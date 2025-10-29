@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>404 - ページが見つかりません | ツーリングスポットシェア</title>
+    
+    <style>
+      /* リセット & ベーススタイル */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      
+      /* メインコンテナ */
+      .container {
+        background: white;
+        border-radius: 16pt;
+        padding: 32px 24px;
+        max-width: 480px;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      
+      /* 404アイコン */
+      .icon-container {
+        margin-bottom: 24px;
+      }
+      
+      .icon {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        animation: pulse 2s infinite;
+      }
+      
+      .icon::before {
+        content: "404";
+        font-size: 36pt;
+        font-weight: bold;
+        color: white;
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      
+      /* 見出し */
+      h1 {
+        font-size: 24pt;
+        font-weight: bold;
+        color: #333333;
+        margin-bottom: 8px;
+      }
+      
+      h2 {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+        margin-bottom: 16px;
+      }
+      
+      /* 本文 */
+      p {
+        font-size: 16pt;
+        color: #333333;
+        margin-bottom: 24px;
+        line-height: 1.5;
+      }
+      
+      .subtitle {
+        font-size: 13pt;
+        color: #666666;
+        margin-bottom: 32px;
+      }
+      
+      /* ボタングループ */
+      .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12pt;
+        margin-top: 24px;
+      }
+      
+      /* プライマリボタン */
+      .btn-primary {
+        display: inline-block;
+        background: #00A8C6;
+        color: white;
+        text-decoration: none;
+        padding: 12pt 16pt;
+        border-radius: 12pt;
+        font-size: 17pt;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0, 168, 198, 0.3);
+      }
+      
+      .btn-primary:hover {
+        background: #008ca6;
+        box-shadow: 0 4px 8px rgba(0, 168, 198, 0.4);
+        transform: translateY(-2px);
+      }
+      
+      .btn-primary:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 3px rgba(0, 168, 198, 0.3);
+      }
+      
+      /* セカンダリボタン */
+      .btn-secondary {
+        display: inline-block;
+        background: transparent;
+        color: #228B22;
+        text-decoration: none;
+        padding: 12pt 16pt;
+        border-radius: 12pt;
+        border: 2px solid #228B22;
+        font-size: 17pt;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-secondary:hover {
+        background: rgba(34, 139, 34, 0.1);
+        border-color: #1a6b1a;
+        color: #1a6b1a;
+      }
+      
+      .btn-secondary:active {
+        background: rgba(34, 139, 34, 0.2);
+      }
+      
+      /* 装飾要素 */
+      .decoration {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #E0E0E0;
+      }
+      
+      .decoration-text {
+        font-size: 13pt;
+        color: #999999;
+        font-weight: 300;
+      }
+      
+      /* レスポンシブ対応 */
+      @media (max-width: 600px) {
+        .container {
+          padding: 24px 20px;
+          margin: 0;
+          border-radius: 0;
+          box-shadow: none;
+        }
+        
+        body {
+          background: white;
+          padding: 0;
+        }
+        
+        h1 {
+          font-size: 22pt;
+        }
+        
+        h2 {
+          font-size: 18pt;
+        }
+        
+        .icon {
+          width: 100px;
+          height: 100px;
+        }
+        
+        .icon::before {
+          font-size: 30pt;
+        }
+      }
+      
+      /* ダークモード対応 */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1C1C1E;
+          color: #F2F2F7;
+        }
+        
+        .container {
+          background: #2C2C2E;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1, p {
+          color: #F2F2F7;
+        }
+        
+        .subtitle {
+          color: #AEAEB2;
+        }
+        
+        .decoration {
+          border-top-color: #48484A;
+        }
+        
+        .decoration-text {
+          color: #8E8E93;
+        }
+        
+        .btn-secondary {
+          color: #32D74B;
+          border-color: #32D74B;
+        }
+        
+        .btn-secondary:hover {
+          background: rgba(50, 215, 75, 0.15);
+          border-color: #30D158;
+          color: #30D158;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="icon-container">
+        <div class="icon" role="img" aria-label="404エラー"></div>
+      </div>
+      
+      <h1>ページが見つかりません</h1>
+      <h2>お探しのページは存在しないようです</h2>
+      
+      <p>
+        申し訳ございません。お探しのページは削除されたか、<br>
+        URLが変更された可能性があります。
+      </p>
+      
+      <p class="subtitle">
+        URLをもう一度ご確認いただくか、<br>
+        トップページからお探しください。
+      </p>
+      
+      <div class="button-group">
+        <a href="/" class="btn-primary" aria-label="トップページへ戻る">
+          トップページへ戻る
+        </a>
+        
+        <a href="javascript:history.back()" class="btn-secondary" aria-label="前のページへ戻る">
+          前のページへ戻る
+        </a>
+      </div>
+      
+      <div class="decoration">
+        <p class="decoration-text">
+          ツーリングスポットシェア
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
