@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ツーリングスポットシェア | Touring Spot Share</title>
+
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+
+    <style>
+      /* ========== リセット & ベーススタイル ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ========== ヘッダー ========== */
+      header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 20px 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      h1 {
+        font-size: 24pt;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .subtitle {
+        font-size: 13pt;
+        font-weight: 300;
+        opacity: 0.9;
+        margin-top: 4px;
+      }
+
+      /* ========== メインコンテナ ========== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      /* ========== ロケーションリスト ========== */
+      #location-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 16pt;
+        margin-top: 24px;
+      }
+
+      /* ========== ロケーションカード ========== */
+      .location-card {
+        background: white;
+        border-radius: 16pt;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .location-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 168, 198, 0.2);
+      }
+
+      /* ========== 画像ギャラリー ========== */
+      .image-gallery {
+        position: relative;
+        width: 100%;
+        height: 240px;
+        background: #E0E0E0;
+        overflow: hidden;
+      }
+
+      .gallery-container {
+        display: flex;
+        height: 100%;
+        transition: transform 0.3s ease;
+        scroll-behavior: smooth;
+      }
+
+      .gallery-image {
+        min-width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ギャラリーナビゲーション */
+      .gallery-nav {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 10;
+      }
+
+      .gallery-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-dot.active {
+        background: white;
+        width: 24px;
+        border-radius: 4px;
+      }
+
+      /* ギャラリー矢印 */
+      .gallery-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20pt;
+        transition: all 0.2s ease;
+        z-index: 10;
+      }
+
+      .gallery-arrow:hover {
+        background: rgba(0, 168, 198, 0.8);
+      }
+
+      .gallery-arrow.prev {
+        left: 8px;
+      }
+
+      .gallery-arrow.next {
+        right: 8px;
+      }
+
+      /* 画像カウンター */
+      .image-counter {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 12pt;
+        font-size: 13pt;
+        font-weight: 500;
+        z-index: 10;
+      }
+
+      /* ========== カード情報エリア ========== */
+      .card-info {
+        padding: 16pt;
+      }
+
+      .location-name {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+        margin-bottom: 8pt;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .location-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 8pt;
+        margin-top: 12pt;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14pt;
+        color: #666666;
+      }
+
+      .meta-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #F5DEB3;
+        padding: 4px 12px;
+        border-radius: 12pt;
+        font-size: 13pt;
+        font-weight: 500;
+        color: #333333;
+      }
+
+      /* ========== 詳細ビューモーダル ========== */
+      .detail-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .detail-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .detail-content {
+        background: white;
+        border-radius: 16pt;
+        width: 90%;
+        max-width: 900px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.3s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 詳細ヘッダー */
+      .detail-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        padding: 16pt;
+        border-bottom: 1px solid #E0E0E0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .close-btn {
+        background: #E0E0E0;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: #333333;
+        transition: all 0.2s ease;
+      }
+
+      .close-btn:hover {
+        background: #C7C7CC;
+      }
+
+      /* 詳細本文 */
+      .detail-body {
+        padding: 24pt;
+      }
+
+      /* マップコンテナ */
+      .map-container {
+        width: 100%;
+        height: 400px;
+        border-radius: 12pt;
+        overflow: hidden;
+        margin-bottom: 24pt;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* 詳細情報グリッド */
+      .detail-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16pt;
+        margin-top: 24pt;
+      }
+
+      .info-box {
+        background: #F9F9F9;
+        padding: 16pt;
+        border-radius: 12pt;
+        border-left: 4px solid #00A8C6;
+      }
+
+      .info-label {
+        font-size: 13pt;
+        color: #666666;
+        font-weight: 500;
+        margin-bottom: 4pt;
+      }
+
+      .info-value {
+        font-size: 16pt;
+        color: #333333;
+        font-weight: 600;
+      }
+
+      /* ========== ローディング ========== */
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .spinner {
+        border: 4px solid #E0E0E0;
+        border-top: 4px solid #00A8C6;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* ローディングインジケーター（スクロール時） */
+      .loading-indicator {
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 24px;
+      }
+
+      .loading-indicator .spinner {
+        width: 40px;
+        height: 40px;
+      }
+
+      .loading-indicator p {
+        color: #666666;
+        font-size: 14pt;
+        margin-top: 12px;
+      }
+
+      /* ========== エンプティステート ========== */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666666;
+      }
+
+      .empty-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+        opacity: 0.5;
+      }
+
+      /* ========== レスポンシブ ========== */
+      @media (max-width: 768px) {
+        #location-list {
+          grid-template-columns: 1fr;
+        }
+
+        .detail-content {
+          width: 100%;
+          height: 100%;
+          max-height: 100vh;
+          border-radius: 0;
+        }
+
+        .map-container {
+          height: 300px;
+        }
+      }
+
+      /* ========== ダークモード対応 ========== */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1C1C1E;
+          color: #F2F2F7;
+        }
+
+        .location-card {
+          background: #2C2C2E;
+        }
+
+        .detail-content {
+          background: #2C2C2E;
+        }
+
+        .detail-header {
+          background: #2C2C2E;
+          border-bottom-color: #48484A;
+        }
+
+        .info-box {
+          background: #1C1C1E;
+        }
+
+        .close-btn {
+          background: #48484A;
+          color: #F2F2F7;
+        }
+
+        .info-value, .location-name {
+          color: #00D4FF;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <!-- ヘッダー -->
+    <header>
+      <div class="header-content">
+        <div>
+          <h1>🏍️ ツーリングスポットシェア</h1>
+          <div class="subtitle">あなたの旅を共有しよう</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <div class="container">
+      <div id="location-list" class="loading">
+        <div class="spinner"></div>
+        <p>ロケーションを読み込み中...</p>
+      </div>
+    </div>
+
+    <!-- 詳細ビューモーダル -->
+    <div id="detail-modal" class="detail-modal">
+      <div class="detail-content">
+        <div class="detail-header">
+          <h2 id="detail-title" style="font-size: 24pt; font-weight: bold; color: #00A8C6;">詳細情報</h2>
+          <button class="close-btn" onclick="closeDetail()" aria-label="閉じる">✕</button>
+        </div>
+        <div class="detail-body">
+          <div class="map-container">
+            <div id="map"></div>
+          </div>
+          <div id="detail-info"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let map;
+      let marker;
+      let db;
+      let currentLocations = [];
+      let userCache = {}; // ユーザー情報のキャッシュ
+      let lastVisible = null; // ページネーション用
+      let isLoading = false; // ローディング中フラグ
+      let hasMore = true; // まだデータがあるかのフラグ
+      const ITEMS_PER_PAGE = 12; // 1回の取得件数
+
+      // Google Maps初期化
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: { lat: 35.6762, lng: 139.6503 },
+          mapTypeControl: true,
+          streetViewControl: true,
+          fullscreenControl: true,
+          styles: [
+            {
+              featureType: "poi",
+              elementType: "labels",
+              stylers: [{ visibility: "off" }]
+            }
+          ]
+        });
+      }
+
+      // Firebase初期化
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          const app = firebase.app();
+          db = firebase.firestore();
+          
+          await loadLocations();
+          
+          // 無限スクロールのイベントリスナー追加
+          window.addEventListener('scroll', handleScroll);
+        } catch (e) {
+          console.error('Firebase初期化エラー:', e);
+          document.getElementById('location-list').innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">⚠️</div>
+              <h3>エラーが発生しました</h3>
+              <p>${e.message}</p>
+            </div>
+          `;
+        }
+      });
+
+      // スクロールハンドラー
+      function handleScroll() {
+        if (isLoading || !hasMore) return;
+
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+
+        // ページ下部から300px以内でデータを読み込み
+        if (scrollTop + clientHeight >= scrollHeight - 300) {
+          loadMoreLocations();
+        }
+      }
+
+      // ユーザー情報を取得
+      async function getUserInfo(userID) {
+        if (!userID) return null;
+        
+        // キャッシュを確認
+        if (userCache[userID]) {
+          return userCache[userID];
+        }
+
+        try {
+          const userDoc = await db.collection('userInfo').doc(userID).get();
+          if (userDoc.exists) {
+            const userData = userDoc.data();
+            userCache[userID] = userData;
+            return userData;
+          }
+        } catch (error) {
+          console.error('ユーザー情報取得エラー:', error);
+        }
+        
+        return null;
+      }
+
+      // ロケーション読み込み（初回）
+      async function loadLocations() {
+        if (isLoading) return;
+        isLoading = true;
+
+        try {
+          let query = db.collection('imagedownload')
+            .orderBy('createTimeTimeStamp', 'desc')
+            .limit(ITEMS_PER_PAGE);
+
+          const snapshot = await query.get();
+          
+          if (snapshot.empty) {
+            document.getElementById('location-list').innerHTML = `
+              <div class="empty-state">
+                <div class="empty-icon">📍</div>
+                <h3>まだロケーションがありません</h3>
+                <p>最初のツーリングスポットを登録しましょう！</p>
+              </div>
+            `;
+            hasMore = false;
+            isLoading = false;
+            return;
+          }
+
+          // 最後のドキュメントを保存
+          lastVisible = snapshot.docs[snapshot.docs.length - 1];
+          
+          // データが指定件数未満の場合、これ以上データがない
+          if (snapshot.docs.length < ITEMS_PER_PAGE) {
+            hasMore = false;
+          }
+
+          currentLocations = [];
+          const locationPromises = [];
+          
+          snapshot.forEach(doc => {
+            const locationData = {
+              id: doc.id,
+              ...doc.data()
+            };
+            currentLocations.push(locationData);
+            
+            // ユーザー情報を非同期で取得
+            if (locationData.userID) {
+              locationPromises.push(getUserInfo(locationData.userID));
+            }
+          });
+
+          // すべてのユーザー情報を取得
+          await Promise.all(locationPromises);
+
+          renderLocationList();
+          
+          isLoading = false;
+        } catch (error) {
+          console.error('データ読み込みエラー:', error);
+          document.getElementById('location-list').innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">⚠️</div>
+              <h3>読み込みエラー</h3>
+              <p>${error.message}</p>
+            </div>
+          `;
+          isLoading = false;
+        }
+      }
+
+      // 追加のロケーション読み込み（スクロール時）
+      async function loadMoreLocations() {
+        if (isLoading || !hasMore || !lastVisible) return;
+        isLoading = true;
+
+        // ローディングインジケーター表示
+        showLoadingIndicator();
+
+        try {
+          let query = db.collection('imagedownload')
+            .orderBy('createTimeTimeStamp', 'desc')
+            .startAfter(lastVisible)
+            .limit(ITEMS_PER_PAGE);
+
+          const snapshot = await query.get();
+          
+          if (snapshot.empty) {
+            hasMore = false;
+            hideLoadingIndicator();
+            isLoading = false;
+            return;
+          }
+
+          // 最後のドキュメントを更新
+          lastVisible = snapshot.docs[snapshot.docs.length - 1];
+          
+          // データが指定件数未満の場合、これ以上データがない
+          if (snapshot.docs.length < ITEMS_PER_PAGE) {
+            hasMore = false;
+          }
+
+          const newLocations = [];
+          const locationPromises = [];
+          
+          snapshot.forEach(doc => {
+            const locationData = {
+              id: doc.id,
+              ...doc.data()
+            };
+            newLocations.push(locationData);
+            
+            // ユーザー情報を非同期で取得
+            if (locationData.userID) {
+              locationPromises.push(getUserInfo(locationData.userID));
+            }
+          });
+
+          // すべてのユーザー情報を取得
+          await Promise.all(locationPromises);
+
+          // 既存のロケーションに追加
+          const startIndex = currentLocations.length;
+          currentLocations = currentLocations.concat(newLocations);
+
+          // 新しいカードのみ追加レンダリング
+          appendLocationCards(newLocations, startIndex);
+          
+          hideLoadingIndicator();
+          isLoading = false;
+        } catch (error) {
+          console.error('追加データ読み込みエラー:', error);
+          hideLoadingIndicator();
+          isLoading = false;
+        }
+      }
+
+      // ローディングインジケーター表示
+      function showLoadingIndicator() {
+        const listEl = document.getElementById('location-list');
+        let indicator = document.getElementById('loading-indicator');
+        
+        if (!indicator) {
+          indicator = document.createElement('div');
+          indicator.id = 'loading-indicator';
+          indicator.className = 'loading-indicator';
+          indicator.innerHTML = `
+            <div class="spinner"></div>
+            <p>読み込み中...</p>
+          `;
+          listEl.parentElement.appendChild(indicator);
+        }
+      }
+
+      // ローディングインジケーター非表示
+      function hideLoadingIndicator() {
+        const indicator = document.getElementById('loading-indicator');
+        if (indicator) {
+          indicator.remove();
+        }
+      }
+
+      // ロケーションリストレンダリング（初回）
+      function renderLocationList() {
+        const listEl = document.getElementById('location-list');
+        listEl.className = '';
+        listEl.innerHTML = '';
+
+        currentLocations.forEach((location, index) => {
+          const card = createLocationCard(location, index);
+          listEl.appendChild(card);
+        });
+      }
+
+      // ロケーションカード追加（スクロール時）
+      function appendLocationCards(newLocations, startIndex) {
+        const listEl = document.getElementById('location-list');
+
+        newLocations.forEach((location, index) => {
+          const card = createLocationCard(location, startIndex + index);
+          listEl.appendChild(card);
+        });
+      }
+
+      // ロケーションカード作成
+      function createLocationCard(location, index) {
+        const card = document.createElement('div');
+        card.className = 'location-card';
+        card.onclick = () => showDetail(location);
+
+        const images = location.LocationImageNames || [];
+        const imageURLs = location.locationImageURLs || [];
+        const locality = location.locality || location.administrative || '不明な場所';
+        const administrative = location.administrative || '';
+        const userID = location.userID || 'Anonymous';
+        
+        // ユーザー情報を取得
+        const userInfo = userCache[userID];
+        const displayName = userInfo && userInfo.userName ? userInfo.userName : userID;
+        const userIcon = userInfo && userInfo.userIcon ? userInfo.userIcon : null;
+
+        // 画像ギャラリー作成
+        let galleryHTML = '';
+        if (imageURLs.length > 0) {
+          galleryHTML = `
+            <div class="image-gallery" id="gallery-${index}">
+              <div class="gallery-container" id="gallery-container-${index}">
+                ${imageURLs.map((url, imgIndex) => `
+                  <img src="${url}" alt="${locality} - 画像${imgIndex + 1}" class="gallery-image" 
+                       onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23E0E0E0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2220%22>画像なし</text></svg>'">
+                `).join('')}
+              </div>
+              ${imageURLs.length > 1 ? `
+                <button class="gallery-arrow prev" onclick="event.stopPropagation(); navigateGallery(${index}, -1)">‹</button>
+                <button class="gallery-arrow next" onclick="event.stopPropagation(); navigateGallery(${index}, 1)">›</button>
+                <div class="gallery-nav" id="gallery-nav-${index}">
+                  ${imageURLs.map((_, dotIndex) => `
+                    <div class="gallery-dot ${dotIndex === 0 ? 'active' : ''}" 
+                         onclick="event.stopPropagation(); goToSlide(${index}, ${dotIndex})"></div>
+                  `).join('')}
+                </div>
+                <div class="image-counter" id="counter-${index}">1 / ${imageURLs.length}</div>
+              ` : ''}
+            </div>
+          `;
+        } else {
+          galleryHTML = `
+            <div class="image-gallery">
+              <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>" 
+                   alt="画像なし" class="gallery-image">
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          ${galleryHTML}
+          <div class="card-info">
+            <div class="location-name">
+              📍 ${locality}
+            </div>
+            <div class="location-meta">
+              ${administrative ? `
+                <div class="meta-item">
+                  <span class="meta-icon">🗺️</span>
+                  <span>${administrative}</span>
+                </div>
+              ` : ''}
+              <div class="meta-item">
+                <span class="meta-icon">👤</span>
+                <span class="user-badge">
+                  ${userIcon ? `<img src="${userIcon}" alt="${displayName}" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;">` : ''}
+                  ${displayName}
+                </span>
+              </div>
+              ${imageURLs.length > 0 ? `
+                <div class="meta-item">
+                  <span class="meta-icon">📷</span>
+                  <span>${imageURLs.length}枚の写真</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+
+        return card;
+      }
+
+      // ギャラリーナビゲーション
+      let currentSlides = {};
+
+      function navigateGallery(cardIndex, direction) {
+        if (!currentSlides[cardIndex]) {
+          currentSlides[cardIndex] = 0;
+        }
+
+        const location = currentLocations[cardIndex];
+        const totalImages = (location.locationImageURLs || []).length;
+        
+        currentSlides[cardIndex] = (currentSlides[cardIndex] + direction + totalImages) % totalImages;
+        updateGallery(cardIndex);
+      }
+
+      function goToSlide(cardIndex, slideIndex) {
+        currentSlides[cardIndex] = slideIndex;
+        updateGallery(cardIndex);
+      }
+
+      function updateGallery(cardIndex) {
+        const container = document.getElementById(`gallery-container-${cardIndex}`);
+        const dots = document.querySelectorAll(`#gallery-nav-${cardIndex} .gallery-dot`);
+        const counter = document.getElementById(`counter-${cardIndex}`);
+        const currentSlide = currentSlides[cardIndex] || 0;
+        const totalImages = currentLocations[cardIndex].locationImageURLs.length;
+
+        if (container) {
+          container.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+        });
+
+        if (counter) {
+          counter.textContent = `${currentSlide + 1} / ${totalImages}`;
+        }
+      }
+
+      // 詳細ビュー表示
+      function showDetail(location) {
+        const modal = document.getElementById('detail-modal');
+        const title = document.getElementById('detail-title');
+        const infoEl = document.getElementById('detail-info');
+
+        const locality = location.locality || location.administrative || '不明な場所';
+        title.textContent = locality;
+
+        // ユーザー情報を取得
+        const userID = location.userID || '';
+        const userInfo = userCache[userID];
+        const displayName = userInfo && userInfo.userName ? userInfo.userName : userID;
+        const userIcon = userInfo && userInfo.userIcon ? userInfo.userIcon : null;
+
+        // マップにマーカー設定
+        if (location.lat && location.lng) {
+          const position = { lat: location.lat, lng: location.lng };
+          
+          if (marker) {
+            marker.setMap(null);
+          }
+
+          marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: locality,
+            animation: google.maps.Animation.DROP,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 12,
+              fillColor: '#00A8C6',
+              fillOpacity: 1,
+              strokeColor: '#FFFFFF',
+              strokeWeight: 3
+            }
+          });
+
+          map.setCenter(position);
+          map.setZoom(15);
+        }
+
+        // 詳細情報表示
+        infoEl.innerHTML = `
+          <div class="detail-info-grid">
+            <div class="info-box">
+              <div class="info-label">📍 地域</div>
+              <div class="info-value">${locality}</div>
+            </div>
+            ${location.administrative ? `
+              <div class="info-box">
+                <div class="info-label">🗺️ 行政区域</div>
+                <div class="info-value">${location.administrative}</div>
+              </div>
+            ` : ''}
+            <div class="info-box">
+              <div class="info-label">🧭 緯度</div>
+              <div class="info-value">${location.lat ? location.lat.toFixed(6) : 'N/A'}</div>
+            </div>
+            <div class="info-box">
+              <div class="info-label">🧭 経度</div>
+              <div class="info-value">${location.lng ? location.lng.toFixed(6) : 'N/A'}</div>
+            </div>
+            ${userID ? `
+              <div class="info-box">
+                <div class="info-label">👤 投稿者</div>
+                <div class="info-value" style="display: flex; align-items: center; gap: 8px;">
+                  ${userIcon ? `<img src="${userIcon}" alt="${displayName}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">` : ''}
+                  <span>${displayName}</span>
+                </div>
+              </div>
+            ` : ''}
+            ${location.locationVisitCount ? `
+              <div class="info-box">
+                <div class="info-label">🔢 訪問回数</div>
+                <div class="info-value">${location.locationVisitCount}回</div>
+              </div>
+            ` : ''}
+            ${location.createTimeTimeStamp ? `
+              <div class="info-box">
+                <div class="info-label">📅 登録日時</div>
+                <div class="info-value">${formatTimestamp(location.createTimeTimeStamp)}</div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      // 詳細ビュー閉じる
+      function closeDetail() {
+        const modal = document.getElementById('detail-modal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      // タイムスタンプフォーマット
+      function formatTimestamp(timestamp) {
+        if (!timestamp || !timestamp.toDate) return 'N/A';
+        const date = timestamp.toDate();
+        return date.toLocaleString('ja-JP', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+
+      // モーダル外クリックで閉じる
+      document.getElementById('detail-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeDetail();
+        }
+      });
+
+      // ESCキーで閉じる
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeDetail();
+        }
+      });
+    </script>
+  </body>
+</html>
