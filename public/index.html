@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ツーリングスポットシェア | Touring Spot Share</title>
 
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
@@ -475,50 +478,131 @@
   </head>
   
   <body>
-    <!-- ヘッダー -->
-    <header>
-      <div class="header-content">
-        <div>
-          <h1>🏍️ ツーリングスポットシェア</h1>
-          <div class="subtitle">あなたの旅を共有しよう</div>
-        </div>
-      </div>
-    </header>
-
-    <!-- メインコンテンツ -->
-    <div class="container">
-      <div id="location-list" class="loading">
-        <div class="spinner"></div>
-        <p>ロケーションを読み込み中...</p>
-      </div>
-    </div>
-
-    <!-- 詳細ビューモーダル -->
-    <div id="detail-modal" class="detail-modal">
-      <div class="detail-content">
-        <div class="detail-header">
-          <h2 id="detail-title" style="font-size: 24pt; font-weight: bold; color: #00A8C6;">詳細情報</h2>
-          <button class="close-btn" onclick="closeDetail()" aria-label="閉じる">✕</button>
-        </div>
-        <div class="detail-body">
-          <div class="map-container">
-            <div id="map"></div>
+    <div id="app">
+      <!-- ヘッダー -->
+      <header>
+        <div class="header-content">
+          <div>
+            <h1>🏍️ ツーリングスポットシェア</h1>
+            <div class="subtitle">あなたの旅を共有しよう</div>
           </div>
-          <div id="detail-info"></div>
+        </div>
+      </header>
+
+      <!-- メインコンテンツ -->
+      <div class="container">
+        <!-- ローディング状態 -->
+        <div v-if="isInitialLoading" id="location-list" class="loading">
+          <div class="spinner"></div>
+          <p>ロケーションを読み込み中...</p>
+        </div>
+
+        <!-- エラー状態 -->
+        <div v-else-if="error" id="location-list">
+          <div class="empty-state">
+            <div class="empty-icon">⚠️</div>
+            <h3>エラーが発生しました</h3>
+            <p>{{ error }}</p>
+          </div>
+        </div>
+
+        <!-- 空の状態 -->
+        <div v-else-if="locations.length === 0" id="location-list">
+          <div class="empty-state">
+            <div class="empty-icon">📍</div>
+            <h3>まだロケーションがありません</h3>
+            <p>最初のツーリングスポットを登録しましょう！</p>
+          </div>
+        </div>
+
+        <!-- ロケーションリスト -->
+        <div v-else id="location-list">
+          <location-card
+            v-for="(location, index) in locations"
+            :key="location.id"
+            :location="location"
+            :index="index"
+            :user-cache="userCache"
+            @show-detail="showDetail"
+            @navigate-gallery="navigateGallery"
+            @go-to-slide="goToSlide"
+          ></location-card>
+        </div>
+
+        <!-- 無限スクロールローディング -->
+        <div v-if="isLoadingMore" class="loading-indicator">
+          <div class="spinner"></div>
+          <p>読み込み中...</p>
+        </div>
+      </div>
+
+      <!-- 詳細ビューモーダル -->
+      <div 
+        class="detail-modal" 
+        :class="{ active: showDetailModal }"
+        @click="handleModalClick"
+      >
+        <div class="detail-content" @click.stop>
+          <div class="detail-header">
+            <h2 style="font-size: 24pt; font-weight: bold; color: #00A8C6;">
+              {{ selectedLocation ? (selectedLocation.locality || selectedLocation.administrative || '詳細情報') : '詳細情報' }}
+            </h2>
+            <button class="close-btn" @click="closeDetail" aria-label="閉じる">✕</button>
+          </div>
+          <div class="detail-body">
+            <div class="map-container">
+              <div id="map"></div>
+            </div>
+            <div v-if="selectedLocation" class="detail-info-grid">
+              <div class="info-box">
+                <div class="info-label">📍 地域</div>
+                <div class="info-value">{{ selectedLocation.locality || selectedLocation.administrative || '不明な場所' }}</div>
+              </div>
+              <div v-if="selectedLocation.administrative" class="info-box">
+                <div class="info-label">🗺️ 行政区域</div>
+                <div class="info-value">{{ selectedLocation.administrative }}</div>
+              </div>
+              <div class="info-box">
+                <div class="info-label">🧭 緯度</div>
+                <div class="info-value">{{ selectedLocation.lat ? selectedLocation.lat.toFixed(6) : 'N/A' }}</div>
+              </div>
+              <div class="info-box">
+                <div class="info-label">🧭 経度</div>
+                <div class="info-value">{{ selectedLocation.lng ? selectedLocation.lng.toFixed(6) : 'N/A' }}</div>
+              </div>
+              <div v-if="selectedLocation.userID" class="info-box">
+                <div class="info-label">👤 投稿者</div>
+                <div class="info-value" style="display: flex; align-items: center; gap: 8px;">
+                  <img 
+                    v-if="getUserInfo(selectedLocation.userID)?.userIcon" 
+                    :src="getUserInfo(selectedLocation.userID).userIcon" 
+                    :alt="getUserInfo(selectedLocation.userID)?.userName || selectedLocation.userID"
+                    style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;"
+                  >
+                  <span>{{ getUserInfo(selectedLocation.userID)?.userName || selectedLocation.userID }}</span>
+                </div>
+              </div>
+              <div v-if="selectedLocation.locationVisitCount" class="info-box">
+                <div class="info-label">🔢 訪問回数</div>
+                <div class="info-value">{{ selectedLocation.locationVisitCount }}回</div>
+              </div>
+              <div v-if="selectedLocation.createTimeTimeStamp" class="info-box">
+                <div class="info-label">📅 登録日時</div>
+                <div class="info-value">{{ formatTimestamp(selectedLocation.createTimeTimeStamp) }}</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <script>
+      const { createApp } = Vue;
+
       let map;
       let marker;
       let db;
-      let currentLocations = [];
-      let userCache = {}; // ユーザー情報のキャッシュ
-      let lastVisible = null; // ページネーション用
-      let isLoading = false; // ローディング中フラグ
-      let hasMore = true; // まだデータがあるかのフラグ
-      const ITEMS_PER_PAGE = 12; // 1回の取得件数
+      const ITEMS_PER_PAGE = 12;
 
       // Google Maps初期化
       function initMap() {
@@ -538,491 +622,400 @@
         });
       }
 
-      // Firebase初期化
+      // ロケーションカードコンポーネント
+      const LocationCard = {
+        props: ['location', 'index', 'userCache'],
+        data() {
+          return {
+            currentSlide: 0
+          };
+        },
+        computed: {
+          locality() {
+            return this.location.locality || this.location.administrative || '不明な場所';
+          },
+          administrative() {
+            return this.location.administrative || '';
+          },
+          userID() {
+            return this.location.userID || 'Anonymous';
+          },
+          userInfo() {
+            return this.userCache[this.userID] || null;
+          },
+          displayName() {
+            return this.userInfo?.userName || this.userID;
+          },
+          userIcon() {
+            return this.userInfo?.userIcon || null;
+          },
+          imageURLs() {
+            return this.location.locationImageURLs || [];
+          },
+          hasMultipleImages() {
+            return this.imageURLs.length > 1;
+          }
+        },
+        methods: {
+          navigateGallery(direction) {
+            const totalImages = this.imageURLs.length;
+            this.currentSlide = (this.currentSlide + direction + totalImages) % totalImages;
+          },
+          goToSlide(slideIndex) {
+            this.currentSlide = slideIndex;
+          },
+          showDetail() {
+            this.$emit('show-detail', this.location);
+          },
+          getImageError(event) {
+            event.target.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>";
+          }
+        },
+        template: `
+          <div class="location-card" @click="showDetail">
+            <!-- 画像ギャラリー -->
+            <div v-if="imageURLs.length > 0" class="image-gallery">
+              <div class="gallery-container" :style="{ transform: 'translateX(-' + (currentSlide * 100) + '%)' }">
+                <img 
+                  v-for="(url, imgIndex) in imageURLs"
+                  :key="imgIndex"
+                  :src="url" 
+                  :alt="locality + ' - 画像' + (imgIndex + 1)" 
+                  class="gallery-image"
+                  @error="getImageError"
+                >
+              </div>
+              <template v-if="hasMultipleImages">
+                <button class="gallery-arrow prev" @click.stop="navigateGallery(-1)">‹</button>
+                <button class="gallery-arrow next" @click.stop="navigateGallery(1)">›</button>
+                <div class="gallery-nav">
+                  <div 
+                    v-for="(url, dotIndex) in imageURLs"
+                    :key="dotIndex"
+                    class="gallery-dot"
+                    :class="{ active: dotIndex === currentSlide }"
+                    @click.stop="goToSlide(dotIndex)"
+                  ></div>
+                </div>
+                <div class="image-counter">{{ currentSlide + 1 }} / {{ imageURLs.length }}</div>
+              </template>
+            </div>
+            <div v-else class="image-gallery">
+              <img 
+                src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>"
+                alt="画像なし" 
+                class="gallery-image"
+              >
+            </div>
+
+            <!-- カード情報 -->
+            <div class="card-info">
+              <div class="location-name">
+                📍 {{ locality }}
+              </div>
+              <div class="location-meta">
+                <div v-if="administrative" class="meta-item">
+                  <span class="meta-icon">🗺️</span>
+                  <span>{{ administrative }}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-icon">👤</span>
+                  <span class="user-badge">
+                    <img 
+                      v-if="userIcon" 
+                      :src="userIcon" 
+                      :alt="displayName"
+                      style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;"
+                    >
+                    {{ displayName }}
+                  </span>
+                </div>
+                <div v-if="imageURLs.length > 0" class="meta-item">
+                  <span class="meta-icon">📷</span>
+                  <span>{{ imageURLs.length }}枚の写真</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      };
+
+      // Firebase初期化を待つ関数
+      function waitForFirebase() {
+        return new Promise((resolve, reject) => {
+          if (typeof firebase !== 'undefined') {
+            resolve();
+            return;
+          }
+
+          let attempts = 0;
+          const maxAttempts = 50;
+          const checkInterval = setInterval(() => {
+            attempts++;
+            if (typeof firebase !== 'undefined') {
+              clearInterval(checkInterval);
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Firebase の読み込みに失敗しました'));
+            }
+          }, 100);
+        });
+      }
+
+      // DOMContentLoadedイベントでVueアプリを初期化
       document.addEventListener('DOMContentLoaded', async function() {
         try {
-          const app = firebase.app();
-          db = firebase.firestore();
-          
-          await loadLocations();
-          
-          // 無限スクロールのイベントリスナー追加
-          window.addEventListener('scroll', handleScroll);
-        } catch (e) {
-          console.error('Firebase初期化エラー:', e);
-          document.getElementById('location-list').innerHTML = `
-            <div class="empty-state">
-              <div class="empty-icon">⚠️</div>
-              <h3>エラーが発生しました</h3>
-              <p>${e.message}</p>
-            </div>
-          `;
-        }
-      });
+          // Firebaseが読み込まれるまで待機
+          await waitForFirebase();
 
-      // スクロールハンドラー
-      function handleScroll() {
-        if (isLoading || !hasMore) return;
+          // Vueアプリ
+          const app = createApp({
+            data() {
+              return {
+                locations: [],
+                userCache: {},
+                lastVisible: null,
+                isInitialLoading: true,
+                isLoadingMore: false,
+                hasMore: true,
+                error: null,
+                showDetailModal: false,
+                selectedLocation: null
+              };
+            },
+            components: {
+              'location-card': LocationCard
+            },
+            async mounted() {
+              try {
+                const firebaseApp = firebase.app();
+                db = firebase.firestore();
+                
+                await this.loadLocations();
+                window.addEventListener('scroll', this.handleScroll);
+                document.addEventListener('keydown', this.handleKeydown);
+              } catch (e) {
+                console.error('Firebase初期化エラー:', e);
+                this.error = e.message;
+                this.isInitialLoading = false;
+              }
+            },
+            beforeUnmount() {
+              window.removeEventListener('scroll', this.handleScroll);
+              document.removeEventListener('keydown', this.handleKeydown);
+            },
+            methods: {
+              async getUserInfo(userID) {
+                if (!userID) return null;
+                
+                if (this.userCache[userID]) {
+                  return this.userCache[userID];
+                }
 
-        const scrollHeight = document.documentElement.scrollHeight;
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const clientHeight = document.documentElement.clientHeight;
+                try {
+                  const userDoc = await db.collection('userInfo').doc(userID).get();
+                  if (userDoc.exists) {
+                    const userData = userDoc.data();
+                    this.userCache[userID] = userData;
+                    return userData;
+                  }
+                } catch (error) {
+                  console.error('ユーザー情報取得エラー:', error);
+                }
+                
+                return null;
+              },
+              
+              async loadLocations() {
+                if (this.isLoadingMore) return;
+                this.isLoadingMore = true;
 
-        // ページ下部から300px以内でデータを読み込み
-        if (scrollTop + clientHeight >= scrollHeight - 300) {
-          loadMoreLocations();
-        }
-      }
+                try {
+                  let query = db.collection('imagedownload')
+                    .orderBy('createTimeTimeStamp', 'desc')
+                    .limit(ITEMS_PER_PAGE);
 
-      // ユーザー情報を取得
-      async function getUserInfo(userID) {
-        if (!userID) return null;
-        
-        // キャッシュを確認
-        if (userCache[userID]) {
-          return userCache[userID];
-        }
+                  const snapshot = await query.get();
+                  
+                  if (snapshot.empty) {
+                    this.hasMore = false;
+                    this.isInitialLoading = false;
+                    this.isLoadingMore = false;
+                    return;
+                  }
 
-        try {
-          const userDoc = await db.collection('userInfo').doc(userID).get();
-          if (userDoc.exists) {
-            const userData = userDoc.data();
-            userCache[userID] = userData;
-            return userData;
-          }
-        } catch (error) {
-          console.error('ユーザー情報取得エラー:', error);
-        }
-        
-        return null;
-      }
+                  this.lastVisible = snapshot.docs[snapshot.docs.length - 1];
+                  
+                  if (snapshot.docs.length < ITEMS_PER_PAGE) {
+                    this.hasMore = false;
+                  }
 
-      // ロケーション読み込み（初回）
-      async function loadLocations() {
-        if (isLoading) return;
-        isLoading = true;
+                  const locationPromises = [];
+                  
+                  snapshot.forEach(doc => {
+                    const locationData = {
+                      id: doc.id,
+                      ...doc.data()
+                    };
+                    this.locations.push(locationData);
+                    
+                    if (locationData.userID) {
+                      locationPromises.push(this.getUserInfo(locationData.userID));
+                    }
+                  });
 
-        try {
-          let query = db.collection('imagedownload')
-            .orderBy('createTimeTimeStamp', 'desc')
-            .limit(ITEMS_PER_PAGE);
+                  await Promise.all(locationPromises);
+                  
+                  this.isInitialLoading = false;
+                  this.isLoadingMore = false;
+                } catch (error) {
+                  console.error('データ読み込みエラー:', error);
+                  this.error = error.message;
+                  this.isInitialLoading = false;
+                  this.isLoadingMore = false;
+                }
+              },
 
-          const snapshot = await query.get();
-          
-          if (snapshot.empty) {
-            document.getElementById('location-list').innerHTML = `
-              <div class="empty-state">
-                <div class="empty-icon">📍</div>
-                <h3>まだロケーションがありません</h3>
-                <p>最初のツーリングスポットを登録しましょう！</p>
-              </div>
-            `;
-            hasMore = false;
-            isLoading = false;
-            return;
-          }
+              async loadMoreLocations() {
+                if (this.isLoadingMore || !this.hasMore || !this.lastVisible) return;
+                this.isLoadingMore = true;
 
-          // 最後のドキュメントを保存
-          lastVisible = snapshot.docs[snapshot.docs.length - 1];
-          
-          // データが指定件数未満の場合、これ以上データがない
-          if (snapshot.docs.length < ITEMS_PER_PAGE) {
-            hasMore = false;
-          }
+                try {
+                  let query = db.collection('imagedownload')
+                    .orderBy('createTimeTimeStamp', 'desc')
+                    .startAfter(this.lastVisible)
+                    .limit(ITEMS_PER_PAGE);
 
-          currentLocations = [];
-          const locationPromises = [];
-          
-          snapshot.forEach(doc => {
-            const locationData = {
-              id: doc.id,
-              ...doc.data()
-            };
-            currentLocations.push(locationData);
-            
-            // ユーザー情報を非同期で取得
-            if (locationData.userID) {
-              locationPromises.push(getUserInfo(locationData.userID));
+                  const snapshot = await query.get();
+                  
+                  if (snapshot.empty) {
+                    this.hasMore = false;
+                    this.isLoadingMore = false;
+                    return;
+                  }
+
+                  this.lastVisible = snapshot.docs[snapshot.docs.length - 1];
+                  
+                  if (snapshot.docs.length < ITEMS_PER_PAGE) {
+                    this.hasMore = false;
+                  }
+
+                  const locationPromises = [];
+                  
+                  snapshot.forEach(doc => {
+                    const locationData = {
+                      id: doc.id,
+                      ...doc.data()
+                    };
+                    this.locations.push(locationData);
+                    
+                    if (locationData.userID) {
+                      locationPromises.push(this.getUserInfo(locationData.userID));
+                    }
+                  });
+
+                  await Promise.all(locationPromises);
+                  
+                  this.isLoadingMore = false;
+                } catch (error) {
+                  console.error('追加データ読み込みエラー:', error);
+                  this.isLoadingMore = false;
+                }
+              },
+
+              handleScroll() {
+                if (this.isLoadingMore || !this.hasMore) return;
+
+                const scrollHeight = document.documentElement.scrollHeight;
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const clientHeight = document.documentElement.clientHeight;
+
+                if (scrollTop + clientHeight >= scrollHeight - 300) {
+                  this.loadMoreLocations();
+                }
+              },
+
+              showDetail(location) {
+                this.selectedLocation = location;
+                this.showDetailModal = true;
+                document.body.style.overflow = 'hidden';
+
+                this.$nextTick(() => {
+                  if (location.lat && location.lng) {
+                    const position = { lat: location.lat, lng: location.lng };
+                    
+                    if (marker) {
+                      marker.setMap(null);
+                    }
+
+                    marker = new google.maps.Marker({
+                      position: position,
+                      map: map,
+                      title: location.locality || location.administrative || '不明な場所',
+                      animation: google.maps.Animation.DROP,
+                      icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 12,
+                        fillColor: '#00A8C6',
+                        fillOpacity: 1,
+                        strokeColor: '#FFFFFF',
+                        strokeWeight: 3
+                      }
+                    });
+
+                    map.setCenter(position);
+                    map.setZoom(15);
+                  }
+                });
+              },
+
+              closeDetail() {
+                this.showDetailModal = false;
+                this.selectedLocation = null;
+                document.body.style.overflow = '';
+              },
+
+              handleModalClick(event) {
+                if (event.target.classList.contains('detail-modal')) {
+                  this.closeDetail();
+                }
+              },
+
+              handleKeydown(event) {
+                if (event.key === 'Escape') {
+                  this.closeDetail();
+                }
+              },
+
+              formatTimestamp(timestamp) {
+                if (!timestamp || !timestamp.toDate) return 'N/A';
+                const date = timestamp.toDate();
+                return date.toLocaleString('ja-JP', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                });
+              }
             }
           });
 
-          // すべてのユーザー情報を取得
-          await Promise.all(locationPromises);
-
-          renderLocationList();
-          
-          isLoading = false;
+          app.mount('#app');
         } catch (error) {
-          console.error('データ読み込みエラー:', error);
-          document.getElementById('location-list').innerHTML = `
-            <div class="empty-state">
-              <div class="empty-icon">⚠️</div>
-              <h3>読み込みエラー</h3>
-              <p>${error.message}</p>
-            </div>
-          `;
-          isLoading = false;
-        }
-      }
-
-      // 追加のロケーション読み込み（スクロール時）
-      async function loadMoreLocations() {
-        if (isLoading || !hasMore || !lastVisible) return;
-        isLoading = true;
-
-        // ローディングインジケーター表示
-        showLoadingIndicator();
-
-        try {
-          let query = db.collection('imagedownload')
-            .orderBy('createTimeTimeStamp', 'desc')
-            .startAfter(lastVisible)
-            .limit(ITEMS_PER_PAGE);
-
-          const snapshot = await query.get();
-          
-          if (snapshot.empty) {
-            hasMore = false;
-            hideLoadingIndicator();
-            isLoading = false;
-            return;
-          }
-
-          // 最後のドキュメントを更新
-          lastVisible = snapshot.docs[snapshot.docs.length - 1];
-          
-          // データが指定件数未満の場合、これ以上データがない
-          if (snapshot.docs.length < ITEMS_PER_PAGE) {
-            hasMore = false;
-          }
-
-          const newLocations = [];
-          const locationPromises = [];
-          
-          snapshot.forEach(doc => {
-            const locationData = {
-              id: doc.id,
-              ...doc.data()
-            };
-            newLocations.push(locationData);
-            
-            // ユーザー情報を非同期で取得
-            if (locationData.userID) {
-              locationPromises.push(getUserInfo(locationData.userID));
-            }
-          });
-
-          // すべてのユーザー情報を取得
-          await Promise.all(locationPromises);
-
-          // 既存のロケーションに追加
-          const startIndex = currentLocations.length;
-          currentLocations = currentLocations.concat(newLocations);
-
-          // 新しいカードのみ追加レンダリング
-          appendLocationCards(newLocations, startIndex);
-          
-          hideLoadingIndicator();
-          isLoading = false;
-        } catch (error) {
-          console.error('追加データ読み込みエラー:', error);
-          hideLoadingIndicator();
-          isLoading = false;
-        }
-      }
-
-      // ローディングインジケーター表示
-      function showLoadingIndicator() {
-        const listEl = document.getElementById('location-list');
-        let indicator = document.getElementById('loading-indicator');
-        
-        if (!indicator) {
-          indicator = document.createElement('div');
-          indicator.id = 'loading-indicator';
-          indicator.className = 'loading-indicator';
-          indicator.innerHTML = `
-            <div class="spinner"></div>
-            <p>読み込み中...</p>
-          `;
-          listEl.parentElement.appendChild(indicator);
-        }
-      }
-
-      // ローディングインジケーター非表示
-      function hideLoadingIndicator() {
-        const indicator = document.getElementById('loading-indicator');
-        if (indicator) {
-          indicator.remove();
-        }
-      }
-
-      // ロケーションリストレンダリング（初回）
-      function renderLocationList() {
-        const listEl = document.getElementById('location-list');
-        listEl.className = '';
-        listEl.innerHTML = '';
-
-        currentLocations.forEach((location, index) => {
-          const card = createLocationCard(location, index);
-          listEl.appendChild(card);
-        });
-      }
-
-      // ロケーションカード追加（スクロール時）
-      function appendLocationCards(newLocations, startIndex) {
-        const listEl = document.getElementById('location-list');
-
-        newLocations.forEach((location, index) => {
-          const card = createLocationCard(location, startIndex + index);
-          listEl.appendChild(card);
-        });
-      }
-
-      // ロケーションカード作成
-      function createLocationCard(location, index) {
-        const card = document.createElement('div');
-        card.className = 'location-card';
-        card.onclick = () => showDetail(location);
-
-        const images = location.LocationImageNames || [];
-        const imageURLs = location.locationImageURLs || [];
-        const locality = location.locality || location.administrative || '不明な場所';
-        const administrative = location.administrative || '';
-        const userID = location.userID || 'Anonymous';
-        
-        // ユーザー情報を取得
-        const userInfo = userCache[userID];
-        const displayName = userInfo && userInfo.userName ? userInfo.userName : userID;
-        const userIcon = userInfo && userInfo.userIcon ? userInfo.userIcon : null;
-
-        // 画像ギャラリー作成
-        let galleryHTML = '';
-        if (imageURLs.length > 0) {
-          galleryHTML = `
-            <div class="image-gallery" id="gallery-${index}">
-              <div class="gallery-container" id="gallery-container-${index}">
-                ${imageURLs.map((url, imgIndex) => `
-                  <img src="${url}" alt="${locality} - 画像${imgIndex + 1}" class="gallery-image" 
-                       onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23E0E0E0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2220%22>画像なし</text></svg>'">
-                `).join('')}
-              </div>
-              ${imageURLs.length > 1 ? `
-                <button class="gallery-arrow prev" onclick="event.stopPropagation(); navigateGallery(${index}, -1)">‹</button>
-                <button class="gallery-arrow next" onclick="event.stopPropagation(); navigateGallery(${index}, 1)">›</button>
-                <div class="gallery-nav" id="gallery-nav-${index}">
-                  ${imageURLs.map((_, dotIndex) => `
-                    <div class="gallery-dot ${dotIndex === 0 ? 'active' : ''}" 
-                         onclick="event.stopPropagation(); goToSlide(${index}, ${dotIndex})"></div>
-                  `).join('')}
-                </div>
-                <div class="image-counter" id="counter-${index}">1 / ${imageURLs.length}</div>
-              ` : ''}
-            </div>
-          `;
-        } else {
-          galleryHTML = `
-            <div class="image-gallery">
-              <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>" 
-                   alt="画像なし" class="gallery-image">
-            </div>
-          `;
-        }
-
-        card.innerHTML = `
-          ${galleryHTML}
-          <div class="card-info">
-            <div class="location-name">
-              📍 ${locality}
-            </div>
-            <div class="location-meta">
-              ${administrative ? `
-                <div class="meta-item">
-                  <span class="meta-icon">🗺️</span>
-                  <span>${administrative}</span>
-                </div>
-              ` : ''}
-              <div class="meta-item">
-                <span class="meta-icon">👤</span>
-                <span class="user-badge">
-                  ${userIcon ? `<img src="${userIcon}" alt="${displayName}" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;">` : ''}
-                  ${displayName}
-                </span>
-              </div>
-              ${imageURLs.length > 0 ? `
-                <div class="meta-item">
-                  <span class="meta-icon">📷</span>
-                  <span>${imageURLs.length}枚の写真</span>
-                </div>
-              ` : ''}
-            </div>
-          </div>
-        `;
-
-        return card;
-      }
-
-      // ギャラリーナビゲーション
-      let currentSlides = {};
-
-      function navigateGallery(cardIndex, direction) {
-        if (!currentSlides[cardIndex]) {
-          currentSlides[cardIndex] = 0;
-        }
-
-        const location = currentLocations[cardIndex];
-        const totalImages = (location.locationImageURLs || []).length;
-        
-        currentSlides[cardIndex] = (currentSlides[cardIndex] + direction + totalImages) % totalImages;
-        updateGallery(cardIndex);
-      }
-
-      function goToSlide(cardIndex, slideIndex) {
-        currentSlides[cardIndex] = slideIndex;
-        updateGallery(cardIndex);
-      }
-
-      function updateGallery(cardIndex) {
-        const container = document.getElementById(`gallery-container-${cardIndex}`);
-        const dots = document.querySelectorAll(`#gallery-nav-${cardIndex} .gallery-dot`);
-        const counter = document.getElementById(`counter-${cardIndex}`);
-        const currentSlide = currentSlides[cardIndex] || 0;
-        const totalImages = currentLocations[cardIndex].locationImageURLs.length;
-
-        if (container) {
-          container.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentSlide);
-        });
-
-        if (counter) {
-          counter.textContent = `${currentSlide + 1} / ${totalImages}`;
-        }
-      }
-
-      // 詳細ビュー表示
-      function showDetail(location) {
-        const modal = document.getElementById('detail-modal');
-        const title = document.getElementById('detail-title');
-        const infoEl = document.getElementById('detail-info');
-
-        const locality = location.locality || location.administrative || '不明な場所';
-        title.textContent = locality;
-
-        // ユーザー情報を取得
-        const userID = location.userID || '';
-        const userInfo = userCache[userID];
-        const displayName = userInfo && userInfo.userName ? userInfo.userName : userID;
-        const userIcon = userInfo && userInfo.userIcon ? userInfo.userIcon : null;
-
-        // マップにマーカー設定
-        if (location.lat && location.lng) {
-          const position = { lat: location.lat, lng: location.lng };
-          
-          if (marker) {
-            marker.setMap(null);
-          }
-
-          marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: locality,
-            animation: google.maps.Animation.DROP,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 12,
-              fillColor: '#00A8C6',
-              fillOpacity: 1,
-              strokeColor: '#FFFFFF',
-              strokeWeight: 3
-            }
-          });
-
-          map.setCenter(position);
-          map.setZoom(15);
-        }
-
-        // 詳細情報表示
-        infoEl.innerHTML = `
-          <div class="detail-info-grid">
-            <div class="info-box">
-              <div class="info-label">📍 地域</div>
-              <div class="info-value">${locality}</div>
-            </div>
-            ${location.administrative ? `
-              <div class="info-box">
-                <div class="info-label">🗺️ 行政区域</div>
-                <div class="info-value">${location.administrative}</div>
-              </div>
-            ` : ''}
-            <div class="info-box">
-              <div class="info-label">🧭 緯度</div>
-              <div class="info-value">${location.lat ? location.lat.toFixed(6) : 'N/A'}</div>
-            </div>
-            <div class="info-box">
-              <div class="info-label">🧭 経度</div>
-              <div class="info-value">${location.lng ? location.lng.toFixed(6) : 'N/A'}</div>
-            </div>
-            ${userID ? `
-              <div class="info-box">
-                <div class="info-label">👤 投稿者</div>
-                <div class="info-value" style="display: flex; align-items: center; gap: 8px;">
-                  ${userIcon ? `<img src="${userIcon}" alt="${displayName}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">` : ''}
-                  <span>${displayName}</span>
+          console.error('アプリケーション初期化エラー:', error);
+          document.getElementById('app').innerHTML = `
+            <div class="container">
+              <div id="location-list">
+                <div class="empty-state">
+                  <div class="empty-icon">⚠️</div>
+                  <h3>エラーが発生しました</h3>
+                  <p>${error.message}</p>
                 </div>
               </div>
-            ` : ''}
-            ${location.locationVisitCount ? `
-              <div class="info-box">
-                <div class="info-label">🔢 訪問回数</div>
-                <div class="info-value">${location.locationVisitCount}回</div>
-              </div>
-            ` : ''}
-            ${location.createTimeTimeStamp ? `
-              <div class="info-box">
-                <div class="info-label">📅 登録日時</div>
-                <div class="info-value">${formatTimestamp(location.createTimeTimeStamp)}</div>
-              </div>
-            ` : ''}
-          </div>
-        `;
-
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      // 詳細ビュー閉じる
-      function closeDetail() {
-        const modal = document.getElementById('detail-modal');
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      // タイムスタンプフォーマット
-      function formatTimestamp(timestamp) {
-        if (!timestamp || !timestamp.toDate) return 'N/A';
-        const date = timestamp.toDate();
-        return date.toLocaleString('ja-JP', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit'
-        });
-      }
-
-      // モーダル外クリックで閉じる
-      document.getElementById('detail-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-          closeDetail();
-        }
-      });
-
-      // ESCキーで閉じる
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          closeDetail();
+            </div>
+          `;
         }
       });
     </script>
