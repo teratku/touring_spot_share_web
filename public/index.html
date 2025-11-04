@@ -937,37 +937,7 @@
               },
 
               showDetail(location) {
-                this.selectedLocation = location;
-                this.showDetailModal = true;
-                document.body.style.overflow = 'hidden';
-
-                this.$nextTick(() => {
-                  if (location.lat && location.lng) {
-                    const position = { lat: location.lat, lng: location.lng };
-                    
-                    if (marker) {
-                      marker.setMap(null);
-                    }
-
-                    marker = new google.maps.Marker({
-                      position: position,
-                      map: map,
-                      title: location.locality || location.administrative || '不明な場所',
-                      animation: google.maps.Animation.DROP,
-                      icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 12,
-                        fillColor: '#00A8C6',
-                        fillOpacity: 1,
-                        strokeColor: '#FFFFFF',
-                        strokeWeight: 3
-                      }
-                    });
-
-                    map.setCenter(position);
-                    map.setZoom(15);
-                  }
-                });
+                window.location.href = `/detail.html?id=${location.id}`;
               },
 
               closeDetail() {

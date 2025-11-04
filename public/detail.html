@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ロケーション詳細 | ツーリングスポットシェア</title>
+
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <!-- Google Maps API -->
+    <script>
+      // Google Maps APIコールバック用のダミー関数
+      // 実際の初期化はVueのmountedで行う
+      window.initMap = function() {
+        console.log('Google Maps API callback triggered');
+      };
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=initMap&loading=async"></script>
+
+    <style>
+      /* ========== リセット & ベーススタイル ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ========== ヘッダー ========== */
+      header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 12pt;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      h1 {
+        font-size: 20pt;
+        font-weight: 600;
+        flex: 1;
+      }
+
+      /* ========== メインコンテナ ========== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      /* ========== ローディング ========== */
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .spinner {
+        border: 4px solid #E0E0E0;
+        border-top: 4px solid #00A8C6;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* ========== エラー表示 ========== */
+      .error-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #E63946;
+      }
+
+      .error-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+      }
+
+      /* ========== マップコンテナ ========== */
+      .map-container {
+        width: 100%;
+        height: 500px;
+        border-radius: 16pt;
+        overflow: hidden;
+        margin-bottom: 24pt;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background: white;
+        position: relative;
+      }
+
+      .map-container.loading::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(249, 249, 249, 0.9);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ========== 詳細カード ========== */
+      .detail-card {
+        background: white;
+        border-radius: 16pt;
+        padding: 24pt;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24pt;
+      }
+
+      .location-title {
+        font-size: 24pt;
+        font-weight: bold;
+        color: #00A8C6;
+        margin-bottom: 16pt;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      /* ========== 画像ギャラリー ========== */
+      .image-gallery-section {
+        margin-bottom: 24pt;
+      }
+
+      .section-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #228B22;
+        margin-bottom: 16pt;
+        padding-bottom: 8pt;
+        border-bottom: 2px solid #F5DEB3;
+      }
+
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 12pt;
+      }
+
+      .gallery-image-item {
+        width: 100%;
+        height: 200px;
+        border-radius: 12pt;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .gallery-image-item:hover {
+        transform: scale(1.05);
+      }
+
+      .gallery-image-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ========== 詳細情報グリッド ========== */
+      .detail-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16pt;
+        margin-top: 24pt;
+      }
+
+      .info-box {
+        background: #F9F9F9;
+        padding: 16pt;
+        border-radius: 12pt;
+        border-left: 4px solid #00A8C6;
+      }
+
+      .info-label {
+        font-size: 13pt;
+        color: #666666;
+        font-weight: 500;
+        margin-bottom: 4pt;
+      }
+
+      .info-value {
+        font-size: 16pt;
+        color: #333333;
+        font-weight: 600;
+        word-break: break-all;
+      }
+
+      /* ========== ユーザー情報 ========== */
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .user-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #00A8C6;
+      }
+
+      .user-details {
+        flex: 1;
+      }
+
+      .user-name {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      .user-id {
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      /* ========== 画像モーダル ========== */
+      .image-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 3000;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .image-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+      }
+
+      .modal-image {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 8pt;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ========== レスポンシブ ========== */
+      @media (max-width: 768px) {
+        .map-container {
+          height: 350px;
+        }
+
+        .detail-card {
+          padding: 16pt;
+        }
+
+        .location-title {
+          font-size: 20pt;
+        }
+
+        .image-grid {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+
+        .gallery-image-item {
+          height: 150px;
+        }
+      }
+
+      /* ========== ダークモード対応 ========== */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1C1C1E;
+          color: #F2F2F7;
+        }
+
+        .detail-card {
+          background: #2C2C2E;
+        }
+
+        .info-box {
+          background: #1C1C1E;
+        }
+
+        .location-title {
+          color: #00D4FF;
+        }
+
+        .section-title {
+          color: #32D74B;
+        }
+
+        .info-value, .user-name {
+          color: #F2F2F7;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="app">
+      <!-- ヘッダー -->
+      <header>
+        <div class="header-content">
+          <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
+          <h1>📍 ロケーション詳細</h1>
+        </div>
+      </header>
+
+      <!-- メインコンテンツ -->
+      <div class="container">
+        <!-- マップ（常に表示） -->
+        <div class="map-container" v-show="!error">
+          <div id="map"></div>
+        </div>
+
+        <!-- ローディング状態 -->
+        <div v-if="isLoading" class="loading">
+          <div class="spinner"></div>
+          <p>読み込み中...</p>
+        </div>
+
+        <!-- エラー状態 -->
+        <div v-else-if="error" class="error-state">
+          <div class="error-icon">⚠️</div>
+          <h3>エラーが発生しました</h3>
+          <p>{{ error }}</p>
+          <button class="back-btn" @click="goBack" style="margin-top: 24px; background: #E63946;">
+            戻る
+          </button>
+        </div>
+
+        <!-- 詳細表示 -->
+        <template v-else-if="location">
+          <!-- 詳細情報カード -->
+          <div class="detail-card">
+            <div class="location-title">
+              🏍️ {{ location.locality || location.administrative || '不明な場所' }}
+            </div>
+
+            <!-- ユーザー情報 -->
+            <div v-if="userInfo" class="user-info">
+              <img 
+                v-if="userInfo.userIcon" 
+                :src="userInfo.userIcon" 
+                :alt="userInfo.userName"
+                class="user-icon"
+              >
+              <div class="user-details">
+                <div class="user-name">{{ userInfo.userName }}</div>
+                <div class="user-id">@{{ location.userID }}</div>
+              </div>
+            </div>
+
+            <!-- 詳細情報グリッド -->
+            <div class="detail-info-grid">
+              <div class="info-box">
+                <div class="info-label">📍 地域</div>
+                <div class="info-value">{{ location.locality || location.administrative || '不明な場所' }}</div>
+              </div>
+              <div v-if="location.administrative" class="info-box">
+                <div class="info-label">🗺️ 行政区域</div>
+                <div class="info-value">{{ location.administrative }}</div>
+              </div>
+              <div class="info-box">
+                <div class="info-label">🧭 緯度</div>
+                <div class="info-value">{{ formatCoordinate(location.lat) }}</div>
+              </div>
+              <div class="info-box">
+                <div class="info-label">🧭 経度</div>
+                <div class="info-value">{{ formatCoordinate(location.lng) }}</div>
+              </div>
+              <div v-if="location.locationVisitCount" class="info-box">
+                <div class="info-label">🔢 訪問回数</div>
+                <div class="info-value">{{ location.locationVisitCount }}回</div>
+              </div>
+              <div v-if="location.createTimeTimeStamp" class="info-box">
+                <div class="info-label">📅 登録日時</div>
+                <div class="info-value">{{ formatTimestamp(location.createTimeTimeStamp) }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 画像ギャラリー -->
+          <div v-if="location.locationImageURLs && location.locationImageURLs.length > 0" class="detail-card image-gallery-section">
+            <div class="section-title">📷 写真ギャラリー（{{ location.locationImageURLs.length }}枚）</div>
+            <div class="image-grid">
+              <div 
+                v-for="(url, index) in location.locationImageURLs"
+                :key="index"
+                class="gallery-image-item"
+                @click="openImageModal(url)"
+              >
+                <img :src="url" :alt="'画像 ' + (index + 1)" @error="handleImageError">
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- 画像モーダル -->
+      <div 
+        class="image-modal" 
+        :class="{ active: showImageModal }"
+        @click="closeImageModal"
+      >
+        <div class="modal-content" @click.stop>
+          <button class="modal-close" @click="closeImageModal">✕</button>
+          <img :src="selectedImage" class="modal-image" alt="拡大画像">
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      let map;
+      let marker;
+      let db;
+
+      // Firebase初期化を待つ関数
+      function waitForFirebase() {
+        return new Promise((resolve, reject) => {
+          if (typeof firebase !== 'undefined') {
+            resolve();
+            return;
+          }
+
+          let attempts = 0;
+          const maxAttempts = 50;
+          const checkInterval = setInterval(() => {
+            attempts++;
+            if (typeof firebase !== 'undefined') {
+              clearInterval(checkInterval);
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Firebase の読み込みに失敗しました'));
+            }
+          }, 100);
+        });
+      }
+
+      // URLパラメータを取得
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // DOMContentLoadedイベントでVueアプリを初期化
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          // Firebaseが読み込まれるまで待機
+          await waitForFirebase();
+
+          // Vueアプリ
+          const app = createApp({
+            data() {
+              return {
+                location: null,
+                userInfo: null,
+                isLoading: true,
+                error: null,
+                locationId: null,
+                showImageModal: false,
+                selectedImage: null
+              };
+            },
+            async mounted() {
+              try {
+                // Firebaseが読み込まれるまで待機
+                await waitForFirebase();
+                
+                const firebaseApp = firebase.app();
+                db = firebase.firestore();
+                
+                // URLパラメータからIDを取得
+                this.locationId = getQueryParam('id');
+                
+                if (!this.locationId) {
+                  this.error = 'ロケーションIDが指定されていません';
+                  this.isLoading = false;
+                  return;
+                }
+
+                // Google Maps APIの読み込みを待つ
+                await this.waitForGoogleMaps();
+
+                // マップを初期化（awaitで完了を待つ）
+                await this.initializeMap();
+
+                // ロケーション詳細を読み込む
+                await this.loadLocationDetail();
+                
+                document.addEventListener('keydown', this.handleKeydown);
+              } catch (e) {
+                console.error('初期化エラー:', e);
+                this.error = e.message;
+                this.isLoading = false;
+              }
+            },
+            beforeUnmount() {
+              document.removeEventListener('keydown', this.handleKeydown);
+            },
+            methods: {
+              async waitForGoogleMaps() {
+                return new Promise((resolve, reject) => {
+                  if (typeof google !== 'undefined' && google.maps) {
+                    resolve();
+                    return;
+                  }
+
+                  let attempts = 0;
+                  const maxAttempts = 50;
+                  const checkInterval = setInterval(() => {
+                    attempts++;
+                    if (typeof google !== 'undefined' && google.maps) {
+                      clearInterval(checkInterval);
+                      resolve();
+                    } else if (attempts >= maxAttempts) {
+                      clearInterval(checkInterval);
+                      reject(new Error('Google Maps APIの読み込みに失敗しました'));
+                    }
+                  }, 100);
+                });
+              },
+
+              initializeMap() {
+                return new Promise((resolve, reject) => {
+                  // DOM要素の準備を確実に待つ
+                  setTimeout(() => {
+                    const mapElement = document.getElementById('map');
+                    if (!mapElement) {
+                      console.error('Map element not found');
+                      reject(new Error('Map element not found'));
+                      return;
+                    }
+
+                    try {
+                      map = new google.maps.Map(mapElement, {
+                        zoom: 5,
+                        center: { lat: 36.2048, lng: 138.2529 }, // 日本の中心
+                        mapTypeControl: true,
+                        streetViewControl: true,
+                        fullscreenControl: true,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        styles: [
+                          {
+                            featureType: "poi",
+                            elementType: "labels",
+                            stylers: [{ visibility: "off" }]
+                          }
+                        ]
+                      });
+
+                      console.log('Map initialized successfully');
+                      resolve();
+                    } catch (error) {
+                      console.error('Map initialization error:', error);
+                      reject(error);
+                    }
+                  }, 100);
+                });
+              },
+
+              async loadLocationDetail() {
+                try {
+                  // Firestoreからドキュメントを取得
+                  const doc = await db.collection('imagedownload').doc(this.locationId).get();
+                  
+                  if (!doc.exists) {
+                    this.error = 'ロケーションが見つかりませんでした';
+                    this.isLoading = false;
+                    return;
+                  }
+
+                  this.location = {
+                    id: doc.id,
+                    ...doc.data()
+                  };
+
+                  // ユーザー情報を取得
+                  if (this.location.userID) {
+                    await this.loadUserInfo(this.location.userID);
+                  }
+
+                  // マップにマーカーを表示
+                  this.$nextTick(() => {
+                    this.displayLocationOnMap();
+                  });
+
+                  this.isLoading = false;
+                } catch (error) {
+                  console.error('データ読み込みエラー:', error);
+                  this.error = error.message;
+                  this.isLoading = false;
+                }
+              },
+
+              async loadUserInfo(userID) {
+                try {
+                  const userDoc = await db.collection('userInfo').doc(userID).get();
+                  if (userDoc.exists) {
+                    this.userInfo = userDoc.data();
+                  }
+                } catch (error) {
+                  console.error('ユーザー情報取得エラー:', error);
+                }
+              },
+
+              displayLocationOnMap() {
+                if (!this.location || !this.location.lat || !this.location.lng) {
+                  console.error('Location data is missing');
+                  return;
+                }
+
+                if (!map) {
+                  console.error('Map is not initialized');
+                  return;
+                }
+
+                const lat = Number(this.location.lat);
+                const lng = Number(this.location.lng);
+
+                if (isNaN(lat) || isNaN(lng)) {
+                  console.error('Invalid coordinates:', this.location.lat, this.location.lng);
+                  return;
+                }
+
+                const position = { lat, lng };
+                
+                // 既存のマーカーを削除
+                if (marker) {
+                  marker.setMap(null);
+                }
+
+                // カスタムマーカーアイコン用のSVG
+                const markerIcon = {
+                  path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
+                  fillColor: '#00A8C6',
+                  fillOpacity: 1,
+                  strokeColor: '#FFFFFF',
+                  strokeWeight: 2,
+                  scale: 2,
+                  anchor: new google.maps.Point(12, 24)
+                };
+
+                try {
+                  // 新しいマーカーを作成
+                  marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: this.location.locality || this.location.administrative || '不明な場所',
+                    animation: google.maps.Animation.DROP,
+                    icon: markerIcon
+                  });
+
+                  // 情報ウィンドウを追加
+                  const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                      <div style="padding: 12px; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;">
+                        <h3 style="margin: 0 0 8px 0; color: #00A8C6; font-size: 16px; font-weight: 600;">
+                          🏍️ ${this.location.locality || this.location.administrative || '不明な場所'}
+                        </h3>
+                        <p style="margin: 0; font-size: 13px; color: #666;">
+                          📍 緯度: ${lat.toFixed(6)}<br>
+                          📍 経度: ${lng.toFixed(6)}
+                        </p>
+                      </div>
+                    `
+                  });
+
+                  marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                  });
+
+                  // マップの中心とズームを設定
+                  map.setCenter(position);
+                  map.setZoom(16);
+
+                  console.log('Marker displayed successfully');
+                } catch (error) {
+                  console.error('Error displaying marker:', error);
+                }
+              },
+
+              openImageModal(imageUrl) {
+                this.selectedImage = imageUrl;
+                this.showImageModal = true;
+                document.body.style.overflow = 'hidden';
+              },
+
+              closeImageModal() {
+                this.showImageModal = false;
+                this.selectedImage = null;
+                document.body.style.overflow = '';
+              },
+
+              handleImageError(event) {
+                event.target.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>";
+              },
+
+              goBack() {
+                window.history.back();
+              },
+
+              handleKeydown(event) {
+                if (event.key === 'Escape') {
+                  if (this.showImageModal) {
+                    this.closeImageModal();
+                  } else {
+                    this.goBack();
+                  }
+                }
+              },
+
+              formatTimestamp(timestamp) {
+                if (!timestamp || !timestamp.toDate) return 'N/A';
+                const date = timestamp.toDate();
+                return date.toLocaleString('ja-JP', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                });
+              },
+
+              formatCoordinate(value) {
+                if (!value) return 'N/A';
+                const num = Number(value);
+                if (isNaN(num)) return 'N/A';
+                return num.toFixed(6);
+              }
+            }
+          });
+
+          app.mount('#app');
+        } catch (error) {
+          console.error('アプリケーション初期化エラー:', error);
+          document.getElementById('app').innerHTML = `
+            <div class="container">
+              <div class="error-state">
+                <div class="error-icon">⚠️</div>
+                <h3>エラーが発生しました</h3>
+                <p>${error.message}</p>
+              </div>
+            </div>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>
