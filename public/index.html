@@ -798,9 +798,79 @@
     <script>
       const { createApp } = Vue;
 
-      let mapMain;
-      let clustererInstance;
-      let db;
+        let mapMain;
+        let clustererInstance;
+        let db;
+
+        const ITEMS_PER_PAGE = 12;
+        const CACHE_KEY = 'touring_locations_cache';
+        const CACHE_TIMESTAMP_KEY = 'touring_cache_timestamp';
+        const CACHE_EXPIRY_MS = 168 * 60 * 60 * 1000; // 168時間
+
+        // キャッシュ管理クラス
+        class CacheManager {
+            // キャッシュにデータを保存
+            static saveToCache(data, timestamp) {
+            try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+                localStorage.setItem(CACHE_TIMESTAMP_KEY, timestamp.toString());
+                console.log('キャッシュに保存しました:', data.length, '件');
+            } catch (error) {
+                console.error('キャッシュ保存エラー:', error);
+            }
+            }
+
+            // キャッシュからデータを取得
+            static loadFromCache() {
+            try {
+                const cachedData = localStorage.getItem(CACHE_KEY);
+                const cachedTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+                
+                if (!cachedData || !cachedTimestamp) {
+                return null;
+                }
+
+                // キャッシュの有効期限チェック
+                const age = Date.now() - parseInt(cachedTimestamp);
+                if (age > CACHE_EXPIRY_MS) {
+                console.log('キャッシュが期限切れです');
+                this.clearCache();
+                return null;
+                }
+
+                const data = JSON.parse(cachedData);
+                console.log('キャッシュから読み込みました:', data.length, '件');
+                return data;
+            } catch (error) {
+                console.error('キャッシュ読み込みエラー:', error);
+                this.clearCache();
+                return null;
+            }
+            }
+
+            // キャッシュをクリア
+            static clearCache() {
+            localStorage.removeItem(CACHE_KEY);
+            localStorage.removeItem(CACHE_TIMESTAMP_KEY);
+            console.log('キャッシュをクリアしました');
+            }
+
+            // 最新の更新日時を取得
+            static getLatestTimestamp(locations) {
+            if (!locations || locations.length === 0) return 0;
+            
+            const timestamps = locations
+                .filter(loc => loc.createTimeTimeStamp)
+                .map(loc => {
+                const timestamp = loc.createTimeTimeStamp;
+                return timestamp.seconds ? timestamp.seconds * 1000 : timestamp;
+                });
+            
+            return timestamps.length > 0 ? Math.max(...timestamps) : 0;
+            }
+        }
+
+
 
       // ロケーションカードコンポーネント
       const LocationCard = {
@@ -989,11 +1059,11 @@
 
       document.addEventListener('DOMContentLoaded', async function() {
         try {
-          await waitForFirebase();
+        await waitForFirebase();
 
-          const app = createApp({
+        const app = createApp({
             data() {
-              return {
+            return {
                 currentView: 'map',
                 locations: [],
                 displayedLocations: [],
@@ -1007,32 +1077,218 @@
                 markers: [],
                 currentPage: 0,
                 itemsPerPage: 12,
-                mapInitialized: false
-              };
+                mapInitialized: false,
+                cacheLoaded: false
+            };
             },
             components: {
-              'location-card': LocationCard
+            'location-card': LocationCard
             },
             async mounted() {
-              try {
+            try {
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
                 
-                await this.loadLocations();
+                // キャッシュから読み込み
+                await this.loadFromCacheFirst();
+                
+                // Firebaseから最新データを確認・取得
+                await this.checkAndUpdateFromFirebase();
                 
                 window.addEventListener('scroll', this.handleScroll);
                 document.addEventListener('keydown', this.handleKeydown);
-              } catch (e) {
+            } catch (e) {
                 console.error('初期化エラー:', e);
                 this.error = e.message;
                 this.isInitialLoading = false;
-              }
+            }
             },
             beforeUnmount() {
-              window.removeEventListener('scroll', this.handleScroll);
-              document.removeEventListener('keydown', this.handleKeydown);
+            window.removeEventListener('scroll', this.handleScroll);
+            document.removeEventListener('keydown', this.handleKeydown);
             },
             methods: {
+            // キャッシュから先に読み込む
+            async loadFromCacheFirst() {
+                const cachedData = CacheManager.loadFromCache();
+                
+                if (cachedData && cachedData.length > 0) {
+                this.locations = cachedData;
+                this.cacheLoaded = true;
+                this.loadMoreDisplayedLocations();
+                this.isInitialLoading = false;
+                
+                // ユーザー情報を非同期で読み込み
+                const userLoadPromises = [];
+                cachedData.forEach(location => {
+                    if (location.userID && !this.userCache[location.userID]) {
+                    userLoadPromises.push(this.getUserInfo(location.userID));
+                    }
+                });
+                await Promise.all(userLoadPromises);
+                
+                // マップビューの場合は初期化
+                if (this.currentView === 'map') {
+                    this.$nextTick(async () => {
+                    try {
+                        await waitForGoogleMaps();
+                        await waitForMarkerClusterer();
+                        await this.initializeMap();
+                        this.mapInitialized = true;
+                    } catch (error) {
+                        console.error('マップ初期化エラー:', error);
+                    }
+                    });
+                }
+                }
+            },
+
+            // Firebaseから最新データを確認・更新
+            async checkAndUpdateFromFirebase() {
+                try {
+                // キャッシュの最新タイムスタンプを取得
+                const cachedTimestamp = CacheManager.getLatestTimestamp(this.locations);
+                
+                let query = db.collection('imagedownload')
+                    .orderBy('createTimeTimeStamp', 'desc');
+                
+                // キャッシュがある場合は、最新のタイムスタンプ以降のデータのみ取得
+                if (cachedTimestamp > 0) {
+                    const timestampDate = new Date(cachedTimestamp);
+                    query = query.where('createTimeTimeStamp', '>', firebase.firestore.Timestamp.fromDate(timestampDate));
+                }
+                
+                const snapshot = await query.get();
+                
+                if (snapshot.empty && this.cacheLoaded) {
+                    console.log('更新なし: キャッシュデータが最新です');
+                    return;
+                }
+                
+                // 新しいデータまたは更新されたデータを処理
+                const newLocations = [];
+                const updatedIds = new Set();
+                
+                snapshot.forEach(doc => {
+                    const locationData = {
+                    id: doc.id,
+                    ...doc.data()
+                    };
+                    newLocations.push(locationData);
+                    updatedIds.add(doc.id);
+                });
+                
+                if (newLocations.length > 0) {
+                    console.log('新規・更新データ:', newLocations.length, '件');
+                    
+                    // 既存データをマージ
+                    if (this.cacheLoaded) {
+                    // 既存のロケーションから更新されたIDを除外
+                    const filteredLocations = this.locations.filter(loc => !updatedIds.has(loc.id));
+                    
+                    // 新しいデータを先頭に追加
+                    this.locations = [...newLocations, ...filteredLocations];
+                    } else {
+                    // キャッシュがない場合は全データを読み込み
+                    await this.loadAllLocations();
+                    return;
+                    }
+                    
+                    // ユーザー情報を取得
+                    const userLoadPromises = [];
+                    newLocations.forEach(location => {
+                    if (location.userID && !this.userCache[location.userID]) {
+                        userLoadPromises.push(this.getUserInfo(location.userID));
+                    }
+                    });
+                    await Promise.all(userLoadPromises);
+                    
+                    // 表示用データを更新
+                    this.displayedLocations = [];
+                    this.currentPage = 0;
+                    this.loadMoreDisplayedLocations();
+                    
+                    // マップを更新
+                    if (this.mapInitialized) {
+                    this.createMarkers();
+                    }
+                    
+                    // キャッシュを更新
+                    CacheManager.saveToCache(this.locations, Date.now());
+                }
+                
+                } catch (error) {
+                console.error('Firebase更新確認エラー:', error);
+                
+                // エラー時でもキャッシュがあれば継続
+                if (!this.cacheLoaded) {
+                    this.error = error.message;
+                    this.isInitialLoading = false;
+                }
+                }
+            },
+
+            // 全データを読み込む（初回またはキャッシュなし時）
+            async loadAllLocations() {
+                if (this.isLoadingMore) return;
+                this.isLoadingMore = true;
+
+                try {
+                const snapshot = await db.collection('imagedownload')
+                    .orderBy('createTimeTimeStamp', 'desc')
+                    .get();
+                
+                if (snapshot.empty) {
+                    this.hasMore = false;
+                    this.isInitialLoading = false;
+                    this.isLoadingMore = false;
+                    return;
+                }
+
+                const locationPromises = [];
+                
+                snapshot.forEach(doc => {
+                    const locationData = {
+                    id: doc.id,
+                    ...doc.data()
+                    };
+                    this.locations.push(locationData);
+                    
+                    if (locationData.userID) {
+                    locationPromises.push(this.getUserInfo(locationData.userID));
+                    }
+                });
+
+                await Promise.all(locationPromises);
+                
+                this.loadMoreDisplayedLocations();
+                
+                // キャッシュに保存
+                CacheManager.saveToCache(this.locations, Date.now());
+                
+                this.isInitialLoading = false;
+                this.isLoadingMore = false;
+                
+                // データ読み込み完了後、マップビューの場合は初期化
+                if (this.currentView === 'map') {
+                    this.$nextTick(async () => {
+                    try {
+                        await waitForGoogleMaps();
+                        await waitForMarkerClusterer();
+                        await this.initializeMap();
+                        this.mapInitialized = true;
+                    } catch (error) {
+                        console.error('マップ初期化エラー:', error);
+                    }
+                    });
+                }
+                } catch (error) {
+                console.error('データ読み込みエラー:', error);
+                this.error = error.message;
+                this.isInitialLoading = false;
+                this.isLoadingMore = false;
+                }
+            },
               switchView(view) {
                 this.currentView = view;
                 if (view === 'map') {
