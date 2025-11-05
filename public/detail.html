@@ -467,19 +467,19 @@
           </div>
 
           <!-- 画像ギャラリー -->
-          <div v-if="location.locationImageURLs && location.locationImageURLs.length > 0" class="detail-card image-gallery-section">
-            <div class="section-title">📷 写真ギャラリー（{{ location.locationImageURLs.length }}枚）</div>
+          <div v-if="hasImages" class="detail-card image-gallery-section">
+            <div class="section-title">📷 写真ギャラリー（{{ imageCount }}枚）</div>
             <div class="image-grid">
-              <div 
-                v-for="(url, index) in location.locationImageURLs"
+                <div 
+                v-for="(url, index) in displayImageURLs"
                 :key="index"
                 class="gallery-image-item"
                 @click="openImageModal(url)"
-              >
+                >
                 <img :src="url" :alt="'画像 ' + (index + 1)" @error="handleImageError">
-              </div>
+                </div>
             </div>
-          </div>
+            </div>
         </template>
       </div>
 
@@ -550,6 +550,25 @@
                 showImageModal: false,
                 selectedImage: null
               };
+            },
+            computed: {
+                displayImageURLs() {
+                // locationImageURLsがあればそれを使用
+                if (this.location?.locationImageURLs && this.location.locationImageURLs.length > 0) {
+                    return this.location.locationImageURLs;
+                }
+                // なければimageDownloadURLを配列として返す
+                if (this.location?.imageDownloadURL) {
+                    return [this.location.imageDownloadURL];
+                }
+                return [];
+                },
+                hasImages() {
+                return this.displayImageURLs.length > 0;
+                },
+                imageCount() {
+                return this.displayImageURLs.length;
+                }
             },
             async mounted() {
               try {

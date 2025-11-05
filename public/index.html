@@ -931,7 +931,16 @@
             return this.userInfo?.userIcon || null;
           },
           imageURLs() {
-            return this.location.locationImageURLs || [];
+            // locationImageURLsがある場合はそれを返す
+            if (this.location.locationImageURLs && this.location.locationImageURLs.length > 0) {
+                return this.location.locationImageURLs;
+            }
+            // locationImageURLsがなく、iconImageURLがある場合は配列化して返す
+            if (this.location.iconImageURL) {
+                return [this.location.iconImageURL];
+            }
+            // どちらもない場合は空配列
+            return [];
           },
           hasMultipleImages() {
             return this.imageURLs.length > 1;
