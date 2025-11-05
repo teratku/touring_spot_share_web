@@ -764,14 +764,23 @@
               <!-- 画像表示 -->
               <div class="cluster-image-container">
                 <img 
-                  v-if="location.locationImageURLs && location.locationImageURLs.length > 0"
-                  :src="location.locationImageURLs[0]" 
-                  :alt="location.locality || location.administrative || '不明な場所'"
-                  class="cluster-image"
-                  @error="handleClusterImageError"
+                    v-if="location.locationImageURLs && location.locationImageURLs.length > 0"
+                    :src="location.locationImageURLs[0]" 
+                    :alt="location.locality || location.administrative || '不明な場所'"
+                    class="cluster-image"
+                    @error="handleClusterImageError"
                 >
+                <!-- locationImageURLsがなくiconImageURLがある場合 -->
+                <img 
+                    v-else-if="location.iconImageURL"
+                    :src="location.iconImageURL" 
+                    :alt="location.locality || location.administrative || '不明な場所'"
+                    class="cluster-image"
+                    @error="handleClusterImageError"
+                >
+                <!-- どちらもない場合はプレースホルダー -->
                 <div v-else class="cluster-image-placeholder">
-                  📷
+                    📷
                 </div>
               </div>
 
