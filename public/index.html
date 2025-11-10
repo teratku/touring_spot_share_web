@@ -749,7 +749,7 @@
       >
         <div class="cluster-panel-header">
           <h2 class="cluster-panel-title">
-            📍 この地域のスポット ({{ clusterLocations.length }}件)
+            📍 {{ clusterLocations.length === 1 ? 'スポット詳細' : `この地域のスポット (${clusterLocations.length}件)` }}
           </h2>
           <button class="panel-close-btn" @click="closeClusterPanel" aria-label="閉じる">✕</button>
         </div>
@@ -1452,7 +1452,7 @@
                     marker.locationData = location;
 
                     marker.addListener('click', () => {
-                        this.showDetail(marker.locationData);
+                        this.showClusterLocations([marker.locationData]);
                     });
 
                     this.markers.push(marker);
