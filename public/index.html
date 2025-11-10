@@ -19,7 +19,7 @@
         console.log('Google Maps API callback triggered');
       };
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=initMap&loading=async"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=initMap&libraries=marker"></script>
     <script src="https://unpkg.com/@googlemaps/markerclusterer@latest/dist/index.min.js"></script>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9797643349224084"
@@ -120,21 +120,6 @@
         margin-bottom: 24pt;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         background: white;
-      }
-      #cluster-map {
-        width: 100%;
-        height: 100%;
-      }
-      .cluster-marker {
-        background: #00A8C6;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        border: 3px solid white;
-        box-shadow: 0 2px 8px rgba(0, 168, 198, 0.4);
       }
 
       .map-view.active {
@@ -1250,7 +1235,7 @@
                     
                     // マップを更新
                     if (this.mapInitialized) {
-                    this.createMarkers();
+                    await this.createMarkers();
                     }
                     
                     // キャッシュを更新
@@ -1329,6 +1314,7 @@
                 this.isLoadingMore = false;
                 }
             },
+
               switchView(view) {
                 this.currentView = view;
                 if (view === 'map') {
@@ -1367,13 +1353,17 @@
                   return;
                 }
 
+                // Request needed libraries
+                const { Map } = await google.maps.importLibrary("maps");
+                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
                 mapMain = new google.maps.Map(mapElement, {
                   zoom: 5,
                   center: { lat: 36.2048, lng: 138.2529 },
+                  mapId: "DEMO_MAP_ID",
                   mapTypeControl: true,
                   streetViewControl: true,
                   fullscreenControl: true,
-                  mapTypeId: google.maps.MapTypeId.ROADMAP,
                   styles: [
                     {
                       featureType: "poi",
@@ -1383,10 +1373,10 @@
                   ]
                 });
 
-                this.createMarkers();
+                await this.createMarkers();
               },
 
-              createMarkers() {
+              async createMarkers() {
                 console.log('createMarkers called');
                 
                 // 既存のクラスタラーを完全に破棄
@@ -1403,9 +1393,8 @@
                 // 既存のマーカーを完全に削除
                 if (this.markers && this.markers.length > 0) {
                     this.markers.forEach(marker => {
-                        if (marker) {
-                            marker.setMap(null);
-                            google.maps.event.clearInstanceListeners(marker);
+                        if (marker && marker.map) {
+                            marker.map = null;
                         }
                     });
                 }
@@ -1420,6 +1409,11 @@
                 const bounds = new google.maps.LatLngBounds();
                 const validLocations = [];
 
+                // AdvancedMarkerElement用のライブラリを取得
+                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+                const self = this;
+
                 // マーカーを作成
                 this.locations.forEach(location => {
                     if (!location.lat || !location.lng) return;
@@ -1433,26 +1427,26 @@
                     bounds.extend(position);
                     validLocations.push(location);
 
-                    const marker = new google.maps.Marker({
+                    // PinElementを作成
+                    const pinElement = new PinElement({
+                        background: '#00A8C6',
+                        borderColor: '#FFFFFF',
+                        glyphColor: '#FFFFFF',
+                        scale: 1.2,
+                    });
+
+                    // AdvancedMarkerElementを作成
+                    const marker = new AdvancedMarkerElement({
                         position: position,
-                        // map: null を設定せず、クラスタラーに管理させる
+                        content: pinElement.element,
                         title: location.locality || location.administrative || '不明な場所',
-                        icon: {
-                            path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-                            fillColor: '#00A8C6',
-                            fillOpacity: 1,
-                            strokeColor: '#FFFFFF',
-                            strokeWeight: 2,
-                            scale: 1.5,
-                            anchor: new google.maps.Point(12, 24)
-                        },
-                        optimized: true // パフォーマンス向上
                     });
 
                     marker.locationData = location;
 
+                    // 個別マーカーのクリックイベント
                     marker.addListener('click', () => {
-                        this.showClusterLocations([marker.locationData]);
+                        self.showClusterLocations([marker.locationData]);
                     });
 
                     this.markers.push(marker);
@@ -1460,79 +1454,43 @@
 
                 console.log(`Created ${this.markers.length} markers`);
 
-                const self = this;
+                // クラスタラーを初期化
+                try {
+                    clustererInstance = new markerClusterer.MarkerClusterer({
+                        markers: this.markers,
+                        map: mapMain,
+                        algorithmOptions: {
+                            maxZoom: 16,
+                        },
+                        onClusterClick: (event, cluster, map) => {
+                            const clusterMarkers = cluster.markers;
+                            
+                            if (clusterMarkers.length <= 10) {
+                                const locations = clusterMarkers.map(m => m.locationData).filter(Boolean);
+                                self.showClusterLocations(locations);
+                            } else {
+                                map.fitBounds(cluster.bounds);
+                            }
+                        }
+                    });
 
-                // 少し遅延させてクラスタラーを初期化（マーカーの準備を確実にするため）
-                setTimeout(() => {
-                    try {
-                        // GridAlgorithmを使用（より確実なクラスタリング）
-                        clustererInstance = new markerClusterer.MarkerClusterer({
-                            map: mapMain,
-                            markers: this.markers,
-                            algorithm: new markerClusterer.GridAlgorithm({
-                                maxZoom: 16,  // このズームレベル以上ではクラスター化しない
-                                gridSize: 60  // グリッドサイズ（ピクセル）
-                            }),
-                            renderer: {
-                                render: ({ count, position }) => {
-                                    // マーカー数に応じて色を変更
-                                    const color = count > 100 ? "#E63946" : 
-                                                count > 50 ? "#228B22" : 
-                                                count > 10 ? "#00A8C6" : "#228B22";
-                                    
-                                    // サイズも調整
-                                    const size = count > 100 ? 70 : count > 50 ? 65 : 60;
-                                    const fontSize = count > 100 ? 22 : count > 50 ? 21 : 20;
-                                    
-                                    return new google.maps.Marker({
-                                        position,
-                                        icon: {
-                                            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
-                                                <circle cx="${size/2}" cy="${size/2}" r="${size/2 - 2}" fill="${color}" stroke="white" stroke-width="3"/>
-                                                <text x="${size/2}" y="${size/2 + 7}" font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="bold" fill="white" text-anchor="middle">${count}</text>
-                                            </svg>
-                                            `)}`,
-                                            scaledSize: new google.maps.Size(size, size),
-                                            anchor: new google.maps.Point(size/2, size/2)
-                                        },
-                                        zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count
-                                    });
-                                }
-                            },
-                            onClusterClick: (event, cluster, map) => {
-                                const clusterMarkers = cluster.markers;
-                                
-                                // クラスター内のマーカー数が少ない場合はズームイン
-                                if (clusterMarkers.length <= 10) {
-                                    const locations = clusterMarkers.map(m => m.locationData).filter(Boolean);
-                                    self.showClusterLocations(locations);
-                                } else {
-                                    // マーカー数が多い場合は自動的にズームイン
-                                    map.fitBounds(cluster.bounds);
-                                }
+                    console.log('Clusterer initialized successfully');
+
+                    // マップの境界を調整
+                    if (validLocations.length > 0) {
+                        mapMain.fitBounds(bounds);
+                        
+                        google.maps.event.addListenerOnce(mapMain, 'bounds_changed', () => {
+                            const zoom = mapMain.getZoom();
+                            if (zoom > 16) {
+                                mapMain.setZoom(16);
                             }
                         });
-
-                        console.log('Clusterer initialized successfully');
-
-                        // マップの境界を調整
-                        if (validLocations.length > 0) {
-                            mapMain.fitBounds(bounds);
-                            
-                            // ズームレベルが高すぎる場合は調整
-                            google.maps.event.addListenerOnce(mapMain, 'bounds_changed', () => {
-                                const zoom = mapMain.getZoom();
-                                if (zoom > 16) {
-                                    mapMain.setZoom(16);
-                                }
-                            });
-                        }
-                    } catch (error) {
-                        console.error('Clusterer initialization error:', error);
                     }
-                }, 100);
-            },
+                } catch (error) {
+                    console.error('Clusterer initialization error:', error);
+                }
+              },
 
               async showClusterLocations(locations) {
                 this.clusterLocations = locations;
@@ -1578,64 +1536,6 @@
                   const defaultUser = { userName: userID, userIcon: null };
                   this.userCache[userID] = defaultUser;
                   return defaultUser;
-                }
-              },
-              
-              async loadLocations() {
-                if (this.isLoadingMore) return;
-                this.isLoadingMore = true;
-
-                try {
-                  const snapshot = await db.collection('imagedownload')
-                    .orderBy('createTimeTimeStamp', 'desc')
-                    .get();
-                  
-                  if (snapshot.empty) {
-                    this.hasMore = false;
-                    this.isInitialLoading = false;
-                    this.isLoadingMore = false;
-                    return;
-                  }
-
-                  const locationPromises = [];
-                  
-                  snapshot.forEach(doc => {
-                    const locationData = {
-                      id: doc.id,
-                      ...doc.data()
-                    };
-                    this.locations.push(locationData);
-                    
-                    if (locationData.userID) {
-                      locationPromises.push(this.getUserInfo(locationData.userID));
-                    }
-                  });
-
-                  await Promise.all(locationPromises);
-                  
-                  this.loadMoreDisplayedLocations();
-                  
-                  this.isInitialLoading = false;
-                  this.isLoadingMore = false;
-                  
-                  // データ読み込み完了後、マップビューの場合は初期化
-                  if (this.currentView === 'map') {
-                    this.$nextTick(async () => {
-                      try {
-                        await waitForGoogleMaps();
-                        await waitForMarkerClusterer();
-                        await this.initializeMap();
-                        this.mapInitialized = true;
-                      } catch (error) {
-                        console.error('マップ初期化エラー:', error);
-                      }
-                    });
-                  }
-                } catch (error) {
-                  console.error('データ読み込みエラー:', error);
-                  this.error = error.message;
-                  this.isInitialLoading = false;
-                  this.isLoadingMore = false;
                 }
               },
 
