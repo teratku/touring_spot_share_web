@@ -58,7 +58,7 @@
         gap: 16px;
       }
 
-      .back-btn {
+      .menu-btn, .back-btn {
         background: rgba(255, 255, 255, 0.2);
         border: none;
         width: 44px;
@@ -73,7 +73,7 @@
         transition: all 0.2s ease;
       }
 
-      .back-btn:hover {
+      .menu-btn:hover, .back-btn:hover {
         background: rgba(255, 255, 255, 0.3);
       }
 
@@ -81,6 +81,119 @@
         font-size: 20pt;
         font-weight: 600;
         flex: 1;
+      }
+
+      /* ========== ハンバーガーメニュー ========== */
+      .hamburger-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .hamburger-menu.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .menu-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 280px;
+        height: 100%;
+        background: white;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+        animation: slideInLeft 0.3s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .menu-header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 20px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-header h2 {
+        font-size: 20pt;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .menu-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .menu-nav {
+        padding: 16px 0;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        color: #333333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-left: 4px solid transparent;
+      }
+
+      .menu-item:hover {
+        background: #F9F9F9;
+        border-left-color: #00A8C6;
+      }
+
+      .menu-item.active {
+        background: #E8F8FB;
+        border-left-color: #00A8C6;
+        color: #00A8C6;
+        font-weight: 600;
+      }
+
+      .menu-icon {
+        font-size: 20pt;
+        width: 28px;
+        text-align: center;
       }
 
       /* ========== メインコンテナ ========== */
@@ -290,11 +403,6 @@
         justify-content: center;
       }
 
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
       .modal-content {
         max-width: 90%;
         max-height: 90%;
@@ -350,6 +458,10 @@
         .gallery-image-item {
           height: 150px;
         }
+
+        .menu-content {
+          width: 240px;
+        }
       }
 
       /* ========== ダークモード対応 ========== */
@@ -378,6 +490,24 @@
         .info-value, .user-name {
           color: #F2F2F7;
         }
+
+        .menu-content {
+          background: #2C2C2E;
+        }
+
+        .menu-item {
+          color: #F2F2F7;
+        }
+
+        .menu-item:hover {
+          background: #3A3A3C;
+        }
+
+        .menu-item.active {
+          background: rgba(0, 168, 198, 0.2);
+          color: #00D4FF;
+          border-left-color: #00D4FF;
+        }
       }
     </style>
   </head>
@@ -387,10 +517,35 @@
       <!-- ヘッダー -->
       <header>
         <div class="header-content">
+          <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
           <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
           <h1>📍 ロケーション詳細</h1>
         </div>
       </header>
+
+      <!-- ハンバーガーメニュー -->
+      <div class="hamburger-menu" :class="{ active: showMenu }" @click="closeMenu">
+        <div class="menu-content" @click.stop>
+          <div class="menu-header">
+            <h2>メニュー</h2>
+            <button class="menu-close-btn" @click="closeMenu" aria-label="閉じる">✕</button>
+          </div>
+          <nav class="menu-nav">
+            <a href="/" class="menu-item">
+              <span class="menu-icon">🏠</span>
+              <span>ホーム</span>
+            </a>
+            <a href="/privacypolicy/privacypolicy.html" class="menu-item">
+              <span class="menu-icon">🔒</span>
+              <span>プライバシーポリシー</span>
+            </a>
+            <a href="/termsofservice/termsofservice.html" class="menu-item">
+              <span class="menu-icon">📋</span>
+              <span>利用規約</span>
+            </a>
+          </nav>
+        </div>
+      </div>
 
       <!-- メインコンテンツ -->
       <div class="container">
@@ -548,7 +703,8 @@
                 error: null,
                 locationId: null,
                 showImageModal: false,
-                selectedImage: null
+                selectedImage: null,
+                showMenu: false
               };
             },
             computed: {
@@ -808,9 +964,25 @@
                 window.history.back();
               },
 
+              toggleMenu() {
+                this.showMenu = !this.showMenu;
+                if (this.showMenu) {
+                  document.body.style.overflow = 'hidden';
+                } else {
+                  document.body.style.overflow = '';
+                }
+              },
+
+              closeMenu() {
+                this.showMenu = false;
+                document.body.style.overflow = '';
+              },
+
               handleKeydown(event) {
                 if (event.key === 'Escape') {
-                  if (this.showImageModal) {
+                  if (this.showMenu) {
+                    this.closeMenu();
+                  } else if (this.showImageModal) {
                     this.closeImageModal();
                   } else {
                     this.goBack();
