@@ -957,14 +957,19 @@
                   <!-- ユーザー情報 -->
                   <span v-if="location.userID" class="cluster-user-info">
                     <img 
-                      v-if="getUserInfo(location.userID)?.userIcon"
-                      :src="getUserInfo(location.userID).userIcon" 
-                      :alt="getUserInfo(location.userID)?.userName || location.userID"
-                      class="cluster-user-icon"
-                      @error="handleUserIconError"
-                    >
+                    v-if="userCache[location.userID].userIcon"
+                    :src="userCache[location.userID].userIcon" 
+                    :alt="userCache[location.userID].userName"
+                    class="cluster-user-icon"
+                    @error="handleUserIconError"
+                  >
                     <span v-else>👤</span>
-                    {{ getUserInfo(location.userID)?.userName || location.userID }}
+                    <template v-if="userCache[location.userID]">
+                      {{ userCache[location.userID].userName }}
+                    </template>
+                    <template v-else>
+                      読み込み中...
+                    </template>
                   </span>
 
                   <!-- 写真枚数 -->
@@ -1676,12 +1681,19 @@
                 this.clusterLocations = locations;
                 this.showClusterPanel = true;
 
+                // 全てのユーザー情報を確実に取得してから表示
                 const userLoadPromises = locations
-                  .filter(loc => loc.userID && !this.userCache[loc.userID])
-                  .map(loc => this.getUserInfo(loc.userID));
+                  .filter(loc => loc.userID)
+                  .map(async (loc) => {
+                    if (!this.userCache[loc.userID]) {
+                      const userInfo = await this.getUserInfo(loc.userID);
+                      return userInfo;
+                    }
+                  });
 
                 try {
                   await Promise.all(userLoadPromises);
+                  // データ取得完了後に強制再描画
                   this.$forceUpdate();
                 } catch (error) {
                   console.error('ユーザー情報一括取得エラー:', error);
@@ -1704,6 +1716,7 @@
                   const userDoc = await db.collection('userInfo').doc(userID).get();
                   if (userDoc.exists) {
                     const userData = userDoc.data();
+                    // Vue 3ではこのように直接代入でリアクティブになる
                     this.userCache[userID] = userData;
                     return userData;
                   } else {
