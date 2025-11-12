@@ -989,6 +989,142 @@
       const { createApp } = Vue;
 
       let db;
+      
+      // index.htmlと共通のキャッシュキー
+      const SHARED_CACHE_KEY = 'touring_locations_cache';
+      const SHARED_CACHE_TIMESTAMP_KEY = 'touring_cache_timestamp';
+
+      // 共有キャッシュ管理クラス
+      class SharedCacheManager {
+        // index.htmlのキャッシュから特定ユーザーのロケーションを抽出
+        static getUserLocationsFromSharedCache(userId) {
+          try {
+            const cachedData = localStorage.getItem(SHARED_CACHE_KEY);
+            
+            if (!cachedData) {
+              return null;
+            }
+
+            const allLocations = JSON.parse(cachedData);
+            
+            // 特定ユーザーのロケーションのみフィルタ
+            const userLocations = allLocations.filter(loc => loc.userID === userId);
+            
+            if (userLocations.length > 0) {
+              console.log(`共有キャッシュからユーザー ${userId} のロケーションを取得:`, userLocations.length, '件');
+              return userLocations;
+            }
+            
+            return null;
+          } catch (error) {
+            console.error('共有キャッシュ読み込みエラー:', error);
+            return null;
+          }
+        }
+
+        // キャッシュの有効性をチェック
+        static isCacheValid() {
+          try {
+            const cachedTimestamp = localStorage.getItem(SHARED_CACHE_TIMESTAMP_KEY);
+            
+            if (!cachedTimestamp) {
+              return false;
+            }
+
+            const CACHE_EXPIRY_MS = 168 * 60 * 60 * 1000; // 168時間
+            const age = Date.now() - parseInt(cachedTimestamp);
+            
+            return age <= CACHE_EXPIRY_MS;
+          } catch (error) {
+            console.error('キャッシュ有効性チェックエラー:', error);
+            return false;
+          }
+        }
+
+        // 最新の更新日時を取得
+        static getLatestTimestamp(locations) {
+          if (!locations || locations.length === 0) return 0;
+          
+          const timestamps = locations
+            .filter(loc => loc.createTimeTimeStamp)
+            .map(loc => {
+              const timestamp = loc.createTimeTimeStamp;
+              return timestamp.seconds ? timestamp.seconds * 1000 : timestamp;
+            });
+          
+          return timestamps.length > 0 ? Math.max(...timestamps) : 0;
+        }
+
+        // 特定ユーザーの新規データをチェック
+        static async checkForUserUpdates(userId, cachedLocations) {
+          if (!cachedLocations || cachedLocations.length === 0) {
+            return true; // キャッシュがない場合は更新が必要
+          }
+
+          try {
+            // キャッシュの最新タイムスタンプを取得
+            const cachedTimestamp = this.getLatestTimestamp(cachedLocations);
+            
+            if (cachedTimestamp === 0) {
+              return true; // キャッシュに有効なタイムスタンプがない場合は更新が必要
+            }
+
+            // Firebaseで最新のタイムスタンプ以降のデータがあるかチェック
+            const timestampDate = new Date(cachedTimestamp);
+            const snapshot = await db.collection('imagedownload')
+              .where('userID', '==', userId)
+              .where('createTimeTimeStamp', '>', firebase.firestore.Timestamp.fromDate(timestampDate))
+              .limit(1)
+              .get();
+
+            const hasUpdates = !snapshot.empty;
+            
+            if (hasUpdates) {
+              console.log(`ユーザー ${userId} の新規データを検出`);
+            } else {
+              console.log(`ユーザー ${userId} のデータは最新です`);
+            }
+            
+            return hasUpdates;
+          } catch (error) {
+            console.error('更新チェックエラー:', error);
+            return true; // エラー時は安全のため更新
+          }
+        }
+
+        // 共有キャッシュを更新（ユーザーのロケーションをマージ）
+        static updateSharedCache(userId, userLocations) {
+          try {
+            const cachedData = localStorage.getItem(SHARED_CACHE_KEY);
+            let allLocations = [];
+            
+            if (cachedData) {
+              allLocations = JSON.parse(cachedData);
+            }
+            
+            // 既存のユーザーデータを削除
+            allLocations = allLocations.filter(loc => loc.userID !== userId);
+            
+            // 新しいユーザーデータを追加
+            allLocations.push(...userLocations);
+            
+            // タイムスタンプでソート（新しい順）
+            allLocations.sort((a, b) => {
+              const timeA = a.createTimeTimeStamp?.seconds || 0;
+              const timeB = b.createTimeTimeStamp?.seconds || 0;
+              return timeB - timeA;
+            });
+            
+            // キャッシュに保存
+            localStorage.setItem(SHARED_CACHE_KEY, JSON.stringify(allLocations));
+            localStorage.setItem(SHARED_CACHE_TIMESTAMP_KEY, Date.now().toString());
+            
+            console.log(`共有キャッシュを更新: ユーザー ${userId} のデータをマージ`);
+          } catch (error) {
+            console.error('共有キャッシュ更新エラー:', error);
+          }
+        }
+      }
 
       // Firebase初期化を待つ関数
       function waitForFirebase() {
@@ -1038,7 +1174,8 @@
                 followerCount: 0,
                 followers: [],
                 showFollowerModal: false,
-                isLoadingFollowers: false
+                isLoadingFollowers: false,
+                cacheLoaded: false
               };
             },
             computed: {
@@ -1065,11 +1202,14 @@
                 // ユーザー情報を読み込む
                 await this.loadUserInfo();
                 
-                // ユーザーの投稿を読み込む
-                await this.loadUserLocations();
+                // 共有キャッシュからロケーションを先に読み込み
+                await this.loadLocationsFromSharedCache();
                 
                 // フォロワー数を読み込む
                 await this.loadFollowerCount();
+                
+                // バックグラウンドでFirebaseから最新データをチェック
+                this.checkAndUpdateLocations();
                 
                 this.isLoading = false;
                 
@@ -1084,6 +1224,57 @@
               document.removeEventListener('keydown', this.handleKeydown);
             },
             methods: {
+              // 共有キャッシュから先に読み込む
+              async loadLocationsFromSharedCache() {
+                // キャッシュの有効性をチェック
+                if (!SharedCacheManager.isCacheValid()) {
+                  console.log('共有キャッシュが期限切れまたは存在しません');
+                  return;
+                }
+
+                // ユーザーのロケーションを抽出
+                const userLocations = SharedCacheManager.getUserLocationsFromSharedCache(this.userId);
+                
+                if (userLocations && userLocations.length > 0) {
+                  this.locations = userLocations;
+                  this.cacheLoaded = true;
+                  console.log('共有キャッシュからロケーションを表示');
+                } else {
+                  console.log('共有キャッシュにユーザーデータが見つかりません');
+                }
+              },
+
+              // Firebaseから最新データをチェック・更新
+              async checkAndUpdateLocations() {
+                try {
+                  // キャッシュがある場合は更新チェック
+                  if (this.cacheLoaded && this.locations.length > 0) {
+                    const hasUpdates = await SharedCacheManager.checkForUserUpdates(
+                      this.userId, 
+                      this.locations
+                    );
+                    
+                    if (!hasUpdates) {
+                      console.log('ユーザーのロケーションデータは最新です');
+                      return;
+                    }
+                    
+                    console.log('新しいロケーションデータを検出、更新中...');
+                  }
+
+                  // Firebaseから全データを取得
+                  await this.loadUserLocations();
+                  
+                } catch (error) {
+                  console.error('ロケーション更新チェックエラー:', error);
+                  
+                  // エラー時でもキャッシュがあれば継続
+                  if (!this.cacheLoaded) {
+                    console.warn('ロケーションの読み込みに失敗しましたが続行します');
+                  }
+                }
+              },
+
               async loadUserInfo() {
                 try {
                   const doc = await db.collection('userInfo').doc(this.userId).get();
@@ -1107,84 +1298,93 @@
                     .orderBy('createTimeTimeStamp', 'desc')
                     .get();
                   
-                  this.locations = [];
+                  const newLocations = [];
                   snapshot.forEach(doc => {
-                    this.locations.push({
+                    newLocations.push({
                       id: doc.id,
                       ...doc.data()
                     });
                   });
+
+                  this.locations = newLocations;
+                  
+                  // 共有キャッシュを更新
+                  SharedCacheManager.updateSharedCache(this.userId, newLocations);
+                  
+                  console.log('Firebaseからロケーションを更新:', newLocations.length, '件');
                 } catch (error) {
                   console.error('ロケーション読み込みエラー:', error);
-                  // エラーがあってもユーザー情報は表示する
-                  console.warn('ロケーションの読み込みに失敗しましたが続行します');
+                  // エラーがあってもキャッシュがあれば継続
+                  if (!this.cacheLoaded) {
+                    console.warn('ロケーションの読み込みに失敗しましたが続行します');
+                  }
                 }
               },
 
               async loadFollowerCount() {
                 try {
-                    const snapshot = await db.collection('followUser')
-                    .where('followUserID', '==', this.userId)  // ← followedUserID から followUserID に修正
+                  const snapshot = await db.collection('followUser')
+                    .where('followUserID', '==', this.userId)
                     .get();
-                    
-                    this.followerCount = snapshot.size;
+                  
+                  this.followerCount = snapshot.size;
                 } catch (error) {
-                    console.error('フォロワー数取得エラー:', error);
-                    this.followerCount = 0;
+                  console.error('フォロワー数取得エラー:', error);
+                  this.followerCount = 0;
                 }
-                },
+              },
 
-                async showFollowerList() {
+              async showFollowerList() {
                 this.showFollowerModal = true;
                 this.isLoadingFollowers = true;
                 document.body.style.overflow = 'hidden';
 
                 try {
-                    // フォロワー一覧を取得
-                    const snapshot = await db.collection('followUser')
-                    .where('followUserID', '==', this.userId)  // ← followedUserID から followUserID に修正
+                  // フォロワー一覧を取得
+                  const snapshot = await db.collection('followUser')
+                    .where('followUserID', '==', this.userId)
                     .get();
-                    
-                    if (snapshot.empty) {
+                  
+                  if (snapshot.empty) {
                     this.followers = [];
                     this.isLoadingFollowers = false;
                     return;
-                    }
+                  }
 
-                    // フォロワーのユーザー情報を取得
-                    const followerPromises = [];
-                    const followerIds = [];
+                  // フォロワーのユーザー情報を取得
+                  const followerPromises = [];
+                  const followerIds = [];
 
-                    snapshot.forEach(doc => {
+                  snapshot.forEach(doc => {
                     const data = doc.data();
-                    if (data.userID) {  // ← followerUserID から userID に修正
-                        followerIds.push(data.userID);
+                    if (data.userID) {
+                      followerIds.push(data.userID);
                     }
-                    });
+                  });
 
-                    // 各フォロワーのユーザー情報を取得
-                    for (const followerId of followerIds) {
+                  // 各フォロワーのユーザー情報を取得
+                  for (const followerId of followerIds) {
                     followerPromises.push(
-                        db.collection('userInfo').doc(followerId).get()
+                      db.collection('userInfo').doc(followerId).get()
                     );
-                    }
+                  }
 
-                    const userDocs = await Promise.all(followerPromises);
-                    
-                    this.followers = userDocs
+                  const userDocs = await Promise.all(followerPromises);
+                  
+                  this.followers = userDocs
                     .filter(doc => doc.exists)
                     .map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
+                      id: doc.id,
+                      ...doc.data()
                     }));
 
-                    this.isLoadingFollowers = false;
+                  this.isLoadingFollowers = false;
                 } catch (error) {
-                    console.error('フォロワー取得エラー:', error);
-                    this.followers = [];
-                    this.isLoadingFollowers = false;
+                  console.error('フォロワー取得エラー:', error);
+                  this.followers = [];
+                  this.isLoadingFollowers = false;
                 }
-                },
+              },
 
               closeFollowerModal() {
                 this.showFollowerModal = false;
