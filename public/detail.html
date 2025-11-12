@@ -15,8 +15,6 @@
 
     <!-- Google Maps API -->
     <script>
-      // Google Maps APIコールバック用のダミー関数
-      // 実際の初期化はVueのmountedで行う
       window.initMap = function() {
         console.log('Google Maps API callback triggered');
       };
@@ -100,6 +98,27 @@
         display: block;
       }
 
+      .menu-content {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 280px;
+        height: 100%;
+        background: white;
+        box-shadow: -4px 0 16px rgba(0, 0, 0, 0.2);
+        animation: slideInRight 0.3s ease;
+        overflow-y: auto;
+      }
+
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -109,30 +128,10 @@
         }
       }
 
-      .menu-content {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 280px;
-        height: 100%;
-        background: white;
-        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
-        animation: slideInLeft 0.3s ease;
-      }
-
-      @keyframes slideInLeft {
-        from {
-          transform: translateX(-100%);
-        }
-        to {
-          transform: translateX(0);
-        }
-      }
-
       .menu-header {
         background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
         color: white;
-        padding: 20px 16px;
+        padding: 20pt;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -140,22 +139,20 @@
 
       .menu-header h2 {
         font-size: 20pt;
-        font-weight: 600;
-        margin: 0;
       }
 
       .menu-close-btn {
         background: rgba(255, 255, 255, 0.2);
         border: none;
-        width: 44px;
-        height: 44px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         cursor: pointer;
+        font-size: 20pt;
+        color: white;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 24pt;
-        color: white;
         transition: all 0.2s ease;
       }
 
@@ -164,14 +161,14 @@
       }
 
       .menu-nav {
-        padding: 16px 0;
+        padding: 16pt 0;
       }
 
       .menu-item {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 16px 20px;
+        padding: 16pt 20pt;
         color: #333333;
         text-decoration: none;
         transition: all 0.2s ease;
@@ -246,20 +243,6 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         background: white;
         position: relative;
-      }
-
-      .map-container.loading::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(249, 249, 249, 0.9);
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
 
       #map {
@@ -359,6 +342,15 @@
         display: flex;
         align-items: center;
         gap: 12px;
+        cursor: pointer;
+        padding: 12pt;
+        border-radius: 12pt;
+        transition: all 0.2s ease;
+      }
+
+      .user-info:hover {
+        background: rgba(0, 168, 198, 0.1);
+        transform: translateX(4px);
       }
 
       .user-icon {
@@ -579,7 +571,7 @@
             </div>
 
             <!-- ユーザー情報 -->
-            <div v-if="userInfo" class="user-info">
+            <div v-if="userInfo" class="user-info" @click="goToUserProfile">
               <img 
                 v-if="userInfo.userIcon" 
                 :src="userInfo.userIcon" 
@@ -658,7 +650,6 @@
       let marker;
       let db;
 
-      // Firebase初期化を待つ関数
       function waitForFirebase() {
         return new Promise((resolve, reject) => {
           if (typeof firebase !== 'undefined') {
@@ -681,19 +672,15 @@
         });
       }
 
-      // URLパラメータを取得
       function getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
       }
 
-      // DOMContentLoadedイベントでVueアプリを初期化
       document.addEventListener('DOMContentLoaded', async function() {
         try {
-          // Firebaseが読み込まれるまで待機
           await waitForFirebase();
 
-          // Vueアプリ
           const app = createApp({
             data() {
               return {
@@ -709,11 +696,9 @@
             },
             computed: {
                 displayImageURLs() {
-                // locationImageURLsがあればそれを使用
                 if (this.location?.locationImageURLs && this.location.locationImageURLs.length > 0) {
                     return this.location.locationImageURLs;
                 }
-                // なければimageDownloadURLを配列として返す
                 if (this.location?.imageDownloadURL) {
                     return [this.location.imageDownloadURL];
                 }
@@ -728,13 +713,11 @@
             },
             async mounted() {
               try {
-                // Firebaseが読み込まれるまで待機
                 await waitForFirebase();
                 
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
                 
-                // URLパラメータからIDを取得
                 this.locationId = getQueryParam('id');
                 
                 if (!this.locationId) {
@@ -743,13 +726,8 @@
                   return;
                 }
 
-                // Google Maps APIの読み込みを待つ
                 await this.waitForGoogleMaps();
-
-                // マップを初期化（awaitで完了を待つ）
                 await this.initializeMap();
-
-                // ロケーション詳細を読み込む
                 await this.loadLocationDetail();
                 
                 document.addEventListener('keydown', this.handleKeydown);
@@ -787,7 +765,6 @@
 
               initializeMap() {
                 return new Promise((resolve, reject) => {
-                  // DOM要素の準備を確実に待つ
                   setTimeout(() => {
                     const mapElement = document.getElementById('map');
                     if (!mapElement) {
@@ -799,7 +776,7 @@
                     try {
                       map = new google.maps.Map(mapElement, {
                         zoom: 5,
-                        center: { lat: 36.2048, lng: 138.2529 }, // 日本の中心
+                        center: { lat: 36.2048, lng: 138.2529 },
                         mapTypeControl: true,
                         streetViewControl: true,
                         fullscreenControl: true,
@@ -825,7 +802,6 @@
 
               async loadLocationDetail() {
                 try {
-                  // Firestoreからドキュメントを取得
                   const doc = await db.collection('imagedownload').doc(this.locationId).get();
                   
                   if (!doc.exists) {
@@ -839,12 +815,10 @@
                     ...doc.data()
                   };
 
-                  // ユーザー情報を取得
                   if (this.location.userID) {
                     await this.loadUserInfo(this.location.userID);
                   }
 
-                  // マップにマーカーを表示
                   this.$nextTick(() => {
                     this.displayLocationOnMap();
                   });
@@ -881,71 +855,24 @@
 
                 const lat = Number(this.location.lat);
                 const lng = Number(this.location.lng);
-
-                if (isNaN(lat) || isNaN(lng)) {
-                  console.error('Invalid coordinates:', this.location.lat, this.location.lng);
-                  return;
-                }
-
                 const position = { lat, lng };
-                
-                // 既存のマーカーを削除
+
+                map.setCenter(position);
+                map.setZoom(15);
+
                 if (marker) {
                   marker.setMap(null);
                 }
 
-                // カスタムマーカーアイコン用のSVG
-                const markerIcon = {
-                  path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-                  fillColor: '#00A8C6',
-                  fillOpacity: 1,
-                  strokeColor: '#FFFFFF',
-                  strokeWeight: 2,
-                  scale: 2,
-                  anchor: new google.maps.Point(12, 24)
-                };
-
-                try {
-                  // 新しいマーカーを作成
-                  marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    title: this.location.locality || this.location.administrative || '不明な場所',
-                    animation: google.maps.Animation.DROP,
-                    icon: markerIcon
-                  });
-
-                  // 情報ウィンドウを追加
-                  const infoWindow = new google.maps.InfoWindow({
-                    content: `
-                      <div style="padding: 12px; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;">
-                        <h3 style="margin: 0 0 8px 0; color: #00A8C6; font-size: 16px; font-weight: 600;">
-                          🏍️ ${this.location.locality || this.location.administrative || '不明な場所'}
-                        </h3>
-                        <p style="margin: 0; font-size: 13px; color: #666;">
-                          📍 緯度: ${lat.toFixed(6)}<br>
-                          📍 経度: ${lng.toFixed(6)}
-                        </p>
-                      </div>
-                    `
-                  });
-
-                  marker.addListener('click', () => {
-                    infoWindow.open(map, marker);
-                  });
-
-                  // マップの中心とズームを設定
-                  map.setCenter(position);
-                  map.setZoom(16);
-
-                  console.log('Marker displayed successfully');
-                } catch (error) {
-                  console.error('Error displaying marker:', error);
-                }
+                marker = new google.maps.Marker({
+                  position: position,
+                  map: map,
+                  title: this.location.locality || this.location.administrative || 'Location'
+                });
               },
 
-              openImageModal(imageUrl) {
-                this.selectedImage = imageUrl;
+              openImageModal(url) {
+                this.selectedImage = url;
                 this.showImageModal = true;
                 document.body.style.overflow = 'hidden';
               },
@@ -976,6 +903,12 @@
               closeMenu() {
                 this.showMenu = false;
                 document.body.style.overflow = '';
+              },
+
+              goToUserProfile() {
+                if (this.location && this.location.userID) {
+                  window.location.href = `/user.html?id=${this.location.userID}`;
+                }
               },
 
               handleKeydown(event) {
