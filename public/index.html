@@ -955,7 +955,12 @@
                 </div>
                 <div class="cluster-location-meta">
                   <!-- ユーザー情報 -->
-                  <span v-if="location.userID" class="cluster-user-info">
+                  <span 
+                    v-if="location.userID" 
+                    class="cluster-user-info"
+                    @click.stop="goToUser(location.userID)"
+                    style="cursor: pointer;"
+                  >
                     <img 
                     v-if="userCache[location.userID].userIcon"
                     :src="userCache[location.userID].userIcon" 
@@ -1126,6 +1131,10 @@
           showDetail() {
             this.$emit('show-detail', this.location);
           },
+          goToUser(event) {
+            event.stopPropagation();
+            window.location.href = `/user.html?id=${this.userID}`;
+          },
           getImageError(event) {
             event.target.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>";
           }
@@ -1177,7 +1186,7 @@
                 </div>
                 <div class="meta-item">
                   <span class="meta-icon">👤</span>
-                  <span class="user-badge">
+                  <span class="user-badge" @click="goToUser" style="cursor: pointer;">
                     <img 
                       v-if="userIcon" 
                       :src="userIcon" 
@@ -1811,6 +1820,9 @@
                 const emoji = document.createElement('span');
                 emoji.textContent = '👤';
                 parent.insertBefore(emoji, parent.firstChild);
+              },
+              goToUser(userId) {
+                window.location.href = `/user.html?id=${userId}`;
               }
             }
           });

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ユーザー詳細 | ツーリングスポットシェア</title>
+
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+      /* ========== リセット & ベーススタイル ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ========== ヘッダー ========== */
+      header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .menu-btn, .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 12pt;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-btn:hover, .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      h1 {
+        font-size: 20pt;
+        font-weight: 600;
+        flex: 1;
+      }
+
+      /* ========== ハンバーガーメニュー ========== */
+      .hamburger-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .hamburger-menu.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .menu-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 280px;
+        height: 100%;
+        background: white;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+        animation: slideInLeft 0.3s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      .menu-header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 20px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-header h2 {
+        font-size: 20pt;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .menu-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .menu-nav {
+        padding: 16px 0;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        color: #333333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-left: 4px solid transparent;
+      }
+
+      .menu-item:hover {
+        background: #F9F9F9;
+        border-left-color: #00A8C6;
+      }
+
+      .menu-item.active {
+        background: #E8F8FB;
+        border-left-color: #00A8C6;
+        color: #00A8C6;
+        font-weight: 600;
+      }
+
+      .menu-icon {
+        font-size: 20pt;
+        width: 28px;
+        text-align: center;
+      }
+
+      /* ========== メインコンテナ ========== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      /* ========== ローディング ========== */
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .spinner {
+        border: 4px solid #E0E0E0;
+        border-top: 4px solid #00A8C6;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* ========== エラー表示 ========== */
+      .error-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #E63946;
+      }
+
+      .error-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+      }
+
+      /* ========== ユーザープロフィールカード ========== */
+      .profile-card {
+        background: white;
+        border-radius: 16pt;
+        padding: 24pt;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24pt;
+      }
+
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 24pt;
+      }
+
+      .profile-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #00A8C6;
+        box-shadow: 0 4px 8px rgba(0, 168, 198, 0.2);
+      }
+
+      .profile-icon-placeholder {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60pt;
+        color: white;
+        border: 4px solid #00A8C6;
+        box-shadow: 0 4px 8px rgba(0, 168, 198, 0.2);
+      }
+
+      .profile-info {
+        flex: 1;
+      }
+
+      .user-name {
+        font-size: 24pt;
+        font-weight: bold;
+        color: #00A8C6;
+        margin-bottom: 8pt;
+      }
+
+      .user-id {
+        font-size: 16pt;
+        color: #666666;
+        margin-bottom: 12pt;
+      }
+
+      .stats-container {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #F9F9F9;
+        padding: 8pt 16pt;
+        border-radius: 12pt;
+        border-left: 4px solid #228B22;
+      }
+
+      .stat-label {
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      .stat-value {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      /* ========== セクションタイトル ========== */
+      .section-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #228B22;
+        margin-bottom: 16pt;
+        padding-bottom: 8pt;
+        border-bottom: 2px solid #F5DEB3;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* ========== ロケーショングリッド ========== */
+      .locations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16pt;
+        margin-bottom: 24pt;
+      }
+
+      /* ========== ロケーションカード ========== */
+      .location-card {
+        background: white;
+        border-radius: 16pt;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .location-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 168, 198, 0.2);
+      }
+
+      .location-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: #E0E0E0;
+      }
+
+      .location-image-placeholder {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #E0E0E0 0%, #C7C7CC 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 64pt;
+        color: #999999;
+      }
+
+      .location-info {
+        padding: 16pt;
+      }
+
+      .location-name {
+        font-size: 18pt;
+        font-weight: 600;
+        color: #00A8C6;
+        margin-bottom: 8pt;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .location-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 6pt;
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ========== エンプティステート ========== */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 16pt;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .empty-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+        opacity: 0.5;
+      }
+
+      .empty-state h3 {
+        font-size: 20pt;
+        color: #666666;
+        margin-bottom: 8pt;
+      }
+
+      .empty-state p {
+        font-size: 14pt;
+        color: #999999;
+      }
+
+      /* ========== レスポンシブ ========== */
+      @media (max-width: 768px) {
+        .profile-header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .profile-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .stats-container {
+          justify-content: center;
+        }
+
+        .locations-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .menu-content {
+          width: 240px;
+        }
+
+        .profile-icon, .profile-icon-placeholder {
+          width: 100px;
+          height: 100px;
+          font-size: 50pt;
+        }
+
+        .user-name {
+          font-size: 20pt;
+        }
+      }
+
+      /* ========== ダークモード対応 ========== */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1C1C1E;
+          color: #F2F2F7;
+        }
+
+        .profile-card, .location-card, .empty-state {
+          background: #2C2C2E;
+        }
+
+        .stat-item {
+          background: #1C1C1E;
+        }
+
+        .user-name, .location-name {
+          color: #00D4FF;
+        }
+
+        .section-title {
+          color: #32D74B;
+        }
+
+        .stat-value, h3 {
+          color: #F2F2F7;
+        }
+
+        .user-id, .stat-label, .location-meta, .empty-state p {
+          color: #AEAEB2;
+        }
+
+        .menu-content {
+          background: #2C2C2E;
+        }
+
+        .menu-item {
+          color: #F2F2F7;
+        }
+
+        .menu-item:hover {
+          background: #3A3A3C;
+        }
+
+        .menu-item.active {
+          background: rgba(0, 168, 198, 0.2);
+          color: #00D4FF;
+          border-left-color: #00D4FF;
+        }
+
+        .location-image-placeholder {
+          background: linear-gradient(135deg, #48484A 0%, #3A3A3C 100%);
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="app">
+      <!-- ヘッダー -->
+      <header>
+        <div class="header-content">
+          <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
+          <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
+          <h1>👤 ユーザー詳細</h1>
+        </div>
+      </header>
+
+      <!-- ハンバーガーメニュー -->
+      <div class="hamburger-menu" :class="{ active: showMenu }" @click="closeMenu">
+        <div class="menu-content" @click.stop>
+          <div class="menu-header">
+            <h2>メニュー</h2>
+            <button class="menu-close-btn" @click="closeMenu" aria-label="閉じる">✕</button>
+          </div>
+          <nav class="menu-nav">
+            <a href="/" class="menu-item">
+              <span class="menu-icon">🏠</span>
+              <span>ホーム</span>
+            </a>
+            <a href="/privacypolicy/privacypolicy.html" class="menu-item">
+              <span class="menu-icon">🔒</span>
+              <span>プライバシーポリシー</span>
+            </a>
+            <a href="/termsofservice/termsofservice.html" class="menu-item">
+              <span class="menu-icon">📋</span>
+              <span>利用規約</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- メインコンテンツ -->
+      <div class="container">
+        <!-- ローディング状態 -->
+        <div v-if="isLoading" class="loading">
+          <div class="spinner"></div>
+          <p>ユーザー情報を読み込み中...</p>
+        </div>
+
+        <!-- エラー状態 -->
+        <div v-else-if="error" class="error-state">
+          <div class="error-icon">⚠️</div>
+          <h3>エラーが発生しました</h3>
+          <p>{{ error }}</p>
+          <button class="back-btn" @click="goBack" style="margin-top: 24px; background: #E63946;">
+            戻る
+          </button>
+        </div>
+
+        <!-- ユーザー情報表示 -->
+        <template v-else-if="userInfo">
+          <!-- プロフィールカード -->
+          <div class="profile-card">
+            <div class="profile-header">
+              <img 
+                v-if="userInfo.userIcon"
+                :src="userInfo.userIcon" 
+                :alt="userInfo.userName"
+                class="profile-icon"
+                @error="handleIconError"
+              >
+              <div v-else class="profile-icon-placeholder">
+                👤
+              </div>
+
+              <div class="profile-info">
+                <div class="user-name">{{ userInfo.userName || 'Unknown User' }}</div>
+                <div class="user-id">@{{ userId }}</div>
+                
+                <div class="stats-container">
+                  <div class="stat-item">
+                    <span class="stat-label">📍 投稿数</span>
+                    <span class="stat-value">{{ locationCount }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 投稿したロケーション -->
+          <div v-if="locations.length > 0">
+            <h2 class="section-title">🏍️ 投稿したスポット（{{ locations.length }}件）</h2>
+            
+            <div class="locations-grid">
+              <div 
+                v-for="location in locations"
+                :key="location.id"
+                class="location-card"
+                @click="showDetail(location)"
+              >
+                <img 
+                  v-if="getLocationImage(location)"
+                  :src="getLocationImage(location)" 
+                  :alt="getLocationName(location)"
+                  class="location-image"
+                  @error="handleImageError"
+                >
+                <div v-else class="location-image-placeholder">
+                  📷
+                </div>
+
+                <div class="location-info">
+                  <div class="location-name">
+                    📍 {{ getLocationName(location) }}
+                  </div>
+                  <div class="location-meta">
+                    <div v-if="location.administrative" class="meta-row">
+                      <span>🗺️</span>
+                      <span>{{ location.administrative }}</span>
+                    </div>
+                    <div v-if="getLocationImageCount(location) > 0" class="meta-row">
+                      <span>📷</span>
+                      <span>{{ getLocationImageCount(location) }}枚の写真</span>
+                    </div>
+                    <div v-if="location.locationVisitCount" class="meta-row">
+                      <span>🔢</span>
+                      <span>{{ location.locationVisitCount }}回訪問</span>
+                    </div>
+                    <div v-if="location.createTimeTimeStamp" class="meta-row">
+                      <span>📅</span>
+                      <span>{{ formatTimestamp(location.createTimeTimeStamp) }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 投稿がない場合 -->
+          <div v-else class="empty-state">
+            <div class="empty-icon">📍</div>
+            <h3>まだスポットを投稿していません</h3>
+            <p>このユーザーの投稿をお楽しみに！</p>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      let db;
+
+      // Firebase初期化を待つ関数
+      function waitForFirebase() {
+        return new Promise((resolve, reject) => {
+          if (typeof firebase !== 'undefined') {
+            resolve();
+            return;
+          }
+
+          let attempts = 0;
+          const maxAttempts = 50;
+          const checkInterval = setInterval(() => {
+            attempts++;
+            if (typeof firebase !== 'undefined') {
+              clearInterval(checkInterval);
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Firebase の読み込みに失敗しました'));
+            }
+          }, 100);
+        });
+      }
+
+      // URLパラメータを取得
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // DOMContentLoadedイベントでVueアプリを初期化
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          // Firebaseが読み込まれるまで待機
+          await waitForFirebase();
+
+          // Vueアプリ
+          const app = createApp({
+            data() {
+              return {
+                userInfo: null,
+                locations: [],
+                isLoading: true,
+                error: null,
+                userId: null,
+                showMenu: false
+              };
+            },
+            computed: {
+              locationCount() {
+                return this.locations.length;
+              }
+            },
+            async mounted() {
+              try {
+                await waitForFirebase();
+                
+                const firebaseApp = firebase.app();
+                db = firebase.firestore();
+                
+                // URLパラメータからユーザーIDを取得
+                this.userId = getQueryParam('id');
+                
+                if (!this.userId) {
+                  this.error = 'ユーザーIDが指定されていません';
+                  this.isLoading = false;
+                  return;
+                }
+
+                // ユーザー情報を読み込む
+                await this.loadUserInfo();
+                
+                // ユーザーの投稿を読み込む
+                await this.loadUserLocations();
+                
+                this.isLoading = false;
+                
+                document.addEventListener('keydown', this.handleKeydown);
+              } catch (e) {
+                console.error('初期化エラー:', e);
+                this.error = e.message;
+                this.isLoading = false;
+              }
+            },
+            beforeUnmount() {
+              document.removeEventListener('keydown', this.handleKeydown);
+            },
+            methods: {
+              async loadUserInfo() {
+                try {
+                  const doc = await db.collection('userInfo').doc(this.userId).get();
+                  
+                  if (!doc.exists) {
+                    this.error = 'ユーザーが見つかりませんでした';
+                    return;
+                  }
+
+                  this.userInfo = doc.data();
+                } catch (error) {
+                  console.error('ユーザー情報読み込みエラー:', error);
+                  this.error = error.message;
+                }
+              },
+
+              async loadUserLocations() {
+                try {
+                  const snapshot = await db.collection('imagedownload')
+                    .where('userID', '==', this.userId)
+                    .orderBy('createTimeTimeStamp', 'desc')
+                    .get();
+                  
+                  this.locations = [];
+                  snapshot.forEach(doc => {
+                    this.locations.push({
+                      id: doc.id,
+                      ...doc.data()
+                    });
+                  });
+                } catch (error) {
+                  console.error('ロケーション読み込みエラー:', error);
+                  // エラーがあってもユーザー情報は表示する
+                  console.warn('ロケーションの読み込みに失敗しましたが続行します');
+                }
+              },
+
+              getLocationName(location) {
+                return location.locality || location.administrative || '不明な場所';
+              },
+
+              getLocationImage(location) {
+                if (location.locationImageURLs && location.locationImageURLs.length > 0) {
+                  return location.locationImageURLs[0];
+                }
+                if (location.iconImageURL) {
+                  return location.iconImageURL;
+                }
+                return null;
+              },
+
+              getLocationImageCount(location) {
+                if (location.locationImageURLs && location.locationImageURLs.length > 0) {
+                  return location.locationImageURLs.length;
+                }
+                if (location.iconImageURL) {
+                  return 1;
+                }
+                return 0;
+              },
+
+              showDetail(location) {
+                window.location.href = `/detail.html?id=${location.id}`;
+              },
+
+              goBack() {
+                window.history.back();
+              },
+
+              toggleMenu() {
+                this.showMenu = !this.showMenu;
+                if (this.showMenu) {
+                  document.body.style.overflow = 'hidden';
+                } else {
+                  document.body.style.overflow = '';
+                }
+              },
+
+              closeMenu() {
+                this.showMenu = false;
+                document.body.style.overflow = '';
+              },
+
+              handleKeydown(event) {
+                if (event.key === 'Escape') {
+                  if (this.showMenu) {
+                    this.closeMenu();
+                  } else {
+                    this.goBack();
+                  }
+                }
+              },
+
+              handleIconError(event) {
+                const parent = event.target.parentElement;
+                event.target.style.display = 'none';
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = 'profile-icon-placeholder';
+                placeholder.textContent = '👤';
+                parent.appendChild(placeholder);
+              },
+
+              handleImageError(event) {
+                const parent = event.target.parentElement;
+                event.target.style.display = 'none';
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = 'location-image-placeholder';
+                placeholder.textContent = '📷';
+                parent.appendChild(placeholder);
+              },
+
+              formatTimestamp(timestamp) {
+                if (!timestamp || !timestamp.toDate) return 'N/A';
+                const date = timestamp.toDate();
+                return date.toLocaleString('ja-JP', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                });
+              }
+            }
+          });
+
+          app.mount('#app');
+        } catch (error) {
+          console.error('アプリケーション初期化エラー:', error);
+          document.getElementById('app').innerHTML = `
+            <div class="container">
+              <div class="error-state">
+                <div class="error-icon">⚠️</div>
+                <h3>エラーが発生しました</h3>
+                <p>${error.message}</p>
+              </div>
+            </div>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>
