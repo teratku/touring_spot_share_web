@@ -1618,7 +1618,7 @@
                 await this.loadLocationsFromSharedCache();
                 await this.loadFollowerCount();
                 
-                this.checkAndUpdateLocations();
+                await this.checkAndUpdateLocations();
                 
                 this.isLoading = false;
                 
@@ -1652,30 +1652,28 @@
 
               async checkAndUpdateLocations() {
                 try {
-                  if (this.cacheLoaded && this.locations.length > 0) {
-                    const hasUpdates = await SharedCacheManager.checkForUserUpdates(
-                      this.userId, 
-                      this.locations
-                    );
-                    
-                    if (!hasUpdates) {
-                      console.log('ユーザーのロケーションデータは最新です');
-                      return;
+                    // キャッシュからデータを読み込んでいない場合は、Firebaseから取得
+                    if (!this.cacheLoaded || this.locations.length === 0) {
+                    console.log('キャッシュデータなし、Firebaseからロケーションを取得');
+                    await this.loadUserLocations();
+                    return;
                     }
-                    
-                    console.log('新しいロケーションデータを検出、更新中...');
-                  }
 
-                  await this.loadUserLocations();
-                  
+                    // キャッシュデータがある場合は、キャッシュのみを使用（Firebaseアクセスなし）
+                    console.log('キャッシュからロケーションを使用（Firebaseアクセスなし）');
+                    
                 } catch (error) {
-                  console.error('ロケーション更新チェックエラー:', error);
-                  
-                  if (!this.cacheLoaded) {
-                    console.warn('ロケーションの読み込みに失敗しましたが続行します');
-                  }
+                    console.error('ロケーション更新チェックエラー:', error);
+                    
+                    // キャッシュデータがない場合のみエラーとして扱う
+                    if (!this.cacheLoaded) {
+                    console.error('キャッシュもFirebaseも利用できません');
+                    this.error = 'ロケーションデータの読み込みに失敗しました';
+                    } else {
+                    console.warn('エラーが発生しましたが、キャッシュデータを使用します');
+                    }
                 }
-              },
+                },
 
               async loadUserInfo() {
                 try {
