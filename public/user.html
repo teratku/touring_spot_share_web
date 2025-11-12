@@ -309,6 +309,213 @@
         color: #333333;
       }
 
+      /* ========== フォロワーカウンター ========== */
+      .follower-counter {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8pt 16pt;
+        background: rgba(0, 168, 198, 0.1);
+        border-radius: 12pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 2px solid transparent;
+      }
+
+      .follower-counter:hover {
+        background: rgba(0, 168, 198, 0.2);
+        border-color: #00A8C6;
+        transform: translateY(-2px);
+      }
+
+      .follower-icon {
+        font-size: 20pt;
+      }
+
+      .follower-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .follower-label {
+        font-size: 11pt;
+        color: #666666;
+        font-weight: 500;
+      }
+
+      .follower-count {
+        font-size: 20pt;
+        font-weight: bold;
+        color: #00A8C6;
+      }
+
+      /* ========== フォロワーリストモーダル ========== */
+      .follower-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 3000;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .follower-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .follower-modal-content {
+        background: white;
+        border-radius: 16pt;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .follower-modal-header {
+        padding: 20pt;
+        border-bottom: 1px solid #E0E0E0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .follower-modal-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .follower-modal-close {
+        background: #E0E0E0;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: #333333;
+        transition: all 0.2s ease;
+      }
+
+      .follower-modal-close:hover {
+        background: #C7C7CC;
+      }
+
+      .follower-modal-body {
+        padding: 16pt;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .follower-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12pt;
+      }
+
+      .follower-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12pt;
+        background: #F9F9F9;
+        border-radius: 12pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-left: 4px solid #00A8C6;
+      }
+
+      .follower-item:hover {
+        background: #E8F8FB;
+        transform: translateX(4px);
+      }
+
+      .follower-item-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #00A8C6;
+      }
+
+      .follower-item-icon-placeholder {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+      }
+
+      .follower-item-info {
+        flex: 1;
+      }
+
+      .follower-item-name {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 4px;
+      }
+
+      .follower-item-id {
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      /* ローディング表示 */
+      .follower-loading {
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      .follower-loading .spinner {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 16px;
+      }
+
+      /* エンプティステート */
+      .follower-empty {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .follower-empty-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+        opacity: 0.5;
+      }
+
+      .follower-empty h3 {
+        font-size: 18pt;
+        color: #666666;
+        margin-bottom: 8pt;
+      }
+
+      .follower-empty p {
+        font-size: 14pt;
+        color: #999999;
+      }
+
       /* ========== セクションタイトル ========== */
       .section-title {
         font-size: 20pt;
@@ -505,6 +712,69 @@
         .location-image-placeholder {
           background: linear-gradient(135deg, #48484A 0%, #3A3A3C 100%);
         }
+
+        .follower-counter {
+          background: rgba(0, 168, 198, 0.2);
+        }
+
+        .follower-counter:hover {
+          background: rgba(0, 168, 198, 0.3);
+          border-color: #00D4FF;
+        }
+
+        .follower-label {
+          color: #AEAEB2;
+        }
+
+        .follower-count {
+          color: #00D4FF;
+        }
+
+        .follower-modal-content {
+          background: #2C2C2E;
+        }
+
+        .follower-modal-header {
+          border-bottom-color: #48484A;
+        }
+
+        .follower-modal-title {
+          color: #00D4FF;
+        }
+
+        .follower-modal-close {
+          background: #48484A;
+          color: #F2F2F7;
+        }
+
+        .follower-modal-close:hover {
+          background: #636366;
+        }
+
+        .follower-item {
+          background: #1C1C1E;
+          border-left-color: #00D4FF;
+        }
+
+        .follower-item:hover {
+          background: #2C2C2E;
+        }
+
+        .follower-item-name {
+          color: #F2F2F7;
+        }
+
+        .follower-item-id {
+          color: #AEAEB2;
+        }
+
+        .follower-empty h3 {
+          color: #AEAEB2;
+        }
+
+        .follower-empty p {
+          color: #8E8E93;
+        }
       }
     </style>
   </head>
@@ -587,6 +857,14 @@
                     <span class="stat-label">📍 投稿数</span>
                     <span class="stat-value">{{ locationCount }}</span>
                   </div>
+
+                  <div class="follower-counter" @click="showFollowerList">
+                    <span class="follower-icon">👥</span>
+                    <div class="follower-info">
+                      <span class="follower-label">フォロワー</span>
+                      <span class="follower-count">{{ followerCount }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -649,6 +927,62 @@
           </div>
         </template>
       </div>
+
+      <!-- フォロワーリストモーダル -->
+      <div 
+        class="follower-modal" 
+        :class="{ active: showFollowerModal }"
+        @click="closeFollowerModal"
+      >
+        <div class="follower-modal-content" @click.stop>
+          <div class="follower-modal-header">
+            <h2 class="follower-modal-title">
+              👥 フォロワー ({{ followerCount }}人)
+            </h2>
+            <button class="follower-modal-close" @click="closeFollowerModal" aria-label="閉じる">✕</button>
+          </div>
+          <div class="follower-modal-body">
+            <!-- ローディング中 -->
+            <div v-if="isLoadingFollowers" class="follower-loading">
+              <div class="spinner"></div>
+              <p>フォロワーを読み込み中...</p>
+            </div>
+
+            <!-- フォロワーが0人 -->
+            <div v-else-if="followers.length === 0" class="follower-empty">
+              <div class="follower-empty-icon">👥</div>
+              <h3>まだフォロワーがいません</h3>
+              <p>このユーザーのフォロワーをお楽しみに！</p>
+            </div>
+
+            <!-- フォロワーリスト -->
+            <div v-else class="follower-list">
+              <div 
+                v-for="follower in followers"
+                :key="follower.id"
+                class="follower-item"
+                @click="goToFollowerProfile(follower.id)"
+              >
+                <img 
+                  v-if="follower.userIcon"
+                  :src="follower.userIcon" 
+                  :alt="follower.userName"
+                  class="follower-item-icon"
+                  @error="handleFollowerIconError"
+                >
+                <div v-else class="follower-item-icon-placeholder">
+                  👤
+                </div>
+
+                <div class="follower-item-info">
+                  <div class="follower-item-name">{{ follower.userName || 'Unknown User' }}</div>
+                  <div class="follower-item-id">@{{ follower.id }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -700,7 +1034,11 @@
                 isLoading: true,
                 error: null,
                 userId: null,
-                showMenu: false
+                showMenu: false,
+                followerCount: 0,
+                followers: [],
+                showFollowerModal: false,
+                isLoadingFollowers: false
               };
             },
             computed: {
@@ -729,6 +1067,9 @@
                 
                 // ユーザーの投稿を読み込む
                 await this.loadUserLocations();
+                
+                // フォロワー数を読み込む
+                await this.loadFollowerCount();
                 
                 this.isLoading = false;
                 
@@ -778,6 +1119,80 @@
                   // エラーがあってもユーザー情報は表示する
                   console.warn('ロケーションの読み込みに失敗しましたが続行します');
                 }
+              },
+
+              async loadFollowerCount() {
+                try {
+                    const snapshot = await db.collection('followUser')
+                    .where('followUserID', '==', this.userId)  // ← followedUserID から followUserID に修正
+                    .get();
+                    
+                    this.followerCount = snapshot.size;
+                } catch (error) {
+                    console.error('フォロワー数取得エラー:', error);
+                    this.followerCount = 0;
+                }
+                },
+
+                async showFollowerList() {
+                this.showFollowerModal = true;
+                this.isLoadingFollowers = true;
+                document.body.style.overflow = 'hidden';
+
+                try {
+                    // フォロワー一覧を取得
+                    const snapshot = await db.collection('followUser')
+                    .where('followUserID', '==', this.userId)  // ← followedUserID から followUserID に修正
+                    .get();
+                    
+                    if (snapshot.empty) {
+                    this.followers = [];
+                    this.isLoadingFollowers = false;
+                    return;
+                    }
+
+                    // フォロワーのユーザー情報を取得
+                    const followerPromises = [];
+                    const followerIds = [];
+
+                    snapshot.forEach(doc => {
+                    const data = doc.data();
+                    if (data.userID) {  // ← followerUserID から userID に修正
+                        followerIds.push(data.userID);
+                    }
+                    });
+
+                    // 各フォロワーのユーザー情報を取得
+                    for (const followerId of followerIds) {
+                    followerPromises.push(
+                        db.collection('userInfo').doc(followerId).get()
+                    );
+                    }
+
+                    const userDocs = await Promise.all(followerPromises);
+                    
+                    this.followers = userDocs
+                    .filter(doc => doc.exists)
+                    .map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+
+                    this.isLoadingFollowers = false;
+                } catch (error) {
+                    console.error('フォロワー取得エラー:', error);
+                    this.followers = [];
+                    this.isLoadingFollowers = false;
+                }
+                },
+
+              closeFollowerModal() {
+                this.showFollowerModal = false;
+                document.body.style.overflow = '';
+              },
+
+              goToFollowerProfile(followerId) {
+                window.location.href = `/user.html?id=${followerId}`;
               },
 
               getLocationName(location) {
@@ -830,6 +1245,8 @@
                 if (event.key === 'Escape') {
                   if (this.showMenu) {
                     this.closeMenu();
+                  } else if (this.showFollowerModal) {
+                    this.closeFollowerModal();
                   } else {
                     this.goBack();
                   }
@@ -853,6 +1270,16 @@
                 const placeholder = document.createElement('div');
                 placeholder.className = 'location-image-placeholder';
                 placeholder.textContent = '📷';
+                parent.appendChild(placeholder);
+              },
+
+              handleFollowerIconError(event) {
+                const parent = event.target.parentElement;
+                event.target.style.display = 'none';
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = 'follower-item-icon-placeholder';
+                placeholder.textContent = '👤';
                 parent.appendChild(placeholder);
               },
 
