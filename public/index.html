@@ -49,7 +49,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         position: sticky;
         top: 0;
-        z-index: 1000;
+        z-index: 1001;
       }
 
       .header-content {
@@ -135,6 +135,15 @@
         }
         to {
           transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
         }
       }
 
@@ -233,11 +242,82 @@
         border-color: white;
       }
 
+      /* ========== 検索バー ========== */
+      .search-bar {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        max-width: 100%;
+        margin: 0;
+        padding: 16px;
+        position: sticky;
+        top: 84px; /* ヘッダーの高さ分下に配置 */
+        z-index: 1000; /* ヘッダーより低い値 */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 12pt;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 16px;
+        font-size: 18pt;
+        color: #666666;
+        pointer-events: none;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 12px 48px 12px 48px;
+        border: none;
+        font-size: 15pt;
+        color: #333333;
+        outline: none;
+      }
+
+      .search-input::placeholder {
+        color: #999999;
+      }
+
+      .search-clear {
+        position: absolute;
+        right: 16px;
+        background: #C7C7CC;
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .search-clear:hover {
+        background: #AEAEB2;
+      }
+
+      .search-clear.hidden {
+        display: none;
+      }
+
       /* ========== メインコンテナ ========== */
       .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 24px 16px;
+        padding-top: 80px;
       }
 
       /* ========== マップビュー ========== */
@@ -258,7 +338,7 @@
 
       .map-container-full {
         width: 100%;
-        height: calc(100vh - 120px);
+        height: calc(100vh - 200px);
         border-radius: 16pt;
         overflow: hidden;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -668,6 +748,9 @@
 
       /* ========== レスポンシブ ========== */
       @media (max-width: 768px) {
+        .search-bar {
+          top: 76px; /* モバイル時のヘッダー高さに合わせる */
+        }
         #location-list {
           grid-template-columns: 1fr;
         }
@@ -705,6 +788,14 @@
 
         .menu-content {
           width: 240px;
+        }
+
+        h1 {
+          font-size: 18pt;
+        }
+
+        .subtitle {
+          font-size: 11pt;
         }
       }
 
@@ -784,6 +875,31 @@
           color: #00D4FF;
           border-left-color: #00D4FF;
         }
+
+        .search-container {
+          background: #2C2C2E;
+        }
+
+        .search-input {
+          background: #2C2C2E;
+          color: #F2F2F7;
+        }
+
+        .search-input::placeholder {
+          color: #8E8E93;
+        }
+
+        .search-icon {
+          color: #8E8E93;
+        }
+
+        .search-clear {
+          background: #48484A;
+        }
+
+        .search-clear:hover {
+          background: #636366;
+        }
       }
     </style>
   </head>
@@ -819,6 +935,28 @@
           </div>
         </div>
       </header>
+
+      <!-- 検索バー -->
+      <div class="search-bar">
+        <div class="search-container">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="地域名、コメント、タグで検索..."
+            v-model="searchQuery"
+            @input="handleSearchInput"
+          >
+          <button 
+            class="search-clear"
+            :class="{ hidden: !searchQuery }"
+            @click="clearSearch"
+            aria-label="検索をクリア"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
 
       <!-- ハンバーガーメニュー -->
       <div class="hamburger-menu" :class="{ active: showMenu }" @click="closeMenu">
@@ -962,7 +1100,7 @@
                     style="cursor: pointer;"
                   >
                     <img 
-                    v-if="userCache[location.userID].userIcon"
+                    v-if="userCache[location.userID] && userCache[location.userID].userIcon"
                     :src="userCache[location.userID].userIcon" 
                     :alt="userCache[location.userID].userName"
                     class="cluster-user-icon"
@@ -1297,7 +1435,10 @@
                 itemsPerPage: 12,
                 mapInitialized: false,
                 cacheLoaded: false,
-                showMenu: false
+                showMenu: false,
+                searchQuery: '',
+                searchDebounceTimer: null,
+                filteredLocations: []
             };
             },
             components: {
@@ -1608,8 +1749,11 @@
 
                 const self = this;
 
+                // 検索中かどうかで使用するロケーションを分岐
+                const locationsToShow = this.searchQuery.trim() ? this.filteredLocations : this.locations;
+
                 // マーカーを作成
-                this.locations.forEach(location => {
+                locationsToShow.forEach(location => {
                     if (!location.lat || !location.lng) return;
 
                     const lat = Number(location.lat);
@@ -1758,6 +1902,108 @@
                 this.isLoadingMore = false;
               },
 
+              // 検索入力ハンドラー（デバウンス付き）
+              handleSearchInput() {
+                clearTimeout(this.searchDebounceTimer);
+                
+                this.searchDebounceTimer = setTimeout(() => {
+                  this.performSearch();
+                }, 300); // 300ms後に検索実行
+              },
+
+              // 検索実行
+              performSearch() {
+                const query = this.searchQuery.trim().toLowerCase();
+                
+                // 検索クエリが空の場合は全データを表示
+                if (!query) {
+                  this.filteredLocations = [];
+                  this.displayedLocations = [];
+                  this.currentPage = 0;
+                  this.hasMore = true;
+                  this.loadMoreDisplayedLocations();
+                  
+                  // マップを更新
+                  if (this.mapInitialized) {
+                    this.createMarkers();
+                  }
+                  return;
+                }
+
+                // キャッシュデータから検索
+                this.filteredLocations = this.locations.filter(location => {
+                  // administrative(String)で検索
+                  if (location.administrative && 
+                      location.administrative.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // comment(String)で検索
+                  if (location.comment && 
+                      location.comment.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // locality(String)で検索
+                  if (location.locality && 
+                      location.locality.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // location_name(String)で検索
+                  if (location.location_name && 
+                      location.location_name.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // tag(配列)で検索
+                  if (location.tag && Array.isArray(location.tag)) {
+                    return location.tag.some(tag => 
+                      tag.toLowerCase().includes(query)
+                    );
+                  }
+
+                  return false;
+                });
+
+                // 検索結果を表示用に設定
+                this.displayedLocations = [];
+                this.currentPage = 0;
+                this.hasMore = true;
+                this.loadMoreSearchResults();
+
+                // マップを更新
+                if (this.mapInitialized) {
+                  this.createMarkers();
+                }
+
+                console.log(`検索実行: "${query}" - ${this.filteredLocations.length}件`);
+              },
+
+              // 検索結果の追加読み込み
+              loadMoreSearchResults() {
+                const start = this.currentPage * this.itemsPerPage;
+                const end = start + this.itemsPerPage;
+                const nextBatch = this.filteredLocations.slice(start, end);
+                
+                if (nextBatch.length > 0) {
+                  this.displayedLocations.push(...nextBatch);
+                  this.currentPage++;
+                }
+                
+                if (end >= this.filteredLocations.length) {
+                  this.hasMore = false;
+                }
+                
+                this.isLoadingMore = false;
+              },
+
+              // 検索クリア
+              clearSearch() {
+                this.searchQuery = '';
+                this.performSearch();
+              },
+
               handleScroll() {
                 if (this.currentView !== 'list' || this.isLoadingMore || !this.hasMore) return;
 
@@ -1767,7 +2013,13 @@
 
                 if (scrollTop + clientHeight >= scrollHeight - 300) {
                   this.isLoadingMore = true;
-                  this.loadMoreDisplayedLocations();
+                  
+                  // 検索中かどうかで処理を分岐
+                  if (this.searchQuery.trim()) {
+                    this.loadMoreSearchResults();
+                  } else {
+                    this.loadMoreDisplayedLocations();
+                  }
                 }
               },
 
@@ -1798,7 +2050,7 @@
                 if (event.key === 'Escape') {
                   if (this.showMenu) {
                     this.closeMenu();
-                  } else {
+                  } else if (this.showClusterPanel) {
                     this.closeClusterPanel();
                   }
                 }
@@ -1821,6 +2073,7 @@
                 emoji.textContent = '👤';
                 parent.insertBefore(emoji, parent.firstChild);
               },
+              
               goToUser(userId) {
                 window.location.href = `/user.html?id=${userId}`;
               }
