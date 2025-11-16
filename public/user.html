@@ -150,9 +150,9 @@
       }
 
       .toggle-btn.route-active {
-        background: #228B22;
+        background: #DC143C;
         color: white;
-        border-color: #228B22;
+        border-color: #DC143C;
       }
 
       .toggle-btn.inactive {
@@ -734,8 +734,8 @@
 
       .route-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(34, 139, 34, 0.2);
-        border-color: #228B22;
+        box-shadow: 0 8px 16px rgba(220, 20, 60, 0.2);
+        border-color: #DC143C;
       }
 
       .route-info-content {
@@ -752,7 +752,7 @@
       .route-title {
         font-size: 18pt;
         font-weight: 600;
-        color: #228B22;
+        color: #DC143C;
         flex: 1;
         margin-right: 12px;
       }
@@ -790,7 +790,7 @@
       }
 
       .route-distance {
-        color: #228B22;
+        color: #DC143C;
         font-weight: 600;
       }
 
@@ -1040,7 +1040,7 @@
         }
 
         .route-title {
-          color: #32D74B;
+          color: #FF6B6B;
         }
 
         .section-title {
@@ -1151,7 +1151,7 @@
         }
 
         .route-distance {
-          color: #32D74B;
+          color: #FF6B6B;
         }
 
         .cluster-panel, .cluster-panel-header {
@@ -1644,6 +1644,110 @@
         }
       }
 
+      // ルートJSONキャッシュ管理クラス
+      class RouteJsonCacheManager {
+        static CACHE_PREFIX = 'route_json_';
+        static CACHE_EXPIRY_MS = 168 * 60 * 60 * 1000; // 7日間
+
+        static getCachedRouteJson(routeID) {
+          try {
+            const cacheKey = `${this.CACHE_PREFIX}${routeID}`;
+            const cachedData = localStorage.getItem(cacheKey);
+            
+            if (!cachedData) {
+              return null;
+            }
+
+            const { data, timestamp } = JSON.parse(cachedData);
+            const age = Date.now() - timestamp;
+            
+            if (age > this.CACHE_EXPIRY_MS) {
+              localStorage.removeItem(cacheKey);
+              console.log(`ルートキャッシュ期限切れ: ${routeID}`);
+              return null;
+            }
+
+            console.log(`キャッシュからルートJSON取得: ${routeID}`);
+            return data;
+          } catch (error) {
+            console.error('ルートキャッシュ読み込みエラー:', error);
+            return null;
+          }
+        }
+
+        static saveRouteJson(routeID, data) {
+          try {
+            const cacheKey = `${this.CACHE_PREFIX}${routeID}`;
+            const cacheData = {
+              data: data,
+              timestamp: Date.now()
+            };
+            
+            localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+            console.log(`ルートJSONをキャッシュに保存: ${routeID}`);
+          } catch (error) {
+            console.error('ルートキャッシュ保存エラー:', error);
+            // localStorageが満杯の場合は古いキャッシュを削除
+            if (error.name === 'QuotaExceededError') {
+              this.clearOldestCache();
+              // 再試行
+              try {
+                const cacheKey = `${this.CACHE_PREFIX}${routeID}`;
+                const cacheData = {
+                  data: data,
+                  timestamp: Date.now()
+                };
+                localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+              } catch (retryError) {
+                console.error('キャッシュ保存再試行失敗:', retryError);
+              }
+            }
+          }
+        }
+
+        static clearOldestCache() {
+          try {
+            const cacheEntries = [];
+            
+            for (let i = 0; i < localStorage.length; i++) {
+              const key = localStorage.key(i);
+              if (key && key.startsWith(this.CACHE_PREFIX)) {
+                const data = JSON.parse(localStorage.getItem(key));
+                cacheEntries.push({ key, timestamp: data.timestamp });
+              }
+            }
+
+            // タイムスタンプでソートして最も古いものを削除
+            cacheEntries.sort((a, b) => a.timestamp - b.timestamp);
+            
+            if (cacheEntries.length > 0) {
+              localStorage.removeItem(cacheEntries[0].key);
+              console.log(`古いキャッシュを削除: ${cacheEntries[0].key}`);
+            }
+          } catch (error) {
+            console.error('キャッシュクリーンアップエラー:', error);
+          }
+        }
+
+        static clearAllRouteCache() {
+          try {
+            const keysToRemove = [];
+            
+            for (let i = 0; i < localStorage.length; i++) {
+              const key = localStorage.key(i);
+              if (key && key.startsWith(this.CACHE_PREFIX)) {
+                keysToRemove.push(key);
+              }
+            }
+
+            keysToRemove.forEach(key => localStorage.removeItem(key));
+            console.log(`${keysToRemove.length}件のルートキャッシュを削除`);
+          } catch (error) {
+            console.error('全キャッシュ削除エラー:', error);
+          }
+        }
+      }
+
       function waitForFirebase() {
         return new Promise((resolve, reject) => {
           if (typeof firebase !== 'undefined') {
@@ -2069,8 +2173,71 @@
                 }
               },
 
+              async fetchRouteCoordinates(route) {
+                const routeID = route.jsonFileName;
+                
+                // キャッシュから取得を試みる
+                const cachedData = RouteJsonCacheManager.getCachedRouteJson(routeID);
+                
+                if (cachedData) {
+                  // キャッシュデータから座標を抽出
+                  if (cachedData.routePoints && Array.isArray(cachedData.routePoints)) {
+                    return cachedData.routePoints
+                      .filter(point => point.latitude && point.longitude)
+                      .map(point => ({
+                        lat: Number(point.latitude),
+                        lng: Number(point.longitude)
+                      }));
+                  }
+                  return [];
+                }
+
+                // キャッシュにない場合はFirebaseから取得
+                const remotePath = `routes/JSON/${routeID}`;
+                const ref = storage.ref(remotePath);
+
+                try {
+                  const url = await ref.getDownloadURL();
+                  console.log(`Firebase Storageからルート取得: ${routeID}`);
+                  
+                  const response = await fetch(url, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                      'Accept': 'application/json',
+                    }
+                  });
+
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+
+                  const data = await response.json();
+                  
+                  // キャッシュに保存
+                  RouteJsonCacheManager.saveRouteJson(routeID, data);
+
+                  if (data.routePoints && Array.isArray(data.routePoints)) {
+                    return data.routePoints
+                      .filter(point => point.latitude && point.longitude)
+                      .map(point => ({
+                        lat: Number(point.latitude),
+                        lng: Number(point.longitude)
+                      }));
+                  }
+
+                  return [];
+                } catch (error) {
+                  console.error(`ルートJSON取得エラー (${routeID}):`, error);
+                  return [];
+                }
+              },
+
               async createRoutePolylines() {
                 this.routePolylines = [];
+                let successCount = 0;
+                let failCount = 0;
 
                 for (const route of this.sharedRoutes) {
                   try {
@@ -2080,7 +2247,7 @@
                       const polyline = new google.maps.Polyline({
                         path: coordinates,
                         geodesic: true,
-                        strokeColor: '#228B22',
+                        strokeColor: '#DC143C',
                         strokeOpacity: 0.8,
                         strokeWeight: 4,
                         map: this.showRoutes ? mapUser : null
@@ -2093,102 +2260,22 @@
                       });
 
                       this.routePolylines.push(polyline);
+                      successCount++;
+                    } else {
+                      failCount++;
                     }
                   } catch (error) {
                     console.error(`ルート ${route.id} の読み込みエラー:`, error);
-                  }
-                }
-
-                console.log(`ルートポリラインを作成: ${this.routePolylines.length}件`);
-              },
-
-            async fetchRouteCoordinates(route) {
-                const routeID = route.jsonFileName;
-                const remotePath = `routes/JSON/${routeID}`;
-                const ref = storage.ref(remotePath);
-
-
-                try {
-                    const url = await ref.getDownloadURL();
-
-                    console.log(`routeID: ${url}`);
-                    
-                    // Fetch with error handling and retry logic
-                    const response = await fetch(url, {
-                    method: 'GET',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    headers: {
-                        'Accept': 'application/json',
-                    }
-                    });
-
-                    if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-
-                    if (data.routePoints && Array.isArray(data.routePoints)) {
-                    return data.routePoints
-                        .filter(point => point.latitude && point.longitude)
-                        .map(point => ({
-                        lat: Number(point.latitude),
-                        lng: Number(point.longitude)
-                        }));
-                    }
-
-                    return [];
-                } catch (error) {
-                    console.error(`ルートJSON取得エラー (${routeID}):`, error);
-                    // エラーが発生してもアプリケーションを継続
-                    return [];
-                }
-                },
-
-                async createRoutePolylines() {
-                this.routePolylines = [];
-                let successCount = 0;
-                let failCount = 0;
-
-                for (const route of this.sharedRoutes) {
-                    try {
-                    const coordinates = await this.fetchRouteCoordinates(route);
-                    
-                    if (coordinates && coordinates.length > 0) {
-                        const polyline = new google.maps.Polyline({
-                        path: coordinates,
-                        geodesic: true,
-                        strokeColor: '#228B22',
-                        strokeOpacity: 0.8,
-                        strokeWeight: 4,
-                        map: this.showRoutes ? mapUser : null
-                        });
-
-                        polyline.routeData = route;
-
-                        polyline.addListener('click', (event) => {
-                        this.showRouteDetail(route);
-                        });
-
-                        this.routePolylines.push(polyline);
-                        successCount++;
-                    } else {
-                        failCount++;
-                    }
-                    } catch (error) {
-                    console.error(`ルート ${route.id} の読み込みエラー:`, error);
                     failCount++;
-                    }
+                  }
                 }
 
                 console.log(`ルートポリラインを作成: ${successCount}件成功, ${failCount}件失敗`);
                 
-                // 一部のルートが失敗してもユーザーに通知（オプション）
                 if (failCount > 0 && successCount === 0) {
-                    console.warn('すべてのルートの読み込みに失敗しました');
+                  console.warn('すべてのルートの読み込みに失敗しました');
                 }
-            },
+              },
 
               toggleSpots() {
                 this.showSpots = !this.showSpots;
