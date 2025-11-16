@@ -11,6 +11,7 @@
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <!-- Google Maps API -->
@@ -108,6 +109,54 @@
         background: white;
         color: #00A8C6;
         border-color: white;
+      }
+
+      /* ========== 地図表示切り替えボタン ========== */
+      .map-controls {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 10;
+      }
+
+      .toggle-btn {
+        background: white;
+        border: 2px solid #E0E0E0;
+        padding: 10px 16px;
+        border-radius: 8pt;
+        cursor: pointer;
+        font-size: 14pt;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .toggle-btn:hover {
+        background: #F9F9F9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .toggle-btn.active {
+        background: #00A8C6;
+        color: white;
+        border-color: #00A8C6;
+      }
+
+      .toggle-btn.route-active {
+        background: #228B22;
+        color: white;
+        border-color: #228B22;
+      }
+
+      .toggle-btn.inactive {
+        opacity: 0.5;
       }
 
       /* ========== ハンバーガーメニュー ========== */
@@ -424,152 +473,6 @@
         display: block;
       }
 
-      /* ========== クラスタ詳細パネル ========== */
-      .cluster-panel {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: white;
-        border-radius: 16pt 16pt 0 0;
-        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
-        max-height: 60vh;
-        overflow-y: auto;
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        z-index: 1500;
-      }
-
-      .cluster-panel.active {
-        transform: translateY(0);
-      }
-
-      .cluster-panel-header {
-        position: sticky;
-        top: 0;
-        background: white;
-        padding: 16pt;
-        border-bottom: 1px solid #E0E0E0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 10;
-      }
-
-      .cluster-panel-title {
-        font-size: 20pt;
-        font-weight: 600;
-        color: #00A8C6;
-      }
-
-      .panel-close-btn {
-        background: #E0E0E0;
-        border: none;
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24pt;
-        color: #333333;
-        transition: all 0.2s ease;
-      }
-
-      .panel-close-btn:hover {
-        background: #C7C7CC;
-      }
-
-      .cluster-panel-body {
-        padding: 16pt;
-      }
-
-      .cluster-location-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12pt;
-      }
-
-      .cluster-location-item {
-        background: #F9F9F9;
-        border-radius: 12pt;
-        padding: 12pt;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border-left: 4px solid #00A8C6;
-        display: flex;
-        gap: 12pt;
-      }
-
-      .cluster-location-item:hover {
-        background: #E8F8FB;
-        transform: translateX(4px);
-      }
-
-      .cluster-image-container {
-        flex-shrink: 0;
-        width: 80px;
-        height: 80px;
-        border-radius: 8pt;
-        overflow: hidden;
-        background: #E0E0E0;
-      }
-
-      .cluster-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .cluster-image-placeholder {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32pt;
-        background: linear-gradient(135deg, #E0E0E0 0%, #C7C7CC 100%);
-      }
-
-      .cluster-info-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 8pt;
-        min-width: 0;
-      }
-
-      .cluster-location-name {
-        font-size: 16pt;
-        font-weight: 600;
-        color: #333333;
-        margin: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .cluster-location-meta {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13pt;
-        color: #666666;
-        flex-wrap: wrap;
-      }
-
-      .cluster-meta-badge {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        background: rgba(0, 168, 198, 0.1);
-        padding: 4px 8px;
-        border-radius: 8pt;
-        font-size: 12pt;
-      }
-
       /* ========== フォロワーリストモーダル ========== */
       .follower-modal {
         display: none;
@@ -818,6 +721,225 @@
         gap: 6px;
       }
 
+      /* ========== 共有ルートカード ========== */
+      .route-card {
+        background: white;
+        border-radius: 16pt;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .route-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(34, 139, 34, 0.2);
+        border-color: #228B22;
+      }
+
+      .route-info-content {
+        padding: 16pt;
+      }
+
+      .route-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12pt;
+      }
+
+      .route-title {
+        font-size: 18pt;
+        font-weight: 600;
+        color: #228B22;
+        flex: 1;
+        margin-right: 12px;
+      }
+
+      .route-status {
+        padding: 4px 12px;
+        border-radius: 8pt;
+        font-size: 12pt;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .status-public {
+        background: rgba(0, 168, 198, 0.1);
+        color: #00A8C6;
+      }
+
+      .status-private {
+        background: #F5F5F5;
+        color: #999999;
+      }
+
+      .route-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 8pt;
+      }
+
+      .route-meta-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      .route-distance {
+        color: #228B22;
+        font-weight: 600;
+      }
+
+      /* ========== クラスタ詳細パネル ========== */
+      .cluster-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 16pt 16pt 0 0;
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+        max-height: 60vh;
+        overflow-y: auto;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        z-index: 1500;
+      }
+
+      .cluster-panel.active {
+        transform: translateY(0);
+      }
+
+      .cluster-panel-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        padding: 16pt;
+        border-bottom: 1px solid #E0E0E0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .cluster-panel-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+      }
+
+      .panel-close-btn {
+        background: #E0E0E0;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: #333333;
+        transition: all 0.2s ease;
+      }
+
+      .panel-close-btn:hover {
+        background: #C7C7CC;
+      }
+
+      .cluster-panel-body {
+        padding: 16pt;
+      }
+
+      .cluster-location-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12pt;
+      }
+
+      .cluster-location-item {
+        background: #F9F9F9;
+        border-radius: 12pt;
+        padding: 12pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-left: 4px solid #00A8C6;
+        display: flex;
+        gap: 12pt;
+      }
+
+      .cluster-location-item:hover {
+        background: #E8F8FB;
+        transform: translateX(4px);
+      }
+
+      .cluster-image-container {
+        flex-shrink: 0;
+        width: 80px;
+        height: 80px;
+        border-radius: 8pt;
+        overflow: hidden;
+        background: #E0E0E0;
+      }
+
+      .cluster-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .cluster-image-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32pt;
+        background: linear-gradient(135deg, #E0E0E0 0%, #C7C7CC 100%);
+      }
+
+      .cluster-info-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8pt;
+        min-width: 0;
+      }
+
+      .cluster-location-name {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .cluster-location-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13pt;
+        color: #666666;
+        flex-wrap: wrap;
+      }
+
+      .cluster-meta-badge {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(0, 168, 198, 0.1);
+        padding: 4px 8px;
+        border-radius: 8pt;
+        font-size: 12pt;
+      }
+
       /* ========== エンプティステート ========== */
       .empty-state {
         text-align: center;
@@ -879,16 +1001,6 @@
           font-size: 20pt;
         }
 
-        .map-container-full {
-          height: calc(100vh - 450px);
-          min-height: 350px;
-          border-radius: 0;
-        }
-
-        .cluster-panel {
-          max-height: 70vh;
-        }
-
         .tab-buttons {
           flex-direction: row;
         }
@@ -898,17 +1010,13 @@
           padding: 6px 12px;
         }
 
-        .cluster-image-container {
-          width: 60px;
-          height: 60px;
+        .route-header {
+          flex-direction: column;
+          gap: 8px;
         }
 
-        .cluster-location-name {
-          font-size: 14pt;
-        }
-
-        .cluster-location-meta {
-          font-size: 11pt;
+        .route-title {
+          margin-right: 0;
         }
       }
 
@@ -919,7 +1027,7 @@
           color: #F2F2F7;
         }
 
-        .profile-card, .location-card, .empty-state {
+        .profile-card, .location-card, .route-card, .empty-state {
           background: #2C2C2E;
         }
 
@@ -931,6 +1039,10 @@
           color: #00D4FF;
         }
 
+        .route-title {
+          color: #32D74B;
+        }
+
         .section-title {
           color: #32D74B;
         }
@@ -939,7 +1051,7 @@
           color: #F2F2F7;
         }
 
-        .user-id, .stat-label, .location-meta, .empty-state p {
+        .user-id, .stat-label, .location-meta, .route-meta-row, .empty-state p {
           color: #AEAEB2;
         }
 
@@ -1028,6 +1140,20 @@
           color: #8E8E93;
         }
 
+        .status-public {
+          background: rgba(0, 168, 198, 0.2);
+          color: #00D4FF;
+        }
+
+        .status-private {
+          background: #48484A;
+          color: #8E8E93;
+        }
+
+        .route-distance {
+          color: #32D74B;
+        }
+
         .cluster-panel, .cluster-panel-header {
           background: #2C2C2E;
           border-bottom-color: #48484A;
@@ -1049,6 +1175,10 @@
         .panel-close-btn {
           background: #48484A;
           color: #F2F2F7;
+        }
+
+        .panel-close-btn:hover {
+          background: #636366;
         }
 
         .cluster-location-name {
@@ -1077,7 +1207,7 @@
           <h1>👤 ユーザー詳細</h1>
           
           <!-- タブ切り替えボタン -->
-          <div v-if="!isLoading && !error && locations.length > 0" class="tab-buttons">
+          <div v-if="!isLoading && !error && (locations.length > 0 || sharedRoutes.length > 0)" class="tab-buttons">
             <button 
               class="tab-btn" 
               :class="{ active: currentView === 'map' }"
@@ -1164,6 +1294,11 @@
                     <span class="stat-value">{{ locationCount }}</span>
                   </div>
 
+                  <div class="stat-item">
+                    <span class="stat-label">🗺️ ルート数</span>
+                    <span class="stat-value">{{ sharedRoutesCount }}</span>
+                  </div>
+
                   <div class="follower-counter" @click="showFollowerList">
                     <span class="follower-icon">👥</span>
                     <div class="follower-info">
@@ -1177,15 +1312,35 @@
           </div>
 
           <!-- マップビュー -->
-          <div class="map-view" :class="{ active: currentView === 'map' && locations.length > 0 }">
+          <div class="map-view" :class="{ active: currentView === 'map' }">
             <div class="map-container-full">
               <div id="map-user"></div>
+              
+              <!-- 地図表示切り替えコントロール -->
+              <div class="map-controls">
+                <button 
+                  class="toggle-btn" 
+                  :class="{ active: showSpots, inactive: !showSpots }"
+                  @click="toggleSpots"
+                >
+                  <span>📍</span>
+                  <span>スポット</span>
+                </button>
+                <button 
+                  class="toggle-btn" 
+                  :class="{ 'route-active': showRoutes, inactive: !showRoutes }"
+                  @click="toggleRoutes"
+                >
+                  <span>🗺️</span>
+                  <span>ルート</span>
+                </button>
+              </div>
             </div>
           </div>
 
           <!-- リストビュー -->
           <div class="list-view" :class="{ active: currentView === 'list' }">
-            <!-- 投稿したロケーション -->
+            <!-- 投稿したスポット -->
             <div v-if="locations.length > 0">
               <h2 class="section-title">🏍️ 投稿したスポット（{{ locations.length }}件）</h2>
               
@@ -1234,11 +1389,48 @@
               </div>
             </div>
 
-            <!-- 投稿がない場合 -->
-            <div v-else class="empty-state">
-              <div class="empty-icon">📍</div>
-              <h3>まだスポットを投稿していません</h3>
-              <p>このユーザーの投稿をお楽しみに！</p>
+            <!-- 共有ルート -->
+            <div v-if="sharedRoutes.length > 0" :style="{ marginTop: locations.length > 0 ? '32px' : '0' }">
+              <h2 class="section-title">🗺️ 共有ルート（{{ sharedRoutes.length }}件）</h2>
+              
+              <div class="locations-grid">
+                <div 
+                  v-for="route in sharedRoutes"
+                  :key="route.id"
+                  class="route-card"
+                  @click="showRouteDetail(route)"
+                >
+                  <div class="route-info-content">
+                    <div class="route-header">
+                      <div class="route-title">{{ route.title }}</div>
+                      <div class="route-status" :class="route.isPublic ? 'status-public' : 'status-private'">
+                        {{ route.isPublic ? '🌐 公開中' : '🔒 非公開' }}
+                      </div>
+                    </div>
+                    <div class="route-meta">
+                      <div class="route-meta-row route-distance">
+                        <span>📍</span>
+                        <span>距離: {{ (route.distance / 1000).toFixed(1) }} km</span>
+                      </div>
+                      <div class="route-meta-row">
+                        <span>🗓</span>
+                        <span>{{ formatRouteDate(route.createdAt) }}</span>
+                      </div>
+                      <div v-if="route.userName" class="route-meta-row">
+                        <span>👤</span>
+                        <span>{{ route.userName }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- データがない場合 -->
+            <div v-if="locations.length === 0 && sharedRoutes.length === 0" class="empty-state">
+              <div class="empty-icon">📭</div>
+              <h3>まだ投稿がありません</h3>
+              <p>このユーザーの投稿をお楽しみに!</p>
             </div>
           </div>
         </template>
@@ -1336,7 +1528,7 @@
             <div v-else-if="followers.length === 0" class="follower-empty">
               <div class="follower-empty-icon">👥</div>
               <h3>まだフォロワーがいません</h3>
-              <p>このユーザーのフォロワーをお楽しみに！</p>
+              <p>このユーザーのフォロワーをお楽しみに!</p>
             </div>
 
             <!-- フォロワーリスト -->
@@ -1373,6 +1565,7 @@
       const { createApp } = Vue;
 
       let db;
+      let storage;
       let mapUser;
       let clustererInstance;
       
@@ -1420,53 +1613,6 @@
           } catch (error) {
             console.error('キャッシュ有効性チェックエラー:', error);
             return false;
-          }
-        }
-
-        static getLatestTimestamp(locations) {
-          if (!locations || locations.length === 0) return 0;
-          
-          const timestamps = locations
-            .filter(loc => loc.createTimeTimeStamp)
-            .map(loc => {
-              const timestamp = loc.createTimeTimeStamp;
-              return timestamp.seconds ? timestamp.seconds * 1000 : timestamp;
-            });
-          
-          return timestamps.length > 0 ? Math.max(...timestamps) : 0;
-        }
-
-        static async checkForUserUpdates(userId, cachedLocations) {
-          if (!cachedLocations || cachedLocations.length === 0) {
-            return true;
-          }
-
-          try {
-            const cachedTimestamp = this.getLatestTimestamp(cachedLocations);
-            
-            if (cachedTimestamp === 0) {
-              return true;
-            }
-
-            const timestampDate = new Date(cachedTimestamp);
-            const snapshot = await db.collection('imagedownload')
-              .where('userID', '==', userId)
-              .where('createTimeTimeStamp', '>', firebase.firestore.Timestamp.fromDate(timestampDate))
-              .limit(1)
-              .get();
-
-            const hasUpdates = !snapshot.empty;
-            
-            if (hasUpdates) {
-              console.log(`ユーザー ${userId} の新規データを検出`);
-            } else {
-              console.log(`ユーザー ${userId} のデータは最新です`);
-            }
-            
-            return hasUpdates;
-          } catch (error) {
-            console.error('更新チェックエラー:', error);
-            return true;
           }
         }
 
@@ -1520,6 +1666,11 @@
         });
       }
 
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
       function waitForGoogleMaps() {
         return new Promise((resolve, reject) => {
           if (typeof google !== 'undefined' && google.maps) {
@@ -1564,11 +1715,6 @@
         });
       }
 
-      function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-      }
-
       document.addEventListener('DOMContentLoaded', async function() {
         try {
           await waitForFirebase();
@@ -1579,7 +1725,9 @@
                 currentView: 'list',
                 userInfo: null,
                 locations: [],
+                sharedRoutes: [],
                 isLoading: true,
+                isLoadingRoutes: false,
                 error: null,
                 userId: null,
                 showMenu: false,
@@ -1589,7 +1737,10 @@
                 isLoadingFollowers: false,
                 cacheLoaded: false,
                 mapInitialized: false,
-                markers: [],
+                showSpots: true,
+                showRoutes: true,
+                spotMarkers: [],
+                routePolylines: [],
                 showClusterPanel: false,
                 clusterLocations: []
               };
@@ -1597,6 +1748,9 @@
             computed: {
               locationCount() {
                 return this.locations.length;
+              },
+              sharedRoutesCount() {
+                return this.sharedRoutes.length;
               }
             },
             async mounted() {
@@ -1605,6 +1759,7 @@
                 
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
+                storage = firebase.storage();
                 
                 this.userId = getQueryParam('id');
                 
@@ -1619,6 +1774,9 @@
                 await this.loadFollowerCount();
                 
                 await this.checkAndUpdateLocations();
+                
+                // 共有ルートを読み込む
+                await this.loadSharedRoutes();
                 
                 this.isLoading = false;
                 
@@ -1652,28 +1810,25 @@
 
               async checkAndUpdateLocations() {
                 try {
-                    // キャッシュからデータを読み込んでいない場合は、Firebaseから取得
-                    if (!this.cacheLoaded || this.locations.length === 0) {
+                  if (!this.cacheLoaded || this.locations.length === 0) {
                     console.log('キャッシュデータなし、Firebaseからロケーションを取得');
                     await this.loadUserLocations();
                     return;
-                    }
+                  }
 
-                    // キャッシュデータがある場合は、キャッシュのみを使用（Firebaseアクセスなし）
-                    console.log('キャッシュからロケーションを使用（Firebaseアクセスなし）');
+                  console.log('キャッシュからロケーションを使用（Firebaseアクセスなし）');
                     
                 } catch (error) {
-                    console.error('ロケーション更新チェックエラー:', error);
-                    
-                    // キャッシュデータがない場合のみエラーとして扱う
-                    if (!this.cacheLoaded) {
+                  console.error('ロケーション更新チェックエラー:', error);
+                  
+                  if (!this.cacheLoaded) {
                     console.error('キャッシュもFirebaseも利用できません');
                     this.error = 'ロケーションデータの読み込みに失敗しました';
-                    } else {
+                  } else {
                     console.warn('エラーが発生しましたが、キャッシュデータを使用します');
-                    }
+                  }
                 }
-                },
+              },
 
               async loadUserInfo() {
                 try {
@@ -1711,10 +1866,6 @@
                   SharedCacheManager.updateSharedCache(this.userId, newLocations);
                   
                   console.log('Firebaseからロケーションを更新:', newLocations.length, '件');
-
-                  if (this.mapInitialized) {
-                    await this.createMarkers();
-                  }
                 } catch (error) {
                   console.error('ロケーション読み込みエラー:', error);
                   if (!this.cacheLoaded) {
@@ -1736,33 +1887,64 @@
                 }
               },
 
+              async loadSharedRoutes() {
+                this.isLoadingRoutes = true;
+                try {
+                  const snapshot = await db.collection('shared_routes')
+                    .where('userID', '==', this.userId)
+                    .orderBy('createdAt', 'desc')
+                    .get();
+                  
+                  const routes = [];
+                  for (const doc of snapshot.docs) {
+                    const routeData = doc.data();
+                    routeData.id = doc.id;
+
+                    // ユーザー情報を取得
+                    try {
+                      const userDoc = await db.collection('userInfo').doc(routeData.userID).get();
+                      if (userDoc.exists()) {
+                        const userData = userDoc.data();
+                        routeData.userName = userData.userName || '匿名ユーザー';
+                        routeData.userIconUrl = userData.userIcon;
+                      }
+                    } catch (error) {
+                      console.error('ユーザー情報取得エラー:', error);
+                      routeData.userName = '取得失敗';
+                    }
+
+                    routes.push(routeData);
+                  }
+
+                  this.sharedRoutes = routes;
+                  console.log('共有ルートを読み込み:', routes.length, '件');
+                } catch (error) {
+                  console.error('共有ルート読み込みエラー:', error);
+                  this.sharedRoutes = [];
+                } finally {
+                  this.isLoadingRoutes = false;
+                }
+              },
+
               async switchView(view) {
                 this.currentView = view;
-                if (view === 'map' && this.locations.length > 0) {
+                
+                if (view === 'map' && !this.mapInitialized) {
                   this.$nextTick(async () => {
-                    if (!this.mapInitialized) {
-                      try {
-                        await waitForGoogleMaps();
-                        await waitForMarkerClusterer();
-                        await this.initializeMap();
-                        this.mapInitialized = true;
-                      } catch (error) {
-                        console.error('マップ初期化エラー:', error);
-                      }
-                    } else if (mapUser && this.mapInitialized) {
-                      setTimeout(() => {
-                        google.maps.event.trigger(mapUser, 'resize');
-                        if (this.locations.length > 0) {
-                          const bounds = new google.maps.LatLngBounds();
-                          this.locations.forEach(loc => {
-                            if (loc.lat && loc.lng) {
-                              bounds.extend({ lat: Number(loc.lat), lng: Number(loc.lng) });
-                            }
-                          });
-                          mapUser.fitBounds(bounds);
-                        }
-                      }, 100);
+                    try {
+                      await waitForGoogleMaps();
+                      await waitForMarkerClusterer();
+                      await this.initializeMap();
+                      this.mapInitialized = true;
+                    } catch (error) {
+                      console.error('マップ初期化エラー:', error);
                     }
+                  });
+                } else if (view === 'map' && this.mapInitialized && mapUser) {
+                  // マップがすでに初期化されている場合はリサイズ
+                  this.$nextTick(() => {
+                    google.maps.event.trigger(mapUser, 'resize');
+                    this.fitMapBounds();
                   });
                 }
               },
@@ -1775,30 +1957,38 @@
                 }
 
                 const { Map } = await google.maps.importLibrary("maps");
-                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
 
                 mapUser = new google.maps.Map(mapElement, {
-                  zoom: 5,
+                  zoom: 10,
                   center: { lat: 36.2048, lng: 138.2529 },
                   mapId: "USER_MAP_ID",
                   mapTypeControl: true,
                   streetViewControl: true,
-                  fullscreenControl: true,
-                  styles: [
-                    {
-                      featureType: "poi",
-                      elementType: "labels",
-                      stylers: [{ visibility: "off" }]
-                    }
-                  ]
+                  fullscreenControl: true
                 });
 
-                await this.createMarkers();
+                await this.loadRouteDataAndDisplay();
               },
 
-              async createMarkers() {
-                console.log('createMarkers called');
-                
+              async loadRouteDataAndDisplay() {
+                // スポットマーカーを作成
+                if (this.locations.length > 0) {
+                  await this.createSpotMarkers();
+                }
+
+                // ルートポリラインを作成
+                if (this.sharedRoutes.length > 0) {
+                  await this.createRoutePolylines();
+                }
+
+                // マップの境界を調整
+                this.fitMapBounds();
+              },
+
+              async createSpotMarkers() {
+                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+                // 既存のクラスタラーをクリーンアップ
                 if (clustererInstance) {
                   try {
                     clustererInstance.clearMarkers();
@@ -1808,39 +1998,26 @@
                   }
                   clustererInstance = null;
                 }
-                
-                if (this.markers && this.markers.length > 0) {
-                  this.markers.forEach(marker => {
+
+                // 既存のマーカーをクリア
+                if (this.spotMarkers && this.spotMarkers.length > 0) {
+                  this.spotMarkers.forEach(marker => {
                     if (marker && marker.map) {
                       marker.map = null;
                     }
                   });
                 }
-                this.markers = [];
-
-                if (!mapUser) {
-                  console.error('Map is not initialized');
-                  return;
-                }
-
-                const bounds = new google.maps.LatLngBounds();
-                const validLocations = [];
-
-                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+                this.spotMarkers = [];
 
                 const self = this;
 
-                this.locations.forEach(location => {
-                  if (!location.lat || !location.lng) return;
+                for (const location of this.locations) {
+                  if (!location.lat || !location.lng) continue;
 
                   const lat = Number(location.lat);
                   const lng = Number(location.lng);
 
-                  if (isNaN(lat) || isNaN(lng)) return;
-
-                  const position = { lat, lng };
-                  bounds.extend(position);
-                  validLocations.push(location);
+                  if (isNaN(lat) || isNaN(lng)) continue;
 
                   const pinElement = new PinElement({
                     background: '#00A8C6',
@@ -1850,7 +2027,7 @@
                   });
 
                   const marker = new AdvancedMarkerElement({
-                    position: position,
+                    position: { lat, lng },
                     content: pinElement.element,
                     title: location.locality || location.administrative || '不明な場所',
                   });
@@ -1858,18 +2035,19 @@
                   marker.locationData = location;
 
                   marker.addListener('click', () => {
-                    self.showClusterLocations([marker.locationData]);
+                    self.showClusterLocations([location]);
                   });
 
-                  this.markers.push(marker);
-                });
+                  this.spotMarkers.push(marker);
+                }
 
-                console.log(`Created ${this.markers.length} markers`);
+                console.log(`スポットマーカーを作成: ${this.spotMarkers.length}件`);
 
+                // MarkerClustererを初期化
                 try {
                   clustererInstance = new markerClusterer.MarkerClusterer({
-                    markers: this.markers,
-                    map: mapUser,
+                    markers: this.spotMarkers,
+                    map: this.showSpots ? mapUser : null,
                     algorithmOptions: {
                       maxZoom: 16,
                     },
@@ -1886,23 +2064,190 @@
                   });
 
                   console.log('Clusterer initialized successfully');
-
-                  if (validLocations.length > 0) {
-                    mapUser.fitBounds(bounds);
-                    
-                    google.maps.event.addListenerOnce(mapUser, 'bounds_changed', () => {
-                      const zoom = mapUser.getZoom();
-                      if (zoom > 16) {
-                        mapUser.setZoom(16);
-                      }
-                    });
-                  }
                 } catch (error) {
                   console.error('Clusterer initialization error:', error);
                 }
               },
 
-              async showClusterLocations(locations) {
+              async createRoutePolylines() {
+                this.routePolylines = [];
+
+                for (const route of this.sharedRoutes) {
+                  try {
+                    const coordinates = await this.fetchRouteCoordinates(route);
+                    
+                    if (coordinates && coordinates.length > 0) {
+                      const polyline = new google.maps.Polyline({
+                        path: coordinates,
+                        geodesic: true,
+                        strokeColor: '#228B22',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 4,
+                        map: this.showRoutes ? mapUser : null
+                      });
+
+                      polyline.routeData = route;
+
+                      polyline.addListener('click', (event) => {
+                        this.showRouteDetail(route);
+                      });
+
+                      this.routePolylines.push(polyline);
+                    }
+                  } catch (error) {
+                    console.error(`ルート ${route.id} の読み込みエラー:`, error);
+                  }
+                }
+
+                console.log(`ルートポリラインを作成: ${this.routePolylines.length}件`);
+              },
+
+            async fetchRouteCoordinates(route) {
+                const routeID = route.jsonFileName;
+                const remotePath = `routes/JSON/${routeID}`;
+                const ref = storage.ref(remotePath);
+
+
+                try {
+                    const url = await ref.getDownloadURL();
+
+                    console.log(`routeID: ${url}`);
+                    
+                    // Fetch with error handling and retry logic
+                    const response = await fetch(url, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                    });
+
+                    if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+
+                    if (data.routePoints && Array.isArray(data.routePoints)) {
+                    return data.routePoints
+                        .filter(point => point.latitude && point.longitude)
+                        .map(point => ({
+                        lat: Number(point.latitude),
+                        lng: Number(point.longitude)
+                        }));
+                    }
+
+                    return [];
+                } catch (error) {
+                    console.error(`ルートJSON取得エラー (${routeID}):`, error);
+                    // エラーが発生してもアプリケーションを継続
+                    return [];
+                }
+                },
+
+                async createRoutePolylines() {
+                this.routePolylines = [];
+                let successCount = 0;
+                let failCount = 0;
+
+                for (const route of this.sharedRoutes) {
+                    try {
+                    const coordinates = await this.fetchRouteCoordinates(route);
+                    
+                    if (coordinates && coordinates.length > 0) {
+                        const polyline = new google.maps.Polyline({
+                        path: coordinates,
+                        geodesic: true,
+                        strokeColor: '#228B22',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 4,
+                        map: this.showRoutes ? mapUser : null
+                        });
+
+                        polyline.routeData = route;
+
+                        polyline.addListener('click', (event) => {
+                        this.showRouteDetail(route);
+                        });
+
+                        this.routePolylines.push(polyline);
+                        successCount++;
+                    } else {
+                        failCount++;
+                    }
+                    } catch (error) {
+                    console.error(`ルート ${route.id} の読み込みエラー:`, error);
+                    failCount++;
+                    }
+                }
+
+                console.log(`ルートポリラインを作成: ${successCount}件成功, ${failCount}件失敗`);
+                
+                // 一部のルートが失敗してもユーザーに通知（オプション）
+                if (failCount > 0 && successCount === 0) {
+                    console.warn('すべてのルートの読み込みに失敗しました');
+                }
+            },
+
+              toggleSpots() {
+                this.showSpots = !this.showSpots;
+                
+                if (clustererInstance) {
+                  clustererInstance.setMap(this.showSpots ? mapUser : null);
+                }
+              },
+
+              toggleRoutes() {
+                this.showRoutes = !this.showRoutes;
+                
+                this.routePolylines.forEach(polyline => {
+                  polyline.setMap(this.showRoutes ? mapUser : null);
+                });
+              },
+
+              fitMapBounds() {
+                if (!mapUser) return;
+
+                const bounds = new google.maps.LatLngBounds();
+                let hasValidPoints = false;
+
+                // スポットマーカーの境界を追加
+                if (this.showSpots) {
+                  this.spotMarkers.forEach(marker => {
+                    if (marker.position) {
+                      bounds.extend(marker.position);
+                      hasValidPoints = true;
+                    }
+                  });
+                }
+
+                // ルートポリラインの境界を追加
+                if (this.showRoutes) {
+                  this.routePolylines.forEach(polyline => {
+                    const path = polyline.getPath();
+                    if (path) {
+                      path.forEach(latLng => {
+                        bounds.extend(latLng);
+                        hasValidPoints = true;
+                      });
+                    }
+                  });
+                }
+
+                if (hasValidPoints) {
+                  mapUser.fitBounds(bounds);
+                  
+                  google.maps.event.addListenerOnce(mapUser, 'bounds_changed', () => {
+                    const zoom = mapUser.getZoom();
+                    if (zoom > 16) {
+                      mapUser.setZoom(16);
+                    }
+                  });
+                }
+              },
+
+              showClusterLocations(locations) {
                 this.clusterLocations = locations;
                 this.showClusterPanel = true;
               },
@@ -1968,6 +2313,11 @@
 
               goToFollowerProfile(followerId) {
                 window.location.href = `/user.html?id=${followerId}`;
+              },
+
+              showRouteDetail(route) {
+                // ルート詳細画面への遷移（実装に応じて変更）
+                window.location.href = `/route-detail.html?id=${route.id}`;
               },
 
               getLocationName(location) {
@@ -2074,6 +2424,16 @@
                 if (!timestamp || !timestamp.toDate) return 'N/A';
                 const date = timestamp.toDate();
                 return date.toLocaleString('ja-JP', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                });
+              },
+
+              formatRouteDate(timestamp) {
+                if (!timestamp || !timestamp.toDate) return 'N/A';
+                const date = timestamp.toDate();
+                return date.toLocaleDateString('ja-JP', {
                   year: 'numeric',
                   month: '2-digit',
                   day: '2-digit'
