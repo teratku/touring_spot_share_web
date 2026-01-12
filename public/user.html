@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ユーザー詳細 | ツーリングスポットシェア</title>
 
+    <!-- リソースヒント -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+
     <link rel="preload" as="image" type="image/webp" :href="getWebPUrl(userInfo?.userIcon)" v-if="userInfo?.userIcon">
 
     <!-- Vue.js 3 -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -1337,6 +1342,7 @@
                   decoding="async"
                   width="120"
                   height="120"
+                  @load="handleImageLoad"
                   @error="handleIconError"
                 >
               </picture>
@@ -2573,6 +2579,11 @@
                   } else {
                     this.goBack();
                   }
+                }
+              },
+              handleImageLoad(event) {
+                if (event.target.loading === 'lazy') {
+                  event.target.classList.add('loaded');
                 }
               },
 

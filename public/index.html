@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ツーリングスポットシェア | Touring Spot Share</title>
 
+
+    <!-- リソースヒント -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+
+    <!-- 🆕 重要なスクリプトをpreload -->
+  <link rel="preload" as="script" href="https://unpkg.com/vue@3/dist/vue.global.js">
+
     <!-- Vue.js 3 -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -814,6 +824,27 @@
         }
       }
 
+      .gallery-image,
+      .cluster-image,
+      .cluster-user-icon {
+        aspect-ratio: attr(width) / attr(height);
+      }
+
+      /* 画像読み込み中の背景色 */
+      img {
+        background-color: #E0E0E0;
+      }
+
+      /* プログレッシブ画像読み込み */
+      img[loading="lazy"] {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+
+      img[loading="lazy"].loaded {
+        opacity: 1;
+      }
+
       /* ========== ダークモード対応 ========== */
       @media (prefers-color-scheme: dark) {
         body {
@@ -1102,6 +1133,7 @@
                     class="cluster-image"
                     loading="lazy"
                     decoding="async"
+                    @load="handleImageLoad"
                     @error="handleClusterImageError"
                   >
                 </picture>
@@ -1116,6 +1148,7 @@
                     class="cluster-image"
                     loading="lazy"
                     decoding="async"
+                    @load="handleImageLoad"
                     @error="handleClusterImageError"
                   >
                 </picture>
@@ -1331,10 +1364,17 @@
                   :key="imgIndex"
                   style="min-width: 100%; height: 100%;"
                 >
+                  <!-- 🆕 レスポンシブ画像の追加 -->
                   <source 
-                    v-if="getWebPUrl(url)" 
-                    :srcset="getWebPUrl(url)" 
+                    v-if="getWebPUrl(url, 'small')" 
+                    :srcset="getResponsiveSrcset(url, 'webp')"
+                    sizes="(max-width: 768px) 100vw, 320px"
                     type="image/webp"
+                  >
+                  <source 
+                    :srcset="getResponsiveSrcset(url, 'jpg')"
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    type="image/jpeg"
                   >
                   <img 
                     :src="url" 
@@ -1342,6 +1382,8 @@
                     class="gallery-image"
                     :loading="index < 3 ? 'eager' : 'lazy'"
                     decoding="async"
+                    width="320"
+                    height="240"
                     @error="getImageError"
                   >
                 </picture>
@@ -1369,6 +1411,7 @@
                 class="gallery-image"
                 loading="lazy"
                 decoding="async"
+                @load="handleImageLoad"
               >
             </div>
 
@@ -1392,6 +1435,7 @@
                         style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;"
                         loading="lazy"
                         decoding="async"
+                        @load="handleImageLoad"
                       >
                     </picture>
                     {{ displayName }}
@@ -2137,17 +2181,48 @@
                 parent.insertBefore(emoji, parent.firstChild);
               },
               
+              handleImageLoad(event) {
+                if (event.target.loading === 'lazy') {
+                  event.target.classList.add('loaded');
+                }
+              },
+
               goToUser(userId) {
                 window.location.href = `/user.html?id=${userId}`;
               },
-              getWebPUrl(url) {
-                if (!url) return null;
-                // Firebase StorageのURLの場合、WebP変換パラメータを追加
-                if (url.includes('firebasestorage.googleapis.com')) {
-                  return url.includes('?') ? `${url}&fm=webp` : `${url}?fm=webp`;
+              getResponsiveSrcset(url, format = 'webp') {
+                if (!url || !url.includes('firebasestorage.googleapis.com')) {
+                  return url;
                 }
-                return url;
+                
+                const baseUrl = url.split('?')[0];
+                const params = format === 'webp' ? 'fm=webp&' : '';
+                
+                // 小・中・大のサイズを生成
+                return `
+                  ${baseUrl}?${params}w=320 320w,
+                  ${baseUrl}?${params}w=640 640w,
+                  ${baseUrl}?${params}w=960 960w
+                `.trim();
               },
+                getWebPUrl(url, size = 'medium') {
+                  if (!url) return null;
+                  
+                  if (url.includes('firebasestorage.googleapis.com')) {
+                    const sizeParams = {
+                      small: 'w=320&h=240',
+                      medium: 'w=640&h=480',
+                      large: 'w=960&h=720'
+                    };
+                    
+                    const sizeParam = sizeParams[size] || sizeParams.medium;
+                    const separator = url.includes('?') ? '&' : '?';
+                    
+                    return `${url}${separator}fm=webp&${sizeParam}&q=85`;
+                  }
+                  
+                  return url;
+                },
             }
           });
 
@@ -2167,6 +2242,17 @@
           `;
         }
       });
+      if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered:', registration);
+            })
+            .catch((error) => {
+              console.log('SW registration failed:', error);
+            });
+        });
+      }
     </script>
   </body>
 </html>

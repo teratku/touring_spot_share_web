@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ロケーション詳細 | ツーリングスポットシェア</title>
 
+    <!-- リソースヒント -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+
     <!-- Vue.js 3 -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -524,6 +529,25 @@
           color: #8E8E93;
         }
       }
+      .gallery-image-item img,
+      .user-icon,
+      .modal-image {
+        aspect-ratio: auto;
+      }
+
+      img {
+        background-color: #E0E0E0;
+      }
+
+      /* プログレッシブ画像読み込み */
+      img[loading="lazy"] {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+
+      img[loading="lazy"].loaded {
+        opacity: 1;
+      }
     </style>
   </head>
   
@@ -600,6 +624,7 @@
                 :src="userInfo.userIcon" 
                 :alt="userInfo.userName"
                 class="user-icon"
+                @load="handleImageLoad"
               >
               <div class="user-details">
                 <div class="user-name">{{ userInfo.userName }}</div>
@@ -656,6 +681,7 @@
                     :alt="'画像 ' + (index + 1)" 
                     :loading="index < 6 ? 'eager' : 'lazy'"
                     decoding="async"
+                    @load="handleImageLoad"
                     @error="handleImageError"
                   >
                 </picture>
@@ -924,6 +950,12 @@
 
               handleImageError(event) {
                 event.target.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>";
+              },
+
+              handleImageLoad(event) {
+                if (event.target.loading === 'lazy') {
+                  event.target.classList.add('loaded');
+                }
               },
 
               goBack() {
