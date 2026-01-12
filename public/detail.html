@@ -640,16 +640,28 @@
           <div v-if="hasImages" class="detail-card image-gallery-section">
             <div class="section-title">📷 写真ギャラリー（{{ imageCount }}枚）</div>
             <div class="image-grid">
-                <div 
+              <div 
                 v-for="(url, index) in displayImageURLs"
                 :key="index"
                 class="gallery-image-item"
                 @click="openImageModal(url)"
-                >
-                <img :src="url" :alt="'画像 ' + (index + 1)" @error="handleImageError">
-                </div>
+              >
+                <picture>
+                  <source 
+                    :srcset="getWebPUrl(url)" 
+                    type="image/webp"
+                  >
+                  <img 
+                    :src="url" 
+                    :alt="'画像 ' + (index + 1)" 
+                    :loading="index < 6 ? 'eager' : 'lazy'"
+                    decoding="async"
+                    @error="handleImageError"
+                  >
+                </picture>
+              </div>
             </div>
-            </div>
+          </div>
         </template>
       </div>
 
@@ -967,7 +979,14 @@
                 const num = Number(value);
                 if (isNaN(num)) return 'N/A';
                 return num.toFixed(6);
-              }
+              },
+              getWebPUrl(url) {
+                if (!url) return null;
+                if (url.includes('firebasestorage.googleapis.com')) {
+                  return url.includes('?') ? `${url}&fm=webp` : `${url}?fm=webp`;
+                }
+                return url;
+              },
             }
           });
 

@@ -1091,24 +1091,36 @@
             >
               <!-- 画像表示 -->
               <div class="cluster-image-container">
-                <img 
-                    v-if="location.locationImageURLs && location.locationImageURLs.length > 0"
+                <picture v-if="location.locationImageURLs && location.locationImageURLs.length > 0">
+                  <source 
+                    :srcset="getWebPUrl(location.locationImageURLs[0])" 
+                    type="image/webp"
+                  >
+                  <img 
                     :src="location.locationImageURLs[0]" 
                     :alt="location.locality || location.administrative || '不明な場所'"
                     class="cluster-image"
+                    loading="lazy"
+                    decoding="async"
                     @error="handleClusterImageError"
-                >
-                <!-- locationImageURLsがなくiconImageURLがある場合 -->
-                <img 
-                    v-else-if="location.iconImageURL"
+                  >
+                </picture>
+                <picture v-else-if="location.iconImageURL">
+                  <source 
+                    :srcset="getWebPUrl(location.iconImageURL)" 
+                    type="image/webp"
+                  >
+                  <img 
                     :src="location.iconImageURL" 
                     :alt="location.locality || location.administrative || '不明な場所'"
                     class="cluster-image"
+                    loading="lazy"
+                    decoding="async"
                     @error="handleClusterImageError"
-                >
-                <!-- どちらもない場合はプレースホルダー -->
+                  >
+                </picture>
                 <div v-else class="cluster-image-placeholder">
-                    📷
+                  📷
                 </div>
               </div>
 
@@ -1269,15 +1281,12 @@
             return this.userInfo?.userIcon || null;
           },
           imageURLs() {
-            // locationImageURLsがある場合はそれを返す
             if (this.location.locationImageURLs && this.location.locationImageURLs.length > 0) {
-                return this.location.locationImageURLs;
+              return this.location.locationImageURLs;
             }
-            // locationImageURLsがなく、iconImageURLがある場合は配列化して返す
             if (this.location.iconImageURL) {
-                return [this.location.iconImageURL];
+              return [this.location.iconImageURL];
             }
-            // どちらもない場合は空配列
             return [];
           },
           hasMultipleImages() {
@@ -1285,6 +1294,16 @@
           }
         },
         methods: {
+          // WebP対応URL生成
+          getWebPUrl(url) {
+            if (!url) return null;
+            // Firebase StorageのURLの場合、WebP変換パラメータを追加
+            if (url.includes('firebasestorage.googleapis.com')) {
+              return url.includes('?') ? `${url}&fm=webp` : `${url}?fm=webp`;
+            }
+            return url;
+          },
+          
           navigateGallery(direction) {
             const totalImages = this.imageURLs.length;
             this.currentSlide = (this.currentSlide + direction + totalImages) % totalImages;
@@ -1307,18 +1326,29 @@
           <div class="location-card" @click="showDetail">
             <div v-if="imageURLs.length > 0" class="image-gallery">
               <div class="gallery-container" :style="{ transform: 'translateX(-' + (currentSlide * 100) + '%)' }">
-                <img 
+                <picture 
                   v-for="(url, imgIndex) in imageURLs"
                   :key="imgIndex"
-                  :src="url" 
-                  :alt="locality + ' - 画像' + (imgIndex + 1)" 
-                  class="gallery-image"
-                  @error="getImageError"
+                  style="min-width: 100%; height: 100%;"
                 >
+                  <source 
+                    v-if="getWebPUrl(url)" 
+                    :srcset="getWebPUrl(url)" 
+                    type="image/webp"
+                  >
+                  <img 
+                    :src="url" 
+                    :alt="locality + ' - 画像' + (imgIndex + 1)" 
+                    class="gallery-image"
+                    :loading="index < 3 ? 'eager' : 'lazy'"
+                    decoding="async"
+                    @error="getImageError"
+                  >
+                </picture>
               </div>
               <template v-if="hasMultipleImages">
-                <button class="gallery-arrow prev" @click.stop="navigateGallery(-1)">‹</button>
-                <button class="gallery-arrow next" @click.stop="navigateGallery(1)">›</button>
+                <button class="gallery-arrow prev" @click.stop="navigateGallery(-1)" aria-label="前の画像">‹</button>
+                <button class="gallery-arrow next" @click.stop="navigateGallery(1)" aria-label="次の画像">›</button>
                 <div class="gallery-nav">
                   <div 
                     v-for="(url, dotIndex) in imageURLs"
@@ -1326,6 +1356,7 @@
                     class="gallery-dot"
                     :class="{ active: dotIndex === currentSlide }"
                     @click.stop="goToSlide(dotIndex)"
+                    :aria-label="'画像' + (dotIndex + 1) + 'へ移動'"
                   ></div>
                 </div>
                 <div class="image-counter">{{ currentSlide + 1 }} / {{ imageURLs.length }}</div>
@@ -1336,6 +1367,8 @@
                 src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>"
                 alt="画像なし" 
                 class="gallery-image"
+                loading="lazy"
+                decoding="async"
               >
             </div>
 
@@ -1351,12 +1384,16 @@
                 <div class="meta-item">
                   <span class="meta-icon">👤</span>
                   <span class="user-badge" @click="goToUser" style="cursor: pointer;">
-                    <img 
-                      v-if="userIcon" 
-                      :src="userIcon" 
-                      :alt="displayName"
-                      style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;"
-                    >
+                    <picture v-if="userIcon">
+                      <source :srcset="getWebPUrl(userIcon)" type="image/webp">
+                      <img 
+                        :src="userIcon" 
+                        :alt="displayName"
+                        style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;"
+                        loading="lazy"
+                        decoding="async"
+                      >
+                    </picture>
                     {{ displayName }}
                   </span>
                 </div>
@@ -2102,7 +2139,15 @@
               
               goToUser(userId) {
                 window.location.href = `/user.html?id=${userId}`;
-              }
+              },
+              getWebPUrl(url) {
+                if (!url) return null;
+                // Firebase StorageのURLの場合、WebP変換パラメータを追加
+                if (url.includes('firebasestorage.googleapis.com')) {
+                  return url.includes('?') ? `${url}&fm=webp` : `${url}?fm=webp`;
+                }
+                return url;
+              },
             }
           });
 

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ユーザー詳細 | ツーリングスポットシェア</title>
 
+    <link rel="preload" as="image" type="image/webp" :href="getWebPUrl(userInfo?.userIcon)" v-if="userInfo?.userIcon">
+
     <!-- Vue.js 3 -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -1217,6 +1219,32 @@
           color: #8E8E93;
         }
       }
+      picture {
+        display: contents;
+      }
+
+      img {
+        background: #E0E0E0;
+      }
+
+      /* レイアウトシフト防止 */
+      .profile-icon,
+      .location-image,
+      .follower-item-icon,
+      .cluster-image {
+        aspect-ratio: auto;
+        object-fit: cover;
+      }
+
+      /* 画像のプログレッシブ表示 */
+      img[loading="lazy"] {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+
+      img[loading="lazy"].loaded {
+        opacity: 1;
+      }
     </style>
   </head>
   
@@ -1296,13 +1324,22 @@
           <!-- プロフィールカード -->
           <div class="profile-card">
             <div class="profile-header">
-              <img 
-                v-if="userInfo.userIcon"
-                :src="userInfo.userIcon" 
-                :alt="userInfo.userName"
-                class="profile-icon"
-                @error="handleIconError"
-              >
+              <picture v-if="userInfo.userIcon">
+                <source 
+                  :srcset="getWebPUrl(userInfo.userIcon)" 
+                  type="image/webp"
+                >
+                <img 
+                  :src="userInfo.userIcon" 
+                  :alt="userInfo.userName"
+                  class="profile-icon"
+                  loading="eager"
+                  decoding="async"
+                  width="120"
+                  height="120"
+                  @error="handleIconError"
+                >
+              </picture>
               <div v-else class="profile-icon-placeholder">
                 👤
               </div>
@@ -1369,18 +1406,28 @@
               
               <div class="locations-grid">
                 <div 
-                  v-for="location in locations"
+                  v-for="location in indexedLocations"
                   :key="location.id"
                   class="location-card"
                   @click="showDetail(location)"
                 >
-                  <img 
-                    v-if="getLocationImage(location)"
-                    :src="getLocationImage(location)" 
-                    :alt="getLocationName(location)"
-                    class="location-image"
-                    @error="handleImageError"
-                  >
+                  <picture v-if="getLocationImage(location)">
+                    <source 
+                      :srcset="getWebPUrl(getLocationImage(location))" 
+                      type="image/webp"
+                    >
+                    <img 
+                      :src="getLocationImage(location)" 
+                      :alt="getLocationName(location)"
+                      class="location-image"
+                      :loading="locations.indexOf(location) < 3 ? 'eager' : 'lazy'"
+                      decoding="async"
+                      width="280"
+                      height="200"
+                      @error="handleImageError"
+                      @load="handleImageLoad"
+                    >
+                  </picture>
                   <div v-else class="location-image-placeholder">
                     📷
                   </div>
@@ -1483,20 +1530,40 @@
             >
               <!-- 画像表示 -->
               <div class="cluster-image-container">
-                <img 
-                  v-if="location.locationImageURLs && location.locationImageURLs.length > 0"
-                  :src="location.locationImageURLs[0]" 
-                  :alt="location.locality || location.administrative || '不明な場所'"
-                  class="cluster-image"
-                  @error="handleClusterImageError"
-                >
-                <img 
-                  v-else-if="location.iconImageURL"
-                  :src="location.iconImageURL" 
-                  :alt="location.locality || location.administrative || '不明な場所'"
-                  class="cluster-image"
-                  @error="handleClusterImageError"
-                >
+                <picture v-if="location.locationImageURLs && location.locationImageURLs.length > 0">
+                  <source 
+                    :srcset="getWebPUrl(location.locationImageURLs[0])" 
+                    type="image/webp"
+                  >
+                  <img 
+                    :src="location.locationImageURLs[0]" 
+                    :alt="location.locality || location.administrative || '不明な場所'"
+                    class="cluster-image"
+                    loading="lazy"
+                    decoding="async"
+                    width="80"
+                    height="80"
+                    @error="handleClusterImageError"
+                    @load="handleImageLoad"
+                  >
+                </picture>
+                <picture v-else-if="location.iconImageURL">
+                  <source 
+                    :srcset="getWebPUrl(location.iconImageURL)" 
+                    type="image/webp"
+                  >
+                  <img 
+                    :src="location.iconImageURL" 
+                    :alt="location.locality || location.administrative || '不明な場所'"
+                    class="cluster-image"
+                    loading="lazy"
+                    decoding="async"
+                    width="80"
+                    height="80"
+                    @error="handleClusterImageError"
+                    @load="handleImageLoad"
+                  >
+                </picture>
                 <div v-else class="cluster-image-placeholder">
                   📷
                 </div>
@@ -1565,13 +1632,23 @@
                 class="follower-item"
                 @click="goToFollowerProfile(follower.id)"
               >
-                <img 
-                  v-if="follower.userIcon"
-                  :src="follower.userIcon" 
-                  :alt="follower.userName"
-                  class="follower-item-icon"
-                  @error="handleFollowerIconError"
-                >
+                <picture v-if="follower.userIcon">
+                  <source 
+                    :srcset="getWebPUrl(follower.userIcon)" 
+                    type="image/webp"
+                  >
+                  <img 
+                    :src="follower.userIcon" 
+                    :alt="follower.userName"
+                    class="follower-item-icon"
+                    loading="lazy"
+                    decoding="async"
+                    width="48"
+                    height="48"
+                    @error="handleFollowerIconError"
+                    @load="handleImageLoad"
+                  >
+                </picture>
                 <div v-else class="follower-item-icon-placeholder">
                   👤
                 </div>
@@ -1881,6 +1958,12 @@
               },
               sharedRoutesCount() {
                 return this.sharedRoutes.length;
+              },
+              indexedLocations() {
+                return this.locations.map((location, index) => ({
+                  ...location,
+                  _index: index
+                }));
               }
             },
             async mounted() {
@@ -2490,6 +2573,35 @@
                   } else {
                     this.goBack();
                   }
+                }
+              },
+
+              getWebPUrl(url) {
+                if (!url) return null;
+                
+                // Firebase StorageのURLかチェック
+                if (url.includes('firebasestorage.googleapis.com')) {
+                  // すでにクエリパラメータがある場合
+                  if (url.includes('?')) {
+                    // alt=mediaパラメータがある場合は、その前に挿入
+                    if (url.includes('alt=media')) {
+                      return url.replace('alt=media', 'alt=media&fm=webp');
+                    }
+                    return `${url}&fm=webp`;
+                  }
+                  // クエリパラメータがない場合
+                  return `${url}?fm=webp`;
+                }
+                
+                // Firebase以外のURLの場合はそのまま返す
+                return url;
+              },
+
+              // 画像読み込み完了ハンドラー
+              handleImageLoad(event) {
+                // lazy loading時のフェードイン効果
+                if (event.target.loading === 'lazy') {
+                  event.target.classList.add('loaded');
                 }
               },
 
