@@ -5,19 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ツーリングスポットシェア | Touring Spot Share</title>
 
-    <!-- リソースヒント -->
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
-    <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
-    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-
-    <!-- 重要なスクリプトをpreload -->
-    <link rel="preload" as="script" href="https://unpkg.com/vue@3/dist/vue.global.prod.js" crossorigin>
-    <link rel="preload" as="script" href="/__/firebase/12.4.0/firebase-app-compat.js">
-    <link rel="preload" as="script" href="/__/firebase/12.4.0/firebase-firestore-compat.js">
-
     <!-- Vue.js 3 -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -275,8 +264,8 @@
         margin: 0;
         padding: 16px;
         position: sticky;
-        top: 84px;
-        z-index: 1000;
+        top: 84px; /* ヘッダーの高さ分下に配置 */
+        z-index: 1000; /* ヘッダーより低い値 */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
@@ -775,7 +764,7 @@
       /* ========== レスポンシブ ========== */
       @media (max-width: 768px) {
         .search-bar {
-          top: 76px;
+          top: 76px; /* モバイル時のヘッダー高さに合わせる */
         }
         #location-list {
           grid-template-columns: 1fr;
@@ -823,34 +812,6 @@
         .subtitle {
           font-size: 11pt;
         }
-      }
-
-      .gallery-image,
-      .cluster-image,
-      .cluster-user-icon {
-        aspect-ratio: attr(width) / attr(height);
-      }
-
-      /* 画像読み込み中の背景色 */
-      img {
-        background-color: #E0E0E0;
-      }
-
-      /* プログレッシブ画像読み込み */
-      img[loading="lazy"] {
-        background: linear-gradient(90deg, #E0E0E0 25%, #F0F0F0 50%, #E0E0E0 75%);
-        background-size: 200% 100%;
-        animation: loading 1.5s ease-in-out infinite;
-      }
-      
-      @keyframes loading {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-      }
-      
-      img[loading="lazy"].loaded {
-        background: none;
-        animation: none;
       }
 
       /* ========== ダークモード対応 ========== */
@@ -1129,31 +1090,32 @@
               @click="showDetail(location)"
             >
               <!-- 画像表示 -->
-              <!-- クラスタ詳細パネル内の画像表示部分 -->
               <div class="cluster-image-container">
                 <picture v-if="location.locationImageURLs && location.locationImageURLs.length > 0">
+                  <source 
+                    :srcset="getWebPUrl(location.locationImageURLs[0])" 
+                    type="image/webp"
+                  >
                   <img 
                     :src="location.locationImageURLs[0]" 
                     :alt="location.locality || location.administrative || '不明な場所'"
                     class="cluster-image"
                     loading="lazy"
                     decoding="async"
-                    crossorigin="anonymous"
-                    referrerpolicy="no-referrer"
-                    @load="handleImageLoad"
                     @error="handleClusterImageError"
                   >
                 </picture>
                 <picture v-else-if="location.iconImageURL">
+                  <source 
+                    :srcset="getWebPUrl(location.iconImageURL)" 
+                    type="image/webp"
+                  >
                   <img 
                     :src="location.iconImageURL" 
                     :alt="location.locality || location.administrative || '不明な場所'"
                     class="cluster-image"
                     loading="lazy"
                     decoding="async"
-                    crossorigin="anonymous"
-                    referrerpolicy="no-referrer"
-                    @load="handleImageLoad"
                     @error="handleClusterImageError"
                   >
                 </picture>
@@ -1161,18 +1123,6 @@
                   📷
                 </div>
               </div>
-
-              <!-- ユーザーアイコン -->
-              <img 
-                v-if="userCache[location.userID] && userCache[location.userID].userIcon"
-                :src="userCache[location.userID].userIcon" 
-                :alt="userCache[location.userID].userName"
-                class="cluster-user-icon"
-                crossorigin="anonymous"
-                referrerpolicy="no-referrer"
-                @error="handleUserIconError"
-                @load="handleImageLoad"
-              >
 
               <!-- 情報コンテナ -->
               <div class="cluster-info-container">
@@ -1353,22 +1303,6 @@
             }
             return url;
           },
-          // レスポンシブ画像のsrcset生成
-          getResponsiveSrcset(url, format = 'webp') {
-            if (!url || !url.includes('firebasestorage.googleapis.com')) {
-              return url;
-            }
-            
-            const baseUrl = url.split('?')[0];
-            const formatParam = format === 'webp' ? 'fm=webp&' : '';
-            
-            return [
-              `${baseUrl}?${formatParam}w=320&q=80 320w`,
-              `${baseUrl}?${formatParam}w=640&q=85 640w`,
-              `${baseUrl}?${formatParam}w=960&q=85 960w`,
-              `${baseUrl}?${formatParam}w=1280&q=90 1280w`
-            ].join(', ');
-          },
           
           navigateGallery(direction) {
             const totalImages = this.imageURLs.length;
@@ -1397,18 +1331,18 @@
                   :key="imgIndex"
                   style="min-width: 100%; height: 100%;"
                 >
+                  <source 
+                    v-if="getWebPUrl(url)" 
+                    :srcset="getWebPUrl(url)" 
+                    type="image/webp"
+                  >
                   <img 
                     :src="url" 
                     :alt="locality + ' - 画像' + (imgIndex + 1)" 
                     class="gallery-image"
                     :loading="index < 3 ? 'eager' : 'lazy'"
                     decoding="async"
-                    width="320"
-                    height="240"
-                    crossorigin="anonymous"
-                    referrerpolicy="no-referrer"
                     @error="getImageError"
-                    @load="handleImageLoad"
                   >
                 </picture>
               </div>
@@ -1450,18 +1384,16 @@
                 <div class="meta-item">
                   <span class="meta-icon">👤</span>
                   <span class="user-badge" @click="goToUser" style="cursor: pointer;">
-                    <img 
-                      v-if="userIcon"
-                      :src="userIcon" 
-                      :alt="displayName"
-                      style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;"
-                      loading="lazy"
-                      decoding="async"
-                      crossorigin="anonymous"
-                      referrerpolicy="no-referrer"
-                      @error="handleIconError"
-                      @load="handleImageLoad"
-                    >
+                    <picture v-if="userIcon">
+                      <source :srcset="getWebPUrl(userIcon)" type="image/webp">
+                      <img 
+                        :src="userIcon" 
+                        :alt="displayName"
+                        style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-right: 4px;"
+                        loading="lazy"
+                        decoding="async"
+                      >
+                    </picture>
                     {{ displayName }}
                   </span>
                 </div>
@@ -1743,12 +1675,6 @@
                     id: doc.id,
                     ...doc.data()
                     };
-                    // 画像URLを最適化
-                    if (locationData.locationImageURLs && locationData.locationImageURLs.length > 0) {
-                      locationData.locationImageURLs = locationData.locationImageURLs.map(url => 
-                        this.optimizeImageUrl(url)
-                      );
-                    }
                     this.locations.push(locationData);
                     
                     if (locationData.userID) {
@@ -1786,515 +1712,442 @@
                 this.isLoadingMore = false;
                 }
             },
-            async getSafeImageUrl(url) {
-              if (!url || !url.includes('firebasestorage.googleapis.com')) {
-                return url;
-              }
-              
-              try {
-                // Firebase Storage SDKを使用してダウンロードURLを取得
-                const urlObj = new URL(url);
-                const pathMatch = urlObj.pathname.match(/\/o\/(.+)/);
-                
-                if (pathMatch && typeof firebase !== 'undefined' && firebase.storage) {
-                  const path = decodeURIComponent(pathMatch[1]);
-                  const ref = firebase.storage().ref(path);
-                  
-                  // 正しいダウンロードURLを取得（トークン付き）
-                  const downloadUrl = await ref.getDownloadURL();
-                  console.log('Safe URL generated:', downloadUrl);
-                  return downloadUrl;
-                }
-              } catch (error) {
-                console.warn('URL変換エラー、元のURLを使用:', error);
-              }
-              
-              return url;
-            },
-            
-            // 画像URL最適化を修正
-            async optimizeImageUrl(url) {
-              if (!url || !url.includes('firebasestorage.googleapis.com')) {
-                return url;
-              }
-              
-              // 安全なURLを取得
-              const safeUrl = await this.getSafeImageUrl(url);
-              
-              // 最適化パラメータを追加（Firebase Storageがサポートしている場合のみ）
-              const separator = safeUrl.includes('?') ? '&' : '?';
-              return `${safeUrl}${separator}w=320&h=240&fm=webp&q=80`;
-            },
-            switchView(view) {
-              this.currentView = view;
-              if (view === 'map') {
-                this.$nextTick(async () => {
-                  if (!this.mapInitialized && !this.isInitialLoading) {
-                    try {
-                      await waitForGoogleMaps();
-                      await waitForMarkerClusterer();
-                      await this.initializeMap();
-                      this.mapInitialized = true;
-                    } catch (error) {
-                      console.error('マップ初期化エラー:', error);
+
+              switchView(view) {
+                this.currentView = view;
+                if (view === 'map') {
+                  this.$nextTick(async () => {
+                    if (!this.mapInitialized && !this.isInitialLoading) {
+                      try {
+                        await waitForGoogleMaps();
+                        await waitForMarkerClusterer();
+                        await this.initializeMap();
+                        this.mapInitialized = true;
+                      } catch (error) {
+                        console.error('マップ初期化エラー:', error);
+                      }
+                    } else if (mapMain && this.mapInitialized) {
+                      setTimeout(() => {
+                        google.maps.event.trigger(mapMain, 'resize');
+                        if (this.locations.length > 0) {
+                          const bounds = new google.maps.LatLngBounds();
+                          this.locations.forEach(loc => {
+                            if (loc.lat && loc.lng) {
+                              bounds.extend({ lat: Number(loc.lat), lng: Number(loc.lng) });
+                            }
+                          });
+                          mapMain.fitBounds(bounds);
+                        }
+                      }, 100);
                     }
-                  } else if (mapMain && this.mapInitialized) {
-                    setTimeout(() => {
-                      google.maps.event.trigger(mapMain, 'resize');
-                      if (this.locations.length > 0) {
-                        const bounds = new google.maps.LatLngBounds();
-                        this.locations.forEach(loc => {
-                          if (loc.lat && loc.lng) {
-                            bounds.extend({ lat: Number(loc.lat), lng: Number(loc.lng) });
-                          }
-                        });
-                        mapMain.fitBounds(bounds);
-                      }
-                    }, 100);
-                  }
-                });
-              }
-            },
-
-            async initializeMap() {
-              const mapElement = document.getElementById('map-main');
-              if (!mapElement) {
-                console.error('Map element not found');
-                return;
-              }
-
-              // Request needed libraries
-              const { Map } = await google.maps.importLibrary("maps");
-              const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-
-              mapMain = new google.maps.Map(mapElement, {
-                zoom: 5,
-                center: { lat: 36.2048, lng: 138.2529 },
-                mapId: "DEMO_MAP_ID",
-                mapTypeControl: true,
-                streetViewControl: true,
-                fullscreenControl: true,
-                styles: [
-                  {
-                    featureType: "poi",
-                    elementType: "labels",
-                    stylers: [{ visibility: "off" }]
-                  }
-                ]
-              });
-
-              await this.createMarkers();
-            },
-
-            async createMarkers() {
-              console.log('createMarkers called');
-              
-              // 既存のクラスタラーを完全に破棄
-              if (clustererInstance) {
-                  try {
-                      clustererInstance.clearMarkers();
-                      clustererInstance.setMap(null);
-                  } catch (error) {
-                      console.error('Clusterer cleanup error:', error);
-                  }
-                  clustererInstance = null;
-              }
-              
-              // 既存のマーカーを完全に削除
-              if (this.markers && this.markers.length > 0) {
-                  this.markers.forEach(marker => {
-                      if (marker && marker.map) {
-                          marker.map = null;
-                      }
                   });
-              }
-              this.markers = [];
+                }
+              },
 
-              // マップがない場合は処理を中断
-              if (!mapMain) {
-                  console.error('Map is not initialized');
+              async initializeMap() {
+                const mapElement = document.getElementById('map-main');
+                if (!mapElement) {
+                  console.error('Map element not found');
                   return;
-              }
+                }
 
-              const bounds = new google.maps.LatLngBounds();
-              const validLocations = [];
+                // Request needed libraries
+                const { Map } = await google.maps.importLibrary("maps");
+                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
 
-              // AdvancedMarkerElement用のライブラリを取得
-              const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-
-              const self = this;
-
-              // 検索中かどうかで使用するロケーションを分岐
-              const locationsToShow = this.searchQuery.trim() ? this.filteredLocations : this.locations;
-
-              // マーカーを作成
-              locationsToShow.forEach(location => {
-                  if (!location.lat || !location.lng) return;
-
-                  const lat = Number(location.lat);
-                  const lng = Number(location.lng);
-
-                  if (isNaN(lat) || isNaN(lng)) return;
-
-                  const position = { lat, lng };
-                  bounds.extend(position);
-                  validLocations.push(location);
-
-                  // PinElementを作成
-                  const pinElement = new PinElement({
-                      background: '#00A8C6',
-                      borderColor: '#FFFFFF',
-                      glyphColor: '#FFFFFF',
-                      scale: 1.2,
-                  });
-
-                  // AdvancedMarkerElementを作成
-                  const marker = new AdvancedMarkerElement({
-                      position: position,
-                      content: pinElement.element,
-                      title: location.locality || location.administrative || '不明な場所',
-                  });
-
-                  marker.locationData = location;
-
-                  // 個別マーカーのクリックイベント
-                  marker.addListener('click', () => {
-                      self.showClusterLocations([marker.locationData]);
-                  });
-
-                  this.markers.push(marker);
-              });
-
-              console.log(`Created ${this.markers.length} markers`);
-
-              // クラスタラーを初期化
-              try {
-                  clustererInstance = new markerClusterer.MarkerClusterer({
-                      markers: this.markers,
-                      map: mapMain,
-                      algorithmOptions: {
-                          maxZoom: 16,
-                      },
-                      onClusterClick: (event, cluster, map) => {
-                          const clusterMarkers = cluster.markers;
-                          
-                          if (clusterMarkers.length <= 10) {
-                              const locations = clusterMarkers.map(m => m.locationData).filter(Boolean);
-                              self.showClusterLocations(locations);
-                          } else {
-                              map.fitBounds(cluster.bounds);
-                          }
-                      }
-                  });
-
-                  console.log('Clusterer initialized successfully');
-
-                  // マップの境界を調整
-                  if (validLocations.length > 0) {
-                      mapMain.fitBounds(bounds);
-                      
-                      google.maps.event.addListenerOnce(mapMain, 'bounds_changed', () => {
-                          const zoom = mapMain.getZoom();
-                          if (zoom > 16) {
-                              mapMain.setZoom(16);
-                          }
-                      });
-                  }
-              } catch (error) {
-                  console.error('Clusterer initialization error:', error);
-              }
-            },
-
-            async showClusterLocations(locations) {
-              this.clusterLocations = locations;
-              this.showClusterPanel = true;
-
-              // 全てのユーザー情報を確実に取得してから表示
-              const userLoadPromises = locations
-                .filter(loc => loc.userID)
-                .map(async (loc) => {
-                  if (!this.userCache[loc.userID]) {
-                    const userInfo = await this.getUserInfo(loc.userID);
-                    return userInfo;
-                  }
+                mapMain = new google.maps.Map(mapElement, {
+                  zoom: 5,
+                  center: { lat: 36.2048, lng: 138.2529 },
+                  mapId: "DEMO_MAP_ID",
+                  mapTypeControl: true,
+                  streetViewControl: true,
+                  fullscreenControl: true,
+                  styles: [
+                    {
+                      featureType: "poi",
+                      elementType: "labels",
+                      stylers: [{ visibility: "off" }]
+                    }
+                  ]
                 });
 
-              try {
-                await Promise.all(userLoadPromises);
-                // データ取得完了後に強制再描画
-                this.$forceUpdate();
-              } catch (error) {
-                console.error('ユーザー情報一括取得エラー:', error);
-              }
-            },
+                await this.createMarkers();
+              },
 
-            closeClusterPanel() {
-              this.showClusterPanel = false;
-              this.clusterLocations = [];
-            },
+              async createMarkers() {
+                console.log('createMarkers called');
+                
+                // 既存のクラスタラーを完全に破棄
+                if (clustererInstance) {
+                    try {
+                        clustererInstance.clearMarkers();
+                        clustererInstance.setMap(null);
+                    } catch (error) {
+                        console.error('Clusterer cleanup error:', error);
+                    }
+                    clustererInstance = null;
+                }
+                
+                // 既存のマーカーを完全に削除
+                if (this.markers && this.markers.length > 0) {
+                    this.markers.forEach(marker => {
+                        if (marker && marker.map) {
+                            marker.map = null;
+                        }
+                    });
+                }
+                this.markers = [];
 
-            async getUserInfo(userID) {
-              if (!userID) return null;
-              
-              if (this.userCache[userID]) {
-                return this.userCache[userID];
-              }
+                // マップがない場合は処理を中断
+                if (!mapMain) {
+                    console.error('Map is not initialized');
+                    return;
+                }
 
-              try {
-                const userDoc = await db.collection('userInfo').doc(userID).get();
-                if (userDoc.exists) {
-                  const userData = userDoc.data();
-                  // Vue 3ではこのように直接代入でリアクティブになる
-                  this.userCache[userID] = userData;
-                  return userData;
-                } else {
+                const bounds = new google.maps.LatLngBounds();
+                const validLocations = [];
+
+                // AdvancedMarkerElement用のライブラリを取得
+                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+                const self = this;
+
+                // 検索中かどうかで使用するロケーションを分岐
+                const locationsToShow = this.searchQuery.trim() ? this.filteredLocations : this.locations;
+
+                // マーカーを作成
+                locationsToShow.forEach(location => {
+                    if (!location.lat || !location.lng) return;
+
+                    const lat = Number(location.lat);
+                    const lng = Number(location.lng);
+
+                    if (isNaN(lat) || isNaN(lng)) return;
+
+                    const position = { lat, lng };
+                    bounds.extend(position);
+                    validLocations.push(location);
+
+                    // PinElementを作成
+                    const pinElement = new PinElement({
+                        background: '#00A8C6',
+                        borderColor: '#FFFFFF',
+                        glyphColor: '#FFFFFF',
+                        scale: 1.2,
+                    });
+
+                    // AdvancedMarkerElementを作成
+                    const marker = new AdvancedMarkerElement({
+                        position: position,
+                        content: pinElement.element,
+                        title: location.locality || location.administrative || '不明な場所',
+                    });
+
+                    marker.locationData = location;
+
+                    // 個別マーカーのクリックイベント
+                    marker.addListener('click', () => {
+                        self.showClusterLocations([marker.locationData]);
+                    });
+
+                    this.markers.push(marker);
+                });
+
+                console.log(`Created ${this.markers.length} markers`);
+
+                // クラスタラーを初期化
+                try {
+                    clustererInstance = new markerClusterer.MarkerClusterer({
+                        markers: this.markers,
+                        map: mapMain,
+                        algorithmOptions: {
+                            maxZoom: 16,
+                        },
+                        onClusterClick: (event, cluster, map) => {
+                            const clusterMarkers = cluster.markers;
+                            
+                            if (clusterMarkers.length <= 10) {
+                                const locations = clusterMarkers.map(m => m.locationData).filter(Boolean);
+                                self.showClusterLocations(locations);
+                            } else {
+                                map.fitBounds(cluster.bounds);
+                            }
+                        }
+                    });
+
+                    console.log('Clusterer initialized successfully');
+
+                    // マップの境界を調整
+                    if (validLocations.length > 0) {
+                        mapMain.fitBounds(bounds);
+                        
+                        google.maps.event.addListenerOnce(mapMain, 'bounds_changed', () => {
+                            const zoom = mapMain.getZoom();
+                            if (zoom > 16) {
+                                mapMain.setZoom(16);
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error('Clusterer initialization error:', error);
+                }
+              },
+
+              async showClusterLocations(locations) {
+                this.clusterLocations = locations;
+                this.showClusterPanel = true;
+
+                // 全てのユーザー情報を確実に取得してから表示
+                const userLoadPromises = locations
+                  .filter(loc => loc.userID)
+                  .map(async (loc) => {
+                    if (!this.userCache[loc.userID]) {
+                      const userInfo = await this.getUserInfo(loc.userID);
+                      return userInfo;
+                    }
+                  });
+
+                try {
+                  await Promise.all(userLoadPromises);
+                  // データ取得完了後に強制再描画
+                  this.$forceUpdate();
+                } catch (error) {
+                  console.error('ユーザー情報一括取得エラー:', error);
+                }
+              },
+
+              closeClusterPanel() {
+                this.showClusterPanel = false;
+                this.clusterLocations = [];
+              },
+
+              async getUserInfo(userID) {
+                if (!userID) return null;
+                
+                if (this.userCache[userID]) {
+                  return this.userCache[userID];
+                }
+
+                try {
+                  const userDoc = await db.collection('userInfo').doc(userID).get();
+                  if (userDoc.exists) {
+                    const userData = userDoc.data();
+                    // Vue 3ではこのように直接代入でリアクティブになる
+                    this.userCache[userID] = userData;
+                    return userData;
+                  } else {
+                    const defaultUser = { userName: userID, userIcon: null };
+                    this.userCache[userID] = defaultUser;
+                    return defaultUser;
+                  }
+                } catch (error) {
+                  console.error('ユーザー情報取得エラー:', error);
                   const defaultUser = { userName: userID, userIcon: null };
                   this.userCache[userID] = defaultUser;
                   return defaultUser;
                 }
-              } catch (error) {
-                console.error('ユーザー情報取得エラー:', error);
-                const defaultUser = { userName: userID, userIcon: null };
-                this.userCache[userID] = defaultUser;
-                return defaultUser;
-              }
-            },
+              },
 
-            loadMoreDisplayedLocations() {
-              const start = this.currentPage * this.itemsPerPage;
-              const end = start + this.itemsPerPage;
-              const nextBatch = this.locations.slice(start, end);
-              
-              if (nextBatch.length > 0) {
-                this.displayedLocations.push(...nextBatch);
-                this.currentPage++;
-              }
-              
-              if (end >= this.locations.length) {
-                this.hasMore = false;
-              }
-              
-              this.isLoadingMore = false;
-            },
+              loadMoreDisplayedLocations() {
+                const start = this.currentPage * this.itemsPerPage;
+                const end = start + this.itemsPerPage;
+                const nextBatch = this.locations.slice(start, end);
+                
+                if (nextBatch.length > 0) {
+                  this.displayedLocations.push(...nextBatch);
+                  this.currentPage++;
+                }
+                
+                if (end >= this.locations.length) {
+                  this.hasMore = false;
+                }
+                
+                this.isLoadingMore = false;
+              },
 
-            // 検索入力ハンドラー（デバウンス付き）
-            handleSearchInput() {
-              clearTimeout(this.searchDebounceTimer);
-              
-              this.searchDebounceTimer = setTimeout(() => {
-                this.performSearch();
-              }, 300); // 300ms後に検索実行
-            },
+              // 検索入力ハンドラー（デバウンス付き）
+              handleSearchInput() {
+                clearTimeout(this.searchDebounceTimer);
+                
+                this.searchDebounceTimer = setTimeout(() => {
+                  this.performSearch();
+                }, 300); // 300ms後に検索実行
+              },
 
-            // 検索実行
-            performSearch() {
-              const query = this.searchQuery.trim().toLowerCase();
-              
-              // 検索クエリが空の場合は全データを表示
-              if (!query) {
-                this.filteredLocations = [];
+              // 検索実行
+              performSearch() {
+                const query = this.searchQuery.trim().toLowerCase();
+                
+                // 検索クエリが空の場合は全データを表示
+                if (!query) {
+                  this.filteredLocations = [];
+                  this.displayedLocations = [];
+                  this.currentPage = 0;
+                  this.hasMore = true;
+                  this.loadMoreDisplayedLocations();
+                  
+                  // マップを更新
+                  if (this.mapInitialized) {
+                    this.createMarkers();
+                  }
+                  return;
+                }
+
+                // キャッシュデータから検索
+                this.filteredLocations = this.locations.filter(location => {
+                  // administrative(String)で検索
+                  if (location.administrative && 
+                      location.administrative.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // comment(String)で検索
+                  if (location.comment && 
+                      location.comment.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // locality(String)で検索
+                  if (location.locality && 
+                      location.locality.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // location_name(String)で検索
+                  if (location.location_name && 
+                      location.location_name.toLowerCase().includes(query)) {
+                    return true;
+                  }
+
+                  // tag(配列)で検索
+                  if (location.tag && Array.isArray(location.tag)) {
+                    return location.tag.some(tag => 
+                      tag.toLowerCase().includes(query)
+                    );
+                  }
+
+                  return false;
+                });
+
+                // 検索結果を表示用に設定
                 this.displayedLocations = [];
                 this.currentPage = 0;
                 this.hasMore = true;
-                this.loadMoreDisplayedLocations();
-                
+                this.loadMoreSearchResults();
+
                 // マップを更新
                 if (this.mapInitialized) {
                   this.createMarkers();
                 }
-                return;
-              }
 
-              // キャッシュデータから検索
-              this.filteredLocations = this.locations.filter(location => {
-                // administrative(String)で検索
-                if (location.administrative && 
-                    location.administrative.toLowerCase().includes(query)) {
-                  return true;
-                }
+                console.log(`検索実行: "${query}" - ${this.filteredLocations.length}件`);
+              },
 
-                // comment(String)で検索
-                if (location.comment && 
-                    location.comment.toLowerCase().includes(query)) {
-                  return true;
-                }
-
-                // locality(String)で検索
-                if (location.locality && 
-                    location.locality.toLowerCase().includes(query)) {
-                  return true;
-                }
-
-                // location_name(String)で検索
-                if (location.location_name && 
-                    location.location_name.toLowerCase().includes(query)) {
-                  return true;
-                }
-
-                // tag(配列)で検索
-                if (location.tag && Array.isArray(location.tag)) {
-                  return location.tag.some(tag => 
-                    tag.toLowerCase().includes(query)
-                  );
-                }
-
-                return false;
-              });
-
-              // 検索結果を表示用に設定
-              this.displayedLocations = [];
-              this.currentPage = 0;
-              this.hasMore = true;
-              this.loadMoreSearchResults();
-
-              // マップを更新
-              if (this.mapInitialized) {
-                this.createMarkers();
-              }
-
-              console.log(`検索実行: "${query}" - ${this.filteredLocations.length}件`);
-            },
-
-            // 検索結果の追加読み込み
-            loadMoreSearchResults() {
-              const start = this.currentPage * this.itemsPerPage;
-              const end = start + this.itemsPerPage;
-              const nextBatch = this.filteredLocations.slice(start, end);
-              
-              if (nextBatch.length > 0) {
-                this.displayedLocations.push(...nextBatch);
-                this.currentPage++;
-              }
-              
-              if (end >= this.filteredLocations.length) {
-                this.hasMore = false;
-              }
-              
-              this.isLoadingMore = false;
-            },
-
-            // 検索クリア
-            clearSearch() {
-              this.searchQuery = '';
-              this.performSearch();
-            },
-
-            handleScroll() {
-              if (this.currentView !== 'list' || this.isLoadingMore || !this.hasMore) return;
-
-              const scrollHeight = document.documentElement.scrollHeight;
-              const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-              const clientHeight = document.documentElement.clientHeight;
-
-              if (scrollTop + clientHeight >= scrollHeight - 300) {
-                this.isLoadingMore = true;
+              // 検索結果の追加読み込み
+              loadMoreSearchResults() {
+                const start = this.currentPage * this.itemsPerPage;
+                const end = start + this.itemsPerPage;
+                const nextBatch = this.filteredLocations.slice(start, end);
                 
-                // 検索中かどうかで処理を分岐
-                if (this.searchQuery.trim()) {
-                  this.loadMoreSearchResults();
-                } else {
-                  this.loadMoreDisplayedLocations();
+                if (nextBatch.length > 0) {
+                  this.displayedLocations.push(...nextBatch);
+                  this.currentPage++;
                 }
-              }
-            },
-
-            showDetail(location) {
-              window.location.href = `/detail.html?id=${location.id}`;
-            },
-
-            toggleMenu() {
-              this.showMenu = !this.showMenu;
-              if (this.showMenu) {
-                document.body.style.overflow = 'hidden';
-              } else {
-                document.body.style.overflow = '';
-              }
-            },
-
-            closeMenu() {
-              this.showMenu = false;
-              document.body.style.overflow = '';
-            },
-
-            isCurrentPage(path) {
-              return window.location.pathname === path || 
-                      (path === '/' && window.location.pathname === '/index.html');
-            },
-
-            handleKeydown(event) {
-              if (event.key === 'Escape') {
-                if (this.showMenu) {
-                  this.closeMenu();
-                } else if (this.showClusterPanel) {
-                  this.closeClusterPanel();
+                
+                if (end >= this.filteredLocations.length) {
+                  this.hasMore = false;
                 }
-              }
-            },
+                
+                this.isLoadingMore = false;
+              },
 
-            handleClusterImageError(event) {
-              const parent = event.target.parentElement;
-              event.target.style.display = 'none';
-              
-              const placeholder = document.createElement('div');
-              placeholder.className = 'cluster-image-placeholder';
-              placeholder.textContent = '📷';
-              parent.appendChild(placeholder);
-            },
+              // 検索クリア
+              clearSearch() {
+                this.searchQuery = '';
+                this.performSearch();
+              },
 
-            handleUserIconError(event) {
-              event.target.style.display = 'none';
-              const parent = event.target.parentElement;
-              const emoji = document.createElement('span');
-              emoji.textContent = '👤';
-              parent.insertBefore(emoji, parent.firstChild);
-            },
-            
-            handleImageLoad(event) {
-              if (event.target.loading === 'lazy') {
-                event.target.classList.add('loaded');
-              }
-            },
-            handleIconError(event) {
-              console.warn('Icon load error:', event.target.src);
-              event.target.style.display = 'none';
-            },
+              handleScroll() {
+                if (this.currentView !== 'list' || this.isLoadingMore || !this.hasMore) return;
 
-            goToUser(userId) {
-              window.location.href = `/user.html?id=${userId}`;
-            },
-            getResponsiveSrcset(url, format = 'webp') {
-              if (!url || !url.includes('firebasestorage.googleapis.com')) {
-                return url;
-              }
-              
-              const baseUrl = url.split('?')[0];
-              const params = format === 'webp' ? 'fm=webp&' : '';
-              
-              // 小・中・大のサイズを生成
-              return `
-                ${baseUrl}?${params}w=320 320w,
-                ${baseUrl}?${params}w=640 640w,
-                ${baseUrl}?${params}w=960 960w
-              `.trim();
-            },
-            getWebPUrl(url, size = 'medium') {
-                  if (!url) return null;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const clientHeight = document.documentElement.clientHeight;
+
+                if (scrollTop + clientHeight >= scrollHeight - 300) {
+                  this.isLoadingMore = true;
                   
-                  if (url.includes('firebasestorage.googleapis.com')) {
-                    const sizeParams = {
-                      small: 'w=320&h=240',
-                      medium: 'w=640&h=480',
-                      large: 'w=960&h=720'
-                    };
-                    
-                    const sizeParam = sizeParams[size] || sizeParams.medium;
-                    const separator = url.includes('?') ? '&' : '?';
-                    
-                    return `${url}${separator}fm=webp&${sizeParam}&q=85`;
+                  // 検索中かどうかで処理を分岐
+                  if (this.searchQuery.trim()) {
+                    this.loadMoreSearchResults();
+                  } else {
+                    this.loadMoreDisplayedLocations();
                   }
-                  
-                  return url;
-                },
+                }
+              },
+
+              showDetail(location) {
+                window.location.href = `/detail.html?id=${location.id}`;
+              },
+
+              toggleMenu() {
+                this.showMenu = !this.showMenu;
+                if (this.showMenu) {
+                  document.body.style.overflow = 'hidden';
+                } else {
+                  document.body.style.overflow = '';
+                }
+              },
+
+              closeMenu() {
+                this.showMenu = false;
+                document.body.style.overflow = '';
+              },
+
+              isCurrentPage(path) {
+                return window.location.pathname === path || 
+                       (path === '/' && window.location.pathname === '/index.html');
+              },
+
+              handleKeydown(event) {
+                if (event.key === 'Escape') {
+                  if (this.showMenu) {
+                    this.closeMenu();
+                  } else if (this.showClusterPanel) {
+                    this.closeClusterPanel();
+                  }
+                }
+              },
+
+              handleClusterImageError(event) {
+                const parent = event.target.parentElement;
+                event.target.style.display = 'none';
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = 'cluster-image-placeholder';
+                placeholder.textContent = '📷';
+                parent.appendChild(placeholder);
+              },
+
+              handleUserIconError(event) {
+                event.target.style.display = 'none';
+                const parent = event.target.parentElement;
+                const emoji = document.createElement('span');
+                emoji.textContent = '👤';
+                parent.insertBefore(emoji, parent.firstChild);
+              },
+              
+              goToUser(userId) {
+                window.location.href = `/user.html?id=${userId}`;
+              },
+              getWebPUrl(url) {
+                if (!url) return null;
+                // Firebase StorageのURLの場合、WebP変換パラメータを追加
+                if (url.includes('firebasestorage.googleapis.com')) {
+                  return url.includes('?') ? `${url}&fm=webp` : `${url}?fm=webp`;
+                }
+                return url;
+              },
             }
           });
 
@@ -2314,49 +2167,6 @@
           `;
         }
       });
-
-      // Service Worker登録（改善版）
-      if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-              console.log('SW registered:', registration);
-              
-              // 更新チェック
-              registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    // 新しいバージョンが利用可能
-                    console.log('新しいバージョンが利用可能です');
-                    // オプション: ユーザーに更新を通知
-                    if (confirm('新しいバージョンが利用可能です。ページを再読み込みしますか？')) {
-                      newWorker.postMessage({ type: 'SKIP_WAITING' });
-                      window.location.reload();
-                    }
-                  }
-                });
-              });
-              
-              // 定期的な更新チェック（24時間ごと）
-              setInterval(() => {
-                registration.update();
-              }, 24 * 60 * 60 * 1000);
-            })
-            .catch((error) => {
-              console.log('SW registration failed:', error);
-            });
-          
-          // SWの制御が変わったらリロード
-          let refreshing = false;
-          navigator.serviceWorker.addEventListener('controllerchange', () => {
-            if (!refreshing) {
-              refreshing = true;
-              window.location.reload();
-            }
-          });
-        });
-      }
     </script>
   </body>
 </html>
