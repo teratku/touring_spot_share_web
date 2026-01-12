@@ -1,0 +1,38 @@
+# ツーリングスポットシェア robots.txt
+
+# 全てのクローラーに対する基本ルール
+User-agent: *
+
+# Firebase内部パスはクロール禁止
+Disallow: /__/
+
+# 一般的なクロール対象外ファイル
+Disallow: /firebase.json
+Disallow: /.firebaserc
+
+# 公開ページは全てクロール可能
+Allow: /
+Allow: /index.html
+Allow: /detail.html
+Allow: /user.html
+Allow: /privacypolicy/
+Allow: /termsofservice/
+
+# サイトマップの場所（作成する場合）
+# Sitemap: https://your-domain.com/sitemap.xml
+
+# 主要な検索エンジンの特別設定
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Yahoo! Japan
+User-agent: Yahoo! Slurp
+Allow: /
+
+# クロール頻度の調整（オプション）
+# Crawl-delay: 1
