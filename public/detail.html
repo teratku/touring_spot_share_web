@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer-when-downgrade">
     <title>ロケーション詳細 | ツーリングスポットシェア</title>
 
     <!-- リソースヒント -->
@@ -16,6 +17,7 @@
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <!-- Google Maps API -->
@@ -316,6 +318,7 @@
         overflow: hidden;
         cursor: pointer;
         transition: transform 0.2s ease;
+        background: #E0E0E0;
       }
 
       .gallery-image-item:hover {
@@ -378,6 +381,19 @@
         height: 48px;
         border-radius: 50%;
         object-fit: cover;
+        border: 2px solid #00A8C6;
+        background: #E0E0E0;
+      }
+
+      .icon-placeholder {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #E0E0E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
         border: 2px solid #00A8C6;
       }
 
@@ -447,6 +463,24 @@
 
       .modal-close:hover {
         background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ========== 画像エラー表示 ========== */
+      .image-error-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #E0E0E0;
+        color: #999;
+        font-size: 48px;
+      }
+
+      .image-error-placeholder small {
+        font-size: 14px;
+        margin-top: 8px;
       }
 
       /* ========== レスポンシブ ========== */
@@ -520,7 +554,8 @@
           color: #00D4FF;
           border-left-color: #00D4FF;
         }
-          .page-footer {
+
+        .page-footer {
           background: #1C1C1E;
           border-top-color: #48484A;
         }
@@ -528,18 +563,15 @@
         .page-footer p {
           color: #8E8E93;
         }
-      }
-      .gallery-image-item img,
-      .user-icon,
-      .modal-image {
-        aspect-ratio: auto;
+
+        .gallery-image-item,
+        .user-icon,
+        .icon-placeholder {
+          background: #3A3A3C;
+        }
       }
 
-      img {
-        background-color: #E0E0E0;
-      }
-
-      /* プログレッシブ画像読み込み */
+      /* ========== 画像読み込み ========== */
       img[loading="lazy"] {
         background: linear-gradient(90deg, #E0E0E0 25%, #F0F0F0 50%, #E0E0E0 75%);
         background-size: 200% 100%;
@@ -631,7 +663,9 @@
                 :src="userInfo.userIcon" 
                 :alt="userInfo.userName"
                 class="user-icon"
+                crossorigin="anonymous"
                 @load="handleImageLoad"
+                @error="handleIconError"
               >
               <div class="user-details">
                 <div class="user-name">{{ userInfo.userName }}</div>
@@ -678,21 +712,15 @@
                 class="gallery-image-item"
                 @click="openImageModal(url)"
               >
-                <picture>
-                  <source 
-                    :srcset="getResponsiveSrcset(url)"
-                    sizes="(max-width: 768px) 150px, 250px"
-                    type="image/webp"
-                  >
-                  <img 
-                    :src="url" 
-                    :alt="'画像 ' + (index + 1)" 
-                    :loading="index < 6 ? 'eager' : 'lazy'"
-                    decoding="async"
-                    @load="handleImageLoad"
-                    @error="handleImageError"
-                  >
-                </picture>
+                <img 
+                  :src="url" 
+                  :alt="'画像 ' + (index + 1)" 
+                  :loading="index < 6 ? 'eager' : 'lazy'"
+                  crossorigin="anonymous"
+                  decoding="async"
+                  @load="handleImageLoad"
+                  @error="handleImageError"
+                >
               </div>
             </div>
           </div>
@@ -711,7 +739,12 @@
       >
         <div class="modal-content" @click.stop>
           <button class="modal-close" @click="closeImageModal">✕</button>
-          <img :src="selectedImage" class="modal-image" alt="拡大画像">
+          <img 
+            :src="selectedImage" 
+            class="modal-image" 
+            alt="拡大画像"
+            crossorigin="anonymous"
+          >
         </div>
       </div>
     </div>
@@ -722,6 +755,7 @@
       let map;
       let marker;
       let db;
+      let storage;
 
       function waitForFirebase() {
         return new Promise((resolve, reject) => {
@@ -768,21 +802,21 @@
               };
             },
             computed: {
-                displayImageURLs() {
+              displayImageURLs() {
                 if (this.location?.locationImageURLs && this.location.locationImageURLs.length > 0) {
-                    return this.location.locationImageURLs.map(url => this.optimizeDetailImageUrl(url));
+                  return this.location.locationImageURLs;
                 }
                 if (this.location?.imageDownloadURL) {
-                    return [this.optimizeDetailImageUrl(this.location.imageDownloadURL)];
+                  return [this.location.imageDownloadURL];
                 }
                 return [];
-                },
-                hasImages() {
+              },
+              hasImages() {
                 return this.displayImageURLs.length > 0;
-                },
-                imageCount() {
+              },
+              imageCount() {
                 return this.displayImageURLs.length;
-                }
+              }
             },
             async mounted() {
               try {
@@ -790,6 +824,10 @@
                 
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
+                storage = firebase.storage();
+                
+                console.log('Firebase Storage initialized:', storage);
+                console.log('Storage bucket:', storage.app.options.storageBucket);
                 
                 this.locationId = getQueryParam('id');
                 
@@ -888,6 +926,17 @@
                     ...doc.data()
                   };
 
+                  // 画像URLを安全な形式に変換
+                  if (this.location.locationImageURLs && this.location.locationImageURLs.length > 0) {
+                    this.location.locationImageURLs = await Promise.all(
+                      this.location.locationImageURLs.map(url => this.getSafeImageUrl(url))
+                    );
+                  }
+                  
+                  if (this.location.imageDownloadURL) {
+                    this.location.imageDownloadURL = await this.getSafeImageUrl(this.location.imageDownloadURL);
+                  }
+
                   if (this.location.userID) {
                     await this.loadUserInfo(this.location.userID);
                   }
@@ -904,11 +953,46 @@
                 }
               },
 
+              async getSafeImageUrl(url) {
+                if (!url) return url;
+                
+                // Firebase StorageのURLでない場合はそのまま返す
+                if (!url.includes('firebasestorage.googleapis.com')) {
+                  return url;
+                }
+                
+                try {
+                  // URLからストレージパスを抽出
+                  const urlObj = new URL(url);
+                  const pathMatch = urlObj.pathname.match(/\/o\/(.+)/);
+                  
+                  if (pathMatch) {
+                    const path = decodeURIComponent(pathMatch[1]);
+                    
+                    // Firebase Storageから正しいダウンロードURLを取得
+                    const ref = storage.ref(path);
+                    const downloadUrl = await ref.getDownloadURL();
+                    
+                    console.log('Safe URL generated:', downloadUrl);
+                    return downloadUrl;
+                  }
+                } catch (error) {
+                  console.warn('URL変換エラー、元のURLを使用:', error);
+                }
+                
+                return url;
+              },
+
               async loadUserInfo(userID) {
                 try {
                   const userDoc = await db.collection('userInfo').doc(userID).get();
                   if (userDoc.exists) {
                     this.userInfo = userDoc.data();
+                    
+                    // ユーザーアイコンも安全なURLに変換
+                    if (this.userInfo.userIcon) {
+                      this.userInfo.userIcon = await this.getSafeImageUrl(this.userInfo.userIcon);
+                    }
                   }
                 } catch (error) {
                   console.error('ユーザー情報取得エラー:', error);
@@ -928,6 +1012,12 @@
 
                 const lat = Number(this.location.lat);
                 const lng = Number(this.location.lng);
+                
+                if (isNaN(lat) || isNaN(lng)) {
+                  console.error('Invalid coordinates:', { lat, lng });
+                  return;
+                }
+                
                 const position = { lat, lng };
 
                 map.setCenter(position);
@@ -940,8 +1030,19 @@
                 marker = new google.maps.Marker({
                   position: position,
                   map: map,
-                  title: this.location.locality || this.location.administrative || 'Location'
+                  title: this.location.locality || this.location.administrative || 'Location',
+                  icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 8,
+                    fillColor: '#00A8C6',
+                    fillOpacity: 1,
+                    strokeColor: '#ffffff',
+                    strokeWeight: 2
+                  },
+                  animation: google.maps.Animation.DROP
                 });
+                
+                console.log('Marker created at:', position);
               },
 
               openImageModal(url) {
@@ -957,10 +1058,37 @@
               },
 
               handleImageError(event) {
-                event.target.src = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect fill='%23E0E0E0' width='400' height='300'/><text x='50%' y='50%' text-anchor='middle' fill='%23999' font-size='20'>画像なし</text></svg>";
+                console.error('画像読み込みエラー:', {
+                  src: event.target.src,
+                  error: event.type
+                });
+                
+                event.target.style.display = 'none';
+                
+                const parent = event.target.closest('.gallery-image-item');
+                if (parent && !parent.querySelector('.image-error-placeholder')) {
+                  const placeholder = document.createElement('div');
+                  placeholder.className = 'image-error-placeholder';
+                  placeholder.innerHTML = '📷<br><small>画像を読み込めません</small>';
+                  parent.appendChild(placeholder);
+                }
+              },
+
+              handleIconError(event) {
+                console.error('アイコン読み込みエラー:', event.target.src);
+                event.target.style.display = 'none';
+                
+                const parent = event.target.closest('.user-info');
+                if (parent && !parent.querySelector('.icon-placeholder')) {
+                  const placeholder = document.createElement('div');
+                  placeholder.className = 'icon-placeholder';
+                  placeholder.textContent = '👤';
+                  parent.insertBefore(placeholder, parent.firstChild);
+                }
               },
 
               handleImageLoad(event) {
+                console.log('画像読み込み成功:', event.target.src);
                 if (event.target.loading === 'lazy') {
                   event.target.classList.add('loaded');
                 }
@@ -1019,40 +1147,6 @@
                 const num = Number(value);
                 if (isNaN(num)) return 'N/A';
                 return num.toFixed(6);
-              },
-              
-              // 🆕 詳細ページ用画像URL最適化（より高品質）
-              optimizeDetailImageUrl(url) {
-                if (!url || !url.includes('firebasestorage.googleapis.com')) {
-                  return url;
-                }
-                
-                const separator = url.includes('?') ? '&' : '?';
-                // 詳細ページでは中サイズを使用
-                return `${url}${separator}w=800&h=600&fm=webp&q=90`;
-              },
-              getWebPUrl(url) {
-                if (!url) return null;
-                if (url.includes('firebasestorage.googleapis.com')) {
-                  return url.includes('?') ? `${url}&fm=webp` : `${url}?fm=webp`;
-                }
-                return url;
-              },
-              // 🆕 レスポンシブ画像のsrcset生成（共通関数）
-              getResponsiveSrcset(url, format = 'webp') {
-                if (!url || !url.includes('firebasestorage.googleapis.com')) {
-                  return url;
-                }
-                
-                const baseUrl = url.split('?')[0];
-                const formatParam = format === 'webp' ? 'fm=webp&' : '';
-                
-                return [
-                  `${baseUrl}?${formatParam}w=320&q=80 320w`,
-                  `${baseUrl}?${formatParam}w=640&q=85 640w`,
-                  `${baseUrl}?${formatParam}w=960&q=85 960w`,
-                  `${baseUrl}?${formatParam}w=1280&q=90 1280w`
-                ].join(', ');
               }
             }
           });
