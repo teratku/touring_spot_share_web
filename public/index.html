@@ -837,12 +837,19 @@
 
       /* プログレッシブ画像読み込み */
       img[loading="lazy"] {
-        opacity: 0;
-        transition: opacity 0.3s ease-in;
+        background: linear-gradient(90deg, #E0E0E0 25%, #F0F0F0 50%, #E0E0E0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s ease-in-out infinite;
       }
-
+      
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      
       img[loading="lazy"].loaded {
-        opacity: 1;
+        background: none;
+        animation: none;
       }
 
       /* ========== ダークモード対応 ========== */
@@ -1336,6 +1343,22 @@
             }
             return url;
           },
+          // 🆕 レスポンシブ画像のsrcset生成（共通関数）
+          getResponsiveSrcset(url, format = 'webp') {
+            if (!url || !url.includes('firebasestorage.googleapis.com')) {
+              return url;
+            }
+            
+            const baseUrl = url.split('?')[0];
+            const formatParam = format === 'webp' ? 'fm=webp&' : '';
+            
+            return [
+              `${baseUrl}?${formatParam}w=320&q=80 320w`,
+              `${baseUrl}?${formatParam}w=640&q=85 640w`,
+              `${baseUrl}?${formatParam}w=960&q=85 960w`,
+              `${baseUrl}?${formatParam}w=1280&q=90 1280w`
+            ].join(', ');
+          },
           
           navigateGallery(direction) {
             const totalImages = this.imageURLs.length;
@@ -1719,6 +1742,12 @@
                     id: doc.id,
                     ...doc.data()
                     };
+                    // 画像URLを最適化
+                    if (locationData.locationImageURLs && locationData.locationImageURLs.length > 0) {
+                      locationData.locationImageURLs = locationData.locationImageURLs.map(url => 
+                        this.optimizeImageUrl(url)
+                      );
+                    }
                     this.locations.push(locationData);
                     
                     if (locationData.userID) {
@@ -1756,456 +1785,464 @@
                 this.isLoadingMore = false;
                 }
             },
-
-              switchView(view) {
-                this.currentView = view;
-                if (view === 'map') {
-                  this.$nextTick(async () => {
-                    if (!this.mapInitialized && !this.isInitialLoading) {
-                      try {
-                        await waitForGoogleMaps();
-                        await waitForMarkerClusterer();
-                        await this.initializeMap();
-                        this.mapInitialized = true;
-                      } catch (error) {
-                        console.error('マップ初期化エラー:', error);
-                      }
-                    } else if (mapMain && this.mapInitialized) {
-                      setTimeout(() => {
-                        google.maps.event.trigger(mapMain, 'resize');
-                        if (this.locations.length > 0) {
-                          const bounds = new google.maps.LatLngBounds();
-                          this.locations.forEach(loc => {
-                            if (loc.lat && loc.lng) {
-                              bounds.extend({ lat: Number(loc.lat), lng: Number(loc.lng) });
-                            }
-                          });
-                          mapMain.fitBounds(bounds);
-                        }
-                      }, 100);
-                    }
-                  });
-                }
-              },
-
-              async initializeMap() {
-                const mapElement = document.getElementById('map-main');
-                if (!mapElement) {
-                  console.error('Map element not found');
-                  return;
-                }
-
-                // Request needed libraries
-                const { Map } = await google.maps.importLibrary("maps");
-                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-
-                mapMain = new google.maps.Map(mapElement, {
-                  zoom: 5,
-                  center: { lat: 36.2048, lng: 138.2529 },
-                  mapId: "DEMO_MAP_ID",
-                  mapTypeControl: true,
-                  streetViewControl: true,
-                  fullscreenControl: true,
-                  styles: [
-                    {
-                      featureType: "poi",
-                      elementType: "labels",
-                      stylers: [{ visibility: "off" }]
-                    }
-                  ]
-                });
-
-                await this.createMarkers();
-              },
-
-              async createMarkers() {
-                console.log('createMarkers called');
-                
-                // 既存のクラスタラーを完全に破棄
-                if (clustererInstance) {
+            optimizeImageUrl(url) {
+              if (!url || !url.includes('firebasestorage.googleapis.com')) {
+                return url;
+              }
+              
+              // リスト表示用は小さいサイズで十分
+              const separator = url.includes('?') ? '&' : '?';
+              return `${url}${separator}w=320&h=240&fm=webp&q=80`;
+            },
+            switchView(view) {
+              this.currentView = view;
+              if (view === 'map') {
+                this.$nextTick(async () => {
+                  if (!this.mapInitialized && !this.isInitialLoading) {
                     try {
-                        clustererInstance.clearMarkers();
-                        clustererInstance.setMap(null);
+                      await waitForGoogleMaps();
+                      await waitForMarkerClusterer();
+                      await this.initializeMap();
+                      this.mapInitialized = true;
                     } catch (error) {
-                        console.error('Clusterer cleanup error:', error);
+                      console.error('マップ初期化エラー:', error);
                     }
-                    clustererInstance = null;
-                }
-                
-                // 既存のマーカーを完全に削除
-                if (this.markers && this.markers.length > 0) {
-                    this.markers.forEach(marker => {
-                        if (marker && marker.map) {
-                            marker.map = null;
-                        }
-                    });
-                }
-                this.markers = [];
-
-                // マップがない場合は処理を中断
-                if (!mapMain) {
-                    console.error('Map is not initialized');
-                    return;
-                }
-
-                const bounds = new google.maps.LatLngBounds();
-                const validLocations = [];
-
-                // AdvancedMarkerElement用のライブラリを取得
-                const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
-
-                const self = this;
-
-                // 検索中かどうかで使用するロケーションを分岐
-                const locationsToShow = this.searchQuery.trim() ? this.filteredLocations : this.locations;
-
-                // マーカーを作成
-                locationsToShow.forEach(location => {
-                    if (!location.lat || !location.lng) return;
-
-                    const lat = Number(location.lat);
-                    const lng = Number(location.lng);
-
-                    if (isNaN(lat) || isNaN(lng)) return;
-
-                    const position = { lat, lng };
-                    bounds.extend(position);
-                    validLocations.push(location);
-
-                    // PinElementを作成
-                    const pinElement = new PinElement({
-                        background: '#00A8C6',
-                        borderColor: '#FFFFFF',
-                        glyphColor: '#FFFFFF',
-                        scale: 1.2,
-                    });
-
-                    // AdvancedMarkerElementを作成
-                    const marker = new AdvancedMarkerElement({
-                        position: position,
-                        content: pinElement.element,
-                        title: location.locality || location.administrative || '不明な場所',
-                    });
-
-                    marker.locationData = location;
-
-                    // 個別マーカーのクリックイベント
-                    marker.addListener('click', () => {
-                        self.showClusterLocations([marker.locationData]);
-                    });
-
-                    this.markers.push(marker);
-                });
-
-                console.log(`Created ${this.markers.length} markers`);
-
-                // クラスタラーを初期化
-                try {
-                    clustererInstance = new markerClusterer.MarkerClusterer({
-                        markers: this.markers,
-                        map: mapMain,
-                        algorithmOptions: {
-                            maxZoom: 16,
-                        },
-                        onClusterClick: (event, cluster, map) => {
-                            const clusterMarkers = cluster.markers;
-                            
-                            if (clusterMarkers.length <= 10) {
-                                const locations = clusterMarkers.map(m => m.locationData).filter(Boolean);
-                                self.showClusterLocations(locations);
-                            } else {
-                                map.fitBounds(cluster.bounds);
-                            }
-                        }
-                    });
-
-                    console.log('Clusterer initialized successfully');
-
-                    // マップの境界を調整
-                    if (validLocations.length > 0) {
-                        mapMain.fitBounds(bounds);
-                        
-                        google.maps.event.addListenerOnce(mapMain, 'bounds_changed', () => {
-                            const zoom = mapMain.getZoom();
-                            if (zoom > 16) {
-                                mapMain.setZoom(16);
-                            }
+                  } else if (mapMain && this.mapInitialized) {
+                    setTimeout(() => {
+                      google.maps.event.trigger(mapMain, 'resize');
+                      if (this.locations.length > 0) {
+                        const bounds = new google.maps.LatLngBounds();
+                        this.locations.forEach(loc => {
+                          if (loc.lat && loc.lng) {
+                            bounds.extend({ lat: Number(loc.lat), lng: Number(loc.lng) });
+                          }
                         });
-                    }
-                } catch (error) {
-                    console.error('Clusterer initialization error:', error);
-                }
-              },
+                        mapMain.fitBounds(bounds);
+                      }
+                    }, 100);
+                  }
+                });
+              }
+            },
 
-              async showClusterLocations(locations) {
-                this.clusterLocations = locations;
-                this.showClusterPanel = true;
+            async initializeMap() {
+              const mapElement = document.getElementById('map-main');
+              if (!mapElement) {
+                console.error('Map element not found');
+                return;
+              }
 
-                // 全てのユーザー情報を確実に取得してから表示
-                const userLoadPromises = locations
-                  .filter(loc => loc.userID)
-                  .map(async (loc) => {
-                    if (!this.userCache[loc.userID]) {
-                      const userInfo = await this.getUserInfo(loc.userID);
-                      return userInfo;
-                    }
+              // Request needed libraries
+              const { Map } = await google.maps.importLibrary("maps");
+              const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+              mapMain = new google.maps.Map(mapElement, {
+                zoom: 5,
+                center: { lat: 36.2048, lng: 138.2529 },
+                mapId: "DEMO_MAP_ID",
+                mapTypeControl: true,
+                streetViewControl: true,
+                fullscreenControl: true,
+                styles: [
+                  {
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [{ visibility: "off" }]
+                  }
+                ]
+              });
+
+              await this.createMarkers();
+            },
+
+            async createMarkers() {
+              console.log('createMarkers called');
+              
+              // 既存のクラスタラーを完全に破棄
+              if (clustererInstance) {
+                  try {
+                      clustererInstance.clearMarkers();
+                      clustererInstance.setMap(null);
+                  } catch (error) {
+                      console.error('Clusterer cleanup error:', error);
+                  }
+                  clustererInstance = null;
+              }
+              
+              // 既存のマーカーを完全に削除
+              if (this.markers && this.markers.length > 0) {
+                  this.markers.forEach(marker => {
+                      if (marker && marker.map) {
+                          marker.map = null;
+                      }
+                  });
+              }
+              this.markers = [];
+
+              // マップがない場合は処理を中断
+              if (!mapMain) {
+                  console.error('Map is not initialized');
+                  return;
+              }
+
+              const bounds = new google.maps.LatLngBounds();
+              const validLocations = [];
+
+              // AdvancedMarkerElement用のライブラリを取得
+              const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
+
+              const self = this;
+
+              // 検索中かどうかで使用するロケーションを分岐
+              const locationsToShow = this.searchQuery.trim() ? this.filteredLocations : this.locations;
+
+              // マーカーを作成
+              locationsToShow.forEach(location => {
+                  if (!location.lat || !location.lng) return;
+
+                  const lat = Number(location.lat);
+                  const lng = Number(location.lng);
+
+                  if (isNaN(lat) || isNaN(lng)) return;
+
+                  const position = { lat, lng };
+                  bounds.extend(position);
+                  validLocations.push(location);
+
+                  // PinElementを作成
+                  const pinElement = new PinElement({
+                      background: '#00A8C6',
+                      borderColor: '#FFFFFF',
+                      glyphColor: '#FFFFFF',
+                      scale: 1.2,
                   });
 
-                try {
-                  await Promise.all(userLoadPromises);
-                  // データ取得完了後に強制再描画
-                  this.$forceUpdate();
-                } catch (error) {
-                  console.error('ユーザー情報一括取得エラー:', error);
-                }
-              },
+                  // AdvancedMarkerElementを作成
+                  const marker = new AdvancedMarkerElement({
+                      position: position,
+                      content: pinElement.element,
+                      title: location.locality || location.administrative || '不明な場所',
+                  });
 
-              closeClusterPanel() {
-                this.showClusterPanel = false;
-                this.clusterLocations = [];
-              },
+                  marker.locationData = location;
 
-              async getUserInfo(userID) {
-                if (!userID) return null;
-                
-                if (this.userCache[userID]) {
-                  return this.userCache[userID];
-                }
+                  // 個別マーカーのクリックイベント
+                  marker.addListener('click', () => {
+                      self.showClusterLocations([marker.locationData]);
+                  });
 
-                try {
-                  const userDoc = await db.collection('userInfo').doc(userID).get();
-                  if (userDoc.exists) {
-                    const userData = userDoc.data();
-                    // Vue 3ではこのように直接代入でリアクティブになる
-                    this.userCache[userID] = userData;
-                    return userData;
-                  } else {
-                    const defaultUser = { userName: userID, userIcon: null };
-                    this.userCache[userID] = defaultUser;
-                    return defaultUser;
+                  this.markers.push(marker);
+              });
+
+              console.log(`Created ${this.markers.length} markers`);
+
+              // クラスタラーを初期化
+              try {
+                  clustererInstance = new markerClusterer.MarkerClusterer({
+                      markers: this.markers,
+                      map: mapMain,
+                      algorithmOptions: {
+                          maxZoom: 16,
+                      },
+                      onClusterClick: (event, cluster, map) => {
+                          const clusterMarkers = cluster.markers;
+                          
+                          if (clusterMarkers.length <= 10) {
+                              const locations = clusterMarkers.map(m => m.locationData).filter(Boolean);
+                              self.showClusterLocations(locations);
+                          } else {
+                              map.fitBounds(cluster.bounds);
+                          }
+                      }
+                  });
+
+                  console.log('Clusterer initialized successfully');
+
+                  // マップの境界を調整
+                  if (validLocations.length > 0) {
+                      mapMain.fitBounds(bounds);
+                      
+                      google.maps.event.addListenerOnce(mapMain, 'bounds_changed', () => {
+                          const zoom = mapMain.getZoom();
+                          if (zoom > 16) {
+                              mapMain.setZoom(16);
+                          }
+                      });
                   }
-                } catch (error) {
-                  console.error('ユーザー情報取得エラー:', error);
+              } catch (error) {
+                  console.error('Clusterer initialization error:', error);
+              }
+            },
+
+            async showClusterLocations(locations) {
+              this.clusterLocations = locations;
+              this.showClusterPanel = true;
+
+              // 全てのユーザー情報を確実に取得してから表示
+              const userLoadPromises = locations
+                .filter(loc => loc.userID)
+                .map(async (loc) => {
+                  if (!this.userCache[loc.userID]) {
+                    const userInfo = await this.getUserInfo(loc.userID);
+                    return userInfo;
+                  }
+                });
+
+              try {
+                await Promise.all(userLoadPromises);
+                // データ取得完了後に強制再描画
+                this.$forceUpdate();
+              } catch (error) {
+                console.error('ユーザー情報一括取得エラー:', error);
+              }
+            },
+
+            closeClusterPanel() {
+              this.showClusterPanel = false;
+              this.clusterLocations = [];
+            },
+
+            async getUserInfo(userID) {
+              if (!userID) return null;
+              
+              if (this.userCache[userID]) {
+                return this.userCache[userID];
+              }
+
+              try {
+                const userDoc = await db.collection('userInfo').doc(userID).get();
+                if (userDoc.exists) {
+                  const userData = userDoc.data();
+                  // Vue 3ではこのように直接代入でリアクティブになる
+                  this.userCache[userID] = userData;
+                  return userData;
+                } else {
                   const defaultUser = { userName: userID, userIcon: null };
                   this.userCache[userID] = defaultUser;
                   return defaultUser;
                 }
-              },
+              } catch (error) {
+                console.error('ユーザー情報取得エラー:', error);
+                const defaultUser = { userName: userID, userIcon: null };
+                this.userCache[userID] = defaultUser;
+                return defaultUser;
+              }
+            },
 
-              loadMoreDisplayedLocations() {
-                const start = this.currentPage * this.itemsPerPage;
-                const end = start + this.itemsPerPage;
-                const nextBatch = this.locations.slice(start, end);
-                
-                if (nextBatch.length > 0) {
-                  this.displayedLocations.push(...nextBatch);
-                  this.currentPage++;
-                }
-                
-                if (end >= this.locations.length) {
-                  this.hasMore = false;
-                }
-                
-                this.isLoadingMore = false;
-              },
+            loadMoreDisplayedLocations() {
+              const start = this.currentPage * this.itemsPerPage;
+              const end = start + this.itemsPerPage;
+              const nextBatch = this.locations.slice(start, end);
+              
+              if (nextBatch.length > 0) {
+                this.displayedLocations.push(...nextBatch);
+                this.currentPage++;
+              }
+              
+              if (end >= this.locations.length) {
+                this.hasMore = false;
+              }
+              
+              this.isLoadingMore = false;
+            },
 
-              // 検索入力ハンドラー（デバウンス付き）
-              handleSearchInput() {
-                clearTimeout(this.searchDebounceTimer);
-                
-                this.searchDebounceTimer = setTimeout(() => {
-                  this.performSearch();
-                }, 300); // 300ms後に検索実行
-              },
+            // 検索入力ハンドラー（デバウンス付き）
+            handleSearchInput() {
+              clearTimeout(this.searchDebounceTimer);
+              
+              this.searchDebounceTimer = setTimeout(() => {
+                this.performSearch();
+              }, 300); // 300ms後に検索実行
+            },
 
-              // 検索実行
-              performSearch() {
-                const query = this.searchQuery.trim().toLowerCase();
-                
-                // 検索クエリが空の場合は全データを表示
-                if (!query) {
-                  this.filteredLocations = [];
-                  this.displayedLocations = [];
-                  this.currentPage = 0;
-                  this.hasMore = true;
-                  this.loadMoreDisplayedLocations();
-                  
-                  // マップを更新
-                  if (this.mapInitialized) {
-                    this.createMarkers();
-                  }
-                  return;
-                }
-
-                // キャッシュデータから検索
-                this.filteredLocations = this.locations.filter(location => {
-                  // administrative(String)で検索
-                  if (location.administrative && 
-                      location.administrative.toLowerCase().includes(query)) {
-                    return true;
-                  }
-
-                  // comment(String)で検索
-                  if (location.comment && 
-                      location.comment.toLowerCase().includes(query)) {
-                    return true;
-                  }
-
-                  // locality(String)で検索
-                  if (location.locality && 
-                      location.locality.toLowerCase().includes(query)) {
-                    return true;
-                  }
-
-                  // location_name(String)で検索
-                  if (location.location_name && 
-                      location.location_name.toLowerCase().includes(query)) {
-                    return true;
-                  }
-
-                  // tag(配列)で検索
-                  if (location.tag && Array.isArray(location.tag)) {
-                    return location.tag.some(tag => 
-                      tag.toLowerCase().includes(query)
-                    );
-                  }
-
-                  return false;
-                });
-
-                // 検索結果を表示用に設定
+            // 検索実行
+            performSearch() {
+              const query = this.searchQuery.trim().toLowerCase();
+              
+              // 検索クエリが空の場合は全データを表示
+              if (!query) {
+                this.filteredLocations = [];
                 this.displayedLocations = [];
                 this.currentPage = 0;
                 this.hasMore = true;
-                this.loadMoreSearchResults();
-
+                this.loadMoreDisplayedLocations();
+                
                 // マップを更新
                 if (this.mapInitialized) {
                   this.createMarkers();
                 }
+                return;
+              }
 
-                console.log(`検索実行: "${query}" - ${this.filteredLocations.length}件`);
-              },
-
-              // 検索結果の追加読み込み
-              loadMoreSearchResults() {
-                const start = this.currentPage * this.itemsPerPage;
-                const end = start + this.itemsPerPage;
-                const nextBatch = this.filteredLocations.slice(start, end);
-                
-                if (nextBatch.length > 0) {
-                  this.displayedLocations.push(...nextBatch);
-                  this.currentPage++;
+              // キャッシュデータから検索
+              this.filteredLocations = this.locations.filter(location => {
+                // administrative(String)で検索
+                if (location.administrative && 
+                    location.administrative.toLowerCase().includes(query)) {
+                  return true;
                 }
-                
-                if (end >= this.filteredLocations.length) {
-                  this.hasMore = false;
+
+                // comment(String)で検索
+                if (location.comment && 
+                    location.comment.toLowerCase().includes(query)) {
+                  return true;
                 }
-                
-                this.isLoadingMore = false;
-              },
 
-              // 検索クリア
-              clearSearch() {
-                this.searchQuery = '';
-                this.performSearch();
-              },
-
-              handleScroll() {
-                if (this.currentView !== 'list' || this.isLoadingMore || !this.hasMore) return;
-
-                const scrollHeight = document.documentElement.scrollHeight;
-                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-                const clientHeight = document.documentElement.clientHeight;
-
-                if (scrollTop + clientHeight >= scrollHeight - 300) {
-                  this.isLoadingMore = true;
-                  
-                  // 検索中かどうかで処理を分岐
-                  if (this.searchQuery.trim()) {
-                    this.loadMoreSearchResults();
-                  } else {
-                    this.loadMoreDisplayedLocations();
-                  }
+                // locality(String)で検索
+                if (location.locality && 
+                    location.locality.toLowerCase().includes(query)) {
+                  return true;
                 }
-              },
 
-              showDetail(location) {
-                window.location.href = `/detail.html?id=${location.id}`;
-              },
-
-              toggleMenu() {
-                this.showMenu = !this.showMenu;
-                if (this.showMenu) {
-                  document.body.style.overflow = 'hidden';
-                } else {
-                  document.body.style.overflow = '';
+                // location_name(String)で検索
+                if (location.location_name && 
+                    location.location_name.toLowerCase().includes(query)) {
+                  return true;
                 }
-              },
 
-              closeMenu() {
-                this.showMenu = false;
-                document.body.style.overflow = '';
-              },
-
-              isCurrentPage(path) {
-                return window.location.pathname === path || 
-                       (path === '/' && window.location.pathname === '/index.html');
-              },
-
-              handleKeydown(event) {
-                if (event.key === 'Escape') {
-                  if (this.showMenu) {
-                    this.closeMenu();
-                  } else if (this.showClusterPanel) {
-                    this.closeClusterPanel();
-                  }
+                // tag(配列)で検索
+                if (location.tag && Array.isArray(location.tag)) {
+                  return location.tag.some(tag => 
+                    tag.toLowerCase().includes(query)
+                  );
                 }
-              },
 
-              handleClusterImageError(event) {
-                const parent = event.target.parentElement;
-                event.target.style.display = 'none';
-                
-                const placeholder = document.createElement('div');
-                placeholder.className = 'cluster-image-placeholder';
-                placeholder.textContent = '📷';
-                parent.appendChild(placeholder);
-              },
+                return false;
+              });
 
-              handleUserIconError(event) {
-                event.target.style.display = 'none';
-                const parent = event.target.parentElement;
-                const emoji = document.createElement('span');
-                emoji.textContent = '👤';
-                parent.insertBefore(emoji, parent.firstChild);
-              },
+              // 検索結果を表示用に設定
+              this.displayedLocations = [];
+              this.currentPage = 0;
+              this.hasMore = true;
+              this.loadMoreSearchResults();
+
+              // マップを更新
+              if (this.mapInitialized) {
+                this.createMarkers();
+              }
+
+              console.log(`検索実行: "${query}" - ${this.filteredLocations.length}件`);
+            },
+
+            // 検索結果の追加読み込み
+            loadMoreSearchResults() {
+              const start = this.currentPage * this.itemsPerPage;
+              const end = start + this.itemsPerPage;
+              const nextBatch = this.filteredLocations.slice(start, end);
               
-              handleImageLoad(event) {
-                if (event.target.loading === 'lazy') {
-                  event.target.classList.add('loaded');
-                }
-              },
+              if (nextBatch.length > 0) {
+                this.displayedLocations.push(...nextBatch);
+                this.currentPage++;
+              }
+              
+              if (end >= this.filteredLocations.length) {
+                this.hasMore = false;
+              }
+              
+              this.isLoadingMore = false;
+            },
 
-              goToUser(userId) {
-                window.location.href = `/user.html?id=${userId}`;
-              },
-              getResponsiveSrcset(url, format = 'webp') {
-                if (!url || !url.includes('firebasestorage.googleapis.com')) {
-                  return url;
+            // 検索クリア
+            clearSearch() {
+              this.searchQuery = '';
+              this.performSearch();
+            },
+
+            handleScroll() {
+              if (this.currentView !== 'list' || this.isLoadingMore || !this.hasMore) return;
+
+              const scrollHeight = document.documentElement.scrollHeight;
+              const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+              const clientHeight = document.documentElement.clientHeight;
+
+              if (scrollTop + clientHeight >= scrollHeight - 300) {
+                this.isLoadingMore = true;
+                
+                // 検索中かどうかで処理を分岐
+                if (this.searchQuery.trim()) {
+                  this.loadMoreSearchResults();
+                } else {
+                  this.loadMoreDisplayedLocations();
                 }
-                
-                const baseUrl = url.split('?')[0];
-                const params = format === 'webp' ? 'fm=webp&' : '';
-                
-                // 小・中・大のサイズを生成
-                return `
-                  ${baseUrl}?${params}w=320 320w,
-                  ${baseUrl}?${params}w=640 640w,
-                  ${baseUrl}?${params}w=960 960w
-                `.trim();
-              },
-                getWebPUrl(url, size = 'medium') {
+              }
+            },
+
+            showDetail(location) {
+              window.location.href = `/detail.html?id=${location.id}`;
+            },
+
+            toggleMenu() {
+              this.showMenu = !this.showMenu;
+              if (this.showMenu) {
+                document.body.style.overflow = 'hidden';
+              } else {
+                document.body.style.overflow = '';
+              }
+            },
+
+            closeMenu() {
+              this.showMenu = false;
+              document.body.style.overflow = '';
+            },
+
+            isCurrentPage(path) {
+              return window.location.pathname === path || 
+                      (path === '/' && window.location.pathname === '/index.html');
+            },
+
+            handleKeydown(event) {
+              if (event.key === 'Escape') {
+                if (this.showMenu) {
+                  this.closeMenu();
+                } else if (this.showClusterPanel) {
+                  this.closeClusterPanel();
+                }
+              }
+            },
+
+            handleClusterImageError(event) {
+              const parent = event.target.parentElement;
+              event.target.style.display = 'none';
+              
+              const placeholder = document.createElement('div');
+              placeholder.className = 'cluster-image-placeholder';
+              placeholder.textContent = '📷';
+              parent.appendChild(placeholder);
+            },
+
+            handleUserIconError(event) {
+              event.target.style.display = 'none';
+              const parent = event.target.parentElement;
+              const emoji = document.createElement('span');
+              emoji.textContent = '👤';
+              parent.insertBefore(emoji, parent.firstChild);
+            },
+            
+            handleImageLoad(event) {
+              if (event.target.loading === 'lazy') {
+                event.target.classList.add('loaded');
+              }
+            },
+
+            goToUser(userId) {
+              window.location.href = `/user.html?id=${userId}`;
+            },
+            getResponsiveSrcset(url, format = 'webp') {
+              if (!url || !url.includes('firebasestorage.googleapis.com')) {
+                return url;
+              }
+              
+              const baseUrl = url.split('?')[0];
+              const params = format === 'webp' ? 'fm=webp&' : '';
+              
+              // 小・中・大のサイズを生成
+              return `
+                ${baseUrl}?${params}w=320 320w,
+                ${baseUrl}?${params}w=640 640w,
+                ${baseUrl}?${params}w=960 960w
+              `.trim();
+            },
+            getWebPUrl(url, size = 'medium') {
                   if (!url) return null;
                   
                   if (url.includes('firebasestorage.googleapis.com')) {

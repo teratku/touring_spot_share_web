@@ -1243,12 +1243,19 @@
 
       /* 画像のプログレッシブ表示 */
       img[loading="lazy"] {
-        opacity: 0;
-        transition: opacity 0.3s ease-in;
+        background: linear-gradient(90deg, #E0E0E0 25%, #F0F0F0 50%, #E0E0E0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s ease-in-out infinite;
       }
-
+      
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      
       img[loading="lazy"].loaded {
-        opacity: 1;
+        background: none;
+        animation: none;
       }
     </style>
   </head>
@@ -2295,9 +2302,10 @@
                 const cachedData = RouteJsonCacheManager.getCachedRouteJson(routeID);
                 
                 if (cachedData) {
-                  // キャッシュデータから座標を抽出
                   if (cachedData.routePoints && Array.isArray(cachedData.routePoints)) {
+                    // 🆕 座標データを間引いて軽量化（10点に1点のみ使用）
                     return cachedData.routePoints
+                      .filter((point, index) => index % 10 === 0 || index === cachedData.routePoints.length - 1)
                       .filter(point => point.latitude && point.longitude)
                       .map(point => ({
                         lat: Number(point.latitude),
@@ -2318,7 +2326,7 @@
                   const response = await fetch(url, {
                     method: 'GET',
                     mode: 'cors',
-                    cache: 'no-cache',
+                    cache: 'force-cache',
                     headers: {
                       'Accept': 'application/json',
                     }
@@ -2334,7 +2342,9 @@
                   RouteJsonCacheManager.saveRouteJson(routeID, data);
 
                   if (data.routePoints && Array.isArray(data.routePoints)) {
+                    // 🆕 座標データを間引き
                     return data.routePoints
+                      .filter((point, index) => index % 10 === 0 || index === data.routePoints.length - 1)
                       .filter(point => point.latitude && point.longitude)
                       .map(point => ({
                         lat: Number(point.latitude),
@@ -2674,6 +2684,22 @@
                   month: '2-digit',
                   day: '2-digit'
                 });
+              },
+              // 🆕 レスポンシブ画像のsrcset生成（共通関数）
+              getResponsiveSrcset(url, format = 'webp') {
+                if (!url || !url.includes('firebasestorage.googleapis.com')) {
+                  return url;
+                }
+                
+                const baseUrl = url.split('?')[0];
+                const formatParam = format === 'webp' ? 'fm=webp&' : '';
+                
+                return [
+                  `${baseUrl}?${formatParam}w=320&q=80 320w`,
+                  `${baseUrl}?${formatParam}w=640&q=85 640w`,
+                  `${baseUrl}?${formatParam}w=960&q=85 960w`,
+                  `${baseUrl}?${formatParam}w=1280&q=90 1280w`
+                ].join(', ');
               }
             }
           });
@@ -2692,6 +2718,7 @@
           `;
         }
       });
+      
     </script>
   </body>
 </html>

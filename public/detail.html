@@ -541,12 +541,19 @@
 
       /* プログレッシブ画像読み込み */
       img[loading="lazy"] {
-        opacity: 0;
-        transition: opacity 0.3s ease-in;
+        background: linear-gradient(90deg, #E0E0E0 25%, #F0F0F0 50%, #E0E0E0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s ease-in-out infinite;
       }
-
+      
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      
       img[loading="lazy"].loaded {
-        opacity: 1;
+        background: none;
+        animation: none;
       }
     </style>
   </head>
@@ -673,7 +680,8 @@
               >
                 <picture>
                   <source 
-                    :srcset="getWebPUrl(url)" 
+                    :srcset="getResponsiveSrcset(url)"
+                    sizes="(max-width: 768px) 150px, 250px"
                     type="image/webp"
                   >
                   <img 
@@ -762,10 +770,10 @@
             computed: {
                 displayImageURLs() {
                 if (this.location?.locationImageURLs && this.location.locationImageURLs.length > 0) {
-                    return this.location.locationImageURLs;
+                    return this.location.locationImageURLs.map(url => this.optimizeDetailImageUrl(url));
                 }
                 if (this.location?.imageDownloadURL) {
-                    return [this.location.imageDownloadURL];
+                    return [this.optimizeDetailImageUrl(this.location.imageDownloadURL)];
                 }
                 return [];
                 },
@@ -1012,6 +1020,17 @@
                 if (isNaN(num)) return 'N/A';
                 return num.toFixed(6);
               },
+              
+              // 🆕 詳細ページ用画像URL最適化（より高品質）
+              optimizeDetailImageUrl(url) {
+                if (!url || !url.includes('firebasestorage.googleapis.com')) {
+                  return url;
+                }
+                
+                const separator = url.includes('?') ? '&' : '?';
+                // 詳細ページでは中サイズを使用
+                return `${url}${separator}w=800&h=600&fm=webp&q=90`;
+              },
               getWebPUrl(url) {
                 if (!url) return null;
                 if (url.includes('firebasestorage.googleapis.com')) {
@@ -1019,6 +1038,22 @@
                 }
                 return url;
               },
+              // 🆕 レスポンシブ画像のsrcset生成（共通関数）
+              getResponsiveSrcset(url, format = 'webp') {
+                if (!url || !url.includes('firebasestorage.googleapis.com')) {
+                  return url;
+                }
+                
+                const baseUrl = url.split('?')[0];
+                const formatParam = format === 'webp' ? 'fm=webp&' : '';
+                
+                return [
+                  `${baseUrl}?${formatParam}w=320&q=80 320w`,
+                  `${baseUrl}?${formatParam}w=640&q=85 640w`,
+                  `${baseUrl}?${formatParam}w=960&q=85 960w`,
+                  `${baseUrl}?${formatParam}w=1280&q=90 1280w`
+                ].join(', ');
+              }
             }
           });
 
