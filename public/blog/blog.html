@@ -526,6 +526,30 @@
         font-size: 11pt;
       }
 
+      .status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-size: 11pt;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+
+      .status-badge.draft {
+        background: #FFC107;
+        color: #333;
+      }
+
+      .status-badge.published {
+        background: #4CAF50;
+        color: white;
+      }
+
+      .blog-card.draft {
+        border: 2px solid #FFC107;
+        background: #FFFBF0;
+      }
+
       /* ========== ローディング ========== */
       .loading {
         text-align: center;
@@ -870,6 +894,33 @@
               </button>
             </div>
           </div>
+          <!-- ステータスフィルター (開発環境のみ表示) -->
+          <div class="filter-section" v-if="isLocalhost">
+            <label class="filter-label">📊 ステータス</label>
+            <div class="filter-tags">
+              <button 
+                class="filter-tag" 
+                :class="{ active: selectedStatus === 'published' }"
+                @click="filterByStatus('published')"
+              >
+                ✅ 公開済み
+              </button>
+              <button 
+                class="filter-tag" 
+                :class="{ active: selectedStatus === 'draft' }"
+                @click="filterByStatus('draft')"
+              >
+                📝 下書き
+              </button>
+              <button 
+                class="filter-tag" 
+                :class="{ active: selectedStatus === 'all' }"
+                @click="filterByStatus('all')"
+              >
+                🔄 すべて
+              </button>
+            </div>
+          </div>
 
           <!-- 検索 -->
           <div class="filter-section">
@@ -945,6 +996,10 @@
             class="blog-card"
           >
             <div class="blog-card-header">
+              <!-- ステータスバッジ（下書きの場合） -->
+              <div v-if="blog.status === 'draft'" class="status-badge draft" style="position: absolute; top: 12px; left: 12px; z-index: 10;">
+                📝 下書き
+              </div>
               <!-- 編集ボタン（開発環境のみ） -->
               <button 
                 v-if="isDevelopment" 
@@ -1159,6 +1214,7 @@
                 isLocalhost: false,
                 isDevelopment: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
                 selectedCategory: 'all',
+                selectedStatus: 'published',
                 searchQuery: '',
                 sortBy: 'latest',
                 isLoading: true,
@@ -1222,110 +1278,7 @@
                   console.log('キャッシュからブログを表示');
                 }
               },
-              async loadAllBlogs() {
-                try {
-                  this.isLoading = true;
-                  console.log('全てのブログを再読み込み中...');
-                  
-                  // Firestoreから全ての公開済みブログを取得
-                  const snapshot = await db.collection('blog_posts')
-                    .where('status', '==', 'published')
-                    .orderBy('createdAt', 'desc')
-                    .get();
-                  
-                  if (snapshot.empty) {
-                    console.log('ブログが見つかりませんでした');
-                    this.blogs = [];
-                    this.applyFiltersAndSort();
-                    this.isLoading = false;
-                    return;
-                  }
-                  
-                  // ブログデータを処理
-                  const blogs = [];
-                  const authorIds = new Set();
-                  
-                  snapshot.forEach(doc => {
-                    const blogData = {
-                      id: doc.id,
-                      ...doc.data()
-                    };
-                    
-                    // タイムスタンプをDateオブジェクトに変換
-                    if (blogData.createdAt && blogData.createdAt.toDate) {
-                      blogData.createdAt = blogData.createdAt.toDate();
-                    }
-                    if (blogData.updatedAt && blogData.updatedAt.toDate) {
-                      blogData.updatedAt = blogData.updatedAt.toDate();
-                    }
-                    
-                    blogs.push(blogData);
-                    
-                    if (blogData.authorID) {
-                      authorIds.add(blogData.authorID);
-                    }
-                  });
-                  
-                  // 著者情報を一括取得
-                  if (authorIds.size > 0) {
-                    const authorPromises = Array.from(authorIds).map(async (authorId) => {
-                      try {
-                        const userDoc = await db.collection('userInfo').doc(authorId).get();
-                        if (userDoc.exists) {
-                          const userData = userDoc.data();
-                          return { id: authorId, data: userData };
-                        }
-                      } catch (error) {
-                        console.error(`ユーザー情報取得エラー (${authorId}):`, error);
-                      }
-                      return null;
-                    });
-                    
-                    const authors = await Promise.all(authorPromises);
-                    const authorMap = new Map();
-                    
-                    authors.forEach(author => {
-                      if (author) {
-                        authorMap.set(author.id, author.data);
-                      }
-                    });
-                    
-                    // ブログに著者情報を追加
-                    blogs.forEach(blog => {
-                      if (blog.authorID && authorMap.has(blog.authorID)) {
-                        const authorData = authorMap.get(blog.authorID);
-                        blog.authorName = authorData.userName || '匿名ユーザー';
-                        blog.authorIcon = authorData.userIcon || null;
-                      } else {
-                        blog.authorName = '匿名ユーザー';
-                        blog.authorIcon = null;
-                      }
-                    });
-                  } else {
-                    // 著者情報がない場合のデフォルト設定
-                    blogs.forEach(blog => {
-                      blog.authorName = '匿名ユーザー';
-                      blog.authorIcon = null;
-                    });
-                  }
-                  
-                  // ブログリストを更新
-                  this.blogs = blogs;
-                  
-                  // キャッシュに保存
-                  BlogCacheManager.saveToCache(blogs);
-                  
-                  // フィルタとソートを適用
-                  this.applyFiltersAndSort();
-                  
-                  console.log(`${blogs.length}件のブログを読み込みました`);
-                  this.isLoading = false;
-                } catch (error) {
-                  console.error('ブログ読み込みエラー:', error);
-                  this.error = error.message;
-                  this.isLoading = false;
-                }
-              },
+              
               async checkAndUpdateBlogs() {
                 try {
                   // キャッシュの最新タイムスタンプを取得
@@ -1452,19 +1405,35 @@
               },
               async loadAllBlogs() {
                 try {
-                  const snapshot = await db.collection('blog_posts')
-                    .where('status', '==', 'published')
-                    .orderBy('createdAt', 'desc')
-                    .limit(50) // 初回は最大50件
-                    .get();
+                  this.isLoading = true;
+                  console.log('全てのブログを再読み込み中...');
+                  
+                  // Firestoreからブログを取得
+                  let query = db.collection('blog_posts')
+                    .orderBy('createdAt', 'desc');
+                  
+                  // ステータスでフィルター (開発環境以外は公開済みのみ)
+                  if (!this.isLocalhost) {
+                    query = query.where('status', '==', 'published');
+                  } else {
+                    // 開発環境でステータスフィルターが選択されている場合
+                    if (this.selectedStatus !== 'all') {
+                      query = query.where('status', '==', this.selectedStatus);
+                    }
+                  }
+                  
+                  const snapshot = await query.get();
                   
                   if (snapshot.empty) {
+                    console.log('ブログが見つかりませんでした');
                     this.blogs = [];
+                    this.applyFiltersAndSort();
                     this.isLoading = false;
                     return;
                   }
                   
-                  const blogPromises = [];
+                  // ブログデータを処理
+                  const blogs = [];
                   const authorIds = new Set();
                   
                   snapshot.forEach(doc => {
@@ -1481,7 +1450,7 @@
                       blogData.updatedAt = blogData.updatedAt.toDate();
                     }
                     
-                    this.blogs.push(blogData);
+                    blogs.push(blogData);
                     
                     if (blogData.authorID) {
                       authorIds.add(blogData.authorID);
@@ -1503,36 +1472,51 @@
                       return null;
                     });
                     
-                    const authorResults = await Promise.all(authorPromises);
-                    const authorMap = {};
-                    authorResults.forEach(result => {
-                      if (result) {
-                        authorMap[result.id] = result.data;
+                    const authors = await Promise.all(authorPromises);
+                    const authorMap = new Map();
+                    
+                    authors.forEach(author => {
+                      if (author) {
+                        authorMap.set(author.id, author.data);
                       }
                     });
                     
-                    // ブログデータに著者情報を追加
-                    this.blogs.forEach(blog => {
-                      if (blog.authorID && authorMap[blog.authorID]) {
-                        blog.authorName = authorMap[blog.authorID].userName || '匿名ユーザー';
-                        blog.authorIcon = authorMap[blog.authorID].userIcon || null;
+                    // ブログに著者情報を追加
+                    blogs.forEach(blog => {
+                      if (blog.authorID && authorMap.has(blog.authorID)) {
+                        const authorData = authorMap.get(blog.authorID);
+                        blog.authorName = authorData.userName || '匿名ユーザー';
+                        blog.authorIcon = authorData.userIcon || null;
                       } else {
-                        blog.authorName = blog.authorName || '匿名ユーザー';
+                        blog.authorName = '匿名ユーザー';
                         blog.authorIcon = null;
                       }
                     });
+                  } else {
+                    // 著者情報がない場合のデフォルト設定
+                    blogs.forEach(blog => {
+                      blog.authorName = '匿名ユーザー';
+                      blog.authorIcon = null;
+                    });
                   }
                   
-                  // フィルター・ソートを適用
+                  // ブログリストを更新
+                  this.blogs = blogs;
+                  
+                  // キャッシュに保存 (公開済みのみ)
+                  const publishedBlogs = blogs.filter(b => b.status === 'published');
+                  if (publishedBlogs.length > 0) {
+                    BlogCacheManager.saveToCache(publishedBlogs);
+                  }
+                  
+                  // フィルタとソートを適用
                   this.applyFiltersAndSort();
                   
-                  // キャッシュに保存
-                  BlogCacheManager.saveToCache(this.blogs, Date.now());
-                  
+                  console.log(`${blogs.length}件のブログを読み込みました`);
                   this.isLoading = false;
                 } catch (error) {
                   console.error('ブログ読み込みエラー:', error);
-                  this.error = 'ブログの読み込みに失敗しました';
+                  this.error = error.message;
                   this.isLoading = false;
                 }
               },
@@ -1541,34 +1525,45 @@
               
               applyFiltersAndSort() {
                 let filtered = [...this.blogs];
-
+                
+                // ステータスフィルター
+                if (this.selectedStatus !== 'all') {
+                  filtered = filtered.filter(blog => blog.status === this.selectedStatus);
+                }
+                
                 // カテゴリフィルター
                 if (this.selectedCategory !== 'all') {
                   filtered = filtered.filter(blog => blog.category === this.selectedCategory);
                 }
-
+                
                 // 検索フィルター
                 if (this.searchQuery.trim()) {
                   const query = this.searchQuery.toLowerCase();
                   filtered = filtered.filter(blog => {
-                    return blog.title.toLowerCase().includes(query) ||
-                           blog.content.toLowerCase().includes(query) ||
-                           (blog.tags && blog.tags.some(tag => tag.toLowerCase().includes(query)));
+                    const title = (blog.title || '').toLowerCase();
+                    const content = (blog.content || '').toLowerCase();
+                    const tags = (blog.tags || []).join(' ').toLowerCase();
+                    
+                    return title.includes(query) || 
+                          content.includes(query) || 
+                          tags.includes(query);
                   });
                 }
-
+                
                 // ソート
-                if (this.sortBy === 'latest') {
-                  filtered.sort((a, b) => b.createdAt - a.createdAt);
-                } else if (this.sortBy === 'popular') {
-                  filtered.sort((a, b) => b.likes - a.likes);
-                } else if (this.sortBy === 'views') {
-                  filtered.sort((a, b) => b.views - a.views);
-                }
-
+                filtered.sort((a, b) => {
+                  if (this.sortBy === 'latest') {
+                    return (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0);
+                  } else if (this.sortBy === 'popular') {
+                    return (b.views || 0) - (a.views || 0);
+                  } else if (this.sortBy === 'likes') {
+                    return (b.likes || 0) - (a.likes || 0);
+                  }
+                  return 0;
+                });
+                
                 this.displayedBlogs = filtered;
-                this.currentPage = 0;
-                this.hasMore = true;
+                console.log(`フィルター適用後: ${filtered.length}件`);
               },
 
               filterByCategory(categoryId) {
@@ -1696,6 +1691,27 @@
               },
               createNewBlog() {
                 window.location.href = '/blog/blog-editor.html';
+              },
+              // ステータスフィルター
+              filterByStatus(status) {
+                this.selectedStatus = status;
+                this.applyFiltersAndSort();
+                console.log(`ステータスフィルター: ${status}`);
+              },
+              
+              // ブログ編集
+              editBlog(blogId) {
+                window.location.href = `/blog/blog-editor.html?id=${blogId}`;
+              },
+              
+              // ブログ詳細表示
+              showBlogDetail(blog) {
+                // 下書きの場合は編集画面へ、公開済みの場合は詳細画面へ
+                if (blog.status === 'draft' && this.isLocalhost) {
+                  window.location.href = `/blog/blog-editor.html?id=${blog.id}`;
+                } else {
+                  window.location.href = `/blog/blog-detail.html?id=${blog.id}`;
+                }
               }
             }
           });
