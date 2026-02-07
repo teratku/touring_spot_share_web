@@ -606,6 +606,174 @@
         color: #666666;
       }
 
+      /* ========== 埋め込みカード ========== */
+      .embedded-card {
+        margin: 24pt 0;
+        background: #F9F9F9;
+        border-radius: 16pt;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+
+      .embedded-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 168, 198, 0.2);
+        border-color: #00A8C6;
+      }
+
+      /* スポットカード */
+      .spot-card {
+        display: flex;
+        gap: 16px;
+        padding: 16pt;
+      }
+
+      .spot-image-container {
+        flex-shrink: 0;
+        width: 200px;
+        height: 150px;
+        border-radius: 12pt;
+        overflow: hidden;
+        background: #E0E0E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48pt;
+      }
+
+      .spot-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .spot-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8pt;
+      }
+
+      .spot-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(0, 168, 198, 0.1);
+        color: #00A8C6;
+        padding: 4px 10px;
+        border-radius: 8pt;
+        font-size: 12pt;
+        font-weight: 600;
+        width: fit-content;
+      }
+
+      .spot-name {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+      }
+
+      .spot-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      /* ルートカード */
+      .route-card {
+        display: flex;
+        gap: 16px;
+        padding: 16pt;
+      }
+
+      .route-image-container {
+        flex-shrink: 0;
+        width: 200px;
+        height: 150px;
+        border-radius: 12pt;
+        overflow: hidden;
+        background: #E0E0E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48pt;
+      }
+
+      .route-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .route-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8pt;
+      }
+
+      .route-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(220, 20, 60, 0.1);
+        color: #DC143C;
+        padding: 4px 10px;
+        border-radius: 8pt;
+        font-size: 12pt;
+        font-weight: 600;
+        width: fit-content;
+      }
+
+      .route-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #DC143C;
+      }
+
+      .route-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      .route-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      /* モバイル対応 */
+      @media (max-width: 768px) {
+        .spot-card {
+          flex-direction: column;
+        }
+        
+        .spot-image-container {
+          width: 100%;
+          height: 200px;
+        }
+        .route-card {
+          flex-direction: column;
+        }
+        
+        .route-image-container {
+          width: 100%;
+          height: 200px;
+        }
+      }
+
       /* ========== モーダル ========== */
       .modal-overlay {
         position: fixed;
@@ -981,6 +1149,7 @@
           border-left-color: #00D4FF;
           color: #AEAEB2;
         }
+
 
         .toolbar button {
           background: #1C1C1E;
@@ -1564,6 +1733,9 @@
                 isSaving: false,
                 isUploadingImage: false,
                 uploadProgress: 0,
+                embeddedSpots: {},
+                embeddedRoutes: {},
+                isLoadingEmbedded: false,
                 toast: {
                   show: false,
                   message: '',
@@ -1588,43 +1760,101 @@
                 });
               },
               renderedMarkdown() {
-                if (!this.blogPost.content) return '<p style="color: #999;">プレビューがここに表示されます</p>';
+                if (!this.blogPost.content) {
+                  return '<p style="color: #999;">プレビューがここに表示されます</p>';
+                }
                 
                 try {
+                  let content = this.blogPost.content;
+                  
+                  // {{spot:xxx}} を置換
+                  content = content.replace(/\{\{spot:([^}]+)\}\}/g, (match, spotId) => {
+                    const spot = this.embeddedSpots[spotId];
+                    if (spot) {
+                      const imageUrl = spot.locationImageURLs?.[0] || '';
+                      const name = spot.locality || spot.administrative || '不明な場所';
+                      const location = spot.administrative || '';
+                      const visits = spot.locationVisitCount || 0;
+
+                      return `<div class="embedded-card spot-card">
+                        <div class="spot-image-container">
+                          ${imageUrl ? `<img src="${imageUrl}" alt="${name}" class="spot-image" loading="lazy">` : '📍'}
+                        </div>
+                        <div class="spot-info">
+                          <div class="spot-label">📍 スポット</div>
+                          <div class="spot-name">${name}</div>
+                          <div class="spot-meta">
+                            <div>🗺️ ${location}</div>
+                            <div>🔢 ${visits}回訪問</div>
+                          </div>
+                        </div>
+                      </div>`;
+                    }
+                    
+                    // データがまだ読み込まれていない場合
+                    return `<div class="embed-card-preview">
+                      <div class="embed-icon">📍</div>
+                      <div class="embed-info">
+                        <div class="embed-title">スポット埋め込み</div>
+                        <div class="embed-meta">ID: ${spotId}</div>
+                      </div>
+                    </div>`;
+                  });
+
+                  // {{route:xxx}} を置換
+                  content = content.replace(/\{\{route:([^}]+)\}\}/g, (match, routeId) => {
+                    const route = this.embeddedRoutes[routeId];
+                    if (route) {
+                      const title = route.title || 'ルート';
+                      const distance = (route.distance / 1000).toFixed(1);
+                      const date = route.createdAt ? new Date(route.createdAt.seconds * 1000).toLocaleDateString('ja-JP') : '';
+                      const userName = route.userName || '';
+                      const status = route.isPublic ? '🌐 公開中' : '🔒 非公開';
+                      const imageUrl = route.coverImageUrl || '';
+
+                      return `<div class="embedded-card route-card">
+                        <div class="route-image-container">
+                          ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="route-image" loading="lazy">` : '🗺️'}
+                        </div>
+                        <div class="route-info">
+                          <div class="route-label">🗺️ ルート</div>
+                          <div class="route-title">${title}</div>
+                          <div class="route-meta">
+                            <div>📍 距離: ${distance} km</div>
+                            <div>🗓 ${date}</div>
+                            <div>👤 ${userName}</div>
+                            <div>${status}</div>
+                          </div>
+                        </div>
+                      </div>`;
+                    }
+                    
+                    // データがまだ読み込まれていない場合
+                    return `<div class="embed-card-preview">
+                      <div class="embed-icon">🗺️</div>
+                      <div class="embed-info">
+                        <div class="embed-title">ルート埋め込み</div>
+                        <div class="embed-meta">ID: ${routeId}</div>
+                      </div>
+                    </div>`;
+                  });
+                  
                   // Markdownを HTMLに変換
-                  let html = marked.parse(this.blogPost.content);
-                  
-                  // {{spot:xxx}} を埋め込みカードに置換
-                  html = html.replace(/\{\{spot:([a-zA-Z0-9]+)\}\}/g, (match, spotId) => {
-                    return `
-                      <div class="embed-card-preview">
-                        <div class="embed-icon">📍</div>
-                        <div class="embed-info">
-                          <div class="embed-title">スポット埋め込み</div>
-                          <div class="embed-meta">ID: ${spotId}</div>
-                        </div>
-                      </div>
-                    `;
-                  });
-                  
-                  // {{route:xxx}} を埋め込みカードに置換
-                  html = html.replace(/\{\{route:([a-zA-Z0-9]+)\}\}/g, (match, routeId) => {
-                    return `
-                      <div class="embed-card-preview">
-                        <div class="embed-icon">🗺️</div>
-                        <div class="embed-info">
-                          <div class="embed-title">ルート埋め込み</div>
-                          <div class="embed-meta">ID: ${routeId}</div>
-                        </div>
-                      </div>
-                    `;
-                  });
+                  let html = marked.parse(content);
                   
                   return html;
                 } catch (error) {
                   console.error('Markdown変換エラー:', error);
                   return '<p style="color: #E63946;">プレビューの生成に失敗しました</p>';
                 }
+              }
+            },
+            watch: {
+              'blogPost.content': {
+                handler: function(newContent) {
+                  this.loadEmbeddedContentFromMarkdown(newContent);
+                },
+                immediate: false
               }
             },
             async mounted() {
@@ -1655,6 +1885,16 @@
                 } catch (e) {
                     console.error('初期化エラー:', e);
                     this.showToast('初期化に失敗しました', 'error');
+                }
+                if (blogId) {
+                  this.blogId = blogId;
+                  this.isEditMode = true;
+                  await this.loadBlogPost();
+                  
+                  // 埋め込みコンテンツを読み込み（追加）
+                  if (this.blogPost.content) {
+                    await this.loadEmbeddedContentFromMarkdown(this.blogPost.content);
+                  }
                 }
             },
 
@@ -1915,9 +2155,68 @@
                 this.showSpotModal = false;
                 this.spotSearchQuery = '';
               },
+              async loadEmbeddedContentFromMarkdown(content) {
+                if (!content) return;
+                
+                // スポットIDを抽出
+                const spotMatches = content.match(/\{\{spot:([a-zA-Z0-9_-]+)\}\}/g);
+                const spotIds = spotMatches 
+                  ? spotMatches.map(match => match.replace(/\{\{spot:|}\}/g, ''))
+                  : [];
 
+                // ルートIDを抽出
+                const routeMatches = content.match(/\{\{route:([a-zA-Z0-9_-]+)\}\}/g);
+                const routeIds = routeMatches 
+                  ? routeMatches.map(match => match.replace(/\{\{route:|}\}/g, ''))
+                  : [];
+                
+                // 新しいIDのみ読み込み
+                for (const spotId of spotIds) {
+                  if (!this.embeddedSpots[spotId]) {
+                    await this.loadSpotData(spotId);
+                  }
+                }
+                
+                for (const routeId of routeIds) {
+                  if (!this.embeddedRoutes[routeId]) {
+                    await this.loadRouteData(routeId);
+                  }
+                }
+              },
+              // スポットデータを読み込み
+              async loadSpotData(spotId) {
+                try {
+                  const doc = await db.collection('imagedownload').doc(spotId).get();
+                  if (doc.exists) {
+                    this.embeddedSpots[spotId] = {
+                      id: doc.id,
+                      ...doc.data()
+                    };
+                    // リアクティブに更新するため、新しいオブジェクトを作成
+                    this.embeddedSpots = { ...this.embeddedSpots };
+                  }
+                } catch (error) {
+                  console.error(`スポット情報取得エラー (${spotId}):`, error);
+                }
+              },
+              
+              // ルートデータを読み込み
+              async loadRouteData(routeId) {
+                try {
+                  const doc = await db.collection('shared_routes').doc(routeId).get();
+                  if (doc.exists) {
+                    this.embeddedRoutes[routeId] = {
+                      id: doc.id,
+                      ...doc.data()
+                    };
+                    // リアクティブに更新するため、新しいオブジェクトを作成
+                    this.embeddedRoutes = { ...this.embeddedRoutes };
+                  }
+                } catch (error) {
+                  console.error(`ルート情報取得エラー (${routeId}):`, error);
+                }
+              },
               // スポット読み込み
-              // loadSpots メソッド内を以下に変更
               async loadSpots() {
                 this.isLoadingSpots = true;
                 
@@ -1992,7 +2291,7 @@
                 
                 try {
                     const snapshot = await db.collection('shared_routes')
-                    .where('isPublic', '==', true)
+                    //.where('isPublic', '==', true)
                     .orderBy('createdAt', 'desc')
                     .limit(50)
                     .get();

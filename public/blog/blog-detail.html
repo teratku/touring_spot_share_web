@@ -510,7 +510,36 @@
 
       /* ルートカード */
       .route-card {
+        display: flex;
+        gap: 16px;
         padding: 16pt;
+      }
+
+      .route-image-container {
+        flex-shrink: 0;
+        width: 200px;
+        height: 150px;
+        border-radius: 12pt;
+        overflow: hidden;
+        background: #E0E0E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48pt;
+      }
+
+      .route-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .route-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8pt;
       }
 
       .route-label {
@@ -523,20 +552,21 @@
         border-radius: 8pt;
         font-size: 12pt;
         font-weight: 600;
-        margin-bottom: 12pt;
+        width: fit-content;
       }
 
       .route-title {
         font-size: 20pt;
         font-weight: 600;
         color: #DC143C;
-        margin-bottom: 12pt;
       }
 
       .route-meta {
         display: flex;
         flex-direction: column;
-        gap: 8pt;
+        gap: 6px;
+        font-size: 13pt;
+        color: #666666;
       }
 
       .route-meta-item {
@@ -624,6 +654,23 @@
       @media (max-width: 768px) {
         .blog-actions {
           grid-template-columns: 1fr 1fr;
+        }
+        .spot-card {
+          flex-direction: column;
+        }
+        
+        .spot-image-container {
+          width: 100%;
+          height: 200px;
+        }
+        
+        .route-card {
+          flex-direction: column;
+        }
+        
+        .route-image-container {
+          width: 100%;
+          height: 200px;
         }
       }
 
@@ -1333,15 +1380,21 @@
                     const date = route.createdAt ? new Date(route.createdAt.seconds * 1000).toLocaleDateString('ja-JP') : '';
                     const userName = route.userName || '';
                     const status = route.isPublic ? '🌐 公開中' : '🔒 非公開';
+                    const imageUrl = route.coverImageUrl || '';
 
                     return `<div class="embedded-card route-card" onclick="window.location.href='/route-detail.html?id=${routeId}'">
-                      <div class="route-label">🗺️ ルート</div>
-                      <div class="route-title">${title}</div>
-                      <div class="route-meta">
-                        <div class="route-meta-item">📍 距離: ${distance} km</div>
-                        <div class="route-meta-item">🗓 ${date}</div>
-                        <div class="route-meta-item">👤 ${userName}</div>
-                        <div class="route-meta-item">${status}</div>
+                      <div class="route-image-container">
+                        ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="route-image" loading="lazy">` : '🗺️'}
+                      </div>
+                      <div class="route-info">
+                        <div class="route-label">🗺️ ルート</div>
+                        <div class="route-title">${title}</div>
+                        <div class="route-meta">
+                          <div>📍 距離: ${distance} km</div>
+                          <div>🗓 ${date}</div>
+                          <div>👤 ${userName}</div>
+                          <div>${status}</div>
+                        </div>
                       </div>
                     </div>`;
                   }

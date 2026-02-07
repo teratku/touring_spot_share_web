@@ -1113,7 +1113,7 @@
 
       // ブログキャッシュ管理クラス
       class BlogCacheManager {
-        static saveToCache(data, timestamp) {
+        static saveToCache(data, timestamp = Date.now()) {  // デフォルト引数を追加
           try {
             localStorage.setItem(BLOG_CACHE_KEY, JSON.stringify(data));
             localStorage.setItem(BLOG_CACHE_TIMESTAMP_KEY, timestamp.toString());
