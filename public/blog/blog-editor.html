@@ -772,6 +772,39 @@
           width: 100%;
           height: 200px;
         }
+        .item-card {
+          flex-direction: row;
+          min-height: 80px;
+        }
+        
+        .item-thumbnail {
+          width: 80px;
+          min-height: 80px;
+          font-size: 28pt;
+        }
+        
+        .item-content {
+          padding: 8pt 12pt 8pt 0;
+          min-height: 80px;
+        }
+        
+        .item-name {
+          font-size: 14pt;
+        }
+        
+        .item-meta {
+          font-size: 11pt;
+          gap: 8pt;
+        }
+        
+        .item-type-badge {
+          font-size: 10pt;
+          padding: 3px 8px;
+        }
+        
+        .item-list {
+          max-height: 400px;
+        }
       }
 
       /* ========== モーダル ========== */
@@ -857,35 +890,127 @@
         display: flex;
         flex-direction: column;
         gap: 12pt;
+        max-height: 500px;
+        overflow-y: auto;
       }
 
       .item-card {
-        background: #F9F9F9;
+        background: white;
         border-radius: 12pt;
-        padding: 12pt;
+        padding: 0;
         cursor: pointer;
         transition: all 0.2s ease;
-        border-left: 4px solid #00A8C6;
+        border: 2px solid #E0E0E0;
+        overflow: hidden;
+        display: flex;
+        gap: 12pt;
+        min-height: 100px;
+        align-items: stretch;
       }
 
       .item-card:hover {
-        background: #E8F8FB;
-        transform: translateX(4px);
+        border-color: #00A8C6;
+        box-shadow: 0 4px 12px rgba(0, 168, 198, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .item-thumbnail {
+        flex-shrink: 0;
+        width: 120px;
+        min-height: 100px;
+        background: #E0E0E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36pt;
+        color: #999999;
+      }
+
+      .item-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .item-thumbnail span {
+        display: block;
+        line-height: 1;
+      }
+
+      .item-content {
+        flex: 1;
+        padding: 12pt 16pt 12pt 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6pt;
+        min-height: 100px;
+      }
+
+      .item-header {
+        display: flex;
+        align-items: center;
+        gap: 8pt;
+        margin-bottom: 4pt;
+      }
+
+      .item-type-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 6pt;
+        font-size: 11pt;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      .item-type-badge.spot {
+        background: rgba(0, 168, 198, 0.1);
+        color: #00A8C6;
+      }
+
+      .item-type-badge.route {
+        background: rgba(220, 20, 60, 0.1);
+        color: #DC143C;
       }
 
       .item-name {
         font-size: 16pt;
         font-weight: 600;
         color: #333333;
-        margin-bottom: 6pt;
+        line-height: 1.3;
+        margin-bottom: 4pt;
+        word-break: break-word;
       }
 
       .item-meta {
-        font-size: 13pt;
+        font-size: 12pt;
         color: #666666;
         display: flex;
         gap: 12pt;
         flex-wrap: wrap;
+        align-items: center;
+        line-height: 1.4;
+      }
+
+      .item-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .item-meta-item .icon {
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      .item-date {
+        font-size: 11pt;
+        color: #999999;
+        margin-top: 4pt;
+        line-height: 1.2;
       }
 
       /* ========== ローディング ========== */
@@ -1540,19 +1665,40 @@
             </div>
 
             <!-- スポットリスト -->
-            <div v-else-if="filteredSpots.length > 0" class="item-list">
+            <div v-else-if="filteredSpots && filteredSpots.length > 0" class="item-list">
               <div 
-                v-for="spot in filteredSpots"
-                :key="spot.id"
+                v-for="(spot, index) in filteredSpots"
+                :key="spot.id || index"
                 class="item-card"
                 @click="insertSpot(spot.id)"
               >
-                <div class="item-name">
-                  📍 {{ spot.locality || spot.administrative || '不明な場所' }}
+                <div class="item-thumbnail">
+                  <img 
+                    v-if="spot.imageUrl" 
+                    :src="spot.imageUrl" 
+                    :alt="spot.locality || 'スポット画像'" 
+                    loading="lazy"
+                    @error="$event.target.style.display='none'"
+                  >
+                  <span v-if="!spot.imageUrl" style="display: block;">📍</span>
                 </div>
-                <div class="item-meta">
-                  <span v-if="spot.administrative">🗺️ {{ spot.administrative }}</span>
-                  <span v-if="spot.locationVisitCount">🔢 {{ spot.locationVisitCount }}回訪問</span>
+                <div class="item-content">
+                  <div class="item-header">
+                    <span class="item-type-badge spot">📍 スポット</span>
+                  </div>
+                  <div class="item-name">
+                    {{ spot.locality || spot.administrative || '不明な場所' }}
+                  </div>
+                  <div class="item-meta">
+                    <div class="item-meta-item" v-if="spot.administrative">
+                      <span class="icon">🗺️</span>
+                      <span>{{ spot.administrative }}</span>
+                    </div>
+                    <div class="item-meta-item" v-if="spot.locationVisitCount">
+                      <span class="icon">👥</span>
+                      <span>{{ spot.locationVisitCount }}回訪問</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1561,7 +1707,8 @@
             <div v-else class="empty-state">
               <div class="empty-icon">📍</div>
               <h3>スポットが見つかりません</h3>
-              <p>別のキーワードで検索してください</p>
+              <p v-if="spots.length === 0">スポットデータを読み込み中...</p>
+              <p v-else>別のキーワードで検索してください</p>
             </div>
           </div>
         </div>
@@ -1591,21 +1738,48 @@
             </div>
 
             <!-- ルートリスト -->
-            <div v-else-if="filteredRoutes.length > 0" class="item-list">
+            <div v-else-if="filteredRoutes && filteredRoutes.length > 0" class="item-list">
               <div 
-                v-for="route in filteredRoutes"
-                :key="route.id"
+                v-for="(route, index) in filteredRoutes"
+                :key="route.id || index"
                 class="item-card"
                 @click="insertRoute(route.id)"
               >
-                <div class="item-name">
-                  🗺️ {{ route.title }}
+                <div class="item-thumbnail">
+                  <img 
+                    v-if="route.coverImageUrl" 
+                    :src="route.coverImageUrl" 
+                    :alt="route.title || 'ルート画像'" 
+                    loading="lazy"
+                    @error="$event.target.style.display='none'"
+                  >
+                  <span v-if="!route.coverImageUrl" style="display: block;">🗺️</span>
                 </div>
-                <div class="item-meta">
-                  <span>📍 {{ (route.distance / 1000).toFixed(1) }} km</span>
-                  <span :style="{ color: route.isPublic ? '#228B22' : '#999999' }">
-                    {{ route.isPublic ? '🌐 公開' : '🔒 非公開' }}
-                  </span>
+                <div class="item-content">
+                  <div class="item-header">
+                    <span class="item-type-badge route">🗺️ ルート</span>
+                    <span :style="{ 
+                      fontSize: '11pt', 
+                      fontWeight: '600',
+                      color: route.isPublic ? '#228B22' : '#999999',
+                      display: 'inline-block'
+                    }">
+                      {{ route.isPublic ? '🌐 公開' : '🔒 非公開' }}
+                    </span>
+                  </div>
+                  <div class="item-name">
+                    {{ route.title || 'タイトルなし' }}
+                  </div>
+                  <div class="item-meta">
+                    <div class="item-meta-item">
+                      <span class="icon">📍</span>
+                      <span>{{ (route.distance / 1000).toFixed(1) }} km</span>
+                    </div>
+                    <div class="item-meta-item" v-if="route.userName">
+                      <span class="icon">👤</span>
+                      <span>{{ route.userName }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1614,7 +1788,8 @@
             <div v-else class="empty-state">
               <div class="empty-icon">🗺️</div>
               <h3>ルートが見つかりません</h3>
-              <p>別のキーワードで検索してください</p>
+              <p v-if="routes.length === 0">ルートデータを読み込み中...</p>
+              <p v-else>別のキーワードで検索してください</p>
             </div>
           </div>
         </div>
@@ -2218,6 +2393,7 @@
               },
               // スポット読み込み
               async loadSpots() {
+                console.log('loadSpots: 開始');
                 this.isLoadingSpots = true;
                 
                 try {
@@ -2226,6 +2402,8 @@
                     .limit(50)
                     .get();
                     
+                    console.log('loadSpots: スナップショット取得', snapshot.size);
+                    
                     this.spots = [];
                     snapshot.forEach(doc => {
                     const data = doc.data();
@@ -2233,18 +2411,22 @@
                         id: doc.id,
                         locality: data.locality || data.administrative || '不明な場所',
                         administrative: data.administrative || '',
-                        lat: data.lat,
-                        lng: data.lng,
-                        imageUrl: data.locationImageURLs?.[0] || data.iconImageURL || null
+                        lat: typeof data.lat === 'number' ? data.lat : (data.lat ? parseFloat(data.lat) : null),
+                        lng: typeof data.lng === 'number' ? data.lng : (data.lng ? parseFloat(data.lng) : null),
+                        imageUrl: data.locationImageURLs?.[0] || data.iconImageURL || null,
+                        locationVisitCount: data.locationVisitCount || 0,
+                        createTimeTimeStamp: data.createTimeTimeStamp
                     });
                     });
 
-                    console.log(`${this.spots.length}件のスポットを読み込みました`);
+                    console.log('loadSpots: 完了', this.spots.length, 'スポット読み込み');
+                    console.log('loadSpots: 最初のスポット', this.spots[0]);
                 } catch (error) {
-                    console.error('スポット読み込みエラー:', error);
+                    console.error('loadSpots: エラー', error);
                     this.showToast('スポットの読み込みに失敗しました', 'error');
                 } finally {
                     this.isLoadingSpots = false;
+                    console.log('loadSpots: 終了 isLoadingSpots=', this.isLoadingSpots);
                 }
               },
               // スポット挿入
@@ -2284,8 +2466,7 @@
                 this.routeSearchQuery = '';
               },
 
-              // ルート読み込み
-              // loadRoutes メソッド内を以下に変更
+              // ルート読み込み              
               async loadRoutes() {
                 this.isLoadingRoutes = true;
                 
@@ -2304,7 +2485,10 @@
                         title: data.title || 'タイトルなし',
                         distance: data.distance || 0,
                         isPublic: data.isPublic || false,
-                        createdAt: data.createdAt
+                        createdAt: data.createdAt,
+                        coverImageUrl: data.coverImageUrl || null,
+                        userName: data.userName || '不明',
+                        description: data.description || ''
                     });
                     });
 
@@ -2336,6 +2520,45 @@
                 
                 this.closeRouteModal();
                 this.showToast('ルートを挿入しました', 'success');
+              },
+              formatDate(timestamp) {
+                if (!timestamp) return '';
+                const date = timestamp.seconds ? new Date(timestamp.seconds * 1000) : new Date(timestamp);
+                const now = new Date();
+                const diff = now - date;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                
+                if (days === 0) return '今日';
+                if (days === 1) return '昨日';
+                if (days < 7) return `${days}日前`;
+                if (days < 30) return `${Math.floor(days / 7)}週間前`;
+                if (days < 365) return `${Math.floor(days / 30)}ヶ月前`;
+                
+                return date.toLocaleDateString('ja-JP', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                });
+              },
+
+              formatTimestamp(timestamp) {
+                if (!timestamp) return '';
+                const date = timestamp.seconds ? new Date(timestamp.seconds * 1000) : new Date(timestamp);
+                const now = new Date();
+                const diff = now - date;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                
+                if (days === 0) return '今日';
+                if (days === 1) return '昨日';
+                if (days < 7) return `${days}日前`;
+                if (days < 30) return `${Math.floor(days / 7)}週間前`;
+                if (days < 365) return `${Math.floor(days / 30)}ヶ月前`;
+                
+                return date.toLocaleDateString('ja-JP', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                });
               },
 
               // プレビュー
