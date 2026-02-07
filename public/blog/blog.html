@@ -1173,6 +1173,34 @@
         }
       }
 
+      // 日付を統一的にタイムスタンプ(ミリ秒)に変換するヘルパー関数
+      function getTimestamp(dateValue) {
+        if (!dateValue) return 0;
+        
+        // Date オブジェクト
+        if (dateValue instanceof Date) {
+          return dateValue.getTime();
+        }
+        
+        // Firestore Timestamp オブジェクト
+        if (dateValue.toDate && typeof dateValue.toDate === 'function') {
+          return dateValue.toDate().getTime();
+        }
+        
+        // Firestore Timestamp の seconds プロパティ
+        if (dateValue.seconds) {
+          return dateValue.seconds * 1000;
+        }
+        
+        // 文字列またはミリ秒の数値
+        if (typeof dateValue === 'string' || typeof dateValue === 'number') {
+          const timestamp = new Date(dateValue).getTime();
+          return isNaN(timestamp) ? 0 : timestamp;
+        }
+        
+        return 0;
+      }
+
       function waitForFirebase() {
         return new Promise((resolve, reject) => {
           if (typeof firebase !== 'undefined') {
@@ -1229,39 +1257,53 @@
             async mounted() {
               this.isLocalhost = window.location.hostname === 'localhost' || 
                                 window.location.hostname === '127.0.0.1';
+              
               try {
+                console.log('ブログページ mounted');
+                
+                // Firebase の初期化を確実に待つ
                 await waitForFirebase();
                 
+                // Firestore インスタンスを初期化
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
-
-                // URLパラメータを確認
-                const urlParams = new URLSearchParams(window.location.search);
-                const shouldRefresh = urlParams.get('refresh') === 'true';
-                const shouldClearCache = urlParams.get('clearCache') === 'true';
                 
-                // 開発環境または強制リフレッシュの場合
-                if (this.isLocalhost || shouldRefresh || shouldClearCache) {
-                  if (shouldRefresh || shouldClearCache) {
-                    BlogCacheManager.clearCache();
-                    console.log('キャッシュをクリアしました');
+                console.log('Firebase 初期化完了');
+                
+                // URLパラメータの確認
+                const urlParams = new URLSearchParams(window.location.search);
+                const forceReload = urlParams.get('reload') === 'true';
+                
+                if (this.isLocalhost || forceReload) {
+                  console.log('localhost または強制リロード: 全データを再読み込み');
+                  
+                  // URLパラメータをクリア
+                  if (forceReload) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
                   }
-                  // パラメータを削除してリダイレクト
-                  window.history.replaceState({}, document.title, window.location.pathname);
                   
                   // 強制的に全てのブログを再読み込み
                   await this.loadAllBlogs();
                 } else {
-                  // 本番環境: 通常のキャッシュ読み込み
-                  await this.loadBlogsFromCache();
-                  await this.checkAndUpdateBlogs();
+                  // 本番環境: キャッシュ読み込み（期限チェック含む） → 差分更新 or 全読み込み
+                  const cachedData = await this.loadBlogsFromCache();
+                  
+                  if (cachedData) {
+                    // キャッシュが有効な場合は差分更新
+                    console.log('キャッシュ有効: 差分更新を実行');
+                    await this.checkAndUpdateBlogs();
+                  } else {
+                    // キャッシュがない、または期限切れの場合は全読み込み
+                    console.log('キャッシュなしまたは期限切れ: 全データ読み込み');
+                    await this.loadAllBlogs();
+                  }
                 }
                 
                 window.addEventListener('scroll', this.handleScroll);
                 document.addEventListener('keydown', this.handleKeydown);
               } catch (e) {
                 console.error('初期化エラー:', e);
-                this.error = e.message;
+                this.error = e.message || 'アプリケーションの初期化に失敗しました';
                 this.isLoading = false;
               }
             },
@@ -1274,7 +1316,27 @@
                 const cachedData = BlogCacheManager.loadFromCache();
                 
                 if (cachedData && cachedData.length > 0) {
-                  this.blogs = cachedData;
+                  // キャッシュから読み込んだデータの日付を Date オブジェクトに変換
+                  this.blogs = cachedData.map(blog => {
+                    const converted = { ...blog };
+                    
+                    // createdAt を Date オブジェクトに変換
+                    if (converted.createdAt) {
+                      if (typeof converted.createdAt === 'string' || typeof converted.createdAt === 'number') {
+                        converted.createdAt = new Date(converted.createdAt);
+                      }
+                    }
+                    
+                    // updatedAt を Date オブジェクトに変換
+                    if (converted.updatedAt) {
+                      if (typeof converted.updatedAt === 'string' || typeof converted.updatedAt === 'number') {
+                        converted.updatedAt = new Date(converted.updatedAt);
+                      }
+                    }
+                    
+                    return converted;
+                  });
+                  
                   this.applyFiltersAndSort();
                   this.isLoading = false;
                   console.log('キャッシュからブログを表示');
@@ -1318,9 +1380,13 @@
                     // タイムスタンプをDateオブジェクトに変換
                     if (blogData.createdAt && blogData.createdAt.toDate) {
                       blogData.createdAt = blogData.createdAt.toDate();
+                    } else if (blogData.createdAt) {
+                      blogData.createdAt = new Date(blogData.createdAt);
                     }
                     if (blogData.updatedAt && blogData.updatedAt.toDate) {
                       blogData.updatedAt = blogData.updatedAt.toDate();
+                    } else if (blogData.updatedAt) {
+                      blogData.updatedAt = new Date(blogData.updatedAt);
                     }
                     
                     newBlogs.push(blogData);
@@ -1408,6 +1474,7 @@
               async loadAllBlogs() {
                 try {
                   this.isLoading = true;
+                  this.error = null;
                   console.log('全てのブログを再読み込み中...');
                   
                   // Firestoreからブログを取得
@@ -1550,7 +1617,10 @@
                 // ソート
                 filtered.sort((a, b) => {
                   if (this.sortBy === 'latest') {
-                    return (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0);
+                    // getTimestamp ヘルパー関数を使用して安全に比較
+                    const timeA = getTimestamp(a.createdAt);
+                    const timeB = getTimestamp(b.createdAt);
+                    return timeB - timeA;
                   } else if (this.sortBy === 'popular') {
                     return (b.views || 0) - (a.views || 0);
                   } else if (this.sortBy === 'likes') {

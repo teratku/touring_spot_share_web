@@ -2133,7 +2133,7 @@
                     // ユーザー情報を取得
                     try {
                       const userDoc = await db.collection('userInfo').doc(routeData.userID).get();
-                      if (userDoc.exists()) {
+                      if (userDoc.exists) {
                         const userData = userDoc.data();
                         routeData.userName = userData.userName || '匿名ユーザー';
                         routeData.userIconUrl = userData.userIcon;
@@ -2490,16 +2490,18 @@
                   }
 
                   const followerPromises = [];
-                  const followerIds = [];
+                  // 🔧 Setを使用して重複を排除
+                  const followerIds = new Set();
 
                   snapshot.forEach(doc => {
                     const data = doc.data();
                     if (data.userID) {
-                      followerIds.push(data.userID);
+                      followerIds.add(data.userID); // 🔧 addメソッドで自動的に重複が排除される
                     }
                   });
 
-                  for (const followerId of followerIds) {
+                  // 🔧 SetをArrayに変換してループ
+                  for (const followerId of Array.from(followerIds)) {
                     followerPromises.push(
                       db.collection('userInfo').doc(followerId).get()
                     );
