@@ -600,6 +600,33 @@
         transform: translateY(-2px);
       }
 
+      .edit-btn {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+      }
+
+      .edit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 168, 198, 0.4);
+      }
+
+      .delete-btn {
+        background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
+        color: white;
+      }
+
+      .delete-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+      }
+
+      /* モバイル対応 */
+      @media (max-width: 768px) {
+        .blog-actions {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
       /* ========== 関連記事 ========== */
       .related-posts {
         background: white;
@@ -970,6 +997,17 @@
               <span>📤</span>
               <span>シェア</span>
             </button>
+            <template v-if="isLocalhost">
+              <button class="action-btn edit-btn" @click="editBlog">
+                <span>✏️</span>
+                <span>編集</span>
+              </button>
+              
+              <button class="action-btn delete-btn" @click="deleteBlog">
+                <span>🗑️</span>
+                <span>削除</span>
+              </button>
+            </template>
           </div>
 
           <!-- 関連記事 -->
@@ -1081,10 +1119,13 @@
                 blogId: null,
                 showMenu: false,
                 hasLiked: false,
-                renderedContent: ''
+                renderedContent: '',
+                isLocalhost: false
               };
             },
             async mounted() {
+              this.isLocalhost = window.location.hostname === 'localhost' || 
+                     window.location.hostname === '127.0.0.1';
               try {
                 await waitForFirebase();
                 
@@ -1477,6 +1518,45 @@
                   month: 'long',
                   day: 'numeric'
                 });
+              },
+              // ブログ編集
+              editBlog() {
+                if (this.blogId) {
+                  window.location.href = `/blog/blog-editor.html?id=${this.blogId}`;
+                }
+              },
+              
+              // ブログ削除
+              async deleteBlog() {
+                if (!this.blogId) {
+                  alert('ブログIDが見つかりません');
+                  return;
+                }
+                
+                // 削除確認
+                const confirmMessage = `「${this.blog.title}」を削除しますか?\n\nこの操作は取り消せません。`;
+                if (!confirm(confirmMessage)) {
+                  return;
+                }
+                
+                // 二重確認
+                if (!confirm('本当に削除してもよろしいですか?')) {
+                  return;
+                }
+                
+                try {
+                  // Firestoreから削除
+                  await db.collection('blog_posts').doc(this.blogId).delete();
+                  
+                  console.log('ブログ削除成功:', this.blogId);
+                  alert('ブログを削除しました');
+                  
+                  // キャッシュをクリアしてブログ一覧にリダイレクト
+                  window.location.href = '/blog/blog.html?refresh=true';  // 変更
+                } catch (error) {
+                  console.error('ブログ削除エラー:', error);
+                  alert('ブログの削除に失敗しました: ' + error.message);
+                }
               }
             }
           });

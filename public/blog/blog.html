@@ -73,6 +73,43 @@
         opacity: 0.9;
         margin-top: 4px;
       }
+      .new-post-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 12pt;
+        cursor: pointer;
+        font-size: 15pt;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .new-post-btn:hover {
+        background: white;
+        color: #00A8C6;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .new-post-btn span:last-child {
+          display: none;
+        }
+        .new-post-btn {
+          width: 44px;
+          height: 44px;
+          padding: 0;
+          justify-content: center;
+          font-size: 24pt;
+        }
+      }
+
+
 
       /* ========== ハンバーガーメニューボタン ========== */
       .menu-btn, .back-btn {
@@ -585,6 +622,59 @@
         }
       }
 
+            /* ========== 編集ボタン（開発環境のみ） ========== */
+      .blog-card-header {
+        position: relative;
+      }
+
+      .edit-btn {
+        position: absolute;
+        top: 12pt;
+        right: 12pt;
+        background: rgba(0, 168, 198, 0.95);
+        color: white;
+        border: none;
+        padding: 8pt 16pt;
+        border-radius: 12pt;
+        font-size: 13pt;
+        font-weight: 600;
+        cursor: pointer;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 6pt;
+      }
+
+      .edit-btn:hover {
+        background: #00A8C6;
+        transform: scale(1.05);
+      }
+
+      .edit-btn:active {
+        transform: scale(0.95);
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 4pt 10pt;
+        border-radius: 8pt;
+        font-size: 10pt;
+        font-weight: 600;
+        margin-left: 8pt;
+      }
+
+      .status-badge.draft {
+        background: rgba(255, 193, 7, 0.2);
+        color: #F57C00;
+      }
+
+      .status-badge.published {
+        background: rgba(76, 175, 80, 0.2);
+        color: #388E3C;
+      }
+
       /* ========== ダークモード対応 ========== */
       @media (prefers-color-scheme: dark) {
         body {
@@ -719,6 +809,10 @@
               <div class="subtitle">体験記・スポット・ルート解説をシェア</div>
             </div>
           </div>
+          <button class="new-post-btn" @click="createNewBlog" v-if="isLocalhost">
+            <span>✏️</span>
+            <span>新規作成</span>
+          </button>
         </div>
       </header>
 
@@ -845,33 +939,44 @@
 
         <!-- ブログカードグリッド -->
         <div v-else class="blog-grid">
-          <div 
+          <div
             v-for="blog in displayedBlogs"
             :key="blog.id"
             class="blog-card"
-            @click="showBlogDetail(blog)"
           >
-            <!-- サムネイル画像 -->
-            <picture v-if="blog.thumbnailURL">
-              <source 
-                :srcset="getWebPUrl(blog.thumbnailURL)" 
-                type="image/webp"
+            <div class="blog-card-header">
+              <!-- 編集ボタン（開発環境のみ） -->
+              <button 
+                v-if="isDevelopment" 
+                class="edit-btn"
+                @click.stop="editBlog(blog.id)"
               >
-              <img 
-                :src="blog.thumbnailURL" 
-                :alt="blog.title"
-                class="blog-card-image"
-                loading="lazy"
-                decoding="async"
-                @error="handleImageError"
-              >
-            </picture>
-            <div v-else class="blog-card-image-placeholder">
-              📝
+                ✏️ 編集
+                <span v-if="blog.status === 'draft'" class="status-badge draft">下書き</span>
+              </button>
+
+              <!-- サムネイル画像 -->
+              <picture v-if="blog.thumbnailURL" @click="showBlogDetail(blog)">
+                <source 
+                  :srcset="getWebPUrl(blog.thumbnailURL)" 
+                  type="image/webp"
+                >
+                <img 
+                  :src="blog.thumbnailURL" 
+                  :alt="blog.title"
+                  class="blog-card-image"
+                  loading="lazy"
+                  decoding="async"
+                  @error="handleImageError"
+                >
+              </picture>
+              <div v-else class="blog-card-image-placeholder" @click="showBlogDetail(blog)">
+                📝
+              </div>
             </div>
 
             <!-- カード内容 -->
-            <div class="blog-card-content">
+            <div class="blog-card-content" @click="showBlogDetail(blog)">
               <!-- カテゴリバッジ -->
               <span class="blog-category">
                 {{ getCategoryName(blog.category) }}
@@ -1051,6 +1156,8 @@
                   { id: 'maintenance', name: 'メンテナンス', icon: '🔧' },
                   { id: 'gear_review', name: '装備レビュー', icon: '🎒' }
                 ],
+                isLocalhost: false,
+                isDevelopment: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
                 selectedCategory: 'all',
                 searchQuery: '',
                 sortBy: 'latest',
@@ -1064,23 +1171,33 @@
               };
             },
             async mounted() {
+              this.isLocalhost = window.location.hostname === 'localhost' || 
+                                window.location.hostname === '127.0.0.1';
               try {
                 await waitForFirebase();
                 
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
 
-                // URLパラメータでキャッシュクリア: ?clearCache=true
+                // URLパラメータを確認
                 const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.get('clearCache') === 'true') {
+                const shouldRefresh = urlParams.get('refresh') === 'true';
+                const shouldClearCache = urlParams.get('clearCache') === 'true';
+                
+                // キャッシュクリアまたはリフレッシュ
+                if (shouldRefresh || shouldClearCache) {
                   BlogCacheManager.clearCache();
                   console.log('キャッシュをクリアしました');
                   // パラメータを削除してリダイレクト
                   window.history.replaceState({}, document.title, window.location.pathname);
+                  
+                  // 強制的に全てのブログを再読み込み
+                  await this.loadAllBlogs();
+                } else {
+                  // 通常のキャッシュ読み込み
+                  await this.loadBlogsFromCache();
+                  await this.checkAndUpdateBlogs();
                 }
-                
-                await this.loadBlogsFromCache();
-                await this.checkAndUpdateBlogs();
                 
                 window.addEventListener('scroll', this.handleScroll);
                 document.addEventListener('keydown', this.handleKeydown);
@@ -1103,6 +1220,110 @@
                   this.applyFiltersAndSort();
                   this.isLoading = false;
                   console.log('キャッシュからブログを表示');
+                }
+              },
+              async loadAllBlogs() {
+                try {
+                  this.isLoading = true;
+                  console.log('全てのブログを再読み込み中...');
+                  
+                  // Firestoreから全ての公開済みブログを取得
+                  const snapshot = await db.collection('blog_posts')
+                    .where('status', '==', 'published')
+                    .orderBy('createdAt', 'desc')
+                    .get();
+                  
+                  if (snapshot.empty) {
+                    console.log('ブログが見つかりませんでした');
+                    this.blogs = [];
+                    this.applyFiltersAndSort();
+                    this.isLoading = false;
+                    return;
+                  }
+                  
+                  // ブログデータを処理
+                  const blogs = [];
+                  const authorIds = new Set();
+                  
+                  snapshot.forEach(doc => {
+                    const blogData = {
+                      id: doc.id,
+                      ...doc.data()
+                    };
+                    
+                    // タイムスタンプをDateオブジェクトに変換
+                    if (blogData.createdAt && blogData.createdAt.toDate) {
+                      blogData.createdAt = blogData.createdAt.toDate();
+                    }
+                    if (blogData.updatedAt && blogData.updatedAt.toDate) {
+                      blogData.updatedAt = blogData.updatedAt.toDate();
+                    }
+                    
+                    blogs.push(blogData);
+                    
+                    if (blogData.authorID) {
+                      authorIds.add(blogData.authorID);
+                    }
+                  });
+                  
+                  // 著者情報を一括取得
+                  if (authorIds.size > 0) {
+                    const authorPromises = Array.from(authorIds).map(async (authorId) => {
+                      try {
+                        const userDoc = await db.collection('userInfo').doc(authorId).get();
+                        if (userDoc.exists) {
+                          const userData = userDoc.data();
+                          return { id: authorId, data: userData };
+                        }
+                      } catch (error) {
+                        console.error(`ユーザー情報取得エラー (${authorId}):`, error);
+                      }
+                      return null;
+                    });
+                    
+                    const authors = await Promise.all(authorPromises);
+                    const authorMap = new Map();
+                    
+                    authors.forEach(author => {
+                      if (author) {
+                        authorMap.set(author.id, author.data);
+                      }
+                    });
+                    
+                    // ブログに著者情報を追加
+                    blogs.forEach(blog => {
+                      if (blog.authorID && authorMap.has(blog.authorID)) {
+                        const authorData = authorMap.get(blog.authorID);
+                        blog.authorName = authorData.userName || '匿名ユーザー';
+                        blog.authorIcon = authorData.userIcon || null;
+                      } else {
+                        blog.authorName = '匿名ユーザー';
+                        blog.authorIcon = null;
+                      }
+                    });
+                  } else {
+                    // 著者情報がない場合のデフォルト設定
+                    blogs.forEach(blog => {
+                      blog.authorName = '匿名ユーザー';
+                      blog.authorIcon = null;
+                    });
+                  }
+                  
+                  // ブログリストを更新
+                  this.blogs = blogs;
+                  
+                  // キャッシュに保存
+                  BlogCacheManager.saveToCache(blogs);
+                  
+                  // フィルタとソートを適用
+                  this.applyFiltersAndSort();
+                  
+                  console.log(`${blogs.length}件のブログを読み込みました`);
+                  this.isLoading = false;
+                } catch (error) {
+                  console.error('ブログ読み込みエラー:', error);
+                  this.error = error.message;
+                  this.isLoading = false;
                 }
               },
               async checkAndUpdateBlogs() {
@@ -1389,6 +1610,9 @@
               showBlogDetail(blog) {
                 window.location.href = `/blog/blog-detail.html?id=${blog.id}`;
               },
+              editBlog(blogId) {
+                window.location.href = `/blog/blog-editor.html?id=${blogId}`;
+              },
 
               getCategoryName(categoryId) {
                 const category = this.categories.find(cat => cat.id === categoryId);
@@ -1469,6 +1693,9 @@
                     this.closeMenu();
                   }
                 }
+              },
+              createNewBlog() {
+                window.location.href = '/blog/blog-editor.html';
               }
             }
           });

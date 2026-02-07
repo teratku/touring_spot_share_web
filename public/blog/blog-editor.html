@@ -1140,12 +1140,15 @@
               <span>👁️</span>
               <span class="header-btn-text">プレビュー</span>
             </button>
-            <button class="header-btn primary" @click="saveBlogPost">
+            <button class="header-btn" @click="saveDraft" :disabled="isSaving">
               <span>💾</span>
-              <span class="header-btn-text">保存</span>
+              <span class="header-btn-text">下書き保存</span>
+            </button>
+            <button class="header-btn primary" @click="publishBlog" :disabled="isSaving">
+              <span>🚀</span>
+              <span class="header-btn-text">{{ isEditMode && blogPost.status === 'published' ? '更新' : '公開' }}</span>
             </button>
           </div>
-        </div>
       </header>
 
       <!-- ハンバーガーメニュー -->
@@ -1625,6 +1628,12 @@
               }
             },
             async mounted() {
+                if (window.location.hostname !== 'localhost' && 
+                    window.location.hostname !== '127.0.0.1') {
+                    alert('⚠️ この編集画面は開発環境専用です。本番環境では使用できません。');
+                    window.location.href = '/blog/blog.html';
+                    return;
+                }
                 try {
                     await waitForFirebase();
                     
@@ -1632,12 +1641,14 @@
                     db = firebase.firestore();
                     storage = firebase.storage();
                     
-                    // URLパラメータからブログIDを取得（編集モードの場合）
+                    // URLパラメータからブログIDを取得(編集モードの場合)
                     const urlParams = new URLSearchParams(window.location.search);
                     const blogId = urlParams.get('id');
                     
                     if (blogId) {
-                    await this.loadBlogPost(blogId);
+                        this.blogId = blogId;
+                        this.isEditMode = true;
+                        await this.loadBlogPost();  // 引数なしで呼び出し
                     }
                     
                     document.addEventListener('keydown', this.handleKeydown);
@@ -1647,113 +1658,48 @@
                 }
             },
 
-            // methods内に追加
-            async loadBlogPost(blogId) {
-                try {
-                    const doc = await db.collection('blog_posts').doc(blogId).get();
-                    
-                    if (!doc.exists) {
-                    this.showToast('ブログが見つかりませんでした', 'error');
-                    return;
-                    }
-                    
-                    const data = doc.data();
-                    this.blogId = blogId;
-                    this.isEditMode = true;
-                    
-                    this.blogPost = {
-                    title: data.title || '',
-                    content: data.content || '',
-                    category: data.category || 'touring',
-                    tags: data.tags || [],
-                    thumbnailUrl: data.thumbnailUrl || '',
-                    status: data.status || 'draft'
-                    };
-                    
-                    console.log('ブログ読み込み成功:', blogId);
-                } catch (error) {
-                    console.error('ブログ読み込みエラー:', error);
-                    this.showToast('ブログの読み込みに失敗しました', 'error');
-                }
-            },
             beforeUnmount() {
               document.removeEventListener('keydown', this.handleKeydown);
             },
             methods: {
-              // デモデータ生成
-              generateDemoData() {
-                this.blogPost = {
-                  title: '秋の富士山周遊ツーリング',
-                  content: `## はじめに
+              // ブログ読み込み
+                async loadBlogPost() {
+                    try {
+                        if (!this.blogId) {
+                            this.showToast('ブログIDが指定されていません', 'error');
+                            return;
+                        }
 
-先週末、念願の富士山周遊ツーリングに行ってきました！
-紅葉シーズン真っ盛りで、絶景の連続でした。
-
-### ルート概要
-
-河口湖をスタート地点として、富士五湖を巡るルートを選択。
-約150kmの道のりでしたが、景色が素晴らしく全く飽きませんでした。
-
-**おすすめポイント**
-- 河口湖展望台からの眺め
-- 精進湖の静けさ
-- 本栖湖の透明度
-
-### 装備について
-
-今回のツーリングで持っていった装備：
-\`\`\`
-- レインウェア（急な雨対策）
-- 防寒着（標高が高いため）
-- カメラ（絶景撮影用）
-\`\`\`
-
-> 標高が高いエリアは気温が低いので、しっかりとした防寒対策が必須です！
-
-![富士山](https://example.com/fuji.jpg)
-
-### まとめ
-
-富士山周遊は何度走っても飽きない最高のルートです。
-みなさんもぜひチャレンジしてみてください！`,
-                  category: 'touring',
-                  tags: ['富士山', '絶景', '秋'],
-                  thumbnailUrl: '',
-                  status: 'draft'
-                };
-              },
-
-              // ブログ記事読み込み（編集モード）
-              async loadBlogPost() {
-                try {
-                  /* 実際のFirestoreからの読み込み
-                  const doc = await db.collection('blog_posts').doc(this.blogId).get();
-                  
-                  if (!doc.exists) {
-                    this.showToast('ブログ記事が見つかりません', 'error');
-                    return;
-                  }
-
-                  const data = doc.data();
-                  this.blogPost = {
-                    title: data.title || '',
-                    content: data.content || '',
-                    category: data.category || '',
-                    tags: data.tags || [],
-                    thumbnailUrl: data.thumbnailUrl || '',
-                    status: data.status || 'draft'
-                  };
-                  */
-
-                  // デモデータ
-                  this.generateDemoData();
-                  this.showToast('ブログを読み込みました', 'success');
-                } catch (error) {
-                  console.error('ブログ読み込みエラー:', error);
-                  this.showToast('ブログの読み込みに失敗しました', 'error');
-                }
-              },
-
+                        const doc = await db.collection('blog_posts').doc(this.blogId).get();
+                        
+                        if (!doc.exists) {
+                            this.showToast('ブログが見つかりませんでした', 'error');
+                            setTimeout(() => {
+                                window.location.href = '/blog/blog.html';
+                            }, 2000);
+                            return;
+                        }
+                        
+                        const data = doc.data();
+                        
+                        // データをblogPostに設定
+                        this.blogPost = {
+                            title: data.title || '',
+                            content: data.content || '',
+                            category: data.category || '',
+                            tags: data.tags || [],
+                            thumbnailUrl: data.thumbnailUrl || '',
+                            status: data.status || 'draft'
+                        };
+                        
+                        console.log('ブログ読み込み成功:', this.blogId);
+                        console.log('読み込んだデータ:', this.blogPost);
+                        this.showToast('ブログを読み込みました', 'success');
+                    } catch (error) {
+                        console.error('ブログ読み込みエラー:', error);
+                        this.showToast('ブログの読み込みに失敗しました: ' + error.message, 'error');
+                    }
+                },
               // Markdown挿入
               insertMarkdown(before, after) {
                 const textarea = this.$refs.markdownEditor;
@@ -2138,10 +2084,20 @@
                   }
                 }
               },
-
-              // ブログ保存
-              // saveBlogPost メソッド内を以下に変更
-              async saveBlogPost() {
+              // 下書き保存
+              async saveDraft() {
+                await this.saveBlogPost('draft');
+              },
+              async publishBlog() {
+                if (!confirm(this.isEditMode && this.blogPost.status === 'published' 
+                  ? 'ブログを更新して公開しますか？' 
+                  : 'ブログを公開しますか？')) {
+                  return;
+                }
+                await this.saveBlogPost('published');
+              },
+              // ブログ保存（共通処理）
+              async saveBlogPost(status) {
                 // バリデーション
                 if (!this.blogPost.title.trim()) {
                     this.showToast('タイトルを入力してください', 'error');
@@ -2162,42 +2118,50 @@
 
                 try {
                     const blogData = {
-                    title: this.blogPost.title.trim(),
-                    content: this.blogPost.content.trim(),
-                    category: this.blogPost.category,
-                    tags: this.blogPost.tags,
-                    thumbnailUrl: this.blogPost.thumbnailUrl,
-                    status: this.blogPost.status,
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                      title: this.blogPost.title.trim(),
+                      content: this.blogPost.content.trim(),
+                      category: this.blogPost.category,
+                      tags: this.blogPost.tags,
+                      thumbnailUrl: this.blogPost.thumbnailUrl,
+                      status: status, // 引数で受け取ったステータスを設定
+                      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                     };
 
                     if (this.isEditMode && this.blogId) {
-                    // 更新
-                    await db.collection('blog_posts').doc(this.blogId).update(blogData);
-                    console.log('ブログ更新成功:', this.blogId);
-                    this.showToast('ブログを更新しました', 'success');
+                      // 更新
+                      await db.collection('blog_posts').doc(this.blogId).update(blogData);
+                      console.log('ブログ更新成功:', this.blogId);
+                      this.blogPost.status = status; // ローカルのステータスも更新
+                      this.showToast(
+                        status === 'published' ? 'ブログを公開しました' : '下書きを保存しました', 
+                        'success'
+                      );
                     } else {
-                    // 新規作成
-                    blogData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-                    blogData.views = 0;
-                    blogData.likes = 0;
-                    
-                    // TODO: 認証実装後にユーザーIDを追加
-                    // blogData.userId = firebase.auth().currentUser.uid;
+                      // 新規作成
+                      blogData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                      blogData.views = 0;
+                      blogData.likes = 0;
+                      
+                      // TODO: 認証実装後にユーザーIDを追加
+                      // blogData.userId = firebase.auth().currentUser.uid;
 
-                    const docRef = await db.collection('blog_posts').add(blogData);
-                    this.blogId = docRef.id;
-                    this.isEditMode = true;
-                    
-                    console.log('ブログ作成成功:', docRef.id);
-                    this.showToast('ブログを作成しました', 'success');
+                      const docRef = await db.collection('blog_posts').add(blogData);
+                      this.blogId = docRef.id;
+                      this.isEditMode = true;
+                      this.blogPost.status = status; // ローカルのステータスも更新
+                      
+                      console.log('ブログ作成成功:', docRef.id);
+                      this.showToast(
+                        status === 'published' ? 'ブログを公開しました' : '下書きを保存しました', 
+                        'success'
+                      );
                     }
 
                     // 公開状態の場合はブログ一覧へリダイレクト
-                    if (this.blogPost.status === 'published') {
-                    setTimeout(() => {
-                        window.location.href = '/blog/blog.html';
-                    }, 1500);
+                    if (status === 'published') {
+                      setTimeout(() => {
+                          window.location.href = '/blog/blog.html';
+                      }, 1500);
                     }
                 } catch (error) {
                     console.error('保存エラー:', error);
@@ -2245,7 +2209,7 @@
                 // Ctrl/Cmd + S: 保存
                 if ((event.ctrlKey || event.metaKey) && event.key === 's') {
                   event.preventDefault();
-                  this.saveBlogPost();
+                  this.saveDraft();
                 }
               },
 
