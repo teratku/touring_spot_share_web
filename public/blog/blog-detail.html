@@ -1275,31 +1275,11 @@
               },
 
               async loadAuthorInfo() {
-                if (!this.blog.authorID) {
-                  this.authorInfo = {
-                    userName: '匿名ユーザー',
-                    userIcon: null
-                  };
-                  return;
-                }
-
-                try {
-                  const doc = await db.collection('userInfo').doc(this.blog.authorID).get();
-                  if (doc.exists) {
-                    this.authorInfo = doc.data();
-                  } else {
-                    this.authorInfo = {
-                      userName: '匿名ユーザー',
-                      userIcon: null
-                    };
-                  }
-                } catch (error) {
-                  console.error('作者情報取得エラー:', error);
-                  this.authorInfo = {
-                    userName: '匿名ユーザー',
-                    userIcon: null
-                  };
-                }
+                // 全てのブログは開発者投稿として表示
+                this.authorInfo = {
+                  userName: 'Touring Spot Share 開発者',
+                  userIcon: null
+                };
               },
 
               async loadEmbeddedContent() {

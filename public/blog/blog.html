@@ -1521,48 +1521,10 @@
                     }
                   });
                   
-                  // 著者情報を一括取得
-                  if (authorIds.size > 0) {
-                    const authorPromises = Array.from(authorIds).map(async (authorId) => {
-                      try {
-                        const userDoc = await db.collection('userInfo').doc(authorId).get();
-                        if (userDoc.exists) {
-                          const userData = userDoc.data();
-                          return { id: authorId, data: userData };
-                        }
-                      } catch (error) {
-                        console.error(`ユーザー情報取得エラー (${authorId}):`, error);
-                      }
-                      return null;
-                    });
-                    
-                    const authors = await Promise.all(authorPromises);
-                    const authorMap = new Map();
-                    
-                    authors.forEach(author => {
-                      if (author) {
-                        authorMap.set(author.id, author.data);
-                      }
-                    });
-                    
-                    // ブログに著者情報を追加
-                    blogs.forEach(blog => {
-                      if (blog.authorID && authorMap.has(blog.authorID)) {
-                        const authorData = authorMap.get(blog.authorID);
-                        blog.authorName = authorData.userName || '匿名ユーザー';
-                        blog.authorIcon = authorData.userIcon || null;
-                      } else {
-                        blog.authorName = '匿名ユーザー';
-                        blog.authorIcon = null;
-                      }
-                    });
-                  } else {
-                    // 著者情報がない場合のデフォルト設定
-                    blogs.forEach(blog => {
-                      blog.authorName = '匿名ユーザー';
-                      blog.authorIcon = null;
-                    });
-                  }
+                  blogs.forEach(blog => {
+                    blog.authorName = 'Touring Spot Share 開発者';
+                    blog.authorIcon = null;
+                  });
                   
                   // ブログリストを更新
                   this.blogs = blogs;
