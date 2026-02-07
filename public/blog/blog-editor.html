@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ブログ編集 | ツーリングスポットシェア</title>
+
+    <!-- リソースヒント -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+    <!-- Marked.js (Markdown → HTML) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+
+    <style>
+      /* ========== リセット & ベーススタイル ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ========== ヘッダー ========== */
+      header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .menu-btn, .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 12pt;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-btn:hover, .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      h1 {
+        font-size: 20pt;
+        font-weight: 600;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      .header-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 12pt;
+        cursor: pointer;
+        font-size: 15pt;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .header-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .header-btn.primary {
+        background: white;
+        color: #00A8C6;
+        border-color: white;
+      }
+
+      .header-btn.primary:hover {
+        background: #F9F9F9;
+      }
+
+      /* ========== ハンバーガーメニュー ========== */
+      .hamburger-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .hamburger-menu.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .menu-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 280px;
+        height: 100%;
+        background: white;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+        animation: slideInLeft 0.3s ease;
+      }
+
+      @keyframes slideInLeft {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+      }
+
+      .menu-header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 20px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-header h2 {
+        font-size: 20pt;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .menu-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .menu-nav {
+        padding: 16px 0;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        color: #333333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-left: 4px solid transparent;
+      }
+
+      .menu-item:hover {
+        background: #F9F9F9;
+        border-left-color: #00A8C6;
+      }
+
+      .menu-icon {
+        font-size: 20pt;
+        width: 28px;
+        text-align: center;
+      }
+
+      /* ========== メインコンテナ ========== */
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      /* ========== エディターレイアウト ========== */
+      .editor-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 24px;
+      }
+
+      .editor-panel, .preview-panel {
+        background: white;
+        border-radius: 16pt;
+        padding: 24pt;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .panel-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #228B22;
+        margin-bottom: 16pt;
+        padding-bottom: 8pt;
+        border-bottom: 2px solid #F5DEB3;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* ========== メタデータフォーム ========== */
+      .metadata-section {
+        background: white;
+        border-radius: 16pt;
+        padding: 24pt;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
+      }
+
+      .section-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #228B22;
+        margin-bottom: 16pt;
+        padding-bottom: 8pt;
+        border-bottom: 2px solid #F5DEB3;
+      }
+
+      .form-group {
+        margin-bottom: 20pt;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 15pt;
+        font-weight: 500;
+        color: #333333;
+        margin-bottom: 8pt;
+      }
+
+      .required {
+        color: #E63946;
+        margin-left: 4px;
+      }
+
+      .form-input, .form-select, .form-textarea {
+        width: 100%;
+        padding: 12pt;
+        border: 1px solid #E0E0E0;
+        border-radius: 8pt;
+        font-size: 16pt;
+        font-family: inherit;
+        transition: all 0.2s ease;
+      }
+
+      .form-input:focus, .form-select:focus, .form-textarea:focus {
+        outline: none;
+        border-color: #00A8C6;
+        box-shadow: 0 0 0 3px rgba(0, 168, 198, 0.1);
+      }
+
+      /* ========== サムネイル ========== */
+      .thumbnail-upload {
+        display: flex;
+        flex-direction: column;
+        gap: 12pt;
+      }
+
+      .thumbnail-preview {
+        width: 100%;
+        max-width: 400px;
+        height: 200px;
+        border-radius: 12pt;
+        overflow: hidden;
+        background: #E0E0E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .thumbnail-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .thumbnail-placeholder {
+        font-size: 48pt;
+        color: #999999;
+      }
+
+      .thumbnail-input-wrapper {
+        display: flex;
+        gap: 12pt;
+      }
+
+      .file-input-btn {
+        background: #00A8C6;
+        color: white;
+        padding: 10pt 16pt;
+        border-radius: 12pt;
+        cursor: pointer;
+        font-size: 15pt;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .file-input-btn:hover {
+        background: #008ca6;
+        transform: translateY(-2px);
+      }
+
+      /* ========== タグ入力 ========== */
+      .tag-input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12pt;
+      }
+
+      .tag-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8pt;
+        min-height: 40px;
+      }
+
+      .tag-chip {
+        background: #F5DEB3;
+        color: #333333;
+        padding: 6pt 12pt;
+        border-radius: 12pt;
+        font-size: 14pt;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .tag-chip:hover {
+        background: #E5D0A3;
+      }
+
+      .tag-remove {
+        background: transparent;
+        border: none;
+        color: #E63946;
+        cursor: pointer;
+        font-size: 16pt;
+        line-height: 1;
+        padding: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .tag-input {
+        width: 100%;
+        padding: 10pt 12pt;
+        border: 1px solid #E0E0E0;
+        border-radius: 8pt;
+        font-size: 15pt;
+      }
+
+      .tag-hint {
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      /* ========== ステータストグル ========== */
+      .status-toggle {
+        display: flex;
+        gap: 12pt;
+      }
+
+      .status-btn {
+        flex: 1;
+        padding: 12pt;
+        border: 2px solid #E0E0E0;
+        border-radius: 12pt;
+        background: white;
+        color: #666666;
+        font-size: 15pt;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .status-btn.active {
+        border-color: #00A8C6;
+        background: #00A8C6;
+        color: white;
+      }
+
+      .status-btn.draft.active {
+        border-color: #999999;
+        background: #999999;
+      }
+
+      /* ========== Markdownツールバー ========== */
+      .toolbar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12pt;
+        padding-bottom: 12pt;
+        border-bottom: 1px solid #E0E0E0;
+      }
+
+      .toolbar button {
+        background: white;
+        border: 1px solid #E0E0E0;
+        padding: 8pt 12pt;
+        border-radius: 8pt;
+        cursor: pointer;
+        font-size: 14pt;
+        transition: all 0.2s ease;
+      }
+
+      .toolbar button:hover {
+        background: #F9F9F9;
+        border-color: #00A8C6;
+      }
+
+      /* ========== Markdownエディター ========== */
+      .markdown-editor {
+        width: 100%;
+        min-height: 500px;
+        padding: 16pt;
+        border: 1px solid #E0E0E0;
+        border-radius: 8pt;
+        font-size: 15pt;
+        font-family: "Courier New", monospace;
+        line-height: 1.6;
+        resize: vertical;
+        transition: all 0.2s ease;
+      }
+
+      .markdown-editor:focus {
+        outline: none;
+        border-color: #00A8C6;
+        box-shadow: 0 0 0 3px rgba(0, 168, 198, 0.1);
+      }
+
+      /* ========== プレビューエリア ========== */
+      .preview-content {
+        min-height: 500px;
+        padding: 16pt;
+        border: 1px solid #E0E0E0;
+        border-radius: 8pt;
+        background: #FAFAFA;
+        overflow-y: auto;
+      }
+
+      /* Markdownスタイル */
+      .preview-content h2 {
+        font-size: 24pt;
+        font-weight: 600;
+        color: #228B22;
+        margin-top: 24pt;
+        margin-bottom: 12pt;
+        padding-bottom: 8pt;
+        border-bottom: 2px solid #F5DEB3;
+      }
+
+      .preview-content h2:first-child {
+        margin-top: 0;
+      }
+
+      .preview-content h3 {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+        margin-top: 20pt;
+        margin-bottom: 10pt;
+      }
+
+      .preview-content p {
+        margin-bottom: 16pt;
+        line-height: 1.8;
+      }
+
+      .preview-content code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 14pt;
+      }
+
+      .preview-content pre {
+        background: #F5F5F5;
+        padding: 16pt;
+        border-radius: 8pt;
+        overflow-x: auto;
+        margin-bottom: 16pt;
+      }
+
+      .preview-content pre code {
+        background: none;
+        padding: 0;
+      }
+
+      .preview-content blockquote {
+        border-left: 4px solid #00A8C6;
+        padding-left: 16pt;
+        margin: 16pt 0;
+        color: #666666;
+        font-style: italic;
+      }
+
+      .preview-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12pt;
+        margin: 16pt 0;
+      }
+
+      .preview-content ul, .preview-content ol {
+        margin-left: 24pt;
+        margin-bottom: 16pt;
+      }
+
+      .preview-content li {
+        margin-bottom: 8pt;
+      }
+
+      /* 埋め込みカードプレビュー */
+      .embed-card-preview {
+        background: white;
+        border: 2px solid #E0E0E0;
+        border-radius: 12pt;
+        padding: 16pt;
+        margin: 16pt 0;
+        display: flex;
+        align-items: center;
+        gap: 12pt;
+      }
+
+      .embed-card-preview .embed-icon {
+        font-size: 32pt;
+        flex-shrink: 0;
+      }
+
+      .embed-card-preview .embed-info {
+        flex: 1;
+      }
+
+      .embed-card-preview .embed-title {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 4pt;
+      }
+
+      .embed-card-preview .embed-meta {
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      /* ========== モーダル ========== */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2500;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 16pt;
+        width: 90%;
+        max-width: 800px;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-header {
+        padding: 20pt;
+        border-bottom: 1px solid #E0E0E0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+      }
+
+      .modal-close {
+        background: #E0E0E0;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24pt;
+        color: #333333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .modal-close:hover {
+        background: #C7C7CC;
+      }
+
+      .modal-body {
+        padding: 20pt;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      /* ========== 検索ボックス ========== */
+      .search-box {
+        margin-bottom: 16pt;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 12pt;
+        border: 1px solid #E0E0E0;
+        border-radius: 8pt;
+        font-size: 15pt;
+      }
+
+      /* ========== アイテムリスト ========== */
+      .item-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12pt;
+      }
+
+      .item-card {
+        background: #F9F9F9;
+        border-radius: 12pt;
+        padding: 12pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-left: 4px solid #00A8C6;
+      }
+
+      .item-card:hover {
+        background: #E8F8FB;
+        transform: translateX(4px);
+      }
+
+      .item-name {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 6pt;
+      }
+
+      .item-meta {
+        font-size: 13pt;
+        color: #666666;
+        display: flex;
+        gap: 12pt;
+        flex-wrap: wrap;
+      }
+
+      /* ========== ローディング ========== */
+      .loading {
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      .spinner {
+        border: 4px solid #E0E0E0;
+        border-top: 4px solid #00A8C6;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* ========== エンプティステート ========== */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #666666;
+      }
+
+      .empty-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+        opacity: 0.5;
+      }
+
+      /* ========== 保存中オーバーレイ ========== */
+      .saving-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .saving-content {
+        background: white;
+        padding: 32pt;
+        border-radius: 16pt;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .saving-content .spinner {
+        margin: 0 auto 16px;
+      }
+
+      .saving-content p {
+        font-size: 16pt;
+        color: #333333;
+      }
+
+      /* ========== 画像アップロード中オーバーレイ ========== */
+      .uploading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .uploading-content {
+        background: white;
+        padding: 32pt;
+        border-radius: 16pt;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .uploading-content .spinner {
+        margin: 0 auto 16px;
+      }
+
+      .uploading-content p {
+        font-size: 16pt;
+        color: #333333;
+        margin-bottom: 16pt;
+      }
+
+      .upload-progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #E0E0E0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 12pt;
+      }
+
+      .upload-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #00A8C6 0%, #228B22 100%);
+        transition: width 0.3s ease;
+        border-radius: 4px;
+      }
+
+      .upload-progress-text {
+        font-size: 14pt;
+        font-weight: 600;
+        color: #00A8C6;
+      }
+
+      /* ========== トースト通知 ========== */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: white;
+        color: #333333;
+        padding: 16pt 24pt;
+        border-radius: 12pt;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        z-index: 4000;
+        animation: slideInUp 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 12pt;
+        max-width: 400px;
+      }
+
+      @keyframes slideInUp {
+        from {
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .toast.success {
+        border-left: 4px solid #228B22;
+      }
+
+      .toast.error {
+        border-left: 4px solid #E63946;
+      }
+
+      .toast-icon {
+        font-size: 24pt;
+      }
+
+      .toast-message {
+        font-size: 15pt;
+        font-weight: 500;
+      }
+
+      /* ========== レスポンシブ ========== */
+      @media (max-width: 1024px) {
+        .editor-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-panel {
+          display: none;
+        }
+
+        .header-btn-text {
+          display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          padding: 12px;
+        }
+
+        h1 {
+          font-size: 16pt;
+        }
+
+        .header-btn {
+          padding: 6px 12px;
+          font-size: 13pt;
+        }
+
+        .container {
+          padding: 16px 12px;
+        }
+
+        .editor-panel, .preview-panel, .metadata-section {
+          padding: 16pt;
+        }
+
+        .menu-content {
+          width: 240px;
+        }
+      }
+
+      /* ========== ダークモード対応 ========== */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1C1C1E;
+          color: #F2F2F7;
+        }
+
+        .editor-panel, .preview-panel, .metadata-section {
+          background: #2C2C2E;
+        }
+
+        .panel-title, .section-title {
+          color: #32D74B;
+        }
+
+        .form-label, .item-name {
+          color: #F2F2F7;
+        }
+
+        .form-input, .form-select, .form-textarea, .markdown-editor, .tag-input, .search-input {
+          background: #1C1C1E;
+          border-color: #48484A;
+          color: #F2F2F7;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus, .markdown-editor:focus, .tag-input:focus, .search-input:focus {
+          border-color: #00D4FF;
+          box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .preview-content {
+          background: #1C1C1E;
+          border-color: #48484A;
+        }
+
+        .preview-content h2 {
+          color: #32D74B;
+        }
+
+        .preview-content h3 {
+          color: #00D4FF;
+        }
+
+        .preview-content code, .preview-content pre {
+          background: #2C2C2E;
+        }
+
+        .preview-content blockquote {
+          border-left-color: #00D4FF;
+          color: #AEAEB2;
+        }
+
+        .toolbar button {
+          background: #1C1C1E;
+          border-color: #48484A;
+          color: #F2F2F7;
+        }
+
+        .toolbar button:hover {
+          background: #2C2C2E;
+          border-color: #00D4FF;
+        }
+
+        .tag-chip {
+          background: rgba(245, 222, 179, 0.2);
+          color: #F2F2F7;
+        }
+
+        .tag-chip:hover {
+          background: rgba(245, 222, 179, 0.3);
+        }
+
+        .status-btn {
+          background: #1C1C1E;
+          border-color: #48484A;
+          color: #AEAEB2;
+        }
+
+        .status-btn.active {
+          border-color: #00D4FF;
+          background: #00D4FF;
+          color: #1C1C1E;
+        }
+
+        .status-btn.draft.active {
+          border-color: #8E8E93;
+          background: #8E8E93;
+        }
+
+        .menu-content {
+          background: #2C2C2E;
+        }
+
+        .menu-item {
+          color: #F2F2F7;
+        }
+
+        .menu-item:hover {
+          background: #3A3A3C;
+          border-left-color: #00D4FF;
+        }
+
+        .modal-content {
+          background: #2C2C2E;
+        }
+
+        .modal-header {
+          border-bottom-color: #48484A;
+        }
+
+        .modal-title {
+          color: #00D4FF;
+        }
+
+        .modal-close {
+          background: #48484A;
+          color: #F2F2F7;
+        }
+
+        .modal-close:hover {
+          background: #636366;
+        }
+
+        .item-card {
+          background: #1C1C1E;
+          border-left-color: #00D4FF;
+        }
+
+        .item-card:hover {
+          background: #2C2C2E;
+        }
+
+        .item-meta {
+          color: #AEAEB2;
+        }
+
+        .embed-card-preview {
+          background: #1C1C1E;
+          border-color: #48484A;
+        }
+
+        .embed-card-preview .embed-title {
+          color: #F2F2F7;
+        }
+
+        .embed-card-preview .embed-meta {
+          color: #AEAEB2;
+        }
+
+        .saving-content, .uploading-content {
+          background: #2C2C2E;
+        }
+
+        .saving-content p, .uploading-content p {
+          color: #F2F2F7;
+        }
+
+        .upload-progress-bar {
+          background: #48484A;
+        }
+
+        .upload-progress-text {
+          color: #00D4FF;
+        }
+
+        .toast {
+          background: #2C2C2E;
+          color: #F2F2F7;
+        }
+
+        .toast.success {
+          border-left-color: #32D74B;
+        }
+
+        .toast.error {
+          border-left-color: #FF453A;
+        }
+
+        .thumbnail-preview {
+          background: #1C1C1E;
+        }
+
+        .file-input-btn {
+          background: #00D4FF;
+          color: #1C1C1E;
+        }
+
+        .file-input-btn:hover {
+          background: #5AC8FA;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="app">
+      <!-- ヘッダー -->
+      <header>
+        <div class="header-content">
+          <div class="header-left">
+            <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
+            <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
+            <h1>{{ isEditMode ? 'ブログ編集' : 'ブログ作成' }}</h1>
+          </div>
+          
+          <div class="header-actions">
+            <button class="header-btn" @click="previewBlog">
+              <span>👁️</span>
+              <span class="header-btn-text">プレビュー</span>
+            </button>
+            <button class="header-btn primary" @click="saveBlogPost">
+              <span>💾</span>
+              <span class="header-btn-text">保存</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- ハンバーガーメニュー -->
+      <div class="hamburger-menu" :class="{ active: showMenu }" @click="closeMenu">
+        <div class="menu-content" @click.stop>
+          <div class="menu-header">
+            <h2>メニュー</h2>
+            <button class="menu-close-btn" @click="closeMenu" aria-label="閉じる">✕</button>
+          </div>
+          <nav class="menu-nav">
+            <a href="/" class="menu-item">
+              <span class="menu-icon">🏠</span>
+              <span>ホーム</span>
+            </a>
+            <a href="/blog/blog.html" class="menu-item">
+              <span class="menu-icon">📝</span>
+              <span>ブログ一覧</span>
+            </a>
+            <a href="/privacypolicy/privacypolicy.html" class="menu-item">
+              <span class="menu-icon">🔒</span>
+              <span>プライバシーポリシー</span>
+            </a>
+            <a href="/termsofservice/termsofservice.html" class="menu-item">
+              <span class="menu-icon">📋</span>
+              <span>利用規約</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- メインコンテンツ -->
+      <div class="container">
+        <!-- メタデータセクション -->
+        <div class="metadata-section">
+          <h2 class="section-title">📋 ブログ情報</h2>
+          
+          <!-- タイトル -->
+          <div class="form-group">
+            <label class="form-label">
+              タイトル<span class="required">*</span>
+            </label>
+            <input 
+              type="text" 
+              class="form-input"
+              v-model="blogPost.title"
+              placeholder="ブログのタイトルを入力..."
+              maxlength="100"
+            >
+          </div>
+
+          <!-- サムネイル画像 -->
+          <div class="form-group">
+            <label class="form-label">サムネイル画像</label>
+            <div class="thumbnail-upload">
+              <div class="thumbnail-preview">
+                <img v-if="blogPost.thumbnailUrl" :src="blogPost.thumbnailUrl" alt="サムネイル">
+                <div v-else class="thumbnail-placeholder">📷</div>
+              </div>
+              <div class="thumbnail-input-wrapper">
+                <input 
+                  type="file" 
+                  ref="thumbnailInput"
+                  accept="image/*"
+                  style="display: none;"
+                  @change="handleThumbnailUpload"
+                >
+                <button class="file-input-btn" @click="$refs.thumbnailInput.click()">
+                  📷 画像を選択
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- カテゴリ -->
+          <div class="form-group">
+            <label class="form-label">
+              カテゴリ<span class="required">*</span>
+            </label>
+            <select class="form-select" v-model="blogPost.category">
+              <option value="">カテゴリを選択...</option>
+              <option value="touring">ツーリング記録</option>
+              <option value="spot">スポット紹介</option>
+              <option value="route">ルート解説</option>
+              <option value="gourmet">グルメ</option>
+              <option value="maintenance">メンテナンス</option>
+              <option value="gear">ギア・装備</option>
+              <option value="beginner">初心者向け</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+
+          <!-- タグ -->
+          <div class="form-group">
+            <label class="form-label">タグ（最大10個）</label>
+            <div class="tag-input-container">
+              <div class="tag-chips" v-if="blogPost.tags.length > 0">
+                <div 
+                  v-for="(tag, index) in blogPost.tags"
+                  :key="index"
+                  class="tag-chip"
+                >
+                  {{ tag }}
+                  <button class="tag-remove" @click="removeTag(index)">✕</button>
+                </div>
+              </div>
+              <input 
+                type="text" 
+                class="tag-input"
+                v-model="tagInput"
+                @keydown.enter.prevent="addTag"
+                @keydown.comma.prevent="addTag"
+                placeholder="タグを入力してEnterまたはカンマで追加..."
+                :disabled="blogPost.tags.length >= 10"
+              >
+              <p class="tag-hint">💡 Enterキーまたはカンマでタグを追加できます</p>
+            </div>
+          </div>
+
+          <!-- 公開ステータス -->
+          <div class="form-group">
+            <label class="form-label">公開ステータス</label>
+            <div class="status-toggle">
+              <button 
+                class="status-btn draft"
+                :class="{ active: blogPost.status === 'draft' }"
+                @click="blogPost.status = 'draft'"
+              >
+                📝 下書き
+              </button>
+              <button 
+                class="status-btn"
+                :class="{ active: blogPost.status === 'published' }"
+                @click="blogPost.status = 'published'"
+              >
+                🌐 公開
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- エディターレイアウト -->
+        <div class="editor-layout">
+          <!-- エディターパネル -->
+          <div class="editor-panel">
+            <h2 class="panel-title">✍️ 本文</h2>
+            
+            <!-- Markdownツールバー -->
+            <div class="toolbar">
+              <button @click="insertMarkdown('## ', '')" title="見出し2">H2</button>
+              <button @click="insertMarkdown('### ', '')" title="見出し3">H3</button>
+              <button @click="insertMarkdown('**', '**')" title="太字">B</button>
+              <button @click="insertMarkdown('*', '*')" title="斜体">I</button>
+              <button @click="insertLink" title="リンク">🔗</button>
+              <button @click="insertMarkdown('`', '`')" title="コード">&lt;/&gt;</button>
+              <button @click="openImageUpload" title="画像挿入">📷</button>
+              <button @click="openSpotModal" title="スポット挿入">📍</button>
+              <button @click="openRouteModal" title="ルート挿入">🗺️</button>
+            </div>
+
+            <!-- Markdownエディター -->
+            <textarea 
+              class="markdown-editor"
+              ref="markdownEditor"
+              v-model="blogPost.content"
+              placeholder="Markdown形式で本文を入力...
+
+## 見出し2
+### 見出し3
+
+**太字** *斜体*
+
+- リスト項目1
+- リスト項目2
+
+[リンクテキスト](URL)
+
+{{spot:documentID}} でスポットを埋め込み
+{{route:documentID}} でルートを埋め込み"
+            ></textarea>
+          </div>
+
+          <!-- プレビューパネル -->
+          <div class="preview-panel">
+            <h2 class="panel-title">👁️ プレビュー</h2>
+            <div class="preview-content" v-html="renderedMarkdown"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 非表示の画像アップロード用input -->
+      <input 
+        type="file" 
+        ref="imageUploadInput"
+        accept="image/*"
+        style="display: none;"
+        @change="handleImageUpload"
+      >
+
+      <!-- スポット挿入モーダル -->
+      <div v-if="showSpotModal" class="modal-overlay" @click="closeSpotModal">
+        <div class="modal-content" @click.stop>
+          <div class="modal-header">
+            <h2 class="modal-title">📍 スポットを選択</h2>
+            <button class="modal-close" @click="closeSpotModal">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="search-box">
+              <input 
+                type="text" 
+                class="search-input"
+                v-model="spotSearchQuery"
+                placeholder="スポット名で検索..."
+              >
+            </div>
+
+            <!-- ローディング -->
+            <div v-if="isLoadingSpots" class="loading">
+              <div class="spinner"></div>
+              <p>スポットを読み込み中...</p>
+            </div>
+
+            <!-- スポットリスト -->
+            <div v-else-if="filteredSpots.length > 0" class="item-list">
+              <div 
+                v-for="spot in filteredSpots"
+                :key="spot.id"
+                class="item-card"
+                @click="insertSpot(spot.id)"
+              >
+                <div class="item-name">
+                  📍 {{ spot.locality || spot.administrative || '不明な場所' }}
+                </div>
+                <div class="item-meta">
+                  <span v-if="spot.administrative">🗺️ {{ spot.administrative }}</span>
+                  <span v-if="spot.locationVisitCount">🔢 {{ spot.locationVisitCount }}回訪問</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- エンプティステート -->
+            <div v-else class="empty-state">
+              <div class="empty-icon">📍</div>
+              <h3>スポットが見つかりません</h3>
+              <p>別のキーワードで検索してください</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ルート挿入モーダル -->
+      <div v-if="showRouteModal" class="modal-overlay" @click="closeRouteModal">
+        <div class="modal-content" @click.stop>
+          <div class="modal-header">
+            <h2 class="modal-title">🗺️ ルートを選択</h2>
+            <button class="modal-close" @click="closeRouteModal">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="search-box">
+              <input 
+                type="text" 
+                class="search-input"
+                v-model="routeSearchQuery"
+                placeholder="ルート名で検索..."
+              >
+            </div>
+
+            <!-- ローディング -->
+            <div v-if="isLoadingRoutes" class="loading">
+              <div class="spinner"></div>
+              <p>ルートを読み込み中...</p>
+            </div>
+
+            <!-- ルートリスト -->
+            <div v-else-if="filteredRoutes.length > 0" class="item-list">
+              <div 
+                v-for="route in filteredRoutes"
+                :key="route.id"
+                class="item-card"
+                @click="insertRoute(route.id)"
+              >
+                <div class="item-name">
+                  🗺️ {{ route.title }}
+                </div>
+                <div class="item-meta">
+                  <span>📍 {{ (route.distance / 1000).toFixed(1) }} km</span>
+                  <span :style="{ color: route.isPublic ? '#228B22' : '#999999' }">
+                    {{ route.isPublic ? '🌐 公開' : '🔒 非公開' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- エンプティステート -->
+            <div v-else class="empty-state">
+              <div class="empty-icon">🗺️</div>
+              <h3>ルートが見つかりません</h3>
+              <p>別のキーワードで検索してください</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 保存中オーバーレイ -->
+      <div v-if="isSaving" class="saving-overlay">
+        <div class="saving-content">
+          <div class="spinner"></div>
+          <p>保存中...</p>
+        </div>
+      </div>
+
+      <!-- 画像アップロード中オーバーレイ -->
+      <div v-if="isUploadingImage" class="uploading-overlay">
+        <div class="uploading-content">
+          <div class="spinner"></div>
+          <p>画像をアップロード中...</p>
+          <div class="upload-progress-bar">
+            <div class="upload-progress-fill" :style="{ width: uploadProgress + '%' }"></div>
+          </div>
+          <p class="upload-progress-text">{{ uploadProgress }}%</p>
+        </div>
+      </div>
+
+      <!-- トースト通知 -->
+      <div v-if="toast.show" :class="['toast', toast.type]">
+        <span class="toast-icon">{{ toast.type === 'success' ? '✅' : '❌' }}</span>
+        <span class="toast-message">{{ toast.message }}</span>
+      </div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      let db;
+      let storage;
+
+      function waitForFirebase() {
+        return new Promise((resolve, reject) => {
+          if (typeof firebase !== 'undefined') {
+            resolve();
+            return;
+          }
+
+          let attempts = 0;
+          const maxAttempts = 50;
+          const checkInterval = setInterval(() => {
+            attempts++;
+            if (typeof firebase !== 'undefined') {
+              clearInterval(checkInterval);
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Firebase の読み込みに失敗しました'));
+            }
+          }, 100);
+        });
+      }
+
+      function waitForMarked() {
+        return new Promise((resolve, reject) => {
+          if (typeof marked !== 'undefined') {
+            resolve();
+            return;
+          }
+
+          let attempts = 0;
+          const maxAttempts = 50;
+          const checkInterval = setInterval(() => {
+            attempts++;
+            if (typeof marked !== 'undefined') {
+              clearInterval(checkInterval);
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Marked.js の読み込みに失敗しました'));
+            }
+          }, 100);
+        });
+      }
+
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          await waitForFirebase();
+          await waitForMarked();
+
+          const app = createApp({
+            data() {
+              return {
+                showMenu: false,
+                isEditMode: false,
+                blogId: null,
+                blogPost: {
+                  title: '',
+                  content: '',
+                  category: '',
+                  tags: [],
+                  thumbnailUrl: '',
+                  status: 'draft'
+                },
+                tagInput: '',
+                showSpotModal: false,
+                showRouteModal: false,
+                spots: [],
+                routes: [],
+                spotSearchQuery: '',
+                routeSearchQuery: '',
+                isLoadingSpots: false,
+                isLoadingRoutes: false,
+                isSaving: false,
+                isUploadingImage: false,
+                uploadProgress: 0,
+                toast: {
+                  show: false,
+                  message: '',
+                  type: 'success'
+                }
+              };
+            },
+            computed: {
+              filteredSpots() {
+                if (!this.spotSearchQuery) return this.spots;
+                const query = this.spotSearchQuery.toLowerCase();
+                return this.spots.filter(spot => {
+                  const name = (spot.locality || spot.administrative || '').toLowerCase();
+                  return name.includes(query);
+                });
+              },
+              filteredRoutes() {
+                if (!this.routeSearchQuery) return this.routes;
+                const query = this.routeSearchQuery.toLowerCase();
+                return this.routes.filter(route => {
+                  return route.title.toLowerCase().includes(query);
+                });
+              },
+              renderedMarkdown() {
+                if (!this.blogPost.content) return '<p style="color: #999;">プレビューがここに表示されます</p>';
+                
+                try {
+                  // Markdownを HTMLに変換
+                  let html = marked.parse(this.blogPost.content);
+                  
+                  // {{spot:xxx}} を埋め込みカードに置換
+                  html = html.replace(/\{\{spot:([a-zA-Z0-9]+)\}\}/g, (match, spotId) => {
+                    return `
+                      <div class="embed-card-preview">
+                        <div class="embed-icon">📍</div>
+                        <div class="embed-info">
+                          <div class="embed-title">スポット埋め込み</div>
+                          <div class="embed-meta">ID: ${spotId}</div>
+                        </div>
+                      </div>
+                    `;
+                  });
+                  
+                  // {{route:xxx}} を埋め込みカードに置換
+                  html = html.replace(/\{\{route:([a-zA-Z0-9]+)\}\}/g, (match, routeId) => {
+                    return `
+                      <div class="embed-card-preview">
+                        <div class="embed-icon">🗺️</div>
+                        <div class="embed-info">
+                          <div class="embed-title">ルート埋め込み</div>
+                          <div class="embed-meta">ID: ${routeId}</div>
+                        </div>
+                      </div>
+                    `;
+                  });
+                  
+                  return html;
+                } catch (error) {
+                  console.error('Markdown変換エラー:', error);
+                  return '<p style="color: #E63946;">プレビューの生成に失敗しました</p>';
+                }
+              }
+            },
+            async mounted() {
+                try {
+                    await waitForFirebase();
+                    
+                    const firebaseApp = firebase.app();
+                    db = firebase.firestore();
+                    storage = firebase.storage();
+                    
+                    // URLパラメータからブログIDを取得（編集モードの場合）
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const blogId = urlParams.get('id');
+                    
+                    if (blogId) {
+                    await this.loadBlogPost(blogId);
+                    }
+                    
+                    document.addEventListener('keydown', this.handleKeydown);
+                } catch (e) {
+                    console.error('初期化エラー:', e);
+                    this.showToast('初期化に失敗しました', 'error');
+                }
+            },
+
+            // methods内に追加
+            async loadBlogPost(blogId) {
+                try {
+                    const doc = await db.collection('blog_posts').doc(blogId).get();
+                    
+                    if (!doc.exists) {
+                    this.showToast('ブログが見つかりませんでした', 'error');
+                    return;
+                    }
+                    
+                    const data = doc.data();
+                    this.blogId = blogId;
+                    this.isEditMode = true;
+                    
+                    this.blogPost = {
+                    title: data.title || '',
+                    content: data.content || '',
+                    category: data.category || 'touring',
+                    tags: data.tags || [],
+                    thumbnailUrl: data.thumbnailUrl || '',
+                    status: data.status || 'draft'
+                    };
+                    
+                    console.log('ブログ読み込み成功:', blogId);
+                } catch (error) {
+                    console.error('ブログ読み込みエラー:', error);
+                    this.showToast('ブログの読み込みに失敗しました', 'error');
+                }
+            },
+            beforeUnmount() {
+              document.removeEventListener('keydown', this.handleKeydown);
+            },
+            methods: {
+              // デモデータ生成
+              generateDemoData() {
+                this.blogPost = {
+                  title: '秋の富士山周遊ツーリング',
+                  content: `## はじめに
+
+先週末、念願の富士山周遊ツーリングに行ってきました！
+紅葉シーズン真っ盛りで、絶景の連続でした。
+
+### ルート概要
+
+河口湖をスタート地点として、富士五湖を巡るルートを選択。
+約150kmの道のりでしたが、景色が素晴らしく全く飽きませんでした。
+
+**おすすめポイント**
+- 河口湖展望台からの眺め
+- 精進湖の静けさ
+- 本栖湖の透明度
+
+### 装備について
+
+今回のツーリングで持っていった装備：
+\`\`\`
+- レインウェア（急な雨対策）
+- 防寒着（標高が高いため）
+- カメラ（絶景撮影用）
+\`\`\`
+
+> 標高が高いエリアは気温が低いので、しっかりとした防寒対策が必須です！
+
+![富士山](https://example.com/fuji.jpg)
+
+### まとめ
+
+富士山周遊は何度走っても飽きない最高のルートです。
+みなさんもぜひチャレンジしてみてください！`,
+                  category: 'touring',
+                  tags: ['富士山', '絶景', '秋'],
+                  thumbnailUrl: '',
+                  status: 'draft'
+                };
+              },
+
+              // ブログ記事読み込み（編集モード）
+              async loadBlogPost() {
+                try {
+                  /* 実際のFirestoreからの読み込み
+                  const doc = await db.collection('blog_posts').doc(this.blogId).get();
+                  
+                  if (!doc.exists) {
+                    this.showToast('ブログ記事が見つかりません', 'error');
+                    return;
+                  }
+
+                  const data = doc.data();
+                  this.blogPost = {
+                    title: data.title || '',
+                    content: data.content || '',
+                    category: data.category || '',
+                    tags: data.tags || [],
+                    thumbnailUrl: data.thumbnailUrl || '',
+                    status: data.status || 'draft'
+                  };
+                  */
+
+                  // デモデータ
+                  this.generateDemoData();
+                  this.showToast('ブログを読み込みました', 'success');
+                } catch (error) {
+                  console.error('ブログ読み込みエラー:', error);
+                  this.showToast('ブログの読み込みに失敗しました', 'error');
+                }
+              },
+
+              // Markdown挿入
+              insertMarkdown(before, after) {
+                const textarea = this.$refs.markdownEditor;
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const selectedText = this.blogPost.content.substring(start, end);
+                
+                const newText = before + selectedText + after;
+                
+                this.blogPost.content = 
+                  this.blogPost.content.substring(0, start) +
+                  newText +
+                  this.blogPost.content.substring(end);
+                
+                this.$nextTick(() => {
+                  textarea.focus();
+                  const newPos = start + before.length + selectedText.length;
+                  textarea.setSelectionRange(newPos, newPos);
+                });
+              },
+
+              // リンク挿入
+              insertLink() {
+                const url = prompt('リンクURLを入力してください:');
+                if (url) {
+                  this.insertMarkdown('[', `](${url})`);
+                }
+              },
+
+              // 画像アップロードダイアログを開く
+              openImageUpload() {
+                this.$refs.imageUploadInput.click();
+              },
+
+              // 画像アップロード処理
+              async handleImageUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                // ファイルサイズチェック（5MB）
+                if (file.size > 5 * 1024 * 1024) {
+                  this.showToast('画像サイズは5MB以下にしてください', 'error');
+                  return;
+                }
+
+                // 画像ファイルチェック
+                if (!file.type.startsWith('image/')) {
+                  this.showToast('画像ファイルを選択してください', 'error');
+                  return;
+                }
+
+                this.isUploadingImage = true;
+                this.uploadProgress = 0;
+
+                try {
+                  // Firebase Storageにアップロード
+                  const timestamp = Date.now();
+                  const fileName = `blog_images/${timestamp}_${file.name}`;
+                  const storageRef = storage.ref().child(fileName);
+                  
+                  // アップロードタスクを作成
+                  const uploadTask = storageRef.put(file);
+
+                  // 進捗状況を監視
+                  uploadTask.on('state_changed',
+                    (snapshot) => {
+                      // 進捗率を計算
+                      this.uploadProgress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                      );
+                    },
+                    (error) => {
+                      // エラー処理
+                      console.error('画像アップロードエラー:', error);
+                      this.showToast('画像のアップロードに失敗しました', 'error');
+                      this.isUploadingImage = false;
+                      this.uploadProgress = 0;
+                    },
+                    async () => {
+                      // アップロード完了
+                      try {
+                        const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                        
+                        // Markdown形式で画像を挿入
+                        this.insertImageMarkdown(downloadURL, file.name);
+                        
+                        this.showToast('画像をアップロードしました', 'success');
+                        this.isUploadingImage = false;
+                        this.uploadProgress = 0;
+                        
+                        // inputをリセット
+                        event.target.value = '';
+                      } catch (error) {
+                        console.error('URL取得エラー:', error);
+                        this.showToast('画像URLの取得に失敗しました', 'error');
+                        this.isUploadingImage = false;
+                        this.uploadProgress = 0;
+                      }
+                    }
+                  );
+                } catch (error) {
+                  console.error('画像アップロードエラー:', error);
+                  this.showToast('画像のアップロードに失敗しました', 'error');
+                  this.isUploadingImage = false;
+                  this.uploadProgress = 0;
+                }
+              },
+
+              // Markdown形式で画像を挿入
+              insertImageMarkdown(url, fileName) {
+                const textarea = this.$refs.markdownEditor;
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const selectedText = this.blogPost.content.substring(start, end);
+                
+                // alt属性は選択テキストまたはファイル名
+                const alt = selectedText || fileName.replace(/\.[^/.]+$/, '');
+                const markdown = `![${alt}](${url})`;
+                
+                // テキストを挿入
+                this.blogPost.content = 
+                  this.blogPost.content.substring(0, start) +
+                  markdown +
+                  this.blogPost.content.substring(end);
+                
+                // カーソル位置を調整
+                this.$nextTick(() => {
+                  textarea.focus();
+                  const newPos = start + markdown.length;
+                  textarea.setSelectionRange(newPos, newPos);
+                });
+              },
+
+              // サムネイル画像アップロード
+              async handleThumbnailUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                // ファイルサイズチェック（5MB）
+                if (file.size > 5 * 1024 * 1024) {
+                  this.showToast('画像サイズは5MB以下にしてください', 'error');
+                  return;
+                }
+
+                // 画像ファイルチェック
+                if (!file.type.startsWith('image/')) {
+                  this.showToast('画像ファイルを選択してください', 'error');
+                  return;
+                }
+
+                try {
+                  // プレビュー表示
+                  const reader = new FileReader();
+                  reader.onload = (e) => {
+                    this.blogPost.thumbnailUrl = e.target.result;
+                  };
+                  reader.readAsDataURL(file);
+
+                  /* Firebase Storageへのアップロード（実装時に有効化）
+                  const timestamp = Date.now();
+                  const fileName = `blog_thumbnails/${timestamp}_${file.name}`;
+                  const storageRef = storage.ref().child(fileName);
+                  
+                  await storageRef.put(file);
+                  const downloadURL = await storageRef.getDownloadURL();
+                  this.blogPost.thumbnailUrl = downloadURL;
+                  */
+
+                  this.showToast('サムネイルを設定しました', 'success');
+                } catch (error) {
+                  console.error('サムネイルアップロードエラー:', error);
+                  this.showToast('サムネイルのアップロードに失敗しました', 'error');
+                }
+              },
+
+              // タグ追加
+              addTag() {
+                const tag = this.tagInput.trim();
+                
+                if (!tag) return;
+                
+                if (this.blogPost.tags.length >= 10) {
+                  this.showToast('タグは最大10個までです', 'error');
+                  return;
+                }
+                
+                if (this.blogPost.tags.includes(tag)) {
+                  this.showToast('すでに追加されているタグです', 'error');
+                  return;
+                }
+                
+                this.blogPost.tags.push(tag);
+                this.tagInput = '';
+              },
+
+              // タグ削除
+              removeTag(index) {
+                this.blogPost.tags.splice(index, 1);
+              },
+
+              // スポットモーダルを開く
+              async openSpotModal() {
+                this.showSpotModal = true;
+                this.spotSearchQuery = '';
+                
+                if (this.spots.length === 0) {
+                  await this.loadSpots();
+                }
+              },
+
+              // スポットモーダルを閉じる
+              closeSpotModal() {
+                this.showSpotModal = false;
+                this.spotSearchQuery = '';
+              },
+
+              // スポット読み込み
+              // loadSpots メソッド内を以下に変更
+              async loadSpots() {
+                this.isLoadingSpots = true;
+                
+                try {
+                    const snapshot = await db.collection('imagedownload')
+                    .orderBy('createTimeTimeStamp', 'desc')
+                    .limit(50)
+                    .get();
+                    
+                    this.spots = [];
+                    snapshot.forEach(doc => {
+                    const data = doc.data();
+                    this.spots.push({
+                        id: doc.id,
+                        locality: data.locality || data.administrative || '不明な場所',
+                        administrative: data.administrative || '',
+                        lat: data.lat,
+                        lng: data.lng,
+                        imageUrl: data.locationImageURLs?.[0] || data.iconImageURL || null
+                    });
+                    });
+
+                    console.log(`${this.spots.length}件のスポットを読み込みました`);
+                } catch (error) {
+                    console.error('スポット読み込みエラー:', error);
+                    this.showToast('スポットの読み込みに失敗しました', 'error');
+                } finally {
+                    this.isLoadingSpots = false;
+                }
+              },
+              // スポット挿入
+              insertSpot(spotId) {
+                const textarea = this.$refs.markdownEditor;
+                const start = textarea.selectionStart;
+                const markdown = `{{spot:${spotId}}}`;
+                
+                this.blogPost.content = 
+                  this.blogPost.content.substring(0, start) +
+                  markdown +
+                  this.blogPost.content.substring(start);
+                
+                this.$nextTick(() => {
+                  textarea.focus();
+                  const newPos = start + markdown.length;
+                  textarea.setSelectionRange(newPos, newPos);
+                });
+                
+                this.closeSpotModal();
+                this.showToast('スポットを挿入しました', 'success');
+              },
+
+              // ルートモーダルを開く
+              async openRouteModal() {
+                this.showRouteModal = true;
+                this.routeSearchQuery = '';
+                
+                if (this.routes.length === 0) {
+                  await this.loadRoutes();
+                }
+              },
+
+              // ルートモーダルを閉じる
+              closeRouteModal() {
+                this.showRouteModal = false;
+                this.routeSearchQuery = '';
+              },
+
+              // ルート読み込み
+              // loadRoutes メソッド内を以下に変更
+              async loadRoutes() {
+                this.isLoadingRoutes = true;
+                
+                try {
+                    const snapshot = await db.collection('shared_routes')
+                    .where('isPublic', '==', true)
+                    .orderBy('createdAt', 'desc')
+                    .limit(50)
+                    .get();
+                    
+                    this.routes = [];
+                    snapshot.forEach(doc => {
+                    const data = doc.data();
+                    this.routes.push({
+                        id: doc.id,
+                        title: data.title || 'タイトルなし',
+                        distance: data.distance || 0,
+                        isPublic: data.isPublic || false,
+                        createdAt: data.createdAt
+                    });
+                    });
+
+                    console.log(`${this.routes.length}件のルートを読み込みました`);
+                } catch (error) {
+                    console.error('ルート読み込みエラー:', error);
+                    this.showToast('ルートの読み込みに失敗しました', 'error');
+                } finally {
+                    this.isLoadingRoutes = false;
+                }
+              },
+
+              // ルート挿入
+              insertRoute(routeId) {
+                const textarea = this.$refs.markdownEditor;
+                const start = textarea.selectionStart;
+                const markdown = `{{route:${routeId}}}`;
+                
+                this.blogPost.content = 
+                  this.blogPost.content.substring(0, start) +
+                  markdown +
+                  this.blogPost.content.substring(start);
+                
+                this.$nextTick(() => {
+                  textarea.focus();
+                  const newPos = start + markdown.length;
+                  textarea.setSelectionRange(newPos, newPos);
+                });
+                
+                this.closeRouteModal();
+                this.showToast('ルートを挿入しました', 'success');
+              },
+
+              // プレビュー
+              previewBlog() {
+                // モバイルでプレビューパネルが非表示の場合の対応
+                if (window.innerWidth <= 1024) {
+                  const previewWindow = window.open('', '_blank');
+                  previewWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="ja">
+                    <head>
+                      <meta charset="utf-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <title>プレビュー: ${this.blogPost.title}</title>
+                      <style>
+                        body {
+                          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+                          max-width: 800px;
+                          margin: 0 auto;
+                          padding: 24px;
+                          line-height: 1.8;
+                        }
+                        h1 {
+                          font-size: 32pt;
+                          margin-bottom: 24px;
+                        }
+                        img {
+                          max-width: 100%;
+                          height: auto;
+                          border-radius: 12px;
+                        }
+                      </style>
+                    </head>
+                    <body>
+                      <h1>${this.blogPost.title}</h1>
+                      ${this.renderedMarkdown}
+                    </body>
+                    </html>
+                  `);
+                } else {
+                  // デスクトップの場合はプレビューパネルにスクロール
+                  const previewPanel = document.querySelector('.preview-panel');
+                  if (previewPanel) {
+                    previewPanel.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              },
+
+              // ブログ保存
+              // saveBlogPost メソッド内を以下に変更
+              async saveBlogPost() {
+                // バリデーション
+                if (!this.blogPost.title.trim()) {
+                    this.showToast('タイトルを入力してください', 'error');
+                    return;
+                }
+                
+                if (!this.blogPost.category) {
+                    this.showToast('カテゴリを選択してください', 'error');
+                    return;
+                }
+                
+                if (!this.blogPost.content.trim()) {
+                    this.showToast('本文を入力してください', 'error');
+                    return;
+                }
+
+                this.isSaving = true;
+
+                try {
+                    const blogData = {
+                    title: this.blogPost.title.trim(),
+                    content: this.blogPost.content.trim(),
+                    category: this.blogPost.category,
+                    tags: this.blogPost.tags,
+                    thumbnailUrl: this.blogPost.thumbnailUrl,
+                    status: this.blogPost.status,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    };
+
+                    if (this.isEditMode && this.blogId) {
+                    // 更新
+                    await db.collection('blog_posts').doc(this.blogId).update(blogData);
+                    console.log('ブログ更新成功:', this.blogId);
+                    this.showToast('ブログを更新しました', 'success');
+                    } else {
+                    // 新規作成
+                    blogData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    blogData.views = 0;
+                    blogData.likes = 0;
+                    
+                    // TODO: 認証実装後にユーザーIDを追加
+                    // blogData.userId = firebase.auth().currentUser.uid;
+
+                    const docRef = await db.collection('blog_posts').add(blogData);
+                    this.blogId = docRef.id;
+                    this.isEditMode = true;
+                    
+                    console.log('ブログ作成成功:', docRef.id);
+                    this.showToast('ブログを作成しました', 'success');
+                    }
+
+                    // 公開状態の場合はブログ一覧へリダイレクト
+                    if (this.blogPost.status === 'published') {
+                    setTimeout(() => {
+                        window.location.href = '/blog/blog.html';
+                    }, 1500);
+                    }
+                } catch (error) {
+                    console.error('保存エラー:', error);
+                    this.showToast(`保存に失敗しました: ${error.message}`, 'error');
+                } finally {
+                    this.isSaving = false;
+                }
+              },
+
+              // 戻る
+              goBack() {
+                if (confirm('編集内容が保存されていない可能性があります。戻りますか？')) {
+                  window.history.back();
+                }
+              },
+
+              // メニュー操作
+              toggleMenu() {
+                this.showMenu = !this.showMenu;
+                if (this.showMenu) {
+                  document.body.style.overflow = 'hidden';
+                } else {
+                  document.body.style.overflow = '';
+                }
+              },
+
+              closeMenu() {
+                this.showMenu = false;
+                document.body.style.overflow = '';
+              },
+
+              // キーボードショートカット
+              handleKeydown(event) {
+                // Escape: モーダルを閉じる
+                if (event.key === 'Escape') {
+                  if (this.showMenu) {
+                    this.closeMenu();
+                  } else if (this.showSpotModal) {
+                    this.closeSpotModal();
+                  } else if (this.showRouteModal) {
+                    this.closeRouteModal();
+                  }
+                }
+
+                // Ctrl/Cmd + S: 保存
+                if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                  event.preventDefault();
+                  this.saveBlogPost();
+                }
+              },
+
+              // トースト表示
+              showToast(message, type = 'success') {
+                this.toast.message = message;
+                this.toast.type = type;
+                this.toast.show = true;
+
+                setTimeout(() => {
+                  this.toast.show = false;
+                }, 3000);
+              }
+            }
+          });
+
+          app.mount('#app');
+        } catch (error) {
+          console.error('アプリケーション初期化エラー:', error);
+          document.getElementById('app').innerHTML = `
+            <div style="max-width: 800px; margin: 100px auto; padding: 40px; text-align: center;">
+              <h1 style="color: #E63946; font-size: 24pt; margin-bottom: 16px;">⚠️ エラーが発生しました</h1>
+              <p style="color: #666; font-size: 16pt;">${error.message}</p>
+            </div>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ツーリングブログ | ツーリングスポットシェア</title>
+    <meta name="description" content="バイク・ツーリングの体験記、おすすめスポット、ルート解説などをシェアするブログ">
+
+    <!-- リソースヒント -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+      /* ========== リセット & ベーススタイル ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ========== ヘッダー ========== */
+      header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 20px 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      h1 {
+        font-size: 24pt;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .subtitle {
+        font-size: 13pt;
+        font-weight: 300;
+        opacity: 0.9;
+        margin-top: 4px;
+      }
+
+      /* ========== ハンバーガーメニューボタン ========== */
+      .menu-btn, .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 12pt;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-btn:hover, .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ========== ハンバーガーメニュー ========== */
+      .hamburger-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .hamburger-menu.active {
+        display: block;
+      }
+
+      .menu-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 280px;
+        height: 100%;
+        background: white;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+        animation: slideInLeft 0.3s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .menu-header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 20px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-header h2 {
+        font-size: 20pt;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .menu-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .menu-nav {
+        padding: 16px 0;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        color: #333333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-left: 4px solid transparent;
+      }
+
+      .menu-item:hover {
+        background: #F9F9F9;
+        border-left-color: #00A8C6;
+      }
+
+      .menu-item.active {
+        background: #E8F8FB;
+        border-left-color: #00A8C6;
+        color: #00A8C6;
+        font-weight: 600;
+      }
+
+      .menu-icon {
+        font-size: 20pt;
+        width: 28px;
+        text-align: center;
+      }
+
+      /* ========== フッター ========== */
+      .page-footer {
+        background: white;
+        padding: 24pt 16px;
+        text-align: center;
+        border-top: 1px solid #E0E0E0;
+        margin-top: 40px;
+      }
+
+      .page-footer p {
+        font-size: 13pt;
+        color: #999999;
+        font-weight: 300;
+      }
+
+      /* ========== メインコンテナ ========== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      /* ========== フィルターバー ========== */
+      .filter-bar {
+        background: white;
+        border-radius: 16pt;
+        padding: 16pt;
+        margin-bottom: 24pt;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .filter-section {
+        margin-bottom: 16pt;
+      }
+
+      .filter-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .filter-label {
+        font-size: 13pt;
+        font-weight: 600;
+        color: #666666;
+        margin-bottom: 8pt;
+        display: block;
+      }
+
+      .filter-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8pt;
+      }
+
+      .filter-tag {
+        background: #F9F9F9;
+        border: 2px solid #E0E0E0;
+        color: #666666;
+        padding: 6pt 12pt;
+        border-radius: 12pt;
+        font-size: 13pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .filter-tag:hover {
+        background: rgba(0, 168, 198, 0.1);
+        border-color: #00A8C6;
+      }
+
+      .filter-tag.active {
+        background: #00A8C6;
+        color: white;
+        border-color: #00A8C6;
+      }
+
+      .search-input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 12px;
+        font-size: 18pt;
+        color: #666666;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 10pt 12pt 10pt 40pt;
+        border: 2px solid #E0E0E0;
+        border-radius: 12pt;
+        font-size: 15pt;
+        transition: all 0.2s ease;
+      }
+
+      .search-input:focus {
+        outline: none;
+        border-color: #00A8C6;
+      }
+
+      /* ========== ソート/表示切替 ========== */
+      .controls-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16pt;
+        flex-wrap: wrap;
+        gap: 12pt;
+      }
+
+      .sort-buttons {
+        display: flex;
+        gap: 8pt;
+      }
+
+      .sort-btn {
+        background: white;
+        border: 2px solid #E0E0E0;
+        color: #666666;
+        padding: 8pt 16pt;
+        border-radius: 12pt;
+        font-size: 13pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .sort-btn:hover {
+        background: #F9F9F9;
+        border-color: #00A8C6;
+      }
+
+      .sort-btn.active {
+        background: #00A8C6;
+        color: white;
+        border-color: #00A8C6;
+      }
+
+      .results-count {
+        font-size: 14pt;
+        color: #666666;
+      }
+
+      /* ========== ブログカードグリッド ========== */
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 20pt;
+        margin-bottom: 24pt;
+      }
+
+      .blog-card {
+        background: white;
+        border-radius: 16pt;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 168, 198, 0.2);
+      }
+
+      .blog-card-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: #E0E0E0;
+      }
+
+      .blog-card-image-placeholder {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #E0E0E0 0%, #C7C7CC 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 64pt;
+        color: #999999;
+      }
+
+      .blog-card-content {
+        padding: 16pt;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .blog-category {
+        display: inline-block;
+        background: rgba(34, 139, 34, 0.1);
+        color: #228B22;
+        padding: 4pt 12pt;
+        border-radius: 12pt;
+        font-size: 11pt;
+        font-weight: 600;
+        margin-bottom: 8pt;
+        width: fit-content;
+      }
+
+      .blog-title {
+        font-size: 18pt;
+        font-weight: 600;
+        color: #00A8C6;
+        margin-bottom: 8pt;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .blog-excerpt {
+        font-size: 14pt;
+        color: #666666;
+        margin-bottom: 12pt;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex: 1;
+      }
+
+      .blog-meta {
+        display: flex;
+        align-items: center;
+        gap: 12pt;
+        margin-top: 12pt;
+        padding-top: 12pt;
+        border-top: 1px solid #F0F0F0;
+        flex-wrap: wrap;
+      }
+
+      .blog-author {
+        display: flex;
+        align-items: center;
+        gap: 6pt;
+        font-size: 13pt;
+        color: #666666;
+      }
+
+      .author-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .blog-stats {
+        display: flex;
+        align-items: center;
+        gap: 12pt;
+        margin-left: auto;
+      }
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 4pt;
+        font-size: 12pt;
+        color: #999999;
+      }
+
+      .blog-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6pt;
+        margin-top: 8pt;
+      }
+
+      .blog-tag {
+        background: #F5DEB3;
+        color: #666666;
+        padding: 3pt 8pt;
+        border-radius: 8pt;
+        font-size: 11pt;
+      }
+
+      /* ========== ローディング ========== */
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .spinner {
+        border: 4px solid #E0E0E0;
+        border-top: 4px solid #00A8C6;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .loading-indicator {
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 24px;
+      }
+
+      .loading-indicator .spinner {
+        width: 40px;
+        height: 40px;
+      }
+
+      .loading-indicator p {
+        color: #666666;
+        font-size: 14pt;
+        margin-top: 12px;
+      }
+
+      /* ========== エンプティステート ========== */
+      .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        background: white;
+        border-radius: 16pt;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .empty-icon {
+        font-size: 80pt;
+        margin-bottom: 16pt;
+        opacity: 0.5;
+      }
+
+      .empty-state h3 {
+        font-size: 20pt;
+        color: #666666;
+        margin-bottom: 8pt;
+      }
+
+      .empty-state p {
+        font-size: 14pt;
+        color: #999999;
+      }
+
+      /* ========== レスポンシブ ========== */
+      @media (max-width: 768px) {
+        .blog-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .menu-content {
+          width: 240px;
+        }
+
+        h1 {
+          font-size: 18pt;
+        }
+
+        .subtitle {
+          font-size: 11pt;
+        }
+
+        .controls-bar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .sort-buttons {
+          justify-content: center;
+        }
+
+        .results-count {
+          text-align: center;
+        }
+      }
+
+      /* ========== ダークモード対応 ========== */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1C1C1E;
+          color: #F2F2F7;
+        }
+
+        .filter-bar, .blog-card, .empty-state {
+          background: #2C2C2E;
+        }
+
+        .filter-tag {
+          background: #1C1C1E;
+          border-color: #48484A;
+          color: #AEAEB2;
+        }
+
+        .filter-tag:hover {
+          background: rgba(0, 168, 198, 0.2);
+          border-color: #00D4FF;
+        }
+
+        .filter-tag.active {
+          background: #00A8C6;
+          color: white;
+        }
+
+        .search-input {
+          background: #1C1C1E;
+          border-color: #48484A;
+          color: #F2F2F7;
+        }
+
+        .search-input:focus {
+          border-color: #00D4FF;
+        }
+
+        .sort-btn {
+          background: #1C1C1E;
+          border-color: #48484A;
+          color: #AEAEB2;
+        }
+
+        .sort-btn:hover {
+          background: #2C2C2E;
+          border-color: #00D4FF;
+        }
+
+        .sort-btn.active {
+          background: #00A8C6;
+          color: white;
+        }
+
+        .blog-category {
+          background: rgba(50, 215, 75, 0.2);
+          color: #32D74B;
+        }
+
+        .blog-title {
+          color: #00D4FF;
+        }
+
+        .blog-excerpt {
+          color: #AEAEB2;
+        }
+
+        .blog-author, .stat-item {
+          color: #AEAEB2;
+        }
+
+        .blog-meta {
+          border-top-color: #48484A;
+        }
+
+        .blog-tag {
+          background: rgba(245, 222, 179, 0.2);
+          color: #AEAEB2;
+        }
+
+        .menu-content {
+          background: #2C2C2E;
+        }
+
+        .menu-item {
+          color: #F2F2F7;
+        }
+
+        .menu-item:hover {
+          background: #3A3A3C;
+        }
+
+        .menu-item.active {
+          background: rgba(0, 168, 198, 0.2);
+          color: #00D4FF;
+          border-left-color: #00D4FF;
+        }
+
+        .page-footer {
+          background: #1C1C1E;
+          border-top-color: #48484A;
+        }
+
+        .page-footer p {
+          color: #8E8E93;
+        }
+
+        .blog-card-image-placeholder {
+          background: linear-gradient(135deg, #48484A 0%, #3A3A3C 100%);
+        }
+
+        .empty-state h3 {
+          color: #AEAEB2;
+        }
+
+        .empty-state p {
+          color: #8E8E93;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="app">
+      <!-- ヘッダー -->
+      <header>
+        <div class="header-content">
+          <div class="header-left">
+            <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
+            <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
+            <div>
+              <h1>📝 ツーリングブログ</h1>
+              <div class="subtitle">体験記・スポット・ルート解説をシェア</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ハンバーガーメニュー -->
+      <div class="hamburger-menu" :class="{ active: showMenu }" @click="closeMenu">
+        <div class="menu-content" @click.stop>
+          <div class="menu-header">
+            <h2>メニュー</h2>
+            <button class="menu-close-btn" @click="closeMenu" aria-label="閉じる">✕</button>
+          </div>
+          <nav class="menu-nav">
+            <a href="/" class="menu-item">
+              <span class="menu-icon">🏠</span>
+              <span>ホーム</span>
+            </a>
+            <a href="/blog/blog.html" class="menu-item active">
+              <span class="menu-icon">📝</span>
+              <span>ブログ</span>
+            </a>
+            <a href="/privacypolicy/privacypolicy.html" class="menu-item">
+              <span class="menu-icon">🔒</span>
+              <span>プライバシーポリシー</span>
+            </a>
+            <a href="/termsofservice/termsofservice.html" class="menu-item">
+              <span class="menu-icon">📋</span>
+              <span>利用規約</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- メインコンテンツ -->
+      <div class="container">
+        <!-- フィルターバー -->
+        <div class="filter-bar">
+          <!-- カテゴリフィルター -->
+          <div class="filter-section">
+            <label class="filter-label">📂 カテゴリ</label>
+            <div class="filter-tags">
+              <button 
+                class="filter-tag" 
+                :class="{ active: selectedCategory === 'all' }"
+                @click="filterByCategory('all')"
+              >
+                すべて
+              </button>
+              <button 
+                v-for="cat in categories"
+                :key="cat.id"
+                class="filter-tag" 
+                :class="{ active: selectedCategory === cat.id }"
+                @click="filterByCategory(cat.id)"
+              >
+                {{ cat.icon }} {{ cat.name }}
+              </button>
+            </div>
+          </div>
+
+          <!-- 検索 -->
+          <div class="filter-section">
+            <label class="filter-label">🔍 検索</label>
+            <div class="search-input-container">
+              <span class="search-icon">🔍</span>
+              <input 
+                type="text" 
+                class="search-input" 
+                placeholder="タイトル、本文、タグで検索..."
+                v-model="searchQuery"
+                @input="handleSearchInput"
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- コントロールバー -->
+        <div class="controls-bar">
+          <div class="sort-buttons">
+            <button 
+              class="sort-btn"
+              :class="{ active: sortBy === 'latest' }"
+              @click="changeSortBy('latest')"
+            >
+              📅 新着順
+            </button>
+            <button 
+              class="sort-btn"
+              :class="{ active: sortBy === 'popular' }"
+              @click="changeSortBy('popular')"
+            >
+              🔥 人気順
+            </button>
+            <button 
+              class="sort-btn"
+              :class="{ active: sortBy === 'views' }"
+              @click="changeSortBy('views')"
+            >
+              👁️ 閲覧数順
+            </button>
+          </div>
+          <div class="results-count">
+            {{ displayedBlogs.length }}件の記事
+          </div>
+        </div>
+
+        <!-- ローディング状態 -->
+        <div v-if="isLoading" class="loading">
+          <div class="spinner"></div>
+          <p>ブログを読み込み中...</p>
+        </div>
+
+        <!-- エラー状態 -->
+        <div v-else-if="error" class="empty-state">
+          <div class="empty-icon">⚠️</div>
+          <h3>エラーが発生しました</h3>
+          <p>{{ error }}</p>
+        </div>
+
+        <!-- 空の状態 -->
+        <div v-else-if="displayedBlogs.length === 0" class="empty-state">
+          <div class="empty-icon">📝</div>
+          <h3>ブログ記事が見つかりませんでした</h3>
+          <p>条件を変更して再度お試しください</p>
+        </div>
+
+        <!-- ブログカードグリッド -->
+        <div v-else class="blog-grid">
+          <div 
+            v-for="blog in displayedBlogs"
+            :key="blog.id"
+            class="blog-card"
+            @click="showBlogDetail(blog)"
+          >
+            <!-- サムネイル画像 -->
+            <picture v-if="blog.thumbnailURL">
+              <source 
+                :srcset="getWebPUrl(blog.thumbnailURL)" 
+                type="image/webp"
+              >
+              <img 
+                :src="blog.thumbnailURL" 
+                :alt="blog.title"
+                class="blog-card-image"
+                loading="lazy"
+                decoding="async"
+                @error="handleImageError"
+              >
+            </picture>
+            <div v-else class="blog-card-image-placeholder">
+              📝
+            </div>
+
+            <!-- カード内容 -->
+            <div class="blog-card-content">
+              <!-- カテゴリバッジ -->
+              <span class="blog-category">
+                {{ getCategoryName(blog.category) }}
+              </span>
+
+              <!-- タイトル -->
+              <h2 class="blog-title">{{ blog.title }}</h2>
+
+              <!-- 抜粋 -->
+              <p class="blog-excerpt">{{ getExcerpt(blog.content) }}</p>
+
+              <!-- タグ -->
+              <div v-if="blog.tags && blog.tags.length > 0" class="blog-tags">
+                <span 
+                  v-for="tag in blog.tags.slice(0, 3)"
+                  :key="tag"
+                  class="blog-tag"
+                >
+                  #{{ tag }}
+                </span>
+              </div>
+
+              <!-- メタ情報 -->
+              <div class="blog-meta">
+                <div class="blog-author">
+                  <picture v-if="blog.authorIcon">
+                    <source 
+                      :srcset="getWebPUrl(blog.authorIcon)" 
+                      type="image/webp"
+                    >
+                    <img 
+                      :src="blog.authorIcon" 
+                      :alt="blog.authorName"
+                      class="author-icon"
+                      loading="lazy"
+                      @error="handleIconError"
+                    >
+                  </picture>
+                  <span v-else>👤</span>
+                  <span>{{ blog.authorName }}</span>
+                </div>
+
+                <div class="blog-stats">
+                  <div class="stat-item">
+                    <span>👁️</span>
+                    <span>{{ formatNumber(blog.views) }}</span>
+                  </div>
+                  <div class="stat-item">
+                    <span>❤️</span>
+                    <span>{{ formatNumber(blog.likes) }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 無限スクロールローディング -->
+        <div v-if="isLoadingMore && !isLoading" class="loading-indicator">
+          <div class="spinner"></div>
+          <p>読み込み中...</p>
+        </div>
+
+        <footer class="page-footer">
+          <p>© 2025 ツーリングスポットシェア All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      let db;
+
+      const ITEMS_PER_PAGE = 12;
+      const BLOG_CACHE_KEY = 'touring_blog_cache';
+      const BLOG_CACHE_TIMESTAMP_KEY = 'touring_blog_timestamp';
+      const CACHE_EXPIRY_MS = 24 * 60 * 60 * 1000; // 24時間
+
+      // ブログキャッシュ管理クラス
+      class BlogCacheManager {
+        static saveToCache(data, timestamp) {
+          try {
+            localStorage.setItem(BLOG_CACHE_KEY, JSON.stringify(data));
+            localStorage.setItem(BLOG_CACHE_TIMESTAMP_KEY, timestamp.toString());
+            console.log('ブログキャッシュに保存:', data.length, '件');
+          } catch (error) {
+            console.error('ブログキャッシュ保存エラー:', error);
+          }
+        }
+
+        static loadFromCache() {
+          try {
+            const cachedData = localStorage.getItem(BLOG_CACHE_KEY);
+            const cachedTimestamp = localStorage.getItem(BLOG_CACHE_TIMESTAMP_KEY);
+            
+            if (!cachedData || !cachedTimestamp) {
+              return null;
+            }
+
+            const age = Date.now() - parseInt(cachedTimestamp);
+            if (age > CACHE_EXPIRY_MS) {
+              console.log('ブログキャッシュが期限切れ');
+              this.clearCache();
+              return null;
+            }
+
+            const data = JSON.parse(cachedData);
+            console.log('ブログキャッシュから読み込み:', data.length, '件');
+            return data;
+          } catch (error) {
+            console.error('ブログキャッシュ読み込みエラー:', error);
+            this.clearCache();
+            return null;
+          }
+        }
+
+        static clearCache() {
+          localStorage.removeItem(BLOG_CACHE_KEY);
+          localStorage.removeItem(BLOG_CACHE_TIMESTAMP_KEY);
+          console.log('ブログキャッシュをクリア');
+        }
+        static getLatestTimestamp(blogs) {
+          if (!blogs || blogs.length === 0) return 0;
+          
+          const timestamps = blogs
+            .filter(blog => blog.createdAt)
+            .map(blog => {
+              if (blog.createdAt instanceof Date) {
+                return blog.createdAt.getTime();
+              }
+              if (blog.createdAt.seconds) {
+                return blog.createdAt.seconds * 1000;
+              }
+              return 0;
+            });
+          
+          return timestamps.length > 0 ? Math.max(...timestamps) : 0;
+        }
+      }
+
+      function waitForFirebase() {
+        return new Promise((resolve, reject) => {
+          if (typeof firebase !== 'undefined') {
+            resolve();
+            return;
+          }
+
+          let attempts = 0;
+          const maxAttempts = 50;
+          const checkInterval = setInterval(() => {
+            attempts++;
+            if (typeof firebase !== 'undefined') {
+              clearInterval(checkInterval);
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Firebase の読み込みに失敗しました'));
+            }
+          }, 100);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          await waitForFirebase();
+
+          const app = createApp({
+            data() {
+              return {
+                blogs: [],
+                displayedBlogs: [],
+                categories: [
+                  { id: 'touring_report', name: 'ツーリングレポート', icon: '🏍️' },
+                  { id: 'spot_guide', name: 'スポット紹介', icon: '📍' },
+                  { id: 'route_guide', name: 'ルート解説', icon: '🗺️' },
+                  { id: 'maintenance', name: 'メンテナンス', icon: '🔧' },
+                  { id: 'gear_review', name: '装備レビュー', icon: '🎒' }
+                ],
+                selectedCategory: 'all',
+                searchQuery: '',
+                sortBy: 'latest',
+                isLoading: true,
+                isLoadingMore: false,
+                hasMore: true,
+                error: null,
+                showMenu: false,
+                currentPage: 0,
+                searchDebounceTimer: null
+              };
+            },
+            async mounted() {
+              try {
+                await waitForFirebase();
+                
+                const firebaseApp = firebase.app();
+                db = firebase.firestore();
+
+                // URLパラメータでキャッシュクリア: ?clearCache=true
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('clearCache') === 'true') {
+                  BlogCacheManager.clearCache();
+                  console.log('キャッシュをクリアしました');
+                  // パラメータを削除してリダイレクト
+                  window.history.replaceState({}, document.title, window.location.pathname);
+                }
+                
+                await this.loadBlogsFromCache();
+                await this.checkAndUpdateBlogs();
+                
+                window.addEventListener('scroll', this.handleScroll);
+                document.addEventListener('keydown', this.handleKeydown);
+              } catch (e) {
+                console.error('初期化エラー:', e);
+                this.error = e.message;
+                this.isLoading = false;
+              }
+            },
+            beforeUnmount() {
+              window.removeEventListener('scroll', this.handleScroll);
+              document.removeEventListener('keydown', this.handleKeydown);
+            },
+            methods: {
+              async loadBlogsFromCache() {
+                const cachedData = BlogCacheManager.loadFromCache();
+                
+                if (cachedData && cachedData.length > 0) {
+                  this.blogs = cachedData;
+                  this.applyFiltersAndSort();
+                  this.isLoading = false;
+                  console.log('キャッシュからブログを表示');
+                }
+              },
+              async checkAndUpdateBlogs() {
+                try {
+                  // キャッシュの最新タイムスタンプを取得
+                  const cachedTimestamp = BlogCacheManager.getLatestTimestamp(this.blogs);
+                  
+                  let query = db.collection('blog_posts')
+                    .where('status', '==', 'published')
+                    .orderBy('createdAt', 'desc');
+                  
+                  // キャッシュがある場合は、最新のタイムスタンプ以降のデータのみ取得
+                  if (cachedTimestamp > 0) {
+                    const timestampDate = new Date(cachedTimestamp);
+                    query = query.where('createdAt', '>', firebase.firestore.Timestamp.fromDate(timestampDate));
+                  }
+                  
+                  const snapshot = await query.get();
+                  
+                  if (snapshot.empty && this.blogs.length > 0) {
+                    console.log('更新なし: キャッシュデータが最新です');
+                    this.isLoading = false;
+                    return;
+                  }
+                  
+                  // 新しいブログデータまたは更新されたデータを処理
+                  const newBlogs = [];
+                  const updatedIds = new Set();
+                  const authorIds = new Set();
+                  
+                  snapshot.forEach(doc => {
+                    const blogData = {
+                      id: doc.id,
+                      ...doc.data()
+                    };
+                    
+                    // タイムスタンプをDateオブジェクトに変換
+                    if (blogData.createdAt && blogData.createdAt.toDate) {
+                      blogData.createdAt = blogData.createdAt.toDate();
+                    }
+                    if (blogData.updatedAt && blogData.updatedAt.toDate) {
+                      blogData.updatedAt = blogData.updatedAt.toDate();
+                    }
+                    
+                    newBlogs.push(blogData);
+                    updatedIds.add(doc.id);
+                    
+                    if (blogData.authorID) {
+                      authorIds.add(blogData.authorID);
+                    }
+                  });
+                  
+                  // 著者情報を一括取得
+                  if (authorIds.size > 0) {
+                    const authorPromises = Array.from(authorIds).map(async (authorId) => {
+                      try {
+                        const userDoc = await db.collection('userInfo').doc(authorId).get();
+                        if (userDoc.exists) {
+                          const userData = userDoc.data();
+                          return { id: authorId, data: userData };
+                        }
+                      } catch (error) {
+                        console.error(`ユーザー情報取得エラー (${authorId}):`, error);
+                      }
+                      return null;
+                    });
+                    
+                    const authorResults = await Promise.all(authorPromises);
+                    const authorMap = {};
+                    authorResults.forEach(result => {
+                      if (result) {
+                        authorMap[result.id] = result.data;
+                      }
+                    });
+                    
+                    // ブログデータに著者情報を追加
+                    newBlogs.forEach(blog => {
+                      if (blog.authorID && authorMap[blog.authorID]) {
+                        blog.authorName = authorMap[blog.authorID].userName || '匿名ユーザー';
+                        blog.authorIcon = authorMap[blog.authorID].userIcon || null;
+                      } else {
+                        blog.authorName = blog.authorName || '匿名ユーザー';
+                        blog.authorIcon = null;
+                      }
+                    });
+                  }
+                  
+                  if (newBlogs.length > 0) {
+                    console.log('新規・更新ブログ:', newBlogs.length, '件');
+                    
+                    // 既存データをマージ
+                    if (this.blogs.length > 0) {
+                      // 既存のブログから更新されたIDを除外
+                      const filteredBlogs = this.blogs.filter(blog => !updatedIds.has(blog.id));
+                      
+                      // 新しいデータを先頭に追加
+                      this.blogs = [...newBlogs, ...filteredBlogs];
+                    } else {
+                      // キャッシュがない場合は全データを読み込み
+                      await this.loadAllBlogs();
+                      return;
+                    }
+                    
+                    // フィルター・ソートを適用
+                    this.applyFiltersAndSort();
+                    
+                    // キャッシュを更新
+                    BlogCacheManager.saveToCache(this.blogs, Date.now());
+                  } else if (this.blogs.length === 0) {
+                    // 初回読み込み時で新規データがない場合は全データを読み込み
+                    await this.loadAllBlogs();
+                    return;
+                  }
+                  
+                  this.isLoading = false;
+                } catch (error) {
+                  console.error('ブログ更新確認エラー:', error);
+                  
+                  // エラー時でもキャッシュがあれば継続
+                  if (this.blogs.length === 0) {
+                    this.error = 'ブログの読み込みに失敗しました';
+                  }
+                  
+                  this.isLoading = false;
+                }
+              },
+              async loadAllBlogs() {
+                try {
+                  const snapshot = await db.collection('blog_posts')
+                    .where('status', '==', 'published')
+                    .orderBy('createdAt', 'desc')
+                    .limit(50) // 初回は最大50件
+                    .get();
+                  
+                  if (snapshot.empty) {
+                    this.blogs = [];
+                    this.isLoading = false;
+                    return;
+                  }
+                  
+                  const blogPromises = [];
+                  const authorIds = new Set();
+                  
+                  snapshot.forEach(doc => {
+                    const blogData = {
+                      id: doc.id,
+                      ...doc.data()
+                    };
+                    
+                    // タイムスタンプをDateオブジェクトに変換
+                    if (blogData.createdAt && blogData.createdAt.toDate) {
+                      blogData.createdAt = blogData.createdAt.toDate();
+                    }
+                    if (blogData.updatedAt && blogData.updatedAt.toDate) {
+                      blogData.updatedAt = blogData.updatedAt.toDate();
+                    }
+                    
+                    this.blogs.push(blogData);
+                    
+                    if (blogData.authorID) {
+                      authorIds.add(blogData.authorID);
+                    }
+                  });
+                  
+                  // 著者情報を一括取得
+                  if (authorIds.size > 0) {
+                    const authorPromises = Array.from(authorIds).map(async (authorId) => {
+                      try {
+                        const userDoc = await db.collection('userInfo').doc(authorId).get();
+                        if (userDoc.exists) {
+                          const userData = userDoc.data();
+                          return { id: authorId, data: userData };
+                        }
+                      } catch (error) {
+                        console.error(`ユーザー情報取得エラー (${authorId}):`, error);
+                      }
+                      return null;
+                    });
+                    
+                    const authorResults = await Promise.all(authorPromises);
+                    const authorMap = {};
+                    authorResults.forEach(result => {
+                      if (result) {
+                        authorMap[result.id] = result.data;
+                      }
+                    });
+                    
+                    // ブログデータに著者情報を追加
+                    this.blogs.forEach(blog => {
+                      if (blog.authorID && authorMap[blog.authorID]) {
+                        blog.authorName = authorMap[blog.authorID].userName || '匿名ユーザー';
+                        blog.authorIcon = authorMap[blog.authorID].userIcon || null;
+                      } else {
+                        blog.authorName = blog.authorName || '匿名ユーザー';
+                        blog.authorIcon = null;
+                      }
+                    });
+                  }
+                  
+                  // フィルター・ソートを適用
+                  this.applyFiltersAndSort();
+                  
+                  // キャッシュに保存
+                  BlogCacheManager.saveToCache(this.blogs, Date.now());
+                  
+                  this.isLoading = false;
+                } catch (error) {
+                  console.error('ブログ読み込みエラー:', error);
+                  this.error = 'ブログの読み込みに失敗しました';
+                  this.isLoading = false;
+                }
+              },
+
+
+              
+              applyFiltersAndSort() {
+                let filtered = [...this.blogs];
+
+                // カテゴリフィルター
+                if (this.selectedCategory !== 'all') {
+                  filtered = filtered.filter(blog => blog.category === this.selectedCategory);
+                }
+
+                // 検索フィルター
+                if (this.searchQuery.trim()) {
+                  const query = this.searchQuery.toLowerCase();
+                  filtered = filtered.filter(blog => {
+                    return blog.title.toLowerCase().includes(query) ||
+                           blog.content.toLowerCase().includes(query) ||
+                           (blog.tags && blog.tags.some(tag => tag.toLowerCase().includes(query)));
+                  });
+                }
+
+                // ソート
+                if (this.sortBy === 'latest') {
+                  filtered.sort((a, b) => b.createdAt - a.createdAt);
+                } else if (this.sortBy === 'popular') {
+                  filtered.sort((a, b) => b.likes - a.likes);
+                } else if (this.sortBy === 'views') {
+                  filtered.sort((a, b) => b.views - a.views);
+                }
+
+                this.displayedBlogs = filtered;
+                this.currentPage = 0;
+                this.hasMore = true;
+              },
+
+              filterByCategory(categoryId) {
+                this.selectedCategory = categoryId;
+                this.applyFiltersAndSort();
+              },
+
+              changeSortBy(sortType) {
+                this.sortBy = sortType;
+                this.applyFiltersAndSort();
+              },
+
+              handleSearchInput() {
+                clearTimeout(this.searchDebounceTimer);
+                
+                this.searchDebounceTimer = setTimeout(() => {
+                  this.applyFiltersAndSort();
+                }, 300);
+              },
+
+              handleScroll() {
+                if (this.isLoadingMore || !this.hasMore) return;
+
+                const scrollHeight = document.documentElement.scrollHeight;
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const clientHeight = document.documentElement.clientHeight;
+
+                if (scrollTop + clientHeight >= scrollHeight - 300) {
+                  this.loadMoreBlogs();
+                }
+              },
+
+              loadMoreBlogs() {
+                // 現在は全件表示のため、無限スクロールは不要
+                // 実装時は以下のようなロジックを追加
+                this.hasMore = false;
+              },
+
+              showBlogDetail(blog) {
+                window.location.href = `/blog/blog-detail.html?id=${blog.id}`;
+              },
+
+              getCategoryName(categoryId) {
+                const category = this.categories.find(cat => cat.id === categoryId);
+                return category ? `${category.icon} ${category.name}` : categoryId;
+              },
+
+              getExcerpt(content) {
+                if (!content) return '';
+                
+                // Markdownや特殊記法を除去
+                const plainText = content
+                  .replace(/{{spot:.*?}}/g, '')
+                  .replace(/{{route:.*?}}/g, '')
+                  .replace(/#+\s/g, '')
+                  .replace(/\*\*/g, '')
+                  .replace(/\*/g, '')
+                  .trim();
+                
+                return plainText.length > 120 ? plainText.substring(0, 120) + '...' : plainText;
+              },
+
+              formatNumber(num) {
+                if (num >= 10000) {
+                  return (num / 10000).toFixed(1) + '万';
+                } else if (num >= 1000) {
+                  return (num / 1000).toFixed(1) + 'k';
+                }
+                return num.toString();
+              },
+
+              getWebPUrl(url) {
+                if (!url) return null;
+                if (url.includes('firebasestorage.googleapis.com')) {
+                  return url.includes('?') ? `${url}&fm=webp` : `${url}?fm=webp`;
+                }
+                return url;
+              },
+
+              handleImageError(event) {
+                const parent = event.target.parentElement;
+                event.target.style.display = 'none';
+                
+                const placeholder = document.createElement('div');
+                placeholder.className = 'blog-card-image-placeholder';
+                placeholder.textContent = '📝';
+                parent.appendChild(placeholder);
+              },
+
+              handleIconError(event) {
+                event.target.style.display = 'none';
+                const parent = event.target.parentElement;
+                const emoji = document.createElement('span');
+                emoji.textContent = '👤';
+                parent.insertBefore(emoji, parent.firstChild);
+              },
+
+              goBack() {
+                window.history.back();
+              },
+
+              toggleMenu() {
+                this.showMenu = !this.showMenu;
+                if (this.showMenu) {
+                  document.body.style.overflow = 'hidden';
+                } else {
+                  document.body.style.overflow = '';
+                }
+              },
+
+              closeMenu() {
+                this.showMenu = false;
+                document.body.style.overflow = '';
+              },
+
+              handleKeydown(event) {
+                if (event.key === 'Escape') {
+                  if (this.showMenu) {
+                    this.closeMenu();
+                  }
+                }
+              }
+            }
+          });
+
+          app.mount('#app');
+        } catch (error) {
+          console.error('アプリケーション初期化エラー:', error);
+          document.getElementById('app').innerHTML = `
+            <div class="container">
+              <div class="empty-state">
+                <div class="empty-icon">⚠️</div>
+                <h3>エラーが発生しました</h3>
+                <p>${error.message}</p>
+              </div>
+            </div>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>
