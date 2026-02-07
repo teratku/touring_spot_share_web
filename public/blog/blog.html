@@ -1214,7 +1214,7 @@
                 isLocalhost: false,
                 isDevelopment: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
                 selectedCategory: 'all',
-                selectedStatus: 'published',
+                selectedStatus: 'all',  // 変更: 'published' → 'all'
                 searchQuery: '',
                 sortBy: 'latest',
                 isLoading: true,
@@ -1240,17 +1240,19 @@
                 const shouldRefresh = urlParams.get('refresh') === 'true';
                 const shouldClearCache = urlParams.get('clearCache') === 'true';
                 
-                // キャッシュクリアまたはリフレッシュ
-                if (shouldRefresh || shouldClearCache) {
-                  BlogCacheManager.clearCache();
-                  console.log('キャッシュをクリアしました');
+                // 開発環境または強制リフレッシュの場合
+                if (this.isLocalhost || shouldRefresh || shouldClearCache) {
+                  if (shouldRefresh || shouldClearCache) {
+                    BlogCacheManager.clearCache();
+                    console.log('キャッシュをクリアしました');
+                  }
                   // パラメータを削除してリダイレクト
                   window.history.replaceState({}, document.title, window.location.pathname);
                   
                   // 強制的に全てのブログを再読み込み
                   await this.loadAllBlogs();
                 } else {
-                  // 通常のキャッシュ読み込み
+                  // 本番環境: 通常のキャッシュ読み込み
                   await this.loadBlogsFromCache();
                   await this.checkAndUpdateBlogs();
                 }
@@ -1412,14 +1414,9 @@
                   let query = db.collection('blog_posts')
                     .orderBy('createdAt', 'desc');
                   
-                  // ステータスでフィルター (開発環境以外は公開済みのみ)
+                  // 本番環境の場合は公開済みのみ
                   if (!this.isLocalhost) {
                     query = query.where('status', '==', 'published');
-                  } else {
-                    // 開発環境でステータスフィルターが選択されている場合
-                    if (this.selectedStatus !== 'all') {
-                      query = query.where('status', '==', this.selectedStatus);
-                    }
                   }
                   
                   const snapshot = await query.get();
@@ -1512,7 +1509,7 @@
                   // フィルタとソートを適用
                   this.applyFiltersAndSort();
                   
-                  console.log(`${blogs.length}件のブログを読み込みました`);
+                  console.log(`${blogs.length}件のブログを読み込みました (公開: ${publishedBlogs.length}件, 下書き: ${blogs.length - publishedBlogs.length}件)`);
                   this.isLoading = false;
                 } catch (error) {
                   console.error('ブログ読み込みエラー:', error);
