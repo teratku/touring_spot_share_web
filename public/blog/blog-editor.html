@@ -1896,6 +1896,7 @@
                   thumbnailUrl: '',
                   status: 'draft'
                 },
+                thumbnailPreview: '',
                 tagInput: '',
                 showSpotModal: false,
                 showRouteModal: false,
@@ -2266,27 +2267,35 @@
                 }
 
                 try {
-                  // プレビュー表示
+                  // ローディング表示
+                  this.showToast('サムネイルをアップロード中...', 'info');
+
+                  // 一時的にプレビュー表示用のBase64データを生成
                   const reader = new FileReader();
                   reader.onload = (e) => {
-                    this.blogPost.thumbnailUrl = e.target.result;
+                    // プレビュー用の一時データ（dataプロパティに保存、thumbnailUrlには保存しない）
+                    this.thumbnailPreview = e.target.result;
                   };
                   reader.readAsDataURL(file);
 
-                  /* Firebase Storageへのアップロード（実装時に有効化）
+                  // Firebase Storageへのアップロード
                   const timestamp = Date.now();
                   const fileName = `blog_thumbnails/${timestamp}_${file.name}`;
                   const storageRef = storage.ref().child(fileName);
                   
-                  await storageRef.put(file);
+                  // アップロード実行
+                  const uploadTask = await storageRef.put(file);
+                  
+                  // ダウンロードURLを取得
                   const downloadURL = await storageRef.getDownloadURL();
+                  
+                  // FirestoreにはURLのみを保存
                   this.blogPost.thumbnailUrl = downloadURL;
-                  */
 
                   this.showToast('サムネイルを設定しました', 'success');
                 } catch (error) {
                   console.error('サムネイルアップロードエラー:', error);
-                  this.showToast('サムネイルのアップロードに失敗しました', 'error');
+                  this.showToast(`サムネイルのアップロードに失敗しました: ${error.message}`, 'error');
                 }
               },
 

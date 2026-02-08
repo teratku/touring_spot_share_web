@@ -1011,23 +1011,23 @@
               </button>
 
               <!-- サムネイル画像 -->
-              <picture v-if="blog.thumbnailURL" @click="showBlogDetail(blog)">
-                <source 
-                  :srcset="getWebPUrl(blog.thumbnailURL)" 
-                  type="image/webp"
-                >
-                <img 
-                  :src="blog.thumbnailURL" 
-                  :alt="blog.title"
-                  class="blog-card-image"
-                  loading="lazy"
-                  decoding="async"
-                  @error="handleImageError"
-                >
-              </picture>
-              <div v-else class="blog-card-image-placeholder" @click="showBlogDetail(blog)">
-                📝
-              </div>
+              <picture v-if="blog.thumbnailUrl" @click="showBlogDetail(blog)">
+              <source 
+                :srcset="getWebPUrl(blog.thumbnailUrl)" 
+                type="image/webp"
+              >
+              <img 
+                :src="blog.thumbnailUrl" 
+                :alt="blog.title"
+                class="blog-card-image"
+                loading="lazy"
+                decoding="async"
+                @error="handleImageError"
+              >
+            </picture>
+            <div v-else class="blog-card-image-placeholder" @click="showBlogDetail(blog)">
+              📝
+            </div>
             </div>
 
             <!-- カード内容 -->
