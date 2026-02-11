@@ -15,6 +15,7 @@
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <!-- Marked.js for Markdown rendering -->
@@ -1098,6 +1099,7 @@
       const { createApp } = Vue;
 
       let db;
+      let storage;
 
       function waitForFirebase() {
         return new Promise((resolve, reject) => {
@@ -1167,7 +1169,13 @@
                 showMenu: false,
                 hasLiked: false,
                 renderedContent: '',
-                isLocalhost: false
+                isLocalhost: false,
+                isSaving: false,  // 追加
+                toast: {  // 追加
+                  show: false,
+                  message: '',
+                  type: 'success'
+                }
               };
             },
             async mounted() {
@@ -1178,6 +1186,7 @@
                 
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
+                storage = firebase.storage();
                 
                 this.blogId = getQueryParam('id');
                 
@@ -1558,7 +1567,15 @@
                   window.location.href = `/blog/blog-editor.html?id=${this.blogId}`;
                 }
               },
-              
+              showToast(message, type = 'success') {
+                this.toast.message = message;
+                this.toast.type = type;
+                this.toast.show = true;
+
+                setTimeout(() => {
+                  this.toast.show = false;
+                }, 3000);
+              },
               // ブログ削除
               async deleteBlog() {
                 if (!this.blogId) {
@@ -1578,17 +1595,66 @@
                 }
                 
                 try {
-                  // Firestoreから削除
+                  // 1. Firestoreからブログデータを取得
+                  const blogDoc = await db.collection('blog_posts').doc(this.blogId).get();
+                  
+                  if (!blogDoc.exists) {
+                    throw new Error('ブログが見つかりません');
+                  }
+
+                  const blogData = blogDoc.data();
+
+                  // 2. Firebase Storageから画像を削除
+                  const deletePromises = [];
+
+                  // サムネイル画像を削除
+                  if (blogData.thumbnailUrl) {
+                    try {
+                      const thumbnailRef = storage.refFromURL(blogData.thumbnailUrl);
+                      deletePromises.push(thumbnailRef.delete());
+                      console.log('サムネイル削除予定:', blogData.thumbnailUrl);
+                    } catch (error) {
+                      console.warn('サムネイル削除エラー:', error);
+                    }
+                  }
+
+                  // 本文内の画像URLを抽出して削除
+                  if (blogData.content) {
+                    // Markdown形式の画像: ![alt](url)
+                    const imagePattern = /!\[.*?\]\((https:\/\/firebasestorage\.googleapis\.com\/.*?)\)/g;
+                    const imageMatches = blogData.content.matchAll(imagePattern);
+
+                    for (const match of imageMatches) {
+                      const imageUrl = match[1];
+                      try {
+                        const imageRef = storage.refFromURL(imageUrl);
+                        deletePromises.push(imageRef.delete());
+                        console.log('本文画像削除予定:', imageUrl);
+                      } catch (error) {
+                        console.warn('本文画像削除エラー:', error);
+                      }
+                    }
+                  }
+
+                  // 画像削除を実行（エラーがあっても続行）
+                  await Promise.allSettled(deletePromises);
+
+                  // 3. Firestoreからブログドキュメントを削除
                   await db.collection('blog_posts').doc(this.blogId).delete();
-                  
+
                   console.log('ブログ削除成功:', this.blogId);
-                  alert('ブログを削除しました');
-                  
-                  // キャッシュをクリアしてブログ一覧にリダイレクト
-                  window.location.href = '/blog/blog.html?refresh=true';  // 変更
+                  this.showToast('ブログを削除しました', 'success');
+
+                  // ブログ一覧へリダイレクト
+                  setTimeout(() => {
+                    window.location.href = '/blog/blog.html';
+                  }, 1500);
+
                 } catch (error) {
-                  console.error('ブログ削除エラー:', error);
-                  alert('ブログの削除に失敗しました: ' + error.message);
+                  console.error('削除エラー:', error);
+                  this.showToast(`削除に失敗しました: ${error.message}`, 'error');
+                } finally {
+                  this.isSaving = false;
                 }
               }
             }

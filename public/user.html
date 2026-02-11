@@ -389,6 +389,19 @@
         padding: 8pt 16pt;
         border-radius: 12pt;
         border-left: 4px solid #228B22;
+        transition: all 0.2s ease;
+      }
+
+      .stat-item.clickable {
+        cursor: pointer;
+        border: 2px solid #00A8C6;
+        border-left: 4px solid #00A8C6;
+      }
+
+      .stat-item.clickable:hover {
+        background: #E8F8FB;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 168, 198, 0.2);
       }
 
       .stat-label {
@@ -642,6 +655,183 @@
       }
 
       .follower-empty p {
+        font-size: 14pt;
+        color: #999999;
+      }
+
+      /* ========== ルートモーダル ========== */
+      .route-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2500;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .route-modal.active {
+        display: flex;
+      }
+
+      .route-modal-content {
+        background: white;
+        border-radius: 16pt;
+        width: 90%;
+        max-width: 800px;
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .route-modal-header {
+        padding: 20pt;
+        border-bottom: 1px solid #E0E0E0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .route-modal-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #00A8C6;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .route-modal-close {
+        background: #E0E0E0;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: #333333;
+        transition: all 0.2s ease;
+      }
+
+      .route-modal-close:hover {
+        background: #C7C7CC;
+      }
+
+      .route-modal-body {
+        padding: 16pt;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .route-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12pt;
+      }
+
+      .route-list-item {
+        display: flex;
+        flex-direction: column;
+        padding: 16pt;
+        background: #F9F9F9;
+        border-radius: 12pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-left: 4px solid #00A8C6;
+      }
+
+      .route-list-item:hover {
+        background: #E8F8FB;
+        transform: translateX(4px);
+        box-shadow: 0 2px 8px rgba(0, 168, 198, 0.2);
+      }
+
+      .route-list-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8pt;
+      }
+
+      .route-list-item-title {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        flex: 1;
+        margin-right: 12pt;
+      }
+
+      .route-list-item-status {
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12pt;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .route-list-item-status.public {
+        background: rgba(0, 168, 198, 0.2);
+        color: #00A8C6;
+      }
+
+      .route-list-item-status.private {
+        background: #E0E0E0;
+        color: #666666;
+      }
+
+      .route-list-item-meta {
+        display: flex;
+        gap: 16pt;
+        font-size: 13pt;
+        color: #666666;
+        flex-wrap: wrap;
+      }
+
+      .route-list-item-meta span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      /* ローディング表示 */
+      .route-loading {
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      .route-loading .spinner {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 16px;
+      }
+
+      /* エンプティステート */
+      .route-empty {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .route-empty-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+        opacity: 0.5;
+      }
+
+      .route-empty h3 {
+        font-size: 18pt;
+        color: #666666;
+        margin-bottom: 8pt;
+      }
+
+      .route-empty p {
         font-size: 14pt;
         color: #999999;
       }
@@ -1215,6 +1405,73 @@
           background: rgba(0, 168, 198, 0.2);
           color: #00D4FF;
         }
+
+        /* ルートモーダル - ダークモード */
+        .route-modal-content {
+          background: #2C2C2E;
+        }
+
+        .route-modal-header {
+          border-bottom-color: #48484A;
+        }
+
+        .route-modal-title {
+          color: #00D4FF;
+        }
+
+        .route-modal-close {
+          background: #48484A;
+          color: #F2F2F7;
+        }
+
+        .route-modal-close:hover {
+          background: #636366;
+        }
+
+        .route-list-item {
+          background: #1C1C1E;
+          border-left-color: #00D4FF;
+        }
+
+        .route-list-item:hover {
+          background: #2C2C2E;
+        }
+
+        .route-list-item-title {
+          color: #F2F2F7;
+        }
+
+        .route-list-item-meta {
+          color: #AEAEB2;
+        }
+
+        .route-list-item-status.public {
+          background: rgba(0, 168, 198, 0.2);
+          color: #00D4FF;
+        }
+
+        .route-list-item-status.private {
+          background: #48484A;
+          color: #8E8E93;
+        }
+
+        .route-empty h3 {
+          color: #AEAEB2;
+        }
+
+        .route-empty p {
+          color: #8E8E93;
+        }
+
+        .stat-item.clickable {
+          border-color: #00D4FF;
+        }
+
+        .stat-item.clickable:hover {
+          background: rgba(0, 168, 198, 0.2);
+          border-color: #00D4FF;
+        }
+
         .page-footer {
           background: #1C1C1E;
           border-top-color: #48484A;
@@ -1371,7 +1628,12 @@
                     <span class="stat-value">{{ locationCount }}</span>
                   </div>
 
-                  <div class="stat-item">
+                  <div class="stat-item clickable" @click="showRouteList" v-if="sharedRoutesCount > 0">
+                    <span class="stat-label">🗺️ ルート数</span>
+                    <span class="stat-value">{{ sharedRoutesCount }}</span>
+                  </div>
+
+                  <div class="stat-item" v-else>
                     <span class="stat-label">🗺️ ルート数</span>
                     <span class="stat-value">{{ sharedRoutesCount }}</span>
                   </div>
@@ -1679,6 +1941,64 @@
           </div>
         </div>
       </div>
+
+      <!-- ルート一覧モーダル -->
+      <div 
+        v-if="showRouteModal" 
+        class="route-modal" 
+        :class="{ active: showRouteModal }"
+        @click.self="closeRouteModal"
+      >
+        <div class="route-modal-content" @click.stop>
+          <div class="route-modal-header">
+            <h2 class="route-modal-title">
+              <span>🗺️</span>
+              <span>共有ルート一覧</span>
+            </h2>
+            <button class="route-modal-close" @click="closeRouteModal" aria-label="閉じる">✕</button>
+          </div>
+          
+          <div class="route-modal-body">
+            <!-- ローディング状態 -->
+            <div v-if="isLoadingRoutes" class="route-loading">
+              <div class="spinner"></div>
+              <p>ルートを読み込み中...</p>
+            </div>
+
+            <!-- ルート一覧 -->
+            <div v-else-if="sharedRoutes.length > 0" class="route-list">
+              <div 
+                v-for="route in sharedRoutes"
+                :key="route.id"
+                class="route-list-item"
+                @click="goToRouteDetail(route.id)"
+              >
+                <div class="route-list-item-header">
+                  <div class="route-list-item-title">{{ route.title || 'タイトルなし' }}</div>
+                  <div 
+                    class="route-list-item-status"
+                    :class="route.isPublic ? 'public' : 'private'"
+                  >
+                    {{ route.isPublic ? '🌐 公開中' : '🔒 非公開' }}
+                  </div>
+                </div>
+                
+                <div class="route-list-item-meta">
+                  <span>📏 {{ (route.distance / 1000).toFixed(1) }} km</span>
+                  <span>📅 {{ formatRouteDate(route.createdAt) }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- エンプティステート -->
+            <div v-else class="route-empty">
+              <div class="route-empty-icon">🗺️</div>
+              <h3>ルートがありません</h3>
+              <p>まだルートを共有していません</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -1958,6 +2278,7 @@
                 followerCount: 0,
                 followers: [],
                 showFollowerModal: false,
+                showRouteModal: false,
                 isLoadingFollowers: false,
                 cacheLoaded: false,
                 mapInitialized: false,
@@ -2533,6 +2854,20 @@
                 window.location.href = `/user.html?id=${followerId}`;
               },
 
+              showRouteList() {
+                this.showRouteModal = true;
+                document.body.style.overflow = 'hidden';
+              },
+
+              closeRouteModal() {
+                this.showRouteModal = false;
+                document.body.style.overflow = '';
+              },
+
+              goToRouteDetail(routeId) {
+                window.location.href = `/route-detail.html?id=${routeId}`;
+              },
+
               showRouteDetail(route) {
                 // ルート詳細画面への遷移（実装に応じて変更）
                 window.location.href = `/route-detail.html?id=${route.id}`;
@@ -2590,6 +2925,8 @@
                     this.closeMenu();
                   } else if (this.showFollowerModal) {
                     this.closeFollowerModal();
+                  } else if (this.showRouteModal) {
+                    this.closeRouteModal();
                   } else if (this.showClusterPanel) {
                     this.closeClusterPanel();
                   } else {

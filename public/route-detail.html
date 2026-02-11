@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <title>ルート詳細 | ツーリングスポットシェア</title>
+
+    <!-- リソースヒント -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <!-- Google Maps API -->
+    <script>
+      window.initMap = function() {
+        console.log('Google Maps API callback triggered');
+      };
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=initMap&loading=async"></script>
+
+    <style>
+      /* ========== リセット & ベーススタイル ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ========== ヘッダー ========== */
+      header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .menu-btn, .back-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 12pt;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-btn:hover, .back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      h1 {
+        font-size: 20pt;
+        font-weight: 600;
+        flex: 1;
+      }
+
+      /* ========== ハンバーガーメニュー ========== */
+      .hamburger-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .hamburger-menu.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .menu-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 280px;
+        height: 100%;
+        background: white;
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+        animation: slideInLeft 0.3s ease;
+      }
+
+      @keyframes slideInLeft {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+      }
+
+      .menu-header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 20px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .menu-header h2 {
+        font-size: 20pt;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .menu-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24pt;
+        color: white;
+        transition: all 0.2s ease;
+      }
+
+      .menu-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .menu-nav {
+        padding: 16px 0;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 20px;
+        color: #333333;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border-left: 4px solid transparent;
+      }
+
+      .menu-item:hover {
+        background: #F9F9F9;
+        border-left-color: #00A8C6;
+      }
+
+      .menu-item.active {
+        background: #E8F8FB;
+        border-left-color: #00A8C6;
+        color: #00A8C6;
+        font-weight: 600;
+      }
+
+      .menu-icon {
+        font-size: 20pt;
+        width: 28px;
+        text-align: center;
+      }
+
+      /* ========== フッター ========== */
+      .page-footer {
+        background: white;
+        padding: 24pt 16px;
+        text-align: center;
+        border-top: 1px solid #E0E0E0;
+        margin-top: 40px;
+      }
+
+      .page-footer p {
+        font-size: 13pt;
+        color: #999999;
+        font-weight: 300;
+      }
+
+      /* ========== メインコンテナ ========== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      /* ========== ローディング ========== */
+      .loading {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .spinner {
+        border: 4px solid #E0E0E0;
+        border-top: 4px solid #00A8C6;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 16px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* ========== エラー表示 ========== */
+      .error-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #E63946;
+      }
+
+      .error-icon {
+        font-size: 64pt;
+        margin-bottom: 16pt;
+      }
+
+      /* ========== カバー画像 ========== */
+      .cover-image-container {
+        width: 100%;
+        height: 400px;
+        border-radius: 16pt;
+        overflow: hidden;
+        margin-bottom: 24pt;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background: #E0E0E0;
+        position: relative;
+      }
+
+      .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .cover-image:hover {
+        transform: scale(1.05);
+      }
+
+      .image-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 64pt;
+        color: #999999;
+      }
+
+      /* ========== マップコンテナ ========== */
+      .map-container {
+        width: 100%;
+        height: 500px;
+        border-radius: 16pt;
+        overflow: hidden;
+        margin-bottom: 24pt;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        background: white;
+        position: relative;
+      }
+
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ========== ルート情報カード ========== */
+      .route-info-card {
+        background: white;
+        border-radius: 16pt;
+        padding: 24pt;
+        margin-bottom: 24pt;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .route-title {
+        font-size: 24pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 16pt;
+        word-wrap: break-word;
+      }
+
+      .route-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16pt;
+        margin-bottom: 24pt;
+      }
+
+      .stat-item {
+        background: #F9F9F9;
+        padding: 16pt;
+        border-radius: 12pt;
+        border-left: 4px solid #00A8C6;
+      }
+
+      .stat-label {
+        font-size: 12pt;
+        color: #666666;
+        margin-bottom: 8pt;
+        font-weight: 500;
+      }
+
+      .stat-value {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      .stat-unit {
+        font-size: 14pt;
+        color: #999999;
+        margin-left: 4pt;
+      }
+
+      /* ========== アクションボタン ========== */
+      .action-buttons {
+        display: flex;
+        gap: 12pt;
+        flex-wrap: wrap;
+      }
+
+      .action-btn {
+        flex: 1;
+        min-width: 150px;
+        padding: 16pt 24pt;
+        border: none;
+        border-radius: 16pt;
+        font-size: 16pt;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8pt;
+      }
+
+      .download-btn {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 168, 198, 0.3);
+      }
+
+      .share-btn {
+        background: white;
+        color: #00A8C6;
+        border: 2px solid #00A8C6;
+      }
+
+      .share-btn:hover {
+        background: #E8F8FB;
+      }
+
+      /* ========== ユーザー情報 ========== */
+      .user-section {
+        background: white;
+        border-radius: 16pt;
+        padding: 24pt;
+        margin-bottom: 24pt;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        font-size: 18pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 16pt;
+        display: flex;
+        align-items: center;
+        gap: 8pt;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 16pt;
+        padding: 16pt;
+        background: #F9F9F9;
+        border-radius: 12pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .user-info:hover {
+        background: #E8F8FB;
+        transform: translateX(4px);
+      }
+
+      .user-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #00A8C6;
+      }
+
+      .icon-placeholder {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32pt;
+        color: white;
+      }
+
+      .user-details h3 {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 4pt;
+      }
+
+      .user-id {
+        font-size: 13pt;
+        color: #999999;
+      }
+
+      /* ========== 画像モーダル ========== */
+      .image-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 3000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+      }
+
+      .modal-image {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 16pt;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        color: white;
+        font-size: 24pt;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+      }
+
+      /* ========== レスポンシブ ========== */
+      @media (max-width: 768px) {
+        .container {
+          padding: 16px 12px;
+        }
+
+        .cover-image-container {
+          height: 250px;
+          border-radius: 12pt;
+        }
+
+        .map-container {
+          height: 350px;
+          border-radius: 12pt;
+        }
+
+        .route-info-card {
+          padding: 16pt;
+          border-radius: 12pt;
+        }
+
+        .route-title {
+          font-size: 20pt;
+        }
+
+        .route-stats {
+          grid-template-columns: 1fr;
+          gap: 12pt;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .action-btn {
+          min-width: 100%;
+        }
+
+        .user-section {
+          padding: 16pt;
+          border-radius: 12pt;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- ヘッダー -->
+      <header>
+        <div class="header-content">
+          <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
+          <h1>ルート詳細</h1>
+          <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
+        </div>
+      </header>
+
+      <!-- ハンバーガーメニュー -->
+      <div class="hamburger-menu" :class="{ active: showMenu }" @click.self="closeMenu">
+        <div class="menu-content">
+          <div class="menu-header">
+            <h2>メニュー</h2>
+            <button class="menu-close-btn" @click="closeMenu">×</button>
+          </div>
+          <nav class="menu-nav">
+            <a href="index.html" class="menu-item">
+              <span class="menu-icon">🏠</span>
+              <span>ホーム</span>
+            </a>
+            <a href="blog.html" class="menu-item">
+              <span class="menu-icon">📝</span>
+              <span>ブログ</span>
+            </a>
+            <a href="#" class="menu-item active">
+              <span class="menu-icon">🛣️</span>
+              <span>ルート</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- ローディング -->
+      <div v-if="isLoading" class="container">
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>ルート情報を読み込み中...</p>
+        </div>
+      </div>
+
+      <!-- エラー -->
+      <div v-else-if="error" class="container">
+        <div class="error-state">
+          <div class="error-icon">⚠️</div>
+          <h3>エラーが発生しました</h3>
+          <p>{{ error }}</p>
+        </div>
+      </div>
+
+      <!-- メインコンテンツ -->
+      <div v-else-if="route" class="container">
+        <!-- カバー画像 -->
+        <div class="cover-image-container">
+          <img
+            v-if="route.coverImageUrl"
+            :src="route.coverImageUrl"
+            :alt="route.title"
+            class="cover-image"
+            @click="openImageModal(route.coverImageUrl)"
+            @error="handleImageError"
+            loading="lazy"
+          >
+          <div v-else class="image-placeholder">🛣️</div>
+        </div>
+
+        <!-- マップ -->
+        <div class="map-container">
+          <div id="map"></div>
+        </div>
+
+        <!-- ルート情報 -->
+        <div class="route-info-card">
+          <h2 class="route-title">{{ route.title || 'タイトルなし' }}</h2>
+          
+          <div class="route-stats">
+            <div class="stat-item">
+              <div class="stat-label">📏 総距離</div>
+              <div class="stat-value">
+                {{ formatDistance(route.distance) }}
+                <span class="stat-unit">km</span>
+              </div>
+            </div>
+            
+            <div class="stat-item">
+              <div class="stat-label">📅 作成日時</div>
+              <div class="stat-value" style="font-size: 14pt;">
+                {{ formatTimestamp(route.createdAt) }}
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <!-- <button class="action-btn download-btn" @click="downloadRoute">
+              <span>⬇️</span>
+              <span>ルートをダウンロード</span>
+            </button> -->
+            <button class="action-btn share-btn" @click="shareRoute">
+              <span>🔗</span>
+              <span>共有</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ユーザー情報 -->
+        <div v-if="userInfo" class="user-section">
+          <h3 class="section-title">
+            <span>👤</span>
+            <span>投稿者情報</span>
+          </h3>
+          <div class="user-info" @click="goToUserProfile">
+            <img
+              v-if="userInfo.userIcon"
+              :src="userInfo.userIcon"
+              :alt="userInfo.userName"
+              class="user-icon"
+              @error="handleIconError"
+            >
+            <div v-else class="icon-placeholder">👤</div>
+            <div class="user-details">
+              <h3>{{ userInfo.userName || 'Unknown User' }}</h3>
+              <p class="user-id">@{{ route.userID }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- フッター -->
+      <footer class="page-footer">
+        <p>&copy; 2025 ツーリングスポットシェア. All rights reserved.</p>
+      </footer>
+
+      <!-- 画像モーダル -->
+      <div v-if="showImageModal" class="image-modal" @click.self="closeImageModal">
+        <div class="modal-content">
+          <button class="modal-close" @click="closeImageModal">×</button>
+          <img :src="selectedImage" alt="Full size image" class="modal-image">
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let map = null;
+      let routePath = null;
+      let markers = [];
+
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          // Firebaseの初期化を待つ
+          await new Promise(resolve => {
+            const checkFirebase = setInterval(() => {
+              if (window.firebase && window.firebase.apps.length > 0) {
+                clearInterval(checkFirebase);
+                resolve();
+              }
+            }, 100);
+          });
+
+          const db = firebase.firestore();
+          const storage = firebase.storage();
+
+          const { createApp } = Vue;
+          const app = createApp({
+            data() {
+              return {
+                routeId: null,
+                route: null,
+                userInfo: null,
+                routeData: null,
+                isLoading: true,
+                error: null,
+                showMenu: false,
+                showImageModal: false,
+                selectedImage: null
+              };
+            },
+
+            async mounted() {
+              // URLパラメータからルートIDを取得
+              const urlParams = new URLSearchParams(window.location.search);
+              this.routeId = urlParams.get('id');
+
+              if (!this.routeId) {
+                this.error = 'ルートIDが指定されていません';
+                this.isLoading = false;
+                return;
+              }
+
+              // キーボードイベント
+              window.addEventListener('keydown', this.handleKeydown);
+
+              // Google Maps APIの初期化を待つ
+              await this.waitForGoogleMaps();
+              
+              // ルートデータを読み込む（マップ初期化はloadRouteDetail内で行う）
+              await this.loadRouteDetail();
+            },
+
+            beforeUnmount() {
+              window.removeEventListener('keydown', this.handleKeydown);
+            },
+
+            methods: {
+              async waitForGoogleMaps() {
+                return new Promise((resolve) => {
+                  const checkGoogleMaps = setInterval(() => {
+                    if (window.google && window.google.maps) {
+                      clearInterval(checkGoogleMaps);
+                      console.log('Google Maps API loaded');
+                      resolve();
+                    }
+                  }, 100);
+                });
+              },
+
+              async initMap() {
+                return new Promise((resolve, reject) => {
+                  // マップ要素が存在するまで待つ
+                  const waitForMapElement = (attempts = 0, maxAttempts = 50) => {
+                    const mapElement = document.getElementById('map');
+                    
+                    if (mapElement) {
+                      try {
+                        map = new google.maps.Map(mapElement, {
+                          center: { lat: 35.6762, lng: 139.6503 }, // 東京
+                          zoom: 10,
+                          mapTypeControl: true,
+                          streetViewControl: false,
+                          fullscreenControl: true,
+                          styles: [
+                            {
+                              featureType: 'poi',
+                              elementType: 'labels',
+                              stylers: [{ visibility: 'off' }]
+                            }
+                          ]
+                        });
+
+                        console.log('Map initialized successfully');
+                        resolve();
+                      } catch (error) {
+                        console.error('Map initialization error:', error);
+                        reject(error);
+                      }
+                    } else if (attempts < maxAttempts) {
+                      // マップ要素がまだ見つからない場合、50ms後に再試行
+                      setTimeout(() => waitForMapElement(attempts + 1, maxAttempts), 50);
+                    } else {
+                      reject(new Error('Map element not found after waiting'));
+                    }
+                  };
+                  
+                  waitForMapElement();
+                });
+              },
+
+              async loadRouteDetail() {
+                try {
+                  console.log('Loading route detail for ID:', this.routeId);
+                  const doc = await db.collection('shared_routes').doc(this.routeId).get();
+                  
+                  if (!doc.exists) {
+                    this.error = 'ルートが見つかりませんでした';
+                    this.isLoading = false;
+                    return;
+                  }
+
+                  this.route = {
+                    id: doc.id,
+                    ...doc.data()
+                  };
+                  
+                  console.log('Route data loaded from Firestore:', this.route);
+
+                  // カバー画像URLを安全な形式に変換
+                  if (this.route.coverImageUrl) {
+                    this.route.coverImageUrl = await this.getSafeImageUrl(this.route.coverImageUrl);
+                  }
+
+                  // ユーザー情報を取得
+                  if (this.route.userID) {
+                    await this.loadUserInfo(this.route.userID);
+                  }
+
+                  // ローディングを終了してDOMを更新
+                  this.isLoading = false;
+                  console.log('Loading complete, initializing map...');
+                  
+                  // DOMが更新されるのを待ってからマップを初期化
+                  try {
+                    // Vue.jsのDOM更新を待つ
+                    await this.$nextTick();
+                    
+                    // さらにブラウザのレンダリングを待つ
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    
+                    await this.initMap();
+
+                    // ルートJSONを読み込んで地図に描画
+                    if (this.route.jsonUrl) {
+                      console.log('Loading route from JSON URL:', this.route.jsonUrl);
+                      await this.loadAndDisplayRoute(this.route.jsonUrl);
+                    } else {
+                      console.warn('No jsonUrl found in route data');
+                    }
+                  } catch (mapError) {
+                    console.error('マップ初期化エラー:', mapError);
+                    // マップエラーは表示を続行（ルート情報は表示できる）
+                  }
+
+                } catch (error) {
+                  console.error('データ読み込みエラー:', error);
+                  this.error = error.message;
+                  this.isLoading = false;
+                }
+              },
+
+              async getSafeImageUrl(url) {
+                if (!url) return url;
+                
+                if (!url.includes('firebasestorage.googleapis.com')) {
+                  return url;
+                }
+                
+                try {
+                  const urlObj = new URL(url);
+                  const pathMatch = urlObj.pathname.match(/\/o\/(.+)/);
+                  
+                  if (pathMatch) {
+                    const path = decodeURIComponent(pathMatch[1]);
+                    const ref = storage.ref(path);
+                    const downloadUrl = await ref.getDownloadURL();
+                    return downloadUrl;
+                  }
+                } catch (error) {
+                  console.warn('URL変換エラー、元のURLを使用:', error);
+                }
+                
+                return url;
+              },
+
+              async loadUserInfo(userID) {
+                try {
+                  const userDoc = await db.collection('userInfo').doc(userID).get();
+                  if (userDoc.exists) {
+                    this.userInfo = userDoc.data();
+                    
+                    if (this.userInfo.userIcon) {
+                      this.userInfo.userIcon = await this.getSafeImageUrl(this.userInfo.userIcon);
+                    }
+                  }
+                } catch (error) {
+                  console.error('ユーザー情報取得エラー:', error);
+                }
+              },
+
+              async loadAndDisplayRoute(jsonUrl) {
+                try {
+                  console.log('Loading route from:', jsonUrl);
+                  
+                  // Firebase StorageからJSONを取得
+                  const response = await fetch(jsonUrl);
+                  if (!response.ok) {
+                    throw new Error('ルートデータの取得に失敗しました');
+                  }
+
+                  this.routeData = await response.json();
+                  console.log('Route data loaded:', this.routeData);
+                  
+                  // coordinatesとroutePointsの両方をサポート
+                  const points = this.routeData.routePoints || this.routeData.coordinates;
+                  
+                  if (!this.routeData || !points || points.length === 0) {
+                    console.warn('座標データが空です');
+                    return;
+                  }
+                  
+                  console.log(`座標数: ${points.length}`);
+                  console.log('最初の座標:', points[0]);
+                  console.log('最後の座標:', points[points.length - 1]);
+
+                  this.displayRouteOnMap();
+                } catch (error) {
+                  console.error('ルートデータ読み込みエラー:', error);
+                }
+              },
+
+              displayRouteOnMap() {
+                if (!this.routeData || !map) {
+                  console.error('displayRouteOnMap failed:', {
+                    hasRouteData: !!this.routeData,
+                    hasMap: !!map
+                  });
+                  return;
+                }
+
+                console.log('Displaying route on map...');
+                
+                try {
+                  // routePointsとcoordinatesの両方をサポート
+                  const points = this.routeData.routePoints || this.routeData.coordinates;
+                  
+                  if (!points || points.length === 0) {
+                    console.error('No route points found');
+                    return;
+                  }
+                  
+                  // 座標を変換（様々なフォーマットに対応）
+                  const coordinates = points.map((coord, index) => {
+                    // latitude/longitude または lat/lng または lat/lon 形式をサポート
+                    const lat = coord.latitude || coord.lat;
+                    const lng = coord.longitude || coord.lng || coord.lon;
+                    
+                    if (lat === undefined || lng === undefined) {
+                      console.error(`Invalid coordinate at index ${index}:`, coord);
+                      throw new Error(`Invalid coordinate at index ${index}`);
+                    }
+                    
+                    return {
+                      lat: Number(lat),
+                      lng: Number(lng)
+                    };
+                  });
+                  
+                  console.log(`変換後の座標数: ${coordinates.length}`);
+                  console.log('最初の変換後座標:', coordinates[0]);
+                  console.log('最後の変換後座標:', coordinates[coordinates.length - 1]);
+
+                  // 既存のルートとマーカーをクリア
+                  if (routePath) {
+                    routePath.setMap(null);
+                  }
+                  markers.forEach(marker => marker.setMap(null));
+                  markers = [];
+
+                  // ルートを描画
+                  routePath = new google.maps.Polyline({
+                    path: coordinates,
+                    geodesic: true,
+                    strokeColor: '#00A8C6',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 4
+                  });
+                  routePath.setMap(map);
+                  console.log('Polyline created and added to map');
+
+                  // スタート地点のマーカー
+                  const startMarker = new google.maps.Marker({
+                    position: coordinates[0],
+                    map: map,
+                    title: 'スタート',
+                    label: {
+                      text: 'S',
+                      color: 'white',
+                      fontWeight: 'bold'
+                    },
+                    icon: {
+                      path: google.maps.SymbolPath.CIRCLE,
+                      scale: 10,
+                      fillColor: '#228B22',
+                      fillOpacity: 1,
+                      strokeColor: '#ffffff',
+                      strokeWeight: 2
+                    }
+                  });
+                  markers.push(startMarker);
+                  console.log('Start marker created at:', coordinates[0]);
+
+                  // ゴール地点のマーカー
+                  const endMarker = new google.maps.Marker({
+                    position: coordinates[coordinates.length - 1],
+                    map: map,
+                    title: 'ゴール',
+                    label: {
+                      text: 'G',
+                      color: 'white',
+                      fontWeight: 'bold'
+                    },
+                    icon: {
+                      path: google.maps.SymbolPath.CIRCLE,
+                      scale: 10,
+                      fillColor: '#E63946',
+                      fillOpacity: 1,
+                      strokeColor: '#ffffff',
+                      strokeWeight: 2
+                    }
+                  });
+                  markers.push(endMarker);
+                  console.log('End marker created at:', coordinates[coordinates.length - 1]);
+
+                  // 地図の表示範囲を調整
+                  const bounds = new google.maps.LatLngBounds();
+                  coordinates.forEach(coord => bounds.extend(coord));
+                  map.fitBounds(bounds);
+                  console.log('Map bounds adjusted');
+
+                  console.log('Route displayed on map successfully!');
+                } catch (error) {
+                  console.error('Error displaying route on map:', error);
+                }
+              },
+
+              async downloadRoute() {
+                if (!this.route || !this.route.jsonUrl) {
+                  alert('ルートデータが見つかりません');
+                  return;
+                }
+
+                try {
+                  const response = await fetch(this.route.jsonUrl);
+                  const blob = await response.blob();
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = this.route.jsonFileName || `route_${this.routeId}.json`;
+                  document.body.appendChild(a);
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                  document.body.removeChild(a);
+                } catch (error) {
+                  console.error('ダウンロードエラー:', error);
+                  alert('ダウンロードに失敗しました');
+                }
+              },
+
+              shareRoute() {
+                const url = window.location.href;
+                if (navigator.share) {
+                  navigator.share({
+                    title: this.route.title || 'ツーリングルート',
+                    text: 'ツーリングスポットシェアでルートを共有',
+                    url: url
+                  }).catch(err => console.log('Share failed:', err));
+                } else {
+                  // フォールバック: URLをコピー
+                  navigator.clipboard.writeText(url).then(() => {
+                    alert('URLをコピーしました');
+                  }).catch(err => {
+                    console.error('コピー失敗:', err);
+                  });
+                }
+              },
+
+              openImageModal(url) {
+                this.selectedImage = url;
+                this.showImageModal = true;
+                document.body.style.overflow = 'hidden';
+              },
+
+              closeImageModal() {
+                this.showImageModal = false;
+                this.selectedImage = null;
+                document.body.style.overflow = '';
+              },
+
+              handleImageError(event) {
+                console.error('画像読み込みエラー:', event.target.src);
+                event.target.style.display = 'none';
+                
+                const parent = event.target.closest('.cover-image-container');
+                if (parent && !parent.querySelector('.image-placeholder')) {
+                  const placeholder = document.createElement('div');
+                  placeholder.className = 'image-placeholder';
+                  placeholder.textContent = '🛣️';
+                  parent.appendChild(placeholder);
+                }
+              },
+
+              handleIconError(event) {
+                console.error('アイコン読み込みエラー:', event.target.src);
+                event.target.style.display = 'none';
+                
+                const parent = event.target.closest('.user-info');
+                if (parent && !parent.querySelector('.icon-placeholder')) {
+                  const placeholder = document.createElement('div');
+                  placeholder.className = 'icon-placeholder';
+                  placeholder.textContent = '👤';
+                  parent.insertBefore(placeholder, parent.firstChild);
+                }
+              },
+
+              goBack() {
+                window.history.back();
+              },
+
+              toggleMenu() {
+                this.showMenu = !this.showMenu;
+                if (this.showMenu) {
+                  document.body.style.overflow = 'hidden';
+                } else {
+                  document.body.style.overflow = '';
+                }
+              },
+
+              closeMenu() {
+                this.showMenu = false;
+                document.body.style.overflow = '';
+              },
+
+              goToUserProfile() {
+                if (this.route && this.route.userID) {
+                  window.location.href = `/user.html?id=${this.route.userID}`;
+                }
+              },
+
+              handleKeydown(event) {
+                if (event.key === 'Escape') {
+                  if (this.showMenu) {
+                    this.closeMenu();
+                  } else if (this.showImageModal) {
+                    this.closeImageModal();
+                  } else {
+                    this.goBack();
+                  }
+                }
+              },
+
+              formatTimestamp(timestamp) {
+                if (!timestamp) return 'N/A';
+                
+                let date;
+                if (timestamp.toDate) {
+                  date = timestamp.toDate();
+                } else if (timestamp.seconds) {
+                  date = new Date(timestamp.seconds * 1000);
+                } else {
+                  date = new Date(timestamp);
+                }
+                
+                return date.toLocaleString('ja-JP', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                });
+              },
+
+              formatDistance(meters) {
+                if (!meters) return '0.0';
+                const km = meters / 1000;
+                return km.toFixed(1);
+              }
+            }
+          });
+
+          app.mount('#app');
+        } catch (error) {
+          console.error('アプリケーション初期化エラー:', error);
+          document.getElementById('app').innerHTML = `
+            <div class="container">
+              <div class="error-state">
+                <div class="error-icon">⚠️</div>
+                <h3>エラーが発生しました</h3>
+                <p>${error.message}</p>
+              </div>
+            </div>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>
