@@ -1977,9 +1977,9 @@
                   <div class="route-list-item-title">{{ route.title || 'タイトルなし' }}</div>
                   <div 
                     class="route-list-item-status"
-                    :class="route.isPublic ? 'public' : 'private'"
+                    :class="route.isPublic === false ? 'private' : 'public'"
                   >
-                    {{ route.isPublic ? '🌐 公開中' : '🔒 非公開' }}
+                    {{ route.isPublic === false ? '🔒 非公開' : '🌐 公開中' }}
                   </div>
                 </div>
                 
