@@ -1809,6 +1809,43 @@
           }
         },
         methods: {
+          addToPlan(location) {
+            const id = location.id || location.placeId;
+            if (!id) return;
+
+            const already = this.planSpots.some(s => s.id === id);
+            if (already) {
+              this.showToast('すでにプランに追加されています', 'error');
+              return;
+            }
+
+            const spot = {
+              id,
+              name: location.locality || location.administrative || '不明なスポット',
+              address: location.administrative || '',
+              lat: location.lat,
+              lng: location.lng,
+              isPoi: !!location._isPoi
+            };
+
+            this.planSpots.push(spot);
+            localStorage.setItem('tourPlanSpots', JSON.stringify(this.planSpots));
+            this.showToast(`「${spot.name}」をプランに追加しました ✅`, 'success');
+
+            // InfoWindow のボタンを更新（POIの場合）
+            const btn = document.getElementById(`poi-btn-${id}`);
+            if (btn) {
+              btn.textContent = '✅ 追加済み';
+              btn.classList.add('added');
+              btn.disabled = true;
+            }
+          },
+
+          isPlanAdded(location) {
+            const id = location.id || location.placeId;
+            return this.planSpots.some(s => s.id === id);
+          },
+
           removeFromPlan(index) {
             const removed = this.planSpots[index];
             this.planSpots.splice(index, 1);
@@ -2039,7 +2076,7 @@
             components: {
             'location-card': LocationCard
             },
-            async mounted() {
+            async mounted() {              
             try {
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
@@ -2047,6 +2084,8 @@
                 firebase.auth().onAuthStateChanged((user) => {
                   this.currentUser = user;
                 });
+
+                window._vueApp = this;
                 
                 // キャッシュから読み込み
                 await this.loadFromCacheFirst();
@@ -2341,7 +2380,7 @@
                 const poiInfoWindow = new google.maps.InfoWindow();
 
                 // グローバル関数として登録（InfoWindow内のHTMLから呼び出すため）
-                window._addToPlan = (placeId, name, address, lat, lng) => {
+                /*window._addToPlan = (placeId, name, address, lat, lng) => {
                   const already = this.planSpots.some(s => s.placeId === placeId);
                   if (already) {
                     this.showToast('すでにプランに追加されています', 'error');
@@ -2359,7 +2398,9 @@
                     btn.classList.add('added');
                     btn.disabled = true;
                   }
-                };
+                };*/
+
+                
 
                 mapMain.addListener('click', async (event) => {
                   if (!event.placeId) return;
@@ -2390,7 +2431,7 @@
                               id="poi-btn-${event.placeId}"
                               class="btn-add-plan ${isAdded ? 'added' : ''}"
                               ${isAdded ? 'disabled' : ''}
-                              onclick="window._addToPlan('${event.placeId}', '${name.replace(/'/g, "\\'")}', '${address.replace(/'/g, "\\'")}', ${event.latLng.lat()}, ${event.latLng.lng()})"
+                              onclick="window._vueApp.addToPlan({ id: '${event.placeId}', locality: '${name.replace(/'/g, "\\'")}', administrative: '${address.replace(/'/g, "\\'")}', lat: ${event.latLng.lat()}, lng: ${event.latLng.lng()}, _isPoi: true })"
                             >
                               ${isAdded ? '✅ 追加済み' : '➕ プランに追加'}
                             </button>
