@@ -2918,6 +2918,20 @@
               /**
                * トースト通知 (簡易版)
                */
+              showToast(message, type = 'success') {
+                  const toast = document.createElement('div');
+                  const bg = type === 'error' ? '#e53935' : '#228B22';
+                  const icon = type === 'error' ? '✗' : '✓';
+                  toast.style.cssText = `
+                      position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+                      background:${bg}; color:white; padding:10px 20px; border-radius:20px;
+                      font-size:14px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.2);
+                      animation: fadeInUp 0.3s ease;
+                  `;
+                  toast.textContent = icon + ' ' + message;
+                  document.body.appendChild(toast);
+                  setTimeout(() => toast.remove(), 3000);
+              },
               showSuccessToast(message) {
                 const toast = document.createElement('div');
                 toast.style.cssText = `
