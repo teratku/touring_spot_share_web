@@ -2030,8 +2030,10 @@
                 touringSpotLimit: 3,           // スポット上限
                 pendingSpotForTouring: null,   // 追加待ちスポットデータ
                 touringModalLoading: false,    // プラン読み込み中フラグ
-                planSpots: JSON.parse(localStorage.getItem('tourPlanSpots') || '[]'),
+                showLongPressDialog: false,
+                longPressLatLng: null,
                 showPlanPanel: false,
+                planSpots: JSON.parse(localStorage.getItem('tourPlanSpots') || '[]'),
             };
             },
             components: {
