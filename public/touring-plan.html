@@ -25,7 +25,7 @@
     };
   </script>
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGmSCeow4uQ_kt02Y2YJaKdG4&callback=initMap&loading=async">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=initMap&libraries=marker">
   </script>
 
 <style>
@@ -795,7 +795,7 @@ createApp({
 
     // ========== ナビゲーション ==========
     function goBack() { window.history.back(); }
-    function goToLogin() { window.location.href = '/'; }
+    function goToLogin() { window.location.href = 'login.html'; }
 
     return {
       loading, currentUser, plans, planLimit, spotLimit,

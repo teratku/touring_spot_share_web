@@ -817,19 +817,21 @@
 
       /* ========== ツーリングプランボタン ========== */
       .add-to-touring-btn {
-        width: 100%;
-        padding: 10px;
-        margin-top: 8px;
-        background: linear-gradient(135deg, #00A8C6, #228B22);
+        flex-shrink: 0;
+        align-self: center;
+        width: auto;
+        margin: 0 8px 0 auto;
+        padding: 6px 10px;
+        background: #00A8C6;
         color: white;
         border: none;
-        border-radius: 12px;
-        font-size: 13px;
-        font-weight: bold;
+        border-radius: 8px;
+        font-size: 11px;
         cursor: pointer;
-        transition: opacity 0.2s;
+        white-space: nowrap;
+        transition: background 0.2s;
       }
-      .add-to-touring-btn:hover { opacity: 0.85; }
+      .add-to-touring-btn:hover { background: #0096b3; }
 
       /* ========== ツーリングプラン選択モーダル ========== */
       .touring-modal-overlay {
