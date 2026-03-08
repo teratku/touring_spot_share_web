@@ -18,6 +18,7 @@
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <!-- Google Maps API -->
@@ -637,6 +638,15 @@
               <span class="menu-icon">📋</span>
               <span>利用規約</span>
             </a>
+            <hr style="border:none;border-top:1px solid #E0E0E0;margin:8px 16px;">
+            <a v-if="!currentUser" href="/login.html" class="menu-item">  <!-- 追加 -->
+              <span class="menu-icon">🔑</span>
+              <span>ログイン</span>
+            </a>
+            <a v-if="currentUser" href="#" class="menu-item" @click.prevent="logout">  <!-- 追加 -->
+              <span class="menu-icon">🚪</span>
+              <span>ログアウト</span>
+            </a>
           </nav>
         </div>
       </div>
@@ -865,6 +875,7 @@
             data() {
               return {
                 location: null,
+                currentUser: null,
                 userInfo: null,
                 isLoading: true,
                 error: null,
@@ -903,6 +914,10 @@
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
                 storage = firebase.storage();
+
+                firebase.auth().onAuthStateChanged((user) => {
+                  this.currentUser = user;
+                });
                 
                 console.log('Firebase Storage initialized:', storage);
                 console.log('Storage bucket:', storage.app.options.storageBucket);
@@ -951,7 +966,14 @@
                   }, 100);
                 });
               },
-
+              async logout() {
+                try {
+                  await firebase.auth().signOut();
+                  this.showMenu = false;
+                } catch (error) {
+                  console.error('ログアウトエラー:', error);
+                }
+              },
               initializeMap() {
                 return new Promise((resolve, reject) => {
                   setTimeout(() => {

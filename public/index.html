@@ -11,6 +11,7 @@
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <!-- Google Maps API -->
@@ -1187,9 +1188,6 @@
               <span class="menu-icon">📝</span>
               <span>ブログ</span>
             </a>
-            <a href="/touring-plan.html" class="header-touring-btn" title="ツーリングプラン">
-              🏍️
-            </a>
             <a href="/privacypolicy/privacypolicy.html" class="menu-item">
               <span class="menu-icon">🔒</span>
               <span>プライバシーポリシー</span>
@@ -1197,6 +1195,15 @@
             <a href="/termsofservice/termsofservice.html" class="menu-item">
               <span class="menu-icon">📋</span>
               <span>利用規約</span>
+            </a>
+            <hr style="border:none;border-top:1px solid #E0E0E0;margin:8px 16px;">
+            <a v-if="!currentUser" href="/login.html" class="menu-item">  <!-- 追加 -->
+              <span class="menu-icon">🔑</span>
+              <span>ログイン</span>
+            </a>
+            <a v-if="currentUser" href="#" class="menu-item" @click.prevent="logout">  <!-- 追加 -->
+              <span class="menu-icon">🚪</span>
+              <span>ログアウト</span>
             </a>
           </nav>
         </div>
@@ -1779,6 +1786,7 @@
             return {
                 currentView: 'map',
                 locations: [],
+                currentUser: null,
                 displayedLocations: [],
                 userCache: {},
                 isInitialLoading: true,
@@ -1811,6 +1819,10 @@
             try {
                 const firebaseApp = firebase.app();
                 db = firebase.firestore();
+
+                firebase.auth().onAuthStateChanged((user) => {
+                  this.currentUser = user;
+                });
                 
                 // キャッシュから読み込み
                 await this.loadFromCacheFirst();
@@ -1865,7 +1877,14 @@
                 }
                 }
             },
-
+            async logout() {
+              try {
+                await firebase.auth().signOut();
+                this.showMenu = false;
+              } catch (error) {
+                console.error('ログアウトエラー:', error);
+              }
+            },
             // Firebaseから最新データを確認・更新
             async checkAndUpdateFromFirebase() {
                 try {

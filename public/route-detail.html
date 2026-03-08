@@ -17,6 +17,7 @@
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
@@ -558,8 +559,8 @@
       <header>
         <div class="header-content">
           <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
-          <h1>ルート詳細</h1>
           <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
+          <h1>ルート詳細</h1>          
         </div>
       </header>
 
@@ -582,6 +583,23 @@
             <a href="#" class="menu-item active">
               <span class="menu-icon">🛣️</span>
               <span>ルート</span>
+            </a>
+            <a href="/privacypolicy/privacypolicy.html" class="menu-item">
+              <span class="menu-icon">🔒</span>
+              <span>プライバシーポリシー</span>
+            </a>
+            <a href="/termsofservice/termsofservice.html" class="menu-item">
+              <span class="menu-icon">📋</span>
+              <span>利用規約</span>
+            </a>
+            <hr style="border:none;border-top:1px solid #E0E0E0;margin:8px 16px;">
+            <a v-if="!currentUser" href="/login.html" class="menu-item">  <!-- 追加 -->
+              <span class="menu-icon">🔑</span>
+              <span>ログイン</span>
+            </a>
+            <a v-if="currentUser" href="#" class="menu-item" @click.prevent="logout">  <!-- 追加 -->
+              <span class="menu-icon">🚪</span>
+              <span>ログアウト</span>
             </a>
           </nav>
         </div>
@@ -719,6 +737,7 @@
           const app = createApp({
             data() {
               return {
+                currentUser: null,
                 routeId: null,
                 route: null,
                 userInfo: null,
@@ -735,6 +754,10 @@
               // URLパラメータからルートIDを取得
               const urlParams = new URLSearchParams(window.location.search);
               this.routeId = urlParams.get('id');
+
+              firebase.auth().onAuthStateChanged((user) => {
+                this.currentUser = user;
+              });
 
               if (!this.routeId) {
                 this.error = 'ルートIDが指定されていません';
@@ -767,6 +790,14 @@
                     }
                   }, 100);
                 });
+              },
+              async logout() {
+                try {
+                  await firebase.auth().signOut();
+                  this.showMenu = false;
+                } catch (error) {
+                  console.error('ログアウトエラー:', error);
+                }
               },
 
               async initMap() {

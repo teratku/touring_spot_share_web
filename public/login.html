@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ログイン | ツーリングスポットシェア</title>
+
+    <!-- リソースヒント -->
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+      /* ========== リセット & ベーススタイル ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+        background: #F9F9F9;
+        color: #333333;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ========== ヘッダー ========== */
+      header {
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        padding: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        max-width: 480px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .header-title {
+        font-size: 20pt;
+        font-weight: 600;
+        flex: 1;
+        text-align: center;
+      }
+
+      /* ========== メインコンテンツ ========== */
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 480px;
+      }
+
+      /* ========== ロゴエリア ========== */
+      .logo-area {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .logo-icon {
+        font-size: 48pt;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .logo-title {
+        font-size: 20pt;
+        font-weight: 700;
+        color: #00A8C6;
+      }
+
+      .logo-subtitle {
+        font-size: 13pt;
+        color: #666;
+        margin-top: 4px;
+      }
+
+      /* ========== ログインカード ========== */
+      .login-card {
+        background: white;
+        border-radius: 16pt;
+        padding: 32px 24px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #E0E0E0;
+      }
+
+      .card-title {
+        font-size: 20pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      /* ========== フォーム ========== */
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 13pt;
+        font-weight: 500;
+        color: #333333;
+        margin-bottom: 8px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16pt;
+        font-family: inherit;
+        border: 1.5px solid #E0E0E0;
+        border-radius: 8pt;
+        background: #F9F9F9;
+        color: #333333;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        outline: none;
+        -webkit-appearance: none;
+      }
+
+      .form-input:focus {
+        border-color: #00A8C6;
+        box-shadow: 0 0 0 3px rgba(0, 168, 198, 0.15);
+        background: white;
+      }
+
+      .form-input.error {
+        border-color: #E63946;
+        box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+      }
+
+      /* パスワード入力ラッパー */
+      .password-wrapper {
+        position: relative;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18pt;
+        color: #666;
+        padding: 4px;
+        line-height: 1;
+      }
+
+      /* ========== エラーメッセージ ========== */
+      .error-message {
+        background: rgba(230, 57, 70, 0.08);
+        border: 1px solid rgba(230, 57, 70, 0.3);
+        border-radius: 8pt;
+        padding: 12px 16px;
+        color: #E63946;
+        font-size: 13pt;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* ========== ボタン ========== */
+      .btn-login {
+        width: 100%;
+        padding: 14px 16px;
+        font-size: 17pt;
+        font-weight: 500;
+        font-family: inherit;
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: white;
+        border: none;
+        border-radius: 12pt;
+        cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.1s ease;
+        margin-top: 8px;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-login:hover:not(:disabled) {
+        opacity: 0.9;
+      }
+
+      .btn-login:active:not(:disabled) {
+        transform: scale(0.98);
+      }
+
+      .btn-login:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* ローディングスピナー */
+      .btn-login .spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* ========== フッターリンク ========== */
+      .footer-links {
+        text-align: center;
+        margin-top: 24px;
+      }
+
+      .footer-links a {
+        color: #00A8C6;
+        font-size: 13pt;
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* ========== ページフッター ========== */
+      footer {
+        text-align: center;
+        padding: 16px;
+        color: #666;
+        font-size: 12pt;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- ヘッダー -->
+      <header>
+        <div class="header-content">
+          <span class="header-title">ツーリングスポットシェア</span>
+        </div>
+      </header>
+
+      <!-- メインコンテンツ -->
+      <main>
+        <div class="login-container">
+          <!-- ロゴエリア -->
+          <div class="logo-area">
+            <span class="logo-icon">🏍️</span>
+            <div class="logo-title">ツーリングスポットシェア</div>
+            <div class="logo-subtitle">お気に入りのスポットをライダーとシェアしよう</div>
+          </div>
+
+          <!-- ログインカード -->
+          <div class="login-card">
+            <h1 class="card-title">ログイン</h1>
+
+            <!-- エラーメッセージ -->
+            <div v-if="errorMessage" class="error-message">
+              <span>⚠️</span>
+              <span>{{ errorMessage }}</span>
+            </div>
+
+            <!-- メールアドレス -->
+            <div class="form-group">
+              <label class="form-label" for="email">メールアドレス</label>
+              <input
+                id="email"
+                v-model="email"
+                type="email"
+                class="form-input"
+                :class="{ error: emailError }"
+                placeholder="example@email.com"
+                autocomplete="email"
+                @keyup.enter="login"
+                @input="clearErrors"
+              >
+            </div>
+
+            <!-- パスワード -->
+            <div class="form-group">
+              <label class="form-label" for="password">パスワード</label>
+              <div class="password-wrapper">
+                <input
+                  id="password"
+                  v-model="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  class="form-input"
+                  :class="{ error: passwordError }"
+                  placeholder="パスワードを入力"
+                  autocomplete="current-password"
+                  @keyup.enter="login"
+                  @input="clearErrors"
+                >
+                <button class="password-toggle" type="button" @click="showPassword = !showPassword">
+                  {{ showPassword ? '🙈' : '👁️' }}
+                </button>
+              </div>
+            </div>
+
+            <!-- ログインボタン -->
+            <button class="btn-login" :disabled="isLoading" @click="login">
+              <span v-if="isLoading">
+                <span class="spinner"></span>ログイン中...
+              </span>
+              <span v-else>ログイン</span>
+            </button>
+
+            <!-- フッターリンク -->
+            <div class="footer-links">
+              <a href="#" @click.prevent="forgotPassword">パスワードをお忘れですか？</a>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <small>&copy; 2025 ツーリングスポットシェア</small>
+      </footer>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      // Firebase の読み込みを待つ
+      function waitForFirebase() {
+        return new Promise((resolve, reject) => {
+          if (typeof firebase !== 'undefined') {
+            resolve();
+            return;
+          }
+
+          let attempts = 0;
+          const maxAttempts = 50;
+          const checkInterval = setInterval(() => {
+            attempts++;
+            if (typeof firebase !== 'undefined') {
+              clearInterval(checkInterval);
+              resolve();
+            } else if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              reject(new Error('Firebase の読み込みに失敗しました'));
+            }
+          }, 100);
+        });
+      }
+
+      // Firebase エラーコードを日本語に変換
+      function getAuthErrorMessage(code) {
+        const messages = {
+          'auth/invalid-email':             'メールアドレスの形式が正しくありません',
+          'auth/user-disabled':             'このアカウントは無効化されています',
+          'auth/user-not-found':            'メールアドレスまたはパスワードが間違っています',
+          'auth/wrong-password':            'メールアドレスまたはパスワードが間違っています',
+          'auth/invalid-credential':        'メールアドレスまたはパスワードが間違っています',
+          'auth/too-many-requests':         'ログイン試行回数が多すぎます。しばらくしてから再試行してください',
+          'auth/network-request-failed':    'ネットワークエラーが発生しました。接続を確認してください',
+          'auth/operation-not-allowed':     'メール/パスワードログインが有効化されていません',
+        };
+        return messages[code] || `ログインに失敗しました (${code})`;
+      }
+
+      document.addEventListener('DOMContentLoaded', async function () {
+        try {
+          await waitForFirebase();
+
+          const app = createApp({
+            data() {
+              return {
+                email: '',
+                password: '',
+                showPassword: false,
+                isLoading: false,
+                errorMessage: '',
+                emailError: false,
+                passwordError: false,
+              };
+            },
+
+            async mounted() {
+              // すでにログイン済みの場合はトップページへリダイレクト
+              firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                  const redirect = new URLSearchParams(window.location.search).get('redirect');
+                  window.location.href = redirect || '/index.html';
+                }
+              });
+            },
+
+            methods: {
+              clearErrors() {
+                this.errorMessage = '';
+                this.emailError = false;
+                this.passwordError = false;
+              },
+
+              validate() {
+                if (!this.email) {
+                  this.emailError = true;
+                  this.errorMessage = 'メールアドレスを入力してください';
+                  return false;
+                }
+                if (!this.password) {
+                  this.passwordError = true;
+                  this.errorMessage = 'パスワードを入力してください';
+                  return false;
+                }
+                return true;
+              },
+
+              async login() {
+                if (this.isLoading) return;
+                this.clearErrors();
+
+                if (!this.validate()) return;
+
+                this.isLoading = true;
+
+                try {
+                  await firebase.auth().signInWithEmailAndPassword(
+                    this.email.trim(),
+                    this.password
+                  );
+                  // onAuthStateChanged で自動リダイレクト
+                } catch (error) {
+                  console.error('ログインエラー:', error);
+                  this.errorMessage = getAuthErrorMessage(error.code);
+
+                  // エラーの種類に応じてフィールドをハイライト
+                  if (error.code === 'auth/invalid-email') {
+                    this.emailError = true;
+                  } else {
+                    this.emailError = true;
+                    this.passwordError = true;
+                  }
+                } finally {
+                  this.isLoading = false;
+                }
+              },
+
+              async forgotPassword() {
+                if (!this.email) {
+                  this.emailError = true;
+                  this.errorMessage = 'パスワードリセットにはメールアドレスを入力してください';
+                  return;
+                }
+
+                try {
+                  await firebase.auth().sendPasswordResetEmail(this.email.trim());
+                  this.errorMessage = '';
+                  alert(`${this.email} にパスワードリセットメールを送信しました`);
+                } catch (error) {
+                  console.error('パスワードリセットエラー:', error);
+                  this.errorMessage = getAuthErrorMessage(error.code);
+                }
+              },
+            },
+          });
+
+          app.mount('#app');
+        } catch (error) {
+          console.error('初期化エラー:', error);
+          document.getElementById('app').innerHTML =
+            '<div style="text-align:center;padding:40px;color:#E63946;">読み込みに失敗しました。ページを再読み込みしてください。</div>';
+        }
+      });
+    </script>
+  </body>
+</html>
