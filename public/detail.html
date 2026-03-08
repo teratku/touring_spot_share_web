@@ -588,6 +588,17 @@
         background: none;
         animation: none;
       }
+
+      .touring-add-btn {
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        width: 100%; padding: 13px;
+        background: linear-gradient(135deg, #00A8C6, #228B22);
+        color: white; border: none; border-radius: 16px;
+        font-size: 15px; font-weight: bold; cursor: pointer;
+        margin-top: 12px; transition: opacity 0.2s;
+        box-shadow: 0 4px 12px rgba(0,168,198,0.3);
+      }
+      .touring-add-btn:hover { opacity: 0.85; }
     </style>
   </head>
   
@@ -752,6 +763,63 @@
           >
         </div>
       </div>
+      <!-- ========== ツーリングプラン選択モーダル ========== -->
+      <div class="touring-modal-overlay" v-if="showTouringModal" @click.self="showTouringModal = false">
+        <div class="touring-modal">
+
+          <div class="touring-modal-header">
+            <div class="touring-modal-title">🏍️ ツーリングプランに追加</div>
+            <button class="touring-modal-close" @click="showTouringModal = false">✕</button>
+          </div>
+
+          <!-- スポット名 -->
+          <div class="touring-pending-spot" v-if="pendingSpotForTouring">
+            📍 {{ pendingSpotForTouring.name }}
+          </div>
+
+          <!-- ローディング -->
+          <div class="touring-modal-loading" v-if="touringModalLoading">
+            <div class="touring-spinner"></div>
+          </div>
+
+          <!-- プランリスト -->
+          <div v-else>
+            <!-- 既存プラン -->
+            <div
+              v-for="plan in touringPlans"
+              :key="plan.id"
+              class="touring-plan-item"
+              :class="{ disabled: plan.spots.length >= touringSpotLimit }"
+              @click="plan.spots.length < touringSpotLimit && addSpotToTouringPlan(plan)"
+            >
+              <div class="touring-plan-item-info">
+                <span class="touring-plan-item-name">{{ plan.name }}</span>
+                <span class="touring-plan-item-count">{{ plan.spots.length }}/{{ touringSpotLimit }}スポット</span>
+              </div>
+              <span class="touring-plan-item-full" v-if="plan.spots.length >= touringSpotLimit">満杯</span>
+              <span class="touring-plan-item-add" v-else>追加 ▶</span>
+            </div>
+
+            <!-- 新規プラン作成 -->
+            <div
+              class="touring-plan-new"
+              :class="{ disabled: touringPlans.length >= touringPlanLimit }"
+              @click="touringPlans.length < touringPlanLimit && createTouringPlanAndAdd()"
+            >
+              <span>＋ 新しいプランを作成して追加</span>
+              <span class="touring-plan-limit" v-if="touringPlans.length >= touringPlanLimit">
+                (上限{{ touringPlanLimit }}プラン)
+              </span>
+            </div>
+
+            <!-- プラン管理ページへ -->
+            <a href="/touring-plan.html" class="touring-manage-link">
+              📋 プラン管理ページへ
+            </a>
+          </div>
+
+        </div>
+      </div>
     </div>
 
     <script>
@@ -803,7 +871,12 @@
                 locationId: null,
                 showImageModal: false,
                 selectedImage: null,
-                showMenu: false
+                showMenu: false,
+                showTouringModal: false,
+                touringPlans: [],
+                touringPlanLimit: 3,
+                touringSpotLimit: 3,
+                touringModalLoading: false
               };
             },
             computed: {
@@ -1152,6 +1225,140 @@
                 const num = Number(value);
                 if (isNaN(num)) return 'N/A';
                 return num.toFixed(6);
+              },
+              // ========== ツーリングプランにスポットを追加する処理 ==========
+              /**
+               * マーカークリック または 長押し時に呼び出す
+               * spot: { spotId, name, lat, lng, address, imageUrl, isCustomPin }
+               */
+              openTouringModal(spot) {
+                if (!firebase.auth().currentUser) {
+                  alert('ログインが必要です');
+                  return;
+                }
+                this.pendingSpotForTouring = spot;
+                this.showTouringModal = true;
+                this.loadTouringPlans();
+              },
+
+              async loadTouringPlans() {
+                this.touringModalLoading = true;
+                const uid = firebase.auth().currentUser?.uid;
+                if (!uid) return;
+                try {
+                  const snap = await firebase.firestore()
+                    .collection('users').doc(uid)
+                    .collection('touringPlans')
+                    .orderBy('createdAt', 'asc')
+                    .get();
+                  this.touringPlans = snap.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    spots: doc.data().spots || []
+                  }));
+                } catch (e) {
+                  console.error('プラン読み込みエラー:', e);
+                } finally {
+                  this.touringModalLoading = false;
+                }
+              },
+
+              /**
+               * 既存プランにスポットを追加
+               */
+              async addSpotToTouringPlan(plan) {
+                const uid = firebase.auth().currentUser?.uid;
+                if (!uid || !this.pendingSpotForTouring) return;
+                if (plan.spots.length >= this.touringSpotLimit) {
+                  alert(`スポットは${this.touringSpotLimit}個まで登録できます`);
+                  return;
+                }
+
+                // 同じスポットが既に追加されているか確認
+                const alreadyAdded = plan.spots.some(
+                  s => s.spotId && s.spotId === this.pendingSpotForTouring.spotId
+                );
+                if (alreadyAdded) {
+                  alert('このスポットはすでに追加されています');
+                  return;
+                }
+
+                const newSpot = {
+                  ...this.pendingSpotForTouring,
+                  order: plan.spots.length
+                };
+                const newSpots = [...plan.spots, newSpot];
+
+                try {
+                  await firebase.firestore()
+                    .collection('users').doc(uid)
+                    .collection('touringPlans').doc(plan.id)
+                    .update({
+                      spots: newSpots,
+                      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                  // ローカル更新
+                  plan.spots = newSpots;
+                  this.showTouringModal = false;
+                  this.pendingSpotForTouring = null;
+                  this.showSuccessToast(`「${plan.name}」に追加しました`);
+                } catch (e) {
+                  console.error('スポット追加エラー:', e);
+                  alert('追加に失敗しました');
+                }
+              },
+
+              /**
+               * 新規プランを作成してスポットを追加
+               */
+              async createTouringPlanAndAdd() {
+                const uid = firebase.auth().currentUser?.uid;
+                if (!uid || !this.pendingSpotForTouring) return;
+                if (this.touringPlans.length >= this.touringPlanLimit) {
+                  alert(`プランは${this.touringPlanLimit}個まで作成できます`);
+                  return;
+                }
+
+                const planNum = this.touringPlans.length + 1;
+                const planName = `ツーリング${planNum}`;
+                const newSpot = { ...this.pendingSpotForTouring, order: 0 };
+
+                try {
+                  const ref = await firebase.firestore()
+                    .collection('users').doc(uid)
+                    .collection('touringPlans')
+                    .add({
+                      name: planName,
+                      spots: [newSpot],
+                      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+
+                  this.touringPlans.push({ id: ref.id, name: planName, spots: [newSpot] });
+                  this.showTouringModal = false;
+                  this.pendingSpotForTouring = null;
+                  this.showSuccessToast(`「${planName}」を作成してスポットを追加しました`);
+                } catch (e) {
+                  console.error('プラン作成エラー:', e);
+                  alert('作成に失敗しました');
+                }
+              },
+
+              /**
+               * トースト通知 (簡易版)
+               */
+              showSuccessToast(message) {
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                  position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
+                  background:#228B22; color:white; padding:10px 20px; border-radius:20px;
+                  font-size:14px; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.2);
+                  animation: fadeInUp 0.3s ease;
+                `;
+                toast.textContent = '✓ ' + message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
               }
             }
           });

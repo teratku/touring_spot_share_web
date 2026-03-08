@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ツーリングプラン | ツーリングスポットシェア</title>
+
+  <!-- リソースヒント -->
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
+
+  <!-- Vue.js 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <!-- Google Maps API -->
+  <script>
+    window.initMap = function() {
+      console.log('Google Maps API callback triggered');
+    };
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGmSCeow4uQ_kt02Y2YJaKdG4&callback=initMap&loading=async">
+  </script>
+
+<style>
+  /* ========== リセット & ベーススタイル ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background: #F9F9F9;
+    color: #333333;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ========== ヘッダー ========== */
+  header {
+    background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+    color: white;
+    padding: 0 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .header-title {
+    font-size: 18pt;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .back-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ========== コンテンツ ========== */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  /* ========== プラン一覧 ========== */
+  .plan-list-section { margin-bottom: 24px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #333;
+  }
+  .plan-count-badge {
+    background: #f0f0f0;
+    color: #666;
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+
+  .add-plan-btn {
+    background: linear-gradient(135deg, #00A8C6, #228B22);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    transition: opacity 0.2s;
+  }
+  .add-plan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .add-plan-btn:not(:disabled):hover { opacity: 0.85; }
+
+  /* ========== プランカード ========== */
+  .plan-cards { display: flex; flex-direction: column; gap: 12px; }
+  .plan-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.1s;
+    border: 2px solid transparent;
+  }
+  .plan-card:hover { box-shadow: 0 4px 16px rgba(0,168,198,0.2); transform: translateY(-1px); }
+  .plan-card.active { border-color: #00A8C6; }
+  .plan-card-header {
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .plan-card-name { font-size: 15px; font-weight: bold; color: #333; }
+  .plan-card-meta { font-size: 12px; color: #888; margin-top: 2px; }
+  .plan-spot-badges {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .spot-badge {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00A8C6, #228B22);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .spot-badge.empty { background: #e0e0e0; color: #aaa; }
+  .plan-chevron { color: #ccc; font-size: 14px; transition: transform 0.2s; }
+  .plan-card.active .plan-chevron { transform: rotate(90deg); color: #00A8C6; }
+
+  /* ========== プラン詳細 (展開時) ========== */
+  .plan-detail {
+    border-top: 1px solid #f0f0f0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  /* マップ */
+  #touring-map {
+    width: 100%;
+    height: 260px;
+  }
+
+  /* スポットリスト */
+  .spot-list { padding: 12px 16px 16px; }
+  .spot-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .spot-list-title { font-size: 13px; font-weight: bold; color: #555; }
+
+  .spot-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .spot-item:last-child { border-bottom: none; }
+  .spot-order-badge {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #00A8C6, #228B22);
+    color: white; font-size: 14px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .spot-info { flex: 1; min-width: 0; }
+  .spot-name { font-size: 14px; font-weight: bold; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .spot-address { font-size: 11px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .spot-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .drag-handle {
+    color: #ccc; cursor: grab; font-size: 16px; padding: 4px;
+    touch-action: none;
+  }
+  .drag-handle:active { cursor: grabbing; }
+  .delete-spot-btn {
+    background: none; border: none;
+    color: #ff4757; cursor: pointer; font-size: 16px;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .delete-spot-btn:hover { background: #fff0f0; }
+
+  .empty-spots {
+    text-align: center; padding: 24px;
+    color: #aaa; font-size: 14px;
+  }
+  .empty-spots .emoji { font-size: 32px; display: block; margin-bottom: 8px; }
+
+  /* ========== プラン名入力モーダル ========== */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9000;
+    padding: 20px;
+  }
+  .modal-box {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    width: 100%; max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-title { font-size: 16px; font-weight: bold; margin-bottom: 16px; color: #333; }
+  .modal-input {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid #e0e0e0; border-radius: 12px;
+    font-size: 15px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .modal-input:focus { border-color: #00A8C6; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+  .modal-cancel-btn {
+    flex: 1; padding: 11px;
+    background: #f5f5f5; border: none; border-radius: 12px;
+    font-size: 14px; cursor: pointer; color: #555;
+  }
+  .modal-confirm-btn {
+    flex: 1; padding: 11px;
+    background: linear-gradient(135deg, #00A8C6, #228B22); border: none; border-radius: 12px;
+    font-size: 14px; font-weight: bold; cursor: pointer; color: white;
+  }
+  .modal-confirm-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* 削除確認ダイアログ */
+  .confirm-msg { font-size: 14px; color: #555; margin-bottom: 16px; }
+  .modal-delete-btn {
+    flex: 1; padding: 11px;
+    background: #ff4757; border: none; border-radius: 12px;
+    font-size: 14px; font-weight: bold; cursor: pointer; color: white;
+  }
+
+  /* ========== ローディング / 未ログイン ========== */
+  .loading-screen, .login-required {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 300px; gap: 12px; color: #888;
+  }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid #e0e0e0;
+    border-top-color: #00A8C6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ドラッグ中 */
+  .spot-item.dragging { opacity: 0.5; background: #f0faff; border-radius: 8px; }
+  .spot-item.drag-over { border-top: 2px solid #00A8C6; }
+
+  /* プラン削除 */
+  .plan-delete-btn {
+    background: none; border: none;
+    color: #bbb; cursor: pointer; font-size: 14px;
+    padding: 4px 8px; border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .plan-delete-btn:hover { color: #ff4757; background: #fff0f0; }
+
+  .no-plans {
+    text-align: center; padding: 48px 20px;
+    color: #aaa;
+  }
+  .no-plans .emoji { font-size: 48px; display: block; margin-bottom: 12px; }
+  .no-plans p { font-size: 14px; }
+
+  /* ログイン誘導ボタン */
+  .login-btn {
+    background: linear-gradient(135deg, #00A8C6, #228B22);
+    color: white; border: none; padding: 12px 28px;
+    border-radius: 16px; font-size: 14px; font-weight: bold; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+
+  <!-- ========== ヘッダー ========== -->
+  <header>
+    <div class="header-content">
+      <button class="back-btn" @click="goBack">◀</button>
+      <div class="header-title">🏍️ ツーリングプラン</div>
+      <div style="width:40px"></div>
+    </div>
+  </header>
+
+  <!-- ========== ローディング中 ========== -->
+  <div class="loading-screen" v-if="loading">
+    <div class="spinner"></div>
+    <span>読み込み中...</span>
+  </div>
+
+  <!-- ========== 未ログイン ========== -->
+  <div class="login-required" v-else-if="!currentUser">
+    <span style="font-size:48px">🔒</span>
+    <p style="font-size:15px;color:#555">ログインが必要です</p>
+    <button class="login-btn" @click="goToLogin">ログインする</button>
+  </div>
+
+  <!-- ========== メインコンテンツ ========== -->
+  <div class="container" v-else>
+
+    <!-- プラン一覧セクション -->
+    <div class="plan-list-section">
+      <div class="section-header">
+        <div>
+          <div class="section-title">マイツーリング</div>
+          <span class="plan-count-badge">{{ plans.length }} / {{ planLimit }}</span>
+        </div>
+        <button
+          class="add-plan-btn"
+          :disabled="plans.length >= planLimit"
+          @click="openCreatePlanModal"
+        >
+          ＋ 新規作成
+        </button>
+      </div>
+
+      <!-- プランなし -->
+      <div class="no-plans" v-if="plans.length === 0">
+        <span class="emoji">🗺️</span>
+        <p>ツーリングプランがありません</p>
+        <p style="margin-top:6px;font-size:12px">「新規作成」からプランを作ってみましょう</p>
+      </div>
+
+      <!-- プランカード一覧 -->
+      <div class="plan-cards">
+        <div
+          v-for="plan in plans"
+          :key="plan.id"
+          class="plan-card"
+          :class="{ active: activePlanId === plan.id }"
+        >
+          <!-- カードヘッダー (クリックで展開) -->
+          <div class="plan-card-header" @click="togglePlan(plan)">
+            <div>
+              <div class="plan-card-name">{{ plan.name }}</div>
+              <div class="plan-card-meta">{{ plan.spots.length }}スポット登録済</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <!-- スポットバッジ (最大3個) -->
+              <div class="plan-spot-badges">
+                <div
+                  v-for="n in spotLimit"
+                  :key="n"
+                  class="spot-badge"
+                  :class="{ empty: n > plan.spots.length }"
+                >
+                  {{ n <= plan.spots.length ? n : '' }}
+                </div>
+              </div>
+              <button class="plan-delete-btn" @click.stop="confirmDeletePlan(plan)" title="プランを削除">✕</button>
+              <span class="plan-chevron">▶</span>
+            </div>
+          </div>
+
+          <!-- プラン詳細 (展開時) -->
+          <div class="plan-detail" v-if="activePlanId === plan.id">
+
+            <!-- マップ -->
+            <div :id="'map-' + plan.id" style="width:100%;height:260px;"></div>
+
+            <!-- スポットリスト -->
+            <div class="spot-list">
+              <div class="spot-list-header">
+                <span class="spot-list-title">登録スポット ({{ plan.spots.length }}/{{ spotLimit }})</span>
+              </div>
+
+              <div class="empty-spots" v-if="plan.spots.length === 0">
+                <span class="emoji">📍</span>
+                スポットがまだ登録されていません
+              </div>
+
+              <div
+                v-for="(spot, index) in plan.spots"
+                :key="spot.spotId || spot.order || index"
+                class="spot-item"
+                :class="{
+                  dragging: dragIndex === index,
+                  'drag-over': dragOverIndex === index && dragOverIndex !== dragIndex
+                }"
+                draggable="true"
+                @dragstart="onDragStart(index)"
+                @dragover.prevent="onDragOver(index)"
+                @drop="onDrop(plan, index)"
+                @dragend="onDragEnd"
+              >
+                <div class="spot-order-badge">{{ index + 1 }}</div>
+                <div class="spot-info">
+                  <div class="spot-name">{{ spot.name }}</div>
+                  <div class="spot-address" v-if="spot.address">{{ spot.address }}</div>
+                  <div class="spot-address" v-else>📌 カスタムピン</div>
+                </div>
+                <div class="spot-actions">
+                  <span class="drag-handle" title="ドラッグして並び替え">⠿</span>
+                  <button class="delete-spot-btn" @click="confirmDeleteSpot(plan, index)" title="スポットを削除">🗑</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <!-- ========== プラン新規作成モーダル ========== -->
+  <div class="modal-overlay" v-if="showCreateModal" @click.self="showCreateModal = false">
+    <div class="modal-box">
+      <div class="modal-title">🗺️ 新しいツーリングプラン</div>
+      <input
+        class="modal-input"
+        v-model="newPlanName"
+        placeholder="プラン名を入力 (例: 箱根ツーリング)"
+        maxlength="30"
+        @keyup.enter="createPlan"
+        ref="planNameInput"
+      >
+      <div class="modal-actions">
+        <button class="modal-cancel-btn" @click="showCreateModal = false">キャンセル</button>
+        <button class="modal-confirm-btn" :disabled="!newPlanName.trim() || creating" @click="createPlan">
+          {{ creating ? '作成中...' : '作成' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== プラン削除確認モーダル ========== -->
+  <div class="modal-overlay" v-if="showDeletePlanModal" @click.self="showDeletePlanModal = false">
+    <div class="modal-box">
+      <div class="modal-title">プランを削除</div>
+      <p class="confirm-msg">「{{ deletePlanTarget?.name }}」を削除しますか？<br>登録済みのスポットも全て削除されます。</p>
+      <div class="modal-actions">
+        <button class="modal-cancel-btn" @click="showDeletePlanModal = false">キャンセル</button>
+        <button class="modal-delete-btn" @click="deletePlan">削除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== スポット削除確認モーダル ========== -->
+  <div class="modal-overlay" v-if="showDeleteSpotModal" @click.self="showDeleteSpotModal = false">
+    <div class="modal-box">
+      <div class="modal-title">スポットを削除</div>
+      <p class="confirm-msg">「{{ deleteSpotTarget?.spot?.name }}」をプランから削除しますか？</p>
+      <div class="modal-actions">
+        <button class="modal-cancel-btn" @click="showDeleteSpotModal = false">キャンセル</button>
+        <button class="modal-delete-btn" @click="deleteSpot">削除</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+const { createApp, ref, onMounted, nextTick } = Vue;
+
+// ========== Firebase 初期化待機 ==========
+function waitForFirebase() {
+  return new Promise(resolve => {
+    const check = () => {
+      if (typeof firebase !== 'undefined' && firebase.apps.length > 0) resolve();
+      else setTimeout(check, 100);
+    };
+    check();
+  });
+}
+
+// ========== Google Maps 初期化待機 ==========
+function waitForMaps() {
+  return new Promise(resolve => {
+    if (typeof google !== 'undefined' && google.maps) resolve();
+    else {
+      const orig = window.initMap;
+      window.initMap = function() {
+        if (orig) orig();
+        resolve();
+      };
+    }
+  });
+}
+
+createApp({
+  setup() {
+    // ========== 定数 (サブスク未加入) ==========
+    const PLAN_LIMIT_FREE = 3;
+    const SPOT_LIMIT_FREE = 3;
+
+    // ========== State ==========
+    const loading = ref(true);
+    const currentUser = ref(null);
+    const plans = ref([]);
+    const planLimit = ref(PLAN_LIMIT_FREE);
+    const spotLimit = ref(SPOT_LIMIT_FREE);
+
+    // モーダル
+    const showCreateModal = ref(false);
+    const newPlanName = ref('');
+    const creating = ref(false);
+    const planNameInput = ref(null);
+
+    const showDeletePlanModal = ref(false);
+    const deletePlanTarget = ref(null);
+
+    const showDeleteSpotModal = ref(false);
+    const deleteSpotTarget = ref(null);
+
+    // 展開中プラン
+    const activePlanId = ref(null);
+    const planMaps = {}; // planId -> google.maps.Map
+
+    // ドラッグ
+    const dragIndex = ref(-1);
+    const dragOverIndex = ref(-1);
+
+    // Firestore
+    let db;
+
+    // ========== 初期化 ==========
+    onMounted(async () => {
+      await waitForFirebase();
+      db = firebase.firestore();
+
+      firebase.auth().onAuthStateChanged(async (user) => {
+        currentUser.value = user;
+        loading.value = false;
+        if (user) {
+          await loadPlans(user.uid);
+        }
+      });
+    });
+
+    // ========== プラン読み込み ==========
+    async function loadPlans(uid) {
+      try {
+        const snap = await db
+          .collection('users').doc(uid)
+          .collection('touringPlans')
+          .orderBy('createdAt', 'asc')
+          .get();
+        plans.value = snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          spots: (doc.data().spots || []).sort((a, b) => a.order - b.order)
+        }));
+      } catch (e) {
+        console.error('プラン読み込みエラー:', e);
+      }
+    }
+
+    // ========== プラン作成モーダルを開く ==========
+    function openCreatePlanModal() {
+      if (plans.value.length >= planLimit.value) return;
+      newPlanName.value = '';
+      showCreateModal.value = true;
+      nextTick(() => planNameInput.value?.focus());
+    }
+
+    // ========== プラン作成 ==========
+    async function createPlan() {
+      const name = newPlanName.value.trim();
+      if (!name || creating.value) return;
+      creating.value = true;
+      try {
+        const ref = await db
+          .collection('users').doc(currentUser.value.uid)
+          .collection('touringPlans')
+          .add({
+            name,
+            spots: [],
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        plans.value.push({ id: ref.id, name, spots: [] });
+        showCreateModal.value = false;
+      } catch (e) {
+        console.error('プラン作成エラー:', e);
+        alert('プランの作成に失敗しました');
+      } finally {
+        creating.value = false;
+      }
+    }
+
+    // ========== プラン展開/折りたたみ ==========
+    async function togglePlan(plan) {
+      if (activePlanId.value === plan.id) {
+        activePlanId.value = null;
+        return;
+      }
+      activePlanId.value = plan.id;
+      await nextTick();
+      await waitForMaps();
+      initPlanMap(plan);
+    }
+
+    // ========== プランマップ初期化 ==========
+    function initPlanMap(plan) {
+      const el = document.getElementById('map-' + plan.id);
+      if (!el) return;
+
+      const map = new google.maps.Map(el, {
+        zoom: plan.spots.length > 0 ? 10 : 6,
+        center: plan.spots.length > 0
+          ? { lat: plan.spots[0].lat, lng: plan.spots[0].lng }
+          : { lat: 36.2048, lng: 138.2529 }, // 日本中心
+        mapTypeId: 'roadmap',
+        disableDefaultUI: true,
+        zoomControl: true,
+      });
+
+      planMaps[plan.id] = map;
+
+      if (plan.spots.length === 0) return;
+
+      const bounds = new google.maps.LatLngBounds();
+
+      plan.spots.forEach((spot, index) => {
+        const pos = { lat: spot.lat, lng: spot.lng };
+        bounds.extend(pos);
+
+        // 番号入りカスタムマーカー
+        const marker = new google.maps.Marker({
+          position: pos,
+          map,
+          label: {
+            text: String(index + 1),
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: '12px'
+          },
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: '#00A8C6',
+            fillOpacity: 1,
+            strokeColor: 'white',
+            strokeWeight: 2,
+            scale: 16,
+          },
+          title: spot.name
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<div style="font-size:13px;font-weight:bold;padding:4px">${index + 1}. ${spot.name}</div>`
+        });
+        marker.addListener('click', () => infoWindow.open(map, marker));
+      });
+
+      if (plan.spots.length > 1) {
+        map.fitBounds(bounds, { top: 30, bottom: 30, left: 30, right: 30 });
+      }
+
+      // ルートライン
+      if (plan.spots.length > 1) {
+        const path = plan.spots.map(s => ({ lat: s.lat, lng: s.lng }));
+        new google.maps.Polyline({
+          path,
+          geodesic: true,
+          strokeColor: '#00A8C6',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          map
+        });
+      }
+    }
+
+    // ========== プラン削除確認 ==========
+    function confirmDeletePlan(plan) {
+      deletePlanTarget.value = plan;
+      showDeletePlanModal.value = true;
+    }
+
+    // ========== プラン削除実行 ==========
+    async function deletePlan() {
+      if (!deletePlanTarget.value) return;
+      try {
+        await db
+          .collection('users').doc(currentUser.value.uid)
+          .collection('touringPlans')
+          .doc(deletePlanTarget.value.id)
+          .delete();
+        plans.value = plans.value.filter(p => p.id !== deletePlanTarget.value.id);
+        if (activePlanId.value === deletePlanTarget.value.id) activePlanId.value = null;
+        showDeletePlanModal.value = false;
+        deletePlanTarget.value = null;
+      } catch (e) {
+        console.error('プラン削除エラー:', e);
+        alert('プランの削除に失敗しました');
+      }
+    }
+
+    // ========== スポット削除確認 ==========
+    function confirmDeleteSpot(plan, index) {
+      deleteSpotTarget.value = { plan, index, spot: plan.spots[index] };
+      showDeleteSpotModal.value = true;
+    }
+
+    // ========== スポット削除実行 ==========
+    async function deleteSpot() {
+      const { plan, index } = deleteSpotTarget.value;
+      const newSpots = [...plan.spots];
+      newSpots.splice(index, 1);
+      // order を振り直す
+      newSpots.forEach((s, i) => { s.order = i; });
+
+      try {
+        await db
+          .collection('users').doc(currentUser.value.uid)
+          .collection('touringPlans').doc(plan.id)
+          .update({
+            spots: newSpots,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        plan.spots = newSpots;
+        showDeleteSpotModal.value = false;
+        deleteSpotTarget.value = null;
+
+        // マップを更新
+        await nextTick();
+        const el = document.getElementById('map-' + plan.id);
+        if (el) initPlanMap(plan);
+      } catch (e) {
+        console.error('スポット削除エラー:', e);
+        alert('スポットの削除に失敗しました');
+      }
+    }
+
+    // ========== ドラッグ&ドロップ並び替え ==========
+    function onDragStart(index) { dragIndex.value = index; }
+    function onDragOver(index) { dragOverIndex.value = index; }
+    function onDragEnd() { dragIndex.value = -1; dragOverIndex.value = -1; }
+
+    async function onDrop(plan, toIndex) {
+      const fromIndex = dragIndex.value;
+      if (fromIndex === -1 || fromIndex === toIndex) { onDragEnd(); return; }
+
+      const newSpots = [...plan.spots];
+      const [moved] = newSpots.splice(fromIndex, 1);
+      newSpots.splice(toIndex, 0, moved);
+      newSpots.forEach((s, i) => { s.order = i; });
+
+      try {
+        await db
+          .collection('users').doc(currentUser.value.uid)
+          .collection('touringPlans').doc(plan.id)
+          .update({
+            spots: newSpots,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        plan.spots = newSpots;
+
+        await nextTick();
+        const el = document.getElementById('map-' + plan.id);
+        if (el) initPlanMap(plan);
+      } catch (e) {
+        console.error('並び替えエラー:', e);
+        alert('並び替えに失敗しました');
+      }
+      onDragEnd();
+    }
+
+    // ========== ナビゲーション ==========
+    function goBack() { window.history.back(); }
+    function goToLogin() { window.location.href = '/'; }
+
+    return {
+      loading, currentUser, plans, planLimit, spotLimit,
+      showCreateModal, newPlanName, creating, planNameInput,
+      showDeletePlanModal, deletePlanTarget,
+      showDeleteSpotModal, deleteSpotTarget,
+      activePlanId, dragIndex, dragOverIndex,
+      openCreatePlanModal, createPlan,
+      togglePlan, confirmDeletePlan, deletePlan,
+      confirmDeleteSpot, deleteSpot,
+      onDragStart, onDragOver, onDrop, onDragEnd,
+      goBack, goToLogin
+    };
+  }
+}).mount('#app');
+</script>
+</body>
+</html>
