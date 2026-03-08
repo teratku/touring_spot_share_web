@@ -512,6 +512,23 @@
         }
       }
 
+      .detail-touring-btn-wrap {
+        padding: 0 0 16px;
+      }
+      .detail-touring-btn {
+        width: 100%;
+        padding: 12px 16px;
+        background: #00A8C6;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .detail-touring-btn:hover { background: #0096b3; }
+
       /* ========== ダークモード対応 ========== */
       @media (prefers-color-scheme: dark) {
         body {
@@ -726,6 +743,22 @@
                 <div class="info-value">{{ formatTimestamp(location.createTimeTimeStamp) }}</div>
               </div>
             </div>
+          </div>
+
+          <!-- ツーリングプランに追加ボタン -->
+          <div v-if="currentUser && location" class="detail-touring-btn-wrap">
+            <button
+              class="detail-touring-btn"
+              @click="openTouringModal({
+                spotId: locationId,
+                name: location.locality || location.administrative || 'スポット',
+                lat: Number(location.lat),
+                lng: Number(location.lng),
+                address: location.administrative || null,
+                imageUrl: (location.locationImageURLs && location.locationImageURLs[0]) || location.iconImageURL || null,
+                isCustomPin: false
+              })"
+            >🏍️ ツーリングプランに追加</button>
           </div>
 
           <!-- 画像ギャラリー -->
