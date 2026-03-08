@@ -912,6 +912,201 @@
       }
       .touring-manage-link:hover { color: #00A8C6; }
 
+      .poi-infowindow {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        min-width: 200px;
+        padding: 4px 0 8px;
+      }
+
+      .poi-name {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 4px;
+      }
+
+      .poi-address {
+        font-size: 13pt;
+        color: #666666;
+        margin-bottom: 12px;
+        line-height: 1.4;
+      }
+
+      .poi-gmaps-link {
+        font-size: 13pt;
+        color: #1a73e8;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      .poi-gmaps-link:hover {
+        text-decoration: underline;
+      }
+
+      .btn-add-plan {
+        display: block;
+        width: 100%;
+        background: #00A8C6;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 15pt;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        text-align: center;
+      }
+
+      .btn-add-plan:hover {
+        background: #008ca6;
+      }
+
+      .btn-add-plan.added {
+        background: #228B22;
+        cursor: default;
+      }
+
+      /* プランバッジ（ヘッダー横など） */
+      .plan-badge {
+        position: fixed;
+        bottom: 80px;
+        right: 16px;
+        background: #00A8C6;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 20px;
+        font-size: 15pt;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 168, 198, 0.4);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .plan-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 168, 198, 0.5);
+      }
+
+      .plan-count {
+        background: white;
+        color: #00A8C6;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12pt;
+        font-weight: bold;
+      }
+
+      /* プランパネル */
+      .plan-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 2500;
+        max-height: 70vh;
+        overflow-y: auto;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        padding: 0 0 24px;
+      }
+
+      .plan-panel.active {
+        transform: translateY(0);
+      }
+
+      .plan-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 20px 16px;
+        border-bottom: 1px solid #E0E0E0;
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 1;
+      }
+
+      .plan-panel-title {
+        font-size: 18pt;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      .plan-panel-close {
+        background: #F0F0F0;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16pt;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .plan-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 20px;
+        border-bottom: 1px solid #F0F0F0;
+      }
+
+      .plan-item-info {
+        flex: 1;
+      }
+
+      .plan-item-name {
+        font-size: 15pt;
+        font-weight: 500;
+        color: #333333;
+      }
+
+      .plan-item-address {
+        font-size: 12pt;
+        color: #999999;
+        margin-top: 2px;
+      }
+
+      .plan-item-remove {
+        background: none;
+        border: none;
+        color: #E63946;
+        font-size: 18pt;
+        cursor: pointer;
+        padding: 4px;
+        line-height: 1;
+      }
+
+      .plan-empty {
+        text-align: center;
+        padding: 40px 20px;
+        color: #999999;
+        font-size: 15pt;
+      }
+
+      .plan-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 2400;
+      }
+
       /* ========== ダークモード対応 ========== */
       @media (prefers-color-scheme: dark) {
         body {
@@ -1374,6 +1569,41 @@
             </div>
           </div>
         </div>
+        <!-- プランボタン（スポットが1件以上の時表示） -->
+        <button
+          v-if="currentView === 'map' && planSpots.length > 0"
+          class="plan-badge"
+          @click="showPlanPanel = true"
+        >
+          🗺️ ツーリングプラン
+          <span class="plan-count">{{ planSpots.length }}</span>
+        </button>
+
+        <!-- プランパネルオーバーレイ -->
+        <div v-if="showPlanPanel" class="plan-overlay" @click="showPlanPanel = false"></div>
+
+        <!-- プランパネル -->
+        <div class="plan-panel" :class="{ active: showPlanPanel }">
+          <div class="plan-panel-header">
+            <h3 class="plan-panel-title">🗺️ ツーリングプラン</h3>
+            <button class="plan-panel-close" @click="showPlanPanel = false">✕</button>
+          </div>
+          <div v-if="planSpots.length === 0" class="plan-empty">
+            マップのスポットを長押しまたはクリックして追加しましょう
+          </div>
+          <div
+            v-for="(spot, index) in planSpots"
+            :key="spot.placeId"
+            class="plan-item"
+          >
+            <span style="font-size:24pt;">📍</span>
+            <div class="plan-item-info">
+              <div class="plan-item-name">{{ spot.name }}</div>
+              <div class="plan-item-address">{{ spot.address }}</div>
+            </div>
+            <button class="plan-item-remove" @click="removeFromPlan(index)">✕</button>
+          </div>
+        </div>
         <!-- ========== 長押しダイアログ ========== -->
         <div class="long-press-overlay" v-if="showLongPressDialog" @click.self="showLongPressDialog = false">
           <div class="long-press-dialog">
@@ -1579,6 +1809,12 @@
           }
         },
         methods: {
+          removeFromPlan(index) {
+            const removed = this.planSpots[index];
+            this.planSpots.splice(index, 1);
+            localStorage.setItem('tourPlanSpots', JSON.stringify(this.planSpots));
+            this.showToast(`「${removed.name}」をプランから削除しました`, 'success');
+          },
           // WebP対応URL生成
           getWebPUrl(url) {
             if (!url) return null;
@@ -1793,7 +2029,9 @@
                 touringPlanLimit: 3,           // プラン上限
                 touringSpotLimit: 3,           // スポット上限
                 pendingSpotForTouring: null,   // 追加待ちスポットデータ
-                touringModalLoading: false    // プラン読み込み中フラグ
+                touringModalLoading: false,    // プラン読み込み中フラグ
+                planSpots: JSON.parse(localStorage.getItem('tourPlanSpots') || '[]'),
+                showPlanPanel: false,
             };
             },
             components: {
@@ -2096,6 +2334,91 @@
                 });
 
                 await this.createMarkers();
+
+                // ── Google Maps POI クリック時に「プランに追加」ボタンを注入 ──────────
+                const poiInfoWindow = new google.maps.InfoWindow();
+
+                // グローバル関数として登録（InfoWindow内のHTMLから呼び出すため）
+                window._addToPlan = (placeId, name, address, lat, lng) => {
+                  const already = this.planSpots.some(s => s.placeId === placeId);
+                  if (already) {
+                    this.showToast('すでにプランに追加されています', 'error');
+                    return;
+                  }
+                  const spot = { placeId, name, address, lat, lng };
+                  this.planSpots.push(spot);
+                  localStorage.setItem('tourPlanSpots', JSON.stringify(this.planSpots));
+                  this.showToast(`「${name}」をプランに追加しました ✅`, 'success');
+
+                  // ボタンを「追加済み」に変更
+                  const btn = document.getElementById(`poi-btn-${placeId}`);
+                  if (btn) {
+                    btn.textContent = '✅ 追加済み';
+                    btn.classList.add('added');
+                    btn.disabled = true;
+                  }
+                };
+
+                mapMain.addListener('click', async (event) => {
+                  if (!event.placeId) return;
+                  event.stop(); // デフォルトのInfoWindowを抑制
+
+                  try {
+                    const { PlacesService, PlacesServiceStatus } = await google.maps.importLibrary("places");
+                    const service = new PlacesService(mapMain);
+
+                    service.getDetails(
+                      {
+                        placeId: event.placeId,
+                        fields: ['name', 'formatted_address', 'geometry', 'url'],
+                        language: 'ja'
+                      },
+                      (place, status) => {
+                        const name    = (place && status === PlacesServiceStatus.OK) ? place.name : '選択したスポット';
+                        const address = (place && place.formatted_address) ? place.formatted_address : '';
+                        const gmapsUrl = (place && place.url) ? place.url : `https://maps.google.com/?q=${event.latLng.lat()},${event.latLng.lng()}`;
+                        const isAdded = this.planSpots.some(s => s.placeId === event.placeId);
+
+                        poiInfoWindow.setContent(`
+                          <div class="poi-infowindow">
+                            <div class="poi-name">${name}</div>
+                            <div class="poi-address">${address}</div>
+                            <a class="poi-gmaps-link" href="${gmapsUrl}" target="_blank" rel="noopener">Googleマップで見る</a>
+                            <button
+                              id="poi-btn-${event.placeId}"
+                              class="btn-add-plan ${isAdded ? 'added' : ''}"
+                              ${isAdded ? 'disabled' : ''}
+                              onclick="window._addToPlan('${event.placeId}', '${name.replace(/'/g, "\\'")}', '${address.replace(/'/g, "\\'")}', ${event.latLng.lat()}, ${event.latLng.lng()})"
+                            >
+                              ${isAdded ? '✅ 追加済み' : '➕ プランに追加'}
+                            </button>
+                          </div>
+                        `);
+                        poiInfoWindow.setPosition(event.latLng);
+                        poiInfoWindow.open(mapMain);
+                      }
+                    );
+                  } catch (e) {
+                    console.warn('Places API エラー:', e);
+                    // フォールバック（Places API 不使用）
+                    const isAdded = this.planSpots.some(s => s.placeId === event.placeId);
+                    poiInfoWindow.setContent(`
+                      <div class="poi-infowindow">
+                        <div class="poi-name">選択したスポット</div>
+                        <button
+                          id="poi-btn-${event.placeId}"
+                          class="btn-add-plan ${isAdded ? 'added' : ''}"
+                          ${isAdded ? 'disabled' : ''}
+                          onclick="window._addToPlan('${event.placeId}', 'このスポット', '', ${event.latLng.lat()}, ${event.latLng.lng()})"
+                        >
+                          ${isAdded ? '✅ 追加済み' : '➕ プランに追加'}
+                        </button>
+                      </div>
+                    `);
+                    poiInfoWindow.setPosition(event.latLng);
+                    poiInfoWindow.open(mapMain);
+                  }
+                });
               },
 
               async createMarkers() {
