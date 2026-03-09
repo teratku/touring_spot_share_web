@@ -1579,116 +1579,64 @@
           <span class="plan-count">{{ planSpots.length }}</span>
         </button>
 
-        <!-- プランパネルオーバーレイ -->
-        <div v-if="showPlanPanel" class="plan-overlay" @click="showPlanPanel = false"></div>
-
-        <!-- プランパネル -->
-        <div class="plan-panel" :class="{ active: showPlanPanel }">
-          <div class="plan-panel-header">
-            <h3 class="plan-panel-title">🗺️ ツーリングプラン</h3>
-            <button class="plan-panel-close" @click="showPlanPanel = false">✕</button>
-          </div>
-          <div v-if="planSpots.length === 0" class="plan-empty">
-            マップのスポットを長押しまたはクリックして追加しましょう
-          </div>
-          <div
-            v-for="(spot, index) in planSpots"
-            :key="spot.placeId"
-            class="plan-item"
-          >
-            <span style="font-size:24pt;">📍</span>
-            <div class="plan-item-info">
-              <div class="plan-item-name">{{ spot.name }}</div>
-              <div class="plan-item-address">{{ spot.address }}</div>
-            </div>
-            <button class="plan-item-remove" @click="removeFromPlan(index)">✕</button>
-          </div>
-        </div>
-        <!-- ========== 長押しダイアログ ========== -->
-        <div class="long-press-overlay" v-if="showLongPressDialog" @click.self="showLongPressDialog = false">
-          <div class="long-press-dialog">
-            <div class="long-press-header">
-              <div class="long-press-title">📍 マップをピン留め</div>
-              <button class="long-press-close" @click="showLongPressDialog = false">✕</button>
-            </div>
-            <div class="long-press-address" v-if="longPressAddress">{{ longPressAddress }}</div>
-            <div class="long-press-address" v-else>{{ longPressLat?.toFixed(5) }}, {{ longPressLng?.toFixed(5) }}</div>
-            <div class="long-press-actions">
-              <button
-                v-if="currentUser"
-                class="long-press-btn touring-btn"
-                @click="openTouringModal({
-                  spotId: null,
-                  name: longPressAddress || `カスタムピン (${longPressLat?.toFixed(4)}, ${longPressLng?.toFixed(4)})`,
-                  lat: longPressLat,
-                  lng: longPressLng,
-                  address: longPressAddress || null,
-                  imageUrl: null,
-                  isCustomPin: true
-                }); showLongPressDialog = false"
-              >🏍️ ツーリングプランに追加</button>
-              <button class="long-press-btn cancel-btn" @click="showLongPressDialog = false">キャンセル</button>
-            </div>
-          </div>
-        </div>
-      </div>
+        
           <!-- ========== ツーリングプラン選択モーダル ========== -->
-    <div class="touring-modal-overlay" v-if="showTouringModal" @click.self="showTouringModal = false">
-      <div class="touring-modal">
+        <div class="touring-modal-overlay" v-if="showTouringModal" @click.self="showTouringModal = false">
+          <div class="touring-modal">
 
-        <div class="touring-modal-header">
-          <div class="touring-modal-title">🏍️ ツーリングプランに追加</div>
-          <button class="touring-modal-close" @click="showTouringModal = false">✕</button>
-        </div>
-
-        <!-- スポット名 -->
-        <div class="touring-pending-spot" v-if="pendingSpotForTouring">
-          📍 {{ pendingSpotForTouring.name }}
-        </div>
-
-        <!-- ローディング -->
-        <div class="touring-modal-loading" v-if="touringModalLoading">
-          <div class="touring-spinner"></div>
-        </div>
-
-        <!-- プランリスト -->
-        <div v-else>
-          <!-- 既存プラン -->
-          <div
-            v-for="plan in touringPlans"
-            :key="plan.id"
-            class="touring-plan-item"
-            :class="{ disabled: plan.spots.length >= touringSpotLimit }"
-            @click="plan.spots.length < touringSpotLimit && addSpotToTouringPlan(plan)"
-          >
-            <div class="touring-plan-item-info">
-              <span class="touring-plan-item-name">{{ plan.name }}</span>
-              <span class="touring-plan-item-count">{{ plan.spots.length }}/{{ touringSpotLimit }}スポット</span>
+            <div class="touring-modal-header">
+              <div class="touring-modal-title">🏍️ ツーリングプランに追加</div>
+              <button class="touring-modal-close" @click="showTouringModal = false">✕</button>
             </div>
-            <span class="touring-plan-item-full" v-if="plan.spots.length >= touringSpotLimit">満杯</span>
-            <span class="touring-plan-item-add" v-else>追加 ▶</span>
-          </div>
 
-          <!-- 新規プラン作成 -->
-          <div
-            class="touring-plan-new"
-            :class="{ disabled: touringPlans.length >= touringPlanLimit }"
-            @click="touringPlans.length < touringPlanLimit && createTouringPlanAndAdd()"
-          >
-            <span>＋ 新しいプランを作成して追加</span>
-            <span class="touring-plan-limit" v-if="touringPlans.length >= touringPlanLimit">
-              (上限{{ touringPlanLimit }}プラン)
-            </span>
-          </div>
+            <!-- スポット名 -->
+            <div class="touring-pending-spot" v-if="pendingSpotForTouring">
+              📍 {{ pendingSpotForTouring.name }}
+            </div>
 
-          <!-- プラン管理ページへ -->
-          <a href="/touring-plan.html" class="touring-manage-link">
-            📋 プラン管理ページへ
-          </a>
+            <!-- ローディング -->
+            <div class="touring-modal-loading" v-if="touringModalLoading">
+              <div class="touring-spinner"></div>
+            </div>
+
+            <!-- プランリスト -->
+            <div v-else>
+              <!-- 既存プラン -->
+              <div
+                v-for="plan in touringPlans"
+                :key="plan.id"
+                class="touring-plan-item"
+                :class="{ disabled: plan.spots.length >= touringSpotLimit }"
+                @click="plan.spots.length < touringSpotLimit && addSpotToTouringPlan(plan)"
+              >
+                <div class="touring-plan-item-info">
+                  <span class="touring-plan-item-name">{{ plan.name }}</span>
+                  <span class="touring-plan-item-count">{{ plan.spots.length }}/{{ touringSpotLimit }}スポット</span>
+                </div>
+                <span class="touring-plan-item-full" v-if="plan.spots.length >= touringSpotLimit">満杯</span>
+                <span class="touring-plan-item-add" v-else>追加 ▶</span>
+              </div>
+
+              <!-- 新規プラン作成 -->
+              <div
+                class="touring-plan-new"
+                :class="{ disabled: touringPlans.length >= touringPlanLimit }"
+                @click="touringPlans.length < touringPlanLimit && createTouringPlanAndAdd()"
+              >
+                <span>＋ 新しいプランを作成して追加</span>
+                <span class="touring-plan-limit" v-if="touringPlans.length >= touringPlanLimit">
+                  (上限{{ touringPlanLimit }}プラン)
+                </span>
+              </div>
+
+              <!-- プラン管理ページへ -->
+              <a href="/touring-plan.html" class="touring-manage-link">
+                📋 プラン管理ページへ
+              </a>
+            </div>
+
+          </div>
         </div>
-
-      </div>
-    </div>
     </div>
 
     <script>
