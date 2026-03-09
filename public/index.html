@@ -1481,7 +1481,7 @@
                   >
                   <img 
                     :src="location.locationImageURLs[0]" 
-                    :alt="location.locality || location.administrative || '不明な場所'"
+                    :alt="location.location_name || location.locality || location.administrative || '不明な場所'"
                     class="cluster-image"
                     loading="lazy"
                     decoding="async"
@@ -1495,7 +1495,7 @@
                   >
                   <img 
                     :src="location.iconImageURL" 
-                    :alt="location.locality || location.administrative || '不明な場所'"
+                    :alt="location.location_name || location.locality || location.administrative || '不明な場所'"
                     class="cluster-image"
                     loading="lazy"
                     decoding="async"
@@ -1510,7 +1510,7 @@
               <!-- 情報コンテナ -->
               <div class="cluster-info-container">
                 <div class="cluster-location-name">
-                  🏍️ {{ location.locality || location.administrative || '不明な場所' }}
+                  🏍️ {{ location.location_name || location.locality || location.administrative || '不明な場所' }}
                 </div>
                 <div class="cluster-location-meta">
                   <!-- ユーザー情報 -->
@@ -1558,7 +1558,7 @@
                 class="add-to-touring-btn"
                 @click.stop="openTouringModal({
                   spotId: location.id,
-                  name: location.locality || location.administrative || 'スポット',
+                  name: location.location_name || location.locality || location.administrative || 'スポット',
                   lat: Number(location.lat),
                   lng: Number(location.lng),
                   address: location.administrative || null,
@@ -1726,7 +1726,7 @@
         },
         computed: {
           locality() {
-            return this.location.locality || this.location.administrative || '不明な場所';
+            return this.location.location_name || this.location.locality || this.location.administrative || '不明な場所';
           },
           administrative() {
             return this.location.administrative || '';
@@ -2478,7 +2478,7 @@
                     const marker = new AdvancedMarkerElement({
                         position: position,
                         content: pinElement.element,
-                        title: location.locality || location.administrative || '不明な場所',
+                        title: location.location_name || location.locality || location.administrative || '不明な場所',
                     });
 
                     marker.locationData = location;

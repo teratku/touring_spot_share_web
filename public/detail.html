@@ -824,7 +824,7 @@
           <!-- 詳細情報カード -->
           <div class="detail-card">
             <div class="location-title">
-              🏍️ {{ location.locality || location.administrative || '不明な場所' }}
+              🏍️ {{ location.location_name || location.locality || location.administrative || '不明な場所' }}
             </div>
 
             <!-- ユーザー情報 -->
@@ -848,7 +848,7 @@
             <div class="detail-info-grid">
               <div class="info-box">
                 <div class="info-label">📍 地域</div>
-                <div class="info-value">{{ location.locality || location.administrative || '不明な場所' }}</div>
+                <div class="info-value">{{ location.location_name || location.locality || location.administrative || '不明な場所' }}</div>
               </div>
               <div v-if="location.administrative" class="info-box">
                 <div class="info-label">🗺️ 行政区域</div>
@@ -879,7 +879,7 @@
               class="detail-touring-btn"
               @click="openTouringModal({
                 spotId: locationId,
-                name: location.locality || location.administrative || 'スポット',
+                name: location.location_name || location.locality || location.administrative || 'スポット',
                 lat: Number(location.lat),
                 lng: Number(location.lng),
                 address: location.administrative || null,
@@ -1291,7 +1291,7 @@
                 marker = new google.maps.Marker({
                   position: position,
                   map: map,
-                  title: this.location.locality || this.location.administrative || 'Location',
+                  title: this.location.location_name || this.location.locality || this.location.administrative || 'Location',
                   icon: {
                     path: google.maps.SymbolPath.CIRCLE,
                     scale: 8,
