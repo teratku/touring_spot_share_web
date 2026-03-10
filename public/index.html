@@ -1579,6 +1579,39 @@
           <span class="plan-count">{{ planSpots.length }}</span>
         </button>
 
+        <!-- プランパネルオーバーレイ -->
+        <div v-if="showPlanPanel" class="plan-overlay" @click="showPlanPanel = false"></div>
+
+        
+        <!-- ========== 長押しダイアログ ========== -->
+        <div class="long-press-overlay" v-if="showLongPressDialog" @click.self="showLongPressDialog = false">
+          <div class="long-press-dialog">
+            <div class="long-press-header">
+              <div class="long-press-title">📍 マップをピン留め</div>
+              <button class="long-press-close" @click="showLongPressDialog = false">✕</button>
+            </div>
+            <div class="long-press-address" v-if="longPressAddress">{{ longPressAddress }}</div>
+            <div class="long-press-address" v-else>{{ longPressLat?.toFixed(5) }}, {{ longPressLng?.toFixed(5) }}</div>
+            <div class="long-press-actions">
+              <button
+                v-if="currentUser"
+                class="long-press-btn touring-btn"
+                @click="openTouringModal({
+                  spotId: null,
+                  name: longPressAddress || `カスタムピン (${longPressLat?.toFixed(4)}, ${longPressLng?.toFixed(4)})`,
+                  lat: longPressLat,
+                  lng: longPressLng,
+                  address: longPressAddress || null,
+                  imageUrl: null,
+                  isCustomPin: true
+                }); showLongPressDialog = false"
+              >🏍️ ツーリングプランに追加</button>
+              <button class="long-press-btn cancel-btn" @click="showLongPressDialog = false">キャンセル</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
         
           <!-- ========== ツーリングプラン選択モーダル ========== -->
         <div class="touring-modal-overlay" v-if="showTouringModal" @click.self="showTouringModal = false">
