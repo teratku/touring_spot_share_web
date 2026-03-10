@@ -1607,6 +1607,50 @@
         border-top: 1px solid #f0f0f0; margin-top: 4px;
       }
       .touring-manage-link:hover { color: #00A8C6; }
+      .poi-infowindow {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        min-width: 200px;
+        padding: 4px 0 8px;
+      }
+      .poi-name {
+        font-size: 16pt;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 4px;
+      }
+      .poi-address {
+        font-size: 13pt;
+        color: #666666;
+        margin-bottom: 12px;
+        line-height: 1.4;
+      }
+      .poi-gmaps-link {
+        font-size: 13pt;
+        color: #1a73e8;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 12px;
+      }
+      .poi-gmaps-link:hover { text-decoration: underline; }
+      .btn-add-plan {
+        display: block;
+        width: 100%;
+        background: #00A8C6;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 15pt;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        text-align: center;
+      }
+      .btn-add-plan:hover { background: #008ca6; }
+      .btn-add-plan.added {
+        background: #228B22;
+        cursor: default;
+      }
     </style>
   </head>
   
@@ -1835,6 +1879,21 @@
                         <span>📅</span>
                         <span>{{ formatTimestamp(location.createTimeTimeStamp) }}</span>
                       </div>
+                      <button
+                      v-if="currentUser"
+                      class="add-to-touring-btn"
+                      style="margin: 8px 0 4px;"
+                      @click.stop="openTouringModal({
+                        spotId: location.id,
+                        name: getLocationName(location),
+                        lat: Number(location.lat),
+                        lng: Number(location.lng),
+                        address: location.administrative || null,
+                        imageUrl: getLocationImage(location),
+                        isCustomPin: false
+                      })"
+                    >🏍️ プランに追加</button>
+                  </div>
                     </div>
                   </div>
                 </div>
@@ -2711,6 +2770,72 @@
                   mapTypeControl: true,
                   streetViewControl: true,
                   fullscreenControl: true
+                });
+
+                // グローバル参照（InfoWindow内のonclickから呼び出すため）
+                window._vueApp = this;
+
+                // POIクリック → InfoWindow with プランに追加ボタン
+                const poiInfoWindow = new google.maps.InfoWindow();
+
+                mapUser.addListener('click', async (event) => {
+                  if (!event.placeId) return;
+                  event.stop();
+
+                  try {
+                    const { PlacesService, PlacesServiceStatus } = await google.maps.importLibrary("places");
+                    const service = new PlacesService(mapUser);
+
+                    service.getDetails(
+                      {
+                        placeId: event.placeId,
+                        fields: ['name', 'formatted_address', 'geometry', 'url'],
+                        language: 'ja'
+                      },
+                      (place, status) => {
+                        const name    = (place && status === PlacesServiceStatus.OK) ? place.name : '選択したスポット';
+                        const address = (place && place.formatted_address) ? place.formatted_address : '';
+                        const gmapsUrl = (place && place.url) ? place.url : `https://maps.google.com/?q=${event.latLng.lat()},${event.latLng.lng()}`;
+                        const isAdded = this.touringPlans.some(p => p.spots.some(s => s.spotId === event.placeId));
+
+                        poiInfoWindow.setContent(`
+                          <div class="poi-infowindow">
+                            <div class="poi-name">${name}</div>
+                            <div class="poi-address">${address}</div>
+                            <a class="poi-gmaps-link" href="${gmapsUrl}" target="_blank" rel="noopener">Googleマップで見る</a>
+                            <button
+                              id="poi-btn-${event.placeId}"
+                              class="btn-add-plan ${isAdded ? 'added' : ''}"
+                              ${isAdded ? 'disabled' : ''}
+                              onclick="window._vueApp.openTouringModal({ spotId: '${event.placeId}', name: '${name.replace(/'/g, "\\'")}', address: '${address.replace(/'/g, "\\'")}', lat: ${event.latLng.lat()}, lng: ${event.latLng.lng()}, isCustomPin: false })"
+                            >
+                              ${isAdded ? '✅ 追加済み' : '➕ プランに追加'}
+                            </button>
+                          </div>
+                        `);
+                        poiInfoWindow.setPosition(event.latLng);
+                        poiInfoWindow.open(mapUser);
+                      }
+                    );
+                  } catch (e) {
+                    console.warn('Places API エラー:', e);
+                    const isAdded = this.touringPlans.some(p => p.spots.some(s => s.spotId === event.placeId));
+                    poiInfoWindow.setContent(`
+                      <div class="poi-infowindow">
+                        <div class="poi-name">選択したスポット</div>
+                        <button
+                          id="poi-btn-${event.placeId}"
+                          class="btn-add-plan ${isAdded ? 'added' : ''}"
+                          ${isAdded ? 'disabled' : ''}
+                          onclick="window._vueApp.openTouringModal({ spotId: '${event.placeId}', name: 'このスポット', address: '', lat: ${event.latLng.lat()}, lng: ${event.latLng.lng()}, isCustomPin: false })"
+                        >
+                          ${isAdded ? '✅ 追加済み' : '➕ プランに追加'}
+                        </button>
+                      </div>
+                    `);
+                    poiInfoWindow.setPosition(event.latLng);
+                    poiInfoWindow.open(mapUser);
+                  }
                 });
 
                 await this.loadRouteDataAndDisplay();
