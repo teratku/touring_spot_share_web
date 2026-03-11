@@ -563,6 +563,9 @@ createApp({
           await loadPlans(user.uid);
         }
       });
+      firebase.auth().onAuthStateChanged((user) => {
+        this.currentUser = user;
+      });
     });
 
     // ========== プラン読み込み ==========
