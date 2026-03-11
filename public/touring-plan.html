@@ -305,6 +305,91 @@
     color: white; border: none; padding: 12px 28px;
     border-radius: 16px; font-size: 14px; font-weight: bold; cursor: pointer;
   }
+  /* ========== プラン名編集 ========== */
+  .plan-name-edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14pt;
+    color: #AEAEB2;
+    padding: 2px 6px;
+    border-radius: 6pt;
+    transition: all 0.2s ease;
+    line-height: 1;
+  }
+
+  .plan-name-edit-btn:hover {
+    background: rgba(0, 168, 198, 0.1);
+    color: #00A8C6;
+  }
+
+  .plan-name-display {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .plan-name-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .plan-name-input {
+    flex: 1;
+    border: 2px solid #00A8C6;
+    border-radius: 8pt;
+    padding: 6px 10px;
+    font-size: 14pt;
+    outline: none;
+    background: white;
+    color: #333333;
+  }
+
+  .plan-name-save-btn {
+    background: #00A8C6;
+    color: white;
+    border: none;
+    border-radius: 8pt;
+    padding: 6px 12px;
+    font-size: 13pt;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+
+  .plan-name-save-btn:hover {
+    background: #0090AA;
+  }
+
+  .plan-name-cancel-btn {
+    background: #E0E0E0;
+    color: #555;
+    border: none;
+    border-radius: 8pt;
+    padding: 6px 12px;
+    font-size: 13pt;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .plan-name-cancel-btn:hover {
+    background: #CCCCCC;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .plan-name-input {
+      background: #2C2C2E;
+      color: #F2F2F7;
+      border-color: #00D4FF;
+    }
+
+    .plan-name-cancel-btn {
+      background: #3A3A3C;
+      color: #AEAEB2;
+    }
+  }
 </style>
 </head>
 <body>
@@ -368,10 +453,27 @@
           :class="{ active: activePlanId === plan.id }"
         >
           <!-- カードヘッダー (クリックで展開) -->
-          <div class="plan-card-header" @click="togglePlan(plan)">
-            <div>
-              <div class="plan-card-name">{{ plan.name }}</div>
-              <div class="plan-card-meta">{{ plan.spots.length }}スポット登録済</div>
+          <div class="plan-card-header" @click="editingPlanId !== plan.id && togglePlan(plan)">
+            <div style="flex:1;min-width:0">
+              <!-- 通常表示 -->
+              <div v-if="editingPlanId !== plan.id" class="plan-name-display">
+                <span class="plan-card-name">{{ plan.name }}</span>
+                <button class="plan-name-edit-btn" @click.stop="startEditPlanName(plan, $event)" title="プラン名を編集">✏️</button>
+              </div>
+              <!-- 編集中 -->
+              <div v-else class="plan-name-input-row" @click.stop>
+                <input
+                  class="plan-name-input"
+                  v-model="editingPlanName"
+                  maxlength="30"
+                  @keyup.enter="savePlanName(plan)"
+                  @keyup.escape="cancelEditPlanName"
+                  @click.stop
+                />
+                <button class="plan-name-save-btn" @click.stop="savePlanName(plan)">保存</button>
+                <button class="plan-name-cancel-btn" @click.stop="cancelEditPlanName">✕</button>
+              </div>
+              <div class="plan-card-meta" v-if="editingPlanId !== plan.id">{{ plan.spots.length }}スポット登録済</div>
             </div>
             <div style="display:flex;align-items:center;gap:10px">
               <!-- スポットバッジ (最大3個) -->
@@ -551,6 +653,10 @@ createApp({
     // Firestore
     let db;
 
+    // プラン名編集
+    const editingPlanId = ref(null);
+    const editingPlanName = ref('');
+
     // ========== 初期化 ==========
     onMounted(async () => {
       await waitForFirebase();
@@ -562,9 +668,6 @@ createApp({
         if (user) {
           await loadPlans(user.uid);
         }
-      });
-      firebase.auth().onAuthStateChanged((user) => {
-        this.currentUser = user;
       });
     });
 
@@ -767,6 +870,34 @@ createApp({
     function onDragOver(index) { dragOverIndex.value = index; }
     function onDragEnd() { dragIndex.value = -1; dragOverIndex.value = -1; }
 
+    // ========== プラン名編集 ==========
+    function startEditPlanName(plan, event) {
+      event.stopPropagation();
+      editingPlanId.value = plan.id;
+      editingPlanName.value = plan.name;
+    }
+
+    function cancelEditPlanName() {
+      editingPlanId.value = null;
+      editingPlanName.value = '';
+    }
+
+    async function savePlanName(plan) {
+      const name = editingPlanName.value.trim();
+      if (!name) return;
+      try {
+        await db
+          .collection('users').doc(currentUser.value.uid)
+          .collection('touringPlans').doc(plan.id)
+          .update({ name, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        plan.name = name;
+        cancelEditPlanName();
+      } catch (e) {
+        console.error('プラン名更新エラー:', e);
+        alert('プラン名の更新に失敗しました');
+      }
+    }
+
     async function onDrop(plan, toIndex) {
       const fromIndex = dragIndex.value;
       if (fromIndex === -1 || fromIndex === toIndex) { onDragEnd(); return; }
@@ -806,6 +937,8 @@ createApp({
       showDeletePlanModal, deletePlanTarget,
       showDeleteSpotModal, deleteSpotTarget,
       activePlanId, dragIndex, dragOverIndex,
+      editingPlanId, editingPlanName,
+      startEditPlanName, cancelEditPlanName, savePlanName,
       openCreatePlanModal, createPlan,
       togglePlan, confirmDeletePlan, deletePlan,
       confirmDeleteSpot, deleteSpot,
