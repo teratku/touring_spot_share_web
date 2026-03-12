@@ -390,6 +390,27 @@
       color: #AEAEB2;
     }
   }
+  /* スポットアイテム クリック対応 */
+  .spot-item {
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .spot-item:hover {
+    background: #e8f8fc;
+    transform: translateX(2px);
+  }
+  .spot-item-link-icon {
+    font-size: 14px;
+    color: #00A8C6;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .spot-item-no-link {
+    font-size: 12px;
+    color: #ccc;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
 </style>
 </head>
 <body>
@@ -522,6 +543,8 @@
                 @dragover.prevent="onDragOver(index)"
                 @drop="onDrop(plan, index)"
                 @dragend="onDragEnd"
+                @click="openSpotDetail(spot)"
+                :title="spot.spotId ? 'スポット詳細を表示' : 'カスタムピンは詳細ページがありません'"
               >
                 <div class="spot-order-badge">{{ index + 1 }}</div>
                 <div class="spot-info">
@@ -533,6 +556,8 @@
                   <span class="drag-handle" title="ドラッグして並び替え">⠿</span>
                   <button class="delete-spot-btn" @click="confirmDeleteSpot(plan, index)" title="スポットを削除">🗑</button>
                 </div>
+                <span v-if="spot.spotId" class="spot-item-link-icon">🔗</span>
+                <span v-else class="spot-item-no-link">📌</span>
               </div>
             </div>
           </div>
@@ -931,6 +956,13 @@ createApp({
     function goBack() { window.history.back(); }
     function goToLogin() { window.location.href = 'login.html'; }
 
+    function openSpotDetail(spot) {
+      if (!spot.spotId) return;
+      // Google Places ID (ChIJ...) はFirestoreのドキュメントIDではないため除外
+      if (spot.spotId.startsWith('ChIJ')) return;
+      window.open(`/detail.html?id=${spot.spotId}`, '_blank');
+    }
+
     return {
       loading, currentUser, plans, planLimit, spotLimit,
       showCreateModal, newPlanName, creating, planNameInput,
@@ -943,6 +975,7 @@ createApp({
       togglePlan, confirmDeletePlan, deletePlan,
       confirmDeleteSpot, deleteSpot,
       onDragStart, onDragOver, onDrop, onDragEnd,
+      openSpotDetail,
       goBack, goToLogin
     };
   }
