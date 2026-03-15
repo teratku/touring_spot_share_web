@@ -474,6 +474,52 @@
           <span class="count-badge">{{ filteredSpots.length }}</span>
         </div>
 
+        <!-- 画像生成エリア -->
+        <div v-if="selectedSpot" style="padding:0 16px 14px;">
+
+        <!-- Canvas（非表示・描画用） -->
+        <canvas ref="cardCanvas" style="display:none;"></canvas>
+
+        <!-- 生成中 -->
+        <div v-if="isGeneratingImage" style="
+            display:flex; align-items:center; gap:8px;
+            padding:10px 12px; background:var(--bg);
+            border-radius:var(--radius-sm); font-size:13px;
+            color:var(--text-sub); border:1px solid var(--border);
+        ">
+            <div class="spinner" style="width:18px;height:18px;border-width:2px;margin:0;"></div>
+            カード画像を生成中...
+        </div>
+
+        <!-- エラー -->
+        <div v-else-if="imageError" style="
+            padding:10px 12px; background:rgba(230,57,70,0.08);
+            border:1px solid var(--danger); border-radius:var(--radius-sm);
+            font-size:12px; color:var(--danger); white-space:pre-line; line-height:1.6;
+        ">⚠️ {{ imageError }}</div>
+
+        <!-- 生成済みプレビュー＋ボタン -->
+        <template v-else-if="generatedImageUrl">
+            <img
+            :src="generatedImageUrl"
+            style="width:100%; border-radius:var(--radius-sm); display:block; margin-bottom:8px;"
+            alt="X投稿用カード"
+            />
+            <div style="display:flex; gap:8px;">
+            <button
+                class="btn btn-primary"
+                style="font-size:13px; padding:9px 0;"
+                @click="copyCardImageToClipboard"
+            >📋 画像をコピー</button>
+            <button
+                class="btn btn-secondary"
+                style="font-size:13px; padding:9px 0;"
+                @click="downloadCardImage"
+            >📥 ダウンロード</button>
+            </div>
+        </template>
+        </div>
+
         <!-- 検索・フィルター -->
         <div class="filter-area">
           <input
@@ -678,6 +724,9 @@
           toastTimer: null,
           currentPage: 0,
           PAGE_SIZE: 5,
+          generatedImageUrl: null,
+          isGeneratingImage: false,
+          imageError: null,
         };
       },
 
@@ -714,10 +763,10 @@
           const url    = `https://biketeilen.web.app/detail.html?id=${this.selectedSpot.id}`;
 
           return [
-            `🗾 今週のおすすめスポット`,
+            `🗾 本日のおすすめスポット`,
             `📍${name}（${pref}）`,
             ``,
-            charm,
+            //charm,
             ``,
             `詳細はアプリで→ ${url}`,
             ``,
@@ -752,6 +801,12 @@
         selectedPref() {
             this.currentPage = 0;
             this.saveState();
+        },
+        charmText() {
+        clearTimeout(this._charmTimer);
+        this._charmTimer = setTimeout(() => {
+            if (this.selectedSpot) this.generateCardImage();
+        }, 600);
         },
     },
 
@@ -800,7 +855,10 @@
         selectSpot(spot) {
         this.selectedSpot = spot;
         this.charmText = '';
+        this.generatedImageUrl = null;
+        this.imageError = null;
         this.saveState();
+        this.$nextTick(() => this.generateCardImage());
         },
 
         async copyPostText() {
@@ -863,6 +921,159 @@
         // ページ数が範囲内かチェックしてから復元
         const maxPage = Math.max(0, Math.ceil(this.filteredSpots.length / this.PAGE_SIZE) - 1);
         this.currentPage = Math.min(savedPage, maxPage);
+        },
+        // Canvas でカード画像を生成
+        async generateCardImage() {
+        if (!this.selectedSpot || !this.selectedSpot.thumbUrl) return;
+
+        this.isGeneratingImage = true;
+        this.imageError = null;
+        this.generatedImageUrl = null;
+
+        try {
+            const canvas = this.$refs.cardCanvas;
+            const ctx = canvas.getContext('2d');
+            // Twitter Card 比率 (1.91:1) = 1200x630
+            canvas.width  = 1200;
+            canvas.height = 630;
+
+            // ── 背景画像を読み込む ──
+            const img = await this.loadImageCORS(this.selectedSpot.thumbUrl);
+
+            // cover フィット
+            const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+            const sw = img.width  * scale;
+            const sh = img.height * scale;
+            const sx = (canvas.width  - sw) / 2;
+            const sy = (canvas.height - sh) / 2;
+            ctx.drawImage(img, sx, sy, sw, sh);
+
+            // ── グラデーションオーバーレイ（下 60%） ──
+            const grad = ctx.createLinearGradient(0, canvas.height * 0.35, 0, canvas.height);
+            grad.addColorStop(0, 'rgba(0,0,0,0)');
+            grad.addColorStop(1, 'rgba(0,0,0,0.82)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // ── アプリ名バッジ（左上） ──
+            ctx.fillStyle = '#00A8C6';
+            this.roundRect(ctx, 28, 28, 310, 48, 10);
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 22px "SF Pro Text", -apple-system, sans-serif';
+            ctx.fillText('🏍 ツーリングスポットシェア', 44, 60);
+
+            // ── 今週のおすすめスポットラベル ──
+            ctx.fillStyle = 'rgba(255,255,255,0.85)';
+            ctx.font = '26px "SF Pro Text", -apple-system, sans-serif';
+            ctx.fillText('🗾 本日のおすすめスポット', 44, canvas.height - 220);
+
+            // ── スポット名 ──
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 62px "SF Pro Text", -apple-system, sans-serif';
+            const spotName = this.selectedSpot.displayName;
+            // 長い場合は省略
+            const maxWidth = canvas.width - 88;
+            ctx.fillText(this.truncateText(ctx, spotName, maxWidth), 44, canvas.height - 140);
+
+            // ── 都道府県 ──
+            const pref = this.selectedSpot.administrative || this.selectedSpot.locality || '';
+            if (pref) {
+            ctx.fillStyle = 'rgba(255,255,255,0.75)';
+            ctx.font = '30px "SF Pro Text", -apple-system, sans-serif';
+            ctx.fillText(`📍 ${pref}`, 44, canvas.height - 88);
+            }
+
+            // ── 魅力テキスト（入力されていれば） ──
+            if (this.charmText.trim()) {
+            ctx.fillStyle = 'rgba(255,255,255,0.90)';
+            ctx.font = '28px "SF Pro Text", -apple-system, sans-serif';
+            ctx.fillText(this.charmText.trim(), 44, canvas.height - 46);
+            }
+
+            // ── 右下：URL ──
+            const url = `biketeilen.web.app`;
+            ctx.fillStyle = 'rgba(255,255,255,0.55)';
+            ctx.font = '22px "SF Pro Text", -apple-system, sans-serif';
+            const urlW = ctx.measureText(url).width;
+            ctx.fillText(url, canvas.width - urlW - 36, canvas.height - 28);
+
+            this.generatedImageUrl = canvas.toDataURL('image/jpeg', 0.92);
+
+        } catch (e) {
+            console.error('画像生成エラー:', e);
+            this.imageError = 'CORS制限のため画像を読み込めませんでした。\n Firebase StorageのCORS設定が必要です。';
+        } finally {
+            this.isGeneratingImage = false;
+        }
+        },
+
+        // CORS 対応で画像を読み込む
+        loadImageCORS(url) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload  = () => resolve(img);
+            img.onerror = () => {
+            // CORS 失敗時は crossOrigin なしで再試行（ただしcanvas汚染になる）
+            const img2 = new Image();
+            img2.onload  = () => resolve(img2);
+            img2.onerror = () => reject(new Error('画像の読み込みに失敗しました'));
+            img2.src = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
+            };
+            img.src = url;
+        });
+        },
+
+        // Canvas に角丸矩形を描く
+        roundRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+        },
+
+        // テキストを最大幅に収める
+        truncateText(ctx, text, maxWidth) {
+        if (ctx.measureText(text).width <= maxWidth) return text;
+        let t = text;
+        while (t.length > 0 && ctx.measureText(t + '…').width > maxWidth) {
+            t = t.slice(0, -1);
+        }
+        return t + '…';
+        },
+
+        // 画像をダウンロード
+        downloadCardImage() {
+        if (!this.generatedImageUrl) return;
+        const a = document.createElement('a');
+        a.href = this.generatedImageUrl;
+        a.download = `touring_spot_${this.selectedSpot.id}.jpg`;
+        a.click();
+        this.showToast('📥 画像をダウンロードしました', 'success');
+        },
+
+        // クリップボードにコピー
+        async copyCardImageToClipboard() {
+        if (!this.generatedImageUrl) return;
+        try {
+            const blob = await (await fetch(this.generatedImageUrl)).blob();
+            await navigator.clipboard.write([
+            new ClipboardItem({ 'image/png': blob })
+            ]);
+            this.showToast('📋 画像をコピーしました！Xに貼り付けできます', 'success');
+        } catch (e) {
+            // フォールバック：ダウンロードへ
+            this.downloadCardImage();
+            this.showToast('⚠️ コピー非対応のため代わりにダウンロードしました', 'success');
+        }
         },
       },
     });
