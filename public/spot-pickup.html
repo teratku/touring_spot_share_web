@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スポットピックアップ（ローカル限定）</title>
+
+  <!-- Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <!-- Vue.js 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <style>
+    :root {
+      --primary: #00A8C6;
+      --secondary: #228B22;
+      --danger: #E63946;
+      --bg: #F9F9F9;
+      --card-bg: #ffffff;
+      --border: #E0E0E0;
+      --text: #333333;
+      --text-sub: #666666;
+      --radius: 16px;
+      --radius-sm: 8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --card-bg: #2a2a2a;
+        --border: #444;
+        --text: #f0f0f0;
+        --text-sub: #aaa;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ローカル限定バナー */
+    .local-banner {
+      background: linear-gradient(135deg, var(--secondary), #1a6b1a);
+      color: white;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .container { grid-template-columns: 1fr; }
+    }
+
+    /* カード共通 */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 検索・フィルター */
+    .filter-area {
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-area input,
+    .filter-area select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .filter-area input:focus,
+    .filter-area select:focus {
+      border-color: var(--primary);
+    }
+
+    /* スポットリスト */
+    .spot-list {
+      max-height: 460px;
+      overflow-y: auto;
+    }
+
+    .spot-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .spot-item:last-child { border-bottom: none; }
+
+    .spot-item:hover { background: rgba(0, 168, 198, 0.06); }
+
+    .spot-item.selected {
+      background: rgba(0, 168, 198, 0.12);
+      border-left: 3px solid var(--primary);
+    }
+
+    .spot-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .spot-thumb-placeholder {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .spot-item-info { flex: 1; min-width: 0; }
+
+    .spot-item-name {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .spot-item-pref {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    /* 右カラム */
+    .right-col { display: flex; flex-direction: column; gap: 16px; }
+
+    /* 選択済みスポットプレビュー */
+    .spot-preview-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .spot-preview-img-placeholder {
+      width: 100%;
+      height: 160px;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .spot-preview-body { padding: 14px 16px; }
+
+    .spot-preview-name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .spot-preview-pref {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    .spot-preview-id {
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 6px;
+      font-family: monospace;
+      word-break: break-all;
+    }
+
+    /* 魅力テキスト入力 */
+    .charm-area { padding: 14px 16px; }
+
+    .charm-area label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .charm-area textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      background: var(--bg);
+      color: var(--text);
+      resize: vertical;
+      min-height: 70px;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    .charm-area textarea:focus { border-color: var(--primary); }
+
+    .char-count {
+      font-size: 11px;
+      color: var(--text-sub);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .char-count.warn { color: var(--danger); }
+
+    /* 投稿文プレビュー */
+    .post-preview {
+      padding: 14px 16px;
+    }
+
+    .post-preview label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .post-text-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-all;
+      min-height: 120px;
+      color: var(--text);
+    }
+
+    .post-text-box.empty {
+      color: var(--text-sub);
+      font-style: italic;
+    }
+
+    /* ボタン */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 11px 20px;
+      border-radius: 12px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .btn:active { transform: scale(0.97); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      width: 100%;
+    }
+
+    .btn-success {
+      background: var(--secondary);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-area {
+      padding: 0 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* トースト */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
+      background: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 9999;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .toast.success { background: var(--secondary); }
+    .toast.hidden { opacity: 0; }
+
+    /* ローディング */
+    .loading-wrap {
+      padding: 40px;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 14px;
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 12px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty-list {
+      padding: 32px;
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 14px;
+    }
+
+    .count-badge {
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-left: 6px;
+    }
+
+    /* アクセス拒否 */
+    .access-denied {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 32px;
+    }
+
+    .access-denied-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 40px;
+      max-width: 400px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+
+    .access-denied-card h2 {
+      font-size: 20px;
+      color: var(--danger);
+      margin-bottom: 12px;
+    }
+
+    .access-denied-card p {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <!-- ローカル以外はアクセス拒否 -->
+  <div v-if="!isLocalhost" class="access-denied">
+    <div class="access-denied-card">
+      <div style="font-size:48px;margin-bottom:16px">🔒</div>
+      <h2>アクセス制限</h2>
+      <p>このページはローカル環境専用です。<br><code>localhost</code> または <code>127.0.0.1</code> からのみ利用できます。</p>
+    </div>
+  </div>
+
+  <template v-else>
+    <div class="local-banner">🔧 ローカル限定ツール – 本番環境では動作しません</div>
+
+    <div class="header">
+      <h1>🗾 スポットピックアップ</h1>
+      <p>「今週のおすすめスポット」SNS投稿文を生成するツール</p>
+    </div>
+
+    <div class="container">
+
+      <!-- 左：スポット一覧 -->
+      <div class="card">
+        <div class="card-header">
+          📍 スポット一覧
+          <span class="count-badge">{{ filteredSpots.length }}</span>
+        </div>
+
+        <!-- 検索・フィルター -->
+        <div class="filter-area">
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="スポット名・地域で検索..."
+          />
+          <select v-model="selectedPref">
+            <option value="">すべての都道府県</option>
+            <option v-for="pref in prefectures" :key="pref" :value="pref">{{ pref }}</option>
+          </select>
+        </div>
+
+        <!-- ローディング -->
+        <div v-if="isLoading" class="loading-wrap">
+          <div class="spinner"></div>
+          スポットを読み込み中...
+        </div>
+
+        <!-- エラー -->
+        <div v-else-if="error" class="empty-list" style="color:var(--danger)">
+          ⚠️ {{ error }}
+        </div>
+
+        <!-- スポットリスト -->
+        <div v-else class="spot-list">
+          <div v-if="filteredSpots.length === 0" class="empty-list">
+            該当するスポットがありません
+          </div>
+          <div
+            v-for="spot in filteredSpots"
+            :key="spot.id"
+            class="spot-item"
+            :class="{ selected: selectedSpot && selectedSpot.id === spot.id }"
+            @click="selectSpot(spot)"
+          >
+            <img
+              v-if="spot.thumbUrl"
+              :src="spot.thumbUrl"
+              class="spot-thumb"
+              loading="lazy"
+              @error="e => e.target.style.display='none'"
+            />
+            <div v-else class="spot-thumb-placeholder">🏔️</div>
+
+            <div class="spot-item-info">
+              <div class="spot-item-name">{{ spot.displayName }}</div>
+              <div class="spot-item-pref">{{ spot.administrative || spot.locality || '—' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右：投稿文作成 -->
+      <div class="right-col">
+
+        <!-- 選択スポットプレビュー -->
+        <div class="card">
+          <div class="card-header">✅ 選択中のスポット</div>
+
+          <template v-if="selectedSpot">
+            <img
+              v-if="selectedSpot.thumbUrl"
+              :src="selectedSpot.thumbUrl"
+              class="spot-preview-img"
+              @error="e => e.target.style.display='none'"
+            />
+            <div v-else class="spot-preview-img-placeholder">🏔️</div>
+
+            <div class="spot-preview-body">
+              <div class="spot-preview-name">{{ selectedSpot.displayName }}</div>
+              <div class="spot-preview-pref">{{ selectedSpot.administrative || selectedSpot.locality || '' }}</div>
+              <div class="spot-preview-id">ID: {{ selectedSpot.id }}</div>
+            </div>
+          </template>
+
+          <div v-else class="empty-list">
+            ← スポットを選択してください
+          </div>
+        </div>
+
+        <!-- 魅力テキスト入力 -->
+        <div class="card">
+          <div class="card-header">✍️ 魅力を1文で入力</div>
+          <div class="charm-area">
+            <label>スポットの魅力（例：晴れた日は雲海が広がる絶景ポイントです）</label>
+            <textarea
+              v-model="charmText"
+              placeholder="例：晴れた日は雲海が広がる絶景ポイントです"
+              maxlength="60"
+            ></textarea>
+            <div class="char-count" :class="{ warn: charmText.length >= 55 }">
+              {{ charmText.length }} / 60文字
+            </div>
+          </div>
+        </div>
+
+        <!-- 投稿文プレビュー -->
+        <div class="card">
+          <div class="card-header">📋 投稿文プレビュー</div>
+          <div class="post-preview">
+            <div
+              class="post-text-box"
+              :class="{ empty: !selectedSpot }"
+            >{{ postText }}</div>
+          </div>
+          <div class="btn-area">
+            <button
+              class="btn btn-primary"
+              :disabled="!selectedSpot"
+              @click="copyPostText"
+            >
+              📋 投稿文をコピー
+            </button>
+            <button
+              class="btn btn-secondary"
+              :disabled="!selectedSpot"
+              @click="resetSelection"
+            >
+              🔄 リセット
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div
+      class="toast"
+      :class="[toast.type, { hidden: !toast.visible }]"
+    >{{ toast.message }}</div>
+  </template>
+</div>
+
+<script>
+  // ========================================
+  // Firebase 設定
+  // 他のページからfirebaseConfigをコピーしてください
+  // ========================================
+  const firebaseConfig = {
+    // ← 既存ページ（index.html等）からコピー
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
+  let db;
+
+  function waitForFirebase() {
+    return new Promise((resolve, reject) => {
+      if (typeof firebase !== 'undefined') { resolve(); return; }
+      let attempts = 0;
+      const iv = setInterval(() => {
+        attempts++;
+        if (typeof firebase !== 'undefined') { clearInterval(iv); resolve(); }
+        else if (attempts >= 50) { clearInterval(iv); reject(new Error('Firebase読み込み失敗')); }
+      }, 100);
+    });
+  }
+
+  const { createApp } = Vue;
+
+  document.addEventListener('DOMContentLoaded', async function () {
+    await waitForFirebase();
+    db = firebase.firestore();
+
+    const app = createApp({
+      data() {
+        return {
+          isLocalhost: ['localhost', '127.0.0.1'].includes(window.location.hostname),
+          isLoading: true,
+          error: null,
+          spots: [],
+          selectedSpot: null,
+          searchQuery: '',
+          selectedPref: '',
+          charmText: '',
+          toast: { visible: false, message: '', type: 'success' },
+          toastTimer: null,
+        };
+      },
+
+      computed: {
+        // 都道府県一覧（重複排除・ソート）
+        prefectures() {
+          const set = new Set();
+          this.spots.forEach(s => {
+            if (s.administrative) set.add(s.administrative);
+          });
+          return [...set].sort();
+        },
+
+        // 検索・フィルター後のスポット
+        filteredSpots() {
+          const q = this.searchQuery.trim().toLowerCase();
+          return this.spots.filter(s => {
+            const matchPref = !this.selectedPref || s.administrative === this.selectedPref;
+            const matchQ = !q || s.displayName.toLowerCase().includes(q)
+              || (s.administrative || '').toLowerCase().includes(q)
+              || (s.locality || '').toLowerCase().includes(q);
+            return matchPref && matchQ;
+          });
+        },
+
+        // SNS投稿文
+        postText() {
+          if (!this.selectedSpot) {
+            return 'スポットを選択すると\n投稿文がここに表示されます';
+          }
+          const name   = this.selectedSpot.displayName;
+          const pref   = this.selectedSpot.administrative || this.selectedSpot.locality || '';
+          const charm  = this.charmText.trim() || '魅力テキストを入力してください';
+          const url    = `https://biketeilen.web.app/detail.html?id=${this.selectedSpot.id}`;
+
+          return [
+            `🗾 今週のおすすめスポット`,
+            `📍${name}（${pref}）`,
+            ``,
+            charm,
+            ``,
+            `詳細はアプリで→ ${url}`,
+            ``,
+            `#ツーリング #ソロツーリング #バイク #ツーリングスポットシェア`,
+          ].join('\n');
+        },
+      },
+
+      async mounted() {
+        if (!this.isLocalhost) return;
+        await this.loadSpots();
+      },
+
+      methods: {
+        async loadSpots() {
+          this.isLoading = true;
+          this.error = null;
+          try {
+            const snapshot = await db.collection('imagedownload')
+              .orderBy('createTimeTimeStamp', 'desc')
+              .get();
+
+            this.spots = [];
+            snapshot.forEach(doc => {
+              const d = doc.data();
+              // スポット名：location_name > locality > administrative
+              const displayName = d.location_name || d.locality || d.administrative || '不明なスポット';
+              // サムネ
+              const thumbUrl = (d.locationImageURLs && d.locationImageURLs.length > 0)
+                ? d.locationImageURLs[0]
+                : (d.iconImageURL || null);
+
+              this.spots.push({
+                id: doc.id,
+                displayName,
+                locality: d.locality || '',
+                administrative: d.administrative || '',
+                thumbUrl,
+              });
+            });
+          } catch (e) {
+            console.error('スポット読み込みエラー:', e);
+            this.error = e.message;
+          } finally {
+            this.isLoading = false;
+          }
+        },
+
+        selectSpot(spot) {
+          this.selectedSpot = spot;
+          // スポット変更時は魅力テキストをリセット
+          this.charmText = '';
+        },
+
+        async copyPostText() {
+          try {
+            await navigator.clipboard.writeText(this.postText);
+            this.showToast('✅ コピーしました！', 'success');
+          } catch (e) {
+            // clipboard APIが使えない場合のフォールバック
+            const ta = document.createElement('textarea');
+            ta.value = this.postText;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            this.showToast('✅ コピーしました！', 'success');
+          }
+        },
+
+        resetSelection() {
+          this.selectedSpot = null;
+          this.charmText = '';
+        },
+
+        showToast(message, type = 'success') {
+          clearTimeout(this.toastTimer);
+          this.toast = { visible: true, message, type };
+          this.toastTimer = setTimeout(() => {
+            this.toast.visible = false;
+          }, 2500);
+        },
+      },
+    });
+
+    app.mount('#app');
+  });
+</script>
+</body>
+</html>
