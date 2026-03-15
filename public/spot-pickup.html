@@ -9,11 +9,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
-  <!-- Firebase SDKs -->
-    <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
-    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  
 
   <!-- Vue.js 3 CDN -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -507,7 +503,7 @@
             該当するスポットがありません
           </div>
           <div
-            v-for="spot in filteredSpots"
+            v-for="spot in paginatedSpots"
             :key="spot.id"
             class="spot-item"
             :class="{ selected: selectedSpot && selectedSpot.id === spot.id }"
@@ -527,6 +523,34 @@
               <div class="spot-item-pref">{{ spot.administrative || spot.locality || '—' }}</div>
             </div>
           </div>
+        </div>
+        <!-- ページネーション -->
+        <div style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        border-top: 1px solid var(--border);
+        gap: 8px;
+        ">
+        <button
+            class="btn btn-secondary"
+            style="width:auto; padding:8px 16px; font-size:13px;"
+            :disabled="!hasPrev"
+            @click="prevPage"
+        >◀ 前の5件</button>
+
+        <span style="font-size:13px; color:var(--text-sub); white-space:nowrap;">
+            {{ currentPage + 1 }} / {{ totalPages }}ページ
+            <span style="font-size:11px;">（全{{ filteredSpots.length }}件）</span>
+        </span>
+
+        <button
+            class="btn btn-primary"
+            style="width:auto; padding:8px 16px; font-size:13px;"
+            :disabled="!hasNext"
+            @click="nextPage"
+        >次の5件 ▶</button>
         </div>
       </div>
 
@@ -664,6 +688,8 @@
           charmText: '',
           toast: { visible: false, message: '', type: 'success' },
           toastTimer: null,
+          currentPage: 0,
+          PAGE_SIZE: 5,
         };
       },
 
@@ -710,12 +736,42 @@
             `#ツーリング #ソロツーリング #バイク #ツーリングスポットシェア`,
           ].join('\n');
         },
+
+        totalPages() {
+          return Math.ceil(this.filteredSpots.length / this.PAGE_SIZE);
+        },
+
+        paginatedSpots() {
+            const start = this.currentPage * this.PAGE_SIZE;
+            return this.filteredSpots.slice(start, start + this.PAGE_SIZE);
+        },
+
+        hasPrev() {
+            return this.currentPage > 0;
+        },
+
+        hasNext() {
+            return this.currentPage < this.totalPages - 1;
+        },
       },
+
+      watch: {
+        // 検索・フィルター変更時はページを先頭に戻す
+        searchQuery() {
+            this.currentPage = 0;
+            this.saveState();
+        },
+        selectedPref() {
+            this.currentPage = 0;
+            this.saveState();
+        },
+    },
 
       async mounted() {
         if (!this.isLocalhost) return;
         await this.loadSpots();
       },
+
 
       methods: {
         async loadSpots() {
@@ -744,6 +800,7 @@
                 thumbUrl,
               });
             });
+            this.restoreState();
           } catch (e) {
             console.error('スポット読み込みエラー:', e);
             this.error = e.message;
@@ -753,9 +810,9 @@
         },
 
         selectSpot(spot) {
-          this.selectedSpot = spot;
-          // スポット変更時は魅力テキストをリセット
-          this.charmText = '';
+        this.selectedSpot = spot;
+        this.charmText = '';
+        this.saveState();
         },
 
         async copyPostText() {
@@ -785,6 +842,39 @@
           this.toastTimer = setTimeout(() => {
             this.toast.visible = false;
           }, 2500);
+        },
+        prevPage() {
+        if (this.hasPrev) {
+            this.currentPage--;
+            this.saveState();
+            this.selectedSpot = null;
+        }
+        },
+
+        nextPage() {
+        if (this.hasNext) {
+            this.currentPage++;
+            this.saveState();
+            this.selectedSpot = null;
+        }
+        },
+
+        saveState() {
+        localStorage.setItem('spotPickup_page', this.currentPage);
+        localStorage.setItem('spotPickup_pref', this.selectedPref);
+        localStorage.setItem('spotPickup_query', this.searchQuery);
+        },
+
+        restoreState() {
+        const savedPage  = parseInt(localStorage.getItem('spotPickup_page') || '0', 10);
+        const savedPref  = localStorage.getItem('spotPickup_pref') || '';
+        const savedQuery = localStorage.getItem('spotPickup_query') || '';
+
+        this.selectedPref  = savedPref;
+        this.searchQuery   = savedQuery;
+        // ページ数が範囲内かチェックしてから復元
+        const maxPage = Math.max(0, Math.ceil(this.filteredSpots.length / this.PAGE_SIZE) - 1);
+        this.currentPage = Math.min(savedPage, maxPage);
         },
       },
     });
