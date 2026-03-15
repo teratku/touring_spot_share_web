@@ -1285,6 +1285,102 @@
       }
       .long-press-btn.cancel-btn:hover { background: #e0e0e0; }
 
+      /* ===== App Store バッジバナー ===== */
+      .app-store-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: var(--card-background, #fff);
+        border-top: 1px solid rgba(0,168,198,0.2);
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+        padding: 12px 16px;
+        animation: slideUpBanner 0.3s ease-out;
+      }
+
+      @keyframes slideUpBanner {
+        from { transform: translateY(100%); opacity: 0; }
+        to   { transform: translateY(0);    opacity: 1; }
+      }
+
+      .app-store-banner-inner {
+        max-width: 480px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .app-store-banner-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .app-store-icon {
+        font-size: 28px;
+        flex-shrink: 0;
+      }
+
+      .app-store-banner-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-primary, #1a1a1a);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .app-store-banner-sub {
+        font-size: 11px;
+        color: var(--text-secondary, #666);
+      }
+
+      .app-store-banner-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+
+      .app-store-badge-link {
+        display: block;
+        line-height: 0;
+      }
+
+      .app-store-badge {
+        height: 36px;
+        width: auto;
+      }
+
+      .app-store-banner-close {
+        background: none;
+        border: none;
+        color: var(--text-secondary, #999);
+        font-size: 16px;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 50%;
+        line-height: 1;
+        transition: background 0.2s;
+      }
+
+      .app-store-banner-close:hover {
+        background: rgba(0,0,0,0.08);
+      }
+
+      /* ダークモード対応 */
+      @media (prefers-color-scheme: dark) {
+        .app-store-banner {
+          background: #1e1e1e;
+          border-top-color: rgba(0,168,198,0.3);
+          box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+        }
+      }
 
 
     </style>
@@ -2060,6 +2156,7 @@
                 longPressLatLng: null,
                 showPlanPanel: false,
                 planSpots: JSON.parse(localStorage.getItem('tourPlanSpots') || '[]'),
+                appBannerDismissed: localStorage.getItem('appBannerDismissed') === 'true',
             };
             },
             components: {
@@ -3011,6 +3108,10 @@
                 localStorage.setItem('tourPlanSpots', JSON.stringify(this.planSpots));
                 this.showToast(`「${removed.name}」をプランから削除しました`, 'success');
               },
+              dismissAppBanner() {
+                this.appBannerDismissed = true;
+                localStorage.setItem('appBannerDismissed', 'true');
+              },
             }
           });
 
@@ -3031,5 +3132,25 @@
         }
       });
     </script>
+    <!-- App Store バッジ -->
+    <div class="app-store-banner" v-if="!appBannerDismissed">
+      <div class="app-store-banner-inner">
+        <div class="app-store-banner-text">
+          <span class="app-store-icon">🏍️</span>
+          <div>
+            <div class="app-store-banner-title">ツーリングスポットシェア</div>
+            <div class="app-store-banner-sub">アプリでもっと便利に</div>
+          </div>
+        </div>
+        <div class="app-store-banner-actions">
+          <a href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener noreferrer" class="app-store-badge-link" @click="dismissAppBanner">
+            <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg"
+                alt="App Store からダウンロード"
+                class="app-store-badge">
+          </a>
+          <button class="app-store-banner-close" @click="dismissAppBanner" aria-label="閉じる">✕</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
