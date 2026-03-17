@@ -1565,6 +1565,7 @@
       <div 
         class="cluster-panel" 
         :class="{ active: showClusterPanel }"
+        :style="{ bottom: bannerHeight + 'px' }"
       >
         <div class="cluster-panel-header">
           <h2 class="cluster-panel-title">
@@ -2161,6 +2162,7 @@
                 showPlanPanel: false,
                 planSpots: JSON.parse(localStorage.getItem('tourPlanSpots') || '[]'),
                 appBannerDismissed: localStorage.getItem('appBannerDismissed') === 'true',
+                bannerHeight: 0,
             };
             },
             components: {
@@ -2185,6 +2187,19 @@
                 
                 window.addEventListener('scroll', this.handleScroll);
                 document.addEventListener('keydown', this.handleKeydown);
+                // app-store-bannerの高さを取得してクラスタパネルのbottom位置に反映
+                this.$nextTick(() => {
+                  const banner = document.querySelector('.app-store-banner');
+                  if (banner) {
+                    this.bannerHeight = banner.offsetHeight;
+
+                    // バナーのリサイズを監視（表示/非表示が切り替わる場合に対応）
+                    const resizeObserver = new ResizeObserver(() => {
+                      this.bannerHeight = banner.offsetHeight;
+                    });
+                    resizeObserver.observe(banner);
+                  }
+                });
             } catch (e) {
                 console.error('初期化エラー:', e);
                 this.error = e.message;
