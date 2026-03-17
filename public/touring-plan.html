@@ -554,7 +554,7 @@
                 </div>
                 <div class="spot-actions">
                   <span class="drag-handle" title="ドラッグして並び替え">⠿</span>
-                  <button class="delete-spot-btn" @click="confirmDeleteSpot(plan, index)" title="スポットを削除">🗑</button>
+                  <button class="delete-spot-btn" @click.stop="confirmDeleteSpot(plan, index)" title="スポットを削除">🗑</button>
                 </div>
                 <span v-if="spot.spotId" class="spot-item-link-icon">🔗</span>
                 <span v-else class="spot-item-no-link">📌</span>
