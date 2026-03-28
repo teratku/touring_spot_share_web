@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>都道府県制覇マップ - touring Spot Share</title>
+
+<!-- Firebase SDKs -->
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+<!-- Prefecture Data -->
+<script src="./prefecture-data.js"></script>
+
+<style>
+/* ===== design_rule.md 準拠カラー ===== */
+:root {
+    --primary: #00A8C6;
+    --secondary: #228B22;
+    --accent: #F5DEB3;
+    --bg: #F9F9F9;
+    --border: #E0E0E0;
+    --danger: #E63946;
+    --text: #333333;
+    --disabled: #C7C7CC;
+    --card-bg: #FFFFFF;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* ===== Header ===== */
+.header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.header-left a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+}
+.header-left h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.user-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+}
+.user-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+.btn-logout {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text);
+}
+
+/* ===== Login Screen ===== */
+.login-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    gap: 24px;
+}
+.login-screen h2 {
+    font-size: 24px;
+    color: var(--text);
+}
+.login-screen p {
+    color: #666;
+    font-size: 14px;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 320px;
+    max-width: 90vw;
+}
+.login-form input {
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+.login-form input:focus {
+    border-color: var(--primary);
+}
+.btn-login {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.btn-login:hover { opacity: 0.85; }
+.btn-login:disabled { background: var(--disabled); cursor: not-allowed; }
+.login-error {
+    color: var(--danger);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ===== Stats Bar ===== */
+.stats-bar {
+    background: var(--card-bg);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+}
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+}
+.stat-label {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+.stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+}
+.progress-wrap {
+    flex: 1;
+    min-width: 200px;
+}
+.progress-label {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+.progress-bar {
+    height: 10px;
+    background: var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 5px;
+    transition: width 0.8s ease;
+}
+
+/* ===== Main Layout ===== */
+.main {
+    display: flex;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    flex-wrap: wrap;
+}
+
+/* ===== Grid Map ===== */
+.map-section {
+    flex: 1;
+    min-width: 340px;
+}
+.map-section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+.grid-map {
+    display: grid;
+    gap: 3px;
+    justify-content: center;
+}
+.pref-tile {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1.5px solid transparent;
+    position: relative;
+    user-select: none;
+}
+.pref-tile .pref-name {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    pointer-events: none;
+}
+.pref-tile .pref-spots {
+    font-size: 8px;
+    opacity: 0.8;
+    pointer-events: none;
+}
+.pref-tile.visited {
+    color: white;
+    border-color: rgba(255,255,255,0.3);
+    box-shadow: 0 2px 8px rgba(0, 168, 198, 0.3);
+}
+.pref-tile.visited:hover {
+    transform: scale(1.12);
+    box-shadow: 0 4px 16px rgba(0, 168, 198, 0.4);
+}
+.pref-tile.unvisited {
+    background: var(--border);
+    color: #999;
+    border-color: #d0d0d0;
+}
+.pref-tile.unvisited:hover {
+    background: #ccc;
+    transform: scale(1.05);
+}
+.pref-tile.selected {
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.3) !important;
+}
+
+/* ===== Region Legend ===== */
+.region-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #666;
+}
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+}
+
+/* ===== Detail Panel ===== */
+.detail-section {
+    width: 300px;
+    padding-left: 24px;
+}
+.detail-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    box-shadow: 0 2px 8px var(--shadow);
+    position: sticky;
+    top: 24px;
+}
+.detail-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.detail-region {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 16px;
+}
+.detail-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.detail-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.detail-stat-row:last-child { border-bottom: none; }
+.detail-stat-label {
+    font-size: 13px;
+    color: #666;
+}
+.detail-stat-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+.detail-empty {
+    text-align: center;
+    padding: 40px 0;
+    color: #aaa;
+    font-size: 14px;
+}
+.detail-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.badge-visited {
+    background: rgba(0, 168, 198, 0.15);
+    color: var(--primary);
+}
+.badge-unvisited {
+    background: rgba(0, 0, 0, 0.06);
+    color: #999;
+}
+
+/* ===== Recent Visits ===== */
+.recent-section {
+    margin-top: 24px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 24px 24px;
+}
+.recent-section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.recent-list {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+.recent-card {
+    flex-shrink: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    min-width: 160px;
+    box-shadow: 0 1px 4px var(--shadow);
+}
+.recent-card .rc-pref {
+    font-size: 14px;
+    font-weight: 600;
+}
+.recent-card .rc-date {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+}
+.recent-card .rc-count {
+    font-size: 11px;
+    color: var(--secondary);
+    margin-top: 2px;
+}
+
+/* ===== Loading ===== */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+    gap: 16px;
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== Rebuild Button ===== */
+.btn-rebuild {
+    background: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.btn-rebuild:hover { opacity: 0.85; }
+.btn-rebuild:disabled { background: var(--disabled); cursor: not-allowed; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+        padding: 16px;
+    }
+    .detail-section {
+        width: 100%;
+        padding-left: 0;
+        margin-top: 16px;
+    }
+    .detail-card {
+        position: static;
+    }
+    .stats-bar {
+        padding: 16px;
+        gap: 16px;
+    }
+    .stat-number {
+        font-size: 24px;
+    }
+    .pref-tile {
+        width: 44px;
+        height: 44px;
+    }
+    .pref-tile .pref-name {
+        font-size: 9px;
+    }
+    .header {
+        padding: 12px 16px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Login Screen ===== -->
+<div id="loginScreen" class="login-screen" style="display:none;">
+    <h2>都道府県制覇マップ</h2>
+    <p>ログインして制覇状況を確認しましょう</p>
+    <div class="login-form">
+        <input type="email" id="loginEmail" placeholder="メールアドレス">
+        <input type="password" id="loginPassword" placeholder="パスワード">
+        <button class="btn-login" id="btnLogin" onclick="handleLogin()">ログイン</button>
+        <div class="login-error" id="loginError"></div>
+        <a href="../index.html" style="text-align:center;color:var(--primary);font-size:13px;">トップへ戻る</a>
+    </div>
+</div>
+
+<!-- ===== Main App ===== -->
+<div id="appScreen" style="display:none;">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <a href="../index.html">← トップ</a>
+            <h1>都道府県制覇マップ</h1>
+        </div>
+        <div class="header-right">
+            <img id="userIcon" class="user-icon" src="" alt="" style="display:none;">
+            <span id="userName" class="user-name"></span>
+            <button class="btn-logout" onclick="handleLogout()">ログアウト</button>
+        </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-number" id="statVisited">0</span>
+            <span class="stat-label">訪問済み</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number" id="statRemaining">47</span>
+            <span class="stat-label">残り</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number" id="statSpots">0</span>
+            <span class="stat-label">スポット</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="progress-wrap">
+            <div class="progress-label">
+                <span>制覇率</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width:0%"></div>
+            </div>
+        </div>
+        <button class="btn-rebuild" id="btnRebuild" onclick="rebuildStats()" title="既存スポットから制覇データを再集計します">再集計</button>
+    </div>
+
+    <!-- Loading -->
+    <div id="loadingArea" class="loading">
+        <div class="spinner"></div>
+        <span style="color:#888;font-size:14px;">データを読み込み中...</span>
+    </div>
+
+    <!-- Map + Detail -->
+    <div class="main" id="mainContent" style="display:none;">
+        <div class="map-section">
+            <h2>日本地図</h2>
+            <div class="grid-map" id="gridMap"></div>
+            <div class="region-legend" id="regionLegend"></div>
+        </div>
+        <div class="detail-section">
+            <div class="detail-card" id="detailCard">
+                <div class="detail-empty">都道府県をタップして<br>詳細を表示</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Visits -->
+    <div class="recent-section" id="recentSection" style="display:none;">
+        <h2>最近訪問した都道府県</h2>
+        <div class="recent-list" id="recentList"></div>
+    </div>
+</div>
+
+<script>
+/* =====================================================
+ *  Firebase 初期化
+ *  ⚠️ 以下のfirebaseConfigを自分のプロジェクト設定に変更してください
+ *  Firebase Console → プロジェクト設定 → ウェブアプリ → SDKの設定と構成
+ * ===================================================== */
+
+let auth, db;
+
+function waitForFirebase() {
+    return new Promise((resolve) => {
+        const check = () => {
+            if (typeof firebase !== "undefined" && firebase.apps && firebase.apps.length > 0) {
+                resolve();
+            } else {
+                setTimeout(check, 100);
+            }
+        };
+        check();
+    });
+}
+
+/* ===== Firestore コレクション名（iOS側 firebaseDBName に合わせる） ===== */
+const COLLECTION = {
+    locations:    "imagedownload",
+    userInfo:     "userInfo",
+    userStats:    "user_stats",
+    sharedRoutes: "shared_routes"
+};
+
+/* ===== State ===== */
+let currentUser        = null;
+let userStatsData      = null;
+let selectedPrefecture = null;
+
+/* =====================================================
+ *  Auth（DOMContentLoaded で Firebase 確定後に実行）
+ * ===================================================== */
+document.addEventListener("DOMContentLoaded", async () => {
+    await waitForFirebase();
+    auth = firebase.auth();
+    db   = firebase.firestore();
+
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("appScreen").style.display  = "block";
+            await loadUserProfile(user.uid);
+            await loadConquestData(user.uid);
+        } else {
+            currentUser = null;
+            document.getElementById("loginScreen").style.display = "flex";
+            document.getElementById("appScreen").style.display  = "none";
+        }
+    });
+});
+
+async function handleLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPassword").value;
+    const errEl = document.getElementById("loginError");
+    const btn = document.getElementById("btnLogin");
+    errEl.textContent = "";
+    btn.disabled = true;
+    try {
+        await auth.signInWithEmailAndPassword(email, pass);
+    } catch (e) {
+        errEl.textContent = "ログインに失敗しました: " + e.message;
+    }
+    btn.disabled = false;
+}
+
+function handleLogout() {
+    auth.signOut();
+}
+
+/* =====================================================
+ *  User Profile
+ * ===================================================== */
+async function loadUserProfile(uid) {
+    try {
+        const doc = await db.collection(COLLECTION.userInfo).doc(uid).get();
+        if (doc.exists) {
+            const data = doc.data();
+            document.getElementById("userName").textContent = data.userName || "";
+            if (data.userIcon) {
+                const iconEl = document.getElementById("userIcon");
+                iconEl.src = data.userIcon;
+                iconEl.style.display = "block";
+            }
+        }
+    } catch (e) {
+        console.warn("ユーザー情報取得エラー:", e);
+    }
+}
+
+/* =====================================================
+ *  Conquest Data
+ * ===================================================== */
+async function loadConquestData(uid) {
+    showLoading(true);
+    try {
+        const statsDoc = await db.collection(COLLECTION.userStats).doc(uid).get();
+        if (statsDoc.exists) {
+            userStatsData = statsDoc.data();
+        } else {
+            userStatsData = await buildStatsFromSpots(uid);
+        }
+        renderAll();
+    } catch (e) {
+        console.error("データ読み込みエラー:", e);
+    }
+    showLoading(false);
+}
+
+/**
+ * user_stats が存在しない場合、既存スポットから自動構築
+ */
+async function buildStatsFromSpots(uid) {
+    const snapshot = await db.collection(COLLECTION.locations)
+        .where("userID", "==", uid)
+        .get();
+
+    const prefectures = new Set();
+    const details = {};
+    let totalSpots = 0;
+
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        totalSpots++;
+        const pref = data.administrative;
+        if (!pref) return;
+        const normalizedPref = normalizePrefecture(pref);
+        if (!normalizedPref) return;
+
+        prefectures.add(normalizedPref);
+        const ts = data.createTimeTimeStamp;
+
+        if (!details[normalizedPref]) {
+            details[normalizedPref] = {
+                firstVisitDate: ts,
+                spotCount: 0,
+                routeCount: 0,
+                lastVisitDate: ts
+            };
+        }
+        details[normalizedPref].spotCount++;
+        if (ts && details[normalizedPref].lastVisitDate &&
+            ts.seconds > details[normalizedPref].lastVisitDate.seconds) {
+            details[normalizedPref].lastVisitDate = ts;
+        }
+        if (ts && details[normalizedPref].firstVisitDate &&
+            ts.seconds < details[normalizedPref].firstVisitDate.seconds) {
+            details[normalizedPref].firstVisitDate = ts;
+        }
+    });
+
+    const statsData = {
+        visitedPrefectures: Array.from(prefectures),
+        visitedPrefectureDetails: details,
+        totalPrefectures: prefectures.size,
+        totalSpots: totalSpots,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    try {
+        await db.collection(COLLECTION.userStats).doc(uid).set(statsData, { merge: true });
+        console.log("user_stats 自動構築完了:", prefectures.size, "都道府県");
+    } catch (e) {
+        console.warn("user_stats 保存エラー:", e);
+    }
+
+    return statsData;
+}
+
+/**
+ * 再集計ボタン: 既存スポットから再構築
+ */
+async function rebuildStats() {
+    if (!currentUser) return;
+    const btn = document.getElementById("btnRebuild");
+    btn.disabled = true;
+    btn.textContent = "集計中...";
+    try {
+        userStatsData = await buildStatsFromSpots(currentUser.uid);
+        renderAll();
+    } catch (e) {
+        console.error("再集計エラー:", e);
+    }
+    btn.disabled = false;
+    btn.textContent = "再集計";
+}
+
+/**
+ * 都道府県名を正規化（「東京」→「東京都」等）
+ */
+function normalizePrefecture(name) {
+    if (!name) return null;
+    const trimmed = name.trim();
+    const match = PREFECTURES.find(p =>
+        p.name === trimmed ||
+        trimmed.startsWith(p.name.replace(/[都道府県]$/, ""))
+    );
+    return match ? match.name : null;
+}
+
+/* =====================================================
+ *  Rendering
+ * ===================================================== */
+function renderAll() {
+    const visited = userStatsData?.visitedPrefectures || [];
+    const details = userStatsData?.visitedPrefectureDetails || {};
+
+    renderStatsBar(visited);
+    renderGridMap(visited, details);
+    renderRegionLegend();
+    renderRecentVisits(details);
+
+    document.getElementById("mainContent").style.display = "flex";
+}
+
+function renderStatsBar(visited) {
+    const count = visited.length;
+    const remaining = 47 - count;
+    const percent = Math.round((count / 47) * 100);
+    const spots = userStatsData?.totalSpots || 0;
+
+    document.getElementById("statVisited").textContent = count;
+    document.getElementById("statRemaining").textContent = remaining;
+    document.getElementById("statSpots").textContent = spots;
+    document.getElementById("progressPercent").textContent = percent + "%";
+    document.getElementById("progressFill").style.width = percent + "%";
+}
+
+function renderGridMap(visited, details) {
+    const grid = document.getElementById("gridMap");
+    grid.innerHTML = "";
+
+    const minRow = Math.min(...PREFECTURES.map(p => p.gridRow));
+    const maxRow = Math.max(...PREFECTURES.map(p => p.gridRow));
+    const minCol = Math.min(...PREFECTURES.map(p => p.gridCol));
+    const maxCol = Math.max(...PREFECTURES.map(p => p.gridCol));
+
+    const cols = maxCol - minCol + 1;
+    const rows = maxRow - minRow + 1;
+
+    grid.style.gridTemplateColumns = `repeat(${cols}, 52px)`;
+    grid.style.gridTemplateRows = `repeat(${rows}, 52px)`;
+
+    PREFECTURES.forEach(pref => {
+        const tile = document.createElement("div");
+        tile.className = "pref-tile";
+
+        const isVisited = visited.includes(pref.name);
+        const regionInfo = REGIONS[pref.region];
+
+        if (isVisited) {
+            tile.classList.add("visited");
+            tile.style.background = regionInfo.color;
+        } else {
+            tile.classList.add("unvisited");
+        }
+
+        const row = pref.gridRow - minRow + 1;
+        const col = pref.gridCol - minCol + 1;
+        tile.style.gridRow = row;
+        tile.style.gridColumn = col;
+
+        const shortName = pref.name.replace(/[都道府県]$/, "");
+        tile.innerHTML = `
+            <span class="pref-name">${shortName}</span>
+            ${isVisited && details[pref.name] ? `<span class="pref-spots">${details[pref.name].spotCount || 0}</span>` : ""}
+        `;
+
+        tile.addEventListener("click", () => selectPrefecture(pref.name));
+        grid.appendChild(tile);
+    });
+}
+
+function renderRegionLegend() {
+    const legend = document.getElementById("regionLegend");
+    legend.innerHTML = "";
+    Object.entries(REGIONS).forEach(([key, info]) => {
+        const item = document.createElement("div");
+        item.className = "legend-item";
+        item.innerHTML = `<span class="legend-dot" style="background:${info.color}"></span>${info.label}`;
+        legend.appendChild(item);
+    });
+}
+
+function selectPrefecture(name) {
+    selectedPrefecture = name;
+    document.querySelectorAll(".pref-tile").forEach(el => el.classList.remove("selected"));
+
+    const pref = PREFECTURES.find(p => p.name === name);
+    if (!pref) return;
+
+    const tiles = document.querySelectorAll(".pref-tile");
+    tiles.forEach(tile => {
+        const tileName = tile.querySelector(".pref-name")?.textContent;
+        const shortName = name.replace(/[都道府県]$/, "");
+        if (tileName === shortName) {
+            tile.classList.add("selected");
+        }
+    });
+
+    renderDetailPanel(name);
+}
+
+function renderDetailPanel(name) {
+    const card = document.getElementById("detailCard");
+    const visited = userStatsData?.visitedPrefectures || [];
+    const details = userStatsData?.visitedPrefectureDetails || {};
+    const isVisited = visited.includes(name);
+    const pref = PREFECTURES.find(p => p.name === name);
+    const region = pref ? REGIONS[pref.region] : null;
+    const detail = details[name];
+
+    let html = `
+        <h3>${name}</h3>
+        <div class="detail-region">
+            ${region ? region.label : ""}
+            <span class="detail-badge ${isVisited ? 'badge-visited' : 'badge-unvisited'}">
+                ${isVisited ? "訪問済み" : "未訪問"}
+            </span>
+        </div>
+    `;
+
+    if (isVisited && detail) {
+        html += `<div class="detail-stats">`;
+        html += renderDetailRow("スポット数", detail.spotCount || 0);
+        html += renderDetailRow("ルート数", detail.routeCount || 0);
+        if (detail.firstVisitDate) {
+            html += renderDetailRow("初訪問", formatTimestamp(detail.firstVisitDate));
+        }
+        if (detail.lastVisitDate) {
+            html += renderDetailRow("最終訪問", formatTimestamp(detail.lastVisitDate));
+        }
+        html += `</div>`;
+    } else {
+        html += `<div style="padding:20px 0;text-align:center;color:#aaa;font-size:13px;">
+            まだ訪問していません。<br>スポットを登録して制覇しましょう！
+        </div>`;
+    }
+
+    card.innerHTML = html;
+}
+
+function renderDetailRow(label, value) {
+    return `<div class="detail-stat-row">
+        <span class="detail-stat-label">${label}</span>
+        <span class="detail-stat-value">${value}</span>
+    </div>`;
+}
+
+function renderRecentVisits(details) {
+    const section = document.getElementById("recentSection");
+    const list = document.getElementById("recentList");
+
+    const entries = Object.entries(details)
+        .filter(([, d]) => d.lastVisitDate)
+        .sort((a, b) => (b[1].lastVisitDate?.seconds || 0) - (a[1].lastVisitDate?.seconds || 0))
+        .slice(0, 8);
+
+    if (entries.length === 0) {
+        section.style.display = "none";
+        return;
+    }
+
+    section.style.display = "block";
+    list.innerHTML = "";
+
+    entries.forEach(([name, detail]) => {
+        const card = document.createElement("div");
+        card.className = "recent-card";
+        card.innerHTML = `
+            <div class="rc-pref">${name}</div>
+            <div class="rc-date">${formatTimestamp(detail.lastVisitDate)}</div>
+            <div class="rc-count">スポット ${detail.spotCount || 0}件</div>
+        `;
+        card.style.cursor = "pointer";
+        card.addEventListener("click", () => selectPrefecture(name));
+        list.appendChild(card);
+    });
+}
+
+/* ===== Helpers ===== */
+function formatTimestamp(ts) {
+    if (!ts) return "-";
+    let date;
+    if (ts.toDate) {
+        date = ts.toDate();
+    } else if (ts.seconds) {
+        date = new Date(ts.seconds * 1000);
+    } else {
+        return "-";
+    }
+    return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, "0")}/${String(date.getDate()).padStart(2, "0")}`;
+}
+
+function showLoading(show) {
+    document.getElementById("loadingArea").style.display = show ? "flex" : "none";
+    if (show) {
+        document.getElementById("mainContent").style.display = "none";
+        document.getElementById("recentSection").style.display = "none";
+    }
+}
+</script>
+</body>
+</html>

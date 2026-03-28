@@ -864,6 +864,27 @@
               <span class="menu-icon">📋</span>
               <span>利用規約</span>
             </a>
+            <a href="/conquest/conquest.html" class="menu-item">  <!-- ← ここに追加 -->
+                <span class="menu-icon">🗾</span>
+                <span>都道府県制覇マップ</span>
+            </a>
+            <a 
+              v-if="currentUser" 
+              :href="'/user.html?id=' + currentUser.uid" 
+              class="menu-item"
+            >
+              <span class="menu-icon">👤</span>
+              <span>マイページ</span>
+            </a>
+            <hr style="border:none;border-top:1px solid #E0E0E0;margin:8px 16px;">
+            <a v-if="!currentUser" href="/login.html" class="menu-item">  <!-- 追加 -->
+              <span class="menu-icon">🔑</span>
+              <span>ログイン</span>
+            </a>
+            <a v-if="currentUser" href="#" class="menu-item" @click.prevent="logout">  <!-- 追加 -->
+              <span class="menu-icon">🚪</span>
+              <span>ログアウト</span>
+            </a>
           </nav>
         </div>
       </div>
