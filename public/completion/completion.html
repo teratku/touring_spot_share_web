@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>道路コンプリート率 - touring Spot Share</title>
+<!-- Firebase SDKs -->
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+<!-- Prefecture Data -->
+<script src="../conquest/prefecture-data.js"></script>
+
+<style>
+:root {
+    --primary: #00A8C6;
+    --secondary: #228B22;
+    --accent: #F5DEB3;
+    --bg: #F9F9F9;
+    --border: #E0E0E0;
+    --danger: #E63946;
+    --text: #333333;
+    --disabled: #C7C7CC;
+    --card: #FFFFFF;
+    --shadow: rgba(0,0,0,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif; background:var(--bg); color:var(--text); }
+
+.header { background:var(--card); border-bottom:1px solid var(--border); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.header-left { display:flex; align-items:center; gap:12px; }
+.header-left a { color:var(--primary); text-decoration:none; font-size:14px; }
+.header-left h1 { font-size:20px; font-weight:700; }
+.header-right { display:flex; align-items:center; gap:12px; }
+.user-icon { width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid var(--primary); }
+.user-name { font-size:14px; font-weight:500; }
+.btn-logout { background:none; border:1px solid var(--border); border-radius:8px; padding:6px 12px; font-size:12px; cursor:pointer; color:var(--text); }
+
+.login-screen { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80vh; gap:24px; }
+.login-screen h2 { font-size:24px; }
+.login-screen p { color:#666; font-size:14px; }
+.login-form { display:flex; flex-direction:column; gap:12px; width:320px; max-width:90vw; }
+.login-form input { padding:12px 16px; border:1px solid var(--border); border-radius:8px; font-size:16px; outline:none; }
+.login-form input:focus { border-color:var(--primary); }
+.btn-login { background:var(--primary); color:white; border:none; border-radius:12px; padding:12px; font-size:16px; font-weight:600; cursor:pointer; }
+.btn-login:hover { opacity:0.85; }
+.btn-login:disabled { background:var(--disabled); cursor:not-allowed; }
+.login-error { color:var(--danger); font-size:13px; text-align:center; }
+
+.loading { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:80px 0; gap:16px; }
+.spinner { width:40px; height:40px; border:3px solid var(--border); border-top-color:var(--primary); border-radius:50%; animation:spin .8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.container { max-width:1000px; margin:0 auto; padding:24px; }
+
+/* Hero Section */
+.hero { display:flex; align-items:center; gap:40px; background:var(--card); border-radius:16px; padding:32px; border:1px solid var(--border); box-shadow:0 2px 8px var(--shadow); margin-bottom:24px; flex-wrap:wrap; justify-content:center; }
+.circle-wrap { position:relative; width:180px; height:180px; flex-shrink:0; }
+.circle-bg { fill:none; stroke:var(--border); stroke-width:10; }
+.circle-fg { fill:none; stroke:var(--primary); stroke-width:10; stroke-linecap:round; transition:stroke-dashoffset 1.2s ease; }
+.circle-text { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; }
+.circle-percent { font-size:40px; font-weight:800; color:var(--primary); line-height:1; }
+.circle-sub { font-size:12px; color:#888; margin-top:4px; }
+.hero-stats { display:flex; flex-direction:column; gap:16px; flex:1; min-width:240px; }
+.hero-stat-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #f0f0f0; }
+.hero-stat-row:last-child { border-bottom:none; }
+.hero-stat-label { font-size:14px; color:#666; }
+.hero-stat-value { font-size:16px; font-weight:700; color:var(--text); }
+
+/* Highway Type Bars */
+.section-title { font-size:16px; font-weight:600; margin-bottom:16px; }
+.type-bars { background:var(--card); border-radius:16px; padding:24px; border:1px solid var(--border); box-shadow:0 2px 8px var(--shadow); margin-bottom:24px; }
+.type-bar-item { margin-bottom:16px; }
+.type-bar-item:last-child { margin-bottom:0; }
+.type-bar-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+.type-bar-name { font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px; }
+.type-bar-dot { width:10px; height:10px; border-radius:3px; display:inline-block; }
+.type-bar-count { font-size:12px; color:#888; }
+.type-bar-track { height:12px; background:#eee; border-radius:6px; overflow:hidden; }
+.type-bar-fill { height:100%; border-radius:6px; transition:width 1s ease; }
+
+/* Prefecture Grid */
+.pref-section { background:var(--card); border-radius:16px; padding:24px; border:1px solid var(--border); box-shadow:0 2px 8px var(--shadow); margin-bottom:24px; }
+.pref-grid { display:grid; gap:3px; justify-content:center; }
+.pref-tile { width:48px; height:48px; border-radius:6px; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; transition:all .2s; border:1px solid transparent; user-select:none; }
+.pref-tile:hover { transform:scale(1.08); }
+.pref-tile .pn { font-size:9px; font-weight:600; line-height:1.2; text-align:center; pointer-events:none; }
+.pref-tile .pr { font-size:8px; opacity:0.85; pointer-events:none; }
+
+/* Recent Roads */
+.recent-roads { background:var(--card); border-radius:16px; padding:24px; border:1px solid var(--border); box-shadow:0 2px 8px var(--shadow); margin-bottom:24px; }
+.road-list { display:flex; flex-direction:column; gap:8px; max-height:300px; overflow-y:auto; }
+.road-item { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:#f8f8f8; border-radius:8px; }
+.road-item-name { font-size:13px; font-weight:600; }
+.road-item-meta { font-size:11px; color:#888; }
+
+/* Empty State */
+.empty-state { text-align:center; padding:60px 20px; color:#aaa; }
+.empty-state p { font-size:14px; margin-top:8px; }
+
+/* Nav Links */
+.nav-links { display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap; }
+.nav-link { padding:8px 16px; border-radius:8px; font-size:13px; text-decoration:none; border:1px solid var(--border); color:var(--text); background:var(--card); transition:all .2s; }
+.nav-link:hover { border-color:var(--primary); color:var(--primary); }
+.nav-link.active { background:var(--primary); color:white; border-color:var(--primary); }
+
+@media (max-width:768px) {
+    .container { padding:16px; }
+    .hero { padding:20px; gap:24px; }
+    .circle-wrap { width:140px; height:140px; }
+    .circle-percent { font-size:30px; }
+    .pref-tile { width:40px; height:40px; }
+    .pref-tile .pn { font-size:8px; }
+}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-screen" style="display:none;">
+    <h2>道路コンプリート率</h2>
+    <p>ログインして走破状況を確認しましょう</p>
+    <div class="login-form">
+        <input type="email" id="loginEmail" placeholder="メールアドレス">
+        <input type="password" id="loginPassword" placeholder="パスワード">
+        <button class="btn-login" id="btnLogin" onclick="handleLogin()">ログイン</button>
+        <div class="login-error" id="loginError"></div>
+        <a href="../index.html" style="text-align:center;color:var(--primary);font-size:13px;">トップへ戻る</a>
+    </div>
+</div>
+
+<div id="appScreen" style="display:none;">
+    <div class="header">
+        <div class="header-left">
+            <a href="../index.html">← トップ</a>
+            <h1>道路コンプリート率</h1>
+        </div>
+        <div class="header-right">
+            <img id="userIcon" class="user-icon" src="" alt="" style="display:none;">
+            <span id="userName" class="user-name"></span>
+            <button class="btn-logout" onclick="handleLogout()">ログアウト</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-links">
+            <a href="../conquest/conquest.html" class="nav-link">都道府県制覇マップ</a>
+            <a href="#" class="nav-link active">道路コンプリート率</a>
+        </div>
+
+        <div id="loadingArea" class="loading">
+            <div class="spinner"></div>
+            <span style="color:#888;font-size:14px;">データを読み込み中...</span>
+        </div>
+
+        <div id="mainContent" style="display:none;">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="circle-wrap">
+                    <svg viewBox="0 0 120 120" width="100%" height="100%">
+                        <circle cx="60" cy="60" r="50" class="circle-bg"/>
+                        <circle id="circleProgress" cx="60" cy="60" r="50" class="circle-fg"
+                            stroke-dasharray="314.16" stroke-dashoffset="314.16"
+                            transform="rotate(-90 60 60)"/>
+                    </svg>
+                    <div class="circle-text">
+                        <div class="circle-percent" id="heroPercent">0%</div>
+                        <div class="circle-sub" id="heroSub">0 / 0 道路</div>
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat-row">
+                        <span class="hero-stat-label">走行済み道路</span>
+                        <span class="hero-stat-value" id="statRidden">0</span>
+                    </div>
+                    <div class="hero-stat-row">
+                        <span class="hero-stat-label">対象道路数</span>
+                        <span class="hero-stat-value" id="statKnown">0</span>
+                    </div>
+                    <div class="hero-stat-row">
+                        <span class="hero-stat-label">最終更新</span>
+                        <span class="hero-stat-value" id="statUpdated">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highway Type Bars -->
+            <div class="type-bars">
+                <div class="section-title">道路種別ごとの走破率</div>
+                <div id="typeBarsContainer"></div>
+            </div>
+
+            <!-- Prefecture Grid -->
+            <div class="pref-section">
+                <div class="section-title">都道府県ごとの走破率</div>
+                <div class="pref-grid" id="prefGrid"></div>
+            </div>
+
+            <!-- Recent Roads -->
+            <div class="recent-roads">
+                <div class="section-title">走行済み道路リスト</div>
+                <div class="road-list" id="roadList"></div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display:none;">
+                <div style="font-size:48px;">🛣️</div>
+                <p>まだ道路データがありません。<br>ルートを記録して走破率を確認しましょう！</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ===== Firebase Config ===== */
+// const firebaseConfig = {
+//     apiKey: "YOUR_API_KEY",
+//     authDomain: "biketeilen.firebaseapp.com",
+//     projectId: "biketeilen",
+//     storageBucket: "biketeilen.appspot.com",
+//     messagingSenderId: "YOUR_SENDER_ID",
+//     appId: "YOUR_APP_ID"
+// };
+// firebase.initializeApp(firebaseConfig);
+// const auth = firebase.auth();
+// const db = firebase.firestore();
+
+let auth, db;
+
+function waitForFirebase() {
+    return new Promise((resolve) => {
+        const check = () => {
+            if (typeof firebase !== "undefined" && firebase.apps && firebase.apps.length > 0) {
+                resolve();
+            } else {
+                setTimeout(check, 100);
+            }
+        };
+        check();
+    });
+}
+
+const COLLECTION = {
+    locations:   "imagedownload",
+    userInfo:    "userInfo",
+    userStats:   "user_stats",
+    sharedRoutes: "shared_routes",
+    roadCompletion: "road_completion"
+};
+
+let currentUser     = null;
+let userStatsData   = null;
+let selectedPrefecture = null;
+let completionData = null;
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await waitForFirebase();
+    auth = firebase.auth();
+    db   = firebase.firestore();
+
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("appScreen").style.display  = "block";
+            await loadUserProfile(user.uid);
+            await loadCompletionData(user.uid);
+        } else {
+            currentUser = null;
+            document.getElementById("loginScreen").style.display = "flex";
+            document.getElementById("appScreen").style.display  = "none";
+        }
+    });
+});
+
+
+/* 道路種別の表示設定 */
+const HIGHWAY_CONFIG = {
+    motorway:  { label: "高速道路",     color: "#E63946", order: 1 },
+    trunk:     { label: "国道（主要）", color: "#F28B30", order: 2 },
+    primary:   { label: "主要地方道",   color: "#00A8C6", order: 3 },
+    secondary: { label: "一般県道",     color: "#228B22", order: 4 },
+    tertiary:  { label: "市町村道",     color: "#7F77DD", order: 5 }
+};
+
+
+/* ===== Auth ===== */
+// auth.onAuthStateChanged(async (user) => {
+//     if (user) {
+//         currentUser = user;
+//         document.getElementById("loginScreen").style.display = "none";
+//         document.getElementById("appScreen").style.display = "block";
+//         await loadUserProfile(user.uid);
+//         await loadCompletionData(user.uid);
+//     } else {
+//         currentUser = null;
+//         document.getElementById("loginScreen").style.display = "flex";
+//         document.getElementById("appScreen").style.display = "none";
+//     }
+// });
+
+async function handleLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPassword").value;
+    const errEl = document.getElementById("loginError");
+    const btn = document.getElementById("btnLogin");
+    errEl.textContent = "";
+    btn.disabled = true;
+    try { await auth.signInWithEmailAndPassword(email, pass); }
+    catch (e) { errEl.textContent = "ログインに失敗しました: " + e.message; }
+    btn.disabled = false;
+}
+function handleLogout() { auth.signOut(); }
+
+async function loadUserProfile(uid) {
+    try {
+        const doc = await db.collection(COLLECTION.userInfo).doc(uid).get();
+        if (doc.exists) {
+            const d = doc.data();
+            document.getElementById("userName").textContent = d.userName || "";
+            if (d.userIcon) {
+                const el = document.getElementById("userIcon");
+                el.src = d.userIcon;
+                el.style.display = "block";
+            }
+        }
+    } catch (e) { console.warn("ユーザー情報取得エラー:", e); }
+}
+
+/* ===== Data Loading ===== */
+async function loadCompletionData(uid) {
+    showLoading(true);
+    try {
+        const doc = await db.collection(COLLECTION.roadCompletion).doc(uid).get();
+        if (doc.exists) {
+            completionData = doc.data();
+            renderAll();
+        } else {
+            document.getElementById("emptyState").style.display = "block";
+        }
+    } catch (e) {
+        console.error("データ読み込みエラー:", e);
+        document.getElementById("emptyState").style.display = "block";
+    }
+    showLoading(false);
+}
+
+/* ===== Rendering ===== */
+function renderAll() {
+    if (!completionData) return;
+    document.getElementById("mainContent").style.display = "block";
+
+    const ridden = completionData.totalRoadsRidden || 0;
+    const known = completionData.totalRoadsKnown || 0;
+    const rate = known > 0 ? ridden / known : 0;
+
+    renderHero(ridden, known, rate);
+    renderTypeBars(completionData.byHighwayType || {});
+    renderPrefGrid(completionData.byPrefecture || {});
+    renderRoadList(completionData.riddenRoadNames || [], completionData.recentlyRidden || []);
+}
+
+function renderHero(ridden, known, rate) {
+    const pct = Math.round(rate * 100);
+    document.getElementById("heroPercent").textContent = pct + "%";
+    document.getElementById("heroSub").textContent = `${ridden.toLocaleString()} / ${known.toLocaleString()} 道路`;
+    document.getElementById("statRidden").textContent = ridden.toLocaleString();
+    document.getElementById("statKnown").textContent = known.toLocaleString();
+    document.getElementById("statUpdated").textContent = formatTimestamp(completionData.updatedAt);
+
+    const circumference = 314.16;
+    const offset = circumference * (1 - rate);
+    setTimeout(() => {
+        document.getElementById("circleProgress").style.strokeDashoffset = offset;
+    }, 100);
+}
+
+function renderTypeBars(byType) {
+    const container = document.getElementById("typeBarsContainer");
+    container.innerHTML = "";
+
+    const entries = Object.entries(HIGHWAY_CONFIG).sort((a, b) => a[1].order - b[1].order);
+
+    for (const [key, config] of entries) {
+        const data = byType[key] || { known: 0, ridden: 0, rate: 0 };
+        const pct = Math.round((data.rate || 0) * 100);
+
+        const item = document.createElement("div");
+        item.className = "type-bar-item";
+        item.innerHTML = `
+            <div class="type-bar-header">
+                <span class="type-bar-name">
+                    <span class="type-bar-dot" style="background:${config.color}"></span>
+                    ${config.label}
+                </span>
+                <span class="type-bar-count">${data.ridden || 0} / ${data.known || 0}（${pct}%）</span>
+            </div>
+            <div class="type-bar-track">
+                <div class="type-bar-fill" style="width:0%;background:${config.color};" data-width="${pct}%"></div>
+            </div>
+        `;
+        container.appendChild(item);
+    }
+
+    setTimeout(() => {
+        container.querySelectorAll(".type-bar-fill").forEach(el => {
+            el.style.width = el.dataset.width;
+        });
+    }, 100);
+}
+
+function renderPrefGrid(byPref) {
+    const grid = document.getElementById("prefGrid");
+    grid.innerHTML = "";
+
+    const minRow = Math.min(...PREFECTURES.map(p => p.gridRow));
+    const maxRow = Math.max(...PREFECTURES.map(p => p.gridRow));
+    const minCol = Math.min(...PREFECTURES.map(p => p.gridCol));
+    const maxCol = Math.max(...PREFECTURES.map(p => p.gridCol));
+    const cols = maxCol - minCol + 1;
+
+    grid.style.gridTemplateColumns = `repeat(${cols}, 48px)`;
+    grid.style.gridTemplateRows = `repeat(${maxRow - minRow + 1}, 48px)`;
+
+    PREFECTURES.forEach(pref => {
+        const tile = document.createElement("div");
+        tile.className = "pref-tile";
+
+        const row = pref.gridRow - minRow + 1;
+        const col = pref.gridCol - minCol + 1;
+        tile.style.gridRow = row;
+        tile.style.gridColumn = col;
+
+        const data = byPref[pref.name];
+        const rate = data ? (data.rate || 0) : 0;
+        const pct = Math.round(rate * 100);
+
+        if (rate > 0) {
+            const alpha = 0.2 + rate * 0.8;
+            tile.style.background = `rgba(0, 168, 198, ${alpha})`;
+            tile.style.color = rate > 0.4 ? "white" : "var(--text)";
+            tile.style.borderColor = `rgba(0, 168, 198, ${Math.min(1, alpha + 0.2)})`;
+        } else {
+            tile.style.background = "#eee";
+            tile.style.color = "#aaa";
+        }
+
+        const shortName = pref.name.replace(/[都道府県]$/, "");
+        tile.innerHTML = `<span class="pn">${shortName}</span>${rate > 0 ? `<span class="pr">${pct}%</span>` : ""}`;
+        tile.title = `${pref.name}: ${data ? data.ridden : 0}/${data ? data.known : 0} (${pct}%)`;
+
+        grid.appendChild(tile);
+    });
+}
+
+function renderRoadList(names, recent) {
+    const list = document.getElementById("roadList");
+    list.innerHTML = "";
+
+    if (recent && recent.length > 0) {
+        recent.forEach(r => {
+            const item = document.createElement("div");
+            item.className = "road-item";
+            const dist = r.distance ? `${(r.distance / 1000).toFixed(1)} km` : "";
+            item.innerHTML = `
+                <span class="road-item-name">${r.name || "不明"}</span>
+                <span class="road-item-meta">${formatTimestamp(r.date)} ${dist}</span>
+            `;
+            list.appendChild(item);
+        });
+    } else if (names && names.length > 0) {
+        const display = names.slice(0, 50);
+        display.forEach(name => {
+            const item = document.createElement("div");
+            item.className = "road-item";
+            item.innerHTML = `<span class="road-item-name">${name}</span>`;
+            list.appendChild(item);
+        });
+        if (names.length > 50) {
+            const more = document.createElement("div");
+            more.style.cssText = "text-align:center;padding:8px;color:#888;font-size:12px;";
+            more.textContent = `他 ${names.length - 50} 件の道路`;
+            list.appendChild(more);
+        }
+    } else {
+        list.innerHTML = '<div style="text-align:center;padding:20px;color:#aaa;font-size:13px;">走行済み道路はまだありません</div>';
+    }
+}
+
+/* ===== Helpers ===== */
+function formatTimestamp(ts) {
+    if (!ts) return "-";
+    let date;
+    if (ts.toDate) date = ts.toDate();
+    else if (ts.seconds) date = new Date(ts.seconds * 1000);
+    else return "-";
+    return `${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,"0")}/${String(date.getDate()).padStart(2,"0")}`;
+}
+
+function showLoading(show) {
+    document.getElementById("loadingArea").style.display = show ? "flex" : "none";
+    if (show) {
+        document.getElementById("mainContent").style.display = "none";
+        document.getElementById("emptyState").style.display = "none";
+    }
+}
+</script>
+</body>
+</html>
