@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マイダッシュボード - touring Spot Share</title>
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--primary:#00A8C6;--secondary:#228B22;--accent:#F5DEB3;--bg:#F9F9F9;--border:#E0E0E0;--danger:#E63946;--text:#333333;--disabled:#C7C7CC;--card:#FFFFFF;--shadow:rgba(0,0,0,0.08);--purple:#7F77DD;--orange:#F28B30}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;background:var(--bg);color:var(--text)}
+
+.header{background:var(--card);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left{display:flex;align-items:center;gap:12px}
+.header-left a{color:var(--primary);text-decoration:none;font-size:14px}
+.header-left h1{font-size:20px;font-weight:700}
+.header-right{display:flex;align-items:center;gap:12px}
+.user-icon{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--primary)}
+.user-name{font-size:14px;font-weight:500}
+.btn-logout{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;color:var(--text)}
+
+.login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;gap:24px}
+.login-screen h2{font-size:24px}
+.login-screen p{color:#666;font-size:14px}
+.login-form{display:flex;flex-direction:column;gap:12px;width:320px;max-width:90vw}
+.login-form input{padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:16px;outline:none}
+.login-form input:focus{border-color:var(--primary)}
+.btn-login{background:var(--primary);color:white;border:none;border-radius:12px;padding:12px;font-size:16px;font-weight:600;cursor:pointer}
+.btn-login:hover{opacity:.85}
+.btn-login:disabled{background:var(--disabled);cursor:not-allowed}
+.login-error{color:var(--danger);font-size:13px;text-align:center}
+
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;gap:16px}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.container{max-width:1000px;margin:0 auto;padding:24px}
+
+.nav-links{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.nav-link{padding:8px 16px;border-radius:8px;font-size:13px;text-decoration:none;border:1px solid var(--border);color:var(--text);background:var(--card);transition:all .2s}
+.nav-link:hover{border-color:var(--primary);color:var(--primary)}
+.nav-link.active{background:var(--primary);color:white;border-color:var(--primary)}
+
+/* Stat Cards */
+.stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:var(--card);border-radius:16px;padding:20px;border:1px solid var(--border);box-shadow:0 2px 8px var(--shadow);text-align:center}
+.stat-card .sc-icon{font-size:28px;margin-bottom:8px}
+.stat-card .sc-value{font-size:28px;font-weight:800;color:var(--primary);line-height:1}
+.stat-card .sc-label{font-size:12px;color:#888;margin-top:6px}
+
+/* Chart Section */
+.chart-section{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);box-shadow:0 2px 8px var(--shadow);margin-bottom:24px}
+.chart-section h2{font-size:16px;font-weight:600;margin-bottom:16px}
+.chart-wrap{position:relative;height:280px}
+
+/* Two Column */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px}
+
+/* B1/B3 Summary */
+.summary-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.summary-panel{background:var(--card);border-radius:16px;padding:20px;border:1px solid var(--border);box-shadow:0 2px 8px var(--shadow);display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .2s}
+.summary-panel:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:0 4px 16px var(--shadow)}
+.sp-icon{font-size:36px}
+.sp-info{flex:1}
+.sp-title{font-size:13px;color:#888;margin-bottom:4px}
+.sp-value{font-size:20px;font-weight:700;color:var(--text)}
+.sp-bar{height:6px;background:#eee;border-radius:3px;margin-top:8px;overflow:hidden}
+.sp-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.sp-arrow{color:#ccc;font-size:18px}
+
+/* Recent Activity */
+.recent-section{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);box-shadow:0 2px 8px var(--shadow);margin-bottom:24px}
+.recent-section h2{font-size:16px;font-weight:600;margin-bottom:16px}
+.recent-list{display:flex;flex-direction:column;gap:8px}
+.recent-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#f8f8f8;border-radius:8px}
+.ri-left{display:flex;align-items:center;gap:10px}
+.ri-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:white}
+.ri-name{font-size:13px;font-weight:600}
+.ri-meta{font-size:11px;color:#888}
+
+.empty-msg{text-align:center;padding:40px;color:#aaa;font-size:14px}
+
+@media(max-width:768px){
+    .container{padding:16px}
+    .stat-cards{grid-template-columns:repeat(2,1fr);gap:12px}
+    .stat-card .sc-value{font-size:22px}
+    .two-col{grid-template-columns:1fr}
+    .summary-panels{grid-template-columns:1fr}
+    .chart-wrap{height:220px}
+    .header{padding:12px 16px}
+}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-screen" style="display:none;">
+    <h2>マイダッシュボード</h2>
+    <p>ログインしてツーリング活動を確認しましょう</p>
+    <div class="login-form">
+        <input type="email" id="loginEmail" placeholder="メールアドレス">
+        <input type="password" id="loginPassword" placeholder="パスワード">
+        <button class="btn-login" id="btnLogin" onclick="handleLogin()">ログイン</button>
+        <div class="login-error" id="loginError"></div>
+        <a href="../index.html" style="text-align:center;color:var(--primary);font-size:13px;">トップへ戻る</a>
+    </div>
+</div>
+
+<div id="appScreen" style="display:none;">
+    <div class="header">
+        <div class="header-left">
+            <a href="../index.html">← トップ</a>
+            <h1>マイダッシュボード</h1>
+        </div>
+        <div class="header-right">
+            <img id="userIcon" class="user-icon" src="" alt="" style="display:none;">
+            <span id="userName" class="user-name"></span>
+            <button class="btn-logout" onclick="handleLogout()">ログアウト</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-links">
+            <a href="#" class="nav-link active">ダッシュボード</a>
+            <a href="../conquest/conquest.html" class="nav-link">都道府県制覇</a>
+            <a href="../completion/completion.html" class="nav-link">道路走破率</a>
+        </div>
+
+        <div id="loadingArea" class="loading">
+            <div class="spinner"></div>
+            <span style="color:#888;font-size:14px;">データを読み込み中...</span>
+        </div>
+
+        <div id="mainContent" style="display:none;">
+            <!-- Stat Cards -->
+            <div class="stat-cards">
+                <div class="stat-card"><div class="sc-icon">🛣️</div><div class="sc-value" id="cardDistance">0</div><div class="sc-label">累計走行距離 (km)</div></div>
+                <div class="stat-card"><div class="sc-icon">📍</div><div class="sc-value" id="cardRoutes">0</div><div class="sc-label">総ルート数</div></div>
+                <div class="stat-card"><div class="sc-icon">📸</div><div class="sc-value" id="cardSpots">0</div><div class="sc-label">総スポット数</div></div>
+                <div class="stat-card"><div class="sc-icon">🗾</div><div class="sc-value" id="cardPref">0/47</div><div class="sc-label">都道府県制覇</div></div>
+            </div>
+
+            <!-- Monthly Distance Chart -->
+            <div class="chart-section">
+                <h2>月別走行距離</h2>
+                <div class="chart-wrap"><canvas id="monthlyChart"></canvas></div>
+            </div>
+
+            <!-- Two Column: Weekday + Spot Trend -->
+            <div class="two-col">
+                <div class="chart-section">
+                    <h2>曜日別走行頻度</h2>
+                    <div class="chart-wrap"><canvas id="weekdayChart"></canvas></div>
+                </div>
+                <div class="chart-section">
+                    <h2>スポット登録推移</h2>
+                    <div class="chart-wrap"><canvas id="spotChart"></canvas></div>
+                </div>
+            </div>
+
+            <!-- B1/B3 Summary -->
+            <div class="summary-panels">
+                <div class="summary-panel" onclick="location.href='../conquest/conquest.html'">
+                    <div class="sp-icon">🗾</div>
+                    <div class="sp-info">
+                        <div class="sp-title">都道府県制覇マップ</div>
+                        <div class="sp-value" id="b1Value">0 / 47</div>
+                        <div class="sp-bar"><div class="sp-bar-fill" id="b1Bar" style="width:0%;background:var(--primary)"></div></div>
+                    </div>
+                    <div class="sp-arrow">→</div>
+                </div>
+                <div class="summary-panel" onclick="location.href='../completion/completion.html'">
+                    <div class="sp-icon">🛣️</div>
+                    <div class="sp-info">
+                        <div class="sp-title">道路コンプリート率</div>
+                        <div class="sp-value" id="b3Value">0%</div>
+                        <div class="sp-bar"><div class="sp-bar-fill" id="b3Bar" style="width:0%;background:var(--secondary)"></div></div>
+                    </div>
+                    <div class="sp-arrow">→</div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-section">
+                <h2>最近のアクティビティ</h2>
+                <div class="recent-list" id="recentList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let auth, db;
+
+function waitForFirebase() {
+    return new Promise((resolve) => {
+        const check = () => {
+            if (typeof firebase !== "undefined" && firebase.apps && firebase.apps.length > 0) {
+                resolve();
+            } else {
+                setTimeout(check, 100);
+            }
+        };
+        check();
+    });
+};
+/* ===== State ===== */
+let currentUser        = null;
+let userStatsData      = null;
+let selectedPrefecture = null;
+let monthlyChart, weekdayChart, spotChart;
+
+const COL = {
+    routes: "shared_routes",
+    locations: "imagedownload",
+    userInfo: "userInfo",
+    userStats: "user_stats",
+    roadCompletion: "road_completion"
+};
+
+const COLORS = {
+    primary: '#00A8C6',
+    secondary: '#228B22',
+    purple: '#7F77DD',
+    orange: '#F28B30',
+    danger: '#E63946'
+};
+
+
+/* =====================================================
+ *  Auth（DOMContentLoaded で Firebase 確定後に実行）
+ * ===================================================== */
+document.addEventListener("DOMContentLoaded", async () => {
+    await waitForFirebase();
+    auth = firebase.auth();
+    db   = firebase.firestore();
+
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("appScreen").style.display  = "block";
+            await loadUserProfile(user.uid);
+            await loadDashboard(user.uid);
+        } else {
+            currentUser = null;
+            document.getElementById("loginScreen").style.display = "flex";
+            document.getElementById("appScreen").style.display  = "none";
+        }
+    });
+});
+
+async function handleLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPassword").value;
+    const errEl = document.getElementById("loginError");
+    const btn = document.getElementById("btnLogin");
+    errEl.textContent = "";
+    btn.disabled = true;
+    try {
+        await auth.signInWithEmailAndPassword(email, pass);
+    } catch (e) {
+        errEl.textContent = "ログインに失敗しました: " + e.message;
+    }
+    btn.disabled = false;
+}
+
+function handleLogout() {
+    auth.signOut();
+}
+
+async function loadUserProfile(uid) {
+    try {
+        const doc = await db.collection(COL.userInfo).doc(uid).get();
+        if (doc.exists) {
+            const d = doc.data();
+            document.getElementById("userName").textContent = d.userName || "";
+            if (d.userIcon) { const el = document.getElementById("userIcon"); el.src = d.userIcon; el.style.display = "block"; }
+        }
+    } catch (e) { console.warn("ユーザー情報取得エラー:", e); }
+}
+
+/* ===== Dashboard Loading ===== */
+async function loadDashboard(uid) {
+    showLoading(true);
+    try {
+        const oneYearAgo = new Date();
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+        const tsOneYear = firebase.firestore.Timestamp.fromDate(oneYearAgo);
+
+        const [routesSnap, spotsSnap, statsDoc, roadDoc] = await Promise.all([
+            db.collection(COL.routes).where("userID", "==", uid).where("createdAt", ">=", tsOneYear).orderBy("createdAt", "desc").get(),
+            db.collection(COL.locations).where("userID", "==", uid).where("createTimeTimeStamp", ">=", tsOneYear).orderBy("createTimeTimeStamp", "desc").get(),
+            db.collection(COL.userStats).doc(uid).get(),
+            db.collection(COL.roadCompletion).doc(uid).get()
+        ]);
+
+        const routes = routesSnap.docs.map(d => ({ ...d.data(), id: d.id }));
+        const spots = spotsSnap.docs.map(d => ({ ...d.data(), id: d.id }));
+        const stats = statsDoc.exists ? statsDoc.data() : null;
+        const road = roadDoc.exists ? roadDoc.data() : null;
+
+        renderStatCards(routes, spots, stats, road);
+        renderMonthlyChart(routes);
+        renderWeekdayChart(routes);
+        renderSpotTrendChart(spots);
+        renderB1B3(stats, road);
+        renderRecent(routes, spots);
+
+        document.getElementById("mainContent").style.display = "block";
+    } catch (e) {
+        console.error("ダッシュボード読み込みエラー:", e);
+    }
+    showLoading(false);
+}
+
+/* ===== Stat Cards ===== */
+function renderStatCards(routes, spots, stats, road) {
+    const totalDist = routes.reduce((s, r) => s + (r.distance || 0), 0);
+    document.getElementById("cardDistance").textContent = (totalDist / 1000).toFixed(1);
+    document.getElementById("cardRoutes").textContent = routes.length;
+    document.getElementById("cardSpots").textContent = stats?.totalSpots || spots.length;
+    const prefCount = stats?.totalPrefectures || 0;
+    document.getElementById("cardPref").textContent = `${prefCount}/47`;
+}
+
+/* ===== Monthly Distance Chart ===== */
+function renderMonthlyChart(routes) {
+    const months = getLast12Months();
+    const monthMap = {};
+    months.forEach(m => monthMap[m.key] = 0);
+
+    routes.forEach(r => {
+        if (!r.createdAt) return;
+        const d = r.createdAt.toDate ? r.createdAt.toDate() : new Date(r.createdAt.seconds * 1000);
+        const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+        if (key in monthMap) monthMap[key] += (r.distance || 0) / 1000;
+    });
+
+    const ctx = document.getElementById("monthlyChart").getContext("2d");
+    if (monthlyChart) monthlyChart.destroy();
+    monthlyChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: months.map(m => m.label),
+            datasets: [{
+                label: "走行距離 (km)",
+                data: months.map(m => Math.round(monthMap[m.key] * 10) / 10),
+                backgroundColor: COLORS.primary + "CC",
+                borderRadius: 6,
+                borderSkipped: false
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: "#f0f0f0" }, ticks: { callback: v => v + " km" } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+}
+
+/* ===== Weekday Radar Chart ===== */
+function renderWeekdayChart(routes) {
+    const days = ["日", "月", "火", "水", "木", "金", "土"];
+    const counts = [0, 0, 0, 0, 0, 0, 0];
+
+    routes.forEach(r => {
+        if (!r.createdAt) return;
+        const d = r.createdAt.toDate ? r.createdAt.toDate() : new Date(r.createdAt.seconds * 1000);
+        counts[d.getDay()]++;
+    });
+
+    const ctx = document.getElementById("weekdayChart").getContext("2d");
+    if (weekdayChart) weekdayChart.destroy();
+    weekdayChart = new Chart(ctx, {
+        type: "radar",
+        data: {
+            labels: days,
+            datasets: [{
+                label: "ルート数",
+                data: counts,
+                backgroundColor: COLORS.secondary + "33",
+                borderColor: COLORS.secondary,
+                borderWidth: 2,
+                pointBackgroundColor: COLORS.secondary,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { r: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        }
+    });
+}
+
+/* ===== Spot Trend Chart ===== */
+function renderSpotTrendChart(spots) {
+    const months = getLast12Months();
+    const monthMap = {};
+    months.forEach(m => monthMap[m.key] = 0);
+
+    spots.forEach(sp => {
+        const ts = sp.createTimeTimeStamp;
+        if (!ts) return;
+        const d = ts.toDate ? ts.toDate() : new Date(ts.seconds * 1000);
+        const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+        if (key in monthMap) monthMap[key]++;
+    });
+
+    let cumulative = 0;
+    const cumData = months.map(m => { cumulative += monthMap[m.key]; return cumulative; });
+
+    const ctx = document.getElementById("spotChart").getContext("2d");
+    if (spotChart) spotChart.destroy();
+    spotChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: months.map(m => m.label),
+            datasets: [{
+                label: "累計スポット数",
+                data: cumData,
+                borderColor: COLORS.purple,
+                backgroundColor: COLORS.purple + "22",
+                fill: true,
+                tension: 0.3,
+                pointRadius: 3,
+                pointBackgroundColor: COLORS.purple
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: "#f0f0f0" } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+}
+
+/* ===== B1/B3 Summary ===== */
+function renderB1B3(stats, road) {
+    const prefCount = stats?.totalPrefectures || 0;
+    const prefPct = Math.round((prefCount / 47) * 100);
+    document.getElementById("b1Value").textContent = `${prefCount} / 47（${prefPct}%）`;
+    setTimeout(() => { document.getElementById("b1Bar").style.width = prefPct + "%"; }, 100);
+
+    const roadRate = road?.completionRate || 0;
+    const roadPct = Math.round(roadRate * 100);
+    const ridden = road?.totalRoadsRidden || 0;
+    const known = road?.totalRoadsKnown || 0;
+    document.getElementById("b3Value").textContent = known > 0 ? `${roadPct}%（${ridden}/${known}）` : "データなし";
+    setTimeout(() => { document.getElementById("b3Bar").style.width = roadPct + "%"; }, 100);
+}
+
+/* ===== Recent Activity ===== */
+function renderRecent(routes, spots) {
+    const list = document.getElementById("recentList");
+    list.innerHTML = "";
+
+    const items = [];
+
+    routes.slice(0, 5).forEach(r => {
+        const d = r.createdAt?.toDate ? r.createdAt.toDate() : (r.createdAt?.seconds ? new Date(r.createdAt.seconds * 1000) : null);
+        items.push({
+            type: "route",
+            name: r.title || "ルート",
+            meta: `${((r.distance || 0) / 1000).toFixed(1)} km`,
+            date: d,
+            color: COLORS.primary
+        });
+    });
+
+    spots.slice(0, 5).forEach(sp => {
+        const d = sp.createTimeTimeStamp?.toDate ? sp.createTimeTimeStamp.toDate() : (sp.createTimeTimeStamp?.seconds ? new Date(sp.createTimeTimeStamp.seconds * 1000) : null);
+        items.push({
+            type: "spot",
+            name: sp.location_name || sp.administrative || "スポット",
+            meta: sp.administrative || "",
+            date: d,
+            color: COLORS.purple
+        });
+    });
+
+    items.sort((a, b) => (b.date || 0) - (a.date || 0));
+
+    if (items.length === 0) {
+        list.innerHTML = '<div class="empty-msg">まだアクティビティがありません</div>';
+        return;
+    }
+
+    items.slice(0, 8).forEach(item => {
+        const el = document.createElement("div");
+        el.className = "recent-item";
+        const icon = item.type === "route" ? "📍" : "📸";
+        el.innerHTML = `
+            <div class="ri-left">
+                <div class="ri-icon" style="background:${item.color}">${icon}</div>
+                <div>
+                    <div class="ri-name">${item.name}</div>
+                    <div class="ri-meta">${item.meta}</div>
+                </div>
+            </div>
+            <div class="ri-meta">${formatDate(item.date)}</div>
+        `;
+        list.appendChild(el);
+    });
+}
+
+/* ===== Helpers ===== */
+function getLast12Months() {
+    const result = [];
+    const now = new Date();
+    for (let i = 11; i >= 0; i--) {
+        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        result.push({
+            key: `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`,
+            label: `${d.getMonth()+1}月`
+        });
+    }
+    return result;
+}
+
+function formatDate(d) {
+    if (!d) return "-";
+    return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function showLoading(show) {
+    document.getElementById("loadingArea").style.display = show ? "flex" : "none";
+    if (show) document.getElementById("mainContent").style.display = "none";
+}
+</script>
+</body>
+</html>
