@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バッジ一覧 - touring Spot Share</title>
+<!-- Firebase SDKs -->
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+<!-- Prefecture Data -->
+<script src="../conquest/prefecture-data.js"></script>
+<style>
+:root{--primary:#00A8C6;--secondary:#228B22;--accent:#F5DEB3;--bg:#F9F9F9;--border:#E0E0E0;--danger:#E63946;--text:#333333;--disabled:#C7C7CC;--card:#FFFFFF;--shadow:rgba(0,0,0,0.08);--purple:#7F77DD;--orange:#F28B30}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;background:var(--bg);color:var(--text)}
+
+.header{background:var(--card);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left{display:flex;align-items:center;gap:12px}
+.header-left a{color:var(--primary);text-decoration:none;font-size:14px}
+.header-left h1{font-size:20px;font-weight:700}
+.header-right{display:flex;align-items:center;gap:12px}
+.user-icon{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--primary)}
+.user-name{font-size:14px;font-weight:500}
+.btn-logout{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;color:var(--text)}
+
+.login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;gap:24px}
+.login-screen h2{font-size:24px}
+.login-screen p{color:#666;font-size:14px}
+.login-form{display:flex;flex-direction:column;gap:12px;width:320px;max-width:90vw}
+.login-form input{padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:16px;outline:none}
+.login-form input:focus{border-color:var(--primary)}
+.btn-login{background:var(--primary);color:white;border:none;border-radius:12px;padding:12px;font-size:16px;font-weight:600;cursor:pointer}
+.btn-login:hover{opacity:.85}
+.btn-login:disabled{background:var(--disabled);cursor:not-allowed}
+.login-error{color:var(--danger);font-size:13px;text-align:center}
+
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;gap:16px}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.container{max-width:1000px;margin:0 auto;padding:24px}
+
+.nav-links{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.nav-link{padding:8px 16px;border-radius:8px;font-size:13px;text-decoration:none;border:1px solid var(--border);color:var(--text);background:var(--card);transition:all .2s}
+.nav-link:hover{border-color:var(--primary);color:var(--primary)}
+.nav-link.active{background:var(--primary);color:white;border-color:var(--primary)}
+
+/* Hero Stats */
+.hero{background:var(--card);border-radius:16px;padding:24px;border:1px solid var(--border);box-shadow:0 2px 8px var(--shadow);margin-bottom:24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.hero-circle{position:relative;width:100px;height:100px;flex-shrink:0}
+.hc-bg{fill:none;stroke:var(--border);stroke-width:8}
+.hc-fg{fill:none;stroke:var(--primary);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.hc-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.hc-num{font-size:24px;font-weight:800;color:var(--primary);line-height:1}
+.hc-sub{font-size:10px;color:#888;margin-top:2px}
+.hero-info{flex:1;min-width:200px}
+.hero-info h2{font-size:18px;font-weight:700;margin-bottom:8px}
+.hero-cats{display:flex;flex-wrap:wrap;gap:8px}
+.hero-cat{font-size:11px;padding:4px 10px;border-radius:12px;background:#f0f0f0;color:#666}
+.hero-cat .hc-count{font-weight:700;color:var(--primary)}
+
+/* Category Filter */
+.filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.filter-btn{padding:8px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer;transition:all .2s;color:var(--text)}
+.filter-btn:hover{border-color:var(--primary);color:var(--primary)}
+.filter-btn.active{background:var(--primary);color:white;border-color:var(--primary)}
+
+/* Badge Grid */
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.badge-card{background:var(--card);border-radius:16px;padding:20px;border:1px solid var(--border);box-shadow:0 2px 8px var(--shadow);text-align:center;transition:all .25s;position:relative;overflow:hidden}
+.badge-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px var(--shadow)}
+.badge-card.earned{border-color:var(--primary)}
+.badge-card.locked{opacity:.55}
+.badge-card.locked .bc-icon{filter:grayscale(1)}
+.bc-icon{font-size:36px;margin-bottom:10px;display:block}
+.bc-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.bc-desc{font-size:11px;color:#888;line-height:1.4;margin-bottom:8px;min-height:30px}
+.bc-date{font-size:10px;color:var(--primary);font-weight:600}
+.bc-locked-label{font-size:10px;color:#aaa;font-style:italic}
+.bc-category{position:absolute;top:8px;right:8px;font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600}
+
+/* Category colors */
+.cat-post{background:#E6F1FB;color:#185FA5}
+.cat-route{background:#EAF3DE;color:#3B6D11}
+.cat-dist{background:#FAEEDA;color:#854F0B}
+.cat-pref{background:#E1F5EE;color:#0F6E56}
+.cat-road{background:#EEEDFE;color:#534AB7}
+.cat-activity{background:#FAECE7;color:#993C1D}
+
+/* Earned stamp */
+.bc-stamp{position:absolute;top:12px;left:12px;width:24px;height:24px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700}
+
+@media(max-width:768px){
+    .container{padding:16px}
+    .badge-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+    .badge-card{padding:16px}
+    .bc-icon{font-size:28px}
+    .hero{padding:16px;gap:16px}
+    .hero-circle{width:80px;height:80px}
+    .hc-num{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-screen" style="display:none;">
+    <h2>バッジ一覧</h2>
+    <p>ログインしてバッジコレクションを確認しましょう</p>
+    <div class="login-form">
+        <input type="email" id="loginEmail" placeholder="メールアドレス">
+        <input type="password" id="loginPassword" placeholder="パスワード">
+        <button class="btn-login" id="btnLogin" onclick="handleLogin()">ログイン</button>
+        <div class="login-error" id="loginError"></div>
+        <a href="../index.html" style="text-align:center;color:var(--primary);font-size:13px;">トップへ戻る</a>
+    </div>
+</div>
+
+<div id="appScreen" style="display:none;">
+    <div class="header">
+        <div class="header-left">
+            <a href="../index.html">← トップ</a>
+            <h1>バッジコレクション</h1>
+        </div>
+        <div class="header-right">
+            <img id="userIcon" class="user-icon" src="" alt="" style="display:none;">
+            <span id="userName" class="user-name"></span>
+            <button class="btn-logout" onclick="handleLogout()">ログアウト</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-links">
+            <a href="../dashboard/dashboard.html" class="nav-link">ダッシュボード</a>
+            <a href="../conquest/conquest.html" class="nav-link">都道府県制覇</a>
+            <a href="../completion/completion.html" class="nav-link">道路走破率</a>
+            <a href="#" class="nav-link active">バッジ</a>
+        </div>
+
+        <div id="loadingArea" class="loading">
+            <div class="spinner"></div>
+            <span style="color:#888;font-size:14px;">バッジデータを読み込み中...</span>
+        </div>
+
+        <div id="mainContent" style="display:none;">
+            <div class="hero">
+                <div class="hero-circle">
+                    <svg viewBox="0 0 80 80" width="100%" height="100%">
+                        <circle cx="40" cy="40" r="34" class="hc-bg"/>
+                        <circle id="heroCircle" cx="40" cy="40" r="34" class="hc-fg" stroke-dasharray="213.63" stroke-dashoffset="213.63" transform="rotate(-90 40 40)"/>
+                    </svg>
+                    <div class="hc-text">
+                        <div class="hc-num" id="heroEarned">0</div>
+                        <div class="hc-sub" id="heroTotal">/ 38</div>
+                    </div>
+                </div>
+                <div class="hero-info">
+                    <h2>獲得バッジ</h2>
+                    <div class="hero-cats" id="heroCats"></div>
+                </div>
+            </div>
+
+            <div class="filter-bar" id="filterBar"></div>
+            <div class="badge-grid" id="badgeGrid"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+/* =====================================================
+ *  Firebase 初期化
+ *  ⚠️ 以下のfirebaseConfigを自分のプロジェクト設定に変更してください
+ *  Firebase Console → プロジェクト設定 → ウェブアプリ → SDKの設定と構成
+ * ===================================================== */
+
+let auth, db;
+
+function waitForFirebase() {
+    return new Promise((resolve) => {
+        const check = () => {
+            if (typeof firebase !== "undefined" && firebase.apps && firebase.apps.length > 0) {
+                resolve();
+            } else {
+                setTimeout(check, 100);
+            }
+        };
+        check();
+    });
+};
+
+/* ===== State ===== */
+let currentUser        = null;
+let userStatsData      = null;
+let selectedPrefecture = null;
+let earnedMap = {};
+let activeFilter = "all";
+
+/* ===== Badge Definitions (BadgeManager.allBadges と同一) ===== */
+const CATEGORIES = {
+    post:     { label: "投稿",       icon: "📸", cssClass: "cat-post" },
+    route:    { label: "ルート記録", icon: "📍", cssClass: "cat-route" },
+    dist:     { label: "走行距離",   icon: "🛣️", cssClass: "cat-dist" },
+    pref:     { label: "都道府県",   icon: "🗾", cssClass: "cat-pref" },
+    road:     { label: "道路走破",   icon: "🏁", cssClass: "cat-road" },
+    activity: { label: "活動",       icon: "⚡", cssClass: "cat-activity" }
+};
+
+const ALL_BADGES = [
+    { id:"first_post", name:"初投稿バッジ",     desc:"初めてのスポット投稿！",               icon:"📸", cat:"post" },
+    { id:"post_5",     name:"5件投稿バッジ",     desc:"旅の始まり！スポットを5件シェア",       icon:"📍", cat:"post" },
+    { id:"post_10",    name:"10件投稿達成！",     desc:"あなたは立派な投稿ライダー！",         icon:"⭐", cat:"post" },
+    { id:"post_20",    name:"20件投稿バッジ",     desc:"投稿常連になってきました！",           icon:"🌟", cat:"post" },
+    { id:"post_30",    name:"30件投稿バッジ",     desc:"投稿マイスターに近づいています！",     icon:"🏆", cat:"post" },
+    { id:"post_50",    name:"50件投稿達成！",     desc:"あなたは旅の達人です！",               icon:"👑", cat:"post" },
+    { id:"post_75",    name:"75件投稿バッジ",     desc:"大ベテランライダー！",                 icon:"🔥", cat:"post" },
+    { id:"post_100",   name:"100件投稿バッジ",   desc:"投稿のレジェンド！",                   icon:"🏅", cat:"post" },
+
+    { id:"route_1",    name:"初ルート記録",       desc:"初めてのルートを記録しました！",       icon:"🗺️", cat:"route" },
+    { id:"route_5",    name:"5ルート達成",         desc:"ツーリングを楽しんでいますね！",       icon:"🚶", cat:"route" },
+    { id:"route_10",   name:"10ルート達成",       desc:"しっかり記録できています！",           icon:"🗺️", cat:"route" },
+    { id:"route_20",   name:"20ルート達成",       desc:"あなたは旅人です",                     icon:"🚗", cat:"route" },
+    { id:"route_30",   name:"30ルート達成",       desc:"旅の達人レベルに到達！",               icon:"🚴", cat:"route" },
+    { id:"route_50",   name:"50ルート達成",       desc:"走り屋の風格が出てきました！",         icon:"⚡", cat:"route" },
+    { id:"route_100",  name:"100ルート達成",     desc:"レジェンド・ライダー！",               icon:"🏅", cat:"route" },
+
+    { id:"dist_10km",   name:"10km走破",          desc:"初めての10km達成！",                   icon:"🚶", cat:"dist" },
+    { id:"dist_50km",   name:"50km走破",          desc:"50km走ってみました！",                 icon:"🚲", cat:"dist" },
+    { id:"dist_100km",  name:"100km走破",         desc:"100km達成！旅が楽しくなってきた！",   icon:"🚗", cat:"dist" },
+    { id:"dist_200km",  name:"200km走破",         desc:"本格的なツーリングに突入です！",       icon:"🏍️", cat:"dist" },
+    { id:"dist_500km",  name:"500km走破",         desc:"半径の広がった旅路！",                 icon:"⚡", cat:"dist" },
+    { id:"dist_1000km", name:"1000km達成",       desc:"走行レジェンド！1000km突破！",         icon:"🌏", cat:"dist" },
+
+    { id:"pref_1",      name:"初旅人",           desc:"初めて他県を訪問！",                   icon:"📌", cat:"pref" },
+    { id:"pref_5",      name:"5県制覇",           desc:"5つの都道府県を訪問",                 icon:"🗺️", cat:"pref" },
+    { id:"pref_10",     name:"10県制覇",          desc:"旅のベテラン！",                       icon:"🗾", cat:"pref" },
+    { id:"pref_20",     name:"20県制覇",          desc:"日本の半分近くを走破！",               icon:"🌏", cat:"pref" },
+    { id:"pref_47",     name:"全国制覇",          desc:"47都道府県完全制覇！",                 icon:"🌏", cat:"pref" },
+    { id:"pref_kanto",  name:"関東マスター",      desc:"関東7県すべて訪問",                   icon:"⭐", cat:"pref" },
+    { id:"pref_tohoku", name:"東北マスター",      desc:"東北6県すべて訪問",                   icon:"❄️", cat:"pref" },
+    { id:"pref_kyushu", name:"九州マスター",      desc:"九州7県+沖縄すべて訪問",             icon:"☀️", cat:"pref" },
+
+    { id:"road_10pct",  name:"道路探検家",        desc:"走破率10%達成！",                     icon:"🛤️", cat:"road" },
+    { id:"road_25pct",  name:"道路ハンター",      desc:"走破率25%達成！",                     icon:"🛤️", cat:"road" },
+    { id:"road_50pct",  name:"道路マスター",      desc:"走破率50%達成！",                     icon:"🏅", cat:"road" },
+    { id:"road_75pct",  name:"道路の覇者",        desc:"走破率75%達成！",                     icon:"🏅", cat:"road" },
+    { id:"road_100pct", name:"完全走破",          desc:"全道路を走破！",                       icon:"👑", cat:"road" },
+
+    { id:"streak_7",    name:"週間ライダー",      desc:"7日連続で記録！",                     icon:"🔥", cat:"activity" },
+    { id:"streak_30",   name:"月間ライダー",      desc:"30日連続で記録！",                     icon:"🔥", cat:"activity" },
+    { id:"night_rider", name:"ナイトライダー",    desc:"夜間（21時以降）に記録",               icon:"🌙", cat:"activity" },
+    { id:"early_bird",  name:"アーリーバード",    desc:"早朝（6時前）に記録",                 icon:"🌅", cat:"activity" }
+];
+
+/* ===== Auth ===== */
+document.addEventListener("DOMContentLoaded", async () => {
+    await waitForFirebase();
+    auth = firebase.auth();
+    db   = firebase.firestore();
+
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("appScreen").style.display  = "block";
+            await loadUserProfile(user.uid);
+            await loadBadges(user.uid);
+        } else {
+            currentUser = null;
+            document.getElementById("loginScreen").style.display = "flex";
+            document.getElementById("appScreen").style.display  = "none";
+        }
+    });
+});
+
+async function handleLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass = document.getElementById("loginPassword").value;
+    const errEl = document.getElementById("loginError");
+    const btn = document.getElementById("btnLogin");
+    errEl.textContent = ""; btn.disabled = true;
+    try { await auth.signInWithEmailAndPassword(email, pass); }
+    catch (e) { errEl.textContent = "ログインに失敗しました: " + e.message; }
+    btn.disabled = false;
+}
+function handleLogout() { auth.signOut(); }
+
+async function loadUserProfile(uid) {
+    try {
+        const doc = await db.collection("userInfo").doc(uid).get();
+        if (doc.exists) {
+            const d = doc.data();
+            document.getElementById("userName").textContent = d.userName || "";
+            if (d.userIcon) { const el = document.getElementById("userIcon"); el.src = d.userIcon; el.style.display = "block"; }
+        }
+    } catch (e) { console.warn(e); }
+}
+
+/* ===== Badge Loading ===== */
+async function loadBadges(uid) {
+    showLoading(true);
+    try {
+        const snap = await db.collection("userInfo").doc(uid).collection("badges").get();
+        earnedMap = {};
+        snap.forEach(doc => { earnedMap[doc.id] = doc.data(); });
+        renderAll();
+        document.getElementById("mainContent").style.display = "block";
+    } catch (e) {
+        console.error("バッジ読み込みエラー:", e);
+    }
+    showLoading(false);
+}
+
+/* ===== Rendering ===== */
+function renderAll() {
+    renderHero();
+    renderFilterBar();
+    renderBadgeGrid();
+}
+
+function renderHero() {
+    const total = ALL_BADGES.length;
+    const earned = Object.keys(earnedMap).length;
+    const rate = total > 0 ? earned / total : 0;
+
+    document.getElementById("heroEarned").textContent = earned;
+    document.getElementById("heroTotal").textContent = `/ ${total}`;
+
+    const circumference = 213.63;
+    setTimeout(() => {
+        document.getElementById("heroCircle").style.strokeDashoffset = circumference * (1 - rate);
+    }, 100);
+
+    const catCounts = {};
+    Object.keys(CATEGORIES).forEach(k => catCounts[k] = { total: 0, earned: 0 });
+    ALL_BADGES.forEach(b => { catCounts[b.cat].total++; });
+    Object.keys(earnedMap).forEach(id => {
+        const badge = ALL_BADGES.find(b => b.id === id);
+        if (badge) catCounts[badge.cat].earned++;
+    });
+
+    const catsEl = document.getElementById("heroCats");
+    catsEl.innerHTML = "";
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const c = catCounts[key];
+        const el = document.createElement("span");
+        el.className = "hero-cat";
+        el.innerHTML = `${cat.icon} ${cat.label} <span class="hc-count">${c.earned}/${c.total}</span>`;
+        catsEl.appendChild(el);
+    });
+}
+
+function renderFilterBar() {
+    const bar = document.getElementById("filterBar");
+    bar.innerHTML = "";
+
+    const allBtn = document.createElement("button");
+    allBtn.className = `filter-btn ${activeFilter === "all" ? "active" : ""}`;
+    allBtn.textContent = `すべて (${ALL_BADGES.length})`;
+    allBtn.onclick = () => { activeFilter = "all"; renderFilterBar(); renderBadgeGrid(); };
+    bar.appendChild(allBtn);
+
+    const earnedBtn = document.createElement("button");
+    earnedBtn.className = `filter-btn ${activeFilter === "earned" ? "active" : ""}`;
+    const earnedCount = Object.keys(earnedMap).length;
+    earnedBtn.textContent = `獲得済み (${earnedCount})`;
+    earnedBtn.onclick = () => { activeFilter = "earned"; renderFilterBar(); renderBadgeGrid(); };
+    bar.appendChild(earnedBtn);
+
+    Object.entries(CATEGORIES).forEach(([key, cat]) => {
+        const btn = document.createElement("button");
+        btn.className = `filter-btn ${activeFilter === key ? "active" : ""}`;
+        btn.textContent = `${cat.icon} ${cat.label}`;
+        btn.onclick = () => { activeFilter = key; renderFilterBar(); renderBadgeGrid(); };
+        bar.appendChild(btn);
+    });
+}
+
+function renderBadgeGrid() {
+    const grid = document.getElementById("badgeGrid");
+    grid.innerHTML = "";
+
+    let filtered = ALL_BADGES;
+    if (activeFilter === "earned") {
+        filtered = ALL_BADGES.filter(b => earnedMap[b.id]);
+    } else if (activeFilter !== "all") {
+        filtered = ALL_BADGES.filter(b => b.cat === activeFilter);
+    }
+
+    filtered.forEach(badge => {
+        const isEarned = !!earnedMap[badge.id];
+        const catInfo = CATEGORIES[badge.cat];
+
+        const card = document.createElement("div");
+        card.className = `badge-card ${isEarned ? "earned" : "locked"}`;
+
+        let dateHtml = "";
+        if (isEarned) {
+            const data = earnedMap[badge.id];
+            const ts = data.earnedAt;
+            dateHtml = `<div class="bc-date">${formatTimestamp(ts)}</div>`;
+        } else {
+            dateHtml = `<div class="bc-locked-label">未獲得</div>`;
+        }
+
+        card.innerHTML = `
+            ${isEarned ? '<div class="bc-stamp">✓</div>' : ''}
+            <span class="bc-category ${catInfo.cssClass}">${catInfo.label}</span>
+            <span class="bc-icon">${badge.icon}</span>
+            <div class="bc-name">${badge.name}</div>
+            <div class="bc-desc">${badge.desc}</div>
+            ${dateHtml}
+        `;
+
+        grid.appendChild(card);
+    });
+
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa;font-size:14px;">該当するバッジがありません</div>';
+    }
+}
+
+/* ===== Helpers ===== */
+function formatTimestamp(ts) {
+    if (!ts) return "";
+    let date;
+    if (ts.toDate) date = ts.toDate();
+    else if (ts.seconds) date = new Date(ts.seconds * 1000);
+    else return "";
+    return `${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,"0")}/${String(date.getDate()).padStart(2,"0")} 獲得`;
+}
+
+function showLoading(show) {
+    document.getElementById("loadingArea").style.display = show ? "flex" : "none";
+    if (show) document.getElementById("mainContent").style.display = "none";
+}
+</script>
+</body>
+</html>
