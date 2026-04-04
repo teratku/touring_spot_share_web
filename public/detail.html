@@ -795,6 +795,10 @@
                 <span class="menu-icon">🗾</span>
                 <span>都道府県制覇マップ</span>
             </a>
+            <a href="/dashboard/dashboard.html" class="menu-item" :class="{ active: isCurrentPage('/dashboard/dashboard.html') }">
+                <span class="menu-icon">📊</span>
+                <span>マイダッシュボード</span>
+            </a>
             <a 
               v-if="currentUser" 
               :href="'/user.html?id=' + currentUser.uid" 

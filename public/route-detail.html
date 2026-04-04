@@ -565,24 +565,20 @@
       </header>
 
       <!-- ハンバーガーメニュー -->
-      <div class="hamburger-menu" :class="{ active: showMenu }" @click.self="closeMenu">
-        <div class="menu-content">
+      <div class="hamburger-menu" :class="{ active: showMenu }" @click="closeMenu">
+        <div class="menu-content" @click.stop>
           <div class="menu-header">
             <h2>メニュー</h2>
-            <button class="menu-close-btn" @click="closeMenu">×</button>
+            <button class="menu-close-btn" @click="closeMenu" aria-label="閉じる">✕</button>
           </div>
           <nav class="menu-nav">
-            <a href="index.html" class="menu-item">
+            <a href="/" class="menu-item" :class="{ active: isCurrentPage('/') }">
               <span class="menu-icon">🏠</span>
               <span>ホーム</span>
             </a>
-            <a href="blog.html" class="menu-item">
+            <a href="/blog/blog.html" class="menu-item">
               <span class="menu-icon">📝</span>
               <span>ブログ</span>
-            </a>
-            <a href="#" class="menu-item active">
-              <span class="menu-icon">🛣️</span>
-              <span>ルート</span>
             </a>
             <a href="/privacypolicy/privacypolicy.html" class="menu-item">
               <span class="menu-icon">🔒</span>
@@ -591,6 +587,14 @@
             <a href="/termsofservice/termsofservice.html" class="menu-item">
               <span class="menu-icon">📋</span>
               <span>利用規約</span>
+            </a>
+            <a href="/conquest/conquest.html" class="menu-item">  <!-- ← ここに追加 -->
+                <span class="menu-icon">🗾</span>
+                <span>都道府県制覇マップ</span>
+            </a>
+            <a href="/dashboard/dashboard.html" class="menu-item" :class="{ active: isCurrentPage('/dashboard/dashboard.html') }">
+                <span class="menu-icon">📊</span>
+                <span>マイダッシュボード</span>
             </a>
             <a 
               v-if="currentUser" 
@@ -604,7 +608,7 @@
             <a v-if="!currentUser" href="/login.html" class="menu-item">  <!-- 追加 -->
               <span class="menu-icon">🔑</span>
               <span>ログイン</span>
-            </a>            
+            </a>
             <a v-if="currentUser" href="#" class="menu-item" @click.prevent="logout">  <!-- 追加 -->
               <span class="menu-icon">🚪</span>
               <span>ログアウト</span>
