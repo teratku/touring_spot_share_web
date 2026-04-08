@@ -1424,6 +1424,153 @@
         margin-bottom: 70px;
       }
 
+      /* ===== オンボーディングモーダル ===== */
+      .onboarding-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        backdrop-filter: blur(4px);
+      }
+      .onboarding-modal {
+        background: #fff;
+        border-radius: 20px;
+        max-width: 400px;
+        width: 100%;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: obModalIn 0.4s ease;
+      }
+      @keyframes obModalIn {
+        from { opacity: 0; transform: translateY(30px) scale(0.95); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .onboarding-header {
+        background: linear-gradient(135deg, #00A8C6, #228B22);
+        padding: 32px 24px 24px;
+        text-align: center;
+        color: #fff;
+      }
+      .onboarding-header .ob-main-icon {
+        font-size: 52px;
+        display: block;
+        margin-bottom: 12px;
+      }
+      .onboarding-header h2 {
+        font-size: 19px;
+        font-weight: 700;
+        margin: 0 0 6px;
+      }
+      .onboarding-header p {
+        font-size: 13px;
+        opacity: 0.9;
+        margin: 0;
+      }
+      .onboarding-steps {
+        padding: 20px 24px 8px;
+      }
+      .ob-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .ob-step:last-child {
+        border-bottom: none;
+      }
+      .ob-step-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #00A8C6, #0090aa);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .ob-step-text h3 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 3px;
+      }
+      .ob-step-text p {
+        font-size: 13px;
+        color: #666;
+        margin: 0;
+        line-height: 1.5;
+      }
+      .onboarding-footer {
+        padding: 12px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .ob-btn-start {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #00A8C6, #228B22);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+      .ob-btn-start:hover { opacity: 0.9; }
+      .ob-btn-skip {
+        width: 100%;
+        padding: 10px;
+        background: transparent;
+        color: #aaa;
+        border: none;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .ob-btn-skip:hover { color: #666; }
+
+      /* ===== マップヒントトースト ===== */
+      .map-hint-toast {
+        position: absolute;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 24px;
+        font-size: 14px;
+        white-space: nowrap;
+        z-index: 500;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        animation: toastFadeIn 0.5s ease, toastFadeOut 0.5s ease 4s forwards;
+      }
+      @keyframes toastFadeIn {
+        from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+        to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      }
+      @keyframes toastFadeOut {
+        from { opacity: 1; }
+        to   { opacity: 0; visibility: hidden; }
+      }
+
+      /* ダークモード対応 */
+      @media (prefers-color-scheme: dark) {
+        .onboarding-modal { background: #1c1c1e; }
+        .ob-step { border-bottom-color: #2c2c2e; }
+        .ob-step-text h3 { color: #f0f0f0; }
+        .ob-step-text p { color: #ababab; }
+      }
 
     </style>
   </head>
@@ -1432,6 +1579,43 @@
     <div id="app">
       <!-- ヘッダー -->
       <header>
+        <!-- ===== オンボーディングモーダル（初回訪問時のみ） ===== -->
+        <div class="onboarding-overlay" v-if="showOnboarding" @click.self="closeOnboarding">
+          <div class="onboarding-modal">
+            <div class="onboarding-header">
+              <span class="ob-main-icon">🏍️</span>
+              <h2>ツーリングスポットシェアへようこそ！</h2>
+              <p>全国のライダーが投稿したおすすめスポットをチェックしよう</p>
+            </div>
+            <div class="onboarding-steps">
+              <div class="ob-step">
+                <div class="ob-step-icon">🗺️</div>
+                <div class="ob-step-text">
+                  <h3>地図でスポットを発見</h3>
+                  <p>全国のおすすめスポットをマップ上で確認。ピンをタップして詳細をチェック！</p>
+                </div>
+              </div>
+              <div class="ob-step">
+                <div class="ob-step-icon">📋</div>
+                <div class="ob-step-text">
+                  <h3>リストで一覧表示</h3>
+                  <p>エリアやタグで絞り込み検索。気になる場所をすぐ見つけられる！</p>
+                </div>
+              </div>
+              <div class="ob-step">
+                <div class="ob-step-icon">🛣️</div>
+                <div class="ob-step-text">
+                  <h3>ツーリングプランを作成</h3>
+                  <p>行きたいスポットをまとめてプランに保存。次のツーリングの計画に活用しよう！</p>
+                </div>
+              </div>
+            </div>
+            <div class="onboarding-footer">
+              <button class="ob-btn-start" @click="closeOnboarding">さっそく使ってみる 🚀</button>
+              <button class="ob-btn-skip" @click="closeOnboarding">スキップ</button>
+            </div>
+          </div>
+        </div>
         <div class="header-content">
           <div class="header-left">
             <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
@@ -1554,7 +1738,12 @@
 
           <!-- マップコンテナ -->
           <div v-else class="map-container-full">
-            <div id="map-main"></div>
+            <div id="map-main">
+              <!-- ===== マップ操作ヒント（初回のみ） ===== -->
+              <div class="map-hint-toast" v-if="showMapHint">
+                📍 ピンをタップしてスポット詳細を確認しよう！
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2209,6 +2398,8 @@
                 planSpots: JSON.parse(localStorage.getItem('tourPlanSpots') || '[]'),
                 appBannerDismissed: localStorage.getItem('appBannerDismissed') === 'true',
                 bannerHeight: 0,
+                showOnboarding: false,
+                showMapHint: false,
             };
             },
             components: {
@@ -2246,6 +2437,10 @@
                     resizeObserver.observe(banner);
                   }
                 });
+                // オンボーディング（初回訪問時のみ）
+                if (!localStorage.getItem('tss_onboarding_done')) {
+                  this.showOnboarding = true;
+                };
             } catch (e) {
                 console.error('初期化エラー:', e);
                 this.error = e.message;
@@ -2529,29 +2724,6 @@
 
                 // ── Google Maps POI クリック時に「プランに追加」ボタンを注入 ──────────
                 const poiInfoWindow = new google.maps.InfoWindow();
-
-                // グローバル関数として登録（InfoWindow内のHTMLから呼び出すため）
-                /*window._addToPlan = (placeId, name, address, lat, lng) => {
-                  const already = this.planSpots.some(s => s.placeId === placeId);
-                  if (already) {
-                    this.showToast('すでにプランに追加されています', 'error');
-                    return;
-                  }
-                  const spot = { placeId, name, address, lat, lng };
-                  this.planSpots.push(spot);
-                  localStorage.setItem('tourPlanSpots', JSON.stringify(this.planSpots));
-                  this.showToast(`「${name}」をプランに追加しました ✅`, 'success');
-
-                  // ボタンを「追加済み」に変更
-                  const btn = document.getElementById(`poi-btn-${placeId}`);
-                  if (btn) {
-                    btn.textContent = '✅ 追加済み';
-                    btn.classList.add('added');
-                    btn.disabled = true;
-                  }
-                };*/
-
-                
 
                 mapMain.addListener('click', async (event) => {
                   if (!event.placeId) return;
@@ -3176,6 +3348,20 @@
               dismissAppBanner() {
                 this.appBannerDismissed = true;
                 localStorage.setItem('appBannerDismissed', 'true');
+              },
+              closeOnboarding() {
+                this.showOnboarding = false;
+                localStorage.setItem('tss_onboarding_done', '1');
+                // モーダルを閉じた後、マップヒントを初回のみ表示
+                if (!localStorage.getItem('tss_map_hint_shown')) {
+                  localStorage.setItem('tss_map_hint_shown', '1');
+                  setTimeout(() => {
+                    this.showMapHint = true;
+                    setTimeout(() => {
+                      this.showMapHint = false;
+                    }, 4500);
+                  }, 600);
+                }
               },
             }
           });
