@@ -1323,6 +1323,63 @@
       }
       .long-press-btn.cancel-btn:hover { background: #e0e0e0; }
 
+      /* ========== ボトムナビバー（モバイルのみ） ========== */
+      .bottom-nav {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .bottom-nav {
+          display: flex;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 60px;
+          background: white;
+          border-top: 1px solid #E0E0E0;
+          z-index: 1000;
+          box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .bottom-nav-item {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          cursor: pointer;
+          border: none;
+          background: none;
+          color: #999999;
+          font-size: 10pt;
+          font-weight: 500;
+          transition: color 0.2s ease;
+          text-decoration: none;
+          padding: 0;
+        }
+
+        .bottom-nav-item.active {
+          color: #00A8C6;
+        }
+
+        .bottom-nav-icon {
+          font-size: 22px;
+          line-height: 1;
+        }
+
+        .bottom-nav-label {
+          font-size: 10px;
+          line-height: 1;
+        }
+
+        /* モバイル時はヘッダーのタブを非表示 */
+        header .tab-buttons {
+          display: none;
+        }
+      }
+
       /* ===== App Store バッジバナー ===== */
       .app-store-banner {
         position: fixed;
@@ -1417,6 +1474,21 @@
           background: #1e1e1e;
           border-top-color: rgba(0,168,198,0.3);
           box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* アプリバナー非表示時 */
+        .bottom-nav {
+          bottom: 0;
+        }
+        /* アプリバナー表示中はボトムナビをバナー分上にずらす */
+        .bottom-nav.has-banner {
+          bottom: 70px;
+        }
+        /* コンテンツの余白 */
+        .page-footer {
+          margin-bottom: 60px;
         }
       }
 
@@ -1571,6 +1643,7 @@
         .ob-step-text h3 { color: #f0f0f0; }
         .ob-step-text p { color: #ababab; }
       }
+      
 
     </style>
   </head>
@@ -2014,6 +2087,39 @@
 
           </div>
         </div>
+        <!-- ボトムナビバー（モバイルのみ） -->
+        <nav class="bottom-nav" :class="{ 'has-banner': !appBannerDismissed }">
+          <button
+            class="bottom-nav-item"
+            :class="{ active: currentView === 'map' }"
+            @click="switchView('map')"
+          >
+            <span class="bottom-nav-icon">🗺️</span>
+            <span class="bottom-nav-label">マップ</span>
+          </button>
+          <button
+            class="bottom-nav-item"
+            :class="{ active: currentView === 'list' }"
+            @click="switchView('list')"
+          >
+            <span class="bottom-nav-icon">📋</span>
+            <span class="bottom-nav-label">リスト</span>
+          </button>
+          <a
+            href="/touring-plan.html"
+            class="bottom-nav-item"
+          >
+            <span class="bottom-nav-icon">🏍️</span>
+            <span class="bottom-nav-label">プラン</span>
+          </a>
+          <button
+            class="bottom-nav-item"
+            @click="toggleMenu"
+          >
+            <span class="bottom-nav-icon">☰</span>
+            <span class="bottom-nav-label">メニュー</span>
+          </button>
+        </nav>
     </div>
 
     <script>
