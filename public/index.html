@@ -365,6 +365,63 @@
       .search-clear.hidden {
         display: none;
       }
+      /* ========== 地域フィルター ========== */
+      .region-filter {
+        max-width: 1200px;
+        margin: 8px auto 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .region-filter::-webkit-scrollbar {
+        display: none;
+      }
+
+      .region-chips {
+        display: flex;
+        gap: 8px;
+        padding: 4px 2px 2px;
+        white-space: nowrap;
+      }
+
+      .region-chip {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+        color: white;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .region-chip:hover {
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      .region-chip.active {
+        background: white;
+        color: #00A8C6;
+        border-color: white;
+        font-weight: 600;
+      }
+
+      /* ダークモード */
+      @media (prefers-color-scheme: dark) {
+        .region-chip {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+        .region-chip.active {
+          background: #00A8C6;
+          color: white;
+          border-color: #00A8C6;
+        }
+      }
 
       /* ========== メインコンテナ ========== */
       .container {
@@ -1744,6 +1801,20 @@
             ✕
           </button>
         </div>
+        <!-- 地域フィルター -->
+        <div class="region-filter">
+          <div class="region-chips">
+            <button
+              v-for="region in regions"
+              :key="region.key"
+              class="region-chip"
+              :class="{ active: selectedRegion === region.key }"
+              @click="selectRegion(region.key)"
+            >
+              {{ region.label }}
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- ハンバーガーメニュー -->
@@ -2506,6 +2577,19 @@
                 bannerHeight: 0,
                 showOnboarding: false,
                 showMapHint: false,
+                selectedRegion: 'all',
+                regions: [
+                  { key: 'all',    label: '🗾 全国' },
+                  { key: '北海道', label: '🌲 北海道' },
+                  { key: '東北',   label: '⛄ 東北' },
+                  { key: '関東',   label: '🗼 関東' },
+                  { key: '中部',   label: '🗻 中部' },
+                  { key: '近畿',   label: '🏯 近畿' },
+                  { key: '中国',   label: '⛩️ 中国' },
+                  { key: '四国',   label: '🍊 四国' },
+                  { key: '九州',   label: '🌋 九州' },
+                  { key: '沖縄',   label: '🌺 沖縄' },
+                ],
             };
             },
             components: {
@@ -2747,6 +2831,30 @@
                 }
             },
 
+            performRegionFilter() {
+              const regionMap = {
+                '北海道': ['北海道'],
+                '東北':   ['青森県','岩手県','宮城県','秋田県','山形県','福島県'],
+                '関東':   ['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県'],
+                '中部':   ['新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県'],
+                '近畿':   ['三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県'],
+                '中国':   ['鳥取県','島根県','岡山県','広島県','山口県'],
+                '四国':   ['徳島県','香川県','愛媛県','高知県'],
+                '九州':   ['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県'],
+                '沖縄':   ['沖縄県'],
+              };
+              const prefList = regionMap[this.selectedRegion] || [];
+              this.filteredLocations = this.locations.filter(location => {
+                const pref = location.administrative || '';
+                return prefList.some(p => pref.includes(p));
+              });
+              this.displayedLocations = [];
+              this.currentPage = 0;
+              this.hasMore = true;
+              this.loadMoreSearchResults();
+              if (this.mapInitialized) this.createMarkers();
+            },
+
               switchView(view) {
                 this.currentView = view;
                 if (view === 'map') {
@@ -2932,7 +3040,9 @@
                 const self = this;
 
                 // 検索中かどうかで使用するロケーションを分岐
-                const locationsToShow = this.searchQuery.trim() ? this.filteredLocations : this.locations;
+                const locationsToShow = (this.searchQuery.trim() || this.selectedRegion !== 'all')
+                ? this.filteredLocations
+                : this.locations;
 
                 // マーカーを作成
                 locationsToShow.forEach(location => {
@@ -3098,22 +3208,40 @@
                 const query = this.searchQuery.trim().toLowerCase();
                 
                 // 検索クエリが空の場合は全データを表示
-                if (!query) {
+                if (!query && this.selectedRegion === 'all') {
                   this.filteredLocations = [];
                   this.displayedLocations = [];
                   this.currentPage = 0;
                   this.hasMore = true;
                   this.loadMoreDisplayedLocations();
                   
-                  // マップを更新
                   if (this.mapInitialized) {
                     this.createMarkers();
                   }
+                  return;
+                } else if (!query) {
+                  this.performRegionFilter();
                   return;
                 }
 
                 // キャッシュデータから検索
                 this.filteredLocations = this.locations.filter(location => {
+                  if (this.selectedRegion !== 'all') {
+                    const regionMap = {
+                      '北海道': ['北海道'],
+                      '東北':   ['青森県','岩手県','宮城県','秋田県','山形県','福島県'],
+                      '関東':   ['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県'],
+                      '中部':   ['新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県'],
+                      '近畿':   ['三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県'],
+                      '中国':   ['鳥取県','島根県','岡山県','広島県','山口県'],
+                      '四国':   ['徳島県','香川県','愛媛県','高知県'],
+                      '九州':   ['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県'],
+                      '沖縄':   ['沖縄県'],
+                    };
+                    const prefList = regionMap[this.selectedRegion] || [];
+                    const pref = location.administrative || '';
+                    if (!prefList.some(p => pref.includes(p))) return false;
+                  }
                   // administrative(String)で検索
                   if (location.administrative && 
                       location.administrative.toLowerCase().includes(query)) {
@@ -3185,6 +3313,10 @@
                 this.searchQuery = '';
                 this.performSearch();
               },
+              selectRegion(regionKey) {
+                this.selectedRegion = regionKey;
+                this.performSearch();
+              },
 
               handleScroll() {
                 if (this.currentView !== 'list' || this.isLoadingMore || !this.hasMore) return;
@@ -3197,7 +3329,7 @@
                   this.isLoadingMore = true;
                   
                   // 検索中かどうかで処理を分岐
-                  if (this.searchQuery.trim()) {
+                  if (this.searchQuery.trim() || this.selectedRegion !== 'all') {
                     this.loadMoreSearchResults();
                   } else {
                     this.loadMoreDisplayedLocations();
