@@ -856,6 +856,94 @@
         margin-bottom: 16pt;
         opacity: 0.5;
       }
+      
+      /* PC以外ではスプリット切り替えボタンを非表示 */
+      .split-toggle-btn {
+        display: none;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+        color: white;
+        padding: 6px 14px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .split-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      .split-toggle-btn.active {
+        background: white;
+        color: #00A8C6;
+        border-color: white;
+      }
+
+      /* ========== スプリットビュー（PC: 1024px以上） ========== */
+      @media (min-width: 1024px) {
+        .split-view-active .container {
+          padding-top: 0;
+          padding-left: 0;
+          padding-right: 0;
+          max-width: 100%;
+        }
+
+        .split-layout {
+          display: flex;
+          height: calc(100vh - 140px); /* ヘッダー + 検索バー分 */
+          gap: 0;
+        }
+
+        .split-map-pane {
+          flex: 1;
+          min-width: 0;
+          position: sticky;
+          top: 140px;
+          height: calc(100vh - 140px);
+        }
+
+        .split-map-pane .map-container-full {
+          height: 100%;
+          border-radius: 0;
+          box-shadow: none;
+        }
+
+        .split-list-pane {
+          width: 400px;
+          flex-shrink: 0;
+          overflow-y: auto;
+          border-left: 1px solid #E0E0E0;
+          background: #F9F9F9;
+        }
+
+        .split-list-pane #location-list {
+          grid-template-columns: 1fr;
+          padding: 16px;
+          margin-top: 0;
+        }
+
+        /* スプリットビュー時はタブ切り替えを非表示 */
+        .split-view-active header .tab-buttons {
+          display: none;
+        }
+
+        /* スプリットビュー切り替えボタン */
+        .split-toggle-btn {
+          display: flex;
+        }
+      }
+
+      /* ダークモード */
+      @media (prefers-color-scheme: dark) {
+        .split-list-pane {
+          background: #1C1C1E;
+          border-left-color: #48484A;
+        }
+      }
 
       /* ========== レスポンシブ ========== */
       @media (max-width: 768px) {
@@ -1755,6 +1843,15 @@
             </div>
           </div>
           <!-- タブ切り替えボタン -->
+          <!-- スプリットビュー切り替え（PC用） -->
+          <button
+            class="split-toggle-btn"
+            :class="{ active: isSplitView }"
+            @click="toggleSplitView"
+            title="マップ＋リスト分割表示"
+          >
+            ⬛ 分割表示
+          </button>
           <div class="tab-buttons">
             <button 
               class="tab-btn" 
@@ -1871,70 +1968,109 @@
       </div>
 
       <!-- メインコンテンツ -->
-      <div class="container">
-        <!-- マップビュー -->
-        <div class="map-view" :class="{ active: currentView === 'map' }">
-          <!-- ローディング状態 -->
-          <div v-if="isInitialLoading" class="loading">
-            <div class="spinner"></div>
-            <p>マップを読み込み中...</p>
-          </div>
+      <!-- メインコンテンツ -->
+      <div class="container" :class="{ 'split-view-active': isSplitView }">
 
-          <!-- マップコンテナ -->
-          <div v-else class="map-container-full">
-            <div id="map-main">
-              <!-- ===== マップ操作ヒント（初回のみ） ===== -->
-              <div class="map-hint-toast" v-if="showMapHint">
-                📍 ピンをタップしてスポット詳細を確認しよう！
+        <!-- ===== スプリットレイアウト（PC・分割ONのみ） ===== -->
+        <template v-if="isSplitView">
+          <div class="split-layout">
+            <!-- 左：マップ -->
+            <div class="split-map-pane">
+              <div v-if="isInitialLoading" class="loading">
+                <div class="spinner"></div>
+                <p>マップを読み込み中...</p>
+              </div>
+              <div v-else class="map-container-full">
+                <div id="map-main">
+                  <div class="map-hint-toast" v-if="showMapHint">
+                    📍 ピンをタップしてスポット詳細を確認しよう！
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 右：リスト -->
+            <div class="split-list-pane">
+              <div v-if="isInitialLoading" class="loading" style="padding: 40px 20px;">
+                <div class="spinner"></div>
+                <p>読み込み中...</p>
+              </div>
+              <div v-else-if="locations.length === 0">
+                <div class="empty-state">
+                  <div class="empty-icon">📍</div>
+                  <h3>まだロケーションがありません</h3>
+                </div>
+              </div>
+              <div v-else id="location-list">
+                <location-card
+                  v-for="(location, index) in displayedLocations"
+                  :key="location.id"
+                  :location="location"
+                  :index="index"
+                  :user-cache="userCache"
+                  @show-detail="showDetail"
+                ></location-card>
+              </div>
+              <div v-if="isLoadingMore" class="loading-indicator">
+                <div class="spinner"></div>
               </div>
             </div>
           </div>
-        </div>
+        </template>
 
-        <!-- リストビュー -->
-        <div class="list-view" :class="{ active: currentView === 'list' }">
-          <!-- ローディング状態 -->
-          <div v-if="isInitialLoading" id="location-list" class="loading">
-            <div class="spinner"></div>
-            <p>ロケーションを読み込み中...</p>
-          </div>
-
-          <!-- エラー状態 -->
-          <div v-else-if="error" id="location-list">
-            <div class="empty-state">
-              <div class="empty-icon">⚠️</div>
-              <h3>エラーが発生しました</h3>
-              <p>{{ error }}</p>
+        <!-- ===== 通常レイアウト（モバイル or 分割OFF） ===== -->
+        <template v-else>
+          <!-- マップビュー -->
+          <div class="map-view" :class="{ active: currentView === 'map' }">
+            <div v-if="isInitialLoading" class="loading">
+              <div class="spinner"></div>
+              <p>マップを読み込み中...</p>
+            </div>
+            <div v-else class="map-container-full">
+              <div id="map-main">
+                <div class="map-hint-toast" v-if="showMapHint">
+                  📍 ピンをタップしてスポット詳細を確認しよう！
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- 空の状態 -->
-          <div v-else-if="locations.length === 0" id="location-list">
-            <div class="empty-state">
-              <div class="empty-icon">📍</div>
-              <h3>まだロケーションがありません</h3>
-              <p>最初のツーリングスポットを登録しましょう!</p>
+          <!-- リストビュー -->
+          <div class="list-view" :class="{ active: currentView === 'list' }">
+            <div v-if="isInitialLoading" id="location-list" class="loading">
+              <div class="spinner"></div>
+              <p>ロケーションを読み込み中...</p>
+            </div>
+            <div v-else-if="error" id="location-list">
+              <div class="empty-state">
+                <div class="empty-icon">⚠️</div>
+                <h3>エラーが発生しました</h3>
+                <p>{{ error }}</p>
+              </div>
+            </div>
+            <div v-else-if="locations.length === 0" id="location-list">
+              <div class="empty-state">
+                <div class="empty-icon">📍</div>
+                <h3>まだロケーションがありません</h3>
+                <p>最初のツーリングスポットを登録しましょう!</p>
+              </div>
+            </div>
+            <div v-else id="location-list">
+              <location-card
+                v-for="(location, index) in displayedLocations"
+                :key="location.id"
+                :location="location"
+                :index="index"
+                :user-cache="userCache"
+                @show-detail="showDetail"
+              ></location-card>
+            </div>
+            <div v-if="isLoadingMore && currentView === 'list'" class="loading-indicator">
+              <div class="spinner"></div>
+              <p>読み込み中...</p>
             </div>
           </div>
+        </template>
 
-          <!-- ロケーションリスト -->
-          <div v-else id="location-list">
-            <location-card
-              v-for="(location, index) in displayedLocations"
-              :key="location.id"
-              :location="location"
-              :index="index"
-              :user-cache="userCache"
-              @show-detail="showDetail"
-            ></location-card>
-          </div>
-
-          <!-- 無限スクロールローディング -->
-          <div v-if="isLoadingMore && currentView === 'list'" class="loading-indicator">
-            <div class="spinner"></div>
-            <p>読み込み中...</p>
-          </div>
-        </div>
         <footer class="page-footer" :class="{ 'has-app-banner': !appBannerDismissed }">
           <p>© 2025 ツーリングスポットシェア All rights reserved.</p>
         </footer>
@@ -2577,6 +2713,7 @@
                 bannerHeight: 0,
                 showOnboarding: false,
                 showMapHint: false,
+                isSplitView: false,
                 selectedRegion: 'all',
                 regions: [
                   { key: 'all',    label: '🗾 全国' },
@@ -2640,6 +2777,8 @@
             beforeUnmount() {
             window.removeEventListener('scroll', this.handleScroll);
             document.removeEventListener('keydown', this.handleKeydown);
+            const listPane = document.querySelector('.split-list-pane');
+            if (listPane) listPane.removeEventListener('scroll', this.handleSplitScroll);
             },
             methods: {
             // キャッシュから先に読み込む
@@ -3312,6 +3451,57 @@
               clearSearch() {
                 this.searchQuery = '';
                 this.performSearch();
+              },
+              toggleSplitView() {
+                this.isSplitView = !this.isSplitView;
+                if (this.isSplitView) {
+                  this.$nextTick(async () => {
+                    // マップ初期化
+                    if (!this.mapInitialized && !this.isInitialLoading) {
+                      try {
+                        await waitForGoogleMaps();
+                        await waitForMarkerClusterer();
+                        await this.initializeMap();
+                        this.mapInitialized = true;
+                      } catch (e) {
+                        console.error('マップ初期化エラー:', e);
+                      }
+                    } else if (mapMain) {
+                      setTimeout(() => {
+                        google.maps.event.trigger(mapMain, 'resize');
+                      }, 100);
+                    }
+
+                    // スプリットリストペインにスクロールリスナーを追加
+                    const listPane = document.querySelector('.split-list-pane');
+                    if (listPane) {
+                      listPane.addEventListener('scroll', this.handleSplitScroll);
+                    }
+                  });
+                } else {
+                  // スプリット解除時はリスナーを削除
+                  const listPane = document.querySelector('.split-list-pane');
+                  if (listPane) {
+                    listPane.removeEventListener('scroll', this.handleSplitScroll);
+                  }
+                }
+              },
+              handleSplitScroll() {
+                if (this.isLoadingMore || !this.hasMore) return;
+
+                const listPane = document.querySelector('.split-list-pane');
+                if (!listPane) return;
+
+                const { scrollTop, scrollHeight, clientHeight } = listPane;
+
+                if (scrollTop + clientHeight >= scrollHeight - 300) {
+                  this.isLoadingMore = true;
+                  if (this.searchQuery.trim() || this.selectedRegion !== 'all') {
+                    this.loadMoreSearchResults();
+                  } else {
+                    this.loadMoreDisplayedLocations();
+                  }
+                }
               },
               selectRegion(regionKey) {
                 this.selectedRegion = regionKey;
