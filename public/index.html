@@ -3073,6 +3073,10 @@
                   }
                 });
 
+                await new Promise(resolve => {
+                  google.maps.event.addListenerOnce(mapMain, 'tilesloaded', resolve);
+                });
+
                 await this.createMarkers();
 
                 // ── Google Maps POI クリック時に「プランに追加」ボタンを注入 ──────────
@@ -3780,6 +3784,11 @@
               closeOnboarding() {
                 this.showOnboarding = false;
                 localStorage.setItem('tss_onboarding_done', '1');
+                this.$nextTick(() => {
+                  if (typeof mapMain !== 'undefined' && mapMain) {
+                    google.maps.event.trigger(mapMain, 'resize');
+                  }
+                });
                 // モーダルを閉じた後、マップヒントを初回のみ表示
                 if (!localStorage.getItem('tss_map_hint_shown')) {
                   localStorage.setItem('tss_map_hint_shown', '1');
