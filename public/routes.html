@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <title>ルートを探す | ツーリングスポットシェア</title>
+
+  <!-- SEO / OGP -->
+  <meta name="description" content="ライダーが共有したツーリングルートを一覧で発見。走行距離・エリア・日付からお気に入りのルートを探せます。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ルートを探す | ツーリングスポットシェア">
+  <meta property="og:description" content="ライダーが共有したツーリングルートを一覧で発見。気になるルートをチェックしよう。">
+  <link rel="canonical" href="https://biketeilen.web.app/routes.html">
+
+  <!-- リソースヒント -->
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+
+  <!-- Vue.js 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    [v-cloak] { display: none; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: #F9F9F9;
+      color: #333333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ========== ヘッダー ========== */
+    header {
+      background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+      color: white;
+      padding: 0 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .header-title {
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .back-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 18px;
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+    }
+    .header-link {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* ========== コンテンツ ========== */
+    .container { max-width: 1000px; margin: 0 auto; padding: 16px; }
+    .page-lead {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    .page-lead .count { color: #00A8C6; font-weight: bold; }
+
+    /* ========== ルートグリッド ========== */
+    .routes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .route-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.1s;
+      display: flex;
+      flex-direction: column;
+    }
+    .route-card:hover {
+      box-shadow: 0 6px 20px rgba(0,168,198,0.2);
+      transform: translateY(-2px);
+    }
+    .route-cover-wrap { position: relative; width: 100%; aspect-ratio: 16 / 10; background: #e8eef0; }
+    .route-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .route-cover-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px;
+      background: linear-gradient(135deg, #d8eef2, #dceede);
+      color: #00A8C6;
+    }
+    .route-distance-chip {
+      position: absolute;
+      left: 10px; bottom: 10px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(2px);
+    }
+    .route-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .route-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 2.6em;
+    }
+    .route-meta { font-size: 12px; color: #888; }
+    .route-author {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 6px;
+      border-top: 1px solid #f3f3f3;
+    }
+    .route-author-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #eee;
+      flex-shrink: 0;
+    }
+    .route-author-icon-fallback {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00A8C6, #228B22);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .route-author-name {
+      font-size: 12px; color: #666;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* ========== もっと見る ========== */
+    .load-more-wrap { text-align: center; margin: 24px 0; }
+    .load-more-btn {
+      background: white;
+      border: 1.5px solid #00A8C6;
+      color: #00A8C6;
+      padding: 11px 28px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .load-more-btn:hover { background: #00A8C6; color: white; }
+    .load-more-btn:disabled { opacity: 0.5; cursor: default; }
+
+    /* ========== ローディング / 空 ========== */
+    .loading-screen, .empty-screen {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 320px; gap: 12px; color: #888;
+    }
+    .empty-screen .emoji { font-size: 48px; }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #e0e0e0;
+      border-top-color: #00A8C6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ========== 帰属表示 ========== */
+    .attribution {
+      max-width: 1000px;
+      margin: 8px auto 32px;
+      padding: 0 16px;
+      font-size: 11px;
+      color: #aaa;
+      text-align: center;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #1C1C1E; color: #F2F2F7; }
+      .route-card { background: #2C2C2E; }
+      .route-title { color: #F2F2F7; }
+      .page-lead { color: #aaa; }
+      .route-author { border-top-color: #3A3A3C; }
+      .load-more-btn { background: #2C2C2E; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+  <!-- ヘッダー -->
+  <header>
+    <div class="header-content">
+      <a class="back-btn" href="/" title="ホームへ">◀</a>
+      <div class="header-title">🛣️ ルートを探す</div>
+      <a class="header-link" href="/">スポット</a>
+    </div>
+  </header>
+
+  <!-- ローディング -->
+  <div class="loading-screen" v-if="loading">
+    <div class="spinner"></div>
+    <span>ルートを読み込み中...</span>
+  </div>
+
+  <!-- 空 -->
+  <div class="empty-screen" v-else-if="routes.length === 0">
+    <span class="emoji">🗺️</span>
+    <p>公開されているルートがまだありません</p>
+  </div>
+
+  <!-- 一覧 -->
+  <div class="container" v-else>
+    <p class="page-lead">ライダーが共有した<span class="count">{{ routes.length }}</span>件のツーリングルート</p>
+
+    <div class="routes-grid">
+      <div
+        v-for="route in routes"
+        :key="route.id"
+        class="route-card"
+        @click="goToRouteDetail(route.id)"
+      >
+        <div class="route-cover-wrap">
+          <img
+            v-if="route.coverImageUrl && !failedCovers.includes(route.id)"
+            :src="route.coverImageUrl"
+            class="route-cover"
+            loading="lazy"
+            alt=""
+            @error="failedCovers.push(route.id)"
+          >
+          <div v-else class="route-cover-placeholder">🛣️</div>
+          <span class="route-distance-chip" v-if="route.distance">📏 {{ formatDistance(route.distance) }}</span>
+        </div>
+        <div class="route-body">
+          <div class="route-title">{{ displayTitle(route) }}</div>
+          <div class="route-meta">📅 {{ formatDate(route.createdAt) }}</div>
+          <div class="route-author">
+            <img
+              v-if="route.userIconUrl && !failedIcons.includes(route.id)"
+              :src="route.userIconUrl"
+              class="route-author-icon"
+              loading="lazy"
+              alt=""
+              @error="failedIcons.push(route.id)"
+            >
+            <span v-else class="route-author-icon-fallback">🏍️</span>
+            <span class="route-author-name">{{ route.userName || '匿名ユーザー' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- もっと見る -->
+    <div class="load-more-wrap" v-if="hasMore">
+      <button class="load-more-btn" :disabled="loadingMore" @click="loadMore">
+        {{ loadingMore ? '読み込み中...' : 'もっと見る' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- 帰属表示 -->
+  <div class="attribution" v-if="!loading">
+    地図・道路データ © OpenStreetMap contributors / Google
+  </div>
+</div>
+
+<script>
+const { createApp, ref, onMounted } = Vue;
+
+// ========== Firebase 初期化待機 ==========
+function waitForFirebase() {
+  return new Promise(resolve => {
+    const check = () => {
+      if (typeof firebase !== 'undefined' && firebase.apps.length > 0) resolve();
+      else setTimeout(check, 100);
+    };
+    check();
+  });
+}
+
+createApp({
+  setup() {
+    const PAGE_SIZE = 24;
+
+    const loading = ref(true);
+    const loadingMore = ref(false);
+    const routes = ref([]);
+    const hasMore = ref(false);
+    const failedCovers = ref([]);
+    const failedIcons = ref([]);
+
+    let db;
+    let lastDoc = null;
+    const userInfoCache = {};          // userID -> { userName, userIconUrl }
+
+    // ========== クエリ生成 ==========
+    // shared_routes は「共有済み（=公開）ルート」の集合。多くのドキュメントには isPublic
+    // フィールドが無いため where では絞らず、明示的に isPublic===false のものだけ後段で除外する。
+    function buildQuery(after) {
+      let q = db.collection('shared_routes').orderBy('createdAt', 'desc');
+      if (after) q = q.startAfter(after);
+      return q.limit(PAGE_SIZE);
+    }
+
+    // ========== ユーザー情報の付与（キャッシュ付き） ==========
+    async function attachUserInfo(routeData) {
+      const uid = routeData.userID;
+      if (!uid) { routeData.userName = '匿名ユーザー'; return; }
+      if (userInfoCache[uid]) {
+        Object.assign(routeData, userInfoCache[uid]);
+        return;
+      }
+      try {
+        const userDoc = await db.collection('userInfo').doc(uid).get();
+        if (userDoc.exists) {
+          const u = userDoc.data();
+          const info = { userName: u.userName || '匿名ユーザー', userIconUrl: u.userIcon || null };
+          userInfoCache[uid] = info;
+          Object.assign(routeData, info);
+        } else {
+          routeData.userName = '匿名ユーザー';
+        }
+      } catch (e) {
+        console.error('ユーザー情報取得エラー:', e);
+        routeData.userName = '匿名ユーザー';
+      }
+    }
+
+    // ========== ページ取得 ==========
+    async function fetchPage(after) {
+      const snap = await buildQuery(after).get();
+      lastDoc = snap.docs.length > 0 ? snap.docs[snap.docs.length - 1] : lastDoc;
+      hasMore.value = snap.docs.length === PAGE_SIZE;
+
+      const page = [];
+      for (const doc of snap.docs) {
+        const data = doc.data();
+        // 非公開（明示的に false）のルートは除外
+        if (data.isPublic === false) continue;
+        data.id = doc.id;
+        await attachUserInfo(data);
+        page.push(data);
+      }
+      return page;
+    }
+
+    // ========== 初回読み込み ==========
+    async function loadInitial() {
+      loading.value = true;
+      try {
+        routes.value = await fetchPage(null);
+      } catch (e) {
+        console.error('ルート読み込みエラー:', e);
+        routes.value = [];
+      } finally {
+        loading.value = false;
+      }
+    }
+
+    // ========== もっと見る ==========
+    async function loadMore() {
+      if (loadingMore.value || !hasMore.value || !lastDoc) return;
+      loadingMore.value = true;
+      try {
+        const page = await fetchPage(lastDoc);
+        routes.value = routes.value.concat(page);
+      } catch (e) {
+        console.error('追加読み込みエラー:', e);
+        hasMore.value = false;
+      } finally {
+        loadingMore.value = false;
+      }
+    }
+
+    // ========== 整形 ==========
+    // タイトルが未設定（UUID・ファイル名・route_xxx など）の場合は汎用ラベルにフォールバック
+    const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    function displayTitle(route) {
+      const t = (route.title || '').trim();
+      if (!t || UUID_RE.test(t) || /^route_/i.test(t) || /\.json$/i.test(t)) return 'ツーリングルート';
+      return t;
+    }
+
+    function formatDistance(meters) {
+      if (!meters || isNaN(meters)) return '0 km';
+      return (meters / 1000).toFixed(1) + ' km';
+    }
+    function formatDate(timestamp) {
+      if (!timestamp || !timestamp.toDate) return '';
+      return timestamp.toDate().toLocaleDateString('ja-JP', {
+        year: 'numeric', month: '2-digit', day: '2-digit'
+      });
+    }
+    function goToRouteDetail(id) {
+      window.location.href = `/route-detail.html?id=${id}`;
+    }
+
+    onMounted(async () => {
+      await waitForFirebase();
+      db = firebase.firestore();
+      await loadInitial();
+    });
+
+    return {
+      loading, loadingMore, routes, hasMore,
+      failedCovers, failedIcons,
+      loadMore, displayTitle, formatDistance, formatDate, goToRouteDetail
+    };
+  }
+}).mount('#app');
+</script>
+</body>
+</html>
