@@ -164,7 +164,91 @@
 
 ---
 
-## 7. Webサイト向け：訴求ポイント案（たたき台）
+## 7. データモデル（主要Firestoreコレクション）
+
+> Web／バックエンド連携時の参照用。**Swiftモデルのプロパティ名と実際のFirestoreフィールド名が異なる**項目があるため、実フィールド名で参照すること。
+
+### 7-1. 評価・クチコミ：`wordOfMouth`
+
+- 定数定義: `firebaseDBName.swift` → `womDBName = "wordOfMouth"`
+- 画像Storageパス: `womImages/`
+- 書き込み: `locationDetail_review.swift`（`addDocument`） / 読み込み: `firestoreAction.swift`（`insertWOMData`）
+
+| Firestoreフィールド名 | 型 | 内容 | 備考 |
+|---|---|---|---|
+| （ドキュメントID） | String | レビューの一意ID | 自動採番。`docID` / `review_docID` として利用 |
+| `womAssessment` | Int | 星評価（1〜5） | ⚠️ `rating` ではない |
+| `postUserID` | String | 投稿ユーザーのUID | ⚠️ `userID` ではない |
+| `locationDocID` | String | 対象スポットのドキュメントID（外部キー） | スポットとの紐付け |
+| `comment` | String | レビュー本文 | |
+| `imageNames` | [String] | 添付画像ファイル名 | 現状の投稿は空配列で登録 |
+| `imageURLs` | [String] | 添付画像URL | 同上 |
+| `createTime` | Timestamp | 投稿日時 | ⚠️ `createdAt` ではない。`serverTimestamp()` |
+
+> ※ Swiftモデル `womData` の `BlockBool: Bool` は **Firestore非保存**。読み込み時にブロックリストと突き合わせてクライアント側で算出するフラグ。
+
+### 7-2. 評価集計：`wordOfMouthCounter`
+
+スポットごとの平均評価を高速表示するための集計ドキュメント（`returnWOMCounter` で読み取り）。
+
+| Firestoreフィールド名 | 型 | 内容 |
+|---|---|---|
+| `locationDocID` | String | 対象スポットのドキュメントID |
+| `womCounter` | Int | レビュー件数 |
+| `sumWOMAssessment` | Int | 評価の合計値（平均 = `sumWOMAssessment / womCounter`） |
+
+### 7-3. フィールド命名の対応表（重要）
+
+| 一般的な想定名 | 実際のFirestoreフィールド名 |
+|---|---|
+| `rating` | `womAssessment` (Int) |
+| `comment` | `comment` ✅ |
+| `userID` | `postUserID` (String) |
+| `createdAt` | `createTime` (Timestamp) |
+| （スポット紐付け） | `locationDocID` (String) |
+
+> 別系統の `reviewData` 構造体はプロパティ名が `rating` / `userID` だが、内部では同じ `womAssessment` / `postUserID` フィールドを読んでいる。プロパティ名に引きずられないこと。
+
+### 7-4. サブスクリプション状態（Free / Plus / Pro）
+
+> ⚠️ **重要**：サブスク状態を保存している専用のFirestoreコレクション／フィールドは**存在しない**。tierは保存値ではなく、**StoreKit（Apple）から実行時に算出**している（`SubscriptionStateManager.refreshEntitlements()`）。
+
+**メモリ上の状態**（`SubscriptionStateManager.shared` の `@Published`、シングルトン保持。永続化されない）:
+
+| プロパティ | 型 | 内容 |
+|---|---|---|
+| `currentTier` | `SubscriptionTier` | `.free` / `.plus` / `.pro` |
+| `currentProductID` | `String?` | 購入中のプロダクトID |
+| `subscriptionExpiration` | `Date?` | 有効期限 |
+| `lastCheckedAt` | `Date?` | 最終判定時刻 |
+
+**プロダクトID → tier マッピング**:
+
+| StoreKit プロダクトID | 判定tier |
+|---|---|
+| `biketeilen_pro_monthly` / `biketeilen_pro_yearly` | Pro（最優先） |
+| `biketeilen_plus_monthly` / `biketeilen_plus_yearly` | Plus |
+| `subscription_3`（旧プロダクト） | Plus 相当（移行互換） |
+| （該当なし） | Free |
+
+**判定の優先順位**（上が強い）:
+1. 開発者モード（DEBUGのみ）… `UserDefaults` キー `developer_mode_enabled` → Proに上書き
+2. `forcedProUserIDs`（`SubscriptionStateManager.swift` 内のハードコードUID集合）→ Pro固定（StoreKitスキップ、`currentProductID = "forced_pro_override"`）
+3. StoreKit エンタイトルメント（`Transaction.currentEntitlements` / `Transaction.updates`）
+4. `forcedFreeUserIDs`（同ハードコードUID集合）→ Freeへ強制ダウングレード
+
+**Firestore上の唯一の痕跡（tier本体ではない）**:
+- Pro検出時に付与される**バッジ** `userInfo/{userID}/badges/pro_member`（フィールド: `name` / `description` / `iconName` / `earnedAt`）
+- 一度Proになると付与される記録で、**解約しても消えない**＝現在の課金状態の判定には使えない
+
+**⚠️ Web／バックエンド連携での注意**:
+現状、サーバー側からユーザーのプランを知る手段がない（Firestore非保存のため）。Webで会員種別を出し分けるには:
+- **(A)** Apple の App Store Server API / Server Notifications でサーバー検証する、または
+- **(B)** アプリ側で判定したtierをFirestoreに書き出す設計を追加する（例: `userInfo/{uid}` に `subscriptionTier` / `subscriptionExpiration` フィールド）※現状未実装
+
+---
+
+## 8. Webサイト向け：訴求ポイント案（たたき台）
 
 サイトのセクション構成・キャッチコピーの素案として。
 

@@ -345,6 +345,80 @@
         object-fit: cover;
       }
 
+      /* ========== クチコミ・評価 ========== */
+      .review-summary {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 16pt;
+        background: #FFF9E6;
+        border-radius: 12pt;
+        margin-bottom: 20pt;
+      }
+      .review-average-num {
+        font-size: 40pt;
+        font-weight: bold;
+        color: #FFB400;
+        line-height: 1;
+      }
+      .stars { white-space: nowrap; letter-spacing: 1px; }
+      .star { color: #E0E0E0; font-size: 18pt; }
+      .star.filled { color: #FFB400; }
+      .review-count-text { font-size: 13pt; color: #666666; margin-top: 6px; }
+
+      .review-list { display: flex; flex-direction: column; gap: 16pt; }
+      .review-item {
+        padding: 16pt;
+        background: #F9F9F9;
+        border-radius: 12pt;
+        border-left: 4px solid #FFB400;
+      }
+      .review-head { display: flex; align-items: center; gap: 10px; }
+      .review-user-icon,
+      .review-user-icon-fallback {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .review-user-icon {
+        object-fit: cover;
+        border: 2px solid #00A8C6;
+        background: #E0E0E0;
+      }
+      .review-user-icon-fallback {
+        background: linear-gradient(135deg, #00A8C6, #228B22);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .review-user-meta { flex: 1; min-width: 0; }
+      .review-user-name { font-weight: 600; color: #333333; font-size: 14pt; }
+      .review-date { font-size: 11pt; color: #999999; }
+      .review-stars .star { font-size: 15pt; }
+      .review-comment {
+        margin-top: 10px;
+        color: #333333;
+        font-size: 14pt;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .review-images { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+      .review-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8pt;
+        cursor: pointer;
+      }
+      .reviews-loading,
+      .reviews-empty { text-align: center; padding: 24pt; color: #999999; font-size: 14pt; }
+      .reviews-empty-emoji { font-size: 32px; display: block; margin-bottom: 8px; }
+      .reviews-empty-sub { font-size: 11pt; color: #BBBBBB; margin-top: 6px; }
+
       /* ========== 詳細情報グリッド ========== */
       .detail-info-grid {
         display: grid;
@@ -947,6 +1021,67 @@
               </div>
             </div>
           </div>
+
+          <!-- ========== クチコミ・評価（閲覧専用） ========== -->
+          <div class="detail-card reviews-section">
+            <div class="section-title">⭐ クチコミ・評価</div>
+
+            <!-- 評価サマリー -->
+            <div v-if="!reviewsLoading && reviewCount > 0" class="review-summary">
+              <div class="review-average-num">{{ reviewAverage.toFixed(1) }}</div>
+              <div>
+                <span class="stars">
+                  <span v-for="(filled, i) in starsFor(reviewAverage)" :key="i" class="star" :class="{ filled }">★</span>
+                </span>
+                <div class="review-count-text">{{ reviewCount }}件のクチコミ</div>
+              </div>
+            </div>
+
+            <!-- ローディング -->
+            <div v-if="reviewsLoading" class="reviews-loading">クチコミを読み込み中...</div>
+
+            <!-- 空 -->
+            <div v-else-if="reviewCount === 0" class="reviews-empty">
+              <span class="reviews-empty-emoji">💬</span>
+              まだクチコミがありません
+              <div class="reviews-empty-sub">クチコミの投稿はアプリから行えます</div>
+            </div>
+
+            <!-- レビュー一覧 -->
+            <div v-else class="review-list">
+              <div v-for="review in reviews" :key="review.id" class="review-item">
+                <div class="review-head">
+                  <img
+                    v-if="review.userIcon"
+                    :src="review.userIcon"
+                    class="review-user-icon"
+                    :alt="review.userName"
+                    crossorigin="anonymous"
+                    @error="review.userIcon = null"
+                  >
+                  <div v-else class="review-user-icon-fallback">🏍️</div>
+                  <div class="review-user-meta">
+                    <div class="review-user-name">{{ review.userName }}</div>
+                    <div class="review-date">{{ formatTimestamp(review.createTime) }}</div>
+                  </div>
+                  <span class="stars review-stars">
+                    <span v-for="(filled, i) in starsFor(review.rating)" :key="i" class="star" :class="{ filled }">★</span>
+                  </span>
+                </div>
+                <div v-if="review.comment" class="review-comment">{{ review.comment }}</div>
+                <div v-if="review.imageURLs && review.imageURLs.length" class="review-images">
+                  <img
+                    v-for="(url, i) in review.imageURLs"
+                    :key="i"
+                    :src="url"
+                    class="review-image"
+                    crossorigin="anonymous"
+                    @click="openImageModal(url)"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
         </template>
       </div>
 
@@ -1036,6 +1171,7 @@
       let marker;
       let db;
       let storage;
+      const reviewerCache = {}; // postUserID -> { userName, userIcon }（クチコミ投稿者の重複読み込み防止）
 
       function waitForFirebase() {
         return new Promise((resolve, reject) => {
@@ -1084,7 +1220,11 @@
                 touringPlans: [],
                 touringPlanLimit: 3,
                 touringSpotLimit: 3,
-                touringModalLoading: false
+                touringModalLoading: false,
+                reviews: [],
+                reviewCount: 0,
+                reviewAverage: 0,
+                reviewsLoading: true
               };
             },
             computed: {
@@ -1242,6 +1382,8 @@
                     this.displayLocationOnMap();
                   });
 
+                  this.loadReviews(); // クチコミ・評価（非同期・非ブロッキング）
+
                   this.isLoading = false;
                 } catch (error) {
                   console.error('データ読み込みエラー:', error);
@@ -1285,7 +1427,7 @@
                   const userDoc = await db.collection('userInfo').doc(userID).get();
                   if (userDoc.exists) {
                     this.userInfo = userDoc.data();
-                    
+
                     // ユーザーアイコンも安全なURLに変換
                     if (this.userInfo.userIcon) {
                       this.userInfo.userIcon = await this.getSafeImageUrl(this.userInfo.userIcon);
@@ -1294,6 +1436,82 @@
                 } catch (error) {
                   console.error('ユーザー情報取得エラー:', error);
                 }
+              },
+
+              // ========== クチコミ・評価（閲覧専用 / 投稿はアプリのみ） ==========
+              async loadReviews() {
+                this.reviewsLoading = true;
+                try {
+                  // wordOfMouth を locationDocID で取得（orderBy は付けず後段でソート＝複合インデックス不要）
+                  const snap = await db.collection('wordOfMouth')
+                    .where('locationDocID', '==', this.locationId)
+                    .get();
+
+                  const reviews = [];
+                  for (const docSnap of snap.docs) {
+                    const d = docSnap.data();
+                    const review = {
+                      id: docSnap.id,
+                      rating: d.womAssessment || 0,     // ⚠️ womAssessment = 星評価(1〜5)
+                      comment: d.comment || '',
+                      userID: d.postUserID || '',        // ⚠️ postUserID = 投稿者UID
+                      createTime: d.createTime || null,  // ⚠️ createTime = 投稿日時(Timestamp)
+                      userName: '匿名ユーザー',
+                      userIcon: null,
+                      imageURLs: []
+                    };
+
+                    // 投稿者情報（キャッシュ付き）
+                    if (review.userID) {
+                      if (reviewerCache[review.userID]) {
+                        review.userName = reviewerCache[review.userID].userName;
+                        review.userIcon = reviewerCache[review.userID].userIcon;
+                      } else {
+                        try {
+                          const u = await db.collection('userInfo').doc(review.userID).get();
+                          if (u.exists) {
+                            review.userName = u.data().userName || '匿名ユーザー';
+                            review.userIcon = u.data().userIcon
+                              ? await this.getSafeImageUrl(u.data().userIcon) : null;
+                          }
+                        } catch (e) { /* 取得失敗は匿名表示 */ }
+                        reviewerCache[review.userID] = { userName: review.userName, userIcon: review.userIcon };
+                      }
+                    }
+
+                    // 添付画像（現状ほぼ空配列）
+                    if (Array.isArray(d.imageURLs) && d.imageURLs.length > 0) {
+                      review.imageURLs = await Promise.all(
+                        d.imageURLs.map(url => this.getSafeImageUrl(url))
+                      );
+                    }
+
+                    reviews.push(review);
+                  }
+
+                  // 新しい順にソート
+                  reviews.sort((a, b) => (b.createTime?.seconds || 0) - (a.createTime?.seconds || 0));
+
+                  this.reviews = reviews;
+                  this.reviewCount = reviews.length;
+                  // 集計(wordOfMouthCounter)は重複・不整合があるため実レビューから平均を算出
+                  this.reviewAverage = reviews.length
+                    ? reviews.reduce((s, r) => s + (r.rating || 0), 0) / reviews.length
+                    : 0;
+                } catch (error) {
+                  console.error('クチコミ読み込みエラー:', error);
+                  this.reviews = [];
+                  this.reviewCount = 0;
+                  this.reviewAverage = 0;
+                } finally {
+                  this.reviewsLoading = false;
+                }
+              },
+
+              // 評価値(0〜5)を5つ星の塗りつぶし配列に変換
+              starsFor(rating) {
+                const r = Math.round(rating || 0);
+                return [1, 2, 3, 4, 5].map(n => n <= r);
               },
 
               displayLocationOnMap() {
