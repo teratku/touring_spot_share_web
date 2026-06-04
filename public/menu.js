@@ -30,14 +30,14 @@
   ];
 
   var CSS = [
-    '#sm-btn{position:fixed;top:9px;right:12px;z-index:100000;width:46px;height:46px;border:2px solid rgba(255,255,255,.9);border-radius:14px;',
-    'background:linear-gradient(135deg,#00A8C6,#228B22);color:#fff;font-size:22px;line-height:1;cursor:pointer;',
+    '#sm-btn{position:fixed;top:10px;left:10px;right:auto;z-index:100000;width:42px;height:42px;border:2px solid rgba(255,255,255,.9);border-radius:12px;',
+    'background:linear-gradient(135deg,#00A8C6,#228B22);color:#fff;font-size:20px;line-height:1;cursor:pointer;',
     'box-shadow:0 2px 10px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;transition:transform .15s,opacity .15s;}',
     '#sm-btn:hover{opacity:.9;transform:translateY(-1px);}',
     '#sm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100001;opacity:0;pointer-events:none;transition:opacity .25s;}',
     '#sm-overlay.sm-open{opacity:1;pointer-events:auto;}',
-    '#sm-panel{position:fixed;top:0;right:0;height:100%;width:288px;max-width:84vw;background:#fff;z-index:100002;',
-    'box-shadow:-4px 0 16px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column;',
+    '#sm-panel{position:fixed;top:0;left:0;right:auto;height:100%;width:288px;max-width:84vw;background:#fff;z-index:100002;',
+    'box-shadow:4px 0 16px rgba(0,0,0,.2);transform:translateX(-100%);transition:transform .28s ease;display:flex;flex-direction:column;',
     'font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}',
     '#sm-panel.sm-open{transform:translateX(0);}',
     '.sm-head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 14px;',
@@ -58,7 +58,9 @@
     '.sm-item.sm-active{background:rgba(0,212,255,.18);color:#00D4FF;border-left-color:#00D4FF;}',
     '.sm-sep{background:#3A3A3C;}}',
     /* 旧・ページ個別メニュー（.menu-btn ハンバーガー / .hamburger-menu パネル）を隠して統一メニューに置換 */
-    '.menu-btn,.hamburger-menu{display:none!important;}'
+    '.menu-btn,.hamburger-menu{display:none!important;}',
+    /* 左上の共通メニューボタン（left:10 / 幅42 → 右端52px）の領域を各ページのヘッダー左端に確保し、戻る◀・ロゴ・「← トップ」等と重ならないようにする */
+    '.header-content,.header{padding-left:54px!important;}'
   ].join('');
 
   function norm(p) {

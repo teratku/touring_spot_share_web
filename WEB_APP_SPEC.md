@@ -79,7 +79,7 @@ Web は「**じっくり見る／計画する**」ための大画面・PC/タブ
 | Markdown | marked.js（ブログ） |
 | 広告 | Google AdSense |
 | 画像最適化 | WebP 変換 + `srcset`（レスポンシブ） |
-| 共通ナビゲーション | **`/public/menu.js`**（全ページ共通ハンバーガーメニュー・単一ソース。各ページは `<script src="/menu.js?v=1" defer>` を1行読むだけ。フレームワーク非依存／Firebase認証連動／更新時は `?v=` を上げる） |
+| 共通ナビゲーション | **`/public/menu.js`**（全ページ共通ハンバーガーメニュー・単一ソース。各ページは `<script src="/menu.js?v=3" defer>` を1行読むだけ。フレームワーク非依存／Firebase認証連動／更新時は `?v=` を上げる） |
 
 ### 2-3. 参照中の Firestore コレクション（iOS と共有）
 
@@ -298,10 +298,11 @@ iOS（`APP_FEATURES.md`）に対し、**Web のスコープ（閲覧＋プラン
 - ナビは `https://www.google.com/maps/dir/?api=1&origin=...&destination=...&waypoints=...` を新規タブで開く方式（APIキー・課金不要で確実）。
 
 ### 付録：全ページ共通ハンバーガーメニュー（`menu.js`）
-- 単一ソース `/public/menu.js` を全ページが `<script src="/menu.js?v=1" defer>` で読み込み、**どのページでも同じメニュー**を表示。項目変更はこのファイルだけ編集する。
+- 単一ソース `/public/menu.js` を全ページが `<script src="/menu.js?v=3" defer>` で読み込み、**どのページでも同じメニュー**を表示。項目変更はこのファイルだけ編集する。
 - 適用ページ（16枚）: index, detail, user, route-detail, routes, touring-plan, login, 404, blog/{blog,blog-editor}, dashboard, conquest, badges, completion, privacypolicy, termsofservice。**spot-pickup（内部/ローカル限定）は対象外**。
 - 旧・ページ個別メニュー（6枚: index/detail/user/route-detail/blog/blog-editor の `.menu-btn`/`.hamburger-menu`）は menu.js のCSSで `display:none` にして置換（マークアップ自体は残置＝デッドコード、将来削除可）。
-- 仕様: フローティング右上ボタン → 右からスライドするパネル。現在ページを `sm-active` でハイライト。`auth:'in'/'out'` でログイン状態に応じてマイページ/ログアウト/ログインを出し分け。Firebase が無いページ（規約等）では auth-compat を遅延ロードして状態を合わせる。
+- 仕様: フローティング**左上**ボタン（left:10 / 42px）→ **左**からスライドするパネル。現在ページを `sm-active` でハイライト。`auth:'in'/'out'` でログイン状態に応じてマイページ/ログアウト/ログインを出し分け。Firebase が無いページ（規約等）では auth-compat を遅延ロードして状態を合わせる。
+- **被り防止**: ボタンは左上固定のため、各ページのヘッダー左端（`.header-content` / `.header`）に `padding-left:54px` を入れて戻る◀・ロゴ・「← トップ」等と重ならないよう余白を確保。右上は空けてあるので各ページ自前の**ログアウトボタン等（badges/completion の `.btn-logout` 等）が隠れない**（※当初は右上配置でこれらが隠れたため左へ変更した）。
 - 項目（順）: ホーム / ルートを探す / ツーリングプラン / ブログ — マイダッシュボード / 都道府県制覇マップ / バッジ / 道路コンプリート率 / マイページ(要ログイン) — プライバシーポリシー / 利用規約 — ログイン or ログアウト。
 - **キャッシュ注意**: `firebase.json` で `*.js` は `immutable` キャッシュ。menu.js を更新したら各ページの `?v=1` を `?v=2`… に上げないと返却ユーザーに反映されない。
 </content>
