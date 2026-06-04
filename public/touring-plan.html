@@ -171,6 +171,55 @@
     height: 260px;
   }
 
+  /* ========== 経路サマリー（距離・所要時間・ナビ） ========== */
+  .route-summary-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    background: #F0FAFC;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .route-stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #00A8C6;
+  }
+  .route-stat-loading { color: #999; font-weight: normal; font-size: 13px; }
+  .route-approx {
+    font-size: 10px;
+    color: #888;
+    background: #eaeaea;
+    padding: 1px 7px;
+    border-radius: 8px;
+  }
+  .nav-btn {
+    margin-left: auto;
+    background: linear-gradient(135deg, #00A8C6, #228B22);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .nav-btn:hover { opacity: 0.88; }
+  .mini-spinner {
+    width: 12px; height: 12px;
+    border: 2px solid #ddd;
+    border-top-color: #00A8C6;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+  }
+
   /* スポットリスト */
   .spot-list { padding: 12px 16px 16px; }
   .spot-list-header {
@@ -412,6 +461,7 @@
     flex-shrink: 0;
   }
 </style>
+  <script src="/menu.js?v=1" defer></script>
 </head>
 <body>
 
@@ -518,6 +568,21 @@
 
             <!-- マップ -->
             <div :id="'map-' + plan.id" style="width:100%;height:260px;"></div>
+
+            <!-- 経路サマリー（距離・所要時間・ナビ） -->
+            <div class="route-summary-bar" v-if="plan.spots.length >= 1">
+              <template v-if="plan.spots.length >= 2">
+                <div class="route-stat route-stat-loading" v-if="!plan.routeInfo || plan.routeInfo.loading">
+                  <span class="mini-spinner"></span>距離を計算中...
+                </div>
+                <template v-else>
+                  <div class="route-stat"><span>📏</span>{{ plan.routeInfo.distanceText }}</div>
+                  <div class="route-stat"><span>⏱</span>{{ plan.routeInfo.durationText }}</div>
+                  <span class="route-approx" v-if="plan.routeInfo.approx" title="直線距離からの概算です">概算</span>
+                </template>
+              </template>
+              <button class="nav-btn" @click="openInGoogleMaps(plan)">🧭 Googleマップで経路</button>
+            </div>
 
             <!-- スポットリスト -->
             <div class="spot-list">
@@ -757,6 +822,7 @@ createApp({
       await nextTick();
       await waitForMaps();
       initPlanMap(plan);
+      computeRouteInfo(plan);
     }
 
     // ========== プランマップ初期化 ==========
@@ -829,6 +895,85 @@ createApp({
       }
     }
 
+    // ========== 経路の距離・所要時間（P2/P3） ==========
+    function haversineKm(a, b) {
+      const R = 6371; // km
+      const toRad = d => d * Math.PI / 180;
+      const dLat = toRad(b.lat - a.lat);
+      const dLng = toRad(b.lng - a.lng);
+      const lat1 = toRad(a.lat), lat2 = toRad(b.lat);
+      const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(h));
+    }
+    function formatKm(km) { return km.toFixed(1) + ' km'; }
+    function formatDuration(totalMinutes) {
+      const m = Math.max(1, Math.round(totalMinutes));
+      if (m < 60) return `約${m}分`;
+      const h = Math.floor(m / 60), mm = m % 60;
+      return mm === 0 ? `約${h}時間` : `約${h}時間${mm}分`;
+    }
+
+    // Google Cloud で Directions API を有効化したら true に切り替える。
+    // 現状この地図キーは Directions 未認可（REQUEST_DENIED）のため、既定は直線距離での概算。
+    const DIRECTIONS_API_ENABLED = false;
+
+    // 展開中プランの距離・所要時間を算出（Directions有効時は道路距離、無効/失敗時は直線距離で概算）
+    async function computeRouteInfo(plan) {
+      if (!plan.spots || plan.spots.length < 2) { plan.routeInfo = null; return; }
+      plan.routeInfo = { loading: true };
+
+      // 1) Google Directions（道路距離・実所要時間）— 有効化されている場合のみ試行
+      if (DIRECTIONS_API_ENABLED) {
+        try {
+          await waitForMaps();
+          if (google.maps && google.maps.DirectionsService) {
+            const svc = new google.maps.DirectionsService();
+            const origin = { lat: plan.spots[0].lat, lng: plan.spots[0].lng };
+            const last = plan.spots[plan.spots.length - 1];
+            const destination = { lat: last.lat, lng: last.lng };
+            const waypoints = plan.spots.slice(1, -1).map(s => ({ location: { lat: s.lat, lng: s.lng }, stopover: true }));
+            const result = await new Promise((resolve, reject) => {
+              svc.route(
+                { origin, destination, waypoints, travelMode: google.maps.TravelMode.DRIVING },
+                (res, status) => status === 'OK' ? resolve(res) : reject(new Error(status))
+              );
+            });
+            const legs = result.routes[0].legs;
+            const meters = legs.reduce((s, l) => s + l.distance.value, 0);
+            const seconds = legs.reduce((s, l) => s + l.duration.value, 0);
+            plan.routeInfo = { loading: false, approx: false, distanceText: formatKm(meters / 1000), durationText: formatDuration(seconds / 60) };
+            return;
+          }
+        } catch (e) {
+          console.warn('Directions 取得に失敗、直線距離で概算します:', e.message);
+        }
+      }
+
+      // 2) フォールバック：直線距離の合計 + 平均35km/h で概算
+      let km = 0;
+      for (let i = 1; i < plan.spots.length; i++) km += haversineKm(plan.spots[i - 1], plan.spots[i]);
+      const minutes = (km / 35) * 60;
+      plan.routeInfo = { loading: false, approx: true, distanceText: formatKm(km), durationText: formatDuration(minutes) };
+    }
+
+    // Googleマップで経路を開く（スポットを経由地に。APIキー/課金不要）
+    function openInGoogleMaps(plan) {
+      if (!plan.spots || plan.spots.length === 0) return;
+      const base = 'https://www.google.com/maps/dir/?api=1';
+      const fmt = s => `${s.lat},${s.lng}`;
+      let url;
+      if (plan.spots.length === 1) {
+        url = `${base}&destination=${fmt(plan.spots[0])}&travelmode=driving`;
+      } else {
+        const origin = fmt(plan.spots[0]);
+        const destination = fmt(plan.spots[plan.spots.length - 1]);
+        const mid = plan.spots.slice(1, -1).map(fmt).join('|');
+        url = `${base}&origin=${origin}&destination=${destination}&travelmode=driving`;
+        if (mid) url += `&waypoints=${encodeURIComponent(mid)}`;
+      }
+      window.open(url, '_blank');
+    }
+
     // ========== プラン削除確認 ==========
     function confirmDeletePlan(plan) {
       deletePlanTarget.value = plan;
@@ -880,10 +1025,11 @@ createApp({
         showDeleteSpotModal.value = false;
         deleteSpotTarget.value = null;
 
-        // マップを更新
+        // マップ・経路情報を更新
         await nextTick();
         const el = document.getElementById('map-' + plan.id);
         if (el) initPlanMap(plan);
+        computeRouteInfo(plan);
       } catch (e) {
         console.error('スポット削除エラー:', e);
         alert('スポットの削除に失敗しました');
@@ -945,6 +1091,7 @@ createApp({
         await nextTick();
         const el = document.getElementById('map-' + plan.id);
         if (el) initPlanMap(plan);
+        computeRouteInfo(plan);
       } catch (e) {
         console.error('並び替えエラー:', e);
         alert('並び替えに失敗しました');
@@ -975,7 +1122,7 @@ createApp({
       togglePlan, confirmDeletePlan, deletePlan,
       confirmDeleteSpot, deleteSpot,
       onDragStart, onDragOver, onDrop, onDragEnd,
-      openSpotDetail,
+      openSpotDetail, openInGoogleMaps,
       goBack, goToLogin
     };
   }
