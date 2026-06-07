@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>フィードバック・ビューア（開発用）</title>
+
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    [v-cloak] { display: none; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: #0f1419; color: #e6edf3; line-height: 1.5; font-size: 14px;
+    }
+    a { color: #4cc9e6; }
+
+    /* ヘッダー */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: #161b22; border-bottom: 1px solid #2a313c;
+      padding: 12px 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .h-title { font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+    .dev-badge {
+      background: #b5371b; color: #fff; font-size: 11px; font-weight: bold;
+      padding: 2px 9px; border-radius: 20px; letter-spacing: .5px;
+    }
+    .h-spacer { flex: 1; }
+    .h-user { font-size: 12px; color: #8b949e; }
+    .btn {
+      background: #21262d; border: 1px solid #2f3742; color: #e6edf3;
+      padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: background .15s;
+    }
+    .btn:hover { background: #2d333b; }
+    .btn-primary { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+    .btn-primary:hover { background: #388bfd; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 18px; }
+
+    /* タブ */
+    .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .tab {
+      background: #161b22; border: 1px solid #2a313c; color: #c9d1d9;
+      padding: 9px 18px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 600;
+    }
+    .tab.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+    .tab .cnt { opacity: .7; font-weight: normal; margin-left: 6px; }
+
+    /* 統計カード */
+    .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .stat {
+      background: #161b22; border: 1px solid #2a313c; border-radius: 12px;
+      padding: 12px 18px; min-width: 110px;
+    }
+    .stat .v { font-size: 22px; font-weight: bold; }
+    .stat .l { font-size: 11px; color: #8b949e; margin-top: 2px; }
+    .v-up { color: #3fb950; } .v-down { color: #f85149; } .v-star { color: #e3b341; }
+
+    /* フィルタ */
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+    .filters select, .filters input {
+      background: #0d1117; border: 1px solid #2f3742; color: #e6edf3;
+      padding: 6px 10px; border-radius: 8px; font-size: 13px;
+    }
+    .filters .lbl { font-size: 12px; color: #8b949e; }
+
+    /* リスト（テーブル風カード） */
+    .row {
+      background: #161b22; border: 1px solid #2a313c; border-radius: 10px;
+      padding: 12px 14px; margin-bottom: 8px; display: grid; gap: 10px; align-items: center;
+    }
+    .row-micro { grid-template-columns: 54px 110px 1fr 150px 70px 140px; }
+    .row-survey { grid-template-columns: 90px 150px 1fr 150px 70px 140px; }
+    .rate-pill {
+      font-weight: bold; text-align: center; border-radius: 8px; padding: 4px 0; font-size: 14px;
+    }
+    .rate-up { background: rgba(63,185,80,.15); color: #3fb950; }
+    .rate-down { background: rgba(248,81,73,.15); color: #f85149; }
+    .stars { color: #e3b341; font-size: 14px; white-space: nowrap; }
+    .stars .off { color: #39414d; }
+    .chip {
+      display: inline-block; background: #21262d; border: 1px solid #2f3742;
+      padding: 3px 10px; border-radius: 20px; font-size: 12px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+    }
+    .txt { font-size: 13px; color: #c9d1d9; word-break: break-word; white-space: pre-wrap; }
+    .txt-empty { color: #545d68; font-style: italic; }
+    .user { font-size: 12px; min-width: 0; }
+    .user .name { color: #e6edf3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user .uid { color: #6e7681; font-size: 10px; font-family: ui-monospace, monospace; }
+    .user .anon { color: #8b949e; font-style: italic; }
+    .ver { font-size: 11px; color: #8b949e; font-family: ui-monospace, monospace; }
+    .ts { font-size: 11px; color: #8b949e; white-space: nowrap; }
+    .col-head { color: #6e7681; font-size: 11px; padding: 0 14px 4px; letter-spacing: .3px; }
+
+    /* 状態 */
+    .center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 14px; text-align: center; padding: 20px; }
+    .center .ico { font-size: 52px; }
+    .spinner { width: 34px; height: 34px; border: 3px solid #2a313c; border-top-color: #1f6feb; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty { text-align: center; color: #6e7681; padding: 40px; }
+    .err { background: rgba(248,81,73,.1); border: 1px solid #f85149; color: #ff9b95; padding: 12px 16px; border-radius: 10px; margin-bottom: 14px; font-size: 13px; }
+
+    /* ログイン */
+    .login-box { background: #161b22; border: 1px solid #2a313c; border-radius: 14px; padding: 24px; width: 100%; max-width: 360px; }
+    .login-box h2 { font-size: 16px; margin-bottom: 14px; }
+    .login-box input { width: 100%; background: #0d1117; border: 1px solid #2f3742; color: #e6edf3; padding: 10px 12px; border-radius: 8px; font-size: 14px; margin-bottom: 10px; }
+    .login-box .btn-primary { width: 100%; padding: 10px; }
+    .login-err { color: #f85149; font-size: 12px; margin-top: 8px; }
+
+    @media (max-width: 720px) {
+      .row-micro, .row-survey { grid-template-columns: 1fr 1fr; }
+      .col-head { display: none; }
+      .ver, .row .ts { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+
+  <!-- 開発環境ゲート -->
+  <div v-if="!isDev" class="center">
+    <div class="ico">🔒</div>
+    <h1 style="font-size:18px">開発環境専用ページ</h1>
+    <p style="color:#8b949e">この画面はローカル開発環境（エミュレータ）でのみ利用できます。<br>
+    <code style="color:#4cc9e6">firebase emulators:start</code> で起動し <code style="color:#4cc9e6">localhost</code> 経由でアクセスしてください。</p>
+    <p style="color:#545d68;font-size:12px">現在のホスト: {{ hostInfo }}</p>
+  </div>
+
+  <template v-else>
+    <header>
+      <div class="h-title">🛠️ フィードバック・ビューア <span class="dev-badge">DEV ONLY</span></div>
+      <div class="h-spacer"></div>
+      <span class="h-user" v-if="currentUser">👤 {{ currentUser.email || currentUser.uid }}</span>
+      <button class="btn" @click="reload" :disabled="loading">{{ loading ? '読込中…' : '⟳ 更新' }}</button>
+      <button class="btn" v-if="currentUser" @click="logout">ログアウト</button>
+    </header>
+
+    <!-- 認証待ち -->
+    <div v-if="!authChecked" class="center"><div class="spinner"></div><p style="color:#8b949e">認証確認中…</p></div>
+
+    <!-- 未ログイン -->
+    <div v-else-if="!currentUser" class="center">
+      <div class="login-box">
+        <h2>🔑 開発者ログイン</h2>
+        <p style="color:#8b949e;font-size:12px;margin-bottom:14px">フィードバックの読み取りには認証が必要です（本番Firestoreに接続）。</p>
+        <input v-model="email" type="email" placeholder="メールアドレス" @keyup.enter="login">
+        <input v-model="password" type="password" placeholder="パスワード" @keyup.enter="login">
+        <button class="btn-primary" @click="login" :disabled="loggingIn">{{ loggingIn ? 'ログイン中…' : 'ログイン' }}</button>
+        <div class="login-err" v-if="loginError">{{ loginError }}</div>
+      </div>
+    </div>
+
+    <!-- 本体 -->
+    <div class="wrap" v-else>
+      <div class="err" v-if="error">⚠️ {{ error }}</div>
+
+      <div class="tabs">
+        <div class="tab" :class="{ active: tab==='micro' }" @click="tab='micro'">👍 マイクロ<span class="cnt">{{ micro.length }}</span></div>
+        <div class="tab" :class="{ active: tab==='survey' }" @click="tab='survey'">⭐ アンケート<span class="cnt">{{ survey.length }}</span></div>
+      </div>
+
+      <div v-if="loading" class="center" style="min-height:40vh"><div class="spinner"></div></div>
+
+      <!-- ===== マイクロフィードバック ===== -->
+      <template v-else-if="tab==='micro'">
+        <div class="stats">
+          <div class="stat"><div class="v">{{ micro.length }}</div><div class="l">総数</div></div>
+          <div class="stat"><div class="v v-up">{{ microStats.up }}</div><div class="l">👍 ポジティブ</div></div>
+          <div class="stat"><div class="v v-down">{{ microStats.down }}</div><div class="l">👎 ネガティブ</div></div>
+          <div class="stat"><div class="v">{{ microStats.satisfaction }}%</div><div class="l">満足率</div></div>
+        </div>
+        <div class="filters">
+          <span class="lbl">機能</span>
+          <select v-model="microFeature">
+            <option value="">すべて</option>
+            <option v-for="(label, key) in featureLabels" :key="key" :value="key">{{ label }}</option>
+          </select>
+          <span class="lbl">評価</span>
+          <select v-model="microRating">
+            <option value="">すべて</option>
+            <option value="1">👍 のみ</option>
+            <option value="-1">👎 のみ</option>
+          </select>
+          <span class="lbl" style="margin-left:auto">{{ microFiltered.length }} 件表示</span>
+        </div>
+
+        <div class="col-head row row-micro" style="background:none;border:none;padding-bottom:0">
+          <div>評価</div><div>機能</div><div>詳細コメント</div><div>ユーザー</div><div>Ver</div><div>日時</div>
+        </div>
+        <div v-if="microFiltered.length===0" class="empty">該当するフィードバックがありません</div>
+        <div v-for="f in microFiltered" :key="f.id" class="row row-micro">
+          <div class="rate-pill" :class="f.rating===1 ? 'rate-up' : 'rate-down'">{{ f.rating===1 ? '👍' : '👎' }}</div>
+          <div><span class="chip">{{ featureLabels[f.featureType] || f.featureType || '—' }}</span></div>
+          <div class="txt" :class="{ 'txt-empty': !f.detail }">{{ f.detail || '（コメントなし）' }}</div>
+          <div class="user" v-html="userCell(f.userID)"></div>
+          <div class="ver">{{ f.appVersion || '—' }}</div>
+          <div class="ts">{{ fmtDate(f.timestamp) }}</div>
+        </div>
+      </template>
+
+      <!-- ===== 詳細アンケート ===== -->
+      <template v-else>
+        <div class="stats">
+          <div class="stat"><div class="v">{{ survey.length }}</div><div class="l">回答数</div></div>
+          <div class="stat"><div class="v v-star">{{ surveyStats.avg }}</div><div class="l">平均満足度 /5</div></div>
+          <div class="stat" v-for="n in 5" :key="n"><div class="v">{{ surveyStats.dist[n] || 0 }}</div><div class="l">{{ n }}★</div></div>
+        </div>
+        <div class="filters">
+          <span class="lbl">不満点</span>
+          <select v-model="surveyOption">
+            <option value="">すべて</option>
+            <option v-for="o in surveyOptions" :key="o" :value="o">{{ o }}</option>
+          </select>
+          <span class="lbl">満足度</span>
+          <select v-model="surveyRating">
+            <option value="">すべて</option>
+            <option v-for="n in 5" :key="n" :value="String(n)">{{ n }}★ のみ</option>
+          </select>
+          <span class="lbl" style="margin-left:auto">{{ surveyFiltered.length }} 件表示</span>
+        </div>
+
+        <div class="col-head row row-survey" style="background:none;border:none;padding-bottom:0">
+          <div>満足度</div><div>不満点</div><div>自由記述</div><div>ユーザー</div><div>Ver</div><div>日時</div>
+        </div>
+        <div v-if="surveyFiltered.length===0" class="empty">該当するフィードバックがありません</div>
+        <div v-for="f in surveyFiltered" :key="f.id" class="row row-survey">
+          <div class="stars" v-html="starHtml(f.rating)"></div>
+          <div><span class="chip">{{ f.selectedOption || '—' }}</span></div>
+          <div class="txt" :class="{ 'txt-empty': !f.freeText }">{{ f.freeText || '（記述なし）' }}</div>
+          <div class="user" v-html="userCell(f.userID)"></div>
+          <div class="ver">{{ f.appVersion || '—' }}</div>
+          <div class="ts">{{ fmtDate(f.timestamp) }}</div>
+        </div>
+      </template>
+    </div>
+  </template>
+</div>
+
+<script>
+const { createApp, ref, reactive, computed, onMounted } = Vue;
+
+function waitForFirebase() {
+  return new Promise(resolve => {
+    const check = () => (typeof firebase !== 'undefined' && firebase.apps.length > 0) ? resolve() : setTimeout(check, 100);
+    check();
+  });
+}
+
+createApp({
+  setup() {
+    // ===== 開発環境ゲート（localhost / エミュレータのみ）=====
+    const host = location.hostname;
+    const isDev = ['localhost', '127.0.0.1', '::1', '0.0.0.0'].includes(host) || host.endsWith('.local');
+    const hostInfo = `${location.protocol}//${location.host}`;
+
+    const LIMIT = 500;
+    const featureLabels = { route_save: 'ルート保存', spot_post: 'スポット投稿', route_share: 'ルート共有', route_record: 'ルート記録' };
+    const surveyOptions = ['UIが分かりにくい', '地図の操作が難しい', 'スポット保存が面倒', '特にない'];
+
+    const authChecked = ref(false);
+    const currentUser = ref(null);
+    const loading = ref(false);
+    const error = ref('');
+    const tab = ref('micro');
+
+    const micro = ref([]);
+    const survey = ref([]);
+
+    const microFeature = ref('');
+    const microRating = ref('');
+    const surveyOption = ref('');
+    const surveyRating = ref('');
+
+    // ログイン
+    const email = ref(''); const password = ref(''); const loginError = ref(''); const loggingIn = ref(false);
+
+    const userCache = reactive({});
+    let db;
+
+    onMounted(async () => {
+      if (!isDev) return;
+      await waitForFirebase();
+      db = firebase.firestore();
+      firebase.auth().onAuthStateChanged(async (user) => {
+        currentUser.value = user;
+        authChecked.value = true;
+        if (user) await loadAll();
+      });
+    });
+
+    async function login() {
+      loginError.value = '';
+      if (!email.value || !password.value) return;
+      loggingIn.value = true;
+      try {
+        await firebase.auth().signInWithEmailAndPassword(email.value.trim(), password.value);
+      } catch (e) {
+        loginError.value = 'ログイン失敗: ' + (e.code || e.message);
+      } finally {
+        loggingIn.value = false;
+      }
+    }
+    function logout() { firebase.auth().signOut(); micro.value = []; survey.value = []; }
+
+    async function loadAll() {
+      loading.value = true; error.value = '';
+      try {
+        const [m, s] = await Promise.all([
+          db.collection('micro_feedback').orderBy('timestamp', 'desc').limit(LIMIT).get(),
+          db.collection('user_feedback').orderBy('timestamp', 'desc').limit(LIMIT).get()
+        ]);
+        micro.value = m.docs.map(d => ({ id: d.id, ...d.data() }));
+        survey.value = s.docs.map(d => ({ id: d.id, ...d.data() }));
+        prefetchUsers([...micro.value, ...survey.value]);
+      } catch (e) {
+        console.error(e);
+        error.value = '読み取りエラー: ' + (e.code || e.message) + '（開発者アカウントでログインしているか、Firestoreルールをご確認ください）';
+      } finally {
+        loading.value = false;
+      }
+    }
+    function reload() { if (currentUser.value) loadAll(); }
+
+    // ===== userInfo 解決（名前表示）=====
+    async function prefetchUsers(list) {
+      const ids = [...new Set(list.map(f => f.userID).filter(u => u && u !== 'anonymous' && !(u in userCache)))];
+      await Promise.all(ids.map(async uid => {
+        userCache[uid] = null; // 取得中マーク
+        try {
+          const doc = await db.collection('userInfo').doc(uid).get();
+          userCache[uid] = doc.exists ? (doc.data().userName || null) : null;
+        } catch (_) { userCache[uid] = null; }
+      }));
+    }
+    function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+    function userCell(uid) {
+      if (!uid || uid === 'anonymous') return '<span class="anon">匿名 (anonymous)</span>';
+      const name = userCache[uid];
+      const short = esc(uid.slice(0, 10)) + '…';
+      return `<div class="name">${name ? esc(name) : '（名前なし）'}</div><div class="uid">${short}</div>`;
+    }
+
+    // ===== 整形 =====
+    function fmtDate(ts) {
+      if (!ts || !ts.toDate) return '—';
+      const d = ts.toDate();
+      return d.toLocaleString('ja-JP', { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+    }
+    function starHtml(r) {
+      r = Number(r) || 0;
+      let h = '';
+      for (let i = 1; i <= 5; i++) h += i <= r ? '★' : '<span class="off">★</span>';
+      return h + ` <span style="color:#8b949e;font-size:11px">${r}</span>`;
+    }
+
+    // ===== フィルタ & 統計 =====
+    const microFiltered = computed(() => micro.value.filter(f =>
+      (!microFeature.value || f.featureType === microFeature.value) &&
+      (!microRating.value || String(f.rating) === microRating.value)
+    ));
+    const microStats = computed(() => {
+      const up = micro.value.filter(f => f.rating === 1).length;
+      const down = micro.value.filter(f => f.rating === -1).length;
+      const tot = up + down;
+      return { up, down, satisfaction: tot ? Math.round(up / tot * 100) : 0 };
+    });
+    const surveyFiltered = computed(() => survey.value.filter(f =>
+      (!surveyOption.value || f.selectedOption === surveyOption.value) &&
+      (!surveyRating.value || String(f.rating) === surveyRating.value)
+    ));
+    const surveyStats = computed(() => {
+      const dist = {}; let sum = 0, n = 0;
+      survey.value.forEach(f => { const r = Number(f.rating); if (r >= 1 && r <= 5) { dist[r] = (dist[r] || 0) + 1; sum += r; n++; } });
+      return { dist, avg: n ? (sum / n).toFixed(2) : '—' };
+    });
+
+    return {
+      isDev, hostInfo, authChecked, currentUser, loading, error, tab,
+      micro, survey, featureLabels, surveyOptions,
+      microFeature, microRating, surveyOption, surveyRating,
+      microFiltered, microStats, surveyFiltered, surveyStats,
+      email, password, loginError, loggingIn, login, logout,
+      reload, userCell, fmtDate, starHtml
+    };
+  }
+}).mount('#app');
+</script>
+</body>
+</html>

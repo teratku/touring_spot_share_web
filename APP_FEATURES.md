@@ -246,6 +246,49 @@
 - **(A)** Apple の App Store Server API / Server Notifications でサーバー検証する、または
 - **(B)** アプリ側で判定したtierをFirestoreに書き出す設計を追加する（例: `userInfo/{uid}` に `subscriptionTier` / `subscriptionExpiration` フィールド）※現状未実装
 
+### 7-5. フィードバック
+
+フィードバックは**2系統**ある。いずれも `addDocument`（自動採番ドキュメントID）で書き込み、未ログイン時 `userID` は `"anonymous"`。
+
+#### (a) マイクロフィードバック：`micro_feedback`
+
+- 実装: `MicroFeedbackView.swift`
+- UX: 主要アクション完了直後にその場で表示。👍/👎 をタップした時点で即送信（最低限の回収）し、任意で詳細テキストを書くと再送信。
+- 表示頻度ガード: 機能種別ごとに **7日間**（`UserDefaults` キー `microFeedback_lastShown_<featureType>`）
+- トリガー（`FeedbackFeatureType`）:
+  - `route_save`（ルート保存）— `RouteRecordMainView`
+  - `spot_post`（スポット投稿）— `SpotSubmitView`
+  - `route_share`（ルート共有）— `ShareCompleteView`
+  - `route_record`（ルート記録）— 定義済み
+
+| Firestoreフィールド名 | 型 | 内容 |
+|---|---|---|
+| （ドキュメントID） | String | 自動採番 |
+| `userID` | String | 投稿ユーザーUID（未ログインは `"anonymous"`） |
+| `featureType` | String | `route_save` / `spot_post` / `route_share` / `route_record` |
+| `rating` | Int | **👍 = `1` / 👎 = `-1`** |
+| `detail` | String | 任意の自由記述（未入力時は空文字） |
+| `appVersion` | String | `CFBundleShortVersionString` |
+| `timestamp` | Timestamp | 送信日時 |
+
+#### (b) 詳細フィードバック（満足度アンケート）：`user_feedback`
+
+- 実装: `FeedbackQuestion.swift`
+- UX: 満足度（5段階）＋ 不満点の選択肢 ＋ 自由記述のアンケート形式。App Store レビューページ（App ID `1466607921`）への導線あり。
+- 表示制御: `markFeedbackAsShown()`（`UserDefaults` フラグ）
+
+| Firestoreフィールド名 | 型 | 内容 |
+|---|---|---|
+| （ドキュメントID） | String | 自動採番 |
+| `userID` | String | 投稿ユーザーUID（未ログインは `"anonymous"`） |
+| `rating` | Int | 満足度 **1〜5**（1=とても不満 … 5=とても満足） |
+| `selectedOption` | String | 選択肢（`UIが分かりにくい` / `地図の操作が難しい` / `スポット保存が面倒` / `特にない`） |
+| `freeText` | String | 自由記述 |
+| `appVersion` | String | `CFBundleShortVersionString` |
+| `timestamp` | Timestamp | 送信日時 |
+
+> ※ 参考: 別途お問い合わせ機能のコレクション（`inquiry` / `inquiryDetail`、画像は `inquiryDetailImage/`）も存在する（フィードバックとは別系統）。
+
 ---
 
 ## 8. Webサイト向け：訴求ポイント案（たたき台）
