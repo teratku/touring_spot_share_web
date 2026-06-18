@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>おまかせ提案 | ツーリングスポットシェア</title>
+
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <!-- Firebase -->
+  <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+  <!-- Google Maps（どこ行このマップ用・任意） -->
+  <script>window.initMap = function(){};</script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=initMap&libraries=marker"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    [v-cloak] { display: none; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: #F2F2F7; color: #1c1c1e; line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* シートヘッダー */
+    .sheet-head {
+      position: sticky; top: 0; z-index: 20; background: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-bottom: 1px solid #ececf0;
+    }
+    .close-btn { background: none; border: none; color: #007aff; font-size: 17px; cursor: pointer; padding: 4px 6px; }
+    .sheet-title { font-size: 17px; font-weight: 700; }
+    .sheet-head .spacer { width: 52px; }
+
+    .body { max-width: 640px; margin: 0 auto; padding: 16px 16px 120px; }
+
+    /* セグメント */
+    .segment { display: flex; background: #e9e9ec; border-radius: 12px; padding: 3px; margin-bottom: 22px; }
+    .segment button {
+      flex: 1; border: none; background: none; padding: 9px 0; border-radius: 9px;
+      font-size: 15px; font-weight: 600; color: #6b6b70; cursor: pointer;
+    }
+    .segment button.active { background: #fff; color: #1c1c1e; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+
+    /* セクション見出し */
+    .sec-label { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 10px; }
+    .sec-label h3 { font-size: 16px; font-weight: 700; }
+    .sec-label .val { font-size: 15px; color: #8e8e93; }
+
+    /* 距離チップ */
+    .dist-chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+    .dist-chips::-webkit-scrollbar { display: none; }
+    .dist-chip {
+      flex: 0 0 auto; border: none; background: #e9e9ec; color: #3a3a3c;
+      padding: 10px 18px; border-radius: 20px; font-size: 15px; font-weight: 600; cursor: pointer;
+    }
+    .dist-chip.active { background: #00A8C6; color: #fff; }
+    .slider { width: 100%; margin: 12px 0 4px; accent-color: #00A8C6; }
+    .hint { font-size: 12.5px; color: #8e8e93; margin: 4px 0 0; }
+
+    /* 提案数ステッパー */
+    .stepper { display: inline-flex; align-items: stretch; background: #e9e9ec; border-radius: 12px; overflow: hidden; }
+    .stepper button { border: none; background: none; width: 46px; font-size: 22px; color: #1c1c1e; cursor: pointer; }
+    .stepper button:disabled { color: #c7c7cc; }
+    .stepper .sep { width: 1px; background: #d1d1d6; }
+
+    /* ジャンル/方角チップ */
+    .block { margin-top: 22px; }
+    .chips-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; }
+    .chips-row::-webkit-scrollbar { display: none; }
+    .tag-chip {
+      flex: 0 0 auto; border: 1px solid #e2e2e6; background: #fff; color: #3a3a3c;
+      padding: 8px 14px; border-radius: 18px; font-size: 14px; cursor: pointer; white-space: nowrap;
+    }
+    .tag-chip.active { background: #00A8C6; color: #fff; border-color: #00A8C6; }
+    .dir-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .dir-btn { border: 1px solid #e2e2e6; background: #fff; color: #3a3a3c; padding: 12px 0; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; }
+    .dir-btn.active { background: #00A8C6; color: #fff; border-color: #00A8C6; }
+
+    /* 位置バナー */
+    .loc-banner { background: #fff4e5; border: 1px solid #ffd699; color: #8a5a00; font-size: 13px; padding: 10px 12px; border-radius: 12px; margin-bottom: 16px; display: flex; gap: 8px; align-items: center; }
+    .loc-banner button { margin-left: auto; background: #ff9500; border: none; color: #fff; padding: 5px 12px; border-radius: 8px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+
+    /* 複数提案：結果リスト */
+    .results { margin-top: 22px; }
+    .results-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .results-head h3 { font-size: 16px; font-weight: 700; }
+    .reroll { background: #fff; border: 1px solid #e2e2e6; color: #00A8C6; font-weight: 600; padding: 7px 14px; border-radius: 18px; font-size: 13px; cursor: pointer; }
+    .spot-card {
+      display: flex; gap: 12px; align-items: center; background: #fff; border-radius: 16px;
+      padding: 10px; margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; transition: border-color .15s;
+    }
+    .spot-card.selected { border-color: #00A8C6; }
+    .spot-card.disabled { opacity: .5; cursor: default; }
+    .spot-thumb { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; background: #e9e9ec; flex-shrink: 0; }
+    .spot-thumb-ph { display: flex; align-items: center; justify-content: center; font-size: 26px; color: #b0b0b5; }
+    .spot-main { flex: 1; min-width: 0; }
+    .spot-name { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .spot-sub { font-size: 12.5px; color: #8e8e93; margin-top: 2px; }
+    .spot-tags { margin-top: 4px; display: flex; gap: 5px; overflow: hidden; }
+    .spot-tags span { font-size: 11px; color: #00A8C6; background: #e5f6fa; padding: 1px 7px; border-radius: 10px; white-space: nowrap; }
+    .check { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #d1d1d6; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; }
+    .spot-card.selected .check { background: #00A8C6; border-color: #00A8C6; }
+
+    /* どこ行こ：カード+マップ */
+    #dokoMap { width: 100%; height: 240px; border-radius: 16px; margin-top: 22px; background: #e9e9ec; }
+    .doko-card { background: #fff; border-radius: 16px; padding: 12px; margin-top: 14px; }
+    .doko-top { display: flex; gap: 12px; align-items: center; }
+    .doko-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .doko-actions button { border: none; border-radius: 12px; padding: 12px 0; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .act-sub { background: #f0f0f3; color: #1c1c1e; }
+    .act-primary { background: #00A8C6; color: #fff; }
+
+    .empty { text-align: center; color: #8e8e93; padding: 36px 16px; }
+    .empty .em { font-size: 40px; display: block; margin-bottom: 8px; }
+
+    /* 下部固定追加バー */
+    .addbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: rgba(255,255,255,.96); border-top: 1px solid #ececf0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
+    .addbar-inner { max-width: 640px; margin: 0 auto; }
+    .add-btn { width: 100%; border: none; border-radius: 14px; padding: 15px; font-size: 16px; font-weight: 700; color: #fff; background: #00A8C6; cursor: pointer; }
+    .add-btn:disabled { background: #c7c7cc; cursor: default; }
+
+    /* 状態 */
+    .center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 14px; color: #8e8e93; text-align: center; padding: 20px; }
+    .spinner { width: 34px; height: 34px; border: 3px solid #e0e0e0; border-top-color: #00A8C6; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .login-btn { background: #00A8C6; color:#fff; border:none; padding: 12px 28px; border-radius: 14px; font-weight: 700; cursor: pointer; }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #000; color: #f2f2f7; }
+      .sheet-head, .spot-card, .doko-card { background: #1c1c1e; }
+      .sheet-head { border-color: #2c2c2e; }
+      .segment, .dist-chip, .stepper { background: #2c2c2e; }
+      .segment button.active { background: #48484a; color:#fff; }
+      .tag-chip, .dir-btn { background:#1c1c1e; border-color:#3a3a3c; color:#e5e5ea; }
+      .reroll { background:#1c1c1e; border-color:#3a3a3c; }
+      .spot-thumb, #dokoMap { background:#2c2c2e; }
+      .act-sub { background:#2c2c2e; color:#f2f2f7; }
+      .addbar { background: rgba(20,20,22,.96); border-color:#2c2c2e; }
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+
+  <!-- ローディング -->
+  <div class="center" v-if="loading">
+    <div class="spinner"></div><p>{{ loadingMsg }}</p>
+  </div>
+
+  <!-- 未ログイン -->
+  <div class="center" v-else-if="!currentUser">
+    <span style="font-size:46px">🔒</span>
+    <p>ログインが必要です</p>
+    <button class="login-btn" @click="goLogin">ログインする</button>
+  </div>
+
+  <template v-else>
+    <div class="sheet-head">
+      <button class="close-btn" @click="close">閉じる</button>
+      <div class="sheet-title">🎲 おまかせ提案</div>
+      <div class="spacer"></div>
+    </div>
+
+    <div class="body">
+      <!-- 対象プラン -->
+      <p class="hint" style="margin-bottom:14px">
+        追加先：<strong style="color:#00A8C6">{{ targetLabel }}</strong>
+        <span v-if="!isNewPlan"> （{{ existingCount }}/{{ SPOT_LIMIT }}）・あと {{ remainingCapacity }} 件追加できます</span>
+      </p>
+
+      <!-- 位置バナー -->
+      <div class="loc-banner" v-if="locFallback">
+        <span>📍 現在地を取得できないため、{{ fallbackName }}周辺で提案します</span>
+        <button @click="requestLocation">再取得</button>
+      </div>
+
+      <!-- セグメント -->
+      <div class="segment">
+        <button :class="{active: mode==='multi'}" @click="setMode('multi')">複数提案</button>
+        <button :class="{active: mode==='doko'}" @click="setMode('doko')">どこ行こ</button>
+      </div>
+
+      <!-- 距離 -->
+      <div class="sec-label">
+        <h3>{{ mode==='multi' ? '半径' : '目標距離' }}</h3>
+        <span class="val">{{ mode==='doko' ? '≒ ' : '' }}{{ radiusKm }} km</span>
+      </div>
+      <div class="dist-chips">
+        <button v-for="d in distPresets" :key="d" class="dist-chip" :class="{active: radiusKm===d}" @click="radiusKm=d">{{ d }}km</button>
+      </div>
+      <input class="slider" type="range" min="10" max="200" step="5" v-model.number="radiusKm">
+      <p class="hint" v-if="mode==='doko'">目標距離の ±20% あたりから1件をランダムに選びます</p>
+
+      <!-- 提案数（複数提案のみ） -->
+      <div class="block" v-if="mode==='multi'">
+        <div class="sec-label"><h3>提案数</h3>
+          <div class="stepper">
+            <button @click="count=Math.max(1,count-1)" :disabled="count<=1">−</button><div class="sep"></div>
+            <button @click="count=Math.min(10,count+1)" :disabled="count>=10">＋</button>
+          </div>
+        </div>
+        <p class="hint">提案数: {{ count }} 件</p>
+      </div>
+
+      <!-- ジャンル -->
+      <div class="block" v-if="allTags.length">
+        <div class="sec-label"><h3>ジャンル</h3><span class="val" v-if="selectedTags.length">{{ selectedTags.length }}選択</span></div>
+        <div class="chips-row">
+          <button v-for="t in allTags" :key="t" class="tag-chip" :class="{active: selectedTags.includes(t)}" @click="toggleTag(t)">#{{ t }}</button>
+        </div>
+      </div>
+
+      <!-- 方角 -->
+      <div class="block">
+        <div class="sec-label"><h3>方角</h3></div>
+        <div class="dir-grid">
+          <button v-for="d in directions" :key="d.key" class="dir-btn" :class="{active: selectedDirs.includes(d.key)}" @click="toggleDir(d.key)">{{ d.label }}</button>
+        </div>
+        <p class="hint">未選択なら全方角から選びます</p>
+      </div>
+
+      <!-- ========== 複数提案：結果 ========== -->
+      <template v-if="mode==='multi'">
+        <div class="results">
+          <div class="results-head">
+            <h3>提案スポット</h3>
+            <button class="reroll" @click="generateMulti" :disabled="generating">🔄 引き直し</button>
+          </div>
+          <div v-if="generating" class="center" style="min-height:120px"><div class="spinner"></div></div>
+          <div v-else-if="suggestions.length===0" class="empty"><span class="em">🧭</span>条件に合うスポットが見つかりませんでした。半径やジャンルを変えてみてください。</div>
+          <div v-else>
+            <div v-for="s in suggestions" :key="s.spotId"
+                 class="spot-card" :class="{ selected: s.selected, disabled: !s.selected && selectedCount>=remainingCapacity }"
+                 @click="toggleSpot(s)">
+              <img v-if="s.imageUrl" :src="s.imageUrl" class="spot-thumb" loading="lazy" alt="">
+              <div v-else class="spot-thumb spot-thumb-ph">🏍️</div>
+              <div class="spot-main">
+                <div class="spot-name">{{ s.name }}</div>
+                <div class="spot-sub">現在地から {{ s.distKm }} km{{ s.address ? ' ・ ' + s.address : '' }}</div>
+                <div class="spot-tags" v-if="s.tags && s.tags.length">
+                  <span v-for="t in s.tags.slice(0,3)" :key="t">#{{ t }}</span>
+                </div>
+              </div>
+              <div class="check">{{ s.selected ? '✓' : '' }}</div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- ========== どこ行こ：1件 ========== -->
+      <template v-else>
+        <div id="dokoMap"></div>
+        <div class="doko-card" v-if="dokoSpot">
+          <div class="doko-top">
+            <img v-if="dokoSpot.imageUrl" :src="dokoSpot.imageUrl" class="spot-thumb" alt="">
+            <div v-else class="spot-thumb spot-thumb-ph">🏍️</div>
+            <div class="spot-main">
+              <div class="spot-name">{{ dokoSpot.name }}</div>
+              <div class="spot-sub">現在地から {{ dokoSpot.distKm }} km</div>
+              <div class="spot-tags" v-if="dokoSpot.tags && dokoSpot.tags.length"><span v-for="t in dokoSpot.tags.slice(0,3)" :key="t">#{{ t }}</span></div>
+            </div>
+          </div>
+          <div class="doko-actions">
+            <button class="act-sub" @click="generateDoko">🔄<span class="act-sub-l">引き直し</span></button>
+            <button class="act-sub" @click="openInMaps(dokoSpot)">🗺️<span>マップで開く</span></button>
+            <button class="act-primary" @click="addDoko" :disabled="remainingCapacity<=0">＋<span>プランに追加</span></button>
+          </div>
+        </div>
+        <div class="doko-card empty" v-else><span class="em">🧭</span>条件に合うスポットが見つかりませんでした。</div>
+      </template>
+    </div>
+
+    <!-- 下部追加バー（複数提案） -->
+    <div class="addbar" v-if="mode==='multi'">
+      <div class="addbar-inner">
+        <button class="add-btn" :disabled="selectedCount===0 || adding" @click="addSelected">
+          {{ adding ? '追加中…' : '選択した ' + selectedCount + ' 件を追加' }}
+        </button>
+      </div>
+    </div>
+  </template>
+</div>
+
+<script>
+const { createApp, ref, computed, onMounted, watch, nextTick } = Vue;
+
+function waitForFirebase(){ return new Promise(r=>{const c=()=>(typeof firebase!=='undefined'&&firebase.apps.length>0)?r():setTimeout(c,100);c();}); }
+function waitForMaps(){ return new Promise(r=>{ if(typeof google!=='undefined'&&google.maps) return r(); const o=window.initMap; window.initMap=function(){o&&o();r();}; setTimeout(r,4000); }); }
+
+// 距離(km) ハバーサイン
+function haversine(aLat,aLng,bLat,bLng){
+  const R=6371, dLat=(bLat-aLat)*Math.PI/180, dLng=(bLng-aLng)*Math.PI/180;
+  const s=Math.sin(dLat/2)**2 + Math.cos(aLat*Math.PI/180)*Math.cos(bLat*Math.PI/180)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s));
+}
+// 方位角(0-360) → 北/東/南/西
+function bearing(aLat,aLng,bLat,bLng){
+  const φ1=aLat*Math.PI/180, φ2=bLat*Math.PI/180, Δλ=(bLng-aLng)*Math.PI/180;
+  const y=Math.sin(Δλ)*Math.cos(φ2);
+  const x=Math.cos(φ1)*Math.sin(φ2)-Math.sin(φ1)*Math.cos(φ2)*Math.cos(Δλ);
+  return (Math.atan2(y,x)*180/Math.PI+360)%360;
+}
+function dirOf(b){ if(b>=315||b<45)return'N'; if(b<135)return'E'; if(b<225)return'S'; return'W'; }
+
+createApp({
+  setup(){
+    const SPOT_LIMIT=3, PLAN_LIMIT=3;
+    const FALLBACK={ lat:35.681236, lng:139.767125, name:'東京' };
+
+    const params=new URLSearchParams(location.search);
+    const planId=params.get('planId');
+    const isNewPlan=!planId;
+
+    const loading=ref(true), loadingMsg=ref('読み込み中...');
+    const currentUser=ref(null);
+    const mode=ref('multi');
+    const distPresets=[10,30,50,100,200];
+    const radiusKm=ref(50);
+    const count=ref(5);
+    const allTags=ref([]); const selectedTags=ref([]);
+    const directions=[{key:'N',label:'↑ 北'},{key:'E',label:'→ 東'},{key:'S',label:'↓ 南'},{key:'W',label:'← 西'}];
+    const selectedDirs=ref([]);
+    const userLat=ref(null), userLng=ref(null), locFallback=ref(false), fallbackName=ref(FALLBACK.name);
+
+    const suggestions=ref([]); const generating=ref(false);
+    const dokoSpot=ref(null);
+    const adding=ref(false);
+
+    let db, allSpots=[], planName='', existingSpots=[], plansCount=0, dokoMap=null, dokoMarker=null;
+
+    const existingCount=computed(()=>existingSpots.length);
+    const remainingCapacity=computed(()=> Math.max(0, SPOT_LIMIT - existingCount.value));
+    const selectedCount=computed(()=> suggestions.value.filter(s=>s.selected).length);
+    const targetLabel=computed(()=> isNewPlan ? '新しいプラン（自動作成）' : (planName||'プラン'));
+
+    onMounted(async ()=>{
+      await waitForFirebase();
+      db=firebase.firestore();
+      firebase.auth().onAuthStateChanged(async user=>{
+        currentUser.value=user;
+        if(!user){ loading.value=false; return; }
+        try{
+          loadingMsg.value='スポットを読み込み中...';
+          await Promise.all([ loadSpots(), loadPlanContext(user.uid) ]);
+          deriveTags();
+          loading.value=false;
+          requestLocation();
+        }catch(e){ console.error(e); loading.value=false; alert('読み込みに失敗しました: '+(e.code||e.message)); }
+      });
+    });
+
+    async function loadSpots(){
+      const snap=await db.collection('imagedownload').get();
+      allSpots=snap.docs.map(d=>{
+        const x=d.data();
+        const lat=Number(x.lat), lng=Number(x.lng);
+        if(!isFinite(lat)||!isFinite(lng)) return null;
+        return {
+          spotId:d.id,
+          name:x.location_name||x.locality||x.administrative||'スポット',
+          lat, lng,
+          address:x.administrative||x.locality||null,
+          imageUrl:(x.locationImageURLs&&x.locationImageURLs[0])||x.iconImageURL||null,
+          tags:Array.isArray(x.tag)?x.tag.filter(Boolean):[],
+          isCustomPin:false
+        };
+      }).filter(Boolean);
+    }
+    async function loadPlanContext(uid){
+      const col=db.collection('users').doc(uid).collection('touringPlans');
+      if(planId){
+        const doc=await col.doc(planId).get();
+        if(doc.exists){ planName=doc.data().name||'プラン'; existingSpots=(doc.data().spots||[]); }
+      } else {
+        const all=await col.get(); plansCount=all.size;
+      }
+    }
+    function deriveTags(){
+      const freq={};
+      allSpots.forEach(s=>s.tags.forEach(t=>{ freq[t]=(freq[t]||0)+1; }));
+      allTags.value=Object.keys(freq).sort((a,b)=>freq[b]-freq[a]).slice(0,30);
+    }
+
+    // ===== 位置情報 =====
+    function requestLocation(){
+      if(!navigator.geolocation){ useFallback(); return; }
+      navigator.geolocation.getCurrentPosition(
+        p=>{ userLat.value=p.coords.latitude; userLng.value=p.coords.longitude; locFallback.value=false; regenerate(); },
+        ()=>{ useFallback(); },
+        { enableHighAccuracy:false, timeout:8000, maximumAge:60000 }
+      );
+    }
+    function useFallback(){ userLat.value=FALLBACK.lat; userLng.value=FALLBACK.lng; locFallback.value=true; regenerate(); }
+
+    // ===== 候補抽出 =====
+    function withDistance(){
+      const uLat=userLat.value, uLng=userLng.value;
+      const exclude=new Set(existingSpots.map(s=>s.spotId).filter(Boolean));
+      return allSpots
+        .filter(s=>!exclude.has(s.spotId))
+        .map(s=>({ ...s, distKm:+haversine(uLat,uLng,s.lat,s.lng).toFixed(1), dir:dirOf(bearing(uLat,uLng,s.lat,s.lng)) }));
+    }
+    function passFilters(s){
+      if(selectedTags.value.length && !s.tags.some(t=>selectedTags.value.includes(t))) return false;
+      if(selectedDirs.value.length && !selectedDirs.value.includes(s.dir)) return false;
+      return true;
+    }
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+    function generateMulti(){
+      if(userLat.value==null) return;
+      generating.value=true;
+      const cand=withDistance().filter(s=>s.distKm<=radiusKm.value && passFilters(s));
+      suggestions.value=shuffle(cand).slice(0,count.value).map(s=>({ ...s, selected:false }));
+      generating.value=false;
+    }
+    function generateDoko(){
+      if(userLat.value==null) return;
+      const t=radiusKm.value, lo=t*0.8, hi=t*1.2;
+      let cand=withDistance().filter(s=>s.distKm>=lo && s.distKm<=hi && passFilters(s));
+      if(cand.length===0) cand=withDistance().filter(s=>s.distKm<=hi && passFilters(s)); // 緩和
+      if(cand.length===0){ dokoSpot.value=null; return; }
+      const pick=cand[Math.floor(Math.random()*cand.length)];
+      dokoSpot.value=pick;
+      nextTick(()=>renderDokoMap(pick));
+    }
+    function regenerate(){ mode.value==='multi'?generateMulti():generateDoko(); }
+
+    async function renderDokoMap(spot){
+      await waitForMaps();
+      if(typeof google==='undefined'||!google.maps) return;
+      const el=document.getElementById('dokoMap'); if(!el) return;
+      if(!dokoMap){ dokoMap=new google.maps.Map(el,{ disableDefaultUI:true, zoomControl:true }); }
+      const c={lat:spot.lat,lng:spot.lng};
+      dokoMap.setCenter(c); dokoMap.setZoom(11);
+      if(dokoMarker) dokoMarker.setMap(null);
+      dokoMarker=new google.maps.Marker({ position:c, map:dokoMap, title:spot.name });
+    }
+
+    // ===== UI操作 =====
+    function setMode(m){ mode.value=m; }
+    function toggleTag(t){ const i=selectedTags.value.indexOf(t); i<0?selectedTags.value.push(t):selectedTags.value.splice(i,1); }
+    function toggleDir(k){ const i=selectedDirs.value.indexOf(k); i<0?selectedDirs.value.push(k):selectedDirs.value.splice(i,1); }
+    function toggleSpot(s){
+      if(!s.selected && selectedCount.value>=remainingCapacity.value) return;
+      s.selected=!s.selected;
+    }
+    // フィルタ変更で自動再生成
+    watch([radiusKm,count,selectedTags,selectedDirs,mode],()=>{ if(userLat.value!=null) regenerate(); }, {deep:true});
+
+    // ===== 追加処理 =====
+    async function buildOrderedNewSpots(picked){
+      // 既存 + picked を order 振り直し
+      const base=existingSpots.slice();
+      picked.forEach(p=>{ base.push({ spotId:p.spotId, name:p.name, lat:p.lat, lng:p.lng, address:p.address||null, imageUrl:p.imageUrl||null, isCustomPin:false }); });
+      base.forEach((s,i)=>{ s.order=i; });
+      return base;
+    }
+    async function addSelected(){
+      const picked=suggestions.value.filter(s=>s.selected);
+      if(picked.length===0||adding.value) return;
+      adding.value=true;
+      try{ await commit(picked); }
+      finally{ adding.value=false; }
+    }
+    async function addDoko(){
+      if(!dokoSpot.value||remainingCapacity.value<=0) return;
+      adding.value=true;
+      try{ await commit([dokoSpot.value]); }
+      finally{ adding.value=false; }
+    }
+    async function commit(picked){
+      const uid=currentUser.value.uid;
+      const col=db.collection('users').doc(uid).collection('touringPlans');
+      try{
+        if(isNewPlan){
+          if(plansCount>=PLAN_LIMIT){ alert(`プランは${PLAN_LIMIT}個まで作成できます`); return; }
+          const name=`ツーリング${plansCount+1}`;
+          const spots=picked.slice(0,SPOT_LIMIT).map((p,i)=>({ spotId:p.spotId,name:p.name,lat:p.lat,lng:p.lng,address:p.address||null,imageUrl:p.imageUrl||null,isCustomPin:false,order:i }));
+          await col.add({ name, spots, createdAt:firebase.firestore.FieldValue.serverTimestamp(), updatedAt:firebase.firestore.FieldValue.serverTimestamp() });
+        } else {
+          const room=remainingCapacity.value;
+          const add=picked.slice(0,room);
+          const spots=await buildOrderedNewSpots(add);
+          await col.doc(planId).update({ spots, updatedAt:firebase.firestore.FieldValue.serverTimestamp() });
+        }
+        location.href='/touring-plan.html';
+      }catch(e){ console.error(e); alert('追加に失敗しました: '+(e.code||e.message)); }
+    }
+
+    function openInMaps(s){ window.open(`https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}`,'_blank'); }
+    function close(){ location.href='/touring-plan.html'; }
+    function goLogin(){ location.href='/login.html'; }
+
+    return {
+      SPOT_LIMIT, loading, loadingMsg, currentUser, mode, distPresets, radiusKm, count,
+      allTags, selectedTags, directions, selectedDirs, userLat, locFallback, fallbackName,
+      suggestions, generating, dokoSpot, adding,
+      isNewPlan, existingCount, remainingCapacity, selectedCount, targetLabel,
+      setMode, toggleTag, toggleDir, toggleSpot, generateMulti, generateDoko,
+      requestLocation, addSelected, addDoko, openInMaps, close, goLogin
+    };
+  }
+}).mount('#app');
+</script>
+</body>
+</html>
