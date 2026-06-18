@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アプリ紹介 | ツーリングスポットシェア（biketeilen）</title>
+  <meta name="description" content="走った道が、地図になる。GPSルート記録・スポット発見・道路走破率の可視化・走破バッジを1つにしたライダー向けiOSアプリ「ツーリングスポットシェア」の紹介ページ。">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ツーリングスポットシェア — 走った道が、地図になる。">
+  <meta property="og:description" content="GPSルート記録 × 道路走破率の可視化。スポット発見・ツーリングプラン・走破バッジまで、ライダーのためのツーリングアプリ。">
+  <meta property="og:image" content="https://biketeilen.web.app/images/ogp.png">
+  <link rel="canonical" href="https://biketeilen.web.app/about.html">
+
+  <script src="/menu.js?v=4" defer></script>
+
+  <style>
+    :root{
+      --teal:#00A8C6; --green:#228B22; --ink:#1c1c1e; --sub:#6b6b70;
+      --grad:linear-gradient(135deg,#00A8C6 0%,#228B22 100%);
+      --bg:#ffffff; --bg2:#F4F8F8; --card:#ffffff; --line:#eceff0;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+    section{padding:72px 0}
+    h2.sec-title{font-size:clamp(24px,4vw,34px);font-weight:800;text-align:center;margin-bottom:10px}
+    .sec-lead{text-align:center;color:var(--sub);max-width:640px;margin:0 auto 44px;font-size:16px}
+    .accent{color:var(--teal)}
+
+    /* fade-in */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    /* ===== HERO ===== */
+    .hero{position:relative;background:var(--grad);color:#fff;padding:96px 0 80px;overflow:hidden}
+    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(1200px 400px at 80% -10%,rgba(255,255,255,.18),transparent 60%)}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    .hero h1{font-size:clamp(30px,5.4vw,52px);font-weight:900;line-height:1.18;letter-spacing:-.5px}
+    .hero .tag{display:inline-block;background:rgba(255,255,255,.18);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:18px;backdrop-filter:blur(4px)}
+    .hero p.lead{font-size:18px;opacity:.95;margin:18px 0 28px;max-width:520px}
+    .hero .meta{font-size:13px;opacity:.85;margin-top:18px}
+    .store-badges{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .store-badge img{height:54px;display:block}
+    .hero-phone{display:flex;justify-content:center}
+
+    /* ===== phone mockup ===== */
+    .phone{width:248px;aspect-ratio:9/19.5;background:#0d0f12;border-radius:38px;padding:11px;box-shadow:0 30px 60px rgba(0,0,0,.32),0 0 0 2px rgba(255,255,255,.06);position:relative;flex:0 0 auto}
+    .phone::before{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:96px;height:22px;background:#0d0f12;border-radius:0 0 16px 16px;z-index:3}
+    .phone-screen{position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;background:linear-gradient(160deg,#d8eef2,#e7f3e1);display:flex;align-items:center;justify-content:center}
+    .phone-screen::before{content:attr(data-emoji) " " attr(data-label);position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:15px;color:#3a7a86;font-weight:700;text-align:center;padding:20px;white-space:pre-line;background:linear-gradient(160deg,#d8eef2,#e7f3e1)}
+    .phone-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+
+    /* ===== 価値カード ===== */
+    .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .value-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px 22px;text-align:center}
+    .value-card .ico{font-size:40px;display:block;margin-bottom:12px}
+    .value-card h3{font-size:19px;margin-bottom:8px}
+    .value-card p{color:var(--sub);font-size:14.5px}
+
+    /* ===== feature row ===== */
+    .feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin:0 auto;max-width:980px}
+    .feat + .feat{margin-top:84px}
+    .feat.rev .feat-media{order:2}
+    .feat-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,168,198,.1);color:var(--teal);font-weight:800;font-size:13px;padding:6px 14px;border-radius:20px;margin-bottom:14px}
+    .feat h3{font-size:clamp(22px,3.2vw,28px);font-weight:800;margin-bottom:14px;line-height:1.3}
+    .feat ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .feat li{position:relative;padding-left:28px;color:#3a3a3c;font-size:15.5px}
+    .feat li::before{content:"✓";position:absolute;left:0;top:0;color:var(--teal);font-weight:900}
+    .feat-media{display:flex;justify-content:center}
+    .pro-pill{background:#1c1c1e;color:#ffd86b;font-size:11px;font-weight:800;padding:2px 9px;border-radius:8px;margin-left:6px;vertical-align:middle}
+
+    .alt{background:var(--bg2)}
+
+    /* ===== バッジ showcase ===== */
+    .badge-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:760px;margin:0 auto}
+    .badge-chip{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .badge-chip .e{font-size:20px}
+
+    /* ===== pricing ===== */
+    .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+    .price-card{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:28px 22px;display:flex;flex-direction:column}
+    .price-card.pop{border-color:var(--teal);box-shadow:0 12px 30px rgba(0,168,198,.16);position:relative}
+    .price-card.pop::after{content:"おすすめ";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:12px;font-weight:800;padding:4px 14px;border-radius:20px}
+    .price-card h3{font-size:22px;margin-bottom:4px}
+    .price-card .tier-sub{color:var(--sub);font-size:13px;margin-bottom:16px;min-height:34px}
+    .price-card ul{list-style:none;display:flex;flex-direction:column;gap:9px;font-size:14px}
+    .price-card li{padding-left:24px;position:relative;color:#3a3a3c}
+    .price-card li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+    .price-card li.no{color:#aaa}
+    .price-card li.no::before{content:"–";color:#ccc}
+
+    /* ===== CTA ===== */
+    .cta{background:var(--grad);color:#fff;text-align:center}
+    .cta h2{font-size:clamp(24px,4vw,34px);font-weight:900;margin-bottom:12px}
+    .cta p{opacity:.95;margin-bottom:26px;font-size:17px}
+    .cta .store-badges{justify-content:center}
+
+    /* ===== footer ===== */
+    footer{background:#11171a;color:#aeb6bb;padding:40px 0;font-size:13px}
+    footer .fwrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
+    footer a{color:#cfd6da;text-decoration:none;margin-right:18px}
+    footer a:hover{color:#fff}
+    .attr{font-size:11px;color:#6b757b;margin-top:14px}
+
+    @media (max-width:820px){
+      .hero-grid{grid-template-columns:1fr;text-align:center}
+      .hero p.lead{margin-left:auto;margin-right:auto}
+      .store-badges{justify-content:center}
+      .hero-phone{margin-top:10px}
+      .value-grid{grid-template-columns:1fr}
+      .feat{grid-template-columns:1fr;gap:26px;text-align:center}
+      .feat.rev .feat-media{order:0}
+      .feat ul{text-align:left;max-width:420px;margin:0 auto}
+      .feat-badge{margin-left:auto;margin-right:auto}
+      .price-grid{grid-template-columns:1fr}
+    }
+    @media (prefers-color-scheme:dark){
+      :root{--bg:#0e1113;--bg2:#14181b;--card:#181c1f;--line:#262b2f;--ink:#eef2f4;--sub:#9aa3a8}
+      body{background:var(--bg)}
+      .value-card,.price-card,.badge-chip{background:var(--card)}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">🏍️ iOS ツーリングアプリ</span>
+        <h1>走った道が、<br>地図になる。</h1>
+        <p class="lead">GPSでルートを記録し、好きなスポットを見つけて、走破実績を貯める。<br>ライダーのためのオールインワン・ツーリングアプリ。</p>
+        <div class="store-badges">
+          <a class="store-badge" href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener">
+            <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="App Store からダウンロード">
+          </a>
+        </div>
+        <div class="meta">iOS 16.0 以降 ・ 日本語 / English 対応 ・ 無料ではじめられます</div>
+      </div>
+      <div class="hero-phone">
+        <div class="phone"><div class="phone-screen" data-emoji="🗺️" data-label="発見マップ">
+          <img src="/images/screen-discover.png" alt="スポット発見マップ" onerror="this.remove()">
+        </div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== 3つの価値 ===== -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title reveal">3つの体験を、ひとつに</h2>
+      <p class="sec-lead reveal">記録して、発見して、貯まっていく。ツーリングがもっと楽しくなる。</p>
+      <div class="value-grid">
+        <div class="value-card reveal"><span class="ico">🛰️</span><h3>記録する</h3><p>ワンタップでGPS走行記録。道路名・標高・写真まで自動で残ります。</p></div>
+        <div class="value-card reveal"><span class="ico">🗺️</span><h3>見つける</h3><p>全国のスポット・道の駅を地図で発見。星評価のクチコミ付き。</p></div>
+        <div class="value-card reveal"><span class="ico">🏅</span><h3>貯める</h3><p>距離・都道府県・道の駅…走るほどバッジと制覇マップが埋まる。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 機能詳細 ===== -->
+  <section class="alt">
+    <div class="wrap">
+      <h2 class="sec-title reveal">主な機能</h2>
+      <p class="sec-lead reveal">走行の「記録・発見・共有・実績」をまるごとサポート。</p>
+
+      <!-- 記録 -->
+      <div class="feat reveal">
+        <div class="feat-media"><div class="phone"><div class="phone-screen" data-emoji="🛰️" data-label="ルート記録">
+          <img src="/images/screen-record.png" alt="ルート記録画面" onerror="this.remove()"></div></div></div>
+        <div>
+          <span class="feat-badge">🛰️ コア機能</span>
+          <h3>GPSルート記録</h3>
+          <ul>
+            <li>走行ルートをリアルタイム記録（バックグラウンド対応）。距離・時間・経路を自動計測</li>
+            <li>OpenStreetMap から<strong>道路名を自動取得</strong>。区間ごとにセグメント管理</li>
+            <li>標高データ、ルート上の任意地点に<strong>写真マーカー</strong>（位置情報抽出に対応）</li>
+            <li>保存・トリミング・タイトル付け。サーバーバックアップ／復元<span class="pro-pill">Plus以上</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 発見 -->
+      <div class="feat rev reveal">
+        <div class="feat-media"><div class="phone"><div class="phone-screen" data-emoji="🗺️" data-label="スポット発見">
+          <img src="/images/screen-discover.png" alt="スポット発見画面" onerror="this.remove()"></div></div></div>
+        <div>
+          <span class="feat-badge">🗺️ Discover</span>
+          <h3>スポット発見・クチコミ</h3>
+          <ul>
+            <li>写真付きスポットを地図／リストで表示・検索</li>
+            <li>全国の<strong>道の駅</strong>データに対応</li>
+            <li><strong>星評価のクチコミ</strong>で行く前にチェック</li>
+            <li>住所・緯度経度は自動付与。ブロック／通報で健全性も担保</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- プラン -->
+      <div class="feat reveal">
+        <div class="feat-media"><div class="phone"><div class="phone-screen" data-emoji="🏍️" data-label="ツーリングプラン">
+          <img src="/images/screen-plan.png" alt="ツーリングプラン画面" onerror="this.remove()"></div></div></div>
+        <div>
+          <span class="feat-badge">🏍️ Plan</span>
+          <h3>ツーリングプラン</h3>
+          <ul>
+            <li>行きたいスポットを組み合わせてプランを作成</li>
+            <li><strong>おまかせ提案</strong>：目標距離や方角からスポットをランダム／複数提案</li>
+            <li>プラン一覧マップで色分けピン・訪問順のルート線を俯瞰</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RoadDex -->
+      <div class="feat rev reveal">
+        <div class="feat-media"><div class="phone"><div class="phone-screen" data-emoji="🛣️" data-label="道路走破率">
+          <img src="/images/screen-roaddex.png" alt="道路走破率（RoadDex）画面" onerror="this.remove()"></div></div></div>
+        <div>
+          <span class="feat-badge">🛣️ RoadDex</span>
+          <h3>道路走破率の可視化<span class="pro-pill">Pro</span></h3>
+          <ul>
+            <li>走った道路をグリッド単位で集計し、<strong>走破率</strong>を地図にハイライト</li>
+            <li>広範囲をサクサク表示（タイルキャッシュ）。達成セレモニー演出</li>
+            <li>Pro なら<strong>メッシュ単位</strong>で全国制覇を細かく可視化</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 実績 -->
+      <div class="feat reveal">
+        <div class="feat-media"><div class="phone"><div class="phone-screen" data-emoji="🏅" data-label="実績・バッジ">
+          <img src="/images/screen-achievements.png" alt="実績・バッジ画面" onerror="this.remove()"></div></div></div>
+        <div>
+          <span class="feat-badge">🏅 Achievements</span>
+          <h3>走るほど貯まるバッジ</h3>
+          <ul>
+            <li>走行距離（10〜1000km）・ルート数・スポット投稿・道の駅訪問・連続記録…</li>
+            <li><strong>47都道府県の制覇マップ</strong>をスポット／ルートから自動判定</li>
+            <li>獲得時はポップアップで祝福。SNS共有も可能</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== バッジ showcase ===== -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title reveal">集めたくなる、走破バッジ</h2>
+      <p class="sec-lead reveal">走った距離も、巡った場所も、続けた日々も、ぜんぶ実績に。</p>
+      <div class="badge-chips reveal">
+        <span class="badge-chip"><span class="e">🏁</span>1000km 走破</span>
+        <span class="badge-chip"><span class="e">🗾</span>47都道府県制覇</span>
+        <span class="badge-chip"><span class="e">🛤️</span>道の駅 100駅</span>
+        <span class="badge-chip"><span class="e">📸</span>スポット100投稿</span>
+        <span class="badge-chip"><span class="e">🔥</span>30日連続記録</span>
+        <span class="badge-chip"><span class="e">🌅</span>早朝ライド</span>
+        <span class="badge-chip"><span class="e">⭐</span>Pro ライダー</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 共有・統計 ===== -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="value-grid">
+        <div class="value-card reveal"><span class="ico">🔗</span><h3>ルート共有</h3><p>記録したルートを仲間にシェア。公開範囲の設定や共有リンクにも対応。</p></div>
+        <div class="value-card reveal"><span class="ico">📊</span><h3>統計ダッシュボード</h3><p>距離・時間・ペースを集計。Plusで月別トレンド、Proで速度・標高・燃費まで。</p></div>
+        <div class="value-card reveal"><span class="ico">🌐</span><h3>多言語対応</h3><p>日本語 / English に対応。端末の言語設定に自動で追従します。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 料金プラン ===== -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title reveal">料金プラン</h2>
+      <p class="sec-lead reveal">まずは無料で。もっと走るなら Plus / Pro へ。</p>
+      <div class="price-grid">
+        <div class="price-card reveal">
+          <h3>Free</h3>
+          <div class="tier-sub">まずは試したい人に</div>
+          <ul>
+            <li>スポット投稿・保存（制限あり）</li>
+            <li>ルート記録（月10・90日保持）</li>
+            <li>ツーリングプラン作成（制限あり）</li>
+            <li class="no">広告の非表示</li>
+            <li class="no">サーバーバックアップ</li>
+          </ul>
+        </div>
+        <div class="price-card pop reveal">
+          <h3>Plus</h3>
+          <div class="tier-sub">本格的に走り始めたら</div>
+          <ul>
+            <li><strong>広告なし</strong></li>
+            <li>ルート記録 <strong>無制限・永久保存</strong></li>
+            <li>スポット投稿・保存・プラン 無制限</li>
+            <li>サーバーバックアップ／復元</li>
+            <li>統計：月別トレンド・ペース分析</li>
+          </ul>
+        </div>
+        <div class="price-card reveal">
+          <h3>Pro</h3>
+          <div class="tier-sub">すべてを使い倒す人に</div>
+          <ul>
+            <li>Plus の全機能</li>
+            <li><strong>道路走破率（メッシュ単位）</strong></li>
+            <li>詳細統計（速度・標高・燃費）</li>
+            <li>GPX / CSV エクスポート・オフライン地図</li>
+            <li>ファミリー共有（最大5人）</li>
+          </ul>
+        </div>
+      </div>
+      <p class="sec-lead reveal" style="margin-top:28px;font-size:13px">※ サブスクリプション（月額・年額）。無料プランは報酬型広告で一部機能を一時解放できます。</p>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta">
+    <div class="wrap reveal">
+      <h2>さあ、次の道へ。</h2>
+      <p>ツーリングスポットシェアを無料でダウンロード</p>
+      <div class="store-badges">
+        <a class="store-badge" href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener">
+          <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="App Store からダウンロード">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== footer ===== -->
+  <footer>
+    <div class="wrap">
+      <div class="fwrap">
+        <div>
+          <strong style="color:#fff">ツーリングスポットシェア</strong>（biketeilen）
+          <div style="margin-top:8px">
+            <a href="/">Webアプリ</a>
+            <a href="/routes.html">ルートを探す</a>
+            <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+            <a href="/termsofservice/termsofservice.html">利用規約</a>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <a href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener">App Store</a>
+        </div>
+      </div>
+      <div class="attr">地図・道路データ © OpenStreetMap contributors / Google。App Store は Apple Inc. の商標です。</div>
+    </div>
+  </footer>
+
+  <script>
+    // スクロールでフェードイン
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

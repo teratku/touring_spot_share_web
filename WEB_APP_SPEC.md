@@ -323,5 +323,14 @@ iOS（`APP_FEATURES.md`）に対し、**Web のスコープ（閲覧＋プラン
 - **データ/ロジック**：スポットは `imagedownload` 全件取得（`index.html`と同方式）。距離=ハバーサイン、方角=方位角→N/E/S/W、ジャンル=`tag`(配列) の頻度上位30をチップ化。現在地はブラウザ geolocation（不可時は東京フォールバック＋再取得バナー）。既にプランにあるスポットは除外。
 - **上限**：現状 3プラン/3スポット固定（[P1未対応](#付録サブスク状態p1-が保留になった理由)）のため、追加は空き枠（`SPOT_LIMIT - 既存`）まで。サブスク連動が入れば緩和。
 - 追加するスポット形状は既存の「プランに追加」と同一（`spotId/name/lat/lng/address/imageUrl/isCustomPin/order`）。
+
+### 付録：アプリ紹介LP（`/about.html`）
+iOSアプリ「ツーリングスポットシェア（biketeilen）」の紹介ランディングページ。`APP_FEATURES.md` の機能・8章の訴求案がベース。共通メニューに「📱 アプリについて」を追加（menu.js v=4）。
+- **構成**: ヒーロー（「走った道が、地図になる。」＋App Storeバッジ＋端末モックアップ）→ 3つの価値 → 主な機能（記録/発見/プラン/RoadDex/実績、交互レイアウト）→ バッジ → 共有・統計・多言語 → 料金プラン(Free/Plus/Pro) → CTA → フッター。スクロールでフェードイン。レスポンシブ＆ダークモード対応。Firebase不要の静的ページ（menu.js のみ）。
+- **App Store**: `https://apps.apple.com/jp/app/id1466607921`、バッジは Apple 公式SVG（CDN）。
+- **画像**: `/images/` 配下に置けば自動表示、無ければプレースホルダー（絵文字＋ラベル）が出る `onerror` フォールバック方式。必要画像:
+  - `screen-discover.png` / `screen-record.png` / `screen-plan.png` / `screen-roaddex.png` / `screen-achievements.png`（iPhone 6.5″ 1242×2688 スクショ）
+  - `ogp.png`（1200×630、OGP）、任意で `app-icon.png`
+- **キャッシュ**: HTMLは1h（must-revalidate）なので画像追加後すぐ反映。`/about.html` 自体はメニュー＋index等から導線可。
 </content>
 </invoke>

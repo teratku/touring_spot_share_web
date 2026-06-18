@@ -12,6 +12,7 @@
   // auth: 'in' = ログイン時のみ表示 / 'out' = 未ログイン時のみ / 省略 = 常時表示
   var ITEMS = [
     { icon: '🏠', label: 'ホーム', href: '/' },
+    { icon: '📱', label: 'アプリについて', href: '/about.html' },
     { icon: '🛣️', label: 'ルートを探す', href: '/routes.html' },
     { icon: '🏍️', label: 'ツーリングプラン', href: '/touring-plan.html' },
     { icon: '📝', label: 'ブログ', href: '/blog/blog.html' },
