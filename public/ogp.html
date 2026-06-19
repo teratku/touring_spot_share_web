@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <!--
+    OGP画像（1200×630）生成用ページ。
+    1) 提供のツーリング写真を public/images/ogp-bg.jpg として保存
+    2) このページを 1200×630 で書き出して public/images/ogp.png として保存
+       （推奨：Chrome ヘッドレス）
+         /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+           --headless --screenshot=public/images/ogp.png --window-size=1200,630 \
+           --default-background-color=0 file:///<このファイルの絶対パス>
+       もしくは localhost で開いて 1200×630 のスクショ。
+  -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    .ogp {
+      position: relative; width: 1200px; height: 630px; background: #0b1d2a;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+    .ogp .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* 文字の可読性のための暗いスクリム（左→右・下→上） */
+    .ogp .scrim {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(8,20,30,.80) 0%, rgba(8,20,30,.38) 46%, rgba(8,20,30,0) 72%),
+        linear-gradient(0deg,  rgba(8,20,30,.74) 0%, rgba(8,20,30,0) 56%);
+    }
+    /* 上部ブランドアクセント帯 */
+    .ogp .bar { position: absolute; top: 0; left: 0; right: 0; height: 8px;
+      background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%); }
+    .ogp .content { position: absolute; left: 64px; right: 64px; bottom: 60px; }
+    .ogp .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .ogp .brand .dot { width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg, #00A8C6, #228B22); box-shadow: 0 4px 14px rgba(0,168,198,.45); }
+    .ogp .brand .name { color: #fff; font-size: 26px; font-weight: 700; letter-spacing: .02em;
+      text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+    .ogp h1 { color: #fff; font-size: 78px; font-weight: 800; line-height: 1.12; letter-spacing: .01em;
+      text-shadow: 0 2px 20px rgba(0,0,0,.5); }
+    .ogp h1 .em { color: #7fe7ff; }
+    .ogp .sub { margin-top: 18px; color: rgba(255,255,255,.94); font-size: 27px; font-weight: 600;
+      text-shadow: 0 1px 10px rgba(0,0,0,.55); }
+    .ogp .tags { margin-top: 20px; display: flex; gap: 10px; }
+    .ogp .tag { color: #fff; font-size: 18px; font-weight: 600; padding: 7px 15px;
+      border: 1.5px solid rgba(255,255,255,.6); border-radius: 999px; }
+  </style>
+</head>
+<body>
+  <div class="ogp">
+    <img class="photo" src="images/ogp-bg.jpeg" alt="">
+    <div class="scrim"></div>
+    <div class="bar"></div>
+    <div class="content">
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="name">ツーリングスポットシェア</div>
+      </div>
+      <h1>走った道が、<br>地図に<span class="em">なる。</span></h1>
+      <div class="sub">GPSルート記録 × 道路走破率の可視化</div>
+      <div class="tags">
+        <span class="tag">ルート記録</span>
+        <span class="tag">スポット発見</span>
+        <span class="tag">走破率マップ</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
