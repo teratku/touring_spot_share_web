@@ -35,8 +35,10 @@
     .reveal.in{opacity:1;transform:none}
 
     /* ===== HERO ===== */
-    .hero{position:relative;background:var(--grad);color:#fff;padding:96px 0 80px;overflow:hidden}
-    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(1200px 400px at 80% -10%,rgba(255,255,255,.18),transparent 60%)}
+    .hero{position:relative;color:#fff;padding:96px 0 80px;overflow:hidden;background-color:#0b8ea8;
+      background-image:linear-gradient(135deg,rgba(0,150,179,.90) 0%,rgba(28,120,42,.86) 100%),url('/images/ogp-bg.jpeg');
+      background-size:cover;background-position:center;background-repeat:no-repeat}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),transparent 30%)}
     .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
     .hero h1{font-size:clamp(30px,5.4vw,52px);font-weight:900;line-height:1.18;letter-spacing:-.5px}
     .hero .tag{display:inline-block;background:rgba(255,255,255,.18);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:18px;backdrop-filter:blur(4px)}
