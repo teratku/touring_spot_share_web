@@ -1,0 +1,14 @@
+{
+  "name": "biketeilen-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "スタンプラリーのマスタ投入など運営用スクリプト",
+  "type": "commonjs",
+  "scripts": {
+    "import": "node importRallies.js",
+    "import:dry": "node importRallies.js --dry-run"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.6.0"
+  }
+}
