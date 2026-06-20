@@ -23,6 +23,7 @@ const fs = require("fs");
 const express = require("express");
 const admin = require("firebase-admin");
 const { validateRally } = require("./lib/rallyValidation");
+const { ROMAJI, REGION } = require("./lib/prefectures");
 
 const PROJECT_ID = "biketeilen";
 const PORT = process.env.PORT || 4317;
@@ -72,6 +73,62 @@ app.get("/api/spots", async (req, res) => {
   } catch (e) {
     console.error("spots error:", e.message);
     res.status(500).json({ error: e.message });
+  }
+});
+
+// Web地名検索（OpenStreetMap Nominatim プロキシ／APIキー不要・日本限定）
+// ※ Nominatim 利用規約: 適切な User-Agent・低頻度。県別コンテンツ作成の用途を想定。
+app.get("/api/geocode", async (req, res) => {
+  try {
+    const q = String(req.query.q || "").trim();
+    if (!q) return res.json({ results: [] });
+    const url =
+      "https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=10" +
+      "&accept-language=ja&countrycodes=jp&q=" + encodeURIComponent(q);
+    const r = await fetch(url, {
+      headers: { "User-Agent": "biketeilen-rally-builder/1.0 (local admin tool)", "Accept-Language": "ja" },
+    });
+    if (!r.ok) return res.status(502).json({ error: "geocode upstream " + r.status });
+    const data = await r.json();
+    const results = (Array.isArray(data) ? data : [])
+      .map((x) => {
+        const a = x.address || {};
+        const addr = [a.state || a.province, a.city || a.town || a.village || a.county].filter(Boolean).join(" ");
+        return {
+          name: x.name || String(x.display_name || "").split(",")[0] || q,
+          address: addr || String(x.display_name || ""),
+          lat: Number(x.lat),
+          lng: Number(x.lon),
+          kind: x.type || x.category || "",
+        };
+      })
+      .filter((o) => isFinite(o.lat) && isFinite(o.lng));
+    res.json({ results });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// 都道府県マスタ（ラリー情報の県プルダウン用。lib/prefectures.js が単一の出典）
+app.get("/api/prefectures", (_req, res) => {
+  const prefectures = Object.keys(ROMAJI).map((name) => ({
+    name,
+    romaji: ROMAJI[name],
+    region: REGION[name] || "",
+  }));
+  res.json({ prefectures });
+});
+
+// 県別に保存したスポットデータ（savePrefectureData.js が生成）を返す
+app.get("/api/prefecture-spots/:romaji", (req, res) => {
+  const file = path.join(__dirname, "data", "prefecture-spots", `${req.params.romaji}.json`);
+  if (!fs.existsSync(file)) {
+    return res.status(404).json({ error: "未生成です。admin で node savePrefectureData.js を実行してください。", spots: [] });
+  }
+  try {
+    res.json(JSON.parse(fs.readFileSync(file, "utf8")));
+  } catch (e) {
+    res.status(500).json({ error: e.message, spots: [] });
   }
 });
 

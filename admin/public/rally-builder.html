@@ -37,6 +37,10 @@
   .tlist { list-style:none; margin:0; padding:0; }
   .tlist li { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid var(--line); }
   .tnum-badge { background:#e8770a; color:#fff; border-radius:50%; width:26px; height:26px; line-height:26px; text-align:center; font-weight:700; font-size:12px; box-shadow:0 0 0 2px #fff; }
+  .wnum-badge { background:#2e9e5b; color:#fff; border-radius:50%; width:24px; height:24px; line-height:24px; text-align:center; font-weight:700; font-size:11px; box-shadow:0 0 0 2px #fff; }
+  .weblist { max-height:170px; overflow:auto; border:1px solid var(--line); border-radius:8px; margin-bottom:6px; }
+  .webrow { display:flex; align-items:center; gap:8px; padding:6px 8px; border-bottom:1px solid var(--line); }
+  .webrow:last-child { border-bottom:none; }
   .tbadge { background:var(--teal); color:#fff; border-radius:50%; width:22px; height:22px; line-height:22px; text-align:center; font-size:11px; font-weight:700; flex:0 0 auto; }
   .tinfo { flex:1; min-width:0; }
   .tinfo .tn { font-size:13px; font-weight:600; }
@@ -84,6 +88,11 @@
             <select v-model="form.region"><option v-for="r in regions" :key="r" :value="r">{{ r || '（なし）' }}</option></select>
           </div>
         </div>
+        <label>都道府県（選ぶと「都道府県別チャレンジ」になります）</label>
+        <select v-model="form.prefecture" @change="onPrefectureChange">
+          <option value="">（標準ラリー）</option>
+          <option v-for="p in prefectures" :key="p.name" :value="p.name">{{ p.name }}（{{ p.region }}）</option>
+        </select>
         <label>説明</label>
         <textarea v-model="form.description" placeholder="ラリーの紹介文"></textarea>
         <div class="row3">
@@ -144,8 +153,28 @@
         <input type="text" v-model="spotQuery" @input="renderSpotMarkers" placeholder="スポット名・住所で絞り込み" />
         <label class="chk"><input type="checkbox" v-model="addMode" />地図クリックで地点追加</label>
         <button class="btn ghost" @click="loadSpots">再読込</button>
+        <button class="btn ghost" @click="loadPrefectureSpots" :disabled="!form.prefecture">県データ読込</button>
       </div>
       <div class="muted" style="margin-bottom:6px">{{ spotMsg }}</div>
+      <div class="muted" style="margin-bottom:6px">凡例: 🔵アプリ保存 / 🟢Web検索 / 🟣県データ / 🟠対象（追加済み）</div>
+
+      <div class="maptools">
+        <input type="text" v-model="webQuery" @keyup.enter="webSearch" placeholder="🔎 Web検索（地名・施設名）例: 鳥取砂丘 / 角島大橋" />
+        <button class="btn primary" @click="webSearch" :disabled="webSearching">{{ webSearching ? '検索中…' : 'Web検索' }}</button>
+      </div>
+      <div v-if="webResults.length" class="weblist">
+        <div v-for="(r,i) in webResults" :key="i" class="webrow">
+          <span class="wnum-badge">{{ i+1 }}</span>
+          <div style="flex:1; min-width:0;">
+            <div style="font-size:13px; font-weight:600;">{{ r.name }}</div>
+            <div class="muted">{{ r.address }} · {{ r.lat.toFixed(4) }},{{ r.lng.toFixed(4) }}{{ r.kind ? ' · '+r.kind : '' }}</div>
+          </div>
+          <button class="iconbtn" @click="focusWeb(r)">地図</button>
+          <button class="btn ghost" @click="addTargetFromWeb(r)">追加</button>
+        </div>
+      </div>
+      <div class="muted" v-if="webMsg" style="margin-bottom:6px">{{ webMsg }}</div>
+
       <div id="map"></div>
     </div>
   </div>
@@ -169,8 +198,10 @@ createApp({
       regions: ['','北海道','東北','関東','中部','関西','中国四国','九州沖縄','全国'],
       monthsList: [1,2,3,4,5,6,7,8,9,10,11,12],
       allSpots: [], spotQuery:'', spotMsg:'', addMode:false,
+      webQuery:'', webResults:[], webMsg:'', webSearching:false,
+      prefectures: [], savedSpots: [],
       targets: [], msg:'', rallyList: [], showJson:false,
-      map:null, spotLayer:null, targetLayer:null
+      map:null, spotLayer:null, targetLayer:null, webLayer:null, savedLayer:null
     };
   },
   computed: {
@@ -184,10 +215,13 @@ createApp({
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap' }).addTo(this.map);
     this.spotLayer = L.layerGroup().addTo(this.map);
     this.targetLayer = L.layerGroup().addTo(this.map);
+    this.webLayer = L.layerGroup().addTo(this.map);
+    this.savedLayer = L.layerGroup().addTo(this.map);
     this.map.on('moveend', () => this.renderSpotMarkers());
     this.map.on('click', (e) => { if (this.addMode) this.addCustomAt(e.latlng.lat, e.latlng.lng); });
     this.loadSpots();
     this.loadRallyList();
+    this.loadPrefectures();
   },
   methods: {
     activeMonths() {
@@ -292,6 +326,69 @@ createApp({
       this.targets.push({ targetId: this.nextTargetId(), name: name.trim(), lat: +lat.toFixed(6), lng: +lng.toFixed(6), spotId: null, address:'', imageURL:'' });
       this.renderTargetMarkers();
       this.msg = `カスタム追加: ${name.trim()}`;
+    },
+    async webSearch() {
+      const q = this.webQuery.trim();
+      if (!q) return;
+      this.webSearching = true; this.webMsg = '検索中…'; this.webResults = [];
+      try {
+        const res = await fetch('/api/geocode?q=' + encodeURIComponent(q));
+        const data = await res.json();
+        if (data.error) { this.webMsg = '❌ ' + data.error; return; }
+        this.webResults = data.results || [];
+        this.webMsg = this.webResults.length
+          ? `${this.webResults.length} 件ヒット（地図ピン/「追加」で対象に）`
+          : '該当なし（言い回しを変えてみてください）';
+        this.renderWebMarkers();
+        if (this.webResults[0]) this.map.setView([this.webResults[0].lat, this.webResults[0].lng], 12);
+      } catch (e) { this.webMsg = '❌ ' + e.message; }
+      finally { this.webSearching = false; }
+    },
+    renderWebMarkers() {
+      if (!this.webLayer) return;
+      this.webLayer.clearLayers();
+      this.webResults.forEach((r, i) => {
+        const icon = L.divIcon({ className:'', html:`<div class="wnum-badge">${i + 1}</div>`, iconSize:[24,24], iconAnchor:[12,12] });
+        L.marker([r.lat, r.lng], { icon }).addTo(this.webLayer).bindTooltip(r.name).on('click', () => this.addTargetFromWeb(r));
+      });
+    },
+    focusWeb(r) { this.map.setView([r.lat, r.lng], 14); },
+    addTargetFromWeb(r) {
+      this.targets.push({ targetId: this.nextTargetId(), name: r.name, lat: +r.lat.toFixed(6), lng: +r.lng.toFixed(6), spotId: null, address: r.address || '', imageURL: '' });
+      this.renderTargetMarkers();
+      this.msg = `Web追加: ${r.name}`;
+    },
+    async loadPrefectures() {
+      try { const res = await fetch('/api/prefectures'); const data = await res.json(); this.prefectures = data.prefectures || []; }
+      catch (e) { /* ignore */ }
+    },
+    onPrefectureChange() {
+      const p = this.prefectures.find(x => x.name === this.form.prefecture);
+      if (p) { this.form.category = 'prefecture'; this.form.region = p.region; }
+      else { this.form.category = 'standard'; }
+    },
+    async loadPrefectureSpots() {
+      const p = this.prefectures.find(x => x.name === this.form.prefecture);
+      if (!p) { this.spotMsg = '先に都道府県を選択してください'; return; }
+      try {
+        const res = await fetch('/api/prefecture-spots/' + p.romaji);
+        const data = await res.json();
+        this.savedSpots = data.spots || [];
+        if (!this.savedSpots.length && data.error) { this.spotMsg = '❌ ' + data.error; this.renderSavedMarkers(); return; }
+        this.spotMsg = `${p.name} 保存スポット ${this.savedSpots.length} 件（🟣ピンをクリックで追加）`;
+        this.renderSavedMarkers();
+        if (this.savedSpots[0]) this.map.setView([this.savedSpots[0].lat, this.savedSpots[0].lng], 9);
+      } catch (e) { this.spotMsg = '❌ ' + e.message; }
+    },
+    renderSavedMarkers() {
+      if (!this.savedLayer) return;
+      this.savedLayer.clearLayers();
+      for (const s of this.savedSpots) {
+        const m = L.circleMarker([s.lat, s.lng], { radius:6, color:'#7a3ff2', weight:1, fillColor:'#a07bff', fillOpacity:.85 });
+        m.bindTooltip(s.name);
+        m.on('click', () => this.addTargetFromSpot(s));
+        this.savedLayer.addLayer(m);
+      }
     },
     move(i, dir) {
       const j = i + dir;
