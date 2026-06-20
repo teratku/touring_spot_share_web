@@ -1,0 +1,21 @@
+{
+  "_note": "2026年度（現在）用サンプル。lat/lng は概算プレースホルダー。実運用前に正確な座標へ、可能なら spotId へ差し替え。targetId は年度内で変更しないこと。",
+  "rallyId": "michinoeki-tohoku-2026",
+  "name": "東北 道の駅めぐり 2026",
+  "theme": "michinoeki",
+  "region": "東北",
+  "description": "東北の人気道の駅をめぐるスタンプラリー。チェックインまたは写真投稿でスタンプ獲得。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "coverImageURL": "https://biketeilen.web.app/images/rallies/michinoeki-tohoku-2026.jpg",
+  "rewardBadgeId": "badge_michinoeki_tohoku_2026",
+  "completionTitle": "東北 道の駅マスター 2026",
+  "targets": [
+    { "targetId": "t01", "name": "道の駅 あ・ら・伊達な道の駅", "lat": 38.731, "lng": 140.776, "address": "宮城県大崎市", "order": 1 },
+    { "targetId": "t02", "name": "道の駅 七ヶ宿", "lat": 38.045, "lng": 140.456, "address": "宮城県刈田郡七ヶ宿町", "order": 2 },
+    { "targetId": "t03", "name": "道の駅 たろう", "lat": 39.741, "lng": 141.974, "address": "岩手県宮古市", "order": 3 },
+    { "targetId": "t04", "name": "道の駅 雫石あねっこ", "lat": 39.701, "lng": 140.918, "address": "岩手県岩手郡雫石町", "order": 4 },
+    { "targetId": "t05", "name": "道の駅 鳥海 ふらっと", "lat": 39.171, "lng": 139.907, "address": "秋田県由利本荘市", "order": 5 }
+  ]
+}
