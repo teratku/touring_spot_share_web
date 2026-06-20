@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>スタンプラリー ビルダー（ローカル）</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<style>
+  :root { --teal:#00A8C6; --ink:#1f2d3d; --line:#e4e9ee; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif; color:var(--ink); background:#f4f7f9; }
+  header { background:linear-gradient(90deg,var(--teal),#0bbed6); color:#fff; padding:12px 18px; display:flex; align-items:center; gap:12px; }
+  header h1 { font-size:18px; margin:0; }
+  header .pill { font-size:11px; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:999px; }
+  .wrap { display:grid; grid-template-columns:minmax(360px,420px) 1fr; gap:14px; padding:14px; align-items:start; }
+  .panel { background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px; }
+  .panel h2 { font-size:14px; margin:0 0 10px; color:var(--teal); }
+  label { display:block; font-size:12px; font-weight:600; margin:8px 0 3px; color:#52606d; }
+  input,select,textarea { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:8px; font-size:13px; font-family:inherit; }
+  textarea { resize:vertical; min-height:48px; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+  .btn { border:none; border-radius:8px; padding:9px 12px; font-size:13px; font-weight:700; cursor:pointer; }
+  .btn.primary { background:var(--teal); color:#fff; }
+  .btn.ghost { background:#eef4f6; color:var(--teal); }
+  .btn.warn { background:#fff3e0; color:#e08a00; }
+  .btn:disabled { opacity:.5; cursor:default; }
+  .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .msg { margin-top:10px; font-size:12px; padding:8px 10px; border-radius:8px; background:#f1f6f8; white-space:pre-wrap; }
+  #map { height:78vh; border-radius:12px; border:1px solid var(--line); }
+  .maptools { display:flex; gap:8px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
+  .maptools input[type=text]{ flex:1; min-width:160px; }
+  .chk { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:#52606d; }
+  .chk input{ width:auto; }
+  .tlist { list-style:none; margin:0; padding:0; }
+  .tlist li { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid var(--line); }
+  .tnum-badge { background:#e8770a; color:#fff; border-radius:50%; width:26px; height:26px; line-height:26px; text-align:center; font-weight:700; font-size:12px; box-shadow:0 0 0 2px #fff; }
+  .tbadge { background:var(--teal); color:#fff; border-radius:50%; width:22px; height:22px; line-height:22px; text-align:center; font-size:11px; font-weight:700; flex:0 0 auto; }
+  .tinfo { flex:1; min-width:0; }
+  .tinfo .tn { font-size:13px; font-weight:600; }
+  .tinfo .ts { font-size:11px; color:#90a4ae; }
+  .miniedit { font-size:12px; padding:4px 6px; }
+  .iconbtn { border:1px solid var(--line); background:#fff; border-radius:6px; padding:3px 7px; cursor:pointer; font-size:12px; }
+  .months { display:flex; flex-wrap:wrap; gap:4px; }
+  .months label { display:flex; align-items:center; gap:3px; font-weight:500; margin:0; }
+  .months input{ width:auto; }
+  pre.json { background:#0d2b33; color:#aee9f5; padding:12px; border-radius:8px; font-size:11px; overflow:auto; max-height:280px; }
+  .muted { color:#90a4ae; font-size:11px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>🔰 スタンプラリー ビルダー</h1>
+    <span class="pill">ローカル開発用 · 127.0.0.1</span>
+    <span style="flex:1"></span>
+    <select style="width:auto" @change="onPickExisting($event)">
+      <option value="">― 既存ラリーを読込 ―</option>
+      <option v-for="r in rallyList" :key="r.id" :value="r.id">{{ r.fiscalYear }} · {{ r.name }}（{{ r.status }}）</option>
+    </select>
+    <button class="btn ghost" @click="resetForm">新規</button>
+  </header>
+
+  <div class="wrap">
+    <!-- 左：フォーム＋対象 -->
+    <div>
+      <div class="panel">
+        <h2>ラリー情報</h2>
+        <label>rallyId（英数・ハイフン／年度内で固定）</label>
+        <div style="display:flex; gap:6px;">
+          <input v-model="form.rallyId" placeholder="例: michinoeki-tohoku-2026" />
+          <button class="btn ghost" style="white-space:nowrap" @click="suggestId">候補</button>
+        </div>
+        <label>ラリー名</label>
+        <input v-model="form.name" placeholder="例: 東北 道の駅めぐり 2026" />
+        <div class="row">
+          <div><label>テーマ</label>
+            <select v-model="form.theme"><option v-for="t in themes" :key="t[0]" :value="t[0]">{{ t[1] }}</option></select>
+          </div>
+          <div><label>エリア(region)</label>
+            <select v-model="form.region"><option v-for="r in regions" :key="r" :value="r">{{ r || '（なし）' }}</option></select>
+          </div>
+        </div>
+        <label>説明</label>
+        <textarea v-model="form.description" placeholder="ラリーの紹介文"></textarea>
+        <div class="row3">
+          <div><label>年度(fiscalYear)</label><input type="number" v-model.number="form.fiscalYear" @change="onYearChange" /></div>
+          <div><label>開始(startAt)</label><input type="date" v-model="form.startAt" /></div>
+          <div><label>終了(endAt)</label><input type="date" v-model="form.endAt" /></div>
+        </div>
+        <label>季節（稼働期間）</label>
+        <select v-model="form.season">
+          <option value="all">通年</option>
+          <option value="spring">春（3〜5月）</option>
+          <option value="summer">夏（6〜8月）</option>
+          <option value="autumn">秋（9〜11月）</option>
+          <option value="winter">冬（12〜2月）</option>
+          <option value="custom">カスタム（月を選択）</option>
+        </select>
+        <div v-if="form.season==='custom'" class="months" style="margin-top:6px">
+          <label v-for="m in monthsList" :key="m"><input type="checkbox" :value="m" v-model="form.customMonths" />{{ m }}月</label>
+        </div>
+        <div class="row">
+          <div><label>完了バッジID</label><input v-model="form.rewardBadgeId" placeholder="badge_xxx_2026" /></div>
+          <div><label>完了称号</label><input v-model="form.completionTitle" placeholder="○○制覇 2026" /></div>
+        </div>
+        <label>カバー画像URL（任意）</label>
+        <input v-model="form.coverImageURL" placeholder="https://..." />
+      </div>
+
+      <div class="panel" style="margin-top:12px">
+        <h2>対象スポット（{{ targets.length }}）</h2>
+        <p class="muted">地図で青点（アプリ保存スポット）をクリック→追加。空白地はツール「地図クリックで追加」で未保存POIも追加可。</p>
+        <ul class="tlist">
+          <li v-for="(t,i) in targets" :key="t.targetId">
+            <span class="tbadge">{{ i+1 }}</span>
+            <div class="tinfo">
+              <input class="miniedit" v-model="t.name" />
+              <div class="ts">{{ t.spotId ? 'アプリ:'+t.spotId.slice(0,8) : 'カスタム' }} · {{ t.lat.toFixed(4) }},{{ t.lng.toFixed(4) }} · {{ t.targetId }}</div>
+            </div>
+            <button class="iconbtn" @click="move(i,-1)" :disabled="i===0">↑</button>
+            <button class="iconbtn" @click="move(i,1)" :disabled="i===targets.length-1">↓</button>
+            <button class="iconbtn" @click="removeTarget(i)">✕</button>
+          </li>
+        </ul>
+        <div v-if="!targets.length" class="muted">まだ対象がありません。</div>
+
+        <div class="actions">
+          <button class="btn primary" :disabled="!canSave" @click="save">Firestoreへ保存（upsert）</button>
+          <button class="btn ghost" :disabled="!targets.length" @click="download">JSONダウンロード</button>
+          <button class="btn ghost" @click="showJson=!showJson">JSON{{ showJson?'隠す':'表示' }}</button>
+        </div>
+        <div class="msg" v-if="msg">{{ msg }}</div>
+        <pre class="json" v-if="showJson">{{ jsonPreview }}</pre>
+      </div>
+    </div>
+
+    <!-- 右：地図 -->
+    <div class="panel">
+      <div class="maptools">
+        <input type="text" v-model="spotQuery" @input="renderSpotMarkers" placeholder="スポット名・住所で絞り込み" />
+        <label class="chk"><input type="checkbox" v-model="addMode" />地図クリックで地点追加</label>
+        <button class="btn ghost" @click="loadSpots">再読込</button>
+      </div>
+      <div class="muted" style="margin-bottom:6px">{{ spotMsg }}</div>
+      <div id="map"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SEASON = { spring:[3,4,5], summer:[6,7,8], autumn:[9,10,11], winter:[12,1,2] };
+const { createApp } = Vue;
+createApp({
+  data() {
+    const now = new Date();
+    const fy = (now.getMonth() + 1) >= 4 ? now.getFullYear() : now.getFullYear() - 1;
+    return {
+      form: {
+        rallyId:'', name:'', theme:'michinoeki', region:'', description:'', coverImageURL:'',
+        fiscalYear: fy, startAt: fy + '-04-01', endAt: (fy + 1) + '-03-31',
+        season:'all', customMonths:[], rewardBadgeId:'', completionTitle:''
+      },
+      themes: [['michinoeki','道の駅'],['zekkei','絶景道'],['hanto','半島'],['island','島めぐり'],['onsen','温泉'],['castle','城'],['other','その他']],
+      regions: ['','北海道','東北','関東','中部','関西','中国四国','九州沖縄','全国'],
+      monthsList: [1,2,3,4,5,6,7,8,9,10,11,12],
+      allSpots: [], spotQuery:'', spotMsg:'', addMode:false,
+      targets: [], msg:'', rallyList: [], showJson:false,
+      map:null, spotLayer:null, targetLayer:null
+    };
+  },
+  computed: {
+    canSave() {
+      return this.form.rallyId.trim() && this.form.name.trim() && this.targets.length > 0;
+    },
+    jsonPreview() { return JSON.stringify(this.buildRally(), null, 2); }
+  },
+  mounted() {
+    this.map = L.map('map').setView([36.5, 138], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'© OpenStreetMap' }).addTo(this.map);
+    this.spotLayer = L.layerGroup().addTo(this.map);
+    this.targetLayer = L.layerGroup().addTo(this.map);
+    this.map.on('moveend', () => this.renderSpotMarkers());
+    this.map.on('click', (e) => { if (this.addMode) this.addCustomAt(e.latlng.lat, e.latlng.lng); });
+    this.loadSpots();
+    this.loadRallyList();
+  },
+  methods: {
+    activeMonths() {
+      if (this.form.season === 'all') return null;
+      if (this.form.season === 'custom') return this.form.customMonths.slice().sort((a,b)=>a-b);
+      return SEASON[this.form.season] || null;
+    },
+    buildRally() {
+      const f = this.form;
+      const r = {
+        rallyId: f.rallyId.trim(),
+        name: f.name.trim(),
+        theme: f.theme,
+        fiscalYear: Number(f.fiscalYear),
+        startAt: f.startAt + 'T00:00:00+09:00',
+        endAt: f.endAt + 'T23:59:59+09:00',
+        targets: this.targets.map((t,i) => {
+          const o = { targetId: t.targetId, name: (t.name||'').trim(), lat: t.lat, lng: t.lng, order: i + 1 };
+          if (t.spotId) o.spotId = t.spotId;
+          if (t.address) o.address = t.address;
+          if (t.imageURL) o.imageURL = t.imageURL;
+          return o;
+        })
+      };
+      if (f.region) r.region = f.region;
+      if (f.description) r.description = f.description;
+      if (f.coverImageURL) r.coverImageURL = f.coverImageURL;
+      if (f.rewardBadgeId) r.rewardBadgeId = f.rewardBadgeId;
+      if (f.completionTitle) r.completionTitle = f.completionTitle;
+      const m = this.activeMonths();
+      if (m !== null) r.activeMonths = m;
+      return r;
+    },
+    async save() {
+      this.msg = '保存中...';
+      try {
+        const res = await fetch('/api/rally', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(this.buildRally()) });
+        const data = await res.json();
+        if (data.ok) { this.msg = `✅ 保存しました: ${data.rallyId}（targets ${data.targetCount}）\n反映を確認: アプリ実績タブ / setRallyStatus.js --list`; this.loadRallyList(); }
+        else { this.msg = '❌ ' + (data.error || '保存失敗'); }
+      } catch (e) { this.msg = '❌ ' + e.message; }
+    },
+    download() {
+      const r = this.buildRally();
+      const blob = new Blob([JSON.stringify(r, null, 2)], { type:'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = (r.rallyId || 'rally') + '.json';
+      a.click();
+    },
+    async loadSpots() {
+      this.spotMsg = 'スポット読込中...';
+      try {
+        const res = await fetch('/api/spots?limit=8000');
+        const data = await res.json();
+        this.allSpots = data.spots || [];
+        this.spotMsg = `アプリ保存スポット ${this.allSpots.length} 件` + (data.limited ? '（上限到達・一部のみ）' : '') + ' / 地図を動かすと周辺を表示';
+        this.renderSpotMarkers();
+      } catch (e) { this.spotMsg = '❌ ' + e.message; }
+    },
+    renderSpotMarkers() {
+      if (!this.map) return;
+      this.spotLayer.clearLayers();
+      const b = this.map.getBounds();
+      const q = this.spotQuery.trim();
+      let shown = 0;
+      for (const s of this.allSpots) {
+        if (!b.contains([s.lat, s.lng])) continue;
+        if (q && !(s.name||'').includes(q) && !(s.address||'').includes(q)) continue;
+        if (++shown > 1200) break;
+        const m = L.circleMarker([s.lat, s.lng], { radius:5, color:'#0077aa', weight:1, fillColor:'#33bbdd', fillOpacity:.85 });
+        m.bindTooltip(s.name);
+        m.on('click', () => this.addTargetFromSpot(s));
+        this.spotLayer.addLayer(m);
+      }
+    },
+    renderTargetMarkers() {
+      if (!this.map) return;
+      this.targetLayer.clearLayers();
+      this.targets.forEach((t,i) => {
+        const icon = L.divIcon({ className:'', html:`<div class="tnum-badge">${i+1}</div>`, iconSize:[26,26], iconAnchor:[13,13] });
+        L.marker([t.lat, t.lng], { icon }).addTo(this.targetLayer).bindTooltip(t.name);
+      });
+    },
+    nextTargetId() {
+      const used = new Set(this.targets.map(t => t.targetId));
+      let n = 1; let id;
+      do { id = 't' + String(n).padStart(2,'0'); n++; } while (used.has(id));
+      return id;
+    },
+    addTargetFromSpot(s) {
+      if (s.spotId && this.targets.some(t => t.spotId === s.spotId)) { this.msg = '既に追加済みのスポットです'; return; }
+      this.targets.push({ targetId: this.nextTargetId(), name: s.name, lat: s.lat, lng: s.lng, spotId: s.spotId || null, address: s.address || '', imageURL: s.imageURL || '' });
+      this.renderTargetMarkers();
+      this.msg = `追加: ${s.name}`;
+    },
+    addCustomAt(lat, lng) {
+      const name = prompt('地点名（アプリ未保存のカスタムPOI）');
+      if (!name || !name.trim()) return;
+      this.targets.push({ targetId: this.nextTargetId(), name: name.trim(), lat: +lat.toFixed(6), lng: +lng.toFixed(6), spotId: null, address:'', imageURL:'' });
+      this.renderTargetMarkers();
+      this.msg = `カスタム追加: ${name.trim()}`;
+    },
+    move(i, dir) {
+      const j = i + dir;
+      if (j < 0 || j >= this.targets.length) return;
+      const a = this.targets;
+      [a[i], a[j]] = [a[j], a[i]];
+      this.renderTargetMarkers();
+    },
+    removeTarget(i) { this.targets.splice(i,1); this.renderTargetMarkers(); },
+    suggestId() {
+      const slug = { michinoeki:'michinoeki', zekkei:'zekkei', hanto:'hanto', island:'island', onsen:'onsen', castle:'castle', other:'rally' }[this.form.theme] || 'rally';
+      this.form.rallyId = `${slug}-${this.form.fiscalYear}`;
+    },
+    onYearChange() {
+      // 年度に合わせて既定の期間も追従（手動変更済みなら触らない簡易版）
+      const fy = Number(this.form.fiscalYear);
+      if (!isNaN(fy)) { this.form.startAt = fy + '-04-01'; this.form.endAt = (fy + 1) + '-03-31'; }
+    },
+    async loadRallyList() {
+      try { const res = await fetch('/api/rallies'); const data = await res.json(); this.rallyList = data.rallies || []; }
+      catch (e) { /* ignore */ }
+    },
+    onPickExisting(ev) {
+      const id = ev.target.value; ev.target.value = '';
+      if (id) this.loadExisting(id);
+    },
+    seasonFromMonths(months) {
+      if (!months || !months.length) return { season:'all', custom:[] };
+      const key = months.slice().sort((a,b)=>a-b).join(',');
+      const presets = { '3,4,5':'spring', '6,7,8':'summer', '9,10,11':'autumn', '1,2,12':'winter' };
+      if (presets[key]) return { season:presets[key], custom:[] };
+      return { season:'custom', custom: months.slice() };
+    },
+    async loadExisting(id) {
+      try {
+        const res = await fetch('/api/rally/' + encodeURIComponent(id));
+        const data = await res.json();
+        if (!data.rally) { this.msg = '取得失敗'; return; }
+        const r = data.rally;
+        const sea = this.seasonFromMonths(r.activeMonths);
+        this.form = {
+          rallyId: r.rallyId, name: r.name || '', theme: r.theme || 'michinoeki', region: r.region || '',
+          description: r.description || '', coverImageURL: r.coverImageURL || '',
+          fiscalYear: r.fiscalYear, startAt: (r.startAt || '').slice(0,10), endAt: (r.endAt || '').slice(0,10),
+          season: sea.season, customMonths: sea.custom,
+          rewardBadgeId: r.rewardBadgeId || '', completionTitle: r.completionTitle || ''
+        };
+        this.targets = (r.targets || []).slice().sort((a,b)=>(a.order||0)-(b.order||0)).map(t => ({
+          targetId: t.targetId, name: t.name, lat: Number(t.lat), lng: Number(t.lng),
+          spotId: t.spotId || null, address: t.address || '', imageURL: t.imageURL || ''
+        }));
+        this.renderTargetMarkers();
+        this.msg = `読込: ${r.rallyId}（status=${r.status}・保存で上書き）`;
+        if (this.targets[0]) this.map.setView([this.targets[0].lat, this.targets[0].lng], 9);
+      } catch (e) { this.msg = '❌ ' + e.message; }
+    },
+    resetForm() {
+      const now = new Date();
+      const fy = (now.getMonth() + 1) >= 4 ? now.getFullYear() : now.getFullYear() - 1;
+      this.form = { rallyId:'', name:'', theme:'michinoeki', region:'', description:'', coverImageURL:'',
+        fiscalYear: fy, startAt: fy + '-04-01', endAt: (fy + 1) + '-03-31', season:'all', customMonths:[], rewardBadgeId:'', completionTitle:'' };
+      this.targets = []; this.renderTargetMarkers(); this.msg = '新規作成';
+    }
+  }
+}).mount('#app');
+</script>
+</body>
+</html>

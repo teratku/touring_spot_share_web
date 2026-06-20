@@ -6,9 +6,12 @@
   "type": "commonjs",
   "scripts": {
     "import": "node importRallies.js",
-    "import:dry": "node importRallies.js --dry-run"
+    "import:dry": "node importRallies.js --dry-run",
+    "serve": "node server.js",
+    "status": "node setRallyStatus.js"
   },
   "dependencies": {
+    "express": "^4.22.2",
     "firebase-admin": "^13.6.0"
   }
 }
