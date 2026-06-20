@@ -132,6 +132,73 @@ app.get("/api/prefecture-spots/:romaji", (req, res) => {
   }
 });
 
+// 県別スポットデータに追加（Web検索・カスタム地点・対象をまとめて保存）。重複は除外。
+app.post("/api/prefecture-spots/:romaji", (req, res) => {
+  const romaji = req.params.romaji;
+  const pref = Object.keys(ROMAJI).find((p) => ROMAJI[p] === romaji);
+  if (!pref) return res.status(400).json({ error: "未知の都道府県: " + romaji });
+  const incoming = Array.isArray(req.body && req.body.spots) ? req.body.spots : [];
+  if (!incoming.length) return res.status(400).json({ error: "spots が空です" });
+
+  const dir = path.join(__dirname, "data", "prefecture-spots");
+  fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, `${romaji}.json`);
+  let doc = { prefecture: pref, romaji, spots: [] };
+  if (fs.existsSync(file)) { try { doc = JSON.parse(fs.readFileSync(file, "utf8")); } catch (_) {} }
+  const spots = Array.isArray(doc.spots) ? doc.spots : [];
+
+  const keyOf = (s) =>
+    s.spotId ? "id:" + s.spotId : "g:" + Number(s.lat).toFixed(4) + "," + Number(s.lng).toFixed(4) + ":" + (s.name || "");
+  const have = new Set(spots.map(keyOf));
+  let added = 0;
+  for (const s of incoming) {
+    const lat = Number(s.lat), lng = Number(s.lng);
+    if (!isFinite(lat) || !isFinite(lng) || !s.name) continue;
+    const norm = { spotId: s.spotId || null, name: String(s.name), lat, lng, address: s.address || null, imageURL: s.imageURL || null, source: "manual" };
+    const k = keyOf(norm);
+    if (have.has(k)) continue;
+    have.add(k);
+    spots.push(norm);
+    added++;
+  }
+  spots.sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"));
+  fs.writeFileSync(file, JSON.stringify({ prefecture: pref, romaji, count: spots.length, total: spots.length, spots }, null, 2) + "\n");
+  res.json({ ok: true, prefecture: pref, added, count: spots.length });
+});
+
+// 県別スポットデータを丸ごと置換（ビルダーでの編集・削除を保存）。source は維持。
+app.put("/api/prefecture-spots/:romaji", (req, res) => {
+  const romaji = req.params.romaji;
+  const pref = Object.keys(ROMAJI).find((p) => ROMAJI[p] === romaji);
+  if (!pref) return res.status(400).json({ error: "未知の都道府県: " + romaji });
+  const incoming = Array.isArray(req.body && req.body.spots) ? req.body.spots : null;
+  if (!incoming) return res.status(400).json({ error: "spots 配列が必要です" });
+
+  const spots = [];
+  for (const s of incoming) {
+    const lat = Number(s.lat), lng = Number(s.lng);
+    if (!isFinite(lat) || !isFinite(lng) || !s.name) continue;
+    spots.push({
+      spotId: s.spotId || null,
+      name: String(s.name),
+      lat, lng,
+      address: s.address || null,
+      imageURL: s.imageURL || null,
+      source: s.source === "manual" ? "manual" : "app",
+    });
+  }
+  spots.sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"));
+  const dir = path.join(__dirname, "data", "prefecture-spots");
+  fs.mkdirSync(dir, { recursive: true });
+  const appCount = spots.filter((s) => s.source === "app").length;
+  const manualCount = spots.filter((s) => s.source === "manual").length;
+  fs.writeFileSync(
+    path.join(dir, `${romaji}.json`),
+    JSON.stringify({ prefecture: pref, romaji, count: spots.length, appCount, manualCount, spots }, null, 2) + "\n"
+  );
+  res.json({ ok: true, prefecture: pref, count: spots.length });
+});
+
 // 既存ラリー一覧（任意で年度フィルタ）
 app.get("/api/rallies", async (req, res) => {
   try {

@@ -68,31 +68,57 @@ async function main() {
       lng,
       address: x.administrative || x.locality || null,
       imageURL: (Array.isArray(x.locationImageURLs) && x.locationImageURLs[0]) || x.iconImageURL || null,
+      source: "app",
     });
     used++;
   });
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
+  const keyOf = (s) =>
+    s.spotId ? "id:" + s.spotId : "g:" + Number(s.lat).toFixed(4) + "," + Number(s.lng).toFixed(4) + ":" + (s.name || "");
   const index = {};
   for (const pref of PREF_NAMES) {
     const romaji = ROMAJI[pref];
-    let spots = buckets[pref] || [];
+    const file = path.join(OUT_DIR, `${romaji}.json`);
+
+    // 既存ファイルの手動追加分（source:"manual"）を保持
+    let manual = [];
+    if (fs.existsSync(file)) {
+      try {
+        manual = (JSON.parse(fs.readFileSync(file, "utf8")).spots || []).filter((s) => s.source === "manual");
+      } catch (_) {}
+    }
+
+    // アプリ由来（source:"app"）: spotId 重複除外→名前順→上限
+    let app = buckets[pref] || [];
+    const seenApp = new Set();
+    app = app.filter((s) => (seenApp.has(s.spotId) ? false : (seenApp.add(s.spotId), true)));
+    app.sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"));
+    app = app.slice(0, PER_PREF_CAP);
+
+    // 手動を優先してマージ（重複除外）
+    const merged = [];
     const seen = new Set();
-    spots = spots.filter((s) => (seen.has(s.spotId) ? false : (seen.add(s.spotId), true)));
-    spots.sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"));
-    const capped = spots.slice(0, PER_PREF_CAP);
+    for (const s of [...manual, ...app]) {
+      const k = keyOf(s);
+      if (seen.has(k)) continue;
+      seen.add(k);
+      merged.push(s);
+    }
+
     fs.writeFileSync(
-      path.join(OUT_DIR, `${romaji}.json`),
-      JSON.stringify({ prefecture: pref, romaji, count: capped.length, total: spots.length, spots: capped }, null, 2) + "\n"
+      file,
+      JSON.stringify({ prefecture: pref, romaji, count: merged.length, appCount: app.length, manualCount: manual.length, spots: merged }, null, 2) + "\n"
     );
-    index[romaji] = { prefecture: pref, count: capped.length, total: spots.length };
+    index[romaji] = { prefecture: pref, count: merged.length, app: app.length, manual: manual.length };
   }
   fs.writeFileSync(path.join(OUT_DIR, "_index.json"), JSON.stringify(index, null, 2) + "\n");
 
+  const manualTotal = Object.values(index).reduce((s, v) => s + v.manual, 0);
   console.log(`✅ 保存: ${PREF_NAMES.length} 県 → ${path.relative(__dirname, OUT_DIR)}/`);
-  console.log(`   採用 ${used} 件 / 県不明・無座標スキップ ${skipped} 件`);
-  const top = Object.values(index).sort((a, b) => b.total - a.total).slice(0, 8);
-  console.log("   多い県:", top.map((v) => `${v.prefecture}:${v.total}`).join(" "));
+  console.log(`   アプリ採用 ${used} 件 / 県不明・無座標スキップ ${skipped} 件 / 手動追加 ${manualTotal} 件を保持`);
+  const top = Object.values(index).sort((a, b) => b.count - a.count).slice(0, 8);
+  console.log("   多い県:", top.map((v) => `${v.prefecture}:${v.count}`).join(" "));
 }
 
 main().catch((e) => { console.error("❌", e.message); process.exit(1); });
