@@ -1,0 +1,21 @@
+{
+  "_note": "2026年度・半島一周ラリー。lat/lng は著名スポットの概算。本番前に正確な座標へ、可能なら spotId に差し替え。targetId は年度内で変更しないこと。",
+  "rallyId": "hanto-boso-2026",
+  "name": "房総半島ぐるり 2026",
+  "theme": "hanto",
+  "region": "関東",
+  "description": "千葉・房総半島の海岸線と名所を一周するスタンプラリー。灯台・絶景・棚田をめぐる。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "coverImageURL": "https://biketeilen.web.app/images/rallies/hanto-boso-2026.jpg",
+  "rewardBadgeId": "badge_hanto_boso_2026",
+  "completionTitle": "房総半島マスター 2026",
+  "targets": [
+    { "targetId": "t01", "name": "鋸山 日本寺", "lat": 35.1583, "lng": 139.8253, "address": "千葉県安房郡鋸南町", "order": 1 },
+    { "targetId": "t02", "name": "大山千枚田", "lat": 35.1570, "lng": 140.0383, "address": "千葉県鴨川市", "order": 2 },
+    { "targetId": "t03", "name": "野島埼灯台", "lat": 34.9021, "lng": 139.8920, "address": "千葉県南房総市", "order": 3 },
+    { "targetId": "t04", "name": "鴨川シーワールド", "lat": 35.1083, "lng": 140.1031, "address": "千葉県鴨川市", "order": 4 },
+    { "targetId": "t05", "name": "犬吠埼灯台", "lat": 35.7075, "lng": 140.8694, "address": "千葉県銚子市", "order": 5 }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "_note": "2026年度・島めぐりラリー。lat/lng は著名スポットの概算。本番前に正確な座標へ、可能なら spotId に差し替え。targetId は年度内で変更しないこと。",
+  "rallyId": "shimanami-2026",
+  "name": "しまなみ海道 アイランドホップ 2026",
+  "theme": "island",
+  "region": "中国四国",
+  "description": "本州と四国を結ぶしまなみ海道の橋と展望スポットを島づたいに巡るスタンプラリー。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "coverImageURL": "https://biketeilen.web.app/images/rallies/shimanami-2026.jpg",
+  "rewardBadgeId": "badge_shimanami_2026",
+  "completionTitle": "しまなみマスター 2026",
+  "targets": [
+    { "targetId": "t01", "name": "亀老山展望公園", "lat": 34.0968, "lng": 133.0100, "address": "愛媛県今治市", "order": 1 },
+    { "targetId": "t02", "name": "来島海峡展望館", "lat": 34.1100, "lng": 132.9870, "address": "愛媛県今治市", "order": 2 },
+    { "targetId": "t03", "name": "道の駅 多々羅しまなみ公園", "lat": 34.2503, "lng": 133.0640, "address": "愛媛県今治市", "order": 3 },
+    { "targetId": "t04", "name": "耕三寺・未来心の丘", "lat": 34.3020, "lng": 133.0920, "address": "広島県尾道市", "order": 4 },
+    { "targetId": "t05", "name": "因島大橋記念公園", "lat": 34.3330, "lng": 133.1830, "address": "広島県尾道市", "order": 5 }
+  ]
+}
