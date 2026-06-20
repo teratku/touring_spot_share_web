@@ -1,5 +1,5 @@
 {
-  "_note": "2026年度・絶景道ラリー。lat/lng は著名スポットの概算。本番前に正確な座標へ、可能なら spotId に差し替え。targetId は年度内で変更しないこと。",
+  "_note": "2026年度・絶景道ラリー。lat/lng は著名スポットの概算。本番前に正確な座標へ、可能なら spotId に差し替え。targetId は年度内で変更しないこと。activeMonths=4〜11月の季節限定例（冬季は積雪閉鎖→アプリでシーズン外/受付終了表示）。通年にするなら activeMonths を削除、または \"season\":\"通年\"。",
   "rallyId": "zekkei-venus-line-2026",
   "name": "ビーナスライン 絶景めぐり 2026",
   "theme": "zekkei",
@@ -8,6 +8,7 @@
   "fiscalYear": 2026,
   "startAt": "2026-04-01T00:00:00+09:00",
   "endAt": "2027-03-31T23:59:59+09:00",
+  "activeMonths": [4, 5, 6, 7, 8, 9, 10, 11],
   "coverImageURL": "https://biketeilen.web.app/images/rallies/zekkei-venus-line-2026.jpg",
   "rewardBadgeId": "badge_zekkei_venus_line_2026",
   "completionTitle": "ビーナスライン制覇 2026",

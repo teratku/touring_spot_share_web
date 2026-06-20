@@ -24,6 +24,15 @@ const admin = require("firebase-admin");
 
 const PROJECT_ID = "biketeilen";
 
+// 季節キーワード → 稼働月(1-12)。空配列=通年。JSON は activeMonths を直接指定してもよい。
+const SEASON_MONTHS = {
+  all: [], 通年: [],
+  spring: [3, 4, 5], 春: [3, 4, 5],
+  summer: [6, 7, 8], 夏: [6, 7, 8], 夏季: [6, 7, 8],
+  autumn: [9, 10, 11], fall: [9, 10, 11], 秋: [9, 10, 11],
+  winter: [12, 1, 2], 冬: [12, 1, 2], 冬季: [12, 1, 2],
+};
+
 // ---- 引数 ----
 const args = process.argv.slice(2);
 function argVal(name) {
@@ -123,6 +132,26 @@ function validateRally(json, fileLabel, expectedYear) {
   if (json.coverImageURL) doc.coverImageURL = String(json.coverImageURL);
   if (json.rewardBadgeId) doc.rewardBadgeId = String(json.rewardBadgeId);
   if (json.completionTitle) doc.completionTitle = String(json.completionTitle);
+
+  // 季節限定（任意）。activeMonths を優先、無ければ season キーワードを展開。空=通年。
+  let activeMonths = null;
+  if (json.activeMonths != null) {
+    if (!Array.isArray(json.activeMonths)) fail(where("activeMonths は月(1-12)の配列で指定してください"));
+    activeMonths = json.activeMonths;
+  } else if (json.season != null) {
+    const raw = String(json.season);
+    const months = SEASON_MONTHS[raw.toLowerCase()] ?? SEASON_MONTHS[raw];
+    if (months === undefined) {
+      fail(where(`season が不明: ${raw}（all/spring/summer/autumn/winter または 通年/春/夏/秋/冬）`));
+    }
+    activeMonths = months;
+  }
+  if (activeMonths) {
+    for (const m of activeMonths) {
+      if (!Number.isInteger(m) || m < 1 || m > 12) fail(where(`activeMonths に不正な月: ${m}（1-12）`));
+    }
+    doc.activeMonths = [...new Set(activeMonths)].sort((a, b) => a - b);
+  }
 
   return { rallyId, doc, targetCount: normTargets.length };
 }
