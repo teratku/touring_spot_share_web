@@ -68,6 +68,7 @@
     <div>
       <div class="panel">
         <h2>ラリー情報</h2>
+        <div v-if="form.category==='prefecture'" class="muted" style="margin:-4px 0 6px">🏳️ 都道府県別チャレンジ（{{ form.prefecture || '—' }}）として保存されます</div>
         <label>rallyId（英数・ハイフン／年度内で固定）</label>
         <div style="display:flex; gap:6px;">
           <input v-model="form.rallyId" placeholder="例: michinoeki-tohoku-2026" />
@@ -161,7 +162,8 @@ createApp({
       form: {
         rallyId:'', name:'', theme:'michinoeki', region:'', description:'', coverImageURL:'',
         fiscalYear: fy, startAt: fy + '-04-01', endAt: (fy + 1) + '-03-31',
-        season:'all', customMonths:[], rewardBadgeId:'', completionTitle:''
+        season:'all', customMonths:[], rewardBadgeId:'', completionTitle:'',
+        category:'standard', prefecture:''
       },
       themes: [['michinoeki','道の駅'],['zekkei','絶景道'],['hanto','半島'],['island','島めぐり'],['onsen','温泉'],['castle','城'],['other','その他']],
       regions: ['','北海道','東北','関東','中部','関西','中国四国','九州沖縄','全国'],
@@ -215,6 +217,8 @@ createApp({
       if (f.coverImageURL) r.coverImageURL = f.coverImageURL;
       if (f.rewardBadgeId) r.rewardBadgeId = f.rewardBadgeId;
       if (f.completionTitle) r.completionTitle = f.completionTitle;
+      if (f.category && f.category !== 'standard') r.category = f.category;
+      if (f.prefecture) r.prefecture = f.prefecture;
       const m = this.activeMonths();
       if (m !== null) r.activeMonths = m;
       return r;
@@ -333,7 +337,8 @@ createApp({
           description: r.description || '', coverImageURL: r.coverImageURL || '',
           fiscalYear: r.fiscalYear, startAt: (r.startAt || '').slice(0,10), endAt: (r.endAt || '').slice(0,10),
           season: sea.season, customMonths: sea.custom,
-          rewardBadgeId: r.rewardBadgeId || '', completionTitle: r.completionTitle || ''
+          rewardBadgeId: r.rewardBadgeId || '', completionTitle: r.completionTitle || '',
+          category: r.category || 'standard', prefecture: r.prefecture || ''
         };
         this.targets = (r.targets || []).slice().sort((a,b)=>(a.order||0)-(b.order||0)).map(t => ({
           targetId: t.targetId, name: t.name, lat: Number(t.lat), lng: Number(t.lng),
@@ -348,7 +353,7 @@ createApp({
       const now = new Date();
       const fy = (now.getMonth() + 1) >= 4 ? now.getFullYear() : now.getFullYear() - 1;
       this.form = { rallyId:'', name:'', theme:'michinoeki', region:'', description:'', coverImageURL:'',
-        fiscalYear: fy, startAt: fy + '-04-01', endAt: (fy + 1) + '-03-31', season:'all', customMonths:[], rewardBadgeId:'', completionTitle:'' };
+        fiscalYear: fy, startAt: fy + '-04-01', endAt: (fy + 1) + '-03-31', season:'all', customMonths:[], rewardBadgeId:'', completionTitle:'', category:'standard', prefecture:'' };
       this.targets = []; this.renderTargetMarkers(); this.msg = '新規作成';
     }
   }

@@ -123,6 +123,8 @@ app.get("/api/rally/:id", async (req, res) => {
         rewardBadgeId: x.rewardBadgeId || "",
         completionTitle: x.completionTitle || "",
         status: x.status || "active",
+        category: x.category || "standard",
+        prefecture: x.prefecture || "",
         targets: x.targets || [],
       },
     });
