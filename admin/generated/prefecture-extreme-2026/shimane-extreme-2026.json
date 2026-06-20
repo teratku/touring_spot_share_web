@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（島根県）。座標は国土地理院由来の“真の端点”を十進変換したもの。【要差し替え】離島/岩礁/係争地など到達困難な点を含む。ビルダーで到達可能点へ修正のこと。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-shimane-extreme-2026",
+  "name": "島根県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "島根県",
+  "region": "中国",
+  "description": "島根県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_shimane_extreme_2026",
+  "completionTitle": "島根県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "島根県最北端",
+      "lat": 37.247778,
+      "lng": 131.863611,
+      "address": "島根県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "島根県最東端",
+      "lat": 36.270833,
+      "lng": 133.390556,
+      "address": "島根県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "島根県最南端",
+      "lat": 34.3025,
+      "lng": 131.820278,
+      "address": "島根県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "島根県最西端",
+      "lat": 34.504167,
+      "lng": 131.667778,
+      "address": "島根県",
+      "order": 4
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（福島県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-fukushima-extreme-2026",
+  "name": "福島県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "福島県",
+  "region": "東北",
+  "description": "福島県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_fukushima_extreme_2026",
+  "completionTitle": "福島県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "福島県最北端",
+      "lat": 37.976667,
+      "lng": 140.28,
+      "address": "福島県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "福島県最東端",
+      "lat": 37.481667,
+      "lng": 141.043611,
+      "address": "福島県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "福島県最南端",
+      "lat": 36.791389,
+      "lng": 140.465,
+      "address": "福島県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "福島県最西端",
+      "lat": 37.237778,
+      "lng": 139.164722,
+      "address": "福島県",
+      "order": 4
+    }
+  ]
+}

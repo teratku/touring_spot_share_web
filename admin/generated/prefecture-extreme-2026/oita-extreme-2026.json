@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（大分県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-oita-extreme-2026",
+  "name": "大分県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "大分県",
+  "region": "九州沖縄",
+  "description": "大分県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_oita_extreme_2026",
+  "completionTitle": "大分県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "大分県最北端",
+      "lat": 33.740556,
+      "lng": 131.667778,
+      "address": "大分県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "大分県最東端",
+      "lat": 33.044167,
+      "lng": 132.177222,
+      "address": "大分県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "大分県最南端",
+      "lat": 32.714444,
+      "lng": 131.925833,
+      "address": "大分県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "大分県最西端",
+      "lat": 33.251111,
+      "lng": 130.824722,
+      "address": "大分県",
+      "order": 4
+    }
+  ]
+}

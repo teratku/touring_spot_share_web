@@ -1,0 +1,20 @@
+{
+  "_note": "通年・本州四極（本州島の東西南北端）。座標は概算、本番前に要確認。targetId固定。最東・魹ヶ崎は徒歩区間あり。",
+  "rallyId": "honshu-yonkyoku-2026",
+  "name": "本州四極 踏破 2026",
+  "theme": "kyoku",
+  "region": "全国",
+  "description": "本州の東西南北の果て4地点をめぐる通年チャレンジ。最北・大間崎、最東・魹ヶ崎、最南・潮岬、最西・毘沙ノ鼻。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "coverImageURL": "https://biketeilen.web.app/images/rallies/honshu-yonkyoku-2026.jpg",
+  "rewardBadgeId": "badge_honshu_yonkyoku_2026",
+  "completionTitle": "本州四極 制覇 2026",
+  "targets": [
+    { "targetId": "n", "name": "大間崎（最北端）", "lat": 41.5290, "lng": 140.9105, "address": "青森県大間町", "order": 1 },
+    { "targetId": "e", "name": "魹ヶ崎（最東端）", "lat": 39.5478, "lng": 142.0719, "address": "岩手県宮古市", "order": 2 },
+    { "targetId": "s", "name": "潮岬（最南端）", "lat": 33.4350, "lng": 135.7627, "address": "和歌山県串本町", "order": 3 },
+    { "targetId": "w", "name": "毘沙ノ鼻（最西端）", "lat": 34.0578, "lng": 130.8731, "address": "山口県下関市", "order": 4 }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（宮城県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-miyagi-extreme-2026",
+  "name": "宮城県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "宮城県",
+  "region": "東北",
+  "description": "宮城県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_miyagi_extreme_2026",
+  "completionTitle": "宮城県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "宮城県最北端",
+      "lat": 39.002778,
+      "lng": 141.508611,
+      "address": "宮城県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "宮城県最東端",
+      "lat": 38.893333,
+      "lng": 141.677222,
+      "address": "宮城県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "宮城県最南端",
+      "lat": 37.773333,
+      "lng": 140.792778,
+      "address": "宮城県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "宮城県最西端",
+      "lat": 37.9825,
+      "lng": 140.275,
+      "address": "宮城県",
+      "order": 4
+    }
+  ]
+}

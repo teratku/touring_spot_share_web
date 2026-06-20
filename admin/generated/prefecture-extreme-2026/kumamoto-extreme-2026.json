@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（熊本県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-kumamoto-extreme-2026",
+  "name": "熊本県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "熊本県",
+  "region": "九州沖縄",
+  "description": "熊本県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_kumamoto_extreme_2026",
+  "completionTitle": "熊本県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "熊本県最北端",
+      "lat": 33.195278,
+      "lng": 131.059722,
+      "address": "熊本県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "熊本県最東端",
+      "lat": 32.833056,
+      "lng": 131.329444,
+      "address": "熊本県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "熊本県最南端",
+      "lat": 32.094722,
+      "lng": 130.820556,
+      "address": "熊本県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "熊本県最西端",
+      "lat": 32.174722,
+      "lng": 129.938889,
+      "address": "熊本県",
+      "order": 4
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（宮崎県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-miyazaki-extreme-2026",
+  "name": "宮崎県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "宮崎県",
+  "region": "九州沖縄",
+  "description": "宮崎県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_miyazaki_extreme_2026",
+  "completionTitle": "宮崎県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "宮崎県最北端",
+      "lat": 32.838889,
+      "lng": 131.766667,
+      "address": "宮崎県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "宮崎県最東端",
+      "lat": 32.745833,
+      "lng": 131.885833,
+      "address": "宮崎県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "宮崎県最南端",
+      "lat": 31.356389,
+      "lng": 131.331667,
+      "address": "宮崎県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "宮崎県最西端",
+      "lat": 32.058333,
+      "lng": 130.703333,
+      "address": "宮崎県",
+      "order": 4
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（鹿児島県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-kagoshima-extreme-2026",
+  "name": "鹿児島県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "鹿児島県",
+  "region": "九州沖縄",
+  "description": "鹿児島県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_kagoshima_extreme_2026",
+  "completionTitle": "鹿児島県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "鹿児島県最北端",
+      "lat": 32.310556,
+      "lng": 130.250278,
+      "address": "鹿児島県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "鹿児島県最東端",
+      "lat": 31.580278,
+      "lng": 131.205556,
+      "address": "鹿児島県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "鹿児島県最南端",
+      "lat": 27.018611,
+      "lng": 128.443611,
+      "address": "鹿児島県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "鹿児島県最西端",
+      "lat": 27.0475,
+      "lng": 128.395278,
+      "address": "鹿児島県",
+      "order": 4
+    }
+  ]
+}

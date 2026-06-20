@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（東京都）。座標は国土地理院由来の“真の端点”を十進変換したもの。【要差し替え】離島/岩礁/係争地など到達困難な点を含む。ビルダーで到達可能点へ修正のこと。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-tokyo-extreme-2026",
+  "name": "東京都 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "東京都",
+  "region": "関東",
+  "description": "東京都の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_tokyo_extreme_2026",
+  "completionTitle": "東京都 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "東京都最北端",
+      "lat": 35.898333,
+      "lng": 139.018333,
+      "address": "東京都",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "東京都最東端",
+      "lat": 24.283056,
+      "lng": 153.986667,
+      "address": "東京都",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "東京都最南端",
+      "lat": 20.425278,
+      "lng": 136.069722,
+      "address": "東京都",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "東京都最西端",
+      "lat": 20.425278,
+      "lng": 136.069722,
+      "address": "東京都",
+      "order": 4
+    }
+  ]
+}

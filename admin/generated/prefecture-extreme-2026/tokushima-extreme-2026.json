@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（徳島県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-tokushima-extreme-2026",
+  "name": "徳島県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "徳島県",
+  "region": "四国",
+  "description": "徳島県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_tokushima_extreme_2026",
+  "completionTitle": "徳島県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "徳島県最北端",
+      "lat": 34.251944,
+      "lng": 134.605833,
+      "address": "徳島県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "徳島県最東端",
+      "lat": 33.854722,
+      "lng": 134.822222,
+      "address": "徳島県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "徳島県最南端",
+      "lat": 33.538611,
+      "lng": 134.318889,
+      "address": "徳島県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "徳島県最西端",
+      "lat": 33.881667,
+      "lng": 133.660833,
+      "address": "徳島県",
+      "order": 4
+    }
+  ]
+}

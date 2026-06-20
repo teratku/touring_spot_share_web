@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（北海道）。座標は国土地理院由来の“真の端点”を十進変換したもの。【要差し替え】離島/岩礁/係争地など到達困難な点を含む。ビルダーで到達可能点へ修正のこと。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-hokkaido-extreme-2026",
+  "name": "北海道 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "北海道",
+  "region": "北海道",
+  "description": "北海道の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_hokkaido_extreme_2026",
+  "completionTitle": "北海道 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "宗谷岬（最北端・到達可）",
+      "lat": 45.5231,
+      "lng": 141.9367,
+      "address": "北海道",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "納沙布岬（最東端・到達可）",
+      "lat": 43.3852,
+      "lng": 145.8171,
+      "address": "北海道",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "北海道最南端",
+      "lat": 41.351667,
+      "lng": 139.799444,
+      "address": "北海道",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "北海道最西端",
+      "lat": 41.514722,
+      "lng": 139.333889,
+      "address": "北海道",
+      "order": 4
+    }
+  ]
+}

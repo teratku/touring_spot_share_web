@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（岐阜県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-gifu-extreme-2026",
+  "name": "岐阜県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "岐阜県",
+  "region": "中部",
+  "description": "岐阜県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_gifu_extreme_2026",
+  "completionTitle": "岐阜県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "岐阜県最北端",
+      "lat": 36.465,
+      "lng": 137.278889,
+      "address": "岐阜県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "岐阜県最東端",
+      "lat": 36.304722,
+      "lng": 137.653056,
+      "address": "岐阜県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "岐阜県最南端",
+      "lat": 35.133889,
+      "lng": 136.669444,
+      "address": "岐阜県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "岐阜県最西端",
+      "lat": 35.653056,
+      "lng": 136.276389,
+      "address": "岐阜県",
+      "order": 4
+    }
+  ]
+}

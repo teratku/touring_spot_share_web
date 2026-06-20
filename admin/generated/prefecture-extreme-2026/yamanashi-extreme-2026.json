@@ -1,0 +1,49 @@
+{
+  "_note": "県別四端ラリー（山梨県）。座標は国土地理院由来の“真の端点”を十進変換したもの。到達性は本番前に要確認（離島はフェリー要の場合あり）。targetId(n/e/s/w)は固定。",
+  "rallyId": "pref-yamanashi-extreme-2026",
+  "name": "山梨県 東西南北端 2026",
+  "theme": "extreme",
+  "category": "prefecture",
+  "prefecture": "山梨県",
+  "region": "中部",
+  "description": "山梨県の東西南北の端をめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_yamanashi_extreme_2026",
+  "completionTitle": "山梨県 四端制覇 2026",
+  "targets": [
+    {
+      "targetId": "n",
+      "name": "山梨県最北端",
+      "lat": 35.971667,
+      "lng": 138.373056,
+      "address": "山梨県",
+      "order": 1
+    },
+    {
+      "targetId": "e",
+      "name": "山梨県最東端",
+      "lat": 35.616667,
+      "lng": 139.134444,
+      "address": "山梨県",
+      "order": 2
+    },
+    {
+      "targetId": "s",
+      "name": "山梨県最南端",
+      "lat": 35.168333,
+      "lng": 138.491111,
+      "address": "山梨県",
+      "order": 3
+    },
+    {
+      "targetId": "w",
+      "name": "山梨県最西端",
+      "lat": 35.714444,
+      "lng": 138.180278,
+      "address": "山梨県",
+      "order": 4
+    }
+  ]
+}

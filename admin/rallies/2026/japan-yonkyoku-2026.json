@@ -1,0 +1,20 @@
+{
+  "_note": "通年・日本本土四極（到達可能な本土の東西南北端）。真の日本端（南鳥島/沖ノ鳥島/与那国/択捉等）は離島・到達困難のため本土四極を採用。座標は概算、本番前に要確認。targetId固定。",
+  "rallyId": "japan-yonkyoku-2026",
+  "name": "日本本土四極 踏破 2026",
+  "theme": "kyoku",
+  "region": "全国",
+  "description": "日本本土の東西南北の果て4岬をめぐる通年チャレンジ。最北・宗谷岬、最東・納沙布岬、最南・佐多岬、最西・神崎鼻。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "coverImageURL": "https://biketeilen.web.app/images/rallies/japan-yonkyoku-2026.jpg",
+  "rewardBadgeId": "badge_japan_yonkyoku_2026",
+  "completionTitle": "日本本土四極 制覇 2026",
+  "targets": [
+    { "targetId": "n", "name": "宗谷岬（最北端）", "lat": 45.5231, "lng": 141.9367, "address": "北海道稚内市", "order": 1 },
+    { "targetId": "e", "name": "納沙布岬（最東端）", "lat": 43.3852, "lng": 145.8171, "address": "北海道根室市", "order": 2 },
+    { "targetId": "s", "name": "佐多岬（最南端）", "lat": 30.9981, "lng": 130.6597, "address": "鹿児島県南大隅町", "order": 3 },
+    { "targetId": "w", "name": "神崎鼻（最西端）", "lat": 33.2126, "lng": 129.5530, "address": "長崎県佐世保市", "order": 4 }
+  ]
+}

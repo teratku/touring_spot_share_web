@@ -92,6 +92,9 @@ function validateRally(json, fileLabel, expectedYear, admin) {
   if (json.coverImageURL) doc.coverImageURL = String(json.coverImageURL);
   if (json.rewardBadgeId) doc.rewardBadgeId = String(json.rewardBadgeId);
   if (json.completionTitle) doc.completionTitle = String(json.completionTitle);
+  // カテゴリ（"standard"|"prefecture" 等）と都道府県（県別チャレンジの絞り込み用）
+  if (json.category) doc.category = String(json.category);
+  if (json.prefecture) doc.prefecture = String(json.prefecture);
 
   // 季節限定（任意）。activeMonths を優先、無ければ season キーワードを展開。空=通年。
   let activeMonths = null;
