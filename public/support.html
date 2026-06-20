@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サポート | ツーリングスポットシェア（biketeilen）</title>
+  <meta name="description" content="ツーリングスポットシェア（biketeilen）のサポートページ。よくある質問（FAQ）、お問い合わせ、使い方、各種リンクをまとめています。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="サポート | ツーリングスポットシェア">
+  <meta property="og:description" content="よくある質問・お問い合わせ・使い方。困ったときはこちら。">
+  <link rel="canonical" href="https://biketeilen.web.app/support.html">
+
+  <script src="/menu.js?v=5" defer></script>
+
+  <style>
+    :root{
+      --teal:#00A8C6; --green:#228B22; --ink:#1c1c1e; --sub:#6b6b70;
+      --grad:linear-gradient(135deg,#00A8C6 0%,#228B22 100%);
+      --bg:#ffffff; --bg2:#F4F8F8; --card:#ffffff; --line:#eceff0;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    .wrap{max-width:860px;margin:0 auto;padding:0 20px}
+    section{padding:56px 0}
+    a{color:var(--teal)}
+
+    /* hero */
+    .hero{background:var(--grad);color:#fff;text-align:center;padding:72px 20px 60px}
+    .hero h1{font-size:clamp(28px,5vw,40px);font-weight:900;margin-bottom:10px}
+    .hero p{opacity:.95;font-size:17px;max-width:560px;margin:0 auto}
+
+    /* quick links */
+    .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:860px;margin:-34px auto 0;padding:0 20px;position:relative;z-index:2}
+    .quick a{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 14px;text-align:center;text-decoration:none;color:var(--ink);box-shadow:0 6px 18px rgba(0,0,0,.06);transition:transform .15s,box-shadow .15s}
+    .quick a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,168,198,.16)}
+    .quick .e{font-size:28px;display:block;margin-bottom:6px}
+    .quick b{font-size:15px}
+
+    h2.sec{font-size:clamp(21px,3.4vw,27px);font-weight:800;margin-bottom:8px}
+    .sec-lead{color:var(--sub);margin-bottom:24px}
+
+    /* contact card */
+    .contact-card{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:26px}
+    .mail-btn{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;text-decoration:none;font-weight:800;padding:13px 24px;border-radius:14px;font-size:16px;margin:6px 0 4px}
+    .mail-addr{font-family:ui-monospace,monospace;background:#fff;border:1px solid var(--line);padding:3px 8px;border-radius:7px}
+    .checklist{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+    .checklist li{position:relative;padding-left:26px;font-size:14.5px;color:#3a3a3c}
+    .checklist li::before{content:"📋";position:absolute;left:0}
+    .note{font-size:13px;color:var(--sub);margin-top:14px}
+
+    /* FAQ */
+    .faq-cat{font-size:14px;font-weight:800;color:var(--teal);margin:26px 0 10px;letter-spacing:.3px}
+    details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+    details[open]{box-shadow:0 4px 14px rgba(0,0,0,.05)}
+    summary{cursor:pointer;list-style:none;padding:16px 46px 16px 18px;font-weight:700;font-size:15.5px;position:relative}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"＋";position:absolute;right:18px;top:50%;transform:translateY(-50%);color:var(--teal);font-weight:900;font-size:18px}
+    details[open] summary::after{content:"－"}
+    details .a{padding:0 18px 18px;color:#3a3a3c;font-size:14.5px}
+    details .a a{font-weight:700}
+
+    /* links / cta */
+    .link-row{display:flex;flex-wrap:wrap;gap:12px}
+    .link-row a{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 18px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px}
+    .link-row a:hover{border-color:var(--teal)}
+    .cta{background:var(--bg2);text-align:center;border-radius:20px;padding:34px 20px;margin-top:8px}
+    .store-badge img{height:52px}
+
+    footer{background:#11171a;color:#aeb6bb;padding:34px 0;font-size:13px;text-align:center;margin-top:40px}
+    footer a{color:#cfd6da;text-decoration:none;margin:0 10px}
+
+    @media (max-width:620px){ .quick{grid-template-columns:1fr} }
+    @media (prefers-color-scheme:dark){
+      :root{--bg:#0e1113;--bg2:#14181b;--card:#181c1f;--line:#262b2f;--ink:#eef2f4;--sub:#9aa3a8}
+      .mail-addr{background:#0d1117}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>🛟 サポート</h1>
+    <p>ツーリングスポットシェアのヘルプ＆お問い合わせ。困ったときはこちらをご覧ください。</p>
+  </header>
+
+  <!-- クイックリンク -->
+  <div class="quick">
+    <a href="#faq"><span class="e">❓</span><b>よくある質問</b></a>
+    <a href="#contact"><span class="e">✉️</span><b>お問い合わせ</b></a>
+    <a href="/about.html"><span class="e">📱</span><b>アプリの使い方</b></a>
+  </div>
+
+  <!-- お問い合わせ -->
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="sec">お問い合わせ</h2>
+      <p class="sec-lead">FAQで解決しない場合は、メールでお気軽にご連絡ください。</p>
+      <div class="contact-card">
+        <a class="mail-btn" href="mailto:tourigspotshare@gmail.com?subject=%E3%80%90%E3%83%84%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%B9%E3%83%9D%E3%83%83%E3%83%88%E3%82%B7%E3%82%A7%E3%82%A2%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">✉️ メールで問い合わせる</a>
+        <div style="margin-top:10px;font-size:14px">または直接送信：<span class="mail-addr">tourigspotshare@gmail.com</span></div>
+        <p style="margin-top:18px;font-weight:700;font-size:14px">スムーズな対応のため、以下を添えてください：</p>
+        <ul class="checklist">
+          <li>iOS のバージョン（設定 → 一般 → 情報）</li>
+          <li>アプリのバージョン（マイページ等に表示）</li>
+          <li>端末モデル（例：iPhone 15）</li>
+          <li>発生している状況・再現手順（できればスクリーンショット）</li>
+        </ul>
+        <p class="note">※ 通常2〜3営業日以内に返信いたします（混雑時は前後する場合があります）。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:var(--bg2)">
+    <div class="wrap">
+      <h2 class="sec">よくある質問</h2>
+      <p class="sec-lead">カテゴリ別によくあるご質問をまとめました。</p>
+
+      <div class="faq-cat">アカウント</div>
+      <details><summary>アカウントは必要ですか？</summary><div class="a">スポットの投稿・ルートの記録・プランの保存などにはアカウント（メールアドレス登録）が必要です。一部のスポット閲覧は登録なしでもご利用いただけます。</div></details>
+      <details><summary>新規登録・ログインはどこからできますか？</summary><div class="a">アプリのログイン画面から、メールアドレスとパスワードで登録・ログインできます。</div></details>
+      <details><summary>退会（アカウント削除）したい</summary><div class="a">マイページの設定からアカウント削除を行えます。削除後は投稿・ルートなどのデータが削除されます。</div></details>
+
+      <div class="faq-cat">ルート記録</div>
+      <details><summary>走行中に記録が止まってしまう／バックグラウンドで記録されない</summary><div class="a">位置情報の権限を「常に許可」に設定してください（設定 → プライバシーとセキュリティ → 位置情報サービス → ツーリングスポットシェア）。また低電力モードや一部の省電力設定が記録に影響する場合があります。</div></details>
+      <details><summary>道路名が表示されない／一部の道が出ない</summary><div class="a">道路名は OpenStreetMap のデータを利用しています。自転車道・歩道など車両が走行しない道は道路名の対象から除外されます。</div></details>
+      <details><summary>記録できるルート数に制限はありますか？</summary><div class="a">無料プランは月10ルート・90日間の保持です。Plus 以上で無制限・永久保存になります。</div></details>
+
+      <div class="faq-cat">ツーリングプラン</div>
+      <details><summary>プランは何個まで作れますか？</summary><div class="a">無料プランは作成数に制限があります。Plus 以上で無制限に作成できます。詳しくは<a href="/about.html#pricing">料金プラン</a>をご覧ください。</div></details>
+
+      <div class="faq-cat">課金・サブスクリプション</div>
+      <details><summary>Plus と Pro の違いは？</summary><div class="a">Plus は広告非表示・ルート無制限保存・バックアップなど、Pro はさらに道路走破率（メッシュ単位）・詳細統計・GPX/CSV エクスポート・ファミリー共有などが加わります。<a href="/about.html">アプリ紹介ページ</a>に比較表があります。</div></details>
+      <details><summary>解約したい</summary><div class="a">iPhone の「設定 → ご自身の名前（Apple ID）→ サブスクリプション」からツーリングスポットシェアを選び、解約できます（アプリ内では解約できません）。</div></details>
+      <details><summary>購入したのに反映されない／機種変更した</summary><div class="a">アプリ内の「購入を復元」をお試しください。同じ Apple ID でサインインしている必要があります。</div></details>
+      <details><summary>家族で使えますか？</summary><div class="a">Pro のファミリー共有に対応しています（最大5人）。</div></details>
+
+      <div class="faq-cat">データ・その他</div>
+      <details><summary>機種変更したらデータは引き継げますか？</summary><div class="a">同じアカウントでログインすると投稿・プランなどが引き継がれます。ルートのバックアップ／復元は Plus 以上でご利用いただけます。</div></details>
+      <details><summary>表示言語を変えたい</summary><div class="a">端末の言語設定（日本語／英語）に自動で追従します。</div></details>
+      <details><summary>不具合を見つけた／要望がある</summary><div class="a">上の<a href="#contact">お問い合わせ</a>からご連絡ください。iOS・アプリのバージョンと状況を添えていただけると助かります。</div></details>
+    </div>
+  </section>
+
+  <!-- 関連リンク -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec">関連リンク</h2>
+      <div class="link-row">
+        <a href="/about.html">📱 アプリ紹介</a>
+        <a href="/privacypolicy/privacypolicy.html">🔒 プライバシーポリシー</a>
+        <a href="/termsofservice/termsofservice.html">📋 利用規約</a>
+        <a href="/">🗺️ Webアプリ</a>
+      </div>
+
+      <div class="cta">
+        <p style="font-weight:800;font-size:18px;margin-bottom:14px">App Store でアプリを入手</p>
+        <a class="store-badge" href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener">
+          <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="App Store からダウンロード">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div><strong style="color:#fff">ツーリングスポットシェア</strong>（biketeilen）</div>
+      <div style="margin-top:10px">
+        <a href="/about.html">アプリ紹介</a>・
+        <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>・
+        <a href="/termsofservice/termsofservice.html">利用規約</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

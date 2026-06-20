@@ -23,6 +23,7 @@
     { icon: '🛤️', label: '道路コンプリート率', href: '/completion/completion.html' },
     { icon: '👤', label: 'マイページ', href: '#mypage', auth: 'in', mypage: true },
     { sep: true },
+    { icon: '🛟', label: 'サポート', href: '/support.html' },
     { icon: '🔒', label: 'プライバシーポリシー', href: '/privacypolicy/privacypolicy.html' },
     { icon: '📋', label: '利用規約', href: '/termsofservice/termsofservice.html' },
     { sep: true },
