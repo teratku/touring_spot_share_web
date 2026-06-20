@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（福島県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-fukushima-recommend-2026",
+  "name": "福島県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "福島県",
+  "region": "東北",
+  "description": "福島県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_fukushima_recommend_2026",
+  "completionTitle": "福島県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "鶴ヶ城（会津若松城）",
+      "lat": 37.4877,
+      "lng": 139.9296,
+      "address": "福島県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "五色沼",
+      "lat": 37.668,
+      "lng": 140.07,
+      "address": "福島県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "大内宿",
+      "lat": 37.336,
+      "lng": 139.858,
+      "address": "福島県",
+      "order": 3
+    }
+  ]
+}

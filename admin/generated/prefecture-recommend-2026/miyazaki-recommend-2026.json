@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（宮崎県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-miyazaki-recommend-2026",
+  "name": "宮崎県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "宮崎県",
+  "region": "九州沖縄",
+  "description": "宮崎県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_miyazaki_recommend_2026",
+  "completionTitle": "宮崎県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "高千穂峡",
+      "lat": 32.715,
+      "lng": 131.305,
+      "address": "宮崎県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "鵜戸神宮",
+      "lat": 31.648,
+      "lng": 131.466,
+      "address": "宮崎県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "青島神社",
+      "lat": 31.8,
+      "lng": 131.473,
+      "address": "宮崎県",
+      "order": 3
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（大分県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-oita-recommend-2026",
+  "name": "大分県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "大分県",
+  "region": "九州沖縄",
+  "description": "大分県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_oita_recommend_2026",
+  "completionTitle": "大分県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "別府 海地獄",
+      "lat": 33.301,
+      "lng": 131.487,
+      "address": "大分県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "由布院 金鱗湖",
+      "lat": 33.264,
+      "lng": 131.372,
+      "address": "大分県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "九重夢大吊橋",
+      "lat": 33.17,
+      "lng": 131.248,
+      "address": "大分県",
+      "order": 3
+    }
+  ]
+}

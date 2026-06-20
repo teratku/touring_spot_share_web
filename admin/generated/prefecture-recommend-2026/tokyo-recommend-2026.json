@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（東京都）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-tokyo-recommend-2026",
+  "name": "東京都 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "東京都",
+  "region": "関東",
+  "description": "東京都の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_tokyo_recommend_2026",
+  "completionTitle": "東京都 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "東京タワー",
+      "lat": 35.6586,
+      "lng": 139.7454,
+      "address": "東京都",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "浅草寺",
+      "lat": 35.7148,
+      "lng": 139.7967,
+      "address": "東京都",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "高尾山",
+      "lat": 35.625,
+      "lng": 139.243,
+      "address": "東京都",
+      "order": 3
+    }
+  ]
+}

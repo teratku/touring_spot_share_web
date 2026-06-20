@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（沖縄県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-okinawa-recommend-2026",
+  "name": "沖縄県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "沖縄県",
+  "region": "九州沖縄",
+  "description": "沖縄県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_okinawa_recommend_2026",
+  "completionTitle": "沖縄県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "首里城",
+      "lat": 26.217,
+      "lng": 127.719,
+      "address": "沖縄県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "美ら海水族館",
+      "lat": 26.694,
+      "lng": 127.878,
+      "address": "沖縄県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "万座毛",
+      "lat": 26.505,
+      "lng": 127.85,
+      "address": "沖縄県",
+      "order": 3
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（広島県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-hiroshima-recommend-2026",
+  "name": "広島県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "広島県",
+  "region": "中国",
+  "description": "広島県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_hiroshima_recommend_2026",
+  "completionTitle": "広島県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "厳島神社",
+      "lat": 34.2959,
+      "lng": 132.3197,
+      "address": "広島県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "原爆ドーム",
+      "lat": 34.3955,
+      "lng": 132.4536,
+      "address": "広島県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "尾道 千光寺",
+      "lat": 34.412,
+      "lng": 133.198,
+      "address": "広島県",
+      "order": 3
+    }
+  ]
+}

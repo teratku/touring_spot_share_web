@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（高知県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-kochi-recommend-2026",
+  "name": "高知県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "高知県",
+  "region": "四国",
+  "description": "高知県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_kochi_recommend_2026",
+  "completionTitle": "高知県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "桂浜",
+      "lat": 33.497,
+      "lng": 133.574,
+      "address": "高知県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "四万十川 佐田沈下橋",
+      "lat": 33,
+      "lng": 132.93,
+      "address": "高知県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "室戸岬",
+      "lat": 33.247,
+      "lng": 134.176,
+      "address": "高知県",
+      "order": 3
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（福井県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-fukui-recommend-2026",
+  "name": "福井県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "福井県",
+  "region": "中部",
+  "description": "福井県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_fukui_recommend_2026",
+  "completionTitle": "福井県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "東尋坊",
+      "lat": 36.238,
+      "lng": 136.126,
+      "address": "福井県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "永平寺",
+      "lat": 36.056,
+      "lng": 136.355,
+      "address": "福井県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "福井県立恐竜博物館",
+      "lat": 36.068,
+      "lng": 136.506,
+      "address": "福井県",
+      "order": 3
+    }
+  ]
+}

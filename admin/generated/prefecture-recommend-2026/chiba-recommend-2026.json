@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（千葉県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-chiba-recommend-2026",
+  "name": "千葉県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "千葉県",
+  "region": "関東",
+  "description": "千葉県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_chiba_recommend_2026",
+  "completionTitle": "千葉県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "鋸山",
+      "lat": 35.1583,
+      "lng": 139.8253,
+      "address": "千葉県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "犬吠埼灯台",
+      "lat": 35.7075,
+      "lng": 140.8694,
+      "address": "千葉県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "成田山新勝寺",
+      "lat": 35.786,
+      "lng": 140.318,
+      "address": "千葉県",
+      "order": 3
+    }
+  ]
+}

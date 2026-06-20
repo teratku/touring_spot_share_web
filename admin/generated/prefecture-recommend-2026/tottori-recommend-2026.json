@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（鳥取県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-tottori-recommend-2026",
+  "name": "鳥取県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "鳥取県",
+  "region": "中国",
+  "description": "鳥取県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_tottori_recommend_2026",
+  "completionTitle": "鳥取県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "鳥取砂丘",
+      "lat": 35.5447,
+      "lng": 134.2256,
+      "address": "鳥取県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "水木しげるロード",
+      "lat": 35.544,
+      "lng": 133.23,
+      "address": "鳥取県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "大山寺",
+      "lat": 35.376,
+      "lng": 133.54,
+      "address": "鳥取県",
+      "order": 3
+    }
+  ]
+}

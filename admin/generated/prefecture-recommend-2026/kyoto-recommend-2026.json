@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（京都府）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-kyoto-recommend-2026",
+  "name": "京都府 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "京都府",
+  "region": "関西",
+  "description": "京都府の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_kyoto_recommend_2026",
+  "completionTitle": "京都府 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "清水寺",
+      "lat": 34.9949,
+      "lng": 135.785,
+      "address": "京都府",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "金閣寺",
+      "lat": 35.0394,
+      "lng": 135.7292,
+      "address": "京都府",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "伏見稲荷大社",
+      "lat": 34.9671,
+      "lng": 135.7727,
+      "address": "京都府",
+      "order": 3
+    }
+  ]
+}

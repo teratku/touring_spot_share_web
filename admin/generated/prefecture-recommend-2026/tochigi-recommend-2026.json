@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（栃木県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-tochigi-recommend-2026",
+  "name": "栃木県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "栃木県",
+  "region": "関東",
+  "description": "栃木県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_tochigi_recommend_2026",
+  "completionTitle": "栃木県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "日光東照宮",
+      "lat": 36.758,
+      "lng": 139.599,
+      "address": "栃木県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "華厳の滝",
+      "lat": 36.739,
+      "lng": 139.503,
+      "address": "栃木県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "あしかがフラワーパーク",
+      "lat": 36.315,
+      "lng": 139.52,
+      "address": "栃木県",
+      "order": 3
+    }
+  ]
+}

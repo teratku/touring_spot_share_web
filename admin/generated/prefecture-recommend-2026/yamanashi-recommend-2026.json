@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（山梨県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-yamanashi-recommend-2026",
+  "name": "山梨県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "山梨県",
+  "region": "中部",
+  "description": "山梨県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_yamanashi_recommend_2026",
+  "completionTitle": "山梨県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "富士山五合目（富士スバルライン）",
+      "lat": 35.394,
+      "lng": 138.735,
+      "address": "山梨県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "河口湖",
+      "lat": 35.517,
+      "lng": 138.754,
+      "address": "山梨県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "昇仙峡",
+      "lat": 35.73,
+      "lng": 138.55,
+      "address": "山梨県",
+      "order": 3
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "_note": "県別おすすめラリー（群馬県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "rallyId": "pref-gunma-recommend-2026",
+  "name": "群馬県 おすすめスポット 2026",
+  "theme": "recommend",
+  "category": "prefecture",
+  "prefecture": "群馬県",
+  "region": "関東",
+  "description": "群馬県の人気観光スポットをめぐる通年チャレンジ。",
+  "fiscalYear": 2026,
+  "startAt": "2026-04-01T00:00:00+09:00",
+  "endAt": "2027-03-31T23:59:59+09:00",
+  "rewardBadgeId": "badge_pref_gunma_recommend_2026",
+  "completionTitle": "群馬県 名所めぐり 2026",
+  "targets": [
+    {
+      "targetId": "t01",
+      "name": "草津温泉 湯畑",
+      "lat": 36.622,
+      "lng": 138.596,
+      "address": "群馬県",
+      "order": 1
+    },
+    {
+      "targetId": "t02",
+      "name": "吹割の滝",
+      "lat": 36.717,
+      "lng": 139.15,
+      "address": "群馬県",
+      "order": 2
+    },
+    {
+      "targetId": "t03",
+      "name": "伊香保温泉 石段街",
+      "lat": 36.489,
+      "lng": 138.912,
+      "address": "群馬県",
+      "order": 3
+    }
+  ]
+}
