@@ -150,13 +150,14 @@
     <!-- 右：地図 -->
     <div class="panel">
       <div class="maptools">
-        <strong style="font-size:12px;color:var(--teal);white-space:nowrap">🟣 県データ</strong>
-        <select v-model="form.prefecture" @change="onPrefectureChange" style="min-width:180px">
+        <strong style="font-size:12px;color:var(--teal);white-space:nowrap">県データ/おすすめ</strong>
+        <select v-model="form.prefecture" @change="onPrefectureChange" style="min-width:210px">
           <option value="">県を選択（データ操作の対象）</option>
-          <option v-for="p in prefectures" :key="p.name" :value="p.name">{{ p.name }}（{{ p.count }}件{{ p.manual ? '・手'+p.manual : '' }}）</option>
+          <option v-for="p in prefectures" :key="p.name" :value="p.name">{{ p.name }}（🟣{{ p.count }} / ⭐{{ p.recommend }}）</option>
         </select>
-        <button class="btn ghost" @click="loadPrefectureSpots">読込</button>
-        <span class="muted">選ぶと🟣自動表示。Web結果「県+」で追加</span>
+        <button class="btn ghost" @click="loadPrefectureSpots">🟣県データ</button>
+        <button class="btn ghost" @click="loadRecommend">⭐おすすめ</button>
+        <span class="muted">選ぶと自動表示。ピンをクリックで情報→追加</span>
       </div>
       <div class="maptools">
         <input type="text" v-model="spotQuery" @input="renderSpotMarkers" placeholder="アプリ保存スポットを名前/住所で絞り込み" />
@@ -181,7 +182,7 @@
       </div>
       <div class="muted" v-if="webMsg" style="margin-bottom:6px">{{ webMsg }}</div>
       <div class="muted" style="margin-bottom:6px">{{ spotMsg }}</div>
-      <div class="muted" style="margin-bottom:6px">凡例: 🔵アプリ保存 / 🟢Web検索 / 🟣県データ / 🟠対象（追加済み）</div>
+      <div class="muted" style="margin-bottom:6px">凡例: 🔵アプリ保存 / 🟢Web検索 / 🟣県データ / ⭐おすすめ / 🟠対象（追加済み）</div>
 
       <!-- 地図タップ地点の操作 -->
       <div v-if="pendingPoint" class="clickbox">
@@ -236,9 +237,9 @@ createApp({
       monthsList: [1,2,3,4,5,6,7,8,9,10,11,12],
       allSpots: [], spotQuery:'', spotMsg:'スポットは「アプリ保存スポット表示」または県を選択で表示', spotsLoaded:false, addMode:false,
       webQuery:'', webResults:[], webMsg:'', webSearching:false,
-      prefectures: [], savedSpots: [], pendingPoint: null,
+      prefectures: [], savedSpots: [], recommendSpots: [], pendingPoint: null,
       targets: [], msg:'', rallyList: [], showJson:false,
-      map:null, infoWindow:null, spotMarkers:[], savedMarkers:[], webMarkers:[], targetMarkers:[], pendingMarker:null
+      map:null, infoWindow:null, spotMarkers:[], savedMarkers:[], recommendMarkers:[], webMarkers:[], targetMarkers:[], pendingMarker:null
     };
   },
   computed: {
@@ -311,7 +312,7 @@ createApp({
           kind === 'web' ? this.addTargetFromWeb(spot) : this.addTargetFromSpot(spot);
           this.infoWindow.close();
         }));
-        bar.appendChild(mkBtn('県+', '#7a3ff2', () => { this.saveOneToPrefData(spot); }));
+        if (kind !== 'recommend') bar.appendChild(mkBtn('県+', '#7a3ff2', () => { this.saveOneToPrefData(spot); }));
       }
       div.appendChild(bar);
       this.infoWindow.setContent(div);
@@ -483,6 +484,7 @@ createApp({
     },
     onPrefectureChange() {
       const p = this.prefectures.find((x) => x.name === this.form.prefecture);
+      this.recommendSpots = []; this.renderRecommendMarkers();
       if (p) { this.form.category = 'prefecture'; this.form.region = p.region; this.loadPrefectureSpots(); }
       else { this.form.category = 'standard'; this.savedSpots = []; this.renderSavedMarkers(); }
     },
@@ -501,6 +503,26 @@ createApp({
     },
     async refreshSavedSpots(romaji) {
       try { const res = await fetch('/api/prefecture-spots/' + romaji); const data = await res.json(); this.savedSpots = data.spots || []; this.renderSavedMarkers(); } catch (e) {}
+    },
+    async loadRecommend() {
+      const p = this.prefectures.find((x) => x.name === this.form.prefecture);
+      if (!p) { this.spotMsg = '先に都道府県を選択してください'; return; }
+      try {
+        const res = await fetch('/api/prefecture-data/recommend/' + p.romaji);
+        const data = await res.json();
+        this.recommendSpots = data.spots || [];
+        if (!this.recommendSpots.length && data.error) { this.spotMsg = '❌ ' + data.error; this.renderRecommendMarkers(); return; }
+        this.spotMsg = `${p.name} おすすめ ${this.recommendSpots.length} 件（⭐ピンをクリックで情報→追加）`;
+        this.renderRecommendMarkers();
+        if (this.recommendSpots[0]) { this.map.setCenter({ lat: this.recommendSpots[0].lat, lng: this.recommendSpots[0].lng }); this.map.setZoom(9); }
+      } catch (e) { this.spotMsg = '❌ ' + e.message; }
+    },
+    renderRecommendMarkers() {
+      if (!this.map) return;
+      this.clearMarkers(this.recommendMarkers);
+      for (const s of this.recommendSpots) {
+        this.recommendMarkers.push(this.circleMarker(s, '#b45309', '#f59e0b', 7, () => this.openInfo(s, 'recommend')));
+      }
     },
     async postPrefSpots(spots) {
       const p = this.prefectures.find((x) => x.name === this.form.prefecture);
@@ -584,7 +606,10 @@ createApp({
       const fy = (now.getMonth() + 1) >= 4 ? now.getFullYear() : now.getFullYear() - 1;
       this.form = { rallyId:'', name:'', theme:'michinoeki', region:'', description:'', coverImageURL:'',
         fiscalYear: fy, startAt: fy + '-04-01', endAt: (fy + 1) + '-03-31', season:'all', customMonths:[], rewardBadgeId:'', completionTitle:'', category:'standard', prefecture:'' };
-      this.targets = []; this.renderTargetMarkers(); this.cancelPending(); this.msg = '新規作成';
+      this.targets = []; this.renderTargetMarkers();
+      this.savedSpots = []; this.renderSavedMarkers();
+      this.recommendSpots = []; this.renderRecommendMarkers();
+      this.cancelPending(); this.msg = '新規作成';
     }
   }
 }).mount('#app');

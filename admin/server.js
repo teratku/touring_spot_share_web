@@ -149,25 +149,45 @@ app.get("/api/geocode", async (req, res) => {
 });
 
 // 都道府県マスタ（ラリー情報の県プルダウン用。lib/prefectures.js が単一の出典）
+// 県別データの保存先（dataset=spots は県データ／recommend はおすすめ）
+function prefDataDir(dataset) {
+  return path.join(__dirname, "data", dataset === "recommend" ? "prefecture-recommend" : "prefecture-spots");
+}
+function isDataset(d) { return d === "spots" || d === "recommend"; }
+function readPrefSpots(dataset, romaji) {
+  const f = path.join(prefDataDir(dataset), `${romaji}.json`);
+  if (!fs.existsSync(f)) return [];
+  try { return (JSON.parse(fs.readFileSync(f, "utf8")).spots) || []; } catch (_) { return []; }
+}
+
 app.get("/api/prefectures", (_req, res) => {
-  const dir = path.join(__dirname, "data", "prefecture-spots");
   const prefectures = Object.keys(ROMAJI).map((name) => {
     const romaji = ROMAJI[name];
-    let count = 0, manual = 0;
-    const f = path.join(dir, `${romaji}.json`);
-    if (fs.existsSync(f)) {
-      try {
-        const sp = (JSON.parse(fs.readFileSync(f, "utf8")).spots) || [];
-        count = sp.length;
-        manual = sp.filter((s) => s.source === "manual").length;
-      } catch (_) {}
-    }
-    return { name, romaji, region: REGION[name] || "", count, manual };
+    const sp = readPrefSpots("spots", romaji);
+    const rec = readPrefSpots("recommend", romaji);
+    return {
+      name, romaji, region: REGION[name] || "",
+      count: sp.length, manual: sp.filter((s) => s.source === "manual").length,
+      recommend: rec.length,
+    };
   });
   res.json({ prefectures });
 });
 
-// 県別に保存したスポットデータ（savePrefectureData.js が生成）を返す
+// 汎用：県別データ取得（dataset=spots|recommend）
+app.get("/api/prefecture-data/:dataset/:romaji", (req, res) => {
+  const { dataset, romaji } = req.params;
+  if (!isDataset(dataset)) return res.status(400).json({ error: "unknown dataset: " + dataset, spots: [] });
+  const file = path.join(prefDataDir(dataset), `${romaji}.json`);
+  if (!fs.existsSync(file)) {
+    const how = dataset === "recommend" ? "node savePrefectureRecommend.js" : "node savePrefectureData.js";
+    return res.status(404).json({ error: `未生成です。admin で ${how} を実行してください。`, spots: [] });
+  }
+  try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
+  catch (e) { res.status(500).json({ error: e.message, spots: [] }); }
+});
+
+// 県別に保存したスポットデータ（savePrefectureData.js が生成）を返す（互換: dataset=spots）
 app.get("/api/prefecture-spots/:romaji", (req, res) => {
   const file = path.join(__dirname, "data", "prefecture-spots", `${req.params.romaji}.json`);
   if (!fs.existsSync(file)) {
