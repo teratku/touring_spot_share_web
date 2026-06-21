@@ -177,6 +177,7 @@
           </div>
           <button class="iconbtn" @click="focusPoint(r)">地図</button>
           <button class="iconbtn" @click="saveOneToPrefData(r)" title="選択中の県データに保存">県+</button>
+          <button class="iconbtn" @click="saveOneToRecommend(r)" title="選択中のおすすめに保存">⭐+</button>
           <button class="btn ghost" @click="addTargetFromWeb(r)">追加</button>
         </div>
       </div>
@@ -190,7 +191,8 @@
         <input v-model="pendingPoint.name" placeholder="地点名を入力（例: ○○展望台）" />
         <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
           <button class="btn primary" @click="addPendingToTargets">対象に追加</button>
-          <button class="btn ghost" @click="addPendingToPrefData">県データに追加（県+）</button>
+          <button class="btn ghost" @click="addPendingToPrefData">県データに追加</button>
+          <button class="btn ghost" @click="addPendingToRecommend">おすすめに追加</button>
           <button class="btn ghost" @click="cancelPending">取消</button>
         </div>
       </div>
@@ -202,7 +204,7 @@
           <strong style="font-size:13px;color:var(--teal)">県データ管理（{{ savedSpots.length }}）</strong>
           <span class="muted">名前編集・✕削除して「更新」で保存</span>
           <span style="flex:1"></span>
-          <button class="btn ghost" @click="savePrefDataEdits">県データを更新</button>
+          <button class="btn ghost" @click="savePrefDataEdits('spots')">県データを更新</button>
         </div>
         <div class="weblist" style="max-height:220px;margin-top:6px;">
           <div v-for="(s,i) in savedSpots" :key="i" class="webrow">
@@ -211,6 +213,24 @@
             <span class="muted">{{ s.source==='manual' ? '手動' : 'アプリ' }}</span>
             <button class="iconbtn" @click="focusPoint(s)">地図</button>
             <button class="iconbtn" @click="deleteSavedSpot(i)">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="recommendSpots.length" style="margin-top:10px;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <strong style="font-size:13px;color:#b45309">⭐おすすめ管理（{{ recommendSpots.length }}）</strong>
+          <span class="muted">名前編集・✕削除して「更新」で保存</span>
+          <span style="flex:1"></span>
+          <button class="btn ghost" @click="savePrefDataEdits('recommend')">おすすめを更新</button>
+        </div>
+        <div class="weblist" style="max-height:220px;margin-top:6px;">
+          <div v-for="(s,i) in recommendSpots" :key="i" class="webrow">
+            <span class="wnum-badge" style="background:#f59e0b">{{ i+1 }}</span>
+            <input class="miniedit" style="flex:1" v-model="s.name" />
+            <span class="muted">{{ s.source==='manual' ? '手動' : '著名' }}</span>
+            <button class="iconbtn" @click="focusPoint(s)">地図</button>
+            <button class="iconbtn" @click="deleteRecommendSpot(i)">✕</button>
           </div>
         </div>
       </div>
@@ -312,7 +332,16 @@ createApp({
           kind === 'web' ? this.addTargetFromWeb(spot) : this.addTargetFromSpot(spot);
           this.infoWindow.close();
         }));
-        if (kind !== 'recommend') bar.appendChild(mkBtn('県+', '#7a3ff2', () => { this.saveOneToPrefData(spot); }));
+        if (kind === 'recommend') {
+          bar.appendChild(mkBtn('おすすめから削除', '#e53935', () => {
+            const i = this.recommendSpots.findIndex((x) => x.name === spot.name && x.lat === spot.lat && x.lng === spot.lng);
+            if (i >= 0) { this.recommendSpots.splice(i, 1); this.savePrefDataEdits('recommend'); }
+            this.infoWindow.close();
+          }));
+        } else {
+          bar.appendChild(mkBtn('県+', '#7a3ff2', () => { this.saveOneToPrefData(spot); }));
+          bar.appendChild(mkBtn('⭐おすすめ+', '#f59e0b', () => { this.saveOneToRecommend(spot); }));
+        }
       }
       div.appendChild(bar);
       this.infoWindow.setContent(div);
@@ -389,8 +418,15 @@ createApp({
     async addPendingToPrefData() {
       const p = this.pendingPoint; if (!p) return;
       if (!p.name.trim()) { this.msg = '地点名を入力してください'; return; }
-      const r = await this.postPrefSpots([{ name: p.name.trim(), lat: +p.lat.toFixed(6), lng: +p.lng.toFixed(6) }]);
+      const r = await this.postPrefData('spots', [{ name: p.name.trim(), lat: +p.lat.toFixed(6), lng: +p.lng.toFixed(6) }]);
       this.msg = r.error ? ('❌ ' + r.error) : `${r.pref}の県データに保存（+${r.added}・計 ${r.count}）`;
+      if (!r.error) this.cancelPending();
+    },
+    async addPendingToRecommend() {
+      const p = this.pendingPoint; if (!p) return;
+      if (!p.name.trim()) { this.msg = '地点名を入力してください'; return; }
+      const r = await this.postPrefData('recommend', [{ name: p.name.trim(), lat: +p.lat.toFixed(6), lng: +p.lng.toFixed(6) }]);
+      this.msg = r.error ? ('❌ ' + r.error) : `${r.pref}のおすすめに保存（+${r.added}・計 ${r.count}）`;
       if (!r.error) this.cancelPending();
     },
 
@@ -502,7 +538,10 @@ createApp({
       } catch (e) { this.spotMsg = '❌ ' + e.message; }
     },
     async refreshSavedSpots(romaji) {
-      try { const res = await fetch('/api/prefecture-spots/' + romaji); const data = await res.json(); this.savedSpots = data.spots || []; this.renderSavedMarkers(); } catch (e) {}
+      try { const res = await fetch('/api/prefecture-data/spots/' + romaji); const data = await res.json(); this.savedSpots = data.spots || []; this.renderSavedMarkers(); } catch (e) {}
+    },
+    async refreshRecommend(romaji) {
+      try { const res = await fetch('/api/prefecture-data/recommend/' + romaji); const data = await res.json(); this.recommendSpots = data.spots || []; this.renderRecommendMarkers(); } catch (e) {}
     },
     async loadRecommend() {
       const p = this.prefectures.find((x) => x.name === this.form.prefecture);
@@ -524,35 +563,42 @@ createApp({
         this.recommendMarkers.push(this.circleMarker(s, '#b45309', '#f59e0b', 7, () => this.openInfo(s, 'recommend')));
       }
     },
-    async postPrefSpots(spots) {
+    async postPrefData(dataset, spots) {
       const p = this.prefectures.find((x) => x.name === this.form.prefecture);
       if (!p) return { error: '先に都道府県を選択してください' };
       try {
-        const res = await fetch('/api/prefecture-spots/' + p.romaji, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ spots }) });
+        const res = await fetch(`/api/prefecture-data/${dataset}/${p.romaji}`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ spots }) });
         const data = await res.json();
-        if (data.ok) { await this.refreshSavedSpots(p.romaji); await this.loadPrefectures(); }
+        if (data.ok) { dataset === 'recommend' ? await this.refreshRecommend(p.romaji) : await this.refreshSavedSpots(p.romaji); await this.loadPrefectures(); }
         return { ...data, pref: p.name };
       } catch (e) { return { error: e.message }; }
     },
+    spotPayload(s) { return { spotId: s.spotId || null, name: s.name, lat: s.lat, lng: s.lng, address: s.address || null, imageURL: s.imageURL || null }; },
     async saveTargetsToPrefData() {
       if (!this.targets.length) { this.msg = '対象がありません'; return; }
-      const spots = this.targets.map((t) => ({ spotId: t.spotId || null, name: t.name, lat: t.lat, lng: t.lng, address: t.address || null, imageURL: t.imageURL || null }));
-      const r = await this.postPrefSpots(spots);
+      const r = await this.postPrefData('spots', this.targets.map((t) => this.spotPayload(t)));
       this.msg = r.error ? ('❌ ' + r.error) : `県データ(${r.pref})に ${r.added} 件追加（計 ${r.count}）`;
     },
     async saveOneToPrefData(s) {
-      const r = await this.postPrefSpots([{ spotId: s.spotId || null, name: s.name, lat: s.lat, lng: s.lng, address: s.address || null, imageURL: s.imageURL || null }]);
+      const r = await this.postPrefData('spots', [this.spotPayload(s)]);
       this.webMsg = r.error ? ('❌ ' + r.error) : `${r.pref}の県データに保存（+${r.added}・計 ${r.count}）`;
     },
+    async saveOneToRecommend(s) {
+      const r = await this.postPrefData('recommend', [this.spotPayload(s)]);
+      this.webMsg = r.error ? ('❌ ' + r.error) : `${r.pref}のおすすめに保存（+${r.added}・計 ${r.count}）`;
+    },
     deleteSavedSpot(i) { this.savedSpots.splice(i, 1); this.renderSavedMarkers(); },
-    async savePrefDataEdits() {
+    deleteRecommendSpot(i) { this.recommendSpots.splice(i, 1); this.renderRecommendMarkers(); },
+    async savePrefDataEdits(dataset) {
       const p = this.prefectures.find((x) => x.name === this.form.prefecture);
       if (!p) { this.spotMsg = '先に都道府県を選択してください'; return; }
+      const list = dataset === 'recommend' ? this.recommendSpots : this.savedSpots;
+      const label = dataset === 'recommend' ? 'おすすめ' : '県データ';
       try {
-        const res = await fetch('/api/prefecture-spots/' + p.romaji, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ spots: this.savedSpots }) });
+        const res = await fetch(`/api/prefecture-data/${dataset}/${p.romaji}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ spots: list }) });
         const data = await res.json();
-        this.spotMsg = data.ok ? `${p.name} 県データ更新（計 ${data.count}）` : ('❌ ' + (data.error || ''));
-        if (data.ok) { this.renderSavedMarkers(); await this.loadPrefectures(); }
+        this.spotMsg = data.ok ? `${p.name} ${label}更新（計 ${data.count}）` : ('❌ ' + (data.error || ''));
+        if (data.ok) { dataset === 'recommend' ? this.renderRecommendMarkers() : this.renderSavedMarkers(); await this.loadPrefectures(); }
       } catch (e) { this.spotMsg = '❌ ' + e.message; }
     },
 

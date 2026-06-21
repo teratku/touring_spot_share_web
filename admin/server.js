@@ -200,15 +200,14 @@ app.get("/api/prefecture-spots/:romaji", (req, res) => {
   }
 });
 
-// 県別スポットデータに追加（Web検索・カスタム地点・対象をまとめて保存）。重複は除外。
-app.post("/api/prefecture-spots/:romaji", (req, res) => {
-  const romaji = req.params.romaji;
+// 県別データに追加（dataset=spots|recommend）。重複除外、追加分は source:manual。
+function addPrefData(dataset, romaji, body, res) {
   const pref = Object.keys(ROMAJI).find((p) => ROMAJI[p] === romaji);
   if (!pref) return res.status(400).json({ error: "未知の都道府県: " + romaji });
-  const incoming = Array.isArray(req.body && req.body.spots) ? req.body.spots : [];
+  const incoming = Array.isArray(body && body.spots) ? body.spots : [];
   if (!incoming.length) return res.status(400).json({ error: "spots が空です" });
 
-  const dir = path.join(__dirname, "data", "prefecture-spots");
+  const dir = prefDataDir(dataset);
   fs.mkdirSync(dir, { recursive: true });
   const file = path.join(dir, `${romaji}.json`);
   let doc = { prefecture: pref, romaji, spots: [] };
@@ -232,15 +231,15 @@ app.post("/api/prefecture-spots/:romaji", (req, res) => {
   spots.sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"));
   fs.writeFileSync(file, JSON.stringify({ prefecture: pref, romaji, count: spots.length, total: spots.length, spots }, null, 2) + "\n");
   res.json({ ok: true, prefecture: pref, added, count: spots.length });
-});
+}
 
-// 県別スポットデータを丸ごと置換（ビルダーでの編集・削除を保存）。source は維持。
-app.put("/api/prefecture-spots/:romaji", (req, res) => {
-  const romaji = req.params.romaji;
+// 県別データを丸ごと置換（編集・削除）。source は維持（既定: recommend=curated / spots=app）。
+function replacePrefData(dataset, romaji, body, res) {
   const pref = Object.keys(ROMAJI).find((p) => ROMAJI[p] === romaji);
   if (!pref) return res.status(400).json({ error: "未知の都道府県: " + romaji });
-  const incoming = Array.isArray(req.body && req.body.spots) ? req.body.spots : null;
+  const incoming = Array.isArray(body && body.spots) ? body.spots : null;
   if (!incoming) return res.status(400).json({ error: "spots 配列が必要です" });
+  const baseSource = dataset === "recommend" ? "curated" : "app";
 
   const spots = [];
   for (const s of incoming) {
@@ -252,20 +251,31 @@ app.put("/api/prefecture-spots/:romaji", (req, res) => {
       lat, lng,
       address: s.address || null,
       imageURL: s.imageURL || null,
-      source: s.source === "manual" ? "manual" : "app",
+      source: s.source === "manual" ? "manual" : baseSource,
     });
   }
   spots.sort((a, b) => String(a.name).localeCompare(String(b.name), "ja"));
-  const dir = path.join(__dirname, "data", "prefecture-spots");
+  const dir = prefDataDir(dataset);
   fs.mkdirSync(dir, { recursive: true });
-  const appCount = spots.filter((s) => s.source === "app").length;
   const manualCount = spots.filter((s) => s.source === "manual").length;
   fs.writeFileSync(
     path.join(dir, `${romaji}.json`),
-    JSON.stringify({ prefecture: pref, romaji, count: spots.length, appCount, manualCount, spots }, null, 2) + "\n"
+    JSON.stringify({ prefecture: pref, romaji, count: spots.length, curatedCount: spots.length - manualCount, manualCount, spots }, null, 2) + "\n"
   );
   res.json({ ok: true, prefecture: pref, count: spots.length });
+}
+
+// 汎用ルート（dataset=spots|recommend）＋ 互換エイリアス（spots）
+app.post("/api/prefecture-data/:dataset/:romaji", (req, res) => {
+  if (!isDataset(req.params.dataset)) return res.status(400).json({ error: "unknown dataset: " + req.params.dataset });
+  addPrefData(req.params.dataset, req.params.romaji, req.body, res);
 });
+app.put("/api/prefecture-data/:dataset/:romaji", (req, res) => {
+  if (!isDataset(req.params.dataset)) return res.status(400).json({ error: "unknown dataset: " + req.params.dataset });
+  replacePrefData(req.params.dataset, req.params.romaji, req.body, res);
+});
+app.post("/api/prefecture-spots/:romaji", (req, res) => addPrefData("spots", req.params.romaji, req.body, res));
+app.put("/api/prefecture-spots/:romaji", (req, res) => replacePrefData("spots", req.params.romaji, req.body, res));
 
 // 既存ラリー一覧（任意で年度フィルタ）
 app.get("/api/rallies", async (req, res) => {
