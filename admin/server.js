@@ -51,9 +51,16 @@ app.get("/", (_req, res) => res.sendFile(path.join(__dirname, "public", "rally-b
 
 // アプリ保存スポット（imagedownload）を地図用に整形して返す。
 // フィールド対応は web の plan-suggest.html と同一。
+// ⚠️ imagedownload 全件 read は高コストのため、メモリにキャッシュ（既定60分）。?refresh=1 で再取得。
+let spotsCache = null; // { t, limit, spots, limited }
+const SPOTS_TTL_MS = 60 * 60 * 1000;
 app.get("/api/spots", async (req, res) => {
   try {
     const limit = Math.min(parseInt(req.query.limit, 10) || 6000, 30000);
+    const force = req.query.refresh === "1";
+    if (!force && spotsCache && Date.now() - spotsCache.t < SPOTS_TTL_MS && spotsCache.limit >= limit) {
+      return res.json({ count: spotsCache.spots.length, limited: spotsCache.limited, cached: true, spots: spotsCache.spots });
+    }
     const snap = await db.collection("imagedownload").limit(limit).get();
     const spots = [];
     snap.forEach((d) => {
@@ -69,7 +76,9 @@ app.get("/api/spots", async (req, res) => {
         imageURL: (Array.isArray(x.locationImageURLs) && x.locationImageURLs[0]) || x.iconImageURL || null,
       });
     });
-    res.json({ count: spots.length, limited: snap.size >= limit, spots });
+    spotsCache = { t: Date.now(), limit, spots, limited: snap.size >= limit };
+    console.log(`📥 imagedownload read: ${spots.length} 件（以後60分キャッシュ）`);
+    res.json({ count: spots.length, limited: spotsCache.limited, cached: false, spots });
   } catch (e) {
     console.error("spots error:", e.message);
     res.status(500).json({ error: e.message });
@@ -111,11 +120,20 @@ app.get("/api/geocode", async (req, res) => {
 
 // 都道府県マスタ（ラリー情報の県プルダウン用。lib/prefectures.js が単一の出典）
 app.get("/api/prefectures", (_req, res) => {
-  const prefectures = Object.keys(ROMAJI).map((name) => ({
-    name,
-    romaji: ROMAJI[name],
-    region: REGION[name] || "",
-  }));
+  const dir = path.join(__dirname, "data", "prefecture-spots");
+  const prefectures = Object.keys(ROMAJI).map((name) => {
+    const romaji = ROMAJI[name];
+    let count = 0, manual = 0;
+    const f = path.join(dir, `${romaji}.json`);
+    if (fs.existsSync(f)) {
+      try {
+        const sp = (JSON.parse(fs.readFileSync(f, "utf8")).spots) || [];
+        count = sp.length;
+        manual = sp.filter((s) => s.source === "manual").length;
+      } catch (_) {}
+    }
+    return { name, romaji, region: REGION[name] || "", count, manual };
+  });
   res.json({ prefectures });
 });
 
