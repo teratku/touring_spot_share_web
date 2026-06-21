@@ -58,7 +58,7 @@ node server.js          # → http://127.0.0.1:4317（ローカル専用）／np
 | `targets[]` | ✓ | 対象スポット配列（1件以上） |
 | `activeMonths` / `season` | 任意 | 季節限定。`[6,7,8]` または `"夏"`（空/未指定=通年） |
 | `category` / `prefecture` | 任意 | `"standard"`(既定)/`"prefecture"` ＋ 県名（県別チャレンジ） |
-| `region` / `description` / `coverImageURL` | 任意 | |
+| `region` / `description` / `coverImageURL` | 任意 | `coverImageURL` は URL手入力のほか、**「🎨生成」ボタン**でラリー情報からカバー画像をCanvas生成できる（プレビュー→画像DL／💾サーバ保存）。「💾サーバ保存」は `public/images/rallies/{rallyId}.jpg` に書き出し、URLを `https://biketeilen.web.app/images/rallies/{rallyId}.jpg` に自動設定（`firebase deploy` で反映） |
 | `rewardBadgeId` / `completionTitle` | 任意 | 完了報酬・称号 |
 
 ### target
@@ -168,6 +168,9 @@ node setRallyStatus.js --year 2026 --status paused           # 年度一括
 | GET | `/api/rallies?year=` | 既存ラリー一覧 |
 | GET | `/api/rally/:id` | 1ラリー取得（編集/複製） |
 | POST | `/api/rally` | 検証して stampRallies へ upsert |
+| POST | `/api/rally-cover/:rallyId` | 「🎨生成」のカバー画像（`{dataUrl}` JPEG/PNG base64）を `../public/images/rallies/{rallyId}.jpg` へ書き出し |
+
+> ⚠️ `/api/rally-cover` は追加エンドポイントのため、**server.js を再起動**してから使うこと。
 
 ---
 

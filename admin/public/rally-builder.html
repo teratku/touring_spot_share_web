@@ -116,7 +116,19 @@
           <div><label>完了称号</label><input v-model="form.completionTitle" placeholder="○○制覇 2026" /></div>
         </div>
         <label>カバー画像URL（任意）</label>
-        <input v-model="form.coverImageURL" placeholder="https://..." />
+        <div class="row" style="gap:6px;align-items:center">
+          <input v-model="form.coverImageURL" placeholder="https://... または「🎨生成」で作成" style="flex:1" />
+          <button class="btn ghost" style="white-space:nowrap" :disabled="!form.rallyId.trim() || !form.name.trim()" @click="generateCover" title="ラリー情報からカバー画像を生成">🎨 生成</button>
+        </div>
+        <div v-if="coverPreview" style="margin-top:8px">
+          <img :src="coverPreview" alt="カバープレビュー" style="width:100%;max-width:380px;border-radius:8px;border:1px solid var(--line);display:block" />
+          <div class="actions" style="margin-top:6px">
+            <button class="btn ghost" @click="generateCover" title="最新のラリー情報で作り直し">🔄 再生成</button>
+            <button class="btn ghost" @click="downloadCover">⬇ 画像DL</button>
+            <button class="btn primary" @click="saveCoverToServer" title="public/images/rallies/ に保存">💾 サーバ保存</button>
+          </div>
+          <div class="msg" v-if="coverMsg">{{ coverMsg }}</div>
+        </div>
       </div>
 
       <div class="panel" style="margin-top:12px">
@@ -258,7 +270,7 @@ createApp({
       allSpots: [], spotQuery:'', spotMsg:'スポットは「アプリ保存スポット表示」または県を選択で表示', spotsLoaded:false, addMode:false,
       webQuery:'', webResults:[], webMsg:'', webSearching:false,
       prefectures: [], savedSpots: [], recommendSpots: [], pendingPoint: null,
-      targets: [], msg:'', rallyList: [], showJson:false,
+      targets: [], msg:'', rallyList: [], showJson:false, coverPreview:'', coverMsg:'',
       map:null, infoWindow:null, spotMarkers:[], savedMarkers:[], recommendMarkers:[], webMarkers:[], targetMarkers:[], pendingMarker:null
     };
   },
@@ -474,6 +486,90 @@ createApp({
       const r = this.buildRally();
       const blob = new Blob([JSON.stringify(r, null, 2)], { type:'application/json' });
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = (r.rallyId || 'rally') + '.json'; a.click();
+    },
+
+    // ===== カバー画像生成（Canvas） =====
+    wrapJa(ctx, text, maxWidth) {
+      // 数字・英字の連続は1かたまり（"2026" を途中で割らない）、日本語は1文字単位で折返し
+      const tokens = text.match(/[A-Za-z0-9]+|[^A-Za-z0-9]/g) || [];
+      const lines = []; let line = '';
+      for (const tk of tokens) {
+        if (ctx.measureText(line + tk).width > maxWidth && line) { lines.push(line); line = tk; }
+        else line += tk;
+      }
+      if (line) lines.push(line);
+      return lines;
+    },
+    drawCoverCanvas() {
+      const W = 1200, H = 630;
+      const canvas = document.createElement('canvas'); canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      const f = this.form;
+      const themeLabel = (this.themes.find(t => t[0] === f.theme) || ['', ''])[1];
+      const emoji = { michinoeki:'🛤️', zekkei:'🏔️', hanto:'🗺️', island:'🏝️', onsen:'♨️', castle:'🏯', extreme:'🧭', recommend:'⭐', other:'🚩' }[f.theme] || '🚩';
+      const unit = f.theme === 'michinoeki' ? '駅' : 'スポット';
+
+      // 背景グラデーション（アプリ配色）
+      const g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, '#00A8C6'); g.addColorStop(1, '#228B22');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      const rg = ctx.createRadialGradient(W * 0.82, -120, 80, W * 0.82, -120, 760);
+      rg.addColorStop(0, 'rgba(255,255,255,.20)'); rg.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+
+      // 大きな半透明テーマ絵文字
+      ctx.save(); ctx.globalAlpha = 0.16; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '430px "Apple Color Emoji", serif'; ctx.fillText(emoji, W - 240, H / 2 + 30); ctx.restore();
+
+      // 上部ラベル
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+      ctx.font = 'bold 30px -apple-system, "Hiragino Sans", sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.92)';
+      ctx.fillText('🚩 スタンプラリー' + (f.region ? '　・　' + f.region : ''), 70, 108);
+
+      // タイトル（自動折返し・最大3行）
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 76px -apple-system, "Hiragino Sans", sans-serif';
+      ctx.shadowColor = 'rgba(0,0,0,.28)'; ctx.shadowBlur = 14; ctx.shadowOffsetY = 3;
+      const lines = this.wrapJa(ctx, (f.name || '').trim() || '（無題ラリー）', W - 330).slice(0, 3);
+      let ty = 232; for (const ln of lines) { ctx.fillText(ln, 70, ty); ty += 92; }
+      ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+
+      // サブ情報
+      ctx.font = '34px -apple-system, "Hiragino Sans", sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.96)';
+      const sub = []; if (themeLabel) sub.push(emoji + ' ' + themeLabel);
+      if (this.targets.length) sub.push('全' + this.targets.length + unit); sub.push(f.fiscalYear + '年度');
+      ctx.fillText(sub.join('　/　'), 70, Math.max(ty + 8, H - 116));
+
+      // ウォーターマーク
+      ctx.textAlign = 'right'; ctx.font = 'bold 26px -apple-system, sans-serif'; ctx.fillStyle = 'rgba(255,255,255,.85)';
+      ctx.fillText('ツーリングスポットシェア', W - 60, H - 50);
+      return canvas;
+    },
+    generateCover() {
+      const rallyId = this.form.rallyId.trim();
+      if (!rallyId || !this.form.name.trim()) { this.coverMsg = 'rallyId と 名前 を入力してください'; return; }
+      this.coverPreview = this.drawCoverCanvas().toDataURL('image/jpeg', 0.88);
+      this.form.coverImageURL = `https://biketeilen.web.app/images/rallies/${rallyId}.jpg`;
+      this.coverMsg = 'プレビュー生成。「💾サーバ保存」で public/images/rallies/ に書き出し→デプロイで反映。';
+    },
+    downloadCover() {
+      this.drawCoverCanvas().toBlob((blob) => {
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+        a.download = (this.form.rallyId.trim() || 'rally') + '.jpg'; a.click();
+      }, 'image/jpeg', 0.88);
+    },
+    async saveCoverToServer() {
+      const rallyId = this.form.rallyId.trim();
+      if (!rallyId) { this.coverMsg = 'rallyId が必要です'; return; }
+      this.coverMsg = '保存中…';
+      try {
+        const dataUrl = this.drawCoverCanvas().toDataURL('image/jpeg', 0.88);
+        const res = await fetch('/api/rally-cover/' + encodeURIComponent(rallyId), {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ dataUrl })
+        });
+        const data = await res.json();
+        if (data.ok) { this.form.coverImageURL = 'https://biketeilen.web.app' + data.path; this.coverMsg = '✅ 保存: public' + data.path + '（firebase deploy で反映）'; }
+        else { this.coverMsg = '❌ ' + (data.error || '保存失敗'); }
+      } catch (e) { this.coverMsg = '❌ ' + e.message; }
     },
 
     // ===== Web検索 =====

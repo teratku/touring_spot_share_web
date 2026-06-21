@@ -348,6 +348,25 @@ app.post("/api/rally", async (req, res) => {
   }
 });
 
+// ビルダーの「🎨カバー生成」から生成画像を public/images/rallies/{rallyId}.jpg に書き出す（ローカル専用）。
+// 規約: coverImageURL = https://biketeilen.web.app/images/rallies/{rallyId}.jpg
+app.post("/api/rally-cover/:rallyId", (req, res) => {
+  try {
+    const rallyId = String(req.params.rallyId || "");
+    if (!/^[a-z0-9-]+$/i.test(rallyId)) return res.status(400).json({ error: "invalid rallyId" });
+    const m = String((req.body && req.body.dataUrl) || "").match(/^data:image\/(?:jpeg|png);base64,(.+)$/);
+    if (!m) return res.status(400).json({ error: "invalid image data" });
+    const dir = path.join(__dirname, "..", "public", "images", "rallies");
+    fs.mkdirSync(dir, { recursive: true });
+    const rel = `/images/rallies/${rallyId}.jpg`;
+    fs.writeFileSync(path.join(dir, `${rallyId}.jpg`), Buffer.from(m[1], "base64"));
+    console.log(`🖼  rally cover saved: public${rel}`);
+    res.json({ ok: true, path: rel });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.listen(PORT, HOST, () => {
   console.log(`🛠  スタンプラリー ビルダー: http://${HOST}:${PORT}`);
   console.log("   ローカル専用。Firestore 認証は importRallies.js と同じ（serviceAccount.json / ADC）。");
