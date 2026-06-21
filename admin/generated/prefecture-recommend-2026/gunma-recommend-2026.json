@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（群馬県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（群馬県）。data/prefecture-recommend/gunma.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-gunma-recommend-2026",
   "name": "群馬県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,51 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "草津温泉 湯畑",
-      "lat": 36.622,
-      "lng": 138.596,
-      "address": "群馬県",
-      "order": 1
+      "name": "草津温泉",
+      "lat": 36.620833,
+      "lng": 138.596311,
+      "order": 1,
+      "address": "群馬県 草津町"
     },
     {
       "targetId": "t02",
       "name": "吹割の滝",
-      "lat": 36.717,
-      "lng": 139.15,
-      "address": "群馬県",
-      "order": 2
+      "lat": 36.702047,
+      "lng": 139.207052,
+      "order": 2,
+      "address": "群馬県 沼田市"
     },
     {
       "targetId": "t03",
-      "name": "伊香保温泉 石段街",
-      "lat": 36.489,
-      "lng": 138.912,
-      "address": "群馬県",
-      "order": 3
+      "name": "伊香保温泉",
+      "lat": 36.499895,
+      "lng": 138.925911,
+      "order": 3,
+      "address": "群馬県 渋川市"
+    },
+    {
+      "targetId": "t04",
+      "name": "富岡製糸場",
+      "lat": 36.255439,
+      "lng": 138.887642,
+      "order": 4,
+      "address": "群馬県 富岡市"
+    },
+    {
+      "targetId": "t05",
+      "name": "尾瀬",
+      "lat": 36.939842,
+      "lng": 139.241597,
+      "order": 5,
+      "address": "福島県 檜枝岐村"
+    },
+    {
+      "targetId": "t06",
+      "name": "谷川岳ロープウェイ",
+      "lat": 36.827277,
+      "lng": 138.955824,
+      "order": 6,
+      "address": "群馬県 みなかみ町"
     }
   ]
 }

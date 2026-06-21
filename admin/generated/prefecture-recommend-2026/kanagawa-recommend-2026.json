@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（神奈川県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（神奈川県）。data/prefecture-recommend/kanagawa.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-kanagawa-recommend-2026",
   "name": "神奈川県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "鎌倉大仏",
-      "lat": 35.317,
-      "lng": 139.536,
-      "address": "神奈川県",
-      "order": 1
+      "lat": 35.316848,
+      "lng": 139.535721,
+      "order": 1,
+      "address": "神奈川県 鎌倉市"
     },
     {
       "targetId": "t02",
       "name": "大涌谷",
-      "lat": 35.244,
-      "lng": 139.02,
-      "address": "神奈川県",
-      "order": 2
+      "lat": 35.247406,
+      "lng": 139.024205,
+      "order": 2,
+      "address": "神奈川県 箱根町"
     },
     {
       "targetId": "t03",
       "name": "江の島",
-      "lat": 35.299,
-      "lng": 139.481,
-      "address": "神奈川県",
-      "order": 3
+      "lat": 35.300105,
+      "lng": 139.480637,
+      "order": 3,
+      "address": "神奈川県 藤沢市"
+    },
+    {
+      "targetId": "t04",
+      "name": "鶴岡八幡宮",
+      "lat": 35.325184,
+      "lng": 139.556179,
+      "order": 4,
+      "address": "神奈川県 鎌倉市"
+    },
+    {
+      "targetId": "t05",
+      "name": "横浜赤レンガ倉庫",
+      "lat": 35.452405,
+      "lng": 139.642918,
+      "order": 5,
+      "address": "神奈川県 横浜市"
+    },
+    {
+      "targetId": "t06",
+      "name": "箱根神社",
+      "lat": 35.203973,
+      "lng": 139.025583,
+      "order": 6,
+      "address": "神奈川県 箱根町"
     }
   ]
 }

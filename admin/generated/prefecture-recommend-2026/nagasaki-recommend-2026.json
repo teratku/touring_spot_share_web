@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（長崎県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（長崎県）。data/prefecture-recommend/nagasaki.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-nagasaki-recommend-2026",
   "name": "長崎県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "グラバー園",
-      "lat": 32.734,
-      "lng": 129.87,
-      "address": "長崎県",
-      "order": 1
+      "lat": 32.733367,
+      "lng": 129.869055,
+      "order": 1,
+      "address": "長崎県 長崎市"
     },
     {
       "targetId": "t02",
-      "name": "稲佐山展望台",
-      "lat": 32.766,
-      "lng": 129.847,
-      "address": "長崎県",
-      "order": 2
+      "name": "稲佐山",
+      "lat": 32.753426,
+      "lng": 129.849338,
+      "order": 2,
+      "address": "長崎県 長崎市"
     },
     {
       "targetId": "t03",
       "name": "ハウステンボス",
-      "lat": 33.087,
-      "lng": 129.79,
-      "address": "長崎県",
-      "order": 3
+      "lat": 33.086204,
+      "lng": 129.788315,
+      "order": 3,
+      "address": "長崎県 佐世保市"
+    },
+    {
+      "targetId": "t04",
+      "name": "軍艦島",
+      "lat": 32.627688,
+      "lng": 129.738258,
+      "order": 4,
+      "address": "長崎県 長崎市"
+    },
+    {
+      "targetId": "t05",
+      "name": "眼鏡橋",
+      "lat": 32.747165,
+      "lng": 129.880102,
+      "order": 5,
+      "address": "長崎県 長崎市"
+    },
+    {
+      "targetId": "t06",
+      "name": "大浦天主堂",
+      "lat": 32.734189,
+      "lng": 129.870162,
+      "order": 6,
+      "address": "長崎県 長崎市"
     }
   ]
 }

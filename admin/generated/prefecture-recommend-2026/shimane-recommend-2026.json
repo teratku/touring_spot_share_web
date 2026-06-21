@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（島根県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（島根県）。data/prefecture-recommend/shimane.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-shimane-recommend-2026",
   "name": "島根県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "出雲大社",
-      "lat": 35.402,
-      "lng": 132.6856,
-      "address": "島根県",
-      "order": 1
+      "lat": 35.399803,
+      "lng": 132.685151,
+      "order": 1,
+      "address": "島根県 出雲市"
     },
     {
       "targetId": "t02",
       "name": "松江城",
-      "lat": 35.475,
-      "lng": 133.051,
-      "address": "島根県",
-      "order": 2
+      "lat": 35.475141,
+      "lng": 133.050762,
+      "order": 2,
+      "address": "島根県 松江市"
     },
     {
       "targetId": "t03",
       "name": "足立美術館",
-      "lat": 35.333,
-      "lng": 133.22,
-      "address": "島根県",
-      "order": 3
+      "lat": 35.380843,
+      "lng": 133.195473,
+      "order": 3,
+      "address": "島根県 安来市"
+    },
+    {
+      "targetId": "t04",
+      "name": "石見銀山",
+      "lat": 34.897519,
+      "lng": 132.071763,
+      "order": 4,
+      "address": "島根県 浜田市"
+    },
+    {
+      "targetId": "t05",
+      "name": "稲佐の浜",
+      "lat": 35.395781,
+      "lng": 132.673611,
+      "order": 5,
+      "address": "島根県 出雲市"
+    },
+    {
+      "targetId": "t06",
+      "name": "由志園",
+      "lat": 35.49071,
+      "lng": 133.175208,
+      "order": 6,
+      "address": "島根県 松江市"
     }
   ]
 }

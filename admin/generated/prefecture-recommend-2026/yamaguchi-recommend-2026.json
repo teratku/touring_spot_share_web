@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（山口県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（山口県）。data/prefecture-recommend/yamaguchi.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-yamaguchi-recommend-2026",
   "name": "山口県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "角島大橋",
-      "lat": 34.353,
-      "lng": 130.883,
-      "address": "山口県",
-      "order": 1
+      "lat": 34.352375,
+      "lng": 130.887219,
+      "order": 1,
+      "address": "山口県 下関市"
     },
     {
       "targetId": "t02",
       "name": "元乃隅神社",
-      "lat": 34.418,
-      "lng": 131.06,
-      "address": "山口県",
-      "order": 2
+      "lat": 34.420083,
+      "lng": 131.063169,
+      "order": 2,
+      "address": "山口県 長門市"
     },
     {
       "targetId": "t03",
       "name": "錦帯橋",
-      "lat": 34.167,
-      "lng": 132.178,
-      "address": "山口県",
-      "order": 3
+      "lat": 34.167643,
+      "lng": 132.178321,
+      "order": 3,
+      "address": "山口県 岩国市"
+    },
+    {
+      "targetId": "t04",
+      "name": "秋吉台",
+      "lat": 34.234167,
+      "lng": 131.306043,
+      "order": 4,
+      "address": "山口県 美祢市"
+    },
+    {
+      "targetId": "t05",
+      "name": "瑠璃光寺五重塔",
+      "lat": 34.189633,
+      "lng": 131.47219,
+      "order": 5,
+      "address": "山口県 山口市"
+    },
+    {
+      "targetId": "t06",
+      "name": "別府弁天池",
+      "lat": 34.255107,
+      "lng": 131.244888,
+      "order": 6,
+      "address": "山口県 美祢市"
     }
   ]
 }

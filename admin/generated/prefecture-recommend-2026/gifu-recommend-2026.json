@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（岐阜県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（岐阜県）。data/prefecture-recommend/gifu.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-gifu-recommend-2026",
   "name": "岐阜県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "白川郷",
-      "lat": 36.258,
-      "lng": 136.906,
-      "address": "岐阜県",
-      "order": 1
+      "lat": 36.257345,
+      "lng": 136.906832,
+      "order": 1,
+      "address": "岐阜県 白川村"
     },
     {
       "targetId": "t02",
       "name": "高山陣屋",
-      "lat": 36.139,
-      "lng": 137.253,
-      "address": "岐阜県",
-      "order": 2
+      "lat": 36.139692,
+      "lng": 137.257618,
+      "order": 2,
+      "address": "岐阜県 高山市"
     },
     {
       "targetId": "t03",
       "name": "新穂高ロープウェイ",
-      "lat": 36.247,
-      "lng": 137.595,
-      "address": "岐阜県",
-      "order": 3
+      "lat": 36.284514,
+      "lng": 137.577625,
+      "order": 3,
+      "address": "岐阜県 高山市"
+    },
+    {
+      "targetId": "t04",
+      "name": "下呂温泉",
+      "lat": 35.926317,
+      "lng": 137.308121,
+      "order": 4,
+      "address": "岐阜県 下呂市"
+    },
+    {
+      "targetId": "t05",
+      "name": "馬籠宿",
+      "lat": 35.526845,
+      "lng": 137.567722,
+      "order": 5,
+      "address": "岐阜県 中津川市"
+    },
+    {
+      "targetId": "t06",
+      "name": "養老の滝",
+      "lat": 35.280376,
+      "lng": 136.534213,
+      "order": 6,
+      "address": "岐阜県 養老町"
     }
   ]
 }

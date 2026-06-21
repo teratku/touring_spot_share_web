@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（山梨県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（山梨県）。data/prefecture-recommend/yamanashi.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-yamanashi-recommend-2026",
   "name": "山梨県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,51 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "富士山五合目（富士スバルライン）",
-      "lat": 35.394,
-      "lng": 138.735,
-      "address": "山梨県",
-      "order": 1
+      "name": "河口湖",
+      "lat": 35.51306,
+      "lng": 138.744824,
+      "order": 1,
+      "address": "山梨県 富士河口湖町"
     },
     {
       "targetId": "t02",
-      "name": "河口湖",
-      "lat": 35.517,
-      "lng": 138.754,
-      "address": "山梨県",
-      "order": 2
+      "name": "昇仙峡",
+      "lat": 35.745896,
+      "lng": 138.567486,
+      "order": 2,
+      "address": "山梨県 甲府市"
     },
     {
       "targetId": "t03",
-      "name": "昇仙峡",
-      "lat": 35.73,
-      "lng": 138.55,
-      "address": "山梨県",
-      "order": 3
+      "name": "忍野八海",
+      "lat": 35.460241,
+      "lng": 138.832703,
+      "order": 3,
+      "address": "山梨県 忍野村"
+    },
+    {
+      "targetId": "t04",
+      "name": "武田神社",
+      "lat": 35.686703,
+      "lng": 138.57739,
+      "order": 4,
+      "address": "山梨県 甲府市"
+    },
+    {
+      "targetId": "t05",
+      "name": "西沢渓谷",
+      "lat": 34.779489,
+      "lng": 135.311572,
+      "order": 5,
+      "address": "兵庫県 西宮市"
+    },
+    {
+      "targetId": "t06",
+      "name": "富士山五合目",
+      "lat": 35.394502,
+      "lng": 138.733123,
+      "order": 6,
+      "address": "山梨県 鳴沢村"
     }
   ]
 }

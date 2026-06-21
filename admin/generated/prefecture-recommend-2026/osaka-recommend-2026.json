@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（大阪府）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（大阪府）。data/prefecture-recommend/osaka.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-osaka-recommend-2026",
   "name": "大阪府 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "大阪城",
-      "lat": 34.6873,
-      "lng": 135.5259,
-      "address": "大阪府",
-      "order": 1
+      "lat": 34.687373,
+      "lng": 135.525856,
+      "order": 1,
+      "address": "大阪府 大阪市"
     },
     {
       "targetId": "t02",
       "name": "通天閣",
-      "lat": 34.6525,
-      "lng": 135.5063,
-      "address": "大阪府",
-      "order": 2
+      "lat": 34.652539,
+      "lng": 135.50631,
+      "order": 2,
+      "address": "大阪府 大阪市"
     },
     {
       "targetId": "t03",
       "name": "海遊館",
-      "lat": 34.6545,
-      "lng": 135.429,
-      "address": "大阪府",
-      "order": 3
+      "lat": 34.654546,
+      "lng": 135.428921,
+      "order": 3,
+      "address": "大阪府 大阪市"
+    },
+    {
+      "targetId": "t04",
+      "name": "万博記念公園",
+      "lat": 34.812017,
+      "lng": 135.530193,
+      "order": 4,
+      "address": "大阪府 吹田市"
+    },
+    {
+      "targetId": "t05",
+      "name": "住吉大社",
+      "lat": 34.613003,
+      "lng": 135.493101,
+      "order": 5,
+      "address": "大阪府 大阪市"
+    },
+    {
+      "targetId": "t06",
+      "name": "あべのハルカス",
+      "lat": 34.645769,
+      "lng": 135.514007,
+      "order": 6,
+      "address": "大阪府 大阪市"
     }
   ]
 }

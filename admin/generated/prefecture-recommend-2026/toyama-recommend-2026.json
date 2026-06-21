@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（富山県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（富山県）。data/prefecture-recommend/toyama.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-toyama-recommend-2026",
   "name": "富山県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,42 @@
     {
       "targetId": "t01",
       "name": "黒部ダム",
-      "lat": 36.566,
-      "lng": 137.66,
-      "address": "富山県",
-      "order": 1
+      "lat": 36.566694,
+      "lng": 137.663639,
+      "order": 1,
+      "address": "富山県 立山町"
     },
     {
       "targetId": "t02",
       "name": "雨晴海岸",
-      "lat": 36.79,
-      "lng": 137.02,
-      "address": "富山県",
-      "order": 2
+      "lat": 36.815091,
+      "lng": 137.041816,
+      "order": 2,
+      "address": "富山県 高岡市"
     },
     {
       "targetId": "t03",
-      "name": "五箇山 相倉合掌造り集落",
-      "lat": 36.408,
-      "lng": 136.935,
-      "address": "富山県",
-      "order": 3
+      "name": "立山黒部アルペンルート",
+      "lat": 36.577187,
+      "lng": 137.494241,
+      "order": 3,
+      "address": "富山県 立山町"
+    },
+    {
+      "targetId": "t04",
+      "name": "富山城",
+      "lat": 36.6932,
+      "lng": 137.210827,
+      "order": 4,
+      "address": "富山県 富山市"
+    },
+    {
+      "targetId": "t05",
+      "name": "瑞龍寺",
+      "lat": 36.735598,
+      "lng": 137.010537,
+      "order": 5,
+      "address": "富山県 高岡市"
     }
   ]
 }

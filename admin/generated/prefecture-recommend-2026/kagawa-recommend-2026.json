@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（香川県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（香川県）。data/prefecture-recommend/kagawa.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-kagawa-recommend-2026",
   "name": "香川県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "金刀比羅宮",
-      "lat": 34.185,
-      "lng": 133.816,
-      "address": "香川県",
-      "order": 1
+      "lat": 34.183988,
+      "lng": 133.80939,
+      "order": 1,
+      "address": "香川県 琴平町"
     },
     {
       "targetId": "t02",
       "name": "栗林公園",
-      "lat": 34.329,
-      "lng": 134.043,
-      "address": "香川県",
-      "order": 2
+      "lat": 34.329497,
+      "lng": 134.043926,
+      "order": 2,
+      "address": "香川県 高松市"
     },
     {
       "targetId": "t03",
       "name": "父母ヶ浜",
-      "lat": 34.253,
-      "lng": 133.602,
-      "address": "香川県",
-      "order": 3
+      "lat": 34.18831,
+      "lng": 133.646831,
+      "order": 3,
+      "address": "香川県 三豊市"
+    },
+    {
+      "targetId": "t04",
+      "name": "屋島",
+      "lat": 34.336581,
+      "lng": 134.109179,
+      "order": 4,
+      "address": "香川県 高松市"
+    },
+    {
+      "targetId": "t05",
+      "name": "エンジェルロード",
+      "lat": 34.477611,
+      "lng": 134.188647,
+      "order": 5,
+      "address": "香川県 土庄町"
+    },
+    {
+      "targetId": "t06",
+      "name": "寒霞渓",
+      "lat": 34.515645,
+      "lng": 134.30036,
+      "order": 6,
+      "address": "香川県 小豆島町"
     }
   ]
 }

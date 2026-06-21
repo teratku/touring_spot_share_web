@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（愛媛県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（愛媛県）。data/prefecture-recommend/ehime.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-ehime-recommend-2026",
   "name": "愛媛県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,42 @@
     {
       "targetId": "t01",
       "name": "道後温泉本館",
-      "lat": 33.852,
-      "lng": 132.786,
-      "address": "愛媛県",
-      "order": 1
+      "lat": 33.852062,
+      "lng": 132.786404,
+      "order": 1,
+      "address": "愛媛県 松山市"
     },
     {
       "targetId": "t02",
       "name": "松山城",
-      "lat": 33.8456,
-      "lng": 132.7657,
-      "address": "愛媛県",
-      "order": 2
+      "lat": 33.845651,
+      "lng": 132.765746,
+      "order": 2,
+      "address": "愛媛県 松山市"
     },
     {
       "targetId": "t03",
       "name": "亀老山展望公園",
-      "lat": 34.0968,
-      "lng": 133.01,
-      "address": "愛媛県",
-      "order": 3
+      "lat": 34.120124,
+      "lng": 133.03411,
+      "order": 3,
+      "address": "愛媛県 今治市"
+    },
+    {
+      "targetId": "t04",
+      "name": "石鎚山",
+      "lat": 33.76778,
+      "lng": 133.115104,
+      "order": 4,
+      "address": "愛媛県 西条市"
+    },
+    {
+      "targetId": "t05",
+      "name": "下灘駅",
+      "lat": 33.655417,
+      "lng": 132.589412,
+      "order": 5,
+      "address": "愛媛県 伊予市"
     }
   ]
 }

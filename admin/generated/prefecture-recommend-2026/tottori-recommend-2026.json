@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（鳥取県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（鳥取県）。data/prefecture-recommend/tottori.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-tottori-recommend-2026",
   "name": "鳥取県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,42 @@
     {
       "targetId": "t01",
       "name": "鳥取砂丘",
-      "lat": 35.5447,
-      "lng": 134.2256,
-      "address": "鳥取県",
-      "order": 1
+      "lat": 35.5413,
+      "lng": 134.227726,
+      "order": 1,
+      "address": "鳥取県 鳥取市"
     },
     {
       "targetId": "t02",
       "name": "水木しげるロード",
-      "lat": 35.544,
-      "lng": 133.23,
-      "address": "鳥取県",
-      "order": 2
+      "lat": 35.546124,
+      "lng": 133.228746,
+      "order": 2,
+      "address": "鳥取県 境港市"
     },
     {
       "targetId": "t03",
-      "name": "大山寺",
-      "lat": 35.376,
-      "lng": 133.54,
-      "address": "鳥取県",
-      "order": 3
+      "name": "大山",
+      "lat": 35.371188,
+      "lng": 133.543167,
+      "order": 3,
+      "address": "鳥取県 大山町"
+    },
+    {
+      "targetId": "t04",
+      "name": "浦富海岸",
+      "lat": 35.590201,
+      "lng": 134.295381,
+      "order": 4,
+      "address": "鳥取県 岩美町"
+    },
+    {
+      "targetId": "t05",
+      "name": "砂の美術館",
+      "lat": 35.539652,
+      "lng": 134.238344,
+      "order": 5,
+      "address": "鳥取県 鳥取市"
     }
   ]
 }

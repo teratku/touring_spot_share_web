@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（栃木県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（栃木県）。data/prefecture-recommend/tochigi.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-tochigi-recommend-2026",
   "name": "栃木県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "日光東照宮",
-      "lat": 36.758,
-      "lng": 139.599,
-      "address": "栃木県",
-      "order": 1
+      "lat": 36.757638,
+      "lng": 139.59911,
+      "order": 1,
+      "address": "栃木県 日光市"
     },
     {
       "targetId": "t02",
       "name": "華厳の滝",
-      "lat": 36.739,
-      "lng": 139.503,
-      "address": "栃木県",
-      "order": 2
+      "lat": 36.737944,
+      "lng": 139.504049,
+      "order": 2,
+      "address": "栃木県 日光市"
     },
     {
       "targetId": "t03",
       "name": "あしかがフラワーパーク",
-      "lat": 36.315,
-      "lng": 139.52,
-      "address": "栃木県",
-      "order": 3
+      "lat": 36.315158,
+      "lng": 139.518393,
+      "order": 3,
+      "address": "栃木県 足利市"
+    },
+    {
+      "targetId": "t04",
+      "name": "中禅寺湖",
+      "lat": 36.736849,
+      "lng": 139.476868,
+      "order": 4,
+      "address": "栃木県 日光市"
+    },
+    {
+      "targetId": "t05",
+      "name": "鬼怒川温泉",
+      "lat": 36.822576,
+      "lng": 139.716697,
+      "order": 5,
+      "address": "栃木県 日光市"
+    },
+    {
+      "targetId": "t06",
+      "name": "那須高原",
+      "lat": 37.074705,
+      "lng": 140.005252,
+      "order": 6,
+      "address": "栃木県 那須町"
     }
   ]
 }

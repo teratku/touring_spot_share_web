@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（石川県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（石川県）。data/prefecture-recommend/ishikawa.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-ishikawa-recommend-2026",
   "name": "石川県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "兼六園",
-      "lat": 36.562,
-      "lng": 136.6624,
-      "address": "石川県",
-      "order": 1
+      "lat": 36.562427,
+      "lng": 136.662355,
+      "order": 1,
+      "address": "石川県 金沢市"
     },
     {
       "targetId": "t02",
       "name": "ひがし茶屋街",
-      "lat": 36.572,
-      "lng": 136.668,
-      "address": "石川県",
-      "order": 2
+      "lat": 36.572556,
+      "lng": 136.666676,
+      "order": 2,
+      "address": "石川県 金沢市"
     },
     {
       "targetId": "t03",
       "name": "千里浜なぎさドライブウェイ",
-      "lat": 36.82,
-      "lng": 136.77,
-      "address": "石川県",
-      "order": 3
+      "lat": 36.879142,
+      "lng": 136.762112,
+      "order": 3,
+      "address": "石川県 羽咋市"
+    },
+    {
+      "targetId": "t04",
+      "name": "金沢城公園",
+      "lat": 36.565762,
+      "lng": 136.659447,
+      "order": 4,
+      "address": "石川県 金沢市"
+    },
+    {
+      "targetId": "t05",
+      "name": "近江町市場",
+      "lat": 36.572535,
+      "lng": 136.655325,
+      "order": 5,
+      "address": "石川県 金沢市"
+    },
+    {
+      "targetId": "t06",
+      "name": "白米千枚田",
+      "lat": 37.425699,
+      "lng": 136.999029,
+      "order": 6,
+      "address": "石川県 輪島市"
     }
   ]
 }

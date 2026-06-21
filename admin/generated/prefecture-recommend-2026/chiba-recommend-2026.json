@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（千葉県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（千葉県）。data/prefecture-recommend/chiba.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-chiba-recommend-2026",
   "name": "千葉県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "鋸山",
-      "lat": 35.1583,
-      "lng": 139.8253,
-      "address": "千葉県",
-      "order": 1
+      "lat": 35.158571,
+      "lng": 139.828853,
+      "order": 1,
+      "address": "千葉県 鋸南町"
     },
     {
       "targetId": "t02",
       "name": "犬吠埼灯台",
-      "lat": 35.7075,
-      "lng": 140.8694,
-      "address": "千葉県",
-      "order": 2
+      "lat": 35.707913,
+      "lng": 140.868526,
+      "order": 2,
+      "address": "千葉県 銚子市"
     },
     {
       "targetId": "t03",
       "name": "成田山新勝寺",
-      "lat": 35.786,
-      "lng": 140.318,
-      "address": "千葉県",
-      "order": 3
+      "lat": 35.786331,
+      "lng": 140.317224,
+      "order": 3,
+      "address": "千葉県 成田市"
+    },
+    {
+      "targetId": "t04",
+      "name": "マザー牧場",
+      "lat": 35.245921,
+      "lng": 139.934083,
+      "order": 4,
+      "address": "千葉県 富津市"
+    },
+    {
+      "targetId": "t05",
+      "name": "養老渓谷",
+      "lat": 35.266436,
+      "lng": 140.159604,
+      "order": 5,
+      "address": "千葉県 市原市"
+    },
+    {
+      "targetId": "t06",
+      "name": "鴨川シーワールド",
+      "lat": 35.115246,
+      "lng": 140.119032,
+      "order": 6,
+      "address": "千葉県 鴨川市"
     }
   ]
 }

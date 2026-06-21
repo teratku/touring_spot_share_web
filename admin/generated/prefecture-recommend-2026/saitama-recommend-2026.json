@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（埼玉県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（埼玉県）。data/prefecture-recommend/saitama.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-saitama-recommend-2026",
   "name": "埼玉県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,43 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "川越 時の鐘",
-      "lat": 35.9255,
-      "lng": 139.484,
-      "address": "埼玉県",
-      "order": 1
+      "name": "長瀞",
+      "lat": 36.095295,
+      "lng": 139.112497,
+      "order": 1,
+      "address": "埼玉県 長瀞町"
     },
     {
       "targetId": "t02",
-      "name": "長瀞",
-      "lat": 36.088,
-      "lng": 139.113,
-      "address": "埼玉県",
-      "order": 2
+      "name": "三峯神社",
+      "lat": 35.925665,
+      "lng": 138.929831,
+      "order": 2,
+      "address": "埼玉県 秩父市"
     },
     {
       "targetId": "t03",
-      "name": "三峯神社",
-      "lat": 35.921,
-      "lng": 138.932,
-      "address": "埼玉県",
-      "order": 3
+      "name": "鉄道博物館",
+      "lat": 35.921729,
+      "lng": 139.617861,
+      "order": 3,
+      "address": "埼玉県 さいたま市"
+    },
+    {
+      "targetId": "t04",
+      "name": "羊山公園",
+      "lat": 35.98532,
+      "lng": 139.088313,
+      "order": 4,
+      "address": "埼玉県 秩父市"
+    },
+    {
+      "targetId": "t05",
+      "name": "秩父神社",
+      "lat": 35.997582,
+      "lng": 139.084245,
+      "order": 5,
+      "address": "埼玉県 秩父市"
     }
   ]
 }

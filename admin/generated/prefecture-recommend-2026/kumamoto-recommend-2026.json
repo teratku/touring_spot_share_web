@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（熊本県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（熊本県）。data/prefecture-recommend/kumamoto.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-kumamoto-recommend-2026",
   "name": "熊本県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "熊本城",
-      "lat": 32.806,
-      "lng": 130.706,
-      "address": "熊本県",
-      "order": 1
+      "lat": 32.805269,
+      "lng": 130.705464,
+      "order": 1,
+      "address": "熊本県 熊本市"
     },
     {
       "targetId": "t02",
-      "name": "阿蘇 草千里ヶ浜",
-      "lat": 32.884,
-      "lng": 131.085,
-      "address": "熊本県",
-      "order": 2
+      "name": "草千里ヶ浜",
+      "lat": 32.881466,
+      "lng": 131.053547,
+      "order": 2,
+      "address": "熊本県 南阿蘇村"
     },
     {
       "targetId": "t03",
       "name": "黒川温泉",
-      "lat": 33.095,
-      "lng": 131.143,
-      "address": "熊本県",
-      "order": 3
+      "lat": 33.077713,
+      "lng": 131.141938,
+      "order": 3,
+      "address": "熊本県 南小国町"
+    },
+    {
+      "targetId": "t04",
+      "name": "通潤橋",
+      "lat": 32.681497,
+      "lng": 130.993894,
+      "order": 4,
+      "address": "熊本県 山都町"
+    },
+    {
+      "targetId": "t05",
+      "name": "鍋ヶ滝",
+      "lat": 33.137686,
+      "lng": 131.035323,
+      "order": 5,
+      "address": "熊本県 小国町"
+    },
+    {
+      "targetId": "t06",
+      "name": "水前寺成趣園",
+      "lat": 32.790744,
+      "lng": 130.734899,
+      "order": 6,
+      "address": "熊本県 熊本市"
     }
   ]
 }

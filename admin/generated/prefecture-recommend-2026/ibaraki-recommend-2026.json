@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（茨城県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（茨城県）。data/prefecture-recommend/ibaraki.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-ibaraki-recommend-2026",
   "name": "茨城県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "国営ひたち海浜公園",
-      "lat": 36.403,
-      "lng": 140.59,
-      "address": "茨城県",
-      "order": 1
+      "lat": 36.402528,
+      "lng": 140.594347,
+      "order": 1,
+      "address": "茨城県 ひたちなか市"
     },
     {
       "targetId": "t02",
       "name": "袋田の滝",
-      "lat": 36.77,
-      "lng": 140.4,
-      "address": "茨城県",
-      "order": 2
+      "lat": 36.764617,
+      "lng": 140.407251,
+      "order": 2,
+      "address": "茨城県 大子町"
     },
     {
       "targetId": "t03",
       "name": "偕楽園",
-      "lat": 36.376,
-      "lng": 140.452,
-      "address": "茨城県",
-      "order": 3
+      "lat": 36.375135,
+      "lng": 140.453545,
+      "order": 3,
+      "address": "茨城県 水戸市"
+    },
+    {
+      "targetId": "t04",
+      "name": "牛久大仏",
+      "lat": 35.982645,
+      "lng": 140.220248,
+      "order": 4,
+      "address": "茨城県 牛久市"
+    },
+    {
+      "targetId": "t05",
+      "name": "竜神大吊橋",
+      "lat": 36.683857,
+      "lng": 140.465828,
+      "order": 5,
+      "address": "茨城県 常陸太田市"
+    },
+    {
+      "targetId": "t06",
+      "name": "大洗磯前神社",
+      "lat": 36.315807,
+      "lng": 140.587752,
+      "order": 6,
+      "address": "茨城県 大洗町"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（北海道）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（北海道）。data/prefecture-recommend/hokkaido.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-hokkaido-recommend-2026",
   "name": "北海道 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,67 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "五稜郭",
-      "lat": 41.7969,
-      "lng": 140.757,
-      "address": "北海道",
-      "order": 1
+      "name": "オトンルイ風力発電所",
+      "lat": 44.976019,
+      "lng": 141.698107,
+      "order": 1,
+      "address": "北海道 幌延町"
     },
     {
       "targetId": "t02",
-      "name": "函館山展望台",
-      "lat": 41.7585,
-      "lng": 140.7042,
-      "address": "北海道",
-      "order": 2
+      "name": "旭山動物園",
+      "lat": 43.768642,
+      "lng": 142.479273,
+      "order": 2,
+      "address": "北海道 旭川市"
     },
     {
       "targetId": "t03",
-      "name": "摩周湖 第一展望台",
-      "lat": 43.5803,
-      "lng": 144.53,
-      "address": "北海道",
-      "order": 3
+      "name": "五稜郭",
+      "lat": 41.7968,
+      "lng": 140.757033,
+      "order": 3,
+      "address": "北海道 函館市"
+    },
+    {
+      "targetId": "t04",
+      "name": "小樽運河",
+      "lat": 43.202023,
+      "lng": 141.0006,
+      "order": 4,
+      "address": "北海道 小樽市"
+    },
+    {
+      "targetId": "t05",
+      "name": "青い池 美瑛",
+      "lat": 43.49349,
+      "lng": 142.614098,
+      "order": 5,
+      "address": "北海道 美瑛町"
+    },
+    {
+      "targetId": "t06",
+      "name": "天に続く道展望台",
+      "lat": 43.906401,
+      "lng": 144.785545,
+      "order": 6,
+      "address": "北海道 斜里町"
+    },
+    {
+      "targetId": "t07",
+      "name": "函館山",
+      "lat": 41.759319,
+      "lng": 140.703984,
+      "order": 7,
+      "address": "北海道 函館市"
+    },
+    {
+      "targetId": "t08",
+      "name": "摩周湖",
+      "lat": 43.578919,
+      "lng": 144.517032,
+      "order": 8,
+      "address": "北海道 弟子屈町"
     }
   ]
 }

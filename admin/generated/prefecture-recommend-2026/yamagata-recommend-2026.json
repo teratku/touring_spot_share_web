@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（山形県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（山形県）。data/prefecture-recommend/yamagata.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-yamagata-recommend-2026",
   "name": "山形県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,35 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "山寺 立石寺",
-      "lat": 38.312,
-      "lng": 140.436,
-      "address": "山形県",
-      "order": 1
+      "name": "銀山温泉",
+      "lat": 38.570419,
+      "lng": 140.530069,
+      "order": 1,
+      "address": "山形県 尾花沢市"
     },
     {
       "targetId": "t02",
-      "name": "銀山温泉",
-      "lat": 38.576,
-      "lng": 140.53,
-      "address": "山形県",
-      "order": 2
+      "name": "蔵王温泉",
+      "lat": 38.167662,
+      "lng": 140.396972,
+      "order": 2,
+      "address": "山形県 山形市"
     },
     {
       "targetId": "t03",
-      "name": "蔵王温泉",
-      "lat": 38.17,
-      "lng": 140.4,
-      "address": "山形県",
-      "order": 3
+      "name": "山形城跡",
+      "lat": 38.246392,
+      "lng": 140.334197,
+      "order": 3,
+      "address": "山形県 山形市"
+    },
+    {
+      "targetId": "t04",
+      "name": "最上峡",
+      "lat": 38.752989,
+      "lng": 140.307708,
+      "order": 4,
+      "address": "山形県 新庄市"
     }
   ]
 }

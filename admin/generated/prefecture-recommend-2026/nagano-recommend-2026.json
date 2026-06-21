@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（長野県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（長野県）。data/prefecture-recommend/nagano.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-nagano-recommend-2026",
   "name": "長野県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "善光寺",
-      "lat": 36.6614,
-      "lng": 138.187,
-      "address": "長野県",
-      "order": 1
+      "lat": 36.661423,
+      "lng": 138.187658,
+      "order": 1,
+      "address": "長野県 長野市"
     },
     {
       "targetId": "t02",
-      "name": "上高地 河童橋",
-      "lat": 36.252,
-      "lng": 137.638,
-      "address": "長野県",
-      "order": 2
+      "name": "上高地",
+      "lat": 36.25393,
+      "lng": 137.660941,
+      "order": 2,
+      "address": "長野県 松本市"
     },
     {
       "targetId": "t03",
       "name": "松本城",
-      "lat": 36.2384,
-      "lng": 137.969,
-      "address": "長野県",
-      "order": 3
+      "lat": 36.238635,
+      "lng": 137.968871,
+      "order": 3,
+      "address": "長野県 松本市"
+    },
+    {
+      "targetId": "t04",
+      "name": "地獄谷野猿公苑",
+      "lat": 36.732812,
+      "lng": 138.462319,
+      "order": 4,
+      "address": "長野県 山ノ内町"
+    },
+    {
+      "targetId": "t05",
+      "name": "諏訪大社",
+      "lat": 36.01969,
+      "lng": 138.131229,
+      "order": 5,
+      "address": "長野県 諏訪市"
+    },
+    {
+      "targetId": "t06",
+      "name": "千畳敷カール",
+      "lat": 35.780249,
+      "lng": 137.813822,
+      "order": 6,
+      "address": "長野県 宮田村"
     }
   ]
 }

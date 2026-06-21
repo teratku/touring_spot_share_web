@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（三重県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（三重県）。data/prefecture-recommend/mie.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-mie-recommend-2026",
   "name": "三重県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,51 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "伊勢神宮 内宮",
-      "lat": 34.455,
-      "lng": 136.7256,
-      "address": "三重県",
-      "order": 1
+      "name": "伊勢神宮",
+      "lat": 34.45689,
+      "lng": 136.722978,
+      "order": 1,
+      "address": "三重県 伊勢市"
     },
     {
       "targetId": "t02",
-      "name": "二見興玉神社 夫婦岩",
-      "lat": 34.513,
-      "lng": 136.787,
-      "address": "三重県",
-      "order": 2
+      "name": "夫婦岩",
+      "lat": 34.301623,
+      "lng": 136.851144,
+      "order": 2,
+      "address": "三重県 志摩市"
     },
     {
       "targetId": "t03",
       "name": "鈴鹿サーキット",
-      "lat": 34.843,
-      "lng": 136.534,
-      "address": "三重県",
-      "order": 3
+      "lat": 34.843609,
+      "lng": 136.534231,
+      "order": 3,
+      "address": "三重県 鈴鹿市"
+    },
+    {
+      "targetId": "t04",
+      "name": "なばなの里",
+      "lat": 35.079906,
+      "lng": 136.704865,
+      "order": 4,
+      "address": "三重県 桑名市"
+    },
+    {
+      "targetId": "t05",
+      "name": "熊野古道",
+      "lat": 33.938477,
+      "lng": 136.163013,
+      "order": 5,
+      "address": "三重県 熊野市"
+    },
+    {
+      "targetId": "t06",
+      "name": "横山展望台",
+      "lat": 34.331867,
+      "lng": 136.799017,
+      "order": 6,
+      "address": "三重県 志摩市"
     }
   ]
 }

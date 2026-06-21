@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（高知県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（高知県）。data/prefecture-recommend/kochi.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-kochi-recommend-2026",
   "name": "高知県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "桂浜",
-      "lat": 33.497,
-      "lng": 133.574,
-      "address": "高知県",
-      "order": 1
+      "lat": 33.497107,
+      "lng": 133.574456,
+      "order": 1,
+      "address": "高知県 高知市"
     },
     {
       "targetId": "t02",
-      "name": "四万十川 佐田沈下橋",
-      "lat": 33,
-      "lng": 132.93,
-      "address": "高知県",
-      "order": 2
+      "name": "四万十川",
+      "lat": 33.193036,
+      "lng": 132.969541,
+      "order": 2,
+      "address": "高知県"
     },
     {
       "targetId": "t03",
       "name": "室戸岬",
-      "lat": 33.247,
-      "lng": 134.176,
-      "address": "高知県",
-      "order": 3
+      "lat": 33.24358,
+      "lng": 134.176834,
+      "order": 3,
+      "address": "高知県 室戸市"
+    },
+    {
+      "targetId": "t04",
+      "name": "高知城",
+      "lat": 33.560691,
+      "lng": 133.531459,
+      "order": 4,
+      "address": "高知県 高知市"
+    },
+    {
+      "targetId": "t05",
+      "name": "仁淀川",
+      "lat": 33.576859,
+      "lng": 133.184212,
+      "order": 5,
+      "address": "高知県"
+    },
+    {
+      "targetId": "t06",
+      "name": "龍河洞",
+      "lat": 33.603136,
+      "lng": 133.745216,
+      "order": 6,
+      "address": "高知県 香美市"
     }
   ]
 }

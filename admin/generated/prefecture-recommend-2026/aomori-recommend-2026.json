@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（青森県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（青森県）。data/prefecture-recommend/aomori.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-aomori-recommend-2026",
   "name": "青森県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,43 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "弘前城",
-      "lat": 40.6076,
-      "lng": 140.464,
-      "address": "青森県",
-      "order": 1
+      "name": "恐山",
+      "lat": 41.316949,
+      "lng": 141.087676,
+      "order": 1,
+      "address": "青森県 むつ市"
     },
     {
       "targetId": "t02",
-      "name": "奥入瀬渓流 石ヶ戸",
-      "lat": 40.555,
-      "lng": 140.943,
-      "address": "青森県",
-      "order": 2
+      "name": "弘前城",
+      "lat": 40.607929,
+      "lng": 140.463661,
+      "order": 2,
+      "address": "青森県 弘前市"
     },
     {
       "targetId": "t03",
+      "name": "種差海岸",
+      "lat": 40.50705,
+      "lng": 141.607264,
+      "order": 3,
+      "address": "青森県 八戸市"
+    },
+    {
+      "targetId": "t04",
+      "name": "十和田湖",
+      "lat": 40.458655,
+      "lng": 140.87113,
+      "order": 4,
+      "address": "青森県 十和田市"
+    },
+    {
+      "targetId": "t05",
       "name": "八甲田ロープウェー",
-      "lat": 40.651,
-      "lng": 140.878,
-      "address": "青森県",
-      "order": 3
+      "lat": 40.678382,
+      "lng": 140.845338,
+      "order": 5,
+      "address": "青森県 青森市"
     }
   ]
 }

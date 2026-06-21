@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（和歌山県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（和歌山県）。data/prefecture-recommend/wakayama.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-wakayama-recommend-2026",
   "name": "和歌山県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,35 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "那智の滝",
-      "lat": 33.672,
-      "lng": 135.89,
-      "address": "和歌山県",
-      "order": 1
+      "name": "高野山",
+      "lat": 34.212105,
+      "lng": 135.582004,
+      "order": 1,
+      "address": "和歌山県 高野町"
     },
     {
       "targetId": "t02",
-      "name": "高野山 金剛峯寺",
-      "lat": 34.213,
-      "lng": 135.584,
-      "address": "和歌山県",
-      "order": 2
+      "name": "熊野本宮大社",
+      "lat": 33.840351,
+      "lng": 135.773633,
+      "order": 2,
+      "address": "和歌山県 田辺市"
     },
     {
       "targetId": "t03",
-      "name": "白浜 円月島",
-      "lat": 33.694,
-      "lng": 135.337,
-      "address": "和歌山県",
-      "order": 3
+      "name": "アドベンチャーワールド",
+      "lat": 33.6659,
+      "lng": 135.372434,
+      "order": 3,
+      "address": "和歌山県 白浜町"
+    },
+    {
+      "targetId": "t04",
+      "name": "友ヶ島",
+      "lat": 34.279453,
+      "lng": 134.980441,
+      "order": 4,
+      "address": "和歌山県 和歌山市"
     }
   ]
 }

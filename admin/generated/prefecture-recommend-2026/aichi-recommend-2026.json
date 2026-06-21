@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（愛知県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（愛知県）。data/prefecture-recommend/aichi.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-aichi-recommend-2026",
   "name": "愛知県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "名古屋城",
-      "lat": 35.1856,
-      "lng": 136.8997,
-      "address": "愛知県",
-      "order": 1
+      "lat": 35.184396,
+      "lng": 136.900099,
+      "order": 1,
+      "address": "愛知県 名古屋市"
     },
     {
       "targetId": "t02",
       "name": "熱田神宮",
-      "lat": 35.128,
-      "lng": 136.908,
-      "address": "愛知県",
-      "order": 2
+      "lat": 35.125431,
+      "lng": 136.909254,
+      "order": 2,
+      "address": "愛知県 名古屋市"
     },
     {
       "targetId": "t03",
       "name": "犬山城",
-      "lat": 35.388,
-      "lng": 136.939,
-      "address": "愛知県",
-      "order": 3
+      "lat": 35.38833,
+      "lng": 136.939278,
+      "order": 3,
+      "address": "愛知県 犬山市"
+    },
+    {
+      "targetId": "t04",
+      "name": "トヨタ産業技術記念館",
+      "lat": 35.182512,
+      "lng": 136.876525,
+      "order": 4,
+      "address": "愛知県 名古屋市"
+    },
+    {
+      "targetId": "t05",
+      "name": "香嵐渓",
+      "lat": 35.130446,
+      "lng": 137.316073,
+      "order": 5,
+      "address": "愛知県 豊田市"
+    },
+    {
+      "targetId": "t06",
+      "name": "博物館明治村",
+      "lat": 35.344124,
+      "lng": 136.990506,
+      "order": 6,
+      "address": "愛知県 犬山市"
     }
   ]
 }

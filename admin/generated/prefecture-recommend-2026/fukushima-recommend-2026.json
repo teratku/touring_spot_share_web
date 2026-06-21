@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（福島県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（福島県）。data/prefecture-recommend/fukushima.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-fukushima-recommend-2026",
   "name": "福島県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,51 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "鶴ヶ城（会津若松城）",
-      "lat": 37.4877,
-      "lng": 139.9296,
-      "address": "福島県",
-      "order": 1
+      "name": "鶴ヶ城",
+      "lat": 37.487735,
+      "lng": 139.929766,
+      "order": 1,
+      "address": "福島県 会津若松市"
     },
     {
       "targetId": "t02",
       "name": "五色沼",
-      "lat": 37.668,
-      "lng": 140.07,
-      "address": "福島県",
-      "order": 2
+      "lat": 37.740628,
+      "lng": 140.243175,
+      "order": 2,
+      "address": "福島県 福島市"
     },
     {
       "targetId": "t03",
       "name": "大内宿",
-      "lat": 37.336,
-      "lng": 139.858,
-      "address": "福島県",
-      "order": 3
+      "lat": 37.333629,
+      "lng": 139.860662,
+      "order": 3,
+      "address": "福島県 下郷町"
+    },
+    {
+      "targetId": "t04",
+      "name": "あぶくま洞",
+      "lat": 37.344769,
+      "lng": 140.672899,
+      "order": 4,
+      "address": "福島県 田村市"
+    },
+    {
+      "targetId": "t05",
+      "name": "塔のへつり",
+      "lat": 37.274819,
+      "lng": 139.901839,
+      "order": 5,
+      "address": "福島県 下郷町"
+    },
+    {
+      "targetId": "t06",
+      "name": "飯盛山",
+      "lat": 37.503585,
+      "lng": 139.955933,
+      "order": 6,
+      "address": "福島県 会津若松市"
     }
   ]
 }

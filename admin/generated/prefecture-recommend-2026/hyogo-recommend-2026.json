@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（兵庫県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（兵庫県）。data/prefecture-recommend/hyogo.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-hyogo-recommend-2026",
   "name": "兵庫県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,42 @@
     {
       "targetId": "t01",
       "name": "姫路城",
-      "lat": 34.8394,
-      "lng": 134.6939,
-      "address": "兵庫県",
-      "order": 1
+      "lat": 34.839331,
+      "lng": 134.69402,
+      "order": 1,
+      "address": "兵庫県 姫路市"
     },
     {
       "targetId": "t02",
-      "name": "神戸 北野異人館",
-      "lat": 34.7,
-      "lng": 135.19,
-      "address": "兵庫県",
-      "order": 2
+      "name": "北野異人館",
+      "lat": 34.70097,
+      "lng": 135.191278,
+      "order": 2,
+      "address": "兵庫県 神戸市"
     },
     {
       "targetId": "t03",
-      "name": "竹田城跡",
-      "lat": 35.3,
-      "lng": 134.829,
-      "address": "兵庫県",
-      "order": 3
+      "name": "有馬温泉",
+      "lat": 34.799256,
+      "lng": 135.246275,
+      "order": 3,
+      "address": "兵庫県 神戸市"
+    },
+    {
+      "targetId": "t04",
+      "name": "城崎温泉",
+      "lat": 35.62371,
+      "lng": 134.813557,
+      "order": 4,
+      "address": "兵庫県 豊岡市"
+    },
+    {
+      "targetId": "t05",
+      "name": "明石海峡大橋",
+      "lat": 34.616641,
+      "lng": 135.020881,
+      "order": 5,
+      "address": "兵庫県 淡路市"
     }
   ]
 }

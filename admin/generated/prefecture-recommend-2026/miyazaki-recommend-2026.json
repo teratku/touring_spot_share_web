@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（宮崎県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（宮崎県）。data/prefecture-recommend/miyazaki.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-miyazaki-recommend-2026",
   "name": "宮崎県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "高千穂峡",
-      "lat": 32.715,
-      "lng": 131.305,
-      "address": "宮崎県",
-      "order": 1
+      "lat": 32.701785,
+      "lng": 131.300939,
+      "order": 1,
+      "address": "宮崎県 高千穂町"
     },
     {
       "targetId": "t02",
       "name": "鵜戸神宮",
-      "lat": 31.648,
-      "lng": 131.466,
-      "address": "宮崎県",
-      "order": 2
+      "lat": 31.649165,
+      "lng": 131.466117,
+      "order": 2,
+      "address": "宮崎県 日南市"
     },
     {
       "targetId": "t03",
       "name": "青島神社",
-      "lat": 31.8,
-      "lng": 131.473,
-      "address": "宮崎県",
-      "order": 3
+      "lat": 31.804413,
+      "lng": 131.475092,
+      "order": 3,
+      "address": "宮崎県 宮崎市"
+    },
+    {
+      "targetId": "t04",
+      "name": "天安河原",
+      "lat": 32.73787,
+      "lng": 131.353234,
+      "order": 4,
+      "address": "宮崎県 高千穂町"
+    },
+    {
+      "targetId": "t05",
+      "name": "都井岬",
+      "lat": 31.367013,
+      "lng": 131.341767,
+      "order": 5,
+      "address": "宮崎県 串間市"
+    },
+    {
+      "targetId": "t06",
+      "name": "堀切峠",
+      "lat": 31.776825,
+      "lng": 131.482161,
+      "order": 6,
+      "address": "宮崎県 宮崎市"
     }
   ]
 }

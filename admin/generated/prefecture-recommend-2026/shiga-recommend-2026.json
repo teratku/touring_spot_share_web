@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（滋賀県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（滋賀県）。data/prefecture-recommend/shiga.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-shiga-recommend-2026",
   "name": "滋賀県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,42 @@
     {
       "targetId": "t01",
       "name": "彦根城",
-      "lat": 35.2767,
-      "lng": 136.2515,
-      "address": "滋賀県",
-      "order": 1
+      "lat": 35.277101,
+      "lng": 136.251717,
+      "order": 1,
+      "address": "滋賀県 彦根市"
     },
     {
       "targetId": "t02",
       "name": "白鬚神社",
-      "lat": 35.273,
-      "lng": 135.947,
-      "address": "滋賀県",
-      "order": 2
+      "lat": 35.274579,
+      "lng": 136.011135,
+      "order": 2,
+      "address": "滋賀県 高島市"
     },
     {
       "targetId": "t03",
       "name": "メタセコイア並木",
-      "lat": 35.418,
-      "lng": 136.056,
-      "address": "滋賀県",
-      "order": 3
+      "lat": 35.46682,
+      "lng": 136.035876,
+      "order": 3,
+      "address": "滋賀県 高島市"
+    },
+    {
+      "targetId": "t04",
+      "name": "比叡山延暦寺",
+      "lat": 35.071036,
+      "lng": 135.865584,
+      "order": 4,
+      "address": "滋賀県 大津市"
+    },
+    {
+      "targetId": "t05",
+      "name": "三井寺",
+      "lat": 35.013061,
+      "lng": 135.859564,
+      "order": 5,
+      "address": "滋賀県 大津市"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（広島県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（広島県）。data/prefecture-recommend/hiroshima.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-hiroshima-recommend-2026",
   "name": "広島県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "厳島神社",
-      "lat": 34.2959,
-      "lng": 132.3197,
-      "address": "広島県",
-      "order": 1
+      "lat": 34.296542,
+      "lng": 132.319008,
+      "order": 1,
+      "address": "広島県 廿日市市"
     },
     {
       "targetId": "t02",
       "name": "原爆ドーム",
-      "lat": 34.3955,
-      "lng": 132.4536,
-      "address": "広島県",
-      "order": 2
+      "lat": 34.395466,
+      "lng": 132.453524,
+      "order": 2,
+      "address": "広島県 広島市"
     },
     {
       "targetId": "t03",
-      "name": "尾道 千光寺",
-      "lat": 34.412,
-      "lng": 133.198,
-      "address": "広島県",
-      "order": 3
+      "name": "千光寺",
+      "lat": 34.410365,
+      "lng": 133.198685,
+      "order": 3,
+      "address": "広島県 尾道市"
+    },
+    {
+      "targetId": "t04",
+      "name": "平和記念公園",
+      "lat": 34.393171,
+      "lng": 132.452301,
+      "order": 4,
+      "address": "広島県 広島市"
+    },
+    {
+      "targetId": "t05",
+      "name": "大久野島",
+      "lat": 34.309121,
+      "lng": 132.993759,
+      "order": 5,
+      "address": "広島県 竹原市"
+    },
+    {
+      "targetId": "t06",
+      "name": "縮景園",
+      "lat": 34.400327,
+      "lng": 132.467445,
+      "order": 6,
+      "address": "広島県 広島市"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（新潟県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（新潟県）。data/prefecture-recommend/niigata.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-niigata-recommend-2026",
   "name": "新潟県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,42 @@
     {
       "targetId": "t01",
       "name": "弥彦神社",
-      "lat": 37.706,
-      "lng": 138.829,
-      "address": "新潟県",
-      "order": 1
+      "lat": 37.70691,
+      "lng": 138.826216,
+      "order": 1,
+      "address": "新潟県 弥彦村"
     },
     {
       "targetId": "t02",
       "name": "清津峡",
-      "lat": 37.076,
-      "lng": 138.74,
-      "address": "新潟県",
-      "order": 2
+      "lat": 36.986338,
+      "lng": 138.744153,
+      "order": 2,
+      "address": "新潟県 十日町市"
     },
     {
       "targetId": "t03",
-      "name": "佐渡 史跡佐渡金山",
-      "lat": 38.042,
-      "lng": 138.26,
-      "address": "新潟県",
-      "order": 3
+      "name": "星峠の棚田",
+      "lat": 37.124235,
+      "lng": 138.529651,
+      "order": 3,
+      "address": "新潟県 十日町市"
+    },
+    {
+      "targetId": "t04",
+      "name": "笹川流れ",
+      "lat": 38.391576,
+      "lng": 139.456734,
+      "order": 4,
+      "address": "新潟県 村上市"
+    },
+    {
+      "targetId": "t05",
+      "name": "苗場",
+      "lat": 36.845942,
+      "lng": 138.690323,
+      "order": 5,
+      "address": "新潟県 津南町"
     }
   ]
 }

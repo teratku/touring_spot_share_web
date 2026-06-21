@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（大分県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（大分県）。data/prefecture-recommend/oita.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-oita-recommend-2026",
   "name": "大分県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,43 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "別府 海地獄",
-      "lat": 33.301,
-      "lng": 131.487,
-      "address": "大分県",
-      "order": 1
+      "name": "海地獄",
+      "lat": 33.315888,
+      "lng": 131.469683,
+      "order": 1,
+      "address": "大分県 別府市"
     },
     {
       "targetId": "t02",
-      "name": "由布院 金鱗湖",
-      "lat": 33.264,
-      "lng": 131.372,
-      "address": "大分県",
-      "order": 2
+      "name": "九重夢大吊橋",
+      "lat": 33.174177,
+      "lng": 131.227066,
+      "order": 2,
+      "address": "大分県 九重町"
     },
     {
       "targetId": "t03",
-      "name": "九重夢大吊橋",
-      "lat": 33.17,
-      "lng": 131.248,
-      "address": "大分県",
-      "order": 3
+      "name": "別府温泉",
+      "lat": 33.276778,
+      "lng": 131.502681,
+      "order": 3,
+      "address": "大分県 別府市"
+    },
+    {
+      "targetId": "t04",
+      "name": "宇佐神宮",
+      "lat": 33.525433,
+      "lng": 131.375199,
+      "order": 4,
+      "address": "大分県 宇佐市"
+    },
+    {
+      "targetId": "t05",
+      "name": "原尻の滝",
+      "lat": 32.964379,
+      "lng": 131.451172,
+      "order": 5,
+      "address": "大分県 豊後大野市"
     }
   ]
 }

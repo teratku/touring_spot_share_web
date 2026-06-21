@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（福岡県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（福岡県）。data/prefecture-recommend/fukuoka.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-fukuoka-recommend-2026",
   "name": "福岡県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "太宰府天満宮",
-      "lat": 33.521,
-      "lng": 130.535,
-      "address": "福岡県",
-      "order": 1
+      "lat": 33.519665,
+      "lng": 130.533089,
+      "order": 1,
+      "address": "福岡県 太宰府市"
     },
     {
       "targetId": "t02",
       "name": "福岡タワー",
-      "lat": 33.593,
-      "lng": 130.352,
-      "address": "福岡県",
-      "order": 2
+      "lat": 33.593274,
+      "lng": 130.351486,
+      "order": 2,
+      "address": "福岡県 福岡市"
     },
     {
       "targetId": "t03",
       "name": "門司港レトロ",
-      "lat": 33.943,
-      "lng": 130.963,
-      "address": "福岡県",
-      "order": 3
+      "lat": 33.94374,
+      "lng": 130.963507,
+      "order": 3,
+      "address": "福岡県 北九州市"
+    },
+    {
+      "targetId": "t04",
+      "name": "櫛田神社",
+      "lat": 33.59307,
+      "lng": 130.410684,
+      "order": 4,
+      "address": "福岡県 福岡市"
+    },
+    {
+      "targetId": "t05",
+      "name": "海の中道海浜公園",
+      "lat": 33.662627,
+      "lng": 130.355711,
+      "order": 5,
+      "address": "福岡県 福岡市"
+    },
+    {
+      "targetId": "t06",
+      "name": "柳川",
+      "lat": 33.503946,
+      "lng": 130.127919,
+      "order": 6,
+      "address": "福岡県 糸島市"
     }
   ]
 }

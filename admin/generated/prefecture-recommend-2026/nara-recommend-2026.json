@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（奈良県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（奈良県）。data/prefecture-recommend/nara.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-nara-recommend-2026",
   "name": "奈良県 おすすめスポット 2026",
   "theme": "recommend",
@@ -15,27 +15,51 @@
   "targets": [
     {
       "targetId": "t01",
-      "name": "東大寺 大仏殿",
-      "lat": 34.689,
-      "lng": 135.84,
-      "address": "奈良県",
-      "order": 1
+      "name": "東大寺",
+      "lat": 34.688244,
+      "lng": 135.839757,
+      "order": 1,
+      "address": "奈良県 奈良市"
     },
     {
       "targetId": "t02",
       "name": "春日大社",
-      "lat": 34.6815,
-      "lng": 135.848,
-      "address": "奈良県",
-      "order": 2
+      "lat": 34.680506,
+      "lng": 135.846075,
+      "order": 2,
+      "address": "奈良県 奈良市"
     },
     {
       "targetId": "t03",
       "name": "法隆寺",
-      "lat": 34.6148,
-      "lng": 135.734,
-      "address": "奈良県",
-      "order": 3
+      "lat": 34.614013,
+      "lng": 135.736043,
+      "order": 3,
+      "address": "奈良県 斑鳩町"
+    },
+    {
+      "targetId": "t04",
+      "name": "奈良公園",
+      "lat": 34.682901,
+      "lng": 135.854598,
+      "order": 4,
+      "address": "奈良県 奈良市"
+    },
+    {
+      "targetId": "t05",
+      "name": "興福寺",
+      "lat": 34.682974,
+      "lng": 135.831865,
+      "order": 5,
+      "address": "奈良県 奈良市"
+    },
+    {
+      "targetId": "t06",
+      "name": "吉野山",
+      "lat": 34.360461,
+      "lng": 135.867088,
+      "order": 6,
+      "address": "奈良県 吉野町"
     }
   ]
 }

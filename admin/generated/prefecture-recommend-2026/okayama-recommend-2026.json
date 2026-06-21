@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（岡山県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（岡山県）。data/prefecture-recommend/okayama.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-okayama-recommend-2026",
   "name": "岡山県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "倉敷美観地区",
-      "lat": 34.598,
-      "lng": 133.772,
-      "address": "岡山県",
-      "order": 1
+      "lat": 34.596525,
+      "lng": 133.772586,
+      "order": 1,
+      "address": "岡山県 倉敷市"
     },
     {
       "targetId": "t02",
       "name": "岡山後楽園",
-      "lat": 34.667,
-      "lng": 133.936,
-      "address": "岡山県",
-      "order": 2
+      "lat": 34.66633,
+      "lng": 133.937395,
+      "order": 2,
+      "address": "岡山県 岡山市"
     },
     {
       "targetId": "t03",
       "name": "鷲羽山",
-      "lat": 34.435,
-      "lng": 133.81,
-      "address": "岡山県",
-      "order": 3
+      "lat": 34.435488,
+      "lng": 133.812472,
+      "order": 3,
+      "address": "岡山県 倉敷市"
+    },
+    {
+      "targetId": "t04",
+      "name": "岡山城",
+      "lat": 34.665176,
+      "lng": 133.936045,
+      "order": 4,
+      "address": "岡山県 岡山市"
+    },
+    {
+      "targetId": "t05",
+      "name": "吹屋ふるさと村",
+      "lat": 34.859621,
+      "lng": 133.47113,
+      "order": 5,
+      "address": "岡山県 高梁市"
+    },
+    {
+      "targetId": "t06",
+      "name": "蒜山高原",
+      "lat": 35.30327,
+      "lng": 133.663859,
+      "order": 6,
+      "address": "岡山県 真庭市"
     }
   ]
 }

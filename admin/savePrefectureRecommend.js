@@ -20,18 +20,25 @@ const OUT_DIR = path.join(__dirname, "data", "prefecture-recommend");
 const UA = "biketeilen-rally-builder/1.0 (local admin tool)";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function geocode(q) {
+async function queryOne(q) {
   const url =
     "https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1" +
     "&countrycodes=jp&accept-language=ja&q=" + encodeURIComponent(q);
   const r = await fetch(url, { headers: { "User-Agent": UA, "Accept-Language": "ja" } });
   if (!r.ok) return null;
   const d = await r.json();
-  if (!Array.isArray(d) || !d[0]) return null;
-  const a = d[0].address || {};
+  return Array.isArray(d) && d[0] ? d[0] : null;
+}
+
+// 「名前 県名」で検索→ヒットしなければ「名前」単独で再検索（取りこぼし回収）
+async function geocode(name, pref) {
+  let hit = await queryOne(`${name} ${pref}`);
+  if (!hit) { await sleep(1100); hit = await queryOne(name); }
+  if (!hit) return null;
+  const a = hit.address || {};
   return {
-    lat: Number(d[0].lat),
-    lng: Number(d[0].lon),
+    lat: Number(hit.lat),
+    lng: Number(hit.lon),
     address: [a.state || a.province, a.city || a.town || a.village || a.county].filter(Boolean).join(" ") || null,
   };
 }
@@ -54,7 +61,7 @@ async function main() {
     for (const name of SEED[pref]) {
       if (seen.has(name)) continue;
       let g = null;
-      try { g = await geocode(`${name} ${pref}`); } catch (_) {}
+      try { g = await geocode(name, pref); } catch (_) {}
       await sleep(1100);
       if (g && isFinite(g.lat) && isFinite(g.lng)) {
         curated.push({ name, lat: +g.lat.toFixed(6), lng: +g.lng.toFixed(6), address: g.address || pref, source: "curated" });

@@ -1,5 +1,5 @@
 {
-  "_note": "県別おすすめラリー（佐賀県）。著名観光地を選定。座標は概算のため本番前にビルダーで要確認。targetIdは固定。",
+  "_note": "県別おすすめラリー（佐賀県）。data/prefecture-recommend/saga.json から生成。座標は Nominatim 由来。targetIdは年度内固定。内容変更はビルダーで「おすすめ」を編集→再生成。",
   "rallyId": "pref-saga-recommend-2026",
   "name": "佐賀県 おすすめスポット 2026",
   "theme": "recommend",
@@ -16,26 +16,50 @@
     {
       "targetId": "t01",
       "name": "吉野ヶ里遺跡",
-      "lat": 33.324,
-      "lng": 130.387,
-      "address": "佐賀県",
-      "order": 1
+      "lat": 33.325421,
+      "lng": 130.384381,
+      "order": 1,
+      "address": "佐賀県 吉野ヶ里町"
     },
     {
       "targetId": "t02",
       "name": "祐徳稲荷神社",
-      "lat": 33.076,
-      "lng": 130.09,
-      "address": "佐賀県",
-      "order": 2
+      "lat": 33.074398,
+      "lng": 130.108065,
+      "order": 2,
+      "address": "佐賀県 鹿島市"
     },
     {
       "targetId": "t03",
       "name": "唐津城",
-      "lat": 33.453,
-      "lng": 129.979,
-      "address": "佐賀県",
-      "order": 3
+      "lat": 33.453513,
+      "lng": 129.978193,
+      "order": 3,
+      "address": "佐賀県 唐津市"
+    },
+    {
+      "targetId": "t04",
+      "name": "武雄温泉",
+      "lat": 33.196442,
+      "lng": 130.023032,
+      "order": 4,
+      "address": "佐賀県 武雄市"
+    },
+    {
+      "targetId": "t05",
+      "name": "御船山楽園",
+      "lat": 33.181909,
+      "lng": 130.018252,
+      "order": 5,
+      "address": "佐賀県 武雄市"
+    },
+    {
+      "targetId": "t06",
+      "name": "大魚神社の海中鳥居",
+      "lat": 33.031101,
+      "lng": 130.177447,
+      "order": 6,
+      "address": "佐賀県 太良町"
     }
   ]
 }
