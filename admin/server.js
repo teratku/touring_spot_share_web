@@ -50,35 +50,65 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (_req, res) => res.sendFile(path.join(__dirname, "public", "rally-builder.html")));
 
 // アプリ保存スポット（imagedownload）を地図用に整形して返す。
-// フィールド対応は web の plan-suggest.html と同一。
-// ⚠️ imagedownload 全件 read は高コストのため、メモリにキャッシュ（既定60分）。?refresh=1 で再取得。
-let spotsCache = null; // { t, limit, spots, limited }
-const SPOTS_TTL_MS = 60 * 60 * 1000;
+// 読取コスト削減：1週間メモリキャッシュ。?refresh=1 で createTimeTimeStamp による「新着のみ」差分取得して追記。
+let spotsCache = null; // { t, spots:[], byId:Set, maxTs:Timestamp|null }
+const SPOTS_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+function mapSpot(d) {
+  const x = d.data() || {};
+  const lat = Number(x.lat), lng = Number(x.lng);
+  if (!isFinite(lat) || !isFinite(lng)) return null;
+  return {
+    spotId: d.id,
+    name: x.location_name || x.locality || x.administrative || "スポット",
+    lat, lng,
+    address: x.administrative || x.locality || null,
+    imageURL: (Array.isArray(x.locationImageURLs) && x.locationImageURLs[0]) || x.iconImageURL || null,
+    _ts: x.createTimeTimeStamp || null,
+  };
+}
+function tsMs(t) { return t && typeof t.toMillis === "function" ? t.toMillis() : (typeof t === "number" ? t : 0); }
+function cleanSpots(arr) {
+  return arr.map((s) => ({ spotId: s.spotId, name: s.name, lat: s.lat, lng: s.lng, address: s.address, imageURL: s.imageURL }));
+}
 app.get("/api/spots", async (req, res) => {
   try {
-    const limit = Math.min(parseInt(req.query.limit, 10) || 6000, 30000);
     const force = req.query.refresh === "1";
-    if (!force && spotsCache && Date.now() - spotsCache.t < SPOTS_TTL_MS && spotsCache.limit >= limit) {
-      return res.json({ count: spotsCache.spots.length, limited: spotsCache.limited, cached: true, spots: spotsCache.spots });
+    const fresh = spotsCache && Date.now() - spotsCache.t < SPOTS_TTL_MS;
+
+    if (spotsCache && fresh && !force) {
+      return res.json({ count: spotsCache.spots.length, cached: true, spots: cleanSpots(spotsCache.spots) });
     }
-    const snap = await db.collection("imagedownload").limit(limit).get();
-    const spots = [];
-    snap.forEach((d) => {
-      const x = d.data() || {};
-      const lat = Number(x.lat), lng = Number(x.lng);
-      if (!isFinite(lat) || !isFinite(lng)) return;
-      spots.push({
-        spotId: d.id,
-        name: x.location_name || x.locality || x.administrative || "スポット",
-        lat,
-        lng,
-        address: x.administrative || x.locality || null,
-        imageURL: (Array.isArray(x.locationImageURLs) && x.locationImageURLs[0]) || x.iconImageURL || null,
+    if (spotsCache && force) {
+      // 新着のみ：createTimeTimeStamp > 既知の最大 だけ取得して追記
+      let q = db.collection("imagedownload");
+      if (spotsCache.maxTs) q = q.where("createTimeTimeStamp", ">", spotsCache.maxTs);
+      const snap = await q.get();
+      let added = 0;
+      snap.forEach((d) => {
+        const s = mapSpot(d);
+        if (!s || spotsCache.byId.has(s.spotId)) return;
+        spotsCache.spots.push(s);
+        spotsCache.byId.add(s.spotId);
+        if (s._ts && tsMs(s._ts) > tsMs(spotsCache.maxTs)) spotsCache.maxTs = s._ts;
+        added++;
       });
+      spotsCache.t = Date.now();
+      console.log(`📥 incremental read: +${added}（計 ${spotsCache.spots.length}）`);
+      return res.json({ count: spotsCache.spots.length, cached: false, added, spots: cleanSpots(spotsCache.spots) });
+    }
+    // 初回 or TTL切れ：全件
+    const limit = Math.min(parseInt(req.query.limit, 10) || 8000, 30000);
+    const snap = await db.collection("imagedownload").limit(limit).get();
+    const spots = []; const byId = new Set(); let maxTs = null;
+    snap.forEach((d) => {
+      const s = mapSpot(d);
+      if (!s) return;
+      spots.push(s); byId.add(s.spotId);
+      if (s._ts && tsMs(s._ts) > tsMs(maxTs)) maxTs = s._ts;
     });
-    spotsCache = { t: Date.now(), limit, spots, limited: snap.size >= limit };
-    console.log(`📥 imagedownload read: ${spots.length} 件（以後60分キャッシュ）`);
-    res.json({ count: spots.length, limited: spotsCache.limited, cached: false, spots });
+    spotsCache = { t: Date.now(), spots, byId, maxTs };
+    console.log(`📥 full read: ${spots.length} 件（1週間キャッシュ）`);
+    res.json({ count: spots.length, cached: false, spots: cleanSpots(spots) });
   } catch (e) {
     console.error("spots error:", e.message);
     res.status(500).json({ error: e.message });

@@ -219,7 +219,7 @@
 
 <script>
 const SEASON = { spring:[3,4,5], summer:[6,7,8], autumn:[9,10,11], winter:[12,1,2] };
-const { createApp } = Vue;
+const { createApp, markRaw } = Vue;
 createApp({
   data() {
     const now = new Date();
@@ -238,7 +238,7 @@ createApp({
       webQuery:'', webResults:[], webMsg:'', webSearching:false,
       prefectures: [], savedSpots: [], pendingPoint: null,
       targets: [], msg:'', rallyList: [], showJson:false,
-      map:null, spotMarkers:[], savedMarkers:[], webMarkers:[], targetMarkers:[], pendingMarker:null
+      map:null, infoWindow:null, spotMarkers:[], savedMarkers:[], webMarkers:[], targetMarkers:[], pendingMarker:null
     };
   },
   computed: {
@@ -254,32 +254,70 @@ createApp({
   methods: {
     // ===== 地図（Google Maps） =====
     initMap() {
-      this.map = new google.maps.Map(document.getElementById('map'), {
+      this.map = markRaw(new google.maps.Map(document.getElementById('map'), {
         center: { lat: 36.5, lng: 138 }, zoom: 5,
         streetViewControl: false, mapTypeControl: false, fullscreenControl: false
-      });
+      }));
+      this.infoWindow = markRaw(new google.maps.InfoWindow());
       this.map.addListener('idle', () => this.renderSpotMarkers());
       this.map.addListener('click', (e) => { if (this.addMode) this.onMapClick(e.latLng.lat(), e.latLng.lng()); });
     },
     circleMarker(s, color, fill, radius, onClick) {
-      const m = new google.maps.Marker({
+      const m = markRaw(new google.maps.Marker({
         position: { lat: s.lat, lng: s.lng }, map: this.map, title: s.name,
         icon: { path: google.maps.SymbolPath.CIRCLE, scale: radius, fillColor: fill, fillOpacity: .85, strokeColor: color, strokeWeight: 1 }
-      });
+      }));
       if (onClick) m.addListener('click', onClick);
       return m;
     },
     numberedMarker(s, n, color, onClick) {
-      const m = new google.maps.Marker({
+      const m = markRaw(new google.maps.Marker({
         position: { lat: s.lat, lng: s.lng }, map: this.map, title: s.name,
         label: { text: String(n), color: '#fff', fontSize: '11px', fontWeight: '700' },
         icon: { path: google.maps.SymbolPath.CIRCLE, scale: 12, fillColor: color, fillOpacity: 1, strokeColor: '#fff', strokeWeight: 2 }
-      });
+      }));
       if (onClick) m.addListener('click', onClick);
       return m;
     },
     clearMarkers(arr) { arr.forEach((m) => m.setMap(null)); arr.length = 0; },
     focusPoint(s) { this.map.setCenter({ lat: s.lat, lng: s.lng }); this.map.setZoom(14); },
+    escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c])); },
+    openInfo(spot, kind) {
+      if (!this.infoWindow) return;
+      const div = document.createElement('div');
+      div.style.cssText = 'max-width:240px;font-size:13px;line-height:1.45';
+      let html = '';
+      if (spot.imageURL) html += `<img src="${this.escapeHtml(spot.imageURL)}" style="width:100%;height:96px;object-fit:cover;border-radius:6px;margin-bottom:6px" onerror="this.style.display='none'">`;
+      html += `<div style="font-weight:700">${this.escapeHtml(spot.name)}</div>`;
+      if (spot.address) html += `<div style="color:#777;font-size:12px">${this.escapeHtml(spot.address)}</div>`;
+      html += `<div style="color:#aaa;font-size:11px">${spot.lat.toFixed(5)}, ${spot.lng.toFixed(5)}${spot.spotId ? ' · ' + this.escapeHtml(String(spot.spotId).slice(0, 8)) : ''}</div>`;
+      div.innerHTML = html;
+      const bar = document.createElement('div');
+      bar.style.cssText = 'display:flex;gap:6px;margin-top:8px;flex-wrap:wrap';
+      const mkBtn = (label, color, fn) => {
+        const b = document.createElement('button');
+        b.textContent = label;
+        b.style.cssText = `border:none;border-radius:6px;padding:6px 10px;font-size:12px;font-weight:700;cursor:pointer;color:#fff;background:${color}`;
+        b.onclick = fn; return b;
+      };
+      if (kind === 'target') {
+        bar.appendChild(mkBtn('対象から削除', '#e53935', () => {
+          const i = this.targets.findIndex((t) => t.targetId === spot.targetId);
+          if (i >= 0) this.removeTarget(i);
+          this.infoWindow.close();
+        }));
+      } else {
+        bar.appendChild(mkBtn('対象に追加', '#00A8C6', () => {
+          kind === 'web' ? this.addTargetFromWeb(spot) : this.addTargetFromSpot(spot);
+          this.infoWindow.close();
+        }));
+        bar.appendChild(mkBtn('県+', '#7a3ff2', () => { this.saveOneToPrefData(spot); }));
+      }
+      div.appendChild(bar);
+      this.infoWindow.setContent(div);
+      this.infoWindow.setPosition({ lat: spot.lat, lng: spot.lng });
+      this.infoWindow.open(this.map);
+    },
 
     // ===== アプリ保存スポット（遅延読込＋サーバキャッシュ） =====
     async loadSpots(force) {
@@ -304,7 +342,7 @@ createApp({
         if (!b.contains(new google.maps.LatLng(s.lat, s.lng))) continue;
         if (q && !(s.name || '').includes(q) && !(s.address || '').includes(q)) continue;
         if (++shown > 500) break;
-        this.spotMarkers.push(this.circleMarker(s, '#0077aa', '#33bbdd', 5, () => this.addTargetFromSpot(s)));
+        this.spotMarkers.push(this.circleMarker(s, '#0077aa', '#33bbdd', 5, () => this.openInfo(s, 'app')));
       }
     },
     // ===== 県データ =====
@@ -313,30 +351,30 @@ createApp({
       this.clearMarkers(this.savedMarkers);
       for (const s of this.savedSpots) {
         const manual = s.source === 'manual';
-        this.savedMarkers.push(this.circleMarker(s, manual ? '#c026d3' : '#7a3ff2', manual ? '#e879f9' : '#a07bff', manual ? 7 : 6, () => this.addTargetFromSpot(s)));
+        this.savedMarkers.push(this.circleMarker(s, manual ? '#c026d3' : '#7a3ff2', manual ? '#e879f9' : '#a07bff', manual ? 7 : 6, () => this.openInfo(s, 'saved')));
       }
     },
     // ===== Web検索結果 =====
     renderWebMarkers() {
       if (!this.map) return;
       this.clearMarkers(this.webMarkers);
-      this.webResults.forEach((r, i) => this.webMarkers.push(this.numberedMarker(r, i + 1, '#2e9e5b', () => this.addTargetFromWeb(r))));
+      this.webResults.forEach((r, i) => this.webMarkers.push(this.numberedMarker(r, i + 1, '#2e9e5b', () => this.openInfo(r, 'web'))));
     },
     // ===== 対象 =====
     renderTargetMarkers() {
       if (!this.map) return;
       this.clearMarkers(this.targetMarkers);
-      this.targets.forEach((t, i) => this.targetMarkers.push(this.numberedMarker(t, i + 1, '#e8770a')));
+      this.targets.forEach((t, i) => this.targetMarkers.push(this.numberedMarker(t, i + 1, '#e8770a', () => this.openInfo(t, 'target'))));
     },
 
     // ===== 地図タップ地点 =====
     onMapClick(lat, lng) {
       this.pendingPoint = { lat: +lat, lng: +lng, name: '' };
       if (this.pendingMarker) this.pendingMarker.setMap(null);
-      this.pendingMarker = new google.maps.Marker({
+      this.pendingMarker = markRaw(new google.maps.Marker({
         position: { lat, lng }, map: this.map, animation: google.maps.Animation.DROP,
         icon: { path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5, fillColor: '#e8770a', fillOpacity: 1, strokeColor: '#fff', strokeWeight: 1 }
-      });
+      }));
     },
     cancelPending() { this.pendingPoint = null; if (this.pendingMarker) { this.pendingMarker.setMap(null); this.pendingMarker = null; } },
     addPendingToTargets() {
