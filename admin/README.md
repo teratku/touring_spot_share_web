@@ -26,20 +26,21 @@ npm install            # firebase-admin / express
 node server.js          # → http://127.0.0.1:4317（ローカル専用）／npm run serve でも可
 ```
 
-ブラウザで `http://127.0.0.1:4317` を開くと **地図ベースのラリービルダー**（Vue3 + Leaflet）。
+ブラウザで `http://127.0.0.1:4317` を開くと **地図ベースのラリービルダー**（Vue3 + Google Maps）。
 
 ### ビルダーでできること
 - **ラリー情報**フォーム：rallyId / 名前 / テーマ / エリア / **都道府県**（選ぶと県別チャレンジに・region自動）/ 期間 / **季節(activeMonths)** / バッジ / 称号。
-- **対象スポットの追加（4経路）**
-  - 🔵 **アプリ保存スポット**（地図の青点。名前/住所で絞り込み）
-  - 🟢 **Web検索**（地名・施設名 → OpenStreetMap で正確座標）
+- **対象スポットの追加（5経路・マーカークリックで情報＋操作の InfoWindow）**
+  - 🔵 **アプリ保存スポット**（青点。名前/住所で絞り込み。1週間キャッシュ＋新着のみ差分取得で読取最小化）
+  - 🟢 **Web検索**（地名・施設名 → Nominatim で正確座標）
   - 🟣 **県データ**（「県データ読込」。手動追加はマゼンタ）
-  - 🟠 **地図クリック**（「地図クリックで地点追加」ON で任意地点）
+  - ⭐ **おすすめ**（「⭐おすすめ」読込。著名観光地。手動追加も）
+  - 🟠 **地図クリック**（「地図クリックで地点追加」ON で任意地点 → 対象/県データ/おすすめへ）
+- **InfoWindow**：マーカークリックで画像/名前/住所/座標＋[対象に追加]/[県+]/[⭐おすすめ+]（対象は[削除]）。
 - **対象の編集**：名前編集・並べ替え（↑↓）・削除（✕）。
 - **保存**：「Firestoreへ保存（upsert）」＝検証して `stampRallies` へ／「JSONダウンロード」。
 - **既存ラリーの読込/複製/上書き**：右上「既存ラリーを読込」。
-- **県データ管理**：地図下パネルで保存スポットを名前編集・✕削除 →「県データを更新」。
-- **県データへ追加**：Web結果の「県+」／対象リストの「対象を県データに保存」。
+- **県データ/おすすめ管理**：地図下パネルで名前編集・✕削除 →「更新」（PUT）。Web結果の「県+」「⭐+」でも蓄積。
 
 > エンドポイントを追加・変更したら **server を再起動**。
 
@@ -95,12 +96,18 @@ node genPrefectureRallies.js
 - 到達不能点は OVERRIDES で代替（北海道N/E=宗谷/納沙布、東京=雲取山/葛西臨海/城南島/高尾山、島根N=隠岐の島町）。
 - 北海道の南西端（離島）は要差し替えフラグ。`_note` 参照。
 
-### 3-2. 各県のおすすめスポット
+### 3-2. 各県のおすすめスポット（データ参照・一気通貫）
 ```bash
+# 1) おすすめスポットデータを生成（著名地名を Nominatim でジオコーディング）
+node savePrefectureRecommend.js
+#    lib/prefectureRecommendSeed.js（県別の著名スポット名）→ data/prefecture-recommend/<romaji>.json
+#    ※「名前 県名」でヒットしなければ「名前」単独で再検索。手動追加(manual)はマージ保持。約5分。
+# 2) データからラリーJSONを生成
 node genPrefectureRecommend.js
-# → generated/prefecture-recommend-2026/<romaji>-recommend-2026.json（47本×著名3）
+#    data/prefecture-recommend/ を読んで → generated/prefecture-recommend-2026/<romaji>-recommend-2026.json
 ```
-- 座標は概算（`_note` に要確認）。ビルダーで精緻化推奨。
+- 座標は地図サービス由来。**ビルダーの⭐おすすめで編集 → genPrefectureRecommend を再実行**で反映（一気通貫）。
+- スポットを増やす：`lib/prefectureRecommendSeed.js` に名前を追記 → 1) を再実行。
 
 ### 3-3. 県別ラリーの投入
 ```bash
@@ -124,6 +131,11 @@ node savePrefectureData.js
 - **再実行してもアプリ最新を取り込みつつ、手動追加(`manual`)はマージ保持**。
 - ビルダー「県データ読込」で 🟣 表示 → クリックで対象に。Web結果「県+」「対象を県データに保存」で蓄積。
 - ⚠️ アプリ由来(`app`)の編集/削除は再実行で元に戻る（恒久にしたい名所は手動追加が確実）。
+
+### 4-2. おすすめデータ（県データと並列・dataset=recommend）
+- `data/prefecture-recommend/<romaji>.json`（生成元: §3-2）。ビルダー「⭐おすすめ」で読込（金色）→ クリックで対象に。
+- `source`: `curated`（シード）/ `manual`（ビルダー追加）。`savePrefectureRecommend.js` 再実行で manual はマージ保持。
+- 県データ(spots)とおすすめ(recommend)は**同一 API の dataset 違い**（§6）。Web結果「⭐+」「⭐おすすめ管理」で編集。
 
 ---
 
@@ -150,10 +162,9 @@ node setRallyStatus.js --year 2026 --status paused           # 年度一括
 | GET | `/` | ビルダー（rally-builder.html） |
 | GET | `/api/spots?limit=` | アプリ保存スポット（imagedownload） |
 | GET | `/api/geocode?q=` | Web地名検索（Nominatim・日本限定） |
-| GET | `/api/prefectures` | 都道府県マスタ（name/romaji/region） |
-| GET | `/api/prefecture-spots/:romaji` | 県別保存スポット |
-| POST | `/api/prefecture-spots/:romaji` | 県データに追加（manual・重複除外） |
-| PUT | `/api/prefecture-spots/:romaji` | 県データを全置換（編集/削除） |
+| GET | `/api/prefectures` | 県マスタ（name/romaji/region＋県データ/おすすめ件数） |
+| GET·POST·PUT | `/api/prefecture-data/:dataset/:romaji` | 県別データ（dataset=`spots`\|`recommend`）取得/追加/全置換 |
+| GET·POST·PUT | `/api/prefecture-spots/:romaji` | 上記 `spots` の互換エイリアス |
 | GET | `/api/rallies?year=` | 既存ラリー一覧 |
 | GET | `/api/rally/:id` | 1ラリー取得（編集/複製） |
 | POST | `/api/rally` | 検証して stampRallies へ upsert |
@@ -165,17 +176,20 @@ node setRallyStatus.js --year 2026 --status paused           # 年度一括
 ```
 admin/
   server.js                      ローカル作成サーバ
-  public/rally-builder.html      ビルダーUI（Vue3 + Leaflet）
+  public/rally-builder.html      ビルダーUI（Vue3 + Google Maps）
   lib/rallyValidation.js         ラリー検証（共用）
   lib/prefectures.js             県メタ（romaji/region・共用）
+  lib/prefectureRecommendSeed.js おすすめ著名スポット名（シード）
   importRallies.js               ラリー投入
   setRallyStatus.js              状態管理（停止/削除/年度一括）
   genPrefectureRallies.js        県別 最東西南北 生成
-  genPrefectureRecommend.js      県別 おすすめ 生成
-  savePrefectureData.js          県別スポット保存（アプリ由来）
+  genPrefectureRecommend.js      県別 おすすめ 生成（data/prefecture-recommend/ 参照）
+  savePrefectureData.js          県データ保存（アプリ由来 imagedownload）
+  savePrefectureRecommend.js     おすすめ保存（シード名→ジオコーディング）
   rallies/<year>/*.json          ラリー定義（テーマ別・四極など）
   generated/prefecture-*/        生成された県別ラリー（投入待ち）
-  data/prefecture-spots/         県別スポットデータ（ビルダー素材）
+  data/prefecture-spots/         県データ（アプリ由来＋手動）
+  data/prefecture-recommend/     おすすめ（著名＋手動）
 ```
 
 ---
