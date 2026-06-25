@@ -52,6 +52,14 @@
       {
         "source": "/blog/blog-editor.html",
         "destination": "/index.html"
+      },
+      {
+        "source": "/s/**",
+        "function": "spotShare"
+      },
+      {
+        "source": "/u/**",
+        "function": "userShare"
       }
     ]
   },
