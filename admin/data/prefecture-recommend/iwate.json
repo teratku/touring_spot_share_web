@@ -1,279 +1,189 @@
 {
   "prefecture": "岩手県",
   "romaji": "iwate",
-  "count": 23,
-  "curatedCount": 6,
+  "count": 20,
+  "curatedCount": 20,
   "manualCount": 0,
   "spots": [
     {
-      "name": "中尊寺",
-      "lat": 39.000941,
-      "lng": 141.10207,
-      "address": "岩手県 平泉町",
-      "source": "curated"
-    },
-    {
-      "name": "龍泉洞",
-      "lat": 39.860148,
-      "lng": 141.797037,
-      "address": "岩手県 岩泉町",
-      "source": "curated"
-    },
-    {
-      "name": "浄土ヶ浜",
-      "lat": 39.65245,
-      "lng": 141.978737,
-      "address": "岩手県 宮古市",
-      "source": "curated"
-    },
-    {
-      "name": "厳美渓",
-      "lat": 38.944126,
-      "lng": 141.047564,
-      "address": "岩手県 一関市",
-      "source": "curated"
-    },
-    {
-      "name": "小岩井農場",
-      "lat": 39.752786,
-      "lng": 141.019067,
-      "address": "岩手県 雫石町",
-      "source": "curated"
-    },
-    {
-      "name": "盛岡城跡公園",
-      "lat": 39.701595,
-      "lng": 141.149946,
-      "address": "岩手県 盛岡市",
-      "source": "curated"
-    },
-    {
-      "name": "八幡平アスピーテライン",
-      "lat": 39.944131,
-      "lng": 140.907451,
-      "address": "岩手県八幡平市",
-      "source": "recommend",
-      "category": "ツーリングロード",
-      "description": "秋田と岩手を結ぶ八幡平山頂を越える快走路。標高1000m超の稜線を走り、ドラゴンアイ（目玉池）や岩手山を望む絶景が続くライダーの人気ルート。",
-      "tags": [
-        "峠",
-        "絶景",
-        "雪景色",
-        "紅葉"
-      ]
-    },
-    {
-      "name": "松尾八幡平ビジターセンター（ドラゴンアイ）",
-      "lat": 39.920167,
-      "lng": 140.975534,
-      "address": "岩手県八幡平市松尾寄木1番地19",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "八幡平山頂付近にある鏡沼。春の融雪期に現れる目玉のような模様が「ドラゴンアイ」として有名。短い出現期間に多くのライダーが訪れる秘景。",
-      "tags": [
-        "絶景",
-        "雪景色"
-      ]
-    },
-    {
-      "name": "三陸海岸リアスライン（国道45号）",
-      "lat": 39.31,
-      "lng": 141.893,
-      "address": "岩手県宮古市〜大船渡市",
-      "source": "recommend",
-      "category": "ツーリングロード",
-      "description": "複雑なリアス式海岸に沿って走る三陸の絶景ルート。高台から見下ろす深い入り江と漁村の風景が続き、震災復興後の三陸を感じながら走れる。",
-      "tags": [
-        "海岸線",
-        "絶景"
-      ]
-    },
-    {
-      "name": "平泉中尊寺",
-      "lat": 38.999049,
-      "lng": 141.108302,
-      "address": "岩手県西磐井郡平泉町平泉衣関202",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "世界文化遺産・平泉の中心寺院。金色堂をはじめ奥州藤原氏の栄華を今に伝える仏教文化財が集積し、東北ツーリングの歴史探訪コースの核心。",
-      "tags": [
-        "世界遺産",
-        "文化",
-        "歴史"
-      ]
-    },
-    {
-      "name": "碁石海岸",
-      "lat": 38.986072,
-      "lng": 141.741733,
-      "address": "岩手県大船渡市末崎町字大浜",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "大船渡市南部の三陸沿岸。黒い玄武岩の小石（碁石）が波に磨かれた海岸と穴通磯・雷岩などの奇岩が並ぶ景勝地で国の名勝・天然記念物。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "焼走り熔岩流（岩手山）",
-      "lat": 39.850153,
-      "lng": 141.002092,
-      "address": "岩手県八幡平市平笠",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "岩手山の1719年噴火で流出した溶岩流跡地。黒々とした溶岩が広がる独特の風景と背後にそびえる岩手山の勇姿は迫力満点のツーリング立ち寄りスポット。",
-      "tags": [
-        "絶景",
-        "自然"
-      ]
-    },
-    {
-      "name": "道の駅 遠野風の丘",
-      "lat": 39.331031,
-      "lng": 141.500435,
-      "address": "岩手県遠野市綾織町新里8-2",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "カッパ伝説の里・遠野の玄関口にある道の駅。遠野物語の舞台となった民話の里を探訪するツーリングの拠点で、ジンギスカンなど遠野グルメも楽しめる。",
-      "tags": [
-        "道の駅",
-        "グルメ",
-        "文化"
-      ]
-    },
-    {
-      "name": "北山崎",
-      "lat": 39.979444,
-      "lng": 141.959722,
-      "address": "岩手県下閉伊郡田野畑村北山",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "高さ200mの断崖が約8km続く三陸北部の絶景スポット。「海のアルプス」とも称される断崖景観は東北太平洋側で屈指の迫力を誇り、展望台から一望できる。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "わんこそば発祥の地 盛岡",
-      "lat": 39.702133,
-      "lng": 141.15454,
-      "address": "岩手県盛岡市中ノ橋通1-8-3",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "岩手の誇る食文化「わんこそば」を体験できる盛岡市内のそば店群。石割桜や盛岡城跡と組み合わせたツーリング観光スポットとして東北ライダーに人気。",
-      "tags": [
-        "グルメ",
-        "文化"
-      ]
-    },
-    {
-      "name": "花巻温泉郷",
-      "lat": 39.411171,
-      "lng": 141.11106,
-      "address": "岩手県花巻市湯口",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "宮沢賢治の故郷・花巻に広がる温泉郷。台温泉・新湯本など複数の温泉地が点在し、豊沢川沿いの自然と宮沢賢治ゆかりの地を訪ねるツーリングを楽しめる。",
-      "tags": [
-        "温泉",
-        "文化"
-      ]
-    },
-    {
-      "name": "種市海岸（ウニ丼の里）",
-      "lat": 35.415721,
-      "lng": 139.657989,
-      "address": "岩手県九戸郡洋野町種市",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "全国屈指のウニの産地として有名な三陸北部の漁村。夏季限定の生ウニ丼目当てに多くのライダーが訪れ、三陸ツーリングのグルメスポットとして名高い。",
-      "tags": [
-        "グルメ",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "道の駅 三田貝分校",
-      "lat": 39.870841,
-      "lng": 141.58931,
-      "address": "岩手県下閉伊郡岩泉町三田貝字羽根115-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "廃校になった小学校を改築した個性的な道の駅。岩泉町の清流・龍泉洞を目指すツーリングルート上にあり、のんびりとした山村風景の中でひと休みできる。",
-      "tags": [
-        "道の駅",
-        "文化"
-      ]
-    },
-    {
-      "name": "宮古市 浄土ヶ浜パークホテル展望台",
-      "lat": 39.639584,
-      "lng": 141.946118,
-      "address": "岩手県宮古市日立浜町32-2",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "浄土ヶ浜と宮古湾を見渡す高台に立つ展望スポット。リアス式海岸の複雑な海岸線を俯瞰できる絶景で、夕日に染まる太平洋の眺めは格別。",
-      "tags": [
-        "絶景",
-        "夕日",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "五葉山",
-      "lat": 39.205442,
-      "lng": 141.732127,
-      "address": "岩手県大船渡市三陸町吉浜字石浜",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "三陸沿岸から望める独立峰。山頂からは太平洋と北上山地の両方を見渡せ、登山道入口へのアプローチは林道ツーリングを楽しめる穴場ルート。",
-      "tags": [
-        "絶景",
-        "峠",
-        "自然"
-      ]
-    },
-    {
-      "name": "げいび渓",
-      "lat": 38.934696,
-      "lng": 141.126605,
-      "address": "岩手県一関市東山町長坂字町",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "砂鉄川が作り出した渓谷。峡谷を手漕ぎ船で巡る「猊鼻渓舟下り」が有名で、高さ100mの断崖が続く景観は全国的にも珍しい川下りの名所。",
-      "tags": [
-        "絶景",
-        "自然"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "えさし藤原の郷",
       "lat": 39.197302,
       "lng": 141.189024,
       "address": "岩手県奥州市江刺区愛宕字高森10-1",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "奥州藤原氏の時代を再現した歴史テーマパーク。大河ドラマのロケ地としても有名で、平安時代の建造物群が広大な敷地に復元され、歴史ロマンを感じられる。",
-      "tags": [
-        "文化",
-        "歴史"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "げいび渓",
+      "lat": 38.989453,
+      "lng": 141.255448,
+      "address": "岩手県一関市東山町長坂字町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "わんこそば発祥の地 盛岡",
+      "lat": 39.702133,
+      "lng": 141.15454,
+      "address": "岩手県盛岡市中ノ橋通1-8-3",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "花巻温泉郷",
+      "lat": 39.454893,
+      "lng": 141.05631,
+      "address": "岩手県花巻市湯口",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "厳美渓",
+      "lat": 38.944126,
+      "lng": 141.047564,
+      "address": "岩手県 一関市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "碁石海岸",
+      "lat": 38.986072,
+      "lng": 141.741733,
+      "address": "岩手県大船渡市末崎町字大浜",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "種市海岸（ウニ丼の里）",
+      "lat": 40.408316,
+      "lng": 141.71922,
+      "address": "岩手県九戸郡洋野町種市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "小岩井農場",
+      "lat": 39.752786,
+      "lng": 141.019067,
+      "address": "岩手県 雫石町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "松尾八幡平ビジターセンター（ドラゴンアイ）",
+      "lat": 39.949745,
+      "lng": 140.856732,
+      "address": "岩手県八幡平市松尾寄木1番地19",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "焼走り熔岩流（岩手山）",
+      "lat": 39.873319,
+      "lng": 141.046085,
+      "address": "岩手県八幡平市平笠",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "浄土ヶ浜",
+      "lat": 39.65245,
+      "lng": 141.978737,
+      "address": "岩手県 宮古市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "盛岡城跡公園",
+      "lat": 39.701595,
+      "lng": 141.149946,
+      "address": "岩手県 盛岡市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "中尊寺",
+      "lat": 39.000941,
+      "lng": 141.10207,
+      "address": "岩手県 平泉町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "道の駅 いわいずみ",
       "lat": 39.842411,
       "lng": 141.862646,
       "address": "岩手県下閉伊郡岩泉町岩泉字中申45-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "龍泉洞の最寄りの道の駅。岩泉ヨーグルトの製造販売で全国的に有名で、濃厚なヨーグルトを求めて多くのライダーが立ち寄る岩泉ツーリングの定番スポット。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 遠野風の丘",
+      "lat": 39.331031,
+      "lng": 141.500435,
+      "address": "岩手県遠野市綾織町新里8-2",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 三田貝分校",
+      "lat": 39.870841,
+      "lng": 141.58931,
+      "address": "岩手県下閉伊郡岩泉町三田貝字羽根115-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "八幡平アスピーテライン",
+      "lat": 39.944131,
+      "lng": 140.907451,
+      "address": "岩手県八幡平市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "平泉中尊寺",
+      "lat": 38.999049,
+      "lng": 141.108302,
+      "address": "岩手県西磐井郡平泉町平泉衣関202",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "北山崎",
+      "lat": 39.979134,
+      "lng": 141.953026,
+      "address": "岩手県下閉伊郡田野畑村北山",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "龍泉洞",
+      "lat": 39.860148,
+      "lng": 141.797037,
+      "address": "岩手県 岩泉町",
+      "imageURL": null,
+      "source": "curated"
     }
-  ],
-  "recommendCount": 17
+  ]
 }
