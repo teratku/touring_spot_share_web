@@ -1,313 +1,153 @@
 {
   "prefecture": "広島県",
   "romaji": "hiroshima",
-  "count": 26,
-  "curatedCount": 6,
+  "count": 16,
+  "curatedCount": 16,
   "manualCount": 0,
   "spots": [
     {
-      "name": "厳島神社",
-      "lat": 34.296542,
-      "lng": 132.319008,
-      "address": "広島県 廿日市市",
+      "spotId": null,
+      "name": "因島（フラワーセンター）",
+      "lat": 34.345465,
+      "lng": 133.151861,
+      "address": "広島県尾道市因島大浜町",
+      "imageURL": null,
       "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "温井ダム（龍姫湖）",
+      "lat": 34.635168,
+      "lng": 132.301483,
+      "address": "広島県山県郡安芸太田町加計",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "岩子島 厳島神社 鳥居",
+      "lat": 34.377587,
+      "lng": 133.156443,
+      "address": "広島県尾道市向島町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "原爆ドーム",
       "lat": 34.395466,
       "lng": 132.453524,
       "address": "広島県 広島市",
+      "imageURL": null,
       "source": "curated"
     },
     {
-      "name": "千光寺",
-      "lat": 34.410365,
-      "lng": 133.198685,
-      "address": "広島県 尾道市",
+      "spotId": null,
+      "name": "厳島神社",
+      "lat": 34.296542,
+      "lng": 132.319008,
+      "address": "広島県 廿日市市",
+      "imageURL": null,
       "source": "curated"
     },
     {
-      "name": "平和記念公園",
-      "lat": 34.393171,
-      "lng": 132.452301,
-      "address": "広島県 広島市",
+      "spotId": null,
+      "name": "呉・大和ミュージアム",
+      "lat": 34.241182,
+      "lng": 132.555799,
+      "address": "広島県呉市宝町5-20",
+      "imageURL": null,
       "source": "curated"
     },
     {
-      "name": "大久野島",
-      "lat": 34.309121,
-      "lng": 132.993759,
-      "address": "広島県 竹原市",
-      "source": "curated"
-    },
-    {
-      "name": "縮景園",
-      "lat": 34.400327,
-      "lng": 132.467445,
-      "address": "広島県 広島市",
-      "source": "curated"
-    },
-    {
-      "name": "しまなみ海道（尾道〜今治）",
-      "lat": 34.432566,
-      "lng": 133.217403,
-      "address": "広島県尾道市向島町",
-      "source": "recommend",
-      "category": "ツーリングロード",
-      "description": "本州と四国を結ぶ全長60kmの橋と島々を渡るルート。瀬戸内の多島美を眺めながら走れるライダー憧れの絶景道で、世界的にも有名。",
-      "tags": [
-        "絶景",
-        "海岸線",
-        "ツーリングロード"
-      ]
-    },
-    {
-      "name": "宮島・厳島神社",
-      "lat": 34.271448,
-      "lng": 132.308872,
-      "address": "広島県廿日市市宮島町1-1",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "世界遺産の海上神社。海中に立つ朱塗りの大鳥居は満潮時に海に浮かぶ幻想的な絶景で、日本三景の一つとして世界的に有名。",
-      "tags": [
-        "世界遺産",
-        "歴史",
-        "絶景"
-      ]
-    },
-    {
-      "name": "帝釈峡",
-      "lat": 34.374947,
-      "lng": 132.433588,
-      "address": "広島県神石郡神石高原町永野",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "石灰岩地帯が刻んだ渓谷。天然の石橋・雄橋をはじめ、神龍湖の遊覧など多彩な景観が楽しめる中国山地の代表的景勝地。",
-      "tags": [
-        "絶景",
-        "湖・川"
-      ]
-    },
-    {
-      "name": "道の駅 たけはら",
-      "lat": 34.349091,
-      "lng": 132.91629,
-      "address": "広島県竹原市本町3丁目",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "竹原市の重要伝統的建造物群に隣接する道の駅。地元グルメや物産が充実し、安芸の小京都と呼ばれる町並み観光の起点。",
-      "tags": [
-        "道の駅",
-        "歴史"
-      ]
-    },
-    {
-      "name": "西条（酒の町）",
-      "lat": 34.431326,
-      "lng": 132.743671,
-      "address": "広島県東広島市西条本町",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "灘・伏見と並ぶ日本三大酒処の一つ。レンガ造りの酒蔵が立ち並ぶ白壁の町並みは風情があり、ツーリングの観光スポットとして人気。",
-      "tags": [
-        "歴史",
-        "グルメ"
-      ]
-    },
-    {
-      "name": "尾道・千光寺山",
-      "lat": 34.404786,
-      "lng": 133.193131,
-      "address": "広島県尾道市東土堂町15-1",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "坂の町・尾道のシンボル的展望地。ロープウェイで登る山頂からは尾道水道と島々が一望でき、映画やアニメの舞台としても有名。",
-      "tags": [
-        "絶景",
-        "観光名所"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "三段峡",
       "lat": 34.59959,
       "lng": 132.208517,
       "address": "広島県山県郡安芸太田町穴",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "日本百景に数えられる西中国山地の渓谷。清流が深い峡谷を縫うように流れ、秋の紅葉は全国有数の美しさを誇る山岳ルートの宝。",
-      "tags": [
-        "絶景",
-        "紅葉",
-        "湖・川"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "向島・岩子島",
-      "lat": 34.382814,
-      "lng": 133.197668,
-      "address": "広島県尾道市向島町",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "しまなみ海道の玄関口・向島に隣接する静かな島。渡し船でアクセスするコースも楽しく、瀬戸内の穏やかな海岸線を走れる。",
-      "tags": [
-        "海岸線",
-        "絶景"
-      ]
+      "spotId": null,
+      "name": "縮景園",
+      "lat": 34.400327,
+      "lng": 132.467445,
+      "address": "広島県 広島市",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "奥田元宋・小由女美術館（三次市）",
-      "lat": 35.397162,
-      "lng": 133.053512,
-      "address": "広島県三次市東酒屋町10453-6",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "霧の三次として知られる三次市の丘に建つ美術館。秋の早朝には霧の海が広がる幻想的な光景が見られ、神秘的な絶景スポット。",
-      "tags": [
-        "絶景"
-      ]
-    },
-    {
-      "name": "福山・鞆の浦",
-      "lat": 34.489597,
-      "lng": 133.362434,
-      "address": "広島県福山市鞆町鞆",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "万葉集にも詠まれた瀬戸内海の古港。江戸時代の雁木や常夜灯が残る港町の風景は映画のロケ地にもなった歴史的景観。",
-      "tags": [
-        "歴史",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "広島平和記念公園・原爆ドーム",
-      "lat": 34.393171,
-      "lng": 132.452301,
-      "address": "広島県広島市中区大手町1丁目10",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "世界平和の象徴として世界遺産に登録された被爆建物。人類の歴史に向き合う場として国内外から多くの人が訪れる。",
-      "tags": [
-        "世界遺産",
-        "歴史"
-      ]
-    },
-    {
-      "name": "道の駅 スパ羅漢",
-      "lat": 34.38936,
-      "lng": 132.104541,
-      "address": "広島県山県郡安芸太田町上殿675-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "三段峡近くに立地する温泉付き道の駅。山間の自然の中でゆったり入浴でき、三段峡ツーリングのフィニッシュに最適な癒しスポット。",
-      "tags": [
-        "道の駅",
-        "温泉"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "生口島・耕三寺・平山郁夫美術館",
-      "lat": 34.28646,
-      "lng": 133.109241,
+      "lat": 34.304875,
+      "lng": 133.090267,
       "address": "広島県尾道市瀬戸田町瀬戸田553-2",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "しまなみ海道の中間点に位置する文化の島。白亜の伽藍が並ぶ耕三寺は別名西の日光と呼ばれ、島内の柑橘畑の景観も美しい。",
-      "tags": [
-        "歴史",
-        "観光名所"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "大山峠（広島側）",
-      "lat": 34.413253,
-      "lng": 133.20246,
-      "address": "広島県山県郡北広島町本地",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "中国山地を越える峠道。島根・岡山へ向かうルートの一つで、深い森と山間の農村風景が続く静かな峠越えルート。",
-      "tags": [
-        "峠",
-        "紅葉"
-      ]
+      "spotId": null,
+      "name": "千光寺",
+      "lat": 34.410365,
+      "lng": 133.198685,
+      "address": "広島県 尾道市",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "呉・大和ミュージアム",
-      "lat": 34.244651,
-      "lng": 132.557488,
-      "address": "広島県呉市宝町5-20",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "戦艦大和の実物大1/10模型が展示される軍港の町・呉の博物館。海自鉄のくじら館との組み合わせで軍艦の歴史を学べる。",
-      "tags": [
-        "歴史",
-        "観光名所"
-      ]
+      "spotId": null,
+      "name": "大久野島",
+      "lat": 34.309121,
+      "lng": 132.993759,
+      "address": "広島県 竹原市",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "因島（フラワーセンター）",
-      "lat": 34.317147,
-      "lng": 133.178558,
-      "address": "広島県尾道市因島大浜町",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "しまなみ海道上の因島にある花の名所。島内の自転車・バイク道も整備され、周囲の瀬戸内海と橋の景観が最高のフォトスポット。",
-      "tags": [
-        "絶景",
-        "桜"
-      ]
+      "spotId": null,
+      "name": "帝釈峡",
+      "lat": 34.862553,
+      "lng": 133.206224,
+      "address": "広島県神石郡神石高原町永野",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "御調・八幡ダム周辺",
-      "lat": 34.513917,
-      "lng": 133.141455,
-      "address": "広島県三原市八幡町",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "広島市から1時間圏内のダム湖。周囲を桜が彩る春の景観が有名で、ローカルライダーが集まる穴場のツーリングスポット。",
-      "tags": [
-        "桜",
-        "湖・川"
-      ]
-    },
-    {
-      "name": "温井ダム（龍姫湖）",
-      "lat": 34.633899,
-      "lng": 132.299254,
-      "address": "広島県山県郡安芸太田町加計",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "中国地方最大のアーチダム。山あいに広がるエメラルドグリーンのダム湖と白いアーチが美しく、三段峡への入口にある絶景スポット。",
-      "tags": [
-        "絶景",
-        "湖・川"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "道の駅 クロスロードみつぎ",
       "lat": 34.51152,
       "lng": 133.144378,
       "address": "広島県尾道市御調町市869-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "山陽・山陰を結ぶ国道486号沿いの道の駅。尾道・福山エリアと三次・広島を結ぶルートの交差点に位置し、利便性が高い。",
-      "tags": [
-        "道の駅"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "比婆山・道後山エリア",
-      "lat": 34.965964,
-      "lng": 133.123205,
-      "address": "広島県庄原市西城町大草",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "広島と島根の県境に広がる中国山地の高原ゾーン。古事記の神話にゆかりのある山々が連なり、神秘的な雰囲気のツーリングルート。",
-      "tags": [
-        "峠",
-        "紅葉"
-      ]
+      "spotId": null,
+      "name": "道の駅 スパ羅漢",
+      "lat": 34.38936,
+      "lng": 132.104541,
+      "address": "広島県山県郡安芸太田町上殿675-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 たけはら",
+      "lat": 34.343932,
+      "lng": 132.912169,
+      "address": "広島県竹原市本町3丁目",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "平和記念公園",
+      "lat": 34.393171,
+      "lng": 132.452301,
+      "address": "広島県 広島市",
+      "imageURL": null,
+      "source": "curated"
     }
-  ],
-  "recommendCount": 20
+  ]
 }

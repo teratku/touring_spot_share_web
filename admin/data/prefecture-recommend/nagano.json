@@ -1,291 +1,171 @@
 {
   "prefecture": "長野県",
   "romaji": "nagano",
-  "count": 23,
-  "curatedCount": 6,
+  "count": 18,
+  "curatedCount": 18,
   "manualCount": 0,
   "spots": [
     {
-      "name": "善光寺",
-      "lat": 36.661423,
-      "lng": 138.187658,
-      "address": "長野県 長野市",
-      "source": "curated"
-    },
-    {
-      "name": "上高地",
-      "lat": 36.25393,
-      "lng": 137.660941,
-      "address": "長野県 松本市",
-      "source": "curated"
-    },
-    {
-      "name": "松本城",
-      "lat": 36.238635,
-      "lng": 137.968871,
-      "address": "長野県 松本市",
-      "source": "curated"
-    },
-    {
-      "name": "地獄谷野猿公苑",
-      "lat": 36.732812,
-      "lng": 138.462319,
-      "address": "長野県 山ノ内町",
-      "source": "curated"
-    },
-    {
-      "name": "諏訪大社",
-      "lat": 36.01969,
-      "lng": 138.131229,
-      "address": "長野県 諏訪市",
-      "source": "curated"
-    },
-    {
-      "name": "千畳敷カール",
-      "lat": 35.780249,
-      "lng": 137.813822,
-      "address": "長野県 宮田村",
-      "source": "curated"
-    },
-    {
+      "spotId": null,
       "name": "ビーナスライン",
-      "lat": 36.107461,
-      "lng": 138.177074,
+      "lat": 36.097609,
+      "lng": 138.168381,
       "address": "長野県茅野市ビーナスライン",
-      "source": "recommend",
-      "category": "ツーリングロード",
-      "description": "八ヶ岳・霧ヶ峰・美ヶ原を結ぶ全長75kmの高原ドライブロード。標高1500m以上の稜線を走り、雄大な山岳パノラマが続く信州屈指のツーリングルート。",
-      "tags": [
-        "絶景",
-        "峠",
-        "高原",
-        "紅葉"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "美ヶ原高原",
-      "lat": 36.230724,
-      "lng": 138.140291,
-      "address": "長野県松本市美ヶ原高原",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "標高2000mの溶岩台地に広がる日本最大の高原。360度の大パノラマが楽しめ、晴れた日には北アルプスや富士山まで見渡せる絶景スポット。",
-      "tags": [
-        "絶景",
-        "高原",
-        "展望台"
-      ]
-    },
-    {
-      "name": "霧ヶ峰高原",
-      "lat": 36.039175,
-      "lng": 138.11398,
-      "address": "長野県諏訪市霧ヶ峰",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "標高1600mのなだらかな高原で、ニッコウキスゲの群生地としても有名。霧が立ち込める幻想的な風景とビーナスライン沿いの快走ルートが魅力。",
-      "tags": [
-        "絶景",
-        "高原",
-        "紅葉"
-      ]
-    },
-    {
-      "name": "乗鞍岳エコーライン",
-      "lat": 36.1067,
-      "lng": 137.5641,
-      "address": "長野県松本市安曇乗鞍高原",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "標高2716mまで上がれる山岳道路。日本最高所の公道として知られ、高山植物や残雪が見られる。マイカー規制区間はシャトルバス利用となる。",
-      "tags": [
-        "峠",
-        "絶景",
-        "高山"
-      ]
-    },
-    {
-      "name": "志賀高原",
-      "lat": 36.740964,
-      "lng": 138.416093,
-      "address": "長野県下高井郡山ノ内町志賀高原",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "日本最大規模の高原リゾートで、標高1500〜2300mのエリアに多数の湖沼が点在。夏は高原ツーリング、秋は紅葉ドライブが楽しめる。",
-      "tags": [
-        "絶景",
-        "高原",
-        "紅葉",
-        "湖"
-      ]
-    },
-    {
-      "name": "白骨温泉",
-      "lat": 36.152539,
-      "lng": 137.626814,
-      "address": "長野県松本市安曇白骨温泉",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "乳白色の硫黄泉が湧き出る秘湯として名高い山間の温泉地。乗鞍方面へのツーリング途中に立ち寄れる絶好の休憩スポット。",
-      "tags": [
-        "温泉",
-        "秘湯",
-        "高原"
-      ]
-    },
-    {
-      "name": "道の駅 雷電くるみの里",
-      "lat": 36.355454,
-      "lng": 138.374424,
-      "address": "長野県東御市和4986",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "長野の特産品くるみを使った加工品が揃う道の駅。北国街道沿いに位置し、善光寺や戸隠方面へのツーリングの起点として利用される。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
-    },
-    {
-      "name": "諏訪湖",
-      "lat": 36.047945,
-      "lng": 138.083285,
-      "address": "長野県諏訪市諏訪湖",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "長野県最大の湖で周囲約16km。湖を一周するルートはフラットで走りやすく、冬の御神渡りや夏の花火大会が有名。諏訪大社への参拝もおすすめ。",
-      "tags": [
-        "湖",
-        "絶景",
-        "夕日"
-      ]
-    },
-    {
-      "name": "渋峠（国道292号）",
-      "lat": 36.66862,
-      "lng": 138.529361,
-      "address": "長野県下高井郡山ノ内町渋峠",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "標高2172mで日本最高所を走る国道。群馬県境に位置し、草津温泉方面へ抜けるルートは絶景の連続。積雪期は通行不可のため春〜秋が最適。",
-      "tags": [
-        "峠",
-        "絶景",
-        "高山"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "戸隠神社",
       "lat": 36.731444,
       "lng": 138.076293,
       "address": "長野県長野市戸隠3506",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "奥社・中社・宝光社など五社からなる神社群。杉並木の参道は神秘的な雰囲気で、戸隠そば街道と組み合わせたツーリングルートが人気。",
-      "tags": [
-        "歴史",
-        "絶景",
-        "グルメ"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "清里高原（野辺山高原）",
-      "lat": 38.542194,
-      "lng": 141.059975,
-      "address": "長野県南佐久郡南牧村野辺山",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "八ヶ岳南麓に広がる高原リゾート。JR最高地点（標高1375m）があり、清里から野辺山へ抜けるルートは山岳風景が素晴らしい。",
-      "tags": [
-        "高原",
-        "絶景",
-        "峠"
-      ]
-    },
-    {
-      "name": "道の駅 木曽福島",
-      "lat": 35.817138,
-      "lng": 137.68254,
-      "address": "長野県木曽郡木曽町福島2982-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "木曽川沿いに位置する木曽地域の玄関口となる道の駅。木曽ヒノキ製品や地元グルメが揃い、木曽路ツーリングの休憩に最適。",
-      "tags": [
-        "道の駅",
-        "グルメ",
-        "川"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "妻籠宿",
       "lat": 35.576991,
       "lng": 137.595421,
       "address": "長野県木曽郡南木曽町吾妻2159-2",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "江戸時代の宿場町の面影を今に残す重要伝統的建造物群保存地区。木曽路ツーリングの必訪スポットで、石畳の街並みと古民家が情緒豊か。",
-      "tags": [
-        "歴史",
-        "文化財",
-        "グルメ"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "麦草峠（国道299号）",
-      "lat": 36.058217,
-      "lng": 138.352916,
-      "address": "長野県南佐久郡佐久穂町麦草峠",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "八ヶ岳を横断する標高2127mの国道最高地点のひとつ。佐久側から松本側へ抜けるルートは高山植物の宝庫で、夏期限定のツーリングスポット。",
-      "tags": [
-        "峠",
-        "高山",
-        "絶景"
-      ]
+      "spotId": null,
+      "name": "志賀高原",
+      "lat": 36.719687,
+      "lng": 138.492429,
+      "address": "長野県下高井郡山ノ内町志賀高原",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "鹿教湯温泉",
-      "lat": 36.283624,
-      "lng": 138.101095,
-      "address": "長野県上田市鹿教湯温泉",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "筑摩山地の奥に位置する山里の温泉地。文殊堂と五台橋の風景が美しく、内湯温泉街の風情が残る隠れた名湯。ビーナスライン方面からのアクセスも良好。",
-      "tags": [
-        "温泉",
-        "秘湯",
-        "歴史"
-      ]
+      "spotId": null,
+      "name": "松本城",
+      "lat": 36.238635,
+      "lng": 137.968871,
+      "address": "長野県 松本市",
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "諏訪湖",
+      "lat": 36.059993,
+      "lng": 138.077288,
+      "address": "長野県諏訪市諏訪湖",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "諏訪大社",
+      "lat": 35.998285,
+      "lng": 138.11913,
+      "address": "長野県 諏訪市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "清里高原（野辺山高原）",
+      "lat": 35.92567,
+      "lng": 138.432723,
+      "address": "長野県南佐久郡南牧村野辺山",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "善光寺",
+      "lat": 36.661423,
+      "lng": 138.187658,
+      "address": "長野県 長野市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "大王わさび農場",
-      "lat": 36.338627,
-      "lng": 137.909943,
+      "lat": 36.339327,
+      "lng": 137.908373,
       "address": "長野県安曇野市穂高3640",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "北アルプスの湧水を利用した日本最大のわさび農場。黒い寒冷紗が並ぶ独特の景観と澄んだ川の流れが印象的。松本市内から近くツーリングの立ち寄りに便利。",
-      "tags": [
-        "絶景",
-        "グルメ",
-        "川"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "地獄谷野猿公苑",
+      "lat": 36.732812,
+      "lng": 138.462319,
+      "address": "長野県 山ノ内町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 木曽福島",
+      "lat": 35.817138,
+      "lng": 137.68254,
+      "address": "長野県木曽郡木曽町福島2982-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 雷電くるみの里",
+      "lat": 36.355454,
+      "lng": 138.374424,
+      "address": "長野県東御市和4986",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "奈良井宿",
       "lat": 35.96455,
       "lng": 137.810427,
       "address": "長野県塩尻市奈良井",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "江戸時代の街並みが1kmにわたって続く中山道最大の宿場町。重要伝統的建造物群保存地区に選定され、木曽路の歴史情緒を体感できる。",
-      "tags": [
-        "歴史",
-        "文化財",
-        "グルメ"
-      ]
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "白骨温泉",
+      "lat": 36.152539,
+      "lng": 137.626814,
+      "address": "長野県松本市安曇白骨温泉",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "麦草峠（国道299号）",
+      "lat": 36.058217,
+      "lng": 138.352916,
+      "address": "長野県南佐久郡佐久穂町麦草峠",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "美ヶ原高原",
+      "lat": 36.230724,
+      "lng": 138.140291,
+      "address": "長野県松本市美ヶ原高原",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "霧ヶ峰高原",
+      "lat": 36.039175,
+      "lng": 138.11398,
+      "address": "長野県諏訪市霧ヶ峰",
+      "imageURL": null,
+      "source": "curated"
     }
-  ],
-  "recommendCount": 17
+  ]
 }

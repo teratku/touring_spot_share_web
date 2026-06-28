@@ -1,320 +1,207 @@
 {
   "prefecture": "静岡県",
   "romaji": "shizuoka",
-  "count": 25,
-  "curatedCount": 6,
+  "count": 22,
+  "curatedCount": 22,
   "manualCount": 0,
   "spots": [
     {
-      "name": "三保松原",
-      "lat": 35.001512,
-      "lng": 138.517599,
-      "address": "静岡県 静岡市",
-      "source": "curated"
-    },
-    {
-      "name": "富士山本宮浅間大社",
-      "lat": 35.22734,
-      "lng": 138.610019,
-      "address": "静岡県 富士宮市",
-      "source": "curated"
-    },
-    {
-      "name": "日本平",
-      "lat": 34.976732,
-      "lng": 138.466619,
-      "address": "静岡県 静岡市",
-      "source": "curated"
-    },
-    {
-      "name": "久能山東照宮",
-      "lat": 34.964786,
-      "lng": 138.467598,
-      "address": "静岡県 静岡市",
-      "source": "curated"
-    },
-    {
-      "name": "寸又峡",
-      "lat": 35.174699,
-      "lng": 138.118059,
-      "address": "静岡県 川根本町",
-      "source": "curated"
-    },
-    {
-      "name": "熱海城",
-      "lat": 35.086378,
-      "lng": 139.078682,
-      "address": "静岡県 熱海市",
-      "source": "curated"
-    },
-    {
-      "name": "富士山スカイライン（富士宮口）",
-      "lat": 35.307022,
-      "lng": 138.743311,
-      "address": "静岡県富士宮市富士山スカイライン",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "富士宮五合目（標高2400m）まで続く山岳道路。富士山を間近に見ながら走る迫力満点のルートで、5合目からの絶景と稜線の雄大さはバイク乗りの聖地。",
-      "tags": [
-        "峠",
-        "絶景",
-        "高山"
-      ]
-    },
-    {
-      "name": "西伊豆スカイライン",
-      "lat": 35.08501,
-      "lng": 139.026529,
-      "address": "静岡県伊豆市土肥西伊豆スカイライン",
-      "source": "recommend",
-      "category": "ツーリングロード",
-      "description": "伊豆半島西側の山脊を走る約10kmのシーサイド山岳ロード。駿河湾と富士山を同時に望める絶景ポイントが続き、伊豆ツーリングの定番ルート。",
-      "tags": [
-        "絶景",
-        "峠",
-        "夕日",
-        "富士山"
-      ]
-    },
-    {
-      "name": "石廊崎",
-      "lat": 34.601951,
-      "lng": 138.846047,
-      "address": "静岡県賀茂郡南伊豆町石廊崎",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "伊豆半島最南端の岬。断崖絶壁と荒々しい海が織りなす絶景が広がり、岬の先端には石廊崎灯台と石室神社がある。南伊豆ツーリングのハイライト。",
-      "tags": [
-        "海岸線",
-        "絶景",
-        "岬"
-      ]
-    },
-    {
-      "name": "寸又峡温泉",
-      "lat": 35.174699,
-      "lng": 138.118059,
-      "address": "静岡県榛原郡川根本町千頭寸又峡",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "南アルプスの秘境に位置する温泉地。エメラルドグリーンの渓谷美とログハウス風の宿が並ぶ山里風景が魅力。夢の吊り橋は観光名所として有名。",
-      "tags": [
-        "温泉",
-        "秘湯",
-        "川",
-        "絶景"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "伊豆スカイライン",
-      "lat": 34.916937,
-      "lng": 139.023096,
+      "lat": 35.078319,
+      "lng": 139.026833,
       "address": "静岡県伊豆市冷川伊豆スカイライン",
-      "source": "recommend",
-      "category": "ツーリングロード",
-      "description": "熱海峠から天城高原まで続く全長40kmの稜線ルート。相模湾と駿河湾の両方を見渡せる高原道路で、料金所はあるが走り応え抜群の伊豆最高のルート。",
-      "tags": [
-        "絶景",
-        "峠",
-        "海岸線"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "天城峠（旧天城トンネル）",
-      "lat": 34.829723,
-      "lng": 138.933602,
-      "address": "静岡県伊豆市湯ヶ島旧天城トンネル",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "川端康成の小説「伊豆の踊子」の舞台となった歴史ある石造りのトンネル。新緑や紅葉シーズンの趣は格別で、国道414号の旧道ルートとして人気。",
-      "tags": [
-        "峠",
-        "歴史",
-        "紅葉"
-      ]
-    },
-    {
-      "name": "堂ヶ島",
-      "lat": 34.784116,
-      "lng": 138.768452,
-      "address": "静岡県賀茂郡西伊豆町仁科堂ヶ島",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "奇岩が連なる西伊豆を代表する海岸景勝地。天然記念物の天窓洞や絶壁に囲まれた入江など独特の景観が続き、夕日の美しさで名高い。",
-      "tags": [
-        "海岸線",
-        "絶景",
-        "夕日"
-      ]
-    },
-    {
-      "name": "三保の松原",
-      "lat": 34.994742,
-      "lng": 138.523802,
-      "address": "静岡県静岡市清水区三保",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "世界文化遺産「富士山」の構成資産。約7kmにわたる海岸線に松林が続き、正面に富士山を望む眺望は日本三景にも数えられる絶景。",
-      "tags": [
-        "世界遺産",
-        "絶景",
-        "海岸線",
-        "富士山"
-      ]
-    },
-    {
-      "name": "道の駅 伊豆ゲートウェイ函南",
-      "lat": 35.075842,
-      "lng": 138.925974,
-      "address": "静岡県田方郡函南町塚本367-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "伊豆半島の玄関口に位置する大型道の駅。伊豆の特産品や地元グルメが充実し、伊豆ツーリングの出発点として多くのライダーが集まる。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
-    },
-    {
-      "name": "修善寺温泉",
-      "lat": 34.970545,
-      "lng": 138.928386,
-      "address": "静岡県伊豆市修善寺",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "伊豆最古の温泉地で弘法大師が開いたと伝わる。桂川沿いに旅館が並ぶ情緒豊かな温泉街で、伊豆ツーリングの中継地として最適なスポット。",
-      "tags": [
-        "温泉",
-        "歴史",
-        "桜"
-      ]
-    },
-    {
-      "name": "浜名湖",
-      "lat": 34.739143,
-      "lng": 137.566093,
-      "address": "静岡県浜松市西区舘山寺",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "東西約30kmに及ぶ汽水湖で浜名湖ガーデンパークなど観光施設が充実。湖岸沿いの国道301号は走りやすく、うなぎグルメとセットでツーリングを楽しめる。",
-      "tags": [
-        "湖",
-        "グルメ",
-        "夕日"
-      ]
-    },
-    {
-      "name": "竜ヶ岩洞",
-      "lat": 34.845101,
-      "lng": 137.649084,
-      "address": "静岡県浜松市北区引佐町田畑193",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "浜松市北方の山中にある東海最大規模の鍾乳洞。全長1kmを超える洞内は幻想的な石灰岩の造形で満ちており、奥三河方面へのルート沿いに位置。",
-      "tags": [
-        "絶景",
-        "歴史"
-      ]
-    },
-    {
-      "name": "富士五湖・本栖湖",
-      "lat": 35.378624,
-      "lng": 138.845217,
-      "address": "静岡県南都留郡富士河口湖町本栖",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "富士五湖の中で最も透明度が高く、千円札に描かれた富士山の絵のモデルとなった湖。国道139号からのアクセスが良く湖畔ツーリングの人気スポット。",
-      "tags": [
-        "湖",
-        "絶景",
-        "富士山"
-      ]
-    },
-    {
-      "name": "道の駅 朝霧高原",
-      "lat": 35.413805,
-      "lng": 138.590857,
-      "address": "静岡県富士宮市上井出3690-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "富士山麓・国道139号沿いに位置する道の駅。朝霧高原の牧場景色と正面に迫る富士山の絶景が楽しめ、富士山スカイライン方面へのルート上にある。",
-      "tags": [
-        "道の駅",
-        "絶景",
-        "富士山",
-        "グルメ"
-      ]
-    },
-    {
-      "name": "下田・龍宮窟",
-      "lat": 34.881262,
-      "lng": 137.957267,
-      "address": "静岡県下田市田牛",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "下田市田牛に位置する直径50mの天然砂浜のドーム。洞窟を抜けると円形の空が広がる幻想的な空間で、ハート形の入江として絶景スポットに認定。",
-      "tags": [
-        "海岸線",
-        "絶景",
-        "秘境"
-      ]
-    },
-    {
-      "name": "大室山",
-      "lat": 34.903137,
-      "lng": 139.094759,
-      "address": "静岡県伊東市池672-2",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "伊東市にある標高580mの火山。リフトで山頂まで上がれ、伊豆七島から富士山までの360度パノラマが楽しめる。山麓の桜やつつじも見もの。",
-      "tags": [
-        "絶景",
-        "展望台",
-        "桜"
-      ]
-    },
-    {
-      "name": "浜松餃子の浜太郎",
-      "lat": 34.710979,
-      "lng": 137.725943,
-      "address": "静岡県浜松市中区田町325-8",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "浜松B級グルメの代表・浜松餃子の名店。円形に並べた餃子ともやしのスタイルはライダーに大人気で、ツーリングのグルメ目的地として定番。",
-      "tags": [
-        "グルメ",
-        "B級グルメ"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "黄金崎",
       "lat": 34.843802,
       "lng": 138.761015,
       "address": "静岡県賀茂郡西伊豆町宇久須黄金崎",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "西伊豆に位置する夕日の名所。岩肌が黄金色に輝く黄昏時は特に絶景で、晴れた日には富士山のシルエットが浮かび上がる。",
-      "tags": [
-        "海岸線",
-        "夕日",
-        "絶景"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "下田・龍宮窟",
+      "lat": 34.642106,
+      "lng": 138.91551,
+      "address": "静岡県下田市田牛",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "三保の松原",
+      "lat": 34.994742,
+      "lng": 138.523802,
+      "address": "静岡県静岡市清水区三保",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "修善寺温泉",
+      "lat": 34.970545,
+      "lng": 138.928386,
+      "address": "静岡県伊豆市修善寺",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "寸又峡",
+      "lat": 35.181061,
+      "lng": 138.112264,
+      "address": "静岡県 川根本町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "西伊豆スカイライン",
+      "lat": 34.960106,
+      "lng": 138.837651,
+      "address": "静岡県伊豆市土肥西伊豆スカイライン",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "石廊崎",
+      "lat": 34.601951,
+      "lng": 138.846047,
+      "address": "静岡県賀茂郡南伊豆町石廊崎",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "大室山",
+      "lat": 34.903137,
+      "lng": 139.094759,
+      "address": "静岡県伊東市池672-2",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "堂ヶ島",
+      "lat": 34.782545,
+      "lng": 138.767053,
+      "address": "静岡県賀茂郡西伊豆町仁科堂ヶ島",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 伊豆ゲートウェイ函南",
+      "lat": 35.075842,
+      "lng": 138.925974,
+      "address": "静岡県田方郡函南町塚本367-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 朝霧高原",
+      "lat": 35.413805,
+      "lng": 138.590857,
+      "address": "静岡県富士宮市上井出3690-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 天城越え",
+      "lat": 34.855721,
+      "lng": 138.922205,
+      "address": "静岡県伊豆市湯ヶ島旧天城トンネル",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "道の駅 富士川楽座",
       "lat": 35.161878,
       "lng": 138.618466,
       "address": "静岡県富士市岩淵1445",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "東名高速道路富士川SAと直結した道の駅。富士山と駿河湾を眺望できる絶景レストランや地場産品の販売が充実し、東西ツーリングの中継地として人気。",
-      "tags": [
-        "道の駅",
-        "絶景",
-        "グルメ",
-        "富士山"
-      ]
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "日本平",
+      "lat": 34.974665,
+      "lng": 138.465843,
+      "address": "静岡県 静岡市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "熱海城",
+      "lat": 35.086378,
+      "lng": 139.078682,
+      "address": "静岡県 熱海市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "浜松城",
+      "lat": 34.711844,
+      "lng": 137.724867,
+      "address": "静岡県浜松市中区田町325-8",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "富士五湖・本栖湖",
+      "lat": 35.474162,
+      "lng": 138.575588,
+      "address": "静岡県南都留郡富士河口湖町本栖",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "富士山スカイライン（富士宮口）",
+      "lat": 35.336729,
+      "lng": 138.735867,
+      "address": "静岡県富士宮市富士山スカイライン",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "富士山本宮浅間大社",
+      "lat": 35.22734,
+      "lng": 138.610019,
+      "address": "静岡県 富士宮市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "弁天島海浜公園",
+      "lat": 34.688945,
+      "lng": 137.60273,
+      "address": "静岡県浜松市西区舘山寺",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "竜ヶ岩洞",
+      "lat": 34.845101,
+      "lng": 137.649084,
+      "address": "静岡県浜松市北区引佐町田畑193",
+      "imageURL": null,
+      "source": "curated"
     }
-  ],
-  "recommendCount": 19
+  ]
 }

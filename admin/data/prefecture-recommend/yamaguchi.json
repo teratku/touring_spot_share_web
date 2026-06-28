@@ -1,287 +1,180 @@
 {
   "prefecture": "山口県",
   "romaji": "yamaguchi",
-  "count": 24,
-  "curatedCount": 6,
+  "count": 19,
+  "curatedCount": 19,
   "manualCount": 0,
   "spots": [
     {
-      "name": "角島大橋",
-      "lat": 34.352375,
-      "lng": 130.887219,
-      "address": "山口県 下関市",
+      "spotId": null,
+      "name": "宇部・常磐公園",
+      "lat": 33.945816,
+      "lng": 131.283016,
+      "address": "山口県宇部市常盤公園1番1号",
+      "imageURL": null,
       "source": "curated"
     },
     {
-      "name": "元乃隅神社",
-      "lat": 34.420083,
-      "lng": 131.063169,
-      "address": "山口県 長門市",
-      "source": "curated"
-    },
-    {
-      "name": "錦帯橋",
-      "lat": 34.167643,
-      "lng": 132.178321,
-      "address": "山口県 岩国市",
-      "source": "curated"
-    },
-    {
-      "name": "秋吉台",
-      "lat": 34.234167,
-      "lng": 131.306043,
-      "address": "山口県 美祢市",
-      "source": "curated"
-    },
-    {
-      "name": "瑠璃光寺五重塔",
-      "lat": 34.189633,
-      "lng": 131.47219,
-      "address": "山口県 山口市",
-      "source": "curated"
-    },
-    {
-      "name": "別府弁天池",
-      "lat": 34.255107,
-      "lng": 131.244888,
-      "address": "山口県 美祢市",
-      "source": "curated"
-    },
-    {
-      "name": "秋吉台カルスト台地",
-      "lat": 34.166799,
-      "lng": 131.206228,
-      "address": "山口県美祢市秋芳町秋吉",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "日本最大のカルスト台地。石灰岩の奇岩が草原に点在する独特の景観が広がり、開放感あふれる快走ルートとしてライダーに人気。",
-      "tags": [
-        "絶景",
-        "観光名所"
-      ]
-    },
-    {
-      "name": "秋芳洞",
-      "lat": 34.228061,
-      "lng": 131.303411,
-      "address": "山口県美祢市秋芳町秋吉3506-2",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "秋吉台の地下に広がる日本最大級の鍾乳洞。全長8.8kmのうち1kmが公開されており、秋吉台ツーリングと合わせて必訪の観光地。",
-      "tags": [
-        "観光名所",
-        "歴史"
-      ]
-    },
-    {
-      "name": "萩城下町",
-      "lat": 34.178578,
-      "lng": 131.308674,
-      "address": "山口県萩市堀内",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "幕末の志士を多く輩出した城下町。白壁の武家屋敷が続く道を走れば歴史に触れることができ、松下村塾など幕末の遺構が残る。",
-      "tags": [
-        "歴史",
-        "観光名所"
-      ]
-    },
-    {
-      "name": "角島（角島灯台）",
-      "lat": 34.35743,
-      "lng": 130.869761,
-      "address": "山口県下関市豊北町角島2609",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "角島大橋を渡った先にある日本有数の絶景灯台。白亜の石造灯台と青い海のコントラストが美しく、島内を一周するプチツーリングも楽しい。",
-      "tags": [
-        "絶景",
-        "海岸線",
-        "夕日"
-      ]
-    },
-    {
-      "name": "道の駅 センザキッチン",
-      "lat": 34.38805,
-      "lng": 131.203414,
-      "address": "山口県長門市仙崎4297-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "仙崎漁港に隣接した海鮮グルメの道の駅。新鮮なウニやアワビ、センザキタコが名物で、日本海沿いツーリングの絶品グルメ休憩地。",
-      "tags": [
-        "道の駅",
-        "グルメ",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "元乃隅神社（龍宮の潮吹き）",
-      "lat": 34.420083,
-      "lng": 131.063169,
-      "address": "山口県長門市油谷津黄498",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "断崖絶壁に並ぶ123基の鳥居が連なる絶景神社。日本海の荒波と鳥居のオレンジが映える景観はSNSで話題を呼んだ人気スポット。",
-      "tags": [
-        "絶景",
-        "海岸線",
-        "歴史"
-      ]
-    },
-    {
-      "name": "関門海峡（火の山公園）",
-      "lat": 33.921808,
-      "lng": 130.931898,
-      "address": "山口県下関市みもすそ川町火の山公園",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "本州と九州を分ける関門海峡を一望できる展望公園。行き交う大型船舶と九州を眼下に見渡す迫力の景観が楽しめる。",
-      "tags": [
-        "絶景",
-        "観光名所"
-      ]
-    },
-    {
-      "name": "須佐ホルンフェルス",
-      "lat": 34.622835,
-      "lng": 131.608928,
-      "address": "山口県萩市須佐町須佐4507",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "国の天然記念物に指定された独特の縞模様の岩壁。地質の奇観として珍しく、日本海の荒波が打ち寄せる豪快な景観が見られる。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "豊田湖（豊田町）",
-      "lat": 34.249074,
-      "lng": 131.118665,
-      "address": "山口県下関市豊田町杢路子",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "ゲンジボタルの生息地として有名な清流が流れる湖。豊田湖畔公園からの眺めが美しく、静かなツーリング立ち寄りスポット。",
-      "tags": [
-        "湖・川"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "下関・唐戸市場",
-      "lat": 33.949385,
-      "lng": 130.921789,
+      "lat": 33.956674,
+      "lng": 130.945787,
       "address": "山口県下関市唐戸町5-50",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "フグ・関サバ・関アジなど九州山口の海の幸が集まる市場。週末は市場内で直接食べられるグルメイベントが開かれライダーにも人気。",
-      "tags": [
-        "グルメ",
-        "観光名所"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "角島（角島灯台）",
+      "lat": 34.352507,
+      "lng": 130.840988,
+      "address": "山口県下関市豊北町角島2609",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "角島大橋",
+      "lat": 34.347617,
+      "lng": 130.894718,
+      "address": "山口県 下関市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "関門海峡（火の山公園）",
+      "lat": 33.97294,
+      "lng": 130.959992,
+      "address": "山口県下関市みもすそ川町火の山公園",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "岩国城",
       "lat": 34.175249,
       "lng": 132.17427,
       "address": "山口県岩国市横山",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "錦帯橋の上方の山頂に立つ再建天守。ロープウェイで登った頂上からは錦帯橋と市街地が一望でき、錦帯橋セットで訪れる定番。",
-      "tags": [
-        "歴史",
-        "絶景"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "宇部・常磐公園",
-      "lat": 34.003202,
-      "lng": 131.222022,
-      "address": "山口県宇部市常盤公園1番1号",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "宇部市の中心部にある大きな池を囲む公園。野外彫刻と自然が融合した独特の景観で、山口市内の散策ルートに組み込める都市公園。",
-      "tags": [
-        "桜",
-        "観光名所"
-      ]
+      "spotId": null,
+      "name": "錦帯橋",
+      "lat": 34.167643,
+      "lng": 132.178321,
+      "address": "山口県 岩国市",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "道の駅 萩しーまーと",
-      "lat": 34.426237,
-      "lng": 131.414524,
-      "address": "山口県萩市江向510-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "萩漁港に隣接する海鮮グルメ道の駅。萩の地魚や夏みかんを使ったスイーツが揃い、萩城下町観光とセットで訪れる人気の立ち寄り地。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
+      "spotId": null,
+      "name": "元乃隅神社",
+      "lat": 34.420083,
+      "lng": 131.063169,
+      "address": "山口県 長門市",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "山陽道・小月あたりの海岸線",
-      "lat": 33.962327,
-      "lng": 130.954256,
-      "address": "山口県下関市小月",
-      "source": "recommend",
-      "category": "ツーリングロード",
-      "description": "関門海峡に向かって広がる海岸線ルート。本州最西端に近づくにつれ九州が見えてくる高揚感があり、ラストランのような気分になれる道。",
-      "tags": [
-        "海岸線",
-        "ツーリングロード"
-      ]
+      "spotId": null,
+      "name": "元乃隅神社（龍宮の潮吹き）",
+      "lat": 34.420083,
+      "lng": 131.063169,
+      "address": "山口県長門市油谷津黄498",
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "秋吉台",
+      "lat": 34.234167,
+      "lng": 131.306043,
+      "address": "山口県 美祢市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "秋芳洞",
+      "lat": 34.228061,
+      "lng": 131.303411,
+      "address": "山口県美祢市秋芳町秋吉3506-2",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "須佐ホルンフェルス",
+      "lat": 34.64546,
+      "lng": 131.591706,
+      "address": "山口県萩市須佐町須佐4507",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "川棚温泉",
       "lat": 34.146499,
       "lng": 130.922306,
       "address": "山口県下関市豊浦町川棚",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "下関市北部に湧く小さな温泉地。瓦そばが名物で、温泉と郷土グルメを一度に楽しめるツーリング立ち寄り温泉として人気。",
-      "tags": [
-        "温泉",
-        "グルメ"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "島根との県境・木谷峡",
-      "lat": 34.1665,
-      "lng": 132.219116,
-      "address": "山口県岩国市錦町広瀬",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "錦川上流の峡谷。秋の紅葉が渓谷を彩り、山陰・山陽を結ぶルートの途中で立ち寄れる静かな秘境的スポット。",
-      "tags": [
-        "紅葉",
-        "峠"
-      ]
+      "spotId": null,
+      "name": "道の駅 センザキッチン",
+      "lat": 34.38805,
+      "lng": 131.203414,
+      "address": "山口県長門市仙崎4297-1",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "防府天満宮",
-      "lat": 34.063104,
-      "lng": 131.574283,
-      "address": "山口県防府市松崎町14-1",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "日本三天神の一つ。防府市の中心に位置し、全国から参拝者が訪れる格式高い神社。山陽ルートの歴史的立ち寄りスポット。",
-      "tags": [
-        "歴史"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "道の駅 ゆとりパークたまがわ",
       "lat": 34.648501,
       "lng": 131.664882,
       "address": "山口県岩国市玖珂町3597-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "岩国市郊外の自然豊かな道の駅。地元農産物と岩国名物のれんこんを使った商品が人気で、山間ツーリングの休憩地として使いやすい。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 萩しーまーと",
+      "lat": 34.426237,
+      "lng": 131.414524,
+      "address": "山口県萩市江向510-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "別府弁天池",
+      "lat": 34.255107,
+      "lng": 131.244888,
+      "address": "山口県 美祢市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "防府天満宮",
+      "lat": 34.063104,
+      "lng": 131.574283,
+      "address": "山口県防府市松崎町14-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "瑠璃光寺五重塔",
+      "lat": 34.189633,
+      "lng": 131.47219,
+      "address": "山口県 山口市",
+      "imageURL": null,
+      "source": "curated"
     }
-  ],
-  "recommendCount": 18
+  ]
 }

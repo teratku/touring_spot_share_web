@@ -1,257 +1,153 @@
 {
   "prefecture": "香川県",
   "romaji": "kagawa",
-  "count": 22,
-  "curatedCount": 6,
+  "count": 16,
+  "curatedCount": 16,
   "manualCount": 0,
   "spots": [
     {
-      "name": "金刀比羅宮",
-      "lat": 34.183988,
-      "lng": 133.80939,
-      "address": "香川県 琴平町",
-      "source": "curated"
-    },
-    {
-      "name": "栗林公園",
-      "lat": 34.329497,
-      "lng": 134.043926,
-      "address": "香川県 高松市",
-      "source": "curated"
-    },
-    {
-      "name": "父母ヶ浜",
-      "lat": 34.18831,
-      "lng": 133.646831,
-      "address": "香川県 三豊市",
-      "source": "curated"
-    },
-    {
-      "name": "屋島",
-      "lat": 34.336581,
-      "lng": 134.109179,
-      "address": "香川県 高松市",
-      "source": "curated"
-    },
-    {
+      "spotId": null,
       "name": "エンジェルロード",
       "lat": 34.477611,
       "lng": 134.188647,
       "address": "香川県 土庄町",
+      "imageURL": null,
       "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "まんのう公園",
+      "lat": 34.171423,
+      "lng": 133.885059,
+      "address": "香川県仲多度郡まんのう町吉野4243-12",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "寒霞渓",
-      "lat": 34.515645,
-      "lng": 134.30036,
+      "lat": 34.5166,
+      "lng": 134.301252,
       "address": "香川県 小豆島町",
+      "imageURL": null,
       "source": "curated"
     },
     {
-      "name": "小豆島（オリーブ公園）",
-      "lat": 34.489774,
-      "lng": 134.260373,
-      "address": "香川県小豆郡小豆島町西村甲1941-1",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "地中海を彷彿させるオリーブ畑と風車が広がる丘。映画・魔女の宅急便のロケ地として有名で、島内のツーリングも爽快なルートが続く。",
-      "tags": [
-        "絶景",
-        "観光名所"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "観音寺・銭形砂絵（琴弾公園）",
-      "lat": 34.124288,
-      "lng": 133.65573,
+      "lat": 34.133902,
+      "lng": 133.645592,
       "address": "香川県観音寺市有明町",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "砂浜に描かれた巨大な寛永通宝の砂絵。展望台から見下ろす砂絵は精巧で、見た者は金運が上がると言われる県内有数の名所。",
-      "tags": [
-        "絶景",
-        "歴史"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "道の駅 しおのえ",
-      "lat": 34.170044,
-      "lng": 134.082089,
-      "address": "香川県高松市塩江町安原上東780",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "塩江温泉郷の入口に立つ道の駅。高松から近い山間の温泉地への玄関口で、地元農産物や温泉グルメが楽しめる人気の休憩地。",
-      "tags": [
-        "道の駅",
-        "温泉"
-      ]
-    },
-    {
-      "name": "寒霞渓（小豆島）",
-      "lat": 34.515645,
-      "lng": 134.30036,
-      "address": "香川県小豆郡小豆島町神懸通乙168",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "日本三大渓谷美の一つ。急峻な渓谷を縫うロープウェイと車道からの眺めは圧巻で、秋の紅葉は小豆島随一の美しさを誇る。",
-      "tags": [
-        "絶景",
-        "紅葉",
-        "峠"
-      ]
-    },
-    {
-      "name": "瀬戸内国際芸術祭・直島",
-      "lat": 34.466713,
-      "lng": 133.980524,
-      "address": "香川県香川郡直島町",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "現代アートが島全体に点在する瀬戸内の離島。草間彌生の水玉南瓜が海岸に立ち、フェリーで渡るアート巡りツーリングが人気。",
-      "tags": [
-        "観光名所"
-      ]
-    },
-    {
-      "name": "紫雲出山（三豊）",
-      "lat": 34.243653,
-      "lng": 133.595763,
-      "address": "香川県三豊市詫間町大浜",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "荘内半島の頂上展望台から見渡す瀬戸内の多島美。春は桜と海の絶景が楽しめ、父母ヶ浜とセットで走る三豊ルートの核心。",
-      "tags": [
-        "絶景",
-        "桜",
-        "夕日"
-      ]
-    },
-    {
-      "name": "塩江温泉",
-      "lat": 34.168108,
-      "lng": 134.086167,
-      "address": "香川県高松市塩江町安原上東",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "高松市の奥座敷として知られる山間の温泉郷。香川唯一の温泉地として大切にされ、うどん県ツーリングの締めくくりに最適な一湯。",
-      "tags": [
-        "温泉"
-      ]
-    },
-    {
-      "name": "道の駅 小豆島オリーブ公園",
-      "lat": 34.476389,
-      "lng": 134.341944,
-      "address": "香川県小豆郡小豆島町西村甲1941-1",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "小豆島のオリーブ産地に立つ産直・観光拠点。オリーブオイルを使ったソフトクリームやアヒージョが名物で、島内一周の休憩地。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
-    },
-    {
-      "name": "豊島（家浦港周辺）",
-      "lat": 34.479641,
-      "lng": 134.070342,
-      "address": "香川県小豆郡土庄町豊島家浦",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "産廃不法投棄問題を乗り越えアートの島として生まれ変わった島。豊島美術館や棚田が有名で、直島・犬島と合わせたアートアイランドツア一。",
-      "tags": [
-        "観光名所"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "丸亀城",
       "lat": 34.286022,
       "lng": 133.800101,
       "address": "香川県丸亀市一番丁",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "現存12天守の一つ。日本一高い石垣の上に立つ小ぶりな天守が印象的で、高松・坂出エリアのツーリングルートの歴史スポット。",
-      "tags": [
-        "歴史"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "與田寺（大内町）",
-      "lat": 34.241932,
-      "lng": 134.321085,
-      "address": "香川県東かがわ市与田山666",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "ハスで有名な古刹。夏の早朝に咲くハスの花が池を彩る景観が美しく、東讃岐のツーリングルートの静かな立ち寄りスポット。",
-      "tags": [
-        "歴史"
-      ]
+      "spotId": null,
+      "name": "金刀比羅宮",
+      "lat": 34.183988,
+      "lng": 133.80939,
+      "address": "香川県 琴平町",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "道の駅 ふれあいパーク大内",
-      "lat": 34.258333,
-      "lng": 134.3625,
-      "address": "香川県東かがわ市水主100",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "さぬき市・東かがわ市の東讃エリアの道の駅。地元の讃岐うどんや海産物が並び、徳島・淡路島方面へ向かうルートの補給地点。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
+      "spotId": null,
+      "name": "栗林公園",
+      "lat": 34.329497,
+      "lng": 134.043926,
+      "address": "香川県 高松市",
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "高見島（多度津沖）",
-      "lat": 34.315452,
-      "lng": 133.673311,
-      "address": "香川県仲多度郡多度津町高見島",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "多度津港からフェリーで渡る小さな離島。廃屋アートと呼ばれるユニークな集落と絶景の海が広がり、趣きある島旅が楽しめる。",
-      "tags": [
-        "海岸線",
-        "絶景"
-      ]
-    },
-    {
-      "name": "まんのう公園（春）",
-      "lat": 34.178644,
-      "lng": 133.882678,
-      "address": "香川県仲多度郡まんのう町吉野4243-12",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "日本最大級の国営公園。春はチューリップや菜の花が丘を彩り、満濃池を望む展望スポットとしても人気の香川内陸ツーリングの拠点。",
-      "tags": [
-        "桜",
-        "観光名所"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "五色台展望台",
       "lat": 34.381377,
       "lng": 133.929547,
       "address": "香川県坂出市王越町乃生",
-      "source": "recommend",
-      "category": "展望台・景勝地",
-      "description": "坂出市北方の溶岩台地から瀬戸大橋と瀬戸内海を一望。サンセットの名所として知られ、地元ライダーが夕暮れ時に集まる穴場スポット。",
-      "tags": [
-        "絶景",
-        "夕日"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "紫雲出山（三豊）",
+      "lat": 34.243653,
+      "lng": 133.595763,
+      "address": "香川県三豊市詫間町大浜",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "小豆島（オリーブ公園）",
+      "lat": 34.472882,
+      "lng": 134.273615,
+      "address": "香川県小豆郡小豆島町西村甲1941-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "瀬戸内国際芸術祭・直島",
+      "lat": 34.458022,
+      "lng": 133.998699,
+      "address": "香川県香川郡直島町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "大窪寺（八十八番・結願の寺）",
       "lat": 34.191364,
       "lng": 134.206873,
       "address": "香川県さぬき市多和兼割96",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "四国八十八箇所の最終霊場。霊場巡礼ツーリングのゴール地点として全国のライダー遍路が目指す山間の古刹。境内の枯山水が美しい。",
-      "tags": [
-        "歴史",
-        "観光名所"
-      ]
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 しおのえ",
+      "lat": 34.170044,
+      "lng": 134.082089,
+      "address": "香川県高松市塩江町安原上東780",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "父母ヶ浜",
+      "lat": 34.190932,
+      "lng": 133.648853,
+      "address": "香川県 三豊市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "豊島（家浦港周辺）",
+      "lat": 34.486891,
+      "lng": 134.059553,
+      "address": "香川県小豆郡土庄町豊島家浦",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "與田寺（大内町）",
+      "lat": 34.241932,
+      "lng": 134.321085,
+      "address": "香川県東かがわ市与田山666",
+      "imageURL": null,
+      "source": "curated"
     }
-  ],
-  "recommendCount": 16
+  ]
 }

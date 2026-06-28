@@ -1,288 +1,162 @@
 {
   "prefecture": "鹿児島県",
   "romaji": "kagoshima",
-  "count": 24,
-  "curatedCount": 6,
+  "count": 17,
+  "curatedCount": 17,
   "manualCount": 0,
   "spots": [
     {
-      "name": "桜島",
-      "lat": 31.580574,
-      "lng": 130.657984,
-      "address": "鹿児島県 鹿児島市",
-      "source": "curated"
-    },
-    {
-      "name": "仙巌園",
-      "lat": 31.616622,
-      "lng": 130.576625,
-      "address": "鹿児島県 鹿児島市",
-      "source": "curated"
-    },
-    {
-      "name": "指宿温泉",
-      "lat": 31.256421,
-      "lng": 130.625966,
-      "address": "鹿児島県 指宿市",
-      "source": "curated"
-    },
-    {
-      "name": "屋久島",
-      "lat": 30.347925,
-      "lng": 130.524483,
-      "address": "鹿児島県 熊毛郡",
-      "source": "curated"
-    },
-    {
-      "name": "霧島神宮",
-      "lat": 31.858368,
-      "lng": 130.871127,
-      "address": "鹿児島県 霧島市",
-      "source": "curated"
-    },
-    {
-      "name": "知覧特攻平和会館",
-      "lat": 31.363704,
-      "lng": 130.434432,
-      "address": "鹿児島県 南九州市",
-      "source": "curated"
-    },
-    {
-      "name": "桜島（湯之平展望所）",
-      "lat": 31.580574,
-      "lng": 130.657984,
-      "address": "鹿児島県鹿児島市桜島小池町1025",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "鹿児島のシンボル・活火山を一周するサイクリング・ツーリングルート。湯之平展望所は一般観光客が入れる最高点で、眼下の溶岩原と錦江湾が絶景。",
-      "tags": [
-        "絶景",
-        "峠"
-      ]
-    },
-    {
-      "name": "開聞岳・長崎鼻",
-      "lat": 31.179961,
-      "lng": 130.52844,
+      "spotId": null,
+      "name": "かいもん山麓ふれあい公園",
+      "lat": 31.196247,
+      "lng": 130.533586,
       "address": "鹿児島県指宿市山川岡児ヶ水",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "薩摩富士とも呼ばれる美しい円錐形の火山を望む薩摩半島最南端の岬。竜宮伝説ゆかりの地で、開聞岳と薩摩の海が一望できる絶景スポット。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "指宿温泉（砂むし）",
-      "lat": 31.256421,
-      "lng": 130.625966,
-      "address": "鹿児島県指宿市湊1-1",
-      "source": "recommend",
-      "category": "温泉",
-      "description": "全身を砂で覆う砂蒸し温泉で有名な指宿。天然の地熱で温められた砂に埋まる体験は全国唯一で、薩摩半島ツーリングの究極の癒しスポット。",
-      "tags": [
-        "温泉",
-        "観光名所"
-      ]
-    },
-    {
-      "name": "屋久島（一湊海岸・宮之浦港）",
-      "lat": 30.347925,
-      "lng": 130.524483,
-      "address": "鹿児島県熊毛郡屋久島町宮之浦",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "世界自然遺産の島。鹿児島港からフェリーで渡り、屋久杉の原生林と亜熱帯の自然を満喫するツーリングは一生に一度は経験したい旅。",
-      "tags": [
-        "世界遺産",
-        "絶景",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "知林ヶ島（指宿）",
-      "lat": 31.276777,
-      "lng": 130.676826,
-      "address": "鹿児島県指宿市知林ヶ島",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "干潮時に砂の道が現れる陸繋島。3月から10月の干潮時に徒歩で渡れる神秘的な光景は指宿の穴場スポットで、錦江湾と開聞岳の眺めも美しい。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "道の駅 川辺やすらぎの郷",
-      "lat": 31.412493,
-      "lng": 130.432666,
-      "address": "鹿児島県南九州市川辺町清水6051",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "知覧・薩摩半島への内陸ルート沿いの道の駅。南薩の農産物と特産品が揃い、知覧特攻基地観光と合わせて立ち寄れる便利な休憩拠点。",
-      "tags": [
-        "道の駅"
-      ]
-    },
-    {
-      "name": "薩摩半島・野間岬",
-      "lat": 31.49963,
-      "lng": 130.4172,
-      "address": "鹿児島県いちき串木野市羽島",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "東シナ海に突き出た薩摩半島西側の岬。灯台のある岬先端から見渡す海景は開放的で、西海岸を走る薩摩ツーリングの静かなスポット。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "仙巌園（磯庭園）",
-      "lat": 31.616622,
-      "lng": 130.576625,
-      "address": "鹿児島県鹿児島市吉野町9700-1",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "桜島を借景にした薩摩藩主・島津家の大名庭園。世界遺産に認定された明治産業革命の遺構も内包し、鹿児島市内ツーリングの歴史・文化拠点。",
-      "tags": [
-        "世界遺産",
-        "歴史",
-        "絶景"
-      ]
-    },
-    {
-      "name": "霧島・韓国岳（えびの高原から）",
-      "lat": 31.58622,
-      "lng": 130.550009,
-      "address": "鹿児島県霧島市牧園町高千穂",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "霧島山系の最高峰(1700m)。えびの高原から登れる登山道が整備され、山頂からは宮崎・鹿児島両県の山並みと火山湖が一望できる。",
-      "tags": [
-        "峠",
-        "絶景"
-      ]
-    },
-    {
-      "name": "池田湖（カルデラ湖）",
-      "lat": 31.234872,
-      "lng": 130.563758,
-      "address": "鹿児島県指宿市池田",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "九州最大のカルデラ湖。開聞岳を湖面に映す景観が美しく、湖畔では巨大ウナギの生息でも知られる指宿ツーリングの必見スポット。",
-      "tags": [
-        "湖・川",
-        "絶景"
-      ]
-    },
-    {
-      "name": "雄川の滝（南大隅）",
-      "lat": 31.200599,
-      "lng": 130.824871,
-      "address": "鹿児島県肝属郡南大隅町根占川南",
-      "source": "recommend",
-      "category": "湖・川",
-      "description": "エメラルドグリーンの滝壺が圧巻の絶景滝。大隅半島の南部に位置し、佐多岬へ向かうルートの途中に立ち寄れる秘境的な絶景スポット。",
-      "tags": [
-        "絶景",
-        "湖・川"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "佐多岬（本土最南端）",
       "lat": 30.994489,
       "lng": 130.660302,
       "address": "鹿児島県肝属郡南大隅町佐多馬籠417",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "北緯31度の本土最南端の岬。展望台から太平洋と屋久島を望む絶景は感動的で、最南端制覇を目指すライダーが全国から訪れる聖地。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
+      "spotId": null,
+      "name": "桜島",
+      "lat": 31.59155,
+      "lng": 130.62993,
+      "address": "鹿児島県 鹿児島市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "薩摩・武家屋敷（出水）",
+      "lat": 32.075375,
+      "lng": 130.358233,
+      "address": "鹿児島県出水市麓町",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "薩摩半島・野間岬",
+      "lat": 31.416047,
+      "lng": 130.109324,
+      "address": "鹿児島県いちき串木野市羽島",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "吹上浜（日置市）",
+      "lat": 31.523569,
+      "lng": 130.326133,
+      "address": "鹿児島県日置市吹上町中原",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "仙巌園",
+      "lat": 31.616622,
+      "lng": 130.576625,
+      "address": "鹿児島県 鹿児島市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "仙巌園（磯庭園）",
+      "lat": 31.616622,
+      "lng": 130.576625,
+      "address": "鹿児島県鹿児島市吉野町9700-1",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "知覧特攻平和会館",
+      "lat": 31.363704,
+      "lng": 130.434432,
+      "address": "鹿児島県 南九州市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "知林ヶ島（指宿）",
+      "lat": 31.276777,
+      "lng": 130.676826,
+      "address": "鹿児島県指宿市知林ヶ島",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "池田湖（カルデラ湖）",
+      "lat": 31.248544,
+      "lng": 130.578518,
+      "address": "鹿児島県指宿市池田",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
       "name": "道の駅 喜入（桜島展望）",
       "lat": 31.379095,
       "lng": 130.545352,
       "address": "鹿児島県鹿児島市喜入中名町",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "錦江湾越しに桜島を望む展望スポットに立つ道の駅。指宿方面へ向かう国道226号沿いにあり、桜島の絶景を眺めながら地元グルメが楽しめる。",
-      "tags": [
-        "道の駅",
-        "絶景"
-      ]
+      "imageURL": null,
+      "source": "curated"
     },
     {
-      "name": "吹上浜（日置市）",
-      "lat": 31.517652,
-      "lng": 130.324584,
-      "address": "鹿児島県日置市吹上町中原",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "全長47kmの九州最長の砂浜海岸。吹き上げる白砂と松林が続く雄大な景観で、夕日の名所としても有名な薩摩西海岸の絶景ロードの核心。",
-      "tags": [
-        "絶景",
-        "海岸線",
-        "夕日"
-      ]
-    },
-    {
-      "name": "薩摩・武家屋敷（出水）",
-      "lat": 31.813421,
-      "lng": 130.303979,
-      "address": "鹿児島県出水市麓町",
-      "source": "recommend",
-      "category": "文化・歴史",
-      "description": "日本最大規模の武家屋敷群が保存された出水市麓集落。整然と区画された石垣と屋敷が続く道は薩摩の武家文化を今に伝える歴史スポット。",
-      "tags": [
-        "歴史",
-        "観光名所"
-      ]
-    },
-    {
-      "name": "与論島（大金久海岸）",
-      "lat": 27.043311,
-      "lng": 128.42524,
-      "address": "鹿児島県大島郡与論町",
-      "source": "recommend",
-      "category": "海岸・岬",
-      "description": "鹿児島最南端の有人離島。真っ白なサンゴ砂と透明なコバルトブルーの海は奄美・沖縄に並ぶ美しさで、フェリーで渡る南西諸島ツーリングの目的地。",
-      "tags": [
-        "絶景",
-        "海岸線"
-      ]
-    },
-    {
-      "name": "加久藤峠（えびの〜宮崎）",
-      "lat": 32.041809,
-      "lng": 130.755634,
-      "address": "鹿児島県えびの市大字永山",
-      "source": "recommend",
-      "category": "峠・山岳",
-      "description": "えびの盆地から宮崎市方面へ抜ける峠道。霧島山地の北端を越えるルートで、九州縦断ツーリングの定番路として多くのライダーが通過する。",
-      "tags": [
-        "峠",
-        "絶景"
-      ]
-    },
-    {
+      "spotId": null,
       "name": "道の駅 桜島",
       "lat": 31.589352,
       "lng": 130.598868,
       "address": "鹿児島県鹿児島市桜島横山町1722-48",
-      "source": "recommend",
-      "category": "道の駅",
-      "description": "桜島一周道路沿いの活火山を眺める道の駅。桜島溶岩アイスや大根料理など桜島グルメが充実し、フェリーで渡ったライダーの最初の立ち寄り地。",
-      "tags": [
-        "道の駅",
-        "グルメ"
-      ]
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "道の駅 川辺やすらぎの郷",
+      "lat": 31.412493,
+      "lng": 130.432666,
+      "address": "鹿児島県南九州市川辺町清水6051",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "霧島神宮",
+      "lat": 31.858368,
+      "lng": 130.871127,
+      "address": "鹿児島県 霧島市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "揖宿神社",
+      "lat": 31.25346,
+      "lng": 130.623579,
+      "address": "鹿児島県 指宿市",
+      "imageURL": null,
+      "source": "curated"
+    },
+    {
+      "spotId": null,
+      "name": "雄川の滝（南大隅）",
+      "lat": 31.200599,
+      "lng": 130.824871,
+      "address": "鹿児島県肝属郡南大隅町根占川南",
+      "imageURL": null,
+      "source": "curated"
     }
-  ],
-  "recommendCount": 18
+  ]
 }
