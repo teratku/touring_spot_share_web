@@ -348,6 +348,40 @@ app.post("/api/rally", async (req, res) => {
   }
 });
 
+// ラリーの状態変更（active/paused/ended/archived）。setRallyStatus.js と同等。
+app.post("/api/rally/:id/status", async (req, res) => {
+  const ALLOWED = ["active", "paused", "ended", "archived"];
+  const status = (req.body && req.body.status) || "";
+  if (!ALLOWED.includes(status)) return res.status(400).json({ ok: false, error: "status は " + ALLOWED.join("/") + " のいずれか" });
+  try {
+    const ref = db.collection("stampRallies").doc(req.params.id);
+    const snap = await ref.get();
+    if (!snap.exists) return res.status(404).json({ ok: false, error: "not found" });
+    const update = { status, updatedAt: admin.firestore.FieldValue.serverTimestamp() };
+    if (status === "ended" && req.body && req.body.endNow) update.endAt = admin.firestore.Timestamp.fromDate(new Date());
+    await ref.set(update, { merge: true });
+    console.log(`🚦 status stampRallies/${req.params.id} → ${status}`);
+    res.json({ ok: true, id: req.params.id, status });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: e.message });
+  }
+});
+
+// ラリーの物理削除（完全削除）。通常はアーカイブ(status=archived)推奨。
+// 注: 獲得スタンプ(users/{uid}/stamps)は別コレクションのため残る（履歴名は解決不可になる）。
+app.delete("/api/rally/:id", async (req, res) => {
+  try {
+    const ref = db.collection("stampRallies").doc(req.params.id);
+    const snap = await ref.get();
+    if (!snap.exists) return res.status(404).json({ ok: false, error: "not found" });
+    await ref.delete();
+    console.log(`🗑  delete stampRallies/${req.params.id}`);
+    res.json({ ok: true, id: req.params.id });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: e.message });
+  }
+});
+
 // ビルダーの「🎨カバー生成」から生成画像を public/images/rallies/{rallyId}.jpg に書き出す（ローカル専用）。
 // 規約: coverImageURL = https://biketeilen.web.app/images/rallies/{rallyId}.jpg
 app.post("/api/rally-cover/:rallyId", (req, res) => {

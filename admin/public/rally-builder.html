@@ -47,6 +47,14 @@
   .months input { width:auto; }
   pre.json { background:#0d2b33; color:#aee9f5; padding:12px; border-radius:8px; font-size:11px; overflow:auto; max-height:280px; }
   .muted { color:#90a4ae; font-size:11px; }
+  .iconbtn.danger { border-color:#f1b0b0; color:#d33; }
+  .iconbtn:disabled { opacity:.4; cursor:default; }
+  .modal-back { position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:100000; display:flex; align-items:flex-start; justify-content:center; padding:40px 16px; }
+  .modal { background:#fff; border-radius:14px; width:min(840px,96vw); max-height:86vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 10px 40px rgba(0,0,0,.3); }
+  .modal-head { display:flex; align-items:center; gap:8px; padding:12px 14px; border-bottom:1px solid var(--line); }
+  .modal-body { overflow:auto; padding:6px 14px; }
+  .mrow { display:flex; align-items:center; gap:6px; padding:9px 0; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .st-active { color:#1a8f3c; font-weight:700; } .st-paused { color:#e08a00; font-weight:700; } .st-ended { color:#888; } .st-archived { color:#c0392b; }
   .weblist { max-height:170px; overflow:auto; border:1px solid var(--line); border-radius:8px; margin-bottom:6px; }
   .webrow { display:flex; align-items:center; gap:8px; padding:6px 8px; border-bottom:1px solid var(--line); }
   .webrow:last-child { border-bottom:none; }
@@ -63,8 +71,45 @@
       <option value="">― 既存ラリーを読込 ―</option>
       <option v-for="r in rallyList" :key="r.id" :value="r.id">{{ r.fiscalYear }} · {{ r.name }}（{{ r.status }}）</option>
     </select>
+    <button class="btn ghost" @click="openManage">🗂 管理</button>
     <button class="btn ghost" @click="resetForm">新規</button>
   </header>
+
+  <!-- ラリー管理モーダル -->
+  <div v-if="showManage" class="modal-back" @click.self="showManage=false">
+    <div class="modal">
+      <div class="modal-head">
+        <strong>🗂 ラリー管理（{{ filteredManage.length }}）</strong>
+        <span style="flex:1"></span>
+        <select v-model="manageFilter" style="width:auto">
+          <option value="all">すべて</option>
+          <option value="active">稼働中</option>
+          <option value="paused">停止</option>
+          <option value="ended">終了</option>
+          <option value="archived">アーカイブ</option>
+        </select>
+        <button class="btn ghost" @click="loadRallyList">再読込</button>
+        <button class="btn ghost" @click="showManage=false">✕</button>
+      </div>
+      <div class="muted" v-if="manageMsg" style="padding:0 14px">{{ manageMsg }}</div>
+      <div class="modal-body">
+        <div v-if="!filteredManage.length" class="muted" style="padding:16px">該当なし</div>
+        <div v-for="r in filteredManage" :key="r.id" class="mrow">
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600">{{ r.name }} <span class="muted">· {{ r.fiscalYear }}</span></div>
+            <div class="muted">{{ r.id }} · {{ r.region || r.theme }} · 対象{{ r.targetCount }} · <span :class="'st-'+r.status">{{ statusLabel(r.status) }}</span></div>
+          </div>
+          <button class="iconbtn" @click="editRally(r.id)">編集</button>
+          <button class="iconbtn" :disabled="r.status==='active'" @click="changeStatus(r,'active')">稼働</button>
+          <button class="iconbtn" :disabled="r.status==='paused'" @click="changeStatus(r,'paused')">停止</button>
+          <button class="iconbtn" :disabled="r.status==='ended'" @click="changeStatus(r,'ended',true)">終了</button>
+          <button class="iconbtn" :disabled="r.status==='archived'" @click="changeStatus(r,'archived')">アーカイブ</button>
+          <button class="iconbtn danger" @click="removeRally(r)">完全削除</button>
+        </div>
+      </div>
+      <div class="muted" style="padding:8px 14px;border-top:1px solid var(--line)">「アーカイブ」=論理削除（推奨・履歴は残る）。「完全削除」は文書を物理削除（獲得スタンプは残ります）。</div>
+    </div>
+  </div>
 
   <div class="wrap">
     <!-- 左：フォーム＋対象 -->
@@ -279,12 +324,17 @@ createApp({
       webQuery:'', webResults:[], webMsg:'', webSearching:false,
       prefectures: [], savedSpots: [], recommendSpots: [], pendingPoint: null, editingRecommendIdx: null,
       targets: [], msg:'', rallyList: [], showJson:false, coverPreview:'', coverMsg:'',
+      showManage:false, manageFilter:'all', manageMsg:'',
       map:null, infoWindow:null, spotMarkers:[], savedMarkers:[], recommendMarkers:[], webMarkers:[], targetMarkers:[], pendingMarker:null
     };
   },
   computed: {
     canSave() { return this.form.rallyId.trim() && this.form.name.trim() && this.targets.length > 0; },
-    jsonPreview() { return JSON.stringify(this.buildRally(), null, 2); }
+    jsonPreview() { return JSON.stringify(this.buildRally(), null, 2); },
+    filteredManage() {
+      const f = this.manageFilter;
+      return (this.rallyList || []).filter((r) => f === 'all' || (r.status || 'active') === f);
+    }
   },
   async mounted() {
     this.loadRallyList();
@@ -739,6 +789,28 @@ createApp({
       try { const res = await fetch('/api/rallies'); const data = await res.json(); this.rallyList = data.rallies || []; } catch (e) {}
     },
     onPickExisting(ev) { const id = ev.target.value; ev.target.value = ''; if (id) this.loadExisting(id); },
+    openManage() { this.manageMsg = ''; this.showManage = true; this.loadRallyList(); },
+    statusLabel(s) { return ({ active:'稼働中', paused:'停止', ended:'終了', archived:'アーカイブ' })[s || 'active'] || (s || 'active'); },
+    editRally(id) { this.showManage = false; this.loadExisting(id); },
+    async changeStatus(r, status, endNow) {
+      this.manageMsg = '更新中...';
+      try {
+        const res = await fetch('/api/rally/' + encodeURIComponent(r.id) + '/status', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ status, endNow: !!endNow }) });
+        const data = await res.json();
+        this.manageMsg = data.ok ? `${r.name} → ${this.statusLabel(status)}` : ('❌ ' + (data.error || '失敗'));
+        if (data.ok) await this.loadRallyList();
+      } catch (e) { this.manageMsg = '❌ ' + e.message; }
+    },
+    async removeRally(r) {
+      if (!confirm(`「${r.name}」を完全削除します。\n獲得スタンプは残りますが履歴の名前解決ができなくなります。\n通常は「アーカイブ」推奨。本当に削除しますか？`)) return;
+      this.manageMsg = '削除中...';
+      try {
+        const res = await fetch('/api/rally/' + encodeURIComponent(r.id), { method:'DELETE' });
+        const data = await res.json();
+        this.manageMsg = data.ok ? `${r.name} を完全削除しました` : ('❌ ' + (data.error || '失敗'));
+        if (data.ok) await this.loadRallyList();
+      } catch (e) { this.manageMsg = '❌ ' + e.message; }
+    },
     seasonFromMonths(months) {
       if (!months || !months.length) return { season:'all', custom:[] };
       const key = months.slice().sort((a, b) => a - b).join(',');

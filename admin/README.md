@@ -40,6 +40,7 @@ node server.js          # → http://127.0.0.1:4317（ローカル専用）／np
 - **対象の編集**：名前編集・並べ替え（↑↓）・削除（✕）。
 - **保存**：「Firestoreへ保存（upsert）」＝検証して `stampRallies` へ／「JSONダウンロード」。
 - **既存ラリーの読込/複製/上書き**：右上「既存ラリーを読込」。
+- **ラリー管理**：右上「🗂 管理」→ 一覧（状態フィルタ）で **編集／稼働・停止・終了／アーカイブ（論理削除・推奨）／完全削除（物理・確認必須）**。
 - **県データ/おすすめ管理**：地図下パネルで名前編集・✕削除 →「更新」（PUT）。Web結果の「県+」「⭐+」でも蓄積。
 
 > エンドポイントを追加・変更したら **server を再起動**。
@@ -168,9 +169,11 @@ node setRallyStatus.js --year 2026 --status paused           # 年度一括
 | GET | `/api/rallies?year=` | 既存ラリー一覧 |
 | GET | `/api/rally/:id` | 1ラリー取得（編集/複製） |
 | POST | `/api/rally` | 検証して stampRallies へ upsert |
+| POST | `/api/rally/:id/status` | 状態変更（active/paused/ended/archived。ended は endNow で endAt=now） |
+| DELETE | `/api/rally/:id` | 物理削除（通常は status=archived 推奨） |
 | POST | `/api/rally-cover/:rallyId` | 「🎨生成」のカバー画像（`{dataUrl}` JPEG/PNG base64）を `../public/images/rallies/{rallyId}.jpg` へ書き出し |
 
-> ⚠️ `/api/rally-cover` は追加エンドポイントのため、**server.js を再起動**してから使うこと。
+> ⚠️ `/api/rally-cover`・`/api/rally/:id/status`・`DELETE /api/rally/:id` は新規エンドポイント。**server.js を再起動**してから使うこと。
 
 ---
 
