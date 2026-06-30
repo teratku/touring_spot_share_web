@@ -64,7 +64,8 @@
 
   var routes = [];          // 一覧
   var selectedId = null;
-  var map = null, polyline = null;
+  var periodSel = 'all';    // 期間フィルタ: 'all' | 'y:2026' | 'm:2026-6'
+  var map = null, polyline = null, allPolylines = [];
 
   // ---- IndexedDB（ジオメトリ・キャッシュ：contentHash 単位） ----
   var idb = {
@@ -136,10 +137,41 @@
     }
   }
 
+  // ---- 期間フィルタ（全期間 / 年 / 月） ----
+  function filteredRoutes() {
+    if (periodSel === 'all') return routes;
+    if (periodSel.indexOf('y:') === 0) {
+      var y = +periodSel.slice(2);
+      return routes.filter(function (r) { return r.startTime && new Date(r.startTime).getFullYear() === y; });
+    }
+    if (periodSel.indexOf('m:') === 0) {
+      var p = periodSel.slice(2).split('-'); var yy = +p[0], mm = +p[1];
+      return routes.filter(function (r) { if (!r.startTime) return false; var d = new Date(r.startTime); return d.getFullYear() === yy && (d.getMonth() + 1) === mm; });
+    }
+    return routes;
+  }
+  function renderPeriodSelect() {
+    var sel = document.getElementById('periodSel'); if (!sel) return;
+    var years = {}, months = {};
+    routes.forEach(function (r) { if (!r.startTime) return; var d = new Date(r.startTime); years[d.getFullYear()] = 1; months[d.getFullYear() + '-' + (d.getMonth() + 1)] = 1; });
+    var yKeys = Object.keys(years).map(Number).sort(function (a, b) { return b - a; });
+    var mKeys = Object.keys(months).map(function (k) { var q = k.split('-'); return { y: +q[0], m: +q[1] }; }).sort(function (a, b) { return (b.y - a.y) || (b.m - a.m); });
+    var html = '<option value="all">全期間</option>';
+    yKeys.forEach(function (y) { html += '<option value="y:' + y + '">' + y + '年</option>'; });
+    mKeys.forEach(function (o) { html += '<option value="m:' + o.y + '-' + o.m + '">' + o.y + '年' + o.m + '月</option>'; });
+    sel.innerHTML = html; sel.value = periodSel;
+  }
+  function onPeriodChange(v) { periodSel = v; renderList(); }
+
   function renderList() {
+    renderPeriodSelect();
     var el = document.getElementById('rlist');
     if (!routes.length) { el.innerHTML = '<li class="muted" style="padding:12px">バックアップがありません（アプリでバックアップしてください）。</li>'; return; }
-    el.innerHTML = routes.map(function (r) {
+    var list = filteredRoutes();
+    var status = document.getElementById('liststatus');
+    if (status) status.textContent = list.length + ' 件' + (periodSel === 'all' ? '' : '（絞り込み中）');
+    if (!list.length) { el.innerHTML = '<li class="muted" style="padding:12px">この期間のルートはありません。</li>'; return; }
+    el.innerHTML = list.map(function (r) {
       var d = r.startTime ? new Date(r.startTime).toLocaleString('ja-JP', { year:'numeric', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }) : '日時不明';
       return '<li class="ritem' + (r.id === selectedId ? ' sel' : '') + '" data-id="' + r.id + '">' +
              '<div class="t">' + esc(r.title) + '</div><div class="s">' + d + ' · ' + fmtDur(r.duration) + '</div></li>';
@@ -147,6 +179,48 @@
     Array.prototype.forEach.call(el.querySelectorAll('.ritem'), function (li) {
       li.onclick = function () { selectRoute(li.getAttribute('data-id')); };
     });
+  }
+
+  // ---- ジオメトリ取得（IndexedDB キャッシュ） ----
+  async function getGeometry(r) {
+    if (!r || !r.storagePath) return { pts: [], cached: false };
+    var pts = await idb.get(r.contentHash);
+    if (pts) return { pts: pts, cached: true };
+    var url = await fb.storage.ref(r.storagePath).getDownloadURL();
+    var json = await (await fetch(url)).json();
+    var raw = json.routePoints || (Array.isArray(json) ? json : []);
+    pts = raw.map(function (p) { return { lat: Number(p.latitude), lng: Number(p.longitude) }; })
+             .filter(function (p) { return isFinite(p.lat) && isFinite(p.lng); });
+    await idb.set(r.contentHash, pts);
+    return { pts: pts, cached: false };
+  }
+  function clearAllPolylines() { allPolylines.forEach(function (p) { p.setMap(null); }); allPolylines = []; }
+
+  // ---- 全ルートを地図に重ねて表示（期間フィルタ適用） ----
+  async function drawAllRoutes() {
+    await waitMaps();
+    if (!window.google || !google.maps) return;
+    selectedId = null; renderList();
+    if (polyline) { polyline.setMap(null); polyline = null; }
+    if (typeof clearSpots === 'function') clearSpots();
+    clearAllPolylines();
+    if (!map) map = new google.maps.Map(document.getElementById('map'), { center: { lat: 36.5, lng: 138 }, zoom: 5, disableDefaultUI: true, zoomControl: true });
+    var list = filteredRoutes();
+    var info = document.getElementById('mapinfo');
+    var bounds = new google.maps.LatLngBounds(), total = 0, drawn = 0;
+    var cap = Math.min(list.length, 300);
+    for (var i = 0; i < cap; i++) {
+      info.textContent = '全ルート読み込み中… ' + (i + 1) + '/' + cap;
+      var g;
+      try { g = await getGeometry(list[i]); } catch (e) { continue; }
+      if (!g.pts.length) continue;
+      var pl = new google.maps.Polyline({ path: g.pts, strokeColor: '#e53935', strokeOpacity: 0.45, strokeWeight: 3, map: map });
+      allPolylines.push(pl);
+      g.pts.forEach(function (p) { bounds.extend(p); });
+      total += distanceOf(g.pts); drawn++;
+    }
+    if (drawn) map.fitBounds(bounds);
+    info.innerHTML = '<span class="pill">全ルート</span> ' + drawn + '本 · ' + fmtKm(total) + (list.length > cap ? '（上限' + cap + '）' : '');
   }
 
   // ---- ルート選択 → ジオメトリ取得（IndexedDB キャッシュ） → 地図描画 ----
@@ -157,17 +231,8 @@
     var info = document.getElementById('mapinfo');
     info.textContent = '読み込み中…';
     try {
-      var pts = await idb.get(r.contentHash);
-      var fromCache = !!pts;
-      if (!pts) {
-        var url = await fb.storage.ref(r.storagePath).getDownloadURL();
-        var res = await fetch(url);
-        var json = await res.json();
-        var raw = json.routePoints || (Array.isArray(json) ? json : []);
-        pts = raw.map(function (p) { return { lat: Number(p.latitude), lng: Number(p.longitude) }; })
-                 .filter(function (p) { return isFinite(p.lat) && isFinite(p.lng); });
-        await idb.set(r.contentHash, pts);
-      }
+      var g = await getGeometry(r);
+      var pts = g.pts, fromCache = g.cached;
       await waitMaps();
       drawRoute(pts);
       var baseInfo = '<span class="pill">' + esc(r.title) + '</span> ' + pts.length + '点 · ' + fmtKm(distanceOf(pts)) + (fromCache ? ' · キャッシュ' : '');
@@ -253,10 +318,11 @@
     if (!window.google || !google.maps) return;
     if (!map) map = new google.maps.Map(document.getElementById('map'), { center:{lat:36.5,lng:138}, zoom:5, disableDefaultUI:true, zoomControl:true });
     if (polyline) polyline.setMap(null);
+    clearAllPolylines();
     clearSpots();
     if (spotInfoWindow) spotInfoWindow.close();
     if (!pts.length) return;
-    polyline = new google.maps.Polyline({ path: pts, strokeColor:'#00A8C6', strokeWeight:4, strokeOpacity:0.9, map: map });
+    polyline = new google.maps.Polyline({ path: pts, strokeColor:'#e53935', strokeWeight:6, strokeOpacity:0.9, map: map });
     var b = new google.maps.LatLngBounds();
     pts.forEach(function (p) { b.extend(p); });
     map.fitBounds(b);
@@ -280,6 +346,8 @@
         '<div class="wrap">' +
           '<div class="panel">' +
             '<div class="listhead"><strong>あなたのバックアップ</strong><span style="flex:1"></span>' +
+              '<select id="periodSel" onchange="onPeriodChange(this.value)" style="font-size:12px;padding:4px 6px;border:1px solid var(--line);border-radius:6px"></select>' +
+              '<button class="btn ghost" style="padding:6px 10px;font-size:12px" onclick="drawAllRoutes()">全ルート</button>' +
               '<button class="btn ghost" style="padding:6px 10px;font-size:12px" onclick="forceReload()">更新</button></div>' +
             '<div class="muted" id="liststatus" style="padding:0 6px 6px"></div>' +
             '<ul class="rlist" id="rlist"></ul>' +
