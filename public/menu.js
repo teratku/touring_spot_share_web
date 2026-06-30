@@ -21,6 +21,7 @@
     { icon: '🗾', label: '都道府県制覇マップ', href: '/conquest/conquest.html' },
     { icon: '🏅', label: 'バッジ', href: '/badges/badges.html' },
     { icon: '🛤️', label: '道路コンプリート率', href: '/completion/completion.html' },
+    { icon: '🗺️', label: 'バックアップルート', href: '/my-routes.html', auth: 'in' },
     { icon: '👤', label: 'マイページ', href: '#mypage', auth: 'in', mypage: true },
     { sep: true },
     { icon: '🛟', label: 'サポート', href: '/support.html' },
