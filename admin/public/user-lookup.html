@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ユーザー購読確認（ローカル）</title>
+<style>
+  :root { --teal:#00A8C6; --ink:#1f2d3d; --line:#e4e9ee; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif; color:var(--ink); background:#f4f7f9; }
+  header { background:linear-gradient(90deg,var(--teal),#0bbed6); color:#fff; padding:12px 18px; display:flex; align-items:center; gap:12px; }
+  header h1 { font-size:18px; margin:0; }
+  header .pill { font-size:11px; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:999px; }
+  header a { color:#fff; font-size:13px; }
+  .wrap { max-width:680px; margin:24px auto; padding:0 16px; }
+  .panel { background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .row { display:flex; gap:8px; }
+  input { flex:1; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14px; }
+  button { border:none; border-radius:8px; padding:10px 16px; font-size:14px; font-weight:700; cursor:pointer; background:var(--teal); color:#fff; }
+  button:disabled { opacity:.5; }
+  .muted { color:#90a4ae; font-size:12px; }
+  .result { margin-top:16px; }
+  .user { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .user img { width:52px; height:52px; border-radius:50%; object-fit:cover; background:#eee; }
+  .badge { display:inline-block; padding:4px 12px; border-radius:999px; font-weight:700; font-size:14px; }
+  .badge.pro { background:#fde68a; color:#92400e; }
+  .badge.plus { background:#bfdbfe; color:#1e3a8a; }
+  .badge.free { background:#e5e7eb; color:#374151; }
+  table { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+  td { padding:7px 6px; border-bottom:1px solid var(--line); }
+  td.k { color:#778; width:140px; }
+  .err { color:#c0392b; margin-top:12px; font-size:13px; }
+  .expired { color:#c0392b; font-weight:700; }
+  pre { background:#0d2b33; color:#aee9f5; padding:10px; border-radius:8px; font-size:11px; overflow:auto; margin-top:12px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>👤 ユーザー購読確認</h1>
+    <span class="pill">ローカル開発用 · 127.0.0.1</span>
+    <span style="flex:1"></span>
+    <a href="/">← ラリービルダー</a>
+  </header>
+  <div class="wrap">
+    <div class="panel">
+      <div class="row">
+        <input id="uid" placeholder="ユーザーUID を貼り付け（例: 3X7lTlF7bTUOGkb5gWiiLol3a5W2）" />
+        <button id="go">確認</button>
+      </div>
+      <div class="muted" style="margin-top:8px">user.html?id=&lt;uid&gt; の uid。購読状態は iOS が user_stats に保存（アプリ起動/購入時に更新）。</div>
+      <div id="result" class="result"></div>
+    </div>
+  </div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function fmt(iso){ if(!iso) return '—'; try { return new Date(iso).toLocaleString('ja-JP'); } catch(_){ return iso; } }
+
+  async function lookup() {
+    const uid = $('uid').value.trim();
+    if (!uid) return;
+    $('go').disabled = true;
+    $('result').innerHTML = '<div class="muted">確認中…</div>';
+    try {
+      const res = await fetch('/api/user/' + encodeURIComponent(uid));
+      const data = await res.json();
+      if (!res.ok) { $('result').innerHTML = '<div class="err">❌ ' + esc(data.error || ('HTTP ' + res.status)) + '</div>'; return; }
+      render(data);
+    } catch (e) {
+      $('result').innerHTML = '<div class="err">❌ ' + esc(e.message) + '</div>';
+    } finally {
+      $('go').disabled = false;
+    }
+  }
+
+  function render(d) {
+    const sub = d.subscription;
+    let html = '';
+    html += '<div class="user">';
+    if (d.userIcon) html += '<img src="' + esc(d.userIcon) + '" onerror="this.style.display=\'none\'">';
+    html += '<div><div style="font-weight:700;font-size:16px">' + esc(d.userName || '（名前なし）') + '</div>';
+    html += '<div class="muted">' + esc(d.uid) + '</div></div></div>';
+
+    if (!sub) {
+      html += '<div class="badge free">購読データなし</div>';
+      html += '<div class="muted" style="margin-top:8px">iOS でまだ保存されていません（対象ユーザーがアプリを起動すると保存）。</div>';
+    } else {
+      const tier = (sub.tier || 'free').toLowerCase();
+      const cls = tier === 'pro' ? 'pro' : (tier === 'plus' ? 'plus' : 'free');
+      const expired = sub.expiration && new Date(sub.expiration) < new Date();
+      html += '<div class="badge ' + cls + '">' + (sub.isSubscribed ? '✓ ' : '') + esc((sub.tier || 'free').toUpperCase()) + '</div>';
+      if (expired) html += ' <span class="expired">（期限切れ）</span>';
+      html += '<table>';
+      html += '<tr><td class="k">購読中</td><td>' + (sub.isSubscribed ? 'はい' : 'いいえ') + (expired ? '（ただし期限切れ）' : '') + '</td></tr>';
+      html += '<tr><td class="k">プラン(tier)</td><td>' + esc(sub.tier || 'free') + '</td></tr>';
+      html += '<tr><td class="k">プロダクトID</td><td>' + esc(sub.productID || '—') + '</td></tr>';
+      html += '<tr><td class="k">有効期限</td><td>' + fmt(sub.expiration) + '</td></tr>';
+      html += '<tr><td class="k">プラットフォーム</td><td>' + esc(sub.platform || '—') + '</td></tr>';
+      html += '<tr><td class="k">最終更新</td><td>' + fmt(sub.updatedAt) + '</td></tr>';
+      html += '</table>';
+    }
+    $('result').innerHTML = html;
+  }
+
+  $('go').onclick = lookup;
+  $('uid').addEventListener('keyup', (e) => { if (e.key === 'Enter') lookup(); });
+</script>
+</body>
+</html>

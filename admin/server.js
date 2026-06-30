@@ -401,6 +401,41 @@ app.post("/api/rally-cover/:rallyId", (req, res) => {
   }
 });
 
+// 開発者用：ユーザーの購読状態を確認（admin SDK で読取。user_stats/{uid}.subscription は iOS が保存）。
+app.get("/api/user/:uid", async (req, res) => {
+  const uid = String(req.params.uid || "").trim();
+  if (!uid) return res.status(400).json({ error: "uid が必要です" });
+  try {
+    const [infoSnap, subSnap] = await Promise.all([
+      db.collection("userInfo").doc(uid).get(),
+      db.collection("subscriptions").doc(uid).get(),
+    ]);
+    if (!infoSnap.exists && !subSnap.exists) {
+      return res.status(404).json({ error: "ユーザーが見つかりません", uid });
+    }
+    const info = infoSnap.data() || {};
+    const sub = subSnap.exists ? subSnap.data() : null;
+    const toISO = (t) => (t && typeof t.toDate === "function" ? t.toDate().toISOString() : t || null);
+    res.json({
+      uid,
+      userName: info.userName || null,
+      userIcon: info.userIcon || null,
+      subscription: sub
+        ? {
+            tier: sub.tier || "free",
+            isSubscribed: sub.isSubscribed === true,
+            productID: sub.productID || null,
+            platform: sub.platform || null,
+            expiration: toISO(sub.expiration),
+            updatedAt: toISO(sub.updatedAt),
+          }
+        : null,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.listen(PORT, HOST, () => {
   console.log(`🛠  スタンプラリー ビルダー: http://${HOST}:${PORT}`);
   console.log("   ローカル専用。Firestore 認証は importRallies.js と同じ（serviceAccount.json / ADC）。");

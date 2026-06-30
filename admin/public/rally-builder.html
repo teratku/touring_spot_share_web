@@ -72,6 +72,7 @@
       <option v-for="r in rallyList" :key="r.id" :value="r.id">{{ r.fiscalYear }} · {{ r.name }}（{{ r.status }}）</option>
     </select>
     <button class="btn ghost" @click="openManage">🗂 管理</button>
+    <a class="btn ghost" href="/user-lookup.html" style="text-decoration:none;display:inline-block" title="ユーザーの購読状態を確認">👤 ユーザー</a>
     <button class="btn ghost" @click="resetForm">新規</button>
   </header>
 
