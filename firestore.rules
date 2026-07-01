@@ -1,12 +1,94 @@
 rules_version = '2';
-// ⚠️ 一時復旧用：元の「全許可」ルールに戻しています（ログイン等を即復旧するため）。
-//    セキュリティは緩いままなので、後述の「段階移行」で1コレクションずつ安全化してください。
-//    （前回の厳格版は user_deleting_scheduled 等を本人限定にしたためログイン時の読取が拒否され、
-//     アプリが動かなくなりました。まずは復旧を最優先。）
+// =====================================================================
+//  Firestore セキュリティルール（コード監査ベース版）
+//  方針：
+//   1) 未認証（匿名）からの「書込み」を全面禁止（現状の最大の穴＝誰でも改ざん/削除可 を塞ぐ）
+//   2) 非公開データ（サブスク/各種バックアップ）は本人のみ read/write
+//   3) 公開ソーシャル（投稿/プロフィール/ルート等）は read 公開のまま（＝閲覧は壊さない）、
+//      write は「認証済み」に限定（フォロー/いいね等は他人配下へ書くため owner 不可）
+//   4) 自動ID＋フィールドでクエリする個人データ（退会チェック/通知/ブロック）は
+//      docID=uid ではないので「認証済み read/create」で対応（←前回ここを誤り、ログイン不能に）
+//   5) マスタ（スタンプラリー/道の駅/グリッド）は read 公開・クライアント write 不可（管理は Admin SDK）
+//
+//  ※ 列挙していないコレクションは既定で全拒否（default deny）。
+//    新コレクションを追加したらここにも追記すること（漏れると its アクセスが壊れる）。
+//  ※ 監査は iOS(touringSpotShare)/Web(public) の .collection 使用を全走査して作成。
+// =====================================================================
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
+
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return request.auth != null && request.auth.uid == uid; }
+
+    // ========== 非公開：本人のみ read/write（docID = uid） ==========
+    match /subscriptions/{uid}            { allow read, write: if isOwner(uid); } // サブスク状態（Webは本人がdoc(user.uid)をread）
+    match /route_backups/{uid}/{doc=**}   { allow read, write: if isOwner(uid); } // ルートバックアップ本体＋配下(routes等)
+    match /selectedLocationBackup/{uid}   { allow read, write: if isOwner(uid); } // 選択スポットのバックアップ
+    match /micinoEkiBackUp/{uid}          { allow read, write: if isOwner(uid); } // 道の駅コレクションのバックアップ
+
+    // users/{uid}：touringPlans / stamps。プロフィールで他人分も閲覧されうるので read 公開、write は本人のみ
+    match /users/{uid}/{doc=**} {
+      allow read:  if true;
+      allow write: if isOwner(uid);
     }
+
+    // ========== 自動ID＋フィールドでクエリする個人データ（本人限定を docID で表現できない） ==========
+    // 退会予約：ログイン成功後に whereField("deletingUserID"==uid) で検索（前回ここを本人限定にしてログイン不能化）
+    match /user_deleting_scheduled/{id} {
+      allow read:   if signedIn();
+      allow create: if signedIn();
+    }
+    match /pushNatification/{id} { allow read, write: if signedIn(); } // 通知（destinationUserID で検索）
+    match /blockList/{id}        { allow read, write: if signedIn(); } // ブロック（reportUserID/blockUserID で検索）
+
+    // ========== 問い合わせ/メッセージ（当事者間・認証必須） ==========
+    match /inquiry/{id}       { allow read, write: if signedIn(); }
+    match /inquiryDetail/{id} { allow read, write: if signedIn(); }
+
+    // ========== 送信専用：フィードバック/通報（クライアントからの read は不可・作成のみ） ==========
+    match /user_feedback/{id}  { allow create: if signedIn(); }
+    match /micro_feedback/{id} { allow create: if signedIn(); }
+    match /reportInf/{id}      { allow create: if signedIn(); }
+
+    // ========== マスタ：全員 read・クライアント write 不可（管理は Admin SDK / コンソール） ==========
+    match /stampRallies/{id}         { allow read: if true; allow write: if false; }
+    match /MicinoEki/{id}            { allow read: if true; allow write: if false; }
+    match /grids_metadata/{id}       { allow read: if true; allow write: if false; }
+    match /grids_metadata_empty/{id} { allow read: if true; allow write: if false; }
+    match /grid_boundaries/{id}      { allow read: if true; allow write: if false; }
+
+    // ========== 公開ソーシャル：read 公開・write 認証済みのみ ==========
+    // プロフィール（＋ badges / followUser / yaehCount 等の配下）。フォロー/問い合わせで他人配下にも書くため write=認証済み
+    match /userInfo/{uid} {
+      allow read: if true;
+      allow write: if signedIn();
+      match /{doc=**} {
+        allow read: if true;
+        allow write: if signedIn();
+      }
+    }
+    // 統計・走破率（docID=uid・本人の進捗）：read 公開、write は本人
+    match /user_stats/{uid}      { allow read: if true; allow write: if isOwner(uid); }
+    match /road_completion/{uid} { allow read: if true; allow write: if isOwner(uid); }
+
+    // 投稿スポット（＋ favoriteCount / withGotoComment / locationTapRecord / yaehCount 等の配下）
+    match /imagedownload/{id}/{doc=**} { allow read: if true; allow write: if signedIn(); }
+    // 共有ルート（＋配下）
+    match /shared_routes/{id}/{doc=**} { allow read: if true; allow write: if signedIn(); }
+
+    // 口コミ
+    match /wordOfMouth/{id}        { allow read: if true; allow write: if signedIn(); }
+    match /wordOfMouthCounter/{id} { allow read: if true; allow write: if signedIn(); }
+    // コメント/いいね（トップレベル版。スポット配下版は imagedownload の配下ルールで許可）
+    match /withGotoComment/{id} { allow read: if true; allow write: if signedIn(); }
+    match /favoriteCount/{id}   { allow read: if true; allow write: if signedIn(); }
+    match /commentDetails/{id}  { allow read: if signedIn(); allow write: if signedIn(); }
+    match /commentRoom/{id}     { allow read: if signedIn(); allow write: if signedIn(); }
+
+    // ルート
+    match /routes/{id}         { allow read: if true;      allow write: if signedIn(); }
+    match /routes_private/{id} { allow read: if signedIn(); allow write: if signedIn(); }
+    // ブログ（Web 管理）
+    match /blog_posts/{id} { allow read: if true; allow write: if signedIn(); }
   }
 }
