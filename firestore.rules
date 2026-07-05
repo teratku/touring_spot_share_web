@@ -19,6 +19,13 @@ service cloud.firestore {
 
     function signedIn() { return request.auth != null; }
     function isOwner(uid) { return request.auth != null && request.auth.uid == uid; }
+    // 開発者（フィードバック/通報ビューア等の DEV ツール用）。メールで判定。増える場合は配列に追記。
+    function isDev() {
+      return request.auth != null
+          && request.auth.token.email in [
+               "little_busters_rin_takuya@yahoo.co.jp"
+             ];
+    }
 
     // ========== 非公開：本人のみ read/write（docID = uid） ==========
     match /subscriptions/{uid}            { allow read, write: if isOwner(uid); } // サブスク状態（Webは本人がdoc(user.uid)をread）
@@ -45,10 +52,10 @@ service cloud.firestore {
     match /inquiry/{id}       { allow read, write: if signedIn(); }
     match /inquiryDetail/{id} { allow read, write: if signedIn(); }
 
-    // ========== 送信専用：フィードバック/通報（クライアントからの read は不可・作成のみ） ==========
-    match /user_feedback/{id}  { allow create: if signedIn(); }
-    match /micro_feedback/{id} { allow create: if signedIn(); }
-    match /reportInf/{id}      { allow create: if signedIn(); }
+    // ========== 送信：作成は認証済みのみ・閲覧は開発者のみ（DEVビューア用） ==========
+    match /user_feedback/{id}  { allow read: if isDev(); allow create: if signedIn(); }
+    match /micro_feedback/{id} { allow read: if isDev(); allow create: if signedIn(); }
+    match /reportInf/{id}      { allow read: if isDev(); allow create: if signedIn(); }
 
     // ========== マスタ：全員 read・クライアント write 不可（管理は Admin SDK / コンソール） ==========
     match /stampRallies/{id}         { allow read: if true; allow write: if false; }

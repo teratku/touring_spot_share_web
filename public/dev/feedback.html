@@ -13,7 +13,7 @@
   <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
   <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
   <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
-  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <!-- 本番のフィードバックを見るため、エミュレータ用 init.js は使わず本番configで明示初期化（下部JS参照） -->
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -250,9 +250,28 @@
 <script>
 const { createApp, ref, reactive, computed, onMounted } = Vue;
 
+// 本番Firebase（biketeilen）。このビューアは localhost 専用ゲートのまま、データは本番を参照する。
+const PROD_CONFIG = {
+  apiKey: "AIzaSyBvng2TxLJpvnQsGawh4zXiMrFkUFRzoGc",
+  authDomain: "biketeilen.firebaseapp.com",
+  projectId: "biketeilen",
+  storageBucket: "biketeilen.appspot.com",
+  messagingSenderId: "949951417349",
+  appId: "1:949951417349:web:267579335e5fa3a07aa06c",
+  measurementId: "G-9HK0Q90XLF"
+};
+
+// Firebase SDK が読み込まれたら本番configで初期化（エミュレータには接続しない）
 function waitForFirebase() {
   return new Promise(resolve => {
-    const check = () => (typeof firebase !== 'undefined' && firebase.apps.length > 0) ? resolve() : setTimeout(check, 100);
+    const check = () => {
+      if (typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) firebase.initializeApp(PROD_CONFIG);
+        resolve();
+      } else {
+        setTimeout(check, 100);
+      }
+    };
     check();
   });
 }
