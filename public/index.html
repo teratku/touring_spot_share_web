@@ -50,7 +50,9 @@
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="/analytics.js?v=1"></script>
 
     <!-- Google Maps API -->
     <script>
@@ -3786,6 +3788,12 @@
                 this.appBannerDismissed = true;
                 localStorage.setItem('appBannerDismissed', 'true');
               },
+              clickAppStoreBanner() {
+                if (typeof window.smTrack === 'function') {
+                  window.smTrack('app_store_cta_click', { placement: 'home_banner' });
+                }
+                this.dismissAppBanner();
+              },
               closeOnboarding() {
                 this.showOnboarding = false;
                 localStorage.setItem('tss_onboarding_done', '1');
@@ -3836,7 +3844,7 @@
           </div>
         </div>
         <div class="app-store-banner-actions">
-          <a href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener noreferrer" class="app-store-badge-link" @click="dismissAppBanner">
+          <a href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener noreferrer" class="app-store-badge-link" @click="clickAppStoreBanner">
             <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg"
                 alt="App Store からダウンロード"
                 class="app-store-badge">
