@@ -32,7 +32,7 @@ exports.blogSSR = functions.https.onRequest(async (req, res) => {
     const description = escapeHtml(
       (post.content || "").replace(/[#*`\n]/g, "").substring(0, 160)
     );
-    const image = post.thumbnailUrl || "https://biketeilen.web.app/img/og-default.png";
+    const image = post.thumbnailUrl || "https://biketeilen.web.app/images/ogp.png";
     const url = "https://biketeilen.web.app/blog/blog-detail.html?id=" + postId;
 
     const metaTags = [
