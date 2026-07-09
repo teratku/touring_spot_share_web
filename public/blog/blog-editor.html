@@ -19,6 +19,7 @@
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/init.js"></script>
 
     <style>
@@ -690,6 +691,33 @@
         display: flex;
         gap: 16px;
         padding: 16pt;
+      }
+
+      /* YouTube動画カード */
+      .youtube-card {
+        padding: 0;
+        cursor: default;
+      }
+
+      .youtube-card:hover {
+        transform: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-color: transparent;
+      }
+
+      .youtube-video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background: #000;
+      }
+
+      .youtube-video-wrapper iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
       }
 
       .route-image-container {
@@ -1415,12 +1443,89 @@
           background: #5AC8FA;
         }
       }
+
+      .auth-gate-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .auth-gate-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        padding: 28px 24px;
+        max-width: 360px;
+        width: 100%;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      }
+
+      .auth-gate-card h2 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+
+      .auth-gate-card p {
+        margin: 0 0 16px;
+        font-size: 13px;
+        color: #666;
+      }
+
+      .auth-gate-card input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        border: 1px solid #E0E0E0;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .auth-gate-error {
+        color: #E63946;
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+
+      .auth-gate-card button {
+        width: 100%;
+        padding: 11px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #00A8C6 0%, #228B22 100%);
+        color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .auth-gate-card button:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
     </style>
     <script src="/menu.js?v=5" defer></script>
 </head>
   
   <body>
     <div id="app">
+      <!-- ログインゲート: 未ログインだと blog_posts への書込みが Firestore ルールで拒否されるため、
+           保存前に開発者アカウントでログインさせる（dev/feedback.html と同じパターン） -->
+      <div v-if="authChecked && !currentUser" class="auth-gate-overlay">
+        <div class="auth-gate-card">
+          <h2>🔒 ログインが必要です</h2>
+          <p>ブログの保存には開発者アカウントでのログインが必要です。</p>
+          <input type="email" v-model="loginEmail" placeholder="メールアドレス" @keyup.enter="login" autocomplete="username">
+          <input type="password" v-model="loginPassword" placeholder="パスワード" @keyup.enter="login" autocomplete="current-password">
+          <div v-if="loginError" class="auth-gate-error">{{ loginError }}</div>
+          <button @click="login" :disabled="loggingIn">{{ loggingIn ? 'ログイン中…' : 'ログイン' }}</button>
+        </div>
+      </div>
+
       <!-- ヘッダー -->
       <header>
         <div class="header-content">
@@ -1601,6 +1706,7 @@
               <button @click="openImageUpload" title="画像挿入">📷</button>
               <button @click="openSpotModal" title="スポット挿入">📍</button>
               <button @click="openRouteModal" title="ルート挿入">🗺️</button>
+              <button @click="insertYoutube" title="YouTube動画埋め込み">▶️</button>
             </div>
 
             <!-- Markdownエディター -->
@@ -1621,7 +1727,8 @@
 [リンクテキスト](URL)
 
 {{spot:documentID}} でスポットを埋め込み
-{{route:documentID}} でルートを埋め込み"
+{{route:documentID}} でルートを埋め込み
+{{youtube:videoID}} でYouTube動画を埋め込み"
             ></textarea>
           </div>
 
@@ -1917,7 +2024,14 @@
                   show: false,
                   message: '',
                   type: 'success'
-                }
+                },
+                // ログインゲート（blog_posts への write は Firestore ルールで signedIn() 必須）
+                authChecked: false,
+                currentUser: null,
+                loginEmail: '',
+                loginPassword: '',
+                loginError: '',
+                loggingIn: false
               };
             },
             computed: {
@@ -2015,7 +2129,16 @@
                       </div>
                     </div>`;
                   });
-                  
+
+                  // {{youtube:xxx}} を置換
+                  content = content.replace(/\{\{youtube:([^}]+)\}\}/g, (match, videoId) => {
+                    return `<div class="embedded-card youtube-card">
+                      <div class="youtube-video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                      </div>
+                    </div>`;
+                  });
+
                   // Markdownを HTMLに変換
                   let html = marked.parse(content);
                   
@@ -2047,7 +2170,13 @@
                     const firebaseApp = firebase.app();
                     db = firebase.firestore();
                     storage = firebase.storage();
-                    
+
+                    // ログイン状態を監視（未ログインだと blog_posts への保存が Firestore ルールで拒否される）
+                    firebase.auth().onAuthStateChanged((user) => {
+                      this.currentUser = user;
+                      this.authChecked = true;
+                    });
+
                     // URLパラメータからブログIDを取得(編集モードの場合)
                     const urlParams = new URLSearchParams(window.location.search);
                     const blogId = urlParams.get('id');
@@ -2079,6 +2208,24 @@
               document.removeEventListener('keydown', this.handleKeydown);
             },
             methods: {
+              // ログインゲート
+              async login() {
+                this.loginError = '';
+                if (!this.loginEmail || !this.loginPassword) return;
+                this.loggingIn = true;
+                try {
+                  await firebase.auth().signInWithEmailAndPassword(this.loginEmail.trim(), this.loginPassword);
+                  this.loginPassword = '';
+                } catch (e) {
+                  this.loginError = 'ログイン失敗: ' + (e.code || e.message);
+                } finally {
+                  this.loggingIn = false;
+                }
+              },
+              logout() {
+                firebase.auth().signOut();
+              },
+
               // ブログ読み込み
                 async loadBlogPost() {
                     try {
@@ -2144,6 +2291,26 @@
                 if (url) {
                   this.insertMarkdown('[', `](${url})`);
                 }
+              },
+
+              // YouTube動画挿入
+              insertYoutube() {
+                const input = prompt('YouTubeのURLまたは動画IDを入力してください:');
+                if (!input) return;
+
+                let videoId = input.trim();
+                const patterns = [
+                  /(?:youtube\.com\/watch\?v=|youtube\.com\/shorts\/|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/
+                ];
+                for (const pattern of patterns) {
+                  const m = videoId.match(pattern);
+                  if (m) {
+                    videoId = m[1];
+                    break;
+                  }
+                }
+
+                this.insertMarkdown(`{{youtube:${videoId}}}`, '');
               },
 
               // 画像アップロードダイアログを開く
@@ -2630,6 +2797,13 @@
               },
               // ブログ保存（共通処理）
               async saveBlogPost(status) {
+                // 未ログインだと Firestore ルールで write が拒否される。ログインゲートを表示して中断。
+                if (!this.currentUser) {
+                    this.authChecked = true;
+                    this.showToast('保存にはログインが必要です', 'error');
+                    return;
+                }
+
                 // バリデーション
                 if (!this.blogPost.title.trim()) {
                     this.showToast('タイトルを入力してください', 'error');

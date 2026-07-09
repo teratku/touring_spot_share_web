@@ -516,6 +516,33 @@
         padding: 16pt;
       }
 
+      /* YouTube動画カード */
+      .youtube-card {
+        padding: 0;
+        cursor: default;
+      }
+
+      .youtube-card:hover {
+        transform: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-color: transparent;
+      }
+
+      .youtube-video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background: #000;
+      }
+
+      .youtube-video-wrapper iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
       .route-image-container {
         flex-shrink: 0;
         width: 200px;
@@ -1388,6 +1415,15 @@
                     </div>`;
                   }
                   return match;
+                });
+
+                // {{youtube:xxx}} を置換
+                content = content.replace(/\{\{youtube:([^}]+)\}\}/g, (match, videoId) => {
+                  return `<div class="embedded-card youtube-card">
+                    <div class="youtube-video-wrapper">
+                      <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                  </div>`;
                 });
 
                 // Markdownをレンダリング
