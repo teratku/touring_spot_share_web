@@ -122,6 +122,15 @@
         background: #F9F9F9;
       }
 
+      .header-btn.danger {
+        background: rgba(220, 53, 69, 0.25);
+        border-color: rgba(220, 53, 69, 0.6);
+      }
+
+      .header-btn.danger:hover {
+        background: rgba(220, 53, 69, 0.4);
+      }
+
       /* ========== ハンバーガーメニュー ========== */
       .hamburger-menu {
         position: fixed;
@@ -1548,6 +1557,10 @@
               <span>🚀</span>
               <span class="header-btn-text">{{ isEditMode && blogPost.status === 'published' ? '更新' : '公開' }}</span>
             </button>
+            <button v-if="isEditMode" class="header-btn danger" @click="deleteBlogPost" :disabled="isSaving">
+              <span>🗑️</span>
+              <span class="header-btn-text">削除</span>
+            </button>
           </div>
       </header>
 
@@ -2874,6 +2887,39 @@
                     this.showToast(`保存に失敗しました: ${error.message}`, 'error');
                 } finally {
                     this.isSaving = false;
+                }
+              },
+
+              // ブログ削除（下書き/公開済み問わず、編集中の記事を完全に削除）
+              async deleteBlogPost() {
+                if (!this.blogId) return;
+                const label = this.blogPost.status === 'published' ? '公開済みの記事' : '下書き';
+                if (!confirm(`この${label}を削除します。この操作は取り消せません。よろしいですか？`)) {
+                  return;
+                }
+
+                this.isSaving = true;
+                try {
+                  // サムネイル画像もベストエフォートで削除（失敗しても記事削除は続行）
+                  if (this.blogPost.thumbnailUrl) {
+                    try {
+                      await storage.refFromURL(this.blogPost.thumbnailUrl).delete();
+                    } catch (imgError) {
+                      console.warn('サムネイル削除に失敗（続行）:', imgError);
+                    }
+                  }
+
+                  await db.collection('blog_posts').doc(this.blogId).delete();
+                  console.log('ブログ削除成功:', this.blogId);
+                  this.showToast('削除しました', 'success');
+                  setTimeout(() => {
+                    window.location.href = '/blog/blog.html';
+                  }, 1000);
+                } catch (error) {
+                  console.error('削除エラー:', error);
+                  this.showToast(`削除に失敗しました: ${error.message}`, 'error');
+                } finally {
+                  this.isSaving = false;
                 }
               },
 

@@ -28,7 +28,8 @@
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
 
     <style>
       /* ========== リセット & ベーススタイル ========== */
@@ -1289,7 +1290,8 @@
                 error: null,
                 showMenu: false,
                 currentPage: 0,
-                searchDebounceTimer: null
+                searchDebounceTimer: null,
+                currentUser: null
               };
             },
             async mounted() {
@@ -1307,7 +1309,12 @@
                 db = firebase.firestore();
                 
                 console.log('Firebase 初期化完了');
-                
+
+                // ログイン状態の監視（ヘッダーのログイン/ログアウトメニュー用）
+                firebase.auth().onAuthStateChanged((user) => {
+                  this.currentUser = user;
+                });
+
                 // URLパラメータの確認
                 const urlParams = new URLSearchParams(window.location.search);
                 const forceReload = urlParams.get('reload') === 'true';
@@ -1350,6 +1357,10 @@
               document.removeEventListener('keydown', this.handleKeydown);
             },
             methods: {
+              logout() {
+                firebase.auth().signOut();
+                this.showMenu = false;
+              },
               async loadBlogsFromCache() {
                 const cachedData = BlogCacheManager.loadFromCache();
                 
