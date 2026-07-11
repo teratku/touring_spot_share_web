@@ -460,6 +460,54 @@
         color: #999999;
       }
 
+      /* ========== 🆕 高低差 ========== */
+      .elevation-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12pt;
+        margin-bottom: 16pt;
+      }
+
+      .elevation-stat {
+        background: #F9F9F9;
+        padding: 12pt;
+        border-radius: 12pt;
+        text-align: center;
+      }
+
+      .elevation-chart {
+        width: 100%;
+        height: 120px;
+        display: block;
+        background: #F9F9F9;
+        border-radius: 12pt;
+      }
+
+      /* ========== 🆕 セグメント（通過道路） ========== */
+      .segment-list {
+        list-style: none;
+      }
+
+      .segment-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12pt 16pt;
+        background: #F9F9F9;
+        border-radius: 12pt;
+        margin-bottom: 8pt;
+      }
+
+      .segment-name {
+        font-weight: 500;
+        color: #333333;
+      }
+
+      .segment-distance {
+        color: #666666;
+        font-size: 13pt;
+      }
+
       /* ========== 画像モーダル ========== */
       .image-modal {
         position: fixed;
@@ -689,6 +737,51 @@
           </div>
         </div>
 
+        <!-- 🆕 高低差 -->
+        <div v-if="elevationPoints.length > 1" class="user-section">
+          <h3 class="section-title">
+            <span>⛰️</span>
+            <span>高低差</span>
+          </h3>
+          <div class="elevation-stats">
+            <div class="elevation-stat">
+              <div class="stat-label">最高標高</div>
+              <div class="stat-value">{{ Math.round(maxElevation) }}<span class="stat-unit">m</span></div>
+            </div>
+            <div class="elevation-stat">
+              <div class="stat-label">最低標高</div>
+              <div class="stat-value">{{ Math.round(minElevation) }}<span class="stat-unit">m</span></div>
+            </div>
+            <div class="elevation-stat">
+              <div class="stat-label">平均標高</div>
+              <div class="stat-value">{{ Math.round(avgElevation) }}<span class="stat-unit">m</span></div>
+            </div>
+          </div>
+          <svg class="elevation-chart" viewBox="0 0 300 100" preserveAspectRatio="none">
+            <polyline
+              :points="elevationChartPoints"
+              fill="none"
+              stroke="#00A8C6"
+              stroke-width="2"
+              vector-effect="non-scaling-stroke"
+            />
+          </svg>
+        </div>
+
+        <!-- 🆕 セグメント（通過道路） -->
+        <div v-if="roadSegments.length > 0" class="user-section">
+          <h3 class="section-title">
+            <span>🛣️</span>
+            <span>通過道路</span>
+          </h3>
+          <ul class="segment-list">
+            <li v-for="segment in roadSegments" :key="segment.id" class="segment-item">
+              <span class="segment-name">{{ segment.name || '不明な道路' }}</span>
+              <span class="segment-distance">{{ formatDistance(segment.distance) }} km</span>
+            </li>
+          </ul>
+        </div>
+
         <!-- ユーザー情報 -->
         <div v-if="userInfo" class="user-section">
           <h3 class="section-title">
@@ -763,8 +856,46 @@
                 error: null,
                 showMenu: false,
                 showImageModal: false,
-                selectedImage: null
+                selectedImage: null,
+                roadSegments: [],      // 🆕 通過道路セグメント（segmentsUrl から取得）
+                elevationPoints: []    // 🆕 高低差データ（elevationUrl から取得）
               };
+            },
+            computed: {
+              // 🆕 高低差グラフ用の統計値
+              maxElevation() {
+                if (!this.elevationPoints.length) return 0;
+                return Math.max(...this.elevationPoints.map(p => p.elevation));
+              },
+              minElevation() {
+                if (!this.elevationPoints.length) return 0;
+                return Math.min(...this.elevationPoints.map(p => p.elevation));
+              },
+              avgElevation() {
+                if (!this.elevationPoints.length) return 0;
+                const sum = this.elevationPoints.reduce((s, p) => s + p.elevation, 0);
+                return sum / this.elevationPoints.length;
+              },
+              // 🆕 高低差グラフ（SVG折れ線）のポイント座標を "x,y x,y ..." 形式で返す。
+              //    viewBoxは "0 0 300 100" 固定。距離(km)をX、標高をYに正規化する。
+              elevationChartPoints() {
+                if (this.elevationPoints.length < 2) return '';
+                const distances = this.elevationPoints.map(p => p.distanceKm);
+                const elevations = this.elevationPoints.map(p => p.elevation);
+                const minDist = Math.min(...distances);
+                const maxDist = Math.max(...distances);
+                const minElev = Math.min(...elevations);
+                const maxElev = Math.max(...elevations);
+                const distRange = Math.max(maxDist - minDist, 0.001);
+                const elevRange = Math.max(maxElev - minElev, 1);
+
+                return this.elevationPoints.map(p => {
+                  const x = ((p.distanceKm - minDist) / distRange) * 300;
+                  // Y軸は上が0なので反転。上下に10ptずつ余白を持たせる。
+                  const y = 100 - 10 - ((p.elevation - minElev) / elevRange) * 80;
+                  return `${x.toFixed(1)},${y.toFixed(1)}`;
+                }).join(' ');
+              }
             },
 
             async mounted() {
@@ -886,6 +1017,9 @@
                     await this.loadUserInfo(this.route.userID);
                   }
 
+                  // 🆕 セグメント（通過道路）・高低差データを取得（無ければスキップ）
+                  await this.loadSegmentsAndElevation();
+
                   // ローディングを終了してDOMを更新
                   this.isLoading = false;
                   console.log('Loading complete, initializing map...');
@@ -916,6 +1050,31 @@
                   console.error('データ読み込みエラー:', error);
                   this.error = error.message;
                   this.isLoading = false;
+                }
+              },
+
+              // 🆕 セグメント（通過道路）・高低差データを取得する。
+              //    古いルート（アプリ側でこの機能追加前に共有されたもの）は segmentsUrl/elevationUrl
+              //    が無いことがあるため、どちらも無ければ静かにスキップする。
+              async loadSegmentsAndElevation() {
+                if (this.route.segmentsUrl) {
+                  try {
+                    const res = await fetch(this.route.segmentsUrl);
+                    const json = await res.json();
+                    this.roadSegments = json.segments || [];
+                  } catch (error) {
+                    console.warn('セグメントデータの取得に失敗:', error);
+                  }
+                }
+
+                if (this.route.elevationUrl) {
+                  try {
+                    const res = await fetch(this.route.elevationUrl);
+                    const json = await res.json();
+                    this.elevationPoints = json.points || [];
+                  } catch (error) {
+                    console.warn('高低差データの取得に失敗:', error);
+                  }
                 }
               },
 
