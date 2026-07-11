@@ -114,14 +114,46 @@ function pathId(req) {
   return seg.length ? decodeURIComponent(seg[seg.length - 1]) : (req.query.id || "");
 }
 
+// UTMパラメータをリダイレクト先URLにも引き継ぐ（着地ページ側でも計測できるように）。
+function withUtmParams(req, baseUrl) {
+  const utmKeys = ["utm_source", "utm_medium", "utm_campaign"];
+  const params = utmKeys
+    .filter((k) => req.query[k])
+    .map((k) => k + "=" + encodeURIComponent(req.query[k]))
+    .join("&");
+  return params ? baseUrl + "&" + params : baseUrl;
+}
+
+// ===== 共有リンクのUTM/クリック計測（成長施策 2.3） =====
+// share.js が付与した utm_source/utm_medium/utm_campaign を読み取り、対象ドキュメントの
+// shareClickCount をインクリメント＋構造化ログに出力する。レスポンスをブロックしないよう
+// await せずファイア&フォーゲットで呼ぶ。
+function logShareClick(req, collection, id) {
+  if (!id) return;
+  const utmSource = req.query.utm_source || "direct";
+  const utmMedium = req.query.utm_medium || "";
+  const utmCampaign = req.query.utm_campaign || "";
+
+  console.log(
+    `share_click collection=${collection} id=${id} utm_source=${utmSource} utm_medium=${utmMedium} utm_campaign=${utmCampaign}`
+  );
+
+  db.collection(collection).doc(id).update({
+    shareClickCount: admin.firestore.FieldValue.increment(1),
+  }).catch((err) => {
+    console.warn(`shareClickCount更新失敗 collection=${collection} id=${id}:`, err);
+  });
+}
+
 exports.spotShare = functions.https.onRequest(async (req, res) => {
   const id = pathId(req);
-  const real = "https://biketeilen.web.app/detail.html?id=" + encodeURIComponent(id);
+  const real = withUtmParams(req, "https://biketeilen.web.app/detail.html?id=" + encodeURIComponent(id));
   try {
     let title = "ツーリングスポット";
     let image = "https://biketeilen.web.app/images/ogp.png";
     let desc = "バイクで行きたいツーリングスポット｜ツーリングスポットシェア";
     if (id) {
+      logShareClick(req, "imagedownload", id);
       const doc = await db.collection("imagedownload").doc(id).get();
       if (doc.exists) {
         const x = doc.data() || {};
@@ -141,12 +173,13 @@ exports.spotShare = functions.https.onRequest(async (req, res) => {
 
 exports.userShare = functions.https.onRequest(async (req, res) => {
   const id = pathId(req);
-  const real = "https://biketeilen.web.app/user.html?id=" + encodeURIComponent(id);
+  const real = withUtmParams(req, "https://biketeilen.web.app/user.html?id=" + encodeURIComponent(id));
   try {
     let title = "ユーザー";
     let image = "https://biketeilen.web.app/images/ogp.png";
     let desc = "投稿スポット・ルート・スタンプラリー｜ツーリングスポットシェア";
     if (id) {
+      logShareClick(req, "userInfo", id);
       const doc = await db.collection("userInfo").doc(id).get();
       if (doc.exists) {
         const x = doc.data() || {};

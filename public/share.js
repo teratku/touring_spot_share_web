@@ -16,20 +16,24 @@
   }
   function shareText() { return title() + " ｜ ツーリングスポットシェア"; }
   // 動的OGP用の共有URL（detail/user は /s/:id・/u/:id に変換してリッチプレビュー化）
-  function shareUrl() {
+  // channel（x/line/native/copy）を utm_source として付与し、どの経路からのクリックかを
+  // spotShare/userShare Cloud Function 側で計測できるようにする。
+  function shareUrl(channel) {
+    var base = location.href;
     try {
       var id = new URLSearchParams(location.search).get("id");
       if (id) {
-        if (/\/detail\.html$/.test(location.pathname)) return location.origin + "/s/" + encodeURIComponent(id);
-        if (/\/user\.html$/.test(location.pathname)) return location.origin + "/u/" + encodeURIComponent(id);
+        if (/\/detail\.html$/.test(location.pathname)) base = location.origin + "/s/" + encodeURIComponent(id);
+        else if (/\/user\.html$/.test(location.pathname)) base = location.origin + "/u/" + encodeURIComponent(id);
       }
     } catch (_) {}
-    return location.href;
+    var sep = base.indexOf("?") >= 0 ? "&" : "?";
+    return base + sep + "utm_source=" + encodeURIComponent(channel || "share") + "&utm_medium=social&utm_campaign=spot_share";
   }
 
   // ---- 共有 ----
   function nativeOrMenu() {
-    var url = shareUrl();
+    var url = shareUrl("native");
     if (navigator.share) {
       navigator.share({ title: title(), text: shareText() + " " + TAGS, url: url }).catch(function () {});
     } else {
@@ -37,17 +41,18 @@
     }
   }
   function openX() {
-    var u = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText() + " " + TAGS) + "&url=" + encodeURIComponent(shareUrl());
+    var u = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText() + " " + TAGS) + "&url=" + encodeURIComponent(shareUrl("x"));
     window.open(u, "_blank", "noopener");
   }
   function openLine() {
-    var u = "https://line.me/R/msg/text/?" + encodeURIComponent(shareText() + " " + shareUrl());
+    var u = "https://line.me/R/msg/text/?" + encodeURIComponent(shareText() + " " + shareUrl("line"));
     window.open(u, "_blank", "noopener");
   }
   function copyLink() {
-    (navigator.clipboard ? navigator.clipboard.writeText(shareUrl()) : Promise.reject()).then(
+    var url = shareUrl("copy");
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
       function () { flash("リンクをコピーしました"); },
-      function () { window.prompt("リンクをコピー", shareUrl()); }
+      function () { window.prompt("リンクをコピー", url); }
     );
     toggleMenu(false);
   }
