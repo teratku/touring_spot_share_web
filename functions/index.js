@@ -1,4 +1,5 @@
 const functions = require("firebase-functions");
+const { onSchedule } = require("firebase-functions/v2/scheduler");
 const admin = require("firebase-admin");
 const fs = require("fs");
 const path = require("path");
@@ -161,3 +162,82 @@ exports.userShare = functions.https.onRequest(async (req, res) => {
     res.redirect(real);
   }
 });
+
+// ===== ウィンバック通知（エンゲージメント施策 Phase 1.1） =====
+// 14日以上活動（スポット投稿・ルート保存・ルート公開）が無いユーザーに再エンゲージメント通知を送る。
+// lastActivityAt はクライアント側（WinBackActivityTracker.swift）が上記アクション時に書き込む。
+// 同じ非活動期間に対しては1回だけ送信し、再度活動が記録されるまで再送しない。
+const WIN_BACK_INACTIVE_DAYS = 14;
+
+exports.winBackNotification = onSchedule(
+  { schedule: "every 24 hours", timeZone: "Asia/Tokyo" },
+  async () => {
+    const cutoff = admin.firestore.Timestamp.fromMillis(
+      Date.now() - WIN_BACK_INACTIVE_DAYS * 24 * 60 * 60 * 1000
+    );
+
+    const snapshot = await db
+      .collection("userInfo")
+      .where("lastActivityAt", "<=", cutoff)
+      .get();
+
+    if (snapshot.empty) {
+      console.log("winBackNotification: 対象ユーザーなし");
+      return null;
+    }
+
+    let sent = 0;
+    let skipped = 0;
+    let failed = 0;
+
+    await Promise.all(
+      snapshot.docs.map(async (doc) => {
+        const data = doc.data();
+        const token = data.userFcmToken;
+        const lastActivityAt = data.lastActivityAt;
+
+        if (!token || token === "0") {
+          skipped++;
+          return;
+        }
+
+        // 同じ非活動期間に対して既に送信済みならスキップ
+        const alreadyNotified =
+          data.winBackNotifiedForActivity &&
+          lastActivityAt &&
+          data.winBackNotifiedForActivity.isEqual(lastActivityAt);
+        if (alreadyNotified) {
+          skipped++;
+          return;
+        }
+
+        try {
+          await admin.messaging().send({
+            token,
+            notification: {
+              title: "最近ツーリングしていますか？",
+              body: "しばらく記録がありません。お気に入りのスポットを見に行きませんか？",
+            },
+            data: { type: "win_back" },
+          });
+          await doc.ref.update({ winBackNotifiedForActivity: lastActivityAt });
+          sent++;
+        } catch (err) {
+          failed++;
+          console.error(`winBackNotification: 送信失敗 uid=${doc.id}`, err);
+          // トークン失効時はクリーンアップ（次回以降の無駄な送信試行を防ぐ）
+          if (
+            err.code === "messaging/registration-token-not-registered" ||
+            err.code === "messaging/invalid-registration-token"
+          ) {
+            await doc.ref.update({ userFcmToken: admin.firestore.FieldValue.delete() });
+          }
+        }
+      })
+    );
+
+    console.log(
+      `winBackNotification: 対象${snapshot.size}件 送信${sent}件 スキップ${skipped}件 失敗${failed}件`
+    );
+    return null;
+  });

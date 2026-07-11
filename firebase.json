@@ -7,9 +7,19 @@
     "ignore": [
       "firebase.json",
       "**/.*",
+      "!/.well-known/**",
       "**/node_modules/**"
     ],
     "headers": [
+      {
+        "source": "/.well-known/apple-app-site-association",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ]
+      },
       {
         "source": "**/*.@(jpg|jpeg|gif|png|webp|svg|ico)",
         "headers": [
