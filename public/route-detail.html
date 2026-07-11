@@ -775,9 +775,14 @@
             <span>通過道路</span>
           </h3>
           <ul class="segment-list">
-            <li v-for="segment in roadSegments" :key="segment.id" class="segment-item">
-              <span class="segment-name">{{ segment.name || '不明な道路' }}</span>
-              <span class="segment-distance">{{ formatDistance(segment.distance) }} km</span>
+            <li v-for="(segment, index) in roadSegments" :key="segment.id" class="segment-item">
+              <div class="segment-main">
+                <span class="segment-name">{{ segment.name || '不明な道路' }}</span>
+                <span class="segment-distance">{{ formatSegmentDistance(segment.distance) }} km</span>
+              </div>
+              <div v-if="segmentTimeRange(index)" class="segment-time">
+                {{ segmentTimeRange(index) }}
+              </div>
             </li>
           </ul>
         </div>
@@ -1403,6 +1408,46 @@
                 if (!meters) return '0.0';
                 const km = meters / 1000;
                 return km.toFixed(1);
+              },
+
+              // 🆕 セグメント(RoadSegment).distance はアプリ側で既にkm換算済みで保存されているため、
+              //    formatDistance（メートル入力想定）とは別に、そのままkm表示する。
+              formatSegmentDistance(km) {
+                if (!km) return '0.0';
+                return km.toFixed(1);
+              },
+
+              // 🆕 セグメントの終了時刻を求める。RoadSegment自体にはendTimeが無いため、
+              //    次のセグメントの開始時刻（＝このセグメントの終了時刻）を使う。
+              //    最後のセグメントだけは、地図表示用に既に取得済みのルートJSON（routeData.routePoints）の
+              //    最終ポイントの時刻を使う（アプリ側のiOSと同じ「開始/終了/走行時間」表示に合わせるため）。
+              segmentEndTime(index) {
+                const next = this.roadSegments[index + 1];
+                if (next) return new Date(next.startTime);
+
+                const points = this.routeData && (this.routeData.routePoints || this.routeData.coordinates);
+                if (points && points.length) {
+                  const last = points[points.length - 1];
+                  if (last.timestamp) return new Date(last.timestamp);
+                }
+                return null;
+              },
+
+              // 🆕 iOSアプリの「開始/終了/走行時間」表示と同じ情報を、一覧向けに1行で表示する。
+              segmentTimeRange(index) {
+                const segment = this.roadSegments[index];
+                if (!segment || !segment.startTime) return '';
+                const start = new Date(segment.startTime);
+                const end = this.segmentEndTime(index);
+                if (!end) return '';
+
+                const timeFmt = (d) => d.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+                const durationSec = Math.max(0, (end - start) / 1000);
+                const hours = Math.floor(durationSec / 3600);
+                const minutes = Math.floor((durationSec % 3600) / 60);
+                const durationText = hours > 0 ? `${hours}時間${minutes}分` : `${minutes}分`;
+
+                return `${timeFmt(start)} 〜 ${timeFmt(end)}（走行時間 ${durationText}）`;
               }
             }
           });
