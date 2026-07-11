@@ -265,7 +265,10 @@ const PROD_CONFIG = {
 function waitForFirebase() {
   return new Promise(resolve => {
     const check = () => {
-      if (typeof firebase !== 'undefined') {
+      // 🆕 firebase本体だけでなく firestore/auth の各SDK（別々のdeferスクリプト）が
+      //    実際にアタッチされたかまで確認する（namespaceだけの確認だと稀に
+      //    firebase.firestore が未定義のまま resolve してしまうレースがあった）。
+      if (typeof firebase !== 'undefined' && firebase.firestore && firebase.auth) {
         if (!firebase.apps.length) firebase.initializeApp(PROD_CONFIG);
         resolve();
       } else {

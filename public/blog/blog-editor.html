@@ -1950,8 +1950,12 @@
       let storage;
 
       function waitForFirebase() {
+        // 🆕 firebase本体だけでなく firestore/auth/storage（別々のdeferスクリプト）が実際に
+        //    アタッチされたかまで確認する（namespaceだけの確認だと稀に firebase.firestore
+        //    が未定義のまま resolve してしまうレースがあった。dev/feedback.html で実際に発生）。
+        const isReady = () => typeof firebase !== 'undefined' && firebase.firestore && firebase.auth && firebase.storage;
         return new Promise((resolve, reject) => {
-          if (typeof firebase !== 'undefined') {
+          if (isReady()) {
             resolve();
             return;
           }
@@ -1960,7 +1964,7 @@
           const maxAttempts = 50;
           const checkInterval = setInterval(() => {
             attempts++;
-            if (typeof firebase !== 'undefined') {
+            if (isReady()) {
               clearInterval(checkInterval);
               resolve();
             } else if (attempts >= maxAttempts) {
