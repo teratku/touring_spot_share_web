@@ -95,7 +95,16 @@ service cloud.firestore {
     // ルート
     match /routes/{id}         { allow read: if true;      allow write: if signedIn(); }
     match /routes_private/{id} { allow read: if signedIn(); allow write: if signedIn(); }
-    // ブログ（Web 管理）
-    match /blog_posts/{id} { allow read: if true; allow write: if signedIn(); }
+
+    // ブログ（公式運営が作成。一般ユーザーは投稿しない = 記事の作成/全体編集/削除は開発者限定）。
+    // 詳細ページはログイン前でも閲覧数(views)を+1する（未ログイン訪問者が大半のため必須）。
+    // いいね(likes)は要ログインだが、一般ユーザーでも押せる必要がある。
+    // → フィールド単位で許可範囲を分け、記事本文等の改ざん・削除は isDev() のみに限定する。
+    match /blog_posts/{id} {
+      allow read: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['views']);              // 誰でも閲覧数のみ
+      allow update: if signedIn() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes']); // ログイン済みならいいねのみ
+      allow create, update, delete: if isDev();  // 記事本文・削除は開発者(公式ブログ管理者)のみ
+    }
   }
 }
