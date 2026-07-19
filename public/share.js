@@ -32,8 +32,12 @@
   }
 
   // ---- 共有 ----
+  function logShare(channel) {
+    if (window.TSSAnalytics) window.TSSAnalytics.logEvent("share", { method: channel });
+  }
   function nativeOrMenu() {
     var url = shareUrl("native");
+    logShare("native");
     if (navigator.share) {
       navigator.share({ title: title(), text: shareText() + " " + TAGS, url: url }).catch(function () {});
     } else {
@@ -41,14 +45,17 @@
     }
   }
   function openX() {
+    logShare("x");
     var u = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText() + " " + TAGS) + "&url=" + encodeURIComponent(shareUrl("x"));
     window.open(u, "_blank", "noopener");
   }
   function openLine() {
+    logShare("line");
     var u = "https://line.me/R/msg/text/?" + encodeURIComponent(shareText() + " " + shareUrl("line"));
     window.open(u, "_blank", "noopener");
   }
   function copyLink() {
+    logShare("copy");
     var url = shareUrl("copy");
     (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
       function () { flash("リンクをコピーしました"); },

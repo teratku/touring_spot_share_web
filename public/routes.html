@@ -45,7 +45,9 @@
   <!-- Firebase SDKs -->
   <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
   <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
   <script defer src="/__/firebase/init.js"></script>
+  <script defer src="/analytics.js"></script>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -457,6 +459,7 @@ createApp({
       });
     }
     function goToRouteDetail(id) {
+      if (window.TSSAnalytics) window.TSSAnalytics.logEvent('select_content', { content_type: 'route', item_id: id });
       window.location.href = `/route-detail.html?id=${id}`;
     }
 

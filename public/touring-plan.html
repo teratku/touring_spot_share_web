@@ -16,7 +16,9 @@
   <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
   <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
   <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
   <script defer src="/__/firebase/init.js"></script>
+  <script defer src="/analytics.js"></script>
 
   <!-- Google Maps API -->
   <script>
@@ -820,6 +822,7 @@ createApp({
             updatedAt: firebase.firestore.FieldValue.serverTimestamp()
           });
         plans.value.push({ id: ref.id, name, spots: [] });
+        if (window.TSSAnalytics) window.TSSAnalytics.logEvent('create_touring_plan', { plan_id: ref.id });
         showCreateModal.value = false;
       } catch (e) {
         console.error('プラン作成エラー:', e);

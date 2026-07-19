@@ -14,7 +14,9 @@
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/init.js"></script>
+    <script defer src="/analytics.js"></script>
 
     <style>
       /* ========== リセット & ベーススタイル ========== */
@@ -446,9 +448,11 @@
                     this.email.trim(),
                     this.password
                   );
+                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('login', { method: 'password' });
                   // onAuthStateChanged で自動リダイレクト
                 } catch (error) {
                   console.error('ログインエラー:', error);
+                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('login_failed', { error_code: error.code });
                   this.errorMessage = getAuthErrorMessage(error.code);
 
                   // エラーの種類に応じてフィールドをハイライト
@@ -472,6 +476,7 @@
 
                 try {
                   await firebase.auth().sendPasswordResetEmail(this.email.trim());
+                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('password_reset_requested', {});
                   this.errorMessage = '';
                   alert(`${this.email} にパスワードリセットメールを送信しました`);
                 } catch (error) {

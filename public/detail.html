@@ -33,7 +33,9 @@
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/init.js"></script>
+    <script defer src="/analytics.js"></script>
 
     <!-- Google Maps API -->
     <script>
@@ -1365,6 +1367,7 @@
                     id: doc.id,
                     ...doc.data()
                   };
+                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('view_spot', { item_id: this.location.id });
 
                   // 画像URLを安全な形式に変換
                   if (this.location.locationImageURLs && this.location.locationImageURLs.length > 0) {

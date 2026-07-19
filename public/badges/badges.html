@@ -8,7 +8,9 @@
 <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
 <script defer src="/__/firebase/init.js"></script>
+<script defer src="/analytics.js"></script>
 
 <!-- Prefecture Data -->
 <script src="../conquest/prefecture-data.js"></script>
@@ -305,6 +307,7 @@ async function loadBadges(uid) {
         const snap = await db.collection("userInfo").doc(uid).collection("badges").get();
         earnedMap = {};
         snap.forEach(doc => { earnedMap[doc.id] = doc.data(); });
+        if (window.TSSAnalytics) window.TSSAnalytics.logEvent('view_badges', { earned_count: Object.keys(earnedMap).length, total_count: ALL_BADGES.length });
         renderAll();
         document.getElementById("mainContent").style.display = "block";
     } catch (e) {

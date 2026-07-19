@@ -19,7 +19,9 @@
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/init.js"></script>
+    <script defer src="/analytics.js"></script>
 
     <!-- Google Maps API -->
     <script>
@@ -1018,7 +1020,8 @@
                     id: doc.id,
                     ...doc.data()
                   };
-                  
+                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('view_route', { item_id: this.route.id });
+
                   console.log('Route data loaded from Firestore:', this.route);
 
                   // カバー画像URLを安全な形式に変換
@@ -1282,6 +1285,7 @@
                   alert('ルートデータが見つかりません');
                   return;
                 }
+                if (window.TSSAnalytics) window.TSSAnalytics.logEvent('download_route', { item_id: this.route.id });
 
                 try {
                   const response = await fetch(this.route.jsonUrl);
@@ -1301,6 +1305,7 @@
               },
 
               shareRoute() {
+                if (window.TSSAnalytics) window.TSSAnalytics.logEvent('share', { method: 'route_detail', item_id: this.route && this.route.id });
                 const url = window.location.href;
                 if (navigator.share) {
                   navigator.share({

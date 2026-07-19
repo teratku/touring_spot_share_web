@@ -36,7 +36,9 @@
     <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/init.js"></script>
+    <script defer src="/analytics.js"></script>
 
     <!-- Google Maps API -->
     <script>
@@ -2698,6 +2700,7 @@
                   }
 
                   this.userInfo = doc.data();
+                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('view_profile', { item_id: this.userId });
                 } catch (error) {
                   console.error('ユーザー情報読み込みエラー:', error);
                   this.error = error.message;

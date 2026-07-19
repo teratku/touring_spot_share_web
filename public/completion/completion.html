@@ -8,7 +8,9 @@
 <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
 <script defer src="/__/firebase/init.js"></script>
+<script defer src="/analytics.js"></script>
 
 <!-- Prefecture Data -->
 <script src="../conquest/prefecture-data.js"></script>
@@ -338,6 +340,7 @@ async function loadCompletionData(uid) {
         const doc = await db.collection(COLLECTION.roadCompletion).doc(uid).get();
         if (doc.exists) {
             completionData = doc.data();
+            if (window.TSSAnalytics) window.TSSAnalytics.logEvent('view_road_completion', {});
             renderAll();
         } else {
             document.getElementById("emptyState").style.display = "block";

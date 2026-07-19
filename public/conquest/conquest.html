@@ -9,7 +9,9 @@
 <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
 <script defer src="/__/firebase/init.js"></script>
+<script defer src="/analytics.js"></script>
 
 <!-- Prefecture Data -->
 <script src="./prefecture-data.js"></script>
@@ -687,6 +689,7 @@ async function loadConquestData(uid) {
         } else {
             userStatsData = await buildStatsFromSpots(uid);
         }
+        if (window.TSSAnalytics) window.TSSAnalytics.logEvent('view_conquest_map', {});
         renderAll();
     } catch (e) {
         console.error("データ読み込みエラー:", e);

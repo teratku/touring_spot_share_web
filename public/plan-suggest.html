@@ -14,7 +14,9 @@
   <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
   <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
   <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
   <script defer src="/__/firebase/init.js"></script>
+  <script defer src="/analytics.js"></script>
 
   <!-- Google Maps（どこ行このマップ用・任意） -->
   <script>window.initMap = function(){};</script>
@@ -421,6 +423,7 @@ createApp({
       const cand=withDistance().filter(s=>s.distKm<=radiusKm.value && passFilters(s));
       suggestions.value=shuffle(cand).slice(0,count.value).map(s=>({ ...s, selected:false }));
       generating.value=false;
+      if (window.TSSAnalytics) window.TSSAnalytics.logEvent('open_plan_suggest', { mode: 'multi' });
     }
     function generateDoko(){
       if(userLat.value==null) return;
@@ -430,6 +433,7 @@ createApp({
       if(cand.length===0){ dokoSpot.value=null; return; }
       const pick=cand[Math.floor(Math.random()*cand.length)];
       dokoSpot.value=pick;
+      if (window.TSSAnalytics) window.TSSAnalytics.logEvent('open_plan_suggest', { mode: 'doko' });
       nextTick(()=>renderDokoMap(pick));
     }
     function regenerate(){ mode.value==='multi'?generateMulti():generateDoko(); }
@@ -492,6 +496,7 @@ createApp({
           const spots=await buildOrderedNewSpots(add);
           await col.doc(planId).update({ spots, updatedAt:firebase.firestore.FieldValue.serverTimestamp() });
         }
+        if (window.TSSAnalytics) window.TSSAnalytics.logEvent('add_spot_to_plan', { spot_count: picked.length, is_new_plan: isNewPlan });
         location.href='/touring-plan.html';
       }catch(e){ console.error(e); alert('追加に失敗しました: '+(e.code||e.message)); }
     }
