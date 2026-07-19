@@ -73,6 +73,14 @@
       {
         "source": "/u/**",
         "function": "userShare"
+      },
+      {
+        "source": "/r/**",
+        "function": "routeShare"
+      },
+      {
+        "source": "/sitemap.xml",
+        "function": "sitemapXml"
       }
     ]
   },

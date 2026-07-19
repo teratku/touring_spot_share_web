@@ -196,6 +196,108 @@ exports.userShare = functions.https.onRequest(async (req, res) => {
   }
 });
 
+exports.routeShare = functions.https.onRequest(async (req, res) => {
+  const id = pathId(req);
+  const real = withUtmParams(req, "https://biketeilen.web.app/route-detail.html?id=" + encodeURIComponent(id));
+  try {
+    let title = "ツーリングルート";
+    let image = "https://biketeilen.web.app/images/ogp.png";
+    let desc = "バイクツーリングのルート｜ツーリングスポットシェア";
+    if (id) {
+      logShareClick(req, "shared_routes", id);
+      const doc = await db.collection("shared_routes").doc(id).get();
+      if (doc.exists) {
+        const x = doc.data() || {};
+        title = x.title || title;
+        image = x.coverImageUrl || image;
+        const km = typeof x.distance === "number" ? x.distance.toFixed(1) + "km" : "";
+        desc = (km ? km + "の" : "") + "ツーリングルート｜ツーリングスポットシェア";
+      }
+    }
+    res.set("Cache-Control", "public, max-age=600, s-maxage=1200");
+    res.status(200).send(shareHtml({ title, description: desc, image, url: real, type: "article" }));
+  } catch (e) {
+    console.error("routeShare error:", e);
+    res.redirect(real);
+  }
+});
+
+// ===== 動的サイトマップ =====
+// 静的ページ＋公開コンテンツ（ブログ/スポット/ルート）を結合して sitemap.xml を返す。
+// 以前は public/sitemap.xml が静的10件のみで、ユーザー生成コンテンツが一切
+// インデックスされていなかった（成長施策：SEO対応）。
+const STATIC_SITEMAP_URLS = [
+  { loc: "https://biketeilen.web.app/", changefreq: "daily", priority: "1.0" },
+  { loc: "https://biketeilen.web.app/about.html", changefreq: "monthly", priority: "0.9" },
+  { loc: "https://biketeilen.web.app/support.html", changefreq: "monthly", priority: "0.6" },
+  { loc: "https://biketeilen.web.app/routes.html", changefreq: "daily", priority: "0.8" },
+  { loc: "https://biketeilen.web.app/blog/blog.html", changefreq: "weekly", priority: "0.7" },
+  { loc: "https://biketeilen.web.app/badges/badges.html", changefreq: "monthly", priority: "0.5" },
+  { loc: "https://biketeilen.web.app/conquest/conquest.html", changefreq: "monthly", priority: "0.5" },
+  { loc: "https://biketeilen.web.app/completion/completion.html", changefreq: "monthly", priority: "0.5" },
+  { loc: "https://biketeilen.web.app/privacypolicy/privacypolicy.html", changefreq: "yearly", priority: "0.3" },
+  { loc: "https://biketeilen.web.app/termsofservice/termsofservice.html", changefreq: "yearly", priority: "0.3" },
+];
+
+// 現状のコーパス規模を把握する手段が無いため、安全側の上限として各コレクション最新5000件に制限。
+// 将来URL数が数万件規模になった場合は sitemap index + 複数ファイル分割に切り替えること
+// （sitemaps.org 仕様: 1ファイルあたり50,000URL/50MBまで）。
+const SITEMAP_PER_COLLECTION_CAP = 5000;
+
+function sitemapUrlEntry(loc, lastmod, changefreq, priority) {
+  return [
+    "  <url>",
+    "    <loc>" + escapeHtml(loc) + "</loc>",
+    lastmod ? "    <lastmod>" + lastmod + "</lastmod>" : "",
+    "    <changefreq>" + changefreq + "</changefreq>",
+    "    <priority>" + priority + "</priority>",
+    "  </url>",
+  ].filter(Boolean).join("\n");
+}
+
+function toLastmod(ts) {
+  return ts && ts.toDate ? ts.toDate().toISOString().split("T")[0] : null;
+}
+
+exports.sitemapXml = functions.https.onRequest(async (req, res) => {
+  try {
+    const [blogSnap, spotSnap, routeSnap] = await Promise.all([
+      db.collection("blog_posts").where("status", "==", "published")
+        .orderBy("createdAt", "desc").limit(SITEMAP_PER_COLLECTION_CAP).get(),
+      db.collection("imagedownload")
+        .orderBy("createTimeTimeStamp", "desc").limit(SITEMAP_PER_COLLECTION_CAP).get(),
+      db.collection("shared_routes")
+        .orderBy("createdAt", "desc").limit(SITEMAP_PER_COLLECTION_CAP).get(),
+    ]);
+
+    const urls = [];
+    STATIC_SITEMAP_URLS.forEach((u) => urls.push(sitemapUrlEntry(u.loc, null, u.changefreq, u.priority)));
+    blogSnap.forEach((doc) => urls.push(sitemapUrlEntry(
+      "https://biketeilen.web.app/blog/blog-detail.html?id=" + doc.id,
+      toLastmod(doc.data().createdAt), "weekly", "0.6"
+    )));
+    spotSnap.forEach((doc) => urls.push(sitemapUrlEntry(
+      "https://biketeilen.web.app/s/" + doc.id,
+      toLastmod(doc.data().createTimeTimeStamp), "monthly", "0.5"
+    )));
+    routeSnap.forEach((doc) => urls.push(sitemapUrlEntry(
+      "https://biketeilen.web.app/r/" + doc.id,
+      toLastmod(doc.data().createdAt), "monthly", "0.5"
+    )));
+
+    const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+      urls.join("\n") + "\n</urlset>";
+
+    res.set("Content-Type", "application/xml");
+    res.set("Cache-Control", "public, max-age=3600, s-maxage=7200");
+    res.status(200).send(xml);
+  } catch (error) {
+    console.error("sitemapXml error:", error);
+    res.status(500).send("<error>sitemap generation failed</error>");
+  }
+});
+
 // ===== ウィンバック通知（エンゲージメント施策 Phase 1.1） =====
 // 14日以上活動（スポット投稿・ルート保存・ルート公開）が無いユーザーに再エンゲージメント通知を送る。
 // lastActivityAt はクライアント側（WinBackActivityTracker.swift）が上記アクション時に書き込む。
