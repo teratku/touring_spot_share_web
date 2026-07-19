@@ -428,8 +428,33 @@ app.get("/api/user/:uid", async (req, res) => {
             platform: sub.platform || null,
             expiration: toISO(sub.expiration),
             updatedAt: toISO(sub.updatedAt),
+            referralBonusExpiresAt: toISO(sub.referralBonusExpiresAt),
+            referralBonusGrantedCount: sub.referralBonusGrantedCount || 0,
           }
         : null,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// 開発者用：紹介報酬の月次カウンタを確認（サポート/デバッグ用、読み取り専用）。
+app.get("/api/referrals/:uid", async (req, res) => {
+  const uid = String(req.params.uid || "").trim();
+  if (!uid) return res.status(400).json({ error: "uid が必要です" });
+  try {
+    const ledgerSnap = await db.collection("referralRewards").doc(uid).get();
+    if (!ledgerSnap.exists) {
+      return res.json({ uid, monthKey: null, rewardsThisMonth: 0, totalRewardsGranted: 0 });
+    }
+    const d = ledgerSnap.data();
+    const toISO = (t) => (t && typeof t.toDate === "function" ? t.toDate().toISOString() : t || null);
+    res.json({
+      uid,
+      monthKey: d.monthKey || null,
+      rewardsThisMonth: d.rewardsThisMonth || 0,
+      totalRewardsGranted: d.totalRewardsGranted || 0,
+      updatedAt: toISO(d.updatedAt),
     });
   } catch (e) {
     res.status(500).json({ error: e.message });

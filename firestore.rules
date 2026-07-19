@@ -26,9 +26,40 @@ service cloud.firestore {
                "little_busters_rin_takuya@yahoo.co.jp"
              ];
     }
+    // subscriptions/{uid} の StoreKit解決フィールドの妥当性検証（tier/isSubscribed整合・型・期限上限）。
+    function isValidSubscriptionWrite(data) {
+      return data.tier in ['free', 'plus', 'pro']
+        && data.isSubscribed == (data.tier != 'free')
+        && (!('productID' in data) || data.productID is string)
+        && (!('expiration' in data) ||
+              (data.expiration is timestamp && data.expiration < request.time + duration.value(400, 'd')));
+    }
 
     // ========== 非公開：本人のみ read/write（docID = uid） ==========
-    match /subscriptions/{uid}            { allow read, write: if isOwner(uid); } // サブスク状態（Webは本人がdoc(user.uid)をread）
+    // サブスク状態。以前は isOwner のみでフィールド無検証＝クライアントが tier/isSubscribed を
+    // 直接書いてStoreKitを経由せずPro/Plusを不正取得できた。クライアントが書ける範囲を
+    // StoreKit解決フィールドのみに限定し、referralBonusExpiresAt/referralBonusGrantedCount
+    // （紹介報酬、processReferralReward が Admin SDK で付与）は許可リスト外＝クライアント書込み不可にする。
+    // 【既知の限界】実在する product ID 文字列を知っていれば依然として雑な偽装は可能。
+    // 根本解決には StoreKit 2 のサーバー側署名検証が必要（別途の取り組みとして記録）。
+    match /subscriptions/{uid} {
+      allow read: if isOwner(uid);
+      // create: 初回書込みは resource（既存データ）が無いため diff() が使えない。
+      // 新規ドキュメントの全キーを許可リストで検証する（referralBonusExpiresAt 等の
+      // Cloud Function専用フィールドを初回書込みで混入させないため）。
+      allow create: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['tier', 'isSubscribed', 'productID', 'expiration', 'updatedAt', 'platform'])
+        && isValidSubscriptionWrite(request.resource.data);
+      // update: 既存データとの差分キーのみ許可リストで検証（merge:true 書込みに対応）。
+      allow update: if isOwner(uid)
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['tier', 'isSubscribed', 'productID', 'expiration', 'updatedAt', 'platform'])
+        && isValidSubscriptionWrite(request.resource.data);
+    }
+    // 紹介報酬：月次カウンタ台帳。本人は自分の達成状況を読めるが書けない（Cloud Functions専用）。
+    match /referralRewards/{uid} { allow read: if isOwner(uid); allow write: if false; }
+    // 紹介報酬：付与イベント台帳（冪等性ガード兼監査ログ）。完全非公開。
+    match /referralRewardEvents/{referredUid} { allow read, write: if false; }
     match /route_backups/{uid}/{doc=**}   { allow read, write: if isOwner(uid); } // ルートバックアップ本体＋配下(routes等)
     match /selectedLocationBackup/{uid}   { allow read, write: if isOwner(uid); } // 選択スポットのバックアップ
     match /micinoEkiBackUp/{uid}          { allow read, write: if isOwner(uid); } // 道の駅コレクションのバックアップ

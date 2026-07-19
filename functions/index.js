@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const { onSchedule } = require("firebase-functions/v2/scheduler");
+const { onDocumentUpdated } = require("firebase-functions/v2/firestore");
 const admin = require("firebase-admin");
 const fs = require("fs");
 const path = require("path");
@@ -220,6 +221,117 @@ exports.routeShare = functions.https.onRequest(async (req, res) => {
     console.error("routeShare error:", e);
     res.redirect(real);
   }
+});
+
+// ===== リファラル報酬（紹介した友達の初回アクション達成で付与） =====
+// 紹介者・被紹介者ともに userInfo/{uid}.firstActionCompletedAt が初めてセットされた
+// タイミングで発火。クライアントが呼び出すエンドポイントは不要（イベント駆動）。
+//
+// 【注意】userInfo/{uid} の write ルールは isOwner ではなく signedIn() のため、
+// firstActionCompletedAt はクライアントから偽装可能。そのため実データ（投稿済みスポット/
+// 保存済みルート）の有無で裏取りしてから付与する。
+const REFERRAL_BONUS_DAYS = 7;
+const REFERRAL_MONTHLY_CAP = 5;
+
+function currentMonthKeyJST() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit",
+  }).formatToParts(new Date());
+  const y = parts.find((p) => p.type === "year").value;
+  const m = parts.find((p) => p.type === "month").value;
+  return `${y}-${m}`;
+}
+
+async function hasRealFirstAction(uid) {
+  const spotSnap = await db.collection("imagedownload").where("userID", "==", uid).limit(1).get();
+  if (!spotSnap.empty) return true;
+  const routeSnap = await db.collection("route_backups").doc(uid).collection("routes").limit(1).get();
+  return !routeSnap.empty;
+}
+
+exports.processReferralReward = onDocumentUpdated("userInfo/{uid}", async (event) => {
+  const uid = event.params.uid;
+  const before = event.data.before.data() || {};
+  const after = event.data.after.data() || {};
+
+  // 「初めて firstActionCompletedAt がセットされた」遷移でのみ処理する。
+  // クライアントが何度この doc を書いても、この条件は生涯で最大1回しか真にならない。
+  if (before.firstActionCompletedAt || !after.firstActionCompletedAt) return;
+
+  const referrerUid = after.referredByUserID;
+  if (!referrerUid || typeof referrerUid !== "string") return;
+
+  const verified = await hasRealFirstAction(uid);
+  if (!verified) {
+    console.warn(`processReferralReward: uid=${uid} firstActionCompletedAtはあるが実データ未確認のためスキップ`);
+    return;
+  }
+
+  const eventRef = db.collection("referralRewardEvents").doc(uid); // docID=referredUid
+  const ledgerRef = db.collection("referralRewards").doc(referrerUid);
+  const referrerSubRef = db.collection("subscriptions").doc(referrerUid);
+  const referredSubRef = db.collection("subscriptions").doc(uid);
+
+  await db.runTransaction(async (tx) => {
+    // 冪等性ガード：この referredUid に対して既に付与済みなら何もしない。
+    // Cloud Functions のトリガーは at-least-once のため再実行され得るが、これで多重付与を防ぐ。
+    const existingEvent = await tx.get(eventRef);
+    if (existingEvent.exists) return;
+
+    const ledgerSnap = await tx.get(ledgerRef);
+    const monthKey = currentMonthKeyJST();
+    let rewardsThisMonth = 0;
+    let totalRewardsGranted = 0;
+    if (ledgerSnap.exists) {
+      const d = ledgerSnap.data();
+      totalRewardsGranted = d.totalRewardsGranted || 0;
+      rewardsThisMonth = d.monthKey === monthKey ? (d.rewardsThisMonth || 0) : 0; // 月替わりでリセット
+    }
+
+    if (rewardsThisMonth >= REFERRAL_MONTHLY_CAP) {
+      // 上限到達：referredByUserID の紹介関係自体は registerUser() 実行時に既に記録済みのまま
+      // 変更しない。ボーナス付与だけをスキップする。
+      tx.set(ledgerRef, {
+        monthKey, rewardsThisMonth, totalRewardsGranted,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      }, { merge: true });
+      console.log(`processReferralReward: referrer=${referrerUid} 月間上限(${REFERRAL_MONTHLY_CAP})到達、referred=${uid} は付与スキップ`);
+      return;
+    }
+
+    const now = admin.firestore.Timestamp.now();
+    const bonusMillis = REFERRAL_BONUS_DAYS * 24 * 60 * 60 * 1000;
+    const extend = (currentExp) => {
+      const base = currentExp && currentExp.toMillis() > now.toMillis() ? currentExp.toMillis() : now.toMillis();
+      return admin.firestore.Timestamp.fromMillis(base + bonusMillis); // 既存ボーナスに加算（上書きしない）
+    };
+
+    const [referrerSub, referredSub] = await Promise.all([tx.get(referrerSubRef), tx.get(referredSubRef)]);
+    const referrerNewExp = extend(referrerSub.exists ? referrerSub.data().referralBonusExpiresAt : null);
+    const referredNewExp = extend(referredSub.exists ? referredSub.data().referralBonusExpiresAt : null);
+
+    tx.set(referrerSubRef, {
+      referralBonusExpiresAt: referrerNewExp,
+      referralBonusGrantedCount: admin.firestore.FieldValue.increment(1),
+    }, { merge: true });
+    tx.set(referredSubRef, {
+      referralBonusExpiresAt: referredNewExp,
+      referralBonusGrantedCount: admin.firestore.FieldValue.increment(1),
+    }, { merge: true });
+
+    tx.set(eventRef, {
+      referrerUid, referredUid: uid,
+      grantedAt: admin.firestore.FieldValue.serverTimestamp(),
+      bonusDays: REFERRAL_BONUS_DAYS, monthKey,
+    });
+
+    tx.set(ledgerRef, {
+      monthKey,
+      rewardsThisMonth: rewardsThisMonth + 1,
+      totalRewardsGranted: totalRewardsGranted + 1,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+  });
 });
 
 // ===== 動的サイトマップ =====
