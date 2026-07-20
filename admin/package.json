@@ -8,7 +8,9 @@
     "import": "node importRallies.js",
     "import:dry": "node importRallies.js --dry-run",
     "serve": "node server.js",
-    "status": "node setRallyStatus.js"
+    "status": "node setRallyStatus.js",
+    "emulators": "cd .. && firebase emulators:start --import=./admin/emulator-data --export-on-exit",
+    "sync-blog-data": "node syncBlogTestData.js"
   },
   "dependencies": {
     "express": "^4.22.2",

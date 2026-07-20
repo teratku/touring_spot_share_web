@@ -220,5 +220,33 @@ admin/
 - server は **127.0.0.1 のみ**。公開しない。`POST/PUT` は本番 Firestore／ローカルファイルへ書き込む。
 - `node_modules` / `serviceAccount.json` は `.gitignore` 済み。`data/`・`generated/` は生成物（コミット要否は運用判断）。
 - Nominatim は低頻度利用（ボタン/Enter実行のみ）。
+
+---
+
+## 11. ローカルでブログを確認する（本番とテスト環境の差異を無くす）
+
+`blog-detail.html`（`functions/blogSSR`）は記事本文の他に `imagedownload`（スポット）/
+`shared_routes`（ルート）も読んで `{{spot:xxx}}` 等の埋め込みカードを描画する。
+Firestoreエミュレータは空データで起動するため、そのままだと本番と表示が食い違う
+（記事が「見つかりません」になったり、埋め込みが展開されず生テキストのまま出たりする）。
+
+### 手順
+
+```bash
+# 1) エミュレータを「永続化あり」で起動（初回のみ --import 先が無くてもエラーにならない）
+cd admin && npm run emulators
+#   実体: cd .. && firebase emulators:start --import=./admin/emulator-data --export-on-exit
+
+# 2) 別ターミナルで、本番の blog_posts と、記事が参照する spot/route だけをローカルへ同期
+cd admin && npm run sync-blog-data
+```
+
+`--export-on-exit` により、Ctrl+C で終了するたびに `admin/emulator-data/`
+（`.gitignore` 済み・コミットしない）へ自動保存され、**次回からは `npm run emulators`
+だけでデータが復元される**（`sync-blog-data` の再実行は、本番に新しい記事/スポットを
+追加した後だけでよい）。
+
+`syncBlogTestData.js` は読み取りを本番Firestoreから行うだけで、**本番データへの書込みは一切行わない**
+（書込み先は常にローカルエミュレータ）。
 - 検証規則は `lib/rallyValidation.js` と `importRallies.js` のインライン版を**同一に保つ**こと。
 - 公開前にテスト用 uid でアプリ表示・チェックイン・写真付与を確認。
