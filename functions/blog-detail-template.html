@@ -1424,7 +1424,23 @@
                 });
 
                 // {{youtube:xxx}} を置換
-                content = content.replace(/\{\{youtube:([^}]+)\}\}/g, (match, videoId) => {
+                // xxx は動画IDそのものだけでなく、youtu.be/ や youtube.com/watch?v= /
+                // youtube.com/shorts/ 等のURL形式でも入力され得るため、実際の動画IDを抽出する。
+                content = content.replace(/\{\{youtube:([^}]+)\}\}/g, (match, raw) => {
+                  const input = raw.trim();
+                  let videoId = null;
+                  const idMatch = input.match(
+                    /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/
+                  );
+                  if (idMatch) {
+                    videoId = idMatch[1];
+                  } else if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
+                    videoId = input; // 動画IDが直接指定されている場合
+                  }
+                  if (!videoId) {
+                    console.warn('YouTube動画IDを抽出できませんでした:', input);
+                    return match; // 未入力のプレースホルダー等はそのまま残す
+                  }
                   return `<div class="embedded-card youtube-card">
                     <div class="youtube-video-wrapper">
                       <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
