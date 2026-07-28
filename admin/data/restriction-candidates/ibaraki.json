@@ -1,0 +1,393 @@
+{
+ "prefecture": "茨城県",
+ "romaji": "ibaraki",
+ "builtAt": "2026-07-28T22:28:06.400Z",
+ "count": 14,
+ "withGeometry": 6,
+ "candidates": [
+  {
+   "id": "ibaraki-1",
+   "prefecture": "茨城県",
+   "city": "",
+   "sourceRoad": "日立有料道路",
+   "from": "日立市助川町地内",
+   "to": "日立市白銀町3丁目",
+   "target": "二輪の自動車（125ccを超えるものを除く）及び原動機付自転車",
+   "time": "終日",
+   "matchedName": "日立有料道路",
+   "confidence": "確実",
+   "polyline": "q_l~EyokyYcHlB{CTu[kCeJaDqFeEeEcF",
+   "chainPolyline": "q_l~EyokyYmNbCu\\aDmM{GmGkIbBiC|CnB",
+   "lengthMeters": 1298,
+   "geocode": {
+    "from": {
+     "lng": 140.6481553,
+     "lat": 36.5940216,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒317-0065 茨城県日立市助川町"
+    },
+    "to": {
+     "lng": 140.6411212,
+     "lat": 36.6148571,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒317-0056 茨城県日立市白銀町３丁目"
+    }
+   },
+   "reason": null,
+   "minCc": 126,
+   "maxCc": null,
+   "targetLabel": "126cc以上"
+  },
+  {
+   "id": "ibaraki-2",
+   "prefecture": "茨城県",
+   "city": "笠間市",
+   "sourceRoad": "県道笠間つくば線",
+   "from": "笠間市本戸4963番地先",
+   "to": "笠間市本戸4934番地先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "笠間つくば線",
+   "confidence": "要確認",
+   "polyline": "}l{|Eqj~vYx@tCC|@sIdTChB",
+   "chainPolyline": "a__}Eec`wYoBjUz\\r@fEvCxGzKhTqCxG\\`FyEpHApDrAhOtOzDzI{IlY",
+   "lengthMeters": 510,
+   "geocode": {
+    "from": {
+     "lng": 140.2192924,
+     "lat": 36.3389639,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒309-1633 茨城県笠間市本戸"
+    },
+    "to": {
+     "lng": 140.2192924,
+     "lat": 36.3389639,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒309-1633 茨城県笠間市本戸"
+    }
+   },
+   "reason": "片方の住所しか当たらないので前後500mを仮に置いた",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-3",
+   "prefecture": "茨城県",
+   "city": "土浦市～つくば市",
+   "sourceRoad": "県道筑波公園永井線表筑波スカイライン",
+   "from": "土浦市小野字千申115番地先",
+   "to": "つくば市大字平沢字上沢無番地先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "筑波公園永井線",
+   "confidence": "要確認",
+   "polyline": "y`w{Eq}pvYlAo@p@gDhD}D`A}J|CkB",
+   "chainPolyline": "y`w{Eq}pvYhHuK`A}JrFmF~D}]u@wHdKas@~GoGzJuEDlAuChCpArKz@f@jBeAJtE`GdM`CBlIkFpKk@",
+   "lengthMeters": 537,
+   "geocode": {
+    "from": {
+     "lng": 140.1600938,
+     "lat": 36.1666329,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒300-4108 茨城県土浦市小野"
+    },
+    "to": {
+     "lng": 140.0707615,
+     "lat": 36.1579784,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒300-4246 茨城県つくば市上沢"
+    }
+   },
+   "reason": "片方の住所しか当たらないので前後500mを仮に置いた",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-4",
+   "prefecture": "茨城県",
+   "city": "土浦市",
+   "sourceRoad": "市道",
+   "from": "土浦市大志戸835番地の7先",
+   "to": "土浦市小野字千申115番地先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "市道",
+   "confidence": "確実",
+   "polyline": null,
+   "chainPolyline": null,
+   "lengthMeters": null,
+   "geocode": null,
+   "reason": "道路の形が取れない",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-5",
+   "prefecture": "茨城県",
+   "city": "石岡市",
+   "sourceRoad": "",
+   "from": "石岡市小幡2090番地の1先",
+   "to": "石岡市小幡横道国有林22い林小班",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": null,
+   "confidence": null,
+   "polyline": null,
+   "chainPolyline": null,
+   "lengthMeters": null,
+   "geocode": null,
+   "reason": "道路名が書かれていない",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-6",
+   "prefecture": "茨城県",
+   "city": "石岡市",
+   "sourceRoad": "市道フルーツライン",
+   "from": "石岡市辻385番地先",
+   "to": "石岡市柴内52番地先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "フルーツライン（東山東部広域農道）",
+   "confidence": "要確認",
+   "polyline": null,
+   "chainPolyline": null,
+   "lengthMeters": null,
+   "geocode": null,
+   "reason": "道路の形が取れない",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-7",
+   "prefecture": "茨城県",
+   "city": "石岡市",
+   "sourceRoad": "県道笠間つくば線",
+   "from": "石岡市太田1409番地先",
+   "to": "石岡市太田字池の台1439番地の1先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "笠間つくば線",
+   "confidence": "要確認",
+   "polyline": "mnp|EgxsvYhBoAlGiO",
+   "chainPolyline": "mnp|EgxsvYhBoAtGwO~IcIfJkO`I_HvBuFlOkSdk@sRxCuDzFeClDaHvJi\\fTtHzGdJ~P}DjLbB~DjGnEN`QtHbKBbChEfJ|HrHfDbQvCtIy@|BzJvEfIs@fL~SpKpEnFzCL`JbI",
+   "lengthMeters": 350,
+   "geocode": {
+    "from": {
+     "lng": 140.2022227,
+     "lat": 36.306555,
+     "precision": "ROOFTOP",
+     "formatted": "日本、〒315-0102 茨城県石岡市太田１４０９"
+    },
+    "to": {
+     "lng": 140.1986951,
+     "lat": 36.3124751,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒315-0102 茨城県石岡市太田"
+    }
+   },
+   "reason": null,
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-8",
+   "prefecture": "茨城県",
+   "city": "つくば市",
+   "sourceRoad": "県道筑波公園永井線表筑波スカイライン",
+   "from": "つくば市筑波字神池1番地の2先",
+   "to": "つくば市平沢字上沢無番地先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "筑波公園永井線",
+   "confidence": "要確認",
+   "polyline": null,
+   "chainPolyline": "y`w{Eq}pvYhHuK`A}JrFmF~D}]u@wHdKas@~GoGzJuEDlAuChCpArKz@f@jBeAJtE`GdM`CBlIkFpKk@",
+   "lengthMeters": null,
+   "geocode": {
+    "from": {
+     "lng": 140.1060931,
+     "lat": 36.2207007,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒300-4352 茨城県つくば市筑波"
+    },
+    "to": {
+     "lng": 140.0707615,
+     "lat": 36.1579784,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒300-4246 茨城県つくば市上沢"
+    }
+   },
+   "reason": "道路と住所が8541m 離れている（別の道の可能性）",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-9",
+   "prefecture": "茨城県",
+   "city": "つくば市",
+   "sourceRoad": "その他の道路筑波スカイライン",
+   "from": "つくば市筑波字東山67番地の1先",
+   "to": "つくば市筑波字北裏1番地の2先",
+   "target": "原付・自動二輪",
+   "time": "19：00～翌8：00",
+   "matchedName": "筑波スカイライン",
+   "confidence": "要確認",
+   "polyline": "yca|Ey|evY`@Q",
+   "chainPolyline": "oea|Ee~evYvAXrHcKd@gE_CeCkAEeE|ClE}GtQtDTz@o@j@c@oApA{C~Af@`B~ChAyBlCv@{A_@",
+   "lengthMeters": 21,
+   "geocode": {
+    "from": {
+     "lng": 140.10485,
+     "lat": 36.21082,
+     "precision": "GEOMETRIC_CENTER",
+     "formatted": "日本、〒300-4352 茨城県つくば市筑波東山入口"
+    },
+    "to": {
+     "lng": 140.1060931,
+     "lat": 36.2207007,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒300-4352 茨城県つくば市筑波"
+    }
+   },
+   "reason": null,
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-10",
+   "prefecture": "茨城県",
+   "city": "桜川市",
+   "sourceRoad": "市道",
+   "from": "桜川市真壁町椎尾237番地先",
+   "to": "桜川市真壁町椎尾無番地先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "市道",
+   "confidence": "確実",
+   "polyline": null,
+   "chainPolyline": null,
+   "lengthMeters": null,
+   "geocode": null,
+   "reason": "道路の形が取れない",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-11",
+   "prefecture": "茨城県",
+   "city": "守谷市",
+   "sourceRoad": "市道",
+   "from": "守谷市大字板戸井1140番地の2先",
+   "to": "守谷市大字板戸井1294番地の2先",
+   "target": "原付・自動二輪",
+   "time": "終日",
+   "matchedName": "市道",
+   "confidence": "確実",
+   "polyline": null,
+   "chainPolyline": null,
+   "lengthMeters": null,
+   "geocode": null,
+   "reason": "道路の形が取れない",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-12",
+   "prefecture": "茨城県",
+   "city": "",
+   "sourceRoad": "市道",
+   "from": "土浦市港町1丁目地内",
+   "to": "土浦市桜町4丁目地内（土浦高架道）",
+   "target": "二輪の自動車及び原動機付自転車",
+   "time": "終日",
+   "matchedName": "市道",
+   "confidence": "確実",
+   "polyline": null,
+   "chainPolyline": null,
+   "lengthMeters": null,
+   "geocode": null,
+   "reason": "道路の形が取れない",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-13",
+   "prefecture": "茨城県",
+   "city": "",
+   "sourceRoad": "土浦境線",
+   "from": "土浦市桜町4丁目地内",
+   "to": "土浦市田中3丁目地内（土浦高架道）",
+   "target": "二輪の自動車及び原動機付自転車",
+   "time": "終日",
+   "matchedName": "土浦境線",
+   "confidence": "確実",
+   "polyline": null,
+   "chainPolyline": "evg{EqrgvYX|EbGdO{ApGuFdFuBlZqFlIoAzFv@vD",
+   "lengthMeters": null,
+   "geocode": {
+    "from": {
+     "lng": 140.1954774,
+     "lat": 36.0780887,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒300-0037 茨城県土浦市桜町４丁目"
+    },
+    "to": {
+     "lng": 140.1851818,
+     "lat": 36.0854743,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒300-0048 茨城県土浦市田中３丁目"
+    }
+   },
+   "reason": "道路と住所が5227m 離れている（別の道の可能性）",
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  },
+  {
+   "id": "ibaraki-14",
+   "prefecture": "茨城県",
+   "city": "",
+   "sourceRoad": "土浦境線",
+   "from": "つくば市竹園3丁目地内",
+   "to": "つくば市吾妻2丁目地内",
+   "target": "二輪の自動車及び原動機付自転車",
+   "time": "終日",
+   "matchedName": "土浦境線",
+   "confidence": "確実",
+   "polyline": "wqf{Eu|dvYM[h@r@eD_I",
+   "chainPolyline": "wqf{Eu|dvYiCgH",
+   "lengthMeters": 221,
+   "geocode": {
+    "from": {
+     "lng": 140.1253735,
+     "lat": 36.0806375,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒305-0032 茨城県つくば市竹園３丁目"
+    },
+    "to": {
+     "lng": 140.1125192,
+     "lat": 36.0846949,
+     "precision": "APPROXIMATE",
+     "formatted": "日本、〒305-0031 茨城県つくば市吾妻２丁目"
+    }
+   },
+   "reason": null,
+   "minCc": null,
+   "maxCc": null,
+   "targetLabel": "二輪すべて"
+  }
+ ]
+}

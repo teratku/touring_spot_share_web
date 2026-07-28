@@ -1,0 +1,52 @@
+{
+ "prefecture": "岐阜県",
+ "romaji": "gifu",
+ "source": "https://www.jmpsa.or.jp/society/roadinfo/area-119-250.html",
+ "fetchedAt": "2026-07-28T21:29:18.961Z",
+ "count": 3,
+ "restrictions": [
+  {
+   "id": "gifu-1",
+   "prefecture": "岐阜県",
+   "city": "",
+   "road": "一般国道256号",
+   "roadCandidates": [
+    "山町乙原地内和良金山トンネル"
+   ],
+   "from": "下呂市保井戸1045番地2先保井戸信号交差点",
+   "to": "下呂市金山町乙原地内和良金山トンネル内郡上市境",
+   "target": "小特、原付、軽車両",
+   "appliesTo": "moped",
+   "time": "終日",
+   "rawSection": "下呂市保井戸1045番地2先保井戸信号交差点～～下呂市金山町乙原地内和良金山トンネル内郡上市境"
+  },
+  {
+   "id": "gifu-2",
+   "prefecture": "岐阜県",
+   "city": "",
+   "road": "一般国道256号",
+   "roadCandidates": [
+    "良町方須地内和良金山トンネル"
+   ],
+   "from": "郡上市和良町方須966番地4先",
+   "to": "郡上市和良町方須地内和良金山トンネル内下呂市境",
+   "target": "原付、小特、軽車両",
+   "appliesTo": "moped",
+   "time": "終日",
+   "rawSection": "郡上市和良町方須966番地4先～～郡上市和良町方須地内和良金山トンネル内下呂市境"
+  },
+  {
+   "id": "gifu-3",
+   "prefecture": "岐阜県",
+   "city": "",
+   "road": "白山白川郷ホワイトロード",
+   "roadCandidates": [],
+   "from": "大野郡白川村大字鳩谷4.3キロポスト（料金徴収所）",
+   "to": "大野郡白川村大字鳩谷14.74キロポスト（県境）",
+   "target": "自二輪、原付、軽車両",
+   "appliesTo": "moped",
+   "time": "終日",
+   "rawSection": "大野郡白川村大字鳩谷4.3キロポスト（料金徴収所）～～大野郡白川村大字鳩谷14.74キロポスト（県境）"
+  }
+ ]
+}

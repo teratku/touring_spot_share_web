@@ -1,0 +1,48 @@
+{
+ "prefecture": "群馬県",
+ "romaji": "gunma",
+ "source": "https://www.jmpsa.or.jp/society/roadinfo/area-119-299.html",
+ "fetchedAt": "2026-07-28T21:29:04.528Z",
+ "count": 3,
+ "restrictions": [
+  {
+   "id": "gunma-1",
+   "prefecture": "群馬県",
+   "city": "",
+   "road": "上信自動車道",
+   "roadCandidates": [],
+   "from": "渋川市金井1670番地3",
+   "to": "吾妻郡東吾妻町大字箱島1162番地8",
+   "target": "原付、小型特殊車両、軽車両、歩行者",
+   "appliesTo": "moped",
+   "time": "0-24",
+   "rawSection": "渋川市金井1670番地3～～吾妻郡東吾妻町大字箱島1162番地8"
+  },
+  {
+   "id": "gunma-2",
+   "prefecture": "群馬県",
+   "city": "",
+   "road": "県道桐生田沼線",
+   "roadCandidates": [],
+   "from": "桐生市梅田町4丁目860番地-3",
+   "to": "桐生市梅田町4丁目6915番地-1",
+   "target": "125cc以上400cc以下",
+   "appliesTo": "unknown",
+   "time": "土日休日の0:00～24:00",
+   "rawSection": "桐生市梅田町4丁目860番地-3～～桐生市梅田町4丁目6915番地-1"
+  },
+  {
+   "id": "gunma-3",
+   "prefecture": "群馬県",
+   "city": "",
+   "road": "国道18号線君ヶ代橋東詰",
+   "roadCandidates": [],
+   "from": "高崎市下豊岡町784番地先",
+   "to": "高崎市下豊岡町784番地先",
+   "target": "原動機付自転車",
+   "appliesTo": "moped",
+   "time": "終日",
+   "rawSection": "高崎市下豊岡町784番地先～～高崎市下豊岡町784番地先"
+  }
+ ]
+}

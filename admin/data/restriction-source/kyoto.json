@@ -1,0 +1,65 @@
+{
+ "prefecture": "京都府",
+ "romaji": "kyoto",
+ "source": "https://www.jmpsa.or.jp/society/roadinfo/area-120-136.html",
+ "fetchedAt": "2026-07-28T21:29:22.164Z",
+ "count": 4,
+ "restrictions": [
+  {
+   "id": "kyoto-1",
+   "prefecture": "京都府",
+   "city": "",
+   "road": "国道1号",
+   "roadCandidates": [
+    "国道1号"
+   ],
+   "from": "国道1号側道分岐点(東側)",
+   "to": "国道1号側道分岐点(西側)",
+   "target": "二輪の自動車・一般原動機付自転車・特定小型原動機付自転車・軽車両",
+   "appliesTo": "all",
+   "time": "終日",
+   "rawSection": "国道1号側道分岐点(東側)～～国道1号側道分岐点(西側)"
+  },
+  {
+   "id": "kyoto-2",
+   "prefecture": "京都府",
+   "city": "",
+   "road": "渋谷蹴上線",
+   "roadCandidates": [],
+   "from": "花鳥橋北詰",
+   "to": "東山浄苑前",
+   "target": "二輪の自動車、一般原動機付自転車",
+   "appliesTo": "all",
+   "time": "9：00～7：00土曜・日曜・休日は終日",
+   "rawSection": "花鳥橋北詰～～東山浄苑前"
+  },
+  {
+   "id": "kyoto-3",
+   "prefecture": "京都府",
+   "city": "",
+   "road": "将軍塚線",
+   "roadCandidates": [],
+   "from": "渋谷蹴上線",
+   "to": "将軍塚駐車場入口",
+   "target": "二輪の自動車、一般原動機付自転車",
+   "appliesTo": "all",
+   "time": "終日",
+   "rawSection": "渋谷蹴上線～～将軍塚駐車場入口"
+  },
+  {
+   "id": "kyoto-4",
+   "prefecture": "京都府",
+   "city": "",
+   "road": "国道9号",
+   "roadCandidates": [
+    "千代原口地下トンネル"
+   ],
+   "from": "千代原口地下トンネルアプローチ区間北東側東詰",
+   "to": "千代原口地下トンネル区間南西側西詰",
+   "target": "二輪の自動車・一般原動機付自転車・特定小型・原動機付自転車・軽車両",
+   "appliesTo": "all",
+   "time": "終日",
+   "rawSection": "千代原口地下トンネルアプローチ区間北東側東詰～～千代原口地下トンネル区間南西側西詰"
+  }
+ ]
+}

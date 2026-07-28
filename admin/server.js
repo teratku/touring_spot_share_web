@@ -299,6 +299,63 @@ app.post("/api/roads/publish/:romaji", async (req, res) => {
   res.json({ ok: imported.ok, commit, prefecture, generation, steps });
 });
 
+// ========== 通行規制（road_restrictions）==========
+//
+// 候補   data/restriction-candidates/<romaji>.json … 自動生成した下書き
+// 登録   data/road-restrictions/<romaji>.json      … 開発者が確認して確定したもの（配信対象）
+//
+// ⚠️ 候補はそのまま配信しない。ジオコーディングの精度が場所によって大きく違い、
+//    茨城で試したとき 1,300m の規制区間が 510m、別の区間が 21m になった。
+//    必ず画面で地図を見て、始点・終点を直してから登録する。
+
+app.get("/api/restrictions/candidates/:romaji", (req, res) => {
+  const file = path.join(__dirname, "data", "restriction-candidates", `${req.params.romaji}.json`);
+  if (!fs.existsSync(file)) {
+    return res.status(404).json({
+      error: "候補が未生成です。node buildRestrictionCandidates.js --prefecture <県名> を実行してください。",
+      candidates: [],
+    });
+  }
+  try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
+  catch (e) { res.status(500).json({ error: e.message, candidates: [] }); }
+});
+
+app.get("/api/restrictions/:romaji", (req, res) => {
+  const file = path.join(__dirname, "data", "road-restrictions", `${req.params.romaji}.json`);
+  if (!fs.existsSync(file)) return res.json({ restrictions: [] });
+  try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
+  catch (e) { res.status(500).json({ error: e.message, restrictions: [] }); }
+});
+
+app.put("/api/restrictions/:romaji", (req, res) => {
+  const { romaji } = req.params;
+  const incoming = (req.body && req.body.restrictions) || [];
+  const cleaned = [];
+  for (const r of incoming) {
+    if (!r || !r.id || !r.polyline || !r.name) continue;
+    cleaned.push({
+      id: String(r.id),
+      kind: ["noMotorcycle", "noPassenger", "winterClosure", "closed"].includes(r.kind) ? r.kind : "noMotorcycle",
+      name: String(r.name),
+      prefecture: String(r.prefecture || ""),
+      polyline: String(r.polyline),
+      note: r.note ? String(r.note) : null,
+      activeMonths: Array.isArray(r.activeMonths) ? r.activeMonths.filter((m) => m >= 1 && m <= 12) : null,
+      minCc: Number.isFinite(r.minCc) ? r.minCc : null,
+      maxCc: Number.isFinite(r.maxCc) ? r.maxCc : null,
+      // いつ確認したか。規制は変わるので必ず持たせる
+      checkedAt: r.checkedAt || new Date().toISOString().slice(0, 10),
+      source: r.source || "admin",
+    });
+  }
+  const dir = path.join(__dirname, "data", "road-restrictions");
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, `${romaji}.json`),
+                   JSON.stringify({ romaji, updatedAt: new Date().toISOString(),
+                                    count: cleaned.length, restrictions: cleaned }, null, 1) + "\n");
+  res.json({ ok: true, count: cleaned.length });
+});
+
 /** いま使っている重みと正規化の基準（画面の初期値に使う） */
 app.get("/api/roads/weights", (_req, res) => {
   const { WEIGHTS, NORMALIZERS, CLASS_RANK } = require("./lib/funSegments");
