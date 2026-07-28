@@ -23,6 +23,7 @@ const fs = require("fs");
 const express = require("express");
 const admin = require("firebase-admin");
 const { normalizeOverride, isEmptyOverride } = require("./lib/roadOverrides");
+const { execFile } = require("child_process");
 const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
 
@@ -245,6 +246,57 @@ app.put("/api/roads/overrides/:romaji", (req, res) => {
   fs.writeFileSync(path.join(dir, `${romaji}.json`),
                    JSON.stringify({ romaji, updatedAt: new Date().toISOString(), overrides: cleaned }, null, 1) + "\n");
   res.json({ ok: true, count: Object.keys(cleaned).length });
+});
+
+/**
+ * 再生成 → 配信 をまとめて実行する。
+ *
+ * ⚠️ 本番の Firestore と Storage に書き込む。
+ *    誤爆すると全ユーザーに出るので、次の3つを必ず守ること:
+ *      1. 既定は下見（dryRun）。commit=true を明示したときだけ書き込む
+ *      2. 1県ずつしか実行しない（--all は画面から叩けない）
+ *      3. 実行の中身をそのまま画面へ返す（何が起きたか隠さない）
+ *
+ * 調整は生成時に当たるので、保存しただけでは配信されない。ここで必ず再生成を挟む。
+ */
+const PUBLISH_TIMEOUT_MS = 10 * 60 * 1000;
+
+function run(script, args) {
+  return new Promise((resolve) => {
+    execFile("node", ["--max-old-space-size=8192", path.join(__dirname, script), ...args],
+      { cwd: __dirname, timeout: PUBLISH_TIMEOUT_MS, maxBuffer: 32 * 1024 * 1024 },
+      (error, stdout, stderr) => {
+        resolve({ ok: !error, code: error ? (error.code ?? 1) : 0, stdout, stderr: stderr || (error ? String(error) : "") });
+      });
+  });
+}
+
+app.post("/api/roads/publish/:romaji", async (req, res) => {
+  const { romaji } = req.params;
+  const commit = req.body && req.body.commit === true;
+  const prefecture = Object.keys(ROMAJI).find((n) => ROMAJI[n] === romaji);
+  if (!prefecture) return res.status(400).json({ error: "県が分かりません: " + romaji });
+
+  const steps = [];
+  // 1. 調整を当てて作り直す
+  const built = await run("buildRoadRecommend.js", ["--build", "--prefecture", prefecture]);
+  steps.push({ name: "再生成", ...built });
+  if (!built.ok) return res.json({ ok: false, steps });
+
+  // 2. 検証（--commit を付けなければ書き込まない）
+  const importArgs = ["--prefecture", prefecture];
+  if (commit) importArgs.push("--commit");
+  const imported = await run("importRoadRecommend.js", importArgs);
+  steps.push({ name: commit ? "配信" : "下見（書き込みなし）", ...imported });
+
+  // いまの世代を返す（画面に出して確認できるように）
+  let generation = null;
+  try {
+    const g = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "road-generation.json"), "utf8"));
+    generation = g[romaji] || null;
+  } catch { /* まだ無い */ }
+
+  res.json({ ok: imported.ok, commit, prefecture, generation, steps });
 });
 
 /** いま使っている重みと正規化の基準（画面の初期値に使う） */

@@ -21,6 +21,7 @@
  *   node importRoadRecommend.js --all --commit         # 全県を投入
  *   node importRoadRecommend.js --prefecture 栃木県 --commit
  *   node importRoadRecommend.js --all --index-only --commit  # 索引だけ作り直す（本体は上げ直さない）
+ *   node importRoadRecommend.js --prefecture 長野県 --bump --commit  # 世代を強制的に上げて配り直す
  *
  * ⚠️ 本番の Firestore と Storage に書き込みます。まず --dry-run で確認してください。
  *    generation を上げるとアプリのキャッシュが失効して再ダウンロードが走ります。
@@ -49,6 +50,12 @@ const COMMIT = args.includes("--commit");
 const ALL = args.includes("--all");
 /** 本体を上げ直さず、Firestore の索引だけ作り直す */
 const INDEX_ONLY = args.includes("--index-only");
+/**
+ * 世代を強制的に1つ上げる。
+ * 配信済みと手元で中身が違うのに、どちらにも contentHash が無くて
+ * 自動判定できないときの逃げ道（hash を入れる前に配信したぶん）。
+ */
+const BUMP = args.includes("--bump");
 const ONLY = argVal("--prefecture");
 
 /** 出力の妥当性を確かめる。おかしなものを配信してしまうと全ユーザーに出る */
@@ -137,6 +144,43 @@ async function main() {
   const db = admin.firestore();
   const bucket = admin.storage().bucket();
 
+  // ⚠️ 配信済みの中身と手元の中身が違うのに世代が同じだと、アプリは落とし直さない。
+  //    「調整したのに端末に届かない」という分かりにくい形で出るので、
+  //    投入の直前に配信済みの hash と突き合わせて、必要なら世代を上げる。
+  //    （手元の world-generation.json だけでは、配信済みが何だったかを知りようがない）
+  const bumped = [];
+  for (const t of targets) {
+    const snapshot = await db.collection(COLLECTION).doc(t.data.romaji).get();
+    const deployed = snapshot.exists ? snapshot.data() : null;
+    if (!deployed) continue;
+    const sameGeneration = deployed.generation >= t.data.generation;
+    // どちらにも hash が無いと差が分からない。--bump で明示的に上げてもらう
+    const bothUnknown = !deployed.contentHash && !t.data.contentHash;
+    const differentContent = deployed.contentHash !== t.data.contentHash;
+    if (BUMP || (sameGeneration && differentContent && !bothUnknown)) {
+      const next = (deployed.generation || 0) + 1;
+      console.log(`  ↑ ${t.data.prefecture}: ${BUMP ? "--bump 指定" : "配信済みと中身が違う"}ので世代を v${t.data.generation} → v${next} へ`);
+      t.data.generation = next;
+      bumped.push(t);
+    }
+  }
+  if (bumped.length) {
+    // 手元のファイルにも書き戻す（次の --build で世代が巻き戻らないように）
+    const genFile = path.join(__dirname, "data", "road-generation.json");
+    let generations = {};
+    try { generations = JSON.parse(fs.readFileSync(genFile, "utf8")); } catch { /* まだ無い */ }
+    for (const t of bumped) {
+      const file = path.join(DATA_DIR, t.file);
+      const raw = JSON.parse(fs.readFileSync(file, "utf8"));
+      raw.generation = t.data.generation;
+      fs.writeFileSync(file, JSON.stringify(raw, null, 1) + "\n");
+      generations[t.data.romaji] = {
+        generation: t.data.generation, hash: t.data.contentHash, updatedAt: new Date().toISOString(),
+      };
+    }
+    fs.writeFileSync(genFile, JSON.stringify(generations, null, 1) + "\n");
+  }
+
   const index = {};
   for (const t of targets) {
     const { data } = t;
@@ -159,6 +203,8 @@ async function main() {
       prefecture: data.prefecture,
       romaji: data.romaji,
       generation: data.generation,
+      // 次に配信するとき「中身が変わったか」を判定する材料
+      contentHash: data.contentHash || null,
       fileName,
       count: data.count,
       // 一覧に出すときの見出し。索引だけで「何が入っているか」が分かるように

@@ -89,6 +89,18 @@
   .warn { color:var(--warn); font-size:11px; padding:6px 10px; background:#fff4e6; border-bottom:1px solid var(--line); }
   .muted { color:var(--muted); font-size:11px; }
 
+  /* 配信の確認 */
+  #publishModal { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex;
+                  align-items:center; justify-content:center; z-index:1000; }
+  #publishModal .sheet { background:#fff; border-radius:12px; width:min(720px, 92vw);
+                  max-height:86vh; display:flex; flex-direction:column; padding:16px; gap:8px; }
+  #publishModal h3 { margin:0; font-size:16px; }
+  .log { flex:1; overflow:auto; background:#0f1720; color:#d5dae0; border-radius:8px;
+         padding:10px; font:11px/1.5 ui-monospace,monospace; white-space:pre-wrap; min-height:180px; }
+  .pubButtons { display:flex; gap:8px; align-items:center; }
+  button.danger-solid { background:#c92a2a; color:#fff; border-color:#c92a2a; }
+  button.danger-solid:disabled { background:#e9ecef; color:#868e96; border-color:var(--line); }
+
   /* 重みの試算 */
   #tuning { padding:14px 18px; overflow-y:auto; width:100%; }
   .slider { display:flex; align-items:center; gap:10px; margin:3px 0; max-width:560px; }
@@ -110,7 +122,23 @@
   <span id="status" class="muted"></span>
   <span id="unsaved" class="unsaved"></span>
   <button class="primary" id="save" disabled>保存 <kbd>S</kbd></button>
+  <button id="publish">配信…</button>
 </header>
+
+<!-- 配信の確認。本番へ書き込むので、必ず下見を挟ませる -->
+<div id="publishModal" style="display:none">
+  <div class="sheet">
+    <h3 id="pubTitle">配信</h3>
+    <p class="muted" id="pubLead"></p>
+    <div id="pubLog" class="log"></div>
+    <div class="pubButtons">
+      <button id="pubClose">閉じる</button>
+      <span class="spacer"></span>
+      <button id="pubDry">下見（書き込まない）</button>
+      <button class="danger-solid" id="pubGo" disabled>本番に配信する</button>
+    </div>
+  </div>
+</div>
 
 <main id="view-curate">
   <div id="list">
@@ -583,6 +611,69 @@ $("tab-tune").onclick = () => {
   $("tab-tune").classList.add("on"); $("tab-curate").classList.remove("on");
   $("view-curate").style.display = "none"; $("tuning").style.display = "block";
   renderTuning();
+};
+
+// ---------- 配信 ----------
+let publishReady = false;
+
+function openPublish() {
+  if (state.dirty) { alert(`未保存の調整が ${state.dirty}件 あります。先に保存してください。`); return; }
+  publishReady = false;
+  $("pubGo").disabled = true;
+  $("pubTitle").textContent = `${state.prefName} を配信`;
+  $("pubLead").innerHTML =
+    "調整を当てて作り直してから、本番の Firestore と Storage へ送ります。<br>" +
+    "<strong>まず「下見」で中身を確かめてください。</strong>下見が通ると配信ボタンが押せるようになります。";
+  $("pubLog").textContent = "";
+  $("publishModal").style.display = "flex";
+}
+
+async function runPublish(commit) {
+  const log = $("pubLog");
+  log.textContent = (commit ? "配信中…" : "下見中…") + "（再生成に十数秒かかります）\n";
+  $("pubDry").disabled = true; $("pubGo").disabled = true;
+  try {
+    const r = await fetch(`/api/roads/publish/${state.romaji}`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ commit }),
+    });
+    const j = await r.json();
+    let text = "";
+    for (const st of j.steps || []) {
+      text += `── ${st.name} ${st.ok ? "✅" : "❌"} ──\n${(st.stdout || "").trim()}\n`;
+      // 進捗表示（「読み込み 500/4587」を \r で上書きしている）はログに残すと邪魔なので畳む
+      const err = (st.stderr || "").split("\r").pop().trim();
+      if (err) text += `[stderr] ${err}\n`;
+      text += "\n";
+    }
+    if (j.generation) text += `世代: v${j.generation.generation}（内容が変わると自動で上がります）\n`;
+    if (j.error) text += `エラー: ${j.error}\n`;
+    log.textContent = text;
+    log.scrollTop = log.scrollHeight;
+
+    if (!commit && j.ok) {
+      publishReady = true;
+      setStatus("下見が通りました。配信できます");
+    } else if (commit && j.ok) {
+      publishReady = false;
+      setStatus(`${j.prefecture} を配信しました`);
+      loadPrefectures();   // 一覧の「調整N」を更新
+    }
+  } catch (e) {
+    log.textContent += `\n通信に失敗しました: ${e}\n`;
+  } finally {
+    $("pubDry").disabled = false;
+    $("pubGo").disabled = !publishReady;
+  }
+}
+
+$("publish").onclick = openPublish;
+$("pubClose").onclick = () => { $("publishModal").style.display = "none"; };
+$("pubDry").onclick = () => runPublish(false);
+$("pubGo").onclick = () => {
+  // 本番へ書き込む直前の最後の確認。県名を出して取り違えを防ぐ
+  if (!confirm(`${state.prefName} を本番に配信します。\n\n世代が上がっていれば、この県のデータを持つ全ユーザーが落とし直します。\n実行しますか？`)) return;
+  runPublish(true);
 };
 
 document.addEventListener("keydown", (e) => {

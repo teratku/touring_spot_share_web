@@ -19,6 +19,7 @@
 "use strict";
 
 const fs = require("fs");
+const crypto = require("crypto");
 const os = require("os");
 const path = require("path");
 const { parseWkt, polylineLength, listGridFiles, readGridFile } = require("./lib/roadCsv");
@@ -53,6 +54,39 @@ const ROMAJI = {
   鹿児島県: "kagoshima", 沖縄県: "okinawa",
 };
 const romaji = (pref) => ROMAJI[pref] || pref;
+
+/**
+ * 世代の管理。
+ *
+ * ⚠️ generation を固定にしてはいけない。アプリは索引の generation が手元と違うときだけ
+ *    落とし直す（RoadRecommendStore.needsDownload）。固定のままだと調整を反映して
+ *    再配信しても、すでに落としたユーザーには永遠に届かない。
+ *
+ * ⚠️ かといって毎回上げてもいけない。47県ぶん上げるとユーザー全員が 3.6MB を
+ *    落とし直す。中身が変わったときだけ上げる。
+ *
+ * 中身のハッシュを控えておき、変わったときだけ +1 する。
+ */
+const GENERATION_FILE = path.join(__dirname, "data", "road-generation.json");
+
+function readGenerations() {
+  if (!fs.existsSync(GENERATION_FILE)) return {};
+  try { return JSON.parse(fs.readFileSync(GENERATION_FILE, "utf8")); }
+  catch { return {}; }
+}
+
+function writeGenerations(all) {
+  fs.mkdirSync(path.dirname(GENERATION_FILE), { recursive: true });
+  fs.writeFileSync(GENERATION_FILE, JSON.stringify(all, null, 1) + "\n");
+}
+
+/** 配信する中身のハッシュ。並び順・点数・説明・ポリラインが変われば変わる */
+function contentHash(segments) {
+  const payload = segments.map((s) =>
+    [s.name, s.title || "", s.note || "", (s.tags || []).join("|"), s.score, s.polyline].join("\u0001")
+  ).join("\u0002");
+  return crypto.createHash("sha1").update(payload).digest("hex").slice(0, 12);
+}
 
 /** 開発者の調整を読む。無ければ空 */
 function readOverrides(prefecture) {
@@ -397,10 +431,21 @@ async function build() {
   }
 
   // 生成物を書き出す（配信はこのあと別スクリプトで行う）
+  const generations = readGenerations();
   for (const row of summary) {
     const file = path.join(outDir, `${romaji(row.pref)}.json`);
+    const r = romaji(row.pref);
+    const hash = contentHash(row.list);
+    const previous = generations[r] || { generation: 0, hash: null };
+    if (previous.hash !== hash) {
+      generations[r] = { generation: previous.generation + 1, hash, updatedAt: new Date().toISOString() };
+      row.bumped = previous.generation > 0;
+    } else {
+      generations[r] = previous;
+    }
     fs.writeFileSync(file, JSON.stringify({
-      prefecture: row.pref, romaji: romaji(row.pref), generation: 1,
+      prefecture: row.pref, romaji: r, generation: generations[r].generation,
+      contentHash: hash,
       builtAt: new Date().toISOString(),
       weights: require("./lib/funSegments").WEIGHTS,
       count: row.list.length,
@@ -408,6 +453,12 @@ async function build() {
       // 何件を手で外したか（運用の記録）
       hiddenCount: row.hidden,
     }, null, 1) + "\n");
+  }
+  writeGenerations(generations);
+  const bumped = summary.filter((r) => r.bumped);
+  if (bumped.length) {
+    console.log(`\n世代が上がった県（配信するとユーザーが落とし直す）: ` +
+                bumped.map((r) => `${r.pref}→v${generations[romaji(r.pref)].generation}`).join("、"));
   }
 
   console.log("県          断片→連結    区間数   採用   非表示   最高点   出力KB");

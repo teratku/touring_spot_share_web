@@ -299,11 +299,34 @@ node --test test/                                       # 純粋関数のテス�
 
 ## 3. 配信
 
+**画面からやる場合**（1県ずつ・おすすめ）
+
+`/roads` の右上「配信…」→ **下見**（書き込まない）で中身を確かめ、通ったら
+**本番に配信する**。再生成から投入までまとめて走る。
+
+- 未保存の調整があると止まる
+- 下見が通るまで配信ボタンは押せない
+- 実行ログをそのまま画面に出す
+- 画面から `--all` は叩けない（誤爆すると全県ぶんユーザーが落とし直すため）
+
+**コマンドからやる場合**
+
 ```bash
 node importRoadRecommend.js --all                     # 検証のみ（既定・書き込まない）
 node importRoadRecommend.js --prefecture 栃木県 --commit # 1県だけ投入
 node importRoadRecommend.js --all --commit            # 全県投入
+node importRoadRecommend.js --all --index-only --commit # 索引だけ作り直す
 ```
+
+### 世代（generation）
+
+**手で管理しない。** `--build` が中身のハッシュを見て、変わったときだけ +1 する
+（`data/road-generation.json` に控えている）。
+
+- 固定のままだと、調整を反映して再配信してもすでに落としたユーザーに永遠に届かない
+- 毎回上げると47県ぶん 3.6MB をユーザー全員が落とし直す
+
+同じ内容で `--build` を回し直しても世代は据え置かれる。調整を変えれば上がる。
 
 - Storage `Json/road_recommend/<romaji>_v<generation>.json` … 本体（1県 80KB 前後）
 - Firestore `road_recommend/_index` … 全県ぶんの世代表。**アプリはこれ1件だけ読む**
