@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>おすすめ道路 調整ツール</title>
+<!--
+  おすすめ道路の手直し用。ローカル専用（http://127.0.0.1:4317/roads）。
+
+  できること
+    ・生成結果を地図で見ながら、非表示／押し上げ／表示名／ひとこと説明を付ける
+      → data/road-overrides/<romaji>.json に保存。再生成しても消えない
+    ・重みを触って順位がどう動くか見る
+      → data/road-tuning/*.json（ポリライン抜きの軽い版）を使ってブラウザ側で再計算
+
+  ⚠️ 重みスライダーは「見るだけ」。実際に反映するには lib/funSegments.js の
+     WEIGHTS を書き換えて再生成する必要がある（画面から保存はしない）。
+     数字を勝手に変えると、配信済みのものと食い違うため。
+-->
+<style>
+  :root { --line:#e2e5e9; --muted:#6b7280; --accent:#00a8c6; --warn:#e8590c; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.6 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; color:#222; }
+  header { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); }
+  header h1 { font-size:16px; margin:0; }
+  header .spacer { flex:1; }
+  .tab { padding:6px 14px; border:1px solid var(--line); border-radius:999px; background:#fff; cursor:pointer; }
+  .tab.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main { display:flex; height:calc(100vh - 53px); }
+  #list { width:420px; border-right:1px solid var(--line); overflow-y:auto; }
+  #map { flex:1; }
+  .row { padding:8px 12px; border-bottom:1px solid var(--line); cursor:pointer; }
+  .row:hover { background:#f6f8fa; }
+  .row.sel { background:#e6f7fb; }
+  .row.hidden-seg { opacity:.45; }
+  .row .top { display:flex; align-items:baseline; gap:8px; }
+  .row .rank { color:var(--muted); font-size:12px; min-width:34px; }
+  .row .name { font-weight:600; flex:1; }
+  .row .score { font-variant-numeric:tabular-nums; }
+  .row .meta { color:var(--muted); font-size:12px; }
+  .row .note { color:#0b7285; font-size:12px; }
+  .row .badge { font-size:11px; padding:1px 6px; border-radius:4px; background:#eef2f5; color:var(--muted); }
+  .row .badge.boost { background:#fff3bf; color:#846100; }
+  .row .badge.hide { background:#ffe3e3; color:#c92a2a; }
+  .bar { padding:8px 12px; border-bottom:1px solid var(--line); display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  select, input[type=text], input[type=number] { padding:5px 8px; border:1px solid var(--line); border-radius:6px; font:inherit; }
+  button { padding:5px 12px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; font:inherit; }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  button:disabled { opacity:.45; cursor:default; }
+  #editor { padding:12px; border-top:2px solid var(--accent); background:#fbfeff; }
+  #editor h3 { margin:0 0 8px; font-size:14px; }
+  #editor label { display:block; margin:6px 0 2px; font-size:12px; color:var(--muted); }
+  #editor input[type=text] { width:100%; }
+  .slider { display:flex; align-items:center; gap:8px; margin:4px 0; }
+  .slider label { width:90px; font-size:12px; color:var(--muted); }
+  .slider input { flex:1; }
+  .slider .val { width:44px; text-align:right; font-variant-numeric:tabular-nums; font-size:12px; }
+  .warn { color:var(--warn); font-size:12px; padding:8px 12px; background:#fff4e6; }
+  .muted { color:var(--muted); font-size:12px; }
+  #tuning { padding:12px 16px; overflow-y:auto; width:100%; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th,td { border-bottom:1px solid var(--line); padding:4px 8px; text-align:left; }
+  td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .up { color:#2b8a3e; } .down { color:#c92a2a; }
+</style>
+</head>
+<body>
+<header>
+  <h1>おすすめ道路 調整ツール</h1>
+  <button class="tab on" id="tab-curate">区間の手直し</button>
+  <button class="tab" id="tab-tune">重みの試算</button>
+  <span class="spacer"></span>
+  <span class="muted" id="status"></span>
+</header>
+
+<main id="view-curate">
+  <div id="list">
+    <div class="bar">
+      <select id="pref"></select>
+      <label class="muted"><input type="checkbox" id="showHidden"> 非表示も出す</label>
+      <span class="spacer"></span>
+      <button class="primary" id="save" disabled>保存</button>
+    </div>
+    <div class="warn" id="unmatched" style="display:none"></div>
+    <div id="rows"></div>
+  </div>
+  <div id="map"></div>
+</main>
+
+<div id="tuning" style="display:none">
+  <p class="muted">
+    重みを動かすと順位がどう変わるかを試算します。<strong>ここで保存はしません。</strong>
+    採用するときは <code>lib/funSegments.js</code> の <code>WEIGHTS</code> を書き換えて
+    <code>node buildRoadRecommend.js --build</code> を回してください。
+  </p>
+  <div id="sliders"></div>
+  <div class="bar">
+    <select id="tunePref"></select>
+    <button id="resetWeights">既定に戻す</button>
+    <span class="muted" id="tuneSummary"></span>
+  </div>
+  <table><thead><tr>
+    <th>順位</th><th>道路名</th><th class="num">現行</th><th class="num">試算</th>
+    <th class="num">増減</th><th class="num">長さ</th><th class="num">曲率</th><th class="num">flow</th>
+  </tr></thead><tbody id="tuneRows"></tbody></table>
+</div>
+
+<script>
+const API_KEY = "AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24";
+const state = {
+  prefectures: [], romaji: null, segments: [], overrides: {}, selected: null,
+  dirty: false, map: null, lines: [], weights: null, normalizers: null, classRank: null,
+  tuning: null, defaults: null,
+};
+
+// ---------- 共通 ----------
+const $ = (id) => document.getElementById(id);
+const setStatus = (t) => { $("status").textContent = t; };
+
+/** 調整の鍵。lib/roadOverrides.js の overrideKey と同じ式にすること */
+function overrideKey(seg) {
+  const r = (v) => (Math.round(v / 0.01) * 0.01).toFixed(2);
+  return seg.name + "@" + r(seg.start[0]) + "," + r(seg.start[1]);
+}
+
+function decodePolyline(encoded) {
+  const points = []; let index = 0, lat = 0, lng = 0;
+  while (index < encoded.length) {
+    for (const isLat of [true, false]) {
+      let shift = 0, result = 0, b;
+      do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+      const d = (result & 1) ? ~(result >> 1) : (result >> 1);
+      if (isLat) lat += d; else lng += d;
+    }
+    points.push({ lat: lat / 1e5, lng: lng / 1e5 });
+  }
+  return points;
+}
+
+// ---------- 区間の手直し ----------
+async function loadPrefectures() {
+  const r = await (await fetch("/api/roads/prefectures")).json();
+  state.prefectures = r.prefectures;
+  for (const sel of [$("pref"), $("tunePref")]) {
+    sel.innerHTML = "";
+    for (const p of r.prefectures) {
+      const o = document.createElement("option");
+      o.value = p.romaji;
+      o.textContent = p.name + (p.built ? "" : "（未生成）") + (p.overrides ? `  調整${p.overrides}` : "");
+      o.disabled = !p.built;
+      sel.appendChild(o);
+    }
+  }
+  const first = r.prefectures.find((p) => p.romaji === "tochigi" && p.built) || r.prefectures.find((p) => p.built);
+  if (first) { $("pref").value = first.romaji; $("tunePref").value = first.romaji; await loadPrefecture(first.romaji); }
+}
+
+async function loadPrefecture(romaji) {
+  if (state.dirty && !confirm("保存していない調整があります。破棄しますか？")) {
+    $("pref").value = state.romaji; return;
+  }
+  setStatus("読み込み中…");
+  state.romaji = romaji;
+  const [seg, ov] = await Promise.all([
+    (await fetch(`/api/roads/segments/${romaji}`)).json(),
+    (await fetch(`/api/roads/overrides/${romaji}`)).json(),
+  ]);
+  state.segments = seg.segments || [];
+  state.overrides = ov.overrides || {};
+  state.selected = null;
+  state.dirty = false;
+  $("save").disabled = true;
+  renderRows();
+  fitMap();
+  setStatus(`${seg.prefecture} ${state.segments.length}区間`);
+}
+
+function currentOverride(seg) {
+  return state.overrides[overrideKey(seg)] || {};
+}
+
+function renderRows() {
+  const showHidden = $("showHidden").checked;
+  const rows = $("rows");
+  rows.innerHTML = "";
+
+  // 調整を当てた順位で並べ直す（保存前でも結果が見える）
+  const adjusted = state.segments.map((s) => {
+    const o = currentOverride(s);
+    return { seg: s, o, score: Math.max(0, Math.min(100, s.score + (o.boost || 0))) };
+  }).filter((r) => showHidden || !r.o.hidden)
+    .sort((a, b) => b.score - a.score);
+
+  adjusted.forEach((r, i) => {
+    const div = document.createElement("div");
+    div.className = "row" + (state.selected === r.seg ? " sel" : "") + (r.o.hidden ? " hidden-seg" : "");
+    const badges = [];
+    if (r.o.hidden) badges.push('<span class="badge hide">非表示</span>');
+    if (r.o.boost) badges.push(`<span class="badge boost">${r.o.boost > 0 ? "+" : ""}${r.o.boost}</span>`);
+    for (const t of (r.o.tags || [])) badges.push(`<span class="badge">${t}</span>`);
+    div.innerHTML =
+      `<div class="top"><span class="rank">${i + 1}</span>` +
+      `<span class="name">${r.o.title ? r.o.title + ' <span class="muted">' + r.seg.name + '</span>' : r.seg.name}</span>` +
+      `<span class="score">${r.score.toFixed(1)}</span></div>` +
+      `<div class="meta">${r.seg.lengthKm.toFixed(1)}km ・ 曲率${r.seg.curviness.toFixed(0)} ・ flow${r.seg.flow.toFixed(1)} ・ ${r.seg.highway} ${badges.join(" ")}</div>` +
+      (r.o.note ? `<div class="note">${r.o.note}</div>` : "");
+    div.onclick = () => select(r.seg);
+    rows.appendChild(div);
+  });
+
+  // どの区間にも当たらない調整（道が消えた・名前が変わった）
+  const live = new Set(state.segments.map(overrideKey));
+  const orphan = Object.keys(state.overrides).filter((k) => !live.has(k));
+  const box = $("unmatched");
+  if (orphan.length) {
+    box.style.display = "block";
+    box.innerHTML = `当たらない調整が ${orphan.length}件（道が消えたか名前が変わった可能性）: ` +
+      orphan.slice(0, 5).join(" / ") +
+      ` <button id="dropOrphan">まとめて削除</button>`;
+    $("dropOrphan").onclick = () => { for (const k of orphan) delete state.overrides[k]; markDirty(); renderRows(); };
+  } else box.style.display = "none";
+}
+
+function markDirty() { state.dirty = true; $("save").disabled = false; }
+
+function select(seg) {
+  state.selected = seg;
+  renderRows();
+  drawSelection(seg);
+  showEditor(seg);
+}
+
+function showEditor(seg) {
+  let box = $("editor");
+  if (!box) { box = document.createElement("div"); box.id = "editor"; $("list").appendChild(box); }
+  const o = currentOverride(seg);
+  box.innerHTML = `
+    <h3>${seg.name}</h3>
+    <div class="muted">${seg.lengthKm.toFixed(1)}km ・ 曲率${seg.curviness.toFixed(0)} ・ flow${seg.flow.toFixed(1)} ・ 素点${seg.score.toFixed(1)}</div>
+    <label>点数の加算（マイナスで下げる）</label>
+    <input type="number" id="e-boost" value="${o.boost || 0}" step="1" min="-100" max="100">
+    <label>表示名（空なら元の名前）</label>
+    <input type="text" id="e-title" value="${o.title || ""}" placeholder="例: 椿ライン">
+    <label>ひとこと説明</label>
+    <input type="text" id="e-note" value="${o.note || ""}" placeholder="例: 相模湾を見下ろす定番">
+    <label>札（カンマ区切り）</label>
+    <input type="text" id="e-tags" value="${(o.tags || []).join(",")}" placeholder="絶景,ワインディング">
+    <div style="margin-top:10px; display:flex; gap:8px;">
+      <label class="muted"><input type="checkbox" id="e-hidden" ${o.hidden ? "checked" : ""}> 一覧から外す</label>
+      <span class="spacer" style="flex:1"></span>
+      <button id="e-clear">調整を消す</button>
+      <button class="primary" id="e-apply">この区間に反映</button>
+    </div>`;
+  $("e-apply").onclick = () => {
+    const next = {
+      hidden: $("e-hidden").checked,
+      boost: Number($("e-boost").value) || 0,
+      title: $("e-title").value.trim() || null,
+      note: $("e-note").value.trim() || null,
+      tags: $("e-tags").value.split(",").map((t) => t.trim()).filter(Boolean),
+    };
+    const key = overrideKey(seg);
+    if (!next.hidden && !next.boost && !next.title && !next.note && !next.tags.length) delete state.overrides[key];
+    else state.overrides[key] = next;
+    markDirty(); renderRows();
+  };
+  $("e-clear").onclick = () => { delete state.overrides[overrideKey(seg)]; markDirty(); renderRows(); showEditor(seg); };
+}
+
+async function save() {
+  setStatus("保存中…");
+  const r = await fetch(`/api/roads/overrides/${state.romaji}`, {
+    method: "PUT", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ overrides: state.overrides }),
+  });
+  const j = await r.json();
+  state.dirty = false; $("save").disabled = true;
+  setStatus(`保存しました（調整 ${j.count}件）。反映するには再生成が必要です`);
+}
+
+// ---------- 地図 ----------
+function initMap() {
+  state.map = new google.maps.Map($("map"), { center: { lat: 36.75, lng: 139.6 }, zoom: 9, mapTypeControl: false });
+  loadWeights().then(loadPrefectures);
+}
+window.initMap = initMap;
+
+function clearLines() { state.lines.forEach((l) => l.setMap(null)); state.lines = []; }
+
+function fitMap() {
+  clearLines();
+  const bounds = new google.maps.LatLngBounds();
+  // 上位30本だけ薄く出す（全部出すと重い）
+  const top = state.segments.slice(0, 30);
+  for (const seg of top) {
+    const path = decodePolyline(seg.polyline);
+    const line = new google.maps.Polyline({
+      path, map: state.map, strokeColor: "#00a8c6", strokeOpacity: .45, strokeWeight: 3,
+    });
+    line.addListener("click", () => select(seg));
+    state.lines.push(line);
+    path.forEach((p) => bounds.extend(p));
+  }
+  if (!bounds.isEmpty()) state.map.fitBounds(bounds);
+}
+
+function drawSelection(seg) {
+  fitMap();
+  const path = decodePolyline(seg.polyline);
+  const line = new google.maps.Polyline({
+    path, map: state.map, strokeColor: "#e8590c", strokeOpacity: 1, strokeWeight: 6, zIndex: 10,
+  });
+  state.lines.push(line);
+  const b = new google.maps.LatLngBounds();
+  path.forEach((p) => b.extend(p));
+  state.map.fitBounds(b);
+}
+
+// ---------- 重みの試算 ----------
+async function loadWeights() {
+  const r = await (await fetch("/api/roads/weights")).json();
+  state.weights = { ...r.weights };
+  state.defaults = { ...r.weights };
+  state.normalizers = r.normalizers;
+  state.classRank = r.classRank;
+  renderSliders();
+}
+
+function renderSliders() {
+  const box = $("sliders");
+  box.innerHTML = "";
+  for (const key of Object.keys(state.weights)) {
+    const row = document.createElement("div");
+    row.className = "slider";
+    row.innerHTML = `<label>${key}</label>
+      <input type="range" min="0" max="1" step="0.05" value="${state.weights[key]}" data-k="${key}">
+      <span class="val">${state.weights[key].toFixed(2)}</span>`;
+    row.querySelector("input").oninput = (e) => {
+      state.weights[key] = Number(e.target.value);
+      row.querySelector(".val").textContent = state.weights[key].toFixed(2);
+      renderTuning();
+    };
+    box.appendChild(row);
+  }
+}
+
+function scoreWith(seg, weights) {
+  const n = state.normalizers;
+  const clamp = (v) => (!isFinite(v) ? 0 : v < 0 ? 0 : v > 1 ? 1 : v);
+  const s = {
+    curviness: clamp(seg.curviness / n.curviness),
+    flow: clamp(seg.flow / n.flow),
+    length: clamp(Math.log1p(seg.lengthKm * 1000) / Math.log1p(n.length)),
+    classRank: state.classRank[seg.highway] ?? 0.7,
+    popularity: 0,
+  };
+  let total = 0;
+  for (const [k, w] of Object.entries(weights)) total += (s[k] ?? 0) * w;
+  return total * 100;
+}
+
+async function renderTuning() {
+  if (!state.tuning) {
+    setStatus("試算データ読み込み中…");
+    state.tuning = (await (await fetch("/api/roads/tuning")).json()).prefectures;
+    setStatus("");
+  }
+  const romaji = $("tunePref").value;
+  const pref = state.tuning.find((p) => p.romaji === romaji);
+  const body = $("tuneRows");
+  body.innerHTML = "";
+  if (!pref) { $("tuneSummary").textContent = "試算データがありません（--build を実行してください）"; return; }
+
+  const current = [...pref.segments].sort((a, b) => b.score - a.score);
+  const rankBefore = new Map(current.map((s, i) => [s.name + s.start.join(), i + 1]));
+  const after = pref.segments.map((s) => ({ ...s, next: scoreWith(s, state.weights) }))
+                             .sort((a, b) => b.next - a.next);
+
+  let moved = 0;
+  after.slice(0, 40).forEach((s, i) => {
+    const before = rankBefore.get(s.name + s.start.join()) ?? 0;
+    const delta = before - (i + 1);
+    if (delta !== 0) moved++;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${i + 1}</td><td>${s.name}</td>
+      <td class="num">${s.score.toFixed(1)}</td><td class="num">${s.next.toFixed(1)}</td>
+      <td class="num ${delta > 0 ? "up" : delta < 0 ? "down" : ""}">${delta > 0 ? "↑" + delta : delta < 0 ? "↓" + -delta : "－"}</td>
+      <td class="num">${s.lengthKm.toFixed(1)}</td><td class="num">${s.curviness.toFixed(0)}</td><td class="num">${s.flow.toFixed(1)}</td>`;
+    body.appendChild(tr);
+  });
+  const sum = Object.values(state.weights).reduce((a, b) => a + b, 0);
+  $("tuneSummary").textContent =
+    `${pref.prefecture} ${pref.segments.length}区間 ／ 上位40のうち ${moved}件が動く ／ 重みの合計 ${sum.toFixed(2)}` +
+    (Math.abs(sum - 1) > 0.001 ? "（1.0 から外れています）" : "");
+}
+
+// ---------- 起動 ----------
+$("pref").onchange = (e) => loadPrefecture(e.target.value);
+$("showHidden").onchange = renderRows;
+$("save").onclick = save;
+$("tunePref").onchange = renderTuning;
+$("resetWeights").onclick = () => { state.weights = { ...state.defaults }; renderSliders(); renderTuning(); };
+$("tab-curate").onclick = () => {
+  $("tab-curate").classList.add("on"); $("tab-tune").classList.remove("on");
+  $("view-curate").style.display = "flex"; $("tuning").style.display = "none";
+};
+$("tab-tune").onclick = () => {
+  $("tab-tune").classList.add("on"); $("tab-curate").classList.remove("on");
+  $("view-curate").style.display = "none"; $("tuning").style.display = "block";
+  renderTuning();
+};
+window.onbeforeunload = () => (state.dirty ? "保存していない調整があります" : undefined);
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24&callback=initMap"></script>
+</body>
+</html>

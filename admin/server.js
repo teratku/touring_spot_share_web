@@ -22,6 +22,7 @@ const path = require("path");
 const fs = require("fs");
 const express = require("express");
 const admin = require("firebase-admin");
+const { normalizeOverride, isEmptyOverride } = require("./lib/roadOverrides");
 const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
 
@@ -44,7 +45,7 @@ initAdmin();
 const db = admin.firestore();
 
 const app = express();
-app.use(express.json({ limit: "2mb" }));
+app.use(express.json({ limit: "8mb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (_req, res) => res.sendFile(path.join(__dirname, "public", "rally-builder.html")));
@@ -172,6 +173,84 @@ app.get("/api/prefectures", (_req, res) => {
     };
   });
   res.json({ prefectures });
+});
+
+// ========== おすすめ道路（road_recommend）==========
+//
+// 生成物   data/road-recommend/<romaji>.json … 配信するもの（ポリライン込み）
+// 調整     data/road-overrides/<romaji>.json … 開発者の手直し。再生成しても消えない
+// 重み調整 data/road-tuning/<romaji>.json    … ポリライン抜きの軽い版。順位の試算に使う
+//
+// 画面は public/road-builder.html（http://127.0.0.1:4317/roads）
+
+const roadDir = (kind) => path.join(__dirname, "data", kind);
+
+app.get("/roads", (_req, res) => res.sendFile(path.join(__dirname, "public", "road-builder.html")));
+
+/** 県の一覧（生成済みかどうか・調整の件数つき） */
+app.get("/api/roads/prefectures", (_req, res) => {
+  const list = Object.keys(ROMAJI).map((name) => {
+    const r = ROMAJI[name];
+    const built = fs.existsSync(path.join(roadDir("road-recommend"), `${r}.json`));
+    let overrides = 0;
+    try {
+      const raw = JSON.parse(fs.readFileSync(path.join(roadDir("road-overrides"), `${r}.json`), "utf8"));
+      overrides = Object.keys(raw.overrides || {}).length;
+    } catch { /* 調整はまだ無い */ }
+    return { name, romaji: r, region: REGION[name] || "", built, overrides };
+  });
+  res.json({ prefectures: list });
+});
+
+/** 1県ぶんの区間（地図に描くのでポリラインを含む） */
+app.get("/api/roads/segments/:romaji", (req, res) => {
+  const file = path.join(roadDir("road-recommend"), `${req.params.romaji}.json`);
+  if (!fs.existsSync(file)) {
+    return res.status(404).json({ error: "未生成です。node buildRoadRecommend.js --build を実行してください。", segments: [] });
+  }
+  try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
+  catch (e) { res.status(500).json({ error: e.message, segments: [] }); }
+});
+
+/** 重み調整用。ポリラインを含まないので全県まとめて返しても軽い */
+app.get("/api/roads/tuning", (_req, res) => {
+  const dir = roadDir("road-tuning");
+  if (!fs.existsSync(dir)) return res.json({ prefectures: [] });
+  const prefectures = [];
+  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".json"))) {
+    try { prefectures.push(JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"))); }
+    catch { /* 壊れたファイルは飛ばす */ }
+  }
+  res.json({ prefectures });
+});
+
+/** 調整の読み書き */
+app.get("/api/roads/overrides/:romaji", (req, res) => {
+  const file = path.join(roadDir("road-overrides"), `${req.params.romaji}.json`);
+  if (!fs.existsSync(file)) return res.json({ overrides: {} });
+  try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
+  catch (e) { res.status(500).json({ error: e.message, overrides: {} }); }
+});
+
+app.put("/api/roads/overrides/:romaji", (req, res) => {
+  const { romaji } = req.params;
+  const incoming = (req.body && req.body.overrides) || {};
+  // 空の調整はファイルに残さない（消したものが残り続けないように）
+  const cleaned = {};
+  for (const [key, value] of Object.entries(incoming)) {
+    if (!isEmptyOverride(value)) cleaned[key] = { ...normalizeOverride(value), updatedAt: new Date().toISOString() };
+  }
+  const dir = roadDir("road-overrides");
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, `${romaji}.json`),
+                   JSON.stringify({ romaji, updatedAt: new Date().toISOString(), overrides: cleaned }, null, 1) + "\n");
+  res.json({ ok: true, count: Object.keys(cleaned).length });
+});
+
+/** いま使っている重みと正規化の基準（画面の初期値に使う） */
+app.get("/api/roads/weights", (_req, res) => {
+  const { WEIGHTS, NORMALIZERS, CLASS_RANK } = require("./lib/funSegments");
+  res.json({ weights: WEIGHTS, normalizers: NORMALIZERS, classRank: CLASS_RANK });
 });
 
 // 汎用：県別データ取得（dataset=spots|recommend）

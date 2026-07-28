@@ -26,6 +26,7 @@ const { PrefectureLocator } = require("./lib/prefectureLocator");
 const { stitch } = require("./lib/roadStitcher");
 const { extract, score } = require("./lib/funSegments");
 const { simplify, encode } = require("./lib/polyline");
+const { applyOverrides } = require("./lib/roadOverrides");
 
 // ---- 引数 ----
 const args = process.argv.slice(2);
@@ -52,6 +53,19 @@ const ROMAJI = {
   鹿児島県: "kagoshima", 沖縄県: "okinawa",
 };
 const romaji = (pref) => ROMAJI[pref] || pref;
+
+/** 開発者の調整を読む。無ければ空 */
+function readOverrides(prefecture) {
+  const file = path.join(__dirname, "data", "road-overrides", `${romaji(prefecture)}.json`);
+  if (!fs.existsSync(file)) return {};
+  try {
+    const raw = JSON.parse(fs.readFileSync(file, "utf8"));
+    return raw.overrides || {};
+  } catch (e) {
+    console.error(`⚠️ 調整ファイルを読めない: ${file}（${e.message}）`);
+    return {};
+  }
+}
 
 /**
  * 答え合わせ用の「正解リスト」。ツーリングで名の知れた道。
@@ -326,6 +340,8 @@ async function build() {
 
   const outDir = path.join(__dirname, "data", "road-recommend");
   fs.mkdirSync(outDir, { recursive: true });
+  const tuningDir = path.join(__dirname, "data", "road-tuning");
+  fs.mkdirSync(tuningDir, { recursive: true });
 
   const summary = [];
   for (const [pref, fragments] of [...fragmentsByPref.entries()].sort()) {
@@ -353,10 +369,31 @@ async function build() {
         });
       }
     }
-    segments.sort((a, b) => b.score - a.score);
-    const top = segments.slice(0, TOP).map((s, i) => ({ id: `${pref}:${i}`, ...s }));
+    // 開発者の調整（非表示・押し上げ・表示名・ひとこと）を当ててから並べる。
+    // 調整は別ファイルに置いてあるので、再生成しても消えない。
+    const overrides = readOverrides(pref);
+    const adjusted = applyOverrides(segments, overrides);
+    if (adjusted.unmatched.length) {
+      console.log(`  ⚠️ ${pref}: 当たらなかった調整が ${adjusted.unmatched.length}件` +
+                  `（${adjusted.unmatched.slice(0, 3).join(" / ")}${adjusted.unmatched.length > 3 ? " …" : ""}）`);
+    }
+    const top = adjusted.segments.slice(0, TOP).map((s, i) => ({ id: `${pref}:${i}`, ...s }));
     summary.push({ pref, chains: chains.length, segments: segments.length, kept: top.length,
-                   list: top, all: segments });
+                   list: top, all: adjusted.segments, hidden: segments.length - adjusted.segments.length });
+  }
+
+  // 重み調整の画面用。配信はしない（ポリラインを含まないので軽い）。
+  // これがあると、重みを変えたときの順位変化をブラウザ側で即座に出せる
+  // （毎回この生成を回すと22秒かかる）。
+  for (const row of summary) {
+    fs.writeFileSync(path.join(tuningDir, `${romaji(row.pref)}.json`), JSON.stringify({
+      prefecture: row.pref, romaji: romaji(row.pref), builtAt: new Date().toISOString(),
+      segments: row.all.map((s) => ({
+        name: s.name, highway: s.highway, lengthKm: s.lengthKm,
+        curviness: s.curviness, flow: s.flow, turnCount: s.turnCount,
+        score: s.score, start: s.start,
+      })),
+    }) + "\n");
   }
 
   // 生成物を書き出す（配信はこのあと別スクリプトで行う）
@@ -368,15 +405,18 @@ async function build() {
       weights: require("./lib/funSegments").WEIGHTS,
       count: row.list.length,
       segments: row.list.map(({ signals, ...rest }) => rest),
+      // 何件を手で外したか（運用の記録）
+      hiddenCount: row.hidden,
     }, null, 1) + "\n");
   }
 
-  console.log("県          断片→連結    区間数   採用   最高点   出力KB");
+  console.log("県          断片→連結    区間数   採用   非表示   最高点   出力KB");
   for (const row of summary) {
     const json = JSON.stringify({ prefecture: row.pref, count: row.list.length, segments: row.list });
     console.log(
       row.pref.padEnd(10) + String(row.chains).padStart(9) +
       String(row.segments).padStart(9) + String(row.kept).padStart(7) +
+      String(row.hidden).padStart(8) +
       (row.list[0]?.score ?? 0).toFixed(1).padStart(9) +
       (json.length / 1024).toFixed(0).padStart(9)
     );
