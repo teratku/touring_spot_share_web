@@ -19,6 +19,7 @@
 
 <!-- Prefecture Data -->
 <script src="./prefecture-data.js"></script>
+<script src="./japan-map.js"></script>
 
 <style>
 /* ===== design_rule.md 準拠カラー ===== */
@@ -225,10 +226,9 @@ body {
     font-weight: 600;
     margin-bottom: 16px;
 }
+/* 中身はタイルから日本地図(SVG)に変わった。SVG は自分で幅を持つので指定を足さない */
 .grid-map {
-    display: grid;
-    gap: 3px;
-    justify-content: center;
+    display: block;
 }
 .pref-tile {
     width: 52px;
@@ -821,48 +821,49 @@ function renderStatsBar(visited) {
     document.getElementById("progressFill").style.width = percent + "%";
 }
 
-function renderGridMap(visited, details) {
-    const grid = document.getElementById("gridMap");
-    grid.innerHTML = "";
+/**
+ * 日本地図に塗り分けて出す。
+ * ⚠️ タイル状の四角から日本地図の形に変えている。iOS の経県値マップと同じ
+ *    県境データ（japan-prefectures.geojson）・同じ投影を使っているので見た目がそろう。
+ */
+let japanMap = null;
 
-    const minRow = Math.min(...PREFECTURES.map(p => p.gridRow));
-    const maxRow = Math.max(...PREFECTURES.map(p => p.gridRow));
-    const minCol = Math.min(...PREFECTURES.map(p => p.gridCol));
-    const maxCol = Math.max(...PREFECTURES.map(p => p.gridCol));
-
-    const cols = maxCol - minCol + 1;
-    const rows = maxRow - minRow + 1;
-
-    grid.style.gridTemplateColumns = `repeat(${cols}, 52px)`;
-    grid.style.gridTemplateRows = `repeat(${rows}, 52px)`;
-
-    PREFECTURES.forEach(pref => {
-        const tile = document.createElement("div");
-        tile.className = "pref-tile";
-
-        const isVisited = visited.includes(pref.name);
-        const regionInfo = REGIONS[pref.region];
-
-        if (isVisited) {
-            tile.classList.add("visited");
-            tile.style.background = regionInfo.color;
-        } else {
-            tile.classList.add("unvisited");
+async function renderGridMap(visited, details) {
+    const container = document.getElementById("gridMap");
+    if (!container) return;
+    if (!japanMap) {
+        try {
+            japanMap = await JapanMap.create(container, { size: 560 });
+        } catch (e) {
+            console.error("日本地図を読めませんでした", e);
+            container.innerHTML = '<p style="color:#888;font-size:13px">地図を読み込めませんでした</p>';
+            return;
         }
-
-        const row = pref.gridRow - minRow + 1;
-        const col = pref.gridCol - minCol + 1;
-        tile.style.gridRow = row;
-        tile.style.gridColumn = col;
-
-        const shortName = pref.name.replace(/[都道府県]$/, "");
-        tile.innerHTML = `
-            <span class="pref-name">${shortName}</span>
-            ${isVisited && details[pref.name] ? `<span class="pref-spots">${details[pref.name].spotCount || 0}</span>` : ""}
-        `;
-
-        tile.addEventListener("click", () => selectPrefecture(pref.name));
-        grid.appendChild(tile);
+    }
+    japanMap.paint({
+        fill: (pref) => {
+            const data = PREFECTURES.find(p => p.name === pref.name);
+            if (!visited.includes(pref.name)) return "#eceef0";
+            return (REGIONS[data.region] || {}).color || "#00a8c6";
+        },
+        // 訪問済みはスポット数、未訪問は県名の頭文字
+        label: (pref) => {
+            if (visited.includes(pref.name) && details[pref.name]) {
+                const n = details[pref.name].spotCount || 0;
+                if (n > 0) return String(n);
+            }
+            return pref.name.replace(/[都道府県]$/, "").charAt(0);
+        },
+        textColor: (pref) => visited.includes(pref.name) ? "#fff" : "rgba(0,0,0,.35)",
+        title: (pref) => {
+            if (!visited.includes(pref.name)) return `${pref.name}（未訪問）`;
+            const d = details[pref.name] || {};
+            return `${pref.name}　スポット${d.spotCount || 0} / ルート${d.routeCount || 0}`;
+        },
+        onClick: (pref) => {
+            japanMap.highlight(pref.code);
+            selectPrefecture(pref.name);
+        },
     });
 }
 

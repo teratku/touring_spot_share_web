@@ -18,6 +18,7 @@
 
 <!-- Prefecture Data -->
 <script src="../conquest/prefecture-data.js"></script>
+<script src="../conquest/japan-map.js"></script>
 
 <style>
 :root {
@@ -89,7 +90,8 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",
 
 /* Prefecture Grid */
 .pref-section { background:var(--card); border-radius:16px; padding:24px; border:1px solid var(--border); box-shadow:0 2px 8px var(--shadow); margin-bottom:24px; }
-.pref-grid { display:grid; gap:3px; justify-content:center; }
+/* 中身はタイルから日本地図(SVG)に変わった */
+.pref-grid { display:block; }
 .pref-tile { width:48px; height:48px; border-radius:6px; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; transition:all .2s; border:1px solid transparent; user-select:none; }
 .pref-tile:hover { transform:scale(1.08); }
 .pref-tile .pn { font-size:9px; font-weight:600; line-height:1.2; text-align:center; pointer-events:none; }
@@ -420,47 +422,51 @@ function renderTypeBars(byType) {
     }, 100);
 }
 
-function renderPrefGrid(byPref) {
-    const grid = document.getElementById("prefGrid");
-    grid.innerHTML = "";
+/**
+ * 県ごとの道路走破率を日本地図に塗る。
+ * ⚠️ タイル状の四角から日本地図の形に変えている。県境データと投影は
+ *    iOS の経県値マップ・都道府県制覇と共通（../conquest/japan-map.js）。
+ */
+let japanMap = null;
 
-    const minRow = Math.min(...PREFECTURES.map(p => p.gridRow));
-    const maxRow = Math.max(...PREFECTURES.map(p => p.gridRow));
-    const minCol = Math.min(...PREFECTURES.map(p => p.gridCol));
-    const maxCol = Math.max(...PREFECTURES.map(p => p.gridCol));
-    const cols = maxCol - minCol + 1;
-
-    grid.style.gridTemplateColumns = `repeat(${cols}, 48px)`;
-    grid.style.gridTemplateRows = `repeat(${maxRow - minRow + 1}, 48px)`;
-
-    PREFECTURES.forEach(pref => {
-        const tile = document.createElement("div");
-        tile.className = "pref-tile";
-
-        const row = pref.gridRow - minRow + 1;
-        const col = pref.gridCol - minCol + 1;
-        tile.style.gridRow = row;
-        tile.style.gridColumn = col;
-
-        const data = byPref[pref.name];
-        const rate = data ? (data.rate || 0) : 0;
-        const pct = Math.round(rate * 100);
-
-        if (rate > 0) {
-            const alpha = 0.2 + rate * 0.8;
-            tile.style.background = `rgba(0, 168, 198, ${alpha})`;
-            tile.style.color = rate > 0.4 ? "white" : "var(--text)";
-            tile.style.borderColor = `rgba(0, 168, 198, ${Math.min(1, alpha + 0.2)})`;
-        } else {
-            tile.style.background = "#eee";
-            tile.style.color = "#aaa";
+async function renderPrefGrid(byPref) {
+    const container = document.getElementById("prefGrid");
+    if (!container) return;
+    if (!japanMap) {
+        try {
+            japanMap = await JapanMap.create(container, { size: 480, geojsonUrl: "../conquest/japan-prefectures.geojson" });
+        } catch (e) {
+            console.error("日本地図を読めませんでした", e);
+            container.innerHTML = '<p style="color:#888;font-size:13px">地図を読み込めませんでした</p>';
+            return;
         }
-
-        const shortName = pref.name.replace(/[都道府県]$/, "");
-        tile.innerHTML = `<span class="pn">${shortName}</span>${rate > 0 ? `<span class="pr">${pct}%</span>` : ""}`;
-        tile.title = `${pref.name}: ${data ? data.ridden : 0}/${data ? data.known : 0} (${pct}%)`;
-
-        grid.appendChild(tile);
+    }
+    japanMap.paint({
+        // 走破率が高いほど濃く。0%は灰色
+        fill: (pref) => {
+            const data = byPref[pref.name];
+            const rate = data ? (data.rate || 0) : 0;
+            if (rate <= 0) return "#eceef0";
+            return `rgba(0, 168, 198, ${(0.2 + rate * 0.8).toFixed(2)})`;
+        },
+        // ⚠️ 小さい県に「10%」を出すと隣と重なって読めなくなる（関東・関西で顕著）。
+        //    狭い県は塗りだけにして、数字はツールチップで見せる。
+        label: (pref) => {
+            const data = byPref[pref.name];
+            const rate = data ? (data.rate || 0) : 0;
+            if (rate <= 0) return "";
+            if (pref.area < 0.0016) return "";
+            return Math.round(rate * 100) + "%";
+        },
+        textColor: (pref) => {
+            const data = byPref[pref.name];
+            return (data && data.rate > 0.4) ? "#fff" : "rgba(0,0,0,.55)";
+        },
+        title: (pref) => {
+            const d = byPref[pref.name];
+            if (!d) return `${pref.name}　走行なし`;
+            return `${pref.name}　${d.ridden}/${d.known} (${Math.round((d.rate || 0) * 100)}%)`;
+        },
     });
 }
 
