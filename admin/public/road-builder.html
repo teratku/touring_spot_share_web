@@ -11,57 +11,94 @@
     ・生成結果を地図で見ながら、非表示／押し上げ／表示名／ひとこと説明を付ける
       → data/road-overrides/<romaji>.json に保存。再生成しても消えない
     ・重みを触って順位がどう動くか見る
-      → data/road-tuning/*.json（ポリライン抜きの軽い版）を使ってブラウザ側で再計算
+      → data/road-tuning/*.json（ポリライン抜きの軽い版）でブラウザ側が再計算
 
   ⚠️ 重みスライダーは「見るだけ」。実際に反映するには lib/funSegments.js の
      WEIGHTS を書き換えて再生成する必要がある（画面から保存はしない）。
      数字を勝手に変えると、配信済みのものと食い違うため。
+
+  ⚠️ overrideKey() は lib/roadOverrides.js と同じ式でなければならない。
+     ずれると保存した調整が生成時に当たらず、エラーも出ないまま反映されない。
+     test/keyParity.test.js が両者を突き合わせている。
 -->
 <style>
-  :root { --line:#e2e5e9; --muted:#6b7280; --accent:#00a8c6; --warn:#e8590c; }
+  :root {
+    --line:#e2e5e9; --muted:#6b7280; --accent:#00a8c6; --warn:#e8590c;
+    --sel:#e8590c; --ok:#2b8a3e; --bg:#fbfcfd;
+  }
   * { box-sizing:border-box; }
-  body { margin:0; font:14px/1.6 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; color:#222; }
-  header { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); }
-  header h1 { font-size:16px; margin:0; }
-  header .spacer { flex:1; }
-  .tab { padding:6px 14px; border:1px solid var(--line); border-radius:999px; background:#fff; cursor:pointer; }
+  html, body { height:100%; }
+  body { margin:0; font:13px/1.5 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; color:#222; }
+  kbd { font:11px/1 monospace; background:#eef2f5; border:1px solid var(--line);
+        border-bottom-width:2px; border-radius:3px; padding:2px 4px; }
+
+  header { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--line); }
+  header h1 { font-size:15px; margin:0; white-space:nowrap; }
+  .spacer { flex:1; }
+  .tab { padding:5px 14px; border:1px solid var(--line); border-radius:999px; background:#fff; cursor:pointer; font:inherit; }
   .tab.on { background:var(--accent); color:#fff; border-color:var(--accent); }
-  main { display:flex; height:calc(100vh - 53px); }
-  #list { width:420px; border-right:1px solid var(--line); overflow-y:auto; }
-  #map { flex:1; }
-  .row { padding:8px 12px; border-bottom:1px solid var(--line); cursor:pointer; }
+  .unsaved { color:var(--warn); font-weight:600; }
+
+  main { display:flex; height:calc(100vh - 45px); }
+
+  /* 一覧 */
+  #list { width:330px; min-width:330px; border-right:1px solid var(--line); display:flex; flex-direction:column; }
+  .bar { padding:7px 10px; border-bottom:1px solid var(--line); display:flex; gap:6px; align-items:center; }
+  .bar.wrap { flex-wrap:wrap; }
+  #rows { overflow-y:auto; flex:1; }
+  .row { padding:5px 10px; border-bottom:1px solid #f0f2f4; cursor:pointer; display:flex; gap:7px; align-items:baseline; }
   .row:hover { background:#f6f8fa; }
-  .row.sel { background:#e6f7fb; }
-  .row.hidden-seg { opacity:.45; }
-  .row .top { display:flex; align-items:baseline; gap:8px; }
-  .row .rank { color:var(--muted); font-size:12px; min-width:34px; }
-  .row .name { font-weight:600; flex:1; }
-  .row .score { font-variant-numeric:tabular-nums; }
-  .row .meta { color:var(--muted); font-size:12px; }
-  .row .note { color:#0b7285; font-size:12px; }
-  .row .badge { font-size:11px; padding:1px 6px; border-radius:4px; background:#eef2f5; color:var(--muted); }
-  .row .badge.boost { background:#fff3bf; color:#846100; }
-  .row .badge.hide { background:#ffe3e3; color:#c92a2a; }
-  .bar { padding:8px 12px; border-bottom:1px solid var(--line); display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-  select, input[type=text], input[type=number] { padding:5px 8px; border:1px solid var(--line); border-radius:6px; font:inherit; }
-  button { padding:5px 12px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; font:inherit; }
+  .row.sel { background:#fff1e6; box-shadow:inset 3px 0 0 var(--sel); }
+  .row.off { opacity:.4; }
+  .row .rank { color:var(--muted); font-size:11px; min-width:26px; text-align:right; font-variant-numeric:tabular-nums; }
+  .row .name { flex:1; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row .sub { color:var(--muted); font-size:11px; white-space:nowrap; }
+  .row .score { font-variant-numeric:tabular-nums; min-width:36px; text-align:right; }
+  .row .mark { font-size:10px; }
+
+  /* 地図 */
+  #map { flex:1; min-width:280px; }
+
+  /* 編集パネル（常に見える） */
+  #editor { width:320px; min-width:320px; border-left:1px solid var(--line); background:var(--bg);
+            overflow-y:auto; padding:12px; }
+  #editor h3 { margin:0 0 2px; font-size:15px; }
+  #editor .stats { color:var(--muted); font-size:11px; margin-bottom:10px; }
+  #editor label { display:block; margin:10px 0 3px; font-size:11px; color:var(--muted); font-weight:600; }
+  #editor input[type=text], #editor input[type=number] { width:100%; padding:5px 7px; border:1px solid var(--line);
+            border-radius:6px; font:inherit; }
+  .empty { color:var(--muted); text-align:center; padding:40px 12px; font-size:12px; }
+
+  .boostRow { display:flex; gap:4px; align-items:center; }
+  .boostRow input { flex:1; min-width:0; text-align:center; font-variant-numeric:tabular-nums; }
+  /* ボタンが折り返すと「＋ / 5」と2行になって読めなくなる */
+  .boostRow button { white-space:nowrap; padding:5px 7px; }
+  .chip { padding:3px 8px; border:1px solid var(--line); border-radius:999px; background:#fff;
+          cursor:pointer; font:11px/1.4 inherit; white-space:nowrap; }
+  .chip:hover { background:#eef2f5; }
+  .chip.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .chips { display:flex; gap:4px; flex-wrap:wrap; }
+
+  button { padding:5px 11px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; font:inherit; white-space:nowrap; }
   button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
-  button:disabled { opacity:.45; cursor:default; }
-  #editor { padding:12px; border-top:2px solid var(--accent); background:#fbfeff; }
-  #editor h3 { margin:0 0 8px; font-size:14px; }
-  #editor label { display:block; margin:6px 0 2px; font-size:12px; color:var(--muted); }
-  #editor input[type=text] { width:100%; }
-  .slider { display:flex; align-items:center; gap:8px; margin:4px 0; }
-  .slider label { width:90px; font-size:12px; color:var(--muted); }
+  button.danger { color:#c92a2a; }
+  button:disabled { opacity:.4; cursor:default; }
+  select, input[type=search] { padding:5px 7px; border:1px solid var(--line); border-radius:6px; font:inherit; }
+  input[type=search] { flex:1; min-width:0; }
+
+  .warn { color:var(--warn); font-size:11px; padding:6px 10px; background:#fff4e6; border-bottom:1px solid var(--line); }
+  .muted { color:var(--muted); font-size:11px; }
+
+  /* 重みの試算 */
+  #tuning { padding:14px 18px; overflow-y:auto; width:100%; }
+  .slider { display:flex; align-items:center; gap:10px; margin:3px 0; max-width:560px; }
+  .slider label { width:84px; font-size:12px; color:var(--muted); }
   .slider input { flex:1; }
-  .slider .val { width:44px; text-align:right; font-variant-numeric:tabular-nums; font-size:12px; }
-  .warn { color:var(--warn); font-size:12px; padding:8px 12px; background:#fff4e6; }
-  .muted { color:var(--muted); font-size:12px; }
-  #tuning { padding:12px 16px; overflow-y:auto; width:100%; }
-  table { border-collapse:collapse; width:100%; font-size:13px; }
-  th,td { border-bottom:1px solid var(--line); padding:4px 8px; text-align:left; }
-  td.num { text-align:right; font-variant-numeric:tabular-nums; }
-  .up { color:#2b8a3e; } .down { color:#c92a2a; }
+  .slider .val { width:40px; text-align:right; font-variant-numeric:tabular-nums; font-size:12px; }
+  table { border-collapse:collapse; width:100%; font-size:12px; margin-top:10px; }
+  th,td { border-bottom:1px solid var(--line); padding:3px 8px; text-align:left; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .up { color:var(--ok); } .down { color:#c92a2a; }
 </style>
 </head>
 <body>
@@ -70,32 +107,49 @@
   <button class="tab on" id="tab-curate">区間の手直し</button>
   <button class="tab" id="tab-tune">重みの試算</button>
   <span class="spacer"></span>
-  <span class="muted" id="status"></span>
+  <span id="status" class="muted"></span>
+  <span id="unsaved" class="unsaved"></span>
+  <button class="primary" id="save" disabled>保存 <kbd>S</kbd></button>
 </header>
 
 <main id="view-curate">
   <div id="list">
     <div class="bar">
       <select id="pref"></select>
-      <label class="muted"><input type="checkbox" id="showHidden"> 非表示も出す</label>
+      <input type="search" id="q" placeholder="道路名で絞る">
+    </div>
+    <div class="bar wrap">
+      <button class="chip on" data-filter="all">すべて</button>
+      <button class="chip" data-filter="curated">調整済み</button>
+      <button class="chip" data-filter="hidden">非表示</button>
       <span class="spacer"></span>
-      <button class="primary" id="save" disabled>保存</button>
+      <select id="sort">
+        <option value="score">点数順</option>
+        <option value="length">長さ順</option>
+        <option value="curviness">曲率順</option>
+        <option value="name">名前順</option>
+      </select>
     </div>
     <div class="warn" id="unmatched" style="display:none"></div>
     <div id="rows"></div>
+    <div class="bar muted" id="count"></div>
   </div>
+
   <div id="map"></div>
+
+  <div id="editor"><div class="empty">左の一覧か地図の線を選ぶと<br>ここで手直しできます<br><br><kbd>↑</kbd><kbd>↓</kbd> で選択を移動</div></div>
 </main>
 
 <div id="tuning" style="display:none">
-  <p class="muted">
+  <p class="muted" style="max-width:720px">
     重みを動かすと順位がどう変わるかを試算します。<strong>ここで保存はしません。</strong>
     採用するときは <code>lib/funSegments.js</code> の <code>WEIGHTS</code> を書き換えて
     <code>node buildRoadRecommend.js --build</code> を回してください。
   </p>
   <div id="sliders"></div>
-  <div class="bar">
+  <div class="bar" style="border:0; padding-left:0">
     <select id="tunePref"></select>
+    <button id="normalize">合計を1.0にそろえる</button>
     <button id="resetWeights">既定に戻す</button>
     <span class="muted" id="tuneSummary"></span>
   </div>
@@ -106,18 +160,17 @@
 </div>
 
 <script>
-const API_KEY = "AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24";
 const state = {
-  prefectures: [], romaji: null, segments: [], overrides: {}, selected: null,
-  dirty: false, map: null, lines: [], weights: null, normalizers: null, classRank: null,
-  tuning: null, defaults: null,
+  romaji: null, prefName: "", segments: [], overrides: {}, selected: null,
+  dirty: 0, map: null, lines: new Map(), weights: null, normalizers: null,
+  classRank: null, tuning: null, defaults: null, filter: "all", visible: [],
 };
+const PRESET_TAGS = ["絶景", "ワインディング", "快走", "林道ぎみ", "要注意"];
 
-// ---------- 共通 ----------
 const $ = (id) => document.getElementById(id);
 const setStatus = (t) => { $("status").textContent = t; };
 
-/** 調整の鍵。lib/roadOverrides.js の overrideKey と同じ式にすること */
+/** ⚠️ lib/roadOverrides.js の overrideKey と同じ式にすること */
 function overrideKey(seg) {
   const r = (v) => (Math.round(v / 0.01) * 0.01).toFixed(2);
   return seg.name + "@" + r(seg.start[0]) + "," + r(seg.start[1]);
@@ -137,16 +190,19 @@ function decodePolyline(encoded) {
   return points;
 }
 
-// ---------- 区間の手直し ----------
+const ov = (seg) => state.overrides[overrideKey(seg)] || {};
+const adjustedScore = (seg) => Math.max(0, Math.min(100, seg.score + (ov(seg).boost || 0)));
+const isCurated = (seg) => Object.keys(ov(seg)).length > 0;
+
+// ---------- 読み込み ----------
 async function loadPrefectures() {
   const r = await (await fetch("/api/roads/prefectures")).json();
-  state.prefectures = r.prefectures;
   for (const sel of [$("pref"), $("tunePref")]) {
     sel.innerHTML = "";
     for (const p of r.prefectures) {
       const o = document.createElement("option");
       o.value = p.romaji;
-      o.textContent = p.name + (p.built ? "" : "（未生成）") + (p.overrides ? `  調整${p.overrides}` : "");
+      o.textContent = p.name + (p.built ? "" : "（未生成）") + (p.overrides ? ` ・調整${p.overrides}` : "");
       o.disabled = !p.built;
       sel.appendChild(o);
     }
@@ -156,115 +212,261 @@ async function loadPrefectures() {
 }
 
 async function loadPrefecture(romaji) {
-  if (state.dirty && !confirm("保存していない調整があります。破棄しますか？")) {
+  if (state.dirty && !confirm(`保存していない調整が ${state.dirty}件 あります。破棄しますか？`)) {
     $("pref").value = state.romaji; return;
   }
   setStatus("読み込み中…");
   state.romaji = romaji;
-  const [seg, ov] = await Promise.all([
+  const [seg, o] = await Promise.all([
     (await fetch(`/api/roads/segments/${romaji}`)).json(),
     (await fetch(`/api/roads/overrides/${romaji}`)).json(),
   ]);
   state.segments = seg.segments || [];
-  state.overrides = ov.overrides || {};
+  state.prefName = seg.prefecture || "";
+  state.overrides = o.overrides || {};
   state.selected = null;
-  state.dirty = false;
-  $("save").disabled = true;
-  renderRows();
-  fitMap();
-  setStatus(`${seg.prefecture} ${state.segments.length}区間`);
+  setDirty(0);
+  drawAll();
+  render();
+  fitPrefecture();
+  setStatus(`${state.prefName}`);
 }
 
-function currentOverride(seg) {
-  return state.overrides[overrideKey(seg)] || {};
+function setDirty(n) {
+  state.dirty = n;
+  $("save").disabled = n === 0;
+  $("unsaved").textContent = n ? `未保存 ${n}件` : "";
 }
+const touch = () => setDirty(state.dirty + 1);
 
-function renderRows() {
-  const showHidden = $("showHidden").checked;
+// ---------- 一覧 ----------
+function render() {
+  const q = $("q").value.trim();
+  let list = state.segments.map((s) => ({ seg: s, o: ov(s), score: adjustedScore(s) }));
+
+  if (state.filter === "curated") list = list.filter((r) => isCurated(r.seg));
+  else if (state.filter === "hidden") list = list.filter((r) => r.o.hidden);
+  else list = list.filter((r) => !r.o.hidden);   // 既定では非表示を隠す
+
+  if (q) list = list.filter((r) => r.seg.name.includes(q) || (r.o.title || "").includes(q));
+
+  const sort = $("sort").value;
+  const cmp = {
+    score: (a, b) => b.score - a.score,
+    length: (a, b) => b.seg.lengthKm - a.seg.lengthKm,
+    curviness: (a, b) => b.seg.curviness - a.seg.curviness,
+    name: (a, b) => a.seg.name.localeCompare(b.seg.name, "ja"),
+  }[sort];
+  list.sort(cmp);
+  state.visible = list.map((r) => r.seg);
+
   const rows = $("rows");
   rows.innerHTML = "";
-
-  // 調整を当てた順位で並べ直す（保存前でも結果が見える）
-  const adjusted = state.segments.map((s) => {
-    const o = currentOverride(s);
-    return { seg: s, o, score: Math.max(0, Math.min(100, s.score + (o.boost || 0))) };
-  }).filter((r) => showHidden || !r.o.hidden)
-    .sort((a, b) => b.score - a.score);
-
-  adjusted.forEach((r, i) => {
+  list.forEach((r, i) => {
     const div = document.createElement("div");
-    div.className = "row" + (state.selected === r.seg ? " sel" : "") + (r.o.hidden ? " hidden-seg" : "");
-    const badges = [];
-    if (r.o.hidden) badges.push('<span class="badge hide">非表示</span>');
-    if (r.o.boost) badges.push(`<span class="badge boost">${r.o.boost > 0 ? "+" : ""}${r.o.boost}</span>`);
-    for (const t of (r.o.tags || [])) badges.push(`<span class="badge">${t}</span>`);
+    div.className = "row" + (state.selected === r.seg ? " sel" : "") + (r.o.hidden ? " off" : "");
+    const marks = [];
+    if (r.o.hidden) marks.push("🚫");
+    if (r.o.boost) marks.push(r.o.boost > 0 ? "⬆︎" : "⬇︎");
+    if (r.o.note) marks.push("💬");
+    for (const t of (r.o.tags || [])) marks.push("🏷");
     div.innerHTML =
-      `<div class="top"><span class="rank">${i + 1}</span>` +
-      `<span class="name">${r.o.title ? r.o.title + ' <span class="muted">' + r.seg.name + '</span>' : r.seg.name}</span>` +
-      `<span class="score">${r.score.toFixed(1)}</span></div>` +
-      `<div class="meta">${r.seg.lengthKm.toFixed(1)}km ・ 曲率${r.seg.curviness.toFixed(0)} ・ flow${r.seg.flow.toFixed(1)} ・ ${r.seg.highway} ${badges.join(" ")}</div>` +
-      (r.o.note ? `<div class="note">${r.o.note}</div>` : "");
+      `<span class="rank">${i + 1}</span>` +
+      `<span class="name">${escapeHtml(r.o.title || r.seg.name)}</span>` +
+      `<span class="mark">${marks.join("")}</span>` +
+      `<span class="sub">${r.seg.lengthKm.toFixed(0)}km</span>` +
+      `<span class="score">${r.score.toFixed(1)}</span>`;
     div.onclick = () => select(r.seg);
     rows.appendChild(div);
   });
 
-  // どの区間にも当たらない調整（道が消えた・名前が変わった）
+  const curatedCount = state.segments.filter(isCurated).length;
+  $("count").textContent = `${list.length}件を表示（全${state.segments.length}件 ・ 調整済み${curatedCount}件）`;
+
+  // どの区間にも当たらない調整
   const live = new Set(state.segments.map(overrideKey));
   const orphan = Object.keys(state.overrides).filter((k) => !live.has(k));
   const box = $("unmatched");
   if (orphan.length) {
     box.style.display = "block";
-    box.innerHTML = `当たらない調整が ${orphan.length}件（道が消えたか名前が変わった可能性）: ` +
-      orphan.slice(0, 5).join(" / ") +
-      ` <button id="dropOrphan">まとめて削除</button>`;
-    $("dropOrphan").onclick = () => { for (const k of orphan) delete state.overrides[k]; markDirty(); renderRows(); };
-  } else box.style.display = "none";
-}
-
-function markDirty() { state.dirty = true; $("save").disabled = false; }
-
-function select(seg) {
-  state.selected = seg;
-  renderRows();
-  drawSelection(seg);
-  showEditor(seg);
-}
-
-function showEditor(seg) {
-  let box = $("editor");
-  if (!box) { box = document.createElement("div"); box.id = "editor"; $("list").appendChild(box); }
-  const o = currentOverride(seg);
-  box.innerHTML = `
-    <h3>${seg.name}</h3>
-    <div class="muted">${seg.lengthKm.toFixed(1)}km ・ 曲率${seg.curviness.toFixed(0)} ・ flow${seg.flow.toFixed(1)} ・ 素点${seg.score.toFixed(1)}</div>
-    <label>点数の加算（マイナスで下げる）</label>
-    <input type="number" id="e-boost" value="${o.boost || 0}" step="1" min="-100" max="100">
-    <label>表示名（空なら元の名前）</label>
-    <input type="text" id="e-title" value="${o.title || ""}" placeholder="例: 椿ライン">
-    <label>ひとこと説明</label>
-    <input type="text" id="e-note" value="${o.note || ""}" placeholder="例: 相模湾を見下ろす定番">
-    <label>札（カンマ区切り）</label>
-    <input type="text" id="e-tags" value="${(o.tags || []).join(",")}" placeholder="絶景,ワインディング">
-    <div style="margin-top:10px; display:flex; gap:8px;">
-      <label class="muted"><input type="checkbox" id="e-hidden" ${o.hidden ? "checked" : ""}> 一覧から外す</label>
-      <span class="spacer" style="flex:1"></span>
-      <button id="e-clear">調整を消す</button>
-      <button class="primary" id="e-apply">この区間に反映</button>
-    </div>`;
-  $("e-apply").onclick = () => {
-    const next = {
-      hidden: $("e-hidden").checked,
-      boost: Number($("e-boost").value) || 0,
-      title: $("e-title").value.trim() || null,
-      note: $("e-note").value.trim() || null,
-      tags: $("e-tags").value.split(",").map((t) => t.trim()).filter(Boolean),
+    box.innerHTML = `当たらない調整が ${orphan.length}件（道が消えたか名前が変わった）<br>` +
+      escapeHtml(orphan.slice(0, 3).join(" / ")) + ` <button id="dropOrphan">削除</button>`;
+    $("dropOrphan").onclick = () => {
+      for (const k of orphan) delete state.overrides[k];
+      touch(); render();
     };
-    const key = overrideKey(seg);
-    if (!next.hidden && !next.boost && !next.title && !next.note && !next.tags.length) delete state.overrides[key];
-    else state.overrides[key] = next;
-    markDirty(); renderRows();
+  } else box.style.display = "none";
+
+  restyleLines();
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+
+// ---------- 選択 ----------
+function select(seg, { pan = true } = {}) {
+  state.selected = seg;
+  render();
+  if (pan) panTo(seg);
+  renderEditor();
+  // 一覧の選択行が見えるように
+  const i = state.visible.indexOf(seg);
+  const row = $("rows").children[i];
+  if (row) row.scrollIntoView({ block: "nearest" });
+}
+
+function move(delta) {
+  if (!state.visible.length) return;
+  const i = state.selected ? state.visible.indexOf(state.selected) : -1;
+  const next = Math.max(0, Math.min(state.visible.length - 1, i + delta));
+  select(state.visible[next]);
+}
+
+// ---------- 地図 ----------
+function initMap() {
+  state.map = new google.maps.Map($("map"), {
+    center: { lat: 36.75, lng: 139.6 }, zoom: 9, mapTypeControl: false, streetViewControl: false,
+  });
+  loadWeights().then(loadPrefectures);
+}
+window.initMap = initMap;
+
+/** 全区間の線を1度だけ作る。選択のたびに作り直すと地図がちらつく */
+function drawAll() {
+  state.lines.forEach((l) => l.setMap(null));
+  state.lines.clear();
+  for (const seg of state.segments) {
+    const line = new google.maps.Polyline({
+      path: decodePolyline(seg.polyline), map: state.map,
+      strokeColor: "#00a8c6", strokeOpacity: 0.7, strokeWeight: 4,
+    });
+    line.addListener("click", () => select(seg, { pan: false }));
+    state.lines.set(seg.id, line);
+  }
+}
+
+/** 色だけ塗り替える（作り直さない） */
+function restyleLines() {
+  for (const seg of state.segments) {
+    const line = state.lines.get(seg.id);
+    if (!line) continue;
+    const o = ov(seg);
+    const selected = state.selected === seg;
+    line.setOptions({
+      strokeColor: selected ? "#e8590c" : o.hidden ? "#adb5bd" : o.boost ? "#2b8a3e" : "#00a8c6",
+      strokeOpacity: selected ? 1 : o.hidden ? 0.35 : 0.7,
+      strokeWeight: selected ? 7 : 4,
+      zIndex: selected ? 100 : 1,
+    });
+  }
+}
+
+function boundsOf(segs) {
+  const b = new google.maps.LatLngBounds();
+  for (const seg of segs) for (const p of decodePolyline(seg.polyline)) b.extend(p);
+  return b;
+}
+
+function fitPrefecture() {
+  if (!state.segments.length) return;
+  state.map.fitBounds(boundsOf(state.segments), 24);
+}
+
+function panTo(seg) {
+  state.map.fitBounds(boundsOf([seg]), 60);
+}
+
+// ---------- 編集パネル ----------
+function renderEditor() {
+  const box = $("editor");
+  const seg = state.selected;
+  if (!seg) {
+    box.innerHTML = `<div class="empty">左の一覧か地図の線を選ぶと<br>ここで手直しできます<br><br><kbd>↑</kbd><kbd>↓</kbd> で選択を移動</div>`;
+    return;
+  }
+  const o = ov(seg);
+  box.innerHTML = `
+    <h3>${escapeHtml(o.title || seg.name)}</h3>
+    <div class="stats">
+      ${o.title ? escapeHtml(seg.name) + "<br>" : ""}
+      ${seg.lengthKm.toFixed(1)}km ・ 曲率${seg.curviness.toFixed(0)} ・ flow${seg.flow.toFixed(1)} ・ ${seg.highway}<br>
+      素点 ${seg.score.toFixed(1)}${o.boost ? ` → <strong>${adjustedScore(seg).toFixed(1)}</strong>` : ""}
+    </div>
+
+    <label>点数の加算</label>
+    <div class="boostRow">
+      <button data-boost="-10">−10</button>
+      <button data-boost="-5">−5</button>
+      <input type="number" id="e-boost" value="${o.boost || 0}" step="1" min="-100" max="100">
+      <button data-boost="5">＋5</button>
+      <button data-boost="10">＋10</button>
+    </div>
+
+    <label>表示名（空なら元の名前）</label>
+    <input type="text" id="e-title" value="${escapeHtml(o.title || "")}" placeholder="例: 椿ライン">
+
+    <label>ひとこと説明（アプリの一覧に出る）</label>
+    <input type="text" id="e-note" value="${escapeHtml(o.note || "")}" placeholder="例: 相模湾を見下ろす定番">
+
+    <label>札（アプリに2つまで出る）</label>
+    <div class="chips" id="e-tags">
+      ${PRESET_TAGS.map((t) => `<button class="chip ${(o.tags || []).includes(t) ? "on" : ""}" data-tag="${t}">${t}</button>`).join("")}
+    </div>
+    <input type="text" id="e-tags-free" value="${escapeHtml((o.tags || []).filter((t) => !PRESET_TAGS.includes(t)).join(","))}"
+           placeholder="その他（カンマ区切り）" style="margin-top:5px">
+
+    <label>一覧から外す</label>
+    <button class="chip ${o.hidden ? "on" : ""}" id="e-hidden">${o.hidden ? "🚫 外している" : "一覧に出す"}</button>
+
+    <div style="margin-top:16px; display:flex; gap:6px;">
+      <button class="danger" id="e-clear" ${Object.keys(o).length ? "" : "disabled"}>調整を消す</button>
+      <span class="spacer"></span>
+      <button id="e-prev">↑ 前</button>
+      <button id="e-next">↓ 次</button>
+    </div>
+    <div class="muted" style="margin-top:10px">変更はすぐ反映されます。<kbd>S</kbd> で保存。</div>`;
+
+  // 加算ボタン
+  box.querySelectorAll("[data-boost]").forEach((b) => {
+    b.onclick = () => {
+      const input = $("e-boost");
+      input.value = Math.max(-100, Math.min(100, (Number(input.value) || 0) + Number(b.dataset.boost)));
+      apply();
+    };
+  });
+  // 札のプリセット
+  box.querySelectorAll("#e-tags [data-tag]").forEach((b) => {
+    b.onclick = () => { b.classList.toggle("on"); apply(); };
+  });
+  $("e-hidden").onclick = () => { $("e-hidden").classList.toggle("on"); apply(); };
+  for (const id of ["e-boost", "e-title", "e-note", "e-tags-free"]) {
+    $(id).onchange = apply;
+  }
+  $("e-clear").onclick = () => { delete state.overrides[overrideKey(seg)]; touch(); render(); renderEditor(); };
+  $("e-prev").onclick = () => move(-1);
+  $("e-next").onclick = () => move(1);
+}
+
+/** 編集パネルの内容を state に反映（保存はしない） */
+function apply() {
+  const seg = state.selected;
+  if (!seg) return;
+  const preset = [...document.querySelectorAll("#e-tags .chip.on")].map((b) => b.dataset.tag);
+  const free = $("e-tags-free").value.split(",").map((t) => t.trim()).filter(Boolean);
+  const next = {
+    hidden: $("e-hidden").classList.contains("on"),
+    boost: Number($("e-boost").value) || 0,
+    title: $("e-title").value.trim() || null,
+    note: $("e-note").value.trim() || null,
+    tags: [...new Set([...preset, ...free])],
   };
-  $("e-clear").onclick = () => { delete state.overrides[overrideKey(seg)]; markDirty(); renderRows(); showEditor(seg); };
+  const key = overrideKey(seg);
+  if (!next.hidden && !next.boost && !next.title && !next.note && !next.tags.length) delete state.overrides[key];
+  else state.overrides[key] = next;
+  touch();
+  render();
+  renderEditor();
 }
 
 async function save() {
@@ -274,46 +476,8 @@ async function save() {
     body: JSON.stringify({ overrides: state.overrides }),
   });
   const j = await r.json();
-  state.dirty = false; $("save").disabled = true;
-  setStatus(`保存しました（調整 ${j.count}件）。反映するには再生成が必要です`);
-}
-
-// ---------- 地図 ----------
-function initMap() {
-  state.map = new google.maps.Map($("map"), { center: { lat: 36.75, lng: 139.6 }, zoom: 9, mapTypeControl: false });
-  loadWeights().then(loadPrefectures);
-}
-window.initMap = initMap;
-
-function clearLines() { state.lines.forEach((l) => l.setMap(null)); state.lines = []; }
-
-function fitMap() {
-  clearLines();
-  const bounds = new google.maps.LatLngBounds();
-  // 上位30本だけ薄く出す（全部出すと重い）
-  const top = state.segments.slice(0, 30);
-  for (const seg of top) {
-    const path = decodePolyline(seg.polyline);
-    const line = new google.maps.Polyline({
-      path, map: state.map, strokeColor: "#00a8c6", strokeOpacity: .45, strokeWeight: 3,
-    });
-    line.addListener("click", () => select(seg));
-    state.lines.push(line);
-    path.forEach((p) => bounds.extend(p));
-  }
-  if (!bounds.isEmpty()) state.map.fitBounds(bounds);
-}
-
-function drawSelection(seg) {
-  fitMap();
-  const path = decodePolyline(seg.polyline);
-  const line = new google.maps.Polyline({
-    path, map: state.map, strokeColor: "#e8590c", strokeOpacity: 1, strokeWeight: 6, zIndex: 10,
-  });
-  state.lines.push(line);
-  const b = new google.maps.LatLngBounds();
-  path.forEach((p) => b.extend(p));
-  state.map.fitBounds(b);
+  setDirty(0);
+  setStatus(`保存しました（調整 ${j.count}件）。配信するには再生成が必要です`);
 }
 
 // ---------- 重みの試算 ----------
@@ -333,7 +497,7 @@ function renderSliders() {
     const row = document.createElement("div");
     row.className = "slider";
     row.innerHTML = `<label>${key}</label>
-      <input type="range" min="0" max="1" step="0.05" value="${state.weights[key]}" data-k="${key}">
+      <input type="range" min="0" max="1" step="0.05" value="${state.weights[key]}">
       <span class="val">${state.weights[key].toFixed(2)}</span>`;
     row.querySelector("input").oninput = (e) => {
       state.weights[key] = Number(e.target.value);
@@ -365,24 +529,21 @@ async function renderTuning() {
     state.tuning = (await (await fetch("/api/roads/tuning")).json()).prefectures;
     setStatus("");
   }
-  const romaji = $("tunePref").value;
-  const pref = state.tuning.find((p) => p.romaji === romaji);
+  const pref = state.tuning.find((p) => p.romaji === $("tunePref").value);
   const body = $("tuneRows");
   body.innerHTML = "";
   if (!pref) { $("tuneSummary").textContent = "試算データがありません（--build を実行してください）"; return; }
 
-  const current = [...pref.segments].sort((a, b) => b.score - a.score);
-  const rankBefore = new Map(current.map((s, i) => [s.name + s.start.join(), i + 1]));
+  const id = (s) => s.name + s.start.join();
+  const before = new Map([...pref.segments].sort((a, b) => b.score - a.score).map((s, i) => [id(s), i + 1]));
   const after = pref.segments.map((s) => ({ ...s, next: scoreWith(s, state.weights) }))
                              .sort((a, b) => b.next - a.next);
-
   let moved = 0;
   after.slice(0, 40).forEach((s, i) => {
-    const before = rankBefore.get(s.name + s.start.join()) ?? 0;
-    const delta = before - (i + 1);
+    const delta = (before.get(id(s)) ?? 0) - (i + 1);
     if (delta !== 0) moved++;
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${i + 1}</td><td>${s.name}</td>
+    tr.innerHTML = `<td>${i + 1}</td><td>${escapeHtml(s.name)}</td>
       <td class="num">${s.score.toFixed(1)}</td><td class="num">${s.next.toFixed(1)}</td>
       <td class="num ${delta > 0 ? "up" : delta < 0 ? "down" : ""}">${delta > 0 ? "↑" + delta : delta < 0 ? "↓" + -delta : "－"}</td>
       <td class="num">${s.lengthKm.toFixed(1)}</td><td class="num">${s.curviness.toFixed(0)}</td><td class="num">${s.flow.toFixed(1)}</td>`;
@@ -396,10 +557,24 @@ async function renderTuning() {
 
 // ---------- 起動 ----------
 $("pref").onchange = (e) => loadPrefecture(e.target.value);
-$("showHidden").onchange = renderRows;
+$("q").oninput = render;
+$("sort").onchange = render;
 $("save").onclick = save;
 $("tunePref").onchange = renderTuning;
 $("resetWeights").onclick = () => { state.weights = { ...state.defaults }; renderSliders(); renderTuning(); };
+$("normalize").onclick = () => {
+  const sum = Object.values(state.weights).reduce((a, b) => a + b, 0);
+  if (sum > 0) for (const k of Object.keys(state.weights)) state.weights[k] = Number((state.weights[k] / sum).toFixed(2));
+  renderSliders(); renderTuning();
+};
+document.querySelectorAll("[data-filter]").forEach((b) => {
+  b.onclick = () => {
+    document.querySelectorAll("[data-filter]").forEach((x) => x.classList.remove("on"));
+    b.classList.add("on");
+    state.filter = b.dataset.filter;
+    render();
+  };
+});
 $("tab-curate").onclick = () => {
   $("tab-curate").classList.add("on"); $("tab-tune").classList.remove("on");
   $("view-curate").style.display = "flex"; $("tuning").style.display = "none";
@@ -409,6 +584,15 @@ $("tab-tune").onclick = () => {
   $("view-curate").style.display = "none"; $("tuning").style.display = "block";
   renderTuning();
 };
+
+document.addEventListener("keydown", (e) => {
+  // 入力中はショートカットを効かせない
+  if (["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
+  if (e.key === "ArrowDown") { e.preventDefault(); move(1); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+  else if (e.key === "s" || e.key === "S") { if (state.dirty) save(); }
+});
+
 window.onbeforeunload = () => (state.dirty ? "保存していない調整があります" : undefined);
 </script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24&callback=initMap"></script>
