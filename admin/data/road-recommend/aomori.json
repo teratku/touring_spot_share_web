@@ -1,0 +1,3166 @@
+{
+ "prefecture": "青森県",
+ "romaji": "aomori",
+ "generation": 1,
+ "builtAt": "2026-07-27T22:39:58.815Z",
+ "weights": {
+  "curviness": 0.35,
+  "flow": 0.25,
+  "length": 0.15,
+  "classRank": 0.1,
+  "popularity": 0.15
+ },
+ "count": 150,
+ "segments": [
+  {
+   "id": "青森県:0",
+   "name": "三厩小泊線（増泊林道）",
+   "ref": "286",
+   "highway": "secondary",
+   "lengthKm": 18.53,
+   "curviness": 690.9,
+   "flow": 30,
+   "turnCount": 427,
+   "score": 84.3,
+   "polyline": "gf`zFixnwYo@yIf@aDpAkA|Hu@j@eBoBgL?eBoAgBs@qD}BkPOkG]s@qBIQa@~A{Ak@wCRkByAwCK_Fz@eDIoB`ByCD_FW}QeAeCt@{IwB{IP_@|Cz@j@eBaAJkB{@uACkAcAAqBrCiAT_AgCeBqAgDtA?fCgA{DoCiCcIQuBwAc@_A`EIdEe@ViAu@{A\\iBfCa@vB_AvACx@v@bBKpHgAR}AqEmEpDo@g@z@o@M}D^{DzAiCRqQ~CcGNiCe@qEb@}@vBiAc@sEVcNxDuF]aBeGfAUYp@iB_C_@_Ep@c@aAlFuFxA{C~AD|BcCfAOR_@UaBy@KsAv@wAOcA}@?wC_Cc@MaDVyB}ApAOpAuAlAoAhCmFdDYSRyBuBVkCmCiBEc@{A_Bm@y@|BcEIsAlBKpBr@zB~AhBAd@gDN{@]oBjAqBQcBz@i@pBoC[{CaB]mA_K{K_F]La@tEu@lB|BlB[dE|@NYyCuIFkDpAaBIq@gAs@sBNo@sBeC_DiAiExFcHnJe@pCn@i@qBDkBsJiAA}CgDWSi@dCiB`FaH^iC{LlFoCb@iAtBiFjBwA_AgBj@aBKgG~DqAKoAsBmCXq@u@?uBe@g@cCn@qB}@WyB}A_EHiBx@mB}AuFeN_LeAaCeCy@{DkJiCgAeCmCMwOnBeFwCwFuCk@q@qBVeGuAyB~@oC]mDdAuH{BcCoAwCyBa@aHoGy@[cBd@u@QgBmM_DmK{G}MsCmBaAuB@uEsAqGe@iHaDsLJoE}BiM}@kBeBe@{EsG",
+   "pointCount": 211,
+   "start": [
+    41.130119,
+    140.327887
+   ],
+   "end": [
+    41.175917,
+    140.428934
+   ]
+  },
+  {
+   "id": "青森県:1",
+   "name": "岩崎西目屋弘前線",
+   "ref": "28",
+   "highway": "primary",
+   "lengthKm": 29.99,
+   "curviness": 806.6,
+   "flow": 32.5,
+   "turnCount": 745,
+   "score": 83.5,
+   "polyline": "wpqvFsyuuYyBNi@c@OeDmEB^oAbEUpA_DFaBcB_HZC~@`BhCAEyAsAOVmB}AQaCyDFYtCd@r@[aBoFkDiCcAnDuAToBfEhAhEeAfDo@_@`AcC_BaCp@sFDyNg@gA~@uFM}G~GhArBgBbBOb@aA[m@oAfAoEDiCqBs@gBaBAkApAEgAnBmAlA[|CfA^O?y@oDwGsBbBiED_@_BvD{GFaCbDcDj@ObAp@r@qAzF{@l@uBBgDdAkCpEGnAd@V]oB{Md@mAnAfA\\S@o@m@s@AsAaA]M}@u@w@}FTyFmCwB]k@}@d@UlB`AxC]hGyDzETbCg@FuFmAoBvCyE_@{CdAuD~@_IcBmC{@oEeB^w@zAk@Q|@kCfBaCBo@c@_@cBtCsB`@{@}@y@TIdDjArBRpBDtAa@d@uFaBi@x@iBu@oChBkDo@Su@TSdBFnBcAv@N`AeAcBe@aAeCuCeAcCXoBjB_@Ef@oAe@gCdA{@L_AuBJ_B`DkAMa@sAn@WFwBwAf@c@o@bBuA?i@w@g@aA@aAdC[OIaBs@zBwAMkCcO{C{HcCaDaCQu@cBuAr@sBoAs@qCuDsDmBmE_CmAm@yBt@g@dAtBhDvAnAtCdAKnFzApCgAlCdBvAxDrBp@~As@tE~CtEeE`DvAtAFt@gAjAY|BuBlAB~@gA|An@Lh@rID?oAw@mAaAqEuCoFKgCpAw@bAoDy@_Cm@mGbEiGjDo@yEq@eEl@tEcCpGf@|BeHcEoFaEkCa@yCaBg@_BuCm@oBEiBp@wBiBOSiCN{@vAo@pCiDJoFnAwCPuEpBh@z@vBh@TpAgDrAVdEwBn@kA?yA_BsCuEgB{AGoAx@{Dm@_DwCiB{E_D}CyAnA{@Mw@wC_FnAOe@rDqCvAXd@WiDkBcC`BoCk@_@oCgA}AUoCeDiJAYhCO`DtDgArBGr@j@p@EwArAoDgBgDOyEaAWyBfBiAk@oDDfCgA~AHz@cCvCk@|A}Av@dE~@pAa@{E}@mDsACeAz@iBaA{B~BqDAkAeA_@kEeFuAyCqEm@}CgDBf@_BrCHjDxBlCVhBvAl@UDiA_AiEoGeDdAm@bDJ`H`CCg@yA_AGqAgB_CeAkDXa@pPxNtAWaFkE_AkEeEaGIuNu@wBwCk@sCoDmAbCi@RyDs@mBiBiCs@eGrDaEsD[gHaDaCi@oDqAeCmBkByDZH{@`AeAhEkApDvAhF[fDhDFkAgBuBiNaF_@eA~J[HaAaAo@gE`@Lm@nB{AzBa@pCpAbBpBb@EdBoDuD_BaGeAkE{BRaAfFoGhIyEf@mAq@S_Gh@iFe@mBy@Ek@l@_AOiBx@uB{A_DcA}IwAuCr@S`Ab@jFtFxCEh@s@MqIq@sEZuFj@TpApCtE`AfCpBtAsCjBw@\\_Hf@W`BjA\\_@KwD",
+   "pointCount": 382,
+   "start": [
+    40.563483,
+    140.036262
+   ],
+   "end": [
+    40.57325,
+    140.149001
+   ]
+  },
+  {
+   "id": "青森県:2",
+   "name": "津軽岩木スカイライン",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 8.45,
+   "curviness": 1197.4,
+   "flow": 40.3,
+   "turnCount": 251,
+   "score": 83.2,
+   "polyline": "qbcwFa{gwYb@bAgB~@Ih@ZNjBu@X`@mC`CjCIoCxBGd@pCc@Dl@kE`D\\VpCo@P^iEjBF~@fC_@T`@{DxBN^zCa@^^_@j@oDr@N`A|BQf@ZUl@aDr@Mp@^b@bC_@\\\\aEtCf@\\jBGUz@_B|@Lj@~Bg@Ej@uAlAFb@pB{@RZKp@cCrBDv@hDYKx@uBzACr@lCg@\\^Kp@uC~AGlA~DGd@b@cDpDAd@xDFZ\\Kl@eE~@Sl@d@f@~DMNbAmFnBYr@Pv@tEfCpBiCp@GN~@_BrE`@XdBeCt@NgAfGV`@~BkEl@D{@rFd@\\pByBXr@iAtEbD{ANd@o@xD|Ct@Bn@oApCFt@`DiAj@VsA~EHr@tD@RbGbDaBh@FHbAuBpELp@lFkAJ|@uA~ATv@`HRW`KxEFJzGvCiBj@^}A`FpDTn@dHt@?`AmEr@H~@rFl@]\\wCp@IbDjDbCfGlBjC",
+   "pointCount": 133,
+   "start": [
+    40.65337,
+    140.292491
+   ],
+   "end": [
+    40.637856,
+    140.259049
+   ]
+  },
+  {
+   "id": "青森県:3",
+   "name": "泊陸奥横浜停車場線",
+   "ref": "179",
+   "highway": "secondary",
+   "lengthKm": 12.63,
+   "curviness": 555.9,
+   "flow": 26.5,
+   "turnCount": 265,
+   "score": 82.4,
+   "polyline": "i`xyFwdm}YyBwNCmI~@iHb@yJz@{ElEaHtAwDvDsDzH_T|@sAbDgBlDwEp@yHrD{FPiEz@mBSsATmD[}BXiB~A}C?cDj@cDbG}EzBuF?oB}@wFeCcF^OzBbBbAJl@dDhBxDbEn@L^s@|Ai@dIpEwG\\x@u@bIhD}DP_Gv@aDQoCv@gDnA}MpBcFlBd@zCu@|CgEg@}AGkIzCcN^qC@uIbAeDG_CuBs@Fc@xB[|CTn@R`AtCn@Ed@}HlAqEfGoINcESs@qGcA}CsBKs@b@cAlEm@jBcA|EiE\\cA{CcBqBRqHeCYwAt@qJt@mBrBo@hFsNvA}BLaGrCj@nCa@vDbBvC{@z@uBBcCk@aCjAwACa@mB}@kAoCjDuCfBQzAd@~DcBnCyHOqEiEeGoHR]PUzAgALgA_CsEBoDiCI~F{As@o@jAe@?cAmEkCjAiBFkEiCm@_Ha@{@qGuAmL]}DcGi@Jo@rBeAWcB{QmBeH",
+   "pointCount": 131,
+   "start": [
+    41.088206,
+    141.302679
+   ],
+   "end": [
+    41.075474,
+    141.38064
+   ]
+  },
+  {
+   "id": "青森県:4",
+   "name": "岩木山環状線",
+   "ref": "30",
+   "highway": "primary",
+   "lengthKm": 5.75,
+   "curviness": 729.4,
+   "flow": 31.5,
+   "turnCount": 133,
+   "score": 81.1,
+   "polyline": "a{iwFag{vY`@uKa@gEwD{EwH{@DwIWm@_Aj@Qe@hA_BeBYy@_G_AyB]b@?bCv@bIWZ_@a@H{CeBqO|@{ARuBW}A]VEzCiBWEvBmAdA^pAz@n@MjGe@[iBaIJmBv@uA@cBhAoAQiGtD_DpAqEpCuBReAUqBk@hDeBr@yBtE}BCLw@bC{A|AqFh@iF]}JlC}La@QeClD{B`B]IgLyWuJsIb@aNsDqCaJmR",
+   "pointCount": 62,
+   "start": [
+    40.688013,
+    140.227845
+   ],
+   "end": [
+    40.69894,
+    140.259615
+   ]
+  },
+  {
+   "id": "青森県:5",
+   "name": "名久井岳公園線",
+   "ref": "227",
+   "highway": "secondary",
+   "lengthKm": 9.47,
+   "curviness": 533.8,
+   "flow": 25.9,
+   "turnCount": 195,
+   "score": 80.4,
+   "polyline": "ettuFivp}YhCmDvLbA`BSfZoKxFwFlEsBhETrHi@lBq@rD}CzOjDzDBvA}BnI}ApAqB^kGfBcA|EfB@vAnD~D~@Nr@aAn@F|AlEjDrEdFu@bGbH\\tAPbKb@|@lE`D~AxEL|CpBzHNrHm@rF`@P\\e@RwDh@}AAmEh@J`@fDrB~Ex@xF_@xHaA`@IvA`AnDlBzAh@vB]XyB[?|ExA|Bj@Sn@iClBDdDhAJ{@s@cDd@AbCfJxAxCzBzKzAdDh@xEl@bAtAlHf@|@~BjAL|@@hGuD`Iu@dLmAxBfAv@JxH`@bAEn@}@`AxAfCSrBPtE]b@eBY_@fDBtAlAbDjAxGy@zDKvGqAzEkE`EeCDV`DOp@{Cv@g@]{@RaBnBQ`C",
+   "pointCount": 103,
+   "start": [
+    40.415546,
+    141.320852
+   ],
+   "end": [
+    40.382925,
+    141.278486
+   ]
+  },
+  {
+   "id": "青森県:6",
+   "name": "貝守斗内線",
+   "ref": "217",
+   "highway": "secondary",
+   "lengthKm": 3.91,
+   "curviness": 517.5,
+   "flow": 28.9,
+   "turnCount": 70,
+   "score": 80,
+   "polyline": "_diuFcsw|YsDByHfEi@r@Hh@jCKGhEmFx@qCjIuABwBuBY\\?hEcCpAkA_@`ApD?nAwClF}@xDkIjBoJyIoS|EQvDgArBmA`JmDpB}AtBeGx@Cj@lAvBD~AYn@aDfAySYk@p@w@jDUpEgDdB",
+   "pointCount": 38,
+   "start": [
+    40.356644,
+    141.192338
+   ],
+   "end": [
+    40.379056,
+    141.17462
+   ]
+  },
+  {
+   "id": "青森県:7",
+   "name": "相馬常盤野線",
+   "ref": "204",
+   "highway": "secondary",
+   "lengthKm": 9.25,
+   "curviness": 501,
+   "flow": 26.8,
+   "turnCount": 173,
+   "score": 79.1,
+   "polyline": "chsvFqaiwY\\G|BrCNwBeB_EHeAqBWi@wA_Bo@MiAZkBhEoEjFyCTf@o@v@Jb@|Aq@xANz@iArBxAv@Il@_BVkFfCnBrAUz@~@|BCv@hAjBF|@fAxF{Ah@oCjD@X`@tA{@jA`@lA{BvAc@l@sBFqBtB{D@aEaAwDaFw@}@sDwB{ByCViAsBmHiBs@h@WvBo@ZgByCsEeECe@x@w@bFmChCuDrBuEzBwIjDKlBcAj@{AF}BoAmLeAoDkAkBcMyH{EgTwGeKi@oEX}KfDyJe@eG~DaFrA}IuAkJx@qC`EoF`@sAvA}[fA}LdF}VOyI_AaIuHmShBgLpBsFN}Av@yAtGqFzBaI",
+   "pointCount": 92,
+   "start": [
+    40.572338,
+    140.298645
+   ],
+   "end": [
+    40.562184,
+    140.367113
+   ]
+  },
+  {
+   "id": "青森県:8",
+   "name": "国道338号",
+   "ref": "338",
+   "highway": "trunk",
+   "lengthKm": 29.99,
+   "curviness": 556.7,
+   "flow": 26.2,
+   "turnCount": 637,
+   "score": 78.4,
+   "polyline": "wvxzFmiqzYeBp@}Bs@a@Xf@zEoB~AbA`IUz@eLqOWVMdCy@tAgE[eEpIe@CqBmFoBeBg@r@MzGmCWu@tCaFg@_@w@@eG}@cNlEcXwA_KDsIuAsBgF@}EiB{@p@cA~EiAbAeAA_HoC}Nl^cBdCeE~@aGAkDnAq@p@q@tDoCpEqF|@y@jAb@hAxAt@^jAuAfKVrB~ASlEeFzA_@h@f@E`AcDfEc@zGNbBdARvFqB~D~@vEY`ApAd@xBIz@s@^wF_DiB@sFp@_H~E_FZiChJ{AjCsGjGcK|MkBvKuLzQgAjDa@T_Bq@?dDyAtAqAtCgCu@a@Tp@bFUv@uBt@o@UwAmB{AaHeBgB[`@JdFg@hF_BxAe@]sD{L_DdCwBcCgAj@{AGk@|AUjLRxBW`@{Ay@eCwGy@HwApBy@Aw@mEu@m@wEf@uAjBiDd@Ww@zAeOdD_FfBaANmAi@e@cFrAoEQaAZmDyHe@iCo@Sa@~EVjDm@`Ch@rB[hC_CrDcDtBsApGqD@qBtD@dDs@~@cAU{CmFyDBmDqDmBgF_@eD}BkFiGjDqAdCgBCgClBu@BoAuAA}Iu@_C[{D}@]gAhD]fFiEqAuFn@G|BeBdAi@dCjBnKo@jJuAtBmFbAuAaCgBaAfAqKq@{CN_HwF{EhFcA|@wAkCaLu@uAXa@jD~@bBeCMuHiDmDs@sEtAmDEwDo@eCvA_BMiCVyAhDFJo@{ECq@zB?tBgBL]f@T`Hc@Z_COwAdCEx@t@lBjBfB_@pATtB_D{B_Fo@cHvO|@lC{Aa@sBNg@l@oB`JaBXs@nA?|Tk@p@iCD}Cy@gI{HwByLMiEy@mBeFyC{BuKyKaJAw@|Am@Jk@iAoDy@u@sAmIu@FUdAvAfCMbBp@jBOhAcAVuBWyDlAw@i@_AeC}Bm@iB_Hq@q@{IVeCc@kCsDmYiM{FhCeEmCkDd@sDaBcCSoEaHwD{D}AHkDdDsBqAeCO}EyDcAHqCtBkG{@k@i@EcA`DeCH}@_@q@qEmB_@iBJyDi@{@{@j@IdHPrAlApBOjAy@LcGuBeBAwB|BeArEk@^g@}@|@{Cs@iElBsDZiCqBmKm@k@w@H_@z@PjHqBbImGCsFt@wI~D}IjAwIyC{Ex@uEgCmFPiBqEuGYs@Z_BdEqCQeDrCkESoBr@i@mAb@sFoAsA{@R",
+   "pointCount": 318,
+   "start": [
+    41.255639,
+    140.83239
+   ],
+   "end": [
+    41.383688,
+    140.830296
+   ]
+  },
+  {
+   "id": "青森県:9",
+   "name": "道前浄法寺線",
+   "ref": "181",
+   "highway": "secondary",
+   "lengthKm": 6.21,
+   "curviness": 491.4,
+   "flow": 26.3,
+   "turnCount": 116,
+   "score": 77.5,
+   "polyline": "uw|tFgba|YfBm@tEMrL{KAkA_A_D?iBdAmAtAeErD_BH{A{@_BaBNsBq@Y]AwB_Dk@S}@l@c@rFMLiHvD_EvByDxAAfFxJxFpGfBpEpBF~BgCjCe@XJLjDb@X|@eBbEaSbGoBdAr@rEp@n@bCz@HpAqETqFvB_Bn@~@q@bDItARRjAmCXiIfAqDcC_J`@W`ATlFvH|@^xAuKz@eCtAqWjH_AfCPnI~E`BlF|LxEhAbC",
+   "pointCount": 64,
+   "start": [
+    40.293229,
+    141.077003
+   ],
+   "end": [
+    40.26572,
+    141.094656
+   ]
+  },
+  {
+   "id": "青森県:10",
+   "name": "岩崎深浦線",
+   "ref": "192",
+   "highway": "secondary",
+   "lengthKm": 7.85,
+   "curviness": 487.8,
+   "flow": 26,
+   "turnCount": 147,
+   "score": 77.3,
+   "polyline": "q~`wFcz_uYjA^pEaD~FkAvMt@fKfIpBpChEvA~NvJ|Lc@nB|@Vn@?`Gv@`A`LlBhCuAhHnBjAHn@_@z@f@rAaBfEqBB`A}@rAOtAfBDn@~@~@Rn@Ej@sAhBlAXKd@oG_BaEbAs@bAeCtAAM|Bh@jAxA_@n@w@lH}AdA}Dh@HrAbChFiB~BlBbDIn@hEjEbEfLqArMJzJhGbEc@~FjFxHItEn@rOZnC|AhGnNrDjAj@hBvBdCfCAdB{@fBt@~FUhB|C|BdBfCAlIaBRcIg@sDzA@",
+   "pointCount": 74,
+   "start": [
+    40.642489,
+    139.923701
+   ],
+   "end": [
+    40.587111,
+    139.913032
+   ]
+  },
+  {
+   "id": "青森県:11",
+   "name": "後平青森線",
+   "ref": "242",
+   "highway": "secondary",
+   "lengthKm": 13.94,
+   "curviness": 502.9,
+   "flow": 24,
+   "turnCount": 292,
+   "score": 77.3,
+   "polyline": "u~zwFcar{Yc@`G_EdMObF|B`UpCfEj@|ExDtBzExLd@P~DuAtKwGxHGtB|@p@`C~A`NjGzKG~Bp@`CrFrIh@rBZ|EpCnFxA|EpBnAbBsAbCq@pId@fAzAbCIhCj@nFxD~@zBf@zJ~CzFxA|KzCdGj@tFxClJvAvAvAdDxBr@`AfB|A|F|@hAGlCp@~DlPpE`FdJbAxEtCx@hBsBbFNnCmCnFBdB{@jIuAvB{DpEuDRsCvEoFtAk@VgCzBsBvAaEvBkChBFhIyBnMqHhDg@|EbEpBlDPxBy@qBgAu@sBlBmBFGd@d@p@bEx@lA`G_AbByD~AwIsAOlFtCzF`CmDr@?]lEVbDvAaBbCaANh@}@|DPl@jAJ|BqAd@Pc@fDj@XhAU_AbBF|@gA~C@jAjA`D~C~AvBnClN~K|BY~HiEpA\\fCnEbE`MT`GcArId@IdAuFp@BMtGy@jBn@JbDoD~@sBd@p@qAtCDd@zDmEv@d@~@xChJrB@v@m@l@cCTIvAxEdApCpB",
+   "pointCount": 137,
+   "start": [
+    40.775634,
+    141.000019
+   ],
+   "end": [
+    40.712825,
+    140.942415
+   ]
+  },
+  {
+   "id": "青森県:12",
+   "name": "戸来岳貝守線",
+   "ref": "216",
+   "highway": "secondary",
+   "lengthKm": 11.56,
+   "curviness": 470.9,
+   "flow": 25.9,
+   "turnCount": 210,
+   "score": 76.7,
+   "polyline": "kssuFcrt{YZTJrB`A^zAiH~FsEnEDtA{A_@qEnBsDyEmLTwDo@oC^aC}@kBWuDTsFWuAlCkDd@sCK{BcAoASsBd@cOdB}AO_ErBDfBg@~Ab@kAaCcBWUoANsAnAn@vB_@aAkIrB|ChF|AdASvBkCV}@HiKhEkI`B{IPuI}H_V`@}GjEgII{@kB_BEaGt@{Go@i@zCuLG_JbBkAvBbBfEgDn@kGc@iDzA]|@`AiAdCh@hLhCn@hA_@?o@sAcBMmAlA}CvCgEhCIMiEvCuE^mFz@kDxBuE|Eg@^}@|C_OjEu]pDcM|BcAhCnAn@EfEcGXeBrBeAjEoPrBiChAeJxC}IKmM|@sEHeDk@iKn@oIYgEbBaHjAwJDyO`CqCQ_EvAeH|FwKfAyQxA}E",
+   "pointCount": 107,
+   "start": [
+    40.410302,
+    141.012983
+   ],
+   "end": [
+    40.379985,
+    141.107909
+   ]
+  },
+  {
+   "id": "青森県:13",
+   "name": "十二湖公園線",
+   "ref": "280",
+   "highway": "secondary",
+   "lengthKm": 3.88,
+   "curviness": 508.4,
+   "flow": 25,
+   "turnCount": 79,
+   "score": 76.7,
+   "polyline": "i~qvFosiuYxDbIRzCg@jCvI`JuArDn@fBt@jIdC|D`EhAVtBQnCl@t@~A|@rFTzCz@l@kA`AQt@x@bASx@`Br@HT[eAiBHu@zEi@v@n@BpK~BvJhBxOYnF|BrTTzGdC~FbCpAx@bE~FdLhAv@S~Aj@~H",
+   "pointCount": 40,
+   "start": [
+    40.565646,
+    139.973843
+   ],
+   "end": [
+    40.550542,
+    139.943115
+   ]
+  },
+  {
+   "id": "青森県:14",
+   "name": "むつ恐山公園大畑線",
+   "ref": "4",
+   "highway": "primary",
+   "lengthKm": 29.99,
+   "curviness": 451.6,
+   "flow": 24.4,
+   "turnCount": 554,
+   "score": 74.1,
+   "polyline": "uss{F}nk|YzBtDvCnN|@jOrBo@xEvAfBlAtCfFM~DeGdLkAtR}E`Jo@~_@hEjP|EjE\\z@v@fHXrGOhJd@lDjDnGjG~Bn@z@f@|CQrEwCjEiBzGyJjI_@jDrGxMRdH`BxNLxOnFvMvJfI|BzEj@pClFrDvBKfCyATcCnD}ENoGhBkBlBIrDxBnDXbK{AzGoFzDdClEvFbL|CvFvEb@dDbHpAbDxDpCj@rGjDlF_@vIyB`D|AbA?Br@]d@oDPcDlAg@fAcAh@|BdD|Ac@lCNj@x@[dDzAbBa@vBbCbDi@rAiCg@BfEjC|BbDKQjKl@vBlGrD~EhAnBk@|@fAhCt@t@lA|A@HrCnAp@n@vDf@`@fBR`Bk@bAh@|A[pCXjB[zAtDrCl@n@fD|Bu@pBeBZsCfClBnFyAnBj@|FkHx@M^j@j@fKvC`DxAf@f@vCpBtAjDdLf@d@j@GtEgEjFeAf@eAPoDjB{Bt@j@tA|Dv@uD~DgDpB_ApCzAPa@WwAmFcOiAaNf@oL}AcKeC}GcAgAc@oBv@mHwEeGL}C}AmLnAaDh@eGfAeBO}Au@gBmDAa@{BRaDkCsCm@_DcB|@gAs@_@{C`B}Km@eIeCaBq@sBh@q@dE|@hBErHeFlDoIF{CuB_R\\{HWmE~@cDvAsBzDgB`BMhLoHpFcAvDvCfAhGvAbC`A]IaDbAeAxC`Pp@bAn@M|AsFt@}@lJf@dDyDzD}KpLcHWsJ{Ai@sAr@a@e@r@yCB}CtAiGNoFj@_AyC{J\\qA|DkAdHcFrCVnCdBpBL`CoAdCgEdDTxAcBzAF`@c@}BsPPq@dB]sBmBm@eDr@uIg@yOdB{XUkDg@wAaE_EwDO{@aD}@Iq@{AkAo@A_E}@wC`D`@\\cCw@_EmD{IKeGaAwDj@iCWkCr@uBk@s@cC?m@sKnA_I~AkE|@_P`Kea@|@mAPcLnBiFWsGtBcLUmYiCw\\PwV`AcM~BqIvF}\\xAqFvDuIC{GQiAyAkBYcBv@aHj@mA",
+   "pointCount": 266,
+   "start": [
+    41.393386,
+    141.130227
+   ],
+   "end": [
+    41.31261,
+    141.188452
+   ]
+  },
+  {
+   "id": "青森県:15",
+   "name": "後平青森線",
+   "ref": "242",
+   "highway": "secondary",
+   "lengthKm": 10.38,
+   "curviness": 414.2,
+   "flow": 25.3,
+   "turnCount": 170,
+   "score": 72.4,
+   "polyline": "mx}wFibk|Y}@vIeCl~@mGjn@q@la@rA|HnFdMt@zFE|EsBdMLhi@fAfEjEvIpCtOzB`FVfCUnGn@hJqCfSqCdCoAfEsDfFm@nBn@~CwAfGBdA|ArGkBpCx@^`CwBd@HhBlFTxBnAxADl@eCxEoDB~AhM{DpGbGy@pAjAT|B|A~DEnAgCxBhAjCCnBsAhA_Cb@?^tAxA`Ed@p@pEMvDjBfBIrETrA[dI`@dFmBbEmBdA?r@vDBfAxGlElEu@|ADzBnABxAvAwC`Nf@vCQnCn@|FlAxDx@`@|KmCnFlDtG?`@l@FrAwAx@wA`ExApDbA~@",
+   "pointCount": 84,
+   "start": [
+    40.789988,
+    141.128208
+   ],
+   "end": [
+    40.78134,
+    141.032354
+   ]
+  },
+  {
+   "id": "青森県:16",
+   "name": "清水川滝沢野内線",
+   "ref": "123",
+   "highway": "secondary",
+   "lengthKm": 17.08,
+   "curviness": 389.6,
+   "flow": 25.3,
+   "turnCount": 263,
+   "score": 71.6,
+   "polyline": "{rdxF__xzYxA{Gc@cA?mB~@cL|@uDbKcWKe[v@qDjDyHb@{Cw@qb@wBkVgBoF_IqHq@_BeAuIE{K_EuEmBkKg@yk@qAyCc@iEaCqBWeQgAgLbDqLRqDy@oHiBqGT{H{CeDc@uEqAkAe@cKmAcEh@{Fm@yA{Ay@NiEqBkIiAeC{CoMw@iAoB]@wAzB}@a@gCHmCdBkHI_Kq@_Df@eDQoC}AmDcC_As@eBPe@`AJ`Be@d@cAAgBkBeEgAwFh@OpE|AvA_KtBoBlBYy@vDFt@jCoGeA_@uFVeEvGgBkCsA[w@HmBbCu@QbCwHbFeFtAuE?wMcAeD~@gAMWcGVw@w@w@mD`AuP|AcFn@s@Gy@o@PgAnCyF?ExBq@Yf@sDhDMh@i@{BwFQkIa@BUbEWl@W[^uCQeEfBAB}@wD_GeASmBiD{DkCuCgKyEyIsCsAqAqKiDaK_AwH_HwFuBFyBpBwBt@uGq@kEgFwGmDyNgKqDyIaG{CkSaG_J{EyB[{QrLmOzDmVjPoDjF{BdB",
+   "pointCount": 140,
+   "start": [
+    40.824945,
+    140.866562
+   ],
+   "end": [
+    40.869707,
+    140.984034
+   ]
+  },
+  {
+   "id": "青森県:17",
+   "name": "青森五所川原線",
+   "ref": "26",
+   "highway": "primary",
+   "lengthKm": 22.95,
+   "curviness": 409.6,
+   "flow": 25,
+   "turnCount": 376,
+   "score": 71.5,
+   "polyline": "{pdxFozixYaCaWPqHy@}IVcImAeCgAgHsBaGaCyDwDqDmDeImAcQnAeO_DzBsBh@wGc@iF}AqBx@{ETKkBuCwEeAc@gDLcE{BsG}AoBkDFeIkEeHqBuHu@cFCsMsAeFjCyJ\\eJoBod@r@{FIsQkHsOs@sCL}D{BgHwHgH}JiGsA{C}AiAY_DqDgEo@oBiKkHwA}FeDaG@{JaDwR_@cLwBoI[sKuAaIJcDsD_E@kDYeA`@gDw@_FsAqA}Aa@y@uBsBoBy@qDgFeEqA{G_BaBG_A~@wBgB}DeCkA}ByMsAuBQ{Gq@qDGsKRo@tFwBNeDvCgBdCuIzCmAvCeDlDe@`CqCdEk@dBsCToD_CsGwAq@wEEgAaBiBeAQ}C`Cc@rA{AFmAe@gCcCoCkAwBOmAf@kAjDUlA}@FsGf@[fAJpA`EvBN~Av@n@g@rAyEpEcCm@}AaHaCkEOW_@dAuLlI_GrF}@\\u@_@mDxBqAS{D}F_BmAEgDlCk@]e@sBZ_Ie@{CJiA`B_BvC_@bA{ArA[`@l@FrB~DD|DaAbAoG[{CT}@pAaB~Cl@dAo@pAoEvA_BpAaD~A{JVyGyAeAkEbEg@i@ToAvEoGjA{DvEqH~E_EdCmF`Bq@~AgCTo@SgCv@mBp@CfDxCf@[bC}FoB{Bz@wA`@IlBjAlA[Xm@MeAdAJj@uApBwAb@oEn@J|@nBr@\\bCgBBeB^m@`B_BvA[J}DjAqC`CWBeCvBuAx@iIlDoHpAiFCaGaC{MYwPnCoL{AySeCiLoBuFgLwj@bA{Fj@mR]{ImF}HoGiF",
+   "pointCount": 213,
+   "start": [
+    40.824617,
+    140.466481
+   ],
+   "end": [
+    40.838877,
+    140.652205
+   ]
+  },
+  {
+   "id": "青森県:18",
+   "name": "国道282号",
+   "ref": "282",
+   "highway": "trunk",
+   "lengthKm": 6.88,
+   "curviness": 466.2,
+   "flow": 26.5,
+   "turnCount": 121,
+   "score": 71.2,
+   "polyline": "ccuuFuytyYkDSCtCa@h@m@_C_@GmAtD_BP`ArFVpJkB`AA`@zAlCdBd@j@~Bk@bB}BbAvArCSn@qFIe@b@~DtC@rBo@dEwAMoA~BsBv@kHsINhBpEpLg@bBqBvBq@fHqBfA_A~E^vAGdDwD`Jk@`HeA|CDbCaCtB_AzE{@bKdDtKJdKgCjPiGdGCjLaC~PsFjEsDbGcD~CaHdFsRxHaCjBuHlJgFvAiCpJmFdGsAv@iDDe@dA",
+   "pointCount": 63,
+   "start": [
+    40.417937,
+    140.686515
+   ],
+   "end": [
+    40.442667,
+    140.634914
+   ]
+  },
+  {
+   "id": "青森県:19",
+   "name": "種里町柳田線",
+   "ref": "191",
+   "highway": "secondary",
+   "lengthKm": 5.3,
+   "curviness": 416.9,
+   "flow": 24.5,
+   "turnCount": 90,
+   "score": 70.9,
+   "polyline": "{htwFabgvYZF`FjQZzF~IzAtIYbEfDlFt@pGhDrDxExIfCvHi@jD~CjAXhJmE`BAnCrCpDdBpD`E|GrDrA~AjCY`BVzE~DvInBxEH`DsAdFjChC}@\\kAxI_CbBfCpLtJvFm@vA|A`Bh@xIFtEzArCG~@^x@lBvBHfGhD",
+   "pointCount": 43,
+   "start": [
+    40.741419,
+    140.124648
+   ],
+   "end": [
+    40.700384,
+    140.10749
+   ]
+  },
+  {
+   "id": "青森県:20",
+   "name": "苫米地兎内線",
+   "ref": "214",
+   "highway": "secondary",
+   "lengthKm": 7.57,
+   "curviness": 367.1,
+   "flow": 26.7,
+   "turnCount": 104,
+   "score": 70.2,
+   "polyline": "av~uF_r|}Y}Bt@gC|DeXhUob@lH_A`B[i@NaB}@aAJqAmAe@FyAc@CWnBZnDm@xAO`C{DvCeAzFkClAuHlAeGbEe@x@m@pFsBdDmEvB{I~@eClEgCnB_DxGkEdEoAlD}EnDkK|XcEjGgDfBiJv@uDxAqAnAkEfI_CrO}DvOiVyJqLm@cAzImBdByB}D]??~@W@]yCg@i@{A`EgAwAcAQuEpDiGJqGxBqFvD",
+   "pointCount": 59,
+   "start": [
+    40.467051,
+    141.381603
+   ],
+   "end": [
+    40.516515,
+    141.346026
+   ]
+  },
+  {
+   "id": "青森県:21",
+   "name": "田子十和田湖線",
+   "ref": "21",
+   "highway": "primary",
+   "lengthKm": 15.63,
+   "curviness": 402.6,
+   "flow": 24.4,
+   "turnCount": 258,
+   "score": 70,
+   "polyline": "wxeuFkon|YPfGiAzBmFhEuE^kD|DuGvB_A|@gAxDwAfBiDjMuA~@gFlNwBxBcA~BuErBkJv@iB|DO`B\\hE]~@iQdL\\zHaFrK^bLw@|L~A`HMzCj@vHwEhJYnF}ArF{@l@sBLkEdDoCp@e@dDmDlFKlG}BtIgDhEu@xFoA|AFn@`DV^`@SxHs@lDkHpIiFlOaChYxArP]pHi@zAgC`CJtRaBnKgBhF_@vKkDvHYpEoBhCqA`E?lHyBpG^`GaBrGmCbGx@bTs@rLm@nAiKzHeBbHjA`FB~Fg@dDEvPaDfYn@hDdAtBz@xOrDhCvA|BnDxAzIhGlDRb@mAnHhCpEk@zFrIT{A]_DVy@tBrAfAe@tBpDbA_Gt@zB[jCHpCv@~@}@pEjAvA|ATFrDfFzAr@fAFdAa@dBfBx@y@`CBfAd@LjAiAbDZfA}@pDw@zDvC\\hEq@vDt@dATbBIv@eCnDg@nV|DvM`@fHqEpDcBvCNvJ_@|D{BbJ",
+   "pointCount": 132,
+   "start": [
+    40.339479,
+    141.145659
+   ],
+   "end": [
+    40.35845,
+    141.013243
+   ]
+  },
+  {
+   "id": "青森県:22",
+   "name": "国道454号",
+   "ref": "454",
+   "highway": "trunk",
+   "lengthKm": 14.22,
+   "curviness": 447.1,
+   "flow": 24.7,
+   "turnCount": 257,
+   "score": 69.5,
+   "polyline": "{qnvFqavyYVnByIrLaB`FSrJ`@tBbAlAzATva@wD`IaIfIgDv@j@Ir@wDbEl@zJ}@zBJ~@|ARlC]fFnBxIJfQxAlAxAd@QOgG`ADv@~BX`DuCfIb@vCnAlBbFbCzDn@Jt@aA~@cH_A?`AhDfK`@`CKlB}ESgAtI}E|Ke@H}ByByBj@~C|FNtDzFxCzBnDXhEfBlFhEbD~@_AbGP@~AqBdBtAnBv@L~BeAzCv@d@eAd@@hBd@|@pAlBTpB_@fCgBpChFpFo@tCgKfAmAv@EzAx@zBtFv@g@x@iCd@AvB|DVvBnAfARnHbCj@W~Dv@JpCoAh@XRnBUjC_BtF|EtAxAbE`@lDkBtHmEp@qCrGP`CnCzCJ~BcBrGwDzFc@lIcDrQNvTw@nDn@`E}ApAVjH|B~OxC~LkApWbApKv@zCpF`IdEzAdCfCvHrCnEnDvBj@hFzG`AlCiB`F\\pFdAdBb@dDgAvLh@|IGnDk@xC{CtGvAfCi@dC^b@",
+   "pointCount": 133,
+   "start": [
+    40.548296,
+    140.692885
+   ],
+   "end": [
+    40.51165,
+    140.606066
+   ]
+  },
+  {
+   "id": "青森県:23",
+   "name": "松代町陸奥赤石停車場線",
+   "ref": "190",
+   "highway": "secondary",
+   "lengthKm": 10.65,
+   "curviness": 395.9,
+   "flow": 22.1,
+   "turnCount": 191,
+   "score": 68.4,
+   "polyline": "keqwFivrvYXmA|DsGvMaLzJMrEf@`JhDxFxFpEn@tGkAzDt@dHkB`CcB|J{DbBgE~D}EhCo@lBgCz@kD`@iHc@kObBwI~DiCfDmD`SmJtAqDj@eGhJ_CxDqEfA_@fEc@lBVt@fCZjF|D`FrF~B|CN`GvDxEAZ\\[h@mGb@O^V^xEUbDxBrJw@zBb@pCtCdBnEfHhGl@pFjAxBhDuDvAiEM_AmC{BTyAbFk@nJjAb@w@Q_Et@cA|FfCpAi@\\qBIgBmGiJOqBlBgB~CCrNiFd@q@d@sAg@{FVg@vAITi@}AqGNcCfCcAtBzApA?t@s@t@uC~Br@f@a@oAyEzBgCj@eC_DqRd@mDw@iF?eFs@eAeBa@{@VqD|Du@JeCkA",
+   "pointCount": 100,
+   "start": [
+    40.725498,
+    140.184206
+   ],
+   "end": [
+    40.674377,
+    140.217276
+   ]
+  },
+  {
+   "id": "青森県:24",
+   "name": "権現崎線",
+   "ref": "111",
+   "highway": "secondary",
+   "lengthKm": 5.76,
+   "curviness": 382.5,
+   "flow": 24,
+   "turnCount": 92,
+   "score": 68.3,
+   "polyline": "ov_zFmpjwYwFbI_BpEkEvEdArNErFeAxI_@hJ}BxG~C|BzCtExHpCpDe@nB^fHbLvBtGbDpTa@|KeAdDlBnE}@fHv@fBx@D{@gDvBoIb@S_A`DAhClB`H`HdMc@dTc@zCx@lLdAvDF~C[`ByBhB}@pFX~EmArGhCjZEbKa@hBq@\\y@[]mAOjD",
+   "pointCount": 47,
+   "start": [
+    41.127605,
+    140.306154
+   ],
+   "end": [
+    41.122501,
+    140.255719
+   ]
+  },
+  {
+   "id": "青森県:25",
+   "name": "国道454号",
+   "ref": "454",
+   "highway": "trunk",
+   "lengthKm": 23.12,
+   "curviness": 415.2,
+   "flow": 24,
+   "turnCount": 400,
+   "score": 67.5,
+   "polyline": "axzuFq|f{YvAiBrF}@tIaFxCoFf@_E~FFtClAp@IlDmDtHyCj@gAkDsCdA{Cr@w@dAMnJTTg@}@mCr@{A|G~Bf@jAxFdDlAlCp@rIvArAx@Uw@wEt@qCzDJPcCVQxDf@r@bAnChAb@iAi@mChDkAXoGSoCiC_BMwGd@UjAfAjD{Eq@{LnAsFtALvIjGfANbAe@xBsDpF{@j@uMn@eArHq@rDd@nEoBzFYrIoFvE|@zAuClA}@bHDhBuC^yBsAcAKcB~E{BTsBeE_ORsPUqBmBgE{D}h@VmBdBuDdGoGqCmKJiCjB}IzFgBrHwFxA}A`@yB_EgZoHiUsBkNsEcJe@{CHqFz@{Ea@_Hv@kBd@aEMaGdAaBt@sEhAsBY{B}@gBNsDmAuF`@wCM}B~AiDWcIm@oEVuDq@yCyB}B{@sEmIcFNeFx@sCeAsDsBNRuCgBeEw@_JDcAbAiB{@wCd@oDScAeAk@_@aAAoBeA_FM{DzBeFTkBk@oAqHkGmC{KTuA~AkAb@gCGmAyAwDjBmDB{@y@gHy@yBFoA}@mIi@aCqByAmC]cD}F_@}AToQqDoDwAkKLyAt@w@vB}@lDQh@{@f@mDrAyAmDiIsPqH{DsIWr@l@lDq@rCCzBsB\\qEiJyB\\u@p@cAvDqC]oCgH{DkDuDkIeC}J{AyJ^sHGaJfAiFNoLt@w@zAnBpGnAlA}BB_CdA{D]e@_DLiDwKeDqBoGcJo@iEqImLS{CyBkEeAsFqJoRyAiJiA{BoDuMi@kMwFoKmB}GNg]c@gGpA_N",
+   "pointCount": 209,
+   "start": [
+    40.44689,
+    140.942969
+   ],
+   "end": [
+    40.439186,
+    141.114446
+   ]
+  },
+  {
+   "id": "青森県:26",
+   "name": "国道339号",
+   "ref": "339",
+   "highway": "trunk",
+   "lengthKm": 29.38,
+   "curviness": 412.7,
+   "flow": 23.6,
+   "turnCount": 514,
+   "score": 67.3,
+   "polyline": "{oxyF_omwYeTtGmEvHgDzOoIbPgHtD{BvGkHxAmLtLmG~CsKdCyCnHO`EeA`DoAz@_CT_FtGoCr@kEpGcCuCwB{@cBM}IfAqQ_AqF{C}AiHsAOsHnAkHm@iEyCuFmAwJmKdFyQz@gMw@cDiDeEUuBNkG]iOvAwPEqBgAyCyHgH[iEv@iFImAk@}BmB_@e@wAvAqD[g@cClBeAJ_C[wAyAoE_@e@x@`@~Ai@x@gAi@gBkC_BHwAjBkBCg@nBsBdAgC`EmBp@m@bB_BOmBrBqKf@eGvBiF`DsJjQaAv@kAFuAq@qKeMgAQiGfAyHoEsCuHoC_D{G_CgFg@oHsCwAiDcAqIw@eAcA\\_CbGuA^mLsBeFuE}A|CqC|AwFiDkAOmNx@sByB}BoFkAy@sM_AmMiF}A@uGxDsBJiJcD}BkEgIwD_JtCiFj@_E]uDsDcLeEoC}BoMs@cEyB_Or@w@h@oDxGwDdB_@e@qDeR]aH{@EcA~B[oF]Uk@`Jm@VWk@CkJm@HQjDo@NwE{J{@q@Ml@fAnBrArNMz@e@DeBuFmBaBCy@|@cCQoAwEoDuAaDqBkBI~@`BvCh@~B|AdBGp@i@AmGsKuEkCa@yAA_Fs@aAgA?oE`DeDeAoC`@qD}BsBwCcFx@}GcAsAcAg@iBg@}K`AqDa@YaApAmBAcAo@c@qBVkB`E}Ga@kGrCoEYcA{A}@_DlAS{@~AeBxDMPs@_Ci@iCTiA~@g@QFs@xBmCF_CkFaSs@{@w@XmCpHyDNaAg@c@sEq@q@}CVqEoBmG[sF}A_FFwLhHqHtCe@]Ew@pAqDn@MpAf@j@a@aAqEaDkA{Dp@oD?aAt@ErDcEhCu@hDuB^eChD{DyAm@qA?mBx@{CQ{@{BYsDrA_DdDkFdJuHhGyCtHg@|Ju@l@cH{HcBr@_ArGkAj@_DcAqCgGiAk@kDp@uFH_NhFwAy@mAcFoAa@oD|JaAPgB_Cu@Ew@l@gAdDoCn@}EpIFlDoB~BmAt@wCqBkAXm@lD{AzBg@`FkDxJ?lAn@dB",
+   "pointCount": 274,
+   "start": [
+    41.090701,
+    140.32128
+   ],
+   "end": [
+    41.25767,
+    140.343868
+   ]
+  },
+  {
+   "id": "青森県:27",
+   "name": "薬研佐井線",
+   "ref": "284",
+   "highway": "secondary",
+   "lengthKm": 23.24,
+   "curviness": 341,
+   "flow": 23.4,
+   "turnCount": 339,
+   "score": 67.2,
+   "polyline": "is{{FoxwzYrFwIvK_J`Dq@bBgErBwAzEmIrQ_MtBkElDyA~AmK|CmDdByFdP}RzGiJ`@wAvBiBxDqNpAqApCiI~CaAdIcRzGmLReB~BoBdAgFpB}@bDkD`F_NvCaCtBqGbEiArCVrEg@~BaBfAqCvEuA~GiHdB?hEvA~JOhDpAvAElDwElEeVEmDlAaCSq@eBDJcAhAu@A_GeAwFNe@zALRY}@mEpAwK[kEjC}H@oCmCwBgBKyB|Hj@~E_BvAkCz@qA`BkCb@BiAnAi@Z}@gAcCYwDh@_H_CoHoBj@gBqBv@yAOkFm@UJbEiCo@sCnCcAyDaCQ_BfAs@QScJmD_Hk@oGgEo@EoEiCiB`AeJeAy@aDl@YiAnAyPnDhB`CHxAsA`B|@x@Ir@iBbAmKuAgA|@aBh@yDA}GXcC}CaIqA}Jd@aHIaGVmAvBgD~DsCtG{InAiD|EoEv@uBzE_D|EkBbAuAvBcFb@cOq@qLd@oHcBgEiBqB]_GeNqXcEmF{B}JhCePyDkAc@gAuG}r@cDqHlCkd@qGm_@iE}I`A}QM{GwCiGoAmKfEmJvHcFdGmMvDkFpAsDzA_Nx@mPdQql@CcDuGgN_CiBmH]sEcBW}D|C}KfCsD|Ft@nHeCz@wCBmB_AkFA{Bn@uCrAmBhTuBrFyFfE]nJkC~A{Al@wD",
+   "pointCount": 177,
+   "start": [
+    41.434294,
+    140.86552
+   ],
+   "end": [
+    41.38645,
+    141.046771
+   ]
+  },
+  {
+   "id": "青森県:28",
+   "name": "西目屋二ツ井線",
+   "ref": "317",
+   "highway": "secondary",
+   "lengthKm": 12.76,
+   "curviness": 367.9,
+   "flow": 21.5,
+   "turnCount": 218,
+   "score": 66.4,
+   "polyline": "_x{uFinlwYuPkAmE|JuBr@iDrDyKhHaDxFcGfDsBbImE|EuAtGB`AjAxBcAxUhAbHKjBs@RmB{@_FNyDu@iG?y@|BuCbAaCjNv@nKCxAu@|BtAjGuDt@UzDsCdEqB^kNeAaAr@g@hAEpBpBzDKl@oCzCuJbDQpAVhCoCh@sDjE}EvIoEfDaDfFSjCmCx@gB`C{Dv@eBnFq@CmDoCgB\\q@dBSlDr@tDcA`DiDfEyJzDuK|AoMnFyIiCsDTgErC_E]{ATcDdIkFzCkAlHeEfC_A|FRtGoEeAqCpAqDRqAhA}CAqAfEyFvCu@bDUlEy@fBcFdAiDjCyMlFwFrE_@`ACzBw@`AGtGqCfBaAvEsK|@_HUoEaBuJAiAf@oElFwD~BgGbK_FjCuF|AkHhGkDjK",
+   "pointCount": 106,
+   "start": [
+    40.451999,
+    140.316048
+   ],
+   "end": [
+    40.52923,
+    140.242592
+   ]
+  },
+  {
+   "id": "青森県:29",
+   "name": "三厩停車場竜飛崎線",
+   "ref": "281",
+   "highway": "secondary",
+   "lengthKm": 13.24,
+   "curviness": 344.8,
+   "flow": 22.9,
+   "turnCount": 199,
+   "score": 66.2,
+   "polyline": "qawzF{zswYv@kCbC{BpCu@`@gAMo@mAu@mEKa@c@cAiFLmAd@o@dCVd@w@C}@uCeEpAeFi@k@mEk@e@cDf@o@xEhAtC_@pD|AvAk@CmAaCuFmF{Be@eBv@iAdBCjBwApBPd@o@F_BsAoBnB_D{AsCv@qSlEwI|HwEaBoJhBsCWcDr@gDc@_DlD_HrA_HpCiCvCzAbAM`@m@[wInDyImCiD?_AdGwApAaAHyA_AoBJuAvFaC|BoD|CoB~CcNx@oAfOuAxD~AnIyJxAe@hMk@dReLhWg`@dHiChB}FpAqNpAoCzI{FtCoInAmBvLoJrT}Vb@uB}@}F@mBtA{@bCMlBf@X]fCiEQmGlCqAvBcG~AuB~KsF~M\\hGgAxKMjBo@rJoMxGkQpGuGrDmF`HcPlPcSl@iBEeCgCuE{@U",
+   "pointCount": 109,
+   "start": [
+    41.247135,
+    140.353899
+   ],
+   "end": [
+    41.18564,
+    140.443962
+   ]
+  },
+  {
+   "id": "青森県:30",
+   "name": "国道102号",
+   "ref": "102;454",
+   "highway": "trunk",
+   "lengthKm": 29.99,
+   "curviness": 394.5,
+   "flow": 23.3,
+   "turnCount": 508,
+   "score": 65.9,
+   "polyline": "e`kvFgfdzYpEuGfDwBhD}DpBgEtA_GdE_BlJ}@`@i@f@_DSiHjEqMd@_DFeFdAqCpCiBx@aBCeBaBqH\\{AjBoArGWbEx@jFfCtHoFpCoPGkI|GaQIuKrDqJpHmBd@m@jAgKxB}FOcHv@}ICmF_DkIYaGnAeA\\eBpGwJv@kEyAqHs@fAVtD]Ze@WcAkLvB}DOsDn@mBk@cDb@}EzIgL`Gs@j@aG]_F`@GlAdAnAzCf@eCnCmCd@nGxDh@bC]|Lc^|E_K`DkDaAyDqDiGsBgB}EyBuAuBe@gCNiI}@yByCaCkEVwCgE[uDxAaFcAsCMqGzB_D@oC_Bm@}DzAo@KmBoCeCiI}CoBg@_Bh@mG{B}ESwEhHyIdB_FGkBqCeMHgH_BwRF}CfAiFZoEaCaIgCkDuCaYgBgGE_Bj@sACmAmA{CkDiEd@YrB~@Nm@sBuB}AwDuB|@m@lBc@K_@gCyBlBoABkA]cBiC{At@mDo@NiA`DOJa@Yi@oTv@iB_BJuAh@m@~Cp@fLi@~FwCxCm@jIkIv@cBlAq@h@yAmBaHq@YgTrSg@u@MwDoAwFHiK\\aDdAm@D{B}@iCYcCNkB}@uDOgEgAaEO_Ox@aKYqDr@yHpCyBfAmDpC{BsAgGaEh@IgD_BoKe@iBsAkAQy@LyYn@sLtCaA|EgG~AyF`@qDjJaI{CoE]yANoK|@_D?sClByHt@eHbEkJrAqI~CsGvDmFtAY`BtB|E{AbEiCnBsDlA]Ht@aBrA{AvEgBdCJ`Aj@W|C{GdAGfA|Ba@?_AwA[b@vBpEHxD~@`DfHhIrE}GgAwGHsAb@e@pHvHdCnFl@LlA_Cj@MbDvKjNtJN`EjBRpDiCxAqCb@{CJsKx@}D|Bg@xBaBvDoGtBo@fM}NxCcChHiC~Hi@vAq@|DwHvCwMbFaD|GkQhBkBmEqKmDoBcBcC{N{FaI{IgDGaBcAqMgTiG{FuBcA}O_A}OcIyKoA",
+   "pointCount": 260,
+   "start": [
+    40.530107,
+    140.765318
+   ],
+   "end": [
+    40.497761,
+    140.955385
+   ]
+  },
+  {
+   "id": "青森県:31",
+   "name": "国道103号",
+   "ref": "103",
+   "highway": "trunk",
+   "lengthKm": 30,
+   "curviness": 388.2,
+   "flow": 23.7,
+   "turnCount": 491,
+   "score": 65.9,
+   "polyline": "e~owF{tlzY|Cg@`BkCPeAq@gGq@{AT_AnEyCbD{HzD{A|@yAYuGzB{@_@yCfB_JYaCbBsG~@}@DmCn@qAp@uFtAw@vADtJlGfEoAzDuCbBGtH|EtBtE|BVjBs@pAkCTyF`BaKlDqEZwIhH}FjJwW~MoVVsAIwFd@{AfAEjElCfSpEPjDf@v@|F^pEvD`Bf@hK|@bGhG~Cq@lDf@tFwExCTp@vAGbQxAbIjBhBfEvB|GG\\x@YbFtAzAhCFfDiAp@LLtLd@bAr@R`N`@bFlBlDyB|M{BvFeEfI]tAd@lEm@bA_AdDwMr@i@hA?zDzBdT}AbCqAtDaJvC_SlFs@^sAP_Gh@wArLmEbCyEb@aCJsKyAoHFuAvA}BfDwApBcHj@sEgA}F_BwBUmBx@_@rApBdABo@aHxD{IxD{A`BmBdD{@MkE~AcDiC{GDyAzDy@pCaFvABtAw@`CmDxFDlIkIpCwAdFwFfAwCp@gFzC}GzDuNTuE_B}GAeBpEqHjEePByDg@eHsAaGNiBpBaDh@uE|EiKt@sEW{F~AbBlD}Il@uMzC_E~@cEHgEx@cEbAkNi@qNoCmKuA_Oc@_BoC{CIu@j@i@tA~Ab@K{@wBa@iFf@}@tBFHm@sAyA~@uBoBiEO}FXqAxBaDvB_Jf@oRv@qCIu@iA`@g@SnDkJG]gBGp@sGCeFqAyFiAoBu@aLSs\\d@wLx@eBdLcN`GaUVsEdDgNh@u@tE}@vJeKjCyApCGj@b@s@fFdFuAtC{BzBmGtA{@}@gAXeAxDtAdAtDVdDMxB{@fBTb@dDsCjE]|BaAlGkHhCcBvDZxC_Ana@x@dAh@`AbBdBlG^TVQb@aGrDgHrAuLTQ\\f@m@pD@rAf@d@d@}DdDuHbF{K`GcJ~CHbDxElKyCxCiG`DyO|Ao@xEjD~@s@jBwIAoG]q@yA?sAcAaE`Bw@_@vCyEmAeGz@s@rDFR}@q@mAHg@bNkIdIXJgCgFk@TcB",
+   "pointCount": 264,
+   "start": [
+    40.719225,
+    140.808616
+   ],
+   "end": [
+    40.589579,
+    140.968718
+   ]
+  },
+  {
+   "id": "青森県:32",
+   "name": "相馬常盤野線",
+   "ref": "204",
+   "highway": "secondary",
+   "lengthKm": 7.55,
+   "curviness": 367.9,
+   "flow": 21.9,
+   "turnCount": 127,
+   "score": 65.9,
+   "polyline": "s~svFudiwYoMnZa@xJgAbAsBPCjBu@|ByFhLe@HUk@jB_E_@_A_DlCiABsB}@sGzBgD`CJtA`Cd@x@fAN`DjBzEgGp^yFsCkFEkJkGmJsD?}@pDgLLwBWaAuPoKqB_CWyA\\iFiCsDqB}GeFqHqBuAuK{BgDuDaAoDL_GrD_HpAaF~CsA?aCi@aB_AY{@VqEpHeMjCcAx@i@~Fm@p@gAc@qAiCcAPeD`FaB\\cHN}As@mB}BoBe@qS~C_CK",
+   "pointCount": 66,
+   "start": [
+    40.575938,
+    140.299149
+   ],
+   "end": [
+    40.611443,
+    140.299411
+   ]
+  },
+  {
+   "id": "青森県:33",
+   "name": "屏風山内真部線",
+   "ref": "2",
+   "highway": "primary",
+   "lengthKm": 19.95,
+   "curviness": 356.9,
+   "flow": 22.7,
+   "turnCount": 314,
+   "score": 65.9,
+   "polyline": "i`sxF_mkxYs@gDgH{Le@{C|A{NhEkFpC{NHwQsA{OoGaNkIwDyAqBQcDjDoO?cDuGgMaEoDTuGkCqJYyMtA_He@cMyAkFpCiPs@gCoAkBuH{Db@{AbEtAhAi@h@wDG{DpB{F@mDuAgIjBgFJ}EhD{CRy@o@gFaCsIHkDwBmDToFkAiAqAkE@iHy@sGFsC_C_E@w@hAiClCsSK_TwA{FSaElAcDfCgBzB_F`BiAzCGtDeEhBoDpCcO?gRrAeI`A_BpEeA|A_B@uAsAqEcB_Cj@yB|@s@RiCdBgAw@wK`@qE`@KT_AeA}@y@sBHmC{B_Cn@aD{EuEi@qBl@iCUs@eH}A_CEw@s@UuFsA}DFoFsAcCKuGiCkCbAk@xCpAnASp@qAtCmBfByEI]qBEa@_AlFmBNuE}@aFD{Bw@yHgAg@Sy@tBi@^kDlEsJM}Bf@oCaA}AK}BpCqDpDiIpCqIHqBsA_F@sCkAqCCiDYc@g_@eNm@k@s@}EoCeB_CgOC_D_D}EgC{Bc@sCPcFUyB_DqD{@eKxCyHHqAkDsCy@{CKmBr@sFqBsM\\kACeG|@uNvAyIj@}w@wAsNyDwPp@iC|PgWtKiHnAkAjAsCPmGmEm`A",
+   "pointCount": 164,
+   "start": [
+    40.898773,
+    140.47456
+   ],
+   "end": [
+    40.904169,
+    140.664728
+   ]
+  },
+  {
+   "id": "青森県:34",
+   "name": "十和田三戸線",
+   "ref": "45",
+   "highway": "primary",
+   "lengthKm": 17.43,
+   "curviness": 348.5,
+   "flow": 23.2,
+   "turnCount": 262,
+   "score": 65.6,
+   "polyline": "yx~uFk~s|YjDcLe@mCoCsFyBeQX}Hj@kAnCoClHGbNgMvHsB|FoKjC_CfEF~DlEt@H`DyAjAsFtDiAbCjAhAdFr@j@f@Yz@gGp@oA`I{BzCaCnDa@fAgBh@n@cBfDPz@xE}BtAaCtEwClHuMnLeWxDwEb@gDo@qIzEx@jBeBrBBjDhEvF~@xDlCdI}AlG}DpCnBzB}BlMcEbB_IjDgC~@{Br@F~DjD~DTnC|ExFyG~CKzGuEjDaHl@RlC~G`JlGhHlAtGeCfCmBlA}GvBwCqBmFPoF|CyCn@{BPkEjCmD[w@wBS[sBNaAnFwF`Gq@~O{I@w@o@q@yAa@eCNC_AhLyCfDkBjLRpF}@dG}FxBkAdAwB`D[jB}@jB_E`BhAfAkCBuAkBuD}BmPr@uZzE[LiElAgEhDkC`F{AnD{CzBgHn@}Ir@_C~Sy^fGcPtBeB~G`@r@s@^gBtHeGbHs@~A_Ch@yBQcGh@aG_@uAkByBc@wBFgDfAiC@oBw@Wk^_m@u@]cC^nEnObGnJL`Aa@f@",
+   "pointCount": 139,
+   "start": [
+    40.46749,
+    141.173662
+   ],
+   "end": [
+    40.387776,
+    141.261542
+   ]
+  },
+  {
+   "id": "青森県:35",
+   "name": "石無坂鹿田線",
+   "ref": "220",
+   "highway": "secondary",
+   "lengthKm": 3.63,
+   "curviness": 354,
+   "flow": 21.8,
+   "turnCount": 59,
+   "score": 63.9,
+   "polyline": "aw~uFkbk|YrBnGfF`IFjBMxPaCxFkCc@a@lDsAzCg@`QdEzJrAhOEpAmBdGH|Ex@|BzAd@b@r@ObGmAdBl@pI_AhCCxB^xAExA~@fB^hD`InN~DtE`AlDQnCcDdEwB`HQvBT`B",
+   "pointCount": 35,
+   "start": [
+    40.467212,
+    141.128218
+   ],
+   "end": [
+    40.46439,
+    141.092094
+   ]
+  },
+  {
+   "id": "青森県:36",
+   "name": "弘前岳鰺ヶ沢線",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 19.84,
+   "curviness": 334.5,
+   "flow": 21.7,
+   "turnCount": 306,
+   "score": 63.5,
+   "polyline": "kyywF{myvYvD}BbBsB~DaSvBsEpDyAjMa@nCu@lDoDrJaS|KgGhFm@tQKdC|@zEtDfDt@xV{AjBRbHcEjEa@fCqBfD}EdBd@zDE~DyAxBhB|GjCzCvClEhAfF{@fMtC|CYxB{BvAExArAhFxKdJhBdEwBnCiFlBuA|Pb@hEfArHeAzAl@xBlERzBv@rAzF^dGqFrAuHzCsE`DmCvCaAzE_DzCcJh@wD|@ErCdDvAP^Or@uD`BWrE`DpFx@lBxBjB|@p@bCz@|@`Bb@nExDxDjA~CdG`OzArKhI~Fz@lDi@hGfH`HMfJ}LdAi@fCAdGnEvEtApC_@vBkBpBFfB`Bz@dMbCrH|D|A~GnAnCOvFqCbBFxCtAnCxBlBzE?zIb@|CdBrAbC`@hDdE`ANlBuCpDwUbEAnXnHtNaA|ByB`@cEi@gBw@g@gD_@yA|C{@Yh@uDlCwG[gKYwAa@~Fa@n@{CQ^s@hBIZkFo@yBoBqCkAw@a@f@zCjGcHjD{B{AsEtAwAOa@q@AkAr@kCVJGbDxBiBPgInAsBrC{JMwBwBaDOaCzEmHtG_OjCcCnHsUjA}@~BVxDuErDj@l@tCcAhD}CjCMrAbDLbAe@RX_@vAqCpCN~Ar@BbDqExH_@|FfB|ExD",
+   "pointCount": 169,
+   "start": [
+    40.769658,
+    140.218697
+   ],
+   "end": [
+    40.656973,
+    140.238404
+   ]
+  },
+  {
+   "id": "青森県:37",
+   "name": "軽米名川線",
+   "ref": "33",
+   "highway": "primary",
+   "lengthKm": 3.54,
+   "curviness": 327.7,
+   "flow": 24.7,
+   "turnCount": 47,
+   "score": 63.3,
+   "polyline": "sruuFchu}YeD}@{Ef@{@yCcA]aEj@sAbAwBhEaEzCmB`DsKdAiCrAuG`Am@r@}FEqFzBkA@kH}D{BoDaOhKg\\t@oCp@{BcS{EoBoAyCeBjDsAlA",
+   "pointCount": 27,
+   "start": [
+    40.420418,
+    141.344182
+   ],
+   "end": [
+    40.446826,
+    141.342729
+   ]
+  },
+  {
+   "id": "青森県:38",
+   "name": "川内佐井線",
+   "ref": "46",
+   "highway": "primary",
+   "lengthKm": 29.82,
+   "curviness": 315.1,
+   "flow": 21.9,
+   "turnCount": 430,
+   "score": 63.1,
+   "polyline": "eh{{F{gwzYxAYRnB|IcBjCm@rD{DbHaAbRdAlDs@|Bf@~LaHzAL~[`GrXvVrNc@xCj@xShLjDnFvEyBjABr@r@zB`GjGbCrCq@`CaCfRmEdBkBrJkCdFT`KwBhXtC`NoBvHAhFiC~GqAlBsAhB_DbDt@vEcDlIp@jHoK|EgFtA}CvJeIvBqF|@uI{AqADcApCZ\\YlAkFDiBx@_C}@kCNuDcEiF{@aHn@EpAnBnE`DxApDx@^l@MnAwCfFyCd@mAMmDuCmDb@gCgAkDuDiCeA{BcHuCoFwDo@oAJgAjBKhAu@xHh@bAmAE_BeCwGgAoIiAiE\\wKf@YjC|CbD~A|BHx@u@`@gC_CsJpCwCg@wFtCIdA}G~BuApAkCd@kIfBS`BaCd@`@|@nGlCg@dANhAzB|D`AlClEtB?tHiEfAlABdHx@zAdHBf@^n@~B`@DnCqBIoAyBJ_BmBaB@sAwKqByG}@UmDhAcAcALcBxJoFhCwGxAsBhKqHBmErEeFTwIdDkI~B_DhFqEvFc@nAuDjB}An@{DrEkBtByF@{FXeAhAeBvCc@~@eEvByClAiEMy@qCUBkC{AqAl@iCQ]mBGo@s@_APeClCAnCeBhC_G]qB`AuExEm@a@Gy@v@}CnIaF`EgFzCmGhCwA~FaGlC]bNfBxJaCx@mAb@uErH{JfIaVt@mIbBeFFqJbAoL_@wI`DyOhBaPtBkHtGsOnC}Kb@sCKcIdKiVr]mJxHnEbZrDhAjApCdIfDbApDeAhIyIbDXzF}@dD`AtGpExAhCbC|HtDn@nFlGzDbCbBRbE{BtH}I`[qUxDwY~EcR`BoRlCmL|AyCpCcA`EA|Bz@bHz@nBnC~AHzVwMjCwBnFyB",
+   "pointCount": 229,
+   "start": [
+    41.432509,
+    140.86286
+   ],
+   "end": [
+    41.281417,
+    140.976262
+   ]
+  },
+  {
+   "id": "青森県:39",
+   "name": "国道338号",
+   "ref": "338",
+   "highway": "trunk",
+   "lengthKm": 26.78,
+   "curviness": 369,
+   "flow": 21.7,
+   "turnCount": 456,
+   "score": 62.7,
+   "polyline": "ckhzFou_{Y|DrDlFfBdFnFzA~LQzAxEhWfGtNpD~C~@bDm@|YiChLgAtTmCdLsA|Yn@~L~BtDf@rBQlKfBjIzBjFd@jHbLfWrB|Hr@nLOxF^tL|@nGpFtGl@pEjElOfAzBfInKjEp@tD`Dr@jCp@zI~AjAjC`Ev@~E`BXr@fE|B`CfAdIxAfE~@lGxEzOnCtC|CpApAxFrEnFbAnDFhIbAjIvIrG{CjOyI`JmA~BiFpCqDlEyCd@}D~BuBnC}HjGuEa@mLrAyBpB}A|GqBxCc@|CaDjCmPpAcGjF_IfDsDlG{IF_D|@sArAeG~KsLlMoNr@yM}EyCNcH~HsGs@_HlBsFjIcNlMyAXaNeD}BeEkD{BgBl@sCxDeBhA{CCkKzAcBgBuAMuBtCeQpEiDaAsAjAiEHqAkCKiEcCtAiG_EU`BfAjHOt@{BzAgENuD|A}@i@yCeG[uCFwJuAsBq@qFy@wAC{AqAuEoAw@gAz@eBDv@rFHvE]j@gDb@mCiDFoBaAwCz@{Es@oBmCUs@eCg@_@kDzC{@WBoAnGsREuAi@WoCd@[o@SyE_Da@iDaEkArEaEi@kDtAO`BjAjD_@d@c@OiAcHvF{Gd@iCc@aBkCIsAeAWyLXeCWm@cBdAiBrC{DdBoBWmBqCi@P^pMfCzEW~F_@hAoBnAoAjG}BnCmBt@gHPuHmD{BoDkFjAqAQsDaG{BqGSsJqEsEgAoDQgFkAiFb@kJg@[wBZoAk@UcAV{Gc@sCg@y@{CEqAmAwBn@}I_F~@mFlEiFpD}B^{AgB}Dw@wHuBa@YuDgCEiAeHaAK_@h@uBjJcDpGy@Qk@gDo@i@oAb@cAjBc@HqDwDeAOwEnAkDyB",
+   "pointCount": 227,
+   "start": [
+    41.171856,
+    140.905998
+   ],
+   "end": [
+    41.243,
+    140.827212
+   ]
+  },
+  {
+   "id": "青森県:40",
+   "name": "弘前平賀線",
+   "ref": "109",
+   "highway": "secondary",
+   "lengthKm": 5.08,
+   "curviness": 228.5,
+   "flow": 40.1,
+   "turnCount": 29,
+   "score": 62,
+   "polyline": "ihwvF}rlxYuGcQyGcy@i@iNP[uC{n@TRlBbo@TVj@lNxFjw@hHrQdExOXfNc@lMJqEj@cDu@iU",
+   "pointCount": 18,
+   "start": [
+    40.592854,
+    140.480629
+   ],
+   "end": [
+    40.591842,
+    140.478691
+   ]
+  },
+  {
+   "id": "青森県:41",
+   "name": "野々上斗内線",
+   "ref": "182",
+   "highway": "secondary",
+   "lengthKm": 6.81,
+   "curviness": 302.5,
+   "flow": 21.7,
+   "turnCount": 95,
+   "score": 61.4,
+   "polyline": "kcauFqez|Y}BrI`AjA|EPNjBu@xBaEtDmLfDsAdBs@`CmC~BS|DmFqAoLp@}BoBwC_@uFkDsBuFiG_H}CcBk@_H}A}EgCkCkKmEoK}UsA}G{E@aCmBwCNiBkD}LeHwDqFuDyBgGvAsKc@_AT}AxCgCpAwAlE_GbHgBq@}DVeH]_G`Ek@?cBk@}CEyCqBgEh@sDkFyAcAkEzCmEToHhGoE`C",
+   "pointCount": 55,
+   "start": [
+    40.315583,
+    141.205533
+   ],
+   "end": [
+    40.361095,
+    141.211142
+   ]
+  },
+  {
+   "id": "青森県:42",
+   "name": "小国本町線",
+   "ref": "282",
+   "highway": "secondary",
+   "lengthKm": 14.28,
+   "curviness": 290,
+   "flow": 21.2,
+   "turnCount": 195,
+   "score": 61.3,
+   "polyline": "_bmvFsptyYb@fD}BtCiBXgFa@x@hDAbCgBxGcGrA_EjDcBdD~@rNGxJxAfT~@vE~DxIrAzAdCj@H~@iA~AA`AhEhRnBr@~B`FdF`@dApDdEnC`DlG~EjD|B~HrA|@bDd@~@jBjAp@bDdOtAdDlClDBzAcOvV{D~@{VjBkEhB_AbAKnDdCtEzAhHiAbCc@dJ]v@_AK}AkDs@K}HhE{Bd@UyAt@aDMcAqACcAtA}F`NcA`Hr@x@|Fy@j@rA}AtBoCtAyA[kB{Co@BOl@bEvTg@rJmBfDWlKm@jBh@nOfCbDn@jB@~As@nDgEvFiBp@}DvEi@bA{@tF{CbDsBxE_HdIm@zDmA|CuOf^uMpSkEpJqFlHaC|FaGtEgIzCeKxAqCbDgKlCeCdCwFdCyF~Ek\\ve@oAjC{AhIgIxW_@~GsAhG",
+   "pointCount": 109,
+   "start": [
+    40.540643,
+    140.685059
+   ],
+   "end": [
+    40.578483,
+    140.576616
+   ]
+  },
+  {
+   "id": "青森県:43",
+   "name": "十和田三戸線",
+   "ref": "45",
+   "highway": "primary",
+   "lengthKm": 27.69,
+   "curviness": 269.5,
+   "flow": 23.2,
+   "turnCount": 322,
+   "score": 61.2,
+   "polyline": "k|yvFqvz|Y~UsPdIzUnG@RvDzZ|@hUM~LwDhE{CzF}BxPeAhN|KjBc@bBNdMxCd@pAgBtWd@nHoAvWClK|FhDjHnHhDtA|Ev@`Sw@vW`DzLjIxG`D|ElKrBjSvDrC`ExFdKhFfFlRlBrCnE`EpFtAxCrBVv@E`F|IfV|BlD|LhJ~HhE`JxCnNlJnCm@hGkF~Fg@jHiDnOwDrCgDr@_IrFlE|ElK~DdAlDrCdEu@fClA`ApEfE`]hDrJdCjDxG~XzGdQt@`EjDhH|EMlJ`BjMs@`HvB|J`@~CcAnCoEdKqI~Pc@|BT`CdCnAxM`EnKxFjCvCtItAXxDoAfHtHNxBqAtE`@~Ap@ZxAY`EyEfGoBfSsK|Ca@D~L~CxSPbMv@fHA|Kv@`AdEDr@`Cx@jH`JlJRnAUlOt@dA|BRGvQeCvFnBDtKqClBaBl@b@\\bGv@bApA{@l@{AhAGR^dFw@lNuExC|@BvE~GeEf@pA}@tBlBRPpA]v@gBBIn@jE~E`BwA|@iEjBaC~M|@rAyH|CaGRqD`A}@i@kBzFkGOiEhAaKEmCl@iCM}Bw@yAd@{Ay@aGQ_GpAvHdBvEt@dAjEtBzDpFtD|IVfDlAuArA{GzAaBpB|@vJgD`EH|KqL~A{@nMsBtHt@`Ct@`B|ClSnEvAO|BsAtDoKpBoAlBXxErGnHnGzBhEdCxH",
+   "pointCount": 181,
+   "start": [
+    40.606301,
+    141.208253
+   ],
+   "end": [
+    40.442551,
+    141.125341
+   ]
+  },
+  {
+   "id": "青森県:44",
+   "name": "弘前岳鰺ケ沢線",
+   "ref": "3;260",
+   "highway": "primary",
+   "lengthKm": 4.06,
+   "curviness": 244.6,
+   "flow": 32.1,
+   "turnCount": 31,
+   "score": 61.2,
+   "polyline": "c|yvFoahxYvDiLr@iGj@m@xCg@bAiBdBiQq@QOo@`CkZsASpAaJvGsHrRqPaGyLc`@{N|B_PX}FWyC{@gCeXif@",
+   "pointCount": 21,
+   "start": [
+    40.606265,
+    140.457355
+   ],
+   "end": [
+    40.608671,
+    140.492119
+   ]
+  },
+  {
+   "id": "青森県:45",
+   "name": "栃棚手倉橋線",
+   "ref": "218",
+   "highway": "secondary",
+   "lengthKm": 11.26,
+   "curviness": 313.6,
+   "flow": 19.5,
+   "turnCount": 181,
+   "score": 61,
+   "polyline": "cjyuFaly|Yz@pFtDdHr@nD`HlEvJ`Lp@bD`Cx@bElDtLrOlC|JE|D`@fDlHjKjBbI`DhBfFrF|At@rHjYbErCtDhHUfIzA~CdArFyDxIOdMv@jFdCjGD`Aw@nB?|@lBnH`BjCMbCl@vBB|Br@zAeAdE}CbAOdFaCpCkAbWdAlCCtBrBvPpAhElFnG^vIfCjAfB|DhDlAp@`APhJ|DxMzApLnBtGZbF~@fEq@|UaA`Ga@bHqBdGe@dGyFQiIpDaBJsMuI_FEaDuFmG_ByLx@uF|FmAYyBcEcEZqEoCmAV{AtEiAp@iIgBoL`DyD_BeDWsDiBmGhB",
+   "pointCount": 85,
+   "start": [
+    40.439539,
+    141.201452
+   ],
+   "end": [
+    40.440825,
+    141.123727
+   ]
+  },
+  {
+   "id": "青森県:46",
+   "name": "国道104号",
+   "ref": "104",
+   "highway": "trunk",
+   "lengthKm": 10.88,
+   "curviness": 343,
+   "flow": 23,
+   "turnCount": 162,
+   "score": 60.9,
+   "polyline": "qx|tFggx{YWzJaArHXzJOzGqBbJoGxa@y@nQiFtNU|F}AlEcLrJgE~LsFlDkEhFiGzCyEp@{EzCaEaAgGpAgAfGyBnAgAtC_@vI}IbFyK~A@hAnBgAn@lBjBmAj@HDzCtAlAFvBy@fCmCdD]fD}LdKsDK`A~By@pGe@Pa@k@d@_FyAeEj@m@bEOvByCDmAiCrBoDZcBlA]zGmE`EeA|Fi@Kd@oH~C{EZcHs@@o@jF{HhHGbCeBxIvB|PGjCiExWcErM]pMeDtSZzLqAnNdBpJRvLmDlMe@nG?zCrBhNc@zT_@lB",
+   "pointCount": 80,
+   "start": [
+    40.293369,
+    141.031722
+   ],
+   "end": [
+    40.323341,
+    140.950553
+   ]
+  },
+  {
+   "id": "青森県:47",
+   "name": "軽米名川線",
+   "ref": "33",
+   "highway": "primary",
+   "lengthKm": 11.58,
+   "curviness": 313.1,
+   "flow": 20.6,
+   "turnCount": 176,
+   "score": 60.4,
+   "polyline": "wqhuFosa~YQ`GiCxBsAjDYrImAZ_AoCc@UqBd@wAhC{KlD_CdB_Bc@s@h@nAbYYlEmG`UwBhEg@zCyAz@k@fBcB~@gAfEcE~BcAvDwAnBm@|FDzBx@nCvD~EhA~DNpElArEm@bEv@dEg@lDXzEOnE}AzIt@dIAhDuEdOmInGkJbCeAO{BmBmBmFi@a@sHlFiHrCi@c@i@gDqAYyBrAsEbA{IjLqHvDmGNqBhAwIfBgFbDwFS{CpDuKiBcGnAsIhHaBfEiIbAiArEMbEc@~@qFh@mDu@qEBkFfAiFdFiEj@iIrKkD|@cAtAqJdAgE|BwI^sAxAuBxGgJlF}Ft@qCGoHlCuEDcBbB{D~N}CmBmJuBcFB",
+   "pointCount": 95,
+   "start": [
+    40.353715,
+    141.407438
+   ],
+   "end": [
+    40.420231,
+    141.344175
+   ]
+  },
+  {
+   "id": "青森県:48",
+   "name": "島守八戸線",
+   "ref": "138",
+   "highway": "secondary",
+   "lengthKm": 10.99,
+   "curviness": 277.9,
+   "flow": 21.5,
+   "turnCount": 142,
+   "score": 60.4,
+   "polyline": "qlbvFe`t~Y`E^rB|@hE|GlBxAdAhE~EzJhGjC~DhDzU~L`EfA|CUvDsB~BSdKhApMHxFxAzExC`D`@pBStLz@nCi@hJmGjFePtCd@jCUdCyDpAu@dAuHtD_L|@cGf@YxO~GvANfKdGrFBzAsCvCcBzC~BjDiBhI}AhFlB`BwCpBuAz@fBs@vEpC`Eb@dFpA~BfBnLrClD`BlEvDpEdCz@~HkFlIqNz@uC~GcHrA_Er@sFbCmB~CoFdBw@Rj@w@`OkAdDe@jE~@bJIzDfBhDtA\\JjDnCnAbDdG~@|DdHnLtGnG`AVlD`@lAy@|LcZ?yJtEXfCsC",
+   "pointCount": 84,
+   "start": [
+    40.486012,
+    141.501631
+   ],
+   "end": [
+    40.417718,
+    141.492638
+   ]
+  },
+  {
+   "id": "青森県:49",
+   "name": "九艘泊脇野沢線",
+   "ref": "175",
+   "highway": "secondary",
+   "lengthKm": 6.52,
+   "curviness": 312.3,
+   "flow": 19.8,
+   "turnCount": 103,
+   "score": 60.3,
+   "polyline": "w|bzF{kozYpE`Dr@~BlDi@~Ad@zEtEpDjGpAn@|A~BbD|ArC~ChH~BjC|BpD`IrB~OlCbIvF|@|ApArEfARrA_AdF?`Dp@nGhA|ApBKX^g@|B?nVo@lEeEbJwHzGiEhFyBrGu@xECzC~@zDhGjJpAhGUrC\\|GKdHuA`CqCtBeBtFmHzLkFdEkFiCgD_GiCK{@rBNbBo@rCA`Cv@|B{@bG_GvEsFWaBb@m@fA",
+   "pointCount": 59,
+   "start": [
+    41.143956,
+    140.822542
+   ],
+   "end": [
+    41.142272,
+    140.773619
+   ]
+  },
+  {
+   "id": "青森県:50",
+   "name": "南部田子線",
+   "ref": "143",
+   "highway": "secondary",
+   "lengthKm": 4.43,
+   "curviness": 302,
+   "flow": 20.9,
+   "turnCount": 64,
+   "score": 60.1,
+   "polyline": "yesuF_wg}Yd@}@t@?z@lDpAv@e@T[tA`@vAq@jFgAlCaE_@yCtBiArEKlGVpBtCfGvAlHLtCy@hYvC~HtAdIT|Nk@lHnCfPNpEfEbHbBnEJrG|@nCv@fH_@~J^nJ~BpF|FfHv@@xB}A`CfCdJx@`G`C",
+   "pointCount": 39,
+   "start": [
+    40.408129,
+    141.27488
+   ],
+   "end": [
+    40.398251,
+    141.235182
+   ]
+  },
+  {
+   "id": "青森県:51",
+   "name": "倉石五戸線",
+   "ref": "142",
+   "highway": "secondary",
+   "lengthKm": 7.42,
+   "curviness": 305.8,
+   "flow": 19.4,
+   "turnCount": 117,
+   "score": 59.7,
+   "polyline": "mrbvFwa_}YxBsAxCrAz@EtF}CL_C`CiIfAwIxBcF`@yC|AaElCuFbHuFr@eC@qG\\oB|Ew@j@{@Q}@cBcBNuBxB}BxD}AvA{AE{D{@yDh@gEa@iBu@q@j@cD}@uDbEwEfAgDL_EjEiB~CcCvB{Dj@mCGmEcGyPiIod@PoEnCoNj@{I_@aHJyDbCcKsAq]oH{UNyEY_Dd@aE?kFa@{CNuNkEyOiAwBq@cJk@_CrE{StAmA",
+   "pointCount": 61,
+   "start": [
+    40.486947,
+    141.230525
+   ],
+   "end": [
+    40.476581,
+    141.302713
+   ]
+  },
+  {
+   "id": "青森県:52",
+   "name": "酸ヶ湯黒石線",
+   "ref": "226",
+   "highway": "secondary",
+   "lengthKm": 6.19,
+   "curviness": 287.1,
+   "flow": 20.9,
+   "turnCount": 85,
+   "score": 59.6,
+   "polyline": "maewFgrgyYn@iB?mAuBiJGeJeDoIwCkDaA_CiCmA}BmEu@aDJaNrCgLPsEvB{ErBcKq@cInA{FW}DdEiK~DkErBuEfCcLFcEz@iCnNoN~DqJnEiFfAg@k@yBv@kC@_CpAwBd@gIdCoFbAsOaAoZT{BmA{@uBqFU}GaFaTuBiPP}RyBcFBgF",
+   "pointCount": 46,
+   "start": [
+    40.663427,
+    140.618758
+   ],
+   "end": [
+    40.65869,
+    140.682323
+   ]
+  },
+  {
+   "id": "青森県:53",
+   "name": "浅水南部線",
+   "ref": "233",
+   "highway": "secondary",
+   "lengthKm": 6.96,
+   "curviness": 286.9,
+   "flow": 20.6,
+   "turnCount": 97,
+   "score": 59.5,
+   "polyline": "qt}uFsrg}YzHjMlBpAvBRfDtCzGtBfAdAj@|CCxDtCpCfBhDvCpBjBP`CaAnDsGvPqFdGcFpANrFjEjD@bDeDxN}V|EoFtD_CnKPtDk@zPhEtCUtGnAhAmBrBHdAe@H}@_DeDvDOh@eDvAbHdA|AdGTjHnDtBHrDzB|NgGrFnBhD[zCp@bHcAfIyDjHy@jFsCxGa@`CTvJ_C",
+   "pointCount": 53,
+   "start": [
+    40.461689,
+    141.27418
+   ],
+   "end": [
+    40.410235,
+    141.2768
+   ]
+  },
+  {
+   "id": "青森県:54",
+   "name": "長坂大湊線",
+   "ref": "174",
+   "highway": "secondary",
+   "lengthKm": 5.16,
+   "curviness": 305.3,
+   "flow": 19.7,
+   "turnCount": 80,
+   "score": 59.4,
+   "polyline": "gld{Fexq|Yt@F^|@bArP[vS_AvJ]pKkBxIFr@p@`@xEkAjAkExBgCvDx@xBQhC_CxD}KxCqBfBRtBwBlB_GDiTfEmJAmF|AiHxCaB|@oBlFuExEkJpCKtAsAfFoJ`IHjAd@\\fBe@bLd@dAdGsB~CwDbDd@~EoBdQdA",
+   "pointCount": 42,
+   "start": [
+    41.315401,
+    141.162426
+   ],
+   "end": [
+    41.291557,
+    141.169317
+   ]
+  },
+  {
+   "id": "青森県:55",
+   "name": "弘前鰺ケ沢線",
+   "ref": "31",
+   "highway": "primary",
+   "lengthKm": 3.75,
+   "curviness": 216.4,
+   "flow": 40.6,
+   "turnCount": 20,
+   "score": 59.2,
+   "polyline": "msyvF}ojxY|@_KhAaE|E_GdNqYB`@}MvXiDpDkA`Cu@~Cy@hJcMcBo@tA_Y{E}Gtx@gKw@oJxC",
+   "pointCount": 17,
+   "start": [
+    40.60487,
+    140.469911
+   ],
+   "end": [
+    40.616697,
+    140.461341
+   ]
+  },
+  {
+   "id": "青森県:56",
+   "name": "むつ東通線",
+   "ref": "7",
+   "highway": "primary",
+   "lengthKm": 9.81,
+   "curviness": 296.2,
+   "flow": 19.9,
+   "turnCount": 146,
+   "score": 58.5,
+   "polyline": "kmkzFkfi}YcGoRm@}G|@mLMeHfAgDNcDfB}E@mB_BoI`AwE?yAkCyKn@mE{DuEq@qL}BoEi@oDp@yEq@mEC_EfCuFl@yG_@iNX}CrAaEzCq@XkCiDqKLaJ{AqCe@iC^eFcDuGg@wHpAgGyAoDMyArAqIbHmJTcAcC}NRoAxAMxCbFp@K^oAgAaHmBsByAm@sFJc@sAfAcG`DaE`@}Ik@]mERsJkJqIiLmCuBcAoGFaEnDaFpCsLr@eQvBcKRmK|BsO~@yB|FaE^cCo@wJbAaFaB_KyGiGyGuMeD{DScAEsBdBqLw@mF",
+   "pointCount": 81,
+   "start": [
+    41.187577,
+    141.282458
+   ],
+   "end": [
+    41.193914,
+    141.376871
+   ]
+  },
+  {
+   "id": "青森県:57",
+   "name": "七戸十和田湖線",
+   "ref": "118",
+   "highway": "secondary",
+   "lengthKm": 3.19,
+   "curviness": 231.4,
+   "flow": 23.8,
+   "turnCount": 31,
+   "score": 57.7,
+   "polyline": "ykkwFgko|Y`FmA`GuEfH{D|@JbBpBrDoCbH|HpUp\\xMdOXPxPsFbB`BfMqA~B`MbIjBxAzA|ChGnCR",
+   "pointCount": 19,
+   "start": [
+    40.695814,
+    141.15012
+   ],
+   "end": [
+    40.672784,
+    141.140071
+   ]
+  },
+  {
+   "id": "青森県:58",
+   "name": "屏風山内真部線",
+   "ref": "2",
+   "highway": "primary",
+   "lengthKm": 5.84,
+   "curviness": 283.9,
+   "flow": 20.7,
+   "turnCount": 80,
+   "score": 57.7,
+   "polyline": "oisxFo}kxYgFrAgHzEmD`NO|FwCfGkBfG|@jLSlIdBjFfArJzAzEKvI`Bl@JrDoAlL^dGnJZ_@zEwBtCkDjKP~BS|Br@xDAlC_AlByAvKoDhEaCtAmA`Fd@vFwAtGaFhB_HjNgBfIn@lE_A`EW~Hu@zBwDzFuDzNBhJWnBqRtX",
+   "pointCount": 44,
+   "start": [
+    40.900235,
+    140.477202
+   ],
+   "end": [
+    40.914437,
+    140.4213
+   ]
+  },
+  {
+   "id": "青森県:59",
+   "name": "櫛引上名久井三戸線",
+   "ref": "134",
+   "highway": "secondary",
+   "lengthKm": 11.3,
+   "curviness": 241,
+   "flow": 20.9,
+   "turnCount": 130,
+   "score": 57.6,
+   "polyline": "spbvFw~e~Yr@[x@vCxBp@lAy@ve@iEdAeDWuMm@uCzA{@jBQbJpBjSlKpGa@fIRfHv@vBjAtBCzDfHrInAjCxAnAfBzB|@tB|EbA~@lCPjAqA|B}@tBfAbGg@r@X~DhFtFlAnAGnClOzEvf@wDdDw@`BoAnJqAtEkE|F_A\\_HaBuC{EsEg@{@v@iCzGuElAgE_F}DqIeBUaAjAsFxNo@vC@rEuBxBgD|@}F~CHr@rLxPbI|C`CzErDeArDnJfSn_@d@|M]vBoEtLNfJgCjOC`Ez@jD~EzJa@`JdBtOhAzDhBdBrC|TnCpH",
+   "pointCount": 79,
+   "start": [
+    40.48666,
+    141.429716
+   ],
+   "end": [
+    40.457181,
+    141.371153
+   ]
+  },
+  {
+   "id": "青森県:60",
+   "name": "増田浅虫線",
+   "ref": "269",
+   "highway": "secondary",
+   "lengthKm": 3.9,
+   "curviness": 294.9,
+   "flow": 18.9,
+   "turnCount": 61,
+   "score": 57.6,
+   "polyline": "e_qxFg~vzYtAoEf@_FhAeBrAqJdE}HbAaFjCuGpCwDhBwFTcCq@qGz@sMxC_ThCoF\\kJEaB_A{A^}BeAsCiJwPeG}GyA_Fi@i@a@cCwBoB_@eGk@uAs@}VkFyJqFoG",
+   "pointCount": 31,
+   "start": [
+    40.888355,
+    140.861324
+   ],
+   "end": [
+    40.889991,
+    140.900823
+   ]
+  },
+  {
+   "id": "青森県:61",
+   "name": "南部田子線",
+   "ref": "143",
+   "highway": "secondary",
+   "lengthKm": 11.09,
+   "curviness": 273.1,
+   "flow": 18.6,
+   "turnCount": 163,
+   "score": 57.5,
+   "polyline": "ahhuF{`o|Y{QtBgMtIkHdA}DpE{GrByA_@oD|B_Fx@}@iCkE{C}BC_CsAiCa@sByEqAmUaEcGkH{GkCmAaPwP_Fs@oCmCqD{AKqDbCwENwCq@oC}EoK|@wEJ{Io@eCuDqD_@iADqEwCkXCgK_BiOQwK~A}LY_DdByFFsMxBuGCmM|@_Fo@qKq@sAiBcA[eA|@aED_EkAyEMgRsBgD}@wEeBaCE}EsAoJgBkDmB{KgH_HiAkG}A{AwBwEs@qCIiEyBeFgDgCuAuGaC_DuAmEeGiEsAeCuCaB_CeEeBoAYyEcEcQmB[cEkGaEwCoCmDmLmGk@oA_@uE",
+   "pointCount": 85,
+   "start": [
+    40.35217,
+    141.148461
+   ],
+   "end": [
+    40.398707,
+    141.233174
+   ]
+  },
+  {
+   "id": "青森県:62",
+   "name": "東北横浜線",
+   "ref": "25",
+   "highway": "primary",
+   "lengthKm": 8.54,
+   "curviness": 276.9,
+   "flow": 20,
+   "turnCount": 118,
+   "score": 57.2,
+   "polyline": "}i}xFkfn}YvFrC|AjRdClOmEz}@?fCt@jFnCpG|ExBxCFfAa@fAiCDiEh@oCvDqEjNxBxCzBdSiKtFuVb@iFh@e@fCNjBy@p@}CtBmDd@}DrDeEjAJvBbCu@pFpAjEx@ZvBi@hAP|@bAp@rCLtF|@?lF}Gv@CdBdArDwCjA{FpAeQjBiB~AQvKnC|@jECrDhBdC`BhFhAh@vBAvBkC`BQpGjHLx@e@bGiCpGdAhKnBdKa@p`@rDnIfE~CpFzN",
+   "pointCount": 65,
+   "start": [
+    40.951515,
+    141.308059
+   ],
+   "end": [
+    40.916345,
+    141.2797
+   ]
+  },
+  {
+   "id": "青森県:63",
+   "name": "けやき通り",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.83,
+   "curviness": 246.2,
+   "flow": 21.4,
+   "turnCount": 44,
+   "score": 56.8,
+   "polyline": "}~`vFu{k~YdEYvF_BiH`CkGHsKyAwLiEkBsAuAiCaAeK{@_DiA}AmHeDkQiFoEeDsD{ErDtFhE`DjRxFfCTxC|AjA`Bz@~C\\tGxAnEhAlA`NhF",
+   "pointCount": 27,
+   "start": [
+    40.478713,
+    141.459948
+   ],
+   "end": [
+    40.481374,
+    141.460433
+   ]
+  },
+  {
+   "id": "青森県:64",
+   "name": "吹上金屋黒石線",
+   "ref": "135",
+   "highway": "secondary",
+   "lengthKm": 7.78,
+   "curviness": 227.2,
+   "flow": 21,
+   "turnCount": 84,
+   "score": 56.3,
+   "polyline": "od{vF{udyYxIcBpFb@`GaCtExB~T~Q~X~F|J~E~EFrCmAlAFvAlCv@b@zDmKjAjA|BgAtBn@hCyDnEcDdJiU~BzDfBtLkCpXjAlE^`FKzIt@bFfBrEr@hE_@hCOlMHdDx@rEvGrBrFJ|BxCnB~@rKb@lKpDbJR|PlCfQlQ~BjGzPrMNpAu@zQ|CzM",
+   "pointCount": 47,
+   "start": [
+    40.612719,
+    140.60398
+   ],
+   "end": [
+    40.567216,
+    140.570103
+   ]
+  },
+  {
+   "id": "青森県:65",
+   "name": "青森田代十和田線",
+   "ref": "40",
+   "highway": "primary",
+   "lengthKm": 3.47,
+   "curviness": 296.8,
+   "flow": 18.7,
+   "turnCount": 55,
+   "score": 56,
+   "polyline": "edmwF{vxzYf@hFfBnDn@lDfAzA[pDnApCdD`So@fBf@vIo@lIj@pJUnMj@hEaA`KH`D_AvA`C~MbEpMJfIy@rDt@jK|AhGq@|Gk@|Wd@xA|E~D",
+   "pointCount": 27,
+   "start": [
+    40.704826,
+    140.870383
+   ],
+   "end": [
+    40.699998,
+    140.832493
+   ]
+  },
+  {
+   "id": "青森県:66",
+   "name": "弘前バイパス",
+   "ref": "7",
+   "highway": "trunk",
+   "lengthKm": 3.14,
+   "curviness": 221.4,
+   "flow": 30.2,
+   "turnCount": 23,
+   "score": 55.8,
+   "polyline": "o_uvFgisxYzBqDdM_Ll@kAvVgSwVfSm@jAuGnEcFpFiD`HoJrWcFxH{IhGcPjDVY",
+   "pointCount": 15,
+   "start": [
+    40.581201,
+    140.514922
+   ],
+   "end": [
+    40.589028,
+    140.506622
+   ]
+  },
+  {
+   "id": "青森県:67",
+   "name": "松代町陸奥赤石停車場線",
+   "ref": "190",
+   "highway": "secondary",
+   "lengthKm": 4.51,
+   "curviness": 224.8,
+   "flow": 21.6,
+   "turnCount": 47,
+   "score": 55.8,
+   "polyline": "gmrwF_fsvY|KhC|IHbHxHdLtAc@lHzQfDpHlDfRZxE`A|LnH|EjEpMtFpAlETjDjBbCzJ~DbEvCtBoDrLlI`KrKrAHzCmAx@oArCi@vBfCzGhA",
+   "pointCount": 27,
+   "start": [
+    40.731882,
+    140.18672
+   ],
+   "end": [
+    40.69739,
+    140.169343
+   ]
+  },
+  {
+   "id": "青森県:68",
+   "name": "越水木造線",
+   "ref": "187",
+   "highway": "secondary",
+   "lengthKm": 8.7,
+   "curviness": 185.2,
+   "flow": 23.4,
+   "turnCount": 69,
+   "score": 55.8,
+   "polyline": "}waxF}tywYcAzBmHxHwBXgNdKh@nAz@fKcA~NXvKSbHbC`R`@bSd@n@lGjBtB~Cdj@tb@nBxElYl^fM`S|UnKz@zOJhL`AbGc@rK|GtRa@xC@fHyErAs@bMaML}B}@gArA]dBFnEhAjItQji@`@vIuBzGYbELtEcGz@cBtEs@lEkB|@WhFwCrM",
+   "pointCount": 46,
+   "start": [
+    40.810392,
+    140.383666
+   ],
+   "end": [
+    40.797988,
+    140.308278
+   ]
+  },
+  {
+   "id": "青森県:69",
+   "name": "松代町陸奥赤石停車場線",
+   "ref": "190",
+   "highway": "secondary",
+   "lengthKm": 4.21,
+   "curviness": 224.5,
+   "flow": 21,
+   "turnCount": 45,
+   "score": 55.2,
+   "polyline": "wuywFc{ovYrC`EfBh@~HtGnCrA|RbSxDrAWiE`@wFGkQzCu@|DwG|AiINcDp@sAhGcFvFwB|Ev@~HeB`BaFJ{CpDaIzGiGbAc@lOr@lCStDgMpKqM|C}B",
+   "pointCount": 29,
+   "start": [
+    40.769083,
+    140.169624
+   ],
+   "end": [
+    40.743305,
+    140.184824
+   ]
+  },
+  {
+   "id": "青森県:70",
+   "name": "戸来十和田線",
+   "ref": "145",
+   "highway": "secondary",
+   "lengthKm": 16.49,
+   "curviness": 215,
+   "flow": 19.4,
+   "turnCount": 183,
+   "score": 55.1,
+   "polyline": "em_vFu|t|YkHxCeEx@qA~As@dE}ArD{Ak@sAkDgGk@}AmAaCxDoCxBeE_BoFzCqAQeA`@kBs@{@kAwCjBoNgAu[fKuCjCYa@sBA_H{M]wIcFyKgK}OoAwJ}Eg@mGnBQsAeBuCYqCcBaCcF_MgE}O_CwE_FcGwDaJm@OoA|@oAkDqCoBeD}EgDgBiCsFsDeFw@oDiHyGw@gCsAkL{AqDoC{CyCgGsFcAqDiFoLoFeEwJuKgM_G{BwIwG_BQmDx@aFsByDiIwFgEkC{Ds@yDgKqK{A_FaD_DaDcJiAmFsAwNsBoFeAgGoDmG}GqHiKrCoIeGmItBcEhHk@fF}Jb^uEyDaLcEmOoJmFc@cI{CiJoJsHmPcSdBeQuDyKuA_QkH_K_L{HyCuHP{CbC{MxGwAbEuDrFsEfEeCpA",
+   "pointCount": 105,
+   "start": [
+    40.470754,
+    141.178512
+   ],
+   "end": [
+    40.581242,
+    141.237858
+   ]
+  },
+  {
+   "id": "青森県:71",
+   "name": "国道279号",
+   "ref": "279",
+   "highway": "trunk",
+   "lengthKm": 10.31,
+   "curviness": 262.3,
+   "flow": 22.4,
+   "turnCount": 121,
+   "score": 55.1,
+   "polyline": "qqu{Fi~s|Y{G|E}DjA}O~U~P~a@oNtM}ByD_JuFyBg@oENiBdAiBdCu@Oi@\\wF`RgE|CsDvFeGnF}AdDmMfNoCnEe@jDn@lIeBrIyCrE[bDe@AQy@|D{J`@aDq@_FcL`EuIp@iJ`K_Iz@iDpCu@~CEdChBhLXzF]jD}A~DJfKi@d@o@Im@yDaBoAkElBeAvG}@vS{@W?oFa@}AsAc@m@fAH~CUh@_FWsLzDoOjN}G|Oud@pd@_HxE{D|AeLGqBr@iEpEeGfN",
+   "pointCount": 68,
+   "start": [
+    41.403286,
+    141.173653
+   ],
+   "end": [
+    41.455357,
+    141.115576
+   ]
+  },
+  {
+   "id": "青森県:72",
+   "name": "柳町下田停車場線",
+   "ref": "213",
+   "highway": "secondary",
+   "lengthKm": 7.95,
+   "curviness": 234.3,
+   "flow": 19,
+   "turnCount": 98,
+   "score": 55,
+   "polyline": "oewvFoxa~YJoAvD{AxBe@`@t@wBlJe@hW~@bCr@pK[hNh@rGf@`UkG@cA~@m@dIiB~EAlDmDtZsFhMyAhFsBrTeAxD_ClW\\pFcA`NoFdHsCrFaCdJe@~EB`E~Ar@bClFxBvBdAbHtDzHFtVb@|HtDfK|AfJWnE_BtEyBjAo@fAs@|BYnDnApHR~GhDxPhDnFXzB_AdFb@tJSxHtB~Hb@xJQvD`@fB",
+   "pointCount": 57,
+   "start": [
+    40.5924,
+    141.408239
+   ],
+   "end": [
+    40.594379,
+    141.327191
+   ]
+  },
+  {
+   "id": "青森県:73",
+   "name": "大俵板柳停車場線",
+   "ref": "276",
+   "highway": "secondary",
+   "lengthKm": 4.02,
+   "curviness": 229.4,
+   "flow": 20.5,
+   "turnCount": 45,
+   "score": 55,
+   "polyline": "u|nwFienxYnIeAfGtAbJV~AkAlBkEnGzHpHbGdArL`BdD`QhIdAnAl@`CFrEx@pEr@bCdDxB?~Db@~BvHu@f@tKbA~GaA`HInGnDrPhDlYi@bOiA~E",
+   "pointCount": 28,
+   "start": [
+    40.71387,
+    140.488686
+   ],
+   "end": [
+    40.696395,
+    140.459563
+   ]
+  },
+  {
+   "id": "青森県:74",
+   "name": "二戸田子線",
+   "ref": "32",
+   "highway": "primary",
+   "lengthKm": 4.53,
+   "curviness": 244.3,
+   "flow": 20.9,
+   "turnCount": 53,
+   "score": 54.9,
+   "polyline": "}ycuFwvo|YzAUvDxArC@vPqJ`LuCrG|@rDsD~@`@lAlE~BGlA_EbBaAnIqONkBkAyDEqKxCoE~@RfAzA|AFdAwBz@]rGk@xCjDxFbKxCxB|NgAdPK`h@|D|@k@nByE",
+   "pointCount": 32,
+   "start": [
+    40.329433,
+    141.151956
+   ],
+   "end": [
+    40.297029,
+    141.159844
+   ]
+  },
+  {
+   "id": "青森県:75",
+   "name": "国道102号",
+   "ref": "102;454",
+   "highway": "trunk",
+   "lengthKm": 4.15,
+   "curviness": 199.9,
+   "flow": 31.9,
+   "turnCount": 26,
+   "score": 54.8,
+   "polyline": "oayvFuxsxYvF|DvFjGzB|DnDdKdCxKj@nF^VfBb`@MxA_Cci@_EkQqB{Ei@ScCiE_JiJiC}A@[k}@k[{B{A",
+   "pointCount": 20,
+   "start": [
+    40.601997,
+    140.517392
+   ],
+   "end": [
+    40.612601,
+    140.522392
+   ]
+  },
+  {
+   "id": "青森県:76",
+   "name": "横浜六ヶ所線",
+   "ref": "24",
+   "highway": "primary",
+   "lengthKm": 3.96,
+   "curviness": 269.6,
+   "flow": 19,
+   "turnCount": 56,
+   "score": 54.7,
+   "polyline": "eodyFuzl}YhAmYnBeKxE_Pa@{F~AyIgBsDIeDvA_@xAzCz@P`E{GC_AeB{DkBaN|@oJ}@sGGiDVoK|@wIZiJnCwP|DsLlEgE~GyClGoQn@uG`Am@",
+   "pointCount": 28,
+   "start": [
+    40.988194,
+    141.30107
+   ],
+   "end": [
+    40.978753,
+    141.340044
+   ]
+  },
+  {
+   "id": "青森県:77",
+   "name": "栃棚手倉橋線",
+   "ref": "218",
+   "highway": "secondary",
+   "lengthKm": 6.3,
+   "curviness": 227.9,
+   "flow": 19.4,
+   "turnCount": 74,
+   "score": 54.6,
+   "polyline": "{q|uFwkf}Yc@zHdCrPj@lA`FvEl@pBiAhZ`ApI`EbMC`CpFnKzAlKlAzCdDxD|@bF~D`FvAl@d@`BdCHpFrIF|BfBrBfAfEpAxB|DlOGhNp@xDsBpFCxGiD`Z@|SaBrFWpLxAdMq@rBWlNeA`JxAnO?tDlJxX~DxElA|G",
+   "pointCount": 42,
+   "start": [
+    40.456139,
+    141.26796
+   ],
+   "end": [
+    40.442688,
+    141.2023
+   ]
+  },
+  {
+   "id": "青森県:78",
+   "name": "青森田代十和田線",
+   "ref": "40",
+   "highway": "primary",
+   "lengthKm": 30,
+   "curviness": 222.2,
+   "flow": 19,
+   "turnCount": 351,
+   "score": 54.6,
+   "polyline": "qv~vFon}{Y_HzOPrHiAnGIdJ_@lAgIbCyHzD}CfJaCxOyEtO|BnQe@|JgA`FJ`K^|BdCtCRlAGrMeBnZs@fImBzGcOjQmEpKkE`EkCfFsGjDeF?m@x@}AxGcGbDaBxCLhEmCxHcGbEaDrKoFpGqAnDaGbDoCpDgNvBuF|JuHj@}@`EH~CmC|BKv@`@b@zFcCb@iEj@q@fFUl@jC`@Tf@eDpAuCpEuCf@LfAtBbBERl@}AdQqDtH_@~WeClKeF|KsRxMa@~A_ArRq@fCsQpPuTfIaDnEyG`SWrDhAvK~B|CxAd@bIVnBjUjA`ChR~SxAhI{FlEqInNaNdc@eFpLwA`JsFtG{E`LeHdHkMdEqErDeDzAeAlCkI`MuClHs@~D]jIsCxJqFjIqLrDmJ~F_DxJlEjNLzC_A|CaJjM{@dKkBfKgIpIkDxIyPpMsJdQoIxJw@jFnBhQVzIdFvQFdBqA`G_CjA]t@_FtYcOjV}ChHTnDv@hCnIbHtAtFa@tCiHjF}ArJgCnHuAtBcGbEsEaFgCwIgB{BgJg@uDtCcEkCiCaD_B[uF`E?~Gu@lByAz@Ih@t@jDa@pDwDjDwDGuCf@m@`Cv@pB_E~GxAlL[bBcFdCqEdQ_LlP_DtRyFnPuInHoBCgAf@{IjMuHrGa@rDuElNuCdDwCDmFzJ}FR_CxAyG|GcEvIyJzBwDdDuEhG{FnCy@pAuCtAo@tD_CdBs@|AlA~Fd@nL",
+   "pointCount": 189,
+   "start": [
+    40.63097,
+    141.058479
+   ],
+   "end": [
+    40.745271,
+    140.825437
+   ]
+  },
+  {
+   "id": "青森県:79",
+   "name": "米田六戸線",
+   "ref": "212",
+   "highway": "secondary",
+   "lengthKm": 4.96,
+   "curviness": 192.8,
+   "flow": 22.2,
+   "turnCount": 43,
+   "score": 54.5,
+   "polyline": "}ksvFypi}YyFAoCbBmDB{EyBq[TeJk@cA{Ay@aIgByGoDy@eDF{FuKiEy@mCXkBs@yAiDcFeD_EkOKeBq\\a@gUeHoPs@~BiIjLuu@?eD",
+   "pointCount": 26,
+   "start": [
+    40.572951,
+    141.28413
+   ],
+   "end": [
+    40.600545,
+    141.308456
+   ]
+  },
+  {
+   "id": "青森県:80",
+   "name": "五所川原黒石線",
+   "ref": "38",
+   "highway": "primary",
+   "lengthKm": 5.85,
+   "curviness": 215.1,
+   "flow": 21.7,
+   "turnCount": 58,
+   "score": 54.2,
+   "polyline": "{ufwFybuxYhI{BlBd@c@iCmGiOxGuLv@yCvC{A|AkDh@wVlD{I\\sGUgGVeK_G}@_@k@j@eXxBqJw@eYlKuPvFsEnEMlFsAfC{AtAkC~AeGjB{Cd_@q`@hOaHi@yFzHwQr@mKv@uC",
+   "pointCount": 33,
+   "start": [
+    40.671824,
+    140.524132
+   ],
+   "end": [
+    40.650621,
+    140.574368
+   ]
+  },
+  {
+   "id": "青森県:81",
+   "name": "神原中里線",
+   "ref": "197",
+   "highway": "secondary",
+   "lengthKm": 3.5,
+   "curviness": 205.7,
+   "flow": 21.2,
+   "turnCount": 34,
+   "score": 53.9,
+   "polyline": "cx|xFao`xY|EnXhKuDhSlAdJmClC_C`GFt@iArDwA`EDAbInNaCtQWdR}KdDY|Jz@rK}DbGc@",
+   "pointCount": 18,
+   "start": [
+    40.948663,
+    140.418568
+   ],
+   "end": [
+    40.921807,
+    140.419282
+   ]
+  },
+  {
+   "id": "青森県:82",
+   "name": "関ヶ平五代線",
+   "ref": "129",
+   "highway": "secondary",
+   "lengthKm": 9.55,
+   "curviness": 223.6,
+   "flow": 18.1,
+   "turnCount": 118,
+   "score": 53.7,
+   "polyline": "eovvFsq_xYH|HyBhLgBpb@dB~H~AdBrDbJlA`BnBfAlMlPpBfNpGzHPx@i@~MhGb^~@nA`D`B`AbBxQtH|KfRxWdMlIxGv@tHfFnKfGlHtIrEbJfKzCz@hAQtDj@rBx@rDPlHdFrCbAtAg@lEApFp@zA[jGhAbC|DxJjFtCg@pQnCfVqCdDgEvBmA|GoLj@yE|@yAfIoBpLsE|CoCdCiGzCPzDuBhBCn@l@zCwBfB@",
+   "pointCount": 59,
+   "start": [
+    40.588832,
+    140.413858
+   ],
+   "end": [
+    40.530483,
+    140.372604
+   ]
+  },
+  {
+   "id": "青森県:83",
+   "name": "米山菖蒲川線",
+   "ref": "200",
+   "highway": "secondary",
+   "lengthKm": 4.94,
+   "curviness": 203.9,
+   "flow": 20.6,
+   "turnCount": 49,
+   "score": 53.7,
+   "polyline": "}|swF{s`xY{@dCwAx@cB[aCeBwBNkJ|NGxF{CWyGtH}@lC{CzRwPvp@i@vLcC~@gHToFxB_LbL[bEsC`NkKnBfAbThEjPS~R|F`P`B|LHnH",
+   "pointCount": 27,
+   "start": [
+    40.739514,
+    140.419341
+   ],
+   "end": [
+    40.755385,
+    140.376735
+   ]
+  },
+  {
+   "id": "青森県:84",
+   "name": "弘前環状線",
+   "ref": "41",
+   "highway": "primary",
+   "lengthKm": 14.45,
+   "curviness": 188.5,
+   "flow": 20.5,
+   "turnCount": 133,
+   "score": 52.7,
+   "polyline": "iy}vFqhoxYqBoLmCgF}EeTy@cA}`@ePlCcSgEoMgCcPmLsi@xIyO~RqZ`BiJxB_H|AHnHsCxKeM^eErAuAC_HlAkFjC~FpOzG`N`NnBrCvIbSnDfGfDmEjPeJzBcFrAwG|J{MlQkIzBMnHeLtAn@lKEjd@fF`GgBhAfEnBvCl@PrN{DhGiEzA_@bBGpRlC~OwCfCr@jDcBzEv@|GuC~M\\vFyDlE}G~IyHnBiD|EeBjKP`F|ApDVrB[nF^|EsAfI[zGC~HdAdBgD|DuCv@}GrFm@lLjC|H_GrEgBpBcBtFeA",
+   "pointCount": 76,
+   "start": [
+    40.626293,
+    140.494333
+   ],
+   "end": [
+    40.551151,
+    140.547849
+   ]
+  },
+  {
+   "id": "青森県:85",
+   "name": "五所川原黒石線",
+   "ref": "38",
+   "highway": "primary",
+   "lengthKm": 9.25,
+   "curviness": 210.6,
+   "flow": 19.7,
+   "turnCount": 99,
+   "score": 52.7,
+   "polyline": "myzwFackxYuI_AaLiDrOdMzD`BAqDh@kCbFqApLeKpFiItAeAbOfBnGE|@jDxGpFvAGjEcB|PdCdBkBnBY`DIxMvAfGo@`TwQdj@uSnIe@`GwCxK{MhDiCvUeBrEd@zHcAlCb@hDiCzBc@hGn@dH~EvP}BfHp@zIkDpHs@zEuDlCeAbGVvCoBnGRb@UHeC~BgGkAqFM{EfQ_R",
+   "pointCount": 52,
+   "start": [
+    40.774791,
+    140.472974
+   ],
+   "end": [
+    40.710713,
+    140.496031
+   ]
+  },
+  {
+   "id": "青森県:86",
+   "name": "櫛引上名久井三戸線",
+   "ref": "134",
+   "highway": "secondary",
+   "lengthKm": 7.37,
+   "curviness": 202.9,
+   "flow": 18.2,
+   "turnCount": 82,
+   "score": 52.2,
+   "polyline": "uswuFirt}Y~B|A`C`GfDfCnHaAtIdFhGdFhHnHnDxGdI~FtBfL~M`L~Hxj@cBfAq@zBHnIu@xJSpRgBpQ|ClGbFhBhQ|QtHrO`@pEg@vEoAdEmBtBLfAsAtDt@tJdAjCdChLjC`F`CfAlDGdAl@fBdF\\|Gd@xBvGbLbLbJbK`FrHvJ~Bd@nKT",
+   "pointCount": 45,
+   "start": [
+    40.430834,
+    141.340687
+   ],
+   "end": [
+    40.397722,
+    141.280893
+   ]
+  },
+  {
+   "id": "青森県:87",
+   "name": "国道339号",
+   "ref": "339",
+   "highway": "trunk",
+   "lengthKm": 11.21,
+   "curviness": 283.8,
+   "flow": 17.5,
+   "turnCount": 182,
+   "score": 52.2,
+   "polyline": "}nyzFierwYbEcGnBkOhQmR`AiD|@yL`CuJvBiCbAkExGiDz@_FvE{KJoAc@uElDkEt@sD_@kJXyCbDqIdCsAbAiBSsFv@{L|AcBlKkD~CmKnDcGjAsFlEcIfIeHfBmEn@uEiA{GZgBzDwAfAsAr@kEvCeI`@{EtAuAxBK`GsGf@uBMeEd@uA|@_@`An@`B?hEgBtBwDtCcAzAsD~BgB`AkBtIeEfCp@`AM`O}FfGp@rBaApCyC|EkIlBqArD}FvDsO|DgLnCeObByDbAiAhDy@pCuCdBeEjDqB~G{It@sBj@yFdB}Br@_D`CeEzH{DD}E~@gB|Jg@fG}BvCqCtBqDpF{AxBsB|GwApEbC`C\\tBq@xBuC",
+   "pointCount": 93,
+   "start": [
+    41.259514,
+    140.345335
+   ],
+   "end": [
+    41.196376,
+    140.430463
+   ]
+  },
+  {
+   "id": "青森県:88",
+   "name": "七ツ館板柳線",
+   "ref": "137",
+   "highway": "secondary",
+   "lengthKm": 7.3,
+   "curviness": 177,
+   "flow": 19.9,
+   "turnCount": 65,
+   "score": 52,
+   "polyline": "eklwFcthxYmE?}@s@c@wBsCOuJeDaI|AkLv@yFo@{F_DcBd@gKe@qDu@iJBcHuAuHjLyNyAe@nC}CnIiEvC}NpSmI`E{G`K_Ch@kNq@qIaC{QgIvDkLrAeHJuHwAsP^eGe@cBkGgDsMaNai@_PuAgA{WoI",
+   "pointCount": 38,
+   "start": [
+    40.700829,
+    140.460342
+   ],
+   "end": [
+    40.751249,
+    140.47217
+   ]
+  },
+  {
+   "id": "青森県:89",
+   "name": "夏泊公園線",
+   "ref": "9",
+   "highway": "primary",
+   "lengthKm": 6.27,
+   "curviness": 237.7,
+   "flow": 17.5,
+   "turnCount": 85,
+   "score": 52,
+   "polyline": "o`~xFkpwzYiKtCsK|@kAaA{A{DoD}AgC?mFfAyCEiAhBMlBTjNzA`EBr@c@n@aIm@gCbBsAN_CkBsFsB}Im@cLLmBoAk@oA_CgLgCeFCwBj@cEy@wD{@c@{ID_DqF{@wFlBkL@yBy@_H_DuDwBk@cD`@eQpJ}JzL}EVqDoCyC_AaFoHeQkGoJiJkD{AcDBaD}@",
+   "pointCount": 50,
+   "start": [
+    40.955118,
+    140.864216
+   ],
+   "end": [
+    40.995147,
+    140.877079
+   ]
+  },
+  {
+   "id": "青森県:90",
+   "name": "碇ヶ関大鰐停車場線",
+   "ref": "202",
+   "highway": "secondary",
+   "lengthKm": 11.69,
+   "curviness": 195.3,
+   "flow": 17.7,
+   "turnCount": 129,
+   "score": 51.9,
+   "polyline": "ehivFmn}xYz@S~HtHrH|DpFvHvNy@rONrG`@pCbB`HaFdEa@lH^`BpBfEdTrBfBhKpBhEvIfAd@bGmGvBu@jJvBtFgA`CFrJtFjO}EpLTxDeApFjB|CaDzFsCvGoNjLgN`FsAdFgHxCqUnGwNvH{Gv@wCr@_IdFeIrI_]g@eDsCgIeCgVMiLsBwHNyHvBuNCkBaCiFCmFg@wA}E@q@_A~@yAjFwAlA{CYeEb@uL}@cGO_IaB_IXuK_AaJ]wAuE_FqCyEwGaFuCcHaEyDmJmEuAiFI_CdCcJ",
+   "pointCount": 74,
+   "start": [
+    40.52115,
+    140.566952
+   ],
+   "end": [
+    40.480179,
+    140.623889
+   ]
+  },
+  {
+   "id": "青森県:91",
+   "name": "国道394号",
+   "ref": "394",
+   "highway": "trunk",
+   "lengthKm": 29.96,
+   "curviness": 230,
+   "flow": 19.4,
+   "turnCount": 356,
+   "score": 51.9,
+   "polyline": "ow~vFyfd{YyB]sCjDcEv@mF_GkNgGiGmAoByBoDuAwEoNeA_Pg@_CoCsEwJsKkCsJaM{FkIs@oKgJsKaDuAoEeDsh@eLo@_CyAcCXs@We@_BVcFlByFu@wBy@Co@f@}AvM}@f@qAu@`@aXv@gBrDsBJcBa@}@gASgInCoLjGgLxMsGnCeNeFkG{@qGuC}EmAaDuD{H_E_EmA_GByEeAgCuBoCeEY}CDsG}AiD{WhEm@g@mC_KyGuFgBkH{CyGGiBXqB~@sAtGiExAoFYoIiEaH@kDpAmKcE}JPcF`AmFhKqIfIwOhCoItHoIfM{HvW}S`FyKb@wBs@cCcH_K{@EmAbBm@]kDgKCwBlAeIJgP\\wC{ByEMeLj@gEuAgAuDvBuAfBsAKqDz@mH{BT_AbGmDxBiDtAsGhDMtB_C\\kDhAeAK}Dv@uFoAcFuDoFBq@f@e@x@ZhBdCj@GX}@S{@sEgFo@qFsBeCPgG_EqKgB}PWeJbC_BJ_C}@oDnA}C\\yFhDaObByQ{@yE@}LiCaNkAaMaGmYgDaFq@cOp@_Eg@kK}@wHkDyPuAaLcEwBsFcJ}FkCiC_CuQ{_@[{Bn@wGMeDmH}XwDwJjAoV@qRQ_DoDcMk@uFDiu@|AsIfQ}d@zFgMtBsJCoIx@sLy@kb@h@iLK_B_DyJwA{SaBkLgCoImGoGyBwJqFuDmMeN}B_Ig@qEyFEy@yHoCj@iDoPSsLaB_IiFvDgEjHkBbBeFv@",
+   "pointCount": 193,
+   "start": [
+    40.631115,
+    140.929247
+   ],
+   "end": [
+    40.70376,
+    141.156492
+   ]
+  },
+  {
+   "id": "青森県:92",
+   "name": "尾駮有戸停車場線",
+   "ref": "180",
+   "highway": "secondary",
+   "lengthKm": 8.18,
+   "curviness": 205.2,
+   "flow": 17.7,
+   "turnCount": 95,
+   "score": 51.9,
+   "polyline": "so{xF{uj}YtBvNzFnJwFvN[nJpFbHOnIpFrR~D|D`AzLtE|CQ`XnCfNb@j@~Ce@`@\\dGfKjZvEb@bCsC~L@hBfEpFdBrIxF^`AfBHlTiBnWcA|JmEnP}@zN{D|W`End@YlHyA|GB|BxAfF`@dK|CjHPjFSxBoJbX}@pEAlBzA`Jx@`S",
+   "pointCount": 45,
+   "start": [
+    40.94218,
+    141.290065
+   ],
+   "end": [
+    40.929696,
+    141.209248
+   ]
+  },
+  {
+   "id": "青森県:93",
+   "name": "酸ヶ湯高田線",
+   "ref": "122",
+   "highway": "secondary",
+   "lengthKm": 13.26,
+   "curviness": 195.7,
+   "flow": 17.4,
+   "turnCount": 149,
+   "score": 51.8,
+   "polyline": "geywF}e|yY~EnAdCzAlGnHhIkBxJ{@pFt@zGKtFmEtF{Bd\\AbGcGvMfAhDkDhKuElD_FrGkCzEeHdH}FzCL`DfA~DYjJmFbRyCrEyBrMuJpEsFnEsD`DoLnMgQnTgTr@kEhG_JhCoFpFcFvIsD`M{JxDgG~BmHpH{MxD_BvO}S|AoFpCgDtAkEpG{HtKwWtFsC~B_IlAmBxEuCbFdBzFqDxL@|GgBrOk@hC}BlC}FzIcFtLy@nEkBtIObGmK|EwBkA}JcAiA_JjDgDlEw@JyFk@HeBaC{BQsA_BjA}DJ_BsAgCC",
+   "pointCount": 77,
+   "start": [
+    40.766436,
+    140.724309
+   ],
+   "end": [
+    40.685605,
+    140.785343
+   ]
+  },
+  {
+   "id": "青森県:94",
+   "name": "西母袋子線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 6.19,
+   "curviness": 232.2,
+   "flow": 16,
+   "turnCount": 90,
+   "score": 51.7,
+   "polyline": "og}uF_~r~YlFcGvEiDxI}QdBkOe@_CmB_DIkBp@_D~AeC`NmJlKmAxFLvA[bGyDvEeHvBy@dCr@|CdErAf@pEMzCyCpAI`JnEnElDnD`BnAAx@aAn@cI[mQV{G|@aBhDcAzB^vDpFf@hJyA|FEzAtBhF|FxAdBS`BwE^oGzAyArEFrGpGxDoA|AF|A|B~Cx[",
+   "pointCount": 50,
+   "start": [
+    40.459598,
+    141.496164
+   ],
+   "end": [
+    40.426348,
+    141.506763
+   ]
+  },
+  {
+   "id": "青森県:95",
+   "name": "中ノ渡十和田線",
+   "ref": "166",
+   "highway": "secondary",
+   "lengthKm": 4.15,
+   "curviness": 192.2,
+   "flow": 19.5,
+   "turnCount": 41,
+   "score": 51.7,
+   "polyline": "_hvvFmks|YyCwIgAmIgEaPa@}EoHrAqBbDuBj@eEsAmPyMQcE|@iJJmGdEcQ`FkFFqByAqGxC_KPqCiJsh@[aGkWy_@Q_G",
+   "pointCount": 23,
+   "start": [
+    40.587679,
+    141.170628
+   ],
+   "end": [
+    40.599535,
+    141.206477
+   ]
+  },
+  {
+   "id": "青森県:96",
+   "name": "名川階上線",
+   "ref": "42",
+   "highway": "primary",
+   "lengthKm": 20.15,
+   "curviness": 208.7,
+   "flow": 17.1,
+   "turnCount": 246,
+   "score": 51.5,
+   "polyline": "ye{uFkom_Z~BdBpH`AdAlAfEdc@p@`ScA|INbCdFrG|F~QxApCZbGc@`Fb@hFnHjOjC~JfDzEz@jDnEdHnCnQ^lIhFtWvHzVjF~I`AvIhGvXbE|L|AzZhAxC`FtHrApLlAnBbKrJfCfQlNvKfBdC`EpK{@tOPtBfDvCxGfMfH`E|BdJ`JrJjBlGbFnFdBpNl@rAfFzEvHpDVpAS|D|@nF~C|AzDd@rKmCvIfD|@bBp@rHaEhKApBf@nBlAbArANpMaDfBLr@`ARdBUvA}BnEIjBf@tB|UzMnBtCB|BcBjGOjD`@bCpDlH\\dSgBpFMzG{A|O_EdHUhL}EvMaGjKkA~@cJ}@yERsBz@sGzIcBbGgAzAmCj@uDyB{KzAq@nAu@vF}DbDw@pJdAjBEfAwH|AkJlIaA`EeC~ByACuEgCq@f@Lf@tCxAu@zEhFvGvC|B|ATZnA{@|GaAbCePdQ@xWjA`DnNtOlAhDNbDgBfGg@xJf@nJbAvEnBdDzV~RbBfDj@fCN~H",
+   "pointCount": 134,
+   "start": [
+    40.449094,
+    141.632063
+   ],
+   "end": [
+    40.410224,
+    141.4627
+   ]
+  },
+  {
+   "id": "青森県:97",
+   "name": "中野北高岩停車場線",
+   "ref": "225",
+   "highway": "secondary",
+   "lengthKm": 5.59,
+   "curviness": 210.9,
+   "flow": 17.3,
+   "turnCount": 68,
+   "score": 51.5,
+   "polyline": "czsuFk~c~YmFwDaCt@kC{@oCByHjB}ItG_@zK}JrEkCdEaDj@aKiFeIgA}NcIoCu@eCD{FdE{Cz@oL{BmCkCqBiKmBoDkJwEgGyIcH}CqBUaL|B_MlIsElGq@rCsBvD}@DkBsAmDdAsCq@mEp@}UzL",
+   "pointCount": 37,
+   "start": [
+    40.411378,
+    141.419422
+   ],
+   "end": [
+    40.453624,
+    141.416583
+   ]
+  },
+  {
+   "id": "青森県:98",
+   "name": "柳橋通り",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.68,
+   "curviness": 114.8,
+   "flow": 24.5,
+   "turnCount": 22,
+   "score": 51.4,
+   "polyline": "wiivF_nx~Ys@yCrCnKnK~JfWhi@bA|DvIll@~IzZsIc[_Ioi@{A}GgWgi@qJsI_C_H",
+   "pointCount": 14,
+   "start": [
+    40.521404,
+    141.524318
+   ],
+   "end": [
+    40.521354,
+    141.524352
+   ]
+  },
+  {
+   "id": "青森県:99",
+   "name": "鰺ケ沢街道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.98,
+   "curviness": 203.1,
+   "flow": 18.4,
+   "turnCount": 44,
+   "score": 51.4,
+   "polyline": "ij|vF{vuwYq@uH{BcGg@kPxEu~@~AyID{ByAqLPoCy@{FyAuAaEXoAcHdHmIn@_SxFmPn@mErGcNOqLlAcXe@gBp@w@",
+   "pointCount": 22,
+   "start": [
+    40.618771,
+    140.363497
+   ],
+   "end": [
+    40.615763,
+    140.405676
+   ]
+  },
+  {
+   "id": "青森県:100",
+   "name": "弘前岳鰺ヶ沢線",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 3.61,
+   "curviness": 240.3,
+   "flow": 17.3,
+   "turnCount": 50,
+   "score": 51.2,
+   "polyline": "k|awFip|vYrEnA|EJpEsBPmCh@{@`Cl@dDuAbI}@|DmER{Ak@sLDuC`@cBfJ{KvCmGhHkGnBwHbCgEv@iEB}FpCsL~AkPdEwFlAcEx@gLzDaHhBcM",
+   "pointCount": 28,
+   "start": [
+    40.647258,
+    140.234445
+   ],
+   "end": [
+    40.629686,
+    140.26361
+   ]
+  },
+  {
+   "id": "青森県:101",
+   "name": "尻労袰部線",
+   "ref": "172",
+   "highway": "secondary",
+   "lengthKm": 5.21,
+   "curviness": 197.4,
+   "flow": 18.1,
+   "turnCount": 57,
+   "score": 51.1,
+   "polyline": "m}o{Fomj~YhBpF}AvCLnAxAp@dEDh@pAJvHdKfHh@~@tChVrEtPvGfAdLWzCj@`Ds@lA`ArGpT`AtKfEjEtGdRvHj_@TxCy@xBOtJkAfOd@jJIpCiBxN`@dLc@xJeMpZ",
+   "pointCount": 32,
+   "start": [
+    41.374469,
+    141.452562
+   ],
+   "end": [
+    41.360823,
+    141.404964
+   ]
+  },
+  {
+   "id": "青森県:102",
+   "name": "三戸広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 26.59,
+   "curviness": 176.5,
+   "flow": 16.8,
+   "turnCount": 280,
+   "score": 51,
+   "polyline": "kj~tFaqc|YjAw@`A~@lIiGnCmDpAHbArDj@Z|BoAh@{BsAyGWqKkD{EyAyOqCaHMwIiEsEoCD_BaAqBwDcBwHQ{Dt@}Ra@aIsBkQnCuUi@sBcHqHeFmYEgGxB}MHuCqAqEiDmEVmG}C_ENgGoB_F@_EsH_Ig_@kg@iHoUwPqQcMwYcBaAuGRcGiH{CUmKuEiAoGaHwJy@mHcAuBkLsJiFeHsMyCgAkBIuK|@_HjBqGHyBuA{DeMwMuAmC[mBHuImDcIsAkb@uFeKk@{BYcWmAkBuCcBuAKmE`AeA[uA_CaBkFaDcWs@sP?kPqAmGiA{BgIeH_@{@OcHoPaUwIqYuBiC_CqFoE{DuDoK}M}Q}DqLcC}OzAmC`@uCzDiGRwCuC{FsPai@|@sHqAmKwIsLm@gBsBcZrEoYiAcEqIiM_AcCR_B~BsCf@oC}AuYiCuGoHqIKqAf@aDeAaJJyKi@{@kG}CkA{A_AuFN{FU{CcK{WsLsWqBu@uAPuL~FqDxCsAK}DmCqJg@gC~@uEvFkG`AoII_Cg@aOyHyBaEcB}@cNj@aJxDiBIwMgR{DgMgA}AiQoBeIb@sa@mIkLaJe@uOk@{@",
+   "pointCount": 155,
+   "start": [
+    40.301341,
+    141.089608
+   ],
+   "end": [
+    40.41061,
+    141.301139
+   ]
+  },
+  {
+   "id": "青森県:103",
+   "name": "田子十和田湖線",
+   "ref": "21",
+   "highway": "primary",
+   "lengthKm": 6.75,
+   "curviness": 195.9,
+   "flow": 19.2,
+   "turnCount": 69,
+   "score": 50.9,
+   "polyline": "_}juFaor{YyAhH}KhB{B|EiANcFL}EyD{QiJqHzA{CEiBzAyB|DcOhAw@^aBnDUlKc@zCqE`F_GbP{BhDWm@zAcFuDaG_B_@oP}KgBv@wBzCeFd@aH_KqGuGmEuJ}DUyRlTaHjF{H~QsFdJsUrTwGdNyPzB",
+   "pointCount": 39,
+   "start": [
+    40.365759,
+    141.00225
+   ],
+   "end": [
+    40.410792,
+    140.98395
+   ]
+  },
+  {
+   "id": "青森県:104",
+   "name": "五戸六戸線",
+   "ref": "113",
+   "highway": "secondary",
+   "lengthKm": 8.42,
+   "curviness": 201.3,
+   "flow": 16.8,
+   "turnCount": 101,
+   "score": 50.9,
+   "polyline": "milvFgvo}YaFqBcDaFOeKiBsJ_@qFeC}GYyFyC}Mi@sAqAaAi@fBsFxE_AxC}EzIcKlK_Cl@mEoCgLgCgCEiO|I}ETqDi@cDaK_IsKuDsBuQ[kDh@mGlDgL}AaEnA{CJ}@t@uC`IqA\\cFqD{DsA}GwBoDC_C}@sJuGsG}GwEdBeIeA{LuHcGlL{D|Da@rH_AdEwF`FeKGyFkAaG`@wChAyMoOD{Cq@yD",
+   "pointCount": 57,
+   "start": [
+    40.53671,
+    141.315718
+   ],
+   "end": [
+    40.594379,
+    141.327191
+   ]
+  },
+  {
+   "id": "青森県:105",
+   "name": "山田鶴田線",
+   "ref": "153",
+   "highway": "secondary",
+   "lengthKm": 6.67,
+   "curviness": 172.2,
+   "flow": 18.8,
+   "turnCount": 61,
+   "score": 50.6,
+   "polyline": "ozwwFwu_xY|Dx@vKnEVxd@aBnQaAr[mBvI_BxMYhQk^vLoUl_@cCp@eG_@qDjE_F^mOjLsDtGsFzBiH~He@lHbCpIbCzSYnHj@|VkEnTCrDvArGgB~ImAbByFfBqBjD",
+   "pointCount": 31,
+   "start": [
+    40.759602,
+    140.414525
+   ],
+   "end": [
+    40.779417,
+    140.356917
+   ]
+  },
+  {
+   "id": "青森県:106",
+   "name": "石川土手町線",
+   "ref": "127",
+   "highway": "secondary",
+   "lengthKm": 5.41,
+   "curviness": 132.8,
+   "flow": 21.7,
+   "turnCount": 33,
+   "score": 50.4,
+   "polyline": "}jxvFwskxYpC~Hxc@|C~CkDhF\\~LiChG]bD`@fCmAl^wBjt@aZvM_DfHaOxFsH~ZkQjCId@{GhEoC~AkCaByUXsJ",
+   "pointCount": 21,
+   "start": [
+    40.598385,
+    140.475635
+   ],
+   "end": [
+    40.559572,
+    140.496198
+   ]
+  },
+  {
+   "id": "青森県:107",
+   "name": "奥入瀬バイパス",
+   "ref": "102",
+   "highway": "trunk",
+   "lengthKm": 7.6,
+   "curviness": 251.9,
+   "flow": 18,
+   "turnCount": 106,
+   "score": 50.1,
+   "polyline": "}dovFe|l{Yi@pD}BbEb@rBpAEnGiFzGlCzL}@hQhMrAb@xF]pEnEjI`ZjAtBbEdDCbKVlBzE`KdAbInBhGpAjHrAtC~A~AhHtBjBtAfDvEfBjK`UbRrCdLp@hA|HxAhCdBfMbPfEvPIdF}ApH?nA~@tAlDQrA`AJvBiAhDNnBlFfCbCtGrBvA|As@bDaJrBO`AtBk@|Kx@lDxBfAvR`CnDbJ",
+   "pointCount": 55,
+   "start": [
+    40.551354,
+    140.973626
+   ],
+   "end": [
+    40.510829,
+    140.924134
+   ]
+  },
+  {
+   "id": "青森県:108",
+   "name": "国道394号",
+   "ref": "394",
+   "highway": "trunk",
+   "lengthKm": 12.01,
+   "curviness": 240.8,
+   "flow": 18,
+   "turnCount": 161,
+   "score": 50,
+   "polyline": "y__wFi{yyYuJgGoB}CcDa\\eCoHqAoJeFwIa@wEPoIwCiKk@aJ{FcI]uI_D}F^iE}BiDZiFQuBi@}@_CeAWu@pA{He@_GcBqCy@sF_D}GY_E}@oAo@iCc@u@aEiBw@wHqCsDiBoFmHeJ{A_PcCyJI{HcAgNFeHuDgDiFZeAi@i@eBRwJ{EmK?qAd@Uj@^xFvJv@~Ff@Rl@_@sAaSf@iFtBsJrDgIpGgIJoIWeGrF}NfJsOdCmK|@mNrFyJpAmRs@_H{@_\\tA{Pd@oOvAcHdCaEb@mCGgNsTgf@gD{QgFiEo@qAGmBp@gESqBeBwAwEU",
+   "pointCount": 83,
+   "start": [
+    40.632449,
+    140.712375
+   ],
+   "end": [
+    40.649243,
+    140.824781
+   ]
+  },
+  {
+   "id": "青森県:109",
+   "name": "石無坂鹿田線",
+   "ref": "220",
+   "highway": "secondary",
+   "lengthKm": 4.09,
+   "curviness": 184.5,
+   "flow": 18,
+   "turnCount": 42,
+   "score": 49.9,
+   "polyline": "yc_vFqxk|Y_AyDcAkJuBoFeCgMkF{GiDwPuKcT[oACaGeFsSyAeDQoNlE{c@kDwTsAg@a@oGf@eBRaLtFeSl@kLl@kBvBgAxAqG",
+   "pointCount": 24,
+   "start": [
+    40.469249,
+    141.131767
+   ],
+   "end": [
+    40.474464,
+    141.175118
+   ]
+  },
+  {
+   "id": "青森県:110",
+   "name": "再賀木造線",
+   "ref": "162",
+   "highway": "secondary",
+   "lengthKm": 4.39,
+   "curviness": 114.6,
+   "flow": 22.9,
+   "turnCount": 22,
+   "score": 49.9,
+   "polyline": "oigxFmvywYeNhNkA`@}]|@oc@zi@}GnC}GNwF|y@mDAwBbAqa@p]iB\\cH_@aD_BsBiKw@k@",
+   "pointCount": 16,
+   "start": [
+    40.838798,
+    140.383908
+   ],
+   "end": [
+    40.867157,
+    140.36135
+   ]
+  },
+  {
+   "id": "青森県:111",
+   "name": "Falcon Drive",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 9.55,
+   "curviness": 131.7,
+   "flow": 20,
+   "turnCount": 63,
+   "score": 49.5,
+   "polyline": "epkwFkty}YZoRkI{c@]kNoELg@cAtD}mAaAw@e`@qBc@rAi@xQqFvAyNbH}DOkA|@aAbW\\vHsD|EyK|Z}Av@cSvDsLzKme@tJgMGcG~@mBbAy@lB_A~o@eA|UhA~Dno@~\\|ALvAw@lB_HxCkAjHlAbJ|I",
+   "pointCount": 37,
+   "start": [
+    40.696514,
+    141.366621
+   ],
+   "end": [
+    40.716214,
+    141.351612
+   ]
+  },
+  {
+   "id": "青森県:112",
+   "name": "三沢七戸線",
+   "ref": "22",
+   "highway": "primary",
+   "lengthKm": 3.64,
+   "curviness": 190.3,
+   "flow": 18.2,
+   "turnCount": 38,
+   "score": 48.8,
+   "polyline": "oofwF{eo}YqFuKkCqPfCuX|DiNxAaLD}GwAaKNwFcDiWpC{AdBwR|@iZOcF`BwRbCiIaAy@MaA~@wGEwD^sCQ_C",
+   "pointCount": 22,
+   "start": [
+    40.670799,
+    141.313101
+   ],
+   "end": [
+    40.669202,
+    141.35334
+   ]
+  },
+  {
+   "id": "青森県:113",
+   "name": "野辺地六ヶ所線",
+   "ref": "5",
+   "highway": "primary",
+   "lengthKm": 10.97,
+   "curviness": 162.5,
+   "flow": 18.2,
+   "turnCount": 98,
+   "score": 48.6,
+   "polyline": "cdpxFk{g}YWtOgBzFkCxOsYri@{@hEFxf@`@dGq@~KpFj\\wKhj@RxFxDhQbFto@jAfBxEdDlCjUnF|ExC_B|@Bx@lDmBfEkBxLgEnHaAxF`@fFc@jH\\xGq@zCeC`FBdCuA|G?lK~@xHqBdHsIzf@s@tHB``@nBhEtAjGlDbHhAtZFhShCvH~EtXcB~GaDhF~BtC~AVnFtT?bH}@zGItGkBxE[tC",
+   "pointCount": 55,
+   "start": [
+    40.884022,
+    141.275577
+   ],
+   "end": [
+    40.885624,
+    141.158791
+   ]
+  },
+  {
+   "id": "青森県:114",
+   "name": "八戸階上線",
+   "ref": "1",
+   "highway": "primary",
+   "lengthKm": 18.64,
+   "curviness": 154.9,
+   "flow": 17.6,
+   "turnCount": 164,
+   "score": 48.4,
+   "polyline": "}pivFqa|~YcFoM_GeEqFgBmB_CeA}Co@sNy@_GoCiH_GqIaNeKuPsHcDaCuKiLeFcJkB?eDwR}FgPc@wNj@sDLqNn@yDhCoGdOyQh@J`ElFfIg@~N}HlJc@|FrFp@H|PsFxFyJrJsJ~CoEhGoFxMjC|CxDdFuHvAuIlBsFzDkc@sAyTrBiP?oLbD{GlGaG|IqBdEsEbO{DnJeEpEyGzD}LlAmVh@kBtJuEfHm@bJiEtEgHjFeLdDaLvG}FrRwKdD_E|BqHnCiBvBe@tEzDbOqAx@m@nBeEjEsBfBeEtGyExCqRjD{IdJwL`AeF`NmJ~KkC~F_FbAqDnAcKnJsY|EuEfGqDfFeMtA{A|Bu@lCCjA_Bl@GlBh@x@~A|DxAtC@|JzFzB^`InIhVn[rKfKzBL",
+   "pointCount": 102,
+   "start": [
+    40.522551,
+    141.542808
+   ],
+   "end": [
+    40.448621,
+    141.649637
+   ]
+  },
+  {
+   "id": "青森県:115",
+   "name": "八戸広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 17.07,
+   "curviness": 175.5,
+   "flow": 14.5,
+   "turnCount": 207,
+   "score": 48.3,
+   "polyline": "}d{uFuab_ZmDfKoAfHiB~B}G`@sI|EoEtDeErAqAGcF}FsAa@wMIwDdC_HvLyApE_AnLh@nYlCrL`AtTzAtHq@hMeF~C{DhI{FdBaGxEkFpHkFbPcDxCiIrKyIbGgCxCmF|I{@hCHvCjBnFWxDgG~GuEhDq@bBNjEj@`BxLbJJhAu@jDBjApHbLxApObAnAxGlD|@fDR~SgAdCaGpBuBjDSnCp@rV]jHcNvd@XpF`DvGc@`BFbKgApMgAxCmExF}BtG_E`F}CrB[`AtCdIWhFVvAhG|DtB|HzH~Q~@rJuBrOj@fGxArCnGvCnAhBzC`[dCrF`A~HvBdGa@jC_IlMmApEqBtQj@lS`EzIdIxEpGtHjK|FvAlBf@vEo@~PxA`FnPtHnKjCbIbK`G~E~@vCF`Hb@dD`AzBjG|GfClM",
+   "pointCount": 108,
+   "start": [
+    40.448953,
+    141.573547
+   ],
+   "end": [
+    40.455443,
+    141.425567
+   ]
+  },
+  {
+   "id": "青森県:116",
+   "name": "太田藤崎線",
+   "ref": "199",
+   "highway": "secondary",
+   "lengthKm": 5.11,
+   "curviness": 165.1,
+   "flow": 17.2,
+   "turnCount": 49,
+   "score": 48.3,
+   "polyline": "khkwFkhkxYtE{@bLRfM{FfFiFtCYpKiGvGaBhIm@nPsFfB@`GaEfM_M|EuHtOmMtF}BnCiC`BCfQlDjIaB~IaE`DaDvFiDlCd@lDC~EwFzF{DxAZrAxAtIiDdCoC",
+   "pointCount": 31,
+   "start": [
+    40.695261,
+    140.473822
+   ],
+   "end": [
+    40.654134,
+    140.49349
+   ]
+  },
+  {
+   "id": "青森県:117",
+   "name": "折茂上北町停車場線",
+   "ref": "211",
+   "highway": "secondary",
+   "lengthKm": 7.84,
+   "curviness": 135.2,
+   "flow": 18.6,
+   "turnCount": 57,
+   "score": 48.2,
+   "polyline": "kzyvFcpl}YoE~DyBUyA\\cHdKqT_LmI}BkGhB_o@_DyNbBqAaAaC_F{FcEeEw@uXLoLbByKQcLpEm@mIaEaOuN?mBf@}[jQ}s@bMmBpBaD|IgAxAwBt@kEQkAj@k@dI}KtPeG`PeF|AmDcB",
+   "pointCount": 35,
+   "start": [
+    40.605978,
+    141.299376
+   ],
+   "end": [
+    40.666638,
+    141.288602
+   ]
+  },
+  {
+   "id": "青森県:118",
+   "name": "東北横浜線",
+   "ref": "25",
+   "highway": "primary",
+   "lengthKm": 3.33,
+   "curviness": 213.9,
+   "flow": 15.8,
+   "turnCount": 45,
+   "score": 48.1,
+   "polyline": "wbdyFivn}Y|Hq@hEeDfDcHnDy@hKEtPzJnSsBt@kAP_DhDqJlEaEjAp@@zAkCbQj@|C~A|@|DIzDuA~LwIfDu@lJgFjC@",
+   "pointCount": 23,
+   "start": [
+    40.986201,
+    141.31061
+   ],
+   "end": [
+    40.963675,
+    141.315063
+   ]
+  },
+  {
+   "id": "青森県:119",
+   "name": "鯵ヶ沢蟹田線",
+   "ref": "12",
+   "highway": "primary",
+   "lengthKm": 3.67,
+   "curviness": 217.2,
+   "flow": 15.3,
+   "turnCount": 52,
+   "score": 47.9,
+   "polyline": "ykuxFcyrwYqJVwDcA}J~AyGGuGuB_EyCkRoH_KdAaCsAkB{CuGmFcRiDiBh@aCxHkGnIuHzB}@GgDkG}GaJ}IyDcIs@",
+   "pointCount": 22,
+   "start": [
+    40.910847,
+    140.348501
+   ],
+   "end": [
+    40.939967,
+    140.354305
+   ]
+  },
+  {
+   "id": "青森県:120",
+   "name": "八戸野辺地線",
+   "ref": "8",
+   "highway": "primary",
+   "lengthKm": 4.29,
+   "curviness": 182,
+   "flow": 17.3,
+   "turnCount": 45,
+   "score": 47.7,
+   "polyline": "{x~wFany|YsDiRVmBxFsH`KwJbFk@rIkG|GMrAyBT}Dl@e@jCo@hD^bDkErMyEtFcEtO_FpEhArFnE~LqDtCeBdA}HBiD_AuU{@kI@iDbAaIzC{HnB{B",
+   "pointCount": 29,
+   "start": [
+    40.795185,
+    141.201773
+   ],
+   "end": [
+    40.772443,
+    141.228884
+   ]
+  },
+  {
+   "id": "青森県:121",
+   "name": "国道280号",
+   "ref": "280",
+   "highway": "trunk",
+   "lengthKm": 10.9,
+   "curviness": 207.1,
+   "flow": 17.9,
+   "turnCount": 126,
+   "score": 47.7,
+   "polyline": "i}lzFwcrxYcI}GeEyEGwA}L_NkDwAqXm^cMgJaCuEi@Q}EbA{D~CuBKcF_CuKkJgJwD}AwA{B]aFaCoJyIoAkH`A_PQgSn@qAnCZhCiAzBuDL{G}BiGcFuG{A{EMaFcCeBi@yAoF{G{C}HoB[qDuCoGuN]uBG{Ap@yDhEiCxBaD\\cBe@}Ii@wAy@sHz@aG?sEfAiBLoCe@yCaC{ESeCf@kDfDsDr@uBF{DeAaCCyAhBeDx@qFMiRx@yK`EcK|DkVzEcGhA}EvGmK|FaNjCaWAgIzBaHBcGpFsc@z@iDrBcD",
+   "pointCount": 78,
+   "start": [
+    41.195249,
+    140.508915
+   ],
+   "end": [
+    41.213234,
+    140.604411
+   ]
+  },
+  {
+   "id": "青森県:122",
+   "name": "七戸十和田湖線",
+   "ref": "118",
+   "highway": "secondary",
+   "lengthKm": 9.68,
+   "curviness": 138.1,
+   "flow": 17.3,
+   "turnCount": 77,
+   "score": 47.6,
+   "polyline": "gcewFklm|YnEa@|JfAnFiB|ByCj]dU|YyH~DyCfCs@K}Qw@mF|@}DzF{Jn@eFzCmCvDy@t@_Ef@_@vCOdLz@~TnF~XhDhj@dQpNx@xN{BnAPz@n@JjHxDzK|EtCbKbCdBnCnAfERtDe@rGa@rWb@`S|@zKdCjKbAfQrJfa@tGlGx@hD_BrW_GdKgKrK?pCtBpA",
+   "pointCount": 48,
+   "start": [
+    40.663723,
+    141.140056
+   ],
+   "end": [
+    40.614685,
+    141.10556
+   ]
+  },
+  {
+   "id": "青森県:123",
+   "name": "十腰内陸奥森田停車場線",
+   "ref": "132",
+   "highway": "secondary",
+   "lengthKm": 3.01,
+   "curviness": 168.9,
+   "flow": 17,
+   "turnCount": 30,
+   "score": 47.6,
+   "polyline": "s|vwF_~owYiGiBcEsFkA_DuFiCaCBeGpAgHiD{]gJsF_AkFFeD{@kGpAiGhEcB?yLeCc@iDwAgC{FqAuELwC}@",
+   "pointCount": 21,
+   "start": [
+    40.754816,
+    140.33392
+   ],
+   "end": [
+    40.779437,
+    140.341389
+   ]
+  },
+  {
+   "id": "青森県:124",
+   "name": "沖飯詰五所川原線",
+   "ref": "163",
+   "highway": "secondary",
+   "lengthKm": 3.93,
+   "curviness": 191,
+   "flow": 15,
+   "turnCount": 50,
+   "score": 47.6,
+   "polyline": "wwfxF{{gxYgBzOrAzR@bIhA|GHjE[rMsCpLbCxG|BDrMiCdFuDzGpDtABrHoI|IcB`G{EnAQjMdHpEnIrErFxFdAhJxE|AExE_B",
+   "pointCount": 25,
+   "start": [
+    40.835958,
+    140.456456
+   ],
+   "end": [
+    40.815871,
+    140.43932
+   ]
+  },
+  {
+   "id": "青森県:125",
+   "name": "切田五戸線",
+   "ref": "168",
+   "highway": "secondary",
+   "lengthKm": 4.63,
+   "curviness": 167.5,
+   "flow": 16.1,
+   "turnCount": 48,
+   "score": 47.4,
+   "polyline": "_rnvF_`_}YoCrDmBzE_Cj@k@vCcJ~RgHh[mFzDgE|MuHhDo@lHsA`B_KlCiK^k_@kAeIxB}IkBsBJ_Al@aDbF_IzGgFd@wF[qIxBiFzDgEZ{DlF",
+   "pointCount": 27,
+   "start": [
+    40.548324,
+    141.230236
+   ],
+   "end": [
+    40.581069,
+    141.207012
+   ]
+  },
+  {
+   "id": "青森県:126",
+   "name": "五所川原金木線",
+   "ref": "36",
+   "highway": "primary",
+   "lengthKm": 6.89,
+   "curviness": 163.2,
+   "flow": 17.6,
+   "turnCount": 64,
+   "score": 47.4,
+   "polyline": "olhxFqbmxYiE`BsBrBkHfB_MkB{KCiE_AoF`BeJzI_MlEyE`@eE}BmCt@kGR_RlIeKfCiDlBaDsBsEk@{GfAcMvEwRhEoDcAiAT}GlJuGhTcHn@|@bJQnAVvF[`Y}AlKHlHzCi@jYaAfRyCjCj@rK|I",
+   "pointCount": 38,
+   "start": [
+    40.844403,
+    140.48313
+   ],
+   "end": [
+    40.871665,
+    140.457697
+   ]
+  },
+  {
+   "id": "青森県:127",
+   "name": "鳥屋部十日市線",
+   "ref": "221",
+   "highway": "secondary",
+   "lengthKm": 4.39,
+   "curviness": 181.5,
+   "flow": 15,
+   "turnCount": 53,
+   "score": 47.2,
+   "polyline": "}yavFiax~YrJkGpDeEdFgAbCeDzFOlGiHvNwG`BU`IzBdE{C~G{AfIaFn@oB\\qExD}HpAmT?kKvBkHnDiCbOeFdDuE|A{E`DwFd@iCbEsGrA}DdJ}@hEw@lAy@",
+   "pointCount": 30,
+   "start": [
+    40.483031,
+    141.52229
+   ],
+   "end": [
+    40.454493,
+    141.549903
+   ]
+  },
+  {
+   "id": "青森県:128",
+   "name": "五所川原浪岡線",
+   "ref": "34",
+   "highway": "primary",
+   "lengthKm": 10.76,
+   "curviness": 168,
+   "flow": 16.3,
+   "turnCount": 111,
+   "score": 47.2,
+   "polyline": "kyywFmytxY~HuEvHmAzMEdKhCfBlDdGtE`Ij@|Zq@bIt@|Ce@|BcD|JmEvBqChCD~HdCtEcEpIgCBiEbBkFd@qHjI{CpD_@`PeFlE{Gf]_T~QkNzKkEdF{EvFmI|AaHrE_@xJoJ`IiT~FoFt@qEtB{E`TeOvLoOm@wAAuI`C_l@gAaH|@qTr@yCbHsN`K{M~@aEYwDcG_QiEwZeIwE",
+   "pointCount": 52,
+   "start": [
+    40.769658,
+    140.522631
+   ],
+   "end": [
+    40.711305,
+    140.58745
+   ]
+  },
+  {
+   "id": "青森県:129",
+   "name": "国道101号",
+   "ref": "101",
+   "highway": "trunk",
+   "lengthKm": 5.22,
+   "curviness": 177.5,
+   "flow": 20.6,
+   "turnCount": 45,
+   "score": 47.1,
+   "polyline": "cxwwFqs}uYnAaKzFuLd@sCG}I`EmInBoBdIqA`IeG~Ig@pGcCxF_JhNuYzFgElAkBxKu[~GkM|@aGHqM}BeJIkDxCkLZcRcAqWyCuOFaLg@uK",
+   "pointCount": 27,
+   "start": [
+    40.759215,
+    140.076245
+   ],
+   "end": [
+    40.741346,
+    140.124317
+   ]
+  },
+  {
+   "id": "青森県:130",
+   "name": "長後川内線",
+   "ref": "253",
+   "highway": "secondary",
+   "lengthKm": 12.08,
+   "curviness": 161.1,
+   "flow": 14.6,
+   "turnCount": 133,
+   "score": 47,
+   "polyline": "_l{zF}jszYxDcMFmA{C_QVcEfQce@q@si@rDcY@qBYwBcFsMi@kEdH}Rd@uEiCoN{EqHOgE\\sFxCoKVkFY{AgBmCkHmE_D{CiIAmCeAaAwAgA{De@gDK{GkB}Gi@g@gE@yCaAiDoCcCeDoAcJ\\_DjBqEsAiMf@wS}AeLwKwKb@_HiB_Gz@oDnGiKGcEuBgCk@yDcAqAwVaHiHsD_LyIqAoBcCgIwCuEoB_IcHoNgAqYwGaSkAuOaLm]SsH^aQs@sFwB{HgHuGqB}EC_CfBqMUiS",
+   "pointCount": 72,
+   "start": [
+    41.269284,
+    140.842872
+   ],
+   "end": [
+    41.296553,
+    140.959497
+   ]
+  },
+  {
+   "id": "青森県:131",
+   "name": "長平町森田線",
+   "ref": "39",
+   "highway": "primary",
+   "lengthKm": 7.39,
+   "curviness": 171.6,
+   "flow": 16.3,
+   "turnCount": 78,
+   "score": 46.9,
+   "polyline": "wjqwFglewY_IePeDgDeBWqClC}AYqEb@o@s@gBsFaLaP{Ci@{C~BcHiD{Ue@oGkLwCkLoAk@sEpA_Bc@mBsCqA}EiIeEeJqJaDsFeSqJaFiJ}F_Qw@aAwCiA_OeNyLsAuC}AqPoViBwIeBcDcHuDi[qCyFXuAcA_CsDmD{BoGmI_BeAaIc@",
+   "pointCount": 44,
+   "start": [
+    40.72636,
+    140.27988
+   ],
+   "end": [
+    40.779021,
+    140.320258
+   ]
+  },
+  {
+   "id": "青森県:132",
+   "name": "屏風山内真部線",
+   "ref": "2",
+   "highway": "primary",
+   "lengthKm": 4.45,
+   "curviness": 127.4,
+   "flow": 20.2,
+   "turnCount": 28,
+   "score": 46.9,
+   "polyline": "ofyxFozswYtAcVnBSfGgEtRkVfCmSfGyUxF_FtD|AhUBhDlD~IIbJiVrI{cAo@}EsIaX",
+   "pointCount": 16,
+   "start": [
+    40.930479,
+    140.353841
+   ],
+   "end": [
+    40.913145,
+    140.388976
+   ]
+  },
+  {
+   "id": "青森県:133",
+   "name": "中部上北広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.58,
+   "curviness": 166.8,
+   "flow": 15.6,
+   "turnCount": 49,
+   "score": 46.8,
+   "polyline": "qi|wFg}m}Yb@lE|EfFj@zAd@jKvBvH|@|OpDhLVfS]zDu@vB}GbG}@dBCpQu@jFwAnAgG\\o@dAhAr]}@jJvAhb@wG|WaF~LY|CHnHi@xG^`HqAvDQbE",
+   "pointCount": 29,
+   "start": [
+    40.782492,
+    141.306603
+   ],
+   "end": [
+    40.785982,
+    141.258262
+   ]
+  },
+  {
+   "id": "青森県:134",
+   "name": "弘前バイパス",
+   "ref": "7",
+   "highway": "trunk",
+   "lengthKm": 3.33,
+   "curviness": 140.3,
+   "flow": 23.4,
+   "turnCount": 20,
+   "score": 46.6,
+   "polyline": "mzawFmkpxYqAaCc[__@gD}B{FuB~KjGvd@ni@lB~DfOld@zBnD`HtFrJxB",
+   "pointCount": 12,
+   "start": [
+    40.646948,
+    140.499911
+   ],
+   "end": [
+    40.638763,
+    140.489091
+   ]
+  },
+  {
+   "id": "青森県:135",
+   "name": "五戸下田停車場線",
+   "ref": "119",
+   "highway": "secondary",
+   "lengthKm": 5.19,
+   "curviness": 162.5,
+   "flow": 15.4,
+   "turnCount": 55,
+   "score": 46.5,
+   "polyline": "susvFiux}Y~AvBbQnL|H[vAz@bG~KvFfHxCvBjNj]lCxBjMtBxChEdBzEtEbDrAGlG_DfWe@lDgApALz@x@dDpEXfEjEjDhCzF|BjPvBpIz@`OzGhKtBpFbHvJzAxG~A~AbBd@",
+   "pointCount": 33,
+   "start": [
+    40.5745,
+    141.361653
+   ],
+   "end": [
+    40.541618,
+    141.32826
+   ]
+  },
+  {
+   "id": "青森県:136",
+   "name": "羽州街道",
+   "ref": "247",
+   "highway": "secondary",
+   "lengthKm": 5.29,
+   "curviness": 154.1,
+   "flow": 15.7,
+   "turnCount": 52,
+   "score": 46.3,
+   "polyline": "yn{wF{bgyYL{AmBaCqBcGk@eFk@mOkFcTmBwCgDsCiBo@wEWaEuG_C_C_NiFyGcO_A}@wHuDwGcBw`@j@uHmIo@iCeDqEgA_DiJuKsEWkEgDoNi@iR}HiJsBkJuFkCu@u@\\",
+   "pointCount": 32,
+   "start": [
+    40.778208,
+    140.616301
+   ],
+   "end": [
+    40.815019,
+    140.645938
+   ]
+  },
+  {
+   "id": "青森県:137",
+   "name": "清水川滝沢野内線",
+   "ref": "123",
+   "highway": "secondary",
+   "lengthKm": 6.03,
+   "curviness": 162.9,
+   "flow": 14.9,
+   "turnCount": 66,
+   "score": 46.3,
+   "polyline": "axoxFysn{YaLiIiHm@aBs@iGcIqAmFmA_CcBgAuNwDkBmAyBiEoHaIcAmHw@eBeX{Hy@u@qAiHkRoK}FcFiFBsGiCkK}BgOw@wLwGsF}H_OmJwCaF}BeAoF_JkF{FqB{F{C}A{CiFuE}BmHsFgB}D{AoA",
+   "pointCount": 37,
+   "start": [
+    40.882087,
+    140.982526
+   ],
+   "end": [
+    40.926261,
+    141.017906
+   ]
+  },
+  {
+   "id": "青森県:138",
+   "name": "弘前岳鰺ケ沢線",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 6.24,
+   "curviness": 154.9,
+   "flow": 17,
+   "turnCount": 57,
+   "score": 46.2,
+   "polyline": "kyywF{myvYkKpGaDbDyF~@oDFgEy@kMmGaAfGd@fTgEjXmDvLeAnAyHrC{DnCmGlA]b@vC|LrC|GSdGyClP~G~]|AjEnGpHbQtFtGrCdAjAzE~MzA`RnEtWdEzM~LrRzC`KArAq@fA",
+   "pointCount": 34,
+   "start": [
+    40.769658,
+    140.218697
+   ],
+   "end": [
+    40.769363,
+    140.169128
+   ]
+  },
+  {
+   "id": "青森県:139",
+   "name": "五林平藤崎線",
+   "ref": "196",
+   "highway": "secondary",
+   "lengthKm": 3.53,
+   "curviness": 186.3,
+   "flow": 14,
+   "turnCount": 47,
+   "score": 46.2,
+   "polyline": "apkwFm}qxYlBzBz@xEjNzP|DjGnGpBtFh@nEpEdN~EbIf@~FoBpEj@pEKxCoBbIaAvF{DzCoD`GkBdO|AhExBvFuAzHl@pCaA",
+   "pointCount": 23,
+   "start": [
+    40.696493,
+    140.507908
+   ],
+   "end": [
+    40.668324,
+    140.50195
+   ]
+  },
+  {
+   "id": "青森県:140",
+   "name": "差波新井田線",
+   "ref": "139",
+   "highway": "secondary",
+   "lengthKm": 4.88,
+   "curviness": 164.1,
+   "flow": 14.8,
+   "turnCount": 54,
+   "score": 46.1,
+   "polyline": "a_}uFuxr~YmGiDqEUmJsI}DmO{@uKoDaJeFoEaJ_FcNb@kF}BaGsEe`@sTiDiIkBsAyG}AsJwOmGcEoGW{DmAgBkDByDcFmFm@oDq@eAuOkAeFJgCsC",
+   "pointCount": 28,
+   "start": [
+    40.458255,
+    141.495306
+   ],
+   "end": [
+    40.492663,
+    141.523505
+   ]
+  },
+  {
+   "id": "青森県:141",
+   "name": "石川バイパス",
+   "ref": "7",
+   "highway": "trunk",
+   "lengthKm": 3.18,
+   "curviness": 202.4,
+   "flow": 18.4,
+   "turnCount": 35,
+   "score": 46.1,
+   "polyline": "odrvFmnwxYiHbGkClFqB~HWbUy@nJ}@lDmDdGqSdRhTcR`DsF|AkIr@u^nDiLnFgG",
+   "pointCount": 15,
+   "start": [
+    40.566644,
+    140.536234
+   ],
+   "end": [
+    40.567246,
+    140.53597
+   ]
+  },
+  {
+   "id": "青森県:142",
+   "name": "三沢七戸線",
+   "ref": "22",
+   "highway": "primary",
+   "lengthKm": 3.15,
+   "curviness": 157.9,
+   "flow": 17.8,
+   "turnCount": 28,
+   "score": 46.1,
+   "polyline": "iihwF}ug}Yd^kQrH_RlA}AdBg@hI[rCcAp@wCxBmWrKaKlC_@gAmIB_E^cB|DaIbCcINoEqA{KiFyJ",
+   "pointCount": 19,
+   "start": [
+    40.680045,
+    141.274712
+   ],
+   "end": [
+    40.666711,
+    141.299954
+   ]
+  },
+  {
+   "id": "青森県:143",
+   "name": "十和田南部広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.65,
+   "curviness": 158.6,
+   "flow": 15.7,
+   "turnCount": 37,
+   "score": 46,
+   "polyline": "q}uvFkpb|YrKwIn@mABmCqA_EIgDrCuSbQwPvI`C|HjDlJdNhHxExDGdEaEt@eBPiEqBgOnC_MVwMvKaYPuC_@cB",
+   "pointCount": 22,
+   "start": [
+    40.586008,
+    141.084375
+   ],
+   "end": [
+    40.569396,
+    141.10527
+   ]
+  },
+  {
+   "id": "青森県:144",
+   "name": "北部上北広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 13.93,
+   "curviness": 136.3,
+   "flow": 14.8,
+   "turnCount": 128,
+   "score": 45.8,
+   "polyline": "gr|wFciw|YeN{GaBDcElBoBNkSaDiZfB}JbIiG`CgOd@}FgBgHxB_`@EgAjAeCzGoCpNeEtKgDtFaGvFyDdAqCSqGoC}AgAuEkHkBeAuSgEoKV}I_ByR\\cMwHmEgK}JqDe@gCd@yHgAsCeSeDuKyJqHm@yFcDgF\\aG}CwYtAgE~AsMdKeAXwAWs_@k[wCiEyGcOmByAiLA{KvAuGcCaHu@{@mCGoEaHgi@yJqFsAAaAn@cD~EuPfNeEk@}UiHyAdBgB~EoA`BqAZ_IYuAdEc@|JyAdA_C`@",
+   "pointCount": 73,
+   "start": [
+    40.783879,
+    141.190738
+   ],
+   "end": [
+    40.8873,
+    141.204484
+   ]
+  },
+  {
+   "id": "青森県:145",
+   "name": "久栗坂造道線",
+   "ref": "259",
+   "highway": "secondary",
+   "lengthKm": 5.5,
+   "curviness": 143.7,
+   "flow": 15.8,
+   "turnCount": 50,
+   "score": 45.8,
+   "polyline": "}jgxFwtkzYaHiLeBcFcDmDeDqBaGoKgBmEgI_[uBsE{GcFqHi@kB}BwCoKeQkLkDeKcHqAwIsFqFuKsCuB}BiEcA_KgJaUoT}JkKgImNu@sAw@}@wCLgGu@mGaFkM",
+   "pointCount": 30,
+   "start": [
+    40.839028,
+    140.803483
+   ],
+   "end": [
+    40.872552,
+    140.845367
+   ]
+  },
+  {
+   "id": "青森県:146",
+   "name": "津軽新城停車場油川線",
+   "ref": "234",
+   "highway": "secondary",
+   "lengthKm": 3.73,
+   "curviness": 130.1,
+   "flow": 17.3,
+   "turnCount": 28,
+   "score": 45.7,
+   "polyline": "wdexFygryYiFXu@xBkAPaEuAgB_CmFsNkk@se@_J{IgC}GyCwCu@wCoCsFuAgHgAqBaLaHw\\yJ_HgFcEyK",
+   "pointCount": 19,
+   "start": [
+    40.827804,
+    140.673407
+   ],
+   "end": [
+    40.853665,
+    140.696843
+   ]
+  },
+  {
+   "id": "青森県:147",
+   "name": "切田五戸線",
+   "ref": "168",
+   "highway": "secondary",
+   "lengthKm": 4.6,
+   "curviness": 154.3,
+   "flow": 15.1,
+   "turnCount": 47,
+   "score": 45.6,
+   "polyline": "_|lvFk{`}YiG}R{DyER{Ig@gHsAqEMgKfBqH~CaDx@aKrBiHdB{\\qAgMF_ChBuFxOqJ|D{OhFia@~AeGvEgGb@yQaEsPQqC\\uFjDuEfAwC",
+   "pointCount": 26,
+   "start": [
+    40.539681,
+    141.239745
+   ],
+   "end": [
+    40.532823,
+    141.287233
+   ]
+  },
+  {
+   "id": "青森県:148",
+   "name": "畑中竹鼻線",
+   "ref": "148",
+   "highway": "secondary",
+   "lengthKm": 3.57,
+   "curviness": 133.4,
+   "flow": 17,
+   "turnCount": 28,
+   "score": 45.6,
+   "polyline": "ez~vFaqyxYmCKeCaAsD`CsF}IiDiDaH?gIyBcR{FuXiLyCBkM`E{CI{a@kOkGeAmDaEWwA`@oOi@cH",
+   "pointCount": 19,
+   "start": [
+    40.631551,
+    140.546892
+   ],
+   "end": [
+    40.657956,
+    140.560767
+   ]
+  },
+  {
+   "id": "青森県:149",
+   "name": "蒔田五所川原線",
+   "ref": "151",
+   "highway": "secondary",
+   "lengthKm": 7.59,
+   "curviness": 165.4,
+   "flow": 13.5,
+   "turnCount": 93,
+   "score": 45.6,
+   "polyline": "wtoxFofaxYhFn@jGtE`Db@`BzA`K~c@xDhIhO|QtL|I`BrBxCjHhLbM|@Z`HsCjTcBvBnAzGcBlA`@hEtEbCLlDcAhDIdI`CdDbCvAJpDs@jJmEdJwKp@_B~@eIhBqGdG}K|@yEhAgQx@_FhD{DvJ_B~Kb@rCwFzCsDhF}AvEd@~A|@zDbLxDbIpWoH",
+   "pointCount": 46,
+   "start": [
+    40.881564,
+    140.422324
+   ],
+   "end": [
+    40.830081,
+    140.417751
+   ]
+  }
+ ]
+}

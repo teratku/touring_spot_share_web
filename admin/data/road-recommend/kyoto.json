@@ -1,0 +1,3166 @@
+{
+ "prefecture": "京都府",
+ "romaji": "kyoto",
+ "generation": 1,
+ "builtAt": "2026-07-27T22:39:58.746Z",
+ "weights": {
+  "curviness": 0.35,
+  "flow": 0.25,
+  "length": 0.15,
+  "classRank": 0.1,
+  "popularity": 0.15
+ },
+ "count": 150,
+ "segments": [
+  {
+   "id": "京都府:0",
+   "name": "嵐山高雄パークウェイ",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 10.36,
+   "curviness": 650.8,
+   "flow": 28.9,
+   "turnCount": 233,
+   "score": 83.5,
+   "polyline": "mh}tE{fb{Xx@DLn@iCf@oHjEKzAh@DpH{FfCr@zAqAxEi@dDjBxAPJvB]pARd@pA[~HPhQrAhClDtRuBrE~B|@D~C}BCcBm@AQf@BtEcDhBcBnC{A\\oJm@}BzCuCYg@XiExJeB[uGh@kDfAcB]Qj@RdBnBRt@p@}ApEjAbJn@pAjH`DvC[vDzBpCBzCfAjFQIw@qBY?u@f@[tE`@|BpAxDKbCxAhFO|FcBAbA_HfCs@fCmAd@Gj@pB\\bBnA|BYj@s@{AcCb@}@pFv@bCvBtAkAlAF^hDaBrDvA~BNbIl@bBhB~AUvEr@~AhCM~@n@ZWGaAkAuAXoAh@YxFnBjBQjDz@`Bs@xBGxCkFBm@o@OiAfAg@fDsEj@dCaFjDiDz@iCxAkBGiC|BiE?uBnAgBDkCdEqDe@e@}AdBy@Fg@e@@q@jCs@BqAmF|@yHiB",
+   "pointCount": 123,
+   "start": [
+    35.053028,
+    135.676139
+   ],
+   "end": [
+    35.028207,
+    135.66394
+   ]
+  },
+  {
+   "id": "京都府:1",
+   "name": "井辺平線",
+   "ref": "654",
+   "highway": "secondary",
+   "lengthKm": 10.44,
+   "curviness": 559.8,
+   "flow": 28.4,
+   "turnCount": 206,
+   "score": 83.5,
+   "polyline": "ubzxEgk{wXy@QkEdADcF}BoEaEaCkEsP{AcCiCoBmFmLc@Im@tFuDl@iBhFaBv@RaC{AVoBc@gA^a@UCuCg@s@u@~@_@nB}BZwBdB{@a@L}D]OqCzAeDYq@e@ReJUKqEtA}CHwD{@_AgA@_DT_@bBQLe@uCmKsGgC}@R]`@NrAy@d@SpAk@Zu@u@k@mEeAmBmDm@]g@iA{H`@aCeBsBNw@dA{@I]eBXgB|AeCp@g@rBgAPyAw@qAHuB`Go@h@o@[OaBmA{C]dAb@pEm@EaB}AeBHgBvCiAh@}@O{@`AUv@h@pEiBAkClAiFGyCcDaBs@_NdAiEUkJ_EeB\\s@zJjA|FAxHC~As@xB}@fAq@DuMsEyBr@}@bCa@pJoAlJuEpEuAOmE}IkEaPgA{ByTc^wOoIiFeB{Bd@eBfD",
+   "pointCount": 115,
+   "start": [
+    35.692112,
+    135.149476
+   ],
+   "end": [
+    35.74753,
+    135.163852
+   ]
+  },
+  {
+   "id": "京都府:2",
+   "name": "二尾木幡線",
+   "ref": "242",
+   "highway": "secondary",
+   "lengthKm": 7.61,
+   "curviness": 657.7,
+   "flow": 31.9,
+   "turnCount": 157,
+   "score": 83,
+   "polyline": "y`etE{kz{XZcE{AwEE{AjL}TtDiN^yHuB{MwIgFmDcHKeBnAeBrKwGpLuCxBsGbBeCl@gDzI}HhIgOt@uFrFoEFiCm@eB}DkBz@u@tAXjAmAf@oCOsAbAy@m@{FT_AdAw@fAiFk@e@aA`ASaAdBwBtCq@bAVhBcBxB\\rCyElA@b@{@J}FwAyE_AiG{@sC}CiEGwCb@cAC_Eh@cBJeD}A}Er@UrAuBeB`AyANnAm@h@qAR_CUgB^_FbAoB~BL~A_Ff@Ez@dChBcB`B@f@eBxAUlBmB|AMxA}ABqDeAk@}@RO]hA[~@^t@}C",
+   "pointCount": 84,
+   "start": [
+    34.928929,
+    135.79982
+   ],
+   "end": [
+    34.910134,
+    135.855023
+   ]
+  },
+  {
+   "id": "京都府:3",
+   "name": "大原野道; 柚原向日線",
+   "ref": "733",
+   "highway": "secondary",
+   "lengthKm": 6.9,
+   "curviness": 750.2,
+   "flow": 31.6,
+   "turnCount": 164,
+   "score": 82.9,
+   "polyline": "inltEihvzXcA{CUsK~DwUzCyG|BgI~Jl@nEkCbC?rJhE|@ElBhAdAbB|E_A|AjA`BU`@aClBmAPwCp@w@rEkDvDb@rFiJh@kDlAkBlAuAbCAb@]G}@o@M_@y@nAuHu@qF~@gCzAu@~@kEaAsBd@iA`AeIaAa@Es@{AY{BgFS_Dw@w@l@G|@v@ZrBrCdCuAqD\\mC}ByD}AaG_CpF}AuBm@IyEvGe@sGm@qAT_D[{AuG_BvGN`Bd@fAqBE}@_AD{@`AkBKhBm@`DmDfAb@N|Bn@hB]kH}AeA~AHhAnAP{@",
+   "pointCount": 79,
+   "start": [
+    34.966935,
+    135.614929
+   ],
+   "end": [
+    34.951832,
+    135.646091
+   ]
+  },
+  {
+   "id": "京都府:4",
+   "name": "木津網野線",
+   "ref": "665",
+   "highway": "secondary",
+   "lengthKm": 11.99,
+   "curviness": 539.3,
+   "flow": 27.9,
+   "turnCount": 232,
+   "score": 82.9,
+   "polyline": "}isxE}zwvXcFlAcMkHoKjAeAsDq@c@cQ}G_Fk@uHxCqEYwKkJy@yBcAvAwAl@AvBpAp@]XeDqAsACuAaGiBn@cCYa@e@]oCf@cDgBcDyHqI{B}EkE}Ek@aGfCxDjCfBHS_@sAJ{Fk@s@cBNuA}@PsBSeFoBfDeAJyBo@Wo@VqA[o@yEF_AsAf@wArBsAoACmBv@{EsFC{@zF}B~@iBQk@eEXsJxCbBwFuH\\y@}Ce@]mCzAAnBk@p@yJf@wDlAeEmA@c@jA[tFsED}AoB{A?m@vC{F|DoEn@aEcBcC}AqHqCuGKiA_CqBFaBjB{Cf@sDj@cAk@qG{@}A{CcC{Cu@_@sDpAo@kEoC`A}CXgGg@oDf@kDBsEt@aDeBkIhAiAhEShEyJp@kDZaM`A_BjBg@DwCpAyFlGwMzJmJjGsCvHqIhGwK`Rv@",
+   "pointCount": 116,
+   "start": [
+    35.65743,
+    134.967672
+   ],
+   "end": [
+    35.67802,
+    135.028339
+   ]
+  },
+  {
+   "id": "京都府:5",
+   "name": "碇網野線",
+   "ref": "653",
+   "highway": "secondary",
+   "lengthKm": 7.17,
+   "curviness": 728.3,
+   "flow": 31.3,
+   "turnCount": 167,
+   "score": 82.9,
+   "polyline": "oi~xE}ltwXoAiJqA{BoBsGkDyCW_McAaJnGoUfEwIlAoGDkCaD}Ms@yJ}@yDmAyBu@_Fi@}@QNjB`Ol@fBWtFEeGkAuBcDgPh@qB~@cANoKlBiI~@y@`ACJnAr@dABwAd@s@zBl@VwAxA_Co@}D~AjB`A?EsPdAiEY{FT]n@^d@eByA{DoAqJaEwBG}CcBeBvAs@JcBz@w@dA}CM}BVuBg@}@mDmAG_An@uEqC_CBmAmAeGe@oAeBaBQoDn@yBKy@gBRaD{@u@lA^iBhCGNyBaD{AaBhA",
+   "pointCount": 77,
+   "start": [
+    35.713683,
+    135.113912
+   ],
+   "end": [
+    35.717387,
+    135.164975
+   ]
+  },
+  {
+   "id": "京都府:6",
+   "name": "柳谷島本線",
+   "ref": "734",
+   "highway": "secondary",
+   "lengthKm": 5.82,
+   "curviness": 706.8,
+   "flow": 28.8,
+   "turnCount": 143,
+   "score": 82.6,
+   "polyline": "md}sEcoa{Xm@zK_BtE_@zDwCfEiGrEqFpLItCtBxEdAbIMd@aA?_BiB{@NkExGwGbHmDl@sE`HyBQm@Vy@dAEnBkCfAyAtDmCc@gBxBwA{AoHwAcBcAo@oCHcC}ByFiB?_A{AsBlAy@k@eATsAo@In@dFpBr@d@Lr@e@f@gC_A_EjFFlCaBbAa@zA`@ZdCm@\\`AsB|ACtAaAzAZfDaBvBqEbB]M@gBpBXfAw@TeCy@gCyAf@kBm@M{DoChBeMR_CSq@aB",
+   "pointCount": 70,
+   "start": [
+    34.888555,
+    135.672337
+   ],
+   "end": [
+    34.913359,
+    135.653587
+   ]
+  },
+  {
+   "id": "京都府:7",
+   "name": "上黒田貴船線",
+   "ref": "361",
+   "highway": "secondary",
+   "lengthKm": 15.86,
+   "curviness": 588,
+   "flow": 26.3,
+   "turnCount": 354,
+   "score": 82.6,
+   "polyline": "o{zuEmep{XvB{AbIcCfAeDvCoBlEGdCfApEvDfAjDrDzDPpIzApDcArFxAlE^|Dj@~A`B|AlKv@jDtCHt@yAlF|@nDl@JpEoBlCNhBdMlAbDdBlBnF]~E`A~@Y|@aB|@SzEnH|@?tAw@bAsBzBxCp@Pz@o@dC}GnBJj@|@fBIfBeB|@qD~C@`D}DZyPbCqJ|BqCV_GjBu@nCDlBoCfBEnAjB\\jBzCjAtBBdCaBpA^nArBjCH~Ap@bBOtA`BhAA~CmB~AEtD~C~HMnA`B~AF`B~@nDmBbDvAbAqFrDc@\\gAxF_HSyAZqBjBaE}@eE\\m@bB@t@sCp@q@{B{FRs@tAS`@o@{AyG@oAf@D`AtAjDeCrCSxD{ClDcA|E}FbGeChDcCtEmBfDc@`CaE?aBdAe@rAuCgB}BtENfA{AC{CkA}A@g@xCF~E}CvDaApDgCdBLfD{@a@|@X`@vAe@hDd@`F]o@h@fGRdElBrHNz@cD|ByDBmBm@oAN[`EbEjBkAdKcDnAPdCq@lGjArCyAvAvAhJlAlG|C~H@hEnBvD@rDdCtD{@rARpErF|Dp@dC~BrEDpEjArELxCs@fL`@tGcItCAdImA|BeB`AiDrDa@",
+   "pointCount": 166,
+   "start": [
+    35.20456,
+    135.747591
+   ],
+   "end": [
+    35.104929,
+    135.763894
+   ]
+  },
+  {
+   "id": "京都府:8",
+   "name": "久僧伊根線",
+   "ref": "652",
+   "highway": "secondary",
+   "lengthKm": 5.23,
+   "curviness": 789.2,
+   "flow": 30.3,
+   "turnCount": 136,
+   "score": 82.5,
+   "polyline": "s{_yEgngxXeIG_@tAe@LgA_DuCCmEvCm@`EuCjGa@wHg@eC[F^vE_@|DyBzHwBfD_@~EPfDqAdBIbBNnCt@j@VORyC|Cy@UaEPy@~@zDJpCe@p@}AMXvCU~CgBbEEfBm@`BaBfB]vCP`CqG`FuFzNcBPkA`CqC^cHkKKaCaBi@uA^cD_D_B~@yAKy@nAaAcA{C@u@oCk@i@HyAr@qAgBqAF{De@{Ak@X{DbHiDhBEz@",
+   "pointCount": 65,
+   "start": [
+    35.721704,
+    135.211397
+   ],
+   "end": [
+    35.741991,
+    135.197346
+   ]
+  },
+  {
+   "id": "京都府:9",
+   "name": "雲ヶ畑下杉坂線",
+   "ref": "107",
+   "highway": "secondary",
+   "lengthKm": 5.09,
+   "curviness": 855.7,
+   "flow": 31.1,
+   "turnCount": 140,
+   "score": 82.4,
+   "polyline": "s}euEknf{X{@yAn@eEmGmDMy@h@_CeBaEFaCmCoBaE@eDm@y@t@mCh@eCq@uBbAoDw@uCbAaB_A}Af@wBIyB_BsA^uEgB_Dh@aCoBGuC_@k@wNr@{EwJs@i@i@L_CjDW{B_AeAaEw@gBb@bB}AAsBz@hA|ASjAVl@_C~@`AhD_@\\wDOsAT[b@F|BdDrBoFg@uDuBgFkBfBqB{AcBhAmCiAqAxAk@cB_C}@]eAoBWfB_@jAr@bCFrCm@j@o@SiC",
+   "pointCount": 67,
+   "start": [
+    35.097377,
+    135.697822
+   ],
+   "end": [
+    35.115547,
+    135.713932
+   ]
+  },
+  {
+   "id": "京都府:10",
+   "name": "久多広河原線",
+   "ref": "110",
+   "highway": "secondary",
+   "lengthKm": 10.86,
+   "curviness": 561.3,
+   "flow": 26.7,
+   "turnCount": 228,
+   "score": 82.4,
+   "polyline": "wvcvE}qs{XaDmEuE_D_DfDs@LkAa@_AyBT_Gm@kAoG~@_F|Gw@NiKiDqFyFyD_@gDlA}DwDk@aF{FuNv@yN|AuJkAoBmCqA{@gDcAs@]oA`A{D~BeA?gCnByD@qG~AmEq@mFDcEtBuNoBwGjBcIhAsBcDV_C|EuCk@c@}@YoEmCqDgAg@o@gCaAk@iALaEeBk@cEaEbB]bDcAv@o@Ku@oAcBY}Cx@Mw@rBuDRmB}AuAyEc@bAqArCkAjD\\jDoDlEaBZs@c@kF~AxEAnA{CxCq@~AlCa@xDuB|Bx@sCuCPmDWaHnH}UdDyAbAoDUaFnA_F_AsEXaDlAuCu@qCf@eCWeBn@qCg@cEj@iGe@mEmFsEHgArBgCFoG|CeDdAoI_AyIp@{Zq@aEcGsF",
+   "pointCount": 104,
+   "start": [
+    35.249883,
+    135.764946
+   ],
+   "end": [
+    35.265307,
+    135.832608
+   ]
+  },
+  {
+   "id": "京都府:11",
+   "name": "尉ヶ畑布袋野線",
+   "ref": "671",
+   "highway": "secondary",
+   "lengthKm": 5.1,
+   "curviness": 787.4,
+   "flow": 32.7,
+   "turnCount": 123,
+   "score": 82.4,
+   "polyline": "uc}wEerrvXHkAhHaIZuFdCcLJqFhAkDTiDrDwEo@yCXaCgBuA~AHrAy@tBH|AeAs@}A_@{Gw@iBgBqBwCo@iCoCqBoHmBK{@|@a@IkG_IR]nBZPkBl@q@v@tB?lAf@C^gGZa@MkCn@wArAe@ZwAUeAn@_@p@sDg@{DsA`AI_DcAUyDtANgEgBa@?a@hAo@xAlAr@{@eBiJgBcB]sBImOyCqMAgD_AuDrB{Ho@sB",
+   "pointCount": 63,
+   "start": [
+    35.543786,
+    134.940673
+   ],
+   "end": [
+    35.54469,
+    134.978103
+   ]
+  },
+  {
+   "id": "京都府:12",
+   "name": "京都日吉美山線",
+   "ref": "50",
+   "highway": "primary",
+   "lengthKm": 13.33,
+   "curviness": 728.4,
+   "flow": 29.6,
+   "turnCount": 328,
+   "score": 82.3,
+   "polyline": "_~xtEkd}zXzKtFpCxCnQ~]C~CrBAnAdDZxC{@pCTjAc@jAaAJyAqAcB?e@~@HzBqA`@mB[w@bA}AMqDnIwBNiArCoCvBoDD{CzEyBIm@~DyCdBiA|BsBv@CfF_BtCcOn@uAw@_DaEsBdAzClFc@fCyABoEqAuBNEj@`Av@dAnCcC\\sHvCaDOi@~C_Ad@cDHe@rD_FbDcBg@gCxCkGbAqIhEgAg@sRXG`AdAvC[pChEa@~Dt@NdCkA|BtD`DzAQwD~EsBSsC\\uAlBwC_BcCrCMxC}ApBsC{A{@Dg@x@{@AcDkDg@HeB`DwCm@gAfB_@KeAgDgElCqIr@w@W_AeDeBKe@dE_Gx@r@zBPpCyExFgBVcCo@eDx@oE_CuMfHoEqAwAnAeAu@sACaD{Ce@n@PnCoAjAwLcByBwA{NpCs@nAaB\\uCY_BeDe@Oc@Xi@`CkAf@_GsAeCBqEqFaBzBiD`@iAsAYz@FtCi@~A}ARk@gAa@A[lBmBhAqAdCsDt@}BhCL~Dw@_C]uF_@a@_AlHKvF",
+   "pointCount": 144,
+   "start": [
+    35.03088,
+    135.650139
+   ],
+   "end": [
+    35.092205,
+    135.606251
+   ]
+  },
+  {
+   "id": "京都府:13",
+   "name": "奥山田射場線",
+   "ref": "283",
+   "highway": "secondary",
+   "lengthKm": 4.01,
+   "curviness": 730,
+   "flow": 29.9,
+   "turnCount": 98,
+   "score": 82.1,
+   "polyline": "wqusEs}u|X`EI\\a@RcE[[cCVk@aD|AsA`@sGm@MuAh@e@{D_CGO_@z@iBhCeAn@uBjBmAkAgDNsBb@HvBxDU`ChCjAGj@aBl@Tl@fEY`DzC~Hv@~EcBzP`F~HaClDjCjC@vAfA|AZ~CeA~C\\lBk@hBPxAYvBnA~EmC|@BpBaJfAeBJ}Bz@k@",
+   "pointCount": 49,
+   "start": [
+    34.849719,
+    135.940903
+   ],
+   "end": [
+    34.830123,
+    135.948075
+   ]
+  },
+  {
+   "id": "京都府:14",
+   "name": "久美浜気比線",
+   "ref": "122",
+   "highway": "secondary",
+   "lengthKm": 4.18,
+   "curviness": 590.1,
+   "flow": 28.7,
+   "turnCount": 86,
+   "score": 82.1,
+   "polyline": "gtqxEyqcvXMiArA}FjAoCzA_AiAkGl@cDg@qB\\iBwDcFm@cDRqBbDcH^wBaAeJ|@oCWeDl@yEAyBgAgDm@{EzD_CfAgCnCJi@eBhA_Dx@]bLfDrCbDrCl@iBuGCyAu@wAl@mAKoDc@wAdAoFEaDh@@p@jFfAtAzHX~HmGbDyDNcFlAmD",
+   "pointCount": 46,
+   "start": [
+    35.648844,
+    134.863808
+   ],
+   "end": [
+    35.637591,
+    134.890688
+   ]
+  },
+  {
+   "id": "京都府:15",
+   "name": "弥栄本庄線",
+   "ref": "57",
+   "highway": "primary",
+   "lengthKm": 13.44,
+   "curviness": 631.5,
+   "flow": 27.7,
+   "turnCount": 306,
+   "score": 82.1,
+   "polyline": "wd}xEwgcxXv@kDfBoAb@eAbHYt@k@r@|Bc@dBd@dCvAlC{@d@sAYU`@fAt@xBPtCnFvAlApABpBpAl@jAfArQ^h@d@Cl@iACqRw@iD|@`@bCjGb@fDPvHUbId@dC?zGZbB`DfCxF|HvCzFz@zC^hJb@pB~FrMx@|@|Bp@pApBA`CgApD`An@xEb@|@`BNfDuArBHbA|EhFrIdR|FnQ|ElDrC[~ApGp@|@dEhBlAxCbA_CwByILsCbAc@xAR|Dc@pL_Gv@@nG~DjCtDx@|DE`DdCvB`DI~@h@ZbEdCvD@lDzAbAfA`GB|D\\nAxC|HjE~FCpD`ApCfAv@]`BtCZeArAHlD{@tCzADtAsA~Dd@nA~C`BNj@h@LxAbFhBSzDi@zBVxAzCnAfExJdBI\\dClAbCxAW^kDhB?|@o@hArAq@xCHlEmAzBdBvB}BKgB~BB{DaAKcA|AcBiArAtDyAzCCrApAdAvBQ`@\\JjBbA`A|BCtAxCXvBhF|AxCvCxFtHZdBdC|@TfCn@hAnClB`C~J^rGbCvE?`ItBhH",
+   "pointCount": 148,
+   "start": [
+    35.707799,
+    135.189883
+   ],
+   "end": [
+    35.656078,
+    135.114396
+   ]
+  },
+  {
+   "id": "京都府:16",
+   "name": "市島和知線",
+   "ref": "59",
+   "highway": "primary",
+   "lengthKm": 10.4,
+   "curviness": 624.3,
+   "flow": 28.4,
+   "turnCount": 229,
+   "score": 82,
+   "polyline": "{ihvEkxdyXxDvDzDjB{@pCWjDdBrNhFzPlGtJhCtBtFhAZlAUxCRdAnC~A~AbEjErC|@hEnAl@nAbCbJtEzCXrCfEhIhDfFdFxB`R~@|A@~Fo@hBGbCrBvHJdE]HeBiDc@?}@hAnBf@d@lCKtDwCxFNbCXLjA_CfCq@r@bDf@F`AcAz@r@vADlCzEnB|AWRkCqA}AiC_C?gAxAuBi@{@~AJbAhCdC?z@[p@{C^oDjE`@|Bs@zAj@fAi@jARtF{@jABxAsAR}AcA]h@~@vDpC|Bj@tAsAjCzAbAXvC}AhBj@XjByBo@oF`@gACuAh@c@Tl@I~D`B~EDtExAnFxK~In@vBxAtBb@~DbEvD~@hElGfNdApHbHfM`BxKfDnGi@zDnA~CbAvFnCjGbCRXj@cA|Bi@tEd@pBdBdB~AfE",
+   "pointCount": 113,
+   "start": [
+    35.273417,
+    135.361505
+   ],
+   "end": [
+    35.244571,
+    135.290571
+   ]
+  },
+  {
+   "id": "京都府:17",
+   "name": "久僧伊根線",
+   "ref": "652",
+   "highway": "secondary",
+   "lengthKm": 3.49,
+   "curviness": 725.6,
+   "flow": 31.2,
+   "turnCount": 81,
+   "score": 81.9,
+   "polyline": "_rvxEcmsxX_C|DyAvFq@mC_B`C}Gu@fBpECbA~Cv@U~ByE[f@|Cz@|@l@pBeA~A_Bb@kDgE}BgAg@vA{A~@aBUcAmA{AtCsFoBuErDeBzEaB`IVpHQxDsAfBgElMoArAAfCcBtA}AvFoC\\gAhAi@jH",
+   "pointCount": 38,
+   "start": [
+    35.674085,
+    135.27266
+   ],
+   "end": [
+    35.688116,
+    135.253516
+   ]
+  },
+  {
+   "id": "京都府:18",
+   "name": "醍醐道",
+   "ref": "118",
+   "highway": "secondary",
+   "lengthKm": 3.39,
+   "curviness": 770.5,
+   "flow": 30.4,
+   "turnCount": 86,
+   "score": 81.8,
+   "polyline": "akmtEkvy{XwBxAgGvOEhKeDpBqFy@RhC[`@_BcAgCCm@b@I~Ba@PsAm@iEbAOm@jAgD[[a@|BwCbFuB~@_AvFgB`DqAnJgDlBmAUo@dAs@?m@w@[PYbAZbCcApA}ArEPbAqAtTBbF_BzGk@T}@rE",
+   "pointCount": 40,
+   "start": [
+    34.971529,
+    135.796376
+   ],
+   "end": [
+    34.985423,
+    135.774101
+   ]
+  },
+  {
+   "id": "京都府:19",
+   "name": "丹後縦貫林道;大鼓山線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.74,
+   "curviness": 735.3,
+   "flow": 27.5,
+   "turnCount": 127,
+   "score": 81.8,
+   "polyline": "m|yxEs{gxXcD{AmAE[`AzAxBTdBWVqCo@oAVAhApA`Ab@fAmClCjBlFw@jCgDxFJp@h@RfCk@`@\\MpA`AxC`IvDzA|BwBnLgBrBaCb@Kp@rDb@|ClBtBJPpA{ErA_CyAwANkBzAPt@bBURT@t@gAp@mBi@eBJi@a@u@L{AjDcBtIwB\\yBpCmBJ_AtAaBPkFvIwANmHgDaExBkEeBy@~B_APmEgCm@f@}CzK",
+   "pointCount": 62,
+   "start": [
+    35.691111,
+    135.213537
+   ],
+   "end": [
+    35.705089,
+    135.191845
+   ]
+  },
+  {
+   "id": "京都府:20",
+   "name": "宮津野田川線",
+   "ref": "16",
+   "highway": "primary",
+   "lengthKm": 8.5,
+   "curviness": 582.1,
+   "flow": 28.6,
+   "turnCount": 173,
+   "score": 81.7,
+   "polyline": "k_ywEmxvwXvGrAbTk@fF}@~H{ElOGdDqAzGVbF`A`KkA~LaJ|BiDfHyGfAiC`AwLnCmMa@}D{AqC`@iHo@{ABkBoAaCp@uFKcByDwKu@oH[@BhBmAxCr@~BKv@m@HiEiDXo@`BVFuBw@eAp@qAuGkFFq@zACXiAiAeG}AcCHc@lAa@QaAR}EqCwGw@GsAlCcByASiB`@gBcBy@|CuIWu@_B@vAyCo@eEh@Kp@`DdB|B~CUT|Ap@^xDiAzEv@dCgBfBoDnDmAbF`@p@c@`ByDjCWh@eEjAsAjEm@pMYhGmIpC_JTyAw@{CNa@",
+   "pointCount": 84,
+   "start": [
+    35.522621,
+    135.125993
+   ],
+   "end": [
+    35.492778,
+    135.166429
+   ]
+  },
+  {
+   "id": "京都府:21",
+   "name": "上杉和知線",
+   "ref": "481",
+   "highway": "secondary",
+   "lengthKm": 7.41,
+   "curviness": 537.9,
+   "flow": 27.1,
+   "turnCount": 147,
+   "score": 81.4,
+   "polyline": "gpxvEma~xXrCkUwAyL?wD}@mDp@oLGiHw@qDn@wDiAuBe@pAq@STqA_@iB`Bm@r@~BlB{@j@tBlBOpBo@\\e@AkA|@Gj@o@WkBzCm@?yD_BoAIi@lBi@_AeCbCwAFeF`@qApEyBdDAbL{FxNoA~G|@|IHhK{An@tBrP~KpGnBdEiCxDaH|I{IlHkAnAy@pByDl@oHpCmAfA}ApE_A|A}B|ME|@]rAyCy@sDDgAvHwL`FwAjBNdFgCtCcE~AgAvDa@",
+   "pointCount": 67,
+   "start": [
+    35.356359,
+    135.327108
+   ],
+   "end": [
+    35.318038,
+    135.361949
+   ]
+  },
+  {
+   "id": "京都府:22",
+   "name": "浜丹後線",
+   "ref": "75",
+   "highway": "primary",
+   "lengthKm": 7.63,
+   "curviness": 561.2,
+   "flow": 27.8,
+   "turnCount": 154,
+   "score": 81.3,
+   "polyline": "qsxxEeh|wXF`A_@rAaGvHeElDmKjBoEL}DbBgFbAyEdNqDvCIlDo@dAv@xAB~EzAbDnAp@Jl@}B|@[hOhAbFhBxAnAzCtA~QiA[aBaEsDmA}@\\cCzCgEcA}ByCoEpAkBtBkAfKoB|Ag@lBmBvAEn@x@nAq@~CtAl@v@hAUdAyA|@Hp@|BnAYt@\\lC_BvAWrDqA`Cm@bEoDRy@|FyCvAMv@~A~DmBl@VlBqEBsB~BiATqAwAg@xAyCrBcBLuB_AoC?_@~@iEfDyCjEqGbEaHbBmDfBgCdDnC`Oi@rKpIfNJhB",
+   "pointCount": 79,
+   "start": [
+    35.684574,
+    135.154107
+   ],
+   "end": [
+    35.711414,
+    135.106324
+   ]
+  },
+  {
+   "id": "京都府:23",
+   "name": "天理加茂木津線",
+   "ref": "47;752",
+   "highway": "primary",
+   "lengthKm": 6.1,
+   "curviness": 651.6,
+   "flow": 28,
+   "turnCount": 142,
+   "score": 81.2,
+   "polyline": "qs{rEovk|X{@l@gEfIeBrJqAfCyAWaCaD{AJu@sD_IIwAl@kAKkC_BSeCoBEH{AaC_Au@}AiBcAc@\\gAnEb@nBQf@iAw@]cA_AWuB_Lg@Uq@nAGlEaB`Dv@~C]`B_DfCaAm@RkAUg@u@WkCPaBpIyBr@yFnGqLk@}Bq@qDxAuEJsFbBy@pAqAxKlFdGC`AmBr@aCw@gDj@[p@@vAp@jCa@nAeAP}D}ABjE_BrCuBr@iDpDoMvCu@bBgDdAMxAd@fA`ApLYnD",
+   "pointCount": 71,
+   "start": [
+    34.716892,
+    135.888558
+   ],
+   "end": [
+    34.747223,
+    135.868241
+   ]
+  },
+  {
+   "id": "京都府:24",
+   "name": "舞鶴野原港高浜線",
+   "ref": "21",
+   "highway": "primary",
+   "lengthKm": 5.75,
+   "curviness": 690.4,
+   "flow": 29,
+   "turnCount": 137,
+   "score": 81.1,
+   "polyline": "g{cxEssuyXp@YpB{Ej@RB~Ab@d@pBsAnAXlAiB|AjA~@mAlD^jDs@xAZxB_@jBcBxDY`AqCpAw@bAGdCx@~B_CjBb@|AaGxBm@~A_C|C_CtEi@nBn@~AMhIsAlFkBhA_BuA_@}G`@sBs@yEsFmF{ByC{EoD{CsCW_C_AkBDmBmAlFuNdBsB|MnD~@a@TwCv@KfAt@lEp@`Aq@v@aCtBdBNpB|ABtArAh@EGsDo@{C`@cBUmD`Ac@Ls@}E{Bv@_BsBi@Wk@NiAvBmB@uA",
+   "pointCount": 72,
+   "start": [
+    35.578276,
+    135.447784
+   ],
+   "end": [
+    35.56095,
+    135.468552
+   ]
+  },
+  {
+   "id": "京都府:25",
+   "name": "宇治木屋線",
+   "ref": "62",
+   "highway": "primary",
+   "lengthKm": 4.74,
+   "curviness": 628.9,
+   "flow": 29.2,
+   "turnCount": 102,
+   "score": 80.8,
+   "polyline": "}besEipp|XkB~Bk@tCkAdAaDtJsEv@DrBtDvCFx@k@rAcB^EtAkBx@MbBiCm@qA^OShAk@bBDJuAt@u@RyAsBLkDwAe@qB{@S[cA}@Ls@y@mC^{AgCwARuAnBmR|AmExA_IdAwKwCgBoCwD{@cBcDm@MwArDo@~EwAxAwHdCaF~EmE\\qC|BsCt@}BlCuD]{Dv@gAdAeBLsDrG",
+   "pointCount": 55,
+   "start": [
+    34.765426,
+    135.913168
+   ],
+   "end": [
+    34.79389,
+    135.902273
+   ]
+  },
+  {
+   "id": "京都府:26",
+   "name": "宇治木屋線",
+   "ref": "62",
+   "highway": "primary",
+   "lengthKm": 4.84,
+   "curviness": 751,
+   "flow": 29.8,
+   "turnCount": 122,
+   "score": 80.8,
+   "polyline": "ibmsEg`m|XeCmCs@kCy@CNrB_AtBoBnBF`@rEYzBhAyCT_AxAjA]F^cDtCoCvA_AIqDzBoCfDk@jDa@OSaCu@o@IiByChAiDwA{Bb@sCWwAr@iDViBY{@rA_GlCiAjAcF~@qC`BwBBi@tD}CpCc@LyCcBuCdBoGh@SlCsAr@mC~GW~DuLxLj@vFi@vFiCVuGdH?h@vB|BLv@cCxJh@hA",
+   "pointCount": 57,
+   "start": [
+    34.806294,
+    135.895242
+   ],
+   "end": [
+    34.830213,
+    135.874461
+   ]
+  },
+  {
+   "id": "京都府:27",
+   "name": "木津加茂線",
+   "ref": "324",
+   "highway": "secondary",
+   "lengthKm": 4.6,
+   "curviness": 524.4,
+   "flow": 30.9,
+   "turnCount": 78,
+   "score": 80.6,
+   "polyline": "cfasEidg|XDnDbAhA@vo@fAVl@v@jA@B^`HZPfAt@d@lCDrDnB|RnB`CtDvC`ClEd@zC~DtDfB^pDCdBkA`Bu@jGNhAWrDk@fBiB|BcFv@y@vAaEFkApD@rCeBlCE`Az@xA}IvKUSyIvJh@fBuBFuAzCoCfCgF`AR`C",
+   "pointCount": 44,
+   "start": [
+    34.745457,
+    135.865172
+   ],
+   "end": [
+    34.743839,
+    135.834127
+   ]
+  },
+  {
+   "id": "京都府:28",
+   "name": "丹後縦貫林道;大鼓山線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 7.9,
+   "curviness": 570.6,
+   "flow": 25.2,
+   "turnCount": 179,
+   "score": 80.6,
+   "polyline": "eteyE_|~wXrAm@xCt@|@qBp@sFdAkBfBcA`E]pA_AfFqJzF_EjMKxEhA^cAqAcH\\y@xA?xApBr@FzAiAlBDxCeEjI}BlBd@bE`Er@[BeD^D|ApC`ABp@kAaA{EfAgAjDbClBHRu@YkBmCkD}AsD?aBzCGt@wBrEGbFoDXwGpAsBXqDxAYbAiAhAGtB_CvCI`@oA|Bu@jBwCl@mEfDhA|DkAxJbEfDK|D~@lE@dCaHK{AcBaDxB_Ih@mNr@u@xCb@jBuBdBJj@s@b@aDr@i@bDMRjAS~ErC@tAxA`CFzC_D~B|@dG^nAxBfApGFtJxA`AvE}@",
+   "pointCount": 88,
+   "start": [
+    35.751227,
+    135.167522
+   ],
+   "end": [
+    35.707799,
+    135.189883
+   ]
+  },
+  {
+   "id": "京都府:29",
+   "name": "西陣杉坂線",
+   "ref": "31",
+   "highway": "primary",
+   "lengthKm": 8.2,
+   "curviness": 573.5,
+   "flow": 26.7,
+   "turnCount": 176,
+   "score": 80.5,
+   "polyline": "co}tEcdm{XYhP_N^_B\\uBzAgMmA]t@PdA|BtApDFx@vAEx@cAXmDqAoAJWfAdAhAyAd@c@tAoBaAqApAwBu@kB|@u@bA^zAUhCqDnA{@dBuBp@}AhCkFv@k@fBCvDiDzEq@|B_FtBeKfBaC_BoELmFhDSTJvCRxAt@~@SdBoFvHqC`CwCRyBkAsGgAmXpI}JrIcD`@aEbByE`D_CXo@j@gAe@]uAWHPfEaAtE}AlD{ArAaD~FeEpAwAbC_Br@q@hBmIjEkDfJpBtCgAlAiAtDgALqCkEaBpBeDv@Wf@IxA\\vAy@bGhAnBSdGlC`GJzF",
+   "pointCount": 86,
+   "start": [
+    35.054104,
+    135.732021
+   ],
+   "end": [
+    35.096646,
+    135.691015
+   ]
+  },
+  {
+   "id": "京都府:30",
+   "name": "志高西舞鶴線",
+   "ref": "66",
+   "highway": "primary",
+   "lengthKm": 3.77,
+   "curviness": 694.3,
+   "flow": 28.7,
+   "turnCount": 91,
+   "score": 80.5,
+   "polyline": "{ugwEuosxXJoJn@qEo@yLiBcEcCcBmBgFsFaDSo@h@[xCjB|AWVaAM{C`@[|Ax@XlAn@\\DhAc@nA~@d@\\mAfBu@EkChAiAhA}InAkC?kBbBwAiBaDSmHd@eE`AmBwAwCv@w@dA@BcAo@oB|@yAs@aEB{Ah@kCbCiAXo@?sDmCu@MeDmAyG[sP",
+   "pointCount": 49,
+   "start": [
+    35.434062,
+    135.273073
+   ],
+   "end": [
+    35.432484,
+    135.301414
+   ]
+  },
+  {
+   "id": "京都府:31",
+   "name": "京都日吉美山線",
+   "ref": "50",
+   "highway": "primary",
+   "lengthKm": 3.46,
+   "curviness": 894.4,
+   "flow": 39.2,
+   "turnCount": 79,
+   "score": 80.4,
+   "polyline": "ojwtEs~a{Xf@pDkCbArD~LD|IwDt@_@zBsBJyJxCwB~DqKpYPpGi@tLcCzEeBJt@bBgBtIQrCyBhA{BSpAnFiAlCErB\\EH}B\\J?x@a@`CYHw@WMaB_@_@TxAUnAZ^wA~@hAUFXa@f@{Bb@~AF",
+   "pointCount": 41,
+   "start": [
+    35.022638,
+    135.674818
+   ],
+   "end": [
+    35.031884,
+    135.650852
+   ]
+  },
+  {
+   "id": "京都府:32",
+   "name": "香美久美浜線",
+   "ref": "11",
+   "highway": "primary",
+   "lengthKm": 3.57,
+   "curviness": 875.7,
+   "flow": 40.6,
+   "turnCount": 77,
+   "score": 80.4,
+   "polyline": "}zkxEygevXhAoBnA?xBeAp@eAJsC`AyAlAZe@hANlDVUJ_DnBq@VeAvCUr@^i@uATqA{AcA`EuBBgBcA_@EyE^YvAZvAsBPcAWmBpAs@WcBpAObAsCo@eA`AcB\\cFMcDiCQSoA|DeDNuFbJgR~L}MfCoF|@BrDiT",
+   "pointCount": 45,
+   "start": [
+    35.619188,
+    134.872445
+   ],
+   "end": [
+    35.606576,
+    134.896977
+   ]
+  },
+  {
+   "id": "京都府:33",
+   "name": "下世屋本庄線",
+   "ref": "621",
+   "highway": "secondary",
+   "lengthKm": 15.32,
+   "curviness": 511.5,
+   "flow": 26.7,
+   "turnCount": 294,
+   "score": 80.4,
+   "polyline": "snnxEwugxXPkCjDk@xAeF~@k@hAiEz@i@RyBUmB|AeErAw@`CwFjDoELgEdA_BnCiL_@kCw@qAyMoLj@kBeBeDVmBUqDt@mKq@u@_CpEaCEmLfB_AjCcCk@aE^kL_AwGeEsHcAoBFaK_GcDcFgFeCeKc@}TvCgECiIc@iK}BeGPoEbBYa@DeB`AaExB_Aj@{C|@aBu@O}ApEkBq@{AD}AnFkC?[hEi@t@oBHsAe@iAhBOnCoAr@{@`Ly@Tu@gAnAwEmIyD_A_BgAF_@zB_CdAPxAdBbCS`ByFIsD_BgAmJmCyCSqCy@FaAxAsAC_AsBoEuAsBgBi@h@?~@r@pB|ArKs@Xc@q@CcCkFsLaCeMXsMrBoJYi@aBWoFI@[|@?x@w@V}C~@y@aA}@eAGeCpGkASwBmCwCnCkANFw@nAa@~AwCbBk@`A_FqGwLoEIoDmD}DaB}GHqEsCcEa@uHwIuCXiFoByI{K}D@cCxL}@TaFoAiBl@oKxIqBf@wTGiHbDsHv@eGw@wEj@kJuB",
+   "pointCount": 142,
+   "start": [
+    35.632579,
+    135.212595
+   ],
+   "end": [
+    35.703553,
+    135.25044
+   ]
+  },
+  {
+   "id": "京都府:34",
+   "name": "伏見柳谷高槻線",
+   "ref": "79",
+   "highway": "primary",
+   "lengthKm": 7.28,
+   "curviness": 613,
+   "flow": 26.6,
+   "turnCount": 168,
+   "score": 80.2,
+   "polyline": "kp`tE{exzXmC_B{AiEgBUe@eCcBkBMmBeB_A\\qEgBeE}BqDgF{D[kDeFuFmAwDwB{AyBgFiB}AcB}FeCyBi@gE`BeN|@kCSyJqAsAk@eBcHoF]oAXmDj@Mp@`@dA}@|C?~B_EzAY`Av@rAuEfBr@`@_@lDdEjBIx@uAB_Eb@_B`FwCf@iAAaBs@oAiAWoM|@}BUaFqC{AeBYgBNyE~AeGSqGjAqGE}@oBiDH{E}AwA}ARmB_EmBLmAc@}@oD}@y@?eE{B]o@s@a@_Cn@sBu@kAoAHs@oAsBc@eA{CwFbByBKq@w@YyAN_BxBgDh@wB@aEZ_Be@oAF{A",
+   "pointCount": 89,
+   "start": [
+    34.905821,
+    135.624783
+   ],
+   "end": [
+    34.921814,
+    135.674162
+   ]
+  },
+  {
+   "id": "京都府:35",
+   "name": "田井中田線",
+   "ref": "561",
+   "highway": "secondary",
+   "lengthKm": 10.31,
+   "curviness": 530.1,
+   "flow": 25.8,
+   "turnCount": 212,
+   "score": 80.2,
+   "polyline": "ei`xEwbwyXdA_AtAMlDj@rA|@lCc@pAVJr@[h@cClAkCb@`@l@jFEjDcBdFClBx@pAC|@e@Hm@g@kF?{Dd@{@j@j@JdDrBdCTfBbAtAMdDtCpANl@]~BiEnD?rBv@x@|J}@|BhAvDQ~EwBdQDzEdA`B{AlBIrBp@~BlEAxDd@~@vAmAjB]b@iDf@m@tAPlA_AvAOr@tAJvA]DYaBa@EkCtAW^l@p@Cz@gCxAGf@lEy@tBxAvBpCn@CnAx@t@jAF`BfB]tCx@HvAtAnAEbBx@x@KfBt@dBOt@qA\\eAdB\\bAfAZxD[dBvBtBCtBpAtBlCnCd@GbAeB~Cl@rBKzCj@zBs@vC\\rDdAdG~GhLH~P|FjXf@lRhDdJ~@xKbGvRf@dIEnEfA|ElCrFbD~M~DvFxH|CrLbQ|CfAdJf@",
+   "pointCount": 115,
+   "start": [
+    35.560032,
+    135.455316
+   ],
+   "end": [
+    35.516376,
+    135.402397
+   ]
+  },
+  {
+   "id": "京都府:36",
+   "name": "笠置山添線",
+   "ref": "4",
+   "highway": "primary",
+   "lengthKm": 3.92,
+   "curviness": 538.5,
+   "flow": 30.1,
+   "turnCount": 70,
+   "score": 79.8,
+   "polyline": "_~_sEqbx|X_NfDeC|EoCQsEl@gCpXn@fH_@Vi@eBg@hBZtFwA|CaAvEuBtAgFfAiD|DqC~@oBLqB_@_A\\tCJj@l@zBE?j@oBFwBs@}ClBoHpA}DpGaDj@k@Q}Bx@kDU{Bd@yCwAuD_FgBg@e@n@wKoE",
+   "pointCount": 39,
+   "start": [
+    34.739035,
+    135.951933
+   ],
+   "end": [
+    34.760714,
+    135.938376
+   ]
+  },
+  {
+   "id": "京都府:37",
+   "name": "和束井手線",
+   "ref": "321",
+   "highway": "secondary",
+   "lengthKm": 13.27,
+   "curviness": 511.3,
+   "flow": 25.5,
+   "turnCount": 266,
+   "score": 79.1,
+   "polyline": "}aksE{vm|XVdAe@rC?tH}C~IGvCdArCM`DdBpFV|GfCdCV~AnAhANnBg@nBo@?{@v@uEhGkD|CaBxCyAdGc@NQ[`BaGSiAWLGhB_B|Eo@F`@iCe@Wg@pCuDtAgFtHXh@jFKz@rBIt@_CKqBp@f@fEaC~DsBp@lAbAO|AxAtCr@v@tC~@N|@gOaA}GsFiEWoDbCoGzHoAjD_C~Bk@hAwAzJwBbBcDpF}EpC{E~GbAhDa@xC_AbB|@tFZt@pBl@z@`DzBz@tBnEuCtG[jDy@`B|AfO~EdGpAp@\\xA|AnBxI`CpA`APfCvCvFv@rEtDn@bB}@fCj@`BWp@b@MlAmBx@eAhDuCXe@n@g@fDdAjDWhEpB`FQ`CkDvGfA|AdCz@zApCpAb@AlBo@lBeBzAOjBrBpEjDhAI~BaBbB^vCtBlGl@bAnFxAf@zB[vIeBjFOhGnAzIcA~ERfDkAbDe@pI@zITbDdE`TXbVyI}AwMfGu@p@yA|FcAvA}F|Be@vJ",
+   "pointCount": 136,
+   "start": [
+    34.795992,
+    135.898857
+   ],
+   "end": [
+    34.807305,
+    135.80525
+   ]
+  },
+  {
+   "id": "京都府:38",
+   "name": "国道429号",
+   "ref": "429",
+   "highway": "trunk",
+   "lengthKm": 12.85,
+   "curviness": 555.4,
+   "flow": 29.4,
+   "turnCount": 243,
+   "score": 78.8,
+   "polyline": "amlvEciowXrF|It@~UfB`I^bHB~H}@bKDvBx@tAfG|C|CpCl@hBt@zGbBjGnC~ClDrArCfCfCdHi@`SzBjLeAdFFzHhRhs@{DzZtAlTKdFtD|OHlGy@`HjKfH~NbFbBtCdIzXWtGhBdF?dFiC`JWtPaDxGDdDhBtBnKfDfBO|@|DxAdCjB~@bC@PeBnBf@ZwAvAu@W}@b@g@Gc@iDCMo@vAI\\eBlCaAOw@uAw@@gBoAi@m@{BHu@hFWp@mBfAVl@jAfD]|BfD`@fDpANnA~@V`BdCBEnAfA~@\\jAu@hBzCdB_AdBp@zAuAlBy@OkBlAeBBOj@fAlDjDfCXY{DmDIqBp@nBrDtBPz@c@hBpBjDDjAm@p@yA[oAzBwCIS|@rBhDBx@gCrD_D`@UfAdGtAh@a@zB?@o@kDKU[hCUfKgDn@r@LvBlBxBSuCl@aA",
+   "pointCount": 122,
+   "start": [
+    35.294413,
+    135.087703
+   ],
+   "end": [
+    35.263523,
+    135.006652
+   ]
+  },
+  {
+   "id": "京都府:39",
+   "name": "高田東鳴川線",
+   "ref": "752",
+   "highway": "secondary",
+   "lengthKm": 4.19,
+   "curviness": 511.7,
+   "flow": 26.8,
+   "turnCount": 80,
+   "score": 78.6,
+   "polyline": "mr~rEuyf|X`@i@~Eg@~Cb@hEInBs@lSsBx@cAb@yGh@u@~G~A`D_CdBKnBmCz@?vBrAXc@FwD|D}AjCoD\\gMpGwD@gFwFwEUmBuBcE}D{EeHwB_A}@DeFfEuJaBqB^eCaC_ByCfAQi@ReBsAkAuDZsBmDtA{G",
+   "pointCount": 41,
+   "start": [
+    34.73207,
+    135.863469
+   ],
+   "end": [
+    34.723763,
+    135.886183
+   ]
+  },
+  {
+   "id": "京都府:40",
+   "name": "国道427号",
+   "ref": "427",
+   "highway": "trunk",
+   "lengthKm": 7.14,
+   "curviness": 622.8,
+   "flow": 28.2,
+   "turnCount": 158,
+   "score": 77.9,
+   "polyline": "s`nvEctmvXlBaPAmB_CyFiEiHM}Jm@aHWeAsAoArAo@Jw@w@sJLYtATJyAuAoBgCMDe@vAo@KkAmAuApAg@QeEj@kCn@Bn@dD`@Ax@kAMuC\\{Be@@GbGg@TJyHkBkBO_A\\_@tAPUyBTYx@bCx@Hp@gDwAeKjA}Gx@gPi@iAkBj@c@[hCaCCeAcBgBL{Hf@}BOcC\\kBxCoGm@_El@gDqAgEHsBrBaDbC\\dBeA|IQzA}BpDy@tCmC|C{GjBm@lEv@hKuIh@qCs@gHlBeL_BqHMkKnAeOlCqE",
+   "pointCount": 79,
+   "start": [
+    35.302661,
+    134.915378
+   ],
+   "end": [
+    35.291753,
+    134.96836
+   ]
+  },
+  {
+   "id": "京都府:41",
+   "name": "枚方大和郡山線",
+   "ref": "7",
+   "highway": "primary",
+   "lengthKm": 9.44,
+   "curviness": 504.3,
+   "flow": 26.6,
+   "turnCount": 179,
+   "score": 77.7,
+   "polyline": "a~esEmvj{XbBlC~Al@fGgAnFnA`ArDvB`BvApDpB?zEcAhCaBdAN~EhGVzF|AbAnAzC`BNzA`AlA~Cj@Vl@S`@oAv@}I~C{Kb@_E`GAhFsAtD|AtBFtGmGyDyF}AgEqEqQUuEkBcBiDuAkF`@y@_@{@wB}@u@iI}@{CsAkAV}GxFcNc@kBlA[fCy@tAoBpM{EnGkCl@qBg@yAl@eBrDmBTeBbBoApIgFjHcEHwCzDyGuAu@|B_@HcA_BcBFY^]dFkAfDyDh@}EfBsEwAcDjCwAdFgAbBkFjAGbHyAjGDtB_A`B}@lFR^UdA`@j@QfBf@TBz@nAXgBV{BgB{BpDmC`@eC|CJhCoDdGSxAt@xAe@jGN|B",
+   "pointCount": 98,
+   "start": [
+    34.769767,
+    135.719586
+   ],
+   "end": [
+    34.786959,
+    135.696896
+   ]
+  },
+  {
+   "id": "京都府:42",
+   "name": "大河内口八田線",
+   "ref": "453",
+   "highway": "secondary",
+   "lengthKm": 5.16,
+   "curviness": 475.2,
+   "flow": 29.6,
+   "turnCount": 83,
+   "score": 77.7,
+   "polyline": "imkuEwvnyXUl@^_B@aG`BiExDaCjN_QrMeKnMiEnIyJvD}PpA{NxBaHcAaAu@nBoALPlA}@Z_AzAe@uEyAt@aAMmAb@YkAfBk@d@cArEuDhIaDl@gBNaD}@yDNSnBjCpCkCtC{IpBmCvIk[jKsHnBi@lI~AnG`@",
+   "pointCount": 41,
+   "start": [
+    35.125493,
+    135.412439
+   ],
+   "end": [
+    35.102907,
+    135.442743
+   ]
+  },
+  {
+   "id": "京都府:43",
+   "name": "上川合猪鼻線",
+   "ref": "521",
+   "highway": "secondary",
+   "lengthKm": 5.45,
+   "curviness": 484.5,
+   "flow": 26.9,
+   "turnCount": 98,
+   "score": 77.4,
+   "polyline": "wq}uEswxxX{CvDaCB}@s@_DpFiArEeKtTsBtK_BjUi@nDkAxC_BjQgBpFwLnR~@fF?`Di@l@cAD[jOr@mEZGR|@UjJg@fBmDvAyA|FcMdQ}FpAkFCeCf@wB}@oGdGqBZgCzBgDrD}@vD_CpDFpCq@jFm@v@_DS{EiCsBL",
+   "pointCount": 43,
+   "start": [
+    35.218364,
+    135.29994
+   ],
+   "end": [
+    35.242874,
+    135.261408
+   ]
+  },
+  {
+   "id": "京都府:44",
+   "name": "京都京北線",
+   "ref": "61",
+   "highway": "primary",
+   "lengthKm": 4.17,
+   "curviness": 511.4,
+   "flow": 26.6,
+   "turnCount": 80,
+   "score": 77,
+   "polyline": "}iyuEcxc{XaMmCg@t@{KzUB~Fi@zEs@pA[tDaBzDuA~A_FRaDhC?x@b@XxB{@zCFUrBoEnFgElANnB]hAwE`BBh@~AtAhB?j@xBSnAwAvA{BiAgE`@k@r@HlAjBhBU~@mBh@?dAhFE`IbDtC`EnAnFEjH{AjGu@vT",
+   "pointCount": 43,
+   "start": [
+    35.196629,
+    135.68402
+   ],
+   "end": [
+    35.204336,
+    135.657906
+   ]
+  },
+  {
+   "id": "京都府:45",
+   "name": "中山綾部線",
+   "ref": "709",
+   "highway": "secondary",
+   "lengthKm": 9.3,
+   "curviness": 460.6,
+   "flow": 27.3,
+   "turnCount": 157,
+   "score": 77,
+   "polyline": "uwmvEimoxX`LB|ByEnB_L^cH`L[zRiFdGb@fEvAfD|Dx@lDFrCnC`GhR`WrCWdDeBrJDbJk@rApAfO|C`DJdAi@`G]lDr@fEvBpBU`BnAx@_@hFA~@nCr@QhCbCxF~Ch@mCuBkDCwChCvErC~@ZpBfDZO`Dt@|@TnB`BfAzCg@pB`@lCeAn@_A[mAbAgBcAoB~AsBlAp@xBHpAo@nABtAzA{@f@Gv@qAClAlDqBrEXb@xN}QpA]nFLbQoBnJoHrCk@jDuC|C{@jE_GpBoEzEkBnDUnEyJhE}FlCwAfFkA\\{@NqF",
+   "pointCount": 81,
+   "start": [
+    35.301225,
+    135.252213
+   ],
+   "end": [
+    35.241774,
+    135.259401
+   ]
+  },
+  {
+   "id": "京都府:46",
+   "name": "大宮岩滝線",
+   "ref": "651",
+   "highway": "secondary",
+   "lengthKm": 8.77,
+   "curviness": 462.4,
+   "flow": 27.2,
+   "turnCount": 149,
+   "score": 76.9,
+   "polyline": "w}`xEc_{wX{AlJfAfLG`B]zAoAhAg@pDgA~@e@u@FwB_CWi@{@DgAvCe@H]iACgCxAz@lCdBf@u@TgBkA]mB@kCcAvFoBjDEvDgAv@kA~BBlBwBF}@n@jAjBpAZTh@~@G`@wAeAmATiCj@cBbAMD`GYvAvDhGbAdETrHgAbDK|D~CrL?pHsApHj@lHj@pBu@`FGfDo@IuAwDiAb@FhAbAfB?v@oDbG{A`Ec@zAc@bHsHbNgGF{C|A_L{FmH_G{c@ym@yEoSmCiEmGyGqEsA_Qg@qM}A{Ax@aD`EeHwImJqE",
+   "pointCount": 80,
+   "start": [
+    35.563325,
+    135.147537
+   ],
+   "end": [
+    35.594858,
+    135.133878
+   ]
+  },
+  {
+   "id": "京都府:47",
+   "name": "京都広河原美山線",
+   "ref": "38",
+   "highway": "primary",
+   "lengthKm": 29.84,
+   "curviness": 487.1,
+   "flow": 24.9,
+   "turnCount": 583,
+   "score": 76.7,
+   "polyline": "ciqvEig`{XcA}AcCmL_AsAu@YqAPmGlBkCe@sCuByAqEu@{P`@aGdGyLzHiBnBuFMaCyD}GWmBVaFjBmJcAgGBiOa@uE^wBv@w@nEqBpGk@vCh@zDnBrAbEbDxA~FbIlEbIn@?dFcFtFNjA{A@wAoBkGmEmIEaBjAmH`C{BnKeCfDHlAa@tGVfDe@Hs@i@sAT_Ba@oIsBaDkCyAm@iBJyAhAaB~ASnItCv@E~@u@nAoElBcAjBjE~BtCDdE\\`AzCx@nBdBtDjAfAtAJbCgC~DEz@l@nBrAz@tLx@hAaA_BeKFsAlIgIzBo@fAhAVz@P|IbCzChALjEi@dBiCvCmB`Bf@hAbDjAt@rM_IxBmFG{DvAk@BmG`@a@dBdAp@xBfAxJr@pAnAn@vA@nJ}DlHpFfBlCp@AdD}BdC{EtDoBjEeJ`@uCrB{AbBqE@qCxDuOMy@~@uIy@gKZwFu@gFvAsKQ}CfAcFqAkAiBaEG}Ew@_BoE_@iAqAuEcCqBQk@cAS}Bj@]~BlBfEh@dC|AjBCXi@gBgKq@}@^iCcAyARsDmCg@l@qByC{EB]zAq@Hq@uBqHPYnAF~AaBj@v@JjBl@j@tEmB\\pCdD@{@bERVl@Wr@wEq@aAoA[c@yC{D}AcAoEUyFf@YhBbBpG_A?sAwDaCC}AfEkBfD?_AcD|ByA|AFAoBx@{A[{AxBcBW}B`CoBtBBt@{@SeD_B{ACy@pDkASmBf@u@~BEn@aAwAsAEwDkCcFDg@x@ElArDdBCdBpAHvBxAdBArBuDrGd@d@tDmGnCw@vBiDzAwFjBk@p@y@pBuIpF{HpAqH|CoFdAaE@iEZyAhBwBbBq@pAV~DbDxBYnCgB~@kB\\gH~BmIdO{C|@uBj@_EMiDZqBvBmAjCl@jCoHxDi@zDiIm@uFrDoBhBmGvAM~BjAfHBdC}HlDkBfA\\fEbG~F[vO_GhQiCdGwCfCgHeAgOkAiB_A{DiDyCaCsGr@}@zH@~GuB~BM|JmDbHqAlLmErNOpDtClA[lCcCrBbBxDzHvFb@VdCpBrBrCVnDoA|Ax@dBHbHoCfAt@hAvEzAxBv@[zDRlHq@nBtBTfFd@x@tBJtAcAd@eDz@cAtAIfCh@",
+   "pointCount": 301,
+   "start": [
+    35.319378,
+    135.66597
+   ],
+   "end": [
+    35.208072,
+    135.775683
+   ]
+  },
+  {
+   "id": "京都府:48",
+   "name": "上野南山城線",
+   "ref": "82",
+   "highway": "primary",
+   "lengthKm": 15.13,
+   "curviness": 489.7,
+   "flow": 25.5,
+   "turnCount": 291,
+   "score": 76.4,
+   "polyline": "czyrEekc}Xq@Y{CkH{JwEiGc@iFdEsBn@F`@pBjANn@mDhAU|JkCxA@rEy@TsDmDqCJu@`A_AtEyEn@f@vBxDxE{ArBfAbBH~@kGjDcEdA{DaCqGy@_@ZN`CQRkHEcB`F}DpA_C_BqAOeHh@mBuCgBo@sAKuBfBmCuA_EQoGqGuCDiBiA{DhByArIsIjBQzD_@v@aAZiAg@_AkDyDYaBcBs@sD@kHa@m@oBPuGnE{@{@e@eD}@cAaCGoAt@}BTq@Co@o@j@sFhE}D[w@gDY_AuAIyAdCuElAChBqAfB|@l@KDqDtCcFIo@gAg@Mi@jBoBFiBf@aAMsAiAyB}@K}AbCkA@cAdBiOtDyJ[{@hFk@Z_CIAvCo@nA_BNmCrAcGmAaDeDqDS{HoBiE?k@\\qCs@_Ed@}@nAcBd@}BnBaA~A_HpAuK`HPv@~NvIpBfCxAvDr@pFHfIaAbXa@`AgHtFMxAoB|A{EtBcGtAuDTwOaEkDOeC`@_CuM_Cy@o@fDoItMElJfDpPrHtVvHnMoA|GzA~L]bA",
+   "pointCount": 146,
+   "start": [
+    34.707696,
+    136.009635
+   ],
+   "end": [
+    34.768997,
+    135.978398
+   ]
+  },
+  {
+   "id": "京都府:49",
+   "name": "余野車作線",
+   "ref": "109",
+   "highway": "secondary",
+   "lengthKm": 6.06,
+   "curviness": 491.3,
+   "flow": 24,
+   "turnCount": 124,
+   "score": 75.4,
+   "polyline": "u}dtEew`zX`BiNbAwDlAgBfBq@|AiDnBoOGeF~IcAjDjCnCAr@sDpBwDpA}I_C}FAoAbDmIdEqC\\_BGwBr@c@fA`AlCUpClBhFwBgA{Os@e@wBv@g@UGo@fGwLKeFcAaCzBaFx@gLp@kAg@aG|AmCd@aGdFeFbGxAnA_AhAjAtBOr@lClBzCpADhDxBnDHr@g@xA}DbCa@zA{AfDwIjCgE|BaBdBiIiB_CAuA",
+   "pointCount": 59,
+   "start": [
+    34.928432,
+    135.504668
+   ],
+   "end": [
+    34.904807,
+    135.54196
+   ]
+  },
+  {
+   "id": "京都府:50",
+   "name": "生駒精華線",
+   "ref": "72",
+   "highway": "primary",
+   "lengthKm": 4.61,
+   "curviness": 468.2,
+   "flow": 27.7,
+   "turnCount": 78,
+   "score": 75.3,
+   "polyline": "}f`sEahk{Xg@iDqCoIsJuMqIiJ}H_Vm@kE_A_BcAgEAoDgD{@cC}Aa@iA}BLqEu@qBcBMu@UaEb@uAm@{Fj@u@OcAt@ItAx@bAgB`Ap@P[yBiA}GmAe@{BnAmCv@uEcAmEeDtAUc@z@qBrEoEj@cEvGqOj@uHlAuDTsHlE}LJ}E",
+   "pointCount": 44,
+   "start": [
+    34.740469,
+    135.722407
+   ],
+   "end": [
+    34.748031,
+    135.758226
+   ]
+  },
+  {
+   "id": "京都府:51",
+   "name": "市野々西野々線",
+   "ref": "303",
+   "highway": "secondary",
+   "lengthKm": 4.23,
+   "curviness": 460.8,
+   "flow": 26.7,
+   "turnCount": 73,
+   "score": 75.3,
+   "polyline": "gfhuE{mhyXlFw@lE}DjEcCbAwALeMbDwBdCsDvCwAjDk@pBKnBdA`CLM[bDU|B}ArB?gCuAh@m@vB]`CmAiAqAWsFp@cBxFyFZeIhCmMvBwC~L{HhDeNpB[|DrA|CdCdDBnFpEhIpCjArAbBtErBhB",
+   "pointCount": 39,
+   "start": [
+    35.109002,
+    135.380303
+   ],
+   "end": [
+    35.084738,
+    135.395941
+   ]
+  },
+  {
+   "id": "京都府:52",
+   "name": "舞鶴和知線",
+   "ref": "51",
+   "highway": "primary",
+   "lengthKm": 5.81,
+   "curviness": 505.4,
+   "flow": 24.5,
+   "turnCount": 120,
+   "score": 75.1,
+   "polyline": "k`lwEoukyXvQ{AnFbA|IiArLNn@Z\\fCs@~FbBtHtGnT|Dv@l@y@D}DxDuAH_@Yc@qB^i@[]yBpA_CqCcACs@nBZ`Ac@lGe@jE{CzAVdDjDfBuBlCzAr@_@_DgJuBYwBqDaBiA?g@rBP`ClCfCi@tBP`BeDkAiCMuCT{@|KSbBgAfBoD~Fr@`Gu@bHqGZaCUcBuF}MyAeHTkGhBwD",
+   "pointCount": 56,
+   "start": [
+    35.456223,
+    135.396882
+   ],
+   "end": [
+    35.432961,
+    135.409348
+   ]
+  },
+  {
+   "id": "京都府:53",
+   "name": "福知山山南線",
+   "ref": "109",
+   "highway": "secondary",
+   "lengthKm": 7.89,
+   "curviness": 430.8,
+   "flow": 27.2,
+   "turnCount": 125,
+   "score": 74.7,
+   "polyline": "s~cvEs}fwXiAs@uIuLTkIoG{RiDgH_@_CtA}ChCqBrB_@~@wArBGlA}AvAl@pBiABk@yBs@f@iDOc@sBR_@dB{@Lw@bAmADwEcO_Ag@e@mAkBDFuFa@}@gADIa@bBArA~EzAPT}AbGsI?cAcAgCCqB|@{@FcAcAsDj@IfE~Cb@S@i@oBuDsDOkCxBo@BsGyEqEuBsFoFyMi@}ByBwJYyUjIgSwI{MIsRkGiSuCoIf@{HbC}BScD}A}C@kR~H",
+   "pointCount": 68,
+   "start": [
+    35.251135,
+    135.044896
+   ],
+   "end": [
+    35.287669,
+    135.070352
+   ]
+  },
+  {
+   "id": "京都府:54",
+   "name": "国道477号",
+   "ref": "477",
+   "highway": "trunk",
+   "lengthKm": 29.97,
+   "curviness": 498.6,
+   "flow": 25.5,
+   "turnCount": 586,
+   "score": 74.5,
+   "polyline": "afyuEuud{XwCqHy@cIxAmMUyOeCeNaEaBmBoCo@aDRsCnA_DlIeHhD{@hGD`IwBT}AeBeG|AwIq@[_EvAmDXiHoJqAu@eMjAgEYeN}HCaEx@cCrOyNr@eBB{Ae@qBcBoA_G\\aF`ByAWaA_AuB_PgBkHnHwDzCkEZoB]uFu@yCgJqPqB{L}CcJaGmIwFuMQwKtBkPe@_Gp@yErAwBpHcEpCyCxAiD]kAoKcCcDmBWsNqEqJA_DrIsWrBiChE_AxFlDlBVhBgAl@aC{@}_@kC}FuCuBi@yMeGmLjAaKQ{Ao@qAmKaK^sBvE{J{@_Gj@gAfAc@~AdC~@ZhEgCjFwGzEuVvE}ApAzAn@B|AsCfBo@hGrAbFvDtP_FrCbCfGDz@vC`Bf@dBtBlDq@fFt@zEq@bCvAtBg@~Aj@`GkAzD_ExJeDtBr@v@vDx@rAzEpA|GLbCmAjJ~@zCi@lDlAlGGrEdCpEq@x@`AjABbCzAxFbBzJtA|L|EbFpDv@jBYxAk@z@yB`@g@z@Fd@pA_@bBZZ}Af@MtCjDh@@d@cA^CpBnBbH|CDaAsAqDqAu@y@{A^{Du@w@Ey@ZYlD@Z{@s@mBN{@lGcAl@q@kBwBcBa@Hw@bByADs@iCiAaBmBOwC|BeBp@yDlDGp@|@rABtAkAQSuAl@kDmD|@}CgAkAhBhAFvAbBWhFr@jAbBs@qDtDpCdAjBlA]zC^F_@m@a@X[dCbBtEbA~CfC`DTeBm@JcBg@}BsCgE}BkAsEgKs@q@nAk@hAlAhDcAb@}@gC}Di@_DkB}@u@cBuC}A]iBNoBp@k@Hs@hCYZcDmCkIeSwN}H{AgHa@_A_AgDaAmAaBeAKuAsA_AmILgLj@wB@iCe@gBI}DpAqBfBWt@_B~NtC|AdAzCHLnB_AhClBxAxGg@iAvF_BnDLp@nOaOI]uBj@jCaDjDvC?i@kAeBs@cHmB_Hp@wHxCsE|B{FdF_FjEwKsAoFd@aPkAgCqBiBS_A|@kGpAsD`@cMm@_DaBiCmAiE",
+   "pointCount": 271,
+   "start": [
+    35.19601,
+    135.688754
+   ],
+   "end": [
+    35.152017,
+    135.830909
+   ]
+  },
+  {
+   "id": "京都府:55",
+   "name": "伊根港線",
+   "ref": "622",
+   "highway": "secondary",
+   "lengthKm": 3.46,
+   "curviness": 460,
+   "flow": 25.6,
+   "turnCount": 62,
+   "score": 74,
+   "polyline": "yexxEslvxXW|DrFtFrHi@~JoCl@u@?uDj@yC}@aE@mApEwW~@eB~FcDt@Zv@|BxCk@nGz@`CE|BsBz@MhE~GrB|FhBvCdFbDhFs@v@RTdAcAfCa@nDdCXJrBxAnBxBWj@iI",
+   "pointCount": 34,
+   "start": [
+    35.682367,
+    135.287936
+   ],
+   "end": [
+    35.664419,
+    135.289578
+   ]
+  },
+  {
+   "id": "京都府:56",
+   "name": "山東大江線",
+   "ref": "63",
+   "highway": "primary",
+   "lengthKm": 9.97,
+   "curviness": 477,
+   "flow": 24.3,
+   "turnCount": 196,
+   "score": 73.9,
+   "polyline": "a~awE}o{wXgApHcBlFJdO|EvJpCjCX`C}GbHcC?c@^DjFi@fAgALuB{@o@JEhCiAdDHnKaDxH}B|AkIb@HhEkAfEmDnB_Dm@iA~@vIpMdFjNa@hD_AfASlAYZ{AOi@`Bz@tIeEDeCiBeCAmA~CCjCeApGo@\\s@iBmCYNwCyAcHaHeAwCeEk@nCCrCw@jBJnAo@NaAa@k@`@oCFuA|@]bB_EGuCh@cEdCdC~GIt@wBzAGlCp@lBvEzF\\dHs@~CqHjCeAhC_@hEB~D`CdFJjBsEvCsA|Iy@xBqFtCeBnB{@pHQrNhAnMC`Ip@vBCrC|@~IbCbHp@tGvHjLxCzGZdBJhKb@fCrAxAzEj@",
+   "pointCount": 96,
+   "start": [
+    35.404652,
+    135.150228
+   ],
+   "end": [
+    35.421243,
+    135.081448
+   ]
+  },
+  {
+   "id": "京都府:57",
+   "name": "舞鶴野原港高浜線",
+   "ref": "21",
+   "highway": "primary",
+   "lengthKm": 17.04,
+   "curviness": 442.9,
+   "flow": 25.5,
+   "turnCount": 296,
+   "score": 73.6,
+   "polyline": "isbxEsyqyXtDwB|EaFtAm@bEYdFdBnErJsAxBvBhDYrNpAxFqA`AyAfCXfBa@jATt@i@rAAnBmCrAoA`Et@dECxFhAhA{FhLG`BhFtElCKn@lE`Af@tAQVjBlCf@hA~BpBUCzBtEt@An@_CzBP`Az@Nr@_@~@d@t@sAt@ORhApAEQ~Ab@f@MbApAvF_ApBzAhA|BBbElAvBnEG~AwEbKbB|Dn@pD|EnIbEjObDMhH_HhAQvCjAxB@vBu@hCChGuC|BXy@jDpCdBj@zCb@PxAcBx@iFvAg@jEpA~FaAdHJtGqA`BmCfFuA~ChAbCi@`HJdHbAxDc@zBrAn@zGzCvCl@rElAtAh@g@e@gDZ{BhAaDx@[P^KvCfBz@|@|BnCXl@~BlAz@jLdDxGm@n]lMpDcM`@aLhBsAhFChEeGrDeLjBcK|@iNj[pGlDxCfFfNhBvA~BN|N}CvAwCXoFhAoC|UsLhQaNpBS~IzCrDlJtJzMzFvOfMvG`Hp@jBe@tP_[jBkAxCKtFhFfCn@dIyBvHo@",
+   "pointCount": 142,
+   "start": [
+    35.571894,
+    135.428264
+   ],
+   "end": [
+    35.478684,
+    135.400693
+   ]
+  },
+  {
+   "id": "京都府:58",
+   "name": "味土野大宮線",
+   "ref": "655",
+   "highway": "secondary",
+   "lengthKm": 4.54,
+   "curviness": 458,
+   "flow": 24.8,
+   "turnCount": 84,
+   "score": 73.5,
+   "polyline": "a{lxEqt}wXd@B_BjF[^{BOAd@lEHlC`Lb@b@zAo@u@zAcBQg@`@k@zC~CVbFdD|Dh@~BfAv@{@tBNxDu@tDdA`DQrCx@fGdGtElCt@dEbDzCpAxFzDdFbBr@hIp@hEnAfEm@rClDzIRdLzAzKbEnFdErApBdAhHq@jGjC~G",
+   "pointCount": 43,
+   "start": [
+    35.624329,
+    135.16121
+   ],
+   "end": [
+    35.598346,
+    135.139647
+   ]
+  },
+  {
+   "id": "京都府:59",
+   "name": "浜丹後線",
+   "ref": "75",
+   "highway": "primary",
+   "lengthKm": 11.03,
+   "curviness": 451.4,
+   "flow": 25.4,
+   "turnCount": 196,
+   "score": 73.5,
+   "polyline": "c~rxE{{axXCzH^v@nTBxNbD~A}Bd@?rClDnANrKeH^y@`A{L|@s@lB_FnC|CtV~BVyCq@aG}CwE_@cCkBwBdAeA?mAc@q@dB_AdAyF`@OHtEi@hBvB~@]zCbE|Er@]bAcCPuChBuAj@wC[qAP}C\\?JdBvAtDp@BHy@m@wBp@wGfClCt@Fp@[l@uCQiAuBgAm@oDv@oFl@cAv@M~BqBe@iBHcCYkAh@iGq@gIs@gCe@c@kADoAtCe@WKaANeAtFeIuA_PoCcKAuBrIaHrA}CdA_Hr@kAtBsA~Jy@tEmBdBkEtH_KjDq@jDsChA_F`Eg@|Bh@fAYvJyQnEqFlEBxA_@z@o@zB{EzGkAfDoD~HStDpAlDvFtNjNhc@hBlB@d@a@",
+   "pointCount": 103,
+   "start": [
+    35.655537,
+    135.182856
+   ],
+   "end": [
+    35.603784,
+    135.221103
+   ]
+  },
+  {
+   "id": "京都府:60",
+   "name": "京都京北線",
+   "ref": "61",
+   "highway": "primary",
+   "lengthKm": 6.76,
+   "curviness": 478.7,
+   "flow": 23.1,
+   "turnCount": 140,
+   "score": 72.4,
+   "polyline": "wscuEeoo{XgBtDi@tGcCf@yD~CiFgD{ADgFvI{DkEuEqAgC@c@}BoBeC_C_AgF\\yF{EcDXsEzFsEzAqBfJcMdB{AnEc@VoAa@aAeC{CsAoA}AsCd@}@hCRpD{AfCyAv@eGd@qA~@Q|Ax@bBbJlJLxAsAjFBrB^bA~Cx@tDkAZb@ChAcBlEwAZyAnBsAnIiB~DEdJ_C|CaBzAgBwCeBSyFbCsAbFgCYqAxByAz@cA|E|@bDcFvUjAhGsCbAqDzC",
+   "pointCount": 66,
+   "start": [
+    35.085563,
+    135.744034
+   ],
+   "end": [
+    35.115572,
+    135.714019
+   ]
+  },
+  {
+   "id": "京都府:61",
+   "name": "中地日吉線",
+   "ref": "364",
+   "highway": "secondary",
+   "lengthKm": 11.77,
+   "curviness": 422.2,
+   "flow": 23.9,
+   "turnCount": 208,
+   "score": 71.8,
+   "polyline": "ihnuEkrqzXoAm@kCGkEtAkHbAq@n@G`H\\lCiAtKLnKe@|HwEfR}JbUmAjD{@xFgAhA{Dd@eCyAyCUm@Z}@dCy@N_As@wCTiBcAaCRaD{ByB\\eCa@_IvCwJtAqCSiBb@yHaAaBqEcE}EiDuAiCkCuCBqAc@{DpAmBDfCR?|CQp@aC`AfB\\H\\UpAaAf@X|@o@|CgBdCh@xCO~E\\`AhEpDfClD?vBbDjFVnCn@jAxJpGpDdDjAzBzLdJtCdAzDpGfE~BjCl@CbDrClDfGp@|@p@NtAc@lG|@dEa@nASdIwCbNBnBeCfIg@dGcDbFWbLgBzJp@xMW`DZtKk@vO^rHo@vAoEbBg@xB`CfGzEzU|AzBo@rGdAxBc@jCbAtFv@tAxDbAlClJq@nQ",
+   "pointCount": 105,
+   "start": [
+    35.14005,
+    135.590936
+   ],
+   "end": [
+    35.154403,
+    135.513573
+   ]
+  },
+  {
+   "id": "京都府:62",
+   "name": "篠山京丹波線",
+   "ref": "702",
+   "highway": "secondary",
+   "lengthKm": 7.38,
+   "curviness": 409.6,
+   "flow": 25.2,
+   "turnCount": 120,
+   "score": 71.5,
+   "polyline": "qgnuEs_qyX[zGcB|JqCdHrBrFlIdHvQfEpDZdLdNhH~ChMjBtNGfF}AtCtDrEfLnGrFlGnI_@bMvArMBdDo@~GuBvHIjC^vBdC|Dc@dEvA^yArAjCfC]p@}EGW`AaAT_AlAa@fCb@\\nAiAf@lArA?EzCl@|BbCfCi@fBI~B`@`C|@~A_D|DKhAfA|DEvBp@hCeAfFDfGtBlHaAbJrAxIiBpN~BtFfApGjElCTxE",
+   "pointCount": 61,
+   "start": [
+    35.139927,
+    135.424101
+   ],
+   "end": [
+    35.11856,
+    135.369132
+   ]
+  },
+  {
+   "id": "京都府:63",
+   "name": "佐々江京北線",
+   "ref": "443",
+   "highway": "secondary",
+   "lengthKm": 8.19,
+   "curviness": 415.9,
+   "flow": 23.8,
+   "turnCount": 143,
+   "score": 70.8,
+   "polyline": "kd{uEgipzXjBy@zDxBj@r@t@bGZPzAEjJcGzD_AKv@yJpILh@xDd@|Bg@n@NfGyBh@}@ByBrA{@d@mBlBcBM}Bn@gAD}AwAeAn@qBBgB}@gBDs@^k@dALv@m@JiDx@eBp@iErIuOfHuBx@kAtAXrBm@bRCrYiT~FKrMmFLyEsAcEKwGtB{Hp@yI}BmJcAcAcE_ASwB~JaKxFiAdDgE|@yCtAkA`HmB~WsAdAk@j@_^cDsGgA}Ef@uHbAiFc@gIr@{L",
+   "pointCount": 68,
+   "start": [
+    35.20598,
+    135.584364
+   ],
+   "end": [
+    35.172885,
+    135.629062
+   ]
+  },
+  {
+   "id": "京都府:64",
+   "name": "下狭川阪原線",
+   "ref": "173",
+   "highway": "secondary",
+   "lengthKm": 4.24,
+   "curviness": 450.8,
+   "flow": 22.2,
+   "turnCount": 86,
+   "score": 70.7,
+   "polyline": "{f|rEeyu|XeBSuDuDyEUcQrFcDlB}@|AEpA}@n@eBrEeBjSsMiAaCdAk@zA?hA`EjDf@~BgHvGqFxBqAjBw@|CwDhCyCrHqCnDw@pFf@pBpB|BJlBs@h@iFZeDjC_B`E_Ah@{EiCiBd@sB`B{EvGi@pADjDmA~@",
+   "pointCount": 40,
+   "start": [
+    34.719976,
+    135.940186
+   ],
+   "end": [
+    34.742106,
+    135.917173
+   ]
+  },
+  {
+   "id": "京都府:65",
+   "name": "舞鶴綾部福知山線",
+   "ref": "74",
+   "highway": "primary",
+   "lengthKm": 9.53,
+   "curviness": 415.4,
+   "flow": 25,
+   "turnCount": 158,
+   "score": 70.6,
+   "polyline": "mbyvE}}{xXmIiFcGcI_MeJ]oBMeOmBqPaBmEiGuCgB{DRaU{B_JkCiFuAwEgFiDgHeHsEuLsKkO{FoRwC}BJcP_@wA_OyIqDZyEuAo@mCyFcFm@uGaHkE{@}CNyAWWsO_EuDFiDy@}@TiDlEaKnF_FnEoAUqCn@eDiDc@pAv@rDq@rB|@dBs@dBj@|@cAr@O|BnAjCo@bDiAjBkAYyA{As@XNnD{Ao@_ApAD|@~@dBW^m@JeB_Cm@_CqC{AyAt@kCxGsAs@wCr@aSqBoJKwB~@eCjEm@lIqKfG",
+   "pointCount": 76,
+   "start": [
+    35.359268,
+    135.316307
+   ],
+   "end": [
+    35.410378,
+    135.345916
+   ]
+  },
+  {
+   "id": "京都府:66",
+   "name": "大津南郷宇治線",
+   "ref": "3;62",
+   "highway": "primary",
+   "lengthKm": 8.32,
+   "curviness": 431,
+   "flow": 23.4,
+   "turnCount": 153,
+   "score": 70,
+   "polyline": "cb|sEu}e|Xp@bDCzEoDnLnInPfA^d@dNfLzHvCfAz@pBbCx@XnCdBxA|GrBlKxArADhCaAfFGpCzA`DxHDnQl@^fFi@bAl@E|BkDjAcCrEj@vDrBtBRzDy@vF_EfGcMbGiApBk@?iA}AqDBcEbB}@lAqB@eAlAuBp@yE~Fa@nCg@FeA}@eA^}CKc@\\wB|NhAfCK`Aq@`@oEJ_@d@fAlF~@fA@~B|@tBsFtPKpCqAxDuCzEoMhFoCxCwAvCk@vBEbFs@bEqDxEiA~Dv@zMiPs@mFDuAr@",
+   "pointCount": 75,
+   "start": [
+    34.88306,
+    135.858995
+   ],
+   "end": [
+    34.89249,
+    135.805439
+   ]
+  },
+  {
+   "id": "京都府:67",
+   "name": "柚原向日線",
+   "ref": "733",
+   "highway": "secondary",
+   "lengthKm": 3.05,
+   "curviness": 414.7,
+   "flow": 23.8,
+   "turnCount": 53,
+   "score": 69.3,
+   "polyline": "_qjtEklqzXbBxCh@|C`BnDvFzB@~GZlBlI`AhCQtA~@vAtC|GtAzCKdH|CzBQbAxC`EzArGfIvC`@vAnEFvA}@rM{B~DOtBbAhBx@bH|BbCIzL",
+   "pointCount": 28,
+   "start": [
+    34.957125,
+    135.589984
+   ],
+   "end": [
+    34.942868,
+    135.569269
+   ]
+  },
+  {
+   "id": "京都府:68",
+   "name": "栗田半島線",
+   "ref": "605",
+   "highway": "secondary",
+   "lengthKm": 13.37,
+   "curviness": 374.8,
+   "flow": 24.2,
+   "turnCount": 207,
+   "score": 69.3,
+   "polyline": "e{}wEeclxXoDb@wCjAcCIqAhBeLm@}R_K_IqKwLiM}IkEeAmA}CgKiA_SCcEtAcGcWaOwEYkB_AeCOqBvAkFfKsA\\aEiAgChAeEIaCfBcCh@iAtBuE_DyAOr@aCwAkCmAc@kAxAKvDiAzAMpBnAzDsEw@iEpAu@hGc@d@e@W_@wBaBi@^nCCvDi@|@^n@_@pAh@nAs@dAkAHCn@`Al@}BfDjBvB[bAcG`Co@xD|BbGtC|D`@rE[hGgBfL{DzIoBnCY`BbAlBlHr@fSmErIJjDbB|@rE`BdCrXrBtIhCrGhFvAjDfAfIQ|DuBvD@bA`AzCtCrE|AbJRtGxCnBbFhG`DlAjClCl@rCaAnMb@zEKnFrGzGx@lBzBtAxDdAvU`D|@eApA}IfGoOvEiFdEoCfHmBxK[t@g@",
+   "pointCount": 108,
+   "start": [
+    35.547555,
+    135.235229
+   ],
+   "end": [
+    35.547848,
+    135.211561
+   ]
+  },
+  {
+   "id": "京都府:69",
+   "name": "町分久美浜線",
+   "ref": "706",
+   "highway": "secondary",
+   "lengthKm": 7.45,
+   "curviness": 358.1,
+   "flow": 25.6,
+   "turnCount": 104,
+   "score": 68.6,
+   "polyline": "sq`xEeqpvXbGiDdK[lHiA|l@iRbCeBnKcPvOmOx@WvIV~ExDnSxGt@`AzDjBnDxJ\\pCAbHbAfFQ~J`C|JjEtCdBCpCwBpCb@@|AzCjC~@xEpDnC~@vBtJfAv@d@pCtHvBfCNdApCrBd@pCbBpBbFh@zAWhArAhB~GA`KZnEZNa@\\^\\g@b@pClAtBlFfAnAf@vEbA~BIzCsAzBXfI|EpDhDhJ",
+   "pointCount": 57,
+   "start": [
+    35.561378,
+    134.930265
+   ],
+   "end": [
+    35.5177,
+    134.904503
+   ]
+  },
+  {
+   "id": "京都府:70",
+   "name": "八原田上弓削線",
+   "ref": "369",
+   "highway": "secondary",
+   "lengthKm": 4.18,
+   "curviness": 407.4,
+   "flow": 22.7,
+   "turnCount": 75,
+   "score": 68.3,
+   "polyline": "{apvEuh{zXs@t@{CoC}Du@aDwCeJm@{DqGoA{@oBHoBzDcEnAqA[iEuGgCsAwLtDuBM{CsB{C{IaCq@eIl@qDx@yAlAyE\\sGoCcCkCcD?eDm@k@yCc@QwBhAuDzDsCe@eAgBg@}CeA?{AfDc@Jq@[k@sAcCQ}GhE{Ca@DqD",
+   "pointCount": 43,
+   "start": [
+    35.313105,
+    135.640592
+   ],
+   "end": [
+    35.343485,
+    135.6477
+   ]
+  },
+  {
+   "id": "京都府:71",
+   "name": "枚方山城線",
+   "ref": "71",
+   "highway": "primary",
+   "lengthKm": 4.07,
+   "curviness": 389.8,
+   "flow": 24.8,
+   "turnCount": 64,
+   "score": 67.5,
+   "polyline": "qeesEk`x{X]f[hBx@~BfHq@dCElHaC`NaCjG}Dx@c@fBv@n@Jz@uCrAwG@sFpHmAfEWdF{@fDVzHWhAsLvKaEnFyDdB}FhGcBtOkA~EhAdDDrAqArBkC_Bq@@SvE}DxF",
+   "pointCount": 33,
+   "start": [
+    34.76585,
+    135.787736
+   ],
+   "end": [
+    34.779618,
+    135.754715
+   ]
+  },
+  {
+   "id": "京都府:72",
+   "name": "枚方亀岡線",
+   "ref": "6",
+   "highway": "primary",
+   "lengthKm": 6.24,
+   "curviness": 415.2,
+   "flow": 21.4,
+   "turnCount": 121,
+   "score": 66.8,
+   "polyline": "_qjtEklqzXjFsBbItAnAGrPyHnFf@zEe@pBaCfEyArBoDLiBvBcIhBgAxCoDtEm@~GqGz@CrB`AjD_EtFWbAsApEe@l@yAJgEz@aAv@\\vA|G`@Vt@YdA_BbAyDFkBg@}Dd@iA~@GvDnApCvDfDS`I~GrDgChBl@~C~DnDi@~@tB[jHpA|@fCe@lDsDhCA`FgAnBuCxAiEdFaA~BkBdBuHnAsAhE?rDq@nA^v@nBFbG`@`C|@~@vBn@",
+   "pointCount": 64,
+   "start": [
+    34.957125,
+    135.589984
+   ],
+   "end": [
+    34.916435,
+    135.60132
+   ]
+  },
+  {
+   "id": "京都府:73",
+   "name": "宮ノ辻神吉線",
+   "ref": "363",
+   "highway": "secondary",
+   "lengthKm": 5.77,
+   "curviness": 406.8,
+   "flow": 20.4,
+   "turnCount": 115,
+   "score": 66.7,
+   "polyline": "ctjuEuywzXdFrKtBjL_A`CwDCiB~B{@dCb@pA|HlIj@xBe@t^QvBeApA}IxByDzCiBhDmB`I]tIJ|@~@jAxBl@`BtAxALpEvIpE|BlBnFjBjBJpBgBrDaDvCiDuEkA_@}@b@}@xBDtH_@hBkDbBQfAuEnH|FvExDzAfCfFrC|BzFw@|ChAdByA`HcC~BjCpCMd@h@LhG|AnDYzA",
+   "pointCount": 53,
+   "start": [
+    35.121463,
+    135.622834
+   ],
+   "end": [
+    35.114887,
+    135.584821
+   ]
+  },
+  {
+   "id": "京都府:74",
+   "name": "今里大通り; 西京高槻線",
+   "ref": "67",
+   "highway": "primary",
+   "lengthKm": 3.14,
+   "curviness": 335,
+   "flow": 43.8,
+   "turnCount": 24,
+   "score": 66.5,
+   "polyline": "cghtEmhe{Xn`ALk@oh@dF}S{EhU`@bg@kCK",
+   "pointCount": 7,
+   "start": [
+    34.945295,
+    135.691753
+   ],
+   "end": [
+    34.935517,
+    135.691739
+   ]
+  },
+  {
+   "id": "京都府:75",
+   "name": "下鴨静原大原線",
+   "ref": "40",
+   "highway": "primary",
+   "lengthKm": 4.94,
+   "curviness": 362.4,
+   "flow": 25.2,
+   "turnCount": 71,
+   "score": 66.4,
+   "polyline": "i~|tEu`t{X_]x@sFd@e@p@cEd@}FUmBjA]YCoBmAzAhAcFeE`IuFbAyBcAgEyI}GkGaDoA}DFsANkC`B{BV{Fe@sGzAiBpGoKhKeCNqE_@{DvBSj@eGV_D|B}Dx@}CnCcMvDgSd@cMaF",
+   "pointCount": 36,
+   "start": [
+    35.051407,
+    135.767313
+   ],
+   "end": [
+    35.088908,
+    135.762527
+   ]
+  },
+  {
+   "id": "京都府:76",
+   "name": "笠置山添線",
+   "ref": "4;25",
+   "highway": "primary",
+   "lengthKm": 11.57,
+   "curviness": 378.1,
+   "flow": 22.5,
+   "turnCount": 194,
+   "score": 66.3,
+   "polyline": "ghyrEucg}XtElJ@bAoJ~Fi@|@{@nGqCnLHbAdCrCH~@u@t@iCc@o@R{AlF`C~FfBpInB~D_@hHb@~FkGnDc@nACrEo@jAj@hFg@xC`@lBz@d@pBg@TRgAvAChFhBdFGbDbB`CF~@m@XyCyBoM|@yDrAa@vDmEKgCpAr@~F`CdHrI|KXpDxAhEi@`C_FnH}@zEmB~BrA~KyBdDg@dGt@`D{ArCV~CqAtCAlCgLzJsCEqCcBaDOqFhCyELiFnDeCm@kBaEmGgA{VrCsAIoFuCcNp@iQbEKfDmAtDl@vDeBxFmCn@mEu@kBt@?nAvBrAfBhEiBrLJrNfA|VoB`Mr@fJvC~HiAxLb@~ErAlE_A~ClAnGElK",
+   "pointCount": 96,
+   "start": [
+    34.704845,
+    136.028912
+   ],
+   "end": [
+    34.734438,
+    135.95092
+   ]
+  },
+  {
+   "id": "京都府:77",
+   "name": "明田丹後大宮停車場線",
+   "ref": "657",
+   "highway": "secondary",
+   "lengthKm": 4.22,
+   "curviness": 326,
+   "flow": 25.9,
+   "turnCount": 53,
+   "score": 66.1,
+   "polyline": "quexEc|vwXl@|@hAjF`AjKyA~DIrJkAfFGpBc@t@eEFuCpA_CTYj@jGfClEr@Rv@sBn@D\\lD?~@`AgCd_@`CxJx@h`@lW|i@tE|Dp@tDR`IhMqBGq@",
+   "pointCount": 29,
+   "start": [
+    35.587608,
+    135.126579
+   ],
+   "end": [
+    35.579342,
+    135.093675
+   ]
+  },
+  {
+   "id": "京都府:78",
+   "name": "園部能勢線",
+   "ref": "54",
+   "highway": "primary",
+   "lengthKm": 19.41,
+   "curviness": 356.3,
+   "flow": 22.7,
+   "turnCount": 305,
+   "score": 65.8,
+   "polyline": "kn_uEsbkyXYrCb@tC~AnBrBf@lFi@tDgD~Ag@bBLnE`CfCCxBkApEcG|DiIz@uI|Jc[`BuBzKmGfBmDF_Bc@iAqEoCmAeBg@wCFwD|D_YdAaB`CcBbEs@SeFfDT^lApEj@lD`IpCnCbBX|BOhCfBnBy@bBcEl@a@zB}@|CBlBi@nGpFJn@a@D{@sAeCe@_CPQn@`Fj@fF~CiBdJfAZpArDnBlBn@nGbDt@nApIdFxIvA?rDsAlGVv@j@nDrGIpDlBxD@`Bq@dAwEfCgFhHm@zB^hCzBfAdEg@jAtAnBf@\\x@HbEtBzCdCpGbCxAn@tAtEdB~CmAnDCvAtCKxBeA|@?nAgABUf@rB~BxBt@tAtCJlD`CfCVc@k@iBBwBt@qDkAyE`BmIUsF{@{EtB_ApDyDzAmGVgFbCsB`AeFIuAaAeCAaCi@sBXaR^sBzB{BlAyDdAcFHqCnB{GpG}HPuR|BsQF{Ea@uDPuDk@gEhAiCYmDvK{P~@iDEkAkE{DOoAn@cCbCyApDkRbRp@|CQrHyBjCgBrEeAlDsEzByAnDu@hFr@xCa@j@i@h@oDpA}B`SeLnEc@xFtA|HeC|RrAdZ{CzFwC~ADvHpClMpUjEpFbBvEtB`C|AxDhBzBhAbGp@lQ",
+   "pointCount": 170,
+   "start": [
+    35.064221,
+    135.393858
+   ],
+   "end": [
+    34.978054,
+    135.426051
+   ]
+  },
+  {
+   "id": "京都府:79",
+   "name": "竹井室河原線",
+   "ref": "454",
+   "highway": "secondary",
+   "lengthKm": 3.43,
+   "curviness": 360.2,
+   "flow": 23.3,
+   "turnCount": 53,
+   "score": 65.6,
+   "polyline": "y`duEmxwyXkBlFo@rEy@bBkAE_@\\~B|Fs@pBHbC_A`AKv@F|Fc@rC?pC|@`JoArDRj@dB\\CvDb@|CmClMO|Kd@fCxEpGChIm@nAiCdBaAzA[vH}@dCcLlMmFjCmDxK_CrD",
+   "pointCount": 34,
+   "start": [
+    35.087653,
+    135.458788
+   ],
+   "end": [
+    35.094705,
+    135.42768
+   ]
+  },
+  {
+   "id": "京都府:80",
+   "name": "綾部大江宮津線",
+   "ref": "9",
+   "highway": "primary",
+   "lengthKm": 19.55,
+   "curviness": 350.3,
+   "flow": 22.4,
+   "turnCount": 306,
+   "score": 65.2,
+   "polyline": "o`zwEelcxXhBM~DuB~@?lf@vMfNfGhD\\vObGbD@vFuBtBJ`VjLfAvApBjHdElIzDvCbEvGvEx@t@n@tAxJdLfQfDtBdHjAnBtDd@|FhD|GrBxAzDHzCrAHvBrE|FfC|EnAX`De@nKxBfC|AtB`DdBrAlCcAp@Jp@`FvApCjAcBfB?X[BeAiBeBr@_Bt@Th@pBdCl@dA{AfBXFv@u@|Ax@xBHjBsBhC_BQMZEtIs@xBhCxEsAlQcArAeBAzAhCj@C|DcDtAgCv@sB|@_LvAwE`CmAdB{BzEuMlAeAhGgBdBJnB`C~BzGrBjBd@lBlEtENtEj@jAvD|EjHjEb@|@r@dDcCnBw@hEFzAkA|AJt@x@TvD}@dCD|AyAp@AaD|L\\rDXWGoChDyHbA_AnDMd@a@fE_Nd@e@jOo@jCdBjCrDhEz@rHgExCwDbEc@tBh@jBfC?dIt@tEzBnGpFAdC|BlBKxEdA`KsElKbF^s@}DiCGs@rD\\fHOpGv@dKyFh@eEnCoEvDoCnFkBCeC}@cEkFkAwCsEGsIt@yDfBmA~K?vF~@vCgBvEPpFeA`Ft@`IzEtN~EhGpA`CArN}BxNpDlFg@nEb@dNpKxLpBrFjD",
+   "pointCount": 163,
+   "start": [
+    35.527916,
+    135.190588
+   ],
+   "end": [
+    35.415308,
+    135.153238
+   ]
+  },
+  {
+   "id": "京都府:81",
+   "name": "舞鶴和知線",
+   "ref": "51",
+   "highway": "primary",
+   "lengthKm": 4.13,
+   "curviness": 392.3,
+   "flow": 21.6,
+   "turnCount": 75,
+   "score": 64.8,
+   "polyline": "ku{vEuotyXx@}Bt@yI~BsL|AgEhDqFnBoUvGkPlAkNtD}MOy@mAOaAvAsFpDmBo@kAiBUkARcDxGeBJoAy@yEb@mBpDgB~D}Gz@LpB|BzBXvE}CfAMn@w@`@yBrBqADg@s@aBv@kA~BRzA]xDbBbBGdFiB`B`A",
+   "pointCount": 41,
+   "start": [
+    35.372537,
+    135.442035
+   ],
+   "end": [
+    35.358368,
+    135.467715
+   ]
+  },
+  {
+   "id": "京都府:82",
+   "name": "網野久美浜線",
+   "ref": "20",
+   "highway": "primary",
+   "lengthKm": 15.05,
+   "curviness": 326,
+   "flow": 23.7,
+   "turnCount": 207,
+   "score": 64.4,
+   "polyline": "u`fxEs|rvX{AiAk@_CoBoCsBg@mBqBqPwAyAcBg@gExE}PbDgEbBaK_CyFrAaUwCsFyB_IbAuDo@eXcBed@uAwEXaBnCqCd@eE{BeHgBoMkEuSgBwAmE]kKwCyPcJmH_CcCgG}N}U{L{AkHkBwCeDAq@`@SzD~B`BWl@t@r@s@`B~@hCg@Hs@wEkKOwE~G~BtB_CtBAzBjB?i@gAc@K}@bCyFh@DNnBXDpAqBx@nAVkArBFr@eAMk@wFeBsImGgFeNaDaDgC}DmEyAcGFeHeCoCuF}CgNoCmA}Fy@eJmDc@o@YqDk@uAwOcNkEiCmHsAoEmC{DfA{Bu@oDR_EyAmFbEoIC_LxFkW{Ba@q@O}BiF{HmAcImBsG_F_I}GuIqQqO_GqIcToT_GqEaCqD",
+   "pointCount": 104,
+   "start": [
+    35.589392,
+    134.942343
+   ],
+   "end": [
+    35.652471,
+    135.032259
+   ]
+  },
+  {
+   "id": "京都府:83",
+   "name": "下野条上川口停車場線",
+   "ref": "528",
+   "highway": "secondary",
+   "lengthKm": 11,
+   "curviness": 340.2,
+   "flow": 21,
+   "turnCount": 178,
+   "score": 64,
+   "polyline": "kxawEcgnwXF`BhBzA`@zAUlFf@tBpBdAfDiBtAN^z@VhGdAfDvANbF}EnADnEzHlAvEjDrAbBwB`A_@jAT`BvAxE~@jDjLpEj@bFpGq@uDRo@vEdC`Dy@zCt@xCKvC`@dBgAbBl@TkCyAaC[yBl@y@xASlBVz@|DfBp@pKKhFu@~GlDzEZvAaD|FuBvCsCvGkDjIeK|BwGGoQZuEr@}CpBmEtFsBzBeEnBdAzGZfJvAfBqArXoKtA}AdBuEFgE~AiIlJcQjB|AfC~GlB`C`JxGpDrAfBlDfARbCq@|@VxDhK?dGv@nCpEl@~ThOvHp@nDiAjIXjKk@jJr@|IwBpDmE`F}A",
+   "pointCount": 91,
+   "start": [
+    35.403744,
+    135.082255
+   ],
+   "end": [
+    35.333619,
+    135.083966
+   ]
+  },
+  {
+   "id": "京都府:84",
+   "name": "桑村雲原線",
+   "ref": "530",
+   "highway": "secondary",
+   "lengthKm": 3.44,
+   "curviness": 371.8,
+   "flow": 20.7,
+   "turnCount": 62,
+   "score": 64,
+   "polyline": "cmvvEys_wXiKcGaFaHsK_HgCgFqC}@w@}AsAw@_EkKkMcCuB}CaCgBuF_AyEiCu@cDe@YwAJyC}BiA}CoBiBgAmCgJmIiB{@iAoCeIy@aEoBa@_BcDsAqFB",
+   "pointCount": 29,
+   "start": [
+    35.345623,
+    135.007489
+   ],
+   "end": [
+    35.370133,
+    135.026831
+   ]
+  },
+  {
+   "id": "京都府:85",
+   "name": "地頭四所停車場線",
+   "ref": "567",
+   "highway": "secondary",
+   "lengthKm": 5.96,
+   "curviness": 360.8,
+   "flow": 20.3,
+   "turnCount": 106,
+   "score": 63.7,
+   "polyline": "{ahwE}`gxX{H_AeCsAsEn@qDdBoIsHO}E\\eCgBaCWuF}ClA}B?gCg@yDyDeLwAkFlDaFS}B_AkEsF_BcAqWsC}@yBUiHuCkC{@qDd@oGsBoDK{D`@iE{AgDW_CDoAp@qAlGeAv@w@LoAeEeFeIqAuCgF}DqDCmB`CkGJuBk@qB}CgDcGcCk@eAgAuJyAcEpB_IF_Ba@w@_AWgHJ",
+   "pointCount": 54,
+   "start": [
+    35.435978,
+    135.209271
+   ],
+   "end": [
+    35.464618,
+    135.242474
+   ]
+  },
+  {
+   "id": "京都府:86",
+   "name": "鱒留但東線",
+   "ref": "704",
+   "highway": "secondary",
+   "lengthKm": 4.97,
+   "curviness": 351,
+   "flow": 21.3,
+   "turnCount": 82,
+   "score": 63.7,
+   "polyline": "wq|wEe}awX{Cc@sELeIlBeKsE}EUq@kAwBi@cAeBsEaCoB\\wDIqEfAwCzDyA`AkCg@wDoCqCB{DcAw@f@KhDqAs@aDNkA`AY|C}@p@mDqBoB?y@jAs@fFuIvAuApCk@hF}DhGoA|@sCm@eD?sD_DyLeEcHcGgCFuL`EcG{@{E{BcLeJ",
+   "pointCount": 45,
+   "start": [
+    35.540916,
+    135.019231
+   ],
+   "end": [
+    35.578311,
+    135.019053
+   ]
+  },
+  {
+   "id": "京都府:87",
+   "name": "大山崎大枝線",
+   "ref": "10",
+   "highway": "primary",
+   "lengthKm": 6.19,
+   "curviness": 281.2,
+   "flow": 27.2,
+   "turnCount": 64,
+   "score": 63.4,
+   "polyline": "wrltEkw~zXmKkG_FsAwXqE_IAhGYbUpEPm@fDi@fKMpLsJbEcFtCs@fFqE`GObDaA|EwJvJyB_AwHdOiDv@cQr@An@eA~EuAjLgLdKkEz_@SbA{ExByCr@wIzAcD^uC]cC\\yHzAcF",
+   "pointCount": 35,
+   "start": [
+    34.967636,
+    135.658302
+   ],
+   "end": [
+    34.942745,
+    135.685785
+   ]
+  },
+  {
+   "id": "京都府:88",
+   "name": "舞鶴宮津線",
+   "ref": "45",
+   "highway": "primary",
+   "lengthKm": 15.1,
+   "curviness": 336.2,
+   "flow": 21.8,
+   "turnCount": 233,
+   "score": 63.4,
+   "polyline": "m{jwEguqxX{JxUcBOkB}CsBg@iTtCuEdBwGbAuFjCoCbCSrAb@vBlCtAbAzAXjMcAbCwKdGgEjJu@jGvCjILlBQ`A}DdEy@hBMlMkFQyHaDuDs@cWnAqARwCtBaYdIqDsA[oAXiDi@{@aBe@{K@}ElC_DLsFrCcQqDyKjCuFQ}E_CoH{@sNpK{E[}Cx@yFRaHhB}CbCiArCc@PwDqAiMw@}BqC}MPeCu@sTMqIiAgFMaDnAaQ~BiFfHeOtLm@nDb@dBpCpDH~Aq@nAgAN{Cq@uFoDiBAm@eA_AnA{AAeDbH_AGiA_B{CNKbBs@\\eA}Bm@YeAbAgADUbAhCnE@hEwBzBe@pHcC~CgD`JiDhCY~B`AnGm@tDAlEq@rAcCb@_@|AI~GeAhCEtB`BrANzCkAj@sCjFdBlJ_C`KG~IfDrOiQTiJtB",
+   "pointCount": 116,
+   "start": [
+    35.450314,
+    135.26372
+   ],
+   "end": [
+    35.538232,
+    135.205449
+   ]
+  },
+  {
+   "id": "京都府:89",
+   "name": "宮津養父線",
+   "ref": "2",
+   "highway": "primary",
+   "lengthKm": 5.29,
+   "curviness": 266.8,
+   "flow": 30.7,
+   "turnCount": 46,
+   "score": 63,
+   "polyline": "g|}wE_ubxXz@w@hCaGxD}EiFrJm@bBLXa@P}BTyGqA{CIyIdCoCFyJuAcM|KiUhm@sCrNaKjUBzBf@fBlGxHva@bb@jJzMlI`FrAxA]O_BnLf@uEtAiE",
+   "pointCount": 29,
+   "start": [
+    35.547717,
+    135.186878
+   ],
+   "end": [
+    35.551924,
+    135.1592
+   ]
+  },
+  {
+   "id": "京都府:90",
+   "name": "国道423号",
+   "ref": "423",
+   "highway": "trunk",
+   "lengthKm": 8.36,
+   "curviness": 363.9,
+   "flow": 24.1,
+   "turnCount": 126,
+   "score": 62.8,
+   "polyline": "snitEez_zX{EyK{AqKGoAvCqUkDyPs@iAsA}@iH}AiFvC_AFuLeDgBx@mC~EyGv@sCsDu[cPeCoF}GkFcE]eEmC_Hy@}GmJsHeQiCqB{EmBoA}AyAC{@z@m@CFwB}@wBsHeFF}@pAw@ViC]eA}AkA_@sEgJqGcE_IyAw@u@kEwCm@_@wCrBsCxBqAQWq@RaE|C|AwCaAkAI}@bBd@rByBnBk@pBDLi@yG]kDb@wDzE}Af@iNiC_\\RmAW_FmD}E}F",
+   "pointCount": 67,
+   "start": [
+    34.951625,
+    135.500029
+   ],
+   "end": [
+    34.996355,
+    135.538531
+   ]
+  },
+  {
+   "id": "京都府:91",
+   "name": "能勢街道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.42,
+   "curviness": 321.3,
+   "flow": 22.2,
+   "turnCount": 64,
+   "score": 62.5,
+   "polyline": "ghwtE_lgyXf@zAr@OB{Db@EfAnIpD`Iz@fEz@b@vM_@~I}DzMVhCjAxHbBzHyA`FPjD{@`DZ|BeAxDjAdEk@pAo@nHuH`ESxBqMdGkFEgC|E_KdR}DpCsC|DqA`NqH",
+   "pointCount": 32,
+   "start": [
+    35.022281,
+    135.374881
+   ],
+   "end": [
+    34.991015,
+    135.383454
+   ]
+  },
+  {
+   "id": "京都府:92",
+   "name": "国道477号",
+   "ref": "477",
+   "highway": "trunk",
+   "lengthKm": 26.62,
+   "curviness": 353.2,
+   "flow": 22.1,
+   "turnCount": 425,
+   "score": 62.1,
+   "polyline": "_p`uE{efzXkE{EsH{XgQ{MqI}UP_DdAsBPiCgBuSmDqRVuBjCuHe@kRBiSk@}EoB{CyCwAoKmCqFWwKeBeDiBgCuQt@eCzDyBnCiEe@mHFkKaAmJAeFoDeFPwJcAiCeIyBAwC`AkEcCkFBsDy@aB}B}AeB}NcBcD@aCeAwCH{DeA{A?kBiCcAa@y@zAi@j@_C`BkCZeCsAsGTqFpA}CJ}D|AwABy@cBsBqBaA[kA?kDkAsEsJeLKqAZsBWmB]JaA~HwKtEcErFe@dBZ|E}BzCa@vEsA|DmAlBgC|@k@v@gAjCw@zF}JnLeCbJiBfAeGa@wCvBgAfFkCnEiAxEgHrF_FfN_AlAkJ~AyBpAmNeA_GeBiAaAo@yBuBoCkBoFoCg@yCjA{A]u@d@iAtCyEwCsGp@kCiAmDeHg@YmCtDfFvFf@lHoF|As@xAeCA?r@h@z@OfEuCbEeEHqFyFg@`@]vBk@pJeAdCuDe@}AaEqDfBkAuAO}BvAaJM{Bo@s@sEJgA]o@y@s@eEgFYqAcAmAyItAcG{AwBwCu@uIfDc@bJo@hA_AJiAa@uGoIsDwLPaAzE}G`BqN?oL}@aEc@qLZuGhAqF`B_CnYyObC_DUiC_C{CgDaBgM}CoNgA{FmAwEkB_D}CcCqIUeJk@oCoSaTsDiAwEe@sBmAO}CbBmErAuAlBVfDjEbBSh@{@AeCyEaHm@aD{Ay@wBKiD{EeDuAi@@c@|AYB]gBFoEwBvA}@uCqCZlFmM^{EnAqEQmAmAc@qALgJtDuAKwAaBmGT@iOkBaIcAe@gO?sEy@cDwAqD[sBmBgBkE}C}EqB{JsFiD",
+   "pointCount": 221,
+   "start": [
+    35.069601,
+    135.532625
+   ],
+   "end": [
+    35.166177,
+    135.642565
+   ]
+  },
+  {
+   "id": "京都府:93",
+   "name": "周山街道",
+   "ref": "162",
+   "highway": "trunk",
+   "lengthKm": 8.57,
+   "curviness": 366.3,
+   "flow": 22.9,
+   "turnCount": 137,
+   "score": 61.9,
+   "polyline": "gpauEiad{XxHn@`HqBdAB|@n@jAfFhBxBfAR~DwAxA@dAxC~CvDjC[zGkC`EA|@hBp@bGl@bA`Bz@pFf@jB|DlFfC`BxD~@l@nCN|CxBdA|AnI\\sAdI_BtCNj@`BA~@}EdAkBdGuAtA^zAO?s@qB_AWeDnEaEtCKEyBZk@jNkFhL^Jo@u@yAFq@~Ee@lAyBM}@}BmAD_AfFoCfBiFdIyCxAArG}DfFmBzDyChE{@fEcT`AkKfJyUjDsFvG}XzK{JzB}Fl@oF`FqJhKy@tJyB",
+   "pointCount": 73,
+   "start": [
+    35.074756,
+    135.685492
+   ],
+   "end": [
+    35.025057,
+    135.709713
+   ]
+  },
+  {
+   "id": "京都府:94",
+   "name": "中地熊田線",
+   "ref": "365",
+   "highway": "secondary",
+   "lengthKm": 4.65,
+   "curviness": 309.6,
+   "flow": 22.2,
+   "turnCount": 65,
+   "score": 61.8,
+   "polyline": "ustuEqhvzXtCjK`B`BpIrOlI`EzBdD|CbCvLdHvGlDbMvCd@bAd@lP^~AfAhA|GdDfE`FbDbGlCx@nBbEpGrBfAtF@jFt@rArBStAeDp@c@hFFdDuB|@AhClF`F|BhBS`@ZHl@y@vCb@jBxAPhHqDr@x@n@lDlDdA",
+   "pointCount": 41,
+   "start": [
+    35.172591,
+    135.614968
+   ],
+   "end": [
+    35.143954,
+    135.589927
+   ]
+  },
+  {
+   "id": "京都府:95",
+   "name": "溝谷内記線",
+   "ref": "662",
+   "highway": "secondary",
+   "lengthKm": 3.63,
+   "curviness": 346.9,
+   "flow": 20,
+   "turnCount": 63,
+   "score": 61.8,
+   "polyline": "k`pxE{lowX?]uBoAa@mGsBkBgGy@_AP_EeAwIx@mB}@DoIkAmAgBe@_AmAoAcFeFuC_CkHyN}AaEf@sA]ReEcAaGb@{Je@sFkAyBqE_EqAeDuE_Gv@mWvBqJkAwC",
+   "pointCount": 31,
+   "start": [
+    35.640538,
+    135.088297
+   ],
+   "end": [
+    35.656711,
+    135.113373
+   ]
+  },
+  {
+   "id": "京都府:96",
+   "name": "久住河辺線",
+   "ref": "658",
+   "highway": "secondary",
+   "lengthKm": 4.81,
+   "curviness": 324.1,
+   "flow": 21.1,
+   "turnCount": 74,
+   "score": 61.8,
+   "polyline": "sjkxEatwwXdCzSO`GdCl@`E|FzF|BbAdDOzBb@pCbBdBxAjED`Bu@xEpBzGi@fB|@jBc@hELzD`CxArAfEvCd@tBhElDtCnJhElDMr@XbAhU`DvYCpBeAdEfB|L~FzRrFzJt@tD~B|B`IbS",
+   "pointCount": 36,
+   "start": [
+    35.616582,
+    135.130411
+   ],
+   "end": [
+    35.598796,
+    135.087983
+   ]
+  },
+  {
+   "id": "京都府:97",
+   "name": "内宮地頭線",
+   "ref": "533",
+   "highway": "secondary",
+   "lengthKm": 4.21,
+   "curviness": 346.6,
+   "flow": 19.4,
+   "turnCount": 75,
+   "score": 61.6,
+   "polyline": "{_fwEwehxXiL_AgDv@wHlLm@Iq@j@YrAChFk@tAsMpDuC`ByFgAoBp@w@~@M|EtAtGOvCy@~@aEr@yAbEgC`B{@~Ao@tCC`HoEnMcChDa@xAj@`C`ChDrAXpEYhA^r@~D^z@`CxAX~B_D|B{E|@gAbE?bNcC`DaAb@cCW",
+   "pointCount": 43,
+   "start": [
+    35.425424,
+    135.215158
+   ],
+   "end": [
+    35.440518,
+    135.188441
+   ]
+  },
+  {
+   "id": "京都府:98",
+   "name": "向日善峰線",
+   "ref": "208",
+   "highway": "secondary",
+   "lengthKm": 3.67,
+   "curviness": 326.4,
+   "flow": 20.7,
+   "turnCount": 58,
+   "score": 61.2,
+   "polyline": "owftEiy{zXvA{FV}EQ{@wHaDuAuAu@cCyAGaFqBqCmEs@aIsBcGOsCiAsBm@uHb@aD}DqHg@eIiCsFGgDgCmHu@gF}AcBg@qEsBsISwGhAkBVkDz@oCi@eDBeBhEmKbCcS",
+   "pointCount": 33,
+   "start": [
+    34.937676,
+    135.643254
+   ],
+   "end": [
+    34.945028,
+    135.677259
+   ]
+  },
+  {
+   "id": "京都府:99",
+   "name": "弥栄本庄線",
+   "ref": "57",
+   "highway": "primary",
+   "lengthKm": 9.98,
+   "curviness": 324.4,
+   "flow": 20.8,
+   "turnCount": 156,
+   "score": 61.1,
+   "polyline": "}c}xEcdexXaEcSI{E`@_BWsFTmCeCeCgCwA_B`@_Ak@gAd@gBa@sBv@sC_@k@kAmB\\}BmCgB_FoJ_@aAb@o@tAwDgCuFOqAw@cAeCiGwBoBgBqD`@cDk@}CgHY}B`AqJxBcGbEq]P{EsAcHDmBnB_HdF{LfBoB`H{CnCw@pG[dEsAhBsAfImKhFkEpDwGdBkOnGiFnEz@pEqIXyCMyD_C{ICuDlFeEvCqFvCwCPcDb@eAhDsCrEYj@g@aEuAaAoA}@wKwByAsDaAgJv@_ChAyFxQoA`B_Bn@mEI}A}@wAgByBoHuGwFeA?{JxHsPwBw@kA",
+   "pointCount": 83,
+   "start": [
+    35.707673,
+    135.199536
+   ],
+   "end": [
+    35.720517,
+    135.252747
+   ]
+  },
+  {
+   "id": "京都府:100",
+   "name": "枚方亀岡線",
+   "ref": "6",
+   "highway": "primary",
+   "lengthKm": 6.77,
+   "curviness": 339,
+   "flow": 20.1,
+   "turnCount": 114,
+   "score": 60.9,
+   "polyline": "iurtEwbozXjC_@jIiFfCS`KfCrL`A|GhJlBjAlGz@hEgBfCPlA|@b@|C~DzChAtBxEo@bAqF~FZfCmC|@H`BvArDcAv@l@p@dCxAjB[hH`@dAzDbAhCbBhAGxFuEhAQvBv@|BdEjE\\|GlBjEGbJmBnEiCX{@a@{H_AeEeEkI_AgFkCqDiCeILyB|AaBj@yEhAyBIqBeB{EAaAdAYpBpB|@DtFmD`GoBdQcUfGoAjC{A",
+   "pointCount": 61,
+   "start": [
+    34.99877,
+    135.578198
+   ],
+   "end": [
+    34.961284,
+    135.590721
+   ]
+  },
+  {
+   "id": "京都府:101",
+   "name": "池辺京田線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 6.68,
+   "curviness": 310.1,
+   "flow": 22.1,
+   "turnCount": 94,
+   "score": 60.7,
+   "polyline": "{acwE_wayX}CmI[gD~@sDdLsSdAiDDwBo@cCUeGkFaKqIiByHcLcCgHiEcIyIaKYkBR}FeOiVuIiQqEqDiA_My@qBg@wI}B{MqE{GsEkKcDeBkCkF}DsEs@iCqMiEwJsAcBsAsBiDqAq@wCaFeDy@yBkDWmCc@FoAfD}D`Ay@Iy@gCeAiAB_C_CwAs@}AuBgB",
+   "pointCount": 49,
+   "start": [
+    35.410378,
+    135.345916
+   ],
+   "end": [
+    35.440353,
+    135.396653
+   ]
+  },
+  {
+   "id": "京都府:102",
+   "name": "永留豊岡線",
+   "ref": "703",
+   "highway": "secondary",
+   "lengthKm": 6.56,
+   "curviness": 273.7,
+   "flow": 22.5,
+   "turnCount": 80,
+   "score": 60.3,
+   "polyline": "ioexEcgtvXfGdHVxF\\bAlInIbBzDnAjFdGnd@zK}C|NgAfRiIvOeCfDQv@ZpJtS|AdS{@|Vd@AjD|E~AhHXpLzAdGxDbCxAvJnGbK~AlAp@jCzChAvAtDvAbBzBj@rCpClEx@fE`EXvEzAjBpCdBhHjAzCuAfCBjBqAzCrH",
+   "pointCount": 42,
+   "start": [
+    35.586606,
+    134.949144
+   ],
+   "end": [
+    35.551403,
+    134.910467
+   ]
+  },
+  {
+   "id": "京都府:103",
+   "name": "大河内口八田線",
+   "ref": "453",
+   "highway": "secondary",
+   "lengthKm": 5.67,
+   "curviness": 308.3,
+   "flow": 20.1,
+   "turnCount": 87,
+   "score": 60.2,
+   "polyline": "arcuEqktyXxKbGpEnK~DzCtOlBbGiE`MeBdGfBvHlEzOhBvFrGvKnDzD|Bp@z@pBjIvAjBnKzBxJxDjDrHbBvAhHx@jE~BnCEtAd@l@[|DFnBeAfNvG\\`Be@jAFpD_DrFiCd@GtAr@p@dAIdB~Cp@|Fw@`DDfBlC`DvFzM",
+   "pointCount": 42,
+   "start": [
+    35.085286,
+    135.441369
+   ],
+   "end": [
+    35.04933,
+    135.414826
+   ]
+  },
+  {
+   "id": "京都府:104",
+   "name": "西坂蓼原線",
+   "ref": "493",
+   "highway": "secondary",
+   "lengthKm": 5.41,
+   "curviness": 313.8,
+   "flow": 19.8,
+   "turnCount": 86,
+   "score": 60.1,
+   "polyline": "oa{vEkxcxXjA`CAzMcCxPh@|GuAdHTlEg@pDNnD_@bEV~Lc@zFPlAz@x@vG|@~BnEk@nBNlAU~@bAtAGx@pA`Dp@~NgAdEmClC_@zAv@dCCdBl@|BH~Dr@tEmGbNaLfDsEpJuGhD}@hAyA|IqD|FeAtKVpAxBpCFnFqBnFo@hGmC~EiFzS",
+   "pointCount": 46,
+   "start": [
+    35.369358,
+    135.19254
+   ],
+   "end": [
+    35.377204,
+    135.142382
+   ]
+  },
+  {
+   "id": "京都府:105",
+   "name": "四ッ池通り",
+   "ref": "326",
+   "highway": "secondary",
+   "lengthKm": 4.22,
+   "curviness": 197.6,
+   "flow": 30.9,
+   "turnCount": 27,
+   "score": 59.7,
+   "polyline": "u_asEcgx{XrVjo@ZvF@rYg@jAuXFCW~XYHa]eBqKoC}G[EmOk`@_Dkb@",
+   "pointCount": 14,
+   "start": [
+    34.744432,
+    135.788821
+   ],
+   "end": [
+    34.745417,
+    135.794689
+   ]
+  },
+  {
+   "id": "京都府:106",
+   "name": "東掛小林線",
+   "ref": "407",
+   "highway": "secondary",
+   "lengthKm": 3.35,
+   "curviness": 206.3,
+   "flow": 27.6,
+   "turnCount": 25,
+   "score": 59.6,
+   "polyline": "y~xtE}dhzXrEm@dGBhBs@fDXtGWjh@FtLl@BuWlHStEsC|H_AxLOjDxArDGzMiCp@q@RaCxEU",
+   "pointCount": 19,
+   "start": [
+    35.031006,
+    135.542707
+   ],
+   "end": [
+    35.005091,
+    135.549376
+   ]
+  },
+  {
+   "id": "京都府:107",
+   "name": "物部西舞鶴線",
+   "ref": "490",
+   "highway": "secondary",
+   "lengthKm": 10.85,
+   "curviness": 256,
+   "flow": 21.9,
+   "turnCount": 127,
+   "score": 59.3,
+   "polyline": "yv_wEipuxXwCGo@}Bg@OoAx@iAzDw@h@eC{BcGkAUy@\\_COa@uAfDZzBfFvC`ApCnEjCt@`HUxB}@^dFjII~AfAYfBt@~BfDjHbA~AlGQlMm@fEqCrE_IrScBbJTvC`DpMdGfHlRhLrPpDfDGdBg@|@RhBlEpDrDM|AmHjHaBfD}ArEkDtSEdBbCfS|A|FdLxOnL`Jp`@fNbCYb@m@dFuNxQ}HhQtD~TbJ`FzEfGpJ]xTiBtF`A`RVj^h@lAjEzB`CtCfGrD",
+   "pointCount": 69,
+   "start": [
+    35.393251,
+    135.283414
+   ],
+   "end": [
+    35.35852,
+    135.219575
+   ]
+  },
+  {
+   "id": "京都府:108",
+   "name": "月ヶ瀬今山線",
+   "ref": "753",
+   "highway": "secondary",
+   "lengthKm": 4.93,
+   "curviness": 291.3,
+   "flow": 20.5,
+   "turnCount": 70,
+   "score": 59.2,
+   "polyline": "uwasEmye}XbAi@jBXvCYnCwBxEjArAgBnH~A~BjBtDx@bDxCnGoAdA{@bLlAnM`DpF_AvUzAjCyA`GoIhDyAjLoMzMyKzOsAbK`DnEFxCpCx@BjAyB~DqB|AaBFkA{@sDtBwE[qFNcDhCuH",
+   "pointCount": 36,
+   "start": [
+    34.748268,
+    136.022146
+   ],
+   "end": [
+    34.712663,
+    136.033757
+   ]
+  },
+  {
+   "id": "京都府:109",
+   "name": "精華大通り",
+   "ref": "72",
+   "highway": "primary",
+   "lengthKm": 4.67,
+   "curviness": 208.5,
+   "flow": 31.4,
+   "turnCount": 31,
+   "score": 59.1,
+   "polyline": "_uasEi`w{XpGbPAr@pDzJhCpPT|QVl@QvrAIu]\\e^WsCAuQVk@?yE[kK_DgQwMk[",
+   "pointCount": 17,
+   "start": [
+    34.747845,
+    135.782614
+   ],
+   "end": [
+    34.747965,
+    135.782619
+   ]
+  },
+  {
+   "id": "京都府:110",
+   "name": "茨木亀岡線",
+   "ref": "46",
+   "highway": "primary",
+   "lengthKm": 6.89,
+   "curviness": 316.9,
+   "flow": 19.7,
+   "turnCount": 111,
+   "score": 59.1,
+   "polyline": "qhdtE_zkzXcBh@qDaAsExA}AScEsBkBHe@z@CjAnCpGsAjFgDnAwDvC{OvAkC`FqKe@sDmC}Cm@eEvIoFlE_EnBaAlG_An@gFj@oD{AeA@yBtAoAfDiBr@cGqCyHfB}F{CkL`@gEsEcLqEuEaFeAiCH}EkAcBkBFuB~CcAf@wI[iBy@eKiJcG{BaBuCgDwPwE{L?eG}AgF`@aFm@wDmCyEmC_Bq@aD",
+   "pointCount": 56,
+   "start": [
+    34.925047,
+    135.561438
+   ],
+   "end": [
+    34.968697,
+    135.571602
+   ]
+  },
+  {
+   "id": "京都府:111",
+   "name": "天王亀岡線",
+   "ref": "731",
+   "highway": "secondary",
+   "lengthKm": 8.39,
+   "curviness": 278.1,
+   "flow": 20.5,
+   "turnCount": 114,
+   "score": 59.1,
+   "polyline": "eawtEoq`zXvA`AzAxFbDhGbAjG~Ths@hBpDdHrFz@~Ae@|IPpDzFxBjApFtDbIpAhAvS~IvCbEv@bDWrPu@bHeCvM{DzGg@xBI~M{ArHtApF?`F_ApC{@VmB}Ie@?U|CNpH_@tEb@xBYV{@w@o@{CcAnDtAfDJ`BItHqAjFSvDnBxFHdC{@dFcCtCa@bByAdTwCdCaBfKiBvE?|Bf@fCJxE[vCb@fGTpAnC`EFpCcAlCf@bGeJ|VEzD",
+   "pointCount": 65,
+   "start": [
+    35.021152,
+    135.503758
+   ],
+   "end": [
+    35.014321,
+    135.430779
+   ]
+  },
+  {
+   "id": "京都府:112",
+   "name": "金河内地頭線",
+   "ref": "491",
+   "highway": "secondary",
+   "lengthKm": 3.9,
+   "curviness": 333.2,
+   "flow": 17.8,
+   "turnCount": 73,
+   "score": 59.1,
+   "polyline": "{cawEqcnxXiBdEs@fE{AvAg@rAqCp@{D|GwF\\_CtByBp@oAlGqDxEwCvBUbCb@jBRzE{EtC{@fLu@bCaCn@gE_CgBMyDnA{Fd@kF|BoEjGsEpDsC`G_KhG_AjCYlFcB~EiBbAcGQiF~D",
+   "pointCount": 35,
+   "start": [
+    35.400462,
+    135.245532
+   ],
+   "end": [
+    35.423873,
+    135.221323
+   ]
+  },
+  {
+   "id": "京都府:113",
+   "name": "岡田浦明線",
+   "ref": "666",
+   "highway": "secondary",
+   "lengthKm": 10.07,
+   "curviness": 264.3,
+   "flow": 20.9,
+   "turnCount": 127,
+   "score": 58.9,
+   "polyline": "azrxEsa{vXtJ_IxBkDn@{By@gDl@}GZ{@lA]~QGlFhAbKTjIg@dGd@|@a@Jt@qBvADb@`EeAnL^vLhEbG_BtA{AbAWpGOnE~@dHJjKvDlErM~KlTxB~FbDpDjAIV\\fAbGrBn@jAdCr@`FjEdFlBtIP|GfAhDHdHk@xBsB`C_CbLI`GcBxCeEhC]jABbCaGpLeIpBuArAtF|ZrCrD`ErBt@vBbCvBdAvDpDvBp@pB`CnCn@fDO`EvBzMuB~XNlCyCzCuEbIuBpF_F~EaBfJeCxE{EnDyB~CUfCzAlF",
+   "pointCount": 77,
+   "start": [
+    35.654888,
+    134.984104
+   ],
+   "end": [
+    35.627047,
+    134.929277
+   ]
+  },
+  {
+   "id": "京都府:114",
+   "name": "亀岡能勢線",
+   "ref": "732",
+   "highway": "secondary",
+   "lengthKm": 6.83,
+   "curviness": 294.6,
+   "flow": 19.2,
+   "turnCount": 105,
+   "score": 58.7,
+   "polyline": "{bmtEyywyX~@uR{@mEwBcESiFpCaJxEwF`B_EiA}NnAmGo@cGvB{FbBuBg@yJiBkE}CkNmBiCc@}IpEuGRiDrI{Hm@_IuAaEk@sDpCcB`BJhAo@tAcDhDoBfCaEfEuAd@kB`BwAp@aCW_M{@iCcAgB}Bs@uMaReRqEmH_F_GoAy@{AuDwRu@iHJkAnBkE[gJjBwIBaI",
+   "pointCount": 50,
+   "start": [
+    34.970216,
+    135.459014
+   ],
+   "end": [
+    34.972529,
+    135.517522
+   ]
+  },
+  {
+   "id": "京都府:115",
+   "name": "外環状線",
+   "ref": "79",
+   "highway": "primary",
+   "lengthKm": 4.19,
+   "curviness": 205.4,
+   "flow": 39.2,
+   "turnCount": 22,
+   "score": 58.7,
+   "polyline": "enetEe{l{Xp@{JbAgExDyHfG_JpFoLeBnFuOdU{AfEgAxGUlKf@p`BK_v@QuA",
+   "pointCount": 14,
+   "start": [
+    34.931068,
+    135.730593
+   ],
+   "end": [
+    34.931085,
+    135.723445
+   ]
+  },
+  {
+   "id": "京都府:116",
+   "name": "由良金ヶ岬上福井線",
+   "ref": "601",
+   "highway": "secondary",
+   "lengthKm": 3.2,
+   "curviness": 258.4,
+   "flow": 22.9,
+   "turnCount": 36,
+   "score": 58.7,
+   "polyline": "}jowEez{xXjH~BnAG`AcALyJbAgF\\q@nCO~BuApIvCxA|E`MhAzClBnDd@Pv@hFrBpAlAjFfJxBzE`AjKxHxQ|ClBrJf@dMtJ",
+   "pointCount": 24,
+   "start": [
+    35.47327,
+    135.315712
+   ],
+   "end": [
+    35.452794,
+    135.304519
+   ]
+  },
+  {
+   "id": "京都府:117",
+   "name": "東掛小林線",
+   "ref": "407",
+   "highway": "secondary",
+   "lengthKm": 6.4,
+   "curviness": 295,
+   "flow": 19.1,
+   "turnCount": 99,
+   "score": 58.6,
+   "polyline": "yuotEk~hzXvLdD|I|HjKbGjIjHrMlGjBFtDoBtExB|AbIv@^dCSd@p@GnDxAjE[tBmAhBK`BvAxCI`G`@fJ~A`CBrBnDbB|CW|AlC~AHxB{FlBq@dCuD~D_BdC_EzCy@lChAnFk@pGkDpHuJ|Da@tIuDhC}EfCoHjFwGxD_HtB_KvIqQpA_EHqF~As@lEThAy@j@sCWsC",
+   "pointCount": 52,
+   "start": [
+    34.98349,
+    135.546781
+   ],
+   "end": [
+    34.945991,
+    135.550709
+   ]
+  },
+  {
+   "id": "京都府:118",
+   "name": "桑村雲原線",
+   "ref": "530",
+   "highway": "secondary",
+   "lengthKm": 4.41,
+   "curviness": 265.5,
+   "flow": 21.3,
+   "turnCount": 55,
+   "score": 58.1,
+   "polyline": "c_`wE{lfwXYkAsPaMkC_EeBMH`Eg@Zk@Sm@qF}CiB_C{GkC{CsCiHkHuH}JoQmB}F}B_AaCmCSyCkDZmDaA{Iu@sPaF_EyHwCeCk@kEbAkM{ByE_DiE_BgAmDiAsKqG{Ey@",
+   "pointCount": 33,
+   "start": [
+    35.394577,
+    135.042216
+   ],
+   "end": [
+    35.421334,
+    135.069516
+   ]
+  },
+  {
+   "id": "京都府:119",
+   "name": "由良金ヶ岬上福井線",
+   "ref": "601",
+   "highway": "secondary",
+   "lengthKm": 5.38,
+   "curviness": 295.6,
+   "flow": 18.5,
+   "turnCount": 86,
+   "score": 57.8,
+   "polyline": "}yvwEq`_yXpDnC`DLlCiAnE}FrJkAxJd@fDp@bK_A|MfD~Fs@dDlCzHa@rDlCnEfAtEhClJfN~@tZ`AhD?fDp@|AlCYlAoClCwBzHe@fGsE`BIfGdCpAfDfEfBjCzEPzB[xChDhOfI|CbAg@jAkBf@E`DfC|HS",
+   "pointCount": 40,
+   "start": [
+    35.51151,
+    135.332087
+   ],
+   "end": [
+    35.475324,
+    135.316311
+   ]
+  },
+  {
+   "id": "京都府:120",
+   "name": "生駒井手線",
+   "ref": "65",
+   "highway": "primary",
+   "lengthKm": 7.01,
+   "curviness": 287.5,
+   "flow": 20.2,
+   "turnCount": 100,
+   "score": 57.7,
+   "polyline": "_kbsEoin{XsBhAuCq@oIBuDaEeNkCcOwHq@?eA`B_Aw@aBE{CiAaDaF}DQuBmCwCq@iALeA_AiBWOiAX_CuAyBRkDm@OoAhBk@[`@cH]mA_CaAeBiC{DFuH{AwGiMsFoDiCgAaG[sFeCmFc@mHaHwCuAaDYkIb@oK{EiJc@sC{@}G}EyDkHoHyBiKkK}GcOk@wEyCgLOqHaMqX",
+   "pointCount": 54,
+   "start": [
+    34.751358,
+    135.738004
+   ],
+   "end": [
+    34.79849,
+    135.773819
+   ]
+  },
+  {
+   "id": "京都府:121",
+   "name": "木津信楽線",
+   "ref": "5",
+   "highway": "primary",
+   "lengthKm": 15.09,
+   "curviness": 288.7,
+   "flow": 18.8,
+   "turnCount": 232,
+   "score": 57.6,
+   "polyline": "ouesE}ni|XyEuIkLuHmCaDkCXeC|BsA[kDmCeCMyBpAcClF_Bh@oGC_DiAsC}Dg@oBcAcHK_Mg@oCsAyByD}BuBE{GpCoI{@wHlAoGg@mB_AiB_DMeDh@yDjD{Gd@sBFmGeBaLuUqZqAa@}C~@cEuF{AgE}@eO{CgHiLuKoCsEkGc@aO{DmO_K{ScWiHyDmHuKo@iEx@aFMaBoGeJFcBjCqHo@}AwGu@eA`@{@nCqCIk@{@g@aEaEwF_C_@wDj@}Ag@q@}BVoFk@gCq@i@sGjEiBpCy@Jy@g@cC}Hi@eGcDmEsA_IuD_AeAwBr@wB`Bw@jCeDEgDsEiFO_F{@CyAbCwBhAwGwD{@qFF}GsAeFaBqUkBkHsGsEmBaEoAeJkDcM^iBnDsAr@w@t@}G~DCxCyJtAg@vDTv@o@lCmGb@eCr@gIo@qENwAfCM|EwAr@aADuAyGsOcFeFQsB",
+   "pointCount": 120,
+   "start": [
+    34.768399,
+    135.877111
+   ],
+   "end": [
+    34.828068,
+    135.970333
+   ]
+  },
+  {
+   "id": "京都府:122",
+   "name": "王子並河線",
+   "ref": "402",
+   "highway": "secondary",
+   "lengthKm": 3.4,
+   "curviness": 169.9,
+   "flow": 28.9,
+   "turnCount": 20,
+   "score": 57.6,
+   "polyline": "a`vtEsunzXmFlGwChA}CjLwDKyFzBgAbBWI_BfGiRbh@uD|Fm@F}BjDoLbMsj@lw@Et@",
+   "pointCount": 16,
+   "start": [
+    35.01585,
+    135.5761
+   ],
+   "end": [
+    35.035748,
+    135.549596
+   ]
+  },
+  {
+   "id": "京都府:123",
+   "name": "遠方瑞穂線",
+   "ref": "711",
+   "highway": "secondary",
+   "lengthKm": 8.58,
+   "curviness": 268.5,
+   "flow": 19.2,
+   "turnCount": 120,
+   "score": 57.4,
+   "polyline": "kvwuEki}xXtEsE|B{@fFz@hKgBvQ^bMe@rFx@hHjCbLbIxAhDtAxAzD|@tChGnChBzCtEtInDnFpEp@zB}@xHXlApCd@`E_A|BFfAn@`DrE`Bl@f@|@IxCh@bCbHpLXpHg@hML`E_AjFdA|O_@|GvD~NrBzEh@~G]pLg@tAqAh@qAfBE|DnBhPQnKw@`BwN~F_BvDMxAmFhEo@\\uAKeBjBoBp@{@xAqBQ_Hv@oBfClDtGvIdE`@~@AlAsB~EbCp]",
+   "pointCount": 66,
+   "start": [
+    35.188379,
+    135.323256
+   ],
+   "end": [
+    35.166087,
+    135.268153
+   ]
+  },
+  {
+   "id": "京都府:124",
+   "name": "宝ヶ池通",
+   "ref": "103",
+   "highway": "tertiary",
+   "lengthKm": 6.26,
+   "curviness": 217.6,
+   "flow": 23.1,
+   "turnCount": 59,
+   "score": 57.2,
+   "polyline": "}~|tEaeu{XoPN{Ak@[mALiIt@mF_@sAcAs@_KaAu\\dFkCe@oAqAuMcZ|GqbA}GpbA|L~YxA|AvBj@h^iFzDz@jDB|@f@b@tAu@rOZhBpAf@rPI",
+   "pointCount": 27,
+   "start": [
+    35.051514,
+    135.773127
+   ],
+   "end": [
+    35.051514,
+    135.773175
+   ]
+  },
+  {
+   "id": "京都府:125",
+   "name": "佐々里井戸線",
+   "ref": "370",
+   "highway": "secondary",
+   "lengthKm": 3.62,
+   "curviness": 281,
+   "flow": 19.2,
+   "turnCount": 53,
+   "score": 57,
+   "polyline": "kmyuEgsf{XwC`GsAhAw@FcAm@}CeF_A@wFvCwAAsH_FmDWqDgAqDJuDcAiM`@_E_@{A_AaBuDeD`@_EmCw@IwBhAuEEoQeGgGKeB}Du@yNaKkGkIgCgBsD",
+   "pointCount": 30,
+   "start": [
+    35.197184,
+    135.6986
+   ],
+   "end": [
+    35.223984,
+    135.708645
+   ]
+  },
+  {
+   "id": "京都府:126",
+   "name": "名田庄綾部線",
+   "ref": "771",
+   "highway": "secondary",
+   "lengthKm": 4.16,
+   "curviness": 284.9,
+   "flow": 18.8,
+   "turnCount": 63,
+   "score": 57,
+   "polyline": "sr~vE{gxyXt@mBjF{GdBsG?}G{AgC{@{D?_JiBaF`@aF`FcF?oA{B{B}Bd@qCu@{ClDyL|BaNpEmUyOw@yAmAyH_@mKqCyD{D}B}@{Ch@mEvHgNIoGhBoLm@kAaB@",
+   "pointCount": 31,
+   "start": [
+    35.387463,
+    135.461261
+   ],
+   "end": [
+    35.397743,
+    135.487772
+   ]
+  },
+  {
+   "id": "京都府:127",
+   "name": "芦原甲山線",
+   "ref": "669",
+   "highway": "secondary",
+   "lengthKm": 4.06,
+   "curviness": 192.9,
+   "flow": 25.2,
+   "turnCount": 31,
+   "score": 56.9,
+   "polyline": "_uixEeinvXfD{FViD|AkAvg@uS_Dw`@Ve@jNoCdm@qDh@rC~DmA|HNtO}MjBm@jKm@Zq@QiCp@qChHwA",
+   "pointCount": 19,
+   "start": [
+    35.607998,
+    134.918752
+   ],
+   "end": [
+    35.581139,
+    134.936281
+   ]
+  },
+  {
+   "id": "京都府:128",
+   "name": "舞鶴和知線",
+   "ref": "51",
+   "highway": "primary",
+   "lengthKm": 9.54,
+   "curviness": 259.5,
+   "flow": 20.5,
+   "turnCount": 121,
+   "score": 56.6,
+   "polyline": "ukrvE_exyXoBlGPbErBxExG`AXt@f@zFo@vNfAfFvA`DdFbCx@`AjBdG@v@eApA?p@jA`GfCvDJfAk@hGl@jAnBZvDo@n@^xAdKjCbD|BtG`HfIrATlEq@rCp@jGbNxBx@fDPp@zAMnHh@hDxC`DxDU`AZjAvAz@hItBnBpD|@pG`EnEjJv@h@~CHfa@iFp@s@fBuIfAk@n@JnIhLfAt@xCFpF}B~Ft@jEa@|BiBpE[tByAxFuAjUiKxBCdBuClAm@jEr@zBkBnFeAtVgA|[lIvVeCrD`B",
+   "pointCount": 74,
+   "start": [
+    35.324909,
+    135.460801
+   ],
+   "end": [
+    35.263991,
+    135.430466
+   ]
+  },
+  {
+   "id": "京都府:129",
+   "name": "余部下舞鶴港線",
+   "ref": "565",
+   "highway": "secondary",
+   "lengthKm": 6.15,
+   "curviness": 259.3,
+   "flow": 19.5,
+   "turnCount": 82,
+   "score": 56.6,
+   "polyline": "irkwEeg~xXkC_FmInFmDlAwAqDgDiA{AhA{Eb@gDtAqBJ{@k@mAkC}CaAgEaEiGe@oEmAaHEwC{@qBuEa@yKmCaHy@w@uFe@eFwDsAcCC{Ap@gDcAsNs@oCoEkGaAgDDsJo@gKuCy@_Gr@aB~B{@hFq@z@iETgFgBkBuNkC}DkAkKfF_^n@eL[}FzFeC|EqI",
+   "pointCount": 48,
+   "start": [
+    35.453974,
+    135.328035
+   ],
+   "end": [
+    35.478244,
+    135.362524
+   ]
+  },
+  {
+   "id": "京都府:130",
+   "name": "志高西舞鶴線",
+   "ref": "66;490",
+   "highway": "primary",
+   "lengthKm": 4.7,
+   "curviness": 218.4,
+   "flow": 24.4,
+   "turnCount": 42,
+   "score": 56.5,
+   "polyline": "ikiwE_j~xXFx@aCxMOhDbJh@~Bx@jXk@SoMfDoA|KlHpFrAtIzQz@vGWjP}ApWo@fEYfOoAfHbAfGInBr@lAx@dEB`HhAfDMrDtB~GdArLE|Na@fCwDU",
+   "pointCount": 30,
+   "start": [
+    35.442612,
+    135.328477
+   ],
+   "end": [
+    35.431166,
+    135.296077
+   ]
+  },
+  {
+   "id": "京都府:131",
+   "name": "京都広河原美山線",
+   "ref": "38;40",
+   "highway": "primary",
+   "lengthKm": 7.84,
+   "curviness": 274.7,
+   "flow": 19.4,
+   "turnCount": 111,
+   "score": 56.3,
+   "polyline": "eoduEohs{XGeCcD_GcIq@cDoD{@SqQ_@yGbAsZbNoEd@{IY{D_BiAwDyB}BaKsD}B}DiEuDgJ_WgCyCyBPqCaCmQqHaC[aDeB_Fh@}KkA_FEuM{E{AoDoBi@}ADgEsCcELaEzAaJeA_IzF_ADwAiAmEQoEaC_GI}AmA_JeB_DqAiCyBoCbAeAKoNkOoKQ_Cc@E`@dA\\m@HwCsCiGoC{C{B",
+   "pointCount": 56,
+   "start": [
+    35.089946,
+    135.763442
+   ],
+   "end": [
+    35.15012,
+    135.785135
+   ]
+  },
+  {
+   "id": "京都府:132",
+   "name": "広野綾部線",
+   "ref": "450",
+   "highway": "secondary",
+   "lengthKm": 3.1,
+   "curviness": 290.7,
+   "flow": 18,
+   "turnCount": 50,
+   "score": 56.3,
+   "polyline": "umlvEee}xXwCeQj@iDpEiEjNiCzGRfBe@zE}ClEuG~E_@rAoF`Ay@vIx@rF[zKxAn@d@N~Cb@\\xBsBhCCfC`At@OvGwClJcQ",
+   "pointCount": 24,
+   "start": [
+    35.294505,
+    135.322588
+   ],
+   "end": [
+    35.274624,
+    135.334242
+   ]
+  },
+  {
+   "id": "京都府:133",
+   "name": "西大路通",
+   "ref": "181",
+   "highway": "primary",
+   "lengthKm": 4.94,
+   "curviness": 162.3,
+   "flow": 34.9,
+   "turnCount": 23,
+   "score": 56.2,
+   "polyline": "iqvtEqbm{X}KQya@vAai@Sqj@wKoAw@xm@dNfi@Cxn@yA",
+   "pointCount": 9,
+   "start": [
+    35.018606,
+    135.731767
+   ],
+   "end": [
+    35.018452,
+    135.731881
+   ]
+  },
+  {
+   "id": "京都府:134",
+   "name": "御池通",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 5.23,
+   "curviness": 135.3,
+   "flow": 44.3,
+   "turnCount": 16,
+   "score": 56.1,
+   "polyline": "m`utEmvi{Xs@wzCiG_SzG~RBnrBn@ng@QG",
+   "pointCount": 7,
+   "start": [
+    35.010787,
+    135.714465
+   ],
+   "end": [
+    35.010787,
+    135.714465
+   ]
+  },
+  {
+   "id": "京都府:135",
+   "name": "小浜綾部線",
+   "ref": "1",
+   "highway": "primary",
+   "lengthKm": 7.51,
+   "curviness": 262.5,
+   "flow": 19.9,
+   "turnCount": 99,
+   "score": 56,
+   "polyline": "a~{vEcstyX{I{@oL{EaDwGo@mL_DyGk@[{Dx@}@Gs@u@u@sC[oFqIiU_BuBgDMu@c@gG}GZcDnFqLTaEyBeAaD|@gCUaQ{Ik@sAX}OOoAk@]aD~@cCrEkNlFaG^sPhEyKOoA]oC{CqBaAyC?qEjByA?eJcIyAu@}APuBfDaGfQqBvA_Ci@}Fl@gAiCuBeB{IKmB}BmCcBoL_CwA{DBkA~AeEPwFiCmE",
+   "pointCount": 59,
+   "start": [
+    35.373933,
+    135.442575
+   ],
+   "end": [
+    35.418123,
+    135.468662
+   ]
+  },
+  {
+   "id": "京都府:136",
+   "name": "枚方山城線",
+   "ref": "71",
+   "highway": "primary",
+   "lengthKm": 4.06,
+   "curviness": 269.8,
+   "flow": 20.3,
+   "turnCount": 54,
+   "score": 55.9,
+   "polyline": "wtlsE}po{XlBjFbCtBzA|MBzHZbCzE~MpBbBl@aDnD}E~FmLxBq@bCyC~Cg@pIiI|CkElIaF~DmEdA{A?uElC{JfAUzCrCdEVhByB]gF\\_AjH?vBuAjCcLMyIfBsJ",
+   "pointCount": 32,
+   "start": [
+    34.804118,
+    135.744315
+   ],
+   "end": [
+    34.784081,
+    135.756017
+   ]
+  },
+  {
+   "id": "京都府:137",
+   "name": "西大路通",
+   "ref": "181",
+   "highway": "primary",
+   "lengthKm": 3.46,
+   "curviness": 149.2,
+   "flow": 32.3,
+   "turnCount": 16,
+   "score": 54.9,
+   "polyline": "csstE}cm{Xpl@UN]b@Zdi@o@NY`t@e@hNk@`D{ApW_R",
+   "pointCount": 10,
+   "start": [
+    35.00354,
+    135.73199
+   ],
+   "end": [
+    34.973476,
+    135.736391
+   ]
+  },
+  {
+   "id": "京都府:138",
+   "name": "周山街道",
+   "ref": "162",
+   "highway": "trunk",
+   "lengthKm": 5.08,
+   "curviness": 319.3,
+   "flow": 18.8,
+   "turnCount": 86,
+   "score": 54.6,
+   "polyline": "ueiuEug`{XlA_DXqCwB_QDkIl@uBzBmCnHsAvBwAbGqM~FcErDeJdDoCv@FbErC~B|IfAPxE}@~FvGrIVbEoBfCK`B}A~CyKmAuGVyEqBkCmIkG}@{Ch@iA`Fm@^i@K_AsBkCc@uAlA{GQqCxDgAnBiCxE_DnAKxB~AtEbL`C`D",
+   "pointCount": 44,
+   "start": [
+    35.114027,
+    135.666034
+   ],
+   "end": [
+    35.094053,
+    135.687617
+   ]
+  },
+  {
+   "id": "京都府:139",
+   "name": "本郷辻線",
+   "ref": "710",
+   "highway": "secondary",
+   "lengthKm": 6.93,
+   "curviness": 251.1,
+   "flow": 17.2,
+   "turnCount": 101,
+   "score": 54.2,
+   "polyline": "wpruE}pqxXqB@sCsAaBb@}GIsF|AoAbAgAbBgAfEoExGe@|Gw@`DaEtFE|@dAjDcAxDLdH{@`FM~FcOfH_AfCmF~F_DBk@b@TnGQzDsFpDqJ]yEeCgKc@{GbC_CNaKbIuFaA}EAuA{@sEyKcFDuBgCuDq@uDeF_KuCoH|AuDbEeY~LuH[uEn@yMyJmJo@kCgA",
+   "pointCount": 50,
+   "start": [
+    35.161878,
+    135.263032
+   ],
+   "end": [
+    35.208887,
+    135.246138
+   ]
+  },
+  {
+   "id": "京都府:140",
+   "name": "九条通",
+   "ref": "171",
+   "highway": "trunk",
+   "lengthKm": 3.36,
+   "curviness": 193.7,
+   "flow": 36.2,
+   "turnCount": 18,
+   "score": 54.1,
+   "polyline": "stntEk`n{Xd@dW`S`d@LOqTae@W{TyBk^NYm@eJW_QQh@VvMn@|L",
+   "pointCount": 13,
+   "start": [
+    34.978183,
+    135.736545
+   ],
+   "end": [
+    34.978889,
+    135.741426
+   ]
+  },
+  {
+   "id": "京都府:141",
+   "name": "下鴨静原大原線",
+   "ref": "40",
+   "highway": "primary",
+   "lengthKm": 7.37,
+   "curviness": 258.4,
+   "flow": 18.1,
+   "turnCount": 105,
+   "score": 54.1,
+   "polyline": "kieuEu|s{XOyBgAqD{CgB_D_FeBeKcOqGeBgDq@oF{@}@wCScBf@yGoEyAqC@kDk@yDeDwHmEoFyBi@uD_DgJiNuCsVjCcf@cG}N}DiE[iA|AyK{CiMb@eBrBkB^{A{@uGoBwF]wCDeDb@eAhBg@rF`@nA[Pe@Mw@eGoIi@_CHgAzDsDjF~@fA_@LoA{BmDuG}BeCyD{HoIa@qTmGuCh@cGdEgL",
+   "pointCount": 56,
+   "start": [
+    35.094144,
+    135.76667
+   ],
+   "end": [
+    35.11278,
+    135.825741
+   ]
+  },
+  {
+   "id": "京都府:142",
+   "name": "丸太町通",
+   "ref": "187",
+   "highway": "primary",
+   "lengthKm": 4.3,
+   "curviness": 144.5,
+   "flow": 27,
+   "turnCount": 23,
+   "score": 54,
+   "polyline": "gnvtEiap{XpC_HFqBBk`Au@{mAn@ie@@mXtCsg@EkJ_@cAqA}N",
+   "pointCount": 11,
+   "start": [
+    35.018121,
+    135.746931
+   ],
+   "end": [
+    35.017202,
+    135.793426
+   ]
+  },
+  {
+   "id": "京都府:143",
+   "name": "京都日吉美山線",
+   "ref": "50",
+   "highway": "primary",
+   "lengthKm": 3.35,
+   "curviness": 266.7,
+   "flow": 18.6,
+   "turnCount": 48,
+   "score": 53.9,
+   "polyline": "_pbvEqe~yXaDt@}Sg@yG}DkDa@iDkByCkGsEcGg@C}BjBaEdFsFz@}FkCuGyAaEiGuDkB{Cb@}B~CwBBmDtAqDSqAoE}GkFcJvCiAhBqBbH",
+   "pointCount": 26,
+   "start": [
+    35.243677,
+    135.491605
+   ],
+   "end": [
+    35.268684,
+    135.495031
+   ]
+  },
+  {
+   "id": "京都府:144",
+   "name": "沓掛西大路五条線",
+   "ref": "142",
+   "highway": "secondary",
+   "lengthKm": 6.15,
+   "curviness": 232.7,
+   "flow": 18.1,
+   "turnCount": 79,
+   "score": 53.7,
+   "polyline": "sgotEyi~zXdBwDfBF`Bo@fFwClCyDHgCiAiE?wQnDsRfBmGlAoBzJ{JrGcLzDeOPmBSoF`A}DiCmQrAsVcAyAe@}CgA{B]{FmAkDcB[w@}AqAeN\\mFOsLmEgHwCyJ]{ETmUYwH{D_@m@uBJwA[aCuLsFyMiNoByDg@_C",
+   "pointCount": 43,
+   "start": [
+    34.981224,
+    135.656125
+   ],
+   "end": [
+    34.98317,
+    135.711789
+   ]
+  },
+  {
+   "id": "京都府:145",
+   "name": "奈良笠置線",
+   "ref": "33",
+   "highway": "primary",
+   "lengthKm": 4.73,
+   "curviness": 259.1,
+   "flow": 18.3,
+   "turnCount": 67,
+   "score": 53.6,
+   "polyline": "yocsEyau|XuDhEsAnC|AhCw@jElAvDGtB`CbKdHhJhFpClFr@fEiBhFi@~DzArMpJdKhBpArBZjDbB|AxAMlE{BdABd@fBWhI`DjRlAlLrIpI`BTlHo@bFnGvFlD`EvDhDhAnBxCtM|C",
+   "pointCount": 35,
+   "start": [
+    34.75725,
+    135.936452
+   ],
+   "end": [
+    34.731181,
+    135.90936
+   ]
+  },
+  {
+   "id": "京都府:146",
+   "name": "水垂上桂線",
+   "ref": "123",
+   "highway": "secondary",
+   "lengthKm": 3.67,
+   "curviness": 185.4,
+   "flow": 21.9,
+   "turnCount": 31,
+   "score": 53.3,
+   "polyline": "u`mtE{tj{XqJm@uN`B}@x@aAtCgBfCsDdBqEx@mFhIaGdG{]tNcD`GiKfI}GjBpI|UcBlAkKbDaFzDV|@b@nS",
+   "pointCount": 20,
+   "start": [
+    34.969868,
+    135.71934
+   ],
+   "end": [
+    34.990604,
+    135.698206
+   ]
+  },
+  {
+   "id": "京都府:147",
+   "name": "国道178号",
+   "ref": "178;312",
+   "highway": "trunk",
+   "lengthKm": 29.99,
+   "curviness": 249.5,
+   "flow": 19.5,
+   "turnCount": 383,
+   "score": 53.3,
+   "polyline": "eb}xE{ftxXyC~BlA~QaDxD_B`Dy@vHqB`JNxBpCxEkAtNaC`Ew@nCoChAyEfJwIrBwGjDmDGwMzHwGdTkBfDaAAyQgL_e@uDyA{A_DcHeDiBeA?eLzMcJxGgExAmCLwC_@oYqJiGA}ChAkM`NqGrDcEzGiKpF_CNeHyAuI{E}ADa@|C_BlDKlAb@dADvBnApDsCxGyD`EsC^iCvBaCtH}AxAL|DkBrDyFbDgC|GqD|@mA`AL~@`G|Av@vAM`Am@f@eIa@qBpGuC}@_HpAcCpCEpFk@rClCpPoBhDaD|BMz@h@|@dDCNr@cCvE_DpCWhARjA}B`CMvDtB`BUzEfA|DxBrPrFnLlDlFNvC`AdEhD`Fv@|B|DlTT`RoCbJ_@lGTnDlAhC@vBIvEqBxOHpCrKdSnEfS|CnFvD|MrEdKPfB{@vIlKd]fPlQlAQzAoDt@IvAfJElFf@xCrFlH~DvAbB{@hBiDh@Fe@xEnAbGzGfMM~B_GnIaMlLoBjEMvCqBbCl@vDhFzOUbDRzBjKfW|GzJYfBk@n@aCn@yB`Cy@tQiIjJ}@xE?zD|GjUhJhVhAz@dAIt@]`AwBhAVJzEm@nDvF~Ix@`D^pC^|Vh@rCrIpNhFvEn@lSwAdJHfBh@nAzF`GtF`JxAvCvAbGOpDq@hB}G|GhHbF~CpErLjGtVrSfH~B~AxARvHgCr[~@fEdEhCxFn@rCzBjDrAnGd@rG|HbHdCtArAt@zBj@hI`BnFlCdFpAtFfGrK^~K]~FRlAfCxDDfGlFnBnCzBrCV",
+   "pointCount": 207,
+   "start": [
+    35.707392,
+    135.276782
+   ],
+   "end": [
+    35.714574,
+    135.067908
+   ]
+  },
+  {
+   "id": "京都府:148",
+   "name": "篠山三和線",
+   "ref": "97",
+   "highway": "primary",
+   "lengthKm": 6.48,
+   "curviness": 221.1,
+   "flow": 19.9,
+   "turnCount": 72,
+   "score": 53.1,
+   "polyline": "oozuEexpxXj@iAzMcKdGiDjJkJpGwDbAEdBfBtITbHEbDeAnEYfEZnAyCb@iE~Dw@v@eDnAqBNuA]iHnIgc@`JaJlB_@vJ_F|IoBpAZdH`GfEg@rB~AlEAlD|BJnD\\p@tF|@fCxB|EzAhCbChCX|Av@xBhGHjFtBtJxG|GxEjKtTlUzAr@",
+   "pointCount": 46,
+   "start": [
+    35.20264,
+    135.25907
+   ],
+   "end": [
+    35.160763,
+    135.261978
+   ]
+  },
+  {
+   "id": "京都府:149",
+   "name": "京丹波三和線",
+   "ref": "26",
+   "highway": "primary",
+   "lengthKm": 5.45,
+   "curviness": 239.6,
+   "flow": 18.7,
+   "turnCount": 70,
+   "score": 52.9,
+   "polyline": "sr{uEofqyXQa@RkFcDyB}@LiIzQgIlGcIbKx@zC}G|K_FpWl@bG`ItJo@nE\\dCxAfAjI|BdAx@fB|J{A`HxBnKjDnBlLxSdAdDdAvHaAtJDjJ_BvBwA~DcHjHqCpGoAlI{A`Dq@vDmCbI}ArK",
+   "pointCount": 36,
+   "start": [
+    35.208263,
+    135.425197
+   ],
+   "end": [
+    35.213656,
+    135.381037
+   ]
+  }
+ ]
+}

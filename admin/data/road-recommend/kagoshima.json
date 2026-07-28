@@ -1,0 +1,3166 @@
+{
+ "prefecture": "鹿児島県",
+ "romaji": "kagoshima",
+ "generation": 1,
+ "builtAt": "2026-07-27T22:39:58.824Z",
+ "weights": {
+  "curviness": 0.35,
+  "flow": 0.25,
+  "length": 0.15,
+  "classRank": 0.1,
+  "popularity": 0.15
+ },
+ "count": 150,
+ "segments": [
+  {
+   "id": "鹿児島県:0",
+   "name": "鶴田定之段線",
+   "ref": "397",
+   "highway": "secondary",
+   "lengthKm": 18.25,
+   "curviness": 575.1,
+   "flow": 29.5,
+   "turnCount": 356,
+   "score": 84.3,
+   "polyline": "{gkbEy|{zWdAdBfG|DbFvFbJMxAy@fCAz@lBxBz@nA|EdAj@NsK{DuDOuCiBTaBcA[sAgCG~@oBvGwAjChAfAsCfAh@pDL`A}CpAc@hC\\zAk@hBr@hAiAvA\\dDi@dGF[qFzJv@DiAm@qBtASbCiDrEwAjAeDnAmAxDcAbAtBhCy@f@}@l@ZfBEPf@}@pAb@dAx@?pA]m@u@Ti@hD\\P_A_@{BzBmC`D`@r@o@zA|CjC`AdAsAdBs@~DuGqDgFCg@hBf@hCeAhBRx@oAuCeAgBoDhA}Dt@YlBJPuB|@}@hB`A~CNgAeBHiApFh@w@uCd@uAScDbAaAtB`CLz@xAhAlAaA|BpADiBfAe@JcA_C{Ak@{A\\oB`DLQcBkAoBtAiB}AuAdBiAeAwAD_AfCeAcA{H`Ce@Z{Df@i@pBl@l@bDdAdAz@yIxBgCrATX[Q{B{AqDmCXk@UPqBtAuDlCOl@iAjAg@fGItO}HlFmAnBgBrTaBvReIpCmB|DqF|DwBjCw@pI\\xAaAnC}F@qEiC{FqCyCoEkHmAg@g@_AmBuJHwDlHyKbPiI~A{AjAwEQe\\b@yF`AqE|B_GjGyJvDwDt@wEd@u@w]yVaHiCoHgLw@sDFgBhDsIpA_HaBkW~@sE?oDqAuKdKgBtEeBrYgX",
+   "pointCount": 175,
+   "start": [
+    32.011659,
+    130.400932
+   ],
+   "end": [
+    31.950058,
+    130.488077
+   ]
+  },
+  {
+   "id": "鹿児島県:1",
+   "name": "内之浦佐多線",
+   "ref": "74",
+   "highway": "primary",
+   "lengthKm": 29.99,
+   "curviness": 793.4,
+   "flow": 30.1,
+   "turnCount": 791,
+   "score": 83.5,
+   "polyline": "{kx|Daop}WW}@^oHeByCCwAXUjHFzAmApCbA|ASLgBaA_Gh@kCKsAsEuEW}B\\y@~C_@bC`At@}@qBg@nAgC[_DXqEq@_GuCeEqBPiCwH|@yBf@OAxBvAbCbAHvB}@Iu@oAgAfCuHgBkCQgAMuHl@uARqCQwEw@_AsAuEyB{B_@?i@hAeCj@aDq@g@s@n@gD]mB`@mElBOj@aEhCu@[wBt@_@B}@iC{IsC{AqAqDoFuGs@a@kJaAoDmAoCmBeEgHoCoAEeBpAqDUuBsAPeDrB{@Ux@uHfCcCHs@OYaDfAaCCg@q@JmAnCW~AuBhGjAnAs@Nm@eEuNeGaFn@qB{@_EwEwDkCu@kAJoAnAsA@SsBu@q@_C^EeBcBiCFy@~Ak@ZoA{AkCr@cB_AwE\\sCaBi@{BsC}@l@WOSyAd@aAEaCeCgDAwAm@oAmCuBy@}BPq@fC`@|@m@fARZWIuCs@eC_Au@`@}Cg@}@IiF{@eA?yAuAiCyA}@oBl@s@bA}AcAuAVqA[yAXk@~@s@Pe@a@RaFuBK_BnALuCgAYOo@dDkEfBu@jAiEKkD{Dw@k@k@z@}AKeCdCmAeBiCv@iC}@uB~BsB_C{CFuDT]~AIRwEbBkBGk@kAyA_AsC_Cl@sDoBw@_CkD_Aq@sD_A?{AiB}Ad@sA_AeB|@uGoBcBxA}BF{BxB`@zD_@|CRrFyAq@_CHVoCWkAmCmAkA}Dq@k@eAY[Zy@rFDdDt@zBEpDwALy@sAm@FWrBg@p@CxDq@PgApDj@hEaCl@{@|KgBGoA_KwDwCQyHcEgCiBRgBwAw@wBcBM}AiA_B]EaDYm@mG{B{@p@ArFsArCkAb@SpByAcAcBWoAn@oArMq@jAsB}E~@qAI_BsAcBqBw@sA{BJ_@fA^v@SVuCe@oCgCgE_AyGgCkCaDa@BsCoEkAqAoCaAV_C`CuA?WuAu@g@nA_B?eAkEqClA}C{@gAT_A{A]wB_CC}B_BeGgB_AU_BmA_A}DoK{Aa@sAf@m@tEG|Eh@|B{Cx@yBG}Aq@kD{M_Aa@yBFc@_BgDoCaAb@a@tDXv@hAf@DnAeCvD_A]YoAzAg@Jq@cDyFg@iF}BkBeBgJtBs@`A}CnDzCdEYh@{@MeBw@gAeAqEqBq@yBuCsCqB_@{@AaB}EkAuBZiCgD[kBJoD{@o@uAyCXsH_Ag@mC?m@w@ByEtAYdBt@J{Ao@gA?_AsAoA_BwFOoCmEwDwCoHLW`AJJcC`A_@`ByCaAkBF_CiAaBbB]`AiErAkAJaDk@eA@iBv@eC~Ai@bBl@r@y@l@@l@bDfBaAbCbFbIlGRY}AyDqFoFs@oDuEwBw@}DeDcAiDBw@yBk@WeE~Cm@EYoCfBcBTwAsA_CPqDy@oAwAs@@mLc@uDb@yDKwHh@}BM}AlDyAJmD",
+   "pointCount": 388,
+   "start": [
+    31.095817,
+    130.833927
+   ],
+   "end": [
+    31.164521,
+    130.968572
+   ]
+  },
+  {
+   "id": "鹿児島県:2",
+   "name": "久志上津貫線",
+   "ref": "270",
+   "highway": "secondary",
+   "lengthKm": 9.81,
+   "curviness": 943.1,
+   "flow": 34.4,
+   "turnCount": 269,
+   "score": 83.4,
+   "polyline": "aai~Dk~bzWsBdDsG|FuCzDYjE_BnCC`Jr@`BkDXaA~@?vA`AxCkB?iBs@Ez@bAnD_Bb@I^p@lAYp@RfBhDrBvBTKxBxBjCbA~BCnAlDp@[~BvEnGIbAiC^bAdDcAlEdBv@^jBrB|@lCnGzCfAGxCv@vAjB~@x@q@fE`DCzAb@t@Oj@n@r@o@~@b@`Aa@lAn@zAdCx@vAdC|@NA~BzBNx@|Ap@]r@~@rFJ`JpDpHNjCy@`JjFfAOPhBt@OJqAl@Ah@vChAx@zAsAxAG?{BhCrCApEhCxCdAc@n@kDg@kFNo@|CPvBg@~@jCK|BjBd@fDcCo@kEr@IxAfEg@zAb@Xb@zC_A|@eFh@eEqAtB~FqC|B@t@fDz@\\hAvCvCbB|ENdChCTb@Xf@vB`C\\InDx@d@`Ck@bBnB`Ao@^ZFlAvBj@j@zAlBk@vAZzBrCEvCfCz@`@`Cv@CnB{AbBP]hCj@p@dEfBtBGbCpA",
+   "pointCount": 132,
+   "start": [
+    31.344972,
+    130.273182
+   ],
+   "end": [
+    31.313346,
+    130.227692
+   ]
+  },
+  {
+   "id": "鹿児島県:3",
+   "name": "白谷雲水峡宮之浦線",
+   "ref": "594",
+   "highway": "secondary",
+   "lengthKm": 9.26,
+   "curviness": 790.4,
+   "flow": 28.2,
+   "turnCount": 260,
+   "score": 83.3,
+   "polyline": "{qlxDmw}{Wo@r@uECsBpATbC{@f@wBKg@zAeAx@EbCiFi@_@NYrAiB}@}C|AkGkBwCPoA|BHdDWdAaBxAeBuCuAg@O{@Z{AuAaB[mCc@c@i@[o@Pa@~@r@|CKd@qA]yAZiA_BmBK}DqFw@_@]ZCj@hAh@F`Am@`BP^hAARf@YrFRzAc@tAj@zCcCbBKnEiCpHq@dEmB`BoBfEcC^c@pCz@lDwBrBw@nB@vDhAjMQdA_Al@uA]mDsCw@cEeAuAy@BeA~@u@GBgCyCcBaCiHqBi@GwCcDm@kALuAo@Fo@bJPbBh@zCrDXKaAoEaEeCqCi@mBmBy@iCu@s@iADiBbAaE_@uCpAsAeA_AFy@|A}Al@s@vCoCfB[bACtEs@hAm@@QmAt@}BkAmBYmDiBmArAkDAq@gCw@s@oATqAdEcGJcA]mAaCm@eKvAcEWaGnBoAB}Bu@}BiB_EiH",
+   "pointCount": 127,
+   "start": [
+    30.379984,
+    130.574153
+   ],
+   "end": [
+    30.417794,
+    130.569069
+   ]
+  },
+  {
+   "id": "鹿児島県:4",
+   "name": "屋久島公園安房線",
+   "ref": "592",
+   "highway": "secondary",
+   "lengthKm": 14.94,
+   "curviness": 627.6,
+   "flow": 27.3,
+   "turnCount": 344,
+   "score": 83.3,
+   "polyline": "wz}wDy`~{Ww@~@_Bo@u@_BwAv@uCkBaEM{DgE?sCiE}Fi@sBkEI{C}AiJqAiLoHp@gEe@yDeBC}@iAa@sBcBUV_ErCEh@~@tATnCs@`@}@jAm@jBU`CBnC`BrBOjElAlAF\\kAu@iF~@yJSu@_@CsBx@k@ORyEs@kC`@qByA_Eh@uB]wCbCqGLiBaAOuCdAcAW@}HgEkDSiAB{AhA{@]mAFcCn@u@PcBs@sBbAoEiDpB{Bb@}@Wk@wHoBOyA}DNcB{@qB`@eEq@cC`@eFq@gAu@GsAjAkBTi@Mc@eA{@I{DhEoCoAmEp@mAu@]qBaAiA_E}@oCkFeBaBlBiDbC_Av@gBdCTvDSz@g@Dm@q@}@b@_BsAkAGi@pAgBlAgFKgFlBiAxCIt@_@r@wCjBw@HwAhBaATqA|@cAlCaAzBgFhB{AVw@m@u@aD@aAeCsBb@iAgCyCK_@oDaJqBQg@PcBiAaAmBqEiAu@H}Ax@c@n@HlB|BdARbLoB|ES`EVfEy@bAl@hBpC|Bn@|KWzL{BlHp@fAWn@{@B}A[s@kFoAqDgEcKwBkZqR_FaAu@qAb@{BvAWlC~A`DH~BnBrALdEcB|DgFP{A]kHh@cGoB}GoAcJD}Gc@yGdBaIj@}@",
+   "pointCount": 172,
+   "start": [
+    30.304601,
+    130.575651
+   ],
+   "end": [
+    30.311585,
+    130.648012
+   ]
+  },
+  {
+   "id": "鹿児島県:5",
+   "name": "国師境線",
+   "ref": "479",
+   "highway": "secondary",
+   "lengthKm": 9.08,
+   "curviness": 556.6,
+   "flow": 28.4,
+   "turnCount": 178,
+   "score": 83.3,
+   "polyline": "gz}_E_ci}Wc@m@{NuC?i@b@GxIxAhEa@Yg@sDGgA_A}BUkCwBhEp@tDiA~Ax@fB@Nk@iBOkAaBeBP_B]Oe@VW~Ab@|CS|@vAbDJvAeAjCLbCsCGg@o@GgCl@}BGwFkC{B{BTm@rBbAjFF|@m@dB{EkAeE`AaIYs@eAEkAfEyAjCyA~AwAIOm@xAyApB}InAuA\\wAq@c@}ClCi@pBa@H^{KiCwC]_EoBsCeAa@cCBOm@xEE|Bn@v@~A~@HxBeEdCu@ZcAcCiBkJhAcCC{BkBsDyAqGpAuBgCoBNoDe@k@wAiCm@_DeCIkA`D}OeFsTkAsOcGaKuCgLmAwy@uDkC",
+   "pointCount": 92,
+   "start": [
+    31.615241,
+    130.796156
+   ],
+   "end": [
+    31.62784,
+    130.83727
+   ]
+  },
+  {
+   "id": "鹿児島県:6",
+   "name": "片泊大里港線",
+   "ref": "221",
+   "highway": "secondary",
+   "lengthKm": 8.59,
+   "curviness": 689.6,
+   "flow": 29.2,
+   "turnCount": 203,
+   "score": 83.2,
+   "polyline": "uvd{Dme{wWwBvAm@iBuAFGkE~Au@EuA{AmCyBiKPoDlAkCsAIq@j@iAbDaBG_@g@JoH{B{CqAo@e@mB}BnBm@EvDcR}@]aD~BuALe@u@K_EyCXu@oEFqE~BgE@s@aC?a@wD[a@}@vBoAVqAjCq@`@eAGuA{DhAkEmDqAo@eCj@eCa@iBD{DcFk@_D}AkDYa@wEf@iCcDyGRqA`NiN@_FbDmErAoFs@cEuD{BQm@H{Em@mCtCwE_@iBLqAzEwAN{Cn@gAlDQdDwBlCY|@cAAeCwCuJ~@wAdCUh@qB_AcCeGoIGqA`DsCv@aGnAuBfDeApDxAb@gBlCMzAkC}E_JKaCd@gA_ARi@|CwBlB}@T{Ay@",
+   "pointCount": 98,
+   "start": [
+    30.831306,
+    129.905668
+   ],
+   "end": [
+    30.837482,
+    129.955522
+   ]
+  },
+  {
+   "id": "鹿児島県:7",
+   "name": "宮之城祁答院線",
+   "ref": "406",
+   "highway": "secondary",
+   "lengthKm": 7.77,
+   "curviness": 669.2,
+   "flow": 30.8,
+   "turnCount": 169,
+   "score": 83,
+   "polyline": "mltaE}qf{Wg@}F_H}RCiCb@}AvDcCnD{DzQqKdB_DtAMhEgDnFoJpD{CbCdDrDaChCMxAeBjDs@lAx@ZOkC}Cq@WqCTcAe@gHoG_CNa@g@oDi@eB_AaAZFcAlAUx@j@zAAfCy@h@l@xD{@rBqAxCl@tCw@fCCv@i@FmA\\QrAH|AmAbBj@|B?lBqBj@Rh@zB`@XfBoI~@o@fCl@fAwCSsDz@_AW{Bt@mDcCmEn@aBr@aAl@xBl@LlAsAzA_@fAdBhAPVsC~BFcAiBcCiBIm@b@{@mKmFkAkAsEmJGiCbEoH`DeIaFqF`EkFn@gBz@c@jGGvCg@rD_AnAoA",
+   "pointCount": 89,
+   "start": [
+    31.894631,
+    130.455515
+   ],
+   "end": [
+    31.873669,
+    130.493878
+   ]
+  },
+  {
+   "id": "鹿児島県:8",
+   "name": "長浜手打港線",
+   "ref": "350",
+   "highway": "secondary",
+   "lengthKm": 7.03,
+   "curviness": 977.5,
+   "flow": 35.4,
+   "turnCount": 194,
+   "score": 82.9,
+   "polyline": "wxo`Eia{vW{Av@U~@pCtJaA~A[lD_B|CdCL`BvCf@lBDnCjAzDjEpAqFlBg@_@OoBm@_@w@HeAxAc@EAwBiAm@q@wASXLlCk@xA|@hGb@NvAm@\\\\?nBlAj@m@nNtExAHhGgAxAJtBtAh@D~BfAt@ZzDbB@Vs@O{ATO^NDjBc@dB{EjDm@]Y{D}A?oA}@w@T]ZnALdB~AWv@kBr@MhBjAj@hAxB~Al@pAUnCfAnE~DbB_@h@u@z@Tl@|@dA`IfE|@`EvEVtAjC^p@`BxBKPxAfB^A`AoATi@fAz@lB_AtBmA`@_@nA_Af@@~@fBnAzBAJ`BaAlCw@dFbAp@hFL`Bc@?lEzBfCc@fBBfBeAxAz@vCo@pDaC|@hAxC",
+   "pointCount": 105,
+   "start": [
+    31.707162,
+    129.741167
+   ],
+   "end": [
+    31.697243,
+    129.703077
+   ]
+  },
+  {
+   "id": "鹿児島県:9",
+   "name": "下手山田帖佐線",
+   "ref": "391",
+   "highway": "secondary",
+   "lengthKm": 20.71,
+   "curviness": 560,
+   "flow": 26.3,
+   "turnCount": 441,
+   "score": 82.9,
+   "polyline": "ow}`Eeaf|WkDh@uCUaB\\gBnASvCqBa@y@fCqCDeA~BdCxBfAlEYXeCq@cAyAeAZWb@LxBtApBcBdBsALqGsAYd@@pC]vAsEPGpAYPm@Gc@mAw@YAkBw@}@cDpCkE|@cBbBcBzD_BlBaEr@a@hDe@EqCqCgA`AmBMb@xD@rEuA`A_AfBw@|EaDxBoExF_GjCeBxD{IzDqCvCBbD}BCcBj@Sd@H~BbAfA?n@uB|BaCIuAdCaAlHvD|Dc@hAkBh@HtBq@hCr@lAb@vGu@bBoAvH_ClB{@bBkAQa@{C_@Oe@Ta@nBaA`@_BAkAaAqAEmNhAy@rCmA`Bo@jEcBfDyOqCcBAuCyB{E[s@nIkGvIwAy@sBdAcFIcCrA{FjLaIdDiFnDeGfBqB]yE~HU|BiAGy@h@uAyAiAGcB`@oCzB]pBJzIa@rA?jBhA~@`@nDrAvAyBzGxCdA|@xAPnAUfGtE~F|@nEe@rG{CdB{@rBuDrBBvA}@|B\\hGaChCaAlCaA~JkA`F\\dDMrCe@v@gB^cA`BmBc@iBZqCzB_BbDqAMkBh@oA]gC`AsDUw@l@_A_@kCXcDQuB|CoB{@mDnBaFw@{Bj@uBbDyCZeAs@cCzDOvEf@bBBnCgHy@kJzCaCe@NvCi@d@{AMwB{AOhEw@^CfByB|CgCjCyGt@_BhBXnAdClAb@lBgCjGaBj@cC|EwF`DuQvRiF|DuAjEuIhMcBzGqCxEiDbOcDxFLnFy@dEeA`O\\vJ}@xA|Drd@o@pDiBlCj@bCIr@qGrBq@xMfBxE_BjHk@~JoBbCq@dF",
+   "pointCount": 215,
+   "start": [
+    31.778638,
+    130.616668
+   ],
+   "end": [
+    31.869973,
+    130.494472
+   ]
+  },
+  {
+   "id": "鹿児島県:10",
+   "name": "安脚場実久線",
+   "ref": "614",
+   "highway": "secondary",
+   "lengthKm": 29.93,
+   "curviness": 557.5,
+   "flow": 25.4,
+   "turnCount": 656,
+   "score": 82.7,
+   "polyline": "wtpjD}khtW}@d@QrHsAvE{AhBoFtBaDiBoDfAh@vCyCvC~B|@^zA[rFJhDq@bCx@`AGlAh@pAa@bCkA~Aw@d@yCW}@q@eALk@`@]`Ck@d@cEmFoHlNaFfCmGf@_AjBBxApA~@Rz@fB^tDhErFvC~EnJ|BK|AjAbANrDcA|DfAlF}@pCnBlB|DnCq@n@\\|A`ETpEcA`DOpCv@pC}DjLcJv@Wd@^fAO`AkBrEaBC_FdDqBGeEpB_BNuBi@mBqBq@Ia@jAhArAOjBjAtDKv@{@zAkDT{BfAiACW`@JlAzAjCnBy@b@tAf@TlEoAVxB~@f@DtBrBDdCbCQj@cBPDdAu@tAdAnBkAhAFvBgBnC]vCf@zAtHfElAjBL~AoAnHv@zEk@hCmDjC}@AmD{AaE~CcBpLoA|Tr@xLpA|@RbAsBbCMlBw@n@eDsBiBvGfBfEJpGq@xBz@~CJtGf@Fb@iCjDv@pD~DfD`Bb@xAIxAu@lA}DUgDnCaG~AqC~EsCbCBv@nC|D}@~EPpA`Ap@`KdAp@dAIbBaB~@}J^wO_E_CDyEtAqDIiLiEkC[yDVuD_FiAmHwHwAiAJi@h@g@lGmI|O}@|G{DtBgKnA_D?iBcCqDu@_A}AgCgBe@mCkC]uBmDu@ZsAxDr@hAEn@sAr@yAUwBwC}AYcBtAmE~@_AkAuBgG{@e@oHxBiBrBcB\\[j@_@nMqCfEGdE_Bl@U`EkAzDkN~KaGFu@p@?fAfApDxBbAt@|Ax@hFMpDy@|AkCp@m@vBeBhCAx@xApCHfBaBbJ{DjAwCfFyBfBs@J}Cw@uAx@JlDlCd@fAtBu@fGDvCwDfDiClIuDmBaAmCsCl@sAU}@gCJy@|@e@Oi@oHPiD~FIn@f@bArCv@BhE~B`B@fB[n@gERm@t@p@~CrDdBn@bBCbCyBbEqDlDuEvCwCdAuCPeCuA{CKgC_A}CqD}GuDqCIaCu@kB|A]bDwCnBcCHiFo@uCxAyBlEM`At@pEoAfC\\`Dq@tBcEhExDtI?j@qCtBqA|CaBbM}BlBStBNlApCnBr@bFSdBmCpCW~AhDrDj@pC`B|AdAdCbANrBs@`@PcA|Bl@bAGhAmB|@eBdFqBm@gFjAiD|CkArBsCc@_B_ByEiAgAcAg@DpA|Bh@bEjE|AfBGHb@Yf@w@FyJgEu@?Oh@hA?pA~BdCb@v@lBhBv@U`@}Ac@}@gBiCKwA_AsCbBoBuDi@WkBz@",
+   "pointCount": 331,
+   "start": [
+    28.107162,
+    129.317906
+   ],
+   "end": [
+    28.186457,
+    129.18683
+   ]
+  },
+  {
+   "id": "鹿児島県:11",
+   "name": "神之川内之浦線",
+   "ref": "561",
+   "highway": "tertiary",
+   "lengthKm": 6.35,
+   "curviness": 843.3,
+   "flow": 30.4,
+   "turnCount": 176,
+   "score": 82.7,
+   "polyline": "}q`~D}{r~W{AdBuAcAqCFmAgAwBXuDYW|BcAp@IbCk@x@qCYiBXaEoDg@HGrBzBdIhEvHGv@oAR_A~AyDd@cB{AsBm@q@qE}CvAc@xFV~DYR{Bs@]Tj@bHKdEQn@eCzBXVfE}@N^_F~CyAe@q@ZP|A{BhCv@bBGdBf@jB{BXs@|AlAQnC\\dCbCXy@wAsD`CkBZE`DbCdIl@hBSnBmBXZgCnCiCh@cBKwDxAy@fDLlHgD|DoAAuB{Bu@MeCdDaDcAa@PBzJ_@~@aChAHt@fAd@`AaAhBEvAwB|AGYpCgClB`@~@QZ",
+   "pointCount": 86,
+   "start": [
+    31.301586,
+    131.010065
+   ],
+   "end": [
+    31.313808,
+    130.988566
+   ]
+  },
+  {
+   "id": "鹿児島県:12",
+   "name": "水俣出水線",
+   "ref": "117",
+   "highway": "secondary",
+   "lengthKm": 5.51,
+   "curviness": 719.2,
+   "flow": 29.6,
+   "turnCount": 134,
+   "score": 82.5,
+   "polyline": "grzbEqwyzWiA{A}FoNmDsFkCcCAeB{BwC\\cDaBeCoBa@}GjD{BgA?q@fC{AjBaEaDkHgBwBoBe@KoB}B}HcD}@yDkFiGaEoCUYsBmBmAsCc@cFh@B_ClAoBYkBs@{@kCIoBu@k@Pa@dA{AB_AhB}ByAqDHs@dAoAo@aGf@KiE_CMCmCcCh@yAI_@e@v@}@J{@yD~@yB{AqB]fBaDo@q@yCQm@oCTm@nBCX{EWi@kDqCeBUk@`AoC{@oDaF",
+   "pointCount": 67,
+   "start": [
+    32.090116,
+    130.389846
+   ],
+   "end": [
+    32.117495,
+    130.416283
+   ]
+  },
+  {
+   "id": "鹿児島県:13",
+   "name": "松元川辺線",
+   "ref": "291",
+   "highway": "secondary",
+   "lengthKm": 4.69,
+   "curviness": 991.7,
+   "flow": 35.8,
+   "turnCount": 130,
+   "score": 82.3,
+   "polyline": "k`m_Ekld{WjBi@bB~Cv@kAhAl@NgJ`ClCp@OX{BfBfAnAQHtD`BvIpDpCtAcAbChAp@`AbCmCz@lDBfB|@lAvF_C`B_B\\z@_BlBu@`CpHfCpDdC~AgAGoCTo@bCjAvA{@zAfCv@MvA\\Pz@nBHfAq@fADrEcCxCEdEwBdIiBdBN~AcA`G|Df@`AGbB`BnANfCp@CbAvAdA`@B`AiC|AIv@x@~@zCEf@xDtCAj@vA|@L",
+   "pointCount": 63,
+   "start": [
+    31.529178,
+    130.444376
+   ],
+   "end": [
+    31.503416,
+    130.435115
+   ]
+  },
+  {
+   "id": "鹿児島県:14",
+   "name": "垂水大崎線",
+   "ref": "72",
+   "highway": "primary",
+   "lengthKm": 13.89,
+   "curviness": 615.4,
+   "flow": 27.9,
+   "turnCount": 306,
+   "score": 82.3,
+   "polyline": "ssw_Eo}f}WnE}FlKaHd@{AL_DbCyD^cD`@o@pHD|FiHx@cCw@mHtBqEEgAaAyAjAm@pAgCg@}@yAZm@cBHc@vAa@eBiKwCgAiB@}BjBm@hGmA@_BfBgAm@l@cEWoD|@gDDkDdA_DcAiBG_DgBW@_CsAE_AaB|AwAo@{BhBSNeCa@qAs@_@Q{AoCsA~@iAkAoFiBmAFiAwAw@k@sA|A@jGjCrBsG_@mDn@Y`BV~BcBvAHf@pAcAlDzAvCgArBj@hAS`CL`@rAThFcB|BiEh@cFpD_BzBmEnDkAl@f@_@hCV`AbFq@~@~@n@dFvA@fBy@k@{GHwDnAyCZgCbDuC|AoEzBgBd@wC_Aw@JuBn@m@vCh@dArAxDgAx@{BEyDuGqDAa@bB{B_Ao@Ku@cBYe@gDV{AvB{B|Eh@dAy@NiFiAMqAaAKmCr@}@dFgAXgGhDyG@iO`@sEe@yHL{B|E{MVaHhCcD`@cFQgE`AiD@{NsFsMXkK`GgFfIwEvEg@`A^vAvB`BQ`@}BNuKhE{@~EsGxCs@nAmBhCg@zB{GlDwBjH_I`BeInA}B",
+   "pointCount": 151,
+   "start": [
+    31.58346,
+    130.785044
+   ],
+   "end": [
+    31.548922,
+    130.864919
+   ]
+  },
+  {
+   "id": "鹿児島県:15",
+   "name": "松ケ窪線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.52,
+   "curviness": 567.9,
+   "flow": 28.2,
+   "turnCount": 71,
+   "score": 81.9,
+   "polyline": "sfx}Dyfg|WbBxDP`BcAlUE~In@tDxGbG|HfBhCvCzBNtCrEbCp@Gd@uAl@_CjJ}AfCNd@j@CrEaFl@Ob@bAgBjGr@AlCaDxBi@Jf@_ClBErA~AaAlENf@fA]vBPrAzDvApDgAdGkJxBiB",
+   "pointCount": 37,
+   "start": [
+    31.258817,
+    130.622688
+   ],
+   "end": [
+    31.246602,
+    130.608484
+   ]
+  },
+  {
+   "id": "鹿児島県:16",
+   "name": "辺塚根占線",
+   "ref": "563",
+   "highway": "secondary",
+   "lengthKm": 3.27,
+   "curviness": 844.2,
+   "flow": 32.5,
+   "turnCount": 85,
+   "score": 81.8,
+   "polyline": "oy~|D_`r}WcD^kA~Bm@Rc@qCPcCWqAuAeAcAl@i@sBmDsCm@RqA|BoE_BsA@{Av@i@z@MxDm@r@s@uKgADq@r@yAKq@zAo@[iAaCyHi@k@bCn@n@\\hB_@vAuFqKcGPwFoAy@rDs@PcDgF{BnCkB`ADhD_A|BoBl@_Am@",
+   "pointCount": 43,
+   "start": [
+    31.128722,
+    130.841763
+   ],
+   "end": [
+    31.146487,
+    130.8425
+   ]
+  },
+  {
+   "id": "鹿児島県:17",
+   "name": "竜之瀬平鹿倉線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.41,
+   "curviness": 741.3,
+   "flow": 28.1,
+   "turnCount": 90,
+   "score": 81.8,
+   "polyline": "y_h_Emt}zWsDxFwC{Ck@mC{CtD@xDrAxATpAEdCd@|Dy@fCH`D|@|CE~Bl@vF_@hG`BdI_AnA]fEvCzMNzDWt@cBn@e@jEy@u@gBL@gCgAeAcBh@qAu@oB`@sCGGdBxCCjClC}AvE^|Ce@tCjBrDW`C_@X",
+   "pointCount": 41,
+   "start": [
+    31.503493,
+    130.409826
+   ],
+   "end": [
+    31.507471,
+    130.388044
+   ]
+  },
+  {
+   "id": "鹿児島県:18",
+   "name": "帯迫皷川線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.19,
+   "curviness": 713.9,
+   "flow": 28.9,
+   "turnCount": 79,
+   "score": 81.7,
+   "polyline": "k{``Ecw{{WpB@rKnCtBbDaArB@fClCtAXpChAvAh@HlAaA|A?j@rHjDpAx@Of@eAvA}@x@N`AjA`C`@xCiBzDsFd@Gn@`A\\C~BwAbA}@fCiFr@[`AVOqCaBkAA_@vBRbCcAlBzAbCBn@a@pAuEl@Az@v@tCNt@e@b@iA|@[fKg@",
+   "pointCount": 46,
+   "start": [
+    31.630778,
+    130.563859
+   ],
+   "end": [
+    31.611283,
+    130.564133
+   ]
+  },
+  {
+   "id": "鹿児島県:19",
+   "name": "鹿児島川辺線",
+   "ref": "19",
+   "highway": "primary",
+   "lengthKm": 7.18,
+   "curviness": 632.5,
+   "flow": 28,
+   "turnCount": 162,
+   "score": 81.4,
+   "polyline": "ubg_Eykn{WV`BsDfE_@bBsDn@_@f@dArDMxCl@~Ck@nBzAzCt@tGCfH\\lBn@JpBuDv@XoBzCkA`Ee@Fo@s@_@NSpBj@v@@~@aAtBfBhCIpBz@tBQdAoC]Yp@j@jARlCdEr@xFSn@dBdAEt@b@zBq@\\~@C`C_AfAl@zAnADd@f@D|ArBnEkAlAeDl@y@bBOhBp@zEgA|ByCZmDeBwF~AyFpF_@nAjB|IfBxEpHtG|@fBUxA}@|@iEx@rA`G{B|BrBbCIxFcAdCwEn@GzA|GdGzBhJjDhEr@|DhM`ElAlD?tA_BrFNtAkIvHiFxA",
+   "pointCount": 84,
+   "start": [
+    31.49883,
+    130.495486
+   ],
+   "end": [
+    31.498229,
+    130.448579
+   ]
+  },
+  {
+   "id": "鹿児島県:20",
+   "name": "小林えびの高原牧園線",
+   "ref": "1",
+   "highway": "primary",
+   "lengthKm": 5.89,
+   "curviness": 753.7,
+   "flow": 29.6,
+   "turnCount": 150,
+   "score": 81.1,
+   "polyline": "ybtaEmdo}W_BwAuC{FNkBzAcC?eCb@}ASgA}DkEg@qBwAaAg@wAmD_@eCiCQwCcBmBq@sB[AX`Dq@pD_D[MwAfAwBgB}De@?\\pB_@pCcEtElAxEkBhDw@HiAwFuDiCReDoBeA_@wBiCcBI{Ab@cCeEwFGmC`Ae@dC`BtK|@MwCcAgBG}CR{A|AmC@mAUuEmAsCoBc@sAdAiB}@g@`C`Cv@Rb@]RuDg@eAqDsCoCTuBh@[jDt@Zk@@oB`DsC~BQnBkCnB`ABa@_B}B?y@dA_BtE?d@iA^iH",
+   "pointCount": 78,
+   "start": [
+    31.893095,
+    130.827112
+   ],
+   "end": [
+    31.899503,
+    130.851407
+   ]
+  },
+  {
+   "id": "鹿児島県:21",
+   "name": "松元川辺線",
+   "ref": "291",
+   "highway": "secondary",
+   "lengthKm": 18.95,
+   "curviness": 504.5,
+   "flow": 27,
+   "turnCount": 354,
+   "score": 80.6,
+   "polyline": "y_h_Eupb{Wl@c@WSVRsAbAmAdD_BtACb@xAzAt@|CzAt@\\bCvEzHtGh@fFbJIdGuA|Ek@rEQ~NmAvGXjEpDdS`I_BxERdBp@zA|BlEd@hDzBfDrIbJnLbArKfAdBrAdFe@pAl@dBx@`BpBHtBxChCx@~BQ`@sAE}AxCOvAsAzEWxBlBD|BvCl@|AjAvDOpDvAhGeA|DbAdPyBnChE`ARfBm@xI{OoDkOOaEs@eAFm@j@Gl@~@x@T~@aAx@ZpAU|AVXq@e@}B`DqAr@mBlFFbGx@lBuDyEyGZgCk@aD^_@rARfBzC`CY|BNrEkAXlBlAfCr@ZhAc@dAmDd@Pd@dCfFgArAoBi@gBh@_Ca@qBbAkChBsA|@|@GfDt@pFjAlA~Cr@G~Bd@pEdChBJnBi@|Er@bD^f@`Dx@jAjInBjDxAPhCaD~EiK[mLc@mB`@sGoA}DjBq@rA{D`CgCTmF|@aA|Ab@pAfDhAl@r@bB~C`BjAe@jC~@zAmAzACv@w@|DRjDoB`@^H~Ak@jAAlAzDr@jAyD|Ak@nAoB|@c@zBb@jDxCt@_@l@\\xA}@lHzEtDf@fCtAfE_@~B|@bFf@bDMnGwHzGeBh@}@`FcAhGRdUrG`Vr@~EbEtIuDlHw@|CpA~Pf@dJbFn@|AArC`@lAdHpD|AjCZ`Gl@dBnJlHjChArLlBpAk@zEkIxNnG",
+   "pointCount": 185,
+   "start": [
+    31.503493,
+    130.434834
+   ],
+   "end": [
+    31.401389,
+    130.407266
+   ]
+  },
+  {
+   "id": "鹿児島県:22",
+   "name": "宮ヶ原岩川停車場線",
+   "ref": "521",
+   "highway": "secondary",
+   "lengthKm": 8.7,
+   "curviness": 546.9,
+   "flow": 24.9,
+   "turnCount": 191,
+   "score": 80.2,
+   "polyline": "qrx_Eisl~WnCe@`Cb@rAKjBuC\\sCn@MrBn@bF`IlFuAlCdDdI?~GwAl@yEjAiAnAl@~@jGtCdBFpBeFdAsAjAWfCgBpFR~EpFtGlArC~@rLnBrGEfAmB~DCfBmAbC`EhHFbAqEdEu@rG`BnJdF|D\\~@HrB{@~@KbA~@fBn@vDhC`BtHu@pBnB]hEiAzAIpAJbEjAxC@xE]lA^lFrChEUxGl@tD`E|AAxAp@fCKpAmBfAw@`CyDrA}DhIN|Gx@vCIfHNh@n@aAZFDzBZ\\bG_Dr@r@JbA}@|CbAJnA`AbD{Bw@wCh@kAlAcAzAG`JpIzPnHjAzA\\dBjBK`BvCEfBrBi@t@j@",
+   "pointCount": 94,
+   "start": [
+    31.588414,
+    130.977972
+   ],
+   "end": [
+    31.562159,
+    130.930569
+   ]
+  },
+  {
+   "id": "鹿児島県:23",
+   "name": "秋目上津貫線",
+   "ref": "271",
+   "highway": "secondary",
+   "lengthKm": 14.82,
+   "curviness": 515.5,
+   "flow": 26.1,
+   "turnCount": 293,
+   "score": 80.1,
+   "polyline": "_ri~DkkbzWqB`BoIjMd@bEaDrEbAtEgBhBb@lFy@RaBsAq@CkDxCqByCoBrAsHe@aBxAd@fCnFxIQ|AcBnBf@xB]xAp@vAAr@uAnA{@|ClBpBfD{@~@dAyEvHiG~AqA`Be@rEv@dIaAhOkGfMwArMeI`JaA^kM^cFpAcO`AkB~EeJlJoCfHcOrQcDpOoEbDgJnKuFfBApIfExElFGfGxDtMh@nKtA~FzCvArDbCtBxFxBxB|DG|AkClEe@jBaBnAgCf@aBjB}EfBmDxJuBRuD}Ee@Cc@f@]`Cx@vFfA`CA|AlBlCcCjBk@pCdCbEmC`A_@nCiFuBmBMsAn@o@z@QvAjAjDtDvCbGnAg@`F\\^xBEtGuCo@sCpBoBd@iBbE{A`CqG`BrEr@BpAgAvBQrC|AbBrBZUHuCdB]hCxC`ACpAnB`DCNdAeE@gDkBsA@GvCi@t@gERgCw@aErD?r@rHpB`@rB`AMrB`ApAg@aCo@AqAtDo@`HfGdDb@zEhFdCf@",
+   "pointCount": 135,
+   "start": [
+    31.347682,
+    130.270137
+   ],
+   "end": [
+    31.358845,
+    130.200392
+   ]
+  },
+  {
+   "id": "鹿児島県:24",
+   "name": "下東郷阿久根線",
+   "ref": "345",
+   "highway": "secondary",
+   "lengthKm": 20.11,
+   "curviness": 506.3,
+   "flow": 25.7,
+   "turnCount": 396,
+   "score": 79.6,
+   "polyline": "selbE_htyWdIyQ~AcIzDcMDyD_B{EBw@x@o@xEGbAmAh@kJ~FeICmDp@eGAkBaHsZuGiJiAmDc@oEx@}DFcCGkC{AiJLyB`AmE`CuDQcGj@_DxCmFdDiKhOmS`BoJbAgBvKwCrAJzDhB|D}AdBCrJvExExIjDpA~F[vJqDdDa@zCzBrLnCnFo@bKnDlIi@vD^f@CIgB~@yBvDkAfCvAzDDdC~CbC~@dAOrBqBpDa@fFvArA~AtBj@x@xArA?h@e@b@{BrCoBfBFzCuEhCe@t@_A@u@mAq@sAqB}CYkDgEa@gCVeAhCm@SqFdBqBh@wCtAsAOuBVg@vAwB|Ae@jGrBpDGzAe@~EoKhBkBbBsDXeFuCJW[V{Ba@sE_Be@NqAuA_ExH}AlKcJlAqGbF_HJuCxAqBtCgBOcGR_ChFcBb@uG|@iAg@gBmAkAyAFs@_AaBLOsBr@Aa@w@XcAaBoB|AmBx@GdBxAbAu@z@^nAKZy@]qDc@y@d@Qd@PtAdDvBhBzEC`AaBZqE~BqFg@{DvHeAb@eAGqAVK~APj@pCzAjCfBz@vG?b@y@VaHoB_AQwAuAqA?e@|DbAbBa@r@hAl@DvBeCrC_@bCaDvDWtCeBzF\\UaAkJyGFoBbHtBdBvAfEe@fJrAbAiAHkE~CqAjChAnH_BvELrCkBfJw@`BBlC|AnE_AhHQ~EeHbDUdD{BfE_AtDuClNwDzFuD`HyB",
+   "pointCount": 195,
+   "start": [
+    32.01642,
+    130.197915
+   ],
+   "end": [
+    31.924601,
+    130.285474
+   ]
+  },
+  {
+   "id": "鹿児島県:25",
+   "name": "長江柴建線",
+   "ref": "497",
+   "highway": "secondary",
+   "lengthKm": 4.03,
+   "curviness": 569.5,
+   "flow": 24.2,
+   "turnCount": 95,
+   "score": 78.7,
+   "polyline": "mva`Eg{_~WpCtApK]`Cd@Vc@}@oAaDe@WsAVs@bGu@jFjArAk@l@eBrBMdBcApCbBbCORY]kDtDqDv@VnAnC`Gl@h@OZ_C|AW`ChDdCVn@h@MpDiAlC`@nDfBdBn@rBpB~BtGl@dInD`C`Dz@XbBq@pCwEnCV`De@bAhDzCv@tAxAxFpL",
+   "pointCount": 47,
+   "start": [
+    31.635112,
+    130.912681
+   ],
+   "end": [
+    31.611313,
+    130.906129
+   ]
+  },
+  {
+   "id": "鹿児島県:26",
+   "name": "堂山宮之城線",
+   "ref": "462",
+   "highway": "secondary",
+   "lengthKm": 10.8,
+   "curviness": 491.6,
+   "flow": 26.4,
+   "turnCount": 201,
+   "score": 78.4,
+   "polyline": "wgsaEgau{W[kD~BoQc@wGdAiLs@{DDkEm@gIPgB|A{Af@{AcBaJsB}ChGgJdOaFrDoGtD_D`AgD|@oKfBmGJqEt@mEFuJt@yDs@oRzKaRpAuDvBThBcBSUwAp@c@KaCaJl@XjA~DlA?tCkDd@aECmCrCsHpDW~AaCnCuAb@_B[u@y@fBcBcAwBrBe@_@nBiDtADpAyCv@_Kd@mB\\CdB`ExEA|@k@\\oAJ{Bc@g@sBK[oCkAeB@}DhGsBoBoChBoES[iC@a@wGr@}@bEh@nHk@Ll@aFvCAjAxFzBnBlD\\KzEyPDaBu@sCxJmRv@qInB_GIsDdAmE`AYnG~@rCeCtA}B?wAkBmFqAM}@|B_@YK{ChDiJbGkF~AaG",
+   "pointCount": 101,
+   "start": [
+    31.888764,
+    130.52964
+   ],
+   "end": [
+    31.861404,
+    130.5999
+   ]
+  },
+  {
+   "id": "鹿児島県:27",
+   "name": "久志大浦線",
+   "ref": "272",
+   "highway": "secondary",
+   "lengthKm": 8.59,
+   "curviness": 479.8,
+   "flow": 27.5,
+   "turnCount": 150,
+   "score": 78.2,
+   "polyline": "q_e~D{u{yWc@b@p@~AkAlC~Cr@|AbAb@~BcCX^jBObB_AnAl@v@pA?q@tBLxAlGc@jAuAh@p@Ol@sAt@_FXsCnBWiCwBmE}@iAeAY}C@cAfAiBMiCfD|@mCDuBjBg@^cAyB_IwBh@qAMYj@dDl@HdAsHlBcKImEtCuKpCgCdE_EzAs@|BJ|A]lA{CnCyDdGaD|ByCoBuFfA_SyEw@_@mA_CmIyAuC}BoX}JkDB_CoAiEd@yAM_CoB}Cq@cIh@}FrBgItFeRrBmG`DqZ`E_AKmCcBmEx@wBt@qBtCqAv@uC[gK}E",
+   "pointCount": 80,
+   "start": [
+    31.32425,
+    130.235978
+   ],
+   "end": [
+    31.375053,
+    130.227638
+   ]
+  },
+  {
+   "id": "鹿児島県:28",
+   "name": "上屋久永田屋久線",
+   "ref": "78",
+   "highway": "primary",
+   "lengthKm": 29.96,
+   "curviness": 459.8,
+   "flow": 29.1,
+   "turnCount": 474,
+   "score": 77.8,
+   "polyline": "yd|wDgs~zWo@cAuAKaCh@_@p@o@vGqC|CiBf@k@hBkGjIiC`BoBn@sNlA}MbHqBCiHfBgDCsDdByGTqEtAqFnEsJxDeFjEgG^{BpD~@jTuAf@Yi@O_HeAO@tEe@nBWxG}@`EoDhIkAXgAY_CcB}CcA_DiCwCGiEpAqDWeAdASdDiBl@Sj@o@pEo@j@wCB_BfA}BGk@k@q@kDuAeCRmBbBwBeAu@k@qGu@]_ADqBdBcD~@iA]aA\\iC|B}A{B_FHkB]yGj@sCz@qAkCi@zAmExDKjAxArCnCp@AdBeEpDCjCu@z@aCGuCnIqBt@a@bBq@AoCeDn@qAb@sDBqBg@y@yGH{Ab@{DnCkAdDXx@WbA}GvHUBy@gD_BjB{@zB{Aj@wAMwCuAw@TLtCzAfFmBfC}@Bg@~@cARmDeCgP~CmA}AaA}CiCiDsBr@gDnCgABIqA{@`@WlBe@e@`@sCuAXkArA]Ea@gA{@TwAtCuEs@iEfBq@S[gBs@Ng@`Ck@j@}CgD^cBmEwHaHdJ_CvAgDyM{@KzAnMi@zDmHnFwCl@oCKs@b@[r@DhAuAn@?vAaATDzAyBi@y@mE{AmA{@?qDzDyAk@iDb@a@`A{An@eDwAsBXi@nBmDbAq@Y}DHz@wDKiAeCf@m@_ByFnBkBC{@z@_FY}ChAFeDmBmAPsA[_EuAsCm@aIcC}AcCMwAmDmDwC[_EzBmDj@cCg@_E{@e@aEfAkAcB{@UiCZaAoAmBf@wBo@gCh@uD_Ao@q@SoBrAiBIu@wBoAiA{Bc@aC|@eDiD}FWwAL{B|CyCPuAeAyEr@uC[aD\\yBPoJ_B{EHoDpAgCMwBvBgHf@a@tGD`@U`@oBEy@{C{EwAqItAaGCgAmC}LcCuUyBaN^cHOeAkGiDeADuDbB_BD}KqDoEHwFuCeC_EeC}Aq@aMsJwNiBwHmJuAcFeEiIwC}KiG_AeB[}DcA{CuFa@eEyAqAHoIzCgAFoBs@wDsHyCoC}KuO{HgAgBqGoHX{DeE[cGe@a@kBHmAmAsByJ|BaFa@{DhCiE_A{E]_MaAwBcJgFcJcKiG_KwBkBmBcAsFy@qEuBmEs@mCwBsFeBkD[yI~A{CQgDuDoE_DqDsJyEo@",
+   "pointCount": 302,
+   "start": [
+    30.295967,
+    130.414762
+   ],
+   "end": [
+    30.448618,
+    130.471244
+   ]
+  },
+  {
+   "id": "鹿児島県:29",
+   "name": "比曽木野福山港線",
+   "ref": "478",
+   "highway": "secondary",
+   "lengthKm": 11.85,
+   "curviness": 483.4,
+   "flow": 26.2,
+   "turnCount": 219,
+   "score": 77.8,
+   "polyline": "_|n`Eisx}WxK`AtFtCfAlD\\|IhDrKfD`Fh@nHvA~Ag@zEnAlAxDxHb@ZfC[lBhAvBhHrDxAGtB`CdFp@Iv@oDx@aAn@ExB~Bb@?vIoJ`DcBj@aExCuBlBcED{BxAiBN}ChByDvD|E~AjFtCnBvElYxJxS|I|[jGq@jFxBx@_@xAmClBCp@z@n@~Gv@xA|LnK~ALxEjX{@tKHpCdElH\\zAlBdCa@tDsA~EoBrB}@bDmChEd@|EcD`GkAnE_@|DeAdCZ\\`CO`EeE|Af@bBm@fE|AEj@iB^mDrEW~Et@V`Co@`H`@CtFwA~CLhAt@ZzB}@zAmBt@}Cv@ByBdKNtC`BrEfDCbArAsA`BiHWaGhAaH~E[a@{@wLy@K[|AkBfB|B~DNtAu@fC@pCmChC@hB",
+   "pointCount": 107,
+   "start": [
+    31.702555,
+    130.875573
+   ],
+   "end": [
+    31.670879,
+    130.818636
+   ]
+  },
+  {
+   "id": "鹿児島県:30",
+   "name": "頴娃宮ケ浜線",
+   "ref": "236",
+   "highway": "secondary",
+   "lengthKm": 6.91,
+   "curviness": 466.4,
+   "flow": 28.3,
+   "turnCount": 114,
+   "score": 77.5,
+   "polyline": "__x}Dyyy{WCnB`EnKvGrBlA~G~KdQhFnOnDjDFn@sArA^jB`CtBpCvEfD}AtChCbCU~@j@rBWxAtBbBvEdB`AjCxGD~@fBtB_BrGD`A_@r@{@KwA|@MlAw@x@[_AXwCeAMaAZUn@V`D~@ZvAhFn@O~@yB`@^rJlSGdCiD~MF~IfE`IdAn@xEt@hAx@tBfHxEvAfArAFdC_C~EGdAZxDQxIPtCbCrItDzD`FlAjBnFKxAlBvEb@xCxAd@dBWlBvK",
+   "pointCount": 69,
+   "start": [
+    31.257596,
+    130.554048
+   ],
+   "end": [
+    31.233824,
+    130.504896
+   ]
+  },
+  {
+   "id": "鹿児島県:31",
+   "name": "久富木藺牟田線",
+   "ref": "405",
+   "highway": "secondary",
+   "lengthKm": 7.75,
+   "curviness": 489.5,
+   "flow": 26.2,
+   "turnCount": 145,
+   "score": 77.5,
+   "polyline": "iycaEkpl{WwAlCy@|FwB`A_Jl@cIm@iKrCyEScGyDcFt@yA|@sCzDmGvAsDLiHpCqEpDgAvGsE_@kC}@cNyJgEYwBf@}Bi@gAN_B|AUjA^vAaAvAP~Fi@RmDkCk@nBrA~BeAjCrAjA|@~Bw@`HlBxDmBtBjAjB]~FlB~Ba@nCpArCx@p@tC`@`A~BtCf@k@fBaBdApBpAlAzCAzAgAz@oBE_AtAWnA|@lBm@z@wHxEcIhD}B`BaHbIq@xDwAvBYzBkHfJNrBv@p@fApDo@bHk@lBHxFy@n@gEJmKxO",
+   "pointCount": 76,
+   "start": [
+    31.809653,
+    130.485976
+   ],
+   "end": [
+    31.842869,
+    130.44741
+   ]
+  },
+  {
+   "id": "鹿児島県:32",
+   "name": "仏迫平房線",
+   "ref": "518",
+   "highway": "secondary",
+   "lengthKm": 5.22,
+   "curviness": 488.6,
+   "flow": 26.5,
+   "turnCount": 96,
+   "score": 77.3,
+   "polyline": "wou_Eip_~W~Kz@`Hi@rA_BFeDzBaEpCsAfDl@bBa@l@mD}@sCdC{Ad@DxBzDzAaAh@DVfDfD|AbC`CqA|CgAdAmApHZlF{@hD_@pEiA~BAzAkAxATzKi@fJpCrF@jCcD|JkItCqAbCnBjE~A~@S~Aq@z@eE`BxBjInBXjA}B|CeClHgDfE}@hB{HrEmB@sE_CqCtAmE",
+   "pointCount": 51,
+   "start": [
+    31.572602,
+    130.910929
+   ],
+   "end": [
+    31.560793,
+    130.899513
+   ]
+  },
+  {
+   "id": "鹿児島県:33",
+   "name": "鶴田大口線",
+   "ref": "404",
+   "highway": "secondary",
+   "lengthKm": 21.1,
+   "curviness": 478.6,
+   "flow": 25.1,
+   "turnCount": 403,
+   "score": 77.3,
+   "polyline": "uq_bEovm{Wo@ImDsEaBiGoDiEg@kEe@aU{AyHeB}@uAPyD|AoGvEaDbA_@K{CmFa@wCgAyBOqFaAyCeF?o@]}C}EiAqFiB}BwAw@_AiDyAm@oDZWp@H`Eg@hABtBcBvAwEaAaC^gA{@e@hBkBToDeBgBn@cAOoFeDuDh@oIO}EqD}GhBkAbAaApDB~F|@dGYjEyCdI?dEa@`DiDjEm@xD}Ab@kCmAMlC}BbAiBOy@j@{@}A{A_@i@bBaBTaBYmBxA}@KaCzBeFaBqAwCyCWmBoDq@[}CM}BnAwC_Bu@n@_@fBkCJgBiBr@oBFaEqAyAkDSWt@j@rBIf@iCSeCnDcA^}@o@aDkGaEwCuBQi@kBuEqBcAoE{I~@}BcBeC@i@kALgDm@yC}BPaCg@uAiDEiExBeEhC}BhCcA?yBk@aDj@wAScEd@qCu@cBAoByDaNe@{FcBkDNqEsFmKiASmJaJn@{Bz@SVaArA_AJaBoDgFyD_Dw@eFmB{B}@wBy@Y_A}C^{@jHuFxAyBjB[l@s@t@sGbCqBQ{CnCL~@}A{@aDpA}BbBoGlAgAtEDnBkQz@GrCx@~@sACw@cHaIMaApLgSFgDxEcDTmAgJqR_FeOaAqAyAWG_Po@}E}B}GhA{DC{Aw@yBqCgFeDeCoCeBiD?yA}@[iDrBoBCwGhBkCNgAyF{N_BiGmAgBiBcAk[kBgF{Dw@wDUmHwCa^{BsEyBuJyBeGqKcRaE{PmAu@mCJgBsAgEwN",
+   "pointCount": 202,
+   "start": [
+    31.951794,
+    130.492084
+   ],
+   "end": [
+    32.024558,
+    130.596032
+   ]
+  },
+  {
+   "id": "鹿児島県:34",
+   "name": "北永野田小浜線",
+   "ref": "471",
+   "highway": "secondary",
+   "lengthKm": 14.31,
+   "curviness": 460.7,
+   "flow": 26.5,
+   "turnCount": 249,
+   "score": 76.9,
+   "polyline": "g}~`Emux}Wx@AlD_ChBr@AbI`A~HgAlHd@~AxEfCS`Ek@bAExArAjBxAt@BxAhAhAo@|DPtEd@J`DuBz@x@uAbLE`CT|@`@`@jCHbElC~Et@tCYdB|@lCXrEdClCWrATI~DqDnFoHjEm@jIh@nCUrAhBfLnAtAvG_@BzOqA|KJvGdCtHh@jDMzFZdHzDtQxCnHrA~HjChAnFClBzD|JnLnBvA~CzFnErEjDvHrEtD~@|A~BpA~AbCtDZ|C~GhDRjAlClD|ApAjFbA|AE`Cm@xBx@|CBdBu@`EdAx@bC`@jCfHd@fGK~EIxA{ApDfCfGHlFx@X`Eg@zCl@rClCrEpBxDxDjBjE|Ap@n@tHhDbErArGbDnFn@fDcAjCDxBrEzDb@YAsDdDhFtBhAYR}C{@_AzAyAAk@^aClEg@tHiB|GuDnBmBkASnAgBXhBnA^dCbEbGKh@uA[QRfDpEb@hNuEnEiFt@oGpJeCXeDhOwA`BgJpS",
+   "pointCount": 133,
+   "start": [
+    31.784685,
+    130.875915
+   ],
+   "end": [
+    31.753816,
+    130.774532
+   ]
+  },
+  {
+   "id": "鹿児島県:35",
+   "name": "鹿児島川辺線",
+   "ref": "19",
+   "highway": "primary",
+   "lengthKm": 13.6,
+   "curviness": 488.7,
+   "flow": 25.7,
+   "turnCount": 259,
+   "score": 76.4,
+   "polyline": "eyg_E}~p{WCtAjF`VlJjV|AhCi@nAsGXgAt@gAnBeAvFTlCj@z@bDf@`DxC~EZxAl@LnFkAnBPnDnFjBr@xAbExAjBfCx@fEk@jC@rB~BtDWjCqBvDzBt@b@xDEfDfAPf@_Bv@e@lAf@~@aEfDbBlC_At@}A~@F^vAvDnCItBh@zB]lDrBpBX|Dz@OlAeB~CNGgCkBcCTmBzE`E`@EXmDjAKnBjB|@aF`C{@PbDr@fCHnJnAAtCwC\\PZrBrA\\~@ObAgApCGtAe@~DV`Cg@VVr@nDuAh@gDfEsA`GyDxD{AvGj@~EkAjGnBbHVhCbAdCiApEzAfI?`EtAnFbEpEt@RhAm@h@PnBxBtIvEhEGzBdEbF`BZvGxD`Li@zFrDhKtAtG`FTnBlCxAp@|EKhEdG`HmArCPxE|D|HvChFdKhEzBbC?bM{BtHNxNaGhFM`OlElBfBxCzFnBhBtWbE|AfAfAdC",
+   "pointCount": 128,
+   "start": [
+    31.502426,
+    130.508789
+   ],
+   "end": [
+    31.442591,
+    130.443185
+   ]
+  },
+  {
+   "id": "鹿児島県:36",
+   "name": "曽津高崎線",
+   "ref": "627",
+   "highway": "secondary",
+   "lengthKm": 14.83,
+   "curviness": 488.7,
+   "flow": 23.7,
+   "turnCount": 306,
+   "score": 76.2,
+   "polyline": "gjjkDmilsWfDgAxAcBt@IbDxEbARlDoFn@gEvC_Cx@Sp@VQvDf@h@hAQbBcBrDwAnAwCvJHtCgC~BG~FqEjC_@jBsEY}BJyBm@yBnDiD|DgIfCwBI{AsDsHTkCk@}IcMeDiA_AsCmHqAcKvAsJjDoHfCaDPwHfAiDm@qBRoBg@eBF_AdAEvCt@xAoDpIuG_C{CkE[mAeBb@OfAl@b@Qr@wBj@eFf@YbB\\nAu@@gDlE{Bt@iADeAmAqAo@iDqAEkC_CmEmAcBiBk@Rz@rEG`Aa@`@qDmC_DcAyGuHkIaMu@uEx@qErAgBnJYtDaBx@mBrDeDbBnA~AJnCaBfCaEZqF_@aD`@yFzEeGTqGfIeISaAwAmAuFwBP_Hy@sAAiAtBiDz@yD`F_LLeAa@sGVyAzGwLhCuARyD|@iBm@uCJyAbA]pA|@v@CvB}A|BQXk@mBmCg@uF\\eBq@iA{B{@}AfBiD@r@_Cd@eH|A}Bd@eCaAmD{BsAuGiBmC{Dm@PyGfIcAZgCk@eC}EaECiDyBoAPaDnCiFZmBjFaAj@iEq@cEFmFcDkEQ",
+   "pointCount": 151,
+   "start": [
+    28.238603,
+    129.17415
+   ],
+   "end": [
+    28.231991,
+    129.25282
+   ]
+  },
+  {
+   "id": "鹿児島県:37",
+   "name": "松元川辺線",
+   "ref": "291",
+   "highway": "secondary",
+   "lengthKm": 11.73,
+   "curviness": 477.2,
+   "flow": 24.2,
+   "turnCount": 231,
+   "score": 75.6,
+   "polyline": "wa{_Egwb{WhALdBdBV|ClDzFdDRlCfAvB@r@}Ed@q@rB^fC[j@eC_AuBPmAnAnDvAh@zM}BnD}BbCjA|CaDvEmCpFuHhGo@~HbAvAGlFkHVuC|@sCjEcEvKCzCsAdG@dHmApGdCl@SbAgB~DqBxAt@vE?dCn@|Jw@fCd@dFzCzILxBzAfB?lCjA`BWrOtGbG~@fCvAnHjAxA|@`A|BBvE`BrE]jCx@|A\\nJlAlAv@ErA|BlAdPnCrBxAxBfDe@`IlB~JhMbBhApAu@zBLvBcCjC_IRuEt@aBp@CzFvFbBV`@IlCgFn@Ij@N|@`E~B@dCcB`EyIPoJ|AoDTkB[sCuAg@O{@|D_Ip@yC|CwAz@gJsAwDCaD^WRV^`CzBRl@oB`E_GrCaBjCwFlFaB`EgCtCqI`AaB`@A",
+   "pointCount": 112,
+   "start": [
+    31.601085,
+    130.43588
+   ],
+   "end": [
+    31.530152,
+    130.447452
+   ]
+  },
+  {
+   "id": "鹿児島県:38",
+   "name": "湯出大口線",
+   "ref": "118",
+   "highway": "secondary",
+   "lengthKm": 22.44,
+   "curviness": 439,
+   "flow": 25.6,
+   "turnCount": 385,
+   "score": 75.4,
+   "polyline": "uvvbEizb|W@pYm@vCqChCiFh@gBxAuFEiCjAyGpAmHhJqBpDWnCTdB~BtDUtGgA|A_DnBu@lC_FnAkMle@dA~Bs@nFD~BoC|HcCtPNjVe@|KXhHaAxDNnH{AxGKfEv@nL~DhDPp@[`Hc@`BvAbM~ExMbAlJnElIn@pBD|Ag@|DcK|QwOpF{@tGqEtKC|Oz@nEm@xLAjOsBtIMfDyCzBIzEeAxA^tGc@|ECnNm@Eg@yB[lAR`D`@X`Aq@^lAyBvCi@`PlAvC`Ep@tAxAi@bEgAzAVfBSfDqArB`B\\Hd@aCfAw@rE}C~FBdDm@hBeBb@c@k@mABy@a@_AcFBeC]a@m@PgCjGqAtAK~Dp@~@w@zBd@dAOxIoBxCiBWyAhBf@vFuAfJVdIjAfBvB?j@fCExCy@lD\\rKc@dEgDnEu@xEeBxAuFpIuRlQgAd@}BE}Av@CjD_ClBoC`GR|NeC\\cC`FsBNaEq@y@}@_B_HiGy@m@HoBtBuC`@_Ee@_BrAoIiCcA`@cDvEiB`AaBJmBeAMlCf@tC?hCz@lDnAxBKzAuCpE[jCuDhCEjCy@nBg@tGu@fAuCzAeApEKrCfAjFBlE~BhD~CbQlArB`BLiA~AlDL`CbEa@hAqEbAMfGtDb@n@f@ZbFmCEkDeA_As@m@cCqA{AoBi@}@R{@tAKjDoAfEeBvAiEtGUrF[JyEiCj@g@tBlAXQGyC`AkEsF{AScAkAOW}@gA?{BoA{ByDaBw@h@}BpB{BRsApAeAiBeEEaIk@AqAdI",
+   "pointCount": 209,
+   "start": [
+    32.070354,
+    130.600213
+   ],
+   "end": [
+    32.123455,
+    130.456872
+   ]
+  },
+  {
+   "id": "鹿児島県:39",
+   "name": "大川原小村線",
+   "ref": "491",
+   "highway": "secondary",
+   "lengthKm": 21.56,
+   "curviness": 447,
+   "flow": 25,
+   "turnCount": 386,
+   "score": 75.3,
+   "polyline": "}xr`Eazh}Wv@}N`AgEi@mJLkA_EqJkHq[r@}DCuH]q@oBm@[kBn@yDbFl@nBx@dE}B\\k@]gBlBoBHyBfASNc@UqAqAqBkAkF}By@u@mAC{@j@mBc@kD}@}@oAiD{Bf@iD}@o@uH{AqBdA_EjB_Ai@gC`BmOm@cA_CWaBmA`@uFdCcLlEuHvCgDj@GfEzAfCaApDD|DcERoGhA}Co@}B[uE`BcEBmE~@qAwAkUl@_MzDz@l@`A~Av@eBnCEvCvJr@bAp@n@UpAcDfCNfB}@|Dd@dCoHr@FlCjDrBuF|@m@?kBpBiBt@yBPoIzBeC|Ak@d@kCbCyAv@{BWyAmCiF@oCcB_CEaDm@eBj@sC[mB_HqEOg@K}Ff@mCBsEa@mDx@}Bf@mFAaHbA{IcBeAcAiET{CqBaO|@wCR}CeDiEOyB`DaFP}Dl@yBxBQx@{@t@p@~@ArHmCyHyDkFs@kDFaOpB{DQqFqCiH}JaFuDqB]wBLkHgB{EZ_CdBwB\\kHmE}FyAsBkC_Bm@{SoC_FiJ_Aq@}I}@qDuB_IiCkDNyAeD{FaEWmJkA}AqDoBi@kFyCCwBo@kBtAgBKgEyE}Ki@sCmBkAmCeBkByGmCyCiFuB_IsAqOh@cGa@wGaFaC[{BVyA_@sA_Aj@iB~Da@Je@_@iA}FyAqAc@oF`@{AGkBkB_GyGmBuEcEoAe@_AgGoEVyB}CyDn@sDqAwF{DmM_AkB_Bi@iCqAuBLwESu@cHmCwCcGoFwB{F`AsAQ",
+   "pointCount": 201,
+   "start": [
+    31.72255,
+    130.794733
+   ],
+   "end": [
+    31.770695,
+    130.924289
+   ]
+  },
+  {
+   "id": "鹿児島県:40",
+   "name": "塗木大隅線",
+   "ref": "110",
+   "highway": "secondary",
+   "lengthKm": 8.11,
+   "curviness": 481.4,
+   "flow": 23.8,
+   "turnCount": 164,
+   "score": 75,
+   "polyline": "acw_Eqxt_X@~AZX`Em@lCuFjBwM~@s@xDt@GtEnAnFEhGg@rBgBlCYdCnCxFDzGkB|@l@j@jCFn@QpAeBtAPnF~MVxHpAjBt@lD`BjBjG|B~AxDq@nJyClGd@jGvCbCc@nIeHnHwArIgCbDjBv@nHqC|@Xt@|AuE`FnI|A~@lBYvChEf@xCrDXbBlD~A~F`MFt@{@jAb@p@tB@hG|GtQtALjB{DvFKpDgBlBcA`Gf@rI|ApCnDbWpAjBpFhCpBq@lBp@bBQrE|CtDn@tAi@b@d@",
+   "pointCount": 73,
+   "start": [
+    31.580805,
+    131.183612
+   ],
+   "end": [
+    31.556114,
+    131.137016
+   ]
+  },
+  {
+   "id": "鹿児島県:41",
+   "name": "十三谷重富線",
+   "ref": "446",
+   "highway": "secondary",
+   "lengthKm": 3.72,
+   "curviness": 482.3,
+   "flow": 24.2,
+   "turnCount": 74,
+   "score": 74.3,
+   "polyline": "oxqaEyfj|WcDcA{@h@kBnDqCv@aBG}CoCIeAjAqCBgAiAmBw@@MkB}@_BeAcAy@KkCpCgJcGu@\\_DbGmMnBeAlAWfHeFtEl@rGcD`AeAhCgJhKu@dBb@bFs@rEr@hCg@dE}A^sH|GoCz@uDtCoD{@",
+   "pointCount": 38,
+   "start": [
+    31.881202,
+    130.638054
+   ],
+   "end": [
+    31.901238,
+    130.625699
+   ]
+  },
+  {
+   "id": "鹿児島県:42",
+   "name": "名瀬瀬戸内線",
+   "ref": "79",
+   "highway": "primary",
+   "lengthKm": 29.99,
+   "curviness": 464.1,
+   "flow": 23.2,
+   "turnCount": 601,
+   "score": 73.7,
+   "polyline": "yuokDwh~sWsE|DI`Bd@hAnC|@fHc@bGZrFxD`E\\|@v@RdA]tE{@|AkAj@uEHqDzDaDvAaBpBCrClAzDmArHnGvG`Br@pGaBj@LjD|Dr@vDx@`AdBo@p@aCdAcAt@MxAr@bBjA`@~AiBbFCjDp@~@xDbAbCc@lCaGdF_ElAVtBbCrGZfAhALrAoB|QtDXjGSvGbAfErBhBQh@q@[{DHgFnAsGk@Fo@bAcAdHaAZ_@u@jAcCb@eDtBkE|D]xAh@zBa@|@p@pAi@n@lBhBSd@vAxCiCzAKb@h@TfCbC`@fDuA|DtDhCvFfCn@dAzDh@T~AOj@f@?v@}@vBl@v@z@pDpDkA~@rBg@nBNv@rASj@x@nAoAtANPjCnAfDz@p@BtBv@t@WcE}AoENyEy@qGk@m@{Br@]gBeBkA|@cBi@qBp@aDnCk@nAoAP_ClBkH~AuCf@uBFcBsAk@{DwE{@uCCsBb@eAdEmCxCoHxCmECaBw@iCm@s@{C}@]sC|@mBzFmCnD_@dIB|B}@Ne@M}AiAoB_EoBeCNgG}BuCKeBmCNkLl@cB`DAv@Zb@z@HdCv@`@tH}CRg@}BmC~@_EmBsAc@yD][wC?gAoDqAMgAyAQuBiBeFQ}Gj@kArD{AtJPtJuA`BdAZ`E\\r@lBrArAQ`DcIxEmDlCqFA}BuBeFnAqIdC_AhAcBzBaAnA~C|@?c@sE}CoDgCyA]iB^mBjE_E]gBwCuDIkBv@}ApEkDn@yDWa@cCSqEp@w@]WeAh@yC_@oB~@}BrFw@zHgDvDG`JvPC`EXx@fKfEBnByAhFd@jAfBfApA[p@w@j@iDdCcH`E{Ez@MfA`@xA|CnDjBbAzF~ChCfAzC|Ft@jBbBf@dC]zDLrApEhGp@hBg@`FRfBpA|@jMfDfEtDt@ArIaFrBeHrLcHfB]jEhBtFs@v@i@fBwDxD}DbGq@n@}@lAkFpC}BpCsJ~BgC|CMzHrA|Ei@jO{FnFcKxK}AhFmCtOfDfM_BnBgAjA_B^gA?aFnBcDdBeA|H|@pEcBbBd@lBdDcApGt@hB`BFxCcB|GTLpCdBhDWpDn@jE}@zBkCtBUzBr@xAhB?t@dBl@TtCk@fAgATaBWqBlBuEDiEzAmAf@}AYaJpBsG|AaBhHoBvGf@~ElC~Cn@xCfCpEnApBnGv@b@lAS",
+   "pointCount": 314,
+   "start": [
+    28.266052,
+    129.266204
+   ],
+   "end": [
+    28.153103,
+    129.29393
+   ]
+  },
+  {
+   "id": "鹿児島県:43",
+   "name": "国道226号",
+   "ref": "226",
+   "highway": "trunk",
+   "lengthKm": 29.96,
+   "curviness": 502.2,
+   "flow": 24.2,
+   "turnCount": 622,
+   "score": 73.6,
+   "polyline": "shw~DavhyWvD|NlBxCtAIzDqDzDq@`Bd@fBtChCsBzC{FnEeBzCyCuBwB}Bb@k@Ow@kEBiD|@oAr@qEjBuCJ_D]qAq@MuAx@]k@~BgCl@ItD`BrAJtG{Cr@_D~BKhAiAtAvApFxAvBuBj@Pn@xArE]vCyDpB_AxBiFjBnB`CCl@gGU{CxC_@EcG`Cb@`GhC`BkChFjHbBaBfBk@lHt@|@OvBiCEoCrDsBZyC~CwB|CG|BwFdAgAtG}C`DUh@g@pA{Ce@gDPiD~@qDfEeErDkG`Ao@nC[xC\\nEiErDwA~@mDnG{@xBkBRcB{@aCgEkA_@k@x@eFeAsFRaEzDcJfBXlCk@tCpBdAJl@w@HgE`@y@vF{CtCN~Av@vBeA`C@pAgAfM{@`@{HjEcAtAeEoAwH_IaDMgCh@{Dp@{A|@e@rCP\\g@J}B}AaBDgHgBmAeAmBcB??uB_@{@cBgAgAE]i@AkCkBqDj@{@xCM\\_@eB}B@_BlFu@hAoBCyDr@m@t@PxBlEhAd@nK}BvAp@lCMBwCjBiBzFjApFcEdB_D~A{IbCuClAg@vBJdBe@~ELPu@oBwCoAg@uGg@i@cIbEgE~GMpDuCnE{AjAgEfIyIFkFnGKdAuFuAgDlC{AxEZ|@g@wBcJdC_Ez@IjDtArCkBz@lDtCTl@zBn@Vv@a@xBwG~@qAjCKVv@A|Ed@v@|FdClDAt@l@nAdD`Aj@zAJlDs@z@{B|@WhD~A|FeGjAh@tAfCzElAFt@iAnDn@vA`GwArCkCjC`CrBAzDmChBuDhEiBh@mAPsCq@aFdEyCvAsB~@Tv@pA_@zDb@lErA?n@w@hByDV}BiBmCgAoGpEYfFiCfIxApHcC`@YRuA{A}JbEuCnBxD|@b@t@OPo@s@sGb@sArCTdDiBnBEtBlBnCwCl@qChCuCb@Vt@hCz@Bh@g@BgDyBgKP_CY}BtAwAl@eEd@c@zAd@tBbDRx@{@`C?jApCrBjD~@jCW|HoDpHuBlFs@`JpDv@rF|@zAbE~AbCtC~Ev@lBiAhDtCv@FjC_A~AmAx@_Bz@Ov@n@ArAk@dDqAzANp@jGfBlCDxAv@j@zAdDXpBdAzGvAnAhBnCXnBMtG}Cd[w\\pDsPUsCsBcGAcCt@kDjBeBnDYdKfF`HVbBv@bEbFpDdNdCxBbBR~Cq@fF\\rAW~@gA",
+   "pointCount": 317,
+   "start": [
+    31.417864,
+    130.138727
+   ],
+   "end": [
+    31.272784,
+    130.225568
+   ]
+  },
+  {
+   "id": "鹿児島県:44",
+   "name": "今別府牧園線",
+   "ref": "481",
+   "highway": "secondary",
+   "lengthKm": 7.78,
+   "curviness": 426.3,
+   "flow": 25.5,
+   "turnCount": 130,
+   "score": 73,
+   "polyline": "kmjaEsvr|Wd@aEz@iCeB}GnAuDDoEp@yDKwFwFsNHuIhDeBbBwCnAaArJoC?cB{Ao@qJYg@w@EqAjBsHS}D}Q{GiQkZ}@e@m@mC_Dq@iCPKcCz@wD[}BoCgEmAI}B`AoGaFgAeKgC{DsFaFuAkFRm@zE}Bl@gBGkAyCg@oE^sA]MqB_CsCkCLaEeDwCCXmAl@]rFAsD{FyCmKh@sHnAoDs@iD_CaCkAkD`DaQ]sGm@]aCNaKgAqLnF",
+   "pointCount": 66,
+   "start": [
+    31.843578,
+    130.681535
+   ],
+   "end": [
+    31.865404,
+    130.731575
+   ]
+  },
+  {
+   "id": "鹿児島県:45",
+   "name": "吉野公園線",
+   "ref": "215",
+   "highway": "secondary",
+   "lengthKm": 5.92,
+   "curviness": 449.4,
+   "flow": 24.2,
+   "turnCount": 110,
+   "score": 72.8,
+   "polyline": "{pf`E}cd|WiI`HDn@b@XnGcBt@Ze@`CmFzDN~@lBo@hAHnDrBdK_CbBhDtBPfEfBzKzB|B{@bA?zIhB|AlAj@pB`CnBzA|DbB~BlB`@xG[hAVnAp@xEnFpB`FhCpMxBnFNdEf@tBW`C~EhGvDbBb@hEhBvCCfBxAbHqAdEHbC`@n@dDCx@\\QrBz@fAZfBB~@sAhBjAtAmGpPBvF}BfFv@pEiBzKn@jE",
+   "pointCount": 59,
+   "start": [
+    31.659822,
+    130.606869
+   ],
+   "end": [
+    31.639703,
+    130.570163
+   ]
+  },
+  {
+   "id": "鹿児島県:46",
+   "name": "十三谷重富線",
+   "ref": "446",
+   "highway": "secondary",
+   "lengthKm": 14.06,
+   "curviness": 406.1,
+   "flow": 25.7,
+   "turnCount": 222,
+   "score": 72.7,
+   "polyline": "wkraEiih|WpBx@lC`EFp@hK`S|F~DjF`BxM^bCn@bBnAnB^n@lAbAJjBvAbBzBxMfDzD~BpBYhCrE|@_AnGxAhAhCzA`Az@`ClC\\rAhAh@fA\\bEfCjAJzEc@jC_DTcCrBkBP|@zBuArAvEbCXz@aCr@i@bDHj@rB^Zn@_@hB|@tB`@zC?z@]`@oBg@ThF^d@`BLdDrC~CiAvB|@VhBr@|@u@~@EzAJzCt@r@nCsFtIaFzAqDpDeF|AoB|CcBl@}CnCeCbD{@lDG`JyAxFyC~O|@zGgB`DSh@|Du@|@}AxHoCtDf@nEGtCUjBqA|C`A`Bi@nBTx@lCuBxMBhGmC~D^fJeAjEt@jLkE`DSrKeCpAVxH~GhAfBvArFxBtArJV|E~@`JgGxLa@vH`@rGlAbBq@tJcJlHg@rKmLbJqBbIdAvHxEzCK~KqDvH~DhOvA~@t@r@rGt@bBdBfB~C|@pEbE",
+   "pointCount": 124,
+   "start": [
+    31.884284,
+    130.628215
+   ],
+   "end": [
+    31.799582,
+    130.599331
+   ]
+  },
+  {
+   "id": "鹿児島県:47",
+   "name": "寺山公園線",
+   "ref": "220",
+   "highway": "secondary",
+   "lengthKm": 5.05,
+   "curviness": 449.7,
+   "flow": 24.1,
+   "turnCount": 94,
+   "score": 72.6,
+   "polyline": "{yf`Eqxc|WkDl@cAuCoCcD}@Lo@|AeCyAyB@{A|BaGz@{ArAlDdFlAv@{@nE|@jC|BXnEa@v@\\hDbCpArEjGrHzCjL_AtFdApMo@pEb@hAfCpAl@jBmDhPThDm@tDrApDMxBwCnFyAlHDhBfCjDXfFkBbEwCvBk@vCDlCuB`A?tBeAfCcBbBX|RaAzA[bDf@tB",
+   "pointCount": 50,
+   "start": [
+    31.661264,
+    130.605052
+   ],
+   "end": [
+    31.663819,
+    130.568829
+   ]
+  },
+  {
+   "id": "鹿児島県:48",
+   "name": "村道屋純曽津高崎線",
+   "ref": "627",
+   "highway": "secondary",
+   "lengthKm": 6.17,
+   "curviness": 431.3,
+   "flow": 24.6,
+   "turnCount": 108,
+   "score": 72.1,
+   "polyline": "y{lkDiqksWk@bIrEdJ`AtEi@h@yAyBQhATvBvA`@z@bAd@~BUdDbBp@`@rFlAXNh@JbCm@~CgArAkDdAiAbHdAzBfB~@VhA|@p@f@lCvCpAvBwAbFKpIdDpCAtEhAzC~BfCP|Az@fDG~A_ArBTjAs@f@iF]iQr@oEdC_FB}CiBoA_Dj@sBzA_CrDaA@eDuCsFeBSoDuAsGPyN_AkJ\\wIjCgFtA{AxLaHvCsErEkC",
+   "pointCount": 61,
+   "start": [
+    28.25165,
+    129.170287
+   ],
+   "end": [
+    28.238603,
+    129.17415
+   ]
+  },
+  {
+   "id": "鹿児島県:49",
+   "name": "蘇刈古仁屋線",
+   "ref": "626",
+   "highway": "secondary",
+   "lengthKm": 8.47,
+   "curviness": 443.6,
+   "flow": 23,
+   "turnCount": 163,
+   "score": 72,
+   "polyline": "ioxjDklgtWxBiL~LuJj@mBvGcJ~Bs@fK?bCyFjOmF`CCpC{BVoAa@wAqAeB_CyAfAyGs@{E]_Jn@{G|MeIbD{GzCh@hBkA~AXzD_DoBeEMkCiAeEeBn@{KwGkDxAsFw@uBfAuJyFyFoPYmDb@wPp@oAfDmBj@sB?mBg@{@oBg@_@iDeAcAwHgAgAv@UdCk@FWo@z@oE|CqDf@MrBdAh@]c@}@eCcBg@oAXwEm@eB@eA\\{Ar@y@s@_CFqAbCcBnAHtCnKn@]~@sBhD]uAsG`@yC|AqE`@_LbFwGvDH",
+   "pointCount": 77,
+   "start": [
+    28.14725,
+    129.312865
+   ],
+   "end": [
+    28.135339,
+    129.361069
+   ]
+  },
+  {
+   "id": "鹿児島県:50",
+   "name": "栗野停車場えびの高原線",
+   "ref": "103",
+   "highway": "secondary",
+   "lengthKm": 11.21,
+   "curviness": 420.3,
+   "flow": 24,
+   "turnCount": 196,
+   "score": 71.8,
+   "polyline": "qk_bEixz|WkFtCyBb@_C{PgDwJiAgKbJyC~EsDrH{XLs@]k@yEeCeAsAw@sDlBkIyAiD?}@`B{@dA~@dAHfBkFVwV}A{IkDuAs@aBL_BhBgFXmFIyEs@_BeDyAeBeKaDeLo@gFRaG{@}E\\sHTaAlCqC@kAk@aAiBRk@[Ak@`AgBOs@sCUg@i@Lk@fBKg@}EDoCvA_CZeC{A_LnAiJ{@yHz@{FeDaI_Am@g@mA~@aC}B}@v@{BsCi@[_AVk@rAGHwA`FT`BjBx@|Er@|@x@iCnBwBnG}BnAgHtC}BtDyGbCTvAzCbFfAp@xAj@~DtCrCdADjHaDjRlF~HgFtBa@pAx@xBrDhBRrCkBx@uCgBgOHeBzAmGPqDyAwFLwCjCkGmBqGtD}J",
+   "pointCount": 104,
+   "start": [
+    31.950805,
+    130.722774
+   ],
+   "end": [
+    31.934678,
+    130.792387
+   ]
+  },
+  {
+   "id": "鹿児島県:51",
+   "name": "岸良高山線",
+   "ref": "542",
+   "highway": "secondary",
+   "lengthKm": 20.88,
+   "curviness": 408.1,
+   "flow": 23.7,
+   "turnCount": 360,
+   "score": 71.6,
+   "polyline": "czq}D{wp~WfEfG^zCxEvJh@dDjDtC\\lBh@pKMrCy@f@eHQiArCTd@bBd@Lj@HrF]~DVzC~BrC~DzIvApH`DhFKfA}BzAUjBeBbAZz@fC\\Hr@i@T_Eu@b@kDkAcAn@{DMm@g@Da@xCs@r@j@tCuB`GdA~BbDW^v@k@tDr@bCk@nEHl@rAdAH|BgBvD~BrCXhDOzB~A`BDnBmAjBEn@rCdC?~E{@fAuCkAg@hAPjBgCrAoACgAlEeCcCgFzCgGcAqAHoAr@}BdFcAZ}A]oHwFwB[oB`AgF`FaDrAaC_AsGyLaFi@eAeE{C_@}BpAgAFkJqEgACaOfNEnAhAjBBz@kCbE^t@rHtCjA~ApBhQz@lCo@nB{CtFqIt@uBe@iDrCsHhCw@v@AzEaCxBaBRyBm@oAR_AfJsOzGu@fBQ~E_B|EqAA_CkBiEt@CkAfCuAIq@o@OoAXgBzACxDg@t@wBWsDyCTkAlCmAc@mB{CgBeFe@gDD{F`DkFl@}EgD_Bc@mAH_J~D{ApAe@hA?dHa@bA_AZgAEsJoDaK}@cE_B_F{@iEaC{ABmEvB}BZ{FqG}PoIaEk@eMOYyAzA{Gm@}DuH_BeFmCgGm@cEgBaBEqMzJmA\\cO_Fy@{@}AyGgAoLqCiD}Bc@}F`A}DWeOeJyMkM_Dn@eIqF_DVwCeBqAdA]|CcEfEwA`H{G~HsEzBoEdFc@jBSjHg@~A{MtMwE~HaFhC",
+   "pointCount": 195,
+   "start": [
+    31.226096,
+    130.999175
+   ],
+   "end": [
+    31.318498,
+    130.949694
+   ]
+  },
+  {
+   "id": "鹿児島県:52",
+   "name": "日南志布志線",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 3.55,
+   "curviness": 425.6,
+   "flow": 27,
+   "turnCount": 56,
+   "score": 71.6,
+   "polyline": "s`g_Eonh_X|CfCrIzLf@rIb@dBpEjEpDdHpNrClBqB|Cg@hCaBLaFx@gAh@?hA`AxCdG`CI`B}AtAGbEjL^hDvClCpADpF`DxCtDl@rAz@lHxIC@rA|BM@oHpDY",
+   "pointCount": 32,
+   "start": [
+    31.4985,
+    131.120556
+   ],
+   "end": [
+    31.477797,
+    131.107829
+   ]
+  },
+  {
+   "id": "鹿児島県:53",
+   "name": "中山小原線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.72,
+   "curviness": 437.9,
+   "flow": 24.3,
+   "turnCount": 67,
+   "score": 71.5,
+   "polyline": "kne~Dwp}yW`E}JhByAnCmFdBmBOsDxDaDF}Cv@?jD~BlANnBmAHwCbB}@rCgDbDf@rAa@T_Ag@iCHiAdA_ErCsCv@eFhCeAdCf@hAeAt@{Mo@cFnBgF?qAq@qA_EgBgE}FqEk[{AqAo@sH@aD",
+   "pointCount": 37,
+   "start": [
+    31.326622,
+    130.245403
+   ],
+   "end": [
+    31.31868,
+    130.272866
+   ]
+  },
+  {
+   "id": "鹿児島県:54",
+   "name": "長浜手打港線",
+   "ref": "350",
+   "highway": "secondary",
+   "lengthKm": 3.72,
+   "curviness": 459,
+   "flow": 22.4,
+   "turnCount": 76,
+   "score": 71.2,
+   "polyline": "}qc`EgjtvWwAOu@\\o@pCwCvAgEzGoDCB|GwAfEiBd@m@~@p@lAfCZ?zBwAPyIeA}BjB{@fEKbDvCrIEbAi@t@jAfBxHpFx@bBsAbHq@nAsBLaHcFoF\\iDqBwDd@kDsAmFbFaNpFoBVsDu@",
+   "pointCount": 37,
+   "start": [
+    31.644625,
+    129.70676
+   ],
+   "end": [
+    31.660458,
+    129.69105
+   ]
+  },
+  {
+   "id": "鹿児島県:55",
+   "name": "尾野見伊崎田線",
+   "ref": "522",
+   "highway": "secondary",
+   "lengthKm": 6.67,
+   "curviness": 416.7,
+   "flow": 24,
+   "turnCount": 116,
+   "score": 70.7,
+   "polyline": "ypp_Euid_XdCfNvE~Ble@nLnBcAjAmGj@aApBa@xFNfAbDtDzClBlE`GzA|BpAMvA{CjBaAlBuDrBkAhB}C@kBjK@vBw@~B|ExAq@xAFfDx@jBTvD|C}@`DIPhBq@vCFhBrDjB\\x@SxAsAvBzCAjBvA^fF`Bn@xAG`KmHjD?dFnA|KvIbETjAi@~@oBlDqCvJRbGbAjBbDjAr@`HHjFbHbKt@hCn@l@lA",
+   "pointCount": 59,
+   "start": [
+    31.547168,
+    131.099308
+   ],
+   "end": [
+    31.512741,
+    131.075326
+   ]
+  },
+  {
+   "id": "鹿児島県:56",
+   "name": "鹿児島港下荒田線",
+   "ref": "218",
+   "highway": "secondary",
+   "lengthKm": 3.69,
+   "curviness": 370.3,
+   "flow": 45.6,
+   "turnCount": 30,
+   "score": 70.5,
+   "polyline": "kut_Ewky{Wt@iDbTkTjLuB|u@iEQcJPbJeK\\eQ`BYYoQfAcDn@oI\\yBv@hMuA",
+   "pointCount": 15,
+   "start": [
+    31.568384,
+    130.551799
+   ],
+   "end": [
+    31.56257,
+    130.556558
+   ]
+  },
+  {
+   "id": "鹿児島県:57",
+   "name": "国道504号旧道",
+   "ref": "504",
+   "highway": "trunk",
+   "lengthKm": 17.78,
+   "curviness": 450.3,
+   "flow": 25.2,
+   "turnCount": 318,
+   "score": 70.4,
+   "polyline": "uh}aEcazzW_EjGUhDd@nDc@bFmHnIi@`BP|S{@tEn@bEFdFd@~@bDpBv@jCeAbQLlGaE`M{B`O{BzDiAxEcMxC_DlIoDtCyAlCsEbEmDrAqBzBwCd@oI~EiFL?v@zAjAOfAiERoB~@UtAmA~AwD~Ag@~A`@hFMhBsBlCgFjBeDxDiBSsC`@gE{ByBA{@hA{CMk@}@x@gAe@G}Dl@iCjAeGPeAW]m@g@cEiDr@}@sAyDs@u@y@oJuCk@aBaCm@cCByDqA_@r@aBj@cBy@e@H_DtGkA|\\nB|OnAtFAhAiAbBwDKoDpDA{EU]_@JSfDn@jD~EHAt@oDv@sHy@{@dFqAd@sAvAb@vBWt@gEnD}@RuAk@k@Lq@xCiBvBWnA\\~AKbAiBtBOpB}AAk@jBfB|A[xBQhLy@fHsA`DaADoAjAgBIm@y@GeA]Co@zDkCp@gEvFb@vDWz@sCL}DtE{HfEqS~CiDrD_GbEmK^gY|ImGxDaBF_IxEqCgA}SCeIfBwC|Dk@fBw@VuBMkGdAeFgAsCcBwEGiBpAsB?kGtA{A~@eC`HeJrJs@~AqFxEaCl@cGLsA`AcDrLi@fNoArDeAXiAQiDcDkE`Bq@`ADrA",
+   "pointCount": 165,
+   "start": [
+    31.940108,
+    130.391382
+   ],
+   "end": [
+    32.032496,
+    130.303399
+   ]
+  },
+  {
+   "id": "鹿児島県:58",
+   "name": "折生野神野吾平線",
+   "ref": "544",
+   "highway": "secondary",
+   "lengthKm": 12.56,
+   "curviness": 398.9,
+   "flow": 23,
+   "turnCount": 218,
+   "score": 69.6,
+   "polyline": "wlz}Dwhf~W@YArD`DbErAlDb@`@zDTd@h@n@xCpA~B|@lFxBpEjE`CCfCxAx@jAdBf@rCd@NxByAbDp@nBQXb@QnAiCw@uBD?f@r@x@UtBiBlCiBo@b@dDEhDy@vElDtFfB^y@tDj@|BfBt@tBq@dAmAt@d@kA`CPbCw@d@qBwAq@FK~CoA~Bj@fB~@Tx@dAt@zB~DtDFnAs@lFlApEg@t@kBp@aG~KsFvDgAnFmMjFaGj@gNnKmCX}FaA_An@{@jBeAd@uI_BqKyFuJmByPo@_FwCoLkCgATkAxAU`FcAfEwDfBqAlEqA|@iGcBqDiBmHWqDj@{Ea@sDyBcJ}BaGo@_HeDw@DmBnAmEIyB|BqEjBgG~E{SmCmDEqJrDeJ~AmI~DsGtGgR|EkDlDuLlPqKlEw@pAiBxIoKzJ",
+   "pointCount": 110,
+   "start": [
+    31.270035,
+    130.945557
+   ],
+   "end": [
+    31.32565,
+    130.899508
+   ]
+  },
+  {
+   "id": "鹿児島県:59",
+   "name": "小山田谷山線",
+   "ref": "210",
+   "highway": "secondary",
+   "lengthKm": 3.97,
+   "curviness": 415.3,
+   "flow": 23.6,
+   "turnCount": 70,
+   "score": 69.5,
+   "polyline": "qz``Eqsn{WgA_DcOcGmA?{@`AmBdIyBpCsBpGcEtAcDYyKbIiG`@w@`@}@bILnC}@p@cL{DuH~AgB{BsDaCcD?uFrBoKeEuGn@uBiAuDqGqAu@`@_CUq@qGVuC}FqG?",
+   "pointCount": 32,
+   "start": [
+    31.630651,
+    130.496726
+   ],
+   "end": [
+    31.657883,
+    130.495869
+   ]
+  },
+  {
+   "id": "鹿児島県:60",
+   "name": "曽津高崎線",
+   "ref": "627",
+   "highway": "secondary",
+   "lengthKm": 11.92,
+   "curviness": 399.6,
+   "flow": 22.5,
+   "turnCount": 212,
+   "score": 69.2,
+   "polyline": "q_mkD_rzsWmAlBsJx@eNrFsGBcEzAwCe@eAyCiEsBe@iEyBqCy@YeAf@eAvAiBhGiK`EkAnDyChDm@rFD`DvAtEb@fEt@d@dGd@jAf@vDjIZjCOvBi@h@cGx@aHi@kBw@aBLqGqA}CLwBhEeA`H{FbCIjAcAdAeAnCx@vC`C`A\\dAsBpAObBwC^E|@n@`Cw@lD|BjF~CrDzAVjBxCh@hE_@jBlDvCnG|PEzBaBnB|AzGgBrEDxAbAXbI{@rBuAfCMdE^xIpE|BiBd@yB`FBdFpA`CaBXcApBMfE~@|GzCxAhGtAlA|DNlEbAvA`Aj@zABnQq@fAqBh@i@p@ErHy@bKy@fCgDvFkD|C_GjCcDAiCmAaAL{@vDkBrDgE|B{BPe@p@rAdTmAhC}B~BYbBLlCk@rAgBz@g@bAT|AvBjBfAzGL`Bq@hO",
+   "pointCount": 115,
+   "start": [
+    28.252252,
+    129.247205
+   ],
+   "end": [
+    28.262282,
+    129.186236
+   ]
+  },
+  {
+   "id": "鹿児島県:61",
+   "name": "宮ヶ原大崎線",
+   "ref": "513",
+   "highway": "secondary",
+   "lengthKm": 18.69,
+   "curviness": 372.6,
+   "flow": 23.3,
+   "turnCount": 299,
+   "score": 68.8,
+   "polyline": "e_s_Eyld~WtAtGbC\\bG`FvCqCpB}DbAIzBjC|Aj@|EsFrHyBnDmD|CQ`FaBpCoDpA}C|@uDCmBfDoAvB_EaAkGz@gDAcEzBcDLuBtDiCtCh@jBkCrCuAb@eAV_EyB{GQsBpAiJdDsBxGqAlB{AnB_Qv@gB|C{AnEIdFmAxDwDzFkBb@qAUkCxAoCbE}@lAaCbCmBd@eAxAs@j@kGbFiPP_DcA_G}EuEmBgD`@mDs@gI`EwHe@sBlCsAh@iABaBjBDz@_AN_Ay@sB|AmDd@q@~CR|@}@HcAQu@qDkDd@uDuA}C}PuLbEeAdCsDVyCtDaC~Gm@xAy@bD{GzDaCxFkFnB}E~@{EjISbDeFrBIdI`GpDZxHa@t@|Az@HYoCpAyC`@qFbPoLpNmUfAwGkVij@eEmG`BmCLwF~EeNpQkH|ClIbAf@d@}@BqD|@{ArEuDlJsEfAVfApCPjG|BPlAaCJ{BnB\\n@SPaFdEsDDmCtAiCxLcIz@qDxBaB`JuDxMTrEiCjG_BxFd@`CeA`EpB|BxBbA@h@eAQcD~JuHxGaAa@z@hAN`LeB~SkOfJoKvCiB`DS",
+   "pointCount": 152,
+   "start": [
+    31.559705,
+    130.935972
+   ],
+   "end": [
+    31.474326,
+    131.034933
+   ]
+  },
+  {
+   "id": "鹿児島県:62",
+   "name": "山之口真黒線",
+   "ref": "395",
+   "highway": "secondary",
+   "lengthKm": 5.33,
+   "curviness": 389.5,
+   "flow": 24.1,
+   "turnCount": 86,
+   "score": 68.8,
+   "polyline": "wq{`E}yh{WpAqHMsSaAeEDuIsCwHj@mFsGwG{DsF^wGYgE~@oDnD{Aj@gAtCmNnAqQpIwGTqKnAeG]_E|AqBdAuEdBShDsCZ{BxAyCNcAUa@aCC_@{@zJ_CvB}BTiCtAiBjBBj@c@@_Ct@yEzBgCpDoJi@{CJ_CgC}Ds@uGh@cB~A_@n@qBzAZ",
+   "pointCount": 48,
+   "start": [
+    31.767478,
+    130.467028
+   ],
+   "end": [
+    31.757808,
+    130.511603
+   ]
+  },
+  {
+   "id": "鹿児島県:63",
+   "name": "隼人溝辺線",
+   "ref": "477",
+   "highway": "secondary",
+   "lengthKm": 6.46,
+   "curviness": 407,
+   "flow": 22.5,
+   "turnCount": 117,
+   "score": 68.7,
+   "polyline": "m`gaEas{|WrAyBxE{AxBqCjHiDfJwL@wBn@oAlYtC~KQfAWxBsBf@mExCoFjBmB~EuAvCz@fGK`Am@|@aClDKdCcAlAqFvBqFJ_A_@_BxAmDU}DhA{C`DyCxERhBq@~CUxEuEpE{GbIO~BX|QjFjCfCrC{AhD}DhD^fAQbH}E|E_GHy@c@_As@MyBnD{CJMg@\\iBcA{BiAsA}Ad@_@e@|Aw@nEpBvCaBzA}C",
+   "pointCount": 60,
+   "start": [
+    31.826153,
+    130.727054
+   ],
+   "end": [
+    31.788293,
+    130.750851
+   ]
+  },
+  {
+   "id": "鹿児島県:64",
+   "name": "犬飼霧島神宮停車場線",
+   "ref": "470",
+   "highway": "secondary",
+   "lengthKm": 11.38,
+   "curviness": 390.8,
+   "flow": 22.7,
+   "turnCount": 196,
+   "score": 68.7,
+   "polyline": "ugeaEwpa}WrIaBnJlBtAg@`BiA`@cAuAaFAeCw@q@gCLaBn@eDfDyEHmDq@gDDmAm@w@wAuH{CyAmBgCaGsCgLuFwC}@?g@r@aJ_H}AmCg@oDgEqKL{A`FsFn@sCcBoCuFsAPwAnDwJbBw@l@cAJaIpAiGnAgB~BeIn@a@bDKh@eAo@eFyBgAcC{CEiAjBe@^sFdN_WnE_@|A}CdACpBzAj@WwAmCu@aEsBoBs@Hy@|BgAGg@sEiBqB[eAQcDxBG[}NuBaEqF}C|@yHvBwFEyAuGeFsHqB{F_EcBgFp@qHQwAs@m@}Gg@oEgG[gCeByCW{Ap@uAnFaApAy@zAoElGmGxBaGhEq@nEjAzDJdD}DFaAc@}ANiAdIIpByAbFcHp@{GbCiEfBeFcCmMpFkD",
+   "pointCount": 106,
+   "start": [
+    31.817074,
+    130.757398
+   ],
+   "end": [
+    31.817083,
+    130.827831
+   ]
+  },
+  {
+   "id": "鹿児島県:65",
+   "name": "川西菱刈線",
+   "ref": "448",
+   "highway": "secondary",
+   "lengthKm": 12.7,
+   "curviness": 386.5,
+   "flow": 22.3,
+   "turnCount": 220,
+   "score": 68.3,
+   "polyline": "wkkbEobk|WTyLm@}BqAu@sDDeD{Ag@q@u@uE{F{EiA}Ba@sLg@yCZeEyDiFg@gEwAuFgJiYTiFmA}AiCsA_FuG{@mGaCaJiE_EBeLlAkLa@iBoBsCEuB~B_FFkAMiEqBqHjCoNG{CaAsFjA}D\\uFjB_GNeOn@iBHoCmFcH?uJcAmE}CoBg@aN~@yHWgJ{DgO{EoGsGsNiByB_BmHyEoCi@_ArAoF^aGb@u@|@MdIrFdA@kAqQo@aAoD{A_DaDpAcInAs@|@{ArEmAjByBlD}BvH`@|@hA\\|BlA{@vBXdB_@Ci@kEgFc@kFfD_FzAm@pBp@~ApBb@gAPqCs@cB{H}Gc@eBNoD~A_CzDb@BiIVc@n@@nApBl@OvAeBl@mDtB_@vBoCdCa@~@_E[}C|M{JlCuCTaBmC{Q",
+   "pointCount": 109,
+   "start": [
+    32.012278,
+    130.642481
+   ],
+   "end": [
+    32.015923,
+    130.739317
+   ]
+  },
+  {
+   "id": "鹿児島県:66",
+   "name": "佐多岬ロードパーク;県道566号　佐多岬公園線",
+   "ref": "566",
+   "highway": "secondary",
+   "lengthKm": 3.3,
+   "curviness": 395.9,
+   "flow": 23.8,
+   "turnCount": 55,
+   "score": 68.2,
+   "polyline": "s{h|D{rq|WyIi@sFlA{@Ws@sByBkA{CyDkBq@yCaDsAoNcEuGw@]_@Do@bCNxFoEp@_CrBiFGgAb@OxAtAnHoC~B_ACeDgDhA{Bo@sIl@w@dGsBnG_LYuCcF_B}BsB",
+   "pointCount": 32,
+   "start": [
+    31.016424,
+    130.675823
+   ],
+   "end": [
+    31.028226,
+    130.685138
+   ]
+  },
+  {
+   "id": "鹿児島県:67",
+   "name": "崎森隼人線",
+   "ref": "473",
+   "highway": "secondary",
+   "lengthKm": 8.63,
+   "curviness": 358.7,
+   "flow": 24.8,
+   "turnCount": 125,
+   "score": 68.1,
+   "polyline": "_t}`Eo{v|WbGqMzCmBjCcGVwBQqEr@wFCcEtAqCzG}Fvb@qLtCaBdOwa@r@}NrEe@|SwGhAA`@dAM|CxBtD}A~C@z@dAtBlDpBhAbEp@dGtItHjDIxDtCtB_A\\wFdEgALm@gFy@l@{EsBaLcDyAYoBoCLaDy@gDqCC}Dp@wF]uB`AoFe@iBEeHpHmCdBuD|CIv@}ASu@}EwEkD}@Uw@ViBp@{AbDDh@]n@mJ~IkBhDkKdJkFbEW`@y@^cGlGfD",
+   "pointCount": 67,
+   "start": [
+    31.778084,
+    130.702795
+   ],
+   "end": [
+    31.746698,
+    130.741532
+   ]
+  },
+  {
+   "id": "鹿児島県:68",
+   "name": "浦原喜界空港線",
+   "ref": "628",
+   "highway": "secondary",
+   "lengthKm": 6.3,
+   "curviness": 340.7,
+   "flow": 25.9,
+   "turnCount": 83,
+   "score": 67.5,
+   "polyline": "avzkDevbxW`F}AlBsAX_IzEoJbGsJpImGcCqE[_HLcCc@eBzCuEf@mDrDcEv@qDdCaDl@mFfAkC~LxCnJ^fCtAIdC`@p@v@U`@kBbEfCvZrA~E`AjI{AZv@g@zP`AAzCoB~AcD~B_@~@z@lGGzKiIpHe@jEaBb@]_@wIb@}AdHeClEcCzA`AvCi@vCcBxCS`AuAdBs@",
+   "pointCount": 51,
+   "start": [
+    28.322409,
+    129.944191
+   ],
+   "end": [
+    28.285729,
+    129.964616
+   ]
+  },
+  {
+   "id": "鹿児島県:69",
+   "name": "松原轟木線",
+   "ref": "618",
+   "highway": "secondary",
+   "lengthKm": 6.23,
+   "curviness": 395.2,
+   "flow": 21.6,
+   "turnCount": 114,
+   "score": 67.2,
+   "polyline": "af~hDqjvqW`D}KT{EdBkE^aFbGcKKoJnBkHIcHtAcCMm@sBeAw@eBWwL`BiAzGm@vED|CcCKiCXoAlF{H]uAaFDk@u@GyAvBwL~@u@vEq@`@i@DuBoAwCCuE^eC|BcDrA}D`EsCWkEhBeEUaE|AyDgDkJA{BxAmDdC{AdBFxDkAfDHtA{@`DPrDa@|Bb@v@[pDaFBeExKgV`HeD",
+   "pointCount": 56,
+   "start": [
+    27.84881,
+    128.897851
+   ],
+   "end": [
+    27.827847,
+    128.942391
+   ]
+  },
+  {
+   "id": "鹿児島県:70",
+   "name": "郡元宇宿線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.07,
+   "curviness": 357.4,
+   "flow": 25.5,
+   "turnCount": 43,
+   "score": 67.2,
+   "polyline": "cwq_Eqkt{W_CiEeAk@uCRiEjEiGh@aJ_AoDgESoAx@mDKkDiT_q@RkA|CiDF}@w@yAqCKc@iBnG{MLwAaByE}BkCyHiC",
+   "pointCount": 23,
+   "start": [
+    31.553301,
+    130.52617
+   ],
+   "end": [
+    31.564826,
+    130.545402
+   ]
+  },
+  {
+   "id": "鹿児島県:71",
+   "name": "手打藺牟田港線",
+   "ref": "349",
+   "highway": "secondary",
+   "lengthKm": 20.52,
+   "curviness": 358.4,
+   "flow": 21.1,
+   "turnCount": 348,
+   "score": 66.1,
+   "polyline": "ytf`EifxvWaIzC_IfB}OaBwFfD}GdAoNcCiOsGyFm@mGiFmEsHmFwF{Ba@yHVgJwEsAOmFx@mCOoWwLoCeDoGeTeI}HoA{BcCqIgA{A}Au@kFCcB|@iAtBo@tDiAlCc@vDaDrBsA|BeAb@kHFcBxAqATkM}A_G_CkFqEyD{IcCEeBmAgFmAy@w@mBMiHmFoBD_AjAiBh@JwFcBiAiEiAqCyCeDBeEkAmDUeGrDs@`Bs@@_@w@DgByAeBNu@~@k@b@}CQu@aCuAeB}CsDqA_C_E{A{@aJeM@}AtCyCK{@mB{A@mCcBu@c@cAX_ChBo@l@}@j@wQ_DuLMsCwBmAgCx@oCe@qEhDaB@u@sCqDyCgDiG_AiEYqET{@xA}@F{@i@iAmDYOaAX}CUq@{@OuA^i@zAkB`Ao@rCcAv@oKyDcA_BMgEa@y@cEQu@eAnBkJW}C{AiAoE@w@_@uDoIyBi@qZ}BiCqBkD}IwAc@_DJwEqHaBEyCtAkAYcBoJ`DeQc@cBiBYuE\\}HvEaO|@q@v@a@jF{@l@}D_BcMgLuAiC~AyEgAiGxBoDUiBg@_@kB@qAtBaAXoLGm@YOmAl@}D|DwDHm@uCgFiByAs@iEsBgCaEbAaGkB_@`@BtBs@d@cEeD}JRwDo@}E_DcAGsDhCaFj@uAx@_@pAHzCoBdFoEn@eH}@aEsBgA{A_E]eCwB",
+   "pointCount": 186,
+   "start": [
+    31.660452,
+    129.726613
+   ],
+   "end": [
+    31.7813,
+    129.795131
+   ]
+  },
+  {
+   "id": "鹿児島県:72",
+   "name": "東郷山田宮之城線",
+   "ref": "344",
+   "highway": "secondary",
+   "lengthKm": 13.86,
+   "curviness": 349.7,
+   "flow": 22.2,
+   "turnCount": 218,
+   "score": 66,
+   "polyline": "yhnaEazqzWuAqA[iAqAyWfA_Q]qBw@gC{AaBaGkCeGiA{B_FeDqEc@}BfAkJ[}IoCcJcDoCg@eE{BqGwEeD}H{DoJuBuNoFaH`@}Ge@uRiIwHwBy@cBi@iIuPaI}DiJyL}HeBcIh@mHUgDqGo@yQWgD^S{GoAyCkHuByA}DeCUoE{D{DeAiByBwErAcFeAGb@tBnADp@kB]uD`@\\yCE_H_AoCeCeANqAnAyAOiD^gH{@_CeDe@oFL}@zBmBlAq@vCcA|@c@c@rAsEIi@mFnCe@ICm@lDqKhA_BlAg@c@gD`@_@jA@Pi@g@sBcHoHuE_JNsFfCkBvFgIyA}KJmIcFaOSmCP_DhCkHhCsB~BaGzDb@xDoBzDFtB{Af@oBU}CwD{J|BqNKgFg@y@oCwAeA{J}A_F`@_HwEmL",
+   "pointCount": 110,
+   "start": [
+    31.863326,
+    130.349294
+   ],
+   "end": [
+    31.909632,
+    130.436484
+   ]
+  },
+  {
+   "id": "鹿児島県:73",
+   "name": "垂水大崎線",
+   "ref": "72",
+   "highway": "primary",
+   "lengthKm": 16.86,
+   "curviness": 376.1,
+   "flow": 21.4,
+   "turnCount": 296,
+   "score": 65.7,
+   "polyline": "qqp_Ecpv}Wr@mJMgDzByGa@{HbAmJsA{EMmF_@mA{BeCAeBr@k@tE?~A_@~AqBtF_D|@sFlH}HPuFdBcBzAmD~BwCdB}HjFiIfAcHeCoHXkEzAoE~FmE|BcFHiG`@gB\\k@`BN^gAkAoA}CGeCuBqHgA_A{QpCiGdF_Fh@}C`Do@`CiBdGuLZeB_H_CoAlAwCPaCdFaFhAwApC_HdC}J}B{B~AeBvDkBbAoBYiEoD_BI{BbCwBnLs@`AeFd@cFdDyKpB}CzI_Ap@sALmJ{@kInCgVqHAcAx@{AbFeGb@oAO}BxAsBI{DiAaCHu@hH}HnEu@zHyDvF`@hD_@dCqCj@oCdBe@nA_Fl@i@`BRjAdE`AONqElBYtAqAIyBpAeCeAsAGiB{AwAXqDxFwEnEaCzBSdAaChCyCY_GRuAj@o@zAg@bCtA|ANjBcAr@sBEgK|@uA|F_D~AsD@gCaAkCJeElCkCvBiIbAmApFmBdCcJzBeBzDUvBaBZkDfC{DhEyA|IsFrDcD`FaBzGPvEsAbL{Q|D_DzB[rBaDnFJ|AsA^iA~BcBbG_@`LxB",
+   "pointCount": 150,
+   "start": [
+    31.54729,
+    130.864825
+   ],
+   "end": [
+    31.516847,
+    130.94409
+   ]
+  },
+  {
+   "id": "鹿児島県:74",
+   "name": "紫尾田牧園線",
+   "ref": "445",
+   "highway": "secondary",
+   "lengthKm": 10.24,
+   "curviness": 356.6,
+   "flow": 21.2,
+   "turnCount": 172,
+   "score": 65.1,
+   "polyline": "uznaE_g}|WtC|T?lBkAxDqBjDk@d@wCX}@~BmApAFnFlD|C\\zGi@bD_AfAw@xFqCPqBxAg@xCRvE{BtE\\lHUjFjAtCn@hEzBhFyAhKq@fAqF`DsFWeDpAaCnFmE~CqDjH@~J}B`KEhDy@vEmGdJuB|I{BhF?hGe@lCaCzBwOlAsB`AmDrFoAtIM~CpAlGU`De@`AmDr@{B|CVfHhAfGQfHmApCF|BrDdItCdCnAXl@bAi@rBuIhAeAtHJxAbB|BArCjEzDjF`JXtBgArBeAr@WbDqEx@{A`BQhENfK}AbAWfCwGD}EbBeDhD_C|@_AtAuBhAiC^aEyGkAg@mBV{CkC_@w@FiB_BwD",
+   "pointCount": 94,
+   "start": [
+    31.866189,
+    130.735356
+   ],
+   "end": [
+    31.894267,
+    130.663962
+   ]
+  },
+  {
+   "id": "鹿児島県:75",
+   "name": "南薩東部広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 10.78,
+   "curviness": 343.2,
+   "flow": 21.3,
+   "turnCount": 174,
+   "score": 64.3,
+   "polyline": "qzx~Dapp{WTgE|AwCMcGxBsD`F}BdBwEd@cEj@iAxGmDdFxA`EClExCfCQbCuECcExHuH|C_G`A]|GBpDsDFgKWiBn@oC_AeEJgAjBWjBj@zBQfBzArC]lFvBpFV~AwBhAkDtCyCJcAkAeD~ByBPoCb@e@vDh@zHlHbBbGjBp@hEnG~@`@vA]xCsI|DmFbCwFtHsB`B{BnDvAzCK`Ab@xAxE~AzJb@x@jAf@vC}@tBiIvC}AfC?~EnBzAoCtFgAxCpC~@FrCi@pB_Ft@s@zElAnJaEnGfBbItFjE~LbAlA|NwA~EL~DkBxC[dGeEhLy@jCwCzF~AvFm@zFvDjBPnE_DpBeDzJ}AjIgE",
+   "pointCount": 93,
+   "start": [
+    31.425848,
+    130.506413
+   ],
+   "end": [
+    31.356568,
+    130.529077
+   ]
+  },
+  {
+   "id": "鹿児島県:76",
+   "name": "出水菱刈線",
+   "ref": "48",
+   "highway": "primary",
+   "lengthKm": 22.94,
+   "curviness": 340.5,
+   "flow": 21.8,
+   "turnCount": 358,
+   "score": 64.3,
+   "polyline": "k{lbEo{e|W{G|NqGtGi@pFeAxAwArF?fAhBnDElAaFbIQfDqAxAuCXoA~AoJdVeCfPu@hSyEnEuAnDs@rHZlDcBpESjBv@`R~@zh@yA`HoCrFMzBj@tAbCvB|FfCdA|AJtAaAzB_I|GSzE~H~P~EfHXlA_@dBmFvFmEvI?dD{CtGdBrFL|HrAfH`@lF|@zAzK|IVtC{@`GgB~FsCzC}@hLaEnItEzQAzEoEvHiCpCa@hD~@rK`@|UzCrNn@hJdAfB`C~AfEh@jAbBe@zd@rAjHjCbEV~BwB|B}BlL_CfH[hFqAdCVhCqE`GmAl@mDdEsBl@iAvA{AvCD~C_@fA}IdBkB_AgBAoEzC}Ei@{D|@BpAvD\\Zd@LrAiA|BQvEdB@b@~AgGxH?bCcInD{CXAtCaGlDaBpCkB|A@`PWfGq@jCAxG_BlFuAdBoClGv@`AlFx@Fl@_ErBcDPsAj@qAdBaAbDi@m@f@qCzAsCQcAaErDyCx@wBI}AyBsBf@hAnMs@hFZlHyAbF_BzAoC_@cA\\i@pD{AzAe@fBaDvAe@dDoBhAcAxD_CtDkD|Bg@rFaAl@{C@]xBRzC_Df@eCbDwF`BuAvEcEdAR|FmGzDqAfIw@bBuAt@iFCqB|AQnCzAdH]dJRrFiDfEApMuEdCsAfCc@nDcCnAYn@HdEhAbGiCjGa@rEdCvGLfB{BxL}@p@yAa@gDuNmAWgE~A",
+   "pointCount": 189,
+   "start": [
+    32.019896,
+    130.615759
+   ],
+   "end": [
+    32.071565,
+    130.440234
+   ]
+  },
+  {
+   "id": "鹿児島県:77",
+   "name": "鹿屋吾平佐多線",
+   "ref": "68",
+   "highway": "primary",
+   "lengthKm": 19.21,
+   "curviness": 350.6,
+   "flow": 21.3,
+   "turnCount": 316,
+   "score": 64.2,
+   "polyline": "w|p|Dsg||WfQHlDaBzBShBfAdDvGj@`GfBlBjI\\bBrBpA\\zAHxEsAr@|Al@|GvAdC`AhG`@vHsBhJhBfGUfFn@nBnCpCbB}@tAmB|Al@hCjCpEApIpBjDq@fCp@bAfJlCrD`@|AuD|LBzAdCzFyChIh@bHi@tCtFxDr@CtBwBlAfAxACdAiAj@{BlCh@|BIKoG~@YjB`JjCl@I|AZx@h@NbBk@{@tDvClHjC`ChE`Ar@hAqKnHy@xAp@R`EqA~@\\pIrQzEhC~AnBd@`DvEhDDjAqH~SsE`FoCfHy[hZmCAsAe@}IuL_EgAmRbG{IbEwEd@cFoA_BBmAt@w@bDy@jOmApAqANkF_@eGyDaJOsP_HsGAcKcKmLsGiBsCaAo@{PrAwHhDsEWiEaB}CyCYsA`BoGIuA}@aAkFw@q@s@E{@hAaCFkAcH}FiAsFs@aAwG\\mCjDsAJeEmC{GJiFaE_FaCu@mDt@{CeDsC]yAJuBiBwCHuAzA}C\\sB}@uDr@mGkAgAkGwBcLqGeB_@oEF}@~Bd@fLjAlKK`BsJdHuDzFqCvB_B|F}DnA{AjKiBxCiAJwDgBeMgBcALqFxDqBR",
+   "pointCount": 157,
+   "start": [
+    31.05756,
+    130.730338
+   ],
+   "end": [
+    31.094468,
+    130.690487
+   ]
+  },
+  {
+   "id": "鹿児島県:78",
+   "name": "伊集院蒲生溝辺線旧道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 5.38,
+   "curviness": 344.8,
+   "flow": 22.1,
+   "turnCount": 84,
+   "score": 64.1,
+   "polyline": "gobaEw~n|WAaBa@w@iDi@wBqAKpMd@bG{@SaAuD{@_AyBZsFzCThCdGrKzDlJbDnB~LZbC^jBdAvLzBzAjF`CfBrAfFbC`Dt@dFjEfJdEn@zD{CtEg@xFjD`BnMClBs@|A}IlEqClHn@zE~FjEj@RdDg@vD~A_BrJ\\zF}DrAqDfG",
+   "pointCount": 44,
+   "start": [
+    31.802924,
+    130.662364
+   ],
+   "end": [
+    31.791575,
+    130.634181
+   ]
+  },
+  {
+   "id": "鹿児島県:79",
+   "name": "東郷西方港線",
+   "ref": "339",
+   "highway": "secondary",
+   "lengthKm": 16.16,
+   "curviness": 317.3,
+   "flow": 21.6,
+   "turnCount": 237,
+   "score": 63.6,
+   "polyline": "q{naEoclzWuSbOiHaDeFyDwAQiKfLeKpHy[yFqGHcIbAcPv@}IpGo@IkBiBcBAcAp@Kj@z@`HqLjNwAMcHwCuCY_K`AuFhEcDR}@|@iGvN_NjJsEc@mBT}IdIyCfJoBjCkEdBwGjHkL`IiKpOyJrCcCbEGbCx@`Gc@hD}CfD}DdAgEdF_G~Bu@pTpCvQbJhJfAFhGkAjErBV`BI|BbAhFnErD|DdO|KjM[rJsJnE?r@~@nAi@~AiAGUlAa@PmCWo@`AjDbD|ClA@~@nAvBUp@cBt@hD`BItBgAdCcGdFe@lJ\\`HcB`KuNbVS|@\\lEOvAqCnAu@dBZzAdBnCbA|GpEhFnEKv@p@tG~PMbEVbArP~L|A`F}AdDqAx@sEn@e@x@hCnAdCIZ|FzA~AfA`F}@lJDxC~CnElAfFSvA_CtAnApDgA`H}GtB",
+   "pointCount": 116,
+   "start": [
+    31.866328,
+    130.320077
+   ],
+   "end": [
+    31.911158,
+    130.224704
+   ]
+  },
+  {
+   "id": "鹿児島県:80",
+   "name": "川辺広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 6.58,
+   "curviness": 353.9,
+   "flow": 20.4,
+   "turnCount": 114,
+   "score": 63.5,
+   "polyline": "kzp~DkelzWhEWxDnBl@K~EwE~@{CP}CYaDnEuUHyE~HeK|AoHhByBnAm@x@r@{AnHHx@lEvGlBz@z@`BlD@dDrAtDc@dBhBz@Pz@eA\\iExBsBHkCl@OpCjDl@NpCoDlCiBhAmHxBgAbAwAjCaOnDcAQaKwAsFsD_DiEuHqG{DcDyGHcBj@cAvGkAbAgA~CoPHyCgAcBsJmFaIaG}HgIk@cBFqAxD}F",
+   "pointCount": 58,
+   "start": [
+    31.384859,
+    130.320377
+   ],
+   "end": [
+    31.371825,
+    130.355575
+   ]
+  },
+  {
+   "id": "鹿児島県:81",
+   "name": "田上西別府線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 5.14,
+   "curviness": 365.5,
+   "flow": 20,
+   "turnCount": 94,
+   "score": 63.5,
+   "polyline": "}at_Eq}r{WeAxBuB^iCKaBbAkFzFo@tB@nCcChEgANoEsAiCtAcCLgAv@iBlEcEbEuC`F{ExDcCEm@XeA~EBfBiBnFuBjB{Br@aCnGmEdE@vF`@rBg@`B}BpBeCj@gCpCoG|CwBpDaFpC_Ch@mBtBqE\\_GQ_BdAwA|BwC~Ao@|ELjGsBpHh@zEw@bFf@xBrClDJ|@iAzCDvEgA|A",
+   "pointCount": 54,
+   "start": [
+    31.565271,
+    130.518807
+   ],
+   "end": [
+    31.591384,
+    130.484683
+   ]
+  },
+  {
+   "id": "鹿児島県:82",
+   "name": "湯湾新村線",
+   "ref": "85",
+   "highway": "primary",
+   "lengthKm": 10.81,
+   "curviness": 368.2,
+   "flow": 19.9,
+   "turnCount": 200,
+   "score": 63.2,
+   "polyline": "i{qkDmpdtWlAkCAqE\\sCq@kJ@gD|@}BfHaFX{FnBeG`C{AbJu@rAo@bCqJl[ka@n@sD]qCcD_FoAeEfDkMcAiWfAsJh@aAtAWzCb@dGmEhGD|DyCzIuAfBLjFvBrMq@r@q@TmAAwGiCkBKcCn@Sz@j@f@Sn@mCzAaBZ_CzB_ArAcBfD|@|G_ArBt@jEFxEzApDAxFv@lAj@z@zCvA~ArCeBtG|AlBKpBgCbCqAbBOtCqCBcAg@m@uDHy@[_@uAXcC|@{AzAs@hAShCT`Ai@fAuBb@kDxDqCIoGb@cAvAi@pAHtGlE`BXjB_C[{E\\e@~BUvCb@x@gAh@GhBfChAKbC_CZkBYcBkE}GGuAx@m@tC~AbMxBlA?vAkAX_BCcD}E}MIoE",
+   "pointCount": 105,
+   "start": [
+    28.277165,
+    129.298146
+   ],
+   "end": [
+    28.22908,
+    129.35014
+   ]
+  },
+  {
+   "id": "鹿児島県:83",
+   "name": "篠川下福線",
+   "ref": "612",
+   "highway": "secondary",
+   "lengthKm": 7.27,
+   "curviness": 349.7,
+   "flow": 19.9,
+   "turnCount": 128,
+   "score": 62.9,
+   "polyline": "kbgkDezctW{CyFu@yGwEkFm@qBeFcDsLmCwAkA]uARqB`AuAzBc@lELfAy@TsBm@}H~@gBjFsAvA?n@h@`CzF`Af@|@I|CcCpA_D~Dc^Y{E_BkDm@yGsBiHn@gHo@qCj@qDwCcGB{DsH}Hl@kCJwDvDcHEiAgAkBt@aCGyAkAcHuDeAwAaCuAkP@kEf@uDdAsAlCcAh@gAm@wORsAx@_AnE[l@iAGaCg@cBoCaD{AiEaFkC]wD}C}JmAB_ChAuGA",
+   "pointCount": 67,
+   "start": [
+    28.22198,
+    129.294585
+   ],
+   "end": [
+    28.227896,
+    129.345892
+   ]
+  },
+  {
+   "id": "鹿児島県:84",
+   "name": "鹿屋吾平佐多線",
+   "ref": "68",
+   "highway": "primary",
+   "lengthKm": 13.41,
+   "curviness": 336.2,
+   "flow": 21,
+   "turnCount": 215,
+   "score": 62.4,
+   "polyline": "_du|Dw{{|WiDJaRzHsEn@eD}@uJmIm@{HeBiFhBaINeEkJi]hBu]c@}BwHoEqBmIqEiDsBgOmA{AsDqAi@uDmGiAkF_CoEj@qAgFsBqBw@Iq@jAzBbDj@rG|B`@h@p@c@hAqBSy@s@oA}C_C_Ae@gDiBaBmCoEsAq@mEYcAq@mBwHeIwKeKqRc@{CZ_HiImSeH_^AaJcAgEcBg@ySoBgCiE}AwAeHgByGqIcJ{DqAsEoGu@oHzDiDkDwCKcBm@cCcFG{CaBl@yB`CUKu@wDgAm@mBwCy@sEyCqBoC{EaAoEl@_G_AgAcCV]`DmAlDsCnAeCzDaH}@}FeGkBMkA_AmC\\eBm@g@RcBjDKvB_@^}@CuDiBaBv@o@nBw@AYm@d@kCKiAgCs@uCaFqIqJgFsK}AwB_D_C",
+   "pointCount": 107,
+   "start": [
+    31.079199,
+    130.72844
+   ],
+   "end": [
+    31.146566,
+    130.795912
+   ]
+  },
+  {
+   "id": "鹿児島県:85",
+   "name": "紫尾虎居線",
+   "ref": "398",
+   "highway": "secondary",
+   "lengthKm": 3.84,
+   "curviness": 335.1,
+   "flow": 21.1,
+   "turnCount": 61,
+   "score": 62.2,
+   "polyline": "_i`bEscc{WvC|AxALfDkAzKZ|C|ArGdGtCf@lBYv@eE~JoLnDi@~IeLj@kAb@}IoBgIRyBtDcDbHmKnDTpE{ClBgChDfAdAC~E{CbAEtBhAtAN~CuBrDw@vE|BzIpA",
+   "pointCount": 32,
+   "start": [
+    31.955517,
+    130.437857
+   ],
+   "end": [
+    31.93011,
+    130.449569
+   ]
+  },
+  {
+   "id": "鹿児島県:86",
+   "name": "針持永野線",
+   "ref": "407",
+   "highway": "secondary",
+   "lengthKm": 8.08,
+   "curviness": 318.7,
+   "flow": 21.1,
+   "turnCount": 122,
+   "score": 62.2,
+   "polyline": "clzaEsp}{Wu@RkBiA}BQqBwF_B}BmCqBgH}BcG`AUnDqFp@cFlBsDcBq@mAyEkSMsFe@aCoFuGmCgBmBwD_CsBoBwI}@_AoCD}B`B?nA`BdBT|A}@lEsAb@kGeHmFrAoFkBuAlAcAJiA}AmB[}GdBuFd@eAeBHyKcCgBuK~BgDpHEjL~CtHoBpQoCm@uGeDiGzBcDEeKbA{DbDiC\\kI~FsCIoDbBgBnBaHuAkLxDaEeBu@?wF|GmAVuL{@mEsB",
+   "pointCount": 66,
+   "start": [
+    31.925298,
+    130.573055
+   ],
+   "end": [
+    31.974714,
+    130.574349
+   ]
+  },
+  {
+   "id": "鹿児島県:87",
+   "name": "西之表南種子線",
+   "ref": "75",
+   "highway": "primary",
+   "lengthKm": 21.37,
+   "curviness": 290.8,
+   "flow": 22.8,
+   "turnCount": 273,
+   "score": 61.8,
+   "polyline": "yqiyDcvh~WkAsGcBmBsBe@sQq@}UwF{Ag@kFaFcEkB_AH{JqWiNmPo@c@_PcB{OsGrMqc@mC_JmSyAoPoImFkIJeXjDmDd@eF`EkFs@}ErBmE|AqB|FuAb@s@dE}Pb@gD?wH`BqFm@iDaHmNuCuMaA]sCbB{@K[s@SgEy@{B\\sAtEw@jA{AIoB_DoDOmA^w@lEm@rAqAPsCYgBe@e@aI@uAnFyIq@uAlHm@Vkb@al@}Ac@eTiAoDgFw@{DsHc@eDgCkFmB{GwDsBLkNnIaA[yDgEiCBOc@dAmAuBaHeH_DoB_C}BVj@gF{ByDsJaAcD~Am@SgGuLsA{Ac@_IgH]sCbDqB^aFkDyE_Rk@c@_BN]c@bAsCMs@uBqAoA}CaCy@oEkG}KeKEe@fBqEyDcFRoFgDoDy@cGiCk@m@uDw@kAgEkB_Fm@eCkE_DeBmH_@gFiIaAGqDzAuMtByBzBkAdDd@bDo@|IVhQc@rA_Ab@mEqEfAuFw@mByDiBFuFkDiAwCBuDxE_Bh@e@a@e@qEcGgBcBsAqDD_Fi@yF_BaU_@cMcFqYLaCfAiHjG",
+   "pointCount": 148,
+   "start": [
+    30.528451,
+    130.957942
+   ],
+   "end": [
+    30.631453,
+    131.049822
+   ]
+  },
+  {
+   "id": "鹿児島県:88",
+   "name": "和田平鹿倉線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 6.36,
+   "curviness": 327.9,
+   "flow": 20.3,
+   "turnCount": 103,
+   "score": 61.7,
+   "polyline": "_}d_EwmrzW|ByJfAoJmE}Ko@oGyBaGBqNgBsGVcMOkFk@yBqD_HaBiK{BqGBeIyCcUoGgK?gAjBwC?w@oGyEiEqI_Ac@oEWiHmEaB_@}@mBg@yH_DcDmA{Cs@c@iGWcBcDTuA`CiBV}JpA}GnAiBjCgAiAsGxDoFf@mJtAuEI{JfAYrB~BlBmAGYkA@w@wAY{BJqB",
+   "pointCount": 52,
+   "start": [
+    31.487681,
+    130.352437
+   ],
+   "end": [
+    31.498069,
+    130.405431
+   ]
+  },
+  {
+   "id": "鹿児島県:89",
+   "name": "黒木新地線",
+   "ref": "403",
+   "highway": "secondary",
+   "lengthKm": 4.09,
+   "curviness": 330.6,
+   "flow": 20.8,
+   "turnCount": 65,
+   "score": 61.7,
+   "polyline": "i|vaEmpx{WXmBOaDz@eIOoBx@oFkA_Bu@yHq@yB`CiK@}Do@sBwLwMuDH_JcD_DXwCaAeFJyBuAiCSaBeA{Eg@qHb@}LoFcAqB?iAVuEOoKdAgHKo@uGsLsDu@e@g@WyC}AiCaBy@a@zC",
+   "pointCount": 37,
+   "start": [
+    31.907407,
+    130.54743
+   ],
+   "end": [
+    31.925298,
+    130.573055
+   ]
+  },
+  {
+   "id": "鹿児島県:90",
+   "name": "小山田川田蒲生線",
+   "ref": "211",
+   "highway": "secondary",
+   "lengthKm": 21.21,
+   "curviness": 290.1,
+   "flow": 20.6,
+   "turnCount": 298,
+   "score": 61.4,
+   "polyline": "sp|`Eydz{WLbDeCpNMfGpGvDvCrHoBjOsCjCa@vBf@pUw@hGzF|OErLxAfDhIjC~FpD|F|HzKbGfKc@`BdE|Cz@rAbAr@nGnCpDI|A{A~C\\tDpAhCvA|GShAkCxCkCg@W^vEjHZlPrAvCtDbDj@zBL|D~BnCwB`JB|AvKbGjCfEzARzAtApMpG`MIxG|DdDfDtCdGRrEc@rIzB`FfD`EhCv@zMrLrIl@rIdH`Jf@fCr@jElDpDjApF`EfFh@fDxCrCrI~ENlHs@rC~@hBYYs@yBsAVsAcA{@{AuFNoDlBa@tBdAtA~B|ElD|CFfQdGlAjC[p@}@VFv@tAfB`CHbCt@t@fAB`AsAvCDf@zEeBV{Bq@iD\\IpDnIqAlEeAn@Nj@lB?hBoA~BBjDbAz@nA|EXnDvA~BLlCyAt@gA~EiQfAs@`FEpBuB~K{SfKmN\\sA@uEb@wAzDcBx@{EvKcKjCqEpIcArJoC~TiA|Pl@xX`GjNmAt^oObD_HxDoFtEoBrKBlFj@lCx@rC|CrEt@`GAfIhDxB`BbH{BnIxB`TdBdDlCzBdDzFfCvC|BhDRz@zG|FnF",
+   "pointCount": 153,
+   "start": [
+    31.772418,
+    130.555807
+   ],
+   "end": [
+    31.654767,
+    130.497098
+   ]
+  },
+  {
+   "id": "鹿児島県:91",
+   "name": "山田湯之元停車場線",
+   "ref": "309",
+   "highway": "secondary",
+   "lengthKm": 7.56,
+   "curviness": 312.8,
+   "flow": 20.4,
+   "turnCount": 116,
+   "score": 61.1,
+   "polyline": "ick`EygzzWpDcEGsFnCmEtCqCxH]|@wAXaF|DwCb@gAAuCgBcD^wFgBeIhBaIPoE|AkGdDFz@kKw@uLrDwCv@eCIaAmDaHCy@hDcHbHmA~DoDVcBjAyAF_HvAmFeAqCDqBuA_B_@{AIeF|@qJ[uDNyC_BeEImApEwBtCuCpFqGxBkFc@uCmDiDaA_FaAs@oCg@yBuCoAqJyHsOq@mi@u@iEiC_C}HqAsCyDAcKrHiA",
+   "pointCount": 61,
+   "start": [
+    31.68325,
+    130.392445
+   ],
+   "end": [
+    31.676894,
+    130.454347
+   ]
+  },
+  {
+   "id": "鹿児島県:92",
+   "name": "飯山喜入線",
+   "ref": "245",
+   "highway": "secondary",
+   "lengthKm": 11.37,
+   "curviness": 304.3,
+   "flow": 20.2,
+   "turnCount": 171,
+   "score": 61,
+   "polyline": "mhz}D{on{Wv@oBF}EiBmEe@yJyBkEaCq@U{BqAmAvAyFImBwAw@oBQwNiKmBqGcF_LDoAzAeDj@sHSgOa@mAqDkEaA_G}CeDuB{Mf@eDfDwDxEmJHuBy@mI\\eCvCoIQqJlFqU\\}HtEkDx@yAHyAi@uB}EiEyBgEoD}CiH{CeCAcA`AeCu@A}BbCwFIkAoECoGwFwAd@yBgJuDsEa@uHgKnBmFfBqHmC{AiCqCkAkF{FuAGqFbAwMt@{Be@cAcB]mEw@cCwFkDiCgCqBqHqFuD_PgXaLqPgBk@gEVkAo@kDwGkAkFcFqEyA^qA`Go@|@gAD{DyAoAiHNgFyFiH",
+   "pointCount": 88,
+   "start": [
+    31.269347,
+    130.496137
+   ],
+   "end": [
+    31.312168,
+    130.572089
+   ]
+  },
+  {
+   "id": "鹿児島県:93",
+   "name": "垂水南之郷線",
+   "ref": "71",
+   "highway": "primary",
+   "lengthKm": 20.15,
+   "curviness": 318.9,
+   "flow": 19.7,
+   "turnCount": 327,
+   "score": 60.8,
+   "polyline": "}ce_E}gx|Wx@sHb@kRwE}Q?_JrAoCfEkAn@aABcAuCmKMgIi@qDyD}GLkA`CkDbAsIyA}EeNyFq@oAo@uFmEcAi@mBb@uAfCsAjAcJvCSdAy@Hq@{@oCJwBdEwB`CsExFkDp@aA@qAmA}A}LmDuC}DoE}@{BiJeCmCuCe@wAsE{CeC{@IuDhAsEyBaAA_CfBaB}DkEgDgB[yD|@kAeA}@_Ds@K{BfAwAi@Qm@\\}DSy@kDgCi@oCmGwEVmCgBgCmB{EkCcDh@mCeBqCb@sBeC{CRmBiGcFo@iDsCiE\\mBjB_BdAsBzCgBmA{HwDkEoBy@sHfB_EkBsDPiDuFmAi@yDD{G{Fk@gDqDcCqAoFbAeECqB}@iA_G}BqAgCf@uAtGwC?kDcE_HyAwFgDkF{BwFuB]cE`@qBg@oJeKmB{CkAgD}@aG@uIuD}Ht@yGC{BsCyFgBeJHeBbCiG`@qCiDsH@eGkB_Fx@yFDmHeBqGpBiJ`AcRv@uF|AwDTeFlB_NvEmKdAsMtHyInCyEdC}JGmG|A}Ea@kRVyK_@wDwA{D{EiEcAoHeF{Fg@sDDgIlBwI`@mH|B}CZyGjHqNHiJq@wEd@sIi@mHbAqHcBoHIyDaBsF~DsJlEgCdCwD",
+   "pointCount": 165,
+   "start": [
+    31.488785,
+    130.709913
+   ],
+   "end": [
+    31.521836,
+    130.86874
+   ]
+  },
+  {
+   "id": "鹿児島県:94",
+   "name": "喜入知覧線",
+   "ref": "232",
+   "highway": "secondary",
+   "lengthKm": 14.98,
+   "curviness": 292.6,
+   "flow": 20.3,
+   "turnCount": 216,
+   "score": 60.7,
+   "polyline": "umo~Dyzc{WpFoAvFcDrD}@hDgG|F}FrA?bCrChANhEmDpGj@`IoB~[s@AuVzFcL`Ay@pDo@vFkCbEK~I{CvAyErGwDJaBmBiEj@_HdBuFHiH~BiC~Ho@hAuA]uMWgBoCeGP_B`AmAjFY|Cv@zBBl@}Ce@wDsFwGQmIgDcH@}FaAkL{DgS?mEaC_CoCwJGmBfBsB~GD`Am@FaGq@}DdAsAHmAwAuFhEkDx@cCxC}C`Iw@`Ak@RgAMwDlBqCZ}As@_CqJ}FkBmBoBgEOgDiAQo@y@s@kGeDaB{AoBmB_@i@q@IaDsAqGCyOcCeDc@eLqEiOFy@nFyK`@yBw@}@}CDc@YXuG[oCuFiFuBoM}FoC]iALwFq@oF}CqEcAyE_@g@mB_@{E|BcBu@{BaG{E{IiAiFcE{DiEuJyE_FDeD`BeHQiBk^gJk@iASeEs@kAmJ_D",
+   "pointCount": 119,
+   "start": [
+    31.377707,
+    130.441567
+   ],
+   "end": [
+    31.37445,
+    130.543385
+   ]
+  },
+  {
+   "id": "鹿児島県:95",
+   "name": "名瀬竜郷線",
+   "ref": "81",
+   "highway": "primary",
+   "lengthKm": 14.92,
+   "curviness": 300.5,
+   "flow": 21.3,
+   "turnCount": 211,
+   "score": 60.6,
+   "polyline": "g_slDmesuWeEzHc@bL}@dHpDdGpBbBzOmCxB{A~AY~@wCBcFXq@r@[hDn@vAMz@s@vByGhJsEzASrBx@xAwAj@CdCrAfD]hAxAjBXp@c@j@kB`CMdBaCbB}@lCAfBd@fDnF~BaAnEz@jC}@zBdCvBJjEw@d@aARcE^c@dDg@jCkBt@EvCbAfL~@pC~AdFzA~C~BnFzAtBtClC^bChBpCz@fCrFbA^zCA|Ap@fDnFc@lEeDfDUbBdA|AtCBjAl@`BjGAnBcBjEs@`GNbAvCpDpAfDF~A_ApBEdAvCbEkApMZxDaDdHJrAbAj@zGo@bAq@RgAiAaEj@cEx@g@bCI~@_Ar@sDWqB^aAt@UfBx@r@ChCcCJoAkAiE~Q_OfJ{LnDmLtBc@lIbA_AtGuFbKsA|EoDfb@nFdPN|Cw@~FTbEdBvIxCtH`CfCzF`A~BzCbB`AjDl@fIzCl^hOxV~GfKzKb@tBQvIdV]",
+   "pointCount": 127,
+   "start": [
+    28.446759,
+    129.537029
+   ],
+   "end": [
+    28.377001,
+    129.497079
+   ]
+  },
+  {
+   "id": "鹿児島県:96",
+   "name": "志柄宮ヶ原福山線",
+   "ref": "495",
+   "highway": "secondary",
+   "lengthKm": 5.13,
+   "curviness": 317.4,
+   "flow": 20.1,
+   "turnCount": 81,
+   "score": 60.6,
+   "polyline": "gi_`Ecvx}Wa@zLu@bEa@zGsFzLi@bIcB|CiB~FaAjAuKjFiIhIq@Ag@cAg@FH`G_EvA\\vCnGORr@[`AeEjBsDb@eBvA{Ep@iA`CcSn@iD`EuDhObAfG{FpRwArAeItByCtCEpN{AvFZ|BvBzF_AtM",
+   "pointCount": 38,
+   "start": [
+    31.622764,
+    130.876018
+   ],
+   "end": [
+    31.642614,
+    130.839532
+   ]
+  },
+  {
+   "id": "鹿児島県:97",
+   "name": "薩摩祁答院線",
+   "ref": "396",
+   "highway": "secondary",
+   "lengthKm": 5.67,
+   "curviness": 302.8,
+   "flow": 20.7,
+   "turnCount": 83,
+   "score": 60.3,
+   "polyline": "umfaE{qn{WqDaFm@yBYsEsAmCuAm@cAeC{A}AeBiFiCXcKcB_C\\gCS_@e@Y}CuCwHg@q@sDwAyCQiGf@sF[{BpAcDK}@{@m@{C_GeH_CQq@cBeAo@iTgIwC?}Du@aXUwTuHoEdBcHh@gDfDuCpAoDq@}BRsA]gE@yAtCwC^o@m@cCVyWkE",
+   "pointCount": 47,
+   "start": [
+    31.823154,
+    130.496464
+   ],
+   "end": [
+    31.86618,
+    130.511231
+   ]
+  },
+  {
+   "id": "鹿児島県:98",
+   "name": "郡元鹿児島港線(産業道路)",
+   "ref": "217",
+   "highway": "secondary",
+   "lengthKm": 4.5,
+   "curviness": 204.3,
+   "flow": 35.4,
+   "turnCount": 26,
+   "score": 60.2,
+   "polyline": "u}k_Egjt{WaH_EcRoHq[sQcIeGoEwDuQgUiSk[qFuE]DgZ_Oo\\gQ[VaRLKh@_KlE",
+   "pointCount": 16,
+   "start": [
+    31.523631,
+    130.525964
+   ],
+   "end": [
+    31.557224,
+    130.546845
+   ]
+  },
+  {
+   "id": "鹿児島県:99",
+   "name": "浦蒲生線",
+   "ref": "463",
+   "highway": "secondary",
+   "lengthKm": 10.22,
+   "curviness": 287.2,
+   "flow": 20.7,
+   "turnCount": 142,
+   "score": 60.2,
+   "polyline": "u~gaEqgz{W|BcC`Fi@xJwCtFaEpHmBhFoCbMcIdEkIdFsCr@EzBvA`AA~@c@bB_Cp@NhGvIv@`@jBI`D}ClF}AVzFj@|ArJfI|Lt@|GcBjCcHbEkEIgAoA}BTmBl@mA~DeDCsEeAgIB}CfA_EaCkA[wBhCeE~@aExBiAB}Bj@c@rCSzCj@d@pEjCxCnKg@l@[bB{DlDpAvFEpCtA|BjEtDlCtEoApE{EzAAhKbHtFrFdGdIzB|@bNNtGp@nGa@dWv@hCk@|NkIvAT~E|CvCM`ImKjB}@~Ke@jFj@tEeBfJsAr@xK",
+   "pointCount": 79,
+   "start": [
+    31.830987,
+    130.556251
+   ],
+   "end": [
+    31.762736,
+    130.570025
+   ]
+  },
+  {
+   "id": "鹿児島県:100",
+   "name": "鹿児島吉田線",
+   "ref": "16",
+   "highway": "primary",
+   "lengthKm": 6.57,
+   "curviness": 319.5,
+   "flow": 20.6,
+   "turnCount": 102,
+   "score": 60,
+   "polyline": "aca`Eud}{WbOTnNnD`DBjTcJtGuEzBYrBd@jAlA~GtUfBjBpACvBuA|@{BRmEhAmBlFC~AcAViAQeBiAcAmA?kA`A[nBNjBxAfBjBRdEk@vQzCmAg@gJa@aD_A_Fj@kBYyAgBWyBVcBnB}AbBJ|@z@X`AU|BgBpAyDOeA`@o@bAQpDcA`DuB~AgBHcAg@q@}AsF_U}B{BaCSyAZiH`FaSpIkCJqK_D",
+   "pointCount": 60,
+   "start": [
+    31.632006,
+    130.571145
+   ],
+   "end": [
+    31.628769,
+    130.57099
+   ]
+  },
+  {
+   "id": "鹿児島県:101",
+   "name": "志柄宮ヶ原福山線",
+   "ref": "495",
+   "highway": "secondary",
+   "lengthKm": 15.3,
+   "curviness": 271.4,
+   "flow": 20.9,
+   "turnCount": 199,
+   "score": 59.9,
+   "polyline": "mdw_Eauu~W`AfFvC|A`BbDhBTvGgAzGxEx@zBn@fO~AjDrH`K`FjCfHdObMjQrDzGvCfCpAzD~Hz@nKlG`BfETjDnIrLyAt@{GEwBnApD`SFhCnBjEJtDtBpCx@CpA_Av@BdBvBSlA_FdDB|@nBvCqCjFw@KeBiCiAp@b@~EpCxDz@zBHxGi@`EpAvD{@hGVxEoA`MnAPjAyCpAT{@vHJvFc@|Bh@|QqB~HqIhSQpC~@vDJhCw@hEEnGu@zIeBhBiE~AmDbL[bCvCjKxEnL|HzBhAjGpC|ErD~Qt@nSzCpKVjDw@xGcDdI{@jElAlIiMxZiAjLqCdKaFlGeBdA{DjG_G~@iBfMBdF{FzOS`FkFfISrEk@r@yCl@{HjFgDpFoAEsDsCgApAwDvBeFlFiI`BiH@eDhAwAnDg@V",
+   "pointCount": 110,
+   "start": [
+    31.581027,
+    131.024331
+   ],
+   "end": [
+    31.581874,
+    130.907854
+   ]
+  },
+  {
+   "id": "鹿児島県:102",
+   "name": "日南志布志線",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 6.73,
+   "curviness": 310.5,
+   "flow": 20.9,
+   "turnCount": 100,
+   "score": 59.8,
+   "polyline": "snk_Ea{t_XZbFoD~@mBnFsAtKwBbBuGrJqBnFrGjM|AlB`Bv@HjDpDrL~B|@oAjGdAfFKvG|AjCtARh@pC~C~EDnAnCtHL`Ei@fDgB`DuKlH?hF|DjHlDpDdA~CjCq@dIFbLlH`@`DYbPg@nE`AdKr@bBtAp@vCwAfBDrEhID`Aw@lBwH~DuFpM{@nEjFzJrJ`CxBzGxAtB",
+   "pointCount": 52,
+   "start": [
+    31.521218,
+    131.184011
+   ],
+   "end": [
+    31.511152,
+    131.132691
+   ]
+  },
+  {
+   "id": "鹿児島県:103",
+   "name": "桜ヶ丘線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.05,
+   "curviness": 256,
+   "flow": 24.4,
+   "turnCount": 32,
+   "score": 59.8,
+   "polyline": "emp_Eits{WpHrH{MxSsC|Cqg@n]wFzAuQWqQmDgBhBQfCkBbC{@[@aDyBw@oBj@Qx@^jBeAx@",
+   "pointCount": 18,
+   "start": [
+    31.54659,
+    130.52245
+   ],
+   "end": [
+    31.564756,
+    130.510461
+   ]
+  },
+  {
+   "id": "鹿児島県:104",
+   "name": "徳重横井鹿児島線",
+   "ref": "206",
+   "highway": "secondary",
+   "lengthKm": 5.94,
+   "curviness": 298.2,
+   "flow": 20.4,
+   "turnCount": 87,
+   "score": 59.8,
+   "polyline": "gu~_Ekyj{WiCoE}CaDcJsBuHcEiByBwJgEoAwA_@kBPkFy@kJnAeFVcMfAcDAgBgB}FoAuAu@sB_B_BwCkAYmE{GeI|CaHjAcAtR{LbCcAjF{@hDeBzAgDvAu@hBoEvBR~AlBdH\\?~Ak@~@oDmBaA@uArDEnBt@bAvCvAv@OrHaMhAyDv@uFlB_E~@qHlFmKpDoEvBuG",
+   "pointCount": 51,
+   "start": [
+    31.619556,
+    130.477183
+   ],
+   "end": [
+    31.614502,
+    130.512144
+   ]
+  },
+  {
+   "id": "鹿児島県:105",
+   "name": "山間役勝線",
+   "ref": "609",
+   "highway": "secondary",
+   "lengthKm": 3.01,
+   "curviness": 311.9,
+   "flow": 20.4,
+   "turnCount": 46,
+   "score": 59.7,
+   "polyline": "}pmkD}eytWzKm@vAo@XkPe@aDd@m@~Dz@nD~FfDv@nFs@tA}D~CmBtAoExDwHw@kDBkAdBwArAyCnC}BdEcObFiGRqGbEcIcBaG",
+   "pointCount": 24,
+   "start": [
+    28.255026,
+    129.403989
+   ],
+   "end": [
+    28.241829,
+    129.42205
+   ]
+  },
+  {
+   "id": "鹿児島県:106",
+   "name": "内之浦佐多線",
+   "ref": "74",
+   "highway": "primary",
+   "lengthKm": 10.59,
+   "curviness": 307.6,
+   "flow": 20.4,
+   "turnCount": 160,
+   "score": 59.7,
+   "polyline": "}pw|Ditt|WkAwFtCmPQwCb@kAlAcAnDuBfEiAKqUl@uAjF}EdA{Cy@kCtB{AX}@GwA_DwDr@}BkCqA@wCcAYeBZ_@c@dFcBxBbCo@aDaAk@vC_BTgAgEb@_EjCsDd@kAFeF}AaEr@aPuE{DuEwOaJmIoOgI}F_EaByAgB}@gEUaK_AmD{E{AaByE}HkFyC}D]wABiDoC}FeDkSK_Cb@aBvKsPfFsEVqA_@}JgD{JEoM}EgKsAmJT}HOeMtAqI?wCuDaNoEsJp@}Ra@uS`AoOuAeLrDiS",
+   "pointCount": 74,
+   "start": [
+    31.091508,
+    130.691412
+   ],
+   "end": [
+    31.109396,
+    130.771974
+   ]
+  },
+  {
+   "id": "鹿児島県:107",
+   "name": "木場吉松えびの線",
+   "ref": "102",
+   "highway": "secondary",
+   "lengthKm": 8.01,
+   "curviness": 266.6,
+   "flow": 22,
+   "turnCount": 97,
+   "score": 59.7,
+   "polyline": "snkbEuh~|WzJy@vRc@xEs@xKl@vDdDnVElXsFjGxFvHdEZr@jCo@hOiH`BnAf\\rG|ACr@~@l@tD|BfC|@pCMvAXXvQyBfDTtDfBhD~EzF~FGtC_FjIe@bBZdCbAfAxAJvH{@InCZb@fB_AlBjAxASbAr@x@e@rAsC|ABdCyBtBj@vIIxCb@fBn@vC`DjFfDnKxNpRrFnTiDdI}BhCoD",
+   "pointCount": 55,
+   "start": [
+    32.012739,
+    130.740747
+   ],
+   "end": [
+    31.954079,
+    130.726579
+   ]
+  },
+  {
+   "id": "鹿児島県:108",
+   "name": "小浦黒瀬港線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.64,
+   "curviness": 295.8,
+   "flow": 21.1,
+   "turnCount": 51,
+   "score": 59.6,
+   "polyline": "goo~DcboyW{J]uCRqB]{Cd@m@WiCiE}KyAkBo@u@}@kC_@}BgHkCuA_CQy@iAWwEgBgBiBwEiH_BwJaHiC{CcFqDuHqB{@_EyGcGuBmFeHaDeFlAuAAuK}Ai@yA",
+   "pointCount": 31,
+   "start": [
+    31.37796,
+    130.171378
+   ],
+   "end": [
+    31.404233,
+    130.187701
+   ]
+  },
+  {
+   "id": "鹿児島県:109",
+   "name": "桑之浦里港線",
+   "ref": "348",
+   "highway": "secondary",
+   "lengthKm": 16.28,
+   "curviness": 285.7,
+   "flow": 19.4,
+   "turnCount": 240,
+   "score": 59.6,
+   "polyline": "mnnaEoenwWiEv@qAOmKkM_DqAyGkAg@yAMaE_DmHeEmR\\eHU{B}GqIoAuH}DaG{CiHaBg@gFTuAoBW{DRwDs@_DNoAjEkBjByCbB}@|Ei@zCjAlAOl@oCYwGzBkDb@oCzA}AhF_@bBsBbD_@rAaBb@uBdCqAnIxOxB~A~IZ`EbBzNfAxA}@v@eFnBc@dFbCjGzH|HnEtEJxKhCzJuF`ILvPrG`HhBbIh@bJiAfAh@hF`GxBj@xD]tBgGdAyAdAmFdEcF|E}BbG{@SgBkBiEwF`AmAi@_@{@kBgV|A}F?oLbAaGMgG}DcJ}AkK{BwCgAaDuG}HmBe@wCTcA}@BsAt@cApFd@z@cAM_B}ByBk@kDhAcI_BaC{@iIyE_FHkAnBoEMkBsE}KkDiCg@qEyD}HJcAlC}ChAgD]gEeBuAgAiCMyAb@_BpC{B~@J~BjBpCd@pAUf@yAcBkI{F{IQoO^{F{@oG_BiF]cPmBsEt@_J`KKzDq@`IsE",
+   "pointCount": 131,
+   "start": [
+    31.86423,
+    129.839117
+   ],
+   "end": [
+    31.8392,
+    129.920482
+   ]
+  },
+  {
+   "id": "鹿児島県:110",
+   "name": "戸口大勝線",
+   "ref": "611",
+   "highway": "secondary",
+   "lengthKm": 3.54,
+   "curviness": 284.7,
+   "flow": 21.4,
+   "turnCount": 47,
+   "score": 59.2,
+   "polyline": "urblDmoyuWaB_D}E}Fx@{DwAiEO}Ev@qBOcHa@qBsBw@}CrAoB{KoFySgBqB{AIyDtA{AH}F_AaR_FuQs@{BaAgHeHyExAiH_CsF~AsAhA",
+   "pointCount": 26,
+   "start": [
+    28.362834,
+    129.569346
+   ],
+   "end": [
+    28.383762,
+    129.585309
+   ]
+  },
+  {
+   "id": "鹿児島県:111",
+   "name": "国道448号",
+   "ref": "448",
+   "highway": "trunk",
+   "lengthKm": 29.98,
+   "curviness": 320.9,
+   "flow": 21.1,
+   "turnCount": 457,
+   "score": 59.2,
+   "polyline": "iil~Dwas~WnL|JnTbAqBaWyAwIP{HvAqH?aEbEeGdEcNnBkITiFhAsKbA}DRkEjDiOjCkEnAaFaAcQlA_Dn@eFnBwD|A}@\\gDfBeBB_EpA{FfByAbA}B`BoATsB~AqADo@}@mChEkGx@eIx@_BfCo@nA{ACsDfAwDhAsAtDo@d@i@QkIs@mFZyDx@UfBhDbBk@rGqHZoGlE_Az@aDxDcEu@wDdBaFs@mD|BaCHq@o@k@oDSAiGwDyAk@kA|DwOfAKvCl@n@k@}AkEbBoHtAuKi@cHjAiCbC^bAe@UaHTsBbDwDtPeJ~CmDZcSlCySaCiHuDsE@qBp@iCv@{AfD}@t@w@h@{CToGhDoBd@cG|Fu@hCsD`F{A|DcDzAeCbEoBtC|@pB~BvBzGvDL|DjApDxF\\pK`ElIj@^x@OpBmDhAYl@^\\jDx@bAnAU~AcBfB?dMhFzAjCbP`RbC`Bz@`E|CnExDpA|C|BbAGbIgEvBUvHtC~GvAlBxDvIlD~EdJd@pCzCdIdClDnCjLhFtLC`B{@v@Gp@x@tBr@dAdIrCfJhIfFv@zF{A`G^~NeDvMoKhReLzK_P|CvCtEnAbDn@hESzF`F|A^bBa@lCoJ`AQbBp@lBzBbAvC|Rd[tAtAxA`@hDYpBkBt@_E_@}Ht@eB~B{@lGq@nBPbEjE`Jl@rCvEhCp@pH_@|BmBlCsE~AeAlBSxEnAbAfDGtDbBxCZzDvBpDfBxNv@rAdCFtCgBzFZ|DwCbBGbLlGvL~D|BrDtD\\r@rBnDbDtEbA|@fE|@`Bj@tEfFlCz@hAz@dC`BvKtCbEeBfBZ|BnC~Cx@OnAsA~BN`@dFfD|AhApDwAdHRbF[tEx@vBUhCq@jAcB~@iCiAkDc@mHpEaAlC|@pL`GnDt@dEd@j@lEnBdCzPtFzM_@xJmCzE",
+   "pointCount": 242,
+   "start": [
+    31.361648,
+    131.010998
+   ],
+   "end": [
+    31.227935,
+    131.032104
+   ]
+  },
+  {
+   "id": "鹿児島県:112",
+   "name": "池田根占線",
+   "ref": "562",
+   "highway": "secondary",
+   "lengthKm": 12.28,
+   "curviness": 288.3,
+   "flow": 19.3,
+   "turnCount": 184,
+   "score": 59.2,
+   "polyline": "ajo}Duae}WiPsABkSyDgMu@q@{Hw@}DkBwC{CrA{TTsPtAaPvAaI~B_EgDyFg@mFqEgEKuA^cCw@yBqAe@uEh@eBnBk@S~@eBbFuCnBgCLwJfCsFoB_FbAgEc@oGuAoDaEqGm@sIsBuEr@qHg@_GhB{KGeGfAoF[yFJaFo@mCgFmDsAuCI}CfC_QAoCwGsRyB}BaBiEsCuD{@qCWcBrAyIwAwMm@_AgFuB}@yEy@u@}KwD}EfAs@WGiCl@aFa@aDlBeDbB{KjAwDa@mHTyL`CaHQ{F^eI~AuEiAqEjAcFu@uByAkA_ELeH_BaGoEcBeDcAZ_CxCwBKo@g@KaD|GkIfBoA`@qBGy@mCqERe[{@y@",
+   "pointCount": 95,
+   "start": [
+    31.213288,
+    130.775466
+   ],
+   "end": [
+    31.235339,
+    130.873477
+   ]
+  },
+  {
+   "id": "鹿児島県:113",
+   "name": "川辺広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 7.83,
+   "curviness": 285.3,
+   "flow": 19.9,
+   "turnCount": 112,
+   "score": 59,
+   "polyline": "ast~D}mdzWp@nKb@dBjMrIrBfHUhH`@xC~ArD|DtDtJxScAj_@rHvT|BzN[xDsBtCwLtGyDL}@f@WvFn@lAdDrARjAQfGxCtCxB^hKGlCtB|BXpA_@~AoDhAk@tB~@lAzFp@p@lBGdBwAjBXj@dADvAaBtD\\nFr@hBhBjATrBs@jA{Fn@k@~@?pChGpJzKtTtFxDdAvAhApJ~GtFPn@ItCiAfAsKrD[rAb@nCp@v@~@J|IsAtAfAThB",
+   "pointCount": 65,
+   "start": [
+    31.404171,
+    130.280787
+   ],
+   "end": [
+    31.383687,
+    130.227568
+   ]
+  },
+  {
+   "id": "鹿児島県:114",
+   "name": "塚脇財部線",
+   "ref": "482",
+   "highway": "secondary",
+   "lengthKm": 10.26,
+   "curviness": 266,
+   "flow": 20.8,
+   "turnCount": 131,
+   "score": 59,
+   "polyline": "}{n`E}hf~WtFxPxBtDtSdPdI|BzApAn@xAdIr`@tCdGtB~BvOdLhD|@rFV~Ro@|Cl@dAt@vRbZdF`KHtCkB`L~CbTmAbI?fBdBjFpEhHcBv@_AjDy@n@mBaAiFFaB|KaDhEuAjDKl@nAzF]T{Ao@m@f@o@|D\\rCgDrPCbMkCvH_@~CbA`NzAPp@`AnAyAbASv@h@NjAaD`Em@bByBvAqA`DgEnEEhA`CvMi@pKgFrDiBvCeATqBe@o@v@DtCfCzHk@xDhBbNhE|DbD`QxCzAx@`BsArFgCvD[tB",
+   "pointCount": 75,
+   "start": [
+    31.702547,
+    130.945589
+   ],
+   "end": [
+    31.684765,
+    130.868013
+   ]
+  },
+  {
+   "id": "鹿児島県:115",
+   "name": "指宿スカイライン",
+   "ref": "17",
+   "highway": "primary",
+   "lengthKm": 29.2,
+   "curviness": 313.8,
+   "flow": 17.2,
+   "turnCount": 533,
+   "score": 58.8,
+   "polyline": "khm_E{`m{WjFwBjFu@pEkCjDh@xCnF`IjFxA|Bv@dDHfLx@hHhBbFxBvAbBLpBe@~FuGjGVlHkD`FVnGc@vF~BjGRnAjAXtB_EvPBbAh@dAx@XfAS~B_DvAo@lLQrA~@bBnElDfCDxGr@|ArBZvCsBrA@hCrCdCrA|AhCjA`@fEk@hBkC`D{@fAyCz@_@zAp@~@zDtAPlC}D|E_AjCqC`Bo@nNlBdIaCdCKhIrBtJ{CpEtB~A@dA{@nBmG`CwBzAe@xFvAlFy@bCv@v@zCcAjEA`Bf@jAbAd@bBY|BcF~BiAzJjCxBM~FyBdBI`Bf@jErDvCP|B_BpBmGbBiBdJ}ApFaGvAKbEhAfB]bA_B~@wFlCaCfBwDxAk@pDXzD_A|E~AnEGjAh@xCnDzBh@lEsAfGGjEgB`Fm@|GuDnHGhDyB~@Mz@b@XfAuA|DDrApEpCfBOfBcEvEQnCqD~B_@pIvDtGBvBh@dBtB|@zEtAd@fAq@vA{CrD{AnCaEtNgFxEA~DgCjEWxEyFzJqBhIRxEuA`H[`C{@lB_ClCaH`BkBjCiAfHiAxEgF~GeBZuBsBkE[cEr@wCtC}B|DYpEz@xBtA|FnGlIhCxKzIjCC~@_B?gBsD{DMeAXqEoBaFxB}HgB_G?aChBaCtG_AvCqB|@qB|Gm\\nBuAhCDlAx@vBnDtAp@dB_@fB{Ct@a@|@?rCpA~A?vAcAxBiDhFyBbCcFtEYfG{ClG|ApFw@~CnCjETvBrBzEq@tErCfH_A~EbBv@[rA{BlBa@fAl@vAtBlDBfBx@|@xA@rD`@~@pJbBpD]dEd@rF_DjFbA|F{AlB^dDrB|EK`DlCz@FfAq@vB_ExBI~@v@rA`D`Ep@z@z@n@rDlB|DqAbGX`DfDfFxB`GtE|DbDhG~At@|F\\~DzDhGjC~AfClAdFfAx@nALjGkBjC@zJdFzKhBlI|FzAFlSkCvAgAtEsH|EmCdEOzKrBbEOzDyBdCeF",
+   "pointCount": 261,
+   "start": [
+    31.530456,
+    130.48862
+   ],
+   "end": [
+    31.335124,
+    130.495087
+   ]
+  },
+  {
+   "id": "鹿児島県:116",
+   "name": "唐湊線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.68,
+   "curviness": 188.9,
+   "flow": 27.8,
+   "turnCount": 25,
+   "score": 58.8,
+   "polyline": "cqu_Eiew{WvBHd^eJbI_HzIyTjCqEvC_Cc@GcDdFkB|AcJ~TeKbIu\\xHwY_JsKk@",
+   "pointCount": 15,
+   "start": [
+    31.57282,
+    130.54053
+   ],
+   "end": [
+    31.578732,
+    130.542584
+   ]
+  },
+  {
+   "id": "鹿児島県:117",
+   "name": "坊津久木野線",
+   "ref": "269",
+   "highway": "secondary",
+   "lengthKm": 9.35,
+   "curviness": 289.6,
+   "flow": 18.9,
+   "turnCount": 143,
+   "score": 58.6,
+   "polyline": "sb}}DgczyWa@Rm@]{BoH[eDzDaQZuGy@gAeGkD}AeNgDaGuEiFuA}HcDqEGmEcAeJFiGyAeLM_GmAcEh@gEjCcFR_CwGsK}DyCcBeF_EmC}AyBIcAr@aEyCqG@wDa@aAmIkBwBXsCfCmAVuK{@gDoAwJgIiGwAwA}@yBMwH|HkD~MeC|A{@@gCcAeEvBkEq@iALoLpEoG~EoMiF_JhBaE_Cs@_CReAhBeCh@gG|B_DHcBo@yAuC}CNmEaAaCcBeAqB}G}IwNgGeCiB_ByAWaByB_Lv@{Aq@",
+   "pointCount": 75,
+   "start": [
+    31.283775,
+    130.227876
+   ],
+   "end": [
+    31.328008,
+    130.27448
+   ]
+  },
+  {
+   "id": "鹿児島県:118",
+   "name": "山崎川内線",
+   "ref": "394",
+   "highway": "secondary",
+   "lengthKm": 4.26,
+   "curviness": 297.6,
+   "flow": 19.5,
+   "turnCount": 65,
+   "score": 58.5,
+   "polyline": "aziaEoctzWmAyVkDSgDxA_CX{Ac@yAyF^yHqDaHwCsCQ_BqCuEUoDsA_EuCcGeD{@HeHaCo@iHaNiGuF|AcGUcJpF_GhAgD|BwDb@uNrEeH|@sEQeCsAuDkK_G_AiC",
+   "pointCount": 32,
+   "start": [
+    31.840491,
+    130.361037
+   ],
+   "end": [
+    31.850656,
+    130.39461
+   ]
+  },
+  {
+   "id": "鹿児島県:119",
+   "name": "田之頭吹上線",
+   "ref": "296",
+   "highway": "secondary",
+   "lengthKm": 9.83,
+   "curviness": 262.4,
+   "flow": 20.2,
+   "turnCount": 128,
+   "score": 58.1,
+   "polyline": "skk_E{xqzWgMrB}FkB\\sHOkBwCaHq@wFcCkEc@mEyD{FsCqNiFmPaEqEsAeKcIyLoCsLs@q@aFyAg@q@oF{Q}AeAaLQcGoBc@k@sAwHoK}FwBkDcKuKiAg@eHMgEwJBmCxA}CJ{AyCeJmAu@sHeA}DsEwEuBsHoFk@mAO_FwBaDsA}@gAmDS{@DuGbCkKnCwD`CcGfIeMKsBx@aDRcE_CmCIuHz@aYp@eEc@wH`B}DFaC~CiKDgCxAiGUuD^_@jAHzAmBdAsFlCq@Rc@EwE}A_AMm@\\qHUs@",
+   "pointCount": 76,
+   "start": [
+    31.520737,
+    130.3491
+   ],
+   "end": [
+    31.547751,
+    130.425315
+   ]
+  },
+  {
+   "id": "鹿児島県:120",
+   "name": "柿ノ木志布志線",
+   "ref": "499",
+   "highway": "secondary",
+   "lengthKm": 7.96,
+   "curviness": 273.9,
+   "flow": 19.1,
+   "turnCount": 114,
+   "score": 57.6,
+   "polyline": "yyt_Eyq__XcFiIg@gBZ}H@aMU_BeDwA}Fu@_M}DwEu@sM{HcBK_Ft@mBYeA{AqBeGqFoHKwB|BgFCsF|GkL`AsI}CiHeEcB{F}L[wBkBmBsDZqBWiBz@wIz@uAfBaBjEcD~BBb@nALErAyB`BqLbNmDtH}@Ko@uBkCoDaCoAuFdBeBtB}Ad@kLDmR_BeC~BkArD}@lAoGx@mErBmI~EqDtDuDOoBpB}@xDs@x@m[j@",
+   "pointCount": 61,
+   "start": [
+    31.569088,
+    131.075011
+   ],
+   "end": [
+    31.614836,
+    131.086811
+   ]
+  },
+  {
+   "id": "鹿児島県:121",
+   "name": "小山田谷山線",
+   "ref": "210",
+   "highway": "secondary",
+   "lengthKm": 4.84,
+   "curviness": 244,
+   "flow": 21.9,
+   "turnCount": 54,
+   "score": 57.4,
+   "polyline": "csm_Eyjp{WwC~KuHjJaMvG_MzEwGdFeN{@mOaCy@}@yBsIw@kAiBm@qFUaE}DqI{EoKcAeNDoMt@uJ_EaD\\wI`GmKv@xAo@lGM|J{FfEY`F~B",
+   "pointCount": 27,
+   "start": [
+    31.532184,
+    130.505571
+   ],
+   "end": [
+    31.558323,
+    130.504086
+   ]
+  },
+  {
+   "id": "鹿児島県:122",
+   "name": "市比野東郷線",
+   "ref": "335;394",
+   "highway": "secondary",
+   "lengthKm": 5.67,
+   "curviness": 258,
+   "flow": 20.6,
+   "turnCount": 71,
+   "score": 57.4,
+   "polyline": "oymaEwiozWfBoH|BeErHk]t@]dHYpByAl@}TxBoAzBoCdBW`Dp@rCqAx@w@vCoJ|CkAMwAoFmEKgA^cA`Si@tR}FnNkNjBo@zEOp@e@d@iDhAeBQ}EnXuCjDBfJlBfE_@hDqDfGiNbG{BtIyFj@D",
+   "pointCount": 38,
+   "start": [
+    31.860875,
+    130.336442
+   ],
+   "end": [
+    31.827346,
+    130.366563
+   ]
+  },
+  {
+   "id": "鹿児島県:123",
+   "name": "十三谷重富線",
+   "ref": "446",
+   "highway": "secondary",
+   "lengthKm": 9.92,
+   "curviness": 270.9,
+   "flow": 18.7,
+   "turnCount": 144,
+   "score": 57.3,
+   "polyline": "apaaE}~b|WnCl@lDnE`D`KpDTnC|@n@rE`@\\~BRtDg@vCp@b@Cz@eExDuFhAH|DlC|AD`C}@dCgC?aAk@sAb@s@~BZ|BrAnKp@nFdE`CC`CnAfCKrEuAtEg@lDJpQcBfCLrDwBrJFzBu@jCuBhNKbOiEf]mHdVhEhDIbIoBpGcEl@eA|@sEtA_Az`@oJhDYbDd@hJxDxDaCvKe@xCy@bMgM|BuExBaA`I|BdAYhBsBlBl@XdBe@dBqDjDmCzEJj@zBjBtHeC`KTjJyAjDLjCmBvF_BlBE",
+   "pointCount": 75,
+   "start": [
+    31.797928,
+    130.600953
+   ],
+   "end": [
+    31.724303,
+    130.608382
+   ]
+  },
+  {
+   "id": "鹿児島県:124",
+   "name": "阿多川辺線",
+   "ref": "297",
+   "highway": "secondary",
+   "lengthKm": 8.69,
+   "curviness": 253.6,
+   "flow": 19.9,
+   "turnCount": 111,
+   "score": 57.1,
+   "polyline": "u{z~DqhozWjOcBd@WbAmC`HdC~@_EnAyAnFrAzEXvAeEvGmFpZaMnFcDtGkSzOuMtDiElBoDnCyJ?}Da@yBcBmCoAs@c@mA~BoGDwAaCwH[gMoA_EmCuD_@{AGsEgAy@OuEv@gDrAiBbIeFdBmBr@_CpA{LhImN|BiAbHg@fAg@lEuFpEmBzBwGpEgA|Cb@d@]x@aDhCaAh@HxArBpHb@lDc@fBkA~DE`Bm@vAwD[wRl@sCjBsBvLqFxBUvDTfAoJhCiH",
+   "pointCount": 67,
+   "start": [
+    31.436272,
+    130.336249
+   ],
+   "end": [
+    31.393862,
+    130.389494
+   ]
+  },
+  {
+   "id": "鹿児島県:125",
+   "name": "瀬上里線",
+   "ref": "352",
+   "highway": "secondary",
+   "lengthKm": 6.89,
+   "curviness": 284.2,
+   "flow": 18.1,
+   "turnCount": 108,
+   "score": 57.1,
+   "polyline": "i`oaE_oswW|HaIvD_B`D^`AQlNuLlFrAlCSpAm@Xu@LgJp@iClAeBrEsBf@{@GgBaBaCHwBlJkFfBkGvA[|@VhGdKpANzAw@b@eCW_CyD}Ok@kDEoDhAsBrELnAg@`@aAj@}Ii@cCeC{CoAwDyBmA}DgF_@aCRiHd@{@|@UdLrFhPCnC|@bB]dEoKbAiJ{GqUpFaKjEuTpEmH|DkBlA}CBiA",
+   "pointCount": 57,
+   "start": [
+    31.867095,
+    129.86624
+   ],
+   "end": [
+    31.84239,
+    129.906749
+   ]
+  },
+  {
+   "id": "鹿児島県:126",
+   "name": "新種子島空港線",
+   "ref": "583",
+   "highway": "secondary",
+   "lengthKm": 4.51,
+   "curviness": 275.5,
+   "flow": 19.1,
+   "turnCount": 65,
+   "score": 56.9,
+   "polyline": "c|zyDeym~WhAzOzAnDjIzC`HnIvF`EpFtBzBbDpFl@xB`Bj@tBHhCs@p@mBTo@jAZbBzChEu@zEnApAxAhIjGfHhA`HrB|Aj@tAfBnLBxBqCpVZt@t@VpEm@|@Lr@dA@pAwIvQg@b@}GrAyBrBo@jC]pI",
+   "pointCount": 39,
+   "start": [
+    30.617135,
+    130.984031
+   ],
+   "end": [
+    30.607581,
+    130.950266
+   ]
+  },
+  {
+   "id": "鹿児島県:127",
+   "name": "辺塚根占線",
+   "ref": "563",
+   "highway": "secondary",
+   "lengthKm": 7.54,
+   "curviness": 266.8,
+   "flow": 18.8,
+   "turnCount": 107,
+   "score": 56.7,
+   "polyline": "mni}D{bp}WSjA_IhOSzE_E`FElAdApEWxDmCzLkDhGD|Dp@vE`FlVw@bDaCfAOpBjDjAlAvBM`AqA|@qKtCcC|C_FjJuGxWzBbHgAv@}C_@eAPi@j@oBrGu@r@{CnA{AIkCfAgA~BPfJiAhDsEjDmHbJoDpCgBvEcI|JyCbBmFhF{KnEuBrB_@nBVhDnGjENx@YjAuB`AqC|EqBbAyGn@oE}@{HbEiGq@eCzV",
+   "pointCount": 59,
+   "start": [
+    31.183266,
+    130.831983
+   ],
+   "end": [
+    31.212762,
+    130.777819
+   ]
+  },
+  {
+   "id": "鹿児島県:128",
+   "name": "打木谷白沢津線",
+   "ref": "265",
+   "highway": "secondary",
+   "lengthKm": 3.8,
+   "curviness": 291.2,
+   "flow": 18.1,
+   "turnCount": 61,
+   "score": 56.7,
+   "polyline": "a|`~DwzpzW_RkFqLoNq@CeGbDkFvAeG[aEsEeESyDgBiABkA|Ac@vIyDpCoDnHyGvGuExAeDBgFdC{@GgA_BaBCc@^}@xDiFzE{GjBuFLsFnC}A`CW`G",
+   "pointCount": 30,
+   "start": [
+    31.303206,
+    130.344276
+   ],
+   "end": [
+    31.329841,
+    130.336596
+   ]
+  },
+  {
+   "id": "鹿児島県:129",
+   "name": "神之川内之浦線",
+   "ref": "561",
+   "highway": "secondary",
+   "lengthKm": 7.3,
+   "curviness": 280.3,
+   "flow": 17.8,
+   "turnCount": 115,
+   "score": 56.7,
+   "polyline": "{}y}Delk}WhByGvCuC|BQ~FjBxAm@rCgG~DsDrCyJ`EcJ|EsPGqBqBkDK{A~@sFpBeFHeBkC{J^uAzB}CTgCYkB_AgAqIs@_BgBiBo@cHaFmGeCgCgC}Dg@kAuEqBiEqEcDm@mH}AoCAm@nAyCfKeCjOyKrDm@dECpD`BvBkAvAuBpCeI[oJRwF\\m@dBk@IcFdCgCj@uCzDaGzAaFG_BaDmMO{P\\gAvBoBTkFvCeDT{B",
+   "pointCount": 62,
+   "start": [
+    31.26766,
+    130.807871
+   ],
+   "end": [
+    31.256139,
+    130.860617
+   ]
+  },
+  {
+   "id": "鹿児島県:130",
+   "name": "松薗加世田線",
+   "ref": "275",
+   "highway": "secondary",
+   "lengthKm": 7.63,
+   "curviness": 265.4,
+   "flow": 18.6,
+   "turnCount": 109,
+   "score": 56.5,
+   "polyline": "mhp~D}njzWhH{BlSpGpEy@~HfJhJfBjDCbLwA`EkB`CoDnD}BhEaH`F{CfGK~EcDvJcApB^dCvAnAOf@]~CoHfDe@nGgD~D}DpCkFjAy@nJhBbBqA|@?fCrDvM~Dx@vChDtChFJAi@}Bs@q@{@{@yEBsC{AkHRoC|D}OnAcLxCwPi@y@kHyDgD{MkFcGCaJ`@{AlE_DrEq@zEcJdB{Fy@yBOoD",
+   "pointCount": 56,
+   "start": [
+    31.381994,
+    130.311668
+   ],
+   "end": [
+    31.345597,
+    130.341082
+   ]
+  },
+  {
+   "id": "鹿児島県:131",
+   "name": "山田湯之元停車場線",
+   "ref": "309",
+   "highway": "secondary",
+   "lengthKm": 6.19,
+   "curviness": 250.5,
+   "flow": 19.9,
+   "turnCount": 78,
+   "score": 56.4,
+   "polyline": "w_k`Eu`zzWF~Cj@zAhM|BpAnB@fCeBzH@fBbEbLDhLx@~F_@lDkC`F?n@Nx@`KjOhAvFJ|IoAhFbCpFeAnGjCjGOrJt@`Eb@hRxDhMVbMbDlOP|KgAvCFtDpAfDnDbB\\|CS`DdA|O~@xBvBtBN`AP|Ey@hBoCfCOvCdAhBgErRlMpF",
+   "pointCount": 46,
+   "start": [
+    31.682678,
+    130.391306
+   ],
+   "end": [
+    31.67136,
+    130.335374
+   ]
+  },
+  {
+   "id": "鹿児島県:132",
+   "name": "毘沙門扇尾線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.6,
+   "curviness": 227.6,
+   "flow": 21.8,
+   "turnCount": 48,
+   "score": 56.2,
+   "polyline": "mqw_EweyzWeP|MaE~AKv@pBxI}A|BeEq@iINeP|Gy@nAxEtHHpDqDbQoH`GeANaEoAaUJiH}BqIhA}FSwGjEyGdIwF~E_K`GiE`AkGKmHx@r@I",
+   "pointCount": 28,
+   "start": [
+    31.583105,
+    130.387002
+   ],
+   "end": [
+    31.61261,
+    130.368252
+   ]
+  },
+  {
+   "id": "鹿児島県:133",
+   "name": "仙名伊集院線",
+   "ref": "304",
+   "highway": "secondary",
+   "lengthKm": 14.57,
+   "curviness": 255.7,
+   "flow": 17.7,
+   "turnCount": 211,
+   "score": 56,
+   "polyline": "k_b`E_`|zWsKNq@j@{AxE_AZiAQ{CkEyB{AoJsAo@y@u@kDcBaBgHFkAg@eCgMqIaAmB`@mErEoB~F{@|@cBDeDmBcBS}BbAqCfC{EEyDzB_GiBkIn@oKvFgAjBeBdGqG~DmBdCQnE|AnS[bCmGjFiFbHgDbH_EhAyHd@gCSwCgA}F}IqEiBeBLwGrCcHgCkIjBgSy@gCe@{ByA_C}Go@o@qPcLeHq@uGnEgHvA_AIqCiEeDrAwAKcB_AaCuGs@q@aB[gFv@_FiHiPwIgMiC{@_DyA_AcEh@cBxEqBdAeD\\aJ}@mDRmCzEmC`BgB~GuDp@wCrBeBE}UhFyBhDqBNcBi@uH_LeF}ByAkHqHkEyB@}@{BaAo@qGaAkAkHkFyGgDiJmKsGyMiNQwFm@iDIsLm@{ByBQkMnB",
+   "pointCount": 108,
+   "start": [
+    31.636541,
+    130.401438
+   ],
+   "end": [
+    31.735678,
+    130.41358
+   ]
+  },
+  {
+   "id": "鹿児島県:134",
+   "name": "豊後迫隼人線",
+   "ref": "475",
+   "highway": "secondary",
+   "lengthKm": 9.81,
+   "curviness": 252.5,
+   "flow": 18.3,
+   "turnCount": 135,
+   "score": 55.8,
+   "polyline": "kfdaEogm}WBhFsBhEcBxIeBfAkDwBaExEcEtCa@~@iAbLsF|HsBdFUpCrCbInCnE~AYzBcEh@O`@d@JtGsAnF\\dE]dEXt@bAJ|LgBzCyCjBu@tIUhBpAfFtQfA|IfFzIn@rHlFbFnApDQbDyArBmNlDKjEtE|FtNxInFnA~AjBxBtF`@zD{AlM?rAfArDtCvC~CF|Go@bFfBjB|AjChFhCbArHnInLbI~HZbElC|F_ApDhBtEAfOnGff@fOxAfAhA`DlDlE|F|M",
+   "pointCount": 69,
+   "start": [
+    31.81174,
+    130.817364
+   ],
+   "end": [
+    31.774951,
+    130.761622
+   ]
+  },
+  {
+   "id": "鹿児島県:135",
+   "name": "塗木大隅線",
+   "ref": "110",
+   "highway": "secondary",
+   "lengthKm": 14.78,
+   "curviness": 238.8,
+   "flow": 18.5,
+   "turnCount": 191,
+   "score": 55.7,
+   "polyline": "ynr_Eiek_XjAf@dB{@pGWjDgAjAlIhCtAFt@c@n@mC\\sAhAYpFw@tBsD~@uAaAaGk@}A`FyFbIt@nWx@hCHvHv@tCaArFu@|AG~Ab@bFdDnEtAnDKfFz@~CXxD]xDqB~FqBhDTbEkBnEUxHjBpGC|Eh@xDM`Cu@~BgDrF{@pKwElHqBzKIbETr@sFxGgHlRk@hECdP_FrJy@tF_EdFe@dDeBvD?nH]pAeE`DmMdQkNbNeP~MaCbDLdEs@lEr@tLsApFPzKoD`LWvCoBtDOzCoErNZdE`CbFAlH`AnFT`JpArFjBdBdBtGmApGxD~N`@`EVpFm@pCvBlIE~Ks@~@yDtAqMpBwA`BeHzWJxHk@rEuBjH}@~GgEjL^~JkCbIy@tLhApOzBbEnBlT",
+   "pointCount": 105,
+   "start": [
+    31.557093,
+    131.134454
+   ],
+   "end": [
+    31.582207,
+    131.006463
+   ]
+  },
+  {
+   "id": "鹿児島県:136",
+   "name": "幸田栗野線",
+   "ref": "443",
+   "highway": "secondary",
+   "lengthKm": 4.2,
+   "curviness": 259.4,
+   "flow": 19.1,
+   "turnCount": 57,
+   "score": 55.7,
+   "polyline": "{e}aEihq|WuByDk@}BqCaD{@cF{GeHyB_FoFsCe@eGsBsDXmGoCwD_AoEaCiFsEyBiFkI~DkTTgIj@oDeAcDAyC{AiCu@cIwAkH~NoSf@_BKyYiCqINyB",
+   "pointCount": 29,
+   "start": [
+    31.939662,
+    130.674131
+   ],
+   "end": [
+    31.947439,
+    130.711625
+   ]
+  },
+  {
+   "id": "鹿児島県:137",
+   "name": "白川縦貫線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.57,
+   "curviness": 258.8,
+   "flow": 19.3,
+   "turnCount": 48,
+   "score": 55.6,
+   "polyline": "cbx~DowuzWy@{A{A{@yJQiA[uEcEu@wCgG}GoDwIuIwFeVwDsAkB{@oD}@mAiEg@aJcFsFYiDqCwCuE}@DmCjBuHeFeImAcBsDoAwFwD_C{ET",
+   "pointCount": 27,
+   "start": [
+    31.421941,
+    130.369363
+   ],
+   "end": [
+    31.44767,
+    130.386116
+   ]
+  },
+  {
+   "id": "鹿児島県:138",
+   "name": "高隈内ヶ迫線",
+   "ref": "551",
+   "highway": "secondary",
+   "lengthKm": 3.83,
+   "curviness": 281,
+   "flow": 17.6,
+   "turnCount": 61,
+   "score": 55.6,
+   "polyline": "qtg_Esu~}WfK`R~GzErCnFvDtBrBvBdALhG}@nLlAhDsBvAZb@z@HpCyB~FErC^zAlDlEr@xFi@vAqGtEmBlDJrGXnAzAbBvGp@jBdGzGjGbFvBt@~EGhBs@bAoIbDkAfC",
+   "pointCount": 33,
+   "start": [
+    31.501694,
+    130.906656
+   ],
+   "end": [
+    31.489112,
+    130.882974
+   ]
+  },
+  {
+   "id": "鹿児島県:139",
+   "name": "志柄宮ヶ原福山線",
+   "ref": "495",
+   "highway": "secondary",
+   "lengthKm": 5.07,
+   "curviness": 250.9,
+   "flow": 19.3,
+   "turnCount": 66,
+   "score": 55.6,
+   "polyline": "opw_Ech_~WmFVaEvEuIbBsGTeDtCcC@wFrEmFbCsC|F}HzByB?{@eBWkIdAeDcAiBs@YwAvBmCv@kCu@}ATgCzDwIiA_MvBkHa@eFhBmDzC{ElBqH~AuKa@uE|EgLf^s@`I{FhQOnG",
+   "pointCount": 35,
+   "start": [
+    31.582961,
+    130.909621
+   ],
+   "end": [
+    31.61567,
+    130.8912
+   ]
+  },
+  {
+   "id": "鹿児島県:140",
+   "name": "永吉入佐鹿児島線",
+   "ref": "35",
+   "highway": "primary",
+   "lengthKm": 28.03,
+   "curviness": 243.5,
+   "flow": 18.6,
+   "turnCount": 366,
+   "score": 55.5,
+   "polyline": "c~p_EogpzWkDwRkCgAeCqCuB_EcByF{C_DyCsHaGuBcBwAoD}J{G}HyFe@uBeBvByXEiFoGyPoAgJoDqPkAsK|@gRs@}BoC_Cs@aBq@qC_@}I_CuBeH^_DS}IeEiBb@sBxFqAp@{ToDoYi]iJCaKiF}@yHmE{KaPeO_AaBOeBfBoV_C_MZgO]oBoKiT_BUaEjAuIRy@oAdBuJSgDdBOxAxCbBB|@aAOcE}BkJpHsb@x@mAhU}G`G_GR}AhEkICeCmCyLw@eAsIeCgIXiK~BsJnJaC|AmIMeImA_FcGs@uEyFiEsAaEwAaMyBsGwD}D}BiK}FeGeBaGTsAfD}C|DdAbEsB~Fk@n@qA`AuM|LsQ|MuJlHmMbQiBdDw@pBmAn@}A@gDuAgDJeAjC_C~F}Bn\\c`@dBoHeBgGHgCjHsJzDqAn@eAnAgQfDkE|@mCLoCrCoDDcKrFoEfDwJlEqEjAoEdD_FhAy@hCk@t@eBBcDsAyBcCmBoDHcA}Ah@yCtDiEB}ExBqJVcIjDoHxDiPU}BaEqDeAsBqCmL?kAtLs[fCaA`NLdBqAh@qAb@uD]kCoBaCgGsBgDsJGwCfBqLtFoBdAsAPoKhC}FsFsFk@qBL_AnDuDbE_AL{@_@aEo@q@eDq@W_A?mFkByAyPkFqHvF{BJ_B{A[gFcA}AmAQgEv@yBCgIcCkD{E{@mFKcF\\yBxB_Dn@uB",
+   "pointCount": 186,
+   "start": [
+    31.549295,
+    130.341203
+   ],
+   "end": [
+    31.575186,
+    130.528264
+   ]
+  },
+  {
+   "id": "鹿児島県:141",
+   "name": "谷山知覧線",
+   "ref": "23",
+   "highway": "primary",
+   "lengthKm": 12.15,
+   "curviness": 258.4,
+   "flow": 18.8,
+   "turnCount": 167,
+   "score": 55.4,
+   "polyline": "cfz~Dq~p{WzVdFdAl@~CvEdA`@hI}@`Cl@tC~BdBVtAc@h@mBgCcHV_DvAiA~Hw@bB~A|Bv@bAlDvBvCZzDrDzB`AQ`@uDdCVpDmBzDpEn@BrA_Ap@JnB`GhGW~AjF`CrAd@dGl@dAvAKrEsDlE\\nAaDfCqCdC|AvDXxS`F`DjBdFlGzFdMlSbE`GOpKnL|DzAvDlElHbClElF|Ej@dCdBxCh@lKnEzAAnJwB`RhCxPhHxF|ElAjDJ`Ia@lH`@xG{Gn_@wBnRu@lAoFdBeEhKoEzByGbLYtM\\tHe@jE`CtTw@zFb@lJ}@`KpCvLcCnHTjE",
+   "pointCount": 83,
+   "start": [
+    31.432825,
+    130.508729
+   ],
+   "end": [
+    31.380868,
+    130.449247
+   ]
+  },
+  {
+   "id": "鹿児島県:142",
+   "name": "国道3号",
+   "ref": "3",
+   "highway": "trunk",
+   "lengthKm": 5.28,
+   "curviness": 202.1,
+   "flow": 44.5,
+   "turnCount": 24,
+   "score": 55.3,
+   "polyline": "y_}_Ekwu{WjSwPds@qWBY|JsEhNeIVJd\\_S_l@j]wJrE_@I}`@bOsPpH{StO",
+   "pointCount": 14,
+   "start": [
+    31.611014,
+    130.533182
+   ],
+   "end": [
+    31.611062,
+    130.533264
+   ]
+  },
+  {
+   "id": "鹿児島県:143",
+   "name": "名瀬瀬戸内線",
+   "ref": "79",
+   "highway": "primary",
+   "lengthKm": 12.9,
+   "curviness": 231.5,
+   "flow": 20.3,
+   "turnCount": 147,
+   "score": 55.2,
+   "polyline": "gkelDwkkuW@lPmQa@oHrE}@uBoJpFsDj@yAQuAkC{Au@gRdAkAwA]iEij@AB`SbDnd@s@pCoGbHqEpSQrGpDxh@@hD}@fFmIrRaBrJlA~Kv@v@|Cb@f@l@BfAs@dAqA`@aFA_Bi@cF{GqAB[fBd@~@hCbAjA`DtAxAbKf@jDfC~D`AdA`COpDPx@xFjC~BzDvExCdC`DdC~ArB~EvCbDnAxDjEjDfArCvBnCdAXdA_@dBqBvJgDzDeDx@AfEpA|HiC~@RpB`DnDpBdFbHn@vEk@hBkAv@aFdAeG|HkE|Ag@|@b@zBjCpAx@dAtAjHjCtCZdB_BdQmDpIqAzIgEbQ]rEDdGrBtK",
+   "pointCount": 90,
+   "start": [
+    28.377001,
+    129.497079
+   ],
+   "end": [
+    28.382379,
+    129.425793
+   ]
+  },
+  {
+   "id": "鹿児島県:144",
+   "name": "郡元鹿児島港線(産業道路)",
+   "ref": "217",
+   "highway": "secondary",
+   "lengthKm": 3.62,
+   "curviness": 162.9,
+   "flow": 25.6,
+   "turnCount": 23,
+   "score": 55.2,
+   "polyline": "cpr_Ewnx{Wv@@rIqDR\\|E_@N_@lJO|x@v`@zEnEhFxGbNdSrCnF|KfN~OlLvLrF",
+   "pointCount": 15,
+   "start": [
+    31.557305,
+    130.54716
+   ],
+   "end": [
+    31.530506,
+    130.530203
+   ]
+  },
+  {
+   "id": "鹿児島県:145",
+   "name": "鹿児島吉田線",
+   "ref": "16",
+   "highway": "primary",
+   "lengthKm": 3.09,
+   "curviness": 249.3,
+   "flow": 21.4,
+   "turnCount": 36,
+   "score": 55.2,
+   "polyline": "geg`Equ|{W{F]yE`CwAPuGwCiCz@iDxG_CzKe@j@iBZyCjP{PmDoIwHwBJoFtBeE`DR|D{@dGClGoBvFwBnDmEtCwE~@",
+   "pointCount": 23,
+   "start": [
+    31.663083,
+    130.568732
+   ],
+   "end": [
+    31.681755,
+    130.556155
+   ]
+  },
+  {
+   "id": "鹿児島県:146",
+   "name": "国道225号",
+   "ref": "225;270",
+   "highway": "trunk",
+   "lengthKm": 10.37,
+   "curviness": 218.9,
+   "flow": 25.5,
+   "turnCount": 89,
+   "score": 55.1,
+   "polyline": "wyn_Eozu{WgMoX}JaNmDeDaCmA}d@eKcU_K}IYeE}AuGyJwAuFaOmGmFeIyD{CyMeVmHmGsTqFyBeA_ABa@k@gDeAsQaA`L^pf@pLlHlGdOzXvBtBbGxI`KjDjBlAxEpKdClDnG`ClH^rV~JlXrG^OdI|AjCjAzOxSjRpb@",
+   "pointCount": 41,
+   "start": [
+    31.538356,
+    130.533684
+   ],
+   "end": [
+    31.537543,
+    130.532073
+   ]
+  },
+  {
+   "id": "鹿児島県:147",
+   "name": "布計山野線",
+   "ref": "421",
+   "highway": "secondary",
+   "lengthKm": 9.55,
+   "curviness": 223.1,
+   "flow": 19.7,
+   "turnCount": 108,
+   "score": 55.1,
+   "polyline": "wb}bEym|{WzAiCvDiXzF{IvByGiCcB_ATiOvPsKfE}LoAgKMoHuDsO~@}RhC_Qv@eN`DmCwCiEwBoIkKkJ}UVcIx@sG~AeGmC_ImByTgBuBqCY_BaDMwHw@{B_EoB{JmAeCuIcAeAwBWkEd@wBfCyGQ_JrE}AXyEYeEqBqLXoFoA}Cj@aC|BkA@oBw@sEuFoCuAcA`@u@tDoAj@oBBsBiBkB]}DWcG`@a@s@YuEiIqD{BKsI`C",
+   "pointCount": 63,
+   "start": [
+    32.103004,
+    130.567486
+   ],
+   "end": [
+    32.158492,
+    130.595478
+   ]
+  },
+  {
+   "id": "鹿児島県:148",
+   "name": "郷戸市来線",
+   "ref": "308",
+   "highway": "secondary",
+   "lengthKm": 13.34,
+   "curviness": 241.6,
+   "flow": 17.7,
+   "turnCount": 182,
+   "score": 55,
+   "polyline": "{fr`Ew_{zWaCnQ`@~@dE`BV~@MtHj@tG|AlClCpBXxGtDlEHlDmBfFIbBZpC~ArEhAtKc@bRcBnAcE`@UfAXlDzH|Hp@pDq@x@oH~BwAnBHbDv@hD~D`EjCjG_ChGmFxGA~AtC`ETjA{D`FMx@^|MShFbA|CrA|IvAr@vD@fB|CwBbX^hDzEjLSfBmAbA_AB{FcBwB@qDhBmBxBk@tBOfGj@~X`AvBnJzLzFjExCfGtDxEs@zGj@xB^lMjAtGoAvKdCdNjDpFpAAnEkBtBPvAtAPzBaBjDBdEfCpEf@|FvB`I~Mv\\~@|NmBtDOrBpGrYSbH_AlFlBpI`M`IdK?nOdBfCoAdCkF|A}AfDi@vBh@zHjFjDpG",
+   "pointCount": 98,
+   "start": [
+    31.719658,
+    130.396277
+   ],
+   "end": [
+    31.692615,
+    130.294558
+   ]
+  },
+  {
+   "id": "鹿児島県:149",
+   "name": "湯之元佐目野線",
+   "ref": "340",
+   "highway": "secondary",
+   "lengthKm": 3.44,
+   "curviness": 245.3,
+   "flow": 19.6,
+   "turnCount": 43,
+   "score": 55,
+   "polyline": "_|waEs_azWx@cBa@uBnBwAvAbA|BnGvHzDnIJvPrClDkAbA@dG~BnBzC|Jv@pGe@tOzC|CKdB}B~C{A`EsD`HyAvP_BpAJrG`DxFcA",
+   "pointCount": 25,
+   "start": [
+    31.912479,
+    130.263137
+   ],
+   "end": [
+    31.885216,
+    130.26176
+   ]
+  }
+ ]
+}

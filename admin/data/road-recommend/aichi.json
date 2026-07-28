@@ -1,0 +1,3166 @@
+{
+ "prefecture": "愛知県",
+ "romaji": "aichi",
+ "generation": 1,
+ "builtAt": "2026-07-27T22:39:58.787Z",
+ "weights": {
+  "curviness": 0.35,
+  "flow": 0.25,
+  "length": 0.15,
+  "classRank": 0.1,
+  "popularity": 0.15
+ },
+ "count": 150,
+ "segments": [
+  {
+   "id": "愛知県:0",
+   "name": "坂宇場津具設楽線",
+   "ref": "427",
+   "highway": "secondary",
+   "lengthKm": 13.01,
+   "curviness": 791.1,
+   "flow": 30.1,
+   "turnCount": 342,
+   "score": 83.8,
+   "polyline": "u~euEohufYvDUp@u@NgCkBmCDgBgAoE}DiIgFoC{AgCuDZa@c@_@}D^yE`AcE]mAeCo@_DhEeAFe@kAOeEuCsAsC`CwAXeBiAkB|CsCoAOoCs@s@iDrDo@?Is@^{A{Ca@qBgB@_Bh@sAGmBjAwA@gA_@aBcBCm@k@`A_GE{D`@}Bi@yDmAb@{@q@iAhEuANwA{@I{Bu@Sg@pAHxCUh@eE`EyBu@}@}BuCk@cAgD}Cn@a@eCaAn@iAg@Qm@VwAsCiAH_@|Cw@cCmB`DcAA{AhEoB`AgDjASv@mBn@kEuC[aBeDn@gKc@wAoB`@b@uD]o@wAnA}@[c@~@mBr@YhCqDdDYtAR~Fu@pBmHi@]sAtCgHDuEbA}BKgD|BeF|AiGkCy@wBCMy@\\mBj@_@ToC}B]qDaFiDdAaCsCq@QiD|AuAOaA_AiFj@wE}Ds@IoAZ_DzDo@NqFgAiDbAgFm@mAbBy@TeBkAwAwC{DWyBrAwEaD}Dm@kAjAuAyA_@?c@~@uAdGuBqBqEh@_@qB}@YgFRUzCcAXyJaFgN~@qKs@oAaAkEwLkFg@kGuCaHt@a@i@EmC[m@cARwBrBuCpF",
+   "pointCount": 160,
+   "start": [
+    35.097551,
+    137.575918
+   ],
+   "end": [
+    35.155061,
+    137.613796
+   ]
+  },
+  {
+   "id": "愛知県:1",
+   "name": "津具大嵐停車場線",
+   "ref": "426",
+   "highway": "secondary",
+   "lengthKm": 10.35,
+   "curviness": 639.6,
+   "flow": 28.4,
+   "turnCount": 233,
+   "score": 83.5,
+   "polyline": "urtuEej}fYwAeBsHkEoD{H{CeCqHaDqPm@mBy@gAgCaIeGu@uFeI_IaAsEeDkH_@}B_CaAZyB}B]gCqFeJp@l@eF}As@FuAg@{BcBgCm@gEoAaAs@{CoAkB`@SlDXt@c@@a@mHaMwDcDeGFcBoA?aA|@g@l@aBaAy@kARoDgAQa@b@k@SkAaEaBAa@r@g@I_AcBgAuBeFoBUCaHgDoEiCgGg@GgA~@mAvGy@MLqA]eGbCwDpBcB_@yC}ArBm@V_@UzDkMAoBl@WrBP|@a@t@gGd@zCZ?V_CvAwCy@y@?i@lEqAlAyBJgD^a@dBb@zI_C`AkDn@e@~ALpDmAfCf@fAs@|C{JdBaSz@}@d@eFjAwBLyBp@_ArFgC_@wCNgBvB_CdFyJaAcBmAJY[~CkJo@kH\\mBgA}Cf@cB`C[zCkFn@{G",
+   "pointCount": 115,
+   "start": [
+    35.172426,
+    137.617153
+   ],
+   "end": [
+    35.184455,
+    137.683008
+   ]
+  },
+  {
+   "id": "愛知県:2",
+   "name": "阿南東栄線",
+   "ref": "74",
+   "highway": "primary",
+   "lengthKm": 26.79,
+   "curviness": 715.7,
+   "flow": 29.8,
+   "turnCount": 644,
+   "score": 83.3,
+   "polyline": "e|vuEaqsgYt@xAZtEj@bBdC?n@{@zBh@bCWxA`AdBgFn@q@~AzAfAWbBzBlAwA`A`AfBa@tF|BbAMVzCtA]xBlEnAeAP_CvBp@tCIvD~AdAtEjAEv@qBn@EThChBrDtJ{@x@Rx@~AfDZjChCoAjACr@rAzApBM?dBzCtBaAtAOzBw@z@nB~Ik@RaD_@l@dD[rAiAh@E~@XXh@GdCsEdEiAb@aF~DgCzBsCbAYpGHxIiF|G[~GaC|@N~AvAp@EfAk@fCyDlC_BxDJxBlCzEArG~AN`A_AdCiBb@Uh@nBbDMl@m@NeCy@]`@|DtAxA`Cj@m@y@}Bb@gB{@mATo@fBk@~A~@nBoBxA|Bp@}Ab@Kp@AlA`A^qChBnBjCf@xAqE^KeBrHkEp@}EWgBvBQlARjAz@z@vCpBfB`@b@bIq@zKx@hJjIlJpDbHXlK_DlFuE~D~AlBtJwEx@{A`@}JlAu@sAcBGcBu@kCCwCyAy@yCiFv@sAbCe@Hs@eDgAUsAoA}@P_FbBTxA[`AcBdBJv@n@h@a@QaBaByBWwARaAg@_BLq@~@ErB`BxAEz@bApBuATl@ErDbCPTdBnDtChAXr@GxAmHl@OjGfKf@_@ZwBrAf@t@a@wAsIl@gEnH|ErAaDbDx@d@qFdCy@l@DjBnBz@~Dt@aA|A`@~G?~B{EtClAvAQrAiBh@r@]dCp@bCQrKZxBbEtApH|EnE|KNm@oCoJxCwITcCj@@NvDyAlBi@pE~FtAlBxInAvArBXBdBo@fCfBXl@pEzArDfBeAlA@t@qA|AMhB}GnDmDhASd@v@ChPh@tCdAYvEaIn@WtEr@~@[`DbD?rCm@pBcB|A{BtE{Bh@tC`DhBaChEj@L[q@kAF_@l@N`AlB~DcBpEhCB~CRPX{@EeCuEaDG{@j@IzBjA~BlDfBoAtLyBbBeBjDhAxE`D|DhA~Lv@xAbBrGvMxCfDKz@uB`DwEnCBl@hEoArB_BdFl@nGWnIeCxJj@fD{F|CkCn@VzC|EhF\\tBuBrB}Dz@OlEpGdEbBvCo@bCyDjBiArKcDjCpAfDzFrBb@hEmF~@iC\\sCh@m@nHt@D~D|DbPFjKZA@sAjAaEPwGnVxA",
+   "pointCount": 303,
+   "start": [
+    35.184188,
+    137.730892
+   ],
+   "end": [
+    35.06844,
+    137.700204
+   ]
+  },
+  {
+   "id": "愛知県:3",
+   "name": "坂宇場津具設楽線",
+   "ref": "427",
+   "highway": "secondary",
+   "lengthKm": 8.77,
+   "curviness": 563.7,
+   "flow": 30,
+   "turnCount": 165,
+   "score": 83.2,
+   "polyline": "cdtuEsvigYk@|BeEhEgBh@gAxBsDH?dAnCbCApBoCjHgAvAo@rC?jExAxCgCtDiCRgBlAd@h@hB_@tDHJz@a@zApAUj@bA\\~Ao@|Cr@rCWfAwClDr@tBpCoAbArB{@|Ab@`I?nDc@xA\\`@|@{A^D~@|E~ApBrBp@hB~Ai@rAr@n@j@Mt@rA}@lClAjAU`Ew@VyCuD_AnArCtF_Bn@A~DdA?~GeGpGl@`D`B~GIfJqL|DyAvEyFdNv@lBaBvCQjEnAZxA`EdFpExJRtBr@TxAv[gElHiCdMiF|QoSt`@cCrMsClBu@xAsAzJn@pHItD^~A",
+   "pointCount": 85,
+   "start": [
+    35.170096,
+    137.68058
+   ],
+   "end": [
+    35.161664,
+    137.630113
+   ]
+  },
+  {
+   "id": "愛知県:4",
+   "name": "一色小久田線",
+   "ref": "331",
+   "highway": "secondary",
+   "lengthKm": 8.28,
+   "curviness": 673.7,
+   "flow": 28.8,
+   "turnCount": 194,
+   "score": 83.1,
+   "polyline": "s`ttEikgeYw@o@sBhCm@pDj@z@`@w@j@BnAzCt@aAp@E\\x@@hBxBvB_@\\iDkA}@zCeCnC`Cn@X`De@pAd@bBrB`AYdDd@jAWrBRpB]v@mEt@cD`EtBhBfERh@|EpB~EfAhGgB|E_Bp@QdCmAN}@bAPzBSt@q@L_FwAsC|B{@dCA|AnECZjCa@~E_BhAIhA`@`@`FRTlAeB`C}GoAmBj@@tAlD`B`A~B]z@_FxCg@~@MfBj@fEcCtK?|EkBrAsEbA{@yBeABf@fHxB~DvA~FbDdDvB~IzC`FxGrCr@nA]lBmErGu@nDRfT{@d@^jEInDf@hBgBdHhBvDn@zKlAnBcBxAyGlBy@pFiB`BkCbIiAhA",
+   "pointCount": 97,
+   "start": [
+    35.0057,
+    137.340851
+   ],
+   "end": [
+    35.011573,
+    137.282698
+   ]
+  },
+  {
+   "id": "愛知県:5",
+   "name": "梨野川面線",
+   "ref": "367",
+   "highway": "secondary",
+   "lengthKm": 8.23,
+   "curviness": 828.5,
+   "flow": 34.8,
+   "turnCount": 196,
+   "score": 83.1,
+   "polyline": "qjnuEqpjeYt@WhDhAnCaCjEw@pAuHg@mEf@w@SOw@n@?wApBkAlBwCrCaBpCaJjBgCDq@YOcAhBa@SrBgEjDqB~BDbBkHrB_@e@aDTYj@b@L]aB_Dw@aD}@{KvAmNgBgDwAw@@eD{BwBKcDgEgIvCgM_Bn@vC_IlHw@t@y@Us@cCh@i@WxA{@xDgAnADtCmAdGcH^gC|@yABqA|@kC?qBa@aAqCwBf@_EzAgCYkOzA_D@kFtBk@l@rAjCeAN_@q@aAt@gATkBzBw@xAmBzCKz@q@dAyF}@SOeA{@He@y@Hw@vAw@e@gBf@iDpBF\\u@MeBlCl@e@iA|A_AlAjA^{ArAiAEs@aAkALyAb@i@pArBF~BUbA}AjBC~B|IzJxEbBnBtDrElA",
+   "pointCount": 106,
+   "start": [
+    35.140405,
+    137.357046
+   ],
+   "end": [
+    35.117659,
+    137.400013
+   ]
+  },
+  {
+   "id": "愛知県:6",
+   "name": "田峯三都橋線",
+   "ref": "365",
+   "highway": "secondary",
+   "lengthKm": 11.61,
+   "curviness": 621.5,
+   "flow": 27.4,
+   "turnCount": 263,
+   "score": 83.1,
+   "polyline": "cijuE{vbfYxCi@|DkBvA`AxCcAlBNnBwAzA~Ap@hCvANvDq@|@rB_ApBjBc@xCBNv@k@f@~BAzArBDeBpAgBbBlIG|A`@XTwDu@sDzAkHfF}Bx@sD|A}@jBsEnAgA~BMjAqAfDd@xCgBbBQdFjBhBe@`@gAAuBvAa@Zs@K}AbCeBK_FvHwIj@iBReEdG_GrHw@xEqCbFkFrJaBdDsCnCm@vDThCu@fEIvB}@nCqEpDwABaAhGmAj@{@v@yEO}@_C}BRuBnA{@d@cCjE_B|HrBhA[@cBoAgDj@mCdHsCvB_KbE{GhAiDnBaAk@yDXeBrAg@pC`Bn@DVi@g@aNjEwAc@oCd@wDf@UxJ^rAg@fCiKa@cCByDn@}I|Ce@hBp@xDaC|McBzDaCxBCdDxBcCb@ShFoBdEPxBn@tApBpAdDAhBv@|BQtI|G~Cz@fAdCb@o@sAoDVs@b@A`G~NjD|B`C@",
+   "pointCount": 125,
+   "start": [
+    35.119702,
+    137.480935
+   ],
+   "end": [
+    35.057365,
+    137.514772
+   ]
+  },
+  {
+   "id": "愛知県:7",
+   "name": "津具大嵐停車場線",
+   "ref": "426",
+   "highway": "secondary",
+   "lengthKm": 8.04,
+   "curviness": 1019.8,
+   "flow": 33.7,
+   "turnCount": 243,
+   "score": 83.1,
+   "polyline": "a~uuEeajgY][kAN{BuD}B}ACcD{@}BqBEiGkDmCmLeAlDy@AqAoAJYbAPn@]KsDcCcBa@wEm@qAb@fD?|A_@XIwBi@}@Hs@}@w@z@{@Gq@oBw@tBoAG{Ls@@]dAf@|BIjB_A}EkEqBL[nEGCyCeAgCx@WbAcCXPIbBr@v@dAnDl@PJiAnAo@_BgEx@_B_AsA}AoHtB[r@sA]uA|@y@_AyA\\kA[_DTgBG]oBUiArC[@qAwAq@wCsAJMqCcCC~@sBoAa@l@wAGoBu@qCkAcAyD_@f@}DiBw@rAgCDcAmB~BOi@h@eDnAWLq@eEsIFeBf@{@IoAh@_AHmGpBcC~@wFzBm@x@{DvBuAh@mG[iCkBeBaCsFoBaCLeBd@eA~Bm@dAyCvBmCzDsCRgCtAuBo@eEXcCrAuDxDmD`@gB",
+   "pointCount": 117,
+   "start": [
+    35.179371,
+    137.682274
+   ],
+   "end": [
+    35.184188,
+    137.730892
+   ]
+  },
+  {
+   "id": "愛知県:8",
+   "name": "作手保永海老線",
+   "ref": "435",
+   "highway": "secondary",
+   "lengthKm": 7.2,
+   "curviness": 695.3,
+   "flow": 28.6,
+   "turnCount": 175,
+   "score": 82.9,
+   "polyline": "wkwtEycjfYv@k@rBp@vFAdFoAjEyDfHuBTqBz@p@zDc@dFiDTqCzCz@r@Sv@qEnAMfA{AJsArAi@bAcC{AoA_@eAs@DgF_DuGmK}D}CcAcBgCs@kB_H{DiDiDcF{G_FgA_DUf@pAhDKf@u@]oAPcBcC}@OqE`BcB?{HoFcDJuBqAaBuBc@_CgF}GwARsAe@cD_Da@`@EtD]l@_AuCyEgAGe@tAo@\\cA_@sEfBGOmBd@qApG_F`@_Cz@V|@yBzAq@nC@h@yAvBoAnCu@bAj@dAc@nDeFzGiEnEsE^yBzHsQDwDdA}CKwF",
+   "pointCount": 82,
+   "start": [
+    35.022839,
+    137.518854
+   ],
+   "end": [
+    35.020182,
+    137.55603
+   ]
+  },
+  {
+   "id": "愛知県:9",
+   "name": "笹戸小田木線",
+   "ref": "490",
+   "highway": "secondary",
+   "lengthKm": 7.21,
+   "curviness": 639.6,
+   "flow": 29.4,
+   "turnCount": 157,
+   "score": 82.9,
+   "polyline": "kzzuEu`keYE`Cx@|Ds@~I`DrPC|@sAbEPjDaAjE}EnLHz@p@JZi@AoBhAOVn@[~GgAzBCpI}AhOqDfK~@|MKvJ{A~BDvARz@bChBn@fCHbE|BxE|@bI`B|F|@x@bCDvBbAfGzMpCxCUtFmAvDeA~@mAzE{Bz@gB]eAl@{ADOyDcBy@mAfAw@iBw@tAoCtBkAFc@a@IwE_AmA}@zCsClA}A{CyANs@y@{Aa@u@d@}BqAV_DWc@aECKqCiFsDCgCaB}@e@d@gEg@\\iBNwIM{@y@QiA~AwC|@Yt@@`Iy@lAMlBeAlAh@lF",
+   "pointCount": 84,
+   "start": [
+    35.204385,
+    137.359626
+   ],
+   "end": [
+    35.216128,
+    137.323703
+   ]
+  },
+  {
+   "id": "愛知県:10",
+   "name": "作手清岳新城線",
+   "ref": "437",
+   "highway": "secondary",
+   "lengthKm": 5.97,
+   "curviness": 669.1,
+   "flow": 28.7,
+   "turnCount": 139,
+   "score": 82.7,
+   "polyline": "yngtEqu}eYZwB}KgKRaB~AgBDw@]MuA~@_@YTm@tBi@`AcBr@}BK_CzBz@zCJfA}AxAcIwD}H?qDoA{BuA{@\\iE`@@p@zBv@MeBcPkBoAcIo@e@WGu@hEc@fCuApEi@PkMe@uBOwGj@eDKgCn@cKzAKfBkAhGnE`A{Al@`HjBjB~Ag@vBqG]yBH}GvA}YIeHp@uAjCl@vChCnDv@OhBZf@dEd@X~@GhEtD]n@h@d@fCjB_A~@Hf@n@",
+   "pointCount": 67,
+   "start": [
+    34.941413,
+    137.455126
+   ],
+   "end": [
+    34.929956,
+    137.482512
+   ]
+  },
+  {
+   "id": "愛知県:11",
+   "name": "作手清岳新城線",
+   "ref": "437",
+   "highway": "secondary",
+   "lengthKm": 6.03,
+   "curviness": 747.8,
+   "flow": 29.1,
+   "turnCount": 155,
+   "score": 82.7,
+   "polyline": "epktEsqxeYhEeBdHcAvMcMh@aCzHoErFiBBm@qAu@?o@bHiAhAcDtAwAlJaAvCeAbCRg@iCoAiAe@sAy@YEwAmAe@d@eCc@w@uAMFgCaDwA^i@lGrAf@o@wFoLJo@bB|@d@o@k@qBmBsANq@tAo@`Ex@fCwAdDCdCpCpCUbBbCzDjC`AaHe@iEp@]vBhAfBEbBg@r@yAz@fAGjF~AKXjBbARBiCeAcLmA_DFcFkCkMDwFu@sFc@}@kBcAZe@jB~@x@WeB_DSiC",
+   "pointCount": 71,
+   "start": [
+    34.962111,
+    137.428897
+   ],
+   "end": [
+    34.94405,
+    137.456014
+   ]
+  },
+  {
+   "id": "愛知県:12",
+   "name": "古真立佐久間線",
+   "ref": "429",
+   "highway": "secondary",
+   "lengthKm": 6.19,
+   "curviness": 671.5,
+   "flow": 27.9,
+   "turnCount": 149,
+   "score": 82.6,
+   "polyline": "{ltuEawugYrGgAnDbJhBjAn@EVuEn@yAjCBrAk@nBqEY_AeCEiAgCDgD~AgDzA?~CdBzAaClCNVw@oAsDLmAlBc@lBwAfEaAvA_BC}Cp@o@x@`@hB~Gn@l@`BwAzGaA|EcDpAXnA`FfCiCjAMlDhDpDj@jD~GpCnD|Nc@j@lCu@xD`@nBlDe@dDcDdBYhB^p@bDp@FVc@^}LrBqBnCb@WwEtAyByBoAe@wBl@yB|C_DyAeBcB}EzD_CEuCfCPxHkEz@r@a@fCfB|@",
+   "pointCount": 71,
+   "start": [
+    35.171503,
+    137.742092
+   ],
+   "end": [
+    35.141918,
+    137.753444
+   ]
+  },
+  {
+   "id": "愛知県:13",
+   "name": "足助下山線",
+   "ref": "77",
+   "highway": "primary",
+   "lengthKm": 14.64,
+   "curviness": 603.3,
+   "flow": 28.2,
+   "turnCount": 313,
+   "score": 82.5,
+   "polyline": "sdluE}u_eYpBmBpBvD|IhI|EtIvC_J|GqBXv@yA~CfAbENY]mDv@q@TaAv@Uh@wAfCq@l@_AZyCd@c@hKXnBbBbF|AhA}BlAOJoB^QvHvDGuAiBoDkCmJrB{CtDgDfCgAbIs@pDwAbDh@nDuFdG{AxCgBzCEvA`@jEvE|ElOBrG~BrFxApGlBbBjC`@f@jAnBtA\\bCbAtAbBx@nB|GvCtA^WPmDz@y@a@{ARsBnB_D]_CpAaFnGqAdDIxC_BrE`@|AeAfBVtEs@xBJt@dAhAPr@sAzBz@~EcBJs@_EkDhDK|A}@l@aBU}@\\mC{@_CgBEKqEzAbClE?n@KlAyClCyAdFp@lBkAdD|Bq@wAnC[jA_D|Bu@nAdB|@PrF}FtAgChE^R{EXi@~D^vC}ChGUbFyFpCsAhBo@`Ga@dAwA`B{ETaD~AcC^sCbDq@pA_AhAqCdAg@bEkGx@XpB`ErCdBxAvC|@WG{Bn@m@dEd@xFfB|CNxB}@jDY|BaCpBBlJ{JnIrDhBjD~AnAvFhBbBMxE`CfID~DfElBp@~Ba@jDqBlAcE~CDjBeA~@kAJsBl@Cp@p@}@~ATd@lCsBvBPrC}@",
+   "pointCount": 161,
+   "start": [
+    35.129216,
+    137.301592
+   ],
+   "end": [
+    35.041917,
+    137.320202
+   ]
+  },
+  {
+   "id": "愛知県:14",
+   "name": "三ケ根山スカイライン",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.96,
+   "curviness": 777.1,
+   "flow": 30.1,
+   "turnCount": 128,
+   "score": 82.4,
+   "polyline": "agnsEogfdYwAx@}AzBmBfJk@Q\\wAKq@yAHG`GrAdBa@Z{BCUl@fCNrAbC^gBxAFf@wBb@IUdE|@pBpDNNn@sCnA}ApDe@Wp@eCYc@iDhEyBw@wBt@}ElIEhBx@lEeAzBCjA~@~AnC^vAdChCh@Xb@UdBlBjCKvDrBhNAzBeAtGF`C`BdEdGnI`CfBhAbCzCVbF`ExFt@zAtAjCkCjBWlA_Fb@GFnC|Bt@\\p@y@pD",
+   "pointCount": 64,
+   "start": [
+    34.812172,
+    137.171283
+   ],
+   "end": [
+    34.804295,
+    137.145376
+   ]
+  },
+  {
+   "id": "愛知県:15",
+   "name": "三ヶ根山スカイライン",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.78,
+   "curviness": 819.1,
+   "flow": 30.8,
+   "turnCount": 127,
+   "score": 82.3,
+   "polyline": "}njsE}}|cYqDgCkJoDOk@wIHwEkBaDb@wCeCHc@hBWvAiClAQZiB`Bq@lA}DSyA}CeDFi@vEgBpBgCQ_@mDm@eAsBDsBgCiCbBuAo@oBv@gEC_CcBB{BcE{AJjBnAp@|FY~A}@XChB{Bz@v@pDq@jAq@w@G_EXs@tAg@@yBlAyAm@eCo@_@sBNgBhAi@lAs@FkCoC_CoGuBgAuAwBSaCdByBZ}BWm@}EaAUg@u@yHpAoF",
+   "pointCount": 64,
+   "start": [
+    34.792946,
+    137.123674
+   ],
+   "end": [
+    34.804542,
+    137.14449
+   ]
+  },
+  {
+   "id": "愛知県:16",
+   "name": "古真立佐久間線",
+   "ref": "429",
+   "highway": "secondary",
+   "lengthKm": 3.7,
+   "curviness": 834.4,
+   "flow": 31.5,
+   "turnCount": 98,
+   "score": 82,
+   "polyline": "_}muEczxgYXu@bBa@@gBVWxBbAlAs@r@gBnBz@hBc@hBTNeDhA_B^sFhAGf@`Ar@bIn@QbAuBxAV`FqAb@uBy@wB~@aBFoAz@}@c@mBHcA`FcC|@gC|Bd@lA{ApBLjAnHjDh@EfD|CvBtBqAh@TlMdVvAm@`BfD`BF`EbEn@L`Cs@d@gBdASrCcCX}@",
+   "pointCount": 50,
+   "start": [
+    35.13824,
+    137.757944
+   ],
+   "end": [
+    35.117753,
+    137.759211
+   ]
+  },
+  {
+   "id": "愛知県:17",
+   "name": "岡崎作手清岳線",
+   "ref": "37",
+   "highway": "primary",
+   "lengthKm": 10.26,
+   "curviness": 627.8,
+   "flow": 32.1,
+   "turnCount": 201,
+   "score": 81.9,
+   "polyline": "koktE{lueYjHhRdL^~CdBhBr^{@~ELhDm@r@NtAi@bBJnBcCj@s@Wg@f@j@|BmAhAlCdDg@d@}B_@_BtBdAbEl@_@i@q@?kA|@y@dBbAv@u@z@BXqB_@{A^yAtBm@z@eDvA_Ct@rBUjFpAjFz@r@J~At@x@lBQf@Xb@zDhBpCvANfA}@d@eD?wFl@YdBdARr@fBTAnB~@xBM|CxAEbAgDf@FfA|CpEmBRtHh@~BzAI`BsAx@JZpCxAjDfFtBh@aGsAwAAsAzDmEL{AaAaBjAqAWu@tAgCKcA~@_@tAZn@wAp@KjAgBAyE~@aB`D|EtCS`@{AhAu@rBGCr@kBdBaHtCaJ`\\}BnTl@zLmB`PdA~Ke@dOjAjSpC`ErCrNjAxC|IrLlHvR`AbHWpG",
+   "pointCount": 107,
+   "start": [
+    34.96198,
+    137.412779
+   ],
+   "end": [
+    34.938453,
+    137.364687
+   ]
+  },
+  {
+   "id": "愛知県:18",
+   "name": "笹戸小田木線",
+   "ref": "490",
+   "highway": "secondary",
+   "lengthKm": 3.57,
+   "curviness": 934.3,
+   "flow": 37.5,
+   "turnCount": 89,
+   "score": 81.9,
+   "polyline": "i}yuEkaseY{@gF@yGd@aBwBwFAaEzBeAV]Ks@l@{@q@sCfCqGd@iLYqBgAcBGiD}AeCJhBYNQmBmAsBp@m@BsEo@j@FjA]`@uEi@fCsA`@mEbAmBXyCeAsJBkC}AmBHmFbAhAPMk@sDSSkBd@g@[vAa@vAgBfBdAvA_ASqFqBoCmAcERo@|As@N_A",
+   "pointCount": 51,
+   "start": [
+    35.19973,
+    137.400695
+   ],
+   "end": [
+    35.200235,
+    137.42722
+   ]
+  },
+  {
+   "id": "愛知県:19",
+   "name": "作手清岳新城線",
+   "ref": "437",
+   "highway": "secondary",
+   "lengthKm": 3.09,
+   "curviness": 665.2,
+   "flow": 29.8,
+   "turnCount": 69,
+   "score": 81.7,
+   "polyline": "qs`tEynefYaGhAcLMyLjGuArAcHvMqHtHmAIi@u@]oGw@Y_ATa@x@\\fEc@nAcLhBqD@b@z@tCSp@lDe@NaAiAgDc@C`AxCFZzAiBhHc@Wz@uDQsAiDL?\\xAx@kApA",
+   "pointCount": 34,
+   "start": [
+    34.906327,
+    137.495006
+   ],
+   "end": [
+    34.920455,
+    137.486122
+   ]
+  },
+  {
+   "id": "愛知県:20",
+   "name": "土岐足助線",
+   "ref": "19",
+   "highway": "primary",
+   "lengthKm": 8.58,
+   "curviness": 645.3,
+   "flow": 29.2,
+   "turnCount": 190,
+   "score": 81.7,
+   "polyline": "mgdvEkf_eYqAgOmGuMmDoLuByOgDoFd@EfB~AlAPx@wArGuDtB}CxBgEX_CrBeEQkIv@aDjBwElCeAw@mA?w@vAmBPuA~@y@IeBxAeAMoDdEw@?eBqB{BEaBvEsDJyCz@{@C_BjBsBsAmCcB]Mc@`DwBtB{EjBmB~@wCmAmBWcJsFuAW_C`AmAfAYFuCbDcD`De@SaEtCEt@oHxBuG@_BdCFbBdBbE]hE|ApBG`FjGtH_D{@aDgCsCb@yEfA{A~@kDHcGtAiG[eHwAq@pBkBRkAa@kJkAsB[sBLwAa@sBrAmCe@mFy@gAT{DdByD}@yJ~@}@p@eGxAy@lB}Gi@iEL{@",
+   "pointCount": 92,
+   "start": [
+    35.252554,
+    137.299099
+   ],
+   "end": [
+    35.236166,
+    137.363488
+   ]
+  },
+  {
+   "id": "愛知県:21",
+   "name": "鳳来佐久間線",
+   "ref": "442",
+   "highway": "secondary",
+   "lengthKm": 11.28,
+   "curviness": 603.4,
+   "flow": 25.8,
+   "turnCount": 264,
+   "score": 81.6,
+   "polyline": "qdhtEoszfYlC~CtDvAlEmAj@w@ZoDx@cB|FX~AoBrCa@rCkBlEsPtB_@vBXxAe@^u@PwAy@kFw@{@wCa@Ge@zB}AnCuFtBe@j@s@JuBgAqCE_CtB}DhBmHtCaDf@uAY_BsDMnAuBFwBe@s@mCs@k@o@x@eMbCuAb@kAKs@iEiFWaFkAyBdC{FjD_BrBcCNqFl@uCc@gB{C}@{@eAUeG[w@sEx@yDqAaBuGkFoBSqFmJj@mF{B|BkDBwCeA}@cEFc@_D}DiBoBiFwCyCJcA`AqA@sD}CmHtBqDqC`@uAeA@yCiC_Gf@eCcBSkA}Fh@wBcCRm@mBy@KcByA_@_EnAaEmCx@mAaEqAf@aCoBsB|AaFDsEdBe@xBkBQm@y@gB@{@xAcGjBcIhBaASK{]{CuG}AiG?_C|AoJw@uJ{CaGDiE]}AgEwDw@qBeCwBaEqABq@tBuC\\aC",
+   "pointCount": 121,
+   "start": [
+    34.944893,
+    137.603279
+   ],
+   "end": [
+    34.961758,
+    137.67246
+   ]
+  },
+  {
+   "id": "愛知県:22",
+   "name": "津具大嵐停車場線",
+   "ref": "426",
+   "highway": "secondary",
+   "lengthKm": 7.39,
+   "curviness": 645.3,
+   "flow": 26.5,
+   "turnCount": 180,
+   "score": 81.6,
+   "polyline": "qvyuEydygYrDtEz@oCdBm@Lf@wAhB[dCl@RRoB^c@b@j@g@r@MfD}DpCwCfEB`AdCmAdAsBzBJzA_BzBfApC?nPhGvBaAdDnAbBMzBxEpIoA\\t@c@rBXdAzAXpA_@xC`@nEpE|Dk@nAjDvAy@zFR`D~BnBmC`FRfBd@`B`BfDUr@fBbAj@`Bq@jANf@vAHlC`DdHhBlBTdDbEzGT~Cn@xAtCdFfG~AXrEMbAwD`GeBJ}BjCmBi@yBZsBWoChATnGy@dCiCPkG{CsEx@Yp@Lt@fBl@\\p@E`B}AxDJ|AnAnDOrBwCdBmCnEeHpEo@LmBm@cC~AeCF",
+   "pointCount": 89,
+   "start": [
+    35.198647,
+    137.759653
+   ],
+   "end": [
+    35.183805,
+    137.729518
+   ]
+  },
+  {
+   "id": "愛知県:23",
+   "name": "東栄稲武線",
+   "ref": "80",
+   "highway": "primary",
+   "lengthKm": 26.6,
+   "curviness": 527.9,
+   "flow": 27.5,
+   "turnCount": 510,
+   "score": 81.5,
+   "polyline": "sg{uEqhifYm@wAeFoBcAaA}CyGc@iDj@yGA_GaC_HKeCv@aB|E}CfBkCtCaQ~DmArCuChD{N~@wBjBaAdC^bByApBS|@eCf@mEdEw@hB_D`@aKb@o@jBIrA_A\\wD?uIbCuDp@gFrCeHi@mDqDyG~AiEEcFaA}BH_BfAuC}BiMh@qBlEcBfAcK_@eA}DkC{@qBK_Gj@_DGqHuBkKv@_CtEoDt@qGjIsKYUaBrBcAF_BhCcBs@Yo@cAfAeBgAuArAHt@y@`C[_@n@kB[}AlAuAF{@u@qB^WtBVnIoDhAeC^cIt@cAjBf@v@{BvAKbDkJd@}Dl@cA`FwArBb@lCGvK{JpFe@fAkB]qBh@{@_@s@mAY@{BvAmAZkAtB{AVoDbC}AHgAo@qAAwCrGW~@aFr@[Ld@{ApKeAZcBe@fAl@ZfAIpAgB`C[bChAbAfCeBnFcBd@BNxBPKI{Ca@YgEVHy@tDyC^uB`DeFb@A@d@wAtBBt@XTx@k@p@wDnB}@p@gBEgAh@L]rEcAvAR~@h@T~EgDnBSzDuEvAx@Z]CyC`@{Cq@SgAzBsAQtAeDz@qHdBuB_Dk@Ky@hDaF@g@{Cj@c@KGi@r@qD`CaAPcBk@s@fBgIjGgN|@aHbBeB?cPdBoEAmC|@}BfCuR?yG{@}BEmBrEgGn@yK`FuNxCmFyB}BrGwFr@qCbCeDhMoK`D_GzJ}IfBkDrC{Bz@IT{HQoB`D{BzB}GhHmJbHy[|JaMjUab@z@{@|CIzGwAGu@kBgASoBjB]p@yBxCwDdA_@n@{Ar@VWhA}@vAy@jD{AlBxBtBP`EgCnJFr@j@dAxEtB@hCfBtEpCxCv@hBhIjEfACfByA`BJ~CtBdDn@`CvBzE}ApEDnCxAjDdIn@^fDsCbCy@p@NlCnDzCR~BcAnImGnD@nFv@jHKxLaF|A}Af@yI`AgCdDmEj@yG\\[pCz@fBm@xA}FCoCy@{CsIgHq@eBlBeA~GkAdAs@NsAk@oDFeAbCkClC_FVmFdCeH",
+   "pointCount": 275,
+   "start": [
+    35.206499,
+    137.514492
+   ],
+   "end": [
+    35.119164,
+    137.65673
+   ]
+  },
+  {
+   "id": "愛知県:24",
+   "name": "八橋中設楽線",
+   "ref": "431",
+   "highway": "secondary",
+   "lengthKm": 7.97,
+   "curviness": 528.1,
+   "flow": 27.7,
+   "turnCount": 152,
+   "score": 81.4,
+   "polyline": "sgjuEix{fYpAmEKwD~BOj@rAbCaHjDw@dAqBpB_AlAcF~@LXvDtDqC`@Z`AjEp@M~@yD`AmAB_B_@uAfBmDI_Bg@k@f@{AOiEh@_AWwBt@oCf@CVzA[nIhBpBz@OhAuAZsIi@yPe@uCb@Cp@r@xBpD`@NP]wGkKiBzAMt@_@g@vEqM~GqKRwIh@kCYqEd@gA`DwAbAcBhBoHVoH`OoP~EoDNaGwC}Ay@}Ba@iEHcJsBgFR{SxB_RlBwBpMeHlChAp@[xBgJhBsDOmEZkAjAqB~A}@nDh@fAaBUuM}AmA",
+   "pointCount": 80,
+   "start": [
+    35.119459,
+    137.609168
+   ],
+   "end": [
+    35.09781,
+    137.662009
+   ]
+  },
+  {
+   "id": "愛知県:25",
+   "name": "生平幸田線",
+   "ref": "324",
+   "highway": "secondary",
+   "lengthKm": 3.38,
+   "curviness": 541.8,
+   "flow": 32.7,
+   "turnCount": 56,
+   "score": 81.3,
+   "polyline": "evzsEmdhdYzBaKdDcKoOqFrBwKXeFc@eFqDoLbAgJOoEz@sCqBOQg@jD{EsBBq@c@@qCg@wB}G`@o@cA{@oF}CwCsDb@FgAhAyAE}BnAaAhB?Hc@mB?aB}BwBc@oGwI",
+   "pointCount": 33,
+   "start": [
+    34.876028,
+    137.18103
+   ],
+   "end": [
+    34.883141,
+    137.205485
+   ]
+  },
+  {
+   "id": "愛知県:26",
+   "name": "岡崎設楽線",
+   "ref": "35",
+   "highway": "primary",
+   "lengthKm": 7.05,
+   "curviness": 541.7,
+   "flow": 28.7,
+   "turnCount": 133,
+   "score": 80.9,
+   "polyline": "c_ytEsb_fYqAWcEoDsCkAmFi@iJJmEqAsGcG]iBoAwAiF}@AuAVOzE?l@w@qCoODmB`BgDMgB_DuEmJg@g@_AQqDmA{BcBu@q@yDqAGMrAe@Zi@cBaDcBSgAgB}BXeDrCmDM{B_Aw@}@AwBoBQwCyBsDc@sHaI^cA`@y@tAQt@rF|MCxAw@PwIcFmFeFy@FwAsAkATw@aAu@aHHuAlAd@m@mCnE}TGgE_ByC{AgAEgGcB{C`AsJOyBsAuD?eGkEeP`@yJm@yAqCeB}AW",
+   "pointCount": 74,
+   "start": [
+    35.031065,
+    137.462342
+   ],
+   "end": [
+    35.055526,
+    137.503819
+   ]
+  },
+  {
+   "id": "愛知県:27",
+   "name": "津具大嵐停車場線",
+   "ref": "426",
+   "highway": "secondary",
+   "lengthKm": 6.64,
+   "curviness": 624.8,
+   "flow": 25.6,
+   "turnCount": 162,
+   "score": 80.7,
+   "polyline": "oyzuEsaygYtLyEbCiFdB}A|@oCpBeArAuEfCmCnAqHbB{Cj@SzA^pCcAdE_EhAIxAz@tCO~CcGjBEbCaBpBiF`CAz@c@zEaKnDu@bAiArBc@nC_EpAB`AxAhB_Bz@Lp@~@fFi@|@{BnCmBp@bAbANdAmA|CoAn@mA`Bw@dATd@q@hB~@nBzD|E}@\\|B|AUz@~AdBn@dDw@f@sAW}CNuDlCqF~C_Ef@kDxBaCu@yGvA{EAuI~@uRyFoCcEaFmFTuCcGiKy@{DqDgBs@o@eA",
+   "pointCount": 71,
+   "start": [
+    35.204236,
+    137.759141
+   ],
+   "end": [
+    35.180296,
+    137.793259
+   ]
+  },
+  {
+   "id": "愛知県:28",
+   "name": "門谷豊岡線",
+   "ref": "524",
+   "highway": "secondary",
+   "lengthKm": 6.02,
+   "curviness": 545.5,
+   "flow": 26,
+   "turnCount": 126,
+   "score": 80.6,
+   "polyline": "a{ltEuzvfYpEn@f@c@mBoDJo@bBm@Do@wDgCBs@lAy@Jo@yBw@Uq@hBwBgCwKfBcDmHcCqDh@iBg@ImAn@yBsBiAWs@l@cFbBkARgAuCcCGeE]wAqCiFm@Wm@RMr@`@`DY~NaCjAuBsDwARi@zEq@hB{A|AaBFS{Fx@eJxCwENgDiCyE}@aN{@SsIvAo@IWy@rHuH~HeF`EwA|Dn@rBc@|BoCdC_@tCiDpDyArKsSp@eQ",
+   "pointCount": 63,
+   "start": [
+    34.968966,
+    137.583951
+   ],
+   "end": [
+    34.96781,
+    137.612967
+   ]
+  },
+  {
+   "id": "愛知県:29",
+   "name": "蔵王山線",
+   "ref": "399",
+   "highway": "secondary",
+   "lengthKm": 3.75,
+   "curviness": 644.5,
+   "flow": 26.3,
+   "turnCount": 92,
+   "score": 80.4,
+   "polyline": "miurEc{wdYgBiBEo@nBc@`AVLd@TxF_B~Ak@OaAcC}AWcBZu@{@z@sE|BgDK_GZuBtCc@\\y@k@{CB{DqBsEpBwBhCa@b@k@v@gEpDuEJaG_@cBsCiBFqD}Aq@uA^oDgD{@RY~CJ|A|@tAkAQg@iBTcGbAkAbASfGXjFpAtG|EfKvDnAg@",
+   "pointCount": 48,
+   "start": [
+    34.684553,
+    137.261455
+   ],
+   "end": [
+    34.678733,
+    137.273836
+   ]
+  },
+  {
+   "id": "愛知県:30",
+   "name": "平畑土岐線",
+   "ref": "354",
+   "highway": "secondary",
+   "lengthKm": 6.14,
+   "curviness": 513.2,
+   "flow": 28.7,
+   "turnCount": 110,
+   "score": 80.4,
+   "polyline": "}e_vEqjeeY]PB|Bc@l@eDQQlD_BxD}CmB_CoGuC}AaKDgDtEaH_@{@tAa@nEeDsAkE~AOlCmAdA_@jA[jFqBnEzFk@f@`A~ClA`@`Bx@t@v@D{AtAFVjCGjBr@`DMf@fElDdGz@x@|DbA|EfKdI~K|ElBhE`Fx@hDvE~FpDfL@n@_DtGoChJc@rJyG|NK~FqB|BqFCw@dBgC|AI`AfA|BYdBkKlP",
+   "pointCount": 58,
+   "start": [
+    35.226712,
+    137.330493
+   ],
+   "end": [
+    35.232107,
+    137.294203
+   ]
+  },
+  {
+   "id": "愛知県:31",
+   "name": "坂上田振線",
+   "ref": "359",
+   "highway": "secondary",
+   "lengthKm": 6.9,
+   "curviness": 506.1,
+   "flow": 27.1,
+   "turnCount": 129,
+   "score": 79.2,
+   "polyline": "sejuE_s|dYdBiBpItM|A|@pCX~@MfE_Ej@d@IfBZr@fAeAtF?z@w@tAn@`A[z@`@fAi@~Mm@n@y@kA_EB_B\\WlLvDbChCzI_Bd@kDl@o@lMm@rA{@f@j@IxB`D~CvDi@`Jp@p@e@NeAiAwBeAYeBaBIu@Zq@zBh@lECZeCxBcBtAC~BcCnGzAlIeAhDr@tB|C@bAmAlAFv@pDrBrHvGv@D|GaCjDAxCl@tFrEnFi@|A~AlH|AhNXlGjAnDyAjBuCZaChAaBs@yJJo@n@LZjB",
+   "pointCount": 74,
+   "start": [
+    35.11914,
+    137.285757
+   ],
+   "end": [
+    35.074142,
+    137.286779
+   ]
+  },
+  {
+   "id": "愛知県:32",
+   "name": "加茂広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.7,
+   "curviness": 517.5,
+   "flow": 25.9,
+   "turnCount": 94,
+   "score": 78.3,
+   "polyline": "s}suEslneY|AiE~AwBjFqBdHoF@mFh@Hf@hBd@NdB[nAeDjEcAlB@rC`BnA?jBwCFwEbAg@tGdBh@`Ep@nA~HlHnC~JQ`Ht@~AlAXlGwA~JMzMdCzL\\zCUx@UVaAuAyH~AgJ?iBc@g@gBNgBw@o@mCfAi@ZoA[s@wCkAKk@^_@`BFrCjDp@JEgAyByCvBw@",
+   "pointCount": 52,
+   "start": [
+    35.16906,
+    137.376904
+   ],
+   "end": [
+    35.146777,
+    137.383616
+   ]
+  },
+  {
+   "id": "愛知県:33",
+   "name": "飯田富山佐久間線",
+   "ref": "1",
+   "highway": "primary",
+   "lengthKm": 3.76,
+   "curviness": 725,
+   "flow": 25.5,
+   "turnCount": 107,
+   "score": 78.2,
+   "polyline": "waxuE_fbhYdEi@xBnDbC|AGbG`@dBfAa@|BeCvDxA|@dBxAZn@bA~@XhArC`Ce@xBxCjBjH|BMlBsAdAC~@h@MbCsB`@aBhDZxNx@nFbHzGdBqDeD}DeAwDGiKdEiCdDzAj@MTs@yAeEE_GeCmBw@_EeBoAYy@Ha@z@QdBdA",
+   "pointCount": 44,
+   "start": [
+    35.190196,
+    137.805917
+   ],
+   "end": [
+    35.179583,
+    137.802559
+   ]
+  },
+  {
+   "id": "愛知県:34",
+   "name": "月原近岡線",
+   "ref": "358",
+   "highway": "secondary",
+   "lengthKm": 8.53,
+   "curviness": 501.4,
+   "flow": 25.5,
+   "turnCount": 168,
+   "score": 77.8,
+   "polyline": "sutuEwewdYvAsB[wC]w@uA_@aAqAt@mDv@o@~AOd@cAHqBmAyAImAPu@zAc@|@}BcAgIkA{DfA_CRgGrAyAhBc@tAqBpBe@vEsE~Aq@rB}EtC}LdEsFl@cCL_EjBaClAaFnEaArB}DvCqCtB]t@{@PuAs@i@OaAVmCdDgF`C_KzBQtHqClI`@jCqAz@yAtBr@`B{@vAH`@]\\{BhBeB`Rb@xCs@rCpAfAzBnGlDx@~AdDl@zCrFxDMtClB`OpBdDdC~BsAOq@iAGK}@zBeAbHp@rE`BdJmJzCBv@oBzBaAz@gClD[`AuApEyBxA{Df@TOvC`@jAjC~BzC]hBmCf@mDbGyRlCSfAl@",
+   "pointCount": 93,
+   "start": [
+    35.172902,
+    137.258043
+   ],
+   "end": [
+    35.125346,
+    137.292988
+   ]
+  },
+  {
+   "id": "愛知県:35",
+   "name": "瀬戸設楽線",
+   "ref": "33",
+   "highway": "primary",
+   "lengthKm": 30,
+   "curviness": 512.9,
+   "flow": 24.1,
+   "turnCount": 639,
+   "score": 77.6,
+   "polyline": "kqiuE}tpfYTtAd@JhBkDb@IlChFfBH|@r@bAo@j@`AnGxArC`GxBnAt@o@_@kCr@m@|@gDX@aBxE\\z@fCL^d@kA`FaC_@_@f@eCD@xAuBOz@tBfD|A_DtG^v@f@oA`@L{@`BLn@aCbC_AlC{DWqCXcGdF{An@gBRmDc@qH~E{Fx@yAjDXfDnF|CSvCwAxC_JpBaHiFqBMkDnBwChDqHdA{@~@YzBo@hAwDG_Cj@k@dCt@zCC~Fl@bDvCdErCbKzChHUjF^t@nCnAfDtFNrEjChGLrC[|EVfFrDhM|AfU@bFzBbDbAzEFzEt@zAlDhDHl@]hHuC|FPhF}G`LqDfD{B^{EeBoGlDuFOyAr@u@lAyAb@y@|B[[NiApB}BJsC\\_@`At@p@QBaDx@gBo@_@}@zEiAgAoCu@U`@`@vDyA`AUtAmA^qCc@g@Xp@rDQ|@cAn@f@bCoDvAiD_@U~@ZtAc@pAoBfBgEv@MhAvAvCJjAw@^iCQoAbBqBx@KxEcBdLh@p@lAqAtB^fBaAvC|@hCo@|G|@vB}@vAL`CsA~A^|Ag@fB~A|Ak@|Cv@fA{@bAIdDxDbG_@tEoB`E{D|GdAr@v@n@hES|G\\bGxAxHqAfOgBzCl@fDg@jC@xC_GjCKbAr@rFa@jA_FHoAuA]aBiCo@uA}EoDoBmG}AiEb@mF~AqCjDyDv@kBpCqI|BuIjJk@bBRrIrAf@j@|HoAbByTlJiCjIgEzGaATeIwA_JMqAd@o@rBcBtB{Cx@iLNeDcBkBC{B\\iAnAwF|AeEbDu@|B~@lEvCrBLnA_AhAoCAyGlCi@pA_@dGeHtKjCdOS`C{AfErCrFF`IdArBKbHn@dAjCDT\\c@d@kD^kBbCMjAfBvDjE]n@dAsBdCaC\\eLpKGp@z@dF}AlC|DxFJbD_BpHeClAk@`AwC|LkBdNuAvCEnAh@dCS`CNpB_DlKyEtIOtKe@~DLlHc@|EjB~E|@nIpF|QNjCEbBkApDn@bHa@x@sCfBId@j@hBpDxB`CdDbFvB`DnGBlEfBtMc@jMdDpJ`AnGhCrCd@pHfBpA|LT\\`BuAzETnBtCp@fCbDxIOh@fBi@xBnApA|AhFh@HbDiBzB|@t@~Cs@zDf@bF~B|FrAjFBvA",
+   "pointCount": 306,
+   "start": [
+    35.115899,
+    137.552314
+   ],
+   "end": [
+    35.143841,
+    137.378024
+   ]
+  },
+  {
+   "id": "愛知県:36",
+   "name": "県道東大見岡崎線",
+   "ref": "477",
+   "highway": "secondary",
+   "lengthKm": 9.44,
+   "curviness": 495.9,
+   "flow": 25,
+   "turnCount": 187,
+   "score": 77.2,
+   "polyline": "g`duEgeneYnFoEnAgDdCqB`DxBz@hE~Cj@~A_@hAfBzClAlArBdD`@bHUfHsB~@mAEoAoC}Bg@yAV}BrBgDLeBzC}@t@_AlDSfCkClAStNfClE`BpGs@fCHhB~AxCNbNtEbK}CfDQ~AiArHp@xEzEpBtHzGDpExAZ~BqBvB@l@lDtDpCvA^vA_BvBiBfHeBlCqAfGuBJ_BzCA~@n@zAQvD~AlAjBu@p@Nx@lCSnDvDbFBn@kDbKYxEjGtIVbBKjG_AlB?|@fCvBvBLzAfABtBv@hBM`AuA`B?t@|CvCTpAc@n@gAKg@v@u@BmA|AoALgBxCmAj@KlBcBtBcCRJ|BsAtJb@fE`CjCbECfDf@xEjDh@vBCpB_AjBiGxAwCbCo@jBp@vD",
+   "pointCount": 105,
+   "start": [
+    35.087557,
+    137.37572
+   ],
+   "end": [
+    35.055568,
+    137.338484
+   ]
+  },
+  {
+   "id": "愛知県:37",
+   "name": "和市清崎線",
+   "ref": "433",
+   "highway": "secondary",
+   "lengthKm": 6.64,
+   "curviness": 496.8,
+   "flow": 24.6,
+   "turnCount": 134,
+   "score": 76.4,
+   "polyline": "a_`uEq`qfYeF_UsDoHqEw@{@eCOoFs@gBaCiAiAuAkAyEoEmCoD[e@sAIiC_GIoCwBCk@~AiCHy@m@}@oD{AUkD|C}D?qB_AoBl@}Gz@yBtAoATcBk@wFb@yAuB{Cj@{AOs@gBt@gA~DgABShAqC~@a@IOmCgA{AeCMiCrAyDwAuDh@sI`LiCj@yAw@k@mDn@kHqAmR]kAwCgCeBaKNcEYgAwBaBoD_A{CXKeEaAmFRgGUkJuAeEyEwFGoB`BsDAyAiEkEc@eD",
+   "pointCount": 71,
+   "start": [
+    35.066892,
+    137.554171
+   ],
+   "end": [
+    35.091358,
+    137.596351
+   ]
+  },
+  {
+   "id": "愛知県:38",
+   "name": "振草三河川合停車場線",
+   "ref": "424",
+   "highway": "secondary",
+   "lengthKm": 11.71,
+   "curviness": 461.8,
+   "flow": 26,
+   "turnCount": 208,
+   "score": 76.2,
+   "polyline": "wfstEcqfgYf@y@tB{@iEcFoK`BiGnFeGt@uGrBmBrByArJqBtFFzI{AfBb@dFfBlE?tAkBdD_E_@UXHd@tCvBnDGPvAw@`HoAtDmAxA{@vKyBpDkBCPfCaAz@a@tAqD_@Q~@p@fFgBlDyHdEqMtC{Da@w@i@mLc@}@kBeEmDsCZDzAr@rBaE|GsBiBsDqAgEI|@pBxAx@zGjH_C|DGrFl@tDSpBmHCaMpAcFwBkBuEsE}EeFtErB~IjDtGfDbBpAjGzAhAhFl@p@xABfCrBp@bAbEyCvKa@hRqBhHCxHqAnHoHzBeH`@cBrBmKjFwFn@aCdFgJbC}@bBt@dE}AjBEjAnCbGu@d@{CuAoA^qBfB_A~D{BzCsALaMiBqDXeK{EyEnF",
+   "pointCount": 101,
+   "start": [
+    35.00156,
+    137.664343
+   ],
+   "end": [
+    35.046588,
+    137.609683
+   ]
+  },
+  {
+   "id": "愛知県:39",
+   "name": "作手保永海老線",
+   "ref": "435",
+   "highway": "secondary",
+   "lengthKm": 21.61,
+   "curviness": 468.1,
+   "flow": 24.4,
+   "turnCount": 414,
+   "score": 76.1,
+   "polyline": "cldtEusxeY_BoBg@qFyAgCOsFm@wCmDyJKaHeCmDqGcD_EwR_FsJTyC]qDd@cIiG_DuAiBSgAZ}Fq@sCoCuBiAkCyGqBcA_AOuB|@cFSo@yDDmJcBkEh@eEEcC_DuGkDgG`JqI}@qEjCiAQg@}E~B_GKeBoE\\}BcB{@vCmAdAmALm@SaAaGaCmFAmFpAyCnBgARyAkAoBaEWaEl@iE~D}F_DgLaEkA_BsAkE_DTeEjDiBQ_D{HwFkBuCJgAiAOo@t@wCA{AyD_Bs@mA]iDX}DMcIWy@sCoBuAGkFnAyJ_C}Ln@}BaCRkEo@eBeDi@cGrAy@nBKfFiB@_@kA[kIoA{BsAcAmAYuARqEhDgDyAcAgQ{@aEs@mBkE_DaF|AsHn@wA|BsBzGw@n@}@Kg@i@g@cDkAK{@gCPgC`Bw@Jg@{DeDoBHkCqI?mDvAmHs@qFyDsKvBmLgGjLkCdAqCXiDc@wAiBiDaKeGkBgBd@_A~A`@dE]bAqA~@kE^}Bo@eAqAyAwEiA_LoCsAkD`AeEIcEpGgAzCeCTeHuAgAb@kBxDwExAcCu@eAaBiGcFMoFwD{F_CwI{EcAsDoDcDb@gDoB{CfA{FY}J_AiEqAm@_EmIiPoCbCcCb@oDhDmPXFgAtBNrBaD`@yEqCyC}IXkBeC{AdAa@SdAeG}@oDkAc@Ee@TYv@`@@k@uEkIRo@f@G~@dBRaAcAsBiAWIoCiBiC`@c@|ArAjAs@Fc@]u@_EkC{@gEZcFQcDf@iBmBaC{CeL\\qS_EiAKi@",
+   "pointCount": 209,
+   "start": [
+    34.925621,
+    137.429231
+   ],
+   "end": [
+    35.031691,
+    137.521293
+   ]
+  },
+  {
+   "id": "愛知県:40",
+   "name": "設楽根羽線",
+   "ref": "10",
+   "highway": "primary",
+   "lengthKm": 9.59,
+   "curviness": 466.4,
+   "flow": 26.2,
+   "turnCount": 171,
+   "score": 74.9,
+   "polyline": "urtuEej}fYqBrCoG|EwGn@qChEsARkEmBkBDgBfB\\dFMvB}Bh@kBi@cAsCHaNa@qEmA}Es@QbBxJk@jD@jF[`@cBOmJkIeBs@LxAjGhM[|@qAOcAjA_C{Ac@F_@xA{BBYlA[Ho@WcCqEkA~@c@Mu@}BwBh@_AqBiAUkCpBuCdAC`FXr@pCoAv@p@Nx@U|AnAbBiArDcGq@s@`@{AvHj@hF_A~@qCF_BaAiLsCeGuDyHs@kFnDyFzB}ArD{AhAyBfDaJlAuF?sMvBwAt@cMjPk@tBaDhB{Ex@iAlAOfA|@nBDnB]dAaC`CkDCiEkAsGuJ}Au@sCvB_ArCyETyAx@gJ]wCdBqCn@iCjEE`Ct@tDGfAkKjFSr@",
+   "pointCount": 100,
+   "start": [
+    35.172426,
+    137.617153
+   ],
+   "end": [
+    35.224147,
+    137.592481
+   ]
+  },
+  {
+   "id": "愛知県:41",
+   "name": "鳳来三ヶ日線",
+   "ref": "445",
+   "highway": "secondary",
+   "lengthKm": 4.94,
+   "curviness": 475.4,
+   "flow": 24.7,
+   "turnCount": 95,
+   "score": 74.7,
+   "polyline": "scwsEworfYhAfJhElHdBzApBOfAl@z@`BjK|IfBtCrHv@rC[jCuAzB]~BhBdAnB`B{@tA\\b@nGhA]nBmDv@[l@b@z@lE^@rB{Bz@FrDvGp@e@NgJnDTlAf@tDdEUjHtDoCvA`Bj@OhAoGToEv@mBPcDl@aB{@kECcDb@yAbBiBjA`@jAxAtAlEvEtBbFjFbAH|DyBfP~H",
+   "pointCount": 53,
+   "start": [
+    34.857695,
+    137.561717
+   ],
+   "end": [
+    34.829836,
+    137.554188
+   ]
+  },
+  {
+   "id": "愛知県:42",
+   "name": "千万町豊川線",
+   "ref": "334",
+   "highway": "secondary",
+   "lengthKm": 12.15,
+   "curviness": 441.2,
+   "flow": 25.6,
+   "turnCount": 209,
+   "score": 74.6,
+   "polyline": "kjftEyzjeYdBeAnCe@jIjA`DtA`Dd@jBnCfCdIdAf@|AoAtB}N`A_BhAPbA|Fv@t@vBQvDyBLiBoEyGOkA^sA|EcDtEPxCyAzGCrBgCjAk@pNbBzKwGpFyAfCkC|FIbCmC~@S|EtC`FaDv@AhAz@n@lBhCvArRyGxHmEpCStK`B~DJxE|CdCNxCsEbLeLfQsJvC{CpBeAh@DjEpEnELb@v@I~C^lAn@f@hBm@b@v@bBLTfAoAlAzAh@b@zCl@\\n@e@p@hAjADV{CSiDzAiB`BHR{@jA_@h@mCn@@^jBb@M{@}C_@AeBV_@xA}Am@mChCa@CLeD~AsGhBsDi@g@{@r@o@Q`@sBuAwAlAmAdJx@xIg@~BSbKsD`Pg@`JaBfGHlEbAfWf@j`@eO~OoHnDo@pGNlG{A",
+   "pointCount": 110,
+   "start": [
+    34.93558,
+    137.358688
+   ],
+   "end": [
+    34.857174,
+    137.379828
+   ]
+  },
+  {
+   "id": "愛知県:43",
+   "name": "作手菅沼平瀬線",
+   "ref": "337",
+   "highway": "secondary",
+   "lengthKm": 6.71,
+   "curviness": 486.1,
+   "flow": 23.3,
+   "turnCount": 140,
+   "score": 74.6,
+   "polyline": "{n_uEi|seYqB{H@qDy@uDqBiEuA_Jn@mGhB_@h@aAKkBdAeGy@aDD{AzCeTyBaByCz@q@Oc@gAe@eIz@sEbEoFtB}@`@qJlBiEtBy@b@eBSeBfBiFNsCqA{Sl@_AnAQbB`CrBVxAdB~Bh@lIGrEoBHq@e@oBTiBpFqI?uG~@}AlD{AhAoAh@yAG_Cr@Ch@dEj@FM}DtA[|B_IfHuHpAuDpDkBzF[fB{EbBkAzAkJfCqB`DoRq@aN{AsC",
+   "pointCount": 65,
+   "start": [
+    35.064302,
+    137.405007
+   ],
+   "end": [
+    35.046488,
+    137.455079
+   ]
+  },
+  {
+   "id": "愛知県:44",
+   "name": "大沼足助線",
+   "ref": "362",
+   "highway": "secondary",
+   "lengthKm": 10.45,
+   "curviness": 464.3,
+   "flow": 24.1,
+   "turnCount": 201,
+   "score": 74.6,
+   "polyline": "ix}tEo|feY_B[iCmBgEdCgItCoDYkByAcBkDUsBt@_HxAqGZwGiBqB}EMyEzBaJnWcCjC}FpAy@vAaB}@cCBw@k@u@b@JdEeB~FmCr@gBEq@l@_AkAoC{@wC?q@r@aCeBoAjAKjAuC^QfAiAa@c@hBj@dAaEYAvClAt@eAh@_@zCqBfAIz@h@bAEv@q@JkBgA_Eq@mDmBwEwE_Du@kK`CcKjMwCrAsADuEyBmBKk@x@JpDjDxHVtCO~C{@nBiCdCoIdOOrBoBfHg@tIThFeA|EgBhAsBWuAaBkFyPoAy@{AaCaDcAqGTaMrCiJtFeFnBeHvA{RMyDsBqCiF_Am@yAR}GxEsI_@wF|EyCl@_DB}EgAeGIuB_B",
+   "pointCount": 99,
+   "start": [
+    35.055568,
+    137.338484
+   ],
+   "end": [
+    35.11799,
+    137.319286
+   ]
+  },
+  {
+   "id": "愛知県:45",
+   "name": "大塚国府線",
+   "ref": "372",
+   "highway": "secondary",
+   "lengthKm": 3.91,
+   "curviness": 440.4,
+   "flow": 27.3,
+   "turnCount": 63,
+   "score": 74.4,
+   "polyline": "mrqsEmfdeYN|JlFvD|DbI`HlFZ~Mj@jBlDlDhCvGfAl@vDVtE|F@b@aFnHf@rBeA|BPvBOlHx@|BWv@pJjQdInCi@jEd@TpCWd@x@DrBb@HjCrKxFy@PrFU`FdCzKrAhBj@H",
+   "pointCount": 35,
+   "start": [
+    34.829349,
+    137.32471
+   ],
+   "end": [
+    34.814668,
+    137.294002
+   ]
+  },
+  {
+   "id": "愛知県:46",
+   "name": "加茂広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 5.63,
+   "curviness": 470.5,
+   "flow": 24.5,
+   "turnCount": 108,
+   "score": 74.4,
+   "polyline": "ecouE__oeYdB_AxAJfBtCbBhHpDD`BhDh@MlByFtA[f@PNbA[|BNh@rHKzHzEvTYfAX`CbFZjIbA`@nB]`@b@@l@cAnB@bAz@xE`BdAZzCjBxAJ~GrExDtENpMvE`Ec@jDxAvBe@xCsDjCaAjERlGqCvKVxAtAR|KlBpFI|@iC|Db@zIl@dAtAe@ZgHdCqAd@cAVcCaAkDbBqBh@^ChEb@`@",
+   "pointCount": 59,
+   "start": [
+    35.144349,
+    137.379838
+   ],
+   "end": [
+    35.113919,
+    137.363568
+   ]
+  },
+  {
+   "id": "愛知県:47",
+   "name": "布里新城線",
+   "ref": "438",
+   "highway": "secondary",
+   "lengthKm": 4.45,
+   "curviness": 482.9,
+   "flow": 23.6,
+   "turnCount": 91,
+   "score": 74,
+   "polyline": "w}ptEydjfYmAnCeC|BbBrGFrEyBfCcKjCQb@Zj@|Gr@hMa@hHnB~GW`Br@jCrCnBu@t@f@tCe@rDzGvGjAjCrAn@dAExEp@bAlBKfEiCr@N^tCtCjGThChCcAdBrBhBPvCyBlIkCxAh@fAvCnCqAzABbDxDtAlGq@dKZdD`@h@xDdA",
+   "pointCount": 45,
+   "start": [
+    34.989875,
+    137.519008
+   ],
+   "end": [
+    34.968797,
+    137.500839
+   ]
+  },
+  {
+   "id": "愛知県:48",
+   "name": "桜形東加茂下山線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.31,
+   "curviness": 458.6,
+   "flow": 25.7,
+   "turnCount": 59,
+   "score": 73.9,
+   "polyline": "mqstEacjeYv@{@P_DjA_@pCpBp@tDxDpClBnFs@P{AkBe@p@vBvCvClIn@fJlD~JDlCzHxKXdBzBhB`@hErAtDlBjA|JxLt@d@tAU`@b@|@lIrBlHC`C|@zC`@hGGnIcAdC",
+   "pointCount": 33,
+   "start": [
+    35.003274,
+    137.354886
+   ],
+   "end": [
+    34.991245,
+    137.329926
+   ]
+  },
+  {
+   "id": "愛知県:49",
+   "name": "豊川蒲郡線",
+   "ref": "368",
+   "highway": "secondary",
+   "lengthKm": 5.73,
+   "curviness": 458.9,
+   "flow": 24.6,
+   "turnCount": 107,
+   "score": 73.7,
+   "polyline": "uzrsE_cvdYaGqCa@o@}B}J}FoJcAkEgA?_BdEu@GQe@^qF_AyC|@oC~@iJdAi@vEhDn@m@Eu@uDiCq@eFeEf@uHqIo@kDeGiATs@dFo@`@cAe@cAyAWa@cAfA_D?wDmAwIWsH`AiF}@}CE_Dr@oIIsCx@_KA}C|@_Cn@qHnCcCpAiD~AiIWsFp@gEXoIbE_M|@gPKgAkCqAw@uDsFiD",
+   "pointCount": 55,
+   "start": [
+    34.835785,
+    137.252476
+   ],
+   "end": [
+    34.841434,
+    137.297655
+   ]
+  },
+  {
+   "id": "愛知県:50",
+   "name": "鳳来渋川線",
+   "ref": "505",
+   "highway": "secondary",
+   "lengthKm": 6.85,
+   "curviness": 451.1,
+   "flow": 24.1,
+   "turnCount": 128,
+   "score": 73.1,
+   "polyline": "uxhtEo||fY{A}Hx@}EIkBqD_BcIsJaCiG}AwB_@sCyBcB{BcH_AcADmCcAoBgC{D}BoAaDkDe@}GoDeL{DkEiA_CiDcBcAgErBoCByDcBkDs@wDaCqDk@yBsLmOoAiD_BcAS}Bk@cAwAo@mBN{BiBWuDeBwAYdAnAtD|BpDJz@[Nq@yBkIsKRcA~E_AfB`Ad@YaAsE|@mJUMaDzAkCcBQw@f@mAzCElAqBtBg@|AP\\]PyBa@qF?eGd@}ArBHbGxChEu@lHFzNpK",
+   "pointCount": 71,
+   "start": [
+    34.948108,
+    137.614961
+   ],
+   "end": [
+    34.957581,
+    137.653531
+   ]
+  },
+  {
+   "id": "愛知県:51",
+   "name": "芦谷蒲郡線",
+   "ref": "323",
+   "highway": "secondary",
+   "lengthKm": 3.78,
+   "curviness": 450.1,
+   "flow": 25,
+   "turnCount": 68,
+   "score": 73,
+   "polyline": "siwsEg}gdYr@aIb@cAvDsGpHwGr@gHhC}EZ}GdC]zAcFrAsB@{DlBy@lA{CQmCbBm@f@yD~CgHpAgMvDcBn@gCnBu@\\}BbBcBU_DPm@`Gk@d@}@fAgIp@i@`CEtC{D[oEjBoCjBkIXkMgAcF",
+   "pointCount": 37,
+   "start": [
+    34.858658,
+    137.179884
+   ],
+   "end": [
+    34.84381,
+    137.21196
+   ]
+  },
+  {
+   "id": "愛知県:52",
+   "name": "牛地大多賀線",
+   "ref": "484",
+   "highway": "secondary",
+   "lengthKm": 3.08,
+   "curviness": 431.4,
+   "flow": 26,
+   "turnCount": 51,
+   "score": 72.4,
+   "polyline": "wutuE_g{eYfD}Bj@yDF}GrCiC~@ZnApJbDfD`Gx@lD}@~I`FxCa@vGyCh@sCbBkBjGd@jEwAxD`DvBo@jCeHx@g@zAr@jCpG|AjAlDgCrA`@\\_@dA}Qb@]",
+   "pointCount": 29,
+   "start": [
+    35.172918,
+    137.442556
+   ],
+   "end": [
+    35.154255,
+    137.447713
+   ]
+  },
+  {
+   "id": "愛知県:53",
+   "name": "本宮山スカイライン",
+   "ref": "527",
+   "highway": "secondary",
+   "lengthKm": 11.62,
+   "curviness": 435.7,
+   "flow": 23.4,
+   "turnCount": 216,
+   "score": 72.3,
+   "polyline": "{rjtE_pteYlCoEnHeA|@b@nD`I~@x@fJ~@|KuBfCxAtAhE~An@|BiApDc@vC_HAuJtG{BtAmBvEyKxBcAfExB|CQ~B|@bCC\\Za@rHnAxC|AvAxAO|BiB~IFbIu@`GqIr@g@|CUdEjAjEdFxGhEjCkBnFcBt@gAAsCn@iD`BcCtCcA^iFn@wBvBeDxDw@lJtAT{C\\]hEcAnB|AjAF`EcB`AwE`Ae@vA~ChF~@t@_EU_Fd@_A~HrA|KiDdClC?hFb@@fBmBdEBlA_Dc@{EzAiNI_Gy@}Gf@uHe@i@}DCu@r@{@bD_@L]_@VgD|C{EcDsI}EqTeFkIwCu@CyEg@kBy@OoAfAoAP_FkGyA{DeFkCXkA~DjA`AQjBsFUiAcAKa@p@`@tAtCr@bAq@EoAsC_Er@sDeA_Fy@cAoDc@qCkCgENDmC",
+   "pointCount": 114,
+   "start": [
+    34.957421,
+    137.408164
+   ],
+   "end": [
+    34.918629,
+    137.446774
+   ]
+  },
+  {
+   "id": "愛知県:54",
+   "name": "作手清岳玖老勢線",
+   "ref": "436",
+   "highway": "secondary",
+   "lengthKm": 10.59,
+   "curviness": 417.6,
+   "flow": 24.8,
+   "turnCount": 178,
+   "score": 72.2,
+   "polyline": "cqmtEsayeY{CwNlCsJvAyMhBaDEmDd@mExB}CjCiA\\w@f@sOoC}SqA_DmCaCqBsF_@mDsAkEcEmBaIlA{A`BuB?oBx@aHTmEz@yQmD{CFmAaCo@QiIzA[yDPcIyBsFeAgAcF{AuFeUyCaEuA}@}BUoGBw@wASiCo@[cHhCqApCwAh@w@_@kFkJmA_@e@dB|A~B@|@_BbAaAC}JoGDyB_IwLDoCe@s@kA]oATwCvAiEf@oBlAsDm@qCuAkEmG[cC`@}OVq@xEkCi@sE`C_Fq@aAwDY{C_CuEg@Q}Ax@cDyA{HZ_AfDcDLgD`DIzA}GMo@}B?mAeBGiBx@_CnAs@dDIbDzAfBdBh@a@\\cEjBmIHqK}@}D}Dg@m@kAFR",
+   "pointCount": 101,
+   "start": [
+    34.972496,
+    137.431463
+   ],
+   "end": [
+    35.004828,
+    137.490336
+   ]
+  },
+  {
+   "id": "愛知県:55",
+   "name": "広域農道幡岡線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 5.8,
+   "curviness": 425.6,
+   "flow": 24.2,
+   "turnCount": 102,
+   "score": 71.3,
+   "polyline": "kexsEqr`dY~IoJfFh@zDzD~Fz@vEH|EyObA}K|FrBRWw@iCt@MzFhA`CpB`@CdHwD`JeDnDg@jE@|A{B|FaFrK}Dx@b@tBbJxFn@hBhD|BXjAc@jAsBhIXv@kC`CkCp@_EbBfC~BsAd@L~@zCtB~@tCvErDnLAdAiBpBu@rEz@jMnAbAvCRnDqBl@}AIcDfDcJfA_@nB~@",
+   "pointCount": 52,
+   "start": [
+    34.863098,
+    137.142329
+   ],
+   "end": [
+    34.828851,
+    137.145348
+   ]
+  },
+  {
+   "id": "愛知県:56",
+   "name": "三河湾スカイライン",
+   "ref": "525",
+   "highway": "secondary",
+   "lengthKm": 6.65,
+   "curviness": 435.5,
+   "flow": 22.6,
+   "turnCount": 128,
+   "score": 70.7,
+   "polyline": "myusEm_kdYu@iBbAiGeAoEjCeCXkGWw@g@r@WvD{CdA}@hAPjIm@nBuIvFu@Km@qA@sAl@oAx@WlCRx@sCiAuF_AuSi@_B}BgAeEkICsC`AmDwDcI}A}IeGi@eBz@mArNTr@tAb@Hj@aCbDeBlEgFwBaDf@aDaD}Eo@uA}C_EUiHiMqBuJrC{HDeAg@u@cFUo@u@mByHtBsNgC_CeCwFlAqDNaQSgAgBiAa@cBKkLj@qC`DsB",
+   "pointCount": 63,
+   "start": [
+    34.850954,
+    137.195592
+   ],
+   "end": [
+    34.867936,
+    137.227892
+   ]
+  },
+  {
+   "id": "愛知県:57",
+   "name": "牛地大多賀線",
+   "ref": "484",
+   "highway": "secondary",
+   "lengthKm": 4.03,
+   "curviness": 424.4,
+   "flow": 22.8,
+   "turnCount": 75,
+   "score": 69.5,
+   "polyline": "s~|uEciweYlCExChCdA}@{AwGToIq@qE|DeIf@eCuEqFKoET_BbAGbBeBjAVbFxErIjAtAgCn@qEp@S~ApDfD~AbB@|CjA|BnGvCNlH`GnBJtAfAhBP`Es@nFNf@[dDn@|AKzG~ItE^bFtEnAAfIeC",
+   "pointCount": 40,
+   "start": [
+    35.215297,
+    137.422418
+   ],
+   "end": [
+    35.192592,
+    137.424845
+   ]
+  },
+  {
+   "id": "愛知県:58",
+   "name": "加茂広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.99,
+   "curviness": 431.1,
+   "flow": 22.3,
+   "turnCount": 77,
+   "score": 69.4,
+   "polyline": "qjyuE{jpeYeAEqA`B_FmBuCE}An@oB|EyDxEyCxFI~@|AbE{@~Ds@`AiG`DuB^{M?iGm@cGAoGrBqG]{B]aAoAkBqLN}Gw@cCkBmA[kCgCHcBrDgA^eA|AiAAWu@^aDUw@oBgCw@yBoDmBXmA`FA`BuBb@_CI_BYk@cBi@",
+   "pointCount": 45,
+   "start": [
+    35.196731,
+    137.386862
+   ],
+   "end": [
+    35.21706,
+    137.389612
+   ]
+  },
+  {
+   "id": "愛知県:59",
+   "name": "富栄設楽線",
+   "ref": "389",
+   "highway": "secondary",
+   "lengthKm": 5.33,
+   "curviness": 407.5,
+   "flow": 23.3,
+   "turnCount": 93,
+   "score": 69.3,
+   "polyline": "}phtEoczfYEbA`CjAJj@|C`CxF|Hq@tD{HtFqKnBk@|EuCnFaFzFsEb@WdCyAJgAwAkCr@wG_BaEnFuJpHkENcE~AoH_AyEvCmH~@sEbDYvCoErBuAnCgDvAqAjCsCpB}A[eAaAgA{EWR|BtPjAbAtIBbDzAlA`BpB`H@pBm@bDj@zLmBvJ",
+   "pointCount": 46,
+   "start": [
+    34.946871,
+    137.600722
+   ],
+   "end": [
+    34.965136,
+    137.572773
+   ]
+  },
+  {
+   "id": "愛知県:60",
+   "name": "梨野川面線",
+   "ref": "367",
+   "highway": "secondary",
+   "lengthKm": 4.84,
+   "curviness": 418.1,
+   "flow": 22.7,
+   "turnCount": 89,
+   "score": 69.3,
+   "polyline": "utcuE_kreY[q@iAMgB~BaC^oCe@oCrAgB?eIqDiGr@iGaB{CXmDiA{EGaDiCmBZsDa@w@nAeFvCq@pDaIzIsAjJg@`@F~A]z@qCTyBg@aGoHsOfAsAvFr@bEObKqAhB{Er@{A~@y@xE_IdJ[vFuAcAgAmCF}GsBcByBSsAu@oCTqApAiAvDk@J",
+   "pointCount": 48,
+   "start": [
+    35.085713,
+    137.397124
+   ],
+   "end": [
+    35.116278,
+    137.385676
+   ]
+  },
+  {
+   "id": "愛知県:61",
+   "name": "豊川片寄線",
+   "ref": "377",
+   "highway": "secondary",
+   "lengthKm": 9.72,
+   "curviness": 386.6,
+   "flow": 23.6,
+   "turnCount": 159,
+   "score": 69.1,
+   "polyline": "yfctEsn`eYfCeS{GcQFyTvFaPb@uDvAc@hCdBz@?x@gA@aGd@eBdMiGb@uBWoBeAwAeBw@SgAzGiDrFoAN{AwAqQJaAj@]|CHdCy@xCiCnBMz@q@`@eBcD_GImA`LePdXPhQlD|A|CtFd@xLpJfHhCjIdOrHnH`Bo@n@qEbAcBrIq@jFx@fD|Av@nBfB~APh@SjApAh@l@bCTSsAuDTiBpAtDrCbC|G?vDhAdDL\\k@}As@FkAjHyA|GbB|BiB`Eu@vIrDrI`BnAjAtADnCsAdFu@`A}@rBp@`Fq@nTzP",
+   "pointCount": 78,
+   "start": [
+    34.919653,
+    137.305535
+   ],
+   "end": [
+    34.866847,
+    137.323202
+   ]
+  },
+  {
+   "id": "愛知県:62",
+   "name": "切山夏山線",
+   "ref": "333",
+   "highway": "secondary",
+   "lengthKm": 17.44,
+   "curviness": 385.4,
+   "flow": 22.9,
+   "turnCount": 294,
+   "score": 69.1,
+   "polyline": "wmqtEatoeYzGdI`Cz@lHw@zGwEfE_@xEoDdFyF~HiEnAmDhF}VpC}ErHoInDaAhFQvFvBp@OfAoBp@~AzCMDjJ{@`GlBpFFjFfBtI\\xEhDnGq@`MdB|InHpFzH~A|AlApAfDBjEl@dC~@pAlDnBdChKpCfGjBrBn@xCFzH{@dEE|CLpApAlCVjCm@bGh@fEs@|AqF~CoB|BuA@Ql@bAvBtIlHDzAkC|BChBhBjCnDdBj@xAEz@c@vAg@VmAUyBaBgJp@qBp@qBrBkB~E~DjLgApBGxCjAxAbO|ElNrM`GvBFvAhA`B`CBO`FjA`CfDtBrAbI~@~@pB]b@\\}C~AU~@n@~EGhB|@`C_@xAL|Bz@rAQvDeBn@kBaBiEa@b@qH?{AYQaCvGGjDiAdGR|A~C~@nAtEzB~BlCVYhDnFnE`@tB`DtEpBh@s@qBf@]jA\\bBzCrEOv@lFlFbCfCvGfDNzC|IxDt@pDrCxBP`GtD^lALpJbCzGn@xLXjBz@|AzLjJvCp@jRTnCp@xBvBfIbNhH`DbMbKpBjElDlMIfAkEfFM`AxDxNdD|@|N{@dAbAn@`C",
+   "pointCount": 154,
+   "start": [
+    34.99244,
+    137.383206
+   ],
+   "end": [
+    34.926482,
+    137.294906
+   ]
+  },
+  {
+   "id": "愛知県:63",
+   "name": "茶臼山高原設楽線",
+   "ref": "507",
+   "highway": "secondary",
+   "lengthKm": 18.61,
+   "curviness": 409.1,
+   "flow": 21,
+   "turnCount": 362,
+   "score": 69.1,
+   "polyline": "qxtuEmfmfY_BiCa@gDnBcNY_KnB_IiEkEYyAlCgGPiEfAsC@eAqHoM}Eu@Oy@bA_CBkAiI_D?_BjBwBQy@sAy@aCLkAeC{HkBo@aAT_A`Dg@@oC^q@hEoAjEV^}@oBaFeD{@}AuFx@_BAiAkD_Ag@_AR_BtCcB\\w@[gAqC}Co@}IcDkKl@e@dF?t@eA}BwDs@}D}ByBJaAfBoBGuCc@q@kDcAUqA?yH`@s@|Ak@T{@qByE@iAx@_@hBrA~@Bl@kDr@u@~@X|BpFx@CVqAmBmF_Aw@mEXgFq@cAvB{@NkDkBeHdDeLGaEiBwAsBeAmD}Bm^hAaG_BqDu@uJwBiF?mYc@}A{AiBU{ANwFj@sAbBMpBt@r@k@o@gEfCkAVaA_DqIVs@xBk@P{@gCcEaAOiCx@m@c@AkApBeECuCyKeQQmCj@oJeAuHoCaEkAoLVaCfCcDEyCo@iBeDk@{@iAEwAx@iHeAeH{AmFoEmHZgXQgB_FoHaBwDgDiBcAkBCoBdBsF{@kJjCgIDsCgSa\\wR{L{BwIwAaBgCqAmAiBoAuG}@gBuG}CyAiBU_D~C{FXgC{BuOa@yMmGgD[cALsG`AkIk@_CeCQmGlDyDiB{AAsJtGaALcA{@kCuF}BQyAbBgDpJy@f@wCLq@t@oE~L",
+   "pointCount": 177,
+   "start": [
+    35.173373,
+    137.534627
+   ],
+   "end": [
+    35.219499,
+    137.658444
+   ]
+  },
+  {
+   "id": "愛知県:64",
+   "name": "坂上花沢線",
+   "ref": "361",
+   "highway": "secondary",
+   "lengthKm": 9.37,
+   "curviness": 391.1,
+   "flow": 22.8,
+   "turnCount": 161,
+   "score": 68.5,
+   "polyline": "srxtEkv~dYiF\\}D|BiDh@}ALcFoA_PrB_BjB}D|NgGjDkAJcCwAuBz@iCO_HmDgBD{NcE{DPmCl@yAdAoBTwJcCuB@cFlAoBoAwGxBqB~CcBJc@~Ao@d@cBsBcFIsFxEaD[{CZiInD_Hu@{Bd@cEAuKhDiErCyENmF~@yQKkCd@_AvDB~IvBhBt@jBIhHdArCVrCzA|B[~CJpEvCzEhBvAdCrEbCbGnFxIfArED`AaAlDaC|Ep@zIMpQr@vO`BrObBhBCtAz@pAOrCj@nCCjCpD^ZoAj@SpBhA|@ASoCRm@pAUUaBv@y@o@}AnAyA",
+   "pointCount": 86,
+   "start": [
+    35.029055,
+    137.296539
+   ],
+   "end": [
+    35.064523,
+    137.258665
+   ]
+  },
+  {
+   "id": "愛知県:65",
+   "name": "豊田多治見線",
+   "ref": "13",
+   "highway": "primary",
+   "lengthKm": 6.61,
+   "curviness": 401.2,
+   "flow": 23.7,
+   "turnCount": 112,
+   "score": 68,
+   "polyline": "qnevE_andYjBgDdA_EpCeA`FoEdKuAvBn@rBO|B}BnCd@nCxA|CJ~Cs@xBkCrEGfCl@zEgEhBW`DiCNsCZe@xCUj@wEeAqEhAeIx@_ChCdB|@DxW}GhCzA|Dr@`DwBlFkAh@}@RcFnAoCn@sHpBkErE_F~H}AxGQj@VrBnEt@JlDu@hFxFbB`@fAo@xDkGNaFt@oF`@q@x@NbAxCvDzAv@GhCmBhIx@`Ay@MsDn@}@rCf@dD[xFw@lFuB",
+   "pointCount": 65,
+   "start": [
+    35.258814,
+    137.211197
+   ],
+   "end": [
+    35.214659,
+    137.23326
+   ]
+  },
+  {
+   "id": "愛知県:66",
+   "name": "長篠東栄線",
+   "ref": "32",
+   "highway": "primary",
+   "lengthKm": 23.59,
+   "curviness": 368.3,
+   "flow": 23.7,
+   "turnCount": 366,
+   "score": 67.8,
+   "polyline": "e|`uEik}fYnA|AzBfAhF~G~PxPjCxFbFlEvCPhAhEpCjDnEfCjCs@`@xCxAtCtBf@vBGbDxBlAnC~CxBhAjD~B|Af@tC`Db@hBpIfA@bCiDl@TqAdFVvB]bEtAlDHhB`CzJrC~GjClBj@lCzC|CbA`FxClFhO`j@@h@_A`Bv@|DdC|CMd@qBJiBU[}@kAZs@c@mBFM~@fArAv@nJs@j@KhAy@Ng@fA{@JgAqA}@|@yAQo@t@CvDs@lASfBqA|@q@~EJl@`@?h@mAJuCxA{AxAKVuB`@KQ`G_@JgAu@k@zAbA~FCnCq@f@kB?sBeBeBt@oAlBQhEfElItCpCTxAyA|AcEbAaA|AB|@vHuApHj@lCgBdDi@vDf@bCtC|HnRWjAoBjCL|@fCuAdDW|@Tt@~BtG`KtAz@`LUjEpCfDcB`DQtEtB`H^n@x@hAvElA~AhD_CjIuCfCn@tCu@~EdC~GTrKtErG^~^kI|FuDlHaAnDaDxFmAvSpIpKv@zCiBlCSt_@vHxBDfFq@tFuDxNeGbM}B`V}JfD\\nCnEzAx@dMlAzEw@dGzBpAmAhLcC|AaAXu@a@}DjBaFpBgB|Gw@r@_AhA_EjFrCrDNnCcAfGcFnGmD`DwD~N{VxA}@lFeAjCsAtAiBjClB`A`CpCh@nF_DbE_An@yF`HvBlFiA`FnEl@vDfB`@dC_AnBcEzEuGdGiCnEeDhGnCzEdAtJq@lD}@pBtAtJpB`J}@lG`AzJ}BvAaEdAs@jY[",
+   "pointCount": 199,
+   "start": [
+    35.071554,
+    137.617333
+   ],
+   "end": [
+    34.934119,
+    137.576048
+   ]
+  },
+  {
+   "id": "愛知県:67",
+   "name": "定光寺山脇線",
+   "ref": "207",
+   "highway": "secondary",
+   "lengthKm": 3.99,
+   "curviness": 342.5,
+   "flow": 26.8,
+   "turnCount": 51,
+   "score": 67.8,
+   "polyline": "}__vEmmxcYvFvUxCfEyAIiBwCkFsRgAkHuQs@ZbBoA`CJjBq@|E}HbJaAxBqAJ_DaBaBl@cC_DiDs@uCuBqAEiCnBmFAGnCqB`EeAx@yEb@iEpC{Cp@qQ`B}ItCgCpB",
+   "pointCount": 32,
+   "start": [
+    35.225753,
+    137.100549
+   ],
+   "end": [
+    35.247111,
+    137.092812
+   ]
+  },
+  {
+   "id": "愛知県:68",
+   "name": "鴛鴨みよし線",
+   "ref": "232",
+   "highway": "secondary",
+   "lengthKm": 4.95,
+   "curviness": 319.9,
+   "flow": 30.4,
+   "turnCount": 52,
+   "score": 67.7,
+   "polyline": "evxtEyf_dYsAP{A`RoCtEkAbF_KxQq@dFuCfFwRxUkB`F_@pEsBvD_BtFh@l@}C~FsCmDkJjMiCkC_C_AsKWeIzJcBjAqC^oJwAcCd@sBxBmEvHeBs@oBGoG|@eFrCqDcCoF{@s@zFr@{F",
+   "pointCount": 35,
+   "start": [
+    35.029632,
+    137.135328
+   ],
+   "end": [
+    35.058583,
+    137.110729
+   ]
+  },
+  {
+   "id": "愛知県:69",
+   "name": "国道473号",
+   "ref": "473",
+   "highway": "trunk",
+   "lengthKm": 9.92,
+   "curviness": 421.6,
+   "flow": 25,
+   "turnCount": 167,
+   "score": 67.6,
+   "polyline": "abotEuvaeYnL`H~FI|AaAvAPjBq@`LQbDT~DdBdAhFv@|ArHdAlC~@nBpArCpD?dHnA|B`@vDxAm@rBGdC{Af@wDpFcEhQmBfDkBfBJvBvEp@b@vBK|DjBzD_@rA_ApAkEfB_Ah@iCj@Gv@p@Fr@aAt@EfAdC|GnCfDdA\\rBcBlDSh@x@o@t@Fn@|CXtAvB|AtEfDgBvAdCfB]TfAUbAgBdAyCXzCfDXfDc@`CzBlDdEyBj@mFj@_AvBS|BcA`AFpKzFjGdHlHtCnCjNv@tBlDrEbBZzD~CxCH~ClAzEq@rDoCbFrA`JAbAq@vAoFxO{DlDbKlD|@pTiFnA|@tEjJv@tPdJpF",
+   "pointCount": 92,
+   "start": [
+    34.980329,
+    137.311948
+   ],
+   "end": [
+    34.917753,
+    137.287664
+   ]
+  },
+  {
+   "id": "愛知県:70",
+   "name": "国道473号",
+   "ref": "473",
+   "highway": "trunk",
+   "lengthKm": 7.53,
+   "curviness": 434.3,
+   "flow": 24.2,
+   "turnCount": 135,
+   "score": 67.2,
+   "polyline": "gpptEukbeY`EuH`@{CS{Du@aC}BmDuEoD{AiFKoCfBoFJeBsCwNoAm@gG`AmB}AKkBvAwHEgAu@}AoFaFoHm@}JaCcHaIiNGyBaA{DeJcDkD}AaLiDuGiA_Hw@ByAjE}CrCm@Jc@a@D_ApCoCxAoHx@yAq@yB`A{Aw@{EgAcB^_BiBcEz@eDHyDxCf@l@v@JhB`BRbBtA\\pB`BhA\\QOgB}@aAOuBXsBiAyBBw@~@_BcBs@GmCgDw@qBaCmDb@yC_Bm@sBOsG{SwSmCqEkCiBwKkEuBU",
+   "pointCount": 75,
+   "start": [
+    34.987723,
+    137.315311
+   ],
+   "end": [
+    35.01394,
+    137.360384
+   ]
+  },
+  {
+   "id": "愛知県:71",
+   "name": "笹戸小田木線",
+   "ref": "490",
+   "highway": "secondary",
+   "lengthKm": 6.4,
+   "curviness": 375.1,
+   "flow": 23.1,
+   "turnCount": 104,
+   "score": 67.2,
+   "polyline": "mv|uEuvxeYeAkFRyDdAeDtEqEVgAk@yBgCgCkAyFKyDdA_E~C}DrZzAbBnApC`FpBrAxCiI~Bs@`A_BAaDcAaCF}BaBwDTYpBH|CyEnDrB`KA`GnDpGk@jNnB~E@vCcCrEt@Xk@kAgC`@aAbPhBvD[x@uD\\{Q_BsYqCcBsD_GBeRSk@uAUsBdADiEqBuBg@qD}@wAcAmEJkB",
+   "pointCount": 54,
+   "start": [
+    35.21399,
+    137.429709
+   ],
+   "end": [
+    35.193903,
+    137.460548
+   ]
+  },
+  {
+   "id": "愛知県:72",
+   "name": "千万町豊川線",
+   "ref": "334",
+   "highway": "secondary",
+   "lengthKm": 4.03,
+   "curviness": 383.7,
+   "flow": 23.1,
+   "turnCount": 67,
+   "score": 67.1,
+   "polyline": "q|ktEwdleYtD@pEaAdBz@dCNjBhApB_BvG`AfEhFjIxCrAdA[v@eAo@eFSgE\\gAl@HpBvDbA~ApBFhCbCyAfFTlCqBfCEnB{AjEk@~BsDzIcIpL?jFtCxHpB~Bu@jBsDxAk@rIs@rMrBrCS",
+   "pointCount": 37,
+   "start": [
+    34.96409,
+    137.365404
+   ],
+   "end": [
+    34.938374,
+    137.364335
+   ]
+  },
+  {
+   "id": "愛知県:73",
+   "name": "県道東大見岡崎線",
+   "ref": "477",
+   "highway": "secondary",
+   "lengthKm": 5.06,
+   "curviness": 365.4,
+   "flow": 24,
+   "turnCount": 77,
+   "score": 67.1,
+   "polyline": "u|ttEcyudYPx@lC|CrDfAhBjCvK|F`HvGbHbDnFfAhAlAjDk@xBhAf@iB^IrAfHlAS`@b@e@dAqBd@a@j@L|A[pCr@zIvB`JMxCx@tG~ClEdB|IhFha@v@d@fCDdBfCdCvGG~F}@xFtCrEfAtDAdC~AfGzLjQdFnDbJtN",
+   "pointCount": 42,
+   "start": [
+    35.01019,
+    137.250898
+   ],
+   "end": [
+    34.987549,
+    137.212371
+   ]
+  },
+  {
+   "id": "愛知県:74",
+   "name": "蘭鍛埜線",
+   "ref": "336",
+   "highway": "secondary",
+   "lengthKm": 3.82,
+   "curviness": 389,
+   "flow": 22.5,
+   "turnCount": 66,
+   "score": 66.9,
+   "polyline": "sqttE{l~dYA~Jp@zBlCdCbBK~Bj@~@x@LzBi@dHf@jC`@ZfEBdE~F~@VrBm@~@PvAtAbClEjFbDlOsB|@{B|F_CfNLh@j@l@nCzBxCvDNdF_BlAtBv@rDdI~CpIiBlCgCdCkAdBIbFnBb@WAoBXy@",
+   "pointCount": 39,
+   "start": [
+    35.008418,
+    137.295021
+   ],
+   "end": [
+    34.983193,
+    137.285091
+   ]
+  },
+  {
+   "id": "愛知県:75",
+   "name": "田峯東大見線",
+   "ref": "364",
+   "highway": "secondary",
+   "lengthKm": 13.14,
+   "curviness": 375.8,
+   "flow": 21.5,
+   "turnCount": 230,
+   "score": 66.9,
+   "polyline": "okluEc{yeYpAbCdBG`@vAvC|Ad@EG[{A_BnCqATu@XEl@`B~@\\PzDxE|GfArDpArAtBxIjBjBLjBzB|Bv@rCvC|BpFtHrBpH@|CbBfHbJjP~CvBaA|AmDdA_CrJpB|DxAlHt@xNrAfJj@bSlDzEvD~AZr@c@t@gFxAqCrHZ~[fA|HxAzAxAFdDaC|A@~Av@kDhDn@~M}DfOsA~IZhFqBvDeDvAwAlCBlCpBzFvH~D~AvDDdKa@`DsAzCJvFj@x@rGlDtBnDKzB{CdGUbEP`CdDjGbA~E_BlWsAlG?bB|@lDp@dHdAnABdKu@rBo@PuHsCg@y@qB_AcBeFmIeAwChAaBfMQfIeBtCqApGAxCcAtES|KThAdAjAhDv@lBrC~@zHdBhGo@bEN~Cx@bCdCdCtAbEI|JjAbDpD~@nHlFnBMhF`AlCpChBo@",
+   "pointCount": 116,
+   "start": [
+    35.130321,
+    137.43554
+   ],
+   "end": [
+    35.111561,
+    137.334447
+   ]
+  },
+  {
+   "id": "愛知県:76",
+   "name": "七郷一色名号線",
+   "ref": "519",
+   "highway": "secondary",
+   "lengthKm": 4.84,
+   "curviness": 390.2,
+   "flow": 21.7,
+   "turnCount": 87,
+   "score": 66.5,
+   "polyline": "grrtEehfgYvDqEd@wCr@gAhMuJnB_IxAeA|FrBv@z@|A`GZ`FpEjFbPyDzFtBtAA`NoEz@mAnBgMM}DcCwGGqDvBuPnAqAtCa@|ATpAzCrGjEfBzBpAtDrA`@rB]tB}AQeDfAeIb@u@|Aa@rCVVgChAsChDI`@tCzAF`ClCj@G~AiB",
+   "pointCount": 45,
+   "start": [
+    34.998279,
+    137.662914
+   ],
+   "end": [
+    34.971961,
+    137.675463
+   ]
+  },
+  {
+   "id": "愛知県:77",
+   "name": "長沢東蔵前線",
+   "ref": "339",
+   "highway": "secondary",
+   "lengthKm": 7.36,
+   "curviness": 369.3,
+   "flow": 22.3,
+   "turnCount": 122,
+   "score": 66.4,
+   "polyline": "obstEishdY|@wJOuN]uB{CsGWsFoCkNA}A^kBpFuLYoE`AkF?uAyCiGwDmFkAaEbAeFeAeF{@wA_HeEmAiC{EyYyCmJ}DoBcBgBaAmFaCs@aAmBQoDcBeEF_IeAmFr@eIkC}SfAga@eB}IiAmCgBwBeEqBk@qAHiAv@q@rDlAbB[pDiCl@iA_BkHdAyHX}HUaDuAgDNeAk@aAr@}B{@iBh@mGQqCzCiBNuCzBMc@oBRyAgAu@DiAw@oAJu@",
+   "pointCount": 66,
+   "start": [
+    35.000882,
+    137.18341
+   ],
+   "end": [
+    35.01019,
+    137.250898
+   ]
+  },
+  {
+   "id": "愛知県:78",
+   "name": "三河湾スカイライン",
+   "ref": "525",
+   "highway": "secondary",
+   "lengthKm": 7.77,
+   "curviness": 382.1,
+   "flow": 20.9,
+   "turnCount": 142,
+   "score": 66,
+   "polyline": "obysEcjqdY~FuDhAB`Bz@r@i@X}E_AwEhCuFe@y@uDLuAs@mBuGfBaJGuA{AiAwGc@YwAn@iEhAeBbEaA|CyCv@qBb@_ElBmEzD}Bt@oAx@wJ[gHdDoI@oDq@iGtAuCr@gGpDqCpDaK`AoFz@WfHf@lCnCrAXjDsBjESlDmBhFiAzC~@nCpBrDg@nGzB~@~ANrEyApDbA`FgA|Gr@nDlCrCz@|Mr@\\rCyDlB_M`DkB|@yABiJ`BsEd@}ErCgD\\_IzAyCa@eDbCmEm@yCPkAxAgC`EyDz@_@zBDv@oB",
+   "pointCount": 76,
+   "start": [
+    34.867759,
+    137.228021
+   ],
+   "end": [
+    34.840827,
+    137.263562
+   ]
+  },
+  {
+   "id": "愛知県:79",
+   "name": "奥田河和線",
+   "ref": "275",
+   "highway": "secondary",
+   "lengthKm": 6.27,
+   "curviness": 333.5,
+   "flow": 24.6,
+   "turnCount": 85,
+   "score": 65.9,
+   "polyline": "gthsEeeibYYgInAoJ`CsIv@uAjGiFhC_G|CwC}DiLm@{Ji@yAHcFvDsOlGgF\\{@f@}Jv@eEmAiDHoCxDyAf@_AFgBl@e@~CZ`Ey@xBdArA?f@kEQ}Gg@CmDcDiBoCc@oEcC}Ee@}Bx@mHpAUZy@_AaJQuJlByEfCaL[wCr@ClD}EiBmI[iMeSmQcBsDS{BR}BtCuOvAqD",
+   "pointCount": 53,
+   "start": [
+    34.783558,
+    136.858592
+   ],
+   "end": [
+    34.777201,
+    136.912925
+   ]
+  },
+  {
+   "id": "愛知県:80",
+   "name": "豊橋下吉田線",
+   "ref": "81",
+   "highway": "primary",
+   "lengthKm": 12.37,
+   "curviness": 358.3,
+   "flow": 23.1,
+   "turnCount": 192,
+   "score": 65.6,
+   "polyline": "otwsEgelfY{@sF~Agg@~E}KhA_JTuIhF}FR{@]}Fm@sBk@JQrBm@LsAy@cBiDv@cC@}DlB_@j@q@[aBqBi@c@eA\\yDSuGvCf@`CeIoBuG^mAx@sLuCqIe@gIuAeAfEiKz@IRj@StDvAuDy@kEsBoBu@uCUiF}@aGeAkAk@uGFaFpDa@XOA{@cG_A{@z@MhAi@Am@qBFiFoDoAmAf@c@`EgBHqAaJ}DkH}MkM}JgFsBsBoFsB}H~AoF]oL^sE}B_FyFkEsByFcGoE}I_BqP[}KcHkQmAcBs@QgKrBwBw@OkBXeGfA}I]gFmBsA}K@_C}@sEgG[_E{AyEaMsCaE?yF~AqDoAeEkEgDwAkO{QkEPmLjCyHmC",
+   "pointCount": 99,
+   "start": [
+    34.860399,
+    137.529323
+   ],
+   "end": [
+    34.9048,
+    137.606378
+   ]
+  },
+  {
+   "id": "愛知県:81",
+   "name": "大津通",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.23,
+   "curviness": 288.7,
+   "flow": 58.1,
+   "turnCount": 21,
+   "score": 65.5,
+   "polyline": "emyuE{{qbYUKd[u@l@\\Zm@Jh@hKa@|I}ChYsA~a@iDiBSwOr@eN~AeYvAaIlCmLl@[l@Ci@i@JB\\sZb@",
+   "pointCount": 21,
+   "start": [
+    35.197151,
+    136.903182
+   ],
+   "end": [
+    35.197151,
+    136.903182
+   ]
+  },
+  {
+   "id": "愛知県:82",
+   "name": "奥田内福寺南知多線",
+   "ref": "276",
+   "highway": "secondary",
+   "lengthKm": 7.93,
+   "curviness": 328.9,
+   "flow": 23.7,
+   "turnCount": 110,
+   "score": 65.2,
+   "polyline": "_casEuenbYBc@gFoB?kVyHiOhAyAs@}F~BkJN{GhEiPE}CtAiGuAkCqA}@}PaHz@sBnA}ApBy@pPo@`By@dDyFxBqBhKqC~EoH`GqCnC_CfG_Kx@}Bb@uD|EYj@jAl@vFlBh@vBlHlF_CxHdBbDKB_I~@gF|FyDxFqN|DkC~Bt@fBaAZmEQuDn@oAF_CfCsEhLQ~CqF~FmC`CqDtFcCxVaOmB_DuAoG",
+   "pointCount": 57,
+   "start": [
+    34.74496,
+    136.884275
+   ],
+   "end": [
+    34.715046,
+    136.930688
+   ]
+  },
+  {
+   "id": "愛知県:83",
+   "name": "南大須鴨田線",
+   "ref": "335",
+   "highway": "secondary",
+   "lengthKm": 5.95,
+   "curviness": 354.1,
+   "flow": 22.2,
+   "turnCount": 95,
+   "score": 65,
+   "polyline": "asltEw|vdYmC`GoFPiAkAeCg@eAmCKgCeJaIuBuCy@E_AdAfA~FeAvAO|Aj@rBo@bBr@|Eq@lApBzIk@lKt@jEmKpPo@fESdIcE~EyAvDmJvb@AnFcBnJbBfMgApDyA|B|@xNS|AiApBTbDi@nDiAjCyC`@}AhDuFfHuDlJoCtOiCxAcBxEaB\\}ArB{@nG{AjC",
+   "pointCount": 49,
+   "start": [
+    34.967686,
+    137.256599
+   ],
+   "end": [
+    34.987549,
+    137.212371
+   ]
+  },
+  {
+   "id": "愛知県:84",
+   "name": "花沢桑原線",
+   "ref": "338",
+   "highway": "secondary",
+   "lengthKm": 13.29,
+   "curviness": 348.6,
+   "flow": 21.2,
+   "turnCount": 219,
+   "score": 64.9,
+   "polyline": "onytEmqzdYrAzClG|Ia@rI^l@`FBvCxCzAf@hI}@jD~CbD`@dHhFvCn@~CW`Bj@|K|IlEUzGyD|CxBZbBQdAeCpCOxAtB|MMjAqL|BgCfFmDMmFkCaJkBs@ZaBrC{Ci@}AbC}ElCeAjH{B`GyC|BqAZo@`CAzBq@vAsAu@y@h@FjErBvHyBhPvAdHErE|ApNE~A_Bl@eC`DmMEwCr@}@dBkC`CuBq@oCTc@`AEbDo@xAmEbEwHnCk@jA[xCaDhGLpAjBlCnB?r@`AmFxBs@nBXjEvDjCV`BKrLgD~AXj@bBVLrIzArFfB`PxCdMn@rFsEfKGzIy@l@wGJ{@xBIxEtCdDvHnElUfKpJz@`Aj@l@bB?fDi@pDoCvG_AvJf@`Oj@pDhAdCzHvH~BhMpAjAeApEIdCdCdQ?nCkAhEuD|F",
+   "pointCount": 113,
+   "start": [
+    35.03352,
+    137.275266
+   ],
+   "end": [
+    35.031212,
+    137.186374
+   ]
+  },
+  {
+   "id": "愛知県:85",
+   "name": "国道473号",
+   "ref": "473",
+   "highway": "trunk",
+   "lengthKm": 7.66,
+   "curviness": 340.5,
+   "flow": 31.8,
+   "turnCount": 82,
+   "score": 64.7,
+   "polyline": "qhpsEosrdYdU`Cqp@_GiPu@aFxj@k^yLaX_GuGgPgDwBwVmA}\\gHoBLaEnBkIC}GbAi@[]wAz@kCbFsBx@gA}@wAaEeB_@oIcHDyBe@@q@bCw@`@oBEi@eB}@@yApEwA{AkCXiE{Bg@Yw@Vy@xBqAEu@gBuCr@yB}AeA?qBe@w@oCWyEdCuC`@wAhA_BO",
+   "pointCount": 49,
+   "start": [
+    34.822653,
+    137.234644
+   ],
+   "end": [
+    34.860956,
+    137.248517
+   ]
+  },
+  {
+   "id": "愛知県:86",
+   "name": "南粕谷半田線",
+   "ref": "464",
+   "highway": "secondary",
+   "lengthKm": 3.73,
+   "curviness": 278,
+   "flow": 35.7,
+   "turnCount": 29,
+   "score": 64.7,
+   "polyline": "orctEuxvbYMaDu@k@nBi@f@s@RcDp@{@MmCqEyLqDBvAuAdAwCnGmK`BaNhBgg@zBkMk@kKk@e]fABfA_BfOeVlAkH`JkK",
+   "pointCount": 23,
+   "start": [
+    34.921524,
+    136.92827
+   ],
+   "end": [
+    34.91393,
+    136.962584
+   ]
+  },
+  {
+   "id": "愛知県:87",
+   "name": "小渡明川足助線",
+   "ref": "366",
+   "highway": "secondary",
+   "lengthKm": 4.46,
+   "curviness": 372.1,
+   "flow": 21,
+   "turnCount": 79,
+   "score": 64.7,
+   "polyline": "kstuEgsneY|Cp@~FxGbEcCdAAl@|Et@hAlIfC~CzBbACrBfBvC|E~@|CpBpCdC~AbBpE`EbB`DpCf@rDn@p@`@|BhFjGbCPnC]bBp@zBmChBXlAe@vBzCxGhVg@pGn@dC?~BnBlIfCxAtFdIpC|B~EbHdB`AXxCpBtDjDtK",
+   "pointCount": 42,
+   "start": [
+    35.172542,
+    137.377965
+   ],
+   "end": [
+    35.147012,
+    137.348689
+   ]
+  },
+  {
+   "id": "愛知県:88",
+   "name": "大代赤坂線",
+   "ref": "332",
+   "highway": "secondary",
+   "lengthKm": 6.48,
+   "curviness": 325.4,
+   "flow": 23.7,
+   "turnCount": 89,
+   "score": 64.6,
+   "polyline": "id_tEcgleYBlAbBdE~@~@dDfAlEbFhAnFtAvB~@R|CrChO`FzDzElCrARpD_@bBhC|AJbA{@pBr@fABbBfBdCZI}@eF^m@`BbFdCpAhJ~LrDhCRhAiAbFa@vGr@rHsAfDa@hGhCrGpLxGvWvFbBbAlCnMvEjEfBvDrErGxErFxF_@jBx@nN|WhC~GfIjJpA|ECnAnHtM",
+   "pointCount": 51,
+   "start": [
+    34.898774,
+    137.365779
+   ],
+   "end": [
+    34.865334,
+    137.320848
+   ]
+  },
+  {
+   "id": "愛知県:89",
+   "name": "作手菅沼平瀬線",
+   "ref": "337",
+   "highway": "secondary",
+   "lengthKm": 4.96,
+   "curviness": 336.1,
+   "flow": 23.2,
+   "turnCount": 72,
+   "score": 64.5,
+   "polyline": "m~}tEk_heYcAqC^uJ^oAfBoBdFuCtPwEpAuCIeFxAuQyEcR{B_D}@iGNoAjAgAjE_BxAqCxAeGV{DeCiUsJwBaAgAQoBZiBtAmC`D_A~GpAt@aBnAqs@WwFuAs@gCn@mCi@Vw@dBa@rByB_@eDl@w@tClB^I",
+   "pointCount": 40,
+   "start": [
+    35.056549,
+    137.344056
+   ],
+   "end": [
+    35.049993,
+    137.38203
+   ]
+  },
+  {
+   "id": "愛知県:90",
+   "name": "加茂川志賀線",
+   "ref": "341",
+   "highway": "secondary",
+   "lengthKm": 4.47,
+   "curviness": 334.1,
+   "flow": 23,
+   "turnCount": 65,
+   "score": 64,
+   "polyline": "w}ztEqokdYbFpG`E`D`EqGrAaE`FlAlGcFvBoEOqJlAuEhB{DnBiNy@iCeB_CqN}Ba[wPwAcBsAgEFwBdA_BzGaFrAZd@a@J_Ao@uCvBgEfB{@dAgEoC{JkD_TgDuGOeK|@yA",
+   "pointCount": 33,
+   "start": [
+    35.041076,
+    137.198172
+   ],
+   "end": [
+    35.040217,
+    137.22739
+   ]
+  },
+  {
+   "id": "愛知県:91",
+   "name": "北一色東広瀬線",
+   "ref": "350",
+   "highway": "secondary",
+   "lengthKm": 6.19,
+   "curviness": 347.3,
+   "flow": 21.5,
+   "turnCount": 100,
+   "score": 64,
+   "polyline": "ajpuE{qodYaSgCiCVaD|BkC`@wGcAoDsBwAO}@TaG`F_ImCwELqHpFcER{AfCe@JmEoEgA_@aBHuEoCuGvAqCSa@d@|@jIO`Jw@hAoC\\wAu@kEmLkAkA_Ea@_CbAoBNqArC_FbCuBpEaFjCkDl@sDcCkCh@oDnCaAdFsAnBsDGwAgDiAg@{@RiC~Cw@C{@w@_APwExGuAfFgCfCqBpI{DnC_CrD}B|F}@jF",
+   "pointCount": 59,
+   "start": [
+    35.150574,
+    137.219023
+   ],
+   "end": [
+    35.192367,
+    137.203092
+   ]
+  },
+  {
+   "id": "愛知県:92",
+   "name": "加茂広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 8.4,
+   "curviness": 337,
+   "flow": 21.6,
+   "turnCount": 131,
+   "score": 63.9,
+   "polyline": "al{tEsrjeYcCk@S}BiC_IWoHkBuAqDzAcGpI{FnFaGpD{Be@cCsE?o@rFUdC{CYa@}Hd@gC_FIyAt@aD`AsM_@aA{@j@sAzFKtDYJa@yDw@cAqBAwExAgBmE{NsGoBJi\\lJ_IsC{Hg@yMoCwJ`BqDzBwHh@kLvNqRlDqFfFqFFi@t@}@dFaDvB}@`CGtA~@hCW`CgA~AuCfBq@]qB}EuBTwCsA}BlByD}As@mDZiG_B}EVkEu@eFB{DeGgGkGcCwCe@mAgB",
+   "pointCount": 69,
+   "start": [
+    35.043369,
+    137.357378
+   ],
+   "end": [
+    35.091362,
+    137.364761
+   ]
+  },
+  {
+   "id": "愛知県:93",
+   "name": "新田名古屋線",
+   "ref": "237",
+   "highway": "secondary",
+   "lengthKm": 4.22,
+   "curviness": 257.8,
+   "flow": 28.6,
+   "turnCount": 38,
+   "score": 63.6,
+   "polyline": "uy~tEseecYuEzBkOvBpCp[vFdKvCzH?bBcBfKPpD{DbD_HnIcDtAgA~HWd@qBXGn@qNkAqJbAPdk@pCpXf@j@f@xDrLrK",
+   "pointCount": 23,
+   "start": [
+    35.060915,
+    137.002025
+   ],
+   "end": [
+    35.067509,
+    136.96997
+   ]
+  },
+  {
+   "id": "愛知県:94",
+   "name": "久木中金線",
+   "ref": "344",
+   "highway": "secondary",
+   "lengthKm": 3.64,
+   "curviness": 358.3,
+   "flow": 21.1,
+   "turnCount": 62,
+   "score": 63.5,
+   "polyline": "u_tuEa}aeYz@uHoAeIgBgC?}@dDaIzB}IM}CeCyIbAyD~BwBqBoJvHoAfBeBnEqAzCkF|CeChFm@rAcCfDsAtBKrCiD|DmRK_EyC_K?kElGuHp@gFGmGVu@",
+   "pointCount": 30,
+   "start": [
+    35.169391,
+    137.312966
+   ],
+   "end": [
+    35.15864,
+    137.34312
+   ]
+  },
+  {
+   "id": "愛知県:95",
+   "name": "小渡明川足助線",
+   "ref": "366",
+   "highway": "secondary",
+   "lengthKm": 10.29,
+   "curviness": 333,
+   "flow": 20.9,
+   "turnCount": 164,
+   "score": 63.3,
+   "polyline": "cw_vEaykeYaBkJ?iAn@mBfG}GrFiBpFRlBgA`@u@d@{ElEgGr@gHeAyG~@eEAeAiFqBgBsEhCgGBaEzCgBTo@QuG\\gApCmClEj@tAy@xAeENmH~AiBrASTm@yAsEDmAfE}ArEkE~EM~BkHjCqDIiCTm@rA_AfAyB|EqBzBoCtG{D~FoIbAkEhCkDt@qCzFgHxBYxBx@~AbEhGeA`DrAvB[vJP~GaDzCb@jDgBxFaAnAhACvF`@`Ct@bBtAjA`BKjAkAnFyBzB`AnDoAlCrB`F`@bKlEtGDbCtE`JbGrReEhSmSvFeDvCj@r@~@nAnMnEdGbB|FnCrBxDpApBaOdAu@l@B",
+   "pointCount": 90,
+   "start": [
+    35.22946,
+    137.363526
+   ],
+   "end": [
+    35.171737,
+    137.396826
+   ]
+  },
+  {
+   "id": "愛知県:96",
+   "name": "白沢八幡線",
+   "ref": "254",
+   "highway": "secondary",
+   "lengthKm": 4.01,
+   "curviness": 338.4,
+   "flow": 21.9,
+   "turnCount": 62,
+   "score": 63.2,
+   "polyline": "wfitE}`tbYU|Df@bJfBtEqAdH_DtFgHzDc@zEaE`CmBvFyBfB]~AFvIg@xEoD~BgHFqAlD_G|CkKzJoDjFfA|AN~A{BrFBvFYz@{JrGuDRu@d@BdCrClCEjBsD|FiAt@_NtC",
+   "pointCount": 34,
+   "start": [
+    34.950361,
+    136.914229
+   ],
+   "end": [
+    34.96828,
+    136.884976
+   ]
+  },
+  {
+   "id": "愛知県:97",
+   "name": "平沢御蔵線",
+   "ref": "357",
+   "highway": "secondary",
+   "lengthKm": 8.93,
+   "curviness": 330.8,
+   "flow": 20.9,
+   "turnCount": 141,
+   "score": 63,
+   "polyline": "oxvuEoj`eYaDsXjAuM}@sJiBkJ{EgMc@eDRyJ{DmNcBkB{@{DQeDXkCkAuE^uDYyDmCyFcBsG?uP_A}J~@gEB_Be@yF_AsDI{HeAiD~AmL\\{HwA{ID}AhAuD}AyAPaH}As@S_A\\mDg@eBd@cAmBaA}AoBa@_CzB_IlByD]sGr@wDAgFoAiFFyHmAkFA{FhECjDoAzEhD|@k@hC{LjA{AvCo@f@m@zAwIlCoE\\cFG{QlBiFdCMnEdAbDiAhDd@jP{@rBgBbAoCfCiBOqHfBg@rBr@`A{AhBgA",
+   "pointCount": 76,
+   "start": [
+    35.183604,
+    137.304875
+   ],
+   "end": [
+    35.174315,
+    137.38087
+   ]
+  },
+  {
+   "id": "愛知県:98",
+   "name": "広域農道西幡線(グリーンロード)",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.52,
+   "curviness": 334,
+   "flow": 21.6,
+   "turnCount": 70,
+   "score": 62.8,
+   "polyline": "m`vsEwmwcYtAgC|BwIdMcOfJ_FdE}GbFy@hBqBrFe@~IeKfAyGcD_JDu@xF_B~AeFjHaE|AuBbBY~Ch@b@_@|IaUCaAcA}@@eAvBw@l@mAWsC}CEcBwACqCfAaGtGmJ~AyEvGwEj@{BLgDnHP",
+   "pointCount": 37,
+   "start": [
+    34.852066,
+    137.095478
+   ],
+   "end": [
+    34.830311,
+    137.126514
+   ]
+  },
+  {
+   "id": "愛知県:99",
+   "name": "笹戸小田木線",
+   "ref": "490",
+   "highway": "secondary",
+   "lengthKm": 4.16,
+   "curviness": 349,
+   "flow": 20.5,
+   "turnCount": 71,
+   "score": 62.6,
+   "polyline": "_}xuEctleYsBoCa@uGiEcEc@qEsAiFGmFxCkDWoD}ByF~AiHAsEcBqIaFsD_@_HgAkDNeAx@cAzDMrBeGrE_EpAgExAcO{CkE]oGq@gBsJXeFq@sCeCmDeFyCEu@{DcH_BeGaDQoB\\_E",
+   "pointCount": 36,
+   "start": [
+    35.194557,
+    137.367862
+   ],
+   "end": [
+    35.204363,
+    137.400024
+   ]
+  },
+  {
+   "id": "愛知県:100",
+   "name": "設楽根羽線",
+   "ref": "10",
+   "highway": "primary",
+   "lengthKm": 8.6,
+   "curviness": 355.3,
+   "flow": 20.5,
+   "turnCount": 149,
+   "score": 62.6,
+   "polyline": "ymjuEcdvfYG{@hCeI[_CePgFiER{Kk@oCaAgBeEeE{ScJiJsFcBe@k@oA_CmBaIu@{@qD[kBpAgJVmDjDcDoCwDYiDcBcHp@oDgCyGFkC_DoCCy@mJ{@gDWeIgBoD}@aFkAaCwBeLoDiCaC{I_DkDi@qEg@{@s@RaEpGm@A[i@bBiFy@oGL{Fm@qBqCQWy@z@}@xFf@h@c@EgAwHMwHvAgD|Bo@k@eCiHsAa@uA`@iDlDcAXs@o@IcEs@}AaAYmFb@eDkEeDcAqMyLyN_CkT`C",
+   "pointCount": 73,
+   "start": [
+    35.12045,
+    137.580339
+   ],
+   "end": [
+    35.169128,
+    137.617999
+   ]
+  },
+  {
+   "id": "愛知県:101",
+   "name": "名駅通",
+   "ref": "68",
+   "highway": "primary",
+   "lengthKm": 6.25,
+   "curviness": 255.5,
+   "flow": 42,
+   "turnCount": 38,
+   "score": 62.5,
+   "polyline": "alvuEuplbYmJlK`A{BrTiU~KmHtK}JxRmKlC{Bl@gBnBXvTkEjLs@jAb@tEa@`IiBhRiCPa@^The@oIOWaEx@S`@c_@tFQ`@g@So\\vFuFL_@p@mMv@iShEO}@",
+   "pointCount": 31,
+   "start": [
+    35.181613,
+    136.875788
+   ],
+   "end": [
+    35.171052,
+    136.884462
+   ]
+  },
+  {
+   "id": "愛知県:102",
+   "name": "馬頭道",
+   "ref": "480",
+   "highway": "secondary",
+   "lengthKm": 3.14,
+   "curviness": 322.5,
+   "flow": 22.5,
+   "turnCount": 45,
+   "score": 62.4,
+   "polyline": "eibtEg`jdY`CAdIbBvGg@lD`B|QjA|UmAhAsC`FcBd@mDnHaCBk@uAy@xAuDDiBtCi@dDaBhA\\jEnIxB`BbKpAbGWjFz@nG@",
+   "pointCount": 24,
+   "start": [
+    34.914905,
+    137.1906
+   ],
+   "end": [
+    34.891024,
+    137.192317
+   ]
+  },
+  {
+   "id": "愛知県:103",
+   "name": "国道301号",
+   "ref": "301",
+   "highway": "trunk",
+   "lengthKm": 5.86,
+   "curviness": 386.6,
+   "flow": 22.4,
+   "turnCount": 101,
+   "score": 62.2,
+   "polyline": "{mvsEmdhfY|BsAtH_KrAu@~N`C|AQ~BmCxFkPnMaS~@JNx@_F|HOrC\\z@`AQh@sFzPyLLeAkBqEGgDx@u@xBMjKaOd@sFe@aLjB{KmAoAS_AXi@bBe@jCL~@kAmCcJ`@GhK|Fn@@r@uDjBmCnEBhAx@fACvBv@nDyB|F{FxCiAvEoD~OaExFJdAiA",
+   "pointCount": 49,
+   "start": [
+    34.854223,
+    137.508707
+   ],
+   "end": [
+    34.8244,
+    137.535936
+   ]
+  },
+  {
+   "id": "愛知県:104",
+   "name": "名古屋岡崎線",
+   "ref": "56",
+   "highway": "primary",
+   "lengthKm": 4.79,
+   "curviness": 259.5,
+   "flow": 27.7,
+   "turnCount": 45,
+   "score": 62,
+   "polyline": "iteuEmadcYbB{DrCqD^?hMcLzByDfGoVfQ_m@~B}VjDuJRiBKpBeD`JgB~RgSlu@c@`@kFxQcDrF_LxIEh@qD`EJZy@nB",
+   "pointCount": 23,
+   "start": [
+    35.095887,
+    136.996228
+   ],
+   "end": [
+    35.095796,
+    136.99618
+   ]
+  },
+  {
+   "id": "愛知県:105",
+   "name": "上半田川名古屋線",
+   "ref": "208",
+   "highway": "secondary",
+   "lengthKm": 3.44,
+   "curviness": 330.7,
+   "flow": 21.4,
+   "turnCount": 53,
+   "score": 62,
+   "polyline": "qjdvEenvcY{FuCwDeDkEuOsBoCi@_C?kE`EgCzBuDn@sLq@aDAkCkD{DcDg@cB{DkEeBsCgE_AiDcB{BBqCmC_Dq@wI}CgIQkGc@_@yCEoInEy@fAgG~@sHJ",
+   "pointCount": 30,
+   "start": [
+    35.253051,
+    137.090426
+   ],
+   "end": [
+    35.267828,
+    137.112045
+   ]
+  },
+  {
+   "id": "愛知県:106",
+   "name": "松平志賀中金線",
+   "ref": "487",
+   "highway": "secondary",
+   "lengthKm": 6.51,
+   "curviness": 321,
+   "flow": 20.3,
+   "turnCount": 103,
+   "score": 61.3,
+   "polyline": "c~muEojvdY`FgAdCaFxE{ArCmElD}C`A@|@oAzBChDeAxBbAnA}@bDZjB]~IxCtBRxBbBzIpBzBzAl@~AnL`AdLdGt@SzCsDdKJhElBxDHlSxEpD`E~@lPxD~@jA~AbAjPbAlAfELv@vBCtDf@hBbK|EDhBaBhD|@tBrAnAR`CfGbF|DzA~BnCrFlIhFvPjFdHlJ|EhD_A",
+   "pointCount": 52,
+   "start": [
+    35.138419,
+    137.253684
+   ],
+   "end": [
+    35.095282,
+    137.229859
+   ]
+  },
+  {
+   "id": "愛知県:107",
+   "name": "瀬戸設楽線",
+   "ref": "33",
+   "highway": "primary",
+   "lengthKm": 10.54,
+   "curviness": 301.1,
+   "flow": 22.3,
+   "turnCount": 142,
+   "score": 61.1,
+   "polyline": "qspuEmhfeYmAhEg@hFv@`JOdLnAxQ?lNpBxHxAlKR|LyBxN{L~RsAJqFmByHuAuDcByGw@kKeG{E\\iM_AcHdFQrBTrE_Nl@mDwBgBrByAXsAvBTzAGtLoANiIsA_FnBSfGsBpBeBzEy@z@iHKQ~A_Dh@w@rBu@GkAsBkDVwAfDqPqF{AR}@dAbF|Ic@dLrCxNlDxHbApFsBdGoDtBOhDsBhC}@nNp@zAtE_@pB`IdAlJtECh@zNcCfJqFzD}@|Ac@xHlBrHHnC{DpKCtF{DxKqBrKyA`C",
+   "pointCount": 75,
+   "start": [
+    35.152088,
+    137.335269
+   ],
+   "end": [
+    35.18423,
+    137.268364
+   ]
+  },
+  {
+   "id": "愛知県:108",
+   "name": "国道473号",
+   "ref": "473",
+   "highway": "trunk",
+   "lengthKm": 6.45,
+   "curviness": 378.2,
+   "flow": 21,
+   "turnCount": 116,
+   "score": 60.6,
+   "polyline": "mlauEor}fY`DO|E}I@mBuCqUr@yB?eBaCiGoE}F_BCcDrBsCiCq@_G}AqE[gDRcAzCcCj@FjAtA|BItAsCDwBi@uAuBc@{Gl@mEbBmBOcA{CFoLgI{EyAcFXkBfA}AhCq@zB^t@QfGiGf@mClAgBw@yCF{Bq@UaGfJcCh@{CwAwB{BoAuFkAa@s@gBo@_@[wATsAxDqBPy@c@aCxDeIbAuDnKoSzCYdC}ArFeBvAcK{@}FwCuJ",
+   "pointCount": 64,
+   "start": [
+    35.074146,
+    137.618478
+   ],
+   "end": [
+    35.075908,
+    137.659311
+   ]
+  },
+  {
+   "id": "愛知県:109",
+   "name": "金野豊川線",
+   "ref": "373",
+   "highway": "secondary",
+   "lengthKm": 5.27,
+   "curviness": 200,
+   "flow": 31,
+   "turnCount": 34,
+   "score": 60.2,
+   "polyline": "gtmsE_fjeYj@zCqCrZ{Up}@c@rCMbLuOdOjFhKeh@zg@tAxAlIrO{@x@f@rAe@rCgCj@t@zF~@zCsBdC_[rWoClKiBzCeFzE",
+   "pointCount": 22,
+   "start": [
+    34.809159,
+    137.355358
+   ],
+   "end": [
+    34.8274,
+    137.31091
+   ]
+  },
+  {
+   "id": "愛知県:110",
+   "name": "大津通",
+   "ref": "226",
+   "highway": "tertiary",
+   "lengthKm": 3.06,
+   "curviness": 211.5,
+   "flow": 30.8,
+   "turnCount": 21,
+   "score": 60.1,
+   "polyline": "kgkuEqpsbYxNtAjGxCeG_CsGy@gE_@eEn@eWfKo@GwR~EaS|Oia@tRyBDb@S",
+   "pointCount": 14,
+   "start": [
+    35.12454,
+    136.91161
+   ],
+   "end": [
+    35.141749,
+    136.902431
+   ]
+  },
+  {
+   "id": "愛知県:111",
+   "name": "名古屋外環状線",
+   "ref": "451",
+   "highway": "secondary",
+   "lengthKm": 4.1,
+   "curviness": 202.7,
+   "flow": 37.8,
+   "turnCount": 22,
+   "score": 60,
+   "polyline": "awivEy_pbYmNcMq@OIiDqC_HHRfEeS`Kuz@`CgHnGiN_KvWqBfLoHtl@kErSjC~GVxC",
+   "pointCount": 16,
+   "start": [
+    35.280649,
+    136.893565
+   ],
+   "end": [
+    35.283369,
+    136.895906
+   ]
+  },
+  {
+   "id": "愛知県:112",
+   "name": "県道東大見岡崎線",
+   "ref": "477",
+   "highway": "secondary",
+   "lengthKm": 5.62,
+   "curviness": 301.7,
+   "flow": 20.2,
+   "turnCount": 84,
+   "score": 59.8,
+   "polyline": "clxtEc`~dYpAOdDuC|E_ClHiJbDgAjCj@v@bAp@bD_AxFNxF`AhGE`ExD|HPxHnAhIvDdEpEH`FjGh@IvCsExExBxDKnO|CnAvAp@|B^tFnBlCrE|Bt@fB\\pC~AlES`Dw@xBQbEiAxFmG~Gz@bEvEHl@|DcBlFYnDaBvAuBjG_EpCkCzH_FpDmEhR",
+   "pointCount": 48,
+   "start": [
+    35.028021,
+    137.292982
+   ],
+   "end": [
+    35.014665,
+    137.25989
+   ]
+  },
+  {
+   "id": "愛知県:113",
+   "name": "名古屋多治見線",
+   "ref": "15",
+   "highway": "primary",
+   "lengthKm": 5.24,
+   "curviness": 218,
+   "flow": 40.8,
+   "turnCount": 28,
+   "score": 59.8,
+   "polyline": "sebvEe|gcYyCyDeFaD}CaE}W{q@wk@}eA|i@~cAh[zt@rClDrG|EbD`F",
+   "pointCount": 11,
+   "start": [
+    35.242025,
+    137.015869
+   ],
+   "end": [
+    35.241544,
+    137.015296
+   ]
+  },
+  {
+   "id": "愛知県:114",
+   "name": "岡崎設楽線",
+   "ref": "35",
+   "highway": "primary",
+   "lengthKm": 20.68,
+   "curviness": 293.4,
+   "flow": 20.3,
+   "turnCount": 299,
+   "score": 59.7,
+   "polyline": "wfftEs~qdY{CaLV_K_@{HVmGc@mMuD{LoBy@yKrBoKPmBuA_EgJkOgL{Ca@kGrBeJsDeOd@_B}@}BoEaCqAgHd@mCtA}FN{HlBqGo@aE_BqVsBuHiKmHsAsByCk@qEZuE|DwEN{B{A_SsCeQmBaHeI{KwAy@cBFyDrBcM@uDmAiE}Du@kBUkBZ_NlA}HoA_GgHkTkOwZ{@mFMwGTgCWqA_BeAwBI_AeAiHwM_BwJyG{KsA_Ea@wFiBeJp@uLg@mBcC{CjCaF^kCQsDy@wBmEoF]}AxAuNJsOkD{Jk@kFcFsFKs@JqClBmGvBm@zAeBfD]tCkBxAcIp@g@rEsLdCwB~Oq@jA}Ad@qJ{A{FHkBvBcESeKtBeFKiAuCsDOoArBqNq@_AsEQsAsBGiBdAgB{B{FAeBz@cGy@mDhBuD|CoCvBqE|C[|CjBp@OLk@mAkDyDgFk@}FiAsB_EmBaCiC}HkFgDmAaAd@v@oDGiJo@qHd@oF[iGn@eDk@o@uBWWqCkAiDXmCgCeCu@gCsBgMA_IkAoDwKyBkDnAqAzA_@GpAoFUqBwCqEUcRq@kA}CwBaAyFr@gBtCFf@OFm@[}@gD{C_BiGeAaBaGiD",
+   "pointCount": 162,
+   "start": [
+    34.935004,
+    137.231303
+   ],
+   "end": [
+    34.995989,
+    137.378185
+   ]
+  },
+  {
+   "id": "愛知県:115",
+   "name": "土岐足助線",
+   "ref": "19",
+   "highway": "primary",
+   "lengthKm": 8,
+   "curviness": 300.3,
+   "flow": 21.2,
+   "turnCount": 113,
+   "score": 59.7,
+   "polyline": "up_vEmjkeYMyCiD_EUyBjArAhE`CzAPdA[nAdAvA@n@lBhDpAh@QZuAp@c@bBp@fF@xAoAv@vAdCTxAhAMx@u@l@cF|ATn@tG{A|A_AlBIxZpDhC?~FpDnJfAfEQvGeB`D?dDw@pBJnJqApNtAzFOtAa@lA_Bh@iBN}GtEsGdDiClQaHnFgMfCr@zNx@nCbBxKpKfFt@vG~DbESbAb@nGlHnCtFlAtG`AfA|IVbBd@xBnCdAZhFq@rCjBtDJlFvChJzAfAI",
+   "pointCount": 70,
+   "start": [
+    35.228431,
+    137.361195
+   ],
+   "end": [
+    35.172502,
+    137.35631
+   ]
+  },
+  {
+   "id": "愛知県:116",
+   "name": "作手清岳玖老勢線",
+   "ref": "436",
+   "highway": "secondary",
+   "lengthKm": 4.6,
+   "curviness": 300.2,
+   "flow": 20.3,
+   "turnCount": 68,
+   "score": 59.5,
+   "polyline": "apptEkxdfYb@m@rA@~DoJhI}GzIuDhHiA`EAd@uCW_EsFsFa@kADeBxBkJS}IYw@kAi@oE_@uAPyCrC_AH_UoEe@wAC{BvB{Cj@qEnA{BK{FoA_F{BkDeBgByBc@sFWoH^_FuAoGiDHgDl@}BfE{AnDWr@o@RmBoAeH",
+   "pointCount": 43,
+   "start": [
+    34.987685,
+    137.491419
+   ],
+   "end": [
+    34.991942,
+    137.517399
+   ]
+  },
+  {
+   "id": "愛知県:117",
+   "name": "阿野名古屋線",
+   "ref": "220",
+   "highway": "secondary",
+   "lengthKm": 5.08,
+   "curviness": 188,
+   "flow": 28.1,
+   "turnCount": 34,
+   "score": 59.4,
+   "polyline": "sgguEqqccYqMDyCpEuCcDkWja@{Irc@aBlEwBnCcHbFqIxAaGjDeJlQe@LoL|Oo@xA[tDwU`GiWnQ}JtBq@fAe@~CaAhAqNjDyAyBd@Lr@jB",
+   "pointCount": 26,
+   "start": [
+    35.104098,
+    136.993694
+   ],
+   "end": [
+    35.136344,
+    136.963545
+   ]
+  },
+  {
+   "id": "愛知県:118",
+   "name": "名古屋多治見線",
+   "ref": "15",
+   "highway": "primary",
+   "lengthKm": 3.35,
+   "curviness": 218.8,
+   "flow": 29.3,
+   "turnCount": 25,
+   "score": 59.2,
+   "polyline": "mzxuEg}zbYr@zB{@jK|JzChGtN{Hll@e@N`Iwm@wFoMaK}CKc@nAgIIyAyJwOy@wJ",
+   "pointCount": 15,
+   "start": [
+    35.194147,
+    136.949476
+   ],
+   "end": [
+    35.196173,
+    136.953658
+   ]
+  },
+  {
+   "id": "愛知県:119",
+   "name": "環状線",
+   "ref": "",
+   "highway": "primary",
+   "lengthKm": 4.36,
+   "curviness": 210.7,
+   "flow": 48.4,
+   "turnCount": 19,
+   "score": 59.1,
+   "polyline": "otsuE}{kbYSXqAm@eLiAkiADuJwFgWyHpBjAbWrHNS~FjD|ZDnH^rWDFYvJ^",
+   "pointCount": 16,
+   "start": [
+    35.167595,
+    136.872472
+   ],
+   "end": [
+    35.170227,
+    136.872791
+   ]
+  },
+  {
+   "id": "愛知県:120",
+   "name": "古真立津具線",
+   "ref": "428",
+   "highway": "secondary",
+   "lengthKm": 5.56,
+   "curviness": 314.1,
+   "flow": 18.6,
+   "turnCount": 94,
+   "score": 59.1,
+   "polyline": "}`quEewdgY{@_LkC}I}CkEuEsQHqAlEmJb@kCc@mCu@mAiFkDTkBV[xCh@zDYpBiA@yBeCkBi@qAEw@l@qBnCyDbB{@tHiA|BwDFgAs@aEsC_HZ}GlFyC~Ez@jAO\\eAGuDpByG|C}FhEyErCeBdEbAr@UdFeLnBcCdIRhAw@xBmE|AmAlOk@dCqAd@q@?sBaEqNTqCvAu@",
+   "pointCount": 53,
+   "start": [
+    35.154226,
+    137.655073
+   ],
+   "end": [
+    35.138013,
+    137.693085
+   ]
+  },
+  {
+   "id": "愛知県:121",
+   "name": "国道420号線",
+   "ref": "420;473",
+   "highway": "trunk",
+   "lengthKm": 3.1,
+   "curviness": 384.8,
+   "flow": 19.9,
+   "turnCount": 60,
+   "score": 59,
+   "polyline": "idauEsgafYoAfH}FlHsEbBeClC_Do@cD?aCvDcFb@eBlBGtCr@~Dq@dG`AzKEnBmFxMcEtDj@rAbDa@vAn@LpA{@bDItD{BvCyB~IoBfCeAzFcDtCMfF",
+   "pointCount": 29,
+   "start": [
+    35.072852,
+    137.473384
+   ],
+   "end": [
+    35.083902,
+    137.449851
+   ]
+  },
+  {
+   "id": "愛知県:122",
+   "name": "新城引佐線",
+   "ref": "392",
+   "highway": "secondary",
+   "lengthKm": 7.75,
+   "curviness": 273.9,
+   "flow": 20.6,
+   "turnCount": 103,
+   "score": 58.9,
+   "polyline": "{|~sEc|kfYrBySqAaHCqHRaAlB}Bl@_DnEgA`FKlDkBrBb@|CaAdDgHXoCbDwL`NkPvLaDdBqDhAaAr@gD|A{CfDqBpBmEMcEn@mFIcH|A_PiAeZhDgK~@{E~AkApA^R]_GiJFaAhBkCTyC{AuBW{DuBgBIgN^kAbHHPe@{H}NmDsBwDuDgLu\\gAaBa@yD`Dk_@hC_KtBcC~EgDnExAzBU",
+   "pointCount": 56,
+   "start": [
+    34.897578,
+    137.527864
+   ],
+   "end": [
+    34.881611,
+    137.590688
+   ]
+  },
+  {
+   "id": "愛知県:123",
+   "name": "名古屋岡崎線",
+   "ref": "56",
+   "highway": "primary",
+   "lengthKm": 5.63,
+   "curviness": 201.6,
+   "flow": 34.4,
+   "turnCount": 33,
+   "score": 58.9,
+   "polyline": "gqjuEsufcYoEpN{Mhl@[nFv@xKyIj]iGpc@cAlD}L|UpLkVbAgDhGoc@hCuI|D}QXcCe@_HT_F~Rk|@",
+   "pointCount": 18,
+   "start": [
+    35.121004,
+    137.0097
+   ],
+   "end": [
+    35.12118,
+    137.009656
+   ]
+  },
+  {
+   "id": "愛知県:124",
+   "name": "芦谷蒲郡線",
+   "ref": "323;383",
+   "highway": "secondary",
+   "lengthKm": 3.3,
+   "curviness": 186.2,
+   "flow": 38.4,
+   "turnCount": 16,
+   "score": 58.6,
+   "polyline": "}zpsE}`pdY~KnEsLkEcFni@aCfRa^yCuGL{Ez@g_@hPoK\\gH`B",
+   "pointCount": 11,
+   "start": [
+    34.825591,
+    137.221429
+   ],
+   "end": [
+    34.843579,
+    137.208522
+   ]
+  },
+  {
+   "id": "愛知県:125",
+   "name": "国道301号",
+   "ref": "301",
+   "highway": "trunk",
+   "lengthKm": 20.13,
+   "curviness": 313,
+   "flow": 21.6,
+   "turnCount": 292,
+   "score": 58.6,
+   "polyline": "_pjtE_zveYfRbBfLeBhC_BxFuJjGyE~Bu@|EDbHfJnDl@jDrB`AHfAi@~@oEhA{@lFm@fEXxG{E|FKpTwDbGGpHiDrEw@rCcCbG}Ar@V\\x@_@~Hd@n@pAG^uBiAyNf@oG{@kCBkAh@a@p@P`A~A~@nE~@XtEyIBkBgBkJyCoK{@kOmCgF_GsF{AsE[gDeDmIAsA`@a@jDQfAwD`CwA`BcEdCG~AsAlB[`DpAlChCxAXxGs@~BqAzDKtFiAxP`CtDB~BnA~Ck@~@h@p@|A`A~Hz@JdBaE~AyHzCuDo@k@iAtBoBb@Wh@LdBq@P`@wEfFsEi@WkDlBeAc@vB{IWeId@sEu@kJp@AThFxA~Aq@zB`@^|BuI~EwKZeBq@eHTgCg@BSt@SbGsAtAsAZeAuAa@gFaD}Cs@{B@_C~BsEL_FdB}DOy@yBeANw@|BgBP}@sCoDCiDv@uA~D}AnCqDdHaCjBkClCyNoA_MRsEnFuSrEyGbE}ErBqAlIwBpIcE~L}@`MwGgAcCyEmYyAkBmAiIrWcDnCy@~\\aYnDbBvA|AdJnPtUpg@vKlJpCeDtJsE|JiAnKkIfGiSlEmI",
+   "pointCount": 156,
+   "start": [
+    34.956963,
+    137.419999
+   ],
+   "end": [
+    34.871321,
+    137.493716
+   ]
+  },
+  {
+   "id": "愛知県:126",
+   "name": "南大須鴨田線",
+   "ref": "335",
+   "highway": "secondary",
+   "lengthKm": 4.85,
+   "curviness": 303.4,
+   "flow": 18.9,
+   "turnCount": 78,
+   "score": 58.5,
+   "polyline": "w_mtEkjxdYbAmCkAqAd@aCMqAoDqNKcBdAqKk@gEF}AdAeBxBi@tByAqAkMDgDnAeCzB{A`LmCxIeFxA_C`AwFQ}BoE{CcBcCs@cFZkDoBcGyB_D_AsHc@e@kGyAwCeIgA_IkCo@iAaCuA_PFyCrB}B`PuDdByJDcGx@cH",
+   "pointCount": 42,
+   "start": [
+    34.969721,
+    137.263903
+   ],
+   "end": [
+    34.966815,
+    137.303881
+   ]
+  },
+  {
+   "id": "愛知県:127",
+   "name": "細川豊田線",
+   "ref": "340",
+   "highway": "secondary",
+   "lengthKm": 6.39,
+   "curviness": 241.7,
+   "flow": 22.7,
+   "turnCount": 68,
+   "score": 58.4,
+   "polyline": "iaauEimgdYeC_ByGkBxK|Er@qBlA{@hYy@nHmFbQWjLrBjDrArJiDnIgKnAw@vCc@~En@xGuBbHaF~Aa@xG~BxMhPfNvIpDtGxLrGdVnJ`AEzByAlKpA\\mGvBgM~IdAjDWvCVbOnHzA}BiAiC",
+   "pointCount": 36,
+   "start": [
+    35.072374,
+    137.177331
+   ],
+   "end": [
+    35.028178,
+    137.177041
+   ]
+  },
+  {
+   "id": "愛知県:128",
+   "name": "農道奥三河線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 14.08,
+   "curviness": 287.1,
+   "flow": 18,
+   "turnCount": 224,
+   "score": 58.3,
+   "polyline": "qcwuE{s}eYxAqAhDoJ|KuBlEeBtJNzFkBl@kA~@sIzB_D~@Gr@j@x@hF|DhAhAKhCwBnHIlIwG|BqEnFqAdBcFtHmGlNcChFsGr@eBEaCoLwQEoGa@}AeGcEsFv@wAMcL}Go@}AVeBbLsPbMab@xDmGbGaOPmCk@iJ{DgGi@aChAqNx@uEpA}Cu@eEn@wChDcCpESnNlIpM`@|D}@vLwIz@sA|@_FvFwEf@uBNkPh@aDfA}BxBcCtAi@fFlCnAW`@{Ba@kGhAmFjCqCbH_BlA_BDqB_@kAeMiHw@qADwAt@eApAOvD~A`AY`@mAEaAy@kAsHcE{@MiAn@{EzNqAT_CyA_AcC{B_MoAqMiA_ByFqDmCsDmDmJV_H_Ci@_AuBqB_B[oCiCe@gAcDsHkEOy@\\o@vEBfCmDjC_Av@{@UeBkGiFVyI^qA",
+   "pointCount": 114,
+   "start": [
+    35.185373,
+    137.454864
+   ],
+   "end": [
+    35.158233,
+    137.537239
+   ]
+  },
+  {
+   "id": "愛知県:129",
+   "name": "豊田知立線旧道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.49,
+   "curviness": 178.1,
+   "flow": 36.5,
+   "turnCount": 17,
+   "score": 58.2,
+   "polyline": "kvduEgmtcYrBzF\\`EyAlm@EjQnAo_Ag@cFuHeTcc@}h@Rf@",
+   "pointCount": 10,
+   "start": [
+    35.091097,
+    137.080043
+   ],
+   "end": [
+    35.097876,
+    137.088802
+   ]
+  },
+  {
+   "id": "愛知県:130",
+   "name": "名古屋東港線",
+   "ref": "225",
+   "highway": "secondary",
+   "lengthKm": 5.24,
+   "curviness": 179.7,
+   "flow": 26.9,
+   "turnCount": 35,
+   "score": 57.9,
+   "polyline": "{r`uEgulbYI|@zAugAO{GcA{BeCwA}X_A}C}AcA{Db@g`@w@l^t@jF|CrB`[vApA`AjAdCLrDqAveA@xR",
+   "pointCount": 19,
+   "start": [
+    35.070055,
+    136.876515
+   ],
+   "end": [
+    35.07011,
+    136.873748
+   ]
+  },
+  {
+   "id": "愛知県:131",
+   "name": "豊田安城線",
+   "ref": "76",
+   "highway": "primary",
+   "lengthKm": 3.67,
+   "curviness": 194.2,
+   "flow": 29.7,
+   "turnCount": 24,
+   "score": 57.8,
+   "polyline": "gd~tEuy~cYqJI}CdAgBxA}JfPuM~JQpA{Yph@PcAzY_i@fBo@vJoH`KuPvEoCpKW",
+   "pointCount": 15,
+   "start": [
+    35.057481,
+    137.133225
+   ],
+   "end": [
+    35.057481,
+    137.133225
+   ]
+  },
+  {
+   "id": "愛知県:132",
+   "name": "東海通",
+   "ref": "70",
+   "highway": "primary",
+   "lengthKm": 4.17,
+   "curviness": 189.5,
+   "flow": 41.6,
+   "turnCount": 19,
+   "score": 57.7,
+   "polyline": "i`iuE}xbbY}@ko@kBud@VckAU~nAhBj`@ApG",
+   "pointCount": 7,
+   "start": [
+    35.113173,
+    136.825906
+   ],
+   "end": [
+    35.113489,
+    136.832346
+   ]
+  },
+  {
+   "id": "愛知県:133",
+   "name": "八熊通",
+   "ref": "29",
+   "highway": "primary",
+   "lengthKm": 3.18,
+   "curviness": 194.1,
+   "flow": 36.4,
+   "turnCount": 17,
+   "score": 57.6,
+   "polyline": "yknuEmxebYIfUfB|J_AsCg@iFfAcaB}@qfA",
+   "pointCount": 7,
+   "start": [
+    35.140608,
+    136.841189
+   ],
+   "end": [
+    35.140611,
+    136.864783
+   ]
+  },
+  {
+   "id": "愛知県:134",
+   "name": "大府常滑線",
+   "ref": "252",
+   "highway": "secondary",
+   "lengthKm": 4.54,
+   "curviness": 240.5,
+   "flow": 22.3,
+   "turnCount": 49,
+   "score": 57.5,
+   "polyline": "uhmtEuwhbYxBcBZ{K~Gy[lUgYbB{@WeJgEyZmCaIcCgCYoHy@oBg@[{B\\oBWeAcAVaAqAaCsDq@oEnAkBu@qAyDiDwSdDuCc@oIi@}@mFyBqC}CwC{QiFoG{AwD",
+   "pointCount": 31,
+   "start": [
+    34.97115,
+    136.856428
+   ],
+   "end": [
+    34.977412,
+    136.893953
+   ]
+  },
+  {
+   "id": "愛知県:135",
+   "name": "笹暮もみじ街道",
+   "ref": "500",
+   "highway": "tertiary",
+   "lengthKm": 5.13,
+   "curviness": 281.7,
+   "flow": 19.3,
+   "turnCount": 75,
+   "score": 57.5,
+   "polyline": "knnuEsppfY_GyCcFqFwDwBq@cAh@cNjBoH}AsE}EsTBsJeCqE_CuKiA}@wHiAsGTwFaBgIIwA_AMuAd@gAjEuB~L}Kl@eBCmBs@yA}@e@eJu@oAiAuBiEsBu@iAsBiBa@s@yBcE_@mBwJgEw@mBcH}DkBOmAlBsLFaCa@}BqD{H",
+   "pointCount": 43,
+   "start": [
+    35.141019,
+    137.551624
+   ],
+   "end": [
+    35.159442,
+    137.587547
+   ]
+  },
+  {
+   "id": "愛知県:136",
+   "name": "桜通",
+   "ref": "68",
+   "highway": "trunk",
+   "lengthKm": 4.04,
+   "curviness": 238.5,
+   "flow": 48.1,
+   "turnCount": 20,
+   "score": 57.3,
+   "polyline": "a~tuEsctbY`@b@]~@dBdo@`@\\hBpq@OzEb@f@jAxWSMwAgWZm@o@wEiBoq@\\g@MyFwAgg@c@{@^e@",
+   "pointCount": 19,
+   "start": [
+    35.174249,
+    136.914657
+   ],
+   "end": [
+    35.17409,
+    136.914665
+   ]
+  },
+  {
+   "id": "愛知県:137",
+   "name": "中伊西一色線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.27,
+   "curviness": 293.2,
+   "flow": 18.8,
+   "turnCount": 51,
+   "score": 57.2,
+   "polyline": "qrttE{|zdY~EuFfGmCpBHpAhCx@d@bEiA|L`AxAjArA|DvDb@~@|B~K~OlIlD|CpDrEvA`CpCz@HpFuApBcBtIf@jC~BlAvEMtDuCpI@zBdBzDtCtB",
+   "pointCount": 28,
+   "start": [
+    35.008573,
+    137.277096
+   ],
+   "end": [
+    34.987958,
+    137.264568
+   ]
+  },
+  {
+   "id": "愛知県:138",
+   "name": "豊橋一宮線",
+   "ref": "380",
+   "highway": "secondary",
+   "lengthKm": 3.97,
+   "curviness": 209,
+   "flow": 24.4,
+   "turnCount": 34,
+   "score": 57.1,
+   "polyline": "sposE}cteYvLjAzCjIjBxBfElCzPlArGdAbDlBnEh@pLjTvTeSxKiDnI_AfD??tEc@dDhOlJtEtAvBDpDs@xCmBjCjBrK|@",
+   "pointCount": 23,
+   "start": [
+    34.818817,
+    137.406233
+   ],
+   "end": [
+    34.789505,
+    137.398119
+   ]
+  },
+  {
+   "id": "愛知県:139",
+   "name": "県道浅井清須線",
+   "ref": "153",
+   "highway": "secondary",
+   "lengthKm": 3.24,
+   "curviness": 162.6,
+   "flow": 27.7,
+   "turnCount": 19,
+   "score": 56.8,
+   "polyline": "}phvEwsebYv@s@jKb@p\\uBrSiG~@tDhFtK~EzDrCjAvAFrP_DvIvAl@M?_EdNrBlNnEnBp@vG~E",
+   "pointCount": 18,
+   "start": [
+    35.274547,
+    136.84044
+   ],
+   "end": [
+    35.248836,
+    136.836536
+   ]
+  },
+  {
+   "id": "愛知県:140",
+   "name": "国道257号",
+   "ref": "257;420",
+   "highway": "trunk",
+   "lengthKm": 29.99,
+   "curviness": 291.2,
+   "flow": 20.1,
+   "turnCount": 434,
+   "score": 56.5,
+   "polyline": "g{mtEqgpfYaDLuDu@q@a@aCgEk@SmCv@wBjDqA~DqBxS`@bEnAhCIx@kMxFm@fB{@pES`Jl@`Ky@vJcBnCiH~D_EcBkN}@sTrEYfGmCfHdA`GfIbF`Jq@nBhEb@TpIiE~AMvC`Cj@v@@bAg@pCaBvAkK|FyKtCqTtWuFbFmAn@sMTeFfAcCeAyAmFL}Pc@gIi@eAiBYmBTeKpF{En@}HkAeDaB{AlBoDsAcGGaLhGqErIgKtG_G~A{S`CcNrFuFpAuAAiH{DqD_EmIoOgBwKu@gAmAAyB`BkErI{BpBcJpAsBCsDiD_CuE}@aFsAiCuLeC}F}KyC{BeHqAuFD}Fz@}Ai@{AaBi@eFHoGk@}@kA[{CXqFaAcQiFkJsAgK}CsAmB_@yCt@iOyBaH_IdDsGjAgESsAZeApAwBtImA~@yAKyFmGyCmA{DT{FfCeCq@w@}ASoBg@_YxAeTxBgK@yCwC}KmF_JcCgCgF}AuAmAqCcHwC}Co@iBqCiDuB_AeE_@kHxAeFu@kBmA_FtAgEvB}NkHsDgGcBmFf@iIa@wQyDsDcDaIgAcIyBiAuBZcCo@eE`@yBQgBcDgB`@}GkH{@YeJd@oCbFiMhKaFhBmB?eE}BqDwE}BePcBwCgQyGcFZ_Am@UqA`@aBtEgBhBLVe@Ic@}F]gDR_EsFc@t@rBjJoBtL_JdGuAdLq@nBoBhCyC|BiEr@mAdA[lK_F~HoAxEO|Fi@pBd@fDyC|J@hI_@X_@WRaEa@wD]}@q@@]j@@`Ct@nEeNnNBn@d@^nB[|Ax@n@bGbE]r@|BtAfADrAq@T]WyA}Da@Z[xCs@j@iAo@gAeCcAQiCxCsBoAmDb@[l@@bCg@x@kCaAiEjBy@kDeB_Ae@mBoBgBmAm@aBv@m@OOeAtAaGaBuCoJkH",
+   "pointCount": 241,
+   "start": [
+    34.97412,
+    137.550171
+   ],
+   "end": [
+    35.12374,
+    137.557334
+   ]
+  },
+  {
+   "id": "愛知県:141",
+   "name": "大津通",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 7.02,
+   "curviness": 135.5,
+   "flow": 34,
+   "turnCount": 28,
+   "score": 56.5,
+   "polyline": "c{nuEgxqbYITyOeAyXeDcKaE}O}BW]eOuBgQ]c\\gFgv@nEw@[yZfBd@`@j[mB\\g@xm@{CnFLx[bFtRh@v_@tE",
+   "pointCount": 21,
+   "start": [
+    35.143058,
+    136.902604
+   ],
+   "end": [
+    35.151868,
+    136.904772
+   ]
+  },
+  {
+   "id": "愛知県:142",
+   "name": "生平幸田線",
+   "ref": "324",
+   "highway": "secondary",
+   "lengthKm": 6,
+   "curviness": 266.4,
+   "flow": 18.8,
+   "turnCount": 85,
+   "score": 56.4,
+   "polyline": "go_tE_ktdYwEoQ{CaEmDi@aTbBoAl@cF`GcGnCgFfHgGhFq^`NaK|AqDzBeGp@gAcAu@yGeBcGS}Bd@aGwEmDmGSwDtBsB|BwBPmD_@mBtAoAvCqDlDs@`GPhA{BrB^rEmBVkEvBaB{@eGcLwA_HgBeEk@eE}K_]sEqA",
+   "pointCount": 41,
+   "start": [
+    34.900522,
+    137.24352
+   ],
+   "end": [
+    34.937722,
+    137.248263
+   ]
+  },
+  {
+   "id": "愛知県:143",
+   "name": "鴛鴨安城線",
+   "ref": "230",
+   "highway": "secondary",
+   "lengthKm": 5.78,
+   "curviness": 162.3,
+   "flow": 26,
+   "turnCount": 36,
+   "score": 56.2,
+   "polyline": "kvxtEgvadY|AUrDwEdEgAdDyCt@jDIvB|CRrg@zPpDy@pBj@fHNjXaGpHB~gAtShKlEpPuFvACzNfETbBvHjB]xGXdIxDfFlJv[",
+   "pointCount": 25,
+   "start": [
+    35.02966,
+    137.148039
+   ],
+   "end": [
+    34.986584,
+    137.13327
+   ]
+  },
+  {
+   "id": "愛知県:144",
+   "name": "木曽岬弥富停車場線",
+   "ref": "108",
+   "highway": "secondary",
+   "lengthKm": 3.56,
+   "curviness": 187.3,
+   "flow": 24.7,
+   "turnCount": 27,
+   "score": 55.8,
+   "polyline": "ebduEouoaYnHsDnJWn@cDnHkClQ\\hD[`W}Je@iFrGqK`HsRlAyFuAeJHo@tPcVtGiPpKRd@z@",
+   "pointCount": 18,
+   "start": [
+    35.08787,
+    136.728079
+   ],
+   "end": [
+    35.066032,
+    136.748192
+   ]
+  },
+  {
+   "id": "愛知県:145",
+   "name": "中金百々線",
+   "ref": "345",
+   "highway": "secondary",
+   "lengthKm": 6.43,
+   "curviness": 253.1,
+   "flow": 18.9,
+   "turnCount": 86,
+   "score": 55.8,
+   "polyline": "sfnuEuprdYSCbOdAl@sFdCkDfAUfKbKnB|@xE\\hKpKnIbF~DMfNpGtL}DzEXrCdD`IpCnD`EfIhRNnBg@`EmErIHdF`AzDaBzC_FvDuAtLhAtBbH~@pAjI~DvDfHtEnBzHbHpGjB`FJrBkA~L~A`NGfGeB~I\\bDtB~GJ|G",
+   "pointCount": 43,
+   "start": [
+    35.13978,
+    137.23419
+   ],
+   "end": [
+    35.112382,
+    137.194547
+   ]
+  },
+  {
+   "id": "愛知県:146",
+   "name": "多治見犬山線",
+   "ref": "16",
+   "highway": "primary",
+   "lengthKm": 7.04,
+   "curviness": 258.2,
+   "flow": 20.2,
+   "turnCount": 90,
+   "score": 55.8,
+   "polyline": "k{vvE{f~bY^sADyCcAcSvWoCdEoBnEoEnGgOhCgL~Cw\\lGgLhD}Df@kJzFaFxEsKn@sCb@wDWkE|AiD?iB{EuLyCyB^cDOgA}H}Ou@wGkC}Fg@_Ph@mFxC}F?cDdA_ECcIf@iBGuAXwB~AoBXeM_BaOByFl@iAbB^h@SCmLfCoDvBeFFgRj@qBw@kCBqB",
+   "pointCount": 50,
+   "start": [
+    35.347896,
+    136.966379
+   ],
+   "end": [
+    35.334288,
+    137.03025
+   ]
+  },
+  {
+   "id": "愛知県:147",
+   "name": "作手善夫線",
+   "ref": "363",
+   "highway": "secondary",
+   "lengthKm": 3.03,
+   "curviness": 268.4,
+   "flow": 18.9,
+   "turnCount": 43,
+   "score": 55.6,
+   "polyline": "uzvtEut|eYmJzLiB`F}@jH~@`HaQrDN`BhAp@|EeBdGfAjCtBdAlCd@pCW|MdC`MNlCe@zNgJhJ_C`H}AdA_I?",
+   "pointCount": 21,
+   "start": [
+    35.020105,
+    137.44987
+   ],
+   "end": [
+    35.025308,
+    137.428549
+   ]
+  },
+  {
+   "id": "愛知県:148",
+   "name": "島崎豊田線",
+   "ref": "355",
+   "highway": "secondary",
+   "lengthKm": 17.58,
+   "curviness": 239.2,
+   "flow": 18,
+   "turnCount": 233,
+   "score": 55.6,
+   "polyline": "akluEabndYwFbE?t@tAfC}@|@oQaCmAi@oBuC_ACwDlCqHpJaBRsBu@cEmGcLcE_HyF}LeD_NwG{Nb@}DwDs@{Cb@kEhHsPj@kLo@cL}D_GaCkFw@EyGlB}GYaOoIgDsEoBiNb@uEjAyF|BeGr@gFsA_BeBcQQuLmC}GsH_YcCiMOmFkAwBoDuCuDgFuAmCq@_DqJu@yIwGqKWiF{BuE_FqE]yD_DgDmAy@cBiDcBkGuGiAgC_EkEgA}DeEyDwB}DuEqZgCaAqJ_@cNeB}IoDeISkO{Se@sB}D{F{E{AeIwHmAoDs@yJfBkFjIcJVkBE}EcAyJuCyN}A_FkJgKeCkGcA{Ay@SmCaGa@cC\\uIiCsJmAgSaHqG}BgDhAa[}C{LkAiC_D}CsIiDUm@wFaAyFmDkCyDeGiRgEwGsAaAiDRqAuAkBC_G`BmApAAj@",
+   "pointCount": 114,
+   "start": [
+    35.130246,
+    137.211371
+   ],
+   "end": [
+    35.216533,
+    137.323075
+   ]
+  },
+  {
+   "id": "愛知県:149",
+   "name": "岡崎足助線",
+   "ref": "39",
+   "highway": "primary",
+   "lengthKm": 3.23,
+   "curviness": 211.5,
+   "flow": 24.4,
+   "turnCount": 28,
+   "score": 55.5,
+   "polyline": "a_ytEqdidYp@nB?jAsCxPW`EBfFx@pBpDhBfMdL`YvOtKpEtC{AxLgCBXfDZdFiAvI|F`AhCxErFnLfF|AfBHx@",
+   "pointCount": 22,
+   "start": [
+    35.031046,
+    137.186175
+   ],
+   "end": [
+    35.011189,
+    137.169404
+   ]
+  }
+ ]
+}

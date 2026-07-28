@@ -250,3 +250,92 @@ cd admin && npm run sync-blog-data
 （書込み先は常にローカルエミュレータ）。
 - 検証規則は `lib/rallyValidation.js` と `importRallies.js` のインライン版を**同一に保つ**こと。
 - 公開前にテスト用 uid でアプリ表示・チェックイン・写真付与を確認。
+
+---
+
+# おすすめ道路（road_recommend）操作マニュアル
+
+道路データから「走って楽しい区間」を**開発者のPCで一括生成して配信する**仕組み。
+アプリ側は読むだけになるので、以前のように端末で毎回曲率を計算しない。
+
+## 0. 元データ
+
+`~/Documents/grid_csvs_japan_empty/`（4,587ファイル / 266MB / 0.1度グリッド）
+
+⚠️ **`~/Downloads/python/` を使ってはいけない。** 列は豊富（`prefecture` / `city` を持つ）が
+緯度 24.0〜36.0度ぶんしか無く、**北海道・東北6県・栃木・群馬・新潟・富山・石川の12県が
+丸ごと欠けている**。いろは坂も草津も入らない。
+全国側は列が `osm_id,name,highway,ref,geometry` の5つだけなので、
+都道府県は座標から判定する（`lib/prefectureLocator.js`）。
+
+## 1. 元データの確認（作り直すときは毎回やる）
+
+```bash
+cd admin
+node buildRoadRecommend.js --audit            # 全国 25秒
+node buildRoadRecommend.js --audit --limit 200 # 一部だけ見る
+```
+
+47県すべてに道路があるか、`highway` の分布、欠損率が出る。
+**「❌ N県が欠けている」が出たら生成に進まないこと。**
+
+## 2. 生成
+
+```bash
+node buildRoadRecommend.js --build                      # 全国 22秒 → data/road-recommend/*.json
+node buildRoadRecommend.js --build --prefecture 栃木県   # 1県だけ試す
+node --test test/                                       # 純粋関数のテスト
+```
+
+出力に必ず目を通すところが2つある。
+
+- **信号の分布** … 「振り切れ」が2割を超えたら `lib/funSegments.js` の `NORMALIZERS` を
+  90パーセンタイル付近へ直す。振り切れていると上位の点数が潰れて順位がつかない。
+- **既知の道の順位** … いろは坂・妙義・美ヶ原などが上位に来ているか。
+  来ていなければ重みか区間の切り出しが間違っている。
+  ⚠️ 正解リストは **OSM に載っている名前**で書くこと。「椿ライン」「ヤビツ峠」「麦草峠」
+  「金精道路」「霧降高原道路」はいずれも名前として存在しない（椿ラインは正式名の
+  「湯河原箱根線」で入っている）。通称で書くと、取れているのに「抜き出せていない」と出る。
+
+## 3. 配信
+
+```bash
+node importRoadRecommend.js --all                     # 検証のみ（既定・書き込まない）
+node importRoadRecommend.js --prefecture 栃木県 --commit # 1県だけ投入
+node importRoadRecommend.js --all --commit            # 全県投入
+```
+
+- Storage `Json/road_recommend/<romaji>_v<generation>.json` … 本体（1県 80KB 前後）
+- Firestore `road_recommend/_index` … 全県ぶんの世代表。**アプリはこれ1件だけ読む**
+- Firestore `road_recommend/<romaji>` … 県ごとの明細（運用の確認用）
+
+⚠️ `generation` を上げるとアプリのキャッシュが失効して再ダウンロードが走る。
+**47県ぶん一斉に上げるとユーザー全員が落とし直す。** 更新は必要な県だけにすること。
+
+`firestore.rules` に公開読み取りの行が要る（追加済み・デプロイは別途）。
+
+```
+match /road_recommend/{id} { allow read: if true; allow write: if false; }
+```
+
+## 4. 調整するとき
+
+| 変えたいこと | 場所 |
+|---|---|
+| 重み（曲率・flow・長さ・道種） | `lib/funSegments.js` の `WEIGHTS` |
+| 点数の伸び方 | `lib/funSegments.js` の `NORMALIZERS` |
+| 区間の長さ・切り出し方 | `lib/funSegments.js` の `EXTRACT` |
+| 対象の道種 | `buildRoadRecommend.js` の `TARGET_HIGHWAYS` |
+| 配信するポリラインの粗さ | `buildRoadRecommend.js` の `OUTPUT_TOLERANCE_METERS` |
+| 1県あたりの件数 | `--top`（既定150） |
+
+⚠️ **スコアの式はここが「正」。** アプリ側（`RoadCurvinessScorer`）にも似た計算が残っているが、
+そちらは配信が取れなかった県の受け皿でしかない。2か所で同じ式を維持すると必ずずれるので、
+**アプリ側は直さない**。
+
+## 5. いまの限界
+
+- **ビーナスラインが118位**。29.9km・曲率435と数字は悪くないが、あの道の価値は見晴らしで、
+  標高も景観もデータに無い。手動キュレーション層（`docs/road-weighting.md`）で持ち上げる想定。
+- `popularity`（走行実績）は重み0.15の枠だけで **0固定**。Cloud Functions での集計が要る。
+- `city` が無いので、区間の表示は県名までになる。

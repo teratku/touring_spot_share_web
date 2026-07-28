@@ -94,6 +94,10 @@ service cloud.firestore {
     match /grids_metadata/{id}       { allow read: if true; allow write: if false; }
     match /grids_metadata_empty/{id} { allow read: if true; allow write: if false; }
     match /grid_boundaries/{id}      { allow read: if true; allow write: if false; }
+    // おすすめ道路（開発者がローカルで生成して配信）。
+    // アプリが読むのは _index の1件だけで、本体は Storage の Json/road_recommend/ にある。
+    // 投入は admin/importRoadRecommend.js（Admin SDK）。
+    match /road_recommend/{id}       { allow read: if true; allow write: if false; }
 
     // ========== 公開ソーシャル：read 公開・write 認証済みのみ ==========
     // プロフィール（＋ badges / followUser / yaehCount 等の配下）。フォロー/問い合わせで他人配下にも書くため write=認証済み
