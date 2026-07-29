@@ -101,6 +101,15 @@
   button.danger-solid { background:#c92a2a; color:#fff; border-color:#c92a2a; }
   button.danger-solid:disabled { background:#e9ecef; color:#868e96; border-color:var(--line); }
 
+  /* 通行規制の一覧（元データ照合用） */
+  #rTable { font-size:12px; }
+  #rTable th { position:sticky; top:0; background:#fff; z-index:1; white-space:nowrap; }
+  #rTable td { vertical-align:top; max-width:260px; }
+  #rTable tr.reg-row { cursor:pointer; }
+  #rTable tr.reg-row:hover { background:#f6f8fa; }
+  #rTable tr.done { background:#f0fbf3; }
+  #rSourceInfo a { color:var(--accent); }
+
   /* 重みの試算 */
   #tuning { padding:14px 18px; overflow-y:auto; width:100%; }
   .slider { display:flex; align-items:center; gap:10px; margin:3px 0; max-width:560px; }
@@ -174,8 +183,12 @@
     <div class="bar">
       <select id="rPref"></select>
       <button id="rNew">＋ 新規</button>
+      <button id="rListToggle">一覧で見る</button>
       <span class="spacer"></span>
       <button class="primary" id="rSave" disabled>保存 <kbd>S</kbd></button>
+    </div>
+    <div class="bar" id="rSourceBar" style="display:none">
+      <span class="muted" id="rSourceInfo"></span>
     </div>
     <div class="bar wrap">
       <button class="chip on" data-rfilter="all">すべて</button>
@@ -192,6 +205,15 @@
   </div>
   <div id="rMap"></div>
   <div id="rEditor"><div class="empty">左の一覧から規制を選ぶと<br>ここで区間を確かめて登録できます</div></div>
+  <div id="rListView" style="display:none; flex:1; overflow:auto; padding:0 16px;">
+    <table id="rTable">
+      <thead><tr>
+        <th>状態</th><th>道路名（元データ）</th><th>市町村</th><th>区間（元の住所表記）</th>
+        <th>規制対象（元データ）</th><th>時間</th><th>当て方</th><th>登録内容</th>
+      </tr></thead>
+      <tbody id="rTableBody"></tbody>
+    </table>
+  </div>
 </main>
 
 <div id="tuning" style="display:none">
@@ -729,12 +751,46 @@ async function rLoadPrefecture(romaji) {
   ]);
   R.candidates = cand.candidates || [];
   R.prefName = cand.prefecture || "";
+  R.sourceUrl = cand.sourceUrl || null;
+  R.sourceFetchedAt = cand.sourceFetchedAt || null;
   R.saved = new Map((saved.restrictions || []).map((r) => [r.id, r]));
   R.selected = null;
+  R.allRoads = null;   // 県が変わったら破棄。使うときに遅延読み込みする
   rSetDirty(0);
   rRender();
+  rRenderSourceBar();
   rClearMap();
   setStatus(cand.error ? cand.error : `${R.prefName} 候補${R.candidates.length}件 / 登録済み${R.saved.size}件`);
+}
+
+/**
+ * ドラッグで「別の道路へ乗り移る」ためのスナップ先を読み込む（県ごとに1回だけ）。
+ *
+ * ⚠️ 二普協の道路名と、実際に地図・OSMがその場所に付けている名前が
+ *    一致しないことがある（例:「筑波公園永井線」の現地は「フルーツライン」）。
+ *    候補のchainPolyline（1本の名前で繋いだ道）だけにドラッグ範囲を限ると、
+ *    名前が変わった先で道が途切れて見え、「動かせない」ように見えてしまう。
+ *    これを読み込んでおけば、ドラッグ中に道路名をまたいで乗り移れる。
+ */
+async function rEnsureAllRoads() {
+  if (R.allRoads || R.allRoadsLoading) return R.allRoadsLoading;
+  R.allRoadsLoading = (async () => {
+    const r = await (await fetch(`/api/restrictions/roads-all/${R.romaji}`)).json();
+    R.allRoads = (r.roads || []).map((road) => ({ name: road.name, points: decodePolyline(road.polyline) }));
+  })();
+  await R.allRoadsLoading;
+  return R.allRoadsLoading;
+}
+
+/** 一次情報（二普協のページ）へのリンクと取得日を出す。裏取りはここから */
+function rRenderSourceBar() {
+  const bar = $("rSourceBar");
+  const info = $("rSourceInfo");
+  if (!R.sourceUrl) { bar.style.display = "none"; return; }
+  bar.style.display = "flex";
+  const fetched = R.sourceFetchedAt ? new Date(R.sourceFetchedAt).toISOString().slice(0, 10) : "不明";
+  info.innerHTML = `元データ: <a href="${R.sourceUrl}" target="_blank" rel="noopener">二普協のページを開く ↗</a>` +
+                   `　（取得日 ${fetched}。現地名・実際の距離は必ずここか都道府県警のページで裏取りすること）`;
 }
 
 function rRender() {
@@ -797,31 +853,93 @@ function rDrawMap(c) {
     R.seg = new google.maps.Polyline({ path: segPath, map: R.map,
       strokeColor: "#c92a2a", strokeOpacity: 1, strokeWeight: 7, zIndex: 10 });
     segPath.forEach((p) => bounds.extend(p));
-    if (chain) rAddHandles(chain, segPath);
+    if (chain) rAddHandles(chain, segPath, c.matchedName || c.sourceRoad);
   }
   if (!bounds.isEmpty()) R.map.fitBounds(bounds, 60);
+  // ドラッグで他の道路へ乗り移れるよう、県内の全道路を裏で読み込んでおく
+  rEnsureAllRoads();
 }
 
-/** 両端のつまみ。道路の上にだけ乗るようにスナップする */
-function rAddHandles(chain, segPath) {
-  const snap = (pos) => {
-    let best = 0, bestD = Infinity;
-    for (let i = 0; i < chain.length; i++) {
-      const d = Math.hypot(chain[i].lat - pos.lat(), chain[i].lng - pos.lng());
-      if (d < bestD) { bestD = d; best = i; }
-    }
-    return best;
-  };
+/**
+ * google.maps.LatLng（.lat()がメソッド）と {lat,lng}（プロパティ）の
+ * どちらで渡されても扱えるようにする。
+ * ⚠️ ここを怠ると、LatLng を渡したときに a.lat が関数のまま引き算され、
+ *    距離が常に NaN になり「延長条件に一切当たらない」という気付きにくい形で壊れる
+ *    （実際にこれで rExtendChain が常に null を返すバグを起こした）。
+ */
+function toPlainLatLng(p) {
+  return typeof p.lat === "function" ? { lat: p.lat(), lng: p.lng() } : p;
+}
+function llDist(a, b) {
+  a = toPlainLatLng(a); b = toPlainLatLng(b);
+  return Math.hypot((a.lat - b.lat) * 111320, (a.lng - b.lng) * 111320 * Math.cos(a.lat * Math.PI / 180));
+}
+
+/** 点列の中で pos に最も近い添字と距離 */
+function nearestOnChain(points, pos) {
+  let best = 0, bestD = Infinity;
+  for (let i = 0; i < points.length; i++) {
+    const d = llDist(points[i], pos);
+    if (d < bestD) { bestD = d; best = i; }
+  }
+  return { index: best, distance: bestD };
+}
+
+/**
+ * ドラッグ位置が今のチェーンから離れすぎているとき、県内の別の道路へ延長する。
+ *
+ * 今のチェーンの端（ドラッグ側）と、見つかった道路の一番近い点を「継ぎ目」とみなし、
+ * そこから先を継ぎ足す。継ぎ目が実際の合流点からズレていても、見た目でおかしければ
+ * その場でドラッグし直せるので、多少の誤りは許容する。
+ */
+function rExtendChain(chain, pos, draggingStart) {
+  const onCurrent = nearestOnChain(chain, pos);
+  if (onCurrent.distance < 35) return null;   // 十分近ければ延長しない
+  if (!R.allRoads) return null;
+
+  let best = null;
+  for (const road of R.allRoads) {
+    const n = nearestOnChain(road.points, pos);
+    if (n.distance < 70 && (!best || n.distance < best.distance)) best = { road, ...n };
+  }
+  if (!best) return null;
+
+  // 継ぎ足す側のチェーン端（始側なら chain[0]、終側なら chain[末尾]）
+  const edge = draggingStart ? chain[0] : chain[chain.length - 1];
+  const join = nearestOnChain(best.road.points, edge);
+  // 継ぎ目から、ドラッグ位置に近づく向きへ伸ばす
+  const towardStart = llDist(best.road.points[0], pos) < llDist(best.road.points[best.road.points.length - 1], pos);
+  const extra = towardStart
+    ? best.road.points.slice(0, join.index + 1).reverse()
+    : best.road.points.slice(join.index);
+  if (extra.length < 2) return null;
+
+  const merged = draggingStart ? [...extra.slice().reverse(), ...chain] : [...chain, ...extra];
+  return { points: merged, roadName: best.road.name };
+}
+
+/** 両端のつまみ。道路の上にだけ乗る。離れた場所へ動かすと別の道路へ延長する */
+function rAddHandles(chain, segPath, roadName) {
+  let activeChain = chain;
+  const snap = (pos) => nearestOnChain(activeChain, pos).index;
   const makeHandle = (latLng, key) => {
     const m = new google.maps.Marker({
       position: latLng, map: R.map, draggable: true, zIndex: 20,
       label: { text: key === "start" ? "始" : "終", color: "#fff", fontSize: "11px" },
     });
     m.addListener("dragend", () => {
+      const draggingStart = key === "start";
+      const rawPos = m.getPosition();
+      const extended = rExtendChain(activeChain, rawPos, draggingStart);
+      if (extended) {
+        activeChain = extended.points;
+        R.chain.setPath(activeChain);
+        setStatus(`「${roadName}」から「${extended.roadName}」へ延長しました（見た目がおかしければ引き直してください）`);
+      }
       const a = snap(R.markers.start.getPosition());
       const b = snap(R.markers.end.getPosition());
       const [lo, hi] = a <= b ? [a, b] : [b, a];
-      const slice = chain.slice(lo, hi + 1);
+      const slice = activeChain.slice(lo, hi + 1);
       if (slice.length < 2) return;
       R.seg.setPath(slice);
       R.markers.start.setPosition(slice[0]);
@@ -1012,6 +1130,58 @@ function rStartFromRoad(road) {
 }
 
 $("rNew").onclick = rNewRestriction;
+// ---------- 一覧表示（元データの照合用） ----------
+///
+/// 地図の1件ずつの確認と違い、全件を一度に見比べるための表。
+/// 前回、茨城の照合で「不動橋」が別の橋だと気付けたのは、こうして全件の
+/// 元データ（区間の生の住所表記・対象の生テキスト）を並べて見比べたから。
+/// それを毎回スクリプトで確認するのではなく、ツールから見られるようにする。
+R.listMode = false;
+
+function rToggleListMode() {
+  R.listMode = !R.listMode;
+  $("rListToggle").textContent = R.listMode ? "地図で見る" : "一覧で見る";
+  $("rListToggle").classList.toggle("on", R.listMode);
+  $("rMap").style.display = R.listMode ? "none" : "block";
+  $("rEditor").style.display = R.listMode ? "none" : "block";
+  $("rListView").style.display = R.listMode ? "block" : "none";
+  if (R.listMode) rRenderTable();
+}
+
+function rStatusMark(c) {
+  if (R.saved.has(c.id)) return "✅ 登録済み";
+  if (c.polyline) return "◻︎ 候補あり";
+  return "✋ 要手動";
+}
+
+function rRenderTable() {
+  const body = $("rTableBody");
+  body.innerHTML = "";
+  for (const c of R.candidates) {
+    const saved = R.saved.get(c.id);
+    const tr = document.createElement("tr");
+    tr.className = "reg-row" + (saved ? " done" : "");
+    const section = c.rawSection || `${c.from || ""} → ${c.to || ""}`;
+    const registeredSummary = saved
+      ? `${KINDS.find(([k]) => k === saved.kind)?.[1] || saved.kind}` +
+        (saved.minCc || saved.maxCc ? ` / ${saved.minCc ?? 0}〜${saved.maxCc ?? "上限なし"}cc` : "") +
+        `<br><span class="muted">確認日 ${saved.checkedAt || "-"}</span>`
+      : "";
+    tr.innerHTML = `
+      <td>${rStatusMark(c)}</td>
+      <td>${escapeHtml(c.sourceRoad || "(名前なし)")}</td>
+      <td>${escapeHtml(c.city || "")}</td>
+      <td>${escapeHtml(section)}</td>
+      <td>${escapeHtml(c.target || "")}</td>
+      <td>${escapeHtml(c.time || "")}</td>
+      <td>${escapeHtml(c.confidence || (c.polyline ? "" : "-"))}</td>
+      <td>${registeredSummary}</td>`;
+    tr.onclick = () => { rToggleListMode(); rSelect(c); };
+    body.appendChild(tr);
+  }
+}
+
+$("rListToggle").onclick = rToggleListMode;
 $("rPref").onchange = (e) => rLoadPrefecture(e.target.value);
 $("rSave").onclick = rSave;
 document.querySelectorAll("[data-rfilter]").forEach((b) => {

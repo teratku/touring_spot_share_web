@@ -397,6 +397,33 @@ app.get("/api/restrictions/roads/:romaji", (req, res) => {
   res.json({ prefecture: index.prefecture, roads, total: roads.length });
 });
 
+/**
+ * 区間のドラッグ修正で「別の道路へ乗り移る」ためのスナップ先。
+ *
+ * ⚠️ 二普協の道路名（例:「筑波公園永井線」）と、実際に地図・OSMがその場所に
+ *    付けている名前（例:「フルーツライン」）が一致しないことがある
+ *    （茨城の「道祖神峠≠笠間つくば線」と同じ問題）。
+ *    候補の chainPolyline（1本の名前で繋いだ道）だけにドラッグ範囲を限ると、
+ *    名前が変わった先で道が途切れて見え、「動かせない」ように見えてしまう。
+ *
+ * そのため県内の全道路をここから返し、ブラウザ側でドラッグ中に
+ * 一番近い道路（元の候補と違う名前でもよい）へ乗り移れるようにする。
+ * 1県 0.2MB 程度なのでまるごと返してよい。
+ */
+app.get("/api/restrictions/roads-all/:romaji", (req, res) => {
+  const index = loadRoadIndex(req.params.romaji);
+  if (!index) {
+    return res.status(404).json({
+      error: "道路の索引が未生成です。node buildRoadIndex.js --prefecture <県名> を実行してください。",
+      roads: [],
+    });
+  }
+  res.json({
+    prefecture: index.prefecture,
+    roads: index.roads.map((r) => ({ name: r.name, highway: r.highway, polyline: r.polyline })),
+  });
+});
+
 /** いま使っている重みと正規化の基準（画面の初期値に使う） */
 app.get("/api/roads/weights", (_req, res) => {
   const { WEIGHTS, NORMALIZERS, CLASS_RANK } = require("./lib/funSegments");
