@@ -356,6 +356,47 @@ app.put("/api/restrictions/:romaji", (req, res) => {
   res.json({ ok: true, count: cleaned.length });
 });
 
+/**
+ * 規制を新規に追加するための道路検索。
+ *
+ * ⚠️ 二普協の一覧に無い規制もある（冬季閉鎖は道路管理者の情報で二普協には載らない、
+ *    ユーザー報告から起こすもの、住所しか書かれておらず候補を作れなかったもの）。
+ *    道路名から引いて地図で区間を切れるようにしておく。
+ *
+ * 索引は data/road-index/<romaji>.json（buildRoadIndex.js で作る）。
+ * 1県 0.2MB 程度だが、まるごとブラウザへ送らず名前で絞って返す。
+ */
+const roadIndexCache = new Map();
+
+function loadRoadIndex(romaji) {
+  if (roadIndexCache.has(romaji)) return roadIndexCache.get(romaji);
+  const file = path.join(__dirname, "data", "road-index", `${romaji}.json`);
+  if (!fs.existsSync(file)) return null;
+  try {
+    const data = JSON.parse(fs.readFileSync(file, "utf8"));
+    roadIndexCache.set(romaji, data);
+    return data;
+  } catch { return null; }
+}
+
+app.get("/api/restrictions/roads/:romaji", (req, res) => {
+  const index = loadRoadIndex(req.params.romaji);
+  if (!index) {
+    return res.status(404).json({
+      error: "道路の索引が未生成です。node buildRoadIndex.js --prefecture <県名> を実行してください。",
+      roads: [],
+    });
+  }
+  const q = String(req.query.q || "").trim();
+  if (!q) return res.json({ prefecture: index.prefecture, roads: [] });
+  // 部分一致。長い道から出す（幹線を先に見せたい）
+  const roads = index.roads
+    .filter((r) => r.name.includes(q))
+    .slice(0, 40)
+    .map((r) => ({ name: r.name, highway: r.highway, lengthMeters: r.lengthMeters, polyline: r.polyline }));
+  res.json({ prefecture: index.prefecture, roads, total: roads.length });
+});
+
 /** いま使っている重みと正規化の基準（画面の初期値に使う） */
 app.get("/api/roads/weights", (_req, res) => {
   const { WEIGHTS, NORMALIZERS, CLASS_RANK } = require("./lib/funSegments");

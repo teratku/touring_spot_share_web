@@ -173,6 +173,7 @@
   <div id="list">
     <div class="bar">
       <select id="rPref"></select>
+      <button id="rNew">＋ 新規</button>
       <span class="spacer"></span>
       <button class="primary" id="rSave" disabled>保存 <kbd>S</kbd></button>
     </div>
@@ -750,7 +751,7 @@ function rRender() {
     const div = document.createElement("div");
     div.className = "row" + (R.selected === c ? " sel" : "") + (c.polyline ? "" : " off");
     div.innerHTML =
-      `<span class="mark">${done ? "✅" : c.polyline ? "◻︎" : "✋"}</span>` +
+      `<span class="mark">${done ? "✅" : c.manual ? "✚" : c.polyline ? "◻︎" : "✋"}</span>` +
       `<span class="name">${escapeHtml(c.matchedName || c.sourceRoad || "(名前なし)")}</span>` +
       `<span class="sub">${c.targetLabel || ""}</span>` +
       `<span class="score">${c.lengthMeters ? (c.lengthMeters + "m") : "—"}</span>`;
@@ -760,6 +761,8 @@ function rRender() {
   const done = R.candidates.filter((c) => R.saved.has(c.id)).length;
   const manual = R.candidates.filter((c) => !c.polyline).length;
   $("rCount").textContent = `${list.length}件を表示（全${R.candidates.length}件 ・ 登録済み${done} ・ 要手動${manual}）`;
+  // ヘッダの表示も合わせる（登録するたびに変わるので置きっぱなしにしない）
+  setStatus(`${R.prefName} 候補${R.candidates.length}件 / 登録済み${done}件`);
 }
 
 function rClearMap() {
@@ -937,6 +940,78 @@ async function rSave() {
   setStatus(`保存しました（規制 ${j.count}件）。配信には別途 importRestrictions が要ります`);
 }
 
+/**
+ * 規制を新規に追加する。
+ *
+ * ⚠️ 二普協の一覧に無い規制がある。冬季閉鎖は道路管理者の情報で二普協には載らないし、
+ *    住所しか書かれておらず候補を作れなかったものもある（茨城14件のうち8件）。
+ *    道路名で引いて、地図で区間を切れるようにしておく。
+ */
+function rNewRestriction() {
+  const box = $("rEditor");
+  box.innerHTML = `
+    <h3>規制を新規に追加</h3>
+    <div class="stats">
+      二普協の一覧に無い規制（冬季閉鎖・ユーザー報告・候補を作れなかったもの）を
+      道路名から追加します。
+    </div>
+    <label>道路名で探す</label>
+    <input type="text" id="rq" placeholder="例: 筑波、フルーツライン、国道6号">
+    <div id="rHits" style="margin-top:8px; max-height:280px; overflow:auto"></div>
+    <div class="muted" id="rNewHint" style="margin-top:10px">
+      道路を選ぶと地図に出ます。「始」「終」をドラッグして区間を決めてください。
+    </div>`;
+
+  let timer = null;
+  $("rq").oninput = () => {
+    clearTimeout(timer);
+    timer = setTimeout(async () => {
+      const q = $("rq").value.trim();
+      const box = $("rHits");
+      if (q.length < 2) { box.innerHTML = '<div class="muted">2文字以上で探します</div>'; return; }
+      box.innerHTML = '<div class="muted">探しています…</div>';
+      const r = await (await fetch(`/api/restrictions/roads/${R.romaji}?q=${encodeURIComponent(q)}`)).json();
+      if (r.error) { box.innerHTML = `<div class="warn">${escapeHtml(r.error)}</div>`; return; }
+      if (!r.roads.length) { box.innerHTML = '<div class="muted">見つかりませんでした</div>'; return; }
+      box.innerHTML = "";
+      for (const road of r.roads) {
+        const div = document.createElement("div");
+        div.className = "row";
+        div.innerHTML = `<span class="name">${escapeHtml(road.name)}</span>` +
+                        `<span class="sub">${road.highway}</span>` +
+                        `<span class="score">${(road.lengthMeters/1000).toFixed(1)}km</span>`;
+        div.onclick = () => rStartFromRoad(road);
+        box.appendChild(div);
+      }
+    }, 250);
+  };
+  $("rq").focus();
+}
+
+/** 選んだ道路を地図に出し、区間を切れる状態にする */
+function rStartFromRoad(road) {
+  // 取り込み由来と混ざらない id にする
+  const id = `manual-${R.romaji}-${Date.now()}`;
+  const chain = decodePolyline(road.polyline);
+  // 最初は真ん中の1kmを仮に置く（そこからドラッグして決めてもらう）
+  const mid = Math.floor(chain.length / 2);
+  const span = Math.max(2, Math.floor(chain.length * 0.1));
+  const candidate = {
+    id, prefecture: R.prefName, city: "",
+    sourceRoad: road.name, matchedName: road.name,
+    from: "", to: "", target: "（手で追加）", targetLabel: "二輪すべて",
+    confidence: "手で追加", reason: "地図で区間を決めてください",
+    chainPolyline: road.polyline,
+    polyline: encodePolyline(chain.slice(Math.max(0, mid - span), Math.min(chain.length, mid + span))),
+    lengthMeters: null, geocode: null, minCc: null, maxCc: null,
+    manual: true,
+  };
+  // 一覧にも載せる（保存対象として扱えるように）
+  R.candidates.unshift(candidate);
+  rSelect(candidate);
+}
+
+$("rNew").onclick = rNewRestriction;
 $("rPref").onchange = (e) => rLoadPrefecture(e.target.value);
 $("rSave").onclick = rSave;
 document.querySelectorAll("[data-rfilter]").forEach((b) => {

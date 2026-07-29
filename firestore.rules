@@ -98,6 +98,10 @@ service cloud.firestore {
     // アプリが読むのは _index の1件だけで、本体は Storage の Json/road_recommend/ にある。
     // 投入は admin/importRoadRecommend.js（Admin SDK）。
     match /road_recommend/{id}       { allow read: if true; allow write: if false; }
+    // 二輪の通行規制（開発者が確認して登録したもの）。
+    // 都道府県警察／二普協の公開情報をもとに、区間形状はこちらで作っている。
+    // 投入は admin/importRestrictions.js（Admin SDK）。
+    match /road_restrictions/{id}    { allow read: if true; allow write: if false; }
 
     // ========== 公開ソーシャル：read 公開・write 認証済みのみ ==========
     // プロフィール（＋ badges / followUser / yaehCount 等の配下）。フォロー/問い合わせで他人配下にも書くため write=認証済み

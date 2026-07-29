@@ -78,6 +78,8 @@ async function buildCandidate(entry, deps) {
     id: entry.id, prefecture: entry.prefecture, city: entry.city,
     sourceRoad: entry.road, from: entry.from, to: entry.to,
     target: entry.target, time: entry.time,
+    // 一覧表示用に生の区間テキストも残す（from/to に分解する前の元の表記）
+    rawSection: entry.rawSection || null,
     matchedName: null, confidence: null, polyline: null,
     // 道路全体の線。画面で始点・終点をドラッグし直すために要る
     // （候補の切り出しは当てにならないので、必ず直せるようにしておく）

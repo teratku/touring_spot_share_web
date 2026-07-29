@@ -64,6 +64,7 @@ async function main() {
   const files = fs.readdirSync(SRC_DIR).filter((f) => f.endsWith(".json"));
   const sources = files.map((f) => JSON.parse(fs.readFileSync(path.join(SRC_DIR, f), "utf8")))
                        .filter((d) => !ONLY || d.prefecture === ONLY);
+  const bySourceRomaji = new Map(sources.map((s) => [ROMAJI[s.prefecture], s]));
   if (!sources.length) { console.error("対象がありません。--prefecture か --all を確認してください"); process.exit(1); }
   if (!ONLY && !ALL) { console.error("--prefecture <県名> か --all を指定してください"); process.exit(1); }
 
@@ -84,9 +85,14 @@ async function main() {
     }
     const ok = candidates.filter((c) => c.polyline).length;
     fs.writeFileSync(path.join(OUT_DIR, `${ROMAJI[source.prefecture]}.json`),
-      JSON.stringify({ prefecture: source.prefecture, romaji: ROMAJI[source.prefecture],
-                       builtAt: new Date().toISOString(), count: candidates.length,
-                       withGeometry: ok, candidates }, null, 1) + "\n");
+      JSON.stringify({
+        prefecture: source.prefecture, romaji: ROMAJI[source.prefecture],
+        builtAt: new Date().toISOString(), count: candidates.length, withGeometry: ok,
+        // 一次情報（開発者が現地名・距離を裏取りするための出どころ）。
+        // road-builder.html の一覧表示で「元データを見る」リンクとして出す。
+        sourceUrl: source.source, sourceFetchedAt: source.fetchedAt,
+        candidates,
+      }, null, 1) + "\n");
     console.log(`  ${source.prefecture.padEnd(6)} ${String(ok).padStart(3)}/${candidates.length} 件で区間を作れた`);
     for (const c of candidates.filter((x) => !x.polyline).slice(0, 3)) {
       console.log(`      × ${(c.sourceRoad || "(名前なし)").slice(0, 20)} … ${c.reason}`);

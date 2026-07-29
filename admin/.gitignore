@@ -2,3 +2,11 @@ node_modules/
 serviceAccount.json
 *-firebase-adminsdk-*.json
 emulator-data/
+
+# 二普協から取り込んだ下書き。
+# ⚠️ コミットしない。これは他所がまとめた一覧そのものであり、
+#    リポジトリに置くと「編集された一覧の複製を持つ」ことになる。
+#    fetchRestrictions.js でいつでも取り直せる。
+data/restriction-source/
+# 候補区間（自動生成の中間物）。buildRestrictionCandidates.js で作り直せる
+data/restriction-candidates/
