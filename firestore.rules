@@ -98,6 +98,11 @@ service cloud.firestore {
     // アプリが読むのは _index の1件だけで、本体は Storage の Json/road_recommend/ にある。
     // 投入は admin/importRoadRecommend.js（Admin SDK）。
     match /road_recommend/{id}       { allow read: if true; allow write: if false; }
+    // 道路名の一覧（走破率・ロードデックスの分母）。
+    // ジオメトリを含まないので軽い（全国で1.8MB）。本体は Storage の Json/road_names/。
+    // グリッドを持っていない端末（海外・未ダウンロード）でも走破率を出すために使う。
+    // 生成は admin/buildRoadNames.js、投入は admin/importRoadNames.js（Admin SDK）。
+    match /road_names/{id}          { allow read: if true; allow write: if false; }
     // 二輪の通行規制（開発者が確認して登録したもの）。
     // 都道府県警察／二普協の公開情報をもとに、区間形状はこちらで作っている。
     // 投入は admin/importRestrictions.js（Admin SDK）。
