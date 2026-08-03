@@ -28,6 +28,9 @@ const { stitch } = require("./lib/roadStitcher");
 const { extract, score } = require("./lib/funSegments");
 const { simplify, encode } = require("./lib/polyline");
 const { applyOverrides } = require("./lib/roadOverrides");
+const {
+  loadSpots, buildIndex, countNearbySpots, sceneryBonus,
+} = require("./lib/scenerySpots");
 
 // ---- 引数 ----
 const args = process.argv.slice(2);
@@ -365,6 +368,15 @@ async function build() {
   const tuningDir = path.join(__dirname, "data", "road-tuning");
   fs.mkdirSync(tuningDir, { recursive: true });
 
+  // 景色の加点に使う投稿スポット。
+  // ⚠️ 無ければ加点なしで進む。スポットが取れないだけで生成を止めない
+  //    （data/spots.json は node fetchSpots.js で作る）。
+  const spots = loadSpots();
+  const spotIndex = buildIndex(spots);
+  console.log(spots.length
+    ? `投稿スポット ${spots.length}件を景色の加点に使います`
+    : "⚠️ data/spots.json が無いので景色の加点はしません（node fetchSpots.js で作れます）");
+
   const summary = [];
   for (const [pref, fragments] of [...fragmentsByPref.entries()].sort()) {
     const chains = stitch(fragments);
@@ -373,6 +385,10 @@ async function build() {
       for (const seg of extract(chain.points)) {
         const { score: value, signals } = score(seg, chain.highway);
         const thinned = simplify(seg.points, OUTPUT_TOLERANCE_METERS);
+        // 景色の加点。曲率では拾えない「眺めの良さ」を投稿スポットの密度で補う。
+        // ⚠️ 加点のみ。0件を減点に使わない（lib/scenerySpots.js の冒頭を参照）
+        const spotCount = countNearbySpots(seg.points, spotIndex);
+        const bonus = sceneryBonus(spotCount);
         segments.push({
           name: chain.name,
           ref: chain.ref,
@@ -381,7 +397,11 @@ async function build() {
           curviness: Number(seg.curviness.toFixed(1)),
           flow: Number(seg.flow.toFixed(1)),
           turnCount: seg.turnCount,
-          score: Number(value.toFixed(1)),
+          score: Number((value + bonus).toFixed(1)),
+          /** 加点前のスコア。景色が効いたのか曲率で勝ったのかを後から見分けるため */
+          baseScore: Number(value.toFixed(1)),
+          /** 近くにある投稿スポットの数（0なら「まだ誰も投稿していない」だけかもしれない） */
+          spotCount,
           signals,
           polyline: encode(thinned),
           pointCount: thinned.length,
