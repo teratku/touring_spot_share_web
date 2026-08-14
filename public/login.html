@@ -10,10 +10,9 @@
     <title>ログイン | ツーリングスポットシェア</title>
 
     <!-- リソースヒント -->
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
 
     <!-- Vue.js 3 -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="/vendor/vue.global.prod.js"></script>
 
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -292,6 +291,12 @@
               <span>{{ errorMessage }}</span>
             </div>
 
+            <!-- ⚠️ 認証情報の入力は必ず <form> で囲む。
+                 div に input を並べただけだと、Chrome のパスワード保護が
+                 「安全に送信されるか」を判断できず、フィッシング扱いされる
+                 （Search Console:「ユーザー ログインでフィッシングの可能性を検出」）。
+                 送信自体は Vue が止めるが、要素としては正規のフォームにしておく。 -->
+            <form action="/login.html" method="post" @submit.prevent="login">
             <!-- メールアドレス -->
             <div class="form-group">
               <label class="form-label" for="email">メールアドレス</label>
@@ -330,12 +335,13 @@
             </div>
 
             <!-- ログインボタン -->
-            <button class="btn-login" :disabled="isLoading" @click="login">
+            <button class="btn-login" type="submit" :disabled="isLoading">
               <span v-if="isLoading">
                 <span class="spinner"></span>ログイン中...
               </span>
               <span v-else>ログイン</span>
             </button>
+            </form>
 
             <!-- フッターリンク -->
             <div class="footer-links">

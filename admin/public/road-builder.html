@@ -69,6 +69,11 @@
             border-radius:6px; font:inherit; }
   .empty { color:var(--muted); text-align:center; padding:40px 12px; font-size:12px; }
 
+  .row .verdict { font-size:12px; font-weight:700; margin-right:2px; }
+  .svRow { display:flex; gap:4px; align-items:center; }
+  .review { border:1px solid var(--line); border-left:3px solid var(--muted); border-radius:4px;
+            padding:6px 8px; font-size:11px; line-height:1.5; background:#fff; }
+  .review div { margin:1px 0; }
   .boostRow { display:flex; gap:4px; align-items:center; }
   .boostRow input { flex:1; min-width:0; text-align:center; font-variant-numeric:tabular-nums; }
   /* ボタンが折り返すと「＋ / 5」と2行になって読めなくなる */
@@ -159,7 +164,9 @@
     <div class="bar wrap">
       <button class="chip on" data-filter="all">すべて</button>
       <button class="chip" data-filter="curated">調整済み</button>
+      <button class="chip" data-filter="reviewed">評価あり</button>
       <button class="chip" data-filter="hidden">非表示</button>
+      <button id="reloadReviews" title="アプリで付けた評価を取り直す（1時間ためています）">⟳ 評価</button>
       <span class="spacer"></span>
       <select id="sort">
         <option value="score">点数順</option>
@@ -240,8 +247,37 @@ const state = {
   romaji: null, prefName: "", segments: [], overrides: {}, selected: null,
   dirty: 0, map: null, lines: new Map(), weights: null, normalizers: null,
   classRank: null, tuning: null, defaults: null, filter: "all", visible: [],
+  reviews: {},          // アプリの評価ツールで付いた評価（読むだけ）
+  svEnd: "start",       // ストリートビューをどちらの端から開くか
 };
 const PRESET_TAGS = ["絶景", "ワインディング", "快走", "林道ぎみ", "要注意"];
+
+const VERDICT = {
+  keep: { mark: "◎", label: "採用", color: "#2b8a3e" },
+  hold: { mark: "△", label: "保留", color: "#e8590c" },
+  drop: { mark: "×", label: "外す", color: "#c92a2a" },
+};
+
+/**
+ * アプリの評価ツールが使っている道路まとめキーを組み立てる。
+ *
+ * ⚠️ **アプリの `EnjoyableRoadsService.groupKey` と同じ式にすること。**
+ *    ここがずれると評価が1件も当たらない（黙って空になるだけで気付けない）。
+ *    ref があれば `r:県|番号|種別`、無ければ `n:県|名前|種別`。
+ * ⚠️ `/` は `_` に置き換える（Firestore が ID に `/` を許さないため、
+ *    アプリの `RoadReviewStore.documentID` が同じ置き換えをしている）。
+ */
+function reviewKey(seg) {
+  // ⚠️ 県名は**区間IDの頭**から取る（`埼玉県:0` → `埼玉県`）。アプリも同じ取り方を
+  //    している（`RoadRecommendSegment.prefecture`）ので、ファイルの見出しではなく
+  //    こちらに合わせる。ずれると評価が当たらない。
+  const pref = String(seg.id || "").split(":")[0] || state.prefName;
+  const ref = String(seg.ref || "").trim();
+  const key = ref ? `r:${pref}|${ref}|${seg.highway}`
+                  : `n:${pref}|${seg.name}|${seg.highway}`;
+  return key.replace(/\//g, "_");
+}
+const reviewOf = (seg) => state.reviews[reviewKey(seg)] || null;
 
 const $ = (id) => document.getElementById(id);
 const setStatus = (t) => { $("status").textContent = t; };
@@ -296,6 +332,7 @@ async function loadPrefecture(romaji) {
   const [seg, o] = await Promise.all([
     (await fetch(`/api/roads/segments/${romaji}`)).json(),
     (await fetch(`/api/roads/overrides/${romaji}`)).json(),
+    loadReviews(),
   ]);
   state.segments = seg.segments || [];
   state.prefName = seg.prefecture || "";
@@ -306,6 +343,23 @@ async function loadPrefecture(romaji) {
   render();
   fitPrefecture();
   setStatus(`${state.prefName}`);
+}
+
+/**
+ * アプリの評価を読み込む（全県ぶん・1度だけ）。
+ *
+ * ⚠️ 取れなくても画面を止めないこと。評価は「あれば助かる」もので、
+ *    区間の手直し自体は評価が無くてもできる。認証が通っていない開発機でも
+ *    ツールが開けるようにしておく。
+ */
+async function loadReviews({ refresh = false } = {}) {
+  if (!refresh && Object.keys(state.reviews).length) return;
+  try {
+    const r = await (await fetch("/api/roads/reviews" + (refresh ? "?refresh=1" : ""))).json();
+    state.reviews = r.reviews || {};
+  } catch {
+    state.reviews = {};
+  }
 }
 
 function setDirty(n) {
@@ -322,6 +376,7 @@ function render() {
 
   if (state.filter === "curated") list = list.filter((r) => isCurated(r.seg));
   else if (state.filter === "hidden") list = list.filter((r) => r.o.hidden);
+  else if (state.filter === "reviewed") list = list.filter((r) => reviewOf(r.seg));
   else list = list.filter((r) => !r.o.hidden);   // 既定では非表示を隠す
 
   if (q) list = list.filter((r) => r.seg.name.includes(q) || (r.o.title || "").includes(q));
@@ -346,10 +401,15 @@ function render() {
     if (r.o.boost) marks.push(r.o.boost > 0 ? "⬆︎" : "⬇︎");
     if (r.o.note) marks.push("💬");
     for (const t of (r.o.tags || [])) marks.push("🏷");
+    // アプリで実際に走って付けた評価。調整の印とは別に、色付きで見せる
+    const rv = reviewOf(r.seg);
+    const v = rv && VERDICT[rv.verdict];
+    const verdictMark = v
+      ? `<span class="verdict" style="color:${v.color}" title="アプリの評価: ${v.label}">${v.mark}</span>` : "";
     div.innerHTML =
       `<span class="rank">${i + 1}</span>` +
       `<span class="name">${escapeHtml(r.o.title || r.seg.name)}</span>` +
-      `<span class="mark">${marks.join("")}</span>` +
+      `<span class="mark">${verdictMark}${marks.join("")}</span>` +
       `<span class="sub">${r.seg.lengthKm.toFixed(0)}km</span>` +
       `<span class="score">${r.score.toFixed(1)}</span>`;
     div.onclick = () => select(r.seg);
@@ -357,7 +417,9 @@ function render() {
   });
 
   const curatedCount = state.segments.filter(isCurated).length;
-  $("count").textContent = `${list.length}件を表示（全${state.segments.length}件 ・ 調整済み${curatedCount}件）`;
+  const reviewedCount = state.segments.filter((s) => reviewOf(s)).length;
+  $("count").textContent = `${list.length}件を表示（全${state.segments.length}件 ・ 調整済み${curatedCount}件`
+    + (reviewedCount ? ` ・ 評価あり${reviewedCount}件` : "") + "）";
 
   // どの区間にも当たらない調整
   const live = new Set(state.segments.map(overrideKey));
@@ -453,6 +515,120 @@ function panTo(seg) {
   state.map.fitBounds(boundsOf([seg]), 60);
 }
 
+// ---------- ストリートビュー ----------
+
+/**
+ * 開く地点と、そこで向く方角を決める。
+ *
+ * ⚠️ 方角を付けること。付けないと Google が適当な向き（多くは真北）でパノラマを
+ *    開くので、道路ではなく畑や壁を向いていることが多く、道を見るのに毎回
+ *    ぐるぐる回すことになる。**道の進む向き**に合わせる。
+ * ⚠️ 端そのものではなく、少し内側の点との方角を使う。端の1点だけだと
+ *    交差点の中心を向いてしまい、その道が見えない。
+ */
+function streetViewSpot(seg, which) {
+  const pts = decodePolyline(seg.polyline);
+  if (pts.length < 2) return null;
+  const last = pts.length - 1;
+  // 20点ぶんか、短い道なら全体の1/4だけ内側を見る
+  const inset = Math.max(1, Math.min(20, Math.floor(pts.length / 4)));
+
+  let at, toward;
+  if (which === "end") {
+    at = pts[last]; toward = pts[Math.max(0, last - inset)];
+    // 終点では「来た向き」ではなく、道をさかのぼる向きを向く
+    return { at, heading: bearing(at, toward) };
+  }
+  if (which === "mid") {
+    const m = Math.floor(last / 2);
+    at = pts[m]; toward = pts[Math.min(last, m + inset)];
+    return { at, heading: bearing(at, toward) };
+  }
+  at = pts[0]; toward = pts[Math.min(last, inset)];
+  return { at, heading: bearing(at, toward) };
+}
+
+function bearing(a, b) {
+  const toRad = (d) => (d * Math.PI) / 180;
+  const y = Math.sin(toRad(b.lng - a.lng)) * Math.cos(toRad(b.lat));
+  const x = Math.cos(toRad(a.lat)) * Math.sin(toRad(b.lat))
+          - Math.sin(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.cos(toRad(b.lng - a.lng));
+  return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+}
+
+/**
+ * 別画面（新しいタブ）でストリートビューを開く。
+ *
+ * ⚠️ ツール自体の地図に埋め込まないこと。埋め込むと、選び直すたびに
+ *    パノラマを読み込んで地図の操作が重くなる。見比べたい道を何本も
+ *    タブで並べられる方が手直しの役に立つ。
+ */
+function openStreetView(seg) {
+  const spot = streetViewSpot(seg, state.svEnd);
+  if (!spot) { setStatus("この区間は形が取れないのでストリートビューを開けません"); return; }
+  const url = "https://www.google.com/maps/@?api=1&map_action=pano"
+    + `&viewpoint=${spot.at.lat.toFixed(6)},${spot.at.lng.toFixed(6)}`
+    + `&heading=${spot.heading.toFixed(0)}&pitch=0&fov=90`;
+  window.open(url, "_blank", "noopener");
+}
+
+// ---------- アプリの評価 ----------
+
+/** 編集パネルに出す「アプリで付いた評価」。無ければ何も出さない */
+function reviewBlock(seg) {
+  const rv = reviewOf(seg);
+  if (!rv) return "";
+  const v = VERDICT[rv.verdict] || { label: rv.verdict || "?", color: "var(--muted)" };
+  const when = rv.reviewedAt ? new Date(rv.reviewedAt).toLocaleDateString("ja-JP") : "";
+  const rows = [];
+  if (rv.title) rows.push(`表示名の案: ${escapeHtml(rv.title)}`);
+  if (rv.note) rows.push(escapeHtml(rv.note));
+  if (rv.tags.length) rows.push("札: " + escapeHtml(rv.tags.join(" / ")));
+  const shared = state.segments.filter((s) => reviewKey(s) === reviewKey(seg)).length;
+  if (shared > 1) rows.push(`<span class="muted">この道は${shared}区間に分かれています</span>`);
+  return `
+    <label>アプリで付けた評価</label>
+    <div class="review">
+      <div><strong style="color:${v.color}">${escapeHtml(v.label)}</strong>
+           <span class="muted">${when}</span></div>
+      ${rows.map((t) => `<div>${t}</div>`).join("")}
+      <button id="e-adopt" style="margin-top:6px">この評価を取り込む</button>
+    </div>`;
+}
+
+/**
+ * 評価の中身を調整として写す。
+ *
+ * ⚠️ **自動では写さない。** 押したときだけにすること。評価は走りながら
+ *    気軽に付けるもので、そのまま配信に流すと試しに付けた分まで出てしまう。
+ * ⚠️ 点数は触らない。「外す」評価でも点数を下げるのではなく一覧から外す方が
+ *    意図がはっきりするし、点数を勝手に動かすと重みの試算が読めなくなる。
+ */
+function adoptReview(seg) {
+  const rv = reviewOf(seg);
+  if (!rv) return;
+  // ⚠️ 評価は**道路1本**に対して付いているが、生成データでは同じ道が複数の区間に
+  //    分かれていることがある（埼玉で150区間→113本）。選んだ区間だけに写すと
+  //    「外す」評価なのに続きの区間だけ一覧に残る。同じ道の区間すべてに効かせる。
+  const targets = state.segments.filter((s) => reviewKey(s) === reviewKey(seg));
+  for (const target of targets) {
+    const key = overrideKey(target);
+    const cur = state.overrides[key] || {};
+    state.overrides[key] = {
+      ...cur,
+      title: rv.title || cur.title || null,
+      note: rv.note || cur.note || null,
+      tags: [...new Set([...(cur.tags || []), ...rv.tags])],
+      hidden: rv.verdict === "drop" ? true : !!cur.hidden,
+      boost: cur.boost || 0,
+    };
+  }
+  touch();
+  render();
+  renderEditor();
+  setStatus(`「${rv.title || seg.name}」の評価を${targets.length}区間に取り込みました（保存は S）`);
+}
+
 // ---------- 編集パネル ----------
 function renderEditor() {
   const box = $("editor");
@@ -469,6 +645,17 @@ function renderEditor() {
       ${seg.lengthKm.toFixed(1)}km ・ 曲率${seg.curviness.toFixed(0)} ・ flow${seg.flow.toFixed(1)} ・ ${seg.highway}<br>
       素点 ${seg.score.toFixed(1)}${o.boost ? ` → <strong>${adjustedScore(seg).toFixed(1)}</strong>` : ""}
     </div>
+
+    <label>ストリートビュー</label>
+    <div class="svRow">
+      <button class="chip ${state.svEnd === "start" ? "on" : ""}" data-sv-end="start">始点</button>
+      <button class="chip ${state.svEnd === "mid" ? "on" : ""}" data-sv-end="mid">中間</button>
+      <button class="chip ${state.svEnd === "end" ? "on" : ""}" data-sv-end="end">終点</button>
+      <span class="spacer"></span>
+      <button id="e-sv">別画面で開く</button>
+    </div>
+
+    ${reviewBlock(seg)}
 
     <label>点数の加算</label>
     <div class="boostRow">
@@ -502,6 +689,16 @@ function renderEditor() {
       <button id="e-next">↓ 次</button>
     </div>
     <div class="muted" style="margin-top:10px">変更はすぐ反映されます。<kbd>S</kbd> で保存。</div>`;
+
+  // ストリートビューを開く端の選択（選び直したらすぐ効く）
+  box.querySelectorAll("[data-sv-end]").forEach((b) => {
+    b.onclick = () => { state.svEnd = b.dataset.svEnd; renderEditor(); };
+  });
+  $("e-sv").onclick = () => openStreetView(seg);
+
+  // 評価をこの調整に取り込む
+  const adopt = $("e-adopt");
+  if (adopt) adopt.onclick = () => adoptReview(seg);
 
   // 加算ボタン
   box.querySelectorAll("[data-boost]").forEach((b) => {
@@ -651,6 +848,15 @@ document.querySelectorAll("[data-filter]").forEach((b) => {
     render();
   };
 });
+
+$("reloadReviews").onclick = async () => {
+  setStatus("評価を取り直しています…");
+  await loadReviews({ refresh: true });
+  render();
+  renderEditor();
+  const n = Object.keys(state.reviews).length;
+  setStatus(n ? `評価 ${n}件を読み込みました` : "評価はまだ1件もありません");
+};
 function showTab(which) {
   for (const t of ["tab-curate", "tab-tune", "tab-restrict"]) $(t).classList.toggle("on", t === "tab-" + which);
   $("view-curate").style.display = which === "curate" ? "flex" : "none";

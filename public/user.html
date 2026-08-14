@@ -26,14 +26,13 @@
     <script src="/share.js" defer></script>
 
     <!-- リソースヒント -->
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
 
     <link rel="preload" as="image" type="image/webp" :href="getWebPUrl(userInfo?.userIcon)" v-if="userInfo?.userIcon">
 
     <!-- Vue.js 3 -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="/vendor/vue.global.prod.js"></script>
 
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>

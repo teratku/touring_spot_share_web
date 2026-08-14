@@ -225,6 +225,55 @@ app.get("/api/roads/tuning", (_req, res) => {
   res.json({ prefectures });
 });
 
+/**
+ * アプリの評価ツール（開発者用）で付けた評価を返す。
+ *
+ * ⚠️ 書き込みはしない。ここは**アプリが貯めた生の評価を読むだけ**で、
+ *    調整として採用するかどうかは画面で人が決める（`road_reviews` を
+ *    自動で調整に流し込むと、試しに付けた評価がそのまま配信されてしまう）。
+ *
+ * ⚠️ ドキュメントIDは**アプリの道路まとめキー**そのもの。
+ *      ref がある: `r:埼玉県|361|secondary`
+ *      ref が無い: `n:埼玉県|白鳥通り|primary`
+ *    `/` だけ `_` に置き換わっている（Firestore が ID に `/` を許さないため）。
+ *    生成データの区間は県ごとの連番ID（`埼玉県:0`）で別物なので、
+ *    画面側で ref・name・highway から同じキーを組み立てて突き合わせる。
+ *
+ * 読み取り回数を抑えるため1時間メモリにためる。?refresh=1 で取り直す。
+ */
+let reviewsCache = null; // { t, reviews }
+const REVIEWS_TTL_MS = 60 * 60 * 1000;
+
+app.get("/api/roads/reviews", async (req, res) => {
+  const fresh = req.query.refresh === "1";
+  if (!fresh && reviewsCache && Date.now() - reviewsCache.t < REVIEWS_TTL_MS) {
+    return res.json({ reviews: reviewsCache.reviews, cached: true });
+  }
+  try {
+    const snap = await db.collection("road_reviews").get();
+    const reviews = {};
+    snap.forEach((doc) => {
+      const d = doc.data() || {};
+      reviews[doc.id] = {
+        verdict: d.verdict || "",
+        title: d.title || "",
+        note: d.note || "",
+        tags: Array.isArray(d.tags) ? d.tags : [],
+        roadName: d.roadName || "",
+        ref: d.ref || "",
+        highway: d.highway || "",
+        lengthKm: typeof d.lengthKm === "number" ? d.lengthKm : null,
+        curviness: typeof d.curviness === "number" ? d.curviness : null,
+        reviewedAt: d.reviewedAt && d.reviewedAt.toDate ? d.reviewedAt.toDate().toISOString() : null,
+      };
+    });
+    reviewsCache = { t: Date.now(), reviews };
+    res.json({ reviews, cached: false });
+  } catch (e) {
+    res.status(500).json({ error: e.message, reviews: {} });
+  }
+});
+
 /** 調整の読み書き */
 app.get("/api/roads/overrides/:romaji", (req, res) => {
   const file = path.join(roadDir("road-overrides"), `${req.params.romaji}.json`);
