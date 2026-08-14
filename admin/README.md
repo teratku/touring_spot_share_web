@@ -427,6 +427,24 @@ node server.js     # → http://127.0.0.1:4317/roads
   **その道の区間すべて**に効く。1区間だけに写すと「外す」評価なのに続きが一覧に残る
 - 読み取り回数を抑えるため1時間ためる。アプリで付けた直後に見たいときは一覧の「⟳ 評価」
 
+#### 評価のルールを確かめる
+
+`road_reviews` は **`isDev()`（開発者のメールでログイン）だけ**が読み書きできる。
+ルールが抜けているとアプリ側は**黙って失敗する**（保存したように見えて何も残らない）ので、
+`firestore.rules` を触ったら必ず確かめること。
+
+```bash
+cd admin/test-rules && npm install      # 初回だけ（admin 本体とは別の依存）
+cd ../.. && firebase emulators:exec --only firestore --project biketeilen \
+  "node admin/test-rules/roadReviews.rules.test.mjs"
+```
+
+⚠️ 依存を `admin/test-rules/` に分けてあるのは、ESM が `NODE_PATH` を見ないため。
+別の場所に入れて実行しようとすると `ERR_MODULE_NOT_FOUND` になる（一度そう書いて踏んだ）。
+
+開発者が読み書きできること・他人と未ログインが弾かれること・配信データ（`road_recommend`）が
+巻き添えで緩んでいないことを見ている。
+
 **⚠️ 突き合わせのキーはアプリの `EnjoyableRoadsService.groupKey` と同じ式でなければならない。**
 `ref` があれば `r:県|番号|種別`、無ければ `n:県|名前|種別`（`/` は `_` に置換）。
 県名は区間IDの頭から取る（`埼玉県:0` → `埼玉県`）。ずれると評価が1件も当たらないが、

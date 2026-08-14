@@ -107,6 +107,12 @@ service cloud.firestore {
     // 都道府県警察／二普協の公開情報をもとに、区間形状はこちらで作っている。
     // 投入は admin/importRestrictions.js（Admin SDK）。
     match /road_restrictions/{id}    { allow read: if true; allow write: if false; }
+    // おすすめ道路の評価（アプリの開発者向け画面で、走った実感を貯めるところ）。
+    // 配信データ（road_recommend）とは別物で、ここに貯めた評価を admin の
+    // 調整ツール（road-builder）が読み、人が選んで調整に取り込む。
+    // ⚠️ 開発者だけ。一般ユーザーに書かせると配信内容を左右できてしまう。
+    // ⚠️ ドキュメントIDは道路のまとめキー（"r:埼玉県|361|secondary"）。
+    match /road_reviews/{id}         { allow read, write: if isDev(); }
 
     // ========== 公開ソーシャル：read 公開・write 認証済みのみ ==========
     // プロフィール（＋ badges / followUser / yaehCount 等の配下）。フォロー/問い合わせで他人配下にも書くため write=認証済み
