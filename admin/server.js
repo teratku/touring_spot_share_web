@@ -26,6 +26,8 @@ const { normalizeOverride, isEmptyOverride } = require("./lib/roadOverrides");
 const { execFile } = require("child_process");
 const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
+const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
+const { routeBetween } = require("./lib/roadRoute");
 
 const PROJECT_ID = "biketeilen";
 const PORT = process.env.PORT || 4317;
@@ -367,6 +369,70 @@ app.get("/api/restrictions/candidates/:romaji", (req, res) => {
   }
   try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
   catch (e) { res.status(500).json({ error: e.message, candidates: [] }); }
+});
+
+/**
+ * 始点と終点を渡して、そのあいだを道でつないだ線を返す。
+ *
+ * 規制は「◯◯橋から△△トンネルまで」と両端で決まっていることが多い。
+ * 1本の道を選んでドラッグする方式では、複数の道路にまたがる規制を表せない。
+ *
+ * ⚠️ 車の経路探索ではない。一方通行も進入禁止も見ていない。
+ *    規制区間の形を作るための「道でつながった線」。
+ */
+app.get("/api/restrictions/route", async (req, res) => {
+  const nums = ["fromLat", "fromLng", "toLat", "toLng"].map((k) => Number(req.query[k]));
+  if (nums.some((n) => !Number.isFinite(n))) {
+    return res.status(400).json({ error: "fromLat/fromLng/toLat/toLng が要ります" });
+  }
+  if (!fs.existsSync(GRID_DIR)) {
+    return res.status(404).json({ error: `道路CSVが見つかりません: ${GRID_DIR}` });
+  }
+  try {
+    const [fromLat, fromLng, toLat, toLng] = nums;
+    res.json(await routeBetween([fromLng, fromLat], [toLng, toLat]));
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// ⚠️ **`/api/restrictions/:romaji` より前に置くこと。** あとに置くと `roads-at` が
+//    県のローマ字として食われ、規制の空配列が返る（実際に踏んだ）。
+/**
+ * 指した1点のまわりの道路を、手元のグリッドCSVから組み立てて返す。
+ *
+ * 【なぜ要るか】
+ * 道路名で引く `/api/restrictions/roads` は県ごとの索引（buildRoadIndex.js）が要り、
+ * 全国を作るには時間がかかるので3県しか用意できていない。加えて二普協の道路名と
+ * 地図の名前は食い違うことがあり、名前が分からないと何も出せなかった。
+ * 場所さえ分かれば道は特定できるので、**地図で指した点**から組み立てる。
+ *
+ * ⚠️ CSV は開発機のローカルにしかない（~/Documents/grid_csvs_japan_empty）。
+ *    無ければ 404 で理由を返す。ここは 127.0.0.1 専用のツールなのでそれでよい。
+ */
+app.get("/api/restrictions/roads-at", async (req, res) => {
+  const lat = Number(req.query.lat);
+  const lng = Number(req.query.lng);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+    return res.status(400).json({ error: "lat と lng が要ります", roads: [] });
+  }
+  if (!fs.existsSync(GRID_DIR)) {
+    return res.status(404).json({
+      error: `道路CSVが見つかりません: ${GRID_DIR}`, roads: [],
+    });
+  }
+  try {
+    const result = await roadsAtPoint(lat, lng, {
+      radiusMeters: req.query.radius,
+      prefecture: String(req.query.prefecture || ""),
+    });
+    if (!result.roads.length && result.grids.length === 0) {
+      return res.json({ ...result, error: "この場所のCSVが手元にありません" });
+    }
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: e.message, roads: [] });
+  }
 });
 
 app.get("/api/restrictions/:romaji", (req, res) => {

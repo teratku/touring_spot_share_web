@@ -934,6 +934,10 @@ const R = {
   romaji: null, prefName: "", candidates: [], saved: new Map(),
   selected: null, map: null, chain: null, seg: null,
   markers: {}, dirty: 0, filter: "all", visible: [],
+  // 地図から道路を探すときの1回きりのクリック待ち（rBeginPickOnMap）
+  pickListener: null,
+  // 両端から作った線の下見（採用前）と、始点・終点の印
+  routePreview: null, endMarkers: {},
 };
 const KINDS = [
   ["noMotorcycle", "二輪通行禁止"], ["noPassenger", "二人乗り禁止"],
@@ -1173,6 +1177,13 @@ function rRenderEditor(c) {
       ${c.geocode ? `住所の精度: ${(c.geocode.from||{}).precision||"-"} / ${(c.geocode.to||{}).precision||"-"}` : ""}
     </div>
 
+    <label>道筋を引き直す</label>
+    ${rFindControlsHtml()}
+    <div class="muted" style="margin-top:4px; font-size:11px">
+      当たっている道が違う・道筋が途中で切れているときに、正しい道を指し直せます。
+    </div>
+    <div id="rHits" style="margin-top:6px; max-height:200px; overflow:auto"></div>
+
     <label>種別</label>
     <div class="chips" id="r-kind">
       ${KINDS.map(([k, l]) => `<button class="chip ${(saved.kind || "noMotorcycle") === k ? "on" : ""}" data-kind="${k}">${l}</button>`).join("")}
@@ -1210,6 +1221,7 @@ function rRenderEditor(c) {
     b.onclick = () => { box.querySelectorAll("[data-kind]").forEach((x) => x.classList.remove("on")); b.classList.add("on"); };
   });
   box.querySelectorAll("[data-month]").forEach((b) => { b.onclick = () => b.classList.toggle("on"); });
+  rWireFindControls(c);
   $("r-register").onclick = rApplyEdit;
   $("r-remove").onclick = () => { R.saved.delete(c.id); rSetDirty(R.dirty + 1); rRender(); rRenderEditor(c); };
 }
@@ -1279,12 +1291,21 @@ function rNewRestriction() {
       二普協の一覧に無い規制（冬季閉鎖・ユーザー報告・候補を作れなかったもの）を
       道路名から追加します。
     </div>
-    <label>道路名で探す</label>
+    <label>地図の位置から探す</label>
+    ${rFindControlsHtml()}
+    <div class="muted" style="margin-top:4px; font-size:11px">
+      道路名が分からなくても、場所さえ分かれば手元のCSVから道をつないで形にします。
+      索引を作っていない県でも使えます。
+    </div>
+
+    <label style="margin-top:14px">道路名で探す</label>
     <input type="text" id="rq" placeholder="例: 筑波、フルーツライン、国道6号">
     <div id="rHits" style="margin-top:8px; max-height:280px; overflow:auto"></div>
     <div class="muted" id="rNewHint" style="margin-top:10px">
       道路を選ぶと地図に出ます。「始」「終」をドラッグして区間を決めてください。
     </div>`;
+
+  rWireFindControls(null);
 
   let timer = null;
   $("rq").oninput = () => {
@@ -1310,6 +1331,343 @@ function rNewRestriction() {
     }, 250);
   };
   $("rq").focus();
+}
+
+// ---------- 地図の位置から道路を組み立てる ----------
+
+/**
+ * 場所を指すための一式（地図クリック・半径・座標の手入力）。
+ *
+ * ⚠️ 新規追加と引き直しで**同じものを使うこと**。片方にだけ手を入れると、
+ *    同じ操作のはずなのに画面によって挙動が違う、という形でずれる。
+ *    どちらも `#rEditor` に1つしか出ないので id の重複は起きない。
+ */
+function rFindControlsHtml() {
+  return `
+    <div class="svRow">
+      <button id="rPick">地図をクリックして探す</button>
+      <span class="spacer"></span>
+      <select id="rRadius" style="width:auto">
+        <option value="150">150m</option>
+        <option value="300" selected>300m</option>
+        <option value="800">800m</option>
+        <option value="2000">2km</option>
+      </select>
+    </div>
+    <div class="svRow" style="margin-top:4px">
+      <input type="text" id="rLatLng" placeholder="35.541343, 138.873705">
+      <button id="rGo">座標で探す</button>
+    </div>
+
+    <label style="margin-top:12px">両端を決めてつなぐ</label>
+    <div class="svRow">
+      <button id="rFromPick" style="width:34px">始</button>
+      <input type="text" id="rFrom" placeholder="始点（クリックか座標）">
+    </div>
+    <div class="svRow" style="margin-top:3px">
+      <button id="rToPick" style="width:34px">終</button>
+      <input type="text" id="rTo" placeholder="終点（クリックか座標）">
+    </div>
+    <div class="svRow" style="margin-top:4px">
+      <button class="primary" id="rRoute">この2点をつなぐ</button>
+    </div>`;
+}
+
+function rWireFindControls(replacing) {
+  $("rPick").onclick = () => rBeginPickOnMap({ replacing });
+
+  const go = () => {
+    const point = parseLatLng($("rLatLng").value);
+    if (!point) {
+      const box = $("rHits");
+      if (box) box.innerHTML = '<div class="warn">緯度と経度を読み取れませんでした<br>'
+        + '例: 35.541343, 138.873705　／　Googleマップの URL を貼っても構いません</div>';
+      return;
+    }
+    // 入れた場所が見えないと合っているか分からないので、地図も寄せる
+    R.map.setCenter({ lat: point.lat, lng: point.lng });
+    if (R.map.getZoom() < 14) R.map.setZoom(15);
+    rFindRoadsAt(point.lat, point.lng, { replacing });
+  };
+  $("rGo").onclick = go;
+  $("rLatLng").onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); go(); } };
+
+  // --- 両端を決めてつなぐ ---
+  const setEnd = (which) => {
+    if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
+    const button = $(which === "from" ? "rFromPick" : "rToPick");
+    button.classList.add("on");
+    rSetStatus(which === "from" ? "始点を地図でクリック" : "終点を地図でクリック");
+    R.pickListener = R.map.addListener("click", (e) => {
+      google.maps.event.removeListener(R.pickListener);
+      R.pickListener = null;
+      button.classList.remove("on");
+      const lat = e.latLng.lat();
+      const lng = e.latLng.lng();
+      $(which === "from" ? "rFrom" : "rTo").value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+      rDrawEndMarker(which, { lat, lng });
+    });
+  };
+  $("rFromPick").onclick = () => setEnd("from");
+  $("rToPick").onclick = () => setEnd("to");
+  $("rRoute").onclick = () => rConnectEnds(replacing);
+}
+
+/** 始点・終点の印。どこを指したか見えないと直しようがない */
+function rDrawEndMarker(which, position) {
+  R.endMarkers = R.endMarkers || {};
+  if (R.endMarkers[which]) R.endMarkers[which].setMap(null);
+  R.endMarkers[which] = new google.maps.Marker({
+    position, map: R.map,
+    label: { text: which === "from" ? "始" : "終", color: "#fff", fontSize: "11px" },
+  });
+}
+
+function rClearEndMarkers() {
+  for (const m of Object.values(R.endMarkers || {})) m.setMap(null);
+  R.endMarkers = {};
+}
+
+/**
+ * 両端をつないだ線を出す。押すのは「探す」だけで、採用は線をクリックしてから。
+ *
+ * ⚠️ 出た線をいきなり区間にしないこと。道が繋がっていない所を跨いでいたり、
+ *    遠回りしていたりする。**地図で見てから採る**手順にする。
+ */
+async function rConnectEnds(replacing) {
+  const from = parseLatLng($("rFrom").value);
+  const to = parseLatLng($("rTo").value);
+  const box = $("rHits");
+  if (!from || !to) {
+    box.innerHTML = '<div class="warn">始点と終点の両方を決めてください</div>';
+    return;
+  }
+  box.innerHTML = '<div class="muted">道をつないでいます…</div>';
+  let r;
+  try {
+    r = await (await fetch(`/api/restrictions/route?fromLat=${from.lat}&fromLng=${from.lng}`
+      + `&toLat=${to.lat}&toLng=${to.lng}`)).json();
+  } catch (e) {
+    box.innerHTML = `<div class="warn">${escapeHtml(String(e.message || e))}</div>`;
+    return;
+  }
+  if (r.error) { box.innerHTML = `<div class="warn">${escapeHtml(r.error)}</div>`; return; }
+
+  // 見つけた線を地図に出す（採用前なので別の色で）
+  if (R.routePreview) R.routePreview.setMap(null);
+  const path = decodePolyline(r.polyline);
+  R.routePreview = new google.maps.Polyline({
+    path, map: R.map, strokeColor: "#7048e8", strokeOpacity: 0.9, strokeWeight: 6, zIndex: 200,
+  });
+  const bounds = new google.maps.LatLngBounds();
+  path.forEach((p) => bounds.extend(p));
+  R.map.fitBounds(bounds, 60);
+
+  const warn = [];
+  if (r.joinGapMeters > 25) warn.push(`道が途切れている所を最大${r.joinGapMeters}m跨いでいます`);
+  if (r.snapFromMeters > 100) warn.push(`始点が道から${r.snapFromMeters}m離れています`);
+  if (r.snapToMeters > 100) warn.push(`終点が道から${r.snapToMeters}m離れています`);
+
+  box.innerHTML = "";
+  const div = document.createElement("div");
+  div.className = "row";
+  div.innerHTML = `<span class="name">${escapeHtml(r.roadNames.slice(0, 3).join(" → ") || "つないだ道")}</span>` +
+                  `<span class="sub">つなぎ目 最大${r.joinGapMeters}m</span>` +
+                  `<span class="score">${(r.lengthMeters / 1000).toFixed(1)}km</span>`;
+  div.onclick = () => rUseRoute(r, replacing);
+  box.appendChild(div);
+  if (warn.length) {
+    const w = document.createElement("div");
+    w.className = "warn";
+    w.style.marginTop = "6px";
+    w.innerHTML = warn.map(escapeHtml).join("<br>");
+    box.appendChild(w);
+  }
+  const hint = document.createElement("div");
+  hint.className = "muted";
+  hint.style.marginTop = "6px";
+  hint.textContent = "紫の線が地図に出ています。上の行をクリックすると、この形を区間として使います。";
+  box.appendChild(hint);
+}
+
+/** つないだ線をそのまま規制の区間として使う */
+function rUseRoute(route, replacing) {
+  if (R.routePreview) { R.routePreview.setMap(null); R.routePreview = null; }
+  rClearEndMarkers();
+  const name = route.roadNames[0] || "（つないだ道）";
+  if (replacing) {
+    // ⚠️ 区間そのものを両端で決めたので、道筋も区間も同じ線にする。
+    //    ここで別々にすると「始」「終」が線の外に出てドラッグできない
+    replacing.chainPolyline = route.polyline;
+    replacing.polyline = route.polyline;
+    replacing.matchedName = name;
+    replacing.confidence = "両端から生成";
+    replacing.reason = "両端をつないだ線です。必要なら「始」「終」で詰めてください";
+    const saved = R.saved.get(replacing.id);
+    if (saved) { saved.name = name; rSetDirty(R.dirty + 1); }
+    rSelect(replacing);
+    return;
+  }
+  const candidate = {
+    id: `manual-${R.romaji}-${Date.now()}`, prefecture: R.prefName, city: "",
+    sourceRoad: name, matchedName: name,
+    from: "", to: "", target: "（手で追加）", targetLabel: "二輪すべて",
+    confidence: "両端から生成", reason: "両端をつないだ線です。必要なら「始」「終」で詰めてください",
+    chainPolyline: route.polyline, polyline: route.polyline,
+    lengthMeters: route.lengthMeters, geocode: null, minCc: null, maxCc: null, manual: true,
+  };
+  R.candidates.unshift(candidate);
+  rSelect(candidate);
+}
+
+/**
+ * 手入力・貼り付けから緯度経度を読む。読めなければ null。
+ *
+ * 受ける形:
+ *   ・「35.541343, 138.873705」（Googleマップの「座標をコピー」そのまま）
+ *   ・空白区切り・全角のカンマ・度分秒ではない小数
+ *   ・GoogleマップのURL（`@35.54,138.87,15z` や `?q=35.54,138.87`）
+ *
+ * ⚠️ **緯度と経度の取り違えを直すこと。** 日本の緯度は 20〜46、経度は 122〜154 で
+ *    重ならないので、逆に入っていれば入れ替える。ここを素通りさせると、
+ *    地球の裏側を指したまま「道が無い」としか見えない。
+ */
+function parseLatLng(text) {
+  if (!text) return null;
+  const cleaned = String(text)
+    .replace(/[，、]/g, ",")            // 全角のカンマ
+    .replace(/[度°]/g, " ")
+    .replace(/[NnEe]/g, " ");           // 「35.5N」のような書き方
+  // URL に埋まっている座標を先に拾う。
+  // ⚠️ 順番が大事。`!3d!4d`（その場所そのもの）を `@`（地図の中心）より先に見る。
+  //    場所を開いたURLでは両方入っていて、`@` は表示位置なので目的地とずれる。
+  const inUrl = cleaned.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/)
+             || cleaned.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/)
+             || cleaned.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+  const numbers = inUrl ? [inUrl[1], inUrl[2]]
+                        : (cleaned.match(/-?\d+(?:\.\d+)?/g) || []);
+  if (numbers.length < 2) return null;
+
+  let lat = Number(numbers[0]);
+  let lng = Number(numbers[1]);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  // 逆に入っていたら入れ替える
+  if (Math.abs(lat) > 90 || (lat > 100 && lng < 100)) { const t = lat; lat = lng; lng = t; }
+  if (Math.abs(lat) > 90 || Math.abs(lng) > 180) return null;
+  return { lat, lng };
+}
+
+/**
+ * 次に地図をクリックした場所で道路を探す。
+ *
+ * ⚠️ 一度きりの受付にすること。付けっぱなしにすると、区間を決めるために
+ *    地図を触るたびに探し直してしまう。
+ */
+function rBeginPickOnMap({ replacing = null } = {}) {
+  if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
+  const button = $("rPick");
+  const label = button ? button.textContent : "";
+  if (button) { button.textContent = "地図をクリック…"; button.classList.add("on"); }
+  rSetStatus("地図で場所をクリックしてください");
+  R.pickListener = R.map.addListener("click", async (e) => {
+    google.maps.event.removeListener(R.pickListener);
+    R.pickListener = null;
+    if (button) { button.textContent = label; button.classList.remove("on"); }
+    await rFindRoadsAt(e.latLng.lat(), e.latLng.lng(), { replacing });
+  });
+}
+
+async function rFindRoadsAt(lat, lng, { replacing = null } = {}) {
+  const box = $("rHits");
+  const radius = Number(($("rRadius") || {}).value) || 300;
+  if (box) box.innerHTML = '<div class="muted">手元のCSVから道をつないでいます…</div>';
+  rSetStatus("");
+  let r;
+  try {
+    r = await (await fetch(`/api/restrictions/roads-at?lat=${lat}&lng=${lng}`
+      + `&radius=${radius}&prefecture=${encodeURIComponent(R.prefName || "")}`)).json();
+  } catch (e) {
+    if (box) box.innerHTML = `<div class="warn">${escapeHtml(String(e.message || e))}</div>`;
+    return;
+  }
+  if (!box) return;
+  if (r.error) { box.innerHTML = `<div class="warn">${escapeHtml(r.error)}</div>`; return; }
+  if (!r.roads || !r.roads.length) {
+    box.innerHTML = `<div class="muted">この場所には道が見つかりませんでした（半径${radius}m）<br>`
+      + `範囲を広げるか、少しずらしてもう一度クリックしてください</div>`;
+    return;
+  }
+  box.innerHTML = "";
+  for (const road of r.roads) {
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `<span class="name">${escapeHtml(road.name)}</span>` +
+                    `<span class="sub">${road.distanceMeters}m ・ ${road.highway}</span>` +
+                    `<span class="score">${(road.lengthMeters / 1000).toFixed(1)}km</span>`;
+    div.onclick = () => (replacing ? rReplaceRoad(replacing, road) : rStartFromRoad(road));
+    box.appendChild(div);
+  }
+}
+
+
+/**
+ * 差し替えた道の上に、区間を置き直す。
+ *
+ * ⚠️ **元の区間をそのまま残さないこと。** 古い区間は別の道の上にあるので、
+ *    残すと「始」「終」をドラッグできない（つまみは道の上にしか乗らない）。
+ * ⚠️ 新しい道の真ん中に置かないこと。長い道に差し替えたとき、直したい場所から
+ *    何km も離れたところに区間が飛ぶ。**元の区間の真ん中に一番近いところ**に置く。
+ *
+ * @param {Array} chain 新しい道の点列
+ * @param {Array} old   元の区間の点列（無ければ新しい道の真ん中を使う）
+ */
+function segmentOnNewRoad(chain, old) {
+  if (!chain.length) return [];
+  const anchor = old && old.length ? old[Math.floor(old.length / 2)]
+                                   : chain[Math.floor(chain.length / 2)];
+  let nearest = 0;
+  let best = Infinity;
+  chain.forEach((p, i) => {
+    const d = (p.lat - anchor.lat) ** 2 + (p.lng - anchor.lng) ** 2;
+    if (d < best) { best = d; nearest = i; }
+  });
+  // 道の1割ぶんを仮に置く（そこからドラッグして合わせてもらう）
+  const span = Math.max(2, Math.floor(chain.length * 0.1));
+  return chain.slice(Math.max(0, nearest - span), Math.min(chain.length, nearest + span));
+}
+
+/**
+ * 既に選んでいる規制の「道筋」を、指し直した道路に差し替える。
+ *
+ * ⚠️ **登録済みの内容（種別・排気量・確認日）は消さないこと。** 直したいのは
+ *    道筋であって規制の中身ではない。ここで作り直すと、付け直しの手間が増える。
+ * ⚠️ 区間（`polyline`）は新しい道の上に取り直す。古い区間は別の道の上にあるので、
+ *    そのまま残すと「始」「終」をドラッグできない（道の上にしか乗らないため）。
+ */
+function rReplaceRoad(candidate, road) {
+  const chain = decodePolyline(road.polyline);
+  const old = candidate.polyline ? decodePolyline(candidate.polyline) : [];
+  candidate.chainPolyline = road.polyline;
+  candidate.polyline = encodePolyline(segmentOnNewRoad(chain, old));
+  candidate.matchedName = road.name;
+  candidate.confidence = "地図で指し直し";
+  candidate.reason = "道筋を指し直しました。「始」「終」で区間を合わせてください";
+
+  // 登録済みなら、道路名だけ新しいものに合わせる（種別などはそのまま）
+  const saved = R.saved.get(candidate.id);
+  if (saved) { saved.name = road.name; rSetDirty(R.dirty + 1); }
+
+  rSelect(candidate);
+  setTimeout(() => rSetStatus(`「${road.name}」に差し替えました`), 0);
+}
+
+function rSetStatus(text) {
+  if (!text) return;
+  // 新規追加の画面には案内欄があるが、既存を編集しているときは無い。
+  // その場合はヘッダの状態表示に出す（黙って消えないように）
+  const hint = $("rNewHint");
+  if (hint) hint.textContent = text;
+  else setStatus(text);
 }
 
 /** 選んだ道路を地図に出し、区間を切れる状態にする */
