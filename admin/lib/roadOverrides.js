@@ -19,6 +19,8 @@
 "use strict";
 
 const { distanceMeters } = require("./roadCsv");
+const { decode, encode, profile } = require("./polyline");
+const { build, score: scoreOf } = require("./funSegments");
 
 /** 場所を丸める粗さ（度）。0.01度 ≒ 1.1km */
 const KEY_PRECISION = 0.01;
@@ -47,15 +49,60 @@ function normalizeOverride(raw = {}) {
     note: typeof raw.note === "string" && raw.note.trim() ? raw.note.trim() : null,
     /** 「絶景」「ワインディング」などの札 */
     tags: Array.isArray(raw.tags) ? raw.tags.filter((t) => typeof t === "string" && t.trim()) : [],
+    /**
+     * 手で直した形（符号化した線）。区間を切り詰めたり、先へ延ばしたりしたもの。
+     *
+     * ⚠️ 自動生成は「曲がっている所」を機械的に切り出すので、
+     *    ・峠の入口の直線が少し足りない／余分に付いている
+     *    ・面白いのは途中までなのに、市街地まで含まれている
+     *    といったズレが出る。そこを人が直せるようにする。
+     *
+     * ⚠️ **形を変えたら距離・曲率・点数も測り直すこと。** 形だけ差し替えると、
+     *    「6.0km・曲率123」と出したまま実際は3kmの線、という嘘が配信される。
+     */
+    shape: typeof raw.shape === "string" && raw.shape.trim() ? raw.shape.trim() : null,
     /** 誰がいつ触ったかの控え（運用の手がかり。配信には載せない） */
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : null,
+  };
+}
+
+/**
+ * 手で直した形に合わせて、測って分かることを全部やり直す。
+ *
+ * ⚠️ 生成と同じ式（funSegments の build / score）を使うこと。ここで別の計算を
+ *    書くと、手直しした道だけ別の物差しで並ぶ。
+ */
+function reshape(segment, encoded) {
+  const points = decode(encoded);
+  if (points.length < 2) return segment;      // 壊れた線は無視して元のまま
+
+  const p = profile(points);
+  if (p.points.length < 2) return segment;
+  const metrics = build(p, 0, p.points.length - 1);
+  const scored = scoreOf(metrics, segment.highway);
+
+  return {
+    ...segment,
+    polyline: encoded,
+    pointCount: points.length,
+    // ⚠️ **並びが違う。** `decode` が返すのは [経度, 緯度]、配信データの start/end は
+    //    [緯度, 経度]（例: [36.066321, 139.130317]）。ここを取り違えると、
+    //    調整の鍵（道路名＠始点）が別の場所を指し、次の生成で調整が当たらなくなる。
+    start: [points[0][1], points[0][0]],
+    end: [points[points.length - 1][1], points[points.length - 1][0]],
+    lengthKm: Number((metrics.lengthMeters / 1000).toFixed(2)),
+    curviness: Number(metrics.curviness.toFixed(1)),
+    flow: Number(metrics.flow.toFixed(1)),
+    turnCount: metrics.turnCount,
+    score: Number(scored.score.toFixed(1)),
+    reshaped: true,
   };
 }
 
 /** 何も指定していない調整か（空の調整はファイルに残さない） */
 function isEmptyOverride(o) {
   const n = normalizeOverride(o);
-  return !n.hidden && n.boost === 0 && !n.title && !n.note && n.tags.length === 0;
+  return !n.hidden && n.boost === 0 && !n.title && !n.note && n.tags.length === 0 && !n.shape;
 }
 
 /**
@@ -89,9 +136,11 @@ function applyOverrides(segments, overrides = {}) {
     const o = hit.override;
     if (o.hidden) continue;   // 一覧から外す
 
-    const next = { ...segment };
+    // ⚠️ 形の直しを先に当てること。点数の加算は「直したあとの点数」に足す。
+    //    逆にすると、切り詰めて点数が下がったぶんまで加算が食われる
+    let next = o.shape ? reshape(segment, o.shape) : { ...segment };
     if (o.boost !== 0) {
-      next.score = Number(Math.max(0, Math.min(100, segment.score + o.boost)).toFixed(1));
+      next.score = Number(Math.max(0, Math.min(100, next.score + o.boost)).toFixed(1));
       next.boost = o.boost;
     }
     if (o.title) next.title = o.title;
@@ -138,6 +187,6 @@ function fuzzyMatch(segment, entries, used) {
 }
 
 module.exports = {
-  overrideKey, applyOverrides, normalizeOverride, isEmptyOverride,
+  overrideKey, applyOverrides, normalizeOverride, isEmptyOverride, reshape,
   KEY_PRECISION, FUZZY_MATCH_METERS,
 };

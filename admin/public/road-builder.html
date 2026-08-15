@@ -247,6 +247,8 @@ const state = {
   romaji: null, prefName: "", segments: [], overrides: {}, selected: null,
   dirty: 0, map: null, lines: new Map(), weights: null, normalizers: null,
   classRank: null, tuning: null, defaults: null, filter: "all", visible: [],
+  // 形を直すときの地図クリック待ちと、線の上に出す掴める点
+  shapeListener: null, shapeHandles: [],
   reviews: {},          // アプリの評価ツールで付いた評価（読むだけ）
   svEnd: "start",       // ストリートビューをどちらの端から開くか
 };
@@ -303,6 +305,20 @@ function decodePolyline(encoded) {
 }
 
 const ov = (seg) => state.overrides[overrideKey(seg)] || {};
+/** 画面に出す線。手で直していればそちらを使う（一覧・地図・保存で必ずこれを通す） */
+const shapeOf = (seg) => ov(seg).shape || seg.polyline;
+/** 直した形のおおよその長さ（km）。表示用 */
+function shapeLengthKm(encoded) {
+  const pts = decodePolyline(encoded);
+  let m = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1], b = pts[i];
+    const dy = (b.lat - a.lat) * 111320;
+    const dx = (b.lng - a.lng) * 111320 * Math.cos((a.lat * Math.PI) / 180);
+    m += Math.hypot(dx, dy);
+  }
+  return (m / 1000).toFixed(2);
+}
 const adjustedScore = (seg) => Math.max(0, Math.min(100, seg.score + (ov(seg).boost || 0)));
 const isCurated = (seg) => Object.keys(ov(seg)).length > 0;
 
@@ -444,6 +460,10 @@ function escapeHtml(s) {
 
 // ---------- 選択 ----------
 function select(seg, { pan = true } = {}) {
+  // ⚠️ 前の道で出した点と待ち受けを必ず片付ける。残すと地図に散らかり、
+  //    別の道の線を切り詰めようとして前の道の点を掴んでしまう
+  if (state.shapeListener) { google.maps.event.removeListener(state.shapeListener); state.shapeListener = null; }
+  clearShapeHandles();
   state.selected = seg;
   render();
   if (pan) panTo(seg);
@@ -476,7 +496,9 @@ function drawAll() {
   state.lines.clear();
   for (const seg of state.segments) {
     const line = new google.maps.Polyline({
-      path: decodePolyline(seg.polyline), map: state.map,
+      // ⚠️ 手で直した形があればそちら。元の線のままだと、切り詰めたのに
+      //    地図では元の長さのまま見え、直したつもりで直っていない
+      path: decodePolyline(shapeOf(seg)), map: state.map,
       strokeColor: "#00a8c6", strokeOpacity: 0.7, strokeWeight: 4,
     });
     line.addListener("click", () => select(seg, { pan: false }));
@@ -502,7 +524,7 @@ function restyleLines() {
 
 function boundsOf(segs) {
   const b = new google.maps.LatLngBounds();
-  for (const seg of segs) for (const p of decodePolyline(seg.polyline)) b.extend(p);
+  for (const seg of segs) for (const p of decodePolyline(shapeOf(seg))) b.extend(p);
   return b;
 }
 
@@ -513,6 +535,166 @@ function fitPrefecture() {
 
 function panTo(seg) {
   state.map.fitBounds(boundsOf([seg]), 60);
+}
+
+// ---------- 道の形を手で直す ----------
+//
+// 自動生成は「曲がっている所」を機械的に切り出すので、面白いのは途中までなのに
+// 市街地まで含まれていたり、峠の入口が少し足りなかったりする。そこを直せるようにする。
+//
+// ⚠️ 直した形は調整（overrides）に持たせる。生成データを書き換えると、
+//    作り直したときに消える。
+
+/** 線に出す掴める点の数の上限。多すぎると地図が埋まって道が見えない */
+const MAX_HANDLES = 40;
+
+/**
+ * 掴める点をどこに出すか（線の点の番号）。
+ *
+ * ⚠️ **両端を必ず含めること。** 端が出ないと「ここまで残す」を端ちょうどで
+ *    指せず、必ず少し余るか足りないかになる。
+ * ⚠️ 点が多い線は間引く。300点の線に300個の印を出すと道が見えなくなる。
+ */
+function handleIndices(count, max = MAX_HANDLES) {
+  if (count <= 0) return [];
+  if (count <= max) return [...Array(count)].map((_, i) => i);
+  const step = (count - 1) / (max - 1);
+  const out = new Set();
+  for (let i = 0; i < max; i++) out.add(Math.round(i * step));
+  out.add(0);
+  out.add(count - 1);
+  return [...out].sort((a, b) => a - b);
+}
+
+/** 地図をクリックした場所が、線のどの点に一番近いか */
+function nearestIndex(points, at) {
+  let best = 0;
+  let bestDistance = Infinity;
+  points.forEach((p, i) => {
+    const d = (p.lat - at.lat) ** 2 + (p.lng - at.lng) ** 2;
+    if (d < bestDistance) { bestDistance = d; best = i; }
+  });
+  return best;
+}
+
+function setShape(seg, encoded) {
+  const key = overrideKey(seg);
+  state.overrides[key] = { ...(state.overrides[key] || {}), shape: encoded };
+  touch();
+  drawAll();
+  render();
+  renderEditor();
+}
+
+/**
+ * 残す範囲を2回のクリックで決める（部分削除）。
+ *
+ * ⚠️ 「消す範囲」ではなく「**残す範囲**」を指してもらう。消す方を指す作りにすると、
+ *    真ん中を消したときに線が2本に割れてしまい、1区間として扱えない。
+ */
+function beginTrim(seg) {
+  const points = decodePolyline(shapeOf(seg));
+  let first = null;
+
+  const finish = () => {
+    if (state.shapeListener) { google.maps.event.removeListener(state.shapeListener); state.shapeListener = null; }
+    clearShapeHandles();
+  };
+
+  const pick = (index) => {
+    if (first === null) {
+      first = index;
+      // 選んだ点が分かるように、その点だけ色を変える
+      drawShapeHandles(points, { picked: index, onPick: pick });
+      setStatus("残す範囲の「終わり」を、線の点か地図でクリック");
+      return;
+    }
+    const [from, to] = first <= index ? [first, index] : [index, first];
+    if (to - from < 1) { setStatus("同じ点です。別の点を選んでください"); return; }
+    finish();
+    setShape(seg, encodePolyline(points.slice(from, to + 1)));
+    setStatus(`${shapeLengthKm(shapeOf(seg))}km に切り詰めました（保存は S）`);
+  };
+
+  drawShapeHandles(points, { onPick: pick });
+  setStatus("残す範囲の「始め」を、線の点か地図でクリック");
+  if (state.shapeListener) google.maps.event.removeListener(state.shapeListener);
+  // ⚠️ 点の上でなくても選べるようにしておく。点は間引いてあるので、
+  //    ちょうど良い場所に印が無いことがある
+  state.shapeListener = state.map.addListener("click", (e) => {
+    pick(nearestIndex(points, { lat: e.latLng.lat(), lng: e.latLng.lng() }));
+  });
+}
+
+/**
+ * 線の上に掴める点を出す。
+ *
+ * ⚠️ 出しっぱなしにしないこと。選び終わったら必ず消す（`clearShapeHandles`）。
+ *    残ったまま別の道を選ぶと、前の道の点が地図に散らかる。
+ */
+function drawShapeHandles(points, { picked = null, onPick } = {}) {
+  clearShapeHandles();
+  state.shapeHandles = handleIndices(points.length).map((index) => {
+    const marker = new google.maps.Marker({
+      position: points[index],
+      map: state.map,
+      zIndex: 300,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: index === picked ? 7 : 5,
+        fillColor: index === picked ? "#e8590c" : "#fff",
+        fillOpacity: 1,
+        strokeColor: "#e8590c",
+        strokeWeight: 2,
+      },
+    });
+    marker.addListener("click", () => onPick && onPick(index));
+    return marker;
+  });
+}
+
+function clearShapeHandles() {
+  for (const m of state.shapeHandles || []) m.setMap(null);
+  state.shapeHandles = [];
+}
+
+/**
+ * 端から先へ延ばす。クリックした場所まで、手元のCSVの道でつなぐ。
+ *
+ * ⚠️ どちらの端から延ばすかは、クリックした場所に近い端で決める。
+ *    選ばせると手数が増えるうえ、間違えると逆側に伸びて分かりにくい。
+ */
+function beginExtend(seg) {
+  clearShapeHandles();
+  const points = decodePolyline(shapeOf(seg));
+  setStatus("どこまで延ばすかを地図でクリック");
+  if (state.shapeListener) google.maps.event.removeListener(state.shapeListener);
+  state.shapeListener = state.map.addListener("click", async (e) => {
+    google.maps.event.removeListener(state.shapeListener);
+    state.shapeListener = null;
+    const at = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+    const head = points[0];
+    const tail = points[points.length - 1];
+    const toHead = (head.lat - at.lat) ** 2 + (head.lng - at.lng) ** 2;
+    const toTail = (tail.lat - at.lat) ** 2 + (tail.lng - at.lng) ** 2;
+    const fromEnd = toHead < toTail ? head : tail;
+
+    setStatus("道をつないでいます…");
+    let r;
+    try {
+      r = await (await fetch(`/api/restrictions/route?fromLat=${fromEnd.lat}&fromLng=${fromEnd.lng}`
+        + `&toLat=${at.lat}&toLng=${at.lng}`)).json();
+    } catch (err) { setStatus("つなげませんでした: " + err.message); return; }
+    if (r.error) { setStatus(r.error); return; }
+
+    const added = decodePolyline(r.polyline);
+    // ⚠️ 向きを揃えること。頭に足すときは、つないだ線を逆にしないと線が折り返す
+    const merged = toHead < toTail
+      ? [...added.slice().reverse(), ...points]
+      : [...points, ...added];
+    setShape(seg, encodePolyline(merged));
+    setStatus(`${shapeLengthKm(shapeOf(seg))}km に延ばしました（つなぎ目 最大${r.joinGapMeters}m・保存は S）`);
+  });
 }
 
 // ---------- ストリートビュー ----------
@@ -657,6 +839,18 @@ function renderEditor() {
 
     ${reviewBlock(seg)}
 
+    <label>道の形</label>
+    <div class="svRow">
+      <button id="e-trim">${o.shape ? "切り直す" : "切り詰める"}</button>
+      <button id="e-extend">先へ延ばす</button>
+      <button id="e-shape-reset" ${o.shape ? "" : "disabled"}>元に戻す</button>
+    </div>
+    <div class="muted" style="margin-top:4px; font-size:11px" id="e-shape-hint">
+      ${o.shape
+        ? `手で直した形です（${shapeLengthKm(o.shape)}km）。距離・曲率・点数は測り直されます。`
+        : "面白いのは途中まで／入口が足りない、というときに直せます。"}
+    </div>
+
     <label>点数の加算</label>
     <div class="boostRow">
       <button data-boost="-10">−10</button>
@@ -689,6 +883,14 @@ function renderEditor() {
       <button id="e-next">↓ 次</button>
     </div>
     <div class="muted" style="margin-top:10px">変更はすぐ反映されます。<kbd>S</kbd> で保存。</div>`;
+
+  $("e-trim").onclick = () => beginTrim(seg);
+  $("e-extend").onclick = () => beginExtend(seg);
+  $("e-shape-reset").onclick = () => {
+    const key = overrideKey(seg);
+    if (state.overrides[key]) { delete state.overrides[key].shape; touch(); }
+    drawAll(); render(); renderEditor();
+  };
 
   // ストリートビューを開く端の選択（選び直したらすぐ効く）
   box.querySelectorAll("[data-sv-end]").forEach((b) => {

@@ -231,4 +231,6 @@ function clamp01(v) {
   return v < 0 ? 0 : v > 1 ? 1 : v;
 }
 
-module.exports = { extract, score, signals, localCurviness, bestWindow, EXTRACT, WEIGHTS, NORMALIZERS, CLASS_RANK };
+// ⚠️ build は手直しした形の再計算にも使う（lib/roadOverrides.js）。
+//    生成と同じ式で測り直すために公開している。式を変えたら両方に効く。
+module.exports = { extract, score, signals, localCurviness, bestWindow, build, EXTRACT, WEIGHTS, NORMALIZERS, CLASS_RANK };
