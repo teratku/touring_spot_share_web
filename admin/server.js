@@ -28,6 +28,8 @@ const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
+const { findOverlaps } = require("./lib/restrictionOverlap");
+const { decode: decodePolylineServer } = require("./lib/polyline");
 
 const PROJECT_ID = "biketeilen";
 const PORT = process.env.PORT || 4317;
@@ -273,6 +275,36 @@ app.get("/api/roads/reviews", async (req, res) => {
     res.json({ reviews, cached: false });
   } catch (e) {
     res.status(500).json({ error: e.message, reviews: {} });
+  }
+});
+
+/**
+ * 通行規制と重なっているおすすめ道路を返す。
+ *
+ * ⚠️ 生成もアプリも規制を見ていないので、**二輪通行禁止の道がおすすめとして
+ *    配信され得る**。走れない道へ案内することになるので、配信の前に気付けるようにする。
+ *
+ * ⚠️ ここは知らせるだけ。実際に外すかどうかは画面で人が決める
+ *    （規制が道の一部にしか掛かっていないこともあり、機械的に消すと行き過ぎる）。
+ */
+app.get("/api/roads/restricted/:romaji", (req, res) => {
+  const { romaji } = req.params;
+  const recFile = path.join(roadDir("road-recommend"), `${romaji}.json`);
+  const resFile = path.join(__dirname, "data", "road-restrictions", `${romaji}.json`);
+  if (!fs.existsSync(recFile) || !fs.existsSync(resFile)) return res.json({ overlaps: {}, count: 0 });
+  try {
+    const rec = JSON.parse(fs.readFileSync(recFile, "utf8"));
+    const rest = JSON.parse(fs.readFileSync(resFile, "utf8"));
+    const restrictions = (rest.restrictions || []).map((r) => ({
+      id: r.id, name: r.name, kind: r.kind, points: decodePolylineServer(r.polyline),
+    }));
+    const roads = (rec.segments || []).map((seg) => ({
+      id: seg.id, name: seg.name, points: decodePolylineServer(seg.polyline),
+    }));
+    const found = findOverlaps(restrictions, roads);
+    res.json({ overlaps: Object.fromEntries(found), count: found.size });
+  } catch (e) {
+    res.status(500).json({ error: e.message, overlaps: {} });
   }
 });
 

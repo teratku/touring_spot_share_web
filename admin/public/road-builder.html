@@ -137,6 +137,9 @@
   <span id="status" class="muted"></span>
   <span id="unsaved" class="unsaved"></span>
   <button class="primary" id="save" disabled>保存 <kbd>S</kbd></button>
+  <!-- ⚠️ 規制の保存はヘッダにも置く。左の一覧バーだけだと幅からはみ出して
+       見えず、「保存ボタンが押せない」と受け取られる（実機で報告） -->
+  <button class="primary" id="rSaveHeader" style="display:none" disabled>保存 <kbd>S</kbd></button>
   <button id="publish">配信…</button>
 </header>
 
@@ -165,6 +168,7 @@
       <button class="chip on" data-filter="all">すべて</button>
       <button class="chip" data-filter="curated">調整済み</button>
       <button class="chip" data-filter="reviewed">評価あり</button>
+      <button class="chip" data-filter="restricted">規制と重なる</button>
       <button class="chip" data-filter="hidden">非表示</button>
       <button id="reloadReviews" title="アプリで付けた評価を取り直す（1時間ためています）">⟳ 評価</button>
       <span class="spacer"></span>
@@ -187,7 +191,7 @@
 
 <main id="view-restrict" style="display:none">
   <div id="list">
-    <div class="bar">
+    <div class="bar wrap">
       <select id="rPref"></select>
       <button id="rNew">＋ 新規</button>
       <button id="rListToggle">一覧で見る</button>
@@ -249,7 +253,13 @@ const state = {
   classRank: null, tuning: null, defaults: null, filter: "all", visible: [],
   // 形を直すときの地図クリック待ちと、線の上に出す掴める点
   shapeListener: null, shapeHandles: [],
+  // 延ばすときの下見・どちらの端から延ばすか
+  extendPreview: null, extendMarker: null, extendWhich: "tail",
+  // 選んだ道の両端に出す印（既定で出す）
+  endMarkers: [],
   reviews: {},          // アプリの評価ツールで付いた評価（読むだけ）
+  // 通行規制と重なっているおすすめ道路（区間id → 重なっている規制の一覧）
+  restricted: {},
   svEnd: "start",       // ストリートビューをどちらの端から開くか
   svZoom: 16,           // 別画面で開いたときの、下の地図の倍率（自前ページ用）
   svSize: 50,           // 下の地図が画面に占める割合（%）。実物のURLでは33だった
@@ -350,12 +360,14 @@ async function loadPrefecture(romaji) {
   const [seg, o] = await Promise.all([
     (await fetch(`/api/roads/segments/${romaji}`)).json(),
     (await fetch(`/api/roads/overrides/${romaji}`)).json(),
+    loadRestricted(romaji),
     loadReviews(),
   ]);
   state.segments = seg.segments || [];
   state.prefName = seg.prefecture || "";
   state.overrides = o.overrides || {};
   state.selected = null;
+  clearEndMarkers();
   setDirty(0);
   drawAll();
   render();
@@ -370,6 +382,20 @@ async function loadPrefecture(romaji) {
  *    区間の手直し自体は評価が無くてもできる。認証が通っていない開発機でも
  *    ツールが開けるようにしておく。
  */
+/**
+ * 通行規制と重なっているおすすめ道路を読む。
+ *
+ * ⚠️ 取れなくても画面を止めないこと。規制が未登録の県では空で返る。
+ */
+async function loadRestricted(romaji) {
+  try {
+    const r = await (await fetch(`/api/roads/restricted/${romaji}`)).json();
+    state.restricted = r.overlaps || {};
+  } catch {
+    state.restricted = {};
+  }
+}
+
 async function loadReviews({ refresh = false } = {}) {
   if (!refresh && Object.keys(state.reviews).length) return;
   try {
@@ -395,6 +421,7 @@ function render() {
   if (state.filter === "curated") list = list.filter((r) => isCurated(r.seg));
   else if (state.filter === "hidden") list = list.filter((r) => r.o.hidden);
   else if (state.filter === "reviewed") list = list.filter((r) => reviewOf(r.seg));
+  else if (state.filter === "restricted") list = list.filter((r) => state.restricted[r.seg.id]);
   else list = list.filter((r) => !r.o.hidden);   // 既定では非表示を隠す
 
   if (q) list = list.filter((r) => r.seg.name.includes(q) || (r.o.title || "").includes(q));
@@ -420,6 +447,10 @@ function render() {
     if (r.o.note) marks.push("💬");
     for (const t of (r.o.tags || [])) marks.push("🏷");
     // アプリで実際に走って付けた評価。調整の印とは別に、色付きで見せる
+    // ⚠️ 通行規制と重なっている道は目立たせる。走れない道をおすすめに出さない
+    const banned = state.restricted[r.seg.id];
+    const bannedMark = banned
+      ? '<span class="verdict" style="color:#c92a2a" title="通行規制と重なっています">🚫</span>' : "";
     const rv = reviewOf(r.seg);
     const v = rv && VERDICT[rv.verdict];
     const verdictMark = v
@@ -427,7 +458,7 @@ function render() {
     div.innerHTML =
       `<span class="rank">${i + 1}</span>` +
       `<span class="name">${escapeHtml(r.o.title || r.seg.name)}</span>` +
-      `<span class="mark">${verdictMark}${marks.join("")}</span>` +
+      `<span class="mark">${bannedMark}${verdictMark}${marks.join("")}</span>` +
       `<span class="sub">${r.seg.lengthKm.toFixed(0)}km</span>` +
       `<span class="score">${r.score.toFixed(1)}</span>`;
     div.onclick = () => select(r.seg);
@@ -466,7 +497,9 @@ function select(seg, { pan = true } = {}) {
   //    別の道の線を切り詰めようとして前の道の点を掴んでしまう
   if (state.shapeListener) { google.maps.event.removeListener(state.shapeListener); state.shapeListener = null; }
   clearShapeHandles();
+  clearExtendPreview();
   state.selected = seg;
+  drawEndMarkers(seg);
   render();
   if (pan) panTo(seg);
   renderEditor();
@@ -547,6 +580,80 @@ function panTo(seg) {
 // ⚠️ 直した形は調整（overrides）に持たせる。生成データを書き換えると、
 //    作り直したときに消える。
 
+/**
+ * 延ばした線が「変」でないか調べる。問題の説明を並べて返す（空なら問題なし）。
+ *
+ * 【なぜ要るか】
+ * つなぐ経路は最短で引かれるだけで、**道の続きを延ばしているとは限らない**。
+ * 実際に起きうるのは:
+ *   ・元の線を逆走して戻ってくる（重なる）
+ *   ・途中で行って戻りが入る
+ *   ・目的の点まで大回りする
+ * どれも「延ばした」つもりの形にならないので、当てる前に気付けるようにする。
+ *
+ * ⚠️ ここで**弾かず、伝えるだけ**にすること。道路網の都合でどうしても
+ *    回り込む場所はあり、機械的に禁止すると直せなくなる。
+ */
+const EXTEND_OVERLAP_METERS = 12;   // これ以内なら元の線と同じところを通っているとみなす
+const EXTEND_OVERLAP_RATIO = 0.25;  // 延ばした分のうち、これ以上重なっていたら知らせる
+const EXTEND_DETOUR_RATIO = 3;      // 直線距離のこの倍を超えたら大回りとみなす
+const EXTEND_EXCESS_METERS = 300;   // かつ、これ以上余計に走っていたら知らせる
+
+function extensionIssues(existing, added, target) {
+  const issues = [];
+  if (!added || added.length < 2) return ["延ばす線が取れませんでした"];
+
+  // 1) 元の線と重なっていないか（＝逆走して戻ってきた）
+  const near = (p) => existing.some((q) => metersBetween(p, q) <= EXTEND_OVERLAP_METERS);
+  let overlap = 0;
+  let total = 0;
+  for (let i = 1; i < added.length; i++) {
+    const step = metersBetween(added[i - 1], added[i]);
+    total += step;
+    if (near(added[i])) overlap += step;
+  }
+  if (total > 0 && overlap / total >= EXTEND_OVERLAP_RATIO) {
+    issues.push(`元の道と${Math.round(overlap)}m重なっています（${Math.round(overlap / total * 100)}%）`);
+  }
+
+  // 2) 延ばした分の中で行って戻りをしていないか
+  //    ⚠️ 判定は切り詰めと同じ規則を使う。別に作ると基準が食い違う
+  if (hasBacktrack(added)) issues.push("延ばした先で行って戻りが入っています");
+
+  // 3) 指した場所まで大回りしていないか
+  //    ⚠️ 「直線が短いときは見ない」としないこと。**すぐ近くの点へ2km走る**という
+  //       いちばん変な形を取りこぼす（実際にテストで見つかった）。
+  //       割合と、余分に走る絶対量の**両方**で見る。
+  if (target) {
+    const straight = metersBetween(added[0], target);
+    if (total > straight * EXTEND_DETOUR_RATIO && total - straight > EXTEND_EXCESS_METERS) {
+      issues.push(`遠回りしています（直線${Math.round(straight)}m に対し ${Math.round(total)}m）`);
+    }
+  }
+  return issues;
+}
+
+function metersBetween(a, b) {
+  const R = 6371000;
+  const p1 = (a.lat * Math.PI) / 180, p2 = (b.lat * Math.PI) / 180;
+  const dp = p2 - p1, dl = ((b.lng - a.lng) * Math.PI) / 180;
+  const h = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+/** 同じ道を200m以上戻っているところがあるか（切り詰めの判定と同じ考え方） */
+function hasBacktrack(points) {
+  const along = [0];
+  for (let i = 1; i < points.length; i++) along.push(along[i - 1] + metersBetween(points[i - 1], points[i]));
+  for (let i = 0; i < points.length; i++) {
+    for (let j = i + 1; j < points.length; j++) {
+      if (along[j] - along[i] < 200) continue;
+      if (metersBetween(points[i], points[j]) <= 8) return true;
+    }
+  }
+  return false;
+}
+
 /** 線に出す掴める点の数の上限。多すぎると地図が埋まって道が見えない */
 const MAX_HANDLES = 40;
 
@@ -579,11 +686,46 @@ function nearestIndex(points, at) {
   return best;
 }
 
+
+/**
+ * 選んだ道の両端に「始」「終」の印を出す。
+ *
+ * ⚠️ 既定で出すこと。どちらが始点か分からないと、
+ *    「始点側へ延ばす」「ここまで残す」のどれもが勘に頼ることになる。
+ * ⚠️ 選び直したら必ず消す（`clearEndMarkers`）。残すと前の道の印と混ざる。
+ */
+function drawEndMarkers(seg) {
+  clearEndMarkers();
+  if (!seg) return;
+  const points = decodePolyline(shapeOf(seg));
+  if (points.length < 2) return;
+  const ends = [
+    { at: points[0], text: "始", color: "#2b8a3e" },
+    { at: points[points.length - 1], text: "終", color: "#c92a2a" },
+  ];
+  state.endMarkers = ends.map((end) => new google.maps.Marker({
+    position: end.at, map: state.map, zIndex: 250,
+    label: { text: end.text, color: "#fff", fontSize: "11px", fontWeight: "bold" },
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE, scale: 9,
+      fillColor: end.color, fillOpacity: 1, strokeColor: "#fff", strokeWeight: 2,
+    },
+  }));
+}
+
+function clearEndMarkers() {
+  for (const m of state.endMarkers || []) m.setMap(null);
+  state.endMarkers = [];
+}
+
 function setShape(seg, encoded) {
   const key = overrideKey(seg);
   state.overrides[key] = { ...(state.overrides[key] || {}), shape: encoded };
   touch();
   drawAll();
+  // ⚠️ 端が動いたので印も付け直す。放っておくと前の端に印が残り、
+  //    どこが始点か分からなくなる
+  drawEndMarkers(seg);
   render();
   renderEditor();
 }
@@ -666,37 +808,86 @@ function clearShapeHandles() {
  * ⚠️ どちらの端から延ばすかは、クリックした場所に近い端で決める。
  *    選ばせると手数が増えるうえ、間違えると逆側に伸びて分かりにくい。
  */
-function beginExtend(seg) {
+function beginExtend(seg, which) {
   clearShapeHandles();
+  clearExtendPreview();
   const points = decodePolyline(shapeOf(seg));
-  setStatus("どこまで延ばすかを地図でクリック");
+  const fromEnd = which === "head" ? points[0] : points[points.length - 1];
+  state.extendWhich = which;
+
+  // ⚠️ 印は既に両端に出ている（`drawEndMarkers`）。ここでは**選んだ側だけ大きくする**。
+  //    同じ印をもう1つ重ねると、2つ重なって見分けが付かなくなる
+  const chosen = state.endMarkers[which === "head" ? 0 : 1];
+  if (chosen) {
+    const icon = chosen.getIcon();
+    chosen.setIcon({ ...icon, scale: 14 });
+    state.extendMarker = chosen;
+  }
+  setStatus(`${which === "head" ? "始点" : "終点"}側から、どこまで延ばすかを地図でクリック`);
+
   if (state.shapeListener) google.maps.event.removeListener(state.shapeListener);
   state.shapeListener = state.map.addListener("click", async (e) => {
     google.maps.event.removeListener(state.shapeListener);
     state.shapeListener = null;
     const at = { lat: e.latLng.lat(), lng: e.latLng.lng() };
-    const head = points[0];
-    const tail = points[points.length - 1];
-    const toHead = (head.lat - at.lat) ** 2 + (head.lng - at.lng) ** 2;
-    const toTail = (tail.lat - at.lat) ** 2 + (tail.lng - at.lng) ** 2;
-    const fromEnd = toHead < toTail ? head : tail;
 
     setStatus("道をつないでいます…");
     let r;
     try {
       r = await (await fetch(`/api/restrictions/route?fromLat=${fromEnd.lat}&fromLng=${fromEnd.lng}`
         + `&toLat=${at.lat}&toLng=${at.lng}`)).json();
-    } catch (err) { setStatus("つなげませんでした: " + err.message); return; }
-    if (r.error) { setStatus(r.error); return; }
+    } catch (err) { setStatus("つなげませんでした: " + err.message); clearExtendPreview(); return; }
+    if (r.error) { setStatus(r.error); clearExtendPreview(); return; }
 
     const added = decodePolyline(r.polyline);
+    // ⚠️ **すぐ当てないこと。** つなぐ経路は最短で引かれるだけで、道の続きを
+    //    延ばしているとは限らない。地図で見て、おかしければ捨てられるようにする
+    showExtendPreview(seg, points, added, at, r);
+  });
+}
+
+/** 延ばす線の下見を出す。よければ当てる、だめなら捨てる */
+function showExtendPreview(seg, points, added, target, route) {
+  state.extendPreview = new google.maps.Polyline({
+    path: added, map: state.map, strokeColor: "#7048e8", strokeOpacity: 0.9,
+    strokeWeight: 6, zIndex: 350,
+  });
+  const issues = extensionIssues(points, added, target);
+  const box = $("editor");
+  const panel = document.createElement("div");
+  panel.className = "review";
+  panel.style.marginTop = "8px";
+  panel.innerHTML =
+    `<div><strong>延ばす形の下見</strong> ${(route.lengthMeters / 1000).toFixed(2)}km` +
+    ` <span class="muted">つなぎ目 最大${route.joinGapMeters}m</span></div>` +
+    (issues.length
+      ? `<div style="color:var(--warn); margin-top:4px">${issues.map(escapeHtml).join("<br>")}</div>`
+      : `<div class="muted" style="margin-top:4px">おかしなところは見つかりませんでした</div>`) +
+    `<div style="margin-top:6px; display:flex; gap:6px">` +
+    `<button id="x-apply" class="${issues.length ? "" : "primary"}">この形で延ばす</button>` +
+    `<button id="x-cancel">やめる</button></div>`;
+  box.appendChild(panel);
+
+  $("x-cancel").onclick = () => { clearExtendPreview(); renderEditor(); setStatus("延ばすのをやめました"); };
+  $("x-apply").onclick = () => {
     // ⚠️ 向きを揃えること。頭に足すときは、つないだ線を逆にしないと線が折り返す
-    const merged = toHead < toTail
+    const merged = state.extendWhich === "head"
       ? [...added.slice().reverse(), ...points]
       : [...points, ...added];
+    clearExtendPreview();
     setShape(seg, encodePolyline(merged));
-    setStatus(`${shapeLengthKm(shapeOf(seg))}km に延ばしました（つなぎ目 最大${r.joinGapMeters}m・保存は S）`);
-  });
+    setStatus(`${shapeLengthKm(shapeOf(seg))}km に延ばしました（保存は S）`);
+  };
+}
+
+function clearExtendPreview() {
+  if (state.extendPreview) { state.extendPreview.setMap(null); state.extendPreview = null; }
+  // ⚠️ 消さずに大きさだけ戻す。これは両端の印そのもので、消すと印が片方消える
+  if (state.extendMarker) {
+    const icon = state.extendMarker.getIcon();
+    if (icon) state.extendMarker.setIcon({ ...icon, scale: 9 });
+    state.extendMarker = null;
+  }
 }
 
 // ---------- ストリートビュー ----------
@@ -903,7 +1094,8 @@ function renderEditor() {
     <label>道の形</label>
     <div class="svRow">
       <button id="e-trim">${o.shape ? "切り直す" : "切り詰める"}</button>
-      <button id="e-extend">先へ延ばす</button>
+      <button id="e-extend-head">始点側へ延ばす</button>
+      <button id="e-extend-tail">終点側へ延ばす</button>
       <button id="e-shape-reset" ${o.shape ? "" : "disabled"}>元に戻す</button>
     </div>
     <div class="muted" style="margin-top:4px; font-size:11px" id="e-shape-hint">
@@ -946,7 +1138,8 @@ function renderEditor() {
     <div class="muted" style="margin-top:10px">変更はすぐ反映されます。<kbd>S</kbd> で保存。</div>`;
 
   $("e-trim").onclick = () => beginTrim(seg);
-  $("e-extend").onclick = () => beginExtend(seg);
+  $("e-extend-head").onclick = () => beginExtend(seg, "head");
+  $("e-extend-tail").onclick = () => beginExtend(seg, "tail");
   $("e-shape-reset").onclick = () => {
     const key = overrideKey(seg);
     if (state.overrides[key]) { delete state.overrides[key].shape; touch(); }
@@ -1127,6 +1320,15 @@ function showTab(which) {
   $("view-curate").style.display = which === "curate" ? "flex" : "none";
   $("tuning").style.display = which === "tune" ? "block" : "none";
   const r = $("view-restrict"); if (r) r.style.display = which === "restrict" ? "flex" : "none";
+
+  // ⚠️ **ヘッダの「保存」「配信」は区間の手直し専用。** 通行規制は県も保存先も別で、
+  //    規制タブで押すと「茨城を見ているのに栃木が配信される」ことになる（実機で報告）。
+  //    タブごとに、そのタブのものだけを出す。
+  const onCurate = which === "curate";
+  $("save").style.display = onCurate ? "" : "none";
+  $("publish").style.display = onCurate ? "" : "none";
+  $("unsaved").style.display = onCurate ? "" : "none";
+  $("rSaveHeader").style.display = which === "restrict" ? "" : "none";
 }
 $("tab-curate").onclick = () => showTab("curate");
 $("tab-tune").onclick = () => { showTab("tune"); renderTuning(); };
@@ -1138,7 +1340,8 @@ function openPublish() {
   if (state.dirty) { alert(`未保存の調整が ${state.dirty}件 あります。先に保存してください。`); return; }
   publishReady = false;
   $("pubGo").disabled = true;
-  $("pubTitle").textContent = `${state.prefName} を配信`;
+  // ⚠️ ここは**区間の手直しで選んでいる県**（`state.romaji`）。規制タブの県ではない
+  $("pubTitle").textContent = `${state.prefName} を配信（おすすめ道路）`;
   $("pubLead").innerHTML =
     "調整を当てて作り直してから、本番の Firestore と Storage へ送ります。<br>" +
     "<strong>まず「下見」で中身を確かめてください。</strong>下見が通ると配信ボタンが押せるようになります。";
@@ -1203,6 +1406,8 @@ const R = {
   pickListener: null,
   // 両端から作った線の下見（採用前）と、始点・終点の印
   routePreview: null, endMarkers: {},
+  // いまどちらの端を決めている最中か（マーカーのクリックで使う）
+  pickingEnd: null,
 };
 const KINDS = [
   ["noMotorcycle", "二輪通行禁止"], ["noPassenger", "二人乗り禁止"],
@@ -1211,7 +1416,14 @@ const KINDS = [
 
 function rSetDirty(n) {
   R.dirty = n;
-  $("rSave").disabled = n === 0;
+  // ⚠️ 一覧バーとヘッダの**両方**を更新すること。片方だけだと、見えている方が
+  //    いつまでも押せないままになる
+  for (const id of ["rSave", "rSaveHeader"]) {
+    const b = $(id);
+    if (!b) continue;
+    b.disabled = n === 0;
+    b.textContent = n ? `保存 ${n}件` : "保存";
+  }
 }
 
 async function rLoadPrefecture(romaji) {
@@ -1280,12 +1492,18 @@ function rRender() {
   for (const c of list) {
     const done = R.saved.has(c.id);
     const div = document.createElement("div");
-    div.className = "row" + (R.selected === c ? " sel" : "") + (c.polyline ? "" : " off");
+    // ⚠️ 薄くするのは「まだ形が無いもの」だけ。**登録した区間や、手で形を作ったもの**
+    //    まで薄いままだと、登録できたのか分からない（実機で報告）。
+    //    元データに形が無かったかどうかではなく、**いま形を持っているか**で見る
+    const hasShape = !!(c.polyline || (R.saved.get(c.id) || {}).polyline);
+    div.className = "row" + (R.selected === c ? " sel" : "") + (hasShape ? "" : " off");
     div.innerHTML =
       `<span class="mark">${done ? "✅" : c.manual ? "✚" : c.polyline ? "◻︎" : "✋"}</span>` +
       `<span class="name">${escapeHtml(c.matchedName || c.sourceRoad || "(名前なし)")}</span>` +
       `<span class="sub">${c.targetLabel || ""}</span>` +
-      `<span class="score">${c.lengthMeters ? (c.lengthMeters + "m") : "—"}</span>`;
+      // ⚠️ 長さも登録した区間のものを出す。元データの値のままだと、
+    //    形を作って登録したのに「—」のままで、登録できたのか分からない
+    `<span class="score">${rShownLength(c)}</span>`;
     div.onclick = () => rSelect(c);
     rows.appendChild(div);
   }
@@ -1294,6 +1512,21 @@ function rRender() {
   $("rCount").textContent = `${list.length}件を表示（全${R.candidates.length}件 ・ 登録済み${done} ・ 要手動${manual}）`;
   // ヘッダの表示も合わせる（登録するたびに変わるので置きっぱなしにしない）
   setStatus(`${R.prefName} 候補${R.candidates.length}件 / 登録済み${done}件`);
+}
+
+
+/** 一覧に出す長さ。登録済みならその区間の長さ、無ければ元データの値 */
+function rShownLength(c) {
+  const saved = R.saved.get(c.id);
+  if (saved && saved.polyline) {
+    const meters = Math.round(rLengthMeters(decodePolyline(saved.polyline)));
+    return meters >= 1000 ? (meters / 1000).toFixed(1) + "km" : meters + "m";
+  }
+  if (c.polyline) {
+    const meters = Math.round(rLengthMeters(decodePolyline(c.polyline)));
+    return meters >= 1000 ? (meters / 1000).toFixed(1) + "km" : meters + "m";
+  }
+  return c.lengthMeters ? c.lengthMeters + "m" : "—";
 }
 
 function rClearMap() {
@@ -1328,7 +1561,10 @@ function rDrawMap(c) {
     R.seg = new google.maps.Polyline({ path: segPath, map: R.map,
       strokeColor: "#c92a2a", strokeOpacity: 1, strokeWeight: 7, zIndex: 10 });
     segPath.forEach((p) => bounds.extend(p));
-    if (chain) rAddHandles(chain, segPath, c.matchedName || c.sourceRoad);
+    // ⚠️ 道筋（chain）が無くてもつまみを出すこと。両端をつないで作った区間や
+    //    CSVに合わせた区間は道筋を持たないことがあり、そのままだと
+    //    「始」「終」が出ず動かせない（実機で報告）。その場合は区間自身を道筋にする
+    rAddHandles(chain || segPath, segPath, c.matchedName || c.sourceRoad);
   }
   if (!bounds.isEmpty()) R.map.fitBounds(bounds, 60);
   // ドラッグで他の道路へ乗り移れるよう、県内の全道路を裏で読み込んでおく
@@ -1432,7 +1668,7 @@ function rRenderEditor(c) {
   const saved = R.saved.get(c.id) || {};
   const months = saved.activeMonths || [];
   box.innerHTML = `
-    <h3>${escapeHtml(c.matchedName || c.sourceRoad || "(名前なし)")}</h3>
+    <h3>${escapeHtml(saved.name || c.matchedName || c.sourceRoad || "(名前なし)")}</h3>
     <div class="stats">
       ${escapeHtml(c.prefecture)}${escapeHtml(c.city || "")}<br>
       規制対象: ${escapeHtml(c.target || "")} → <strong>${escapeHtml(c.targetLabel || "")}</strong><br>
@@ -1443,11 +1679,21 @@ function rRenderEditor(c) {
     </div>
 
     <label>道筋を引き直す</label>
+    <div class="svRow" style="margin-bottom:4px">
+      <button id="r-fit">いまの区間をCSVの道に合わせる</button>
+    </div>
     ${rFindControlsHtml()}
     <div class="muted" style="margin-top:4px; font-size:11px">
       当たっている道が違う・道筋が途中で切れているときに、正しい道を指し直せます。
     </div>
     <div id="rHits" style="margin-top:6px; max-height:200px; overflow:auto"></div>
+
+    <label>道路名（アプリに出る名前）</label>
+    <input type="text" id="r-name" value="${escapeHtml(saved.name || c.matchedName || c.sourceRoad || "")}"
+           placeholder="例: 日本ロマンチック街道">
+    <div class="muted" style="font-size:11px; margin-top:2px">
+      元データの表記: ${escapeHtml(c.sourceRoad || "（無し）")}
+    </div>
 
     <label>種別</label>
     <div class="chips" id="r-kind">
@@ -1479,7 +1725,8 @@ function rRenderEditor(c) {
       <button class="primary" id="r-register" ${(R.seg ? "" : "disabled")}>この区間で登録</button>
     </div>
     <div class="muted" style="margin-top:10px">
-      地図の「始」「終」をドラッグすると区間を直せます。道路の上にだけ乗ります。
+      地図の「始」「終」をドラッグすると区間を直せます。道路の上にだけ乗ります。<br>
+      ⚠️「この区間で登録」はまだ画面の中だけです。<strong>右上の「保存」（S）まで押すと残ります。</strong>
     </div>`;
 
   box.querySelectorAll("[data-kind]").forEach((b) => {
@@ -1487,6 +1734,7 @@ function rRenderEditor(c) {
   });
   box.querySelectorAll("[data-month]").forEach((b) => { b.onclick = () => b.classList.toggle("on"); });
   rWireFindControls(c);
+  $("r-fit").onclick = () => rFitToRoads(c);
   $("r-register").onclick = rApplyEdit;
   $("r-remove").onclick = () => { R.saved.delete(c.id); rSetDirty(R.dirty + 1); rRender(); rRenderEditor(c); };
 }
@@ -1499,8 +1747,14 @@ function rApplyEdit() {
   const kind = (document.querySelector("#r-kind .chip.on") || {}).dataset?.kind || "noMotorcycle";
   const months = [...document.querySelectorAll("#r-months .chip.on")].map((b) => Number(b.dataset.month));
   const min = Number($("r-min").value), max = Number($("r-max").value);
+  // ⚠️ **名前を空のまま保存しないこと。** 保存APIは名前の無い規制を黙って捨てる
+  //    （server.js の `if (!r || !r.id || !r.polyline || !r.name) continue;`）。
+  //    消えたことに気付けないので、空なら元の名前に戻す
+  const typed = $("r-name") ? $("r-name").value.trim() : "";
+  const name = typed || (R.saved.get(c.id) || {}).name || c.matchedName || c.sourceRoad || "";
+  if (!name) { rSetStatus("道路名を入れてください"); return; }
   R.saved.set(c.id, {
-    id: c.id, kind, name: c.matchedName || c.sourceRoad || "", prefecture: c.prefecture,
+    id: c.id, kind, name, prefecture: c.prefecture,
     polyline: encodePolyline(path),
     note: $("r-note").value.trim() || null,
     activeMonths: months.length ? months : null,
@@ -1532,11 +1786,29 @@ function encodePolyline(points) {
 
 async function rSave() {
   setStatus("保存中…");
-  const r = await fetch(`/api/restrictions/${R.romaji}`, {
-    method: "PUT", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ restrictions: [...R.saved.values()] }),
-  });
-  const j = await r.json();
+  const sending = [...R.saved.values()];
+  let j;
+  try {
+    const r = await fetch(`/api/restrictions/${R.romaji}`, {
+      method: "PUT", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ restrictions: sending }),
+    });
+    j = await r.json();
+  } catch (e) {
+    // ⚠️ 失敗したら未保存のままにすること。ここで dirty を落とすと、
+    //    保存できていないのに「保存済み」に見えて、そのまま閉じて消える
+    setStatus("保存できませんでした: " + (e.message || e));
+    return;
+  }
+  // ⚠️ **送った数と保存された数を突き合わせる。** 保存APIは形の足りない規制を
+  //    黙って捨てる（名前・id・線のどれかが無いもの）。件数だけ出していると、
+  //    減ったことに気付けないまま「保存しました」と表示されていた
+  if (typeof j.count === "number" && j.count < sending.length) {
+    rSetDirty(0);
+    setStatus(`⚠️ ${sending.length}件のうち ${j.count}件しか保存されていません`
+      + "（道路名・区間が入っていない規制は保存されません）");
+    return;
+  }
   rSetDirty(0);
   setStatus(`保存しました（規制 ${j.count}件）。配信には別途 importRestrictions が要ります`);
 }
@@ -1658,39 +1930,158 @@ function rWireFindControls(replacing) {
   $("rLatLng").onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); go(); } };
 
   // --- 両端を決めてつなぐ ---
-  const setEnd = (which) => {
-    if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
-    const button = $(which === "from" ? "rFromPick" : "rToPick");
-    button.classList.add("on");
-    rSetStatus(which === "from" ? "始点を地図でクリック" : "終点を地図でクリック");
-    R.pickListener = R.map.addListener("click", (e) => {
-      google.maps.event.removeListener(R.pickListener);
-      R.pickListener = null;
-      button.classList.remove("on");
-      const lat = e.latLng.lat();
-      const lng = e.latLng.lng();
-      $(which === "from" ? "rFrom" : "rTo").value = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-      rDrawEndMarker(which, { lat, lng });
-    });
-  };
-  $("rFromPick").onclick = () => setEnd("from");
-  $("rToPick").onclick = () => setEnd("to");
+  $("rFromPick").onclick = () => rPickEnd("from");
+  $("rToPick").onclick = () => rPickEnd("to");
   $("rRoute").onclick = () => rConnectEnds(replacing);
 }
 
+
+/**
+ * いま登録されている区間の**両端**を使って、CSVの道に沿った線を引き直す。
+ *
+ * 【なぜ要るか】
+ * 二普協から起こした区間は、住所や目標物から割り出した**おおまかな形**で、
+ * 道の上を正確になぞっていないことがある（実測で、県警公表1,300mの規制が
+ * 510m、別の区間が21m になっていた）。両端は合っていることが多いので、
+ * そこを手がかりに道でつなぎ直す。
+ *
+ * ⚠️ **両端が合っていない区間には効かない。** 端が違う道の上にあれば、
+ *    出てくるのも違う道になる。だから当てる前に必ず下見を見せる。
+ */
+async function rFitToRoads(candidate) {
+  const box = $("rHits");
+  const current = candidate.polyline ? decodePolyline(candidate.polyline) : [];
+  if (current.length < 2) {
+    box.innerHTML = '<div class="warn">いまの区間が取れません</div>';
+    return;
+  }
+  const from = current[0];
+  const to = current[current.length - 1];
+  box.innerHTML = '<div class="muted">CSVの道に合わせています…</div>';
+  let r;
+  try {
+    r = await (await fetch(`/api/restrictions/route?fromLat=${from.lat}&fromLng=${from.lng}`
+      + `&toLat=${to.lat}&toLng=${to.lng}`)).json();
+  } catch (e) {
+    box.innerHTML = `<div class="warn">${escapeHtml(String(e.message || e))}</div>`;
+    return;
+  }
+  if (r.error) { box.innerHTML = `<div class="warn">${escapeHtml(r.error)}</div>`; return; }
+
+  // 下見を出す（採用は行をクリックしてから）
+  if (R.routePreview) R.routePreview.setMap(null);
+  const path = decodePolyline(r.polyline);
+  R.routePreview = new google.maps.Polyline({
+    path, map: R.map, strokeColor: "#7048e8", strokeOpacity: 0.9, strokeWeight: 6, zIndex: 200,
+  });
+
+  // どれだけ形が変わるかを見せる。大きく変わるなら端が違う道に乗っている疑い
+  const before = Math.round(rLengthMeters(current));
+  const after = r.lengthMeters;
+  const warn = [];
+  if (before > 0 && (after > before * 2 || after < before / 2)) {
+    warn.push(`長さが大きく変わります（${(before / 1000).toFixed(2)}km → ${(after / 1000).toFixed(2)}km）。`
+      + `両端が違う道に乗っているかもしれません`);
+  }
+  if (r.joinGapMeters > 25) warn.push(`道が途切れている所を最大${r.joinGapMeters}m跨いでいます`);
+  if (r.snapFromMeters > 100) warn.push(`始点が道から${r.snapFromMeters}m離れています`);
+  if (r.snapToMeters > 100) warn.push(`終点が道から${r.snapToMeters}m離れています`);
+
+  box.innerHTML = "";
+  const row = document.createElement("div");
+  row.className = "row";
+  row.innerHTML = `<span class="name">${escapeHtml(r.roadNames.slice(0, 3).join(" → ") || "CSVの道")}</span>` +
+                  `<span class="sub">${(before / 1000).toFixed(2)} → ${(after / 1000).toFixed(2)}km</span>` +
+                  `<span class="score">つなぎ目${r.joinGapMeters}m</span>`;
+  row.onclick = () => rUseRoute(r, candidate);
+  box.appendChild(row);
+  if (warn.length) {
+    const w = document.createElement("div");
+    w.className = "warn";
+    w.style.marginTop = "6px";
+    w.innerHTML = warn.map(escapeHtml).join("<br>");
+    box.appendChild(w);
+  }
+  const hint = document.createElement("div");
+  hint.className = "muted";
+  hint.style.marginTop = "6px";
+  hint.textContent = "紫が引き直した線です。上の行をクリックすると差し替えます。";
+  box.appendChild(hint);
+}
+
+/** 線の長さ（m）。形がどれだけ変わるかを見せるのに使う */
+function rLengthMeters(points) {
+  let total = 0;
+  for (let i = 1; i < points.length; i++) total += metersBetween(points[i - 1], points[i]);
+  return total;
+}
+
 /** 始点・終点の印。どこを指したか見えないと直しようがない */
+/**
+ * 始点・終点を地図で決める。
+ *
+ * ⚠️ **マーカーの上のクリックは地図に届かない。** Google のマーカーが
+ *    クリックを飲み込むので、既に置いた印の上や近くを押しても何も起きない
+ *    （実機で「マーカーをクリックしても反応がない」と報告された）。
+ *    マーカー自身にもクリックを付けて、同じ場所に置き直せるようにする。
+ */
+function rPickEnd(which) {
+  if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
+  R.pickingEnd = which;
+  const button = $(which === "from" ? "rFromPick" : "rToPick");
+  if (button) button.classList.add("on");
+  rSetStatus(which === "from" ? "始点を地図でクリック（印をクリックしてもよい）"
+                              : "終点を地図でクリック（印をクリックしてもよい）");
+  R.pickListener = R.map.addListener("click", (e) => {
+    rSetEndAt(which, { lat: e.latLng.lat(), lng: e.latLng.lng() });
+  });
+}
+
+/** 片方の端を、指した場所に決める */
+function rSetEndAt(which, at) {
+  if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
+  R.pickingEnd = null;
+  const button = $(which === "from" ? "rFromPick" : "rToPick");
+  if (button) button.classList.remove("on");
+  const field = $(which === "from" ? "rFrom" : "rTo");
+  if (field) field.value = `${at.lat.toFixed(6)}, ${at.lng.toFixed(6)}`;
+  rDrawEndMarker(which, at);
+}
+
 function rDrawEndMarker(which, position) {
   R.endMarkers = R.endMarkers || {};
   if (R.endMarkers[which]) R.endMarkers[which].setMap(null);
-  R.endMarkers[which] = new google.maps.Marker({
+  const marker = new google.maps.Marker({
     position, map: R.map,
+    // ⚠️ ドラッグでも動かせるようにする。1回のクリックで置き直すより、
+    //    少しずらしたいときはこちらの方が早い
+    draggable: true,
     label: { text: which === "from" ? "始" : "終", color: "#fff", fontSize: "11px" },
   });
+  marker.addListener("click", () => {
+    // いま反対側の端を決めている最中なら、この印の場所をその端にする。
+    // そうでなければ、この端を置き直す
+    const at = { lat: position.lat, lng: position.lng };
+    if (R.pickingEnd && R.pickingEnd !== which) rSetEndAt(R.pickingEnd, at);
+    else rPickEnd(which);
+  });
+  marker.addListener("dragend", (e) => {
+    rSetEndAt(which, { lat: e.latLng.lat(), lng: e.latLng.lng() });
+  });
+  R.endMarkers[which] = marker;
 }
 
 function rClearEndMarkers() {
   for (const m of Object.values(R.endMarkers || {})) m.setMap(null);
   R.endMarkers = {};
+  // ⚠️ 「決めかけ」の状態も戻すこと。印を消したのに待ち受けだけ残ると、
+  //    次に地図を触った1回が勝手に端の指定として使われる
+  if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
+  R.pickingEnd = null;
+  for (const id of ["rFromPick", "rToPick"]) {
+    const b = $(id);
+    if (b) b.classList.remove("on");
+  }
 }
 
 /**
@@ -2013,6 +2404,7 @@ function rRenderTable() {
 $("rListToggle").onclick = rToggleListMode;
 $("rPref").onchange = (e) => rLoadPrefecture(e.target.value);
 $("rSave").onclick = rSave;
+$("rSaveHeader").onclick = rSave;
 document.querySelectorAll("[data-rfilter]").forEach((b) => {
   b.onclick = () => {
     document.querySelectorAll("[data-rfilter]").forEach((x) => x.classList.remove("on"));
@@ -2041,7 +2433,14 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-window.onbeforeunload = () => (state.dirty ? "保存していない調整があります" : undefined);
+// ⚠️ **両方の未保存を見ること。** 以前は `state.dirty`（区間の手直し）だけを見ていて、
+//    通行規制を「この区間で登録」しただけで再読み込みすると、警告も出ないまま消えていた
+//    （実機で報告）。タブが2つある画面なので、どちらの未保存でも止める。
+window.onbeforeunload = () => {
+  if (state.dirty) return "保存していない調整があります";
+  if (R.dirty) return "保存していない通行規制があります";
+  return undefined;
+};
 </script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24&callback=initMap"></script>
 </body>

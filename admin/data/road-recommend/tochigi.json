@@ -1,9 +1,9 @@
 {
  "prefecture": "栃木県",
  "romaji": "tochigi",
- "generation": 4,
- "contentHash": "067a91e3386a",
- "builtAt": "2026-08-14T22:22:41.318Z",
+ "generation": 5,
+ "contentHash": "8540135c93f8",
+ "builtAt": "2026-08-15T13:15:10.074Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -15,6 +15,30 @@
  "segments": [
   {
    "id": "栃木県:0",
+   "name": "もみじライン",
+   "ref": "19",
+   "highway": "primary",
+   "lengthKm": 27.42,
+   "curviness": 620.9,
+   "flow": 27.6,
+   "turnCount": 616,
+   "score": 92.6,
+   "baseScore": 83,
+   "spotCount": 2,
+   "polyline": "kzt`FewftYd@wAPd@s@bEfAxAOnD~Cn@?fDhBX|BzAdDKfDaCzDwAxMz@p@tDhCb@J\\a@h@}DF_Aj@qBzCDzAtApAvOxFvAlD~I|@~AjEtBh@vAzBpDn@jCzFr@rFnAnCrCrAhCpGjF`DzAxCxEJzAcAMg@kCZqBWWqAvAyBbC`@vFo@rBhCf@~Bq@hDxDdBTfA}@rB{EdDZhGj@dAnCdB~B`G_@|@eDLc@t@c@bQr@zH}CjHt@bLtBzGzBrE`H|GjLvF`BnCbBFxC}@nDtBtDcBtEUhEj@tCcAd@t@ObAs@hAqErBArA~AjAxEJdAUnCcChBIZ`AUrCfCrAb@fA[~@mBfAIv@vBhAjC`DlDl@~AbDt@b@nBEpKwJzGuAvCKjAuAjCiArB`@vCu@|JnDbJZhJmDf@b@?h@gDjLnBlBFbCsDv@Kt@nERtCnDZhDn@v@lD@pD|@`JB?|@uAlCH`Ji@nD`AtLrCdEzEDnBzB~DbC|ENrBhBD`Cp@fA|HVrFwFzDOrFpDvCKvAjErCFtD}Dv@aDjB_Bx@_Ew@wF|DId@sA@sCzA{@HkD~AeBAs@sAoBt@qCAqD|EwBbAd@T~C`EhElA~DzClAjCfC~@pE|EpHt@XrBw@`@LOp@wD~ANrA|D?hBd@n@_@`@kB`@Y~AfAzCJ~BeA~BN~GcAn@b@jC~FnCxBdCQlFdA~DeB|EpDl@a@j@iF`Dy@BzBuBx@Oh@b@pF~DfH\\]MaElC[At@aBp@tBfC{AzBw@pC{Cx@wB~AuD@iDlD{@tBHp@f@CpA_DrAHpAaA|AxB`D\\v@yEb@SxEtEhAqB?}DZQtJxFpBgB~BRpCvAzDiDZRQ`BkBb@m@vByDe@aBf@kBvIh@Jd@gDdCoBzAVjB`CtB]pAh@`@IbAeCn@Q`EtDnCEp@j@ApAe@\\s@PoBq@q@fCi@aBo@SKzGo@EeA{AWLF|CeA~@ThBiBzBVn@rBdAA~@aAr@HtD{Ad@V`DmBxFfCnCXrEpBq@fAdD`@GbA_E`D}B`G~E~C]bBd@lBg@|@dB`AcAvC]xAuA~AtANkAaA{Cp@_FzA_AjE|DN|AtAbCf@bHx@p@Na@iAaD@wBkBqMUg@aCu@h@o@hDjBDhCnDpMdClArFL|JtBrC|D~Af@tClD",
+   "pointCount": 313,
+   "start": [
+    36.975903,
+    139.795228
+   ],
+   "end": [
+    36.863386,
+    139.717056
+   ],
+   "boost": 5
+  },
+  {
+   "id": "栃木県:1",
    "name": "中宮祠足尾線",
    "ref": "250",
    "highway": "secondary",
@@ -34,29 +58,6 @@
    "end": [
     36.723757,
     139.494383
-   ]
-  },
-  {
-   "id": "栃木県:1",
-   "name": "もみじライン",
-   "ref": "19",
-   "highway": "primary",
-   "lengthKm": 27.42,
-   "curviness": 620.9,
-   "flow": 27.6,
-   "turnCount": 616,
-   "score": 87.6,
-   "baseScore": 83,
-   "spotCount": 2,
-   "polyline": "kzt`FewftYd@wAPd@s@bEfAxAOnD~Cn@?fDhBX|BzAdDKfDaCzDwAxMz@p@tDhCb@J\\a@h@}DF_Aj@qBzCDzAtApAvOxFvAlD~I|@~AjEtBh@vAzBpDn@jCzFr@rFnAnCrCrAhCpGjF`DzAxCxEJzAcAMg@kCZqBWWqAvAyBbC`@vFo@rBhCf@~Bq@hDxDdBTfA}@rB{EdDZhGj@dAnCdB~B`G_@|@eDLc@t@c@bQr@zH}CjHt@bLtBzGzBrE`H|GjLvF`BnCbBFxC}@nDtBtDcBtEUhEj@tCcAd@t@ObAs@hAqErBArA~AjAxEJdAUnCcChBIZ`AUrCfCrAb@fA[~@mBfAIv@vBhAjC`DlDl@~AbDt@b@nBEpKwJzGuAvCKjAuAjCiArB`@vCu@|JnDbJZhJmDf@b@?h@gDjLnBlBFbCsDv@Kt@nERtCnDZhDn@v@lD@pD|@`JB?|@uAlCH`Ji@nD`AtLrCdEzEDnBzB~DbC|ENrBhBD`Cp@fA|HVrFwFzDOrFpDvCKvAjErCFtD}Dv@aDjB_Bx@_Ew@wF|DId@sA@sCzA{@HkD~AeBAs@sAoBt@qCAqD|EwBbAd@T~C`EhElA~DzClAjCfC~@pE|EpHt@XrBw@`@LOp@wD~ANrA|D?hBd@n@_@`@kB`@Y~AfAzCJ~BeA~BN~GcAn@b@jC~FnCxBdCQlFdA~DeB|EpDl@a@j@iF`Dy@BzBuBx@Oh@b@pF~DfH\\]MaElC[At@aBp@tBfC{AzBw@pC{Cx@wB~AuD@iDlD{@tBHp@f@CpA_DrAHpAaA|AxB`D\\v@yEb@SxEtEhAqB?}DZQtJxFpBgB~BRpCvAzDiDZRQ`BkBb@m@vByDe@aBf@kBvIh@Jd@gDdCoBzAVjB`CtB]pAh@`@IbAeCn@Q`EtDnCEp@j@ApAe@\\s@PoBq@q@fCi@aBo@SKzGo@EeA{AWLF|CeA~@ThBiBzBVn@rBdAA~@aAr@HtD{Ad@V`DmBxFfCnCXrEpBq@fAdD`@GbA_E`D}B`G~E~C]bBd@lBg@|@dB`AcAvC]xAuA~AtANkAaA{Cp@_FzA_AjE|DN|AtAbCf@bHx@p@Na@iAaD@wBkBqMUg@aCu@h@o@hDjBDhCnDpMdClArFL|JtBrC|D~Af@tClD",
-   "pointCount": 313,
-   "start": [
-    36.975903,
-    139.795228
-   ],
-   "end": [
-    36.863386,
-    139.717056
    ]
   },
   {
