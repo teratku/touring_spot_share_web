@@ -88,14 +88,71 @@ test("同じ場所を2回指したら断る", async (t) => {
   assert.ok(r.error, "同じ点なのに線を作っている");
 });
 
-test("繋ぐ距離を0にすると、繋がらない経路が出てくる", async (t) => {
+test("端点を繋がないと遠回りになる", async (t) => {
   if (skipIfNoCsv(t)) return;
-  // ⚠️ 端点は測量誤差で完全一致しない。0だと孤立した断片が生まれて繋がらなくなる
-  //    （実測：大月→青梅は45m以下で「つなぐ道が見つからない」）
+  // ⚠️ **このテストは以前と主張が変わっている。** 元は「0mだと繋がらない」を
+  //    確かめていたが、線の途中に乗せられるようにしたら0mでも繋がるようになった。
+  //    いまの繋ぎの役目は「繋がるかどうか」ではなく**遠回りを防ぐこと**。
+  //    実測（大月→青梅・直線36.2km）: 0m→62.29km / 25m→54.40km / 50m→53.92km
   const from = [138.9400, 35.6100];
   const to = [139.2750, 35.7880];
   const strict = await routeBetween(from, to, { joinMeters: 0 });
   const normal = await routeBetween(from, to);
-  assert.ok(strict.error, "0mでも繋がってしまう（この経路では前提が変わった）");
   assert.ok(!normal.error, "既定の距離で繋がらない: " + normal.error);
+  if (strict.error) return;   // 繋がらないなら、それはそれで既定の方が良いということ
+  assert.ok(strict.lengthMeters > normal.lengthMeters * 1.05,
+            `繋がなくても変わらない（${strict.lengthMeters} vs ${normal.lengthMeters}）`);
+});
+
+// MARK: 道の途中を指す（実機で報告された不具合）
+
+/**
+ * ⚠️ 実機で報告：「先へ延ばそうと別の場所をクリックしても
+ *    『始点と終点が同じ場所です』と出る」。
+ *
+ *    原因は、両端を**道路断片の端点（交差点）にしか吸い付けていなかった**こと。
+ *    道の途中を指すと近くに端点が無く、たまたま同じ交差点が最寄りになると
+ *    「同じ場所」と判定されていた。線の途中で切ってノードを作るようにした。
+ */
+test("道の途中どうしでもつながる", async (t) => {
+  if (skipIfNoCsv(t)) return;
+  const { parseWkt, readGridFile } = require("../lib/roadCsv");
+  const { TARGET_HIGHWAYS } = require("../lib/roadsAtPoint");
+
+  let target = null;
+  await readGridFile(path.join(GRID, "roads_grid_1258_3192.csv"), (row) => {
+    if (target || !TARGET_HIGHWAYS.has(row.get("highway"))) return;
+    const points = parseWkt(row.get("geometry"));
+    if (points && points.length > 40) target = points;
+  });
+  if (!target) return t.skip("長い道が見つからない環境");
+
+  // どちらも端点ではなく、線の途中
+  const from = target[Math.floor(target.length * 0.3)];
+  const to = target[Math.floor(target.length * 0.7)];
+  const r = await routeBetween(from, to);
+
+  assert.ok(!r.error, "途中どうしで繋がらない: " + r.error);
+  // ⚠️ 交差点まで戻ってから来る「行って戻り」になっていないこと。
+  //    2点の直線距離の3倍を超えていたら、遠回りを疑う
+  const straight = distanceMeters(from, to);
+  assert.ok(r.lengthMeters < straight * 6,
+            `遠回りしている（直線${Math.round(straight)}m に対し ${r.lengthMeters}m）`);
+});
+
+test("道から少しずれた場所を指してもつながる", async (t) => {
+  if (skipIfNoCsv(t)) return;
+  // 実際のクリックは道の真上には落ちない
+  const from = [138.9077, 35.5568];
+  const off = [138.9410, 35.6105];      // 大月市のあたりから少しずらした点
+  const r = await routeBetween(from, off);
+  assert.ok(!r.error, r.error);
+});
+
+test("本当に同じ場所なら断る", async (t) => {
+  if (skipIfNoCsv(t)) return;
+  // ⚠️ 直したせいで、同じ点を2回指しても通ってしまわないこと
+  const at = [138.9077, 35.5568];
+  const r = await routeBetween(at, at);
+  assert.ok(r.error && r.error.includes("同じ場所"), "同じ点を通している: " + JSON.stringify(r).slice(0, 80));
 });

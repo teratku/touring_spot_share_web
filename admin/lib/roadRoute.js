@@ -41,19 +41,25 @@ const MAX_CELLS = 42;
 /**
  * 端点が同じ場所とみなせる距離（m）。
  *
- * 【実測（大月→青梅・直線36.2km。CSVの端点が微妙に離れていて繋がらなかった例）】
- *   0〜45m … つなぐ道が見つからない
- *   50m    … 54.87km（直線比1.51）継ぎ目16m
- *   55m〜  … 53.18km（直線比1.47）継ぎ目20m
+ * 【実測（大月→青梅・直線36.2km）】
+ *    0m … 62.29km（直線比1.72）
+ *   25m … 54.40km（直線比1.50）
+ *   50m … 53.92km（直線比1.49）
  *
- * ⚠️ 短い区間の結果はほとんど変わらない（都留→大月 8.14km→8.13km、
- *    奥多摩→丹波山 21.48km→21.47km）。長い経路が繋がるかどうかだけが変わる。
+ * ⚠️ 短い区間の結果はほとんど変わらない（都留→大月 8.20→8.18km、
+ *    奥多摩→丹波山 21.49→21.48km）。効くのは長い経路の遠回りぶん。
+ *
+ * ⚠️ 以前は「繋がるかどうか」が変わっていたが、線の途中に乗せられるように
+ *    してからは0mでも繋がる。いまの役目は**遠回りを防ぐこと**。
  *
  * ⚠️ 広げすぎないこと。端点どうしが50m以内にあるのは「本当は繋がっている道」が
  *    ほとんどだが、川や立体交差をまたいで繋いでしまう余地は残る。
  *    どれだけ跨いだかは `joinGapMeters` で返しているので、画面で必ず見せること。
  */
 const JOIN_METERS = 50;
+
+/** これより近ければ「同じ場所を2回指した」とみなす */
+const SAME_PLACE_METERS = 5;
 
 /** 返す線の粗さ */
 const TOLERANCE = 10;
@@ -75,6 +81,20 @@ function cellsCovering(from, to) {
     }
   }
   return names;
+}
+
+
+/** 点を線分の上に落とした位置（経度緯度の平面近似。数百mの範囲なので十分） */
+function closestOnSegment(at, a, b) {
+  const scale = Math.cos((at[1] * Math.PI) / 180) || 1;
+  const ax = (a[0] - at[0]) * scale, ay = a[1] - at[1];
+  const bx = (b[0] - at[0]) * scale, by = b[1] - at[1];
+  const dx = bx - ax, dy = by - ay;
+  const lengthSq = dx * dx + dy * dy;
+  if (lengthSq === 0) return a;
+  let t = -(ax * dx + ay * dy) / lengthSq;
+  t = Math.max(0, Math.min(1, t));
+  return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
 }
 
 function lengthOf(points) {
@@ -157,21 +177,72 @@ async function routeBetween(from, to, options = {}) {
     }
   }
 
-  // --- 両端に一番近いノードを探す ---
-  const nearestNode = (at) => {
+  // --- 両端を道の上に乗せる ---
+  //
+  // ⚠️ **端点だけに吸い付けないこと。** 道路断片の端（交差点）にしかノードが
+  //    無いので、道の途中を指すと「近くに道が見つかりません」になり、
+  //    たまたま同じ交差点が最寄りだと「始点と終点が同じ場所です」になる。
+  //    実機で「先へ延ばそうと別の場所をクリックしても同じ場所だと言われる」と
+  //    報告されたのがこれ。**線の途中で切って**そこにノードを作る。
+  const startAttach = attach(from, edges, "s");
+  const goalAttach = attach(to, edges, "g");
+  if (!startAttach) return { error: "始点の近くに道が見つかりません" };
+  if (!goalAttach) return { error: "終点の近くに道が見つかりません" };
+  if (distanceMeters(startAttach.point, goalAttach.point) < SAME_PLACE_METERS) {
+    return { error: "始点と終点が同じ場所です" };
+  }
+
+  addAttachment(startAttach);
+  addAttachment(goalAttach);
+  // 同じ断片の上に両方が乗ったときは、そのあいだを直接つなぐ。
+  // ⚠️ これが無いと、いったん交差点まで戻ってから来る「行って戻り」になる
+  if (startAttach.edge === goalAttach.edge) {
+    const sub = subPath(startAttach, goalAttach);
+    graph.get(startAttach.key).push({ to: goalAttach.key, meters: lengthOf(sub), points: sub, name: startAttach.edge.name });
+    graph.get(goalAttach.key).push({ to: startAttach.key, meters: lengthOf(sub), points: [...sub].reverse(), name: startAttach.edge.name });
+  }
+  const start = startAttach.key;
+  const goal = goalAttach.key;
+
+  /** 指した点を、いちばん近い断片の上に落とす */
+  function attach(at, list, tag) {
     let best = null;
-    let bestDistance = MAX_SNAP_METERS;
-    for (const [k, point] of nodePoint) {
-      const d = distanceMeters(at, point);
-      if (d < bestDistance) { bestDistance = d; best = k; }
+    for (const edge of list) {
+      for (let i = 0; i < edge.points.length - 1; i++) {
+        const p = closestOnSegment(at, edge.points[i], edge.points[i + 1]);
+        const d = distanceMeters(at, p);
+        if (!best || d < best.distance) best = { distance: d, point: p, edge, index: i };
+      }
     }
+    if (!best || best.distance > MAX_SNAP_METERS) return null;
+    best.key = `${tag}@${best.point[0].toFixed(6)},${best.point[1].toFixed(6)}`;
     return best;
-  };
-  const start = nearestNode(from);
-  const goal = nearestNode(to);
-  if (!start) return { error: "始点の近くに道が見つかりません" };
-  if (!goal) return { error: "終点の近くに道が見つかりません" };
-  if (start === goal) return { error: "始点と終点が同じ場所です" };
+  }
+
+  /** 落とした点をノードにして、断片の両端へ繋ぐ */
+  function addAttachment(a) {
+    if (!graph.has(a.key)) { graph.set(a.key, []); nodePoint.set(a.key, a.point); }
+    const head = [...a.edge.points.slice(0, a.index + 1), a.point];
+    const tail = [a.point, ...a.edge.points.slice(a.index + 1)];
+    const ends = [
+      { node: key(a.edge.points[0]), path: [...head].reverse() },
+      { node: key(a.edge.points[a.edge.points.length - 1]), path: tail },
+    ];
+    for (const end of ends) {
+      if (!graph.has(end.node)) continue;
+      const meters = lengthOf(end.path);
+      graph.get(a.key).push({ to: end.node, meters, points: end.path, name: a.edge.name });
+      graph.get(end.node).push({ to: a.key, meters, points: [...end.path].reverse(), name: a.edge.name });
+    }
+  }
+
+  /** 同じ断片に乗った2点のあいだの線 */
+  function subPath(a, b) {
+    const [first, second] = a.index <= b.index ? [a, b] : [b, a];
+    const middle = a.edge.points.slice(first.index + 1, second.index + 1);
+    const path = [first.point, ...middle, second.point];
+    return a.index <= b.index ? path : [...path].reverse();
+  }
 
   // --- ダイクストラ ---
   // ⚠️ 優先度付きキューは使わず、素朴に最小を選ぶ。ノードは数千で、

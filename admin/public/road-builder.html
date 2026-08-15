@@ -251,6 +251,8 @@ const state = {
   shapeListener: null, shapeHandles: [],
   reviews: {},          // アプリの評価ツールで付いた評価（読むだけ）
   svEnd: "start",       // ストリートビューをどちらの端から開くか
+  svZoom: 16,           // 別画面で開いたときの、下の地図の倍率（自前ページ用）
+  svSize: 50,           // 下の地図が画面に占める割合（%）。実物のURLでは33だった
 };
 const PRESET_TAGS = ["絶景", "ワインディング", "快走", "林道ぎみ", "要注意"];
 
@@ -744,14 +746,61 @@ function bearing(a, b) {
  * ⚠️ ツール自体の地図に埋め込まないこと。埋め込むと、選び直すたびに
  *    パノラマを読み込んで地図の操作が重くなる。見比べたい道を何本も
  *    タブで並べられる方が手直しの役に立つ。
+ *
+ * ⚠️ **Googleマップの URL を直接開かないこと。** `api=1&map_action=pano` だと
+ *    下の地図が隅の小さなものになり、拡大した状態も倍率も URL で指定できない
+ *    （実際に開いて確認済み）。道の形を見ながら見たいので、地図の大きさと倍率を
+ *    こちらで決められる `streetview.html` を開く。
  */
 function openStreetView(seg) {
   const spot = streetViewSpot(seg, state.svEnd);
   if (!spot) { setStatus("この区間は形が取れないのでストリートビューを開けません"); return; }
-  const url = "https://www.google.com/maps/@?api=1&map_action=pano"
-    + `&viewpoint=${spot.at.lat.toFixed(6)},${spot.at.lng.toFixed(6)}`
-    + `&heading=${spot.heading.toFixed(0)}&pitch=0&fov=90`;
-  window.open(url, "_blank", "noopener");
+  const o = ov(seg);
+  const heading = Math.round(spot.heading);
+  const fallback = () => window.open(
+    "/streetview.html"
+      + `?lat=${spot.at.lat.toFixed(6)}&lng=${spot.at.lng.toFixed(6)}`
+      + `&heading=${heading}&zoom=${state.svZoom}&size=${state.svSize}`
+      + `&name=${encodeURIComponent(o.title || seg.name)}`,
+    "_blank", "noopener");
+
+  // ⚠️ パノラマIDが要る。座標だけでは下の地図を開いた状態にできない（下の注記）。
+  //    近くに撮影地点が無ければ自前のページで開く
+  new google.maps.StreetViewService().getPanorama(
+    { location: { lat: spot.at.lat, lng: spot.at.lng }, radius: 50, source: "outdoor" },
+    (data, status) => {
+      if (status !== "OK" || !data || !data.location || !data.location.pano) {
+        setStatus("この地点のストリートビューが無いので、地図だけで開きます");
+        fallback();
+        return;
+      }
+      window.open(googleStreetViewUrl(data.location.pano, data.location.latLng, heading, state.svSize),
+                  "_blank", "noopener");
+    });
+}
+
+/**
+ * Googleマップのストリートビューを、**下の地図を開いた状態**で開く URL。
+ *
+ * ⚠️ `maps/@?api=1&map_action=pano` では作れない。あれは下の地図が隅の小さなものになり、
+ *    開いた状態も大きさも指定できない（実際に開いて確認済み）。
+ *
+ * 下の地図を決めているのは末尾の **`!9m2!1b1!2iNN`**。
+ *   `1b1` … 下の地図を出す
+ *   `2iNN` … 画面に占める割合（実物の URL では 33 だった）
+ *
+ * ⚠️ **`!3m10` などの数字は「そのあとに続く要素の数」なので、要素を足し引きするなら
+ *    数え直すこと。** ここは実際に開けた URL の形をそのまま使い、パノラマIDと
+ *    向きだけ差し替えている。崩すと Google 側が黙って別の画面を開く。
+ */
+function googleStreetViewUrl(panoId, latLng, heading, sizePercent) {
+  const lat = latLng.lat().toFixed(7);
+  const lng = latLng.lng().toFixed(7);
+  const thumb = "https:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail"
+    + "%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D0"
+    + `%26panoid%3D${panoId}%26yaw%3D${heading}`;
+  return `https://www.google.com/maps/@${lat},${lng},3a,75y,${heading}h,90t/data=`
+    + `!3m10!1e1!3m8!1s${panoId}!2e0!6s${thumb}!7i13312!8i6656!9m2!1b1!2i${sizePercent}`;
 }
 
 // ---------- アプリの評価 ----------
@@ -836,6 +885,18 @@ function renderEditor() {
       <span class="spacer"></span>
       <button id="e-sv">別画面で開く</button>
     </div>
+    <div class="svRow" style="margin-top:3px">
+      <span class="muted" style="font-size:11px">下の地図の大きさ</span>
+      <span class="spacer"></span>
+      <select id="e-sv-size" style="width:auto">
+        ${[33, 50, 66].map((n) =>
+          `<option value="${n}" ${state.svSize === n ? "selected" : ""}>${n}%${n === 33 ? "（既定）" : ""}</option>`).join("")}
+      </select>
+      <select id="e-sv-zoom" style="width:auto" title="ストリートビューが無い地点で開く、自前ページの倍率">
+        ${[14, 15, 16, 17, 18].map((z) =>
+          `<option value="${z}" ${state.svZoom === z ? "selected" : ""}>倍率${z}</option>`).join("")}
+      </select>
+    </div>
 
     ${reviewBlock(seg)}
 
@@ -897,6 +958,8 @@ function renderEditor() {
     b.onclick = () => { state.svEnd = b.dataset.svEnd; renderEditor(); };
   });
   $("e-sv").onclick = () => openStreetView(seg);
+  $("e-sv-zoom").onchange = (e) => { state.svZoom = Number(e.target.value); };
+  $("e-sv-size").onchange = (e) => { state.svSize = Number(e.target.value); };
 
   // 評価をこの調整に取り込む
   const adopt = $("e-adopt");

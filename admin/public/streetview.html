@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ストリートビュー</title>
+<!--
+  streetview.html — 道の下見用。road-builder から別窓で開く。
+
+  【なぜ Google マップの URL を直接開かないか】
+  `maps/@?api=1&map_action=pano` で開くと、**下の地図が隅の小さなもの**になり、
+  拡大した状態や倍率を URL で指定できない（実際に開いて確認済み）。
+  道の形を見ながらパノラマを動かしたいので、地図の大きさと倍率をこちらで決める。
+
+  ⚠️ ここは 127.0.0.1 のツール専用。公開ページではない。
+-->
+<style>
+  :root { --line:#dee2e6; --muted:#868e96; }
+  html, body { margin:0; height:100%; font-family:-apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif; }
+  #wrap { display:flex; flex-direction:column; height:100%; }
+  #bar { display:flex; align-items:center; gap:10px; padding:6px 12px; border-bottom:1px solid var(--line);
+         font-size:12px; background:#fff; }
+  #bar .muted { color:var(--muted); }
+  #bar .spacer { flex:1; }
+  #bar button, #bar select { font-size:12px; padding:4px 8px; border:1px solid var(--line);
+                             border-radius:6px; background:#fff; cursor:pointer; }
+  /* 上がパノラマ、下が地図。境目はドラッグで動かせる */
+  #pano { flex:1 1 auto; min-height:120px; }
+  #split { height:6px; cursor:row-resize; background:#f1f3f5; border-top:1px solid var(--line);
+           border-bottom:1px solid var(--line); }
+  #map { flex:0 0 45%; min-height:120px; }
+  #err { padding:14px; color:#c92a2a; font-size:13px; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="bar">
+    <strong id="title">ストリートビュー</strong>
+    <span class="muted" id="at"></span>
+    <span class="spacer"></span>
+    <span class="muted">地図の倍率</span>
+    <select id="zoom">
+      <option value="14">広め（14）</option>
+      <option value="15">15</option>
+      <option value="16" selected>16</option>
+      <option value="17">17</option>
+      <option value="18">近め（18）</option>
+    </select>
+    <button id="openGoogle">Googleマップで開く</button>
+  </div>
+  <div id="pano"></div>
+  <div id="split" title="ドラッグで高さを変えられます"></div>
+  <div id="map"></div>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const lat = Number(params.get("lat"));
+const lng = Number(params.get("lng"));
+const heading = Number(params.get("heading") || 0);
+/** 下の地図の倍率。指定が無ければ道の形が分かる程度に寄せる */
+const initialZoom = Number(params.get("zoom") || 16);
+/** 下の地図が画面に占める割合（%）。Googleマップ側の `2iNN` と揃えている */
+const mapPercent = Math.max(20, Math.min(80, Number(params.get("size") || 45)));
+const label = params.get("name") || "";
+
+function fail(message) {
+  document.getElementById("wrap").innerHTML = `<div id="err">${message}</div>`;
+}
+
+function initStreetView() {
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) { fail("緯度経度が指定されていません"); return; }
+  const at = { lat, lng };
+  document.getElementById("title").textContent = label || "ストリートビュー";
+  document.getElementById("at").textContent = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+  document.getElementById("zoom").value = String(initialZoom);
+
+  document.getElementById("map").style.flex = `0 0 ${mapPercent}%`;
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: at, zoom: initialZoom, mapTypeControl: false, streetViewControl: false,
+  });
+  const pano = new google.maps.StreetViewPanorama(document.getElementById("pano"), {
+    position: at,
+    pov: { heading, pitch: 0 },
+    // ⚠️ 既定の小さな地図は出さない。下に大きな地図があるので二重になる
+    addressControl: true,
+    linksControl: true,
+    panControl: true,
+    enableCloseButton: false,
+  });
+  // 地図とパノラマを連動させる（地図をクリックした場所へパノラマが動く）
+  map.setStreetView(pano);
+
+  // ⚠️ パノラマは指した点にぴったり立つとは限らない（近くの撮影地点に寄る）。
+  //    どこに立ったかを地図の中心にも反映しないと、下見したい場所とずれる
+  pano.addListener("position_changed", () => {
+    const p = pano.getPosition();
+    if (p) map.setCenter(p);
+  });
+
+  document.getElementById("zoom").onchange = (e) => map.setZoom(Number(e.target.value));
+  // Googleマップ側で見たいとき用。
+  //
+  // ⚠️ **`api=1&map_action=pano` は使わない。** それだと下の地図が隅の小さなものになり、
+  //    倍率も拡大状態も指定できない（実際に開いて確認済み）。
+  //    古い形式（`layer=c` + `cbll` + `z`）なら倍率 `z` を渡せる。
+  //    ⚠️ ただし Google 側がこれをどこまで尊重するかは未確認。ここでしか使っていないので、
+  //       効かなくても下の地図（このページ側）には影響しない。
+  document.getElementById("openGoogle").onclick = () => {
+    const p = pano.getPosition() || { lat: () => lat, lng: () => lng };
+    const pov = pano.getPov ? pano.getPov() : { heading };
+    const z = Number(document.getElementById("zoom").value) || initialZoom;
+    window.open("https://maps.google.com/maps?q=&layer=c"
+      + `&cbll=${p.lat()},${p.lng()}`
+      + `&cbp=11,${Math.round(pov.heading || 0)},0,0,0&z=${z}`,
+      "_blank", "noopener");
+  };
+
+  // 境目をドラッグして、パノラマと地図の割合を変える
+  const split = document.getElementById("split");
+  const mapEl = document.getElementById("map");
+  split.onmousedown = (down) => {
+    down.preventDefault();
+    const startY = down.clientY;
+    const startHeight = mapEl.getBoundingClientRect().height;
+    const onMove = (move) => {
+      const next = Math.max(120, Math.min(window.innerHeight - 180, startHeight - (move.clientY - startY)));
+      mapEl.style.flex = `0 0 ${next}px`;
+      google.maps.event.trigger(map, "resize");
+    };
+    const onUp = () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  };
+}
+window.initStreetView = initStreetView;
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24&callback=initStreetView"></script>
+</body>
+</html>
