@@ -28,6 +28,7 @@ const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
+const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
 const { decode: decodePolylineServer } = require("./lib/polyline");
 
@@ -488,6 +489,10 @@ app.put("/api/restrictions/:romaji", (req, res) => {
       polyline: String(r.polyline),
       note: r.note ? String(r.note) : null,
       activeMonths: Array.isArray(r.activeMonths) ? r.activeMonths.filter((m) => m >= 1 && m <= 12) : null,
+      // 効いている曜日・時間帯。おかしな値は保存しない（`lib/restrictionTime.js`）
+      activeDays: normalizeDays(r.activeDays),
+      includesHoliday: r.includesHoliday === true,
+      activeHours: normalizeHours(r.activeHours),
       minCc: Number.isFinite(r.minCc) ? r.minCc : null,
       maxCc: Number.isFinite(r.maxCc) ? r.maxCc : null,
       // いつ確認したか。規制は変わるので必ず持たせる

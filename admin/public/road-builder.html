@@ -1406,6 +1406,10 @@ const R = {
   pickListener: null,
   // 両端から作った線の下見（採用前）と、始点・終点の印
   routePreview: null, endMarkers: {},
+  // 名前で探した道の下見（選ぶ前に地図で見せる）
+  roadPreview: null,
+  // 手で線を引くとき
+  drawPoints: [], drawLine: null, drawMarkers: [], drawListener: null,
   // いまどちらの端を決めている最中か（マーカーのクリックで使う）
   pickingEnd: null,
 };
@@ -1499,7 +1503,7 @@ function rRender() {
     div.className = "row" + (R.selected === c ? " sel" : "") + (hasShape ? "" : " off");
     div.innerHTML =
       `<span class="mark">${done ? "✅" : c.manual ? "✚" : c.polyline ? "◻︎" : "✋"}</span>` +
-      `<span class="name">${escapeHtml(c.matchedName || c.sourceRoad || "(名前なし)")}</span>` +
+      `<span class="name">${escapeHtml(rNameOf(c) || "(名前なし)")}</span>` +
       `<span class="sub">${c.targetLabel || ""}</span>` +
       // ⚠️ 長さも登録した区間のものを出す。元データの値のままだと、
     //    形を作って登録したのに「—」のままで、登録できたのか分からない
@@ -1529,6 +1533,20 @@ function rShownLength(c) {
   return c.lengthMeters ? c.lengthMeters + "m" : "—";
 }
 
+
+/**
+ * 画面に出す規制の道路名。
+ *
+ * ⚠️ **登録した名前を最優先にすること。** 編集パネルだけが登録名を見ていて、
+ *    一覧は元データの名前のままだったため、名前を直しても一覧が変わらなかった
+ *    （実機で報告：「規制道路名が初期のままになってしまう」）。
+ *    出す場所ごとに書くとまた食い違うので、ここに寄せる。
+ */
+function rNameOf(c) {
+  const saved = R.saved.get(c.id);
+  return (saved && saved.name) || c.matchedName || c.sourceRoad || "";
+}
+
 function rClearMap() {
   if (R.chain) { R.chain.setMap(null); R.chain = null; }
   if (R.seg) { R.seg.setMap(null); R.seg = null; }
@@ -1536,6 +1554,10 @@ function rClearMap() {
 }
 
 function rSelect(c) {
+  // ⚠️ 引きかけの線を残さない。残すと別の規制を選んでも紫の線が地図に残り、
+  //    どれがいまの区間か分からなくなる
+  rCancelDraw();
+  rClearRoadPreview();
   R.selected = c;
   rRender();
   rDrawMap(c);
@@ -1564,7 +1586,7 @@ function rDrawMap(c) {
     // ⚠️ 道筋（chain）が無くてもつまみを出すこと。両端をつないで作った区間や
     //    CSVに合わせた区間は道筋を持たないことがあり、そのままだと
     //    「始」「終」が出ず動かせない（実機で報告）。その場合は区間自身を道筋にする
-    rAddHandles(chain || segPath, segPath, c.matchedName || c.sourceRoad);
+    rAddHandles(chain || segPath, segPath, rNameOf(c));
   }
   if (!bounds.isEmpty()) R.map.fitBounds(bounds, 60);
   // ドラッグで他の道路へ乗り移れるよう、県内の全道路を裏で読み込んでおく
@@ -1668,7 +1690,7 @@ function rRenderEditor(c) {
   const saved = R.saved.get(c.id) || {};
   const months = saved.activeMonths || [];
   box.innerHTML = `
-    <h3>${escapeHtml(saved.name || c.matchedName || c.sourceRoad || "(名前なし)")}</h3>
+    <h3>${escapeHtml(rNameOf(c) || "(名前なし)")}</h3>
     <div class="stats">
       ${escapeHtml(c.prefecture)}${escapeHtml(c.city || "")}<br>
       規制対象: ${escapeHtml(c.target || "")} → <strong>${escapeHtml(c.targetLabel || "")}</strong><br>
@@ -1689,7 +1711,7 @@ function rRenderEditor(c) {
     <div id="rHits" style="margin-top:6px; max-height:200px; overflow:auto"></div>
 
     <label>道路名（アプリに出る名前）</label>
-    <input type="text" id="r-name" value="${escapeHtml(saved.name || c.matchedName || c.sourceRoad || "")}"
+    <input type="text" id="r-name" value="${escapeHtml(rNameOf(c))}"
            placeholder="例: 日本ロマンチック街道">
     <div class="muted" style="font-size:11px; margin-top:2px">
       元データの表記: ${escapeHtml(c.sourceRoad || "（無し）")}
@@ -1711,6 +1733,23 @@ function rRenderEditor(c) {
     <label>補足</label>
     <input type="text" id="r-note" value="${escapeHtml(saved.note || "")}" placeholder="例: トンネル区間のみ">
 
+    <label>効いている曜日（未選択なら毎日）</label>
+    <div class="chips" id="r-days">
+      ${["月","火","水","木","金","土","日"].map((d, i) =>
+        `<button class="chip ${(saved.activeDays || []).includes(i + 1) ? "on" : ""}" data-day="${i + 1}">${d}</button>`).join("")}
+      <button class="chip ${saved.includesHoliday ? "on" : ""}" id="r-holiday">祝</button>
+    </div>
+
+    <label>効いている時間（空欄なら終日）</label>
+    <div class="boostRow">
+      <input type="text" id="r-from" placeholder="07:00" value="${escapeHtml((saved.activeHours || {}).from || "")}">
+      <span class="muted">〜</span>
+      <input type="text" id="r-to" placeholder="19:00" value="${escapeHtml((saved.activeHours || {}).to || "")}">
+    </div>
+    <div class="muted" style="font-size:11px; margin-top:2px">
+      22:00〜05:00 のように日をまたぐ指定もできます。
+    </div>
+
     <label>効いている月（冬季閉鎖など。未選択なら通年）</label>
     <div class="chips" id="r-months">
       ${[...Array(12)].map((_, i) => `<button class="chip ${months.includes(i+1) ? "on" : ""}" data-month="${i+1}">${i+1}</button>`).join("")}
@@ -1721,6 +1760,7 @@ function rRenderEditor(c) {
 
     <div style="margin-top:16px; display:flex; gap:6px;">
       <button class="danger" id="r-remove" ${R.saved.has(c.id) ? "" : "disabled"}>登録を消す</button>
+      ${c.manual ? '<button class="danger" id="r-delete">一覧から削除</button>' : ""}
       <span class="spacer"></span>
       <button class="primary" id="r-register" ${(R.seg ? "" : "disabled")}>この区間で登録</button>
     </div>
@@ -1733,10 +1773,30 @@ function rRenderEditor(c) {
     b.onclick = () => { box.querySelectorAll("[data-kind]").forEach((x) => x.classList.remove("on")); b.classList.add("on"); };
   });
   box.querySelectorAll("[data-month]").forEach((b) => { b.onclick = () => b.classList.toggle("on"); });
+  box.querySelectorAll("[data-day]").forEach((b) => { b.onclick = () => b.classList.toggle("on"); });
+  $("r-holiday").onclick = () => $("r-holiday").classList.toggle("on");
   rWireFindControls(c);
   $("r-fit").onclick = () => rFitToRoads(c);
   $("r-register").onclick = rApplyEdit;
+  // 「登録を消す」＝規制としての登録を外す。候補自体は一覧に残る
   $("r-remove").onclick = () => { R.saved.delete(c.id); rSetDirty(R.dirty + 1); rRender(); rRenderEditor(c); };
+
+  // ⚠️ **消せるのは手で足したものだけ。** 二普協から取り込んだ候補を消すと、
+  //    取り込み直すたびに復活して「消したのに戻る」ことになる。
+  //    そちらは「登録を消す」で登録だけ外し、候補は一覧に残す。
+  const del = $("r-delete");
+  if (del) del.onclick = () => {
+    if (!confirm(`「${rNameOf(c) || "この規制"}」を一覧から削除します。よろしいですか？`)) return;
+    R.saved.delete(c.id);
+    const i = R.candidates.indexOf(c);
+    if (i >= 0) R.candidates.splice(i, 1);
+    R.selected = null;
+    rSetDirty(R.dirty + 1);
+    rClearMap();
+    rRender();
+    $("rEditor").innerHTML = '<div class="empty">左の一覧から規制を選ぶと<br>ここで区間を確かめて登録できます</div>';
+    setStatus("一覧から削除しました（保存で確定します）");
+  };
 }
 
 /** 画面の内容を登録内容に反映（保存はしない） */
@@ -1746,18 +1806,22 @@ function rApplyEdit() {
   const path = R.seg.getPath().getArray().map((p) => ({ lat: p.lat(), lng: p.lng() }));
   const kind = (document.querySelector("#r-kind .chip.on") || {}).dataset?.kind || "noMotorcycle";
   const months = [...document.querySelectorAll("#r-months .chip.on")].map((b) => Number(b.dataset.month));
+  const days = [...document.querySelectorAll("#r-days [data-day].on")].map((b) => Number(b.dataset.day));
   const min = Number($("r-min").value), max = Number($("r-max").value);
   // ⚠️ **名前を空のまま保存しないこと。** 保存APIは名前の無い規制を黙って捨てる
   //    （server.js の `if (!r || !r.id || !r.polyline || !r.name) continue;`）。
   //    消えたことに気付けないので、空なら元の名前に戻す
   const typed = $("r-name") ? $("r-name").value.trim() : "";
-  const name = typed || (R.saved.get(c.id) || {}).name || c.matchedName || c.sourceRoad || "";
+  const name = typed || rNameOf(c);
   if (!name) { rSetStatus("道路名を入れてください"); return; }
   R.saved.set(c.id, {
     id: c.id, kind, name, prefecture: c.prefecture,
     polyline: encodePolyline(path),
     note: $("r-note").value.trim() || null,
     activeMonths: months.length ? months : null,
+    activeDays: days.length && days.length < 7 ? days : null,
+    includesHoliday: $("r-holiday").classList.contains("on"),
+    activeHours: rReadHours(),
     minCc: Number.isFinite(min) && $("r-min").value !== "" ? min : null,
     maxCc: Number.isFinite(max) && $("r-max").value !== "" ? max : null,
     checkedAt: $("r-checked").value.trim(),
@@ -1766,6 +1830,27 @@ function rApplyEdit() {
   rSetDirty(R.dirty + 1);
   rRender();
   rRenderEditor(c);
+}
+
+
+/**
+ * 時間の欄を読む。片方だけ・書き方が違うものは「終日」として捨てる。
+ *
+ * ⚠️ **片方だけを通さないこと。** 「7:00から」だけでは終わりが決まらず、
+ *    アプリ側で終日と区別できない。サーバ側（lib/restrictionTime.js）でも
+ *    同じ規則で弾いているが、画面でも知らせる。
+ */
+function rReadHours() {
+  const from = ($("r-from").value || "").trim();
+  const to = ($("r-to").value || "").trim();
+  if (!from && !to) return null;
+  const ok = /^\d{1,2}:\d{2}$/;
+  if (!ok.test(from) || !ok.test(to)) {
+    rSetStatus("時間は 07:00 のように入れてください（片方だけは不可）");
+    return null;
+  }
+  if (from === to) { rSetStatus("開始と終了が同じです。終日にするなら空欄に"); return null; }
+  return { from, to };
 }
 
 /** Google Encoded Polyline に符号化（decodePolyline の逆） */
@@ -1862,7 +1947,11 @@ function rNewRestriction() {
         div.innerHTML = `<span class="name">${escapeHtml(road.name)}</span>` +
                         `<span class="sub">${road.highway}</span>` +
                         `<span class="score">${(road.lengthMeters/1000).toFixed(1)}km</span>`;
-        div.onclick = () => rStartFromRoad(road);
+        // ⚠️ **選ぶ前に地図で見せること。** 同じ名前の道が何本も出るので、
+        //    どれかを選んでから「違った」と気付くと、候補を作り直す手間がかかる
+        div.onmouseenter = () => rPreviewRoad(road);
+        div.onmouseleave = () => rClearRoadPreview();
+        div.onclick = () => { rClearRoadPreview(); rStartFromRoad(road); };
         box.appendChild(div);
       }
     }, 250);
@@ -1907,6 +1996,8 @@ function rFindControlsHtml() {
     </div>
     <div class="svRow" style="margin-top:4px">
       <button class="primary" id="rRoute">この2点をつなぐ</button>
+      <span class="spacer"></span>
+      <button id="rDraw">手で線を引く</button>
     </div>`;
 }
 
@@ -1933,6 +2024,7 @@ function rWireFindControls(replacing) {
   $("rFromPick").onclick = () => rPickEnd("from");
   $("rToPick").onclick = () => rPickEnd("to");
   $("rRoute").onclick = () => rConnectEnds(replacing);
+  $("rDraw").onclick = () => rBeginDraw(replacing);
 }
 
 
@@ -2017,6 +2109,83 @@ function rLengthMeters(points) {
 }
 
 /** 始点・終点の印。どこを指したか見えないと直しようがない */
+
+// ---------- 手で線を引く ----------
+
+/**
+ * 地図をクリックして線を引く。CSVに道が無い場所のための最後の手段。
+ *
+ * ⚠️ **道に沿っているかは誰も確かめない。** つないだ線と違い、ここで引いた形は
+ *    完全に手作業で、地図の道からずれていても気付けない。CSVで作れるなら
+ *    そちらを使うこと（点で探す・両端をつなぐ）。
+ * ⚠️ 引いている間は他の待ち受けを止める。地図のクリックが取り合いになる
+ */
+function rBeginDraw(replacing) {
+  rCancelDraw();
+  if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
+  R.drawPoints = [];
+  R.drawLine = new google.maps.Polyline({
+    path: [], map: R.map, strokeColor: "#7048e8", strokeOpacity: 0.9, strokeWeight: 6, zIndex: 220,
+  });
+  R.drawMarkers = [];
+  R.drawListener = R.map.addListener("click", (e) => {
+    const at = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+    R.drawPoints.push(at);
+    R.drawLine.setPath(R.drawPoints);
+    R.drawMarkers.push(new google.maps.Marker({
+      position: at, map: R.map, zIndex: 230,
+      icon: { path: google.maps.SymbolPath.CIRCLE, scale: 4,
+              fillColor: "#7048e8", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 1.5 },
+    }));
+    rRenderDrawPanel(replacing);
+  });
+  rRenderDrawPanel(replacing);
+}
+
+function rRenderDrawPanel(replacing) {
+  const box = $("rHits");
+  if (!box) return;
+  const n = R.drawPoints.length;
+  const meters = n >= 2 ? Math.round(rLengthMeters(R.drawPoints)) : 0;
+  box.innerHTML =
+    `<div class="review">` +
+    `<div><strong>手で線を引いています</strong> ${n}点 ・ ${(meters / 1000).toFixed(2)}km</div>` +
+    `<div class="muted" style="margin-top:4px">地図をクリックすると点が増えます。道の曲がりに合わせて何点か置いてください。</div>` +
+    `<div style="margin-top:6px; display:flex; gap:6px">` +
+    `<button id="rDrawUndo" ${n ? "" : "disabled"}>1つ戻す</button>` +
+    `<button id="rDrawApply" class="${n >= 2 ? "primary" : ""}" ${n >= 2 ? "" : "disabled"}>この形で決める</button>` +
+    `<button id="rDrawCancel">やめる</button></div></div>`;
+  $("rDrawUndo").onclick = () => {
+    R.drawPoints.pop();
+    const m = R.drawMarkers.pop();
+    if (m) m.setMap(null);
+    R.drawLine.setPath(R.drawPoints);
+    rRenderDrawPanel(replacing);
+  };
+  $("rDrawCancel").onclick = () => { rCancelDraw(); rSetStatus("手で引くのをやめました"); };
+  $("rDrawApply").onclick = () => {
+    // ⚠️ 2点だけだと直線になる。道の形として使うので、曲がりがあるなら点を足してもらう
+    const points = R.drawPoints.slice();
+    const route = {
+      polyline: encodePolyline(points),
+      lengthMeters: Math.round(rLengthMeters(points)),
+      roadNames: [],
+      joinGapMeters: 0,
+    };
+    rCancelDraw();
+    rUseRoute(route, replacing);
+    setStatus("手で引いた線を区間にしました（保存は S）");
+  };
+}
+
+function rCancelDraw() {
+  if (R.drawListener) { google.maps.event.removeListener(R.drawListener); R.drawListener = null; }
+  if (R.drawLine) { R.drawLine.setMap(null); R.drawLine = null; }
+  for (const m of R.drawMarkers || []) m.setMap(null);
+  R.drawMarkers = [];
+  R.drawPoints = [];
+}
+
 /**
  * 始点・終点を地図で決める。
  *
@@ -2026,6 +2195,7 @@ function rLengthMeters(points) {
  *    マーカー自身にもクリックを付けて、同じ場所に置き直せるようにする。
  */
 function rPickEnd(which) {
+  rCancelDraw();
   if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
   R.pickingEnd = which;
   const button = $(which === "from" ? "rFromPick" : "rToPick");
@@ -2091,6 +2261,7 @@ function rClearEndMarkers() {
  *    遠回りしていたりする。**地図で見てから採る**手順にする。
  */
 async function rConnectEnds(replacing) {
+  rCancelDraw();
   const from = parseLatLng($("rFrom").value);
   const to = parseLatLng($("rTo").value);
   const box = $("rHits");
@@ -2220,6 +2391,7 @@ function parseLatLng(text) {
  *    地図を触るたびに探し直してしまう。
  */
 function rBeginPickOnMap({ replacing = null } = {}) {
+  rCancelDraw();
   if (R.pickListener) { google.maps.event.removeListener(R.pickListener); R.pickListener = null; }
   const button = $("rPick");
   const label = button ? button.textContent : "";
@@ -2324,6 +2496,29 @@ function rSetStatus(text) {
   const hint = $("rNewHint");
   if (hint) hint.textContent = text;
   else setStatus(text);
+}
+
+
+/**
+ * 名前で探した道を、選ぶ前に地図へ出す（下見）。
+ *
+ * ⚠️ 候補を作らないこと。ここで `rStartFromRoad` を呼ぶと、指しただけで
+ *    一覧に候補が増えていく。見せるだけにして、選んだときに初めて作る。
+ */
+function rPreviewRoad(road) {
+  rClearRoadPreview();
+  const path = decodePolyline(road.polyline);
+  if (path.length < 2) return;
+  R.roadPreview = new google.maps.Polyline({
+    path, map: R.map, strokeColor: "#7048e8", strokeOpacity: 0.85, strokeWeight: 6, zIndex: 180,
+  });
+  const bounds = new google.maps.LatLngBounds();
+  path.forEach((p) => bounds.extend(p));
+  R.map.fitBounds(bounds, 60);
+}
+
+function rClearRoadPreview() {
+  if (R.roadPreview) { R.roadPreview.setMap(null); R.roadPreview = null; }
 }
 
 /** 選んだ道路を地図に出し、区間を切れる状態にする */

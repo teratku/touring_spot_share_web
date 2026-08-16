@@ -86,6 +86,20 @@ function validate(data) {
     if (r.activeMonths && r.activeMonths.some((m) => m < 1 || m > 12)) {
       problems.push(`${at}: 月の指定がおかしい`);
     }
+    // ⚠️ 曜日・時間帯は配信データにそのまま載る（`restrictions` を丸ごと送っている）。
+    //    おかしな値を通すと、アプリ側が「効いていない時間」を通行禁止と案内する
+    if (r.activeDays && r.activeDays.some((d) => d < 1 || d > 7)) {
+      problems.push(`${at}: 曜日の指定がおかしい（1=月〜7=日）`);
+    }
+    if (r.activeHours) {
+      const hm = /^\d{1,2}:\d{2}$/;
+      const { from, to } = r.activeHours;
+      if (!hm.test(from || "") || !hm.test(to || "")) {
+        problems.push(`${at}: 時間の書き方がおかしい（07:00 のように）`);
+      } else if (from === to) {
+        problems.push(`${at}: 時間の開始と終了が同じ（終日にするなら指定しない）`);
+      }
+    }
   }
   return problems;
 }
