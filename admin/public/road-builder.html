@@ -1441,17 +1441,70 @@ async function rLoadPrefecture(romaji) {
     (await fetch(`/api/restrictions/${romaji}`)).json(),
   ]);
   R.candidates = cand.candidates || [];
-  R.prefName = cand.prefecture || "";
+  // ⚠️ 候補ファイルが無い県では `cand.prefecture` が空になる。
+  //    県名は画面の選択肢からも取れるので、そちらで埋める（空だと保存時に県が抜ける）
+  R.prefName = cand.prefecture
+    || ($("rPref").selectedOptions[0] || {}).textContent?.replace(/（.*$/, "").trim()
+    || "";
   R.sourceUrl = cand.sourceUrl || null;
   R.sourceFetchedAt = cand.sourceFetchedAt || null;
   R.saved = new Map((saved.restrictions || []).map((r) => [r.id, r]));
+  // ⚠️ **保存済みで候補に無いものを一覧へ戻すこと。** 一覧は二普協の候補ファイルから
+  //    作っているので、手で足した規制（候補が無い）は再読み込みで消えて見える。
+  //    実機で「保存した規制道路が消えている」と報告された（データは残っていた）。
+  //    候補ファイルが無い県（北海道など）では、登録済みが全部見えなくなる。
+  restoreSavedAsCandidates();
   R.selected = null;
   R.allRoads = null;   // 県が変わったら破棄。使うときに遅延読み込みする
   rSetDirty(0);
   rRender();
   rRenderSourceBar();
   rClearMap();
-  setStatus(cand.error ? cand.error : `${R.prefName} 候補${R.candidates.length}件 / 登録済み${R.saved.size}件`);
+  // ⚠️ 候補が未生成でも、登録済みがあるなら件数を出すこと。エラーだけ出すと
+  //    「データが消えた」ように見える
+  setStatus(cand.error && !R.saved.size
+    ? cand.error
+    : `${R.prefName || cand.prefecture || ""} 候補${R.candidates.length}件 / 登録済み${R.saved.size}件`
+      + (cand.error ? "（候補は未生成）" : ""));
+}
+
+
+/**
+ * 保存済みの規制のうち、候補に無いものを一覧へ戻す。
+ *
+ * ⚠️ 候補と同じ形（`R.candidates` の要素）に組み立てること。一覧・地図・編集の
+ *    どれもがこの形を前提にしている。
+ * ⚠️ `manual: true` にすること。二普協由来と混ざると、取り込み直しの扱いが変わる。
+ */
+function restoreSavedAsCandidates() {
+  const known = new Set(R.candidates.map((c) => c.id));
+  const restored = [];
+  for (const [id, saved] of R.saved) {
+    if (known.has(id)) continue;
+    restored.push({
+      id,
+      prefecture: saved.prefecture || R.prefName,
+      city: "",
+      sourceRoad: saved.name,
+      matchedName: saved.name,
+      from: "", to: "",
+      target: "（手で追加）",
+      targetLabel: "二輪すべて",
+      confidence: "登録済み",
+      reason: "",
+      // ⚠️ 道筋は保存していないので、区間そのものを道筋として持たせる。
+      //    無いとつまみ（始・終）が出ずに動かせない
+      chainPolyline: saved.polyline,
+      polyline: saved.polyline,
+      lengthMeters: null,
+      geocode: null,
+      minCc: saved.minCc ?? null,
+      maxCc: saved.maxCc ?? null,
+      manual: true,
+    });
+  }
+  // 登録済みを先に見せる（探しにいかなくて済むように）
+  R.candidates = [...restored, ...R.candidates];
 }
 
 /**
@@ -1502,9 +1555,12 @@ function rRender() {
     const hasShape = !!(c.polyline || (R.saved.get(c.id) || {}).polyline);
     div.className = "row" + (R.selected === c ? " sel" : "") + (hasShape ? "" : " off");
     div.innerHTML =
-      `<span class="mark">${done ? "✅" : c.manual ? "✚" : c.polyline ? "◻︎" : "✋"}</span>` +
+      // 🗺️ は OSM から拾ったもの。区間が道なりに繋がっていて確かめやすい代わりに、
+      // 規制の範囲が現地と合っているとは限らない（切れ目は OSM の都合で決まっている）
+      `<span class="mark">${done ? "✅" : c.manual ? "✚" : c.confidence === "OSM" ? "🗺️"
+                                       : c.polyline ? "◻︎" : "✋"}</span>` +
       `<span class="name">${escapeHtml(rNameOf(c) || "(名前なし)")}</span>` +
-      `<span class="sub">${c.targetLabel || ""}</span>` +
+      `<span class="sub">${escapeHtml(rScheduleLabel(c) || c.targetLabel || "")}</span>` +
       // ⚠️ 長さも登録した区間のものを出す。元データの値のままだと、
     //    形を作って登録したのに「—」のままで、登録できたのか分からない
     `<span class="score">${rShownLength(c)}</span>`;
@@ -1518,6 +1574,25 @@ function rRender() {
   setStatus(`${R.prefName} 候補${R.candidates.length}件 / 登録済み${done}件`);
 }
 
+
+/**
+ * 一覧に出す「いつ効くか」。終日なら空。
+ *
+ * ⚠️ 一覧で終日と時間限定を見分けられないと、夜間だけの規制を終日のつもりで
+ *    登録してしまう。登録済みならその値、まだなら候補が持ってきた値を見る
+ */
+function rScheduleLabel(c) {
+  const saved = R.saved.get(c.id) || {};
+  const days = saved.activeDays ?? c.activeDays;
+  const holiday = saved.includesHoliday ?? c.includesHoliday;
+  const hours = saved.activeHours ?? c.activeHours;
+  const names = ["月", "火", "水", "木", "金", "土", "日"];
+  const parts = [];
+  if (days && days.length) parts.push(days.map((d) => names[d - 1]).join("・"));
+  if (holiday) parts.push("祝");
+  if (hours && hours.from && hours.to) parts.push(`${hours.from}〜${hours.to}`);
+  return parts.join(" ");
+}
 
 /** 一覧に出す長さ。登録済みならその区間の長さ、無ければ元データの値 */
 function rShownLength(c) {
@@ -1689,6 +1764,14 @@ function rRenderEditor(c) {
   const box = $("rEditor");
   const saved = R.saved.get(c.id) || {};
   const months = saved.activeMonths || [];
+  // ⚠️ **まだ登録していないときは、候補が持ってきた内容を初期値にすること。**
+  //    OSM から拾った規制は曜日と時間帯を持っている（旧東海道は月〜金の07:30〜09:00）。
+  //    `saved` からしか埋めないと、それが画面に出ないまま「終日」で登録されてしまう。
+  //    ⚠️ `||` ではなく `??` を使う。空配列や false を「未指定」と取り違える
+  const days = saved.activeDays ?? c.activeDays ?? [];
+  const hours = saved.activeHours ?? c.activeHours ?? {};
+  const holiday = saved.includesHoliday ?? c.includesHoliday ?? false;
+  const kind = saved.kind ?? c.kind ?? "noMotorcycle";
   box.innerHTML = `
     <h3>${escapeHtml(rNameOf(c) || "(名前なし)")}</h3>
     <div class="stats">
@@ -1719,7 +1802,7 @@ function rRenderEditor(c) {
 
     <label>種別</label>
     <div class="chips" id="r-kind">
-      ${KINDS.map(([k, l]) => `<button class="chip ${(saved.kind || "noMotorcycle") === k ? "on" : ""}" data-kind="${k}">${l}</button>`).join("")}
+      ${KINDS.map(([k, l]) => `<button class="chip ${kind === k ? "on" : ""}" data-kind="${k}">${l}</button>`).join("")}
     </div>
 
     <label>対象の排気量（空欄なら制限なし）</label>
@@ -1736,15 +1819,15 @@ function rRenderEditor(c) {
     <label>効いている曜日（未選択なら毎日）</label>
     <div class="chips" id="r-days">
       ${["月","火","水","木","金","土","日"].map((d, i) =>
-        `<button class="chip ${(saved.activeDays || []).includes(i + 1) ? "on" : ""}" data-day="${i + 1}">${d}</button>`).join("")}
-      <button class="chip ${saved.includesHoliday ? "on" : ""}" id="r-holiday">祝</button>
+        `<button class="chip ${(days || []).includes(i + 1) ? "on" : ""}" data-day="${i + 1}">${d}</button>`).join("")}
+      <button class="chip ${holiday ? "on" : ""}" id="r-holiday">祝</button>
     </div>
 
     <label>効いている時間（空欄なら終日）</label>
     <div class="boostRow">
-      <input type="text" id="r-from" placeholder="07:00" value="${escapeHtml((saved.activeHours || {}).from || "")}">
+      <input type="text" id="r-from" placeholder="07:00" value="${escapeHtml((hours || {}).from || "")}">
       <span class="muted">〜</span>
-      <input type="text" id="r-to" placeholder="19:00" value="${escapeHtml((saved.activeHours || {}).to || "")}">
+      <input type="text" id="r-to" placeholder="19:00" value="${escapeHtml((hours || {}).to || "")}">
     </div>
     <div class="muted" style="font-size:11px; margin-top:2px">
       22:00〜05:00 のように日をまたぐ指定もできます。
@@ -1988,16 +2071,25 @@ function rFindControlsHtml() {
     <label style="margin-top:12px">両端を決めてつなぐ</label>
     <div class="svRow">
       <button id="rFromPick" style="width:34px">始</button>
-      <input type="text" id="rFrom" placeholder="始点（クリックか座標）">
+      <input type="text" id="rFrom" placeholder="始点（クリック・座標・GoogleマップのURL）">
     </div>
     <div class="svRow" style="margin-top:3px">
       <button id="rToPick" style="width:34px">終</button>
-      <input type="text" id="rTo" placeholder="終点（クリックか座標）">
+      <input type="text" id="rTo" placeholder="終点（クリック・座標・GoogleマップのURL）">
     </div>
     <div class="svRow" style="margin-top:4px">
       <button class="primary" id="rRoute">この2点をつなぐ</button>
       <span class="spacer"></span>
       <button id="rDraw">手で線を引く</button>
+    </div>
+
+    <label style="margin-top:12px">マイマップから取り込む</label>
+    <div class="svRow">
+      <input type="text" id="rMyMaps" placeholder="https://www.google.com/maps/d/...?mid=...">
+      <button id="rMyMapsGo">読む</button>
+    </div>
+    <div class="muted" style="margin-top:4px; font-size:11px">
+      県警などが公開しているマイマップの URL を貼ると、区間の形と両端を取り込めます。
     </div>`;
 }
 
@@ -2023,8 +2115,18 @@ function rWireFindControls(replacing) {
   // --- 両端を決めてつなぐ ---
   $("rFromPick").onclick = () => rPickEnd("from");
   $("rToPick").onclick = () => rPickEnd("to");
+  // ⚠️ **貼った時点で読むこと。** つなぐボタンを押すまで何も起きないと、
+  //    URL が正しく読めたのか分からないまま進むことになる（実機で要望）
+  for (const which of ["from", "to"]) {
+    const field = $(which === "from" ? "rFrom" : "rTo");
+    const read = () => rReadEndField(which);
+    field.onpaste = () => setTimeout(read, 0);   // paste 直後はまだ値が入っていない
+    field.onchange = read;
+    field.onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); read(); } };
+  }
   $("rRoute").onclick = () => rConnectEnds(replacing);
   $("rDraw").onclick = () => rBeginDraw(replacing);
+  $("rMyMapsGo").onclick = () => rLoadMyMaps(replacing);
 }
 
 
@@ -2109,6 +2211,67 @@ function rLengthMeters(points) {
 }
 
 /** 始点・終点の印。どこを指したか見えないと直しようがない */
+
+
+/**
+ * Google マイマップから区間を取り込む。
+ *
+ * ⚠️ **取り込むのは形と名前だけ。** 規制の種別・時間・排気量は説明文に日本語で
+ *    書かれているだけなので、読んで画面で設定すること。自動で解釈すると
+ *    「原付一種のみ」を「二輪すべて」にするような取り違えが起きる。
+ */
+async function rLoadMyMaps(replacing) {
+  const box = $("rHits");
+  const url = ($("rMyMaps").value || "").trim();
+  if (!url) { box.innerHTML = '<div class="warn">マイマップの URL を貼ってください</div>'; return; }
+  box.innerHTML = '<div class="muted">マイマップを読んでいます…</div>';
+  let r;
+  try {
+    r = await (await fetch(`/api/restrictions/mymaps?url=${encodeURIComponent(url)}`)).json();
+  } catch (e) {
+    box.innerHTML = `<div class="warn">${escapeHtml(String(e.message || e))}</div>`;
+    return;
+  }
+  if (r.error) { box.innerHTML = `<div class="warn">${escapeHtml(r.error)}</div>`; return; }
+
+  box.innerHTML = `<div class="review"><div><strong>${escapeHtml(r.title || "マイマップ")}</strong></div>`
+    + (r.description ? `<div class="muted" style="margin-top:2px">${escapeHtml(r.description.slice(0, 200))}</div>` : "")
+    + `<div class="muted" style="margin-top:4px">⚠️ 種別・時間・排気量は上の説明を読んで、下の欄で設定してください</div></div>`;
+
+  // 線があればそれを区間に使う。無ければ地点2つを両端として埋める
+  if (r.lines && r.lines.length) {
+    for (const line of r.lines) {
+      const div = document.createElement("div");
+      div.className = "row";
+      const path = line.points.map((p) => ({ lat: p[1], lng: p[0] }));
+      div.innerHTML = `<span class="name">${escapeHtml(line.name || "区間")}</span>` +
+                      `<span class="sub">${line.lengthPoints}点</span>` +
+                      `<span class="score">${(rLengthMeters(path) / 1000).toFixed(1)}km</span>`;
+      div.onmouseenter = () => rPreviewRoad({ polyline: encodePolyline(path) });
+      div.onmouseleave = () => rClearRoadPreview();
+      div.onclick = () => {
+        rClearRoadPreview();
+        rUseRoute({ polyline: encodePolyline(path), lengthMeters: Math.round(rLengthMeters(path)),
+                    roadNames: [line.name || ""], joinGapMeters: 0 }, replacing);
+      };
+      box.appendChild(div);
+    }
+  }
+  // 両端は座標欄にも入れておく（線が無いときはここから「この2点をつなぐ」）
+  if (r.places && r.places.length >= 2) {
+    const a = r.places[0];
+    const b = r.places[r.places.length - 1];
+    $("rFrom").value = `${a.lat.toFixed(6)}, ${a.lng.toFixed(6)}`;
+    $("rTo").value = `${b.lat.toFixed(6)}, ${b.lng.toFixed(6)}`;
+    rDrawEndMarker("from", { lat: a.lat, lng: a.lng });
+    rDrawEndMarker("to", { lat: b.lat, lng: b.lng });
+    const note = document.createElement("div");
+    note.className = "muted";
+    note.style.marginTop = "6px";
+    note.textContent = `両端を入れました: ${a.name || "始"} → ${b.name || "終"}`;
+    box.appendChild(note);
+  }
+}
 
 // ---------- 手で線を引く ----------
 
@@ -2205,6 +2368,38 @@ function rPickEnd(which) {
   R.pickListener = R.map.addListener("click", (e) => {
     rSetEndAt(which, { lat: e.latLng.lat(), lng: e.latLng.lng() });
   });
+}
+
+
+/**
+ * 始点・終点の欄を読んで、座標に直して印を置く。
+ *
+ * GoogleマップのURLをそのまま貼れる（`parseLatLng` が `!3d!4d` を優先して読む）。
+ * ⚠️ 欄の中身は**座標に書き換える**。URLのままだと、正しく読めたのか、
+ *    どの地点になったのかが分からない。
+ */
+function rReadEndField(which) {
+  const field = $(which === "from" ? "rFrom" : "rTo");
+  const raw = (field.value || "").trim();
+  if (!raw) { return; }
+  const point = parseLatLng(raw);
+  if (!point) {
+    rSetStatus(which === "from" ? "始点を読み取れませんでした" : "終点を読み取れませんでした");
+    return;
+  }
+  rSetEndAt(which, point);
+  // 両方そろったら地図を合わせる（どこを指したか見えないと直しようがない）
+  const other = parseLatLng($(which === "from" ? "rTo" : "rFrom").value);
+  if (other) {
+    const bounds = new google.maps.LatLngBounds();
+    bounds.extend(point);
+    bounds.extend(other);
+    R.map.fitBounds(bounds, 80);
+  } else {
+    R.map.setCenter(point);
+    if (R.map.getZoom() < 14) R.map.setZoom(15);
+  }
+  rSetStatus(`${which === "from" ? "始点" : "終点"}を読み取りました`);
 }
 
 /** 片方の端を、指した場所に決める */

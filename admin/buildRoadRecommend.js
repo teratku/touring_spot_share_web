@@ -26,8 +26,9 @@ const { parseWkt, polylineLength, listGridFiles, readGridFile } = require("./lib
 const { PrefectureLocator } = require("./lib/prefectureLocator");
 const { stitch } = require("./lib/roadStitcher");
 const { extract, score } = require("./lib/funSegments");
-const { simplify, encode } = require("./lib/polyline");
+const { simplify, encode, decode: decodePolyline } = require("./lib/polyline");
 const { applyOverrides } = require("./lib/roadOverrides");
+const { blockedSegments } = require("./lib/restrictionOverlap");
 const {
   loadSpots, buildIndex, countNearbySpots, sceneryBonus,
 } = require("./lib/scenerySpots");
@@ -330,6 +331,32 @@ async function audit() {
  */
 const OUTPUT_TOLERANCE_METERS = 10;
 
+
+/**
+ * 二輪が通れない規制と重なるおすすめ道路の番号。
+ *
+ * ⚠️ 規制データが無い県では何も落とさない（`data/road-restrictions/<romaji>.json`）。
+ *    規制を登録していない県のおすすめが黙って減る、ということは起きない。
+ *
+ * ⚠️ 判定そのものは `lib/restrictionOverlap.js` の `blockedSegments` に置いてある。
+ *    ここに書いていたときは区間の形を `seg.points` で渡しており、区間が持っているのは
+ *    `polyline` なので**一度も働いていなかった**（エラーは出ず「0本除外」と出るだけ）。
+ *    テストできる場所に移し、`test/roadRecommendBlocked.test.js` で押さえている。
+ */
+function blockedByRestrictions(pref, segments) {
+  const file = path.join(__dirname, "data", "road-restrictions", `${romaji(pref)}.json`);
+  if (!fs.existsSync(file)) return new Set();
+  let saved;
+  try { saved = JSON.parse(fs.readFileSync(file, "utf8")).restrictions || []; }
+  catch { return new Set(); }
+
+  const found = blockedSegments(saved, segments);
+  for (const [index, hits] of found) {
+    console.log(`     ・${segments[index].name} … ${hits.map((h) => `${h.name}(${Math.round(h.ratio * 100)}%)`).join(" / ")}`);
+  }
+  return new Set(found.keys());
+}
+
 async function build() {
   const locator = new PrefectureLocator();
   let files = listGridFiles(INPUT_DIR);
@@ -415,6 +442,17 @@ async function build() {
     // 調整は別ファイルに置いてあるので、再生成しても消えない。
     const overrides = readOverrides(pref);
     const adjusted = applyOverrides(segments, overrides);
+
+    // ⚠️ **二輪が通れない道はおすすめから外す。** 生成もアプリも規制を見ていなかったため、
+    //    二輪通行禁止の道がおすすめとして配信され、ルート生成が自分で選ぶことがあり得た。
+    //    走れない道へ案内することになるので、配信する前に落とす。
+    // ⚠️ 落とすのは「通れない」規制だけ。二人乗り禁止・冬季閉鎖は、条件次第で走れるので残す
+    //    （アプリ側が乗り方と時期を見て警告する）。
+    const blocked = blockedByRestrictions(pref, adjusted.segments);
+    if (blocked.size) {
+      console.log(`  🚫 ${pref}: 二輪が通れない規制と重なる ${blocked.size}本をおすすめから外しました`);
+      adjusted.segments = adjusted.segments.filter((_, i) => !blocked.has(i));
+    }
     if (adjusted.unmatched.length) {
       console.log(`  ⚠️ ${pref}: 当たらなかった調整が ${adjusted.unmatched.length}件` +
                   `（${adjusted.unmatched.slice(0, 3).join(" / ")}${adjusted.unmatched.length > 3 ? " …" : ""}）`);

@@ -30,6 +30,7 @@ const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
 const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
+const { midFrom, kmlUrl, parseKml } = require("./lib/myMapsKml");
 const { decode: decodePolylineServer } = require("./lib/polyline");
 
 const PROJECT_ID = "biketeilen";
@@ -385,23 +386,53 @@ app.post("/api/roads/publish/:romaji", async (req, res) => {
 
 // ========== 通行規制（road_restrictions）==========
 //
-// 候補   data/restriction-candidates/<romaji>.json … 自動生成した下書き
+// 候補   data/restriction-candidates/<romaji>.json … 二普協の一覧から作った下書き
+//        data/restriction-osm/<romaji>.json        … OSM のタグから拾った下書き
 // 登録   data/road-restrictions/<romaji>.json      … 開発者が確認して確定したもの（配信対象）
 //
 // ⚠️ 候補はそのまま配信しない。ジオコーディングの精度が場所によって大きく違い、
 //    茨城で試したとき 1,300m の規制区間が 510m、別の区間が 21m になった。
 //    必ず画面で地図を見て、始点・終点を直してから登録する。
+//
+// ⚠️ **候補を1つのファイルにまとめないこと。** 作っているスクリプトが別（
+//    `buildRestrictionCandidates.js` と `fetchOsmRestrictions.js`）で、
+//    どちらも県ぶんを丸ごと書き直す。同じファイルにすると互いを消し合う。
+//    それぞれが自分のファイルだけを書き、読むときにここで合わせる。
+
+function readCandidateFile(dir, romaji) {
+  const file = path.join(__dirname, "data", dir, `${romaji}.json`);
+  if (!fs.existsSync(file)) return null;
+  try { return JSON.parse(fs.readFileSync(file, "utf8")); }
+  catch (e) { return { error: `${dir}/${romaji}.json を読めません: ${e.message}`, candidates: [] }; }
+}
 
 app.get("/api/restrictions/candidates/:romaji", (req, res) => {
-  const file = path.join(__dirname, "data", "restriction-candidates", `${req.params.romaji}.json`);
-  if (!fs.existsSync(file)) {
+  const { romaji } = req.params;
+  const jmpsa = readCandidateFile("restriction-candidates", romaji);
+  const osm = readCandidateFile("restriction-osm", romaji);
+
+  // ⚠️ 片方しか無くても 404 にしないこと。OSM 側だけがある県（石川・新潟・大阪など）で
+  //    「候補が未生成です」と出て、拾えているはずの規制が見えなくなる
+  if (!jmpsa && !osm) {
     return res.status(404).json({
-      error: "候補が未生成です。node buildRestrictionCandidates.js --prefecture <県名> を実行してください。",
+      error: "候補が未生成です。node fetchOsmRestrictions.js --prefecture <県名>"
+           + "（または buildRestrictionCandidates.js）を実行してください。",
       candidates: [],
     });
   }
-  try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
-  catch (e) { res.status(500).json({ error: e.message, candidates: [] }); }
+
+  const errors = [jmpsa, osm].filter((d) => d && d.error).map((d) => d.error);
+  res.json({
+    prefecture: (jmpsa && jmpsa.prefecture) || (osm && osm.prefecture) || "",
+    romaji,
+    // OSM 由来を先に見せる。区間が道なりに繋がっていて確かめやすい
+    candidates: [...((osm && osm.candidates) || []), ...((jmpsa && jmpsa.candidates) || [])],
+    sourceUrl: jmpsa && jmpsa.sourceUrl,
+    sourceFetchedAt: jmpsa && jmpsa.sourceFetchedAt,
+    osmBuiltAt: osm && osm.builtAt,
+    osmAttribution: osm && osm.attribution,
+    error: errors.length ? errors.join(" / ") : undefined,
+  });
 });
 
 /**
@@ -424,6 +455,33 @@ app.get("/api/restrictions/route", async (req, res) => {
   try {
     const [fromLat, fromLng, toLat, toLng] = nums;
     res.json(await routeBetween([fromLng, fromLat], [toLng, toLat]));
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * Google マイマップから規制の区間を取り込む。
+ *
+ * 県警や二普協が規制区間をマイマップで公開していることがある。目で見て座標を
+ * 写すと間違えるし、区間の形（何百点）は写せない。KML で読む。
+ *
+ * ⚠️ 公開されている地図だけ。限定公開のものは Google が 404 を返す。
+ * ⚠️ 取り込むのは**形と名前だけ**。規制の種別・時間・排気量は説明文に日本語で
+ *    書かれているだけなので、人が読んで画面で設定すること（自動で解釈しない）。
+ */
+app.get("/api/restrictions/mymaps", async (req, res) => {
+  const mid = midFrom(req.query.url || req.query.mid);
+  if (!mid) return res.status(400).json({ error: "マイマップの URL か mid を渡してください" });
+  try {
+    const r = await fetch(kmlUrl(mid), { headers: { "User-Agent": "biketeilen-admin/1.0" } });
+    if (!r.ok) {
+      return res.status(502).json({
+        error: `マイマップを読めませんでした（${r.status}）。公開されている地図か確認してください`,
+      });
+    }
+    const parsed = parseKml(await r.text());
+    res.json({ mid, ...parsed });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

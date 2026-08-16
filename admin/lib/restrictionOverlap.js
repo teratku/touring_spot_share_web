@@ -116,7 +116,41 @@ function findOverlaps(restrictions, roads, options = {}) {
   return found;
 }
 
+/** 「そもそも通れない」規制の種別。二人乗り禁止・冬季閉鎖は条件次第で走れる */
+const BLOCKING_KINDS = new Set(["noMotorcycle", "closed"]);
+
+/**
+ * 二輪が通れない規制と重なる、おすすめ道路の番号を返す。
+ *
+ * ⚠️ **おすすめ道路の区間は `points` を持っていない。** 持っているのは
+ *    `polyline`（符号化した文字列）で、`points` は生成の途中でしか存在しない。
+ *    そこを取り違えて `seg.points` を渡していたため、この除外は
+ *    **一度も働いていなかった**（栃木で「0本除外」と出ていたのは、規制が
+ *    重ならなかったのではなく空振りしていたから）。エラーは出ない。
+ *    だからここで受け取って、この中で復号する。
+ *
+ * @param {Array} saved    data/road-restrictions/<romaji>.json の `restrictions`
+ * @param {Array} segments おすすめ道路の区間（`polyline` を持つ形）
+ * @returns {Map} 区間の番号 → [{ restrictionId, name, kind, ratio }]
+ */
+function blockedSegments(saved, segments) {
+  const { decode } = require("./polyline");
+  const restrictions = (saved || [])
+    .filter((r) => r && BLOCKING_KINDS.has(r.kind) && r.polyline)
+    .map((r) => ({ id: r.id, name: r.name, kind: r.kind, points: decode(r.polyline) }))
+    .filter((r) => r.points.length >= 2);
+  if (!restrictions.length) return new Map();
+
+  const roads = (segments || []).map((seg, index) => ({
+    id: index,
+    name: seg.name,
+    // 生成の途中では `points`、書き出したあとは `polyline`。どちらでも受ける
+    points: seg.points || (seg.polyline ? decode(seg.polyline) : null),
+  }));
+  return findOverlaps(restrictions, roads);
+}
+
 module.exports = {
-  findOverlaps, overlapRatio, resample, distanceToLine,
-  NEAR_METERS, STEP_METERS, MIN_RATIO,
+  findOverlaps, overlapRatio, resample, distanceToLine, blockedSegments,
+  NEAR_METERS, STEP_METERS, MIN_RATIO, BLOCKING_KINDS,
 };
