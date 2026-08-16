@@ -1,7 +1,7 @@
 {
  "romaji": "hokkaido",
- "updatedAt": "2026-08-16T09:01:56.416Z",
- "count": 6,
+ "updatedAt": "2026-08-16T11:04:22.465Z",
+ "count": 8,
  "restrictions": [
   {
    "id": "manual-hokkaido-1786842901605",
@@ -96,6 +96,38 @@
    "activeHours": null,
    "minCc": null,
    "maxCc": null,
+   "checkedAt": "2026-08-16",
+   "source": "admin"
+  },
+  {
+   "id": "osm-hokkaido-1134783205",
+   "kind": "noMotorcycle",
+   "name": "国道238号",
+   "prefecture": "北海道",
+   "polyline": "{nimGopmjZnD{Gjy@ibApd@s[tWed@xQ_U~PiNfGmHvNeYr[uf@fGmO|IoZfYei@bGiS",
+   "note": null,
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 50,
+   "checkedAt": "2026-08-16",
+   "source": "admin"
+  },
+  {
+   "id": "osm-hokkaido-1204313604",
+   "kind": "noMotorcycle",
+   "name": "藻岩山観光自動車道",
+   "prefecture": "北海道",
+   "polyline": "iyoeG{|p}YQhBxA`IgBhC\\pD~Aa@nDgG",
+   "note": null,
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 50,
    "checkedAt": "2026-08-16",
    "source": "admin"
   }

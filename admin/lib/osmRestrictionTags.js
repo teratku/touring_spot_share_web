@@ -23,6 +23,9 @@
  *   no @ (22:00-06:00)                           3件  秋田自動車道
  *   no @ (07:00-09:00)                           2件  中央通り
  *   destination @ 07:00-09:00                    1件  富士見通り（規制ではない）
+ *
+ * 原付だけ通れない道は `moped=no`（全国1,565本）。`moped:conditional` と `moped=private` は
+ * 全国0件だったので、時間帯・私道の読み替えは要らない。値は `no` と `yes` の2つだけ。
  */
 "use strict";
 
@@ -33,6 +36,15 @@ const DAY_NUMBERS = { Mo: 1, Tu: 2, We: 3, Th: 4, Fr: 5, Sa: 6, Su: 7 };
 
 /** 原付が通れるとき、規制の下限に使う排気量 */
 const MOPED_MAX_CC = 50;
+
+/**
+ * 自動車専用道路で通行できない上限。
+ *
+ * ⚠️ **原付二種（125cc以下）も入れない。** 標識が無くても道交法で決まっている。
+ *    ふつうの道の「原付通行禁止」は50cc以下なので、切る位置が違う。
+ *    一律50にすると、原付二種の人に通れない道（小田原厚木道路など）を勧めることになる。
+ */
+const MOTORROAD_MAX_CC = 125;
 
 /** 時間帯（07:30-09:00）を拾う。前後の空白は許す */
 const TIME_RANGE = /(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/g;
@@ -171,6 +183,8 @@ function toCandidateFields(tags = {}) {
   let activeHours = null;
   let reason = null;
   let sourceTag = null;
+  /** 原付だけが対象か（二輪は通れる） */
+  let mopedOnly = false;
 
   if (motorcycle === "no") {
     sourceTag = "motorcycle=no";
@@ -198,31 +212,72 @@ function toCandidateFields(tags = {}) {
       includesHoliday = parsed.includesHoliday;
       activeHours = parsed.hours;
     }
+    // ⚠️ `motor_vehicle=no` が併記されていたら、原付だけの話ではない。
+    //    ここで拾うと上限50ccが付き、**251ccの人が通れることになってしまう**。下の枝に渡す
+  } else if (tags.moped === "no" && tags.motor_vehicle !== "no") {
+    // ⚠️ **原付だけ通れない道。** バイパス・一般有料道路に多く、`motorcycle=designated`
+    //    （二輪はむしろ通れる）と併記されているのが普通の形。
+    //    `motorcycle=no` しか見ていなかったので、この形をまるごと取りこぼしていた。
+    //    神奈川県だけで324本あり、うち223本が `motorcycle=designated` 付き
+    //    （小田原厚木道路・横浜新道・逗葉新道・真鶴道路・ターンパイク箱根・
+    //      湯河原パークウェイ・芦ノ湖スカイライン）。
+    //    実際、湯河原パークウェイ80.1点・芦ノ湖スカイライン76.5点・ターンパイク50.4点が
+    //    神奈川県のおすすめに載っていて、原付の人に提案されていた。
+    mopedOnly = true;
+    sourceTag = "moped=no";
+  } else if (tags.motor_vehicle === "no") {
+    // ⚠️ **自動車が全部通れない道。二輪も当然通れない。**
+    //    二輪だけのタグ（`motorcycle` / `moped`）が付いていないので、そこだけ見ていると
+    //    **まるごと落ちる**。クエリでは取っていたのに、ここで捨てていた。
+    //    実際、埼玉県は該当13本すべてがこの形で候補0件になっていた
+    //    （秩父上名栗線・畑トンネル・林道清流線など。19県が同じ理由で空だった）。
+    sourceTag = "motor_vehicle=no";
   } else {
     return none;   // 二輪についての指定が無い
   }
 
   // ⚠️ 車両全部が通れないなら「二輪通行禁止」ではなく「通行止め」。
-  //    アプリ側の扱いが変わる（二輪だけの話ではないと伝わる）
-  const kind = tags.motor_vehicle === "no" ? "closed" : "noMotorcycle";
+  //    アプリ側の扱いが変わる（二輪だけの話ではないと伝わる）。
+  // ⚠️ 原付だけの規制は別。上限50ccを付けているのに「通行止め」と言うと食い違う
+  const kind = (!mopedOnly && tags.motor_vehicle === "no") ? "closed" : "noMotorcycle";
 
   // 原付は通れる、と別に書いてあるなら対象は51cc以上（京都の天の橋立線がこれ）。
   // ⚠️ moped=dismount は「降りて押せば通れる」であって、走っては通れない。下限を付けない
   const mopedAllowed = tags.moped === "yes" && !tags["moped:conditional"];
   const minCc = mopedAllowed ? MOPED_MAX_CC + 1 : null;
+  // ⚠️ **上限を付け忘れないこと。** 付けないと「二輪すべて」になり、
+  //    原付だけの規制で251ccの人のおすすめからも道が消える。
+  // ⚠️ 自動車専用道路なら125cc以下。ふつうの道の原付規制（50cc以下）とは切る位置が違う
+  const motorroad = tags.motorroad === "yes";
+  const maxCc = !mopedOnly ? null : motorroad ? MOTORROAD_MAX_CC : MOPED_MAX_CC;
+
+  // ⚠️ **ここで決めた排気量は当てにならない、と必ず伝えること。**
+  //    OSM は `moped=no`（原付が通れない）としか書かず、**125cc以下なのか50cc以下なのかを
+  //    区別できない**。実際に登録してみると125cc以下の道が多かった（報告あり）。
+  //    `motorroad` も当てにならず、同じ道でも区間によって付いていたりいなかったりする
+  //    （ターンパイク箱根で実際にそうなっている）。
+  //    ⚠️ 曜日も同じ。OSM は持っていない（神奈川223本・大阪53本を調べて0件）。
+  //       観光有料道路は土日祝だけ二輪通行禁止のことがあるが、それはここでは分からない。
+  if (mopedOnly && !reason) {
+    reason = motorroad
+      ? "自動車専用道路として125cc以下にした。現地の標識で確かめること"
+      : "原付だけの規制として50cc以下にした。自動車専用道路なら125cc以下、"
+        + "観光有料道路なら土日祝だけ二輪通行禁止のことがある。現地の告知で確かめること";
+  }
 
   return {
     blocks: true,
     kind,
     minCc,
-    maxCc: null,
+    maxCc,
     activeDays,
     includesHoliday,
     activeHours,
-    targetLabel: minCc ? `${minCc}cc以上` : "二輪すべて",
+    targetLabel: maxCc ? `${maxCc}cc以下` : minCc ? `${minCc}cc以上` : "二輪すべて",
     reason,
     sourceTag,
   };
 }
 
-module.exports = { parseConditional, parseDays, toCandidateFields, DAY_NUMBERS, MOPED_MAX_CC };
+module.exports = { parseConditional, parseDays, toCandidateFields,
+                   DAY_NUMBERS, MOPED_MAX_CC, MOTORROAD_MAX_CC };

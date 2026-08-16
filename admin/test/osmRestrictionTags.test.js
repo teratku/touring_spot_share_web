@@ -305,3 +305,121 @@ test("意味の同じタグの揺れでは注意書きを出さない", () => {
   assert.ok(!(white.reason || "").includes("区間によって"),
             "同じ意味のタグの揺れで注意書きが出ている: " + white.reason);
 });
+
+// MARK: 原付だけ通れない道（バイパス・一般有料道路）
+
+/**
+ * ⚠️ ここを読まないと、原付が乗れない道を原付の人におすすめし続ける。
+ *    実際に神奈川県のおすすめに、湯河原パークウェイ80.1点・芦ノ湖スカイライン76.5点・
+ *    ターンパイク箱根50.4点が載っていた。
+ *    この形の道は `motorcycle=designated`（二輪はむしろ通れる）になっていて、
+ *    `motorcycle=no` では1本も引っ掛からない。
+ */
+test("原付だけ通れない道を規制として拾う", () => {
+  const f = toCandidateFields({ name: "湯河原パークウェイ", moped: "no", motorcycle: "designated" });
+  assert.strictEqual(f.blocks, true, "原付通行禁止を見逃している");
+  assert.strictEqual(f.sourceTag, "moped=no");
+});
+
+test("原付だけの規制には上限を付ける", () => {
+  // ⚠️ **上限が抜けると「二輪すべて」になる。** 原付だけ禁止の道が
+  //    251ccの人のおすすめからも消える
+  const f = toCandidateFields({ name: "小田原厚木道路", moped: "no", motorcycle: "designated" });
+  assert.strictEqual(f.maxCc, 50, "上限が付いていない（全員の規制になっている）");
+  assert.strictEqual(f.minCc, null);
+  assert.strictEqual(f.targetLabel, "50cc以下");
+});
+
+test("二輪も原付も禁止なら上限は付けない", () => {
+  // ⚠️ 上限を付けると、251ccの人が通れない道を通れることにしてしまう
+  const f = toCandidateFields({ name: "両方禁止", motorcycle: "no", moped: "no" });
+  assert.strictEqual(f.maxCc, null, "全員の規制なのに原付だけの扱いにしている");
+  assert.strictEqual(f.targetLabel, "二輪すべて");
+});
+
+test("原付だけの規制を通行止めにしない", () => {
+  // ⚠️ 上限50ccを付けているのに「通行止め」と言うと、伝わる意味が食い違う。
+  //    ⚠️ `motor_vehicle=no` が併記された場合は話が別（誰も通れないので通行止め）。
+  //       そちらは「原付禁止と全車通行止めが重なったら通行止めを採る」で押さえている
+  const f = toCandidateFields({ name: "湯河原パークウェイ", moped: "no", motorcycle: "designated" });
+  assert.strictEqual(f.kind, "noMotorcycle", "原付だけの規制を通行止めにしている");
+  assert.strictEqual(f.maxCc, 50);
+});
+
+test("原付が通れる指定は規制にしない", () => {
+  assert.strictEqual(toCandidateFields({ name: "ふつうの道", moped: "yes" }).blocks, false);
+});
+
+// MARK: 自動車専用道路（125cc以下が通れない）
+
+/**
+ * ⚠️ **一律50cc以下にしないこと。** 自動車専用道路は道交法で125cc以下が通行禁止
+ *    （原付二種も入れない）。実機で「125cc以下の道路が多かった」と報告された。
+ *    50のままだと、原付二種の人に通れない道（小田原厚木道路など）を勧めることになる。
+ */
+test("自動車専用道路は125cc以下にする", () => {
+  const f = toCandidateFields({ name: "小田原厚木道路", moped: "no",
+                                motorcycle: "designated", motorroad: "yes" });
+  assert.strictEqual(f.maxCc, 125, "自動車専用道路を50cc以下にしている");
+  assert.strictEqual(f.targetLabel, "125cc以下");
+});
+
+test("ふつうの道の原付規制は50cc以下のまま", () => {
+  // ⚠️ 逆に全部125にすると、原付二種で走れる道が原付二種の人から消える
+  const f = toCandidateFields({ name: "湯河原パークウェイ", moped: "no" });
+  assert.strictEqual(f.maxCc, 50, "ふつうの道を125cc以下にしている");
+});
+
+test("自動車専用ではないと書いてあれば50cc以下", () => {
+  const f = toCandidateFields({ name: "大阪港咲洲トンネル", moped: "no", motorroad: "no" });
+  assert.strictEqual(f.maxCc, 50);
+});
+
+test("排気量を当てにしないよう注意書きを付ける", () => {
+  // ⚠️ **黙って決めないこと。** OSM は `moped=no` としか書かず、125cc以下なのか
+  //    50cc以下なのかを区別できない。人が現地を確かめるための手掛かりを残す
+  for (const tags of [{ moped: "no" }, { moped: "no", motorroad: "yes" }]) {
+    const f = toCandidateFields({ name: "どこか", ...tags });
+    assert.ok(f.reason && f.reason.includes("確かめること"),
+              "注意書きが無い: " + JSON.stringify(tags) + " → " + f.reason);
+  }
+});
+
+test("二輪すべての規制には排気量の注意書きを付けない", () => {
+  // ⚠️ 全部に出すと、本当に確かめてほしいものが埋もれる
+  const f = toCandidateFields({ name: "弥彦山スカイライン", motorcycle: "no" });
+  assert.strictEqual(f.reason, null, "関係の無い注意書きが出ている: " + f.reason);
+});
+
+// MARK: 自動車が全部通れない道（二輪だけのタグが無い）
+
+/**
+ * ⚠️ **これを落とすと県ごとまるごと空になる。** 二輪だけのタグ（`motorcycle` / `moped`）が
+ *    付いていない道でも、`motor_vehicle=no` なら二輪も通れない。
+ *    実際、埼玉県は該当13本すべてがこの形で、候補0件になっていた
+ *    （秩父上名栗線・畑トンネル・林道清流線など）。19県が同じ理由で空だった。
+ *    クエリでは取れているのに読み替えで捨てていたので、エラーも出ず「規制なし」に見えた。
+ */
+test("自動車が全部通れない道も規制として拾う", () => {
+  const f = toCandidateFields({ name: "秩父上名栗線", motor_vehicle: "no" });
+  assert.strictEqual(f.blocks, true, "二輪も通れないのに規制にしていない");
+  assert.strictEqual(f.kind, "closed", "通行止めになっていない");
+  assert.strictEqual(f.maxCc, null, "排気量で切っている（誰も通れない道)");
+  assert.strictEqual(f.targetLabel, "二輪すべて");
+});
+
+test("原付禁止と全車通行止めが重なったら通行止めを採る", () => {
+  // ⚠️ 原付の枝で拾うと上限50ccが付き、**251ccの人が通れることになってしまう**
+  const f = toCandidateFields({ name: "両方", moped: "no", motor_vehicle: "no" });
+  assert.strictEqual(f.kind, "closed", "原付だけの規制にしている");
+  assert.strictEqual(f.maxCc, null, `上限が付いている（${f.maxCc}）`);
+});
+
+test("自動車が通れる指定は規制にしない", () => {
+  // ⚠️ 危険物だけの条件（大阪港咲洲トンネル）を通行止めにしない
+  for (const tags of [{ motor_vehicle: "yes" }, { motor_vehicle: "private" },
+                      { motor_vehicle: "yes", "motor_vehicle:conditional": "no @ (hazmat)" }]) {
+    assert.strictEqual(toCandidateFields({ name: "どこか", ...tags }).blocks, false,
+                       "規制ではないものを拾っている: " + JSON.stringify(tags));
+  }
+});

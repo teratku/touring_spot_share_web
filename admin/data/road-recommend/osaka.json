@@ -1,9 +1,9 @@
 {
  "prefecture": "大阪府",
  "romaji": "osaka",
- "generation": 2,
- "contentHash": "8d52ddd1098a",
- "builtAt": "2026-07-28T15:24:50.371Z",
+ "generation": 4,
+ "contentHash": "90d55af5b1dd",
+ "builtAt": "2026-08-16T12:08:02.117Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -11,31 +11,10 @@
   "classRank": 0.1,
   "popularity": 0.15
  },
- "count": 127,
+ "count": 123,
  "segments": [
   {
    "id": "大阪府:0",
-   "name": "茨木能勢線",
-   "ref": "4",
-   "highway": "primary",
-   "lengthKm": 29.94,
-   "curviness": 640.8,
-   "flow": 28.6,
-   "turnCount": 670,
-   "score": 83.5,
-   "polyline": "}tusEoi`zXoA^kCnE_D~@w@hAwGy@mB`D{@b@uCs@gBfD}BOyDdBc@xC}FcG_AuBcBkAeC?kDhDiBo@IkEyE{EqB}EiByBgGa@k@n@yBfKoDwBkBdC`CX~DpD~B}F`BcC^En@j@bAlE`E`EMbCkCl@`A|EqBnFItAaBzASz@z@tKt@|BoAxJh@nCRvFpBfBfBbDxCnChCr@vC~CjBi@pAh@SzAjBhDh@xFnD|GGfDyBvGkAnAgC`AwOS_FaBw@NmCdD}@JkDmB{Fq@gCdAeDxEu@U{AwCsATyCrBiA?wB}AYmIa@a@iGr@eAo@oAkCi@{DViDxBgJ@{A_A{GmDkCiDw@uCcBkHlCiFdFyCb@mDiBeAyAgAsEe@WeJYwEhB_CqC{@[qCRaBpBiGp@uP_Ek@Ps@vAoAjFyDK}BzCQzEmAlB`@fE_BvASbDoADwAoBaDB]fCcCYmCdBAlCs@f@mBDcAg@d@}FYi@aHhG{FkBwBkBqBUoEp@aEg@uJvByBdBaAHwBmCqAkDmCeBg@CyAtAeAD{BoBuAHmAc@q@gCwCkAkEtCmBOgAaBk@_Jy@o@k@h@LfEsBrBYnApApGIj@sJuBq@NQpA`@vAjCSZT@~Cl@pAq@jCb@j@`CWd@`DrBa@n@~BzAe@lA|@dAeCdB[?t@aBZ}@pEaCqAYfC{A^a@UU}AqB?cB{@y@fCqC@cCtB_@Qa@kCeDj@gDmC_AdBeBU_AlC_C{Dc@BgAtAu@DyA_CyAu@uFa@_BrBeBGmBpAaCNmBvBqANm@|@AbBu@bAExAw@f@_@~BmAfAaB`@gAtEe@}AC}ByAmAc@}BlAoCyA[mBnAu@U~@bC{Be@k@`@]i@K}DjAkAGy@yBhAaASwDbMeA~AwA?SZZ`@vBKLl@iC\\qAhEaBa@g@n@V`B_@vBXDd@gAZH}@`CaDnFg@SCiB_@GiBhK_@?Sw@YHJ~CgM`LZXnBcAHr@aEzB_BP{@xCsCzC}EaDw@EW\\SnDpBdIG`A}AjCcD~AuArJuChDaDbMWda@}@bJ[dUYNoAlGkApMyHhNuFfFDrAvAy@d@p@rCf@b@rAg@xBuEfEGbAr@xCm@dDl@bC]bD{C|Dg@jCsB]mFkIkI_Iy@aBoCFgJ{AcAoA_C_AeAqEmAqAyB_@iAb@cC`DyAbE?bD]vAsElEiAdIsDdOAjE_AzEK|GdBjEPlCuD`JkBLSh@fBfB|@tFK`EsBR`A~CSnBe@l@yBf@{DUeE`@cCs@YLF`B",
-   "pointCount": 343,
-   "start": [
-    34.850228,
-    135.502477
-   ],
-   "end": [
-    34.968131,
-    135.415595
-   ]
-  },
-  {
-   "id": "大阪府:1",
    "name": "東阪三日市線",
    "ref": "209",
    "highway": "secondary",
@@ -44,6 +23,8 @@
    "flow": 29.2,
    "turnCount": 105,
    "score": 82.4,
+   "baseScore": 82.4,
+   "spotCount": 0,
    "polyline": "saeqEivrzXcCSy@m@_EmLD{ApB}FIq@cBzAwGyEeBb@iCg@iB|AkGg@aBZ{@_@E^zAzAF|Az@z@Gh@a@FaEmCcFM{CuAyIcAuBaCcD_Bp@eDrL{HbCiHvDGnB_Bi@{Gb@aCnBeBHgAmBmGmB]u@sABo@nA_COyBlBiBnAiD_@mCfAgBOsC|Be@dEmFW{A{B]}BjBsE{DoCc@}BgDrB{C",
    "pointCount": 56,
    "start": [
@@ -56,7 +37,7 @@
    ]
   },
   {
-   "id": "大阪府:2",
+   "id": "大阪府:1",
    "name": "上河内富田林線",
    "ref": "200",
    "highway": "secondary",
@@ -65,6 +46,8 @@
    "flow": 31.1,
    "turnCount": 132,
    "score": 82.4,
+   "baseScore": 82.4,
+   "spotCount": 0,
    "polyline": "einqEuv{zXgDmV|Bs@xAcFvBW`B}A`E]~BqCjFIdFqAdC?`K_Bx@oB]_Cz@q@bDr@t@`DzBx@fCq@dAgBfANfA_@dEtA|BgAfArCnB\\vAqA|G^|ApC~K`@jCq@tB^|Dc@bAiATeCv@mAjAn@dF}BnAb@?o@uBgBzDgCVp@]~BdCp@FrAlBnD?rCbCOXv@j@F`BgDk@_AReA~AO\\e@UaBrAeC@eEfAwC|BgCdA@",
    "pointCount": 62,
    "start": [
@@ -77,7 +60,7 @@
    ]
   },
   {
-   "id": "大阪府:3",
+   "id": "大阪府:2",
    "name": "国崎野間口線",
    "ref": "605",
    "highway": "secondary",
@@ -86,6 +69,8 @@
    "flow": 31.2,
    "turnCount": 80,
    "score": 81.9,
+   "baseScore": 81.9,
+   "spotCount": 0,
    "polyline": "ohetEeuzyX~CpLPbE_@jAaDl@[lAP~Ah@gCdEY|DrEtAs@mAcD`@kA`DjCPbBv@xAcBtBe@~IfCvFzA~BjDPlBdBHWhDxBnCf@fJdKfAzEdBdBl@fLO`D\\`Cq@hEs@xAo@`LmAhBq@|CJvBt@|B",
    "pointCount": 38,
    "start": [
@@ -98,7 +83,7 @@
    ]
   },
   {
-   "id": "大阪府:4",
+   "id": "大阪府:3",
    "name": "堺かつらぎ線",
    "ref": "61",
    "highway": "primary",
@@ -107,6 +92,8 @@
    "flow": 28.3,
    "turnCount": 243,
    "score": 81.8,
+   "baseScore": 81.8,
+   "spotCount": 0,
    "polyline": "qpypEgedzXxCy@~AXzC~Gj@ZnCsBdHw@zCn@nHLrB`AVZI`AlCfG|AjAChBlBtAb@xDlG`GJtAyA~FBz@hAIbD{Ch@@tC~BxEj@bAq@xBVh@w@jBHhDqBhCg@fCBvCcAhCT|@c@`BAtD`@^r@|@PfBcCv@SjHe@xB|@pEyBvCvBtB{@hBoB~AMpJhDjAe@xDjCpV|BzAhAdJiBfC@hDdArBjCxACBgA}@gBMgBuAiA_CaFnD{EIe@aC]RwAu@kDxBgFZNAn@aA`Aa@tB`AfBCbB`D{@hADd@a@nANAb@}AtAsDvG~@tAlEeA^zEiA^Ih@xAdB\\ArEeHvAh@j@Wl@cC\\Bf@tAvEtAf@`BjAnADvAaC|BeAzBzD|@vBzAbBJ|AtBC`Cz@|BdCpADsDoAcAeCwHsCeC~C}ApDY^TE`@kB^K`@",
    "pointCount": 119,
    "start": [
@@ -119,7 +106,7 @@
    ]
   },
   {
-   "id": "大阪府:5",
+   "id": "大阪府:4",
    "name": "亀岡能勢線",
    "ref": "732",
    "highway": "secondary",
@@ -128,6 +115,8 @@
    "flow": 35.7,
    "turnCount": 76,
    "score": 81.7,
+   "baseScore": 81.7,
+   "spotCount": 0,
    "polyline": "}lntEkupyX|LiJD}Ca@yBbDiHj@Lr@vCf@HP_@kBkQTSXlBZBq@sFq@]eAl@m@bAe@dD_@@`BwGjGkKFmE_@m@}EuAg@yB_BkA`AyAJmBbA_B@k@s@gAt@{BiBWP{As@wB`@aA]w@{Bq@aAPQ[VoA~A^h@e@yAwFKmE",
    "pointCount": 45,
    "start": [
@@ -140,7 +129,7 @@
    ]
   },
   {
-   "id": "大阪府:6",
+   "id": "大阪府:5",
    "name": "河内長野かつらぎ線",
    "ref": "218",
    "highway": "secondary",
@@ -149,6 +138,8 @@
    "flow": 28.3,
    "turnCount": 111,
    "score": 81.3,
+   "baseScore": 81.3,
+   "spotCount": 0,
    "polyline": "{t}pEi|dzXyAqBX_F]qAmDoBkAuB_@}BBkFsDqDAkGoBmFmDc@qBgBgCjAeCmA_GNg@wAq@`@u@dCcBvByBqBwFy@_F_GqBKoBf@OkBsCmBWiCqBv@eDG{F_BoBuCUaBkBkD{C{A[mAsBOgAu@GoAaBuEmA{@{EqHcBgEuBwAwGyB{CcC}Ia@i@RaA`C}AOe@r@oBqB{BjAgErFgDrB{Bi@_GPqDc@WmBaBmA_FeHqLsH{AzDyAfB",
    "pointCount": 64,
    "start": [
@@ -161,28 +152,7 @@
    ]
   },
   {
-   "id": "大阪府:7",
-   "name": "豊中亀岡線",
-   "ref": "43",
-   "highway": "primary",
-   "lengthKm": 6.03,
-   "curviness": 831.3,
-   "flow": 31.3,
-   "turnCount": 160,
-   "score": 81.2,
-   "polyline": "}_ssE_{zyXq@Up@mBeA}A}FpAk@SIo@j@wAlBcAG_A}FAcBpE|DdKWjBaAxAOk@dAgBW}AcFuGI{AcCw@Yo@uC~AyLDwBg@s@aAcDn@{BeBkADi@qBwBC_@p@ZlAgAlAhEfCkCnCeC\\yBcAuAz@qAEq@{CkCmCVpD_BhAAfCkBrBy@|EqBWcB`@}HcCsAfCMjEw@|Cs@f@k@GiDwHEm@dBe@Di@OgAmAaAa@kCzBqB{AiG?qBb@}@dBm@Ba@qEmJqBK_AiAcBkG\\uGwEwFcAiGgCyG",
-   "pointCount": 76,
-   "start": [
-    34.83663,
-    135.474555
-   ],
-   "end": [
-    34.860093,
-    135.486208
-   ]
-  },
-  {
-   "id": "大阪府:8",
+   "id": "大阪府:6",
    "name": "余野茨木線",
    "ref": "110",
    "highway": "secondary",
@@ -191,6 +161,8 @@
    "flow": 27.1,
    "turnCount": 130,
    "score": 81.1,
+   "baseScore": 81.1,
+   "spotCount": 0,
    "polyline": "}zbtEgq~yXd@gCKaAaDyCkCkLr@qGbG}EBiBcA_GJkAnEsIdSiR~GgDxCoErDmBcAiG~CkKuAiHzAaChBChBgApCUz@}@b@mEh@aAEkEt@sAA}Al@sArA{@D_FrAo@ViAbAi@?mC`AoBk@gCb@aBk@eCjCiFbA]b@yFbBiAxC\\f@eAp@I|GrDbAjDdD|BHzBh@|@lBi@fAgA~HNrArA~Et@jByFvD}AfBwDRyDoAqDL}@jBQrAb@jBy@zAn@|BeAtDExA`@zBqAdCZx@k@]iCnA]",
    "pointCount": 74,
    "start": [
@@ -203,7 +175,7 @@
    ]
   },
   {
-   "id": "大阪府:9",
+   "id": "大阪府:7",
    "name": "忍頂寺福井線",
    "ref": "114",
    "highway": "secondary",
@@ -212,6 +184,8 @@
    "flow": 26.6,
    "turnCount": 66,
    "score": 80.5,
+   "baseScore": 80.5,
+   "spotCount": 0,
    "polyline": "_kzsEuohzXjIgFzDgFv@?t@pAv@[z@l@dBUh@fFj@r@rIfAjAy@hBB|AcCrCJxAcDfFLzAcBpCbAbAiDdDNt@o@tADzEeB`C{BhDoAxCVpC_AdDAxG}DjFw@jBuAdI|A~DH",
    "pointCount": 34,
    "start": [
@@ -224,7 +198,7 @@
    ]
   },
   {
-   "id": "大阪府:10",
+   "id": "大阪府:8",
    "name": "堺かつらぎ線",
    "ref": "61",
    "highway": "primary",
@@ -233,6 +207,8 @@
    "flow": 27.6,
    "turnCount": 69,
    "score": 79.8,
+   "baseScore": 79.8,
+   "spotCount": 0,
    "polyline": "kubqEmxbzXnGAnEaClHSzTiKpBJzAzArAi@xAbBvBNdAlAdARfCqA|LKbBqB|@InFvA~RVHiBl@_@~CtBrCr@dCe@hAh@ZiAfCEtA`BnEPh@yAnAsLg@{Gf@G`@~ArCU",
    "pointCount": 34,
    "start": [
@@ -245,7 +221,7 @@
    ]
   },
   {
-   "id": "大阪府:11",
+   "id": "大阪府:9",
    "name": "大野天野線",
    "ref": "217",
    "highway": "secondary",
@@ -254,6 +230,8 @@
    "flow": 26.5,
    "turnCount": 103,
    "score": 78.1,
+   "baseScore": 78.1,
+   "spotCount": 0,
    "polyline": "irjqEqbhzXvC[dBoCh@mDzAc@`E{FhEJf@_AtB{@bATx@{@p@mChAM|BiCdCe@fCoBhIcCdFzBpCXQ|EwBxDBtF_AtG@|DrChDr@hBv@AjCxBlDnArAxEbEbGtJjC~AzBlFhBpEzDv@|DfCjEdG\\tEdClE|DtB?fExAvJC`J|@pIrBvI}@vO@q@oBVcB`@G",
    "pointCount": 50,
    "start": [
@@ -266,7 +244,7 @@
    ]
   },
   {
-   "id": "大阪府:12",
+   "id": "大阪府:10",
    "name": "豊中亀岡線",
    "ref": "43",
    "highway": "primary",
@@ -275,6 +253,8 @@
    "flow": 26.5,
    "turnCount": 173,
    "score": 76.4,
+   "baseScore": 76.4,
+   "spotCount": 0,
    "polyline": "ywbtEm|jzXpHq@t@g@j@|AQbC\\d@lAoB^}Cd@YrBpCt@wAVNNlGhAwBl@Wt@|BKxAtCvAjAdDzBdDF`Cy@rA?lAtFn@xDlB|EzGb@dGbBdC\\pD~CtGr@|DKxGdAdBnIzBzFrFnCOpRzJvD@rBfJlCnBrA|BrAn@ZbCtAp@fHbAtCzD~FhDvHrGpEEvFhCrCg@x@XtHdLfAvDlCdAz@pC|BxBcCpHYvGqBdEEbJiClGf@vDc@|@DlHa@hCpA|En@X|BeAzAx@vF}@hFj@zEtCn@jCdBzBNnDxGdHhCdBfG`AhJnOxF|A|BrBdCfElGbAnE`Cl@xACpETb@~CW|AX",
    "pointCount": 90,
    "start": [
@@ -287,7 +267,7 @@
    ]
   },
   {
-   "id": "大阪府:13",
+   "id": "大阪府:11",
    "name": "茨木摂津線",
    "ref": "1",
    "highway": "primary",
@@ -296,6 +276,8 @@
    "flow": 28.2,
    "turnCount": 191,
    "score": 75,
+   "baseScore": 75,
+   "spotCount": 0,
    "polyline": "q||sEqzjzX_CZqAhDqHb@Ib@X\\fDIIfCVT~Du@^x@cD~DaFvCWhAgAp@DrByBb@g@bAUnEVb@hBH`Aa@z@jAjBFl@m@f@d@@t@cB~DNrBwEfCsCLkAzIkJdBUvC{@nAgEaA_BVmBnCi@jC{@x@eBhF{@n@mAtGbHkD~DZrBz@pASp@aDrDKPoCv@eC`@Hv@bCtA~@rCsBzCj@rCOzCkCr@\\rA`Dn@RhNn@hLeC|FrB|@?lZyKtCeIbLU|@fGp@ZbFDp@jA?hChC~AzAtCnG`SpIvh@vH{@jHyI\\oB_@iBdCoCx@OzDbFnCnHl@hDx@X~@[vIbVbI`OrG~FjGjDnKvCxD\\fl@dAxFm@BTjDcBbQaS~DgCbMkCfJI",
    "pointCount": 102,
    "start": [
@@ -308,7 +290,7 @@
    ]
   },
   {
-   "id": "大阪府:14",
+   "id": "大阪府:12",
    "name": "河内長野千早城跡線",
    "ref": "214",
    "highway": "secondary",
@@ -317,6 +299,8 @@
    "flow": 24.9,
    "turnCount": 95,
    "score": 74.3,
+   "baseScore": 74.3,
+   "spotCount": 0,
    "polyline": "i`eqEgzmzXpGhAx@cDrDiDPgB[wBl@_DjB]dCpAtAA|AuFbBwAj@yFdBwF{BaGUqBb@aFjBkExBc@hAcAWeGlBaBfCkEvBkPFyCd@cABqCh@{AC}BxB}D@aFfByCzCqAlM_Rw@yAB_Jt@mFJiFpAeFnB{DWiB@qIn@a@dAqCtCkCr@iFo@{D\\_ASkBl@qAjAsIzBiF",
    "pointCount": 52,
    "start": [
@@ -329,7 +313,7 @@
    ]
   },
   {
-   "id": "大阪府:15",
+   "id": "大阪府:13",
    "name": "国道308号",
    "ref": "308",
    "highway": "trunk",
@@ -338,6 +322,8 @@
    "flow": 25.3,
    "turnCount": 70,
    "score": 74.3,
+   "baseScore": 74.3,
+   "spotCount": 0,
    "polyline": "stqrE{ea{Xg@rDaCjEw@rGoDrGEh@bA|AA|C{@z@_@rCsAnA}A@?`AaA\\k@`AEpAhBbCRpBiC|BaA`Gy@|Bw@\\eB|FgC`KCbB_ErJM~Cr@jBNpBUtHZ`C_@bKb@~KcEnMX~F",
    "pointCount": 35,
    "start": [
@@ -350,7 +336,7 @@
    ]
   },
   {
-   "id": "大阪府:16",
+   "id": "大阪府:14",
    "name": "市道九条梅田線",
    "ref": "",
    "highway": "primary",
@@ -359,6 +345,8 @@
    "flow": 32.8,
    "turnCount": 84,
    "score": 72.4,
+   "baseScore": 72.4,
+   "spotCount": 0,
    "polyline": "egxrEml|yXjGbMFzHi@xUVbHjIlV`CfElCxApANtNa@vj@_JJYqD~As^bFsUvA_FiB}AcBoCcKyFmNr@}g@oGaLeDeMe@wOp@iR{LgUA`@rHlM",
    "pointCount": 27,
    "start": [
@@ -371,7 +359,7 @@
    ]
   },
   {
-   "id": "大阪府:17",
+   "id": "大阪府:15",
    "name": "大阪高槻京都線",
    "ref": "14;102;134",
    "highway": "primary",
@@ -380,6 +368,8 @@
    "flow": 47.8,
    "turnCount": 47,
    "score": 71.9,
+   "baseScore": 71.9,
+   "spotCount": 0,
    "polyline": "_{wrE{~azXZ?oa@n@_\\Wgq@dAsFC{FeBec@xKe@WXt@J]|b@yKjGpA~KRbd@y@td@Da@H",
    "pointCount": 17,
    "start": [
@@ -392,7 +382,7 @@
    ]
   },
   {
-   "id": "大阪府:18",
+   "id": "大阪府:16",
    "name": "富田林五条線",
    "ref": "705",
    "highway": "secondary",
@@ -401,6 +391,8 @@
    "flow": 23.8,
    "turnCount": 200,
    "score": 71.2,
+   "baseScore": 71.2,
+   "spotCount": 0,
    "polyline": "aylqEopwzXzTs@`J{AfLSpEyB`DeDbHUfKxDrHzEbDf@fBhAfESpBrBdDHt@jAlAVlAnAhCXjC~EfE`DtCDfF`Ab@f@|E^vHgFzFWxD_G~OyIbSiWpBuEdBeBlA}J~AoCzCG|@w@bAiDdDuBtEe@t@y@\\mCbAaB@_ElFkAX}BpCsCbBq@pCKxDcBtA}GlCBlAe@|BoB\\mCzFl@hD]dA_ABkBXYbLn@`Bv@fA]~AdAbB{BfAeGl@ChHxCxB`CrFBTcCU{B`AiGDoDfBuAUsB~@{DkAcHZqAzA}@b@_Jt@]~FbDtAaGnGoGfBe@zJDrC{BCcCr@qAv@iE|@c@nB@NaDv@_AzD@t@iFhCmCn@oGpCuDvAwHbDoJnCkMdA{AxATzAyC",
    "pointCount": 104,
    "start": [
@@ -413,7 +405,7 @@
    ]
   },
   {
-   "id": "大阪府:19",
+   "id": "大阪府:17",
    "name": "萩谷西五百住線",
    "ref": "115",
    "highway": "secondary",
@@ -422,6 +414,8 @@
    "flow": 24,
    "turnCount": 120,
    "score": 69.9,
+   "baseScore": 69.9,
+   "spotCount": 0,
    "polyline": "yxusEcuqzXqEzDuJrMgDbAiFVsNzGgF|@gCpAcHt@iFxE_GHuK`BaCdAwCUgCrAwC`@_KnFaDwBgB~A}FsB{H`@iDbB{D|EsALy@m@gBCgBkAuADmBrAaC]yAv@Y~@VhE|CpHLxAsDpY{FrEaA~AcCrAwDfGiGs@L}Ba@kA{CyBgBa@_BkB]u@KmC}B_D}Am@YsBqCyA{Co@yAyDoBoA{@Bm@`AwCo@qAt@{D}@iFKiGiA{A}AwBBaBgBiE}Aw@uAsCuA",
    "pointCount": 68,
    "start": [
@@ -434,7 +428,7 @@
    ]
   },
   {
-   "id": "大阪府:20",
+   "id": "大阪府:18",
    "name": "勝山通",
    "ref": "173",
    "highway": "primary",
@@ -443,6 +437,8 @@
    "flow": 39.1,
    "turnCount": 34,
    "score": 69.4,
+   "baseScore": 69.4,
+   "spotCount": 0,
    "polyline": "y}orEqhczXnA{BF}BnCkPvE_UpA}LpA{v@fBmZh@wwA",
    "pointCount": 9,
    "start": [
@@ -455,7 +451,7 @@
    ]
   },
   {
-   "id": "大阪府:21",
+   "id": "大阪府:19",
    "name": "竹内河南線",
    "ref": "704",
    "highway": "secondary",
@@ -464,6 +460,8 @@
    "flow": 23.3,
    "turnCount": 65,
    "score": 69.1,
+   "baseScore": 69.1,
+   "spotCount": 0,
    "polyline": "ippqE}|_{XrB|@`@zGo@pFRtJmApHhAxE`AvAFlDjBtIlBb@fGbL@rDzAdCMpGnBpCYrEr@xEEv@}BdDErDa@pA{A|AkBfI`A`DsAvFBtGwFrBgBpCxBfKw@bHnCnBX|L",
    "pointCount": 33,
    "start": [
@@ -476,7 +474,7 @@
    ]
   },
   {
-   "id": "大阪府:22",
+   "id": "大阪府:20",
    "name": "能勢猪名川線",
    "ref": "603",
    "highway": "secondary",
@@ -485,6 +483,8 @@
    "flow": 24.3,
    "turnCount": 82,
    "score": 68.8,
+   "baseScore": 68.8,
+   "spotCount": 0,
    "polyline": "exltEctjyXpDlBxJg@zBuCtIeCnHcH~Bw@fHPhFrApB~AdD|@pKuDfCjBrB^jDoApAfBRbBqD~Bm@rAf@l@rCGdK}GzQu@zGR`TaIdBjBpD`KL`E^VlBYv@b@]pDxC|A^nBhBzCEr@mCbA}@dEaClAKr@~@h@~BUnAnEhBhBbDvAbFzF",
    "pointCount": 46,
    "start": [
@@ -497,7 +497,7 @@
    ]
   },
   {
-   "id": "大阪府:23",
+   "id": "大阪府:21",
    "name": "城北公園通",
    "ref": "",
    "highway": "primary",
@@ -506,6 +506,8 @@
    "flow": 30,
    "turnCount": 44,
    "score": 68.5,
+   "baseScore": 68.5,
+   "spotCount": 0,
    "polyline": "{~zrEgy_zX_@cGcFe`@[wERgSqAcJL]{@cIoIkZfEnLjE|XhAtK]rSrEj\\z@xL\\z@",
    "pointCount": 16,
    "start": [
@@ -518,7 +520,7 @@
    ]
   },
   {
-   "id": "大阪府:24",
+   "id": "大阪府:22",
    "name": "加賀田片添線",
    "ref": "221",
    "highway": "secondary",
@@ -527,6 +529,8 @@
    "flow": 22.2,
    "turnCount": 102,
    "score": 67.9,
+   "baseScore": 67.9,
+   "spotCount": 0,
    "polyline": "}ndqEajmzXJdFnCMfIv@dJxDjFx@|FlFjR`DrDc@`JlA~FsDjAeCdC_@hNoInDeA~AAlI~@`BsApD[tDbDfHvB`@xCp@r@zBVv@l@jG`@n@|@FxDrBpAxBrClAU`A{AfDxDtD|AtGyB~DbCpCeA~C~ClGbBnAxCb@NxFaAjEb@d@}AdGuEpG}BfEk@jCqA",
    "pointCount": 48,
    "start": [
@@ -539,7 +543,7 @@
    ]
   },
   {
-   "id": "大阪府:25",
+   "id": "大阪府:23",
    "name": "八尾茨木線",
    "ref": "15",
    "highway": "primary",
@@ -548,6 +552,8 @@
    "flow": 27.4,
    "turnCount": 64,
    "score": 67.5,
+   "baseScore": 67.5,
+   "spotCount": 0,
    "polyline": "wrsrEgipzXkFg@qHbIuGzD_KWqVjEmZ{EuExKaa@gOi@k@e@Pj@jBeAnAuE_HeDxBoB]mFkDsDmEeC~BwBB{FqF_EImB{A_CFmDgBgMTsAu@{CVwAp@iBiBeF}B}@_CcB_BkAcFu@i@",
    "pointCount": 35,
    "start": [
@@ -560,7 +566,7 @@
    ]
   },
   {
-   "id": "大阪府:26",
+   "id": "大阪府:24",
    "name": "伏見柳谷高槻線",
    "ref": "79",
    "highway": "primary",
@@ -569,6 +575,8 @@
    "flow": 24,
    "turnCount": 109,
    "score": 67.4,
+   "baseScore": 67.4,
+   "spotCount": 0,
    "polyline": "{dwsE}hxzXeCcM{M[uBgB_O{DoA}EaHp@{CdB_DzI_JbIgGxB{Eh@?xHaBbC_NbEs@_@wEgJc@CyC|CcEbC_Gx@uCbEuDzB{BzFgB|@eBzBk@WgBaKoBeAwGWy@{AEsEcAmA_H~@qDkBwGdBwF}@{DhAmKh@sCZkCdAoCBkAm@yF_@sI}DoAt@kABiBpB{Ay@_DiIoKt@qDmDi@cBgC~Bs@?",
    "pointCount": 55,
    "start": [
@@ -581,7 +589,7 @@
    ]
   },
   {
-   "id": "大阪府:27",
+   "id": "大阪府:25",
    "name": "国道310号",
    "ref": "310",
    "highway": "trunk",
@@ -590,6 +598,8 @@
    "flow": 24.2,
    "turnCount": 259,
    "score": 67.1,
+   "baseScore": 67.1,
+   "spotCount": 0,
    "polyline": "suiqEqdmzX|y@eIbDqK?sAiAoAoI_ENmCxHn@fAyA`AJ|E{AhAwB|EyB`A{B`C{Bx@uCdC}AbF}HzDqA~CoUlBmDfCuK`KoDhFZdCaAn@iIqAyEYaE^kKdB}KfAkCtHaFVsFsAiFv@}BrCoB`DCf@yCnAoBI{DtA_DfA_AfCa@dD{GbCo@zBDf@uDtAuA|EUjB_DtJcD`IaGhAW|Bf@pAc@jCsCzAkDbAeGxD}EzCz@rC[`@iAUmF`@aC~BEvBiC`E{KnB}C~@aFjB_D\\aFlDaFtBsHlCiA}@{EDwEX{@lAQlClAfCm@lHFlIkCpBmBtEtAjCRdCpChCi@|CHxCwBbBNrFoAlBqF|EqA|AtAt@E`CkCfA}BrHgGpBi@rBqJlBoFtBwBvDcIr@_FKiDVqDzDoKbAqAfFyBlAcBbCkA[_@yG~AsA}Ay@R]hA]IAe@|AcBnBpAnBm@bC{FvABv@_AOaIr@gBi@yE|@ArB~BdAe@bAoEe@oBl@{AU_BrAu@~FcT",
    "pointCount": 136,
    "start": [
@@ -602,7 +612,7 @@
    ]
   },
   {
-   "id": "大阪府:28",
+   "id": "大阪府:26",
    "name": "吹田箕面線",
    "ref": "121",
    "highway": "secondary",
@@ -611,6 +621,8 @@
    "flow": 25.3,
    "turnCount": 47,
    "score": 66.8,
+   "baseScore": 66.8,
+   "spotCount": 0,
    "polyline": "}ydsEsqazXiL~CeCKaEoAmCVeB|AyDzGoBvAgCp@eHv@oJPyS}@oBf@m@pA_Ez@q@UsBrB_En@sGc@_@`@SnHYZyE?}I_Bc@k@_@uEi@Ya@_CeAkBoCkCeJsF",
    "pointCount": 31,
    "start": [
@@ -623,7 +635,7 @@
    ]
   },
   {
-   "id": "大阪府:29",
+   "id": "大阪府:27",
    "name": "父鬼和気線",
    "ref": "226",
    "highway": "secondary",
@@ -632,6 +644,8 @@
    "flow": 22.3,
    "turnCount": 115,
    "score": 65.2,
+   "baseScore": 65.2,
+   "spotCount": 0,
    "polyline": "yadqEq|vyXnAE|n@oYjZ{ApMJjD}@tEOvDx@zFQzKrGlUvDhJYbAo@jAAjBvBxFhBxBvB~CDrC}DtBkAbOqCtBaAvA}B`D~Ap@WbCsFLgC`Cu@dAyC]aCv@uFO_EZwDhAuBO{ARi@fD{@|@t@vAAj@lAbDx@xFwB~J~@nDk@hGaKlG}AlDmDlCZ`Az@dFe@hGp@vE{@zC`BnDyAvAX^W",
    "pointCount": 56,
    "start": [
@@ -644,7 +658,7 @@
    ]
   },
   {
-   "id": "大阪府:30",
+   "id": "大阪府:28",
    "name": "勝山通",
    "ref": "173",
    "highway": "primary",
@@ -653,6 +667,8 @@
    "flow": 34.8,
    "turnCount": 32,
    "score": 63.9,
+   "baseScore": 63.9,
+   "spotCount": 0,
    "polyline": "y_prE}qbzXbAgVz@aChAaJpH{[lAeKBuRbAea@zBqa@f@owA",
    "pointCount": 10,
    "start": [
@@ -665,7 +681,7 @@
    ]
   },
   {
-   "id": "大阪府:31",
+   "id": "大阪府:29",
    "name": "岸和田牛滝山貝塚線",
    "ref": "40",
    "highway": "primary",
@@ -674,6 +690,8 @@
    "flow": 20.6,
    "turnCount": 143,
    "score": 63.6,
+   "baseScore": 63.6,
+   "spotCount": 0,
    "polyline": "qbypEi`ryXe@nA^jAhDfAbEFvBlCyA~JHvLr@zGnBhF|BvApBYzDpAtCyE~@[X`@kC`JaCzDWnEy@vAXbDc@vWqEzEuClAm@`CeBDo@hAMvEfDfA\\|@QlJk@tAsCnEsA~@_AEaB_Bu@mBkC]eCZyJ[uGcFkClC{FTgCqAaByCuCKyBuDoCYwA\\uCbFSjB~DrDj@nAFxA}K|RuBfImAd@}GeAiBhB}F|KkCIaEbAqAvEqGbKo@bDqGpQmIw@cCLwCxAcIhH",
    "pointCount": 70,
    "start": [
@@ -686,7 +704,7 @@
    ]
   },
   {
-   "id": "大阪府:32",
+   "id": "大阪府:30",
    "name": "富田林泉大津線",
    "ref": "38",
    "highway": "primary",
@@ -695,6 +713,8 @@
    "flow": 33.2,
    "turnCount": 29,
    "score": 63.5,
+   "baseScore": 63.5,
+   "spotCount": 0,
    "polyline": "m{lqEsbuyXeCcEj@gZwAgQbEyf@eF{Nd@gQScGp@uEfLfAJ}CjGaKIaLtAoBk@cBnGoEoGnE",
    "pointCount": 17,
    "start": [
@@ -707,7 +727,7 @@
    ]
   },
   {
-   "id": "大阪府:33",
+   "id": "大阪府:31",
    "name": "南港通",
    "ref": "42",
    "highway": "primary",
@@ -716,6 +736,8 @@
    "flow": 30.8,
    "turnCount": 33,
    "score": 62.4,
+   "baseScore": 62.4,
+   "spotCount": 0,
    "polyline": "a}hrEsmfzX~AonDk@loA",
    "pointCount": 3,
    "start": [
@@ -728,7 +750,7 @@
    ]
   },
   {
-   "id": "大阪府:34",
+   "id": "大阪府:32",
    "name": "泉佐野打田線",
    "ref": "62",
    "highway": "primary",
@@ -737,6 +759,8 @@
    "flow": 31,
    "turnCount": 26,
    "score": 61.9,
+   "baseScore": 61.9,
+   "spotCount": 0,
    "polyline": "cr|pEe}ayXoa@rKwJVWpEsBzKkHrDwLpR{H}G@e@X^qKnQyErLmHhE}HfO",
    "pointCount": 14,
    "start": [
@@ -749,7 +773,7 @@
    ]
   },
   {
-   "id": "大阪府:35",
+   "id": "大阪府:33",
    "name": "大阪高石線",
    "ref": "28",
    "highway": "primary",
@@ -758,6 +782,8 @@
    "flow": 28.3,
    "turnCount": 42,
    "score": 61.7,
+   "baseScore": 61.7,
+   "spotCount": 0,
    "polyline": "of|qE{a_zXdIcDlNjGbIbH|@bHfA~@nBhGjK}BtAdGzC|H|BTtBzEzDt@J|BtBxBRjAlCQ~H{BpHa@fO{DzL_@@~UyFfj@kK~_@FxB~@|Ah@vC",
    "pointCount": 27,
    "start": [
@@ -770,7 +796,7 @@
    ]
   },
   {
-   "id": "大阪府:36",
+   "id": "大阪府:34",
    "name": "土佐堀通",
    "ref": "168",
    "highway": "tertiary",
@@ -779,6 +805,8 @@
    "flow": 28.6,
    "turnCount": 39,
    "score": 61.1,
+   "baseScore": 61.1,
+   "spotCount": 0,
    "polyline": "czvrEmb_zX`G`J|HnJ|CdCfFfQ\\HrK~Yk@c@sHsSmGeTeWg[y@wUvByb@d@sFtCqL`D{GPyQrAcXU{EcIiW",
    "pointCount": 20,
    "start": [
@@ -791,7 +819,7 @@
    ]
   },
   {
-   "id": "大阪府:37",
+   "id": "大阪府:35",
    "name": "野間出野一庫線",
    "ref": "604",
    "highway": "secondary",
@@ -800,6 +828,8 @@
    "flow": 19,
    "turnCount": 100,
    "score": 61.1,
+   "baseScore": 61.1,
+   "spotCount": 0,
    "polyline": "{|atEwxpyXuDNkF{BgFa@eBTmBgB{B]iBTwArBy@\\cCEcD}@eCt@oCgCuB_GcMoE{ANyHrFkAPcWmDqAl@oGzKoBPqE}AqA{Au@{BiB}AcAFAcBbBoEu@gEoC}A{DzAcBFm@WMcEoAmCaBa@iCn@aC@_AkBYmGs@}ByB}@oEQoEoI}AkA}@}DAuHjAqLgM_Qw@aN",
    "pointCount": 52,
    "start": [
@@ -812,7 +842,7 @@
    ]
   },
   {
-   "id": "大阪府:38",
+   "id": "大阪府:36",
    "name": "泉佐野打田線",
    "ref": "62",
    "highway": "primary",
@@ -821,6 +851,8 @@
    "flow": 19.5,
    "turnCount": 161,
    "score": 60.9,
+   "baseScore": 60.9,
+   "spotCount": 0,
    "polyline": "e`npEihhyXwKfDsB`HgI|BaAhFk@|@aThBi@AiCkBwBvD}EIi@dDiAh@gCoB{@gCkCZ{@uAKiBuCVkAmAa@BiD~EgA|G{A~AeAMqBqBsGmJqIxGoCe@s@wAIqBu@g@mFfDgA~AmBNoHq@yDcHs@cDoA{@eLfDyJzE[fA@dFgB|HEhB_AzB}EhCcKjCuGrH{CpB}DrIPbBbAnBQ|BwIzNeBtAcDrF_HbGoX`EyG_D_G^aDu@_CFuO`FgAdBWrGoFoA}H`@kHc@oFz@iDSuPl@",
    "pointCount": 72,
    "start": [
@@ -833,7 +865,7 @@
    ]
   },
   {
-   "id": "大阪府:39",
+   "id": "大阪府:37",
    "name": "森屋狭山線",
    "ref": "202",
    "highway": "secondary",
@@ -842,6 +874,8 @@
    "flow": 21.3,
    "turnCount": 59,
    "score": 60.5,
+   "baseScore": 60.5,
+   "spotCount": 0,
    "polyline": "acmqEo}pzX~CoDRcDdGcIo@iHd@yB?sFfAyBNeBe@uGuCsJp@yHoAwIRkChD{O[cGlA}Dw@iHfDyC|VqFvGu@|@oAeAeLy@s@sCm@o@{BtDaNy@iFE}KgByErDqB",
    "pointCount": 31,
    "start": [
@@ -854,7 +888,7 @@
    ]
   },
   {
-   "id": "大阪府:40",
+   "id": "大阪府:38",
    "name": "美原太子線",
    "ref": "32",
    "highway": "primary",
@@ -863,6 +897,8 @@
    "flow": 23.9,
    "turnCount": 60,
    "score": 60.2,
+   "baseScore": 60.2,
+   "spotCount": 0,
    "polyline": "c_uqEmovzXgMbXyGbEDjRmEKNn`@QdEpCtIDxDIdAeBjD@lDw@pDZpEu@lBeClCq@hHkC`GN~Jg@vBwFtBwAvA}@~DgBr@cBxB{ETC~b@_ArEwExLlBvKCnFiChKoDbATtE",
    "pointCount": 34,
    "start": [
@@ -875,7 +911,7 @@
    ]
   },
   {
-   "id": "大阪府:41",
+   "id": "大阪府:39",
    "name": "今里筋",
    "ref": "173",
    "highway": "primary",
@@ -884,6 +920,8 @@
    "flow": 41.1,
    "turnCount": 24,
    "score": 60.1,
+   "baseScore": 60.1,
+   "spotCount": 0,
    "polyline": "{`rrE_fhzXfO`Bx@OxPbB`ZzATZ`VhAjBj@pb@dEpZtCX[dRhBzDBV\\zMS`K`@x_@A",
    "pointCount": 17,
    "start": [
@@ -896,7 +934,7 @@
    ]
   },
   {
-   "id": "大阪府:42",
+   "id": "大阪府:40",
    "name": "枚方亀岡線",
    "ref": "6",
    "highway": "primary",
@@ -905,6 +943,8 @@
    "flow": 21.2,
    "turnCount": 98,
    "score": 60.1,
+   "baseScore": 60.1,
+   "spotCount": 0,
    "polyline": "}cysEulszXaKu@yUiH}CNcFc@kL~CoBCgFcBqJbCkKjNkA`@iH?s@c@i@kBiAsAmi@_Nue@jA}Fn@gDdBmA_@wCgDiCeBgA?kB~Bq@FyGeCk@L_DvEq@HqCeEqDj@k@[cA{A_AeGaAk@eA~@a@dGs@dAeCE}DcAm@PSbEz@rGm@~AaB[{@uC{BJ}AbBc@~B{ApAq@s@GmFWu@kBqBaDW",
    "pointCount": 55,
    "start": [
@@ -917,28 +957,7 @@
    ]
   },
   {
-   "id": "大阪府:43",
-   "name": "大阪生駒線",
-   "ref": "8",
-   "highway": "primary",
-   "lengthKm": 8.61,
-   "curviness": 313.5,
-   "flow": 20.6,
-   "turnCount": 131,
-   "score": 60,
-   "polyline": "owxrEiv~zXsDjE}ClBiDd@qBYuC{D}ToIwAkAeA{CT}IoA}CsBm@mEt@}EiFsGcDyAeJmCgHUiYwAkLXyClDuJ?eBuBcGn@sCxK_EtK}GtB_Cm@tA{DtCeJrFqHvB_AzABxA`BzDN`BiErOz@`PNjWnCdHlAlIj@x@jGrCdE|E~Eq@jBl@bA`CEdJnBnDlUdJ`CbKwE`PN`B|Dn@bFgCRu@Y{ArAoFh@YdBX`AoANyBd@CWdC{@|BuAL",
-   "pointCount": 65,
-   "start": [
-    34.702157,
-    135.658132
-   ],
-   "end": [
-    34.703566,
-    135.654479
-   ]
-  },
-  {
-   "id": "大阪府:44",
+   "id": "大阪府:41",
    "name": "富田林泉大津線",
    "ref": "28",
    "highway": "primary",
@@ -947,6 +966,8 @@
    "flow": 21.6,
    "turnCount": 98,
    "score": 59.8,
+   "baseScore": 59.8,
+   "spotCount": 0,
    "polyline": "s`mqEwrlzXm@bBhAhGs@~G|Hn\\uBdCeAlF{@A[h@Jt@|D~BjNZnE`AbBrAzGj@~B~FD|FbAbGvEpErEpHDfAo@tBI|J^jDr@bBRrIgAtCwC~AwEdIa@dCcAr@{BKy@vBR~@zDhEbElCtDlAvFfJ~@nKc@dDcAzAuCxAa@|DyBnEoBjH{DtAqHi@uGzAuGtF{IzNiEvDwH|DsGxBsCT}CzCcCpF{F`C",
    "pointCount": 57,
    "start": [
@@ -959,7 +980,7 @@
    ]
   },
   {
-   "id": "大阪府:45",
+   "id": "大阪府:42",
    "name": "都島通",
    "ref": "",
    "highway": "primary",
@@ -968,6 +989,8 @@
    "flow": 31.5,
    "turnCount": 52,
    "score": 59.6,
+   "baseScore": 59.6,
+   "spotCount": 0,
    "polyline": "a~yrEmrczXBb@n@yE}Dif@rBe~@QwDmHeJqUmTyCiFgEiOrE~NvCfFjUdT`I~JqBlgAdDbd@oFdY_HzYPxEvBhEvg@ns@`FjGjBbA",
    "pointCount": 23,
    "start": [
@@ -980,7 +1003,7 @@
    ]
   },
   {
-   "id": "大阪府:46",
+   "id": "大阪府:43",
    "name": "堺かつらぎ線",
    "ref": "61",
    "highway": "primary",
@@ -989,6 +1012,8 @@
    "flow": 36.5,
    "turnCount": 21,
    "score": 59.2,
+   "baseScore": 59.2,
+   "spotCount": 0,
    "polyline": "uluqEq`{yX[?{GpKoEjF_HvBg^xHzCK`[aHrI}E|KcPCc@j_@wl@Z@vJaK",
    "pointCount": 14,
    "start": [
@@ -1001,7 +1026,7 @@
    ]
   },
   {
-   "id": "大阪府:47",
+   "id": "大阪府:44",
    "name": "新なにわ筋; 大阪臨海線",
    "ref": "29",
    "highway": "primary",
@@ -1010,6 +1035,8 @@
    "flow": 29.8,
    "turnCount": 27,
    "score": 59.1,
+   "baseScore": 59.1,
+   "spotCount": 0,
    "polyline": "cmrrE}e}yXsAHtAg@HZjn@o@zMuH|H^|VWpBb@pDhCrBbE`DbKLSeA_EyEqKcFuCeYFyH_@sMdH",
    "pointCount": 19,
    "start": [
@@ -1022,7 +1049,7 @@
    ]
   },
   {
-   "id": "大阪府:48",
+   "id": "大阪府:45",
    "name": "天満橋筋",
    "ref": "",
    "highway": "tertiary",
@@ -1031,6 +1058,8 @@
    "flow": 33.6,
    "turnCount": 24,
    "score": 58.9,
+   "baseScore": 58.9,
+   "spotCount": 0,
    "polyline": "cxwrEijczXqXkAsZ~KgSbCul@wE[Rfe@~D|I]T^nPmBhYyKjYZ",
    "pointCount": 12,
    "start": [
@@ -1043,7 +1072,7 @@
    ]
   },
   {
-   "id": "大阪府:49",
+   "id": "大阪府:46",
    "name": "市道赤川天王寺線",
    "ref": "",
    "highway": "primary",
@@ -1052,6 +1081,8 @@
    "flow": 30.4,
    "turnCount": 40,
    "score": 58.7,
+   "baseScore": 58.7,
+   "spotCount": 0,
    "polyline": "uzxrEsjezXb@Q}KrBcFpGeRtBee@}[{cAqExbAbEpf@z\\bR}C~C_FlBiA|Q_CbBZrQhL",
    "pointCount": 15,
    "start": [
@@ -1064,7 +1095,7 @@
    ]
   },
   {
-   "id": "大阪府:50",
+   "id": "大阪府:47",
    "name": "国道25号",
    "ref": "25;165;170",
    "highway": "trunk",
@@ -1073,6 +1104,8 @@
    "flow": 41.1,
    "turnCount": 46,
    "score": 58.5,
+   "baseScore": 58.5,
+   "spotCount": 0,
    "polyline": "}rirEewkzXcAf\\uEvHgB~FiB~CijAxlBoCfP__@`oArFmSlBoEjR{n@`EoU^Gf^kn@ZAnJaQ\\CnGmKnBkEn@[",
    "pointCount": 20,
    "start": [
@@ -1085,7 +1118,7 @@
    ]
   },
   {
-   "id": "大阪府:51",
+   "id": "大阪府:48",
    "name": "堺泉北環状線",
    "ref": "208",
    "highway": "secondary",
@@ -1094,6 +1127,8 @@
    "flow": 28.9,
    "turnCount": 21,
    "score": 58.3,
+   "baseScore": 58.3,
+   "spotCount": 0,
    "polyline": "ghjqEca}yXiFfAeEdD{Sbl@}E`G{MpKzMqKhEaGbTol@hEiDpFw@{CqS",
    "pointCount": 12,
    "start": [
@@ -1106,7 +1141,7 @@
    ]
   },
   {
-   "id": "大阪府:52",
+   "id": "大阪府:49",
    "name": "岸和田港塔原線",
    "ref": "39",
    "highway": "primary",
@@ -1115,6 +1150,8 @@
    "flow": 20.1,
    "turnCount": 108,
    "score": 58,
+   "baseScore": 58,
+   "spotCount": 0,
    "polyline": "afbqEkinyXrD_AlCDnJiEbCkBpK^dGrD`EN|B`AjBH|GqAjChAjBJv@m@D}L~ByCvDLpAbFxC|AjQkEj@uAf@oJjCiKdFkIx@{CFeLdAsHSyAeA}AY}D|@w@`FpAjAk@pLmOpHaH~@Tt@~ChAdAdJrB|Aw@tBxBlBv@dDa@|CLbCu@~JrBnDF|BcD|DsCjE]zUsHzHJfLjD~E_@rEcBnFEh@yChEcD",
    "pointCount": 58,
    "start": [
@@ -1127,7 +1164,7 @@
    ]
   },
   {
-   "id": "大阪府:53",
+   "id": "大阪府:50",
    "name": "余野茨木線",
    "ref": "110",
    "highway": "secondary",
@@ -1136,6 +1173,8 @@
    "flow": 20.6,
    "turnCount": 52,
    "score": 57.9,
+   "baseScore": 57.9,
+   "spotCount": 0,
    "polyline": "oqxsEumfzXmA}IPaDrI}JbDgAZ{AxEqD@iByAuAk@qC?kBb@uAdI_@vDzA`F@nAcAr@oCQaG^eA`CoAdHr@hE]fJkHdLoOd@iCxAObCwC|j@}LdGiC",
    "pointCount": 29,
    "start": [
@@ -1148,7 +1187,7 @@
    ]
   },
   {
-   "id": "大阪府:54",
+   "id": "大阪府:51",
    "name": "高田久々知線",
    "ref": "338",
    "highway": "secondary",
@@ -1157,6 +1196,8 @@
    "flow": 43,
    "turnCount": 12,
    "score": 56.8,
+   "baseScore": 56.8,
+   "spotCount": 0,
    "polyline": "cw`sEezvyXs@dmAXe|@t@wp@[v_@",
    "pointCount": 5,
    "start": [
@@ -1169,7 +1210,7 @@
    ]
   },
   {
-   "id": "大阪府:55",
+   "id": "大阪府:52",
    "name": "和歌山貝塚線",
    "ref": "64",
    "highway": "primary",
@@ -1178,6 +1219,8 @@
    "flow": 19.6,
    "turnCount": 58,
    "score": 56.7,
+   "baseScore": 56.7,
+   "spotCount": 0,
    "polyline": "strpEykqxXnBlChDyCzIc@`CmJ`FyEzLcEpDwGjLqHzESjCaDtAgElG}CdANbC|BpGlArN`HtFw@xMRd@U@sAl@g@~GzAvHmB~Wr@",
    "pointCount": 25,
    "start": [
@@ -1190,7 +1233,7 @@
    ]
   },
   {
-   "id": "大阪府:56",
+   "id": "大阪府:53",
    "name": "国道479号",
    "ref": "479",
    "highway": "trunk",
@@ -1199,6 +1242,8 @@
    "flow": 32,
    "turnCount": 29,
    "score": 56.7,
+   "baseScore": 56.7,
+   "spotCount": 0,
    "polyline": "qanrEgkjzXrELN\\p[rDjc@`ShIfAv^tAfVST`@fq@s@l[XtBk@",
    "pointCount": 12,
    "start": [
@@ -1211,7 +1256,7 @@
    ]
   },
   {
-   "id": "大阪府:57",
+   "id": "大阪府:54",
    "name": "国道2号",
    "ref": "2",
    "highway": "trunk",
@@ -1220,6 +1265,8 @@
    "flow": 33.8,
    "turnCount": 53,
    "score": 56.3,
+   "baseScore": 56.3,
+   "spotCount": 0,
    "polyline": "mkwrEa`}yX~FtRg@jd@PzBx@bBe@CaD~FmXn\\ij@hd@iDtDyXbj@D`@cPf\\wEdMsE`GwJfHwIlJ_ApC_@jDOzX?_ZzAuGfCsDhPmM~GcIdIgTxd@a`AxCmDrDcC",
    "pointCount": 29,
    "start": [
@@ -1232,7 +1279,7 @@
    ]
   },
   {
-   "id": "大阪府:58",
+   "id": "大阪府:55",
    "name": "谷町筋",
    "ref": "30",
    "highway": "primary",
@@ -1241,6 +1288,8 @@
    "flow": 40.6,
    "turnCount": 15,
    "score": 56.2,
+   "baseScore": 56.2,
+   "spotCount": 0,
    "polyline": "}`prEaqbzXb@[bIz@`KDfPY`WbCdBt@mZwCuFZqTGcI{@[g@_u@kHxHn@",
    "pointCount": 14,
    "start": [
@@ -1253,7 +1302,7 @@
    ]
   },
   {
-   "id": "大阪府:59",
+   "id": "大阪府:56",
    "name": "枚方富田林泉佐野線",
    "ref": "20",
    "highway": "primary",
@@ -1262,6 +1311,8 @@
    "flow": 21.4,
    "turnCount": 90,
    "score": 55.8,
+   "baseScore": 55.8,
+   "spotCount": 0,
    "polyline": "onfqEwbjzXvLdS`B|D~MzG`E~D`AjErMzKjAtB?nB~@fEpC~GUj@{DzBaBnCsAjFAlEXdAx\\tK~@nCrBpAOhEnApBnA`@xGAxA]dC|Bd@`DWvK|AvI~GjHpCnFLzAa@rGz@fEpBnBGfCgDhFYpHqBfGeBnJaEzHiCzA}AzFExBeB`@yBnDo@rFs@jSXbF?bN^fDoGf[cBhFeF`KzE|@hNbGjD_@`F^",
    "pointCount": 58,
    "start": [
@@ -1274,7 +1325,7 @@
    ]
   },
   {
-   "id": "大阪府:60",
+   "id": "大阪府:57",
    "name": "木ノ本岬線",
    "ref": "751",
    "highway": "secondary",
@@ -1283,6 +1334,8 @@
    "flow": 16.8,
    "turnCount": 80,
    "score": 55.6,
+   "baseScore": 55.6,
+   "spotCount": 0,
    "polyline": "cgmpE{|vwXbEhDtDbAlBGpEmBtAmAtAwDlD{AvImMtD_ChHoMtAeG~@sAfDaBvM_@dD`@z@u@jAmErGg@|Bx@tEPdGsBxEp@hCpAxB{@`Gc@xCnAlB|CzEDbBhAjAxAx@xEdAtAjCLjDgClA?zOzHjJrBfBlDJ~B",
    "pointCount": 40,
    "start": [
@@ -1295,7 +1348,7 @@
    ]
   },
   {
-   "id": "大阪府:61",
+   "id": "大阪府:58",
    "name": "深井畑山宿院線",
    "ref": "197",
    "highway": "secondary",
@@ -1304,6 +1357,8 @@
    "flow": 24.3,
    "turnCount": 35,
    "score": 55.6,
+   "baseScore": 55.6,
+   "spotCount": 0,
    "polyline": "ca}qE_`}yXpKqN|DwDjFiSt@o@xHqAfHwEt^sh@nC}BvBOlHtCpVfCvAOlNeMhM}StC]j@g@j@cAE_JrLRz@a@r@nBlAc@jKxAdDdE",
    "pointCount": 25,
    "start": [
@@ -1316,7 +1371,7 @@
    ]
   },
   {
-   "id": "大阪府:62",
+   "id": "大阪府:59",
    "name": "尼崎平野線",
    "ref": "",
    "highway": "tertiary",
@@ -1325,6 +1380,8 @@
    "flow": 28.3,
    "turnCount": 15,
    "score": 55.4,
+   "baseScore": 55.4,
+   "spotCount": 0,
    "polyline": "sknrEqp`zXh@c@b@kCnLi{@zGi`@cMt{@eC|JoEnYJzA",
    "pointCount": 9,
    "start": [
@@ -1337,7 +1394,7 @@
    ]
   },
   {
-   "id": "大阪府:63",
+   "id": "大阪府:60",
    "name": "八尾茨木線",
    "ref": "15",
    "highway": "primary",
@@ -1346,6 +1403,8 @@
    "flow": 24.8,
    "turnCount": 35,
    "score": 54.6,
+   "baseScore": 54.6,
+   "spotCount": 0,
    "polyline": "slpsEypnzXuCC{CnGkDhEvDcEzDqGvi@h@h@bAOhHvPLzIrFxOiArg@d@vK}EnWYfXuVz@e@dHm@lAo@bAeB",
    "pointCount": 20,
    "start": [
@@ -1358,7 +1417,7 @@
    ]
   },
   {
-   "id": "大阪府:64",
+   "id": "大阪府:61",
    "name": "国道308号",
    "ref": "308",
    "highway": "trunk",
@@ -1367,6 +1426,8 @@
    "flow": 48.8,
    "turnCount": 13,
    "score": 54.1,
+   "baseScore": 54.1,
+   "spotCount": 0,
    "polyline": "octrE_ilzXm@hMXpB_AnQdaA`FubAuE~@yO|@mD",
    "pointCount": 8,
    "start": [
@@ -1379,7 +1440,7 @@
    ]
   },
   {
-   "id": "大阪府:65",
+   "id": "大阪府:62",
    "name": "南千里茨木停車場線",
    "ref": "129",
    "highway": "secondary",
@@ -1388,6 +1449,8 @@
    "flow": 20.5,
    "turnCount": 51,
    "score": 54.1,
+   "baseScore": 54.1,
+   "spotCount": 0,
    "polyline": "}tmsEw{czXy@fCEnEcA`E`E|FvHlHfCl@lNx@vI]~DVvDvApOdMpFfClGh@jN[yMt@cIu@yEaCiOgMuDuA{DYqJZwPoAyBwAeLqMcAMsC|@_DcDk@sA_@kM",
    "pointCount": 30,
    "start": [
@@ -1400,7 +1463,7 @@
    ]
   },
   {
-   "id": "大阪府:66",
+   "id": "大阪府:63",
    "name": "堺狭山線",
    "ref": "34",
    "highway": "primary",
@@ -1409,6 +1472,8 @@
    "flow": 26.6,
    "turnCount": 24,
    "score": 54,
+   "baseScore": 54,
+   "spotCount": 0,
    "polyline": "q~pqEqvhzXwAvDcKlPs@lDKvD\\rAIdFlAr\\hNl{@iNm{@Ps@uAeb@[}@nAiJdKoPbAgE",
    "pointCount": 16,
    "start": [
@@ -1421,7 +1486,7 @@
    ]
   },
   {
-   "id": "大阪府:67",
+   "id": "大阪府:64",
    "name": "淀川通",
    "ref": "16",
    "highway": "tertiary",
@@ -1430,6 +1495,8 @@
    "flow": 35.5,
    "turnCount": 12,
    "score": 53.7,
+   "baseScore": 53.7,
+   "spotCount": 0,
    "polyline": "k`{rE_lyyXuSukAcHaQpGzPlg@rrC",
    "pointCount": 5,
    "start": [
@@ -1442,7 +1509,7 @@
    ]
   },
   {
-   "id": "大阪府:68",
+   "id": "大阪府:65",
    "name": "岸和田牛滝山貝塚線",
    "ref": "40",
    "highway": "primary",
@@ -1451,6 +1518,8 @@
    "flow": 28.2,
    "turnCount": 18,
    "score": 53.5,
+   "baseScore": 53.5,
+   "spotCount": 0,
    "polyline": "wqlqE{lmyXza@uo@`AiFTeSrAaFhc@im@fNsNBa@xKmJxb@aP|PiF",
    "pointCount": 11,
    "start": [
@@ -1463,7 +1532,7 @@
    ]
   },
   {
-   "id": "大阪府:69",
+   "id": "大阪府:66",
    "name": "熊野大阪線",
    "ref": "134",
    "highway": "secondary",
@@ -1472,6 +1541,8 @@
    "flow": 16.6,
    "turnCount": 50,
    "score": 53.5,
+   "baseScore": 53.5,
+   "spotCount": 0,
    "polyline": "}aesE{_~yXeDGcDv@gIbHiBYeD_DeFcBqPWgFkAoEQ{CeBeCaD}BW{H`BqAdA_@fBy@~Uw@x@eLzHyCl@k@dBsK_BiC~A}Cp@a@hA",
    "pointCount": 25,
    "start": [
@@ -1484,7 +1555,7 @@
    ]
   },
   {
-   "id": "大阪府:70",
+   "id": "大阪府:67",
    "name": "岸和田牛滝山貝塚線",
    "ref": "40",
    "highway": "primary",
@@ -1493,6 +1564,8 @@
    "flow": 18,
    "turnCount": 104,
    "score": 53.4,
+   "baseScore": 53.4,
+   "spotCount": 0,
    "polyline": "wlxpEwwuyXkKtDmHiEoBYaDyBuFkB{D_EkB_@kBiD}B[yBwAwJuAaD}B}BPaDfFoJzG{B~E?vMe@dEfApG?bBo@xJcAnBiAlF\\rGSdA_RfPmHtEeCn@cD@kIeFkD|AkCJk@s@k@{Dg@_@iCJk@[k@aB}HQaC_B}EkAyHp@sHjCkDNgHiEyCi@qD\\wRmAqDP_A_@sByCiDcAyM_@_YzCmDeAyAeAiD_@",
    "pointCount": 58,
    "start": [
@@ -1505,7 +1578,7 @@
    ]
   },
   {
-   "id": "大阪府:71",
+   "id": "大阪府:68",
    "name": "鳥飼仁和寺大橋有料道路",
    "ref": "15",
    "highway": "primary",
@@ -1514,6 +1587,8 @@
    "flow": 47.7,
    "turnCount": 9,
    "score": 53.3,
+   "baseScore": 53.3,
+   "spotCount": 0,
    "polyline": "q_fsEsfszX{O~RYC}a@ji@}GpGyGfEbQiM|t@aaA",
    "pointCount": 8,
    "start": [
@@ -1526,7 +1601,7 @@
    ]
   },
   {
-   "id": "大阪府:72",
+   "id": "大阪府:69",
    "name": "和歌山貝塚線",
    "ref": "64",
    "highway": "primary",
@@ -1535,6 +1610,8 @@
    "flow": 21.3,
    "turnCount": 48,
    "score": 53,
+   "baseScore": 53,
+   "spotCount": 0,
    "polyline": "{t}pEqg|xXtNvJzASvDjEjJvQxNbEbMhGpBtBd@WxCfJ`Rld@p@dAbCpAhAxGvCvAXlHrA`HxClJ|HjR\\RrIiB|B^pF~EpDbKhA~A|@hGtEpFpJBfDf@dDrB",
    "pointCount": 30,
    "start": [
@@ -1547,28 +1624,7 @@
    ]
   },
   {
-   "id": "大阪府:73",
-   "name": "信貴生駒スカイライン",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 5.46,
-   "curviness": 243.3,
-   "flow": 16.8,
-   "turnCount": 79,
-   "score": 53,
-   "polyline": "um{rEqla{XNoDr@y@xDdAbDK`FoAtRj@lJoC`WyCdDh@dF|C|Dx@zCa@pHaEfB[lDx@vNx@z@r@bCrFnFjGxGLhBtArBV~JwCnAaAl@iBjA_LdF_CpAcEvFaGlBaGfB_A|Dh@EnC^vA|D`BpCxC`DeBzFAlCh@dLfHlBsA",
-   "pointCount": 42,
-   "start": [
-    34.715952,
-    135.671931
-   ],
-   "end": [
-    34.675068,
-    135.675294
-   ]
-  },
-  {
-   "id": "大阪府:74",
+   "id": "大阪府:70",
    "name": "茨木亀岡線",
    "ref": "46",
    "highway": "primary",
@@ -1577,6 +1633,8 @@
    "flow": 17.6,
    "turnCount": 131,
    "score": 52.4,
+   "baseScore": 52.4,
+   "spotCount": 0,
    "polyline": "gdwsEewlzXwJlE_Dt@yDTcL]sCdAg\\tj@gEfD{DtB}F~AsLHcDd@cFbC}I|GcG`B{@wC}Au@yRjBkDGuEeA_FcDqCqDo@iDPyHq@eCqKoI}FeCwF{@mc@u@{A[gBuAgBoEaFcEsLgCqByBuBs@{L_J}@cB_@aCsBsB_EEoF~A{JCi@hBNnG{@bHqAlAwCOwAaBGoBjAsEnB{Be@uBoB_BmDKcBsDuJhB[m@c@gIw@k@o@j@cAzCg@bGyBzBmFxLiEhCqE|@uDxHsFvBmCdEsCdB",
    "pointCount": 71,
    "start": [
@@ -1589,7 +1647,7 @@
    ]
   },
   {
-   "id": "大阪府:75",
+   "id": "大阪府:71",
    "name": "岬加太港線",
    "ref": "65",
    "highway": "primary",
@@ -1598,6 +1656,8 @@
    "flow": 17.9,
    "turnCount": 76,
    "score": 52.2,
+   "baseScore": 52.2,
+   "spotCount": 0,
    "polyline": "uekpE}gnwXaDgEwDgLkCkMeLqKoIcSuEaFcBc@oBkBQsFoByB{AeIiCoFmIqCkD{CeBiERkJvA_GFuB`CoFj@mFWsANqCvB_GlIsNd@aHsD_K{GeIwCyMP}IcAeIpBkEtGaGl@oCuA_NTsArBuDLiBmEwK",
    "pointCount": 39,
    "start": [
@@ -1610,7 +1670,7 @@
    ]
   },
   {
-   "id": "大阪府:76",
+   "id": "大阪府:72",
    "name": "大阪中央環状線",
    "ref": "2",
    "highway": "primary",
@@ -1619,6 +1679,8 @@
    "flow": 22.4,
    "turnCount": 41,
    "score": 52.2,
+   "baseScore": 52.2,
+   "spotCount": 0,
    "polyline": "geksE_r~yXsFgIeEeE{Es@sBuAaB{Cy@uGkJ}KiFeAqA}AkCmRQ{HcDkJbCug@MuTtAcG~AcCbMeEvLmS|RqJjI_JzLuYNwD}@aG@qFTRYtB",
    "pointCount": 27,
    "start": [
@@ -1631,7 +1693,7 @@
    ]
   },
   {
-   "id": "大阪府:77",
+   "id": "大阪府:73",
    "name": "平野守口線",
    "ref": "159",
    "highway": "secondary",
@@ -1640,6 +1702,8 @@
    "flow": 19.3,
    "turnCount": 53,
    "score": 51.9,
+   "baseScore": 51.9,
+   "spotCount": 0,
    "polyline": "g~urEirlzXsDw@wFd@}ItF}Cd@oGAmAeAeBIeIFwG|AoEXuISpAjNi[cD_VYun@}DgEnBcJ`@cI~EkC[mG}BkEeEyIaDy@j@aSbD{MxP",
    "pointCount": 26,
    "start": [
@@ -1652,7 +1716,7 @@
    ]
   },
   {
-   "id": "大阪府:78",
+   "id": "大阪府:74",
    "name": "大阪高槻京都線",
    "ref": "14",
    "highway": "primary",
@@ -1661,6 +1725,8 @@
    "flow": 21.4,
    "turnCount": 33,
    "score": 51.9,
+   "baseScore": 51.9,
+   "spotCount": 0,
    "polyline": "{~qsE}`xzXmHmHkAyCg@{b@UwDw@uC{FqHuVeUoEwHd@BtBhGtCnDrUvRpDhE~AnHHta@|BjG",
    "pointCount": 17,
    "start": [
@@ -1673,7 +1739,7 @@
    ]
   },
   {
-   "id": "大阪府:79",
+   "id": "大阪府:75",
    "name": "京阪国道",
    "ref": "1;163",
    "highway": "trunk",
@@ -1682,6 +1748,8 @@
    "flow": 30.8,
    "turnCount": 31,
    "score": 51.4,
+   "baseScore": 51.4,
+   "spotCount": 0,
    "polyline": "gzwrEqpdzXBo@YOd@cLmOkwAw@ub@a~Aa@s}@_SgO{EmLwMiC_EiAiDgRmYwWi]uFwI",
    "pointCount": 15,
    "start": [
@@ -1694,7 +1762,7 @@
    ]
   },
   {
-   "id": "大阪府:80",
+   "id": "大阪府:76",
    "name": "国道423号",
    "ref": "423",
    "highway": "trunk",
@@ -1703,6 +1771,8 @@
    "flow": 18.6,
    "turnCount": 159,
    "score": 51.2,
+   "baseScore": 51.2,
+   "spotCount": 0,
    "polyline": "cyvsEkqtyXgFyCyHMoAgIwBkE{TmE{@^{@xEn@xEhBtCF|@y@`CkD`@}@eC_CeAgCaFKqBqC{AQi@`@iGsDmFk@uCiAa@kHhCq@OgHmHuBo@gGBuCw@sBf@]sDzAcMW}C_AyBwC}ByGU}@e@gLoPyCwBkI[oE}CmFyAoDwHDuIcEgFwDgHwByBwG_BaBgA_JoKiEyKsCyDsHAkA_AoFiNBqK]mB}@i@_FKqHv@wDeAcCsBaDiJaEiBoHv@eOc@sAe@}A}CuCeDuF}DwDmJsEyG}A_HwHsEwHwC}LyLyLmCsGqEkDYwCvA_FzF{Ev@cF~DsACmCoA}Kq@k@ZmDxGmCpBiD`A",
    "pointCount": 90,
    "start": [
@@ -1715,7 +1785,7 @@
    ]
   },
   {
-   "id": "大阪府:81",
+   "id": "大阪府:77",
    "name": "大阪伊丹線",
    "ref": "41",
    "highway": "primary",
@@ -1724,6 +1794,8 @@
    "flow": 25.6,
    "turnCount": 17,
    "score": 51.1,
+   "baseScore": 51.1,
+   "spotCount": 0,
    "polyline": "yhlrEk|}yXpDe@xP}JZs@VuGWjIiMbIcFjBmyAu@mh@X",
    "pointCount": 10,
    "start": [
@@ -1736,7 +1808,7 @@
    ]
   },
   {
-   "id": "大阪府:82",
+   "id": "大阪府:78",
    "name": "日根野羽倉崎線",
    "ref": "248",
    "highway": "secondary",
@@ -1745,6 +1817,8 @@
    "flow": 23.4,
    "turnCount": 21,
    "score": 50.8,
+   "baseScore": 50.8,
+   "spotCount": 0,
    "polyline": "myxpEabayXeAnDiFlIyF`H~Br@fClB~IlMgArXjBxc@sA\\}JtPsf@l^gA~BmHnX}KbIgDzE",
    "pointCount": 16,
    "start": [
@@ -1757,7 +1831,7 @@
    ]
   },
   {
-   "id": "大阪府:83",
+   "id": "大阪府:79",
    "name": "第二阪和国道",
    "ref": "26",
    "highway": "trunk",
@@ -1766,6 +1840,8 @@
    "flow": 28.7,
    "turnCount": 18,
    "score": 50.5,
+   "baseScore": 50.5,
+   "spotCount": 0,
    "polyline": "c}tqEkiuyXnD~D~Yxh@nGbHdPpNIVZEn`@v\\pDpBlMhDRd@jQtBtG`C|HhFl@?dSlS",
    "pointCount": 16,
    "start": [
@@ -1778,7 +1854,7 @@
    ]
   },
   {
-   "id": "大阪府:84",
+   "id": "大阪府:80",
    "name": "槇尾山仏並線",
    "ref": "228",
    "highway": "secondary",
@@ -1787,6 +1863,8 @@
    "flow": 16.1,
    "turnCount": 56,
    "score": 50.5,
+   "baseScore": 50.5,
+   "spotCount": 0,
    "polyline": "yx|pEo}`zXeCpHr@`Fa@jJoAjAyBvOy@zAeE@yQmEqCLwGzAmDfBaMz@uJnIkFx@aBfB}@hE_A|@_EGaD`DqEpBiLGqHfCwINsBr@iIvGgMfBuBzA",
    "pointCount": 28,
    "start": [
@@ -1799,7 +1877,7 @@
    ]
   },
   {
-   "id": "大阪府:85",
+   "id": "大阪府:81",
    "name": "岸和田牛滝山貝塚線",
    "ref": "40",
    "highway": "primary",
@@ -1808,6 +1886,8 @@
    "flow": 24.8,
    "turnCount": 19,
    "score": 50.2,
+   "baseScore": 50.2,
+   "spotCount": 0,
    "polyline": "cwgqE}asyXem@xT_IfFwRjRwe@zo@}A`GAtRoA`FqObWeQhW",
    "pointCount": 10,
    "start": [
@@ -1820,7 +1900,7 @@
    ]
   },
   {
-   "id": "大阪府:86",
+   "id": "大阪府:82",
    "name": "南港通",
    "ref": "42",
    "highway": "primary",
@@ -1829,6 +1909,8 @@
    "flow": 24.6,
    "turnCount": 17,
    "score": 49.9,
+   "baseScore": 49.9,
+   "spotCount": 0,
    "polyline": "isirEky_zXErDlAfEfEzH`@hBw@~ZFfErCbTpE|j@bCzVb@h@LlBxAloA",
    "pointCount": 13,
    "start": [
@@ -1841,7 +1923,7 @@
    ]
   },
   {
-   "id": "大阪府:87",
+   "id": "大阪府:83",
    "name": "茨木摂津線",
    "ref": "1",
    "highway": "primary",
@@ -1850,6 +1932,8 @@
    "flow": 22.4,
    "turnCount": 29,
    "score": 49.9,
+   "baseScore": 49.9,
+   "spotCount": 0,
    "polyline": "enlsEmefzX?`Aj@p@dAWnE_OrCcCtn@qCbVsUxJcElD_EgFnEwHfEgVpUsm@fCiA\\cBfB_EhNgFzH",
    "pointCount": 18,
    "start": [
@@ -1862,7 +1946,7 @@
    ]
   },
   {
-   "id": "大阪府:88",
+   "id": "大阪府:84",
    "name": "国道168号",
    "ref": "168",
    "highway": "trunk",
@@ -1871,6 +1955,8 @@
    "flow": 19.5,
    "turnCount": 114,
    "score": 49.9,
+   "baseScore": 49.9,
+   "spotCount": 0,
    "polyline": "im_sEq|f{XkH`CqHvFgFfAmHH}Et@wApAcAvCuBvCmGlBeFR}Cv@uBjBmCjFsAfAiIWcA}AQ}B_@IQ`@n@fFq@fCPlFi@bDg@f@aGv@sEeAmBkA{JuAkAp@uFtJoEa@yFuBiC~@aAjG{AhA}@@qAq@uECqBxBBtD]lAuEfC_MjN{S`MmOjAmBfFcIrCkEjDeHpDuK~CkKdJ}Eb@iAwCa@GyFrE{E~GqDbCwMtEqFN{BpByRxZkNtGoK`HmARiDhD_HxDcGbA{HcAyAvDeGhEiH`I",
    "pointCount": 72,
    "start": [
@@ -1883,7 +1969,7 @@
    ]
   },
   {
-   "id": "大阪府:89",
+   "id": "大阪府:85",
    "name": "国道371号",
    "ref": "371",
    "highway": "trunk",
@@ -1892,6 +1978,8 @@
    "flow": 18.8,
    "turnCount": 112,
    "score": 49.8,
+   "baseScore": 49.8,
+   "spotCount": 0,
    "polyline": "urzpEgtszXuDJqEm@_DfAmKFwDbE{BnFiBt@{B`CqCh@ePlS}GnAeD~AsGk@uKrEwC|BeEi@eDdBaCRuBxAuCM_DdBmBzDoHhHuHiBuAF}GvB}B|AaDGcFtHgBlAwGP{D|@}HnLeJtFyAlBgAnHQpI[|AuCj@u@a@aEvA{BtBaChLqFhQ{ChC_UlLoArAy@jC}AbMyBlIoRt`@wDjCsEf@oTkFyC?uCt@gBnAeCxDwKfZj@_B",
    "pointCount": 61,
    "start": [
@@ -1904,7 +1992,7 @@
    ]
   },
   {
-   "id": "大阪府:90",
+   "id": "大阪府:86",
    "name": "枚方茨木線",
    "ref": "139",
    "highway": "secondary",
@@ -1913,6 +2001,8 @@
    "flow": 18.3,
    "turnCount": 37,
    "score": 49.8,
+   "baseScore": 49.8,
+   "spotCount": 0,
    "polyline": "qwosEs|wzXhC~G~@pM~D`Kz@HfEeAb@\\AnB{AtAaCjFA~ExCtRjEdGt@dC@tLpEv[g@lg@gErJCr`@}FlI",
    "pointCount": 20,
    "start": [
@@ -1925,7 +2015,7 @@
    ]
   },
   {
-   "id": "大阪府:91",
+   "id": "大阪府:87",
    "name": "南港通",
    "ref": "42",
    "highway": "primary",
@@ -1934,6 +2024,8 @@
    "flow": 23.3,
    "turnCount": 20,
    "score": 49.2,
+   "baseScore": 49.2,
+   "spotCount": 0,
    "polyline": "sxhrEw_xyXn@}LqBkpA[aDPWcOewAv@qb@uH}QBsD",
    "pointCount": 9,
    "start": [
@@ -1946,7 +2038,7 @@
    ]
   },
   {
-   "id": "大阪府:92",
+   "id": "大阪府:88",
    "name": "国道309号",
    "ref": "309",
    "highway": "trunk",
@@ -1955,6 +2047,8 @@
    "flow": 18.6,
    "turnCount": 62,
    "score": 48.5,
+   "baseScore": 48.5,
+   "spotCount": 0,
    "polyline": "a~jqEudyzXxP]rEyAvIm@f@u@RwDfBiElDyAtGwM|D}AdBcF`FkD^qB@gH~AwHRwGbBuMpAaEwAaEiFeA]g@T{Pw@{JNuGj@qB|B}BdBeElB{BrCiB^qIr@_AdE{BfCeHjIqE~F{J|IqE\\mAPeK",
    "pointCount": 38,
    "start": [
@@ -1967,7 +2061,7 @@
    ]
   },
   {
-   "id": "大阪府:93",
+   "id": "大阪府:89",
    "name": "城見通",
    "ref": "",
    "highway": "tertiary",
@@ -1976,6 +2070,8 @@
    "flow": 20.3,
    "turnCount": 23,
    "score": 48.5,
+   "baseScore": 48.5,
+   "spotCount": 0,
    "polyline": "wawrEalezXxF_D^oA{@cj@uCqL_C}m@P`N|An^tCbM|@ti@[`AkFfE",
    "pointCount": 12,
    "start": [
@@ -1988,7 +2084,7 @@
    ]
   },
   {
-   "id": "大阪府:94",
+   "id": "大阪府:90",
    "name": "国道170号",
    "ref": "170",
    "highway": "trunk",
@@ -1997,6 +2093,8 @@
    "flow": 30.2,
    "turnCount": 10,
    "score": 47.8,
+   "baseScore": 47.8,
+   "spotCount": 0,
    "polyline": "y|xrE_a{zXvh@zHhY|@vy@pFbUh@|Ed@|MvDrDZ",
    "pointCount": 8,
    "start": [
@@ -2009,7 +2107,7 @@
    ]
   },
   {
-   "id": "大阪府:95",
+   "id": "大阪府:91",
    "name": "泉大津美原線",
    "ref": "36;210",
    "highway": "primary",
@@ -2018,6 +2116,8 @@
    "flow": 19.4,
    "turnCount": 25,
    "score": 47.8,
+   "baseScore": 47.8,
+   "spotCount": 0,
    "polyline": "w{uqEsrgzXq@gQq@gEsAwAy@yEo@cV_DeTSqKaByVqASPuUqEwFiBqJcCqG_OgR",
    "pointCount": 15,
    "start": [
@@ -2030,7 +2130,7 @@
    ]
   },
   {
-   "id": "大阪府:96",
+   "id": "大阪府:92",
    "name": "枚方交野寝屋川線",
    "ref": "18",
    "highway": "primary",
@@ -2039,6 +2139,8 @@
    "flow": 20.3,
    "turnCount": 34,
    "score": 47.8,
+   "baseScore": 47.8,
+   "spotCount": 0,
    "polyline": "ytcsEgtxzXRbMmCft@{@zb@FhGJyYdDyeAI{KZuPi@iEkDaKmBkL_@wInAoQvJuQpFaE",
    "pointCount": 16,
    "start": [
@@ -2051,7 +2153,7 @@
    ]
   },
   {
-   "id": "大阪府:97",
+   "id": "大阪府:93",
    "name": "大阪狭山線",
    "ref": "26",
    "highway": "primary",
@@ -2060,6 +2162,8 @@
    "flow": 21.1,
    "turnCount": 20,
    "score": 47.7,
+   "baseScore": 47.7,
+   "spotCount": 0,
    "polyline": "ugerE}cezXI_UvGp@hM[xLgAjCVzI|Dfe@iD`WoLvFkEdGaD`MeM",
    "pointCount": 12,
    "start": [
@@ -2072,7 +2176,7 @@
    ]
   },
   {
-   "id": "大阪府:98",
+   "id": "大阪府:94",
    "name": "第二阪和国道",
    "ref": "26",
    "highway": "trunk",
@@ -2081,6 +2185,8 @@
    "flow": 26.9,
    "turnCount": 14,
    "score": 47.5,
+   "baseScore": 47.5,
+   "spotCount": 0,
    "polyline": "aerqE}dryX|KnGbJvBZYhObBjFxA~HbEp|@||@~@jB|WfX~G`GrIrL",
    "pointCount": 12,
    "start": [
@@ -2093,7 +2199,7 @@
    ]
   },
   {
-   "id": "大阪府:99",
+   "id": "大阪府:95",
    "name": "大阪和泉泉南線",
    "ref": "30",
    "highway": "primary",
@@ -2102,6 +2208,8 @@
    "flow": 18.1,
    "turnCount": 40,
    "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
    "polyline": "}h}pE{y`yXuJuUnChFpOv`@`GvJ`EjB|RlE~CtCrP`VtB|AhDz@nHm@fDL|CxA`FfEgDsDmE_CqDSyGn@_GiByRmXsE{C",
    "pointCount": 22,
    "start": [
@@ -2114,7 +2222,7 @@
    ]
   },
   {
-   "id": "大阪府:100",
+   "id": "大阪府:96",
    "name": "吹田箕面線",
    "ref": "121",
    "highway": "secondary",
@@ -2123,6 +2231,8 @@
    "flow": 20,
    "turnCount": 20,
    "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
    "polyline": "}{ksEyv`zX{NfDoLjAuJQIViNaA}VeGgHEsGlBqLbI{EzDeG|ImDpDsPxHwIyGyFyH",
    "pointCount": 16,
    "start": [
@@ -2135,7 +2245,7 @@
    ]
   },
   {
-   "id": "大阪府:101",
+   "id": "大阪府:97",
    "name": "枚方富田林泉佐野線",
    "ref": "20",
    "highway": "primary",
@@ -2144,6 +2254,8 @@
    "flow": 16.8,
    "turnCount": 100,
    "score": 47,
+   "baseScore": 47,
+   "spotCount": 0,
    "polyline": "yx~pEmxayXlWrGj@qIpCqF~BkJtDmJZsIwAsO~Fsh@a@a_@^_HnLaZnByNC_EsBkGgH_K_EwHsAaHoBcDm@uCZqAdDcA`BwAy@{D{@qAjAoHmBoJOuD@}HdBeNeBgIgBwE_AsH{DiK}DmHeAeMaC_F}B{IDcHm@cA}CsBw@yAeM{y@kGkQ@kJdAuIIqE{AwDwDmFy@eEeAwB}JsH{@eCUyDrAyVtAgFNsJiAmL{DgGc@qCw@eA",
    "pointCount": 61,
    "start": [
@@ -2156,7 +2268,7 @@
    ]
   },
   {
-   "id": "大阪府:102",
+   "id": "大阪府:98",
    "name": "我堂金岡線",
    "ref": "192",
    "highway": "secondary",
@@ -2165,6 +2277,8 @@
    "flow": 20,
    "turnCount": 19,
    "score": 46.7,
+   "baseScore": 46.7,
+   "spotCount": 0,
    "polyline": "uu~qEcmdzXcCW{DyBaLuQqEyCyCQaw@tAPWpLa@|m@YvE|ChJxOrBlBxB|@",
    "pointCount": 14,
    "start": [
@@ -2177,7 +2291,7 @@
    ]
   },
   {
-   "id": "大阪府:103",
+   "id": "大阪府:99",
    "name": "第二阪和国道",
    "ref": "26",
    "highway": "trunk",
@@ -2186,6 +2300,8 @@
    "flow": 24,
    "turnCount": 21,
    "score": 46.5,
+   "baseScore": 46.5,
+   "spotCount": 0,
    "polyline": "onjqEsqkyXlRvQl@@lm@fm@@f@~FdFrBpCbCnExD`L`Hbc@pCfK|FtKlWp_@dG`F",
    "pointCount": 14,
    "start": [
@@ -2198,7 +2314,7 @@
    ]
   },
   {
-   "id": "大阪府:104",
+   "id": "大阪府:100",
    "name": "国道171号",
    "ref": "171",
    "highway": "trunk",
@@ -2207,6 +2323,8 @@
    "flow": 33.2,
    "turnCount": 7,
    "score": 46.5,
+   "baseScore": 46.5,
+   "spotCount": 0,
    "polyline": "_dnsEezvyX~CpMr@vJ_A`{AEm]t@u|@",
    "pointCount": 6,
    "start": [
@@ -2219,7 +2337,7 @@
    ]
   },
   {
-   "id": "大阪府:105",
+   "id": "大阪府:101",
    "name": "吉野下田尻線",
    "ref": "106",
    "highway": "secondary",
@@ -2228,6 +2346,8 @@
    "flow": 15.8,
    "turnCount": 48,
    "score": 46.4,
+   "baseScore": 46.4,
+   "spotCount": 0,
    "polyline": "ydmtEwsuyXdH|EtDp@nCbH`ErBdE`ElRpb@tCzAbBjHpEhG`CrFnOtMhF\\bCxAhLnQ`ErDfGVnEvDzIvCtHj@fGnBdD^jF_C`CDdQeD`HUlC{@xEI",
    "pointCount": 28,
    "start": [
@@ -2240,7 +2360,7 @@
    ]
   },
   {
-   "id": "大阪府:106",
+   "id": "大阪府:102",
    "name": "鳥取吉見泉佐野線",
    "ref": "250",
    "highway": "secondary",
@@ -2249,6 +2369,8 @@
    "flow": 15.7,
    "turnCount": 55,
    "score": 45.7,
+   "baseScore": 45.7,
+   "spotCount": 0,
    "polyline": "q|}pEgbxxXjGdHbBhFrDbGlAtDtDlFzGlGbFtHtIbEnFpHrJbZnNxQ`CpGzCbExQbPl@@zHjGjBfDvBrBjGdC`PzRfCpFbGzQnGvW~BhENpSi@nG`AtCxC~DOvFrErMtB|B",
    "pointCount": 32,
    "start": [
@@ -2261,7 +2383,7 @@
    ]
   },
   {
-   "id": "大阪府:107",
+   "id": "大阪府:103",
    "name": "大阪中央環状線",
    "ref": "2",
    "highway": "primary",
@@ -2270,6 +2392,8 @@
    "flow": 19.3,
    "turnCount": 24,
    "score": 45.7,
+   "baseScore": 45.7,
+   "spotCount": 0,
    "polyline": "wjarE{hrzXyL|QwDjCsBSwJqF}G|BmHd[eBrCqCrAoVl@{Q|A{TXqAi[aKCaNmA",
    "pointCount": 15,
    "start": [
@@ -2282,7 +2406,7 @@
    ]
   },
   {
-   "id": "大阪府:108",
+   "id": "大阪府:104",
    "name": "島能勢線",
    "ref": "602",
    "highway": "secondary",
@@ -2291,6 +2415,8 @@
    "flow": 15.7,
    "turnCount": 36,
    "score": 45,
+   "baseScore": 45,
+   "spotCount": 0,
    "polyline": "iyltE{alyXl@|Nr@dCMrHXbE}AjKeOvWoG|BwBpCoChKyBdC_DbHy@rEuBvFiBhOyEvDqDjJaC`CgIta@qBjQt@fJwDbN",
    "pointCount": 22,
    "start": [
@@ -2303,7 +2429,7 @@
    ]
   },
   {
-   "id": "大阪府:109",
+   "id": "大阪府:105",
    "name": "甘南備川向線",
    "ref": "201",
    "highway": "secondary",
@@ -2312,6 +2438,8 @@
    "flow": 13.6,
    "turnCount": 50,
    "score": 44.5,
+   "baseScore": 44.5,
+   "spotCount": 0,
    "polyline": "utnqEyhtzX`N`AjMyBdIRpGhB~E`@zI|FnG|AjAAtGmB|ETvHqAfFrBzObBrCdAhLq@~NFnAZhHzFrA^`DSjEoCvBKlG{DjC@nEpAzKy@dE}@",
    "pointCount": 28,
    "start": [
@@ -2324,7 +2452,7 @@
    ]
   },
   {
-   "id": "大阪府:110",
+   "id": "大阪府:106",
    "name": "第二阪和国道",
    "ref": "26",
    "highway": "trunk",
@@ -2333,6 +2461,8 @@
    "flow": 22.3,
    "turnCount": 20,
    "score": 44.1,
+   "baseScore": 44.1,
+   "spotCount": 0,
    "polyline": "_njqE}rkyXpRjRDn@|u@vt@~DzGhDhIjKfi@rCzJjDxHxXp`@dH`G",
    "pointCount": 11,
    "start": [
@@ -2345,7 +2475,7 @@
    ]
   },
   {
-   "id": "大阪府:111",
+   "id": "大阪府:107",
    "name": "泉佐野岩出線",
    "ref": "63",
    "highway": "primary",
@@ -2354,6 +2484,8 @@
    "flow": 13.8,
    "turnCount": 56,
    "score": 43.5,
+   "baseScore": 43.5,
+   "spotCount": 0,
    "polyline": "ynqpEcuwxX~Q{E|AyAnDqHrAoAtIyAnBkA|BoGhBqBdBg@dGI~As@`BcCzH}S|FcGjBaDjBqAlD@lGrEpIx@pHq@bEmBjR}@bCFfL`DvWmBpDv@|GdGxCnAlPF",
    "pointCount": 30,
    "start": [
@@ -2366,7 +2498,7 @@
    ]
   },
   {
-   "id": "大阪府:112",
+   "id": "大阪府:108",
    "name": "豊能池田線",
    "ref": "116",
    "highway": "secondary",
@@ -2375,6 +2507,8 @@
    "flow": 14.5,
    "turnCount": 35,
    "score": 43.3,
+   "baseScore": 43.3,
+   "spotCount": 0,
    "polyline": "qlzsEoevyXmB~FmIvGeCpDy@vDsA`SiAfC}CvAoACmGkCuDu@k]y@eDw@aBcB_AsCwE}\\}@kCmCaC{ToIcE|Q}AjC}Q~D",
    "pointCount": 22,
    "start": [
@@ -2387,7 +2521,7 @@
    ]
   },
   {
-   "id": "大阪府:113",
+   "id": "大阪府:109",
    "name": "和歌山阪南線",
    "ref": "752",
    "highway": "secondary",
@@ -2396,6 +2530,8 @@
    "flow": 14,
    "turnCount": 54,
    "score": 42.9,
+   "baseScore": 42.9,
+   "spotCount": 0,
    "polyline": "kunpEk`|wXzLdOfMpEn@Cn@aBhAaZt@mCfA_BdXsQtSuCdK{GnG_AbC\\`BjAvUf^xIjCrHhFp_@vSfEJbFwBxF}DbDo@vBBvMlEp@t@l@nEr@nAzJjEfALnFiBrBIdKtBtDvC",
    "pointCount": 33,
    "start": [
@@ -2408,7 +2544,7 @@
    ]
   },
   {
-   "id": "大阪府:114",
+   "id": "大阪府:110",
    "name": "堺富田林線",
    "ref": "35",
    "highway": "primary",
@@ -2417,6 +2553,8 @@
    "flow": 14.4,
    "turnCount": 50,
    "score": 42.6,
+   "baseScore": 42.6,
+   "spotCount": 0,
    "polyline": "{twqEsnlzXuL{L~A{BzE_CtFcIpDeBlEGxBs@tMeOpGmFnVgF`FmGvMoMfFqInGiFdCs@bOcAfFdBdBC`Ak@tDyFvCsBd@gA`AuJpEuId@}B@{DcDcLR{IfEkOhMyF",
    "pointCount": 31,
    "start": [
@@ -2429,7 +2567,7 @@
    ]
   },
   {
-   "id": "大阪府:115",
+   "id": "大阪府:111",
    "name": "新なにわ筋;大阪臨海線",
    "ref": "29",
    "highway": "primary",
@@ -2438,6 +2576,8 @@
    "flow": 18.9,
    "turnCount": 14,
    "score": 42.6,
+   "baseScore": 42.6,
+   "spotCount": 0,
    "polyline": "{vjrE_l|yX_EuBwAKmk@\\yKoEcKIaLcFiu@`C{@uDoAgQ",
    "pointCount": 10,
    "start": [
@@ -2450,7 +2590,7 @@
    ]
   },
   {
-   "id": "大阪府:116",
+   "id": "大阪府:112",
    "name": "国道309号",
    "ref": "309",
    "highway": "trunk",
@@ -2459,6 +2599,8 @@
    "flow": 21.1,
    "turnCount": 16,
    "score": 42.1,
+   "baseScore": 42.1,
+   "spotCount": 0,
    "polyline": "uwnqEgfuzXx@mBjBkBt]wMlEcDtC_F`Pgg@kOzf@gCzEuFjEq]rMeBdBq@fB",
    "pointCount": 13,
    "start": [
@@ -2471,7 +2613,7 @@
    ]
   },
   {
-   "id": "大阪府:117",
+   "id": "大阪府:113",
    "name": "堺かつらぎ線",
    "ref": "61",
    "highway": "primary",
@@ -2480,6 +2622,8 @@
    "flow": 15,
    "turnCount": 33,
    "score": 41.9,
+   "baseScore": 41.9,
+   "spotCount": 0,
    "polyline": "gziqEomazX~O|AlG~ArKj@tMhQ~NqAbMBjI}@pJbBdDYpBRnO|DxFp@hJhE|BrNnSjVdEGvI~@vDU",
    "pointCount": 19,
    "start": [
@@ -2492,7 +2636,7 @@
    ]
   },
   {
-   "id": "大阪府:118",
+   "id": "大阪府:114",
    "name": "国道477号",
    "ref": "477",
    "highway": "trunk",
@@ -2501,6 +2645,8 @@
    "flow": 14.6,
    "turnCount": 90,
    "score": 41.5,
+   "baseScore": 41.5,
+   "spotCount": 0,
    "polyline": "wyktEwmxyXhKdOrCl@~EiAtDb@tQrTvSjGrVvRjDn@pHS~GlBtJfAzFy@rLdBbD`EzCxL`H~H`U~MfGlAbHnF`EOzKaJrImElE{Fz@eD~CmFxAsEjE}@zBkCnFcBhNhClH`F|IUvEdJ|Ar@dFd@`JzC|@f@~CpEvIbA|BgClGg@|KdJ",
    "pointCount": 43,
    "start": [
@@ -2513,7 +2659,7 @@
    ]
   },
   {
-   "id": "大阪府:119",
+   "id": "大阪府:115",
    "name": "茨木摂津線",
    "ref": "1",
    "highway": "primary",
@@ -2522,6 +2668,8 @@
    "flow": 14.6,
    "turnCount": 43,
    "score": 41.1,
+   "baseScore": 41.1,
+   "spotCount": 0,
    "polyline": "cgpsE{rezX~O{AP[rT~ApEsPbHe_@pDoFrD}AlDM`c@`F`FlEbF~LJbIgErYeCvIqPdZwGpJoChBcFn@qEaAgBmAwVkYsA}Ck@aFP{EfBeH",
    "pointCount": 26,
    "start": [
@@ -2534,7 +2682,7 @@
    ]
   },
   {
-   "id": "大阪府:120",
+   "id": "大阪府:116",
    "name": "吹田箕面線",
    "ref": "121;135",
    "highway": "secondary",
@@ -2543,6 +2691,8 @@
    "flow": 13.3,
    "turnCount": 22,
    "score": 38.9,
+   "baseScore": 38.9,
+   "spotCount": 0,
    "polyline": "qfisEuu`zXeAcDcB{BiK{GyFmBsESiPpA_h@rR}QtCaPv@wPmBsSiFmE[cIhAwHjF",
    "pointCount": 15,
    "start": [
@@ -2555,7 +2705,7 @@
    ]
   },
   {
-   "id": "大阪府:121",
+   "id": "大阪府:117",
    "name": "柏原駒ヶ谷千早赤阪線",
    "ref": "27",
    "highway": "primary",
@@ -2564,6 +2714,8 @@
    "flow": 13.3,
    "turnCount": 32,
    "score": 37.6,
+   "baseScore": 37.6,
+   "spotCount": 0,
    "polyline": "mbwqEwrwzXrNNjEaBhCeD|GoOpIgHbu@LfUfJ~^t@rFwAjKmHhHyMbCsCvy@mAlJiGfg@]rIwB",
    "pointCount": 17,
    "start": [
@@ -2576,7 +2728,7 @@
    ]
   },
   {
-   "id": "大阪府:122",
+   "id": "大阪府:118",
    "name": "大阪臨海線",
    "ref": "29",
    "highway": "primary",
@@ -2585,6 +2737,8 @@
    "flow": 11.6,
    "turnCount": 29,
    "score": 37.4,
+   "baseScore": 37.4,
+   "spotCount": 0,
    "polyline": "okcrEctyyXfKT`ToF|CVxAdB`@tC_E|UVnEfApBvTrThEtCtEfAtEEbOmBnQPvLzF",
    "pointCount": 16,
    "start": [
@@ -2597,7 +2751,7 @@
    ]
   },
   {
-   "id": "大阪府:123",
+   "id": "大阪府:119",
    "name": "国道170号",
    "ref": "170",
    "highway": "trunk",
@@ -2606,6 +2760,8 @@
    "flow": 10.7,
    "turnCount": 37,
    "score": 34.5,
+   "baseScore": 34.5,
+   "spotCount": 0,
    "polyline": "atdqE{whzXbM`GhBxBpAbDn@zDn@x^n@hDjBxDjFbDhKf@dEdAfFtFvAzI@hE{EvV_@|Df@hExDdKR~F]rC",
    "pointCount": 20,
    "start": [
@@ -2618,7 +2774,7 @@
    ]
   },
   {
-   "id": "大阪府:124",
+   "id": "大阪府:120",
    "name": "第二阪和国道",
    "ref": "26",
    "highway": "trunk",
@@ -2627,6 +2783,8 @@
    "flow": 14.2,
    "turnCount": 15,
    "score": 33.7,
+   "baseScore": 33.7,
+   "spotCount": 0,
    "polyline": "i}bqEsqayXpErOdBnDzD|EzDlC|i@bTzJ~GtIjN~`@r}@Eb@",
    "pointCount": 10,
    "start": [
@@ -2639,7 +2797,7 @@
    ]
   },
   {
-   "id": "大阪府:125",
+   "id": "大阪府:121",
    "name": "国道480号",
    "ref": "480",
    "highway": "trunk",
@@ -2648,6 +2806,8 @@
    "flow": 13.1,
    "turnCount": 21,
    "score": 33.4,
+   "baseScore": 33.4,
+   "spotCount": 0,
    "polyline": "kgeqEqu{yXiGjBuP`@cQzM_EvGiD~AoYtCqKyDy`@Gwd@~e@mHnS",
    "pointCount": 11,
    "start": [
@@ -2660,7 +2820,7 @@
    ]
   },
   {
-   "id": "大阪府:126",
+   "id": "大阪府:122",
    "name": "国道310号",
    "ref": "310",
    "highway": "trunk",
@@ -2669,6 +2829,8 @@
    "flow": 13.3,
    "turnCount": 19,
    "score": 33.2,
+   "baseScore": 33.2,
+   "spotCount": 0,
    "polyline": "}y~qEcq|yXpA_BjHuPL_Ec@kH~HaNxDkClP}Gz\\gHlDaBrDqFvF{W~AkEji@go@",
    "pointCount": 14,
    "start": [
@@ -2681,5 +2843,5 @@
    ]
   }
  ],
- "hiddenCount": 0
+ "hiddenCount": 4
 }

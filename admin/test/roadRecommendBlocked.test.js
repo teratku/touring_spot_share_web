@@ -118,3 +118,54 @@ test("配信中のおすすめに、登録済みの規制と重なるものが�
   assert.deepStrictEqual(problems, [],
     "二輪が通れない道がおすすめに残っている（該当県を作り直すこと）");
 });
+
+// MARK: 排気量（原付だけ通れない道）
+
+/**
+ * ⚠️ **おすすめ道路は排気量ごとに作り分けていない。** 1県につき1本の同じ一覧を
+ *    全員に配る。だから生成の段で落としてよいのは「全員が通れない」規制だけ。
+ *    原付だけ通れない道（小田原厚木道路・ターンパイク箱根など、神奈川県だけで324本）を
+ *    ここで落とすと、251ccの人のおすすめからも消える。
+ *    排気量ごとの出し分けはアプリ側の仕事（`FunRoadRestrictionFilter`）。
+ */
+
+/** 排気量の範囲を持つ規制 */
+const ccRestriction = (name, points, minCc, maxCc) =>
+  ({ ...restriction(name, points), minCc, maxCc });
+
+test("原付だけ通れない道はおすすめから外さない", () => {
+  const road = straight(35.2, 139.1, 20);
+  const found = blockedSegments([ccRestriction("ターンパイク", road, null, 50)],
+                                [segment("おすすめ", road)]);
+  assert.strictEqual(found.size, 0,
+    "原付だけの規制で全員のおすすめから消している（251ccの人も乗れなくなる）");
+});
+
+test("251cc以上だけの規制でもおすすめから外さない", () => {
+  // ⚠️ 逆向きの取り違えも同じこと。原付の人には関係の無い規制
+  const road = straight(35.2, 139.1, 20);
+  assert.strictEqual(blockedSegments([ccRestriction("大型だけ", road, 251, null)],
+                                     [segment("おすすめ", road)]).size, 0,
+                     "大型だけの規制で全員のおすすめから消している");
+});
+
+test("全員が通れない規制なら外す", () => {
+  // ⚠️ 排気量を見るようにしたせいで、本来落とすべきものまで残らないこと
+  const road = straight(35.2, 139.1, 20);
+  for (const [min, max] of [[null, null], [0, 99999], [null, 99999], [0, null]]) {
+    assert.ok(blockedSegments([ccRestriction("全員", road, min, max)],
+                              [segment("おすすめ", road)]).has(0),
+              `全員が通れない規制を見逃している（minCc=${min} maxCc=${max}）`);
+  }
+});
+
+test("全員が通れるかの判定", () => {
+  const { blocksEveryone } = require("../lib/restrictionOverlap");
+  assert.strictEqual(blocksEveryone({}), true, "指定なしは全員が対象");
+  assert.strictEqual(blocksEveryone({ maxCc: 50 }), false, "原付だけを全員扱いしている");
+  assert.strictEqual(blocksEveryone({ minCc: 51 }), false, "原付が抜けているのに全員扱い");
+  assert.strictEqual(blocksEveryone({ minCc: 126, maxCc: 250 }), false);
+  assert.strictEqual(blocksEveryone({ minCc: 0, maxCc: 99999 }), true);
+  // ⚠️ 上限が一番上の区分に届いていれば全員。99999 ちょうどでなくてよい
+  assert.strictEqual(blocksEveryone({ minCc: 0, maxCc: 251 }), true);
+});

@@ -120,6 +120,34 @@ function findOverlaps(restrictions, roads, options = {}) {
 const BLOCKING_KINDS = new Set(["noMotorcycle", "closed"]);
 
 /**
+ * 排気量の区切り。アプリの `BikeDisplacement.ccRange` と同じ
+ * （`touringSpotShare/saveRoute/nav/BikeProfile.swift`）。
+ * ⚠️ 片方だけ変えると、生成で落とす道とアプリが避ける道が食い違う
+ */
+const DISPLACEMENT_RANGES = [[0, 50], [51, 125], [126, 250], [251, 99_999]];
+
+/** その規制が、この排気量の乗り手に当たるか。範囲が重なっていれば当たり */
+function appliesToRange(restriction, [low, high]) {
+  const min = Number.isFinite(restriction.minCc) ? restriction.minCc : 0;
+  const max = Number.isFinite(restriction.maxCc) ? restriction.maxCc : 99_999;
+  return low <= max && high >= min;
+}
+
+/**
+ * どの排気量の乗り手でも通れない規制か。
+ *
+ * ⚠️ **おすすめ道路は排気量ごとに作り分けていない。** 1県につき1本の同じ一覧を
+ *    全員に配る。だから生成の段で落としてよいのは「全員が通れない」規制だけ。
+ *    原付だけ通れない道（小田原厚木道路・ターンパイク箱根・芦ノ湖スカイラインなど、
+ *    神奈川県だけで324本）をここで落とすと、251ccの人のおすすめからも消える。
+ *    排気量ごとの出し分けはアプリ側の仕事
+ *    （`FunRoadRestrictionFilter` が `RoadRestriction.applies(to:)` で乗り手を見る）。
+ */
+function blocksEveryone(restriction) {
+  return DISPLACEMENT_RANGES.every((range) => appliesToRange(restriction, range));
+}
+
+/**
  * 二輪が通れない規制と重なる、おすすめ道路の番号を返す。
  *
  * ⚠️ **おすすめ道路の区間は `points` を持っていない。** 持っているのは
@@ -129,6 +157,8 @@ const BLOCKING_KINDS = new Set(["noMotorcycle", "closed"]);
  *    重ならなかったのではなく空振りしていたから）。エラーは出ない。
  *    だからここで受け取って、この中で復号する。
  *
+ * ⚠️ 落とすのは**全員が通れない**規制だけ（`blocksEveryone`）。理由はそちらに書いた。
+ *
  * @param {Array} saved    data/road-restrictions/<romaji>.json の `restrictions`
  * @param {Array} segments おすすめ道路の区間（`polyline` を持つ形）
  * @returns {Map} 区間の番号 → [{ restrictionId, name, kind, ratio }]
@@ -136,7 +166,7 @@ const BLOCKING_KINDS = new Set(["noMotorcycle", "closed"]);
 function blockedSegments(saved, segments) {
   const { decode } = require("./polyline");
   const restrictions = (saved || [])
-    .filter((r) => r && BLOCKING_KINDS.has(r.kind) && r.polyline)
+    .filter((r) => r && BLOCKING_KINDS.has(r.kind) && r.polyline && blocksEveryone(r))
     .map((r) => ({ id: r.id, name: r.name, kind: r.kind, points: decode(r.polyline) }))
     .filter((r) => r.points.length >= 2);
   if (!restrictions.length) return new Map();
@@ -152,5 +182,6 @@ function blockedSegments(saved, segments) {
 
 module.exports = {
   findOverlaps, overlapRatio, resample, distanceToLine, blockedSegments,
-  NEAR_METERS, STEP_METERS, MIN_RATIO, BLOCKING_KINDS,
+  blocksEveryone, appliesToRange,
+  NEAR_METERS, STEP_METERS, MIN_RATIO, BLOCKING_KINDS, DISPLACEMENT_RANGES,
 };

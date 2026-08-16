@@ -82,6 +82,11 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
  *    石川県で実測: highway の正規表現あり **127.7秒** / 無し **8.4秒**（15倍）。
  *    全国47県では2時間と8分の差になる。歩道・自転車道はこちらで落とす
  *    （`toFragments`）。返る件数は60→145に増えるが、その程度は誤差。
+ *
+ * ⚠️ **`moped=no` を落とさないこと。** 原付だけ通れないバイパス・一般有料道路は
+ *    二輪の指定が `motorcycle=designated`（むしろ通れる）になっていて、
+ *    `motorcycle=no` では1本も引っ掛からない。神奈川県だけで324本ある
+ *    （小田原厚木道路・横浜新道・ターンパイク箱根・芦ノ湖スカイラインなど）。
  */
 function buildQuery(prefecture) {
   return `[out:json][timeout:120];
@@ -90,6 +95,7 @@ area["name"="${prefecture}"]["admin_level"="4"]->.a;
   way["motorcycle"="no"](area.a);
   way["motorcycle:conditional"](area.a);
   way["motor_vehicle"="no"](area.a);
+  way["moped"="no"](area.a);
 );
 out geom;`;
 }

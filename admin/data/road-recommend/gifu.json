@@ -1,9 +1,9 @@
 {
  "prefecture": "岐阜県",
  "romaji": "gifu",
- "generation": 2,
- "contentHash": "08faf5018118",
- "builtAt": "2026-07-28T15:24:50.386Z",
+ "generation": 3,
+ "contentHash": "cd73759c553d",
+ "builtAt": "2026-08-16T10:21:25.229Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -15,6 +15,29 @@
  "segments": [
   {
    "id": "岐阜県:0",
+   "name": "国道360号",
+   "ref": "360",
+   "highway": "trunk",
+   "lengthKm": 29.93,
+   "curviness": 567.1,
+   "flow": 28.1,
+   "turnCount": 604,
+   "score": 87.5,
+   "baseScore": 80,
+   "spotCount": 5,
+   "polyline": "gpi|EqnrbYmFd@cC}C}@yJv@iGnEsHzAiExFaGpD}HdDsCBkAuAsBnAkDtCoCfHcEhDc@tAgAoFReKrBw@OhAoLGwD~@i@x@pB`@FBYiAgCeBi@qAwAu@eF\\oJyDwLmCqBiA}BYwBFoJq@iFi@m@_@L\\hEm@jBFuB_@KSdDoAsJ_DmEi@oF{BkBmB_DNi@bGlA~BQbBsC|AmGp@YTf@L`Hi@|EpA~Bm@eCrAwE^qOdBcKEmAe@KoDdCcD|DeE`KWHE_@xD_J`CqKdA@`BoBdCmAzE_J_@E_DbFkBfBeDt@yAkAcB|@[dDoDpHw@z@iAL}AeCgDt@k@oAuBo@e@yAaBDuB_CeBSk@{AmBXiBmCDoBo@uB_BkAuAsEiCwC~BeNa@iDRiCh@oB~BuCVoAfCuBxBy@nBG|B{ArDOnEwBpQf@nG[fGs@vEaDfAsB~A_IF_Ec@mDTcCv@cCdB{@Z_C[m@yABkEyDqCoIaC`AfBqFyCkOo@{AeDzDCwEz@{ACuCwAOmBd@KWr@eDeAsBzCw@WoEvAnEk@fBdAs@CoCg@iBJoFgAc@vA{ADaBF~C|@tALcEkDmS@cDe@aEt@uCaA}BeBkAe@yCEsAh@dBVGw@aO}EgJqBsQiBqEw@IkCvBs@o@~@mHvA_BzAeF{@_DUuJeD}F{Bv@ByFyCsE}A[]uC_FkI\\cCy@qCu@i@qAAjAg@z@JB_@yBw@cDnCg@[jByG`DyDu@qEv@lARKqAoEj@BbA|A\\SkAiCaB[MoBd@{IxAeA@iJ|@bEp@d@o@sCQ{GmBkE^gEqAgLd@oLqEuBRSjAj@`CWP_AoBo@{BuFwA_@Ti@zBjCd@Ib@yCu@uBcAWaGfCaBOmAuFgBiDQ{DjBaHFeLo@uH_CqKeFqG_CcGyNmLmHuPeCiAgD}D{CqA_DeIqOiNmDg@yDoDqBqJkBuF{B_M_AeKcBVuAoAwK_LoFcIc@cGzAwHyJoZE}Jf@yHsAoJuA{AeM_DaGmIoFcAkB}Aw@oCU}CcCuDiHgSg@yHkBcEoEaDgGoN_@{IxBaJrCsDrCoS",
+   "pointCount": 284,
+   "start": [
+    36.262605,
+    136.906166
+   ],
+   "end": [
+    36.305282,
+    137.095732
+   ]
+  },
+  {
+   "id": "岐阜県:1",
    "name": "落合飛騨小坂停車場線",
    "ref": "441",
    "highway": "secondary",
@@ -23,6 +46,8 @@
    "flow": 29,
    "turnCount": 641,
    "score": 85,
+   "baseScore": 85,
+   "spotCount": 0,
    "polyline": "oiizEck{eYUtAgBzCm@Js@}@a@HKz@ZjC{@f@gA~CaAY_C{D_@LdBxExBzCoErBgBdDlEjC_FdAcE~DoBr@YIG}@aASKkCo@Kq@vB?jEmGhDwLvOaK~AqEeCuEGaAyBwBHzAvCIpAbBz@c@tAi@VEvCUR[MKoAoAAm@_AaBV}AaAqBGyCfAwCy@u@uG]i@a@LQdCaC|DiCn@_ExGgErCkC`@uDoB_BO@`HoBrByARnApCe@nAl@pC}@jD_@dIuA@yCeA@fFi@h@mBVaCoB[aDe@a@WzBu@EoAtBaCDYnBbItANp@Y`EdCMxDfCnB`Ev@lG_BjHbAlEYbFy@`AgCj@WnGsD`DoBXw@jB?t@`@z@dEIlJlDlBHbAfA\\pAMnBl@tABpGfBlJ@hDtEnJ^~G_AdFl@bClBnA|@hEQ|HnDbDjBuAjBXt@xJ~AnAj@|Ba@zBX`C]xBRnEvArAvC~GvBVb@cBrArCV`CbCbJnAnA\\rBZh@xGfCbAnGGlDzBtAdA|ElD|FzB@dAx@@hBsARy@vBj@hMnGfCf@x@Cx@pAvCw@zE\\hBjDhAt@|BpBWx@p@p@jG`C^d@l@GjJk@`EFfA|BvEPbEdAzBUnCwB`Bk@Ck@{BkCu@aCjC{@UgGeOuD{GcCeAmOl@mNvHo@KuCuDsAEeAu@_FbCwDmBqBdDq@nDyC\\_Ax@}AMmBzAsEmBi@F|A~EcA`A@rArD@^n@ErB{@dBmDYkCtAk@`A}EjA}EwE}DZoA_G_AW_CyEkE?_DhAoBSq@eBZoE\\s@~DCt@oCiA{@aDOiDeBo@X]~CwDjCUfI}ChJqBlBeEJ?qCa@?cAz@e@dEgCnAqCgB^zFsAfB|@vBRlFIpAoApCdC~Fu@|A_A?}@x@MbBZxBnFlM~IpGn@BjAiAj@LfAdHfDbDbAvBvBrAxCk@fFhC~E]pIzBf@v@_AzDDfBlDzIh@dDf@[]gCl@S\\d@`@|MjCdB~D|EvJjDzFnDdBxBxAWnC\\`CnCp@LbCuA`AlGtChAn@jBIrFbHnLdB?lCaAlADnBvAhBcAh@gBd@}JnCgEdAg@pAx@bApDrFmAzGn@|CIdG~AnH_B`J|BhE|G~Ge@rAd@~@lAQzDX~CpCxIfM~N~FPtFfB|B?`An@v@nC_@nCPvAn@dAxCn@lBtCrAtHcCx]",
    "pointCount": 322,
    "start": [
@@ -35,7 +60,7 @@
    ]
   },
   {
-   "id": "岐阜県:1",
+   "id": "岐阜県:2",
    "name": "打保神岡停車場線",
    "ref": "484",
    "highway": "secondary",
@@ -44,6 +69,8 @@
    "flow": 31.2,
    "turnCount": 561,
    "score": 84.7,
+   "baseScore": 84.7,
+   "spotCount": 0,
    "polyline": "ycc}EgkveYvATd@|AiFnR_@pDgA^p@dAg@bEFlBpBxCz@hMeBnEi@rNoF~KcC|Yb@`DzBx@p@hB{BX}A]e@j@Xf@~BJrAj@vBvFwAdGtA`P]~FR|Kw@d@o@jCp@jAJzAo@vPrBnJ}@nKuD`RRlFu@jNPdEpBdJbF|IoArC|@fBu@bCg@zGfCrBvAyAbC`@xBaClDQdDlE`ArG~@bAfH}Bp@FlCzBxB?jCiD|B^`L{FdEfA|L|@uDrFAz@r@fB@hB}D\\W\\LlHYtBkB~EdA_@FX}ArCyAyBy@h@f@zFg@`Ff@nEOtH~@pDbJ~G|AzCn@hDlAzApAxFvF~BfFd@v@vApEpA|E`HbGlBlAfBpBpAjJvC`FbFbChASnAd@pD\\CZwA|@@zEnDzEKfFz@Dt@aAtBvAf@dC{@Bm@w@{BlBo@dCrAnBrDJlCZRbCCBaChGzALiD~BhB~@jBbBq@lAr@jDJj@Xr@jBtCjAb@|ChSxPpA~BDzAdBdB\\`FzD^jB|@YhD`BlApA|DbAZ|B|Cc@x@}GfBwC_@oAhBQlAkA`AeAhElEpFnBx@StA^rDH{DtAuAuC}CrGpC}AzDxB|CfB\\s@pCLnAw@p@Gp@dArHTMKuB~@rDd@Sk@}@UcFtB@rC_AaAmAc@iBn@mA|@[w@}Bd@Uv@vCoAnBbDfDWp@LjB{C`A`D|E[dA}DjDrBh@jBEjDuAjCyFrHaFv@oDd@LB|@qAjDNb@v@WlAoBnBiIlPgRhBgH~@o@xAGt@^y@hBHn@nEdCxBrERlDjDdFnCx@rAhAkBbAt@lAQhB~Du@b@h@AhBPBvBmAxBpAxAc@p@Rp@wAnDnA|@Y\\qD`DUhBs@t@BnAjAxBcBlEdFfAyAbBAz@j@`AnKkCKm@bCoBiAKbFaAzBc@GOyBUKqAvAyBC{AdD~B{AdCDI|BtACz@OjCiCfANrB_BlHaAxGr@rAfAjBE|DcCnB{GIdEzA|ES|GnDfT",
    "pointCount": 268,
    "start": [
@@ -56,7 +83,7 @@
    ]
   },
   {
-   "id": "岐阜県:2",
+   "id": "岐阜県:3",
    "name": "伊吹山ドライブウェイ",
    "ref": "",
    "highway": "tertiary",
@@ -65,6 +92,8 @@
    "flow": 29.1,
    "turnCount": 334,
    "score": 84.1,
+   "baseScore": 84.1,
+   "spotCount": 0,
    "polyline": "mv{vEaey_Y`APhF_A{FlA_FaDgADyCfJ{@rHu@lA{J|DyHwAOh@jAzCBxA_CbQs@h@]_Ar@iDmAuIoGgElBiElHyFJ}@]gBzAgCAu@}EoIo@AiGtCmC{C_CqARg@rEeBpEaIi@@eEfFiEh@sIhE[j@Ph@lDtB`Cf@LbC`B|@`AfCqA|EyEk@sH~@RbArC~CCnCiBzCfCnDrAhDV`Bg@bBcFjDwCqCyBI_BcBqAhBeBM?vBz@zBqApBElBYXaB[qBz@{CgAgBb@mBuAkAtAkDi@@~EaBlAGj@tBrDw@jExCxCCdBaA|Dj@rCfB|@Qx@m@HeBmB_GsCaBwEcCyDm@LaAbCiBMu@rBmBc@m@tFfAtDYVoDYy@TW|CoC`DLdEqG~E?tAxArAAr@[LsBoA{AhAcAhCeB_AiBJ}@~CcBt@m@tBkFq@gDbAgAAc@Q{@cCsCIkAoAyBx@aEwC_@d@o@rGFb@d@Ej@eEp@IcAvMsIjH}Cn@qE|CgBSmBp@iAk@oA`@uBmAeLhByAnCw@nEeCbAc@zAyBPiBpAs@Cu@i@q@mDeBY_CnHiG~Dy@A}BoA}BgC_AyDfAwHa@qBkBs@mC`@aHg@qEeAoBgCk@BDzF}BtJApBj@`@|Eb@nIrExB`LnFnEjBb@l@jCInBhDlFvA~Hx@z@zAlE",
    "pointCount": 180,
    "start": [
@@ -77,7 +106,7 @@
    ]
   },
   {
-   "id": "岐阜県:3",
+   "id": "岐阜県:4",
    "name": "東野中津川線",
    "ref": "413",
    "highway": "secondary",
@@ -86,6 +115,8 @@
    "flow": 29.2,
    "turnCount": 349,
    "score": 84,
+   "baseScore": 84,
+   "spotCount": 0,
    "polyline": "qqfwEa__fY}@gEuC{CaBcEl@yDSwDTkIkAgEg@iLhBwJSc@k@HsAhBq@u@|@gKgAcGS_FfAiGaAcJ}A{FBwEw@{IHyP{@yFm@I_BtCq@IuAgLuAaDiBuBmAyD[f@\\tCs@H{BwGy@sN_@CHlCo@?iCwOc@^UxC~@hGkCbHa@WkBuIw@iAeAZgCdEgGj@yAcA?o@nBu@z@mFBs@sAkEzCmI{@eDzAgF?eGfAgAz@cCtCV`Bu@~BPdCgAf@sAUy@iAu@uEu@_AR_AfBsBq@k@iBwBqCy@cLoADs@r@t@xKiAnAq@~FeB}@y@wDcB_@w@iDkAeBA}@_BeB@mBqB{CcBTcDa@uFz@yCvGYE_@sBaFrAUoBV{AsB}D{EwAcBRsB]cAvAe@`EiCT_A[sBjGyBNcA|BcAh@iE^StAtAnBAbC}AbA{@|CkBh@cG{AgAv@sAEl@zBm@bBr@z@lJPHj@_Az@_@dB{@\\z@fBKhAa@Kw@mCkBsA{@BWt@yCu@kDFuAzBy@gCaGeCmDb@^zGuD_C}@ZG|AcAzCb@hCe@hU{AvKcAtCaCcA_CyEuA{@wU]{A|Aw@SkAuBf@eD[eAwGnAyBoBWy@H{@|CeB_CaCEwE{DoAmAkCkEn@eKT",
    "pointCount": 171,
    "start": [
@@ -98,7 +129,7 @@
    ]
   },
   {
-   "id": "岐阜県:4",
+   "id": "岐阜県:5",
    "name": "中野方七宗線",
    "ref": "402",
    "highway": "secondary",
@@ -107,6 +138,8 @@
    "flow": 28.6,
    "turnCount": 313,
    "score": 84,
+   "baseScore": 84,
+   "spotCount": 0,
    "polyline": "ctywEk`jdYiBiDYaI}BkF}@mNl@{CrFu@p@oAQqFbAyKwBqLGeDyBwGmA{GLgGi@wFm@m@qGXoDrBkAdCsBFo@s@i@eFeB}CeIbBaBk@sAeD{AiHp@_Et@u@|BKjA}ClDcEzC}I~I{EvAyD`BqBTiM`CgEfCsOWmEoFmIW_B~@_BlC[tA_Av@qBC{CwAaK_BuBmEkDiBwHKgCt@uMaAqM|@aCzI{HfEeNfIiBr@s@ZeB~Ak@tEmN^yGnC}FEiCiBwC[uCrBeINoCt@yAIiD_@uBwA}@Wv@n@hB_@n@a@A}@wHkAyAdAg@XkDeAsBfBkBViBbD_AtD`Bx@{@c@}GtAsDaAqBoCw@@q@bAc@VwAjBaAzBbArBmBfCr@p@mBnC{A?qAf@{@_@gHbCnAxB_Ap@oAnD}@r@n@p@g@To@o@{ADs@t@l@h@GbC}FpN}NfGuElEiJ@{DnA}D}JaNm@iEkE}GpAm@eAyBC~@iBrBa@yBcAy@_AaCiBo@uCRSsAw@Ux@g@Qg@y@AgAbA^jEUh@aCWsA~@{Cd@{BUuAf@_CEuA~@mA[qAT{@m@lAsSl@_C^yLrA}Ca@mAMgHbB_BHwCnB^FeFk@gBZmD",
    "pointCount": 163,
    "start": [
@@ -119,7 +152,7 @@
    ]
   },
   {
-   "id": "岐阜県:5",
+   "id": "岐阜県:6",
    "name": "飛騨木曽川公園線",
    "ref": "366",
    "highway": "secondary",
@@ -128,6 +161,8 @@
    "flow": 28,
    "turnCount": 289,
    "score": 83.9,
+   "baseScore": 83.9,
+   "spotCount": 0,
    "polyline": "khnwEq}hdYvAaCv@yEdCuGdDsDn@kJvAg@lC|An@aA_@}@uD{B{AoHiCcE}F_NYgCv@Cf@fBnC~BdDYjAyA|@@LnCo@nDXx@t@Ff@i@PaCbAwBpCwAjCExAiDl@EpCzArEoBvEx@xAaGlE_DD_AaAoA}AQaB^sDs@S{BaDcCEaAdAsCmAiPnCaL|F}AfGqGTsBcBiJF_Cx@iFhD{GbFqQ|GgF|BTjFxHnBz@`C~C|@X|JEjFgDlERvEyEnPjAdGmE`JaEt@mDfLcJ~Bh@fG[|IjCdCo@~EdC~BVxCnBrGDtClA|CnExCv@vCk@|@NrCzDp@tBvDdEnASnCr@pHYzBh@bCvCj@bBbGwAzCjBpCpPU`Bp@jAKjBvA|BDxCjBx@Tt@}A~AtB|Fn@PvBcAXsAtA{A^t@{@rGd@v@bMgG`BOZXsAbEyAx@sChDuAb@UnBNdAy@h@iBtE|@nAH`C`A~@b@Cj@cBr@YH`E~Cy@b@t@bCz@pAdB~A@FdBfBlAnAJRnBhCRRhAkAtBYpDkA~BXzA]|@v@h@tAq@hAbB}B|A}C|HiAX",
    "pointCount": 152,
    "start": [
@@ -140,7 +175,7 @@
    ]
   },
   {
-   "id": "岐阜県:6",
+   "id": "岐阜県:7",
    "name": "石徹白前谷線",
    "ref": "314",
    "highway": "secondary",
@@ -149,6 +184,8 @@
    "flow": 29.8,
    "turnCount": 275,
    "score": 83.8,
+   "baseScore": 83.8,
+   "spotCount": 0,
    "polyline": "enpzEkcxaYt@eBo@uHZ{JrA}FeAmWcDsGw@yDf@}RjAiGfDaHbBsAz@cBz@oIdFuCp@mAfAeUOeFp@uEc@CcChIiAt@k@SpC_KJeMxBoEzBq@vAwB~D_J|F_F|BQhCoA|BKbCrA`@~@cAt@sCNGr@|DG|Al@p@w@K_Dj@iGqAl@{@Ij@wBwA_ALcBwC^EmEiEo@wCiBuBuFQsBs@}@oDcAe@mA_DiAi@oAgCgCPc@lK]j@gA_@oHv@c@rCj@z@iAxBm@p@iArBVbBa@t@sAqAG_@o@v@yElBwB_AkAx@aCoA{A\\eC_B{AWgCt@vBzC|AVUoCkBa@wEqH}BLkCyEuESyDcA{AVw@fJx@nMpGY^uCaAGx@hKnBbK_DjBIjA{CVp@k@bAV`@hDaCfGC`Bo@lCGhAa@nB{CNp@m@`CdArBvAyAvE~@zE{@lBsArFfAf@SjCwFr@i@hEHbDoBhCMHmG`AwAlGeDjFNtAk@^wCwCmEdAqGtDsBv@}BxDHfCl@",
    "pointCount": 137,
    "start": [
@@ -161,7 +198,7 @@
    ]
   },
   {
-   "id": "岐阜県:7",
+   "id": "岐阜県:8",
    "name": "白山内ヶ谷線",
    "ref": "315",
    "highway": "secondary",
@@ -170,6 +207,8 @@
    "flow": 27.8,
    "turnCount": 299,
    "score": 83.7,
+   "baseScore": 83.7,
+   "spotCount": 0,
    "polyline": "_g}xEskqbYn@FdBtCnBc@lCyBfACnBpAEbEx@dBtCWpDb@dChCnEiGtByAxD?t@`@PrAoAvIDlAp@f@xE_@kA`GDzAfBfBdGZU{DXw@f@ItItAf@jAD|B`D\\fA`Bv@wA|Ac@zIbBdBy@`Ip@pEWnK|E`IfIbDmA|@H|BtClCpAhCMhEdAv@YZd@[vBT\\~CWhDdAlAg@?w@yC}CiAyCyBOz@oA`Bp@Jr@lD|ClDmGb@Ol@lAF|AfAd@El@{@z@bAhBjANjAm@vCnBhAuAHiBrBpAtAOrCaBbCb@fDoAjGbFZiAyA_E^y@fAY\\_AiD{Lb@YvAdC^xCzADv@v@QpE|@t@lB_@bC`AlAzEjBnCd@CVc@aBaGmBuFkBaCk@yEuCsGXs@~D~D|@c@QoCuGoNnAaD}@iFz@uFe@cMo@mDj@wGa@cBp@_KQ{BcBeDTeEvDqCN{AiHcR_@gIeBkHJgK\\wCzFuFfAoBjCgIpA_Jl@qAzF{HnH_@dBaBv@}H|E{O{Bgb@FkDrAyMtAgHtCeKnDyF^_DuA{B{B]qAmAwAkR",
    "pointCount": 149,
    "start": [
@@ -182,7 +221,7 @@
    ]
   },
   {
-   "id": "岐阜県:8",
+   "id": "岐阜県:9",
    "name": "中野方七宗線",
    "ref": "402",
    "highway": "secondary",
@@ -191,6 +230,8 @@
    "flow": 32.9,
    "turnCount": 266,
    "score": 83.5,
+   "baseScore": 83.5,
+   "spotCount": 0,
    "polyline": "gkywEmmidYC`EuAtI}I|Th@dEG~Eh@`MxGhD|BbDL`AUpCiBjEs@dLuFnDeAdCUjCJhCbClJjCbCw@zBoBq@gA|@qAAk@|A{E{@qA|EpD~IrB~Ad@lC{@vDdAfC_@pBJn@lE`B?dAcAhCLrCr@`C{@`ChCdA^n@t@hF?jC|@rDjAhBuA~C`CdEQh@iCG_@|AvFpGLtFg@d@yAi@}A`@SlHmBv@{@lF{Af@l@bGdBnB_@rARrBd@wAPZCzAy@l@ObBeAf@lAbDU`Ep@xCdA{ATLaBnGgA`BOdFoAdBeCbAuCScBv@bB?z@`Aa@pCNjBm@j@g@a@@xAaAbFLfHkBh@uA[c@jBvAHCfAeB|EkDtB|@lD{@]Ig@]ND`A|@f@^tEdB`ApA]Zj@wA|By@fFe@Ae@iA[?k@rCNfBhBr@\\jAfAz@ZjEl@`@l@k@w@i@Xu@iBkHd@_@vA|GdBfEwAlAaJ^gGzBiOr@wK{D}DcF",
    "pointCount": 132,
    "start": [
@@ -203,7 +244,7 @@
    ]
   },
   {
-   "id": "岐阜県:9",
+   "id": "岐阜県:10",
    "name": "神原揖斐川線",
    "ref": "267",
    "highway": "secondary",
@@ -212,6 +253,8 @@
    "flow": 31.7,
    "turnCount": 172,
    "score": 83.1,
+   "baseScore": 83.1,
+   "spotCount": 0,
    "polyline": "qftwEcgn`YYkBuPiHqXuEmHoKgVjIg@`EfEnBu@tB\\bCfDlCnC`FjDVoDtApALlEsAVXeC~@{@vAgAb@eC{@y@{A_BtBgCc@oBhCeE|CgCoG_DY`@sCwBcB|@aDz@cA?w@yCt@aAvBgA^sAgBqDiAYyBcCc@k@cCmCwBO}@xAeDaC{CVsJeA{Gk@u@mAAgAf@{@vAGhC|@lAApAyArAcAKF|Bc@eBw@m@iA^s@y@NkAxBZl@g@_BiGSJHnBcAt@}AQqDfH{IYmK`BiLmBmCfCcEfI_MvGgKrK_E|@mL|I",
    "pointCount": 79,
    "start": [
@@ -224,7 +267,7 @@
    ]
   },
   {
-   "id": "岐阜県:10",
+   "id": "岐阜県:11",
    "name": "中野方苗木線",
    "ref": "408",
    "highway": "secondary",
@@ -233,6 +276,8 @@
    "flow": 31.5,
    "turnCount": 172,
    "score": 83,
+   "baseScore": 83,
+   "spotCount": 0,
    "polyline": "}a{wEyymeYrCrDXbCw@lHyC~IMdEjAjM|@hCz@rG`CxG]^eBBc@j@GdAdGfHuCzA_CtEr@rDOjEm@f@cBEgAvDVpCgAhAl@f@yAz@Y}@w@MsAfBqAo@YfByAv@V`FWhAwCm@k@`CaHzAiAzBf@pDx@vAMxBeAhC`BfBrBJ~AzADj@_@b@VrBKrBl@~DxDvAf@lB|BdD~@_AzC^nHrFtBpFjAvA^hCu@xBAvCiAzATzAwAjBfAKjBxGh@X`@zBh@f@a@d@wAcB_@FpA|C|DzEpBtLxGrJDlA}@bGL|BrBnI`EvEp@~AlJxd@`EhFSdBoAl@",
    "pointCount": 86,
    "start": [
@@ -245,7 +290,7 @@
    ]
   },
   {
-   "id": "岐阜県:11",
+   "id": "岐阜県:12",
    "name": "多治見白川線",
    "ref": "83",
    "highway": "primary",
@@ -254,6 +299,8 @@
    "flow": 30.4,
    "turnCount": 463,
    "score": 82.9,
+   "baseScore": 82.9,
+   "spotCount": 0,
    "polyline": "aeowEgb`dYA{AYOoWHsHt@eMmEgEyBoB_CyKiG_Dm@oH@_Ci@HwBqBoF?_BhBs@~Eb@R}@_Au@SoBmDiB{CnAMyAaAcBf@{B}@o@]wEf@Ev@nD~Aw@LfBd@`@rAyBrAn@r@mCbCERsAwGx@}A}Ad@uBWs@qBIHcD{@aAwA`AyAwBeAUeEnCmBO?s@vAeAPeEcByIr@aDeA_DvBi@c@kCv@yAcEgCSiBe@E_B~AyCi@q@eB}C{Bg@sDiBcAWsCyAaCgCS}CmCkBLyAgAUaFmCyIVuHgDuIiE{GWqAg@cMv@sEG_Bw@cA{FkAyBmBcCaG_B_Jk@{@gKg@uLqFiJdA}CkBoBsCkAm@uGn@mFoA{FpAiJ[cBg@aDcDiCqAoFQuEqBcGa@eB{A_CmEuDS}@g@yF}PyAEiCkAqCwHaG{DeAwAeEf@cFvBoEyAaIq@s@qAGiDoBuA`AyDmHoEh@yEoCeCDyC{@iA}Al@yClEd@{DUmBpByCwDaAgCuBeCrAcCrD_AXmB`CwBx@e@hAeAb@gCaCMo@\\oAY_AgBa@GsAiAo@}ACcHmBaBt@aDG`DxA_@XsFYaCeAeIu@aGcC_AkAcBMcCcDeB{NiDaEgDg@wBuBsQxBs@vB_@Na@G{@_BiCIEyA_De@m@~@_C_BRcD_@{Di@gBeCqBfA_@A[cCk@jAkA@g@_@IgBrAAtCw@tAjAhAoBy@XuCi@{CjA{Aa@{Bz@yAqB~@BpBwAdBLtBgA_CpAeBs@iCfAmBrD_C_ACwExAcCbC}AlEy@BTwChCiF}@mLy@Gi@|D{@z@}@qAL{FsA{A{EaB",
    "pointCount": 219,
    "start": [
@@ -266,7 +313,7 @@
    ]
   },
   {
-   "id": "岐阜県:12",
+   "id": "岐阜県:13",
    "name": "井尻八百津線",
    "ref": "358",
    "highway": "secondary",
@@ -275,6 +322,8 @@
    "flow": 33.5,
    "turnCount": 166,
    "score": 82.9,
+   "baseScore": 82.9,
+   "spotCount": 0,
    "polyline": "crfwEkibdYaEmDsCe@{AoA{BkIgEeJoAoAyIiD_C_B{AcC_MmFkQoNkCu@mBaBqBZaGoBsBwCeCKyB_AcAgDi@HRvBiBl@AyEa@oAbBuFmBuDcCoCo@iC[DHtCa@To@sBcIeC}A}B_DaBaIY}A{@eBcDiByAl@wCS}Av@cB}EnEyAMkCrAA^~@t@m@pBJuBuAqA|BwBFaAsA?aD~AaCHcAk@AgEmCxBWIy@aBd@iCeFLA}@i@i@YcBt@sCiASUn@DfJn@~AwBn@s@lAFlAc@JMa@`@wBI{B_@S_FjFqAdC}CdB{DzDuB\\_@n@aACw@jA^^iGtD",
    "pointCount": 89,
    "start": [
@@ -287,7 +336,7 @@
    ]
   },
   {
-   "id": "岐阜県:13",
+   "id": "岐阜県:14",
    "name": "白鳥板取線",
    "ref": "52",
    "highway": "primary",
@@ -296,6 +345,8 @@
    "flow": 27.4,
    "turnCount": 622,
    "score": 82.9,
+   "baseScore": 82.9,
+   "spotCount": 0,
    "polyline": "urayEqjxaYgE}KaGoDmAAqJzCgG|@{BjAoAAoOiEqMgGsB?iAeCsBqA{DNcGmFmEmBeBAoA_AgEeFeGgO}EqHgHkHaAiIaCoDfA{@Lw@iBgE{BeAsCoD{BgGoFkB_AcAEgCfFkA[yGy@}@k@aCyDaFoBSi@q@WuFrA_D@iBoEaJ@aB|@mCK}@mEcFiIyQmAeHqFkPcA{H_DaBmDgJSkHmByIc@qHKoEf@sFi@sJ{EaNgG}YmDwEs@\\x@jDeGgLoEgBNp@|CpCxC~GEzB}BpB]dA|@d@~DV}AZaFYq@u@`C}C@iBwG}GgE_ByA~@gAhBy@RM}Ak@u@qD]n@eEkBaA{CoEqAa@iCr@qC@qEkBcEq@}CPk@jAjDlJ_@PaCo@a@~@eCxAk@pEgAjB?zCwBkCRwDs@gG{AVuBq@y@j@o@pCm@P_@aAo@GcBhAaD^CaArCyHDmCjAkC_@]mDJYmAJkEaDkAeBv@iAnEy@|@uA~@q@s@{Af@Mc@j@cDi@YQ}B{Aw@gARiAqAvEgGB_AwACuAs@aFS[WD{B_@a@{@BwAhBiB}AKeBs@sAd@gAOoBqFuD^qBnBoBWsA_C]kFnCgEsEm@LOvBwBg@u@yAyDgD}@}DqAYfAiAqBG]z@fAvABdEl@zAsAtAu@dDiF|EcE{@wALJpCg@nB}AvB{BpAe@eDgDiF{@UwAwBM}DfBqDzAq@qEwJ_A}@{@JqBmCcD_Ag@Bu@~A_@Go@qGmEaI_Cs@]o@ToA`CwA`@_DrB{CbFeAjCoCjDEd@}D\\_@lAn@`B~Dn@O?aB}D_Is@aItBiAb@eAb@mJjDmSvCqDrGoBzBqFIkAm@Qe@^KxB[X}Fb@mBQHyAbEPr@e@k@gOdAgBnCC^i@m@eA_DBsBvCk@s@AiAd@eB`A{@rEg@dChBn@qAe@w@kFqBmCJiAoCaAg@oCt@qE]yB`BkAtDiAi@LoAjDmFbGqDtCc@tDn@nGuAPsAQ}Bf@oBWy@}AHm@fCw@ZsBsAaCrB}@a@R}AbFqJH{@[k@a@IkAhAeCa@uArAgAGE{B`BsAZuA{JUaFoKoAFwF|CyFN_Cz@c@u@nIgGjDuArD_FtKkEvEqGjBuG`H_IfJqDlFwLzEqAzCyEvJaEbByBfL}IdDw@dB{An@}CeBeEc@uEPe^",
    "pointCount": 314,
    "start": [
@@ -308,7 +359,7 @@
    ]
   },
   {
-   "id": "岐阜県:14",
+   "id": "岐阜県:15",
    "name": "安久田吉野線",
    "ref": "328",
    "highway": "secondary",
@@ -317,6 +368,8 @@
    "flow": 30.3,
    "turnCount": 166,
    "score": 82.9,
+   "baseScore": 82.9,
+   "spotCount": 0,
    "polyline": "{rcyEayacYdCnJlFrD|EVjBzArBvBtCjHpAG\\b@zCpI\\[JmBm@q@XKp@p@p@`EBjFwBF_B~AoDXyCsB]NHhCFqAZKpAlDv@\\l@nAOpBeDHJnAlAnA]pAnB_AxANxByEzDzBlFZtBvAjCWlB~AfSQhC_@|@o@|@`BdAbFOZmASk@zBrBtGG`Dx@dEd@ZrAcB|Cc@jBhAlAlCzBhBpAhF{CrDEfBdBzClAvEdCdCFv@eB`FcFd@LbDaAdGAdCZtDlCrGv@d@lCg@~CvCDfEWvAwFdHj@XvDa@`AnAe@hO",
    "pointCount": 82,
    "start": [
@@ -329,7 +382,7 @@
    ]
   },
   {
-   "id": "岐阜県:15",
+   "id": "岐阜県:16",
    "name": "美並和良明宝線",
    "ref": "329",
    "highway": "secondary",
@@ -338,6 +391,8 @@
    "flow": 34.1,
    "turnCount": 168,
    "score": 82.8,
+   "baseScore": 82.8,
+   "spotCount": 0,
    "polyline": "cwuxEev}bYlAyA`AaD^aGeDk\\J_PrCqG]m@iCAe@uAhByC`@mBo@qCDgAdAmAzB}@j@qAC{Kr@qEq@uGv@uCiEmFuB_Ja@`@TtFk@@Eg@b@s@o@uDqB}BsCgKsAmAkAQbAs@oG[lAbE_CqBSmAkBuCu@Al@o@|CRhA_AjBd@H_A}AwBv@kAbBLd@YFcBf@cAaAw@yBYwAkB}@fEoBq@{BvBe@wF]k@gAd@s@oAqCoAsBDo@zBwBeAd@_JcA_GRY^RlAdDe@iGmBiBwD[qEyDeD_AqDmEeA{Ce@uGi@o@",
    "pointCount": 79,
    "start": [
@@ -350,7 +405,7 @@
    ]
   },
   {
-   "id": "岐阜県:16",
+   "id": "岐阜県:17",
    "name": "深坂大野線",
    "ref": "266",
    "highway": "secondary",
@@ -359,6 +414,8 @@
    "flow": 33.8,
    "turnCount": 148,
    "score": 82.6,
+   "baseScore": 82.6,
+   "spotCount": 0,
    "polyline": "a}qwEs~{`Y_J_FeHcHyBDuIxLoHvH}@dCkBeAJ`Dy@hDSAIoD[CRrByA`EAjAdAfBdDXf@kBfAe@|D|B~AaCV{Bj@^?jH{ArEz@~C[LqDuCm@xEqBdBh@jAaAjCpBl@P~AmBHoAnAoBg@sAt@fArD`AdAVbBmB@]\\kBm@cAfEwCgAPgBiAeBs@[mATqC`ITtBwBbD`@JlDeEgC|GiEfASb@kQv@iGxDeObEyClFcCdI",
    "pointCount": 64,
    "start": [
@@ -371,7 +428,7 @@
    ]
   },
   {
-   "id": "岐阜県:17",
+   "id": "岐阜県:18",
    "name": "大湫恵那線",
    "ref": "394",
    "highway": "secondary",
@@ -380,6 +437,8 @@
    "flow": 37.5,
    "turnCount": 128,
    "score": 82.6,
+   "baseScore": 82.6,
+   "spotCount": 0,
    "polyline": "mvgwEeo~dY[\\}Ds@oMIn@_Co@c@sBj@TwB_@UkKv@eBSeE~AoG`AsImA{ALaDqKKaCyB{Be@sDYPy@pEa@BTeFeAwB@qBrB{AGiAaAVcAg@wC?aFoBwC_CqADaAfAm@@WkHaDqEkBu@{ADg@}CgBqC?iBwFm@UoAoAw@hBMsBiAaFT?]`Be@pBqD|ENvBoDM[_FEbB_DiD_@|BkCo@yFLm@]c@nAa@hCmC`A_CVeCYqBqCqGyAUoCoCfAiCO[",
    "pointCount": 71,
    "start": [
@@ -392,7 +451,7 @@
    ]
   },
   {
-   "id": "岐阜県:18",
+   "id": "岐阜県:19",
    "name": "平畑土岐線",
    "ref": "111",
    "highway": "secondary",
@@ -401,6 +460,8 @@
    "flow": 28.1,
    "turnCount": 108,
    "score": 82.4,
+   "baseScore": 82.4,
+   "spotCount": 0,
    "polyline": "ommvEeiydY~A]~BsBhFiAbB`@zEsB`Ad@xAbCjA\\RtAlBXZrB`@XpCL|BiBvAbAvCq@RiAoBeELiBfA{@dB`@nBYJi@e@yBrCyDpG_BxBgD`AaIzBkDp@_CrB]xB{CjAcDzBiMhDkIzAu@lAkG`D}Cn@_BdDoBz@oAGmHfAm@lDPfByBlA[|@yDdBuA]qCbBo@lBkHvFgFhAgDR}CnCFj@bA|BNlFgE",
    "pointCount": 59,
    "start": [
@@ -413,7 +474,7 @@
    ]
   },
   {
-   "id": "岐阜県:19",
+   "id": "岐阜県:20",
    "name": "篠原八百津線",
    "ref": "353",
    "highway": "secondary",
@@ -422,6 +483,8 @@
    "flow": 35,
    "turnCount": 123,
    "score": 82.3,
+   "baseScore": 82.3,
+   "spotCount": 0,
    "polyline": "ifrwEqvodY~C`@a@tBD`DZ`AjG|CbDrEzATB~BzBWtAjErHvDh@nA~@XDtAuBt@o@|@jGbCFr@qAtAbDrD{A~CIlAwDdBOtDvHyAjAPxCcFr@h@|@bDfBb@NtDs@dB@fAlAVn@xAhBlAx@nByA~AB`@fFhF?fCsATgAbBTl@hFxAvAfBvAf@fBnFu@zAhAwA{@gHaBy@wC{Dj@w@p@cEf@vD`ArA`C[",
    "pointCount": 59,
    "start": [
@@ -434,7 +497,7 @@
    ]
   },
   {
-   "id": "岐阜県:20",
+   "id": "岐阜県:21",
    "name": "高山上宝線",
    "ref": "89",
    "highway": "primary",
@@ -443,6 +506,8 @@
    "flow": 27.7,
    "turnCount": 396,
    "score": 82.3,
+   "baseScore": 82.3,
+   "spotCount": 0,
    "polyline": "ktz{Ei}eeYk@qUgAgEoBaBuI{BsJwFi@kAi@uFkDkMo@w@eGHiHo@eIbBgG_DoERqG}@kFoCkN}DkEl@_K}BqB}DGqMuEgEu@qO}DuQ{DaImI_[aGgGq@MS`@b@hGu@fEv@rFeBbCo@zDkAV{@{@JcBzAyALw@eBgJb@mGu@}DcAsBeHoBcBkBs@}EjAyJc@oEu@iCoBsCp@_GUmAsFeEkDgHgAg@s@b@iAjMhAhBvExBJpGg@Bm@qDwLrLeBGkDhBiBP]yBU?YlCfBbBdDuA|@HZn@UjCc@SXcBk@YkBvAcA`CiAA_@mBi@My@lA{Br@nBl@bAIpB`BGd@_CcAiDpAcBYs@t@iDn@}A@}AkA{@x@g@CiAkCoBeAaCRqGcJuA}@aB{E_GqG_DeBQ{@TmCyDkEmAkCqCn@Ks@b@yB{BeEaCBh@rCoDdBmEyEFcA_@{@iDyCaB{EgAAwA|Au@Q{Av@Go@tBiEYiAm@?_CfBuEGmA{Bw@QsBcC_A_CkApAeAkBeA[a@v@q@lIaArEo@nJc@?q@eBg@eH{B}JKkEkBuHoB_CkDBuAd@{AsBjBv@bBo@jDQrDhBEeAs@aAuFu@uDyBLYnAl@zHB?qA}HgCgB?cAqAiFiC_JmKq@ScBp@m@KOkG_J_IFs@`BYa@gDoCsBcAzAuA?cBiD@cExA_Fi@qB[g@gDm@aFkCb@gEbBy@rEoFwHdEeCxCkC`AsBvCsEp@_D~HsBzCeCxB_DtAuB`CiByEcC{TcBG",
    "pointCount": 204,
    "start": [
@@ -455,27 +520,6 @@
    ]
   },
   {
-   "id": "岐阜県:21",
-   "name": "白山白川郷ホワイトロード",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 23.96,
-   "curviness": 581,
-   "flow": 25.3,
-   "turnCount": 550,
-   "score": 82.3,
-   "polyline": "c`j|EivqbYv@fAtCYvBmE`DkAnDqFtAc@pK|]nFx@lHeArC|Al@`BOnH{DrB}C`FeAlHuA|E\\lI_AlFtCvDC~GnAl@fFb@R^s@tRuCfKzBxJ~EpLAr@cAtAZ~CcBzBq@lDiBrBwC~A_EoByDGiA`C_EkEoA]qELqD_AiB?q@x@InBwGYaAz@aBvCa@zFmFV}F|DkCsAiHf@x@v@pF?zArD|D}Ax@{@nCq@rDnBfCYh@w@pAgGtGbCdAWlAwAx@Bx@`ANrElBGt@f@KhEn@hEQn@o@KoBwG_DkAu@kAkA_@iBj@[dFaBzD_@PsEaBeCdBKbAjBvBrBqBlDbAzDcCxAzBnAzG|@v@rLbA|EQQ|@oKz@?`CvBhBObAs@f@yGv@a@\\mAdFsCeAWzEsClDStCgAViC{@}Ax@y@jJFxBpDjEzAp@f@nAg@zDkBrAk@lBFp@pBlCuA~ByBhBh@tBUz@{EnDmBCoBj@_@hDfDhGhA~@HbB{@dBhAlBnFy@pE`AlEaBf@J_@dCdArC_CvGoBpAEh@xCtAlArBpEpASpBaCdB_A~AF`F~@fCvOnLbBf@OjDpAnCKpBeBfCuEPoDpBjAlBzA^dJnHJbElAvBV~B_BlDyDh@]`Aj@pB~FfAAdAmAlDp@jDv@`@|@aC~C_BrDvAnBlFnBzAlBpJdD`CjCQzAlBHrEmDtEA|AbAjCMtBwD~DNr@pD|D@hAcCrCw@xHa@z@u@jAwARmAhAAbAt@hCa@vBc@h@yCDmDbFmD[gEkBm@ES`@R`CYrCzBdNFxAo@hBNd@`@AfA_BiAwG\\{Bs@eCRoAzCArCdBnAqBfDuAbFS~HmOlEcCN}@a@cBv@_CvFmE^_Ca@}BJoA`AgC@gBrAu@ZaAUyA|@sGu@aF`AiEVwEt@KqAjLN`Cn@nAFxE]|BLpBaAbHd@zC]vJoEjFkCxIU~CyD|FaDhLkCx@g@p@WpB",
-   "pointCount": 261,
-   "start": [
-    36.265136,
-    136.902287
-   ],
-   "end": [
-    36.254849,
-    136.802221
-   ]
-  },
-  {
    "id": "岐阜県:22",
    "name": "恵那八百津線",
    "ref": "412",
@@ -485,6 +529,8 @@
    "flow": 28.5,
    "turnCount": 104,
    "score": 82.2,
+   "baseScore": 82.2,
+   "spotCount": 0,
    "polyline": "agvwEqw{dYn@FjBbBl@S|AiC^kB~CiA`@FE~A}AdBr@n@jBo@rFoGpAbAx@k@`A^j@c@j@j@|Bg@Lq@s@oAc@sC^qApDzCtCHtEcA|BjAxC_@|JpIhDdBhFa@|BvArChPbBxC~@H`FgDpE}An@L\\h@I`E|BpCZpBhBt@VlC~BtAnC[|CoCdByClHpCrDtFvAuGGu@",
    "pointCount": 52,
    "start": [
@@ -506,6 +552,8 @@
    "flow": 37.1,
    "turnCount": 81,
    "score": 82.1,
+   "baseScore": 82.1,
+   "spotCount": 0,
    "polyline": "wu}wEumiaYIR~@gCFyAeAwDaAMuCxAmDFzBiKAk@uAICc@jAY~ArAb@QTaCbBgCGwDfAe@AoAh@i@WgAPgDfBaBd@TeAtBTf@[xAh@rAq@hA\\xAa@rC`@n@lAu@bHiNCuGnK{l@hCmX}CgB|AqNZeIkBE^oFo@iD",
    "pointCount": 44,
    "start": [
@@ -527,6 +575,8 @@
    "flow": 31.6,
    "turnCount": 110,
    "score": 82.1,
+   "baseScore": 82.1,
+   "spotCount": 0,
    "polyline": "y|y{EueofY|Av@DhC|ATDjDzGpBiAxIZnD_B~@`CdAiCfAnAVfDxDl@jC_GuCfI~LZXd@WGoEj@cAxD_AnCr@nAaAZH?f@q@p@mATeBc@}BfAGtClB~EqAdAStCqAdDeAAkAqCkE_CgAoBd@hCfB|B|AnHrCnDe@N_FmBcD{HmBaAjAbDXdGx@jB",
    "pointCount": 49,
    "start": [
@@ -548,6 +598,8 @@
    "flow": 33.1,
    "turnCount": 246,
    "score": 82,
+   "baseScore": 82,
+   "spotCount": 0,
    "polyline": "oo_xEcm}_YpB~HzCrEpBlAnAhBbBZbEw@~CzBk@lB_DhBk@fEt@xOfCfL]jGf@|InFfUbDrELzEvHh\\vCvDdEVxAv@x@bFvC`DdCtGBfDzAtDT`JnDbMhCfEdAj@L`ClAvB?~Di@pBnAfEi@J}@qAg@cCa@j@rDfJG`Fb@JxAiB`ChBjBjFbAyAjBn@j@z@`BP{Bf@G\\fBGRnAbAClAxAbAC`@z@Q`CrA`@|AfC[hBpHpJElAgAb@cAbCkAoC]?AtBo@pBuA`BaAiBa@X_@jByAZsAiCmCvDrA}@bC|CjA`@lAjCtDPAe@uAWPg@v@JxAv@rCLbDbAfDzBrFsAtFKhFtF`@lA|E~CnDfEbAXh@jAbBJlBbC~D@?lAsDnEtBtCw@lAx@nEmAx@pAxObDzGj@MbAcBhC\\Gn@oBz@Qn@jArBxAbHpAJWdAv@t@e@b@RhApCdDbBPMv@",
    "pointCount": 125,
    "start": [
@@ -569,6 +621,8 @@
    "flow": 26.8,
    "turnCount": 180,
    "score": 81.9,
+   "baseScore": 81.9,
+   "spotCount": 0,
    "polyline": "_fqwEu{zdY{@c@qBmIUkDaAgCzAGsAeAj@g@f@{CrGwDoDaMe@oEJkBjD_IxFgW|KsIYsEt@kCsAyDKwCtAG`GfMvFdCrDRhCbBvJGzBsDx@M|AlBnBDj@lE`CvArD}AbC[tAnAhAJxAq@\\y@bBO`LdAuBcDB_BcAiCSqCiB_@w@cAl@gALeH|AcENaBy@mIfD{BFaBo@uHuB_AiEiGqDaBgGaA}@cAuC[AeBtAeBCoA}C_AwAiG{AGOuBwBaFeBeAEgCgCuAgAcCyBi@ReCyAoCsE{FsBWeAoBcCoBu@oAg@aE",
    "pointCount": 81,
    "start": [
@@ -590,6 +644,8 @@
    "flow": 31.5,
    "turnCount": 256,
    "score": 81.9,
+   "baseScore": 81.9,
+   "spotCount": 0,
    "polyline": "kidxEetjeYtE{B`D`CvAgA~Cl@fA}A^qB~DoDjEoIzH_DfCInAdA|CBxA~Dn@c@j@_DZCj@|ASlDfBvAvAmGIcC{@uADc@`@ApArBClBnAlAnAnG`@ZVmAe@eEJqC[wDZoA^^@fCp@jAFxBrDvIl@OyAwC\\kCk@oD`@o@LxBnAhABpCrBl@\\nCr@r@~AUbCt@pCbCJ_@gAsCkBuAK_Fb@FPlBvB~@dAG~AqAjFf@rArABbAiAxGN`@zBbB~BWxBTiB{@`AmApBCmA{@Jk@dDFd@b@_@lAL\\jBkEZDTbBlAa@bBRzAqAjBe@pAP\\]A{@k@aAgFb@a@yCBmDw@sEeAoAkCQI{@pDa@|EvCf@OHy@sByAlCmA|F~BpD{AdAn@V_@qC_AUu@dJuCzCaCKc@wBPKe@f@s@lBw@hBd@NaCfFmAtAiCfEyBvE|@rDAbAzAnRyAzFmApFInC}@xHmG",
    "pointCount": 130,
    "start": [
@@ -611,6 +667,8 @@
    "flow": 28.1,
    "turnCount": 289,
    "score": 81.9,
+   "baseScore": 81.9,
+   "spotCount": 0,
    "polyline": "uuuxEskkeYvAkLKo@y@WB_@bB}F|BkEnAqHc@mCTeBh@i@dJlAnC_@z@}@xE_NdBo@`FZd@]pC}JpGuDbByChSkMvGaCdF}E|Bk@rEcDdBUhJV~GjG`FIrBsClB}@dHfBnAOz@_Bh@kKrIs@pDqBxDiRjIuLjAkFvC_HlIeNvDa@L]TcKjA{A|@oEcA}BoAe@eCiK\\aKi@wKoAx@gB]uCiDOyBuB@gG`GVxDmD|HcCs@m@b@]zEa@eBkB}CRuDdAuCPqB{BgM_Ak@e@vAyAYwATWoBo@Y?}AoA]qAiD{Ay@eC`@o@gBgABkA}KoA~@rAuArAjDh@VvAwCv@?n@dAp@M`A{Dx@RfAdBt@SgBoIuC{AWgBuDgDAg@hEmB~C`@OsEkCwE{@aDeBiBqFAm@cAqAZa@_@hBkEzC{AxDgF`CwA~CeFLcBzAyCfAu@vAqGc@mCrAsCOcCe@g@}Fh@cA]kAoBa@_Fw@kAyHWmFpAwC`C{@KgCkDsBgGjHkApOkNbR_LrDaDpWs]b@p@hDkEhIwGdCsGs@aC",
    "pointCount": 145,
    "start": [
@@ -632,6 +690,8 @@
    "flow": 27,
    "turnCount": 151,
    "score": 81.9,
+   "baseScore": 81.9,
+   "spotCount": 0,
    "polyline": "cd`|E}aleYPwAhAy@nH`@hIxGfDrHf@Rd@YHeA@uOf@aA`AOx@fAf@|CfArAtBbKw@jB|@bDTnIh@AjByBzC~BhAPpHyEbGjBfBeBjD|@xCbDjAPl@_ADeB_BcEYeJ~AeGpAuBe@cDb@sCbBaAnBMrHjEtAo@ZgEoAwB^eCeBgAuA{D?iAxCoD`Ce@t@qInBYzAoArA`C`An@|CqAd@gBvChAbDkEYoDh@{A|DZP_A}@cCHsBaA{AFu@pBo@`CiCxHhAGgBqCcE}BcAJ{@lB[xBkD",
    "pointCount": 75,
    "start": [
@@ -653,6 +713,8 @@
    "flow": 30,
    "turnCount": 214,
    "score": 81.9,
+   "baseScore": 81.9,
+   "spotCount": 0,
    "polyline": "_fv|EkydcYd@mJOeCwCqEk@eEuBwCoAoDyDcY}A{CcGsHcBgKsEiFgD}JmIeKCiB|@{BqB_AsCsHkBuOiAqEuOsWwDiCuDgFcCsKoDwAcIsN[gD_BiDmCoAwEsI}@{FeDkMyPeTHo@j@C|AfB\\GyFeIScDv@l@`@lBvAVhAdCtBj@^fBxAYtAnAfCwAzApDBzB|AsC\\_CfAvB|Az@~BGZ`@SjB\\dD{AxCzEpBo@kQeAuB_Eu@`BmCFmAcBk@aALW_BgCyBaB}Ep@yFsAcDFc@~@fArAUh@`DPC]oG{AaEs@aGuByC_@kCeBu@mBeCq@iGNcAaAiBIeCgBg@WaByAiC|@_AxFn@o@sDzA]b@mAhB|@rCaB",
    "pointCount": 98,
    "start": [
@@ -674,6 +736,8 @@
    "flow": 27.3,
    "turnCount": 108,
    "score": 81.8,
+   "baseScore": 81.8,
+   "spotCount": 0,
    "polyline": "k`mvE__leYlA`KbC~FlFtGrCpI~HnBlAvAXfD}@bFhBzIhEnIzAfGlD~GNnClCxA`@dBh@dFkBpCaDt@M`CjExEjD~ANnAgAjC@lE|D`EdAnCCz@_A^nAnCaArBfBx@h@pAsBb@hBrCaBp@iAlBaBIKhA`CClAiBpBQdByEjAs@`DEhDbHL~BfA|CzEpEzF|C|CKfAbEzAzA",
    "pointCount": 53,
    "start": [
@@ -695,6 +759,8 @@
    "flow": 26.9,
    "turnCount": 107,
    "score": 81.5,
+   "baseScore": 81.5,
+   "spotCount": 0,
    "polyline": "y`evEckaeYmAuA{@{C}AvAcA}IeB_CAcB_FDgAgC_BiAQcDoBw@O_GqCmAs@Dc@~@FhCe@x@a@KZ}BcAcJl@{BOa@wBQ{AdKk@?x@sFJuFpAkD?{@iDuFcDYkF}Eg@yFsBiHp@gJy@cH^kEr@oB?}AeBsDk@wDiBcFeD{CyB_En@cEl@qPeEiKbBqIIaDoEuFiAk@uBdAc@O",
    "pointCount": 54,
    "start": [
@@ -716,6 +782,8 @@
    "flow": 29.8,
    "turnCount": 158,
    "score": 81.4,
+   "baseScore": 81.4,
+   "spotCount": 0,
    "polyline": "y``vEcos`YzAjD|CbNrE|F`BfFbBxJ|@tA`NdExEd@lG~B~BPbDlChEcAh@iAnAw@rBQt@fAxAWf@tBfFzCtB|BjAVHdAlApAtD`AvErFdBn@dBE`B{DDmAf@Ir@hAXlCc@tKb@nAjDOX{ClAcCnAOg@jDh@nBWvCpBvA@h@oBl@gBCyD|CeH{@oEnCeBwAqAIaBzBRlD~AtBQl@yBg@s@{@eBI[jBsAhBAhCyBL{@z@f@zCQ\\wBNe@d@jAjF\\V`@{@iAkBBw@xBNrA}AbBrAl@|BbAj@`BdGx@dOvMlIRhErCbH",
    "pointCount": 82,
    "start": [
@@ -737,6 +805,8 @@
    "flow": 26.7,
    "turnCount": 275,
    "score": 80.8,
+   "baseScore": 80.8,
+   "spotCount": 0,
    "polyline": "ybzxEclb`YSVfH_MtCqJ`B}Lf@{Uf@eDz@w@bBYlEtAhBzAvEkAEuGnAkCi@kBjCo@jA_DrAM`@k@w@oF^aCiAmCn@_DnB}An@AhAdC`Af@lBkDvBwA\\_Az@S|@qCeA{CdAyFn@PzCnEdE[`BeBxB{FCgCu@kA?aA~AcIpAyAKeAkA_AgCq@wBdBm@_@H}F_@iA_BQQeBsB{AUqAp@UhFlBpBfBnGfB_EDjA|@tJ~@xDwA~@gFjCsBk@sDtB{@bAmAUmAdBq@BsBqDq@vByCrAu@gAeDoA]O_AdGuD?`@gC`Cf@V`EoEi@cBd@oDoB}BhDJvA}EnDkC`@cAt@iIfBcEe@iBuDqA{AcBo@gD^kFx@uBbDwB`AqBvC}JYqDtBcE~DgEvAaJ|D}JzByLvAaD`EeFj@mOh@wDrGwVxD}IXyL|BgH`D{Fe@mIuCsBmLaE{@oH~AeH~FsHxDkDnIoA|BkBvCyEfC}JvAqBhAcEdIsLsD}Ek@gCjC_FnAm@`CCbAq@pB_RWiA",
    "pointCount": 137,
    "start": [
@@ -758,6 +828,8 @@
    "flow": 27.2,
    "turnCount": 76,
    "score": 80.3,
+   "baseScore": 80.3,
+   "spotCount": 0,
    "polyline": "yscxEec}_YnHqCdDh@bA_@`GMbCsB|BkEjAWYoF{E}FkAuCc@kE\\kBa@_ClAqGbCwEd@{BvE}F|Au@hBkG`AyAh@aE`AoCh@qNx@k@tBh@|COfArBjCyArB]pBRbE}Ah@u@h@eDvAuBJiDfA}D[kBhCsGHcIpE`B",
    "pointCount": 41,
    "start": [
@@ -779,6 +851,8 @@
    "flow": 25,
    "turnCount": 281,
    "score": 80.2,
+   "baseScore": 80.2,
+   "spotCount": 0,
    "polyline": "gqv{EyzqbYvHvH~BjHlEbHhAbFz@lMCvDj@|B}BxEmDfDF~D|@pEc@~CsCjE_CpBgLvEoA`DxBnG\\fErJ~L`DhBxFpA|F|Cr@dBrARjAbElGhIdB`A`AdGtAnCpDdD`EfAPpA`BrCdB`@\\p@kBjJmChByDbKYrCZfFg@p@a@[KkGa@WYXb@`BOxJ~@dDCxE}@`CfBrGzDbD?jB`A~@~@fDjI~Cr@tA^nIWlJRjEcCtRwJxJaGbIy@lBpAnAhAaAfJqAl@gCbFaDfEjAbCkFtBTb@_@G_G`CmAdFkLhABaBjHLtD`CbE|@j@dAHx@y@rBI|@~BJnFiAdDmA?sC~A}B`@{CtDEbE`Ch@|A|IiCxBaAxD]jFzCbBrArBhClBRdDnBzBXfCl@TzAi@jAlARtCq@xGgFfBwAjAIhAXl@tARfC}AJz@Yx@_DtAI^VZvCDt@p@d@bGbC`HbA`AUdCNfEq@fAiA@@pCmBvCE`AtAx@jDaBfDfB",
    "pointCount": 135,
    "start": [
@@ -800,6 +874,8 @@
    "flow": 24.7,
    "turnCount": 231,
    "score": 80.1,
+   "baseScore": 80.1,
+   "spotCount": 0,
    "polyline": "aenwE{g{_YdAH|H~GwAxHPrDpAjBrFhDpAlCl@vEjAdBxB|@BxGzCfFzEzAnBrG~BjBzDl@jCdFdEbB|CbDtGzC|FPlC~CbHk@|HyFxDQhBxAlBFnB{B|COrCsAxKmA`Ev@bF}C`DhCbBLbQeIfLHrAZxCdGtDlDhCs@pFkGr@Q|@j@bAnCbBx@lAE~AeC|@MjExCzK`BjDObFtCdCUdDxAzEs@nCsC|AKpBn@@tAv@nAlH_@xCzEzA_Dn@YdEvCnCmCfBD|C_BlBVhAxAh@F|BkEtC_AbByBdBFjBdB`A{@~Bd@xCkExCj@KyATm@zA@tD{Ah@eFe@aBhBm@xAeBEuB_AyAEiBdBsAtBIPa@q@iIj@{Aq@qAfAyA?cChBiDo@iBpAwG@{C^_A?cDz@uHm@iA",
    "pointCount": 109,
    "start": [
@@ -821,6 +897,8 @@
    "flow": 28.5,
    "turnCount": 130,
    "score": 80,
+   "baseScore": 80,
+   "spotCount": 0,
    "polyline": "mfgxEan~aYho@`WzJAvEvFfChAdBIrFsDfAOfGpCnHfAdBwA|ApBjGb@bCtBjEr@|Ew@hDsCT{A~BqB`CaIpDgDzAwDnAq@tEcOhBsBx@uBhAPB`AOt@aCrAE~@~Bn@@dCf@BzAsBtAq@dBt@hAIKo@kADg@q@kCFC{@tAw@n@wB_A]eAiCyCiAIo@XK`CVvB~ArDYvBl@?j@kAOQVnBpCzMnHlPz@dXwBrDkDlJ}DxBVjAW`B`A`FmC`BF`BfAdBm@xAR",
    "pointCount": 71,
    "start": [
@@ -834,27 +912,6 @@
   },
   {
    "id": "岐阜県:39",
-   "name": "国道360号",
-   "ref": "360",
-   "highway": "trunk",
-   "lengthKm": 29.93,
-   "curviness": 567.1,
-   "flow": 28.1,
-   "turnCount": 604,
-   "score": 80,
-   "polyline": "gpi|EqnrbYmFd@cC}C}@yJv@iGnEsHzAiExFaGpD}HdDsCBkAuAsBnAkDtCoCfHcEhDc@tAgAoFReKrBw@OhAoLGwD~@i@x@pB`@FBYiAgCeBi@qAwAu@eF\\oJyDwLmCqBiA}BYwBFoJq@iFi@m@_@L\\hEm@jBFuB_@KSdDoAsJ_DmEi@oF{BkBmB_DNi@bGlA~BQbBsC|AmGp@YTf@L`Hi@|EpA~Bm@eCrAwE^qOdBcKEmAe@KoDdCcD|DeE`KWHE_@xD_J`CqKdA@`BoBdCmAzE_J_@E_DbFkBfBeDt@yAkAcB|@[dDoDpHw@z@iAL}AeCgDt@k@oAuBo@e@yAaBDuB_CeBSk@{AmBXiBmCDoBo@uB_BkAuAsEiCwC~BeNa@iDRiCh@oB~BuCVoAfCuBxBy@nBG|B{ArDOnEwBpQf@nG[fGs@vEaDfAsB~A_IF_Ec@mDTcCv@cCdB{@Z_C[m@yABkEyDqCoIaC`AfBqFyCkOo@{AeDzDCwEz@{ACuCwAOmBd@KWr@eDeAsBzCw@WoEvAnEk@fBdAs@CoCg@iBJoFgAc@vA{ADaBF~C|@tALcEkDmS@cDe@aEt@uCaA}BeBkAe@yCEsAh@dBVGw@aO}EgJqBsQiBqEw@IkCvBs@o@~@mHvA_BzAeF{@_DUuJeD}F{Bv@ByFyCsE}A[]uC_FkI\\cCy@qCu@i@qAAjAg@z@JB_@yBw@cDnCg@[jByG`DyDu@qEv@lARKqAoEj@BbA|A\\SkAiCaB[MoBd@{IxAeA@iJ|@bEp@d@o@sCQ{GmBkE^gEqAgLd@oLqEuBRSjAj@`CWP_AoBo@{BuFwA_@Ti@zBjCd@Ib@yCu@uBcAWaGfCaBOmAuFgBiDQ{DjBaHFeLo@uH_CqKeFqG_CcGyNmLmHuPeCiAgD}D{CqA_DeIqOiNmDg@yDoDqBqJkBuF{B_M_AeKcBVuAoAwK_LoFcIc@cGzAwHyJoZE}Jf@yHsAoJuA{AeM_DaGmIoFcAkB}Aw@oCU}CcCuDiHgSg@yHkBcEoEaDgGoN_@{IxBaJrCsDrCoS",
-   "pointCount": 284,
-   "start": [
-    36.262605,
-    136.906166
-   ],
-   "end": [
-    36.305282,
-    137.095732
-   ]
-  },
-  {
-   "id": "岐阜県:40",
    "name": "市之倉内津線",
    "ref": "123",
    "highway": "secondary",
@@ -863,6 +920,8 @@
    "flow": 24.5,
    "turnCount": 139,
    "score": 79.4,
+   "baseScore": 79.4,
+   "spotCount": 0,
    "polyline": "qbnvEmwxcYkBhDt@nBnCp@Xd@BxE{AzHuAhAuE^Sj@\\`C[z@q@D{DgBeAL{BvDiEd@wDdC@zDiBr@eDDcBhCAdFqCfE`@bGz@~BHpBiAnDMdDwApH{ChB{AvDR|BdDbEBfAa@|@eDv@g@dCyGdIyElCeGe@yEkDeJ`B{ChAm@t@uBbJeA|IiBzFa@vFwApDqBnBaBHaIkGmA^}@`B{A}@oDv@_C?aBxCYOHw@jCcDuAUkF`ChAxFSnDXf@|@u@CkC",
    "pointCount": 69,
    "start": [
@@ -875,7 +934,7 @@
    ]
   },
   {
-   "id": "岐阜県:41",
+   "id": "岐阜県:40",
    "name": "国道418号",
    "ref": "418",
    "highway": "trunk",
@@ -884,6 +943,8 @@
    "flow": 29.1,
    "turnCount": 391,
    "score": 79.3,
+   "baseScore": 79.3,
+   "spotCount": 0,
    "polyline": "goowEkaldYx@T~AlGrAjBpAa@|AaCzDmWg@aHiBmJyA{@GaCw@_BiBuB}EgCuA{BIcAwB{A[iDqAwE^eBkAiDDg@p@[NyC`AmCdHqHJgIr@?h@p@`AjExHmEf@eAm@cGyCqLRsDsAyAgBcF_A_@iBiKs@eA`@{@l@oH_@sBaAeAjAu@`Bf@tAsDfFoFOyAnAK`AgAjBJR_CjBrClDl@fBUtBXMhA|D`BzBZ`@g@jBRjEqAhA^xA}@b@yAbAlAnAuA~BCdAmFrBjAxCs@bAj@jBc@pCaCjA{EjC{Bu@Ma@qAy@?KeC}@[_@iCeCeDgAkGcDc@A]~AaBCoB_B}Am@@sBaEsB[oAyAo@DQh@{@u@s@T_@y@o@MHgA{AaCGsA{@y@P}@o@iBQcFP}Bu@qA?gF}AuCoCqA`@gAvC`@rCtBjCgGtBuB\\iBa@sOgBaMgBaCEeC{AyHFmDdBwDbDkD~B{AfDy@qAqCpBWbAzBl@NvCUbBmAjDy@fL}GLsArCgFpW_QrAsCvD}ZhBmHKeAlCqT`AwDlCgFHuAgAkBeJmCwQa@_K}GsByCuFeRoDeDmJeEsG_Lq@qIyByDDmLo@sB?}DkB_He@eIkBgFaKuLqAoHcD}B{FeB}KaHiFyDwQ_SeMwG_BuEa@eD",
    "pointCount": 174,
    "start": [
@@ -896,7 +957,7 @@
    ]
   },
   {
-   "id": "岐阜県:42",
+   "id": "岐阜県:41",
    "name": "大野瀬小渡線",
    "ref": "356",
    "highway": "secondary",
@@ -905,6 +966,8 @@
    "flow": 25.7,
    "turnCount": 333,
    "score": 79.2,
+   "baseScore": 79.2,
+   "spotCount": 0,
    "polyline": "wpdvE_scfY|B`QQxGx@~LhCvLdAt@jFhAxKlKzMjIxAhCnEtEv@`Bx@~EgAtFvA|H|DjHrCPxDpFzCIHf@_@r@XbA`ElCdAtCdBv@SxBfApBYjDb@fD}AtKyA`DBx@rFnHnBf@dD~CnDrAlCXbExDv@vDT|E~AxCbLU|Cl@p@[xClAzD~IPjBwAhF{D`HEz@lDfC`@nCpArCjA@|DxApJxFdBG~HrHdA`ERxDQhF~EbEYNTvC~DvEzAnFF~JmAdDnB~Ge@j@eCpAo@}AsC`@cAaAkDw@N|E]`D_KfCmA{CiACaDpDmDdCmKX{@zF}B_A}@TgAxAQhCwBBsAnD{B\\eAdC_CY{CrAqCi@cC|B_EZc@lADdAvEvAa@|ClHtGJfBxA|CVhD~AnBEbA|B~NiAxGgBzAYdAmAL{BcAcDtBCp@mBxBYnCJlDyBnA_DlIiFnByEn@Sr@HlFpCvE|@lF]hHZfAk@`J~ApCiAfDNrG[zERlCSpCeBbE_DzDeE~BIh@jHbMj@|BbB`AJrEYz@tAfEMtEpB`I`EpEfAUbGl@bDfI~EvUlBxTfGjUlAfK",
    "pointCount": 155,
    "start": [
@@ -917,7 +980,7 @@
    ]
   },
   {
-   "id": "岐阜県:43",
+   "id": "岐阜県:42",
    "name": "国道471号",
    "ref": "471;472",
    "highway": "trunk",
@@ -926,6 +989,8 @@
    "flow": 33.7,
    "turnCount": 379,
    "score": 79,
+   "baseScore": 79,
+   "spotCount": 0,
    "polyline": "u_b}E{bucYzEs@|BgClFGrA_CxDi@jEh@zCrA|GtGfEIlEzA`Az@RfDpEbDtBhFxCI|@dBjAp@pHWzBbC`PjHnFfErDRnAjAnFrA`A~FvAbA`B?f@fDlCnBb@zAjCLzF|Cx@tAV~BlDnC|@bCjDYzE|BbDa@bDdBjDxDR`FbBrBrBfAuCLbEzAj@fEjAxBXa@EsHXStGYbAl@|@e@dBrAN_BnAQvAwArBhAvE}BD\\oAbAlBs@jDT@c@mAk@A]p@eAhCUyA_EIuD~DwKRNu@~DrEoKQmA\\eDZ`@WpBx@fAaAbGVCt@aDpBqADo@}@@OaA`@mBE}C^BNzD^aFyC[xC{DE{C`@hCOrBjAK|@pASsBbAtA`@qAf@?nDgD|EoA|F}CRJoCfChRoFLR}A~@NdA`Du@|C~@jCvBnEwBbCWlB{Aq@jB|Fd@w@gAPg@tB`BfAFnAmA|AgD|Ak@RaCnB_D|RaIhFWnAcAr@DP{@~DuBcDMFiAzGgEhJwB|FgDrAA|ArAdImCrB_@|Ap@xFuAlCsB@Ys@EjEmFlB}Dp@{F]iAeDcA[sAXiCm@~A_@A\\{DzAmB`AkFdE}ClL}A~FbD`Bm@hA|@zB`@zAv@d@jB",
    "pointCount": 170,
    "start": [
@@ -938,7 +1003,7 @@
    ]
   },
   {
-   "id": "岐阜県:44",
+   "id": "岐阜県:43",
    "name": "乗鞍スカイライン",
    "ref": "5",
    "highway": "primary",
@@ -947,6 +1012,8 @@
    "flow": 26.5,
    "turnCount": 269,
    "score": 78.8,
+   "baseScore": 78.8,
+   "spotCount": 0,
    "polyline": "yhy{EqelfYvFzBxBtChC{@hHjCr@k@vA{EpCaBb@Rv@fChHpAdIoDvDODpA_BnFtAnBaBfENpAs@hDAjE`GpGhGiBd@r@mDzIsD`DT~@bAC~CqCnB{ExC]b@m@HwEx@yC\\yEu@eG`AcDk@S_DpB[UFa@xEcCzDo@hAaBXb@@|B_@~AVVZWr@oM_@gDg@LgDnHo@UpCaF\\mEtALrAjBpA|NP\\h@KoAwQ{CeIyCa@Yk@pA]bCHhGbJh@BEs@qAiBa@wCI{LiAgEaAiAZg@vAd@zCvGv@`D\\DiBgZl@Pp@rErBfEf@Pl@i@zB}G|BmE|HiHp@gCn@c@nEsAp@Fp@~@hCdJz@d@lPwHhAJvBzA~@QtD{TvAuAVcCzBgD`CwAdBkG~B_CvF_BtAiCzAgAxBLTWMs@mBw@wBtBc@MBu@hDwAfGXlGwCfBgEF{EZHJ~@k@tIX^TQtA{Pw@iEfCeCIkCxA}DfBJdN`H|G`AdLeEpO_KxBOxB_ClC^~AjA|DfAjE~C",
    "pointCount": 142,
    "start": [
@@ -959,7 +1026,7 @@
    ]
   },
   {
-   "id": "岐阜県:45",
+   "id": "岐阜県:44",
    "name": "王滝加子母付知線",
    "ref": "486",
    "highway": "secondary",
@@ -968,6 +1035,8 @@
    "flow": 25.6,
    "turnCount": 234,
    "score": 78.7,
+   "baseScore": 78.7,
+   "spotCount": 0,
    "polyline": "w_wxE{}ueYu@q@mAAaCbA{@bBmAVuEsDkAKqHdAcDAkCcA_PkBoHaE}GiAgCuCwKkBcFgB}BZsGxCmGKgFkDOwAwAuAA_BwD{H[yBiAu@cB_Ei@TcBrFa@zDuA|BoFjFe@pE{AzDTlASh@aG|C{BSuAy@q@xAeBqAuBCaChAe@qBuGCsE{GyCyC_D_QoBnAsDp@c@[Fm@`DsCk@{E}CaCLmBqAwB{EoAiA}@i@}CReC]a@oACeFgFg@eBgByAu@_GcBqBaGsDwGm@aEkAyA{CmGyAeCFyDpC{A@cBiBuAiDD_DqAgA}OaA}A_BsGD_Eu@kDxBcAhEoBfBRjCa@TAxEwD|AuCtGqBrSiBvA}AToH{A[n@x@~CKt@u@v@sCTyDrBwAjPw@l@wBMgBx@i@fHyErGkF_@kBt@cGl@uApBg@xEBlDiBpDaBjA}@nCiBh@",
    "pointCount": 119,
    "start": [
@@ -980,7 +1049,7 @@
    ]
   },
   {
-   "id": "岐阜県:46",
+   "id": "岐阜県:45",
    "name": "国道256号",
    "ref": "256;472",
    "highway": "trunk",
@@ -989,6 +1058,8 @@
    "flow": 29.6,
    "turnCount": 188,
    "score": 78.3,
+   "baseScore": 78.3,
+   "spotCount": 0,
    "polyline": "ygdyEquzbYkL}\\}AuGn@aJs@}SiC}JqAeD}FiDcDuD{HgCS_E|DkMtAeHzA}BfAcE~AiAhFm@~DmG[s@wClBqBdDeBOoBf@o@WN[h@R`Cm@v@JtAeEfBiBr@iFvAOIg@yAZeApFsBvA_AzBcDFG]|CId@qBpBuBfAgI|EUMYgCVu@k@iAd@k@~@Q|EsBfBC]jBwBIeGrCyAjAiPl@@j@nNx@IdBaBv@lBzA~@f@Ex@{AzAkK~CsEnEeRvAyBB_DkAkHXIdEjHr@AOwFaB}EaBkBC{C~@E~AjA~@WjAdAt@Yr@p@ArBXz@~CjBt@kAtAQbCj@hA_E~DLtAw@~BH\\aAB_AoDoK@{FwLwW",
    "pointCount": 98,
    "start": [
@@ -1001,7 +1072,7 @@
    ]
   },
   {
-   "id": "岐阜県:47",
+   "id": "岐阜県:46",
    "name": "落合・葛屋線",
    "ref": "",
    "highway": "tertiary",
@@ -1010,6 +1081,8 @@
    "flow": 25.3,
    "turnCount": 85,
    "score": 78.3,
+   "baseScore": 78.3,
+   "spotCount": 0,
    "polyline": "}y`xEgdzcYp@sCdDaDKw@eE?iEaEiE~@cDaCgAiBmC{@wBBImAxCuHc@sAaBaBuDeAkCr@_BCcDmDmEW}AzAjBvBBlAwDlBGtFeFxB~@pCQx@{Ch@Wf@~AnGWj@wFf@kEgAmCuBcFVmA^oClCuH|EmCG{@hBsAv@eHTqEq@uDZ",
    "pointCount": 45,
    "start": [
@@ -1022,7 +1095,7 @@
    ]
   },
   {
-   "id": "岐阜県:48",
+   "id": "岐阜県:47",
    "name": "月瀬上矢作線",
    "ref": "101",
    "highway": "secondary",
@@ -1031,6 +1104,8 @@
    "flow": 28,
    "turnCount": 126,
    "score": 78.2,
+   "baseScore": 78.2,
+   "spotCount": 0,
    "polyline": "}dmvEsnffYIoApByEMmFu@mPeFkZt@}WkBgDr@oDS}ATmF~G{JM}BgAoB{A}FDmAjBeCtDy@nFkGzA{DrGwGLkB`BqB\\mB`@m@pBOfDwGh@G?tA_AbD}@bA]pBqBxCY|AZ`@zEcClLwLdBkCxAyFnBiBpBDrBeA|AqB^_BnBcAZaB`AkAd@eGtEkFj@iCeBe@eAcBwCe@YYL_@pGDLmB~DoMl@kAfCuA`CaEc@Q}@h@Wg@rAeC`AXzAi@pBcBhC}DlBm@`E_DbBMlAiAtBUjBcEx@oElF{K",
    "pointCount": 77,
    "start": [
@@ -1043,7 +1118,7 @@
    ]
   },
   {
-   "id": "岐阜県:49",
+   "id": "岐阜県:48",
    "name": "上之保下袋坂線",
    "ref": "294",
    "highway": "secondary",
@@ -1052,6 +1127,8 @@
    "flow": 25,
    "turnCount": 96,
    "score": 77.7,
+   "baseScore": 77.7,
+   "spotCount": 0,
    "polyline": "konxEylxcYc@HoBpHqEdLoB`A|@jBH|Gi@t@}AgA_@PpCrE]dDaBtAeA]YeAmAR{A_@_B|@p@ZfA[`CnCr@`I}CjO{CzBgC~Dn@|Qh@jEyBtKpAvGe@hEr@fEv@xPy@jR_FXoAdFtCnKDvFdBpAd@lCfBtDd@dE]jGpAdB",
    "pointCount": 43,
    "start": [
@@ -1064,7 +1141,7 @@
    ]
   },
   {
-   "id": "岐阜県:50",
+   "id": "岐阜県:49",
    "name": "神原西津汲線",
    "ref": "268",
    "highway": "secondary",
@@ -1073,6 +1150,8 @@
    "flow": 25.2,
    "turnCount": 117,
    "score": 77.6,
+   "baseScore": 77.6,
+   "spotCount": 0,
    "polyline": "}j_xEoad`YgEwIaCyI}CEsBw@cCTyB_@cDsCf@wFzAkCVoBeA}B{Ac@kC~@eB?}@eAyAB}C}D_Fo@qI}C_I{HoK}OcAK_Br@a@bG_C`B_CMuA_AuC{E}A~@WrBaAzAmCjBwCi@cEqCw@aGtBcKs@gCsAWAsBXk@TW`CL|BrAj@n@HlCVFfBsDWqGx@cFbC{FGkClAiArBoF~GuCrBmC|HK~DcDdBkDjBSI{@dA?",
    "pointCount": 62,
    "start": [
@@ -1085,7 +1164,7 @@
    ]
   },
   {
-   "id": "岐阜県:51",
+   "id": "岐阜県:50",
    "name": "恵那蛭川東白川線",
    "ref": "72",
    "highway": "primary",
@@ -1094,6 +1173,8 @@
    "flow": 28.2,
    "turnCount": 217,
    "score": 77.4,
+   "baseScore": 77.4,
+   "spotCount": 0,
    "polyline": "_mqxE_vfeYXo@dAPbBo@tFLbEhCdGoIk@kHnDmCmAiFh@kIz@y@By@gCkDpEmTu@yFtEqCrCgDx@iCtAeA|CcB~BZzAw@jCmEhAoIOaDRq@vIuEvByBzDu@jZ{QlFiIlDyBtAkHzByDj@_DYePh@kEpE\\^~@j@LfJDhB|C`BtArHfDl@v@nAo@d@HlE`H^SJgE`@O~@nBAhAhBhA`@jC|CrDAzB^?l@aBb@~AvAa@_@nD|CjG[|AnFjPzDlGXIt@kEv@@hArV|A~BnBpA~B`IUfBxClA[l@Nx@zDt@fAvA^SEkD\\YnBdC|BdB\\Gb@oFv@IzAjJxAjAj@~B~CnDTpEdCfFd@hEWnE`DrH}B`^QxNv@bCnE|GX`CzBnGRdIjEpEdBjFbCfUjDzJD~NnBnQj@xKlAxCvC{@h@eEnBZ",
    "pointCount": 115,
    "start": [
@@ -1106,7 +1187,7 @@
    ]
   },
   {
-   "id": "岐阜県:52",
+   "id": "岐阜県:51",
    "name": "宮清見線",
    "ref": "453",
    "highway": "secondary",
@@ -1115,6 +1196,8 @@
    "flow": 25,
    "turnCount": 412,
    "score": 77.1,
+   "baseScore": 77.1,
+   "spotCount": 0,
    "polyline": "mrszEgotcYcB`Bu@Ik@{AViKaFwFwAo@qA_C{Bm@sBuDyF}EaCyD}B}@}CW}QmJ{JyAqFK{AyA}AAcDaDyC}GwDiBiDKaFfAqAyAm@uDsE{FaCcJcIyAkEuHmCe@eBqB}Ig@s@oAgBy@Kf@~@|BOfBo@_BaBd@So@`@_BOcAoBwBkBKqAdB[Cu@_@`@kCU}@wFRGo@x@s@GeBnAgAUiFn@Y^kAe@{@`AiGB_Dg@uDmBqB{HkDoAZuAnCa@@sAqCt@cEMcD]O{AvBw@k@lAaFH}B|F~AdAYaAu@Ko@p@_FY{DoCgDsAL_@_BeAImAyBu@Qc@nAaC_@GgArBaAJi@yDgFk@mDu@sAm@{@qAa@y@{BwBsBkCq@mBVq@m@o@_FRaDcAkCIiC}B}G{@i@}@Fi@mA}Eo@aAiC{AiBOkAmA{A_@wDkGaHFkCyAwWz@uGFcEs@eCXg@pBl@E}BdCs@jAiGOa@eAKgA_EkB_DaBiJBiC`D{NA{AeCiG`@y@|EyBLsC|BiHpBi@v@yAOuDy@oCgEgE{CeF}D{BmCU_DdEcBA[_GsBsCuAFcBpBaBBkGjBqEq@mCyCkFgBcEiDwAcDoA{ImFaGu@?aC`BgJN_I_FwCO}DbAcEuAkEg@cB_Bg@}C}CgDiCyGkFqC}FyG_Bm@kBoByMyHC{BwA_EQwBRsLpAkHCmCmAuCcF_HcA_D{AcOqGmIeF{BeDkC_AeH{A}B{@sFoAuDqCsDwCiHuBuNb@qFuHsLiAeF_@oLwB_CgA}CeBgBaAuE?cG{EgI{EyPwBsPoEuKv@wFyAsNgFuL",
    "pointCount": 216,
    "start": [
@@ -1127,7 +1210,7 @@
    ]
   },
   {
-   "id": "岐阜県:53",
+   "id": "岐阜県:52",
    "name": "国道306号",
    "ref": "306",
    "highway": "trunk",
@@ -1136,6 +1219,8 @@
    "flow": 28.5,
    "turnCount": 106,
    "score": 77,
+   "baseScore": 77,
+   "spotCount": 0,
    "polyline": "mg{uEi`n_Y`F}BtGiIfG_Qp@aHaAk@_Av@{AhDFvAw@nDwEvCAlCoB|@a@nAwAlAgCn@?y@`Cg@t@y@h@}BjAs@KkEpBaAhAmB_@cIlBs@IeCvA_AVu@KgAmB{BViA~C}BJ{@eDkEvCgBDgEuCqIeDeCjA}BK_@aD}BhBgAKuEtBeBzBx@lAsC",
    "pointCount": 47,
    "start": [
@@ -1148,7 +1233,7 @@
    ]
   },
   {
-   "id": "岐阜県:54",
+   "id": "岐阜県:53",
    "name": "緑資源幹線林道　高山大山線",
    "ref": "",
    "highway": "tertiary",
@@ -1157,6 +1242,8 @@
    "flow": 24.7,
    "turnCount": 121,
    "score": 77,
+   "baseScore": 77,
+   "spotCount": 0,
    "polyline": "w_g}Ee~weYvB}@vACZh@E~CZv@vIlBDhBuBtBMt@d@n@tD`AjApDbBbB`Cj@fEkAxCnCrDBh@`@j@bGc@n@kEhAIz@Xl@rAh@|ApBxAZjAjB|DVpCzBn@jB|Ad@~E_@t@\\FtBkEbGy@n@qCO]XOnAnBtDo@|A_HkB{@PIp@~@`B|FrEzA~DhEjFp@dHvDfCvA~BrB~FKhA{AvBDbBlFfLPxAw@|AiD[iD|BmG{@{@x@ObB\\dArCbA~J|@xClFfAl@dPuA",
    "pointCount": 70,
    "start": [
@@ -1169,7 +1256,7 @@
    ]
   },
   {
-   "id": "岐阜県:55",
+   "id": "岐阜県:54",
    "name": "国道257号",
    "ref": "257",
    "highway": "trunk",
@@ -1178,6 +1265,8 @@
    "flow": 31.8,
    "turnCount": 70,
    "score": 76.8,
+   "baseScore": 76.8,
+   "spotCount": 0,
    "polyline": "cguzEqzpcY_GdAsRx@k@`Ag@vGi@nAiF`BuENMdDiD?kBfFqEd@yBvDoFnAcBpB~A|ATtB{@tDQ~HXrCwAbD_@vF~DrDCxAj@pAi@~@MjCrBhAJrAxAzCg@`AFnCeBo@k@r@m@rC]rGgAz@",
    "pointCount": 37,
    "start": [
@@ -1190,7 +1279,7 @@
    ]
   },
   {
-   "id": "岐阜県:56",
+   "id": "岐阜県:55",
    "name": "金山明宝線",
    "ref": "86",
    "highway": "primary",
@@ -1199,6 +1288,8 @@
    "flow": 25.2,
    "turnCount": 183,
    "score": 76.4,
+   "baseScore": 76.4,
+   "spotCount": 0,
    "polyline": "eflyEqgedYf@?A`C_AvGh@l@hB@dCcAjEJfA}AvBWnAqA|BEnAsCvBp@jCUj@cDz@_AlEdBfLj@j@pASdBgDtCwCjEeCYcC|AyF@}ChBIfAr@vG`CtEvBfAz@dCzBt@x@fBxDCPd@Q`Ch@x@bEuAb@NEfExBxAAnDjCf@jDrGpBbAt@jFpF~@jAUzAwAjAkCjGyBjB}E|BQrAoB~CW`@iCxB_AVkAeCgFNmAlH_@lEbBr@MJ{@o@}DA{B\\s@jBF~H`ChDuA|BbBvA_Bl@Gb@Tl@|BdJhBz@e@lBuGYmEZo@|@?tBxAlBhMxR`MnEvGxBjBfAzCpHbL`QbGtM|IjGtMkJrD",
    "pointCount": 93,
    "start": [
@@ -1211,7 +1302,7 @@
    ]
   },
   {
-   "id": "岐阜県:57",
+   "id": "岐阜県:56",
    "name": "鼠餅古川線",
    "ref": "473",
    "highway": "secondary",
@@ -1220,6 +1311,8 @@
    "flow": 26.1,
    "turnCount": 264,
    "score": 76.3,
+   "baseScore": 76.3,
+   "spotCount": 0,
    "polyline": "csc|Eu|leYgHsB{BVpARdCvB|ARtBrCnAN`@|AbBx@{@fC_C^_Ae@yCp@nA|BnApHt@hAg@tB@~BZAr@gBVmCx@]RPM|BfAdCe@dGbCi@Pd@i@`CO|H\\jDY`BnBzKDjBi@rBd@jAMVcDe@gAjAzClKq@hDdAtAtANXON}AbDJl@w@dAl@VvA~@nA~@lFHpDk@~BxAfHGtGrFlBd@rAAfLfCzKApEi@tA@lA|DtDuAzD^dDxDtC_@|FqFpGE|D^pCrBdDsBtBSlCj@rF`DlFg@rFv@|Ai@tFmAhCh@nBExHrBpD`@`FjAvDjCrA~CLfCdDfABvFcC|HW`AmAdH}CdJ_AlI|ElDbAfB~BvJxBlAdAtCZhBrAhB?|F`EhFzHr@pCPpEl@`BR|FbCxHaClDDbDfFtCj@lA_AxE\\xQc@|BeDvHAtMhBtGU`Fb@`CCpJ}@rFOdGyBdEiAbEoHtIqFjDqK|JkFpJe@pDr@dNqB|Gu@xI{BxJkBtEsBnCwAbE}D~C_BToCbD{AbH{AhC\\|IsGpFmDl@]fFf@|J",
    "pointCount": 148,
    "start": [
@@ -1232,7 +1325,7 @@
    ]
   },
   {
-   "id": "岐阜県:58",
+   "id": "岐阜県:57",
    "name": "瑞浪上矢作線",
    "ref": "33",
    "highway": "primary",
@@ -1241,6 +1334,8 @@
    "flow": 26.2,
    "turnCount": 247,
    "score": 75.7,
+   "baseScore": 75.7,
+   "spotCount": 0,
    "polyline": "yiovE_aqeYh@sDxD{E`BaHtFmItFy@pDTfEcC`EaRrCmH~@mGvCuFZwDdBkDjDaBjBkDk@uIcBuDFiFvAoOoFgDoEwRXuCrDyBEcDk@kBoGyC?w@jKv@dN}@vDkCtC}@t@iB~HRhBuB`E{BdBeF|AeAxA?jGtCjNxBvC_@fAcCEoCw@_CQyCr@gHmEcQwBsGgKkJaEcH{DwOeAmP|A{FHuCs@oMyA}EFoFqDuHL}@iE{GkAqFeCkBcCwFp@}F~EoJ`DaLjB{Cd@qE|A_CHcAiBsCwE_@gCqGXs@bCJh@e@aBeGQaDoBPU^bA|AVpB_Fs@yAlDm@cBaAl@]M@iIqBoDaAq@XaEkAm@bAoALgHwBsB}@Nc@e@z@q@tDDxAoAt@E~@{CdEyCXXuAx@QtAhAiAzAWjAiBtAt@RoBxDwAjDWpAd@h@QZoIdB}CG_Do@sAKaBrA{DHwDxBcGeBoH~AgG",
    "pointCount": 126,
    "start": [
@@ -1253,7 +1348,7 @@
    ]
   },
   {
-   "id": "岐阜県:59",
+   "id": "岐阜県:58",
    "name": "上半田川名古屋線",
    "ref": "208",
    "highway": "secondary",
@@ -1262,6 +1357,8 @@
    "flow": 25.3,
    "turnCount": 85,
    "score": 75.6,
+   "baseScore": 75.6,
+   "spotCount": 0,
    "polyline": "}fgvEguzcYiE|@yEmAW_BFmIaBmDDqBaAgAoCQoAoAs@_LiDaFiDgBh@q@lBgKtDEfB{AxCFbBcAfAuBPiFQcB`BU]aBgCeCaDUViBiA{I~@uD]sCsG{E}@eF`C}J|HuNl@gCJqEa@iBgEoDGuEoCsCbBiLbEyL",
    "pointCount": 42,
    "start": [
@@ -1274,7 +1371,7 @@
    ]
   },
   {
-   "id": "岐阜県:60",
+   "id": "岐阜県:59",
    "name": "御岳山朝日線",
    "ref": "435",
    "highway": "secondary",
@@ -1283,6 +1380,8 @@
    "flow": 24.5,
    "turnCount": 549,
    "score": 75.5,
+   "baseScore": 75.5,
+   "spotCount": 0,
    "polyline": "mkgzE}z|eYB^pA@pAzAA~@e@xBcCPNbCm@~Dz@`AIj@yEFi@^j@bDOhAeArAf@fAkBXeBkAwBdBeIhDmCsAs@j@u@dDkC`Ay@GsA{AqBY}AR{AqCyEzCcA?}@yAIoCg@yAeAk@uC`@mHyHxEtAbBQCc@uAEsI}HaJ|AgAE_Au@sBiE_@qGJaA~D_Fp@kBIo@iB}@Os@TkC`AaBu@u@gBtAmAUm@_Ab@eCYsDcBsDuBg@gFh@{@{EBw@~@{@bCzAlAs@DqAaA_C`@oAbDb@|AaCx@UxBjBjCXdDyDc@sCqCyCUkDo@{@UiBf@qCrDw@^sB_CqJkEmFcAwImBmDc@}EeAcCHmA|AoC@{@s@m@eE?mEeA_@m@MsD_EoAkH}MBoCdBkAl@oAT{Ea@oAuDy@cAoACiGq@uAoE{@}@wA@cEzAmIOiAcF~BmArAjArEJjB_@nBoB?_GqAmPpCiAaINcCwCgBuCBeGaDEpHwC|EXbFc@p@eAFiA|@nBtJ|BvAjC_@BfA{C~AsBCiAk@{@v@{AJm@t@yC~@gBpDrAfF`El@tAtB`A\\vGHRlAgEtFeHhCkBnEOxBtA|Db@Do@}Cd@sBj@bD`CnB}@hCsC~BtBfEmEbD_InCkCzCIr@rA[fCwB~Kq@`MtCnBlAfApBaLq@oGnBF\\`BWX^eFrBiCpBkD~H}BtTqFxHqH|F_A~BkG\\h@f@`CJ@lAmEnCy@rB{F^@lChEtEn@lD{D|LaDfFPrApC`GF|E|BdJCb@mAv@q@rCgAbBfAzHkAfDsJlKuHtKqDbJuE`EyDdHgEhE_MvAiOtDsC?aIiCyB`@_BvEI|BjAhW`BnSyAdJ|AvOw@vHn@rGEjC_@xAmCxDk@rIuAjFCjKyCjREdI[vBiB~DaBzGeCrDcD`C_DrGya@vHgDtCaWnKiE_@mG_B_GGcI|BiNEqI|DmDp@m^y@aDtAcS?uDq@cOGcJmCkA{@uB{DoDgAeCkC{NsDcLiHkLeDqIiHgP}G",
    "pointCount": 269,
    "start": [
@@ -1295,7 +1394,7 @@
    ]
   },
   {
-   "id": "岐阜県:61",
+   "id": "岐阜県:60",
    "name": "篠原八百津線",
    "ref": "353",
    "highway": "secondary",
@@ -1304,6 +1403,8 @@
    "flow": 24.2,
    "turnCount": 103,
    "score": 75,
+   "baseScore": 75,
+   "spotCount": 0,
    "polyline": "ihwwEiizdY|AdAzD@zA~Ar@vBvFf@tCShAv@rBjS|AdDlChAd@lJhF~DJ|ChDtErB~FQdAeBB_Af@y@fBH|AjCjBbCf@xA|B`GxBzBzJ~AdBf@UKaB\\a@vCf@l@Qz@gCf@{ExBg@bBvBz@pCDvBxCSdAlGhClCpCjAt@dH|D~Gt@vExA\\bElC|MxC^~AdB`AbEzFlMdI",
    "pointCount": 52,
    "start": [
@@ -1316,6 +1417,29 @@
    ]
   },
   {
+   "id": "岐阜県:61",
+   "name": "美濃加茂和良線",
+   "ref": "63",
+   "highway": "primary",
+   "lengthKm": 21.56,
+   "curviness": 433.2,
+   "flow": 23.7,
+   "turnCount": 395,
+   "score": 74.6,
+   "baseScore": 71.7,
+   "spotCount": 1,
+   "polyline": "igqxEk~jcYaEgA}O}KyCKoGhG_FnXmCjCq@HyK_H_M\\mAk@eEgFyCBuAdBk@nBaAbFAnBv@fCfDhERxCoEbGcDjPoXUs@fD`CzDj@dCApCo@hA_BS}@kC}CuBsV_B{FcEk@{FgAdAaDdHaHnD_Eh@eE|AqE~Fw@O}@{AwBq@uFuFqAiGuBP]vB}BhCeA|KHrCo@j@_Fw@}Ah@o@xAb@bB|D`@l@|@u@|Eb@bG}AhFr@dEtAjDnC|A|CdGW|A\\rCW`EdAnDSdAwC~@qCi@qKzDcBzAoBjEeDgAeDXaEaBcAcAgBHyAtAmHkCmC`@mCnEsET}AYeEmCuD`@{A}AO}Ao@aAmB{@_AoF{Cb@qDGBh@zBdBrBBtE|HOd@_F}GuAp@aEYWwByCHU}A_@Q{Ch@eCKLy@tC_CmCcAb@eBUS_GgBh@aBvCo@sB}AgCc@uCd@a@b@v@x@Ml@mC?iAhFo@PFkFt@aDw@iEDqEoGiPiG_DaCiGl@wDxAcBNqAeAyDXkFuCyRiAmEGuBfAgBjIwBn@kDkCsEoAs@{MzA{A{A]sCxBaJy@gEGeFm@wA_Cm@eCF{GdCyEtCoAL{D{BwFgKO}@XmAnIkLrI_BrGoG`FoJNqE{@kCs@m@ySyEyFYkFj@w@WaB_EkBsKoCqEgBoHoBqC_B{@kMmCgIpBeHpDeF}C{ADsDtBeAK{@kAwBcPmDuEeDkCuKw@gBq@aD{BwEmFmBw@",
+   "pointCount": 194,
+   "start": [
+    35.646775,
+    137.031581
+   ],
+   "end": [
+    35.738665,
+    137.056877
+   ]
+  },
+  {
    "id": "岐阜県:62",
    "name": "下明智線",
    "ref": "403",
@@ -1325,6 +1449,8 @@
    "flow": 25.1,
    "turnCount": 189,
    "score": 74.2,
+   "baseScore": 74.2,
+   "spotCount": 0,
    "polyline": "a`hvEubbfYxCg@fDRzAo@bC`ANvClKGnBvAZfCdAzBMlE~A@rAfEZvB@rH|BzGrEbDfAxF`A|AbGjDbB|BdE|MDpCa@tDsDnJ^pDQbCT|DQdBgApBlDh@dCdBzB[hFxAVtASnE{@lFp@hGbCbBHf@s@jDVzBO~Cu@nAoBRQlA`@zCsBpEmBm@yCf@yAdAwDzFuHdCoD|Fs@~HcC~BaA`Fi@zHbBdA\\jAu@lFPxEkBnDU`DdAbCN|FtAvKzAbGV`FdCxDbEw@p@XdC~UpDlInD|PfBhDLrBeAnEiB~AYhAuH~EuC`G}BdIgDhHUvCyAlBa@xDcEjLm@lCc@xJsDzFVFxDkDTZcCjCo@jCuAp@`ArALxAo@fDwBfDc@xEc@xIfBlG",
    "pointCount": 104,
    "start": [
@@ -1346,6 +1472,8 @@
    "flow": 24.6,
    "turnCount": 270,
    "score": 74.2,
+   "baseScore": 74.2,
+   "spotCount": 0,
    "polyline": "cucxEmtgcY_CdCiBhQeAtBmBp@}A?eMiCwBN_RgOk@oAcHBgD|@eCe@uBPkKaG}HgCwDJwMjHoAzE?fHiCxAgGmAsKj@eGoDaJbCoOyAmGr@aHdDoC?aHtDKpEeJu@aDpCeDvGWxDuDrAuDs@_FBsAzFMbLqC~C{AHmJcJuDkB_AxDK|Ku@rD}@@uBkAk@JsDjDqBjFkAzAsCTyCkAsC|@yB~A[`IgGvFaBh@g@bBO|BtApIGhAwErOoBzDQ|EiA~@_@cBg@DNn@c@|AjAhA\\dCr@LbAcCj@Tz@hGzAzDu@bK_DMe@\\pBvFoDlGpHuE~EJfG_FvFhBhBhC|@Ab@hDnA|AhArElA|AZ|FhBrFRbEyA~BOpEeAhG_@n@mCbAe@pBgCyBuBXeAzC}C|CeA~CqEnBcE]{Dp@sBgA\\fCs@rB{CVDl@xA`BDnA[n@uBd@k@`AMfBf@fCY`BmLbKmIMgAl@{AbGHhBh@t@Yd@PvDqAhLjCvEd@`ImEjI",
    "pointCount": 136,
    "start": [
@@ -1367,6 +1495,8 @@
    "flow": 25.6,
    "turnCount": 208,
    "score": 74.1,
+   "baseScore": 74.1,
+   "spotCount": 0,
    "polyline": "y|xyEkeccYq@`Mb@bBBbF`D`Kl@xFcChJU|CXvGx@zANxCvAjG}@~NLxAl@jAo@bATrBoBdAaAtBeBdA_@`ADbApB`B|@dC~@CpBlApBo@fATtA`DEjCl@b@rCCdAfBz@FhBg@mCkJd@cEvH{BtDAhBo@nCXv@}ClAWy@hGjB]vBNRlAzCdCrChAzDKBbAy@T_@fBvAa@x@xBjC^vExCfB`Gd@o@QiEn@i@jDLpGdEpCzF_@`AmBxAI|@tAfBpAzD|DrPjEvFjLdFtHzGtOdYhBjHH`CgAnCHzAxArFhFfEx@|OzDlEnHjDbCxEzDnDvAjEjFtArCtGhBlHJfF~BbRzGnU`CvQ`GvNApFw@xKXvHeCpMt@|HhCvLxGzGlFnCnEvFpAtFIpEvAnH",
    "pointCount": 106,
    "start": [
@@ -1388,6 +1518,8 @@
    "flow": 39.5,
    "turnCount": 37,
    "score": 73.9,
+   "baseScore": 73.9,
+   "spotCount": 0,
    "polyline": "smqwE{wq`Y|Vmj@aEuBgCeE_Ao@s\\uEmFaBkCVkGfF{N}VgDcDOP`@hAa@Oq@_Dk@Dl@|C|@nAMZoB}DqBWhByJaF_J",
    "pointCount": 23,
    "start": [
@@ -1409,6 +1541,8 @@
    "flow": 27.3,
    "turnCount": 62,
    "score": 72.9,
+   "baseScore": 72.9,
+   "spotCount": 0,
    "polyline": "{drvEojldYqFcCk@v@uAxF_J{B{@v@qAPBxBu@`AtBNDZwCl@_Bu@WmAy@e@uAaFcBsAaBEgAkQy@oBoDqB_MqDqIo@{FqBePe@aHyAoC}ByCmHsCaCeCaAeM?qEt@cIhEgBe@mCmCuD^",
    "pointCount": 36,
    "start": [
@@ -1430,6 +1564,8 @@
    "flow": 23.5,
    "turnCount": 114,
    "score": 72.6,
+   "baseScore": 72.6,
+   "spotCount": 0,
    "polyline": "gbeyEseeeYnDfC`De@fCrB|@fCf@P`@}@KaDbAcBj@DnChCz@_Bd@?z@fFtAnANvCiBtCaBp@eAhDmCjBUt@PZdCMzDb@dCw@rAbBpGJxDjAfE|DhDrAxAlBpD`BxClFvCn@hB`DpCx@nDrDlBr@nDzL|ChFz@jEnPtFrAxAj@vBIrFbAjDaAnHh@`GC`EeChPClLu@vAyC|Ac@pBHrEr@vFvBdFQ~FT~IcAdG",
    "pointCount": 60,
    "start": [
@@ -1451,6 +1587,8 @@
    "flow": 26.4,
    "turnCount": 226,
    "score": 72.6,
+   "baseScore": 72.6,
+   "spotCount": 0,
    "polyline": "mab|Em~sdYiCt@yFxEkIkAgMn@y@d@mAtBiCCkBvB_DjBuBW}A_CiAe@cJv@kGuFyAeEm@iEk@}@s@Ku@b@YnDcC\\y@a@WkDfBRpA{@rAqEaAUoCjDZcDcAzAk@aByBuBSuK[f@?rEg@BHaK_@@MfI_@nCUU@sGWM[nCcGzAo@tFeApAm@UCo@t@oBAiAmDwAGd@rAzAeBzA\\lBQh@u@_@sAyFb@aFtA{Db@gDEmI`BkB[s@y@RyBjDBbEi@jC_Ch@oE~MKlDiChEgBpAm@CwAuA}Mb@ePqQiCiFiFmF}BsBuGkCgBUsDzI}BrB_ARqAiAeAoAgEoOGqK_@sC{BgFkAcUy@s@eJs@_B}DOgG|@oJkGoKi@gCXyBMiA_O}N}EeHmGeE_Cu@mFmE{@aEAiHW{@uBmEgNyRcF_RoEmHgHii@j@qWwDu`@uBwFCeCm@uCKmEdByN",
    "pointCount": 123,
    "start": [
@@ -1472,6 +1610,8 @@
    "flow": 24.2,
    "turnCount": 186,
    "score": 72.3,
+   "baseScore": 72.3,
+   "spotCount": 0,
    "polyline": "yh_yEynwbYsBqBw@gH_FcBoBMeCwA}AmF@cD{@mCq@c@iIi@oFx@aE~AqDe@iCr@uA_AiNyAmCyBs@b@}@zCsBzC{AnQ\\~EbEhQE~DjAdJIjBuAfFgB`BFxB[z@wDh@uOByH|F}EpGMpBV|Bk@hEmBnCNjEaE~GDtA~AdCxAx@rAa@`@RjC|J~ArBf@rG~@x@_@hA^`CBpL_FbEo@zLsBQy@mAqGOqAdBy@zCy@h@YnAyDdBuA_AwC?_BwBwF`@aGuBuBgCsAMq@z@XlAw@xC_EhA{C|B}Bl@{F?sKfCeG@_JlEqCpKeGpCu@zJqHlKwAxE_CvBmArGmAxA]xAMjHeAjHN`DU~CcCpEm@fD_ExFc@|C",
    "pointCount": 97,
    "start": [
@@ -1493,6 +1633,8 @@
    "flow": 26.3,
    "turnCount": 70,
    "score": 72.2,
+   "baseScore": 72.2,
+   "spotCount": 0,
    "polyline": "wbawEcg{dYyA~Bq@pDp@h@nAgBz@RAv@_B|B|AvFmDdEmA\\eDxFDdAhBxC{ExCIp@pArCuBL{EnFgDpFkBhByBd@e@v@IvGnFfM?jDqBtDkBx@_EjGQ|DuCnAaBhDw@xD_HfLg@dRjBzThIlLbNpHhAjA",
    "pointCount": 39,
    "start": [
@@ -1514,6 +1656,8 @@
    "flow": 24.7,
    "turnCount": 377,
    "score": 72.1,
+   "baseScore": 72.1,
+   "spotCount": 0,
    "polyline": "opsxE_qs`YkFzD_Eb@oCw@{A`Au@fL{B|B|@dCSnB]WR}Ak@K{OlDmMjG}@]{AsB_Fv@sJrGkFn@mDfAmB|AyBb@cEfEgLdHcRhHgBo@y@cEa@YuHu@u@dA`@rBa@xHsBfCHfCiCzCwBqAaAwD{E~DeHqBg@fAm@vK{CpEaB^yE{AGeB{B}EGqIyFkJ[oBcFo@fDwGrCaA~CDl@g@Ae@mCyB_@eByHoE]qCVcAmBe@uAqET]nC?zA{@rBgKCwAbBkC`Bo@|ABbCzAz@MKkF|C{HkCoC]h@iEm@?kFgDwDNsE{E{ETkDbBkEs@u@wJw@OyHg@_Ag@CiDnB}AbB}@rCiBp@aDfD_MlEgEr@wCxCoD~FaDdAmE[aEdAiAfBi@zCgHhFqB|Dn@nAk@j@SpA_FRwGiBeBbDc@@OoBoDUsAaAcAgCiDsAmEh@iDrCiHiA_LlFsAhCaHrHeC\\uGlD{GUy@hAyB{A_CfEeCbAaIv@wEeAuA`@_EEiBy@yGgGqAh@o@hF}@ZoA{E{PeFqBgDuB}G_AQkAz@oCb@wDMuHiIkDfCeEvHkFnF}Ah@_GTiGxAqDe@oBdAe@~BgAjAaBnFoDpBwDbF_CvIkEjBcApAuBbII|Cs@lAmAlLm@`A@vKy@tBsBlAXbE}BhC?pCmAzE_ChCsAvCoArGIpEq@dE",
    "pointCount": 180,
    "start": [
@@ -1535,6 +1679,8 @@
    "flow": 24.6,
    "turnCount": 225,
    "score": 72.1,
+   "baseScore": 72.1,
+   "spotCount": 0,
    "polyline": "yw|wEkldcYiBoBQ_Du@qBaJw@qIeJ?eDkE_PhBcQIyEVgAtEgCjF{AvAgCxE}CjBF~BaEnLaDH][QuCd@c@UzBu@X}B|@r@\\M~@kHhAcCzCyBdDEbAuAbAVpBuCVZ_AzBH`@fBwBlDa@n@_BB{D\\s@jCWh@_AhHsCjAFrEbCdJm@vDsHrDgEFuEu@wD`@cCf@c@~CJzBhAfDbHrAdAlH@`F}CV}Fp@aCjG_ErDqGu@eM|@aCRcJlBu@dFSlCiAzDbClEDl@a@Ny@S}Dd@kDbEiCqCmMtA_IrEeHvDb@nS_CQq@yF\\]UhGiA`CeC`BeIKuDf@uF|@aBlDuBpOo@~FLbB`AxA?dC_BjDoEh@_GbAcClMoDnGvA~BO~CqAtFmE~Br@x@m@p@w@^oCtC}AA{DzAsBuEsJcAcHZ_JdFaP^}D",
    "pointCount": 116,
    "start": [
@@ -1548,27 +1694,6 @@
   },
   {
    "id": "岐阜県:73",
-   "name": "美濃加茂和良線",
-   "ref": "63",
-   "highway": "primary",
-   "lengthKm": 21.56,
-   "curviness": 433.2,
-   "flow": 23.7,
-   "turnCount": 395,
-   "score": 71.7,
-   "polyline": "igqxEk~jcYaEgA}O}KyCKoGhG_FnXmCjCq@HyK_H_M\\mAk@eEgFyCBuAdBk@nBaAbFAnBv@fCfDhERxCoEbGcDjPoXUs@fD`CzDj@dCApCo@hA_BS}@kC}CuBsV_B{FcEk@{FgAdAaDdHaHnD_Eh@eE|AqE~Fw@O}@{AwBq@uFuFqAiGuBP]vB}BhCeA|KHrCo@j@_Fw@}Ah@o@xAb@bB|D`@l@|@u@|Eb@bG}AhFr@dEtAjDnC|A|CdGW|A\\rCW`EdAnDSdAwC~@qCi@qKzDcBzAoBjEeDgAeDXaEaBcAcAgBHyAtAmHkCmC`@mCnEsET}AYeEmCuD`@{A}AO}Ao@aAmB{@_AoF{Cb@qDGBh@zBdBrBBtE|HOd@_F}GuAp@aEYWwByCHU}A_@Q{Ch@eCKLy@tC_CmCcAb@eBUS_GgBh@aBvCo@sB}AgCc@uCd@a@b@v@x@Ml@mC?iAhFo@PFkFt@aDw@iEDqEoGiPiG_DaCiGl@wDxAcBNqAeAyDXkFuCyRiAmEGuBfAgBjIwBn@kDkCsEoAs@{MzA{A{A]sCxBaJy@gEGeFm@wA_Cm@eCF{GdCyEtCoAL{D{BwFgKO}@XmAnIkLrI_BrGoG`FoJNqE{@kCs@m@ySyEyFYkFj@w@WaB_EkBsKoCqEgBoHoBqC_B{@kMmCgIpBeHpDeF}C{ADsDtBeAK{@kAwBcPmDuEeDkCuKw@gBq@aD{BwEmFmBw@",
-   "pointCount": 194,
-   "start": [
-    35.646775,
-    137.031581
-   ],
-   "end": [
-    35.738665,
-    137.056877
-   ]
-  },
-  {
-   "id": "岐阜県:74",
    "name": "白山内ヶ谷線",
    "ref": "315",
    "highway": "secondary",
@@ -1577,6 +1702,8 @@
    "flow": 22.5,
    "turnCount": 97,
    "score": 71.4,
+   "baseScore": 71.4,
+   "spotCount": 0,
    "polyline": "uvkyEaribYoBzIiCrB{@HuB{@mJNi@^eC|DN~E}@xAuBb@yAqAkB{D{EO_B`Bu@tGuGUwCj@i@`@gA|CeEPqChAw@vA[rB}AjBw@QOiByCyDsEj@iBaAw@{@e@kDeAu@wB`@y@|EeCpAoBN}Bc@s@q@kE{J_CQw@T_AlEw@dAqJRoBxAaDi@iBx@GfAb@fCdKpIRf@SbAeCw@sE?cEoC",
    "pointCount": 56,
    "start": [
@@ -1589,7 +1716,7 @@
    ]
   },
   {
-   "id": "岐阜県:75",
+   "id": "岐阜県:74",
    "name": "緑資源幹線林道　高山大山線",
    "ref": "",
    "highway": "tertiary",
@@ -1598,6 +1725,8 @@
    "flow": 22,
    "turnCount": 80,
    "score": 71.3,
+   "baseScore": 71.3,
+   "spotCount": 0,
    "polyline": "sg`|Ey_keYlApE`CvC\\lAEjCgBlC{BlAuCXiBrA}CJs@~Cc@TyD}@qCJoCm@yIbEqAeCuAM_EfB{B|EmBf@{@o@U{AbDoGjAmEt@oLKgCaC}Dk@kFwD]q@nEcAL{@c@wKyKQyEwDeFLcCy@uBmDuEo@WqA\\s@yA",
    "pointCount": 42,
    "start": [
@@ -1610,7 +1739,7 @@
    ]
   },
   {
-   "id": "岐阜県:76",
+   "id": "岐阜県:75",
    "name": "乗政下呂停車場線",
    "ref": "440",
    "highway": "secondary",
@@ -1619,6 +1748,8 @@
    "flow": 26.1,
    "turnCount": 85,
    "score": 70.9,
+   "baseScore": 70.9,
+   "spotCount": 0,
    "polyline": "{bpyEqc_eYfEJxBdAbAAtBjC[hA~@lAeANx@~@Mb@eCB_CjCcBj@kAUq@j@gBg@Cp@|CrA~Gq@~CrAxEPtEhBfAfBxDBhAlClHtFrDbEtH|AxDlB`H|@lDrAdEnDrFrB|MrKxALvEs@fFnAbIThH{GvBmApVmFjJX|MvAfE[tKxHrAfO~@jA",
    "pointCount": 47,
    "start": [
@@ -1631,7 +1762,7 @@
    ]
   },
   {
-   "id": "岐阜県:77",
+   "id": "岐阜県:76",
    "name": "岩井高山停車場線",
    "ref": "462",
    "highway": "secondary",
@@ -1640,6 +1771,8 @@
    "flow": 24.8,
    "turnCount": 336,
    "score": 70.9,
+   "baseScore": 70.9,
+   "spotCount": 0,
    "polyline": "u~q{EuaxdYo@wEfFkBfFiDvLwM~BuAdC_EtDqOtH{KfGcn@hCuJoFuEkCmKoBsPNmAzDqGrDsIT{AWyEbCgEaBsEk@iHwDkFr@kHe@_NfCuLm@{H|@qJcI}NyDuBmAaBoBcUrEYdDgClEa@dGdAj@]`@cBeAwCYqHiAiBkDoKNsIaFgDI{Af@oC}C}D{@yB_G]u@i@WaATaBrDwBj@qC_A}FAsGsBoEFsJqCmC{CaS|@yDSiMdAyScAqH{BeF]uBS}Lv@eG_AwOy@gDGaKoAgM@oJ_@}BeBcEqCcPIiD`@mE[ePs@cDaAiAeEqVF{BvAwFi@_D_@sK{AoD_@gGeAqEi@_GkBcDeAsOeBwE{BiDAsBaC_HYwGsFuKo@kFeAiCNaIhByDMgCd@YpBvBq@nBrAhB`ALjCi@Gy@uAQlAi@r@Jv@pABnBsAPwDjDDpAn@dAf@OHqBpBgAhExClFdBdBNt@mADyAo@yCqIiNbAiDReHsA_DbCgK@oA{@uA_Bm@_B{KoFgCg@eAJ}Cx@yBr@E?jBf@Rp@mD{AqCEuIr@_D[_Br@y@JqE_@gCfCmFM_EzBGxCpAbA}@L{@q@yFj@mTX_A|B}AdAgFb@oGYwA}@y@aElCmDn@uAhAm@KyByCi@sE}CiEAiBxAiFrEaBpAgD{J_Q`@y@vCoAGaAyFiEaEi@@q@hBo@Ns@cBoIgD{A^k@lBa@",
    "pointCount": 190,
    "start": [
@@ -1652,7 +1785,7 @@
    ]
   },
   {
-   "id": "岐阜県:78",
+   "id": "岐阜県:77",
    "name": "瑞浪大野瀬線",
    "ref": "20",
    "highway": "primary",
@@ -1661,6 +1794,8 @@
    "flow": 24.7,
    "turnCount": 231,
    "score": 70.8,
+   "baseScore": 70.8,
+   "spotCount": 0,
    "polyline": "eacvEqroeYmAs@Ec@xC{Lz@wAdH}FpEGnFaAzE{Dr@gGkA_O?{D{AoJZkIwDcRCuEhFcHjMwJ_AgJ@iDlAuE|BmEl@uGEyAoFwGiDuJ{CsCq@eBCgBqCeFg@iDhDiG`Db@`BWr@aBnAGn@eAvH{DnIS|Cw@Rc@g@aD^qAv@c@rC^VsCtAi@e@cELk@bHfAt@aCdBb@~@Yp@{DbDVv@q@f@_CbCl@AeCXc@lD`Av@KtAx@p@{@r@iEhA}By@cH`EHzA{Cs@_Aq@sG{C_@O}AqAsAa@}BsBOLyBq@{@kBr@i@mAsDAwG{BoBsDqEa@}BgBoCgEWwCh@kDKu@iCWkA{@uBkGmEsFLyAwAyNDcIcB}EuN}KuJoC[cBd@}CkBuI|EqOJsEu@kEaHuHyCsBcG_CgDkEmCaAuEqIY{Dp@{EqC}NsAwBcKcIoI}D}K_LwD_QeDe`@",
    "pointCount": 120,
    "start": [
@@ -1673,7 +1808,7 @@
    ]
   },
   {
-   "id": "岐阜県:79",
+   "id": "岐阜県:78",
    "name": "中津川田立線",
    "ref": "6",
    "highway": "primary",
@@ -1682,6 +1817,8 @@
    "flow": 24,
    "turnCount": 164,
    "score": 70.6,
+   "baseScore": 70.6,
+   "spotCount": 0,
    "polyline": "qz~wEqqlfY`AMvDsEn@iBLiCtE}@lAcBnD{@zHaIhAOzDf@nBx@hG`GvA^hBjCrB^lBlFbLvLbBjEpCXfGs@lCb@pFIfH~D|Gn@dBtD`@{B~GOfF{DIu@{B_AEaCr@tAlAGrEbDRt@e@`CJvAxBgAtBr@`GjGzNtJhAdHV`IjAlFvCdEtIlYuAvFxB~@nAYnD|@~DtCnFfBtBpBbDz@rCxDzD`OpH|i@G|Es@nEiBhAm@|B_AxUcBhB_CQyGkGaERcC_AuAyEu@_L{G_GeB?kEzD",
    "pointCount": 73,
    "start": [
@@ -1694,7 +1831,7 @@
    ]
   },
   {
-   "id": "岐阜県:80",
+   "id": "岐阜県:79",
    "name": "恵那御嵩線",
    "ref": "65",
    "highway": "primary",
@@ -1703,6 +1840,8 @@
    "flow": 25.6,
    "turnCount": 57,
    "score": 70.5,
+   "baseScore": 70.5,
+   "spotCount": 0,
    "polyline": "w`cwEk_`eYuAdBcEOfC~OqBoFgAqA[IaBhAeDrDyApEkDnBmGjR{CpCmBdDwKj@wE|AqERgJHmC}@@h@~CdBC\\kHeDyFcAkDXiFa@iEdAeK^eAd@",
    "pointCount": 29,
    "start": [
@@ -1715,7 +1854,7 @@
    ]
   },
   {
-   "id": "岐阜県:81",
+   "id": "岐阜県:80",
    "name": "白鳥明宝線",
    "ref": "82",
    "highway": "primary",
@@ -1724,6 +1863,8 @@
    "flow": 24.7,
    "turnCount": 146,
    "score": 70.4,
+   "baseScore": 70.4,
+   "spotCount": 0,
    "polyline": "cjwyEc}icYxC`W}BpKCzU}BlFKfBPjFzAvDz@hNGnAeAxA?t@vAhDM|Bo@dBmD`EcN|LsB\\uC_ByAXiBhJmHfImHvZoCnFsIbJy@~Fe@z@uBjAcDi@iE^YpAbE{@ZjAgEj@kHpEgJb@uKpFsHpBqA@{CoBkFxBsKr@cDgAyEcE}FXuBhAuAk@uDjCmKoB_NvEiFC_Ab@oBe@qAkAqD{@iC~BU|@s@?wApA}A^cD`EqDtAeAdBwAFo@{@i@nB_Dk@_BN\\q@}@OuE|@C_@n@YQa@wCR]a@",
    "pointCount": 76,
    "start": [
@@ -1736,7 +1877,7 @@
    ]
   },
   {
-   "id": "岐阜県:82",
+   "id": "岐阜県:81",
    "name": "金山上之保線",
    "ref": "85",
    "highway": "primary",
@@ -1745,6 +1886,8 @@
    "flow": 24.2,
    "turnCount": 323,
    "score": 70.1,
+   "baseScore": 70.1,
+   "spotCount": 0,
    "polyline": "s~jxEydmcYoCiI{R{CeV~B}F~GoAzD}@`AcFsCqE{EoAeJiAaEoJuPEw@hCeEf@{HpAoBRaByAyDyEyCOyEuASkNtCyJjQi@HF}Dv@wCk@kBu@MyAn@sBbEsARaEsAuFuIf@aBv@c@~BUjBn@f@m@bBwUIaBi@_AqCu@iDvAeCo@iBeC_Dk@qA_C_@oCy@e@}BTcDhHsAIo@m@{GeJ}EdByDfDcCVc@w@jB}GgCqHJ{GgFaFoAgGq@eKuKqU{BRuC|D{C`KOhBk@L{KqMyJoGaBcGsIoCOkBZwAoAgB{Dm@yPpEsBxCwKvIiBbD_BhAuGE}CvAeJmAoGvBgBi@qDv@qBm@m@sCLtEc@Vg@_HmA_DWiC|AlCb@\\LUeBiEiEgGoAcEeBcB^{A}AiDkI}DHWxFXr@[wAk@q@mAr@sAi@_AZ{AgB?gBeC`@yC{@N_AtDuA{BaBkA_AUoCf@m@oB}OaFgFiE_EwECyGkG}DMqAd@eC[qAyEsE{ByDcHr@aEW}Dl@oA]iC{Ls@uHgHuCwC{E{GiH}GiEq[_a@cDyNoReMUkBhAqGqFmFe@_FLy@dDkDp@eE@cDgCwBd@gExDgIRkJpAsBnAs@",
    "pointCount": 161,
    "start": [
@@ -1757,7 +1900,7 @@
    ]
   },
   {
-   "id": "岐阜県:83",
+   "id": "岐阜県:82",
    "name": "惣則高鷲線",
    "ref": "452",
    "highway": "secondary",
@@ -1766,6 +1909,8 @@
    "flow": 23.5,
    "turnCount": 112,
    "score": 70.1,
+   "baseScore": 70.1,
+   "spotCount": 0,
    "polyline": "g`pzEezubY}AcGcAaIFqDyCwAa@{@uBgHKoBpAgNvBcCn@eDFwGtAyD_@_CfBuHC{Cp@oBpCo@lAuBn@}H|@wBXgGxA_E?aElAiDv@w@dEq@vEqHfEcCbAeCByBgBmFAcAhB_CvAeIjC_Dc@mBH{@fDoDv@aChBOZwCdBeAjBcJfAwTjByDN{CuBIGhA{A|AgBgBkAIkAeAmK_CyByC{CqJ{ScJ}AIyHrB}BHaGcB",
    "pointCount": 61,
    "start": [
@@ -1778,7 +1923,7 @@
    ]
   },
   {
-   "id": "岐阜県:84",
+   "id": "岐阜県:83",
    "name": "ひるがの高原線",
    "ref": "321",
    "highway": "secondary",
@@ -1787,6 +1932,8 @@
    "flow": 24,
    "turnCount": 86,
    "score": 70,
+   "baseScore": 70,
+   "spotCount": 0,
    "polyline": "q|qzEg~sbYfBhCpCjM|BhDvd@jZjIGv@g@`@gBQoIkBgB{@uCBaAhAmAFs@_CkCDkAjAcBD{@_CgAg@_ACmB|AsCEs@eA_BMgBXwBtBgFLia@hAwCdCa@fA~@\\pCbCjG\\`ClBbBl@~A^~BBfGlAl@`CwAx@TxCrNfCx@dBxBlB@z@lA^bB]nCZt@t@@dDsEnB{@",
    "pointCount": 52,
    "start": [
@@ -1799,7 +1946,7 @@
    ]
   },
   {
-   "id": "岐阜県:85",
+   "id": "岐阜県:84",
    "name": "奈川野麦高根線",
    "ref": "39",
    "highway": "primary",
@@ -1808,6 +1955,8 @@
    "flow": 22.8,
    "turnCount": 230,
    "score": 69.6,
+   "baseScore": 69.6,
+   "spotCount": 0,
    "polyline": "ihzzEaoffY}C{BuDgIBcF{DcIL{A_BmGaBmCcGyFS_CyCeIaAsOmBq@UoC_CyCW_CcJwIcEwH{IyC_BeCsG_GmOmDyGeDsJ}AaDaBqLyC}F_Dd@c@pDx@pF}AtHdArAaA|AClE~B`@I[w@oA[{C{C{Dh@SmBmDyBeGcAwFyM}@wFB}BmDWUq@xBqCfDYd@mAGs@uDmF{EQ}@eCiAe@I{BgDqBj@aAhETfClApBEv@sAzIbCbBXx@Uy@mEcB}B\\aESsBb@mAK_DsHaA]a@Rc@dIuBfAgIrEyLt@uFs@gBcMgKoD_JyDgG_AoDiCeC]_DeBeBmDyG}@gE]qJ_CcHN{Eg@qENkGaCmCgCcAHsBbCu@Ni@sD_CkAwI{FkIQuChAwIaB{JeBqDJsDwAmD{AyAqAsCoDcDwAM{AiA",
    "pointCount": 112,
    "start": [
@@ -1820,7 +1969,7 @@
    ]
   },
   {
-   "id": "岐阜県:86",
+   "id": "岐阜県:85",
    "name": "宮地片山線",
    "ref": "260",
    "highway": "secondary",
@@ -1829,6 +1978,8 @@
    "flow": 25.6,
    "turnCount": 65,
    "score": 69.5,
+   "baseScore": 69.5,
+   "spotCount": 0,
    "polyline": "uuewE}ko`Y}A`EQlFsDI_@vFkEjDwBlDgHCaDx@}Cw@sE?wEgBdAjFDnGsAzAsDHuCvCeEfAsEbC{Nd@wCdBiD^uHkAmJl@aEw@}GUmNL{OrBmB`AaNm@cEsB}Ee@",
    "pointCount": 32,
    "start": [
@@ -1841,7 +1992,7 @@
    ]
   },
   {
-   "id": "岐阜県:87",
+   "id": "岐阜県:86",
    "name": "伊自良高富線",
    "ref": "174",
    "highway": "secondary",
@@ -1850,6 +2001,8 @@
    "flow": 25.3,
    "turnCount": 52,
    "score": 69,
+   "baseScore": 69,
+   "spotCount": 0,
    "polyline": "{c_xEmrnaYiG|FoA|J{B|IuHjOWdDTjGk@nMyBfGoAvGeFdJe@~G{ApFg@bLbAfFq@Ou@iDe@KgAn@YUSuE_@c@cC|AmE[aDvB{DmAaApFeEvAaA~G",
    "pointCount": 29,
    "start": [
@@ -1862,7 +2015,7 @@
    ]
   },
   {
-   "id": "岐阜県:88",
+   "id": "岐阜県:87",
    "name": "川合垂井線",
    "ref": "257",
    "highway": "secondary",
@@ -1871,6 +2024,8 @@
    "flow": 24.4,
    "turnCount": 67,
    "score": 68.4,
+   "baseScore": 68.4,
+   "spotCount": 0,
    "polyline": "k`awE}h~_YXeD~AiGEiAwAyDaDgC{BsI{AgCd@g@|@wFrBeDbByExFcFt@mCnBOg@}APmA|AcDnAo@rByHl@_@jCdA^MTq@uAsBG{AjBqEtDmFhDyL`BaBn@_DbDeDnDK`BkArKSlWaMxKkKlDsAhBgDlDyB",
    "pointCount": 40,
    "start": [
@@ -1883,7 +2038,7 @@
    ]
   },
   {
-   "id": "岐阜県:89",
+   "id": "岐阜県:88",
    "name": "久保原阿木線",
    "ref": "406",
    "highway": "secondary",
@@ -1892,6 +2047,8 @@
    "flow": 24.6,
    "turnCount": 62,
    "score": 67.9,
+   "baseScore": 67.9,
+   "spotCount": 0,
    "polyline": "qh`wEia`fYyCbA_Ce@Ix@`A~DxBpAdC|CJf@i@vCyKvJwF~IpAPxAm@fCGc@pCb@zBQ~Bo@~C_CjDqBnK`JdAlHxD`En@\\|@EzDV|A~CvFrFnDv@nDq@zGHtHhBzLlCdElAdE~BjEXlHk@zDnAbFI~B",
    "pointCount": 39,
    "start": [
@@ -1904,7 +2061,7 @@
    ]
   },
   {
-   "id": "岐阜県:90",
+   "id": "岐阜県:89",
    "name": "国道256号",
    "ref": "256;257",
    "highway": "trunk",
@@ -1913,6 +2070,8 @@
    "flow": 25.1,
    "turnCount": 334,
    "score": 67.6,
+   "baseScore": 67.6,
+   "spotCount": 0,
    "polyline": "ocyxEm}qeYiKdJoBvGkDrYyAvDcItMfHdAhEdFrEnAvCdBbAvAfBdKvGxDhFpAnD~DzMbBtNlFvMfUzGrE|ChHlDhFzB~AjG|AzAjAdB|EdAjRnEvHl@rEjEzN{@|WfA|InBrFbBjBvHnDfDpDlJ|B|MhA|EpKrGfJpNjItEz@lD|BxBTbH_@dCh@bArBtAtG|B|E|B|@vG]`B~@fBjCn@|JmFhKIrEV`DvAvCdErEbOdKqAfAoE`BsGkAkFkGaB`As@AgYqK}@q@oAgDiAu@eCvAmA`CqBv@_Dk@_Db@yAaAw@F}@tAsERc@tBN^pA]NfBuA`BwFnM{ChC@~@|AhAaAlDw@b@mD_CYb@]rH{Af@?rBm@~AkBz@wEq@cDzCpBzD`CH|CvCt@}@^JhBdF^zEQhB_COgAhBqAJaAkAg@@a@rBmBz@b@pA_@`EyAJuA{@k@~@aCAmBlB]vAqAo@wD[pAdE_Er@mAfAC\\~B`A@|FmBtFm@`F}@pC[XcF}@oBn@eAm@k@VDn@jDdDXlCs@Aq@u@uCIId@tAVFf@_FvE_@WCwAwC|@u@nEgFtLe@nCcDxA_BhEeBbAc@tBgChDmIfFaDJyA]mIhCfAjE|EzF`AxBbFbb@EnKhLbWdAtH|HvPrA~FrChSU|BsCtJ",
    "pointCount": 174,
    "start": [
@@ -1925,7 +2084,7 @@
    ]
   },
   {
-   "id": "岐阜県:91",
+   "id": "岐阜県:90",
    "name": "岐阜県道40号山東本巣線",
    "ref": "40",
    "highway": "primary",
@@ -1934,6 +2093,8 @@
    "flow": 22,
    "turnCount": 262,
    "score": 67.5,
+   "baseScore": 67.5,
+   "spotCount": 0,
    "polyline": "oo_xEcm}_Yq@cImByB_@qAM{LgD{PMgJaAqFwAe@mEz@qBgGnBcDNcGnEeE`CiIcB_PiAsAKyB}A{EBeDcFgGqBa@FaElAcEo@gBFo@dAw@`F{@lAgCUOu@dAs@HKwAoDsFKcCfAQn@uAdQiJ|DyEnDoCn@LjKqCrFkLbCgCzDaCrD_@xENfEdD`CtEnFtBhAc@nAHjBgC|CyNfAgCrBq@z@}ApFoEnMoFxOe@hGgAtC|@fEzG~BxAzDmAfCN~@e@p@}B\\qFtByGo@yAMkDiBwBaCiAo@aBaB{Am@AuF_FaBuC[iDXcDhFcFrEcKv@eEdDoEnAsGmHiLaAyEKwDj@_HpAaD~CyBZqA@}CeAmCmDaCsAiGiEuFNyDzBeEQkCcAaAqCvAiD[gDpBmFs@sBwCaAcJsAwF_A[eFv@aAS}JcMmCmItC}@nDjCzCRhAkBbBoIdGyH}@{MjCoN]qRxBiH",
    "pointCount": 124,
    "start": [
@@ -1946,7 +2107,7 @@
    ]
   },
   {
-   "id": "岐阜県:92",
+   "id": "岐阜県:91",
    "name": "宮萩原線",
    "ref": "98",
    "highway": "primary",
@@ -1955,6 +2116,8 @@
    "flow": 23,
    "turnCount": 395,
    "score": 67.5,
+   "baseScore": 67.5,
+   "spotCount": 0,
    "polyline": "kye{EewqdYvAhFvSzJb@rC~@\\hAwI|CeHb@Kf@jK|@|ArEtC\\_AuAuCPeDt@}CvB{@Nq@}AyKTiDtCmFd@i@b@FIzKrCdErDvClClElD`@HtK`A`@lGq@jAPn@z@pAjFlBt@pAWtQsPtBs@`Ni@~Ag@~NiRnCy@jDb@fJbGnCEhElBrAfArAhCjA^b@|AjMdKtE~FbItEnJzIvZ~IdACdCmA~AAxGzC`SfGtCpBtDlIt@rD`BvAjB[tC{DtBMdDfCbDhGpGvEpDrH|F~Cx@JnGkCvFN|PcAjEwBhEsFrCIhDrHFzCYtB~BfCx@vBx@Rh@pC{AzBcCtA}@??dAoAxDlDy@lBcBpB[l@Nf@hARaCpCUhD`@rDrCNhAv@VIzB^dBdClCpBj@|BErAyApBUp@w@v@kE]sEZaDfCG`Bq@|IbHpEVvC{CpAmC]cB`AcHd@Qv@l@~@{D|@Cv@s@GjAkA^SfDmAhBS~B^PXiBpCiCTcAlCc@j@iEYmB\\c@hCpH]vAFbCzFzAtBjEfBxAhCtGvAl@rEExBx@fHxEnCnD`JpDxBnCxGdRfBfBbKhUG`AaA|AdA`CjJiEv@mBjK~AbG{C|FGhH_E~LnBbJyApLH~FfCxD?~HsEdDqEtAWzQdCtCfAlE~DjFtArCD|HbCbGtE`N|CdAfDfBxAzA?x@oBjBaBtIn@jCy@nMlDvFvF`Bf@xVaGtEY`H`AnF}AbDCdRmHpIkB~A}AlAqErB}AlA_D~CwDnC}G`GyD",
    "pointCount": 204,
    "start": [
@@ -1967,7 +2130,7 @@
    ]
   },
   {
-   "id": "岐阜県:93",
+   "id": "岐阜県:92",
    "name": "美濃川辺線",
    "ref": "80",
    "highway": "primary",
@@ -1976,6 +2139,8 @@
    "flow": 24.2,
    "turnCount": 166,
    "score": 67.4,
+   "baseScore": 67.4,
+   "spotCount": 0,
    "polyline": "mb~wE{~sbYvDsAbBNtHeF`AM|DlA~GdQxJoI_HaQaCwQ`@sCdDkGpBiSsCmJqDm@iMsNyGoFsA_F_DkFN_HS}@yAsByFgEaDeMSqJy@wEgJwUv@iGUwBoIcW^kCdGqEfAWf@eAwBaAKoIa@uA}@lB]rDeB@aAeADWjCDn@cL~@kBeCoI}BuAKmAoAVQYxAmCb@{BaB{CXIlBxBl@y@cD{FuCsB_A_B_BmKiCiIEkCaAuFnCoFnBeIrA}ABiB_AwCAiDzA{GzFaM~@ItBt@vCoEu@_GCuK~JiEvFDvCaBpJ{Jn@SfEn@rCiCpG{KTyDUkA",
    "pointCount": 86,
    "start": [
@@ -1988,7 +2153,7 @@
    ]
   },
   {
-   "id": "岐阜県:94",
+   "id": "岐阜県:93",
    "name": "鮎立恩地線",
    "ref": "316",
    "highway": "secondary",
@@ -1997,6 +2162,8 @@
    "flow": 23.5,
    "turnCount": 63,
    "score": 67.4,
+   "baseScore": 67.4,
+   "spotCount": 0,
    "polyline": "}akzEghjbY}AvHtAzIlDrCnCgJhAwKjBcKA}@}AcE|BoITkLfAgBhDu@~@iAbDd@lCv@fDxDfGx@nA~CbCVdA_DvAkBnIa@Hc@{@sC`@cDpHmMfAeGHkD`D}C|AeDb@}BEmCaBwIoA}B",
    "pointCount": 35,
    "start": [
@@ -2009,7 +2176,7 @@
    ]
   },
   {
-   "id": "岐阜県:95",
+   "id": "岐阜県:94",
    "name": "長倉神岡線",
    "ref": "477",
    "highway": "secondary",
@@ -2018,6 +2185,8 @@
    "flow": 24.3,
    "turnCount": 195,
    "score": 67.1,
+   "baseScore": 67.1,
+   "spotCount": 0,
    "polyline": "usj|EcyqeYuBrCyArDwEfFiDrFsFxCaJpKkArFTtBqDfFXfHiA_@eBqBe@FyIrPQlAeABy@~@sFfQjApHxA|@`@xAkEdFcB_BeAVkGzIp@`IkC`J}Cd\\YnMcOnPyItP_ChG}AtKcChJzArBU~He@lCuCj@}AxAsBP_@hAd@vEYtA_F|DmBb@yDvGjArL?oFn@pAEpBn@pCWbB{AjAiIxC_Jx@qEzCZpAiBXFlLu@tDgG~IwEzMsCzCeNhFcFvF}BhFcBxFW|GgArHgAz@OfIcEhDkBpCqE`@sBdB{Eo@sEtEMl@z@hJiApDQtFi@tCaLlOwBjAqDRqIzEsEjF}InBeBlA}BrE{CfSyEb@sAv@}AdCmIhCqDpCiAM_C{AiGKaB_B}@b@cIRCsGiMtCwFxEmCpA",
    "pointCount": 107,
    "start": [
@@ -2030,7 +2199,7 @@
    ]
   },
   {
-   "id": "岐阜県:96",
+   "id": "岐阜県:95",
    "name": "下呂白川線",
    "ref": "62",
    "highway": "primary",
@@ -2039,6 +2208,8 @@
    "flow": 23.1,
    "turnCount": 238,
    "score": 66.3,
+   "baseScore": 66.3,
+   "spotCount": 0,
    "polyline": "ofwxEepzdYq@jBvB|DTbCqBvA_@jIiAr@VnCwAl@eCuD_BiAg@mBJsBgBg@_ByAsBAeAiB}CcByFkGkCgGmCaCeAqCiB{@eBwBkCKmCeAiAwA{BUuDx@bAnAIV}D{@u@o@iBQcBwBeBu@k@wBqCnAvA~@Sf@{J{@Eb@d@d@SNwGK}GrAuFnCsFqBmBdBuFJgCx@iHbHkCUeEz@_CC_DmBm@wDrAmKbA{k@iGwE{Cd@iAOs@wBwEmDiC_GaAw@kGCmEyAmG|CiHz@{FjC_J`H{Dr@gEUiJ_CwJgFwQe@mDtBgH`HoCzEqCpKuD~IF`BtApD@`Bi@hCgIpKcSxOoH|CeV~f@RrI_AzB}IlFeCB}E`C_Df@kIrJyOjKs@hCl@vL[dCiAbAmAj@mDc@wE|@uHpDyCdDoKp@eAiCWyE_AgBkJtCcAs@eBsDqCkAeBVgEjCeFsAeErBoAJ_AeBa@sDy@yBkHsD",
    "pointCount": 124,
    "start": [
@@ -2051,7 +2222,7 @@
    ]
   },
   {
-   "id": "岐阜県:97",
+   "id": "岐阜県:96",
    "name": "恵那御嵩線",
    "ref": "65",
    "highway": "primary",
@@ -2060,6 +2231,8 @@
    "flow": 21.3,
    "turnCount": 84,
    "score": 66.1,
+   "baseScore": 66.1,
+   "spotCount": 0,
    "polyline": "_qgwEawvdYqAcEoCsAaFmFuGiNoImKqAg@gAeDOsEk@qCg@wGJkEdCcGjBu@\\_ANsHhA}GLaEr@mBnCkB?eEx@_DlEuCdGfBnCJjA}B~C_@~C{EzBq@fBoCk@qD^wB_CkAc@sEqBy@g@sAAaAfA{D?cGl@gBjCcCh@sAyAuP",
    "pointCount": 43,
    "start": [
@@ -2072,7 +2245,7 @@
    ]
   },
   {
-   "id": "岐阜県:98",
+   "id": "岐阜県:97",
    "name": "神崎高富線",
    "ref": "200",
    "highway": "secondary",
@@ -2081,6 +2254,8 @@
    "flow": 20.9,
    "turnCount": 300,
    "score": 66.1,
+   "baseScore": 66.1,
+   "spotCount": 0,
    "polyline": "wjfxE}|qaYiG}AwJuFgEd@iM_EaK}KsFcDiB}CoFaC}B[eFz@gBtG{CjGkFxEuA\\u@UcCwCsAcEkE}@sJ~JqDzFiNxCyAdEmBzB_B?qB}AoI|@{DpEgDzGsA`QgD~KVpAdJrETv@UpAcDlCsCb@kCiBu@aDsBSuDhA_DdG}AFo@fDr@jF|BtFvDdOe@zC{@p@oBEaCv@wDGyD`CoIuAqBnGmFjLPlCqAtBaCzKkEnHgCfMsJlNUrHsAvAuG`CwDhCoBGuEcGuBgAuCOaElCcB\\cEmAqB{@oBcD_CsBsDcB_Bt@yApDsE}CaIQy@FiBxA{HEmIn@{Cm@_Ef@iKq@uD_@kB{@k@aAe@mDsAoAwDnAwD_CiDvBmF}AyI^aH_AeMoEuEXyKu@kDyAuAsAu@`@}@nBaHfAeBjAuB~CwC}AeCb@{BcBcBMuB|AqF[{CdAsPqDmB{BcAWuAz@aDJwE|GmBIy@^u@dE}BEeAkA{AWs@Fg@nAs@@gA]qC}CyAKqBb@kAU}AqBc@cCs@g@cAd@{B@{HjD}Ci@yIiGeC`@{B_@yAoBw@}FqCgG",
    "pointCount": 149,
    "start": [
@@ -2093,7 +2268,7 @@
    ]
   },
   {
-   "id": "岐阜県:99",
+   "id": "岐阜県:98",
    "name": "恵那御嵩線",
    "ref": "65",
    "highway": "primary",
@@ -2102,6 +2277,8 @@
    "flow": 22.4,
    "turnCount": 122,
    "score": 66,
+   "baseScore": 66,
+   "spotCount": 0,
    "polyline": "q|fwEq`rdYfDtEjIlZFvJl@xBFnDqBbHcChEG`ArArEaCxEk@hJoClKkBdD_BlPDhAjAtCb@hJ_@zJ^~D[hDtApA@tBbA~@^jB_@jDeArAaABW`@|@ZlA]V`@eEvCuDjIpAI`@h@PhK`@fBrE~EjJxD|@bCIvBj@`BpGtG`FxJHvA}@pFxCjJFlI`@~CnC|EpArEg@fCPjESzB`ApHjDhCfEh@|FzDzH}B`CZ|DrDjDfHjCnD",
    "pointCount": 64,
    "start": [
@@ -2114,7 +2291,7 @@
    ]
   },
   {
-   "id": "岐阜県:100",
+   "id": "岐阜県:99",
    "name": "瑞浪大野瀬線",
    "ref": "20",
    "highway": "primary",
@@ -2123,6 +2300,8 @@
    "flow": 22.2,
    "turnCount": 199,
    "score": 65.9,
+   "baseScore": 65.9,
+   "spotCount": 0,
    "polyline": "_ghvEo}~dYrAeC`@cEdCw@pBgCnBgKKqCo@iAS_C\\iCy@wIoDkA}AiFb@y@tCvAx@aA@k@kB_D}@Eq@wAoDeAaBwBcDmIgBgI@kAyAaEmBmBgBiEcBmAQsEiAiEBoAcAuAMcCsCuGyCuAeAcCmA_AsC?{Bq@IaAv@}FnBaDo@kIjBuCfH_UjEyBn@wFrHcJ`@_D[eJjBsI`@eHdDuGl@yEdB{E~CcCnEsAnBaD|@_@~A\\fCzDbB`AfAExCqBbFVpGw@t@cAdCcKrPeYfAu@r@gEU{Ew@iBcEsDkBeH~B}QzAq@rCtAvECb@w@JkFt@aBdA_ArBAdCmAlDkGpDStAz@lCfK|Ab@xB_@hG~DtCk@v@{BFiKrDeDxHeF`EeAdCaCbBGpEbB`CCd@_EzAqE{BeJN_JfGkNnCkAjBP",
    "pointCount": 110,
    "start": [
@@ -2135,7 +2314,7 @@
    ]
   },
   {
-   "id": "岐阜県:101",
+   "id": "岐阜県:100",
    "name": "国道257号",
    "ref": "257;472",
    "highway": "trunk",
@@ -2144,6 +2323,8 @@
    "flow": 27,
    "turnCount": 72,
    "score": 65.8,
+   "baseScore": 65.8,
+   "spotCount": 0,
    "polyline": "oz{zEwqccYaCuLVgIbBuEgBqVBwEq@wBt@a@tAeSvByHvD{E~LqGxByDdAuHBuOf@mFG}AbBQpEwFXmDx@oAfBWlB`@nGy@lC{D~HkGpFsA|FuCnKd@rCUh@q@n@wG`CkA~Er@hGiCs@mAHiDY_CL_Gj@kCa@eD",
    "pointCount": 41,
    "start": [
@@ -2156,7 +2337,7 @@
    ]
   },
   {
-   "id": "岐阜県:102",
+   "id": "岐阜県:101",
    "name": "国道158号",
    "ref": "158",
    "highway": "trunk",
@@ -2165,6 +2346,8 @@
    "flow": 23,
    "turnCount": 208,
    "score": 65.7,
+   "baseScore": 65.7,
+   "spotCount": 0,
    "polyline": "op~yEutyaYxBgGx@wLCoAmBiCS}A~AaJPaLzB}D|LwE`F}Eb@iCy@uLfD_I@_JjAmBnHaCvA{BN}HSaCwEkJk@yHjBiNq@oMTkIfBsM|DuJkBeKcEoHoAc@wB`As@IsBwBqCqA^sE~C{DjC}KY}BgDcLaDcCC_EsBIy@rEqCc@CdDe@`@yB}DuD`@?sL{@?wA|A_@UxBcGY]iBv@g@Kf@gEdDSx@iAbK}Fj@cAFaK^yDy@}AsGeCa@cBn@sAzAB~A`E|BLhAzA`Dp@zAjFjE~Cp@nCyA|DHhAh@Pb@YnAcDX}BYgB}G{PoG}E{CuGeH}FqAsCqCaDoAaSyBqEg@_CfAcHUmEgAiFd@gJuBaCaCEcAbCLhAp@~@hAP`Ac@h@_Dw@kB_DeA",
    "pointCount": 105,
    "start": [
@@ -2177,7 +2360,7 @@
    ]
   },
   {
-   "id": "岐阜県:103",
+   "id": "岐阜県:102",
    "name": "春日揖斐川線",
    "ref": "32",
    "highway": "primary",
@@ -2186,6 +2369,8 @@
    "flow": 21.5,
    "turnCount": 207,
    "score": 65.3,
+   "baseScore": 65.3,
+   "spotCount": 0,
    "polyline": "wmowEmaj`Yb@bMU|Cz@zHCnGk@lB{I|OaBjPRxDbAnEbDrBhCp@h@~DWjExCtRmAxMVdHQtCZ|BIfL`@vBrBrC~DtCb@~A_@fFmCnKBjH|A~CbAdE|CvF|FpDHvAkBpFCnAxH`J~@vC[bJqBvJCpEtAxNnDfDhCjGPzFgAbULpFvAtEeAbBi@`CGvDjApH]xJvApH}@xDTdFaB`NVbFgAr@Gd@|@`CpCzCf@pBWf@cBRmBnABxEcDzB_BrCNjGWj@eC`@mGu@oB\\uAlAk@bCr@|@XjCUd@iAM{A\\E`Fp@~B}@zAC~@}A~@sCcCyBj@s@lAHxBmAjEgOzFyHjB}DtCgBjCeEYoAiD{@}@sCZwE_Aw@Pr@nBPnCqAbIaBbDIpDdApD?|DjDbPSvFv@xCv@r@",
    "pointCount": 110,
    "start": [
@@ -2198,7 +2383,7 @@
    ]
   },
   {
-   "id": "岐阜県:104",
+   "id": "岐阜県:103",
    "name": "白川福岡線",
    "ref": "70",
    "highway": "primary",
@@ -2207,6 +2392,8 @@
    "flow": 22.2,
    "turnCount": 461,
    "score": 65.2,
+   "baseScore": 65.2,
+   "spotCount": 0,
    "polyline": "yafxEgc_fYBrAjAnARhAsBvDXhEiHRCpF[v@_LxJkDhIaBfB}LfE?hBgA`EjBhMvFvJFtBiAdEEnClC|Gd@bGSdAqAz@_A|DyDzEm@hBoAvHv@xWOlA{AfBc@vBj@hJaEvFS|ADzH|FrMv@bJWlG^tWg@|EfBzOeBlIcApKt@~BtDbDHf@e@B{BiBeFdAYf@~CRDtCtCbDtAfFbBv@zA~Ck@dAmDFNvCgEmBEn@vBdDCl@mBGqEsBc@`AhBfDf@lDpEhDZnFdAIP|A`AN`EhDjEVmBrDsFbAi@\\Fb@fCAfBv@xBITr@MdCn@P|Aw@jEz@lDlFpC\\gAfBgFHuAc@JfA`BjB~DpBhEr@jCvBlHzCtAlBrDg@nAV|@tA~BcArL`A|CxDHv@cAnCkQ~F{A`NnCrDtE`DrK~EEbAwBx@Mf@x@hAEhEpAvB?jDjAxHzAfC`Bv@zBfE`CDnCxBpFzO|@hEa@pA{CzC}BvDmFlDeApCBbLw@|F?bDeAdFbBjJOrL}DtSgEx`@uX~^qEbI}EtLCrBz@rFa@nCeBpFkFfHoGlQuDbGcBbHc@vHeCxKuA|q@cB~NSlIh@rBzFxG`@lAGnDgAfFF~CxEzQdEzKt@rEEdDkA`JHtAz@n@lCV~ISjBlBvCfHxAlBzCp@pEu@xCbAlCtCbBtEVvAI~CqB`FqAnIBtMdDxQx@fILvCcAtDKdGbA~LzAhDJpBc@|FiFjDiBCDt@jB`D|EbEqBdFa@bDdA~U_@vA_FjI?vJdAxCxCxDrEn@fEpCd@nA_@xHv@zDzArBpDpAvGvJ`B?rEiDv@aCvAI\\`CM|HaAfFP`D|B~AdBrEzDnFjE~RtC~GxBtC`AXxBQp@bAXpFcArGmExEmAxEmB|Dp@vCrFpEn@fC]nGoC|H@vFhDhHxF`G",
    "pointCount": 245,
    "start": [
@@ -2219,7 +2406,7 @@
    ]
   },
   {
-   "id": "岐阜県:105",
+   "id": "岐阜県:104",
    "name": "国道158号",
    "ref": "158",
    "highway": "trunk",
@@ -2228,6 +2415,8 @@
    "flow": 24.2,
    "turnCount": 134,
    "score": 65.2,
+   "baseScore": 65.2,
+   "spotCount": 0,
    "polyline": "_|y{EifnfYq@aGs@}AsHaF_CqF?wEk@aBiAKmGhCeAKg@cAJcAn@e@zLi@lHrKbBx@fA_@f@iCkBi`@s@gD{@iAcCgAwHq@}DHuGiEwAIqGzAiFm@mB}FsFcF}A{DKcAtAyHi@wGeDDqDeCuVbEcD`BwKfASq@hAOpBaCrG}CnAMJ_@uH~A_C_@{C|@k@SlDoCnEoAlC_BrIeBpKiEbBgAh@{A`AHl@a@t@_AbAsK|@y@|@mE~CB`DaFpC]tA{M`@eAnECtBr@bDcCBcCv@uAxEgC`AC",
    "pointCount": 74,
    "start": [
@@ -2240,7 +2429,7 @@
    ]
   },
   {
-   "id": "岐阜県:106",
+   "id": "岐阜県:105",
    "name": "国道418号",
    "ref": "418",
    "highway": "trunk",
@@ -2249,6 +2438,8 @@
    "flow": 25,
    "turnCount": 144,
    "score": 65.1,
+   "baseScore": 65.1,
+   "spotCount": 0,
    "polyline": "kjnvE}edfYd@YLT`JoIfF}AlAoG`BeDf@oSkAmAa@}AOaXw@aDSqEZyEsA}IC_EiAeIdAui@QyKgB}NsCyFMqHy@yDBkGiAmN?{Do@aDK_H|@m[EsBuAqFAuCb@wAW{A^_@?cCKu@_A_@aAoCe@aIe@}A_FyFaB_FmB}CaIwV}Am@wBoHkAq@GWtBq@LoBhCmGMoBeAcDcIuHcA_HeBmBBm@bCkC\\uC[yAcEsBp@yAqAwBa@qGgAWWt@mAAmEy@a@}DNuFoFsCkDcHsM}Q?iDhF{Gh@sBEcB",
    "pointCount": 78,
    "start": [
@@ -2261,7 +2452,7 @@
    ]
   },
   {
-   "id": "岐阜県:107",
+   "id": "岐阜県:106",
    "name": "伊自良高富線",
    "ref": "174",
    "highway": "secondary",
@@ -2270,6 +2461,8 @@
    "flow": 24.1,
    "turnCount": 54,
    "score": 64.7,
+   "baseScore": 64.7,
+   "spotCount": 0,
    "polyline": "ys}wEa_oaYU_MiAaL^mFa@iEb@eDc@eFSc@o@LQtCsAvA?pBm@FWcDtAkAeBaCEgAf@oBiAaB@cC[kAqIiJ_DyGaEeDO}B`MyT`QiHxQ_OvAiBbCwFLyEfGuT",
    "pointCount": 32,
    "start": [
@@ -2282,7 +2475,7 @@
    ]
   },
   {
-   "id": "岐阜県:108",
+   "id": "岐阜県:107",
    "name": "国道418号",
    "ref": "418",
    "highway": "trunk",
@@ -2291,6 +2484,8 @@
    "flow": 22.7,
    "turnCount": 67,
    "score": 64.4,
+   "baseScore": 64.4,
+   "spotCount": 0,
    "polyline": "i{kwEmoceYwK|L{Aj@aHhAmBu@iBjCgJyBkMoL{GeSkB_BmAuCaNsFsBvAcAhHiE|BaBfGeAg@~AyDk@cAq@TiBdEoAnAsAN{Bg@{A`@\\hG}BnI_DL_Bw@m@_Bk@O",
    "pointCount": 31,
    "start": [
@@ -2303,7 +2498,7 @@
    ]
   },
   {
-   "id": "岐阜県:109",
+   "id": "岐阜県:108",
    "name": "揖斐高原線",
    "ref": "274",
    "highway": "secondary",
@@ -2312,6 +2507,8 @@
    "flow": 21.2,
    "turnCount": 128,
    "score": 64.1,
+   "baseScore": 64.1,
+   "spotCount": 0,
    "polyline": "gz{wEwhs_YwDlAoBe@}Al@kAUcAuAyE~BeGFiB}GuG_AoIlFqAjDcCb@uA|@iBlG}AN}BlCwBrAsJvCSnC~AdBw@z@mCLiBk@eBjBkBe@{AFiDiCkBk@{LLaEsAaMg@gJoCcEp@wFtEoAJmGwCyFAcDnA_JeD_CZwCY_DwAmCFcLqFgEbAwBvC{GcAs@k@e@_DsDoDeHVaNc@iN_FcFu@qGX}GtAyD_BcE[iBeFGaJo@eCcEuDeCeF{DUcDiA",
    "pointCount": 66,
    "start": [
@@ -2324,7 +2521,7 @@
    ]
   },
   {
-   "id": "岐阜県:110",
+   "id": "岐阜県:109",
    "name": "柿野谷合線",
    "ref": "196",
    "highway": "secondary",
@@ -2333,6 +2530,8 @@
    "flow": 22.4,
    "turnCount": 136,
    "score": 63.8,
+   "baseScore": 63.8,
+   "spotCount": 0,
    "polyline": "isexEimuaYQiKkBgFbAmCwB_AyB`AyL}AwG_WsCeGkGmH{B{AqF_JaHgC]k@AyBpBgAKwCmBcAoCh@mAg@fAqDtCmBNo@i@u@}A?aAo@k@yATaC~DiGtA_A~Ca@bAcBx@uIc@mEFaGgCyGiJzAoHvGoDzEgBDcDy@qAuDcAcJhBmM}DgTXwE{GcHeAmC_X}_@}AsC}D_LkBWoIlCkEaA_Fz@qG@{B_Ds@CiBlDgAbEiBpB{Al@gGe@yAv@wExHXhJU~CsBrAkB^{BWsCsBcD}@yIsGuKJqEeCyF\\",
    "pointCount": 76,
    "start": [
@@ -2345,7 +2544,7 @@
    ]
   },
   {
-   "id": "岐阜県:111",
+   "id": "岐阜県:110",
    "name": "舟原荒町線",
    "ref": "478",
    "highway": "secondary",
@@ -2354,6 +2553,8 @@
    "flow": 21.1,
    "turnCount": 314,
    "score": 63.8,
+   "baseScore": 63.8,
+   "spotCount": 0,
    "polyline": "sqq{E_wtcY}BXyAhBcC|Ri@r@cEjAsKSkB}CiNsIcALiChCwBz@_Wf@oB?{KmB}Ct@oTkG}GbBiGrMyBjPAtAzAnIcDbFwCfAoAlBgC`_@{BdAmEY{CbDcB^q@lA@tBb@pAOzAyDpBsC`DqEpB}BfFkE~AcKvJqBhD{@tDZ`HSpAmFpF{IvEoGrGwArDyB~Bc@vD{@fCeGhHsBlIeBbDwItHwEpAaFn@wEoAgM@kB`@sBpBm@FqPsA{UmI{BBq@|Ac@dGeCfEeK`FgJe@gDxERjRWzB`AxNcBr@aA|BaHhCoDuByBS{Au@uBB{@t@]fCmEzBcArB}Cj@yAGaDsAmE_Eo@NyBnC_A~KPbGwAdTZjBlBfDIhAoAV{EoBeBHuFlIoBhJyC~BaAjC_Ar@qVpAsBg@uHaH_ESeCpD_BkCyDE_Cu@sEfA[jFa@n@u@SaD{F{EbEe@u@_@eGqAe@oCvAs@UTsEsMgJuDm@k@eCb@iCWcBuDyAoEyFgCuAaAAsAvLq@rA_EsIcC{Ba@uDeGcEk@HyAxDmMzA[zBoAbBg@nBsBy@uCeG{B}@kAB_AvEgBpC{BjGe@X[k@CuCdBsLmAoBJqE[m@gOBoDvGgJfAcClAgJM{CoB",
    "pointCount": 166,
    "start": [
@@ -2366,7 +2567,7 @@
    ]
   },
   {
-   "id": "岐阜県:112",
+   "id": "岐阜県:111",
    "name": "小倉烏江大垣線",
    "ref": "225",
    "highway": "secondary",
@@ -2375,6 +2576,8 @@
    "flow": 24,
    "turnCount": 39,
    "score": 62.6,
+   "baseScore": 62.6,
+   "spotCount": 0,
    "polyline": "avkvEc|t`Y}Fu@kTbCiAn@sASuLnAwAuCeCYcCmCqFeM~@cKgB@a@`BkPnMwI`BqBxA{DsD_AkB[cSfBqO",
    "pointCount": 20,
    "start": [
@@ -2387,7 +2590,7 @@
    ]
   },
   {
-   "id": "岐阜県:113",
+   "id": "岐阜県:112",
    "name": "神岡河合線",
    "ref": "75",
    "highway": "primary",
@@ -2396,6 +2599,8 @@
    "flow": 21.5,
    "turnCount": 241,
    "score": 62.6,
+   "baseScore": 62.6,
+   "spotCount": 0,
    "polyline": "awk|E_}icY`@ClBxCtLuBnBHbMxFhDlDjA\\zDe@vHcEdG`CzCXjDM|C}BpF`BnE{Ip@mEnBk@tA{AlA~@|AFfNqCb@q@PuCvNxFf@Mv@}BfDbGt@`@pLcE|C}EJmDjF_A~@{GL{H_DiKZ_@hDKdAoFDyEjBu@AdBr@v@EyBtBoEgAiAU_EuAaGw@xBAfDoBZ_ArFkAOAyFr@cFxAiBjAoEQcEhAcDYaHxBqGsCgIBm]uBkFcAyFU{OcGgFiAeCWcBCwMsB}D_BmFo@}ImCeNcAiZkEoYiBcZPkJaE{JmBsAsCkIw@{IReFk@iEcAoCy@aKcBuJqGkKeBcG_@{Dl@qHdFeStDeLbGkKjFgRpBmC|KiHbCuEn@iFUkFaHcQgEqPqAyCyAgA_KMCiCl@iBcAsEwJmAeFmEoHiEsE_NkCaN",
    "pointCount": 113,
    "start": [
@@ -2408,7 +2613,7 @@
    ]
   },
   {
-   "id": "岐阜県:114",
+   "id": "岐阜県:113",
    "name": "国道363号",
    "ref": "363",
    "highway": "trunk",
@@ -2417,6 +2622,8 @@
    "flow": 22.7,
    "turnCount": 194,
    "score": 62.3,
+   "baseScore": 62.3,
+   "spotCount": 0,
    "polyline": "g|hvEkesdYtAtAlF`L`AlMs@~BcI|GoFzIUrB|ChExObg@|E~GbOhJ`GbKm@lDaEvGaAnDrBbXjDpN_@fBcIvKaBpYbA~JlD~Fd@rBYtBsA~CTdEa@jE~H`Rt@h@nDP~HfFvE|HbBdGGfOn@hJ~BnF}@lMaElEQdBjAvIdABtAuAb@JPv@aA~CTlDSxEd@jDc@~CaA`@Mj@p@lC?lCnBr@F~AY~@x@v@bCgCf@AX`@FhC\\ZhBA\\w@KaAkAs@@sAl@WxA^lC`DtCKbBbFrAV^|@mAjEAtDr@nADpD_CEeAiAcAKo@d@RfHn@nCmBvC`D~Nd@tIYxAgBtB_@jKeBjDGxAd@zA|DfESdIlMbJbInDdGnN~BpT",
    "pointCount": 100,
    "start": [
@@ -2429,7 +2636,7 @@
    ]
   },
   {
-   "id": "岐阜県:115",
+   "id": "岐阜県:114",
    "name": "緑資源幹線林道　高山大山線",
    "ref": "",
    "highway": "tertiary",
@@ -2438,6 +2645,8 @@
    "flow": 19.5,
    "turnCount": 328,
    "score": 61.9,
+   "baseScore": 61.9,
+   "spotCount": 0,
    "polyline": "e|o|EedmeYmA}CkJwEoCMuDyGSaDzAkHLgLsA_EaFaE}CmI}EuB}HJiDc@aHkCqH{EuCuEs@{GiFuM}IoDs@sAiAkHg@aA{FaDgJqBcM_MkFyDgEiNqHwHyByE{AqPBuCiB}Hf@gHkEkBkBsDsBcBDy@r@U~H|CjAy@`AqCm@WaAvBg@FaBqCwADkBwAsEBkFgCsEOaFz@mDSmAp@yIQi@xDmA~@sHrNMhBz@~DA`BkB|D]nH_C~HgGjJ{@dDS`GdBnGw@`AsBq@[`@|BnMQxCyApFj@hVrBtC|EbBT|@Wv@{@RmA]yDgEcCLHsDwAiFc@oFw@g@sCZaB{B_@}CbB}AFs@uBaBEmEUQ{EMeCiDeCk@}I|BaGPoElByAKmDsBk@~@w@fGaALqCkDcALkAlFkEnC_InI_ErBsFfK_EdDiDlHyEnFyGtFaCtD_FvBcG`KwEtBiHAyBzA{CnFmFhBkBfBwEr@uCfEaOvMcEpIuEhFyAbFgA`AsABaNkFgANqBhBqATaA_@wBqCSwClDcJ[qGe@kB{@q@eI_@kBcCwAqQjA{KmAaCwBT_K`JcErFwANgF_Ao@ZaDlMyB`@eEiBkLsOk@wDK_GeAmEo@qIu@mAkDmB@eG]gC",
    "pointCount": 168,
    "start": [
@@ -2450,7 +2659,7 @@
    ]
   },
   {
-   "id": "岐阜県:116",
+   "id": "岐阜県:115",
    "name": "岐阜関ヶ原線",
    "ref": "53",
    "highway": "primary",
@@ -2459,6 +2668,8 @@
    "flow": 34.7,
    "turnCount": 38,
    "score": 61.8,
+   "baseScore": 61.8,
+   "spotCount": 0,
    "polyline": "mgfwE}loaYMgAt@}KrNe~@zEib@GqAe@i@uA^HvBhARlCwEf`@wFSOw_@xF{CtEs@[H_Bn@Kd@`@DbA{Efb@sNd~@g@rN",
    "pointCount": 23,
    "start": [
@@ -2471,7 +2682,7 @@
    ]
   },
   {
-   "id": "岐阜県:117",
+   "id": "岐阜県:116",
    "name": "岐阜県道北野乙狩線",
    "ref": "59",
    "highway": "primary",
@@ -2480,6 +2691,8 @@
    "flow": 22.7,
    "turnCount": 126,
    "score": 61.6,
+   "baseScore": 61.6,
+   "spotCount": 0,
    "polyline": "{{exEayhbYiDvFcCB{JjDwBhB}E`HeAxDwB~ZhB`VPlHxIdKtCvAjA|LxGlJpGtA~FVxCeB`EB`J_BnEO~SkJnNt@vWrJnD|BhEb@hM`HjJ|@zEfDpNxAdHEjBd@lApA\\nCk@tBPjAUlB_AH}Au@{@pCrApCcFGW^hCnEiEn@g@`@Fn@vEp@`CE`Bt@xEgF}@{@wA~@_ACm@a@Hm@bBwApDeA`D~BzNYfKx@fGo@`Lb@fGbArFq@zGzB|Nj@",
    "pointCount": 66,
    "start": [
@@ -2492,7 +2705,7 @@
    ]
   },
   {
-   "id": "岐阜県:118",
+   "id": "岐阜県:117",
    "name": "町方高山線",
    "ref": "458",
    "highway": "secondary",
@@ -2501,6 +2714,8 @@
    "flow": 24.5,
    "turnCount": 66,
    "score": 61.6,
+   "baseScore": 61.6,
+   "spotCount": 0,
    "polyline": "ynw{Ey{_eY|CFfCpE_@`EiC`LKnIbB~CIlDdAJj@eDl@y@`AAdDdAqAdWU~RcElPuG|L|ChE~BxGf@`aA`@fD|NbQfF_Fl@sAo@dGRrAf@^vBQpBhC|Bx@`E~NfCVpKeAjNbGhMrNfBxE`A`F",
    "pointCount": 37,
    "start": [
@@ -2513,7 +2728,7 @@
    ]
   },
   {
-   "id": "岐阜県:119",
+   "id": "岐阜県:118",
    "name": "恵那峡公園線",
    "ref": "401",
    "highway": "secondary",
@@ -2522,6 +2737,8 @@
    "flow": 20.5,
    "turnCount": 59,
    "score": 61.3,
+   "baseScore": 61.3,
+   "spotCount": 0,
    "polyline": "ygpwEikteYxCd@vAdCfBpAlA~C|IdCbDuPZsEfB_AnB_DbBbAlIzNxBh@|@w@fAuGpFkHnQoY~@kFfDO|FkFzI}DzEuDbCXtBxBbBBnE|A|Ae@zAyEd@_@",
    "pointCount": 29,
    "start": [
@@ -2534,7 +2751,7 @@
    ]
   },
   {
-   "id": "岐阜県:120",
+   "id": "岐阜県:119",
    "name": "市場池田線",
    "ref": "259",
    "highway": "secondary",
@@ -2543,6 +2760,8 @@
    "flow": 21.8,
    "turnCount": 58,
    "score": 61.2,
+   "baseScore": 61.2,
+   "spotCount": 0,
    "polyline": "mpkwEwun`YJzHmDnCgBzFyDvDy@lJuMjMqGjCiGpKaDhBmBfDiDbDw@jE{DfGaCjC{HfF}BhE}Az@iCfF[D{B`K`@rD{ClQVzE_@jEuHxVQTkFiAcBtAmCcE",
    "pointCount": 30,
    "start": [
@@ -2555,7 +2774,7 @@
    ]
   },
   {
-   "id": "岐阜県:121",
+   "id": "岐阜県:120",
    "name": "瑞浪大野瀬線",
    "ref": "20",
    "highway": "primary",
@@ -2564,6 +2783,8 @@
    "flow": 19.9,
    "turnCount": 142,
    "score": 61.1,
+   "baseScore": 61.1,
+   "spotCount": 0,
    "polyline": "myevEykdfY^{F@}J`BoHPiDEgEsAmF{BQo@p@u@|CaAfAmC`BgC`@aC_@wFyF]mAAgF~AoKxAeBb@aBnC{Uk@_A_Cs@eBlB_AFsF?kCoA]mAEcGr@aHe@{C_CeAwCwEqC{FiAaGuBw@iEtCeEUmByCqEaDeA}C}DoD_@i@QmCh@uFbCsJxFqEbBgDi@eCqCuCqCwFk@{C@}Bf@yBbCwBjEeB|Fd@dBhC`BfNzBx@xAk@l@iAMgCoBaFIwAp@kBdA_AvI|@d@hAhGfGxAN`@sCyBoMZeArEaEpFe@pMtD`BApAjBzBThA]v@sC",
    "pointCount": 82,
    "start": [
@@ -2576,7 +2797,7 @@
    ]
   },
   {
-   "id": "岐阜県:122",
+   "id": "岐阜県:121",
    "name": "苗木恵那線",
    "ref": "410",
    "highway": "secondary",
@@ -2585,6 +2806,8 @@
    "flow": 21.8,
    "turnCount": 144,
    "score": 61.1,
+   "baseScore": 61.1,
+   "spotCount": 0,
    "polyline": "ooywEyi~eYxJz@rCWlK_JlAMhBp@hDtGtCrBl]SjO`DtDPxC]zZmJjCArCpArLfOHpBk@rB}FxFD|C\\fA~WtH|NNtAz@zHhKfJlHbDq@jBbB`AJbDkEdECdEpGjAiFtBq@r@iB\\T?rB|@hBf@ICoB`@mBjBvE`AaEdGg@|Am@`BeBbCW|N|AD|G~@pCf@bAdEbChOkI~[RlBhEzA|NvAle@rHpNt@jHrBjBxFjIlCvKVpD{@tCA|H~AlL|ChDvAk@RbEzAjAbPvV",
    "pointCount": 71,
    "start": [
@@ -2597,7 +2820,7 @@
    ]
   },
   {
-   "id": "岐阜県:123",
+   "id": "岐阜県:122",
    "name": "豊田明智線",
    "ref": "11",
    "highway": "primary",
@@ -2606,6 +2829,8 @@
    "flow": 20.2,
    "turnCount": 183,
    "score": 60.7,
+   "baseScore": 60.7,
+   "spotCount": 0,
    "polyline": "_tavEwnmeYoAsB}EcC{DgFaG}E|BsM|E_IDcHe@sBeD`AsAxBaB\\cBmC{@aEyCaI_F_@y@l@sBjFi@j@}A@kFoDgD_EgMqHwH@gKtD_Ku@sLjGkDrD_ABo@i@u@aEh@wDJoFc@kEeAiE_GeIeBGiCnC_CQuDaF{B}EqCeCmA_@_Bd@k@|Cu@fAwE|AsBmIZcGc@oBi@UeDZaCg@wF_HmEsBgEk@mAu@CgAxCcG|@oEoAiL}@mB}@a@aETwBvF}HxL{Ax@yE~@qFfFaClAcAF}@cAGaH{@sAkAa@wCp@}CzFq@hLqCzEuBRq@x@wA~G_AG_AiE_DcBsH`B{CpGuCVaDvCeAFmDsA_KMaAeAeC{FwC{@iAb@gDhDgB~LgE~GiB`B{DrBwHs@cDN",
    "pointCount": 103,
    "start": [
@@ -2618,7 +2843,7 @@
    ]
   },
   {
-   "id": "岐阜県:124",
+   "id": "岐阜県:123",
    "name": "美濃東部農道",
    "ref": "",
    "highway": "tertiary",
@@ -2627,6 +2852,8 @@
    "flow": 19.8,
    "turnCount": 157,
    "score": 60.3,
+   "baseScore": 60.3,
+   "spotCount": 0,
    "polyline": "kkvxE{l}cYrA~AlBzJL`Ds@~By@tH@pD{Ch@UdAvCxAj@dDrAi@?}Bd@IVpBhAjByAvDLvDfElFtD`BrAtD`CrC[xDcAjCVpEpAtDKrBwAbFj@bEbCp@zD`DrF`ChAtBOtDiBvIm@pG@|F`AtGtIpRrDpVdHtMhAd@zBs@f@LlEnFMxBoDxHjAhEAfIp@`GhBtH{AtJdCdPQpFnAjMbCzM`GrS|ErLxEdHEzCsBpFZzFbApBfGrBx@~Aa@bDkBnE\\bEGrG}ArPqGrZs@dLTlIgBbDaCbAD~@~@tFfCpCbAtInDbHjLdHtA~A",
    "pointCount": 82,
    "start": [
@@ -2639,7 +2866,7 @@
    ]
   },
   {
-   "id": "岐阜県:125",
+   "id": "岐阜県:124",
    "name": "鮎立恩地線",
    "ref": "316",
    "highway": "secondary",
@@ -2648,6 +2875,8 @@
    "flow": 20.6,
    "turnCount": 100,
    "score": 59.9,
+   "baseScore": 59.9,
+   "spotCount": 0,
    "polyline": "yjfzE}mqbYhKfBt@Gj@oBoAoE@mB{BuAc@_EqC{EsBkLv@eEeBmBGoFuAsAi@}DqCoDsGsQq@wJdAsAjCz@`DzBrD|GvGjArBfChDNbBaAd@LxWhLbDrFv@fCHzNjGhInF`PlEtHpFnCbEv@jC}@|FeGtBCtMpJdFlJ`FzDt@~BZhMr@J^i@o@wHx@y@rBhE`AhI`DzFrCp@~MsB",
    "pointCount": 53,
    "start": [
@@ -2660,7 +2889,7 @@
    ]
   },
   {
-   "id": "岐阜県:126",
+   "id": "岐阜県:125",
    "name": "時下野尻線",
    "ref": "107",
    "highway": "secondary",
@@ -2669,6 +2898,8 @@
    "flow": 20.4,
    "turnCount": 62,
    "score": 59.6,
+   "baseScore": 59.6,
+   "spotCount": 0,
    "polyline": "{|avEau|_YbCiEbEaCvFuA|B_Cg@_@{F~Cc@ItAyChBYl@y@BwFp@qCE_IfCkIz@aGfCuHxEgHFsA}@cI@uEm@{BZwAxDkB~Ba@xIqElEwF~DsAbCyDjIoEtADnEfClEgAtGQjDcA|HVlHfF",
    "pointCount": 37,
    "start": [
@@ -2681,7 +2912,7 @@
    ]
   },
   {
-   "id": "岐阜県:127",
+   "id": "岐阜県:126",
    "name": "根尾谷汲大野線",
    "ref": "255",
    "highway": "secondary",
@@ -2690,6 +2921,8 @@
    "flow": 20.4,
    "turnCount": 182,
    "score": 59.6,
+   "baseScore": 59.6,
+   "spotCount": 0,
    "polyline": "or`yEqmbaYxH}AfGTxDWdD^f@aB`FgF|[_OrXq]hBoEzFwBrCl@bAkAbHRfBrCz@P|BqBnDaA|Ff@fDc@`J`@zCe@fARfBbCpBr@h@x@JdCnPrv@fFbIeAnIj@tBbE}ApNj@vHmBpF\\|HqFbIoA~I{F`CN|CoBpCgGtCo@dC^nBrAzDj@tAkAbFDfFyBtCdJbCt@zCsA~D}EzBv@vAI`Cq@lDsCjEaAvENnKbGdH`@nDjBvAfCjCs@`@N`AzDdAjNbDvC~CrGCdA}ClGmArF|CvSW`LRfAh@t@vIcApCNfBt@rDtER|HbCtEhFpEdMp@b@fItC|Gk@pCRdClCtAh^r\\jBbDb@jDOfEaB`K{AvDFlB",
    "pointCount": 95,
    "start": [
@@ -2702,7 +2935,7 @@
    ]
   },
   {
-   "id": "岐阜県:128",
+   "id": "岐阜県:127",
    "name": "惣則高鷲線",
    "ref": "452",
    "highway": "secondary",
@@ -2711,6 +2944,8 @@
    "flow": 20.5,
    "turnCount": 93,
    "score": 59.3,
+   "baseScore": 59.3,
+   "spotCount": 0,
    "polyline": "mapzEaxubYVjNr@vKdDlUfCjLt@nBfD~Df@rFnAdBzClJfA`A~BRl@f@xCvKFtCtArBbAlHjAtBnEhUXdFbD`MEfB_GjILzD{BfC\\rDSnARzGrCrCrBdGrDhEr@tJzE|@|FbJnC`@bH}@bCf@`XnGzEzElHxL`A`DPbDo@`Hl@d@PjAy@tCQtLdAxFlFlKIx@",
    "pointCount": 50,
    "start": [
@@ -2723,7 +2958,7 @@
    ]
   },
   {
-   "id": "岐阜県:129",
+   "id": "岐阜県:128",
    "name": "多治見犬山線",
    "ref": "16",
    "highway": "primary",
@@ -2732,6 +2967,8 @@
    "flow": 22,
    "turnCount": 78,
    "score": 59.1,
+   "baseScore": 59.1,
+   "spotCount": 0,
    "polyline": "qcuvE_zpcYt@gA@gAxAwAVkBnHKrBaAiKmAuBgAoDmEyBuAuBgH@_HqBcE[uDpAmFHeEcA}Bk@oGiFsQGqMmCc]mLmPuBgGw@sMmBqFQmEu@yDkBkXdCcRz@uCP_JjDwPtNmCnGb@~BU|JgE~FaI",
    "pointCount": 38,
    "start": [
@@ -2744,7 +2981,7 @@
    ]
   },
   {
-   "id": "岐阜県:130",
+   "id": "岐阜県:129",
    "name": "ひるがの高原線",
    "ref": "321",
    "highway": "secondary",
@@ -2753,6 +2990,8 @@
    "flow": 24.7,
    "turnCount": 41,
    "score": 59,
+   "baseScore": 59,
+   "spotCount": 0,
    "polyline": "g~uzEg`rbYnJaQiAaEwMqXUeBtAg[~GyOtCqCh@{AE}DwCkHDwAjCyAfPWlA_@pK}R|TeLhBGfAJDfAiDtDYfAd@t@|CnAItCgAbArDrHxKdO",
    "pointCount": 28,
    "start": [
@@ -2765,7 +3004,7 @@
    ]
   },
   {
-   "id": "岐阜県:131",
+   "id": "岐阜県:130",
    "name": "国道363号",
    "ref": "363",
    "highway": "trunk",
@@ -2774,6 +3013,8 @@
    "flow": 21.6,
    "turnCount": 298,
    "score": 58.9,
+   "baseScore": 58.9,
+   "spotCount": 0,
    "polyline": "}_zvEue{eYkGgBmGcE}G_@}Bs@cLmGcIiJyMGoDiAeHkF{GwQ?sQiBgMiAgAgBUwN|DoCw@}AcCYuBR{CzF_Kx@iDYiDuBkC{DQ}[bIwDJgFmBmH{JkByAkGYsCmAiFuHkAmEGmFbAwN}@mHn@eNc@{CcDkFgFoPoMkQuHwPgBwAcJcCgBkA{LeSgAkCgD_S}@{B{@w@mOqFaBmBwK_@w_@uLuJ_BuC}CmGg@sBkAwByCgGoDkDI{CyDcFV_BcEy@NcApBu@QSiDgBkC}@yC_De@wCmBrAwKg@[yDAkAiCaAjAy@@aByBuDy@UcAp@{CCkAc@W{BXAsEoBmDN_DgF}DFWp@Rs@gA}Ap@QiB^uCyBqE}Bz@TuI_@a@iAZ_BiCVYlC?Jo@}CuAV_@`Fg@Hy@sAmEeAuA}AQ{D{EE_DaDg@wCD}AjAcMtRiBlFeCzLaDdDiLxFuQrByCc@eAPoFpGqEpNiGpDaA\\kA[cCaHq@s@cF@sEpBqDjF}@?iEcBsBn@mCjFqGvHsAr@uQJiXtNeJhBeBa@mF}GiNjAeMdFaEdEmGvB",
    "pointCount": 150,
    "start": [
@@ -2786,7 +3027,7 @@
    ]
   },
   {
-   "id": "岐阜県:132",
+   "id": "岐阜県:131",
    "name": "白山中居神社朝日線",
    "ref": "127",
    "highway": "secondary",
@@ -2795,6 +3036,8 @@
    "flow": 19.2,
    "turnCount": 167,
    "score": 58.3,
+   "baseScore": 58.3,
+   "spotCount": 0,
    "polyline": "cntzEcwwaYvFfAdCpAdPTzJsCvD_@pUJrCVdI`CdDi@|EHbNkHrB{C~@e@lAmCrBAzCrB~@xEzCxEtI~IrDhI`D|A`C?xD`GzItFbA~Ax@zDlJtJWvBxAnCNzA_F`KQfEh@~AfInBJ|@[lCBvEgEzGBjCl@z@vBp@~SnBfA|@hDdHzAT|LcAtBn@|ApFL~HlCtF`@zIvApFdAfBx@zGnD`Hd@X`BUx@dBBdBmD|Ft@nEjDbArB|Dd@hFc@rBaEjFuEvBkAvBEnDrCvL}BpJVjIm@hAsFl@eA|CBnAnDdNAtJ`AjWx@xEhArCvCfE`@bH`B~FbI|ApBpAxL`YdC~CvDf@",
    "pointCount": 90,
    "start": [
@@ -2807,7 +3050,7 @@
    ]
   },
   {
-   "id": "岐阜県:133",
+   "id": "岐阜県:132",
    "name": "谷高山線",
    "ref": "471",
    "highway": "secondary",
@@ -2816,6 +3059,8 @@
    "flow": 20.7,
    "turnCount": 87,
    "score": 58.1,
+   "baseScore": 58.1,
+   "spotCount": 0,
    "polyline": "kjv{EkqrdYmNwDaBhG`AfJI~A{AtEyJlJ{@dBiArFyChCe@pDNhIu@bCmFtCcNzAsGc@yLvDeEa@cAtB}C|A}BvDVbExAh@Hx@uG`Pv@PfBe@H~@aMtGuEvDkWbAqEqBwKxDeBMwXyPwK}PwA}Hd@yJoBmD_OsDaCp@iB~BqCnFiFjO",
    "pointCount": 44,
    "start": [
@@ -2828,7 +3073,7 @@
    ]
   },
   {
-   "id": "岐阜県:134",
+   "id": "岐阜県:133",
    "name": "妻木笠原線",
    "ref": "388",
    "highway": "secondary",
@@ -2837,6 +3082,8 @@
    "flow": 23.4,
    "turnCount": 37,
    "score": 57.8,
+   "baseScore": 57.8,
+   "spotCount": 0,
    "polyline": "}jmvE{|ddY_DuCeBs@qGq@aGBf@s@jAJ|Dw@nE}BPaJtDuN`R_q@jBy@aBoBUsFqDmGl@eHs@cX~EeO`@cDiC{Vy@qC",
    "pointCount": 22,
    "start": [
@@ -2849,7 +3096,7 @@
    ]
   },
   {
-   "id": "岐阜県:135",
+   "id": "岐阜県:134",
    "name": "美濃東部農道",
    "ref": "",
    "highway": "tertiary",
@@ -2858,6 +3105,8 @@
    "flow": 18.8,
    "turnCount": 57,
    "score": 57.5,
+   "baseScore": 57.5,
+   "spotCount": 0,
    "polyline": "ucoxEe`aeYtAcCbBY`Q|Dt@dA|@xDvFzIlIvGnDnH`Ar@zAo@~BkIt@m@fBVvAtDvAtAhGmAtDGfAi@lBiJjB}QpA_CdDwAnADt@rAaBfJn@dCxAN~G_DxFNvErB|BxClA\\",
    "pointCount": 33,
    "start": [
@@ -2870,7 +3119,7 @@
    ]
   },
   {
-   "id": "岐阜県:136",
+   "id": "岐阜県:135",
    "name": "土岐市停車場細野線",
    "ref": "69",
    "highway": "primary",
@@ -2879,6 +3128,8 @@
    "flow": 21,
    "turnCount": 125,
    "score": 57.4,
+   "baseScore": 57.4,
+   "spotCount": 0,
    "polyline": "mrovEawvdYiGwF_B_DeEIgAz@i@nDm@n@yF`AmCpBcBJ_@dAVfDoAfId@t@|BHjAn@\\pAq@pEmAzByBb@cAOiAkD{@g@uA|@{@nEk@^wAWmCcCk@r@o@fDuGtJLvBfHfGa@jAy@`@oHYUtBV~HeAbIbAhF?zCgExBeCfHkApAyGpBgWd@VjG{Che@wEu@oLSqFvAeDa@iBRu]`KcMnI_AhAyBvFaInJkKdRyIbE_I`[aHbNkMbGwLpPgUxJeDJbBb`@",
    "pointCount": 67,
    "start": [
@@ -2891,7 +3142,7 @@
    ]
   },
   {
-   "id": "岐阜県:137",
+   "id": "岐阜県:136",
    "name": "中之元古川線",
    "ref": "265",
    "highway": "secondary",
@@ -2900,6 +3151,8 @@
    "flow": 28.3,
    "turnCount": 26,
    "score": 57.4,
+   "baseScore": 57.4,
+   "spotCount": 0,
    "polyline": "werwEmk~`Y|@jb@[vPfHnBO~Mc@dD`Kz@s@xP`B~NtBbGr@|FQhEoAzEf@paA|WUfFw@fFKrDk@vJcHxJ[",
    "pointCount": 20,
    "start": [
@@ -2912,7 +3165,7 @@
    ]
   },
   {
-   "id": "岐阜県:138",
+   "id": "岐阜県:137",
    "name": "寒水八幡線",
    "ref": "319",
    "highway": "secondary",
@@ -2921,6 +3174,8 @@
    "flow": 20.3,
    "turnCount": 136,
    "score": 57.4,
+   "baseScore": 57.4,
+   "spotCount": 0,
    "polyline": "yluyE}ddcYK~@tAfD?hDpCbG~BQfCZlG~IfChA`@rAbA_@hB^`@~@?lCZ~@~OxBlDpIPpBbDlDjEnHlFu@dBhAvIlA~BtA`Dt@rAfB`Ic@nBXlA~@vCjGrGfG|Me@pDtAxGt@lEjA~CbFrEnAbDIjD}A|A~Dx@tFzBjIbA~Lh@fA|FhChJfLrIhEhF|A~MrLhCf@vH~EbS|BjDpAfB|B|HdQrQvV`CrBvNtDxIJxMlG~QY|Ht@lK]~Ib@zGzCrGn@x@d@Yl@]`HRhLxBlGpGdLdBv@`DEzNoG`AzB",
    "pointCount": 76,
    "start": [
@@ -2933,7 +3188,7 @@
    ]
   },
   {
-   "id": "岐阜県:139",
+   "id": "岐阜県:138",
    "name": "金山明宝線",
    "ref": "86",
    "highway": "primary",
@@ -2942,6 +3197,8 @@
    "flow": 18.4,
    "turnCount": 249,
    "score": 57.3,
+   "baseScore": 57.3,
+   "spotCount": 0,
    "polyline": "eslyE}hedYiGoBkInDcDxGaA`GaD~@eCtCqFIq@pFgBpB[tEmA~AgFRcCjEaJy@aENgDdAcBpCoAf@eB[_DcENmK[{B{DyG_DwBeGPcEhFkC|GgBdAs@]Wy@LiKs@uBoEMsH`C{D_IsC}A}N~B}F`E{@xHgAbDmIbHcDKuE}Bm@iAaBGiOtHsFdFiFtG{D|I_A`@YxHkApDsBvAiJ~@_A~@MhCfCrDNfAi@x@kCb@_@rBw@`AkBf@eAIcFgD}Ce@_HpFaDsAgFc@_Cx@_CKuI~AoGdG}CnGiBpBwCnHsAj@gChD_AfDgC|CqA`@cAM_BmBcByK}CsDiBgAwCJgEm@}Af@B~CsFzRk@^wEaAiCRk@zEaAzBAxFk@fCwFtJ_F~BoBhD_FrPqAxJaE`JgDha@n@tL}ChIeAlIVhPeD~NoCzH?rCx@jE{@dHFbCv@|EFrIXnAlFnN`DpExCzKdFjDdAbBbA~FlBvEhA`HrIvI",
    "pointCount": 128,
    "start": [
@@ -2954,7 +3211,7 @@
    ]
   },
   {
-   "id": "岐阜県:140",
+   "id": "岐阜県:139",
    "name": "下半田川春日井線",
    "ref": "205",
    "highway": "secondary",
@@ -2963,6 +3220,8 @@
    "flow": 19.8,
    "turnCount": 60,
    "score": 57.1,
+   "baseScore": 57.1,
+   "spotCount": 0,
    "polyline": "q_ivEmxtcYLwC_BuCs@gDcCsCr@wEHuFi@_CPkEoAuDL_MrCuIzBwCYgEu@iCcCkB}AgCuDcJwGaFiFgBmAcDGeCcBsDkBqIeBiCw@_DiFuEqCmEyBcAaC@kAgAc@iJrAiDm@cDBgCn@}QdAgJ{KcP",
    "pointCount": 38,
    "start": [
@@ -2975,7 +3234,7 @@
    ]
   },
   {
-   "id": "岐阜県:141",
+   "id": "岐阜県:140",
    "name": "国道418号",
    "ref": "418",
    "highway": "trunk",
@@ -2984,6 +3243,8 @@
    "flow": 20.6,
    "turnCount": 263,
    "score": 57,
+   "baseScore": 57,
+   "spotCount": 0,
    "polyline": "{rnxEy{y`YaAOcAr@sDuAwFxDgMlBmChBkB`@}@?aHgDgPcVs@iI}CaEaBuEBuD`GiNzFwUvF_Hf@eHfD}ApEQnEiC`@aBTkJnGyKfA_Ht@i@dI{AxFqJlIgK|K}CtBoCzDmKnEaE~AyEn@oGbI}MjCoGbA_QzBsEEwEtEuGb@wC`AqBKgAxAgCTiDbCwAxDKpA{AS}@cBv@I]l@mFbB_Cg@KcBz@iBoB[wDNoEoB_@eCkBsBjAd@mE|@KhCvArGq@zGoLdJgIl@mDhFkNjKqKhCoA~Dk@DgEdBcF\\wC~BiAP{Dv@{A~C}Af@eEhD{Cn@{DbC_CtDWdFsEjAqEmAgDhDwHS{AkCmGCoCrEyKr@cLrCgCvAgDYgCZ{F~DuM|C_GjCiR?mCfCgNvMuUpDcLh@qEEaIdBuGl@{Ft@wBpC@dB}AhAuDHkK|C}_@KoFbDwQ`H}ShBMv@aEHkNYaMpAkH^cGxDkJzBm`@xB}E",
    "pointCount": 128,
    "start": [
@@ -2996,7 +3257,7 @@
    ]
   },
   {
-   "id": "岐阜県:142",
+   "id": "岐阜県:141",
    "name": "岐阜南濃線",
    "ref": "1",
    "highway": "primary",
@@ -3005,6 +3266,8 @@
    "flow": 27.7,
    "turnCount": 31,
    "score": 56.9,
+   "baseScore": 56.9,
+   "spotCount": 0,
    "polyline": "{zbvEgt`aYqGeBsl@rGkAjAwGdPuUvBGin@q@wSe@uCiBiBaNiFmLaMeOm[iByBuDcBeNt@kBk@_AaBKuA|A{K",
    "pointCount": 20,
    "start": [
@@ -3017,7 +3280,7 @@
    ]
   },
   {
-   "id": "岐阜県:143",
+   "id": "岐阜県:142",
    "name": "門和佐瀬戸線",
    "ref": "432",
    "highway": "secondary",
@@ -3026,6 +3289,8 @@
    "flow": 19,
    "turnCount": 118,
    "score": 56.9,
+   "baseScore": 56.9,
+   "spotCount": 0,
    "polyline": "u`}xEaa{dYaBhEc@pKr@fHl@zAGpCkA~McBtG]lGy@bA}F_@eBl@q@dAa@`Ff@|AnBjABxAcAVsE_ByDPw@fAKdEz@~DhDxEnGvBBnAcB`GHlBl@tAnIrBzABpBs@|@h@ClO_DfM{AjJoDfHa@zBj@zGbEjGVbH}BpMd@`Bv@\\vG[x@d@`@|@j@fOhKvUrAvAbAj@`B@rDsD~@gEjBq@v@p@~@nPlTdq@hAdRE~DuB`CeSu@_H~CwJvRiBxF",
    "pointCount": 65,
    "start": [
@@ -3038,7 +3303,7 @@
    ]
   },
   {
-   "id": "岐阜県:144",
+   "id": "岐阜県:143",
    "name": "下山名丸線",
    "ref": "431",
    "highway": "secondary",
@@ -3047,6 +3312,8 @@
    "flow": 18.3,
    "turnCount": 216,
    "score": 56.8,
+   "baseScore": 56.8,
+   "spotCount": 0,
    "polyline": "{h_zEc{fdYdCxAzFA|Cp@vBo@lAd@|CeBnC_@|O|A|CaElIB|DvDdEtBlGdBnFPzCwAlCcIzBYzCeC`E{GrNaMpEg@jFuCdJ_ApFqEzCEtDhAtFKnClAdHs@nCRxGoBxEMvFuCjCwEpLuD`LiL~BG~GjDpBAzAeAxByFbCw@tUxDhFCfMwEpC{C~E{B~HDhSqGjG`ElF`I`Br@zEK`B|@rA@jAk@jIeKrBk@vJXbPfHjDzCzCnI^pE`BfD?pIfAvGfEhCnH@bDkCtDaIvHqF~DmEtCoG|HcGfCVhA|@GzHs@jCDpEw@vDpBzA|Ce@|Bd@bAlA`BZnPyM~BoCxH{EfAf@jCIvDt@jGbG~GjBdD`G`An@`F}BtAEvAnAHnAy@bAaBf@o@~CdDxD|ApEItEXbDeFdLbA|Lr@hCyBnCyFrLFhBzAzFEnD",
    "pointCount": 115,
    "start": [
@@ -3059,7 +3326,7 @@
    ]
   },
   {
-   "id": "岐阜県:145",
+   "id": "岐阜県:144",
    "name": "古川清見線",
    "ref": "90",
    "highway": "primary",
@@ -3068,6 +3335,8 @@
    "flow": 18.6,
    "turnCount": 142,
    "score": 56.7,
+   "baseScore": 56.7,
+   "spotCount": 0,
    "polyline": "o_}{E_f~cYiDyDuCaHmCuTqAcF}LiP_IsOeBqF_A}Iu@uBuIkJa@{BBkClCqKQ_BcA}AsA_@}ATaAfAsBvFuCjBkD?gGqAgDkBiBKoAh@qDtFiBrA{ITsF`AmDi@aEeFsEo@oAu@kDgEuE{G_KeUmAkAm@yJmCuIuE_EuAWiCVNo@hCc@dB\\JYsEmByEgLZ_ArBPx@sB?}@gFeBuHcHsEwLmAeBoBSyBbBcBXeBq@y@mBVsD`C}BbDqAnFO`EwBrBuNhAsApDs@jCiCl@_C[gCcAoAqDgBmFNmChB}BhGmBv@yBq@wAkD",
    "pointCount": 81,
    "start": [
@@ -3080,7 +3349,7 @@
    ]
   },
   {
-   "id": "岐阜県:146",
+   "id": "岐阜県:145",
    "name": "恵那御嵩線",
    "ref": "65",
    "highway": "primary",
@@ -3089,6 +3358,8 @@
    "flow": 18.5,
    "turnCount": 128,
    "score": 56.5,
+   "baseScore": 56.5,
+   "spotCount": 0,
    "polyline": "ssbwEii_eYr@sA{BuIOuHhIe@nDmCbA{C~Gw_@tEkBrDsCzIUfCw@`AkEU_GmAyGqDaEwFeAuAaAuEcJ_Dc@m@iDEcEcIyEsEwHkBPuF|DyGoAo@aBxBsGhHgCjAqAtByJ\\}GnJaB`@}Dx@{A~DoDbKcYlEiErHyDfFc@~A{BAsBeAu@eAT{@~AoE|@y@OsCaDkD_HcGwBqB}BeB{Ev@iKC}JrAqFdByA|@aF?mC_AqFZwH|FuNc@_D",
    "pointCount": 63,
    "start": [
@@ -3101,7 +3372,7 @@
    ]
   },
   {
-   "id": "岐阜県:147",
+   "id": "岐阜県:146",
    "name": "上石津多賀線",
    "ref": "139",
    "highway": "secondary",
@@ -3110,6 +3381,8 @@
    "flow": 19.1,
    "turnCount": 83,
    "score": 56.4,
+   "baseScore": 56.4,
+   "spotCount": 0,
    "polyline": "aadvE}_|_YjBdBhJFC|E~BzJt@hIfExKbAnSnAnGbCdFxAzLpC`JRvJnBfCdAdHjDdJ`I`GhEzAf@pAj@dG|A`Eb@bHEzJ|A~CZjGaAhFjCvEFz@mDnHyE|@K^^rCA|D|@j@RzAs@dOx@nElBdDL~BWdGZhDGlD_ApLmBvHy@~L|AbP[pB",
    "pointCount": 47,
    "start": [
@@ -3122,7 +3395,7 @@
    ]
   },
   {
-   "id": "岐阜県:148",
+   "id": "岐阜県:147",
    "name": "富加七宗線",
    "ref": "97",
    "highway": "primary",
@@ -3131,6 +3404,8 @@
    "flow": 20,
    "turnCount": 144,
    "score": 56.4,
+   "baseScore": 56.4,
+   "spotCount": 0,
    "polyline": "{zaxEgducYp@|A`IpHz@lItAfBjE|Bn@pCeAxc@DbJ~@bHeAx@wAoAsCBoD`F\\tDrCjCOvEzBpBGlCz@jAjAvEbGhGdDfLzIvMvC|C~LdH~JT|CtBfDIvElBjAYhBiExEsRHaE}@{EFcA^}AxCoDhCiGXwDhDkKRaE|@{CPp@a@vABlAnD}EjH}ClFw@lAp@|B[tGpD~FpFxN~EdEsChDTxJ{GxDBjGz@tCg@nBJpFlDpIvNjTrN|IbJ|@xBPrFr@vEr@`CpB`DyBvRb@hEfAdB~BvA`EfFnFzEbWtMz@rCHxE`JfL",
    "pointCount": 80,
    "start": [
@@ -3143,7 +3418,7 @@
    ]
   },
   {
-   "id": "岐阜県:149",
+   "id": "岐阜県:148",
    "name": "裏木曽公園線",
    "ref": "411",
    "highway": "secondary",
@@ -3152,6 +3427,8 @@
    "flow": 19.4,
    "turnCount": 51,
    "score": 56.4,
+   "baseScore": 56.4,
+   "spotCount": 0,
    "polyline": "c`pxE_xgfYdAxAlALtFc@dDn@|CcA`Af@lEzHfKd@fF`BxFj@rIpC~CXt@~@hBxH|Cn@jAzCjG^|DnEnBMbIn@xBt@dDH|EhBhH@lMzAr@SnE}G|Cw@~Nq@",
    "pointCount": 30,
    "start": [
@@ -3162,7 +3439,30 @@
     35.611239,
     137.499403
    ]
+  },
+  {
+   "id": "岐阜県:149",
+   "name": "鼠餅古川線",
+   "ref": "473",
+   "highway": "secondary",
+   "lengthKm": 9.2,
+   "curviness": 186.1,
+   "flow": 23.8,
+   "turnCount": 72,
+   "score": 56.4,
+   "baseScore": 56.4,
+   "spotCount": 0,
+   "polyline": "}ta|EqktdY|@rRsArIR`A`D~BKhTf@xCC`KdE`WjDhGxAbG`AdBp@|FHrDgBpSLvGe@nDxAzN}AjHqDlE{FzQ}Fg@gE~@aTtT_A`@gBbDoN`d@_Srh@qAdFcACyE}DaArBs@o@mRu[cCtCkFdC}MvPeCxJTtNqE|HkCxRuDlGk@hIkKbSm@tC}AdCkAlFaGlN",
+   "pointCount": 48,
+   "start": [
+    36.222386,
+    137.243613
+   ],
+   "end": [
+    36.251074,
+    137.171053
+   ]
   }
  ],
- "hiddenCount": 0
+ "hiddenCount": 1
 }

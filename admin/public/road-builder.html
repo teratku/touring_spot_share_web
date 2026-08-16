@@ -1418,6 +1418,17 @@ const KINDS = [
   ["winterClosure", "冬季閉鎖"], ["closed", "通行止め"],
 ];
 
+/**
+ * 排気量のよく使う組み合わせ。[下限, 上限, 表示]
+ *
+ * ⚠️ OSM から拾った値は当てにならない。`moped=no` としか書かれていないので、
+ *    **125cc以下なのか50cc以下なのかを区別できない**。実際に登録してみると
+ *    125cc以下の道が多かった（報告あり）。1押しで直せるようにしてある。
+ * ⚠️ 自動車専用道路は道交法で125cc以下が通行禁止（原付二種も入れない）。
+ *    ふつうの道の「原付通行禁止」は50cc以下。切る位置が違う。
+ */
+const CC_PRESETS = [["", "", "二輪すべて"], ["", "50", "50cc以下"], ["", "125", "125cc以下"]];
+
 function rSetDirty(n) {
   R.dirty = n;
   // ⚠️ 一覧バーとヘッダの**両方**を更新すること。片方だけだと、見えている方が
@@ -1560,7 +1571,10 @@ function rRender() {
       `<span class="mark">${done ? "✅" : c.manual ? "✚" : c.confidence === "OSM" ? "🗺️"
                                        : c.polyline ? "◻︎" : "✋"}</span>` +
       `<span class="name">${escapeHtml(rNameOf(c) || "(名前なし)")}</span>` +
-      `<span class="sub">${escapeHtml(rScheduleLabel(c) || c.targetLabel || "")}</span>` +
+      // ⚠️ 排気量と時間の**両方**を出す。片方だけだと、原付だけの規制と終日の規制が
+      //    一覧で見分けられない（原付だけの規制は神奈川県だけで324本ある）
+      `<span class="sub">${escapeHtml([rTargetLabel(c), rScheduleLabel(c)]
+                                       .filter(Boolean).join(" "))}</span>` +
       // ⚠️ 長さも登録した区間のものを出す。元データの値のままだと、
     //    形を作って登録したのに「—」のままで、登録できたのか分からない
     `<span class="score">${rShownLength(c)}</span>`;
@@ -1581,11 +1595,35 @@ function rRender() {
  * ⚠️ 一覧で終日と時間限定を見分けられないと、夜間だけの規制を終日のつもりで
  *    登録してしまう。登録済みならその値、まだなら候補が持ってきた値を見る
  */
+/**
+ * 一覧に出す「誰が対象か」。
+ *
+ * ⚠️ **候補の `targetLabel` をそのまま出さないこと。** あれは元データ（OSM）を読んだ結果で、
+ *    画面で排気量を直しても変わらない。実機で「排気量は変更できたが一覧の文言が
+ *    変わっていない」として報告された。登録済みなら、登録した値から作り直す。
+ * ⚠️ 言い回しはアプリ側の `RoadRestriction.targetLabel` と揃えること
+ *    （`touringSpotShare/saveRoute/nav/RoadRestriction.swift`）。
+ *    ここだけ違うと、ツールで見た文言とアプリに出る文言が食い違う。
+ */
+function rTargetLabel(c) {
+  const saved = R.saved.get(c.id);
+  if (!saved) return (c || {}).targetLabel || "";
+  const low = saved.minCc ?? 0;
+  const high = saved.maxCc ?? 99999;
+  if (low <= 0 && high >= 99999) return "二輪すべて";
+  if (low <= 0) return `${high}cc以下`;
+  if (high >= 99999) return `${low}cc以上`;
+  return `${low}〜${high}cc`;
+}
+
 function rScheduleLabel(c) {
-  const saved = R.saved.get(c.id) || {};
-  const days = saved.activeDays ?? c.activeDays;
-  const holiday = saved.includesHoliday ?? c.includesHoliday;
-  const hours = saved.activeHours ?? c.activeHours;
+  // ⚠️ **登録済みなら候補に戻らないこと**（`rEditorDefaults` と同じ理由）。
+  //    `saved.activeHours ?? c.activeHours` と繋ぐと、終日に直した規制の一覧に
+  //    候補の時間帯が出たままになり、**一覧と編集欄で違う時間が見える**。
+  const base = R.saved.get(c.id) || c;
+  const days = base.activeDays;
+  const holiday = base.includesHoliday;
+  const hours = base.activeHours;
   const names = ["月", "火", "水", "木", "金", "土", "日"];
   const parts = [];
   if (days && days.length) parts.push(days.map((d) => names[d - 1]).join("・"));
@@ -1760,23 +1798,45 @@ function rAddHandles(chain, segPath, roadName) {
   R.markers.end = makeHandle(segPath[segPath.length - 1], "end");
 }
 
+/**
+ * 編集欄に出す初期値を決める。
+ *
+ * ⚠️ **登録済みなら、候補の値に戻さないこと。** `saved.maxCc ?? c.maxCc` のように繋ぐと、
+ *    空欄にした排気量・曜日・時間帯が候補の値に戻る。実機で
+ *    「排気量を更新しても変更できない」として報告された。登録済みの null は
+ *    「まだ決めていない」ではなく**制限なしと決めた結果**なので、候補で埋めてはいけない。
+ *    OSM 由来の候補は排気量を持っている（moped=no なら 50cc以下）ので、これが起きる。
+ *
+ * ⚠️ **まだ登録していないときは、候補が持ってきた内容を初期値にすること。**
+ *    OSM から拾った規制は曜日と時間帯を持っている（旧東海道は月〜金の07:30〜09:00）。
+ *    候補を見ないと、それが画面に出ないまま「終日」で登録されてしまう。
+ *
+ * ⚠️ `||` ではなく `??` を使う。空配列や false を「未指定」と取り違える。
+ */
+function rEditorDefaults(candidate, saved, isSaved) {
+  const base = (isSaved ? saved : candidate) || {};
+  return {
+    kind: base.kind ?? "noMotorcycle",
+    // 数値の欄は空文字で「制限なし」を表す
+    minCc: base.minCc ?? "",
+    maxCc: base.maxCc ?? "",
+    months: base.activeMonths ?? [],
+    days: base.activeDays ?? [],
+    hours: base.activeHours ?? {},
+    holiday: base.includesHoliday ?? false,
+  };
+}
+
 function rRenderEditor(c) {
   const box = $("rEditor");
   const saved = R.saved.get(c.id) || {};
-  const months = saved.activeMonths || [];
-  // ⚠️ **まだ登録していないときは、候補が持ってきた内容を初期値にすること。**
-  //    OSM から拾った規制は曜日と時間帯を持っている（旧東海道は月〜金の07:30〜09:00）。
-  //    `saved` からしか埋めないと、それが画面に出ないまま「終日」で登録されてしまう。
-  //    ⚠️ `||` ではなく `??` を使う。空配列や false を「未指定」と取り違える
-  const days = saved.activeDays ?? c.activeDays ?? [];
-  const hours = saved.activeHours ?? c.activeHours ?? {};
-  const holiday = saved.includesHoliday ?? c.includesHoliday ?? false;
-  const kind = saved.kind ?? c.kind ?? "noMotorcycle";
+  const initial = rEditorDefaults(c, saved, R.saved.has(c.id));
+  const { months, days, hours, holiday, kind } = initial;
   box.innerHTML = `
     <h3>${escapeHtml(rNameOf(c) || "(名前なし)")}</h3>
     <div class="stats">
       ${escapeHtml(c.prefecture)}${escapeHtml(c.city || "")}<br>
-      規制対象: ${escapeHtml(c.target || "")} → <strong>${escapeHtml(c.targetLabel || "")}</strong><br>
+      元データの規制対象: ${escapeHtml(c.target || "")} → <strong>${escapeHtml(c.targetLabel || "")}</strong><br>
       区間: ${escapeHtml(c.from || "")} → ${escapeHtml(c.to || "")}<br>
       ${c.confidence ? `道路の当て方: <strong>${c.confidence}</strong><br>` : ""}
       ${c.reason ? `<span style="color:var(--warn)">${escapeHtml(c.reason)}</span><br>` : ""}
@@ -1806,11 +1866,18 @@ function rRenderEditor(c) {
     </div>
 
     <label>対象の排気量（空欄なら制限なし）</label>
+    <div class="chips" id="r-cc">
+      ${CC_PRESETS.map(([min, max, label]) =>
+        `<button class="chip" data-min="${min}" data-max="${max}">${label}</button>`).join("")}
+    </div>
     <div class="boostRow">
-      <input type="number" id="r-min" placeholder="下限" value="${saved.minCc ?? c.minCc ?? ""}">
+      <input type="number" id="r-min" placeholder="下限" value="${initial.minCc}">
       <span class="muted">〜</span>
-      <input type="number" id="r-max" placeholder="上限" value="${saved.maxCc ?? c.maxCc ?? ""}">
+      <input type="number" id="r-max" placeholder="上限" value="${initial.maxCc}">
       <span class="muted">cc</span>
+    </div>
+    <div class="muted" style="font-size:11px; margin-top:2px">
+      自動車専用道路は125cc以下が通行禁止（原付二種も入れない）。ふつうの道の原付規制は50cc以下。
     </div>
 
     <label>補足</label>
@@ -1821,6 +1888,12 @@ function rRenderEditor(c) {
       ${["月","火","水","木","金","土","日"].map((d, i) =>
         `<button class="chip ${(days || []).includes(i + 1) ? "on" : ""}" data-day="${i + 1}">${d}</button>`).join("")}
       <button class="chip ${holiday ? "on" : ""}" id="r-holiday">祝</button>
+      <button class="chip" id="r-weekend" title="土・日・祝だけにする">土日祝</button>
+      <button class="chip" id="r-everyday" title="曜日の指定を外す">毎日</button>
+    </div>
+    <div class="muted" style="font-size:11px; margin-top:2px">
+      ⚠️ OSM は曜日を持っていない（神奈川223本・大阪53本を調べて0件）。
+      観光有料道路は土日祝だけ二輪通行禁止のことがあるので、現地の告知で確かめること。
     </div>
 
     <label>効いている時間（空欄なら終日）</label>
@@ -1858,6 +1931,20 @@ function rRenderEditor(c) {
   box.querySelectorAll("[data-month]").forEach((b) => { b.onclick = () => b.classList.toggle("on"); });
   box.querySelectorAll("[data-day]").forEach((b) => { b.onclick = () => b.classList.toggle("on"); });
   $("r-holiday").onclick = () => $("r-holiday").classList.toggle("on");
+  // 排気量のよく使う組み合わせ。OSM の値は当てにならないので1押しで直せるようにする
+  box.querySelectorAll("#r-cc [data-min]").forEach((b) => {
+    b.onclick = () => { $("r-min").value = b.dataset.min; $("r-max").value = b.dataset.max; };
+  });
+  // 「土日祝だけ二輪通行禁止」は観光有料道路に多い形
+  $("r-weekend").onclick = () => {
+    box.querySelectorAll("#r-days [data-day]").forEach((d) =>
+      d.classList.toggle("on", d.dataset.day === "6" || d.dataset.day === "7"));
+    $("r-holiday").classList.add("on");
+  };
+  $("r-everyday").onclick = () => {
+    box.querySelectorAll("#r-days [data-day]").forEach((d) => d.classList.remove("on"));
+    $("r-holiday").classList.remove("on");
+  };
   rWireFindControls(c);
   $("r-fit").onclick = () => rFitToRoads(c);
   $("r-register").onclick = rApplyEdit;
