@@ -255,6 +255,15 @@ const state = {
   // ⚠️ overrides と混ぜないこと。あちらは「生成した道への調整」で、
   //    当たらなかったものは不具合として画面に出す。足した道は当たらなくて当たり前
   added: {}, addDraft: null,
+  // CSV（グリッドデータ）にある道。道を足すときだけ地図に出す。
+  // ⚠️ 県ごとに1回だけ取る。北海道で6,012本あり、毎回取り直すと重い
+  csvRoads: null, csvRoadsRomaji: null, csvLines: [], csvIdle: null, csvShow: true,
+  // 道の種類での絞り込み。地図と名前検索の両方に効く。"all" で絞らない
+  csvKind: "all",
+  // いま点を出している CSV の道と、その点の印。
+  // ⚠️ 全部の道に点を出さないこと。1本40点×500本＝2万個の印で地図が固まる。
+  //    クリックした1本にだけ出す
+  csvPicked: null, csvPointMarkers: [], csvPickFrom: null,
   // 手で直した形・足した道を、生成と同じ式で測り直した結果（鍵 → {lengthKm, curviness, flow, score}）
   // ⚠️ 画面で計算しないこと。点数の式は `lib/funSegments.js` にあり、重みでも動く。
   //    写しを置くと本物と食い違い「ツールでは62点、配信は48点」になる
@@ -830,7 +839,10 @@ function clearEndMarkers() {
 
 function setShape(seg, encoded) {
   const key = overrideKey(seg);
-  state.overrides[key] = { ...(state.overrides[key] || {}), shape: encoded };
+  // ⚠️ 足した道は `state.added` が本体（`entryOf`）。`overrides` に書くと、
+  //    生成側でどこにも当たらず、切り直した形が配信に載らない
+  const home = seg.added ? state.added : state.overrides;
+  home[key] = { ...(home[key] || {}), shape: encoded };
   // ⚠️ 測り直してから描き直すこと。忘れると距離・曲率・点数が元のまま出て
   //    「直したのに変わらない」ように見える（実機で報告）
   measureShapes([{ key, shape: encoded, highway: seg.highway }])
@@ -1019,11 +1031,21 @@ function clearExtendPreview() {
  *    地図を手でなぞった線ではないので、道から外れない。
  * ⚠️ 保存するだけでは配信されない。生成を回して初めておすすめに入る（保存後の案内文）。
  */
+/**
+ * 足す道の種別。点数に効く（`lib/funSegments.js` の `CLASS_RANK`）。
+ *
+ * ⚠️ **CSV から選んだ道の種別を、この一覧に無いからと勝手に別のものにしないこと。**
+ *    林道は `unclassified` で入っていることが多く、以前は一覧に無いため
+ *    先頭の `primary` が選ばれ、**実際と違う点数が付いていた**（実機で確認）。
+ * ⚠️ `CLASS_RANK` に載っていない種別（unclassified など）は既定値で計算される。
+ *    載っている4つとは点数が変わるので、選び分けられるようにしておく。
+ */
 const ADD_HIGHWAYS = [
   ["primary", "国道など（primary）"],
   ["secondary", "主要地方道（secondary）"],
   ["tertiary", "一般県道（tertiary）"],
   ["trunk", "幹線（trunk）"],
+  ["unclassified", "その他・林道（unclassified）"],
 ];
 
 function beginAddRoad() {
@@ -1037,6 +1059,9 @@ function beginAddRoad() {
     if (!d.from) { d.from = at; addRoadMarker(at, "始"); renderAddPanel(); return; }
     if (!d.to) { d.to = at; addRoadMarker(at, "終"); renderAddPanel(); connectAddRoad(); }
   });
+  // ⚠️ 地図を動かすたびに描き直す。止めないと、寄っても増えず引いても減らない
+  state.csvIdle = state.map.addListener("idle", () => { drawCsvRoads(); });
+  drawCsvRoads();
   renderAddPanel();
 }
 
@@ -1057,6 +1082,10 @@ function cancelAddRoad() {
     if (d.line) d.line.setMap(null);
     for (const m of d.markers) m.setMap(null);
   }
+  // ⚠️ CSV の線も必ず消すこと。残ると、おすすめの線と見分けが付かなくなる
+  if (state.csvIdle) { google.maps.event.removeListener(state.csvIdle); state.csvIdle = null; }
+  clearCsvLines();
+  clearCsvPoints();
   state.addDraft = null;
   const box = $("addPanel");
   if (box) { box.style.display = "none"; box.innerHTML = ""; }
@@ -1092,16 +1121,272 @@ async function connectAddRoad() {
   renderAddPanel();
 }
 
+/** 地図に出す CSV の道の上限。これを超えたら「寄ってください」と出す */
+const CSV_DRAW_LIMIT = 500;
+
+/**
+ * 道の種類での絞り込み。
+ *
+ * ⚠️ 索引に実際にある7種類に合わせてある（全県を数えて確認）。
+ *    secondary 2,834 / tertiary 2,698 / unclassified 2,477 / primary 1,554 /
+ *    trunk 1,049 / residential 882 / motorway 329。
+ *    ここに無い種類を足すと、選んでも0件になる。
+ * ⚠️ 「すべて」を必ず残すこと。絞ったまま探して「無い」と誤解する
+ */
+const CSV_KINDS = [
+  ["all", "すべて"],
+  ["primary", "国道など"],
+  ["secondary", "主要地方道"],
+  ["tertiary", "一般県道"],
+  ["trunk", "幹線"],
+  ["unclassified", "その他・林道"],
+  ["residential", "生活道路"],
+  ["motorway", "高速"],
+];
+
+/**
+ * CSV（グリッドデータ）にある道を地図に描く。
+ *
+ * 【なぜ要るか】
+ * ⚠️ 2点をつなぐやり方は **CSV に道が無いと失敗する**（能登の百海七尾線で実際に
+ *    「間の道がCSVにありません」になった）。どこに道があるのか見えないまま
+ *    地図をクリックすることになっていた。**あるものを見せてから選ばせる**。
+ *
+ * ⚠️ 全部いっぺんに描かないこと。北海道は6,012本あり、地図の操作が固まる。
+ *    いま見えている範囲だけ、上限を決めて描く。
+ * ⚠️ 描いた線はクリックできる。押せばその道がそのまま足す道の形になる。
+ */
+async function loadCsvRoads() {
+  if (state.csvRoads && state.csvRoadsRomaji === state.romaji) return state.csvRoads;
+  const r = await (await fetch(`/api/restrictions/roads-all/${state.romaji}`)).json();
+  if (r.error) { state.csvRoads = { error: r.error }; state.csvRoadsRomaji = state.romaji; return state.csvRoads; }
+  // 範囲での絞り込みに使う枠を、ここで1回だけ作る
+  state.csvRoads = (r.roads || []).map((road) => {
+    const pts = decodePolyline(road.polyline);
+    let n = -90, s2 = 90, e = -180, w = 180;
+    for (const p of pts) { n = Math.max(n, p.lat); s2 = Math.min(s2, p.lat); e = Math.max(e, p.lng); w = Math.min(w, p.lng); }
+    return { ...road, pts, bounds: { n, s: s2, e, w } };
+  });
+  state.csvRoadsRomaji = state.romaji;
+  return state.csvRoads;
+}
+
+/** いまの絞り込みに当てはまる道か。"all" なら全部通す */
+function matchesCsvKind(road) {
+  return state.csvKind === "all" || road.highway === state.csvKind;
+}
+
+function clearCsvLines() {
+  for (const l of state.csvLines) l.setMap(null);
+  state.csvLines = [];
+}
+
+async function drawCsvRoads() {
+  if (!state.addDraft) { clearCsvLines(); clearCsvPoints(); return; }
+  const roads = await loadCsvRoads();
+  clearCsvLines();
+  if (!state.csvShow) { renderAddPanel(); return; }
+  if (roads.error) { renderAddPanel(); return; }
+
+  const b = state.map.getBounds();
+  if (!b) return;
+  const ne = b.getNorthEast(), sw = b.getSouthWest();
+  const inView = roads.filter((r) =>
+    matchesCsvKind(r)
+    && r.bounds.s <= ne.lat() && r.bounds.n >= sw.lat()
+    && r.bounds.w <= ne.lng() && r.bounds.e >= sw.lng());
+
+  state.addDraft.csvInView = inView.length;
+  for (const road of inView.slice(0, CSV_DRAW_LIMIT)) {
+    const line = new google.maps.Polyline({
+      path: road.pts, map: state.map, zIndex: 120,
+      strokeColor: "#1c7ed6", strokeOpacity: 0.55, strokeWeight: 3,
+    });
+    // ⚠️ クリックで丸ごと使うのをやめ、**点を出す**ようにした。
+    //    道の一部だけ欲しいことの方が多く、丸ごとだと毎回切り直すことになる
+    //    （丸ごと使いたいときは、点を出したあとのボタンから）。
+    line.addListener("click", () => showCsvPoints(road));
+    // ⚠️ どの道か分からないと選べない。触ったときに名前を出す
+    line.addListener("mouseover", () => {
+      line.setOptions({ strokeOpacity: 1, strokeWeight: 6 });
+      setStatus(`${road.name}（${(road.lengthMeters / 1000).toFixed(1)}km・${road.highway}）— クリックで使う`);
+    });
+    line.addListener("mouseout", () => line.setOptions({ strokeOpacity: 0.55, strokeWeight: 3 }));
+    state.csvLines.push(line);
+  }
+  renderAddPanel();
+}
+
+/**
+ * CSV に入っている道路を名前で探す。
+ *
+ * 【なぜ要るか】
+ * ⚠️ 2点をつなぐやり方は、**CSV の道路網が繋がっていないと失敗する**
+ *    （実際に能登の百海七尾線の両端・6.5kmで「間の道がCSVにありません」になった）。
+ *    どの道が CSV にあるのかを先に見られないと、当たるまで地図をクリックすることになる。
+ *    ここで名前を引けば、**確実にある道**をそのまま形として使える。
+ *
+ * ⚠️ 索引（`data/road-index/<romaji>.json`）が要る。無い県では作り方を画面に出す。
+ *    黙って「0件」と出すと、道が無いのか索引が無いのか区別が付かない。
+ */
+async function findCsvRoads() {
+  const d = state.addDraft;
+  if (!d) return;
+  const q = (d.query || "").trim();
+  if (!q) { d.hits = null; renderCsvHits(); return; }
+  d.hits = "searching";
+  renderCsvHits();
+  try {
+    const r = await (await fetch(`/api/restrictions/roads/${state.romaji}`
+                                 + `?q=${encodeURIComponent(q)}`)).json();
+    // ⚠️ 地図と同じ絞り込みを掛ける。片方だけ効くと「地図に無いのに一覧に出る」になる
+    d.hits = r.error ? { error: r.error } : (r.roads || []).filter(matchesCsvKind);
+  } catch (e) {
+    d.hits = { error: String(e.message || e) };
+  }
+  renderCsvHits();
+}
+
+function renderCsvHits() {
+  const box = $("addFindHits");
+  const d = state.addDraft;
+  if (!box || !d) return;
+  const hits = d.hits;
+  if (hits === null || hits === undefined) { box.innerHTML = ""; return; }
+  if (hits === "searching") { box.innerHTML = '<div class="bar muted">探しています…</div>'; return; }
+  if (hits.error) {
+    // ⚠️ 索引が無いことと、道が無いことを区別して伝える。
+    //    索引が無いだけなら、ここから作れる（1県あたり実測 約15秒）
+    const missing = hits.error.includes("索引が未生成");
+    box.innerHTML = `<div class="warn" style="font-size:11px">${escapeHtml(hits.error)}`
+      + (missing ? ' <button id="addMakeIndex">索引を作る（約15秒）</button>' : "")
+      + "</div>";
+    if (missing) {
+      $("addMakeIndex").onclick = async () => {
+        $("addMakeIndex").disabled = true;
+        setStatus(`${state.prefName} の道路索引を作っています…（30秒ほどかかることがあります）`);
+        try {
+          const r = await (await fetch(`/api/roads/index/${state.romaji}`, { method: "POST" })).json();
+          if (!r.ok) { setStatus("索引を作れませんでした: " + (r.stderr || "").slice(0, 120)); return; }
+          setStatus(`索引ができました（${r.count}本）。もう一度探してください`);
+          findCsvRoads();
+        } catch (e) { setStatus("索引を作れませんでした: " + (e.message || e)); }
+      };
+    }
+    return;
+  }
+  if (!hits.length) {
+    box.innerHTML = '<div class="bar muted" style="font-size:11px">'
+      + 'CSV にこの名前の道はありません。地図で2点をつないでください。</div>';
+    return;
+  }
+  box.innerHTML = hits.map((r, i) =>
+    `<div class="row" data-hit="${i}">`
+    + `<span class="name">${escapeHtml(r.name)}</span>`
+    + `<span class="sub">${escapeHtml(r.highway || "")}</span>`
+    + `<span class="score">${(r.lengthMeters / 1000).toFixed(1)}km</span></div>`).join("");
+  box.querySelectorAll("[data-hit]").forEach((el) => {
+    el.onclick = () => useCsvRoad(hits[Number(el.dataset.hit)]);
+  });
+}
+
+/**
+ * 選んだ CSV の道に、掴める点を出す。
+ *
+ * ⚠️ **全部の道に点を出さないこと。** 1本40点×500本＝2万個の印になり、地図が固まる。
+ *    クリックした1本にだけ出す。
+ * ⚠️ 点は間引く（`handleIndices`）。長い道は数千点あり、そのまま出すと選べない。
+ * ⚠️ 同じ道の2点なら、**経路探索を通さずに線を切り出す**。
+ *    つなぐやり方は CSV の道路網が繋がっていないと失敗するが、
+ *    1本の中を切るだけなら必ず成功する（能登で失敗した形がこれで避けられる）。
+ */
+function showCsvPoints(road) {
+  clearCsvPoints();
+  state.csvPicked = road;
+  state.csvPickFrom = null;
+  const pts = road.pts;
+  state.csvPointMarkers = handleIndices(pts.length).map((index) => {
+    const marker = new google.maps.Marker({
+      position: pts[index], map: state.map, zIndex: 310,
+      icon: { path: google.maps.SymbolPath.CIRCLE, scale: 5,
+              fillColor: "#f76707", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 1.5 },
+    });
+    marker.addListener("click", () => pickCsvPoint(road, index));
+    marker.__index = index;
+    return marker;
+  });
+  setStatus(`${road.name}：始点にする点をクリック（もう一度押すと範囲が決まります）`);
+  renderAddPanel();
+}
+
+function clearCsvPoints() {
+  for (const m of state.csvPointMarkers) m.setMap(null);
+  state.csvPointMarkers = [];
+  state.csvPicked = null;
+  state.csvPickFrom = null;
+}
+
+/** 点を選ぶ。1回目が始点、2回目で範囲が決まる */
+function pickCsvPoint(road, index) {
+  if (state.csvPickFrom === null) {
+    state.csvPickFrom = index;
+    for (const m of state.csvPointMarkers) {
+      const on = m.__index === index;
+      m.setIcon({ path: google.maps.SymbolPath.CIRCLE, scale: on ? 8 : 5,
+                  fillColor: on ? "#2b8a3e" : "#f76707", fillOpacity: 1,
+                  strokeColor: "#fff", strokeWeight: on ? 2 : 1.5 });
+    }
+    setStatus(`${road.name}：終点にする点をクリック`);
+    renderAddPanel();
+    return;
+  }
+  const [from, to] = state.csvPickFrom <= index
+    ? [state.csvPickFrom, index] : [index, state.csvPickFrom];
+  if (to - from < 1) { setStatus("同じ点です。別の点を選んでください"); return; }
+  // ⚠️ 経路探索を通さない。1本の中を切るだけなので必ず成功する
+  useCsvRoad({ ...road, polyline: encodePolyline(road.pts.slice(from, to + 1)),
+               lengthMeters: null }, { partial: true });
+}
+
+/** 探して見つかった道を、そのまま足す道の形にする */
+function useCsvRoad(road, { partial = false } = {}) {
+  const d = state.addDraft;
+  if (!d || !road || !road.polyline) return;
+  clearCsvPoints();
+  // 地図で拾いかけていた点は捨てる（混ざると分かりにくい）
+  for (const m of d.markers) m.setMap(null);
+  d.markers = []; d.from = null; d.to = null;
+  if (d.line) d.line.setMap(null);
+  d.shape = road.polyline;
+  d.name = d.name || road.name;
+  d.highway = road.highway || d.highway || "secondary";
+  d.line = new google.maps.Polyline({
+    path: decodePolyline(road.polyline), map: state.map,
+    strokeColor: "#7048e8", strokeOpacity: 0.95, strokeWeight: 6, zIndex: 290,
+  });
+  // 選んだ道が見えるところまで寄せる
+  const b = new google.maps.LatLngBounds();
+  for (const p of decodePolyline(road.polyline)) b.extend(p);
+  state.map.fitBounds(b);
+  // ⚠️ 切り出したときは元の道の長さを出さないこと。実際の線と食い違う
+  const km = shapeLengthKm(road.polyline);
+  setStatus(partial
+    ? `「${road.name}」の一部を使います（${km}km）`
+    : `「${road.name}」を丸ごと使います（${km}km）。`
+      + "一部だけ欲しいときは、線をクリックして点から選べます");
+  renderAddPanel();
+}
+
 function renderAddPanel() {
   const box = $("addPanel");
   const d = state.addDraft;
   if (!box) return;
   if (!d) { box.style.display = "none"; box.innerHTML = ""; return; }
   box.style.display = "";
-  const step = !d.from ? "地図で<strong>始点</strong>をクリック"
+  const step = d.shape ? `線ができました（${shapeLengthKm(d.shape)}km）`
+             : !d.from ? "道路名で探すか、地図で<strong>始点</strong>をクリック"
              : !d.to ? "地図で<strong>終点</strong>をクリック"
-             : !d.shape ? "つないでいます…"
-             : `線ができました（${shapeLengthKm(d.shape)}km）`;
+             : "つないでいます…";
   box.innerHTML = `
     <div class="bar wrap" style="gap:6px">
       <span class="muted">${step}</span>
@@ -1109,10 +1394,48 @@ function renderAddPanel() {
       <button id="addCancel">やめる</button>
     </div>
     <div class="bar wrap" style="gap:6px">
+      <button class="chip ${state.csvShow ? "on" : ""}" id="addCsvToggle"
+              title="CSV（グリッドデータ）にある道を地図に出す">CSVの道を出す</button>
+      <select id="addCsvKind" title="道の種類でしぼる（地図と検索の両方に効きます）">
+        ${CSV_KINDS.map(([v, l]) =>
+          `<option value="${v}"${state.csvKind === v ? " selected" : ""}>${l}</option>`).join("")}
+      </select>
+      <span class="muted" style="font-size:11px">${
+        state.csvRoads && state.csvRoads.error ? "索引が無いので出せません"
+        : d.csvInView === undefined ? ""
+        : d.csvInView > CSV_DRAW_LIMIT
+          ? `この範囲に${d.csvInView}本。多いので${CSV_DRAW_LIMIT}本だけ出しています（寄ると全部出ます）`
+          : `この範囲に${d.csvInView}本。青い線がCSVにある道です`}${
+        // ⚠️ 絞っていることを必ず出す。0件のとき「CSVに無い」と誤解する
+        state.csvKind === "all" ? "" : `（${(CSV_KINDS.find(([v]) => v === state.csvKind) || [])[1]}だけ）`}</span>
+    </div>
+    ${state.csvPicked ? `
+    <div class="bar wrap" style="gap:6px">
+      <span class="muted" style="font-size:11px">${escapeHtml(state.csvPicked.name)}：${
+        state.csvPickFrom === null ? "<strong>始点</strong>の点をクリック" : "<strong>終点</strong>の点をクリック"}</span>
+      <span class="spacer"></span>
+      <button id="addWhole">この道を丸ごと使う</button>
+      <button id="addPointsCancel">点を消す</button>
+    </div>` : ""}
+    <div class="bar wrap" style="gap:6px">
+      <input type="search" id="addFind" placeholder="CSVにある道路名で探す（例: いろは坂）" style="flex:1"
+             value="${escapeHtml(d.query || "")}">
+      <button id="addFindGo">探す</button>
+    </div>
+    <div id="addFindHits" style="max-height:180px; overflow:auto"></div>
+    <div class="bar wrap" style="gap:6px">
       <input type="text" id="addName" placeholder="道路名（アプリに出ます）" style="flex:1"
              value="${escapeHtml((d.name || ""))}">
       <select id="addHighway">
-        ${ADD_HIGHWAYS.map(([v, l]) => `<option value="${v}"${(d.highway || "secondary") === v ? " selected" : ""}>${l}</option>`).join("")}
+        ${(() => {
+          const cur = d.highway || "secondary";
+          // ⚠️ CSV の種別が一覧に無いときは、その種別を足して選ばせる。
+          //    黙って先頭（primary）にすると、実際と違う点数が付く
+          const list = ADD_HIGHWAYS.some(([v]) => v === cur)
+            ? ADD_HIGHWAYS : [...ADD_HIGHWAYS, [cur, `${cur}（元データのまま）`]];
+          return list.map(([v, l]) =>
+            `<option value="${v}"${cur === v ? " selected" : ""}>${l}</option>`).join("");
+        })()}
       </select>
       <button class="primary" id="addCommit" ${d.shape ? "" : "disabled"}>足す</button>
     </div>
@@ -1120,6 +1443,22 @@ function renderAddPanel() {
       距離・曲率・点数は線から測り直します。保存したあと、配信するには再生成が要ります。
     </div>`;
   $("addCancel").onclick = () => { cancelAddRoad(); setStatus("やめました"); };
+  $("addCsvToggle").onclick = () => { state.csvShow = !state.csvShow; drawCsvRoads(); };
+  if (state.csvPicked) {
+    const picked = state.csvPicked;
+    $("addWhole").onclick = () => useCsvRoad(picked);
+    $("addPointsCancel").onclick = () => { clearCsvPoints(); renderAddPanel(); setStatus(""); };
+  }
+  $("addCsvKind").onchange = (e) => {
+    state.csvKind = e.target.value;
+    drawCsvRoads();
+    // ⚠️ 名前で探した結果にも掛け直す。片方だけ変わると食い違って見える
+    if (d.query) findCsvRoads();
+  };
+  const find = () => { state.addDraft.query = $("addFind").value; findCsvRoads(); };
+  $("addFindGo").onclick = find;
+  $("addFind").onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); find(); } };
+  renderCsvHits();
   const keep = () => { d.name = $("addName").value; d.highway = $("addHighway").value; };
   $("addName").oninput = keep;
   $("addHighway").onchange = keep;

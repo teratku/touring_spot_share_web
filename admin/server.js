@@ -632,6 +632,25 @@ function loadRoadIndex(romaji) {
   } catch { return null; }
 }
 
+/**
+ * 道路の索引をその場で作る。
+ *
+ * ⚠️ 索引が無い県では「道路名で探す」が何も返せない。作り方を文章で出すだけだと、
+ *    ツールを離れて端末を開くことになる。実測で1県あたり約15秒なので、ここで作れる。
+ * ⚠️ 作ったら**メモリの控えを捨てること**。捨てないと、作ったのに
+ *    「未生成です」と言い続ける。
+ */
+app.post("/api/roads/index/:romaji", async (req, res) => {
+  const { romaji } = req.params;
+  const prefecture = Object.keys(ROMAJI).find((n) => ROMAJI[n] === romaji);
+  if (!prefecture) return res.status(400).json({ ok: false, error: "県が分かりません: " + romaji });
+  const r = await run("buildRoadIndex.js", ["--prefecture", prefecture]);
+  roadIndexCache.delete(romaji);
+  const index = loadRoadIndex(romaji);
+  res.json({ ok: r.ok && !!index, count: index ? index.roads.length : 0,
+             stdout: r.stdout, stderr: r.stderr });
+});
+
 app.get("/api/restrictions/roads/:romaji", (req, res) => {
   const index = loadRoadIndex(req.params.romaji);
   if (!index) {
