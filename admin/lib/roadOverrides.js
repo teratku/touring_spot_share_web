@@ -66,6 +66,90 @@ function normalizeOverride(raw = {}) {
   };
 }
 
+/** 手で足した道の既定値 */
+function normalizeAdded(raw = {}) {
+  const o = normalizeOverride(raw);
+  return {
+    /** アプリに出る名前。**必須**（無いものは足せない） */
+    name: typeof raw.name === "string" && raw.name.trim() ? raw.name.trim() : null,
+    /**
+     * 道路の種別。点数の計算に効く（`funSegments.score`）。
+     *
+     * ⚠️ 既定を `secondary` にしている。生成側の対象は
+     *    primary/secondary/tertiary/trunk なので、その真ん中を取る。
+     *    ここを変えると同じ形でも点数が変わるので、画面から選べるようにしてある。
+     */
+    highway: typeof raw.highway === "string" && raw.highway.trim() ? raw.highway.trim() : "secondary",
+    /** 道の形。**必須**。これを measure し直して距離・曲率・点数を出す */
+    shape: o.shape,
+    boost: o.boost,
+    title: o.title,
+    note: o.note,
+    tags: o.tags,
+    updatedAt: o.updatedAt,
+  };
+}
+
+/**
+ * 日本の範囲。
+ * ⚠️ 配信前の検証（`importRoadRecommend.js`）と**同じ値にすること**。
+ *    ここが緩いと、保存はできるのに配信でその県まるごと止まる。
+ */
+const JAPAN_BOUNDS = { minLat: 20, maxLat: 46, minLng: 122, maxLng: 154 };
+
+/**
+ * これより短い道はおすすめにしない。
+ * ⚠️ 0m の線は配信の検証で弾かれる（`lengthKm > 0`）。そこまで行く前に止める。
+ */
+const MIN_ADDED_METERS = 200;
+
+/** 足せる状態か。判定は `buildAddedSegment` に任せて、二重に書かない */
+function isValidAdded(raw) {
+  return buildAddedSegment(raw) !== null;
+}
+
+/**
+ * 手で足した道を、生成した区間と同じ形の1件に組み立てる。
+ *
+ * ⚠️ **距離・曲率・点数を自分で書かせないこと。** 形から測り直す（`reshape`）。
+ *    手入力させると、実際の線と数字が食い違ったまま配信される。
+ * ⚠️ `id` はここで付けない。生成の最後に順位で振り直される
+ *    （`buildRoadRecommend.js` の `${pref}:${i}`）。
+ */
+function buildAddedSegment(entry) {
+  const a = normalizeAdded(entry);
+  if (!a.name || !a.shape) return null;
+  const skeleton = {
+    name: a.name, ref: "", highway: a.highway,
+    osmId: null, spotCount: 0, tags: a.tags,
+    title: a.title, note: a.note,
+  };
+  const built = reshape(skeleton, a.shape);
+  if (built === skeleton) return null;          // 線が壊れている（点が足りない）
+  const { reshaped, ...rest } = built;
+
+  // ⚠️ **短すぎる線を通さないこと。** 壊れた符号列でも2点には復号できてしまう
+  //    （実際に "@@@" が 0m の線として通り、アフリカ沖の道になりかけた）。
+  if (!(rest.lengthKm * 1000 >= MIN_ADDED_METERS)) return null;
+  // ⚠️ **日本の外を通さないこと。** ここで止めないと、配信の検証で
+  //    その県まるごと止まる（`importRoadRecommend.js`）。保存した本人が
+  //    原因に辿り着けないので、足すときに弾く。
+  const [lat, lng] = rest.start;
+  if (lat < JAPAN_BOUNDS.minLat || lat > JAPAN_BOUNDS.maxLat
+      || lng < JAPAN_BOUNDS.minLng || lng > JAPAN_BOUNDS.maxLng) return null;
+  const score = a.boost !== 0
+    ? Number(Math.max(0, Math.min(100, rest.score + a.boost)).toFixed(1))
+    : rest.score;
+  return {
+    ...rest,
+    score,
+    baseScore: rest.score,
+    ...(a.boost !== 0 ? { boost: a.boost } : {}),
+    // 生成データ由来ではないと分かるようにする（画面の印・運用の手がかり）
+    added: true,
+  };
+}
+
 /**
  * 手で直した形に合わせて、測って分かることを全部やり直す。
  *
@@ -114,7 +198,7 @@ function isEmptyOverride(o) {
  *   applied   … 実際に当たった鍵
  *   unmatched … どの区間にも当たらなかった鍵（道が消えた・名前が変わった等。UIで知らせる）
  */
-function applyOverrides(segments, overrides = {}) {
+function applyOverrides(segments, overrides = {}, added = {}) {
   const entries = Object.entries(overrides).map(([key, value]) => ({
     key,
     override: normalizeOverride(value),
@@ -149,11 +233,30 @@ function applyOverrides(segments, overrides = {}) {
     result.push(next);
   }
 
+  // ⚠️ **手で足した道はここで混ぜる。** 生成データには無いので、上のループでは出てこない。
+  //    混ぜてから並べ直すことで、生成した道と同じ物差しで順位が付く。
+  // ⚠️ 生成データに同じ鍵の道があるなら足さない。二重に出る
+  //    （名前が付いていなかった道に名前を付けて足したあと、OSM 側にも名前が入った、など）。
+  const existingKeys = new Set(result.map((s) => overrideKey(s)));
+  const addedKeys = [];
+  const skipped = [];
+  for (const [key, value] of Object.entries(added || {})) {
+    if (existingKeys.has(key)) { skipped.push(key); continue; }
+    const segment = buildAddedSegment(value);
+    if (!segment) { skipped.push(key); continue; }
+    result.push(segment);
+    addedKeys.push(key);
+  }
+
   result.sort((a, b) => b.score - a.score);
   return {
     segments: result,
     applied: [...used],
     unmatched: entries.filter((e) => !used.has(e.key)).map((e) => e.key),
+    /** 実際に足した道の鍵 */
+    added: addedKeys,
+    /** 足さなかった鍵（生成データに同じ道がある／線が壊れている） */
+    addSkipped: skipped,
   };
 }
 
@@ -188,5 +291,6 @@ function fuzzyMatch(segment, entries, used) {
 
 module.exports = {
   overrideKey, applyOverrides, normalizeOverride, isEmptyOverride, reshape,
-  KEY_PRECISION, FUZZY_MATCH_METERS,
+  normalizeAdded, isValidAdded, buildAddedSegment,
+  KEY_PRECISION, FUZZY_MATCH_METERS, JAPAN_BOUNDS, MIN_ADDED_METERS,
 };

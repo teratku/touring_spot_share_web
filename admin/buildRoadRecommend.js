@@ -83,13 +83,15 @@ function contentHash(segments) {
 /** 開発者の調整を読む。無ければ空 */
 function readOverrides(prefecture) {
   const file = path.join(__dirname, "data", "road-overrides", `${romaji(prefecture)}.json`);
-  if (!fs.existsSync(file)) return {};
+  if (!fs.existsSync(file)) return { overrides: {}, added: {} };
   try {
     const raw = JSON.parse(fs.readFileSync(file, "utf8"));
-    return raw.overrides || {};
+    // ⚠️ `added`（手で足した道）も一緒に返すこと。落とすと、画面で足して保存した道が
+    //    生成に乗らず「配信ボタンを押したのに出てこない」ことになる
+    return { overrides: raw.overrides || {}, added: raw.added || {} };
   } catch (e) {
     console.error(`⚠️ 調整ファイルを読めない: ${file}（${e.message}）`);
-    return {};
+    return { overrides: {}, added: {} };
   }
 }
 
@@ -441,7 +443,7 @@ async function build() {
     // 開発者の調整（非表示・押し上げ・表示名・ひとこと）を当ててから並べる。
     // 調整は別ファイルに置いてあるので、再生成しても消えない。
     const overrides = readOverrides(pref);
-    const adjusted = applyOverrides(segments, overrides);
+    const adjusted = applyOverrides(segments, overrides.overrides, overrides.added);
 
     // ⚠️ **二輪が通れない道はおすすめから外す。** 生成もアプリも規制を見ていなかったため、
     //    二輪通行禁止の道がおすすめとして配信され、ルート生成が自分で選ぶことがあり得た。
@@ -456,6 +458,15 @@ async function build() {
     if (adjusted.unmatched.length) {
       console.log(`  ⚠️ ${pref}: 当たらなかった調整が ${adjusted.unmatched.length}件` +
                   `（${adjusted.unmatched.slice(0, 3).join(" / ")}${adjusted.unmatched.length > 3 ? " …" : ""}）`);
+    }
+    if (adjusted.added.length) {
+      console.log(`  ＋ ${pref}: 手で足した道を ${adjusted.added.length}本 混ぜました` +
+                  `（${adjusted.added.slice(0, 3).join(" / ")}${adjusted.added.length > 3 ? " …" : ""}）`);
+    }
+    // ⚠️ 足せなかったものは黙って捨てない。「保存したのに出てこない」の原因になる
+    if (adjusted.addSkipped.length) {
+      console.log(`  ⚠️ ${pref}: 足せなかった道が ${adjusted.addSkipped.length}件` +
+                  `（同じ道が生成側にある／線が壊れている: ${adjusted.addSkipped.slice(0, 3).join(" / ")}）`);
     }
     const top = adjusted.segments.slice(0, TOP).map((s, i) => ({ id: `${pref}:${i}`, ...s }));
     summary.push({ pref, chains: chains.length, segments: segments.length, kept: top.length,

@@ -22,7 +22,8 @@ const path = require("path");
 const fs = require("fs");
 const express = require("express");
 const admin = require("firebase-admin");
-const { normalizeOverride, isEmptyOverride } = require("./lib/roadOverrides");
+const { normalizeOverride, isEmptyOverride,
+        normalizeAdded, isValidAdded } = require("./lib/roadOverrides");
 const { execFile } = require("child_process");
 const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
@@ -313,9 +314,13 @@ app.get("/api/roads/restricted/:romaji", (req, res) => {
 /** 調整の読み書き */
 app.get("/api/roads/overrides/:romaji", (req, res) => {
   const file = path.join(roadDir("road-overrides"), `${req.params.romaji}.json`);
-  if (!fs.existsSync(file)) return res.json({ overrides: {} });
-  try { res.json(JSON.parse(fs.readFileSync(file, "utf8"))); }
-  catch (e) { res.status(500).json({ error: e.message, overrides: {} }); }
+  // ⚠️ `added`（手で足した道）も必ず返すこと。返し忘れると画面が空で読み込み、
+  //    そのまま保存したときに**足した道が消える**
+  if (!fs.existsSync(file)) return res.json({ overrides: {}, added: {} });
+  try {
+    const raw = JSON.parse(fs.readFileSync(file, "utf8"));
+    res.json({ ...raw, overrides: raw.overrides || {}, added: raw.added || {} });
+  } catch (e) { res.status(500).json({ error: e.message, overrides: {}, added: {} }); }
 });
 
 app.put("/api/roads/overrides/:romaji", (req, res) => {
@@ -326,11 +331,24 @@ app.put("/api/roads/overrides/:romaji", (req, res) => {
   for (const [key, value] of Object.entries(incoming)) {
     if (!isEmptyOverride(value)) cleaned[key] = { ...normalizeOverride(value), updatedAt: new Date().toISOString() };
   }
+  // 手で足した道。名前と形が揃っているものだけ残す
+  // ⚠️ 中途半端なものを保存しないこと。生成のときに黙って落ちて、
+  //    「保存したのに配信に出ない」ことになる（`isValidAdded`）。
+  const addedIn = (req.body && req.body.added) || {};
+  const addedOut = {};
+  const rejected = [];
+  for (const [key, value] of Object.entries(addedIn)) {
+    if (!isValidAdded(value)) { rejected.push(key); continue; }
+    addedOut[key] = { ...normalizeAdded(value), updatedAt: new Date().toISOString() };
+  }
+
   const dir = roadDir("road-overrides");
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, `${romaji}.json`),
-                   JSON.stringify({ romaji, updatedAt: new Date().toISOString(), overrides: cleaned }, null, 1) + "\n");
-  res.json({ ok: true, count: Object.keys(cleaned).length });
+                   JSON.stringify({ romaji, updatedAt: new Date().toISOString(),
+                                    overrides: cleaned, added: addedOut }, null, 1) + "\n");
+  res.json({ ok: true, count: Object.keys(cleaned).length,
+             addedCount: Object.keys(addedOut).length, rejected });
 });
 
 /**

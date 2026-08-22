@@ -163,7 +163,10 @@
     <div class="bar">
       <select id="pref"></select>
       <input type="search" id="q" placeholder="道路名で絞る">
+      <button id="addRoad" title="生成データに無い道を、地図で2点をつないで足します">＋ 道を足す</button>
     </div>
+    <div id="addPanel" style="display:none"></div>
+    <div id="addedList" style="display:none"></div>
     <div class="bar wrap">
       <button class="chip on" data-filter="all">すべて</button>
       <button class="chip" data-filter="curated">調整済み</button>
@@ -249,6 +252,10 @@
 <script>
 const state = {
   romaji: null, prefName: "", segments: [], overrides: {}, selected: null,
+  // 手で足した道（生成データに無い道）。鍵は overrides と同じ「名前@丸めた始点」
+  // ⚠️ overrides と混ぜないこと。あちらは「生成した道への調整」で、
+  //    当たらなかったものは不具合として画面に出す。足した道は当たらなくて当たり前
+  added: {}, addDraft: null,
   dirty: 0, map: null, lines: new Map(), weights: null, normalizers: null,
   classRank: null, tuning: null, defaults: null, filter: "all", visible: [],
   // 形を直すときの地図クリック待ちと、線の上に出す掴める点
@@ -366,6 +373,9 @@ async function loadPrefecture(romaji) {
   state.segments = seg.segments || [];
   state.prefName = seg.prefecture || "";
   state.overrides = o.overrides || {};
+  // ⚠️ 読み込み忘れると、保存したときに足した道が消える
+  state.added = o.added || {};
+  cancelAddRoad();
   state.selected = null;
   clearEndMarkers();
   setDirty(0);
@@ -414,7 +424,40 @@ function setDirty(n) {
 const touch = () => setDirty(state.dirty + 1);
 
 // ---------- 一覧 ----------
+/**
+ * 手で足した道の一覧。
+ *
+ * ⚠️ **本体の一覧（`render`）に混ぜないこと。** 点数・曲率は生成のときに
+ *    サーバ側で測り直す（`buildAddedSegment`）。ブラウザで同じ計算を書くと
+ *    式が二重になり、いずれ食い違う。ここでは名前と長さだけ出す。
+ */
+function renderAddedList() {
+  const box = $("addedList");
+  if (!box) return;
+  const keys = Object.keys(state.added || {});
+  if (!keys.length) { box.style.display = "none"; box.innerHTML = ""; return; }
+  box.style.display = "";
+  box.innerHTML = `<div class="bar muted" style="font-size:11px">手で足した道 ${keys.length}本`
+    + `（点数は再生成のときに付きます）</div>`
+    + keys.map((k) => {
+        const a = state.added[k];
+        return `<div class="row"><span class="mark">＋</span>`
+          + `<span class="name">${escapeHtml(a.name)}</span>`
+          + `<span class="score">${shapeLengthKm(a.shape)}km</span>`
+          + `<button data-del="${escapeHtml(k)}" title="足した道を消す">×</button></div>`;
+      }).join("");
+  box.querySelectorAll("[data-del]").forEach((b) => {
+    b.onclick = () => {
+      const k = b.dataset.del;
+      if (!confirm(`「${state.added[k].name}」を消しますか？`)) return;
+      delete state.added[k];
+      touch(); render();
+    };
+  });
+}
+
 function render() {
+  renderAddedList();
   const q = $("q").value.trim();
   let list = state.segments.map((s) => ({ seg: s, o: ov(s), score: adjustedScore(s) }));
 
@@ -890,6 +933,147 @@ function clearExtendPreview() {
   }
 }
 
+// ---------- 道を足す ----------
+
+/**
+ * 生成データに無い道を、地図で2点をつないで足す。
+ *
+ * 【なぜ要るか】
+ * 生成は OSM の道路データからしか作れない。名前が付いていない道・OSM に無い道・
+ * 区間の切り出しがどうしても合わない道は、いくら調整しても出せない。そこを人が足す。
+ *
+ * ⚠️ **距離・曲率・点数は入力させない。** 線から測り直す（`lib/roadOverrides.js` の
+ *    `buildAddedSegment`）。手入力させると、実際の線と数字が食い違ったまま配信される。
+ * ⚠️ 線は `/api/restrictions/route`（CSVの道をたどる経路探索）で作る。
+ *    地図を手でなぞった線ではないので、道から外れない。
+ * ⚠️ 保存するだけでは配信されない。生成を回して初めておすすめに入る（保存後の案内文）。
+ */
+const ADD_HIGHWAYS = [
+  ["primary", "国道など（primary）"],
+  ["secondary", "主要地方道（secondary）"],
+  ["tertiary", "一般県道（tertiary）"],
+  ["trunk", "幹線（trunk）"],
+];
+
+function beginAddRoad() {
+  if (!state.romaji) { setStatus("先に県を選んでください"); return; }
+  cancelAddRoad();
+  state.addDraft = { from: null, to: null, shape: null, line: null, markers: [], listener: null };
+  state.addDraft.listener = state.map.addListener("click", (e) => {
+    const at = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+    const d = state.addDraft;
+    if (!d) return;
+    if (!d.from) { d.from = at; addRoadMarker(at, "始"); renderAddPanel(); return; }
+    if (!d.to) { d.to = at; addRoadMarker(at, "終"); renderAddPanel(); connectAddRoad(); }
+  });
+  renderAddPanel();
+}
+
+function addRoadMarker(at, text) {
+  state.addDraft.markers.push(new google.maps.Marker({
+    position: at, map: state.map, zIndex: 300,
+    label: { text, color: "#fff", fontSize: "11px", fontWeight: "bold" },
+    icon: { path: google.maps.SymbolPath.CIRCLE, scale: 9,
+            fillColor: text === "始" ? "#2b8a3e" : "#c92a2a",
+            fillOpacity: 1, strokeColor: "#fff", strokeWeight: 2 },
+  }));
+}
+
+function cancelAddRoad() {
+  const d = state.addDraft;
+  if (d) {
+    if (d.listener) google.maps.event.removeListener(d.listener);
+    if (d.line) d.line.setMap(null);
+    for (const m of d.markers) m.setMap(null);
+  }
+  state.addDraft = null;
+  const box = $("addPanel");
+  if (box) { box.style.display = "none"; box.innerHTML = ""; }
+}
+
+/** 両端を道でつなぐ。規制タブと同じ経路探索を使う（道から外れない線を作るため） */
+async function connectAddRoad() {
+  const d = state.addDraft;
+  if (!d || !d.from || !d.to) return;
+  setStatus("道をたどっています…");
+  let r;
+  try {
+    r = await (await fetch(`/api/restrictions/route?fromLat=${d.from.lat}&fromLng=${d.from.lng}`
+                           + `&toLat=${d.to.lat}&toLng=${d.to.lng}`)).json();
+  } catch (e) { setStatus("つなげませんでした: " + (e.message || e)); return; }
+  if (r.error || !r.polyline) {
+    // ⚠️ **終点を戻すこと。** 戻さないと「つないでいます…」のまま止まって見え、
+    //    やり直す手段が「やめる」しか無くなる
+    const last = d.markers.pop();
+    if (last) last.setMap(null);
+    d.to = null;
+    setStatus("つなげませんでした: " + (r.error || "道が見つかりません") + "。終点を選び直してください");
+    renderAddPanel();
+    return;
+  }
+  d.shape = r.polyline;
+  if (d.line) d.line.setMap(null);
+  d.line = new google.maps.Polyline({
+    path: decodePolyline(r.polyline), map: state.map,
+    strokeColor: "#7048e8", strokeOpacity: 0.95, strokeWeight: 6, zIndex: 290,
+  });
+  setStatus(`つなぎました（${(r.lengthMeters / 1000).toFixed(2)}km）。名前を入れて「足す」を押してください`);
+  renderAddPanel();
+}
+
+function renderAddPanel() {
+  const box = $("addPanel");
+  const d = state.addDraft;
+  if (!box) return;
+  if (!d) { box.style.display = "none"; box.innerHTML = ""; return; }
+  box.style.display = "";
+  const step = !d.from ? "地図で<strong>始点</strong>をクリック"
+             : !d.to ? "地図で<strong>終点</strong>をクリック"
+             : !d.shape ? "つないでいます…"
+             : `線ができました（${shapeLengthKm(d.shape)}km）`;
+  box.innerHTML = `
+    <div class="bar wrap" style="gap:6px">
+      <span class="muted">${step}</span>
+      <span class="spacer"></span>
+      <button id="addCancel">やめる</button>
+    </div>
+    <div class="bar wrap" style="gap:6px">
+      <input type="text" id="addName" placeholder="道路名（アプリに出ます）" style="flex:1"
+             value="${escapeHtml((d.name || ""))}">
+      <select id="addHighway">
+        ${ADD_HIGHWAYS.map(([v, l]) => `<option value="${v}"${(d.highway || "secondary") === v ? " selected" : ""}>${l}</option>`).join("")}
+      </select>
+      <button class="primary" id="addCommit" ${d.shape ? "" : "disabled"}>足す</button>
+    </div>
+    <div class="muted" style="font-size:11px; padding:0 8px 6px">
+      距離・曲率・点数は線から測り直します。保存したあと、配信するには再生成が要ります。
+    </div>`;
+  $("addCancel").onclick = () => { cancelAddRoad(); setStatus("やめました"); };
+  const keep = () => { d.name = $("addName").value; d.highway = $("addHighway").value; };
+  $("addName").oninput = keep;
+  $("addHighway").onchange = keep;
+  $("addCommit").onclick = () => { keep(); commitAddRoad(); };
+}
+
+/** 下書きを `state.added` に入れる（保存ボタンでファイルに書かれる） */
+function commitAddRoad() {
+  const d = state.addDraft;
+  if (!d || !d.shape) return;
+  const name = (d.name || "").trim();
+  if (!name) { setStatus("道路名を入れてください"); return; }
+  const pts = decodePolyline(d.shape);
+  // ⚠️ 鍵の作り方はサーバ側（`overrideKey`）と揃えること。ずれると、次に読み込んだとき
+  //    同じ道が二重に見える
+  const round = (v) => (Math.round(v / 0.01) * 0.01).toFixed(2);
+  const key = `${name}@${round(pts[0].lat)},${round(pts[0].lng)}`;
+  if (state.added[key]) { setStatus("同じ名前・同じ場所の道が既にあります"); return; }
+  state.added[key] = { name, highway: d.highway || "secondary", shape: d.shape, tags: [], boost: 0 };
+  cancelAddRoad();
+  touch();
+  setStatus(`「${name}」を足しました。保存してから再生成すると配信に入ります`);
+  render();
+}
+
 // ---------- ストリートビュー ----------
 
 /**
@@ -902,7 +1086,10 @@ function clearExtendPreview() {
  *    交差点の中心を向いてしまい、その道が見えない。
  */
 function streetViewSpot(seg, which) {
-  const pts = decodePolyline(seg.polyline);
+  // ⚠️ **`seg.polyline`（元の形）を見ないこと。** 手で切り直したあとも元の端で開いてしまい、
+  //    「形を直したのにストリートビューの位置が変わらない」ことになる（実機で報告）。
+  //    画面に出ている形は `shapeOf`（手直しがあればそちら）なので、そちらに合わせる。
+  const pts = decodePolyline(shapeOf(seg));
   if (pts.length < 2) return null;
   const last = pts.length - 1;
   // 20点ぶんか、短い道なら全体の1/4だけ内側を見る
@@ -1204,11 +1391,15 @@ async function save() {
   setStatus("保存中…");
   const r = await fetch(`/api/roads/overrides/${state.romaji}`, {
     method: "PUT", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ overrides: state.overrides }),
+    body: JSON.stringify({ overrides: state.overrides, added: state.added }),
   });
   const j = await r.json();
   setDirty(0);
-  setStatus(`保存しました（調整 ${j.count}件）。配信するには再生成が必要です`);
+  // ⚠️ 弾かれたものは黙って捨てない。「保存したのに出てこない」の原因になる
+  const rejected = (j.rejected || []).length
+    ? `／⚠️ ${j.rejected.length}本は足せませんでした（短すぎる・日本の外）` : "";
+  const added = j.addedCount ? `・足した道 ${j.addedCount}本` : "";
+  setStatus(`保存しました（調整 ${j.count}件${added}）${rejected}。配信するには再生成が必要です`);
 }
 
 // ---------- 重みの試算 ----------
@@ -1306,6 +1497,12 @@ document.querySelectorAll("[data-filter]").forEach((b) => {
     render();
   };
 });
+
+$("addRoad").onclick = () => {
+  if (state.addDraft) { cancelAddRoad(); setStatus("やめました"); return; }
+  beginAddRoad();
+  setStatus("地図で始点をクリックしてください");
+};
 
 $("reloadReviews").onclick = async () => {
   setStatus("評価を取り直しています…");
