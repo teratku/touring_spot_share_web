@@ -82,6 +82,12 @@ function normalizeAdded(raw = {}) {
     highway: typeof raw.highway === "string" && raw.highway.trim() ? raw.highway.trim() : "secondary",
     /** 道の形。**必須**。これを measure し直して距離・曲率・点数を出す */
     shape: o.shape,
+    /**
+     * 一覧から外す。
+     * ⚠️ 生成した道の `hidden` と同じ意味にすること。足した道だけ効かないと、
+     *    画面で非表示にしたのに配信に出続ける（実際にそうなっていた）。
+     */
+    hidden: o.hidden,
     boost: o.boost,
     title: o.title,
     note: o.note,
@@ -119,6 +125,8 @@ function isValidAdded(raw) {
 function buildAddedSegment(entry) {
   const a = normalizeAdded(entry);
   if (!a.name || !a.shape) return null;
+  // ⚠️ 生成した道と同じで、非表示にしたものは配信に出さない
+  if (a.hidden) return null;
   const skeleton = {
     name: a.name, ref: "", highway: a.highway,
     osmId: null, spotCount: 0, tags: a.tags,

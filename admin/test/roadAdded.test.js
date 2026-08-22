@@ -159,3 +159,79 @@ test("足した道が無くても、これまでどおり動く", () => {
     assert.deepStrictEqual(r.added, []);
   }
 });
+
+// MARK: ツールの表示と、配信される値が一致すること
+
+/**
+ * ⚠️ 実機で「形を直したのに距離が変わらない」と報告された。画面は元データの
+ *    `lengthKm` を出しており、生成側だけが測り直していた。
+ *    直したいま、画面は `/api/roads/measure`（`reshape`）の値を出す。
+ *    **そこが生成側（`applyOverrides`）と一致していないと、
+ *    「ツールでは4.9km、配信は3.1km」という食い違いが起きる。**
+ */
+test("画面は元データの距離を出さない", () => {
+  // ⚠️ **これが報告された不具合そのもの。** 一覧が `seg.lengthKm`（元データ）を
+  //    出していたので、形を切り詰めても距離が変わらなかった。
+  //    いまは `metricsOf`（サーバで測り直した値）を通す。
+  // ⚠️ 値の比較では捕まえられない（画面もサーバも同じ `reshape` を呼ぶので、
+  //    式を変えると両方いっしょに変わる）。**どちらを読んでいるか**を見る。
+  const fs = require("fs");
+  const path = require("path");
+  const html = fs.readFileSync(path.join(__dirname, "..", "public", "road-builder.html"), "utf8");
+
+  const rows = html.match(/rows\.innerHTML[\s\S]*?div\.innerHTML =[\s\S]*?`;/);
+  assert.ok(rows, "一覧の行を組み立てている場所を取り出せない");
+  assert.ok(!/seg\.lengthKm/.test(rows[0]),
+            "一覧が元データの距離を出している（手直ししても変わらない）: "
+            + (rows[0].match(/.*lengthKm.*/) || [""])[0].trim());
+  assert.ok(/metricsOf\(/.test(rows[0]), "一覧が測り直した値を通っていない");
+});
+
+test("編集欄も測り直した値を出す", () => {
+  // ⚠️ 一覧だけ直しても、編集欄が元データのままだと結局「変わらない」と見える
+  const fs = require("fs");
+  const path = require("path");
+  const html = fs.readFileSync(path.join(__dirname, "..", "public", "road-builder.html"), "utf8");
+  // 編集欄の数値ブロック（`class="stats"` から次の閉じタグまで）
+  const stats = html.match(/<div class="stats">[\s\S]{0,700}?<\/div>/);
+  assert.ok(stats, "編集欄の数値ブロックを取り出せない");
+  assert.ok(/metricsOf/.test(stats[0]),
+            "編集欄が測り直した値を通っていない: " + stats[0].slice(0, 120).replace(/\s+/g, " "));
+  // 元データを直接読んでいないこと（`seg.lengthKm` のような形）
+  assert.ok(!/seg\.lengthKm|seg\.curviness|seg\.score/.test(stats[0]),
+            "編集欄が元データの値を出している: "
+            + (stats[0].match(/.*seg\.(lengthKm|curviness|score).*/) || [""])[0].trim());
+});
+
+test("加算は測り直した点数に足す（画面と配信で順序を揃える）", () => {
+  // ⚠️ 「形を直してから加算」の順。逆にすると、切り詰めて下がったぶんまで加算が食われる
+  const { reshape } = require("../lib/roadOverrides");
+  const points = winding(35.5, 138.9, 50);
+  const generated = [segment("試す道", points, 60)];
+  const newShape = encode(points.slice(0, 25));
+  const o = { shape: newShape, boost: 10 };
+
+  const shown = reshape({ name: "x", highway: generated[0].highway }, newShape);
+  const published = applyOverrides(generated, { [overrideKey(generated[0])]: o }).segments[0];
+  assert.strictEqual(published.score,
+                     Number(Math.min(100, shown.score + 10).toFixed(1)),
+                     `加算の当て方が違う（測り直し${shown.score} + 10 → ${published.score}）`);
+});
+
+test("非表示にした道は配信に出ない", () => {
+  // ⚠️ 生成した道の `hidden` と揃えること。足した道だけ効かないと、
+  //    画面で非表示にしたのに配信に出続ける（実際にそうなっていた）
+  const r = applyOverrides([], {}, { "道@36.00,139.00": { name: "道", shape, hidden: true } });
+  assert.strictEqual(r.segments.length, 0, "非表示にしたのに出ている");
+  assert.deepStrictEqual(r.addSkipped, ["道@36.00,139.00"], "飛ばした記録が無い");
+  // 非表示を外せば出る
+  assert.strictEqual(
+    applyOverrides([], {}, { "道@36.00,139.00": { name: "道", shape } }).segments.length, 1);
+});
+
+test("足した道にも表示名・ひとこと・札が乗る", () => {
+  const seg = buildAddedSegment({ name: "道", shape, title: "別名", note: "ひとこと", tags: ["絶景"] });
+  assert.strictEqual(seg.title, "別名");
+  assert.strictEqual(seg.note, "ひとこと");
+  assert.deepStrictEqual(seg.tags, ["絶景"]);
+});

@@ -1,9 +1,9 @@
 {
  "prefecture": "山梨県",
  "romaji": "yamanashi",
- "generation": 4,
- "contentHash": "fe22fc439b56",
- "builtAt": "2026-08-22T00:25:31.874Z",
+ "generation": 6,
+ "contentHash": "1382da0a65cf",
+ "builtAt": "2026-08-22T04:42:00.101Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -181,6 +181,35 @@
   },
   {
    "id": "山梨県:6",
+   "name": "河口湖御坂線（御坂みち）",
+   "ref": "708",
+   "highway": "secondary",
+   "lengthKm": 5.59,
+   "curviness": 749.9,
+   "flow": 29.3,
+   "turnCount": 143,
+   "score": 85.4,
+   "baseScore": 82.6,
+   "spotCount": 1,
+   "polyline": "wu_xEwdanYtE{@dF}Bk@_EgBeAe@cApBeGa@gA}ARc@]MiBrAmDHwA]sBkCgGXaAvAfEdApAfAlE[`CZZlBIZ`@ZtFg@jCdBNnBbBu@hDrBNhBdE}D|FFpA`GoHuBgMF}Aj@JPrCzAlDIpAf@xCkC~DbFf@`@vDfBbB]vBbAfCu@tElCrFu@nFl@d@dBmBjA_@fAz@OfEqChCBrAxB`@~BYnAxBfDc@bA|CxCLvB|AdDJ^\\kB~FuDlGq@zEb@fC",
+   "pointCount": 69,
+   "start": [
+    35.556916,
+    138.78364
+   ],
+   "end": [
+    35.545908,
+    138.76831
+   ],
+   "title": "御坂みち",
+   "tags": [
+    "ワインディング",
+    "快走",
+    "林道ぎみ"
+   ]
+  },
+  {
+   "id": "山梨県:7",
    "name": "山保久那土線",
    "ref": "414",
    "highway": "secondary",
@@ -207,7 +236,7 @@
    ]
   },
   {
-   "id": "山梨県:7",
+   "id": "山梨県:8",
    "name": "大月上野原線",
    "ref": "30",
    "highway": "primary",
@@ -235,33 +264,6 @@
    ]
   },
   {
-   "id": "山梨県:8",
-   "name": "愛宕山スカイライン",
-   "ref": "119",
-   "highway": "secondary",
-   "lengthKm": 3.13,
-   "curviness": 596.4,
-   "flow": 31.7,
-   "turnCount": 59,
-   "score": 84.6,
-   "baseScore": 81.7,
-   "spotCount": 1,
-   "polyline": "sivxEslzlYy@|BXfJ}@l@qBeCK_G[y@uFTiBmEwI_C_EsDoE[cBeFgC}@{CgE_BYaBaBa@Bs@~AoBe@_DvEd@XnAgB`@Ds@|B]nGl@bBpBjQ~@Ej@sBpB^_EpY",
-   "pointCount": 32,
-   "start": [
-    35.67274,
-    138.58522
-   ],
-   "end": [
-    35.682882,
-    138.580225
-   ],
-   "tags": [
-    "ワインディング",
-    "快走"
-   ]
-  },
-  {
    "id": "山梨県:9",
    "name": "四尾連湖公園線",
    "ref": "409",
@@ -282,6 +284,11 @@
    "end": [
     35.529499,
     138.520966
+   ],
+   "tags": [
+    "ワインディング",
+    "快走",
+    "林道ぎみ"
    ]
   },
   {
@@ -332,6 +339,10 @@
    "end": [
     35.614289,
     139.07121
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
@@ -363,34 +374,6 @@
   },
   {
    "id": "山梨県:13",
-   "name": "足柄停車場富士公園線",
-   "ref": "150",
-   "highway": "secondary",
-   "lengthKm": 8.19,
-   "curviness": 651.6,
-   "flow": 27.8,
-   "turnCount": 192,
-   "score": 82.9,
-   "baseScore": 82.9,
-   "spotCount": 0,
-   "polyline": "ewyvEsvinYcArJlCrEV|Ae@~@iBLWh@|BdCLz@aErCf@tAbB`APp@eIvClC|JyAf@sDC?`AxCzDNx@c@d@kCEa@h@tCjIc@h@iHz@CdAdD~Ha@j@gDUr@zFmCpAa@tFf@jBlEtDn@~B@hEsAdEzBfCNv@sCrELx@dDbEoDdCfBnK}C~AHnDoCtAjCnFiAnBi@pIjH|E~@vC_@`@aFb@gA~AhJfDkE`DcE^o@`BdFxExDPZh@{EV{D~@F~@hGxEUpAeF|@_HPY\\Vj@xMfHxCfIc@ZmEoAwD~AwJbBy@x@b@r@vQnBn@d@D~@oBf@",
-   "pointCount": 84,
-   "start": [
-    35.362593,
-    138.827458
-   ],
-   "end": [
-    35.366103,
-    138.778471
-   ],
-   "title": "ふじあざみライン",
-   "tags": [
-    "ワインディング",
-    "快走"
-   ]
-  },
-  {
-   "id": "山梨県:14",
    "name": "雨畑大島線",
    "ref": "810",
    "highway": "secondary",
@@ -417,7 +400,7 @@
    ]
   },
   {
-   "id": "山梨県:15",
+   "id": "山梨県:14",
    "name": "日向宿線",
    "ref": "811",
    "highway": "secondary",
@@ -443,7 +426,7 @@
    ]
   },
   {
-   "id": "山梨県:16",
+   "id": "山梨県:15",
    "name": "高下鰍沢線",
    "ref": "420",
    "highway": "secondary",
@@ -470,32 +453,7 @@
    ]
   },
   {
-   "id": "山梨県:17",
-   "name": "河口湖御坂線（御坂みち）",
-   "ref": "708",
-   "highway": "secondary",
-   "lengthKm": 5.88,
-   "curviness": 603,
-   "flow": 52.2,
-   "turnCount": 68,
-   "score": 82.6,
-   "baseScore": 82.6,
-   "spotCount": 1,
-   "polyline": "gk`xEieanYnTP??tE{@dF}Bk@_EgBeAe@cApBeGa@gA}ARc@]MiBrAmDHwA]sBkCgGXaAvAfEdApAfAlE[`CZZlBIZ`@ZtFg@jCdBNnBbBu@hDrBNhBdE}D|FFpA`GoHuBgMF}Aj@JPrCzAlDIpAf@xCkC~DbFf@`@vDfBbB]vBbAfCu@tElCrFu@nFl@d@dBmBjA_@fAz@OfEqChCBrAxB`@~BYnAxBfDc@bA|CxCLvB|AdDJ^\\kB~FuDlGq@zEb@fC",
-   "pointCount": 71,
-   "start": [
-    35.56036,
-    138.78373
-   ],
-   "end": [
-    35.54591,
-    138.76831
-   ],
-   "reshaped": true,
-   "title": "御坂みち"
-  },
-  {
-   "id": "山梨県:18",
+   "id": "山梨県:16",
    "name": "身延本栖線",
    "ref": "805",
    "highway": "secondary",
@@ -522,30 +480,7 @@
    ]
   },
   {
-   "id": "山梨県:19",
-   "name": "山中湖小山線",
-   "ref": "730",
-   "highway": "secondary",
-   "lengthKm": 3.58,
-   "curviness": 472.3,
-   "flow": 27.7,
-   "turnCount": 61,
-   "score": 82.5,
-   "baseScore": 76.7,
-   "spotCount": 3,
-   "polyline": "aefwEgxznYd@w@~@MnMbCbCdIph@hV`BNbJkCT|@q@rDl@v@zG]jC}ArBwCEs@k@AeApBuCf@Wk@jCs@xA}CpBmAl@Rr@pC~@VdA]j@{ANgGpBmApBaD\\mDvAGlBbArAYnGqL",
-   "pointCount": 35,
-   "start": [
-    35.426252,
-    138.914761
-   ],
-   "end": [
-    35.405279,
-    138.915806
-   ]
-  },
-  {
-   "id": "山梨県:20",
+   "id": "山梨県:17",
    "name": "県民の森公園線",
    "ref": "108",
    "highway": "secondary",
@@ -572,7 +507,35 @@
    ]
   },
   {
-   "id": "山梨県:21",
+   "id": "山梨県:18",
+   "name": "愛宕山スカイライン",
+   "ref": "119",
+   "highway": "secondary",
+   "lengthKm": 4.86,
+   "curviness": 669.8,
+   "flow": 59.2,
+   "turnCount": 55,
+   "score": 82.4,
+   "baseScore": 81.7,
+   "spotCount": 1,
+   "polyline": "}ruxEc`{lYw@OeAlF[UIsCi@AErE]Cc@{Bc@HVjDnBtAiDpDyAzFc@_@T{C[{A}@ViA|Dc@_@LuA]eEg@^QlC??y@|BXfJ}@l@qBeCK_G[y@uFTiBmEwI_C_EsDoE[cBeFgC}@{CgE_BYaBaBa@Bs@~AoBe@_DvEd@XnAgB`@Ds@|B]nGl@bBpBjQ~@Ej@sBpB^_EpY??InK{CxL",
+   "pointCount": 59,
+   "start": [
+    35.66911,
+    138.58834
+   ],
+   "end": [
+    35.68371,
+    138.57601
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:19",
    "name": "台ヶ原長坂線",
    "ref": "606",
    "highway": "secondary",
@@ -599,7 +562,7 @@
    ]
   },
   {
-   "id": "山梨県:22",
+   "id": "山梨県:20",
    "name": "観音平下久保線",
    "ref": "618",
    "highway": "secondary",
@@ -619,10 +582,14 @@
    "end": [
     35.907269,
     138.333982
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:23",
+   "id": "山梨県:21",
    "name": "光子沢大野線",
    "ref": "813",
    "highway": "secondary",
@@ -642,33 +609,14 @@
    "end": [
     35.363249,
     138.449666
-   ]
-  },
-  {
-   "id": "山梨県:24",
-   "name": "上野原丹波山線",
-   "ref": "18",
-   "highway": "primary",
-   "lengthKm": 11.79,
-   "curviness": 582.7,
-   "flow": 27.3,
-   "turnCount": 252,
-   "score": 81.5,
-   "baseScore": 81.5,
-   "spotCount": 0,
-   "polyline": "eo{xEywpoY`@jCMrDtA~HIx@{@ZmB[kBhAcMxBuClEyCxB}@rCcB|A_AdCS|AnBdLXx@bA?^z@SjC}CvDyGfZmMvUqAnN_Az@eA?}@oA{CmAy@LgAdBPRtAm@zAn@mApCEvA`AxAzCjAAzD^xAmBxCCxD|@~C_BpCeBzAKbBbBzJuCtFUrEyDbAmFcByGJgCc@uFj@aCvAgLB_DzCoNhD{IzJiFZw@d@kBxD{Bg@cCx@a@jHiD~DgBrFDzCk@nAAfCgCWmAb@|AhBaBzEEbHd@Xh@wATp@iCpDaAqAc@Dv@zEg@ZwBk@E|CyA`A{@`BuFI]V`@~B{AhADx@zD{Bj@LeAvCD`FiAGWiCsBxAoL~DcF|JaExF}FvA{GzEkCZ{GnC{FfF{Dx@_BvAmB`@gD|CGp@zBbDx@vG]X{BkCiAQ}AxCgB`@Sp@Vj@|BBxBv@z@jBhCdC",
-   "pointCount": 124,
-   "start": [
-    35.699226,
-    139.027325
    ],
-   "end": [
-    35.746615,
-    138.958516
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:25",
+   "id": "山梨県:22",
    "name": "上野原丹波山線",
    "ref": "18",
    "highway": "primary",
@@ -688,10 +636,14 @@
    "end": [
     35.759925,
     138.940202
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:26",
+   "id": "山梨県:23",
    "name": "清里須玉線",
    "ref": "605",
    "highway": "secondary",
@@ -711,10 +663,14 @@
    "end": [
     35.889015,
     138.464124
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:27",
+   "id": "山梨県:24",
    "name": "甲府精進湖線",
    "ref": "113",
    "highway": "secondary",
@@ -734,33 +690,14 @@
    "end": [
     35.530769,
     138.615582
-   ]
-  },
-  {
-   "id": "山梨県:28",
-   "name": "大菩薩峠線",
-   "ref": "508",
-   "highway": "secondary",
-   "lengthKm": 5.37,
-   "curviness": 563.2,
-   "flow": 26.5,
-   "turnCount": 114,
-   "score": 81.2,
-   "baseScore": 81.2,
-   "spotCount": 0,
-   "polyline": "qdfyEebvnYnAgFe@kHuAqCUgBV}Jy@sGp@oGuAoKCcDyCwA|CsAjAkBXwA}@aBvA{@Do@eA{CEuEmBeCz@iF{CSs@mCwAkAfFeCdBeEsBoA}AkEqBKP}CeA}CuAsAjCk@}@iDeBaC}D{AeAaC?eAz@gCb@uNmDiEd@wB_GoJoEmCU_Ah@iE_@}CHkFc@cDKoG_D_NCcTrCyG",
-   "pointCount": 53,
-   "start": [
-    35.753847,
-    138.890749
    ],
-   "end": [
-    35.760876,
-    138.938218
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:29",
+   "id": "山梨県:25",
    "name": "都留道志線",
    "ref": "24",
    "highway": "primary",
@@ -780,56 +717,14 @@
    "end": [
     35.511241,
     139.000116
-   ]
-  },
-  {
-   "id": "山梨県:30",
-   "name": "大城小田船原線",
-   "ref": "808",
-   "highway": "secondary",
-   "lengthKm": 3.64,
-   "curviness": 532.5,
-   "flow": 28.1,
-   "turnCount": 69,
-   "score": 80.8,
-   "baseScore": 80.8,
-   "spotCount": 0,
-   "polyline": "s}svE}{tkYyDmFUkAgBeBuAwEwANgA_B}Bo@aAqDh@uE_@g@cD}@eCzBh@~AU\\eCo@yBbAoAm@OcAz@}DgF_Ot@uDsCmEqCyKoC@sAcCcFoD}FyH_BeFaEsCuEmA{@kBiGkCaGuIqAsHeBcF",
-   "pointCount": 36,
-   "start": [
-    35.332895,
-    138.393112
    ],
-   "end": [
-    35.351721,
-    138.417112
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:31",
-   "name": "笛吹市川三郷線",
-   "ref": "36",
-   "highway": "primary",
-   "lengthKm": 4.46,
-   "curviness": 719,
-   "flow": 31.2,
-   "turnCount": 103,
-   "score": 80.7,
-   "baseScore": 80.7,
-   "spotCount": 0,
-   "polyline": "gqdxE_{kmYjNqIJ_Be@y@aA?iDrAo@GWaAjIgHrCuDnBeHfGsLlLwKtCXv@bBXfCb@Zv@_@FgDp@o@n@r@i@`B`@rAdDaBxAFX~@QfClCtFd@SSkEh@eA`ElJfAQc@yBd@UjEfHh@??i@w@cA\\k@~B|Cl@L@gAsAiATy@rF`GEsAyD{GNoAnAe@jA`FxEz@|EfF",
-   "pointCount": 53,
-   "start": [
-    35.581797,
-    138.67456
-   ],
-   "end": [
-    35.563812,
-    138.680342
-   ]
-  },
-  {
-   "id": "山梨県:32",
+   "id": "山梨県:26",
    "name": "平林青柳線",
    "ref": "413",
    "highway": "secondary",
@@ -849,10 +744,14 @@
    "end": [
     35.566016,
     138.393357
+   ],
+   "tags": [
+    "ワインディング",
+    "林道ぎみ"
    ]
   },
   {
-   "id": "山梨県:33",
+   "id": "山梨県:27",
    "name": "金山大月線",
    "ref": "512",
    "highway": "secondary",
@@ -872,10 +771,14 @@
    "end": [
     35.612567,
     138.937108
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:34",
+   "id": "山梨県:28",
    "name": "昇仙峡ライン",
    "ref": "27",
    "highway": "primary",
@@ -895,10 +798,15 @@
    "end": [
     35.767928,
     138.556673
+   ],
+   "title": "昇仙峡グリーンライン",
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:35",
+   "id": "山梨県:29",
    "name": "折門古関線",
    "ref": "416",
    "highway": "secondary",
@@ -918,10 +826,42 @@
    "end": [
     35.506234,
     138.570872
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:36",
+   "id": "山梨県:30",
+   "name": "上野原丹波山線",
+   "ref": "18",
+   "highway": "primary",
+   "lengthKm": 13.08,
+   "curviness": 474.1,
+   "flow": 44,
+   "turnCount": 141,
+   "score": 77.5,
+   "baseScore": 81.5,
+   "spotCount": 0,
+   "polyline": "iwzxE{fsoYaBrAsAhCuAzG}AtCmBtAcAdCuC^zAtAC~D[t@`@lBa@tB}AxBKhCaArAn@jA?z@wA`JlAbF??`@jCMrDtA~HIx@{@ZmB[kBhAcMxBuClEyCxB}@rCcB|A_AdCS|AnBdLXx@bA?^z@SjC}CvDyGfZmMvUqAnN_Az@eA?}@oA{CmAy@LgAdBPRtAm@zAn@mApCEvA`AxAzCjAAzD^xAmBxCCxD|@~C_BpCeBzAKbBbBzJuCtFUrEyDbAmFcByGJgCc@uFj@aCvAgLB_DzCoNhD{IzJiFZw@d@kBxD{Bg@cCx@a@jHiD~DgBrFDzCk@nAAfCgCWmAb@|AhBaBzEEbHd@Xh@wATp@iCpDaAqAc@Dv@zEg@ZwBk@E|CyA`A{@`BuFI]V`@~B{AhADx@zD{Bj@LeAvCD`FiAGWiCsBxAoL~DcF|JaExF}FvA{GzEkCZ{GnC{FfF{Dx@_BvAmB`@gD|CGp@zBbDx@vG]X{BkCiAQ}AxCgB`@Sp@Vj@|BBxBv@z@jBhCdC",
+   "pointCount": 144,
+   "start": [
+    35.69541,
+    139.03998
+   ],
+   "end": [
+    35.74662,
+    138.95852
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:31",
    "name": "遅沢静川線",
    "ref": "421",
    "highway": "secondary",
@@ -941,56 +881,127 @@
    "end": [
     35.464888,
     138.440422
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:37",
-   "name": "浅川瀬戸線",
-   "ref": "511",
-   "highway": "secondary",
-   "lengthKm": 4.78,
-   "curviness": 496.7,
-   "flow": 25,
-   "turnCount": 95,
-   "score": 76.2,
-   "baseScore": 76.2,
+   "id": "山梨県:32",
+   "name": "笛吹市川三郷線",
+   "ref": "36",
+   "highway": "primary",
+   "lengthKm": 6.6,
+   "curviness": 480.9,
+   "flow": 51.2,
+   "turnCount": 62,
+   "score": 76.9,
+   "baseScore": 66.2,
    "spotCount": 0,
-   "polyline": "_|rxE}jloYc@]y@z@x@bFIlKn@j@tCw@JhFuDbKWpCnAhBpDf@V^v@xE`CbDfFbMkKxPs@rIaBdGr@bFc@jIaAhGt@zDY|Ej@pCy@pDoBtB`CdL_AjEZtBn@`Am@vA|@vCYhG~BnHWbDfAnEzJxPfCtBdAfHdAv@vBaApEhD",
-   "pointCount": 43,
+   "polyline": "cvgxEqkimYzAqDHcC|AgF`C_F~BgCpBs@fR{NdEgAfIyFpGeBze@oS??jNqIJ_Be@y@aA?iDrAo@GWaAjIgHrCuDnBeHfGsLlLwKtCXv@bBXfCb@Zv@_@FgDp@o@n@r@i@`B`@rAdDaBxAFX~@QfClCtFd@SSkEh@eA`ElJfAQc@yBd@UjEfHh@??i@w@cA\\k@~B|Cl@L@gAsAiATy@rF`GEsAyD{GNoAnAe@jA`FxEz@|EfF",
+   "pointCount": 65,
    "start": [
-    35.6552,
-    139.004787
+    35.59794,
+    138.66185
    ],
    "end": [
-    35.64891,
-    138.962741
+    35.56381,
+    138.68034
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:38",
-   "name": "鶯宿上曽根線",
-   "ref": "308",
-   "highway": "secondary",
-   "lengthKm": 7.12,
-   "curviness": 436.1,
-   "flow": 28,
-   "turnCount": 111,
-   "score": 75.6,
-   "baseScore": 75.6,
+   "id": "山梨県:33",
+   "name": "笛吹市川三郷線",
+   "ref": "36",
+   "highway": "primary",
+   "lengthKm": 6.6,
+   "curviness": 480.9,
+   "flow": 51.2,
+   "turnCount": 62,
+   "score": 76.9,
+   "baseScore": 80.7,
    "spotCount": 0,
-   "polyline": "orfxE{g{lYIs@~C{B~@eCvCgC|FiNGmFz@iI_@}M\\kDtBsI_@aE`B_Mp@mAxCyM~@_BfGyCd@qAAcI_@sAwI_GgG{@sDaEjAoQW{GtDi@hCcBfIeBzEaCtNgE|K_C~GwETo@Ow@qCuBYgAl@}@~B\\dBk@zAoBFy@yAiEB}Bj@CnGpCt@gBmAwALmAbEn@v@m@P_CfAEtCsB`IaBxAsCnA\\hE_C`EgIlC}B?uB{AOdAiDw@d@GSrAgCL}BnA_Cl@mCnAsB",
-   "pointCount": 69,
+   "polyline": "cvgxEqkimYzAqDHcC|AgF`C_F~BgCpBs@fR{NdEgAfIyFpGeBze@oS??jNqIJ_Be@y@aA?iDrAo@GWaAjIgHrCuDnBeHfGsLlLwKtCXv@bBXfCb@Zv@_@FgDp@o@n@r@i@`B`@rAdDaBxAFX~@QfClCtFd@SSkEh@eA`ElJfAQc@yBd@UjEfHh@??i@w@cA\\k@~B|Cl@L@gAsAiATy@rF`GEsAyD{GNoAnAe@jA`FxEz@|EfF",
+   "pointCount": 65,
    "start": [
-    35.592244,
-    138.589578
+    35.59794,
+    138.66185
    ],
    "end": [
-    35.567761,
-    138.638122
+    35.56381,
+    138.68034
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:39",
+   "id": "山梨県:34",
+   "name": "川窪猪狩線",
+   "ref": "112",
+   "highway": "secondary",
+   "lengthKm": 2.45,
+   "curviness": 476.9,
+   "flow": 43.2,
+   "turnCount": 27,
+   "score": 76.7,
+   "baseScore": 74.3,
+   "spotCount": 0,
+   "polyline": "ergyEmzulYFq@rBMhAkBrDmAA_AyBsA~AgBJ{A_DcBAmAr@wAWwAcCsBkBOy@{@VgFcCkKl@{I_@{CqB{EeCmBk@iDeAyBuFsDm@aArF_Qk@mF}@kB",
+   "pointCount": 29,
+   "start": [
+    35.76115,
+    138.56183
+   ],
+   "end": [
+    35.76455,
+    138.58214
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "林道ぎみ"
+   ]
+  },
+  {
+   "id": "山梨県:35",
+   "name": "足柄停車場富士公園線",
+   "ref": "150",
+   "highway": "secondary",
+   "lengthKm": 10.8,
+   "curviness": 436.4,
+   "flow": 55.4,
+   "turnCount": 85,
+   "score": 76.3,
+   "baseScore": 82.9,
+   "spotCount": 0,
+   "polyline": "_tyvEmronYl@p_Bj@rSq@nl@k@|IaBdM??cArJlCrEV|Ae@~@iBLWh@|BdCLz@aErCf@tAbB`APp@eIvClC|JyAf@sDC?`AxCzDNx@c@d@kCEa@h@tCjIc@h@iHz@CdAdD~Ha@j@gDUr@zFmCpAa@tFf@jBlEtDn@~B@hEsAdEzBfCNv@sCrELx@dDbEoDdCfBnK}C~AHnDoCtAjCnFiAnBi@pIjH|E~@vC_@`@aFb@gA~AhJfDkE`DcE^o@`BdFxExDPZh@{EV{D~@F~@hGxEUpAeF|@_HPY\\Vj@xMfHxCfIc@ZmEoAwD~AwJbBy@x@b@r@vQnBn@d@D~@oBf@",
+   "pointCount": 90,
+   "start": [
+    35.36208,
+    138.85751
+   ],
+   "end": [
+    35.3661,
+    138.77847
+   ],
+   "reshaped": true,
+   "title": "ふじあざみライン",
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:36",
    "name": "湯之奥上之平線",
    "ref": "415",
    "highway": "secondary",
@@ -1010,56 +1021,14 @@
    "end": [
     35.402639,
     138.495175
-   ]
-  },
-  {
-   "id": "山梨県:40",
-   "name": "大向福士線",
-   "ref": "802",
-   "highway": "secondary",
-   "lengthKm": 5.97,
-   "curviness": 475.6,
-   "flow": 25.1,
-   "turnCount": 113,
-   "score": 75.4,
-   "baseScore": 75.4,
-   "spotCount": 0,
-   "polyline": "mx{uEgqblY`@bImFvDcArCWbEbAhHk@|GsElEuChRT~CrDlEFzCeA`CFhJ|ChJ~BjBfInApI`Kt@nCdApAzElDpHhCSd@sA`@hBfBlDMvFqDnAQrDvA~BnCxGtAtBtBWl@q@w@c@FKh@Xb@|C`@jB[zElAjC|A`CT`@uApADG}@lNdBz@S`@{@tAF|@lBlBZfCzClEdN~@hLvC|CbAnHzBnG",
-   "pointCount": 57,
-   "start": [
-    35.209189,
-    138.463076
    ],
-   "end": [
-    35.185727,
-    138.426814
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:41",
-   "name": "川窪猪狩線",
-   "ref": "112",
-   "highway": "secondary",
-   "lengthKm": 3.51,
-   "curviness": 486.3,
-   "flow": 24,
-   "turnCount": 71,
-   "score": 74.3,
-   "baseScore": 74.3,
-   "spotCount": 0,
-   "polyline": "ergyEmzulYFq@rBMhAkBrDmAA_AyBsA~AgBJ{A_DcBAmAr@wAWwAcCsBkBOy@{@VgFcCkKl@{I_@{CqB{EeCmBk@iDeAyBuFsDm@aArF_Qk@mF}@kBaDyBaBwC{EjAwGXkHbDcB`FmEDoEzC",
-   "pointCount": 37,
-   "start": [
-    35.761155,
-    138.561831
-   ],
-   "end": [
-    35.772422,
-    138.58024
-   ]
-  },
-  {
-   "id": "山梨県:42",
+   "id": "山梨県:37",
    "name": "精進湖畔線",
    "ref": "706",
    "highway": "secondary",
@@ -1079,10 +1048,13 @@
    "end": [
     35.49289,
     138.610923
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:43",
+   "id": "山梨県:38",
    "name": "都留道志線",
    "ref": "24",
    "highway": "primary",
@@ -1102,33 +1074,14 @@
    "end": [
     35.511847,
     138.968094
-   ]
-  },
-  {
-   "id": "山梨県:44",
-   "name": "甲府昇仙峡線",
-   "ref": "7",
-   "highway": "primary",
-   "lengthKm": 3.18,
-   "curviness": 487.3,
-   "flow": 24.6,
-   "turnCount": 63,
-   "score": 73.2,
-   "baseScore": 73.2,
-   "spotCount": 0,
-   "polyline": "yfcyEsuvlYo@f@wC}Dw@D?`@vCtAX~A_@dDl@bArGBnD|BjGxA`@jEw@`GrBbE`@WAeD`@q@dHoBrBr@p@hGxF~N`A~E|FnIJhBs@lHjEoCrAQhA|Ap@hElBpBfFtL|@T",
-   "pointCount": 33,
-   "start": [
-    35.738848,
-    138.566181
    ],
-   "end": [
-    35.725739,
-    138.549494
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:45",
+   "id": "山梨県:39",
    "name": "上野原丹波山線",
    "ref": "18",
    "highway": "primary",
@@ -1148,10 +1101,14 @@
    "end": [
     35.680865,
     139.065305
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:46",
+   "id": "山梨県:40",
    "name": "下部飯富線",
    "ref": "411",
    "highway": "secondary",
@@ -1171,10 +1128,14 @@
    "end": [
     35.439144,
     138.474924
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:47",
+   "id": "山梨県:41",
    "name": "市川三郷身延線",
    "ref": "9",
    "highway": "primary",
@@ -1194,10 +1155,14 @@
    "end": [
     35.487493,
     138.458656
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:48",
+   "id": "山梨県:42",
    "name": "本栖湖畔線",
    "ref": "709",
    "highway": "secondary",
@@ -1217,79 +1182,41 @@
    "end": [
     35.464675,
     138.602589
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:49",
-   "name": "乾徳山線",
-   "ref": "209",
+   "id": "山梨県:43",
+   "name": "山中湖小山線",
+   "ref": "730",
    "highway": "secondary",
-   "lengthKm": 4.58,
-   "curviness": 393.9,
-   "flow": 25.8,
-   "turnCount": 70,
-   "score": 70.4,
-   "baseScore": 70.4,
-   "spotCount": 0,
-   "polyline": "u~oyE{srmYdD_Cz@mC|DyC|E_JzBkAdFgJ~GoIdC}Gj@cGGkEp@rAHnDr@yDlEeFvCwAvCOvC}BtAOrAwAlA[zBoFnBJdD_AjBeBbBK`BuAdE_BvJJrEkB~FsExI}DhBqC~A}@|CyOB_Bl@e@vBqHh@aE~AaBTqBc@wD~AqE",
-   "pointCount": 43,
+   "lengthKm": 14.93,
+   "curviness": 318.5,
+   "flow": 37.2,
+   "turnCount": 128,
+   "score": 69.3,
+   "baseScore": 76.7,
+   "spotCount": 3,
+   "polyline": "aefwEgxznYd@w@~@MnMbCbCdIph@hV`BNbJkCT|@q@rDl@v@zG]jC}ArBwCEs@k@AeApBuCf@Wk@jCs@xA}CpBmAl@Rr@pC~@VdA]j@{ANgGpBmApBaD\\mDvAGlBbArAYnGqL??r@_DbDiBbA{GfFkE_AeB@{A{AuDX}@nBs@\\u@iDmELmChA_BRiBe@_FzA_@pC`Ar@GvEeLLmIy@yAXcBUuBzCmIn@uK`EiF\\uA]cEgCgMAsDdC{Bx@{BvCM~@l@dFg@pAs@lADzAsBxCe@|IXbItCxAnBpEhBr@c@AkDrAwEnJgGt@eEOyAXY`ApAI`D`AlBnTlIpCObBkAlIeC~EAlA_@lCRzB_ArBdAdAKvEoD|B}@dBqCdCcB~AwChBaB??PGy@wCCiCjDwiA\\gC|EkIv`@_W`G}F`EqRdEiJEcAu@}@sNeFc@sAJkEYiC??SwBP}@jFqEfF{Iv@_CQiBcAgAcBB_FtFeGnDqFwA}A{F",
+   "pointCount": 135,
    "start": [
-    35.804113,
-    138.709261
+    35.42625,
+    138.91476
    ],
    "end": [
-    35.777516,
-    138.738702
+    35.36689,
+    138.98217
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:50",
-   "name": "南アルプス公園線",
-   "ref": "37",
-   "highway": "primary",
-   "lengthKm": 10.16,
-   "curviness": 425.9,
-   "flow": 23.8,
-   "turnCount": 182,
-   "score": 70.3,
-   "baseScore": 70.3,
-   "spotCount": 0,
-   "polyline": "aefxEmzckYeKy@wEd@oDkCyCoDmCiA}C_E}A_A_B@eGdCyCA_G{CoAqBmCvAkAH_DYkAaA{B^yCfBkCj@Q|DgBb@iAk@o@tBmB\\kDyA_CiCwAcE}JtB{CHkA_@yBeEU{FaBwCyA`BcFnCwD~Io@j@iA?sGcHK{Bt@oDq@eCkBcByGeBsBtAgJhAuAhAkBG{BvCiD\\o@SCeAzDgHwD@qDo@uC|HoFzCy@nAmG?iE|Bc@x@D`CaB~@uBWq@{BeDyBoAMqB_DeAReBlDy@h@eH{Ao@oA?wGg@c@gEZmDlGgBv@_C@yAdAwAu@oDTmDzAiCdFY|BKtHbAtN}BlJd@xJ_@jA}D`Em@pEG|D}AvF?~CaAjAmBs@sLeMcCiE{BgBsAwDwD}E",
-   "pointCount": 103,
-   "start": [
-    35.590092,
-    138.305835
-   ],
-   "end": [
-    35.650885,
-    138.30063
-   ]
-  },
-  {
-   "id": "山梨県:51",
-   "name": "国道138号",
-   "ref": "138",
-   "highway": "trunk",
-   "lengthKm": 6.05,
-   "curviness": 346.4,
-   "flow": 24.1,
-   "turnCount": 87,
-   "score": 69.9,
-   "baseScore": 61.2,
-   "spotCount": 7,
-   "polyline": "}obwEifsnYzDm@~LbAxGnD|AdD~EzFhBbQjBvEgAjGl@xBtATnN[xE|C`FdFxC~ExAb@nLgA`AcF`@MUnEh@zCbHpDpUhPdHrGdCjDXhAS`CPhA|BnAfAxCk@~ABlB_A|BXvDbClEDvEt@bAlIxAhBy@l@{B_Aa@iCtAcCoAaAuHyAcE\\oAfEcC^_AgB}HXmFsA}FnA_AjDl@",
-   "pointCount": 53,
-   "start": [
-    35.407507,
-    138.876051
-   ],
-   "end": [
-    35.380647,
-    138.85874
-   ]
-  },
-  {
-   "id": "山梨県:52",
+   "id": "山梨県:44",
    "name": "割子切石線",
    "ref": "405",
    "highway": "secondary",
@@ -1309,10 +1236,42 @@
    "end": [
     35.480071,
     138.470594
+   ],
+   "tags": [
+    "快走",
+    "要注意"
    ]
   },
   {
-   "id": "山梨県:53",
+   "id": "山梨県:45",
+   "name": "大城小田船原線",
+   "ref": "808",
+   "highway": "secondary",
+   "lengthKm": 4.15,
+   "curviness": 340.8,
+   "flow": 39.3,
+   "turnCount": 36,
+   "score": 68.8,
+   "baseScore": 80.8,
+   "spotCount": 0,
+   "polyline": "s}svE}{tkYyDmFUkAgBeBuAwEwANgA_B}Bo@aAqDh@uE_@g@cD}@eCzBh@~AU\\eCo@yBbAoAm@OcAz@}DgF_Ot@uDsCmEqCyKoC@sAcCcFoD}FyH_BeFaEsCuEmA{@kBiGkCaGuIqAsHeBcF??kEiF}KsT",
+   "pointCount": 39,
+   "start": [
+    35.3329,
+    138.39311
+   ],
+   "end": [
+    35.35481,
+    138.42174
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:46",
    "name": "国道300号",
    "ref": "300",
    "highway": "trunk",
@@ -1332,10 +1291,15 @@
    "end": [
     35.47101,
     138.59724
+   ],
+   "tags": [
+    "ワインディング",
+    "快走",
+    "要注意"
    ]
   },
   {
-   "id": "山梨県:54",
+   "id": "山梨県:47",
    "name": "朝日小沢猿橋線",
    "ref": "509",
    "highway": "secondary",
@@ -1355,10 +1319,14 @@
    "end": [
     35.583002,
     138.970559
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:55",
+   "id": "山梨県:48",
    "name": "韮崎増富線",
    "ref": "23",
    "highway": "primary",
@@ -1378,10 +1346,44 @@
    "end": [
     35.85623,
     138.507572
+   ],
+   "title": "増富ラジウムライン",
+   "tags": [
+    "ワインディング",
+    "快走",
+    "要注意"
    ]
   },
   {
-   "id": "山梨県:56",
+   "id": "山梨県:49",
+   "name": "浅川瀬戸線",
+   "ref": "511",
+   "highway": "secondary",
+   "lengthKm": 4.66,
+   "curviness": 321.9,
+   "flow": 38.5,
+   "turnCount": 39,
+   "score": 67.8,
+   "baseScore": 76.2,
+   "spotCount": 0,
+   "polyline": "}~rxE_jloYx@bFIlKn@j@tCw@JhFuDbKWpCnAhBpDf@V^v@xE`CbDfFbMkKxPs@rIaBdGr@bFc@jIaAhGt@zDY|Ej@pCy@pDoBtB`CdL_AjEZtBn@`Am@vA|@vCYhG~BnHWbDfAnEzJxPfCtBdAfHdAv@vBaApEhD",
+   "pointCount": 41,
+   "start": [
+    35.65567,
+    139.00464
+   ],
+   "end": [
+    35.64891,
+    138.96274
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:50",
    "name": "古関割子線",
    "ref": "404",
    "highway": "secondary",
@@ -1401,10 +1403,13 @@
    "end": [
     35.481393,
     138.486585
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:57",
+   "id": "山梨県:51",
    "name": "青木ヶ原船津線",
    "ref": "710",
    "highway": "secondary",
@@ -1424,10 +1429,13 @@
    "end": [
     35.504877,
     138.701819
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:58",
+   "id": "山梨県:52",
    "name": "甲府昇仙峡線",
    "ref": "7",
    "highway": "primary",
@@ -1447,10 +1455,14 @@
    "end": [
     35.767928,
     138.556673
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:59",
+   "id": "山梨県:53",
    "name": "大幡初狩線",
    "ref": "712",
    "highway": "secondary",
@@ -1470,10 +1482,13 @@
    "end": [
     35.596568,
     138.882681
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:60",
+   "id": "山梨県:54",
    "name": "青梅街道",
    "ref": "411",
    "highway": "trunk",
@@ -1493,33 +1508,14 @@
    "end": [
     35.786778,
     138.95011
-   ]
-  },
-  {
-   "id": "山梨県:61",
-   "name": "笛吹市川三郷線",
-   "ref": "36",
-   "highway": "primary",
-   "lengthKm": 10.13,
-   "curviness": 390.5,
-   "flow": 21.7,
-   "turnCount": 182,
-   "score": 66.2,
-   "baseScore": 66.2,
-   "spotCount": 0,
-   "polyline": "wf`xEwolmYpF}A`BuBz@qC|DgC?gAe@q@qC{AGgB~DmBrDgKdDgBx@yE|BeGhDcAv@mFz@eAz@VLp@yAjIeA|ATlCsAvDK|E`ApGkB`G{BnDaAxIqBhDBv@pDjJJpBo@tHgD~Dg@fDnE|El@~G~DbKNjBm@pEXrKrBxJzAj@r@xA~H~FpDz@h@p@_@`B}HxBeA|@oAzBDhDlBvA~CLfBhBhDzJs@rEVlCxEdOxBdCn@pB_@dJbHlK`BxEhDb@@fFVv@|GtDbH]jDpD`B|CF~Be@fE}DjKjBxHjCzDNzGZfAhD`C^v@@|Go@fFNjBbAr@bBw@bBXnBhDtAnFhIbEfDj@@`AcAxA^pB|Fq@vCz@zBxEbBl@hBW",
-   "pointCount": 98,
-   "start": [
-    35.559635,
-    138.67788
    ],
-   "end": [
-    35.530627,
-    138.621104
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:62",
+   "id": "山梨県:55",
    "name": "十谷鬼島線",
    "ref": "407",
    "highway": "secondary",
@@ -1539,10 +1535,44 @@
    "end": [
     35.516313,
     138.453649
+   ],
+   "tags": [
+    "ワインディング"
    ]
   },
   {
-   "id": "山梨県:63",
+   "id": "山梨県:56",
+   "name": "ぐるり富士山風景街道",
+   "ref": "",
+   "highway": "secondary",
+   "osmId": null,
+   "spotCount": 0,
+   "tags": [
+    "ワインディング",
+    "快走"
+   ],
+   "title": null,
+   "note": null,
+   "polyline": "ok_wE}cqnYItEh@zCbHpDpUhPdHrGdCjDXhAS`CPhA|BnAfAxCk@~ABlB_A|BXvDbClEDvEt@bAnHrA`A@dAu@l@{B_Aa@iCtAcCoAaAuHyAcE\\oAfEcC^_AgB}HXmFwAcFf@oApNdB~NAjGaAlGmFtAc@~MMrGzAbD|GjEz@`GoBvDgE`FO|CaD",
+   "pointCount": 48,
+   "start": [
+    35.39144,
+    138.86543
+   ],
+   "end": [
+    35.36381,
+    138.86045
+   ],
+   "lengthKm": 5.52,
+   "curviness": 282.4,
+   "flow": 33.9,
+   "turnCount": 46,
+   "score": 65.5,
+   "baseScore": 65.5,
+   "added": true
+  },
+  {
+   "id": "山梨県:57",
    "name": "東山広域農道（フルーツライン）",
    "ref": "",
    "highway": "tertiary",
@@ -1562,56 +1592,14 @@
    "end": [
     35.665419,
     138.644367
-   ]
-  },
-  {
-   "id": "山梨県:64",
-   "name": "南アルプス公園線",
-   "ref": "37",
-   "highway": "primary",
-   "lengthKm": 4.93,
-   "curviness": 391.1,
-   "flow": 21.7,
-   "turnCount": 89,
-   "score": 65.1,
-   "baseScore": 65.1,
-   "spotCount": 0,
-   "polyline": "{htxEi_bkYuGbAgI_DmCrCuClAoDP_LzNyIpCoB|ByG|Cq@nC@bGcAzEsB_@mB~ByGvCuAe@wDX}KmE}ADeE`C{@xCuDvFeGxAcAjGmHdHkOu@iG|BmEf@_AbCx@hHKz@sCdCoCl@JdJElAg@~@L|B}@nBeCvBcC~@[v@",
-   "pointCount": 42,
-   "start": [
-    35.662378,
-    138.296366
    ],
-   "end": [
-    35.694312,
-    138.272898
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:65",
-   "name": "高瀬福士線",
-   "ref": "801",
-   "highway": "secondary",
-   "lengthKm": 8.76,
-   "curviness": 342.4,
-   "flow": 21.6,
-   "turnCount": 139,
-   "score": 64.3,
-   "baseScore": 64.3,
-   "spotCount": 0,
-   "polyline": "}cbvEa~flY~AfAtEpAhGEhC|CxAzFjFxFhPvJlAjDfCbOi@zK`@rArAz@hNcBnY{JjSsMzEsA|CPxKfLhCnHhBrCpIvFnDtDdBbVrDvI}@vG\\~AtBn@xGaAhDHvBrAlChF`Ew@bFx@xDeA~EnEnFjA~FwAz@u@rDr@xFcCxEIdDb@|AeAvABn@gBpBkBXpGp@jC@_GhAmDlDcFh@mCbEcCzA@pA{@hAJRpBz@d@rBcApBNlDu@pBpB`@pAdC`ApDAlDqB`Ah@pIIL_@_@q@",
-   "pointCount": 71,
-   "start": [
-    35.241747,
-    138.485615
-   ],
-   "end": [
-    35.184934,
-    138.466562
-   ]
-  },
-  {
-   "id": "山梨県:66",
+   "id": "山梨県:58",
    "name": "韮崎増富線（増富ラジウムライン）",
    "ref": "23",
    "highway": "primary",
@@ -1631,10 +1619,14 @@
    "end": [
     35.856364,
     138.502388
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:67",
+   "id": "山梨県:59",
    "name": "北杜富士見線",
    "ref": "11",
    "highway": "primary",
@@ -1654,10 +1646,14 @@
    "end": [
     35.921997,
     138.40502
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:68",
+   "id": "山梨県:60",
    "name": "青木ヶ原船津線",
    "ref": "710",
    "highway": "secondary",
@@ -1677,10 +1673,42 @@
    "end": [
     35.50314,
     138.769618
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:69",
+   "id": "山梨県:61",
+   "name": "道志みち",
+   "ref": "413",
+   "highway": "trunk",
+   "lengthKm": 36.72,
+   "curviness": 274.7,
+   "flow": 34.1,
+   "turnCount": 296,
+   "score": 62.5,
+   "baseScore": 54.7,
+   "spotCount": 1,
+   "polyline": "eaiwEuc|nYqLsR}KoL??oFmCoDaEyEwCqBLs@pBg@NYoByEgGwEfAwEcJoBwFiB@mBtCk@@|AqIwBcDi@cGe@aA{J{BkMuO}@BkCxBq@AqRmOoGsAiEHiDuB{BTcFaF}GxA}BcDyAkIcGmEaAcGaDuE{@uDyFuA_EmDeGY_Ag@eEmM}@oLaCgGgJwE}DqE}AmDoF_CiGkGeDyQw@y@oDi@k@q@oAqDgBeMgP_YgFyP{DyEwEeNgC_FwFwBsDgHcBqFgEkDaDmHiAg@}Fe@sEoEoG}DsAcCs@{CFcFYmAeDkEeDgBqC_DqD}LyDsFwByAwF{AgAiAm@iC?qGqA}D}FsJm@eGkB}EmAkRBkE}B}Ls@yAsDgAsIoIwE}XuMmHaIuMkKwFoHkJaGyMw@oK`A_HsDeLk@oGoA}Eq@cPoEoOgBsBi@eBQsEj@mCG_AaCwI}CwBg@aAJkHkBmQwAyBgDc@kBsB}@_Ce@kF{DeFqC{NDcCv@iDtEyItC_DbBeEHyG[gE`@cAg@yFT{@rBoAaAeHd@sGKwBmFcJR}A~BeDZwAaA_JgBoBkGWcAk@iAeCMwB^mBtAwB|BqMrA}BqCmJuB_AOkAvGyK~C}TrBeD??`FoHhFbA?gGc@gA|@cCNsBd@HFnBx@dCpD_BrEu@v@q@ZsA_B_HAuBuAsAOuBaAmANoA~@y@?s@wBgAXqBa@cAyBm@iB}Ao@yEuE?_BkA}@cDa@eOwCcA_CiCw@Cq@fAr@lCQ|BkB~Ak@Gs@}ANwCqAsDlAiDIeCyIgIiATs@hBk@k@QwByAcCkHqCyByDGiAv@yDmA_C_@aFtFmIe@eGhA}E_DqGaAEsC~BkBF_Bu@cGiGs@mEt@oPa@kBcCoE[qBd@[z@t@|@@m@cEbDAh@c@MuBvB{BjAaMdA_CbCqBn@wFo@e@}B|@eEaAGmDqBwAWqE??c@eC_AqA{N}H{GmRKwG~BkDZyA[kBaDuCk@wB`@kFpAmBFaAk@SoAb@wCwA[q@@_CgEmAwDqKsEyH_@sCVkFSkHZgFy@aBiAuGuB_BwA}B_@wBiAqBSkCkDgCc@kCP}Ci@yAi@iGwDyM}M{UwAmRQ}Po@mBeDiEqLo`@g@}EiAcv@vEif@l@w@`B_@b@sA_@uAmGkF",
+   "pointCount": 302,
+   "start": [
+    35.44099,
+    138.92171
+   ],
+   "end": [
+    35.56425,
+    139.20891
+   ],
+   "reshaped": true,
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:62",
    "name": "国道139号",
    "ref": "139",
    "highway": "trunk",
@@ -1700,10 +1728,14 @@
    "end": [
     35.762296,
     138.981191
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:70",
+   "id": "山梨県:63",
    "name": "精進ブルーライン",
    "ref": "358",
    "highway": "trunk",
@@ -1723,10 +1755,14 @@
    "end": [
     35.533067,
     138.605876
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:71",
+   "id": "山梨県:64",
    "name": "塩山勝沼線",
    "ref": "38",
    "highway": "primary",
@@ -1746,10 +1782,13 @@
    "end": [
     35.656809,
     138.739404
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:72",
+   "id": "山梨県:65",
    "name": "河口湖上九一色線（湖北ビューライン）",
    "ref": "21",
    "highway": "primary",
@@ -1769,10 +1808,14 @@
    "end": [
     35.512987,
     138.732591
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:73",
+   "id": "山梨県:66",
    "name": "四日市場上野原線",
    "ref": "35",
    "highway": "primary",
@@ -1792,10 +1835,14 @@
    "end": [
     35.567924,
     139.014038
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:74",
+   "id": "山梨県:67",
    "name": "釜の口塩沢線",
    "ref": "809",
    "highway": "secondary",
@@ -1815,10 +1862,13 @@
    "end": [
     35.279563,
     138.417679
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:75",
+   "id": "山梨県:68",
    "name": "塩山停車場大菩薩嶺線",
    "ref": "201",
    "highway": "secondary",
@@ -1846,7 +1896,7 @@
    ]
   },
   {
-   "id": "山梨県:76",
+   "id": "山梨県:69",
    "name": "桑西下真木線",
    "ref": "510",
    "highway": "secondary",
@@ -1866,10 +1916,13 @@
    "end": [
     35.600836,
     138.905865
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:77",
+   "id": "山梨県:70",
    "name": "横手日野春停車場線",
    "ref": "612",
    "highway": "secondary",
@@ -1889,10 +1942,14 @@
    "end": [
     35.792332,
     138.392473
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:78",
+   "id": "山梨県:71",
    "name": "笛吹市川三郷線",
    "ref": "36",
    "highway": "primary",
@@ -1912,10 +1969,14 @@
    "end": [
     35.535201,
     138.598397
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:79",
+   "id": "山梨県:72",
    "name": "穂坂路",
    "ref": "616",
    "highway": "secondary",
@@ -1935,10 +1996,42 @@
    "end": [
     35.692856,
     138.501351
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:80",
+   "id": "山梨県:73",
+   "name": "フルーツライン（東山東部広域農道）",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 8.1,
+   "curviness": 100.3,
+   "flow": 20.8,
+   "turnCount": 39,
+   "score": 58.1,
+   "baseScore": 43.2,
+   "spotCount": 0,
+   "polyline": "}msxEycxmYgAFuDjBgBHmI}BoJaEgHmGcGsL??g\\aViXaE??}HAiKiDsEcHyAy@{AI_I~AwNuEaBn@}LrOmGfBgEi@_EwByFiAcMQcImAeKWgRz@aFlAcLiDg[cCmKjD_K~J{ErIeBdGeK|K}LzEsB|GeDvBcBrFcDlBcBnC",
+   "pointCount": 43,
+   "start": [
+    35.65807,
+    138.73741
+   ],
+   "end": [
+    35.7214,
+    138.73552
+   ],
+   "reshaped": true,
+   "boost": 10,
+   "tags": [
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:74",
    "name": "敷島竜王線",
    "ref": "101",
    "highway": "secondary",
@@ -1958,33 +2051,14 @@
    "end": [
     35.758243,
     138.54017
-   ]
-  },
-  {
-   "id": "山梨県:81",
-   "name": "道志みち",
-   "ref": "413",
-   "highway": "trunk",
-   "lengthKm": 21.4,
-   "curviness": 272.7,
-   "flow": 20,
-   "turnCount": 292,
-   "score": 57.6,
-   "baseScore": 54.7,
-   "spotCount": 1,
-   "polyline": "u{iwEyd}nYoFmCoDaEyEwCqBLs@pBg@NYoByEgGwEfAwEcJoBwFiB@mBtCk@@|AqIwBcDi@cGe@aA{J{BkMuO}@BkCxBq@AqRmOoGsAiEHiDuB{BTcFaF}GxA}BcDyAkIcGmEaAcGaDuE{@uDyFuA_EmDeGY_Ag@eEmM}@oLaCgGgJwE}DqE}AmDoF_CiGkGeDyQw@y@oDi@k@q@oAqDgBeMgP_YgFyP{DyEwEeNgC_FwFwBsDgHcBqFgEkDaDmHiAg@}Fe@sEoEoG}DsAcCs@{CFcFYmAeDkEeDgBqC_DqD}LyDsFwByAwF{AgAiAm@iC?qGqA}D}FsJm@eGkB}EmAkRBkE}B}Ls@yAsDgAsIoIwE}XuMmHaIuMkKwFoHkJaGyMw@oK`A_HsDeLk@oGoA}Eq@cPoEoOgBsBi@eBQsEj@mCG_AaCwI}CwBg@aAJkHkBmQwAyBgDc@kBsB}@_Ce@kF{DeFqC{NDcCv@iDtEyItC_DbBeEHyG[gE`@cAg@yFT{@rBoAaAeHd@sGKwBmFcJR}A~BeDZwAaA_JgBoBkGWcAk@iAeCMwB^mBtAwB|BqMrA}BqCmJuB_AOkAvGyK~C}TrBeD",
-   "pointCount": 157,
-   "start": [
-    35.445231,
-    138.927014
    ],
-   "end": [
-    35.534142,
-    139.093096
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:82",
+   "id": "山梨県:75",
    "name": "南アルプス街道",
    "ref": "37",
    "highway": "primary",
@@ -2004,10 +2078,14 @@
    "end": [
     35.410937,
     138.358234
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:83",
+   "id": "山梨県:76",
    "name": "身延線",
    "ref": "804",
    "highway": "secondary",
@@ -2027,10 +2105,13 @@
    "end": [
     35.3694,
     138.445555
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:84",
+   "id": "山梨県:77",
    "name": "茅ヶ岳広域農道",
    "ref": "616",
    "highway": "secondary",
@@ -2050,10 +2131,13 @@
    "end": [
     35.729061,
     138.448636
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:85",
+   "id": "山梨県:78",
    "name": "桃園市之瀬線",
    "ref": "110",
    "highway": "secondary",
@@ -2073,10 +2157,13 @@
    "end": [
     35.628961,
     138.446783
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:86",
+   "id": "山梨県:79",
    "name": "国道139号線",
    "ref": "139",
    "highway": "trunk",
@@ -2096,10 +2183,13 @@
    "end": [
     35.61788,
     138.948793
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:87",
+   "id": "山梨県:80",
    "name": "県道205号線",
    "ref": "205",
    "highway": "secondary",
@@ -2119,10 +2209,13 @@
    "end": [
     35.701145,
     138.695968
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:88",
+   "id": "山梨県:81",
    "name": "河口湖上九一色線",
    "ref": "21",
    "highway": "primary",
@@ -2142,10 +2235,13 @@
    "end": [
     35.512987,
     138.732591
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:89",
+   "id": "山梨県:82",
    "name": "塩平窪平線",
    "ref": "206",
    "highway": "secondary",
@@ -2165,10 +2261,14 @@
    "end": [
     35.734122,
     138.711855
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:90",
+   "id": "山梨県:83",
    "name": "富士スバルライン",
    "ref": "707",
    "highway": "secondary",
@@ -2188,10 +2288,14 @@
    "end": [
     35.376507,
     138.691689
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:91",
+   "id": "山梨県:84",
    "name": "休息勝沼線",
    "ref": "214",
    "highway": "secondary",
@@ -2211,33 +2315,40 @@
    "end": [
     35.68155,
     138.719402
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:92",
-   "name": "国道139号",
-   "ref": "139",
-   "highway": "trunk",
-   "lengthKm": 3.1,
-   "curviness": 208.3,
-   "flow": 34,
-   "turnCount": 19,
-   "score": 55,
-   "baseScore": 55,
+   "id": "山梨県:85",
+   "name": "山中湖忍野富士吉田線",
+   "ref": "717",
+   "highway": "secondary",
+   "lengthKm": 7.74,
+   "curviness": 120.5,
+   "flow": 26.6,
+   "turnCount": 35,
+   "score": 54.5,
+   "baseScore": 51.4,
    "spotCount": 0,
-   "polyline": "}bqwEir`nY`EwKfXaa@lLyU{LxUeZfd@qPlf@",
-   "pointCount": 7,
+   "polyline": "ixkwEqoonY{MqGmCpLkCjHBbD}BvOsA~Sc@x`@yg@pCaJfF_ZhJeFnCqBvBgEnKeB`A}Eb@eBjAe@tBQtI_F~FGxB`A`D@fBy@nAgE`C?jIf@dK`A|CpAjJbEbFrArCrFbF\\tBMlAoJfMgEvHwc@f|@oHbX",
+   "pointCount": 38,
    "start": [
-    35.482229,
-    138.780686
+    35.45493,
+    138.85705
    ],
    "end": [
-    35.484453,
-    138.775914
+    35.48639,
+    138.80012
+   ],
+   "reshaped": true,
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:93",
+   "id": "山梨県:86",
    "name": "韮崎増富線",
    "ref": "23",
    "highway": "primary",
@@ -2257,10 +2368,13 @@
    "end": [
     35.735133,
     138.445856
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:94",
+   "id": "山梨県:87",
    "name": "小荒間長坂停車場線",
    "ref": "609",
    "highway": "secondary",
@@ -2280,10 +2394,13 @@
    "end": [
     35.896736,
     138.350388
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:95",
+   "id": "山梨県:88",
    "name": "原浅尾韮崎線",
    "ref": "610",
    "highway": "secondary",
@@ -2303,10 +2420,14 @@
    "end": [
     35.8833,
     138.523144
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:96",
+   "id": "山梨県:89",
    "name": "白井甲州線",
    "ref": "34",
    "highway": "primary",
@@ -2326,10 +2447,42 @@
    "end": [
     35.661769,
     138.729805
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:97",
+   "id": "山梨県:90",
+   "name": "国道138号",
+   "ref": "138",
+   "highway": "trunk",
+   "lengthKm": 2.54,
+   "curviness": 183.9,
+   "flow": 29.1,
+   "turnCount": 16,
+   "score": 53.1,
+   "baseScore": 61.2,
+   "spotCount": 7,
+   "polyline": "}obwEifsnYzDm@~LbAxGnD|AdD~EzFhBbQjBvEgAjGl@xBtATnN[xE|C`FdFxC~ExAb@nLgA`AcF",
+   "pointCount": 18,
+   "start": [
+    35.40751,
+    138.87605
+   ],
+   "end": [
+    35.39155,
+    138.86533
+   ],
+   "reshaped": true,
+   "title": "富士パノラマライン",
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:91",
    "name": "富士スバルライン",
    "ref": "707",
    "highway": "secondary",
@@ -2349,10 +2502,13 @@
    "end": [
     35.446194,
     138.754778
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:98",
+   "id": "山梨県:92",
    "name": "富士吉田西桂線",
    "ref": "718",
    "highway": "secondary",
@@ -2372,10 +2528,13 @@
    "end": [
     35.525852,
     138.850885
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:99",
+   "id": "山梨県:93",
    "name": "長沢小淵沢線",
    "ref": "608",
    "highway": "secondary",
@@ -2395,10 +2554,13 @@
    "end": [
     35.862668,
     138.397082
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:100",
+   "id": "山梨県:94",
    "name": "駒ヶ岳公園線",
    "ref": "614",
    "highway": "secondary",
@@ -2418,10 +2580,13 @@
    "end": [
     35.76988,
     138.313811
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:101",
+   "id": "山梨県:95",
    "name": "南アルプス街道",
    "ref": "37",
    "highway": "primary",
@@ -2441,10 +2606,14 @@
    "end": [
     35.481532,
     138.334036
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:102",
+   "id": "山梨県:96",
    "name": "金川曽根広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -2464,10 +2633,13 @@
    "end": [
     35.553765,
     138.482627
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:103",
+   "id": "山梨県:97",
    "name": "茅ヶ岳広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -2487,10 +2659,14 @@
    "end": [
     35.811879,
     138.45754
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:104",
+   "id": "山梨県:98",
    "name": "南アルプス街道",
    "ref": "20",
    "highway": "primary",
@@ -2510,10 +2686,13 @@
    "end": [
     35.637407,
     138.376625
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:105",
+   "id": "山梨県:99",
    "name": "北杜富士見線",
    "ref": "11",
    "highway": "primary",
@@ -2533,10 +2712,13 @@
    "end": [
     35.898029,
     138.327815
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:106",
+   "id": "山梨県:100",
    "name": "富士宮鳴沢線",
    "ref": "71",
    "highway": "primary",
@@ -2556,33 +2738,13 @@
    "end": [
     35.350757,
     138.595512
-   ]
-  },
-  {
-   "id": "山梨県:107",
-   "name": "山中湖忍野富士吉田線",
-   "ref": "717",
-   "highway": "secondary",
-   "lengthKm": 8.14,
-   "curviness": 159.8,
-   "flow": 20.3,
-   "turnCount": 64,
-   "score": 51.4,
-   "baseScore": 51.4,
-   "spotCount": 0,
-   "polyline": "ixkwEqoonY{MqGmCpLkCjHBbD}BvOsA~Sc@x`@yg@pCaJfF_ZhJeFnCqBvBgEnKeB`A}Eb@eBjAe@tBQtI_F~FGxB`A`D@fBy@nAgE`C?jIf@dK`A|CpAjJbEbFrArCrFbF\\tBMlAoJfMgEvHwc@f|@oHbXnH_W",
-   "pointCount": 39,
-   "start": [
-    35.45493,
-    138.857053
    ],
-   "end": [
-    35.484869,
-    138.803964
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:108",
+   "id": "山梨県:101",
    "name": "下荻原三日市場線",
    "ref": "213",
    "highway": "secondary",
@@ -2602,10 +2764,13 @@
    "end": [
     35.72484,
     138.714756
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:109",
+   "id": "山梨県:102",
    "name": "長坂高根線",
    "ref": "32",
    "highway": "primary",
@@ -2625,10 +2790,13 @@
    "end": [
     35.835235,
     138.395719
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:110",
+   "id": "山梨県:103",
    "name": "御坂みち",
    "ref": "137",
    "highway": "trunk",
@@ -2648,10 +2816,14 @@
    "end": [
     35.521558,
     138.777099
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:111",
+   "id": "山梨県:104",
    "name": "上野原あきる野線",
    "ref": "33",
    "highway": "primary",
@@ -2671,10 +2843,13 @@
    "end": [
     35.637346,
     139.106359
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:112",
+   "id": "山梨県:105",
    "name": "富士河口湖富士線",
    "ref": "707",
    "highway": "secondary",
@@ -2694,10 +2869,13 @@
    "end": [
     35.483301,
     138.776932
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:113",
+   "id": "山梨県:106",
    "name": "平沢千野線",
    "ref": "207",
    "highway": "secondary",
@@ -2717,10 +2895,13 @@
    "end": [
     35.754699,
     138.761367
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:114",
+   "id": "山梨県:107",
    "name": "日野春停車場線",
    "ref": "611",
    "highway": "secondary",
@@ -2740,10 +2921,13 @@
    "end": [
     35.78722,
     138.421002
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:115",
+   "id": "山梨県:108",
    "name": "深城バイパス",
    "ref": "139",
    "highway": "trunk",
@@ -2763,10 +2947,14 @@
    "end": [
     35.715086,
     138.938721
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:116",
+   "id": "山梨県:109",
    "name": "戸沢谷村線",
    "ref": "711",
    "highway": "secondary",
@@ -2786,10 +2974,13 @@
    "end": [
     35.54985,
     138.949835
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:117",
+   "id": "山梨県:110",
    "name": "城東通り",
    "ref": "411",
    "highway": "trunk",
@@ -2809,10 +3000,13 @@
    "end": [
     35.655126,
     138.608217
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:118",
+   "id": "山梨県:111",
    "name": "国道358号",
    "ref": "358",
    "highway": "trunk",
@@ -2832,10 +3026,15 @@
    "end": [
     35.59512,
     138.585675
+   ],
+   "title": "精進ブルーライン",
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:119",
+   "id": "山梨県:112",
    "name": "甲府中央右左口線",
    "ref": "29",
    "highway": "primary",
@@ -2855,10 +3054,13 @@
    "end": [
     35.570747,
     138.589123
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:120",
+   "id": "山梨県:113",
    "name": "甲州街道",
    "ref": "20",
    "highway": "trunk",
@@ -2878,10 +3080,13 @@
    "end": [
     35.613037,
     138.944865
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:121",
+   "id": "山梨県:114",
    "name": "四日市場上野原線",
    "ref": "35",
    "highway": "primary",
@@ -2901,10 +3106,13 @@
    "end": [
     35.568439,
     138.932615
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:122",
+   "id": "山梨県:115",
    "name": "韮崎南アルプス中央線",
    "ref": "12",
    "highway": "primary",
@@ -2924,10 +3132,13 @@
    "end": [
     35.677014,
     138.440893
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:123",
+   "id": "山梨県:116",
    "name": "茅野北杜韮崎線",
    "ref": "17",
    "highway": "primary",
@@ -2947,10 +3158,13 @@
    "end": [
     35.856673,
     138.320925
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:124",
+   "id": "山梨県:117",
    "name": "箕輪須玉線",
    "ref": "619",
    "highway": "secondary",
@@ -2970,10 +3184,13 @@
    "end": [
     35.797516,
     138.426075
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:125",
+   "id": "山梨県:118",
    "name": "甲府韮崎線",
    "ref": "6",
    "highway": "primary",
@@ -2993,10 +3210,13 @@
    "end": [
     35.698693,
     138.465164
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:126",
+   "id": "山梨県:119",
    "name": "南アルプス街道",
    "ref": "37",
    "highway": "primary",
@@ -3016,10 +3236,13 @@
    "end": [
     35.420796,
     138.444768
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:127",
+   "id": "山梨県:120",
    "name": "小和田猿橋線",
    "ref": "505",
    "highway": "secondary",
@@ -3039,10 +3262,13 @@
    "end": [
     35.616042,
     138.982279
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:128",
+   "id": "山梨県:121",
    "name": "国道139号",
    "ref": "139",
    "highway": "trunk",
@@ -3062,10 +3288,14 @@
    "end": [
     35.48764,
     138.645349
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:129",
+   "id": "山梨県:122",
    "name": "八ヶ岳南広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -3085,10 +3315,13 @@
    "end": [
     35.824208,
     138.365847
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:130",
+   "id": "山梨県:123",
    "name": "北杜八ヶ岳公園線",
    "ref": "28",
    "highway": "primary",
@@ -3108,10 +3341,13 @@
    "end": [
     35.922121,
     138.434599
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:131",
+   "id": "山梨県:124",
    "name": "藤垈石和線",
    "ref": "313",
    "highway": "secondary",
@@ -3131,10 +3367,13 @@
    "end": [
     35.624566,
     138.625897
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:132",
+   "id": "山梨県:125",
    "name": "市川三郷身延線",
    "ref": "9",
    "highway": "primary",
@@ -3154,10 +3393,13 @@
    "end": [
     35.37059,
     138.445752
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:133",
+   "id": "山梨県:126",
    "name": "高畑谷村停車場線",
    "ref": "705",
    "highway": "secondary",
@@ -3177,10 +3419,13 @@
    "end": [
     35.56568,
     138.831917
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:134",
+   "id": "山梨県:127",
    "name": "国道52号",
    "ref": "52",
    "highway": "trunk",
@@ -3200,10 +3445,14 @@
    "end": [
     35.306783,
     138.447664
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:135",
+   "id": "山梨県:128",
    "name": "白井甲州線",
    "ref": "34",
    "highway": "primary",
@@ -3223,10 +3472,13 @@
    "end": [
     35.620632,
     138.669715
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:136",
+   "id": "山梨県:129",
    "name": "市之蔵山梨線",
    "ref": "303",
    "highway": "secondary",
@@ -3246,10 +3498,13 @@
    "end": [
     35.66222,
     138.701238
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:137",
+   "id": "山梨県:130",
    "name": "富士川身延線",
    "ref": "10",
    "highway": "primary",
@@ -3269,10 +3524,13 @@
    "end": [
     35.241068,
     138.505619
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:138",
+   "id": "山梨県:131",
    "name": "長沢小淵沢線",
    "ref": "608",
    "highway": "secondary",
@@ -3292,10 +3550,13 @@
    "end": [
     35.853872,
     138.366049
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:139",
+   "id": "山梨県:132",
    "name": "みやさか道（東八中央農免農道）",
    "ref": "",
    "highway": "tertiary",
@@ -3315,10 +3576,13 @@
    "end": [
     35.600336,
     138.657263
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:140",
+   "id": "山梨県:133",
    "name": "甲州街道",
    "ref": "20",
    "highway": "trunk",
@@ -3338,10 +3602,13 @@
    "end": [
     35.656373,
     138.738435
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:141",
+   "id": "山梨県:134",
    "name": "御坂みち",
    "ref": "137",
    "highway": "trunk",
@@ -3361,10 +3628,13 @@
    "end": [
     35.609873,
     138.702564
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:142",
+   "id": "山梨県:135",
    "name": "レインボーライン",
    "ref": "",
    "highway": "tertiary",
@@ -3384,33 +3654,13 @@
    "end": [
     35.87274,
     138.407218
-   ]
-  },
-  {
-   "id": "山梨県:143",
-   "name": "フルーツライン（東山東部広域農道）",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 5.97,
-   "curviness": 137.3,
-   "flow": 13.2,
-   "turnCount": 62,
-   "score": 43.2,
-   "baseScore": 43.2,
-   "spotCount": 0,
-   "polyline": "_wvxEa}ymY}HAiKiDsEcHyAy@{AI_I~AwNuEaBn@}LrOmGfBgEi@_EwByFiAcMQcImAeKWgRz@aFlAcLiDg[cCmKjD_K~J{ErIeBdGeK|K}LzEsB|GeDvBcBrFcDlBcBnC",
-   "pointCount": 32,
-   "start": [
-    35.674881,
-    138.746567
    ],
-   "end": [
-    35.721402,
-    138.73552
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:144",
+   "id": "山梨県:136",
    "name": "韮崎南アルプス中央線",
    "ref": "12",
    "highway": "primary",
@@ -3430,10 +3680,13 @@
    "end": [
     35.590863,
     138.543976
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:145",
+   "id": "山梨県:137",
    "name": "下神内川石和温泉停車場線",
    "ref": "208;314",
    "highway": "secondary",
@@ -3453,10 +3706,13 @@
    "end": [
     35.662011,
     138.654131
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:146",
+   "id": "山梨県:138",
    "name": "甲州街道",
    "ref": "20",
    "highway": "trunk",
@@ -3476,10 +3732,13 @@
    "end": [
     35.602585,
     138.854726
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:147",
+   "id": "山梨県:139",
    "name": "雁坂みち",
    "ref": "140",
    "highway": "trunk",
@@ -3499,10 +3758,14 @@
    "end": [
     35.86141,
     138.763074
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
-   "id": "山梨県:148",
+   "id": "山梨県:140",
    "name": "御坂みち",
    "ref": "137",
    "highway": "trunk",
@@ -3522,10 +3785,13 @@
    "end": [
     35.646212,
     138.66439
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "山梨県:149",
+   "id": "山梨県:141",
    "name": "富士みち",
    "ref": "139",
    "highway": "trunk",
@@ -3545,8 +3811,209 @@
    "end": [
     35.60956,
     138.937466
+   ],
+   "tags": [
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:142",
+   "name": "甲州街道",
+   "ref": "20",
+   "highway": "trunk",
+   "lengthKm": 3.88,
+   "curviness": 147.7,
+   "flow": 15.5,
+   "turnCount": 37,
+   "score": 40.2,
+   "baseScore": 40.2,
+   "spotCount": 0,
+   "polyline": "w{hxEyglnYsD`H{@lLj@zTnCpKDdLe@lOj@|ReCtXmDbE]lBlBdg@fAxHApJlAvEnB~C`BpAjDp@n@jBs@dCuBx@aIeCyAA",
+   "pointCount": 23,
+   "start": [
+    35.603964,
+    138.840453
+   ],
+   "end": [
+    35.605324,
+    138.804562
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:143",
+   "name": "茅野北杜韮崎線",
+   "ref": "17",
+   "highway": "primary",
+   "lengthKm": 5.64,
+   "curviness": 106.3,
+   "flow": 13,
+   "turnCount": 46,
+   "score": 39.5,
+   "baseScore": 39.5,
+   "spotCount": 0,
+   "polyline": "ke}xE{|_lYyG`IsB|F_ChDwZt[yHzFkG`AgMwDyJDgDvAgK~HkTfF_NjPoDfC{M|Ty@~AQpGwAhDoApAeFtBkMfDcLtLw\\|g@eEtJ",
+   "pointCount": 24,
+   "start": [
+    35.707896,
+    138.449577
+   ],
+   "end": [
+    35.746455,
+    138.415242
+   ],
+   "tags": [
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:144",
+   "name": "国道52号",
+   "ref": "52",
+   "highway": "trunk",
+   "lengthKm": 4.43,
+   "curviness": 132.5,
+   "flow": 14.7,
+   "turnCount": 40,
+   "score": 38.8,
+   "baseScore": 38.8,
+   "spotCount": 0,
+   "polyline": "oydwE_`_lYrDv@lLnHpKfBvWxArFWbI|@hOTnAMxEeDvFt@fGkAxDVjHbEjFx@zGsD~ViAlE{CjAkF`BwBpOaF|Fb@~AWxRiM",
+   "pointCount": 24,
+   "start": [
+    35.41928,
+    138.444963
+   ],
+   "end": [
+    35.382421,
+    138.448696
+   ],
+   "tags": [
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:145",
+   "name": "清里ライン",
+   "ref": "141",
+   "highway": "trunk",
+   "lengthKm": 8.21,
+   "curviness": 126.1,
+   "flow": 13.6,
+   "turnCount": 76,
+   "score": 38.3,
+   "baseScore": 38.3,
+   "spotCount": 0,
+   "polyline": "wfzyEkf|kYuIhA_GNcBj@mFtEcGjDiTbFkTyAmJyB{FoDuJo@_HlCoGz@iGLeH`EsK|ByPk@_AgAKkAp@sBtQmFvE_DhGyBpDoDl@wBBsCeCwJCsFj@mEtDuB`AaB?qEuAqBkMa@}]XsWlAgIkDyIs@sJeCs[oCgJyC{DcCeGA}MsD",
+   "pointCount": 44,
+   "start": [
+    35.856604,
+    138.430618
+   ],
+   "end": [
+    35.905533,
+    138.444068
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
+   ]
+  },
+  {
+   "id": "山梨県:146",
+   "name": "甲斐芦安線",
+   "ref": "20",
+   "highway": "primary",
+   "lengthKm": 3.41,
+   "curviness": 72.7,
+   "flow": 14.6,
+   "turnCount": 17,
+   "score": 38,
+   "baseScore": 38,
+   "spotCount": 0,
+   "polyline": "_ttxEefklYfA~HeAdOlCne@u@bNTxJk@tEQ~Q|Ibp@}@vVqE`MbArX",
+   "pointCount": 12,
+   "start": [
+    35.664155,
+    138.507393
+   ],
+   "end": [
+    35.663184,
+    138.470614
+   ]
+  },
+  {
+   "id": "山梨県:147",
+   "name": "国道139号",
+   "ref": "139",
+   "highway": "trunk",
+   "lengthKm": 3.27,
+   "curviness": 116.3,
+   "flow": 14.6,
+   "turnCount": 26,
+   "score": 37.2,
+   "baseScore": 37.2,
+   "spotCount": 0,
+   "polyline": "orpwEsxhmYnAyBbA{ElEuCtA}A`@yBqCyOSqSVwScC}VJmB|BiHj@uEXyKoBwNdCk]yAkIuHaO",
+   "pointCount": 18,
+   "start": [
+    35.479597,
+    138.65882
+   ],
+   "end": [
+    35.479449,
+    138.692263
+   ]
+  },
+  {
+   "id": "山梨県:148",
+   "name": "国道52号",
+   "ref": "52",
+   "highway": "trunk",
+   "lengthKm": 3.86,
+   "curviness": 116.1,
+   "flow": 12.8,
+   "turnCount": 35,
+   "score": 35.8,
+   "baseScore": 35.8,
+   "spotCount": 0,
+   "polyline": "qpivEew_lY`E{@rIiEjFm@vD}CvE]vAm@pIeIvJcOvCyI`FmK~FgHvJoGhBgCfBsK`EwKtAoJ|@iAdKyGbAiB\\iCfAkPzDeFtHyG",
+   "pointCount": 24,
+   "start": [
+    35.279613,
+    138.448674
+   ],
+   "end": [
+    35.256646,
+    138.477071
+   ]
+  },
+  {
+   "id": "山梨県:149",
+   "name": "甲州街道",
+   "ref": "20;52",
+   "highway": "trunk",
+   "lengthKm": 4.18,
+   "curviness": 106.4,
+   "flow": 12.7,
+   "turnCount": 35,
+   "score": 35.3,
+   "baseScore": 35.3,
+   "spotCount": 0,
+   "polyline": "c_zxE_wclY~@kGS}TdA}HxCiGtSgZdDsGfDmP~CmWnBoH|DwFvN{JxA}CpBcJ`B_ChBcA~ViFxXiNtCyC",
+   "pointCount": 19,
+   "start": [
+    35.691538,
+    138.46912
+   ],
+   "end": [
+    35.669626,
+    138.501928
    ]
   }
  ],
- "hiddenCount": 2
+ "hiddenCount": 8
 }

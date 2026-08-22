@@ -23,7 +23,7 @@ const fs = require("fs");
 const express = require("express");
 const admin = require("firebase-admin");
 const { normalizeOverride, isEmptyOverride,
-        normalizeAdded, isValidAdded } = require("./lib/roadOverrides");
+        normalizeAdded, isValidAdded, reshape } = require("./lib/roadOverrides");
 const { execFile } = require("child_process");
 const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
@@ -321,6 +321,31 @@ app.get("/api/roads/overrides/:romaji", (req, res) => {
     const raw = JSON.parse(fs.readFileSync(file, "utf8"));
     res.json({ ...raw, overrides: raw.overrides || {}, added: raw.added || {} });
   } catch (e) { res.status(500).json({ error: e.message, overrides: {}, added: {} }); }
+});
+
+/**
+ * 手で直した形・足した道を、**生成と同じ式で測り直す**。
+ *
+ * ⚠️ **ブラウザ側で計算を書かないこと。** 点数の式は `lib/funSegments.js` にあり、
+ *    重みの調整でも動く。画面に写しを置くと、いずれ本物と食い違い、
+ *    「ツールでは62点、配信は48点」という状態になる。
+ * ⚠️ 形を直したのに距離・曲率・点数が元のままだと、
+ *    「直したのに変わらない」ように見える（実機で報告）。ここで測って画面に返す。
+ */
+app.post("/api/roads/measure", (req, res) => {
+  const items = (req.body && req.body.items) || [];
+  const results = {};
+  for (const item of items) {
+    if (!item || !item.key || !item.shape) continue;
+    const built = reshape({ name: "x", highway: item.highway || "secondary" }, item.shape);
+    // reshape は壊れた線だと元をそのまま返す。測れていないものは返さない
+    if (!built.reshaped) continue;
+    results[item.key] = {
+      lengthKm: built.lengthKm, curviness: built.curviness, flow: built.flow,
+      turnCount: built.turnCount, score: built.score,
+    };
+  }
+  res.json({ results });
 });
 
 app.put("/api/roads/overrides/:romaji", (req, res) => {

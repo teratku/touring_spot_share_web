@@ -166,7 +166,6 @@
       <button id="addRoad" title="生成データに無い道を、地図で2点をつないで足します">＋ 道を足す</button>
     </div>
     <div id="addPanel" style="display:none"></div>
-    <div id="addedList" style="display:none"></div>
     <div class="bar wrap">
       <button class="chip on" data-filter="all">すべて</button>
       <button class="chip" data-filter="curated">調整済み</button>
@@ -256,6 +255,10 @@ const state = {
   // ⚠️ overrides と混ぜないこと。あちらは「生成した道への調整」で、
   //    当たらなかったものは不具合として画面に出す。足した道は当たらなくて当たり前
   added: {}, addDraft: null,
+  // 手で直した形・足した道を、生成と同じ式で測り直した結果（鍵 → {lengthKm, curviness, flow, score}）
+  // ⚠️ 画面で計算しないこと。点数の式は `lib/funSegments.js` にあり、重みでも動く。
+  //    写しを置くと本物と食い違い「ツールでは62点、配信は48点」になる
+  measured: {},
   dirty: 0, map: null, lines: new Map(), weights: null, normalizers: null,
   classRank: null, tuning: null, defaults: null, filter: "all", visible: [],
   // 形を直すときの地図クリック待ちと、線の上に出す掴める点
@@ -323,7 +326,15 @@ function decodePolyline(encoded) {
   return points;
 }
 
-const ov = (seg) => state.overrides[overrideKey(seg)] || {};
+/**
+ * その道の調整。**足した道は `state.added` が本体**。
+ *
+ * ⚠️ 足した道の札や加算を `state.overrides` に書かないこと。生成側は
+ *    「生成した区間へ調整を当てる → 足した道を混ぜる」の順なので、
+ *    足した道に対する `overrides` はどこにも当たらず、黙って消える。
+ */
+const entryOf = (seg) => (seg && seg.added ? state.added : state.overrides)[overrideKey(seg)] || {};
+const ov = (seg) => entryOf(seg);
 /** 画面に出す線。手で直していればそちらを使う（一覧・地図・保存で必ずこれを通す） */
 const shapeOf = (seg) => ov(seg).shape || seg.polyline;
 /** 直した形のおおよその長さ（km）。表示用 */
@@ -338,7 +349,11 @@ function shapeLengthKm(encoded) {
   }
   return (m / 1000).toFixed(2);
 }
-const adjustedScore = (seg) => Math.max(0, Math.min(100, seg.score + (ov(seg).boost || 0)));
+// ⚠️ **測り直した点数に加算すること。** 生成側も「形を直してから加算」の順で計算する
+//    （`lib/roadOverrides.js` の applyOverrides）。順序が違うと画面と配信で点数がずれる。
+//    ⚠️ `metricsOf` より後に定義があると読めないので、参照は関数の中に置く
+const adjustedScore = (seg) =>
+  Math.max(0, Math.min(100, metricsOf(seg).score + (ov(seg).boost || 0)));
 const isCurated = (seg) => Object.keys(ov(seg)).length > 0;
 
 // ---------- 読み込み ----------
@@ -375,6 +390,9 @@ async function loadPrefecture(romaji) {
   state.overrides = o.overrides || {};
   // ⚠️ 読み込み忘れると、保存したときに足した道が消える
   state.added = o.added || {};
+  // ⚠️ 読み込みのたびに測り直すこと。控えが空のままだと、前に直した道の距離が
+  //    元の値で出る（画面を開き直すと直っていないように見える）
+  state.measured = {};
   cancelAddRoad();
   state.selected = null;
   clearEndMarkers();
@@ -383,6 +401,21 @@ async function loadPrefecture(romaji) {
   render();
   fitPrefecture();
   setStatus(`${state.prefName}`);
+
+  // 手直し済みの道をまとめて測り直す（1回の通信で済ませる）。
+  // ⚠️ 待たずに先へ進めること。数が多いと数百ミリ秒かかり、その間
+  //    画面が真っ白に見える。届いてから描き直す
+  const shaped = state.segments
+    .map((seg) => ({ seg, o: ov(seg) }))
+    .filter(({ o }) => o.shape)
+    .map(({ seg, o }) => ({ key: overrideKey(seg), shape: o.shape, highway: seg.highway }));
+  // ⚠️ 足した道も測ること。測れていないと一覧に「0km・0点」と並ぶ
+  const addedItems = Object.entries(state.added || {})
+    .map(([key, a]) => ({ key, shape: a.shape, highway: a.highway || "secondary" }));
+  const items = [...shaped, ...addedItems];
+  if (items.length) {
+    measureShapes(items).then(() => { render(); renderEditor(); });
+  }
 }
 
 /**
@@ -424,42 +457,76 @@ function setDirty(n) {
 const touch = () => setDirty(state.dirty + 1);
 
 // ---------- 一覧 ----------
+
 /**
- * 手で足した道の一覧。
+ * 手で直した形・足した道を、サーバで測り直して控える。
  *
- * ⚠️ **本体の一覧（`render`）に混ぜないこと。** 点数・曲率は生成のときに
- *    サーバ側で測り直す（`buildAddedSegment`）。ブラウザで同じ計算を書くと
- *    式が二重になり、いずれ食い違う。ここでは名前と長さだけ出す。
+ * ⚠️ 形を直したら必ず呼ぶこと。呼ばないと距離・曲率・点数が**元のまま**表示され、
+ *    「直したのに変わらない」ように見える（実機で報告）。
+ * ⚠️ 画面で計算しないこと。点数の式は `lib/funSegments.js` にあり重みでも動く。
+ *    写しを置くと本物と食い違い「ツールでは62点、配信は48点」になる。
  */
-function renderAddedList() {
-  const box = $("addedList");
-  if (!box) return;
-  const keys = Object.keys(state.added || {});
-  if (!keys.length) { box.style.display = "none"; box.innerHTML = ""; return; }
-  box.style.display = "";
-  box.innerHTML = `<div class="bar muted" style="font-size:11px">手で足した道 ${keys.length}本`
-    + `（点数は再生成のときに付きます）</div>`
-    + keys.map((k) => {
-        const a = state.added[k];
-        return `<div class="row"><span class="mark">＋</span>`
-          + `<span class="name">${escapeHtml(a.name)}</span>`
-          + `<span class="score">${shapeLengthKm(a.shape)}km</span>`
-          + `<button data-del="${escapeHtml(k)}" title="足した道を消す">×</button></div>`;
-      }).join("");
-  box.querySelectorAll("[data-del]").forEach((b) => {
-    b.onclick = () => {
-      const k = b.dataset.del;
-      if (!confirm(`「${state.added[k].name}」を消しますか？`)) return;
-      delete state.added[k];
-      touch(); render();
+async function measureShapes(items) {
+  const wanted = items.filter((i) => i.shape);
+  if (!wanted.length) return;
+  try {
+    const r = await (await fetch("/api/roads/measure", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: wanted }),
+    })).json();
+    Object.assign(state.measured, r.results || {});
+  } catch (e) {
+    // ⚠️ 測れなくても画面は動かす。ただし黙って元の値を出すので、その旨を出す
+    setStatus("測り直せませんでした（元の距離を出しています）: " + (e.message || e));
+  }
+}
+
+/** 手直し・追加を踏まえた、いま正しい数値。測り直せていなければ元の値 */
+function metricsOf(seg) {
+  const m = state.measured[overrideKey(seg)];
+  return m ? { ...seg, ...m } : seg;
+}
+
+/**
+ * 手で足した道を、一覧に出せる形にする。
+ *
+ * ⚠️ **距離・曲率・点数はここで計算しないこと。** サーバで測り直した控え
+ *    （`state.measured`）を使う。まだ測れていないものは 0 のまま出す
+ *    （測り終われば描き直される）。
+ * ⚠️ `id` は生成データと衝突しない形にする。地図の線や選択の照合に使う。
+ */
+function addedSegments() {
+  // ⚠️ **再生成したあとの二重表示を防ぐ。** 足した道は生成を回すと配信データに
+  //    混ざる（`applyOverrides`）ので、次にこの画面を開くと `state.segments` にも
+  //    同じ道が入っている。両方出すと一覧に2行並ぶ（実機で報告）。
+  //    生成側と同じ規則（同じ鍵があるなら足さない）で揃える。
+  const existing = new Set(state.segments.map((s) => overrideKey(s)));
+  return Object.entries(state.added || {})
+    .filter(([key]) => !existing.has(key))
+    .map(([key, a]) => {
+    const pts = decodePolyline(a.shape);
+    const m = state.measured[key] || {};
+    return {
+      id: "added:" + key,
+      name: a.name, ref: "", highway: a.highway || "secondary",
+      polyline: a.shape, pointCount: pts.length,
+      start: [pts[0].lat, pts[0].lng],
+      end: [pts[pts.length - 1].lat, pts[pts.length - 1].lng],
+      lengthKm: m.lengthKm ?? 0, curviness: m.curviness ?? 0,
+      flow: m.flow ?? 0, turnCount: m.turnCount ?? 0,
+      score: m.score ?? 0, baseScore: m.score ?? 0,
+      // ⚠️ この印で `entryOf` の行き先が変わる。外すと調整が `overrides` に入り、配信で消える
+      added: true,
     };
   });
 }
 
 function render() {
-  renderAddedList();
   const q = $("q").value.trim();
-  let list = state.segments.map((s) => ({ seg: s, o: ov(s), score: adjustedScore(s) }));
+  // ⚠️ 足した道も同じ一覧に出す。別枠にしていたが、点数で並べて比べられないと
+  //    「足したけど使いものになるのか」が分からない（実機で要望）
+  let list = [...state.segments, ...addedSegments()]
+    .map((s) => ({ seg: s, o: ov(s), score: adjustedScore(s) }));
 
   if (state.filter === "curated") list = list.filter((r) => isCurated(r.seg));
   else if (state.filter === "hidden") list = list.filter((r) => r.o.hidden);
@@ -502,7 +569,7 @@ function render() {
       `<span class="rank">${i + 1}</span>` +
       `<span class="name">${escapeHtml(r.o.title || r.seg.name)}</span>` +
       `<span class="mark">${bannedMark}${verdictMark}${marks.join("")}</span>` +
-      `<span class="sub">${r.seg.lengthKm.toFixed(0)}km</span>` +
+      `<span class="sub">${metricsOf(r.seg).lengthKm.toFixed(0)}km</span>` +
       `<span class="score">${r.score.toFixed(1)}</span>`;
     div.onclick = () => select(r.seg);
     rows.appendChild(div);
@@ -764,6 +831,10 @@ function clearEndMarkers() {
 function setShape(seg, encoded) {
   const key = overrideKey(seg);
   state.overrides[key] = { ...(state.overrides[key] || {}), shape: encoded };
+  // ⚠️ 測り直してから描き直すこと。忘れると距離・曲率・点数が元のまま出て
+  //    「直したのに変わらない」ように見える（実機で報告）
+  measureShapes([{ key, shape: encoded, highway: seg.highway }])
+    .then(() => { render(); renderEditor(); });
   touch();
   drawAll();
   // ⚠️ 端が動いたので印も付け直す。放っておくと前の端に印が残り、
@@ -1069,6 +1140,9 @@ function commitAddRoad() {
   if (state.added[key]) { setStatus("同じ名前・同じ場所の道が既にあります"); return; }
   state.added[key] = { name, highway: d.highway || "secondary", shape: d.shape, tags: [], boost: 0 };
   cancelAddRoad();
+  // ⚠️ 測ってから描き直す。忘れると一覧に「0km・0点」で並ぶ
+  measureShapes([{ key, shape: state.added[key].shape, highway: state.added[key].highway }])
+    .then(() => { render(); renderEditor(); });
   touch();
   setStatus(`「${name}」を足しました。保存してから再生成すると配信に入ります`);
   render();
@@ -1251,8 +1325,10 @@ function renderEditor() {
     <h3>${escapeHtml(o.title || seg.name)}</h3>
     <div class="stats">
       ${o.title ? escapeHtml(seg.name) + "<br>" : ""}
-      ${seg.lengthKm.toFixed(1)}km ・ 曲率${seg.curviness.toFixed(0)} ・ flow${seg.flow.toFixed(1)} ・ ${seg.highway}<br>
-      素点 ${seg.score.toFixed(1)}${o.boost ? ` → <strong>${adjustedScore(seg).toFixed(1)}</strong>` : ""}
+      ${(() => { const m = metricsOf(seg); const changed = m !== seg;
+         return `${m.lengthKm.toFixed(1)}km ・ 曲率${m.curviness.toFixed(0)} ・ flow${m.flow.toFixed(1)} ・ ${seg.highway}`
+           + (changed ? ' <span class="muted">（手直し後の実測）</span>' : ""); })()}<br>
+      素点 ${metricsOf(seg).score.toFixed(1)}${o.boost ? ` → <strong>${adjustedScore(seg).toFixed(1)}</strong>` : ""}
     </div>
 
     <label>ストリートビュー</label>
@@ -1329,7 +1405,12 @@ function renderEditor() {
   $("e-extend-tail").onclick = () => beginExtend(seg, "tail");
   $("e-shape-reset").onclick = () => {
     const key = overrideKey(seg);
-    if (state.overrides[key]) { delete state.overrides[key].shape; touch(); }
+    if (state.overrides[key]) {
+      delete state.overrides[key].shape;
+      // ⚠️ 控えを消さないと、元に戻したのに手直し後の距離が出たままになる
+      delete state.measured[key];
+      touch();
+    }
     drawAll(); render(); renderEditor();
   };
 
@@ -1366,22 +1447,44 @@ function renderEditor() {
   $("e-next").onclick = () => move(1);
 }
 
+/**
+ * 調整のうち、何も指定していない状態か。
+ *
+ * ⚠️ **`shape`（手で直した形）を必ず見ること。** サーバ側の `isEmptyOverride`
+ *    （`lib/roadOverrides.js`）も同じ条件で見ている。ここだけ抜けていると、
+ *    形だけ直した道が「空の調整」とみなされて消える。
+ */
+function isEmptyEdit(o) {
+  return !o.hidden && !o.boost && !o.title && !o.note
+         && !(o.tags || []).length && !o.shape;
+}
+
 /** 編集パネルの内容を state に反映（保存はしない） */
 function apply() {
   const seg = state.selected;
   if (!seg) return;
   const preset = [...document.querySelectorAll("#e-tags .chip.on")].map((b) => b.dataset.tag);
   const free = $("e-tags-free").value.split(",").map((t) => t.trim()).filter(Boolean);
+  const key = overrideKey(seg);
+  // ⚠️ 足した道は `state.added` が本体（`entryOf`）。ここを間違えると、
+  //    札や加算が `overrides` に入って配信でどこにも当たらない
+  const home = seg.added ? state.added : state.overrides;
   const next = {
+    // ⚠️ **この欄が扱っていない項目を落とさないこと。** 以前はここで作り直していたため、
+    //    形を直したあとに札や表示名を触ると `shape` が黙って消えていた
+    //    （実機で「保存できているときとできていない時がある」として報告。
+    //      形だけ直したときは残り、そのあと他の欄を触ると消える、という違いだった）。
+    ...(home[key] || {}),
     hidden: $("e-hidden").classList.contains("on"),
     boost: Number($("e-boost").value) || 0,
     title: $("e-title").value.trim() || null,
     note: $("e-note").value.trim() || null,
     tags: [...new Set([...preset, ...free])],
   };
-  const key = overrideKey(seg);
-  if (!next.hidden && !next.boost && !next.title && !next.note && !next.tags.length) delete state.overrides[key];
-  else state.overrides[key] = next;
+  // ⚠️ 足した道は「空だから消す」をしないこと。名前と形が本体なので、
+  //    札を外しただけで道そのものが消える
+  if (!seg.added && isEmptyEdit(next)) delete state.overrides[key];
+  else home[key] = next;
   touch();
   render();
   renderEditor();
