@@ -264,6 +264,8 @@ const state = {
   // ⚠️ 全部の道に点を出さないこと。1本40点×500本＝2万個の印で地図が固まる。
   //    クリックした1本にだけ出す
   csvPicked: null, csvPointMarkers: [], csvPickFrom: null,
+  // 足した道の区間もどきの控え（`addedSegments`）。同じ物を返すために持つ
+  addedCache: [], addedSig: null,
   // 手で直した形・足した道を、生成と同じ式で測り直した結果（鍵 → {lengthKm, curviness, flow, score}）
   // ⚠️ 画面で計算しないこと。点数の式は `lib/funSegments.js` にあり、重みでも動く。
   //    写しを置くと本物と食い違い「ツールでは62点、配信は48点」になる
@@ -505,12 +507,20 @@ function metricsOf(seg) {
  * ⚠️ `id` は生成データと衝突しない形にする。地図の線や選択の照合に使う。
  */
 function addedSegments() {
+  // ⚠️ **毎回作り直さないこと。** 選択の判定（`state.selected === seg`）や
+  //    一覧の位置（`state.visible.indexOf(seg)`）は**同じ物かどうか**で見ている。
+  //    呼ぶたびに新しい物を返すと、地図の線をクリックしても選ばれず、
+  //    選んでも色が変わらない（実機で確認）。中身が変わったときだけ作り直す。
+  const sig = JSON.stringify(Object.entries(state.added || {}).map(([k, a]) =>
+    [k, a.name, a.highway, a.shape, state.measured[k] || null]));
+  if (state.addedSig === sig) return state.addedCache;
+
   // ⚠️ **再生成したあとの二重表示を防ぐ。** 足した道は生成を回すと配信データに
   //    混ざる（`applyOverrides`）ので、次にこの画面を開くと `state.segments` にも
   //    同じ道が入っている。両方出すと一覧に2行並ぶ（実機で報告）。
   //    生成側と同じ規則（同じ鍵があるなら足さない）で揃える。
   const existing = new Set(state.segments.map((s) => overrideKey(s)));
-  return Object.entries(state.added || {})
+  const built = Object.entries(state.added || {})
     .filter(([key]) => !existing.has(key))
     .map(([key, a]) => {
     const pts = decodePolyline(a.shape);
@@ -528,6 +538,9 @@ function addedSegments() {
       added: true,
     };
   });
+  state.addedSig = sig;
+  state.addedCache = built;
+  return built;
 }
 
 function render() {
@@ -612,6 +625,9 @@ function escapeHtml(s) {
 
 // ---------- 選択 ----------
 function select(seg, { pan = true } = {}) {
+  // ⚠️ 呼び出し元が「足した道を探して渡す」形なので、見つからないことがある。
+  //    そのまま進むと `drawEndMarkers` で落ちる
+  if (!seg) return;
   // ⚠️ 前の道で出した点と待ち受けを必ず片付ける。残すと地図に散らかり、
   //    別の道の線を切り詰めようとして前の道の点を掴んでしまう
   if (state.shapeListener) { google.maps.event.removeListener(state.shapeListener); state.shapeListener = null; }
@@ -645,28 +661,45 @@ function initMap() {
 window.initMap = initMap;
 
 /** 全区間の線を1度だけ作る。選択のたびに作り直すと地図がちらつく */
+/**
+ * 地図と一覧に出す道の全部（生成した道＋手で足した道）。
+ *
+ * ⚠️ **`state.segments` だけを見ないこと。** 手で足した道はそこに入っていないので、
+ *    一覧には出るのに**地図に線が出ない**（実機で報告）。
+ *    描く・塗り直す・範囲を合わせる、のどれもここを通す。
+ */
+function allSegments() {
+  return [...state.segments, ...addedSegments()];
+}
+
 function drawAll() {
   state.lines.forEach((l) => l.setMap(null));
   state.lines.clear();
-  for (const seg of state.segments) {
+  for (const seg of allSegments()) {
     const line = new google.maps.Polyline({
       // ⚠️ 手で直した形があればそちら。元の線のままだと、切り詰めたのに
       //    地図では元の長さのまま見え、直したつもりで直っていない
       path: decodePolyline(shapeOf(seg)), map: state.map,
       strokeColor: "#00a8c6", strokeOpacity: 0.7, strokeWeight: 4,
     });
-    line.addListener("click", () => select(seg, { pan: false }));
-    state.lines.set(seg.id, line);
+    // ⚠️ **`seg` を握らないこと。** 足した道の区間もどきは、測り直しが届いた時点で
+    //    作り直される（`addedSegments`）。描いた時点の物を握ると、
+    //    クリックしても「いまの物」と一致せず選ばれない（実機で確認）。
+    //    id は変わらないので、押されたときに引き直す。
+    const id = seg.id;
+    line.addListener("click", () => select(allSegments().find((x) => x.id === id), { pan: false }));
+    state.lines.set(id, line);
   }
 }
 
 /** 色だけ塗り替える（作り直さない） */
 function restyleLines() {
-  for (const seg of state.segments) {
+  for (const seg of allSegments()) {
     const line = state.lines.get(seg.id);
     if (!line) continue;
     const o = ov(seg);
-    const selected = state.selected === seg;
+    // ⚠️ 同じ物かではなく id で見る。作り直しをまたいでも色が合う
+    const selected = !!state.selected && state.selected.id === seg.id;
     line.setOptions({
       strokeColor: selected ? "#e8590c" : o.hidden ? "#adb5bd" : o.boost ? "#2b8a3e" : "#00a8c6",
       strokeOpacity: selected ? 1 : o.hidden ? 0.35 : 0.7,
@@ -1479,12 +1512,17 @@ function commitAddRoad() {
   if (state.added[key]) { setStatus("同じ名前・同じ場所の道が既にあります"); return; }
   state.added[key] = { name, highway: d.highway || "secondary", shape: d.shape, tags: [], boost: 0 };
   cancelAddRoad();
+  // ⚠️ **地図にも描き直すこと。** 一覧だけ描き直すと、足した道が地図に出ない
+  //    （実機で報告）。線は `drawAll` が `allSegments()` から作る
+  drawAll();
   // ⚠️ 測ってから描き直す。忘れると一覧に「0km・0点」で並ぶ
   measureShapes([{ key, shape: state.added[key].shape, highway: state.added[key].highway }])
     .then(() => { render(); renderEditor(); });
   touch();
   setStatus(`「${name}」を足しました。保存してから再生成すると配信に入ります`);
   render();
+  // 足した道が見えるところまで寄せる
+  select(addedSegments().find((seg) => overrideKey(seg) === key));
 }
 
 // ---------- ストリートビュー ----------
@@ -3558,6 +3596,6 @@ window.onbeforeunload = () => {
   return undefined;
 };
 </script>
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24&callback=initMap"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>
 </body>
 </html>

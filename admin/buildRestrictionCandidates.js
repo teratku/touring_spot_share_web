@@ -27,7 +27,9 @@ const args = process.argv.slice(2);
 const argVal = (n) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
 const ONLY = argVal("--prefecture");
 const ALL = args.includes("--all");
-const API_KEY = process.env.GOOGLE_MAPS_API_KEY || "AIzaSyASDL3J6KQSn7uxxgRcuH0gYAYrYWE9I24";
+// ⚠️ **サーバー用のキーを使うこと。** ブラウザ用はウェブサイト制限が効いて
+// Node からは弾かれる（リファラーが無いため）
+const { SERVER_KEY: API_KEY } = require("./lib/mapsKey");
 const SRC_DIR = path.join(__dirname, "data", "restriction-source");
 const OUT_DIR = path.join(__dirname, "data", "restriction-candidates");
 const GRID_DIR = path.join(os.homedir(), "Documents", "grid_csvs_japan_empty");

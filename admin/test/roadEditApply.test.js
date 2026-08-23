@@ -211,3 +211,41 @@ test("切り出したときは元の道の長さを出さない", () => {
   assert.ok(/shapeLengthKm\(road\.polyline\)/.test(src[0]),
             "元データの lengthMeters をそのまま出している");
 });
+
+// MARK: 手で足した道を地図にも描く
+
+test("地図に描く対象に、手で足した道が入っている", () => {
+  // ⚠️ **これが報告された不具合。** `state.segments` だけを見ていたので、
+  //    一覧には出るのに地図に線が出なかった
+  const draw = html.match(/function drawAll\(\) \{[\s\S]*?\n\}/);
+  const restyle = html.match(/function restyleLines\(\) \{[\s\S]*?\n\}/);
+  assert.ok(draw && restyle, "drawAll / restyleLines を取り出せない");
+  // ⚠️ **繰り返しの対象**を見ること。`drawAll` の中にはクリック時の
+  //    `allSegments().find(...)` もあるので、単に含まれるかだけ見ると
+  //    繰り返しを `state.segments` に戻しても気付けない（実際に見逃した）
+  assert.ok(/for \(const seg of allSegments\(\)\)/.test(draw[0]),
+            "地図の繰り返しが足した道を含んでいない:\n" + draw[0].slice(0, 200));
+  assert.ok(/for \(const seg of allSegments\(\)\)/.test(restyle[0]),
+            "塗り直しの繰り返しが足した道を含んでいない");
+
+  const all = html.match(/function allSegments\(\) \{[\s\S]*?\n\}/);
+  assert.ok(all, "allSegments を取り出せない");
+  assert.ok(/addedSegments\(\)/.test(all[0]), "足した道を混ぜていない");
+});
+
+test("足した道の区間もどきは作り直さない", () => {
+  // ⚠️ 呼ぶたびに新しい物を返すと、選択の判定（`===`）も一覧の位置も合わなくなり、
+  //    **選んでも色が変わらない・線をクリックしても選ばれない**（実機で確認）
+  const src = html.match(/function addedSegments\(\) \{[\s\S]*?\n  return built;\n\}/);
+  assert.ok(src, "addedSegments を取り出せない");
+  assert.ok(/state\.addedSig === sig/.test(src[0]), "控えを使っていない（毎回作り直す）");
+  assert.ok(/state\.addedCache = built/.test(src[0]), "控えに残していない");
+});
+
+test("線のクリックは id で引き直す", () => {
+  // ⚠️ 描いた時点の物を握ると、測り直しが届いて作り直されたあとに一致しなくなる。
+  //    id は変わらないので、押されたときに引く
+  const src = html.match(/function drawAll\(\) \{[\s\S]*?\n\}/);
+  assert.ok(/allSegments\(\)\.find\(\(x\) => x\.id === id\)/.test(src[0]),
+            "クリック時に引き直していない（作り直しで選べなくなる）:\n" + src[0]);
+});

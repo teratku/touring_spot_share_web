@@ -21,6 +21,7 @@
 const path = require("path");
 const fs = require("fs");
 const express = require("express");
+const { HTML_PLACEHOLDERS } = require("./lib/mapsKey");
 const admin = require("firebase-admin");
 const { normalizeOverride, isEmptyOverride,
         normalizeAdded, isValidAdded, reshape } = require("./lib/roadOverrides");
@@ -54,9 +55,30 @@ const db = admin.firestore();
 
 const app = express();
 app.use(express.json({ limit: "8mb" }));
+
+/**
+ * HTML を返すときに、Google Maps のキーを差し込む。
+ *
+ * ⚠️ **`express.static` より前に置くこと。** 後ろに置くと static が先に素の HTML を返し、
+ *    目印（`__GOOGLE_MAPS_API_KEY__`）がそのまま画面に出て地図が動かない。
+ * ⚠️ キーの実体は `lib/mapsKey.js` にしかない。HTML に直書きしないこと
+ *    （直書きすると、キーを差し替えてもそこだけ古いまま残る）。
+ */
+function sendHtml(res, file) {
+  let html;
+  try { html = fs.readFileSync(path.join(__dirname, "public", file), "utf8"); }
+  catch (e) { return res.status(404).send("見つかりません: " + file); }
+  for (const [placeholder, value] of Object.entries(HTML_PLACEHOLDERS)) {
+    html = html.split(placeholder).join(value);
+  }
+  res.type("html").send(html);
+}
+
+// ⚠️ .html への直アクセスもここで受ける。static に任せると差し込みが効かない
+app.get(/^\/[\w-]+\.html$/, (req, res) => sendHtml(res, path.basename(req.path)));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (_req, res) => res.sendFile(path.join(__dirname, "public", "rally-builder.html")));
+app.get("/", (_req, res) => sendHtml(res, "rally-builder.html"));
 
 // アプリ保存スポット（imagedownload）を地図用に整形して返す。
 // 読取コスト削減：1週間メモリキャッシュ。?refresh=1 で createTimeTimeStamp による「新着のみ」差分取得して追記。
@@ -193,7 +215,7 @@ app.get("/api/prefectures", (_req, res) => {
 
 const roadDir = (kind) => path.join(__dirname, "data", kind);
 
-app.get("/roads", (_req, res) => res.sendFile(path.join(__dirname, "public", "road-builder.html")));
+app.get("/roads", (_req, res) => sendHtml(res, "road-builder.html"));
 
 /** 県の一覧（生成済みかどうか・調整の件数つき） */
 app.get("/api/roads/prefectures", (_req, res) => {
