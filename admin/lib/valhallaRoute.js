@@ -69,11 +69,49 @@ const MANEUVER = {
   28: "ferry", 29: "ferry",
 };
 
-//: 案の作り分け。**遠回りを作るのは経由地で、ここの重みではない**（実測で確認済み）
+/**
+ * 案の作り分け。**遠回りを作るのは経由地で、ここの重みではない**（実測で確認済み）。
+ *
+ * ⚠️ **原付とバイクで効く設定が違う。** `use_primary` は motor_scooter 専用で、
+ *    motorcycle には**まったく効かない**。それに気づかず同じ設定を渡していたため、
+ *    バイクの「楽しい」が **77.8km 中 66.5km を高速道路**（関越道・圏央道・中央道）で
+ *    走る経路になっていた。
+ *
+ * 【バイクで効いた設定（実測・新座→愛川）】
+ *     既定             77.8km 高速66.5km 曲率 57度
+ *     use_highways 0   51.7km 高速 0.0km 曲率128度  ← これだけ
+ *
+ * ⚠️ **効かない設定を足さないこと。** 次はどれも経路を1mも変えなかった:
+ *    `use_primary` / `use_living_streets` / `use_tracks` / `use_trails` /
+ *    `service_penalty` / `maneuver_penalty` / `use_tolls`（6区間で確認）。
+ *
+ * ⚠️ **`top_speed` は入れない。** 1件で曲率128→149と出たので入れかけたが、
+ *    6区間で測り直したら**4件で悪化か横ばい**だった（高崎→草津 423→317、
+ *    福岡→阿蘇 149→142）。しかも所要時間はどこでも増える。1件で決めないこと。
+ *
+ * ⚠️ つまり**バイクには道の良し悪しを選ぶつまみが無い。**「楽しい」と「ふつう」の
+ *    違いは高速に乗るかどうかだけになる。楽しさは**経由地**で作る。
+ *
+ * ⚠️ **「ふつう」で高速を外さないこと。** アプリの `avoidHighways` の既定は false で、
+ *    126cc以上は高速に乗れる。「ふつう＝いちばん速い道」を保つ。
+ *    外すのは「楽しい」だけ（高速から景色は楽しめない）。
+ */
 const VARIANTS = {
-  shortest: { label: "最短", options: { use_primary: 0.9, shortest: true } },
-  normal:   { label: "ふつう", options: {} },
-  fun:      { label: "楽しい", options: { use_primary: 0.05 } },
+  shortest: {
+    label: "最短",
+    motor_scooter: { use_primary: 0.9, shortest: true },
+    motorcycle:    { shortest: true },
+  },
+  normal: {
+    label: "ふつう",
+    motor_scooter: {},
+    motorcycle:    {},
+  },
+  fun: {
+    label: "楽しい",
+    motor_scooter: { use_primary: 0.05 },
+    motorcycle:    { use_highways: 0 },
+  },
 };
 
 /**
@@ -88,6 +126,8 @@ const VARIANTS = {
 async function routeWithValhalla(from, to, opts = {}) {
   const variant = VARIANTS[opts.variant] || VARIANTS.normal;
   const costing = opts.costing || "motor_scooter";
+  // ⚠️ costing ごとの設定を選ぶ。無ければ空（既定のまま）
+  const variantOptions = variant[costing] || {};
   const locations = [
     { lat: from[1], lon: from[0] },
     ...(opts.vias || []).map((p) => ({ lat: p[1], lon: p[0], type: "through" })),
@@ -98,7 +138,7 @@ async function routeWithValhalla(from, to, opts = {}) {
     costing,
     units: "kilometers",
     language: "ja-JP",
-    costing_options: { [costing]: variant.options },
+    costing_options: { [costing]: variantOptions },
   };
   if (opts.excludePolygons && opts.excludePolygons.length) {
     body.exclude_polygons = opts.excludePolygons;

@@ -137,7 +137,8 @@
       </div>
       <p class="hint">両端のあいだに掛かる<strong>県を全部まとめて</strong>見て、
         点数の高い道から予算に収まるぶんだけ通す。<strong>たっぷり／ひかえめ／別ルートの
-        3通り</strong>を出す。<br>⚠️ 最短・ふつうには入れない。</p>
+        3通り</strong>を出す。<br>⚠️ 最短・ふつうには入れない。
+        <br>⚠️ <strong>引いてみてUターンした道は外す</strong>（外したぶんは別の道で埋め直す）。</p>
       <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
         <select id="pref"><option value="">県を選んで手で足す…</option></select>
         <select id="road" disabled><option value="">道を選ぶ…</option></select>
@@ -392,15 +393,31 @@ function renderPicked() {
   const list = document.getElementById("pickedList");
   const note = document.getElementById("pickedNote");
   const r = state.results[state.selected];
-  if (!r || r.error || !r.funRoads || !r.funRoads.length) { box.hidden = true; return; }
+  // ⚠️ **おすすめ道路が0本の案では、欄ごと隠すこと。**
+  //    隠し忘れて、最短を選んでいるのに前の案の道が残って見えた。
+  //    `hidden` を戻すだけでなく、中身も消す
+  if (!r || r.error || !r.funRoads || !r.funRoads.length) {
+    box.hidden = true;
+    list.innerHTML = "";
+    note.textContent = "";
+    return;
+  }
   box.hidden = false;
   list.innerHTML = r.funRoads.map((f, i) =>
     `<div class="pt"><span class="tag">${i + 1}本目</span>`
     + `<span class="val">${escapeHtml(f.name)}　`
     + `${f.lengthKm.toFixed(1)}km・${Math.round(f.score)}点・曲率${Math.round(f.curviness)}</span></div>`).join("");
   const p = r.funPick || {};
-  const dropped = (p.uTurnOnly || []).length
-    ? `　Uターンでしか通れず諦めた: ${escapeHtml(p.uTurnOnly.join("・"))}` : "";
+  const notes = [];
+  if ((p.uTurnOnly || []).length) {
+    notes.push(`選ぶ前に外した（大きく戻る）: ${escapeHtml(p.uTurnOnly.join("・"))}`);
+  }
+  if ((p.uTurnDropped || []).length) {
+    // ⚠️ 実際に引いてみてUターンしたので外した道。選ぶ側では見えない
+    notes.push(`引いてから外した（Uターンした）: ${escapeHtml(p.uTurnDropped.join("・"))}`);
+  }
+  if (p.refilled) notes.push("外したぶんは別の道で埋め直した");
+  const dropped = notes.length ? "<br>⚠️ " + notes.join("<br>⚠️ ") : "";
   const prefs = (p.prefectures || []).length
     ? `${p.prefectures.length}県（${escapeHtml(p.prefectures.join(" "))}）の` : "";
   note.innerHTML = `${prefs}候補${p.considered}本から。`

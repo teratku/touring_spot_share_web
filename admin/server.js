@@ -33,6 +33,7 @@ const { routeBetween } = require("./lib/roadRoute");
 const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
 const { buildFunVariants } = require("./lib/funRouteSelect");
 const { segmentsBetween } = require("./lib/roadRecommendIndex");
+const { dropUTurnRoads } = require("./lib/funRouteRefine");
 const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
 const { midFrom, kmlUrl, parseKml } = require("./lib/myMapsKml");
@@ -579,15 +580,28 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       { count: funCount || 4, budgetRatio, maxVariants: maxVariants || 3 });
 
     const routes = [];
+    const seen = new Set();
     for (const pick of picks) {
       // ⚠️ 手で置いた経由地は残す。自動で選んだぶんの前に置く
-      const allVias = (Array.isArray(vias) ? vias.slice() : []).concat(pick.waypoints);
-      const r = await routeWithValhalla(from, to,
-        { vias: allVias, variant: "fun", costing, excludePolygons });
-      if (r.error) continue;
+      const handVias = Array.isArray(vias) ? vias.slice() : [];
+      const routeFn = (autoVias) => routeWithValhalla(from, to,
+        { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons });
+
+      // ⚠️ **実際に引いてから、Uターンを起こす道を外す。**
+      //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）
+      const refined = await dropUTurnRoads(pick.segments, from, to, routeFn,
+        { pool: near.segments, pickOptions: pick.pickOptions });
+      const r = refined.route;
+      if (!r || r.error) continue;
+
+      // ⚠️ 外した結果、別の案と同じ顔ぶれになることがある。同じものを並べない
+      const key = refined.segments.map((s) => s.id).sort().join("|");
+      if (seen.has(key)) continue;
+      seen.add(key);
+
       r.kind = pick.kind;
       r.variantLabel = pick.label;
-      r.funRoads = pick.segments.map((s) => ({
+      r.funRoads = refined.segments.map((s) => ({
         id: s.id, name: s.name, lengthKm: s.lengthKm,
         score: s.score, curviness: s.curviness, start: s.start, end: s.end,
       }));
@@ -598,6 +612,9 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
         baselineMeters: pick.baselineMeters,
         detourRatio: pick.detourRatio,
         uTurnOnly: pick.uTurnOnly,
+        // Uターンを起こしたので外した道
+        uTurnDropped: refined.dropped.map((s) => s.name),
+        routeCalls: refined.calls,
       };
       routes.push(r);
     }

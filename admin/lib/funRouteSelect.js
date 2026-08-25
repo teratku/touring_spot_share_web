@@ -415,7 +415,8 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
   const generous = selectFunRoads(origin, destination, segments,
     { count, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
   if (!generous || !generous.segments.length) return out;
-  out.push({ kind: "generous", label: "たっぷり", ...generous });
+  const generousOpts = { count, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO };
+  out.push({ kind: "generous", label: "たっぷり", pickOptions: generousOpts, ...generous });
   if (maxVariants < 2) return out;
 
   // ひかえめ: 予算だけ絞る。
@@ -425,7 +426,8 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
     { count, budgetRatio: modestBudget });
   if (modest && modest.segments.length
       && overlapRatio(modest.segments, generous.segments) < 1) {
-    out.push({ kind: "modest", label: "ひかえめ", ...modest });
+    out.push({ kind: "modest", label: "ひかえめ",
+               pickOptions: { count, budgetRatio: modestBudget }, ...modest });
   }
   if (out.length >= maxVariants) return out;
 
@@ -437,7 +439,9 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
     { count, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
   if (alternate && alternate.segments.length
       && out.every((v) => overlapRatio(v.segments, alternate.segments) < MAX_VARIANT_OVERLAP)) {
-    out.push({ kind: "alternate", label: "別ルート", ...alternate });
+    // ⚠️ 別ルートは「たっぷりの上位2本を外す」のが持ち味。選び直すときも外し続ける
+    out.push({ kind: "alternate", label: "別ルート",
+               pickOptions: { ...generousOpts, excludeIds: [...topIds] }, ...alternate });
   }
   if (out.length >= maxVariants) return out;
 
@@ -457,7 +461,10 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
       corridorScale: WIDE_CORRIDOR_SCALE });
   if (wide && wide.segments.length
       && wide.segments.some((c) => !out.some((v) => v.segments.some((s) => s.id === c.id)))) {
-    out.push({ kind: "wide", label: "もっと寄り道", ...wide });
+    out.push({ kind: "wide", label: "もっと寄り道",
+               pickOptions: { count, corridorScale: WIDE_CORRIDOR_SCALE,
+                              budgetRatio: Math.max(WIDE_BUDGET_RATIO, opts.budgetRatio ?? 0) },
+               ...wide });
   }
   return out;
 }

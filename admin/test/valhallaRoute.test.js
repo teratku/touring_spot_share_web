@@ -115,15 +115,57 @@ test("左右を取り違えない", () => {
 
 test("案は3通りで、最短だけ shortest が立つ", () => {
   assert.deepStrictEqual(Object.keys(VARIANTS), ["shortest", "normal", "fun"]);
-  assert.strictEqual(VARIANTS.shortest.options.shortest, true);
-  assert.ok(!VARIANTS.normal.options.shortest, "ふつうに shortest が立っている");
-  assert.ok(!VARIANTS.fun.options.shortest, "楽しいに shortest が立っている");
+  for (const costing of ["motor_scooter", "motorcycle"]) {
+    assert.strictEqual(VARIANTS.shortest[costing].shortest, true,
+      `${costing} の最短に shortest が立っていない`);
+    assert.ok(!VARIANTS.normal[costing].shortest, `${costing} のふつうに shortest が立っている`);
+    assert.ok(!VARIANTS.fun[costing].shortest, `${costing} の楽しいに shortest が立っている`);
+  }
 });
 
-test("楽しい案は幹線を避ける向きの値になっている", () => {
+test("原付とバイクで設定を分けている", () => {
+  // ⚠️ **同じ設定を渡していて、バイクの「楽しい」が高速道路を66.5km走っていた。**
+  //    `use_primary` は motor_scooter 専用でバイクには効かない
+  for (const v of Object.values(VARIANTS)) {
+    assert.ok(v.motor_scooter, `${v.label} に motor_scooter の設定が無い`);
+    assert.ok(v.motorcycle, `${v.label} に motorcycle の設定が無い`);
+  }
+});
+
+test("楽しい案は幹線を避ける向きの値になっている（原付）", () => {
   // ⚠️ 実測では差は小さい（遠回り+7%）。遠回りを作るのは経由地の方。
   //    それでも向きが逆だと「楽しい」が最短寄りになる
-  assert.ok(VARIANTS.fun.options.use_primary < VARIANTS.shortest.options.use_primary,
-    `楽しい(${VARIANTS.fun.options.use_primary}) が `
-    + `最短(${VARIANTS.shortest.options.use_primary}) より幹線寄りになっている`);
+  const fun = VARIANTS.fun.motor_scooter.use_primary;
+  const short = VARIANTS.shortest.motor_scooter.use_primary;
+  assert.ok(fun < short, `楽しい(${fun}) が 最短(${short}) より幹線寄りになっている`);
+});
+
+test("バイクの楽しい案は高速を外す", () => {
+  // ⚠️ **これが無いと高速道路を走る。** 実測（新座→愛川）:
+  //      既定           77.8km うち高速66.5km 曲率57度
+  //      use_highways 0 51.7km うち高速 0.0km 曲率128度
+  assert.strictEqual(VARIANTS.fun.motorcycle.use_highways, 0,
+    "バイクの楽しい案で高速を外していない");
+});
+
+test("ふつうは高速を外さない", () => {
+  // ⚠️ アプリの avoidHighways の既定は false で、126cc以上は高速に乗れる。
+  //    「ふつう＝いちばん速い道」を保つ。外すのは「楽しい」だけ
+  assert.strictEqual(VARIANTS.normal.motorcycle.use_highways, undefined,
+    "ふつうで高速を外している");
+});
+
+test("効かない設定を渡さない", () => {
+  // ⚠️ 実測で経路を1mも変えなかったもの。残すと「効いているつもり」になる
+  const NO_EFFECT = ["use_living_streets", "use_tracks", "use_trails",
+                     "service_penalty", "maneuver_penalty", "use_tolls", "top_speed"];
+  for (const [name, v] of Object.entries(VARIANTS)) {
+    for (const key of NO_EFFECT) {
+      assert.ok(!(key in v.motorcycle),
+        `${name} のバイク設定に、効かない ${key} が入っている`);
+    }
+    // ⚠️ use_primary はバイクには効かない（motor_scooter 専用）
+    assert.ok(!("use_primary" in v.motorcycle),
+      `${name} のバイク設定に use_primary（原付専用）が入っている`);
+  }
 });

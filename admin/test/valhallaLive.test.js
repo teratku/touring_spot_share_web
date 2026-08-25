@@ -139,3 +139,58 @@ test("繋がらないときは原因が分かる文言で返す", async (t) => {
     delete require.cache[require.resolve("../lib/valhallaRoute")];
   }
 });
+
+// MARK: バイク（motorcycle）
+
+/** その経路が高速道路を何m走るか */
+function highwayMeters(route) {
+  return (route.steps || [])
+    .filter((s) => /自動車道|Expressway|圏央|高速道路/.test(s.roadName || ""))
+    .reduce((a, s) => a + s.distanceMeters, 0);
+}
+
+//: 新座 → 愛川。バイクの既定だと関越道・圏央道・中央道を66.5km走る組
+const NIIZA = [139.57376, 35.79677];
+const AIKAWA = [139.26171, 35.55400];
+
+test("バイクの楽しい案が高速道路を走らない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **これが実機で報告された不具合そのもの。**
+  //    原付と同じ設定を渡していて、`use_primary` がバイクに効かず、
+  //    77.8km のうち 66.5km が高速道路になっていた
+  const r = await routeWithValhalla(NIIZA, AIKAWA, { costing: "motorcycle", variant: "fun" });
+  assert.ok(!r.error, r.error);
+  const hw = highwayMeters(r);
+  assert.ok(hw < 1000,
+    `楽しい案が高速道路を ${(hw / 1000).toFixed(1)}km 走っている`);
+});
+
+test("バイクの楽しい案は、ふつうより高速が少ない", async (t) => {
+  if (await skipIfDown(t)) return;
+  const normal = await routeWithValhalla(NIIZA, AIKAWA, { costing: "motorcycle", variant: "normal" });
+  const fun = await routeWithValhalla(NIIZA, AIKAWA, { costing: "motorcycle", variant: "fun" });
+  assert.ok(!normal.error && !fun.error);
+  assert.ok(highwayMeters(fun) < highwayMeters(normal),
+    `楽しい${(highwayMeters(fun) / 1000).toFixed(1)}km が `
+    + `ふつう${(highwayMeters(normal) / 1000).toFixed(1)}km より高速が多い`);
+});
+
+test("原付は、そもそも高速に乗らない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 原付・原二は法律で高速に乗れない。Valhalla の motor_scooter も乗せない。
+  //    ここが崩れたら costing の取り違えを疑うこと
+  for (const variant of ["shortest", "normal", "fun"]) {
+    const r = await routeWithValhalla(NIIZA, AIKAWA, { costing: "motor_scooter", variant });
+    assert.ok(!r.error, r.error);
+    assert.strictEqual(highwayMeters(r), 0, `原付の${variant}が高速に乗っている`);
+  }
+});
+
+test("バイクの最短は高速を使わずに済んでいる", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 最短は距離を詰めるので、結果として高速から降りる。
+  //    ここが変わったら shortest が効いていない
+  const r = await routeWithValhalla(NIIZA, AIKAWA, { costing: "motorcycle", variant: "shortest" });
+  assert.ok(!r.error, r.error);
+  assert.ok(highwayMeters(r) < 1000, `最短が高速を ${highwayMeters(r)}m 走っている`);
+});
