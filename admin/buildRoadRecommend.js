@@ -22,13 +22,14 @@ const fs = require("fs");
 const crypto = require("crypto");
 const os = require("os");
 const path = require("path");
-const { parseWkt, polylineLength, listGridFiles, readGridFile } = require("./lib/roadCsv");
+const { parseWkt, polylineLength, distanceMeters, listGridFiles, readGridFile } = require("./lib/roadCsv");
 const { PrefectureLocator } = require("./lib/prefectureLocator");
 const { stitch } = require("./lib/roadStitcher");
 const { extract, score } = require("./lib/funSegments");
 const { simplify, encode, decode: decodePolyline } = require("./lib/polyline");
 const { applyOverrides } = require("./lib/roadOverrides");
 const { blockedSegments } = require("./lib/restrictionOverlap");
+const { loadSurfaces, measureUnpaved, key: surfaceKey } = require("./lib/roadSurface");
 const {
   loadSpots, buildIndex, countNearbySpots, sceneryBonus,
 } = require("./lib/scenerySpots");
@@ -370,6 +371,17 @@ async function build() {
   // 県ごとに断片を集める。全国を一度に持つとメモリが厳しいので、
   // 対象県が指定されていればそれ以外は捨てる
   const fragmentsByPref = new Map();
+  // ⚠️ **舗装の状態はグリッドCSVに入っていない。** 未舗装の道の id を別ファイルに
+  //    持たせてある（lib/roadSurface.js 参照）。無ければ砂利の印が付かないだけで、
+  //    生成は止めない
+  const surfaces = loadSurfaces();
+  //: 未舗装の道の点。区間のどこが砂利かを測るのに使う（点の座標 → 舗装の状態）
+  const pointSurface = new Map();
+  console.log(surfaces.size
+    ? `舗装の状態 ${surfaces.size.toLocaleString()}本ぶんを読みました`
+    : "⚠️ data/road-surface.csv が無いので砂利道の印は付きません"
+      + "（~/Documents/OSM道路データ更新/extract_surface.py で作れます）");
+
   let read = 0;
   const started = Date.now();
   for (const file of files) {
@@ -385,7 +397,10 @@ async function build() {
       if (ONLY_PREFECTURE && pref !== ONLY_PREFECTURE) return;
       let list = fragmentsByPref.get(pref);
       if (!list) { list = []; fragmentsByPref.set(pref, list); }
-      list.push({ prefecture: pref, name, ref: get("ref"), highway, osmId: get("osm_id"), points });
+      const osmId = get("osm_id");
+      const surface = surfaces.get(osmId);
+      if (surface) for (const p of points) pointSurface.set(surfaceKey(p), surface);
+      list.push({ prefecture: pref, name, ref: get("ref"), highway, osmId, points });
     });
     if (++read % 500 === 0) process.stderr.write(`  読み込み ${read}/${files.length}\r`);
   }
@@ -437,6 +452,9 @@ async function build() {
           start: [Number(seg.points[0][1].toFixed(6)), Number(seg.points[0][0].toFixed(6))],
           end: [Number(seg.points[seg.points.length - 1][1].toFixed(6)),
                 Number(seg.points[seg.points.length - 1][0].toFixed(6))],
+          // ⚠️ **簡略化する前の点で測ること。** thinned は点を間引いてあるので、
+          //    舗装路の区間まで砂利に数えてしまう
+          unpaved: measureUnpaved(seg.points, pointSurface, distanceMeters) || undefined,
         });
       }
     }

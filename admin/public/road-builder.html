@@ -171,6 +171,7 @@
       <button class="chip" data-filter="curated">調整済み</button>
       <button class="chip" data-filter="reviewed">評価あり</button>
       <button class="chip" data-filter="restricted">規制と重なる</button>
+      <button class="chip" data-filter="unpaved">未舗装あり</button>
       <button class="chip" data-filter="hidden">非表示</button>
       <button id="reloadReviews" title="アプリで付けた評価を取り直す（1時間ためています）">⟳ 評価</button>
       <span class="spacer"></span>
@@ -313,6 +314,38 @@ function reviewKey(seg) {
   return key.replace(/\//g, "_");
 }
 const reviewOf = (seg) => state.reviews[reviewKey(seg)] || null;
+
+/* 舗装の状態（OSM の surface / tracktype より。lib/roadSurface.js が付ける）
+
+   ⚠️ **配信しているグリッドCSVには surface の列が無い。** 未舗装の道の id だけを
+      data/road-surface.csv に持たせ、生成のときに区間へ付けている。
+      作り直すには ~/Documents/OSM道路データ更新/extract_surface.py を回す。 */
+
+//: この割合を超えたら「砂利道」として一覧で目立たせる。
+//: ⚠️ 実測（全国6,978区間中130区間が未舗装を含む）: 0〜9%が31件、10〜19%が38件…と
+//:    少しだけ未舗装の道が多い。1割を超えたら知らせる、くらいが妥当
+const UNPAVED_NOTABLE_RATIO = 0.10;
+
+/** 一覧に出す印。未舗装が無ければ空 */
+function unpavedBadge(seg) {
+  const u = seg && seg.unpaved;
+  if (!u) return "";
+  const strong = u.ratio >= UNPAVED_NOTABLE_RATIO;
+  const title = `${u.label}　${(u.unpavedMeters / 1000).toFixed(1)}km`
+    + `（この区間の${Math.round(u.ratio * 100)}%）`;
+  return `<span class="verdict" style="color:${strong ? "#e8590c" : "#adb5bd"}"`
+    + ` title="${escapeHtml(title)}">⛰</span>`;
+}
+
+/** 詳細に出す1行 */
+function unpavedDetail(seg) {
+  const u = seg && seg.unpaved;
+  if (!u) return "";
+  const strong = u.ratio >= UNPAVED_NOTABLE_RATIO;
+  return `<br><span style="color:${strong ? "#e8590c" : "var(--muted)"}">`
+    + `⛰ ${escapeHtml(u.label)} ${(u.unpavedMeters / 1000).toFixed(1)}km`
+    + `（この区間の${Math.round(u.ratio * 100)}%）</span>`;
+}
 
 const $ = (id) => document.getElementById(id);
 const setStatus = (t) => { $("status").textContent = t; };
@@ -554,6 +587,8 @@ function render() {
   else if (state.filter === "hidden") list = list.filter((r) => r.o.hidden);
   else if (state.filter === "reviewed") list = list.filter((r) => reviewOf(r.seg));
   else if (state.filter === "restricted") list = list.filter((r) => state.restricted[r.seg.id]);
+  // ⚠️ 少しでも未舗装があれば出す。割合の高いものは印の色が変わる
+  else if (state.filter === "unpaved") list = list.filter((r) => r.seg.unpaved);
   else list = list.filter((r) => !r.o.hidden);   // 既定では非表示を隠す
 
   if (q) list = list.filter((r) => r.seg.name.includes(q) || (r.o.title || "").includes(q));
@@ -587,20 +622,25 @@ function render() {
     const v = rv && VERDICT[rv.verdict];
     const verdictMark = v
       ? `<span class="verdict" style="color:${v.color}" title="アプリの評価: ${v.label}">${v.mark}</span>` : "";
+    // ⚠️ **砂利道は一覧で分かるようにする。** 見た目が同じ「県道◯◯線」でも、
+    //    半分が未舗装なら行く前に知りたい（OSM の surface / tracktype より）
+    const unpavedMark = unpavedBadge(r.seg);
     div.innerHTML =
       `<span class="rank">${i + 1}</span>` +
       `<span class="name">${escapeHtml(r.o.title || r.seg.name)}</span>` +
-      `<span class="mark">${bannedMark}${verdictMark}${marks.join("")}</span>` +
+      `<span class="mark">${bannedMark}${verdictMark}${unpavedMark}${marks.join("")}</span>` +
       `<span class="sub">${metricsOf(r.seg).lengthKm.toFixed(0)}km</span>` +
       `<span class="score">${r.score.toFixed(1)}</span>`;
     div.onclick = () => select(r.seg);
     rows.appendChild(div);
   });
 
+  const unpavedCount = state.segments.filter((x) => x.unpaved).length;
   const curatedCount = state.segments.filter(isCurated).length;
   const reviewedCount = state.segments.filter((s) => reviewOf(s)).length;
   $("count").textContent = `${list.length}件を表示（全${state.segments.length}件 ・ 調整済み${curatedCount}件`
-    + (reviewedCount ? ` ・ 評価あり${reviewedCount}件` : "") + "）";
+    + (reviewedCount ? ` ・ 評価あり${reviewedCount}件` : "")
+    + (unpavedCount ? ` ・ 未舗装あり${unpavedCount}件` : "") + "）";
 
   // どの区間にも当たらない調整
   const live = new Set(state.segments.map(overrideKey));
@@ -1706,6 +1746,7 @@ function renderEditor() {
          return `${m.lengthKm.toFixed(1)}km ・ 曲率${m.curviness.toFixed(0)} ・ flow${m.flow.toFixed(1)} ・ ${seg.highway}`
            + (changed ? ' <span class="muted">（手直し後の実測）</span>' : ""); })()}<br>
       素点 ${metricsOf(seg).score.toFixed(1)}${o.boost ? ` → <strong>${adjustedScore(seg).toFixed(1)}</strong>` : ""}
+      ${unpavedDetail(seg)}
     </div>
 
     <label>ストリートビュー</label>

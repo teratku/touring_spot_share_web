@@ -1,9 +1,9 @@
 {
  "prefecture": "東京都",
  "romaji": "tokyo",
- "generation": 3,
- "contentHash": "6f06580127df",
- "builtAt": "2026-08-16T08:33:59.442Z",
+ "generation": 4,
+ "contentHash": "ba0a21178d65",
+ "builtAt": "2026-08-25T13:11:39.767Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -356,7 +356,14 @@
    "end": [
     35.751478,
     139.182115
-   ]
+   ],
+   "unpaved": {
+    "unpavedMeters": 499,
+    "totalMeters": 3733,
+    "ratio": 0.134,
+    "surface": "gravel",
+    "label": "砂利"
+   }
   },
   {
    "id": "東京都:15",
@@ -1579,6 +1586,29 @@
   },
   {
    "id": "東京都:68",
+   "name": "明治通り",
+   "ref": "416",
+   "highway": "primary",
+   "lengthKm": 10.84,
+   "curviness": 221.4,
+   "flow": 23.8,
+   "turnCount": 101,
+   "score": 57.3,
+   "baseScore": 57.3,
+   "spotCount": 0,
+   "polyline": "itqxEy{wsY`BkE|BiOtDeHh@gCMwOqA{Hu@sSLuBnBaGh@iHQc@k@nIiBjFQ`Cv@hT~@lFVbQa@`CwCrF@nBeBnK}BbIElBpBnWY|FsAdJ_JnJkBhAiJdAgCjAwCdFkHrGeMpQ{GbCmX`@_DYwo@sc@oBNoFtBoDdC{OzCoLjH}UIyFdCgSjEkb@iUMuAcEFmf@wFqTuA",
+   "pointCount": 51,
+   "start": [
+    35.648849,
+    139.719174
+   ],
+   "end": [
+    35.704338,
+    139.708556
+   ]
+  },
+  {
+   "id": "東京都:69",
    "name": "江戸通り",
    "ref": "407",
    "highway": "trunk",
@@ -1601,7 +1631,7 @@
    ]
   },
   {
-   "id": "東京都:69",
+   "id": "東京都:70",
    "name": "中原街道",
    "ref": "2",
    "highway": "primary",
@@ -1624,7 +1654,7 @@
    ]
   },
   {
-   "id": "東京都:70",
+   "id": "東京都:71",
    "name": "環八通り",
    "ref": "311",
    "highway": "primary",
@@ -1647,7 +1677,7 @@
    ]
   },
   {
-   "id": "東京都:71",
+   "id": "東京都:72",
    "name": "府中街道",
    "ref": "16;17",
    "highway": "primary",
@@ -1670,7 +1700,7 @@
    ]
   },
   {
-   "id": "東京都:72",
+   "id": "東京都:73",
    "name": "本郷通り",
    "ref": "17",
    "highway": "secondary",
@@ -1693,7 +1723,7 @@
    ]
   },
   {
-   "id": "東京都:73",
+   "id": "東京都:74",
    "name": "津久井広域道路",
    "ref": "510",
    "highway": "secondary",
@@ -1716,7 +1746,7 @@
    ]
   },
   {
-   "id": "東京都:74",
+   "id": "東京都:75",
    "name": "環八通り",
    "ref": "311",
    "highway": "primary",
@@ -1739,7 +1769,7 @@
    ]
   },
   {
-   "id": "東京都:75",
+   "id": "東京都:76",
    "name": "奥多摩あきる野線",
    "ref": "184",
    "highway": "secondary",
@@ -1762,7 +1792,7 @@
    ]
   },
   {
-   "id": "東京都:76",
+   "id": "東京都:77",
    "name": "環八通り",
    "ref": "311",
    "highway": "primary",
@@ -1785,7 +1815,7 @@
    ]
   },
   {
-   "id": "東京都:77",
+   "id": "東京都:78",
    "name": "環七通り",
    "ref": "318",
    "highway": "primary",
@@ -1808,7 +1838,7 @@
    ]
   },
   {
-   "id": "東京都:78",
+   "id": "東京都:79",
    "name": "白山通り",
    "ref": "17",
    "highway": "primary",
@@ -1831,7 +1861,7 @@
    ]
   },
   {
-   "id": "東京都:79",
+   "id": "東京都:80",
    "name": "早稲田通り",
    "ref": "438",
    "highway": "primary",
@@ -1854,7 +1884,7 @@
    ]
   },
   {
-   "id": "東京都:80",
+   "id": "東京都:81",
    "name": "第一京浜",
    "ref": "15",
    "highway": "trunk",
@@ -1877,7 +1907,7 @@
    ]
   },
   {
-   "id": "東京都:81",
+   "id": "東京都:82",
    "name": "秋川街道",
    "ref": "32",
    "highway": "primary",
@@ -1900,7 +1930,7 @@
    ]
   },
   {
-   "id": "東京都:82",
+   "id": "東京都:83",
    "name": "陣馬街道",
    "ref": "521",
    "highway": "secondary",
@@ -1923,7 +1953,7 @@
    ]
   },
   {
-   "id": "東京都:83",
+   "id": "東京都:84",
    "name": "蔵前橋通り",
    "ref": "315",
    "highway": "primary",
@@ -1946,7 +1976,7 @@
    ]
   },
   {
-   "id": "東京都:84",
+   "id": "東京都:85",
    "name": "第二京浜",
    "ref": "1",
    "highway": "trunk",
@@ -1969,7 +1999,7 @@
    ]
   },
   {
-   "id": "東京都:85",
+   "id": "東京都:86",
    "name": "永代通り",
    "ref": "10",
    "highway": "primary",
@@ -1992,7 +2022,7 @@
    ]
   },
   {
-   "id": "東京都:86",
+   "id": "東京都:87",
    "name": "丸八通り",
    "ref": "476",
    "highway": "secondary",
@@ -2015,7 +2045,7 @@
    ]
   },
   {
-   "id": "東京都:87",
+   "id": "東京都:88",
    "name": "永代通り",
    "ref": "1;20",
    "highway": "trunk",
@@ -2038,7 +2068,7 @@
    ]
   },
   {
-   "id": "東京都:88",
+   "id": "東京都:89",
    "name": "明治通り",
    "ref": "306",
    "highway": "primary",
@@ -2061,7 +2091,7 @@
    ]
   },
   {
-   "id": "東京都:89",
+   "id": "東京都:90",
    "name": "新府中街道",
    "ref": "17",
    "highway": "primary",
@@ -2084,7 +2114,7 @@
    ]
   },
   {
-   "id": "東京都:90",
+   "id": "東京都:91",
    "name": "蔵前橋通り",
    "ref": "315",
    "highway": "primary",
@@ -2107,7 +2137,7 @@
    ]
   },
   {
-   "id": "東京都:91",
+   "id": "東京都:92",
    "name": "外堀通り",
    "ref": "405",
    "highway": "secondary",
@@ -2130,7 +2160,7 @@
    ]
   },
   {
-   "id": "東京都:92",
+   "id": "東京都:93",
    "name": "芋窪街道",
    "ref": "43",
    "highway": "primary",
@@ -2153,7 +2183,7 @@
    ]
   },
   {
-   "id": "東京都:93",
+   "id": "東京都:94",
    "name": "日光街道",
    "ref": "4",
    "highway": "trunk",
@@ -2176,7 +2206,7 @@
    ]
   },
   {
-   "id": "東京都:94",
+   "id": "東京都:95",
    "name": "笹目通り",
    "ref": "443",
    "highway": "secondary",
@@ -2199,7 +2229,7 @@
    ]
   },
   {
-   "id": "東京都:95",
+   "id": "東京都:96",
    "name": "伏見通り",
    "ref": "7",
    "highway": "secondary",
@@ -2222,7 +2252,7 @@
    ]
   },
   {
-   "id": "東京都:96",
+   "id": "東京都:97",
    "name": "東村山東大和線",
    "ref": "128",
    "highway": "secondary",
@@ -2245,7 +2275,7 @@
    ]
   },
   {
-   "id": "東京都:97",
+   "id": "東京都:98",
    "name": "環八通り",
    "ref": "311",
    "highway": "primary",
@@ -2268,7 +2298,7 @@
    ]
   },
   {
-   "id": "東京都:98",
+   "id": "東京都:99",
    "name": "めじろ台グリーンヒル通り",
    "ref": "",
    "highway": "tertiary",
@@ -2291,7 +2321,7 @@
    ]
   },
   {
-   "id": "東京都:99",
+   "id": "東京都:100",
    "name": "鎌倉街道",
    "ref": "18",
    "highway": "primary",
@@ -2314,7 +2344,7 @@
    ]
   },
   {
-   "id": "東京都:100",
+   "id": "東京都:101",
    "name": "環七通り",
    "ref": "318",
    "highway": "primary",
@@ -2337,7 +2367,7 @@
    ]
   },
   {
-   "id": "東京都:101",
+   "id": "東京都:102",
    "name": "大久保通り",
    "ref": "433",
    "highway": "secondary",
@@ -2360,7 +2390,7 @@
    ]
   },
   {
-   "id": "東京都:102",
+   "id": "東京都:103",
    "name": "鎌倉街道",
    "ref": "18",
    "highway": "primary",
@@ -2383,7 +2413,7 @@
    ]
   },
   {
-   "id": "東京都:103",
+   "id": "東京都:104",
    "name": "野猿街道",
    "ref": "20",
    "highway": "primary",
@@ -2406,7 +2436,7 @@
    ]
   },
   {
-   "id": "東京都:104",
+   "id": "東京都:105",
    "name": "品川埠頭線",
    "ref": "480",
    "highway": "secondary",
@@ -2429,7 +2459,30 @@
    ]
   },
   {
-   "id": "東京都:105",
+   "id": "東京都:106",
+   "name": "甲州街道",
+   "ref": "20",
+   "highway": "trunk",
+   "lengthKm": 3.88,
+   "curviness": 214.9,
+   "flow": 23.8,
+   "turnCount": 35,
+   "score": 52,
+   "baseScore": 52,
+   "spotCount": 0,
+   "polyline": "kgyxEmnssY_GcTg@wHuAuGm@sKt@qEfBiCvEiM`DwQP_JaAeMMh@~@~OWtEiB|L{EpOkBnDu@lFZhJnBlRrInXmAkB",
+   "pointCount": 22,
+   "start": [
+    35.687742,
+    139.696552
+   ],
+   "end": [
+    35.687742,
+    139.696552
+   ]
+  },
+  {
+   "id": "東京都:107",
    "name": "新武蔵境通り",
    "ref": "12",
    "highway": "primary",
@@ -2452,7 +2505,7 @@
    ]
   },
   {
-   "id": "東京都:106",
+   "id": "東京都:108",
    "name": "東京環状",
    "ref": "16",
    "highway": "trunk",
@@ -2475,7 +2528,7 @@
    ]
   },
   {
-   "id": "東京都:107",
+   "id": "東京都:109",
    "name": "明治通り",
    "ref": "416",
    "highway": "primary",
@@ -2498,7 +2551,7 @@
    ]
   },
   {
-   "id": "東京都:108",
+   "id": "東京都:110",
    "name": "津久井道",
    "ref": "3",
    "highway": "primary",
@@ -2521,7 +2574,7 @@
    ]
   },
   {
-   "id": "東京都:109",
+   "id": "東京都:111",
    "name": "青梅街道",
    "ref": "4;5",
    "highway": "primary",
@@ -2544,7 +2597,7 @@
    ]
   },
   {
-   "id": "東京都:110",
+   "id": "東京都:112",
    "name": "八王子城山線",
    "ref": "506",
    "highway": "secondary",
@@ -2567,7 +2620,7 @@
    ]
   },
   {
-   "id": "東京都:111",
+   "id": "東京都:113",
    "name": "海岸通り",
    "ref": "316",
    "highway": "primary",
@@ -2590,7 +2643,7 @@
    ]
   },
   {
-   "id": "東京都:112",
+   "id": "東京都:114",
    "name": "秋川街道",
    "ref": "31",
    "highway": "primary",
@@ -2613,7 +2666,7 @@
    ]
   },
   {
-   "id": "東京都:113",
+   "id": "東京都:115",
    "name": "三ツ目通り",
    "ref": "319",
    "highway": "primary",
@@ -2636,7 +2689,7 @@
    ]
   },
   {
-   "id": "東京都:114",
+   "id": "東京都:116",
    "name": "平山通り",
    "ref": "155",
    "highway": "secondary",
@@ -2659,7 +2712,7 @@
    ]
   },
   {
-   "id": "東京都:115",
+   "id": "東京都:117",
    "name": "東京環状",
    "ref": "16",
    "highway": "trunk",
@@ -2682,7 +2735,7 @@
    ]
   },
   {
-   "id": "東京都:116",
+   "id": "東京都:118",
    "name": "瀬田貫井線",
    "ref": "427",
    "highway": "secondary",
@@ -2705,7 +2758,7 @@
    ]
   },
   {
-   "id": "東京都:117",
+   "id": "東京都:119",
    "name": "所沢街道",
    "ref": "4",
    "highway": "primary",
@@ -2728,7 +2781,7 @@
    ]
   },
   {
-   "id": "東京都:118",
+   "id": "東京都:120",
    "name": "八王子城山線",
    "ref": "506",
    "highway": "secondary",
@@ -2751,7 +2804,7 @@
    ]
   },
   {
-   "id": "東京都:119",
+   "id": "東京都:121",
    "name": "大島循環線",
    "ref": "208",
    "highway": "secondary",
@@ -2774,7 +2827,7 @@
    ]
   },
   {
-   "id": "東京都:120",
+   "id": "東京都:122",
    "name": "新荒川堤防線",
    "ref": "449",
    "highway": "secondary",
@@ -2797,7 +2850,7 @@
    ]
   },
   {
-   "id": "東京都:121",
+   "id": "東京都:123",
    "name": "八丈循環線",
    "ref": "215",
    "highway": "secondary",
@@ -2820,7 +2873,7 @@
    ]
   },
   {
-   "id": "東京都:122",
+   "id": "東京都:124",
    "name": "日本橋芝浦大森線",
    "ref": "316",
    "highway": "primary",
@@ -2843,7 +2896,30 @@
    ]
   },
   {
-   "id": "東京都:123",
+   "id": "東京都:125",
+   "name": "墨堤通り",
+   "ref": "461",
+   "highway": "secondary",
+   "lengthKm": 5.23,
+   "curviness": 142.8,
+   "flow": 20.2,
+   "turnCount": 37,
+   "score": 49.6,
+   "baseScore": 49.6,
+   "spotCount": 0,
+   "polyline": "iz~xEgaitYwJuHMcDe^wR_KIuLoAsPeE_SmN}F{FqHk@cCLkQrGwC~BiHfIqKtTKdBlDt[ObTwAvNeCxL{GlOeB`A",
+   "pointCount": 22,
+   "start": [
+    35.716366,
+    139.807083
+   ],
+   "end": [
+    35.746409,
+    139.794632
+   ]
+  },
+  {
+   "id": "東京都:126",
    "name": "柚木街道",
    "ref": "20",
    "highway": "primary",
@@ -2866,7 +2942,7 @@
    ]
   },
   {
-   "id": "東京都:124",
+   "id": "東京都:127",
    "name": "八王子バイパス",
    "ref": "16",
    "highway": "trunk",
@@ -2889,7 +2965,7 @@
    ]
   },
   {
-   "id": "東京都:125",
+   "id": "東京都:128",
    "name": "八丈循環線",
    "ref": "215",
    "highway": "secondary",
@@ -2912,7 +2988,7 @@
    ]
   },
   {
-   "id": "東京都:126",
+   "id": "東京都:129",
    "name": "東八道路",
    "ref": "14",
    "highway": "primary",
@@ -2935,7 +3011,7 @@
    ]
   },
   {
-   "id": "東京都:127",
+   "id": "東京都:130",
    "name": "第二京浜",
    "ref": "1",
    "highway": "trunk",
@@ -2958,7 +3034,7 @@
    ]
   },
   {
-   "id": "東京都:128",
+   "id": "東京都:131",
    "name": "環七通り",
    "ref": "318",
    "highway": "primary",
@@ -2981,7 +3057,7 @@
    ]
   },
   {
-   "id": "東京都:129",
+   "id": "東京都:132",
    "name": "川崎街道",
    "ref": "20",
    "highway": "primary",
@@ -3004,7 +3080,7 @@
    ]
   },
   {
-   "id": "東京都:130",
+   "id": "東京都:133",
    "name": "サンセットパームライン",
    "ref": "",
    "highway": "tertiary",
@@ -3027,7 +3103,7 @@
    ]
   },
   {
-   "id": "東京都:131",
+   "id": "東京都:134",
    "name": "鶴川街道",
    "ref": "139",
    "highway": "primary",
@@ -3050,7 +3126,7 @@
    ]
   },
   {
-   "id": "東京都:132",
+   "id": "東京都:135",
    "name": "千歳通り",
    "ref": "",
    "highway": "tertiary",
@@ -3073,7 +3149,7 @@
    ]
   },
   {
-   "id": "東京都:133",
+   "id": "東京都:136",
    "name": "青梅街道",
    "ref": "5;16",
    "highway": "primary",
@@ -3096,7 +3172,7 @@
    ]
   },
   {
-   "id": "東京都:134",
+   "id": "東京都:137",
    "name": "鎌倉街道",
    "ref": "18;3",
    "highway": "primary",
@@ -3119,7 +3195,7 @@
    ]
   },
   {
-   "id": "東京都:135",
+   "id": "東京都:138",
    "name": "檜原街道",
    "ref": "33",
    "highway": "primary",
@@ -3142,7 +3218,7 @@
    ]
   },
   {
-   "id": "東京都:136",
+   "id": "東京都:139",
    "name": "清砂大橋通り",
    "ref": "10",
    "highway": "secondary",
@@ -3165,7 +3241,7 @@
    ]
   },
   {
-   "id": "東京都:137",
+   "id": "東京都:140",
    "name": "外苑東通り",
    "ref": "319",
    "highway": "primary",
@@ -3188,7 +3264,7 @@
    ]
   },
   {
-   "id": "東京都:138",
+   "id": "東京都:141",
    "name": "八王子バイパス",
    "ref": "16",
    "highway": "trunk",
@@ -3211,7 +3287,7 @@
    ]
   },
   {
-   "id": "東京都:139",
+   "id": "東京都:142",
    "name": "東八道路",
    "ref": "14",
    "highway": "primary",
@@ -3234,7 +3310,7 @@
    ]
   },
   {
-   "id": "東京都:140",
+   "id": "東京都:143",
    "name": "環八通り",
    "ref": "311",
    "highway": "primary",
@@ -3257,7 +3333,7 @@
    ]
   },
   {
-   "id": "東京都:141",
+   "id": "東京都:144",
    "name": "環七通り",
    "ref": "318",
    "highway": "primary",
@@ -3280,7 +3356,7 @@
    ]
   },
   {
-   "id": "東京都:142",
+   "id": "東京都:145",
    "name": "鍛冶谷相模原線",
    "ref": "48",
    "highway": "primary",
@@ -3303,7 +3379,7 @@
    ]
   },
   {
-   "id": "東京都:143",
+   "id": "東京都:146",
    "name": "川越街道",
    "ref": "254",
    "highway": "trunk",
@@ -3326,7 +3402,7 @@
    ]
   },
   {
-   "id": "東京都:144",
+   "id": "東京都:147",
    "name": "若郷新島港線",
    "ref": "211",
    "highway": "secondary",
@@ -3349,7 +3425,7 @@
    ]
   },
   {
-   "id": "東京都:145",
+   "id": "東京都:148",
    "name": "吉野街道",
    "ref": "45",
    "highway": "primary",
@@ -3372,7 +3448,7 @@
    ]
   },
   {
-   "id": "東京都:146",
+   "id": "東京都:149",
    "name": "奥多摩街道",
    "ref": "29",
    "highway": "primary",
@@ -3393,76 +3469,7 @@
     35.727809,
     139.33484
    ]
-  },
-  {
-   "id": "東京都:147",
-   "name": "高輪麻布線",
-   "ref": "415",
-   "highway": "secondary",
-   "lengthKm": 5.22,
-   "curviness": 107.6,
-   "flow": 15.6,
-   "turnCount": 36,
-   "score": 43.2,
-   "baseScore": 43.2,
-   "spotCount": 0,
-   "polyline": "shuxE{{{sYnD`BfHb@rV|DtIhF~Er@hBBzIgCvVzBjGc@rN@~Q|ErNxGRl@iPwHwQmEaLCoHd@sWqB{IvCcA?qGcAyGwEuLsB",
-   "pointCount": 24,
-   "start": [
-    35.667456,
-    139.739656
-   ],
-   "end": [
-    35.663311,
-    139.738296
-   ]
-  },
-  {
-   "id": "東京都:148",
-   "name": "芝溝街道",
-   "ref": "57",
-   "highway": "primary",
-   "lengthKm": 3.32,
-   "curviness": 115.2,
-   "flow": 17.4,
-   "turnCount": 22,
-   "score": 43.1,
-   "baseScore": 43.1,
-   "spotCount": 0,
-   "polyline": "__dxEuz{qYeByDo@Ss@uT}H{HuCeMqAqIe@yLiDy^sHgUw@gTeI_UIoXwAwJ",
-   "pointCount": 14,
-   "start": [
-    35.57888,
-    139.411789
-   ],
-   "end": [
-    35.587625,
-    139.445573
-   ]
-  },
-  {
-   "id": "東京都:149",
-   "name": "青梅街道",
-   "ref": "411",
-   "highway": "trunk",
-   "lengthKm": 4.93,
-   "curviness": 162,
-   "flow": 16.6,
-   "turnCount": 48,
-   "score": 42.5,
-   "baseScore": 42.5,
-   "spotCount": 0,
-   "polyline": "unlyEca~pY{@xEcFpIkAvIeBg@wGU_Al]cA~BKlG|Bz[lChQrMdWnFpArHVjAf@nCjHDbCk@bBqFpFiZrRgJdAqDvBoFh@kCvAwE`EiDfB}ArF}FvH",
-   "pointCount": 28,
-   "start": [
-    35.786188,
-    139.259221
-   ],
-   "end": [
-    35.797151,
-    139.223141
-   ]
   }
  ],
- "hiddenCount": 5
+ "hiddenCount": 1
 }

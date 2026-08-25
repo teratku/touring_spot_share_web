@@ -1,9 +1,9 @@
 {
  "prefecture": "北海道",
  "romaji": "hokkaido",
- "generation": 4,
- "contentHash": "a86da7b0277e",
- "builtAt": "2026-08-18T13:57:02.311Z",
+ "generation": 5,
+ "contentHash": "76b803450c7e",
+ "builtAt": "2026-08-25T13:21:23.696Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -419,6 +419,13 @@
     44.069571,
     141.760402
    ],
+   "unpaved": {
+    "unpavedMeters": 5018,
+    "totalMeters": 9857,
+    "ratio": 0.509,
+    "surface": "unpaved",
+    "label": "未舗装"
+   },
    "tags": [
     "ワインディング",
     "快走",
@@ -450,33 +457,6 @@
   },
   {
    "id": "北海道:16",
-   "name": "士幌然別湖線",
-   "ref": "661",
-   "highway": "secondary",
-   "lengthKm": 6.15,
-   "curviness": 320.4,
-   "flow": 21.2,
-   "turnCount": 93,
-   "score": 62,
-   "baseScore": 62,
-   "spotCount": 0,
-   "polyline": "egzfG{dqhZwIlRsBlA{AFcDyAwXc\\oJaJuEc@kSlF_ChCKtE`A`C`E~D|BzF|B|UQlJpB|F}@DkLkJ}EcAWcAh@aDKqBmAiDyCyDgAoE]n@tCzNFvBuDaJkCuDqKy@B`AdF|@~AnApCnKu@M}BqEiA_AwHyAHb@lG`Dj@zALvCmC~K}GfJ",
-   "pointCount": 46,
-   "start": [
-    43.229468,
-    143.125425
-   ],
-   "end": [
-    43.249931,
-    143.115368
-   ],
-   "tags": [
-    "快走",
-    "林道ぎみ"
-   ]
-  },
-  {
-   "id": "北海道:17",
    "name": "下川愛別線",
    "ref": "101;296",
    "highway": "primary",
@@ -503,7 +483,7 @@
    ]
   },
   {
-   "id": "北海道:18",
+   "id": "北海道:17",
    "name": "旭台今金線",
    "ref": "793",
    "highway": "secondary",
@@ -531,7 +511,7 @@
    ]
   },
   {
-   "id": "北海道:19",
+   "id": "北海道:18",
    "name": "光地園尾田線",
    "ref": "1002",
    "highway": "secondary",
@@ -558,7 +538,7 @@
    ]
   },
   {
-   "id": "北海道:20",
+   "id": "北海道:19",
    "name": "老古美小沢停車場線",
    "ref": "604",
    "highway": "secondary",
@@ -586,7 +566,7 @@
    ]
   },
   {
-   "id": "北海道:21",
+   "id": "北海道:20",
    "name": "オンネトー線",
    "ref": "949",
    "highway": "secondary",
@@ -607,6 +587,13 @@
     43.40142,
     143.980748
    ],
+   "unpaved": {
+    "unpavedMeters": 113,
+    "totalMeters": 4486,
+    "ratio": 0.025,
+    "surface": "gravel",
+    "label": "砂利"
+   },
    "tags": [
     "ワインディング",
     "快走",
@@ -614,7 +601,7 @@
    ]
   },
   {
-   "id": "北海道:22",
+   "id": "北海道:21",
    "name": "名寄遠別線",
    "ref": "688",
    "highway": "secondary",
@@ -642,7 +629,7 @@
    ]
   },
   {
-   "id": "北海道:23",
+   "id": "北海道:22",
    "name": "小樽環状線",
    "ref": "956",
    "highway": "secondary",
@@ -669,7 +656,7 @@
    ]
   },
   {
-   "id": "北海道:24",
+   "id": "北海道:23",
    "name": "緑資源幹線林道 置戸・阿寒線 足寄・阿寒区間",
    "ref": "",
    "highway": "tertiary",
@@ -697,7 +684,7 @@
    ]
   },
   {
-   "id": "北海道:25",
+   "id": "北海道:24",
    "name": "夕張岩見沢線",
    "ref": "38",
    "highway": "primary",
@@ -724,7 +711,7 @@
    ]
   },
   {
-   "id": "北海道:26",
+   "id": "北海道:25",
    "name": "居辺本別線",
    "ref": "660",
    "highway": "secondary",
@@ -751,7 +738,7 @@
    ]
   },
   {
-   "id": "北海道:27",
+   "id": "北海道:26",
    "name": "洞爺虻田線",
    "ref": "578",
    "highway": "secondary",
@@ -778,7 +765,7 @@
    ]
   },
   {
-   "id": "北海道:28",
+   "id": "北海道:27",
    "name": "中島・港北通",
    "ref": "",
    "highway": "tertiary",
@@ -805,7 +792,7 @@
    ]
   },
   {
-   "id": "北海道:29",
+   "id": "北海道:28",
    "name": "貫気別振内線",
    "ref": "797",
    "highway": "secondary",
@@ -832,7 +819,7 @@
    ]
   },
   {
-   "id": "北海道:30",
+   "id": "北海道:29",
    "name": "旭丘線",
    "ref": "",
    "highway": "tertiary",
@@ -860,7 +847,7 @@
    ]
   },
   {
-   "id": "北海道:31",
+   "id": "北海道:30",
    "name": "豊浦京極線",
    "ref": "97",
    "highway": "primary",
@@ -886,7 +873,7 @@
    ]
   },
   {
-   "id": "北海道:32",
+   "id": "北海道:31",
    "name": "阿寒標茶線",
    "ref": "243",
    "highway": "secondary",
@@ -913,7 +900,7 @@
    ]
   },
   {
-   "id": "北海道:33",
+   "id": "北海道:32",
    "name": "町道日進狢岱線",
    "ref": "",
    "highway": "tertiary",
@@ -940,7 +927,7 @@
    ]
   },
   {
-   "id": "北海道:34",
+   "id": "北海道:33",
    "name": "北海道道578号洞爺虻田線 (Toya Abuta line)",
    "ref": "578",
    "highway": "secondary",
@@ -967,7 +954,7 @@
    ]
   },
   {
-   "id": "北海道:35",
+   "id": "北海道:34",
    "name": "美沢美馬牛線",
    "ref": "824",
    "highway": "secondary",
@@ -993,7 +980,7 @@
    ]
   },
   {
-   "id": "北海道:36",
+   "id": "北海道:35",
    "name": "十勝岳温泉美瑛線",
    "ref": "966",
    "highway": "secondary",
@@ -1019,7 +1006,7 @@
    ]
   },
   {
-   "id": "北海道:37",
+   "id": "北海道:36",
    "name": "国道334号",
    "ref": "334",
    "highway": "trunk",
@@ -1046,7 +1033,7 @@
    ]
   },
   {
-   "id": "北海道:38",
+   "id": "北海道:37",
    "name": "国道241号",
    "ref": "241",
    "highway": "trunk",
@@ -1073,7 +1060,7 @@
    ]
   },
   {
-   "id": "北海道:39",
+   "id": "北海道:38",
    "name": "国道40号",
    "ref": "40",
    "highway": "trunk",
@@ -1099,7 +1086,7 @@
    ]
   },
   {
-   "id": "北海道:40",
+   "id": "北海道:39",
    "name": "岩内洞爺線",
    "ref": "66",
    "highway": "primary",
@@ -1128,7 +1115,7 @@
    ]
   },
   {
-   "id": "北海道:41",
+   "id": "北海道:40",
    "name": "奥尻島線",
    "ref": "39",
    "highway": "primary",
@@ -1151,7 +1138,7 @@
    ]
   },
   {
-   "id": "北海道:42",
+   "id": "北海道:41",
    "name": "清水谷足寄線",
    "ref": "468",
    "highway": "secondary",
@@ -1178,7 +1165,7 @@
    ]
   },
   {
-   "id": "北海道:43",
+   "id": "北海道:42",
    "name": "豊富中頓別線",
    "ref": "785",
    "highway": "secondary",
@@ -1206,7 +1193,7 @@
    ]
   },
   {
-   "id": "北海道:44",
+   "id": "北海道:43",
    "name": "金山幾寅停車場線",
    "ref": "465",
    "highway": "secondary",
@@ -1233,7 +1220,7 @@
    ]
   },
   {
-   "id": "北海道:45",
+   "id": "北海道:44",
    "name": "上遠別霧立線",
    "ref": "741",
    "highway": "secondary",
@@ -1260,7 +1247,7 @@
    ]
   },
   {
-   "id": "北海道:46",
+   "id": "北海道:45",
    "name": "占冠穂別線（支線）",
    "ref": "610",
    "highway": "secondary",
@@ -1287,7 +1274,7 @@
    ]
   },
   {
-   "id": "北海道:47",
+   "id": "北海道:46",
    "name": "名寄遠別線",
    "ref": "688",
    "highway": "secondary",
@@ -1314,7 +1301,7 @@
    ]
   },
   {
-   "id": "北海道:48",
+   "id": "北海道:47",
    "name": "高見西舎線",
    "ref": "746",
    "highway": "secondary",
@@ -1341,7 +1328,7 @@
    ]
   },
   {
-   "id": "北海道:49",
+   "id": "北海道:48",
    "name": "苫前小平線",
    "ref": "1049",
    "highway": "secondary",
@@ -1362,6 +1349,13 @@
     44.069571,
     141.760402
    ],
+   "unpaved": {
+    "unpavedMeters": 3180,
+    "totalMeters": 5357,
+    "ratio": 0.594,
+    "surface": "unpaved",
+    "label": "未舗装"
+   },
    "tags": [
     "ワインディング",
     "快走",
@@ -1369,7 +1363,7 @@
    ]
   },
   {
-   "id": "北海道:50",
+   "id": "北海道:49",
    "name": "美唄達布岩見沢線",
    "ref": "687",
    "highway": "secondary",
@@ -1395,7 +1389,7 @@
    ]
   },
   {
-   "id": "北海道:51",
+   "id": "北海道:50",
    "name": "望来当別線",
    "ref": "527",
    "highway": "secondary",
@@ -1422,7 +1416,7 @@
    ]
   },
   {
-   "id": "北海道:52",
+   "id": "北海道:51",
    "name": "大沼公園鹿部線",
    "ref": "43;338",
    "highway": "primary",
@@ -1449,7 +1443,7 @@
    ]
   },
   {
-   "id": "北海道:53",
+   "id": "北海道:52",
    "name": "士別滝上線",
    "ref": "61",
    "highway": "primary",
@@ -1476,7 +1470,7 @@
    ]
   },
   {
-   "id": "北海道:54",
+   "id": "北海道:53",
    "name": "洞爺湖登別線",
    "ref": "2",
    "highway": "primary",
@@ -1503,7 +1497,7 @@
    ]
   },
   {
-   "id": "北海道:55",
+   "id": "北海道:54",
    "name": "古平神恵内線",
    "ref": "998",
    "highway": "secondary",
@@ -1529,7 +1523,7 @@
    ]
   },
   {
-   "id": "北海道:56",
+   "id": "北海道:55",
    "name": "旭川幌加内線",
    "ref": "72",
    "highway": "primary",
@@ -1555,7 +1549,7 @@
    ]
   },
   {
-   "id": "北海道:57",
+   "id": "北海道:56",
    "name": "忠別清水線",
    "ref": "718",
    "highway": "secondary",
@@ -1582,7 +1576,7 @@
    ]
   },
   {
-   "id": "北海道:58",
+   "id": "北海道:57",
    "name": "根室浜中釧路線",
    "ref": "142",
    "highway": "primary",
@@ -1609,7 +1603,7 @@
    ]
   },
   {
-   "id": "北海道:59",
+   "id": "北海道:58",
    "name": "道道1025号 静内浦河線",
    "ref": "1025",
    "highway": "secondary",
@@ -1635,7 +1629,7 @@
    ]
   },
   {
-   "id": "北海道:60",
+   "id": "北海道:59",
    "name": "夕張長沼線",
    "ref": "1008",
    "highway": "secondary",
@@ -1661,7 +1655,7 @@
    ]
   },
   {
-   "id": "北海道:61",
+   "id": "北海道:60",
    "name": "相生津別停車場線",
    "ref": "768",
    "highway": "secondary",
@@ -1687,7 +1681,7 @@
    ]
   },
   {
-   "id": "北海道:62",
+   "id": "北海道:61",
    "name": "北海道道285号豊浦洞爺線 (Toyoura Toya line)",
    "ref": "285",
    "highway": "secondary",
@@ -1713,7 +1707,7 @@
    ]
   },
   {
-   "id": "北海道:63",
+   "id": "北海道:62",
    "name": "旭川旭岳温泉線",
    "ref": "1160",
    "highway": "secondary",
@@ -1736,7 +1730,7 @@
    ]
   },
   {
-   "id": "北海道:64",
+   "id": "北海道:63",
    "name": "遠軽雄武線",
    "ref": "137",
    "highway": "primary",
@@ -1759,7 +1753,7 @@
    ]
   },
   {
-   "id": "北海道:65",
+   "id": "北海道:64",
    "name": "阿寒標茶線",
    "ref": "243",
    "highway": "secondary",
@@ -1782,7 +1776,7 @@
    ]
   },
   {
-   "id": "北海道:66",
+   "id": "北海道:65",
    "name": "上士別和寒線",
    "ref": "639",
    "highway": "secondary",
@@ -1805,7 +1799,7 @@
    ]
   },
   {
-   "id": "北海道:67",
+   "id": "北海道:66",
    "name": "大沼公園線",
    "ref": "338",
    "highway": "secondary",
@@ -1828,7 +1822,7 @@
    ]
   },
   {
-   "id": "北海道:68",
+   "id": "北海道:67",
    "name": "中足寄愛冠線",
    "ref": "",
    "highway": "tertiary",
@@ -1851,7 +1845,7 @@
    ]
   },
   {
-   "id": "北海道:69",
+   "id": "北海道:68",
    "name": "新富神里線",
    "ref": "914",
    "highway": "secondary",
@@ -1874,7 +1868,7 @@
    ]
   },
   {
-   "id": "北海道:70",
+   "id": "北海道:69",
    "name": "厚別東通",
    "ref": "",
    "highway": "tertiary",
@@ -1897,7 +1891,7 @@
    ]
   },
   {
-   "id": "北海道:71",
+   "id": "北海道:70",
    "name": "国道237号",
    "ref": "237",
    "highway": "trunk",
@@ -1920,7 +1914,7 @@
    ]
   },
   {
-   "id": "北海道:72",
+   "id": "北海道:71",
    "name": "北檜山大成線",
    "ref": "740",
    "highway": "secondary",
@@ -1943,7 +1937,7 @@
    ]
   },
   {
-   "id": "北海道:73",
+   "id": "北海道:72",
    "name": "仲洞爺留寿都線",
    "ref": "560",
    "highway": "secondary",
@@ -1966,7 +1960,7 @@
    ]
   },
   {
-   "id": "北海道:74",
+   "id": "北海道:73",
    "name": "林道大山線",
    "ref": "",
    "highway": "tertiary",
@@ -1989,7 +1983,7 @@
    ]
   },
   {
-   "id": "北海道:75",
+   "id": "北海道:74",
    "name": "大野上磯線",
    "ref": "756",
    "highway": "secondary",
@@ -2012,7 +2006,7 @@
    ]
   },
   {
-   "id": "北海道:76",
+   "id": "北海道:75",
    "name": "羊ヶ丘線",
    "ref": "9903",
    "highway": "primary",
@@ -2035,7 +2029,7 @@
    ]
   },
   {
-   "id": "北海道:77",
+   "id": "北海道:76",
    "name": "福住女満別線",
    "ref": "249",
    "highway": "secondary",
@@ -2058,7 +2052,7 @@
    ]
   },
   {
-   "id": "北海道:78",
+   "id": "北海道:77",
    "name": "国道393号",
    "ref": "393",
    "highway": "trunk",
@@ -2081,7 +2075,7 @@
    ]
   },
   {
-   "id": "北海道:79",
+   "id": "北海道:78",
    "name": "美和豊浦停車場線",
    "ref": "702",
    "highway": "secondary",
@@ -2104,7 +2098,7 @@
    ]
   },
   {
-   "id": "北海道:80",
+   "id": "北海道:79",
    "name": "から沢泥沢線",
    "ref": "",
    "highway": "tertiary",
@@ -2127,7 +2121,7 @@
    ]
   },
   {
-   "id": "北海道:81",
+   "id": "北海道:80",
    "name": "美馬牛神楽線",
    "ref": "580",
    "highway": "secondary",
@@ -2150,7 +2144,7 @@
    ]
   },
   {
-   "id": "北海道:82",
+   "id": "北海道:81",
    "name": "国道333号",
    "ref": "333",
    "highway": "trunk",
@@ -2173,7 +2167,7 @@
    ]
   },
   {
-   "id": "北海道:83",
+   "id": "北海道:82",
    "name": "緑資源幹線林道 滝雄・厚和線 滝上・白滝区間",
    "ref": "",
    "highway": "tertiary",
@@ -2196,7 +2190,7 @@
    ]
   },
   {
-   "id": "北海道:84",
+   "id": "北海道:83",
    "name": "士別滝上線",
    "ref": "61",
    "highway": "primary",
@@ -2219,7 +2213,7 @@
    ]
   },
   {
-   "id": "北海道:85",
+   "id": "北海道:84",
    "name": "林道大山線",
    "ref": "",
    "highway": "tertiary",
@@ -2242,7 +2236,7 @@
    ]
   },
   {
-   "id": "北海道:86",
+   "id": "北海道:85",
    "name": "北海道道141号樽前錦岡線",
    "ref": "141",
    "highway": "primary",
@@ -2265,7 +2259,7 @@
    ]
   },
   {
-   "id": "北海道:87",
+   "id": "北海道:86",
    "name": "倶知安ニセコ線",
    "ref": "58",
    "highway": "primary",
@@ -2288,7 +2282,7 @@
    ]
   },
   {
-   "id": "北海道:88",
+   "id": "北海道:87",
    "name": "然別余市線",
    "ref": "755",
    "highway": "secondary",
@@ -2311,7 +2305,7 @@
    ]
   },
   {
-   "id": "北海道:89",
+   "id": "北海道:88",
    "name": "八雲中部広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -2334,7 +2328,7 @@
    ]
   },
   {
-   "id": "北海道:90",
+   "id": "北海道:89",
    "name": "北海道道746号高見西舎線 (Takami Nishicha line)",
    "ref": "746",
    "highway": "secondary",
@@ -2363,7 +2357,7 @@
    ]
   },
   {
-   "id": "北海道:91",
+   "id": "北海道:90",
    "name": "小樽定山渓線",
    "ref": "1",
    "highway": "primary",
@@ -2386,7 +2380,7 @@
    ]
   },
   {
-   "id": "北海道:92",
+   "id": "北海道:91",
    "name": "宿志別振内停車場線",
    "ref": "638",
    "highway": "secondary",
@@ -2415,7 +2409,7 @@
    ]
   },
   {
-   "id": "北海道:93",
+   "id": "北海道:92",
    "name": "町道 幾代線",
    "ref": "",
    "highway": "tertiary",
@@ -2438,7 +2432,7 @@
    ]
   },
   {
-   "id": "北海道:94",
+   "id": "北海道:93",
    "name": "士別滝上線",
    "ref": "61",
    "highway": "primary",
@@ -2461,7 +2455,7 @@
    ]
   },
   {
-   "id": "北海道:95",
+   "id": "北海道:94",
    "name": "洞爺湖登別線",
    "ref": "2",
    "highway": "primary",
@@ -2484,7 +2478,7 @@
    ]
   },
   {
-   "id": "北海道:96",
+   "id": "北海道:95",
    "name": "あいの里循環通",
    "ref": "",
    "highway": "tertiary",
@@ -2507,53 +2501,7 @@
    ]
   },
   {
-   "id": "北海道:97",
-   "name": "当麻上川線",
-   "ref": "1134",
-   "highway": "secondary",
-   "lengthKm": 5.42,
-   "curviness": 190.2,
-   "flow": 18.1,
-   "turnCount": 57,
-   "score": 50.8,
-   "baseScore": 50.8,
-   "spotCount": 0,
-   "polyline": "wrnjGqzveZoBjD{BtAkFjHeApEShB^vEs@r[}InJkHmCsDzFb@hLc@xST|H`@xDpD~MfBbDvBrB|AN|DeDt@rKlAjFrC|HpIjQZbBL~NlDxSlFhPhCbDnE`MzAdHhFdh@KrAiBfDYnB",
-   "pointCount": 35,
-   "start": [
-    43.825238,
-    142.662974
-   ],
-   "end": [
-    43.820594,
-    142.609676
-   ]
-  },
-  {
-   "id": "北海道:98",
-   "name": "小川古丹別線",
-   "ref": "1063",
-   "highway": "secondary",
-   "lengthKm": 5.55,
-   "curviness": 181.7,
-   "flow": 18.7,
-   "turnCount": 54,
-   "score": 50.8,
-   "baseScore": 50.8,
-   "spotCount": 0,
-   "polyline": "kzcmGgwr`ZhDxOoAfF@|B~EzJHtAoB|JyBzCgC`Ai@bBCxAbChFp@jFsBzJqFzCiBrDuAdOm@vS{BbKYpJaI~KkDvA_CvDi@nSgG~VaAzA{DtCuB|FgMrFuArBb@tExVd_AhAp\\",
-   "pointCount": 33,
-   "start": [
-    44.261663,
-    141.822763
-   ],
-   "end": [
-    44.269781,
-    141.76544
-   ]
-  },
-  {
-   "id": "北海道:99",
+   "id": "北海道:96",
    "name": "名寄遠別線",
    "ref": "688",
    "highway": "secondary",
@@ -2576,7 +2524,7 @@
    ]
   },
   {
-   "id": "北海道:100",
+   "id": "北海道:97",
    "name": "上問寒幌延停車場線",
    "ref": "645",
    "highway": "secondary",
@@ -2599,7 +2547,7 @@
    ]
   },
   {
-   "id": "北海道:101",
+   "id": "北海道:98",
    "name": "東藻琴豊富線",
    "ref": "995",
    "highway": "secondary",
@@ -2622,7 +2570,7 @@
    ]
   },
   {
-   "id": "北海道:102",
+   "id": "北海道:99",
    "name": "新富様似停車場線",
    "ref": "233",
    "highway": "secondary",
@@ -2645,7 +2593,7 @@
    ]
   },
   {
-   "id": "北海道:103",
+   "id": "北海道:100",
    "name": "岩内洞爺線",
    "ref": "66",
    "highway": "primary",
@@ -2668,7 +2616,7 @@
    ]
   },
   {
-   "id": "北海道:104",
+   "id": "北海道:101",
    "name": "緑陽通",
    "ref": "",
    "highway": "tertiary",
@@ -2691,7 +2639,7 @@
    ]
   },
   {
-   "id": "北海道:105",
+   "id": "北海道:102",
    "name": "札幌環状線",
    "ref": "89",
    "highway": "primary",
@@ -2714,7 +2662,7 @@
    ]
   },
   {
-   "id": "北海道:106",
+   "id": "北海道:103",
    "name": "忠別清水線",
    "ref": "718",
    "highway": "secondary",
@@ -2737,7 +2685,7 @@
    ]
   },
   {
-   "id": "北海道:107",
+   "id": "北海道:104",
    "name": "北見置戸線",
    "ref": "50",
    "highway": "primary",
@@ -2760,7 +2708,7 @@
    ]
   },
   {
-   "id": "北海道:108",
+   "id": "北海道:105",
    "name": "小倉山丹羽停車場線",
    "ref": "677",
    "highway": "secondary",
@@ -2783,7 +2731,7 @@
    ]
   },
   {
-   "id": "北海道:109",
+   "id": "北海道:106",
    "name": "釧路鶴居弟子屈線",
    "ref": "53",
    "highway": "primary",
@@ -2806,7 +2754,7 @@
    ]
   },
   {
-   "id": "北海道:110",
+   "id": "北海道:107",
    "name": "阿寒標茶線",
    "ref": "243",
    "highway": "secondary",
@@ -2829,7 +2777,7 @@
    ]
   },
   {
-   "id": "北海道:111",
+   "id": "北海道:108",
    "name": "三ノ原ニセコ線",
    "ref": "230",
    "highway": "secondary",
@@ -2852,7 +2800,7 @@
    ]
   },
   {
-   "id": "北海道:112",
+   "id": "北海道:109",
    "name": "西南大通",
    "ref": "",
    "highway": "tertiary",
@@ -2875,7 +2823,7 @@
    ]
   },
   {
-   "id": "北海道:113",
+   "id": "北海道:110",
    "name": "上藻別上渚滑停車場線",
    "ref": "553",
    "highway": "secondary",
@@ -2898,30 +2846,7 @@
    ]
   },
   {
-   "id": "北海道:114",
-   "name": "島牧美利河線",
-   "ref": "836",
-   "highway": "secondary",
-   "lengthKm": 4.16,
-   "curviness": 209.7,
-   "flow": 16.1,
-   "turnCount": 54,
-   "score": 49.9,
-   "baseScore": 49.9,
-   "spotCount": 0,
-   "polyline": "_bqbGybtvYhB|BjCh@rMqDvCBdKtBxQeF~Le@lYl@rJfBlBc@jDgCzB_@|OnAxB|AzBjDtCf@lB_An@sApBgINyAg@yDHgBdF_DhAEjBfC@nA{AxFx@nCxAXxKoCzEn@",
-   "pointCount": 32,
-   "start": [
-    42.527196,
-    140.191331
-   ],
-   "end": [
-    42.496072,
-    140.192856
-   ]
-  },
-  {
-   "id": "北海道:115",
+   "id": "北海道:111",
    "name": "音別浦幌線",
    "ref": "500",
    "highway": "secondary",
@@ -2944,7 +2869,7 @@
    ]
   },
   {
-   "id": "北海道:116",
+   "id": "北海道:112",
    "name": "霧多布岬線",
    "ref": "1039",
    "highway": "secondary",
@@ -2967,7 +2892,7 @@
    ]
   },
   {
-   "id": "北海道:117",
+   "id": "北海道:113",
    "name": "小樽港線",
    "ref": "17",
    "highway": "primary",
@@ -2990,7 +2915,7 @@
    ]
   },
   {
-   "id": "北海道:118",
+   "id": "北海道:114",
    "name": "町道 湖南朝日線",
    "ref": "",
    "highway": "tertiary",
@@ -3013,30 +2938,7 @@
    ]
   },
   {
-   "id": "北海道:119",
-   "name": "クチョロ原野塘路線",
-   "ref": "1060",
-   "highway": "secondary",
-   "lengthKm": 7.96,
-   "curviness": 164.1,
-   "flow": 18.1,
-   "turnCount": 72,
-   "score": 49.7,
-   "baseScore": 49.7,
-   "spotCount": 0,
-   "polyline": "k~vfGartpZhKqDtKoB~LXbEuBlI{I~@DpCtBzGK~C{DvBs@ZcFxHeJtBy@xEB`E}A|EcItFcEfHwIvCiA|T{BxJ_DbFsIdNaO|XkHpGwPdMaSjAw@bN{Dte@dHlLsDbDyDpHa`@gAiVeBeNI_I{AaItDmFmCo@",
-   "pointCount": 39,
-   "start": [
-    43.212698,
-    144.453614
-   ],
-   "end": [
-    43.161929,
-    144.497165
-   ]
-  },
-  {
-   "id": "北海道:120",
+   "id": "北海道:115",
    "name": "砂川歌志内線",
    "ref": "1027",
    "highway": "secondary",
@@ -3059,7 +2961,7 @@
    ]
   },
   {
-   "id": "北海道:121",
+   "id": "北海道:116",
    "name": "遠軽雄武線",
    "ref": "137",
    "highway": "primary",
@@ -3082,7 +2984,7 @@
    ]
   },
   {
-   "id": "北海道:122",
+   "id": "北海道:117",
    "name": "瑞穂東川線",
    "ref": "611",
    "highway": "secondary",
@@ -3105,7 +3007,7 @@
    ]
   },
   {
-   "id": "北海道:123",
+   "id": "北海道:118",
    "name": "雨竜旭川線",
    "ref": "251",
    "highway": "secondary",
@@ -3128,7 +3030,7 @@
    ]
   },
   {
-   "id": "北海道:124",
+   "id": "北海道:119",
    "name": "船泊港利礼公園線",
    "ref": "507",
    "highway": "secondary",
@@ -3151,7 +3053,7 @@
    ]
   },
   {
-   "id": "北海道:125",
+   "id": "北海道:120",
    "name": "椴法華港線",
    "ref": "231",
    "highway": "secondary",
@@ -3171,10 +3073,18 @@
    "end": [
     41.820465,
     141.175294
-   ]
+   ],
+   "unpaved": {
+    "unpavedMeters": 82,
+    "totalMeters": 3329,
+    "ratio": 0.025,
+    "surface": "",
+    "tracktype": "grade3",
+    "label": "砂利・土"
+   }
   },
   {
-   "id": "北海道:126",
+   "id": "北海道:121",
    "name": "石山通",
    "ref": "452",
    "highway": "secondary",
@@ -3197,7 +3107,7 @@
    ]
   },
   {
-   "id": "北海道:127",
+   "id": "北海道:122",
    "name": "上社名渕上湧別線",
    "ref": "336",
    "highway": "secondary",
@@ -3220,7 +3130,7 @@
    ]
   },
   {
-   "id": "北海道:128",
+   "id": "北海道:123",
    "name": "小谷石渡島知内停車場線",
    "ref": "531",
    "highway": "secondary",
@@ -3243,7 +3153,7 @@
    ]
   },
   {
-   "id": "北海道:129",
+   "id": "北海道:124",
    "name": "野束清住線",
    "ref": "840",
    "highway": "secondary",
@@ -3266,7 +3176,7 @@
    ]
   },
   {
-   "id": "北海道:130",
+   "id": "北海道:125",
    "name": "八雲中部広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -3289,30 +3199,7 @@
    ]
   },
   {
-   "id": "北海道:131",
-   "name": "瀬多来吉野線",
-   "ref": "1146",
-   "highway": "secondary",
-   "lengthKm": 4.86,
-   "curviness": 192.8,
-   "flow": 16.4,
-   "turnCount": 57,
-   "score": 49.3,
-   "baseScore": 49.3,
-   "spotCount": 0,
-   "polyline": "}~`eGerokZvDvBxCtGvFpCnBlJtD|CpIrVpA`BxCzA`H_AbLFdJ}DbH{G|@\\R~@c@pEiB|D@r@p@TjBwBtDi@tDmDhPiFxNiAjGxA|BMfNwIlVuHfIxAvLrHvI|@",
-   "pointCount": 31,
-   "start": [
-    42.936314,
-    143.608832
-   ],
-   "end": [
-    42.900899,
-    143.602384
-   ]
-  },
-  {
-   "id": "北海道:132",
+   "id": "北海道:126",
    "name": "遠野別保線",
    "ref": "1003",
    "highway": "secondary",
@@ -3335,7 +3222,7 @@
    ]
   },
   {
-   "id": "北海道:133",
+   "id": "北海道:127",
    "name": "東山富良野停車場線",
    "ref": "253",
    "highway": "secondary",
@@ -3358,7 +3245,7 @@
    ]
   },
   {
-   "id": "北海道:134",
+   "id": "北海道:128",
    "name": "奈江富良野線 (Nae Furano Line)",
    "ref": "759;851",
    "highway": "secondary",
@@ -3381,7 +3268,7 @@
    ]
   },
   {
-   "id": "北海道:135",
+   "id": "北海道:129",
    "name": "町道北斗1号幹線",
    "ref": "",
    "highway": "tertiary",
@@ -3404,7 +3291,7 @@
    ]
   },
   {
-   "id": "北海道:136",
+   "id": "北海道:130",
    "name": "静内浦河線",
    "ref": "1025",
    "highway": "secondary",
@@ -3427,7 +3314,7 @@
    ]
   },
   {
-   "id": "北海道:137",
+   "id": "北海道:131",
    "name": "大津長節線",
    "ref": "912",
    "highway": "secondary",
@@ -3450,7 +3337,7 @@
    ]
   },
   {
-   "id": "北海道:138",
+   "id": "北海道:132",
    "name": "達布石狩沼田停車場線",
    "ref": "867",
    "highway": "secondary",
@@ -3473,30 +3360,7 @@
    ]
   },
   {
-   "id": "北海道:139",
-   "name": "奥瀬戸瀬瀬戸瀬停車場線",
-   "ref": "493",
-   "highway": "secondary",
-   "lengthKm": 3.25,
-   "curviness": 195.8,
-   "flow": 16.7,
-   "turnCount": 38,
-   "score": 49.2,
-   "baseScore": 49.2,
-   "spotCount": 0,
-   "polyline": "ifikGesjjZtAkBnAyIzDgE`LiHpLcDvCG~V`F~EeAzEvBhKAxFvAbGKrCp@vCuBRqE|BmIfMgMnM{FzBoB",
-   "pointCount": 20,
-   "start": [
-    43.961493,
-    143.419553
-   ],
-   "end": [
-    43.936673,
-    143.430576
-   ]
-  },
-  {
-   "id": "北海道:140",
+   "id": "北海道:133",
    "name": "東大里瀬棚停車場線",
    "ref": "783",
    "highway": "secondary",
@@ -3519,7 +3383,7 @@
    ]
   },
   {
-   "id": "北海道:141",
+   "id": "北海道:134",
    "name": "美唄富良野線",
    "ref": "135",
    "highway": "primary",
@@ -3542,7 +3406,7 @@
    ]
   },
   {
-   "id": "北海道:142",
+   "id": "北海道:135",
    "name": "新開西神楽停車場線",
    "ref": "579",
    "highway": "secondary",
@@ -3565,30 +3429,7 @@
    ]
   },
   {
-   "id": "北海道:143",
-   "name": "暑寒別公園線",
-   "ref": "546",
-   "highway": "secondary",
-   "lengthKm": 8.36,
-   "curviness": 174.1,
-   "flow": 16.5,
-   "turnCount": 88,
-   "score": 49,
-   "baseScore": 49,
-   "spotCount": 0,
-   "polyline": "ojojG}ty~Y|D@pGnCtGj@xE{B~HwLrFiCzCKjH|@hRVdNjGbHvAvAvAdFfLpIzWxGfHxF|RxCjH|^|p@lH`IfQt`@~AvBtKtHzNbYtAvAzIiEjGqApBwCdCC~Q_GfJi@pD}DDgA~BcDnGyEpAeCDsBnBcAxCkG`F}BdDuFdAaFvAiBrCmArEs@nCTrAw@",
-   "pointCount": 47,
-   "start": [
-    43.829037,
-    141.530549
-   ],
-   "end": [
-    43.770892,
-    141.510671
-   ]
-  },
-  {
-   "id": "北海道:144",
+   "id": "北海道:136",
    "name": "国道231号",
    "ref": "231",
    "highway": "trunk",
@@ -3611,7 +3452,7 @@
    ]
   },
   {
-   "id": "北海道:145",
+   "id": "北海道:137",
    "name": "町道 新富152号線",
    "ref": "",
    "highway": "tertiary",
@@ -3634,7 +3475,7 @@
    ]
   },
   {
-   "id": "北海道:146",
+   "id": "北海道:138",
    "name": "霧立小平線",
    "ref": "742",
    "highway": "secondary",
@@ -3657,7 +3498,7 @@
    ]
   },
   {
-   "id": "北海道:147",
+   "id": "北海道:139",
    "name": "函館空港線",
    "ref": "63",
    "highway": "primary",
@@ -3680,7 +3521,7 @@
    ]
   },
   {
-   "id": "北海道:148",
+   "id": "北海道:140",
    "name": "城丘江差線",
    "ref": "634",
    "highway": "secondary",
@@ -3703,7 +3544,7 @@
    ]
   },
   {
-   "id": "北海道:149",
+   "id": "北海道:141",
    "name": "高根平岸停車場線",
    "ref": "339",
    "highway": "secondary",
@@ -3724,7 +3565,191 @@
     43.504816,
     142.13269
    ]
+  },
+  {
+   "id": "北海道:142",
+   "name": "南渡島広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.34,
+   "curviness": 191.3,
+   "flow": 16.4,
+   "turnCount": 39,
+   "score": 48.6,
+   "baseScore": 48.6,
+   "spotCount": 0,
+   "polyline": "uqw}Fa`_yYj@TdNqCfHiLrDsB|BAxB|@fG|InCrH?nEeQlh@GjDtDtIG|HvBtNlB`GlBx@bCaB|@@rI`FxAjBdDvIzB`C",
+   "pointCount": 23,
+   "start": [
+    41.741231,
+    140.574886
+   ],
+   "end": [
+    41.728732,
+    140.55515
+   ]
+  },
+  {
+   "id": "北海道:143",
+   "name": "小樽環状線",
+   "ref": "956",
+   "highway": "secondary",
+   "lengthKm": 4.39,
+   "curviness": 188.2,
+   "flow": 16.2,
+   "turnCount": 51,
+   "score": 48.6,
+   "baseScore": 48.6,
+   "spotCount": 0,
+   "polyline": "y|mfG_{{{YcDfMJhD|@fCpAlAnd@bRjClBxAxBhAxDd@tHUhD}AbGoG`HqAdCs@lDAxFxCtOg@vLs@pEc@z@kD{DyEEI`E_DvMgA`AeGdB}BjBqCxEcA~Dc@bFFnF|ErY]jJ",
+   "pointCount": 33,
+   "start": [
+    43.166375,
+    141.050235
+   ],
+   "end": [
+    43.166541,
+    141.012519
+   ]
+  },
+  {
+   "id": "北海道:144",
+   "name": "八雲北檜山線",
+   "ref": "42",
+   "highway": "primary",
+   "lengthKm": 7.86,
+   "curviness": 199.9,
+   "flow": 15.9,
+   "turnCount": 99,
+   "score": 48.4,
+   "baseScore": 48.4,
+   "spotCount": 0,
+   "polyline": "ob_aG_s|uYrAdOgAvJBbChKxVpAfOaAfJ?jCtBvM~Cz_@qBtMq@lOkCf[cArBgH~FsHjKuFlBmAnAxCjAdHmA|F{BdALx@xAgDbNBjDrAhFFzB{CzKs@tGd@|Li@rDOnGjAbMSvMXjFt@~BdEnAp@zAF|A_@rBwJhQe@lCCtF~@|CbI|JzDbB`G}@xBiA~EsLpFcD`IsJpBJzAdBx@zDg@xC",
+   "pointCount": 55,
+   "start": [
+    42.271282,
+    140.071035
+   ],
+   "end": [
+    42.262055,
+    140.009034
+   ]
+  },
+  {
+   "id": "北海道:145",
+   "name": "豊浦京極線",
+   "ref": "97",
+   "highway": "primary",
+   "lengthKm": 4.9,
+   "curviness": 205.3,
+   "flow": 16.2,
+   "turnCount": 62,
+   "score": 48.4,
+   "baseScore": 48.4,
+   "spotCount": 0,
+   "polyline": "wrmcGwmdzYfI|EnC?|DeAzBNlIjIhBp@hDa@`FkDdFTpJbDnDbEjApBXbCiBxI`@fE`NzJhA`D?tCg@~BaF~Ei@zBJlC`EhHrEbOKdBaEzGKdC\\hA`M`MpFlO`QdIjGNzAl@tAlBpGnQrDtC",
+   "pointCount": 37,
+   "start": [
+    42.673238,
+    140.766523
+   ],
+   "end": [
+    42.647865,
+    140.734264
+   ]
+  },
+  {
+   "id": "北海道:146",
+   "name": "美川黒松内線",
+   "ref": "523",
+   "highway": "secondary",
+   "lengthKm": 14.47,
+   "curviness": 135.4,
+   "flow": 17.7,
+   "turnCount": 111,
+   "score": 48.3,
+   "baseScore": 48.3,
+   "spotCount": 0,
+   "polyline": "ip|cGm_kvYxGm[lEkIdAgJ~DmGfGqMz@cDK}E}BuT`AiKBcIkCq\\r@}EhGyNdBuGnCyLbA_IxCsGt@mGu@yB{Be@kGhA}AqBo@gD}EoJgDuKyG}EiEgKUmDoAgD{CkEmBcQCaD|BmSzB_K`DgLxAqCjMoHt@_Av@yDc@eM{@}CqB_D}BuBmPmCaHqF_AuCG}CbA}DxL{Pzl@uUzEu@tHsExWeSrCyC|JcYhJaIvB}DnAcKhDqNvAkClDgBrNiArH_G`E_@lHtB`ZkCzBkA`ByCp@oF}BqQNgD~DgOtB{EbCmBjIm@jCwAdBoDd@iFpAsDpCsBzIiAxBwC|@kFCsH~AuJ",
+   "pointCount": 86,
+   "start": [
+    42.749646,
+    140.144714
+   ],
+   "end": [
+    42.705893,
+    140.263038
+   ]
+  },
+  {
+   "id": "北海道:147",
+   "name": "三ノ原ニセコ線",
+   "ref": "230",
+   "highway": "secondary",
+   "lengthKm": 10.48,
+   "curviness": 160,
+   "flow": 16.4,
+   "turnCount": 102,
+   "score": 48.3,
+   "baseScore": 48.3,
+   "spotCount": 0,
+   "polyline": "ypedGi_zyYbFc@hDaF|AYxMbIvQjIzARtA}@fEoTcByXpBoKhHeLlEkK~MwLlBuIIgJyAmG@gBdHiXWwAuBeDYgBHeBxSiTdCkAnFs@`EsFlDoRzCqKUcIRqCl@eAfP}F|BT`BxBvF`ShCfDt@NjFmA|GQtCgBpHj@jGsHdKaE~G_JTwCeAmMLyCtNaTuG{H{@kDoAyt@mAcMaAiDqE_IkUgJwP_b@",
+   "pointCount": 57,
+   "start": [
+    42.795814,
+    140.713012
+   ],
+   "end": [
+    42.764562,
+    140.783909
+   ]
+  },
+  {
+   "id": "北海道:148",
+   "name": "南十九条宮の沢線",
+   "ref": "9902",
+   "highway": "primary",
+   "lengthKm": 4.59,
+   "curviness": 180.3,
+   "flow": 18,
+   "turnCount": 46,
+   "score": 48.3,
+   "baseScore": 48.3,
+   "spotCount": 0,
+   "polyline": "w{|eGarf}Y{ArEeBbC{HfGiHxUqBrB_DFeMeDyBFeDbBiGzHcEv@wPoAeB{AgC{FXGlChGjA~@rRlAtAYhHwIjDiBhDD`LzCrCGfBgBxEsPnLuKzA}BlImZ",
+   "pointCount": 30,
+   "start": [
+    43.079159,
+    141.268966
+   ],
+   "end": [
+    43.077899,
+    141.272211
+   ]
+  },
+  {
+   "id": "北海道:149",
+   "name": "白老大滝線",
+   "ref": "86",
+   "highway": "primary",
+   "lengthKm": 16.35,
+   "curviness": 182.4,
+   "flow": 15.7,
+   "turnCount": 190,
+   "score": 48.2,
+   "baseScore": 48.2,
+   "spotCount": 0,
+   "polyline": "}rfcGg}_}Y{CpQaEpGkDnTiDhLkDxG_LnJmL|TsCpGi@vIoClEY`H_DtEmB`Lp@jHMpAgDxRv@lJEzC}CzOuQd`@K`Ef@tJQhCk@xA_DhDs@`Cy@pMnC|MOtBiBrAqFmCuEc@kAn@u@nB@|ChAlKxOxZCfBy@r@sFp@mEhF}@LcBiA}AaJ_Cw@eBz@e@bCz@zFSfBe@r@{FTcAfA]`B|AdMxCjHr@hEA~J{D`FiAH}@e@cEcH}@@kD`CkB\\y\\m@eD[iO_IyAFgAvAE|C~EbMTrD{BrLQvOkO~b@qC|O_Dxi@A|QiB|L@~QqA|OHvBxAjFJhBkBtJSpDx@lOv@vBnDvEhAxMhHbS?rCkB`F^tKl@lBdFbHdAnDl@nYeAvH}GzOaAlEgEv`@_@|OsAdDsCzC",
+   "pointCount": 106,
+   "start": [
+    42.637431,
+    141.234922
+   ],
+   "end": [
+    42.677567,
+    141.089957
+   ]
   }
  ],
- "hiddenCount": 76
+ "hiddenCount": 84
 }
