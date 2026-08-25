@@ -137,6 +137,8 @@ async function dropUTurnRoads(segments, origin, destination, routeFn, opts = {})
       count: pickOptions.count ?? opts.count ?? segments.length,
       budgetRatio: pickOptions.budgetRatio ?? opts.budgetRatio,
       corridorScale: pickOptions.corridorScale,
+      // ⚠️ 方角の指定も守る。守らないと「北まわり」で選び直したら南の道が入る
+      side: pickOptions.side ?? null,
     });
     if (again && again.segments.length > remaining.length) {
       const trial = await routeFn(again.waypoints);

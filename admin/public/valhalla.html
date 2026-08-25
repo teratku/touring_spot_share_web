@@ -134,8 +134,21 @@
             <option value="3">もっと 3.0倍</option>
           </select>
         </label>
+        <label style="font-size:11px;color:var(--muted)">まわり方
+          <select id="side">
+            <option value="">おまかせ</option>
+            <option value="north">北まわり</option>
+            <option value="east">東まわり</option>
+            <option value="south">南まわり</option>
+            <option value="west">西まわり</option>
+          </select>
+        </label>
       </div>
-      <p class="hint">両端のあいだに掛かる<strong>県を全部まとめて</strong>見て、
+      <p class="hint">⚠️ <strong>まわり方は「直線のどちら側へ膨らむか」。</strong>
+        候補は旅の向きと直角の2方向に集まるので、南西へ向かう旅なら
+        「北まわり」と「西まわり」は同じ側を指す（幾何の通り）。
+        旅の向きと同じ方角を選ぶと候補がほぼ無くなる。
+        <br>両端のあいだに掛かる<strong>県を全部まとめて</strong>見て、
         点数の高い道から予算に収まるぶんだけ通す。<strong>たっぷり／ひかえめ／別ルートの
         3通り</strong>を出す。<br>⚠️ 最短・ふつうには入れない。
         <br>⚠️ <strong>引いてみてUターンした道は外す</strong>（外したぶんは別の道で埋め直す）。</p>
@@ -327,6 +340,7 @@ async function run() {
   const costing = document.getElementById("costing").value;
   const funCount = Number(document.getElementById("funCount").value) || 0;
   const budgetRatio = Number(document.getElementById("budget").value) || undefined;
+  const side = document.getElementById("side").value || undefined;
   document.getElementById("run").disabled = true;
   state.results = {};
   state.variants = [];
@@ -355,7 +369,7 @@ async function run() {
   // ② 楽しい道の案を何通りか
   if (funCount > 0) {
     const body = { from:state.from, to:state.to, vias:state.vias,
-                   costing, funCount, budgetRatio, maxVariants:3 };
+                   costing, funCount, budgetRatio, side, maxVariants:3 };
     state.lastRequest = body;
     const got = await post("/api/valhalla/fun-routes", body);
     if (got.error) {
@@ -420,6 +434,11 @@ function renderPicked() {
   const dropped = notes.length ? "<br>⚠️ " + notes.join("<br>⚠️ ") : "";
   const prefs = (p.prefectures || []).length
     ? `${p.prefectures.length}県（${escapeHtml(p.prefectures.join(" "))}）の` : "";
+  const SIDE_LABEL = { north:"北", east:"東", south:"南", west:"西" };
+  if (p.side) {
+    notes.unshift(`${SIDE_LABEL[p.side] || p.side}まわりで選んだ`
+      + (p.sideDropped ? `（方角の指定で${p.sideDropped}本を外した）` : ""));
+  }
   note.innerHTML = `${prefs}候補${p.considered}本から。`
     + `見積もり${(p.estimatedMeters / 1000).toFixed(1)}km`
     + `（実際は${(r.lengthMeters / 1000).toFixed(1)}km）${dropped}`;

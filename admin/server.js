@@ -569,7 +569,7 @@ app.post("/api/valhalla/route", async (req, res) => {
  */
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons,
-          funCount, budgetRatio, maxVariants } = req.body || {};
+          funCount, budgetRatio, maxVariants, side } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -577,7 +577,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
   try {
     const near = segmentsBetween(from, to);
     const picks = buildFunVariants(from, to, near.segments,
-      { count: funCount || 4, budgetRatio, maxVariants: maxVariants || 3 });
+      { count: funCount || 4, budgetRatio, side, maxVariants: maxVariants || 3 });
 
     const routes = [];
     const seen = new Set();
@@ -611,6 +611,9 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
         estimatedMeters: pick.estimatedMeters,
         baselineMeters: pick.baselineMeters,
         detourRatio: pick.detourRatio,
+        side: side || null,
+        // 方角の指定で落とした本数（0本になったときに理由が分かるように）
+        sideDropped: pick.sideDropped || 0,
         uTurnOnly: pick.uTurnOnly,
         // Uターンを起こしたので外した道
         uTurnDropped: refined.dropped.map((s) => s.name),

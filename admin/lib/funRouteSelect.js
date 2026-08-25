@@ -113,6 +113,8 @@ function project(point, axis) {
     // ⚠️ 後退の判定には使わないこと（alongOnAxis のコメント参照）
     rawAlong: t * axisLength,
     lateralDistance: distance(point, near),
+    //: 軸の上のいちばん近い点。「どちら側に外れているか」を測るのに使う
+    near,
   };
 }
 
@@ -130,6 +132,68 @@ function project(point, axis) {
  *    **はみ出しを理由に落とす規則を足さないこと。**
  */
 const alongOnAxis = (point, axis) => project(point, axis).along;
+
+// MARK: どちら側へ回り込むか
+
+const deg = (r) => (r * 180) / Math.PI;
+
+/** a から b を見た方角（0=北, 90=東, 180=南, 270=西） */
+function bearing(a, b) {
+  const p1 = rad(a[1]), p2 = rad(b[1]);
+  const dl = rad(b[0] - a[0]);
+  const y = Math.sin(dl) * Math.cos(p2);
+  const x = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl);
+  return (deg(Math.atan2(y, x)) + 360) % 360;
+}
+
+//: 指定できる方角
+const SIDES = { north: 0, east: 90, south: 180, west: 270 };
+const SIDE_LABELS = { north: "北", east: "東", south: "南", west: "西" };
+
+/**
+ * その区間が、直線のどちら側に外れているか（方角）。
+ * 直線の上にほぼ乗っているときは null。
+ */
+function sideBearing(seg, origin, destination) {
+  const mid = midpoint(seg);
+  if (!mid) return null;
+  const proj = project(mid, [origin, destination]);
+  // ⚠️ ほぼ直線上の点は向きが定まらない。10m を切ったら「どちらでもない」
+  if (proj.lateralDistance < 10) return null;
+  return bearing(proj.near, mid);
+}
+
+/**
+ * 指定した方角の側にあるか（半平面で見る）。
+ *
+ * ⚠️ **候補は「旅の向きと直角の2方向」に集まる。** 実測:
+ *      新座→愛川（226°へ）   北西4本 / 南東1本
+ *      甲府→富士吉田（132°へ） 北東5本 / 南西3本
+ *      高崎→草津（313°へ）   北東10本 / 南西22本
+ *    そのため「北」と「西」が同じ群を指すことがある（南西へ向かう旅なら
+ *    「北まわり」と「西まわり」は同じ意味）。これは幾何の通りで、間違いではない。
+ *
+ * ⚠️ **旅の向きと同じ方角を選ぶと、ほぼ何も残らない。** 南へ向かう旅で
+ *    「南まわり」を選んでも、直角にしか外れないので当たらない。
+ *    呼び出し側は「0本だった」と分かる形で伝えること。
+ */
+function matchesSide(sideDegrees, segmentBearing) {
+  if (segmentBearing == null) return false;
+  const diff = Math.abs(((segmentBearing - sideDegrees + 540) % 360) - 180);
+  return diff < 90;
+}
+
+/** "north" / "北" / 数値 のいずれでも受ける。分からなければ null */
+function normalizeSide(side) {
+  if (side == null || side === "") return null;
+  if (Number.isFinite(side)) return ((side % 360) + 360) % 360;
+  const key = String(side).toLowerCase();
+  if (key in SIDES) return SIDES[key];
+  for (const [k, label] of Object.entries(SIDE_LABELS)) {
+    if (String(side) === label) return SIDES[k];
+  }
+  return null;
+}
 
 // MARK: 区間
 
@@ -307,13 +371,18 @@ function selectFunRoads(origin, destination, segments, opts = {}) {
   const budget = baseline * (opts.budgetRatio ?? DEFAULT_BUDGET_RATIO);
   const limit = Math.max(1, Math.min(opts.count ?? 4, MAX_SEGMENTS));
 
-  const candidates = (segments || []).filter((s) =>
+  // ⚠️ **方角の指定は、コリドーを通ったあとに掛ける。** 先に掛けると
+  //    「そもそも遠すぎる道」まで数に入って、何本落としたのか分からなくなる
+  const side = normalizeSide(opts.side);
+  const inCorridor = (segments || []).filter((s) =>
     s.score >= MIN_AUTO_SCORE
     && Array.isArray(s.start) && Array.isArray(s.end)
     && isWithinCorridor(s, origin, destination, directDistance, opts.corridorScale));
+  const candidates = side == null ? inCorridor
+    : inCorridor.filter((s) => matchesSide(side, sideBearing(s, origin, destination)));
   if (!candidates.length) {
     return { segments: [], waypoints: [], detourRatio: 1, baselineMeters: baseline,
-             estimatedMeters: baseline, considered: 0 };
+             estimatedMeters: baseline, considered: 0, sideDropped: 0 };
   }
 
   // ⚠️ **点数 ÷ 遠回り距離 で選ばないこと。** 点数の幅（実測52〜84）に対して
@@ -338,9 +407,10 @@ function selectFunRoads(origin, destination, segments, opts = {}) {
     chosenLength = picked.length;
   }
 
+  const sideDropped = side == null ? 0 : inCorridor.length - candidates.length;
   const empty = { segments: [], waypoints: [], detourRatio: 1, baselineMeters: Math.round(baseline),
                   estimatedMeters: Math.round(baseline), considered: candidates.length,
-                  uTurnOnly: [] };
+                  sideDropped, uTurnOnly: [] };
   if (!chosen.length) return empty;
 
   // ⚠️ **並べ替えただけでは後退が消えないことがある。**
@@ -365,6 +435,7 @@ function selectFunRoads(origin, destination, segments, opts = {}) {
         baselineMeters: Math.round(baseline),
         estimatedMeters: Math.round(estimated),
         considered: candidates.length,
+        sideDropped,
         uTurnOnly: uTurnOnly.map((s) => s.name),
       };
     }
@@ -412,10 +483,13 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
   const maxVariants = opts.maxVariants ?? 3;
   const out = [];
 
+  // ⚠️ **方角の指定は全部の案に同じものを渡す。** 案ごとに変えると、
+  //    「北まわりを選んだのに南の案が出る」ことになる
+  const side = opts.side ?? null;
   const generous = selectFunRoads(origin, destination, segments,
-    { count, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
+    { count, side, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
   if (!generous || !generous.segments.length) return out;
-  const generousOpts = { count, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO };
+  const generousOpts = { count, side, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO };
   out.push({ kind: "generous", label: "たっぷり", pickOptions: generousOpts, ...generous });
   if (maxVariants < 2) return out;
 
@@ -423,11 +497,11 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
   // ⚠️ 候補を除外して選び直すより、予算を絞る方が安定して別ルートになる（実測）
   const modestBudget = Math.min(MODEST_BUDGET_RATIO, opts.budgetRatio ?? DEFAULT_BUDGET_RATIO);
   const modest = selectFunRoads(origin, destination, segments,
-    { count, budgetRatio: modestBudget });
+    { count, side, budgetRatio: modestBudget });
   if (modest && modest.segments.length
       && overlapRatio(modest.segments, generous.segments) < 1) {
     out.push({ kind: "modest", label: "ひかえめ",
-               pickOptions: { count, budgetRatio: modestBudget }, ...modest });
+               pickOptions: { count, side, budgetRatio: modestBudget }, ...modest });
   }
   if (out.length >= maxVariants) return out;
 
@@ -436,7 +510,7 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
     .sort((a, b) => b.score - a.score).slice(0, 2).map((s) => s.id));
   const alternate = selectFunRoads(origin, destination,
     segments.filter((s) => !topIds.has(s.id)),
-    { count, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
+    { count, side, budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
   if (alternate && alternate.segments.length
       && out.every((v) => overlapRatio(v.segments, alternate.segments) < MAX_VARIANT_OVERLAP)) {
     // ⚠️ 別ルートは「たっぷりの上位2本を外す」のが持ち味。選び直すときも外し続ける
@@ -457,12 +531,12 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
   //    **外して良い保証は無い。** 消すなら先に再現するテストを書くこと。
   //    （移し元の FunRouteBuilder.swift にも同じ断り書きがある）
   const wide = selectFunRoads(origin, destination, segments,
-    { count, budgetRatio: Math.max(WIDE_BUDGET_RATIO, opts.budgetRatio ?? 0),
+    { count, side, budgetRatio: Math.max(WIDE_BUDGET_RATIO, opts.budgetRatio ?? 0),
       corridorScale: WIDE_CORRIDOR_SCALE });
   if (wide && wide.segments.length
       && wide.segments.some((c) => !out.some((v) => v.segments.some((s) => s.id === c.id)))) {
     out.push({ kind: "wide", label: "もっと寄り道",
-               pickOptions: { count, corridorScale: WIDE_CORRIDOR_SCALE,
+               pickOptions: { count, side, corridorScale: WIDE_CORRIDOR_SCALE,
                               budgetRatio: Math.max(WIDE_BUDGET_RATIO, opts.budgetRatio ?? 0) },
                ...wide });
   }
@@ -473,6 +547,7 @@ module.exports = {
   buildFunVariants, overlapRatio,
   MAX_VARIANT_OVERLAP, MODEST_BUDGET_RATIO, WIDE_CORRIDOR_SCALE, WIDE_BUDGET_RATIO,
   selectFunRoads, isWithinCorridor, orderedByProgress, twoOptImprove, worstBackwardExcursion,
+  bearing, sideBearing, matchesSide, normalizeSide, SIDES, SIDE_LABELS,
   pathLength, waypointsFor, traversal, midpoint, project, distance,
   MIN_AUTO_SCORE, MIN_SEGMENT_LENGTH_KM, MIN_CURVINESS, CORRIDOR_RATIO,
   CORRIDOR_CAP_METERS, CORRIDOR_LENGTH_FACTOR, CORRIDOR_MIN_WIDTH_METERS,

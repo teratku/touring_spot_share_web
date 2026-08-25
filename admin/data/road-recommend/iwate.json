@@ -1,9 +1,9 @@
 {
  "prefecture": "岩手県",
  "romaji": "iwate",
- "generation": 3,
- "contentHash": "cd6c34930331",
- "builtAt": "2026-08-25T13:11:39.756Z",
+ "generation": 4,
+ "contentHash": "d013496c6e3b",
+ "builtAt": "2026-08-25T13:57:36.815Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -3551,6 +3551,9 @@
    "end": [
     38.813193,
     141.252505
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
@@ -3574,6 +3577,9 @@
    "end": [
     39.183246,
     141.003855
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
@@ -3597,6 +3603,9 @@
    "end": [
     39.887454,
     141.617307
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
@@ -3620,6 +3629,9 @@
    "end": [
     39.382493,
     141.341492
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
@@ -3643,6 +3655,9 @@
    "end": [
     39.975707,
     141.239789
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
@@ -3666,6 +3681,10 @@
    "end": [
     40.31707,
     141.636116
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
@@ -3689,6 +3708,10 @@
    "end": [
     38.843588,
     141.264015
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
@@ -3712,6 +3735,10 @@
    "end": [
     39.129305,
     140.992138
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
@@ -3735,6 +3762,10 @@
    "end": [
     39.846376,
     141.879065
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
@@ -3758,6 +3789,9 @@
    "end": [
     39.242613,
     141.148905
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
@@ -3781,6 +3815,10 @@
    "end": [
     38.859988,
     141.354671
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
@@ -3804,6 +3842,10 @@
    "end": [
     39.767395,
     141.212723
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
@@ -3827,56 +3869,14 @@
    "end": [
     40.159156,
     141.579926
+   ],
+   "tags": [
+    "ワインディング",
+    "快走"
    ]
   },
   {
    "id": "岩手県:145",
-   "name": "国道46号",
-   "ref": "46",
-   "highway": "trunk",
-   "lengthKm": 3.53,
-   "curviness": 105.3,
-   "flow": 33.8,
-   "turnCount": 11,
-   "score": 48.6,
-   "baseScore": 48.6,
-   "spotCount": 0,
-   "polyline": "oo`qFkgo|YN}JaAgk@gEmTQFnEpVlAzt@kA~_BWI",
-   "pointCount": 9,
-   "start": [
-    39.657035,
-    141.149501
-   ],
-   "end": [
-    39.657454,
-    141.134019
-   ]
-  },
-  {
-   "id": "岩手県:146",
-   "name": "侍浜停車場阿子木線",
-   "ref": "153",
-   "highway": "secondary",
-   "lengthKm": 4.41,
-   "curviness": 176.6,
-   "flow": 16.9,
-   "turnCount": 46,
-   "score": 48.6,
-   "baseScore": 48.6,
-   "spotCount": 0,
-   "polyline": "exutF{__`Z_@wOfCiJ~JeEjJ}Hv@yCHcG]qAuHiGeGqTsAi^jBkQgAmGOiFrByEz@wDCcW]wCsG_Pu@qSw@oHeDeCuCwEgNpDu@ZAx@",
-   "pointCount": 26,
-   "start": [
-    40.257465,
-    141.721739
-   ],
-   "end": [
-    40.261726,
-    141.761127
-   ]
-  },
-  {
-   "id": "岩手県:147",
    "name": "江刺東和線",
    "ref": "27",
    "highway": "primary",
@@ -3896,10 +3896,13 @@
    "end": [
     39.291227,
     141.323184
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "岩手県:148",
+   "id": "岩手県:146",
    "name": "唐丹日頃市線",
    "ref": "193",
    "highway": "secondary",
@@ -3919,10 +3922,13 @@
    "end": [
     39.156296,
     141.700173
+   ],
+   "tags": [
+    "快走"
    ]
   },
   {
-   "id": "岩手県:149",
+   "id": "岩手県:147",
    "name": "盛岡環状線",
    "ref": "16",
    "highway": "primary",
@@ -3942,8 +3948,57 @@
    "end": [
     39.754914,
     141.185665
+   ],
+   "tags": [
+    "快走"
+   ]
+  },
+  {
+   "id": "岩手県:148",
+   "name": "柏台松尾線",
+   "ref": "45",
+   "highway": "primary",
+   "lengthKm": 4.02,
+   "curviness": 140.2,
+   "flow": 20.9,
+   "turnCount": 27,
+   "score": 48.1,
+   "baseScore": 48.1,
+   "spotCount": 0,
+   "polyline": "uyxrFk`w{YoHmFeAoDaBe`@kBeMoRdJcEb@wDiBgWgT}DeJ{HoUyByNmBsCkTwM{BPqCnKcAhByCrBsKqG",
+   "pointCount": 19,
+   "start": [
+    39.945394,
+    141.025498
+   ],
+   "end": [
+    39.968783,
+    141.046299
+   ]
+  },
+  {
+   "id": "岩手県:149",
+   "name": "東山薄衣線",
+   "ref": "282",
+   "highway": "secondary",
+   "lengthKm": 8.46,
+   "curviness": 156,
+   "flow": 16.7,
+   "turnCount": 79,
+   "score": 48,
+   "baseScore": 48,
+   "spotCount": 0,
+   "polyline": "_r|lFiea}Yi@_Eb@OvAr@rHbId_@jPhCWfMyD|Ay@bE}EvBk@rNl@dOE`BqGbCoFvG{G|@yC@qCkB_O@aGh@{DnFkIbCaHpP{NbDmGtDzE~ExIRjArBQ~B^`GvHrDtCfASjHmHxB_@fEvAnF~HxA|@fh@zI~IuAhJfAzK_AvE_EjOc]pBwCbGeF~Dm@bCLrQbI",
+   "pointCount": 49,
+   "start": [
+    38.981596,
+    141.241327
+   ],
+   "end": [
+    38.923293,
+    141.256172
    ]
   }
  ],
- "hiddenCount": 17
+ "hiddenCount": 19
 }

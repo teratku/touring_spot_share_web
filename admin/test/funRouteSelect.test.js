@@ -10,6 +10,7 @@ const {
   MIN_AUTO_SCORE, MIN_CURVINESS, MIN_SEGMENT_LENGTH_KM,
   CORRIDOR_CAP_METERS, CIRCUITY_FACTOR, MAX_BACKWARD_EXCURSION_METERS,
   MAX_OVERSHOOT_RATIO, buildFunVariants, overlapRatio, MAX_VARIANT_OVERLAP,
+  bearing, sideBearing, matchesSide, normalizeSide, SIDES, SIDE_LABELS,
 } = require("../lib/funRouteSelect");
 
 /**
@@ -481,5 +482,146 @@ test("もっと寄り道は、他の案に無い道を含む", () => {
       !others.some((v) => v.segments.some((s) => s.id === c.id)));
     assert.ok(fresh.length > 0,
       `「もっと寄り道」に新しい道が1本も無い（${wide.segments.map((s) => s.name).join("・")}）`);
+  }
+});
+
+// MARK: どちら側へ回り込むか
+
+test("方角を測れる", () => {
+  const at = [139.0, 35.0];
+  assert.ok(Math.abs(bearing(at, [139.0, 35.1]) - 0) < 1, "北が0度になっていない");
+  assert.ok(Math.abs(bearing(at, [139.1, 35.0]) - 90) < 1, "東が90度になっていない");
+  assert.ok(Math.abs(bearing(at, [139.0, 34.9]) - 180) < 1, "南が180度になっていない");
+  assert.ok(Math.abs(bearing(at, [138.9, 35.0]) - 270) < 1, "西が270度になっていない");
+});
+
+test("半平面で見る（真横まで含める）", () => {
+  // ⚠️ **「北まわり」は北西も北東も含む。** 真北しか通さないと、
+  //    候補が旅の向きと直角に集まる以上、ほとんど何も残らない
+  assert.ok(matchesSide(SIDES.north, 0), "真北が北に入っていない");
+  assert.ok(matchesSide(SIDES.north, 45), "北東が北に入っていない");
+  assert.ok(matchesSide(SIDES.north, 315), "北西が北に入っていない");
+  assert.ok(!matchesSide(SIDES.north, 90), "真東まで北に入れている");
+  assert.ok(!matchesSide(SIDES.north, 180), "南が北に入っている");
+});
+
+test("方角が定まらないときは、どの向きにも入れない", () => {
+  assert.strictEqual(matchesSide(SIDES.north, null), false);
+});
+
+test("方角の書き方をいくつか受ける", () => {
+  assert.strictEqual(normalizeSide("north"), 0);
+  assert.strictEqual(normalizeSide("北"), 0);
+  assert.strictEqual(normalizeSide("south"), 180);
+  assert.strictEqual(normalizeSide(45), 45);
+  assert.strictEqual(normalizeSide(""), null);
+  assert.strictEqual(normalizeSide(null), null);
+  assert.strictEqual(normalizeSide("なにか"), null, "分からない値を通している");
+});
+
+test("東西南北の角度が合っている", () => {
+  // ⚠️ **東と西を取り違えると、押したのと反対側へ回り込む。**
+  //    方角を測る関数（bearing）と同じ決まりであること
+  const at = [139.0, 35.0];
+  assert.ok(Math.abs(bearing(at, [139.1, 35.0]) - SIDES.east) < 1,
+    `東が ${SIDES.east}度 になっていない`);
+  assert.ok(Math.abs(bearing(at, [138.9, 35.0]) - SIDES.west) < 1,
+    `西が ${SIDES.west}度 になっていない`);
+  assert.ok(Math.abs(bearing(at, [139.0, 35.1]) - SIDES.north) < 1);
+  assert.ok(Math.abs(bearing(at, [139.0, 34.9]) - SIDES.south) < 1);
+  assert.deepStrictEqual(Object.keys(SIDE_LABELS).sort(), Object.keys(SIDES).sort(),
+    "SIDES と SIDE_LABELS の顔ぶれが違う");
+});
+
+test("東に置いた道は、東まわりでだけ選ばれる", () => {
+  // ⚠️ 実データだと候補が旅の向きに引きずられる。手で置いて確かめる
+  const north = [KOFU[0] + 0.05, KOFU[1] + 0.20];    // 出発地の真北
+  const east = seg({ name:"東の道", start:[35.60, 138.95], end:[35.61, 138.96] });
+  const west = seg({ name:"西の道", start:[35.60, 138.20], end:[35.61, 138.19] });
+  const dest = [KOFU[0] + 0.02, KOFU[1] - 0.30];      // ほぼ真南へ向かう旅
+
+  const eb = sideBearing(east, KOFU, dest);
+  const wb = sideBearing(west, KOFU, dest);
+  assert.ok(matchesSide(SIDES.east, eb), `東の道の向きが ${Math.round(eb)}度`);
+  assert.ok(!matchesSide(SIDES.west, eb), "東の道が西まわりに入っている");
+  assert.ok(matchesSide(SIDES.west, wb), `西の道の向きが ${Math.round(wb)}度`);
+  assert.ok(!matchesSide(SIDES.east, wb), "西の道が東まわりに入っている");
+});
+
+test("直線の上にある道は、どちら側でもない", () => {
+  // ⚠️ **ほぼ直線上の点は向きが定まらない。** 無理に決めると、
+  //    ほんの数mのぶれで北になったり南になったりして、
+  //    「北まわり」を選ぶたびに違う道が入る
+  const from = [139.0, 35.0], to = [139.0, 35.5];      // 真北へ向かう旅
+  // 直線のちょうど上に置く（横ズレ 0m）
+  const onLine = seg({ name:"直線上", start:[35.20, 139.0], end:[35.21, 139.0] });
+  const lateral = project(midpoint(onLine), [from, to]).lateralDistance;
+  assert.ok(lateral < 10, `材料が悪い（横ズレ ${Math.round(lateral)}m）`);
+  assert.strictEqual(sideBearing(onLine, from, to), null,
+    "直線上の道に向きを付けている");
+  // どの方角にも入らないこと
+  for (const d of Object.values(SIDES)) {
+    assert.ok(!matchesSide(d, sideBearing(onLine, from, to)),
+      `直線上の道が ${d}度 の側に入っている`);
+  }
+});
+
+test("指定した側の道だけを選ぶ", () => {
+  if (!yamanashi) return;
+  // 甲府→富士吉田は南東へ向かう。候補は北東側と南西側に分かれる（実測）
+  const north = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4, side: "north" });
+  const south = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4, side: "south" });
+  assert.ok(north.segments.length, "北まわりで1本も選ばれていない");
+  assert.ok(south.segments.length, "南まわりで1本も選ばれていない");
+
+  // ⚠️ **選ばれた道が、本当にその側にあること。** 指定を素通りしていないか
+  for (const s of north.segments) {
+    assert.ok(matchesSide(SIDES.north, sideBearing(s, KOFU, FUJI)),
+      `北まわりに ${s.name} が入っている（北側にない）`);
+  }
+  for (const s of south.segments) {
+    assert.ok(matchesSide(SIDES.south, sideBearing(s, KOFU, FUJI)),
+      `南まわりに ${s.name} が入っている（南側にない）`);
+  }
+});
+
+test("北と南で、違う道が選ばれる", () => {
+  if (!yamanashi) return;
+  const north = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4, side: "north" });
+  const south = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4, side: "south" });
+  const a = new Set(north.segments.map((s) => s.id));
+  const both = south.segments.filter((s) => a.has(s.id));
+  assert.strictEqual(both.length, 0,
+    `両方に入っている道がある: ${both.map((s) => s.name).join("・")}`);
+});
+
+test("指定しなければ、どちら側も選べる", () => {
+  if (!yamanashi) return;
+  const free = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4 });
+  const north = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4, side: "north" });
+  assert.ok(free.considered > north.considered,
+    `指定なし${free.considered}本 が 北まわり${north.considered}本 より多くない`);
+  assert.strictEqual(free.sideDropped, 0, "指定していないのに落としている");
+});
+
+test("方角で何本落としたかを返す", () => {
+  if (!yamanashi) return;
+  // ⚠️ 0本になったとき「道が無い」のか「方角で外れた」のか分かるように
+  const north = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4, side: "north" });
+  const free = selectFunRoads(KOFU, FUJI, yamanashi, { count: 4 });
+  assert.strictEqual(north.sideDropped, free.considered - north.considered,
+    "落とした本数が合っていない");
+});
+
+test("案を作るときも、方角を全部の案に効かせる", () => {
+  if (!yamanashi) return;
+  // ⚠️ 案ごとに変えると「北まわりを選んだのに南の案が出る」
+  const vs = buildFunVariants(KOFU, FUJI, yamanashi, { count: 4, side: "north" });
+  assert.ok(vs.length, "案が出ていない");
+  for (const v of vs) {
+    for (const s of v.segments) {
+      assert.ok(matchesSide(SIDES.north, sideBearing(s, KOFU, FUJI)),
+        `「${v.label}」に南側の ${s.name} が入っている`);
+    }
   }
 });
