@@ -25,6 +25,7 @@ const path = require("path");
 const { parseWkt, distanceMeters, readGridFile } = require("./roadCsv");
 const { simplify, encode } = require("./polyline");
 const { gridFileName, TARGET_HIGHWAYS, GRID_DIR } = require("./roadsAtPoint");
+const { MinHeap } = require("./minHeap");
 
 /** 端点を同じ点とみなす粗さ（度）。約22m。roadStitcher の CELL と同じ考え方 */
 const NODE_CELL = 0.0002;
@@ -110,6 +111,78 @@ function lengthOf(points) {
  * @param {[number,number]} to   [lng, lat]
  * @returns {Promise<{points, lengthMeters, polyline, roadNames, cells, truncated}|{error}>}
  */
+/**
+ * 読んで解いたマスを控えておく。
+ *
+ * ⚠️ **ルート生成は1回で何本も引く。** おすすめ道路を混ぜたルートは
+ *    4案 × 3通り＝12本を同じ地域で引くので、同じマスを12回読み直していた。
+ *    1本 0.8 秒のうち 0.67 秒がCSV読みだった（実測・甲府→富士吉田16マス）。
+ *
+ * ⚠️ **中身を書き換えないこと。** ここで配る edge は使い回される。
+ *    いまの経路探索は points を slice して読むだけで、書き換えていない
+ *    （attach / addAttachment / subPath いずれも元の配列に触らない）。
+ *    書き換えるように直すなら、ここで複製すること。
+ *
+ * ⚠️ ファイルの更新時刻を鍵に入れてある。CSVを差し替えたのに古い控えを
+ *    返すと、「作り直したのに変わらない」になる。
+ */
+const cellCache = new Map();   // "更新時刻|パス" → 断片の配列
+let cachedPoints = 0;
+//: 控える頂点の上限。1点あたり約97バイト（実測）なので、100万点で約100MB。
+//: 1マスが平均1.6万点なので、だいたい64マス＝経路4本ぶんの範囲を覚えていられる
+const MAX_CACHED_POINTS = Number(process.env.ROUTE_CACHE_POINTS || 1_000_000);
+
+async function readCell(file) {
+  const stat = fs.statSync(file);
+  const cacheKey = `${stat.mtimeMs}|${file}`;
+  const hit = cellCache.get(cacheKey);
+  if (hit) {
+    // いちばん新しく使ったものを末尾へ回す（古い方から捨てるため）
+    cellCache.delete(cacheKey);
+    cellCache.set(cacheKey, hit);
+    return hit;
+  }
+
+  const list = [];
+  let points = 0;
+  await readGridFile(file, (row) => {
+    if (!TARGET_HIGHWAYS.has(row.get("highway"))) return;
+    const shape = parseWkt(row.get("geometry"));
+    if (!shape || shape.length < 2) return;
+    points += shape.length;
+    list.push({ name: row.get("name") || row.get("ref") || "", points: shape, meters: lengthOf(shape) });
+  });
+
+  cellCache.set(cacheKey, list);
+  cachedPoints += points;
+  list.__points = points;
+  while (cachedPoints > MAX_CACHED_POINTS && cellCache.size > 1) {
+    const [oldestKey, oldest] = cellCache.entries().next().value;
+    cellCache.delete(oldestKey);
+    cachedPoints -= oldest.__points || 0;
+  }
+  return list;
+}
+
+/** 控えを捨てる（CSVを作り直したあとなど） */
+function clearCellCache() {
+  cellCache.clear();
+  cachedPoints = 0;
+}
+
+/**
+ * いま何マス・何点を控えているか。上限と、捨てる順が効いているかを
+ * 外から確かめるため。paths は古い順（先頭がいちばん昔に使ったもの）。
+ */
+function cellCacheStats() {
+  return {
+    cells: cellCache.size,
+    points: cachedPoints,
+    limit: MAX_CACHED_POINTS,
+    paths: [...cellCache.keys()].map((k) => k.slice(k.indexOf("|") + 1)),
+  };
+}
+
 async function routeBetween(from, to, options = {}) {
   const dir = options.gridDir || GRID_DIR;
   const cells = cellsCovering(from, to);
@@ -124,12 +197,7 @@ async function routeBetween(from, to, options = {}) {
     const file = path.join(dir, name);
     if (!fs.existsSync(file)) continue;
     used.push(name);
-    await readGridFile(file, (row) => {
-      if (!TARGET_HIGHWAYS.has(row.get("highway"))) return;
-      const points = parseWkt(row.get("geometry"));
-      if (!points || points.length < 2) return;
-      edges.push({ name: row.get("name") || row.get("ref") || "", points, meters: lengthOf(points) });
-    });
+    for (const edge of await readCell(file)) edges.push(edge);
   }
   if (!edges.length) return { error: "この範囲のCSVが手元にありません" };
 
@@ -245,25 +313,31 @@ async function routeBetween(from, to, options = {}) {
   }
 
   // --- ダイクストラ ---
-  // ⚠️ 優先度付きキューは使わず、素朴に最小を選ぶ。ノードは数千で、
-  //    1回の操作にしか使わないので、読みやすさを取る。
+  //
+  // ⚠️ **優先度付きキューを外さないこと。** 元は distance を毎回なめて最小を
+  //    選んでいた（「ノードは数千だから」という前提）。名前の無い道も読むように
+  //    したら 2,977 → 35,216 ノードになり、その走査だけで **1.2億回** に膨れて
+  //    1本 12.2 秒になった。ヒープ（lib/minHeap.js）にして 0.8 秒に戻っている。
+  //    ノード数は読ませるCSV次第で変わるので、この前提は当てにできない。
   const distance = new Map([[start, 0]]);
   const cameFrom = new Map();
-  const visited = new Set();
-  while (true) {
-    let current = null;
-    let currentDistance = Infinity;
-    for (const [k, d] of distance) {
-      if (!visited.has(k) && d < currentDistance) { currentDistance = d; current = k; }
-    }
-    if (current === null) break;
+
+  const heap = new MinHeap();
+  heap.push(0, start);
+  while (heap.size) {
+    const { value: currentDistance, payload: current } = heap.pop();
+    // ⚠️ **積んだものを取り消す仕組みは持たない。** 距離を縮めるたびに積み直すので、
+    //    同じノードが何度も出てくる。ただし積む値は縮むときだけなので**必ず減っていく**。
+    //    よって distance と食い違う取り出しは全部「古い控え」で、ここで捨てれば
+    //    各ノードは一度だけ通る（別に済んだ印を持たなくてよい）。
+    if (currentDistance > (distance.get(current) ?? Infinity)) continue;
     if (current === goal) break;
-    visited.add(current);
     for (const edge of graph.get(current) || []) {
       const next = currentDistance + edge.meters;
       if (next < (distance.get(edge.to) ?? Infinity)) {
         distance.set(edge.to, next);
         cameFrom.set(edge.to, { from: current, edge });
+        heap.push(next, edge.to);
       }
     }
   }
@@ -307,4 +381,5 @@ async function routeBetween(from, to, options = {}) {
   };
 }
 
-module.exports = { routeBetween, cellsCovering, MAX_CELLS, MAX_SNAP_METERS, MARGIN_DEGREES, JOIN_METERS };
+module.exports = {
+  clearCellCache, cellCacheStats, routeBetween, cellsCovering, MAX_CELLS, MAX_SNAP_METERS, MARGIN_DEGREES, JOIN_METERS };

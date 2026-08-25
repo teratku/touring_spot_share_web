@@ -30,6 +30,9 @@ const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
+const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
+const { buildFunVariants } = require("./lib/funRouteSelect");
+const { segmentsBetween } = require("./lib/roadRecommendIndex");
 const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
 const { midFrom, kmlUrl, parseKml } = require("./lib/myMapsKml");
@@ -216,6 +219,7 @@ app.get("/api/prefectures", (_req, res) => {
 const roadDir = (kind) => path.join(__dirname, "data", kind);
 
 app.get("/roads", (_req, res) => sendHtml(res, "road-builder.html"));
+app.get("/valhalla", (_req, res) => sendHtml(res, "valhalla.html"));
 
 /** 県の一覧（生成済みかどうか・調整の件数つき） */
 app.get("/api/roads/prefectures", (_req, res) => {
@@ -522,6 +526,99 @@ app.get("/api/restrictions/route", async (req, res) => {
     res.json(await routeBetween([fromLng, fromLat], [toLng, toLat]));
   } catch (e) {
     res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * Valhalla に経路を頼む（ローカル確認用）。
+ *
+ * 自前探索（`/api/restrictions/route`）との違いは、**曲がる指示が付くこと**と
+ * **一方通行を見ていること**。画面は /valhalla。
+ *
+ * ⚠️ Valhalla が立っていなくても、ここが 502 を返すだけで済むこと。
+ *    他の画面を巻き込まないよう、起動時に繋ぎに行ったりしない。
+ */
+app.post("/api/valhalla/route", async (req, res) => {
+  const { from, to, vias, variant, costing, excludePolygons, funCount, budgetRatio } = req.body || {};
+  const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
+  if (!ok(from) || !ok(to)) {
+    return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
+  }
+  try {
+    // ⚠️ **楽しい道はこの口では選ばない。** 最短・ふつうに混ぜないため、
+    //    自動で選ぶのは /api/valhalla/fun-routes の方だけにしてある
+    const out = await routeWithValhalla(from, to,
+      { vias, variant, costing, excludePolygons });
+    if (out.error) return res.status(502).json(out);
+    res.json(out);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * 楽しい道を通したルートを、**何通りか**返す。
+ *
+ * ⚠️ **最短・ふつうと分けてあること。** 同じ口で作ると、最短にまで
+ *    おすすめ道路が入ってしまう（実機で報告された）。
+ *    最短・ふつうは経由地なしの `/api/valhalla/route` で引く。
+ *
+ * ⚠️ 県は指定させない。両端のあいだに掛かる県を全部集める
+ *    （lib/roadRecommendIndex.js）。
+ */
+app.post("/api/valhalla/fun-routes", async (req, res) => {
+  const { from, to, vias, costing, excludePolygons,
+          funCount, budgetRatio, maxVariants } = req.body || {};
+  const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
+  if (!ok(from) || !ok(to)) {
+    return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
+  }
+  try {
+    const near = segmentsBetween(from, to);
+    const picks = buildFunVariants(from, to, near.segments,
+      { count: funCount || 4, budgetRatio, maxVariants: maxVariants || 3 });
+
+    const routes = [];
+    for (const pick of picks) {
+      // ⚠️ 手で置いた経由地は残す。自動で選んだぶんの前に置く
+      const allVias = (Array.isArray(vias) ? vias.slice() : []).concat(pick.waypoints);
+      const r = await routeWithValhalla(from, to,
+        { vias: allVias, variant: "fun", costing, excludePolygons });
+      if (r.error) continue;
+      r.kind = pick.kind;
+      r.variantLabel = pick.label;
+      r.funRoads = pick.segments.map((s) => ({
+        id: s.id, name: s.name, lengthKm: s.lengthKm,
+        score: s.score, curviness: s.curviness, start: s.start, end: s.end,
+      }));
+      r.funPick = {
+        prefectures: near.prefectures,
+        considered: pick.considered,
+        estimatedMeters: pick.estimatedMeters,
+        baselineMeters: pick.baselineMeters,
+        detourRatio: pick.detourRatio,
+        uTurnOnly: pick.uTurnOnly,
+      };
+      routes.push(r);
+    }
+    if (!routes.length) {
+      return res.json({ routes: [], prefectures: near.prefectures,
+                        note: "この範囲に通せるおすすめ道路がありません" });
+    }
+    res.json({ routes, prefectures: near.prefectures });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/** Valhalla が立っているか。画面がまず聞きに来る */
+app.get("/api/valhalla/status", async (_req, res) => {
+  try {
+    const r = await fetch(`${VALHALLA_URL}/status`, { signal: AbortSignal.timeout(3000) });
+    const j = await r.json();
+    res.json({ up: true, url: VALHALLA_URL, version: j.version });
+  } catch (e) {
+    res.json({ up: false, url: VALHALLA_URL, error: e.message });
   }
 });
 

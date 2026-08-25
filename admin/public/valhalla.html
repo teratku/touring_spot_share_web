@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valhalla ルート生成 確認</title>
+<!--
+  Valhalla が返す経路を、地図と生データの両方で見るための画面。
+  ローカル専用（http://127.0.0.1:4317/valhalla）。
+
+  【何を確かめる画面か】
+  自前探索（lib/roadRoute.js）が返すのは**線と道路名だけ**で、
+  「200m先を右折」を作れない。Valhalla ならそれが付く。
+  ここでは **線・曲がる指示・生の応答** を並べて、実際にそうなっているかを見る。
+
+  【立ち上げ方】
+    docker run -d --name valhalla-jp -p 8002:8002 valhalla-jp-cloudrun:latest
+    node server.js
+
+  ⚠️ Valhalla が居ないときは、画面の上に赤く出る。地図は動くので混同しないこと。
+
+  ⚠️ **ポリラインは触らない。** サーバ側（lib/valhallaRoute.js）で6桁→点の配列に
+     直してから渡している。ここで decode し直すと精度を間違える。
+-->
+<style>
+  :root {
+    --line:#e2e5e9; --muted:#6b7280; --accent:#00a8c6; --warn:#e8590c;
+    --sel:#e8590c; --ok:#2b8a3e; --bg:#fbfcfd; --ng:#c92a2a;
+  }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; font:13px/1.5 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; color:#222; }
+  kbd { font:11px/1 monospace; background:#eef2f5; border:1px solid var(--line);
+        border-bottom-width:2px; border-radius:3px; padding:2px 4px; }
+
+  header { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--line); }
+  header h1 { font-size:15px; margin:0; white-space:nowrap; }
+  .spacer { flex:1; }
+  a.back { color:var(--muted); text-decoration:none; font-size:12px; }
+  a.back:hover { color:var(--accent); }
+
+  #status { font-size:12px; padding:3px 9px; border-radius:999px; border:1px solid var(--line); white-space:nowrap; }
+  #status.up { color:var(--ok); border-color:#b2f2bb; background:#ebfbee; }
+  #status.down { color:var(--ng); border-color:#ffc9c9; background:#fff5f5; }
+
+  main { display:flex; height:calc(100vh - 45px); }
+
+  /* 左 */
+  #side { width:340px; min-width:340px; border-right:1px solid var(--line); display:flex; flex-direction:column; overflow-y:auto; }
+  .bar { padding:8px 10px; border-bottom:1px solid var(--line); }
+  .bar h2 { font-size:12px; margin:0 0 6px; color:var(--muted); font-weight:600; }
+  .hint { color:var(--muted); font-size:11px; margin:4px 0 0; }
+  button { font:inherit; padding:5px 12px; border:1px solid var(--line); border-radius:6px; background:#fff; cursor:pointer; }
+  button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+  button:disabled { opacity:.45; cursor:default; }
+  button.go { background:var(--accent); color:#fff; border-color:var(--accent); }
+  button.go:hover:not(:disabled) { background:#0093ad; color:#fff; }
+  select { font:inherit; padding:4px 6px; border:1px solid var(--line); border-radius:6px; background:#fff; }
+
+  .pt { display:flex; gap:7px; align-items:center; padding:3px 0; }
+  .pt .tag { width:52px; font-size:11px; color:var(--muted); }
+  .pt .val { flex:1; font:11px/1.4 ui-monospace,Menlo,monospace; color:#333; }
+  .pt .val.empty { color:#b0b6bd; }
+
+  /* 案 */
+  #variants { display:flex; flex-direction:column; }
+  .v { padding:7px 10px; border-bottom:1px solid #f0f2f4; cursor:pointer; display:flex; gap:8px; align-items:baseline; }
+  .v:hover { background:#f6f8fa; }
+  .v.sel { background:#fff1e6; box-shadow:inset 3px 0 0 var(--sel); }
+  .v .swatch { width:10px; height:10px; border-radius:2px; flex:none; align-self:center; }
+  .v .name { flex:1; font-weight:600; }
+  .v .num { font-variant-numeric:tabular-nums; color:var(--muted); font-size:11px; white-space:nowrap; }
+  .v .err { color:var(--ng); font-size:11px; }
+
+  /* 曲がる指示 */
+  #steps { flex:1; overflow-y:auto; }
+  .st { padding:4px 10px; border-bottom:1px solid #f4f6f8; display:flex; gap:8px; align-items:baseline; cursor:pointer; font-size:12px; }
+  .st:hover { background:#f6f8fa; }
+  .st.sel { background:#e7f5ff; }
+  .st .n { color:var(--muted); font-size:10px; min-width:22px; text-align:right; font-variant-numeric:tabular-nums; }
+  .st .m { min-width:64px; font-size:11px; color:var(--accent); }
+  .st .m.uturn { color:var(--ng); font-weight:700; }
+  .st .t { flex:1; }
+  .st .d { color:var(--muted); font-size:11px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+
+  /* 右 */
+  #right { flex:1; display:flex; flex-direction:column; min-width:280px; }
+  #map { flex:1; min-height:200px; }
+  #raw { height:200px; border-top:1px solid var(--line); display:flex; flex-direction:column; }
+  #raw .bar { display:flex; align-items:center; gap:8px; }
+  #raw pre { flex:1; margin:0; overflow:auto; padding:8px 12px; background:#fbfcfd;
+             font:11px/1.5 ui-monospace,Menlo,monospace; white-space:pre-wrap; word-break:break-all; }
+  .banner { padding:7px 14px; background:#fff5f5; color:var(--ng); border-bottom:1px solid #ffc9c9; font-size:12px; }
+  .banner code { background:#fff; padding:1px 5px; border-radius:3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Valhalla ルート生成 確認</h1>
+  <span id="status">確かめています…</span>
+  <span class="spacer"></span>
+  <a class="back" href="/roads">← おすすめ道路 調整ツール</a>
+</header>
+
+<div id="banner" class="banner" hidden></div>
+
+<main>
+  <div id="side">
+    <div class="bar">
+      <h2>両端（地図をクリック）</h2>
+      <div class="pt"><span class="tag">始点</span><span class="val empty" id="v-from">まだ</span></div>
+      <div class="pt"><span class="tag">終点</span><span class="val empty" id="v-to">まだ</span></div>
+      <div class="pt"><span class="tag">経由</span><span class="val empty" id="v-via">なし</span></div>
+      <p class="hint">1回目＝始点、2回目＝終点、3回目以降＝経由地。<kbd>右クリック</kbd>で全部消す。</p>
+    </div>
+
+    <div class="bar">
+      <h2>おすすめ道路を通す</h2>
+      <div style="display:flex;gap:6px;align-items:center">
+        <label style="font-size:11px;color:var(--muted)">自動で
+          <select id="funCount">
+            <option value="0">通さない</option>
+            <option value="2">2本</option>
+            <option value="4" selected>4本</option>
+            <option value="6">6本</option>
+            <option value="8">8本</option>
+          </select>
+        </label>
+        <label style="font-size:11px;color:var(--muted)">寄り道
+          <select id="budget">
+            <option value="1.35">ひかえめ 1.35倍</option>
+            <option value="2" selected>たっぷり 2.0倍</option>
+            <option value="3">もっと 3.0倍</option>
+          </select>
+        </label>
+      </div>
+      <p class="hint">両端のあいだに掛かる<strong>県を全部まとめて</strong>見て、
+        点数の高い道から予算に収まるぶんだけ通す。<strong>たっぷり／ひかえめ／別ルートの
+        3通り</strong>を出す。<br>⚠️ 最短・ふつうには入れない。</p>
+      <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
+        <select id="pref"><option value="">県を選んで手で足す…</option></select>
+        <select id="road" disabled><option value="">道を選ぶ…</option></select>
+      </div>
+      <p class="hint">手で足した道も、自動で選んだぶんと一緒に通る。</p>
+    </div>
+
+    <div id="picked" class="bar" hidden>
+      <h2>通した楽しい道</h2>
+      <div id="pickedList"></div>
+      <p class="hint" id="pickedNote"></p>
+    </div>
+
+    <div class="bar" style="display:flex;gap:8px;align-items:center">
+      <select id="costing">
+        <option value="motor_scooter">原付・原二（motor_scooter）</option>
+        <option value="motorcycle">バイク（motorcycle）</option>
+      </select>
+      <button class="go" id="run" disabled>引く</button>
+    </div>
+
+    <div id="variants"></div>
+    <div id="steps"></div>
+  </div>
+
+  <div id="right">
+    <div id="map"></div>
+    <div id="raw">
+      <div class="bar">
+        <h2 style="margin:0">取れたデータ</h2>
+        <span class="spacer"></span>
+        <select id="rawKind">
+          <option value="summary">まとめ</option>
+          <option value="steps">曲がる指示（全部）</option>
+          <option value="points">線の点（先頭20）</option>
+          <option value="request">投げた中身</option>
+        </select>
+      </div>
+      <pre id="rawText">まだ引いていません。</pre>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ⚠️ サーバ側で6桁→点の配列に直して渡している。ここで decode しないこと */
+
+/* ⚠️ **最短・ふつうに、おすすめ道路を混ぜないこと。**
+      混ぜてしまい「最短なのに遠回りしている」と報告された。
+      経由地なしで引くのが最短・ふつう、楽しい道を通すのは別の口。 */
+const PLAIN = [
+  { key:"shortest", label:"最短",   color:"#868e96" },
+  { key:"normal",   label:"ふつう", color:"#1c7ed6" },
+];
+//: 楽しい道の案の色。kind は サーバの buildFunVariants と揃える
+const FUN_COLORS = {
+  generous:"#e8590c", modest:"#f08c00", alternate:"#ae3ec9", wide:"#c2255c",
+};
+
+const state = {
+  from:null, to:null, vias:[],
+  roads:{},            // 手で足せるおすすめ道路（番号 → 区間）
+  variants:[],         // 出せた案（最短・ふつう・楽しい◯通り）を並び順に
+  results:{},          // key → 応答 or {error}
+  selected:"normal",
+  lastRequest:null,
+  map:null, markers:[], lines:{}, funMarks:[], stepPin:null,
+};
+
+/** いま出ている案の一覧（色と名前つき） */
+function variantList() { return state.variants; }
+
+// MARK: 地図
+
+function initMap() {
+  state.map = new google.maps.Map(document.getElementById("map"), {
+    center:{ lat:35.6642, lng:138.5684 }, zoom:10,
+    mapTypeControl:false, streetViewControl:false, fullscreenControl:false,
+  });
+  state.map.addListener("click", (e) => addPoint([e.latLng.lng(), e.latLng.lat()]));
+  // ⚠️ 右クリックの既定のメニューを出さない。出ると点が消えたのか分からなくなる
+  state.map.addListener("rightclick", () => clearPoints());
+  loadPrefectures();
+  checkStatus();
+}
+window.initMap = initMap;
+
+function addPoint(p) {
+  if (!state.from) state.from = p;
+  else if (!state.to) state.to = p;
+  else state.vias.push(p);
+  redrawMarkers();
+  renderPoints();
+}
+
+function clearPoints() {
+  state.from = state.to = null;
+  state.vias = [];
+  state.results = {};
+  redrawMarkers();
+  renderPoints();
+  renderVariants();
+  renderSteps();
+  renderPicked();
+  showRaw();
+  clearLines();
+}
+
+function redrawMarkers() {
+  state.markers.forEach((m) => m.setMap(null));
+  state.markers = [];
+  const put = (p, label, color) => {
+    if (!p) return;
+    state.markers.push(new google.maps.Marker({
+      position:{ lat:p[1], lng:p[0] }, map:state.map, label,
+      icon:{ path:google.maps.SymbolPath.CIRCLE, scale:7, fillColor:color,
+             fillOpacity:1, strokeColor:"#fff", strokeWeight:2 },
+    }));
+  };
+  put(state.from, "S", "#2b8a3e");
+  put(state.to, "G", "#c92a2a");
+  state.vias.forEach((p, i) => put(p, String(i + 1), "#1c7ed6"));
+}
+
+function clearLines() {
+  Object.values(state.lines).forEach((l) => l.setMap(null));
+  state.lines = {};
+  state.funMarks.forEach((m) => m.setMap(null));
+  state.funMarks = [];
+  if (state.stepPin) { state.stepPin.setMap(null); state.stepPin = null; }
+}
+
+/**
+ * 自動で通した楽しい道の入口・出口を地図に出す。
+ * ⚠️ **手で置いた経由地（青丸）と見分けられること。** どちらが自動で入ったのか
+ *    分からないと、「選んでいない道が通っている」と見えてしまう
+ */
+function drawFunMarks() {
+  state.funMarks.forEach((m) => m.setMap(null));
+  state.funMarks = [];
+  const r = state.results[state.selected];
+  if (!r || r.error || !r.funRoads) return;
+  r.funRoads.forEach((f, i) => {
+    for (const [p, kind] of [[f.start, "入"], [f.end, "出"]]) {
+      if (!Array.isArray(p)) continue;
+      state.funMarks.push(new google.maps.Marker({
+        position:{ lat:p[0], lng:p[1] },     // ⚠️ start/end は [緯度, 経度]
+        map:state.map,
+        title:`${f.name}（${kind}）`,
+        icon:{ path:google.maps.SymbolPath.CIRCLE, scale:6, fillColor:"#e8590c",
+               fillOpacity:0.9, strokeColor:"#fff", strokeWeight:2 },
+        label:{ text:String(i + 1), color:"#fff", fontSize:"9px" },
+      }));
+    }
+  });
+}
+
+function drawLines() {
+  clearLines();
+  for (const v of variantList()) {
+    const r = state.results[v.key];
+    if (!r || r.error || !r.points) continue;
+    const on = state.selected === v.key;
+    state.lines[v.key] = new google.maps.Polyline({
+      path:r.points.map((p) => ({ lat:p[1], lng:p[0] })),
+      map:state.map,
+      strokeColor:v.color,
+      // ⚠️ 選んでいない案も薄く残す。3案の違いが見えないと意味がない
+      strokeOpacity:on ? 0.95 : 0.35,
+      strokeWeight:on ? 5 : 3,
+      zIndex:on ? 10 : 1,
+    });
+  }
+  drawFunMarks();
+  const r = state.results[state.selected];
+  if (r && r.points && r.points.length) {
+    const b = new google.maps.LatLngBounds();
+    r.points.forEach((p) => b.extend({ lat:p[1], lng:p[0] }));
+    state.map.fitBounds(b);
+  }
+}
+
+// MARK: 引く
+
+async function run() {
+  if (!state.from || !state.to) return;
+  const costing = document.getElementById("costing").value;
+  const funCount = Number(document.getElementById("funCount").value) || 0;
+  const budgetRatio = Number(document.getElementById("budget").value) || undefined;
+  document.getElementById("run").disabled = true;
+  state.results = {};
+  state.variants = [];
+  renderVariants();
+
+  const post = async (path, body) => {
+    const began = performance.now();
+    try {
+      const res = await fetch(path, { method:"POST",
+        headers:{ "Content-Type":"application/json" }, body:JSON.stringify(body) });
+      const json = await res.json();
+      json.tookMs = Math.round(performance.now() - began);
+      return json;
+    } catch (e) { return { error:e.message }; }
+  };
+
+  // ① 最短・ふつう。⚠️ **おすすめ道路は通さない**（経由地は手で置いたぶんだけ）
+  for (const v of PLAIN) {
+    const body = { from:state.from, to:state.to, vias:state.vias, variant:v.key, costing };
+    state.lastRequest = body;
+    state.results[v.key] = await post("/api/valhalla/route", body);
+    state.variants.push({ key:v.key, label:v.label, color:v.color });
+    renderVariants(); drawLines();
+  }
+
+  // ② 楽しい道の案を何通りか
+  if (funCount > 0) {
+    const body = { from:state.from, to:state.to, vias:state.vias,
+                   costing, funCount, budgetRatio, maxVariants:3 };
+    state.lastRequest = body;
+    const got = await post("/api/valhalla/fun-routes", body);
+    if (got.error) {
+      state.results.fun = got;
+      state.variants.push({ key:"fun", label:"楽しい", color:FUN_COLORS.generous });
+    } else {
+      (got.routes || []).forEach((r, i) => {
+        const key = `fun:${r.kind}`;
+        state.results[key] = r;
+        state.variants.push({ key, label:r.variantLabel,
+                              color:FUN_COLORS[r.kind] || FUN_COLORS.generous });
+        if (i === 0) state.selected = key;   // いちばん楽しい案を最初に見せる
+      });
+      if (!got.routes.length) {
+        state.results["fun:none"] = { error:got.note || "通せるおすすめ道路がありません" };
+        state.variants.push({ key:"fun:none", label:"楽しい", color:FUN_COLORS.generous });
+      }
+    }
+  }
+
+  document.getElementById("run").disabled = false;
+  renderVariants();
+  drawLines();
+  renderSteps();
+  renderPicked();
+  showRaw();
+}
+
+/**
+ * 自動で通した楽しい道を出す。
+ * ⚠️ 案ごとに選び直してはいない（経由地は3案で同じ）。どれを見ても同じ顔ぶれになる
+ */
+function renderPicked() {
+  const box = document.getElementById("picked");
+  const list = document.getElementById("pickedList");
+  const note = document.getElementById("pickedNote");
+  const r = state.results[state.selected];
+  if (!r || r.error || !r.funRoads || !r.funRoads.length) { box.hidden = true; return; }
+  box.hidden = false;
+  list.innerHTML = r.funRoads.map((f, i) =>
+    `<div class="pt"><span class="tag">${i + 1}本目</span>`
+    + `<span class="val">${escapeHtml(f.name)}　`
+    + `${f.lengthKm.toFixed(1)}km・${Math.round(f.score)}点・曲率${Math.round(f.curviness)}</span></div>`).join("");
+  const p = r.funPick || {};
+  const dropped = (p.uTurnOnly || []).length
+    ? `　Uターンでしか通れず諦めた: ${escapeHtml(p.uTurnOnly.join("・"))}` : "";
+  const prefs = (p.prefectures || []).length
+    ? `${p.prefectures.length}県（${escapeHtml(p.prefectures.join(" "))}）の` : "";
+  note.innerHTML = `${prefs}候補${p.considered}本から。`
+    + `見積もり${(p.estimatedMeters / 1000).toFixed(1)}km`
+    + `（実際は${(r.lengthMeters / 1000).toFixed(1)}km）${dropped}`;
+}
+
+// MARK: 描く
+
+function renderPoints() {
+  const fmt = (p) => p ? `${p[1].toFixed(5)}, ${p[0].toFixed(5)}` : null;
+  const set = (id, text) => {
+    const el = document.getElementById(id);
+    el.textContent = text || "まだ";
+    el.classList.toggle("empty", !text);
+  };
+  set("v-from", fmt(state.from));
+  set("v-to", fmt(state.to));
+  const via = state.vias.length ? `${state.vias.length}点` : null;
+  set("v-via", via);
+  document.getElementById("run").disabled = !(state.from && state.to);
+}
+
+function renderVariants() {
+  const box = document.getElementById("variants");
+  box.innerHTML = "";
+  for (const v of variantList()) {
+    const r = state.results[v.key];
+    const el = document.createElement("div");
+    el.className = "v" + (state.selected === v.key ? " sel" : "");
+    const sw = `<span class="swatch" style="background:${v.color}"></span>`;
+    let right;
+    if (!r) right = `<span class="num">—</span>`;
+    else if (r.error) right = `<span class="err">✗ ${escapeHtml(shorten(r.error))}</span>`;
+    else {
+      const roads = (r.funRoads || []).length;
+      right = `<span class="num">${(r.lengthMeters / 1000).toFixed(1)}km ／ `
+        + `指示${r.steps.length} ／ Uターン${r.uTurns}`
+        + (roads ? ` ／ <strong>おすすめ${roads}本</strong>` : "") + `</span>`;
+    }
+    el.innerHTML = `${sw}<span class="name">${v.label}</span>${right}`;
+    el.onclick = () => {
+      state.selected = v.key;
+      renderVariants(); drawLines(); renderSteps(); renderPicked(); showRaw();
+    };
+    box.appendChild(el);
+  }
+}
+
+function renderSteps() {
+  const box = document.getElementById("steps");
+  box.innerHTML = "";
+  const r = state.results[state.selected];
+  if (!r || r.error || !r.steps) return;
+  r.steps.forEach((s, i) => {
+    const el = document.createElement("div");
+    el.className = "st";
+    const uturn = s.maneuver.startsWith("uturn");
+    el.innerHTML = `<span class="n">${i + 1}</span>`
+      + `<span class="m${uturn ? " uturn" : ""}">${escapeHtml(s.maneuver)}</span>`
+      + `<span class="t">${escapeHtml(s.roadName || s.instruction || "—")}</span>`
+      + `<span class="d">${fmtM(s.distanceMeters)}</span>`;
+    el.onclick = () => {
+      document.querySelectorAll(".st.sel").forEach((x) => x.classList.remove("sel"));
+      el.classList.add("sel");
+      const p = r.points[s.beginIndex];
+      if (!p) return;
+      if (state.stepPin) state.stepPin.setMap(null);
+      state.stepPin = new google.maps.Marker({
+        position:{ lat:p[1], lng:p[0] }, map:state.map,
+        icon:{ path:google.maps.SymbolPath.CIRCLE, scale:9, fillColor:"#fff",
+               fillOpacity:1, strokeColor:"#e8590c", strokeWeight:3 },
+      });
+      state.map.panTo({ lat:p[1], lng:p[0] });
+    };
+    box.appendChild(el);
+  });
+}
+
+function showRaw() {
+  const kind = document.getElementById("rawKind").value;
+  const r = state.results[state.selected];
+  const out = document.getElementById("rawText");
+  if (kind === "request") {
+    out.textContent = state.lastRequest
+      ? JSON.stringify(state.lastRequest, null, 2) : "まだ投げていません。";
+    return;
+  }
+  if (!r) { out.textContent = "まだ引いていません。"; return; }
+  if (r.error) { out.textContent = "エラー:\n" + r.error; return; }
+  if (kind === "steps") {
+    out.textContent = JSON.stringify(r.steps, null, 1);
+  } else if (kind === "points") {
+    out.textContent = `全${r.points.length}点。先頭20点（[経度, 緯度]）:\n`
+      + JSON.stringify(r.points.slice(0, 20), null, 0);
+  } else {
+    const { points, steps, ...rest } = r;
+    out.textContent = JSON.stringify(
+      { ...rest, 点の数:points.length, 指示の数:steps.length }, null, 2);
+  }
+}
+
+// MARK: おすすめ道路
+
+/* ⚠️ 応答の形（実測）
+     /api/roads/prefectures       → { prefectures:[{ name, romaji, region, built }] }
+     /api/roads/segments/<romaji> → { segments:[{ name, score, lengthKm, start, end, ... }] }
+   ⚠️ **`start` / `end` をそのまま使う。** 区間は両端を [緯度, 経度] で持っているので、
+      ポリラインを解く必要はない。解くと5桁/6桁を取り違える隙ができる。 */
+
+async function loadPrefectures() {
+  try {
+    const data = await (await fetch("/api/roads/prefectures")).json();
+    const sel = document.getElementById("pref");
+    for (const p of data.prefectures || []) {
+      if (!p.built) continue;      // 生成済みのものだけ
+      const o = document.createElement("option");
+      o.value = p.romaji; o.textContent = p.name;
+      sel.appendChild(o);
+    }
+  } catch (e) { /* おすすめ道路が無くても、地図クリックだけで使える */ }
+}
+
+document.getElementById("pref").onchange = async (e) => {
+  const roadSel = document.getElementById("road");
+  roadSel.innerHTML = '<option value="">道を選ぶ…</option>';
+  roadSel.disabled = true;
+  state.roads = {};
+  if (!e.target.value) return;
+  try {
+    const data = await (await fetch(`/api/roads/segments/${e.target.value}`)).json();
+    const segs = (data.segments || [])
+      .filter((s) => Array.isArray(s.start) && Array.isArray(s.end))
+      .sort((a, b) => (b.score || 0) - (a.score || 0))
+      .slice(0, 120);
+    segs.forEach((s, i) => {
+      state.roads[i] = s;
+      const o = document.createElement("option");
+      o.value = String(i);
+      o.textContent = `${s.name}（${(s.lengthKm || 0).toFixed(1)}km・${(s.score || 0).toFixed(0)}点）`;
+      roadSel.appendChild(o);
+    });
+    roadSel.disabled = false;
+  } catch (err) { /* 読めなければ選べないだけ */ }
+};
+
+document.getElementById("road").onchange = (e) => {
+  const s = state.roads[e.target.value];
+  if (!s) return;
+  // ⚠️ start / end は [緯度, 経度]。この画面は [経度, 緯度] で通しているので入れ替える
+  state.vias.push([s.start[1], s.start[0]], [s.end[1], s.end[0]]);
+  redrawMarkers();
+  renderPoints();
+};
+
+// MARK: Valhalla が居るか
+
+async function checkStatus() {
+  const el = document.getElementById("status");
+  const banner = document.getElementById("banner");
+  try {
+    const s = await (await fetch("/api/valhalla/status")).json();
+    if (s.up) {
+      el.textContent = `Valhalla ${s.version}`;
+      el.className = "up";
+      banner.hidden = true;
+    } else {
+      el.textContent = "Valhalla が居ません";
+      el.className = "down";
+      banner.hidden = false;
+      banner.innerHTML = `Valhalla（${escapeHtml(s.url)}）に繋がりません。`
+        + `<code>docker run -d --name valhalla-jp -p 8002:8002 valhalla-jp-cloudrun:latest</code>`
+        + ` で立ち上げてから、この画面を読み込み直してください。`;
+    }
+  } catch (e) {
+    el.textContent = "確かめられません";
+    el.className = "down";
+  }
+}
+
+// MARK: こまごま
+
+const escapeHtml = (s) => String(s).replace(/[&<>"]/g,
+  (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+const shorten = (s) => String(s).length > 40 ? String(s).slice(0, 40) + "…" : String(s);
+const fmtM = (m) => m >= 1000 ? (m / 1000).toFixed(1) + "km" : m + "m";
+
+document.getElementById("run").onclick = run;
+document.getElementById("rawKind").onchange = showRaw;
+renderPoints();
+// ⚠️ 引く前は案が無い。VARIANTS を決め打ちで出していた頃の名残で
+//    「まだ引いていないのに3案並ぶ」ことがないようにする
+state.variants = [];
+renderVariants();
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>
+</body>
+</html>
