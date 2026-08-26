@@ -1,7 +1,7 @@
 "use strict";
 const test = require("node:test");
 const assert = require("node:assert");
-const { decode6, MANEUVER, VARIANTS } = require("../lib/valhallaRoute");
+const { decode6, MANEUVER, VARIANTS, DISPLACEMENTS } = require("../lib/valhallaRoute");
 const { decode } = require("../lib/polyline");
 
 /**
@@ -168,4 +168,40 @@ test("効かない設定を渡さない", () => {
     assert.ok(!("use_primary" in v.motorcycle),
       `${name} のバイク設定に use_primary（原付専用）が入っている`);
   }
+});
+
+// MARK: 排気量と回避（アプリと同じ設定）
+
+test("排気量で costing が決まる", () => {
+  // ⚠️ **50cc に motorcycle を使うと高速に乗る経路が出る。**
+  //    画面で costing を直接選ばせず、排気量から決める
+  assert.strictEqual(DISPLACEMENTS.moped50.costing, "motor_scooter");
+  assert.strictEqual(DISPLACEMENTS.small125.costing, "motor_scooter");
+  assert.strictEqual(DISPLACEMENTS.medium250.costing, "motorcycle");
+  assert.strictEqual(DISPLACEMENTS.large.costing, "motorcycle");
+});
+
+test("125cc以下は高速を通れない（法令）", () => {
+  assert.strictEqual(DISPLACEMENTS.moped50.canUseExpressway, false);
+  assert.strictEqual(DISPLACEMENTS.small125.canUseExpressway, false);
+  assert.strictEqual(DISPLACEMENTS.medium250.canUseExpressway, true);
+  assert.strictEqual(DISPLACEMENTS.large.canUseExpressway, true);
+});
+
+test("排気量に top_speed を持たせない", () => {
+  // ⚠️ 「原付は30km/h制限だから top_speed 30」は誤り。
+  //    Valhalla の top_speed は「その速度より速い道を避ける」なので、
+  //    30 を渡すと60km/hの一般道をほぼ全部避ける
+  for (const [key, d] of Object.entries(DISPLACEMENTS)) {
+    assert.ok(!("topSpeed" in d) || d.topSpeed == null,
+      `${key} に topSpeed が入っている（Valhalla の意味を取り違えている）`);
+  }
+});
+
+// MARK: 道の種別（色分けの材料）
+
+test("種別の鍵は3つだけ", () => {
+  // ⚠️ 画面の KIND_COLORS と揃っていること
+  const kinds = new Set(["expressway", "toll", "surface"]);
+  assert.strictEqual(kinds.size, 3);
 });

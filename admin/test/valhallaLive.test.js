@@ -194,3 +194,86 @@ test("バイクの最短は高速を使わずに済んでいる", async (t) => {
   assert.ok(!r.error, r.error);
   assert.ok(highwayMeters(r) < 1000, `最短が高速を ${highwayMeters(r)}m 走っている`);
 });
+
+// MARK: 排気量と回避（実際に引いて確かめる）
+
+test("125cc以下は高速に乗らない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **法令の話。** 画面の指定では緩められないこと
+  for (const key of ["moped50", "small125"]) {
+    const r = await routeWithValhalla(KOFU, FUJI, { displacement: key });
+    assert.ok(!r.error, r.error);
+    assert.strictEqual(r.kindMeters.expressway, 0,
+      `${key} が高速を ${(r.kindMeters.expressway / 1000).toFixed(1)}km 走っている`);
+  }
+});
+
+test("高速回避を外しても、125cc以下は高速に乗らない", async (t) => {
+  if (await skipIfDown(t)) return;
+  const r = await routeWithValhalla(KOFU, FUJI,
+    { displacement: "moped50", avoidHighways: false });
+  assert.strictEqual(r.kindMeters.expressway, 0,
+    "画面の指定で法令の制約が緩んでいる");
+  assert.strictEqual(r.costingOptions.use_highways, 0,
+    "use_highways が最後に上書きされていない");
+});
+
+test("高速回避を入れると高速が消える", async (t) => {
+  if (await skipIfDown(t)) return;
+  // 新座→愛川。大型なら既定で65.9km高速を走る（実測）
+  const from = [139.57386, 35.79677], to = [139.26211, 35.55413];
+  const plain = await routeWithValhalla(from, to, { displacement: "large" });
+  const avoid = await routeWithValhalla(from, to,
+    { displacement: "large", avoidHighways: true });
+  assert.ok(plain.kindMeters.expressway > 10_000,
+    `材料が悪い（既定で高速${(plain.kindMeters.expressway / 1000).toFixed(1)}km。もっと乗る組で試すこと）`);
+  assert.strictEqual(avoid.kindMeters.expressway, 0,
+    `高速回避なのに ${(avoid.kindMeters.expressway / 1000).toFixed(1)}km 乗っている`);
+});
+
+test("区間ごとに道の種別が付く", async (t) => {
+  if (await skipIfDown(t)) return;
+  const from = [139.57386, 35.79677], to = [139.26211, 35.55413];
+  const r = await routeWithValhalla(from, to, { displacement: "large" });
+  assert.ok(r.steps.every((s) => s.roadKind), "種別の付いていない区間がある");
+  const kinds = new Set(r.steps.map((s) => s.roadKind));
+  for (const k of kinds) {
+    assert.ok(["expressway", "toll", "surface"].includes(k), `知らない種別: ${k}`);
+  }
+  // 内訳の合計が、区間の距離の合計と合うこと
+  const sum = Object.values(r.kindMeters).reduce((a, b) => a + b, 0);
+  const stepSum = r.steps.reduce((a, s) => a + s.distanceMeters, 0);
+  assert.strictEqual(sum, stepSum, "内訳の合計が区間の合計と合わない");
+});
+
+/**
+ * ⚠️ **同じ点が続くと Valhalla が失敗する。**
+ *    `leg_shape_index not set for intermediate location` が返る。
+ *    実測: 陣馬街道の出口と和田林道の入口が**0m**（同じ交差点）で、
+ *    楽しい道8本を通す案が**丸ごと引けなくなっていた**。
+ *
+ * ⚠️ 材料は手で作らないこと。同じ点を3つ並べただけでは Valhalla が耐えてしまい、
+ *    まとめる処理を外しても落ちなかった。**実際に壊れた並びをそのまま使う。**
+ */
+test("重なった経由地でも引ける", async (t) => {
+  if (await skipIfDown(t)) return;
+  const from = [139.57386, 35.79677], to = [139.26211, 35.55413];
+  // 実測で失敗した north まわり8本ぶんの経由地。3番目と4番目が同じ点
+  const vias = [
+    [139.214782, 35.67028], [139.168281, 35.657623],
+    [139.168281, 35.657623], [139.154828, 35.656111],
+    [139.139812, 35.638763], [139.122311, 35.627306],
+    [139.104918, 35.629708], [139.011506, 35.608357],
+    [139.061537, 35.631811], [139.07121, 35.614289],
+    [139.131064, 35.584826], [139.149932, 35.590786],
+    [139.150269, 35.581156], [139.199929, 35.60091],
+    [139.172123, 35.59323], [139.206548, 35.563589],
+  ];
+  // 材料が正しいこと（重なりが本当に入っている）
+  assert.deepStrictEqual(vias[1], vias[2], "材料に重なりが無い");
+
+  const r = await routeWithValhalla(from, to, { vias, displacement: "large" });
+  assert.ok(!r.error, `重なった経由地で落ちている: ${r.error}`);
+  assert.ok(r.lengthMeters > 100_000,
+    `${(r.lengthMeters / 1000).toFixed(0)}km しかない（8本通っていない）`);
+});

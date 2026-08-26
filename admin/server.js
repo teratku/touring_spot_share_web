@@ -540,7 +540,8 @@ app.get("/api/restrictions/route", async (req, res) => {
  *    他の画面を巻き込まないよう、起動時に繋ぎに行ったりしない。
  */
 app.post("/api/valhalla/route", async (req, res) => {
-  const { from, to, vias, variant, costing, excludePolygons, funCount, budgetRatio } = req.body || {};
+  const { from, to, vias, variant, costing, excludePolygons,
+          displacement, avoidHighways, avoidTolls } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -549,7 +550,8 @@ app.post("/api/valhalla/route", async (req, res) => {
     // ⚠️ **楽しい道はこの口では選ばない。** 最短・ふつうに混ぜないため、
     //    自動で選ぶのは /api/valhalla/fun-routes の方だけにしてある
     const out = await routeWithValhalla(from, to,
-      { vias, variant, costing, excludePolygons });
+      { vias, variant, costing, excludePolygons,
+        displacement, avoidHighways, avoidTolls });
     if (out.error) return res.status(502).json(out);
     res.json(out);
   } catch (e) {
@@ -568,8 +570,8 @@ app.post("/api/valhalla/route", async (req, res) => {
  *    （lib/roadRecommendIndex.js）。
  */
 app.post("/api/valhalla/fun-routes", async (req, res) => {
-  const { from, to, vias, costing, excludePolygons,
-          funCount, budgetRatio } = req.body || {};
+  const { from, to, vias, costing, excludePolygons, funCount, budgetRatio,
+          corridorScale, minScore, displacement, avoidHighways, avoidTolls } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -580,7 +582,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
     //    同じ顔ぶれになる方角（南西へ向かう旅の「北」と「西」など）は
     //    buildSideVariants がまとめる
     const built = buildSideVariants(from, to, near.segments,
-      { count: funCount || 4, budgetRatio });
+      { count: funCount || 4, budgetRatio, corridorScale, minScore });
     const picks = built.variants;
     const sideEmpties = built.empties;
 
@@ -590,7 +592,8 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       // ⚠️ 手で置いた経由地は残す。自動で選んだぶんの前に置く
       const handVias = Array.isArray(vias) ? vias.slice() : [];
       const routeFn = (autoVias) => routeWithValhalla(from, to,
-        { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons });
+        { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
+          displacement, avoidHighways, avoidTolls });
 
       // ⚠️ **実際に引いてから、Uターンを起こす道を外す。**
       //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）

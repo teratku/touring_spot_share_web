@@ -117,6 +117,23 @@
 
     <div class="bar">
       <h2>おすすめ道路を通す</h2>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+        <label style="font-size:11px;color:var(--muted)">回り込みの広さ
+          <select id="corridor">
+            <option value="1" selected>ふつう ×1</option>
+            <option value="2">広め ×2</option>
+            <option value="3">かなり広い ×3</option>
+            <option value="5">思い切り ×5</option>
+          </select>
+        </label>
+        <label style="font-size:11px;color:var(--muted)">点数の下限
+          <select id="minScore">
+            <option value="40" selected>40（全部）</option>
+            <option value="72">72（市街地を外す）</option>
+            <option value="78">78（峠だけ）</option>
+          </select>
+        </label>
+      </div>
       <div style="display:flex;gap:6px;align-items:center">
         <label style="font-size:11px;color:var(--muted)">自動で
           <select id="funCount">
@@ -155,14 +172,32 @@
       <p class="hint" id="pickedNote"></p>
     </div>
 
-    <div class="bar" style="display:flex;gap:8px;align-items:center">
-      <select id="costing">
-        <option value="motor_scooter">原付・原二（motor_scooter）</option>
-        <option value="motorcycle">バイク（motorcycle）</option>
-      </select>
-      <button class="go" id="run" disabled>引く</button>
+    <div class="bar">
+      <h2>アプリと同じ設定</h2>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <select id="displacement">
+          <option value="moped50">原付一種（50cc以下）</option>
+          <option value="small125">原付二種（125cc以下）</option>
+          <option value="medium250">軽二輪（250cc以下）</option>
+          <option value="large" selected>普通・大型二輪（251cc以上）</option>
+        </select>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="avoidHighways"> 高速回避</label>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="avoidTolls"> 有料回避</label>
+      </div>
+      <p class="hint">⚠️ <strong>125cc以下は高速・自動車専用道を通れない（法令）。</strong>
+        チェックを外しても乗らない。</p>
+      <div style="margin-top:8px"><button class="go" id="run" disabled>引く</button></div>
     </div>
 
+    <div class="bar" style="font-size:11px;color:var(--muted)">
+      選んでいる案は<strong>道の種別で色を分ける</strong>：
+      <span style="color:#c92a2a">■高速</span>
+      <span style="color:#e8590c">■有料</span>
+      <span style="color:#2b8a3e">■下道</span>
+      <br>⚠️ 種別は Valhalla が区間ごとに返す値。道路名から推測していない。
+    </div>
     <div id="variants"></div>
     <div id="steps"></div>
   </div>
@@ -217,7 +252,7 @@ const state = {
   selected:"normal",
   lastRequest:null,
   sideEmpties:[],
-  map:null, markers:[], lines:{}, funMarks:[], stepPin:null,
+  map:null, markers:[], lines:{}, kindLines:[], funMarks:[], stepPin:null,
 };
 
 /** いま出ている案の一覧（色と名前つき） */
@@ -278,6 +313,8 @@ function redrawMarkers() {
 function clearLines() {
   Object.values(state.lines).forEach((l) => l.setMap(null));
   state.lines = {};
+  state.kindLines.forEach((l) => l.setMap(null));
+  state.kindLines = [];
   state.funMarks.forEach((m) => m.setMap(null));
   state.funMarks = [];
   if (state.stepPin) { state.stepPin.setMap(null); state.stepPin = null; }
@@ -308,6 +345,39 @@ function drawFunMarks() {
   });
 }
 
+/* 道の種別ごとの色。⚠️ サーバの `roadKind`（lib/valhallaRoute.js）と鍵を揃える */
+const KIND_COLORS = { expressway:"#c92a2a", toll:"#e8590c", surface:"#2b8a3e" };
+const KIND_LABELS = { expressway:"高速", toll:"有料", surface:"下道" };
+
+/**
+ * 選んでいる案だけ、道の種別で色を分けて描く。
+ *
+ * ⚠️ **選んでいない案は種別で分けない。** 全部を分けると線だらけで、
+ *    案どうしの違いが見えなくなる（案の色は案の見分けに使う）。
+ * ⚠️ 種別は Valhalla が maneuver ごとに返す `highway` / `toll` から来る。
+ *    道路名から推測していない。
+ */
+function drawKindLines(r) {
+  if (!r.steps || !r.steps.length) return;
+  // 隣り合う同じ種別をつなげて、線の数を減らす
+  const runs = [];
+  for (const st of r.steps) {
+    const last = runs[runs.length - 1];
+    if (last && last.kind === st.roadKind) last.end = st.endIndex;
+    else runs.push({ kind:st.roadKind, begin:st.beginIndex, end:st.endIndex });
+  }
+  runs.forEach((run, i) => {
+    const path = r.points.slice(run.begin, Math.max(run.end + 1, run.begin + 2))
+      .map((p) => ({ lat:p[1], lng:p[0] }));
+    if (path.length < 2) return;
+    state.kindLines.push(new google.maps.Polyline({
+      path, map:state.map,
+      strokeColor:KIND_COLORS[run.kind] || KIND_COLORS.surface,
+      strokeOpacity:0.95, strokeWeight:6, zIndex:20,
+    }));
+  });
+}
+
 function drawLines() {
   clearLines();
   for (const v of variantList()) {
@@ -318,11 +388,13 @@ function drawLines() {
       path:r.points.map((p) => ({ lat:p[1], lng:p[0] })),
       map:state.map,
       strokeColor:v.color,
-      // ⚠️ 選んでいない案も薄く残す。3案の違いが見えないと意味がない
+      // ⚠️ 選んでいない案も薄く残す。案の違いが見えないと意味がない
       strokeOpacity:on ? 0.95 : 0.35,
-      strokeWeight:on ? 5 : 3,
+      // 選んでいる案は種別の色を上に重ねるので、下地は細く
+      strokeWeight:on ? 3 : 3,
       zIndex:on ? 10 : 1,
     });
+    if (on) drawKindLines(r);
   }
   drawFunMarks();
   const r = state.results[state.selected];
@@ -337,7 +409,17 @@ function drawLines() {
 
 async function run() {
   if (!state.from || !state.to) return;
-  const costing = document.getElementById("costing").value;
+  // ⚠️ **costing は排気量から決める。** 画面で直接選ばせない
+  //    （50cc に motorcycle を渡すと高速に乗る経路が出る）
+  const val = (id) => document.getElementById(id).value;
+  const checked = (id) => document.getElementById(id).checked;
+  const bike = {
+    displacement: val("displacement"),
+    avoidHighways: checked("avoidHighways"),
+    avoidTolls: checked("avoidTolls"),
+  };
+  const corridorScale = Number(val("corridor")) || 1;
+  const minScore = Number(val("minScore")) || undefined;
   const funCount = Number(document.getElementById("funCount").value) || 0;
   const budgetRatio = Number(document.getElementById("budget").value) || undefined;
   document.getElementById("run").disabled = true;
@@ -358,7 +440,7 @@ async function run() {
 
   // ① 最短・ふつう。⚠️ **おすすめ道路は通さない**（経由地は手で置いたぶんだけ）
   for (const v of PLAIN) {
-    const body = { from:state.from, to:state.to, vias:state.vias, variant:v.key, costing };
+    const body = { from:state.from, to:state.to, vias:state.vias, variant:v.key, ...bike };
     state.lastRequest = body;
     state.results[v.key] = await post("/api/valhalla/route", body);
     state.variants.push({ key:v.key, label:v.label, color:v.color });
@@ -368,7 +450,7 @@ async function run() {
   // ② 楽しい道の案を何通りか
   if (funCount > 0) {
     const body = { from:state.from, to:state.to, vias:state.vias,
-                   costing, funCount, budgetRatio, maxVariants:3 };
+                   funCount, budgetRatio, corridorScale, minScore, maxVariants:3, ...bike };
     state.lastRequest = body;
     const got = await post("/api/valhalla/fun-routes", body);
     if (got.error) {
@@ -477,9 +559,17 @@ function renderVariants() {
     else if (r.error) right = `<span class="err">✗ ${escapeHtml(shorten(r.error))}</span>`;
     else {
       const roads = (r.funRoads || []).length;
+      // ⚠️ **種別の内訳を必ず出す。** 「ふつう」が実は高速ばかり、という事故が
+      //    数字を出すまで分からなかった（実測: バイク77.8km中65.9kmが高速）
+      const k = r.kindMeters || {};
+      const kinds = ["expressway", "toll", "surface"]
+        .filter((x) => (k[x] || 0) > 0)
+        .map((x) => `<span style="color:${KIND_COLORS[x]}">${KIND_LABELS[x]}${(k[x] / 1000).toFixed(0)}km</span>`)
+        .join(" ");
       right = `<span class="num">${(r.lengthMeters / 1000).toFixed(1)}km ／ `
         + `指示${r.steps.length} ／ Uターン${r.uTurns}`
-        + (roads ? ` ／ <strong>おすすめ${roads}本</strong>` : "") + `</span>`;
+        + (roads ? ` ／ <strong>おすすめ${roads}本</strong>` : "")
+        + (kinds ? `<br>${kinds}` : "") + `</span>`;
     }
     el.innerHTML = `${sw}<span class="name">${v.label}</span>${right}`;
     el.onclick = () => {

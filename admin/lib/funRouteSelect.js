@@ -374,8 +374,14 @@ function selectFunRoads(origin, destination, segments, opts = {}) {
   // ⚠️ **方角の指定は、コリドーを通ったあとに掛ける。** 先に掛けると
   //    「そもそも遠すぎる道」まで数に入って、何本落としたのか分からなくなる
   const side = normalizeSide(opts.side);
+  // ⚠️ **点数の下限は上げられるようにしておく。** 幅を広げると市街地の道が入り、
+  //    それが中央分離帯でUターンを起こして落とされる。実測（新座→愛川・幅×5）:
+  //      良い道   奥多摩周遊道路85 / 陣馬街道83 / 十里木御嶽停車場線82（曲率1262）
+  //      市街地   明治通り71 / 市電通り70 / 新川通り68 / 競馬場通り66 / 祝田通り66
+  //    72あたりで切ると市街地だけ落ちる（ただし檜原街道71・秩父上名栗線71も落ちる）
+  const minScore = Number.isFinite(opts.minScore) ? opts.minScore : MIN_AUTO_SCORE;
   const inCorridor = (segments || []).filter((s) =>
-    s.score >= MIN_AUTO_SCORE
+    s.score >= minScore
     && Array.isArray(s.start) && Array.isArray(s.end)
     && isWithinCorridor(s, origin, destination, directDistance, opts.corridorScale));
   const candidates = side == null ? inCorridor
@@ -565,10 +571,17 @@ function buildSideVariants(origin, destination, segments, opts = {}) {
   const byKey = new Map();
   const empties = [];
 
+  // ⚠️ **回り込みの広さは全部の案に同じものを渡す。** 案ごとに変えると
+  //    「広くしたのに一部の案だけ狭い」になる。
+  //    実測（新座→愛川・989本から）: 幅×1で候補5本 → ×2で18本 → ×3で32本。
+  //    8本通したくても候補が5本しか無ければ通らない
+  const corridorScale = opts.corridorScale ?? 1;
+  const base = { count: opts.count ?? 4, corridorScale,
+                 minScore: opts.minScore,
+                 budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO };
+
   for (const key of order) {
-    const pick = selectFunRoads(origin, destination, segments,
-      { count: opts.count ?? 4, side: key,
-        budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
+    const pick = selectFunRoads(origin, destination, segments, { ...base, side: key });
     if (!pick || !pick.segments.length) {
       // ⚠️ **表示名は入れない。** 鍵（north/east/south/west）だけ返し、
       //    呼ぶ側が訳す。ここで日本語を入れるとAPIに混ざる
@@ -581,8 +594,7 @@ function buildSideVariants(origin, destination, segments, opts = {}) {
     const entry = {
       kind: `side:${key}`,
       sides: [key],
-      pickOptions: { count: opts.count ?? 4, side: key,
-                     budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO },
+      pickOptions: { ...base, side: key },
       ...pick,
     };
     byKey.set(sig, entry);
