@@ -286,7 +286,17 @@ const state = {
   svZoom: 16,           // 別画面で開いたときの、下の地図の倍率（自前ページ用）
   svSize: 50,           // 下の地図が画面に占める割合（%）。実物のURLでは33だった
 };
-const PRESET_TAGS = ["絶景", "ワインディング", "快走", "林道ぎみ", "要注意"];
+/* 札は**鍵**で持ち、画面にだけ日本語を出す。
+   ⚠️ 札は配信データに入り、アプリで音声案内にそのまま乗る
+      （NavigationEngine.swift:362）。日本語のまま配ると海外で日本語が読み上げられる。
+   ⚠️ 鍵と日本語の対応は `lib/roadTags.js` が出典。**ここを直したら向こうも直すこと。** */
+const TAG_LABELS = {
+  scenic: "絶景", winding: "ワインディング", flowing: "快走",
+  forest: "林道ぎみ", caution: "要注意", gravel: "砂利道", deadend: "行き止まり",
+};
+const PRESET_TAGS = ["scenic", "winding", "flowing", "forest", "caution", "gravel", "deadend"];
+/** 鍵→表示名。⚠️ **知らない鍵はそのまま出す**（自由記述と、移行前の日本語のため） */
+const tagLabel = (t) => TAG_LABELS[t] || t;
 
 const VERDICT = {
   keep: { mark: "◎", label: "採用", color: "#2b8a3e" },
@@ -1802,9 +1812,9 @@ function renderEditor() {
 
     <label>札（アプリに2つまで出る）</label>
     <div class="chips" id="e-tags">
-      ${PRESET_TAGS.map((t) => `<button class="chip ${(o.tags || []).includes(t) ? "on" : ""}" data-tag="${t}">${t}</button>`).join("")}
+      ${PRESET_TAGS.map((t) => `<button class="chip ${(o.tags || []).includes(t) ? "on" : ""}" data-tag="${t}">${tagLabel(t)}</button>`).join("")}
     </div>
-    <input type="text" id="e-tags-free" value="${escapeHtml((o.tags || []).filter((t) => !PRESET_TAGS.includes(t)).join(","))}"
+    <input type="text" id="e-tags-free" value="${escapeHtml((o.tags || []).filter((t) => !PRESET_TAGS.includes(t)).map(tagLabel).join(","))}"
            placeholder="その他（カンマ区切り）" style="margin-top:5px">
 
     <label>一覧から外す</label>

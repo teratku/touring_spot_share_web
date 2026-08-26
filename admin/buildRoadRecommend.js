@@ -486,7 +486,19 @@ async function build() {
       console.log(`  ⚠️ ${pref}: 足せなかった道が ${adjusted.addSkipped.length}件` +
                   `（同じ道が生成側にある／線が壊れている: ${adjusted.addSkipped.slice(0, 3).join(" / ")}）`);
     }
-    const top = adjusted.segments.slice(0, TOP).map((s, i) => ({ id: `${pref}:${i}`, ...s }));
+    // ⚠️ **IDは触らない。** 出荷済みアプリが `山梨県:0` を `:` で割って県名を取り出している
+    //    （RoadRecommendStore.swift:60-65、road-builder.html:307）。
+    //    形を変えると表示が壊れるので、地域は**別の項目**として足す。
+    //    こうすると新しい地域は `region: "tw-taipei"` を足すだけで済み、
+    //    IDの中身が何であってもよくなる
+    const top = adjusted.segments.slice(0, TOP).map((s, i) => ({
+      id: `${pref}:${i}`,
+      //: 不透明な小文字ローマ字。海外もこの形（tw-taipei / de-bayern）
+      region: romaji(pref),
+      //: 表示用。アプリは訳さずそのまま出す
+      regionName: pref,
+      ...s,
+    }));
     summary.push({ pref, chains: chains.length, segments: segments.length, kept: top.length,
                    list: top, all: adjusted.segments, hidden: segments.length - adjusted.segments.length });
   }

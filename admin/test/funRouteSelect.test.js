@@ -11,6 +11,7 @@ const {
   CORRIDOR_CAP_METERS, CIRCUITY_FACTOR, MAX_BACKWARD_EXCURSION_METERS,
   MAX_OVERSHOOT_RATIO, buildFunVariants, overlapRatio, MAX_VARIANT_OVERLAP,
   bearing, sideBearing, matchesSide, normalizeSide, SIDES, SIDE_LABELS,
+  buildSideVariants,
 } = require("../lib/funRouteSelect");
 
 /**
@@ -212,7 +213,9 @@ test("大きく後退する道は諦める", () => {
   const out = selectFunRoads(KOFU, FUJI, [good, back], { count: 2 });
   assert.ok(!out.segments.some((s) => s.name === "戻る道"),
     "大きく後退する道を通している");
-  assert.deepStrictEqual(out.uTurnOnly, ["戻る道"], "諦めた道が記録されていない");
+  // ⚠️ 名前だけでなく鍵（id）も返す。APIに日本語を混ぜないため
+  assert.deepStrictEqual(out.uTurnOnly, [{ id: "戻る道", name: "戻る道" }],
+    "諦めた道が {id, name} で記録されていない");
 });
 
 // MARK: 選ぶ
@@ -624,4 +627,134 @@ test("案を作るときも、方角を全部の案に効かせる", () => {
         `「${v.label}」に南側の ${s.name} が入っている`);
     }
   }
+});
+
+// MARK: まわり方を全部並べる
+
+test("まわり方を全部作る", () => {
+  if (!yamanashi) return;
+  const { variants, empties } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  assert.ok(variants.length >= 1, "1通りも出ていない");
+  // ⚠️ 4方向すべてを試したこと（出た案 ＋ 候補なしの方角 で4つ揃う）
+  const tried = variants.reduce((n, v) => n + v.sides.length, 0) + empties.length;
+  assert.strictEqual(tried, 4, `試した方角が ${tried} 個（4つのはず）`);
+});
+
+test("同じ道になる方角はまとめる", () => {
+  if (!yamanashi) return;
+  // ⚠️ **候補は旅の向きと直角の2方向に集まる。** まとめないと、
+  //    4通り並べたうち半分が同じ線の重複になる
+  const { variants } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  const seen = new Set();
+  for (const v of variants) {
+    const sig = v.segments.map((s) => s.id).sort().join("|");
+    assert.ok(!seen.has(sig),
+      `同じ顔ぶれの案が2つ出ている（${v.label}: ${v.segments.map((s) => s.name).join("・")}）`);
+    seen.add(sig);
+  }
+  // 甲府→富士吉田は南東へ向かうので、まとめが起きるはず
+  assert.ok(variants.some((v) => v.sides.length > 1),
+    `まとまっていない（${variants.map((v) => v.label).join(" / ")}）`);
+});
+
+test("方角ごとに別の道を選ぶ（全部が1つにまとまらない）", () => {
+  if (!yamanashi) return;
+  // ⚠️ **各方角に side を渡し忘れると、4方向とも同じ結果になって
+  //    「1通り（4方角ぶん）」に潰れる。** そうなっていないこと。
+  //    甲府→富士吉田は実測で 北・東まわり / 南・西まわり の2通りに分かれる
+  const { variants } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  assert.ok(variants.length >= 2,
+    `${variants.length}通りしか出ていない（方角を渡し忘れていないか）`);
+  for (const v of variants) {
+    assert.ok(v.sides.length < 4,
+      `「${v.label}」に4方角すべてがまとまっている（方角が効いていない）`);
+  }
+});
+
+/**
+ * ⚠️ **表示名を返さないこと。** ここで「北・西まわり」を作って返すと、
+ *    APIを外に出したときに応答へ日本語が混ざる。海外へ出す前提なので、
+ *    返すのは鍵（north/east/south/west）だけにして、呼ぶ側が訳す。
+ */
+test("案は方角の鍵だけを返す（表示名は返さない）", () => {
+  if (!yamanashi) return;
+  const { variants, empties } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  const KEYS = Object.keys(SIDES);
+  for (const v of variants) {
+    assert.ok(Array.isArray(v.sides) && v.sides.length, "sides が無い");
+    for (const key of v.sides) {
+      assert.ok(KEYS.includes(key), `sides に鍵でないもの: ${key}`);
+    }
+    assert.strictEqual(v.label, undefined,
+      `表示名を返している（${v.label}）。呼ぶ側で作ること`);
+  }
+  for (const e of empties) {
+    assert.ok(KEYS.includes(e.side), `候補なしの側が鍵でない: ${e.side}`);
+    assert.strictEqual(e.label, undefined, `候補なしの側に表示名が付いている（${e.label}）`);
+  }
+});
+
+test("応答に日本語が混ざっていない", () => {
+  if (!yamanashi) return;
+  // ⚠️ 目視ではなく、返り値そのものを走査する。項目が増えたときに気付けるように
+  const { variants, empties } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  const japanese = /[぀-ヿ一-鿿]/;
+  const walk = (value, path) => {
+    if (typeof value === "string") {
+      // ⚠️ **固有名詞は日本語で当然。** それ以外の項目に日本語が出たら困る。
+      //    name       道路名（甲府山梨線）
+      //    title      名前の上書き（湯河原箱根線 → 椿ライン）
+      //    note       ひとこと説明
+      //    regionName 地域の表示名（山梨県）。鍵は別に `region` がある
+      //    どれも人が読むための固有の文字列で、鍵にはできない
+      if (/\.(name|id|title|note|regionName)$/.test(path)) return;
+      assert.ok(!japanese.test(value), `${path} に日本語が入っている: ${value}`);
+    } else if (Array.isArray(value)) {
+      value.forEach((v, i) => walk(v, `${path}[${i}]`));
+    } else if (value && typeof value === "object") {
+      for (const [k, v] of Object.entries(value)) walk(v, `${path}.${k}`);
+    }
+  };
+  walk(variants, "variants");
+  walk(empties, "empties");
+});
+
+test("案の道が、その方角の側にある", () => {
+  if (!yamanashi) return;
+  // ⚠️ まとめる処理で方角の指定が抜けていないか
+  const { variants } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  for (const v of variants) {
+    for (const s of v.segments) {
+      const ok = v.sides.some((key) => matchesSide(SIDES[key], sideBearing(s, KOFU, FUJI)));
+      assert.ok(ok, `「${v.label}」に ${s.name} が入っているが、その側にない`);
+    }
+  }
+});
+
+test("候補が無かった方角も返す", () => {
+  if (!yamanashi) return;
+  // ⚠️ 黙って消すと「出ない」のか「試していない」のかが分からない
+  const { variants, empties } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  const covered = new Set(variants.flatMap((v) => v.sides));
+  for (const e of empties) {
+    assert.ok(!covered.has(e.side), `${e.label} が案にも「候補なし」にも入っている`);
+    assert.ok(e.label, "候補なしの方角に名前が付いていない");
+  }
+});
+
+test("選び直しに使う設定を持たせる", () => {
+  if (!yamanashi) return;
+  // ⚠️ Uターンした道を外して選び直すとき、方角を守るために要る
+  const { variants } = buildSideVariants(KOFU, FUJI, yamanashi, { count: 4 });
+  for (const v of variants) {
+    assert.ok(v.pickOptions, `「${v.label}」に pickOptions が無い`);
+    assert.strictEqual(v.pickOptions.side, v.sides[0],
+      `「${v.label}」の pickOptions.side が違う`);
+  }
+});
+
+test("道が無ければ案も出ない（落ちない）", () => {
+  const { variants, empties } = buildSideVariants(KOFU, FUJI, [], { count: 4 });
+  assert.deepStrictEqual(variants, []);
+  assert.strictEqual(empties.length, 4, "4方向とも「候補なし」になっていない");
 });

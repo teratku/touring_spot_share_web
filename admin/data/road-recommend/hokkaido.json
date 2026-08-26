@@ -1,9 +1,9 @@
 {
  "prefecture": "北海道",
  "romaji": "hokkaido",
- "generation": 6,
- "contentHash": "bb58b5ab5f41",
- "builtAt": "2026-08-25T13:42:29.016Z",
+ "generation": 7,
+ "contentHash": "c13e26d73f67",
+ "builtAt": "2026-08-26T09:40:08.362Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -15,6 +15,8 @@
  "segments": [
   {
    "id": "北海道:0",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "城岱スカイライン",
    "ref": "",
    "highway": "tertiary",
@@ -37,12 +39,14 @@
    ],
    "boost": 20,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "北海道:1",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "鹿追糠平線",
    "ref": "85;593",
    "highway": "primary",
@@ -66,13 +70,15 @@
    "boost": 18,
    "title": "パールスカイライン",
    "tags": [
-    "ワインディング",
-    "快走",
-    "林道ぎみ"
+    "winding",
+    "flowing",
+    "forest"
    ]
   },
   {
    "id": "北海道:2",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "大平ジオパークロード",
    "ref": "",
    "highway": "tertiary",
@@ -95,12 +101,14 @@
    ],
    "boost": 18,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "北海道:3",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "京極定山渓線",
    "ref": "95",
    "highway": "primary",
@@ -123,12 +131,14 @@
    ],
    "boost": 18.8,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "北海道:4",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "中央東線",
    "ref": "919",
    "highway": "secondary",
@@ -151,13 +161,15 @@
    ],
    "boost": -2,
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
    "id": "北海道:5",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "名寄遠別線",
    "ref": "688",
    "highway": "secondary",
@@ -179,12 +191,14 @@
     142.180291
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "北海道:6",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "屈斜路津別線",
    "ref": "588",
    "highway": "secondary",
@@ -204,10 +218,15 @@
    "end": [
     43.588058,
     144.27099
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
    "id": "北海道:7",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "祝津西小路中央線",
    "ref": "844",
    "highway": "secondary",
@@ -229,11 +248,13 @@
     140.972888
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "北海道:8",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "吹上上富良野線",
    "ref": "291;299",
    "highway": "secondary",
@@ -255,13 +276,15 @@
     142.643407
    ],
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
    "id": "北海道:9",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "赤平歌志内線",
    "ref": "691",
    "highway": "secondary",
@@ -283,12 +306,14 @@
     142.038613
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "北海道:10",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "知床公園線",
    "ref": "93",
    "highway": "primary",
@@ -310,12 +335,14 @@
     145.049361
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "北海道:11",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北海道道350号倶多楽湖公園線 (Kuttarako park line)",
    "ref": "350",
    "highway": "secondary",
@@ -337,13 +364,15 @@
     141.146602
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "北海道:12",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "岩内蘭越線",
    "ref": "268",
    "highway": "secondary",
@@ -365,13 +394,15 @@
     140.559866
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "北海道:13",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "屈斜路摩周湖畔線",
    "ref": "52",
    "highway": "primary",
@@ -393,12 +424,14 @@
     144.503
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "北海道:14",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "大椴線",
    "ref": "958",
    "highway": "secondary",
@@ -427,36 +460,15 @@
     "label": "未舗装"
    },
    "tags": [
-    "ワインディング",
-    "快走",
-    "林道ぎみ"
+    "winding",
+    "flowing",
+    "forest"
    ]
   },
   {
    "id": "北海道:15",
-   "name": "西野真駒内清田線",
-   "ref": "82",
-   "highway": "primary",
-   "lengthKm": 4.27,
-   "curviness": 330.4,
-   "flow": 23.1,
-   "turnCount": 61,
-   "score": 62.3,
-   "baseScore": 62.3,
-   "spotCount": 0,
-   "polyline": "u~qeG}ak}YsCtFmE|DiCl@Jv@fBe@bElDtBv@tKuA`A{BUcD}@cAqGoCw@aB@}AhAyAbOMpAs@ZuAmB}Hh@uJqDeJkB_LPkDz@m@nAR|H|V|@p@bAEjA_Cx@yEdAiBfKgInUiN`BiB?g@`GqFnBwD",
-   "pointCount": 38,
-   "start": [
-    43.023311,
-    141.291993
-   ],
-   "end": [
-    43.009644,
-    141.306921
-   ]
-  },
-  {
-   "id": "北海道:16",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "下川愛別線",
    "ref": "101;296",
    "highway": "primary",
@@ -478,12 +490,14 @@
     142.73821
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:17",
+   "id": "北海道:16",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "旭台今金線",
    "ref": "793",
    "highway": "secondary",
@@ -505,13 +519,15 @@
     140.024159
    ],
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:18",
+   "id": "北海道:17",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "光地園尾田線",
    "ref": "1002",
    "highway": "secondary",
@@ -533,12 +549,14 @@
     143.15678
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:19",
+   "id": "北海道:18",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "老古美小沢停車場線",
    "ref": "604",
    "highway": "secondary",
@@ -560,13 +578,15 @@
     140.662237
    ],
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:20",
+   "id": "北海道:19",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "オンネトー線",
    "ref": "949",
    "highway": "secondary",
@@ -595,13 +615,15 @@
     "label": "砂利"
    },
    "tags": [
-    "ワインディング",
-    "快走",
-    "林道ぎみ"
+    "winding",
+    "flowing",
+    "forest"
    ]
   },
   {
-   "id": "北海道:21",
+   "id": "北海道:20",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "名寄遠別線",
    "ref": "688",
    "highway": "secondary",
@@ -623,13 +645,15 @@
     142.242268
    ],
    "tags": [
-    "ワインディング",
-    "快走",
-    "林道ぎみ"
+    "winding",
+    "flowing",
+    "forest"
    ]
   },
   {
-   "id": "北海道:22",
+   "id": "北海道:21",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "小樽環状線",
    "ref": "956",
    "highway": "secondary",
@@ -651,12 +675,14 @@
     140.98032
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:23",
+   "id": "北海道:22",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "緑資源幹線林道 置戸・阿寒線 足寄・阿寒区間",
    "ref": "",
    "highway": "tertiary",
@@ -678,13 +704,15 @@
     143.92415
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
-   "id": "北海道:24",
+   "id": "北海道:23",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "夕張岩見沢線",
    "ref": "38",
    "highway": "primary",
@@ -706,12 +734,14 @@
     141.984063
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:25",
+   "id": "北海道:24",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "居辺本別線",
    "ref": "660",
    "highway": "secondary",
@@ -733,12 +763,14 @@
     143.395319
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:26",
+   "id": "北海道:25",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "洞爺虻田線",
    "ref": "578",
    "highway": "secondary",
@@ -760,12 +792,14 @@
     140.784792
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:27",
+   "id": "北海道:26",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "中島・港北通",
    "ref": "",
    "highway": "tertiary",
@@ -787,12 +821,14 @@
     141.012516
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:28",
+   "id": "北海道:27",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "貫気別振内線",
    "ref": "797",
    "highway": "secondary",
@@ -814,12 +850,14 @@
     142.270919
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:29",
+   "id": "北海道:28",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "旭丘線",
    "ref": "",
    "highway": "tertiary",
@@ -841,13 +879,15 @@
     143.342441
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
-   "id": "北海道:30",
+   "id": "北海道:29",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "豊浦京極線",
    "ref": "97",
    "highway": "primary",
@@ -869,11 +909,13 @@
     140.723514
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:31",
+   "id": "北海道:30",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "阿寒標茶線",
    "ref": "243",
    "highway": "secondary",
@@ -895,12 +937,14 @@
     144.493826
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:32",
+   "id": "北海道:31",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "町道日進狢岱線",
    "ref": "",
    "highway": "tertiary",
@@ -922,12 +966,14 @@
     140.001325
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:33",
+   "id": "北海道:32",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北海道道578号洞爺虻田線 (Toya Abuta line)",
    "ref": "578",
    "highway": "secondary",
@@ -949,12 +995,14 @@
     140.825112
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
-   "id": "北海道:34",
+   "id": "北海道:33",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美沢美馬牛線",
    "ref": "824",
    "highway": "secondary",
@@ -976,11 +1024,13 @@
     142.444716
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:35",
+   "id": "北海道:34",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "十勝岳温泉美瑛線",
    "ref": "966",
    "highway": "secondary",
@@ -1002,11 +1052,13 @@
     142.631234
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "北海道:36",
+   "id": "北海道:35",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "国道334号",
    "ref": "334",
    "highway": "trunk",
@@ -1028,12 +1080,14 @@
     145.087428
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:37",
+   "id": "北海道:36",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "国道241号",
    "ref": "241",
    "highway": "trunk",
@@ -1055,12 +1109,14 @@
     144.28816
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:38",
+   "id": "北海道:37",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "国道40号",
    "ref": "40",
    "highway": "trunk",
@@ -1082,11 +1138,13 @@
     141.691061
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:39",
+   "id": "北海道:38",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "岩内洞爺線",
    "ref": "66",
    "highway": "primary",
@@ -1109,13 +1167,15 @@
    ],
    "title": "ニセコパノラマライン",
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:40",
+   "id": "北海道:39",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "奥尻島線",
    "ref": "39",
    "highway": "primary",
@@ -1135,10 +1195,15 @@
    "end": [
     42.107338,
     139.424311
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:41",
+   "id": "北海道:40",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "清水谷足寄線",
    "ref": "468",
    "highway": "secondary",
@@ -1160,12 +1225,14 @@
     143.484352
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:42",
+   "id": "北海道:41",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "豊富中頓別線",
    "ref": "785",
    "highway": "secondary",
@@ -1187,13 +1254,15 @@
     142.092834
    ],
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:43",
+   "id": "北海道:42",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "金山幾寅停車場線",
    "ref": "465",
    "highway": "secondary",
@@ -1215,12 +1284,14 @@
     142.522437
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:44",
+   "id": "北海道:43",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上遠別霧立線",
    "ref": "741",
    "highway": "secondary",
@@ -1242,12 +1313,14 @@
     141.86548
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:45",
+   "id": "北海道:44",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "占冠穂別線（支線）",
    "ref": "610",
    "highway": "secondary",
@@ -1269,12 +1342,14 @@
     142.370296
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:46",
+   "id": "北海道:45",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "名寄遠別線",
    "ref": "688",
    "highway": "secondary",
@@ -1296,12 +1371,14 @@
     142.350029
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:47",
+   "id": "北海道:46",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "高見西舎線",
    "ref": "746",
    "highway": "secondary",
@@ -1323,12 +1400,14 @@
     142.838962
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:48",
+   "id": "北海道:47",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "苫前小平線",
    "ref": "1049",
    "highway": "secondary",
@@ -1357,13 +1436,15 @@
     "label": "未舗装"
    },
    "tags": [
-    "ワインディング",
-    "快走",
-    "林道ぎみ"
+    "winding",
+    "flowing",
+    "forest"
    ]
   },
   {
-   "id": "北海道:49",
+   "id": "北海道:48",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美唄達布岩見沢線",
    "ref": "687",
    "highway": "secondary",
@@ -1385,11 +1466,13 @@
     141.67342
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:50",
+   "id": "北海道:49",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "望来当別線",
    "ref": "527",
    "highway": "secondary",
@@ -1411,12 +1494,14 @@
     141.449693
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:51",
+   "id": "北海道:50",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "大沼公園鹿部線",
    "ref": "43;338",
    "highway": "primary",
@@ -1438,12 +1523,14 @@
     140.67582
    ],
    "tags": [
-    "絶景",
-    "快走"
+    "scenic",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:52",
+   "id": "北海道:51",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "士別滝上線",
    "ref": "61",
    "highway": "primary",
@@ -1465,12 +1552,14 @@
     142.713745
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:53",
+   "id": "北海道:52",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "洞爺湖登別線",
    "ref": "2",
    "highway": "primary",
@@ -1492,12 +1581,14 @@
     141.0619
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:54",
+   "id": "北海道:53",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "古平神恵内線",
    "ref": "998",
    "highway": "secondary",
@@ -1519,11 +1610,13 @@
     140.601265
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:55",
+   "id": "北海道:54",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "旭川幌加内線",
    "ref": "72",
    "highway": "primary",
@@ -1545,11 +1638,13 @@
     142.166097
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:56",
+   "id": "北海道:55",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "忠別清水線",
    "ref": "718",
    "highway": "secondary",
@@ -1571,12 +1666,14 @@
     142.867175
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
-   "id": "北海道:57",
+   "id": "北海道:56",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "根室浜中釧路線",
    "ref": "142",
    "highway": "primary",
@@ -1598,12 +1695,14 @@
     144.531101
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:58",
+   "id": "北海道:57",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "道道1025号 静内浦河線",
    "ref": "1025",
    "highway": "secondary",
@@ -1625,11 +1724,13 @@
     142.491299
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "北海道:59",
+   "id": "北海道:58",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "夕張長沼線",
    "ref": "1008",
    "highway": "secondary",
@@ -1651,11 +1752,13 @@
     141.774453
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:60",
+   "id": "北海道:59",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "相生津別停車場線",
    "ref": "768",
    "highway": "secondary",
@@ -1677,11 +1780,13 @@
     143.983955
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "北海道:61",
+   "id": "北海道:60",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北海道道285号豊浦洞爺線 (Toyoura Toya line)",
    "ref": "285",
    "highway": "secondary",
@@ -1703,11 +1808,13 @@
     140.803532
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:62",
+   "id": "北海道:61",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "遠軽雄武線",
    "ref": "137",
    "highway": "primary",
@@ -1729,11 +1836,13 @@
     142.946229
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:63",
+   "id": "北海道:62",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "阿寒標茶線",
    "ref": "243",
    "highway": "secondary",
@@ -1755,12 +1864,14 @@
     144.226606
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:64",
+   "id": "北海道:63",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上士別和寒線",
    "ref": "639",
    "highway": "secondary",
@@ -1782,12 +1893,14 @@
     142.5086
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:65",
+   "id": "北海道:64",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "大沼公園線",
    "ref": "338",
    "highway": "secondary",
@@ -1809,12 +1922,14 @@
     140.666697
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:66",
+   "id": "北海道:65",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "中足寄愛冠線",
    "ref": "",
    "highway": "tertiary",
@@ -1836,11 +1951,13 @@
     143.613605
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:67",
+   "id": "北海道:66",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "新富神里線",
    "ref": "914",
    "highway": "secondary",
@@ -1862,12 +1979,14 @@
     140.727596
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:68",
+   "id": "北海道:67",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北檜山大成線",
    "ref": "740",
    "highway": "secondary",
@@ -1889,11 +2008,13 @@
     139.836475
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:69",
+   "id": "北海道:68",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "大野上磯線",
    "ref": "756",
    "highway": "secondary",
@@ -1915,11 +2036,13 @@
     140.657352
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:70",
+   "id": "北海道:69",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "福住女満別線",
    "ref": "249",
    "highway": "secondary",
@@ -1941,12 +2064,14 @@
     144.174257
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:71",
+   "id": "北海道:70",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "国道393号",
    "ref": "393",
    "highway": "trunk",
@@ -1968,12 +2093,14 @@
     140.995188
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:72",
+   "id": "北海道:71",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美和豊浦停車場線",
    "ref": "702",
    "highway": "secondary",
@@ -1995,11 +2122,13 @@
     140.705072
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:73",
+   "id": "北海道:72",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "から沢泥沢線",
    "ref": "",
    "highway": "tertiary",
@@ -2021,12 +2150,14 @@
     142.487142
    ],
    "tags": [
-    "絶景",
-    "快走"
+    "scenic",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:74",
+   "id": "北海道:73",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美馬牛神楽線",
    "ref": "580",
    "highway": "secondary",
@@ -2048,11 +2179,13 @@
     142.400398
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:75",
+   "id": "北海道:74",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "国道333号",
    "ref": "333",
    "highway": "trunk",
@@ -2074,12 +2207,14 @@
     142.968585
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:76",
+   "id": "北海道:75",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "士別滝上線",
    "ref": "61",
    "highway": "primary",
@@ -2101,12 +2236,14 @@
     142.827695
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:77",
+   "id": "北海道:76",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "林道大山線",
    "ref": "",
    "highway": "tertiary",
@@ -2128,12 +2265,14 @@
     143.318789
    ],
    "tags": [
-    "快走",
-    "要注意"
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "北海道:78",
+   "id": "北海道:77",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北海道道141号樽前錦岡線",
    "ref": "141",
    "highway": "primary",
@@ -2155,11 +2294,13 @@
     141.46042
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:79",
+   "id": "北海道:78",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "倶知安ニセコ線",
    "ref": "58",
    "highway": "primary",
@@ -2181,12 +2322,14 @@
     140.74501
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:80",
+   "id": "北海道:79",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "然別余市線",
    "ref": "755",
    "highway": "secondary",
@@ -2208,11 +2351,13 @@
     140.723915
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:81",
+   "id": "北海道:80",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "八雲中部広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -2234,11 +2379,13 @@
     140.246006
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:82",
+   "id": "北海道:81",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北海道道746号高見西舎線 (Takami Nishicha line)",
    "ref": "746",
    "highway": "secondary",
@@ -2261,13 +2408,15 @@
    ],
    "boost": -13,
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
-   "id": "北海道:83",
+   "id": "北海道:82",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "小樽定山渓線",
    "ref": "1",
    "highway": "primary",
@@ -2289,12 +2438,14 @@
     141.109965
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:84",
+   "id": "北海道:83",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "宿志別振内停車場線",
    "ref": "638",
    "highway": "secondary",
@@ -2317,13 +2468,15 @@
    ],
    "boost": -25,
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
-   "id": "北海道:85",
+   "id": "北海道:84",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "町道 幾代線",
    "ref": "",
    "highway": "tertiary",
@@ -2345,11 +2498,13 @@
     139.996071
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:86",
+   "id": "北海道:85",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "士別滝上線",
    "ref": "61",
    "highway": "primary",
@@ -2371,11 +2526,13 @@
     142.674098
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:87",
+   "id": "北海道:86",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "洞爺湖登別線",
    "ref": "2",
    "highway": "primary",
@@ -2397,12 +2554,14 @@
     141.177943
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:88",
+   "id": "北海道:87",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上問寒幌延停車場線",
    "ref": "645",
    "highway": "secondary",
@@ -2424,11 +2583,13 @@
     141.95907
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:89",
+   "id": "北海道:88",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "東藻琴豊富線",
    "ref": "995",
    "highway": "secondary",
@@ -2450,11 +2611,13 @@
     144.3161
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:90",
+   "id": "北海道:89",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "新富様似停車場線",
    "ref": "233",
    "highway": "secondary",
@@ -2476,11 +2639,13 @@
     142.98167
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:91",
+   "id": "北海道:90",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "岩内洞爺線",
    "ref": "66",
    "highway": "primary",
@@ -2502,11 +2667,13 @@
     140.552234
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:92",
+   "id": "北海道:91",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "釧路鶴居弟子屈線",
    "ref": "53",
    "highway": "primary",
@@ -2528,11 +2695,13 @@
     144.470637
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:93",
+   "id": "北海道:92",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "阿寒標茶線",
    "ref": "243",
    "highway": "secondary",
@@ -2554,11 +2723,13 @@
     144.27626
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:94",
+   "id": "北海道:93",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "三ノ原ニセコ線",
    "ref": "230",
    "highway": "secondary",
@@ -2580,11 +2751,13 @@
     140.827834
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:95",
+   "id": "北海道:94",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上藻別上渚滑停車場線",
    "ref": "553",
    "highway": "secondary",
@@ -2606,11 +2779,13 @@
     143.306357
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:96",
+   "id": "北海道:95",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "霧多布岬線",
    "ref": "1039",
    "highway": "secondary",
@@ -2633,7 +2808,9 @@
    ]
   },
   {
-   "id": "北海道:97",
+   "id": "北海道:96",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "町道 湖南朝日線",
    "ref": "",
    "highway": "tertiary",
@@ -2655,11 +2832,13 @@
     144.225605
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:98",
+   "id": "北海道:97",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "砂川歌志内線",
    "ref": "1027",
    "highway": "secondary",
@@ -2681,11 +2860,13 @@
     141.929591
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:99",
+   "id": "北海道:98",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "遠軽雄武線",
    "ref": "137",
    "highway": "primary",
@@ -2707,11 +2888,13 @@
     143.231616
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:100",
+   "id": "北海道:99",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "瑞穂東川線",
    "ref": "611",
    "highway": "secondary",
@@ -2733,11 +2916,13 @@
     142.63263
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:101",
+   "id": "北海道:100",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "雨竜旭川線",
    "ref": "251",
    "highway": "secondary",
@@ -2759,11 +2944,13 @@
     142.305972
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:102",
+   "id": "北海道:101",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "船泊港利礼公園線",
    "ref": "507",
    "highway": "secondary",
@@ -2786,7 +2973,9 @@
    ]
   },
   {
-   "id": "北海道:103",
+   "id": "北海道:102",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "椴法華港線",
    "ref": "231",
    "highway": "secondary",
@@ -2816,11 +3005,13 @@
     "label": "砂利・土"
    },
    "tags": [
-    "要注意"
+    "caution"
    ]
   },
   {
-   "id": "北海道:104",
+   "id": "北海道:103",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上社名渕上湧別線",
    "ref": "336",
    "highway": "secondary",
@@ -2842,11 +3033,13 @@
     143.442735
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:105",
+   "id": "北海道:104",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "野束清住線",
    "ref": "840",
    "highway": "secondary",
@@ -2868,11 +3061,13 @@
     140.514058
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:106",
+   "id": "北海道:105",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "八雲中部広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -2894,11 +3089,13 @@
     140.344661
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:107",
+   "id": "北海道:106",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "遠野別保線",
    "ref": "1003",
    "highway": "secondary",
@@ -2920,11 +3117,13 @@
     144.498034
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:108",
+   "id": "北海道:107",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "東山富良野停車場線",
    "ref": "253",
    "highway": "secondary",
@@ -2946,11 +3145,13 @@
     142.501016
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:109",
+   "id": "北海道:108",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "奈江富良野線 (Nae Furano Line)",
    "ref": "759;851",
    "highway": "secondary",
@@ -2970,10 +3171,15 @@
    "end": [
     43.469492,
     142.39593
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:110",
+   "id": "北海道:109",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "静内浦河線",
    "ref": "1025",
    "highway": "secondary",
@@ -2995,11 +3201,13 @@
     142.657105
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:111",
+   "id": "北海道:110",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "大津長節線",
    "ref": "912",
    "highway": "secondary",
@@ -3021,11 +3229,13 @@
     143.603323
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:112",
+   "id": "北海道:111",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "達布石狩沼田停車場線",
    "ref": "867",
    "highway": "secondary",
@@ -3047,12 +3257,14 @@
     141.853861
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:113",
+   "id": "北海道:112",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "東大里瀬棚停車場線",
    "ref": "783",
    "highway": "secondary",
@@ -3074,11 +3286,13 @@
     139.854737
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:114",
+   "id": "北海道:113",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美唄富良野線",
    "ref": "135",
    "highway": "primary",
@@ -3100,11 +3314,13 @@
     142.130236
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:115",
+   "id": "北海道:114",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "町道 新富152号線",
    "ref": "",
    "highway": "tertiary",
@@ -3126,11 +3342,13 @@
     144.310761
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:116",
+   "id": "北海道:115",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "霧立小平線",
    "ref": "742",
    "highway": "secondary",
@@ -3152,11 +3370,13 @@
     141.968271
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:117",
+   "id": "北海道:116",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "城丘江差線",
    "ref": "634",
    "highway": "secondary",
@@ -3178,11 +3398,13 @@
     140.281103
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:118",
+   "id": "北海道:117",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "南渡島広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -3204,11 +3426,13 @@
     140.55515
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:119",
+   "id": "北海道:118",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "小樽環状線",
    "ref": "956",
    "highway": "secondary",
@@ -3230,11 +3454,13 @@
     141.012519
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "北海道:120",
+   "id": "北海道:119",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "八雲北檜山線",
    "ref": "42",
    "highway": "primary",
@@ -3256,12 +3482,14 @@
     140.009034
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:121",
+   "id": "北海道:120",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "豊浦京極線",
    "ref": "97",
    "highway": "primary",
@@ -3283,12 +3511,14 @@
     140.734264
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:122",
+   "id": "北海道:121",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美川黒松内線",
    "ref": "523",
    "highway": "secondary",
@@ -3310,13 +3540,15 @@
     140.263038
    ],
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:123",
+   "id": "北海道:122",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "三ノ原ニセコ線",
    "ref": "230",
    "highway": "secondary",
@@ -3338,12 +3570,14 @@
     140.783909
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:124",
+   "id": "北海道:123",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "白老大滝線",
    "ref": "86",
    "highway": "primary",
@@ -3365,12 +3599,14 @@
     141.089957
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:125",
+   "id": "北海道:124",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "火散布茶内停車場線",
    "ref": "599",
    "highway": "secondary",
@@ -3390,10 +3626,15 @@
    "end": [
     43.129693,
     145.027415
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:126",
+   "id": "北海道:125",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "ウエンナイ幌内保線",
    "ref": "1069",
    "highway": "secondary",
@@ -3413,10 +3654,15 @@
    "end": [
     44.949281,
     142.577859
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:127",
+   "id": "北海道:126",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上雨紛台場線",
    "ref": "937",
    "highway": "secondary",
@@ -3436,10 +3682,15 @@
    "end": [
     43.722431,
     142.31955
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:128",
+   "id": "北海道:127",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北進平取線",
    "ref": "933",
    "highway": "secondary",
@@ -3459,10 +3710,15 @@
    "end": [
     42.794019,
     142.036676
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:129",
+   "id": "北海道:128",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "新町富里線",
    "ref": "",
    "highway": "tertiary",
@@ -3482,33 +3738,15 @@
    "end": [
     42.724509,
     141.885872
-   ]
-  },
-  {
-   "id": "北海道:130",
-   "name": "夕張厚真線",
-   "ref": "1065",
-   "highway": "secondary",
-   "lengthKm": 4.72,
-   "curviness": 161,
-   "flow": 17.2,
-   "turnCount": 44,
-   "score": 48,
-   "baseScore": 48,
-   "spotCount": 0,
-   "polyline": "mf~cGm}faZqIy@aIbC}ClBeCT_BEuFoBiRxAwJ_DgDuBgCsEaJsX_HB_NeEeCiC{A_DoLyEaByB_AcD{FwD}IkJuAaNgFwEqBmI}I_GkBcCsF}BwA_GoA}Pi@uA",
-   "pointCount": 30,
-   "start": [
-    42.758311,
-    141.926147
    ],
-   "end": [
-    42.790707,
-    141.951837
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:131",
+   "id": "北海道:129",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "和寒鷹栖線",
    "ref": "99",
    "highway": "primary",
@@ -3528,10 +3766,15 @@
    "end": [
     43.944083,
     142.366045
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:132",
+   "id": "北海道:130",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "仁倉端野線",
    "ref": "655",
    "highway": "secondary",
@@ -3551,33 +3794,16 @@
    "end": [
     43.971457,
     143.883095
-   ]
-  },
-  {
-   "id": "北海道:133",
-   "name": "八雲バイパス",
-   "ref": "5",
-   "highway": "trunk",
-   "lengthKm": 4.32,
-   "curviness": 105.5,
-   "flow": 26.8,
-   "turnCount": 17,
-   "score": 47.8,
-   "baseScore": 47.8,
-   "spotCount": 0,
-   "polyline": "o_}`G}qdwYuHdHuOjGoEh@k^r@a@Yey@tBlzAoDlHq@|KcF",
-   "pointCount": 10,
-   "start": [
-    42.260557,
-    140.275669
    ],
-   "end": [
-    42.262111,
-    140.274199
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:134",
+   "id": "北海道:131",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "丹羽今金線",
    "ref": "936",
    "highway": "secondary",
@@ -3597,33 +3823,15 @@
    "end": [
     42.423527,
     139.999629
-   ]
-  },
-  {
-   "id": "北海道:135",
-   "name": "南大通",
-   "ref": "943",
-   "highway": "tertiary",
-   "lengthKm": 3.39,
-   "curviness": 111.9,
-   "flow": 21.1,
-   "turnCount": 18,
-   "score": 47.8,
-   "baseScore": 47.8,
-   "spotCount": 0,
-   "polyline": "qbijG_k}lZzZqBRqEQkHwIod@eAqMh@mP~AoHnC_IXmCoFmkB",
-   "pointCount": 11,
-   "start": [
-    43.797047,
-    143.843201
    ],
-   "end": [
-    43.794306,
-    143.878623
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:136",
+   "id": "北海道:132",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "泉川西春別線",
    "ref": "830",
    "highway": "secondary",
@@ -3643,33 +3851,15 @@
    "end": [
     43.356637,
     144.711406
-   ]
-  },
-  {
-   "id": "北海道:137",
-   "name": "釧路新道",
-   "ref": "38",
-   "highway": "trunk",
-   "lengthKm": 3.86,
-   "curviness": 160.7,
-   "flow": 23,
-   "turnCount": 27,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "woneGowmoZiGgDsQaDuf@K{Iq@iDyAmEeFyBoG]mFe@iArD|NbC|DnDhC~Cx@hG\\vf@JdIfAhQjG",
-   "pointCount": 18,
-   "start": [
-    43.005559,
-    144.254799
    ],
-   "end": [
-    43.005296,
-    144.254892
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:138",
+   "id": "北海道:133",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "野花南芦別線",
    "ref": "978",
    "highway": "secondary",
@@ -3689,33 +3879,15 @@
    "end": [
     43.518312,
     142.210689
-   ]
-  },
-  {
-   "id": "北海道:139",
-   "name": "常元中里線",
-   "ref": "1050",
-   "highway": "secondary",
-   "lengthKm": 5.98,
-   "curviness": 174.4,
-   "flow": 15.6,
-   "turnCount": 67,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "_lciGgiejZ_Lt_@kBFcJ}FcD`@_EeCkAn@aF|QmD~Hw@xHcAbDqAzMeAvBcFfDw@nAoNzg@yAbD_@hEt@~U_@zAgCnCSfAJrBpB`GLpVpEfObApItDtJvC`SpBvBhLxGpPDhGnDf@nAPfHn@rDxF`P",
-   "pointCount": 37,
-   "start": [
-    43.603996,
-    143.392356
    ],
-   "end": [
-    43.606737,
-    143.340352
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:140",
+   "id": "北海道:134",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "川東道路",
    "ref": "",
    "highway": "tertiary",
@@ -3735,33 +3907,15 @@
    "end": [
     44.091166,
     144.057696
-   ]
-  },
-  {
-   "id": "北海道:141",
-   "name": "元村恵山線",
-   "ref": "635",
-   "highway": "secondary",
-   "lengthKm": 7.26,
-   "curviness": 175.5,
-   "flow": 15.2,
-   "turnCount": 84,
-   "score": 47.6,
-   "baseScore": 47.6,
-   "spotCount": 0,
-   "polyline": "_|b~Fc}t|YPhEh@zA|G~JdDfAbAxARfInApJbEzRrBbFjBjJdBnBxGvA|KlGrGtIfEtHlHzGfEpKiA~c@x@dRgAhZfAjGtCbEj@|Cf@nGWdF}@hEyCjEeGtBiIH}@v@uDjVEzM_@vF|AjPz@n@p@jSa@zJnDrMRzIpF|KbHvT?dCmAbC",
-   "pointCount": 44,
-   "start": [
-    41.799195,
-    141.178583
    ],
-   "end": [
-    41.78519,
-    141.107276
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:142",
+   "id": "北海道:135",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "北海道道519号滝之町伊達線",
    "ref": "519",
    "highway": "secondary",
@@ -3781,10 +3935,15 @@
    "end": [
     42.52525,
     140.889271
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:143",
+   "id": "北海道:136",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "居辺本別線",
    "ref": "660",
    "highway": "secondary",
@@ -3804,56 +3963,15 @@
    "end": [
     43.15389,
     143.427204
-   ]
-  },
-  {
-   "id": "北海道:144",
-   "name": "然別余市線",
-   "ref": "755",
-   "highway": "secondary",
-   "lengthKm": 3.94,
-   "curviness": 161.4,
-   "flow": 17.2,
-   "turnCount": 37,
-   "score": 47.6,
-   "baseScore": 47.6,
-   "spotCount": 0,
-   "polyline": "kvdfGeuyyYs@|HX|IUnHsDdK?pByA`F{EjFuDvGiHlNcBdG{FxEwDrFaA`EuH`LaClAcAnBeDtCkGrVuD|AuCjCwHxLuFrEmBrDiC~AyAd@iFk@sFb@wGY",
-   "pointCount": 29,
-   "start": [
-    43.119259,
-    140.71139
    ],
-   "end": [
-    43.141996,
-    140.679831
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:145",
-   "name": "静内中札内線",
-   "ref": "111",
-   "highway": "primary",
-   "lengthKm": 4.78,
-   "curviness": 186.7,
-   "flow": 16.5,
-   "turnCount": 54,
-   "score": 47.5,
-   "baseScore": 47.5,
-   "spotCount": 0,
-   "polyline": "ew_cGoa`gZkI~A{A~@_BxCa@dI{@xDcA|AwD`CkK`@mM{DwCMmHlJcRfAcBr@mElJmBfCmCfAkQ|CsAx@aJfRoJxIo@fD_EnIUrI}@fD}CrCoJlCqBdBO~Bz@bF|ArB|F~ClBfFDjEq@fF",
-   "pointCount": 35,
-   "start": [
-    42.602266,
-    142.874
-   ],
-   "end": [
-    42.628506,
-    142.844861
-   ]
-  },
-  {
-   "id": "北海道:146",
+   "id": "北海道:137",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "望来当別線",
    "ref": "527",
    "highway": "secondary",
@@ -3873,10 +3991,15 @@
    "end": [
     43.305048,
     141.427394
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:147",
+   "id": "北海道:138",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "雨竜旭川線",
    "ref": "251",
    "highway": "secondary",
@@ -3896,10 +4019,15 @@
    "end": [
     43.880629,
     142.324844
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:148",
+   "id": "北海道:139",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "塘路厚岸線",
    "ref": "221",
    "highway": "secondary",
@@ -3919,10 +4047,16 @@
    "end": [
     43.150894,
     144.501254
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "北海道:149",
+   "id": "北海道:140",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "野塚婦美線",
    "ref": "913",
    "highway": "secondary",
@@ -3942,8 +4076,258 @@
    "end": [
     43.361432,
     140.499861
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:141",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "国道452号",
+   "ref": "452",
+   "highway": "trunk",
+   "lengthKm": 29.94,
+   "curviness": 203.3,
+   "flow": 16.1,
+   "turnCount": 379,
+   "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
+   "polyline": "olggG_zibZ@jDsA|K@jD`HtRbBjVmKdg@aAjKVhDdCjGfLdMvHn\\lAr@vFL|Yha@vJ|GpBdEdBdIdCvGBfBqAzE\\~BfBf@`HmCdBj@`AvAb@`EyAdHLzBz@`AlIlCl@vBOxGVlB`G~FnAlCjA~T~I~r@x@nEhBvEnG|IbH~FtAvI~@XhEi@pCzA`AfCr@~FfAbB|F^lHrBvIn@~BpC|@tHt@|@`AIdCsDfBEpHxHnAfFr@z@~@BdC_CzAU|JlEtHt@|AvA~D~InAf@vHJtBt@~QnMpFjK|KqSdEyPjBcEfV}R|G{@vAaB?wDwEqH}@uDOqKfBwEfDaBbNmAzG}EjRmGpCcDlCgHbMaLlKqPxBsAhFDnBq@fJgNvNsHhHqIhDWfKpGlIzAr`@kCjBuAxDuFhEg@rAqAfCuHpEuG\\wKfA_CdLiB|FmDbEl@xAQtGmFbPaUtAy@nFnAnGk@zFnBvFaD|Dc@nDuAbIA|At@t@nBt@zPjAv@hAQj@mAd@cGp@wB`Aw@bGk@fAq@v@oBh@gHjAiBnDqBpA?`Av@~B~ExB`@`BuBt@eHtI{EdEuItBH|EfFrBa@`B_D^wBQiA_CaDGkAp@eEqCaGE_Cp@cAjEa@p@iA~@cFpAkBjb@mKdFfAbGUdFfBrIh@dBArDsAhP~I|D]nA}@hB{E`EoAzBsF`HaGtB}HtNmX|@_AzGaChBaBjLuY|CwC~CSfBd@hStMjU}@hCkBpD{Gr@sG@oLvAaG|Cy@rG~@hBKlVmLrCnAjIhT",
+   "pointCount": 199,
+   "start": [
+    43.296884,
+    142.104795
+   ],
+   "end": [
+    43.11963,
+    142.100002
+   ]
+  },
+  {
+   "id": "北海道:142",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "国道391号",
+   "ref": "391",
+   "highway": "trunk",
+   "lengthKm": 5.92,
+   "curviness": 215,
+   "flow": 17.9,
+   "turnCount": 71,
+   "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
+   "polyline": "qnxiGwmzpZ~B|CjExCnf@|UzDtH|@t@lBr@hL|@~EjBtDxCxNbS|PnGjBjCpCxGpCnCrNbCfMJzGnE^xBcArECxB|@hC`EpGPzB]rAqAh@w@[aCiEgAA{@z@?|C|HzIX~Am@dCaGjAk@hC^tAnFbHpAnMd@bApB^~OwInHkA",
+   "pointCount": 43,
+   "start": [
+    43.711932,
+    144.483639
+   ],
+   "end": [
+    43.678619,
+    144.453447
+   ]
+  },
+  {
+   "id": "北海道:143",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "北見白糠線",
+   "ref": "143",
+   "highway": "primary",
+   "lengthKm": 7.71,
+   "curviness": 186,
+   "flow": 15.6,
+   "turnCount": 92,
+   "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
+   "polyline": "mamfGksgmZkEmHoCKeC|AoHrNiC\\oB_AiJ}LoBIuAjAyJ`ToAx@kI~AcB~BcC|G{AhAsCg@uEeIsB{@kCnAiG`IwCjAkH]eGd@kIuBqIdB}NmFoDL}AbCkBfHeItFaNpR_CdAoILkBjAeAhDe@rKgBhCoIrAkFeAkOBoB|@eEfJuCxByCEmF{B}B[_C^}AfAs@tAk@xEkGdw@wAxDyCjA",
+   "pointCount": 54,
+   "start": [
+    43.16199,
+    143.895739
+   ],
+   "end": [
+    43.213787,
+    143.865507
+   ],
+   "unpaved": {
+    "unpavedMeters": 2462,
+    "totalMeters": 7713,
+    "ratio": 0.319,
+    "surface": "compacted",
+    "label": "締固め"
+   }
+  },
+  {
+   "id": "北海道:144",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "麓郷山部停車場線",
+   "ref": "544",
+   "highway": "secondary",
+   "lengthKm": 9.23,
+   "curviness": 137.5,
+   "flow": 17.1,
+   "turnCount": 74,
+   "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
+   "polyline": "i{ggG_iidZO|Jb@dD|FpRrCbj@sHzSc@~Hq@hCsBxBuFp@{B`BsO`b@rJbDzHrAph@`AxHtD`LtKdBv@vYrIbEDjCtBvOjE|@O~A{CfCPrIfEbVrI|MhB|Qs@~VmKvB\\lC_CzC\\nLgBhCPdDpE|Az@dEFhPrEfRj@lI}A~Bdc@",
+   "pointCount": 42,
+   "start": [
+    43.299246,
+    142.429764
+   ],
+   "end": [
+    43.249781,
+    142.38884
+   ],
+   "unpaved": {
+    "unpavedMeters": 1605,
+    "totalMeters": 9231,
+    "ratio": 0.174,
+    "surface": "gravel",
+    "label": "砂利"
+   }
+  },
+  {
+   "id": "北海道:145",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "上猿払浅茅野線",
+   "ref": "732",
+   "highway": "secondary",
+   "lengthKm": 11.96,
+   "curviness": 152.9,
+   "flow": 15.6,
+   "turnCount": 117,
+   "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
+   "polyline": "kn|rG{aacZfE|BlJvBxf@fw@eAvQcEzJ^tGkAdFIjD~BnIE`EiEpVY~JoJtWw\\`WmD|Ec@bGZjBtGrFf@xBkBzJ{C|WKnNq@`NsDlGaAvFnCbDlCfHxCdBtC`E`CdLDdHrDnNdHtM`I~FtHvM|FjHhTvPxG|AhGYlHxBxB~AzGlK|LbEvGGtGnBtIiD~CW`FrAlD`CbBlF`J|LvBzHKvDhF|MfBxGfAjAxGhCzNaBjCHri@~KpC`B",
+   "pointCount": 62,
+   "start": [
+    45.206943,
+    142.223823
+   ],
+   "end": [
+    45.161939,
+    142.132887
+   ],
+   "unpaved": {
+    "unpavedMeters": 10653,
+    "totalMeters": 11957,
+    "ratio": 0.891,
+    "surface": "",
+    "tracktype": "grade3",
+    "label": "砂利・土"
+   }
+  },
+  {
+   "id": "北海道:146",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "洞爺公園洞爺線",
+   "ref": "132",
+   "highway": "primary",
+   "lengthKm": 5.91,
+   "curviness": 189.2,
+   "flow": 15.7,
+   "turnCount": 71,
+   "score": 47.2,
+   "baseScore": 47.2,
+   "spotCount": 0,
+   "polyline": "_dhcGciwzY}E}Ou@yFDuF|BgC}@iLlAcHz@uB~JcIrAeCEiN~EuLxFmK]mJ~AuIlBqDdG}G|DiCnF}H~D}A`CKfAmAlDuK?_KzB}HdDgGzC}A~DuDdE_IfNcOzFgBhLnAlHgBfBsArDuIp@kFzAgFJsF~BsH`DqGlDgC",
+   "pointCount": 41,
+   "start": [
+    42.64528,
+    140.863062
+   ],
+   "end": [
+    42.61773,
+    140.913428
+   ]
+  },
+  {
+   "id": "北海道:147",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "江別奈井江線",
+   "ref": "139",
+   "highway": "primary",
+   "lengthKm": 4.08,
+   "curviness": 123.2,
+   "flow": 21,
+   "turnCount": 24,
+   "score": 47.2,
+   "baseScore": 47.2,
+   "spotCount": 0,
+   "polyline": "ilxfGkyt_ZwAsByD}K}FlF}Bl@{BKaDiBaUyVeDcAk\\PgDy@mDuE_c@kw@mPaIeHRmARyCjCwCdJqGwO",
+   "pointCount": 19,
+   "start": [
+    43.220052,
+    141.669501
+   ],
+   "end": [
+    43.248829,
+    141.68736
+   ]
+  },
+  {
+   "id": "北海道:148",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "豊富遠別線",
+   "ref": "256",
+   "highway": "secondary",
+   "lengthKm": 5.33,
+   "curviness": 183.6,
+   "flow": 14.6,
+   "turnCount": 67,
+   "score": 47.2,
+   "baseScore": 47.2,
+   "spotCount": 0,
+   "polyline": "ewcpG}`aaZcGuCgPu\\_BkAaE{@iBnAOhHoAhGm@~GyArBsHnA_F}@sCwBqDmHkDmAsBn@wIlJeBl@wD_A_AqAsEkR?qFbB{KqAuOmAeCuFuDuGsLm@qBk@cKwB{C{Es@sHeCkHnCwPAyAp@eR~P_Cr@",
+   "pointCount": 37,
+   "start": [
+    44.75267,
+    141.895991
+   ],
+   "end": [
+    44.785241,
+    141.910686
+   ]
+  },
+  {
+   "id": "北海道:149",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "上猿払清浜線",
+   "ref": "889",
+   "highway": "secondary",
+   "lengthKm": 17,
+   "curviness": 170.8,
+   "flow": 13.6,
+   "turnCount": 214,
+   "score": 47.2,
+   "baseScore": 47.2,
+   "spotCount": 0,
+   "polyline": "gfutGsz_aZ`BiPCqRtCeHZ_CcC}WNqE|AiIHcCw@wC{GsFmDoFs@eCIsDzE{P?iOx@kEvVmTzAoCx@sDFqHeIir@dEy^zAgD|A[`G~AdCA`UeHrJ`C~CAxDsBrIaN~EeBnCV|IbEnGB|DbCtA?v@w@bBgFtFuH`De[tBaEvBs@vB\\dGbHtK|@vAbAvEzGjE`@lCqB|L}QjAkD~@oI`AmCrGoEpEs@pEF|Ap@~A~BbB|GfAhBnHzBfBpAbIbU~J~JbB\\nKUfLfCtDzAvFdFhBr@`Ju@zBNbTfOlE\\pVwHvDeDbAmCj@iEm@oS`@oFxBiEpLwMtBq@~BPhBlArD~EjB|@nIOvCuBtIkXQiJj@sKuAwHIwCj@{DzA_CjBw@dJ\\hBe@dBmB`CmHzBwAlDz@|CtHrC`BjCk@|E}GzCg@tBr@zElFzD|KtA~@zA@",
+   "pointCount": 115,
+   "start": [
+    45.497475,
+    141.88986
+   ],
+   "end": [
+    45.407448,
+    141.959141
    ]
   }
  ],
- "hiddenCount": 109
+ "hiddenCount": 118
 }

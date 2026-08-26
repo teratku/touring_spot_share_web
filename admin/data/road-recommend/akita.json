@@ -1,9 +1,9 @@
 {
  "prefecture": "秋田県",
  "romaji": "akita",
- "generation": 3,
- "contentHash": "d5147eeb6685",
- "builtAt": "2026-08-25T13:11:39.780Z",
+ "generation": 4,
+ "contentHash": "e9c4a3cb7237",
+ "builtAt": "2026-08-26T09:40:08.437Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -15,6 +15,8 @@
  "segments": [
   {
    "id": "秋田県:0",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "鳥海ブルーライン",
    "ref": "210",
    "highway": "secondary",
@@ -38,13 +40,15 @@
    "reshaped": true,
    "boost": 10,
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "秋田県:1",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "八幡平アスピーテライン",
    "ref": "23",
    "highway": "primary",
@@ -68,12 +72,14 @@
    "reshaped": true,
    "boost": 16,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "秋田県:2",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "比内森吉線",
    "ref": "309",
    "highway": "secondary",
@@ -98,13 +104,15 @@
    "boost": 15,
    "title": "くまげらエコーライン",
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
    "id": "秋田県:3",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋ノ宮小安温泉線",
    "ref": "310",
    "highway": "secondary",
@@ -126,12 +134,14 @@
     140.526595
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "秋田県:4",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "小安温泉椿川線",
    "ref": "323",
    "highway": "secondary",
@@ -153,12 +163,14 @@
     140.718276
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "秋田県:5",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "鴻屋梺線",
    "ref": "275",
    "highway": "secondary",
@@ -181,12 +193,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "秋田県:6",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "楢渕横渡線",
    "ref": "284",
    "highway": "secondary",
@@ -208,12 +222,14 @@
     140.229697
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "秋田県:7",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "象潟矢島線",
    "ref": "58",
    "highway": "primary",
@@ -236,46 +252,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "秋田県:8",
-   "name": "花巻大曲線",
-   "ref": "12",
-   "highway": "primary",
-   "lengthKm": 10.96,
-   "curviness": 358.1,
-   "flow": 38.5,
-   "turnCount": 102,
-   "score": 69.8,
-   "baseScore": 77.3,
-   "spotCount": 0,
-   "polyline": "i}qoFe{}xYvBuJdCuFv@_IxDyPa@oL~@sMo@aSdFkb@W}HoGmMOyAfAwEz@kNv@qDvP}UxG_PzCcEpAyG|KmKNuF`AwD~H}ChIwM\\wAi@u@uCtCw@SIs@dJqJdIiBnE}BrBkChEVpBqChB`@zFYrCqFr@V\\lCrEtEJr@_AxA?n@lAbBn@lDfDzDfCRbAk@QgA{BQUa@Es@dAi@zE`@lAhEh@b@bBg@hAkJOeCqB_DNqAl@_@hBKjAf@TxDr@f@x@y@~@mHbBi@~@H^\\L`Dl@`B|ChDt@E~AkBDkDbBuF_A_Fl@eBDyCOiAcCsEiCuB[aAB_Mp@cBbAGhFlFvBMp@iAEmB_JaHUeA`@i@~C[hIBj@qAu@oAoTuEy@kAH{@fAc@",
-   "pointCount": 104,
-   "start": [
-    39.41861,
-    140.56899
-   ],
-   "end": [
-    39.38749,
-    140.63257
-   ],
-   "unpaved": {
-    "unpavedMeters": 1628,
-    "totalMeters": 15670,
-    "ratio": 0.104,
-    "surface": "unpaved",
-    "label": "未舗装"
-   },
-   "reshaped": true,
-   "tags": [
-    "快走"
-   ]
-  },
-  {
-   "id": "秋田県:9",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道103号",
    "ref": "103;104",
    "highway": "trunk",
@@ -299,12 +283,14 @@
    "reshaped": true,
    "boost": 10,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:10",
+   "id": "秋田県:9",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道454号",
    "ref": "454",
    "highway": "trunk",
@@ -327,11 +313,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:11",
+   "id": "秋田県:10",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "本荘岩城線",
    "ref": "69",
    "highway": "primary",
@@ -353,12 +341,14 @@
     140.099364
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:12",
+   "id": "秋田県:11",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "仁賀保矢島館合線",
    "ref": "32",
    "highway": "primary",
@@ -382,7 +372,9 @@
    "reshaped": true
   },
   {
-   "id": "秋田県:13",
+   "id": "秋田県:12",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "久保秋田線",
    "ref": "112",
    "highway": "secondary",
@@ -405,11 +397,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:14",
+   "id": "秋田県:13",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "南郷黒沢線",
    "ref": "320",
    "highway": "secondary",
@@ -432,12 +426,14 @@
    ],
    "title": "バードハイライン",
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:15",
+   "id": "秋田県:14",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道341号",
    "ref": "341",
    "highway": "trunk",
@@ -459,13 +455,15 @@
     140.043254
    ],
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:16",
+   "id": "秋田県:15",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "仁賀保矢島館合線",
    "ref": "32",
    "highway": "primary",
@@ -487,13 +485,15 @@
     140.274997
    ],
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:17",
+   "id": "秋田県:16",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "本荘岩城線",
    "ref": "69",
    "highway": "primary",
@@ -515,12 +515,14 @@
     140.122934
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:18",
+   "id": "秋田県:17",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道397号",
    "ref": "397",
    "highway": "trunk",
@@ -542,12 +544,14 @@
     140.713247
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:19",
+   "id": "秋田県:18",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "男鹿半島線",
    "ref": "59",
    "highway": "primary",
@@ -569,13 +573,15 @@
     139.720142
    ],
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:20",
+   "id": "秋田県:19",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "小滝二ツ井線",
    "ref": "202",
    "highway": "secondary",
@@ -597,11 +603,13 @@
     140.189582
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:21",
+   "id": "秋田県:20",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "十文字羽後鳥海線",
    "ref": "57",
    "highway": "primary",
@@ -624,12 +632,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:22",
+   "id": "秋田県:21",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "西山生保内線",
    "ref": "194",
    "highway": "secondary",
@@ -651,12 +661,14 @@
     140.798399
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:23",
+   "id": "秋田県:22",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "長岡冬師城内線",
    "ref": "312",
    "highway": "secondary",
@@ -687,20 +699,22 @@
    "reshaped": true,
    "title": "鳥海グリーンライン",
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:24",
+   "id": "秋田県:23",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "鳥海グリーンライン",
    "ref": "",
    "highway": "secondary",
    "osmId": null,
    "spotCount": 0,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ],
    "title": null,
    "note": null,
@@ -724,7 +738,9 @@
    "added": true
   },
   {
-   "id": "秋田県:25",
+   "id": "秋田県:24",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "きみまち阪公園素波里湖線",
    "ref": "322",
    "highway": "secondary",
@@ -746,11 +762,13 @@
     140.22231
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:26",
+   "id": "秋田県:25",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "林道三ツ森山線",
    "ref": "",
    "highway": "tertiary",
@@ -772,12 +790,14 @@
     140.372947
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:27",
+   "id": "秋田県:26",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "仁郷大湯線",
    "ref": "282",
    "highway": "secondary",
@@ -800,12 +820,14 @@
    ],
    "title": "栗駒ロマンティック街道",
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:28",
+   "id": "秋田県:27",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道282号",
    "ref": "282",
    "highway": "trunk",
@@ -827,12 +849,14 @@
     140.686515
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:29",
+   "id": "秋田県:28",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "入道崎寒風山線",
    "ref": "55",
    "highway": "primary",
@@ -854,12 +878,14 @@
     139.905685
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:30",
+   "id": "秋田県:29",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "琴丘上小阿仁線",
    "ref": "37",
    "highway": "primary",
@@ -882,11 +908,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:31",
+   "id": "秋田県:30",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "上桧木内玉川線",
    "ref": "321",
    "highway": "secondary",
@@ -908,12 +936,14 @@
     140.635242
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:32",
+   "id": "秋田県:31",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "冬師西目線",
    "ref": "285",
    "highway": "secondary",
@@ -936,12 +966,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:33",
+   "id": "秋田県:32",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "横手東成瀬線",
    "ref": "40",
    "highway": "primary",
@@ -963,12 +995,14 @@
     140.613498
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:34",
+   "id": "秋田県:33",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "湯沢栗駒公園線",
    "ref": "51",
    "highway": "primary",
@@ -992,12 +1026,14 @@
    "reshaped": true,
    "title": "コスモスライン",
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:35",
+   "id": "秋田県:34",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "西仙北南外線",
    "ref": "315",
    "highway": "secondary",
@@ -1019,11 +1055,13 @@
     140.308281
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:36",
+   "id": "秋田県:35",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "外山落合線",
    "ref": "273",
    "highway": "secondary",
@@ -1045,12 +1083,14 @@
     140.631074
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:37",
+   "id": "秋田県:36",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "入道崎八望台北浦線",
    "ref": "121",
    "highway": "secondary",
@@ -1073,11 +1113,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:38",
+   "id": "秋田県:37",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "雪沢十和田毛馬内線",
    "ref": "313",
    "highway": "secondary",
@@ -1099,12 +1141,14 @@
     140.768641
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:39",
+   "id": "秋田県:38",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "男鹿半島線",
    "ref": "59",
    "highway": "primary",
@@ -1127,11 +1171,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:40",
+   "id": "秋田県:39",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道398号",
    "ref": "398",
    "highway": "trunk",
@@ -1153,12 +1199,14 @@
     140.714083
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:41",
+   "id": "秋田県:40",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道341号",
    "ref": "341",
    "highway": "trunk",
@@ -1181,12 +1229,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:42",
+   "id": "秋田県:41",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "上新城土崎港線",
    "ref": "231",
    "highway": "secondary",
@@ -1208,11 +1258,13 @@
     140.102273
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:43",
+   "id": "秋田県:42",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "田沢湖西木線",
    "ref": "38",
    "highway": "primary",
@@ -1234,13 +1286,15 @@
     140.716722
    ],
    "tags": [
-    "絶景",
-    "ワインディング",
-    "快走"
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:44",
+   "id": "秋田県:43",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "きみまち阪公園素波里湖線",
    "ref": "322",
    "highway": "secondary",
@@ -1263,11 +1317,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:45",
+   "id": "秋田県:44",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道342号",
    "ref": "342",
    "highway": "trunk",
@@ -1290,12 +1346,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:46",
+   "id": "秋田県:45",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "ワインロード",
    "ref": "",
    "highway": "tertiary",
@@ -1318,11 +1376,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:47",
+   "id": "秋田県:46",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道285号旧道",
    "ref": "",
    "highway": "tertiary",
@@ -1344,12 +1404,14 @@
     140.367735
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:48",
+   "id": "秋田県:47",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "西滝沢館線",
    "ref": "293",
    "highway": "secondary",
@@ -1371,11 +1433,13 @@
     140.114708
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:49",
+   "id": "秋田県:48",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "揚の下岩脇線",
    "ref": "198",
    "highway": "secondary",
@@ -1396,10 +1460,15 @@
     40.17289,
     140.39999
    ],
-   "reshaped": true
+   "reshaped": true,
+   "tags": [
+    "flowing"
+   ]
   },
   {
-   "id": "秋田県:50",
+   "id": "秋田県:49",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "唐松宇津野線",
    "ref": "316",
    "highway": "secondary",
@@ -1422,12 +1491,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:51",
+   "id": "秋田県:50",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道398号",
    "ref": "398",
    "highway": "trunk",
@@ -1449,12 +1520,14 @@
     140.411965
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:52",
+   "id": "秋田県:51",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "根瀬尾去沢線",
    "ref": "191",
    "highway": "secondary",
@@ -1476,11 +1549,13 @@
     140.786699
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:53",
+   "id": "秋田県:52",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "南由利原鮎川線",
    "ref": "287",
    "highway": "secondary",
@@ -1502,12 +1577,14 @@
     140.068464
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:54",
+   "id": "秋田県:53",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "横手大森大内線",
    "ref": "29",
    "highway": "primary",
@@ -1529,13 +1606,15 @@
     140.35813
    ],
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:55",
+   "id": "秋田県:54",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "鳥海矢島線",
    "ref": "70",
    "highway": "primary",
@@ -1557,11 +1636,13 @@
     140.145658
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:56",
+   "id": "秋田県:55",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "高屋敷茶屋下線",
    "ref": "203",
    "highway": "secondary",
@@ -1583,12 +1664,14 @@
     140.224929
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:57",
+   "id": "秋田県:56",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "大館十和田湖線",
    "ref": "2",
    "highway": "primary",
@@ -1611,12 +1694,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:58",
+   "id": "秋田県:57",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "十二所花輪大湯線",
    "ref": "66",
    "highway": "primary",
@@ -1638,12 +1723,14 @@
     140.796937
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:59",
+   "id": "秋田県:58",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道398号",
    "ref": "398",
    "highway": "trunk",
@@ -1665,12 +1752,14 @@
     140.657878
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:60",
+   "id": "秋田県:59",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "木戸石鷹巣線",
    "ref": "197",
    "highway": "secondary",
@@ -1692,11 +1781,13 @@
     140.356422
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:61",
+   "id": "秋田県:60",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "十文字羽後鳥海線",
    "ref": "57",
    "highway": "primary",
@@ -1718,11 +1809,13 @@
     140.312878
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:62",
+   "id": "秋田県:61",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道101号",
    "ref": "101",
    "highway": "trunk",
@@ -1744,11 +1837,13 @@
     139.851142
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:63",
+   "id": "秋田県:62",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "払戸琴川線",
    "ref": "304",
    "highway": "secondary",
@@ -1770,11 +1865,13 @@
     139.897526
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:64",
+   "id": "秋田県:63",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "能代五城目線",
    "ref": "4",
    "highway": "primary",
@@ -1796,11 +1893,13 @@
     140.148214
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:65",
+   "id": "秋田県:64",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "鳥海公園小滝線",
    "ref": "131",
    "highway": "secondary",
@@ -1822,11 +1921,13 @@
     139.960101
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:66",
+   "id": "秋田県:65",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "本荘西仙北角館線",
    "ref": "10",
    "highway": "primary",
@@ -1848,11 +1949,13 @@
     140.233067
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:67",
+   "id": "秋田県:66",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "太平山八田線",
    "ref": "232",
    "highway": "secondary",
@@ -1874,11 +1977,13 @@
     140.231738
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:68",
+   "id": "秋田県:67",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "古井内大久保停車場線",
    "ref": "229",
    "highway": "secondary",
@@ -1900,11 +2005,13 @@
     140.067608
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:69",
+   "id": "秋田県:68",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "白沢田代線",
    "ref": "68",
    "highway": "primary",
@@ -1926,11 +2033,13 @@
     140.457278
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:70",
+   "id": "秋田県:69",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "林道 花矢線",
    "ref": "",
    "highway": "tertiary",
@@ -1952,12 +2061,14 @@
     140.591722
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:71",
+   "id": "秋田県:70",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道105号",
    "ref": "105",
    "highway": "trunk",
@@ -1979,12 +2090,14 @@
     140.460382
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:72",
+   "id": "秋田県:71",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "男鹿半島線",
    "ref": "59",
    "highway": "primary",
@@ -2006,11 +2119,13 @@
     139.739866
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:73",
+   "id": "秋田県:72",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "金光寺鵜川線",
    "ref": "211",
    "highway": "secondary",
@@ -2032,12 +2147,14 @@
     140.023472
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:74",
+   "id": "秋田県:73",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "旧・常盤峰浜線",
    "ref": "",
    "highway": "tertiary",
@@ -2059,12 +2176,14 @@
     140.067578
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:75",
+   "id": "秋田県:74",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道454号",
    "ref": "454",
    "highway": "trunk",
@@ -2086,11 +2205,13 @@
     140.858777
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:76",
+   "id": "秋田県:75",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "田沢湖畔線",
    "ref": "60",
    "highway": "primary",
@@ -2112,12 +2233,14 @@
     140.587002
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "秋田県:77",
+   "id": "秋田県:76",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "大館十和田湖線",
    "ref": "2",
    "highway": "primary",
@@ -2139,11 +2262,13 @@
     140.865279
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
-   "id": "秋田県:78",
+   "id": "秋田県:77",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "象潟矢島線",
    "ref": "58",
    "highway": "primary",
@@ -2165,11 +2290,13 @@
     139.993323
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:79",
+   "id": "秋田県:78",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "相内潟潟野線",
    "ref": "247",
    "highway": "secondary",
@@ -2191,11 +2318,13 @@
     140.644022
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:80",
+   "id": "秋田県:79",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "比内大葛鹿角線",
    "ref": "22",
    "highway": "primary",
@@ -2217,11 +2346,13 @@
     140.730362
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:81",
+   "id": "秋田県:80",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "長信田羽後長野停車場線",
    "ref": "259",
    "highway": "secondary",
@@ -2243,11 +2374,13 @@
     140.58715
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:82",
+   "id": "秋田県:81",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "大川端伏見線",
    "ref": "291",
    "highway": "secondary",
@@ -2269,11 +2402,13 @@
     140.187908
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:83",
+   "id": "秋田県:82",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "角館長野線",
    "ref": "253",
    "highway": "secondary",
@@ -2295,11 +2430,13 @@
     140.530928
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:84",
+   "id": "秋田県:83",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "上郷仁賀保線",
    "ref": "289",
    "highway": "secondary",
@@ -2321,11 +2458,13 @@
     139.94629
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:85",
+   "id": "秋田県:84",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "田代平大清水線",
    "ref": "128",
    "highway": "secondary",
@@ -2347,11 +2486,13 @@
     140.963175
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:86",
+   "id": "秋田県:85",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "みずほの里ロード",
    "ref": "",
    "highway": "tertiary",
@@ -2373,11 +2514,13 @@
     140.575125
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:87",
+   "id": "秋田県:86",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田御所野雄和線",
    "ref": "61",
    "highway": "primary",
@@ -2399,11 +2542,13 @@
     140.195366
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:88",
+   "id": "秋田県:87",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "比内森吉線",
    "ref": "309",
    "highway": "secondary",
@@ -2425,11 +2570,13 @@
     140.566439
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:89",
+   "id": "秋田県:88",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "湯の又前田線",
    "ref": "265",
    "highway": "secondary",
@@ -2451,11 +2598,13 @@
     140.354811
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:90",
+   "id": "秋田県:89",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "日三市角館線",
    "ref": "250;257",
    "highway": "secondary",
@@ -2477,11 +2626,13 @@
     140.505931
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:91",
+   "id": "秋田県:90",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "出羽グリーンロード（出羽丘陵広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -2503,12 +2654,14 @@
     140.396999
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:92",
+   "id": "秋田県:91",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "雄平フルーツライン",
    "ref": "",
    "highway": "tertiary",
@@ -2531,11 +2684,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:93",
+   "id": "秋田県:92",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "男鹿街道",
    "ref": "",
    "highway": "tertiary",
@@ -2557,11 +2712,13 @@
     139.952832
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:94",
+   "id": "秋田県:93",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "河辺阿仁線",
    "ref": "308",
    "highway": "secondary",
@@ -2583,11 +2740,13 @@
     140.458733
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:95",
+   "id": "秋田県:94",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "羽後向田館合線",
    "ref": "34",
    "highway": "primary",
@@ -2609,11 +2768,13 @@
     140.318272
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:96",
+   "id": "秋田県:95",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "出羽グリーンロード",
    "ref": "",
    "highway": "tertiary",
@@ -2635,11 +2796,13 @@
     140.248075
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:97",
+   "id": "秋田県:96",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "角館長野線",
    "ref": "253",
    "highway": "secondary",
@@ -2661,11 +2824,13 @@
     140.521774
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:98",
+   "id": "秋田県:97",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "湯沢雄物川大曲線",
    "ref": "13",
    "highway": "primary",
@@ -2687,11 +2852,13 @@
     140.471674
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:99",
+   "id": "秋田県:98",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "雄和岩城線",
    "ref": "44",
    "highway": "primary",
@@ -2713,11 +2880,13 @@
     140.172405
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:100",
+   "id": "秋田県:99",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "旧・常盤峰浜線",
    "ref": "",
    "highway": "tertiary",
@@ -2739,11 +2908,13 @@
     140.103007
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:101",
+   "id": "秋田県:100",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田雄和本荘線",
    "ref": "9",
    "highway": "primary",
@@ -2765,11 +2936,13 @@
     140.228985
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:102",
+   "id": "秋田県:101",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "琴丘上小阿仁線",
    "ref": "37",
    "highway": "primary",
@@ -2791,11 +2964,13 @@
     140.139171
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:103",
+   "id": "秋田県:102",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "鴻屋梺線",
    "ref": "275",
    "highway": "secondary",
@@ -2817,11 +2992,13 @@
     140.320772
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:104",
+   "id": "秋田県:103",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "千畑大曲線",
    "ref": "305",
    "highway": "secondary",
@@ -2843,11 +3020,13 @@
     140.527127
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:105",
+   "id": "秋田県:104",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "雄和協和線",
    "ref": "319",
    "highway": "secondary",
@@ -2869,11 +3048,13 @@
     140.261145
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:106",
+   "id": "秋田県:105",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道104号",
    "ref": "104",
    "highway": "trunk",
@@ -2895,11 +3076,13 @@
     140.886859
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:107",
+   "id": "秋田県:106",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "川添下浜停車場線",
    "ref": "240",
    "highway": "secondary",
@@ -2921,11 +3104,13 @@
     140.099322
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:108",
+   "id": "秋田県:107",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "神岡南外東由利線",
    "ref": "30",
    "highway": "primary",
@@ -2947,11 +3132,13 @@
     140.369445
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:109",
+   "id": "秋田県:108",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "みずほの里ロード",
    "ref": "",
    "highway": "tertiary",
@@ -2973,11 +3160,13 @@
     140.589432
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:110",
+   "id": "秋田県:109",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "土川神岡線",
    "ref": "254",
    "highway": "secondary",
@@ -2999,11 +3188,13 @@
     140.449905
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:111",
+   "id": "秋田県:110",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "旧・常盤峰浜線",
    "ref": "",
    "highway": "tertiary",
@@ -3025,11 +3216,13 @@
     140.069663
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:112",
+   "id": "秋田県:111",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "小出金浦線",
    "ref": "290",
    "highway": "secondary",
@@ -3051,11 +3244,13 @@
     139.923156
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:113",
+   "id": "秋田県:112",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "能代五城目線",
    "ref": "4",
    "highway": "primary",
@@ -3077,12 +3272,14 @@
     140.159319
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:114",
+   "id": "秋田県:113",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "山谷富根停車場線",
    "ref": "206",
    "highway": "secondary",
@@ -3104,11 +3301,13 @@
     140.149955
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:115",
+   "id": "秋田県:114",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田昭和線",
    "ref": "41",
    "highway": "primary",
@@ -3130,11 +3329,13 @@
     140.137714
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:116",
+   "id": "秋田県:115",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "本荘西仙北角館線",
    "ref": "10",
    "highway": "primary",
@@ -3156,12 +3357,14 @@
     140.438654
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:117",
+   "id": "秋田県:116",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "河辺阿仁線",
    "ref": "308",
    "highway": "secondary",
@@ -3181,10 +3384,15 @@
    "end": [
     39.655876,
     140.239836
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:118",
+   "id": "秋田県:117",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田八郎潟線",
    "ref": "15",
    "highway": "primary",
@@ -3204,10 +3412,15 @@
    "end": [
     39.93938,
     140.130178
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:119",
+   "id": "秋田県:118",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "鹿角広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -3227,10 +3440,15 @@
    "end": [
     40.257235,
     140.813179
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:120",
+   "id": "秋田県:119",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道341号",
    "ref": "341",
    "highway": "trunk",
@@ -3250,33 +3468,15 @@
    "end": [
     39.545275,
     140.207775
-   ]
-  },
-  {
-   "id": "秋田県:121",
-   "name": "大曲大森羽後線",
-   "ref": "36",
-   "highway": "primary",
-   "lengthKm": 3.48,
-   "curviness": 82.7,
-   "flow": 20.5,
-   "turnCount": 14,
-   "score": 44,
-   "baseScore": 44,
-   "spotCount": 0,
-   "polyline": "cpwoFezfxYq@_MRyKmAwEe@wHeEiZsKap@Z}MsO_Cq`@oM{a@eD",
-   "pointCount": 11,
-   "start": [
-    39.447221,
-    140.451071
    ],
-   "end": [
-    39.464427,
-    140.476398
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:122",
+   "id": "秋田県:120",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田岩見船岡線",
    "ref": "28",
    "highway": "primary",
@@ -3296,10 +3496,15 @@
    "end": [
     39.739412,
     140.228722
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:123",
+   "id": "秋田県:121",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道101号",
    "ref": "101",
    "highway": "trunk",
@@ -3319,10 +3524,15 @@
    "end": [
     40.089957,
     139.960751
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:124",
+   "id": "秋田県:122",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "土川中仙線",
    "ref": "256",
    "highway": "secondary",
@@ -3342,10 +3552,15 @@
    "end": [
     39.540928,
     140.523146
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:125",
+   "id": "秋田県:123",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "神岡南外東由利線",
    "ref": "30",
    "highway": "primary",
@@ -3365,10 +3580,15 @@
    "end": [
     39.360705,
     140.292198
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:126",
+   "id": "秋田県:124",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "能代五城目線",
    "ref": "4",
    "highway": "primary",
@@ -3388,10 +3608,15 @@
    "end": [
     40.142605,
     140.095497
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:127",
+   "id": "秋田県:125",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "国道107号",
    "ref": "107",
    "highway": "trunk",
@@ -3411,10 +3636,15 @@
    "end": [
     39.337665,
     140.161166
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:128",
+   "id": "秋田県:126",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "神岡南外東由利線",
    "ref": "30",
    "highway": "primary",
@@ -3434,10 +3664,15 @@
    "end": [
     39.407363,
     140.318839
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:129",
+   "id": "秋田県:127",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "真坂五城目線",
    "ref": "220",
    "highway": "secondary",
@@ -3457,10 +3692,15 @@
    "end": [
     39.947762,
     140.117377
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:130",
+   "id": "秋田県:128",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "湯沢栗駒公園線",
    "ref": "51",
    "highway": "primary",
@@ -3480,10 +3720,16 @@
    "end": [
     39.042675,
     140.566679
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:131",
+   "id": "秋田県:129",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田北野田線",
    "ref": "62",
    "highway": "primary",
@@ -3503,10 +3749,15 @@
    "end": [
     39.687226,
     140.225241
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:132",
+   "id": "秋田県:130",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "出羽グリーンロード（出羽丘陵広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -3526,10 +3777,15 @@
    "end": [
     39.523345,
     140.296425
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:133",
+   "id": "秋田県:131",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "水沢西仙北線",
    "ref": "252",
    "highway": "secondary",
@@ -3549,10 +3805,15 @@
    "end": [
     39.544885,
     140.383686
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:134",
+   "id": "秋田県:132",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "福館阿仁前田線",
    "ref": "214",
    "highway": "secondary",
@@ -3572,10 +3833,15 @@
    "end": [
     40.060163,
     140.38499
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:135",
+   "id": "秋田県:133",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "大館十和田湖線",
    "ref": "2",
    "highway": "primary",
@@ -3595,10 +3861,16 @@
    "end": [
     40.349623,
     140.775091
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:136",
+   "id": "秋田県:134",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "四ツ屋神岡線",
    "ref": "67",
    "highway": "primary",
@@ -3618,10 +3890,15 @@
    "end": [
     39.507114,
     140.46253
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:137",
+   "id": "秋田県:135",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "白沢田代線",
    "ref": "68",
    "highway": "primary",
@@ -3641,10 +3918,15 @@
    "end": [
     40.278896,
     140.466996
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:138",
+   "id": "秋田県:136",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "みずほの里ロード",
    "ref": "",
    "highway": "tertiary",
@@ -3664,10 +3946,15 @@
    "end": [
     39.479015,
     140.631999
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:139",
+   "id": "秋田県:137",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田岩見船岡線",
    "ref": "28",
    "highway": "primary",
@@ -3687,10 +3974,15 @@
    "end": [
     39.725873,
     140.146276
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:140",
+   "id": "秋田県:138",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "淀川北野目線",
    "ref": "113",
    "highway": "secondary",
@@ -3710,10 +4002,15 @@
    "end": [
     39.547798,
     140.349029
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:141",
+   "id": "秋田県:139",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "秋田御所野雄和線",
    "ref": "61",
    "highway": "primary",
@@ -3733,33 +4030,15 @@
    "end": [
     39.600093,
     140.205791
-   ]
-  },
-  {
-   "id": "秋田県:142",
-   "name": "横手バイパス",
-   "ref": "13;107",
-   "highway": "trunk",
-   "lengthKm": 3.2,
-   "curviness": 87.2,
-   "flow": 21.4,
-   "turnCount": 13,
-   "score": 41.4,
-   "baseScore": 41.4,
-   "spotCount": 0,
-   "polyline": "of{nFmn{xYaN}CgMIiWnD}c@hDoZtEyJn@mTq@oDq@{F_CcImG",
-   "pointCount": 11,
-   "start": [
-    39.302315,
-    140.556707
    ],
-   "end": [
-    39.330288,
-    140.556996
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:143",
+   "id": "秋田県:140",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "白岩角館線",
    "ref": "258",
    "highway": "secondary",
@@ -3779,10 +4058,15 @@
    "end": [
     39.584323,
     140.573973
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:144",
+   "id": "秋田県:141",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "入道崎寒風山線",
    "ref": "55",
    "highway": "primary",
@@ -3802,10 +4086,15 @@
    "end": [
     39.978335,
     139.729349
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:145",
+   "id": "秋田県:142",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "金光寺能代線",
    "ref": "210",
    "highway": "secondary",
@@ -3825,10 +4114,15 @@
    "end": [
     40.168961,
     140.031323
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:146",
+   "id": "秋田県:143",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "大館十和田湖線",
    "ref": "2",
    "highway": "primary",
@@ -3848,10 +4142,15 @@
    "end": [
     40.290936,
     140.670803
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:147",
+   "id": "秋田県:144",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "仙北北部第二広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -3871,10 +4170,16 @@
    "end": [
     39.644387,
     140.369831
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:148",
+   "id": "秋田県:145",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "メロンロード",
    "ref": "",
    "highway": "tertiary",
@@ -3894,10 +4199,15 @@
    "end": [
     40.122903,
     139.993731
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "秋田県:149",
+   "id": "秋田県:146",
+   "region": "akita",
+   "regionName": "秋田県",
    "name": "森岳鹿渡線",
    "ref": "217",
    "highway": "secondary",
@@ -3917,8 +4227,86 @@
    "end": [
     40.061279,
     140.070792
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "秋田県:147",
+   "region": "akita",
+   "regionName": "秋田県",
+   "name": "十二所花輪大湯線",
+   "ref": "66",
+   "highway": "primary",
+   "lengthKm": 3.5,
+   "curviness": 124.1,
+   "flow": 14,
+   "turnCount": 31,
+   "score": 40.8,
+   "baseScore": 40.8,
+   "spotCount": 0,
+   "polyline": "i|ntFs|syYdHtFbETLgDlA{DzAiDhDoDtEwBrFcEpa@_LxAmA`GuKnFaDxCUlM`AfNuB|QxCxDaAlRyJ",
+   "pointCount": 19,
+   "start": [
+    40.222285,
+    140.681858
+   ],
+   "end": [
+    40.194722,
+    140.692737
+   ]
+  },
+  {
+   "id": "秋田県:148",
+   "region": "akita",
+   "regionName": "秋田県",
+   "name": "国道398号",
+   "ref": "398",
+   "highway": "trunk",
+   "lengthKm": 16.11,
+   "curviness": 119.6,
+   "flow": 15.7,
+   "turnCount": 123,
+   "score": 40.7,
+   "baseScore": 40.7,
+   "spotCount": 0,
+   "polyline": "qznmFelayY[gAwFcAqDuCuN_CeDeF_HvAqOQyRtNoAvIoD~E{ElEaAjEcDhIgCdBcLm@aOsIuXm@w@cAgGtAsFDeDoAoCS{Th@mDt@iI{CuQHqCp@gT~LyHbM{QjCqEzB{MhBsFNmLi@kJxBgE|C_Lr@qJkAsIgGaG`@aKqDaCt@iEhEgL`CiUbV{QjKcEtFzBbMyAjUF|AlBfHGjJ}@jByFpCcJnHmMrD{@dBI`aAaKj_AOlN_D~JaDpFiClQ`BvVFxQdD~NFpBcArGaIxVoBxIwAxKs@hPoChI",
+   "pointCount": 74,
+   "start": [
+    39.075126,
+    140.587066
+   ],
+   "end": [
+    39.165028,
+    140.502082
+   ]
+  },
+  {
+   "id": "秋田県:149",
+   "region": "akita",
+   "regionName": "秋田県",
+   "name": "中村上吉野線",
+   "ref": "274",
+   "highway": "secondary",
+   "lengthKm": 5.56,
+   "curviness": 104.6,
+   "flow": 12.9,
+   "turnCount": 45,
+   "score": 40.7,
+   "baseScore": 40.7,
+   "spotCount": 0,
+   "polyline": "u|fnF}heyY`HfBxBg@hS}YtQsJpCwJzAqCvGoFhM}O~I_IhKyA|LdDtPJzIpBzZeFfS`BfKmHtGyArM_GpPJxA_ArDgFrF{C|BWdCiB",
+   "pointCount": 25,
+   "start": [
+    39.198347,
+    140.607031
+   ],
+   "end": [
+    39.154568,
+    140.626743
    ]
   }
  ],
- "hiddenCount": 31
+ "hiddenCount": 34
 }

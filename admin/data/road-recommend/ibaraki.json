@@ -1,9 +1,9 @@
 {
  "prefecture": "茨城県",
  "romaji": "ibaraki",
- "generation": 3,
- "contentHash": "64873f411afb",
- "builtAt": "2026-08-25T13:11:39.782Z",
+ "generation": 4,
+ "contentHash": "47b133c37c31",
+ "builtAt": "2026-08-26T09:40:08.441Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -15,6 +15,8 @@
  "segments": [
   {
    "id": "茨城県:0",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "石岡つくば線",
    "ref": "138",
    "highway": "secondary",
@@ -38,37 +40,8 @@
   },
   {
    "id": "茨城県:1",
-   "name": "大塚真壁線",
-   "ref": "218",
-   "highway": "secondary",
-   "lengthKm": 10.57,
-   "curviness": 788.1,
-   "flow": 32.8,
-   "turnCount": 254,
-   "score": 83.5,
-   "baseScore": 83.5,
-   "spotCount": 0,
-   "polyline": "wpm|EkervYsIdFeDjFo@|CiCvBiArCwA`@{FyAqDBhB~HXhEs@tCItFnAhAd@lCxAlCHrSuBfOcASQuB}@fAiACk@m@e@PKdDbCtG_BjD~AbApBNeBl@eBbCc@zEa@EOuB]Pj@tD~Av@d@_@c@kBbAsApCl@Lz@kAdI{@tAeAJi@tAyAeA}A^fB^?vAp@vA|AcApAfA|@{@p@^@lBaApCZhB\\b@dBs@d@TgAZmAzAw@y@cAL_@YFuCWg@aAtFv@`AjBL\\bCjCK`A~BlAr@nCnLWjFmAfF_AnAoAA@rAyA|@`CLaAjAv@xAV~Ck@rBnB|GOfBkBl@nCdBn@xHYvFmAhBmAd@_@|BzDrBjC`DHrJl@tEh@[LsAlBq@lHdEnBw@pBlD_DlDMxAiBlEy@nOP|E{@hFmAjCpApAMfG]dBLpDuGtWg@nJiBnFqF|F}@rB}A|MZ~C?xI",
-   "pointCount": 125,
-   "start": [
-    36.28316,
-    140.181501
-   ],
-   "end": [
-    36.288891,
-    140.107698
-   ],
-   "unpaved": {
-    "unpavedMeters": 6673,
-    "totalMeters": 10573,
-    "ratio": 0.631,
-    "surface": "dirt",
-    "tracktype": "grade2",
-    "label": "土"
-   }
-  },
-  {
-   "id": "茨城県:2",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立山方線",
    "ref": "36",
    "highway": "primary",
@@ -91,7 +64,9 @@
    ]
   },
   {
-   "id": "茨城県:3",
+   "id": "茨城県:2",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "上君田小妻線",
    "ref": "245",
    "highway": "secondary",
@@ -114,7 +89,9 @@
    ]
   },
   {
-   "id": "茨城県:4",
+   "id": "茨城県:3",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "塙大津港線",
    "ref": "27",
    "highway": "primary",
@@ -137,7 +114,9 @@
    ]
   },
   {
-   "id": "茨城県:5",
+   "id": "茨城県:4",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "赤沢茂木線",
    "ref": "212",
    "highway": "secondary",
@@ -160,7 +139,9 @@
    ]
   },
   {
-   "id": "茨城県:6",
+   "id": "茨城県:5",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "上檜沢下小川停車場線",
    "ref": "321",
    "highway": "secondary",
@@ -183,7 +164,9 @@
    ]
   },
   {
-   "id": "茨城県:7",
+   "id": "茨城県:6",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "北茨城大子線",
    "ref": "22",
    "highway": "primary",
@@ -206,7 +189,9 @@
    ]
   },
   {
-   "id": "茨城県:8",
+   "id": "茨城県:7",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立常陸太田線",
    "ref": "37",
    "highway": "primary",
@@ -229,7 +214,9 @@
    ]
   },
   {
-   "id": "茨城県:9",
+   "id": "茨城県:8",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "山方水府線",
    "ref": "249",
    "highway": "secondary",
@@ -252,7 +239,9 @@
    ]
   },
   {
-   "id": "茨城県:10",
+   "id": "茨城県:9",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立いわき線",
    "ref": "10",
    "highway": "primary",
@@ -275,7 +264,9 @@
    ]
   },
   {
-   "id": "茨城県:11",
+   "id": "茨城県:10",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "山内上境線",
    "ref": "171",
    "highway": "secondary",
@@ -298,7 +289,9 @@
    ]
   },
   {
-   "id": "茨城県:12",
+   "id": "茨城県:11",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "塙大津港線",
    "ref": "27",
    "highway": "primary",
@@ -321,7 +314,9 @@
    ]
   },
   {
-   "id": "茨城県:13",
+   "id": "茨城県:12",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "北茨城大子線",
    "ref": "22",
    "highway": "primary",
@@ -344,7 +339,9 @@
    ]
   },
   {
-   "id": "茨城県:14",
+   "id": "茨城県:13",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "みらい通り",
    "ref": "",
    "highway": "tertiary",
@@ -367,7 +364,9 @@
    ]
   },
   {
-   "id": "茨城県:15",
+   "id": "茨城県:14",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "筑波公園永井線",
    "ref": "236",
    "highway": "secondary",
@@ -390,7 +389,9 @@
    ]
   },
   {
-   "id": "茨城県:16",
+   "id": "茨城県:15",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "グリーンふるさとライン（県北東部広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -413,7 +414,9 @@
    ]
   },
   {
-   "id": "茨城県:17",
+   "id": "茨城県:16",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "粟生木崎線",
    "ref": "239",
    "highway": "secondary",
@@ -436,7 +439,9 @@
    ]
   },
   {
-   "id": "茨城県:18",
+   "id": "茨城県:17",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "諸沢西金停車場線",
    "ref": "322",
    "highway": "secondary",
@@ -459,7 +464,9 @@
    ]
   },
   {
-   "id": "茨城県:19",
+   "id": "茨城県:18",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "藤沢荒川沖線",
    "ref": "201",
    "highway": "secondary",
@@ -482,7 +489,9 @@
    ]
   },
   {
-   "id": "茨城県:20",
+   "id": "茨城県:19",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "十王里美線",
    "ref": "60",
    "highway": "primary",
@@ -505,7 +514,9 @@
    ]
   },
   {
-   "id": "茨城県:21",
+   "id": "茨城県:20",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "月岡真壁線",
    "ref": "150",
    "highway": "secondary",
@@ -528,7 +539,9 @@
    ]
   },
   {
-   "id": "茨城県:22",
+   "id": "茨城県:21",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立山方線",
    "ref": "36",
    "highway": "primary",
@@ -551,7 +564,9 @@
    ]
   },
   {
-   "id": "茨城県:23",
+   "id": "茨城県:22",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "つくば道",
    "ref": "139",
    "highway": "secondary",
@@ -574,7 +589,9 @@
    ]
   },
   {
-   "id": "茨城県:24",
+   "id": "茨城県:23",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "小場常陸大宮停車場線",
    "ref": "318",
    "highway": "secondary",
@@ -597,7 +614,9 @@
    ]
   },
   {
-   "id": "茨城県:25",
+   "id": "茨城県:24",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "門井山方線",
    "ref": "161",
    "highway": "secondary",
@@ -620,7 +639,9 @@
    ]
   },
   {
-   "id": "茨城県:26",
+   "id": "茨城県:25",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "笠間緒川線",
    "ref": "39",
    "highway": "primary",
@@ -643,7 +664,9 @@
    ]
   },
   {
-   "id": "茨城県:27",
+   "id": "茨城県:26",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "土浦学園線",
    "ref": "408",
    "highway": "primary",
@@ -666,7 +689,9 @@
    ]
   },
   {
-   "id": "茨城県:28",
+   "id": "茨城県:27",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "亀作石名坂線",
    "ref": "156",
    "highway": "secondary",
@@ -689,7 +714,9 @@
    ]
   },
   {
-   "id": "茨城県:29",
+   "id": "茨城県:28",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "学園東大通り",
    "ref": "55",
    "highway": "primary",
@@ -712,7 +739,9 @@
    ]
   },
   {
-   "id": "茨城県:30",
+   "id": "茨城県:29",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "粟生木崎線",
    "ref": "239",
    "highway": "secondary",
@@ -735,7 +764,9 @@
    ]
   },
   {
-   "id": "茨城県:31",
+   "id": "茨城県:30",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "下伊勢畑増井線",
    "ref": "291",
    "highway": "secondary",
@@ -758,7 +789,9 @@
    ]
   },
   {
-   "id": "茨城県:32",
+   "id": "茨城県:31",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "笠間緒川線",
    "ref": "39",
    "highway": "primary",
@@ -781,7 +814,9 @@
    ]
   },
   {
-   "id": "茨城県:33",
+   "id": "茨城県:32",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "高萩塙線",
    "ref": "111",
    "highway": "secondary",
@@ -804,7 +839,9 @@
    ]
   },
   {
-   "id": "茨城県:34",
+   "id": "茨城県:33",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "山方常陸大宮線",
    "ref": "165",
    "highway": "secondary",
@@ -827,7 +864,9 @@
    ]
   },
   {
-   "id": "茨城県:35",
+   "id": "茨城県:34",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "学園西大通り",
    "ref": "408",
    "highway": "secondary",
@@ -850,7 +889,9 @@
    ]
   },
   {
-   "id": "茨城県:36",
+   "id": "茨城県:35",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "石岡筑西線",
    "ref": "7",
    "highway": "primary",
@@ -873,7 +914,9 @@
    ]
   },
   {
-   "id": "茨城県:37",
+   "id": "茨城県:36",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "高萩友部線",
    "ref": "230",
    "highway": "secondary",
@@ -896,7 +939,9 @@
    ]
   },
   {
-   "id": "茨城県:38",
+   "id": "茨城県:37",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "学園西大通り",
    "ref": "408",
    "highway": "secondary",
@@ -919,7 +964,9 @@
    ]
   },
   {
-   "id": "茨城県:39",
+   "id": "茨城県:38",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "飯岡石岡線",
    "ref": "221",
    "highway": "secondary",
@@ -942,7 +989,9 @@
    ]
   },
   {
-   "id": "茨城県:40",
+   "id": "茨城県:39",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "下入野水戸線",
    "ref": "235",
    "highway": "secondary",
@@ -965,7 +1014,9 @@
    ]
   },
   {
-   "id": "茨城県:41",
+   "id": "茨城県:40",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "グリーンふるさとライン（県北東部広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -988,7 +1039,9 @@
    ]
   },
   {
-   "id": "茨城県:42",
+   "id": "茨城県:41",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "北茨城大子線",
    "ref": "22",
    "highway": "primary",
@@ -1011,7 +1064,9 @@
    ]
   },
   {
-   "id": "茨城県:43",
+   "id": "茨城県:42",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "那珂湊那珂線",
    "ref": "38",
    "highway": "primary",
@@ -1034,7 +1089,9 @@
    ]
   },
   {
-   "id": "茨城県:44",
+   "id": "茨城県:43",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "つくば野田線バイパス",
    "ref": "3",
    "highway": "primary",
@@ -1057,7 +1114,9 @@
    ]
   },
   {
-   "id": "茨城県:45",
+   "id": "茨城県:44",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "グリーンふるさとライン（県北東部広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -1080,7 +1139,9 @@
    ]
   },
   {
-   "id": "茨城県:46",
+   "id": "茨城県:45",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "いぶきの丘大通り",
    "ref": "34",
    "highway": "primary",
@@ -1103,7 +1164,9 @@
    ]
   },
   {
-   "id": "茨城県:47",
+   "id": "茨城県:46",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "土浦学園線",
    "ref": "408",
    "highway": "primary",
@@ -1126,7 +1189,9 @@
    ]
   },
   {
-   "id": "茨城県:48",
+   "id": "茨城県:47",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "谷原息栖東庄線",
    "ref": "260",
    "highway": "secondary",
@@ -1149,7 +1214,9 @@
    ]
   },
   {
-   "id": "茨城県:49",
+   "id": "茨城県:48",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "荒井行方線",
    "ref": "186",
    "highway": "secondary",
@@ -1172,7 +1239,9 @@
    ]
   },
   {
-   "id": "茨城県:50",
+   "id": "茨城県:49",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道354号",
    "ref": "354",
    "highway": "trunk",
@@ -1195,7 +1264,9 @@
    ]
   },
   {
-   "id": "茨城県:51",
+   "id": "茨城県:50",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "鶏足山線",
    "ref": "225;226",
    "highway": "secondary",
@@ -1218,7 +1289,9 @@
    ]
   },
   {
-   "id": "茨城県:52",
+   "id": "茨城県:51",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "上君田大能線",
    "ref": "227",
    "highway": "secondary",
@@ -1241,7 +1314,9 @@
    ]
   },
   {
-   "id": "茨城県:53",
+   "id": "茨城県:52",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "長倉小舟線",
    "ref": "164",
    "highway": "secondary",
@@ -1264,7 +1339,9 @@
    ]
   },
   {
-   "id": "茨城県:54",
+   "id": "茨城県:53",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "グリーンふるさとライン（県北東部広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -1287,7 +1364,9 @@
    ]
   },
   {
-   "id": "茨城県:55",
+   "id": "茨城県:54",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "錫高野石塚線",
    "ref": "246",
    "highway": "secondary",
@@ -1310,7 +1389,9 @@
    ]
   },
   {
-   "id": "茨城県:56",
+   "id": "茨城県:55",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "牛久学園通り",
    "ref": "408",
    "highway": "trunk",
@@ -1333,7 +1414,9 @@
    ]
   },
   {
-   "id": "茨城県:57",
+   "id": "茨城県:56",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "常陸那珂港山方線",
    "ref": "62",
    "highway": "primary",
@@ -1356,7 +1439,9 @@
    ]
   },
   {
-   "id": "茨城県:58",
+   "id": "茨城県:57",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "赤浜谷田部線",
    "ref": "133",
    "highway": "secondary",
@@ -1379,7 +1464,9 @@
    ]
   },
   {
-   "id": "茨城県:59",
+   "id": "茨城県:58",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "取手バイパス",
    "ref": "6;294",
    "highway": "trunk",
@@ -1402,7 +1489,9 @@
    ]
   },
   {
-   "id": "茨城県:60",
+   "id": "茨城県:59",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "潮来佐原線",
    "ref": "101",
    "highway": "secondary",
@@ -1425,7 +1514,9 @@
    ]
   },
   {
-   "id": "茨城県:61",
+   "id": "茨城県:60",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "茨城空港アクセス道路",
    "ref": "359",
    "highway": "secondary",
@@ -1448,7 +1539,9 @@
    ]
   },
   {
-   "id": "茨城県:62",
+   "id": "茨城県:61",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "北茨城大子線",
    "ref": "22",
    "highway": "primary",
@@ -1471,7 +1564,9 @@
    ]
   },
   {
-   "id": "茨城県:63",
+   "id": "茨城県:62",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "筑西幹線道路",
    "ref": "56",
    "highway": "tertiary",
@@ -1494,7 +1589,9 @@
    ]
   },
   {
-   "id": "茨城県:64",
+   "id": "茨城県:63",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "上野宮下金沢線",
    "ref": "159",
    "highway": "secondary",
@@ -1517,7 +1614,9 @@
    ]
   },
   {
-   "id": "茨城県:65",
+   "id": "茨城県:64",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道354号土浦バイパス",
    "ref": "354",
    "highway": "trunk",
@@ -1540,7 +1639,9 @@
    ]
   },
   {
-   "id": "茨城県:66",
+   "id": "茨城県:65",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "学園東大通り",
    "ref": "55",
    "highway": "primary",
@@ -1563,7 +1664,9 @@
    ]
   },
   {
-   "id": "茨城県:67",
+   "id": "茨城県:66",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "棚倉街道",
    "ref": "349",
    "highway": "tertiary",
@@ -1586,7 +1689,9 @@
    ]
   },
   {
-   "id": "茨城県:68",
+   "id": "茨城県:67",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道461号",
    "ref": "461",
    "highway": "trunk",
@@ -1609,7 +1714,9 @@
    ]
   },
   {
-   "id": "茨城県:69",
+   "id": "茨城県:68",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "水戸那珂湊線",
    "ref": "6",
    "highway": "primary",
@@ -1632,7 +1739,9 @@
    ]
   },
   {
-   "id": "茨城県:70",
+   "id": "茨城県:69",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "新都市中央通り",
    "ref": "354",
    "highway": "primary",
@@ -1655,7 +1764,9 @@
    ]
   },
   {
-   "id": "茨城県:71",
+   "id": "茨城県:70",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "牛渡馬場山土浦線",
    "ref": "141",
    "highway": "secondary",
@@ -1678,7 +1789,9 @@
    ]
   },
   {
-   "id": "茨城県:72",
+   "id": "茨城県:71",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "笠間つくば線",
    "ref": "42;64",
    "highway": "primary",
@@ -1701,7 +1814,9 @@
    ]
   },
   {
-   "id": "茨城県:73",
+   "id": "茨城県:72",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "サンビーチ通り",
    "ref": "2",
    "highway": "primary",
@@ -1724,7 +1839,9 @@
    ]
   },
   {
-   "id": "茨城県:74",
+   "id": "茨城県:73",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立山方線",
    "ref": "36",
    "highway": "primary",
@@ -1747,7 +1864,9 @@
    ]
   },
   {
-   "id": "茨城県:75",
+   "id": "茨城県:74",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "山根大津港線",
    "ref": "154",
    "highway": "secondary",
@@ -1770,7 +1889,9 @@
    ]
   },
   {
-   "id": "茨城県:76",
+   "id": "茨城県:75",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "水沼磯原線",
    "ref": "153",
    "highway": "secondary",
@@ -1793,7 +1914,9 @@
    ]
   },
   {
-   "id": "茨城県:77",
+   "id": "茨城県:76",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "石岡田伏土浦線",
    "ref": "118",
    "highway": "secondary",
@@ -1816,7 +1939,9 @@
    ]
   },
   {
-   "id": "茨城県:78",
+   "id": "茨城県:77",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "県庁南大通り",
    "ref": "50",
    "highway": "primary",
@@ -1839,7 +1964,9 @@
    ]
   },
   {
-   "id": "茨城県:79",
+   "id": "茨城県:78",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "常陸太田大子線",
    "ref": "33",
    "highway": "primary",
@@ -1862,7 +1989,9 @@
    ]
   },
   {
-   "id": "茨城県:80",
+   "id": "茨城県:79",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道354号旧道",
    "ref": "",
    "highway": "tertiary",
@@ -1885,7 +2014,9 @@
    ]
   },
   {
-   "id": "茨城県:81",
+   "id": "茨城県:80",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "富谷稲田線",
    "ref": "289",
    "highway": "secondary",
@@ -1908,7 +2039,9 @@
    ]
   },
   {
-   "id": "茨城県:82",
+   "id": "茨城県:81",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "茂木街道",
    "ref": "123",
    "highway": "trunk",
@@ -1931,7 +2064,9 @@
    ]
   },
   {
-   "id": "茨城県:83",
+   "id": "茨城県:82",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "菅谷小原内水戸線",
    "ref": "169",
    "highway": "secondary",
@@ -1954,7 +2089,9 @@
    ]
   },
   {
-   "id": "茨城県:84",
+   "id": "茨城県:83",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道51号",
    "ref": "51;355",
    "highway": "trunk",
@@ -1977,7 +2114,9 @@
    ]
   },
   {
-   "id": "茨城県:85",
+   "id": "茨城県:84",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "土浦稲敷線バイパス",
    "ref": "25",
    "highway": "primary",
@@ -2000,7 +2139,9 @@
    ]
   },
   {
-   "id": "茨城県:86",
+   "id": "茨城県:85",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "水戸神栖線",
    "ref": "50",
    "highway": "primary",
@@ -2023,7 +2164,9 @@
    ]
   },
   {
-   "id": "茨城県:87",
+   "id": "茨城県:86",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "学園東大通り",
    "ref": "55",
    "highway": "primary",
@@ -2046,7 +2189,9 @@
    ]
   },
   {
-   "id": "茨城県:88",
+   "id": "茨城県:87",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "尾崎境線",
    "ref": "126",
    "highway": "secondary",
@@ -2069,7 +2214,9 @@
    ]
   },
   {
-   "id": "茨城県:89",
+   "id": "茨城県:88",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "結城街道",
    "ref": "15",
    "highway": "secondary",
@@ -2092,7 +2239,9 @@
    ]
   },
   {
-   "id": "茨城県:90",
+   "id": "茨城県:89",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "取手つくば線",
    "ref": "19;211",
    "highway": "primary",
@@ -2115,7 +2264,9 @@
    ]
   },
   {
-   "id": "茨城県:91",
+   "id": "茨城県:90",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "水戸神栖線",
    "ref": "50",
    "highway": "primary",
@@ -2138,7 +2289,9 @@
    ]
   },
   {
-   "id": "茨城県:92",
+   "id": "茨城県:91",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "結城街道",
    "ref": "50",
    "highway": "trunk",
@@ -2161,7 +2314,9 @@
    ]
   },
   {
-   "id": "茨城県:93",
+   "id": "茨城県:92",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "常陸太田那須烏山線",
    "ref": "29",
    "highway": "primary",
@@ -2184,7 +2339,9 @@
    ]
   },
   {
-   "id": "茨城県:94",
+   "id": "茨城県:93",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "小田野大那地線",
    "ref": "234",
    "highway": "secondary",
@@ -2207,7 +2364,9 @@
    ]
   },
   {
-   "id": "茨城県:95",
+   "id": "茨城県:94",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立いわき線",
    "ref": "10",
    "highway": "primary",
@@ -2230,7 +2389,9 @@
    ]
   },
   {
-   "id": "茨城県:96",
+   "id": "茨城県:95",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "鶏足山片庭線",
    "ref": "226",
    "highway": "secondary",
@@ -2253,7 +2414,9 @@
    ]
   },
   {
-   "id": "茨城県:97",
+   "id": "茨城県:96",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "真端水戸線",
    "ref": "113",
    "highway": "secondary",
@@ -2276,7 +2439,9 @@
    ]
   },
   {
-   "id": "茨城県:98",
+   "id": "茨城県:97",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "大子美和線",
    "ref": "32",
    "highway": "primary",
@@ -2299,7 +2464,9 @@
    ]
   },
   {
-   "id": "茨城県:99",
+   "id": "茨城県:98",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "上金沢栃原線",
    "ref": "158",
    "highway": "secondary",
@@ -2322,7 +2489,9 @@
    ]
   },
   {
-   "id": "茨城県:100",
+   "id": "茨城県:99",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "谷田部藤代線",
    "ref": "210;211",
    "highway": "secondary",
@@ -2345,7 +2514,9 @@
    ]
   },
   {
-   "id": "茨城県:101",
+   "id": "茨城県:100",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "鉾田鹿嶋線",
    "ref": "242",
    "highway": "secondary",
@@ -2368,7 +2539,9 @@
    ]
   },
   {
-   "id": "茨城県:102",
+   "id": "茨城県:101",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道50号笠間バイパス",
    "ref": "50",
    "highway": "trunk",
@@ -2391,7 +2564,9 @@
    ]
   },
   {
-   "id": "茨城県:103",
+   "id": "茨城県:102",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "中石崎水戸線",
    "ref": "179",
    "highway": "secondary",
@@ -2414,7 +2589,9 @@
    ]
   },
   {
-   "id": "茨城県:104",
+   "id": "茨城県:103",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "谷和原・学園通り",
    "ref": "354",
    "highway": "trunk",
@@ -2437,7 +2614,9 @@
    ]
   },
   {
-   "id": "茨城県:105",
+   "id": "茨城県:104",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "つくば野田線",
    "ref": "3",
    "highway": "primary",
@@ -2460,7 +2639,9 @@
    ]
   },
   {
-   "id": "茨城県:106",
+   "id": "茨城県:105",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "グリーンふるさとライン（県北東部広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -2483,7 +2664,9 @@
    ]
   },
   {
-   "id": "茨城県:107",
+   "id": "茨城県:106",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立いわき線",
    "ref": "10",
    "highway": "primary",
@@ -2506,7 +2689,9 @@
    ]
   },
   {
-   "id": "茨城県:108",
+   "id": "茨城県:107",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道124号",
    "ref": "124",
    "highway": "trunk",
@@ -2529,7 +2714,9 @@
    ]
   },
   {
-   "id": "茨城県:109",
+   "id": "茨城県:108",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "真端水戸線",
    "ref": "113",
    "highway": "secondary",
@@ -2552,7 +2739,9 @@
    ]
   },
   {
-   "id": "茨城県:110",
+   "id": "茨城県:109",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "山内上小瀬線",
    "ref": "287",
    "highway": "secondary",
@@ -2575,7 +2764,9 @@
    ]
   },
   {
-   "id": "茨城県:111",
+   "id": "茨城県:110",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "グリーンふるさとライン（県北東部広域農道）",
    "ref": "",
    "highway": "tertiary",
@@ -2598,7 +2789,9 @@
    ]
   },
   {
-   "id": "茨城県:112",
+   "id": "茨城県:111",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "下妻常総線",
    "ref": "129",
    "highway": "secondary",
@@ -2621,7 +2814,9 @@
    ]
   },
   {
-   "id": "茨城県:113",
+   "id": "茨城県:112",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "筑西三和線バイパス",
    "ref": "23",
    "highway": "primary",
@@ -2644,7 +2839,9 @@
    ]
   },
   {
-   "id": "茨城県:114",
+   "id": "茨城県:113",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "友部内原線",
    "ref": "105",
    "highway": "secondary",
@@ -2667,7 +2864,9 @@
    ]
   },
   {
-   "id": "茨城県:115",
+   "id": "茨城県:114",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "佐原街道",
    "ref": "51",
    "highway": "trunk",
@@ -2690,7 +2889,9 @@
    ]
   },
   {
-   "id": "茨城県:116",
+   "id": "茨城県:115",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道294号",
    "ref": "294",
    "highway": "trunk",
@@ -2713,7 +2914,9 @@
    ]
   },
   {
-   "id": "茨城県:117",
+   "id": "茨城県:116",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "谷和原・学園通り",
    "ref": "354",
    "highway": "trunk",
@@ -2736,7 +2939,9 @@
    ]
   },
   {
-   "id": "茨城県:118",
+   "id": "茨城県:117",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道354号岩井バイパス",
    "ref": "354",
    "highway": "trunk",
@@ -2759,7 +2964,9 @@
    ]
   },
   {
-   "id": "茨城県:119",
+   "id": "茨城県:118",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "阿波山徳蔵線",
    "ref": "112",
    "highway": "secondary",
@@ -2782,7 +2989,9 @@
    ]
   },
   {
-   "id": "茨城県:120",
+   "id": "茨城県:119",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "岩瀬バイパス",
    "ref": "50",
    "highway": "trunk",
@@ -2805,7 +3014,9 @@
    ]
   },
   {
-   "id": "茨城県:121",
+   "id": "茨城県:120",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "那須烏山御前山線",
    "ref": "12",
    "highway": "primary",
@@ -2828,7 +3039,9 @@
    ]
   },
   {
-   "id": "茨城県:122",
+   "id": "茨城県:121",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "牛渡馬場山土浦線",
    "ref": "141",
    "highway": "secondary",
@@ -2851,7 +3064,9 @@
    ]
   },
   {
-   "id": "茨城県:123",
+   "id": "茨城県:122",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道245号",
    "ref": "245",
    "highway": "trunk",
@@ -2874,7 +3089,9 @@
    ]
   },
   {
-   "id": "茨城県:124",
+   "id": "茨城県:123",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "日立いわき線",
    "ref": "10",
    "highway": "primary",
@@ -2897,7 +3114,9 @@
    ]
   },
   {
-   "id": "茨城県:125",
+   "id": "茨城県:124",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "竜ヶ崎阿見線バイパス",
    "ref": "34",
    "highway": "primary",
@@ -2920,7 +3139,9 @@
    ]
   },
   {
-   "id": "茨城県:126",
+   "id": "茨城県:125",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "結城街道",
    "ref": "",
    "highway": "tertiary",
@@ -2943,7 +3164,9 @@
    ]
   },
   {
-   "id": "茨城県:127",
+   "id": "茨城県:126",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "大子那須線",
    "ref": "28",
    "highway": "primary",
@@ -2966,7 +3189,9 @@
    ]
   },
   {
-   "id": "茨城県:128",
+   "id": "茨城県:127",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道51号",
    "ref": "51;124;245",
    "highway": "trunk",
@@ -2989,7 +3214,9 @@
    ]
   },
   {
-   "id": "茨城県:129",
+   "id": "茨城県:128",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "長岡大洗線",
    "ref": "106",
    "highway": "secondary",
@@ -3012,7 +3239,9 @@
    ]
   },
   {
-   "id": "茨城県:130",
+   "id": "茨城県:129",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "赤沢茂木線",
    "ref": "212",
    "highway": "secondary",
@@ -3035,7 +3264,9 @@
    ]
   },
   {
-   "id": "茨城県:131",
+   "id": "茨城県:130",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "土浦新治バイパス",
    "ref": "125",
    "highway": "trunk",
@@ -3058,7 +3289,9 @@
    ]
   },
   {
-   "id": "茨城県:132",
+   "id": "茨城県:131",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "花貫街道",
    "ref": "461",
    "highway": "trunk",
@@ -3081,7 +3314,9 @@
    ]
   },
   {
-   "id": "茨城県:133",
+   "id": "茨城県:132",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "上新田木原線",
    "ref": "120",
    "highway": "secondary",
@@ -3104,7 +3339,9 @@
    ]
   },
   {
-   "id": "茨城県:134",
+   "id": "茨城県:133",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "土浦新治バイパス",
    "ref": "125",
    "highway": "trunk",
@@ -3127,7 +3364,9 @@
    ]
   },
   {
-   "id": "茨城県:135",
+   "id": "茨城県:134",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "取手つくば線",
    "ref": "19",
    "highway": "primary",
@@ -3150,7 +3389,9 @@
    ]
   },
   {
-   "id": "茨城県:136",
+   "id": "茨城県:135",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "赤浜谷田部線",
    "ref": "133",
    "highway": "secondary",
@@ -3173,7 +3414,9 @@
    ]
   },
   {
-   "id": "茨城県:137",
+   "id": "茨城県:136",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "門井山方線",
    "ref": "161",
    "highway": "secondary",
@@ -3196,7 +3439,9 @@
    ]
   },
   {
-   "id": "茨城県:138",
+   "id": "茨城県:137",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "阿波山徳蔵線",
    "ref": "112",
    "highway": "secondary",
@@ -3219,7 +3464,9 @@
    ]
   },
   {
-   "id": "茨城県:139",
+   "id": "茨城県:138",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "学園東大通り",
    "ref": "55",
    "highway": "primary",
@@ -3242,7 +3489,9 @@
    ]
   },
   {
-   "id": "茨城県:140",
+   "id": "茨城県:139",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "柿岡街道",
    "ref": "7",
    "highway": "tertiary",
@@ -3265,7 +3514,9 @@
    ]
   },
   {
-   "id": "茨城県:141",
+   "id": "茨城県:140",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "白鳥通り",
    "ref": "243",
    "highway": "secondary",
@@ -3288,7 +3539,9 @@
    ]
   },
   {
-   "id": "茨城県:142",
+   "id": "茨城県:141",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "土浦竜ヶ崎線",
    "ref": "48",
    "highway": "primary",
@@ -3311,7 +3564,9 @@
    ]
   },
   {
-   "id": "茨城県:143",
+   "id": "茨城県:142",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "美浦栄線",
    "ref": "68",
    "highway": "primary",
@@ -3334,7 +3589,9 @@
    ]
   },
   {
-   "id": "茨城県:144",
+   "id": "茨城県:143",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道294号",
    "ref": "294",
    "highway": "trunk",
@@ -3357,7 +3614,9 @@
    ]
   },
   {
-   "id": "茨城県:145",
+   "id": "茨城県:144",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "ぬく森通り",
    "ref": "243",
    "highway": "secondary",
@@ -3380,7 +3639,9 @@
    ]
   },
   {
-   "id": "茨城県:146",
+   "id": "茨城県:145",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "笠間広域農道(ビーフライン)",
    "ref": "",
    "highway": "tertiary",
@@ -3403,7 +3664,9 @@
    ]
   },
   {
-   "id": "茨城県:147",
+   "id": "茨城県:146",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "国道293号",
    "ref": "293",
    "highway": "trunk",
@@ -3426,7 +3689,9 @@
    ]
   },
   {
-   "id": "茨城県:148",
+   "id": "茨城県:147",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "小野土浦線",
    "ref": "199",
    "highway": "secondary",
@@ -3449,7 +3714,9 @@
    ]
   },
   {
-   "id": "茨城県:149",
+   "id": "茨城県:148",
+   "region": "ibaraki",
+   "regionName": "茨城県",
    "name": "下太田鉾田線",
    "ref": "114",
    "highway": "secondary",
@@ -3470,7 +3737,32 @@
     36.223601,
     140.517851
    ]
+  },
+  {
+   "id": "茨城県:149",
+   "region": "ibaraki",
+   "regionName": "茨城県",
+   "name": "藤沢荒川沖線",
+   "ref": "201",
+   "highway": "secondary",
+   "lengthKm": 4.5,
+   "curviness": 157.6,
+   "flow": 18.7,
+   "turnCount": 38,
+   "score": 48.9,
+   "baseScore": 48.9,
+   "spotCount": 0,
+   "polyline": "a|n{Ey`mvYrTmBbALtA~@~@pBri@z^f@zB@dSzArD`WpLtCd@hGEnGbAtHpCmCfG\\~MsCvNeBxEmDfGyBjVClKiAnI\\l@",
+   "pointCount": 23,
+   "start": [
+    36.126247,
+    140.155168
+   ],
+   "end": [
+    36.108904,
+    140.125224
+   ]
   }
  ],
- "hiddenCount": 5
+ "hiddenCount": 6
 }

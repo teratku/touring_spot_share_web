@@ -27,6 +27,8 @@
 const { encode } = require("./polyline");
 
 const BASE = process.env.VALHALLA_URL || "http://localhost:8002";
+//: 案内文の既定の言語。⚠️ 地域を増やすときは呼ぶ側から渡すこと
+const DEFAULT_LANGUAGE = "ja-JP";
 //: 1本にかける上限。全国どこでも実測1秒未満だが、落ちているときに待ち続けないため
 const TIMEOUT_MS = 30_000;
 
@@ -96,19 +98,18 @@ const MANEUVER = {
  *    126cc以上は高速に乗れる。「ふつう＝いちばん速い道」を保つ。
  *    外すのは「楽しい」だけ（高速から景色は楽しめない）。
  */
+/* ⚠️ **表示名（「最短」など）はここに置かない。** 呼ぶ側が鍵から作る。
+      置くと、APIを外に出したときに応答へ日本語が混ざる。 */
 const VARIANTS = {
   shortest: {
-    label: "最短",
     motor_scooter: { use_primary: 0.9, shortest: true },
     motorcycle:    { shortest: true },
   },
   normal: {
-    label: "ふつう",
     motor_scooter: {},
     motorcycle:    {},
   },
   fun: {
-    label: "楽しい",
     motor_scooter: { use_primary: 0.05 },
     motorcycle:    { use_highways: 0 },
   },
@@ -122,6 +123,8 @@ const VARIANTS = {
  *   - variant   "shortest" | "normal" | "fun"
  *   - costing   "motor_scooter"（既定） | "motorcycle"
  *   - excludePolygons  [[[lng,lat], ...], ...]  通れない範囲（規制）
+ *   - language  案内文の言語（既定 "ja-JP"）
+ *   - baseUrl   Valhalla の場所（既定は環境変数 VALHALLA_URL）
  */
 async function routeWithValhalla(from, to, opts = {}) {
   const variant = VARIANTS[opts.variant] || VARIANTS.normal;
@@ -137,7 +140,10 @@ async function routeWithValhalla(from, to, opts = {}) {
     locations,
     costing,
     units: "kilometers",
-    language: "ja-JP",
+    // ⚠️ **決め打ちにしないこと。** 海外の地域を足したとき、ここが日本語のままだと
+    //    その国の言語で返らない。Valhalla 側は admins.sqlite の
+    //    default_language / supported_languages を持っているので、渡せば従う
+    language: opts.language || DEFAULT_LANGUAGE,
     costing_options: { [costing]: variantOptions },
   };
   if (opts.excludePolygons && opts.excludePolygons.length) {
@@ -146,7 +152,9 @@ async function routeWithValhalla(from, to, opts = {}) {
 
   let json;
   try {
-    const res = await fetch(`${BASE}/route`, {
+    // ⚠️ **URLを固定しないこと。** 地域ごとに Valhalla を分ける前提
+    //    （惑星規模のタイルは作れないので、地域ごとのサービスになる）
+    const res = await fetch(`${opts.baseUrl || BASE}/route`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -155,7 +163,7 @@ async function routeWithValhalla(from, to, opts = {}) {
     json = await res.json();
   } catch (e) {
     // ⚠️ 立ち上がっていないのが圧倒的に多い。原因が分かる文言にする
-    return { error: `Valhalla に繋がりません（${BASE}）。`
+    return { error: `Valhalla に繋がりません（${opts.baseUrl || BASE}）。`
       + "docker run -d --name valhalla-jp -p 8002:8002 valhalla-jp-cloudrun:latest "
       + `で立ち上げてください / ${e.message}` };
   }
@@ -191,7 +199,8 @@ async function routeWithValhalla(from, to, opts = {}) {
 
   return {
     variant: opts.variant || "normal",
-    variantLabel: variant.label,
+    // ⚠️ **表示名は返さない。** 呼ぶ側が作る。ここで日本語を返すと、
+    //    APIを外に出したときに日本語が混ざる（`variant` は鍵なので言語に依存しない）
     costing,
     lengthMeters: Math.round(trip.summary.length * 1000),
     durationSeconds: Math.round(trip.summary.time),

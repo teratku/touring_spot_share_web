@@ -436,14 +436,16 @@ function selectFunRoads(origin, destination, segments, opts = {}) {
         estimatedMeters: Math.round(estimated),
         considered: candidates.length,
         sideDropped,
-        uTurnOnly: uTurnOnly.map((s) => s.name),
+        // ⚠️ **名前だけを返さない。** APIに日本語が混ざる。
+        //    鍵（id）と名前の組で返し、表示に使うかは呼ぶ側が決める
+        uTurnOnly: uTurnOnly.map((s) => ({ id: s.id, name: s.name })),
       };
     }
     const weakest = remaining.reduce((a, b) => (a.score <= b.score ? a : b));
     uTurnOnly.push(weakest);
     remaining = remaining.filter((s) => s.id !== weakest.id);
   }
-  return { ...empty, uTurnOnly: uTurnOnly.map((s) => s.name) };
+  return { ...empty, uTurnOnly: uTurnOnly.map((s) => ({ id: s.id, name: s.name })) };
 }
 
 /** 2つの区間の集合がどれだけ重なっているか（0=まったく違う、1=同じ） */
@@ -543,7 +545,57 @@ function buildFunVariants(origin, destination, segments, opts = {}) {
   return out;
 }
 
+/**
+ * まわり方（北・東・南・西）を**全部**作る。
+ *
+ * ⚠️ **同じ顔ぶれになる方角は、まとめて1つにすること。**
+ *    候補は旅の向きと直角の2方向に集まるので、南西へ向かう旅では
+ *    「北まわり」と「西まわり」が必ず同じ道を選ぶ（実測）。
+ *    そのまま4通り並べると、半分が同じ線の重複になる。
+ *
+ * ⚠️ **1本も選べなかった方角も返す。** 黙って消すと
+ *    「北まわりが出ない」のか「試していない」のかが分からない。
+ *    `segments` が空のものは `empty: true` を付けて返す。
+ *
+ * @returns {Array<{kind, label, sides, empty, ...selectFunRoads の返り値}>}
+ */
+function buildSideVariants(origin, destination, segments, opts = {}) {
+  const order = ["north", "east", "south", "west"];
+  const groups = [];        // 顔ぶれ（id の並び）→ まとめた案
+  const byKey = new Map();
+  const empties = [];
+
+  for (const key of order) {
+    const pick = selectFunRoads(origin, destination, segments,
+      { count: opts.count ?? 4, side: key,
+        budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO });
+    if (!pick || !pick.segments.length) {
+      // ⚠️ **表示名は入れない。** 鍵（north/east/south/west）だけ返し、
+      //    呼ぶ側が訳す。ここで日本語を入れるとAPIに混ざる
+      empties.push({ side: key, considered: pick ? pick.considered : 0 });
+      continue;
+    }
+    const sig = pick.segments.map((x) => x.id).sort().join("|");
+    const found = byKey.get(sig);
+    if (found) { found.sides.push(key); continue; }   // 同じ顔ぶれ → まとめる
+    const entry = {
+      kind: `side:${key}`,
+      sides: [key],
+      pickOptions: { count: opts.count ?? 4, side: key,
+                     budgetRatio: opts.budgetRatio ?? DEFAULT_BUDGET_RATIO },
+      ...pick,
+    };
+    byKey.set(sig, entry);
+    groups.push(entry);
+  }
+
+  // ⚠️ **表示名はここで作らない。** `sides` を返すだけにして、呼ぶ側が
+  //    「北・西まわり」を作る。APIを外に出したとき日本語が混ざらないようにするため
+  return { variants: groups, empties };
+}
+
 module.exports = {
+  buildSideVariants,
   buildFunVariants, overlapRatio,
   MAX_VARIANT_OVERLAP, MODEST_BUDGET_RATIO, WIDE_CORRIDOR_SCALE, WIDE_BUDGET_RATIO,
   selectFunRoads, isWithinCorridor, orderedByProgress, twoOptImprove, worstBackwardExcursion,

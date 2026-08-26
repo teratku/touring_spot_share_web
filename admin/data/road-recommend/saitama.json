@@ -1,9 +1,9 @@
 {
  "prefecture": "埼玉県",
  "romaji": "saitama",
- "generation": 4,
- "contentHash": "d6923101bedb",
- "builtAt": "2026-08-25T13:11:39.735Z",
+ "generation": 5,
+ "contentHash": "a5cafc79f04a",
+ "builtAt": "2026-08-26T09:40:08.371Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -15,6 +15,8 @@
  "segments": [
   {
    "id": "埼玉県:0",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "下日野沢東門平吉田線",
    "ref": "284",
    "highway": "secondary",
@@ -36,11 +38,13 @@
     139.07843
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "埼玉県:1",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "小鹿野影森停車場線",
    "ref": "209",
    "highway": "secondary",
@@ -62,11 +66,13 @@
     139.032896
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "埼玉県:2",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "青梅秩父線",
    "ref": "53",
    "highway": "primary",
@@ -88,12 +94,14 @@
     139.161478
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:3",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "大野東松山線",
    "ref": "172",
    "highway": "secondary",
@@ -115,11 +123,13 @@
     139.179515
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:4",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "矢納浄法寺線",
    "ref": "289",
    "highway": "secondary",
@@ -141,11 +151,13 @@
     139.035552
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:5",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "高崎神流秩父線",
    "ref": "71",
    "highway": "primary",
@@ -167,13 +179,15 @@
     138.943909
    ],
    "tags": [
-    "絶景",
-    "ワインディング",
-    "要注意"
+    "scenic",
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:6",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父多摩甲斐国立公園三峰線",
    "ref": "278",
    "highway": "secondary",
@@ -195,12 +209,14 @@
     138.934359
    ],
    "tags": [
-    "絶景",
-    "ワインディング"
+    "scenic",
+    "winding"
    ]
   },
   {
    "id": "埼玉県:7",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "熊谷小川秩父線",
    "ref": "11",
    "highway": "primary",
@@ -222,13 +238,15 @@
     139.235284
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:8",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "石間下吉田線",
    "ref": "363",
    "highway": "secondary",
@@ -252,6 +270,8 @@
   },
   {
    "id": "埼玉県:9",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父上名栗線",
    "ref": "73",
    "highway": "primary",
@@ -280,12 +300,14 @@
     "label": "土"
    },
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:10",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "西平小川線",
    "ref": "273",
    "highway": "secondary",
@@ -307,12 +329,14 @@
     139.242762
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "埼玉県:11",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "吉田久長秩父線",
    "ref": "270",
    "highway": "secondary",
@@ -334,12 +358,14 @@
     139.059797
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:12",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "中津川三峰口停車場線",
    "ref": "210",
    "highway": "secondary",
@@ -361,13 +387,15 @@
     138.868467
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:13",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父往還",
    "ref": "140",
    "highway": "trunk",
@@ -389,13 +417,15 @@
     138.932083
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:14",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "下畑軍畑線",
    "ref": "193",
    "highway": "secondary",
@@ -417,12 +447,14 @@
     139.211255
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:15",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "前橋長瀞線",
    "ref": "13",
    "highway": "primary",
@@ -444,12 +476,14 @@
     139.109981
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:16",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "彩甲斐街道",
    "ref": "140",
    "highway": "trunk",
@@ -471,12 +505,14 @@
     138.818717
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:17",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "藤倉吉田線",
    "ref": "282",
    "highway": "secondary",
@@ -498,12 +534,14 @@
     138.969023
    ],
    "tags": [
-    "林道ぎみ",
-    "要注意"
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:18",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "国道299号",
    "ref": "299",
    "highway": "trunk",
@@ -525,12 +563,14 @@
     138.986012
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:19",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父児玉線",
    "ref": "44",
    "highway": "primary",
@@ -552,11 +592,13 @@
     139.078662
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:20",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "皆野荒川線",
    "ref": "43",
    "highway": "primary",
@@ -578,13 +620,15 @@
     139.066506
    ],
    "tags": [
-    "快走",
-    "林道ぎみ",
-    "要注意"
+    "flowing",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:21",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "成木街道",
    "ref": "53",
    "highway": "primary",
@@ -606,12 +650,14 @@
     139.259039
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:22",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "東大宮バイパス",
    "ref": "16",
    "highway": "trunk",
@@ -635,6 +681,8 @@
   },
   {
    "id": "埼玉県:23",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "坂本寄居線",
    "ref": "294",
    "highway": "secondary",
@@ -656,11 +704,13 @@
     139.177453
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:24",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "広木折原線",
    "ref": "349",
    "highway": "secondary",
@@ -682,12 +732,14 @@
     139.154899
    ],
    "tags": [
-    "快走",
-    "林道ぎみ"
+    "flowing",
+    "forest"
    ]
   },
   {
    "id": "埼玉県:25",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父児玉線",
    "ref": "44",
    "highway": "primary",
@@ -709,11 +761,13 @@
     139.079453
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:26",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "下小鹿野吉田線",
    "ref": "283",
    "highway": "secondary",
@@ -735,11 +789,13 @@
     139.034787
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:27",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "赤浜小川",
    "ref": "274",
    "highway": "secondary",
@@ -761,11 +817,13 @@
     139.254071
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:28",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "長瀞玉淀自然公園線",
    "ref": "82",
    "highway": "primary",
@@ -787,11 +845,13 @@
     139.118363
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:29",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "小曽木街道",
    "ref": "28",
    "highway": "primary",
@@ -813,11 +873,13 @@
     139.295674
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:30",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "あじさい街道",
    "ref": "299",
    "highway": "trunk",
@@ -839,11 +901,13 @@
     139.23275
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:31",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "皆野荒川線",
    "ref": "43",
    "highway": "primary",
@@ -865,11 +929,13 @@
     139.097728
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:32",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父荒川線",
    "ref": "72",
    "highway": "primary",
@@ -891,11 +957,13 @@
     139.080429
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:33",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "越生長沢線",
    "ref": "61",
    "highway": "primary",
@@ -917,11 +985,13 @@
     139.294123
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:34",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "国道299号",
    "ref": "299",
    "highway": "trunk",
@@ -943,12 +1013,14 @@
     139.162217
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:35",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "皆野両神荒川線",
    "ref": "37",
    "highway": "primary",
@@ -970,11 +1042,13 @@
     138.979276
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:36",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "飯能下名栗線",
    "ref": "70",
    "highway": "primary",
@@ -996,11 +1070,13 @@
     139.284409
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:37",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "彩甲斐街道",
    "ref": "140",
    "highway": "trunk",
@@ -1022,12 +1098,14 @@
     138.869534
    ],
    "tags": [
-    "絶景",
-    "快走"
+    "scenic",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:38",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "毛呂停車場鎌北湖線",
    "ref": "186",
    "highway": "secondary",
@@ -1049,11 +1127,13 @@
     139.310932
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:39",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "東松山越生線",
    "ref": "41",
    "highway": "primary",
@@ -1075,11 +1155,13 @@
     139.333647
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:40",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "小鹿野影森停車場線",
    "ref": "209",
    "highway": "secondary",
@@ -1101,11 +1183,13 @@
     139.032196
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:41",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "十石峠街道",
    "ref": "462",
    "highway": "trunk",
@@ -1127,11 +1211,13 @@
     139.039497
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:42",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "北河原熊谷線",
    "ref": "178",
    "highway": "secondary",
@@ -1153,11 +1239,13 @@
     139.438636
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:43",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "皆野両神荒川線",
    "ref": "37",
    "highway": "primary",
@@ -1179,11 +1267,13 @@
     139.03205
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:44",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "日高狭山線",
    "ref": "262",
    "highway": "secondary",
@@ -1205,11 +1295,13 @@
     139.37941
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:45",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "日高川島線",
    "ref": "74",
    "highway": "primary",
@@ -1231,11 +1323,13 @@
     139.423993
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:46",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "ときがわ熊谷線",
    "ref": "173",
    "highway": "secondary",
@@ -1259,6 +1353,8 @@
   },
   {
    "id": "埼玉県:47",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "あじさい街道",
    "ref": "299",
    "highway": "trunk",
@@ -1280,11 +1376,13 @@
     139.232774
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:48",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "葛和田新堀線",
    "ref": "359",
    "highway": "secondary",
@@ -1306,11 +1404,13 @@
     139.416487
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:49",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "神流グリーンライン",
    "ref": "",
    "highway": "tertiary",
@@ -1332,11 +1432,13 @@
     139.067407
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:50",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "内田ヶ谷鴻巣線",
    "ref": "308",
    "highway": "secondary",
@@ -1358,11 +1460,13 @@
     139.521596
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:51",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "原市場下成木線",
    "ref": "221",
    "highway": "secondary",
@@ -1384,12 +1488,14 @@
     139.281069
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:52",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "富岡入間線",
    "ref": "195",
    "highway": "secondary",
@@ -1411,11 +1517,13 @@
     139.367193
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:53",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "上尾久喜線",
    "ref": "87",
    "highway": "primary",
@@ -1437,11 +1545,13 @@
     139.656106
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:54",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "寄居岡部深谷線",
    "ref": "265",
    "highway": "secondary",
@@ -1463,11 +1573,13 @@
     139.278085
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:55",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "二本木飯能線",
    "ref": "218",
    "highway": "secondary",
@@ -1489,11 +1601,13 @@
     139.317103
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:56",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "今泉東松山線",
    "ref": "271",
    "highway": "secondary",
@@ -1515,11 +1629,13 @@
     139.449218
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:57",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "東松山越生線",
    "ref": "41",
    "highway": "primary",
@@ -1541,11 +1657,13 @@
     139.333352
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:58",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "針ヶ谷岡線",
    "ref": "353",
    "highway": "secondary",
@@ -1569,6 +1687,8 @@
   },
   {
    "id": "埼玉県:59",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "騎西鴻巣線",
    "ref": "148",
    "highway": "secondary",
@@ -1590,11 +1710,13 @@
     139.563071
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:60",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "ふじみ野朝霞線",
    "ref": "266",
    "highway": "secondary",
@@ -1618,6 +1740,8 @@
   },
   {
    "id": "埼玉県:61",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "本田小川線",
    "ref": "184",
    "highway": "secondary",
@@ -1639,11 +1763,13 @@
     139.278621
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "埼玉県:62",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "上伊草坂戸線",
    "ref": "269",
    "highway": "secondary",
@@ -1667,6 +1793,8 @@
   },
   {
    "id": "埼玉県:63",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "ときがわ坂戸線",
    "ref": "171",
    "highway": "secondary",
@@ -1690,6 +1818,8 @@
   },
   {
    "id": "埼玉県:64",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父児玉線",
    "ref": "44",
    "highway": "primary",
@@ -1713,6 +1843,8 @@
   },
   {
    "id": "埼玉県:65",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "寄居岡部深谷線",
    "ref": "265",
    "highway": "secondary",
@@ -1736,6 +1868,8 @@
   },
   {
    "id": "埼玉県:66",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "深谷嵐山線",
    "ref": "69",
    "highway": "primary",
@@ -1759,6 +1893,8 @@
   },
   {
    "id": "埼玉県:67",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "さいたま鴻巣線",
    "ref": "57",
    "highway": "primary",
@@ -1782,6 +1918,8 @@
   },
   {
    "id": "埼玉県:68",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "下吉羽幸手線",
    "ref": "371",
    "highway": "secondary",
@@ -1805,6 +1943,8 @@
   },
   {
    "id": "埼玉県:69",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "岩殿岩井線",
    "ref": "343",
    "highway": "secondary",
@@ -1828,6 +1968,8 @@
   },
   {
    "id": "埼玉県:70",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "片柳川越線",
    "ref": "256",
    "highway": "secondary",
@@ -1851,6 +1993,8 @@
   },
   {
    "id": "埼玉県:71",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "羽生外野栗橋線",
    "ref": "60",
    "highway": "primary",
@@ -1874,6 +2018,8 @@
   },
   {
    "id": "埼玉県:72",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "飯能寄居線",
    "ref": "30;61",
    "highway": "primary",
@@ -1897,6 +2043,8 @@
   },
   {
    "id": "埼玉県:73",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "さいたま鴻巣線",
    "ref": "57",
    "highway": "primary",
@@ -1920,6 +2068,8 @@
   },
   {
    "id": "埼玉県:74",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "所沢武蔵村山立川線",
    "ref": "55",
    "highway": "primary",
@@ -1943,6 +2093,8 @@
   },
   {
    "id": "埼玉県:75",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "ときがわ坂戸線",
    "ref": "171",
    "highway": "secondary",
@@ -1966,6 +2118,8 @@
   },
   {
    "id": "埼玉県:76",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "児玉町蛭川普済寺線",
    "ref": "352",
    "highway": "secondary",
@@ -1989,6 +2143,8 @@
   },
   {
    "id": "埼玉県:77",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "大里比企広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -2012,6 +2168,8 @@
   },
   {
    "id": "埼玉県:78",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "川越坂戸毛呂山線旧道",
    "ref": "",
    "highway": "tertiary",
@@ -2035,6 +2193,8 @@
   },
   {
    "id": "埼玉県:79",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "東松山桶川線",
    "ref": "33",
    "highway": "primary",
@@ -2058,6 +2218,8 @@
   },
   {
    "id": "埼玉県:80",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "北根菖蒲線",
    "ref": "313",
    "highway": "secondary",
@@ -2081,6 +2243,8 @@
   },
   {
    "id": "埼玉県:81",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "吉場安行東京線",
    "ref": "103",
    "highway": "secondary",
@@ -2104,6 +2268,8 @@
   },
   {
    "id": "埼玉県:82",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "川越越生線",
    "ref": "114",
    "highway": "secondary",
@@ -2127,6 +2293,8 @@
   },
   {
    "id": "埼玉県:83",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "川越新座線",
    "ref": "113",
    "highway": "secondary",
@@ -2150,6 +2318,8 @@
   },
   {
    "id": "埼玉県:84",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "熊谷羽生線旧道",
    "ref": "",
    "highway": "tertiary",
@@ -2173,6 +2343,8 @@
   },
   {
    "id": "埼玉県:85",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "秩父児玉線",
    "ref": "44",
    "highway": "primary",
@@ -2196,6 +2368,8 @@
   },
   {
    "id": "埼玉県:86",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "国道254号",
    "ref": "254",
    "highway": "trunk",
@@ -2219,6 +2393,8 @@
   },
   {
    "id": "埼玉県:87",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "豊岡街道",
    "ref": "63",
    "highway": "primary",
@@ -2242,6 +2418,8 @@
   },
   {
    "id": "埼玉県:88",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "越谷岩槻線",
    "ref": "48",
    "highway": "primary",
@@ -2265,6 +2443,8 @@
   },
   {
    "id": "埼玉県:89",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "白鳥通り",
    "ref": "82",
    "highway": "primary",
@@ -2288,6 +2468,8 @@
   },
   {
    "id": "埼玉県:90",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "飯能寄居線",
    "ref": "30",
    "highway": "primary",
@@ -2311,6 +2493,8 @@
   },
   {
    "id": "埼玉県:91",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "新方須賀さいたま線",
    "ref": "214",
    "highway": "secondary",
@@ -2334,6 +2518,8 @@
   },
   {
    "id": "埼玉県:92",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "行田蓮田線",
    "ref": "77",
    "highway": "primary",
@@ -2357,6 +2543,8 @@
   },
   {
    "id": "埼玉県:93",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "鴻巣羽生線",
    "ref": "32",
    "highway": "primary",
@@ -2380,6 +2568,8 @@
   },
   {
    "id": "埼玉県:94",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "東松山桶川線",
    "ref": "33",
    "highway": "primary",
@@ -2403,6 +2593,8 @@
   },
   {
    "id": "埼玉県:95",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "野田岩槻線",
    "ref": "80",
    "highway": "primary",
@@ -2426,6 +2618,8 @@
   },
   {
    "id": "埼玉県:96",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "さいたま鴻巣線",
    "ref": "57",
    "highway": "primary",
@@ -2449,6 +2643,8 @@
   },
   {
    "id": "埼玉県:97",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "葛飾吉川松伏線",
    "ref": "67",
    "highway": "primary",
@@ -2472,6 +2668,8 @@
   },
   {
    "id": "埼玉県:98",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "上尾蓮田線",
    "ref": "150",
    "highway": "secondary",
@@ -2495,6 +2693,8 @@
   },
   {
    "id": "埼玉県:99",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "両神小鹿野線",
    "ref": "279",
    "highway": "secondary",
@@ -2517,12 +2717,14 @@
    ],
    "boost": -35,
    "tags": [
-    "林道ぎみ",
-    "要注意"
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:100",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "新方須賀さいたま線",
    "ref": "214",
    "highway": "secondary",
@@ -2546,6 +2748,8 @@
   },
   {
    "id": "埼玉県:101",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "熊谷児玉線",
    "ref": "75",
    "highway": "primary",
@@ -2569,6 +2773,8 @@
   },
   {
    "id": "埼玉県:102",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "鴻巣羽生線",
    "ref": "32",
    "highway": "primary",
@@ -2592,6 +2798,8 @@
   },
   {
    "id": "埼玉県:103",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "久喜騎西線",
    "ref": "151",
    "highway": "secondary",
@@ -2615,6 +2823,8 @@
   },
   {
    "id": "埼玉県:104",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "蒲生岩槻線",
    "ref": "324",
    "highway": "secondary",
@@ -2638,6 +2848,8 @@
   },
   {
    "id": "埼玉県:105",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "南川上名栗線",
    "ref": "395",
    "highway": "secondary",
@@ -2660,12 +2872,14 @@
    ],
    "boost": -50,
    "tags": [
-    "林道ぎみ",
-    "要注意"
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:106",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "児玉新町線",
    "ref": "131",
    "highway": "secondary",
@@ -2689,6 +2903,8 @@
   },
   {
    "id": "埼玉県:107",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "飯能寄居線",
    "ref": "30",
    "highway": "primary",
@@ -2712,6 +2928,8 @@
   },
   {
    "id": "埼玉県:108",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "川越坂戸毛呂山線",
    "ref": "39",
    "highway": "primary",
@@ -2735,6 +2953,8 @@
   },
   {
    "id": "埼玉県:109",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "川越日高線",
    "ref": "15",
    "highway": "primary",
@@ -2758,6 +2978,8 @@
   },
   {
    "id": "埼玉県:110",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "日高川島線",
    "ref": "74",
    "highway": "primary",
@@ -2781,6 +3003,8 @@
   },
   {
    "id": "埼玉県:111",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "福田鴻巣線",
    "ref": "307",
    "highway": "secondary",
@@ -2804,6 +3028,8 @@
   },
   {
    "id": "埼玉県:112",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "前橋長瀞線",
    "ref": "13",
    "highway": "primary",
@@ -2827,6 +3053,8 @@
   },
   {
    "id": "埼玉県:113",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "国道462号",
    "ref": "462",
    "highway": "trunk",
@@ -2850,6 +3078,8 @@
   },
   {
    "id": "埼玉県:114",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "彩甲斐街道",
    "ref": "140",
    "highway": "trunk",
@@ -2873,6 +3103,8 @@
   },
   {
    "id": "埼玉県:115",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "三沢坂本線",
    "ref": "361",
    "highway": "secondary",
@@ -2895,12 +3127,14 @@
    ],
    "boost": -55,
    "tags": [
-    "林道ぎみ",
-    "要注意"
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:116",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "吉田太田部譲原線",
    "ref": "331",
    "highway": "secondary",
@@ -2923,12 +3157,14 @@
    ],
    "boost": -55,
    "tags": [
-    "林道ぎみ",
-    "要注意"
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:117",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "薄小森線",
    "ref": "367",
    "highway": "secondary",
@@ -2951,12 +3187,14 @@
    ],
    "boost": -45,
    "tags": [
-    "林道ぎみ",
-    "要注意"
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "埼玉県:118",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "南飯能線",
    "ref": "350",
    "highway": "secondary",
@@ -2979,8 +3217,8 @@
    ],
    "boost": -40,
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   }
  ],

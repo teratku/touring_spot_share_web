@@ -134,23 +134,13 @@
             <option value="3">もっと 3.0倍</option>
           </select>
         </label>
-        <label style="font-size:11px;color:var(--muted)">まわり方
-          <select id="side">
-            <option value="">おまかせ</option>
-            <option value="north">北まわり</option>
-            <option value="east">東まわり</option>
-            <option value="south">南まわり</option>
-            <option value="west">西まわり</option>
-          </select>
-        </label>
       </div>
-      <p class="hint">⚠️ <strong>まわり方は「直線のどちら側へ膨らむか」。</strong>
-        候補は旅の向きと直角の2方向に集まるので、南西へ向かう旅なら
-        「北まわり」と「西まわり」は同じ側を指す（幾何の通り）。
-        旅の向きと同じ方角を選ぶと候補がほぼ無くなる。
+      <p class="hint"><strong>まわり方（北・東・南・西）を全部作って並べる。</strong>
+        まわり方＝直線のどちら側へ膨らむか。候補は旅の向きと直角の2方向に集まるので、
+        南西へ向かう旅なら「北まわり」と「西まわり」は同じ側を指す（幾何の通り）。
+        そういう方角は<strong>1つにまとめて</strong>出す。
         <br>両端のあいだに掛かる<strong>県を全部まとめて</strong>見て、
-        点数の高い道から予算に収まるぶんだけ通す。<strong>たっぷり／ひかえめ／別ルートの
-        3通り</strong>を出す。<br>⚠️ 最短・ふつうには入れない。
+        点数の高い道から予算に収まるぶんだけ通す。<br>⚠️ 最短・ふつうには入れない。
         <br>⚠️ <strong>引いてみてUターンした道は外す</strong>（外したぶんは別の道で埋め直す）。</p>
       <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
         <select id="pref"><option value="">県を選んで手で足す…</option></select>
@@ -205,10 +195,19 @@ const PLAIN = [
   { key:"shortest", label:"最短",   color:"#868e96" },
   { key:"normal",   label:"ふつう", color:"#1c7ed6" },
 ];
-//: 楽しい道の案の色。kind は サーバの buildFunVariants と揃える
+/* ⚠️ 案の色は**まわり方**で決める。kind は "side:north" のようにサーバが付ける
+      （lib/funRouteSelect.js の buildSideVariants）。
+      同じ顔ぶれの方角はまとめられるので、先頭の方角の色を使う。 */
 const FUN_COLORS = {
-  generous:"#e8590c", modest:"#f08c00", alternate:"#ae3ec9", wide:"#c2255c",
+  north:"#1971c2", east:"#e8590c", south:"#c2255c", west:"#2f9e44",
 };
+const funColor = (kind) => FUN_COLORS[String(kind).replace("side:", "")] || "#e8590c";
+
+/* ⚠️ **表示名は画面で作る。** サーバは鍵（north/east/south/west）だけ返す。
+      海外へ出す前提なので、APIの応答に日本語を混ぜない。 */
+const SIDE_LABEL = { north:"北", east:"東", south:"南", west:"西" };
+const sidesLabel = (sides) =>
+  `${(sides || []).map((k) => SIDE_LABEL[k] || k).join("・")}まわり`;
 
 const state = {
   from:null, to:null, vias:[],
@@ -217,6 +216,7 @@ const state = {
   results:{},          // key → 応答 or {error}
   selected:"normal",
   lastRequest:null,
+  sideEmpties:[],
   map:null, markers:[], lines:{}, funMarks:[], stepPin:null,
 };
 
@@ -340,7 +340,6 @@ async function run() {
   const costing = document.getElementById("costing").value;
   const funCount = Number(document.getElementById("funCount").value) || 0;
   const budgetRatio = Number(document.getElementById("budget").value) || undefined;
-  const side = document.getElementById("side").value || undefined;
   document.getElementById("run").disabled = true;
   state.results = {};
   state.variants = [];
@@ -369,23 +368,24 @@ async function run() {
   // ② 楽しい道の案を何通りか
   if (funCount > 0) {
     const body = { from:state.from, to:state.to, vias:state.vias,
-                   costing, funCount, budgetRatio, side, maxVariants:3 };
+                   costing, funCount, budgetRatio, maxVariants:3 };
     state.lastRequest = body;
     const got = await post("/api/valhalla/fun-routes", body);
     if (got.error) {
       state.results.fun = got;
-      state.variants.push({ key:"fun", label:"楽しい", color:FUN_COLORS.generous });
+      state.variants.push({ key:"fun", label:"楽しい", color:funColor("north") });
     } else {
       (got.routes || []).forEach((r, i) => {
         const key = `fun:${r.kind}`;
         state.results[key] = r;
-        state.variants.push({ key, label:r.variantLabel,
-                              color:FUN_COLORS[r.kind] || FUN_COLORS.generous });
+        state.variants.push({ key, label:sidesLabel(r.funPick && r.funPick.sides),
+                              color:funColor(r.kind) });
         if (i === 0) state.selected = key;   // いちばん楽しい案を最初に見せる
       });
+      state.sideEmpties = got.sideEmpties || [];
       if (!got.routes.length) {
         state.results["fun:none"] = { error:got.note || "通せるおすすめ道路がありません" };
-        state.variants.push({ key:"fun:none", label:"楽しい", color:FUN_COLORS.generous });
+        state.variants.push({ key:"fun:none", label:"楽しい", color:funColor("north") });
       }
     }
   }
@@ -423,22 +423,26 @@ function renderPicked() {
     + `${f.lengthKm.toFixed(1)}km・${Math.round(f.score)}点・曲率${Math.round(f.curviness)}</span></div>`).join("");
   const p = r.funPick || {};
   const notes = [];
+  // ⚠️ **候補が無かった方角も出す。** 黙って消すと「北まわりが出ない」のか
+  //    「試していない」のかが分からない
+  const emptySides = (state.sideEmpties || []).map((e) => SIDE_LABEL[e.side] || e.side);
+  if (emptySides.length) notes.push(`${escapeHtml(emptySides.join("・"))}まわりは候補なし`);
+  if ((p.sides || []).length > 1) {
+    notes.push(`${p.sides.map((k) => SIDE_LABEL[k] || k).join("・")}`
+      + "まわりは同じ道になるのでまとめてある");
+  }
   if ((p.uTurnOnly || []).length) {
-    notes.push(`選ぶ前に外した（大きく戻る）: ${escapeHtml(p.uTurnOnly.join("・"))}`);
+    // ⚠️ サーバは {id, name} の組で返す（APIに日本語を混ぜないため）。表示は name
+    notes.push(`選ぶ前に外した（大きく戻る）: ${escapeHtml(p.uTurnOnly.map((x) => x.name).join("・"))}`);
   }
   if ((p.uTurnDropped || []).length) {
     // ⚠️ 実際に引いてみてUターンしたので外した道。選ぶ側では見えない
-    notes.push(`引いてから外した（Uターンした）: ${escapeHtml(p.uTurnDropped.join("・"))}`);
+    notes.push(`引いてから外した（Uターンした）: ${escapeHtml(p.uTurnDropped.map((x) => x.name).join("・"))}`);
   }
   if (p.refilled) notes.push("外したぶんは別の道で埋め直した");
   const dropped = notes.length ? "<br>⚠️ " + notes.join("<br>⚠️ ") : "";
-  const prefs = (p.prefectures || []).length
-    ? `${p.prefectures.length}県（${escapeHtml(p.prefectures.join(" "))}）の` : "";
-  const SIDE_LABEL = { north:"北", east:"東", south:"南", west:"西" };
-  if (p.side) {
-    notes.unshift(`${SIDE_LABEL[p.side] || p.side}まわりで選んだ`
-      + (p.sideDropped ? `（方角の指定で${p.sideDropped}本を外した）` : ""));
-  }
+  const prefs = (p.regions || []).length
+    ? `${p.regions.length}地域（${escapeHtml(p.regions.join(" "))}）の` : "";
   note.innerHTML = `${prefs}候補${p.considered}本から。`
     + `見積もり${(p.estimatedMeters / 1000).toFixed(1)}km`
     + `（実際は${(r.lengthMeters / 1000).toFixed(1)}km）${dropped}`;

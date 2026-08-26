@@ -1,9 +1,9 @@
 {
  "prefecture": "岩手県",
  "romaji": "iwate",
- "generation": 4,
- "contentHash": "d013496c6e3b",
- "builtAt": "2026-08-25T13:59:39.541Z",
+ "generation": 5,
+ "contentHash": "c95b891dc9c6",
+ "builtAt": "2026-08-26T09:40:08.403Z",
  "weights": {
   "curviness": 0.35,
   "flow": 0.25,
@@ -15,6 +15,8 @@
  "segments": [
   {
    "id": "岩手県:0",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "八幡平アスピーテライン",
    "ref": "23",
    "highway": "primary",
@@ -38,12 +40,14 @@
    "reshaped": true,
    "boost": 15,
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:1",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "吉浜上荒川線",
    "ref": "250",
    "highway": "secondary",
@@ -65,12 +69,14 @@
     141.857358
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "岩手県:2",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "桜峠平田線",
    "ref": "249",
    "highway": "secondary",
@@ -92,12 +98,14 @@
     141.888036
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "岩手県:3",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "姉帯戸田線",
    "ref": "271",
    "highway": "secondary",
@@ -119,12 +127,14 @@
     141.427751
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "岩手県:4",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "宮古岩泉線",
    "ref": "40",
    "highway": "primary",
@@ -146,12 +156,14 @@
     141.93191
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "岩手県:5",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "夏油温泉江釣子線",
    "ref": "122",
    "highway": "secondary",
@@ -173,12 +185,14 @@
     140.887144
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "岩手県:6",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "水海大渡線",
    "ref": "242",
    "highway": "secondary",
@@ -200,11 +214,13 @@
     141.883476
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:7",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "一戸浄法寺線",
    "ref": "210",
    "highway": "secondary",
@@ -226,13 +242,15 @@
     141.209528
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:8",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "重茂半島線",
    "ref": "41",
    "highway": "primary",
@@ -254,13 +272,15 @@
     142.024819
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:9",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "綱木黄海線",
    "ref": "188",
    "highway": "secondary",
@@ -282,13 +302,15 @@
     141.301338
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:10",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "唐丹日頃市線",
    "ref": "193",
    "highway": "secondary",
@@ -310,13 +332,15 @@
     141.849842
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:11",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "吉里吉里釜石線",
    "ref": "231",
    "highway": "secondary",
@@ -338,13 +362,15 @@
     141.893546
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:12",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "崎山宮古線",
    "ref": "259",
    "highway": "secondary",
@@ -366,11 +392,13 @@
     141.96285
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:13",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "野田山形線",
    "ref": "29",
    "highway": "primary",
@@ -392,13 +420,15 @@
     141.799963
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:14",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "吉里吉里釜石線",
    "ref": "231",
    "highway": "secondary",
@@ -420,13 +450,15 @@
     141.920651
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:15",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "小友米里線",
    "ref": "174",
    "highway": "secondary",
@@ -448,13 +480,15 @@
     141.416967
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:16",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "田野畑岩泉線",
    "ref": "173",
    "highway": "secondary",
@@ -477,11 +511,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:17",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "長坂束稲前沢線",
    "ref": "237",
    "highway": "secondary",
@@ -503,13 +539,15 @@
     141.151074
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:18",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "釜石遠野線",
    "ref": "35",
    "highway": "primary",
@@ -531,13 +569,15 @@
     141.737912
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:19",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "重茂半島線",
    "ref": "41",
    "highway": "primary",
@@ -559,11 +599,13 @@
     142.024653
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:20",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "大槌小国線",
    "ref": "26",
    "highway": "primary",
@@ -585,11 +627,13 @@
     141.690494
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:21",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "気仙沼陸前高田線",
    "ref": "34",
    "highway": "primary",
@@ -611,11 +655,13 @@
     141.552926
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:22",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻雫石線",
    "ref": "234",
    "highway": "secondary",
@@ -637,12 +683,14 @@
     140.938602
    ],
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "岩手県:23",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "小本街道",
    "ref": "",
    "highway": "tertiary",
@@ -664,11 +712,13 @@
     141.529429
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:24",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "普代小屋瀬線",
    "ref": "202",
    "highway": "secondary",
@@ -690,11 +740,13 @@
     141.745491
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:25",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "野々上下斗米線",
    "ref": "256",
    "highway": "secondary",
@@ -716,11 +768,13 @@
     141.249028
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:26",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻大曲線",
    "ref": "12",
    "highway": "primary",
@@ -742,11 +796,13 @@
     140.95272
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:27",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "有芸田老線",
    "ref": "177",
    "highway": "secondary",
@@ -768,12 +824,14 @@
     141.965988
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "岩手県:28",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "大野山形線",
    "ref": "292",
    "highway": "secondary",
@@ -795,11 +853,13 @@
     141.576062
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:29",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "世田米矢作線",
    "ref": "246",
    "highway": "secondary",
@@ -821,11 +881,13 @@
     141.491177
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:30",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "葛巻日影線",
    "ref": "30",
    "highway": "primary",
@@ -848,11 +910,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:31",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "釜石住田線",
    "ref": "167",
    "highway": "secondary",
@@ -874,12 +938,14 @@
     141.739765
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "岩手県:32",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "盛岡大迫東和線",
    "ref": "43",
    "highway": "primary",
@@ -901,12 +967,14 @@
     141.335012
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ"
+    "winding",
+    "forest"
    ]
   },
   {
    "id": "岩手県:33",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "川井住田線",
    "ref": "",
    "highway": "tertiary",
@@ -928,11 +996,13 @@
     141.56318
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:34",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "薮川川口線",
    "ref": "158",
    "highway": "secondary",
@@ -954,11 +1024,13 @@
     141.301131
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:35",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "二戸軽米線",
    "ref": "264",
    "highway": "secondary",
@@ -980,11 +1052,13 @@
     141.293384
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:36",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "折壁大原線",
    "ref": "263",
    "highway": "secondary",
@@ -1006,11 +1080,13 @@
     141.467641
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:37",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "野田長内線",
    "ref": "268",
    "highway": "secondary",
@@ -1032,11 +1108,13 @@
     141.787831
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:38",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "川井住田線",
    "ref": "",
    "highway": "tertiary",
@@ -1058,11 +1136,13 @@
     141.478088
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:39",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道342号",
    "ref": "342",
    "highway": "trunk",
@@ -1084,11 +1164,13 @@
     140.948819
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:40",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "衣川前沢線",
    "ref": "283",
    "highway": "secondary",
@@ -1110,11 +1192,13 @@
     141.118842
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:41",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "藤沢津谷川線",
    "ref": "218",
    "highway": "secondary",
@@ -1136,11 +1220,13 @@
     141.373682
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:42",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "紫波江繋線",
    "ref": "25",
    "highway": "primary",
@@ -1163,12 +1249,14 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング",
-    "要注意"
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "岩手県:43",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "一戸山形線",
    "ref": "5",
    "highway": "primary",
@@ -1190,11 +1278,13 @@
     141.419291
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:44",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "野田山形線",
    "ref": "29",
    "highway": "primary",
@@ -1216,11 +1306,13 @@
     141.703031
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:45",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "八戸川内大規模林道",
    "ref": "",
    "highway": "tertiary",
@@ -1242,11 +1334,13 @@
     141.59779
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:46",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "八戸川内大規模林道",
    "ref": "",
    "highway": "tertiary",
@@ -1268,11 +1362,13 @@
     141.583922
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:47",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "道前浄法寺線",
    "ref": "181",
    "highway": "secondary",
@@ -1294,11 +1390,13 @@
     141.128154
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:48",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "川井住田線",
    "ref": "",
    "highway": "tertiary",
@@ -1320,11 +1418,13 @@
     141.563536
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:49",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "紫波江繋線",
    "ref": "25",
    "highway": "primary",
@@ -1346,11 +1446,13 @@
     141.630057
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:50",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "上有住日頃市線",
    "ref": "180",
    "highway": "secondary",
@@ -1372,11 +1474,13 @@
     141.658675
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:51",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "紫波江繋線",
    "ref": "25",
    "highway": "primary",
@@ -1399,11 +1503,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:52",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "樹海ライン",
    "ref": "318",
    "highway": "secondary",
@@ -1425,11 +1531,13 @@
     140.923639
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:53",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "岩泉平井賀普代線",
    "ref": "44",
    "highway": "primary",
@@ -1451,11 +1559,13 @@
     141.931338
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:54",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "岩泉平井賀普代線",
    "ref": "44",
    "highway": "primary",
@@ -1477,11 +1587,13 @@
     141.932212
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:55",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "宮古山田線",
    "ref": "290",
    "highway": "secondary",
@@ -1503,11 +1615,13 @@
     141.927783
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:56",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "大船渡綾里三陸線",
    "ref": "9",
    "highway": "primary",
@@ -1529,11 +1643,13 @@
     141.782964
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:57",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "川井住田線",
    "ref": "",
    "highway": "tertiary",
@@ -1556,11 +1672,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:58",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "川井住田線",
    "ref": "",
    "highway": "tertiary",
@@ -1582,11 +1700,13 @@
     141.563823
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:59",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "大野山形線",
    "ref": "292",
    "highway": "secondary",
@@ -1608,11 +1728,13 @@
     141.611129
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:60",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "久慈岩泉線",
    "ref": "7",
    "highway": "primary",
@@ -1634,11 +1756,13 @@
     141.73451
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:61",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "大船渡広田陸前高田線",
    "ref": "38",
    "highway": "primary",
@@ -1660,12 +1784,14 @@
     141.697836
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:62",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "安家玉川線",
    "ref": "273",
    "highway": "secondary",
@@ -1687,11 +1813,13 @@
     141.85065
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:63",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "下宮守田瀬線",
    "ref": "178",
    "highway": "secondary",
@@ -1713,11 +1841,13 @@
     141.346661
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:64",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "白崖弥栄線",
    "ref": "239",
    "highway": "secondary",
@@ -1739,11 +1869,13 @@
     141.245884
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:65",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "崎浜港線",
    "ref": "209",
    "highway": "secondary",
@@ -1765,11 +1897,13 @@
     141.860895
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:66",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "口内伊手線",
    "ref": "287",
    "highway": "secondary",
@@ -1791,11 +1925,13 @@
     141.203829
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:67",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "大川松草線",
    "ref": "171",
    "highway": "secondary",
@@ -1817,13 +1953,15 @@
     141.649664
    ],
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:68",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "大船渡綾里三陸線",
    "ref": "9",
    "highway": "primary",
@@ -1845,11 +1983,13 @@
     141.809171
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:69",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "野々上斗内線",
    "ref": "182",
    "highway": "secondary",
@@ -1871,11 +2011,13 @@
     141.205533
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:70",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "江刺室根線",
    "ref": "10",
    "highway": "primary",
@@ -1897,11 +2039,13 @@
     141.378265
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:71",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻田瀬線",
    "ref": "284",
    "highway": "secondary",
@@ -1923,11 +2067,13 @@
     141.261505
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:72",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道397号",
    "ref": "397",
    "highway": "trunk",
@@ -1950,11 +2096,13 @@
    ],
    "reshaped": true,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:73",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "碁石海岸線",
    "ref": "275",
    "highway": "secondary",
@@ -1976,11 +2124,13 @@
     141.740291
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:74",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "白崖弥栄線",
    "ref": "239",
    "highway": "secondary",
@@ -2002,11 +2152,13 @@
     141.256217
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:75",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "二戸田子線",
    "ref": "32",
    "highway": "primary",
@@ -2028,11 +2180,13 @@
     141.161681
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:76",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "相川平泉線",
    "ref": "206",
    "highway": "secondary",
@@ -2054,11 +2208,13 @@
     141.21852
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:77",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "川井住田線",
    "ref": "",
    "highway": "tertiary",
@@ -2080,11 +2236,13 @@
     141.564191
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:78",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "松川千厩線",
    "ref": "267",
    "highway": "secondary",
@@ -2106,12 +2264,14 @@
     141.253966
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:79",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "田原折居線",
    "ref": "197",
    "highway": "secondary",
@@ -2133,11 +2293,13 @@
     141.193931
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:80",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -2159,12 +2321,14 @@
     141.744162
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:81",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "田山花輪線",
    "ref": "195",
    "highway": "secondary",
@@ -2186,12 +2350,14 @@
     140.915306
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:82",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "二戸田子線",
    "ref": "32",
    "highway": "primary",
@@ -2213,11 +2379,13 @@
     141.167003
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:83",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "薮川川口線",
    "ref": "158",
    "highway": "secondary",
@@ -2239,11 +2407,13 @@
     141.44783
    ],
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:84",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "上斗米金田一線",
    "ref": "241",
    "highway": "secondary",
@@ -2265,12 +2435,14 @@
     141.169781
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:85",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "江刺室根線",
    "ref": "10",
    "highway": "primary",
@@ -2292,12 +2464,14 @@
     141.41402
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:86",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "沖田渋民線",
    "ref": "104",
    "highway": "secondary",
@@ -2319,11 +2493,13 @@
     141.35004
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:87",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "八戸大野線",
    "ref": "11",
    "highway": "primary",
@@ -2345,11 +2521,13 @@
     141.632433
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:88",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "遠野住田線",
    "ref": "238",
    "highway": "secondary",
@@ -2371,13 +2549,15 @@
     141.505032
    ],
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
    "id": "岩手県:89",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "上米内湯沢線",
    "ref": "36",
    "highway": "primary",
@@ -2399,12 +2579,14 @@
     141.225711
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:90",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "一戸山形線",
    "ref": "5",
    "highway": "primary",
@@ -2426,12 +2608,14 @@
     141.571097
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:91",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "戸田荷軽部線",
    "ref": "272",
    "highway": "secondary",
@@ -2453,13 +2637,15 @@
     141.429072
    ],
    "tags": [
-    "ワインディング",
-    "快走",
-    "要注意"
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
    "id": "岩手県:92",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻田瀬線",
    "ref": "284",
    "highway": "secondary",
@@ -2481,12 +2667,14 @@
     141.200061
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:93",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "矢巾西安庭線",
    "ref": "281",
    "highway": "secondary",
@@ -2508,11 +2696,13 @@
     140.992758
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:94",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "土淵達曽部線",
    "ref": "160",
    "highway": "secondary",
@@ -2534,12 +2724,14 @@
     141.374334
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:95",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道456号",
    "ref": "456",
    "highway": "trunk",
@@ -2561,12 +2753,14 @@
     141.334826
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:96",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "二戸田子線",
    "ref": "32",
    "highway": "primary",
@@ -2588,11 +2782,13 @@
     141.261183
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:97",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "沖田田原線",
    "ref": "262",
    "highway": "secondary",
@@ -2615,13 +2811,15 @@
    ],
    "boost": -15,
    "tags": [
-    "ワインディング",
-    "林道ぎみ",
-    "要注意"
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
    "id": "岩手県:98",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "川井住田線",
    "ref": "",
    "highway": "tertiary",
@@ -2643,12 +2841,14 @@
     141.531547
    ],
    "tags": [
-    "快走",
-    "要注意"
+    "flowing",
+    "caution"
    ]
   },
   {
    "id": "岩手県:99",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "栗駒平泉線",
    "ref": "49",
    "highway": "primary",
@@ -2670,12 +2870,14 @@
     140.94158
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:100",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "葛巻日影線",
    "ref": "30",
    "highway": "primary",
@@ -2697,11 +2899,13 @@
     141.074885
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:101",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "久慈岩泉線",
    "ref": "7",
    "highway": "primary",
@@ -2723,11 +2927,13 @@
     141.702837
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:102",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "本郷五串線",
    "ref": "240",
    "highway": "secondary",
@@ -2749,11 +2955,13 @@
     141.031075
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:103",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道45号",
    "ref": "45",
    "highway": "trunk",
@@ -2775,12 +2983,14 @@
     141.8825
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:104",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "侍浜夏井線",
    "ref": "279",
    "highway": "secondary",
@@ -2802,11 +3012,13 @@
     141.796504
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:105",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "夏油温泉江釣子線",
    "ref": "122",
    "highway": "secondary",
@@ -2828,11 +3040,13 @@
     140.981518
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:106",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "前沢東山線",
    "ref": "106",
    "highway": "secondary",
@@ -2854,12 +3068,14 @@
     141.250955
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:107",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "一戸葛巻線",
    "ref": "15",
    "highway": "primary",
@@ -2881,12 +3097,14 @@
     141.337636
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:108",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "元木江刈内線",
    "ref": "253",
    "highway": "secondary",
@@ -2908,12 +3126,14 @@
     141.362183
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:109",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道106号",
    "ref": "106",
    "highway": "trunk",
@@ -2935,12 +3155,14 @@
     141.346433
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:110",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "湯川温泉線",
    "ref": "215",
    "highway": "secondary",
@@ -2962,12 +3184,14 @@
     140.769309
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:111",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道343号",
    "ref": "343",
    "highway": "trunk",
@@ -2989,12 +3213,14 @@
     141.57064
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:112",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道340号",
    "ref": "340",
    "highway": "trunk",
@@ -3016,11 +3242,13 @@
     141.467033
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:113",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道45号",
    "ref": "45",
    "highway": "trunk",
@@ -3042,12 +3270,14 @@
     141.716789
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:114",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道45号",
    "ref": "45",
    "highway": "trunk",
@@ -3069,11 +3299,13 @@
     141.85348
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:115",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国見温泉線",
    "ref": "266",
    "highway": "secondary",
@@ -3096,11 +3328,13 @@
    ],
    "boost": -25,
    "tags": [
-    "ワインディング"
+    "winding"
    ]
   },
   {
    "id": "岩手県:116",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道340号",
    "ref": "340",
    "highway": "trunk",
@@ -3122,12 +3356,14 @@
     141.679743
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:117",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "久慈岩泉線",
    "ref": "7",
    "highway": "primary",
@@ -3149,12 +3385,14 @@
     141.8028
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:118",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "渋民川又線",
    "ref": "169",
    "highway": "secondary",
@@ -3176,12 +3414,14 @@
     141.163307
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:119",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "衣川水沢線",
    "ref": "236",
    "highway": "secondary",
@@ -3203,12 +3443,14 @@
     141.110097
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:120",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "一関大東線",
    "ref": "19",
    "highway": "primary",
@@ -3230,11 +3472,13 @@
     141.284697
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:121",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "田野畑岩泉線",
    "ref": "173",
    "highway": "secondary",
@@ -3256,12 +3500,14 @@
     141.84167
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:122",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻大曲線",
    "ref": "12",
    "highway": "primary",
@@ -3283,12 +3529,14 @@
     140.973803
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:123",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "栗駒平泉線",
    "ref": "49",
    "highway": "primary",
@@ -3310,12 +3558,14 @@
     140.958288
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:124",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道455号",
    "ref": "455",
    "highway": "trunk",
@@ -3337,12 +3587,14 @@
     141.639932
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:125",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "紫宿横沢線",
    "ref": "289",
    "highway": "secondary",
@@ -3364,12 +3616,14 @@
     141.261116
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:126",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "雫石環状線",
    "ref": "",
    "highway": "tertiary",
@@ -3391,12 +3645,14 @@
     140.943435
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:127",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "広域農道",
    "ref": "",
    "highway": "tertiary",
@@ -3418,12 +3674,14 @@
     141.178763
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:128",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻平泉線",
    "ref": "37",
    "highway": "primary",
@@ -3445,12 +3703,14 @@
     141.072258
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:129",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "田代平西根線",
    "ref": "227",
    "highway": "secondary",
@@ -3472,12 +3732,14 @@
     141.1097
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:130",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道397号",
    "ref": "397",
    "highway": "trunk",
@@ -3499,12 +3761,14 @@
     141.443926
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:131",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "軽米種市線",
    "ref": "20",
    "highway": "primary",
@@ -3526,12 +3790,14 @@
     141.515487
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:132",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "東和薄衣線",
    "ref": "189",
    "highway": "secondary",
@@ -3553,11 +3819,13 @@
     141.252505
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:133",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻平泉線",
    "ref": "37",
    "highway": "primary",
@@ -3579,11 +3847,13 @@
     141.003855
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:134",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道340号",
    "ref": "340",
    "highway": "trunk",
@@ -3605,11 +3875,13 @@
     141.617307
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:135",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "土淵達曽部線",
    "ref": "160",
    "highway": "secondary",
@@ -3631,11 +3903,13 @@
     141.341492
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:136",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "岩手平舘線",
    "ref": "17",
    "highway": "primary",
@@ -3657,11 +3931,13 @@
     141.239789
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:137",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "明戸種市線",
    "ref": "269",
    "highway": "secondary",
@@ -3683,12 +3959,14 @@
     141.636116
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:138",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花泉藤沢線",
    "ref": "21",
    "highway": "primary",
@@ -3710,12 +3988,14 @@
     141.264015
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:139",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "花巻平泉線",
    "ref": "37",
    "highway": "primary",
@@ -3737,12 +4017,14 @@
     140.992138
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:140",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "岩泉平井賀普代線",
    "ref": "44",
    "highway": "primary",
@@ -3764,12 +4046,14 @@
     141.879065
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:141",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "広瀬三ヶ尻線",
    "ref": "255",
    "highway": "secondary",
@@ -3791,11 +4075,13 @@
     141.148905
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:142",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "藤沢大籠線",
    "ref": "295",
    "highway": "secondary",
@@ -3817,12 +4103,14 @@
     141.354671
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:143",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道455号",
    "ref": "455",
    "highway": "trunk",
@@ -3844,12 +4132,14 @@
     141.212723
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:144",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "国道281号",
    "ref": "281",
    "highway": "trunk",
@@ -3871,12 +4161,14 @@
     141.579926
    ],
    "tags": [
-    "ワインディング",
-    "快走"
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "岩手県:145",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "江刺東和線",
    "ref": "27",
    "highway": "primary",
@@ -3898,11 +4190,13 @@
     141.323184
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:146",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "唐丹日頃市線",
    "ref": "193",
    "highway": "secondary",
@@ -3924,11 +4218,13 @@
     141.700173
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:147",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "盛岡環状線",
    "ref": "16",
    "highway": "primary",
@@ -3950,11 +4246,13 @@
     141.185665
    ],
    "tags": [
-    "快走"
+    "flowing"
    ]
   },
   {
    "id": "岩手県:148",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "柏台松尾線",
    "ref": "45",
    "highway": "primary",
@@ -3974,10 +4272,15 @@
    "end": [
     39.968783,
     141.046299
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
    "id": "岩手県:149",
+   "region": "iwate",
+   "regionName": "岩手県",
    "name": "東山薄衣線",
    "ref": "282",
    "highway": "secondary",
@@ -3997,6 +4300,9 @@
    "end": [
     38.923293,
     141.256172
+   ],
+   "tags": [
+    "flowing"
    ]
   }
  ],

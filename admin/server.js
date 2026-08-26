@@ -31,7 +31,7 @@ const { ROMAJI, REGION } = require("./lib/prefectures");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
 const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
-const { buildFunVariants } = require("./lib/funRouteSelect");
+const { buildSideVariants } = require("./lib/funRouteSelect");
 const { segmentsBetween } = require("./lib/roadRecommendIndex");
 const { dropUTurnRoads } = require("./lib/funRouteRefine");
 const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
@@ -569,15 +569,20 @@ app.post("/api/valhalla/route", async (req, res) => {
  */
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons,
-          funCount, budgetRatio, maxVariants, side } = req.body || {};
+          funCount, budgetRatio } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
   }
   try {
     const near = segmentsBetween(from, to);
-    const picks = buildFunVariants(from, to, near.segments,
-      { count: funCount || 4, budgetRatio, side, maxVariants: maxVariants || 3 });
+    // ⚠️ **まわり方は選ばせず、全部作って並べる。**
+    //    同じ顔ぶれになる方角（南西へ向かう旅の「北」と「西」など）は
+    //    buildSideVariants がまとめる
+    const built = buildSideVariants(from, to, near.segments,
+      { count: funCount || 4, budgetRatio });
+    const picks = built.variants;
+    const sideEmpties = built.empties;
 
     const routes = [];
     const seen = new Set();
@@ -600,32 +605,38 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       seen.add(key);
 
       r.kind = pick.kind;
-      r.variantLabel = pick.label;
+      // ⚠️ **表示名は返さない。** 呼ぶ側が `funPick.sides` から作る
       r.funRoads = refined.segments.map((s) => ({
         id: s.id, name: s.name, lengthKm: s.lengthKm,
         score: s.score, curviness: s.curviness, start: s.start, end: s.end,
       }));
       r.funPick = {
-        prefectures: near.prefectures,
+        // ⚠️ **「県」ではなく「地域」。** 海外では州・県・地方と呼び名が変わる。
+        //    値は不透明な小文字ローマ字（yamanashi / tw-taipei / de-bayern）
+        regions: near.prefectures,
         considered: pick.considered,
         estimatedMeters: pick.estimatedMeters,
         baselineMeters: pick.baselineMeters,
         detourRatio: pick.detourRatio,
-        side: side || null,
+        //: この案がどの方角から出たか（まとまっていれば複数）
+        sides: pick.sides,
         // 方角の指定で落とした本数（0本になったときに理由が分かるように）
         sideDropped: pick.sideDropped || 0,
         uTurnOnly: pick.uTurnOnly,
         // Uターンを起こしたので外した道
-        uTurnDropped: refined.dropped.map((s) => s.name),
+        // ⚠️ 同上。名前だけだとAPIに日本語が混ざる
+        uTurnDropped: refined.dropped.map((s) => ({ id: s.id, name: s.name })),
         routeCalls: refined.calls,
       };
       routes.push(r);
     }
     if (!routes.length) {
-      return res.json({ routes: [], prefectures: near.prefectures,
+      return res.json({ routes: [], prefectures: near.prefectures, sideEmpties,
                         note: "この範囲に通せるおすすめ道路がありません" });
     }
-    res.json({ routes, prefectures: near.prefectures });
+    // ⚠️ 候補が無かった方角も返す。「出ない」のか「試していない」のかが
+    //    分からないと、画面で誤解される
+    res.json({ routes, prefectures: near.prefectures, sideEmpties });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
