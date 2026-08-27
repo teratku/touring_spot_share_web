@@ -1,7 +1,8 @@
 "use strict";
 const test = require("node:test");
 const assert = require("node:assert");
-const { decode6, MANEUVER, VARIANTS, DISPLACEMENTS } = require("../lib/valhallaRoute");
+const { decode6, MANEUVER, VARIANTS, DISPLACEMENTS,
+        ROAD_CLASS_TIERS, ROAD_CLASS_COLORS } = require("../lib/valhallaRoute");
 const { decode } = require("../lib/polyline");
 
 /**
@@ -135,9 +136,18 @@ test("原付とバイクで設定を分けている", () => {
 test("楽しい案は幹線を避ける向きの値になっている（原付）", () => {
   // ⚠️ 実測では差は小さい（遠回り+7%）。遠回りを作るのは経由地の方。
   //    それでも向きが逆だと「楽しい」が最短寄りになる
-  const fun = VARIANTS.fun.motor_scooter.use_primary;
-  const short = VARIANTS.shortest.motor_scooter.use_primary;
-  assert.ok(fun < short, `楽しい(${fun}) が 最短(${short}) より幹線寄りになっている`);
+  // ⚠️ **重みの置き場所は ROAD_CLASS_TIERS ひとつ。** 以前は VARIANTS にも
+  //    同じ値があり、片方を消しても効いてしまう二重状態だった
+  for (const disp of ["moped50", "small125", "default"]) {
+    const fun = ROAD_CLASS_TIERS[disp].fun.use_primary;
+    const short = ROAD_CLASS_TIERS[disp].shortest.use_primary;
+    assert.ok(fun < short,
+      `${disp}: 楽しい(${fun}) が 最短(${short}) より幹線寄りになっている`);
+  }
+  for (const [name, v] of Object.entries(VARIANTS)) {
+    assert.ok(!("use_primary" in v.motor_scooter),
+      `VARIANTS.${name} にも幹線の重みがある（二重になっている）`);
+  }
 });
 
 test("バイクの楽しい案は高速を外す", () => {
@@ -188,13 +198,18 @@ test("125cc以下は高速を通れない（法令）", () => {
   assert.strictEqual(DISPLACEMENTS.large.canUseExpressway, true);
 });
 
-test("排気量に top_speed を持たせない", () => {
-  // ⚠️ 「原付は30km/h制限だから top_speed 30」は誤り。
-  //    Valhalla の top_speed は「その速度より速い道を避ける」なので、
-  //    30 を渡すと60km/hの一般道をほぼ全部避ける
-  for (const [key, d] of Object.entries(DISPLACEMENTS)) {
-    assert.ok(!("topSpeed" in d) || d.topSpeed == null,
-      `${key} に topSpeed が入っている（Valhalla の意味を取り違えている）`);
+test("効かない排気量には top_speed を渡さない", () => {
+  // ⚠️ **ここには以前「どの排気量にも top_speed を入れない」と書いてあった。**
+  //    理由は「30を渡すと60km/hの一般道をほぼ全部避ける」だったが、
+  //    5区間で測り直すと言い過ぎだった（`top_speed: 30` でも主要地方道を
+  //    16〜30%使い、距離の増えかたは最大+7%）。**禁止ではなく傾きにすぎない。**
+  //    いまは原付の走り方を表すために使っている（DISPLACEMENTS 参照）。
+  //
+  // ⚠️ **motorcycle には渡さない。** 8通り試して経路が1mも変わらなかったので、
+  //    渡しても設定が増えるだけで紛らわしい
+  for (const d of ["medium250", "large"]) {
+    assert.ok(!DISPLACEMENTS[d].topSpeed,
+      `${d} に topSpeed が入っている（motorcycle では効かない）`);
   }
 });
 
@@ -204,4 +219,66 @@ test("種別の鍵は3つだけ", () => {
   // ⚠️ 画面の KIND_COLORS と揃っていること
   const kinds = new Set(["expressway", "toll", "surface"]);
   assert.strictEqual(kinds.size, 3);
+});
+
+// MARK: 道路クラスごとの重み（GenNavi と同じ考え方）
+
+test("3段階で幹線の使い方が変わる", () => {
+  // ⚠️ スライドの表: 最短0.9使う / 推奨バランス / 裏道0.1避ける
+  for (const disp of ["moped50", "small125", "default"]) {
+    const t = ROAD_CLASS_TIERS[disp];
+    const s = t.shortest.use_primary, n = t.normal.use_primary, f = t.fun.use_primary;
+    assert.ok(s > n && n >= f,
+      `${disp}: 段階になっていない（最短${s} / 推奨${n} / 裏道${f}）`);
+  }
+});
+
+test("原付一種は生活道路寄り、原付二種は幹線寄り", () => {
+  // ⚠️ **ここが今回の要**。以前は両方とも同じ値で、画面で選び分けても
+  //    経路が1mも変わらなかった。
+  //    実測（5区間・高速回避）で大きい道の割合:
+  //      原付一種 56→18 / 76→55 / 66→58 / 71→58 / 23→21 %
+  //      原付二種 56→88 / 76→76 / 66→79 / 71→79 / 23→53 %
+  const moped = ROAD_CLASS_TIERS.moped50;
+  const small = ROAD_CLASS_TIERS.small125;
+  for (const v of ["shortest", "normal", "fun"]) {
+    assert.ok(moped[v].use_primary < small[v].use_primary,
+      `${v}: 原付一種(${moped[v].use_primary}) が `
+      + `原付二種(${small[v].use_primary}) より幹線寄りになっている`);
+  }
+  assert.ok(moped.normal.use_primary <= 0.1,
+    `原付一種の「ふつう」が幹線を避ける値になっていない: ${moped.normal.use_primary}`);
+  assert.ok(small.normal.use_primary >= 0.8,
+    `原付二種の「ふつう」が幹線を使う値になっていない: ${small.normal.use_primary}`);
+});
+
+test("排気量ごとの速度が法令と合っている", () => {
+  // ⚠️ **`top_speed` は所要時間も決める。** 入れる前は原付一種 49km が80分
+  //    （＝37km/h）で、法定30km/h では出せない数字だった
+  assert.strictEqual(DISPLACEMENTS.moped50.topSpeed, 30, "原付一種は法定30km/h");
+  assert.strictEqual(DISPLACEMENTS.small125.topSpeed, 60, "原付二種は法定60km/h");
+  // ⚠️ **軽二輪・大型には入れない。** motorcycle costing では効かないことを実測済み
+  //    （8通り試して経路が1mも変わらなかった）
+  for (const d of ["medium250", "large"]) {
+    assert.ok(!DISPLACEMENTS[d].topSpeed,
+      `${d} に topSpeed がある（motorcycle では効かない）`);
+  }
+});
+
+test("use_living_streets は入れない", () => {
+  // ⚠️ 3区間で試して**経路が1mも変わらなかった**。
+  //    Valhalla の living_street は日本にほとんど無く、residential とは別物
+  for (const [disp, tiers] of Object.entries(ROAD_CLASS_TIERS)) {
+    for (const [tier, o] of Object.entries(tiers)) {
+      assert.ok(!("use_living_streets" in o),
+        `${disp}.${tier} に use_living_streets が入っている（効かないことを実測済み）`);
+    }
+  }
+});
+
+test("クラスの色は Valhalla の road_class に揃える", () => {
+  // ⚠️ 勝手な鍵を足すと、実際には来ない色が凡例に出る
+  const known = ["motorway", "trunk", "primary", "secondary",
+                 "tertiary", "unclassified", "residential", "service_other"];
+  assert.deepStrictEqual(Object.keys(ROAD_CLASS_COLORS).sort(), known.slice().sort());
 });

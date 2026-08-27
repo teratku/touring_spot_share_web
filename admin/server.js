@@ -31,13 +31,15 @@ const { ROMAJI, REGION } = require("./lib/prefectures");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
 const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
-const { buildSideVariants } = require("./lib/funRouteSelect");
+const { buildSideVariants, selectFunRoads } = require("./lib/funRouteSelect");
 const { segmentsBetween } = require("./lib/roadRecommendIndex");
-const { dropUTurnRoads } = require("./lib/funRouteRefine");
+const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
+const { simulate } = require("./lib/navSimulate");
+const { normalized: normalizedAnnounce } = require("./lib/navGuide");
 const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
 const { midFrom, kmlUrl, parseKml } = require("./lib/myMapsKml");
-const { decode: decodePolylineServer } = require("./lib/polyline");
+const { decode: decodePolylineServer, encode: encodePolyline } = require("./lib/polyline");
 
 const PROJECT_ID = "biketeilen";
 const PORT = process.env.PORT || 4317;
@@ -541,7 +543,7 @@ app.get("/api/restrictions/route", async (req, res) => {
  */
 app.post("/api/valhalla/route", async (req, res) => {
   const { from, to, vias, variant, costing, excludePolygons,
-          displacement, avoidHighways, avoidTolls } = req.body || {};
+          displacement, avoidHighways, avoidTolls, arriveOnNearSide } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -551,7 +553,7 @@ app.post("/api/valhalla/route", async (req, res) => {
     //    自動で選ぶのは /api/valhalla/fun-routes の方だけにしてある
     const out = await routeWithValhalla(from, to,
       { vias, variant, costing, excludePolygons,
-        displacement, avoidHighways, avoidTolls });
+        displacement, avoidHighways, avoidTolls, arriveOnNearSide });
     if (out.error) return res.status(502).json(out);
     res.json(out);
   } catch (e) {
@@ -571,7 +573,7 @@ app.post("/api/valhalla/route", async (req, res) => {
  */
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons, funCount, budgetRatio,
-          corridorScale, minScore, displacement, avoidHighways, avoidTolls } = req.body || {};
+          corridorScale, minScore, displacement, avoidHighways, avoidTolls, arriveOnNearSide } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -588,28 +590,49 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
 
     const routes = [];
     const seen = new Set();
+    // ⚠️ **往復の原因は案をまたいで覚える。** 道路網の性質なので、
+    //    別の方角の案でも同じところで往復する。
+    //    ⚠️ ゴールの回り込みは覚えない（今回の行き先との関係でしかない）
+    const bannedForever = new Set();
     for (const pick of picks) {
       // ⚠️ 手で置いた経由地は残す。自動で選んだぶんの前に置く
       const handVias = Array.isArray(vias) ? vias.slice() : [];
       const routeFn = (autoVias) => routeWithValhalla(from, to,
         { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
-          displacement, avoidHighways, avoidTolls });
+          displacement, avoidHighways, avoidTolls, arriveOnNearSide });
 
-      // ⚠️ **実際に引いてから、Uターンを起こす道を外す。**
-      //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）
-      const refined = await dropUTurnRoads(pick.segments, from, to, routeFn,
-        { pool: near.segments, pickOptions: pick.pickOptions });
+      // ⚠️ **実際に引いてから、余計に走らせている道を外す。**
+      //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）。
+      //    ⚠️ 原因を外したら**案を丸ごと組み立て直す**。1本ずつ抜く方式では、
+      //       楽しい道が1本しかない案で何もできず往復が残った
+      const rebuild = (banIds) => {
+        const usable = near.segments.filter((s) => !banIds.has(s.id));
+        return selectFunRoads(from, to, usable, pick.pickOptions);
+      };
+      const refined = await dropBacktrackingRoads(pick, to, rebuild, routeFn,
+        { bannedIds: bannedForever });
       const r = refined.route;
       if (!r || r.error) continue;
+      // ⚠️ **往復の原因は次の案でも外しておく。** 道路網の性質なので、
+      //    案が変わっても同じところで往復する
+      for (const seg of refined.bannedForever) bannedForever.add(seg.id);
 
       // ⚠️ 外した結果、別の案と同じ顔ぶれになることがある。同じものを並べない
-      const key = refined.segments.map((s) => s.id).sort().join("|");
+      const key = refined.picked.segments.map((s) => s.id).sort().join("|");
       if (seen.has(key)) continue;
       seen.add(key);
 
       r.kind = pick.kind;
+      // ⚠️ **`uTurns`（maneuver の数）と並べて出すこと。** 片方だけだと
+      //    「Uターン0回なのに往復している」に気づけない（実際に見落とした）
+      r.retracedMeters = refined.retracedMeters;
+      r.backtracks = refined.backtracks;
+      r.passedDestinationAlong = refined.passedDestinationAlong;
+      // ⚠️ **到着のための切り返しは、道のせいではない。** 分けて出さないと
+      //    「Uターン1」だけが見えて、直せない不具合に見える
+      r.arrivalUTurns = refined.arrivalUTurns || 0;
       // ⚠️ **表示名は返さない。** 呼ぶ側が `funPick.sides` から作る
-      r.funRoads = refined.segments.map((s) => ({
+      r.funRoads = refined.picked.segments.map((s) => ({
         id: s.id, name: s.name, lengthKm: s.lengthKm,
         score: s.score, curviness: s.curviness, start: s.start, end: s.end,
       }));
@@ -630,6 +653,8 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
         // ⚠️ 同上。名前だけだとAPIに日本語が混ざる
         uTurnDropped: refined.dropped.map((s) => ({ id: s.id, name: s.name })),
         routeCalls: refined.calls,
+        //: 楽しい道が無くなった（原因を外し切った）
+        ranOut: refined.ranOut,
       };
       routes.push(r);
     }
@@ -640,6 +665,139 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
     // ⚠️ 候補が無かった方角も返す。「出ない」のか「試していない」のかが
     //    分からないと、画面で誤解される
     res.json({ routes, prefectures: near.prefectures, sideEmpties });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * ナビの窓口。**アプリがそのまま食べられる形**でルートと案内を返す。
+ *
+ * ⚠️ **`/api/valhalla/fun-routes` とは目的が違う。** あちらは確認ツールの画面用で、
+ *    案を並べて見せるためのもの。こちらは**アプリ向け**で、
+ *    `NavRoute` / `NavStep` に流し込める鍵だけを返す。両方を混ぜないこと。
+ *
+ * ⚠️ **`guidance` は確かめるためのもの。** 本番のアプリは `NavigationEngine` が
+ *    自分で組み立てる（同じ規則なので同じ文言になるはず）。
+ *    アプリを載せ替える前に、案内が使い物になるかをここで見る。
+ *
+ * ⚠️ **`funCount` を渡さなければ、おすすめ道路は通さない。** 素直な経路が要るとき
+ *    （最短・ふつう）に、勝手に寄り道を足さない。
+ */
+app.post("/api/nav/route", async (req, res) => {
+  const { from, to, vias, variant, funCount, budgetRatio, corridorScale, minScore,
+          displacement, avoidHighways, avoidTolls, arriveOnNearSide,
+          announce, guidance } = req.body || {};
+  const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
+  if (!ok(from) || !ok(to)) {
+    return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
+  }
+
+  try {
+    const handVias = Array.isArray(vias) ? vias.slice() : [];
+    const kind = variant || (funCount > 0 ? "fun" : "normal");
+    const drawOptions = { variant: kind, displacement, avoidHighways, avoidTolls,
+                          arriveOnNearSide, withRoadClass: false };
+
+    let picked = { segments: [], waypoints: [] };
+    let refined = null;
+
+    if (funCount > 0) {
+      // ⚠️ **おすすめ道路を通すときは、往復の始末までやる。** 画面と同じ手順。
+      //    引いてみないと往復は分からない（lib/funRouteRefine.js）
+      const near = segmentsBetween(from, to);
+      const built = buildSideVariants(from, to, near.segments,
+        { count: funCount, budgetRatio, corridorScale, minScore });
+      const pick = built.variants[0];
+      if (pick) {
+        const routeFn = (autoVias) => routeWithValhalla(from, to,
+          { ...drawOptions, vias: handVias.concat(autoVias) });
+        const rebuild = (banIds) => selectFunRoads(from, to,
+          near.segments.filter((seg) => !banIds.has(seg.id)), pick.pickOptions);
+        refined = await dropBacktrackingRoads(pick, to, rebuild, routeFn);
+        picked = refined.picked;
+      }
+    }
+
+    const route = refined ? refined.route : await routeWithValhalla(from, to,
+      { ...drawOptions, vias: handVias.concat(picked.waypoints) });
+    if (!route || route.error) {
+      return res.status(502).json({ error: (route && route.error) || "経路が引けません" });
+    }
+
+    // ⚠️ **アプリの `NavStep` に対応する鍵だけを返す。**
+    //    `instruction` は画面のバナー用、`roadName` は表示用（番号もローマ字も
+    //    つないである）、`spokenRoad` が読み上げ用。取り違えないこと
+    const steps = route.steps.map((step, i) => ({
+      maneuver: step.maneuver,
+      instruction: step.instruction,
+      roadName: step.roadName || null,
+      spokenRoad: step.spokenRoad || null,
+      intersectionName: step.intersectionName || null,
+      distanceMeters: step.distanceMeters,
+      durationSeconds: step.durationSeconds,
+      isCurvyAhead: !!step.isCurvyAhead,
+      roadKind: step.roadKind,
+      beginIndex: step.beginIndex,
+      endIndex: step.endIndex,
+      isLegEnd: i === route.steps.length - 1,
+    }));
+
+    // ⚠️ 返す線を、そのまま見て数える（上の注意書きを読むこと）
+    const shape = blame(route, picked.segments || [], to);
+
+    res.json({
+      route: {
+        totalDistanceMeters: route.lengthMeters,
+        totalDurationSeconds: route.durationSeconds,
+        // ⚠️ **6桁ではなく5桁で返す。** アプリ・Google と同じ精度。
+        //    Valhalla の6桁のまま渡すと座標が10倍ずれる（実際にやった）
+        polyline: encodePolyline(route.points),
+        steps,
+        funRoads: (picked.segments || []).map((seg) => ({
+          id: seg.id, name: seg.name, lengthKm: seg.lengthKm,
+          start: seg.start, end: seg.end, score: seg.score, curviness: seg.curviness,
+        })),
+        // 走らせる前に知っておきたいこと
+        uTurns: route.uTurns,
+        // ⚠️ **返す線そのものから数え直すこと。** 始末をした結果を持ち回ると、
+        //    始末を通らない道筋（おすすめ道路なしのとき）で**いつも0と嘘をつく**。
+        //    ここが嘘だと「往復していないはず」で受け入れてしまう
+        retracedMeters: shape.retracedMeters,
+        arrivalUTurns: shape.arrivalUTurns || 0,
+        backtracks: shape.backtracks,
+        ferryMeters: route.ferryMeters,
+        arrivedSide: route.arrivedSide,
+        sideGaveUp: !!route.sideGaveUp,
+        costing: route.costing,
+        costingOptions: route.costingOptions,
+      },
+      // ⚠️ 要らないときは渡さない。長い経路では数百件になる
+      guidance: guidance === false ? undefined
+        : simulate({ steps }, { announce }),
+      announce: normalizedAnnounce(announce),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * 指示の並びから、案内だけを組み立てて返す。
+ *
+ * ⚠️ **画面の「走らせる」用。** すでに引いてある経路の `steps` を渡してもらう。
+ *    経路を引き直さないので速い（読み上げ設定を変えるたびに叩かれる）。
+ * ⚠️ **文言を画面側で作らないこと。** アプリと同じ規則をここ（`lib/navGuide.js`）に
+ *    だけ置く。二重に持つと必ずずれる。
+ */
+app.post("/api/nav/guidance", (req, res) => {
+  const { steps, announce } = req.body || {};
+  if (!Array.isArray(steps) || steps.length < 2) {
+    return res.status(400).json({ error: "steps が要ります" });
+  }
+  try {
+    res.json({ guidance: simulate({ steps }, { announce }),
+               announce: normalizedAnnounce(announce) });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

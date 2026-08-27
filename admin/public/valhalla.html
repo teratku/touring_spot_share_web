@@ -72,6 +72,20 @@
   .v .num { font-variant-numeric:tabular-nums; color:var(--muted); font-size:11px; white-space:nowrap; }
   .v .err { color:var(--ng); font-size:11px; }
 
+  /* 走らせる */
+  .now { min-height:38px; margin:6px 0; padding:8px 10px; border-radius:8px;
+         background:var(--panel2, #f4f6f8); font-size:14px; font-weight:600; line-height:1.35; }
+  .now.quiet { color:var(--muted); font-weight:400; }
+  #driveLog { max-height:220px; overflow:auto; }
+  .ln { display:flex; gap:8px; align-items:baseline; padding:3px 4px; font-size:12px;
+        border-bottom:1px solid var(--line, #e5e7eb); }
+  .ln .at { color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .ln .kd { font-size:10px; padding:1px 5px; border-radius:9px; background:#e9ecef; white-space:nowrap; }
+  .ln.imminent .kd { background:#ffe3e3; color:#c92a2a; }
+  .ln.afterTurn .kd { background:#e7f5ff; color:#1c7ed6; }
+  .ln.longStretch .kd { background:#f3f0ff; color:#7048e8; }
+  .ln.on { background:#fff9db; }
+
   /* 曲がる指示 */
   #steps { flex:1; overflow-y:auto; }
   .st { padding:4px 10px; border-bottom:1px solid #f4f6f8; display:flex; gap:8px; align-items:baseline; cursor:pointer; font-size:12px; }
@@ -185,18 +199,92 @@
           <input type="checkbox" id="avoidHighways"> 高速回避</label>
         <label style="font-size:11px;color:var(--muted)">
           <input type="checkbox" id="avoidTolls"> 有料回避</label>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="arriveOnNearSide"> 目的地は手前の車線側</label>
       </div>
       <p class="hint">⚠️ <strong>125cc以下は高速・自動車専用道を通れない（法令）。</strong>
         チェックを外しても乗らない。</p>
+      <p class="hint">⚠️ <strong>船（フェリー）には乗らない。</strong>
+        <code>use_ferry: 0</code> は「最短」では効かない（距離だけで決めるので
+        時間の重みを全部無視する）ため、船が出たらその場所を塞いで引き直す。
+        それでも残るのは北海道・沖縄など<strong>船なしで行けない</strong>ところだけ。</p>
+      <p class="hint">⚠️ <strong>「目的地は手前の車線側」＝対向車線を渡らずに着ける。</strong>
+        日本は左側通行なので<strong>左側</strong>に着く。
+        向きは国ごとに Valhalla が持っているので、右側通行の国では右側になる。
+        目的地が道の真上や交差点のすぐ近くだと効かない（実測6地点中1地点）。</p>
+      <p class="hint">排気量で道の選び方が変わる。<br>
+        <strong>原付一種</strong>は生活道路寄り・30km/h（法定30km/h・二段階右折で
+        幹線の流れに乗れない）。<br>
+        <strong>原付二種</strong>は幹線寄り・60km/h。<br>
+        <strong>軽二輪・大型</strong>は Valhalla 側につまみが無い（8通り試して
+        経路が1mも変わらなかった）。ただし既定でもともと幹線寄りに走る。</p>
       <div style="margin-top:8px"><button class="go" id="run" disabled>引く</button></div>
     </div>
 
     <div class="bar" style="font-size:11px;color:var(--muted)">
-      選んでいる案は<strong>道の種別で色を分ける</strong>：
-      <span style="color:#c92a2a">■高速</span>
-      <span style="color:#e8590c">■有料</span>
-      <span style="color:#2b8a3e">■下道</span>
-      <br>⚠️ 種別は Valhalla が区間ごとに返す値。道路名から推測していない。
+      <label>選んでいる案の色分け
+        <select id="paint">
+          <option value="class" selected>道路クラス</option>
+          <option value="kind">高速／有料／下道</option>
+        </select>
+      </label>
+      <div id="legend" style="margin-top:5px"></div>
+      <p class="hint">⚠️ クラスは <code>/trace_attributes</code>、高速／有料は
+        maneuver の値。<strong>どちらも道路名から推測していない。</strong></p>
+    </div>
+    <div class="box">
+      <div class="bar"><h2 style="margin:0">走らせて案内を聞く</h2></div>
+      <p class="hint">選んでいる案の上を走らせて、<strong>そのとき出る案内</strong>を並べる。
+        文言はアプリの読み上げ規則で組み立てている（Valhalla の読み上げ文は
+        日本語が壊れているので使っていない）。</p>
+      <div class="row">
+        <label>遠め
+          <select id="annFar">
+            <option value="0">なし</option><option value="300">300m</option>
+            <option value="500">500m</option><option value="700" selected>700m</option>
+            <option value="1000">1km</option><option value="1500">1.5km</option>
+            <option value="2000">2km</option>
+          </select></label>
+        <label>近め
+          <select id="annNear">
+            <option value="0">なし</option><option value="100">100m</option>
+            <option value="150">150m</option><option value="200">200m</option>
+            <option value="300" selected>300m</option><option value="500">500m</option>
+          </select></label>
+        <label>直前
+          <select id="annImminent">
+            <option value="0">なし</option><option value="30">30m</option>
+            <option value="50">50m</option><option value="60" selected>60m</option>
+            <option value="80">80m</option><option value="100">100m</option>
+          </select></label>
+        <label>長い直線
+          <select id="annLong">
+            <option value="0" selected>刻まない</option><option value="1000">1kmごと</option>
+            <option value="2000">2kmごと</option><option value="3000">3kmごと</option>
+            <option value="5000">5kmごと</option>
+          </select></label>
+      </div>
+      <div class="row" style="margin-top:6px">
+        <button class="go" id="driveRun" disabled>走らせる</button>
+        <label>速さ
+          <select id="driveSpeed">
+            <option value="1">等速</option><option value="8" selected>8倍</option>
+            <option value="30">30倍</option><option value="0">一気に</option>
+          </select></label>
+        <span id="driveAt" class="hint" style="margin:0"></span>
+      </div>
+      <div class="row" style="margin-top:6px">
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="driveVoice"> 声を出す</label>
+        <select id="driveVoiceName" style="max-width:190px"></select>
+        <button id="driveTry" type="button">試聴</button>
+      </div>
+      <p class="hint">⚠️ <strong>声は等速か8倍で聞くこと。</strong> それより速いと
+        次の案内が先に来て、前の案内を途中で切ってしまう
+        （アプリも同じ振る舞い＝<strong>古い案内は捨てる</strong>。渋滞して数十秒遅れて
+        喋るより安全なため）。</p>
+      <div id="driveNow" class="now"></div>
+      <div id="driveLog"></div>
     </div>
     <div id="variants"></div>
     <div id="steps"></div>
@@ -273,6 +361,7 @@ function initMap() {
 }
 window.initMap = initMap;
 
+
 function addPoint(p) {
   if (!state.from) state.from = p;
   else if (!state.to) state.to = p;
@@ -325,6 +414,27 @@ function clearLines() {
  * ⚠️ **手で置いた経由地（青丸）と見分けられること。** どちらが自動で入ったのか
  *    分からないと、「選んでいない道が通っている」と見えてしまう
  */
+/**
+ * 折り返しの先端を地図に出す。
+ * ⚠️ **先端＝往復を強いた地点。** ここを見れば、どの道が原因か目で分かる
+ */
+function drawBacktrackMarks() {
+  const r = state.results[state.selected];
+  if (!r || r.error || !Array.isArray(r.backtracks)) return;
+  for (const b of r.backtracks) {
+    if (!Array.isArray(b.apex)) continue;
+    state.funMarks.push(new google.maps.Marker({
+      position:{ lat:b.apex[1], lng:b.apex[0] },
+      map:state.map,
+      title:`折り返し ${(b.alongGapMeters / 1000).toFixed(1)}km`,
+      icon:{ path:google.maps.SymbolPath.CIRCLE, scale:9, fillColor:"#c92a2a",
+             fillOpacity:0.9, strokeColor:"#fff", strokeWeight:2 },
+      label:{ text:"↩", color:"#fff", fontSize:"12px" },
+      zIndex:40,
+    }));
+  }
+}
+
 function drawFunMarks() {
   state.funMarks.forEach((m) => m.setMap(null));
   state.funMarks = [];
@@ -349,6 +459,21 @@ function drawFunMarks() {
 const KIND_COLORS = { expressway:"#c92a2a", toll:"#e8590c", surface:"#2b8a3e" };
 const KIND_LABELS = { expressway:"高速", toll:"有料", surface:"下道" };
 
+/* 道路クラスごとの色。⚠️ Valhalla の `edge.road_class` と鍵を揃える
+   （lib/valhallaRoute.js の ROAD_CLASS_COLORS と同じ） */
+const CLASS_COLORS = {
+  motorway:"#c92a2a", trunk:"#e8590c", primary:"#f08c00", secondary:"#fab005",
+  tertiary:"#82c91e", unclassified:"#2b8a3e", residential:"#1c7ed6",
+  service_other:"#868e96",
+};
+const CLASS_LABELS = {
+  motorway:"高速", trunk:"幹線", primary:"主要地方道", secondary:"県道",
+  tertiary:"市町村道", unclassified:"その他", residential:"生活道路",
+  service_other:"敷地内",
+};
+//: 色分けの見方。"kind"＝高速/有料/下道、"class"＝道路クラス
+let paintMode = "class";
+
 /**
  * 選んでいる案だけ、道の種別で色を分けて描く。
  *
@@ -358,24 +483,51 @@ const KIND_LABELS = { expressway:"高速", toll:"有料", surface:"下道" };
  *    道路名から推測していない。
  */
 function drawKindLines(r) {
-  if (!r.steps || !r.steps.length) return;
-  // 隣り合う同じ種別をつなげて、線の数を減らす
+  // ⚠️ **道路クラスは `classSpans`、高速/有料は `steps` から。** 出どころが違う。
+  //    クラスは /trace_attributes、種別は maneuver の highway/toll
   const runs = [];
-  for (const st of r.steps) {
-    const last = runs[runs.length - 1];
-    if (last && last.kind === st.roadKind) last.end = st.endIndex;
-    else runs.push({ kind:st.roadKind, begin:st.beginIndex, end:st.endIndex });
+  if (paintMode === "class" && Array.isArray(r.classSpans)) {
+    for (const sp of r.classSpans) {
+      runs.push({ color:CLASS_COLORS[sp.roadClass] || "#868e96",
+                  begin:sp.begin, end:sp.end });
+    }
+  } else {
+    if (!r.steps || !r.steps.length) return;
+    let last = null;
+    for (const st of r.steps) {
+      if (last && last.kind === st.roadKind) { last.end = st.endIndex; continue; }
+      last = { kind:st.roadKind, color:KIND_COLORS[st.roadKind] || KIND_COLORS.surface,
+               begin:st.beginIndex, end:st.endIndex };
+      runs.push(last);
+    }
   }
-  runs.forEach((run, i) => {
+  for (const run of runs) {
     const path = r.points.slice(run.begin, Math.max(run.end + 1, run.begin + 2))
       .map((p) => ({ lat:p[1], lng:p[0] }));
-    if (path.length < 2) return;
+    if (path.length < 2) continue;
     state.kindLines.push(new google.maps.Polyline({
-      path, map:state.map,
-      strokeColor:KIND_COLORS[run.kind] || KIND_COLORS.surface,
+      path, map:state.map, strokeColor:run.color,
       strokeOpacity:0.95, strokeWeight:6, zIndex:20,
     }));
-  });
+  }
+}
+
+/** 凡例を、いま出ている案に実際に含まれるものだけで描く */
+function renderLegend() {
+  const box = document.getElementById("legend");
+  const r = state.results[state.selected];
+  const table = paintMode === "class" ? CLASS_COLORS : KIND_COLORS;
+  const labels = paintMode === "class" ? CLASS_LABELS : KIND_LABELS;
+  // ⚠️ **出ていないクラスは凡例に出さない。** 8色を常に並べると、
+  //    どれが実際に通っているのか分からない
+  const meters = (r && !r.error)
+    ? (paintMode === "class" ? (r.classMeters || {}) : (r.kindMeters || {})) : {};
+  const rows = Object.keys(table)
+    .filter((k) => (meters[k] || 0) > 0)
+    .sort((a, b) => (meters[b] || 0) - (meters[a] || 0))
+    .map((k) => `<span style="color:${table[k]};white-space:nowrap">■${labels[k] || k}`
+      + ` ${(meters[k] / 1000).toFixed(1)}km</span>`);
+  box.innerHTML = rows.length ? rows.join("　") : "（まだ引いていません）";
 }
 
 function drawLines() {
@@ -397,6 +549,8 @@ function drawLines() {
     if (on) drawKindLines(r);
   }
   drawFunMarks();
+  drawBacktrackMarks();
+  renderLegend();
   const r = state.results[state.selected];
   if (r && r.points && r.points.length) {
     const b = new google.maps.LatLngBounds();
@@ -417,6 +571,8 @@ async function run() {
     displacement: val("displacement"),
     avoidHighways: checked("avoidHighways"),
     avoidTolls: checked("avoidTolls"),
+    // ⚠️ 目的地を対向車線側にしない（日本は左側）。国ごとの向きは Valhalla が持つ
+    arriveOnNearSide: checked("arriveOnNearSide"),
   };
   const corridorScale = Number(val("corridor")) || 1;
   const minScore = Number(val("minScore")) || undefined;
@@ -517,6 +673,11 @@ function renderPicked() {
     // ⚠️ サーバは {id, name} の組で返す（APIに日本語を混ぜないため）。表示は name
     notes.push(`選ぶ前に外した（大きく戻る）: ${escapeHtml(p.uTurnOnly.map((x) => x.name).join("・"))}`);
   }
+  if (r.retracedMeters > 0) {
+    notes.push(`⚠️ <strong style="color:var(--ng)">まだ ${(r.retracedMeters / 1000).toFixed(1)}km 往復している</strong>`
+      + `（折り返し${(r.backtracks || []).length}箇所）`);
+  }
+  if (p.ranOut) notes.push("原因を外した結果、通せる楽しい道が無くなった");
   if ((p.uTurnDropped || []).length) {
     // ⚠️ 実際に引いてみてUターンしたので外した道。選ぶ側では見えない
     notes.push(`引いてから外した（Uターンした）: ${escapeHtml(p.uTurnDropped.map((x) => x.name).join("・"))}`);
@@ -566,8 +727,20 @@ function renderVariants() {
         .filter((x) => (k[x] || 0) > 0)
         .map((x) => `<span style="color:${KIND_COLORS[x]}">${KIND_LABELS[x]}${(k[x] / 1000).toFixed(0)}km</span>`)
         .join(" ");
+      // ⚠️ **`uTurns` と往復を並べて出すこと。** 片方だけだと
+      //    「Uターン0回なのに往復している」に気づけない（実際に見落とした）
+      const back = r.retracedMeters || 0;
+      // ⚠️ 到着のための切り返し（目的地を手前側に着けるとき）は分けて出す
+      const arrival = r.arrivalUTurns || 0;
+      // ⚠️ **残った船は必ず出す。** 北海道・沖縄は船なしで行けないので、
+      //    黙って消すのではなく「避けられない航路」として見せる
+      const ferry = r.ferryMeters || 0;
       right = `<span class="num">${(r.lengthMeters / 1000).toFixed(1)}km ／ `
         + `指示${r.steps.length} ／ Uターン${r.uTurns}`
+        + (back > 0 ? ` ／ <strong style="color:var(--ng)">往復${(back / 1000).toFixed(1)}km</strong>` : "")
+        + (arrival > 0 ? ` <span style="color:var(--muted)">（うち到着時${arrival}）</span>` : "")
+        + (ferry > 0 ? ` ／ <strong style="color:var(--ng)">船${(ferry / 1000).toFixed(0)}km</strong>`
+                       + `<span style="color:var(--muted)">（避けられない航路）</span>` : "")
         + (roads ? ` ／ <strong>おすすめ${roads}本</strong>` : "")
         + (kinds ? `<br>${kinds}` : "") + `</span>`;
     }
@@ -575,8 +748,226 @@ function renderVariants() {
     el.onclick = () => {
       state.selected = v.key;
       renderVariants(); drawLines(); renderSteps(); renderPicked(); showRaw();
+      // ⚠️ 案を変えたら走り直し。前の案の案内が残っていると混乱する
+      driveReset();
     };
     box.appendChild(el);
+  }
+}
+
+/**
+ * 走らせて案内を聞く。
+ *
+ * ⚠️ **文言はサーバーで組み立てている**（`lib/navGuide.js`）。ここで作らないこと。
+ *    アプリの `NavigationEngine` と同じ規則にしてあるので、二重に持つと必ずずれる。
+ * ⚠️ **GPS は模さない。** 線の上を距離で進めるだけ。位置合わせやオフルート判定は
+ *    アプリの仕事で、ここで見たいのは**案内の中身と出る順番**。
+ */
+const drive = { timer: null, events: [], index: 0, meters: 0, marker: null, route: null };
+
+function announceSettings() {
+  const n = (id) => Number(document.getElementById(id).value) || 0;
+  return { far: n("annFar"), near: n("annNear"),
+           imminent: n("annImminent"), longStretch: n("annLong") };
+}
+
+function driveStop() {
+  if (drive.timer) { clearInterval(drive.timer); drive.timer = null; }
+  document.getElementById("driveRun").textContent = "走らせる";
+  // ⚠️ 止めたのに喋り続けない
+  stopSpeaking();
+}
+
+function driveReset() {
+  driveStop();
+  drive.events = []; drive.index = 0; drive.meters = 0; drive.route = null;
+  if (drive.marker) { drive.marker.setMap(null); drive.marker = null; }
+  document.getElementById("driveLog").innerHTML = "";
+  document.getElementById("driveAt").textContent = "";
+  const now = document.getElementById("driveNow");
+  now.className = "now quiet"; now.textContent = "「走らせる」で案内が出ます";
+  document.getElementById("driveRun").disabled = !state.results[state.selected];
+}
+
+/** サーバーに案内を組み立ててもらう */
+async function driveLoad() {
+  const r = state.results[state.selected];
+  if (!r || r.error || !r.steps) return null;
+  const res = await fetch("/api/nav/guidance", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ steps: r.steps, announce: announceSettings() }),
+  });
+  const json = await res.json();
+  return json.guidance || [];
+}
+
+async function driveToggle() {
+  if (drive.timer) { driveStop(); return; }
+  const r = state.results[state.selected];
+  if (!r || r.error) return;
+
+  // ⚠️ 走らせる前に声を読み直す（上の説明を読むこと）
+  if (document.getElementById("driveVoice").checked) refreshVoices();
+
+  if (!drive.events.length || drive.route !== state.selected) {
+    driveReset();
+    drive.route = state.selected;
+    document.getElementById("driveRun").textContent = "作っています…";
+    drive.events = await driveLoad();
+    if (!drive.events.length) {
+      document.getElementById("driveNow").textContent = "案内が作れませんでした";
+      document.getElementById("driveRun").textContent = "走らせる";
+      return;
+    }
+  }
+
+  const speed = Number(document.getElementById("driveSpeed").value);
+  if (speed === 0) {                      // 一気に出す
+    // ⚠️ **一気に出すときは喋らない。** 全部が瞬時に来るので、
+    //    最後の1つを切れ切れに聞くだけになる
+    const voiceOn = document.getElementById("driveVoice");
+    const was = voiceOn.checked; voiceOn.checked = false;
+    while (drive.index < drive.events.length) fireNext();
+    voiceOn.checked = was;
+    driveStop();
+    return;
+  }
+  document.getElementById("driveRun").textContent = "止める";
+  const metersPerTick = 40 * 1000 / 3600 * speed * 0.2;   // 40km/h を基準に
+  drive.timer = setInterval(() => {
+    drive.meters += metersPerTick;
+    while (drive.index < drive.events.length
+           && drive.events[drive.index].atMeters <= drive.meters) fireNext();
+    document.getElementById("driveAt").textContent =
+      `${(drive.meters / 1000).toFixed(1)}km / ${(r.lengthMeters / 1000).toFixed(1)}km`;
+    moveMarker(r, drive.meters);
+    if (drive.index >= drive.events.length) driveStop();
+  }, 200);
+
+  function fireNext() {
+    const e = drive.events[drive.index++];
+    drive.meters = Math.max(drive.meters, e.atMeters);
+    const now = document.getElementById("driveNow");
+    now.className = "now"; now.textContent = e.text;
+    speakGuidance(e.text);
+    const log = document.getElementById("driveLog");
+    document.querySelectorAll("#driveLog .ln.on").forEach((x) => x.classList.remove("on"));
+    const ln = document.createElement("div");
+    ln.className = `ln ${e.kind} on`;
+    ln.innerHTML = `<span class="at">${(e.atMeters / 1000).toFixed(2)}km</span>`
+      + `<span class="kd">${escapeHtml(KIND_JA[e.kind] || e.kind)}</span>`
+      + `<span>${escapeHtml(e.text)}</span>`;
+    log.appendChild(ln);
+    log.scrollTop = log.scrollHeight;
+  }
+}
+
+const KIND_JA = { far: "遠め", near: "近め", imminent: "直前",
+                  afterTurn: "曲がった直後", longStretch: "刻み" };
+
+// MARK: 声
+
+/**
+ * 読み上げ。
+ *
+ * ⚠️ **声は「聞こえかた」を確かめるためのもの。** 本番はアプリの `NavVoiceGuide`
+ *    （AVSpeechSynthesizer ＋ 風切り音対策のゲイン）が鳴らす。ここは代わりではない。
+ *
+ * ⚠️ **喋っている最中に次が来たら、前を切って新しい方を喋る**（アプリと同じ）。
+ *    アプリのコメント:「案内が渋滞して数十秒遅れて喋るより、
+ *    鮮度の低い案内は捨てる方が安全」。積むと交差点を過ぎてから喋ることになる。
+ */
+const voice = { list: [], picked: null };
+
+/**
+ * 声の一覧を読む。
+ *
+ * ⚠️ **`getVoices()` は最初 空で返る。** 非同期に読み込まれる。
+ *    ⚠️ **`voiceschanged` を待つだけでは足りない。** 既に読み込み済みの
+ *       ブラウザでは二度と発火せず、一覧が空のままになる。
+ *    ⚠️ **短い見張りでも足りない。** 実測で、読み込みまで3秒以上かかった
+ *       （150ms×20回の見張りが先に切れて0件のままだった）。
+ *    なので **使う直前にも読み直す**（`refreshVoices`）。
+ */
+function refreshVoices() {
+  const found = (window.speechSynthesis ? speechSynthesis.getVoices() : [])
+    .filter((v) => /^ja/i.test(v.lang));
+  if (!found.length) return false;
+  const same = found.length === voice.list.length
+    && found.every((v, i) => v.name === voice.list[i].name);
+  if (same) return true;
+
+  voice.list = found;
+  const sel = document.getElementById("driveVoiceName");
+  if (sel) {
+    sel.innerHTML = found
+      .map((v, i) => `<option value="${i}">${escapeHtml(v.name)}</option>`).join("");
+    sel.onchange = () => { voice.picked = voice.list[Number(sel.value)] || null; };
+  }
+  voice.picked = found[0];
+  return true;
+}
+
+function loadVoices() {
+  if (!window.speechSynthesis) return;
+  // ⚠️ **最初の `getVoices()` は0を返し、それが読み込みの合図になる。**
+  //    実測（この環境）: 1回目0件 → しばらくして180件。`voiceschanged` は発火しなかった。
+  //    なので**発火待ちと見張りの両方**を張り、揃ったら止める
+  refreshVoices();
+  speechSynthesis.onvoiceschanged = refreshVoices;
+  let tries = 0;
+  const poll = setInterval(() => {
+    if (refreshVoices() || ++tries > 30) clearInterval(poll);
+  }, 500);
+
+  // ⚠️ **見張りだけに頼らない。** 裏に回ったタブでは setInterval が絞られて
+  //    ほとんど動かない（実際に、8秒経っても一覧が空のままだった）。
+  //    触った時点でも読み直す
+  const sel = document.getElementById("driveVoiceName");
+  if (sel) { sel.onfocus = refreshVoices; sel.onmousedown = refreshVoices; }
+}
+
+function speakGuidance(text) {
+  const on = document.getElementById("driveVoice");
+  if (!on || !on.checked || !text) return;
+  // ⚠️ 使う直前に読み直す（上の説明を読むこと）
+  if (!voice.list.length) refreshVoices();
+  // ⚠️ 古い案内は捨てる（上の説明を読むこと）
+  if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  // ⚠️ **国を決め打ちしないこと。** 海外へ広げたら経路の言語に合わせる
+  u.lang = (voice.picked && voice.picked.lang) || "ja-JP";
+  if (voice.picked) u.voice = voice.picked;
+  speechSynthesis.speak(u);
+}
+
+function stopSpeaking() {
+  if (window.speechSynthesis) speechSynthesis.cancel();
+}
+
+/** 進んだ距離のところに印を置く */
+function moveMarker(r, meters) {
+  const pts = r.points;
+  if (!pts || pts.length < 2) return;
+  let sum = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const d = google.maps.geometry
+      ? google.maps.geometry.spherical.computeDistanceBetween(
+          new google.maps.LatLng(pts[i - 1][1], pts[i - 1][0]),
+          new google.maps.LatLng(pts[i][1], pts[i][0]))
+      : Math.hypot((pts[i][0] - pts[i - 1][0]) * 91000, (pts[i][1] - pts[i - 1][1]) * 111000);
+    sum += d;
+    if (sum < meters) continue;
+    const p = { lat: pts[i][1], lng: pts[i][0] };
+    if (!drive.marker) {
+      drive.marker = new google.maps.Marker({
+        map: state.map, zIndex: 90,
+        icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: "#1c7ed6",
+                fillOpacity: 1, strokeColor: "#fff", strokeWeight: 3 },
+      });
+    }
+    drive.marker.setPosition(p);
+    return;
   }
 }
 
@@ -718,6 +1109,10 @@ const escapeHtml = (s) => String(s).replace(/[&<>"]/g,
 const shorten = (s) => String(s).length > 40 ? String(s).slice(0, 40) + "…" : String(s);
 const fmtM = (m) => m >= 1000 ? (m / 1000).toFixed(1) + "km" : m + "m";
 
+document.getElementById("paint").onchange = (e) => {
+  paintMode = e.target.value;
+  drawLines();
+};
 document.getElementById("run").onclick = run;
 document.getElementById("rawKind").onchange = showRaw;
 renderPoints();
@@ -725,6 +1120,23 @@ renderPoints();
 //    「まだ引いていないのに3案並ぶ」ことがないようにする
 state.variants = [];
 renderVariants();
+
+// MARK: 「走らせる」の配線
+// ⚠️ **ここは末尾に置くこと。** `voice` などの const より前で呼ぶと
+//    「Cannot access 'voice' before initialization」で丸ごと止まる（実際に踏んだ）。
+document.getElementById("driveRun").onclick = driveToggle;
+document.getElementById("driveTry").onclick = () => {
+  refreshVoices();
+  const on = document.getElementById("driveVoice");
+  const was = on.checked; on.checked = true;
+  speakGuidance("700メートル先、甲府警察署東交差点を城東通りへ左折です");
+  on.checked = was;
+};
+for (const id of ["annFar", "annNear", "annImminent", "annLong"]) {
+  // ⚠️ 設定を変えたら作り直す。古い案内が混ざらないように
+  document.getElementById(id).onchange = () => driveReset();
+}
+loadVoices();
 </script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>
 </body>
