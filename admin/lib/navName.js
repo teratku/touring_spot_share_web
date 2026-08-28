@@ -77,6 +77,33 @@ function firstJapanese(names) {
 }
 
 /**
+ * 都道府県から、道路の呼び名を決める。
+ *
+ * ⚠️ **東京で「県道」と言ってはいけない。** 都道府県ごとに呼び方が違う。
+ *    県が分からないときは `null`（＝番号の形に直さない）。適当に「県道」と
+ *    言うくらいなら、路線名をそのまま読むほうがまし。
+ */
+function prefectureRoadWord(prefecture) {
+  if (!prefecture) return null;
+  if (prefecture === "東京都") return "都道";
+  if (prefecture === "北海道") return "道道";
+  if (prefecture === "京都府" || prefecture === "大阪府") return "府道";
+  if (/[都道府県]$/.test(prefecture)) return "県道";
+  return null;
+}
+
+/**
+ * 高速・自動車道の名前か。
+ *
+ * ⚠️ **番号の形に直してはいけないもの。** 実測でこれらが「〜線」で終わる:
+ *      首都高速3号渋谷線 / 阪神高速14号松原線 / 福岡都市高速2号太宰府線
+ *    そのまま直すと「県道3号線」になり、**まったく別の道を指す。**
+ */
+function isExpresswayName(name) {
+  return /高速|自動車道|有料道路|バイパス/.test(name || "");
+}
+
+/**
  * 読み上げる道路名（＝**曲がった先の道**の名前）を1つ選ぶ。
  *
  * ⚠️ **`begin_street_names` を先に見ること。** Valhalla では
@@ -85,21 +112,65 @@ function firstJapanese(names) {
  *    「〇〇へ左折です」の〇〇は曲がる地点の名前なので、こちらが正しい。
  *    ⚠️ 逆順にすると番号しか残らない指示が増える。実測（7区間・曲がる116件）:
  *      `street_names` だけ    69件 (59.5%)
- *      `begin` → `street`    **82件 (70.7%)**   ← アプリの Google 経由 74.3% に近い
- *    拾えるようになった例: 江戸通り / 青葉通り / 笛吹市川三郷線 /
- *                        富士河口湖芦川線 / 小金井街道 / 八王子城山線
- *    （いずれも `street_names` は ["4"] ["22"] ["36"] のような番号だけだった）
+ *      `begin` → `street`    **82件 (70.7%)**
+ *
+ * 【番号の形に直す】
+ * ⚠️ **路線名は読み上げに向かない。**「河口湖上九一色線」「主要地方道さいたま東村山線」
+ *    のような二つの地名をつないだ名前が並び、耳で追えない。道路標識に出ている
+ *    番号（「県道21号線」）のほうが、走りながら確かめられる。
+ *    実測（8区間・路線名73種）: **23%が7字以上**、最長13字。
+ *    ⚠️ ただし**短くなるとは限らない**（「原宿山野線」→「県道318号線」）。
+ *       短さではなく「標識と一致する」ことが利点。
+ *
+ * ⚠️ **国道と路線名は同居しない。** 396件の指示で1件も無かったので、
+ *    「〜線 ＋ 番号」なら都道府県道と見なしてよい。
+ * ⚠️ **高速だけは別**（`isExpresswayName` を読むこと）。
  *
  * ⚠️ **番号だけのときは名前を言わない。** 「358へ左折です」は意味が通らないし、
  *    国道か県道かも分からないので補えない（実測: 曲がる指示の12.1%）。
- *    アプリの `NavRoadNameParser.spokenRoad` と同じく、無いものは無いとして扱う。
  *
+ * 【読み上げ時間の実測（ブラウザの読み上げで実際に計った）】
+ * ⚠️ **短くなるとは限らない。番号の桁数で逆転する。**
+ *   主要地方道さいたま東村山線 3051ms → 県道40号線  1747ms  **−1304ms**
+ *   河口湖上九一色線          2504ms → 県道21号線  1848ms   **−656ms**
+ *   東京都道一七六号線        2722ms → 都道176号線 2133ms   **−589ms**
+ *   笛吹市川三郷線           1694ms → 県道36号線  2036ms    +342ms
+ *   原宿山野線              1396ms → 県道318号線 2389ms    +993ms
+ *   玉川通り                1024ms → 国道246号線 2447ms   +1423ms
+ *   ──────────────────────────────────────────
+ *   合計                  14290ms → 14935ms   **+645ms（+5%）**
+ *
+ *   3桁の番号は「さんびゃくじゅうはち」と読むので長い。**短い通称には勝てない。**
+ *   それでも番号を既定にしているのは、**道路標識と一致していて走りながら
+ *   確かめられる**ため。`style: "name"` で従来どおりの名前にも戻せる。
+ *
+ * @param {object} maneuver Valhalla の maneuver
+ * @param {object} [opts]   { prefecture, style }
+ *   `style`: `"number"`（既定・番号の形）/ `"name"`（名前をそのまま）
  * @returns {string|null}
  */
-function spokenRoadName(maneuver) {
+function spokenRoadName(maneuver, opts = {}) {
   if (!maneuver) return null;
-  return firstJapanese(maneuver.begin_street_names)
-      || firstJapanese(maneuver.street_names);
+  // ⚠️ **生の maneuver でも、名前だけの並びでも受ける。** 経路を引き直さずに
+  //    呼び方を切り替えられるようにするため（`steps[].roadNames` を渡す）
+  const raw = Array.isArray(maneuver) ? maneuver
+    : [...(maneuver.begin_street_names || []), ...(maneuver.street_names || [])];
+  const names = raw.filter((n) => typeof n === "string" && n.trim()).map((n) => n.trim());
+  if (opts.style === "name") return firstJapanese(names);
+
+  // ⚠️ 高速は番号に直さない。そのままの名前で読む
+  if (!names.some(isExpresswayName)) {
+    for (const name of names) {
+      const kokudo = name.match(/(?:一般)?国道\s*(\d+)\s*号/);
+      if (kokudo) return `国道${kokudo[1]}号線`;
+    }
+    const word = prefectureRoadWord(opts.prefecture);
+    const ref = names.find((n) => /^\d+$/.test(n));
+    const routeName = names.find((n) => hasJapanese(n) && /線$/.test(n));
+    if (word && ref && routeName) return `${word}${ref}号線`;
+  }
+
+  return firstJapanese(names);
 }
 
 /**
@@ -162,5 +233,6 @@ function spokenIntersection(name) {
 
 module.exports = {
   spokenRoadName, intersectionName, spokenIntersection, firstJapanese, stripRomajiParens,
+  prefectureRoadWord, isExpresswayName,
   hasJapanese, NOT_A_PLACE, MAX_NAME_LENGTH,
 };

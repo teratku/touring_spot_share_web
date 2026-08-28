@@ -1,0 +1,406 @@
+{
+  "prefecture": "宮崎県",
+  "romaji": "miyazaki",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:52:54.185Z",
+  "totalRows": 52849,
+  "candidates": [
+    {
+      "id": "jartic-45000000000000000000000000022177",
+      "kind": "noMotorcycle",
+      "name": "一ツ葉有料道路",
+      "prefecture": "宮崎県",
+      "points": [
+        [
+          131.418250756695,
+          31.8716682243467
+        ],
+        [
+          131.417284860058,
+          31.8710292168923
+        ],
+        [
+          131.415351055389,
+          31.8700351865266
+        ],
+        [
+          131.4148291095,
+          31.8697731780154
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 51,
+      "maxCc": 125,
+      "jartic": {
+        "kindCode": "4",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "小二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1981/09/16"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 11,
+      "chainPolyline": "}|oaEasbaX~B`EzFhN",
+      "sourceRoad": "一ツ葉有料道路",
+      "matchedName": "一ツ葉有料道路",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "小二輪",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 1981/09/16"
+    },
+    {
+      "id": "jartic-45000000000000000000000000022341",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "宮崎県",
+      "points": [
+        [
+          131.663239285529,
+          32.5833556662273
+        ],
+        [
+          131.662898302122,
+          32.5833776512077
+        ],
+        [
+          131.662100339879,
+          32.58346061402
+        ],
+        [
+          131.661931347801,
+          32.5834806059905
+        ],
+        [
+          131.661853351609,
+          32.5834856025602
+        ],
+        [
+          131.661734357686,
+          32.5834855978231
+        ],
+        [
+          131.661217385237,
+          32.5834525793845
+        ],
+        [
+          131.660667414929,
+          32.5834055605316
+        ],
+        [
+          131.660500424203,
+          32.5833835553055
+        ],
+        [
+          131.659695480017,
+          32.5832355307486
+        ],
+        [
+          131.658867548086,
+          32.5830775036236
+        ],
+        [
+          131.658359590184,
+          32.5829744873327
+        ],
+        [
+          131.657811635884,
+          32.5828584700375
+        ],
+        [
+          131.657648650462,
+          32.5827974665804
+        ],
+        [
+          131.656711738645,
+          32.5823384534929
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "4",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2000/09/07"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "_}zeEgnrbXYtGTlGfBxOfBzE",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 2000/09/07"
+    },
+    {
+      "id": "jartic-45000000000000000000000000030146",
+      "kind": "noMotorcycle",
+      "name": "延岡インター線",
+      "prefecture": "宮崎県",
+      "points": [
+        [
+          131.644457649263,
+          32.5835268057759
+        ],
+        [
+          131.643546748951,
+          32.5830467882619
+        ],
+        [
+          131.642843829895,
+          32.5825847804993
+        ],
+        [
+          131.642393882204,
+          32.5822767763434
+        ],
+        [
+          131.641985923672,
+          32.5821297644276
+        ],
+        [
+          131.640675050846,
+          32.5817907179875
+        ],
+        [
+          131.637827311789,
+          32.5813905965431
+        ],
+        [
+          131.637244364242,
+          32.5813295704194
+        ],
+        [
+          131.635330528966,
+          32.5812984740775
+        ],
+        [
+          131.633913655545,
+          32.5813463872078
+        ],
+        [
+          131.633486695708,
+          32.5813233626681
+        ],
+        [
+          131.633244719555,
+          32.5812823504319
+        ],
+        [
+          131.632852761127,
+          32.5811373352362
+        ],
+        [
+          131.632561793318,
+          32.5809903261767
+        ],
+        [
+          131.632383815587,
+          32.5808293247625
+        ],
+        [
+          131.632141846624,
+          32.5805843242326
+        ],
+        [
+          131.63189787783,
+          32.5803323238088
+        ],
+        [
+          131.631613917955,
+          32.5799233297711
+        ],
+        [
+          131.631302960562,
+          32.579496334705
+        ],
+        [
+          131.631158980099,
+          32.5792983368716
+        ],
+        [
+          131.630992000231,
+          32.5791373353748
+        ],
+        [
+          131.63053105202,
+          32.5787873255202
+        ],
+        [
+          131.63021408598,
+          32.5785843163654
+        ],
+        [
+          131.629401179971,
+          32.5781572972613
+        ],
+        [
+          131.628714261009,
+          32.5778652810907
+        ],
+        [
+          131.627931353595,
+          32.5775432627992
+        ],
+        [
+          131.627081450159,
+          32.5772592377663
+        ],
+        [
+          131.626687496499,
+          32.5771122281202
+        ],
+        [
+          131.625462642912,
+          32.5766462008786
+        ]
+      ],
+      "note": "通行禁止 / 対象車両1：[その他：自動二輪車の二人乗り、２０歳未満又は自動二輪免許３年未満の運転者]",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 125,
+      "jartic": {
+        "kindCode": "4",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付",
+          "小二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2005/03/10"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 4,
+      "chainPolyline": "a~zeE{xnbX~AtDxCfF`BtIzAnTCxSLdCx@fCbCbClErCnC|DrA`DzBdHpDlN",
+      "sourceRoad": "延岡インター線",
+      "matchedName": "延岡インター線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付・小二輪",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 2005/03/10"
+    },
+    {
+      "id": "jartic-45000000000000000000000000030147",
+      "kind": "noMotorcycle",
+      "name": "延岡インター線",
+      "prefecture": "宮崎県",
+      "points": [
+        [
+          131.626948471748,
+          32.5771342420654
+        ],
+        [
+          131.627262439684,
+          32.57719025593
+        ],
+        [
+          131.628748277364,
+          32.5776093078955
+        ]
+      ],
+      "note": "通行禁止 / 対象車両1：[その他：自動二輪車の二人乗り、２０歳未満又は自動二輪免許３年未満の運転者]",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 125,
+      "jartic": {
+        "kindCode": "4",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付",
+          "小二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2005/03/10"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 6,
+      "chainPolyline": "avyeEmkkbX_BgJ",
+      "sourceRoad": "延岡インター線",
+      "matchedName": "延岡インター線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付・小二輪",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 2005/03/10"
+    },
+    {
+      "id": "jartic-45000000000000000000000000048691",
+      "kind": "noMotorcycle",
+      "name": "延岡インター線",
+      "prefecture": "宮崎県",
+      "points": [
+        [
+          131.636188473273,
+          32.5808985432659
+        ],
+        [
+          131.634850580734,
+          32.5810844605263
+        ]
+      ],
+      "note": "通行禁止 / 対象車両1：[その他：自動二輪車の二人乗り、２０歳未満又は自動二輪免許３年未満の運転者]",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 125,
+      "jartic": {
+        "kindCode": "4",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付",
+          "小二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2011/12/22"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 3,
+      "chainPolyline": "smzeEeembXc@jG",
+      "sourceRoad": "延岡インター線",
+      "matchedName": "延岡インター線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付・小二輪",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 2011/12/22"
+    }
+  ]
+}

@@ -35,6 +35,7 @@ const { buildSideVariants, selectFunRoads } = require("./lib/funRouteSelect");
 const { segmentsBetween } = require("./lib/roadRecommendIndex");
 const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
+const { spokenRoadName } = require("./lib/navName");
 const { normalized: normalizedAnnounce } = require("./lib/navGuide");
 const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
@@ -482,27 +483,38 @@ app.get("/api/restrictions/candidates/:romaji", (req, res) => {
   const { romaji } = req.params;
   const jmpsa = readCandidateFile("restriction-candidates", romaji);
   const osm = readCandidateFile("restriction-osm", romaji);
+  // ⚠️ **JARTIC は公安委員会の規制そのもの。** 曜日・時間が入っているのはここだけ
+  //    （OSM の日本データに曜日は0件・二普協の一覧にも無い）
+  const jartic = readCandidateFile("restriction-jartic", romaji);
 
-  // ⚠️ 片方しか無くても 404 にしないこと。OSM 側だけがある県（石川・新潟・大阪など）で
+  // ⚠️ 1つしか無くても 404 にしないこと。OSM 側だけがある県（石川・新潟・大阪など）で
   //    「候補が未生成です」と出て、拾えているはずの規制が見えなくなる
-  if (!jmpsa && !osm) {
+  if (!jmpsa && !osm && !jartic) {
     return res.status(404).json({
-      error: "候補が未生成です。node fetchOsmRestrictions.js --prefecture <県名>"
-           + "（または buildRestrictionCandidates.js）を実行してください。",
+      error: "候補が未生成です。node fetchJarticRestrictions.js --prefecture <県名>"
+           + "（または fetchOsmRestrictions.js / buildRestrictionCandidates.js）を実行してください。",
       candidates: [],
     });
   }
 
-  const errors = [jmpsa, osm].filter((d) => d && d.error).map((d) => d.error);
+  const errors = [jmpsa, osm, jartic].filter((d) => d && d.error).map((d) => d.error);
   res.json({
-    prefecture: (jmpsa && jmpsa.prefecture) || (osm && osm.prefecture) || "",
+    prefecture: (jartic && jartic.prefecture) || (jmpsa && jmpsa.prefecture)
+      || (osm && osm.prefecture) || "",
     romaji,
-    // OSM 由来を先に見せる。区間が道なりに繋がっていて確かめやすい
-    candidates: [...((osm && osm.candidates) || []), ...((jmpsa && jmpsa.candidates) || [])],
+    // ⚠️ **JARTIC を先頭に。** 出どころが公安委員会で、曜日・時間まで入っている。
+    //    次が OSM（区間が道なりに繋がっていて確かめやすい）、最後が二普協
+    candidates: [...((jartic && jartic.candidates) || []),
+                 ...((osm && osm.candidates) || []),
+                 ...((jmpsa && jmpsa.candidates) || [])],
     sourceUrl: jmpsa && jmpsa.sourceUrl,
     sourceFetchedAt: jmpsa && jmpsa.sourceFetchedAt,
     osmBuiltAt: osm && osm.builtAt,
     osmAttribution: osm && osm.attribution,
+    // ⚠️ **出典は必ず一緒に返すこと。** JARTIC の規約が求めている
+    jarticAttribution: jartic && jartic.attribution,
+    jarticTargetMonth: jartic && jartic.targetMonth,
+    jarticFetchedAt: jartic && jartic.fetchedAt,
     error: errors.length ? errors.join(" / ") : undefined,
   });
 });
@@ -687,7 +699,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
 app.post("/api/nav/route", async (req, res) => {
   const { from, to, vias, variant, funCount, budgetRatio, corridorScale, minScore,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          announce, guidance } = req.body || {};
+          announce, guidance, roadNameStyle } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -696,8 +708,9 @@ app.post("/api/nav/route", async (req, res) => {
   try {
     const handVias = Array.isArray(vias) ? vias.slice() : [];
     const kind = variant || (funCount > 0 ? "fun" : "normal");
+    // ⚠️ `roadNameStyle`: "number"（既定・国道◯号線／県道◯号線）or "name"（路線名のまま）
     const drawOptions = { variant: kind, displacement, avoidHighways, avoidTolls,
-                          arriveOnNearSide, withRoadClass: false };
+                          arriveOnNearSide, roadNameStyle, withRoadClass: false };
 
     let picked = { segments: [], waypoints: [] };
     let refined = null;
@@ -733,6 +746,9 @@ app.post("/api/nav/route", async (req, res) => {
       instruction: step.instruction,
       roadName: step.roadName || null,
       spokenRoad: step.spokenRoad || null,
+      // ⚠️ 呼び方を後から変えられるように、生の名前と県を渡す
+      roadNames: step.roadNames || [],
+      prefecture: step.prefecture || null,
       intersectionName: step.intersectionName || null,
       distanceMeters: step.distanceMeters,
       durationSeconds: step.durationSeconds,
@@ -791,12 +807,19 @@ app.post("/api/nav/route", async (req, res) => {
  *    だけ置く。二重に持つと必ずずれる。
  */
 app.post("/api/nav/guidance", (req, res) => {
-  const { steps, announce } = req.body || {};
+  const { steps, announce, roadNameStyle } = req.body || {};
   if (!Array.isArray(steps) || steps.length < 2) {
     return res.status(400).json({ error: "steps が要ります" });
   }
   try {
-    res.json({ guidance: simulate({ steps }, { announce }),
+    // ⚠️ **経路を引き直さずに呼び方を変えられるようにする。**
+    //    `roadNames` と `prefecture` を持ち回っているので、ここで決め直せる
+    //    （県ごとに都道／府道／道道／県道が変わるので、画面側では決められない）
+    const shaped = steps.map((step) => (step.roadNames
+      ? { ...step, spokenRoad: spokenRoadName(step.roadNames,
+            { prefecture: step.prefecture, style: roadNameStyle }) }
+      : step));
+    res.json({ guidance: simulate({ steps: shaped }, { announce }),
                announce: normalizedAnnounce(announce) });
   } catch (e) {
     res.status(500).json({ error: e.message });

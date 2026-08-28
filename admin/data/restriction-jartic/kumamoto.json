@@ -1,0 +1,114 @@
+{
+  "prefecture": "熊本県",
+  "romaji": "kumamoto",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:52:46.788Z",
+  "totalRows": 47263,
+  "candidates": [
+    {
+      "id": "jartic-43202606000084400000000000077906",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "熊本県",
+      "points": [
+        [
+          130.729234105979,
+          32.806646891312
+        ],
+        [
+          130.728836904518,
+          32.806966300695
+        ]
+      ],
+      "note": "車両の通行を禁止する道路",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両の通行を禁止する道路",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2020/08/03"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "qpfgEu`||W_AlA",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "車両の通行を禁止する道路 / 終日 / 意思決定 2020/08/03"
+    },
+    {
+      "id": "jartic-43202606000086500000000000083349",
+      "kind": "noMotorcycle",
+      "name": "熊本港線",
+      "prefecture": "熊本県",
+      "points": [
+        [
+          130.602471820175,
+          32.765104393001
+        ],
+        [
+          130.593883875593,
+          32.7644406913275
+        ],
+        [
+          130.589570381521,
+          32.7641295355925
+        ],
+        [
+          130.587415023902,
+          32.7639489605922
+        ],
+        [
+          130.585379099517,
+          32.7637878300463
+        ]
+      ],
+      "note": "車両の通行を禁止する道路",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "21:00",
+        "to": "03:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両の通行を禁止する道路",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2024/04/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 11,
+      "chainPolyline": "{l~fEmhc|WdGxiB",
+      "sourceRoad": "熊本港線",
+      "matchedName": "熊本港線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "車両の通行を禁止する道路 / 21:00〜03:00 / 意思決定 2024/04/01"
+    }
+  ]
+}

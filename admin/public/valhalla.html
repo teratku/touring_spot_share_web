@@ -275,6 +275,15 @@
       </div>
       <div class="row" style="margin-top:6px">
         <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="driveNumbered" checked> 道を番号で言う</label>
+      </div>
+      <p class="hint">⚠️ <strong>「県道21号線」と番号で言うか、「河口湖上九一色線」と
+        路線名で言うか。</strong> 番号は道路標識と一致するので走りながら確かめられる。
+        ただし<strong>読み上げ時間は短くなるとは限らない</strong>（実測: 長い路線名は
+        最大1.3秒短くなるが、3桁の番号は「さんびゃくじゅうはち」と長く、
+        短い通称には勝てない。全体では+5%）。切り替えて聞き比べること。</p>
+      <div class="row" style="margin-top:6px">
+        <label style="font-size:11px;color:var(--muted)">
           <input type="checkbox" id="driveVoice"> 声を出す</label>
         <select id="driveVoiceName" style="max-width:190px"></select>
         <button id="driveTry" type="button">試聴</button>
@@ -793,9 +802,13 @@ function driveReset() {
 async function driveLoad() {
   const r = state.results[state.selected];
   if (!r || r.error || !r.steps) return null;
+
   const res = await fetch("/api/nav/guidance", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ steps: r.steps, announce: announceSettings() }),
+    // ⚠️ **道の呼び方はサーバーが決める**（県ごとに都道／府道／道道／県道が変わる）。
+    //    画面は「番号にするか」だけを渡す
+    body: JSON.stringify({ steps: r.steps, announce: announceSettings(),
+      roadNameStyle: document.getElementById("driveNumbered").checked ? "number" : "name" }),
   });
   const json = await res.json();
   return json.guidance || [];
@@ -1136,6 +1149,7 @@ for (const id of ["annFar", "annNear", "annImminent", "annLong"]) {
   // ⚠️ 設定を変えたら作り直す。古い案内が混ざらないように
   document.getElementById(id).onchange = () => driveReset();
 }
+document.getElementById("driveNumbered").onchange = () => driveReset();
 loadVoices();
 </script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>

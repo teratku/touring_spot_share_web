@@ -334,6 +334,53 @@ const ROAD_CLASS_COLORS = {
  *    ⚠️ **速い方を先に試すこと。** `edge_walk` 17ms に対し
  *    `walk_or_snap` は137ms（地図合わせをやり直すぶん重い）。
  */
+/**
+ * 経路の線を、**都道府県ごと**の区間に割る。
+ *
+ * 【なぜ要るか】
+ * 「県道36号線」と読み上げるため。⚠️ **東京で「県道」と言ってはいけない**（都道）。
+ *   東京都 → 都道 ／ 北海道 → 道道 ／ 京都府・大阪府 → 府道 ／ ほか → 県道
+ *
+ * ⚠️ **`edge.end_node.admin_index` は `node.admin_index` を頼まないと入らない。**
+ *    `edge.end_node.admin_index` と書いて頼んでも undefined が返る（実測）。
+ * ⚠️ 番号は `admins` の並びへの添字。`admins` は経路が通った順ではなく
+ *    **出てきた順**なので、必ず添字で引くこと。
+ *
+ * 【実測】東京→箱根（下道93km・1,520辺）で **30ms**。
+ *        `admins` は [{state_text:"東京都"},{state_text:"神奈川県"}] が返る。
+ */
+async function adminSpans(encodedShape, costing, baseUrl) {
+  try {
+    const res = await fetch(`${baseUrl || BASE}/trace_attributes`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        encoded_polyline: encodedShape,
+        costing,
+        shape_match: "walk_or_snap",
+        filters: {
+          attributes: ["node.admin_index", "admin.state_text",
+                       "edge.begin_shape_index", "edge.end_shape_index"],
+          action: "include",
+        },
+      }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    const json = await res.json();
+    if (!json || !Array.isArray(json.edges) || !Array.isArray(json.admins)) return null;
+    const spans = [];
+    for (const e of json.edges) {
+      const state = (json.admins[(e.end_node || {}).admin_index] || {}).state_text || null;
+      const last = spans[spans.length - 1];
+      if (last && last.state === state) { last.end = e.end_shape_index; continue; }
+      spans.push({ state, begin: e.begin_shape_index, end: e.end_shape_index });
+    }
+    return spans;
+  } catch (e) {
+    return null;          // 県が分からないだけ。経路は返す
+  }
+}
+
 async function roadClassSpans(encodedShape, costing, baseUrl) {
   const ask = async (shapeMatch) => {
     const res = await fetch(`${baseUrl || BASE}/trace_attributes`, {
@@ -610,9 +657,15 @@ async function routeWithValhalla(from, to, opts = {}) {
         instruction: m.instruction || "",
         // ⚠️ **表示用。** 番号もローマ字も全部つなげてある。読み上げには使わない
         roadName: (m.street_names || []).join("／"),
-        // ⚠️ **読み上げ用は別。** 漢字かなを含むものを1つだけ選ぶ
-        //    （`lib/navName.js`。番号だけ・ローマ字は言わない）
-        spokenRoad: spokenRoadName(m),
+        // ⚠️ **読み上げ名を後から決め直すために持ち回る。**
+        //    `roadName` では足りない（`begin_street_names` が落ちる）
+        roadNames: [...new Set([...(m.begin_street_names || []),
+                                ...(m.street_names || [])])],
+        // ⚠️ **読み上げ用は別。** 番号の形（「県道21号線」）に直すこともある。
+        //    ⚠️ **県が分かってからでないと決められない**ので、下の admin の後で入れる
+        spokenRoad: null,
+        // 生の名前。読み上げ名を決め直すために持ち回る
+        _maneuver: m,
         // ⚠️ 交差点名は `sign` に入らない。読み上げ文の中から取り出している
         intersectionName: intersectionName(m),
         // ⚠️ **曲がりくねった道で「直進します」と言わないための印。**
@@ -633,6 +686,24 @@ async function routeWithValhalla(from, to, opts = {}) {
 
   // ⚠️ 区間が複数あるときは先頭だけ。色分けは目で見るためのものなので、
   //    全部を繋ぐ手間に見合わない（経由地を through にしているので通常1区間）
+  // ⚠️ **読み上げに要る**（「県道36号線」の「県道」）。切るときは
+  //    `withAdmins: false` を渡すこと。実測30msなので既定では取る
+  const admins = opts.withAdmins === false ? null
+    : await adminSpans(trip.legs[0].shape, costing, opts.baseUrl);
+  if (admins) {
+    for (const step of steps) {
+      const span = admins.find((a) => step.beginIndex >= a.begin && step.beginIndex <= a.end)
+        || admins.find((a) => step.beginIndex <= a.end);
+      step.prefecture = span ? span.state : null;
+    }
+  }
+  // ⚠️ **県が決まってから読み上げ名を決める**（「県道」か「都道」かが変わる）
+  for (const step of steps) {
+    step.spokenRoad = spokenRoadName(step._maneuver,
+      { prefecture: step.prefecture, style: opts.roadNameStyle });
+    delete step._maneuver;
+  }
+
   let classSpans = opts.withRoadClass === false ? null
     : await roadClassSpans(trip.legs[0].shape, costing, opts.baseUrl);
   // ⚠️ **番号を線の範囲に収めること。** `/trace_attributes` は最後の辺の
@@ -692,5 +763,6 @@ async function routeWithValhalla(from, to, opts = {}) {
 
 module.exports = { routeWithValhalla, decode6, MANEUVER, VARIANTS, DISPLACEMENTS,
   ROAD_CLASS_TIERS, ROAD_CLASS_COLORS, HIGHWAY_LADDER, MAX_SIDE_DETOUR_METERS,
+  adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
   roadClassSpans, BASE };

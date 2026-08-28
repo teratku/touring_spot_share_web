@@ -1,0 +1,56 @@
+{
+  "prefecture": "福島県",
+  "romaji": "fukushima",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:49:06.867Z",
+  "totalRows": 71018,
+  "candidates": [
+    {
+      "id": "jartic-07202606000401300000000021100027",
+      "kind": "noMotorcycle",
+      "name": "矢吹大橋",
+      "prefecture": "福島県",
+      "points": [
+        [
+          140.3253431,
+          37.1974297
+        ],
+        [
+          140.3244191,
+          37.1978652
+        ]
+      ],
+      "note": "車両通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両通行禁止",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2014/07/24"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 15,
+      "chainPolyline": "}b`bFkhnwYwAvD",
+      "sourceRoad": "矢吹大橋",
+      "matchedName": "矢吹大橋",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "車両通行禁止 / 終日 / 意思決定 2014/07/24"
+    }
+  ]
+}

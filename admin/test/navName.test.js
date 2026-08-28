@@ -5,7 +5,14 @@ const fs = require("fs");
 const path = require("path");
 const {
   spokenRoadName, intersectionName, spokenIntersection, hasJapanese, stripRomajiParens,
+  prefectureRoadWord, isExpresswayName,
 } = require("../lib/navName");
+
+/** 実際に生成した経路（県つき）。番号の形を確かめるのに使う */
+const ROUTES_FIX = path.join(__dirname, "fixtures-nav-routes.json");
+const routes = fs.existsSync(ROUTES_FIX)
+  ? JSON.parse(fs.readFileSync(ROUTES_FIX, "utf8")) : null;
+const allSteps = () => Object.values(routes || {}).flatMap((r) => r.steps);
 
 /**
  * Valhalla の maneuver から、読み上げに使う名前を取り出すところ。
@@ -193,4 +200,122 @@ test("材料にローマ字混じりの名前が入っている", (t) => {
     .filter((n) => typeof n === "string" && hasJapanese(n) && /[（(]/.test(n));
   assert.ok(mixed.length >= 1,
     "材料に括弧つきの名前が無い。ローマ字の除けを確かめられていない");
+});
+
+// MARK: 番号の形（国道◯号線・県道◯号線）
+
+test("路線名を番号の形に直す", (t) => {
+  if (!routes) return t.skip("材料が無い環境");
+  // ⚠️ **これが今回の要。**「河口湖上九一色線」のような二つの地名をつないだ名前は
+  //    耳で追えない。道路標識に出ている番号なら、走りながら確かめられる
+  assert.strictEqual(
+    spokenRoadName(["河口湖上九一色線", "21"], { prefecture: "山梨県" }),
+    "県道21号線");
+  assert.strictEqual(
+    spokenRoadName(["主要地方道さいたま東村山線", "40"], { prefecture: "埼玉県" }),
+    "県道40号線");
+  // 実際の経路でも出ていること
+  const numbered = allSteps().filter((s) => /号線$/.test(s.spokenRoad || ""));
+  assert.ok(numbered.length >= 20,
+    `番号の形が ${numbered.length} 件しか出ていない（実測59件）`);
+});
+
+test("県ごとに都道・府道・道道・県道を言い分ける", () => {
+  // ⚠️ **東京で「県道」と言ってはいけない。** 実測の材料に4種類とも入っている
+  assert.strictEqual(prefectureRoadWord("東京都"), "都道");
+  assert.strictEqual(prefectureRoadWord("北海道"), "道道");
+  assert.strictEqual(prefectureRoadWord("大阪府"), "府道");
+  assert.strictEqual(prefectureRoadWord("京都府"), "府道");
+  assert.strictEqual(prefectureRoadWord("神奈川県"), "県道");
+  // 県が分からないときは直さない（適当に「県道」と言わない）
+  assert.strictEqual(prefectureRoadWord(null), null);
+  assert.strictEqual(spokenRoadName(["河口湖上九一色線", "21"], {}), "河口湖上九一色線");
+});
+
+test("材料に4種類とも入っている", (t) => {
+  if (!routes) return t.skip("材料が無い環境");
+  // ⚠️ 上のテストが空振りしないこと
+  const words = new Set(allSteps().map((s) => (s.spokenRoad || "")
+    .match(/^(国道|都道|府道|道道|県道)/)).filter(Boolean).map((m) => m[1]));
+  for (const word of ["国道", "都道", "府道", "道道", "県道"]) {
+    assert.ok(words.has(word), `材料に「${word}」が出ていない`);
+  }
+});
+
+test("国道は国道と言う", () => {
+  // ⚠️ **国道と路線名は同居しない**（396件の指示で0件）。だから
+  //    「〜線＋番号」を都道府県道と見なしてよい
+  assert.strictEqual(
+    spokenRoadName(["246", "玉川通り", "一般国道246号"], { prefecture: "東京都" }),
+    "国道246号線");
+  assert.strictEqual(
+    spokenRoadName(["4", "一般国道4号"], { prefecture: "東京都" }), "国道4号線");
+  // 県の指定が無くても国道は言える
+  assert.strictEqual(spokenRoadName(["139", "国道139号"], {}), "国道139号線");
+});
+
+test("高速を県道と言わない", () => {
+  // ⚠️ **実測で見つけた落とし穴。** 高速の名前も「〜線」で終わる。
+  //    そのまま直すと「県道3号線」になり、**まったく別の道を指す**
+  for (const [name, ref] of [["首都高速3号渋谷線", "3"],
+                             ["阪神高速14号松原線", "14"],
+                             ["福岡都市高速2号太宰府線", "2"]]) {
+    const said = spokenRoadName([name, ref], { prefecture: "東京都" });
+    assert.ok(!/号線$/.test(said) || said === name,
+      `高速を番号に直している: ${name} → ${said}`);
+  }
+  assert.ok(isExpresswayName("首都高速3号渋谷線"));
+  assert.ok(!isExpresswayName("河口湖上九一色線"));
+});
+
+test("実際の経路で、高速を番号に直していない", (t) => {
+  if (!routes) return t.skip("材料が無い環境");
+  for (const step of allSteps()) {
+    if (!/号線$/.test(step.spokenRoad || "")) continue;
+    const raw = (step.roadNames || []).join("／");
+    assert.ok(!/高速|自動車道/.test(raw),
+      `高速を「${step.spokenRoad}」と言っている（元: ${raw}）`);
+  }
+});
+
+test("路線名のままにも戻せる", (t) => {
+  if (!routes) return t.skip("材料が無い環境");
+  // ⚠️ **番号が短いとは限らない**（実測: 全体では読み上げ時間が+5%）。
+  //    聞き比べられるように、名前のままにも戻せること
+  assert.strictEqual(
+    spokenRoadName(["河口湖上九一色線", "21"], { prefecture: "山梨県", style: "name" }),
+    "河口湖上九一色線");
+  const named = allSteps()
+    .map((s) => spokenRoadName(s.roadNames || [], { prefecture: s.prefecture, style: "name" }))
+    .filter(Boolean);
+  assert.ok(named.some((n) => /線$/.test(n)),
+    "名前に戻しても路線名が出てこない（切り替えが効いていない）");
+  assert.ok(!named.some((n) => /^(国道|都道|府道|道道|県道)\d+号線$/.test(n)),
+    "名前に戻したのに番号の形が混ざっている");
+});
+
+test("通称＋番号は、番号に直さない", (t) => {
+  if (!routes) return t.skip("材料が無い環境");
+  // ⚠️ **番号だけでは国道か県道か分からない。**「〜線」という路線名の形が
+  //    都道府県道の目印になっている（国道は「国道◯号」か通称を名乗る）。
+  //    ⚠️ **実測の危ない例**: 甲府の「城東通り／411」は **国道411号**。
+  //    「〜線」の条件を外すと「県道411号線」と言ってしまう
+  assert.strictEqual(
+    spokenRoadName(["411", "城東通り"], { prefecture: "山梨県" }), "城東通り");
+  assert.strictEqual(
+    spokenRoadName(["20", "甲州街道"], { prefecture: "東京都" }), "甲州街道");
+  assert.strictEqual(
+    spokenRoadName(["明治通り", "305"], { prefecture: "東京都" }), "明治通り");
+
+  // 実際の経路でも、通称が番号に化けていないこと
+  for (const step of allSteps()) {
+    const names = step.roadNames || [];
+    const nickname = names.find((n) => /[぀-ヿ一-鿿]/.test(n) && !/線$/.test(n)
+      && !/国道\s*\d+\s*号/.test(n));
+    if (!nickname) continue;
+    if (names.some((n) => /線$/.test(n))) continue;      // 路線名も持つ道は対象外
+    if (names.some((n) => /国道\s*\d+\s*号/.test(n))) continue;
+    assert.ok(!/^(都道|府道|道道|県道)\d+号線$/.test(step.spokenRoad || ""),
+      `通称しか無いのに「${step.spokenRoad}」と言っている（元: ${names.join("／")}）`);
+  }
 });

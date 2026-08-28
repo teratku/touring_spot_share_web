@@ -196,3 +196,56 @@ test("両端が無ければ断る", async (t) => {
   const res = await ask({ from: KOFU });
   assert.ok(res.error, "目的地が無いのに引けてしまっている");
 });
+
+// MARK: 道の呼び方
+
+test("道を番号の形で言う", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 「河口湖上九一色線」のような路線名は耳で追えない。
+  //    道路標識に出ている番号なら走りながら確かめられる
+  const res = await ask({ from: KOFU, to: FUJI, displacement: "large",
+                          avoidHighways: true, guidance: false });
+  const numbered = res.route.steps.filter((s) => /号線$/.test(s.spokenRoad || ""));
+  assert.ok(numbered.length > 0, "番号の形が1件も出ていない");
+  for (const step of numbered) {
+    assert.ok(/^(国道|都道|府道|道道|県道)\d+号線$/.test(step.spokenRoad),
+      `形が違う: ${step.spokenRoad}`);
+  }
+});
+
+test("県が付いてくる（都道と県道を言い分けるため）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **東京で「県道」と言ってはいけない。** 県ごとに呼び方が変わるので、
+  //    どの県を走っているかが要る
+  const res = await ask({ from: [139.7671, 35.6812], to: [139.1069, 35.2324],
+                          displacement: "large", avoidHighways: true, guidance: false });
+  const prefectures = new Set(res.route.steps.map((s) => s.prefecture).filter(Boolean));
+  assert.ok(prefectures.has("東京都") && prefectures.has("神奈川県"),
+    `県をまたいでいるのに取れていない: ${[...prefectures].join(",")}`);
+  for (const step of res.route.steps) {
+    if (step.prefecture !== "東京都") continue;
+    assert.ok(!/^県道/.test(step.spokenRoad || ""),
+      `東京都で「${step.spokenRoad}」と言っている`);
+  }
+});
+
+test("呼び方を、引き直さずに切り替えられる", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **番号が短いとは限らない**（実測: 読み上げ時間は全体で+5%）。
+  //    聞き比べられるよう、経路を引き直さずに変えられること
+  const res = await ask({ from: KOFU, to: FUJI, displacement: "large",
+                          avoidHighways: true, guidance: false });
+  const one = async (style) => {
+    const r = await fetch(`${BASE}/api/nav/guidance`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ steps: res.route.steps, roadNameStyle: style }),
+    });
+    return (await r.json()).guidance.map((e) => e.text).join("\n");
+  };
+  const numbered = await one("number");
+  const named = await one("name");
+  assert.notStrictEqual(numbered, named, "切り替えても案内が変わらない");
+  assert.ok(/号線/.test(numbered), "番号の形が出ていない");
+  assert.ok(!/(都道|府道|道道|県道)\d+号線/.test(named),
+    "名前に戻したのに番号の形が混ざっている");
+});
