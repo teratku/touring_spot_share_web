@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARTIC 交通規制 取り込み確認</title>
+<!--
+  JARTIC の「交通規制情報」から拾った二輪の規制を、地図と一覧で見る画面。
+  ローカル専用（http://127.0.0.1:4317/jartic.html）。
+
+  【何を確かめる画面か】
+  ⚠️ ここに出ているのは**候補**であって配信物ではない。
+     区間の切れ目は交通規制の単位で決まっていて、アプリで見せたい「道」の
+     単位とは限らない。road-builder の規制タブで1件ずつ確認して登録する。
+
+  【出典】
+  ⚠️ **JARTIC の規約が出典の記載を求めている。** 画面から消さないこと。
+     加工した旨も一緒に出す。「JARTIC が作ったかのように」見せてはいけない。
+
+  ⚠️ ポリラインは触らない。サーバ側（fetchJarticRestrictions.js）で
+     [経度,緯度] の配列にしてある。ここで decode し直さない。
+-->
+<style>
+  :root {
+    --line:#e2e5e9; --muted:#6b7280; --accent:#00a8c6; --warn:#e8590c;
+    --sel:#e8590c; --ok:#2b8a3e; --bg:#fbfcfd; --ng:#c92a2a;
+  }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; font:13px/1.5 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; color:#222; }
+  header { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--line); }
+  header h1 { font-size:15px; margin:0; white-space:nowrap; }
+  .spacer { flex:1; }
+  a.back { color:var(--muted); text-decoration:none; font-size:12px; }
+  a.back:hover { color:var(--accent); }
+  .tag { font-size:11px; background:#e8f7fa; color:#0a7; border-radius:10px; padding:2px 8px; }
+
+  main { display:flex; height:calc(100% - 42px); }
+  aside { width:390px; min-width:390px; border-right:1px solid var(--line); overflow:auto; padding:10px 12px; }
+  #map { flex:1; }
+
+  .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:6px; }
+  select, input { font:12px inherit; padding:3px 6px; border:1px solid var(--line); border-radius:4px; background:#fff; }
+  label { font-size:12px; color:var(--muted); }
+  .hint { font-size:11px; color:var(--muted); margin:6px 0; line-height:1.6; }
+  .hint strong { color:#222; }
+
+  .totals { display:flex; gap:10px; flex-wrap:wrap; font-size:11px; margin:8px 0; }
+  .totals b { font-size:15px; display:block; color:#222; }
+  .totals div { background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:4px 9px; }
+
+  ul.list { list-style:none; margin:8px 0 0; padding:0; }
+  ul.list li { border:1px solid var(--line); border-radius:6px; padding:6px 8px; margin-bottom:5px; cursor:pointer; }
+  ul.list li:hover { border-color:var(--accent); }
+  ul.list li.on { border-color:var(--sel); background:#fff7f2; }
+  .nm { font-weight:600; }
+  .nm.none { color:var(--muted); font-weight:400; }
+  .meta { font-size:11px; color:var(--muted); }
+  .chip { font-size:10px; border-radius:8px; padding:1px 6px; margin-right:4px; display:inline-block; }
+  .chip.time { background:#fff4e6; color:var(--warn); }
+  .chip.day  { background:#e7f5ff; color:#1971c2; }
+  .chip.all  { background:#ffe8e8; color:var(--ng); }
+  .chip.cc   { background:#eef2f5; color:#495057; }
+
+  .attr { margin-top:12px; padding:8px; background:var(--bg); border:1px solid var(--line);
+          border-radius:6px; font-size:10px; color:var(--muted); line-height:1.7; }
+</style>
+</head>
+<body>
+<header>
+  <h1>JARTIC 交通規制 取り込み確認</h1>
+  <span class="tag" id="month">—</span>
+  <span class="spacer"></span>
+  <a class="back" href="/road-builder.html">← 道路調整ツール</a>
+</header>
+
+<main>
+  <aside>
+    <div class="row">
+      <label>県
+        <select id="pref"></select>
+      </label>
+      <label><input type="checkbox" id="onlyTime"> 時間・曜日つきだけ</label>
+    </div>
+    <div class="row">
+      <label><input type="checkbox" id="onlyEveryone"> 全員が通れないものだけ</label>
+      <label><input type="checkbox" id="onlyUnnamed"> 名前が引けなかったものだけ</label>
+    </div>
+
+    <p class="hint">
+      ⚠️ <strong>ここに出ているのは候補で、配信物ではありません。</strong>
+      区間の切れ目は交通規制の単位で、アプリで見せたい「道」の単位とは限りません。
+      road-builder の規制タブで1件ずつ地図を見て登録してください。<br>
+      ⚠️ <strong>道路名は推定です。</strong> JARTIC に道路名は入っていないので
+      （路線名0%・交差点名0%）、手元のグリッドから当てています。
+    </p>
+
+    <div class="totals" id="totals"></div>
+    <ul class="list" id="list"></ul>
+    <div class="attr" id="attr"></div>
+  </aside>
+  <div id="map"></div>
+</main>
+
+<script>
+const state = { pref: null, data: null, lines: [], selected: null, map: null };
+
+const esc = (s) => String(s == null ? "" : s)
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/** 全部の排気量に当たるか。`lib/restrictionOverlap.js` の考え方と同じ */
+const RANGES = [[0, 50], [51, 125], [126, 250], [251, 99999]];
+const applies = (c, [lo, hi]) => lo <= (c.maxCc ?? 99999) && hi >= (c.minCc ?? 0);
+const blocksEveryone = (c) => RANGES.every((r) => applies(c, r));
+const isTimed = (c) => !!(c.activeHours || (c.activeDays && c.activeDays.length) || c.includesHoliday);
+
+const DAY_NAME = ["", "月", "火", "水", "木", "金", "土", "日"];
+function ccLabel(c) {
+  const min = c.minCc ?? 0, max = c.maxCc ?? 99999;
+  if (min === 0 && max >= 99999) return "二輪すべて";
+  if (max >= 99999) return `${min}cc以上`;
+  if (min === 0) return `${max}cc以下`;
+  return `${min}〜${max}cc`;
+}
+
+function initMap() {
+  state.map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 35.68, lng: 139.76 }, zoom: 9, mapTypeControl: false, streetViewControl: false,
+  });
+  loadPrefectures();
+}
+window.initMap = initMap;
+
+async function loadPrefectures() {
+  const r = await fetch("/api/jartic/prefectures").then((x) => x.json());
+  const sel = document.getElementById("pref");
+  sel.innerHTML = r.prefectures
+    .map((p) => `<option value="${p.romaji}">${esc(p.prefecture)}（${p.count}）</option>`).join("");
+  sel.onchange = () => load(sel.value);
+  if (r.prefectures.length) load(r.prefectures[0].romaji);
+}
+
+async function load(romaji) {
+  state.pref = romaji;
+  const d = await fetch(`/api/jartic/${romaji}`).then((x) => x.json());
+  if (d.error) { document.getElementById("list").innerHTML = `<li>${esc(d.error)}</li>`; return; }
+  state.data = d;
+  document.getElementById("month").textContent = `${d.targetMonth} 分`;
+  // ⚠️ 出典は必ず出す（JARTIC の規約）
+  document.getElementById("attr").textContent = d.attribution || "";
+  render();
+}
+
+function visible() {
+  const c = state.data.candidates;
+  const t = document.getElementById("onlyTime").checked;
+  const e = document.getElementById("onlyEveryone").checked;
+  const u = document.getElementById("onlyUnnamed").checked;
+  return c.filter((x) => (!t || isTimed(x)) && (!e || blocksEveryone(x)) && (!u || !x.name));
+}
+
+function render() {
+  const d = state.data;
+  const shown = visible();
+  const timed = d.candidates.filter(isTimed).length;
+  const every = d.candidates.filter(blocksEveryone).length;
+
+  document.getElementById("totals").innerHTML = [
+    ["候補", d.candidates.length], ["表示中", shown.length],
+    ["時間・曜日つき", timed], ["全員が通れない", every],
+    ["元の行数", d.totalRows.toLocaleString()],
+  ].map(([k, v]) => `<div>${k}<b>${v}</b></div>`).join("");
+
+  document.getElementById("list").innerHTML = shown.map((c, i) => {
+    const chips = [
+      `<span class="chip cc">${esc(ccLabel(c))}</span>`,
+      blocksEveryone(c) ? `<span class="chip all">全員</span>` : "",
+      c.activeHours ? `<span class="chip time">${esc(c.activeHours.from)}〜${esc(c.activeHours.to)}</span>` : "",
+      (c.activeDays && c.activeDays.length)
+        ? `<span class="chip day">${c.activeDays.map((n) => DAY_NAME[n]).join("")}${c.includesHoliday ? "祝" : ""}</span>`
+        : (c.includesHoliday ? `<span class="chip day">祝</span>` : ""),
+    ].join("");
+    const name = c.name
+      ? `<span class="nm">${esc(c.name)}</span> <span class="meta">${c.nameDistanceMeters}m</span>`
+      : `<span class="nm none">(名前が引けず)</span>`;
+    return `<li data-i="${i}" class="${state.selected === c.id ? "on" : ""}">
+      ${name}<br>${chips}
+      <div class="meta">${esc(c.targetLabel)} ／ ${esc(c.reason)} ／ ${c.points.length}点</div></li>`;
+  }).join("") || `<li class="meta">この絞り込みに当てはまるものはありません</li>`;
+
+  for (const li of document.querySelectorAll("ul.list li[data-i]")) {
+    li.onclick = () => select(shown[Number(li.dataset.i)]);
+  }
+  draw(shown);
+}
+
+function draw(list) {
+  for (const l of state.lines) l.setMap(null);
+  state.lines = [];
+  const bounds = new google.maps.LatLngBounds();
+  for (const c of list) {
+    const path = c.points.map(([lng, lat]) => ({ lat, lng }));
+    path.forEach((p) => bounds.extend(p));
+    const on = state.selected === c.id;
+    state.lines.push(new google.maps.Polyline({
+      path, map: state.map,
+      // 時間・曜日つきは色を変える。**そこが今回いちばん見たいもの**
+      strokeColor: on ? "#e8590c" : (isTimed(c) ? "#1971c2" : "#c92a2a"),
+      strokeWeight: on ? 6 : 3, strokeOpacity: on ? 1 : 0.75, zIndex: on ? 10 : 1,
+    }));
+  }
+  if (!bounds.isEmpty() && !state.selected) state.map.fitBounds(bounds);
+}
+
+function select(c) {
+  state.selected = state.selected === c.id ? null : c.id;
+  render();
+  if (state.selected) {
+    const b = new google.maps.LatLngBounds();
+    c.points.forEach(([lng, lat]) => b.extend({ lat, lng }));
+    state.map.fitBounds(b);
+  }
+}
+
+for (const id of ["onlyTime", "onlyEveryone", "onlyUnnamed"]) {
+  document.getElementById(id).onchange = () => { state.selected = null; render(); };
+}
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>
+</body>
+</html>

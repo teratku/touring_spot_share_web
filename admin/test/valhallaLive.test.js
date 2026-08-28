@@ -691,3 +691,57 @@ test("塞いで悪くなったら、塞ぐ前を採る", async (t) => {
       + "塞いで悪くなった案を採っている（実測: 打ち切れば39km、打ち切らないと411km）");
   }
 });
+
+// MARK: 走る日時で規制の避け方が変わる
+
+test("時間限定の規制は、効いていない時刻には避けない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **これが日時を渡す理由。** 二輪の規制は時間・曜日で切られていることが多い
+  //    （実測: JARTIC の全国1,442件のうち388件が時間つき）。
+  //    日時を渡さないと時間限定も避ける対象になり、走れる道を回り込む
+  const fs = require("fs");
+  const path = require("path");
+  const file = path.join(__dirname, "..", "data", "road-restrictions", "saitama.json");
+  if (!fs.existsSync(file)) return t.skip("埼玉の規制データが無い環境");
+  const { decode } = require("../lib/polyline");
+  const saved = JSON.parse(fs.readFileSync(file, "utf8")).restrictions || [];
+  const timed = saved
+    .filter((r) => r.activeHours && r.kind === "noMotorcycle")
+    .map((r) => ({ ...r, points: decode(r.polyline) }))
+    .sort((a, b) => b.points.length - a.points.length)[0];
+  if (!timed) return t.skip("時間つきの規制が無い環境");
+
+  const p = timed.points;
+  const from = p[0];
+  const to = p[p.length - 1];
+  const draw = (at) => routeWithValhalla(from, to,
+    { variant: "normal", displacement: "large", withRoadClass: false,
+      restrictions: saved.map((r) => ({ ...r })), at });
+
+  // 22:00〜06:00 の規制。効いている時刻と、効いていない時刻で比べる
+  const hours = timed.activeHours;
+  const startHour = Number(hours.from.split(":")[0]);
+  const inside = new Date(2026, 7, 30, (startHour + 1) % 24, 0);
+  const outside = new Date(2026, 7, 30,
+    (Number(hours.to.split(":")[0]) + 3) % 24, 0);
+
+  const a = await draw(inside);
+  const b = await draw(outside);
+  assert.ok(!a.error && !b.error, `${a.error || b.error}`);
+  assert.ok(a.restrictionTries >= b.restrictionTries,
+    `効いている時刻のほうが避けていない（${a.restrictionTries} vs ${b.restrictionTries}）`);
+});
+
+test("日時を渡さなければ、時間限定でも避ける", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **走る時刻が分からないのに「いまは通れる」と決めない。**
+  //    避けすぎより見落としのほうが危ない
+  const { applicable } = require("../lib/restrictionAvoid");
+  const timed = [{
+    id: "t1", kind: "noMotorcycle", name: "試験",
+    points: [[139.0, 35.0], [139.01, 35.0]],
+    minCc: 0, maxCc: 99999, activeHours: { from: "22:00", to: "06:00" },
+  }];
+  assert.strictEqual(applicable(timed, {}).length, 1,
+    "日時を渡していないのに、時間限定の規制を対象から外している");
+});

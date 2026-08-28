@@ -202,8 +202,21 @@
         <label style="font-size:11px;color:var(--muted)">
           <input type="checkbox" id="arriveOnNearSide"> 目的地は手前の車線側</label>
       </div>
+      <div class="row">
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="useRideAt"> 走る日時を決める</label>
+        <input type="datetime-local" id="rideAt" disabled>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="rideHoliday" disabled> 祝日</label>
+      </div>
       <p class="hint">⚠️ <strong>125cc以下は高速・自動車専用道を通れない（法令）。</strong>
         チェックを外しても乗らない。</p>
+      <p class="hint">⚠️ <strong>走る日時を決めると、その時刻に効いている規制だけを避ける。</strong>
+        二輪の規制は時間・曜日で切られていることが多く（実測: JARTIC の全国1,442件のうち
+        <strong>388件が時間つき</strong>）、日時を決めないと
+        <strong>時間限定の規制も避ける対象になる</strong>（避けすぎ）。
+        決めれば「平日の昼だけ通れる道」を通す経路が出る。<br>
+        ⚠️ 祝日かどうかはこちらでは判らないので、チェックで渡す。</p>
       <p class="hint">⚠️ <strong>船（フェリー）には乗らない。</strong>
         <code>use_ferry: 0</code> は「最短」では効かない（距離だけで決めるので
         時間の重みを全部無視する）ため、船が出たらその場所を塞いで引き直す。
@@ -582,6 +595,9 @@ async function run() {
     avoidTolls: checked("avoidTolls"),
     // ⚠️ 目的地を対向車線側にしない（日本は左側）。国ごとの向きは Valhalla が持つ
     arriveOnNearSide: checked("arriveOnNearSide"),
+    // ⚠️ **渡さなければ時間の判断をしない。** 走る時刻が分からないのに
+    //    「いまは通れる」と決めてはいけない（時間限定の規制も避ける対象になる）
+    ...rideWhen(),
   };
   const corridorScale = Number(val("corridor")) || 1;
   const minScore = Number(val("minScore")) || undefined;
@@ -878,6 +894,23 @@ async function driveToggle() {
 const KIND_JA = { far: "遠め", near: "近め", imminent: "直前",
                   afterTurn: "曲がった直後", longStretch: "刻み" };
 
+/**
+ * 走る日時。
+ *
+ * ⚠️ **決めなければ渡さない。** サーバー側は `at` が無ければ時間の判断をしない
+ *    （＝時間指定つきの規制も避ける対象にする）。走る時刻が分からないのに
+ *    「いまは通れる」と決めるより、避けすぎるほうが安全。
+ * ⚠️ **祝日かどうかはこちらでは判らない。** 祝日の一覧を持っていないので、
+ *    人にチェックしてもらう（アプリも同じ作り）。
+ */
+function rideWhen() {
+  if (!document.getElementById("useRideAt").checked) return {};
+  const value = document.getElementById("rideAt").value;
+  if (!value) return {};
+  return { at: new Date(value).toISOString(),
+           isHoliday: document.getElementById("rideHoliday").checked };
+}
+
 // MARK: 声
 
 /**
@@ -1150,6 +1183,19 @@ for (const id of ["annFar", "annNear", "annImminent", "annLong"]) {
   document.getElementById(id).onchange = () => driveReset();
 }
 document.getElementById("driveNumbered").onchange = () => driveReset();
+// ⚠️ 日時は既定で「いま」を入れておく。空のまま有効にすると何も渡らない
+(() => {
+  const box = document.getElementById("rideAt");
+  const now = new Date(Date.now() - new Date().getTimezoneOffset() * 60000);
+  box.value = now.toISOString().slice(0, 16);
+  const toggle = document.getElementById("useRideAt");
+  const sync = () => {
+    box.disabled = !toggle.checked;
+    document.getElementById("rideHoliday").disabled = !toggle.checked;
+  };
+  toggle.onchange = sync;
+  sync();
+})();
 loadVoices();
 </script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>

@@ -36,6 +36,9 @@ const { segmentsBetween } = require("./lib/roadRecommendIndex");
 const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
 const { spokenRoadName } = require("./lib/navName");
+const { ROMAJI: PREF_ROMAJI } = require("./lib/prefectureRomaji");
+const { PrefectureLocator } = require("./lib/prefectureLocator");
+const restrictionLocator = new PrefectureLocator();
 const { normalized: normalizedAnnounce } = require("./lib/navGuide");
 const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
@@ -553,9 +556,40 @@ app.get("/api/restrictions/route", async (req, res) => {
  * ⚠️ Valhalla が立っていなくても、ここが 502 を返すだけで済むこと。
  *    他の画面を巻き込まないよう、起動時に繋ぎに行ったりしない。
  */
+/**
+ * その両端が掛かる県の、登録済みの通行規制を集める。
+ *
+ * ⚠️ **経路を引くときに渡すもの。** おすすめ道路の一覧づくり
+ *    （`buildRoadRecommend.js`）とは判断が違う。あちらは時刻を持たないので
+ *    「全員が・いつでも通れない」ものだけ落とす。こちらは走る時刻が分かるので、
+ *    その時刻に効いている規制を避ける。
+ * ⚠️ **JARTIC の候補は入れない。** あれは未確認の下書き。
+ *    road-builder で確認して `road-restrictions` に入ったものだけを使う。
+ */
+function restrictionsNear(from, to) {
+  const out = [];
+  const seen = new Set();
+  for (const point of [from, to]) {
+    let pref;
+    try { pref = restrictionLocator.locate(point[0], point[1]); } catch (e) { pref = null; }
+    if (!pref) continue;
+    const romaji = PREF_ROMAJI[pref];
+    if (!romaji || seen.has(romaji)) continue;
+    seen.add(romaji);
+    const file = path.join(__dirname, "data", "road-restrictions", `${romaji}.json`);
+    if (!fs.existsSync(file)) continue;
+    try {
+      const d = JSON.parse(fs.readFileSync(file, "utf8"));
+      out.push(...(d.restrictions || []));
+    } catch (e) { /* 壊れた県は飛ばす。他の県の規制は活かす */ }
+  }
+  return out;
+}
+
 app.post("/api/valhalla/route", async (req, res) => {
   const { from, to, vias, variant, costing, excludePolygons,
-          displacement, avoidHighways, avoidTolls, arriveOnNearSide } = req.body || {};
+          displacement, avoidHighways, avoidTolls, arriveOnNearSide,
+          at, isHoliday } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -565,7 +599,9 @@ app.post("/api/valhalla/route", async (req, res) => {
     //    自動で選ぶのは /api/valhalla/fun-routes の方だけにしてある
     const out = await routeWithValhalla(from, to,
       { vias, variant, costing, excludePolygons,
-        displacement, avoidHighways, avoidTolls, arriveOnNearSide });
+        displacement, avoidHighways, avoidTolls, arriveOnNearSide,
+        restrictions: restrictionsNear(from, to),
+        at: at ? new Date(at) : undefined, isHoliday: !!isHoliday });
     if (out.error) return res.status(502).json(out);
     res.json(out);
   } catch (e) {
@@ -585,12 +621,15 @@ app.post("/api/valhalla/route", async (req, res) => {
  */
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons, funCount, budgetRatio,
-          corridorScale, minScore, displacement, avoidHighways, avoidTolls, arriveOnNearSide } = req.body || {};
+          corridorScale, minScore, displacement, avoidHighways, avoidTolls, arriveOnNearSide,
+          at, isHoliday } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
   }
   try {
+    const rideRestrictions = restrictionsNear(from, to);
+    const rideAt = at ? new Date(at) : undefined;
     const near = segmentsBetween(from, to);
     // ⚠️ **まわり方は選ばせず、全部作って並べる。**
     //    同じ顔ぶれになる方角（南西へ向かう旅の「北」と「西」など）は
@@ -609,9 +648,13 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
     for (const pick of picks) {
       // ⚠️ 手で置いた経由地は残す。自動で選んだぶんの前に置く
       const handVias = Array.isArray(vias) ? vias.slice() : [];
+      // ⚠️ **二輪が通れない道を避ける。** 走る日時が分かっていれば、その時刻に
+      //    効いている規制だけを避ける（`lib/restrictionAvoid.js`）。
+      //    ⚠️ 日時を渡さなければ時間の判断をしない（＝時間指定つきも避ける対象になる）
       const routeFn = (autoVias) => routeWithValhalla(from, to,
         { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
-          displacement, avoidHighways, avoidTolls, arriveOnNearSide });
+          displacement, avoidHighways, avoidTolls, arriveOnNearSide,
+          restrictions: rideRestrictions, at: rideAt, isHoliday: !!isHoliday });
 
       // ⚠️ **実際に引いてから、余計に走らせている道を外す。**
       //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）。
@@ -643,6 +686,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       // ⚠️ **到着のための切り返しは、道のせいではない。** 分けて出さないと
       //    「Uターン1」だけが見えて、直せない不具合に見える
       r.arrivalUTurns = refined.arrivalUTurns || 0;
+      // ⚠️ **避けきれなかった規制は必ず出す。** 黙って通させない
       // ⚠️ **表示名は返さない。** 呼ぶ側が `funPick.sides` から作る
       r.funRoads = refined.picked.segments.map((s) => ({
         id: s.id, name: s.name, lengthKm: s.lengthKm,
@@ -709,8 +753,14 @@ app.post("/api/nav/route", async (req, res) => {
     const handVias = Array.isArray(vias) ? vias.slice() : [];
     const kind = variant || (funCount > 0 ? "fun" : "normal");
     // ⚠️ `roadNameStyle`: "number"（既定・国道◯号線／県道◯号線）or "name"（路線名のまま）
+    // ⚠️ **二輪が通れない道を避ける。** 引いてから掛かったところを塞ぎ直す
+    //    （`lib/restrictionAvoid.js`）。`at` を渡さなければ時間の判断をしない
+    const restrictions = restrictionsNear(from, to);
     const drawOptions = { variant: kind, displacement, avoidHighways, avoidTolls,
-                          arriveOnNearSide, roadNameStyle, withRoadClass: false };
+                          arriveOnNearSide, roadNameStyle, withRoadClass: false,
+                          restrictions,
+                          at: req.body.at ? new Date(req.body.at) : undefined,
+                          isHoliday: !!req.body.isHoliday };
 
     let picked = { segments: [], waypoints: [] };
     let refined = null;
@@ -783,6 +833,10 @@ app.post("/api/nav/route", async (req, res) => {
         arrivalUTurns: shape.arrivalUTurns || 0,
         backtracks: shape.backtracks,
         ferryMeters: route.ferryMeters,
+        // ⚠️ **避けきれなかった規制は必ず返す。** 黙って通させない
+        restrictionTries: route.restrictionTries,
+        restrictionHits: route.restrictionHits,
+        restrictionSkipped: route.restrictionSkipped,
         arrivedSide: route.arrivedSide,
         sideGaveUp: !!route.sideGaveUp,
         costing: route.costing,
@@ -823,6 +877,50 @@ app.post("/api/nav/guidance", (req, res) => {
                announce: normalizedAnnounce(announce) });
   } catch (e) {
     res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * JARTIC の取り込み結果を見る窓口。
+ *
+ * ⚠️ **これは開発者が確かめるための窓口**であって、配信用ではない。
+ *    候補はまだ road-builder の規制タブで確認していない下書き。
+ * ⚠️ **出典を必ず一緒に返すこと。** JARTIC の規約が求めている
+ *    （出典の記載＋加工した旨の明記）。画面にも出す。
+ */
+app.get("/api/jartic/prefectures", (_req, res) => {
+  const dir = path.join(__dirname, "data", "restriction-jartic");
+  if (!fs.existsSync(dir)) return res.json({ prefectures: [], note: "まだ取り込んでいません" });
+  const out = [];
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".json"))) {
+    try {
+      const d = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
+      const c = d.candidates || [];
+      out.push({
+        prefecture: d.prefecture, romaji: d.romaji,
+        targetMonth: d.targetMonth, fetchedAt: d.fetchedAt, totalRows: d.totalRows,
+        count: c.length,
+        withHours: c.filter((x) => x.activeHours).length,
+        withDays: c.filter((x) => x.activeDays || x.includesHoliday).length,
+        named: c.filter((x) => x.name).length,
+      });
+    } catch (e) { /* 壊れたファイルは飛ばす。他の県は見せる */ }
+  }
+  out.sort((a, b) => b.count - a.count);
+  res.json({ prefectures: out });
+});
+
+app.get("/api/jartic/:romaji", (req, res) => {
+  const file = path.join(__dirname, "data", "restriction-jartic", `${req.params.romaji}.json`);
+  if (!fs.existsSync(file)) {
+    return res.status(404).json({
+      error: "その県はまだ取り込んでいません。node fetchJarticRestrictions.js --prefecture <県名>",
+    });
+  }
+  try {
+    res.json(JSON.parse(fs.readFileSync(file, "utf8")));
+  } catch (e) {
+    res.status(500).json({ error: `読めません: ${e.message}` });
   }
 });
 

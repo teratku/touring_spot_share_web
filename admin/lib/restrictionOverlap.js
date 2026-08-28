@@ -148,6 +148,31 @@ function blocksEveryone(restriction) {
 }
 
 /**
+ * いつでも効いている規制か（時間・曜日・月の指定が無い）。
+ *
+ * ⚠️ **時間限定の規制をおすすめから落としてはいけない。** 落とすと、
+ *    1日23時間走れる道が丸ごと消える。実測: JARTIC の候補1,442件のうち
+ *    **全員が通れないもの235件、そのうち90件が時間・曜日つき**
+ *    （千葉の通学路規制「07:00〜08:00」など）。
+ *    いま登録済みの時間つきは48件しかないので表面化していなかったが、
+ *    JARTIC を入れると388件になる。
+ *
+ * ⚠️ **「効いている時間帯だけ避ける」のは経路を引くときの仕事**
+ *    （`excludePolygons`）。おすすめ道路の一覧は時刻を持たないので、
+ *    ここでは「いつ行っても通れない」ものだけを落とす。
+ */
+function blocksAlways(restriction) {
+  if (!restriction) return false;
+  if (restriction.activeHours) return false;
+  if (Array.isArray(restriction.activeDays) && restriction.activeDays.length
+      && restriction.activeDays.length < 7) return false;
+  if (restriction.includesHoliday) return false;
+  if (Array.isArray(restriction.activeMonths) && restriction.activeMonths.length
+      && restriction.activeMonths.length < 12) return false;
+  return true;
+}
+
+/**
  * 二輪が通れない規制と重なる、おすすめ道路の番号を返す。
  *
  * ⚠️ **おすすめ道路の区間は `points` を持っていない。** 持っているのは
@@ -166,7 +191,9 @@ function blocksEveryone(restriction) {
 function blockedSegments(saved, segments) {
   const { decode } = require("./polyline");
   const restrictions = (saved || [])
-    .filter((r) => r && BLOCKING_KINDS.has(r.kind) && r.polyline && blocksEveryone(r))
+    // ⚠️ **全員が・いつでも通れないものだけ落とす**（`blocksAlways` の説明を読むこと）
+    .filter((r) => r && BLOCKING_KINDS.has(r.kind) && r.polyline
+                     && blocksEveryone(r) && blocksAlways(r))
     .map((r) => ({ id: r.id, name: r.name, kind: r.kind, points: decode(r.polyline) }))
     .filter((r) => r.points.length >= 2);
   if (!restrictions.length) return new Map();
@@ -182,6 +209,6 @@ function blockedSegments(saved, segments) {
 
 module.exports = {
   findOverlaps, overlapRatio, resample, distanceToLine, blockedSegments,
-  blocksEveryone, appliesToRange,
+  blocksEveryone, blocksAlways, appliesToRange,
   NEAR_METERS, STEP_METERS, MIN_RATIO, BLOCKING_KINDS, DISPLACEMENT_RANGES,
 };

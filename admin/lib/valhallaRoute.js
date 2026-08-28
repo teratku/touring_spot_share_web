@@ -26,6 +26,8 @@
 
 const { spokenRoadName, intersectionName } = require("./navName");
 const { shouldSayFollowTheRoad } = require("./navGuide");
+const { applicable: applicableRestrictions, hitsOnRoute, excludePolygonsFor }
+  = require("./restrictionAvoid");
 
 const { encode } = require("./polyline");
 
@@ -301,6 +303,17 @@ const FERRY_EXCLUDE_TRIES = 3;
 const FERRY_MANEUVER = 28;
 
 /**
+ * 二輪の通行規制を避けるために、何回まで引き直すか。
+ *
+ * ⚠️ **引いてから避けること。** `exclude_polygons` は周囲の合計に上限があり
+ *    （Valhalla の `max_exclude_polygons_length`、既定10,000m）、県内の規制を
+ *    全部渡すことはできない。掛かったものだけ塞げば、実測で1件あたり
+ *    9個・1,800m に収まった（芦ノ湖スカイライン10km級）。
+ * ⚠️ **塞ぐと別の規制に掛かることがある。** 数回で打ち切り、残ったことは返す。
+ */
+const MAX_RESTRICTION_TRIES = 3;
+
+/**
  * 道路クラスの色（スライドと同じ並び）。
  * ⚠️ 鍵は Valhalla の `edge.road_class` に合わせる。勝手に増やさないこと。
  */
@@ -512,6 +525,20 @@ async function routeWithValhalla(from, to, opts = {}) {
   const ridesExpressway = (t) =>
     (t.legs || []).some((leg) => (leg.maneuvers || []).some((m) => m.highway));
 
+  /** 経路の点。規制と重なっているかを測るのに使う */
+  const pointsOfTrip = (t) => (t.legs || []).flatMap((leg) => decode6(leg.shape));
+  const perimeterOfRings = (rings) => rings.reduce((a, r) => a + perimeterOfRing(r), 0);
+  const perimeterOfRing = (ring) => {
+    let total = 0;
+    for (let i = 1; i < ring.length; i++) {
+      const dLat = (ring[i][1] - ring[i - 1][1]) * 110540;
+      const dLng = (ring[i][0] - ring[i - 1][0]) * 111320
+        * Math.cos(((ring[i][1] + ring[i - 1][1]) / 2) * Math.PI / 180);
+      total += Math.hypot(dLat, dLng);
+    }
+    return total;
+  };
+
   /** その経路が船に乗っているか */
   const ridesFerry = (t) => ferryMetersOf(t) > 0;
   const ferryMetersOf = (t) => (t.legs || []).reduce((a, leg) =>
@@ -540,6 +567,9 @@ async function routeWithValhalla(from, to, opts = {}) {
   let ferryTries = 1;
   let sideTried = false;
   let sideGaveUp = false;
+  let restrictionTries = 0;
+  let restrictionHits = [];
+  let restrictionSkipped = [];
   try {
     json = await ask();
 
@@ -600,6 +630,41 @@ async function routeWithValhalla(from, to, opts = {}) {
         }
       }
       body.costing_options[costing] = variantOptions;
+    }
+
+    // ⚠️ **二輪が通れない道を避ける。** 引いてから、掛かったところだけ塞いで引き直す
+    //    （MAX_RESTRICTION_TRIES の説明を読むこと）
+    if (json && json.trip && Array.isArray(opts.restrictions) && opts.restrictions.length) {
+      const rules = applicableRestrictions(opts.restrictions, {
+        displacement: opts.displacement, at: opts.at, isHoliday: opts.isHoliday,
+      });
+      if (rules.length) {
+        const handPolygons = body.exclude_polygons || [];
+        const boxes = [];
+        for (let i = 0; i < MAX_RESTRICTION_TRIES; i++) {
+          const hits = hitsOnRoute(pointsOfTrip(json.trip), rules);
+          restrictionHits = hits.map((h) => ({ id: h.id, name: h.name, ratio: h.ratio }));
+          if (!hits.length) break;
+          const made = excludePolygonsFor(hits, {
+            // ⚠️ 既に船で使っているぶんを差し引く。合計で上限に当たる
+            maxPerimeterMeters: 10_000 - perimeterOfRings(boxes),
+          });
+          restrictionSkipped = made.skipped.map((h) => ({ id: h.id, name: h.name }));
+          if (!made.polygons.length) break;      // これ以上は塞げない。残ったまま返す
+          boxes.push(...made.polygons);
+          body.exclude_polygons = [...handPolygons, ...boxes];
+          restrictionTries++;
+          const avoided = await ask();
+          if (!avoided || !avoided.trip) {
+            // ⚠️ 塞ぎすぎて引けない。**塞ぐ前を返す**（経路が無いより通れない道のほうがまし）
+            boxes.length = 0;
+            body.exclude_polygons = handPolygons.length ? handPolygons : undefined;
+            if (!body.exclude_polygons) delete body.exclude_polygons;
+            break;
+          }
+          json = avoided;
+        }
+      }
     }
 
     // ⚠️ **目的地を「渡らずに着ける側」にする。** 日本は左側通行なので**左側**に着く。
@@ -732,6 +797,11 @@ async function routeWithValhalla(from, to, opts = {}) {
     // 船を外すために何回引き直したか／それでも残った船の距離（避けられない航路）
     ferryTries,
     ferryMeters: Math.round(ferryMetersOf(trip)),
+    // 規制を避けるために何回引き直したか／それでも残った規制
+    restrictionTries,
+    // ⚠️ **残ったものは黙って捨てない。** 画面とアプリで警告に使う
+    restrictionHits,
+    restrictionSkipped,
     // 目的地のどちら側に着いたか（"left" / "right" / null）。
     // ⚠️ 指定しても null で返ることがある（上の注意書き参照）
     arrivedSide: ((trip.locations || [])[(trip.locations || []).length - 1] || {})

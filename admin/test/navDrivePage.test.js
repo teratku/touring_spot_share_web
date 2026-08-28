@@ -83,3 +83,44 @@ test("案内は窓口から取る", () => {
   assert.ok(code.includes("/api/nav/guidance"),
     "画面が案内の窓口を叩いていない");
 });
+
+// MARK: 走る日時
+
+test("走る日時を決める欄がある", () => {
+  for (const id of ["useRideAt", "rideAt", "rideHoliday"]) {
+    assert.ok(html.includes(`id="${id}"`), `${id} が画面に無い`);
+  }
+  // ⚠️ **祝日はこちらでは判らない。** 祝日の一覧を持っていないので人に渡してもらう
+  assert.ok(/祝日/.test(html), "祝日の指定が画面に無い");
+});
+
+test("決めていなければ日時を渡さない", () => {
+  // ⚠️ **空の `at` や「いま」を勝手に渡してはいけない。** サーバー側は `at` があると
+  //    「その時刻に効いている規制だけ避ける」に切り替わる。走る時刻が分からないのに
+  //    「いまは通れる」と決めるより、避けすぎるほうが安全。
+  //    ⚠️ 実際に走らせて確かめる。文字列を探すだけだと、別の行に当たって空振りする
+  const code = inlineScripts().join("\n");
+  const m = code.match(/function rideWhen\(\) \{[\s\S]*?\n\}/);
+  assert.ok(m, "rideWhen が無い");
+
+  const boxes = { useRideAt: { checked: false }, rideAt: { value: "" },
+                  rideHoliday: { checked: false } };
+  const run = new Function("document", `${m[0]}\nreturn rideWhen();`);
+  const doc = { getElementById: (id) => boxes[id] };
+
+  assert.deepStrictEqual(run(doc), {}, "決めていないのに日時を渡している");
+
+  boxes.useRideAt.checked = true;
+  assert.deepStrictEqual(run(doc), {}, "日時が空なのに渡している");
+
+  boxes.rideAt.value = "2026-08-29T09:00";
+  boxes.rideHoliday.checked = true;
+  const got = run(doc);
+  assert.ok(got.at, "決めたのに日時を渡していない");
+  assert.strictEqual(got.isHoliday, true, "祝日の指定が渡っていない");
+});
+
+test("日時を経路の依頼に混ぜている", () => {
+  const code = inlineScripts().join("\n");
+  assert.ok(/\.\.\.rideWhen\(\)/.test(code), "依頼に日時を混ぜていない");
+});
