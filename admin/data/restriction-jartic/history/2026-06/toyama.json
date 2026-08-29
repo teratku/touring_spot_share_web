@@ -1,0 +1,8140 @@
+{
+  "prefecture": "富山県",
+  "romaji": "toyama",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:50:34.859Z",
+  "totalRows": 57181,
+  "candidates": [
+    {
+      "id": "jartic-19010180000000501000000000000000",
+      "kind": "noMotorcycle",
+      "name": "泊停車場線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.557092511471,
+          36.956628492233
+        ],
+        [
+          137.55721241493,
+          36.956250149154
+        ],
+        [
+          137.55734809566,
+          36.956059016242
+        ],
+        [
+          137.557908295807,
+          36.955507551103
+        ],
+        [
+          137.558090664738,
+          36.95533428682
+        ],
+        [
+          137.558193921294,
+          36.955302766113
+        ],
+        [
+          137.559023816669,
+          36.95509987829
+        ],
+        [
+          137.559135207076,
+          36.955078062481
+        ],
+        [
+          137.559213895349,
+          36.955073026232
+        ],
+        [
+          137.559298583823,
+          36.955077522449
+        ],
+        [
+          137.559646392247,
+          36.955131253029
+        ],
+        [
+          137.559717834944,
+          36.955158412035
+        ],
+        [
+          137.559856880231,
+          36.955186518711
+        ],
+        [
+          137.559909022264,
+          36.955216174649
+        ],
+        [
+          137.559931514636,
+          36.955244757235
+        ],
+        [
+          137.560371339573,
+          36.955264747698
+        ],
+        [
+          137.560920766067,
+          36.955242648759
+        ],
+        [
+          137.561111034938,
+          36.955252740823
+        ],
+        [
+          137.5613026327,
+          36.955259223504
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 37,
+      "chainPolyline": "}aq`FyrqfYpBs@pCsCr@_Fa@oCCqG",
+      "sourceRoad": "泊停車場線",
+      "matchedName": "泊停車場線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19010260000005701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.454237725324,
+          36.869713969949
+        ],
+        [
+          137.455851960477,
+          36.870094587625
+        ],
+        [
+          137.456657964754,
+          36.870003587189
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2025/02/21"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ub``F_p}eYkAaIPaD",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2025/02/21"
+    },
+    {
+      "id": "jartic-19010260000005801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.461030688083,
+          36.873543311187
+        ],
+        [
+          137.461132306974,
+          36.873307851304
+        ],
+        [
+          137.461089360431,
+          36.873253075788
+        ],
+        [
+          137.461033685621,
+          36.873213651853
+        ],
+        [
+          137.460950180515,
+          36.873170962433
+        ],
+        [
+          137.460928637948,
+          36.873140105269
+        ],
+        [
+          137.461032691182,
+          36.872954474726
+        ],
+        [
+          137.461083635191,
+          36.872871890502
+        ],
+        [
+          137.461170493294,
+          36.872677741206
+        ],
+        [
+          137.461313077612,
+          36.87253662338
+        ],
+        [
+          137.461387668447,
+          36.872478041928
+        ],
+        [
+          137.461536770858,
+          36.872369530415
+        ],
+        [
+          137.461378121553,
+          36.872211946887
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1989/08/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "sz``Fmz~eYl@S`@f@zAo@|@iA^^",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 1989/08/01"
+    },
+    {
+      "id": "jartic-19010260000005901000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.459595467896,
+          36.874009342968
+        ],
+        [
+          137.459658782126,
+          36.873758208089
+        ],
+        [
+          137.459814102019,
+          36.873514235962
+        ],
+        [
+          137.4599327708,
+          36.873307212355
+        ],
+        [
+          137.460143191396,
+          36.873070493498
+        ],
+        [
+          137.460381204451,
+          36.872863174692
+        ],
+        [
+          137.460683485944,
+          36.872596669097
+        ],
+        [
+          137.460995190654,
+          36.872418725471
+        ],
+        [
+          137.461224255778,
+          36.872248375537
+        ],
+        [
+          137.46174668236,
+          36.871914904413
+        ],
+        [
+          137.462250595417,
+          36.871551918289
+        ],
+        [
+          137.462837281578,
+          36.871188813911
+        ],
+        [
+          137.463304651642,
+          36.870892331389
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2025/02/21"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "q}``Foq~eYjCaAlCuCtIkO",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2025/02/21"
+    },
+    {
+      "id": "jartic-19010260000006401000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.461935595913,
+          36.871833869688
+        ],
+        [
+          137.462274599563,
+          36.872017859258
+        ],
+        [
+          137.462706542199,
+          36.872450702792
+        ],
+        [
+          137.46307601621,
+          36.872826565658
+        ],
+        [
+          137.46311027169,
+          36.87286703336
+        ],
+        [
+          137.463131249692,
+          36.872896720002
+        ],
+        [
+          137.463150708563,
+          36.872939657786
+        ],
+        [
+          137.463156684047,
+          36.872976591291
+        ],
+        [
+          137.46316145632,
+          36.873050476206
+        ],
+        [
+          137.463169471994,
+          36.873208973899
+        ],
+        [
+          137.463174645177,
+          36.873386583708
+        ],
+        [
+          137.463180829704,
+          36.87344856951
+        ],
+        [
+          137.463191459515,
+          36.873499820171
+        ],
+        [
+          137.463204996654,
+          36.873548720507
+        ],
+        [
+          137.463230329586,
+          36.873602277549
+        ],
+        [
+          137.463303619795,
+          36.873729611717
+        ],
+        [
+          137.463378353513,
+          36.873882085171
+        ],
+        [
+          137.463385890133,
+          36.873916581573
+        ],
+        [
+          137.46337575534,
+          36.873964369445
+        ],
+        [
+          137.463361071801,
+          36.874025145671
+        ],
+        [
+          137.463353954786,
+          36.874099150361
+        ],
+        [
+          137.463351499121,
+          36.87421829256
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1989/08/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "}o``Fc`_fYe@aAoDkDwBKsAg@{@F",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 1989/08/01"
+    },
+    {
+      "id": "jartic-19010340005320501000000000000000",
+      "kind": "noMotorcycle",
+      "name": "富山朝日自転車道線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.412917882822,
+          36.853291216243
+        ],
+        [
+          137.413531856787,
+          36.853712508401
+        ],
+        [
+          137.413762324376,
+          36.85385784128
+        ],
+        [
+          137.414002465114,
+          36.853977109344
+        ],
+        [
+          137.414145162927,
+          36.854028900844
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 75,
+      "chainPolyline": "a||_FwmueYqBgDa@mA",
+      "sourceRoad": "富山朝日自転車道線",
+      "matchedName": "富山朝日自転車道線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19010420000011401000000000000000",
+      "kind": "noMotorcycle",
+      "name": "富山滑川魚津線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.352074932968,
+          36.757925045285
+        ],
+        [
+          137.352460281239,
+          36.757719871765
+        ],
+        [
+          137.352893549456,
+          36.757508854327
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1994/06/15"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 46,
+      "chainPolyline": "ahj_FmqieYrAcD",
+      "sourceRoad": "富山滑川魚津線",
+      "matchedName": "富山滑川魚津線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1994/06/15"
+    },
+    {
+      "id": "jartic-19010420005320601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.370083492632,
+          36.776859637013
+        ],
+        [
+          137.371352430791,
+          36.776266906114
+        ],
+        [
+          137.372072067691,
+          36.775920507297
+        ],
+        [
+          137.37244778048,
+          36.775533604868
+        ],
+        [
+          137.373438870702,
+          36.775071825269
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2025/02/21"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "k~m_F_bmeYzDmKlAkAzAeE",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2025/02/21"
+    },
+    {
+      "id": "jartic-19010420005320701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.373202279226,
+          36.776494325592
+        ],
+        [
+          137.372934009012,
+          36.775964346291
+        ],
+        [
+          137.372861449627,
+          36.775935273273
+        ],
+        [
+          137.372643763529,
+          36.775928711126
+        ],
+        [
+          137.372433825582,
+          36.775635554426
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2025/02/21"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "a|m_FoumeYhBt@Dx@x@h@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2025/02/21"
+    },
+    {
+      "id": "jartic-19011070000015501000000000000000",
+      "kind": "noMotorcycle",
+      "name": "上市北馬場線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.364351652989,
+          36.705762692142
+        ],
+        [
+          137.364236371866,
+          36.705282359296
+        ],
+        [
+          137.364201843769,
+          36.705085772951
+        ],
+        [
+          137.364155854306,
+          36.705046466443
+        ],
+        [
+          137.363869035802,
+          36.704668975094
+        ],
+        [
+          137.363574765838,
+          36.704221201096
+        ],
+        [
+          137.363544869196,
+          36.70412824583
+        ],
+        [
+          137.363537202616,
+          36.704018581444
+        ],
+        [
+          137.363550351031,
+          36.703951780158
+        ],
+        [
+          137.363511406101,
+          36.703777821201
+        ],
+        [
+          137.363534212152,
+          36.703548155576
+        ],
+        [
+          137.363417097214,
+          36.703267172108
+        ],
+        [
+          137.363351537776,
+          36.702926172986
+        ],
+        [
+          137.363283874831,
+          36.70219846864
+        ],
+        [
+          137.363246541252,
+          36.702085338471
+        ],
+        [
+          137.363225523431,
+          36.701962538421
+        ],
+        [
+          137.36318057296,
+          36.701187302693
+        ],
+        [
+          137.364279757096,
+          36.701112575663
+        ],
+        [
+          137.364104936878,
+          36.699623167263
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 12,
+      "chainPolyline": "_b`_Fe~keYdC\\~DbCrB@zBb@zI`@N{EhHb@",
+      "sourceRoad": "上市北馬場線",
+      "matchedName": "上市北馬場線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19011070000015601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.363260677128,
+          36.702142632006
+        ],
+        [
+          137.362779003005,
+          36.702198129717
+        ],
+        [
+          137.362627102339,
+          36.702232265264
+        ],
+        [
+          137.362404191773,
+          36.702289858681
+        ],
+        [
+          137.362236121763,
+          36.702347451735
+        ],
+        [
+          137.361418579996,
+          36.702538856694
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "kk__FkwkeYK~AcAnG",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19011070000017001000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.313019427359,
+          36.652728021828
+        ],
+        [
+          137.315038014643,
+          36.654391153618
+        ],
+        [
+          137.316050230841,
+          36.655242259211
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2001/08/03"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "qvu~Ek}aeYuN}Q",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2001/08/03"
+    },
+    {
+      "id": "jartic-19011150000029401000000000000000",
+      "kind": "noMotorcycle",
+      "name": "流杉町袋線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.267657287307,
+          36.730183772118
+        ],
+        [
+          137.268615225375,
+          36.729846715711
+        ],
+        [
+          137.269195577579,
+          36.729641012716
+        ],
+        [
+          137.269725059029,
+          36.730496069902
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1987/12/05"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 2,
+      "chainPolyline": "szd_F{aydYjBsHkDiB",
+      "sourceRoad": "流杉町袋線",
+      "matchedName": "流杉町袋線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1987/12/05"
+    },
+    {
+      "id": "jartic-19011150000043001000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.311660869718,
+          36.752456607123
+        ],
+        [
+          137.311302676622,
+          36.752554913515
+        ],
+        [
+          137.309907114721,
+          36.752426197594
+        ],
+        [
+          137.309557198517,
+          36.752399131607
+        ],
+        [
+          137.308942824654,
+          36.752470251572
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1986/10/22"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "{ei_F{taeYQfA\\zIMzB",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜09:00 / 意思決定 1986/10/22"
+    },
+    {
+      "id": "jartic-19011150000043101000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.311501181834,
+          36.754966647878
+        ],
+        [
+          137.311598804499,
+          36.754886682582
+        ],
+        [
+          137.311774918112,
+          36.754796978665
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1987/06/10"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "qui_F{saeY`@u@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1987/06/10"
+    },
+    {
+      "id": "jartic-19011150000044501000000000000000",
+      "kind": "noMotorcycle",
+      "name": "国道8号",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.2963677266,
+          36.718213165836
+        ],
+        [
+          137.296449610951,
+          36.718710993507
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1995/10/30"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 28,
+      "chainPolyline": "yob_Fiu~dYcBO",
+      "sourceRoad": "国道8号",
+      "matchedName": "国道8号",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1995/10/30"
+    },
+    {
+      "id": "jartic-19011150005321501000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.196460711078,
+          36.752009137891
+        ],
+        [
+          137.196560574774,
+          36.751922597398
+        ],
+        [
+          137.196693675836,
+          36.751774225938
+        ],
+        [
+          137.196911206949,
+          36.751596994413
+        ],
+        [
+          137.197144101115,
+          36.751473380111
+        ],
+        [
+          137.197382128864,
+          36.751306416176
+        ],
+        [
+          137.197522856719,
+          36.751193098591
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2005/03/14"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "aci_F{dkdYpAyApAyB",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2005/03/14"
+    },
+    {
+      "id": "jartic-19011150005322301000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.301941392324,
+          36.750513074959
+        ],
+        [
+          137.302070064849,
+          36.750255725532
+        ],
+        [
+          137.30218340815,
+          36.750070129108
+        ],
+        [
+          137.302333656383,
+          36.74991918679
+        ],
+        [
+          137.30294736492,
+          36.749416515928
+        ],
+        [
+          137.303465970328,
+          36.749030206328
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2005/12/14"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "uyh_Fcx_eYtBmApDcF",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2005/12/14"
+    },
+    {
+      "id": "jartic-19011150006003501000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.263037366948,
+          36.729487996241
+        ],
+        [
+          137.264239732494,
+          36.729511980106
+        ],
+        [
+          137.265045263913,
+          36.729848277863
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ivd_F_exdYCoFcAaD",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19011580000020901000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.241925843433,
+          36.686719035157
+        ],
+        [
+          137.241958172492,
+          36.687053815106
+        ],
+        [
+          137.241970865194,
+          36.687332822407
+        ],
+        [
+          137.241955047735,
+          36.687521636376
+        ],
+        [
+          137.241898408019,
+          36.687732015107
+        ],
+        [
+          137.241893191514,
+          36.687890811992
+        ],
+        [
+          137.241941649429,
+          36.68835571672
+        ],
+        [
+          137.241964995147,
+          36.688657608012
+        ],
+        [
+          137.241940316348,
+          36.688824978693
+        ],
+        [
+          137.241810889391,
+          36.689098398043
+        ],
+        [
+          137.241750594925,
+          36.689234338844
+        ],
+        [
+          137.241825238598,
+          36.689239969392
+        ],
+        [
+          137.241734899571,
+          36.689434598039
+        ],
+        [
+          137.24103238969,
+          36.690489456723
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "_k|~EaatdYcLAyBh@sEjC",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19011580000029901000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.251992642263,
+          36.703461705157
+        ],
+        [
+          137.252745238295,
+          36.703390778956
+        ],
+        [
+          137.253088461967,
+          36.703354481933
+        ],
+        [
+          137.253378435713,
+          36.703340572716
+        ],
+        [
+          137.253932754665,
+          36.703314393128
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/08/26"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ss__F}_vdY\\cK",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2022/08/26"
+    },
+    {
+      "id": "jartic-19011580000040801000000000000000",
+      "kind": "noMotorcycle",
+      "name": "しののめ通り",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.228560259498,
+          36.704496812045
+        ],
+        [
+          137.228249051146,
+          36.704560508702
+        ],
+        [
+          137.228255600621,
+          36.704773371047
+        ],
+        [
+          137.228055879608,
+          36.705697123928
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1982/12/10"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 55,
+      "chainPolyline": "cz__FomqdYK|@cFd@",
+      "sourceRoad": "しののめ通り",
+      "matchedName": "しののめ通り",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1982/12/10"
+    },
+    {
+      "id": "jartic-19011580000040901000000000000000",
+      "kind": "noMotorcycle",
+      "name": "しののめ通り",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.227621508761,
+          36.704860483855
+        ],
+        [
+          137.228248289338,
+          36.70472795386
+        ],
+        [
+          137.228250280292,
+          36.704557984679
+        ],
+        [
+          137.228563613805,
+          36.704492574615
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1982/12/10"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 41,
+      "chainPolyline": "k|__FsgqdYX}B`@?L}@",
+      "sourceRoad": "しののめ通り",
+      "matchedName": "しののめ通り",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1982/12/10"
+    },
+    {
+      "id": "jartic-19011580000042201000000000000000",
+      "kind": "noMotorcycle",
+      "name": "稲荷停車場線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.227930100034,
+          36.694726574463
+        ],
+        [
+          137.228531257303,
+          36.694702201313
+        ],
+        [
+          137.228885117028,
+          36.694705441544
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1984/09/17"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 44,
+      "chainPolyline": "a}}~EqiqdYB_E",
+      "sourceRoad": "稲荷停車場線",
+      "matchedName": "稲荷停車場線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1984/09/17"
+    },
+    {
+      "id": "jartic-19011580000043701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.20385915539,
+          36.666995193857
+        ],
+        [
+          137.203874743304,
+          36.667539162666
+        ],
+        [
+          137.203920383878,
+          36.667998497903
+        ],
+        [
+          137.203989889258,
+          36.668531725266
+        ],
+        [
+          137.204013594392,
+          36.668970789919
+        ],
+        [
+          137.204050652656,
+          36.669492581896
+        ],
+        [
+          137.204124634442,
+          36.670024185453
+        ],
+        [
+          137.204158513443,
+          36.670446934773
+        ],
+        [
+          137.204164802107,
+          36.670726399564
+        ],
+        [
+          137.204198071848,
+          36.671045329056
+        ],
+        [
+          137.204214190111,
+          36.671292617346
+        ],
+        [
+          137.204242038501,
+          36.671735195179
+        ],
+        [
+          137.204291467472,
+          36.672383062873
+        ],
+        [
+          137.204325483231,
+          36.672852855339
+        ],
+        [
+          137.204393467736,
+          36.67369357691
+        ],
+        [
+          137.20443052958,
+          36.674212754828
+        ],
+        [
+          137.204498428065,
+          36.674872962943
+        ],
+        [
+          137.2045354052,
+          36.675216674332
+        ],
+        [
+          137.204597166515,
+          36.675906534176
+        ],
+        [
+          137.204655786465,
+          36.676576568199
+        ],
+        [
+          137.204692779714,
+          36.676949929376
+        ],
+        [
+          137.204705258549,
+          36.677298605086
+        ],
+        [
+          137.204717789867,
+          36.677753624
+        ],
+        [
+          137.204778249703,
+          36.679199962681
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1994/06/15"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "wox~EcsldYe}@eDaMQ",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1994/06/15"
+    },
+    {
+      "id": "jartic-19011580000043801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.206874972272,
+          36.672033989341
+        ],
+        [
+          137.204497395245,
+          36.672077485844
+        ],
+        [
+          137.204241075808,
+          36.672056208193
+        ],
+        [
+          137.202711953217,
+          36.672067315117
+        ],
+        [
+          137.202314225749,
+          36.672053195627
+        ],
+        [
+          137.201836965633,
+          36.672064061971
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1994/06/15"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "eoy~E}emdYEl^",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1994/06/15"
+    },
+    {
+      "id": "jartic-19011580005825401000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.271211152364,
+          36.696313573341
+        ],
+        [
+          137.272066811535,
+          36.693595668158
+        ],
+        [
+          137.272298605735,
+          36.692720206474
+        ],
+        [
+          137.270387073935,
+          36.692342837368
+        ],
+        [
+          137.26949918565,
+          36.692154082696
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2008/02/29"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "}f~~EaxydYlUyEpBnP",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2008/02/29"
+    },
+    {
+      "id": "jartic-19011580005825501000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.271193245558,
+          36.696312868093
+        ],
+        [
+          137.271849954889,
+          36.694267892993
+        ],
+        [
+          137.272297148385,
+          36.692800145202
+        ],
+        [
+          137.272359308653,
+          36.692674731563
+        ],
+        [
+          137.272921492105,
+          36.690779434316
+        ],
+        [
+          137.273235907954,
+          36.689782233077
+        ],
+        [
+          137.273672833958,
+          36.688371805308
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2008/02/29"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "}f~~E}wydYrp@oN",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2008/02/29"
+    },
+    {
+      "id": "jartic-19011580005944701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.223617342619,
+          36.702924594961
+        ],
+        [
+          137.223647193816,
+          36.702426662139
+        ],
+        [
+          137.223698332552,
+          36.701808587758
+        ],
+        [
+          137.223655534941,
+          36.70159691398
+        ],
+        [
+          137.223579167934,
+          36.701393457242
+        ],
+        [
+          137.223472170623,
+          36.701085474674
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2010/03/25"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "gp__FsnpdY|EOnCl@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2010/03/25"
+    },
+    {
+      "id": "jartic-19011580005945201000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.218649613715,
+          36.70725357516
+        ],
+        [
+          137.219070349641,
+          36.708243549347
+        ],
+        [
+          137.219224599363,
+          36.708589455555
+        ],
+        [
+          137.219343396792,
+          36.708812542433
+        ],
+        [
+          137.219403474794,
+          36.708934990154
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2010/01/17"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ik`_FqoodYoIuC",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2010/01/17"
+    },
+    {
+      "id": "jartic-19011580005945401000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.221825595625,
+          36.708719044381
+        ],
+        [
+          137.221447748237,
+          36.708756979498
+        ],
+        [
+          137.220268444519,
+          36.708899546837
+        ],
+        [
+          137.219392767512,
+          36.708990599497
+        ],
+        [
+          137.218487683082,
+          36.709296416637
+        ],
+        [
+          137.217462382309,
+          36.709609217544
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2010/01/17"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ot`_FmcpdYu@fN{B`K",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2010/01/17"
+    },
+    {
+      "id": "jartic-19011580005945601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.221622357788,
+          36.706555154642
+        ],
+        [
+          137.221875736642,
+          36.706523495087
+        ],
+        [
+          137.222614018839,
+          36.70639058254
+        ],
+        [
+          137.223648845999,
+          36.706181191414
+        ],
+        [
+          137.224173573901,
+          36.706056752454
+        ],
+        [
+          137.224972545737,
+          36.705821238302
+        ],
+        [
+          137.22542762436,
+          36.705661049878
+        ],
+        [
+          137.225689984634,
+          36.705524747338
+        ],
+        [
+          137.226649401646,
+          36.705663955336
+        ],
+        [
+          137.227108952207,
+          36.70564587898
+        ],
+        [
+          137.228020870384,
+          36.705726521406
+        ],
+        [
+          137.228736957339,
+          36.705713082702
+        ],
+        [
+          137.229223119368,
+          36.705662270403
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": [
+        7
+      ],
+      "includesHoliday": true,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": "日曜・休日",
+        "decidedAt": "2010/01/17"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "_g`_FcbpdYbB}NjBoH[_EMqGLoF",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 日曜・休日 / 意思決定 2010/01/17"
+    },
+    {
+      "id": "jartic-19011580005946301000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.221132134832,
+          36.703403759508
+        ],
+        [
+          137.221255135927,
+          36.703402261242
+        ],
+        [
+          137.222225770871,
+          36.703624951842
+        ],
+        [
+          137.223006767609,
+          36.70378319778
+        ],
+        [
+          137.223544627707,
+          36.703881985016
+        ],
+        [
+          137.224214470005,
+          36.704012879292
+        ],
+        [
+          137.225050200624,
+          36.704165227481
+        ],
+        [
+          137.226017910242,
+          36.70434129602
+        ],
+        [
+          137.226170464344,
+          36.704344824715
+        ],
+        [
+          137.226297934712,
+          36.704331603279
+        ],
+        [
+          137.226496443909,
+          36.704276620018
+        ],
+        [
+          137.226894906254,
+          36.704153584229
+        ],
+        [
+          137.227142211939,
+          36.704097313502
+        ],
+        [
+          137.228148228489,
+          36.703883572027
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2010/01/17"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "gs__Fa_pdY{Dq]@w@xAqJ",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2010/01/17"
+    },
+    {
+      "id": "jartic-19011580005947101000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.217239934723,
+          36.707326098805
+        ],
+        [
+          137.217503508365,
+          36.707302104507
+        ],
+        [
+          137.21761015952,
+          36.707278176873
+        ],
+        [
+          137.218533163699,
+          36.707185945124
+        ],
+        [
+          137.219517053199,
+          36.707092417514
+        ],
+        [
+          137.220293329685,
+          36.707019252678
+        ],
+        [
+          137.221510117364,
+          36.70690091033
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2010/01/17"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "yk`_FwfodYtAuY",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2010/01/17"
+    },
+    {
+      "id": "jartic-19011580006002801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.219054824198,
+          36.655654430886
+        ],
+        [
+          137.219487245495,
+          36.655161093847
+        ],
+        [
+          137.219943331779,
+          36.654606822324
+        ],
+        [
+          137.220078025078,
+          36.654480231087
+        ],
+        [
+          137.220232104458,
+          36.654406081833
+        ],
+        [
+          137.220366965982,
+          36.654361861462
+        ],
+        [
+          137.22051962744,
+          36.654340343571
+        ],
+        [
+          137.220681144977,
+          36.654347390062
+        ],
+        [
+          137.22152291889,
+          36.65448308923
+        ],
+        [
+          137.22332818137,
+          36.654770093059
+        ],
+        [
+          137.224383402344,
+          36.654939105445
+        ],
+        [
+          137.225745584251,
+          36.655153377987
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2010/11/20"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "yhv~EarodYhFmEZwAaDu_@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2010/11/20"
+    },
+    {
+      "id": "jartic-19011580006010201000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.254400458633,
+          36.671872559828
+        ],
+        [
+          137.254043911656,
+          36.672270527904
+        ],
+        [
+          137.253744080314,
+          36.67256697669
+        ],
+        [
+          137.253683830104,
+          36.672612802418
+        ],
+        [
+          137.253401587451,
+          36.6728332651
+        ],
+        [
+          137.253059228183,
+          36.673121091441
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "eny~E_ovdYkCbCmBfC",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19011660000034201000000000000000",
+      "kind": "noMotorcycle",
+      "name": "荒屋敷月岡町線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.251040297734,
+          36.622896566427
+        ],
+        [
+          137.252131857802,
+          36.622393897976
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1989/08/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 14,
+      "chainPolyline": "c|o~E_zudYdByE",
+      "sourceRoad": "荒屋敷月岡町線",
+      "matchedName": "荒屋敷月岡町線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1989/08/01"
+    },
+    {
+      "id": "jartic-19011660000034301000000000000000",
+      "kind": "noMotorcycle",
+      "name": "富山外郭環状線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.250862539194,
+          36.623010426377
+        ],
+        [
+          137.251590150872,
+          36.624624178713
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1989/08/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 29,
+      "chainPolyline": "y|o~E{xudYaIqC",
+      "sourceRoad": "富山外郭環状線",
+      "matchedName": "富山外郭環状線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1989/08/01"
+    },
+    {
+      "id": "jartic-19011740000026001000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.198351246699,
+          36.706475934151
+        ],
+        [
+          137.197956184309,
+          36.706568773091
+        ],
+        [
+          137.197538616185,
+          36.706642781278
+        ],
+        [
+          137.196833856896,
+          36.706751467558
+        ],
+        [
+          137.195739728446,
+          36.706930629841
+        ],
+        [
+          137.19522735484,
+          36.707006996175
+        ],
+        [
+          137.194599588891,
+          36.707098978355
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "of`_FupkdY{BlV",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19011740000026101000000000000000",
+      "kind": "noMotorcycle",
+      "name": "富山八尾線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.198392418134,
+          36.706161130687
+        ],
+        [
+          137.198383595818,
+          36.7064817834
+        ],
+        [
+          137.198385378606,
+          36.707279353311
+        ],
+        [
+          137.198394506325,
+          36.707701477354
+        ],
+        [
+          137.198586048801,
+          36.709135610542
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 79,
+      "chainPolyline": "od`_F}pkdYsH?_Hg@",
+      "sourceRoad": "富山八尾線",
+      "matchedName": "富山八尾線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19011740000043901000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.166101852957,
+          36.698405575786
+        ],
+        [
+          137.166356569965,
+          36.698592758204
+        ],
+        [
+          137.166651689577,
+          36.698877451086
+        ],
+        [
+          137.166715593539,
+          36.699355363111
+        ],
+        [
+          137.166787221368,
+          36.700358680807
+        ],
+        [
+          137.166825609482,
+          36.700560551913
+        ],
+        [
+          137.166943347896,
+          36.70081397208
+        ],
+        [
+          137.167107085146,
+          36.700989076773
+        ],
+        [
+          137.167429412261,
+          36.701203382978
+        ],
+        [
+          137.167582965738,
+          36.701287825308
+        ],
+        [
+          137.167777369525,
+          36.701341355549
+        ],
+        [
+          137.167976920353,
+          36.701306386558
+        ],
+        [
+          137.168117601008,
+          36.701234288098
+        ],
+        [
+          137.16840422133,
+          36.701073598448
+        ],
+        [
+          137.168526994759,
+          36.701024120142
+        ],
+        [
+          137.168588437734,
+          36.701013845368
+        ],
+        [
+          137.168744451425,
+          36.700991132245
+        ],
+        [
+          137.16903353755,
+          36.701019965583
+        ],
+        [
+          137.169120498576,
+          36.701032310406
+        ],
+        [
+          137.169158887409,
+          36.701057092895
+        ],
+        [
+          137.169194703351,
+          36.701118825052
+        ],
+        [
+          137.169210155447,
+          36.701341333565
+        ],
+        [
+          137.169225493254,
+          36.70148967246
+        ],
+        [
+          137.169339431769,
+          36.7016295378
+        ],
+        [
+          137.169435684788,
+          36.701696315285
+        ],
+        [
+          137.16956450548,
+          36.701734433415
+        ],
+        [
+          137.169681460083,
+          36.701702257304
+        ],
+        [
+          137.169881344375,
+          36.701610508865
+        ],
+        [
+          137.169987889497,
+          36.701562741794
+        ],
+        [
+          137.170115252522,
+          36.701538946221
+        ],
+        [
+          137.170270707844,
+          36.701529388788
+        ],
+        [
+          137.170531369178,
+          36.701560382248
+        ],
+        [
+          137.170652691038,
+          36.701587775042
+        ],
+        [
+          137.17082001439,
+          36.701662930264
+        ],
+        [
+          137.170963612656,
+          36.70176539278
+        ],
+        [
+          137.17122126646,
+          36.702020515832
+        ],
+        [
+          137.171356024103,
+          36.702120725181
+        ],
+        [
+          137.171532189027,
+          36.702164787294
+        ],
+        [
+          137.171655188071,
+          36.702146938241
+        ],
+        [
+          137.172010526154,
+          36.702028864282
+        ],
+        [
+          137.172093345297,
+          36.702006240159
+        ],
+        [
+          137.17219698216,
+          36.70199307772
+        ],
+        [
+          137.172297712207,
+          36.702022903059
+        ],
+        [
+          137.172852975495,
+          36.702380565844
+        ],
+        [
+          137.17297732395,
+          36.702440129313
+        ],
+        [
+          137.173103236404,
+          36.702462742948
+        ],
+        [
+          137.17446240845,
+          36.702552151888
+        ],
+        [
+          137.174683005938,
+          36.702569981202
+        ],
+        [
+          137.175389234399,
+          36.702648607208
+        ],
+        [
+          137.175523986368,
+          36.702642649273
+        ],
+        [
+          137.175771319938,
+          36.702546020887
+        ],
+        [
+          137.175873387601,
+          36.702512668262
+        ],
+        [
+          137.176005230799,
+          36.702518605982
+        ],
+        [
+          137.176074848334,
+          36.702542482571
+        ],
+        [
+          137.176125106106,
+          36.702586547766
+        ],
+        [
+          137.176271742574,
+          36.702749925429
+        ],
+        [
+          137.176366550548,
+          36.702836884521
+        ],
+        [
+          137.176482060539,
+          36.702895363592
+        ],
+        [
+          137.176596001338,
+          36.702934646906
+        ],
+        [
+          137.177060938143,
+          36.703053837322
+        ],
+        [
+          137.177192783007,
+          36.70306455014
+        ],
+        [
+          137.177303805593,
+          36.703039486632
+        ],
+        [
+          137.177392661396,
+          36.702969184273
+        ],
+        [
+          137.177445920267,
+          36.702857068925
+        ],
+        [
+          137.177478478632,
+          36.702780823596
+        ],
+        [
+          137.177522904728,
+          36.70273431711
+        ],
+        [
+          137.177583557104,
+          36.702672308306
+        ],
+        [
+          137.177734538137,
+          36.702671032673
+        ],
+        [
+          137.177897500437,
+          36.702709228724
+        ],
+        [
+          137.178086995028,
+          36.702793834331
+        ],
+        [
+          137.178192099721,
+          36.702866551861
+        ],
+        [
+          137.178224684122,
+          36.702969106414
+        ],
+        [
+          137.178192154724,
+          36.703234966543
+        ],
+        [
+          137.178180317521,
+          36.703412596189
+        ],
+        [
+          137.178220398056,
+          36.703496044356
+        ],
+        [
+          137.178295845182,
+          36.703573541073
+        ],
+        [
+          137.178392111082,
+          36.703658155251
+        ],
+        [
+          137.178550608249,
+          36.703757092395
+        ],
+        [
+          137.178812627436,
+          36.703813121215
+        ],
+        [
+          137.178968090437,
+          36.703829777639
+        ],
+        [
+          137.179076207024,
+          36.703826251701
+        ],
+        [
+          137.179154657956,
+          36.703784517477
+        ],
+        [
+          137.179464071948,
+          36.703473296807
+        ],
+        [
+          137.179549905775,
+          36.7034112843
+        ],
+        [
+          137.179641787045,
+          36.703371891444
+        ],
+        [
+          137.179789853177,
+          36.703333754032
+        ],
+        [
+          137.179914201775,
+          36.703354017487
+        ],
+        [
+          137.17999266761,
+          36.703404025889
+        ],
+        [
+          137.180001577205,
+          36.703796321608
+        ],
+        [
+          137.180019401545,
+          36.703962052123
+        ],
+        [
+          137.18007862751,
+          36.704070551144
+        ],
+        [
+          137.18019123486,
+          36.704144437621
+        ],
+        [
+          137.18035263223,
+          36.704169472814
+        ],
+        [
+          137.180512453358,
+          36.704141967433
+        ],
+        [
+          137.180801196947,
+          36.704045413922
+        ],
+        [
+          137.180888605157,
+          36.704026297863
+        ],
+        [
+          137.180987770081,
+          36.704033405535
+        ],
+        [
+          137.181075076552,
+          36.704069173036
+        ],
+        [
+          137.181152089325,
+          36.70412161411
+        ],
+        [
+          137.18197252172,
+          36.704873841469
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "22:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1994/12/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "at~~EcgedY}AmBgH[yA]_B_CCoAx@mB?cBGYuAMi@i@EWd@oBCqASy@{AkBGa@`@eC}AsDe@iMX{B_AgAi@iC@o@hAw@G_A_@y@kB@eAiAMiBrA}AJgAIOeCQSu@ZkBGe@_DqD",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 22:00〜05:00 / 意思決定 1994/12/01"
+    },
+    {
+      "id": "jartic-19011740000044001000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.159739750934,
+          36.701898017076
+        ],
+        [
+          137.160050716269,
+          36.701287104285
+        ],
+        [
+          137.160201834601,
+          36.700953844983
+        ],
+        [
+          137.160255119029,
+          36.700817855211
+        ],
+        [
+          137.160319154322,
+          36.700597602806
+        ],
+        [
+          137.160351065302,
+          36.700421598095
+        ],
+        [
+          137.160324604553,
+          36.699645924761
+        ],
+        [
+          137.160329116638,
+          36.69921433522
+        ],
+        [
+          137.160311333401,
+          36.699076088552
+        ],
+        [
+          137.160283259141,
+          36.698875747907
+        ],
+        [
+          137.160312924552,
+          36.698780401397
+        ],
+        [
+          137.160386909229,
+          36.698673071121
+        ],
+        [
+          137.160563084618,
+          36.698406051526
+        ],
+        [
+          137.160691909365,
+          36.698264207478
+        ],
+        [
+          137.160918440459,
+          36.698046035484
+        ],
+        [
+          137.161143519577,
+          36.697769374396
+        ],
+        [
+          137.161316774177,
+          36.697594186905
+        ],
+        [
+          137.161587733104,
+          36.697345013943
+        ],
+        [
+          137.161734349648,
+          36.697182892251
+        ],
+        [
+          137.162040791843,
+          36.696770330144
+        ],
+        [
+          137.162108950644,
+          36.696698866735
+        ],
+        [
+          137.16215774714,
+          36.696651194527
+        ],
+        [
+          137.162480514346,
+          36.696417522276
+        ],
+        [
+          137.162726399748,
+          36.696119049539
+        ],
+        [
+          137.162821083315,
+          36.69598711532
+        ],
+        [
+          137.16297653104,
+          36.695921512065
+        ],
+        [
+          137.163140816907,
+          36.695911964205
+        ],
+        [
+          137.163339234157,
+          36.695935852012
+        ],
+        [
+          137.163487289422,
+          36.696010926949
+        ],
+        [
+          137.163550961931,
+          36.696133763714
+        ],
+        [
+          137.163456167156,
+          36.696274440255
+        ],
+        [
+          137.163280014636,
+          36.6963590591
+        ],
+        [
+          137.163137881883,
+          36.696466389215
+        ],
+        [
+          137.163006149883,
+          36.696714398529
+        ],
+        [
+          137.16290833293,
+          36.696831192435
+        ],
+        [
+          137.162711471062,
+          36.69698736593
+        ],
+        [
+          137.162564633236,
+          36.697147235796
+        ],
+        [
+          137.162551868036,
+          36.697281155308
+        ],
+        [
+          137.162679752802,
+          36.697897497816
+        ],
+        [
+          137.162688360181,
+          36.698091438683
+        ],
+        [
+          137.162532341197,
+          36.698289159027
+        ],
+        [
+          137.162499098814,
+          36.698359181948
+        ],
+        [
+          137.162511853086,
+          36.698433352044
+        ],
+        [
+          137.162562994817,
+          36.698495176878
+        ],
+        [
+          137.162642340146,
+          36.698538437704
+        ],
+        [
+          137.162721687563,
+          36.69854258593
+        ],
+        [
+          137.162995433554,
+          36.698495190998
+        ],
+        [
+          137.163171921774,
+          36.698526107839
+        ],
+        [
+          137.163315169269,
+          36.698606499959
+        ],
+        [
+          137.163404697748,
+          36.69868887311
+        ],
+        [
+          137.163471282778,
+          36.698796028875
+        ],
+        [
+          137.163491647198,
+          36.698896965023
+        ],
+        [
+          137.163448210466,
+          36.699222481164
+        ],
+        [
+          137.163466112731,
+          36.699325490027
+        ],
+        [
+          137.163537736795,
+          36.699379023844
+        ],
+        [
+          137.163665655659,
+          36.699409938663
+        ],
+        [
+          137.163793576085,
+          36.699401650681
+        ],
+        [
+          137.163880537793,
+          36.699321354877
+        ],
+        [
+          137.164028946271,
+          36.699090648322
+        ],
+        [
+          137.164599496891,
+          36.698917537017
+        ],
+        [
+          137.16468903306,
+          36.698767216586
+        ],
+        [
+          137.164852769618,
+          36.698569403429
+        ],
+        [
+          137.16534911889,
+          36.698175941316
+        ],
+        [
+          137.16547188967,
+          36.698126466136
+        ],
+        [
+          137.165602381773,
+          36.69812033914
+        ],
+        [
+          137.165732873308,
+          36.698159452786
+        ],
+        [
+          137.166369887852,
+          36.698590054606
+        ],
+        [
+          137.166572005956,
+          36.698793998934
+        ],
+        [
+          137.166676870533,
+          36.698911426731
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "22:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "自二輪",
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1994/12/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "{i__Fk_ddYbGsBjJ@hAq@bNcML_@CgAe@i@[Pg@~@gAl@_AdA{DYcAb@UY@iB_@m@i@QuABM_A|@o@`@qBdAq@vA{BEs@uA_C_A}@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "自二輪・原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 22:00〜05:00 / 意思決定 1994/12/01"
+    },
+    {
+      "id": "jartic-19011740000044101000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.169595894229,
+          36.697186653357
+        ],
+        [
+          137.169537140746,
+          36.697207743125
+        ],
+        [
+          137.169528188684,
+          36.69723396858
+        ],
+        [
+          137.169504577633,
+          36.697304263602
+        ],
+        [
+          137.169494175002,
+          36.697448547725
+        ],
+        [
+          137.169501569593,
+          36.697675021857
+        ],
+        [
+          137.16948086923,
+          36.697775237002
+        ],
+        [
+          137.169430509881,
+          36.697826517081
+        ],
+        [
+          137.169341763254,
+          36.697856259068
+        ],
+        [
+          137.169212949889,
+          36.697840761064
+        ],
+        [
+          137.169167063904,
+          36.697800297667
+        ],
+        [
+          137.168607363942,
+          36.697038424359
+        ],
+        [
+          137.16857177477,
+          36.697000303708
+        ],
+        [
+          137.168519958712,
+          36.696978855703
+        ],
+        [
+          137.168454825364,
+          36.696969303862
+        ],
+        [
+          137.16837492076,
+          36.697013374254
+        ],
+        [
+          137.168355673012,
+          36.697069429854
+        ],
+        [
+          137.168404593281,
+          36.697709649419
+        ],
+        [
+          137.168392731555,
+          36.697759756918
+        ],
+        [
+          137.168358598654,
+          36.697795535481
+        ],
+        [
+          137.168299396822,
+          36.697821761544
+        ],
+        [
+          137.168228331793,
+          36.697833658481
+        ],
+        [
+          137.167356299136,
+          36.69782177074
+        ],
+        [
+          137.167295642152,
+          36.697858720722
+        ],
+        [
+          137.167271916758,
+          36.697902790058
+        ],
+        [
+          137.167263076008,
+          36.697961188567
+        ],
+        [
+          137.167411142421,
+          36.698394039302
+        ],
+        [
+          137.167437779391,
+          36.698522732035
+        ],
+        [
+          137.167436325532,
+          36.698626461405
+        ],
+        [
+          137.167423008561,
+          36.698719466442
+        ],
+        [
+          137.16736224031,
+          36.698903133563
+        ],
+        [
+          137.167356310956,
+          36.699145108674
+        ],
+        [
+          137.167433311038,
+          36.699352566902
+        ],
+        [
+          137.167588763471,
+          36.699441965897
+        ],
+        [
+          137.16808186572,
+          36.699422855392
+        ],
+        [
+          137.168121821015,
+          36.699488463046
+        ],
+        [
+          137.168087687422,
+          36.699534965927
+        ],
+        [
+          137.167467336552,
+          36.699645820621
+        ],
+        [
+          137.167323747821,
+          36.699655374332
+        ],
+        [
+          137.167205340056,
+          36.699635097687
+        ],
+        [
+          137.167107636746,
+          36.699589857316
+        ],
+        [
+          137.167021684477,
+          36.699482523416
+        ],
+        [
+          137.166906298101,
+          36.699239286946
+        ],
+        [
+          137.166802663657,
+          36.699039038092
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "05:00",
+        "to": "22:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1994/12/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ml~~E_}edYUR_BBOZJ`@vCnBL^SPqC?KrEcC[}BNg@MQ_@BaBUAUnD^d@vAj@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 05:00〜22:00 / 意思決定 1994/12/01"
+    },
+    {
+      "id": "jartic-19011740000044201000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.166795053408,
+          36.699045076213
+        ],
+        [
+          137.166907641088,
+          36.69923820549
+        ],
+        [
+          137.167026049232,
+          36.69948738994
+        ],
+        [
+          137.167125207709,
+          36.699605448193
+        ],
+        [
+          137.167311772731,
+          36.699651949797
+        ],
+        [
+          137.167520496883,
+          36.699647172067
+        ],
+        [
+          137.168031281821,
+          36.699546952688
+        ],
+        [
+          137.168111301138,
+          36.69950171097
+        ],
+        [
+          137.168108278285,
+          36.699442050862
+        ],
+        [
+          137.168034301367,
+          36.69942303619
+        ],
+        [
+          137.167687809306,
+          36.699444488479
+        ],
+        [
+          137.167524971063,
+          36.699424212524
+        ],
+        [
+          137.167421335883,
+          36.69933832785
+        ],
+        [
+          137.167360676164,
+          36.699200082501
+        ],
+        [
+          137.167345789903,
+          36.699034349939
+        ],
+        [
+          137.167382831911,
+          36.698813823456
+        ],
+        [
+          137.167442033389,
+          36.698645657158
+        ],
+        [
+          137.16743173546,
+          36.698469200153
+        ],
+        [
+          137.167347349174,
+          36.698178289812
+        ],
+        [
+          137.167267328686,
+          36.697954159101
+        ],
+        [
+          137.167282212736,
+          36.697889812568
+        ],
+        [
+          137.16730884785,
+          36.697842138371
+        ],
+        [
+          137.167357642081,
+          36.697819427584
+        ],
+        [
+          137.168223743351,
+          36.697834920237
+        ],
+        [
+          137.168308125975,
+          36.697815903553
+        ],
+        [
+          137.16837628074,
+          36.69778246767
+        ],
+        [
+          137.168408846002,
+          36.697709739478
+        ],
+        [
+          137.168355560971,
+          36.697063571984
+        ],
+        [
+          137.168385104708,
+          36.697008777932
+        ],
+        [
+          137.16845180381,
+          36.696972998873
+        ],
+        [
+          137.168528687781,
+          36.69697416927
+        ],
+        [
+          137.168590912069,
+          36.697009946358
+        ],
+        [
+          137.168626501497,
+          36.697057619841
+        ],
+        [
+          137.169172771741,
+          36.697807507235
+        ],
+        [
+          137.169223134093,
+          36.697842112663
+        ],
+        [
+          137.169320835777,
+          36.697868335762
+        ],
+        [
+          137.169419990622,
+          36.697844451422
+        ],
+        [
+          137.169492619434,
+          36.697755049599
+        ],
+        [
+          137.169508842315,
+          36.697629871017
+        ],
+        [
+          137.169496972927,
+          36.697451071049
+        ],
+        [
+          137.169504466207,
+          36.697317511406
+        ],
+        [
+          137.169529531423,
+          36.697228110676
+        ],
+        [
+          137.169593208218,
+          36.69718394979
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "22:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "自二輪",
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1994/12/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ax~~EokedYoBaAGmA\\uBNN?dBNR|@LnBOfB^TGJuEnCBPQG[_DsBEq@bCa@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "自二輪・原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 22:00〜05:00 / 意思決定 1994/12/01"
+    },
+    {
+      "id": "jartic-19011740000049301000000000000000",
+      "kind": "noMotorcycle",
+      "name": "湯八尾線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.136108600143,
+          36.5783720494
+        ],
+        [
+          137.135821077782,
+          36.578683890728
+        ],
+        [
+          137.135771439979,
+          36.578745431817
+        ],
+        [
+          137.135780244207,
+          36.578804104107
+        ],
+        [
+          137.135815614585,
+          36.578934250732
+        ],
+        [
+          137.135968224665,
+          36.579008731641
+        ],
+        [
+          137.136115369293,
+          36.579058787648
+        ],
+        [
+          137.136480833357,
+          36.579173336822
+        ],
+        [
+          137.136686523876,
+          36.579243504338
+        ],
+        [
+          137.136782267829,
+          36.579293636706
+        ],
+        [
+          137.136775199913,
+          36.579366634477
+        ],
+        [
+          137.136729022069,
+          36.579439532309
+        ],
+        [
+          137.136666864323,
+          36.579513958192
+        ],
+        [
+          137.136556868308,
+          36.579619734733
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "18:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1999/07/14"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 40,
+      "chainPolyline": "yeg~Euk_dYkAbAc@IgA_EaAj@",
+      "sourceRoad": "湯八尾線",
+      "matchedName": "湯八尾線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜18:00 / 意思決定 1999/07/14"
+    },
+    {
+      "id": "jartic-19011740005322101000000000000000",
+      "kind": "noMotorcycle",
+      "name": "湯八尾線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.135854232731,
+          36.58017137762
+        ],
+        [
+          137.136024244927,
+          36.580045069161
+        ],
+        [
+          137.136495950822,
+          36.579664870899
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2005/04/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 63,
+      "chainPolyline": "aqg~Eaj_dYdBaC",
+      "sourceRoad": "湯八尾線",
+      "matchedName": "湯八尾線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2005/04/01"
+    },
+    {
+      "id": "jartic-19012390000060401000000000000000",
+      "kind": "noMotorcycle",
+      "name": "桐木町通り",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.01430825401,
+          36.745960913607
+        ],
+        [
+          137.014657648828,
+          36.74550354943
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "12:00",
+        "to": "21:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1998/04/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 18,
+      "chainPolyline": "g}g_FmrgcYzAeA",
+      "sourceRoad": "桐木町通り",
+      "matchedName": "桐木町通り",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 12:00〜21:00 / 意思決定 1998/04/01"
+    },
+    {
+      "id": "jartic-19012390000061601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.003664441121,
+          36.739818360819
+        ],
+        [
+          137.003714685201,
+          36.740469458951
+        ],
+        [
+          137.003782761537,
+          36.74105470344
+        ],
+        [
+          137.003828158461,
+          36.741456792319
+        ],
+        [
+          137.003842213325,
+          36.741535486587
+        ],
+        [
+          137.00393292993,
+          36.742323983152
+        ],
+        [
+          137.003927377022,
+          36.742461318904
+        ],
+        [
+          137.00397097153,
+          36.742816182134
+        ],
+        [
+          137.004149535543,
+          36.743314340732
+        ],
+        [
+          137.004181260172,
+          36.743457404949
+        ],
+        [
+          137.00418297339,
+          36.743494626968
+        ],
+        [
+          137.004179305697,
+          36.743534635368
+        ],
+        [
+          137.004152945012,
+          36.743662389943
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1998/11/16"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "{vf_F{oecYwQ}@_Ci@g@D",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 1998/11/16"
+    },
+    {
+      "id": "jartic-19012390000062701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.980330772404,
+          36.684354908177
+        ],
+        [
+          136.97923629321,
+          36.684464760594
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2001/12/10"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "e|{~Ea~`cYUxE",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2001/12/10"
+    },
+    {
+      "id": "jartic-19012390000063801000000000000000",
+      "kind": "noMotorcycle",
+      "name": "国道8号",
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.989848569165,
+          36.744796798668
+        ],
+        [
+          136.989664210402,
+          36.744276350518
+        ],
+        [
+          136.989577356811,
+          36.744013610878
+        ],
+        [
+          136.98949047253,
+          36.743764479277
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/10/26"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 35,
+      "chainPolyline": "_vg_FqybcYnEfA",
+      "sourceRoad": "国道8号",
+      "matchedName": "国道8号",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1985/10/26"
+    },
+    {
+      "id": "jartic-19012390000065301000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.005891045809,
+          36.739984507268
+        ],
+        [
+          137.006719203275,
+          36.740690274039
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/10/26"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "{wf_Fy}ecYmCeD",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1985/10/26"
+    },
+    {
+      "id": "jartic-19012390000070101000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.969774619973,
+          36.685125311351
+        ],
+        [
+          136.969636162192,
+          36.684572008952
+        ],
+        [
+          136.969426683353,
+          36.683788058838
+        ],
+        [
+          136.969313296311,
+          36.683365383022
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "17:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "aa|~Ea|~bY~IzA",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜17:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390000070401000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.016415819677,
+          36.749963940198
+        ],
+        [
+          137.016048008432,
+          36.750212657612
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/03/07"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "gvh_Fs_hcYq@hA",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2022/03/07"
+    },
+    {
+      "id": "jartic-19012390000076001000000000000000",
+      "kind": "noMotorcycle",
+      "name": "高岡庄川線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.009508010811,
+          36.736766633713
+        ],
+        [
+          137.009863754908,
+          36.736814416119
+        ],
+        [
+          137.009925085134,
+          36.736828916165
+        ],
+        [
+          137.009973745924,
+          36.736851690577
+        ],
+        [
+          137.010032463176,
+          36.736884751929
+        ],
+        [
+          137.010073327079,
+          36.736942482753
+        ],
+        [
+          137.01035888488,
+          36.737478443601
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/10/26"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 48,
+      "chainPolyline": "ycf_FmtfcYUgBwBaA",
+      "sourceRoad": "高岡庄川線",
+      "matchedName": "高岡庄川線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1985/10/26"
+    },
+    {
+      "id": "jartic-19012390000076301000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.016762542332,
+          36.757848988971
+        ],
+        [
+          137.017902839031,
+          36.757376568542
+        ],
+        [
+          137.017971103312,
+          36.757347454953
+        ],
+        [
+          137.018703513599,
+          36.757034209236
+        ],
+        [
+          137.018784657199,
+          36.757005111191
+        ],
+        [
+          137.01977319178,
+          36.75663900602
+        ],
+        [
+          137.02024716104,
+          36.756467911344
+        ],
+        [
+          137.020341202977,
+          36.75642846429
+        ],
+        [
+          137.0207618324,
+          36.756271090333
+        ],
+        [
+          137.02112686379,
+          36.756137618848
+        ],
+        [
+          137.021622199223,
+          36.755976818498
+        ],
+        [
+          137.021982884672,
+          36.755889750943
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "qgj_FwahcYbDcKpDeNp@iD",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390000076501000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.01292233266,
+          36.760224791062
+        ],
+        [
+          137.012633552006,
+          36.76124989349
+        ],
+        [
+          137.012521259155,
+          36.761617257541
+        ],
+        [
+          137.01241979491,
+          36.761946154252
+        ],
+        [
+          137.012375358233,
+          36.76288181271
+        ],
+        [
+          137.012384578246,
+          36.763591159168
+        ],
+        [
+          137.01242100346,
+          36.763971602868
+        ],
+        [
+          137.012441410425,
+          36.764016959672
+        ],
+        [
+          137.012464331059,
+          36.764037626855
+        ],
+        [
+          137.012515590125,
+          36.764058330749
+        ],
+        [
+          137.013285988655,
+          36.764285978072
+        ],
+        [
+          137.013646895711,
+          36.764393595405
+        ],
+        [
+          137.014373690182,
+          36.764697421098
+        ],
+        [
+          137.01498274823,
+          36.764953689205
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "kvj_FwigcYyIbBsK?QSaAaFoBiG",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390000076601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.012542888542,
+          36.761555192862
+        ],
+        [
+          137.012425322024,
+          36.761926785613
+        ],
+        [
+          137.012392699279,
+          36.762332643868
+        ],
+        [
+          137.012375543981,
+          36.762900918391
+        ],
+        [
+          137.012369457886,
+          36.763311136739
+        ],
+        [
+          137.012400669443,
+          36.763610195349
+        ],
+        [
+          137.012424483873,
+          36.76396755198
+        ],
+        [
+          137.012427526119,
+          36.764014508436
+        ],
+        [
+          137.012464317708,
+          36.764044295717
+        ],
+        [
+          137.012525776323,
+          36.764061678384
+        ],
+        [
+          137.013186136518,
+          36.764255388763
+        ],
+        [
+          137.013643757818,
+          36.764394402449
+        ],
+        [
+          137.014374557757,
+          36.764711841405
+        ],
+        [
+          137.015022602103,
+          36.764964914881
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "w~j_FkggcYyC\\oIGkAqFqBsG",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390000078001000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.036329135223,
+          36.75000976542
+        ],
+        [
+          137.036825078716,
+          36.751107611334
+        ],
+        [
+          137.037078340494,
+          36.751677266851
+        ],
+        [
+          137.038070286663,
+          36.753871507733
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "qvh_Fa|kcYcW{I",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390000078101000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.037880927501,
+          36.77482537668
+        ],
+        [
+          137.037403107482,
+          36.774109847579
+        ],
+        [
+          137.037346928776,
+          36.774008852286
+        ],
+        [
+          137.037081079813,
+          36.77368503272
+        ],
+        [
+          137.03679493165,
+          36.773309731941
+        ],
+        [
+          137.036457500332,
+          36.772856060167
+        ],
+        [
+          137.036230149313,
+          36.772559046373
+        ],
+        [
+          137.036133015116,
+          36.772433312728
+        ],
+        [
+          137.035956765804,
+          36.77212608078
+        ],
+        [
+          137.035918457988,
+          36.772057998172
+        ],
+        [
+          137.035796102841,
+          36.771744697027
+        ],
+        [
+          137.035574117953,
+          36.771194270671
+        ],
+        [
+          137.035336630959,
+          36.770802527903
+        ],
+        [
+          137.035168036909,
+          36.770542706231
+        ],
+        [
+          137.035145066558,
+          36.770480858582
+        ],
+        [
+          137.035147769665,
+          36.770406692881
+        ],
+        [
+          137.035163404805,
+          36.770237735321
+        ],
+        [
+          137.035284925249,
+          36.769592881289
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "uqm_FwelcYhPfKlDdAlCrApDY",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390000078601000000000000000",
+      "kind": "noMotorcycle",
+      "name": "富山高岡線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.028607177043,
+          36.749043440169
+        ],
+        [
+          137.02869662712,
+          36.749184401828
+        ],
+        [
+          137.029795207088,
+          36.750459519731
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 22,
+      "chainPolyline": "oph_FykjcY{GmF",
+      "sourceRoad": "富山高岡線",
+      "matchedName": "富山高岡線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390000078801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.994042952265,
+          36.740400039551
+        ],
+        [
+          136.99531099976,
+          36.739425958901
+        ],
+        [
+          136.995984218968,
+          36.738906030664
+        ],
+        [
+          136.996173020551,
+          36.738747509213
+        ],
+        [
+          136.996247880442,
+          36.738668851238
+        ],
+        [
+          136.996384999857,
+          36.738588930499
+        ],
+        [
+          136.996477637518,
+          36.738521833216
+        ],
+        [
+          136.997451757072,
+          36.737776214463
+        ],
+        [
+          136.999016743096,
+          36.736559460908
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1981/10/29"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ozf_FwsccY~Vc^",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1981/10/29"
+    },
+    {
+      "id": "jartic-19012390000078901000000000000000",
+      "kind": "noMotorcycle",
+      "name": "高岡環状線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.010085245291,
+          36.769600958291
+        ],
+        [
+          137.010308293003,
+          36.770087628685
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2003/12/26"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 9,
+      "chainPolyline": "_ql_FaxfcYaBk@",
+      "sourceRoad": "高岡環状線",
+      "matchedName": "高岡環状線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2003/12/26"
+    },
+    {
+      "id": "jartic-19012390000079101000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.010497359431,
+          36.770263700899
+        ],
+        [
+          137.010015572104,
+          36.771637485803
+        ],
+        [
+          137.009997535501,
+          36.771693156131
+        ],
+        [
+          137.009490134427,
+          36.773093670419
+        ],
+        [
+          137.009469495554,
+          36.773161593514
+        ],
+        [
+          137.008933684237,
+          36.774640471764
+        ],
+        [
+          137.008377304964,
+          36.776141849795
+        ],
+        [
+          137.008060287757,
+          36.777056413813
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2003/12/26"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "cul_FszfcYoi@fN",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2003/12/26"
+    },
+    {
+      "id": "jartic-19012390000079501000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.020746767569,
+          36.693155112914
+        ],
+        [
+          137.019957465285,
+          36.691812149968
+        ],
+        [
+          137.019522869237,
+          36.691084787051
+        ],
+        [
+          137.018837505149,
+          36.689949133107
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1987/10/26"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "gs}~EuzhcY`S|J",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1987/10/26"
+    },
+    {
+      "id": "jartic-19012390000079701000000000000000",
+      "kind": "noMotorcycle",
+      "name": "高岡青井谷線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.02082718042,
+          36.739198881473
+        ],
+        [
+          137.02082718042,
+          36.739198881473
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/10/26"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 60,
+      "chainPolyline": "_sf_Fe{hcY??",
+      "sourceRoad": "高岡青井谷線",
+      "matchedName": "高岡青井谷線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1985/10/26"
+    },
+    {
+      "id": "jartic-19012390000079901000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.979008236706,
+          36.67723902364
+        ],
+        [
+          136.978881368116,
+          36.676683406292
+        ],
+        [
+          136.978758465768,
+          36.676337867717
+        ],
+        [
+          136.978446075871,
+          36.675746449182
+        ],
+        [
+          136.977922435237,
+          36.674798625933
+        ],
+        [
+          136.977764195078,
+          36.674449425371
+        ],
+        [
+          136.977694462272,
+          36.674050618084
+        ],
+        [
+          136.977265856373,
+          36.674003614899
+        ],
+        [
+          136.976576731198,
+          36.673892208521
+        ],
+        [
+          136.976156859968,
+          36.673887932788
+        ],
+        [
+          136.97579444137,
+          36.673905196535
+        ],
+        [
+          136.975462910019,
+          36.673918903919
+        ],
+        [
+          136.974260615399,
+          36.673981043918
+        ],
+        [
+          136.973884882631,
+          36.673998190222
+        ],
+        [
+          136.973615281614,
+          36.673987119209
+        ],
+        [
+          136.973195454526,
+          36.67396507921
+        ],
+        [
+          136.971997964513,
+          36.673895446824
+        ],
+        [
+          136.971012413948,
+          36.673854719211
+        ],
+        [
+          136.968283317443,
+          36.673868138772
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1989/10/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "woz~Eyu`cYrDp@rHfDtCl@^|EUzO\\|PC`P",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1989/10/01"
+    },
+    {
+      "id": "jartic-19012390000080501000000000000000",
+      "kind": "noMotorcycle",
+      "name": "恵比須通り",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.014808347111,
+          36.745462286491
+        ],
+        [
+          137.014673522432,
+          36.745460942815
+        ],
+        [
+          137.014563929044,
+          36.745441787423
+        ],
+        [
+          137.014384758093,
+          36.745384331926
+        ],
+        [
+          137.014226418623,
+          36.74532564116
+        ],
+        [
+          137.01407390943,
+          36.745263442968
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "12:00",
+        "to": "21:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1998/04/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 41,
+      "chainPolyline": "czg_FqugcYf@rC",
+      "sourceRoad": "恵比須通り",
+      "matchedName": "恵比須通り",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 12:00〜21:00 / 意思決定 1998/04/01"
+    },
+    {
+      "id": "jartic-19012390000080601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.004154042771,
+          36.743672845395
+        ],
+        [
+          137.004176418438,
+          36.743576266999
+        ],
+        [
+          137.004181035733,
+          36.743510755854
+        ],
+        [
+          137.004185490891,
+          36.743469036242
+        ],
+        [
+          137.004179758375,
+          36.743426131158
+        ],
+        [
+          137.004154729036,
+          36.74334733185
+        ],
+        [
+          137.003960276172,
+          36.742790302987
+        ],
+        [
+          137.003926929299,
+          36.742461228172
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1998/11/16"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "}ng_F}recYn@E`Ep@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1998/11/16"
+    },
+    {
+      "id": "jartic-19012390000080701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.044428080199,
+          36.79321120817
+        ],
+        [
+          137.044284158091,
+          36.793240709527
+        ],
+        [
+          137.044022259101,
+          36.793261167293
+        ],
+        [
+          137.043557437978,
+          36.793278530818
+        ],
+        [
+          137.043461449979,
+          36.793322950507
+        ],
+        [
+          137.04337285747,
+          36.793367287664
+        ],
+        [
+          137.043265897655,
+          36.793405747931
+        ],
+        [
+          137.042933738373,
+          36.793497414971
+        ],
+        [
+          137.042135986811,
+          36.794081007866
+        ],
+        [
+          137.041980946318,
+          36.794193585022
+        ],
+        [
+          137.041844335254,
+          36.794273467916
+        ],
+        [
+          137.041726284927,
+          36.794308941206
+        ],
+        [
+          137.041467870719,
+          36.794388785788
+        ],
+        [
+          137.041371889817,
+          36.794427255897
+        ],
+        [
+          137.041346040064,
+          36.794474721671
+        ],
+        [
+          137.041345948323,
+          36.794531046295
+        ],
+        [
+          137.04139014687,
+          36.794569664019
+        ],
+        [
+          137.041452858452,
+          36.79459352161
+        ],
+        [
+          137.041552348169,
+          36.794602458011
+        ],
+        [
+          137.0416667988,
+          36.794575902949
+        ],
+        [
+          137.042024736511,
+          36.794484356602
+        ],
+        [
+          137.042264656769,
+          36.794407465417
+        ],
+        [
+          137.042412210775,
+          36.794351204798
+        ],
+        [
+          137.042574710586,
+          36.794268374318
+        ],
+        [
+          137.04264107033,
+          36.794253573799
+        ],
+        [
+          137.042703777397,
+          36.794280314553
+        ],
+        [
+          137.042736859213,
+          36.794333789921
+        ],
+        [
+          137.042714684299,
+          36.794396039429
+        ],
+        [
+          137.042662950926,
+          36.794443478516
+        ],
+        [
+          137.042563267973,
+          36.794484919673
+        ],
+        [
+          137.042478385647,
+          36.794520428308
+        ],
+        [
+          137.042208841504,
+          36.794692184818
+        ],
+        [
+          137.041569906081,
+          36.795175096079
+        ],
+        [
+          137.041485056407,
+          36.79518978642
+        ],
+        [
+          137.041403938263,
+          36.795183753136
+        ],
+        [
+          137.041142118197,
+          36.795082633368
+        ],
+        [
+          137.040698498218,
+          36.794942118636
+        ],
+        [
+          137.040611373742,
+          36.794909042587
+        ],
+        [
+          137.04055765504,
+          36.794867801016
+        ],
+        [
+          137.04051943035,
+          36.794808011226
+        ],
+        [
+          137.040350823844,
+          36.794513231494
+        ],
+        [
+          137.040307329552,
+          36.794455508787
+        ],
+        [
+          137.040251037495,
+          36.794412191591
+        ],
+        [
+          137.040143543727,
+          36.794364674419
+        ],
+        [
+          137.039833782961,
+          36.794255119641
+        ],
+        [
+          137.03962130217,
+          36.794203434628
+        ],
+        [
+          137.039503428671,
+          36.794199163178
+        ],
+        [
+          137.03941375512,
+          36.794217631909
+        ],
+        [
+          137.039331653445,
+          36.794264946936
+        ],
+        [
+          137.039131602309,
+          36.794421270283
+        ],
+        [
+          137.038539316259,
+          36.794805894856
+        ],
+        [
+          137.037959882941,
+          36.795073104597
+        ],
+        [
+          137.037829168462,
+          36.795107929472
+        ],
+        [
+          137.037678076942,
+          36.795132548601
+        ],
+        [
+          137.037444800767,
+          36.795185826418
+        ],
+        [
+          137.037196326334,
+          36.795214394483
+        ],
+        [
+          137.037078402855,
+          36.795238958826
+        ],
+        [
+          137.036973344673,
+          36.795275973576
+        ],
+        [
+          137.036783580525,
+          36.795374627655
+        ],
+        [
+          137.036604065726,
+          36.795508349133
+        ],
+        [
+          137.036483606701,
+          36.795574094739
+        ],
+        [
+          137.036358027712,
+          36.79561928736
+        ],
+        [
+          137.036096581117,
+          36.795697314534
+        ],
+        [
+          137.035932531496,
+          36.795763101841
+        ],
+        [
+          137.035845383674,
+          36.79581031878
+        ],
+        [
+          137.035765778272,
+          36.795902964197
+        ],
+        [
+          137.035647597145,
+          36.796077936319
+        ],
+        [
+          137.035588644768,
+          36.796149966989
+        ],
+        [
+          137.035493697564,
+          36.796236377063
+        ],
+        [
+          137.035388566986,
+          36.796314574946
+        ],
+        [
+          137.035293689679,
+          36.796359800316
+        ],
+        [
+          137.035216794156,
+          36.796374134487
+        ],
+        [
+          137.035093867948,
+          36.79637399858
+        ],
+        [
+          137.034850480781,
+          36.796373729116
+        ],
+        [
+          137.034735177985,
+          36.796371528537
+        ],
+        [
+          137.034627571691,
+          36.796389973759
+        ],
+        [
+          137.034425105227,
+          36.796443279834
+        ],
+        [
+          137.034279017208,
+          36.796488447448
+        ],
+        [
+          137.034186780127,
+          36.796496635751
+        ],
+        [
+          137.034086951734,
+          36.79648823353
+        ],
+        [
+          137.033733551056,
+          36.796407542622
+        ],
+        [
+          137.033482601036,
+          36.796374278165
+        ],
+        [
+          137.033203455795,
+          36.796316288798
+        ],
+        [
+          137.032752730099,
+          36.796206557371
+        ],
+        [
+          137.032445502952,
+          36.796123841859
+        ],
+        [
+          137.032335434345,
+          36.796076314741
+        ],
+        [
+          137.032212634621,
+          36.796004080384
+        ],
+        [
+          137.031982528253,
+          36.795779242215
+        ],
+        [
+          137.031780364936,
+          36.795659514651
+        ],
+        [
+          137.031539922807,
+          36.795451155768
+        ],
+        [
+          137.031442629866,
+          36.795403732453
+        ],
+        [
+          137.031242926041,
+          36.795351956891
+        ],
+        [
+          137.031094435171,
+          36.795298256744
+        ],
+        [
+          137.030943418274,
+          36.795215625159
+        ],
+        [
+          137.030828338383,
+          36.795151689169
+        ],
+        [
+          137.030487776404,
+          36.79504000215
+        ],
+        [
+          137.030234342583,
+          36.794957342489
+        ],
+        [
+          137.030019314871,
+          36.794891128168
+        ],
+        [
+          137.029340635593,
+          36.794807977336
+        ],
+        [
+          137.029053824204,
+          36.794780880374
+        ],
+        [
+          137.028846351189,
+          36.794751801921
+        ],
+        [
+          137.028682482313,
+          36.794714482697
+        ],
+        [
+          137.028613429889,
+          36.7946669997
+        ],
+        [
+          137.028580137534,
+          36.794611357303
+        ],
+        [
+          137.028575220774,
+          36.794541328714
+        ],
+        [
+          137.028644945741,
+          36.794213825104
+        ],
+        [
+          137.028645063915,
+          36.794147947854
+        ],
+        [
+          137.028609314024,
+          36.794088157109
+        ],
+        [
+          137.02854788555,
+          36.794038610168
+        ],
+        [
+          137.028445502206,
+          36.794019926618
+        ],
+        [
+          137.028368611324,
+          36.794032273745
+        ],
+        [
+          137.028312178202,
+          36.794071320004
+        ],
+        [
+          137.028278798357,
+          36.794126884934
+        ],
+        [
+          137.028178375833,
+          36.794388385094
+        ],
+        [
+          137.028093531013,
+          36.794586098673
+        ],
+        [
+          137.028039641141,
+          36.794643712386
+        ],
+        [
+          137.027978071428,
+          36.794672478868
+        ],
+        [
+          137.027893582564,
+          36.794672380331
+        ],
+        [
+          137.027832116848,
+          36.794643470356
+        ],
+        [
+          137.027796337594,
+          36.794600171213
+        ],
+        [
+          137.027548666166,
+          36.794183709776
+        ],
+        [
+          137.02750015036,
+          36.794119848389
+        ],
+        [
+          137.027433568124,
+          36.794070294844
+        ],
+        [
+          137.027356721903,
+          36.794057858494
+        ],
+        [
+          137.027272188981,
+          36.794082452219
+        ],
+        [
+          137.027223479438,
+          36.79412565251
+        ],
+        [
+          137.027151593358,
+          36.794220373979
+        ],
+        [
+          137.027125742527,
+          36.794325423042
+        ],
+        [
+          137.027086949422,
+          36.794523099797
+        ],
+        [
+          137.027066308974,
+          36.794597243954
+        ],
+        [
+          137.027014999334,
+          36.79465278748
+        ],
+        [
+          137.026922733746,
+          36.794677461995
+        ],
+        [
+          137.026628030902,
+          36.794738847297
+        ],
+        [
+          137.026397448817,
+          36.79478597849
+        ],
+        [
+          137.026248770666,
+          36.794837351447
+        ],
+        [
+          137.026100036009,
+          36.79491954503
+        ],
+        [
+          137.025912949047,
+          36.794956453047
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "23:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1999/10/08"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "qdq_FunmcYMlDk@|BiC|Do@xBSBMg@`AkEKa@iDhF?`@t@|CbBfAh@tCyB~Ds@rBa@nDaAvBe@lBwB~BAlBWzAhAlJdCtD`BdGp@tHRRzAMTREn@gBj@OTD\\fB`AJZ_@h@uAZ}@zE",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 23:00〜05:00 / 意思決定 1999/10/08"
+    },
+    {
+      "id": "jartic-19012390005850601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.996047215819,
+          36.740949779769
+        ],
+        [
+          136.99855062139,
+          36.739020261061
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2023/03/04"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "}}f_Fi`dcY`KsN",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2023/03/04"
+    },
+    {
+      "id": "jartic-19012390005890201000000000000000",
+      "kind": "noMotorcycle",
+      "name": "国道8号",
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.967633483858,
+          36.735177066774
+        ],
+        [
+          136.96762001837,
+          36.735275185331
+        ],
+        [
+          136.967630344881,
+          36.735352075268
+        ],
+        [
+          136.967656633482,
+          36.735448097409
+        ],
+        [
+          136.967756826484,
+          36.735672304101
+        ],
+        [
+          136.968096921473,
+          36.736436822189
+        ],
+        [
+          136.968453995462,
+          36.737263280162
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2009/03/23"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 43,
+      "chainPolyline": "{ye_Fun~bYu@EiJ}C",
+      "sourceRoad": "国道8号",
+      "matchedName": "国道8号",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2009/03/23"
+    },
+    {
+      "id": "jartic-19012390006020001000000000000000",
+      "kind": "noMotorcycle",
+      "name": "国道160号",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.000223890505,
+          36.779381793103
+        ],
+        [
+          137.000708868111,
+          36.778814536001
+        ],
+        [
+          137.001721564192,
+          36.77764312584
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 50,
+      "chainPolyline": "cnn_FkzdcYzIkH",
+      "sourceRoad": "国道160号",
+      "matchedName": "国道160号",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012390006020201000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.008251543283,
+          36.726108131403
+        ],
+        [
+          137.008044072318,
+          36.726171750591
+        ],
+        [
+          137.007836618085,
+          36.726227078347
+        ],
+        [
+          137.007639385246,
+          36.726266017456
+        ],
+        [
+          137.007419222895,
+          36.7262945617
+        ],
+        [
+          137.00726560823,
+          36.726300574411
+        ],
+        [
+          137.007142656453,
+          36.726312756217
+        ],
+        [
+          137.007024945246,
+          36.726335218669
+        ],
+        [
+          137.006873824403,
+          36.726380346538
+        ],
+        [
+          137.006714965603,
+          36.726431682136
+        ],
+        [
+          137.006568990015,
+          36.726478889304
+        ],
+        [
+          137.006420499385,
+          36.72649716421
+        ],
+        [
+          137.006241203631,
+          36.726523778629
+        ],
+        [
+          137.006074830056,
+          36.726527609713
+        ],
+        [
+          137.005836792104,
+          36.726537652197
+        ],
+        [
+          137.005739503192,
+          36.726537520709
+        ],
+        [
+          137.005199221001,
+          36.726584192466
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ead_FqlfcYiAnISpG",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19012470000080901000000000000000",
+      "kind": "noMotorcycle",
+      "name": "国道415号",
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.985595270604,
+          36.859242274954
+        ],
+        [
+          136.985557741528,
+          36.859415155177
+        ],
+        [
+          136.985506993569,
+          36.859534214499
+        ],
+        [
+          136.985368467809,
+          36.859780837857
+        ],
+        [
+          136.985125685082,
+          36.860198887461
+        ],
+        [
+          136.984863477875,
+          36.860625287849
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/10/24"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 70,
+      "chainPolyline": "ga~_F__bcYy@P{E`C",
+      "sourceRoad": "国道415号",
+      "matchedName": "国道415号",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1985/10/24"
+    },
+    {
+      "id": "jartic-19012470000081101000000000000000",
+      "kind": "noMotorcycle",
+      "name": "国道415号",
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.986123954917,
+          36.860093707525
+        ],
+        [
+          136.985393175255,
+          36.859813678666
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/10/24"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 73,
+      "chainPolyline": "qf~_FgbbcYv@pC",
+      "sourceRoad": "国道415号",
+      "matchedName": "国道415号",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1985/10/24"
+    },
+    {
+      "id": "jartic-19012470000081301000000000000000",
+      "kind": "noMotorcycle",
+      "name": "薮田下田子線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.985791438306,
+          36.860518831628
+        ],
+        [
+          136.985658937733,
+          36.860683096164
+        ],
+        [
+          136.98559801432,
+          36.86074149027
+        ],
+        [
+          136.985542841188,
+          36.860834408482
+        ],
+        [
+          136.985508570264,
+          36.860909424947
+        ],
+        [
+          136.985489094655,
+          36.860988068691
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/10/24"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 2,
+      "chainPolyline": "gi~_Fe`bcY}Az@",
+      "sourceRoad": "薮田下田子線",
+      "matchedName": "薮田下田子線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1985/10/24"
+    },
+    {
+      "id": "jartic-19012470000081801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.99411555614,
+          36.809363868699
+        ],
+        [
+          136.99544319051,
+          36.809521783894
+        ],
+        [
+          136.995197936703,
+          36.810742186064
+        ],
+        [
+          136.994926441584,
+          36.812066006454
+        ],
+        [
+          136.994513403966,
+          36.814129049184
+        ],
+        [
+          136.994119147916,
+          36.816054054421
+        ],
+        [
+          136.993764477905,
+          36.817862140617
+        ],
+        [
+          136.993451231222,
+          36.819436336305
+        ],
+        [
+          136.993437955013,
+          36.819557797534
+        ],
+        [
+          136.993449679956,
+          36.820124753933
+        ],
+        [
+          136.993464956058,
+          36.820807158011
+        ],
+        [
+          136.993482624051,
+          36.822069842251
+        ],
+        [
+          136.993493583302,
+          36.822180884911
+        ],
+        [
+          136.993504087879,
+          36.823140578152
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1995/03/23"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "oit_FgtccY_@gG_}@lKcVI",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 1995/03/23"
+    },
+    {
+      "id": "jartic-19012470000083301000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.982738812533,
+          36.862953924543
+        ],
+        [
+          136.982851458439,
+          36.862982666331
+        ],
+        [
+          136.983970984492,
+          36.863263398927
+        ],
+        [
+          136.98512618687,
+          36.863542913808
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/03/08"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "mx~_FcmacYuB}M",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 2022/03/08"
+    },
+    {
+      "id": "jartic-19012470000083501000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.980528655735,
+          36.876429482972
+        ],
+        [
+          136.980066952585,
+          36.876474088464
+        ],
+        [
+          136.979653979071,
+          36.87654553396
+        ],
+        [
+          136.978979097399,
+          36.876701005489
+        ],
+        [
+          136.97883047727,
+          36.876696715382
+        ],
+        [
+          136.97870484171,
+          36.876651187295
+        ],
+        [
+          136.978443653276,
+          36.876533349905
+        ],
+        [
+          136.97821593437,
+          36.876444492963
+        ],
+        [
+          136.977932812689,
+          36.876305802359
+        ],
+        [
+          136.977808270748,
+          36.876272170665
+        ],
+        [
+          136.977616991105,
+          36.876190850282
+        ],
+        [
+          136.977473170434,
+          36.876151239767
+        ],
+        [
+          136.977415303934,
+          36.876145199838
+        ],
+        [
+          136.97735001647,
+          36.876146267399
+        ],
+        [
+          136.977263929863,
+          36.876166406846
+        ],
+        [
+          136.977024621428,
+          36.87631985706
+        ],
+        [
+          136.976910181545,
+          36.876374466286
+        ],
+        [
+          136.976822600856,
+          36.876408931824
+        ],
+        [
+          136.976729027888,
+          36.8764170732
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1999/06/21"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ula`Fi_acYu@tHHv@bBtFCh@q@hB",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1999/06/21"
+    },
+    {
+      "id": "jartic-19012470000083601000000000000000",
+      "kind": "noMotorcycle",
+      "name": "鹿西氷見線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.975755604056,
+          36.876003763436
+        ],
+        [
+          136.975853821385,
+          36.876067454509
+        ],
+        [
+          136.976436548818,
+          36.876298460445
+        ],
+        [
+          136.976714116663,
+          36.876413895232
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1982/11/08"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 67,
+      "chainPolyline": "_ja`Foa`cYqA}D",
+      "sourceRoad": "鹿西氷見線",
+      "matchedName": "鹿西氷見線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 1982/11/08"
+    },
+    {
+      "id": "jartic-19012470005323301000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.97713159949,
+          36.863256925974
+        ],
+        [
+          136.977112479947,
+          36.863187684537
+        ],
+        [
+          136.977290525108,
+          36.862573991457
+        ],
+        [
+          136.97737716423,
+          36.86236911001
+        ],
+        [
+          136.977405593887,
+          36.8622558764
+        ],
+        [
+          136.977412278839,
+          36.861955432157
+        ],
+        [
+          136.977422900075,
+          36.861877947204
+        ],
+        [
+          136.977464763514,
+          36.861729048051
+        ],
+        [
+          136.977566361062,
+          36.861460927089
+        ],
+        [
+          136.977582725798,
+          36.861419228277
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2006/03/31"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "kz~_Faj`cYnJyA",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2006/03/31"
+    },
+    {
+      "id": "jartic-19012550000055301000000000000000",
+      "kind": "noMotorcycle",
+      "name": "広上大門新線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.046232161746,
+          36.732291990237
+        ],
+        [
+          137.046485511884,
+          36.732810168842
+        ],
+        [
+          137.046588077996,
+          36.73309352108
+        ],
+        [
+          137.046616352186,
+          36.733199441181
+        ],
+        [
+          137.046619830401,
+          36.733266674576
+        ],
+        [
+          137.046736377655,
+          36.733776062944
+        ],
+        [
+          137.046881917693,
+          36.734146514561
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1987/10/26"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 6,
+      "chainPolyline": "yge_F}ymcY_DgAsEy@",
+      "sourceRoad": "広上大門新線",
+      "matchedName": "広上大門新線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 1987/10/26"
+    },
+    {
+      "id": "jartic-19012550000055501000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.051100787961,
+          36.72915755811
+        ],
+        [
+          137.05144141192,
+          36.729128058423
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2000/09/18"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "gtd_FkxncYDcA",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2000/09/18"
+    },
+    {
+      "id": "jartic-19012550000055601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.051512175657,
+          36.729124341839
+        ],
+        [
+          137.051889967942,
+          36.729096048388
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2000/09/18"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "_td_F}zncYBkA",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2000/09/18"
+    },
+    {
+      "id": "jartic-19012550000055701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.052042375502,
+          36.726589040718
+        ],
+        [
+          137.052418577124,
+          36.726567953683
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2000/09/18"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "edd_Fg~ncYBkA",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2000/09/18"
+    },
+    {
+      "id": "jartic-19012550000055801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.052486804984,
+          36.726536206576
+        ],
+        [
+          137.052711405218,
+          36.726827331095
+        ],
+        [
+          137.052921372531,
+          36.727096992493
+        ],
+        [
+          137.053220040321,
+          36.727422793086
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2000/09/18"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "{cd_FaaocYoDqC",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2000/09/18"
+    },
+    {
+      "id": "jartic-19012550000055901000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.054719649729,
+          36.727843183462
+        ],
+        [
+          137.054489682348,
+          36.728078992762
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2000/09/18"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "_ld_F_oocYo@l@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2000/09/18"
+    },
+    {
+      "id": "jartic-19012550000056601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.059922155276,
+          36.733290342278
+        ],
+        [
+          137.06092122926,
+          36.733202555489
+        ],
+        [
+          137.061033200009,
+          36.733198419249
+        ],
+        [
+          137.061130972907,
+          36.733178409107
+        ],
+        [
+          137.062042698491,
+          36.732770066884
+        ],
+        [
+          137.062702231104,
+          36.732474959367
+        ],
+        [
+          137.06383742103,
+          36.73198118381
+        ],
+        [
+          137.064424332858,
+          36.731727729748
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1982/04/05"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ane_FoopcYTqF`HqS",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 1982/04/05"
+    },
+    {
+      "id": "jartic-19012550000056701000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.064445925323,
+          36.732753680332
+        ],
+        [
+          137.064733909041,
+          36.733676941554
+        ],
+        [
+          137.064395438774,
+          36.734097333696
+        ],
+        [
+          137.064005281255,
+          36.734567877385
+        ],
+        [
+          137.063650658821,
+          36.735003934372
+        ],
+        [
+          137.063543907804,
+          36.735121899759
+        ],
+        [
+          137.063499437439,
+          36.735136190378
+        ],
+        [
+          137.063067437635,
+          36.735656801609
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1982/04/05"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "uje_FykqcYyDw@kKjI",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 1982/04/05"
+    },
+    {
+      "id": "jartic-19012550000056801000000000000000",
+      "kind": "noMotorcycle",
+      "name": "富山高岡線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.063342900605,
+          36.733552817818
+        ],
+        [
+          137.063545412752,
+          36.733661678766
+        ],
+        [
+          137.063580894409,
+          36.733670270949
+        ],
+        [
+          137.06439440263,
+          36.734118781484
+        ],
+        [
+          137.065406864171,
+          36.734669021645
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1982/04/05"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 27,
+      "chainPolyline": "uoe_F{dqcY_F}K",
+      "sourceRoad": "富山高岡線",
+      "matchedName": "富山高岡線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:30 / 意思決定 1982/04/05"
+    },
+    {
+      "id": "jartic-19012550000057601000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.083833387137,
+          36.782099802171
+        ],
+        [
+          137.083330811405,
+          36.781358215976
+        ],
+        [
+          137.083243828057,
+          36.781192154362
+        ],
+        [
+          137.082854791111,
+          36.780622413947
+        ],
+        [
+          137.082568896638,
+          36.780197207211
+        ],
+        [
+          137.082354017581,
+          36.779889386101
+        ],
+        [
+          137.08228468581,
+          36.779772000954
+        ],
+        [
+          137.08209125278,
+          36.779422739442
+        ],
+        [
+          137.08195809007,
+          36.779179411314
+        ],
+        [
+          137.08175212204,
+          36.778821488789
+        ],
+        [
+          137.081496529698,
+          36.778359171607
+        ],
+        [
+          137.081388171749,
+          36.778178764199
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1982/04/05"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "c_o_F}ducYxLfHtI~D",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 1982/04/05"
+    },
+    {
+      "id": "jartic-19012550005322501000000000000000",
+      "kind": "noMotorcycle",
+      "name": "串田新黒河線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.099916240826,
+          36.696028668547
+        ],
+        [
+          137.099191647011,
+          36.695864960711
+        ],
+        [
+          137.09878907027,
+          36.695775241647
+        ],
+        [
+          137.098359737142,
+          36.695697582103
+        ],
+        [
+          137.097699560161,
+          36.695589867322
+        ],
+        [
+          137.097462672378,
+          36.695559899795
+        ],
+        [
+          137.09684833143,
+          36.695507090678
+        ],
+        [
+          137.096034106435,
+          36.695468489246
+        ],
+        [
+          137.095458207149,
+          36.695477699075
+        ],
+        [
+          137.095338233784,
+          36.69548357526
+        ],
+        [
+          137.095130972588,
+          36.695486965647
+        ],
+        [
+          137.094999238561,
+          36.695503648958
+        ],
+        [
+          137.094543171594,
+          36.69553788997
+        ],
+        [
+          137.094267842915,
+          36.695568724543
+        ],
+        [
+          137.093909456216,
+          36.695620956579
+        ],
+        [
+          137.093557103163,
+          36.695682744076
+        ],
+        [
+          137.092955926536,
+          36.695792050821
+        ],
+        [
+          137.092477642436,
+          36.695884758756
+        ],
+        [
+          137.090952453339,
+          36.696180657592
+        ],
+        [
+          137.089465753746,
+          36.69647304711
+        ],
+        [
+          137.089348675011,
+          36.696491986693
+        ],
+        [
+          137.088399582835,
+          36.696680981389
+        ],
+        [
+          137.088061887109,
+          36.696736814252
+        ],
+        [
+          137.087961242919,
+          36.696771264144
+        ],
+        [
+          137.087432607057,
+          36.696843641257
+        ],
+        [
+          137.086964764495,
+          36.696891003071
+        ],
+        [
+          137.086394655708,
+          36.69691684533
+        ],
+        [
+          137.085896631062,
+          36.696930387191
+        ],
+        [
+          137.085285275336,
+          36.696909333191
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2005/11/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 23,
+      "chainPolyline": "ee~~EoixcY|AjNP|GCrDe@xHyE~a@WfEClI",
+      "sourceRoad": "串田新黒河線",
+      "matchedName": "串田新黒河線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2005/11/01"
+    },
+    {
+      "id": "jartic-19012550005322601000000000000000",
+      "kind": "noMotorcycle",
+      "name": "串田新黒河線",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.097295035176,
+          36.695305480484
+        ],
+        [
+          137.096754665618,
+          36.695256318799
+        ],
+        [
+          137.096309060656,
+          36.695233345816
+        ],
+        [
+          137.096088487166,
+          36.695232043705
+        ],
+        [
+          137.095457870072,
+          36.695236444669
+        ],
+        [
+          137.094972154249,
+          36.6952647216
+        ],
+        [
+          137.094507358517,
+          36.695300218917
+        ],
+        [
+          137.094033475178,
+          36.695359590969
+        ],
+        [
+          137.093417537527,
+          36.695460509784
+        ],
+        [
+          137.092373557455,
+          36.695660202202
+        ],
+        [
+          137.091972263516,
+          36.695757642418
+        ],
+        [
+          137.091933704999,
+          36.695820883236
+        ],
+        [
+          137.090214542219,
+          36.696147652377
+        ],
+        [
+          137.090088800052,
+          36.696101069092
+        ],
+        [
+          137.088772351342,
+          36.696358862707
+        ],
+        [
+          137.088141491536,
+          36.696482454956
+        ],
+        [
+          137.087863114646,
+          36.696533549945
+        ],
+        [
+          137.087550713767,
+          36.696586964829
+        ],
+        [
+          137.08721907704,
+          36.696627298502
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2005/11/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 12,
+      "chainPolyline": "u`~~EcywcYLnJW|G}CzVHViB|P",
+      "sourceRoad": "串田新黒河線",
+      "matchedName": "串田新黒河線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 終日 / 意思決定 2005/11/01"
+    },
+    {
+      "id": "jartic-19012550005323101000000000000000",
+      "kind": "noMotorcycle",
+      "name": "国道8号",
+      "prefecture": "富山県",
+      "points": [
+        [
+          137.068812254291,
+          36.756529292694
+        ],
+        [
+          137.067693372457,
+          36.756887406047
+        ],
+        [
+          137.06503056547,
+          36.757750765494
+        ],
+        [
+          137.063828613321,
+          36.758140403594
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 73,
+      "chainPolyline": "i_j_FagrcYaIb^",
+      "sourceRoad": "国道8号",
+      "matchedName": "国道8号",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜09:00 / 意思決定 2026/03/01"
+    },
+    {
+      "id": "jartic-19013440000090301000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.886991456126,
+          36.552271175886
+        ],
+        [
+          136.887609285295,
+          36.553483335462
+        ],
+        [
+          136.887936235089,
+          36.554170656921
+        ],
+        [
+          136.88810835234,
+          36.554643573803
+        ],
+        [
+          136.888288678703,
+          36.555382192028
+        ],
+        [
+          136.888531646992,
+          36.556534440048
+        ],
+        [
+          136.888802446705,
+          36.557590771314
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2024/02/27"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ubb~EuvnbYyM_FmQiC",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:00 / 意思決定 2024/02/27"
+    },
+    {
+      "id": "jartic-19013440005917801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.88315867638,
+          36.558270531554
+        ],
+        [
+          136.882668741279,
+          36.557559377499
+        ],
+        [
+          136.883933570161,
+          36.557088697182
+        ],
+        [
+          136.883242731129,
+          36.555902121004
+        ],
+        [
+          136.882719925013,
+          36.55608824281
+        ],
+        [
+          136.88226665797,
+          36.556288857729
+        ],
+        [
+          136.882191646442,
+          36.556151421592
+        ],
+        [
+          136.88199599037,
+          36.555892031503
+        ],
+        [
+          136.881602135091,
+          36.555184707076
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2024/02/27"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ehc~Ew~mbYlC`B|A{FlFhCmA`E|EdC",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:00 / 意思決定 2024/02/27"
+    },
+    {
+      "id": "jartic-19013440005917901000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.88351825554,
+          36.556316710161
+        ],
+        [
+          136.888105453813,
+          36.554641944819
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2024/02/27"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "_|b~E_anbYnIu[",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:00〜08:00 / 意思決定 2024/02/27"
+    },
+    {
+      "id": "jartic-19013660000090801000000000000000",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "富山県",
+      "points": [
+        [
+          136.896700988965,
+          36.623880263818
+        ],
+        [
+          136.896683175046,
+          36.624051094628
+        ],
+        [
+          136.896668138296,
+          36.624098825177
+        ],
+        [
+          136.896639608837,
+          36.62413625125
+        ],
+        [
+          136.89659991101,
+          36.624170137249
+        ],
+        [
+          136.896551072721,
+          36.624196071787
+        ],
+        [
+          136.89629185776,
+          36.624305432652
+        ],
+        [
+          136.895961217915,
+          36.624440856187
+        ],
+        [
+          136.895546824949,
+          36.624578611682
+        ],
+        [
+          136.895446201189,
+          36.624545848683
+        ],
+        [
+          136.895246859253,
+          36.624574684415
+        ],
+        [
+          136.895124058014,
+          36.624585129145
+        ],
+        [
+          136.895024814419,
+          36.624605180376
+        ],
+        [
+          136.89486928912,
+          36.624669172777
+        ],
+        [
+          136.894611558228,
+          36.624768710067
+        ],
+        [
+          136.894347920464,
+          36.624894458773
+        ],
+        [
+          136.894211666402,
+          36.62494668838
+        ],
+        [
+          136.894113934617,
+          36.624949979633
+        ],
+        [
+          136.89432556397,
+          36.627213153733
+        ]
+      ],
+      "note": "通行の禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行の禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/03/01"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "gbp~EkspbYs@Ja@dAu@rCEhBcAtDcMk@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行の禁止 / 07:30〜08:30 / 意思決定 2026/03/01"
+    }
+  ]
+}

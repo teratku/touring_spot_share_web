@@ -1,0 +1,63 @@
+{
+  "prefecture": "福井県",
+  "romaji": "fukui",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:50:41.685Z",
+  "totalRows": 26553,
+  "candidates": [
+    {
+      "id": "jartic-21202606000018600000010600000010",
+      "kind": "noMotorcycle",
+      "name": "芦原丸岡線",
+      "prefecture": "福井県",
+      "points": [
+        [
+          136.2259202,
+          36.217412
+        ],
+        [
+          136.2260861,
+          36.2166494
+        ],
+        [
+          136.2260952,
+          36.2166581
+        ]
+      ],
+      "note": "通行禁止場所",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止場所",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1993/07/20"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 7,
+      "chainPolyline": "yu`|E_sm~XtCc@",
+      "sourceRoad": "芦原丸岡線",
+      "matchedName": "芦原丸岡線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止場所 / 07:00〜08:30 / 意思決定 1993/07/20"
+    }
+  ]
+}

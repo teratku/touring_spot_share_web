@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>二普協由来の規制を JARTIC で作り直す</title>
+<!--
+  ローカル専用（http://127.0.0.1:4317/rebuild.html）。
+
+  【何をする画面か】
+  ⚠️ **販売APIに載せるための作業。** 二普協（JMPSA）の一覧は
+     「非営利目的ならリンク自由」で、データ転用の許諾ではない。そこから作った
+     規制は売れないので、同じ規制が JARTIC 側にあれば作り直す。
+
+  ⚠️ **機械で決めない。** 実測で、短い「市道」が長い「首都圏中央連絡自動車道」に
+     100%重なった（区間が中に収まるため）。逆に「日立有料道路」は同じ道なのに
+     逆向きが59%しかない。ここに出るのは順位付けであって判定ではない。
+     **必ず地図で両方の線を見比べてから押すこと。**
+
+  ⚠️ 置き換えるとアプリで使う規制も JARTIC の区間形状に変わる。
+     区間の切れ目が変わるので、線が伸び縮みして見えるのは正常。
+-->
+<style>
+  :root {
+    --line:#e2e5e9; --muted:#6b7280; --accent:#00a8c6; --warn:#e8590c;
+    --old:#e8590c; --new:#1971c2; --ok:#2b8a3e; --bg:#fbfcfd; --ng:#c92a2a;
+  }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; font:13px/1.5 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif; color:#222; }
+  header { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--line); }
+  header h1 { font-size:15px; margin:0; white-space:nowrap; }
+  .spacer { flex:1; }
+  a.back { color:var(--muted); text-decoration:none; font-size:12px; }
+  a.back:hover { color:var(--accent); }
+  .tag { font-size:11px; background:#e8f7fa; color:#0a7; border-radius:10px; padding:2px 8px; }
+  .tag.sell { background:#ebfbee; color:var(--ok); }
+
+  main { display:flex; height:calc(100% - 42px); }
+  aside { width:420px; min-width:420px; border-right:1px solid var(--line); overflow:auto; padding:10px 12px; }
+  #map { flex:1; }
+
+  .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:6px; }
+  select { font:12px inherit; padding:3px 6px; border:1px solid var(--line); border-radius:4px; background:#fff; }
+  label { font-size:12px; color:var(--muted); }
+  .hint { font-size:11px; color:var(--muted); margin:6px 0; line-height:1.6; }
+  .hint strong { color:#222; }
+
+  .totals { display:flex; gap:8px; flex-wrap:wrap; font-size:11px; margin:8px 0; }
+  .totals b { font-size:15px; display:block; color:#222; }
+  .totals div { background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:4px 9px; }
+
+  ul.list { list-style:none; margin:8px 0 0; padding:0; }
+  ul.list li { border:1px solid var(--line); border-radius:6px; padding:6px 8px; margin-bottom:5px; cursor:pointer; }
+  ul.list li:hover { border-color:var(--accent); }
+  ul.list li.on { border-color:var(--old); background:#fff7f2; }
+  .nm { font-weight:600; }
+  .nm.none { color:var(--muted); font-weight:400; }
+  .meta { font-size:11px; color:var(--muted); }
+  .chip { font-size:10px; border-radius:8px; padding:1px 6px; margin-right:4px; display:inline-block; }
+  .chip.strong { background:#ebfbee; color:var(--ok); }
+  .chip.review { background:#fff4e6; color:var(--warn); }
+  .chip.none   { background:#eef2f5; color:var(--muted); }
+  .chip.time { background:#fff4e6; color:var(--warn); }
+  .chip.day  { background:#e7f5ff; color:#1971c2; }
+  .chip.cc   { background:#eef2f5; color:#495057; }
+  .chip.name { background:#ebfbee; color:var(--ok); }
+
+  .cands { margin:8px 0 0; padding:8px; border:1px solid var(--line); border-radius:6px; background:var(--bg); }
+  .cand { border:1px solid var(--line); border-radius:6px; padding:6px 8px; margin-bottom:6px; background:#fff; }
+  .cand.on { border-color:var(--new); box-shadow:0 0 0 2px #e7f5ff; }
+  .cov { font-variant-numeric:tabular-nums; }
+  button { font:12px inherit; padding:4px 10px; border:1px solid var(--line); border-radius:4px;
+           background:#fff; cursor:pointer; }
+  button:hover { border-color:var(--accent); }
+  button.go { background:var(--new); color:#fff; border-color:var(--new); }
+  button.go:hover { filter:brightness(1.1); }
+  button.skip { color:var(--muted); }
+  .warn { font-size:11px; color:var(--ng); margin:4px 0 6px; line-height:1.6; }
+  .attr { margin-top:12px; padding:8px; background:var(--bg); border:1px solid var(--line);
+          border-radius:6px; font-size:10px; color:var(--muted); line-height:1.7; }
+  .legend { font-size:11px; color:var(--muted); margin:6px 0; }
+  .legend i { display:inline-block; width:14px; height:3px; vertical-align:middle; margin-right:4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>二普協由来の規制を JARTIC で作り直す</h1>
+  <span class="tag" id="left">—</span>
+  <span class="tag sell" id="sell">—</span>
+  <span class="spacer"></span>
+  <a class="back" href="/jartic.html">JARTIC 候補 →</a>
+  <a class="back" href="/road-builder.html">← 道路調整ツール</a>
+</header>
+
+<main>
+  <aside>
+    <div class="row">
+      <label>県 <select id="pref"></select></label>
+    </div>
+
+    <p class="hint">
+      ⚠️ <strong>重なりだけでは決められません。</strong>
+      短い「市道」が長い「首都圏中央連絡自動車道」に100%重なった例があります。
+      逆に「日立有料道路」は同じ道なのに逆向きが59%でした。
+      <strong>必ず地図で2本の線を見比べてから押してください。</strong><br>
+      ⚠️ 置き換えると区間の形が JARTIC のものに変わります（線が伸び縮みするのは正常）。
+    </p>
+    <p class="legend">
+      <i style="background:#e8590c"></i>いま登録されている線　
+      <i style="background:#1971c2"></i>JARTIC の候補
+    </p>
+
+    <div class="totals" id="totals"></div>
+    <ul class="list" id="list"></ul>
+    <div class="attr" id="attr"></div>
+  </aside>
+  <div id="map"></div>
+</main>
+
+<script>
+const state = { romaji: null, data: null, jartic: null, lines: [], sel: null, pick: null, map: null };
+
+const esc = (s) => String(s == null ? "" : s)
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/**
+ * ⚠️ **5桁で読む。** 配信物も端末も5桁（`lib/polyline.js`）。
+ *    6桁で読むと座標が10分の1になって、地図の外へ飛ぶ
+ */
+function decode(str) {
+  const pts = []; let i = 0, lat = 0, lng = 0;
+  while (i < str.length) {
+    let r = 0, sh = 0, b;
+    do { b = str.charCodeAt(i++) - 63; r |= (b & 0x1f) << sh; sh += 5; } while (b >= 0x20);
+    lat += (r & 1) ? ~(r >> 1) : (r >> 1);
+    r = 0; sh = 0;
+    do { b = str.charCodeAt(i++) - 63; r |= (b & 0x1f) << sh; sh += 5; } while (b >= 0x20);
+    lng += (r & 1) ? ~(r >> 1) : (r >> 1);
+    pts.push({ lat: lat / 1e5, lng: lng / 1e5 });
+  }
+  return pts;
+}
+
+const DAY_NAME = ["", "月", "火", "水", "木", "金", "土", "日"];
+function ccLabel(c) {
+  const min = c.minCc ?? 0, max = c.maxCc ?? 99999;
+  if (min === 0 && max >= 99999) return "二輪すべて";
+  if (max >= 99999) return `${min}cc以上`;
+  if (min === 0) return `${max}cc以下`;
+  return `${min}〜${max}cc`;
+}
+function timeChips(c) {
+  return [
+    `<span class="chip cc">${esc(ccLabel(c))}</span>`,
+    c.activeHours ? `<span class="chip time">${esc(c.activeHours.from)}〜${esc(c.activeHours.to)}</span>` : "",
+    (c.activeDays && c.activeDays.length)
+      ? `<span class="chip day">${c.activeDays.map((n) => DAY_NAME[n]).join("")}${c.includesHoliday ? "祝" : ""}</span>`
+      : (c.includesHoliday ? `<span class="chip day">祝</span>` : ""),
+  ].join("");
+}
+const TIER_CLASS = { "強い一致": "strong", "要確認": "review", "候補なし": "none" };
+
+function initMap() {
+  state.map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 35.68, lng: 139.76 }, zoom: 9, mapTypeControl: false, streetViewControl: false,
+  });
+  loadPrefectures();
+}
+window.initMap = initMap;
+
+async function loadPrefectures() {
+  const r = await fetch("/api/rebuild/prefectures").then((x) => x.json());
+  const sel = document.getElementById("pref");
+  if (!r.prefectures.length) {
+    document.getElementById("list").innerHTML =
+      `<li class="meta">${esc(r.note || "作り直す規制はありません")}</li>`;
+    return;
+  }
+  sel.innerHTML = r.prefectures.map((p) =>
+    `<option value="${p.romaji}">${esc(p.prefecture)}（${p.count}）</option>`).join("");
+  sel.onchange = () => load(sel.value);
+  const total = r.prefectures.reduce((a, p) => a + p.count, 0);
+  document.getElementById("left").textContent = `残り ${total}件`;
+  load(r.prefectures[0].romaji);
+}
+
+async function load(romaji) {
+  state.romaji = romaji; state.sel = null; state.pick = null;
+  const [q, j] = await Promise.all([
+    fetch(`/api/rebuild/${romaji}`).then((x) => x.json()),
+    fetch(`/api/jartic/${romaji}`).then((x) => x.json()).catch(() => ({ candidates: [] })),
+  ]);
+  if (q.error) { document.getElementById("list").innerHTML = `<li>${esc(q.error)}</li>`; return; }
+  state.data = q;
+  state.jartic = {};
+  for (const c of j.candidates || []) state.jartic[c.id] = c;
+  // ⚠️ 出典は必ず出す（JARTIC の規約）
+  document.getElementById("attr").textContent = j.attribution || "";
+  render();
+}
+
+function render() {
+  const items = state.data.items || [];
+  const by = (t) => items.filter((x) => x.tier === t).length;
+  document.getElementById("totals").innerHTML = [
+    ["作り直す", items.length], ["強い一致", by("強い一致")],
+    ["要確認", by("要確認")], ["候補なし", by("候補なし")],
+  ].map(([k, v]) => `<div>${k}<b>${v}</b></div>`).join("");
+
+  document.getElementById("list").innerHTML = items.map((it, i) => {
+    const r = it.registered;
+    const on = state.sel === r.id;
+    const name = r.name ? `<span class="nm">${esc(r.name)}</span>`
+                        : `<span class="nm none">(名前なし)</span>`;
+    let body = `<li data-i="${i}" class="${on ? "on" : ""}">
+      <span class="chip ${TIER_CLASS[it.tier]}">${esc(it.tier)}</span>${name}
+      <div class="meta">${esc(r.id)}</div>`;
+    if (on) body += candidatesHtml(it);
+    return body + `</li>`;
+  }).join("") || `<li class="meta">この県はもう作り直すものがありません</li>`;
+
+  for (const li of document.querySelectorAll("ul.list li[data-i]")) {
+    li.onclick = (e) => {
+      if (e.target.tagName === "BUTTON") return;   // ボタンは別の動き
+      const it = items[Number(li.dataset.i)];
+      const opening = state.sel !== it.registered.id;
+      state.sel = opening ? it.registered.id : null;
+      // ⚠️ 開いたらすぐ見比べられるよう、いちばん上の候補を選んでおく。
+      //    **選んであることが「押してよい」という意味ではない**
+      state.pick = opening && it.matches.length ? it.matches[0].id : null;
+      render();
+    };
+  }
+  wireButtons(items);
+  draw(items);
+}
+
+function candidatesHtml(it) {
+  if (!it.matches.length) {
+    return `<div class="cands">
+      <div class="meta">JARTIC に重なる候補がありません。</div>
+      <div class="warn">⚠️ 規制そのものは消えません。アプリでは今までどおり使われ、販売APIにだけ載りません。</div>
+      <button class="skip" data-skip="${esc(it.registered.id)}">JARTIC に無いと決める</button>
+    </div>`;
+  }
+  const cards = it.matches.map((m) => {
+    const c = state.jartic[m.id] || {};
+    const on = state.pick === m.id;
+    return `<div class="cand ${on ? "on" : ""}" data-pick="${esc(m.id)}">
+      <div>${m.name ? `<span class="nm">${esc(m.name)}</span>` : `<span class="nm none">(名前が引けず)</span>`}
+        ${m.nameAgrees ? `<span class="chip name">名前一致</span>` : ""}</div>
+      <div class="meta cov">重なり 順 ${(m.forward * 100).toFixed(0)}%／逆 ${(m.backward * 100).toFixed(0)}%</div>
+      <div>${timeChips(m)}</div>
+      <div class="meta">${esc(m.reason || "")}</div>
+      <div style="margin-top:5px">
+        <button class="go" data-go="${esc(m.id)}">この候補に置き換える</button>
+      </div>
+    </div>`;
+  }).join("");
+  return `<div class="cands">${cards}
+    <div class="warn">⚠️ 地図の2本を見比べてから押してください。重なり率だけでは決まりません。</div>
+    <button class="skip" data-skip="${esc(it.registered.id)}">どれも違う（JARTIC に無い）</button>
+  </div>`;
+}
+
+function wireButtons(items) {
+  for (const el of document.querySelectorAll("[data-pick]")) {
+    el.onclick = (e) => {
+      if (e.target.tagName === "BUTTON") return;
+      state.pick = state.pick === el.dataset.pick ? null : el.dataset.pick;
+      render();
+    };
+  }
+  for (const b of document.querySelectorAll("[data-go]")) {
+    b.onclick = async () => {
+      const it = items.find((x) => x.registered.id === state.sel);
+      b.disabled = true; b.textContent = "置き換え中…";
+      const r = await fetch(`/api/rebuild/${state.romaji}/promote`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registeredId: it.registered.id, candidateId: b.dataset.go }),
+      }).then((x) => x.json());
+      if (r.error) { alert("置き換えられません: " + r.error); b.disabled = false; return; }
+      document.getElementById("sell").textContent = `この県の販売対象 ${r.sellable}件`;
+      // 済んだものは一覧から外す（サーバ側で origin が jartic に変わっている）
+      state.data.items = state.data.items.filter((x) => x.registered.id !== it.registered.id);
+      state.sel = null; state.pick = null;
+      render();
+    };
+  }
+  for (const b of document.querySelectorAll("[data-skip]")) {
+    b.onclick = async () => {
+      b.disabled = true;
+      await fetch("/api/rebuild/skip", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registeredId: b.dataset.skip }),
+      });
+      state.data.items = state.data.items.filter((x) => x.registered.id !== b.dataset.skip);
+      state.sel = null; state.pick = null;
+      render();
+    };
+  }
+}
+
+function draw(items) {
+  for (const l of state.lines) l.setMap(null);
+  state.lines = [];
+  const it = items.find((x) => x.registered.id === state.sel);
+  if (!it) return;
+  const bounds = new google.maps.LatLngBounds();
+
+  // ⚠️ **いま登録されている線は下に敷く。** 上に重ねると候補が隠れて見比べられない
+  //    （実際にそうなった）。太く薄い帯にして「置き換え前」を示す
+  const oldPath = decode(it.registered.polyline || "");
+  oldPath.forEach((p) => bounds.extend(p));
+  state.lines.push(new google.maps.Polyline({
+    path: oldPath, map: state.map, strokeColor: "#e8590c",
+    strokeWeight: 9, strokeOpacity: 0.45, zIndex: 1,
+  }));
+
+  // JARTIC の候補。⚠️ **必ず登録済みより上**（zIndex を下回らせない）
+  for (const m of it.matches) {
+    const c = state.jartic[m.id];
+    if (!c || !c.points) continue;
+    const path = c.points.map(([lng, lat]) => ({ lat, lng }));
+    path.forEach((p) => bounds.extend(p));
+    const on = state.pick === m.id;
+    state.lines.push(new google.maps.Polyline({
+      path, map: state.map, strokeColor: "#1971c2",
+      strokeWeight: on ? 5 : 3, strokeOpacity: on ? 1 : 0.8, zIndex: on ? 9 : 5,
+    }));
+  }
+  if (!bounds.isEmpty()) state.map.fitBounds(bounds);
+}
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>
+</body>
+</html>

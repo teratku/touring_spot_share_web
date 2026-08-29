@@ -209,6 +209,20 @@
         <label style="font-size:11px;color:var(--muted)">
           <input type="checkbox" id="rideHoliday" disabled> 祝日</label>
       </div>
+      <div class="row">
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="includeUnverified" checked> 未確認の JARTIC 候補も避ける</label>
+      </div>
+      <p class="hint">⚠️ <strong>登録済みの規制があるのは25県だけ。</strong>
+        候補はあるのに登録が0件の県が14ある（富山98・福岡21・広島21・岡山12 など）。
+        そこでは規制を避けずに経路が引かれる。<br>
+        ⚠️ <strong>候補は区間の切れ目が交通規制の単位</strong>で、アプリで見せたい「道」の
+        単位とは限らない。<strong>避けすぎて走れる道を回り込むことがある</strong>
+        （実測: 候補を跨ぐ26区間・原付で合計距離 +14.5%、10/26本で経路が変わった）。
+        避けた規制は<strong>確認済みと未確認を分けて</strong>出す。<br>
+        ⚠️ <strong>この画面では既定でオン</strong>（開発者が全部見るための道具なので）。
+        <strong>窓口の既定はオフ</strong>——アプリと販売APIの挙動を黙って変えないため、
+        混ぜたい側が <code>includeUnverified</code> を明示する。</p>
       <p class="hint">⚠️ <strong>125cc以下は高速・自動車専用道を通れない（法令）。</strong>
         チェックを外しても乗らない。</p>
       <p class="hint">⚠️ <strong>走る日時を決めると、その時刻に効いている規制だけを避ける。</strong>
@@ -598,6 +612,8 @@ async function run() {
     // ⚠️ **渡さなければ時間の判断をしない。** 走る時刻が分からないのに
     //    「いまは通れる」と決めてはいけない（時間限定の規制も避ける対象になる）
     ...rideWhen(),
+    // ⚠️ 未確認の候補を混ぜるかどうか。**既定は混ぜない**（避けすぎる恐れがある）
+    includeUnverified: checked("includeUnverified"),
   };
   const corridorScale = Number(val("corridor")) || 1;
   const minScore = Number(val("minScore")) || undefined;
@@ -760,6 +776,31 @@ function renderVariants() {
       // ⚠️ **残った船は必ず出す。** 北海道・沖縄は船なしで行けないので、
       //    黙って消すのではなく「避けられない航路」として見せる
       const ferry = r.ferryMeters || 0;
+      // ⚠️ **避けきれなかった規制は必ず出す。** 出さないと、規制の上を通る経路が
+      //    ふつうの経路にしか見えない。**黙って通させないための表示**
+      const hits = r.restrictionHits || [];
+      const over = r.restrictionSkipped || [];
+      const tries = r.restrictionTries || 0;
+      // ⚠️ **確認済みと未確認を分けて出す。** 未確認（JARTIC の候補）は区間の
+      //    切れ目が道の単位と違うので、同じ重みで見せてはいけない
+      const sure = hits.filter((h) => h.verified !== false);
+      const maybe = hits.filter((h) => h.verified === false);
+      const names = (list) => list
+        .map((h) => `${escapeHtml(h.name || h.id)} ${Math.round((h.ratio || 0) * 100)}%`).join("・");
+      const hitText = (sure.length
+          ? ` ／ <strong style="color:var(--ng)">規制の上を通る${sure.length}件</strong>`
+            + `<span style="color:var(--muted)">（${names(sure)}）</span>`
+          : "")
+        + (maybe.length
+          ? ` ／ <strong style="color:var(--warn)">未確認の規制の上を通る${maybe.length}件</strong>`
+            + `<span style="color:var(--muted)">（${names(maybe)}）</span>`
+          : "");
+      // ⚠️ **塞ぎきれなかったものも出す。** `exclude_polygons` は周囲の合計 10,000m までで、
+      //    超えると経路ごと失敗するので落としている。落としたことを黙ってはいけない
+      const overText = over.length
+        ? ` ／ <strong style="color:var(--ng)">大きすぎて塞げない${over.length}件</strong>` : "";
+      const triesText = tries > 0 && !hits.length && !over.length
+        ? ` <span style="color:var(--ok)">規制を避けた（${tries}回引き直し）</span>` : "";
       right = `<span class="num">${(r.lengthMeters / 1000).toFixed(1)}km ／ `
         + `指示${r.steps.length} ／ Uターン${r.uTurns}`
         + (back > 0 ? ` ／ <strong style="color:var(--ng)">往復${(back / 1000).toFixed(1)}km</strong>` : "")
@@ -767,6 +808,7 @@ function renderVariants() {
         + (ferry > 0 ? ` ／ <strong style="color:var(--ng)">船${(ferry / 1000).toFixed(0)}km</strong>`
                        + `<span style="color:var(--muted)">（避けられない航路）</span>` : "")
         + (roads ? ` ／ <strong>おすすめ${roads}本</strong>` : "")
+        + hitText + overText + triesText
         + (kinds ? `<br>${kinds}` : "") + `</span>`;
     }
     el.innerHTML = `${sw}<span class="name">${v.label}</span>${right}`;

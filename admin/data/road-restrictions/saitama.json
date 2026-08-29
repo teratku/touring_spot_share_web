@@ -1,47 +1,69 @@
 {
  "romaji": "saitama",
- "updatedAt": "2026-08-16T14:06:14.728Z",
- "count": 39,
+ "updatedAt": "2026-08-28T23:52:42.236Z",
+ "count": 37,
  "restrictions": [
   {
-   "id": "manual-saitama-1786884825761",
+   "id": "jartic-12000000000000000000000000227418",
    "kind": "noMotorcycle",
    "name": "新大宮バイパス",
    "prefecture": "埼玉県",
-   "polyline": "qgtyEsghsY~}@gs@pEkBhGsAhRaA",
-   "note": null,
+   "polyline": "ciqyEycjsY_O|@aFt@mGfCcGjEyT~Q_KhIeRzO",
+   "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
    "activeHours": null,
-   "minCc": null,
+   "minCc": 0,
    "maxCc": 50,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786884865871",
+   "id": "jartic-12000000000000000000000000227419",
    "kind": "noMotorcycle",
-   "name": "首都高速埼玉大宮線",
+   "name": "新大宮バイパス",
    "prefecture": "埼玉県",
-   "polyline": "cftyEcghsY`d@i]|VgTnJiDtU{B",
-   "note": null,
+   "polyline": "cftyE{ghsYpTuQzZaW|EeElDaCxFwBjB]lRyA",
+   "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
    "activeHours": null,
-   "minCc": null,
+   "minCc": 0,
    "maxCc": 50,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786884921417",
+   "id": "jartic-12000000000000000000000000026246",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "inu{EkxxqYwMyA",
-   "note": null,
+   "polyline": "{iu{EiwxqY}De@_@C_Gu@eC[aAM",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": {
+    "from": "00:00",
+    "to": "05:00"
+   },
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000025062",
+   "kind": "noMotorcycle",
+   "name": "市道",
+   "prefecture": "埼玉県",
+   "polyline": "kifzEgqgsYs@sEMqCAoA",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -51,31 +73,11 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786885058239",
-   "kind": "noMotorcycle",
-   "name": "市道",
-   "prefecture": "埼玉県",
-   "polyline": "eifzEiqgsYaAqHC_C",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": [
-    7
-   ],
-   "includesHoliday": true,
-   "activeHours": {
-    "from": "00:00",
-    "to": "05:00"
-   },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
    "id": "manual-saitama-1786885231321",
@@ -96,15 +98,16 @@
    "minCc": 251,
    "maxCc": null,
    "checkedAt": "2026-08-16",
-   "source": "admin"
+   "source": "admin",
+   "origin": "jmpsa"
   },
   {
-   "id": "manual-saitama-1786885356581",
+   "id": "jartic-12000000000000000000000000026046",
    "kind": "noMotorcycle",
-   "name": "市道",
+   "name": "首都圏中央連絡自動車道",
    "prefecture": "埼玉県",
-   "polyline": "oj`{EsoisYzEdCzH|I",
-   "note": null,
+   "polyline": "qy_{Ek`isYsG{Hs@s@[SaEeB",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -114,39 +117,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786885823919",
+   "id": "jartic-12000000000000000000000000025846",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "ccgzEeo|sYh_@nEvAWlVwKxV}Jx@C~@Tl@f@no@fs@",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": [
-    7
-   ],
-   "includesHoliday": false,
-   "activeHours": {
-    "from": "00:00",
-    "to": "05:00"
-   },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786886007212",
-   "kind": "noMotorcycle",
-   "name": "市道",
-   "prefecture": "埼玉県",
-   "polyline": "ecgzEqo|sYxDaAn@QdJyDxJuEb@]bOiSpBkC`@[|@QjXqE",
-   "note": null,
+   "polyline": "c{bzE_l{sY}DmFkG}GyGeHoCwC}GkH}GqHeCeCk@Qu@Gc@HiHjCuFxBmErBgAb@oHbDsHfDkBx@o@DcCW}De@kIaAqEg@kDe@",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -156,26 +139,50 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786886143694",
+   "id": "jartic-12000000000000000000000000025847",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "}kjyEee}qYZnD\\`@bBd@rBnCXvAZbAtAfCxBdBrAg@n@UlAGrD\\hAVbGjHdBpAz@F",
-   "note": null,
+   "polyline": "ksdzEg`~sYqInAeGdAgG`A[P_@VmBdC{HpKoCzDiAtA_Br@mD`B{BhAyB|@qGnCYCiD`A",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+   "activeMonths": null,
+   "activeDays": [
+    7
+   ],
+   "includesHoliday": true,
+   "activeHours": {
+    "from": "00:00",
+    "to": "05:00"
+   },
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000026523",
+   "kind": "noMotorcycle",
+   "name": "市道",
+   "prefecture": "埼玉県",
+   "polyline": "ykjyEee}qYFrBJp@P^jAf@j@N^^z@nAXf@Pv@Fx@x@vAx@`BzAdA^PfBy@TId@KhEZ|@JNJ~@|@xBnCp@v@hAvArAl@`@?",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
    "activeHours": null,
-   "minCc": null,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
    "id": "manual-saitama-1786886215127",
@@ -196,15 +203,16 @@
    "minCc": 251,
    "maxCc": null,
    "checkedAt": "2026-08-16",
-   "source": "admin"
+   "source": "admin",
+   "origin": "jmpsa"
   },
   {
-   "id": "manual-saitama-1786886363720",
+   "id": "jartic-12000000000000000000000000025887",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "k{kzEok~sYuNlNaClAqk@vPk]`E",
-   "note": null,
+   "polyline": "aznzEsa}sYjQuBrEm@xEq@|Bi@vEuAfA[bFiA~Bk@|HoCtI}C~@c@bAm@v@u@|A_BhIiI",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -214,18 +222,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786886456159",
+   "id": "jartic-12000000000000000000000000025888",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "ekmzEm{~sYzAvBj@zA`@~CjBh]pCdMx@jNX`FH|C",
-   "note": null,
+   "polyline": "ikmzEk{~sYbAlAVf@b@dAJ\\^jCLhCJ~Ax@`N\\hHpCpLHz@^nIZ`EHbADxBDvA",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -235,18 +244,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786886622490",
+   "id": "jartic-12000000000000000000000000025933",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "i{}yEyshtYe@{B_@e@i@I_EnA_@b@QnAa@nEcGzi@ObB@p@",
-   "note": null,
+   "polyline": "}o~yEy|ftYAw@VwCRaBxBgS~@aIl@kGT}BFwAZiA~@i@rCcAp@N^j@`@vB",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -256,18 +266,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786886786775",
+   "id": "jartic-12000000000000000000000000025308",
    "kind": "noMotorcycle",
    "name": "公園進入路（県管理地）",
    "prefecture": "埼玉県",
-   "polyline": "g}pzEuxasYbHwE",
-   "note": null,
+   "polyline": "a~pzEaxasYbImF",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -277,10 +288,11 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
    "id": "manual-saitama-1786886967556",
@@ -301,17 +313,19 @@
    "minCc": 251,
    "maxCc": null,
    "checkedAt": "2026-08-16",
-   "source": "admin"
+   "source": "admin",
+   "origin": "jmpsa"
   },
   {
-   "id": "manual-saitama-1786887026623",
+   "id": "jartic-12000000000000000000000000227743",
    "kind": "noMotorcycle",
    "name": "下早見菖蒲線",
    "prefecture": "埼玉県",
-   "polyline": "kga{Ei~isYkUtj@oAlHSlN",
-   "note": null,
+   "polyline": "s}_{E}qksYo@jNFnC_N~NeXpNgStf@gBbFu@hISlXOlB_Rnh@gAbEoDp]yApF{A~C{BvCoGjHkHnImLbN",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 規制時間1：[規制時間：自動二輪]　除外時間1：[除外時間：２５０ｃｃ以下]",
    "activeMonths": null,
    "activeDays": [
+    6,
     7
    ],
    "includesHoliday": true,
@@ -319,18 +333,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887105206",
+   "id": "jartic-12000000000000000000000000026049",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "oga{Ei_jsYoB}@q@}@",
-   "note": null,
+   "polyline": "}va{EcjgsYkCeBcEqCYYgDiD{@gCiA}CeBcB{EwE@K~CsIp@aBx@yAfByCfE{G|EcInDcGt@kAX[zAs@vAc@fA]",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -340,18 +355,41 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887159081",
+   "id": "jartic-12000000000000000000000000025707",
+   "kind": "noMotorcycle",
+   "name": "はなみずき通り",
+   "prefecture": "埼玉県",
+   "polyline": "m}syEmhxrYpPbFlJlChAZ~@NrA?`AKhAMn@U|@c@x@q@j@m@bBaB",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+   "activeMonths": null,
+   "activeDays": [
+    7
+   ],
+   "includesHoliday": true,
+   "activeHours": {
+    "from": "00:00",
+    "to": "05:00"
+   },
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000025709",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "mkryEadxrYeGtEgGr@y`@wK",
-   "note": null,
+   "polyline": "snjyEk}zrYL}@@aAv@oIxCv@`Cr@",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -361,18 +399,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887307016",
+   "id": "jartic-12000000000000000000000000025935",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "onjyE}}zrYHo@@w@Do@p@eHnGfB",
-   "note": null,
+   "polyline": "wz~yEochtY_Dcv@",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -382,18 +421,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887402749",
+   "id": "jartic-12000000000000000000000000025941",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "w__zEwzitYbD~u@",
-   "note": null,
+   "polyline": "e~~yEynitYzWmB",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -403,18 +443,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887554363",
+   "id": "jartic-12000000000000000000000000025937",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "c}~yEaoitYlVeB",
-   "note": null,
+   "polyline": "{c~yEk~htYcMv@u@LiIh@yNz@",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -424,18 +465,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887664105",
+   "id": "jartic-12000000000000000000000000025938",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "qm_zEoyhtYxg@}C",
-   "note": null,
+   "polyline": "ig~yE}pjtYmBx@oAt@kGrDmCxCaJlLiBxBeDnEJlCLpD`@rBHxA",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -445,18 +487,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887780569",
+   "id": "jartic-12000000000000000000000000025939",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "{f~yEeojtYGa@[K_D`BoGtD}HpJsL`OQp@@j@TbFp@dF",
-   "note": null,
+   "polyline": "kg~yEqqhtYZ}Bb@s@r@e@DcCCkCU_Gy@uZ[iJ",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -466,18 +509,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887873965",
+   "id": "jartic-12000000000000000000000000025940",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "ue~yE{{itYx@|`@Cj@[Xe@b@]~@OlBF\\DPSrC",
-   "note": null,
+   "polyline": "}~~yEyxitY|WiB",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -487,18 +531,19 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786887924240",
+   "id": "jartic-12000000000000000000000000025942",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "q~~yEwxitYdWkB",
-   "note": null,
+   "polyline": "g}~yEaeitYnW_B",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
    "activeMonths": null,
    "activeDays": [
     7
@@ -508,31 +553,11 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786887972452",
-   "kind": "noMotorcycle",
-   "name": "市道",
-   "prefecture": "埼玉県",
-   "polyline": "y|~yEeeitYzV{A",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": [
-    7
-   ],
-   "includesHoliday": true,
-   "activeHours": {
-    "from": "00:00",
-    "to": "05:00"
-   },
-   "minCc": 246,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
    "id": "manual-saitama-1786888106137",
@@ -553,47 +578,50 @@
    "minCc": 248,
    "maxCc": null,
    "checkedAt": "2026-08-16",
-   "source": "admin"
+   "source": "admin",
+   "origin": "jmpsa"
   },
   {
-   "id": "manual-saitama-1786888161000",
+   "id": "jartic-12000000000000000000000000026524",
    "kind": "noMotorcycle",
    "name": "所沢武蔵村山立川線",
    "prefecture": "埼玉県",
-   "polyline": "wghyEmxxqY`@qEs@uE{Fw@eEsF{Co@kCaBsAkF^yGmCmFKsCtA}Dx@gGs@gNjCkLEyD",
-   "note": null,
+   "polyline": "kghyEyxxqYReBH{@GkAGiAMaA_@g@s@W}CAg@Se@k@uAsBu@_Ae@_@y@QwAQmCkBGMc@kBa@cC@]h@cFOo@[g@aBiCI]Ag@FuC|@wAZqAXmBP}BEsB_@wDM}A?cAnAyHd@yAN_@FU@MEcC",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
    "activeHours": null,
-   "minCc": null,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786888274305",
+   "id": "jartic-12000000000000000000000000278272",
    "kind": "noMotorcycle",
    "name": "市道",
    "prefecture": "埼玉県",
-   "polyline": "a|jyEsegrYzDvBjAbAxAb@fAIp@CfAr@jAdARn@?t@Yx@}@tBs@rCiAdEQhAMzAAdBN`DNnC`@lHXjA`@v@zAlAjCvArEnCbBv@z@TrARhBJrAFdAFh@Xb@h@\\jBPhIHjAf@|Bl@hCz@jBPf@Nl@MnA]h@qCnAo@j@_@^",
-   "note": null,
+   "polyline": "wliyEeqcrYnAuAvAe@p@Yb@k@Ps@?q@e@yAc@m@e@gBkAoFMuGOkDe@_AaAc@gCK{Fi@_@UaHwDkEeC}@qASeAMsAo@yLGoCF{ATyBl@_C|AgG`AuBHe@Ck@Us@IEYS",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
    "activeHours": null,
-   "minCc": null,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786888365172",
+   "id": "jartic-12000000000000000000000000025424",
    "kind": "noMotorcycle",
    "name": "（つないだ道）",
    "prefecture": "埼玉県",
-   "polyline": "w_pyEifksYnEPfAOpA}@f@eAP{@LeASgDsA}Ng@gJ[oKA_GNiFHmCb@cNNcDXcGTmCv@iFlAiJlAgL`@kJR}K?{HKcC",
-   "note": null,
+   "polyline": "ukoyEgvpsYHhG@|C?nDOhFSvFeA~KsCrUg@jF]xHk@tOa@tN~@xWtBtUOxCqArBoBv@sH_@",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
@@ -601,133 +629,124 @@
     "from": "22:00",
     "to": "06:00"
    },
-   "minCc": null,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786888454052",
-   "kind": "noMotorcycle",
-   "name": "国道17号新大宮BP上り線地下道",
-   "prefecture": "埼玉県",
-   "polyline": "gi}yEcpdsYdi@gC",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": null,
-   "includesHoliday": false,
-   "activeHours": null,
-   "minCc": null,
-   "maxCc": 50,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786888487559",
-   "kind": "noMotorcycle",
-   "name": "国道17号新大宮BP下り線地下道",
-   "prefecture": "埼玉県",
-   "polyline": "{}{yEesdsY}k@pC",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": null,
-   "includesHoliday": false,
-   "activeHours": null,
-   "minCc": null,
-   "maxCc": 50,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786888561151",
-   "kind": "noMotorcycle",
-   "name": "市道",
-   "prefecture": "埼玉県",
-   "polyline": "_g|yEkwntYgMfBuBx@i@_BmEeBuNyB_Cb@aAk@cAyCoP`AmE{C}EjAiN~FcKbB",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": [
-    6,
-    7
-   ],
-   "includesHoliday": true,
-   "activeHours": null,
-   "minCc": null,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786888611027",
-   "kind": "noMotorcycle",
-   "name": "長瀞児玉線",
-   "prefecture": "埼玉県",
-   "polyline": "aun{E}p`pYcBzBiLdEoEvCgDbKApA\\^hCiDnGuF^BB^s@bBwFzFiA|LsB~@qCzCeNx@SaAnBqCm@uADq@dHuEFu@g@QoAb@cDg@yAoA{@Bm@^oA~EcAn@wAG[eCaBgDPwD]wByD_C}AoGe@{@u@Sq@`@w@lCoHvH\\hH`BzBG|AyBbAyDqB{DQeD|D\\rIg@^u@mBd@qAq@}D~@cG_DyFUoBNYpDEJm@cFuBiDkC}A]",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": null,
-   "includesHoliday": false,
-   "activeHours": null,
-   "minCc": null,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786888934233",
-   "kind": "noMotorcycle",
-   "name": "市道",
-   "prefecture": "埼玉県",
-   "polyline": "ufczE{hjqY[dCl@~Bf@pBJdAn@`EOd@iArAH~Ak@fCXfA`@b@a@fBi@X[^_C`Ek@d@_@z@G|@If@",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": null,
-   "includesHoliday": false,
-   "activeHours": null,
-   "minCc": null,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786888989074",
-   "kind": "noMotorcycle",
-   "name": "国道17号線新大宮BP上り線地下道",
-   "prefecture": "埼玉県",
-   "polyline": "o|xyEuoesYlg@wL",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": null,
-   "includesHoliday": false,
-   "activeHours": null,
-   "minCc": null,
-   "maxCc": 50,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786889022845",
+   "id": "jartic-12000000000000000000000000025157",
    "kind": "noMotorcycle",
    "name": "新大宮バイパス",
    "prefecture": "埼玉県",
-   "polyline": "_|xyE{oesYx@SJl@dDo@tb@iK",
-   "note": null,
+   "polyline": "a_|yEetdsYmGXiH`@eGZ_Jd@iAD",
+   "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
    "activeHours": null,
-   "minCc": null,
+   "minCc": 0,
    "maxCc": 50,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
-   "id": "manual-saitama-1786889065037",
+   "id": "jartic-12000000000000000000000000025158",
    "kind": "noMotorcycle",
-   "name": "県道下早見菖蒲線",
+   "name": "首都高速埼玉大宮線",
    "prefecture": "埼玉県",
-   "polyline": "mn`{EanjsYmW`NeTpg@eCfLo@r_@sS`l@aBlKI|FyCfRsDbHe`@fe@",
-   "note": null,
+   "polyline": "ok}yE}ndsYbGQpDSpG_@fCKxKg@jDO",
+   "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": 0,
+   "maxCc": 50,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000264191",
+   "kind": "noMotorcycle",
+   "name": "中川通り",
+   "prefecture": "埼玉県",
+   "polyline": "}f|yEewntYyATuADk@Xc@FyAHMH_BV_@FaAj@a@AI_@Gs@YOw@Me@k@gCm@uCSo@AeCg@}Aa@q@Qs@j@e@B}@]m@i@a@iCi@@g@ToAD{@E}BZq@CcAKeA\\}@?_Ae@{@yA",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
+   "activeMonths": null,
+   "activeDays": [
+    6,
+    7
+   ],
+   "includesHoliday": true,
+   "activeHours": null,
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000026755",
+   "kind": "noMotorcycle",
+   "name": "長瀞児玉線",
+   "prefecture": "埼玉県",
+   "polyline": "_un{Eoq`pYw@tAq@t@gAb@cD~@gClAeBjAeC|ASVMb@wAbGe@dAYf@Af@FXRRTAHS`@iAT]j@k@`BiAnAcA^[~@qAV?HL?^[x@Yb@c@f@{@j@a@f@WV_@f@y@x@?~Ak@|BShA@~Bo@n@mAh@iAdBa@X[P_BXwDFu@N{AEmARQOGYH_@pByB?YIQ_@g@E]@WRa@xFaDZq@?]KSOAo@b@oABmBSs@s@e@k@[Cq@Jc@^Mf@U~BS`@a@TaAZc@Ba@CYSGSCqAKUaA}AQs@@o@LkB?gAOcA[o@q@]_Bq@]UK]GcAOu@[eAq@_BYY_@Gg@DUf@UrAO^SZkCpBoC|CMl@Aj@`@xFXh@z@b@Rd@?r@M`@sAhAq@Cc@[aBkA}@SyCQg@Vg@nAcAb@a@x@AdAJf@Nv@SpAB`@T~@IZWJWSk@kBH]^a@DSESIYg@kB?_@XgDXm@LWB[sBgEs@o@EWDe@Oe@?YFIlDBRMF[I[}@Q{CqAcDgCUOy@Q??",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000026673",
+   "kind": "noMotorcycle",
+   "name": "市道",
+   "prefecture": "埼玉県",
+   "polyline": "qfczEaijqY_@zDbAxC`@pCl@hD_AjAa@d@NbBMp@_@jAL~@`@^JZg@jBu@^uCbFu@n@SnA@b@",
+   "note": "二輪の自動車・一般原動機付自転車通行止め",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": 0,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000026778",
+   "kind": "noMotorcycle",
+   "name": "新大宮バイパス",
+   "prefecture": "埼玉県",
+   "polyline": "czxyEcpesYxBi@|NmDlOqDrA[",
+   "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": 0,
+   "maxCc": 50,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
+  },
+  {
+   "id": "jartic-12000000000000000000000000227799",
+   "kind": "noMotorcycle",
+   "name": "圏央道",
+   "prefecture": "埼玉県",
+   "polyline": "{o_{EsnksYqJxKuA|A",
+   "note": "二輪の自動車・一般原動機付自転車通行止め / 規制時間1：[規制時間：自動二輪]　除外時間1：[除外時間：２５０ｃｃ以下]",
    "activeMonths": null,
    "activeDays": [
     6,
@@ -738,32 +757,11 @@
     "from": "00:00",
     "to": "05:00"
    },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
-  },
-  {
-   "id": "manual-saitama-1786889148547",
-   "kind": "noMotorcycle",
-   "name": "県道下早見菖蒲線",
-   "prefecture": "埼玉県",
-   "polyline": "wo_{E_pksYCd@mLdN",
-   "note": null,
-   "activeMonths": null,
-   "activeDays": [
-    6,
-    7
-   ],
-   "includesHoliday": true,
-   "activeHours": {
-    "from": "00:00",
-    "to": "05:00"
-   },
-   "minCc": 251,
-   "maxCc": null,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "minCc": 51,
+   "maxCc": 99999,
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   }
  ]
 }

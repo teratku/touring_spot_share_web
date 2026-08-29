@@ -1,0 +1,63 @@
+{
+  "prefecture": "佐賀県",
+  "romaji": "saga",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:52:39.650Z",
+  "totalRows": 23352,
+  "candidates": [
+    {
+      "id": "jartic-41202606000034000000000000068998",
+      "kind": "noMotorcycle",
+      "name": "鹿島バイパス",
+      "prefecture": "佐賀県",
+      "points": [
+        [
+          130.105251933443,
+          33.0886566872853
+        ],
+        [
+          130.104992334304,
+          33.0890443319739
+        ],
+        [
+          130.104983088869,
+          33.0890584194296
+        ]
+      ],
+      "note": "別表第３　車両通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "別表第３　車両通行禁止",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2023/2/20"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 14,
+      "chainPolyline": "cs}hEydbyWoAt@",
+      "sourceRoad": "鹿島バイパス",
+      "matchedName": "鹿島バイパス",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "別表第３　車両通行禁止 / 07:00〜08:30 / 意思決定 2023/2/20"
+    }
+  ]
+}

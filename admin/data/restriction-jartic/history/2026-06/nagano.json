@@ -1,0 +1,59 @@
+{
+  "prefecture": "長野県",
+  "romaji": "nagano",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:50:24.561Z",
+  "totalRows": 72107,
+  "candidates": [
+    {
+      "id": "jartic-17202603000120700000000000107283",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "長野県",
+      "points": [
+        [
+          137.857639188845,
+          36.4347133574289
+        ],
+        [
+          137.857692567252,
+          36.4347105929531
+        ],
+        [
+          137.857745929983,
+          36.4347097359285
+        ]
+      ],
+      "note": "踏切通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "7",
+        "kindName": "踏切通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/11/10"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "}ck}EgilhY?U",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "踏切通行禁止 / 終日 / 意思決定 2022/11/10"
+    }
+  ]
+}

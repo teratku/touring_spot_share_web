@@ -36,6 +36,7 @@ const { segmentsBetween } = require("./lib/roadRecommendIndex");
 const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
 const { spokenRoadName } = require("./lib/navName");
+const { ATTRIBUTION, normalizeOrigin, isSellable } = require("./lib/restrictionOrigin");
 const { ROMAJI: PREF_ROMAJI } = require("./lib/prefectureRomaji");
 const { PrefectureLocator } = require("./lib/prefectureLocator");
 const restrictionLocator = new PrefectureLocator();
@@ -566,30 +567,90 @@ app.get("/api/restrictions/route", async (req, res) => {
  * ⚠️ **JARTIC の候補は入れない。** あれは未確認の下書き。
  *    road-builder で確認して `road-restrictions` に入ったものだけを使う。
  */
-function restrictionsNear(from, to) {
+/**
+ * 県ぶんの登録済み規制を読む。
+ *
+ * ⚠️ **県は経路が通るところを渡すこと**（`routeWithValhalla` が `restrictionsFor` で
+ *    引いた後に決める）。**両端の県だけでは足りない。** 実測: 東京→大阪の両端は
+ *    [東京都, 大阪府] だが、実際に通るのは8県で **6県ぶんの規制を見落とす**。
+ *    ⚠️ 東京→箱根・名古屋→伊勢では0件なので、**短い区間で試すと気づけない。**
+ *
+ * ⚠️ **JARTIC の候補は使わない。** あれは未確認の下書き。区間の切れ目が
+ *    道の単位と違うので、避けると走れる道を回り込ませる。
+ *    road-builder で確認して `road-restrictions` に入ったものだけ。
+ */
+/**
+ * @param {object} [opts] `sellableOnly` … 販売APIで使う。
+ *   `includeUnverified` … **JARTIC の未確認候補も混ぜる**（1,442件・47県）。
+ *
+ * ⚠️ **既定では混ぜない。** 候補は区間の切れ目が交通規制の単位で決まっていて、
+ *    アプリで見せたい「道」の単位とは限らない。行き過ぎて避けると走れる道を回り込ませる。
+ * ⚠️ ただし**登録があるのは25県だけ**で、候補はあるのに登録0件の県が14ある
+ *    （富山98・福岡21・広島21・岡山12 など）。そこでは規制を避けずに経路が引かれる。
+ *    実測（候補を跨ぐ26区間・原付）: 混ぜると合計距離 +14.5%、10/26本で経路が変わり、
+ *    **上限超過で塞げなかったものは0件**（当たったものだけ塞ぐ設計なので予算は問題にならない）。
+ * ⚠️ **販売APIには混ぜない。** あちらは Firestore の `road_restrictions` だけを読む
+ *    （候補はそこに無い）。混ぜるのは開発者用ツールとアプリの検討まで。
+ *   ⚠️ **商用利用が許されている出どころだけに絞る**（`SELLABLE_ORIGINS`）。
+ *      いまある279件は由来の記録が無いので**1件も残らない**。
+ *      販売に載せるには JARTIC の候補から作り直すこと。
+ */
+function restrictionsForPrefectures(routePoints, opts = {}) {
+  // ⚠️ **経路の線が通る県を全部拾うこと。** 両端だけでは足りない（上の説明）。
+  //    ⚠️ 全点を調べると長距離で重い。間引いて見る（1県は最小でも十数km分の点を持つ）
+  const step = Math.max(1, Math.floor((routePoints || []).length / 400));
+  const prefectures = [];
+  const seenPref = new Set();
+  for (let i = 0; i < (routePoints || []).length; i += step) {
+    const p = routePoints[i];
+    let name = null;
+    try { name = restrictionLocator.locate(p[0], p[1]); } catch (e) { name = null; }
+    if (name && !seenPref.has(name)) { seenPref.add(name); prefectures.push(name); }
+  }
+
   const out = [];
   const seen = new Set();
-  for (const point of [from, to]) {
-    let pref;
-    try { pref = restrictionLocator.locate(point[0], point[1]); } catch (e) { pref = null; }
-    if (!pref) continue;
+  for (const pref of prefectures) {
     const romaji = PREF_ROMAJI[pref];
     if (!romaji || seen.has(romaji)) continue;
     seen.add(romaji);
     const file = path.join(__dirname, "data", "road-restrictions", `${romaji}.json`);
-    if (!fs.existsSync(file)) continue;
+    // ⚠️ **登録が無くても抜けないこと。** ここで `continue` すると、
+    //    **登録0件の14県（富山・福岡・広島・岡山…）が候補を読む前に素通りする**——
+    //    未確認を混ぜる機能が、いちばん要る県で効かなくなる（実際にそうなっていた）
+    if (fs.existsSync(file)) {
+      try {
+        const d = JSON.parse(fs.readFileSync(file, "utf8"));
+        // ⚠️ 登録済みは確認済み。印を付けて、未確認と混ざっても見分けられるようにする
+        out.push(...(d.restrictions || []).map((r) => ({ ...r, verified: true })));
+      } catch (e) { /* 壊れた県は飛ばす。他の県の規制は活かす */ }
+    }
+
+    if (!opts.includeUnverified) continue;
+    const candFile = path.join(__dirname, "data", "restriction-jartic", `${romaji}.json`);
+    if (!fs.existsSync(candFile)) continue;
     try {
-      const d = JSON.parse(fs.readFileSync(file, "utf8"));
-      out.push(...(d.restrictions || []));
-    } catch (e) { /* 壊れた県は飛ばす。他の県の規制は活かす */ }
+      const d = JSON.parse(fs.readFileSync(candFile, "utf8"));
+      // ⚠️ **すでに登録済みのものと二重に数えない。** 作り直しで昇格した候補は
+      //    `road-restrictions` 側に同じ id で入っている
+      const known = new Set(out.map((r) => r.id));
+      for (const c of d.candidates || []) {
+        if (!c || known.has(c.id)) continue;
+        if (!Array.isArray(c.points) || c.points.length < 2) continue;
+        out.push({ ...c, verified: false });
+      }
+    } catch (e) { /* 壊れた県は飛ばす */ }
   }
-  return out;
+  // ⚠️ 販売APIでは、商用利用が許されている出どころだけ（`lib/restrictionOrigin.js`）
+  const usable = opts.sellableOnly ? out.filter(isSellable) : out;
+  // ⚠️ どの県を見たかも返す。見落としが起きていないか確かめるため
+  return { restrictions: usable, prefectures };
 }
 
 app.post("/api/valhalla/route", async (req, res) => {
   const { from, to, vias, variant, costing, excludePolygons,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          at, isHoliday } = req.body || {};
+          at, isHoliday, includeUnverified } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -600,7 +661,7 @@ app.post("/api/valhalla/route", async (req, res) => {
     const out = await routeWithValhalla(from, to,
       { vias, variant, costing, excludePolygons,
         displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-        restrictions: restrictionsNear(from, to),
+        restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
         at: at ? new Date(at) : undefined, isHoliday: !!isHoliday });
     if (out.error) return res.status(502).json(out);
     res.json(out);
@@ -622,13 +683,12 @@ app.post("/api/valhalla/route", async (req, res) => {
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons, funCount, budgetRatio,
           corridorScale, minScore, displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          at, isHoliday } = req.body || {};
+          at, isHoliday, includeUnverified } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
   }
   try {
-    const rideRestrictions = restrictionsNear(from, to);
     const rideAt = at ? new Date(at) : undefined;
     const near = segmentsBetween(from, to);
     // ⚠️ **まわり方は選ばせず、全部作って並べる。**
@@ -654,7 +714,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       const routeFn = (autoVias) => routeWithValhalla(from, to,
         { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          restrictions: rideRestrictions, at: rideAt, isHoliday: !!isHoliday });
+          restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }), at: rideAt, isHoliday: !!isHoliday });
 
       // ⚠️ **実際に引いてから、余計に走らせている道を外す。**
       //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）。
@@ -743,7 +803,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
 app.post("/api/nav/route", async (req, res) => {
   const { from, to, vias, variant, funCount, budgetRatio, corridorScale, minScore,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          announce, guidance, roadNameStyle } = req.body || {};
+          announce, guidance, roadNameStyle, includeUnverified } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -755,10 +815,9 @@ app.post("/api/nav/route", async (req, res) => {
     // ⚠️ `roadNameStyle`: "number"（既定・国道◯号線／県道◯号線）or "name"（路線名のまま）
     // ⚠️ **二輪が通れない道を避ける。** 引いてから掛かったところを塞ぎ直す
     //    （`lib/restrictionAvoid.js`）。`at` を渡さなければ時間の判断をしない
-    const restrictions = restrictionsNear(from, to);
     const drawOptions = { variant: kind, displacement, avoidHighways, avoidTolls,
                           arriveOnNearSide, roadNameStyle, withRoadClass: false,
-                          restrictions,
+                          restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
                           at: req.body.at ? new Date(req.body.at) : undefined,
                           isHoliday: !!req.body.isHoliday };
 
@@ -910,6 +969,179 @@ app.get("/api/jartic/prefectures", (_req, res) => {
   res.json({ prefectures: out });
 });
 
+/* ─────────── 二普協由来の規制を JARTIC で置き換える ─────────── */
+
+/**
+ * ⚠️ **販売APIに載せられるようにするための作業。**
+ *    二普協の一覧は「非営利ならリンク自由」で転用の許諾ではないので、
+ *    そこから作った規制（134件）は売れない。JARTIC は商用可なので、
+ *    同じ規制が JARTIC 側にあれば作り直せる。
+ *
+ * ⚠️ **機械で決めない。** 実測で、短い「市道」が長い「首都圏中央連絡自動車道」に
+ *    100%重なる。逆に「日立有料道路」は同じ道なのに逆向きが59%しかない。
+ *    ここが返すのは順位付けした候補で、判定ではない（`lib/restrictionRebuild.js`）。
+ */
+const REBUILD_DIR = path.join(__dirname, "data", "restriction-rebuild");
+const REBUILD_SKIPPED = path.join(REBUILD_DIR, "skipped.json");
+
+/** 「JARTIC に代わりが無い」と人が判断したもの。⚠️ 消さない限り再び出てこない */
+function loadSkipped() {
+  try { return JSON.parse(fs.readFileSync(REBUILD_SKIPPED, "utf8")).ids || []; }
+  catch { return []; }
+}
+
+app.get("/api/rebuild/prefectures", (_req, res) => {
+  if (!fs.existsSync(REBUILD_DIR)) {
+    return res.json({ prefectures: [], note: "node matchJarticToRegistered.js を実行してください" });
+  }
+  const skipped = new Set(loadSkipped());
+  const out = [];
+  for (const file of fs.readdirSync(REBUILD_DIR).filter((f) => f.endsWith(".json") && f !== "skipped.json")) {
+    try {
+      const d = JSON.parse(fs.readFileSync(path.join(REBUILD_DIR, file), "utf8"));
+      // ⚠️ 一覧と中身で数え方を変えないこと（片方だけ済んだ件を数え続ける）
+      const items = pendingItems(d.items, d.romaji);
+      if (!items.length) continue;
+      out.push({
+        prefecture: d.prefecture, romaji: d.romaji, builtAt: d.builtAt,
+        count: items.length,
+        strong: items.filter((x) => x.tier === "強い一致").length,
+        review: items.filter((x) => x.tier === "要確認").length,
+        none: items.filter((x) => x.tier === "候補なし").length,
+      });
+    } catch { /* 壊れたファイルは飛ばす */ }
+  }
+  out.sort((a, b) => b.strong - a.strong || b.count - a.count);
+  res.json({ prefectures: out, skipped: skipped.size });
+});
+
+/**
+ * まだ作り直していないものだけに絞る。
+ *
+ * ⚠️ **突き合わせファイルは静的な控え。** 置き換えたあとも中身は残るので、
+ *    そのまま返すと済んだ1件が再読込で戻ってくる（実際にそうなった）。
+ *    ⚠️ **いまの登録を見て決めること。** 置き換えると id が `jartic-…` に変わり、
+ *       `origin` も jartic になるので、どちらでも外れる。
+ */
+function pendingItems(items, romaji) {
+  const skipped = new Set(loadSkipped());
+  let live = new Map();
+  try {
+    const reg = JSON.parse(fs.readFileSync(
+      path.join(__dirname, "data", "road-restrictions", `${romaji}.json`), "utf8"));
+    for (const r of reg.restrictions || []) live.set(r.id, r);
+  } catch { /* 県ごと無ければ、残っているものは無い */ }
+  return (items || []).filter((it) => {
+    if (skipped.has(it.registered.id)) return false;
+    const now = live.get(it.registered.id);
+    // 消えた（＝置き換わった）か、もう二普協由来ではない
+    return !!now && now.origin === "jmpsa";
+  });
+}
+
+app.get("/api/rebuild/:romaji", (req, res) => {
+  const file = path.join(REBUILD_DIR, `${req.params.romaji}.json`);
+  if (!fs.existsSync(file)) {
+    return res.status(404).json({ error: "突き合わせがまだです。node matchJarticToRegistered.js" });
+  }
+  try {
+    const d = JSON.parse(fs.readFileSync(file, "utf8"));
+    d.items = pendingItems(d.items, req.params.romaji);
+    res.json(d);
+  } catch (e) { res.status(500).json({ error: `読めません: ${e.message}` }); }
+});
+
+/**
+ * 1件を JARTIC の候補に置き換える。
+ *
+ * ⚠️ **入れ替えはサーバー側でやる。** 画面から県ぶんの配列を送り返させると、
+ *    表示していない規制を巻き添えで消しうる。
+ * ⚠️ **規制の中身は JARTIC のものを採る**（時間帯・排気量・種別）。人が引いた線ではなく
+ *    JARTIC の区間形状に置き換わるので、`origin: "jartic"` と言い切れる。
+ */
+app.post("/api/rebuild/:romaji/promote", (req, res) => {
+  const { romaji } = req.params;
+  const { registeredId, candidateId } = req.body || {};
+  if (!registeredId || !candidateId) {
+    return res.status(400).json({ error: "registeredId と candidateId が要ります" });
+  }
+
+  const regFile = path.join(__dirname, "data", "road-restrictions", `${romaji}.json`);
+  const candFile = path.join(__dirname, "data", "restriction-jartic", `${romaji}.json`);
+  if (!fs.existsSync(regFile)) return res.status(404).json({ error: "その県の規制がありません" });
+  if (!fs.existsSync(candFile)) return res.status(404).json({ error: "その県の JARTIC 候補がありません" });
+
+  let reg, cand;
+  try {
+    reg = JSON.parse(fs.readFileSync(regFile, "utf8"));
+    cand = JSON.parse(fs.readFileSync(candFile, "utf8"));
+  } catch (e) { return res.status(500).json({ error: `読めません: ${e.message}` }); }
+
+  const at = (reg.restrictions || []).findIndex((r) => r.id === registeredId);
+  if (at < 0) return res.status(404).json({ error: "その規制が見つかりません" });
+  const c = (cand.candidates || []).find((x) => x.id === candidateId);
+  if (!c) return res.status(404).json({ error: "その候補が見つかりません" });
+  if (!Array.isArray(c.points) || !c.points.length) {
+    return res.status(400).json({ error: "候補に線がありません" });
+  }
+
+  const old = reg.restrictions[at];
+
+  // ⚠️ **同じ候補に2件を寄せると重複する。** 実際に5件そうなった。
+  //    二普協側では隣り合う2区間でも、JARTIC 側では1区間ということがある。
+  //    ⚠️ **2つ目を足さずに、元の1件を消す**（2区間が1区間にまとまる）
+  const already = reg.restrictions.findIndex((r, i) => i !== at && r.id === c.id);
+  if (already >= 0) {
+    reg.restrictions.splice(at, 1);
+    fs.writeFileSync(regFile, JSON.stringify(
+      { romaji, updatedAt: new Date().toISOString(),
+        count: reg.restrictions.length, restrictions: reg.restrictions }, null, 1) + "\n");
+    return res.json({ ok: true, merged: true, replaced: { from: old.id, to: c.id },
+                      total: reg.restrictions.length,
+                      sellable: reg.restrictions.filter(isSellable).length });
+  }
+
+  reg.restrictions[at] = {
+    id: c.id,
+    kind: c.kind || old.kind,
+    // ⚠️ JARTIC 側で名前が引けていないことがある。そのときは元の名前を残す
+    name: c.name || old.name,
+    prefecture: old.prefecture || cand.prefecture || "",
+    // ⚠️ **5桁で書く。** 配信物も端末も5桁（`lib/polyline.js`）
+    polyline: encodePolyline(c.points),
+    note: c.note || null,
+    activeMonths: c.activeMonths || null,
+    activeDays: c.activeDays || null,
+    includesHoliday: c.includesHoliday === true,
+    activeHours: c.activeHours || null,
+    minCc: Number.isFinite(c.minCc) ? c.minCc : null,
+    maxCc: Number.isFinite(c.maxCc) ? c.maxCc : null,
+    checkedAt: new Date().toISOString().slice(0, 10),
+    source: "admin",
+    // ⚠️ ここが目的。JARTIC は商用可なので販売APIに載る
+    origin: "jartic",
+  };
+
+  fs.writeFileSync(regFile, JSON.stringify(
+    { romaji, updatedAt: new Date().toISOString(),
+      count: reg.restrictions.length, restrictions: reg.restrictions }, null, 1) + "\n");
+
+  const sellable = reg.restrictions.filter(isSellable).length;
+  res.json({ ok: true, replaced: { from: old.id, to: c.id },
+             total: reg.restrictions.length, sellable });
+});
+
+/** 「JARTIC に代わりが無い」と決めたものを控える。⚠️ 規制自体は消さない（アプリでは使う） */
+app.post("/api/rebuild/skip", (req, res) => {
+  const id = req.body && req.body.registeredId;
+  if (!id) return res.status(400).json({ error: "registeredId が要ります" });
+  const ids = new Set(loadSkipped());
+  if (req.body.undo) ids.delete(String(id)); else ids.add(String(id));
+  fs.mkdirSync(REBUILD_DIR, { recursive: true });
+  fs.writeFileSync(REBUILD_SKIPPED, JSON.stringify({ ids: [...ids] }, null, 1) + "\n");
+  res.json({ ok: true, skipped: ids.size });
+});
+
 app.get("/api/jartic/:romaji", (req, res) => {
   const file = path.join(__dirname, "data", "restriction-jartic", `${req.params.romaji}.json`);
   if (!fs.existsSync(file)) {
@@ -1031,6 +1263,14 @@ app.put("/api/restrictions/:romaji", (req, res) => {
       // いつ確認したか。規制は変わるので必ず持たせる
       checkedAt: r.checkedAt || new Date().toISOString().slice(0, 10),
       source: r.source || "admin",
+      // ⚠️ **どの資料をもとに作ったか。販売できるかがこれで決まる。**
+      //    jartic … JARTIC のオープンデータ。**CC BY 4.0 互換・商用可**（出典表示が条件）
+      //    jmpsa  … 二普協の一覧。⚠️ **「非営利ならリンク自由」で転用の許諾ではない**
+      //    osm    … OpenStreetMap のタグ。ODbL（商用可・出典表示が義務）
+      //    survey … 自分で標識を見て作った。自前のもの
+      //    ⚠️ **記録が無いものは販売APIに載せない。** 由来が分からないものを
+      //       売り物に入れてはいけない（あとから切り分けられない）
+      origin: normalizeOrigin(r.origin, r.id),
     });
   }
   const dir = path.join(__dirname, "data", "road-restrictions");

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  JARTIC の交通規制情報を月に一度取り込む launchd の設定。
+
+  ⚠️ **置き場所**: ~/Library/LaunchAgents/com.biketeilen.jartic-monthly.plist
+  ⚠️ **読み込み**: launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.biketeilen.jartic-monthly.plist
+  ⚠️ **止める**:   launchctl bootout gui/$(id -u)/com.biketeilen.jartic-monthly
+
+  ⚠️ **毎月5日にしてある。** JARTIC の公開は月初だが「作業状況により更新が遅れる場合が
+     あります」と書かれているため、1日ちょうどだと前月ぶんを掴むことがある。
+  ⚠️ **Mac が寝ていると走らない。** 過ぎた時刻は、次に起きたときに1回だけ走る。
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.biketeilen.jartic-monthly</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/teradatakumi/Documents/touring_spot_share_web/admin/jartic-monthly.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Day</key><integer>5</integer>
+    <key>Hour</key><integer>4</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/teradatakumi/Documents/touring_spot_share_web/admin/data/restriction-jartic/logs/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/teradatakumi/Documents/touring_spot_share_web/admin/data/restriction-jartic/logs/launchd.err.log</string>
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>

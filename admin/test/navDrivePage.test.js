@@ -124,3 +124,29 @@ test("日時を経路の依頼に混ぜている", () => {
   const code = inlineScripts().join("\n");
   assert.ok(/\.\.\.rideWhen\(\)/.test(code), "依頼に日時を混ぜていない");
 });
+
+test("避けきれなかった規制を、画面に出している", () => {
+  // ⚠️ **出さないと、規制の上を通る経路がふつうの経路にしか見えない。**
+  //    窓口は返しているのに画面が捨てていた（実際にそうなっていた）
+  const html = fs.readFileSync(
+    require("path").join(__dirname, "..", "public", "valhalla.html"), "utf8");
+  assert.ok(/restrictionHits/.test(html), "避けきれなかった規制を読んでいない");
+  assert.ok(/規制の上を通る/.test(html), "避けきれなかった規制の見出しが無い");
+  // ⚠️ exclude_polygons は周囲の合計 10,000m まで。超えたぶんは落としている
+  assert.ok(/restrictionSkipped/.test(html), "塞げなかった規制を読んでいない");
+  assert.ok(/塞げない/.test(html), "塞げなかった規制の見出しが無い");
+  // 何件ぶつかったかだけでなく、どの規制かを出す
+  assert.ok(/h\.name \|\| h\.id/.test(html), "どの規制かを出していない（件数だけ）");
+
+  // ⚠️ **組み立てただけでは出ない。** 表示する文字列に繋がっているか確かめる
+  //    （文言を作っておいて `right` に足し忘れる、という抜け方をする）
+  // ⚠️ 手前に置き場所だけの `right = ...—...` があるので、そこを掴まないこと
+  //    （掴むと定義そのものを数えてしまい、足し忘れを見逃す）
+  const at = html.indexOf("right = `<span class=\"num\">${(r.lengthMeters");
+  assert.ok(at > 0, "経路のまとめを組み立てている場所が見つからない");
+  const built = html.slice(at, html.indexOf("el.innerHTML", at));
+  assert.ok(!built.includes("const hitText"), "切り出す範囲が広すぎる（定義を含んでいる）");
+  for (const name of ["hitText", "overText"]) {
+    assert.ok(built.includes(name), `${name} を表示に足していない（作っただけ）`);
+  }
+});

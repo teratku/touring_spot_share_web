@@ -184,3 +184,56 @@ test("曜日・時間つきの規制が実際に取れている", (t) => {
   assert.ok(withTime > 0,
     "時間つきの規制が1件も取れていない（実測: 神奈川10件・大阪14件・新潟25件）");
 });
+
+// MARK: 月ごとの控えと増減
+
+test("取り込むと月ごとの控えが残る", (t) => {
+  if (skipIfNotBuilt(t)) return;
+  // ⚠️ **これが無いと「規制が解除された」ことを永久に検知できない。**
+  //    JARTIC は前月ぶんを消し、廃止の印も付けない（実測: 意思決定廃止日 0.0%）
+  const history = path.join(DIR, "history");
+  assert.ok(fs.existsSync(history), "月ごとの控えの置き場が無い");
+  const months = fs.readdirSync(history).filter((d) => /^\d{4}-\d{2}$/.test(d));
+  assert.ok(months.length >= 1, `控えが ${months.length} か月ぶんしかない`);
+  for (const m of months) {
+    const files = fs.readdirSync(path.join(history, m)).filter((f) => f.endsWith(".json"));
+    assert.ok(files.length >= 1, `${m} の控えが空`);
+  }
+});
+
+test("控えの月の名前が並べ替えられる形", () => {
+  // ⚠️ 「2026年6月」のままだと文字の並びで前後が決まらず、前の月を選び損ねる
+  const dirs = fs.existsSync(path.join(DIR, "history"))
+    ? fs.readdirSync(path.join(DIR, "history")) : [];
+  for (const d of dirs) {
+    assert.ok(/^\d{4}-\d{2}$/.test(d) || d === "unknown", `並べ替えられない名前: ${d}`);
+  }
+});
+
+test("控えるのは候補だけ（生CSVは残さない）", (t) => {
+  if (skipIfNotBuilt(t)) return;
+  // ⚠️ 生CSVは47県で約363MB/月（年4.3GB）。候補なら3.9MB/月（年47MB）
+  const history = path.join(DIR, "history");
+  if (!fs.existsSync(history)) return;
+  for (const m of fs.readdirSync(history)) {
+    const dir = path.join(history, m);
+    if (!fs.statSync(dir).isDirectory()) continue;
+    for (const f of fs.readdirSync(dir)) {
+      assert.ok(f.endsWith(".json"), `控えに ${f} が混ざっている（候補JSONだけにすること）`);
+    }
+  }
+});
+
+test("月に一度の取り込みの手順が置いてある", () => {
+  // ⚠️ **取り逃すとその月は永久に取れない。** 手順が消えていないこと
+  const sh = path.join(__dirname, "..", "jartic-monthly.sh");
+  const plist = path.join(__dirname, "..", "jartic-monthly.plist");
+  assert.ok(fs.existsSync(sh), "月次の実行スクリプトが無い");
+  assert.ok(fs.existsSync(plist), "launchd の設定が無い");
+  const shBody = fs.readFileSync(sh, "utf8");
+  // ⚠️ launchd から node は PATH に居ない。明示していないと黙って失敗する
+  assert.ok(/export PATH=/.test(shBody), "PATH を明示していない（launchd から node が見えない）");
+  assert.ok(/--all/.test(shBody), "全県を取り込む形になっていない");
+  const plistBody = fs.readFileSync(plist, "utf8");
+  assert.ok(/StartCalendarInterval/.test(plistBody), "実行時刻の指定が無い");
+});

@@ -81,7 +81,12 @@ function hitsOnRoute(routePoints, restrictions, options = {}) {
   const hits = found.get("route") || [];
   const byId = new Map(restrictions.map((r) => [r.id, r]));
   return hits
-    .map((h) => ({ ...h, id: h.restrictionId, points: (byId.get(h.restrictionId) || {}).points }))
+    .map((h) => {
+      const src = byId.get(h.restrictionId) || {};
+      // ⚠️ **確認済みかどうかを落とさない。** 未確認（JARTIC の候補）を避けたのか、
+      //    人が地図で見て登録したものを避けたのかは、見る側にとって意味が違う
+      return { ...h, id: h.restrictionId, points: src.points, verified: src.verified !== false };
+    })
     .filter((h) => h.points && h.points.length >= 2)
     .sort((a, b) => b.ratio - a.ratio);
 }

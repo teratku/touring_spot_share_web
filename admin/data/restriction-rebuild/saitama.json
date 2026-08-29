@@ -1,0 +1,1223 @@
+{
+  "prefecture": "埼玉県",
+  "romaji": "saitama",
+  "builtAt": "2026-08-28",
+  "count": 39,
+  "items": [
+    {
+      "registered": {
+        "id": "manual-saitama-1786884825761",
+        "name": "新大宮バイパス",
+        "kind": "noMotorcycle",
+        "polyline": "qgtyEsghsY~}@gs@pEkBhGsAhRaA",
+        "minCc": null,
+        "maxCc": 50,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000227418",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2012/11/21",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.63,
+          "nameAgrees": true
+        },
+        {
+          "id": "jartic-12000000000000000000000000227419",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2012/11/21",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 0.8,
+          "backward": 0.5,
+          "nameAgrees": true
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786884865871",
+        "name": "首都高速埼玉大宮線",
+        "kind": "noMotorcycle",
+        "polyline": "cftyEcghsY`d@i]|VgTnJiDtU{B",
+        "minCc": null,
+        "maxCc": 50,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000227419",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2012/11/21",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 0.8,
+          "backward": 0.63,
+          "nameAgrees": false
+        },
+        {
+          "id": "jartic-12000000000000000000000000227418",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2012/11/21",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 0.8,
+          "backward": 0.5,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786884921417",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "inu{EkxxqYwMyA",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026246",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 意思決定 2004/01/21",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": null,
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.67,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786885058239",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "eifzEiqgsYaAqHC_C",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025062",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/04/21",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786885356581",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "oj`{EsoisYzEdCzH|I",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026046",
+          "name": "首都圏中央連絡自動車道",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 2004/01/21",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886007212",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "ecgzEqo|sYxDaAn@QdJyDxJuEb@]bOiSpBkC`@[|@QjXqE",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025847",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 2004/01/21",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.71,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886143694",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "}kjyEee}qYZnD\\`@bBd@rBnCXvAZbAtAfCxBdBrAg@n@UlAGrD\\hAVbGjHdBpAz@F",
+        "minCc": null,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026523",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 終日 / 意思決定 1983/09/08",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.96,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886456159",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "ekmzEm{~sYzAvBj@zA`@~CjBh]pCdMx@jNX`FH|C",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025888",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1984/05/30",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.88,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886622490",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "i{}yEyshtYe@{B_@e@i@I_EnA_@b@QnAa@nEcGzi@ObB@p@",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025933",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/04/21",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.8,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886786775",
+        "name": "公園進入路（県管理地）",
+        "kind": "noMotorcycle",
+        "polyline": "g}pzEuxasYbHwE",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025308",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/04/21",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887026623",
+        "name": "下早見菖蒲線",
+        "kind": "noMotorcycle",
+        "polyline": "kga{Ei~isYkUtj@oAlHSlN",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000227743",
+          "name": "下早見菖蒲線",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 規制時間1：[規制時間：自動二輪]　除外時間1：[除外時間：２５０ｃｃ以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 土曜・日曜・休日 / 意思決定 2012/10/24",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            6,
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 0.75,
+          "backward": 0.16,
+          "nameAgrees": true
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887105206",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "oga{Ei_jsYoB}@q@}@",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026050",
+          "name": "下早見菖蒲線",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/04/21",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        },
+        {
+          "id": "jartic-12000000000000000000000000026049",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/04/21",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 0.67,
+          "backward": 0.09,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887159081",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "mkryEadxrYeGtEgGr@y`@wK",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025707",
+          "name": "はなみずき通り",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1984/11/01",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.62,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887307016",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "onjyE}}zrYHo@@w@Do@p@eHnGfB",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025709",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1984/11/01",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.83,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887402749",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "w__zEwzitYbD~u@",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025935",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/05/04",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887554363",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "c}~yEaoitYlVeB",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025941",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/05/04",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887780569",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "{f~yEeojtYGa@[K_D`BoGtD}HpJsL`OQp@@j@TbFp@dF",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025938",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/05/04",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 0.91,
+          "backward": 0.75,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887924240",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "q~~yEwxitYdWkB",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025940",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/05/04",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887972452",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "y|~yEeeitYzV{A",
+        "minCc": 246,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025942",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/05/04",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888161000",
+        "name": "所沢武蔵村山立川線",
+        "kind": "noMotorcycle",
+        "polyline": "wghyEmxxqY`@qEs@uE{Fw@eEsF{Co@kCaBsAkF^yGmCmFKsCtA}Dx@gGs@gNjCkLEyD",
+        "minCc": null,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026524",
+          "name": "所沢武蔵村山立川線",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 終日 / 意思決定 1983/09/08",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.95,
+          "nameAgrees": true
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888274305",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "a|jyEsegrYzDvBjAbAxAb@fAIp@CfAr@jAdARn@?t@Yx@}@tBs@rCiAdEQhAMzAAdBN`DNnC`@lHXjA`@v@zAlAjCvArEnCbBv@z@TrARhBJrAFdAFh@Xb@h@\\jBPhIHjAf@|Bl@hCz@jBPf@Nl@MnA]h@qCnAo@j@_@^",
+        "minCc": null,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000278272",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 終日 / 意思決定 2023/10/06",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 0.83,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888365172",
+        "name": "（つないだ道）",
+        "kind": "noMotorcycle",
+        "polyline": "w_pyEifksYnEPfAOpA}@f@eAP{@LeASgDsA}Ng@gJ[oKA_GNiFHmCb@cNNcDXcGTmCv@iFlAiJlAgL`@kJR}K?{HKcC",
+        "minCc": null,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025424",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 22:00〜06:00 / 意思決定 2004/01/21",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": null,
+          "activeHours": {
+            "from": "22:00",
+            "to": "06:00"
+          },
+          "forward": 0.8,
+          "backward": 0.83,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888561151",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "_g|yEkwntYgMfBuBx@i@_BmEeBuNyB_Cb@aAk@cAyCoP`AmE{C}EjAiN~FcKbB",
+        "minCc": null,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000264191",
+          "name": "中川通り",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 終日 / 土曜・日曜・休日 / 意思決定 2021/11/18",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            6,
+            7
+          ],
+          "activeHours": null,
+          "forward": 0.79,
+          "backward": 0.68,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888611027",
+        "name": "長瀞児玉線",
+        "kind": "noMotorcycle",
+        "polyline": "aun{E}p`pYcBzBiLdEoEvCgDbKApA\\^hCiDnGuF^BB^s@bBwFzFiA|LsB~@qCzCeNx@SaAnBqCm@uADq@dHuEFu@g@QoAb@cDg@yAoA{@Bm@^oA~EcAn@wAG[eCaBgDPwD]wByD_C}AoGe@{@u@Sq@`@w@lCoHvH\\hH`BzBG|AyBbAyDqB{DQeD|D\\rIg@^u@mBd@qAq@}D~@cG_DyFUoBNYpDEJm@cFuBiDkC}A]",
+        "minCc": null,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026755",
+          "name": "長瀞児玉線",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 終日 / 意思決定 1988/11/14",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.96,
+          "nameAgrees": true
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888934233",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "ufczE{hjqY[dCl@~Bf@pBJdAn@`EOd@iArAH~Ak@fCXfA`@b@a@fBi@X[^_C`Ek@d@_@z@G|@If@",
+        "minCc": null,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026673",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 終日 / 意思決定 1991/03/11",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888989074",
+        "name": "国道17号線新大宮BP上り線地下道",
+        "kind": "noMotorcycle",
+        "polyline": "o|xyEuoesYlg@wL",
+        "minCc": null,
+        "maxCc": 50,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026778",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2004/09/29",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.6,
+          "nameAgrees": false
+        },
+        {
+          "id": "jartic-12000000000000000000000000026779",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2004/09/29",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.33,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786889022845",
+        "name": "新大宮バイパス",
+        "kind": "noMotorcycle",
+        "polyline": "_|xyE{oesYx@SJl@dDo@tb@iK",
+        "minCc": null,
+        "maxCc": 50,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000026778",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2004/09/29",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.6,
+          "nameAgrees": true
+        },
+        {
+          "id": "jartic-12000000000000000000000000026779",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 2004/09/29",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.5,
+          "nameAgrees": true
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786889065037",
+        "name": "県道下早見菖蒲線",
+        "kind": "noMotorcycle",
+        "polyline": "mn`{EanjsYmW`NeTpg@eCfLo@r_@sS`l@aBlKI|FyCfRsDbHe`@fe@",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000227743",
+          "name": "下早見菖蒲線",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 規制時間1：[規制時間：自動二輪]　除外時間1：[除外時間：２５０ｃｃ以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 土曜・日曜・休日 / 意思決定 2012/10/24",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            6,
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 0.82,
+          "backward": 0.53,
+          "nameAgrees": true
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786889148547",
+        "name": "県道下早見菖蒲線",
+        "kind": "noMotorcycle",
+        "polyline": "wo_{E_pksYCd@mLdN",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "強い一致",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000227799",
+          "name": "圏央道",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 規制時間1：[規制時間：自動二輪]　除外時間1：[除外時間：２５０ｃｃ以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 土曜・日曜・休日 / 意思決定 2012/10/24",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            6,
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 1,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786885231321",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "ih|zEijsrYeAmCgAmBv@e@^k@rCwA",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "候補なし",
+      "matches": []
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786885823919",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "ccgzEeo|sYh_@nEvAWlVwKxV}Jx@C~@Tl@f@no@fs@",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "要確認",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025846",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 2004/01/21",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.46,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886215127",
+        "name": "町道",
+        "kind": "noMotorcycle",
+        "polyline": "wth{E_`apYxBzH",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "候補なし",
+      "matches": []
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886363720",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "k{kzEok~sYuNlNaClAqk@vPk]`E",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "要確認",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025887",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1984/05/30",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.38,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786886967556",
+        "name": "（つないだ道）",
+        "kind": "noMotorcycle",
+        "polyline": "mxozEwtbsY|IbQ",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "候補なし",
+      "matches": []
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887664105",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "qm_zEoyhtYxg@}C",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "要確認",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025937",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/05/04",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 1,
+          "backward": 0.4,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786887873965",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "ue~yE{{itYx@|`@Cj@[Xe@b@]~@OlBF\\DPSrC",
+        "minCc": 251,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "要確認",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025939",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/05/04",
+          "minCc": 51,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 0.8,
+          "backward": 0.56,
+          "nameAgrees": false
+        },
+        {
+          "id": "jartic-12000000000000000000000000025933",
+          "name": "(名前が引けず)",
+          "note": "二輪の自動車・一般原動機付自転車通行止め / 除外車両1：[その他：250cc以下]",
+          "reason": "二輪の自動車・一般原動機付自転車通行止め / 00:00〜05:00 / 日曜・休日 / 意思決定 1983/04/21",
+          "minCc": 0,
+          "maxCc": 99999,
+          "activeDays": [
+            7
+          ],
+          "activeHours": {
+            "from": "00:00",
+            "to": "05:00"
+          },
+          "forward": 0.9,
+          "backward": 0.33,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888106137",
+        "name": "市道",
+        "kind": "noMotorcycle",
+        "polyline": "q`uyEy~xrYxFb@^RfGzKdDwCYcArH_H",
+        "minCc": 248,
+        "maxCc": null,
+        "prefecture": "埼玉県"
+      },
+      "tier": "候補なし",
+      "matches": []
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888454052",
+        "name": "国道17号新大宮BP上り線地下道",
+        "kind": "noMotorcycle",
+        "polyline": "gi}yEcpdsYdi@gC",
+        "minCc": null,
+        "maxCc": 50,
+        "prefecture": "埼玉県"
+      },
+      "tier": "要確認",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025157",
+          "name": "新大宮バイパス",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 1985/03/15",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.33,
+          "nameAgrees": false
+        },
+        {
+          "id": "jartic-12000000000000000000000000025158",
+          "name": "首都高速埼玉大宮線",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 1985/03/15",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.29,
+          "nameAgrees": false
+        }
+      ]
+    },
+    {
+      "registered": {
+        "id": "manual-saitama-1786888487559",
+        "name": "国道17号新大宮BP下り線地下道",
+        "kind": "noMotorcycle",
+        "polyline": "{}{yEesdsY}k@pC",
+        "minCc": null,
+        "maxCc": 50,
+        "prefecture": "埼玉県"
+      },
+      "tier": "要確認",
+      "matches": [
+        {
+          "id": "jartic-12000000000000000000000000025158",
+          "name": "首都高速埼玉大宮線",
+          "note": "車両通行止め（その他） / 対象車両1：[その他：特定原付]",
+          "reason": "車両通行止め（その他） / 終日 / 意思決定 1985/03/15",
+          "minCc": 0,
+          "maxCc": 50,
+          "activeDays": null,
+          "activeHours": null,
+          "forward": 1,
+          "backward": 0.29,
+          "nameAgrees": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "prefecture": "大分県",
+  "romaji": "oita",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:52:50.183Z",
+  "totalRows": 35824,
+  "candidates": [
+    {
+      "id": "jartic-44000101000005000000018300000012",
+      "kind": "noMotorcycle",
+      "name": "米良バイパス",
+      "prefecture": "大分県",
+      "points": [
+        [
+          131.635462,
+          33.204322
+        ],
+        [
+          131.635387,
+          33.205027
+        ],
+        [
+          131.635355,
+          33.205619
+        ],
+        [
+          131.635352,
+          33.206111
+        ],
+        [
+          131.635352,
+          33.206752
+        ],
+        [
+          131.635376,
+          33.207294
+        ],
+        [
+          131.635405,
+          33.207775
+        ],
+        [
+          131.636082,
+          33.215117
+        ],
+        [
+          131.63609,
+          33.215261
+        ]
+      ],
+      "note": "車両通行止め",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両通行止め",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2023/07/01"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 1,
+      "chainPolyline": "_ftiEs`mbXcGRmICyp@mC",
+      "sourceRoad": "米良バイパス",
+      "matchedName": "米良バイパス",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "車両通行止め / 終日 / 意思決定 2023/07/01"
+    },
+    {
+      "id": "jartic-44000101000005000000018700000012",
+      "kind": "noMotorcycle",
+      "name": "中央通り線",
+      "prefecture": "大分県",
+      "points": [
+        [
+          131.607294,
+          33.238936
+        ],
+        [
+          131.607457,
+          33.234701
+        ]
+      ],
+      "note": "車両通行止め",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "22:00",
+        "to": "05:00"
+      },
+      "minCc": 51,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両通行止め",
+        "vehicles": [
+          "自二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2019/02/18"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 4,
+      "chainPolyline": "k~ziEqpgbXnYa@",
+      "sourceRoad": "中央通り線",
+      "matchedName": "中央通り線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "自二輪",
+      "confidence": "JARTIC",
+      "reason": "車両通行止め / 22:00〜05:00 / 意思決定 2019/02/18"
+    }
+  ]
+}

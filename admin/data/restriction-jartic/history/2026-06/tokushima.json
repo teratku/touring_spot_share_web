@@ -1,0 +1,155 @@
+{
+  "prefecture": "徳島県",
+  "romaji": "tokushima",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:52:18.376Z",
+  "totalRows": 20748,
+  "candidates": [
+    {
+      "id": "jartic-36202605000275200000011302000024",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "徳島県",
+      "points": [
+        [
+          134.6677778,
+          33.9176875
+        ],
+        [
+          134.667834,
+          33.9178389
+        ]
+      ],
+      "note": "別表第２　一般道路における通行の禁止および制限",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 51,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "4",
+        "kindName": "別表第２　一般道路における通行の禁止および制限",
+        "vehicles": [
+          "自二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1990/07/03"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "qp_nEsh}tX]I",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "自二輪",
+      "confidence": "JARTIC",
+      "reason": "別表第２　一般道路における通行の禁止および制限 / 終日 / 意思決定 1990/07/03"
+    },
+    {
+      "id": "jartic-36202605000275300000011302000026",
+      "kind": "noMotorcycle",
+      "name": "大林那賀川阿南線",
+      "prefecture": "徳島県",
+      "points": [
+        [
+          134.6667364,
+          33.9333152
+        ],
+        [
+          134.6667402,
+          33.9333492
+        ],
+        [
+          134.6667298,
+          33.9333663
+        ],
+        [
+          134.666747,
+          33.9334912
+        ],
+        [
+          134.6668891,
+          33.9344614
+        ],
+        [
+          134.6671427,
+          33.936162
+        ],
+        [
+          134.6672044,
+          33.9365729
+        ],
+        [
+          134.6673334,
+          33.9374444
+        ],
+        [
+          134.667355,
+          33.9374814
+        ],
+        [
+          134.6673581,
+          33.9375333
+        ],
+        [
+          134.667247,
+          33.9375403
+        ],
+        [
+          134.6672345,
+          33.9374924
+        ],
+        [
+          134.6672541,
+          33.9374579
+        ],
+        [
+          134.6666388,
+          33.9334064
+        ],
+        [
+          134.666617,
+          33.9333619
+        ],
+        [
+          134.6666138,
+          33.9333325
+        ]
+      ],
+      "note": "別表第２　一般道路における通行の禁止および制限",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 51,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "4",
+        "kindName": "別表第２　一般道路における通行の禁止および制限",
+        "vehicles": [
+          "自二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2006/03/20"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 10,
+      "chainPolyline": "grbnEcb}tXiY{BFX~XzB",
+      "sourceRoad": "大林那賀川阿南線",
+      "matchedName": "大林那賀川阿南線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "自二輪",
+      "confidence": "JARTIC",
+      "reason": "別表第２　一般道路における通行の禁止および制限 / 終日 / 意思決定 2006/03/20"
+    }
+  ]
+}

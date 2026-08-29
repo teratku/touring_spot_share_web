@@ -745,3 +745,57 @@ test("日時を渡さなければ、時間限定でも避ける", async (t) => {
   assert.strictEqual(applicable(timed, {}).length, 1,
     "日時を渡していないのに、時間限定の規制を対象から外している");
 });
+
+// MARK: 規制を読む県
+
+test("経路が通る県の規制を、すべて読む", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **両端の県だけでは足りない。** 実測: 東京→大阪の両端は [東京都, 大阪府] だが
+  //    実際に通るのは8県で、**6県ぶんの規制を見落としていた**。
+  //    ⚠️ **短い区間では確かめられない**（東京→箱根・名古屋→伊勢は両端で足りる）。
+  //       長距離で試すこと
+  const { PrefectureLocator } = require("../lib/prefectureLocator");
+  const locator = new PrefectureLocator();
+  const seen = [];
+  const r = await routeWithValhalla([139.7671, 35.6812], [135.5023, 34.6937], {
+    variant: "normal", displacement: "moped50", withRoadClass: false, withAdmins: false,
+    restrictionsFor: (points) => {
+      const step = Math.max(1, Math.floor(points.length / 400));
+      const names = new Set();
+      for (let i = 0; i < points.length; i += step) {
+        const n = locator.locate(points[i][0], points[i][1]);
+        if (n) names.add(n);
+      }
+      seen.push(...names);
+      return { restrictions: [], prefectures: [...names] };
+    },
+  });
+  assert.ok(!r.error, `経路が引けない: ${r.error}`);
+
+  for (const pref of ["東京都", "神奈川県", "静岡県", "愛知県", "三重県", "大阪府"]) {
+    assert.ok(seen.includes(pref), `${pref} の規制を読んでいない（読んだ県: ${seen.join(",")}）`);
+  }
+  assert.ok(seen.length >= 6, `${seen.length}県しか読んでいない`);
+  // ⚠️ 広く取りすぎてもいけない。おすすめ道路用の円は35県を返す
+  assert.ok(seen.length <= 12, `${seen.length}県は多すぎる（実際に通るのは8県）`);
+});
+
+test("長距離でも県を取り違えない（Valhalla の上限に当たらない）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **`trace_attributes` は200kmまで。** 使うと長距離で
+  //    「Path distance exceeds the max distance limit: 200000 meters」になり
+  //    **0県**になる（実測: 東京→大阪561kmで起きた）。県の判断に使ってはいけない
+  const { adminSpans } = require("../lib/valhallaRoute");
+  const res = await fetch(`${BASE}/route`, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      locations: [{ lon: 139.7671, lat: 35.6812 }, { lon: 135.5023, lat: 34.6937 }],
+      costing: "motorcycle",
+    }),
+  });
+  const trip = (await res.json()).trip;
+  const long = trip.legs.map((l) => l.shape).join("");
+  const spans = await adminSpans(long, "motorcycle");
+  assert.ok(!spans || spans.length === 0,
+    "材料が悪い（200kmの上限に当たっていない。もっと長い区間で試すこと）");
+});

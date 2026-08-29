@@ -1,0 +1,755 @@
+{
+  "prefecture": "岡山県",
+  "romaji": "okayama",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
+  "targetMonth": "2026年06月",
+  "releaseDay": "2026年08月01日",
+  "fetchedAt": "2026-08-28T12:52:07.540Z",
+  "totalRows": 65291,
+  "candidates": [
+    {
+      "id": "jartic-33202606000007600000000001000463",
+      "kind": "noMotorcycle",
+      "name": "オペラ通り",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.9201631,
+          34.6653229
+        ],
+        [
+          133.9201814,
+          34.6647341
+        ],
+        [
+          133.920207,
+          34.6639151
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "22:00",
+        "to": "04:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 28,
+      "chainPolyline": "gqqrE_hkpXvGI",
+      "sourceRoad": "オペラ通り",
+      "matchedName": "オペラ通り",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 22:00〜04:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000045500000000001001882",
+      "kind": "noMotorcycle",
+      "name": "山口山陽線",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          134.0066854,
+          34.764292
+        ],
+        [
+          134.0069064,
+          34.7638567
+        ],
+        [
+          134.0071013,
+          34.7634543
+        ],
+        [
+          134.0071277,
+          34.7633531
+        ],
+        [
+          134.0071341,
+          34.763307
+        ],
+        [
+          134.0071397,
+          34.7628366
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 55,
+      "chainPolyline": "y{dsEyd|pXfDqAxBG",
+      "sourceRoad": "山口山陽線",
+      "matchedName": "山口山陽線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 07:00〜08:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000070000000000001001079",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.7416602,
+          34.5868983
+        ],
+        [
+          133.740489,
+          34.5872059
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "cgbrEklhoX}@hF",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 07:00〜09:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000073700000000001001899",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.7725311,
+          34.5830937
+        ],
+        [
+          133.7724825,
+          34.5829619
+        ],
+        [
+          133.7724477,
+          34.5829028
+        ],
+        [
+          133.772377,
+          34.5828249
+        ],
+        [
+          133.772194,
+          34.5826749
+        ],
+        [
+          133.7720649,
+          34.5825812
+        ],
+        [
+          133.7719569,
+          34.5825273
+        ],
+        [
+          133.7718044,
+          34.5824605
+        ],
+        [
+          133.7717591,
+          34.582434
+        ],
+        [
+          133.7717369,
+          34.5824133
+        ],
+        [
+          133.7717138,
+          34.5823876
+        ],
+        [
+          133.7717045,
+          34.5823606
+        ],
+        [
+          133.7716967,
+          34.5822575
+        ],
+        [
+          133.7716845,
+          34.5821487
+        ],
+        [
+          133.7716668,
+          34.5821038
+        ],
+        [
+          133.7716337,
+          34.5820347
+        ],
+        [
+          133.7716097,
+          34.5820147
+        ],
+        [
+          133.771572,
+          34.5819918
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "00:00",
+        "to": "04:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ioarEimnoXt@\\tAdCnAZ",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 00:00〜04:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000073800000000001001900",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.7722585,
+          34.5834552
+        ],
+        [
+          133.7712779,
+          34.5827731
+        ],
+        [
+          133.7712692,
+          34.5827497
+        ],
+        [
+          133.7714419,
+          34.582457
+        ],
+        [
+          133.7714724,
+          34.5823674
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "00:00",
+        "to": "04:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "sqarEsknoXhCbEnAe@",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 00:00〜04:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000078400000000001001204",
+      "kind": "noMotorcycle",
+      "name": "通橋",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.6766448,
+          34.5441097
+        ],
+        [
+          133.6765302,
+          34.5440955
+        ],
+        [
+          133.6764094,
+          34.5440746
+        ],
+        [
+          133.6761305,
+          34.5440574
+        ],
+        [
+          133.6760455,
+          34.5440399
+        ],
+        [
+          133.6759387,
+          34.5439938
+        ],
+        [
+          133.6758444,
+          34.5439327
+        ],
+        [
+          133.6757457,
+          34.5438469
+        ],
+        [
+          133.6756203,
+          34.5437272
+        ],
+        [
+          133.6747443,
+          34.5433445
+        ],
+        [
+          133.673209,
+          34.5427844
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/12/16"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 63,
+      "chainPolyline": "u{yqE_v{nXLtB|@tA|D`N",
+      "sourceRoad": "通橋",
+      "matchedName": "通橋",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 1985/12/16"
+    },
+    {
+      "id": "jartic-33202606000080900000000001001251",
+      "kind": "noMotorcycle",
+      "name": "清心町商店街",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.6690219,
+          34.5442212
+        ],
+        [
+          133.6695974,
+          34.544007
+        ],
+        [
+          133.6702408,
+          34.5437645
+        ],
+        [
+          133.6704666,
+          34.5436787
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1985/12/16"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 4,
+      "chainPolyline": "k|yqEkfznXjBaH",
+      "sourceRoad": "清心町商店街",
+      "matchedName": "清心町商店街",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 1985/12/16"
+    },
+    {
+      "id": "jartic-33202606000081800000000001001273",
+      "kind": "noMotorcycle",
+      "name": "倉敷笠岡線",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.6535434,
+          34.5639235
+        ],
+        [
+          133.6531325,
+          34.5637809
+        ],
+        [
+          133.653039,
+          34.5637557
+        ],
+        [
+          133.6529454,
+          34.5637417
+        ],
+        [
+          133.6527982,
+          34.5637273
+        ],
+        [
+          133.6527356,
+          34.5637492
+        ],
+        [
+          133.652511,
+          34.5637294
+        ],
+        [
+          133.6522362,
+          34.5636726
+        ],
+        [
+          133.6521455,
+          34.5636621
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "09:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 58,
+      "chainPolyline": "ow}qEsewnX^bBRpD",
+      "sourceRoad": "倉敷笠岡線",
+      "matchedName": "倉敷笠岡線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 07:00〜09:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000085800000000001001983",
+      "kind": "noMotorcycle",
+      "name": "玉島港線",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.6711592,
+          34.5422699
+        ],
+        [
+          133.6712653,
+          34.5423264
+        ],
+        [
+          133.6713064,
+          34.542365
+        ],
+        [
+          133.671501,
+          34.5424858
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "21:00",
+        "to": "08:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 51,
+      "chainPolyline": "epyqEwsznXk@cA",
+      "sourceRoad": "玉島港線",
+      "matchedName": "玉島港線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 21:00〜08:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000086000000000001001984",
+      "kind": "noMotorcycle",
+      "name": "玉島港線",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.6711994,
+          34.5428657
+        ],
+        [
+          133.6715154,
+          34.5424968
+        ],
+        [
+          133.6717783,
+          34.5426624
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "21:00",
+        "to": "08:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 53,
+      "chainPolyline": "}syqE_tznXhA_A_@s@",
+      "sourceRoad": "玉島港線",
+      "matchedName": "玉島港線",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 21:00〜08:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000086200000000001001985",
+      "kind": "noMotorcycle",
+      "name": "栄町商店街",
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.6713907,
+          34.5431218
+        ],
+        [
+          133.6713106,
+          34.5430236
+        ],
+        [
+          133.6712613,
+          34.542972
+        ],
+        [
+          133.6711355,
+          34.5428603
+        ],
+        [
+          133.6705116,
+          34.5424169
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "21:00",
+        "to": "08:00"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 46,
+      "chainPolyline": "ouyqEeuznXjCnD",
+      "sourceRoad": "栄町商店街",
+      "matchedName": "栄町商店街",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 21:00〜08:00 / 意思決定 2022/12/22"
+    },
+    {
+      "id": "jartic-33202606000095100000000001001475",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "岡山県",
+      "points": [
+        [
+          133.7422917,
+          34.6783739
+        ],
+        [
+          133.74234,
+          34.678038
+        ]
+      ],
+      "note": "通行禁止",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": null,
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "通行禁止",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2022/12/22"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "ybtrEiphoX`AI",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "通行禁止 / 終日 / 意思決定 2022/12/22"
+    }
+  ]
+}

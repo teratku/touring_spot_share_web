@@ -359,6 +359,11 @@ const ROAD_CLASS_COLORS = {
  * ⚠️ 番号は `admins` の並びへの添字。`admins` は経路が通った順ではなく
  *    **出てきた順**なので、必ず添字で引くこと。
  *
+ * ⚠️ **200kmを超える経路では何も返らない。** `trace_attributes` の上限
+ *    （`Path distance exceeds the max distance limit: 200000 meters`）。
+ *    そのときは `step.prefecture` が null になり、道路名は番号の形に直せず
+ *    路線名のまま読まれる（落ちはしない）。**規制の県決めには使わないこと。**
+ *
  * 【実測】東京→箱根（下道93km・1,520辺）で **30ms**。
  *        `admins` は [{state_text:"東京都"},{state_text:"神奈川県"}] が返る。
  */
@@ -570,6 +575,8 @@ async function routeWithValhalla(from, to, opts = {}) {
   let restrictionTries = 0;
   let restrictionHits = [];
   let restrictionSkipped = [];
+  /** 規制を読んだ県。⚠️ 見落としが起きていないか確かめるために返す */
+  let restrictionPrefectures = [];
   try {
     json = await ask();
 
@@ -634,8 +641,27 @@ async function routeWithValhalla(from, to, opts = {}) {
 
     // ⚠️ **二輪が通れない道を避ける。** 引いてから、掛かったところだけ塞いで引き直す
     //    （MAX_RESTRICTION_TRIES の説明を読むこと）
-    if (json && json.trip && Array.isArray(opts.restrictions) && opts.restrictions.length) {
-      const rules = applicableRestrictions(opts.restrictions, {
+    if (json && json.trip && (opts.restrictionsFor || opts.restrictions)) {
+      // ⚠️ **県は「引いてから」決めること。**
+      //    規制を渡すには県が要るが、県を知るには経路が要る（鶏と卵）。
+      //    ⚠️ **両端の県だけでは足りない。** 実測: 東京→大阪の両端は
+      //       [東京都, 大阪府] だが、実際に通るのは8県。**6県ぶんの規制を見落とす。**
+      //       東京→箱根・名古屋→伊勢では0件なので、**短い区間で試している限り気づけない。**
+      //    ⚠️ `segmentsBetween` の `prefectures` は使わないこと。あれはおすすめ道路を
+      //       集めるための広い円で、東京→大阪で **35県**を返す（実際に通るのは8県）。
+      //    Valhalla 自身が経路の通る県を返す（`adminSpans`。実測30ms）ので、それを使う。
+      let list = opts.restrictions;
+      if (opts.restrictionsFor) {
+        // ⚠️ **どの県かの判断は呼び出し側に任せる。** ここでは経路の点だけ渡す。
+        //    ⚠️ Valhalla の `adminSpans` は使えない。`trace_attributes` に
+        //       **200kmの上限**があり、長距離だと
+        //       「Path distance exceeds the max distance limit: 200000 meters」で
+        //       何も返らない（実測: 東京→大阪561kmで0県になった）。
+        const found = await opts.restrictionsFor(pointsOfTrip(json.trip));
+        list = (found && found.restrictions) || found || [];
+        restrictionPrefectures = (found && found.prefectures) || [];
+      }
+      const rules = applicableRestrictions(list || [], {
         displacement: opts.displacement, at: opts.at, isHoliday: opts.isHoliday,
       });
       if (rules.length) {
@@ -643,7 +669,11 @@ async function routeWithValhalla(from, to, opts = {}) {
         const boxes = [];
         for (let i = 0; i < MAX_RESTRICTION_TRIES; i++) {
           const hits = hitsOnRoute(pointsOfTrip(json.trip), rules);
-          restrictionHits = hits.map((h) => ({ id: h.id, name: h.name, ratio: h.ratio }));
+          // ⚠️ **`verified` を落とさないこと。** 落とすと未確認（JARTIC の候補）を
+          //    避けたのか、人が地図で見て登録したものを避けたのかが見る側に伝わらない
+          //    （実際に落としていて、未確認がすべて「確認済」に見えていた）
+          restrictionHits = hits.map((h) => ({
+            id: h.id, name: h.name, ratio: h.ratio, verified: h.verified !== false }));
           if (!hits.length) break;
           const made = excludePolygonsFor(hits, {
             // ⚠️ 既に船で使っているぶんを差し引く。合計で上限に当たる
@@ -802,6 +832,7 @@ async function routeWithValhalla(from, to, opts = {}) {
     // ⚠️ **残ったものは黙って捨てない。** 画面とアプリで警告に使う
     restrictionHits,
     restrictionSkipped,
+    restrictionPrefectures,
     // 目的地のどちら側に着いたか（"left" / "right" / null）。
     // ⚠️ 指定しても null で返ることがある（上の注意書き参照）
     arrivedSide: ((trip.locations || [])[(trip.locations || []).length - 1] || {})

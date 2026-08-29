@@ -1,23 +1,24 @@
 {
  "romaji": "miyagi",
- "updatedAt": "2026-08-16T12:35:04.719Z",
+ "updatedAt": "2026-08-28T23:50:20.832Z",
  "count": 3,
  "restrictions": [
   {
-   "id": "manual-miyagi-1786844202954",
+   "id": "jartic-04000000000000000000000000099781",
    "kind": "noMotorcycle",
-   "name": "市道中埣橋石巻大橋伊原津一丁目線",
-   "prefecture": "",
-   "polyline": "cxniFyos}YcHc@kExAufAnsAeFnFeFfD",
-   "note": null,
+   "name": "牧山道路",
+   "prefecture": "宮城県",
+   "polyline": "k~qiFilp}Y@???zEwC`A{@fC{CzBwCvAeB|C{DzEeGrEwFlKwMrDkEfGuH~BuClEmFvBiCzBsChBuBt@q@t@a@d@O`AKf@EX@?A",
+   "note": "車両通行禁止 / 対象車両1：[その他：特定原付、特定原付]",
    "activeMonths": null,
    "activeDays": null,
    "includesHoliday": false,
    "activeHours": null,
-   "minCc": null,
+   "minCc": 0,
    "maxCc": 50,
-   "checkedAt": "2026-08-16",
-   "source": "admin"
+   "checkedAt": "2026-08-28",
+   "source": "admin",
+   "origin": "jartic"
   },
   {
    "id": "osm-miyagi-389303509",
@@ -33,7 +34,8 @@
    "minCc": null,
    "maxCc": 125,
    "checkedAt": "2026-08-16",
-   "source": "admin"
+   "source": "admin",
+   "origin": "osm"
   },
   {
    "id": "osm-miyagi-660095132",
@@ -49,7 +51,8 @@
    "minCc": null,
    "maxCc": 125,
    "checkedAt": "2026-08-16",
-   "source": "admin"
+   "source": "admin",
+   "origin": "osm"
   }
  ]
 }

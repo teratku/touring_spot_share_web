@@ -51,6 +51,25 @@ const BASE = "https://www.jartic.or.jp/d/opendata";
 /** 出典に載せるページ。⚠️ データの直リンクではなく、規約の載っているページを指すこと */
 const SOURCE_PAGE = "https://www.jartic.or.jp/service/opendata/";
 const OUT_DIR = path.join(__dirname, "data", "restriction-jartic");
+/**
+ * 月ごとの控え。
+ *
+ * ⚠️ **これが無いと「規制が解除された」ことを永久に検知できない。**
+ *    JARTIC は前月ぶんを消すうえ、実測で
+ *      意思決定廃止日   0.0%   （山梨24,100行・神奈川210,035行とも）
+ *      データ更新日     0.0%
+ *    ＝**解除されると印も付かずにファイルから消えるだけ**。
+ *    新規は `意思決定改正日` で気づけるが、解除は**差分でしか分からない**。
+ *    一度「二輪通行禁止」で登録した道が解除されると、おすすめから外れたまま
+ *    戻らず、良い道を隠し続ける。
+ *
+ * ⚠️ **控えるのは候補JSONだけ。** 生CSVは47県で約363MB/月（年4.3GB）あり、
+ *    大半は二輪と無関係な行（一時停止9,742件・横断歩道5,369件など）。
+ *    候補なら 3.9MB/月（年47MB）で収まる。
+ *    ⚠️ ただし候補は「二輪の通行止め」に絞った後なので、**後から絞り方を
+ *       変えたくなっても遡れない**。そこは割り切っている。
+ */
+const HISTORY_DIR = path.join(OUT_DIR, "history");
 const UA = "biketeilen-admin/1.0 (local tool; tourigspotshare@gmail.com)";
 /** 1県ごとに空ける時間。相手のサーバーに負担をかけない */
 const POLITE_DELAY_MS = 2000;
@@ -64,6 +83,13 @@ const ALL = args.includes("--all");
 const ONLY = argVal("--prefecture");
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/** 「2026年06月」→「2026-06」。⚠️ 並べたときに順になる形にすること */
+function monthKey(targetMonth) {
+  const m = String(targetMonth || "").match(/(\d{4})年\s*(\d{1,2})月/);
+  if (!m) return "unknown";
+  return `${m[1]}-${String(m[2]).padStart(2, "0")}`;
+}
 
 /** 県コード R01〜R47 → 都道府県名。JARTIC の並びは全国地方公共団体コード順 */
 const PREF_ORDER = Object.keys(ROMAJI);
@@ -189,6 +215,53 @@ async function buildPrefecture(prefecture, link, meta) {
   };
 }
 
+/**
+ * 前の月と比べて、増えた規制と**消えた規制**を出す。
+ *
+ * ⚠️ **消えたほうが大事。** 新規は `意思決定改正日` で気づけるが、
+ *    解除は差分でしか分からない（JARTIC は廃止の印を付けない）。
+ *    解除された規制を登録したままにすると、走れる道を隠し続ける。
+ */
+function reportDiff(currentMonth) {
+  if (!fs.existsSync(HISTORY_DIR)) return;
+  const months = fs.readdirSync(HISTORY_DIR)
+    .filter((d) => /^\d{4}-\d{2}$/.test(d)).sort();
+  const previous = months.filter((m) => m < currentMonth).pop();
+  if (!previous) {
+    console.log(`\nℹ️ 前の月の控えがありません。次回から増減を出せます（いまの控え: ${currentMonth}）`);
+    return;
+  }
+
+  const read = (month) => {
+    const dir = path.join(HISTORY_DIR, month);
+    const out = new Map();
+    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".json"))) {
+      try {
+        for (const c of JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")).candidates || []) {
+          out.set(c.id, c);
+        }
+      } catch (e) { /* 壊れた県は飛ばす */ }
+    }
+    return out;
+  };
+
+  const before = read(previous);
+  const after = read(currentMonth);
+  const added = [...after.keys()].filter((id) => !before.has(id));
+  const gone = [...before.keys()].filter((id) => !after.has(id));
+
+  console.log(`\n${previous} → ${currentMonth} の増減`);
+  console.log(`  増えた ${added.length}件 / 消えた ${gone.length}件`);
+  if (gone.length) {
+    console.log(`  ⚠️ **消えた規制は解除された可能性がある。** 登録済みなら外すか確かめること:`);
+    for (const id of gone.slice(0, 20)) {
+      const c = before.get(id);
+      console.log(`     ${(c.name || "(名前なし)").padEnd(18)} ${c.prefecture}  ${c.reason || ""}`);
+    }
+    if (gone.length > 20) console.log(`     …ほか ${gone.length - 20}件`);
+  }
+}
+
 (async () => {
   const catalog = await fetchCatalog();
   const typeD = catalog.find((g) => g.type === "typeD");
@@ -214,12 +287,17 @@ async function buildPrefecture(prefecture, link, meta) {
   }
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.mkdirSync(HISTORY_DIR, { recursive: true });
   for (const [i, t] of chosen.entries()) {
     process.stdout.write(`  ${t.prefecture} … `);
     try {
       const built = await buildPrefecture(t.prefecture, t.link, typeD);
-      const out = path.join(OUT_DIR, `${built.romaji}.json`);
-      fs.writeFileSync(out, JSON.stringify(built, null, 2));
+      const body = JSON.stringify(built, null, 2);
+      fs.writeFileSync(path.join(OUT_DIR, `${built.romaji}.json`), body);
+      // ⚠️ 月ごとの控えも残す（HISTORY_DIR の説明を読むこと）
+      const monthDir = path.join(HISTORY_DIR, monthKey(built.targetMonth));
+      fs.mkdirSync(monthDir, { recursive: true });
+      fs.writeFileSync(path.join(monthDir, `${built.romaji}.json`), body);
       const withTime = built.candidates.filter((c) => c.activeHours).length;
       const withDay = built.candidates.filter((c) => c.activeDays || c.includesHoliday).length;
       const named = built.candidates.filter((c) => c.name).length;
@@ -230,5 +308,6 @@ async function buildPrefecture(prefecture, link, meta) {
     }
     if (i < chosen.length - 1) await sleep(POLITE_DELAY_MS);
   }
+  reportDiff(monthKey(typeD.targetMonth));
   console.log(`\n⚠️ そのまま配信しないこと。road-builder の規制タブで1件ずつ地図で確認して登録する。`);
 })().catch((e) => { console.error(e); process.exit(1); });
