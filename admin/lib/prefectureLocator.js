@@ -22,10 +22,22 @@
 const fs = require("fs");
 const path = require("path");
 
-const DEFAULT_GEOJSON = path.resolve(
+/**
+ * 県の形。
+ *
+ * ⚠️ **リポジトリ内の控えを先に見ること。** もとはアプリ側（iOS リポジトリ）に
+ *    あるが、そちらは Docker のビルド文脈の外なのでイメージに入らない。
+ *    実際に Cloud Run で落ちた:
+ *      ENOENT /Xcode/biketeilen_iOS_clean/.../japan-prefectures.geojson
+ *    （コンテナでは `__dirname` が /app/admin/lib なので `../../..` が / になる）
+ * ⚠️ 控えは 87KB。**アプリ側が本家**なので、更新したらこちらへも写すこと。
+ */
+const LOCAL_GEOJSON = path.join(__dirname, "..", "data", "japan-prefectures.geojson");
+const APP_GEOJSON = path.resolve(
   __dirname, "..", "..", "..",
   "Xcode/biketeilen_iOS_clean/touringSpotShare/biketeilen_firebase/NewTabs/japan-prefectures.geojson"
 );
+const DEFAULT_GEOJSON = fs.existsSync(LOCAL_GEOJSON) ? LOCAL_GEOJSON : APP_GEOJSON;
 
 /** ISO 3166-2 の "JP-13" → 13 */
 function isoCode(raw) {

@@ -18,6 +18,7 @@ const { simulate } = require("../../admin/lib/navSimulate");
 const { normalized: normalizedAnnounce } = require("../../admin/lib/navGuide");
 const { ATTRIBUTION } = require("../../admin/lib/restrictionOrigin");
 const { encode: encodePolyline } = require("../../admin/lib/polyline");
+const { toAppManeuver } = require("../../admin/lib/navManeuver");
 
 /**
  * @param {object} body    受け取った依頼
@@ -54,7 +55,10 @@ async function buildRouteResponse(body, deps = {}) {
   }
 
   const steps = route.steps.map((step, i) => ({
-    maneuver: step.maneuver,
+    // ⚠️ **アプリの生値に直して返すこと。** 中は camelCase、アプリの enum は
+    //    kebab-case。そのまま渡すと `NavManeuver.from` が `.none` にして、
+    //    **エラーも出ないまま曲がり角の案内が全部消える**（`lib/navManeuver.js`）
+    maneuver: toAppManeuver(step.maneuver),
     instruction: step.instruction,
     roadName: step.roadName || null,
     spokenRoad: step.spokenRoad || null,

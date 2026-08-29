@@ -37,6 +37,7 @@ const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
 const { spokenRoadName } = require("./lib/navName");
 const { ATTRIBUTION, normalizeOrigin, isSellable } = require("./lib/restrictionOrigin");
+const { toAppManeuver } = require("./lib/navManeuver");
 const { ROMAJI: PREF_ROMAJI } = require("./lib/prefectureRomaji");
 const { PrefectureLocator } = require("./lib/prefectureLocator");
 const restrictionLocator = new PrefectureLocator();
@@ -851,7 +852,9 @@ app.post("/api/nav/route", async (req, res) => {
     //    `instruction` は画面のバナー用、`roadName` は表示用（番号もローマ字も
     //    つないである）、`spokenRoad` が読み上げ用。取り違えないこと
     const steps = route.steps.map((step, i) => ({
-      maneuver: step.maneuver,
+      // ⚠️ **アプリの生値に直す**（`lib/navManeuver.js`）。ここは「アプリの NavRoute の形」
+      //    を返す口なので、camelCase のまま出すと曲がり角の案内が黙って消える
+      maneuver: toAppManeuver(step.maneuver),
       instruction: step.instruction,
       roadName: step.roadName || null,
       spokenRoad: step.spokenRoad || null,
@@ -990,7 +993,8 @@ function loadSkipped() {
   catch { return []; }
 }
 
-app.get("/api/rebuild/prefectures", (_req, res) => {
+app.get("/api/rebuild/prefectures", (req, res) => {
+  const includeSkipped = req.query.includeSkipped === "1";
   if (!fs.existsSync(REBUILD_DIR)) {
     return res.json({ prefectures: [], note: "node matchJarticToRegistered.js を実行してください" });
   }
@@ -1000,7 +1004,7 @@ app.get("/api/rebuild/prefectures", (_req, res) => {
     try {
       const d = JSON.parse(fs.readFileSync(path.join(REBUILD_DIR, file), "utf8"));
       // ⚠️ 一覧と中身で数え方を変えないこと（片方だけ済んだ件を数え続ける）
-      const items = pendingItems(d.items, d.romaji);
+      const items = pendingItems(d.items, d.romaji, { includeSkipped });
       if (!items.length) continue;
       out.push({
         prefecture: d.prefecture, romaji: d.romaji, builtAt: d.builtAt,
@@ -1008,6 +1012,7 @@ app.get("/api/rebuild/prefectures", (_req, res) => {
         strong: items.filter((x) => x.tier === "強い一致").length,
         review: items.filter((x) => x.tier === "要確認").length,
         none: items.filter((x) => x.tier === "候補なし").length,
+        skipped: items.filter((x) => x.skipped).length,
       });
     } catch { /* 壊れたファイルは飛ばす */ }
   }
@@ -1023,7 +1028,7 @@ app.get("/api/rebuild/prefectures", (_req, res) => {
  *    ⚠️ **いまの登録を見て決めること。** 置き換えると id が `jartic-…` に変わり、
  *       `origin` も jartic になるので、どちらでも外れる。
  */
-function pendingItems(items, romaji) {
+function pendingItems(items, romaji, opts = {}) {
   const skipped = new Set(loadSkipped());
   let live = new Map();
   try {
@@ -1031,13 +1036,46 @@ function pendingItems(items, romaji) {
       path.join(__dirname, "data", "road-restrictions", `${romaji}.json`), "utf8"));
     for (const r of reg.restrictions || []) live.set(r.id, r);
   } catch { /* 県ごと無ければ、残っているものは無い */ }
-  return (items || []).filter((it) => {
-    if (skipped.has(it.registered.id)) return false;
+  const out = [];
+  for (const it of items || []) {
     const now = live.get(it.registered.id);
     // 消えた（＝置き換わった）か、もう二普協由来ではない
-    return !!now && now.origin === "jmpsa";
-  });
+    if (!now || now.origin !== "jmpsa") continue;
+    const isSkipped = skipped.has(it.registered.id);
+    // ⚠️ **見送ったものを見る手段を残すこと。** 隠したままだと、
+    //    間違えて「JARTIC に無い」と決めた1件を戻せない
+    if (isSkipped && !opts.includeSkipped) continue;
+    out.push(isSkipped ? { ...it, skipped: true } : it);
+  }
+  return out;
 }
+
+/**
+ * 作り直しの進み具合。
+ *
+ * ⚠️ **待ち行列が空になったとき、画面が「終わった」と言えるようにするため。**
+ *    数字が無いと、片付いたのか壊れているのか見分けがつかない（実際に分からなかった）。
+ */
+app.get("/api/rebuild/progress", (_req, res) => {
+  let jmpsa = 0, jartic = 0, osm = 0, total = 0, sellable = 0;
+  try {
+    const dir = path.join(__dirname, "data", "road-restrictions");
+    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".json"))) {
+      const d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+      for (const r of d.restrictions || []) {
+        total++;
+        if (isSellable(r)) sellable++;
+        if (r.origin === "jmpsa") jmpsa++;
+        else if (r.origin === "jartic") jartic++;
+        else if (r.origin === "osm") osm++;
+      }
+    }
+  } catch (e) { return res.status(500).json({ error: e.message }); }
+  const skipped = loadSkipped().length;
+  res.json({ total, sellable, osm, jartic, jmpsa, skipped,
+             // 残っている＝まだ二普協由来で、見送ってもいないもの
+             pending: Math.max(0, jmpsa - skipped) });
+});
 
 app.get("/api/rebuild/:romaji", (req, res) => {
   const file = path.join(REBUILD_DIR, `${req.params.romaji}.json`);
@@ -1046,7 +1084,8 @@ app.get("/api/rebuild/:romaji", (req, res) => {
   }
   try {
     const d = JSON.parse(fs.readFileSync(file, "utf8"));
-    d.items = pendingItems(d.items, req.params.romaji);
+    d.items = pendingItems(d.items, req.params.romaji,
+      { includeSkipped: req.query.includeSkipped === "1" });
     res.json(d);
   } catch (e) { res.status(500).json({ error: `読めません: ${e.message}` }); }
 });
@@ -1059,6 +1098,44 @@ app.get("/api/rebuild/:romaji", (req, res) => {
  * ⚠️ **規制の中身は JARTIC のものを採る**（時間帯・排気量・種別）。人が引いた線ではなく
  *    JARTIC の区間形状に置き換わるので、`origin: "jartic"` と言い切れる。
  */
+/**
+ * 登録した規制を Firestore へ反映する（アプリが読む置き場）。
+ *
+ * ⚠️ **アプリはルート生成に規制を使っていない**（いまは Google Directions）。
+ *    ここで配るのは**走行中の規制予告**と**ルート候補の絞り込み**に効く。
+ * ⚠️ **未確認の JARTIC 候補は配らない。** `importRestrictions.js` が読むのは
+ *    `data/road-restrictions` だけ。混ぜたければ先に road-builder で確認して登録すること。
+ *
+ * ⚠️ **`commit` を付けない限り書き込まない。** 本番の Firestore なので、
+ *    まず下見して差分を見ること（`importRestrictions.js` の注意書きと同じ）。
+ * ⚠️ 誤った区間を配ると「通れない」と誤案内することになる。
+ */
+app.post("/api/restrictions/publish", async (req, res) => {
+  const commit = req.body && req.body.commit === true;
+  const prefecture = req.body && req.body.prefecture;
+  const args = prefecture ? ["--prefecture", String(prefecture)] : ["--all"];
+  if (commit) args.push("--commit");
+
+  const out = await run("importRestrictions.js", args);
+  // 手元の件数も返す。⚠️ 反映できたかは Firestore 側の数字で確かめること
+  let local = 0, files = 0;
+  try {
+    const dir = path.join(__dirname, "data", "road-restrictions");
+    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".json"))) {
+      const d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+      const n = (d.restrictions || []).length;
+      // ⚠️ **空のファイルを県として数えない。** `importRestrictions.js` は
+      //    中身のある県だけを数えるので、揃えないと画面と出力が食い違う
+      if (!n) continue;
+      local += n;
+      files++;
+    }
+  } catch (e) { /* 数えられなくても結果は返す */ }
+
+  res.json({ ok: out.ok, commit, prefecture: prefecture || null,
+             local, files, stdout: out.stdout, stderr: out.stderr });
+});
+
 app.post("/api/rebuild/:romaji/promote", (req, res) => {
   const { romaji } = req.params;
   const { registeredId, candidateId } = req.body || {};

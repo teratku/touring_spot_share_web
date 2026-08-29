@@ -1,9 +1,17 @@
 # 配信用のルート生成API。**Valhalla と同じコンテナに入れる。**
 #
 # ⚠️ **ビルドはリポジトリの根から。** `admin/lib` を複製せずそのまま入れるため。
-#      docker build -f service/Dockerfile -t route-api .
+#      DOCKER_BUILDKIT=0 docker build -f service/Dockerfile -t route-api .
 #    ⚠️ `service/` の中でビルドすると `admin/lib` が見えず、
 #       判断の中身（規制・案内）を二重に持つはめになる。**必ず根から。**
+#
+# ⚠️ **`DOCKER_BUILDKIT=0` が要る。** BuildKit は下の `FROM` を Docker Hub に
+#    取りに行き、`pull access denied` で落ちる（土台は手元だけにあるイメージなので
+#    公開レジストリには無い）。旧ビルダーなら手元のイメージを使う。
+#    実測: 土台がある状態で 4分30秒。
+#
+# ⚠️ **Cloud Run は amd64。** 土台が amd64 なので Apple Silicon でも amd64 で焼ける
+#    （`platform does not match` の警告は出るが、それでよい）。
 #
 # ⚠️ **土台は焼き済みの Valhalla イメージ**（タイル入り・4.15GB）。
 #    タイルはイメージに焼くしかない（惑星規模を実行時に落とせない）。
@@ -22,10 +30,16 @@ WORKDIR /app
 # ⚠️ **判断の中身は admin/lib のものをそのまま使う。** 複製しない
 COPY admin/lib            /app/admin/lib
 COPY admin/package.json   /app/admin/package.json
+# ⚠️ **県の形（87KB）も入れること。** 経路が通る県を決めるのに要る。
+#    もとはアプリ側にあるがビルド文脈の外で、忘れると ENOENT で落ちた
+COPY admin/data/japan-prefectures.geojson /app/admin/data/japan-prefectures.geojson
 COPY service/package.json /app/service/package.json
 RUN cd /app/service && npm install --omit=dev
 
+COPY service/lib       /app/service/lib
 COPY service/server.js /app/service/server.js
+# ⚠️ **`service/lib` も入れること。** 忘れて `Cannot find module './lib/buildRoute'`
+#    で落ちた。server.js だけ入れても中身が無い
 
 # ⚠️ **道路グリッドCSVは入れない。** 道路名の推定（JARTIC 取り込み）でしか使わず、
 #    数GBある。配信では要らない。
@@ -38,4 +52,13 @@ EXPOSE 8080
 #    ⚠️ Valhalla が落ちたらコンテナごと終わらせる（黙って経路が出ない状態にしない）
 COPY service/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
+
+# ⚠️ **土台の ENTRYPOINT を打ち消すこと。** 土台は
+#    `ENTRYPOINT ["/valhalla/scripts/run.sh"]` / `CMD ["build_tiles"]` なので、
+#    こちらの CMD は**その引数として渡されるだけ**で start.sh に届かない。
+#    実際に Cloud Run で落ちた:
+#      「If you run with custom UID or GID you have to create the mapped
+#        directory to the container's /custom_files」→ Container called exit(1)
+#    土台の run.sh はタイルを焼くための入口で、配信では通らない。
+ENTRYPOINT []
 CMD ["/app/start.sh"]

@@ -165,7 +165,12 @@
             <option value="3">もっと 3.0倍</option>
           </select>
         </label>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="sweep"> 回り込み・寄り道を変えて比べる</label>
       </div>
+      <p class="hint">⚠️ <strong>比べると時間が掛かる</strong>（実測: 回り込み4通りで23秒、寄り道3通りで9秒）。
+        <strong>同じ経路になったものは出さない</strong>——実測では ×3 と ×5、2.0倍と3.0倍が
+        同じ結果になった。出ない値は「そこから先は広げても変わらない」という意味。</p>
       <p class="hint"><strong>まわり方（北・東・南・西）を全部作って並べる。</strong>
         まわり方＝直線のどちら側へ膨らむか。候補は旅の向きと直角の2方向に集まるので、
         南西へ向かう旅なら「北まわり」と「西まわり」は同じ側を指す（幾何の通り）。
@@ -365,8 +370,33 @@ const funColor = (kind) => FUN_COLORS[String(kind).replace("side:", "")] || "#e8
 /* ⚠️ **表示名は画面で作る。** サーバは鍵（north/east/south/west）だけ返す。
       海外へ出す前提なので、APIの応答に日本語を混ぜない。 */
 const SIDE_LABEL = { north:"北", east:"東", south:"南", west:"西" };
+/**
+ * 比べるときに回す値。
+ * ⚠️ **画面の選択肢から採ること。** 二重に持つと、選択肢を増やしたときに
+ *    比べる側だけ古い値のまま残る
+ */
+const stepsOf = (id) => [...document.getElementById(id).options]
+  .map((o) => Number(o.value)).filter(Number.isFinite);
 const sidesLabel = (sides) =>
   `${(sides || []).map((k) => SIDE_LABEL[k] || k).join("・")}まわり`;
+
+/**
+ * 同じ経路かどうかの見分け。
+ *
+ * ⚠️ **同じものを何本も並べない。** 実測で回り込み ×3 と ×5、寄り道 2.0倍と 3.0倍が
+ *    同じ経路になった。並べると「設定を変えたのに効いている」と誤解する。
+ * ⚠️ 長さだけでは足りない（別の道で同じ距離になりうる）ので両端も見る。
+ */
+function routeSignature(r) {
+  const p = r.points || [];
+  if (p.length < 2) return null;
+  const at = (q) => `${q[0].toFixed(4)},${q[1].toFixed(4)}`;
+  // ⚠️ **両端は常に同じ**（始点と終点は変えていない）ので、両端だけでは
+  //    「距離が近い別経路」を同じものとみなしてしまう。**途中の点も見る**
+  const via = [0.2, 0.4, 0.6, 0.8]
+    .map((f) => at(p[Math.floor((p.length - 1) * f)])).join("|");
+  return `${Math.round(r.lengthMeters / 10)}|${via}|${(r.funRoads || []).length}`;
+}
 
 const state = {
   from:null, to:null, vias:[],
@@ -645,26 +675,69 @@ async function run() {
   }
 
   // ② 楽しい道の案を何通りか
-  if (funCount > 0) {
+  //    ⚠️ 同じ経路を何本も並べないため、出したものの印を控える
+  const seen = new Set();
+  Object.values(state.results).forEach((r) => {
+    const sig = r && !r.error ? routeSignature(r) : null;
+    if (sig) seen.add(sig);
+  });
+
+  /**
+   * おすすめ道路の案を1組取って並べる。
+   * @param suffix ラベルの後ろに付ける設定（比べるときだけ）
+   * @returns 出せた本数（0 なら「その設定では新しい経路が出ない」）
+   */
+  async function addFunRoutes({ corridorScale, budgetRatio, suffix }) {
     const body = { from:state.from, to:state.to, vias:state.vias,
                    funCount, budgetRatio, corridorScale, minScore, maxVariants:3, ...bike };
     state.lastRequest = body;
     const got = await post("/api/valhalla/fun-routes", body);
     if (got.error) {
+      if (suffix) return 0;                // 比べている途中の失敗は黙って飛ばす
       state.results.fun = got;
       state.variants.push({ key:"fun", label:"楽しい", color:funColor("north") });
-    } else {
-      (got.routes || []).forEach((r, i) => {
-        const key = `fun:${r.kind}`;
-        state.results[key] = r;
-        state.variants.push({ key, label:sidesLabel(r.funPick && r.funPick.sides),
-                              color:funColor(r.kind) });
-        if (i === 0) state.selected = key;   // いちばん楽しい案を最初に見せる
-      });
+      renderVariants(); drawLines();
+      return 0;
+    }
+    let added = 0;
+    (got.routes || []).forEach((r) => {
+      // ⚠️ **同じ経路は出さない。** 実測で ×3 と ×5、2.0倍と 3.0倍が同じになった
+      const sig = routeSignature(r);
+      if (sig && seen.has(sig)) return;
+      if (sig) seen.add(sig);
+      const key = suffix ? `fun:${r.kind}${suffix}` : `fun:${r.kind}`;
+      state.results[key] = r;
+      const base = sidesLabel(r.funPick && r.funPick.sides);
+      state.variants.push({ key, label: suffix ? `${base}${suffix}` : base,
+                            color:funColor(r.kind) });
+      if (!suffix && added === 0 && !state.selected.startsWith("fun:")) state.selected = key;
+      added++;
+    });
+    if (!suffix) {
       state.sideEmpties = got.sideEmpties || [];
       if (!got.routes.length) {
         state.results["fun:none"] = { error:got.note || "通せるおすすめ道路がありません" };
         state.variants.push({ key:"fun:none", label:"楽しい", color:funColor("north") });
+      }
+    }
+    renderVariants(); drawLines();
+    return added;
+  }
+
+  if (funCount > 0) {
+    state.selected = "normal";
+    await addFunRoutes({ corridorScale, budgetRatio });
+
+    // ③ 設定を変えて比べる。⚠️ **時間が掛かる**ので明示したときだけ
+    if (checked("sweep")) {
+      // ⚠️ いま使った値はもう出してある。同じ呼び出しを繰り返さない
+      for (const c of stepsOf("corridor")) {
+        if (c === corridorScale) continue;
+        await addFunRoutes({ corridorScale:c, budgetRatio, suffix:` ×${c}` });
+      }
+      for (const b of stepsOf("budget")) {
+        if (b === budgetRatio) continue;
+        await addFunRoutes({ corridorScale, budgetRatio:b, suffix:` ${b}倍` });
       }
     }
   }

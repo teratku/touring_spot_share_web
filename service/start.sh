@@ -1,7 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Valhalla と API を両方起こす。
 # ⚠️ **どちらかが落ちたらコンテナごと終わらせる。** 片方だけ生きていると
 #    「繋がるのに経路が出ない」状態になり、Cloud Run が異常に気づけない。
+#
+# ⚠️ **`#!/bin/sh` にしないこと。** 下の `wait -n` は bash 専用で、Debian の
+#    `/bin/sh`（dash）では `wait: Illegal option -n` で落ちる。
+#    実際に Cloud Run で落ちた（Valhalla は起動済み・/status も 200 だったのに
+#    この1行でコンテナごと終了した）。
+#    ⚠️ `kill -0` のポーリングで代用しないこと。終了した子はゾンビとして残り、
+#       `kill -0` が成功し続けるので**落ちたことを検知できない**。
 set -e
 
 valhalla_service /custom_files/valhalla.json 1 &

@@ -79,6 +79,14 @@
   .warn { font-size:11px; color:var(--ng); margin:4px 0 6px; line-height:1.6; }
   .attr { margin-top:12px; padding:8px; background:var(--bg); border:1px solid var(--line);
           border-radius:6px; font-size:10px; color:var(--muted); line-height:1.7; }
+
+  .publish { margin-top:16px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--bg); }
+  .publish h2 { font-size:13px; margin:0 0 6px; }
+  button.danger { background:var(--ng); color:#fff; border-color:var(--ng); }
+  button.danger:disabled { background:#fff; color:var(--muted); border-color:var(--line); cursor:default; }
+  #pubOut { max-height:220px; overflow:auto; background:#fff; border:1px solid var(--line);
+            border-radius:6px; padding:8px; font-size:11px; line-height:1.6; white-space:pre-wrap;
+            margin:8px 0 0; }
   .legend { font-size:11px; color:var(--muted); margin:6px 0; }
   .legend i { display:inline-block; width:14px; height:3px; vertical-align:middle; margin-right:4px; }
 </style>
@@ -97,6 +105,7 @@
   <aside>
     <div class="row">
       <label>県 <select id="pref"></select></label>
+      <label><input type="checkbox" id="showSkipped"> 見送ったものも見る</label>
     </div>
 
     <p class="hint">
@@ -108,11 +117,36 @@
     </p>
     <p class="legend">
       <i style="background:#e8590c"></i>いま登録されている線　
-      <i style="background:#1971c2"></i>JARTIC の候補
+      <i style="background:#1971c2"></i>JARTIC の候補　
+      <i style="background:#8b938b"></i>見送ったもの
     </p>
 
+    <div class="totals" id="progress"></div>
     <div class="totals" id="totals"></div>
     <ul class="list" id="list"></ul>
+
+    <div class="publish">
+      <h2>アプリへ反映する</h2>
+      <p class="hint">
+        登録した規制を Firestore（<code>road_restrictions</code>）へ上げる。
+        ⚠️ <strong>アプリはルート生成に規制を使っていない</strong>（いまは Google Directions）。
+        ここで配るのは<strong>走行中の規制予告</strong>と<strong>ルート候補の絞り込み</strong>に効く。<br>
+        ⚠️ <strong>未確認の JARTIC 候補は配られない。</strong>
+        上げるのは <code>data/road-restrictions</code> だけ。
+      </p>
+      <div class="row">
+        <button id="pubDry">下見（書き込まない）</button>
+        <button id="pubGo" class="danger" disabled>本番へ反映</button>
+        <span class="meta" id="pubCount"></span>
+      </div>
+      <p class="warn" id="pubWarn" style="display:none">
+        ⚠️ <strong>本番の Firestore に書き込みます。</strong>
+        誤った区間を配ると「通れない」と誤案内することになります。
+        <strong>先に下見して差分を確かめてください。</strong>
+      </p>
+      <pre id="pubOut" style="display:none"></pre>
+    </div>
+
     <div class="attr" id="attr"></div>
   </aside>
   <div id="map"></div>
@@ -169,26 +203,62 @@ function initMap() {
 }
 window.initMap = initMap;
 
+/** 見送ったものも見るか。⚠️ 隠したままだと、間違えて見送った1件を戻せない */
+const withSkipped = () => document.getElementById("showSkipped").checked;
+
 async function loadPrefectures() {
-  const r = await fetch("/api/rebuild/prefectures").then((x) => x.json());
+  const q = withSkipped() ? "?includeSkipped=1" : "";
+  const [r, p] = await Promise.all([
+    fetch(`/api/rebuild/prefectures${q}`).then((x) => x.json()),
+    fetch("/api/rebuild/progress").then((x) => x.json()).catch(() => null),
+  ]);
   const sel = document.getElementById("pref");
+  const total = r.prefectures.reduce((a, x) => a + x.count, 0);
+
+  // ⚠️ **数字を必ず出す。** 空のときに何も言わないと、片付いたのか
+  //    壊れているのか見分けがつかない（実際に分からなかった）
+  if (p) {
+    document.getElementById("left").textContent =
+      p.pending > 0 ? `残り ${p.pending}件` : "作り直し完了";
+    document.getElementById("sell").textContent = `販売APIに載る ${p.sellable}件`;
+  }
+  renderProgress(p);
+
   if (!r.prefectures.length) {
-    document.getElementById("list").innerHTML =
-      `<li class="meta">${esc(r.note || "作り直す規制はありません")}</li>`;
+    sel.innerHTML = "";
+    document.getElementById("list").innerHTML = p && p.pending === 0
+      ? `<li class="meta">作り直すものは残っていません。`
+        + (p.skipped ? `見送った ${p.skipped}件 を見直すには、上の「見送ったものも見る」を入れてください。` : "")
+        + `</li>`
+      : `<li class="meta">${esc(r.note || "作り直す規制はありません")}</li>`;
     return;
   }
-  sel.innerHTML = r.prefectures.map((p) =>
-    `<option value="${p.romaji}">${esc(p.prefecture)}（${p.count}）</option>`).join("");
+  sel.innerHTML = r.prefectures.map((x) =>
+    `<option value="${x.romaji}">${esc(x.prefecture)}（${x.count}）</option>`).join("");
   sel.onchange = () => load(sel.value);
-  const total = r.prefectures.reduce((a, p) => a + p.count, 0);
-  document.getElementById("left").textContent = `残り ${total}件`;
+  if (!p) document.getElementById("left").textContent = `残り ${total}件`;
   load(r.prefectures[0].romaji);
 }
+
+/** 進み具合の内訳。⚠️ 出どころごとに出す。販売に載るかがそれで決まる */
+function renderProgress(p) {
+  const box = document.getElementById("progress");
+  if (!p) { box.innerHTML = ""; return; }
+  box.innerHTML = [
+    ["登録済み", p.total], ["OSM", p.osm], ["JARTIC", p.jartic],
+    ["二普協（売れない）", p.jmpsa], ["見送り", p.skipped], ["販売APIに載る", p.sellable],
+  ].map(([k, v]) => `<div>${k}<b>${v}</b></div>`).join("");
+}
+
+document.getElementById("showSkipped").onchange = () => {
+  state.sel = null; state.pick = null;
+  loadPrefectures();
+};
 
 async function load(romaji) {
   state.romaji = romaji; state.sel = null; state.pick = null;
   const [q, j] = await Promise.all([
-    fetch(`/api/rebuild/${romaji}`).then((x) => x.json()),
+    fetch(`/api/rebuild/${romaji}${withSkipped() ? "?includeSkipped=1" : ""}`).then((x) => x.json()),
     fetch(`/api/jartic/${romaji}`).then((x) => x.json()).catch(() => ({ candidates: [] })),
   ]);
   if (q.error) { document.getElementById("list").innerHTML = `<li>${esc(q.error)}</li>`; return; }
@@ -213,10 +283,17 @@ function render() {
     const on = state.sel === r.id;
     const name = r.name ? `<span class="nm">${esc(r.name)}</span>`
                         : `<span class="nm none">(名前なし)</span>`;
+    // ⚠️ 見送ったものは、そうと分かる形で出して戻せるようにする
+    const skipChip = it.skipped ? `<span class="chip none">見送り</span>` : "";
     let body = `<li data-i="${i}" class="${on ? "on" : ""}">
-      <span class="chip ${TIER_CLASS[it.tier]}">${esc(it.tier)}</span>${name}
+      <span class="chip ${TIER_CLASS[it.tier]}">${esc(it.tier)}</span>${skipChip}${name}
       <div class="meta">${esc(r.id)}</div>`;
-    if (on) body += candidatesHtml(it);
+    if (it.skipped) {
+      body += `<div style="margin-top:5px">
+        <button data-unskip="${esc(r.id)}">見送りを取り消す</button></div>`;
+      // ⚠️ 見送ったものでも候補があれば見せる。戻して置き換える判断に要る
+      if (on && it.matches.length) body += candidatesHtml(it);
+    } else if (on) body += candidatesHtml(it);
     return body + `</li>`;
   }).join("") || `<li class="meta">この県はもう作り直すものがありません</li>`;
 
@@ -288,6 +365,18 @@ function wireButtons(items) {
       render();
     };
   }
+  for (const b of document.querySelectorAll("[data-unskip]")) {
+    b.onclick = async () => {
+      b.disabled = true;
+      // ⚠️ 規制そのものは消していないので、控えから外すだけで戻る
+      await fetch("/api/rebuild/skip", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ registeredId: b.dataset.unskip, undo: true }),
+      });
+      state.sel = null; state.pick = null;
+      loadPrefectures();
+    };
+  }
   for (const b of document.querySelectorAll("[data-skip]")) {
     b.onclick = async () => {
       b.disabled = true;
@@ -302,11 +391,72 @@ function wireButtons(items) {
   }
 }
 
+/**
+ * Firestore へ反映する。
+ *
+ * ⚠️ **下見を通さずに本番へ書かせない。** ボタンは下見が終わるまで押せない。
+ *    誤った区間を配ると「通れない」と誤案内することになる。
+ */
+async function publish(commit) {
+  const out = document.getElementById("pubOut");
+  const dry = document.getElementById("pubDry");
+  const go = document.getElementById("pubGo");
+  dry.disabled = true; go.disabled = true;
+  out.style.display = "block";
+  out.textContent = commit ? "反映しています…" : "下見しています…";
+  let r;
+  try {
+    r = await fetch("/api/restrictions/publish", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ commit }),
+    }).then((x) => x.json());
+  } catch (e) {
+    out.textContent = "呼べません: " + e.message; dry.disabled = false; return;
+  }
+  out.textContent = [r.stdout, r.stderr].filter(Boolean).join("\n") || "（何も出力されませんでした）";
+  document.getElementById("pubCount").textContent = `手元 ${r.local}件 / ${r.files}県`;
+  dry.disabled = false;
+  // ⚠️ 下見が通ったときだけ本番を開ける。落ちたなら直してから
+  if (!commit) {
+    go.disabled = !r.ok;
+    document.getElementById("pubWarn").style.display = r.ok ? "block" : "none";
+  } else {
+    go.disabled = true;
+    document.getElementById("pubWarn").style.display = "none";
+  }
+}
+document.getElementById("pubDry").onclick = () => publish(false);
+document.getElementById("pubGo").onclick = () => {
+  // ⚠️ 本番へ書く前にもう一度きく。押し間違いで配信されないように
+  if (!confirm("本番の Firestore に書き込みます。よろしいですか？")) return;
+  publish(true);
+};
+
 function draw(items) {
   for (const l of state.lines) l.setMap(null);
   state.lines = [];
   const it = items.find((x) => x.registered.id === state.sel);
-  if (!it) return;
+
+  // ⚠️ **何も選んでいなくても、地図を空にしない。** 一覧に48件あるのに
+  //    地図が真っ白だと「データが無い」ように見える（実際にそう見えた）。
+  //    まとめて薄く描いて、どこの話かを先に見せる
+  if (!it) {
+    const all = new google.maps.LatLngBounds();
+    for (const x of items) {
+      const pts = decode(x.registered.polyline || "");
+      if (pts.length < 2) continue;
+      pts.forEach((p) => all.extend(p));
+      // ⚠️ **薄くしすぎないこと。** 県ぜんぶに寄せると1件は数ピクセルにしかならず、
+      //    薄い線だと地図が空に見える（実際にそう見えた）
+      state.lines.push(new google.maps.Polyline({
+        path: pts, map: state.map,
+        strokeColor: x.skipped ? "#6b7280" : "#e8590c",
+        strokeWeight: 6, strokeOpacity: 0.9, zIndex: 1,
+      }));
+    }
+    if (!all.isEmpty()) state.map.fitBounds(all);
+    return;
+  }
   const bounds = new google.maps.LatLngBounds();
 
   // ⚠️ **いま登録されている線は下に敷く。** 上に重ねると候補が隠れて見比べられない

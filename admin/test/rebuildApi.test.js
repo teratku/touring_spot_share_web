@@ -211,3 +211,87 @@ test("同じ候補に置き換え直しても、規制を消さない", async (t
       "置き換え直しで重複した");
   });
 });
+
+test("片付いたあとも、進み具合の数字が出る", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **空のときに何も言わないと、片付いたのか壊れているのか見分けがつかない**
+  //    （実際に「データが表示されていない」と見えた）
+  const p = await get("/api/rebuild/progress");
+  assert.ok(p.total > 0, "登録済みの件数が出ていない");
+  for (const k of ["sellable", "osm", "jartic", "jmpsa", "skipped", "pending"]) {
+    assert.ok(Number.isFinite(p[k]), `${k} が数字で返っていない`);
+  }
+  // 残り = まだ二普協由来で、見送ってもいないもの
+  assert.strictEqual(p.pending, Math.max(0, p.jmpsa - p.skipped), "残りの数え方が合わない");
+  assert.ok(p.osm + p.jartic + p.jmpsa <= p.total, "内訳が合計を超えている");
+  // ⚠️ **控えのファイルと突き合わせる。** 自分の数字どうしで辻褄を合わせても意味が無い
+  const onDisk = fs.existsSync(SKIP_FILE)
+    ? (JSON.parse(fs.readFileSync(SKIP_FILE, "utf8")).ids || []).length : 0;
+  assert.strictEqual(p.skipped, onDisk, `見送りの件数が控えと違う（${p.skipped} 対 ${onDisk}）`);
+  // 出どころの内訳も、実物と突き合わせる
+  let jmpsa = 0;
+  for (const f of fs.readdirSync(REG_DIR).filter((x) => x.endsWith(".json"))) {
+    const d = JSON.parse(fs.readFileSync(path.join(REG_DIR, f), "utf8"));
+    jmpsa += (d.restrictions || []).filter((r) => r.origin === "jmpsa").length;
+  }
+  assert.strictEqual(p.jmpsa, jmpsa, "二普協由来の件数が実物と違う");
+});
+
+test("見送ったものを、見て戻せる", async (t) => {
+  if (await skipIfDown(t)) return;
+  await withBackup("tokyo", async () => {
+    // ⚠️ **隠したままだと、間違えて見送った1件を戻せない**
+    const hidden  = await get("/api/rebuild/tokyo");
+    const shown   = await get("/api/rebuild/tokyo?includeSkipped=1");
+    // ⚠️ **`t.skip` で逃げないこと。** 逃がすと「旗を渡しても出さない」壊れ方を見逃す
+    //    （実際に見逃した）。控えに東京ぶんが在るなら、出ていなければ落とす
+    const ids = new Set(fs.existsSync(SKIP_FILE)
+      ? (JSON.parse(fs.readFileSync(SKIP_FILE, "utf8")).ids || []) : []);
+    const inTokyo = (JSON.parse(fs.readFileSync(path.join(REG_DIR, "tokyo.json"), "utf8"))
+      .restrictions || []).filter((r) => ids.has(r.id)).length;
+    assert.ok(inTokyo > 0, "東京に見送りが無い（材料が悪い）");
+    assert.strictEqual(shown.items.filter((x) => x.skipped).length, inTokyo,
+      `見送り ${inTokyo}件 のうち ${shown.items.filter((x) => x.skipped).length}件 しか出ていない`);
+    assert.ok(shown.items.length > hidden.items.length, "見送りが見えるようになっていない");
+    assert.ok(shown.items.some((x) => x.skipped === true), "見送りの印が付いていない");
+
+    const one = shown.items.find((x) => x.skipped);
+    await post("/api/rebuild/skip", { registeredId: one.registered.id, undo: true });
+    const after = await get("/api/rebuild/tokyo");
+    assert.ok(after.items.some((x) => x.registered.id === one.registered.id),
+      "取り消しても一覧に戻ってこない");
+  });
+});
+
+test("見送りを見せても、片付いたものは戻さない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 置き換え済み（jartic 化した）ものまで出してはいけない
+  const shown = await get("/api/rebuild/tokyo?includeSkipped=1");
+  const reg = JSON.parse(fs.readFileSync(path.join(REG_DIR, "tokyo.json"), "utf8"));
+  const byId = new Map(reg.restrictions.map((r) => [r.id, r]));
+  for (const it of shown.items) {
+    assert.strictEqual(byId.get(it.registered.id).origin, "jmpsa",
+      `片付いたものが出ている: ${it.registered.id}`);
+  }
+});
+
+test("由来を手で直したものは、作り直しの対象から外れる", async (t) => {
+  if (await skipIfDown(t)) return;
+  await withBackup("tokyo", async () => {
+    // ⚠️ **id を変えずに由来だけ直す道がある**（road-builder で「自前調査」に直すなど）。
+    //    id の有無だけで見ていると、売れる状態になったのに対象に残り続ける
+    const file = path.join(REG_DIR, "tokyo.json");
+    const reg = JSON.parse(fs.readFileSync(file, "utf8"));
+    const before = await get("/api/rebuild/tokyo?includeSkipped=1");
+    const target = before.items[0];
+    assert.ok(target, "東京に対象が無い（材料が悪い）");
+
+    const r = reg.restrictions.find((x) => x.id === target.registered.id);
+    r.origin = "survey";
+    fs.writeFileSync(file, JSON.stringify(reg, null, 1) + "\n");
+
+    const after = await get("/api/rebuild/tokyo?includeSkipped=1");
+    assert.ok(!after.items.some((x) => x.registered.id === target.registered.id),
+      "由来を直したのに、まだ作り直しの対象に残っている");
+  });
+});
