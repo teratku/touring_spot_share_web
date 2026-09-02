@@ -18,9 +18,12 @@
  *    このツールの `lib/polyline.js` は5桁。**そのまま渡すと10倍ずれた線になる。**
  *    ここで5桁に直してから返す。
  *
- * ⚠️ **経由地は type=through にする。** break にすると区間が分かれ、
- *    「そこで一度止まる」扱いになって指示が増える。
- *    楽しい道を通したいだけなら through。
+ * ⚠️ **経由地には2種類ある。**
+ *    ・`through`（既定）… 楽しい道の中継点。**そこを通らせたいだけ**なので
+ *      区間を分けない。break にすると「一度止まる」扱いで指示が増える。
+ *    ・`break`（`stopAt` で指定）… 利用者が置いた立ち寄り先。
+ *      **区間を分けないと「着きました」と言えない**（実機で報告: 立ち寄り先を
+ *      設定したのに経路に出ず、通過しても何も起きなかった）。
  */
 "use strict";
 
@@ -498,7 +501,13 @@ async function routeWithValhalla(from, to, opts = {}) {
   const destination = { lat: to[1], lon: to[0] };
   const locations = [
     { lat: from[1], lon: from[0] },
-    ...vias.map((p) => ({ lat: p[1], lon: p[0], type: "through" })),
+    // ⚠️ **止まる場所だけ break にする。** 全部 through だと区間が1つになり、
+    //    立ち寄り先に着いても知らせられない。逆に全部 break にすると、
+    //    楽しい道の中継点ごとに「着きました」と言うことになる
+    ...vias.map((p, i) => ({
+      lat: p[1], lon: p[0],
+      type: (opts.stopAt || []).includes(i) ? "break" : "through",
+    })),
     destination,
   ];
   const body = {
@@ -739,12 +748,26 @@ async function routeWithValhalla(from, to, opts = {}) {
   for (const leg of trip.legs) {
     // ⚠️ 区間ごとに shape が別々。区間をまたぐ番号として使えないので、
     //    いまの points の長さを足してから記録する
-    const offset = points.length;
+    // ⚠️ **区間の切れ目を覚えること。** ここで平らに繋ぐと立ち寄り先が消え、
+    //    アプリが「経由地に着いた」と言えなくなる（実機で報告: 立ち寄り先を
+    //    設定したのに経路に出ず、通過しても何も起きなかった）
+    const stepsBeforeLeg = steps.length;
     const shape = decode6(leg.shape);
+    // ⚠️ **足す前の長さを番号の起点にしないこと。**
+    //    区間の先頭の点は前の区間の終点と同じで、下の重複除きで**足されない**。
+    //    起点を points.length にしていたため2区間目以降が丸ごと1つずれ、
+    //    最後の2指示がアプリで範囲外になって**黙って捨てられていた**
+    //    （`ValhallaRouteService.parseStep` は `end < full.count` でないと nil）。
+    //    実測（新座→ドンキ→オギノパン）: 点1868に対し最大の番号1868。
+    //    捨てられた中に1,618mの走る指示があり、**最後の1.6kmが無案内**だった。
+    //    番号の対応表を作れば、区間の中に重なった点があっても狂わない
+    const at = [];
     for (const p of shape) {
       const tail = points[points.length - 1];
       if (!tail || tail[0] !== p[0] || tail[1] !== p[1]) points.push(p);
+      at.push(points.length - 1);
     }
+    const indexOf = (i) => (at[i] !== undefined ? at[i] : points.length - 1);
     for (const m of leg.maneuvers) {
       steps.push({
         maneuver: MANEUVER[m.type] || "straight",
@@ -769,14 +792,21 @@ async function routeWithValhalla(from, to, opts = {}) {
           shape.slice(m.begin_shape_index || 0, (m.end_shape_index || 0) + 1)),
         distanceMeters: Math.round((m.length || 0) * 1000),
         durationSeconds: Math.round(m.time || 0),
-        beginIndex: offset + (m.begin_shape_index || 0),
-        endIndex: offset + (m.end_shape_index || 0),
+        beginIndex: indexOf(m.begin_shape_index || 0),
+        endIndex: indexOf(m.end_shape_index || 0),
         // ⚠️ **道の種別は Valhalla が maneuver ごとに教えてくれる。**
         //    道路名から「自動車道」を探すような当て推量をしないこと
         //    （実測: highway 3区間65.9km / toll 7区間70.6km を正しく拾えた）
         roadKind: m.highway ? "expressway" : (m.toll ? "toll" : "surface"),
       });
     }
+    // ⚠️ **この区間の最後の指示が「着いた」にあたる。** Valhalla は区間ごとに
+    //    到着の maneuver を返すので、その1つに印を付ける
+    // ⚠️ `stepsBeforeLeg` との比較が効くのは「指示が1つも無い区間」のときだけ
+    //    （そのときは前の区間の印を付け直さない）。答えは変わらないので、
+    //    テストでは落ちない——**用心のための条件**と分かるように残す
+    if (steps.length > stepsBeforeLeg) steps[steps.length - 1].isLegEnd = true;
+
   }
 
   // ⚠️ 区間が複数あるときは先頭だけ。色分けは目で見るためのものなので、

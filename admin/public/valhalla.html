@@ -296,6 +296,26 @@
             <option value="5000">5kmごと</option>
           </select></label>
       </div>
+      <div class="row" style="margin-top:10px">
+        <button id="gpx">GPX を書き出す</button>
+        <button id="gpxPts">simctl 用に書き出す</button>
+        <label>走る速さ
+          <select id="gpxSpeed">
+            <option value="40" selected>40km/h</option>
+            <option value="60">60km/h</option>
+            <option value="120">120km/h</option>
+          </select>
+        </label>
+      </div>
+      <p class="hint">⚠️ <strong>選んでいる案の線をそのまま出します。</strong>
+        Xcode に入れて <strong>Debug → Simulate Location</strong> で選ぶと、その道を走ります。<br>
+        ⚠️ <strong>simctl は GPX を読みません</strong>（<code>緯度,経度</code> の行）。
+        そちらは「simctl 用」で出して
+        <code>xcrun simctl location &lt;UDID&gt; start --speed=17 - &lt; ファイル</code>
+        （<code>--speed</code> は m/s。17≒60km/h）。<br>
+        ⚠️ 点の間隔は用途で変えています——GPX は20m（Xcode はそのまま並べる）、
+        simctl は100m（点の間を自分で補間する）。</p>
+
       <div class="row" style="margin-top:6px">
         <button class="go" id="driveRun" disabled>走らせる</button>
         <label>速さ
@@ -1285,6 +1305,40 @@ renderVariants();
 // MARK: 「走らせる」の配線
 // ⚠️ **ここは末尾に置くこと。** `voice` などの const より前で呼ぶと
 //    「Cannot access 'voice' before initialization」で丸ごと止まる（実際に踏んだ）。
+/**
+ * 選んでいる案の線を、位置情報として書き出す。
+ *
+ * ⚠️ **書式の組み立てはサーバでやる**（`lib/gpx.js`）。ここで作ると、
+ *    端末の `makeGpx.js` と2か所に分かれて必ずずれる。
+ */
+async function downloadTrace(format) {
+  const r = state.results[state.selected];
+  if (!r || r.error || !(r.points || []).length) {
+    alert("先に経路を引いてください");
+    return;
+  }
+  const res = await fetch("/api/valhalla/gpx", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      points: r.points, format,
+      speedKmh: Number(document.getElementById("gpxSpeed").value) || 40,
+      name: `${state.selected} ${(r.lengthMeters / 1000).toFixed(1)}km`,
+    }),
+  });
+  if (!res.ok) { alert("書き出せません: " + (await res.text()).slice(0, 200)); return; }
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = format === "simctl" ? "route-points.txt" : "route.gpx";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+document.getElementById("gpx").onclick = () => downloadTrace("gpx");
+document.getElementById("gpxPts").onclick = () => downloadTrace("simctl");
+
 document.getElementById("driveRun").onclick = driveToggle;
 document.getElementById("driveTry").onclick = () => {
   refreshVoices();

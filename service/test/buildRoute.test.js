@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const { buildRouteResponse } = require("../lib/buildRoute");
 const { isSellable } = require("../../admin/lib/restrictionOrigin");
+const { decode } = require("../../admin/lib/polyline");
 
 /**
  * 配信APIの応答。
@@ -136,4 +137,62 @@ test("外から繋がる待ち方をしている", () => {
   // ⚠️ Cloud Run は 0.0.0.0 で待つこと。127.0.0.1 だと外から繋がらない
   const server = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
   assert.ok(/const HOST = "0\.0\.0\.0"/.test(server), "0.0.0.0 で待っていない");
+});
+
+test("立ち寄り先があっても、アプリが指示を1つも捨てない", async (t) => {
+  // ⚠️ **アプリは範囲外の指示を黙って捨てる。**
+  //    `ValhallaRouteService.parseStep` は
+  //    `begin >= 0, end < full.count, begin <= end` を満たさないと nil を返し、
+  //    エラーも警告も出ない。区間の先頭の点は前の区間の終点と同じで足されないのに、
+  //    足す前の長さを番号の起点にしていたため2区間目以降が丸ごと1つずれ、
+  //    **最後の2指示が消えていた**（実測: 点1868に対し最大の番号1868。
+  //    消えた中に1,618mの走る指示があり、最後の1.6kmが無案内だった）
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse({
+    from: TOKYO, vias: [[139.4, 35.45]], to: HAKONE, stopAt: [0], guidance: false,
+  }, {});
+  assert.strictEqual(out.status, 200, JSON.stringify(out.body));
+  const n = decode(out.body.route.polyline).length;
+  const steps = out.body.route.steps;
+  assert.ok(steps.length > 2, "指示が少なすぎる（材料が悪い）");
+  const dropped = steps.filter((s) =>
+    !(s.beginIndex >= 0 && s.endIndex < n && s.beginIndex <= s.endIndex));
+  assert.deepStrictEqual(dropped.map((s) => s.instruction), [],
+    `アプリが捨てる指示がある（線は${n}点）`);
+  assert.strictEqual(steps[steps.length - 1].endIndex, n - 1,
+    "最後の指示が線の終わりに届いていない");
+});
+
+test("止まる場所を言えば、区間の切れ目が2つになる", async (t) => {
+  // ⚠️ **`stopAt` が空だと経由地は「通るだけ」になり、着いても知らせられない**
+  //    （実機で報告: 立ち寄り先を設定したのに通過しても何も起きなかった）
+  if (await skipIfDown(t)) return;
+  const body = { from: TOKYO, vias: [[139.4, 35.45]], to: HAKONE, guidance: false };
+  const stop = await buildRouteResponse({ ...body, stopAt: [0] }, {});
+  const through = await buildRouteResponse(body, {});
+  const ends = (o) => o.body.route.steps.filter((s) => s.isLegEnd).length;
+  assert.strictEqual(ends(stop), 2, "立ち寄り先が区間の終わりになっていない");
+  assert.strictEqual(ends(through), 1, "通るだけの経由地まで区間の終わりにしている");
+});
+
+test("到着の指示は距離0で、その手前が走る指示", async (t) => {
+  // ⚠️ **アプリの言い換えがこの形に乗っている。**
+  //    到着は距離0の独立した指示なので、走っている最中の現在ステップは
+  //    `isLegEnd` ではない。現在ステップだけを見ていたため、実機で
+  //    「300メートル先、直進です」のままだった（`NavigationEngine.arrivalStepAhead`）
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse({
+    from: TOKYO, vias: [[139.4, 35.45]], to: HAKONE, stopAt: [0], guidance: false,
+  }, {});
+  const steps = out.body.route.steps;
+  const ends = steps.map((s, i) => [i, s]).filter(([, s]) => s.isLegEnd);
+  assert.strictEqual(ends.length, 2, "区間の切れ目が2つでない（材料が悪い）");
+  for (const [i, s] of ends) {
+    assert.strictEqual(s.distanceMeters, 0, `指示${i} の到着に距離が付いている`);
+    assert.ok(i > 0, "到着の手前に走る指示が無い");
+    assert.ok(steps[i - 1].distanceMeters > 0,
+      `指示${i} の手前が走る指示になっていない`);
+    assert.strictEqual(steps[i - 1].isLegEnd, false,
+      `指示${i - 1}（走る指示）にまで区間の終わりの印が付いている`);
+  }
 });

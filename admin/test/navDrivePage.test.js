@@ -150,3 +150,17 @@ test("避けきれなかった規制を、画面に出している", () => {
     assert.ok(built.includes(name), `${name} を表示に足していない（作っただけ）`);
   }
 });
+
+test("位置情報の書き出しが画面にある", () => {
+  // ⚠️ **配線だけでは出ない。** 一度、JS は入れたのにボタンの HTML を入れ忘れ、
+  //    「窓口は動くのに画面に何も無い」状態になった（実際にそうなった）
+  assert.ok(/id="gpx"/.test(html), "GPX のボタンが無い");
+  assert.ok(/id="gpxPts"/.test(html), "simctl のボタンが無い");
+  assert.ok(/id="gpxSpeed"/.test(html), "走る速さの指定が無い");
+  const code = inlineScripts().join("\n");
+  assert.ok(/getElementById\("gpx"\)\.onclick/.test(code), "GPX のボタンが配線されていない");
+  assert.ok(/getElementById\("gpxPts"\)\.onclick/.test(code), "simctl のボタンが配線されていない");
+  // ⚠️ 書式の組み立てはサーバでやる（端末の makeGpx.js と2か所に分けない）
+  assert.ok(/\/api\/valhalla\/gpx/.test(code), "サーバの窓口を使っていない");
+  assert.ok(!/<wpt lat=/.test(code), "画面で GPX を組み立てている");
+});

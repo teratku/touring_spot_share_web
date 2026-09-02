@@ -48,7 +48,9 @@ test("既定では未確認を混ぜない", () => {
   const wired = (server.match(/restrictionsForPrefectures\(pts, \{ includeUnverified \}\)/g) || []).length;
   assert.strictEqual(wired, 3, `旗を通している窓口が ${wired} 個（3個のはず）`);
   // 受け取っていない窓口があると、実行時に落ちる
-  const got = (server.match(/includeUnverified \} = req\.body/g) || []).length;
+  // ⚠️ **並びの最後だと決めつけないこと。** `includeUnverified` の後ろに
+  //    `stopAt` を足したとたん 3個が 0個に見え、直っているのに落ちた
+  const got = (server.match(/includeUnverified[^}]*\} = req\.body/g) || []).length;
   assert.strictEqual(got, 3, `旗を受け取っている窓口が ${got} 個（3個のはず）`);
 });
 

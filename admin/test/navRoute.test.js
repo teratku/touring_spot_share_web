@@ -71,6 +71,47 @@ test("表示用と読み上げ用の名前を、別々に返す", async (t) => {
   }
 });
 
+test("立ち寄り先があっても、番号が線からはみ出さない", async (t) => {
+  // ⚠️ **アプリは範囲外の指示を黙って捨てる。**
+  //    `ValhallaRouteService.parseStep` は `end < full.count` でなければ nil を返し、
+  //    エラーも出ない。区間の先頭の点が重複で足されないぶんを数え忘れていたため、
+  //    2区間目以降が丸ごと1つずれ、**最後の2指示が消えていた**。
+  //    実測（新座→ドンキ→オギノパン）: 点1868に対し最大の番号1868。
+  //    捨てられた中に1,618mの走る指示があり、最後の1.6kmが無案内だった
+  if (await skipIfDown(t)) return;
+  const res = await ask({ from: KOFU, vias: [[138.7, 35.55]], to: FUJI, stopAt: [0] });
+  assert.ok(!res.error, `${res.error}`);
+  const n = decode(res.route.polyline).length;
+  assert.ok(res.route.steps.length > 2, "指示が少なすぎる（材料が悪い）");
+  for (const [i, s] of res.route.steps.entries()) {
+    assert.ok(s.beginIndex >= 0 && s.beginIndex < n,
+      `指示${i} の始点 ${s.beginIndex} が線（${n}点）の外`);
+    assert.ok(s.endIndex >= s.beginIndex && s.endIndex < n,
+      `指示${i} の終点 ${s.endIndex} が線（${n}点）の外`);
+  }
+  // 最後の指示は線の終わりまで届いていること（1.6km 足りない、が起きない）
+  const last = res.route.steps[res.route.steps.length - 1];
+  assert.strictEqual(last.endIndex, n - 1,
+    `最後の指示が線の終わりに届いていない（${last.endIndex} / ${n - 1}）`);
+});
+
+test("区間をまたいでも、指示の終点が地図の位置と合う", async (t) => {
+  // ⚠️ ずれは1点ぶんなので「はみ出す」だけ見ると2区間目の中では気づけない。
+  //    立ち寄り先の到着（距離0）は、経由地そのものの上に無ければおかしい
+  if (await skipIfDown(t)) return;
+  const via = [138.7, 35.55];
+  const res = await ask({ from: KOFU, vias: [via], to: FUJI, stopAt: [0] });
+  assert.ok(!res.error, `${res.error}`);
+  const pts = decode(res.route.polyline);
+  const ends = res.route.steps.filter((s) => s.isLegEnd);
+  assert.strictEqual(ends.length, 2, `区間の終端が ${ends.length} 個（材料が悪い）`);
+  const last = ends[ends.length - 1];
+  const p = pts[last.endIndex];
+  assert.ok(p, "最後の到着が線の外を指している");
+  const d = Math.hypot((p[0] - FUJI[0]) * 90, (p[1] - FUJI[1]) * 111) * 1000;
+  assert.ok(d < 300, `最後の到着が目的地から ${Math.round(d)}m ずれている`);
+});
+
 test("線は5桁で返す（10倍ずれない）", async (t) => {
   if (await skipIfDown(t)) return;
   // ⚠️ **Valhalla は6桁、アプリと Google は5桁。** そのまま渡すと座標が10倍ずれる。

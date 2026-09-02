@@ -28,7 +28,7 @@ const { toAppManeuver } = require("../../admin/lib/navManeuver");
 async function buildRouteResponse(body, deps = {}) {
   const { from, to, vias, variant, displacement, avoidHighways, avoidTolls,
           arriveOnNearSide, roadNameStyle, announce, guidance,
-          at, isHoliday } = body || {};
+          at, isHoliday, stopAt } = body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
@@ -38,6 +38,9 @@ async function buildRouteResponse(body, deps = {}) {
   try {
     route = await routeWithValhalla(from, to, {
       vias: Array.isArray(vias) ? vias : [],
+      // ⚠️ **止まる場所（立ち寄り先）の番号。** ここが空だと経由地が全部
+      //    「通るだけ」になり、着いても知らせられない
+      stopAt: Array.isArray(stopAt) ? stopAt : [],
       variant: variant || "normal",
       displacement, avoidHighways, avoidTolls, arriveOnNearSide, roadNameStyle,
       withRoadClass: false,
@@ -71,7 +74,10 @@ async function buildRouteResponse(body, deps = {}) {
     roadKind: step.roadKind,
     beginIndex: step.beginIndex,
     endIndex: step.endIndex,
-    isLegEnd: i === route.steps.length - 1,
+    // ⚠️ **番号で決めないこと。** 最後の1つだけを終点にすると、途中の
+    //    立ち寄り先が「着いた」にならず、アプリが何も言わない（実機で報告）。
+    //    区間の切れ目は `valhallaRoute.js` が印を付けている
+    isLegEnd: step.isLegEnd === true || i === route.steps.length - 1,
   }));
 
   return {

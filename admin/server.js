@@ -32,6 +32,7 @@ const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
 const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
 const { buildSideVariants, selectFunRoads } = require("./lib/funRouteSelect");
+const { toGpx, toSimctl } = require("./lib/gpx");
 const { segmentsBetween } = require("./lib/roadRecommendIndex");
 const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
@@ -651,7 +652,7 @@ function restrictionsForPrefectures(routePoints, opts = {}) {
 app.post("/api/valhalla/route", async (req, res) => {
   const { from, to, vias, variant, costing, excludePolygons,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          at, isHoliday, includeUnverified } = req.body || {};
+          at, isHoliday, includeUnverified, stopAt } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -663,6 +664,7 @@ app.post("/api/valhalla/route", async (req, res) => {
       { vias, variant, costing, excludePolygons,
         displacement, avoidHighways, avoidTolls, arriveOnNearSide,
         restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
+        stopAt: Array.isArray(stopAt) ? stopAt : [],
         at: at ? new Date(at) : undefined, isHoliday: !!isHoliday });
     if (out.error) return res.status(502).json(out);
     res.json(out);
@@ -681,10 +683,35 @@ app.post("/api/valhalla/route", async (req, res) => {
  * ⚠️ 県は指定させない。両端のあいだに掛かる県を全部集める
  *    （lib/roadRecommendIndex.js）。
  */
+/**
+ * 引いた経路を、Xcode / simctl で流せる位置情報にして返す。
+ *
+ * ⚠️ **書式の作り方は `lib/gpx.js` にしかない。** 端末（`makeGpx.js`）と
+ *    ここで同じものを使う。2か所に持つと必ずずれる。
+ * ⚠️ **画面から線をそのまま送ってもらう。** ここで引き直すと、
+ *    画面に出ている案と違う道の位置情報を渡すことになる
+ */
+app.post("/api/valhalla/gpx", (req, res) => {
+  const { points, format, speedKmh, everyMeters, name } = req.body || {};
+  if (!Array.isArray(points) || points.length < 2) {
+    return res.status(400).json({ error: "points（[経度, 緯度] の配列）が要ります" });
+  }
+  const simctl = format === "simctl";
+  const made = simctl
+    ? toSimctl(points, { everyMeters: Number(everyMeters) || 100 })
+    : toGpx(points, { speedKmh: Number(speedKmh) || 40,
+                      everyMeters: Number(everyMeters) || 20, name });
+  const file = simctl ? "route-points.txt" : "route.gpx";
+  res.setHeader("Content-Type", simctl ? "text/plain; charset=utf-8" : "application/gpx+xml");
+  res.setHeader("Content-Disposition", `attachment; filename="${file}"`);
+  res.setHeader("X-Point-Count", String(made.count));
+  res.send(made.text);
+});
+
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons, funCount, budgetRatio,
           corridorScale, minScore, displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          at, isHoliday, includeUnverified } = req.body || {};
+          at, isHoliday, includeUnverified, stopAt } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -715,7 +742,8 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       const routeFn = (autoVias) => routeWithValhalla(from, to,
         { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }), at: rideAt, isHoliday: !!isHoliday });
+          restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
+        stopAt: Array.isArray(stopAt) ? stopAt : [], at: rideAt, isHoliday: !!isHoliday });
 
       // ⚠️ **実際に引いてから、余計に走らせている道を外す。**
       //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）。
@@ -802,9 +830,11 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
  *    （最短・ふつう）に、勝手に寄り道を足さない。
  */
 app.post("/api/nav/route", async (req, res) => {
+  // ⚠️ **`stopAt` を受け取り忘れないこと。** 下で使っているのに取り出しておらず、
+  //    この窓口が丸ごと ReferenceError で 500 を返していた（テスト16件が落ちた）
   const { from, to, vias, variant, funCount, budgetRatio, corridorScale, minScore,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          announce, guidance, roadNameStyle, includeUnverified } = req.body || {};
+          announce, guidance, roadNameStyle, includeUnverified, stopAt } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -819,6 +849,9 @@ app.post("/api/nav/route", async (req, res) => {
     const drawOptions = { variant: kind, displacement, avoidHighways, avoidTolls,
                           arriveOnNearSide, roadNameStyle, withRoadClass: false,
                           restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
+                          // ⚠️ **止まる場所（立ち寄り先）の番号。** 空だと経由地が
+                          //    全部「通るだけ」になり、着いても知らせられない
+                          stopAt: Array.isArray(stopAt) ? stopAt : [],
                           at: req.body.at ? new Date(req.body.at) : undefined,
                           isHoliday: !!req.body.isHoliday };
 
@@ -868,7 +901,11 @@ app.post("/api/nav/route", async (req, res) => {
       roadKind: step.roadKind,
       beginIndex: step.beginIndex,
       endIndex: step.endIndex,
-      isLegEnd: i === route.steps.length - 1,
+      // ⚠️ **番号で決めないこと。** 最後の1つだけを終点にすると、途中の
+      //    立ち寄り先が「着いた」にならず、アプリが何も言わない（実機で報告）。
+      //    区間の切れ目は `lib/valhallaRoute.js` が印を付けている
+      //    （配信API `service/lib/buildRoute.js` と同じ扱いにそろえる）
+      isLegEnd: step.isLegEnd === true || i === route.steps.length - 1,
     }));
 
     // ⚠️ 返す線を、そのまま見て数える（上の注意書きを読むこと）
