@@ -293,6 +293,8 @@ const state = {
 const TAG_LABELS = {
   scenic: "絶景", winding: "ワインディング", flowing: "快走",
   forest: "林道ぎみ", caution: "要注意", gravel: "砂利道", deadend: "行き止まり",
+  // ⚠️ 自由記述で付けられた語を後から足したもの。`lib/roadTags.js` と揃えること
+  toll: "有料道路",
 };
 const PRESET_TAGS = ["scenic", "winding", "flowing", "forest", "caution", "gravel", "deadend"];
 /** 鍵→表示名。⚠️ **知らない鍵はそのまま出す**（自由記述と、移行前の日本語のため） */

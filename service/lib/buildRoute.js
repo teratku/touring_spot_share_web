@@ -28,7 +28,7 @@ const { toAppManeuver } = require("../../admin/lib/navManeuver");
 async function buildRouteResponse(body, deps = {}) {
   const { from, to, vias, variant, displacement, avoidHighways, avoidTolls,
           arriveOnNearSide, roadNameStyle, announce, guidance,
-          at, isHoliday, stopAt } = body || {};
+          at, isHoliday, stopAt, heading, headingTolerance } = body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
@@ -41,6 +41,9 @@ async function buildRouteResponse(body, deps = {}) {
       // ⚠️ **止まる場所（立ち寄り先）の番号。** ここが空だと経由地が全部
       //    「通るだけ」になり、着いても知らせられない
       stopAt: Array.isArray(stopAt) ? stopAt : [],
+      // ⚠️ **走っている向き。** 引き直しのときに渡すと、その場で向きを変えさせず
+      //    そのまま進んで小道で回り込む経路になる（`lib/valhallaRoute.js`）
+      heading, headingTolerance,
       variant: variant || "normal",
       displacement, avoidHighways, avoidTolls, arriveOnNearSide, roadNameStyle,
       withRoadClass: false,

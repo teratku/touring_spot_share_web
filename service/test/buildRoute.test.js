@@ -196,3 +196,45 @@ test("到着の指示は距離0で、その手前が走る指示", async (t) => 
       `指示${i - 1}（走る指示）にまで区間の終わりの印が付いている`);
   }
 });
+
+test("走っている向きを渡すと、その場で向きを変えさせない", async (t) => {
+  // ⚠️ **これが引き直しの肝。** 渡さないと「いま来た道を逆向きに」と言われる。
+  //    渡すと、そのまま進んで小道で回り込む形（コの字）になる。
+  //    実測（新座・南1.3kmへ戻る）: 渡さない 1.80km「南西方向です」／
+  //    北向きを渡す 2.48km「北東方向です → 左 → 左」
+  if (await skipIfDown(t)) return;
+  const from = [139.5666, 35.7867];
+  const to = [139.5600, 35.7750];        // 南（＝走ってきた方向）
+  const plain = await buildRouteResponse({ from, to, guidance: false }, {});
+  const facing = await buildRouteResponse({ from, to, guidance: false, heading: 0 }, {});
+
+  assert.strictEqual(plain.status, 200, JSON.stringify(plain.body));
+  assert.strictEqual(facing.status, 200, JSON.stringify(facing.body));
+
+  const first = (o) => o.body.route.steps[0].instruction;
+  assert.ok(/南/.test(first(plain)),
+    `渡さないときに南へ向かっていない（材料が変わった）: ${first(plain)}`);
+  assert.ok(/北/.test(first(facing)),
+    `向きを渡したのに、いきなり逆を向かせている: ${first(facing)}`);
+  // 遠回りになるのは織り込み済み。ただし極端に伸びないこと
+  const ratio = facing.body.route.totalDistanceMeters / plain.body.route.totalDistanceMeters;
+  assert.ok(ratio < 3, `遠回りが大きすぎる（${ratio.toFixed(2)}倍）`);
+});
+
+test("許容角から外れる向きは効かない（渡す側が知っておくこと）", async (t) => {
+  // ⚠️ **道の向きから45度以上ずれた値を渡すと、逆向きの経路が返る。**
+  //    実測（水道道路・北東に伸びる道）: heading=0/10/45/60 は北東へ、
+  //    heading=350 は「南西方向です」に戻った。
+  //    走っている向きをそのまま渡すぶんには問題ないが、
+  //    当て推量の値を渡すと**かえってUターンさせる**ことになる
+  if (await skipIfDown(t)) return;
+  const from = [139.5666, 35.7867];
+  const to = [139.5600, 35.7750];
+  const first = (o) => o.body.route.steps[0].instruction;
+
+  const facing = await buildRouteResponse({ from, to, guidance: false, heading: 10 }, {});
+  assert.ok(/北/.test(first(facing)), `向きが効いていない: ${first(facing)}`);
+
+  const off = await buildRouteResponse({ from, to, guidance: false, heading: 350 }, {});
+  assert.strictEqual(off.status, 200, "許容角から外れた値で失敗している（断らずに返すこと）");
+});

@@ -834,7 +834,8 @@ app.post("/api/nav/route", async (req, res) => {
   //    この窓口が丸ごと ReferenceError で 500 を返していた（テスト16件が落ちた）
   const { from, to, vias, variant, funCount, budgetRatio, corridorScale, minScore,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          announce, guidance, roadNameStyle, includeUnverified, stopAt } = req.body || {};
+          announce, guidance, roadNameStyle, includeUnverified, stopAt,
+          heading, headingTolerance } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -852,6 +853,8 @@ app.post("/api/nav/route", async (req, res) => {
                           // ⚠️ **止まる場所（立ち寄り先）の番号。** 空だと経由地が
                           //    全部「通るだけ」になり、着いても知らせられない
                           stopAt: Array.isArray(stopAt) ? stopAt : [],
+                          // ⚠️ 走っている向き（引き直しでUターンを避けるため）
+                          heading, headingTolerance,
                           at: req.body.at ? new Date(req.body.at) : undefined,
                           isHoliday: !!req.body.isHoliday };
 

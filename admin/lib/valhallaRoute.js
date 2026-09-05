@@ -499,8 +499,25 @@ async function routeWithValhalla(from, to, opts = {}) {
     vias.push(p);
   }
   const destination = { lat: to[1], lon: to[0] };
+  // ⚠️ **走っている向きを渡すと、その場で向きを変えさせなくなる。**
+  //    渡さないと「水道道路を南西方向です」＝いきなり逆を向けと言われる。
+  //    渡すと「北東方向です → 左 → 左」と、そのまま進んで小道で回り込む形になる
+  //    （実測・新座で 1.80km → 2.48km。遠回り +0.68km でUターンが消えた）。
+  // ⚠️ **許容角は広めに取ること。** 狭いと道の向きから外れて、
+  //    かえって逆向きの経路が返る（実測: 水道道路で heading=350 は
+  //    許容45度から外れて「南西方向です」に戻った）。
+  // ⚠️ **範囲外を丸める必要は無い。** Valhalla が内部で正規化する
+  //    （実測: 370 は 10 として効き、-10 は 350 として効いた）。
+  //    危ないのは **`CLLocation.course` が不明のとき -1 になる**ほうで、
+  //    それは渡す前にアプリで弾く（`NavigationController`）
+  const start = { lat: from[1], lon: from[0] };
+  if (Number.isFinite(opts.heading)) {
+    start.heading = opts.heading;
+    start.heading_tolerance = Number.isFinite(opts.headingTolerance)
+      ? opts.headingTolerance : 45;
+  }
   const locations = [
-    { lat: from[1], lon: from[0] },
+    start,
     // ⚠️ **止まる場所だけ break にする。** 全部 through だと区間が1つになり、
     //    立ち寄り先に着いても知らせられない。逆に全部 break にすると、
     //    楽しい道の中継点ごとに「着きました」と言うことになる
