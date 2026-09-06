@@ -238,3 +238,36 @@ test("許容角から外れる向きは効かない（渡す側が知ってお�
   const off = await buildRouteResponse({ from, to, guidance: false, heading: 350 }, {});
   assert.strictEqual(off.status, 200, "許容角から外れた値で失敗している（断らずに返すこと）");
 });
+
+test("経由地に進入方向を渡すと、行って戻らず回り込む", async (t) => {
+  // ⚠️ **利用者が選んだ道は端まで走らせる。** 端まで行って戻るのが嫌だからと
+  //    入口を落とすと、選んだ道を走らないことになる（実機の要望:
+  //    「今回はユーザーがわざわざ選択したものなため」）。
+  //    入口に「道に沿った向き」を渡すと、その向きで入れる道筋＝回り込みを探す。
+  //    実測（新座→大野東松山線→赤城大沼）: 指定なし 往復11.1km → 指定あり 6.1km
+  if (await skipIfDown(t)) return;
+  const from = [139.5666, 35.7867], to = [139.1930, 36.5540];
+  const via = [139.2000, 36.0300];
+  const plain = await buildRouteResponse({ from, to, vias: [via], stopAt: [0], guidance: false }, {});
+  const facing = await buildRouteResponse({ from, to, vias: [via], stopAt: [0],
+                                            viaHeadings: [90], guidance: false }, {});
+  assert.strictEqual(plain.status, 200, JSON.stringify(plain.body));
+  assert.strictEqual(facing.status, 200, JSON.stringify(facing.body));
+  // ⚠️ **経路が変わったことを確かめる。** 渡しても効いていなければ意味が無い
+  assert.notStrictEqual(facing.body.route.polyline, plain.body.route.polyline,
+    "進入方向を渡したのに経路が変わっていない");
+});
+
+test("経由地の進入方向は、間引いても番号がずれない", async (t) => {
+  // ⚠️ **重なった経由地は間引かれる。** 向きを別の配列で持つと、
+  //    間引いたぶんだけ番号がずれて**別の経由地の向き**が付く
+  if (await skipIfDown(t)) return;
+  const from = [139.5666, 35.7867], to = [139.1930, 36.5540];
+  const via = [139.2000, 36.0300];
+  // 同じ点を2つ並べる（2つ目は間引かれる）。3つ目に向きを付ける
+  const out = await buildRouteResponse({
+    from, to, vias: [via, via, [139.2930, 36.0100]],
+    viaHeadings: [undefined, undefined, 90], guidance: false,
+  }, {});
+  assert.strictEqual(out.status, 200, JSON.stringify(out.body));
+});

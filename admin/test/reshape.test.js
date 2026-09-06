@@ -76,9 +76,12 @@ test("先頭を残して切り詰めれば、調整の鍵は変わらない", ()
 });
 
 test("形と点数の加算は両方効く", () => {
-  const seg = segmentOf(winding(100));
+  // ⚠️ **満点近い道で試さないこと。** 点数は100で頭打ちなので、
+  //    加算そのものではなく打ち切りを見ることになる（重みの配り直しで
+  //    満点が 85 → 100 に伸びたとき、実際にそうなって落ちた）
+  const seg = segmentOf(straight(100));
   const key = overrideKey(seg);
-  const shape = encode(winding(50));
+  const shape = encode(straight(50));
 
   const shapedOnly = applyOverrides([seg], { [key]: { shape } }).segments[0];
   const withBoost = applyOverrides([seg], { [key]: { shape, boost: 10 } }).segments[0];
@@ -205,4 +208,13 @@ test("番号は小さい順に並ぶ", () => {
 test("点が無い線でも落ちない", () => {
   assert.deepStrictEqual(handleIndices(0), []);
   assert.deepStrictEqual(handleIndices(1), [0]);
+});
+
+test("点数は100で頭打ち", () => {
+  // ⚠️ 上の試験が打ち切りを見ないよう分けてある。打ち切り自体はここで見る
+  const seg = segmentOf(winding(100));
+  const key = overrideKey(seg);
+  const shape = encode(winding(100));
+  const boosted = applyOverrides([seg], { [key]: { shape, boost: 50 } }).segments[0];
+  assert.ok(boosted.score <= 100, `100 を超えている: ${boosted.score}`);
 });

@@ -493,10 +493,15 @@ async function routeWithValhalla(from, to, opts = {}) {
   //    ⚠️ 端点（出発地・目的地）は消さない。消すと行き先が変わる。
   const MIN_VIA_GAP_METERS = 25;
   const vias = [];
-  for (const p of (opts.vias || [])) {
+  // ⚠️ **進入方向は経由地と一緒に運ぶこと。** 下で重なった点を間引くので、
+  //    別々の配列にすると番号がずれて**別の経由地の向き**が付く
+  const viaHeadings = [];
+  const rawHeadings = Array.isArray(opts.viaHeadings) ? opts.viaHeadings : [];
+  for (const [index, p] of (opts.vias || []).entries()) {
     const last = vias[vias.length - 1];
     if (last && metersBetween(last, p) < MIN_VIA_GAP_METERS) continue;
     vias.push(p);
+    viaHeadings.push(rawHeadings[index]);
   }
   const destination = { lat: to[1], lon: to[0] };
   // ⚠️ **走っている向きを渡すと、その場で向きを変えさせなくなる。**
@@ -521,10 +526,23 @@ async function routeWithValhalla(from, to, opts = {}) {
     // ⚠️ **止まる場所だけ break にする。** 全部 through だと区間が1つになり、
     //    立ち寄り先に着いても知らせられない。逆に全部 break にすると、
     //    楽しい道の中継点ごとに「着きました」と言うことになる
-    ...vias.map((p, i) => ({
-      lat: p[1], lon: p[0],
-      type: (opts.stopAt || []).includes(i) ? "break" : "through",
-    })),
+    ...vias.map((p, i) => {
+      const at = {
+        lat: p[1], lon: p[0],
+        type: (opts.stopAt || []).includes(i) ? "break" : "through",
+      };
+      // ⚠️ **「その向きで入れ」と言うと、行って戻るのではなく回り込む。**
+      //    おすすめ道路の入口に、道に沿った向きを渡すために使う。
+      //    実測（新座→大野東松山線→赤城大沼）: 指定なし 164.1km/往復11.1km →
+      //    指定あり 167.5km/往復6.1km。**距離+3.4kmで往復が45%減る**
+      //    ⚠️ 許容角を変えても結果は同じだった（15〜90度で往復6.1kmのまま）
+      const heading = viaHeadings[i];
+      if (Number.isFinite(heading)) {
+        at.heading = ((heading % 360) + 360) % 360;
+        at.heading_tolerance = 45;
+      }
+      return at;
+    }),
     destination,
   ];
   const body = {

@@ -172,13 +172,22 @@ function build(p, from, to) {
  * flow（1曲がりあたりの平均角度）で「大きい角が緩やかに続く峠」と
  * 「小さい角が細かく続く市街地」を分ける。ここが今回いちばん効く。
  */
+/*
+ * ⚠️ **合計を 1.0 に保つこと。** かつては `popularity: 0.15` を入れていたが、
+ *    信号側が常に 0 だったので**その重みが丸ごと死んで**いた。
+ *    点数が 0〜85 にしか伸びず、他の信号もそのぶん薄まっていた
+ *    （曲率は 0.35 のつもりで実効 0.41）。
+ *    ⚠️ 走行実績は**利用者をまたいだ集計が要る**。いまあるのは
+ *    `road_completion/{uid}`（その人が走った道）だけで、
+ *    「みんなが走っている道」は作れない。集計基盤ができたら、
+ *    ここへ重みを戻して他を按分し直す。
+ *    ⚠️ **順位は変わらない**（比例配分なので）。変わるのは点数の絶対値だけ
+ */
 const WEIGHTS = {
-  curviness: 0.35,
-  flow: 0.25,
-  length: 0.15,
-  classRank: 0.10,
-  /** 走行実績。集計基盤ができるまでは 0 のまま（枠だけ用意しておく） */
-  popularity: 0.15,
+  curviness: 0.41,
+  flow: 0.30,
+  length: 0.18,
+  classRank: 0.11,
 };
 
 /**
@@ -215,7 +224,6 @@ function signals(segment, highway) {
     // 対数。3km と 6km の差は大きいが、25km と 30km の差は小さい
     length: clamp01(Math.log1p(segment.lengthMeters) / Math.log1p(NORMALIZERS.length)),
     classRank: CLASS_RANK[highway] ?? 0.7,
-    popularity: 0,
   };
 }
 

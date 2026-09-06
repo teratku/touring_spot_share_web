@@ -835,7 +835,7 @@ app.post("/api/nav/route", async (req, res) => {
   const { from, to, vias, variant, funCount, budgetRatio, corridorScale, minScore,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
           announce, guidance, roadNameStyle, includeUnverified, stopAt,
-          heading, headingTolerance } = req.body || {};
+          heading, headingTolerance, viaHeadings } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -854,7 +854,7 @@ app.post("/api/nav/route", async (req, res) => {
                           //    全部「通るだけ」になり、着いても知らせられない
                           stopAt: Array.isArray(stopAt) ? stopAt : [],
                           // ⚠️ 走っている向き（引き直しでUターンを避けるため）
-                          heading, headingTolerance,
+                          heading, headingTolerance, viaHeadings,
                           at: req.body.at ? new Date(req.body.at) : undefined,
                           isHoliday: !!req.body.isHoliday };
 
