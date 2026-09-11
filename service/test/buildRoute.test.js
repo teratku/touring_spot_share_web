@@ -26,6 +26,9 @@ async function skipIfDown(t) {
 
 const TOKYO = [139.7671, 35.6812];
 const HAKONE = [139.1069, 35.2324];
+// ⚠️ 雁坂トンネル（有料6.8km）を通らないと着けない。有料回避の検査に使う
+const OTAKI  = [138.93776, 35.94965];
+const HIROSE = [138.76376, 35.83867];
 
 test("両端が無ければ断る", async () => {
   for (const body of [{}, { from: TOKYO }, { from: TOKYO, to: [1] }, { from: "x", to: HAKONE }]) {
@@ -62,6 +65,59 @@ test("アプリが読む形で返す", async (t) => {
     assert.ok(key in step, `steps に ${key} が無い`);
   }
   assert.ok(Array.isArray(out.body.guidance) && out.body.guidance.length > 0, "案内が付いてこない");
+});
+
+test("道の種別ごとの距離を返す", async (t) => {
+  // ⚠️ **アプリが読む先が無かった。** `ValhallaRouteService.hasTolls` は
+  //    `kindMeters` を読むが応答に入っておらず、常に false に落ちていた
+  //    （自前エンジンで「有料」の札が一度も出ない）。
+  // ⚠️ 高速・有料・下道を**分けたまま**返すこと。足して1つにしない
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse(
+    { from: TOKYO, to: HAKONE, displacement: "large" }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  const km = out.body.route.kindMeters;
+  assert.ok(km, "kindMeters が無い");
+  for (const key of ["expressway", "toll", "surface"]) {
+    assert.ok(typeof km[key] === "number", `kindMeters に ${key} が無い`);
+  }
+  const sum = km.expressway + km.toll + km.surface;
+  assert.ok(Math.abs(sum - out.body.route.totalDistanceMeters) < 1000,
+    `内訳の合計(${sum})が総距離(${out.body.route.totalDistanceMeters})と合わない`);
+});
+
+test("避けきれなかった有料の距離をアプリへ返す", async (t) => {
+  // ⚠️ **実機で報告された形。**「有料を避ける」にしたのに雁坂トンネルを通り、
+  //    画面は何も言わなかった。`use_tolls: 0` は**重みであって禁止ではない**ので、
+  //    代替路が無ければ通る。**通ったことを黙らせない。**
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse(
+    { from: OTAKI, to: HIROSE, displacement: "small125", avoidTolls: true },
+    { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  const m = out.body.route.tollUnavoidableMeters;
+  assert.ok(typeof m === "number", "避けきれなかった有料の距離を返していない");
+  // 材料の確認: この区間は実際に避けられないこと
+  assert.ok(m > 5_000 && m < 9_000, `雁坂トンネルは約6.8kmのはず: ${m}m`);
+});
+
+test("遠回りしてでも有料を避けられる", async (t) => {
+  // ⚠️ 実測（道の駅大滝温泉→広瀬ダム）: 約30km → 143.6km。
+  //    **既定にしてはいけない。** 遠回りを承知の利用者が選んだときだけ通す
+  if (await skipIfDown(t)) return;
+  const [ふつう, 塞ぐ] = await Promise.all([
+    buildRouteResponse({ from: OTAKI, to: HIROSE, displacement: "small125",
+                         avoidTolls: true }, { baseUrl: BASE }),
+    buildRouteResponse({ from: OTAKI, to: HIROSE, displacement: "small125",
+                         avoidTolls: true, excludeTolls: true }, { baseUrl: BASE }),
+  ]);
+  assert.strictEqual(塞ぐ.status, 200, 塞ぐ.body.error);
+  assert.ok(ふつう.body.route.tollUnavoidableMeters > 0,
+    "前提: 塞がなければ有料を通るはずの区間で試すこと");
+  assert.strictEqual(塞ぐ.body.route.tollUnavoidableMeters, 0,
+    `塞いだのに有料が ${塞ぐ.body.route.tollUnavoidableMeters}m 残っている`);
+  assert.ok(塞ぐ.body.route.totalDistanceMeters > ふつう.body.route.totalDistanceMeters * 2,
+    "遠回りになっていない");
 });
 
 test("案内は要らないと言えば付けない", async (t) => {

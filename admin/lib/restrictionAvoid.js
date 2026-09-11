@@ -175,13 +175,16 @@ function perimeterOf(ring) {
 function excludePolygonsFor(hits, options = {}) {
   const budget = options.maxPerimeterMeters ?? 10_000;
   const buffer = options.bufferMeters ?? BUFFER_METERS;
+  // ⚠️ **短いものを塞ぐときは間隔を詰めること。** 既定は1,000mおきなので、
+  //    300mの輪には1個しか置かれず、塞げていないのに塞いだつもりになる
+  const every = options.everyMeters ?? BLOCK_EVERY_METERS;
   const polygons = [];
   const used = [];
   const skipped = [];
   let perimeter = 0;
 
   for (const hit of hits) {
-    const rings = boxesAround(hit.points, buffer);
+    const rings = boxesAround(hit.points, buffer, every);
     const cost = rings.reduce((a, r) => a + perimeterOf(r), 0);
     if (perimeter + cost > budget) { skipped.push({ ...hit, perimeter: cost }); continue; }
     polygons.push(...rings);

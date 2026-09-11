@@ -1,17 +1,16 @@
 {
  "prefecture": "埼玉県",
  "romaji": "saitama",
- "generation": 6,
- "contentHash": "dd8ca5b5b7d0",
- "builtAt": "2026-09-06T05:44:41.484Z",
+ "generation": 8,
+ "contentHash": "8cf7b8a59b7e",
+ "builtAt": "2026-09-09T00:51:57.973Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
- "count": 90,
+ "count": 86,
  "segments": [
   {
    "id": "埼玉県:0",
@@ -24,8 +23,8 @@
    "curviness": 559.8,
    "flow": 25.4,
    "turnCount": 325,
-   "score": 81.7,
-   "baseScore": 81.7,
+   "score": 96,
+   "baseScore": 96,
    "spotCount": 0,
    "polyline": "{l~zE{sroY}AeFaKtC_GxDs@dAWnDcEzE}HpEk@rAM~CmE`AaAbA{DrPsClAs@lAeCb@{IpEgG[}EdCeHoAsDt@oCgAaDX}AwCyDXwDsB}A{Cg@uFwCXaGeGcF~C?bBeBtBcAC_Ax@WfCwA_Fe@L[tA{Bt@sDO}@zBa@J_EEsDiBwAoBaBFg@f@oAzEuFlNy@jHaCrCqA|CkC~@q@jFqH|Bd@iAtCyAZ_HtBaHm@uCoByC}@uCkCoBuBdAy@QuDeIw@c@}CAKwBoC~Du@DJgDwGIkA_EgAT_@jBgDh@mAhAi@Wf@kAJoDr@uAC{Bn@eFtFgB@xAaFzCAzCh@\\tAuAdFlAhHmEp@cCXsElAs@@aAd@k@OoBbBoBd@_BnBg@`C~@^SoCwDqB{@o@j@k@rCw@H`AyIK}Aw@oAmBGaCyBcAqF^mF~@{CmAqDv@wCAgNrA_F]uDiAyBc@oFl@gDtBgDRoFoAgE}CqEj@qG]gN_AkMXgCrDyAf@kAy@oHlAiTwAuKGuGvAiGHqC]iCuIoFk@iBLuBfA}AfCc@xCbAhAEbAaAj@wCs@eFi@u@wH@",
    "pointCount": 154,
@@ -52,8 +51,8 @@
    "curviness": 539.5,
    "flow": 27,
    "turnCount": 69,
-   "score": 80.3,
-   "baseScore": 80.3,
+   "score": 94.3,
+   "baseScore": 94.3,
    "spotCount": 0,
    "polyline": "ozrzEy_voYgAx@mHL}DoB{AuBiAMk@n@MpB|@dFrC`E~@jD~@z@x@jLdE|I\\hDnApDhElHzAvFKpB`@H`@oA^?nAxBh@tDvBf@pAo@YhDlAdAHr@o@d@yAs@kAB{IvDsBbCuDrN_BvAwFjBoAfDqEhC",
    "pointCount": 39,
@@ -73,6 +72,62 @@
    "id": "埼玉県:2",
    "region": "saitama",
    "regionName": "埼玉県",
+   "name": "大野東松山線",
+   "ref": "172",
+   "highway": "secondary",
+   "lengthKm": 15.01,
+   "curviness": 463,
+   "flow": 26.4,
+   "turnCount": 263,
+   "score": 90.6,
+   "baseScore": 90.6,
+   "spotCount": 0,
+   "polyline": "{gwzEyqdqY~@pGb@tIlJzPlBnLcBbW_BzLAbGgCbNsD`Nw@nJ`@|Ne@rXv@zAfFvBv@tC}AvJaEvHAxFaBvCo@`NXlEnGbPS`JqCdKaHvIqAnUj@nAlCrBxFxBnFrEJfExA|A~@hDjA~Of@|RfAhFfC~CvA~ChGzClCJtAhA]dMfAxEBnHvAvAc@zBCpE|@zCrCbBpGQ`EzC~AbCJnAo@`AcJjB_@l@BtA`AlJdKjCo@h@eFy@Sz@dBfBtBXlC|Ah@|Bt@|@?t@o@r@eF{@mB~@qBg@cA`AtBtD`CAjA~@`BxDZxCpCbI`D|Ca@bBNz@x@^tH^b@fGY`Bp@`BEvCm@x@{@AkAgDTwB]oAcAWu@h@u@hJl@xAZnFlBlD|Ge@dCfBl@`BnBTnArCa@dAaCMkCp@gAwAq@BaAnBCzAZtA|A`@?fB}BPuBwBcAIMb@bAnB_C_B`AxBQzAc@b@yADkAbAFp@~@z@}Dk@}@p@gCBg@lCDbEgBrBmBCeAtAnAjM_GrJqCdCW|FRxGk@nCgBzAY`A",
+   "pointCount": 144,
+   "start": [
+    36.005264,
+    139.292613
+   ],
+   "end": [
+    35.997745,
+    139.179515
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:3",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "矢納浄法寺線",
+   "ref": "289",
+   "highway": "secondary",
+   "lengthKm": 7.61,
+   "curviness": 482.9,
+   "flow": 26.1,
+   "turnCount": 141,
+   "score": 90.5,
+   "baseScore": 90.5,
+   "spotCount": 0,
+   "polyline": "kbv{EatwoYjKqEtCOhGuBpFAhNbIbG^`F}@zG|B~@`BVnG`Hv\\r@p@rIfC~AlBfN~f@xCtBbBpDPhDz@n@jC@dB~BzBaAp@xDfEzDpBIpFuB|Ar@|A?fBwBbDkB`@aAb@NlA~CvDYpDyBtASrA_CrAFx@oCxAHr@~DzBO~@kAdBWdBv@~DTlCiEbFcC`BsHZIh@`B`D]J\\kAj@yB`DKtBq@~@KhDoAvBXdBxA~@Dd@oCvD@fAxD~ERvFdCr@Pb@AvFbAxH~FhFtDcChBdC",
+   "pointCount": 74,
+   "start": [
+    36.163104,
+    139.062567
+   ],
+   "end": [
+    36.12168,
+    139.035552
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:4",
+   "region": "saitama",
+   "regionName": "埼玉県",
    "name": "青梅秩父線",
    "ref": "53",
    "highway": "primary",
@@ -80,8 +135,8 @@
    "curviness": 417.4,
    "flow": 24.8,
    "turnCount": 333,
-   "score": 77.3,
-   "baseScore": 71.6,
+   "score": 90,
+   "baseScore": 84.3,
    "spotCount": 3,
    "polyline": "emwyEaxqpYeCd@wClBoDJmB}AsCY}B\\qE_E{BMa@d@IrCr@nC[d@cAwA{@{EZ{F_Be@kCmCoKDwG~IcFlRsGpKkFzByF~HkKrHoSnGwKJ}Cy@ma@lAiEaEcB?mIjF{KrCaEYsD\\qRjIaZdKqEbD_EpF{C|AcCfDyPjEcDlBqDX}A`DyBl@u@dC?~FgA~HqDfN_A|@yFj@_Az@SvPqCjHBtIkAnFwAp@aDeBsA?_RzKm@tBj@hH{@x@sCD_AnAm@hJ_FrLg@tGcAjAoD~@aDnByC|IoBlCwE{BaBeEyCeBwIcC}DzB}IbByB{BmL_CeG?B_A|ADXc@Ka@{Aa@mHl@yCfCB}BvAeBUq@cBlCaBB}@c@sChBRr@jCFXf@e@x@CtBcDfGi@@EkBbBgDsBcBs@d@b@nB}@vCwCZ`@hBw@dC`BbESf@cBgD_As@z@kBoA}C`A}D?}Cw@uBmDcAeCfB}CkE}HW}B{AiFyAeA\\KlEw@^We@FwB_BuDN}BqA}@iBHsEuAkAiA{Cg@oGjEwD{AwAxAkHJkP~Dk]QqBd@iF|C{COuB`BiA?u@c@k@oBaAgIsDmDeFmBk@DgArC_En@mDtDiBc@YoARkHgA_G~AkGEu@sFiH_Gw@_B}C",
    "pointCount": 169,
@@ -99,62 +154,6 @@
    ]
   },
   {
-   "id": "埼玉県:3",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "大野東松山線",
-   "ref": "172",
-   "highway": "secondary",
-   "lengthKm": 15.01,
-   "curviness": 463,
-   "flow": 26.4,
-   "turnCount": 263,
-   "score": 77,
-   "baseScore": 77,
-   "spotCount": 0,
-   "polyline": "{gwzEyqdqY~@pGb@tIlJzPlBnLcBbW_BzLAbGgCbNsD`Nw@nJ`@|Ne@rXv@zAfFvBv@tC}AvJaEvHAxFaBvCo@`NXlEnGbPS`JqCdKaHvIqAnUj@nAlCrBxFxBnFrEJfExA|A~@hDjA~Of@|RfAhFfC~CvA~ChGzClCJtAhA]dMfAxEBnHvAvAc@zBCpE|@zCrCbBpGQ`EzC~AbCJnAo@`AcJjB_@l@BtA`AlJdKjCo@h@eFy@Sz@dBfBtBXlC|Ah@|Bt@|@?t@o@r@eF{@mB~@qBg@cA`AtBtD`CAjA~@`BxDZxCpCbI`D|Ca@bBNz@x@^tH^b@fGY`Bp@`BEvCm@x@{@AkAgDTwB]oAcAWu@h@u@hJl@xAZnFlBlD|Ge@dCfBl@`BnBTnArCa@dAaCMkCp@gAwAq@BaAnBCzAZtA|A`@?fB}BPuBwBcAIMb@bAnB_C_B`AxBQzAc@b@yADkAbAFp@~@z@}Dk@}@p@gCBg@lCDbEgBrBmBCeAtAnAjM_GrJqCdCW|FRxGk@nCgBzAY`A",
-   "pointCount": 144,
-   "start": [
-    36.005264,
-    139.292613
-   ],
-   "end": [
-    35.997745,
-    139.179515
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:4",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "矢納浄法寺線",
-   "ref": "289",
-   "highway": "secondary",
-   "lengthKm": 7.61,
-   "curviness": 482.9,
-   "flow": 26.1,
-   "turnCount": 141,
-   "score": 77,
-   "baseScore": 77,
-   "spotCount": 0,
-   "polyline": "kbv{EatwoYjKqEtCOhGuBpFAhNbIbG^`F}@zG|B~@`BVnG`Hv\\r@p@rIfC~AlBfN~f@xCtBbBpDPhDz@n@jC@dB~BzBaAp@xDfEzDpBIpFuB|Ar@|A?fBwBbDkB`@aAb@NlA~CvDYpDyBtASrA_CrAFx@oCxAHr@~DzBO~@kAdBWdBv@~DTlCiEbFcC`BsHZIh@`B`D]J\\kAj@yB`DKtBq@~@KhDoAvBXdBxA~@Dd@oCvD@fAxD~ERvFdCr@Pb@AvFbAxH~FhFtDcChBdC",
-   "pointCount": 74,
-   "start": [
-    36.163104,
-    139.062567
-   ],
-   "end": [
-    36.12168,
-    139.035552
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
    "id": "埼玉県:5",
    "region": "saitama",
    "regionName": "埼玉県",
@@ -165,8 +164,8 @@
    "curviness": 439,
    "flow": 25.9,
    "turnCount": 189,
-   "score": 76,
-   "baseScore": 73.1,
+   "score": 88.9,
+   "baseScore": 86.1,
    "spotCount": 1,
    "polyline": "mv~zEywjoY]zCuCbF}GbQyBjNgC`WwHdS_GFyAo@oB{CaB@{C|CwBrF}OlNeFbCwCaBkCh@cAz@k@`BIlJu@~Br@`Fe@zGo@jCyAhBuDnBqFrE_Cn@}ApBuBX{G`IoCbBwItBkHvD{@IgFkDgGdGoHZsAfAsDr@u@pCcDbDsEtBcCxCiCnAoAdE[fE_DZuAt@wCvEuExCeLlBuIjMmCtHm@bNsDxJiD|Ce@s@nBqBdA}Cq@uB|AoAbAmDmAyBIiA^_AQk@oFoAkAF]wBpGsDCiAyGzBoBxCd@hBc@dCdD|@fASt@vAa@|AqDvBClIWb@eDTsBaAeB`@qDoDSoB}Aa@qA{BeBv@aCq@s@~AeBFFpBlAjAvCCT`Bm@fAwAb@_@dAeB~@yFzR",
    "pointCount": 103,
@@ -188,35 +187,6 @@
    "id": "埼玉県:6",
    "region": "saitama",
    "regionName": "埼玉県",
-   "name": "秩父多摩甲斐国立公園三峰線",
-   "ref": "278",
-   "highway": "secondary",
-   "lengthKm": 9.44,
-   "curviness": 470.1,
-   "flow": 24,
-   "turnCount": 185,
-   "score": 74.7,
-   "baseScore": 74.7,
-   "spotCount": 0,
-   "polyline": "k`kzEauynYbBOhB{Aj@sBAiDr@Bx@|@`Bw@x@tAx@bEvBfB~@`GjEbA|BgAt@sBh@QdEzAxArB~AAXe@PuF`CwCxEaCF}Dh@_C}@mCN{AnBoCdGs@bAs@dBaHJwAa@mBxA{Bf@Cp@~@|CvAbMsDzAbBlBM~Ax@bEaAHa@YM}Ax@yF{AiCsDgChAaCkAaB|@y@C}G_HqASiCvCuDbAu@z@aArBD`C_@|@kHnD_GxAmBzBQ`Dw@vBaE`D_@QxDiF@}F|A}Cp@{CvDkBhEyNvF_Ic@Wu@vBcAz@iEpAiCzDyCxBgBxD]DGk@~AoFlC}DxA{HvEgEfQoFhDz@|Aa@jCxAhAKbFaQzG_LdMuMrBmDzGuDtGoFjBuC",
-   "pointCount": 98,
-   "start": [
-    35.942625,
-    138.909134
-   ],
-   "end": [
-    35.91973,
-    138.934359
-   ],
-   "tags": [
-    "scenic",
-    "winding"
-   ]
-  },
-  {
-   "id": "埼玉県:7",
-   "region": "saitama",
-   "regionName": "埼玉県",
    "name": "熊谷小川秩父線",
    "ref": "11",
    "highway": "primary",
@@ -224,8 +194,8 @@
    "curviness": 391.9,
    "flow": 23.8,
    "turnCount": 491,
-   "score": 74.2,
-   "baseScore": 69.6,
+   "score": 86.6,
+   "baseScore": 82,
    "spotCount": 2,
    "polyline": "iavzEgd_pY{BqUk@_AyEeFiReJgJuCaAcAaBkEgCcDaD_C}DmAsOE_F{@kE@_a@_DuGIyEkFyCaGqC{BaDsJq@sFJqOjA_IeEea@D_Ft@sBtA_BdWqJb@sAb@oHpEgKB_Ck@yDTiQfCePhEsEv@uEAoDv@iCnDcCxAmBnBEf@eAo@]mF~CmB@a@bAkAT]zA{B[\\zHa@fDmBD}@dCy@WgCTiEsAc@jBuCdBuA|BkBf@gA`CYpD}@h@_@aAr@wBJsCUqBzFgEJuBhAwAdAaEt@PpAtBdCDIsBv@kCQ_Am@He@lFm@Sh@uJdBkF~AwA~A_@hAwABk@wBcBuEwAIkCcC}@|AoFjAyAt@a@vAT|@UFk@aAkCLm@~D}BnAcCbB]nBkDf@ArA`Bh@`C`@GhB{Cz@pAdB^bHkFjC]`AwBJuEl@aBNuF`AeHUuAcDcEsCiBsABoC`EsGhFcBGwCuAsBsDh@QnBzCrDdAdCiGnCiAnCsEvB}HbES~@pB\\Cj@_BCeJWiBaAOi@`@pAlDeAjCwIeD{Ab@A~CgCnBoCyAIzA`BtCa@nAcCYiBd@q@mAkJ@_Bu@}ANoBjBeGu@g@y@Tm@~F|A\\Qn@{C|AA~@k@x@j@nGw@Do@}AiAw@}B~Ai@vAnA\\UWoBgCgExE{LMgBm@E}@z@eI~NmAnEqCjAkGf@wKiAiBc@wCkFi@uCuDm@}A_CiD\\{CWkBgB{CXoF}Ew@HqAhBs@?yDcFcFkJaKcB{JuEiJ|Aa\\aFiIYeN`BeFtAgIc@}Jb@}A[oCqBgEs@cFnAqCCsJcBkGj@qA]iDeDmF{IcCy@cJgQ`JgKvJqFN_C}AsHKkDtCcPtA_C|F}BpF}DhH}Ln@aDA_Hd@kDvJ_\\pAuAnGa@jBs@hCgQbDoGzBsHcAoNHoBzDeLdCgNj@mIm@}INcCfHaUjBkClE_BhMxAlGy@l@mAKaHeB}GaFsDuCgF_DwBqBgC",
    "pointCount": 260,
@@ -244,6 +214,37 @@
    ]
   },
   {
+   "id": "埼玉県:7",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "彩甲斐街道",
+   "ref": "140",
+   "highway": "trunk",
+   "lengthKm": 25.37,
+   "curviness": 174.4,
+   "flow": 28,
+   "turnCount": 158,
+   "score": 86.2,
+   "baseScore": 60.2,
+   "spotCount": 0,
+   "polyline": "sknzEevroYpD~PdCnRpBrCpIjCzB~EtFlGR`BMnZ]bDLtJqL~ZqCfWiDhKcA`G{AtP_GrLuHtKwA~DmAbOvBdHPdIwAtK_Kb[?jHdAtEDhDcCjJ_@lJjBtELlEf@pBjGjNz@lErBhBtDlHrB|IrEdK~@hHHrExHfKzDjDJ|Cp@hAlBO|FqGjN|FlCc@|D{EpCcKzCkDbAyDfGyI|AJrE~GpDjCvAhChK{CdDx@lC|A|AzBlAnEzB~CnExK`DrDTjBuKvLoKdDe@tABrEbAjCxInC~AtD~@bHhAjBzBxHxCh^QdAqARgEsE{GiEuGNoDnDoAhEyCbCqDxI{Bh@uCmB{@AeDlA}BtBcC|EmBbK}@jAoDN{PeGgEvCaAhBv@zDOnFZvChF~J\\jDxB|ByChMoHdDgAfEf@rA~CdBpCzMrAbCn@|G}FrJ}AfEy@hLgB|GiGpCi@|@eAtZaLxRhAjLs@rIZpBzA`AnF@pAa@t@uAEwC}AaB_KCcBhA}@`EaCdDJpAhClA^x@o@pDg@`ShCbOcArCL`CjE`Ed@dBgBxK@bIeAvG`@xE]rDJ|GYrGiA|F{FjMmAnFj@tZ|BnNpA~B??nl@vt@lIpI??~HvFfPfI|b@bL",
+   "pointCount": 163,
+   "start": [
+    35.95978,
+    139.03731
+   ],
+   "end": [
+    35.93965,
+    138.85426
+   ],
+   "reshaped": true,
+   "boost": 20,
+   "tags": [
+    "scenic",
+    "flowing"
+   ]
+  },
+  {
    "id": "埼玉県:8",
    "region": "saitama",
    "regionName": "埼玉県",
@@ -254,8 +255,8 @@
    "curviness": 421.6,
    "flow": 22.2,
    "turnCount": 96,
-   "score": 71.9,
-   "baseScore": 69.1,
+   "score": 84,
+   "baseScore": 81.1,
    "spotCount": 1,
    "polyline": "m_`{EqsloYkGEwA`BcCl@qE{DwGlCsJnBiDE}MdNuFVc@jAXzC]nAgCnAc@xAyDdEgAdDcErBk@`J[r@yDtBJdJaFbIwBfAiAvAk@`BE|BkAdCSvCmA`AwACuBxAqBRkB|AiEx@kBhCsBz@_C`GgCTgD_C}Bt@yAbB}CWwAx@yIpAmCwEgCm@{DaGyE_AoC`A",
    "pointCount": 50,
@@ -279,22 +280,22 @@
    "name": "秩父上名栗線",
    "ref": "73",
    "highway": "primary",
-   "lengthKm": 10.99,
-   "curviness": 435.1,
-   "flow": 23.4,
-   "turnCount": 204,
-   "score": 70.6,
-   "baseScore": 70.6,
+   "lengthKm": 10.18,
+   "curviness": 353.6,
+   "flow": 37.5,
+   "turnCount": 96,
+   "score": 81.8,
+   "baseScore": 83.1,
    "spotCount": 0,
-   "polyline": "ucezEe|~oYzFbG`EzB~@|GdARtAkAz@Ev@`C`D|AkAdBEpDm@|AClB}ClDLdEsCtCv@tFqBvBvCzAJvBy@dBcA|FkBlCOdD{BdCoDc@cBj@kFxMkFrEaB~CwDbCSdCsAL{CoD_BDmAp@e@zCp@`C@hCuCxIHpEcAzEyBtFeF|GiAtHyBzCsDpA}ITmFkCiESsDxA}P|A}AbC}FQgOjCgBdBwA|IeD`EWtCgErIw@HwFcC}A~BsBb@{AfAk@O{@{BeBYcAyAmAUyD~GmBxAy@JwAeA{@EuHvA{GhD}CrDeExHcBlAiTm@sKiEwAnAeBMgCrAgBIOl@T\\tFg@f@l@[`@uDRiAbBs@R_MwUy@mJyAsEyCBuBfBoAN}LyAqFd@c@]i@{De@[YT",
-   "pointCount": 106,
+   "polyline": "efdzEeb~oYkAdBEpDm@|AClB}ClDLdEsCtCv@tFqBvBvCzAJvBy@dBcA|FkBlCOdD{BdCoDc@cBj@kFxMkFrEaB~CwDbCSdCsAL{CoD_BDmAp@e@zCp@`C@hCuCxIHpEcAzEyBtFeF|GiAtHyBzCsDpA}ITmFkCiESsDxA}P|A}AbC}FQgOjCgBdBwA|IeD`EWtCgErIw@HwFcC}A~BsBb@{AfAk@O{@{BeBYcAyAmAUyD~GmBxAy@JwAeA{@EuHvA{GhD}CrDeExHcBlAiTm@sKiEwAnAeBMgCrAgBIOl@T\\tFg@f@l@[`@uDRiAbBs@R_MwUy@mJyAsEyCBuBfBoAN}LyAqFd@c@]i@{De@[YT",
+   "pointCount": 98,
    "start": [
-    35.912429,
-    139.099714
+    35.90771,
+    139.09555
    ],
    "end": [
-    35.967315,
-    139.061645
+    35.96731,
+    139.06164
    ],
    "unpaved": {
     "unpavedMeters": 214,
@@ -303,6 +304,7 @@
     "surface": "dirt",
     "label": "土"
    },
+   "reshaped": true,
    "tags": [
     "winding",
     "caution"
@@ -319,8 +321,8 @@
    "curviness": 390.7,
    "flow": 24.4,
    "turnCount": 96,
-   "score": 69.3,
-   "baseScore": 69.3,
+   "score": 81.4,
+   "baseScore": 81.4,
    "spotCount": 0,
    "polyline": "_f`{Eum{pY~FuB`MbAzQ|JzK|IjRbL~HjCdGF|LlDhEBxH}AxGfBhD`F|CUnDeAnEtA\\WKoAcCyB]mAJq@t@EpAdAxDyCdB~@~@WfAt@bByBdBa@lDh@jC`Gx@Sk@yCN[|CbA~CIn@p@\\pCzCrApDXfDcB`A}A|BObCyAxEbBpAWfCgCxIwCpImFhA}@`AkDxDCfD_B`DzA",
    "pointCount": 54,
@@ -348,8 +350,8 @@
    "curviness": 419.8,
    "flow": 22.9,
    "turnCount": 72,
-   "score": 69.2,
-   "baseScore": 69.2,
+   "score": 81.3,
+   "baseScore": 81.3,
    "spotCount": 0,
    "polyline": "_f|zEcczoY}D|EiAFiFmBgEcDa@JvCpGhAdIh@V|Au@tCbAUfFiDxDuBBmFpCBlEg@b@kC?u@nCq@l@_Ha@yImDsKlGoI~BsCAoBxEyJnGiBrCoCzBkUSsAZqAlAiExL",
    "pointCount": 33,
@@ -370,66 +372,6 @@
    "id": "埼玉県:12",
    "region": "saitama",
    "regionName": "埼玉県",
-   "name": "中津川三峰口停車場線",
-   "ref": "210",
-   "highway": "secondary",
-   "lengthKm": 10.7,
-   "curviness": 397,
-   "flow": 22.7,
-   "turnCount": 187,
-   "score": 69,
-   "baseScore": 69,
-   "spotCount": 0,
-   "polyline": "m~wzEkdenYw@w@\\gHnAaA`AyBXyBQkDrD}@`BoEnBHn@uBrBPf@_B~CiATwCf@eAlBe@WwFdCSv@m@?gAmB{Cx@cE}@oBLsAz@[rC`Bp@MpD}CzAkDIkC|@{FlFFBqBy@iC{EyH@aE`BoEzCeBpGqAjIvA`Qz@rB_AnBwFbAa@`BrApI`Db@mBm@aGpFqG^wFl@OdBv@xA?tAqAV}F|BoLb@mJj@_@nC|@x@GvBsClDoBhBsBhA}BSiGr@oB`CyApHw@f@t@t@`FbBpA|AN~AkAnCi@nFmCrFmEtHBhB}B`Lr@``@}\\f@_Bv@aR{AkXj@iA`EkB\\oAaAaNDwE~Fy[~@oClMiSnF{ChDUjBuA",
-   "pointCount": 95,
-   "start": [
-    36.008874,
-    138.804059
-   ],
-   "end": [
-    35.957801,
-    138.868467
-   ],
-   "tags": [
-    "winding",
-    "forest",
-    "caution"
-   ]
-  },
-  {
-   "id": "埼玉県:13",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "秩父往還",
-   "ref": "140",
-   "highway": "trunk",
-   "lengthKm": 10.69,
-   "curviness": 438,
-   "flow": 23.2,
-   "turnCount": 202,
-   "score": 67.1,
-   "baseScore": 67.1,
-   "spotCount": 0,
-   "polyline": "sajzEwmnnY_FyIiEmBiCuG{DYmFhBuBSa@iE^gC{BoOyDeL`AmNM}Il@iC~BwBhBsKrBeF\\{Fk@{AnAcC`@}HuBoFiC}BViB[{Cl@cJhB}BbAmDmCs@kFyDuCmMSoMt@yB^_HlB{B|AgKXsVOqCeBcI~AaCX@Lx@b@KR_Cu@eLrBkEb@cGhC_LvCeERoBwAgIqB{CqBmAEkByAsBcGqEi@{EcBm@{DdByClCuDgBoDEsAsBkCsA`@eEE_ItBiFBwF\\EFb@[dIqA~D\\b@dDqPfCuAlGVlAm@FmEyCeKQiKPcBdHmN@eEl@eHkBiLcCaDaKsCaETaIWsAt@",
-   "pointCount": 90,
-   "start": [
-    35.937702,
-    138.851636
-   ],
-   "end": [
-    35.95106,
-    138.932083
-   ],
-   "tags": [
-    "winding",
-    "forest",
-    "caution"
-   ]
-  },
-  {
-   "id": "埼玉県:14",
-   "region": "saitama",
-   "regionName": "埼玉県",
    "name": "下畑軍畑線",
    "ref": "193",
    "highway": "secondary",
@@ -437,8 +379,8 @@
    "curviness": 387,
    "flow": 22.7,
    "turnCount": 58,
-   "score": 66.7,
-   "baseScore": 66.7,
+   "score": 78.4,
+   "baseScore": 78.4,
    "spotCount": 0,
    "polyline": "qyryEiszpYRbNS|DZhDu@zCwDbIoBpLgFxMsDxFwDFkBt@h@xDIrGiCnAwAhCg@xDNnB{@|AOnG_CxF_@bCsBlBcEdPLzAzAbB_@fDzA~CQvC|@nCzBfCpIbE",
    "pointCount": 31,
@@ -456,7 +398,7 @@
    ]
   },
   {
-   "id": "埼玉県:15",
+   "id": "埼玉県:13",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "前橋長瀞線",
@@ -466,8 +408,8 @@
    "curviness": 335.4,
    "flow": 22.5,
    "turnCount": 183,
-   "score": 63.7,
-   "baseScore": 63.7,
+   "score": 75,
+   "baseScore": 75,
    "spotCount": 0,
    "polyline": "kcv{EgvvoYvFmFdCk@tq@bF|@wJlQaCpAiAdCiFRyAS}ElBaJ]OaCxAqCh@Am@|DaCbAoBYKw@pAqBn@?s@lAy@T{@wCq@a@wAfAcDhCGRaB`A{AFyArAuC~FCn@eAn@mDfBo@xKhCEbAoBpE?x@f@~@bCp@|IQxEfAvAc@pAqBvBgAnCO~E{An@}@t@mEbCqEz@yEbBkBjCBxHeNnAsK`DvArHdM~BrA`AIxD}CnC}@|Hz@tUmA`HiCdOwCtKaFpFSpBmBvHaEvQsEpHmHz@ApB`A|CkAd@eAAoC\\mBtD_Gp@wBJcC_AgHCqEi@e@uCtAyEcDuJ_AyHqBsDsB{A_DeDeCsHwTcDcE}@sG{AuEMcDwCuHa@aGbAkHa@kHl@gO",
    "pointCount": 101,
@@ -485,7 +427,7 @@
    ]
   },
   {
-   "id": "埼玉県:16",
+   "id": "埼玉県:14",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "彩甲斐街道",
@@ -495,8 +437,8 @@
    "curviness": 407.3,
    "flow": 21.9,
    "turnCount": 135,
-   "score": 63.4,
-   "baseScore": 63.4,
+   "score": 74.9,
+   "baseScore": 74.9,
    "spotCount": 0,
    "polyline": "_pjzEe_onY`GjDjEfI^lB@|D_B`HMjFVxAvAdBpD~@|@bAlAjErDfGb@xGjBhCv@dHbBnAp@hB`ChCrCz@YdEfBzAn@zFdB|@`AxCbB@lBsAp@Nt@vAPnBrC`D@xA{AtCrCdDIfGZfAfC~AjCRdGsAdB`CZ|DvFpBfAA`@oBe@iChAyCJeDpDcF~@EhDdCfEo@zCz@hAc@dCBlDiCn@@zJfGnCfGLtHjAvFkBjD^zFu@hEvArIr@f@|F`@~NoT|A_AtDJhBpAbA`CbB|Z",
    "pointCount": 72,
@@ -514,7 +456,7 @@
    ]
   },
   {
-   "id": "埼玉県:17",
+   "id": "埼玉県:15",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "藤倉吉田線",
@@ -524,8 +466,8 @@
    "curviness": 308.7,
    "flow": 20.6,
    "turnCount": 141,
-   "score": 61.4,
-   "baseScore": 61.4,
+   "score": 72.1,
+   "baseScore": 72.1,
    "spotCount": 0,
    "polyline": "}we{E{uwnYjG}M`Aq@|B@bBs@pA_CrCg@lLvEt@SfDqFfAoFpFyEhD{OpAwBdBeQpEkHAoF|@oJjAkCrECjFgHjBkFj@}IvDeGnAuHxEcMj@wNaAmU~AaBtCBZg@SiDcCmIFgAzHiNhDoCx@}BjFr@`DgAfFiEdBiDjBgApCwE|CEbAkAfC{@VsFzBkCFoB]aAsNAaAgAYoAHiDzCwBrAyGrEqEJqNoFuFcG{@uEuDkCwEoDmBiEmMJcY}EgBeHKB_FwAwB_BcG{DoBoA_B",
    "pointCount": 72,
@@ -543,7 +485,7 @@
    ]
   },
   {
-   "id": "埼玉県:18",
+   "id": "埼玉県:16",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "国道299号",
@@ -553,8 +495,8 @@
    "curviness": 307.9,
    "flow": 21.1,
    "turnCount": 268,
-   "score": 60.6,
-   "baseScore": 57.8,
+   "score": 71.1,
+   "baseScore": 68.2,
    "spotCount": 1,
    "polyline": "mza{EmtlnY~AkQ{B_EQcIiDm@{BnA_ASTkGv@gFuDwCqFmCj@eAdH_BzA_BpDuAvAoDsDwEYyCZ_@|Fe@Jm@sAwB?{@|BaC`CKTy@u@a@oIVmA_AqBE}BwE^KrCxDnFRhHy@bBd@AxGcDt@~@pB_@~BBrCw@dArBpBvAjFh@Tx@YtAeN}@a@u@hCuA`Aw@iBNkCnCsCfDkHzNoMlAkD^mSw@cR|BoEH}DzEyNrAwLnEkI|AmJfBwE?wEdAqDnC{SwByFJ}@jE}H|DuB|E{FzDeRpGk@`NgHrB{GfEgIhBuGsAyQ^gEfDkHJgGuD}GMyBhGmIv@qCpAiB@sAqAmDu@{GtEgH`AkGFqErCiFp@oC`Bwe@tBaEpFqDn@cCJsHeE}MLyWn@gBvF}ExC{EjKgH|GiHd@aDQ{Hv@oIG}JVoCnQkc@R{At@eXcCm^Jw@dBaCQ}PWaAiFgG{MuKo@{A_Hu\\VwZyC}OaBqE[cDJmB",
    "pointCount": 130,
@@ -572,7 +514,7 @@
    ]
   },
   {
-   "id": "埼玉県:19",
+   "id": "埼玉県:17",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "秩父児玉線",
@@ -582,8 +524,8 @@
    "curviness": 324.7,
    "flow": 19.5,
    "turnCount": 88,
-   "score": 59.1,
-   "baseScore": 59.1,
+   "score": 69.4,
+   "baseScore": 69.4,
    "spotCount": 0,
    "polyline": "osu{Emr~oYzKo@~@j@`DzFc@vGpA~B`KS|E`@zCzBz@zCuBzHMbDjBlAxGQn@XXvAo@lJL|BrDbIx@p@rAXlHwAb@r@ZhFnAnBvDDpLfBbMzJhBKtGoEdCq@|AXr@xAVdEgAvQThDt@lA~APhA{@xBmKf@i@n@v@u@hK\\jAz@f@bBc@rK{JhDQpDz@",
    "pointCount": 49,
@@ -600,7 +542,7 @@
    ]
   },
   {
-   "id": "埼玉県:20",
+   "id": "埼玉県:18",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "皆野荒川線",
@@ -610,8 +552,8 @@
    "curviness": 283.5,
    "flow": 20.3,
    "turnCount": 173,
-   "score": 58.4,
-   "baseScore": 58.4,
+   "score": 68.7,
+   "baseScore": 68.7,
    "spotCount": 0,
    "polyline": "abnzEg`moYwEb@eGeA[o@NkDlCaHqIuE{PfFmLhGuHlG}KPqAo@cDf@Sa@jAoGEcAuGaMPoCwA_NmCcJsAeJcJoIwB@sG{DwDoGk@{DcEkIi@cFcBeA_D]wBgCiE_B_JgNgAiFi@u@yBg@uBkBmDo@wB`BaFyAsDAsB`AcApAkC^kAUkCkBeEp@yKk@mJt@iFUKiCo@uBqJgO_AaEyC}DiIw@wJyEoLmDkIp@{GkEvAoFoCUyHoEyBoCiD[kByAA{C}AkC_@mE{CoB{F}FwC}FcLa_@{DgG_SgKiCNeAYoLuJcCGuCmAqG}EmCaD}C}AkDe@sEL{GoCwFk@cNiEeAkB",
    "pointCount": 89,
@@ -630,7 +572,7 @@
    ]
   },
   {
-   "id": "埼玉県:21",
+   "id": "埼玉県:19",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "成木街道",
@@ -640,8 +582,8 @@
    "curviness": 276.7,
    "flow": 20.7,
    "turnCount": 114,
-   "score": 57.8,
-   "baseScore": 57.8,
+   "score": 68,
+   "baseScore": 68,
    "spotCount": 0,
    "polyline": "emwyEaxqpYzKoCxBqAfDyHhJwYpDwCe@sE^yCGcCpAcFVuFsGcJGiCwA_A_BsF}AoAmANiAy@sBQCiGdBcDrG_C~DU^sFvCkBj@aD~EiCvAqElEkFZaBQqMp@uAjCaA`CoGtAcKUgDoDsEKiDjCiLl@qIn@{B|CmEfBaJ~GuJjAqHdB{D`Ay@pEeAf@m@z@gGhE{LpEaDlIlGrF\\|BjA`BfBnB|FlANvVsd@pFiPd@}GnEiEj@kHjD_I",
    "pointCount": 64,
@@ -659,7 +601,7 @@
    ]
   },
   {
-   "id": "埼玉県:22",
+   "id": "埼玉県:20",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "坂本寄居線",
@@ -669,8 +611,8 @@
    "curviness": 263.8,
    "flow": 19.7,
    "turnCount": 60,
-   "score": 56.6,
-   "baseScore": 56.6,
+   "score": 66.5,
+   "baseScore": 66.5,
    "spotCount": 0,
    "polyline": "mgc{EqaopY{FpEuBdG}@z@iCVwGiCeI|E{KLoFjDcInA{CfCiFvBaBbCaCdBcHrBcD`FaMhHwCSqVeHmDdCiB|D]J{@_BGwFg@_A_J}AsBj@mHaFqDk@yB^_CpBgABeHqCcEeI",
    "pointCount": 34,
@@ -687,7 +629,7 @@
    ]
   },
   {
-   "id": "埼玉県:23",
+   "id": "埼玉県:21",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "広木折原線",
@@ -697,8 +639,8 @@
    "curviness": 247.3,
    "flow": 19,
    "turnCount": 114,
-   "score": 55.9,
-   "baseScore": 55.9,
+   "score": 65.6,
+   "baseScore": 65.6,
    "spotCount": 0,
    "polyline": "ijl{EqtlpYy@gFhBsEFoBcAwBuB_@yAPgGtC_NhIsNpBaKjD{@|@e@hBQvSuB|SiDj@cHZqDqBmD[u@_BRsAu@mDsCyBmCzAEmBiAyAw@A_CkIsAsAsBQoHlBuMiBuHCsFlBaGCcFpEkO~DeEnC{JxD{CGeCcAqGb@oGjG{C~@aCnFqDlCoFl@kIgB_DiBqDAyCn@wCnB_DbEyChAeJTkOxAsEtD_FhBaCP_CtAgHgAqExBcGn@wMtHgBQwCgB",
    "pointCount": 66,
@@ -716,7 +658,7 @@
    ]
   },
   {
-   "id": "埼玉県:24",
+   "id": "埼玉県:22",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "秩父児玉線",
@@ -726,8 +668,8 @@
    "curviness": 266.8,
    "flow": 19.6,
    "turnCount": 70,
-   "score": 55.4,
-   "baseScore": 55.4,
+   "score": 65.2,
+   "baseScore": 65.2,
    "spotCount": 0,
    "polyline": "ite{Eom}oYe@|@SbE{C`GyO|OSrMy@fMCjKu@xBoBbBq@`DuLr@}BpB{@PqLeD_E?aDaBaI`@eF}@gDeAmFcD{InB{FR}BmAkBIyAmAoBjAiD^cC_@}BX}GQaEjCsB_@sDHsBlAkZ|AsGMi@i@_@_Ce@U{EB",
    "pointCount": 41,
@@ -744,7 +686,7 @@
    ]
   },
   {
-   "id": "埼玉県:25",
+   "id": "埼玉県:23",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "下小鹿野吉田線",
@@ -754,8 +696,8 @@
    "curviness": 259.1,
    "flow": 18.7,
    "turnCount": 58,
-   "score": 55.3,
-   "baseScore": 55.3,
+   "score": 64.9,
+   "baseScore": 64.9,
    "spotCount": 0,
    "polyline": "{l~zE{sroYPzA_GdCcAdAtEhHvF|FfHa@tCnBvCl@~CuDjFgBhEjA|Iv@lIsFbEpApA[t@kAnB}Lt@qAtEsDbGcAjAsD~Cy@xDwC|MeHhL`HdPxMjEnB`JlM",
    "pointCount": 29,
@@ -772,7 +714,7 @@
    ]
   },
   {
-   "id": "埼玉県:26",
+   "id": "埼玉県:24",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "赤浜小川",
@@ -782,8 +724,8 @@
    "curviness": 249.6,
    "flow": 19,
    "turnCount": 53,
-   "score": 54.9,
-   "baseScore": 54.9,
+   "score": 64.4,
+   "baseScore": 64.4,
    "spotCount": 0,
    "polyline": "_bl{E{tzpYpCFfFhEzC[dDrB`AAdEsBdLcAlGlC~DF|BqCnAgD`AeF\\kKnIeOj@kG|FkG`AOj@iBhGgAtDvG|@l@zEhAzQ|AlCkAzSaQtFaAjF_FdCy@",
    "pointCount": 29,
@@ -800,63 +742,7 @@
    ]
   },
   {
-   "id": "埼玉県:27",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "長瀞玉淀自然公園線",
-   "ref": "82",
-   "highway": "primary",
-   "lengthKm": 9.54,
-   "curviness": 221.1,
-   "flow": 17.4,
-   "turnCount": 121,
-   "score": 54.4,
-   "baseScore": 51.5,
-   "spotCount": 1,
-   "polyline": "y_{zEyubpY_HFmD{BmAgHmG{@kBiG_AgHeA}BcHyE_DNSqBeCc@gCyE_Ic@kITgT}E_KsH_Bg@wDa@uF`A_DaA{GYuBaB{EoA_G`@uCq@gBJsD~G{DhAkJmC_N_AmHvB{EOeD`@iNpHsBQ_IgFaGSqFfBk@hAgBfN?pHo@xAiElD{ArCq@rL_N`G_IfB_CpAqAxGAhH`@jCuEbEcDbBcAQwEcHwBeBuKwDkJuNiAs@iBSsWnAgHpBoLm@uCb@yC|A",
-   "pointCount": 66,
-   "start": [
-    36.024452,
-    139.119168
-   ],
-   "end": [
-    36.093068,
-    139.118363
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:28",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "小曽木街道",
-   "ref": "28",
-   "highway": "primary",
-   "lengthKm": 5.2,
-   "curviness": 228.2,
-   "flow": 20.8,
-   "turnCount": 57,
-   "score": 54.1,
-   "baseScore": 54.1,
-   "spotCount": 0,
-   "polyline": "shqyE_a~pYaBmBwCqGyAwIuBgBgFmHeCsUoEgOeCsFeFsCy@wDuCiH_AcAyCQiIbBq@]_BuCdAiJaFmn@m@}B_GaKkGcEyLyM{KkU}CiDyDeAaCmBiKi@uHp@wDvBgAzB",
-   "pointCount": 31,
-   "start": [
-    35.810818,
-    139.259197
-   ],
-   "end": [
-    35.837384,
-    139.295674
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:29",
+   "id": "埼玉県:25",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "あじさい街道",
@@ -866,8 +752,8 @@
    "curviness": 295.9,
    "flow": 19,
    "turnCount": 147,
-   "score": 54.1,
-   "baseScore": 54.1,
+   "score": 63.9,
+   "baseScore": 63.9,
    "spotCount": 0,
    "polyline": "mllzEybnpYhMkIp@_Dn@}@lCeA`Fg@lL_H|BRrA|@jBzGp@z@fEn@hAObBaFJqGx@uA|D}BrAcB~@eCC}CVkArA_@pDnAhB{@d@cAFiEd@}AdFkE|JcLt@aC|@mKr@mBzFeGtDqAlEoG`@kAYcB}@_@wDX}@w@EwAt@kB~BkBzBs@rTj@zCUxDuCdCuGvDcDpEeHXmASkDgFsEaAmCwBwCg@wDBgB|@iCjHwCvCiDU{BmFmFAaCtAo@bSQnGmHbIeE~AiBf@aEaCaNz@eFxAaAjGbBrCm@~KeZ]mCsC}DkDcLYqDPaHfBsA~DjB|C@",
    "pointCount": 83,
@@ -884,7 +770,35 @@
    ]
   },
   {
-   "id": "埼玉県:30",
+   "id": "埼玉県:26",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "小曽木街道",
+   "ref": "28",
+   "highway": "primary",
+   "lengthKm": 5.2,
+   "curviness": 228.2,
+   "flow": 20.8,
+   "turnCount": 57,
+   "score": 63.6,
+   "baseScore": 63.6,
+   "spotCount": 0,
+   "polyline": "shqyE_a~pYaBmBwCqGyAwIuBgBgFmHeCsUoEgOeCsFeFsCy@wDuCiH_AcAyCQiIbBq@]_BuCdAiJaFmn@m@}B_GaKkGcEyLyM{KkU}CiDyDeAaCmBiKi@uHp@wDvBgAzB",
+   "pointCount": 31,
+   "start": [
+    35.810818,
+    139.259197
+   ],
+   "end": [
+    35.837384,
+    139.295674
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:27",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "皆野荒川線",
@@ -894,8 +808,8 @@
    "curviness": 234,
    "flow": 20.7,
    "turnCount": 47,
-   "score": 53.9,
-   "baseScore": 53.9,
+   "score": 63.5,
+   "baseScore": 63.5,
    "spotCount": 0,
    "polyline": "in_{E{pyoY{Ig@sEiFkGgEgMgG{K}DsAC{GlD{BwJmDeGiCoH}EiEuC}H}IiHwCgKeFrAgDhBcAgJjBeFm@mLkMeUmQeMaBuD",
    "pointCount": 23,
@@ -912,7 +826,35 @@
    ]
   },
   {
-   "id": "埼玉県:31",
+   "id": "埼玉県:28",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "長瀞玉淀自然公園線",
+   "ref": "82",
+   "highway": "primary",
+   "lengthKm": 9.54,
+   "curviness": 221.1,
+   "flow": 17.4,
+   "turnCount": 121,
+   "score": 63.4,
+   "baseScore": 60.5,
+   "spotCount": 1,
+   "polyline": "y_{zEyubpY_HFmD{BmAgHmG{@kBiG_AgHeA}BcHyE_DNSqBeCc@gCyE_Ic@kITgT}E_KsH_Bg@wDa@uF`A_DaA{GYuBaB{EoA_G`@uCq@gBJsD~G{DhAkJmC_N_AmHvB{EOeD`@iNpHsBQ_IgFaGSqFfBk@hAgBfN?pHo@xAiElD{ArCq@rL_N`G_IfB_CpAqAxGAhH`@jCuEbEcDbBcAQwEcHwBeBuKwDkJuNiAs@iBSsWnAgHpBoLm@uCb@yC|A",
+   "pointCount": 66,
+   "start": [
+    36.024452,
+    139.119168
+   ],
+   "end": [
+    36.093068,
+    139.118363
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:29",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "秩父荒川線",
@@ -922,8 +864,8 @@
    "curviness": 204.7,
    "flow": 17.5,
    "turnCount": 121,
-   "score": 53.5,
-   "baseScore": 50.6,
+   "score": 62.4,
+   "baseScore": 59.5,
    "spotCount": 1,
    "polyline": "{omzE}ynoY{OcLyFyA{@qCmGqKoAsKoDmNiEmG_DmBcAiP_CuPwBsGk@_K{AgEUcI}HmTwB{B_DsGsBsBaC_RsCk@iAsBSmBbAiEe@eBiNyCwVsDeDyAwBdA_Fb@sFk@}Cv@}BmCeCqJTcCjCkCt@cEUi@kCcAkJ{HyAi@_FM_GoJyNuKmToLyFvBuHIaMvDcBE_DoCqJwB}CsC}McDkFyG}B[sDuCcGOkEuGoEsE{EuB{CaHwGkIkD_CkL_N",
    "pointCount": 64,
@@ -940,7 +882,7 @@
    ]
   },
   {
-   "id": "埼玉県:32",
+   "id": "埼玉県:30",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "越生長沢線",
@@ -950,8 +892,8 @@
    "curviness": 210.4,
    "flow": 17.6,
    "turnCount": 88,
-   "score": 53.5,
-   "baseScore": 50.6,
+   "score": 62.3,
+   "baseScore": 59.5,
    "spotCount": 1,
    "polyline": "ieizEkv|pYoKkHqFh@cDcDyBIeBb@_BhBgAwAyB_HsB@_EzByCW{MeOwGyAkDwDsGMgAwB[sJ_BqBmK}@qHeDuGx@gKuAcBw@aJaJ{Bk@aCKkItAwDKyDv@aB_@u@u@qEkLiL}SwDmCaDcAqCwCeS_Le@yAgAkQz@oE|EoMHq\\`DmK\\oFxAuHYoCxFmHvG_C",
    "pointCount": 49,
@@ -968,7 +910,7 @@
    ]
   },
   {
-   "id": "埼玉県:33",
+   "id": "埼玉県:31",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "国道299号",
@@ -978,8 +920,8 @@
    "curviness": 195.6,
    "flow": 17.2,
    "turnCount": 256,
-   "score": 52,
-   "baseScore": 47.4,
+   "score": 60.6,
+   "baseScore": 56,
    "spotCount": 2,
    "polyline": "ifyzEegooY`AiBrHgGxBuFhAqFn@mJBoCmAaNsDaI{FkZzCeN|@wI|G_TlIkAlCsAhE?n@e@s@yBiEo@`AaBHoBdAwAY{DfD}J{@eDx@qI]gDgF_HkE}@{F@uDcB{JeT{BkIcF}BsBmCcIiQ_K{MmSsNqFoHyEaC?uAm@eA{R_JsC{KqEoFEaCjFqCtH{GfDBzDzAfFpD|@IfIsEpLkDtKlCVu@EoOuHmVnGmAvDx@vKqDtGh@hMu@nK_Gd`@bGbDpAdNfCda@bPvGuWfGqLxMwKdD{OfKeVpFeRhD}CtCsF`EwUn@e@xEk@|A_DpIuE`B[hEPfCcB`PeSzGuOrG{ErAmCvBqTa@sDoJiKyFs@{HaEuEeKLmAtFmD~FwI?{AyDqIeBkI`AuHy@oJ|BcGf@gD_@uH}@aGdDwGf@gDCwGVoBtA_CxDsDj@{A?wBcDsIUyDr@kDjDgGpC_L@}Qh@kDzBqBbGkAxC}D~GkCvKz@nMsBzMjAxBMdE{C",
    "pointCount": 130,
@@ -997,7 +939,7 @@
    ]
   },
   {
-   "id": "埼玉県:34",
+   "id": "埼玉県:32",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "皆野両神荒川線",
@@ -1007,8 +949,8 @@
    "curviness": 191.1,
    "flow": 16.1,
    "turnCount": 172,
-   "score": 51.9,
-   "baseScore": 49,
+   "score": 60.5,
+   "baseScore": 57.6,
    "spotCount": 1,
    "polyline": "sx~zEqmooYtBfVm@pF_B|BwK~HsAZ}JAwFvG]bAMtO}@`L`@~F`AtAjGlCjDxCtA|BfH`DlBfBvCrGvBvMP~FxFqAjDnCpIhBhD|ElAxF|GfL|EzCrB^|GgBvD[vBPlDjBxIrH~h@|[dIzHvA~BrEbPzAzVlA`HWtGzD|FpFt@`TaHpEhBdJf@|FnAbNsDhJnAfGBbFlAfOvAzEkBnKsBfDqH`Bw@zFpBvEVlG`CpFwBdFvAhFW|EiBvEf@fK}@bIXjFyAfC@~Ac@nFkHhBa@`F~@j@h@a@jN|BlLbC|Cb@]~@kF@oEz@aCbASx@d@vBzG~E?xCk@jBuC|@iGDgGl@kBvIsDdIkIxIcF|L]",
    "pointCount": 93,
@@ -1025,7 +967,7 @@
    ]
   },
   {
-   "id": "埼玉県:35",
+   "id": "埼玉県:33",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "飯能下名栗線",
@@ -1035,8 +977,8 @@
    "curviness": 176.5,
    "flow": 17.3,
    "turnCount": 109,
-   "score": 51.6,
-   "baseScore": 48.7,
+   "score": 60.1,
+   "baseScore": 57.2,
    "spotCount": 1,
    "polyline": "uiyyEwgrpYpB_DbAwDPkEa@cF_BsCcFsBiCGyFbAiAWmOaSWmAV}AdEkA~AiDNiCuG_JyDiBwAsB]}BJwBhB_E\\wByBiOm@yAkJgLoCgI}GiNRiQxCwF`HwAz@o@lAyFw@sEiA{AqHqDwKcM_HIkKxEeD}C}HjAgBsAkAeCOeB|Cec@~CgJ`AyEfHmb@xC_VmAsGsBkEy@qE_E{LeGyUg@sE~@gBvFsDbCg@xEaEnHqZ{@_KiAeGcDeHyHiF{AiCY_BNoCWqFhAeCbFkDlHkK",
    "pointCount": 71,
@@ -1053,36 +995,7 @@
    ]
   },
   {
-   "id": "埼玉県:36",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "彩甲斐街道",
-   "ref": "140",
-   "highway": "trunk",
-   "lengthKm": 22.92,
-   "curviness": 243.8,
-   "flow": 17.7,
-   "turnCount": 315,
-   "score": 51,
-   "baseScore": 51,
-   "spotCount": 0,
-   "polyline": "sknzEevroYpD~PdCnRpBrCpIjCzB~EtFlGR`BMnZ]bDLtJqL~ZqCfWiDhKcA`G{AtP_GrLuHtKwA~DmAbOvBdHPdIwAtK_Kb[?jHdAtEDhDcCjJ_@lJjBtELlEf@pBjGjNz@lErBhBtDlHrB|IrEdK~@hHHrExHfKzDjDJ|Cp@hAlBO|FqGjN|FlCc@|D{EpCcKzCkDbAyDfGyI|AJrE~GpDjCvAhChK{CdDx@lC|A|AzBlAnEzB~CnExK`DrDTjBuKvLoKdDe@tABrEbAjCxInC~AtD~@bHhAjBzBxHxCh^QdAqARgEsE{GiEuGNoDnDoAhEyCbCqDxI{Bh@uCmB{@AeDlA}BtBcC|EmBbK}@jAoDN{PeGgEvCaAhBv@zDOnFZvChF~J\\jDxB|ByChMoHdDgAfEf@rA~CdBpCzMrAbCn@|G}FrJ}AfEy@hLgB|GiGpCi@|@eAtZaLxRhAjLs@rIZpBzA`AnF@pAa@t@uAEwC}AaB_KCcBhA}@`EaCdDJpAhClA^x@o@pDg@`ShCbOcArCL`CjE`Ed@dBgBxK@bIeAvG`@xE]rDJ|GYrGiA|F{FjMmAnFj@tZ|BnNpA~B",
-   "pointCount": 156,
-   "start": [
-    35.959784,
-    139.037309
-   ],
-   "end": [
-    35.958707,
-    138.869534
-   ],
-   "tags": [
-    "scenic",
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:37",
+   "id": "埼玉県:34",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "毛呂停車場鎌北湖線",
@@ -1092,8 +1005,8 @@
    "curviness": 224.6,
    "flow": 16.6,
    "turnCount": 45,
-   "score": 50.9,
-   "baseScore": 50.9,
+   "score": 59.7,
+   "baseScore": 59.7,
    "spotCount": 0,
    "polyline": "gdfzEwhdqYgBg@oDeFBcDiAgCToDi@_CqAc@cHB}CqGkLuLg@sAGmBlAkJ[_FR}DYmRP{Ca@iBwHqE_FkGyEiCuPiBoJ|@kGbCoDn@",
    "pointCount": 26,
@@ -1110,7 +1023,38 @@
    ]
   },
   {
-   "id": "埼玉県:38",
+   "id": "埼玉県:35",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "秩父往還",
+   "ref": "140",
+   "highway": "trunk",
+   "lengthKm": 10.69,
+   "curviness": 438,
+   "flow": 23.2,
+   "turnCount": 202,
+   "score": 59.2,
+   "baseScore": 79.2,
+   "spotCount": 0,
+   "polyline": "sajzEwmnnY_FyIiEmBiCuG{DYmFhBuBSa@iE^gC{BoOyDeL`AmNM}Il@iC~BwBhBsKrBeF\\{Fk@{AnAcC`@}HuBoFiC}BViB[{Cl@cJhB}BbAmDmCs@kFyDuCmMSoMt@yB^_HlB{B|AgKXsVOqCeBcI~AaCX@Lx@b@KR_Cu@eLrBkEb@cGhC_LvCeERoBwAgIqB{CqBmAEkByAsBcGqEi@{EcBm@{DdByClCuDgBoDEsAsBkCsA`@eEE_ItBiFBwF\\EFb@[dIqA~D\\b@dDqPfCuAlGVlAm@FmEyCeKQiKPcBdHmN@eEl@eHkBiLcCaDaKsCaETaIWsAt@",
+   "pointCount": 90,
+   "start": [
+    35.937702,
+    138.851636
+   ],
+   "end": [
+    35.95106,
+    138.932083
+   ],
+   "boost": -20,
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
+   ]
+  },
+  {
+   "id": "埼玉県:36",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "東松山越生線",
@@ -1120,8 +1064,8 @@
    "curviness": 135.1,
    "flow": 17.6,
    "turnCount": 76,
-   "score": 49.1,
-   "baseScore": 46.2,
+   "score": 57.2,
+   "baseScore": 54.3,
    "spotCount": 1,
    "polyline": "un}zEazyqYfBhC|NvDfFxL`DtNrDzC~BpDlNxEvD`EpAxCfLdHZnA?fHn@xHAzPpEfA|GC|SkBxGgCbAvJa@bGgAnCaJpI_DvF}@~DQ`NP`EvClNbJpRl@jCBpNaFlv@NtMjBnLn@n@`AH`Ca@nBkAxANjG`PzGXnHlI`GfD|D~K~FlL`BnGnBfCdMhGpZvKvG~F~LdA`MA~Av@",
    "pointCount": 53,
@@ -1138,7 +1082,7 @@
    ]
   },
   {
-   "id": "埼玉県:39",
+   "id": "埼玉県:37",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "小鹿野影森停車場線",
@@ -1148,8 +1092,8 @@
    "curviness": 142.6,
    "flow": 16,
    "turnCount": 44,
-   "score": 48.7,
-   "baseScore": 45.8,
+   "score": 56.6,
+   "baseScore": 53.7,
    "spotCount": 1,
    "polyline": "ig{zEi`koYtNQhBVpCeEfCsHrFaLbIy_@tDkEvGsS`EiHjEgS~@gNhEbAzJnGvEsFtBqPdBqF|@eG@uF|@qJ|H{KdEsJfE{EtEeBxRnB",
    "pointCount": 25,
@@ -1166,7 +1110,7 @@
    ]
   },
   {
-   "id": "埼玉県:40",
+   "id": "埼玉県:38",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "十石峠街道",
@@ -1176,8 +1120,8 @@
    "curviness": 238.8,
    "flow": 17.9,
    "turnCount": 42,
-   "score": 47.9,
-   "baseScore": 47.9,
+   "score": 56.5,
+   "baseScore": 56.5,
    "spotCount": 0,
    "polyline": "_{p{EwsooYyDoNxAgNxAaCjEeA~FuG`BK`GvAx@OzBuPlDuBzDeJfEiBMkGp@gGg@{ByJeMkC{AkFXqDSyV|C",
    "pointCount": 21,
@@ -1194,7 +1138,7 @@
    ]
   },
   {
-   "id": "埼玉県:41",
+   "id": "埼玉県:39",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "北河原熊谷線",
@@ -1204,8 +1148,8 @@
    "curviness": 168.8,
    "flow": 17.2,
    "turnCount": 32,
-   "score": 47.9,
-   "baseScore": 47.9,
+   "score": 56.1,
+   "baseScore": 56.1,
    "spotCount": 0,
    "polyline": "o~v{Euv|qYw@qP_A{AyHuF}Ne`@yEsGuBsHkAaPy@{BcOmJkYyDP}BsE{@iD_CcFsJaAg@aDSyDf@",
    "pointCount": 18,
@@ -1222,7 +1166,7 @@
    ]
   },
   {
-   "id": "埼玉県:42",
+   "id": "埼玉県:40",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "皆野両神荒川線",
@@ -1232,8 +1176,8 @@
    "curviness": 174.1,
    "flow": 15.2,
    "turnCount": 107,
-   "score": 46.5,
-   "baseScore": 46.5,
+   "score": 54.6,
+   "baseScore": 54.6,
    "spotCount": 0,
    "polyline": "mle{Esq_pYjOpM~DbCxLbNqIfC{HAqDmBuAoD}EYwHjGeDfIe@zFPxCpD`EvBrEbCvChFAnCjB|Cn@~QhOtJrElBlBn@zBtFrGvDvH`DzIhE~WH`I`FfRJfFu@~MrGfOjBhGjBxC|AfGzBvC~@~G~C|Hj@lEbD`DzC`G|GbFrDlKh@~Ev@pBr\\rMtCtEhFhRv@lTy@pK~CdJvB`KxEfHbAhG",
    "pointCount": 54,
@@ -1250,88 +1194,7 @@
    ]
   },
   {
-   "id": "埼玉県:43",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "日高狭山線",
-   "ref": "262",
-   "highway": "secondary",
-   "lengthKm": 5.93,
-   "curviness": 147,
-   "flow": 16.1,
-   "turnCount": 54,
-   "score": 46.4,
-   "baseScore": 46.4,
-   "spotCount": 0,
-   "polyline": "mr_zE}pmqYU{@kNwAgJfBoFBnCwMxCuBrAkE|H_DjM}Iv@aBV_Jz@uCnBsA`MaDhHoJzJ}PbCaMZeMdB_Pc@uWhBiFhAeK`HuJ|BqBjEaBnIiKtQiJtMuEjDuCbGqIlFeC",
-   "pointCount": 32,
-   "start": [
-    35.88407,
-    139.338554
-   ],
-   "end": [
-    35.861437,
-    139.37941
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:44",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "日高川島線",
-   "ref": "74",
-   "highway": "primary",
-   "lengthKm": 3.02,
-   "curviness": 180,
-   "flow": 16.5,
-   "turnCount": 33,
-   "score": 46.3,
-   "baseScore": 46.3,
-   "spotCount": 0,
-   "polyline": "ouozE_byqYByEiByHVuEUaBoEiNoAuGmG_LcIkRaFw]yCyK}J|BsAkQK_IwBmEaEaAaEuD",
-   "pointCount": 17,
-   "start": [
-    35.966482,
-    139.397596
-   ],
-   "end": [
-    35.978218,
-    139.423993
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:45",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "ときがわ熊谷線",
-   "ref": "173",
-   "highway": "secondary",
-   "lengthKm": 3.95,
-   "curviness": 125.7,
-   "flow": 13.1,
-   "turnCount": 38,
-   "score": 46.3,
-   "baseScore": 41.7,
-   "spotCount": 2,
-   "polyline": "c~}zEmriqYl@lA`@vCpC~FhOvLnAB`I}CnGbAlC|A|KtMhJdG`E~A`Q~BpCzD~A|KlBhDh^dLdBrBtExQfArBzGrF~FxA`C`B",
-   "pointCount": 23,
-   "start": [
-    36.039541,
-    139.318306
-   ],
-   "end": [
-    36.011919,
-    139.296565
-   ]
-  },
-  {
-   "id": "埼玉県:46",
+   "id": "埼玉県:41",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "あじさい街道",
@@ -1341,8 +1204,8 @@
    "curviness": 212,
    "flow": 15.9,
    "turnCount": 143,
-   "score": 46.2,
-   "baseScore": 46.2,
+   "score": 54.5,
+   "baseScore": 54.5,
    "spotCount": 0,
    "polyline": "iq~yEumgqY}M|@wKrM}@vBqBh\\JxBh@dAfH`ExInInCdJNpBuChOaGfFiF|Kg@dCo@vOiFtLoKbNwHdAuBnC_@tHjAnLbAhCnFtF`@nBWbDs@tAcB`AaUlBwBbB}AdDwBlHExE|CzIpD`FXlBMrA_BzB{HjB{B|AqCbHkCbDiFjMcGl@cCrAUxFzBnSArEcAtMuAlEiF`E{FAeGcDsGOe@mA?wDq@w@w@AyBvD{IhW}B|@uFiAiAx@MzAXhCpE~QzAX~HsEhBXd@jAU|AmFfHsC~Fk@tCPzEc@fCuAlBkBr@",
    "pointCount": 78,
@@ -1359,7 +1222,63 @@
    ]
   },
   {
-   "id": "埼玉県:47",
+   "id": "埼玉県:42",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "日高狭山線",
+   "ref": "262",
+   "highway": "secondary",
+   "lengthKm": 5.93,
+   "curviness": 147,
+   "flow": 16.1,
+   "turnCount": 54,
+   "score": 54.4,
+   "baseScore": 54.4,
+   "spotCount": 0,
+   "polyline": "mr_zE}pmqYU{@kNwAgJfBoFBnCwMxCuBrAkE|H_DjM}Iv@aBV_Jz@uCnBsA`MaDhHoJzJ}PbCaMZeMdB_Pc@uWhBiFhAeK`HuJ|BqBjEaBnIiKtQiJtMuEjDuCbGqIlFeC",
+   "pointCount": 32,
+   "start": [
+    35.88407,
+    139.338554
+   ],
+   "end": [
+    35.861437,
+    139.37941
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:43",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "日高川島線",
+   "ref": "74",
+   "highway": "primary",
+   "lengthKm": 3.02,
+   "curviness": 180,
+   "flow": 16.5,
+   "turnCount": 33,
+   "score": 54.4,
+   "baseScore": 54.4,
+   "spotCount": 0,
+   "polyline": "ouozE_byqYByEiByHVuEUaBoEiNoAuGmG_LcIkRaFw]yCyK}J|BsAkQK_IwBmEaEaAaEuD",
+   "pointCount": 17,
+   "start": [
+    35.966482,
+    139.397596
+   ],
+   "end": [
+    35.978218,
+    139.423993
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:44",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "葛和田新堀線",
@@ -1369,8 +1288,8 @@
    "curviness": 127.6,
    "flow": 16.7,
    "turnCount": 62,
-   "score": 46.2,
-   "baseScore": 46.2,
+   "score": 54.2,
+   "baseScore": 54.2,
    "spotCount": 0,
    "polyline": "obx{E{`nqYwBWcA{@gEgLuWmk@e@eEj@}HBsIw@kBaHyF}BaF}BuRl@yG}AkO}GsJyB{EwFsEmB{JyFmH]qGt@sNaGiTs@q_@dBuHl@_LlD{WPq[_AiEgFqEqBwEy@yQnDwEgBS}^q]sH_Jk@yAo@oJaAoCmMeM",
    "pointCount": 39,
@@ -1387,35 +1306,7 @@
    ]
   },
   {
-   "id": "埼玉県:48",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "神流グリーンライン",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.42,
-   "curviness": 143.9,
-   "flow": 17,
-   "turnCount": 29,
-   "score": 46.1,
-   "baseScore": 46.1,
-   "spotCount": 0,
-   "polyline": "o{_|Es`|oYhG`CxDlFhD~BfRvRhFlDrQbRpGfNNnE^r@vf@x\\xAV`ByA`AIhFhGbBj@hGwDtEo@xAwA",
-   "pointCount": 19,
-   "start": [
-    36.213197,
-    139.08506
-   ],
-   "end": [
-    36.189098,
-    139.067407
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:49",
+   "id": "埼玉県:45",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "内田ヶ谷鴻巣線",
@@ -1425,8 +1316,8 @@
    "curviness": 88.9,
    "flow": 20.2,
    "turnCount": 22,
-   "score": 46,
-   "baseScore": 46,
+   "score": 54.1,
+   "baseScore": 54.1,
    "spotCount": 0,
    "polyline": "khi{EgxurYlC`FjRkQbc@de@bUrSjDjBl`@lIp[j\\fJlFbE|D~AHnDoB|ACdb@hRlAnAtEbLzDpF",
    "pointCount": 17,
@@ -1443,7 +1334,35 @@
    ]
   },
   {
-   "id": "埼玉県:50",
+   "id": "埼玉県:46",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "神流グリーンライン",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.42,
+   "curviness": 143.9,
+   "flow": 17,
+   "turnCount": 29,
+   "score": 54.1,
+   "baseScore": 54.1,
+   "spotCount": 0,
+   "polyline": "o{_|Es`|oYhG`CxDlFhD~BfRvRhFlDrQbRpGfNNnE^r@vf@x\\xAV`ByA`AIhFhGbBj@hGwDtEo@xAwA",
+   "pointCount": 19,
+   "start": [
+    36.213197,
+    139.08506
+   ],
+   "end": [
+    36.189098,
+    139.067407
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:47",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "原市場下成木線",
@@ -1453,8 +1372,8 @@
    "curviness": 160.8,
    "flow": 14.7,
    "turnCount": 59,
-   "score": 45.9,
-   "baseScore": 45.9,
+   "score": 53.8,
+   "baseScore": 53.8,
    "spotCount": 0,
    "polyline": "gr{yEihypYvBcDbGiFpC}GdIwH\\uA@iDx@qC~I}MnGgPbQgP`C{GdIwH|HqOlDaCdEs@bAkAzBmH`B_MdB{EPiRxDaFjB_I|@o[dAwJbCmFf@{CjCaEEyAnAmDjHyOlAi@pGi@",
    "pointCount": 33,
@@ -1472,7 +1391,7 @@
    ]
   },
   {
-   "id": "埼玉県:51",
+   "id": "埼玉県:48",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "富岡入間線",
@@ -1482,8 +1401,8 @@
    "curviness": 150.3,
    "flow": 15,
    "turnCount": 71,
-   "score": 45.9,
-   "baseScore": 45.9,
+   "score": 53.8,
+   "baseScore": 53.8,
    "spotCount": 0,
    "polyline": "avuyEumeqY_@oBuCuE\\iEiAuDaBoAgDHiBsAw@yA}AwGLeSvAcL~BoKpAkN|E_JrAyPUaInCsq@w@_HgFyLa@cHx@}Ev@_Bp@uGzBwJnFaJx@kCR}Qq@gC{QoWiAqJkAaXeCeHe@wKiHiMmBsIaFyGNcCbDwLZkL",
    "pointCount": 40,
@@ -1500,7 +1419,7 @@
    ]
   },
   {
-   "id": "埼玉県:52",
+   "id": "埼玉県:49",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "上尾久喜線",
@@ -1510,8 +1429,8 @@
    "curviness": 150.7,
    "flow": 17.2,
    "turnCount": 41,
-   "score": 45.7,
-   "baseScore": 45.7,
+   "score": 53.7,
+   "baseScore": 53.7,
    "spotCount": 0,
    "polyline": "mjzzEksesYyKaCaI}Es@kB}@cKm@gCeSu]aCmH}EyJiHiBiKx@k@{Gr@mIxAwHy@aHiCqIsFqEkBwEyDeGqCeCmIj@sNxH}\\}i@",
    "pointCount": 23,
@@ -1528,7 +1447,32 @@
    ]
   },
   {
-   "id": "埼玉県:53",
+   "id": "埼玉県:50",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "ときがわ熊谷線",
+   "ref": "173",
+   "highway": "secondary",
+   "lengthKm": 3.95,
+   "curviness": 125.7,
+   "flow": 13.1,
+   "turnCount": 38,
+   "score": 53.4,
+   "baseScore": 48.8,
+   "spotCount": 2,
+   "polyline": "c~}zEmriqYl@lA`@vCpC~FhOvLnAB`I}CnGbAlC|A|KtMhJdG`E~A`Q~BpCzD~A|KlBhDh^dLdBrBtExQfArBzGrF~FxA`C`B",
+   "pointCount": 23,
+   "start": [
+    36.039541,
+    139.318306
+   ],
+   "end": [
+    36.011919,
+    139.296565
+   ]
+  },
+  {
+   "id": "埼玉県:51",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "寄居岡部深谷線",
@@ -1538,8 +1482,8 @@
    "curviness": 112.7,
    "flow": 18.2,
    "turnCount": 24,
-   "score": 45.5,
-   "baseScore": 45.5,
+   "score": 53.4,
+   "baseScore": 53.4,
    "spotCount": 0,
    "polyline": "ety{EguzpYg@uEgNq]cPqXOkAzBeS{J{JgDsFeM}M{BmFcGaIeBiEkHeJnBsb@Y{Ee@sAq@{X",
    "pointCount": 17,
@@ -1556,7 +1500,37 @@
    ]
   },
   {
-   "id": "埼玉県:54",
+   "id": "埼玉県:52",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "南川上名栗線",
+   "ref": "395",
+   "highway": "secondary",
+   "lengthKm": 6.86,
+   "curviness": 871.5,
+   "flow": 33,
+   "turnCount": 181,
+   "score": 53.2,
+   "baseScore": 97.4,
+   "spotCount": 3,
+   "polyline": "avhzEokqpYCfClAvFq@`CZz@bJaAvBuBvC|ArC`GpCn@pBpChMeCvC_Br@D|AtAAnC~@hDIlEfA`BjChA\\|BtArAWrDiBtE`AfCE|En@dGxB`H`F~A`@bH|BxCR[kAoBGkBnEi@xBpApE`AtDcAoB`BOjAkAIv@t@jAFfA_BpClAtADnAfBd@}@rCo@eBrAFl@`BYjAiA^^]tF|@rAfCXXhCtAtB^gBfA}AMY{@R@aBpIsBbBHs@iAjAq@pC`Ap@}@x@@vAfDrIxGb@~AzCf@dEjBnC_CpHuDjCZxArBnBKdCpBnBmDbBS",
+   "pointCount": 84,
+   "start": [
+    35.93073,
+    139.194319
+   ],
+   "end": [
+    35.89592,
+    139.173677
+   ],
+   "boost": -50,
+   "tags": [
+    "forest",
+    "caution"
+   ]
+  },
+  {
+   "id": "埼玉県:53",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "二本木飯能線",
@@ -1566,8 +1540,8 @@
    "curviness": 135.4,
    "flow": 15.9,
    "turnCount": 45,
-   "score": 45.3,
-   "baseScore": 45.3,
+   "score": 53.1,
+   "baseScore": 53.1,
    "spotCount": 0,
    "polyline": "w}qyE_bkqYaEe@_BT}VxIwCRuDsAcQaNeJeFeGiHkEwCqLf@wHeAyFh@_GhC`@rMo@tAsK~CkJEmMbQuZvLoBb@{FOaEZ{AbBwMzUkQsCaBp@",
    "pointCount": 27,
@@ -1584,6 +1558,34 @@
    ]
   },
   {
+   "id": "埼玉県:54",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "東松山越生線",
+   "ref": "41",
+   "highway": "primary",
+   "lengthKm": 4.67,
+   "curviness": 139.6,
+   "flow": 17.2,
+   "turnCount": 38,
+   "score": 52.9,
+   "baseScore": 52.9,
+   "spotCount": 0,
+   "polyline": "ihqzEe{eqYcHuBwIeFgBKwHx@}@a@uHkK{@eGeBoD}RuTgBmEU_ErC}Rh@eSUuDcG{[S}EvAwP[wQnBsP}Tb@mK_G_K@",
+   "pointCount": 23,
+   "start": [
+    35.974615,
+    139.299231
+   ],
+   "end": [
+    35.99348,
+    139.333352
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
    "id": "埼玉県:55",
    "region": "saitama",
    "regionName": "埼玉県",
@@ -1594,8 +1596,8 @@
    "curviness": 129.8,
    "flow": 16.9,
    "turnCount": 24,
-   "score": 45.1,
-   "baseScore": 45.1,
+   "score": 52.9,
+   "baseScore": 52.9,
    "spotCount": 0,
    "polyline": "gk_{Eqp}qY[gHoEgNe@}C_AkQmGiLkPyh@GuEjCmIvAiC`J_Jr@eA\\yBcBqHN{RW{FkDNwF{@",
    "pointCount": 18,
@@ -1615,34 +1617,6 @@
    "id": "埼玉県:56",
    "region": "saitama",
    "regionName": "埼玉県",
-   "name": "東松山越生線",
-   "ref": "41",
-   "highway": "primary",
-   "lengthKm": 4.67,
-   "curviness": 139.6,
-   "flow": 17.2,
-   "turnCount": 38,
-   "score": 45,
-   "baseScore": 45,
-   "spotCount": 0,
-   "polyline": "ihqzEe{eqYcHuBwIeFgBKwHx@}@a@uHkK{@eGeBoD}RuTgBmEU_ErC}Rh@eSUuDcG{[S}EvAwP[wQnBsP}Tb@mK_G_K@",
-   "pointCount": 23,
-   "start": [
-    35.974615,
-    139.299231
-   ],
-   "end": [
-    35.99348,
-    139.333352
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:57",
-   "region": "saitama",
-   "regionName": "埼玉県",
    "name": "騎西鴻巣線",
    "ref": "148",
    "highway": "secondary",
@@ -1650,8 +1624,8 @@
    "curviness": 133.6,
    "flow": 16.4,
    "turnCount": 27,
-   "score": 44.9,
-   "baseScore": 44.9,
+   "score": 52.6,
+   "baseScore": 52.6,
    "spotCount": 0,
    "polyline": "udm{EgtrrYPwCYeGb@{AyBsGq@eF`@uZc@cEKgQ|I{_@jAkKpHqNMcEmCqPjCkXvGwSKs@",
    "pointCount": 17,
@@ -1668,7 +1642,7 @@
    ]
   },
   {
-   "id": "埼玉県:58",
+   "id": "埼玉県:57",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "本田小川線",
@@ -1678,8 +1652,8 @@
    "curviness": 149.5,
    "flow": 14.5,
    "turnCount": 46,
-   "score": 44.7,
-   "baseScore": 44.7,
+   "score": 52.4,
+   "baseScore": 52.4,
    "spotCount": 0,
    "polyline": "q{l{EqwbqYbD|E`DxJfIlHdC~@jEQnG|BzQjArKhDrFzDlIrCdC~AvAtBjCbI~@lApAf@dBIxC_BzEmI|F}BvH}EjEyGnEsKxDcDzKaArFjJlBvAfBNzUmC",
    "pointCount": 29,
@@ -1696,7 +1670,7 @@
    ]
   },
   {
-   "id": "埼玉県:59",
+   "id": "埼玉県:58",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "上伊草坂戸線",
@@ -1706,8 +1680,8 @@
    "curviness": 124.2,
    "flow": 16.2,
    "turnCount": 34,
-   "score": 44.6,
-   "baseScore": 44.6,
+   "score": 52.3,
+   "baseScore": 52.3,
    "spotCount": 0,
    "polyline": "{nozE_{zqYR{KgH_NcBiJgEgOg@qMVuMtDsRdBiOcAyJFkOhEmFrAyLjBc\\hCaFbAaEpA_HDoFr@kFEcV{BwLgEgO",
    "pointCount": 22,
@@ -1724,35 +1698,7 @@
    ]
   },
   {
-   "id": "埼玉県:60",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "ときがわ坂戸線",
-   "ref": "171",
-   "highway": "secondary",
-   "lengthKm": 5.19,
-   "curviness": 115,
-   "flow": 13.3,
-   "turnCount": 45,
-   "score": 44.5,
-   "baseScore": 41.6,
-   "spotCount": 1,
-   "polyline": "e~tzE}olqYiBp@sFtFuE`A_LdPyFbEqEhVeBzFu@zIcFzTeAhPShUY`BeAlAgHfC{@x@wAlPuHpQsS`OiDpFw@hFsAjYB~Fd@tChG~LJrL}AnI",
-   "pointCount": 27,
-   "start": [
-    35.993469,
-    139.333273
-   ],
-   "end": [
-    36.011008,
-    139.286253
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:61",
+   "id": "埼玉県:59",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "秩父児玉線",
@@ -1762,8 +1708,8 @@
    "curviness": 162.1,
    "flow": 15.6,
    "turnCount": 34,
-   "score": 44.5,
-   "baseScore": 44.5,
+   "score": 52.3,
+   "baseScore": 52.3,
    "spotCount": 0,
    "polyline": "mcz{EulcpYdC_BvBcErDtAhK~GdGvAbBpAtIvUjNdNbA`JjArCxB~AzGTnBl@nQbRv@zDm@bNRdCvGhOxDzC",
    "pointCount": 20,
@@ -1780,7 +1726,7 @@
    ]
   },
   {
-   "id": "埼玉県:62",
+   "id": "埼玉県:60",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "寄居岡部深谷線",
@@ -1790,8 +1736,8 @@
    "curviness": 123.8,
    "flow": 16,
    "turnCount": 32,
-   "score": 44.3,
-   "baseScore": 44.3,
+   "score": 51.9,
+   "baseScore": 51.9,
    "spotCount": 0,
    "polyline": "e}q{EoerpY{J{MmCaB{BOcIlAyE_A}KBcCoAwD{EwJcByLh@ib@mHaGmCkOwCgH}Eo@kAV_D{@_g@{HGoNuA",
    "pointCount": 20,
@@ -1808,7 +1754,35 @@
    ]
   },
   {
-   "id": "埼玉県:63",
+   "id": "埼玉県:61",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "ときがわ坂戸線",
+   "ref": "171",
+   "highway": "secondary",
+   "lengthKm": 5.19,
+   "curviness": 115,
+   "flow": 13.3,
+   "turnCount": 45,
+   "score": 51.6,
+   "baseScore": 48.7,
+   "spotCount": 1,
+   "polyline": "e~tzE}olqYiBp@sFtFuE`A_LdPyFbEqEhVeBzFu@zIcFzTeAhPShUY`BeAlAgHfC{@x@wAlPuHpQsS`OiDpFw@hFsAjYB~Fd@tChG~LJrL}AnI",
+   "pointCount": 27,
+   "start": [
+    35.993469,
+    139.333273
+   ],
+   "end": [
+    36.011008,
+    139.286253
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:62",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "深谷嵐山線",
@@ -1818,8 +1792,8 @@
    "curviness": 139.4,
    "flow": 14.7,
    "turnCount": 80,
-   "score": 43.6,
-   "baseScore": 43.6,
+   "score": 51.2,
+   "baseScore": 51.2,
    "spotCount": 0,
    "polyline": "y`n{E{fbqYzKkKbFwBzY{@rBg@tHcFrBs@vZzGnFH`SkAjDoK~PeX}@gOnAcKm@yFPaHhA_HlCqDdFcBrFaFjI{BjGkSjEYbB}A~C]vGwD~ClBtAMnGcCzJ}GfDcAfFmEtQy@bKsFfHmI~JiCdGgDrSwQpLgEdO_NjIeB",
    "pointCount": 41,
@@ -1836,7 +1810,7 @@
    ]
   },
   {
-   "id": "埼玉県:64",
+   "id": "埼玉県:63",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "岩殿岩井線",
@@ -1846,8 +1820,8 @@
    "curviness": 133.5,
    "flow": 14.1,
    "turnCount": 46,
-   "score": 43.4,
-   "baseScore": 43.4,
+   "score": 50.8,
+   "baseScore": 50.8,
    "spotCount": 0,
    "polyline": "gaqzEygpqY|A`A\\tAq@rGxAbV|Q~`@dNnEvJ~KtFdBfGtHlZjElAj@dAbBdJzUaBxUwA|FyBrSBjDt@dC|A|AvUxNdB@pCiAhEo@xBn@",
    "pointCount": 25,
@@ -1864,7 +1838,7 @@
    ]
   },
   {
-   "id": "埼玉県:65",
+   "id": "埼玉県:64",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "片柳川越線",
@@ -1874,8 +1848,8 @@
    "curviness": 112.6,
    "flow": 15.4,
    "turnCount": 32,
-   "score": 43.1,
-   "baseScore": 43.1,
+   "score": 50.5,
+   "baseScore": 50.5,
    "spotCount": 0,
    "polyline": "qlmzEs~_rY|DyFpD_CxDuTdQeWzA{Ez@cQ|A_N_D_Pg@yFr@qPs@kIp@yH~FqLhYyO|B{BnByEjCyQpLdAdKyG",
    "pointCount": 20,
@@ -1892,7 +1866,7 @@
    ]
   },
   {
-   "id": "埼玉県:66",
+   "id": "埼玉県:65",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "飯能寄居線",
@@ -1902,8 +1876,8 @@
    "curviness": 126.3,
    "flow": 15.2,
    "turnCount": 55,
-   "score": 42.9,
-   "baseScore": 42.9,
+   "score": 50.4,
+   "baseScore": 50.4,
    "spotCount": 0,
    "polyline": "qfgzEeajqYc@nAuEzCoIvCiH~GkN`EiSpKwHhKe@bGgAnBqIdHqZnRkHhBmHVwc@wIcR`CkBp@_PnO_BrIgA~AwIbDoNxLyJv@}BlMu@zAgKvCgGv@qBeKiFqLCeFq@kH",
    "pointCount": 31,
@@ -1920,7 +1894,7 @@
    ]
   },
   {
-   "id": "埼玉県:67",
+   "id": "埼玉県:66",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "さいたま鴻巣線",
@@ -1930,8 +1904,8 @@
    "curviness": 129.3,
    "flow": 15.5,
    "turnCount": 36,
-   "score": 42.8,
-   "baseScore": 42.8,
+   "score": 50.3,
+   "baseScore": 50.3,
    "spotCount": 0,
    "polyline": "_v_zEuq_sYfBoH~AqLl@{AbB_AnQnBxMbFlFh@~C{@`JoGbCm@rITxI|EvCfDnBt@`RlAvE_AtDcDh_@oeA|B{COiAtE}K",
    "pointCount": 22,
@@ -1948,7 +1922,7 @@
    ]
   },
   {
-   "id": "埼玉県:68",
+   "id": "埼玉県:67",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "所沢武蔵村山立川線",
@@ -1958,8 +1932,8 @@
    "curviness": 124.7,
    "flow": 16,
    "turnCount": 29,
-   "score": 42.7,
-   "baseScore": 42.7,
+   "score": 50.2,
+   "baseScore": 50.2,
    "spotCount": 0,
    "polyline": "wohyEo}|qY}HbD{AJwO}HcMwN{KwIkDiKsKqJBkG_@uC^uZkHkl@m@qAoDmCqCmGyCiD_C{JqE}G",
    "pointCount": 18,
@@ -1976,7 +1950,7 @@
    ]
   },
   {
-   "id": "埼玉県:69",
+   "id": "埼玉県:68",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "ときがわ坂戸線",
@@ -1986,8 +1960,8 @@
    "curviness": 102.7,
    "flow": 15.8,
    "turnCount": 24,
-   "score": 42.6,
-   "baseScore": 42.6,
+   "score": 49.9,
+   "baseScore": 49.9,
    "spotCount": 0,
    "polyline": "agozEgzpqYuGpVxA~f@cAnDoLrFeNfEu@bA_AdF{@nA{TdIsS|RcKfD{RxA{J|KeGg@",
    "pointCount": 15,
@@ -2004,7 +1978,7 @@
    ]
   },
   {
-   "id": "埼玉県:70",
+   "id": "埼玉県:69",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "大里比企広域農道",
@@ -2014,8 +1988,8 @@
    "curviness": 112.2,
    "flow": 14.6,
    "turnCount": 27,
-   "score": 42.1,
-   "baseScore": 42.1,
+   "score": 49.3,
+   "baseScore": 49.3,
    "spotCount": 0,
    "polyline": "aqj{Ecn}qYyC|AmAxD`BzXNhWwAjC_OdQ}Jf\\gGzEm@fACvh@u@zEqAjBgBp@i\\Z_C`A",
    "pointCount": 16,
@@ -2032,7 +2006,7 @@
    ]
   },
   {
-   "id": "埼玉県:71",
+   "id": "埼玉県:70",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "川越坂戸毛呂山線旧道",
@@ -2042,8 +2016,8 @@
    "curviness": 115.5,
    "flow": 14.3,
    "turnCount": 28,
-   "score": 42,
-   "baseScore": 42,
+   "score": 49.2,
+   "baseScore": 49.2,
    "spotCount": 0,
    "polyline": "eqnzEijqqYPaAgAqDoFiLg@}C^eIzFoJz@wFzF{OPuIqAeYiOqn@ReDjEeM}ByNHqHfFoR",
    "pointCount": 17,
@@ -2060,7 +2034,7 @@
    ]
   },
   {
-   "id": "埼玉県:72",
+   "id": "埼玉県:71",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "東松山桶川線",
@@ -2070,8 +2044,8 @@
    "curviness": 119.4,
    "flow": 15,
    "turnCount": 41,
-   "score": 41.9,
-   "baseScore": 41.9,
+   "score": 49.2,
+   "baseScore": 49.2,
    "spotCount": 0,
    "polyline": "y|yzEqjnrYSuEaC_OAmDj@qF[qEBmH}Ae[z@s@xHiStCsMnEgDxCgIhFoC~AmBjCwHt@wHhC_FViFgAiIgAoQrFkt@aA}FkFyMcTk^qBaG",
    "pointCount": 26,
@@ -2088,7 +2062,7 @@
    ]
   },
   {
-   "id": "埼玉県:73",
+   "id": "埼玉県:72",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "川越越生線",
@@ -2098,8 +2072,8 @@
    "curviness": 115.5,
    "flow": 13.5,
    "turnCount": 36,
-   "score": 41.6,
-   "baseScore": 41.6,
+   "score": 48.7,
+   "baseScore": 48.7,
    "spotCount": 0,
    "polyline": "aglzEsgmqYjKqTJyFcC}RfJaZh@gDiAqMuC{IgAeGc@_QJqDdAyDpMmWRaBa@oFNiA|NqPa@kQlB}Lu@aNvAaP",
    "pointCount": 21,
@@ -2116,7 +2090,7 @@
    ]
   },
   {
-   "id": "埼玉県:74",
+   "id": "埼玉県:73",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "熊谷羽生線旧道",
@@ -2126,8 +2100,8 @@
    "curviness": 114.2,
    "flow": 13.5,
    "turnCount": 28,
-   "score": 41.1,
-   "baseScore": 41.1,
+   "score": 48.1,
+   "baseScore": 48.1,
    "spotCount": 0,
    "polyline": "usx{Ea`nrYhJ}CtEwFvC}Gg@cMnAkQaAsXnA}VcBaKoBaFwCkLMkCrAgWbKmYl@}EhEu@",
    "pointCount": 16,
@@ -2144,35 +2118,7 @@
    ]
   },
   {
-   "id": "埼玉県:75",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "秩父児玉線",
-   "ref": "44",
-   "highway": "primary",
-   "lengthKm": 4.43,
-   "curviness": 95.1,
-   "flow": 12.4,
-   "turnCount": 34,
-   "score": 40.7,
-   "baseScore": 37.8,
-   "spotCount": 1,
-   "polyline": "ckzzEgc|oYkLn@qOdCyC`BoG|@qFOiI}AwDoBmK}NeMcLcZmE_Bs@sDsDoOoIqSOoL{A_DRyLjCaHVkJeCuChA_DjE",
-   "pointCount": 22,
-   "start": [
-    36.021145,
-    139.085484
-   ],
-   "end": [
-    36.057744,
-    139.0923
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:76",
+   "id": "埼玉県:74",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "国道254号",
@@ -2182,8 +2128,8 @@
    "curviness": 145.5,
    "flow": 15.2,
    "turnCount": 58,
-   "score": 40.6,
-   "baseScore": 40.6,
+   "score": 47.9,
+   "baseScore": 47.9,
    "spotCount": 0,
    "polyline": "igd{EuyypYeKvNq@pBYzDeF~P]zNkAlFeBnD]vFeCdIaEvDsFzLuC_AmEmGuAu@{A@yFnD_COyL_KeGqPeL}DkFlBoJvA{JMwHeHwGqOm@_EWqJyA_EwCeBeIgBsEXyW`M{BzC{JjT",
    "pointCount": 35,
@@ -2200,7 +2146,7 @@
    ]
   },
   {
-   "id": "埼玉県:77",
+   "id": "埼玉県:75",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "越谷岩槻線",
@@ -2210,8 +2156,8 @@
    "curviness": 121.2,
    "flow": 13.8,
    "turnCount": 34,
-   "score": 40.5,
-   "baseScore": 40.5,
+   "score": 47.6,
+   "baseScore": 47.6,
    "spotCount": 0,
    "polyline": "ygezEur`tYqHnDs@rAe@fEaKzTsIr`@uEbJyKrLk@nAoB~QK`NqCnI{AzA_Fz@eKvMe@xAYlGsBrEqMpHmQ~E",
    "pointCount": 20,
@@ -2228,7 +2174,7 @@
    ]
   },
   {
-   "id": "埼玉県:78",
+   "id": "埼玉県:76",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "白鳥通り",
@@ -2238,8 +2184,8 @@
    "curviness": 123,
    "flow": 12.9,
    "turnCount": 57,
-   "score": 40.5,
-   "baseScore": 40.5,
+   "score": 47.5,
+   "baseScore": 47.5,
    "spotCount": 0,
    "polyline": "}vh{EcibpY}Bp@qGZwJ{BgJGuI{BuI|AuJe@iFuAeNeBmEiB}FgEoAMmFx@uIpCaE|DeCnHmChCkMxDiFCuFcBwJ{LcBiD}B{AgD{EkHoGgD}EsCaMkByDo@}FgFuT?oEmBeW`HuRxBkL",
    "pointCount": 35,
@@ -2256,7 +2202,7 @@
    ]
   },
   {
-   "id": "埼玉県:79",
+   "id": "埼玉県:77",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "飯能寄居線",
@@ -2266,8 +2212,8 @@
    "curviness": 117,
    "flow": 13.2,
    "turnCount": 51,
-   "score": 40.4,
-   "baseScore": 40.4,
+   "score": 47.4,
+   "baseScore": 47.4,
    "spotCount": 0,
    "polyline": "m_xzEen`qYmDhBoFxGyCbBwALkIaB}BsBmCiFiNiIkNt]{FfK{A~@_H`BsF`DuMpAqJnCgKXcJvCcLkAk[rAsHk@iNlBuP{EiEsCsBa@sQfF}EhCiG]aKl@",
    "pointCount": 29,
@@ -2284,179 +2230,35 @@
    ]
   },
   {
-   "id": "埼玉県:80",
+   "id": "埼玉県:78",
    "region": "saitama",
    "regionName": "埼玉県",
-   "name": "両神小鹿野線",
-   "ref": "279",
-   "highway": "secondary",
-   "lengthKm": 11.65,
-   "curviness": 416.5,
-   "flow": 23.9,
-   "turnCount": 203,
-   "score": 39.4,
-   "baseScore": 71.5,
+   "name": "秩父児玉線",
+   "ref": "44",
+   "highway": "primary",
+   "lengthKm": 4.43,
+   "curviness": 95.1,
+   "flow": 12.4,
+   "turnCount": 34,
+   "score": 47.3,
+   "baseScore": 44.4,
    "spotCount": 1,
-   "polyline": "ix{zEousnYWf@LlAxCz@Cm@aAg@Ck@v@yBjBs@\\s@{@cFdAeCKwAj@BIzDn@`@SaCdAkCV_C`E}I|@yHf@c@tAoE|E_HpBaFzAyAjBoFfCqAl@eAViBCaHpBcHv@sLpAsGIgGrJ}MrCwLxAqCvBiBdAMbAiCdC_PmAaU`FuCp@}A]}B_A{AaBaAwAX]Yg@cFm@oAuGuEmC[gFbD}@OGeAvBsJOcF}@iAmBs@}FM?cAtCqFWiEaA_EwAyBaHcFw@mCkBcB_AwEjBcJjG}HlBmRxHi[`HkLxCmI?qDvAqDd@}I`AkEvGcK`B{E~Ak@xAkBzCUjFoIX}AIwB~@cDN_En@qBdC_DHwE}@gEqGwFSw@PgEyBmFkFwFqEAoBkBmFeIyByI}GyGeDyGE_B",
-   "pointCount": 107,
+   "polyline": "ckzzEgc|oYkLn@qOdCyC`BoG|@qFOiI}AwDoBmK}NeMcLcZmE_Bs@sDsDoOoIqSOoL{A_DRyLjCaHVkJeCuChA_DjE",
+   "pointCount": 22,
    "start": [
-    36.028373,
-    138.878475
+    36.021145,
+    139.085484
    ],
    "end": [
-    36.019184,
-    138.972857
-   ],
-   "boost": -35,
-   "tags": [
-    "forest",
-    "caution"
-   ]
-  },
-  {
-   "id": "埼玉県:81",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "南川上名栗線",
-   "ref": "395",
-   "highway": "secondary",
-   "lengthKm": 6.86,
-   "curviness": 871.5,
-   "flow": 33,
-   "turnCount": 181,
-   "score": 38.6,
-   "baseScore": 82.9,
-   "spotCount": 3,
-   "polyline": "avhzEokqpYCfClAvFq@`CZz@bJaAvBuBvC|ArC`GpCn@pBpChMeCvC_Br@D|AtAAnC~@hDIlEfA`BjChA\\|BtArAWrDiBtE`AfCE|En@dGxB`H`F~A`@bH|BxCR[kAoBGkBnEi@xBpApE`AtDcAoB`BOjAkAIv@t@jAFfA_BpClAtADnAfBd@}@rCo@eBrAFl@`BYjAiA^^]tF|@rAfCXXhCtAtB^gBfA}AMY{@R@aBpIsBbBHs@iAjAq@pC`Ap@}@x@@vAfDrIxGb@~AzCf@dEjBnC_CpHuDjCZxArBnBKdCpBnBmDbBS",
-   "pointCount": 84,
-   "start": [
-    35.93073,
-    139.194319
-   ],
-   "end": [
-    35.89592,
-    139.173677
-   ],
-   "boost": -50,
-   "tags": [
-    "forest",
-    "caution"
-   ]
-  },
-  {
-   "id": "埼玉県:82",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "飯能寄居線",
-   "ref": "30",
-   "highway": "primary",
-   "lengthKm": 3.49,
-   "curviness": 108.2,
-   "flow": 12.6,
-   "turnCount": 30,
-   "score": 38.5,
-   "baseScore": 38.5,
-   "spotCount": 0,
-   "polyline": "elqzE_kdqYLtHiBtFek@p]aCxDuEdRu@dBgCdCcHfA_Jm@yFjCuAtAgElJoT`OmEDuLuFyFW",
-   "pointCount": 17,
-   "start": [
-    35.975226,
-    139.291518
-   ],
-   "end": [
-    35.999239,
-    139.274327
+    36.057744,
+    139.0923
    ],
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "埼玉県:83",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "福田鴻巣線",
-   "ref": "307",
-   "highway": "secondary",
-   "lengthKm": 3.45,
-   "curviness": 90,
-   "flow": 11.1,
-   "turnCount": 28,
-   "score": 37.5,
-   "baseScore": 37.5,
-   "spotCount": 0,
-   "polyline": "_ue{EkmqqYsAoFkDoE_CoFuAkGuHmM_FwOeA{OgDyJq@iOv@}EhD}EbB{A~G_ChBeB~[{g@rDaIhBeL",
-   "pointCount": 18,
-   "start": [
-    36.079039,
-    139.358464
-   ],
-   "end": [
-    36.075831,
-    139.389521
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:84",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "前橋長瀞線",
-   "ref": "13",
-   "highway": "primary",
-   "lengthKm": 3.69,
-   "curviness": 77.5,
-   "flow": 13,
-   "turnCount": 22,
-   "score": 37,
-   "baseScore": 37,
-   "spotCount": 0,
-   "polyline": "qdb|EmmyoYbVnNpt@bN~BxBlHtSvYpTnIf@jF]|VvCxKeEfCsBdGmB",
-   "pointCount": 12,
-   "start": [
-    36.224894,
-    139.071745
-   ],
-   "end": [
-    36.195457,
-    139.060786
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:85",
-   "region": "saitama",
-   "regionName": "埼玉県",
-   "name": "彩甲斐街道",
-   "ref": "140",
-   "highway": "trunk",
-   "lengthKm": 3.22,
-   "curviness": 112.8,
-   "flow": 11.7,
-   "turnCount": 31,
-   "score": 34.4,
-   "baseScore": 34.4,
-   "spotCount": 0,
-   "polyline": "iqp{Ee{dpY_@sLv@}FxNsZ~@sEj@eHk@eLkBsHgM_XAaB`AwEeAeMa@uShCgJhD}EpBs@fDGhFnAxER",
-   "pointCount": 19,
-   "start": [
-    36.134771,
-    139.130275
-   ],
-   "end": [
-    36.129607,
-    139.158177
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "埼玉県:86",
+   "id": "埼玉県:79",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "三沢坂本線",
@@ -2466,8 +2268,8 @@
    "curviness": 719.1,
    "flow": 29.4,
    "turnCount": 340,
-   "score": 31.8,
-   "baseScore": 83.9,
+   "score": 46.5,
+   "baseScore": 98.7,
    "spotCount": 1,
    "polyline": "oec{Eo{dpYf@qA]}FxAiMuAeELmGaAyDWwEsA}CWyDsAkEb@wCJ{GsAmEuHaH_BY{AxAaFYyCuD_@|@iBArAvAG\\eCIsEaBOw@fA{A_AiAt@kBKcAmDb@o@}@KcBeBuAJu@_AwI}DV}CpFcAn@{C~@oAu@gC`@iB`CoB\\kBvCsFeBq@FeG~DcAxDd@lCk@f@yAMsGiCmAkBCkCsEfFsAKfC_HN}GU}BlEwE|C{AfGcFpTmFdE_ExAy@xBMvCiBxIi@pDj@xA~@`CDpDmAhFB|BmArBKtAr@xB_BjLg@fCcBlFoAjBZfBwBtAd@ZmAbA]`DqEhE\\~C[hE`AzB}Eb@jA~@Qd@lAnA{@|@|@z@B`@`DpAOt@h@b@SMuA|@UGkBrB]bA~Cc@hDzB\\dAtDzA\\fBUpByBfCq@lG^jDc@xCsAnBkBzEHjBfBjBNFu@kAYDuCmB}EcFmAoA{A\\SzAZ~AiC|AJ@g@u@k@sChA_@_@|CqE~BKd@_D|@eBrB@jAkA{@aC]yIVgD}A}Fy@eIn@c@nBjAzAnElAWp@\\Rk@s@yAY}Ds@k@IqAy@cAiAgF_BQeBcCmJi@eBy@{CwQHt@",
    "pointCount": 163,
@@ -2486,7 +2288,63 @@
    ]
   },
   {
-   "id": "埼玉県:87",
+   "id": "埼玉県:80",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "飯能寄居線",
+   "ref": "30",
+   "highway": "primary",
+   "lengthKm": 3.49,
+   "curviness": 108.2,
+   "flow": 12.6,
+   "turnCount": 30,
+   "score": 45.1,
+   "baseScore": 45.1,
+   "spotCount": 0,
+   "polyline": "elqzE_kdqYLtHiBtFek@p]aCxDuEdRu@dBgCdCcHfA_Jm@yFjCuAtAgElJoT`OmEDuLuFyFW",
+   "pointCount": 17,
+   "start": [
+    35.975226,
+    139.291518
+   ],
+   "end": [
+    35.999239,
+    139.274327
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:81",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "福田鴻巣線",
+   "ref": "307",
+   "highway": "secondary",
+   "lengthKm": 3.45,
+   "curviness": 90,
+   "flow": 11.1,
+   "turnCount": 28,
+   "score": 43.8,
+   "baseScore": 43.8,
+   "spotCount": 0,
+   "polyline": "_ue{EkmqqYsAoFkDoE_CoFuAkGuHmM_FwOeA{OgDyJq@iOv@}EhD}EbB{A~G_ChBeB~[{g@rDaIhBeL",
+   "pointCount": 18,
+   "start": [
+    36.079039,
+    139.358464
+   ],
+   "end": [
+    36.075831,
+    139.389521
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:82",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "吉田太田部譲原線",
@@ -2496,8 +2354,8 @@
    "curviness": 796.2,
    "flow": 30.7,
    "turnCount": 341,
-   "score": 28.8,
-   "baseScore": 83.8,
+   "score": 43.6,
+   "baseScore": 98.6,
    "spotCount": 0,
    "polyline": "s}n{EsqroYzDZbGvFtB~CxC_@lBgDfAm@lBbAt@pB?~Df@~@QbC\\dCc@dJhAjBYPeAiBQiHeA{GQlAr@vFw@rCYk@b@cCqBiHeBrAwAvIeAbBoAHwDwCkEp@D`AnBzD?fB_@x@kCh@]v@A|GqAd@gB_@WdAhAxAPrAdCbBLtDs@bBUjEcFzAfAxBPxDgBdAeB|CPnBrAtDiBlCyBb@qAxAoAtJd@v@rCnA^bJ`B~ELhEfBzAbEt@hBpApFXlDpF~D]zEj@fCMdAa@bA}Bl@FDhD}@jDbIvEFbAcNnAqA]qCTsE|M@xA|DbD_AnA`@fDoA~@EhCq@dBTj@tBW[hGdA`EcArAA|BhExGpA[v@XVzAe@nC~FEn@tDd@ZnAg@dCwCZcBj@SfAfBzBP@nBr@vBpADjHdGbFoAnAb@@xAi@h@k@bHe@~AKzCjFHk@tCnAtAn@nEeBrAaBaAsBCWh@FjCoCjDRpB{@tAXlCYfAnAbDnAt@RbCeAtEnE`@fB[~FnBdAlBlBExB{Az@Cf@|AsFxCaCZoAwAeA?gB_AeB`DuBv@qCOmCoAgCLkBfBm@rDaAAq@kAmASi@vA}@NMlAqBb@",
    "pointCount": 165,
@@ -2516,37 +2374,63 @@
    ]
   },
   {
-   "id": "埼玉県:88",
+   "id": "埼玉県:83",
    "region": "saitama",
    "regionName": "埼玉県",
-   "name": "薄小森線",
-   "ref": "367",
-   "highway": "secondary",
-   "lengthKm": 13.64,
-   "curviness": 416,
-   "flow": 22.3,
-   "turnCount": 254,
-   "score": 25.3,
-   "baseScore": 70.3,
+   "name": "前橋長瀞線",
+   "ref": "13",
+   "highway": "primary",
+   "lengthKm": 3.69,
+   "curviness": 77.5,
+   "flow": 13,
+   "turnCount": 22,
+   "score": 43.4,
+   "baseScore": 43.4,
    "spotCount": 0,
-   "polyline": "skwzEyronYjEsAxGsNjBKd@a@PaBu@_A@y@rBgKf@aAhCBXs@U_Ij@_DQkGhAkD|AyApBmFvAk@~@mBVcGlCgCXyF|DgKt@oIvDkDlJ{PnIy\\bDoA|ByKpDeB?kA{BqAy@oAa@kBJ}A|B_AdIvAnE_G@}BmBuFOoCrB}GtCaBrAuCh@gIpBsIJ}HbA{Ei@mFBiCjEwLfDcAvDiIFaCcA_CbD{JdAgGBeAu@wCDgClB_EMoExAU\\g@QoA{BeCq@uHiCcA_FyD\\eCdEs@X_AOcA_KFgHsEq@{BXuAzB{CRuF~D{Au@gCAeEzBoF?aFtCuDeDmDPwDlBaK_BwIx@aGSoHVcFuA}Hn@eAc@{BoCeIsAkAwA_DqIgDu@cAiBoNJsD[qAf@iBKaEkB}AoB_@oGoGa@_JmHuAuJaGUc@HmCmAqIkEqMQuDi@{A{DwFmFmAmEaI{DqAaA}A",
-   "pointCount": 123,
+   "polyline": "qdb|EmmyoYbVnNpt@bN~BxBlHtSvYpTnIf@jF]|VvCxKeEfCsBdGmB",
+   "pointCount": 12,
    "start": [
-    36.005856,
-    138.857571
+    36.224894,
+    139.071745
    ],
    "end": [
-    36.000501,
-    138.971029
+    36.195457,
+    139.060786
    ],
-   "boost": -45,
    "tags": [
-    "forest",
-    "caution"
+    "flowing"
    ]
   },
   {
-   "id": "埼玉県:89",
+   "id": "埼玉県:84",
+   "region": "saitama",
+   "regionName": "埼玉県",
+   "name": "彩甲斐街道",
+   "ref": "140",
+   "highway": "trunk",
+   "lengthKm": 3.22,
+   "curviness": 112.8,
+   "flow": 11.7,
+   "turnCount": 31,
+   "score": 40.6,
+   "baseScore": 40.6,
+   "spotCount": 0,
+   "polyline": "iqp{Ee{dpY_@sLv@}FxNsZ~@sEj@eHk@eLkBsHgM_XAaB`AwEeAeMa@uShCgJhD}EpBs@fDGhFnAxER",
+   "pointCount": 19,
+   "start": [
+    36.134771,
+    139.130275
+   ],
+   "end": [
+    36.129607,
+    139.158177
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "埼玉県:85",
    "region": "saitama",
    "regionName": "埼玉県",
    "name": "南飯能線",
@@ -2556,8 +2440,8 @@
    "curviness": 339.1,
    "flow": 21.1,
    "turnCount": 105,
-   "score": 23.2,
-   "baseScore": 63.2,
+   "score": 34.3,
+   "baseScore": 74.3,
    "spotCount": 0,
    "polyline": "ck}yEcv}pYaMzSaI|G{@rDj@lIq@~DwM~MaApCiCrB}ArT|AzD|AfH]rDcAz@wBOwA`@uElG}CrCa@nDM`C`ChIpBf@`BgAf@DdFlIbEjApAjA~HfA\\~@^pMuKvF}FdA_CpERtHWjDZzE`HfHb@nAJjB}@zCjAzCk@hBFlFyBvFu@tGqBxBaGJwBxF{JdGeEdHeBDyB~@i@fAMnB",
    "pointCount": 54,
@@ -2576,5 +2460,5 @@
    ]
   }
  ],
- "hiddenCount": 81
+ "hiddenCount": 85
 }

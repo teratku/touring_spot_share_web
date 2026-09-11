@@ -26,7 +26,9 @@ const { toAppManeuver } = require("../../admin/lib/navManeuver");
  * @returns {{status:number, body:object}}
  */
 async function buildRouteResponse(body, deps = {}) {
-  const { from, to, vias, variant, displacement, avoidHighways, avoidTolls,
+  // ⚠️ `excludeTolls` を取り出し忘れないこと。下で渡しているのに取り出しておらず
+  //    ReferenceError で窓口ごと500を返した前例がある（`stopAt` で同じことをやった）
+  const { from, to, vias, variant, displacement, avoidHighways, avoidTolls, excludeTolls,
           arriveOnNearSide, roadNameStyle, announce, guidance,
           at, isHoliday, stopAt, heading, headingTolerance, viaHeadings } = body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
@@ -47,7 +49,8 @@ async function buildRouteResponse(body, deps = {}) {
       // ⚠️ おすすめ道路の入口に「道に沿った向き」を渡すと、行って戻らず回り込む
       viaHeadings,
       variant: variant || "normal",
-      displacement, avoidHighways, avoidTolls, arriveOnNearSide, roadNameStyle,
+      displacement, avoidHighways, avoidTolls, excludeTolls,
+      arriveOnNearSide, roadNameStyle,
       withRoadClass: false,
       baseUrl: deps.baseUrl,
       restrictionsFor: deps.restrictionsFor,
@@ -77,6 +80,11 @@ async function buildRouteResponse(body, deps = {}) {
     durationSeconds: step.durationSeconds,
     isCurvyAhead: !!step.isCurvyAhead,
     roadKind: step.roadKind,
+    //: **その指示のうち何mが有料か。** 指示の有料の旗は一部でも有料なら丸ごう立つ
+    //  ので、画面の「通る道」が4倍に膨れていた（実測 6.8km → 28.4km）
+    tollMeters: step.tollMeters,
+    // ⚠️ 指示の `highway` の旗は一部でも立つ。実測: 27.2kmの指示のうち高速は9.2km
+    expresswayMeters: step.expresswayMeters,
     beginIndex: step.beginIndex,
     endIndex: step.endIndex,
     // ⚠️ **番号で決めないこと。** 最後の1つだけを終点にすると、途中の
@@ -95,6 +103,20 @@ async function buildRouteResponse(body, deps = {}) {
         polyline: encodePolyline(route.points),
         steps,
         uTurns: route.uTurns,
+        // ⚠️ **高速・有料・下道を分けたまま返すこと。** アプリはこれを読んで
+        //    「有料」の札を出す。応答に入れ忘れていたため、自前エンジンでは
+        //    その札が一度も出ていなかった（`ValhallaRouteService.hasTolls`）
+        kindMeters: route.kindMeters,
+        // ⚠️ **線を塗り分けるための本当の区間。** 指示の旗で塗ると、
+        //    一部が高速なだけの国道まで高速の色になる（実機で報告）
+        kindSpans: route.kindSpans,
+        // ⚠️ **塞げずに残った「無駄な輪」の場所。** 経由地（おすすめ道路の出入口）が
+        //    輪になっていると塞げないので、アプリが原因の道を外して組み立て直す
+        wastefulLoopSpans: route.wastefulLoopSpans,
+        //: **避けきれなかった有料の距離。** `use_tolls: 0` は重みであって禁止ではない
+        //  ので、代替路が無ければ通る。⚠️ **黙って通させないために必ず返す**
+        //  （実機で報告: 有料を避ける設定なのに雁坂トンネル6.8kmを通り、画面は無言だった）
+        tollUnavoidableMeters: route.tollUnavoidableMeters,
         ferryMeters: route.ferryMeters,
         arrivedSide: route.arrivedSide,
         // ⚠️ **避けきれなかった規制は必ず返す。** 黙って通させない

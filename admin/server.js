@@ -928,6 +928,11 @@ app.post("/api/nav/route", async (req, res) => {
         })),
         // 走らせる前に知っておきたいこと
         uTurns: route.uTurns,
+        //: 小道に入って戻る形。見つけた数と、塞いで消せた数（調べもの用）
+        wastefulLoops: route.wastefulLoops,
+        wastefulLoopsDropped: route.wastefulLoopsDropped,
+        //: 塞げずに残った輪の場所。アプリが原因のおすすめ道路を外すのに使う
+        wastefulLoopSpans: route.wastefulLoopSpans,
         // ⚠️ **返す線そのものから数え直すこと。** 始末をした結果を持ち回ると、
         //    始末を通らない道筋（おすすめ道路なしのとき）で**いつも0と嘘をつく**。
         //    ここが嘘だと「往復していないはず」で受け入れてしまう
