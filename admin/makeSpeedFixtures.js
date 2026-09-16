@@ -1,3 +1,6 @@
+// ⚠️ **`test/` に置かないこと。** Node 20 の `node --test test/` は、そこにある `.js` を
+//    すべて実行する。置いてあったため、検査を回すたびに比べる土台を作り直していた
+//    （Valhalla を焼き直したあとなら、比較の土台が消えるところだった）
 const fs=require("fs");
 const {routeWithValhalla, speedSpans, BASE}=require("/Users/teradatakumi/Documents/touring_spot_share_web/admin/lib/valhallaRoute");
 const 区間=[
@@ -36,7 +39,7 @@ const 区間=[
  fs.writeFileSync("/Users/teradatakumi/Documents/touring_spot_share_web/admin/test/fixtures-speed-sections.json",
    JSON.stringify({
      "⚠️ なぜ線を焼き込むか":"焼き直しの前後で同じ線を測るため。線を固定しないと「経路が変わった」と「速度が変わった」が混ざる",
-     "⚠️ 作り直し方":"node test/makeSpeedFixtures.js（Valhalla を焼き直したあとに作り直してはいけない。比較の土台が消える）",
+     "⚠️ 作り直し方":"admin で node makeSpeedFixtures.js（Valhalla を焼き直したあとに作り直してはいけない。比較の土台が消える）",
      作成日:new Date().toISOString().slice(0,10),
      costing:"motorcycle（displacement: large）",
      sections:out}, null, 1));

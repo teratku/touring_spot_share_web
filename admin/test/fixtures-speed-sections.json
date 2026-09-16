@@ -1,6 +1,6 @@
 {
  "⚠️ なぜ線を焼き込むか": "焼き直しの前後で同じ線を測るため。線を固定しないと「経路が変わった」と「速度が変わった」が混ざる",
- "⚠️ 作り直し方": "node test/makeSpeedFixtures.js（Valhalla を焼き直したあとに作り直してはいけない。比較の土台が消える）",
+ "⚠️ 作り直し方": "admin で node makeSpeedFixtures.js（Valhalla を焼き直したあとに作り直してはいけない。比較の土台が消える）",
  "作成日": "2026-09-11",
  "costing": "motorcycle（displacement: large）",
  "sections": [
