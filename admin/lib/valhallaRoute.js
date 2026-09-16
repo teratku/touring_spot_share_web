@@ -27,13 +27,14 @@
  */
 "use strict";
 
-const { spokenRoadName, intersectionName } = require("./navName");
+const { spokenRoadName, intersectionName, towardNames } = require("./navName");
 const { shouldSayFollowTheRoad } = require("./navGuide");
 const routeLoops = require("./routeLoops");
 const { applicable: applicableRestrictions, hitsOnRoute, excludePolygonsFor }
   = require("./restrictionAvoid");
 
 const { encode } = require("./polyline");
+const { applyRealisticTime } = require("./realisticTime");
 
 const BASE = process.env.VALHALLA_URL || "http://localhost:8002";
 //: 案内文の既定の言語。⚠️ 地域を増やすときは呼ぶ側から渡すこと
@@ -557,6 +558,266 @@ async function roadClassSpans(encodedShape, costing, baseUrl) {
  *   - language  案内文の言語（既定 "ja-JP"）
  *   - baseUrl   Valhalla の場所（既定は環境変数 VALHALLA_URL）
  */
+//: 経路の線を1本につなぐ（区間をまたいで平らにする）。⚠️ 番号は使わない
+const pointsOfTrip = (t) => (t.legs || []).flatMap((leg) => decode6(leg.shape));
+
+const ferryMetersOf = (t) => (t.legs || []).reduce((a, leg) =>
+    a + (leg.maneuvers || []).filter((m) => m.type === FERRY_MANEUVER)
+      .reduce((b, m) => b + (m.length || 0) * 1000, 0), 0);
+
+/**
+ * 引けた経路（`trip`）をアプリ・画面が読める形に組み立てる。
+ *
+ * ⚠️ **ここは引き直しをしない。** 引き直し（船・高速・有料・規制・無駄な輪・
+ *    左側に到着）は `routeWithValhalla` の仕事で、その結果が `trip`。
+ *    分けてあるのは、**代替ルートにも同じ組み立てをかける**ため。
+ * ⚠️ 診断の数（何回引き直したか等）は本命のもの。代替には空を渡す
+ */
+async function buildResult(trip, opts, costing, variantOptions, 診断) {
+  const points = [];
+  const steps = [];
+  // ⚠️ **区間ごとの番号の対応表を残すこと。** `/trace_attributes` は線1本ぶんしか
+  //    測れないので、測った結果を全体の番号へ直すのに要る（`spansOverLegs`）
+  const legMaps = [];
+  for (const leg of trip.legs) {
+    // ⚠️ 区間ごとに shape が別々。区間をまたぐ番号として使えないので、
+    //    いまの points の長さを足してから記録する
+    // ⚠️ **区間の切れ目を覚えること。** ここで平らに繋ぐと立ち寄り先が消え、
+    //    アプリが「経由地に着いた」と言えなくなる（実機で報告: 立ち寄り先を
+    //    設定したのに経路に出ず、通過しても何も起きなかった）
+    const stepsBeforeLeg = steps.length;
+    const shape = decode6(leg.shape);
+    // ⚠️ **足す前の長さを番号の起点にしないこと。**
+    //    区間の先頭の点は前の区間の終点と同じで、下の重複除きで**足されない**。
+    //    起点を points.length にしていたため2区間目以降が丸ごと1つずれ、
+    //    最後の2指示がアプリで範囲外になって**黙って捨てられていた**
+    //    （`ValhallaRouteService.parseStep` は `end < full.count` でないと nil）。
+    //    実測（新座→ドンキ→オギノパン）: 点1868に対し最大の番号1868。
+    //    捨てられた中に1,618mの走る指示があり、**最後の1.6kmが無案内**だった。
+    //    番号の対応表を作れば、区間の中に重なった点があっても狂わない
+    const at = [];
+    for (const p of shape) {
+      const tail = points[points.length - 1];
+      if (!tail || tail[0] !== p[0] || tail[1] !== p[1]) points.push(p);
+      at.push(points.length - 1);
+    }
+    const indexOf = (i) => (at[i] !== undefined ? at[i] : points.length - 1);
+    legMaps.push(at);
+    for (const m of leg.maneuvers) {
+      steps.push({
+        maneuver: MANEUVER[m.type] || "straight",
+        valhallaType: m.type,
+        instruction: m.instruction || "",
+        // ⚠️ **表示用。** 番号もローマ字も全部つなげてある。読み上げには使わない
+        roadName: (m.street_names || []).join("／"),
+        // ⚠️ **読み上げ名を後から決め直すために持ち回る。**
+        //    `roadName` では足りない（`begin_street_names` が落ちる）
+        roadNames: [...new Set([...(m.begin_street_names || []),
+                                ...(m.street_names || [])])],
+        // ⚠️ **読み上げ用は別。** 番号の形（「県道21号線」）に直すこともある。
+        //    ⚠️ **県が分かってからでないと決められない**ので、下の admin の後で入れる
+        spokenRoad: null,
+        // 生の名前。読み上げ名を決め直すために持ち回る
+        _maneuver: m,
+        // ⚠️ 交差点名は `sign` に入らない。読み上げ文の中から取り出している
+        intersectionName: intersectionName(m),
+        // ⚠️ **標識の「〇〇方面」。** Valhalla は返していたのに、ここで捨てていた。
+        //    英字も含めて渡し、どれを読むかはアプリが言語で決める（`navName.towardNames`）
+        towardNames: towardNames(m),
+        // ⚠️ **曲がりくねった道で「直進します」と言わないための印。**
+        //    この指示のあいだに走る線の曲率で決める（250度/km以上）
+        isCurvyAhead: shouldSayFollowTheRoad(
+          shape.slice(m.begin_shape_index || 0, (m.end_shape_index || 0) + 1)),
+        distanceMeters: Math.round((m.length || 0) * 1000),
+        durationSeconds: Math.round(m.time || 0),
+        beginIndex: indexOf(m.begin_shape_index || 0),
+        endIndex: indexOf(m.end_shape_index || 0),
+        // ⚠️ **道の種別は Valhalla が maneuver ごとに教えてくれる。**
+        //    道路名から「自動車道」を探すような当て推量をしないこと
+        //    （実測: highway 3区間65.9km / toll 7区間70.6km を正しく拾えた）
+        roadKind: m.highway ? "expressway" : (m.toll ? "toll" : "surface"),
+      });
+    }
+    // ⚠️ **この区間の最後の指示が「着いた」にあたる。** Valhalla は区間ごとに
+    //    到着の maneuver を返すので、その1つに印を付ける
+    // ⚠️ `stepsBeforeLeg` との比較が効くのは「指示が1つも無い区間」のときだけ
+    //    （そのときは前の区間の印を付け直さない）。答えは変わらないので、
+    //    テストでは落ちない——**用心のための条件**と分かるように残す
+    if (steps.length > stepsBeforeLeg) steps[steps.length - 1].isLegEnd = true;
+
+  }
+
+  // ⚠️ **読み上げに要る**（「県道36号線」の「県道」）。切るときは
+  //    `withAdmins: false` を渡すこと。実測30msなので既定では取る
+  const admins = opts.withAdmins === false ? null
+    : await spansOverLegs(trip, legMaps, (sh) => adminSpans(sh, costing, opts.baseUrl));
+  if (admins) {
+    for (const step of steps) {
+      const span = admins.find((a) => step.beginIndex >= a.begin && step.beginIndex <= a.end)
+        || admins.find((a) => step.beginIndex <= a.end);
+      step.prefecture = span ? span.state : null;
+    }
+  }
+  // ⚠️ **県が決まってから読み上げ名を決める**（「県道」か「都道」かが変わる）
+  for (const step of steps) {
+    step.spokenRoad = spokenRoadName(step._maneuver,
+      { prefecture: step.prefecture, style: opts.roadNameStyle });
+    delete step._maneuver;
+  }
+
+  // ⚠️ **所要時間を実際の走りに近づける。** Valhalla は maxspeed 未登録の道に
+  //    90km/h などを当てるので、下道の指示に上限をかける。
+  //    ⚠️ **ここでやること**（指示が出揃い、まだ合計を作る前）。
+  //       合計は下で指示の総和から作り直すので、順番を入れ替えないこと
+  const 時間補正 = applyRealisticTime(steps);
+
+  let classSpans = opts.withRoadClass === false ? null
+    : await spansOverLegs(trip, legMaps, (sh) => roadClassSpans(sh, costing, opts.baseUrl));
+  // ⚠️ **番号を線の範囲に収めること。** `/trace_attributes` は最後の辺の
+  //    `end_shape_index` に「点の数」を返すことがあり（実測: 線1,203点に対し1203）、
+  //    そのまま slice すると末尾が1点足りない線になる。
+  //    ⚠️ points は区間をつなぐときに重複を落としているので、
+  //    trace 側の番号とは1つずれうる。ここで必ず丸める
+  if (classSpans) {
+    const lastIndex = points.length - 1;
+    classSpans = classSpans.map((sp) => ({
+      ...sp,
+      begin: Math.max(0, Math.min(sp.begin, lastIndex)),
+      end: Math.max(0, Math.min(sp.end, lastIndex)),
+    })).filter((sp) => sp.end > sp.begin);
+  }
+
+  // ⚠️ **有料・高速が出てくるときだけ測る。** 配信では `withRoadClass: false` で
+  //    種別の内訳を作らないので（通信を減らすため）、そのままだと0になる。
+  //    かといって毎回測ると `/trace_attributes` が1回増える。
+  //    下道だけの経路には要らないので、そこは呼ばない。
+  // ⚠️ **`avoidTolls` で絞らないこと。** 避ける指定の有無に関わらず、
+  //    線を塗り分けるのに要る（指示の旗は一部でも立つので当てにならない）
+  let tollSpans = classSpans;
+  if (!tollSpans && steps.some((x) => x.roadKind !== "surface")) {
+    tollSpans = await spansOverLegs(trip, legMaps,
+                                    (sh) => roadClassSpans(sh, costing, opts.baseUrl));
+  }
+  const tollMeters = (tollSpans || []).reduce((a, sp) => a + (sp.toll ? sp.meters : 0), 0);
+
+  // ⚠️ **線を塗り分けるのに使う「本当の区間」。**
+  //    指示の `highway` / `toll` の旗は**一部でも含めば丸ごと立つ**。
+  //    実測（新座→道の駅大滝温泉→広瀬ダム・251cc）: 「140を直進です 27.2km」の
+  //    中身は **motorway 9.2km ＋ trunk 17.9km**。旗のまま塗ると、普通の国道140号
+  //    17.9km まで高速の色になる（実機で報告:「高速を避けているのに緑の線が出る」）。
+  //    ⚠️ **指示は分割できない**（曲がり方が狂う）ので、線のほうを区間で塗る。
+  const kindOfSpan = (sp) =>
+    // ⚠️ 高速が先。有料の高速は「高速」と呼ぶ（指示の旗と同じ決め方に揃える）
+    (sp.roadClass === "motorway" ? "expressway" : (sp.toll ? "toll" : "surface"));
+  const kindSpans = [];
+  for (const sp of tollSpans || []) {
+    const kind = kindOfSpan(sp);
+    const last = kindSpans[kindSpans.length - 1];
+    if (last && last.kind === kind && last.end === sp.begin) {
+      last.end = sp.end;
+      last.meters += sp.meters;
+    } else {
+      kindSpans.push({ begin: sp.begin, end: sp.end, kind, meters: sp.meters });
+    }
+  }
+
+  // ⚠️ **指示ごとに「そのうち何mが有料か」を添える。**
+  //    指示の有料の旗は、一部でも有料を含むと丸ごう立つ。実測: 実際6.8kmの
+  //    雁坂トンネルを含む28.4kmの指示が丸ごと「有料」になり、画面の「通る道」が
+  //    4倍に見えていた。**指示は分割できない**（曲がり方が狂う）ので、内訳を添える。
+  //    ⚠️ **番号の幅を距離の代わりに使わないこと。** 線の番号は距離に比例しない
+  //       （トンネルは直線なので点が少ない。実測: 6,811mの雁坂トンネルが
+  //        番号では17番ぶんしかなく、按分すると599mになった）。
+  //       **区間が持っている距離（`meters`）を使い、重なった割合だけ取る。**
+  if (tollSpans) {
+    const 重なり = (st, 対象) => {
+      let m = 0;
+      for (const sp of 対象) {
+        const 幅 = Math.max(1, sp.end - sp.begin);
+        const from = Math.max(st.beginIndex, sp.begin);
+        const to = Math.min(st.endIndex, sp.end);
+        if (to > from) m += sp.meters * ((to - from) / 幅);
+      }
+      return Math.min(st.distanceMeters, Math.round(m));
+    };
+    const 有料 = kindSpans.filter((sp) => sp.kind === "toll");
+    const 高速 = kindSpans.filter((sp) => sp.kind === "expressway");
+    for (const st of steps) {
+      if (st.beginIndex == null || st.endIndex == null) continue;
+      st.tollMeters = 重なり(st, 有料);
+      // ⚠️ 高速も同じ。旗のままだと国道17.9kmが高速に見える
+      st.expresswayMeters = 重なり(st, 高速);
+    }
+  }
+
+  return {
+    variant: opts.variant || "normal",
+    // ⚠️ **表示名は返さない。** 呼ぶ側が作る。ここで日本語を返すと、
+    //    APIを外に出したときに日本語が混ざる（`variant` は鍵なので言語に依存しない）
+    costing,
+    //: 実際に効いた設定（画面で確かめられるように）
+    costingOptions: variantOptions,
+    // ⚠️ 何回引き直したか。画面で「国道を通すために緩めた」が見えるように
+    highwayTries: 診断.highwayTries,
+    // 船を外すために何回引き直したか／それでも残った船の距離（避けられない航路）
+    ferryTries: 診断.ferryTries,
+    ferryMeters: Math.round(ferryMetersOf(trip)),
+    // 規制を避けるために何回引き直したか／それでも残った規制
+    restrictionTries: 診断.restrictionTries,
+    // ⚠️ **残ったものは黙って捨てない。** 画面とアプリで警告に使う
+    restrictionHits: 診断.restrictionHits,
+    restrictionSkipped: 診断.restrictionSkipped,
+    restrictionPrefectures: 診断.restrictionPrefectures,
+    // 目的地のどちら側に着いたか（"left" / "right" / null）。
+    // ⚠️ 指定しても null で返ることがある（上の注意書き参照）
+    arrivedSide: ((trip.locations || [])[(trip.locations || []).length - 1] || {})
+      .side_of_street || null,
+    // 側の指定を試したか／遠回りが大きすぎて諦めたか
+    sideTried: 診断.sideTried, sideGaveUp: 診断.sideGaveUp,
+    displacement: opts.displacement || null,
+    lengthMeters: Math.round(trip.summary.length * 1000),
+    // ⚠️ **`trip.summary.time` をそのまま返さないこと。** 上で指示ごとに
+    //    時間を直しているので、合計も総和から作らないと内訳と合わなくなる
+    durationSeconds: steps.reduce((a, st) => a + (Number(st.durationSeconds) || 0), 0),
+    //: 補正の中身（どれだけ伸ばしたか）。実機との突き合わせ用
+    timeAdjust: { ...時間補正, rawSeconds: Math.round(trip.summary.time) },
+    points,
+    polyline: encode(points),     // 5桁。このツールの他の線と揃える
+    steps,
+    uTurns: steps.filter((s) => s.maneuver.startsWith("uturn")).length,
+    //: 小道に入って戻ってくる形。見つけた数と、塞いで消せた数
+    wastefulLoops: 診断.wastefulLoops,
+    wastefulLoopsDropped: 診断.wastefulLoopsDropped,
+    wastefulLoopSpans: 診断.wastefulLoopSpans,
+    // ⚠️ 「ふつう」がほぼ高速だった、のような事故に気づけるよう内訳を返す
+    //    （実測: バイクの「ふつう」は77.8km中65.9kmが高速だった）
+    //: 道路クラスごとの区間（色分け用）。取れなければ null
+    classSpans,
+    //: **避けきれなかった有料の距離。** `use_tolls: 0` は重みであって禁止ではない
+    //  ので、代替路が無ければ通る。通ったことを黙らせないために返す
+    //  ⚠️ 区間(edge)から数える。指示の旗では4倍に膨れる（実測 6.8km → 28.4km）
+    tollUnavoidableMeters: tollMeters,
+    //: クラスごとの距離
+    classMeters: (classSpans || []).reduce((acc, sp) => {
+      acc[sp.roadClass] = (acc[sp.roadClass] || 0) + sp.meters;
+      return acc;
+    }, {}),
+    //: 線を塗り分けるための本当の区間（`begin`/`end` は `points` の番号）
+    kindSpans,
+    // ⚠️ **区間から数えること。** 指示の旗から数えると、一部が高速なだけの
+    //    27.2kmの指示が丸ごと高速に数えられる（実測: 本当は9.2km）
+    kindMeters: kindSpans.length
+      ? kindSpans.reduce((acc, sp) => {
+        acc[sp.kind] += sp.meters;
+        return acc;
+      }, { expressway: 0, toll: 0, surface: 0 })
+      : steps.reduce((acc, x) => {
+        acc[x.roadKind] += x.distanceMeters;
+        return acc;
+      }, { expressway: 0, toll: 0, surface: 0 }),
+  };
+}
+
 async function routeWithValhalla(from, to, opts = {}) {
   const variant = VARIANTS[opts.variant] || VARIANTS.normal;
   // ⚠️ **排気量が指定されたら costing もそれで決める。**
@@ -659,6 +920,17 @@ async function routeWithValhalla(from, to, opts = {}) {
   if (opts.excludePolygons && opts.excludePolygons.length) {
     body.exclude_polygons = opts.excludePolygons;
   }
+  // ⚠️ **別の道も一緒に頼む。** Google のように選ばせるため。
+  //    ⚠️ **立ち寄り先があると返らない**（Valhalla の性質。実測で1本だけ）。
+  //       頼んでも無駄なので、2点のときだけ付ける。
+  //       ⚠️ **この条件を外しても検査は落ちない**——Valhalla 側が返さないので
+  //          振る舞いが変わらない。要らない頼みを送らないための用心
+  //    ⚠️ **塞ぎと併用できる**（実測: 塞いだ場所を3本とも通らず、
+  //       本命との重なりは33%だった）。だから代替も規制回避を通っている。
+  //    ⚠️ 引き直しのたびに一緒に返ってくるが、使うのは最後の1回ぶんだけ
+  if (opts.alternates > 0 && locations.length === 2) {
+    body.alternates = opts.alternates;
+  }
 
   const ask = async () => {
     // ⚠️ **URLを固定しないこと。** 地域ごとに Valhalla を分ける前提
@@ -676,7 +948,6 @@ async function routeWithValhalla(from, to, opts = {}) {
     (t.legs || []).some((leg) => (leg.maneuvers || []).some((m) => m.highway));
 
   /** 経路の点。規制と重なっているかを測るのに使う */
-  const pointsOfTrip = (t) => (t.legs || []).flatMap((leg) => decode6(leg.shape));
   const perimeterOfRings = (rings) => rings.reduce((a, r) => a + perimeterOfRing(r), 0);
   const perimeterOfRing = (ring) => {
     let total = 0;
@@ -691,9 +962,6 @@ async function routeWithValhalla(from, to, opts = {}) {
 
   /** その経路が船に乗っているか */
   const ridesFerry = (t) => ferryMetersOf(t) > 0;
-  const ferryMetersOf = (t) => (t.legs || []).reduce((a, leg) =>
-    a + (leg.maneuvers || []).filter((m) => m.type === FERRY_MANEUVER)
-      .reduce((b, m) => b + (m.length || 0) * 1000, 0), 0);
   /** 点のまわりの小さな四角。ここを通れなくする */
   const boxAround = (p) => {
     const d = FERRY_EXCLUDE_DEGREES;
@@ -1032,236 +1300,28 @@ async function routeWithValhalla(from, to, opts = {}) {
     return { error: String(message) };
   }
 
-  const trip = json.trip;
-  const points = [];
-  const steps = [];
-  // ⚠️ **区間ごとの番号の対応表を残すこと。** `/trace_attributes` は線1本ぶんしか
-  //    測れないので、測った結果を全体の番号へ直すのに要る（`spansOverLegs`）
-  const legMaps = [];
-  for (const leg of trip.legs) {
-    // ⚠️ 区間ごとに shape が別々。区間をまたぐ番号として使えないので、
-    //    いまの points の長さを足してから記録する
-    // ⚠️ **区間の切れ目を覚えること。** ここで平らに繋ぐと立ち寄り先が消え、
-    //    アプリが「経由地に着いた」と言えなくなる（実機で報告: 立ち寄り先を
-    //    設定したのに経路に出ず、通過しても何も起きなかった）
-    const stepsBeforeLeg = steps.length;
-    const shape = decode6(leg.shape);
-    // ⚠️ **足す前の長さを番号の起点にしないこと。**
-    //    区間の先頭の点は前の区間の終点と同じで、下の重複除きで**足されない**。
-    //    起点を points.length にしていたため2区間目以降が丸ごと1つずれ、
-    //    最後の2指示がアプリで範囲外になって**黙って捨てられていた**
-    //    （`ValhallaRouteService.parseStep` は `end < full.count` でないと nil）。
-    //    実測（新座→ドンキ→オギノパン）: 点1868に対し最大の番号1868。
-    //    捨てられた中に1,618mの走る指示があり、**最後の1.6kmが無案内**だった。
-    //    番号の対応表を作れば、区間の中に重なった点があっても狂わない
-    const at = [];
-    for (const p of shape) {
-      const tail = points[points.length - 1];
-      if (!tail || tail[0] !== p[0] || tail[1] !== p[1]) points.push(p);
-      at.push(points.length - 1);
-    }
-    const indexOf = (i) => (at[i] !== undefined ? at[i] : points.length - 1);
-    legMaps.push(at);
-    for (const m of leg.maneuvers) {
-      steps.push({
-        maneuver: MANEUVER[m.type] || "straight",
-        valhallaType: m.type,
-        instruction: m.instruction || "",
-        // ⚠️ **表示用。** 番号もローマ字も全部つなげてある。読み上げには使わない
-        roadName: (m.street_names || []).join("／"),
-        // ⚠️ **読み上げ名を後から決め直すために持ち回る。**
-        //    `roadName` では足りない（`begin_street_names` が落ちる）
-        roadNames: [...new Set([...(m.begin_street_names || []),
-                                ...(m.street_names || [])])],
-        // ⚠️ **読み上げ用は別。** 番号の形（「県道21号線」）に直すこともある。
-        //    ⚠️ **県が分かってからでないと決められない**ので、下の admin の後で入れる
-        spokenRoad: null,
-        // 生の名前。読み上げ名を決め直すために持ち回る
-        _maneuver: m,
-        // ⚠️ 交差点名は `sign` に入らない。読み上げ文の中から取り出している
-        intersectionName: intersectionName(m),
-        // ⚠️ **曲がりくねった道で「直進します」と言わないための印。**
-        //    この指示のあいだに走る線の曲率で決める（250度/km以上）
-        isCurvyAhead: shouldSayFollowTheRoad(
-          shape.slice(m.begin_shape_index || 0, (m.end_shape_index || 0) + 1)),
-        distanceMeters: Math.round((m.length || 0) * 1000),
-        durationSeconds: Math.round(m.time || 0),
-        beginIndex: indexOf(m.begin_shape_index || 0),
-        endIndex: indexOf(m.end_shape_index || 0),
-        // ⚠️ **道の種別は Valhalla が maneuver ごとに教えてくれる。**
-        //    道路名から「自動車道」を探すような当て推量をしないこと
-        //    （実測: highway 3区間65.9km / toll 7区間70.6km を正しく拾えた）
-        roadKind: m.highway ? "expressway" : (m.toll ? "toll" : "surface"),
-      });
-    }
-    // ⚠️ **この区間の最後の指示が「着いた」にあたる。** Valhalla は区間ごとに
-    //    到着の maneuver を返すので、その1つに印を付ける
-    // ⚠️ `stepsBeforeLeg` との比較が効くのは「指示が1つも無い区間」のときだけ
-    //    （そのときは前の区間の印を付け直さない）。答えは変わらないので、
-    //    テストでは落ちない——**用心のための条件**と分かるように残す
-    if (steps.length > stepsBeforeLeg) steps[steps.length - 1].isLegEnd = true;
-
-  }
-
-  // ⚠️ **読み上げに要る**（「県道36号線」の「県道」）。切るときは
-  //    `withAdmins: false` を渡すこと。実測30msなので既定では取る
-  const admins = opts.withAdmins === false ? null
-    : await spansOverLegs(trip, legMaps, (sh) => adminSpans(sh, costing, opts.baseUrl));
-  if (admins) {
-    for (const step of steps) {
-      const span = admins.find((a) => step.beginIndex >= a.begin && step.beginIndex <= a.end)
-        || admins.find((a) => step.beginIndex <= a.end);
-      step.prefecture = span ? span.state : null;
+  const result = await buildResult(json.trip, opts, costing, variantOptions, {
+    highwayTries, ferryTries, restrictionTries, restrictionHits, restrictionSkipped,
+    restrictionPrefectures, sideTried, sideGaveUp,
+    wastefulLoops, wastefulLoopsDropped, wastefulLoopSpans,
+  });
+  // ⚠️ **代替も同じ塞ぎを通っている。** 塞ぎ（規制・有料・無駄な輪）は `body` に
+  //    溜めてあり、最後の引き直しで一緒に返ってくるので、代替も安全側になる。
+  //    実測: 塞いだ場所を3本とも通らず、本命との重なりは33%だった。
+  // ⚠️ **立ち寄り先があると代替は返らない**（Valhalla の性質。実測で1本だけ）
+  if (Array.isArray(json.alternates) && json.alternates.length) {
+    result.alternates = [];
+    for (const a of json.alternates) {
+      if (!a || !a.trip) continue;
+      result.alternates.push(await buildResult(a.trip, opts, costing, variantOptions, {
+        highwayTries: 0, ferryTries: 0, restrictionTries: 0, restrictionHits: [],
+        restrictionSkipped: [], restrictionPrefectures: [],
+        sideTried: false, sideGaveUp: false,
+        wastefulLoops: 0, wastefulLoopsDropped: 0, wastefulLoopSpans: [],
+      }));
     }
   }
-  // ⚠️ **県が決まってから読み上げ名を決める**（「県道」か「都道」かが変わる）
-  for (const step of steps) {
-    step.spokenRoad = spokenRoadName(step._maneuver,
-      { prefecture: step.prefecture, style: opts.roadNameStyle });
-    delete step._maneuver;
-  }
-
-  let classSpans = opts.withRoadClass === false ? null
-    : await spansOverLegs(trip, legMaps, (sh) => roadClassSpans(sh, costing, opts.baseUrl));
-  // ⚠️ **番号を線の範囲に収めること。** `/trace_attributes` は最後の辺の
-  //    `end_shape_index` に「点の数」を返すことがあり（実測: 線1,203点に対し1203）、
-  //    そのまま slice すると末尾が1点足りない線になる。
-  //    ⚠️ points は区間をつなぐときに重複を落としているので、
-  //    trace 側の番号とは1つずれうる。ここで必ず丸める
-  if (classSpans) {
-    const lastIndex = points.length - 1;
-    classSpans = classSpans.map((sp) => ({
-      ...sp,
-      begin: Math.max(0, Math.min(sp.begin, lastIndex)),
-      end: Math.max(0, Math.min(sp.end, lastIndex)),
-    })).filter((sp) => sp.end > sp.begin);
-  }
-
-  // ⚠️ **有料・高速が出てくるときだけ測る。** 配信では `withRoadClass: false` で
-  //    種別の内訳を作らないので（通信を減らすため）、そのままだと0になる。
-  //    かといって毎回測ると `/trace_attributes` が1回増える。
-  //    下道だけの経路には要らないので、そこは呼ばない。
-  // ⚠️ **`avoidTolls` で絞らないこと。** 避ける指定の有無に関わらず、
-  //    線を塗り分けるのに要る（指示の旗は一部でも立つので当てにならない）
-  let tollSpans = classSpans;
-  if (!tollSpans && steps.some((x) => x.roadKind !== "surface")) {
-    tollSpans = await spansOverLegs(trip, legMaps,
-                                    (sh) => roadClassSpans(sh, costing, opts.baseUrl));
-  }
-  const tollMeters = (tollSpans || []).reduce((a, sp) => a + (sp.toll ? sp.meters : 0), 0);
-
-  // ⚠️ **線を塗り分けるのに使う「本当の区間」。**
-  //    指示の `highway` / `toll` の旗は**一部でも含めば丸ごと立つ**。
-  //    実測（新座→道の駅大滝温泉→広瀬ダム・251cc）: 「140を直進です 27.2km」の
-  //    中身は **motorway 9.2km ＋ trunk 17.9km**。旗のまま塗ると、普通の国道140号
-  //    17.9km まで高速の色になる（実機で報告:「高速を避けているのに緑の線が出る」）。
-  //    ⚠️ **指示は分割できない**（曲がり方が狂う）ので、線のほうを区間で塗る。
-  const kindOfSpan = (sp) =>
-    // ⚠️ 高速が先。有料の高速は「高速」と呼ぶ（指示の旗と同じ決め方に揃える）
-    (sp.roadClass === "motorway" ? "expressway" : (sp.toll ? "toll" : "surface"));
-  const kindSpans = [];
-  for (const sp of tollSpans || []) {
-    const kind = kindOfSpan(sp);
-    const last = kindSpans[kindSpans.length - 1];
-    if (last && last.kind === kind && last.end === sp.begin) {
-      last.end = sp.end;
-      last.meters += sp.meters;
-    } else {
-      kindSpans.push({ begin: sp.begin, end: sp.end, kind, meters: sp.meters });
-    }
-  }
-
-  // ⚠️ **指示ごとに「そのうち何mが有料か」を添える。**
-  //    指示の有料の旗は、一部でも有料を含むと丸ごう立つ。実測: 実際6.8kmの
-  //    雁坂トンネルを含む28.4kmの指示が丸ごと「有料」になり、画面の「通る道」が
-  //    4倍に見えていた。**指示は分割できない**（曲がり方が狂う）ので、内訳を添える。
-  //    ⚠️ **番号の幅を距離の代わりに使わないこと。** 線の番号は距離に比例しない
-  //       （トンネルは直線なので点が少ない。実測: 6,811mの雁坂トンネルが
-  //        番号では17番ぶんしかなく、按分すると599mになった）。
-  //       **区間が持っている距離（`meters`）を使い、重なった割合だけ取る。**
-  if (tollSpans) {
-    const 重なり = (st, 対象) => {
-      let m = 0;
-      for (const sp of 対象) {
-        const 幅 = Math.max(1, sp.end - sp.begin);
-        const from = Math.max(st.beginIndex, sp.begin);
-        const to = Math.min(st.endIndex, sp.end);
-        if (to > from) m += sp.meters * ((to - from) / 幅);
-      }
-      return Math.min(st.distanceMeters, Math.round(m));
-    };
-    const 有料 = kindSpans.filter((sp) => sp.kind === "toll");
-    const 高速 = kindSpans.filter((sp) => sp.kind === "expressway");
-    for (const st of steps) {
-      if (st.beginIndex == null || st.endIndex == null) continue;
-      st.tollMeters = 重なり(st, 有料);
-      // ⚠️ 高速も同じ。旗のままだと国道17.9kmが高速に見える
-      st.expresswayMeters = 重なり(st, 高速);
-    }
-  }
-
-  return {
-    variant: opts.variant || "normal",
-    // ⚠️ **表示名は返さない。** 呼ぶ側が作る。ここで日本語を返すと、
-    //    APIを外に出したときに日本語が混ざる（`variant` は鍵なので言語に依存しない）
-    costing,
-    //: 実際に効いた設定（画面で確かめられるように）
-    costingOptions: variantOptions,
-    // ⚠️ 何回引き直したか。画面で「国道を通すために緩めた」が見えるように
-    highwayTries,
-    // 船を外すために何回引き直したか／それでも残った船の距離（避けられない航路）
-    ferryTries,
-    ferryMeters: Math.round(ferryMetersOf(trip)),
-    // 規制を避けるために何回引き直したか／それでも残った規制
-    restrictionTries,
-    // ⚠️ **残ったものは黙って捨てない。** 画面とアプリで警告に使う
-    restrictionHits,
-    restrictionSkipped,
-    restrictionPrefectures,
-    // 目的地のどちら側に着いたか（"left" / "right" / null）。
-    // ⚠️ 指定しても null で返ることがある（上の注意書き参照）
-    arrivedSide: ((trip.locations || [])[(trip.locations || []).length - 1] || {})
-      .side_of_street || null,
-    // 側の指定を試したか／遠回りが大きすぎて諦めたか
-    sideTried, sideGaveUp,
-    displacement: opts.displacement || null,
-    lengthMeters: Math.round(trip.summary.length * 1000),
-    durationSeconds: Math.round(trip.summary.time),
-    points,
-    polyline: encode(points),     // 5桁。このツールの他の線と揃える
-    steps,
-    uTurns: steps.filter((s) => s.maneuver.startsWith("uturn")).length,
-    //: 小道に入って戻ってくる形。見つけた数と、塞いで消せた数
-    wastefulLoops,
-    wastefulLoopsDropped,
-    wastefulLoopSpans,
-    // ⚠️ 「ふつう」がほぼ高速だった、のような事故に気づけるよう内訳を返す
-    //    （実測: バイクの「ふつう」は77.8km中65.9kmが高速だった）
-    //: 道路クラスごとの区間（色分け用）。取れなければ null
-    classSpans,
-    //: **避けきれなかった有料の距離。** `use_tolls: 0` は重みであって禁止ではない
-    //  ので、代替路が無ければ通る。通ったことを黙らせないために返す
-    //  ⚠️ 区間(edge)から数える。指示の旗では4倍に膨れる（実測 6.8km → 28.4km）
-    tollUnavoidableMeters: tollMeters,
-    //: クラスごとの距離
-    classMeters: (classSpans || []).reduce((acc, sp) => {
-      acc[sp.roadClass] = (acc[sp.roadClass] || 0) + sp.meters;
-      return acc;
-    }, {}),
-    //: 線を塗り分けるための本当の区間（`begin`/`end` は `points` の番号）
-    kindSpans,
-    // ⚠️ **区間から数えること。** 指示の旗から数えると、一部が高速なだけの
-    //    27.2kmの指示が丸ごと高速に数えられる（実測: 本当は9.2km）
-    kindMeters: kindSpans.length
-      ? kindSpans.reduce((acc, sp) => {
-        acc[sp.kind] += sp.meters;
-        return acc;
-      }, { expressway: 0, toll: 0, surface: 0 })
-      : steps.reduce((acc, x) => {
-        acc[x.roadKind] += x.distanceMeters;
-        return acc;
-      }, { expressway: 0, toll: 0, surface: 0 }),
-  };
+  return result;
 }
 
 module.exports = { routeWithValhalla, decode6, MANEUVER, VARIANTS, DISPLACEMENTS,

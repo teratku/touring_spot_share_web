@@ -1309,3 +1309,96 @@ test("おすすめ道路を抜けてすぐ戻る形を残さない", async (t) =
     assert.ok(当たり, "残った輪の2,000m以内におすすめ道路が無い（外す相手が居ない）");
   }
 });
+
+test("別の道も一緒に返る", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ Google のように選ばせるため。⚠️ **塞ぎ（規制・有料・無駄な輪）と併用できる**
+  //    ので、代替も安全側を通っている（実測: 塞いだ場所を3本とも通らなかった）
+  const r = await routeWithValhalla(NIIZA, [139.2621, 35.5541], {
+    displacement: "large", avoidTolls: true, avoidHighways: true,
+    arriveOnNearSide: true, alternates: 2 });
+  assert.ok(!r.error, r.error);
+  assert.ok(Array.isArray(r.alternates) && r.alternates.length >= 1,
+    `別の道が ${(r.alternates || []).length} 本しか返っていない`);
+
+  // 本体①: 代替も「使える経路」になっていること（指示・線・種別が揃う）
+  for (const a of r.alternates) {
+    assert.ok(a.steps.length > 5, `代替の指示が ${a.steps.length} 件しかない`);
+    assert.ok(a.points.length > 100, `代替の線の点が ${a.points.length} 個しかない`);
+    assert.ok(a.steps.every((s) => s.maneuver), "代替に maneuver の無い指示がある");
+    assert.ok(a.lengthMeters > 0 && a.durationSeconds > 0, "代替の距離・時間が空");
+  }
+
+  // 本体②: 本命と**違う道**であること（同じものを並べても選べない）
+  const km = (x) => x.lengthMeters / 1000;
+  const 違う = r.alternates.some((a) => Math.abs(km(a) - km(r)) > 0.5);
+  assert.ok(違う,
+    `本命 ${km(r).toFixed(1)}km と代替 ${r.alternates.map((a) => km(a).toFixed(1)).join(",")}km が同じ`);
+});
+
+test("立ち寄り先があるときは別の道を返さない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **Valhalla の性質**（設定では変えられない）。実測で1本だけだった。
+  //    頼んでも無駄なので、2点のときだけ付ける
+  const r = await routeWithValhalla(NIIZA, HIROSE, {
+    displacement: "large", avoidTolls: true, avoidHighways: true,
+    vias: [OTAKI], alternates: 2 });
+  assert.ok(!r.error, r.error);
+  assert.ok(!r.alternates || r.alternates.length === 0,
+    `立ち寄り先があるのに別の道が ${(r.alternates || []).length} 本返っている`);
+});
+
+// MARK: - 所要時間を実際の走りに近づける
+
+test("下道の所要時間が生の Valhalla より長くなる", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **実機で報告された壊れ方。** maxspeed 未登録の国道に 90km/h が当たり、
+  //    372.3km を 402分（平均55.5km/h）と見積もっていた。
+  //    実際に動いていたのは617分（平均39.1km/h）
+  const r = await routeWithValhalla(KOFU, FUJI,
+    { displacement: "large", costing: "motorcycle", withRoadClass: false,
+      withAdmins: false, avoidHighways: true, avoidTolls: true, excludeTolls: true });
+  assert.ok(r, "経路が引けない");
+  assert.ok(r.timeAdjust, "補正の記録が無い（組み込みが外れている）");
+  // 材料の確認: 生の見積りが実際に楽観的であること
+  const kmhRaw = (r.lengthMeters / 1000) / (r.timeAdjust.rawSeconds / 3600);
+  assert.ok(kmhRaw > 45,
+            `この道は元から遅く、検査の材料にならない: ${kmhRaw.toFixed(1)}km/h`);
+  assert.ok(r.durationSeconds > r.timeAdjust.rawSeconds,
+            `補正が効いていない: ${r.timeAdjust.rawSeconds}s → ${r.durationSeconds}s`);
+  const kmh = (r.lengthMeters / 1000) / (r.durationSeconds / 3600);
+  assert.ok(kmh <= 46, `下道なのに速すぎる: ${kmh.toFixed(1)}km/h`);
+});
+
+test("合計と指示ごとの時間がずれない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **画面は区間ごとの合計を足して出す。** 合計だけ直すと内訳と合わなくなり、
+  //    到着予定と各区間の足し算が食い違う
+  const r = await routeWithValhalla(KOFU, FUJI,
+    { displacement: "large", costing: "motorcycle", withRoadClass: false,
+      withAdmins: false, avoidHighways: true, avoidTolls: true, excludeTolls: true });
+  assert.ok(r, "経路が引けない");
+  const sum = r.steps.reduce((a, st) => a + st.durationSeconds, 0);
+  assert.strictEqual(r.durationSeconds, sum,
+                     `合計 ${r.durationSeconds}s と内訳の総和 ${sum}s が違う`);
+  assert.ok(r.steps.length > 3, "指示が少なすぎて検査にならない");
+});
+
+test("高速を使う経路の時間はほとんど変えない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **高速は実際に速く走れる。** ここまで遅くすると、高速を使う意味が消える。
+  //    実測: 東京→名古屋（高速あり）は +1分しか変わらない
+  const TOKYO = [139.7006, 35.6896], NAGOYA = [136.8816, 35.1709];
+  const r = await routeWithValhalla(TOKYO, NAGOYA,
+    { displacement: "large", costing: "motorcycle", withRoadClass: false,
+      withAdmins: false });
+  assert.ok(r, "経路が引けない");
+  // 材料の確認: ちゃんと高速を使っていること
+  const fastM = r.steps.filter((st) => st.roadKind !== "surface")
+                       .reduce((a, st) => a + st.distanceMeters, 0);
+  assert.ok(fastM > r.lengthMeters * 0.5,
+            `高速をほとんど使っておらず検査にならない: ${(fastM / 1000).toFixed(0)}km`);
+  const ratio = r.durationSeconds / r.timeAdjust.rawSeconds;
+  assert.ok(ratio < 1.05,
+            `高速なのに ${((ratio - 1) * 100).toFixed(0)}% も伸びている`);
+});

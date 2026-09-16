@@ -231,8 +231,32 @@ function spokenIntersection(name) {
   return `${name}交差点`;
 }
 
+/**
+ * 標識の「〇〇方面」を取り出す。
+ *
+ * ⚠️ **高速の分岐・出口にしか付かないと思ってよい。** 実測（12区間）で
+ *    高速の曲がる指示の33%、一般道は8%。
+ * ⚠️ **英字の名前も混ざる**（`Hachioji` / `Ebina EXIT`）。どれを読むかは
+ *    **アプリが言語で選ぶ**ので、ここでは落とさない（英語の利用者もいる）。
+ * ⚠️ **前後の空白を落とすこと。** 実データに `" Enzan"` がある。
+ * ⚠️ 「帯広方面」のように**名前自体に「方面」が入る**ことがある。
+ *    削るのは読み上げる側（アプリ）。ここで削ると表示にも効いてしまう。
+ * ⚠️ 並び順は Valhalla のまま。先頭ほど標識の主な行き先。
+ *
+ * @returns {string[]} 出てきた順・重複なし（無ければ空）
+ */
+function towardNames(maneuver) {
+  const elements = (maneuver && maneuver.sign && maneuver.sign.exit_toward_elements) || [];
+  const out = [];
+  for (const e of elements) {
+    const text = e && typeof e.text === "string" ? e.text.trim() : "";
+    if (text && !out.includes(text)) out.push(text);
+  }
+  return out;
+}
+
 module.exports = {
-  spokenRoadName, intersectionName, spokenIntersection, firstJapanese, stripRomajiParens,
+  spokenRoadName, intersectionName, towardNames, spokenIntersection, firstJapanese, stripRomajiParens,
   prefectureRoadWord, isExpresswayName,
   hasJapanese, NOT_A_PLACE, MAX_NAME_LENGTH,
 };

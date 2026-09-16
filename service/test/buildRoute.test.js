@@ -67,6 +67,30 @@ test("アプリが読む形で返す", async (t) => {
   assert.ok(Array.isArray(out.body.guidance) && out.body.guidance.length > 0, "案内が付いてこない");
 });
 
+test("高速の方面と、出口を見分ける番号をアプリへ返す", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **詰め直しで落としていた。** `admin/lib` の指示には載っているのに、
+  //    ここで項目を選び直すときに入れ忘れ、アプリに届いていなかった。
+  //    用賀 → 厚木（東名・海老名JCT）。高速を通るよう大型で引く
+  const out = await buildRouteResponse(
+    { from: [139.6335, 35.6262], to: [139.3640, 35.4420], displacement: "large",
+      guidance: false },
+    { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  const steps = out.body.route.steps;
+  for (const s of steps) {
+    assert.ok(Array.isArray(s.towardNames), `方面の欄が無い: ${s.instruction}`);
+    assert.strictEqual(typeof s.valhallaType, "number", `種類番号が無い: ${s.instruction}`);
+  }
+  const named = steps.filter((s) => s.towardNames.length > 0);
+  assert.ok(named.length > 0, "方面がひとつも届いていない");
+  assert.ok(steps.some((s) => s.roadKind === "expressway"), "材料が悪い: 高速を通っていない");
+  // 出口（20/21）はアプリでは ramp-* として届く。番号が無いと入口と見分けられない
+  const exits = steps.filter((s) => s.valhallaType === 20 || s.valhallaType === 21);
+  assert.ok(exits.length > 0, "材料が悪い: 出口を通っていない");
+  for (const e of exits) assert.match(e.maneuver, /^ramp/, `出口の値が変わった: ${e.maneuver}`);
+});
+
 test("道の種別ごとの距離を返す", async (t) => {
   // ⚠️ **アプリが読む先が無かった。** `ValhallaRouteService.hasTolls` は
   //    `kindMeters` を読むが応答に入っておらず、常に false に落ちていた

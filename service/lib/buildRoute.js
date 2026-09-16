@@ -25,46 +25,13 @@ const { toAppManeuver } = require("../../admin/lib/navManeuver");
  * @param {object} deps    { baseUrl, restrictionsFor }
  * @returns {{status:number, body:object}}
  */
-async function buildRouteResponse(body, deps = {}) {
-  // ⚠️ `excludeTolls` を取り出し忘れないこと。下で渡しているのに取り出しておらず
-  //    ReferenceError で窓口ごと500を返した前例がある（`stopAt` で同じことをやった）
-  const { from, to, vias, variant, displacement, avoidHighways, avoidTolls, excludeTolls,
-          arriveOnNearSide, roadNameStyle, announce, guidance,
-          at, isHoliday, stopAt, heading, headingTolerance, viaHeadings } = body || {};
-  const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
-  if (!ok(from) || !ok(to)) {
-    return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
-  }
-
-  let route;
-  try {
-    route = await routeWithValhalla(from, to, {
-      vias: Array.isArray(vias) ? vias : [],
-      // ⚠️ **止まる場所（立ち寄り先）の番号。** ここが空だと経由地が全部
-      //    「通るだけ」になり、着いても知らせられない
-      stopAt: Array.isArray(stopAt) ? stopAt : [],
-      // ⚠️ **走っている向き。** 引き直しのときに渡すと、その場で向きを変えさせず
-      //    そのまま進んで小道で回り込む経路になる（`lib/valhallaRoute.js`）
-      heading, headingTolerance,
-      // ⚠️ おすすめ道路の入口に「道に沿った向き」を渡すと、行って戻らず回り込む
-      viaHeadings,
-      variant: variant || "normal",
-      displacement, avoidHighways, avoidTolls, excludeTolls,
-      arriveOnNearSide, roadNameStyle,
-      withRoadClass: false,
-      baseUrl: deps.baseUrl,
-      restrictionsFor: deps.restrictionsFor,
-      // ⚠️ 渡さなければ時間の判断をしない（時間限定の規制も避ける＝避けすぎ側）
-      at: at ? new Date(at) : undefined,
-      isHoliday: !!isHoliday,
-    });
-  } catch (e) {
-    return { status: 500, body: { error: e.message } };
-  }
-  if (!route || route.error) {
-    return { status: 502, body: { error: (route && route.error) || "経路が引けません" } };
-  }
-
+/**
+ * 引けた経路を、アプリが読める形にする。
+ *
+ * ⚠️ **代替ルートにも同じ形を使う。** 片方だけ直すと、選んだ候補によって
+ *    出るものが変わる（有料の内訳・線の塗り分け・規制の警告）
+ */
+function toAppRoute(route) {
   const steps = route.steps.map((step, i) => ({
     // ⚠️ **アプリの生値に直して返すこと。** 中は camelCase、アプリの enum は
     //    kebab-case。そのまま渡すと `NavManeuver.from` が `.none` にして、
@@ -75,6 +42,13 @@ async function buildRouteResponse(body, deps = {}) {
     spokenRoad: step.spokenRoad || null,
     roadNames: step.roadNames || [],
     intersectionName: step.intersectionName || null,
+    // ⚠️ **標識の「〇〇方面」。** ここで詰め直すときに入れ忘れると、
+    //    `admin/lib` が取り出していてもアプリには届かない（実際に抜けていた）
+    towardNames: step.towardNames || [],
+    // ⚠️ **Valhalla の種類番号。** アプリは出口（20/21）の見分けに使う。
+    //    `maneuver` は出口も入口も `ramp-*` なので、これが無いと
+    //    高速の出口で「左の入口に入ります」と言う
+    valhallaType: step.valhallaType,
     prefecture: step.prefecture || null,
     distanceMeters: step.distanceMeters,
     durationSeconds: step.durationSeconds,
@@ -94,9 +68,6 @@ async function buildRouteResponse(body, deps = {}) {
   }));
 
   return {
-    status: 200,
-    body: {
-      route: {
         totalDistanceMeters: route.lengthMeters,
         totalDurationSeconds: route.durationSeconds,
         // ⚠️ **5桁で返す。** Valhalla の6桁のまま渡すと座標が10倍ずれる
@@ -124,8 +95,63 @@ async function buildRouteResponse(body, deps = {}) {
         restrictionHits: route.restrictionHits,
         restrictionSkipped: route.restrictionSkipped,
         restrictionPrefectures: route.restrictionPrefectures,
-      },
-      guidance: guidance === false ? undefined : simulate({ steps }, { announce }),
+  };
+}
+
+async function buildRouteResponse(body, deps = {}) {
+  // ⚠️ `excludeTolls` を取り出し忘れないこと。下で渡しているのに取り出しておらず
+  //    ReferenceError で窓口ごと500を返した前例がある（`stopAt` で同じことをやった）
+  const { from, to, vias, variant, displacement, avoidHighways, avoidTolls, excludeTolls,
+          alternates,
+          arriveOnNearSide, roadNameStyle, announce, guidance,
+          at, isHoliday, stopAt, heading, headingTolerance, viaHeadings } = body || {};
+  const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
+  if (!ok(from) || !ok(to)) {
+    return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
+  }
+
+  let route;
+  try {
+    route = await routeWithValhalla(from, to, {
+      vias: Array.isArray(vias) ? vias : [],
+      // ⚠️ **止まる場所（立ち寄り先）の番号。** ここが空だと経由地が全部
+      //    「通るだけ」になり、着いても知らせられない
+      stopAt: Array.isArray(stopAt) ? stopAt : [],
+      // ⚠️ **走っている向き。** 引き直しのときに渡すと、その場で向きを変えさせず
+      //    そのまま進んで小道で回り込む経路になる（`lib/valhallaRoute.js`）
+      heading, headingTolerance,
+      // ⚠️ おすすめ道路の入口に「道に沿った向き」を渡すと、行って戻らず回り込む
+      viaHeadings,
+      variant: variant || "normal",
+      displacement, avoidHighways, avoidTolls, excludeTolls,
+      // ⚠️ **別の道も一緒に頼む。** 立ち寄り先があると返らない（Valhalla の性質）
+      alternates: Number(alternates) || 0,
+      arriveOnNearSide, roadNameStyle,
+      withRoadClass: false,
+      baseUrl: deps.baseUrl,
+      restrictionsFor: deps.restrictionsFor,
+      // ⚠️ 渡さなければ時間の判断をしない（時間限定の規制も避ける＝避けすぎ側）
+      at: at ? new Date(at) : undefined,
+      isHoliday: !!isHoliday,
+    });
+  } catch (e) {
+    return { status: 500, body: { error: e.message } };
+  }
+  if (!route || route.error) {
+    return { status: 502, body: { error: (route && route.error) || "経路が引けません" } };
+  }
+
+  const app = toAppRoute(route);
+  // ⚠️ **代替も同じ形にする。** 立ち寄り先があると Valhalla が返さないので空になる
+  const alternateRoutes = (route.alternates || []).map(toAppRoute);
+
+  return {
+    status: 200,
+    body: {
+      route: app,
+      //: 別の道（Google のように選ばせるため）。⚠️ 立ち寄り先があるときは空
+      alternates: alternateRoutes,
+      guidance: guidance === false ? undefined : simulate({ steps: app.steps }, { announce }),
       announce: normalizedAnnounce(announce),
       // ⚠️ **消さないこと。** OSM の ODbL と JARTIC の規約が求めている
       attribution: ATTRIBUTION,

@@ -1,0 +1,2195 @@
+{
+ "⚠️ 何か": "Valhalla が返した maneuver をそのまま（使う項目だけ）置いたもの",
+ "⚠️ 作り直し方": "admin で node makeSignFixtures.js",
+ "作成日": "2026-09-16",
+ "区間": {
+  "東京→甲府": {
+   "note": "英字の前に空白（' Enzan'）・首都高の出口",
+   "from": [
+    139.7671,
+    35.6812
+   ],
+   "to": [
+    138.5684,
+    35.6664
+   ],
+   "maneuvers": [
+    {
+     "type": 3,
+     "instruction": "南方向です。",
+     "length": 0.065
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.043,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "東京駅南口/Tokyo Station South Exitを左方向です。",
+     "street_names": [
+      "丸の内室町線",
+      "Marunouchi-Muromachi Line",
+      "407"
+     ],
+     "sign": {},
+     "length": 0.344,
+     "verbal_transition_alert_instruction": "東京駅南口を左方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "東京国際フォーラム東/Tokyo kokusai Forum E.を右方向です。",
+     "street_names": [
+      "Babasaki Street",
+      "406"
+     ],
+     "begin_street_names": [
+      "鍛冶橋通り",
+      "Babasaki Street",
+      "406"
+     ],
+     "sign": {},
+     "length": 0.379,
+     "verbal_transition_alert_instruction": "東京国際フォーラム東を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "馬場先門/Babasakimonを左方向です。",
+     "street_names": [
+      "1",
+      "20",
+      "日比谷通り",
+      "Hibiya Street"
+     ],
+     "sign": {},
+     "length": 0.418,
+     "verbal_transition_alert_instruction": "馬場先門を左方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "日比谷/Hibiyaを右方向です。",
+     "street_names": [
+      "20"
+     ],
+     "begin_street_names": [
+      "1",
+      "20",
+      "晴海通り",
+      "Harumi Street"
+     ],
+     "sign": {},
+     "length": 1.428,
+     "verbal_transition_alert_instruction": "日比谷を右方向です。"
+    },
+    {
+     "type": 23,
+     "instruction": "右方向です。その先20/内堀通り/Uchibori-doriです。",
+     "street_names": [
+      "20",
+      "内堀通り",
+      "Uchibori-dori"
+     ],
+     "sign": {},
+     "length": 0.453,
+     "verbal_transition_alert_instruction": "右方向です。その先20です。"
+    },
+    {
+     "type": 21,
+     "instruction": "四谷/新宿方面、20出口です。",
+     "street_names": [
+      "20"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "20",
+        "consecutive_count": 1
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "四谷"
+       },
+       {
+        "text": "新宿"
+       }
+      ]
+     },
+     "length": 5.872,
+     "verbal_transition_alert_instruction": "20出口です。"
+    },
+    {
+     "type": 18,
+     "highway": true,
+     "toll": true,
+     "instruction": "4を右方向です。",
+     "street_names": [
+      "4",
+      "首都高速4号新宿線",
+      "Route 4 Shinjuku Line"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "4"
+       }
+      ]
+     },
+     "length": 10.936,
+     "verbal_transition_alert_instruction": "4を右方向です。"
+    },
+    {
+     "type": 21,
+     "highway": true,
+     "toll": true,
+     "instruction": "中央自動車道出口です。",
+     "street_names": [
+      "中央自動車道"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "中央自動車道"
+       }
+      ]
+     },
+     "length": 31.281,
+     "verbal_transition_alert_instruction": "中央自動車道出口です。"
+    },
+    {
+     "type": 8,
+     "highway": true,
+     "toll": true,
+     "instruction": "E20/河口湖/甲府方面、直進です。",
+     "street_names": [
+      "E20",
+      "中央自動車道",
+      "Chuo Expressway"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "6"
+       }
+      ]
+     },
+     "length": 22.564,
+     "verbal_transition_alert_instruction": "E20方面、直進です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先Chuo Expresswayです。",
+     "street_names": [
+      "Chuo Expressway"
+     ],
+     "length": 31.916,
+     "verbal_transition_alert_instruction": "右方向です。その先Chuo Expresswayです。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "勝沼/山梨市/塩山/Katsunuma方面、12番出口です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "12"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "勝沼"
+       },
+       {
+        "text": "山梨市"
+       },
+       {
+        "text": "塩山"
+       },
+       {
+        "text": "Katsunuma"
+       },
+       {
+        "text": "Yamanashi City"
+       },
+       {
+        "text": " Enzan"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "勝沼IC"
+       },
+       {
+        "text": "Katsunuma IC"
+       }
+      ]
+     },
+     "length": 0.663,
+     "verbal_transition_alert_instruction": "12番出口です。"
+    },
+    {
+     "type": 24,
+     "toll": true,
+     "instruction": "左方向です。その先20です。",
+     "street_names": [
+      "20"
+     ],
+     "length": 11.446,
+     "verbal_transition_alert_instruction": "左方向です。その先20です。"
+    },
+    {
+     "type": 10,
+     "instruction": "向町二を右方向です。",
+     "street_names": [
+      "140",
+      "和戸通り",
+      "Wado avenue"
+     ],
+     "sign": {},
+     "length": 1.402,
+     "verbal_transition_alert_instruction": "向町二を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "十郎橋西/Juro Bridge W.を左方向です。",
+     "street_names": [
+      "6"
+     ],
+     "begin_street_names": [
+      "青梅街道",
+      "Ome Kaido",
+      "6",
+      "甲府韮崎線"
+     ],
+     "sign": {},
+     "length": 5.049,
+     "verbal_transition_alert_instruction": "十郎橋西を左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "朝日通り北を左方向です。",
+     "street_names": [
+      "朝日通り",
+      "6"
+     ],
+     "sign": {},
+     "length": 0.687,
+     "verbal_transition_alert_instruction": "朝日通り北を左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "朝日町ガード南を左方向です。",
+     "street_names": [
+      "甲府韮崎線",
+      "6"
+     ],
+     "sign": {},
+     "length": 0.328,
+     "verbal_transition_alert_instruction": "朝日町ガード南を左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.129,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 4,
+     "instruction": "目的地に到着しました。",
+     "length": 0,
+     "verbal_transition_alert_instruction": "まもなく目的地に到着します。"
+    }
+   ]
+  },
+  "札幌→苫小牧": {
+   "note": "名前に「方面」が入る（帯広方面）",
+   "from": [
+    141.3544,
+    43.0621
+   ],
+   "to": [
+    141.6055,
+    42.6343
+   ],
+   "maneuvers": [
+    {
+     "type": 3,
+     "instruction": "12/北1条・雁来通/Kita 1-jo･Kariki-dori Avenueを西方向です。",
+     "street_names": [
+      "12",
+      "北1条・雁来通",
+      "Kita 1-jo･Kariki-dori Avenue"
+     ],
+     "length": 0.211
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先36/札幌駅前通/Sapporo Ekimae Doriです。",
+     "street_names": [
+      "36",
+      "札幌駅前通",
+      "Sapporo Ekimae Dori"
+     ],
+     "length": 0.711,
+     "verbal_transition_alert_instruction": "左方向です。その先36です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先36/月寒通/Tsukisamu Doriです。",
+     "street_names": [
+      "36",
+      "月寒通",
+      "Tsukisamu Dori"
+     ],
+     "length": 13.669,
+     "verbal_transition_alert_instruction": "左方向です。その先36です。"
+    },
+    {
+     "type": 19,
+     "toll": true,
+     "instruction": "分岐です。",
+     "length": 0.482,
+     "verbal_transition_alert_instruction": "分岐です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先E5/道央自動車道/Do-O Expressway、苫小牧/帯広方面/Tomakomai/Obihiro方面です。",
+     "street_names": [
+      "E5",
+      "道央自動車道",
+      "Do-O Expressway"
+     ],
+     "sign": {
+      "exit_toward_elements": [
+       {
+        "text": "苫小牧"
+       },
+       {
+        "text": "帯広方面"
+       },
+       {
+        "text": "Tomakomai"
+       },
+       {
+        "text": "Obihiro"
+       }
+      ]
+     },
+     "length": 44.041,
+     "verbal_transition_alert_instruction": "右方向です。その先E5です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "21番出口です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "21"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "苫小牧中央IC"
+       },
+       {
+        "text": "苫小牧中央インターチェンジ"
+       },
+       {
+        "text": "Tomakomai-chuo IC"
+       }
+      ]
+     },
+     "length": 0.791,
+     "verbal_transition_alert_instruction": "21番出口です。"
+    },
+    {
+     "type": 23,
+     "toll": true,
+     "instruction": "右方向です。その先1179/苫小牧中央インター線です。",
+     "street_names": [
+      "1179",
+      "苫小牧中央インター線"
+     ],
+     "length": 0.499,
+     "verbal_transition_alert_instruction": "右方向です。その先1179です。"
+    },
+    {
+     "type": 10,
+     "instruction": "右方向です。その先276/国道276号/National Highway Route 276です。",
+     "street_names": [
+      "276",
+      "国道276号",
+      "National Highway Route 276"
+     ],
+     "length": 3.593,
+     "verbal_transition_alert_instruction": "右方向です。その先276です。"
+    },
+    {
+     "type": 10,
+     "instruction": "右方向です。その先36/235/国道36号/National Highway Route 36です。",
+     "street_names": [
+      "36",
+      "235",
+      "国道36号",
+      "National Highway Route 36"
+     ],
+     "length": 0.708,
+     "verbal_transition_alert_instruction": "右方向です。その先36です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.058,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "右方向です。",
+     "length": 0.031,
+     "verbal_transition_alert_instruction": "右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.022,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 5,
+     "instruction": "目的地は右側です。",
+     "length": 0,
+     "verbal_transition_alert_instruction": "目的地は右側です。"
+    }
+   ]
+  },
+  "大阪→名古屋": {
+   "note": "4つ並ぶ・「近畿自動車道吹田方面」",
+   "from": [
+    135.4959,
+    34.7025
+   ],
+   "to": [
+    136.8815,
+    35.1709
+   ],
+   "maneuvers": [
+    {
+     "type": 3,
+     "instruction": "市道九条梅田線を南西方向です。",
+     "street_names": [
+      "市道九条梅田線"
+     ],
+     "length": 0.44
+    },
+    {
+     "type": 19,
+     "highway": true,
+     "toll": true,
+     "instruction": "11を左方向です。",
+     "street_names": [
+      "11",
+      "阪神高速11号池田線",
+      "Hanshin Expressway Route 11 Ikeda Line"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "11"
+       }
+      ]
+     },
+     "length": 2.15,
+     "verbal_transition_alert_instruction": "11を左方向です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先1/阪神高速1号環状線/Loopです。",
+     "street_names": [
+      "1",
+      "阪神高速1号環状線",
+      "Loop"
+     ],
+     "length": 1.355,
+     "verbal_transition_alert_instruction": "右方向です。その先1です。"
+    },
+    {
+     "type": 21,
+     "highway": true,
+     "toll": true,
+     "instruction": "出口です。",
+     "street_names": [
+      "13",
+      "阪神高速13号東大阪線",
+      "Hanshin Expressway Route 13 Higashi-Osaka Line"
+     ],
+     "length": 7.566,
+     "verbal_transition_alert_instruction": "出口です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "13-05番出口です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "13-05"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "東大阪JCT"
+       },
+       {
+        "text": "Higashiosaka JCT"
+       }
+      ]
+     },
+     "length": 0.231,
+     "verbal_transition_alert_instruction": "13-05番出口です。"
+    },
+    {
+     "type": 24,
+     "highway": true,
+     "toll": true,
+     "instruction": "左方向です。その先E26/近畿自動車道/Kinki Expressway、近畿自動車道吹田方面方面です。",
+     "street_names": [
+      "E26",
+      "近畿自動車道",
+      "Kinki Expressway"
+     ],
+     "sign": {
+      "exit_toward_elements": [
+       {
+        "text": "近畿自動車道吹田方面"
+       }
+      ]
+     },
+     "length": 3.739,
+     "verbal_transition_alert_instruction": "左方向です。その先E26です。"
+    },
+    {
+     "type": 21,
+     "highway": true,
+     "toll": true,
+     "instruction": "3-1番出口です。",
+     "street_names": [
+      "E89",
+      "1",
+      "第二京阪道路",
+      "Daini-Keihan Road"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "3-1"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "門真JCT"
+       },
+       {
+        "text": "Kadoma JCT"
+       }
+      ]
+     },
+     "length": 26.438,
+     "verbal_transition_alert_instruction": "3-1番出口です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "2番出口です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "2"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "久御山JCT"
+       },
+       {
+        "text": "Kumiyama JCT"
+       }
+      ]
+     },
+     "length": 0.195,
+     "verbal_transition_alert_instruction": "2番出口です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先E88/1/京滋バイパス/Keiji Bypassです。",
+     "street_names": [
+      "E88",
+      "1",
+      "京滋バイパス",
+      "Keiji Bypass"
+     ],
+     "length": 20.609,
+     "verbal_transition_alert_instruction": "右方向です。その先E88です。"
+    },
+    {
+     "type": 24,
+     "highway": true,
+     "toll": true,
+     "instruction": "左方向です。その先E1、栗東/名古屋方面です。",
+     "street_names": [
+      "E1",
+      "名神高速道路",
+      "Meishin Expressway"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E1",
+        "consecutive_count": 1
+       },
+       {
+        "text": "E1A"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "栗東"
+       },
+       {
+        "text": "名古屋"
+       }
+      ]
+     },
+     "length": 3.651,
+     "verbal_transition_alert_instruction": "左方向です。その先E1です。"
+    },
+    {
+     "type": 21,
+     "highway": true,
+     "toll": true,
+     "instruction": "30-1番出口です。その先E1A、草津田上/信楽/亀山/伊勢方面です。",
+     "street_names": [
+      "E1A",
+      "新名神高速道路大津連絡路",
+      "Shin-Meishin Expressway"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "30-1"
+       }
+      ],
+      "exit_branch_elements": [
+       {
+        "text": "E1A",
+        "consecutive_count": 1
+       },
+       {
+        "text": "E23"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "草津田上"
+       },
+       {
+        "text": "信楽"
+       },
+       {
+        "text": "亀山"
+       },
+       {
+        "text": "伊勢"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "草津JCT"
+       },
+       {
+        "text": "Kusatsu JCT"
+       }
+      ]
+     },
+     "length": 3.814,
+     "verbal_transition_alert_instruction": "30-1番出口です。"
+    },
+    {
+     "type": 21,
+     "highway": true,
+     "toll": true,
+     "instruction": "大津JCT（仮称）出口です。",
+     "street_names": [
+      "E1A",
+      "新名神高速道路",
+      "Shin-Meishin Expressway"
+     ],
+     "sign": {
+      "exit_name_elements": [
+       {
+        "text": "大津JCT（仮称）"
+       }
+      ]
+     },
+     "length": 41.163,
+     "verbal_transition_alert_instruction": "大津JCT（仮称）出口です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先E1A/新名神高速道路/Shin-Meishin Expresswayです。",
+     "street_names": [
+      "E1A",
+      "新名神高速道路",
+      "Shin-Meishin Expressway"
+     ],
+     "length": 28.127,
+     "verbal_transition_alert_instruction": "右方向です。その先E1Aです。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "29-1番出口です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "29-1"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "四日市JCT"
+       },
+       {
+        "text": "Yokkaichi JCT"
+       }
+      ]
+     },
+     "length": 0.457,
+     "verbal_transition_alert_instruction": "29-1番出口です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先E23/東名阪自動車道/Higashi-Meihan Expresswayです。",
+     "street_names": [
+      "E23",
+      "東名阪自動車道",
+      "Higashi-Meihan Expressway"
+     ],
+     "length": 26.787,
+     "verbal_transition_alert_instruction": "右方向です。その先E23です。"
+    },
+    {
+     "type": 20,
+     "toll": true,
+     "instruction": "右方向、512番出口です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "512"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "烏森出口"
+       }
+      ]
+     },
+     "length": 0.5,
+     "verbal_transition_alert_instruction": "右方向、512番出口です。"
+    },
+    {
+     "type": 9,
+     "instruction": "右方向です。その先津島七宝名古屋線/Route Tsushima-Shiipou-Nagoya/115です。",
+     "street_names": [
+      "津島七宝名古屋線",
+      "Route Tsushima-Shiipou-Nagoya",
+      "115"
+     ],
+     "length": 1.024,
+     "verbal_transition_alert_instruction": "右方向です。その先津島七宝名古屋線です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先環状線/Inner Ringです。",
+     "street_names": [
+      "環状線",
+      "Inner Ring"
+     ],
+     "length": 1.157,
+     "verbal_transition_alert_instruction": "左方向です。その先環状線です。"
+    },
+    {
+     "type": 10,
+     "instruction": "太閤通3を右方向です。",
+     "street_names": [
+      "太閤通",
+      "Taikou Dori Avenue",
+      "68"
+     ],
+     "sign": {},
+     "length": 1.075,
+     "verbal_transition_alert_instruction": "太閤通3を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.069,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.383,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 6,
+     "instruction": "目的地は左側です。",
+     "length": 0,
+     "verbal_transition_alert_instruction": "目的地は左側です。"
+    }
+   ]
+  },
+  "京都→神戸": {
+   "note": "英字が混ざる・JCTの出口",
+   "from": [
+    135.7588,
+    34.9858
+   ],
+   "to": [
+    135.178,
+    34.6795
+   ],
+   "maneuvers": [
+    {
+     "type": 3,
+     "instruction": "北西方向です。",
+     "length": 0.005
+    },
+    {
+     "type": 9,
+     "instruction": "右方向です。その先烏丸通/Karasuma Street/32/下鴨京都停車場線/Shimogamo Kyoto Station Lineです。",
+     "street_names": [
+      "烏丸通",
+      "Karasuma Street",
+      "32",
+      "下鴨京都停車場線",
+      "Shimogamo Kyoto Station Line"
+     ],
+     "length": 0.3,
+     "verbal_transition_alert_instruction": "右方向です。その先烏丸通です。"
+    },
+    {
+     "type": 10,
+     "instruction": "烏丸七条/Karasumashichijoを右方向です。",
+     "street_names": [
+      "24",
+      "七条通",
+      "Shichijō Street",
+      "梅津東山七条線",
+      "Umezu Higashiyama Shichijo Line"
+     ],
+     "sign": {},
+     "length": 0.41,
+     "verbal_transition_alert_instruction": "烏丸七条を右方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "七条河原町/Shichijokawaramachiを右方向です。",
+     "street_names": [
+      "24",
+      "河原町通"
+     ],
+     "begin_street_names": [
+      "24",
+      "河原町通",
+      "Kawaramachi avenue",
+      "一般国道24号"
+     ],
+     "sign": {},
+     "length": 1.826,
+     "verbal_transition_alert_instruction": "七条河原町を右方向です。"
+    },
+    {
+     "type": 18,
+     "highway": true,
+     "toll": true,
+     "instruction": "1を右方向です。",
+     "street_names": [
+      "1",
+      "第二京阪道路",
+      "Daini-Keihan Road"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "1"
+       }
+      ]
+     },
+     "length": 8.399,
+     "verbal_transition_alert_instruction": "1を右方向です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "出口です。",
+     "length": 0.221,
+     "verbal_transition_alert_instruction": "出口です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先E88/京滋バイパス/Keiji Bypassです。",
+     "street_names": [
+      "E88",
+      "京滋バイパス",
+      "Keiji Bypass"
+     ],
+     "length": 6.525,
+     "verbal_transition_alert_instruction": "右方向です。その先E88です。"
+    },
+    {
+     "type": 21,
+     "highway": true,
+     "toll": true,
+     "instruction": "33-3番出口です。その先名神高速道路、大阪/吹田方面です。",
+     "street_names": [
+      "E1",
+      "名神高速道路",
+      "Meishin Expressway"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "33-3"
+       }
+      ],
+      "exit_branch_elements": [
+       {
+        "text": "名神高速道路",
+        "consecutive_count": 1
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "大阪"
+       },
+       {
+        "text": "吹田"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "大山崎JCT"
+       },
+       {
+        "text": "Oyamazaki JCT"
+       }
+      ]
+     },
+     "length": 18.291,
+     "verbal_transition_alert_instruction": "33-3番出口です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先E1/名神高速道路/Meishin Expressway、関西空港/松原/西宮/Matsubara方面です。",
+     "street_names": [
+      "E1",
+      "名神高速道路",
+      "Meishin Expressway"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E26"
+       },
+       {
+        "text": "E1"
+       },
+       {
+        "text": "近畿高速道路"
+       },
+       {
+        "text": "東名高速道路"
+       },
+       {
+        "text": "Kinki Expressway"
+       },
+       {
+        "text": "Tomei Expressway"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "関西空港"
+       },
+       {
+        "text": "松原"
+       },
+       {
+        "text": "西宮"
+       },
+       {
+        "text": "Matsubara"
+       },
+       {
+        "text": "Nishinomiya"
+       },
+       {
+        "text": "Kansai Airport"
+       }
+      ]
+     },
+     "length": 22.675,
+     "verbal_transition_alert_instruction": "右方向です。その先E1です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向、3-09番出口です。その先3、神戸/Kobe方面です。",
+     "street_names": [
+      "3",
+      "阪神高速3号神戸線",
+      "Hanshin Expressway Route 3 Kobe Line"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "3-09"
+       }
+      ],
+      "exit_branch_elements": [
+       {
+        "text": "3",
+        "consecutive_count": 1
+       },
+       {
+        "text": "阪神高速道路"
+       },
+       {
+        "text": "Hanshin Expressway"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "神戸"
+       },
+       {
+        "text": "Kobe"
+       }
+      ]
+     },
+     "length": 15.128,
+     "verbal_transition_alert_instruction": "右方向、3-09番出口です。"
+    },
+    {
+     "type": 20,
+     "toll": true,
+     "instruction": "右方向、生田川方面3-16番出口です。",
+     "street_names": [
+      "3-16"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "3-16"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "生田川"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "生田川出口"
+       },
+       {
+        "text": "Ikutagawa"
+       }
+      ]
+     },
+     "length": 0.298,
+     "verbal_transition_alert_instruction": "右方向、3-16番出口です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先灘浜脇浜線です。",
+     "street_names": [
+      "灘浜脇浜線"
+     ],
+     "length": 0.014,
+     "verbal_transition_alert_instruction": "左方向です。その先灘浜脇浜線です。"
+    },
+    {
+     "type": 10,
+     "highway": true,
+     "instruction": "右方向です。その先浜手幹線/神戸市主要地方道 梅香浜辺通脇浜線/Umegaka Hamabedori Wakihama Lineです。",
+     "street_names": [
+      "浜手幹線",
+      "神戸市主要地方道 梅香浜辺通脇浜線",
+      "Umegaka Hamabedori Wakihama Line"
+     ],
+     "length": 2.694,
+     "verbal_transition_alert_instruction": "右方向です。その先浜手幹線です。"
+    },
+    {
+     "type": 21,
+     "instruction": "2出口です。",
+     "street_names": [
+      "2",
+      "国道2号",
+      "National Highway Route 2"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "2"
+       }
+      ]
+     },
+     "length": 0.177,
+     "verbal_transition_alert_instruction": "2出口です。"
+    },
+    {
+     "type": 10,
+     "instruction": "神戸駅南/Kobe Station Southを右方向です。",
+     "street_names": [
+      "神戸駅裏線"
+     ],
+     "sign": {},
+     "length": 0.191,
+     "verbal_transition_alert_instruction": "神戸駅南を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先生田南７８号線です。",
+     "street_names": [
+      "生田南７８号線"
+     ],
+     "length": 0.082,
+     "verbal_transition_alert_instruction": "左方向です。その先生田南７８号線です。"
+    },
+    {
+     "type": 16,
+     "instruction": "左方向です。その先若菜神戸駅線です。",
+     "street_names": [
+      "若菜神戸駅線"
+     ],
+     "length": 0.004,
+     "verbal_transition_alert_instruction": "左方向です。その先若菜神戸駅線です。"
+    },
+    {
+     "type": 16,
+     "instruction": "左方向です。",
+     "length": 0.035,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 4,
+     "instruction": "目的地に到着しました。",
+     "length": 0,
+     "verbal_transition_alert_instruction": "まもなく目的地に到着します。"
+    }
+   ]
+  },
+  "東京→箱根": {
+   "note": "東名の分岐と出口",
+   "from": [
+    139.7671,
+    35.6812
+   ],
+   "to": [
+    139.1069,
+    35.2324
+   ],
+   "maneuvers": [
+    {
+     "type": 3,
+     "instruction": "南方向です。",
+     "length": 0.065
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.043,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "東京駅南口/Tokyo Station South Exitを左方向です。",
+     "street_names": [
+      "丸の内室町線",
+      "Marunouchi-Muromachi Line",
+      "407"
+     ],
+     "sign": {},
+     "length": 0.344,
+     "verbal_transition_alert_instruction": "東京駅南口を左方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "東京国際フォーラム東/Tokyo kokusai Forum E.を右方向です。",
+     "street_names": [
+      "Babasaki Street",
+      "406"
+     ],
+     "begin_street_names": [
+      "鍛冶橋通り",
+      "Babasaki Street",
+      "406"
+     ],
+     "sign": {},
+     "length": 0.379,
+     "verbal_transition_alert_instruction": "東京国際フォーラム東を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "馬場先門/Babasakimonを左方向です。",
+     "street_names": [
+      "1",
+      "20",
+      "日比谷通り",
+      "Hibiya Street"
+     ],
+     "sign": {},
+     "length": 0.418,
+     "verbal_transition_alert_instruction": "馬場先門を左方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "日比谷/Hibiyaを右方向です。",
+     "street_names": [
+      "20"
+     ],
+     "begin_street_names": [
+      "1",
+      "20",
+      "晴海通り",
+      "Harumi Street"
+     ],
+     "sign": {},
+     "length": 0.842,
+     "verbal_transition_alert_instruction": "日比谷を右方向です。"
+    },
+    {
+     "type": 24,
+     "instruction": "左方向です。その先東京都道一七六号線/Tokyo Metropolitan Route 176/176/東京都道一七六号線です。",
+     "street_names": [
+      "東京都道一七六号線",
+      "Tokyo Metropolitan Route 176",
+      "176",
+      "東京都道一七六号線"
+     ],
+     "length": 0.068,
+     "verbal_transition_alert_instruction": "左方向です。その先東京都道一七六号線です。"
+    },
+    {
+     "type": 15,
+     "instruction": "国会前/The National Dietを左方向です。",
+     "street_names": [
+      "六本木通り",
+      "Roppongi-dori",
+      "412"
+     ],
+     "sign": {},
+     "length": 0.403,
+     "verbal_transition_alert_instruction": "国会前を左方向です。"
+    },
+    {
+     "type": 17,
+     "highway": true,
+     "toll": true,
+     "instruction": "C1を直進です。",
+     "street_names": [
+      "C1",
+      "首都高速都心環状線"
+     ],
+     "begin_street_names": [
+      "C1",
+      "霞が関入口",
+      "首都高速都心環状線",
+      "Circle 1"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "C1"
+       }
+      ]
+     },
+     "length": 1.016,
+     "verbal_transition_alert_instruction": "C1を直進です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先3/首都高速3号渋谷線/Route 3 Shibuya Lineです。",
+     "street_names": [
+      "3",
+      "首都高速3号渋谷線",
+      "Route 3 Shibuya Line"
+     ],
+     "length": 18.329,
+     "verbal_transition_alert_instruction": "右方向です。その先3です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "出口です。",
+     "street_names": [
+      "E1",
+      "東名高速道路",
+      "Tomei Expressway"
+     ],
+     "length": 0.084,
+     "verbal_transition_alert_instruction": "出口です。"
+    },
+    {
+     "type": 24,
+     "highway": true,
+     "toll": true,
+     "instruction": "左方向です。その先東名高速道路/Tomei Expresswayです。",
+     "street_names": [
+      "東名高速道路",
+      "Tomei Expressway"
+     ],
+     "begin_street_names": [
+      "E1",
+      "東名高速道路",
+      "Tomei Expressway"
+     ],
+     "length": 28.191,
+     "verbal_transition_alert_instruction": "左方向です。その先東名高速道路です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "5番出口です。その先129/271/246/E85、厚木/平塚/小田原/Atsugi方面です。",
+     "street_names": [
+      "城際橋"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "5"
+       }
+      ],
+      "exit_branch_elements": [
+       {
+        "text": "129"
+       },
+       {
+        "text": "271"
+       },
+       {
+        "text": "246"
+       },
+       {
+        "text": "E85"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "厚木"
+       },
+       {
+        "text": "平塚"
+       },
+       {
+        "text": "小田原"
+       },
+       {
+        "text": "Atsugi"
+       },
+       {
+        "text": "Hiratsuka"
+       },
+       {
+        "text": "Odawara"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "厚木IC"
+       }
+      ]
+     },
+     "length": 0.413,
+     "verbal_transition_alert_instruction": "5番出口です。"
+    },
+    {
+     "type": 23,
+     "toll": true,
+     "instruction": "分岐を右方向です。",
+     "length": 0.203,
+     "verbal_transition_alert_instruction": "分岐を右方向です。"
+    },
+    {
+     "type": 23,
+     "toll": true,
+     "instruction": "右方向です。その先E85、伊勢原/小田原方面です。",
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E85",
+        "consecutive_count": 2
+       },
+       {
+        "text": "246",
+        "consecutive_count": 1
+       },
+       {
+        "text": "129"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "伊勢原",
+        "consecutive_count": 1
+       },
+       {
+        "text": "小田原",
+        "consecutive_count": 1
+       },
+       {
+        "text": "厚木市街"
+       },
+       {
+        "text": "Atsugi"
+       },
+       {
+        "text": "Isehara"
+       },
+       {
+        "text": "Odawara"
+       }
+      ]
+     },
+     "length": 0.134,
+     "verbal_transition_alert_instruction": "右方向です。その先E85です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先E85、伊勢原/小田原方面です。",
+     "street_names": [
+      "E85",
+      "271",
+      "小田原厚木道路",
+      "Odawara-Atsugi Road"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E85",
+        "consecutive_count": 2
+       },
+       {
+        "text": "246",
+        "consecutive_count": 1
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "伊勢原",
+        "consecutive_count": 1
+       },
+       {
+        "text": "小田原",
+        "consecutive_count": 1
+       }
+      ]
+     },
+     "length": 31.514,
+     "verbal_transition_alert_instruction": "右方向です。その先E85です。"
+    },
+    {
+     "type": 18,
+     "highway": true,
+     "instruction": "E84を右方向です。",
+     "street_names": [
+      "E84",
+      "1",
+      "西湘バイパス",
+      "Seisho By-pass"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E84"
+       }
+      ]
+     },
+     "length": 0.439,
+     "verbal_transition_alert_instruction": "E84を右方向です。"
+    },
+    {
+     "type": 21,
+     "instruction": "8番出口です。",
+     "street_names": [
+      "西湘バイパス"
+     ],
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "8"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "箱根口IC"
+       }
+      ]
+     },
+     "length": 0.256,
+     "verbal_transition_alert_instruction": "8番出口です。"
+    },
+    {
+     "type": 19,
+     "instruction": "分岐を左方向です。",
+     "street_names": [
+      "1",
+      "小田原箱根道路"
+     ],
+     "sign": {},
+     "length": 1.014,
+     "verbal_transition_alert_instruction": "分岐を左方向です。"
+    },
+    {
+     "type": 23,
+     "instruction": "右方向です。その先1/小田原箱根道路です。",
+     "street_names": [
+      "1",
+      "小田原箱根道路"
+     ],
+     "length": 0.81,
+     "verbal_transition_alert_instruction": "右方向です。その先1です。"
+    },
+    {
+     "type": 8,
+     "instruction": "1/138/国道1号/National Highway Route 1を直進です。",
+     "street_names": [
+      "1",
+      "138",
+      "国道1号",
+      "National Highway Route 1"
+     ],
+     "length": 0.672,
+     "verbal_transition_alert_instruction": "1を直進です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.171,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 23,
+     "instruction": "分岐を右方向です。",
+     "length": 0.07,
+     "verbal_transition_alert_instruction": "分岐を右方向です。"
+    },
+    {
+     "type": 5,
+     "instruction": "目的地は右側です。",
+     "length": 0,
+     "verbal_transition_alert_instruction": "目的地は右側です。"
+    }
+   ]
+  },
+  "岡山→広島": {
+   "note": "5つ並ぶ・道路名が方面になる（岡山道）",
+   "from": [
+    133.918,
+    34.6664
+   ],
+   "to": [
+    132.4753,
+    34.3978
+   ],
+   "maneuvers": [
+    {
+     "type": 1,
+     "instruction": "北西方向です。",
+     "length": 0.025
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.056,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "右方向です。その先西口筋/Nishiguchi-suji Avenueです。",
+     "street_names": [
+      "西口筋",
+      "Nishiguchi-suji Avenue"
+     ],
+     "length": 1.846,
+     "verbal_transition_alert_instruction": "右方向です。その先西口筋です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先53/国道53号/National Highway Route 53です。",
+     "street_names": [
+      "53",
+      "国道53号",
+      "National Highway Route 53"
+     ],
+     "length": 1.969,
+     "verbal_transition_alert_instruction": "左方向です。その先53です。"
+    },
+    {
+     "type": 10,
+     "instruction": "右方向です。その先53/国道53号/National Highway Route 53です。",
+     "street_names": [
+      "53",
+      "国道53号",
+      "National Highway Route 53"
+     ],
+     "length": 1.968,
+     "verbal_transition_alert_instruction": "右方向です。その先53です。"
+    },
+    {
+     "type": 19,
+     "toll": true,
+     "instruction": "E2/E73を山陽道/岡山道方面です。",
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E2"
+       },
+       {
+        "text": "E73"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "山陽道"
+       },
+       {
+        "text": "岡山道"
+       }
+      ]
+     },
+     "length": 0.994,
+     "verbal_transition_alert_instruction": "分岐をE2方面です。"
+    },
+    {
+     "type": 24,
+     "instruction": "分岐を左方向です。",
+     "length": 0.257,
+     "verbal_transition_alert_instruction": "分岐を左方向です。"
+    },
+    {
+     "type": 24,
+     "highway": true,
+     "toll": true,
+     "instruction": "左方向です。その先E2/E73/E30、広島/坂出/岡山道/米子道方面です。",
+     "street_names": [
+      "山陽自動車道",
+      "Sanyo Expressway"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E2"
+       },
+       {
+        "text": "E73"
+       },
+       {
+        "text": "E30"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "広島"
+       },
+       {
+        "text": "坂出"
+       },
+       {
+        "text": "岡山道"
+       },
+       {
+        "text": "米子道"
+       },
+       {
+        "text": "瀬戸中央道"
+       }
+      ]
+     },
+     "length": 148.602,
+     "verbal_transition_alert_instruction": "左方向です。その先E2です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "29番出口です。その先54、広島方面です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "29"
+       }
+      ],
+      "exit_branch_elements": [
+       {
+        "text": "54",
+        "consecutive_count": 2
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "広島"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "広島IC"
+       },
+       {
+        "text": "Hiroshima IC"
+       }
+      ]
+     },
+     "length": 0.611,
+     "verbal_transition_alert_instruction": "29番出口です。"
+    },
+    {
+     "type": 23,
+     "toll": true,
+     "instruction": "右方向です。その先54、広島市街/安佐動物公園/呉方面です。",
+     "street_names": [
+      "54",
+      "191",
+      "祇園新道",
+      "Gion-Shindou Highway"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "54",
+        "consecutive_count": 2
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "広島市街"
+       },
+       {
+        "text": "安佐動物公園"
+       },
+       {
+        "text": "呉"
+       }
+      ]
+     },
+     "length": 4.062,
+     "verbal_transition_alert_instruction": "右方向です。その先54です。"
+    },
+    {
+     "type": 10,
+     "instruction": "祇園新橋南/Gionshinbashi Bridge Southを右方向です。",
+     "street_names": [
+      "54",
+      "191",
+      "祇園新道",
+      "Gion-Shindou Highway",
+      "一般国道54号"
+     ],
+     "sign": {},
+     "length": 1.583,
+     "verbal_transition_alert_instruction": "祇園新橋南を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "新こうへい橋北/Shinkohei Bridge Northを左方向です。",
+     "street_names": [
+      "広島三次線",
+      "Hiroshima Miyoshi Line",
+      "37"
+     ],
+     "sign": {},
+     "length": 0.667,
+     "verbal_transition_alert_instruction": "新こうへい橋北を左方向です。"
+    },
+    {
+     "type": 10,
+     "instruction": "牛田大橋北詰を右方向です。",
+     "street_names": [
+      "広島三次線",
+      "Hiroshima Miyoshi Line",
+      "37"
+     ],
+     "sign": {},
+     "length": 0.69,
+     "verbal_transition_alert_instruction": "牛田大橋北詰を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "白島/Hakushimaを左方向です。",
+     "street_names": [
+      "広島三次線",
+      "Hiroshima Miyoshi Line",
+      "37"
+     ],
+     "begin_street_names": [
+      "広島三次線",
+      "Hiroshima Miyoshi Line",
+      "37",
+      "84"
+     ],
+     "sign": {},
+     "length": 1.172,
+     "verbal_transition_alert_instruction": "白島を左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "広島駅前(西)を左方向です。",
+     "sign": {},
+     "length": 0.155,
+     "verbal_transition_alert_instruction": "広島駅前(西)を左方向です。"
+    },
+    {
+     "type": 6,
+     "instruction": "目的地は左側です。",
+     "length": 0,
+     "verbal_transition_alert_instruction": "目的地は左側です。"
+    }
+   ]
+  },
+  "用賀→厚木": {
+   "note": "海老名JCT。方面に出口の名前が入る（海老名出口）",
+   "from": [
+    139.6335,
+    35.6262
+   ],
+   "to": [
+    139.364,
+    35.442
+   ],
+   "maneuvers": [
+    {
+     "type": 2,
+     "instruction": "瀬田貫井線/427を南西方向です。",
+     "street_names": [
+      "瀬田貫井線",
+      "427"
+     ],
+     "length": 0.594
+    },
+    {
+     "type": 10,
+     "instruction": "瀬田/Setaを右方向です。",
+     "street_names": [
+      "環八通り",
+      "Kampachi dori",
+      "311"
+     ],
+     "sign": {},
+     "length": 0.745,
+     "verbal_transition_alert_instruction": "瀬田を右方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。",
+     "length": 0.101,
+     "verbal_transition_alert_instruction": "左方向です。"
+    },
+    {
+     "type": 18,
+     "highway": true,
+     "toll": true,
+     "instruction": "E1を右方向です。その先横浜/静岡方面です。",
+     "street_names": [
+      "E1",
+      "東名高速道路",
+      "Tomei Expressway"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "E1",
+        "consecutive_count": 1
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "横浜"
+       },
+       {
+        "text": "静岡"
+       }
+      ]
+     },
+     "length": 6.373,
+     "verbal_transition_alert_instruction": "E1を右方向です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "出口です。",
+     "street_names": [
+      "E1",
+      "東名高速道路",
+      "Tomei Expressway"
+     ],
+     "length": 0.084,
+     "verbal_transition_alert_instruction": "出口です。"
+    },
+    {
+     "type": 24,
+     "highway": true,
+     "toll": true,
+     "instruction": "左方向です。その先東名高速道路/Tomei Expresswayです。",
+     "street_names": [
+      "東名高速道路",
+      "Tomei Expressway"
+     ],
+     "begin_street_names": [
+      "E1",
+      "東名高速道路",
+      "Tomei Expressway"
+     ],
+     "length": 26.712,
+     "verbal_transition_alert_instruction": "左方向です。その先東名高速道路です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "4-2番出口です。その先C4、八王子/海老名出口/Hachioji/Ebina EXIT方面です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "4-2"
+       }
+      ],
+      "exit_branch_elements": [
+       {
+        "text": "C4",
+        "consecutive_count": 2
+       },
+       {
+        "text": "E20",
+        "consecutive_count": 1
+       },
+       {
+        "text": "E84"
+       },
+       {
+        "text": "E1A"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "八王子",
+        "consecutive_count": 1
+       },
+       {
+        "text": "海老名出口",
+        "consecutive_count": 1
+       },
+       {
+        "text": "Hachioji",
+        "consecutive_count": 1
+       },
+       {
+        "text": "Ebina EXIT",
+        "consecutive_count": 1
+       },
+       {
+        "text": "茅ヶ崎"
+       },
+       {
+        "text": "圏央道"
+       },
+       {
+        "text": "新湘南"
+       },
+       {
+        "text": "中央道"
+       },
+       {
+        "text": "新東名"
+       },
+       {
+        "text": "Chigasaki"
+       },
+       {
+        "text": "Ken-O Expwy"
+       },
+       {
+        "text": "Shin-Shonan"
+       },
+       {
+        "text": "Chuo Expwy"
+       },
+       {
+        "text": "Shin-Tomei"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "海老名JCT"
+       }
+      ]
+     },
+     "length": 0.556,
+     "verbal_transition_alert_instruction": "4-2番出口です。"
+    },
+    {
+     "type": 23,
+     "highway": true,
+     "toll": true,
+     "instruction": "右方向です。その先C4、八王子/海老名出口/Hachioji/Ebina EXIT方面です。",
+     "street_names": [
+      "C4",
+      "首都圏中央連絡自動車道",
+      "Ken-O Expressway",
+      "一般国道468号",
+      "National Highway Route 468"
+     ],
+     "sign": {
+      "exit_branch_elements": [
+       {
+        "text": "C4",
+        "consecutive_count": 2
+       },
+       {
+        "text": "E20",
+        "consecutive_count": 1
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "八王子",
+        "consecutive_count": 1
+       },
+       {
+        "text": "海老名出口",
+        "consecutive_count": 1
+       },
+       {
+        "text": "Hachioji",
+        "consecutive_count": 1
+       },
+       {
+        "text": "Ebina EXIT",
+        "consecutive_count": 1
+       }
+      ]
+     },
+     "length": 1.5,
+     "verbal_transition_alert_instruction": "右方向です。その先C4です。"
+    },
+    {
+     "type": 21,
+     "toll": true,
+     "instruction": "海老名方面、31番出口です。",
+     "sign": {
+      "exit_number_elements": [
+       {
+        "text": "31"
+       }
+      ],
+      "exit_toward_elements": [
+       {
+        "text": "海老名"
+       }
+      ],
+      "exit_name_elements": [
+       {
+        "text": "海老名ＩＣ"
+       },
+       {
+        "text": "海老名IC"
+       },
+       {
+        "text": "Ebina IC"
+       }
+      ]
+     },
+     "length": 0.985,
+     "verbal_transition_alert_instruction": "31番出口です。"
+    },
+    {
+     "type": 15,
+     "instruction": "海老名インター前/Ebina Interを左方向です。",
+     "street_names": [
+      "藤沢厚木線",
+      "Fujisawa-Atsugi Line",
+      "43",
+      "46"
+     ],
+     "sign": {},
+     "length": 1.042,
+     "verbal_transition_alert_instruction": "海老名インター前を左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "相模大橋東/Sagamiohashi Eastを左方向です。",
+     "street_names": [
+      "43"
+     ],
+     "begin_street_names": [
+      "厚木街道",
+      "Atsugi Kaido",
+      "40",
+      "43",
+      "51"
+     ],
+     "sign": {},
+     "length": 1.338,
+     "verbal_transition_alert_instruction": "相模大橋東を左方向です。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先さつき通りです。",
+     "street_names": [
+      "さつき通り"
+     ],
+     "length": 0.173,
+     "verbal_transition_alert_instruction": "左方向です。その先さつき通りです。"
+    },
+    {
+     "type": 15,
+     "instruction": "左方向です。その先公園通りです。",
+     "street_names": [
+      "公園通り"
+     ],
+     "length": 0.056,
+     "verbal_transition_alert_instruction": "左方向です。その先公園通りです。"
+    },
+    {
+     "type": 6,
+     "instruction": "目的地は左側です。",
+     "length": 0,
+     "verbal_transition_alert_instruction": "目的地は左側です。"
+    }
+   ]
+  }
+ }
+}
