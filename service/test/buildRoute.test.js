@@ -91,6 +91,110 @@ test("高速の方面と、出口を見分ける番号をアプリへ返す", as
   for (const e of exits) assert.match(e.maneuver, /^ramp/, `出口の値が変わった: ${e.maneuver}`);
 });
 
+test("区間ごとに条件が違うルートも Valhalla で引く", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **ナビは Valhalla 一択**（利用者の判断）。区間ごとの有料・下道も自前で引く。
+  //    新座 → 箱根。前半は高速あり、高速の上（厚木の手前）で切り替えて後半は下道のみ。
+  // ⚠️ **全体の条件は「両方避ける」にしておく**（アプリは一番厳しい組み合わせを送る）。
+  //    区間ごとの条件を無視して全体の条件で引くと、前半でも高速を使わないので、
+  //    「前半で高速を使った」ことが区間ごとに引いた証拠になる
+  const switchPoint = [139.467012, 35.486613];
+  const out = await buildRouteResponse({
+    from: [139.5693, 35.7936], to: HAKONE, vias: [switchPoint], displacement: "large",
+    guidance: false, avoidTolls: true, avoidHighways: true,
+    legConditions: [{ avoidTolls: false, avoidHighways: false }, { avoidTolls: true, avoidHighways: true }],
+  }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  const r = out.body.route;
+  const pts = decode(r.polyline);
+  const k = pts.findIndex(([lng, lat]) =>
+    Math.hypot((lng - switchPoint[0]) * 91000, (lat - switchPoint[1]) * 111000) < 30);
+  assert.ok(k > 0, "材料が悪い: 切り替え地点を通っていない");
+  assert.ok(r.kindSpans.some((s) => s.end <= k && s.kind === "expressway"),
+    "高速ありの区間で高速を使っていない（区間ごとの条件が効いていない）");
+  // 切り替え地点は立ち寄り先ではない
+  assert.strictEqual(r.steps.filter((s) => s.isLegEnd).length, 1, "切り替え地点が立ち寄り先になっている");
+  // 後半は、いったん下道に降りたら高速に戻らない
+  const after = r.kindSpans.filter((s) => s.begin >= k);
+  const down = after.findIndex((s) => s.kind === "surface" && s.meters > 500);
+  assert.ok(down >= 0, "後半で下道に降りていない");
+  assert.deepStrictEqual(after.slice(down).filter((s) => s.kind === "expressway"), [],
+    "下道のみの区間で、また高速に乗った");
+});
+
+test("区間ごとの条件が崩れていたら使わず、全体の条件で引く", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 崩れた値で区間ごとに引くと、避けたい区間で有料・高速に乗せる
+  for (const legConditions of [
+    [{ avoidTolls: "yes", avoidHighways: false }, { avoidTolls: false, avoidHighways: false }],
+    [null, { avoidTolls: false, avoidHighways: false }],
+    "下道",
+  ]) {
+    const out = await buildRouteResponse({
+      from: [139.5693, 35.7936], to: HAKONE, vias: [[139.114793, 35.235292]], displacement: "large",
+      guidance: false, avoidTolls: true, avoidHighways: true, legConditions,
+    }, { baseUrl: BASE });
+    assert.strictEqual(out.status, 200, out.body.error);
+    assert.strictEqual(out.body.route.kindMeters.expressway, 0,
+      `崩れた条件 ${JSON.stringify(legConditions)} で高速に乗った（全体の条件を使っていない）`);
+  }
+});
+
+/**
+ * `buildRouteResponse` が経路の関数へ渡した中身を覗く。
+ * ⚠️ **読み込み時に関数を取り込んでいる**ので、差し替えたら読み直すこと
+ */
+async function optsSent(body) {
+  const seg = require("../../admin/lib/segmentedRoute");
+  const original = seg.routeWithValhallaSegmented;
+  let sent = null;
+  delete require.cache[require.resolve("../lib/buildRoute")];
+  seg.routeWithValhallaSegmented = async (from, to, opts) => { sent = opts; return { error: "見るだけ" }; };
+  try {
+    const fresh = require("../lib/buildRoute");
+    await fresh.buildRouteResponse(body, { baseUrl: BASE });
+  } finally {
+    seg.routeWithValhallaSegmented = original;
+    delete require.cache[require.resolve("../lib/buildRoute")];
+  }
+  return sent;
+}
+
+test("おすすめ道路の終点を、立ち寄るが引き返さない扱いで渡す", async () => {
+  // ⚠️ **窓口で落とすと、実機のUターンが直らない。** 渡した番号がそのまま届くこと
+  const sent = await optsSent({ from: TOKYO, to: HAKONE, vias: [[139.4, 35.4]], stopAt: [0],
+    throughStopAt: [0], displacement: "large" });
+  assert.deepStrictEqual(sent.throughStopAt, [0], "通り抜けの番号を渡していない");
+  assert.deepStrictEqual(sent.stopAt, [0], "立ち寄り先の番号を渡していない");
+});
+
+test("崩れた通り抜けの番号は捨てる", async () => {
+  // ⚠️ 崩れた番号で引くと、別の立ち寄り先が通り抜けになる
+  for (const throughStopAt of ["0", { 0: true }, undefined]) {
+    const sent = await optsSent({ from: TOKYO, to: HAKONE, vias: [[139.4, 35.4]], stopAt: [0],
+      throughStopAt, displacement: "large" });
+    assert.deepStrictEqual(sent.throughStopAt, [], `${JSON.stringify(throughStopAt)} を通している`);
+  }
+  const mixed = await optsSent({ from: TOKYO, to: HAKONE, vias: [[139.4, 35.4]], stopAt: [0],
+    throughStopAt: [0, "1", 2.5, null], displacement: "large" });
+  assert.deepStrictEqual(mixed.throughStopAt, [0], "数でない番号を通している");
+});
+
+test("信号のある交差点かをアプリへ渡す", async (t) => {
+  // ⚠️ **窓口で落とすと、案内が「この交差点で」にならない。**
+  //    Valhalla は信号を持っていないので、ここが唯一の伝え口
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse(
+    { from: [139.5693, 35.7936], to: [139.4683, 35.7996], displacement: "large", guidance: false },
+    { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  const steps = out.body.route.steps;
+  assert.ok(steps.every((s) => typeof s.atSignal === "boolean"), "印が付いていない指示がある");
+  assert.ok(steps.some((s) => s.atSignal), "信号のある交差点を1つも渡していない");
+  // ⚠️ **全部に印を付けないこと。** 信号の無い交差点は今までどおりの言い方
+  assert.ok(steps.some((s) => !s.atSignal), "全部の指示を信号ありにしている");
+});
+
 test("道の種別ごとの距離を返す", async (t) => {
   // ⚠️ **アプリが読む先が無かった。** `ValhallaRouteService.hasTolls` は
   //    `kindMeters` を読むが応答に入っておらず、常に false に落ちていた
@@ -202,7 +306,8 @@ test("管理の窓口を載せていない", () => {
   // ⚠️ 規制の編集・取り込み・道路データの生成は admin の仕事。外に出さない
   const server = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
   const routes = [...server.matchAll(/app\.(get|post|put|delete)\("([^"]+)"/g)].map((m) => m[2]);
-  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/route"],
+  // ⚠️ `/v1/snap` はアプリの「なぞる」が使う（道路に載せるだけ。管理の窓口ではない）
+  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/route", "/v1/snap"],
     `余計な窓口が載っている: ${routes.join(", ")}`);
 });
 

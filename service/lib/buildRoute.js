@@ -13,7 +13,9 @@
  */
 "use strict";
 
-const { routeWithValhalla } = require("../../admin/lib/valhallaRoute");
+// ⚠️ **区間ごとに条件が違うときも Valhalla で引く**（ナビは Valhalla 一択）。
+//    条件がそろっていれば、中で `routeWithValhalla` をそのまま呼ぶ
+const { routeWithValhallaSegmented } = require("../../admin/lib/segmentedRoute");
 const { simulate } = require("../../admin/lib/navSimulate");
 const { normalized: normalizedAnnounce } = require("../../admin/lib/navGuide");
 const { ATTRIBUTION } = require("../../admin/lib/restrictionOrigin");
@@ -53,6 +55,14 @@ function toAppRoute(route) {
     distanceMeters: step.distanceMeters,
     durationSeconds: step.durationSeconds,
     isCurvyAhead: !!step.isCurvyAhead,
+    // ⚠️ **曲がる場所に信号があるか。** 案内を「この交差点で〜」に変えるのに使う
+    //    （信号の無い交差点は今までどおり）
+    atSignal: !!step.atSignal,
+    // ⚠️ **曲がったあとに走る道の車線数。** アプリは「2車線以上のときだけ
+    //    車線を言う」判断に使う（1車線の道で「左車線へ」と言わないため）。
+    //    ⚠️ OSM 由来なので入っていない道がある（実測: 浦和所沢バイパスは
+    //    片側2車線だがデータ上は1）。無い・1のときは黙ること
+    laneCount: Number.isInteger(step.laneCount) ? step.laneCount : null,
     roadKind: step.roadKind,
     //: **その指示のうち何mが有料か。** 指示の有料の旗は一部でも有料なら丸ごう立つ
     //  ので、画面の「通る道」が4倍に膨れていた（実測 6.8km → 28.4km）
@@ -104,19 +114,34 @@ async function buildRouteResponse(body, deps = {}) {
   const { from, to, vias, variant, displacement, avoidHighways, avoidTolls, excludeTolls,
           alternates,
           arriveOnNearSide, roadNameStyle, announce, guidance,
-          at, isHoliday, stopAt, heading, headingTolerance, viaHeadings } = body || {};
+          at, isHoliday, stopAt, throughStopAt, heading, headingTolerance, viaHeadings,
+          legConditions } = body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
   }
 
+  // ⚠️ **区間ごとの条件は、形が正しいときだけ使う。** 崩れた値で区間ごとに引くと、
+  //    避けたい区間で有料・高速に乗せることになる。使わないときは全体の条件で引く
+  //    （アプリは全体の条件に「一番厳しい組み合わせ」を入れて送ってくる）
+  const conditions = Array.isArray(legConditions)
+    && legConditions.every((c) => c && typeof c === "object"
+      && typeof c.avoidTolls === "boolean" && typeof c.avoidHighways === "boolean")
+    ? legConditions.map((c) => ({ avoidTolls: c.avoidTolls, avoidHighways: c.avoidHighways }))
+    : undefined;
+
   let route;
   try {
-    route = await routeWithValhalla(from, to, {
+    // ⚠️ **区間ごとの条件が無ければ、いつもの引き方そのもの**（`routeWithValhallaSegmented` が委ねる）
+    route = await routeWithValhallaSegmented(from, to, {
+      legConditions: conditions,
       vias: Array.isArray(vias) ? vias : [],
       // ⚠️ **止まる場所（立ち寄り先）の番号。** ここが空だと経由地が全部
       //    「通るだけ」になり、着いても知らせられない
       stopAt: Array.isArray(stopAt) ? stopAt : [],
+      // ⚠️ **おすすめ道路の終点。** 立ち寄るが、その場で引き返させない
+      //    （`admin/lib/valhallaRoute.js` の `locationType` を読むこと）
+      throughStopAt: Array.isArray(throughStopAt) ? throughStopAt.filter(Number.isInteger) : [],
       // ⚠️ **走っている向き。** 引き直しのときに渡すと、その場で向きを変えさせず
       //    そのまま進んで小道で回り込む経路になる（`lib/valhallaRoute.js`）
       heading, headingTolerance,
@@ -127,7 +152,11 @@ async function buildRouteResponse(body, deps = {}) {
       // ⚠️ **別の道も一緒に頼む。** 立ち寄り先があると返らない（Valhalla の性質）
       alternates: Number(alternates) || 0,
       arriveOnNearSide, roadNameStyle,
-      withRoadClass: false,
+      // ⚠️ **車線数を取るために測る。** かつては通信を減らすため false にしていたが、
+      //    「曲がったあとどの車線にいればよいか」を言うのに要る（実機の要望）。
+      //    実測で増えるのは誤差のうち（11km: 128→78ms / 82km: 218→178ms・3回平均。
+      //    Valhalla は同じコンテナの中なので往復が軽い）
+      withRoadClass: true,
       baseUrl: deps.baseUrl,
       restrictionsFor: deps.restrictionsFor,
       // ⚠️ 渡さなければ時間の判断をしない（時間限定の規制も避ける＝避けすぎ側）

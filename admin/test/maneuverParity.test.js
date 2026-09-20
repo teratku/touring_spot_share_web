@@ -20,8 +20,12 @@ const SWIFT = path.join(__dirname, "..", "..", "..",
 /** アプリの enum の生値を、Swift のソースから読む */
 function appRawValues() {
   const src = fs.readFileSync(SWIFT, "utf8");
-  const at = src.indexOf("enum NavManeuver: String {");
-  assert.ok(at > 0, "NavManeuver が見つからない");
+  // ⚠️ **字面を決め打ちしないこと。** `CaseIterable` を足しただけで
+  //    「見つからない」と言い出した（生値は何も変わっていないのに）。
+  //    見たいのは case の生値なので、宣言の飾りは読み飛ばす
+  const head = /enum\s+NavManeuver\s*:\s*String[^{]*\{/.exec(src);
+  assert.ok(head, "NavManeuver が見つからない");
+  const at = head.index;
   const body = src.slice(at, src.indexOf("\n}", at));
   return new Set([...body.matchAll(/case\s+\w+\s*=\s*"([^"]*)"/g)].map((m) => m[1]));
 }

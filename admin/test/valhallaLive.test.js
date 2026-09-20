@@ -83,6 +83,77 @@ test("経由地を通してもUターンが出ない", async (t) => {
 });
 
 /**
+ * おすすめ道路の終点で、来た道へ引き返さないこと。
+ *
+ * ⚠️ **実機で報告された壊れ方。** おすすめ道路（山中湖小山線）を選び、そのあと
+ *    スポット（伊東市）をゴールにすると、道の終点で向きを変えて**来た道を戻って**いた。
+ *    書き出した経路（2026-09-19）では 到着方位66° → 出発方位246°、引き返し199m。
+ * ⚠️ 材料はその報告そのもの（出発・通過点・終点・ゴール）。
+ */
+const YAMANAKAKO_COURSE = {
+  from: [139.57398, 35.79685],
+  vias: [[138.91476, 35.42625], [138.90837, 35.41233], [138.91856, 35.40386], [138.93303, 35.40002],
+    [138.94166, 35.39046], [138.94384, 35.37851], [138.96105, 35.37132], [138.97344, 35.36141],
+    [138.98217, 35.36689]],
+  stopAt: [8],
+  to: [139.09453, 34.985935],
+};
+
+/** 区間の切れ目で、着いた向きと出た向きがどれだけ違うか（度） */
+function turnAtLegEnd(route) {
+  const end = route.steps.findIndex((s) => s.isLegEnd);
+  if (end < 0) return null;
+  const pts = route.points;
+  const at = route.steps[end].endIndex ?? route.steps[end].beginIndex;
+  const bearing = (a, b) => {
+    const t = (x) => x * Math.PI / 180;
+    const y = Math.sin(t(b[0] - a[0])) * Math.cos(t(b[1]));
+    const x = Math.cos(t(a[1])) * Math.sin(t(b[1])) - Math.sin(t(a[1])) * Math.cos(t(b[1])) * Math.cos(t(b[0] - a[0]));
+    return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+  };
+  const back = Math.max(0, at - 20), fwd = Math.min(pts.length - 1, at + 20);
+  const diff = ((bearing(pts[at], pts[fwd]) - bearing(pts[back], pts[at]) + 540) % 360) - 180;
+  return Math.abs(diff);
+}
+
+test("おすすめ道路の終点で、来た道へ引き返さない", async (t) => {
+  if (await skipIfDown(t)) return;
+  const common = { displacement: "large", variant: "fun", avoidTolls: true, avoidHighways: true,
+    vias: YAMANAKAKO_COURSE.vias, stopAt: YAMANAKAKO_COURSE.stopAt };
+  const back = await routeWithValhalla(YAMANAKAKO_COURSE.from, YAMANAKAKO_COURSE.to, common);
+  assert.ok(!back.error, back.error);
+  // 材料の確認: 指定しなければ引き返す（この材料でしか差が出ない）
+  assert.ok(turnAtLegEnd(back) > 150,
+    `材料が悪い: 指定なしでも引き返していない（${turnAtLegEnd(back)}度）`);
+
+  const through = await routeWithValhalla(YAMANAKAKO_COURSE.from, YAMANAKAKO_COURSE.to,
+    { ...common, throughStopAt: YAMANAKAKO_COURSE.stopAt });
+  assert.ok(!through.error, through.error);
+  assert.ok(turnAtLegEnd(through) < 120,
+    `終点で引き返している（${turnAtLegEnd(through)}度）`);
+  // ⚠️ **到着の知らせを失わないこと。** through だけにすると区間が分かれない
+  //    （数える印は「道の終点」と「最終目的地」の2つ）
+  assert.strictEqual(through.steps.filter((x) => x.isLegEnd).length, 2,
+    "区間が分かれていない（着いても知らせられない）");
+  // ⚠️ **遠回りと引き換えにしないこと。** 実測では 0.1km 短くなった
+  assert.ok(through.lengthMeters < back.lengthMeters * 1.1,
+    `引き返さないために遠回りしすぎ（${back.lengthMeters}m → ${through.lengthMeters}m）`);
+});
+
+test("行き止まりの終点でも経路を返す", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **引き返すしか無い場所では引き返してよい**（利用者の判断）。
+  //    石廊崎（岬の先）で、通り抜けを指しても経路が返ること
+  const IROUZAKI = [138.8447, 34.6034];
+  const SHIMODA = [138.9450, 34.6800];
+  const r = await routeWithValhalla(SHIMODA, SHIMODA, {
+    displacement: "large", vias: [[138.8700, 34.6200], IROUZAKI], stopAt: [1], throughStopAt: [1] });
+  assert.ok(r && !r.error, `行き止まりで経路を失った: ${r && r.error}`);
+  assert.ok(r.lengthMeters > 0, "距離が0の経路を返している");
+  assert.strictEqual(r.steps.filter((x) => x.isLegEnd).length, 2, "立ち寄り先の区切りが無い");
+});
+
+/**
  * ⚠️ **Uターンの数え方が合っていること。** 「0回だった」を報告する以上、
  *    出るときにちゃんと数えられないと意味がない。
  *    材料は、同じあたりを往復させて実際にUターンが出る組（実測3回）。

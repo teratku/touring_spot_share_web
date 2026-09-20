@@ -33,6 +33,9 @@ COPY admin/package.json   /app/admin/package.json
 # ⚠️ **県の形（87KB）も入れること。** 経路が通る県を決めるのに要る。
 #    もとはアプリ側にあるがビルド文脈の外で、忘れると ENOENT で落ちた
 COPY admin/data/japan-prefectures.geojson /app/admin/data/japan-prefectures.geojson
+# ⚠️ **信号（1.56MB）も入れること。** 入れ忘れると案内が「この交差点で」に
+#    ならないだけで**エラーは出ない**（読めなければ信号なしとして動く）
+COPY admin/data/traffic-signals.bin /app/admin/data/traffic-signals.bin
 COPY service/package.json /app/service/package.json
 RUN cd /app/service && npm install --omit=dev
 

@@ -5,7 +5,7 @@
  *
  * ⚠️ **`admin/server.js` とは別物。** あちらは開発者用でローカル専用
  *    （`const HOST = "127.0.0.1"`）、認証なし、管理の窓口が全部載っている。
- *    **あれを公開してはいけない。** こちらは `/v1/route` だけを出す。
+ *    **あれを公開してはいけない。** こちらは `/v1/route` と `/v1/snap` だけを出す。
  *
  * 【判断のもと】
  * ⚠️ **`admin/lib` を複製しないこと。** 規制の判断（排気量・時間・重なり）が
@@ -32,6 +32,7 @@ const { isSellable } = require("../admin/lib/restrictionOrigin");
 const { PrefectureLocator } = require("../admin/lib/prefectureLocator");
 const { ROMAJI } = require("../admin/lib/prefectureRomaji");
 const { buildRouteResponse } = require("./lib/buildRoute");
+const { buildSnapResponse } = require("./lib/snapRoads");
 
 const PORT = process.env.PORT || 8080;
 /** ⚠️ Cloud Run は 0.0.0.0 で待つこと。127.0.0.1 だと外から繋がらない */
@@ -141,6 +142,16 @@ app.post("/v1/route", requireAuth, async (req, res) => {
   const out = await buildRouteResponse(req.body || {}, {
     baseUrl: VALHALLA_URL, restrictionsFor: restrictionsForRoute,
   });
+  res.status(out.status).json(out.body);
+});
+
+/**
+ * なぞった線を道路に載せる（アプリの「なぞる」。もとは Google の Roads API）。
+ *
+ * ⚠️ **認証を外さないこと。** `/v1/route` と同じく Valhalla の CPU を使う
+ */
+app.post("/v1/snap", requireAuth, async (req, res) => {
+  const out = await buildSnapResponse(req.body || {}, { baseUrl: VALHALLA_URL });
   res.status(out.status).json(out.body);
 });
 

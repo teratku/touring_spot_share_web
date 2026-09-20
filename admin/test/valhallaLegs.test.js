@@ -1,7 +1,7 @@
 "use strict";
 const test = require("node:test");
 const assert = require("node:assert");
-const { routeWithValhalla } = require("../lib/valhallaRoute");
+const { routeWithValhalla, locationType } = require("../lib/valhallaRoute");
 
 /**
  * 経由地（立ち寄り先）ごとの区間の切れ目。
@@ -123,6 +123,59 @@ test("止まる場所だけを break にする", async () => {
   const types = sent.locations.slice(1, -1).map((l) => l.type);
   assert.deepStrictEqual(types, ["through", "break"],
     `経由地の種類が違う: ${JSON.stringify(types)}`);
+});
+
+test("おすすめ道路の終点は break_through（立ち寄るが引き返さない）", async () => {
+  // ⚠️ **`break` だと、その場で向きを変えて来た道を戻る**（実機で報告）。
+  //    立ち寄り先の印は残すこと（区間を分けないと「着きました」と言えない）
+  const sent = await bodySent({ vias: [[139.72, 35.68], [139.74, 35.68]], stopAt: [0, 1], throughStopAt: [1] });
+  const types = sent.locations.slice(1, -1).map((l) => l.type);
+  assert.deepStrictEqual(types, ["break", "break_through"],
+    `経由地の種類が違う: ${JSON.stringify(types)}`);
+});
+
+test("通り抜けを指しても、止まる場所でなければ効かない", async () => {
+  // ⚠️ 通らせたいだけの中継点は through のまま。break_through にすると
+  //    中継点ごとに「着きました」と言うことになる
+  const sent = await bodySent({ vias: [[139.72, 35.68], [139.74, 35.68]], stopAt: [1], throughStopAt: [0, 1] });
+  const types = sent.locations.slice(1, -1).map((l) => l.type);
+  assert.deepStrictEqual(types, ["through", "break_through"],
+    `経由地の種類が違う: ${JSON.stringify(types)}`);
+});
+
+test("種別の決め方（表）", () => {
+  const opts = { stopAt: [1, 2], throughStopAt: [2, 3] };
+  assert.deepStrictEqual([0, 1, 2, 3].map((i) => locationType(i, opts)),
+    ["through", "break", "break_through", "through"]);
+  assert.strictEqual(locationType(0, {}), "through", "止まる場所を言わないのに止めている");
+  assert.strictEqual(locationType(0, { stopAt: [0] }), "break");
+});
+
+test("通り抜けで引けなければ、諦めて引き直す", async () => {
+  // ⚠️ **経路そのものを失わないため。** 本当に回れない行き止まりでは
+  //    「引き返さない」を守れないことがある。そのときは引き返してよい
+  const real = globalThis.fetch;
+  const sent = [];
+  globalThis.fetch = async (url, init) => {
+    if (String(url).includes("trace_attributes")) {
+      return { ok: true, json: async () => ({ edges: [], admins: [] }) };
+    }
+    sent.push(JSON.parse(init.body));
+    // 1回目は引けない。2回目（通り抜けを諦めた頼み）だけ返す
+    return { ok: true, json: async () => (sent.length === 1
+      ? { error_code: 442, error: "No path could be found" } : fakeTrip(2)) };
+  };
+  let route;
+  try {
+    route = await routeWithValhalla([139.70, 35.68], [139.76, 35.68], {
+      baseUrl: "http://127.0.0.1:9", withRoadClass: false, prefectureSpans: false,
+      vias: [[139.72, 35.68]], stopAt: [0], throughStopAt: [0],
+    });
+  } finally { globalThis.fetch = real; }
+  assert.strictEqual(sent.length, 2, "引き直していない");
+  assert.deepStrictEqual(sent[0].locations[1].type, "break_through", "材料が悪い: 1回目が通り抜けでない");
+  assert.deepStrictEqual(sent[1].locations[1].type, "break", "引き直しでも通り抜けのまま");
+  assert.ok(route && !route.error, "引き直した経路を返していない");
 });
 
 test("止まる場所を言わなければ全部 through", async () => {

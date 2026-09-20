@@ -24,12 +24,24 @@
  *    ・`break`（`stopAt` で指定）… 利用者が置いた立ち寄り先。
  *      **区間を分けないと「着きました」と言えない**（実機で報告: 立ち寄り先を
  *      設定したのに経路に出ず、通過しても何も起きなかった）。
+ *    ・`break_through`（`throughStopAt` で指定）… おすすめ道路の終点。
+ *      区間は分けるが、**その場で引き返させない**（`locationType` の説明を読むこと）。
  */
 "use strict";
 
 const { spokenRoadName, intersectionName, towardNames } = require("./navName");
 const { shouldSayFollowTheRoad } = require("./navGuide");
 const routeLoops = require("./routeLoops");
+const trafficSignals = require("./trafficSignals");
+
+/**
+ * 曲がる地点から信号までの距離が、これ以内なら「信号のある交差点」とみなす。
+ *
+ * ⚠️ **実測で決めた**（2026-09-19・市街地と郊外の4経路・曲がる指示19件）:
+ *    0〜10m に14件、次に近いのは81m、あとは100m超。あいだが空いているので、
+ *    少し余裕を見て20m。⚠️ 信号は停止線に打たれ、向きごとに複数あることがある
+ */
+const SIGNAL_RADIUS_METERS = 20;
 const { applicable: applicableRestrictions, hitsOnRoute, excludePolygonsFor }
   = require("./restrictionAvoid");
 
@@ -511,7 +523,9 @@ async function roadClassSpans(encodedShape, costing, baseUrl) {
         costing,
         shape_match: shapeMatch,
         filters: {
-          attributes: ["edge.road_class", "edge.length", "edge.toll",
+          // ⚠️ **車線数もここで一緒に取る。** 別に `/trace_attributes` を
+          //    叩くと1往復増える（この口は経路1本につき既に呼んでいる）
+          attributes: ["edge.road_class", "edge.length", "edge.toll", "edge.lane_count",
                        "edge.begin_shape_index", "edge.end_shape_index"],
           action: "include",
         },
@@ -531,12 +545,16 @@ async function roadClassSpans(encodedShape, costing, baseUrl) {
       // ⚠️ **有料は区間(edge)から数えること。** 指示(maneuver)の旗は、一部でも
       //    有料を含むと丸ごう立つ。実測: 実際6.8kmの雁坂トンネルが28.4km（4倍）
       const toll = e.toll === true;
+      // ⚠️ **車線数は OSM 由来で、入っていない道もある**（実測: 123辺中すべてに
+      //    値はあったが、1車線は既定値のことがある）。2車線以上だけを当てにする
+      const lanes = Number.isInteger(e.lane_count) ? e.lane_count : null;
       const last = spans[spans.length - 1];
-      if (last && last.roadClass === e.road_class && last.toll === toll) {
+      if (last && last.roadClass === e.road_class && last.toll === toll
+          && last.laneCount === lanes) {
         last.end = e.end_shape_index;
         last.meters += Math.round((e.length || 0) * 1000);
       } else {
-        spans.push({ roadClass: e.road_class, toll,
+        spans.push({ roadClass: e.road_class, toll, laneCount: lanes,
                      begin: e.begin_shape_index, end: e.end_shape_index,
                      meters: Math.round((e.length || 0) * 1000) });
       }
@@ -636,6 +654,12 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
         //    道路名から「自動車道」を探すような当て推量をしないこと
         //    （実測: highway 3区間65.9km / toll 7区間70.6km を正しく拾えた）
         roadKind: m.highway ? "expressway" : (m.toll ? "toll" : "surface"),
+        // ⚠️ **曲がる場所に信号があるか**（案内を「この交差点で」に変えるため）。
+        //    Valhalla は信号を持っていないので OSM から自前で見る
+        //    （`admin/lib/trafficSignals.js`）。実測: 曲がる19件のうち
+        //    信号のある交差点は 0〜10m に14件、次に近いのは81m。20mで分かれる
+        atSignal: trafficSignals.isNear(points[indexOf(m.begin_shape_index || 0)],
+                                        SIGNAL_RADIUS_METERS),
       });
     }
     // ⚠️ **この区間の最後の指示が「着いた」にあたる。** Valhalla は区間ごとに
@@ -685,6 +709,14 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
       begin: Math.max(0, Math.min(sp.begin, lastIndex)),
       end: Math.max(0, Math.min(sp.end, lastIndex)),
     })).filter((sp) => sp.end > sp.begin);
+
+    // ⚠️ **車線数は指示ごとに持たせる。** アプリは「2車線以上のときだけ
+    //    車線を言う」判断に使う（1車線の道で「左車線へ」と言わないため）。
+    //    ⚠️ 見るのは**曲がったあとに走る道**なので、指示の始まりの地点で引く
+    for (const st of steps) {
+      const sp = classSpans.find((x) => st.beginIndex >= x.begin && st.beginIndex < x.end);
+      st.laneCount = sp ? sp.laneCount : null;
+    }
   }
 
   // ⚠️ **有料・高速が出てくるときだけ測る。** 配信では `withRoadClass: false` で
@@ -818,6 +850,23 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
   };
 }
 
+/**
+ * 経由地の種別を決める。
+ *
+ * ⚠️ **`break_through` は「立ち寄るが、来た道へ引き返さない」。** おすすめ道路の
+ *    終点に使う。`break` だと、その場で向きを変えて**来た道を戻る**経路になる
+ *    （実機で報告。実測・山中湖小山線→伊東: 到着方位66°→出発方位246°で
+ *    199m 引き返していた。`break_through` にすると 68°・24m、距離は 218.7→218.6km）。
+ * ⚠️ **行き止まりでも使ってよい。** 引き返すしか無い場所では引き返す経路が返る
+ *    （実測・石廊崎 +0.1km、扇沢 変化なし）。禁止ではなく「その場で回らない」だけ。
+ * ⚠️ **スポットには使わないこと。** 寄り道して戻るのは自然な動きで、
+ *    塞ぐと遠回りになる。呼ぶ側（アプリ）が道の終点だけを指定する
+ */
+function locationType(index, opts = {}) {
+  if (!(opts.stopAt || []).includes(index)) return "through";
+  return (opts.throughStopAt || []).includes(index) ? "break_through" : "break";
+}
+
 async function routeWithValhalla(from, to, opts = {}) {
   const variant = VARIANTS[opts.variant] || VARIANTS.normal;
   // ⚠️ **排気量が指定されたら costing もそれで決める。**
@@ -891,7 +940,7 @@ async function routeWithValhalla(from, to, opts = {}) {
     ...vias.map((p, i) => {
       const at = {
         lat: p[1], lon: p[0],
-        type: (opts.stopAt || []).includes(i) ? "break" : "through",
+        type: locationType(i, opts),
       };
       // ⚠️ **「その向きで入れ」と言うと、行って戻るのではなく回り込む。**
       //    おすすめ道路の入口に、道に沿った向きを渡すために使う。
@@ -997,6 +1046,15 @@ async function routeWithValhalla(from, to, opts = {}) {
   let restrictionPrefectures = [];
   try {
     json = await ask();
+
+    // ⚠️ **通り抜けの指定で引けなければ、諦めて引き直す。** 「引き返さない」を
+    //    守れない場所（本当に回れない行き止まり）で、経路そのものを失わないため。
+    //    ⚠️ 実測では石廊崎・扇沢とも引けたので、ここは滅多に通らない保険
+    if ((!json || !json.trip) && (opts.throughStopAt || []).length) {
+      body.locations = locations.map((at) => (at.type === "break_through"
+        ? { ...at, type: "break" } : at));
+      json = await ask();
+    }
 
     // ⚠️ **船に乗ってしまったら、その場所を塞いで引き直す。**
     //    `shortest` では `use_ferry` が効かないため（上の説明を読むこと）
@@ -1324,8 +1382,8 @@ async function routeWithValhalla(from, to, opts = {}) {
   return result;
 }
 
-module.exports = { routeWithValhalla, decode6, MANEUVER, VARIANTS, DISPLACEMENTS,
+module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS, DISPLACEMENTS,
   ROAD_CLASS_TIERS, ROAD_CLASS_COLORS, HIGHWAY_LADDER, MAX_SIDE_DETOUR_METERS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
-  roadClassSpans, speedSpans, BASE };
+  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE };

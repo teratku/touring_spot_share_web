@@ -71,3 +71,7 @@ node_modules/
 
 admin/test-rules/node_modules/
 admin/test-rules/.npmcache/
+
+# 変異テストの退避ファイル。⚠️ 走っている最中にコミットすると、変異が当たった
+# ソースごと記録される
+*.mutbak
