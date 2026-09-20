@@ -1473,3 +1473,47 @@ test("高速を使う経路の時間はほとんど変えない", async (t) => {
   assert.ok(ratio < 1.05,
             `高速なのに ${((ratio - 1) * 100).toFixed(0)}% も伸びている`);
 });
+
+test("代替も規制を照合して返す", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **実機で報告（2026-09-20）**: 代替が規制を2件通っているのに
+  //    「規制を避けた経路」と名乗っていた。「塞ぎは body に溜めてあるから
+  //    代替も安全側」という前提で `restrictionHits: []` に固定していたが、
+  //    **塞ぐと経路が引けないときは塞ぎを外して引き直す**ので前提が崩れる
+  //    （朝日峠展望公園は表筑波スカイラインの沿道にあり、塞ぐと到達できない）。
+  const fs = require("fs");
+  const { isSellable } = require("../lib/restrictionOrigin");
+  const path = require("path").join(__dirname, "..", "data", "road-restrictions", "ibaraki.json");
+  if (!fs.existsSync(path)) { t.skip("茨城の規制データが無い"); return; }
+  const rj = JSON.parse(fs.readFileSync(path, "utf8"));
+  const list = (rj.restrictions || Object.values(rj).find((v) => Array.isArray(v)) || [])
+    .filter(isSellable);
+  assert.ok(list.length >= 5, `材料が悪い: 売ってよい規制が ${list.length}件`);
+
+  // 朝日峠展望公園（表筑波スカイラインの沿道。避けると到達できない）
+  const r = await routeWithValhalla(NIIZA, [140.16277, 36.1728115], {
+    displacement: "large", avoidTolls: true, avoidHighways: true, alternates: 1,
+    restrictions: list,
+  });
+  assert.ok(!r.error, r.error);
+  assert.ok(r.restrictionHits.length >= 1,
+    "材料が悪い: 本命が規制を1件も通っていない（避けられてしまった）");
+  assert.ok(Array.isArray(r.alternates) && r.alternates.length >= 1,
+    "材料が悪い: 代替が返っていない");
+
+  for (const a of r.alternates) {
+    // ⚠️ **空で固定しないこと。** 通っているなら通っていると言う
+    assert.ok(Array.isArray(a.restrictionHits), "代替に規制の欄が無い");
+    assert.ok(a.restrictionHits.length >= 1,
+      "代替が規制を通っているのに0件と言っている（黙って通させない）");
+    // ⚠️ どこを通るかも返すこと（画面が赤い点線で示す）
+    for (const h of a.restrictionHits) {
+      assert.ok(Array.isArray(h.spans) && h.spans.length >= 1,
+        `${h.name} の範囲が空（地図に示せない）`);
+      for (const s of h.spans) {
+        assert.ok(s.end > s.begin, `範囲が逆さま: ${JSON.stringify(s)}`);
+        assert.ok(s.end < a.points.length, `範囲が線の外: ${s.end} / ${a.points.length}点`);
+      }
+    }
+  }
+});

@@ -24,7 +24,8 @@
  */
 "use strict";
 
-const { findOverlaps, appliesToRange, BLOCKING_KINDS } = require("./restrictionOverlap");
+const { findOverlaps, appliesToRange, BLOCKING_KINDS,
+        longestRunOnLine, spansOnLine, ROUTE_RUN_METERS, NEAR_METERS } = require("./restrictionOverlap");
 const { isActiveAt } = require("./restrictionTime");
 const { decode } = require("./polyline");
 
@@ -80,12 +81,35 @@ function hitsOnRoute(routePoints, restrictions, options = {}) {
   const found = findOverlaps(restrictions, [{ id: "route", points: routePoints }], options);
   const hits = found.get("route") || [];
   const byId = new Map(restrictions.map((r) => [r.id, r]));
+
+  // ⚠️ **割合だけでは足りない。** `findOverlaps` の物差しは「この道とこの道は
+  //    同じ道か」で、長い規制線を少しかすめただけの経路を取りこぼす。
+  //    経路は**走った距離**で見ること（実機で報告: 「二輪禁止表示は出ているが
+  //    二輪禁止ルートを通ってしまっている」。表筑波スカイラインを763m走って
+  //    いたのに、重なり17%で見逃していた）。
+  const seen = new Set(hits.map((h) => h.restrictionId));
+  const near = options.nearMeters ?? NEAR_METERS;
+  const runLimit = options.runMeters ?? ROUTE_RUN_METERS;
+  for (const r of restrictions) {
+    if (seen.has(r.id) || !r.points || r.points.length < 2) continue;
+    const run = longestRunOnLine(routePoints, r.points, near);
+    if (run <= runLimit) continue;
+    hits.push({ restrictionId: r.id, name: r.name, kind: r.kind,
+                // ⚠️ 割合も添える（並べ替えと表示に使う）。走った距離で拾ったものは
+                //    割合が小さいので、ここで0にはしない
+                ratio: 0, runMeters: Math.round(run) });
+  }
+
   return hits
     .map((h) => {
       const src = byId.get(h.restrictionId) || {};
       // ⚠️ **確認済みかどうかを落とさない。** 未確認（JARTIC の候補）を避けたのか、
       //    人が地図で見て登録したものを避けたのかは、見る側にとって意味が違う
-      return { ...h, id: h.restrictionId, points: src.points, verified: src.verified !== false };
+      // ⚠️ **どこを走ったかも返すこと。** 画面はこの範囲を赤点線にして
+      //    「ここは通れない」と示す（実機の要望）。件数だけでは場所が分からない
+      return { ...h, id: h.restrictionId, points: src.points,
+               verified: src.verified !== false,
+               spans: src.points ? spansOnLine(routePoints, src.points, options.nearMeters ?? NEAR_METERS) : [] };
     })
     .filter((h) => h.points && h.points.length >= 2)
     .sort((a, b) => b.ratio - a.ratio);

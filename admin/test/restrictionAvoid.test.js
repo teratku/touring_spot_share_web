@@ -5,7 +5,7 @@ const {
   applicable, hitsOnRoute, excludePolygonsFor, boxesAround, perimeterOf, spotsAlong,
   DISPLACEMENT_CC, BLOCK_EVERY_METERS,
 } = require("../lib/restrictionAvoid");
-const { blocksAlways, blocksEveryone, blockedSegments } = require("../lib/restrictionOverlap");
+const { blocksAlways, blocksEveryone, blockedSegments, overlapRatio } = require("../lib/restrictionOverlap");
 const { encode } = require("../lib/polyline");
 
 /** 芦ノ湖スカイラインを模した、まっすぐ10kmの線（実データの長さに合わせてある） */
@@ -157,4 +157,67 @@ test("時間限定の規制は、おすすめ道路から落とさない", () =>
     "07:00〜08:00 だけの規制で、1日23時間走れる道をおすすめから消している");
   assert.strictEqual(blockedSegments([weekend], [road]).size, 0,
     "土日だけの規制で、平日走れる道をおすすめから消している");
+});
+
+// MARK: 経路が規制の上を走ったか（割合では測れない）
+
+/**
+ * ⚠️ **実機で報告（2026-09-20）**:「二輪禁止表示は出ているが、二輪禁止ルートを
+ *    通ってしまっている」。原因は、経路の判定に**おすすめ道路と同じ割合の物差し**
+ *    （`MIN_RATIO` 0.3）を使っていたこと。長い規制線を少しかすめる経路は
+ *    「重なり17%」で見逃されるが、**763m も走っていた**。
+ *    経路は1mでも走れば通行禁止違反なので、割合ではなく**走った距離**で見る。
+ */
+test("長い規制を少しだけ走る経路も見逃さない", () => {
+  // 10km の規制線（東西にまっすぐ）
+  const long = [];
+  for (let i = 0; i <= 100; i++) long.push([139.0 + i * 0.0011, 35.0]);
+  const restriction = { id: "r1", kind: "noMotorcycle", name: "長い規制",
+                        polyline: encode(long) };
+  const rules = applicable([restriction], {});
+  assert.strictEqual(rules.length, 1, "材料が悪い: 規制が当てはまっていない");
+
+  // 規制線の端 600m ぶんだけ重なって走り、あとは南へ離れる経路
+  const route = [];
+  for (let i = 0; i <= 6; i++) route.push([139.0 + i * 0.0011, 35.0]);
+  for (let i = 1; i <= 40; i++) route.push([139.0066, 35.0 - i * 0.002]);
+
+  // ⚠️ 材料の確認。割合で見ると小さく、旧の物差しでは拾えない形であること
+  const ratio = overlapRatio(rules[0].points, route, 25);
+  assert.ok(ratio < 0.3, `材料が悪い: 重なりが ${(ratio * 100).toFixed(0)}% で割合でも拾える`);
+
+  const hits = hitsOnRoute(route, rules);
+  assert.strictEqual(hits.length, 1,
+    `走っているのに見逃している（重なり ${(ratio * 100).toFixed(0)}%）`);
+  assert.ok(hits[0].runMeters > 400,
+    `走った距離を測れていない: ${hits[0].runMeters}m`);
+});
+
+test("交差点で横切るだけなら規制とみなさない", () => {
+  // ⚠️ **ここを拾うと、無関係な道が軒並み「規制の上」になる。**
+  //    25m 以内にいる距離は、直角に横切るなら道幅ぶんにしかならない
+  const long = [];
+  for (let i = 0; i <= 100; i++) long.push([139.0 + i * 0.0011, 35.0]);
+  const rules = applicable([{ id: "r1", kind: "noMotorcycle", name: "長い規制",
+                              polyline: encode(long) }], {});
+  // 南北にまっすぐ横切る経路（規制線とは1点で交わるだけ）
+  const route = [];
+  for (let i = -40; i <= 40; i++) route.push([139.055, 35.0 + i * 0.002]);
+  assert.strictEqual(hitsOnRoute(route, rules).length, 0,
+    "横切っただけの道を規制の上とみなしている");
+});
+
+test("走った距離で拾ったものも、避ける対象として使える形で返す", () => {
+  // ⚠️ `excludePolygonsFor` は `points` を見る。付け忘れると塞げない
+  const long = [];
+  for (let i = 0; i <= 100; i++) long.push([139.0 + i * 0.0011, 35.0]);
+  const rules = applicable([{ id: "r1", kind: "noMotorcycle", name: "長い規制",
+                              polyline: encode(long) }], {});
+  const route = [];
+  for (let i = 0; i <= 6; i++) route.push([139.0 + i * 0.0011, 35.0]);
+  for (let i = 1; i <= 40; i++) route.push([139.0066, 35.0 - i * 0.002]);
+  const hits = hitsOnRoute(route, rules);
+  assert.strictEqual(hits.length, 1, "材料が悪い");
+  assert.ok(hits[0].points && hits[0].points.length >= 2, "線が付いていない（塞げない）");
+  assert.ok(excludePolygonsFor(hits).polygons.length > 0, "通せんぼを作れない");
 });

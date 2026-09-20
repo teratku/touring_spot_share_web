@@ -24,6 +24,31 @@ const STEP_METERS = 20;
 /** これ以上の割合が重なっていたら「同じ道」とみなす */
 const MIN_RATIO = 0.3;
 
+/**
+ * **経路が**規制線の上を連続して走った距離（m）。これを超えたら「通っている」。
+ *
+ * ⚠️ **割合（`MIN_RATIO`）では経路を測れない。** あれは「この道とこの道は同じ道か」
+ *    を見る物差しで、おすすめ道路を一覧から落とすのに使う。経路は**1mでも走れば
+ *    通行禁止違反**なので、長い規制線をかすめただけでも拾わなければならない。
+ *    実測（2026-09-20・朝日峠展望公園への経路。実機で報告された形）:
+ *      フルーツライン(八郷広域農道) … 重なり100%・連続3,228m → 割合でも拾えた
+ *      表筑波スカイライン            … 重なり 17%・連続  763m → **割合では見逃す**
+ *      フルーツライン(八郷広域農道) … 重なり  2%・連続   67m → **割合では見逃す**
+ *
+ * ⚠️ **交差点で横切るだけを拾わないための下限。** 実測（打ち直したあとの値）:
+ *      90度で横切る … 連続 50m
+ *      45度        … 連続 71m
+ *      30度        … 連続100m
+ *      20度        … 連続146m
+ *    浅い角度で交わる道まで含めて外すため、**150m** を下限にする。
+ * ⚠️ これを下回る「短く走った」ぶんは見逃す。同じ道の別区間で長く走っていれば
+ *    そちらで拾えるので、警告そのものは出る（実測: フルーツライン(八郷広域農道)は
+ *    67m の区間を見逃すが、3,228m の区間で拾える）。
+ * ⚠️ もっと厳しく見たくなったら、距離ではなく**経路と規制線の向き**
+ *    （並行か直交か）で見分けること。距離だけでは浅い角度の横切りと区別できない。
+ */
+const ROUTE_RUN_METERS = 150;
+
 function distanceMeters(a, b) {
   const R = 6371000;
   const p1 = (a[1] * Math.PI) / 180;
@@ -207,8 +232,52 @@ function blockedSegments(saved, segments) {
   return findOverlaps(restrictions, roads);
 }
 
+/**
+ * 経路が規制線の上を**連続して走った**距離のうち、いちばん長いもの（m）。
+ *
+ * ⚠️ 合計ではなく連続を見る。交差点で何度も横切る道と、一度まとまって走る道を
+ *    同じ扱いにしないため。
+ */
+function longestRunOnLine(routePoints, linePoints, nearMeters = NEAR_METERS) {
+  // ⚠️ **打ち直してから測ること。** 経路の点は間隔がまちまちで、粗いところでは
+  //    1区間まるごとが「近い」と数えられて**実際の3倍**になる
+  //    （実測: 同じ直角の横切りが、点の間隔22mで67m・222mで222m）。
+  const pts = resample(routePoints, STEP_METERS);
+  let best = 0, run = 0;
+  for (let i = 1; i < pts.length; i++) {
+    if (distanceToLine(pts[i], linePoints) <= nearMeters) {
+      run += distanceMeters(pts[i - 1], pts[i]);
+      if (run > best) best = run;
+    } else {
+      run = 0;
+    }
+  }
+  return best;
+}
+
+/**
+ * 経路のうち、規制線の上を走っている範囲（**元の経路の添字**）。
+ *
+ * ⚠️ **添字は打ち直す前のものを返すこと。** 画面はこの範囲で線を塗り分けるので、
+ *    打ち直した点の番号を返すと**別の場所に赤が出る**。
+ *    測るとき（`longestRunOnLine`）だけ打ち直す。
+ */
+function spansOnLine(routePoints, linePoints, nearMeters = NEAR_METERS) {
+  const spans = [];
+  let begin = -1;
+  for (let i = 0; i < routePoints.length; i++) {
+    const on = distanceToLine(routePoints[i], linePoints) <= nearMeters;
+    if (on && begin < 0) begin = i;
+    if (!on && begin >= 0) { spans.push({ begin, end: i - 1 }); begin = -1; }
+  }
+  if (begin >= 0) spans.push({ begin, end: routePoints.length - 1 });
+  // ⚠️ 1点だけの範囲は線にならない。捨てる
+  return spans.filter((s) => s.end > s.begin);
+}
+
 module.exports = {
   findOverlaps, overlapRatio, resample, distanceToLine, blockedSegments,
+  longestRunOnLine, spansOnLine, ROUTE_RUN_METERS,
   blocksEveryone, blocksAlways, appliesToRange,
   NEAR_METERS, STEP_METERS, MIN_RATIO, BLOCKING_KINDS, DISPLACEMENT_RANGES,
 };

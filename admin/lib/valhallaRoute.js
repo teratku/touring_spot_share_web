@@ -1042,6 +1042,8 @@ async function routeWithValhalla(from, to, opts = {}) {
   let restrictionTries = 0;
   let restrictionHits = [];
   let restrictionSkipped = [];
+  /** 当てはまる規制。⚠️ **代替の照合にも要る**ので、避ける処理の外でも持つ */
+  let restrictionRules = [];
   /** 規制を読んだ県。⚠️ 見落としが起きていないか確かめるために返す */
   let restrictionPrefectures = [];
   try {
@@ -1287,6 +1289,7 @@ async function routeWithValhalla(from, to, opts = {}) {
       const rules = applicableRestrictions(list || [], {
         displacement: opts.displacement, at: opts.at, isHoliday: opts.isHoliday,
       });
+      restrictionRules = rules;
       if (rules.length) {
         const handPolygons = body.exclude_polygons || [];
         const boxes = [];
@@ -1296,7 +1299,10 @@ async function routeWithValhalla(from, to, opts = {}) {
           //    避けたのか、人が地図で見て登録したものを避けたのかが見る側に伝わらない
           //    （実際に落としていて、未確認がすべて「確認済」に見えていた）
           restrictionHits = hits.map((h) => ({
-            id: h.id, name: h.name, ratio: h.ratio, verified: h.verified !== false }));
+            id: h.id, name: h.name, ratio: h.ratio, verified: h.verified !== false,
+            // ⚠️ **どこを走るかも渡すこと。** 画面はこの範囲を赤点線にして
+            //    「ここは通れない」と示す（実機の要望）。件数だけでは場所が分からない
+            spans: h.spans || [], runMeters: h.runMeters }));
           if (!hits.length) break;
           const made = excludePolygonsFor(hits, {
             // ⚠️ 既に塞いでいるぶんを差し引く。合計で上限に当たる。
@@ -1363,17 +1369,24 @@ async function routeWithValhalla(from, to, opts = {}) {
     restrictionPrefectures, sideTried, sideGaveUp,
     wastefulLoops, wastefulLoopsDropped, wastefulLoopSpans,
   });
-  // ⚠️ **代替も同じ塞ぎを通っている。** 塞ぎ（規制・有料・無駄な輪）は `body` に
-  //    溜めてあり、最後の引き直しで一緒に返ってくるので、代替も安全側になる。
-  //    実測: 塞いだ場所を3本とも通らず、本命との重なりは33%だった。
+  // ⚠️ **代替も1本ずつ照合すること。** 「塞ぎは `body` に溜めてあるから代替も
+  //    安全側になる」という前提で空にしていたが、**塞ぐと経路が引けないときは
+  //    塞ぎを外して引き直す**ので、その前提が崩れる。実機で報告（2026-09-20):
+  //    代替が規制を2件通っているのに「規制を避けた経路」と名乗っていた
+  //    （朝日峠展望公園は表筑波スカイラインの沿道にあり、塞ぐと到達できない）。
   // ⚠️ **立ち寄り先があると代替は返らない**（Valhalla の性質。実測で1本だけ）
   if (Array.isArray(json.alternates) && json.alternates.length) {
     result.alternates = [];
     for (const a of json.alternates) {
       if (!a || !a.trip) continue;
+      const altHits = restrictionRules.length
+        ? hitsOnRoute(pointsOfTrip(a.trip), restrictionRules).map((h) => ({
+            id: h.id, name: h.name, ratio: h.ratio, verified: h.verified !== false,
+            spans: h.spans || [], runMeters: h.runMeters }))
+        : [];
       result.alternates.push(await buildResult(a.trip, opts, costing, variantOptions, {
-        highwayTries: 0, ferryTries: 0, restrictionTries: 0, restrictionHits: [],
-        restrictionSkipped: [], restrictionPrefectures: [],
+        highwayTries: 0, ferryTries: 0, restrictionTries: 0, restrictionHits: altHits,
+        restrictionSkipped: [], restrictionPrefectures,
         sideTried: false, sideGaveUp: false,
         wastefulLoops: 0, wastefulLoopsDropped: 0, wastefulLoopSpans: [],
       }));
