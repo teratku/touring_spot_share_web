@@ -1517,3 +1517,53 @@ test("代替も規制を照合して返す", async (t) => {
     }
   }
 });
+
+test("通れない区間の番号は、返す線の番号であること", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **`pointsOfTrip` の番号を返さないこと**（`⚠️ 番号は使わない` と注記がある）。
+  //    `buildResult` は区間の継ぎ目の重複点を落とすので点数が違い、
+  //    立ち寄り先があるとずれる。画面はこの番号で線を塗り分けるため、
+  //    ずれると**別の場所が赤くなる**か、範囲外として黙って捨てられる。
+  const fs = require("fs");
+  const { isSellable } = require("../lib/restrictionOrigin");
+  const p = require("path").join(__dirname, "..", "data", "road-restrictions", "ibaraki.json");
+  if (!fs.existsSync(p)) { t.skip("茨城の規制データが無い"); return; }
+  const rj = JSON.parse(fs.readFileSync(p, "utf8"));
+  const list = (rj.restrictions || Object.values(rj).find((v) => Array.isArray(v)) || [])
+    .filter(isSellable);
+
+  // ⚠️ **立ち寄り先を入れること。** 区間が1本だと継ぎ目が無く、ずれても気づけない
+  const r = await routeWithValhalla(NIIZA, [140.1297666, 36.2147929], {
+    displacement: "large", avoidTolls: true, avoidHighways: true,
+    vias: [[139.9, 36.0]], stopAt: [0], alternates: 1, restrictions: list,
+  });
+  assert.ok(!r.error, r.error);
+  assert.ok(r.restrictionHits.length >= 1, "材料が悪い: 規制を1件も通っていない");
+
+  const { applicable } = require("../lib/restrictionAvoid");
+  const { distanceToLine, NEAR_METERS } = require("../lib/restrictionOverlap");
+  const rules = applicable(list, { displacement: "large" });
+  const byId = new Map(rules.map((x) => [x.id, x]));
+
+  const check = (label, route) => {
+    for (const h of route.restrictionHits || []) {
+      assert.ok(Array.isArray(h.spans) && h.spans.length >= 1, `${label} ${h.name}: 範囲が空`);
+      const rule = byId.get(h.id);
+      assert.ok(rule, `${label} ${h.name}: 元の規制が引けない`);
+      for (const s of h.spans) {
+        assert.ok(s.end < route.points.length,
+          `${label} ${h.name}: 範囲が線の外（${s.end} / ${route.points.length}点）`);
+        assert.ok(s.end > s.begin, `${label} ${h.name}: 範囲が逆さま`);
+        // ⚠️ **範囲内かだけでは足りない。** 番号がずれていても「線の中」には
+        //    収まるので通ってしまう。**その番号の地点が本当に規制の上か**を見る
+        for (const i of [s.begin, Math.floor((s.begin + s.end) / 2), s.end]) {
+          const d = distanceToLine(route.points[i], rule.points);
+          assert.ok(d <= NEAR_METERS * 2,
+            `${label} ${h.name}: ${i}番目の点が規制から ${d.toFixed(0)}m 離れている（番号がずれている）`);
+        }
+      }
+    }
+  };
+  check("本命", r);
+  for (const [i, a] of (r.alternates || []).entries()) check(`代替${i}`, a);
+});

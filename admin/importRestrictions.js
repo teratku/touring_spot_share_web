@@ -23,6 +23,7 @@ const fs = require("fs");
 const path = require("path");
 const admin = require("firebase-admin");
 const { ROMAJI } = require("./lib/prefectureRomaji");
+const { isSellable } = require("./lib/restrictionOrigin");
 
 const PROJECT_ID = "biketeilen";
 const COLLECTION = "road_restrictions";
@@ -64,6 +65,13 @@ function lengthMeters(points) {
  */
 function validate(data) {
   const problems = [];
+  /**
+   * 配信APIから外れるもの。⚠️ **止めない**（`jmpsa` のように、表示だけで
+   * 配信しないのが正しいものもある）。ただし**黙って上げない**。
+   * 実機で報告（2026-09-20): 手で登録した規制の出どころが空で、一覧には出るのに
+   * 経路が避けないまま気づけなかった。
+   */
+  const notSellable = [];
   for (const [i, r] of (data.restrictions || []).entries()) {
     const at = `restrictions[${i}]${r.name ? `（${r.name}）` : ""}`;
     if (!r.id || !r.name) { problems.push(`${at}: id / name が無い`); continue; }
@@ -86,6 +94,11 @@ function validate(data) {
     if (r.activeMonths && r.activeMonths.some((m) => m < 1 || m > 12)) {
       problems.push(`${at}: 月の指定がおかしい`);
     }
+    // ⚠️ **経路が避けるのは、配信APIに載るものだけ**（`restrictionOrigin.js`）。
+    //    出どころが無い・売れないものは、一覧に出ても**経路は通る**
+    if (!isSellable(r)) {
+      notSellable.push(`${r.name}（出どころ ${r.origin || "なし"}）`);
+    }
     // ⚠️ 曜日・時間帯は配信データにそのまま載る（`restrictions` を丸ごと送っている）。
     //    おかしな値を通すと、アプリ側が「効いていない時間」を通行禁止と案内する
     if (r.activeDays && r.activeDays.some((d) => d < 1 || d > 7)) {
@@ -101,7 +114,8 @@ function validate(data) {
       }
     }
   }
-  return problems;
+  // ⚠️ 止めない。**知らせる**（`problems` とは別に返す）
+  return Object.assign(problems, { notSellable });
 }
 
 async function main() {
@@ -133,6 +147,16 @@ async function main() {
     } else {
       const oldest = t.data.restrictions.map((r) => r.checkedAt).sort()[0];
       console.log(`  ✅ ${String(t.prefecture).padEnd(6)} ${String(t.data.restrictions.length).padStart(3)}件  最も古い確認日 ${oldest}`);
+      // ⚠️ **配信に載らないものを黙って上げない。** 一覧には出るのに経路は通る、
+      //    という食い違いに気づけないまま配信してしまう（実機で報告）
+      const skipped = problems.notSellable || [];
+      if (skipped.length) {
+        console.log(`      ⚠️ ${skipped.length}件は配信APIに載りません（経路は避けません）:`);
+        for (const nameAndOrigin of skipped.slice(0, 5)) {
+          console.log(`         ${nameAndOrigin}`);
+        }
+        if (skipped.length > 5) console.log(`         ほか${skipped.length - 5}件`);
+      }
     }
   }
   if (bad) { console.error(`\n${bad}県に問題があります。投入を中止しました`); process.exit(1); }

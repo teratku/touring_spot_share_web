@@ -44,6 +44,7 @@ const trafficSignals = require("./trafficSignals");
 const SIGNAL_RADIUS_METERS = 20;
 const { applicable: applicableRestrictions, hitsOnRoute, excludePolygonsFor }
   = require("./restrictionAvoid");
+const { spansOnLine } = require("./restrictionOverlap");
 
 const { encode } = require("./polyline");
 const { applyRealisticTime } = require("./realisticTime");
@@ -591,6 +592,25 @@ const ferryMetersOf = (t) => (t.legs || []).reduce((a, leg) =>
  *    分けてあるのは、**代替ルートにも同じ組み立てをかける**ため。
  * ⚠️ 診断の数（何回引き直したか等）は本命のもの。代替には空を渡す
  */
+/**
+ * 避けきれなかった規制について、**アプリへ返す線の番号**で「どこを走るか」を数え直す。
+ *
+ * ⚠️ **避けるときに使った番号をそのまま返さないこと。** あれは `pointsOfTrip`
+ *    （区間をただ繋いだもの）の番号で、`buildResult` が作る線とは点数が違う
+ *    （継ぎ目の重複点を落とすため）。画面はこの番号で線を塗り分けるので、
+ *    ずれると別の場所が赤くなるか、範囲外として捨てられる。
+ */
+function withSpansOn(built, rules) {
+  if (!built || !Array.isArray(built.restrictionHits) || !built.restrictionHits.length) return;
+  if (!Array.isArray(rules) || !rules.length) return;
+  const byId = new Map(rules.map((r) => [r.id, r]));
+  built.restrictionHits = built.restrictionHits.map((h) => {
+    const rule = byId.get(h.id);
+    if (!rule || !rule.points) return h;
+    return { ...h, spans: spansOnLine(built.points, rule.points) };
+  });
+}
+
 async function buildResult(trip, opts, costing, variantOptions, 診断) {
   const points = [];
   const steps = [];
@@ -1293,16 +1313,29 @@ async function routeWithValhalla(from, to, opts = {}) {
       if (rules.length) {
         const handPolygons = body.exclude_polygons || [];
         const boxes = [];
+        // ⚠️ **`verified` を落とさないこと。** 落とすと未確認（JARTIC の候補）を
+        //    避けたのか、人が地図で見て登録したものを避けたのかが見る側に伝わらない
+        //    （実際に落としていて、未確認がすべて「確認済」に見えていた）
+        // ⚠️ **どこを走るかも渡すこと。** 画面はこの範囲を赤点線にして
+        //    「ここは通れない」と示す（実機の要望）。件数だけでは場所が分からない
+        const 申告形 = (hits) => hits.map((h) => ({
+          id: h.id, name: h.name, ratio: h.ratio, verified: h.verified !== false,
+          spans: h.spans || [], runMeters: h.runMeters }));
+        // ⚠️ **申告は「返す経路」で数えたものであること。** 塞いでは引き直す
+        //    ループは、上限まで試すと**最後に引き直した経路を測らないまま終わる**。
+        //    そのまま返すと前の経路の件数を申告することになり、
+        //    **通る規制を黙って通させる**ことになる。
+        // ⚠️ **これは守りであって、直した不具合ではない。** 上限に達する経路4本
+        //    （フルーツライン／湯袋観光道路／土浦高架道／桜川市・市道の各中点行き）で
+        //    測ったが、**外しても結果は1件も変わらなかった**（id・範囲・走行距離まで同じ）。
+        //    避けきれないから上限まで行くので、最後の引き直しでも同じ規制に当たる。
+        //    ⚠️ 最後の1回で規制Aを避けきり、代わりに規制Bへ乗る形は作れていない。
+        //       作れたらここを検査にすること（いまは変異で落とせないので検査は無い）
+        let 測り済み = false;
         for (let i = 0; i < MAX_RESTRICTION_TRIES; i++) {
           const hits = hitsOnRoute(pointsOfTrip(json.trip), rules);
-          // ⚠️ **`verified` を落とさないこと。** 落とすと未確認（JARTIC の候補）を
-          //    避けたのか、人が地図で見て登録したものを避けたのかが見る側に伝わらない
-          //    （実際に落としていて、未確認がすべて「確認済」に見えていた）
-          restrictionHits = hits.map((h) => ({
-            id: h.id, name: h.name, ratio: h.ratio, verified: h.verified !== false,
-            // ⚠️ **どこを走るかも渡すこと。** 画面はこの範囲を赤点線にして
-            //    「ここは通れない」と示す（実機の要望）。件数だけでは場所が分からない
-            spans: h.spans || [], runMeters: h.runMeters }));
+          測り済み = true;
+          restrictionHits = 申告形(hits);
           if (!hits.length) break;
           const made = excludePolygonsFor(hits, {
             // ⚠️ 既に塞いでいるぶんを差し引く。合計で上限に当たる。
@@ -1324,7 +1357,10 @@ async function routeWithValhalla(from, to, opts = {}) {
             break;
           }
           json = avoided;
+          測り済み = false;   // ⚠️ 引き直した経路はまだ測っていない
         }
+        // ⚠️ 上限まで試して抜けたときだけここに落ちる。返す経路で数え直す
+        if (!測り済み) restrictionHits = 申告形(hitsOnRoute(pointsOfTrip(json.trip), rules));
       }
     }
 
@@ -1369,6 +1405,13 @@ async function routeWithValhalla(from, to, opts = {}) {
     restrictionPrefectures, sideTried, sideGaveUp,
     wastefulLoops, wastefulLoopsDropped, wastefulLoopSpans,
   });
+  // ⚠️ **範囲は「アプリへ返す線」で数え直すこと。** 避けるときに使った
+  //    `pointsOfTrip` は区間をただ繋いだもので、**番号として使ってはいけない**
+  //    （`buildResult` は区間の継ぎ目の重複点を落とすので点数が違う）。
+  //    ずれたまま返すと、画面が**別の場所に赤い線を引く**か、
+  //    範囲外として黙って捨てる（実機で報告 2026-09-20:
+  //    同じ規制なのに候補によって赤い点線が出たり出なかったりした）
+  withSpansOn(result, restrictionRules);
   // ⚠️ **代替も1本ずつ照合すること。** 「塞ぎは `body` に溜めてあるから代替も
   //    安全側になる」という前提で空にしていたが、**塞ぐと経路が引けないときは
   //    塞ぎを外して引き直す**ので、その前提が崩れる。実機で報告（2026-09-20):
@@ -1384,12 +1427,15 @@ async function routeWithValhalla(from, to, opts = {}) {
             id: h.id, name: h.name, ratio: h.ratio, verified: h.verified !== false,
             spans: h.spans || [], runMeters: h.runMeters }))
         : [];
-      result.alternates.push(await buildResult(a.trip, opts, costing, variantOptions, {
+      const alt = await buildResult(a.trip, opts, costing, variantOptions, {
         highwayTries: 0, ferryTries: 0, restrictionTries: 0, restrictionHits: altHits,
         restrictionSkipped: [], restrictionPrefectures,
         sideTried: false, sideGaveUp: false,
         wastefulLoops: 0, wastefulLoopsDropped: 0, wastefulLoopSpans: [],
-      }));
+      });
+      // ⚠️ 本命と同じく、返す線で数え直す
+      withSpansOn(alt, restrictionRules);
+      result.alternates.push(alt);
     }
   }
   return result;

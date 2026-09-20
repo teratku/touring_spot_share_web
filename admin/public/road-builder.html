@@ -140,6 +140,11 @@
   <!-- ⚠️ 規制の保存はヘッダにも置く。左の一覧バーだけだと幅からはみ出して
        見えず、「保存ボタンが押せない」と受け取られる（実機で報告） -->
   <button class="primary" id="rSaveHeader" style="display:none" disabled>保存 <kbd>S</kbd></button>
+  <!-- ⚠️ **規制の配信は別の入口にする。** 右の「配信…」はおすすめ道路を
+       作り直して送るもので、規制とは別物。押し間違えると違うものが本番へ行く
+       （実機で「通行規制のタブに配信ボタンが無いので、区間の手直しの配信を
+       押せばよいか」と尋ねられた） -->
+  <button class="primary" id="rPublishHeader" style="display:none">規制を配信…</button>
   <button id="publish">配信…</button>
 </header>
 
@@ -2059,6 +2064,9 @@ function showTab(which) {
   $("publish").style.display = onCurate ? "" : "none";
   $("unsaved").style.display = onCurate ? "" : "none";
   $("rSaveHeader").style.display = which === "restrict" ? "" : "none";
+  $("rPublishHeader").style.display = which === "restrict" ? "" : "none";
+  // ⚠️ おすすめ道路の配信は、規制タブでは押させない（別のものが本番へ行く）
+  $("publish").style.display = which === "restrict" ? "none" : "";
 }
 $("tab-curate").onclick = () => showTab("curate");
 $("tab-tune").onclick = () => { showTab("tune"); renderTuning(); };
@@ -2118,14 +2126,75 @@ async function runPublish(commit) {
   }
 }
 
-$("publish").onclick = openPublish;
-$("pubClose").onclick = () => { $("publishModal").style.display = "none"; };
-$("pubDry").onclick = () => runPublish(false);
-$("pubGo").onclick = () => {
-  // 本番へ書き込む直前の最後の確認。県名を出して取り違えを防ぐ
-  if (!confirm(`${state.prefName} を本番に配信します。\n\n世代が上がっていれば、この県のデータを持つ全ユーザーが落とし直します。\n実行しますか？`)) return;
-  runPublish(true);
+$("publish").onclick = () => {
+  openPublish();
+  // ⚠️ **行き先を必ず戻すこと。** モーダルのボタンは規制の配信と共用で、
+  //    一度規制を配信したあとに戻さないと、**おすすめ道路のつもりで規制を配信する**
+  $("pubDry").onclick = () => runPublish(false);
+  $("pubGo").onclick = () => {
+    // 本番へ書き込む直前の最後の確認。県名を出して取り違えを防ぐ
+    if (!confirm(`${state.prefName} を本番に配信します。\n\n世代が上がっていれば、この県のデータを持つ全ユーザーが落とし直します。\n実行しますか？`)) return;
+    runPublish(true);
+  };
 };
+
+// ---------- 規制の配信 ----------
+//
+// ⚠️ **おすすめ道路の配信とは別物。** あちらは道の一覧を作り直して Storage へも送る。
+//    こちらは登録済みの規制を Firestore の road_restrictions へ入れるだけ。
+// ⚠️ **必ず下見を挟む**（本番の Firestore に書き込むため）。
+let rPublishReady = false;
+
+function rOpenPublish() {
+  if (R.dirty) { alert(`未保存の規制が ${R.dirty}件 あります。先に保存してください。`); return; }
+  rPublishReady = false;
+  $("pubGo").disabled = true;
+  $("pubTitle").textContent = `${R.prefName} を配信（通行規制）`;
+  $("pubLead").innerHTML =
+    "登録済みの通行規制を、本番の Firestore へ送ります（おすすめ道路は触りません）。<br>" +
+    "<strong>まず「下見」で中身を確かめてください。</strong>下見が通ると配信ボタンが押せるようになります。<br>" +
+    "⚠️ <b>出どころ（origin）が無いものは配信APIから外れ、経路が避けません。</b>下見の出力で確かめてください。";
+  $("pubLog").textContent = "";
+  $("publishModal").style.display = "flex";
+}
+
+async function rRunPublish(commit) {
+  const log = $("pubLog");
+  log.textContent = (commit ? "配信中…" : "下見中…") + "\n";
+  $("pubDry").disabled = true; $("pubGo").disabled = true;
+  try {
+    const r = await fetch("/api/restrictions/publish", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ commit, prefecture: R.prefName }),
+    });
+    const j = await r.json();
+    log.textContent = (j.stdout || "").trim() + ((j.stderr || "").trim() ? `\n[stderr] ${j.stderr.trim()}` : "");
+    if (j.ok && !commit) {
+      rPublishReady = true;
+      log.textContent += "\n\n下見が通りました。配信できます。";
+    }
+    if (j.ok && commit) log.textContent += "\n\n配信しました。";
+    if (!j.ok) log.textContent += "\n\n❌ 失敗しました。上の出力を確かめてください。";
+  } catch (e) {
+    log.textContent += `\n通信に失敗しました: ${e.message}`;
+  } finally {
+    $("pubDry").disabled = false;
+    $("pubGo").disabled = !rPublishReady;
+  }
+}
+
+$("rPublishHeader").onclick = () => {
+  rOpenPublish();
+  // ⚠️ モーダルのボタンは共用なので、押した入口によって行き先を差し替える
+  $("pubDry").onclick = () => rRunPublish(false);
+  $("pubGo").onclick = () => {
+    if (!confirm(`${R.prefName} の通行規制を本番に配信します。よろしいですか？`)) return;
+    rRunPublish(true);
+  };
+};
+$("pubClose").onclick = () => { $("publishModal").style.display = "none"; };
+// ⚠️ ここで割り当てないこと。行き先は**開いた入口**（おすすめ道路／規制）が決める。
+//    ここに置くと、規制の入口から開いても最後にこちらで上書きされてしまう
 
 // ---------- 通行規制 ----------
 const R = {
@@ -2644,6 +2713,19 @@ function rRenderEditor(c) {
     <label>確認日</label>
     <input type="text" id="r-checked" value="${saved.checkedAt || new Date().toISOString().slice(0,10)}">
 
+    <label>出どころ（⚠️ 選ばないと配信APIに載りません）</label>
+    <select id="r-origin">
+      <option value="" ${!saved.origin ? "selected" : ""}>選んでください</option>
+      <option value="survey" ${saved.origin === "survey" ? "selected" : ""}>survey … 現地の標識・県警のページで自分で確かめた</option>
+      <option value="jartic" ${saved.origin === "jartic" ? "selected" : ""}>jartic … JARTIC のオープンデータ</option>
+      <option value="osm" ${saved.origin === "osm" ? "selected" : ""}>osm … OpenStreetMap</option>
+      <option value="jmpsa" ${saved.origin === "jmpsa" ? "selected" : ""}>jmpsa … 二普協の一覧（⚠️ 転用の許諾が無いので配信では避けません）</option>
+    </select>
+    <div class="muted" style="font-size:11px; margin-top:2px">
+      ⚠️ <b>憶測で選ばないこと。</b> 何を見て登録したかを書く欄です。
+      空のままだと「出どころ不明」となり、<b>経路が避けません</b>（表示はされます）。
+    </div>
+
     <div style="margin-top:16px; display:flex; gap:6px;">
       <button class="danger" id="r-remove" ${R.saved.has(c.id) ? "" : "disabled"}>登録を消す</button>
       ${c.manual ? '<button class="danger" id="r-delete">一覧から削除</button>' : ""}
@@ -2726,10 +2808,19 @@ function rApplyEdit() {
     maxCc: Number.isFinite(max) && $("r-max").value !== "" ? max : null,
     checkedAt: $("r-checked").value.trim(),
     source: "admin",
+    // ⚠️ **これが無いと配信APIから外れ、経路が避けない**（`restrictionOrigin.js`）。
+    //    ⚠️ 空のときは null のまま。**憶測で survey などと書かないこと**
+    origin: $("r-origin").value || null,
   });
   rSetDirty(R.dirty + 1);
   rRender();
   rRenderEditor(c);
+  // ⚠️ **黙って登録させない。** 出どころが空だと配信APIから外れ、
+  //    「一覧には出るのに経路が避けない」という食い違いになる（実機で報告 2026-09-20:
+  //    表筑波スカイラインを手で登録したのに、経路がそのまま通った）
+  if (!$("r-origin").value) {
+    rSetStatus("⚠️ 出どころが空です。このままだと経路が避けません（表示だけになります）");
+  }
 }
 
 

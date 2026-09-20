@@ -221,3 +221,80 @@ test("走った距離で拾ったものも、避ける対象として使える�
   assert.ok(hits[0].points && hits[0].points.length >= 2, "線が付いていない（塞げない）");
   assert.ok(excludePolygonsFor(hits).polygons.length > 0, "通せんぼを作れない");
 });
+
+// MARK: 手で登録した規制が配信に載るか
+
+/**
+ * ⚠️ **実機で報告（2026-09-20）**: 県道236号（不動峠）の二輪規制がデータに無く、
+ *    経路がそのまま通っていた。手で登録してもらったが、**登録画面が出どころを
+ *    記録していなかった**ため `origin` が空になり、`isSellable` で外れて
+ *    「一覧には出るのに経路が避けない」状態が続いた。
+ */
+test("登録画面が出どころを記録する", () => {
+  const fs = require("fs");
+  const path = require("path").join(__dirname, "..", "public", "road-builder.html");
+  if (!fs.existsSync(path)) { return; }
+  const html = fs.readFileSync(path, "utf8");
+  assert.ok(html.includes('id="r-origin"'), "出どころを選ぶ欄が無い");
+  assert.ok(html.includes("origin: $(\"r-origin\").value || null"),
+    "保存するときに出どころを入れていない");
+  // ⚠️ **憶測で埋めないこと。** 空のときは null のまま（「分からない」を残す）
+  assert.ok(!/origin:\s*\$\("r-origin"\)\.value\s*\|\|\s*"(survey|jartic|osm|jmpsa)"/.test(html),
+    "空のときに出どころを決め打ちしている（憶測で埋めない）");
+  // 空で登録したときに知らせること
+  assert.ok(html.includes("出どころが空です"), "出どころが空でも黙って登録している");
+});
+
+test("出どころの無い規制は配信に載らない", () => {
+  const { isSellable } = require("../lib/restrictionOrigin");
+  // ⚠️ ここが崩れると、転用の許諾が無いデータを売ってしまう
+  assert.strictEqual(isSellable({ origin: "survey" }), true);
+  assert.strictEqual(isSellable({ origin: "jartic" }), true);
+  assert.strictEqual(isSellable({ origin: "osm" }), true);
+  assert.strictEqual(isSellable({ origin: "jmpsa" }), false, "二普協を売ろうとしている");
+  assert.strictEqual(isSellable({}), false, "出どころ不明を売ろうとしている");
+  assert.strictEqual(isSellable({ origin: null }), false);
+});
+
+// MARK: 規制の配信ボタン
+
+/**
+ * ⚠️ **実機で尋ねられた（2026-09-20）**:「通行規制のタブに配信ボタンが無いため、
+ *    区間の手直しの配信ボタンを押せばいい？」。押していたら**おすすめ道路**の
+ *    再生成と配信が走っていた（規制とは別物）。規制専用の入口を用意する。
+ */
+test("規制タブから規制だけを配信できる", () => {
+  const fs = require("fs");
+  const path = require("path").join(__dirname, "..", "public", "road-builder.html");
+  if (!fs.existsSync(path)) return;
+  const html = fs.readFileSync(path, "utf8");
+
+  assert.ok(html.includes('id="rPublishHeader"'), "規制の配信ボタンが無い");
+  assert.ok(html.includes('"/api/restrictions/publish"'),
+    "規制の配信が規制のエンドポイントを呼んでいない");
+  // ⚠️ **規制タブでおすすめ道路の配信を押させないこと**（別のものが本番へ行く）
+  assert.ok(/\$\("publish"\)\.style\.display\s*=\s*which === "restrict" \? "none"/.test(html),
+    "規制タブでおすすめ道路の配信ボタンを隠していない");
+  // ⚠️ **下見を挟むこと**（本番の Firestore に書き込む）
+  assert.ok(html.includes("rRunPublish(false)"), "規制の下見が無い");
+  assert.ok(html.includes("rPublishReady"), "下見なしで配信できてしまう");
+});
+
+test("配信モーダルの行き先が入口ごとに決まる", () => {
+  const fs = require("fs");
+  const path = require("path").join(__dirname, "..", "public", "road-builder.html");
+  if (!fs.existsSync(path)) return;
+  const html = fs.readFileSync(path, "utf8");
+  // ⚠️ **開いた入口が行き先を決めること。** モーダルのボタンは共用なので、
+  //    どこかで固定すると「おすすめ道路のつもりで規制を配信する」が起きる
+  const assigns = html.match(/\$\("pubGo"\)\.onclick\s*=/g) || [];
+  assert.strictEqual(assigns.length, 2,
+    `pubGo の行き先が ${assigns.length}か所（おすすめ道路と規制の2つであること）`);
+  for (const entry of ['$("publish").onclick', '$("rPublishHeader").onclick']) {
+    const at = html.indexOf(entry);
+    assert.ok(at > 0, `${entry} が無い`);
+    const body = html.slice(at, at + 900);
+    assert.ok(body.includes('$("pubGo").onclick'),
+      `${entry} が行き先を入れ直していない（前に開いた入口のまま配信される）`);
+  }
+});
