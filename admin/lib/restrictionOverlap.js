@@ -82,6 +82,80 @@ function resample(points, step = STEP_METERS) {
   return out;
 }
 
+/**
+ * 点の並びを囲む箱（余白つき）。⚠️ 点は **[経度, 緯度]**。
+ *
+ * ⚠️ **長い経路では、これで弾かないと終わらない。** 規制1件ごとに経路の全点を
+ *    測っていたため、1,509kmの経路×199件で **67秒**かかっていた
+ *    （実機で報告 2026-09-21: 50ccで鹿児島まで引くとタイムアウトする）。
+ */
+function boundsOf(points, marginMeters = 0) {
+  let minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
+  for (const p of points) {
+    if (!p) continue;
+    if (p[0] < minLon) minLon = p[0];
+    if (p[0] > maxLon) maxLon = p[0];
+    if (p[1] < minLat) minLat = p[1];
+    if (p[1] > maxLat) maxLat = p[1];
+  }
+  if (!Number.isFinite(minLon)) return null;
+  const dLat = marginMeters / 111_320;
+  // ⚠️ 経度の余白は緯度で変わる。高緯度ほど1度が短いので、余白は広く取る
+  const cos = Math.max(0.1, Math.cos(((minLat + maxLat) / 2) * Math.PI / 180));
+  const dLon = marginMeters / (111_320 * cos);
+  return { minLon: minLon - dLon, maxLon: maxLon + dLon,
+           minLat: minLat - dLat, maxLat: maxLat + dLat };
+}
+
+const inBounds = (p, b) => p[0] >= b.minLon && p[0] <= b.maxLon
+  && p[1] >= b.minLat && p[1] <= b.maxLat;
+
+const boundsOverlap = (a, b) => !(a.maxLon < b.minLon || a.minLon > b.maxLon
+  || a.maxLat < b.minLat || a.minLat > b.maxLat);
+
+/** 格子の一辺（度）。約2km。⚠️ `NEAR_METERS`(25m) より十分大きいこと */
+const CELL_DEG = 0.02;
+const cellKey = (lon, lat) => `${Math.floor(lon / CELL_DEG)}:${Math.floor(lat / CELL_DEG)}`;
+
+/**
+ * 長い線を格子に入れて、近くの点だけ測れるようにする。
+ *
+ * ⚠️ **打ち直してから入れること。** 格子には線の「点」しか入らないので、
+ *    点の間隔が格子（約2km）より広い区間があると、その真ん中を問われたときに
+ *    近傍のセルが空になり**取りこぼす**。打ち直せば間隔が `STEP_METERS` に
+ *    揃うので、この穴が塞がる（中点を足す小細工では塞ぎきれない）。
+ * ⚠️ 打ち直した点の番号は**返さない**。ここは距離を測るためだけの道具で、
+ *    範囲の番号は `spansOnLine` が元の線で出す
+ */
+function indexLine(line) {
+  const pts = resample(line, STEP_METERS);
+  const cells = new Map();
+  for (let i = 0; i < pts.length; i++) {
+    const k = cellKey(pts[i][0], pts[i][1]);
+    const at = cells.get(k);
+    if (at) at.push(i); else cells.set(k, [i]);
+  }
+  return { line: pts, cells, bounds: boundsOf(pts, 0) };
+}
+
+/** 格子を使って点と線の距離を測る。⚠️ 近く（数km）でなければ Infinity でよい */
+function distanceToIndexed(point, index) {
+  const cx = Math.floor(point[0] / CELL_DEG), cy = Math.floor(point[1] / CELL_DEG);
+  let best = Infinity;
+  const line = index.line;
+  for (let dx = -1; dx <= 1; dx++) {
+    for (let dy = -1; dy <= 1; dy++) {
+      const at = index.cells.get(`${cx + dx}:${cy + dy}`);
+      if (!at) continue;
+      for (const i of at) {
+        const d = distanceMeters(point, line[i]);
+        if (d < best) best = d;
+      }
+    }
+  }
+  return best;
+}
+
 /** 点から線までの最短距離。辺の途中も見る */
 function distanceToLine(point, line) {
   let best = Infinity;
@@ -102,11 +176,17 @@ function distanceToLine(point, line) {
  *    掛かった規制を「ほとんど重なっていない」と見誤る。規制されている区間が
  *    その道の上にあるかどうかが知りたい。
  */
-function overlapRatio(restrictionLine, roadLine, nearMeters = NEAR_METERS) {
+function overlapRatio(restrictionLine, roadLine, nearMeters = NEAR_METERS, index = null) {
   const points = resample(restrictionLine);
   if (!points.length || roadLine.length < 2) return 0;
+  // ⚠️ **長い線は格子で測ること。** 総当たりだと1,509kmの経路で待たされる
+  //    （`boundsOf` の説明を読むこと）。格子は呼ぶ側が使い回す
+  const idx = index || (roadLine.length > 2_000 ? indexLine(roadLine) : null);
   let hit = 0;
-  for (const p of points) if (distanceToLine(p, roadLine) <= nearMeters) hit++;
+  for (const p of points) {
+    const d = idx ? distanceToIndexed(p, idx) : distanceToLine(p, roadLine);
+    if (d <= nearMeters) hit++;
+  }
   return hit / points.length;
 }
 
@@ -123,11 +203,18 @@ function findOverlaps(restrictions, roads, options = {}) {
   const found = new Map();
   for (const road of roads) {
     if (!road.points || road.points.length < 2) continue;
+    // ⚠️ **道ごとに1回だけ作ること。** 規制1件ごとに作り直すと元の木阿弥
+    const idx = road.points.length > 2_000 ? indexLine(road.points) : null;
+    const roadBox = boundsOf(road.points, 5000);
     for (const restriction of restrictions) {
       if (!restriction.points || restriction.points.length < 2) continue;
-      // ⚠️ 先に大づかみで弾く。全部の点を測ると、県内150本×規制数で待たされる
-      if (distanceToLine(restriction.points[0], road.points) > 5000) continue;
-      const ratio = overlapRatio(restriction.points, road.points, nearMeters);
+      // ⚠️ 先に大づかみで弾く。全部の点を測ると、県内150本×規制数で待たされる。
+      //    ⚠️ **まず箱で弾く**（O(1)）。距離での足切りは経路の全点を測るので、
+      //    長い経路では1件ごとに数十msかかる（実測: 1,509kmで11.5秒）
+      const rBox = boundsOf(restriction.points, 0);
+      if (!rBox || !roadBox || !boundsOverlap(rBox, roadBox)) continue;
+      if (!idx && distanceToLine(restriction.points[0], road.points) > 5000) continue;
+      const ratio = overlapRatio(restriction.points, road.points, nearMeters, idx);
       if (ratio < minRatio) continue;
       if (!found.has(road.id)) found.set(road.id, []);
       found.get(road.id).push({
@@ -243,8 +330,13 @@ function longestRunOnLine(routePoints, linePoints, nearMeters = NEAR_METERS) {
   //    1区間まるごとが「近い」と数えられて**実際の3倍**になる
   //    （実測: 同じ直角の横切りが、点の間隔22mで67m・222mで222m）。
   const pts = resample(routePoints, STEP_METERS);
+  // ⚠️ **規制線の近くだけ測ること。** 経路の全点×規制の全点を測ると、
+  //    1,509kmの経路で1件あたり90msかかる（実測）。
+  //    箱の外は「近くない」と決まっているので測らなくてよい
+  const box = boundsOf(linePoints, nearMeters + STEP_METERS * 2);
   let best = 0, run = 0;
   for (let i = 1; i < pts.length; i++) {
+    if (box && !inBounds(pts[i], box)) { run = 0; continue; }
     if (distanceToLine(pts[i], linePoints) <= nearMeters) {
       run += distanceMeters(pts[i - 1], pts[i]);
       if (run > best) best = run;
