@@ -887,6 +887,37 @@ function locationType(index, opts = {}) {
   return (opts.throughStopAt || []).includes(index) ? "break_through" : "break";
 }
 
+/**
+ * 「通るだけ」の点を何点まで残して引き直すか。**多い順に試す**。
+ *
+ * ⚠️ 実測（実機で報告 2026-09-20・鶴岡村上線29.5km）: 経由地**5点は引けるのに
+ *    6点で落ちる**。だから最初に5を試す。0は「端だけで引く」最後の手段。
+ */
+const VIA_THINNING_STEPS = [5, 3, 0];
+
+/**
+ * 「通るだけ」(`through`) の点を等間隔に間引く。
+ *
+ * ⚠️ **止まる場所（`break` / `break_through`）は必ず残すこと。** 立ち寄り先と
+ *    おすすめ道路の終点を落とすと、**行き先そのものが変わる**。
+ * ⚠️ **両端を優先して残す。** 道の入口と出口が消えると、その道に入らない経路になる。
+ *
+ * @param middle 出発地と目的地を除いた並び
+ * @param limit  残す「通るだけ」の点の数。0なら全部落とす
+ */
+function thinThroughPoints(middle, limit) {
+  const at = [];
+  middle.forEach((p, i) => { if (p.type === "through") at.push(i); });
+  if (at.length <= limit) return middle;
+  const keep = new Set();
+  if (limit === 1) keep.add(at[0]);
+  else if (limit > 1) {
+    const step = (at.length - 1) / (limit - 1);
+    for (let i = 0; i < limit; i++) keep.add(at[Math.round(i * step)]);
+  }
+  return middle.filter((p, i) => p.type !== "through" || keep.has(i));
+}
+
 async function routeWithValhalla(from, to, opts = {}) {
   const variant = VARIANTS[opts.variant] || VARIANTS.normal;
   // ⚠️ **排気量が指定されたら costing もそれで決める。**
@@ -1078,6 +1109,32 @@ async function routeWithValhalla(from, to, opts = {}) {
       json = await ask();
     }
 
+    // ⚠️ **中継点が多いと Valhalla が落ちることがある。**
+    //    `leg_shape_index not set for intermediate location` が返る。
+    //    ⚠️ **最初の1回で落ちるので受け皿が無く、そのまま画面に出ていた**
+    //       （実機で報告 2026-09-20: おすすめ道路2本のプランが引けない）。
+    //    実測（鶴岡村上線29.5km・中継9点）: 経由地**5点は引けるのに6点で落ちる**。
+    //    ⚠️ **重なりではない**（いちばん近い隣どうしで514.8m。`MIN_VIA_GAP_METERS`
+    //       の話とは別物）。各点は単独なら通るし、同じ作り方でも
+    //       大江西川線14.8kmは中継8点で引ける。道ごとの形の問題。
+    //    ⚠️ **間引くのは「通るだけ」の点だけ**（`thinThroughPoints` を読むこと）。
+    //       減らすほど道から外れるので、引けたところで止める
+    //    ⚠️ `thinVias: false` は**検査専用の口**。材料（落ちる並び）がまだ
+    //       落ちることを確かめるために要る。本番では渡さないこと
+    if ((!json || !json.trip) && opts.thinVias !== false) {
+      const 頭 = body.locations[0];
+      const 尾 = body.locations[body.locations.length - 1];
+      const 中 = body.locations.slice(1, -1);
+      for (const 上限 of VIA_THINNING_STEPS) {
+        const 間引いた = thinThroughPoints(中, 上限);
+        // 減らないなら頼むだけ無駄
+        if (間引いた.length === 中.length) continue;
+        body.locations = [頭, ...間引いた, 尾];
+        json = await ask();
+        if (json && json.trip) break;
+      }
+    }
+
     // ⚠️ **船に乗ってしまったら、その場所を塞いで引き直す。**
     //    `shortest` では `use_ferry` が効かないため（上の説明を読むこと）
     if (json && json.trip && ridesFerry(json.trip)) {
@@ -1146,12 +1203,23 @@ async function routeWithValhalla(from, to, opts = {}) {
     //    経路ごと失敗する（実測: 130m四方10個で弾かれた）
     if (json && json.trip && opts.excludeTolls) {
       // ⚠️ **区間(leg)を全部見ること。** 立ち寄り先の先にある有料を塞ぎ忘れる
+      // ⚠️ **本命だけを見ないこと。** `use_tolls: 0` は重みなので、本命は
+      //    たまたま避けられていることがある。そのとき塞ぐ相手が0件になり、
+      //    引き直しても**代替の有料が素通り**する（実機で報告 2026-09-20:
+      //    「有料道路を避ける設定だが、入っている」。本命は有料0mなのに
+      //    代替0が鬼怒バイパス131mを通っていた）。
+      //    ⚠️ 塞ぎは `body` 全体に効くので、代替の有料を塞げば本命も代替も避ける。
+      //    ⚠️ trace が代替のぶん増えるが、ここは塞ぐと決めたときしか通らない
+      const trips = [json.trip,
+                     ...(json.alternates || []).map((a) => a && a.trip).filter(Boolean)];
       const hits = [];
-      for (const leg of json.trip.legs) {
-        const spans = await roadClassSpans(leg.shape, costing, opts.baseUrl);
-        const shape = decode6(leg.shape);
-        for (const sp of (spans || []).filter((x) => x.toll)) {
-          hits.push({ points: shape.slice(sp.begin, sp.end + 1) });
+      for (const trip of trips) {
+        for (const leg of trip.legs || []) {
+          const spans = await roadClassSpans(leg.shape, costing, opts.baseUrl);
+          const shape = decode6(leg.shape);
+          for (const sp of (spans || []).filter((x) => x.toll)) {
+            hits.push({ points: shape.slice(sp.begin, sp.end + 1) });
+          }
         }
       }
       if (hits.length) {
@@ -1442,6 +1510,7 @@ async function routeWithValhalla(from, to, opts = {}) {
 }
 
 module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS, DISPLACEMENTS,
+  thinThroughPoints, VIA_THINNING_STEPS,
   ROAD_CLASS_TIERS, ROAD_CLASS_COLORS, HIGHWAY_LADDER, MAX_SIDE_DETOUR_METERS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,

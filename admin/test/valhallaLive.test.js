@@ -1567,3 +1567,170 @@ test("通れない区間の番号は、返す線の番号であること", async
   check("本命", r);
   for (const [i, a] of (r.alternates || []).entries()) check(`代替${i}`, a);
 });
+
+//: 新座 → 只見。国道121号の鬼怒バイパス（OSM way 871541259 が toll=yes）を
+//  代替だけが通る。⚠️ **本命は重みだけで避けられてしまう**ので、
+//  「本命に有料が残る」形の検査（OTAKI→HIROSE）では代替の穴を捕まえられない
+const NIIZA_T = [139.57376017973206, 35.79679374263324];
+const TADAMI  = [139.418105, 37.07075283333333];
+
+test("有料を塞ぐとき、代替が通る有料も塞ぐこと", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **実機で報告（2026-09-20）**:「有料道路を避ける設定だが、入っている。
+  //    また、近場に有料道路を避けれる道路があるのでそれを使用してルートを
+  //    生成して欲しい」。塞ぐ相手を**本命の区間からしか集めていなかった**ため、
+  //    本命がたまたま避けられていると塞ぐ相手が0件になり、引き直しても
+  //    代替の有料が素通りしていた。
+  const opts = { displacement: "large", avoidTolls: true, avoidHighways: true, alternates: 2 };
+  const toll = (r) => (r.kindMeters || {}).toll || 0;
+
+  // 材料の確認: 塞がないと、本命は避けられていて代替だけが有料を通る
+  const before = await routeWithValhalla(NIIZA_T, TADAMI, opts);
+  assert.ok(!before.error, before.error);
+  assert.ok(Array.isArray(before.alternates) && before.alternates.length >= 1,
+    "材料が悪い: 代替が返っていない");
+  assert.strictEqual(toll(before), 0,
+    `材料が悪い: 本命が有料を通っている（${toll(before)}m）。` +
+    "本命に残る形では、本命しか見ない実装でも塞げてしまう");
+  assert.ok(before.alternates.some((a) => toll(a) > 0),
+    "材料が悪い: 代替も有料を通っていない（この経路では検査にならない）");
+
+  // 塞いだら、本命も代替も有料0mになること
+  const after = await routeWithValhalla(NIIZA_T, TADAMI, { ...opts, excludeTolls: true });
+  assert.ok(!after.error, after.error);
+  assert.strictEqual(toll(after), 0, `塞いだのに本命が有料を通っている（${toll(after)}m）`);
+  assert.ok(Array.isArray(after.alternates) && after.alternates.length >= 1,
+    "塞いだら代替が消えた（選ばせるものが無くなる）");
+  for (const [i, a] of after.alternates.entries()) {
+    assert.strictEqual(toll(a), 0, `塞いだのに代替${i}が有料を通っている（${toll(a)}m）`);
+  }
+
+  // ⚠️ **遠回りが小さいことまで見る。** すぐ隣に道があるから塞ぐ値打ちがある。
+  //    実測: 231.5km→231.7km / 234.0km→234.3km（どちらも+0.3km未満）
+  const 伸び = after.lengthMeters - before.lengthMeters;
+  assert.ok(伸び <= 2_000, `本命が ${伸び}m 伸びた（代替のために本命を壊している）`);
+});
+
+/**
+ * ⚠️ **中継点が多いと Valhalla が落ちる。**
+ *    `leg_shape_index not set for intermediate location` が返り、
+ *    **最初の1回で落ちるので受け皿が無く、そのまま画面に出ていた**
+ *    （実機で報告 2026-09-20: おすすめ道路2本のプランが引けない）。
+ *
+ * ⚠️ **「重なった経由地」とは別物。** いちばん近い隣どうしで514.8m空いており、
+ *    各点は単独なら通る。同じ作り方でも大江西川線14.8km（中継8点）は引ける。
+ *    実測: 鶴岡村上線29.5kmは**その道の中継点が5点なら引けるのに6点で落ちる**。
+ *    ⚠️ 全体の上限（`VIA_THINNING_STEPS`）は道ごとの点数とは別。
+ *       上限6でもこの並びは引けるので、この検査は上限の値までは縛らない。
+ *
+ * ⚠️ 材料は手で作らないこと（`重なった経由地でも引ける` と同じ理由）。
+ *    実機のログ「中継9 / 中継8 / 経由地18点」をそのまま復元したもの。
+ */
+test("中継点が多くても引ける", async (t) => {
+  if (await skipIfDown(t)) return;
+  const from = [139.57628499025844, 35.80554077492591];   // 新座
+  // 鶴岡村上線(南西→北東)の中継9点＋終点、大江西川線(北→南)の中継8点
+  const vias = [
+    [139.648530, 38.249910], [139.665280, 38.256120], [139.685190, 38.263600],
+    [139.708620, 38.273870], [139.721720, 38.285480], [139.722860, 38.303530],
+    [139.720880, 38.324930], [139.715960, 38.347850], [139.706900, 38.361850],
+    [139.694200, 38.373320], [139.994720, 38.452470], [139.993420, 38.436350],
+    [139.994220, 38.419610], [139.993700, 38.405230], [139.993410, 38.388860],
+    [139.991480, 38.371790], [139.986350, 38.356660], [139.993260, 38.357030],
+  ];
+  const to = [139.999140, 38.357450];
+
+  // 材料の確認1: 重なりでは落ちていないこと（`MIN_VIA_GAP_METERS` の話と混ぜない）
+  const 全 = [...vias, to];
+  let 最小 = Infinity;
+  for (let i = 1; i < 全.length; i++) {
+    const [ax, ay] = 全[i - 1], [bx, by] = 全[i];
+    const m = Math.hypot((by - ay) * 111_000, (bx - ax) * 111_000 * Math.cos(ay * Math.PI / 180));
+    if (m < 最小) 最小 = m;
+  }
+  assert.ok(最小 > 100,
+    `材料が悪い: いちばん近い隣どうしが ${Math.round(最小)}m。重なりの検査になってしまう`);
+
+  // 材料の確認2: 間引かずに頼むと本当に落ちること（＝この検査に値打ちがある）
+  const 素 = await routeWithValhalla(from, to, {
+    displacement: "large", avoidHighways: true, avoidTolls: true,
+    vias, stopAt: [9], throughStopAt: [9], thinVias: false,
+  });
+  assert.ok(素 && 素.error && /leg_shape_index/.test(素.error),
+    `材料が悪い: 間引かずに引けてしまう（${素 && 素.error ? 素.error : `${素.lengthMeters}m`}）。`
+    + "Valhalla か道のデータが変わったなら、落ちる並びを取り直すこと");
+
+  // 本体: 受け皿が働いて引けること
+  const r = await routeWithValhalla(from, to, {
+    displacement: "large", avoidHighways: true, avoidTolls: true,
+    vias, stopAt: [9], throughStopAt: [9],
+  });
+  assert.ok(!r.error, `受け皿が働いていない: ${r.error}`);
+  assert.ok(r.lengthMeters > 400_000 && r.lengthMeters < 700_000,
+    `距離が変（${Math.round(r.lengthMeters / 1000)}km）。間引きすぎて道から外れていないか`);
+  // ⚠️ **おすすめ道路の上を走っていること。** 端だけにすると道を走らない経路になる。
+  //    ⚠️ **両方を見ること。** 片方だけだと、前寄りの点だけ残す間引き方
+  //       （後ろの道の中継点が全部消える）を見逃す
+  const 走る = (語) => r.steps.some((s) => String(s.roadName || "").includes(語));
+  assert.ok(走る("鶴岡"), "間引いた結果、鶴岡村上線を走らなくなった");
+  assert.ok(走る("大江") || 走る("西川"), "間引いた結果、大江西川線を走らなくなった");
+
+  // ⚠️ **止まる場所（break_through）は間引いてはいけない。** ここは
+  //    おすすめ道路の終点で、落とすと**行き先そのものが変わる**
+  const 止まる場所 = vias[9];
+  const 最短 = r.points.reduce((best, [x, y]) => {
+    const m = Math.hypot((y - 止まる場所[1]) * 111_000,
+                         (x - 止まる場所[0]) * 111_000 * Math.cos(y * Math.PI / 180));
+    return Math.min(best, m);
+  }, Infinity);
+  assert.ok(最短 < 1_000,
+    `おすすめ道路の終点から ${Math.round(最短)}m 離れている。止まる場所まで間引いている`);
+});
+
+/**
+ * 中継点の間引き方そのものの確認（通信は要らない）。
+ *
+ * ⚠️ **経路の検査だけでは中身を縛れない。** 実測（新座→鶴岡村上線→大江西川線）では
+ *    中継点を全部落としても同じ道を走るので、「止まる場所を落とす」「前寄りだけ残す」
+ *    といった壊し方を経路側では見分けられなかった。ここで直接縛る。
+ */
+test("間引いても止まる場所と両端は残る", () => {
+  const { thinThroughPoints, VIA_THINNING_STEPS } = require("../lib/valhallaRoute");
+  const 点 = (type, id) => ({ lat: 35 + id / 1000, lon: 139, type, id });
+  // 通るだけ0〜5 ／ 止まる場所(6) ／ 通るだけ7〜11
+  const 並び = [
+    点("through", 0), 点("through", 1), 点("through", 2),
+    点("through", 3), 点("through", 4), 点("through", 5),
+    点("break_through", 6),
+    点("through", 7), 点("through", 8), 点("through", 9),
+    点("through", 10), 点("through", 11),
+  ];
+  const 通るだけ = 並び.filter((p) => p.type === "through").length;
+  assert.strictEqual(通るだけ, 11, "材料が悪い: 通るだけの点が11個でない");
+
+  const r5 = thinThroughPoints(並び, 5);
+  // ⚠️ **止まる場所は絶対に落とさない。** 落とすと行き先が変わる
+  assert.ok(r5.some((p) => p.id === 6), "止まる場所を落としている");
+  assert.strictEqual(r5.filter((p) => p.type === "through").length, 5,
+    "通るだけの点が5個になっていない");
+  // ⚠️ **両端を残す。** 道の入口と出口が消えると、その道に入らない経路になる
+  assert.ok(r5.some((p) => p.id === 0), "先頭の中継点を落としている（道の入口）");
+  assert.ok(r5.some((p) => p.id === 11), "末尾の中継点を落としている（道の出口）");
+  // ⚠️ 並び順を崩さないこと
+  assert.deepStrictEqual(r5.map((p) => p.id), [...r5.map((p) => p.id)].sort((a, b) => a - b),
+    "並び順が崩れている");
+
+  // 0 なら通るだけは全部落ちるが、止まる場所は残る
+  const r0 = thinThroughPoints(並び, 0);
+  assert.deepStrictEqual(r0.map((p) => p.id), [6], "0のとき止まる場所だけにならない");
+
+  // 上限より少なければそのまま
+  const 少 = [点("through", 0), 点("break", 1), 点("through", 2)];
+  assert.strictEqual(thinThroughPoints(少, 5).length, 3, "減らす必要が無いのに減らしている");
+
+  // ⚠️ **多い順に試すこと。** 少ない順だと、引けるのに道から外れた経路を先に採る
+  assert.deepStrictEqual([...VIA_THINNING_STEPS].sort((a, b) => b - a), VIA_THINNING_STEPS,
+    "間引きの段が多い順に並んでいない");
+  assert.ok(VIA_THINNING_STEPS[0] >= 5,
+    "いきなり削りすぎている（実測では5点で引けた）");
+});
