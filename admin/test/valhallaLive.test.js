@@ -3,7 +3,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const { routeWithValhalla, speedSpans, ROAD_CLASS_TIERS, HIGHWAY_LADDER,
         MAX_SIDE_DETOUR_METERS, FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES,
-        FERRY_MANEUVER, BASE } = require("../lib/valhallaRoute");
+        FERRY_MANEUVER, BASE, SHIMANAMI, bridgePasses } = require("../lib/valhallaRoute");
 
 /**
  * 実際に動いている Valhalla に繋ぐ確認。
@@ -959,6 +959,153 @@ test("塞いで悪くなったら、塞ぐ前を採る", async (t) => {
     assert.ok(r.ferryMeters <= 40_000,
       `${variant}: 船が ${(r.ferryMeters / 1000).toFixed(0)}km。`
       + "塞いで悪くなった案を採っている（実測: 打ち切れば39km、打ち切らないと411km）");
+  }
+});
+
+// MARK: しまなみ海道を原付で渡る
+
+//: 尾道駅前・今治駅前・大三島の宮浦（大山祇神社のあたり）。新座は上の NIIZA を使う
+const ONOMICHI = [133.2050, 34.4089];
+const IMABARI = [132.9977, 34.0663];
+const MIYAURA = [132.99, 34.25];
+
+/** 経路が、その点から何m以内を通るか */
+const passesNear = (points, [lon, lat]) => Math.min(...points.map(([x, y]) =>
+  Math.hypot((y - lat) * 110_574, (x - lon) * 111_320 * Math.cos((lat * Math.PI) / 180))));
+
+/**
+ * ⚠️ **タイルに橋の原付道が開いていないと、ここは全部落ちる。** 飛ばさないこと。
+ *    月1回の焼き直しで `admin/tiles/patchShimanamiMoped.py` を当て忘れた合図になる
+ *    （当て忘れても Valhalla は何も言わず、原付が四国へ船で渡るだけ）
+ */
+const NOT_PATCHED = "橋の原付道が開いていないタイル。"
+  + "patchShimanamiMoped.py を当てた PBF で焼き直すこと（docs/valhalla-plan.md）";
+
+for (const displacement of ["small125", "moped50"]) {
+  test(`しまなみ: ${displacement} でも尾道→今治を船に乗らずに橋で渡る`, async (t) => {
+    if (await skipIfDown(t)) return;
+    // 材料: 経由地を足さないと船に乗る（足す処理が効いていることの確かめ）
+    const plain = await routeWithValhalla(ONOMICHI, IMABARI, { displacement, shimanami: false });
+    assert.ok(!plain.error, plain.error);
+    assert.ok(plain.ferryMeters > 0, "材料が悪い: 経由地を足さなくても船に乗らない");
+
+    const r = await routeWithValhalla(ONOMICHI, IMABARI, { displacement });
+    assert.ok(!r.error, r.error);
+    assert.strictEqual(r.ferryMeters, 0, `船に ${r.ferryMeters}m 乗っている。${NOT_PATCHED}`);
+    assert.strictEqual(r.shimanamiUsed, true, "経由地を足していない");
+    // ⚠️ 橋を1本ずつ確かめる。どれか1本でも船に回ると、その橋から遠く離れる
+    for (let j = 1; j < SHIMANAMI.bridges.length; j++) {
+      const m = passesNear(r.points, SHIMANAMI.bridges[j]);
+      assert.ok(m < 50, `橋 ${j} から ${Math.round(m)}m 離れている（渡っていない）`);
+    }
+  });
+}
+
+test("しまなみ: 遠くから四国へ行くときも、宇野の船ではなくしまなみを渡る", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **いちばん直したかった経路。** 新座→今治は、何もしないと宇野－直島－高松の
+  //    船（しまなみの範囲の外）に乗る。範囲だけで見ていると、ここに効かない
+  const plain = await routeWithValhalla(NIIZA, IMABARI, { displacement: "small125", shimanami: false });
+  assert.ok(!plain.error, plain.error);
+  assert.ok(plain.ferryMeters > 0, "材料が悪い: 経由地を足さなくても船に乗らない");
+
+  const r = await routeWithValhalla(NIIZA, IMABARI, { displacement: "small125" });
+  assert.ok(!r.error, r.error);
+  assert.strictEqual(r.ferryMeters, 0, `船に ${r.ferryMeters}m 乗っている。${NOT_PATCHED}`);
+  assert.strictEqual(r.shimanamiUsed, true, "経由地を足していない");
+  assert.ok(r.lengthMeters < plain.lengthMeters,
+    `陸で渡るほうが長い（${r.lengthMeters}m ≥ ${plain.lengthMeters}m）。遠回りの橋を渡っている`);
+});
+
+test("しまなみ: 島の上が目的地なら、その先の橋までは行かない", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 実測: 島の真ん中に点を置いたときは、尾道→大三島が 44.6km → 55.3km に
+  //    伸びた（点まで寄り道した）。橋に置けば、渡るべき橋だけを渡る
+  const r = await routeWithValhalla(ONOMICHI, MIYAURA, { displacement: "small125" });
+  assert.ok(!r.error, r.error);
+  assert.strictEqual(r.ferryMeters, 0, `船に ${r.ferryMeters}m 乗っている。${NOT_PATCHED}`);
+  const 先の橋 = passesNear(r.points, SHIMANAMI.bridges[4]);    // 大三島橋（大三島→伯方島）
+  assert.ok(先の橋 > 1_000, `大三島橋から ${Math.round(先の橋)}m まで近づいている（行って戻っている）`);
+});
+
+test("しまなみ: アプリが標識の知らせを出せる道路名が返る", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ アプリは道路名で「しまなみを通る」と見分けて、入口の手前で
+  //    「入口の標識を確かめてください」と言う（iOS の NavSignCheckRoads.swift）。
+  //    名前が返らないと、原付に開けた自転車道を黙って走らせることになる
+  const r = await routeWithValhalla(ONOMICHI, IMABARI, { displacement: "small125" });
+  assert.ok(!r.error, r.error);
+  const names = r.steps.flatMap((s) => [s.roadName, s.spokenRoadName]).filter(Boolean).join(" / ");
+  assert.ok(/しまなみ|来島海峡|因島大橋|生口橋|多々羅大橋|大三島橋|伯方・大島大橋|尾道大橋/.test(names),
+    `しまなみの道路名が1つも無い: ${names.slice(0, 200)}`);
+});
+
+test("しまなみ: 橋のそばの島から出ても、手前の橋を往復せずに渡る", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **島の上の1点からの近さで決めていたら、船が残った**（実測 2026-09-23）。
+  //    因島の北端（因島大橋の南）を向島と取り違え、因島大橋を北へ渡って引き返す経路に
+  //    なり、採れずに船 17.8km が残った。島の輪郭で決める（`chainEntry`）
+  const 因島の北端 = [133.178, 34.342];
+  const r = await routeWithValhalla(因島の北端, IMABARI, { displacement: "small125" });
+  assert.ok(!r.error, r.error);
+  assert.strictEqual(r.ferryMeters, 0, `船に ${r.ferryMeters}m 乗っている`);
+  const passes = bridgePasses(r.points);
+  assert.strictEqual(passes[1], 0, "因島大橋を渡っている（向島へ行って戻っている）");
+  assert.ok(passes.every((n) => n <= 1), `同じ橋を2回渡っている: ${passes.join("")}`);
+});
+
+test("しまなみ: 船のほうが近くても、陸で渡れるなら渡る（広島→今治）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **遠回りを理由に弾かないこと。** 船は近道なので、陸で渡ると伸びて当然。
+  //    実測: 船なら 87.6km、しまなみで 157.2km（1.8倍）。船を避けるのはこのアプリの
+  //    方針（東京湾フェリーでも2.5倍の陸まわりを採っている）
+  const HIROSHIMA = [132.4596, 34.3853];
+  const plain = await routeWithValhalla(HIROSHIMA, IMABARI, { displacement: "small125", shimanami: false });
+  assert.ok(plain.ferryMeters > 0, "材料が悪い: 経由地を足さなくても船に乗らない");
+  const r = await routeWithValhalla(HIROSHIMA, IMABARI, { displacement: "small125" });
+  assert.ok(!r.error, r.error);
+  assert.strictEqual(r.ferryMeters, 0, `船に ${r.ferryMeters}m 乗っている`);
+  assert.ok(r.lengthMeters > plain.lengthMeters * 1.5,
+    "材料が悪い: 陸で渡っても1.5倍より短い（遠回りの上限を確かめられない）");
+});
+
+test("しまなみ: 船でしか行けない近くの島からは、隣の島へ渡ってから橋を渡る", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 本州とみなすと尾道大橋から全部の橋を渡らせ、生名島→今治が 105km（船 7.9km）に
+  //    なった。隣の因島へ渡れば 67km（船 0.6km）
+  const 生名島 = [133.18, 34.26];
+  const r = await routeWithValhalla(生名島, IMABARI, { displacement: "small125" });
+  assert.ok(!r.error, r.error);
+  assert.ok(r.ferryMeters <= 2_000, `船に ${r.ferryMeters}m 乗っている（隣の島へ渡る船だけのはず）`);
+  const passes = bridgePasses(r.points);
+  assert.deepStrictEqual(passes.slice(0, 2), [0, 0], `尾道側の橋まで行っている: ${passes.join("")}`);
+});
+
+test("しまなみ: 開けた道は原付だけ（車・126cc以上のバイクには開けない）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **歩道系を unclassified に付け替えると、車とバイクが暗黙に開く。**
+  //    付け替えるだけだった版では 94本のうち32本が車と126cc以上に、14本が車に
+  //    開いた（実測 2026-09-22）。大型バイクの経路が歩道を近道に使いかねない。
+  //    下はその版で開いてしまっていた道（way の番号と、道の上の1点）
+  const 見本 = [
+    [137112576, [133.185745, 34.359543], "因島大橋の原付道（車が開いた）"],
+    [90810152, [133.077332, 34.200506], "伯方島の自転車道（車と126cc以上が開いた）"],
+    [846210650, [133.015760, 34.128018], "大島の自転車道（車と126cc以上が開いた）"],
+    [683268505, [133.060132, 34.153394], "名前の無い歩道（車と126cc以上が開いた）"],
+  ];
+  for (const [wayId, [lon, lat], 名前] of 見本) {
+    const res = await fetch(`${BASE}/locate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ locations: [{ lat, lon }], costing: "pedestrian", verbose: true }),
+    });
+    const json = await res.json();
+    const edge = ((json[0] || {}).edges || []).find((e) => (e.edge_info || {}).way_id === wayId);
+    assert.ok(edge, `${名前}: way ${wayId} が見つからない（OSM が変わったなら見本を取り直す）`);
+    const a = edge.edge.access;
+    assert.strictEqual(a.moped, true, `${名前}: 原付に開いていない。${NOT_PATCHED}`);
+    assert.strictEqual(a.motorcycle, false, `${名前}: 126cc以上のバイクに開いている`);
+    assert.strictEqual(a.car, false, `${名前}: 車に開いている`);
   }
 });
 

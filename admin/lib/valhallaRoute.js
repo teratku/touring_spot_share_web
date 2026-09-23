@@ -332,6 +332,240 @@ const FERRY_EXCLUDE_TRIES = 3;
 /** Valhalla の maneuver: 28 = フェリーに乗る */
 const FERRY_MANEUVER = 28;
 
+// しまなみの6島の輪郭（`admin/tiles/shimanamiIslands.py` が作る）
+const ISLAND_OUTLINES = require("./shimanamiIslands.json");
+
+/**
+ * **しまなみ海道を原付で渡らせるための経由地**（橋ごとに1点・橋の原付道の上）。
+ *
+ * 【なぜ要るか】125cc以下は本線（西瀬戸自動車道）を走れず、橋の原付道・
+ * 自転車歩行者道を渡る。タイルを焼くときにその道を原付に開けてあるが
+ * （`admin/tiles/patchShimanamiMoped.py`）、**それでも自由に引くとフェリーを選ぶ**。
+ * 実測（2026-09-22・尾道→今治・125cc・しまなみだけ焼いたタイル）:
+ *     自由に引く        73.8km  2.4時間  フェリー23.1km
+ *     橋ごとに経由地     74.0km  1.8時間  陸路
+ * 陸路のほうが Valhalla 自身の費用で8倍安い（11,549 対 93,989）のに、長い区間の
+ * 探索では間の細い道を見つけきれない（`disable_hierarchy_pruning` も
+ * 付け替え先を `secondary` にするのも効かなかった）。区間を短く切ると見つかる。
+ *
+ * ⚠️ **点は島ではなく橋に置く。** 島の真ん中に置くと、島の上が目的地のときに
+ *    点まで寄り道する（実測: 尾道→大三島 44.6km → 55.3km）。かといって
+ *    目的地の島の点を抜くと、その島で探しきれずに船へ回る（因島の土生→今治で
+ *    金山－赤崎の船 522m が残った）。橋なら「渡る」ことだけを決められる。
+ * ⚠️ **焼き直す前のタイルでは何も変わらない。** 橋の原付道が開いていないので、
+ *    足すと「No path could be found」が返り、元の経路を使う（実測: :8002）
+ * ⚠️ 点は**橋の原付道・自転車道の上**に置くこと（自転車の陸路が通る way の中点。
+ *    `[経度, 緯度]`）。外すと本線など別の道に吸着する
+ */
+const SHIMANAMI = {
+  // 経路がこの範囲で船に乗ったら、しまなみの話とみなす（島どうしの船など。
+  // 本州と四国を結ぶ船は、この範囲の外でも見る。`shimanamiLocations` 参照）
+  bounds: { minLon: 132.95, maxLon: 133.30, minLat: 34.05, maxLat: 34.42 },
+  // 島の輪郭（端点がどの島の上にいるかを決めるためだけに使う。経由地にはしない）。
+  // `admin/tiles/shimanamiIslands.py` が OSM の place=island から作る。
+  // ⚠️ **島の上の1点からの近さで決めないこと。** 橋のそばの端点を隣の島と取り違え、
+  //    手前の橋を往復する経路になって採れず、船が残った（実測 2026-09-23:
+  //    因島の北端→今治で船 17.8km）。
+  // ⚠️ **並びは尾道側→今治側で固定**（向島・因島・生口島・大三島・伯方島・大島）
+  islands: ISLAND_OUTLINES.order.map((name) => ISLAND_OUTLINES.islands[name]),
+  // 船でしか行けない近くの島と、その続きとみなす鎖の島（生名島→因島・岩城島→生口島など）。
+  // ⚠️ 本州とみなすと尾道大橋から全部の橋を渡らせ、生名島→今治が 105km（船 7.9km）に
+  //    なった。隣の因島へ渡れば 60km 弱で済む
+  nearbyIslands: ISLAND_OUTLINES.others,
+  // 橋（経由地にする）。`bridges[j]` は `islands[j - 1]` と `islands[j]` の間を渡す
+  //    （j = 0 は本州→向島、j = 6 は大島→四国）。
+  // ⚠️ **点は橋の長さの真ん中（海の上）に置くこと。** way の中央の「節点」にしたら
+  //    多々羅大橋で陸から5m、生口橋で56mしか離れず、橋の下をくぐる国道317号を
+  //    「橋を渡った」と数えた（`bridgePasses` が往復と取り違える）。
+  //    下はどれも way の長さの半分の点。（　）は陸までの距離
+  bridges: [
+    [133.21659, 34.40933],   // 尾道大橋（way 90964667・ふつうの道・64m）
+    [133.18036, 34.35723],   // 因島大橋（way 137112576・原付道・358m）
+    [133.15007, 34.30375],   // 生口橋（way 297562264・176m）
+    [133.06341, 34.25943],   // 多々羅大橋（way 123283517・586m）
+    [133.05634, 34.21566],   // 大三島橋（way 90810156・原付道・87m）
+    [133.07238, 34.19210],   // 伯方・大島大橋の大島大橋（way 391883761・原付道・271m）
+    [133.00002, 34.12124],   // 来島海峡第二大橋（way 1520681838・1,432m）
+  ],
+  // 島の輪郭の外でも、これ以内なら島の上とみなす（桟橋や海沿いの店を指したとき。
+  // 輪郭は約60mの粗さで間引いてある）
+  nearIslandMeters: 300,
+  // ⚠️ **本州か四国かは、この大まかな輪郭で決める。** 近さで決めると
+  //    広島（本州）は今治のほうが近く、高松・徳島（四国）は尾道のほうが近い
+  //    ので、逆の入口から入って島を往復する。
+  //    ⚠️ 島の輪郭を先に見るので、ここは粗くてよい
+  shikoku: [
+    [132.00, 33.30], [132.70, 33.95], [132.92, 34.16], [133.00, 34.09],
+    [133.10, 34.05], [133.50, 34.05], [133.60, 34.28], [133.85, 34.36],
+    [134.15, 34.42], [134.45, 34.30], [134.62, 34.20], [134.80, 33.85],
+    [134.25, 33.15], [133.50, 33.35], [133.00, 32.65], [132.45, 32.85],
+    [132.30, 33.40],
+  ],
+  // 端点のすぐそばの橋は足さない。⚠️ 同じ場所に点が2つ並ぶと Valhalla が
+  //    `leg_shape_index not set` で落ちる（`MIN_VIA_GAP_METERS` と同じ値・同じ理由）
+  nearPointMeters: 25,
+  // ⚠️ **遠回りでは弾かない。** 船に乗る経路は近道なので、陸で渡ると伸びて当然
+  //    （実測: 広島→今治 87.6km → 160.3km・1.83倍、高松→尾道 109.1km → 217.4km・
+  //    1.99倍。どちらも Valhalla 自身の費用では半分以下）。船を避けるのはこのアプリの
+  //    方針で、東京湾フェリーでも2.5倍の陸まわりを採っている。
+  //    これは**どんな理由でも採らない上限**（歯止め）で、狙いの値ではない。
+  //    入口の取り違えで島を往復する経路は、下の `bridgePasses` で直接弾く
+  maxStretch: 3,
+  // 橋の点からこれ以内を通ったら「その橋を渡った」とみなす。
+  // ⚠️ **いちばん陸に近い橋の点（尾道大橋・64m）より小さくすること。** 大きいと
+  //    岸の道を「渡った」と数える。橋の上の経路は点をほぼ0mで通る
+  bridgePassMeters: 40,
+};
+
+/** 平面に近似した座標（m）。⚠️ 並びや向きを決めるだけなので、この粗さで足りる */
+function toMeters(p, lat0) {
+  return [p[0] * 111_320 * Math.cos((lat0 * Math.PI) / 180), p[1] * 111_320];
+}
+
+/** 2点のおおよその距離（m） */
+function approxMeters(a, b) {
+  const [ax, ay] = toMeters(a, a[1]);
+  const [bx, by] = toMeters(b, a[1]);
+  return Math.hypot(bx - ax, by - ay);
+}
+
+/** 点が多角形の中にあるか（`[経度, 緯度]` の輪） */
+function insideRing(p, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i], [xj, yj] = ring[j];
+    if ((yi > p[1]) !== (yj > p[1])
+        && p[0] < ((xj - xi) * (p[1] - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+/** 点から輪の縁までのおおよその距離（m） */
+function metersToRing(p, ring) {
+  const [px, py] = toMeters(p, p[1]);
+  let best = Infinity;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [ax, ay] = toMeters(ring[i], p[1]);
+    const [bx, by] = toMeters(ring[i + 1], p[1]);
+    const dx = bx - ax, dy = by - ay, len2 = dx * dx + dy * dy;
+    const u = len2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2)) : 0;
+    best = Math.min(best, Math.hypot(px - (ax + u * dx), py - (ay + u * dy)));
+  }
+  return best;
+}
+
+/**
+ * 端点が**鎖のどこにいるか**。-1 = 本州、0〜5 = 島（`islands` の番号）、6 = 四国。
+ *
+ * ⚠️ 見る順: 島の輪郭の中 → 船で渡る近くの島の中（隣の鎖の島とみなす）→ 四国の中 →
+ *    島の輪郭のすぐそば → それ以外は本州。
+ *    鎖から離れた島（大崎上島など）は本州とみなす。足して取り違えても、
+ *    往復する経路は `bridgePasses` で弾かれ、元の経路に戻るだけ
+ */
+function chainEntry(p) {
+  const islands = SHIMANAMI.islands;
+  const inside = islands.findIndex((ring) => insideRing(p, ring));
+  if (inside >= 0) return inside;
+  const nearby = SHIMANAMI.nearbyIslands.find((o) => insideRing(p, o.ring));
+  if (nearby) return nearby.near;
+  if (insideRing(p, SHIMANAMI.shikoku)) return islands.length;
+  let best = -1, bestMeters = Infinity;
+  islands.forEach((ring, i) => {
+    const meters = metersToRing(p, ring);
+    if (meters < bestMeters) { best = i; bestMeters = meters; }
+  });
+  return bestMeters <= SHIMANAMI.nearIslandMeters ? best : -1;
+}
+
+/**
+ * 経路が**それぞれの橋を何回渡ったか**（`SHIMANAMI.bridges` の並び）。
+ *
+ * ⚠️ **2回渡っていたら、島を往復している。** 経由地は橋ごとに1回ずつ通らせる
+ *    ので、ふつうは1回か0回。2回は、端点がどの島の上かを取り違えて、
+ *    反対側の橋まで行ってから戻ってきた合図
+ * - `points` は経路の点（`[経度, 緯度]`）
+ */
+function bridgePasses(points) {
+  return SHIMANAMI.bridges.map((bridge) => {
+    let passes = 0;
+    let near = false;
+    for (const p of points || []) {
+      const d = approxMeters(p, bridge);
+      // ⚠️ 近づいたときに1回と数え、十分離れるまで数え直さない（点が密でも1回）
+      if (!near && d <= SHIMANAMI.bridgePassMeters) { passes++; near = true; }
+      else if (near && d > SHIMANAMI.bridgePassMeters * 5) near = false;
+    }
+    return passes;
+  });
+}
+
+/**
+ * 船が**しまなみの船か、本州と四国を結ぶ船**なら、橋ごとの経由地を差し込んだ並びを返す。
+ * 当てはまる船が無ければ null。
+ *
+ * - `locations` は Valhalla に渡す並び（`{lat, lon, type?}`）
+ * - `ferries` は船ごとの `{mid, start, end}`（まんなか・乗る所・降りる所。`[経度, 緯度]`）
+ *
+ * ⚠️ **本州と四国を結ぶ船も見ること。** 遠くから四国へ行く経路は、しまなみから
+ *    離れた船に乗る（実測: 新座→今治・京都→松山は宇野－直島－高松の船）。
+ *    しまなみの範囲だけで見ると、いちばん直したい長い経路に効かない
+ * ⚠️ **差し込むのは、船がいた区間（隣り合う2点の間）だけ。** 立ち寄り先の
+ *    並びを崩さない。
+ * ⚠️ **`through` で入れること。** `break` にすると島ごとに「着きました」と言う。
+ *    `through` は区間(leg)を分けないので、アプリ側の区間の数も変わらない
+ * ⚠️ 足した並びにもう一度かけても増えない。橋の点は区間の端に来るので、
+ *    端点のすぐそば（`nearPointMeters`）として外れる
+ */
+function shimanamiLocations(locations, ferries) {
+  const b = SHIMANAMI.bounds;
+  if (!Array.isArray(locations) || locations.length < 2 || !Array.isArray(ferries)) return null;
+  const しまなみの船 = (p) => p[0] >= b.minLon && p[0] <= b.maxLon && p[1] >= b.minLat && p[1] <= b.maxLat;
+  const 四国へ渡る船 = (f) => insideRing(f.start, SHIMANAMI.shikoku) !== insideRing(f.end, SHIMANAMI.shikoku);
+
+  // 船がいたのは、どの2点の間か（線分までいちばん近い組）
+  const 区間 = new Set();
+  for (const f of ferries) {
+    if (!f || !f.mid || !(しまなみの船(f.mid) || 四国へ渡る船(f))) continue;
+    const m = f.mid;
+    let k = 0, best = Infinity;
+    for (let i = 0; i < locations.length - 1; i++) {
+      const a = [locations[i].lon, locations[i].lat], c = [locations[i + 1].lon, locations[i + 1].lat];
+      const [px, py] = toMeters(m, m[1]), [ax, ay] = toMeters(a, m[1]), [cx, cy] = toMeters(c, m[1]);
+      const dx = cx - ax, dy = cy - ay, len2 = dx * dx + dy * dy;
+      const u = len2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2)) : 0;
+      const d = Math.hypot(px - (ax + u * dx), py - (ay + u * dy));
+      if (d < best) { best = d; k = i; }
+    }
+    区間.add(k);
+  }
+  if (!区間.size) return null;
+
+  const out = [];
+  let added = false;
+  for (let i = 0; i < locations.length; i++) {
+    out.push(locations[i]);
+    if (!区間.has(i)) continue;
+    const a = [locations[i].lon, locations[i].lat];
+    const b2 = [locations[i + 1].lon, locations[i + 1].lat];
+    const from = chainEntry(a);
+    const to = chainEntry(b2);
+    // ⚠️ **間の橋を順に全部。** 1本でも抜くと、そこで船に回る。
+    //    `bridges[j]` は j-1 と j の間なので、from → to で渡るのは
+    //    from+1 〜 to（逆向きなら from 〜 to+1 を逆順）
+    const 橋 = [];
+    if (from < to) for (let j = from + 1; j <= to; j++) 橋.push(j);
+    else for (let j = from; j > to; j--) 橋.push(j);
+    for (const j of 橋) {
+      const p = SHIMANAMI.bridges[j];
+      if (approxMeters(p, a) <= SHIMANAMI.nearPointMeters
+          || approxMeters(p, b2) <= SHIMANAMI.nearPointMeters) continue;
+      out.push({ lat: p[1], lon: p[0], type: "through" });
+      added = true;
+    }
+  }
+  return added ? out : null;
+}
+
 /**
  * 二輪の通行規制を避けるために、何回まで引き直すか。
  *
@@ -814,6 +1048,8 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
     // 船を外すために何回引き直したか／それでも残った船の距離（避けられない航路）
     ferryTries: 診断.ferryTries,
     ferryMeters: Math.round(ferryMetersOf(trip)),
+    // しまなみを橋ごとの経由地で渡らせたか（原付だけ。`SHIMANAMI` 参照）
+    shimanamiUsed: 診断.shimanamiUsed === true,
     // 規制を避けるために何回引き直したか／それでも残った規制
     restrictionTries: 診断.restrictionTries,
     // ⚠️ **残ったものは黙って捨てない。** 画面とアプリで警告に使う
@@ -1080,7 +1316,27 @@ async function routeWithValhalla(from, to, opts = {}) {
     return null;
   };
 
+  /** 船ごとの、まんなか・乗る所・降りる所（`[経度, 緯度]`）。
+   *  ⚠️ **最初の船だけを見ないこと。** 長い経路では、四国へ渡る船より手前で
+   *  別の船に乗ることがある */
+  const ferriesOf = (t) => {
+    const out = [];
+    for (const leg of t.legs || []) {
+      if (!(leg.maneuvers || []).some((x) => x.type === FERRY_MANEUVER)) continue;
+      const shape = decode6(leg.shape);
+      for (const m of leg.maneuvers || []) {
+        if (m.type !== FERRY_MANEUVER) continue;
+        const b = m.begin_shape_index || 0, e = m.end_shape_index || 0;
+        const mid = shape[Math.floor((b + e) / 2)];
+        if (mid) out.push({ mid, start: shape[b] || mid, end: shape[e] || mid });
+      }
+    }
+    return out;
+  };
+
   let json;
+  //: しまなみの橋ごとの経由地を足したか（検査と調べもの用）
+  let shimanamiUsed = false;
   let highwayTries = 1;
   let ferryTries = 1;
   let sideTried = false;
@@ -1132,6 +1388,44 @@ async function routeWithValhalla(from, to, opts = {}) {
         body.locations = [頭, ...間引いた, 尾];
         json = await ask();
         if (json && json.trip) break;
+      }
+    }
+
+    // ⚠️ **しまなみ海道を原付で渡らせる。** 四国へ渡る船に乗ったら、橋ごとの
+    //    経由地を足して引き直す（`SHIMANAMI` の説明を読むこと）。
+    //    ⚠️ **船を塞ぐより先に試すこと。** 塞いでも別の船に乗るだけで、
+    //       長い経路では引き直しが3回ぶん無駄になる（実測: 新座→今治は
+    //       宇野－直島－高松の船。しまなみの範囲の外なので、範囲だけで見ると
+    //       ここに来ない）
+    //    ⚠️ **原付（motor_scooter）だけ。** 126cc以上は本線を走れるので要らない
+    //    ⚠️ **採るのは、船が減り・費用が下がり・島を往復していないときだけ。**
+    //       焼き直す前のタイル（橋の原付道が閉じている）では引けずに元の経路を使う
+    //    ⚠️ `shimanami: false` は**検査専用の口**。足さないと船に乗ることを
+    //       確かめるために要る。本番では渡さないこと
+    if (json && json.trip && costing === "motor_scooter" && opts.shimanami !== false
+        && ridesFerry(json.trip)) {
+      const 橋つき = shimanamiLocations(body.locations, ferriesOf(json.trip));
+      if (橋つき) {
+        const 前 = body.locations;
+        body.locations = 橋つき;
+        ferryTries++;
+        const land = await ask();
+        const 前の = json.trip.summary || {};
+        const 今の = (land && land.trip && land.trip.summary) || {};
+        // ⚠️ 費用は Valhalla 自身の物差し。下がる＝本当は自由に引いても
+        //    選ぶはずだった経路（探しきれなかっただけ）
+        // ⚠️ **同じ橋を2回渡る経路は採らない。** 島を往復している（`bridgePasses`）
+        const 採る = land && land.trip
+          && ferryMetersOf(land.trip) < ferryMetersOf(json.trip)
+          && !(今の.cost > 前の.cost)
+          && 今の.length <= 前の.length * SHIMANAMI.maxStretch
+          && bridgePasses(pointsOfTrip(land.trip)).every((n) => n <= 1);
+        if (採る) {
+          json = land;
+          shimanamiUsed = true;
+        } else {
+          body.locations = 前;
+        }
       }
     }
 
@@ -1469,7 +1763,7 @@ async function routeWithValhalla(from, to, opts = {}) {
   }
 
   const result = await buildResult(json.trip, opts, costing, variantOptions, {
-    highwayTries, ferryTries, restrictionTries, restrictionHits, restrictionSkipped,
+    highwayTries, ferryTries, shimanamiUsed, restrictionTries, restrictionHits, restrictionSkipped,
     restrictionPrefectures, sideTried, sideGaveUp,
     wastefulLoops, wastefulLoopsDropped, wastefulLoopSpans,
   });
@@ -1514,4 +1808,5 @@ module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS,
   ROAD_CLASS_TIERS, ROAD_CLASS_COLORS, HIGHWAY_LADDER, MAX_SIDE_DETOUR_METERS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
+  SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses,
   roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE };
