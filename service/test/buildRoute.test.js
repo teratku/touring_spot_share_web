@@ -248,6 +248,69 @@ test("遠回りしてでも有料を避けられる", async (t) => {
     "遠回りになっていない");
 });
 
+// MARK: フェリーを避ける（アプリの「避ける」に並ぶボタン）
+
+const YOKOSUKA = [139.672, 35.2814];   // 久里浜の近く（東京湾フェリー）
+const TATEYAMA = [139.87, 34.997];
+const NIIZA = [139.57396996069144, 35.79681016815063];
+const MARUGAME = [133.90515, 34.23266667000001];
+const KIRISHIMA = [130.85135, 31.863625];
+
+test("フェリーは既定で避け、避けないと言えば乗る（横須賀→館山）", async (t) => {
+  // ⚠️ **既定は避ける。** 古いアプリは avoidFerries を渡してこない。
+  //    渡されなければこれまでどおり避けること
+  if (await skipIfDown(t)) return;
+  const [既定, 乗る] = await Promise.all([
+    buildRouteResponse({ from: YOKOSUKA, to: TATEYAMA, displacement: "large" }, { baseUrl: BASE }),
+    buildRouteResponse({ from: YOKOSUKA, to: TATEYAMA, displacement: "large", avoidFerries: false },
+                       { baseUrl: BASE }),
+  ]);
+  assert.strictEqual(既定.status, 200, 既定.body.error);
+  assert.strictEqual(乗る.status, 200, 乗る.body.error);
+  assert.strictEqual(既定.body.route.ferryMeters, 0, "渡さなかったのに船に乗っている");
+  assert.ok(乗る.body.route.ferryMeters > 5_000, "避けないと言ったのに東京湾フェリーに乗らない");
+  assert.ok(乗る.body.route.totalDistanceMeters < 60_000,
+    `船に乗れば 47km のはず: ${乗る.body.route.totalDistanceMeters}m`);
+});
+
+test("原付でフェリーを避けないときも、長距離フェリーを乗り継がない（新座→丸亀）", async (t) => {
+  // ⚠️ 原付は幹線を避ける重みで陸の費用が膨らみ、use_ferry 0.5 のままだと
+  //    東京九州フェリーで新門司へ行き、阪九フェリーで神戸へ戻った（船1,539km・43.8時間。
+  //    `FERRY_WEIGHT_WHEN_ALLOWED` の説明を読むこと）
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse({ from: NIIZA, to: MARUGAME, displacement: "moped50",
+                                         avoidHighways: true, avoidFerries: false }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  assert.ok(out.body.route.ferryMeters > 0, "材料が悪い: 避けないのに船に乗らない");
+  assert.ok(out.body.route.ferryMeters < 200_000,
+    `船に ${(out.body.route.ferryMeters / 1000).toFixed(0)}km 乗っている（長距離フェリーを乗り継いでいる）`);
+});
+
+test("原付でフェリーを避けるなら、遠回りでもしまなみを渡る（新座→丸亀）", async (t) => {
+  // ⚠️ 実機で報告（2026-09-23）: 3候補とも宇野－直島－高松の船に乗った。
+  //    陸路（しまなみ）は Valhalla の費用では船より高く、費用で比べて弾いていた
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse({ from: NIIZA, to: MARUGAME, displacement: "moped50",
+                                         avoidHighways: true, alternates: 2 }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  assert.strictEqual(out.body.route.ferryMeters, 0,
+    `船に ${out.body.route.ferryMeters}m 乗っている`);
+});
+
+test("フェリーを避けるなら、船に乗る別の道も返さない（新座→霧島市）", async (t) => {
+  // ⚠️ 実機で報告（2026-09-23）: 本命は船0kmなのに、代替が船 88.7km を通り、
+  //    アプリが「いちばん速くて短い」として先頭に出した
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse({ from: NIIZA, to: KIRISHIMA, displacement: "moped50",
+                                         avoidHighways: true, alternates: 2 }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  assert.strictEqual(out.body.route.ferryMeters, 0, "材料が悪い: 本命が船に乗っている");
+  assert.ok(out.body.alternates.length > 0, "材料が悪い: 別の道が返らない");
+  for (const a of out.body.alternates) {
+    assert.strictEqual(a.ferryMeters, 0, `別の道が船に ${a.ferryMeters}m 乗っている`);
+  }
+});
+
 test("案内は要らないと言えば付けない", async (t) => {
   if (await skipIfDown(t)) return;
   const out = await buildRouteResponse(

@@ -174,14 +174,35 @@ const VARIANTS = {
  */
 const DISPLACEMENTS = {
   // 法定30km/h・二段階右折。幹線を流れに乗って走れないので生活道路寄り
-  moped50:   { costing: "motor_scooter", canUseExpressway: false, topSpeed: 30 },
+  moped50:   { costing: "motor_scooter", canUseExpressway: false, topSpeed: 30, ferryWeight: 0.35 },
   // 法定60km/h・二段階右折なし。クルマの流れに乗れるので幹線寄り
-  small125:  { costing: "motor_scooter", canUseExpressway: false, topSpeed: 60 },
+  small125:  { costing: "motor_scooter", canUseExpressway: false, topSpeed: 60, ferryWeight: 0.45 },
   // ⚠️ **motorcycle は道路クラスのつまみが一切効かない**（下の注意書き参照）。
   //    既定で主要地方道65〜67%と、もともと幹線寄りに走る
   medium250: { costing: "motorcycle",    canUseExpressway: true },
   large:     { costing: "motorcycle",    canUseExpressway: true },
 };
+
+/**
+ * **「フェリーを避ける」を外したときの `use_ferry`**（排気量ごと）。書いていなければ
+ * Valhalla の既定（0.5＝好きでも嫌いでもない）。
+ *
+ * ⚠️ **原付を 0.5 にしないこと。** 原付は幹線を避ける重み（`ROAD_CLASS_TIERS`）で
+ *    陸の費用が実時間の3倍ほどに膨らむので、重みの掛からない船を割安に見る。
+ *    0.5 のままだと長距離フェリーを乗り継ぐ（実測 2026-09-23・50cc 新座→丸亀:
+ *    東京九州フェリーで新門司へ行き、阪九フェリーで神戸へ戻る 船1,539km・43.8時間。
+ *    宇野－高松の船なら 28.3時間）。
+ * 実測（避けない・船の距離）:
+ *              新座→丸亀  新座→今治  広島→松山  大阪→徳島  横須賀→館山
+ *    50cc 0.5    1,539     1,642       64         56         12
+ *    50cc 0.35      56         0       46         56         12   ← 採る
+ *    125cc 0.5      77        77       46         56         12
+ *    125cc 0.45     21         0       46         56         12   ← 採る
+ *    125cc 0.4      21         0        0（199km走る）
+ * ⚠️ 短い船（大阪→徳島・横須賀→館山・広島→松山）は使うこと。避けないと言った人に
+ *    陸まわりを押しつけない。126cc以上は 0.5 のままで東京湾フェリーに乗る
+ */
+const FERRY_WEIGHT_WHEN_ALLOWED = 0.5;
 
 /**
  * 道路クラスごとの重み。GenNavi（OSMカンファレンス発表）と同じ考え方。
@@ -819,6 +840,15 @@ const ferryMetersOf = (t) => (t.legs || []).reduce((a, leg) =>
       .reduce((b, m) => b + (m.length || 0) * 1000, 0), 0);
 
 /**
+ * 代替（Valhalla の `alternates`）のうち、**本命より船に長く乗らないもの**だけを残す。
+ * ⚠️ 本命も船に乗るとき（北海道など避けられない航路）は、同じ長さまでは残す
+ */
+function alternatesNoMoreFerry(mainTrip, alternates) {
+  const limit = ferryMetersOf(mainTrip || {});
+  return (alternates || []).filter((a) => a && a.trip && ferryMetersOf(a.trip) <= limit);
+}
+
+/**
  * 引けた経路（`trip`）をアプリ・画面が読める形に組み立てる。
  *
  * ⚠️ **ここは引き直しをしない。** 引き直し（船・高速・有料・規制・無駄な輪・
@@ -1176,8 +1206,15 @@ async function routeWithValhalla(from, to, opts = {}) {
 
   // ⚠️ **船に乗せない。** `shortest` のときは効かないので、下で塞ぎ直す
   //    （FERRY_EXCLUDE_DEGREES の説明を読むこと）
-  variantOptions.use_ferry = 0;
-  variantOptions.use_rail_ferry = 0;
+  // ⚠️ **利用者が「フェリーを避ける」を外したときだけ乗せる**（`avoidFerries: false`）。
+  //    渡されなければ避ける（これまでどおり。古いアプリは渡してこない）
+  const avoidFerries = opts.avoidFerries !== false;
+  if (avoidFerries) {
+    variantOptions.use_ferry = 0;
+    variantOptions.use_rail_ferry = 0;
+  } else {
+    variantOptions.use_ferry = (bike && bike.ferryWeight) || FERRY_WEIGHT_WHEN_ALLOWED;
+  }
 
   // ⚠️ **重ねる順番を変えないこと。** 案の作り分け → 画面の回避指定 →
   //    最後に法令由来の制約。**画面の指定で法令を緩められてはいけない。**
@@ -1398,7 +1435,8 @@ async function routeWithValhalla(from, to, opts = {}) {
     //       宇野－直島－高松の船。しまなみの範囲の外なので、範囲だけで見ると
     //       ここに来ない）
     //    ⚠️ **原付（motor_scooter）だけ。** 126cc以上は本線を走れるので要らない
-    //    ⚠️ **採るのは、船が減り・費用が下がり・島を往復していないときだけ。**
+    //    ⚠️ **採るのは、船が減り・島を往復していないときだけ。** フェリーを避けない
+    //       設定なら、さらに Valhalla の費用でも安いときだけ（下の `採る` を読むこと）。
     //       焼き直す前のタイル（橋の原付道が閉じている）では引けずに元の経路を使う
     //    ⚠️ `shimanami: false` は**検査専用の口**。足さないと船に乗ることを
     //       確かめるために要る。本番では渡さないこと
@@ -1412,12 +1450,16 @@ async function routeWithValhalla(from, to, opts = {}) {
         const land = await ask();
         const 前の = json.trip.summary || {};
         const 今の = (land && land.trip && land.trip.summary) || {};
-        // ⚠️ 費用は Valhalla 自身の物差し。下がる＝本当は自由に引いても
-        //    選ぶはずだった経路（探しきれなかっただけ）
+        // ⚠️ **フェリーを避けるなら、費用では弾かない。** `use_ferry: 0` は重みで、
+        //    20km 程度の船なら 225km の遠回りより安いと判断される（実測 2026-09-23:
+        //    新座→丸亀で 陸路1,072km 費用388,833 対 船846km 費用358,350。費用で比べて
+        //    船が残った）。下の船を塞ぐ処理と同じく「船が減れば採る」。
+        // ⚠️ **避けないなら、Valhalla 自身の費用で安いときだけ採る。** 探しきれなかった
+        //    分の補正だけにする（船に乗ってよいと言った人を遠回りさせない）
         // ⚠️ **同じ橋を2回渡る経路は採らない。** 島を往復している（`bridgePasses`）
         const 採る = land && land.trip
           && ferryMetersOf(land.trip) < ferryMetersOf(json.trip)
-          && !(今の.cost > 前の.cost)
+          && (avoidFerries || !(今の.cost > 前の.cost))
           && 今の.length <= 前の.length * SHIMANAMI.maxStretch
           && bridgePasses(pointsOfTrip(land.trip)).every((n) => n <= 1);
         if (採る) {
@@ -1431,7 +1473,7 @@ async function routeWithValhalla(from, to, opts = {}) {
 
     // ⚠️ **船に乗ってしまったら、その場所を塞いで引き直す。**
     //    `shortest` では `use_ferry` が効かないため（上の説明を読むこと）
-    if (json && json.trip && ridesFerry(json.trip)) {
+    if (avoidFerries && json && json.trip && ridesFerry(json.trip)) {
       const handPolygons = body.exclude_polygons || [];
       let best = json;
       const boxes = [];
@@ -1780,6 +1822,13 @@ async function routeWithValhalla(from, to, opts = {}) {
   //    代替が規制を2件通っているのに「規制を避けた経路」と名乗っていた
   //    （朝日峠展望公園は表筑波スカイラインの沿道にあり、塞ぐと到達できない）。
   // ⚠️ **立ち寄り先があると代替は返らない**（Valhalla の性質。実測で1本だけ）
+  // ⚠️ **フェリーを避けるなら、本命より船に長く乗る代替は返さない。** 船を塞ぐ処理は
+  //    本命にしか効かないので、代替には船が素通りで残る。しかも船は近道なので
+  //    「いちばん速くて短い」として先頭に出てしまう（実機で報告 2026-09-23:
+  //    新座→霧島市。本命は船0kmなのに、代替が宇野－高松と四国→九州の船 88.7km）
+  if (avoidFerries && Array.isArray(json.alternates)) {
+    json.alternates = alternatesNoMoreFerry(json.trip, json.alternates);
+  }
   if (Array.isArray(json.alternates) && json.alternates.length) {
     result.alternates = [];
     for (const a of json.alternates) {
@@ -1808,5 +1857,5 @@ module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS,
   ROAD_CLASS_TIERS, ROAD_CLASS_COLORS, HIGHWAY_LADDER, MAX_SIDE_DETOUR_METERS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
-  SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses,
+  SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses, alternatesNoMoreFerry,
   roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE };
