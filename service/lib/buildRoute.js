@@ -47,6 +47,11 @@ function toAppRoute(route) {
     // ⚠️ **標識の「〇〇方面」。** ここで詰め直すときに入れ忘れると、
     //    `admin/lib` が取り出していてもアプリには届かない（実際に抜けていた）
     towardNames: step.towardNames || [],
+    // ⚠️ **高速の IC・JCT の名前・出口番号・その先の道路。** 方面と同じく、
+    //    ここで詰め直すときに入れ忘れるとアプリに届かない
+    exitNames: step.exitNames || [],
+    exitNumbers: step.exitNumbers || [],
+    branchNames: step.branchNames || [],
     // ⚠️ **Valhalla の種類番号。** アプリは出口（20/21）の見分けに使う。
     //    `maneuver` は出口も入口も `ramp-*` なので、これが無いと
     //    高速の出口で「左の入口に入ります」と言う

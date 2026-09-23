@@ -246,7 +246,16 @@ function spokenIntersection(name) {
  * @returns {string[]} 出てきた順・重複なし（無ければ空）
  */
 function towardNames(maneuver) {
-  const elements = (maneuver && maneuver.sign && maneuver.sign.exit_toward_elements) || [];
+  return signTexts(maneuver, "exit_toward_elements");
+}
+
+/**
+ * 標識の要素（`maneuver.sign.<key>`）の文字を、出てきた順・重なりなしで返す。
+ * ⚠️ 前後の空白だけ落とす。英字・全角・「（仮称）」は**ここでは直さない**
+ *    （表示と読み上げで扱いが違うので、アプリが決める）
+ */
+function signTexts(maneuver, key) {
+  const elements = (maneuver && maneuver.sign && maneuver.sign[key]) || [];
   const out = [];
   for (const e of elements) {
     const text = e && typeof e.text === "string" ? e.text.trim() : "";
@@ -255,8 +264,41 @@ function towardNames(maneuver) {
   return out;
 }
 
+/**
+ * 標識の IC・JCT・出口の名前（「海老名JCT」「厚木IC」「生田川出口」）。
+ *
+ * ⚠️ **英字・全角と併記で来る**（実測: `海老名ＩＣ` / `海老名IC` / `Ebina IC`）。
+ *    「大津JCT（仮称）」のように「（仮称）」が付くものもある。整えるのはアプリ。
+ * 【実測（2026-09-23・高速12区間の分岐・出口73件）】26%に付く
+ */
+function exitNames(maneuver) {
+  return signTexts(maneuver, "exit_name_elements");
+}
+
+/**
+ * 標識の出口番号（「4-2」「31」「13-05」）。
+ * ⚠️ **読み上げには使わない**（利用者の判断 2026-09-23: 画面にだけ出す）。
+ * 【実測】高速の分岐・出口の25%に付く
+ */
+function exitNumbers(maneuver) {
+  return signTexts(maneuver, "exit_number_elements");
+}
+
+/**
+ * 標識の「その先に入る道路」（「C4」「E20」「名神高速道路」「129」）。
+ *
+ * ⚠️ **番号と名前が混ざる。** 高速の番号（E1・C4）、国道の番号（20・129）、
+ *    路線名（中央自動車道・Hanshin Expressway）が同じ並びに来る。
+ *    読み方（C4→圏央道）はアプリが決める。
+ * 【実測】高速の分岐・出口の40%に付く
+ */
+function branchNames(maneuver) {
+  return signTexts(maneuver, "exit_branch_elements");
+}
+
 module.exports = {
-  spokenRoadName, intersectionName, towardNames, spokenIntersection, firstJapanese, stripRomajiParens,
+  spokenRoadName, intersectionName, towardNames, exitNames, exitNumbers, branchNames,
+  spokenIntersection, firstJapanese, stripRomajiParens,
   prefectureRoadWord, isExpresswayName,
   hasJapanese, NOT_A_PLACE, MAX_NAME_LENGTH,
 };

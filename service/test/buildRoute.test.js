@@ -559,3 +559,23 @@ test("経由地のまわりの輪（Uターン路）を通らない経路をア�
   // ⚠️ **立ち寄り先の知らせを失わないこと。** 道の終点2つ＋最終目的地
   assert.strictEqual(out.body.route.steps.filter((s) => s.isLegEnd).length, 3, "区間の数が変わった");
 });
+
+test("アプリへ IC・JCTの名前・出口番号・その先の道路を渡す（高速の JCT・IC 案内）", async (t) => {
+  // ⚠️ **詰め直すときに入れ忘れると、`admin/lib` が取り出していてもアプリに届かない**
+  //    （方面 `towardNames` で実際に抜けていた）
+  if (await skipIfDown(t)) return;
+  // 用賀 → 厚木（東名・海老名JCT で圏央道へ分かれる所を通る）
+  const out = await buildRouteResponse({ from: [139.6335, 35.6262], to: [139.364, 35.442],
+    displacement: "large", guidance: false }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, JSON.stringify(out.body));
+  const steps = out.body.route.steps;
+  for (const s of steps) {
+    for (const key of ["exitNames", "exitNumbers", "branchNames"]) {
+      assert.ok(Array.isArray(s[key]), `${key} を渡していない指示がある: ${s.instruction}`);
+    }
+  }
+  const jct = steps.find((s) => s.exitNames.includes("海老名JCT"));
+  assert.ok(jct, "海老名JCT の名前をアプリへ渡していない");
+  assert.deepStrictEqual(jct.exitNumbers, ["4-2"], "出口番号を渡していない・取り違えている");
+  assert.deepStrictEqual(jct.branchNames.slice(0, 2), ["C4", "E20"], `その先の道路: ${jct.branchNames}`);
+});

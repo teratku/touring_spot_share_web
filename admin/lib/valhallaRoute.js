@@ -29,7 +29,7 @@
  */
 "use strict";
 
-const { spokenRoadName, intersectionName, towardNames } = require("./navName");
+const { spokenRoadName, intersectionName, towardNames, exitNames, exitNumbers, branchNames } = require("./navName");
 const { shouldSayFollowTheRoad } = require("./navGuide");
 const routeLoops = require("./routeLoops");
 const viaLoops = require("./viaLoops");
@@ -927,6 +927,11 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
         // ⚠️ **標識の「〇〇方面」。** Valhalla は返していたのに、ここで捨てていた。
         //    英字も含めて渡し、どれを読むかはアプリが言語で決める（`navName.towardNames`）
         towardNames: towardNames(m),
+        // ⚠️ **高速の IC・JCT の名前・出口番号・その先の道路。** 方面と同じく
+        //    英字も含めて渡し、整え方と読み方はアプリが決める（`navName.exitNames` ほか）
+        exitNames: exitNames(m),
+        exitNumbers: exitNumbers(m),
+        branchNames: branchNames(m),
         // ⚠️ **曲がりくねった道で「直進します」と言わないための印。**
         //    この指示のあいだに走る線の曲率で決める（250度/km以上）
         isCurvyAhead: shouldSayFollowTheRoad(
