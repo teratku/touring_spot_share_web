@@ -32,6 +32,7 @@
 const { spokenRoadName, intersectionName, towardNames } = require("./navName");
 const { shouldSayFollowTheRoad } = require("./navGuide");
 const routeLoops = require("./routeLoops");
+const viaLoops = require("./viaLoops");
 const trafficSignals = require("./trafficSignals");
 
 /**
@@ -1107,6 +1108,13 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
     wastefulLoops: 診断.wastefulLoops,
     wastefulLoopsDropped: 診断.wastefulLoopsDropped,
     wastefulLoopSpans: 診断.wastefulLoopSpans,
+    //: 経由地のまわりの輪（Uターン路）。見つけた数・残った数・ほどき方（`lib/viaLoops.js`）
+    viaLoops: {
+      found: 診断.viaLoopsFound || 0,
+      left: 診断.viaLoopsLeft || 0,
+      fixes: 診断.viaLoopFixes || [],
+      redraws: 診断.viaLoopRedraws || 0,
+    },
     // ⚠️ 「ふつう」がほぼ高速だった、のような事故に気づけるよう内訳を返す
     //    （実測: バイクの「ふつう」は77.8km中65.9kmが高速だった）
     //: 道路クラスごとの区間（色分け用）。取れなければ null
@@ -1305,13 +1313,18 @@ async function routeWithValhalla(from, to, opts = {}) {
     body.alternates = opts.alternates;
   }
 
-  const ask = async () => {
+  /**
+   * @param sent 送る中身。既定は `body`。⚠️ **試しに引くだけのときは写しを渡すこと。**
+   *        `body` を書き換えて試すと、採らなかったときに戻し忘れて、あとの段
+   *        （規制を避ける引き直しなど）へ持ち込む
+   */
+  const ask = async (sent = body) => {
     // ⚠️ **URLを固定しないこと。** 地域ごとに Valhalla を分ける前提
     //    （惑星規模のタイルは作れないので、地域ごとのサービスになる）
     const res = await fetch(`${opts.baseUrl || BASE}/route`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify(sent),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     return res.json();
@@ -1383,6 +1396,12 @@ async function routeWithValhalla(from, to, opts = {}) {
   let wastefulLoopsDropped = 0;
   //: 塞げずに残った無駄な輪の場所（線の番号）。アプリが原因の道を外すのに使う
   let wastefulLoopSpans = [];
+  //: 経由地のまわりの輪（Uターン路）を何本見つけ、何本ほどいたか（検査と調べもの用）
+  let viaLoopsFound = 0;
+  let viaLoopsLeft = 0;
+  //: ほどいた経由地と直し方（`{ via, how, meters, at }`。via は重なりをまとめた後の番号、at は直した先）
+  let viaLoopFixes = [];
+  let viaLoopRedraws = 0;
   let restrictionTries = 0;
   let restrictionHits = [];
   let restrictionSkipped = [];
@@ -1688,6 +1707,144 @@ async function routeWithValhalla(from, to, opts = {}) {
       }
     }
 
+    /**
+     * 線に残った「無駄な輪」の場所（数えるだけ。塞がない）。上の「無駄な輪」の最後の回と同じ見方
+     */
+    const 無駄な輪の場所 = async (線, 全長) => {
+      const 守る = routeLoops.viasToKeep(opts.vias, opts.stopAt);
+      const spans = [];
+      for (const loop of routeLoops.loopBands(線, 全長)) {
+        if (routeLoops.holdsVia(線, loop, 守る)) continue;
+        if (!routeLoops.interiorOf(線, loop)) continue;
+        const 直 = await routeWithValhalla(線[loop.begin], 線[loop.end], {
+          displacement: opts.displacement,
+          avoidHighways: opts.avoidHighways, avoidTolls: opts.avoidTolls,
+          withAdmins: false, withRoadClass: false,
+          dropWastefulLoops: false,
+          baseUrl: opts.baseUrl,
+        });
+        const m = 直 && !直.error
+          ? 直.steps.reduce((a, st) => a + st.distanceMeters, 0) : null;
+        if (routeLoops.isWasteful(loop.meters, m)) {
+          spans.push({ begin: loop.begin, end: loop.end, meters: Math.round(loop.meters) });
+        }
+      }
+      return spans;
+    };
+
+    // ⚠️ **経由地のまわりの輪（Uターン路）を、点の置き方でほどく**
+    //    （`lib/viaLoops.js` の説明を読むこと）。実機で報告（2026-09-23・ツーリング3）:
+    //    「250cc以上だとUターン路は生成されないが125cc以下で生成されてしまう」。
+    //    上の「無駄な輪」は立ち寄り先を含む輪を守って見送り（道の終点は立ち寄り先）、
+    //    経由地が輪の中にある輪は塞ぐと経由地へ行けなくなって棄却する。ここで拾うのはその残り。
+    //    ⚠️ **「無駄な輪」を塞いだ後にやること。** 先にやると、ずらして変わった線の上で
+    //       「無駄な輪」が5%までの遠回りを許して塞ぎ直し、長く・輪の多い経路になった
+    //       （実測・ツーリング3とおすすめ道路から作ったプラン、計55経路）:
+    //         先に … いまより長い1件（123.2→125.9km）・無駄な輪 213→245km
+    //         後に … いまより長い0件・無駄な輪 213→201km・経由地の輪 175→154km
+    //       ツーリング3はどちらでも同じ（125cc 555.4→551.5km・輪3→0）
+    //    ⚠️ **ここで失敗しても経路は失わないこと。** 直す前の経路を返す
+    //    ⚠️ `untangleVias: false` は**検査専用の口**（直す前に輪があることを確かめる）
+    if (json && json.trip && opts.untangleVias !== false && vias.length) {
+      const 前の置き方 = body.locations;
+      const 前の経路 = json;
+      try {
+        // ⚠️ **入れ物で見分けること。** しまなみの橋・間引きで並びが変わっても、
+        //    経由地の入れ物は同じ物が使われる（`shimanamiLocations` / `thinThroughPoints`）
+        const 今 = locations.slice(1, -1);
+        const 種別 = 今.map((at) => at.type);
+        const 試した = 今.map(() => new Set());
+        const 位置 = (list) => list.map((at) => [at.lon, at.lat]);
+        /** 輪の根元から戻り点へ直接引いて、近道があるか（峠のヘアピンを外す） */
+        const 無駄か = async (線, loop) => {
+          const 直 = await routeWithValhalla(線[loop.base], 線[loop.back], {
+            displacement: opts.displacement,
+            avoidHighways: opts.avoidHighways, avoidTolls: opts.avoidTolls,
+            withAdmins: false, withRoadClass: false,
+            dropWastefulLoops: false,
+            baseUrl: opts.baseUrl,
+          });
+          const m = 直 && !直.error
+            ? 直.steps.reduce((a, st) => a + st.distanceMeters, 0) : null;
+          return routeLoops.isWasteful(loop.meters, m);
+        };
+        const 数える = async (trip, list) => {
+          const 線 = pointsOfTrip(trip);
+          const found = viaLoops.findViaLoops(線, 位置(list), 種別);
+          const 輪 = [];
+          for (const l of found.loops) {
+            // ⚠️ 行き止まりの往復は数えない（直さない。引き返すしか無い）
+            if (!l.deadEnd && await 無駄か(線, l)) 輪.push(l);
+          }
+          return { 線, cum: found.cum, at: found.at, 輪 };
+        };
+        let いま = await 数える(json.trip, 今);
+        viaLoopsFound = いま.輪.length;
+        let まとめて = true;
+        while (いま.輪.length && viaLoopRedraws < viaLoops.MAX_REDRAWS) {
+          const 案 = [];
+          for (const l of いま.輪) {
+            const r = viaLoops.remedyFor(l, {
+              points: いま.線, cum: いま.cum, at: いま.at, kinds: 種別,
+              vias: 位置(今), headings: 今.map((at) => at.heading), tried: 試した[l.n],
+            });
+            if (r.how) 案.push({ n: l.n, ...r });
+          }
+          if (!案.length) break;
+          // ⚠️ **まとめて直して採れなければ、1つずつにする。** どれか1つが悪さを
+          //    すると、まとめた全部が棄却される
+          const 使う = まとめて ? 案 : 案.slice(0, 1);
+          const 次 = 今.slice();
+          for (const a of 使う) 次[a.n] = viaLoops.applyRemedy(今[a.n], a);
+          const 差し替え = new Map(今.map((at, n) => [at, 次[n]]));
+          // ⚠️ **採ると決めるまで `body` を書き換えないこと。** 写しで試しに引く
+          const 置き方 = body.locations.map((at) => 差し替え.get(at) || at);
+          viaLoopRedraws++;
+          const redrawn = await ask({ ...body, locations: 置き方 });
+          const 次の輪 = redrawn && redrawn.trip ? await 数える(redrawn.trip, 次) : null;
+          const 採る = 次の輪 && viaLoops.shouldAccept(
+            { meters: json.trip.summary.length * 1000, loops: いま.輪.length,
+              ferryMeters: ferryMetersOf(json.trip) },
+            { meters: redrawn.trip.summary.length * 1000, loops: 次の輪.輪.length,
+              ferryMeters: ferryMetersOf(redrawn.trip) },
+            // ⚠️ `untangleMinGainMeters` は**検査専用の口**（どの試しも採らない状態を作り、
+            //    採らなかった置き方があとの段へ漏れないことを確かめる）
+            opts.untangleMinGainMeters);
+          if (採る) {
+            for (const a of 使う) {
+              試した[a.n].add(a.how);
+              viaLoopFixes.push({
+                via: a.n, how: a.how,
+                meters: Math.round(routeLoops.distance(位置([今[a.n]])[0], 位置([次[a.n]])[0])),
+                at: 位置([次[a.n]])[0],
+              });
+              今[a.n] = 次[a.n];
+            }
+            body.locations = 置き方;
+            json = redrawn;
+            いま = 次の輪;
+          } else if (まとめて && 使う.length > 1) {
+            まとめて = false;
+          } else {
+            for (const a of 使う) 試した[a.n].add(a.how);
+          }
+        }
+        viaLoopsLeft = いま.輪.length;
+        // ⚠️ **線が変わったら、残った「無駄な輪」の場所を数え直すこと。** 上で控えた場所は
+        //    ほどく前の線の番号なので、そのまま返すとアプリが別の場所の道を外す
+        if (json !== 前の経路 && opts.dropWastefulLoops !== false) {
+          wastefulLoopSpans = await 無駄な輪の場所(pointsOfTrip(json.trip), json.trip.summary.length * 1000);
+        }
+      } catch (e) {
+        // ⚠️ 直す前に戻す。**経路を失うより、輪が残るほうがまし**
+        //    （控えた「無駄な輪」の場所は、戻した線のものなのでそのまま使える）
+        body.locations = 前の置き方;
+        json = 前の経路;
+        viaLoopFixes = [];
+        viaLoopsLeft = viaLoopsFound;
+      }
+    }
+
     // ⚠️ **二輪が通れない道を避ける。** 引いてから、掛かったところだけ塞いで引き直す
     //    （MAX_RESTRICTION_TRIES の説明を読むこと）
     if (json && json.trip && (opts.restrictionsFor || opts.restrictions)) {
@@ -1808,6 +1965,7 @@ async function routeWithValhalla(from, to, opts = {}) {
     highwayTries, ferryTries, shimanamiUsed, restrictionTries, restrictionHits, restrictionSkipped,
     restrictionPrefectures, sideTried, sideGaveUp,
     wastefulLoops, wastefulLoopsDropped, wastefulLoopSpans,
+    viaLoopsFound, viaLoopsLeft, viaLoopFixes, viaLoopRedraws,
   });
   // ⚠️ **範囲は「アプリへ返す線」で数え直すこと。** 避けるときに使った
   //    `pointsOfTrip` は区間をただ繋いだもので、**番号として使ってはいけない**

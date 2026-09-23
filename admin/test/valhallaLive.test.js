@@ -1881,3 +1881,210 @@ test("間引いても止まる場所と両端は残る", () => {
   assert.ok(VIA_THINNING_STEPS[0] >= 5,
     "いきなり削りすぎている（実測では5点で引けた）");
 });
+
+/**
+ * 経由地のまわりの輪（Uターン路）。`lib/viaLoops.js` の説明を読むこと。
+ *
+ * ⚠️ **実機で報告された経路の条件そのもの**を焼き込んである（`fixtures-via-loops.json`）。
+ *    「250cc以上だとUターン路は生成されないが125cc以下でルートのUターン路が生成されてしまう」
+ *    （2026-09-23・国道286号→347号→398号）。
+ */
+const VIA_LOOPS = require("./fixtures-via-loops.json");
+const viaLoops = require("../lib/viaLoops");
+const 輪の材料 = (name, displacement, extra = {}) => {
+  const c = VIA_LOOPS[name];
+  return routeWithValhalla(c["出発"], c["行き先"], {
+    vias: c["経由地"], stopAt: c["立ち寄り先の番号"], throughStopAt: c["通り抜けの番号"],
+    displacement, variant: "normal", avoidTolls: true, avoidHighways: true, avoidFerries: true,
+    ...extra,
+  });
+};
+const 輪の種別 = (name) => {
+  const c = VIA_LOOPS[name];
+  return c["経由地"].map((_, i) => (!c["立ち寄り先の番号"].includes(i) ? "through"
+    : c["通り抜けの番号"].includes(i) ? "break_through" : "break"));
+};
+/** 経由地を囲む輪の番号（行き止まりの往復は除く）。`at` は直した後の位置 */
+const 輪のある経由地 = (r, name, at = VIA_LOOPS[name]["経由地"]) =>
+  viaLoops.findViaLoops(r.points, at, 輪の種別(name)).loops.filter((l) => !l.deadEnd).map((l) => l.n);
+/** 直した後の経由地の位置（直していない点は元のまま） */
+const 直した位置 = (r, name) => {
+  const at = VIA_LOOPS[name]["経由地"].slice();
+  for (const f of r.viaLoops.fixes) if (f.at) at[f.via] = f.at;
+  return at;
+};
+/** 線から点までの距離（m） */
+const 線までの距離 = (points, p) => {
+  let best = Infinity;
+  for (const q of points) best = Math.min(best, viaLoops.cumulative([q, p])[1]);
+  return best;
+};
+
+test("経由地の輪: 125cc の道の終点・入口の輪をほどく（ツーリング3）", async (t) => {
+  if (await skipIfDown(t)) return;
+  const raw = await 輪の材料("ツーリング3", "small125", { untangleVias: false });
+  assert.ok(!raw.error, raw.error);
+  // 材料の確認: ほどかなければ 286号の終点(9)・347号の入口(10)・347号の終点(19) に輪がある
+  const 前 = 輪のある経由地(raw, "ツーリング3");
+  for (const n of [9, 10, 19]) {
+    assert.ok(前.includes(n), `材料が悪い: 経由地${n} に輪が無い（${前}）`);
+  }
+
+  const r = await 輪の材料("ツーリング3", "small125");
+  assert.ok(!r.error, r.error);
+  assert.ok(r.viaLoops.found >= 3, `輪を ${r.viaLoops.found} 本しか見つけていない`);
+  assert.strictEqual(r.viaLoops.left, 0, `輪が ${r.viaLoops.left} 本残っている`);
+  // 本体: 直した後の置き方で見て、どの経由地も輪に囲まれていない
+  const 後 = 輪のある経由地(r, "ツーリング3", 直した位置(r, "ツーリング3"));
+  assert.deepStrictEqual(後, [], `経由地 ${後} がまだ輪に囲まれている`);
+  // ⚠️ **直した先の点は経路の上にある**（直した位置を記録どおりに使っている）
+  for (const f of r.viaLoops.fixes) {
+    const d = 線までの距離(r.points, f.at);
+    assert.ok(d <= 40, `経由地${f.via} の直した先が経路から ${Math.round(d)}m 離れている`);
+  }
+  // ⚠️ **到着の知らせを失わないこと。** 道の終点2つ＋最終目的地
+  assert.strictEqual(r.steps.filter((s) => s.isLegEnd).length, 3, "区間の数が変わった");
+  // ⚠️ 遠回りと引き換えにしない（実測 555.4km → 551.5km）
+  assert.ok(r.lengthMeters < raw.lengthMeters,
+    `ほどいたのに長くなった（${raw.lengthMeters}m → ${r.lengthMeters}m）`);
+  // ⚠️ **まとめて直すこと。** 1つずつだと引き直しが輪の数だけ増える（555kmで1回0.5秒ほど）
+  assert.ok(r.viaLoops.redraws <= 2, `引き直しが ${r.viaLoops.redraws} 回`);
+  // ⚠️ **アプリへ返す「無駄な輪」の場所も、ほどいた後の線で数え直していること。**
+  //    ほどく前の場所（347号の入口・線の番号）をそのまま返すと、アプリが別の場所の道を外す
+  assert.ok(raw.wastefulLoopSpans.length > 0, "材料が悪い: ほどく前に無駄な輪の場所が無い");
+  assert.deepStrictEqual(r.wastefulLoopSpans, [],
+    `ほどいた後の線に無い輪の場所を返している: ${JSON.stringify(r.wastefulLoopSpans)}`);
+});
+
+test("経由地の輪: 裏側から着いた終点は道なりの向き、後ろへ戻る終点は切る（ツーリング3）", async (t) => {
+  if (await skipIfDown(t)) return;
+  const r = await 輪の材料("ツーリング3", "small125");
+  assert.ok(!r.error, r.error);
+  const how = Object.fromEntries(r.viaLoops.fixes.map((f) => [f.via, f.how]));
+  // 347号の終点: 脇道から東側に降りて西向きに着いていた。道を終点まで走らせる
+  assert.strictEqual(how[19], "heading", `347号の終点を ${how[19]} で直している`);
+  // 286号の終点: 次の行き先（べにばなトンネル）が400m後ろ。向きでは消えない
+  assert.strictEqual(how[9], "trim", `286号の終点を ${how[9]} で直している`);
+  // ⚠️ **切りすぎない。** 終点は元の場所から1,000m以内（実測 560m・分岐は終点の400m手前）。
+  //    ⚠️ 物差しに実装の定数を使わないこと。上限を変える壊し方で物差しも一緒に動く
+  const 終点 = r.viaLoops.fixes.find((f) => f.via === 9);
+  assert.ok(終点.meters <= 1_000, `286号の終点を ${終点.meters}m 切っている`);
+});
+
+test("経由地の輪: 50cc でも入口・途中・終点の輪をほどく（ツーリング3）", async (t) => {
+  if (await skipIfDown(t)) return;
+  const r = await 輪の材料("ツーリング3", "moped50");
+  assert.ok(!r.error, r.error);
+  assert.ok(r.viaLoops.found >= 3, `材料が悪い: 輪を ${r.viaLoops.found} 本しか見つけていない`);
+  assert.strictEqual(r.viaLoops.left, 0, `輪が ${r.viaLoops.left} 本残っている`);
+  const 後 = 輪のある経由地(r, "ツーリング3", 直した位置(r, "ツーリング3"));
+  assert.deepStrictEqual(後, [], `経由地 ${後} がまだ輪に囲まれている`);
+  assert.strictEqual(r.steps.filter((s) => s.isLegEnd).length, 3, "区間の数が変わった");
+});
+
+test("経由地の輪: 250cc以上は輪が無く、引き直しも増えない（ツーリング3）", async (t) => {
+  if (await skipIfDown(t)) return;
+  for (const displacement of ["medium250", "large"]) {
+    const r = await 輪の材料("ツーリング3", displacement);
+    assert.ok(!r.error, r.error);
+    assert.strictEqual(r.viaLoops.found, 0, `${displacement}: 輪を ${r.viaLoops.found} 本見つけた`);
+    // ⚠️ **輪が無ければ1回も引き直さない。** 全部の経路で走るので、無駄に遅くしない
+    assert.strictEqual(r.viaLoops.redraws, 0, `${displacement}: 輪が無いのに引き直している`);
+  }
+});
+
+test("経由地の輪: 道を飛ばしてまでは、ほどかない（兵庫・谷の奥の入口）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ 新宮林田線の入口が谷の奥にあり、道を逆走して迎えに行く形。点を1kmずらせば
+  //    「短い」経路になるが、それは**その道を走らない**経路（実測: 経由地17・18から
+  //    980m・1,107m離れた）
+  const c = VIA_LOOPS["兵庫・谷の奥の入口"];
+  // ⚠️ **物差しは固定値で持つこと。** 実装の上限（`MAX_MOVE_METERS` など）を読むと、
+  //    上限を外す壊し方で物差しも一緒に広がり、道を飛ばしても通ってしまう（実際に素通りした）
+  const 通る点の限度 = 300;
+  const 終点の限度 = 1_000;
+  for (const displacement of ["moped50", "small125"]) {
+    const r = await 輪の材料("兵庫・谷の奥の入口", displacement);
+    assert.ok(!r.error, r.error);
+    assert.ok(r.viaLoops.found >= 2, `材料が悪い: ${displacement} で輪を ${r.viaLoops.found} 本しか見つけていない`);
+    c["経由地"].forEach((via, i) => {
+      const 限度 = c["立ち寄り先の番号"].includes(i) ? 終点の限度 : 通る点の限度;
+      const d = 線までの距離(r.points, via);
+      assert.ok(d <= 限度, `${displacement}: 経由地${i} から ${Math.round(d)}m 離れた（選んだ道を飛ばしている）`);
+    });
+  }
+});
+
+test("経由地の輪: ほどいても、ほどかない経路より長くしない（山形・50cc）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **「無駄な輪」を塞いだ後にほどくこと。** 先にほどくと、ずらして変わった線の上で
+  //    「無駄な輪」が5%までの遠回りを許して塞ぎ直し、123.2km が 125.9km になった
+  const name = "山形・ずらすと塞ぎ直しが遠回りする形";
+  const raw = await 輪の材料(name, "moped50", { untangleVias: false });
+  const r = await 輪の材料(name, "moped50");
+  assert.ok(!raw.error && !r.error, raw.error || r.error);
+  // 材料の確認: ほどく相手があり、実際に点を動かしている
+  assert.ok(r.viaLoops.fixes.length >= 1, "材料が悪い: 1つもほどいていない");
+  assert.ok(r.lengthMeters <= raw.lengthMeters,
+    `ほどいて長くなった（${(raw.lengthMeters / 1000).toFixed(1)}km → ${(r.lengthMeters / 1000).toFixed(1)}km）`);
+});
+
+test("経由地の輪: 橋へ上がるループ道の上の点は、輪と見なさない（県道226号・岩出山大橋）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **形だけでは見分けられない。** 県道226号は岩出山大橋へ上がるのに道そのものが
+  //    輪を描く（ツーリング3の125ccで通った 486m の輪）。その上に置いた点は、形の上では
+  //    輪に囲まれるが、近道が無いので直す相手ではない（`routeLoops.isWasteful`）
+  const from = [140.85524, 38.64311], via = [140.86298, 38.66244], to = [140.86984, 38.66755];
+  const r = await routeWithValhalla(from, to, {
+    vias: [via], displacement: "small125", variant: "normal", avoidTolls: true, avoidHighways: true });
+  assert.ok(!r.error, r.error);
+  // 材料の確認: 形の上では、点が輪に囲まれている（行き止まりではない）
+  const 形 = viaLoops.findViaLoops(r.points, [via], ["through"]).loops.filter((l) => !l.deadEnd);
+  assert.ok(形.length >= 1, "材料が悪い: 点がループ道の輪に囲まれていない");
+  assert.strictEqual(r.viaLoops.found, 0, `道そのものの輪を ${r.viaLoops.found} 本「直す相手」と見た`);
+  // ⚠️ 直す相手でなければ、1回も引き直さない
+  assert.strictEqual(r.viaLoops.redraws, 0, `道そのものの輪のために ${r.viaLoops.redraws} 回引き直した`);
+});
+
+test("経由地の輪: ほどいた置き方は、あとの「規制を避ける引き直し」でも使う（ツーリング3）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **ほどいた置き方を `body` に残すこと。** 規制を避ける段は `body` で引き直し、その経路を
+  //    そのまま採る。戻すと、規制に1件掛かっただけで輪が戻る（本番は規制を必ず渡す）
+  const F = VIA_LOOPS["ツーリング3"];
+  const 規制 = [{ id: "試験用", name: "試験用の通行止め", kind: "closed", points: F["試験用の通行止め"]["線"] }];
+  const r = await 輪の材料("ツーリング3", "small125", { restrictions: 規制 });
+  assert.ok(!r.error, r.error);
+  // 材料の確認: ほどいたうえで、規制を避ける引き直しが起きている
+  assert.ok(r.viaLoops.fixes.length >= 3, `材料が悪い: ほどいたのは ${r.viaLoops.fixes.length} 本`);
+  assert.ok(r.restrictionTries >= 1, "材料が悪い: 規制を避ける引き直しが起きていない");
+  assert.strictEqual(r.restrictionHits.length, 0, "材料が悪い: 試験用の通行止めを避けていない");
+  // 本体: 引き直した後も、輪の先（ほどく前に通っていた3点）を通らない
+  const 輪の先 = {
+    "286号の終点の先（県道272の三角）": [140.39778, 38.23723],
+    "347号の入口の先（銀山温泉入口の角）": [140.48535, 38.60179],
+    "347号の終点の先（南の街区）": [140.743, 38.58252],
+  };
+  for (const [name, p] of Object.entries(輪の先)) {
+    const d = 線までの距離(r.points, p);
+    assert.ok(d >= 100, `規制を避けて引き直したら、${name} の輪が戻った（${Math.round(d)}m）`);
+  }
+});
+
+test("経由地の輪: 採らなかった試しの置き方は、あとの「規制を避ける引き直し」へ持ち込まない（ツーリング3）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ **試しの引き直しは写しで引くこと。** `body` を書き換えて試すと、採らなかった置き方で
+  //    あとの段が引き直す。規制を避ける段は引いた経路をそのまま採るので、黙って別の経路になる。
+  //    検査専用の口（`untangleMinGainMeters`）で「どの試しも採らない」状態を作って確かめる
+  const F = VIA_LOOPS["ツーリング3"];
+  const 規制 = [{ id: "試験用", name: "試験用の通行止め", kind: "closed", points: F["試験用の通行止め"]["線"] }];
+  const raw = await 輪の材料("ツーリング3", "small125", { untangleVias: false, restrictions: 規制 });
+  const r = await 輪の材料("ツーリング3", "small125", { restrictions: 規制, untangleMinGainMeters: 1e9 });
+  assert.ok(!raw.error && !r.error, raw.error || r.error);
+  // 材料の確認: 試しは引いたが、1つも採っていない。そのうえで規制を避けて引き直している
+  assert.ok(r.viaLoops.redraws >= 1, "材料が悪い: 試しの引き直しをしていない");
+  assert.strictEqual(r.viaLoops.fixes.length, 0, "材料が悪い: 試しを採っている（検査専用の口が効いていない）");
+  assert.ok(r.restrictionTries >= 1, "材料が悪い: 規制を避ける引き直しが起きていない");
+  // 本体: 採らなかったのだから、ほどかない経路とまったく同じ
+  assert.ok(Math.abs(r.lengthMeters - raw.lengthMeters) < 1,
+    `採らなかった置き方で引き直している（${raw.lengthMeters}m → ${r.lengthMeters}m）`);
+});

@@ -519,3 +519,43 @@ test("経由地の進入方向は、間引いても番号がずれない", async
   }, {});
   assert.strictEqual(out.status, 200, JSON.stringify(out.body));
 });
+
+test("経由地のまわりの輪（Uターン路）を通らない経路をアプリへ返す（ツーリング3・125cc）", async (t) => {
+  // ⚠️ 実機で報告（2026-09-23）:「250cc以上だとUターン路は生成されないが125cc以下で
+  //    ルートのUターン路が生成されてしまう」。下の3点は輪の先で、ほどかない経路なら
+  //    真上を通る（`admin/lib/viaLoops.js`）
+  if (await skipIfDown(t)) return;
+  const { routeWithValhalla } = require("../../admin/lib/valhallaRoute");
+  const { distance } = require("../../admin/lib/routeLoops");
+  const F = require("../../admin/test/fixtures-via-loops.json")["ツーリング3"];
+  const 輪の先 = {
+    "286号の終点の先（県道272の三角）": [140.39778, 38.23723],
+    "347号の入口の先（銀山温泉入口の角）": [140.48535, 38.60179],
+    "347号の終点の先（南の街区）": [140.743, 38.58252],
+  };
+  const 近さ = (line, p) => line.reduce((best, q) => Math.min(best, distance(q, p)), Infinity);
+
+  // 材料の確認: ほどかなければ3点とも通る
+  const raw = await routeWithValhalla(F["出発"], F["行き先"], {
+    vias: F["経由地"], stopAt: F["立ち寄り先の番号"], throughStopAt: F["通り抜けの番号"],
+    displacement: "small125", variant: "normal", avoidTolls: true, avoidHighways: true,
+    avoidFerries: true, untangleVias: false, baseUrl: BASE });
+  assert.ok(!raw.error, raw.error);
+  for (const [name, p] of Object.entries(輪の先)) {
+    assert.ok(近さ(raw.points, p) <= 20, `材料が悪い: ほどかない経路が ${name} を通らない`);
+  }
+
+  const out = await buildRouteResponse({
+    from: F["出発"], to: F["行き先"], vias: F["経由地"], stopAt: F["立ち寄り先の番号"],
+    throughStopAt: F["通り抜けの番号"], displacement: "small125",
+    avoidTolls: true, avoidHighways: true, avoidFerries: true, guidance: false,
+  }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, JSON.stringify(out.body));
+  const line = decode(out.body.route.polyline);
+  for (const [name, p] of Object.entries(輪の先)) {
+    const d = 近さ(line, p);
+    assert.ok(d >= 100, `アプリへ返す経路が ${name} を通っている（${Math.round(d)}m）`);
+  }
+  // ⚠️ **立ち寄り先の知らせを失わないこと。** 道の終点2つ＋最終目的地
+  assert.strictEqual(out.body.route.steps.filter((s) => s.isLegEnd).length, 3, "区間の数が変わった");
+});
