@@ -160,6 +160,16 @@ function mergeRuns(parts, stopAfter, runs) {
     wastefulLoops: sum("wastefulLoops"),
     wastefulLoopsDropped: sum("wastefulLoopsDropped"),
     wastefulLoopSpans,
+    // ⚠️ **経由地をずらした記録は、まとまりごとに足し合わせること。** `...last` のままだと
+    //    最後のまとまりの分しか残らず、アプリが前のまとまりのマーカーを元の位置に描く。
+    //    `via` はまとまりの中の番号なので、アプリは `from`（元の座標）で突き合わせる
+    viaLoops: {
+      found: parts.reduce((a, p) => a + ((p.viaLoops && p.viaLoops.found) || 0), 0),
+      left: parts.reduce((a, p) => a + ((p.viaLoops && p.viaLoops.left) || 0), 0),
+      fixes: parts.flatMap((p) => (p.viaLoops && p.viaLoops.fixes) || []),
+      redraws: parts.reduce((a, p) => a + ((p.viaLoops && p.viaLoops.redraws) || 0), 0),
+    },
+    falseExitsMerged: sum("falseExitsMerged"),
     classSpans,
     // ⚠️ **有料を避けるまとまりの分だけ数える。** `routeWithValhalla` は避けたかどうかに
     //    関わらず有料の距離を返すので、そのまま足すと、有料を使ってよい区間の有料まで

@@ -520,6 +520,43 @@ test("経由地の進入方向は、間引いても番号がずれない", async
   assert.strictEqual(out.status, 200, JSON.stringify(out.body));
 });
 
+test("経由地をずらした先を、元の座標と組にしてアプリへ渡す（ツーリング3・125cc）", async (t) => {
+  // ⚠️ 実機で報告（2026-09-24）:「一箇所だけマーカーが離れてしまっている」。Uターン路をほどくために
+  //    国道286号の終点を道に沿って手前へずらしたので、元の位置のマーカーが線から419m離れて見えた。
+  //    アプリはこれで地図のマーカーを実際に通る位置に描く（利用者の判断）
+  if (await skipIfDown(t)) return;
+  const F = require("../../admin/test/fixtures-via-loops.json")["ツーリング3"];
+  const { distance } = require("../../admin/lib/routeLoops");
+  const out = await buildRouteResponse({
+    from: F["出発"], to: F["行き先"], vias: F["経由地"], stopAt: F["立ち寄り先の番号"],
+    throughStopAt: F["通り抜けの番号"], displacement: "small125",
+    avoidTolls: true, avoidHighways: true, avoidFerries: true, guidance: false,
+  }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, JSON.stringify(out.body));
+  const moved = out.body.route.movedVias;
+  assert.ok(Array.isArray(moved), "ずらした経由地を渡していない");
+  // ⚠️ **元の座標は届いたままの値で返す**（アプリは座標で突き合わせる。番号はずれる）
+  const sent = F["経由地"].map((p) => JSON.stringify(p));
+  for (const m of moved) {
+    assert.ok(sent.includes(JSON.stringify(m.from)), `元の座標が届いた経由地のどれとも一致しない: ${m.from}`);
+    assert.ok(m.meters > 0, "ずらしていないもの（向きを付けただけ）まで入れている");
+    assert.ok(Math.abs(distance(m.from, m.to) - m.meters) <= 2, `距離が合わない: ${m.meters}m`);
+  }
+  // 国道286号の終点（9番）は道に沿って手前へ、国道347号の最初の通る点（10番）は先へずらしている
+  const end286 = moved.find((m) => JSON.stringify(m.from) === JSON.stringify(F["経由地"][9]));
+  assert.ok(end286, "国道286号の終点をずらした先を渡していない");
+  assert.ok(end286.meters > 300 && end286.meters <= 1000, `終点のずらし幅: ${end286.meters}m`);
+  const line = decode(out.body.route.polyline);
+  const near = (p) => line.reduce((best, q) => Math.min(best, distance(q, p)), Infinity);
+  assert.ok(near(end286.to) <= 30, `ずらした先が線の上に無い（${Math.round(near(end286.to))}m）`);
+  assert.ok(near(end286.from) > 300, "材料が悪い: 元の終点が線から離れていない");
+  assert.ok(moved.some((m) => JSON.stringify(m.from) === JSON.stringify(F["経由地"][10])),
+            "国道347号の最初の通る点をずらした先を渡していない");
+  // 向きを付けただけの国道347号の終点（19番）は入れない
+  assert.ok(!moved.some((m) => JSON.stringify(m.from) === JSON.stringify(F["経由地"][19])),
+            "ずらしていない経由地を入れている");
+});
+
 test("経由地のまわりの輪（Uターン路）を通らない経路をアプリへ返す（ツーリング3・125cc）", async (t) => {
   // ⚠️ 実機で報告（2026-09-23）:「250cc以上だとUターン路は生成されないが125cc以下で
   //    ルートのUターン路が生成されてしまう」。下の3点は輪の先で、ほどかない経路なら

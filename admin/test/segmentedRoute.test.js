@@ -271,6 +271,25 @@ test("つないでも所要時間と距離が減らない", async (t) => {
     "消した指示の数が違う（到着1つ・出発1つのはず）");
 });
 
+test("経由地をずらした記録は、まとまりごとに足し合わせる", () => {
+  // ⚠️ `...last` のままだと最後のまとまりの分しか残らず、アプリが前のまとまりの
+  //    マーカーを元の位置（線から離れた所）に描く
+  const part = (fixes, merged) => ({
+    points: [[139.0, 35.0], [139.001, 35.0]],
+    steps: [{ maneuver: "straight", valhallaType: 1, distanceMeters: 91, durationSeconds: 9, beginIndex: 0, endIndex: 1 },
+            { maneuver: "none", valhallaType: 4, distanceMeters: 0, durationSeconds: 0, beginIndex: 1, endIndex: 1, isLegEnd: true }],
+    viaLoops: { found: fixes.length, left: 0, fixes, redraws: 1 },
+    falseExitsMerged: merged,
+  });
+  const a = { via: 9, how: "trim", from: [140.39445, 38.23997], meters: 560, at: [140.400436, 38.241783] };
+  const b = { via: 0, how: "move", from: [140.4861, 38.6014], meters: 213, at: [140.488158, 38.600361] };
+  const merged = seg.mergeRuns([part([a], 1), part([b], 0)], [true]);
+  assert.deepStrictEqual(merged.viaLoops.fixes, [a, b], "前のまとまりのずらした記録が消えた");
+  assert.strictEqual(merged.viaLoops.found, 2);
+  assert.strictEqual(merged.viaLoops.redraws, 2);
+  assert.strictEqual(merged.falseExitsMerged, 1, "前のまとまりでまとめた偽の出口の数が消えた");
+});
+
 test("避けられなかった有料は、有料を避けるまとまりの分だけ数える", async (t) => {
   if (await skipIfDown(t)) return;
   // ⚠️ 数えすぎると、アプリが「避けられなかった」と判断して有料を禁止して引き直す

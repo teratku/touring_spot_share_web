@@ -1454,7 +1454,8 @@ async function routeWithValhalla(from, to, opts = {}) {
   //: 経由地のまわりの輪（Uターン路）を何本見つけ、何本ほどいたか（検査と調べもの用）
   let viaLoopsFound = 0;
   let viaLoopsLeft = 0;
-  //: ほどいた経由地と直し方（`{ via, how, meters, at }`。via は重なりをまとめた後の番号、at は直した先）
+  //: ほどいた経由地と直し方（`{ via, how, from, meters, at }`。via は重なりをまとめた後の番号、
+  //  from は直す前の座標（アプリから届いたまま）、at は直した先）
   let viaLoopFixes = [];
   let viaLoopRedraws = 0;
   let restrictionTries = 0;
@@ -1810,6 +1811,9 @@ async function routeWithValhalla(from, to, opts = {}) {
         const 種別 = 今.map((at) => at.type);
         const 試した = 今.map(() => new Set());
         const 位置 = (list) => list.map((at) => [at.lon, at.lat]);
+        // ⚠️ **ずらす前の座標を控えること。** アプリは地図のマーカーをこれで突き合わせる
+        //    （番号は重なった点をまとめた後・区間ごとに引いた中のもので、アプリの番号とずれる）
+        const 元の位置 = 位置(今);
         /** 輪の根元から戻り点へ直接引いて、近道があるか（峠のヘアピンを外す） */
         const 無駄か = async (線, loop) => {
           const 直 = await routeWithValhalla(線[loop.base], 線[loop.back], {
@@ -1869,7 +1873,7 @@ async function routeWithValhalla(from, to, opts = {}) {
             for (const a of 使う) {
               試した[a.n].add(a.how);
               viaLoopFixes.push({
-                via: a.n, how: a.how,
+                via: a.n, how: a.how, from: 元の位置[a.n],
                 meters: Math.round(routeLoops.distance(位置([今[a.n]])[0], 位置([次[a.n]])[0])),
                 at: 位置([次[a.n]])[0],
               });
