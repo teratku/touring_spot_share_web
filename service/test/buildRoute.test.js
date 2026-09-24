@@ -634,3 +634,17 @@ test("東京料金所（東名の下り）で本線の途中の出口をアプ�
   assert.strictEqual(steps[jct - 1].valhallaType, 18, "海老名JCT の手前が東京IC の入口でない");
   assert.ok(steps[jct - 1].distanceMeters > 32000, `入口の指示が ${steps[jct - 1].distanceMeters}m しかない`);
 });
+
+test("種類17（分岐を直進）の左右をアプリへ渡す（新座の国道254号→浦和所沢バイパス）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ アプリは「左車線に入ります」と言う（利用者の判断 2026-09-25）。詰め直すときに入れ忘れると届かない
+  const out = await buildRouteResponse(
+    { from: [139.5560, 35.8060], to: [139.5205, 35.8205], displacement: "large" }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  const steps = out.body.route.steps;
+  const forks = steps.filter((x) => x.valhallaType === 17);
+  assert.strictEqual(forks.length, 1, "材料が悪い: 浦和所沢バイパスへの分岐を通っていない");
+  assert.strictEqual(forks[0].forkSide, "left");
+  // 分からない・種類17でないものは null（古いアプリと同じ言い方になる）
+  assert.deepStrictEqual([...new Set(steps.filter((x) => x.valhallaType !== 17).map((x) => x.forkSide))], [null]);
+});

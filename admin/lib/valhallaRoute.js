@@ -823,6 +823,92 @@ async function roadClassSpans(encodedShape, costing, baseUrl) {
 }
 
 /**
+ * 種類17（分岐を直進）で、経路が**左右どちらの道**へ分かれるか。分からなければ null。
+ *
+ * ⚠️ **Valhalla は左右を言わない。** 種類17は「分岐を直進です」だけ。実機で報告（2026-09-24）:
+ *    国道254号（新座・柳瀬川の橋）から浦和所沢バイパスへ「分岐を直進」と言われたが、実際は
+ *    左の2車線が本線から分かれる所（本線は右へ +23°、経路は左へ −22°）。利用者の判断:
+ *    「左車線に入ります」と言えれば取り違えない。
+ * ⚠️ **経路の線の曲がりでは決められない。** 分かれる前から道が曲がっているので、
+ *    測る長さで −25°〜−4° とぶれた（アプリへ返す5桁の線では −5°）。分かれる**もう一方の道**の
+ *    向きと比べること（`/trace_attributes` の節点の `intersecting_edges`）。
+ * ⚠️ **出て行けない道は数えない**（`driveability` が `backward`＝入ってくるだけの道）。
+ *    実測: 新大宮バイパスの種類17は、ほかの道が合流してくるだけで、分かれ道は無かった
+ *
+ * @param {number} inHeading   入ってくる辺の終わりの向き（度）
+ * @param {number} outHeading  経路が出て行く辺の始まりの向き（度）
+ * @param {Array<{heading:number, driveability:string}>} others その節点のほかの辺
+ * @returns {"left"|"right"|null}
+ */
+function forkSide(inHeading, outHeading, others) {
+  const rel = (h) => ((h - inHeading + 540) % 360) - 180;
+  const mine = rel(outHeading);
+  const branches = (others || [])
+    .filter((o) => o.driveability === "forward" || o.driveability === "both")
+    .map((o) => rel(o.heading))
+    // ⚠️ 横から交わる道（交差点）は分かれ道ではない
+    .filter((r) => Math.abs(r) <= FORK_MAX_DEGREES);
+  if (!branches.length) return null;
+  if (branches.every((r) => r > mine)) return "left";
+  if (branches.every((r) => r < mine)) return "right";
+  return null;        // 3つに分かれる真ん中など
+}
+
+/** 分かれ道とみなす、もう一方の道の向きの差の上限（度） */
+const FORK_MAX_DEGREES = 60;
+
+/**
+ * 線の上の、指定した点（種類17の始まり）ごとの左右。区間1本ぶん。
+ *
+ * ⚠️ **種類17のある経路でだけ呼ぶこと。** `/trace_attributes` が1回増える
+ *    （実測: 下道72経路で種類17は1件、10経路で3件）。
+ * ⚠️ 取れなければ空。アプリは今までどおり「分岐を直進」と言うだけ
+ *
+ * @returns {Array<{begin:number, end:number, side:"left"|"right"}>}
+ */
+async function forkSides(encodedShape, costing, atIndices, baseUrl) {
+  const ask = async (shapeMatch) => {
+    const res = await fetch(`${baseUrl || BASE}/trace_attributes`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        encoded_polyline: encodedShape,
+        costing,
+        shape_match: shapeMatch,
+        filters: {
+          attributes: ["edge.begin_heading", "edge.end_heading", "edge.begin_shape_index",
+                       "node.intersecting_edge.begin_heading",
+                       "node.intersecting_edge.driveability"],
+          action: "include",
+        },
+      }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    return res.json();
+  };
+  try {
+    // ⚠️ **edge_walk は外すことがある**（実測: 新座の分岐を通る線で失敗した）。そのときは地図に合わせる
+    let json = await ask("edge_walk");
+    if (!json || !Array.isArray(json.edges)) json = await ask("walk_or_snap");
+    if (!json || !Array.isArray(json.edges)) return [];
+    const want = new Set(atIndices);
+    const out = [];
+    for (let k = 1; k < json.edges.length; k++) {
+      const e = json.edges[k];
+      if (!want.has(e.begin_shape_index)) continue;
+      const before = json.edges[k - 1];
+      const others = ((before.end_node || {}).intersecting_edges || [])
+        .map((x) => ({ heading: x.begin_heading, driveability: x.driveability }));
+      const side = forkSide(before.end_heading, e.begin_heading, others);
+      if (side) out.push({ begin: e.begin_shape_index, end: e.begin_shape_index, side });
+    }
+    return out;
+  } catch (e) {
+    return [];
+  }
+}
+
+/**
  * @param {[number,number]} from        [lng, lat]
  * @param {[number,number]} to          [lng, lat]
  * @param {object} opts
@@ -1054,6 +1140,21 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
     for (const st of steps) {
       const sp = classSpans.find((x) => st.beginIndex >= x.begin && st.beginIndex < x.end);
       st.laneCount = sp ? sp.laneCount : null;
+    }
+  }
+
+  // ⚠️ **種類17（分岐を直進）の左右。** アプリは「左車線に入ります」と言う（`forkSide`）。
+  //    ⚠️ 近道の確かめ（`withRoadClass: false`）では要らない。アプリへ返す経路でだけ測る
+  if (opts.withRoadClass !== false && steps.some((x) => x.valhallaType === 17)) {
+    const forks = await spansOverLegs(trip, legMaps, (sh) => {
+      const leg = trip.legs.find((l) => l.shape === sh);
+      const at = ((leg && leg.maneuvers) || []).filter((m) => m.type === 17)
+        .map((m) => m.begin_shape_index);
+      return forkSides(sh, costing, at, opts.baseUrl);
+    });
+    for (const f of forks) {
+      const st = steps.find((x) => x.valhallaType === 17 && x.beginIndex === f.begin);
+      if (st) st.forkSide = f.side;
     }
   }
 
@@ -2075,4 +2176,4 @@ module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
   SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses, alternatesNoMoreFerry,
-  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits };
+  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, forkSide };

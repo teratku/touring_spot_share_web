@@ -68,6 +68,9 @@ function toAppRoute(route) {
     //    ⚠️ OSM 由来なので入っていない道がある（実測: 浦和所沢バイパスは
     //    片側2車線だがデータ上は1）。無い・1のときは黙ること
     laneCount: Number.isInteger(step.laneCount) ? step.laneCount : null,
+    // ⚠️ **種類17（分岐を直進）で左右どちらの道へ分かれるか**（"left" / "right"）。
+    //    アプリは「左車線に入ります」と言う。分からなければ null（今までどおり「分岐を直進」）
+    forkSide: step.forkSide === "left" || step.forkSide === "right" ? step.forkSide : null,
     roadKind: step.roadKind,
     //: **その指示のうち何mが有料か。** 指示の有料の旗は一部でも有料なら丸ごう立つ
     //  ので、画面の「通る道」が4倍に膨れていた（実測 6.8km → 28.4km）
