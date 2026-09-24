@@ -837,7 +837,11 @@ async function roadClassSpans(encodedShape, costing, baseUrl) {
  *
  * @param {number} inHeading   入ってくる辺の終わりの向き（度）
  * @param {number} outHeading  経路が出て行く辺の始まりの向き（度）
- * @param {Array<{heading:number, driveability:string}>} others その節点のほかの辺
+ * ⚠️ **脇道は分かれ道に数えない**（住宅地の道・名前の無い細い道・私道など）。全国216経路の実測で、
+ *    国道18号（安中）の住宅地の道（−58°）・姫路の細い道（−57°）を分かれ道とみなし、
+ *    「右車線に入ります」と言うところだった。数えるのは幹線（高速〜三級道路）とその出入口だけ
+ *
+ * @param {Array<{heading:number, driveability:string, roadClass:string}>} others その節点のほかの辺
  * @returns {"left"|"right"|null}
  */
 function forkSide(inHeading, outHeading, others) {
@@ -845,6 +849,7 @@ function forkSide(inHeading, outHeading, others) {
   const mine = rel(outHeading);
   const branches = (others || [])
     .filter((o) => o.driveability === "forward" || o.driveability === "both")
+    .filter((o) => FORK_ROAD_CLASSES.has(o.roadClass))
     .map((o) => rel(o.heading))
     // ⚠️ 横から交わる道（交差点）は分かれ道ではない
     .filter((r) => Math.abs(r) <= FORK_MAX_DEGREES);
@@ -854,8 +859,14 @@ function forkSide(inHeading, outHeading, others) {
   return null;        // 3つに分かれる真ん中など
 }
 
+/** 分かれ道に数える道の種別（Valhalla の road_class）。脇道（residential など）は数えない */
+const FORK_ROAD_CLASSES = new Set(["motorway", "trunk", "primary", "secondary", "tertiary"]);
+
 /** 分かれ道とみなす、もう一方の道の向きの差の上限（度） */
 const FORK_MAX_DEGREES = 60;
+/** 指示の始まりと、分かれる節点を同じ所とみなす距離（m）。
+ *  ⚠️ 分岐の直後に短い辺が続くことがある（新座: 3m）。いちばん近い辺を採る */
+const FORK_MATCH_METERS = 5;
 
 /**
  * 線の上の、指定した点（種類17の始まり）ごとの左右。区間1本ぶん。
@@ -876,9 +887,10 @@ async function forkSides(encodedShape, costing, atIndices, baseUrl) {
         costing,
         shape_match: shapeMatch,
         filters: {
-          attributes: ["edge.begin_heading", "edge.end_heading", "edge.begin_shape_index",
+          attributes: ["shape", "edge.begin_heading", "edge.end_heading", "edge.begin_shape_index",
                        "node.intersecting_edge.begin_heading",
-                       "node.intersecting_edge.driveability"],
+                       "node.intersecting_edge.driveability",
+                       "node.intersecting_edge.road_class"],
           action: "include",
         },
       }),
@@ -891,16 +903,29 @@ async function forkSides(encodedShape, costing, atIndices, baseUrl) {
     let json = await ask("edge_walk");
     if (!json || !Array.isArray(json.edges)) json = await ask("walk_or_snap");
     if (!json || !Array.isArray(json.edges)) return [];
-    const want = new Set(atIndices);
+    // ⚠️ **番号で突き合わせないこと。位置で突き合わせる。** 地図に合わせ直すと（walk_or_snap）、
+    //    辺の番号は合わせ直した線の番号になり、経路の線とずれる（実測: 新座→所沢で指示103・辺104。
+    //    番号で見ていたため左右が付かなかった。新座の南から引いたときは偶然そろっていた）
+    const matched = decode6(json.shape || "");
+    const route = decode6(encodedShape);
     const out = [];
-    for (let k = 1; k < json.edges.length; k++) {
-      const e = json.edges[k];
-      if (!want.has(e.begin_shape_index)) continue;
-      const before = json.edges[k - 1];
+    for (const at of atIndices) {
+      const p = route[at];
+      if (!p) continue;
+      let best = null;
+      for (let k = 1; k < json.edges.length; k++) {
+        const q = matched[json.edges[k].begin_shape_index];
+        if (!q) continue;
+        const d = metersBetween(p, q);
+        if (d <= FORK_MATCH_METERS && (!best || d < best.d)) best = { k, d };
+      }
+      if (!best) continue;
+      const e = json.edges[best.k];
+      const before = json.edges[best.k - 1];
       const others = ((before.end_node || {}).intersecting_edges || [])
-        .map((x) => ({ heading: x.begin_heading, driveability: x.driveability }));
+        .map((x) => ({ heading: x.begin_heading, driveability: x.driveability, roadClass: x.road_class }));
       const side = forkSide(before.end_heading, e.begin_heading, others);
-      if (side) out.push({ begin: e.begin_shape_index, end: e.begin_shape_index, side });
+      if (side) out.push({ begin: at, end: at, side });
     }
     return out;
   } catch (e) {
@@ -2176,4 +2201,4 @@ module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
   SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses, alternatesNoMoreFerry,
-  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, forkSide };
+  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, forkSide, forkSides };
