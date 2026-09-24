@@ -579,3 +579,21 @@ test("アプリへ IC・JCTの名前・出口番号・その先の道路を渡�
   assert.deepStrictEqual(jct.exitNumbers, ["4-2"], "出口番号を渡していない・取り違えている");
   assert.deepStrictEqual(jct.branchNames.slice(0, 2), ["C4", "E20"], `その先の道路: ${jct.branchNames}`);
 });
+
+test("東京料金所（東名の下り）で本線の途中の出口をアプリへ返さない", async (t) => {
+  // ⚠️ 料金所を通る本線の3車線が OSM で出口用の種別（motorway_link）になっていて、アプリが
+  //    本線の上で「東名へ左の出口に進みます」と言っていた（`admin/lib/valhallaRoute.js` の `mergeFalseExits`）
+  if (await skipIfDown(t)) return;
+  const out = await buildRouteResponse({ from: [139.6335, 35.6262], to: [139.364, 35.442],
+    displacement: "large", guidance: false }, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, JSON.stringify(out.body));
+  const steps = out.body.route.steps;
+  const bogus = steps.filter((s) => [20, 21].includes(s.valhallaType) && s.distanceMeters <= 400
+    && s.roadName.includes("東名高速道路"));
+  assert.deepStrictEqual(bogus.map((s) => s.instruction), [], "本線の途中の出口をアプリへ返している");
+  // 東京IC の入口の次が海老名JCT（間に「出口」「左寄り」を挟まない）
+  const jct = steps.findIndex((s) => s.exitNames.includes("海老名JCT"));
+  assert.ok(jct > 0, "材料が悪い: 海老名JCT を通っていない");
+  assert.strictEqual(steps[jct - 1].valhallaType, 18, "海老名JCT の手前が東京IC の入口でない");
+  assert.ok(steps[jct - 1].distanceMeters > 32000, `入口の指示が ${steps[jct - 1].distanceMeters}m しかない`);
+});

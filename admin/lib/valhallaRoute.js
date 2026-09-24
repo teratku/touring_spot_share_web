@@ -876,6 +876,51 @@ function withSpansOn(built, rules) {
   });
 }
 
+//: 本線の途中の偽の出口として扱う長さの上限（m）。実測の東京料金所は84m
+const FALSE_EXIT_METERS = 400;
+
+/**
+ * 本線の途中の「出口」→「寄る」を、手前の指示にまとめる。まとめた数を返す。
+ *
+ * ⚠️ **実測（2026-09-24）**: 東名の東京料金所（下り・東名川崎IC 付近）では、料金所を
+ *    通る3車線（way/619203717。名前も番号も東名）が出口用の種別（motorway_link）で
+ *    描かれ、Valhalla は「左の出口（21）84m」→「左寄り（24）」と返す。アプリは本線の上で
+ *    「東名へ左の出口に進みます」と言う（大型で用賀から東名を下ると毎回）。
+ *    主な高速32区間・6,600km で当たったのはこの1か所だけ
+ * ⚠️ **まとめる形を狭くしておくこと**:
+ *    - 手前・出口・その先の3つが**同じ高速の名前**を持つ（辰巳JCT のように手前が
+ *      別の高速なら本物の分かれ道）
+ *    - **標識の無い出口**だけ（本物の出口・JCT には名前・番号・方面が付く）
+ *    - 区間の切れ目（立ち寄り先）をまたがない
+ * ⚠️ 読み上げ名・時間の補正・車線数・有料の内訳より**前**に呼ぶこと（まとめた後の指示で決める）
+ */
+function mergeFalseExits(steps, points) {
+  const EXIT = new Set([20, 21]);
+  const STAY = new Set([22, 23, 24]);
+  const isExpresswayName = (n) => /高速|自動車道/.test(n);
+  let merged = 0;
+  for (let i = 1; i + 1 < steps.length;) {
+    const prev = steps[i - 1], s = steps[i], next = steps[i + 1];
+    const shared = (s.roadNames || []).some((n) => isExpresswayName(n)
+      && (prev.roadNames || []).includes(n) && (next.roadNames || []).includes(n));
+    const signed = [s.exitNames, s.exitNumbers, s.branchNames, s.towardNames]
+      .some((names) => names && names.length);
+    if (!(EXIT.has(s.valhallaType) && STAY.has(next.valhallaType)
+          && s.distanceMeters <= FALSE_EXIT_METERS && shared && !signed
+          && !prev.isLegEnd && !s.isLegEnd && !next.isLegEnd)) {
+      i++;
+      continue;
+    }
+    prev.distanceMeters += s.distanceMeters + next.distanceMeters;
+    prev.durationSeconds += s.durationSeconds + next.durationSeconds;
+    prev.endIndex = next.endIndex;
+    prev.isCurvyAhead = shouldSayFollowTheRoad(points.slice(prev.beginIndex, prev.endIndex + 1));
+    steps.splice(i, 2);
+    merged++;
+  }
+  return merged;
+}
+
 async function buildResult(trip, opts, costing, variantOptions, 診断) {
   const points = [];
   const steps = [];
@@ -960,6 +1005,9 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
     if (steps.length > stepsBeforeLeg) steps[steps.length - 1].isLegEnd = true;
 
   }
+  // ⚠️ **料金所の偽の出口をまとめる**（`mergeFalseExits`）。区間の切れ目の印を付けた後、
+  //    読み上げ名・時間の補正より前
+  const 偽の出口 = mergeFalseExits(steps, points);
 
   // ⚠️ **読み上げに要る**（「県道36号線」の「県道」）。切るときは
   //    `withAdmins: false` を渡すこと。実測30msなので既定では取る
@@ -1109,6 +1157,8 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
     polyline: encode(points),     // 5桁。このツールの他の線と揃える
     steps,
     uTurns: steps.filter((s) => s.maneuver.startsWith("uturn")).length,
+    //: 手前の指示にまとめた偽の出口の数（料金所の車線の描き方で出る。`mergeFalseExits`）
+    falseExitsMerged: 偽の出口,
     //: 小道に入って戻ってくる形。見つけた数と、塞いで消せた数
     wastefulLoops: 診断.wastefulLoops,
     wastefulLoopsDropped: 診断.wastefulLoopsDropped,
@@ -2021,4 +2071,4 @@ module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
   SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses, alternatesNoMoreFerry,
-  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE };
+  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits };
