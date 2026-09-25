@@ -648,3 +648,21 @@ test("種類17（分岐を直進）の左右をアプリへ渡す（新座の国
   // 分からない・種類17でないものは null（古いアプリと同じ言い方になる）
   assert.deepStrictEqual([...new Set(steps.filter((x) => x.valhallaType !== 17).map((x) => x.forkSide))], [null]);
 });
+
+test("曲がる手前の車線数と原付の二段階右折をアプリへ渡す（大阪駅前西）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ アプリは車線数から「左折は左端・右折は右端」を推定して言い、原付には二段階右折と言う（2026-09-25）。
+  //    詰め直すときに入れ忘れると届かない
+  for (const d of ["moped50", "large"]) {
+    const out = await buildRouteResponse(
+      { from: [135.4950, 34.7020], to: [135.4925, 34.6960], displacement: d }, { baseUrl: BASE });
+    assert.strictEqual(out.status, 200, out.body.error);
+    const steps = out.body.route.steps;
+    const west = steps.find((x) => x.intersectionName === "大阪駅前西");
+    assert.ok(west, `材料が悪い（${d}）: 大阪駅前西を通っていない`);
+    assert.strictEqual(west.approachLaneCount, 4, d);
+    assert.strictEqual(west.twoStageRightTurn, d === "moped50", d);
+    // どの指示にも項目がある（null / false）。古いアプリは読まないだけ
+    assert.ok(steps.every((x) => "approachLaneCount" in x && typeof x.twoStageRightTurn === "boolean"));
+  }
+});

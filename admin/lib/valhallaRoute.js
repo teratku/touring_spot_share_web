@@ -770,6 +770,29 @@ async function spansOverLegs(trip, legMaps, fn) {
   return out;
 }
 
+/**
+ * 地図に合わせ直した線（`walk_or_snap` の応答の `shape`）の番号 → 経路の線の番号の表。
+ * 合わせ直した線の各点に、経路の線のいちばん近い点を**前へ進みながら**当てる
+ * （同じ所を2回通る経路で、後の通過を前の番号に当てないため）。
+ *
+ * ⚠️ 見るのは今の番号から `ROUTE_INDEX_WINDOW` 点先まで。ずれは実測で1点ほど
+ */
+function routeIndexMap(matched, route) {
+  const out = new Array(matched.length);
+  let j = 0;
+  for (let i = 0; i < matched.length; i++) {
+    let best = j, bestD = Infinity;
+    for (let k = j; k < Math.min(route.length, j + ROUTE_INDEX_WINDOW); k++) {
+      const d = metersBetween(matched[i], route[k]);
+      if (d < bestD) { bestD = d; best = k; }
+    }
+    out[i] = best;
+    j = best;
+  }
+  return out;
+}
+const ROUTE_INDEX_WINDOW = 30;
+
 async function roadClassSpans(encodedShape, costing, baseUrl) {
   const ask = async (shapeMatch) => {
     const res = await fetch(`${baseUrl || BASE}/trace_attributes`, {
@@ -782,7 +805,7 @@ async function roadClassSpans(encodedShape, costing, baseUrl) {
         filters: {
           // ⚠️ **車線数もここで一緒に取る。** 別に `/trace_attributes` を
           //    叩くと1往復増える（この口は経路1本につき既に呼んでいる）
-          attributes: ["edge.road_class", "edge.length", "edge.toll", "edge.lane_count",
+          attributes: ["shape", "edge.road_class", "edge.length", "edge.toll", "edge.lane_count",
                        "edge.begin_shape_index", "edge.end_shape_index"],
           action: "include",
         },
@@ -794,11 +817,18 @@ async function roadClassSpans(encodedShape, costing, baseUrl) {
 
   try {
     let json = await ask("edge_walk");
-    if (!json || !Array.isArray(json.edges)) json = await ask("walk_or_snap");
+    let snapped = false;
+    if (!json || !Array.isArray(json.edges)) { json = await ask("walk_or_snap"); snapped = true; }
     if (!json || !Array.isArray(json.edges)) return null;
+    // ⚠️ **地図に合わせ直したときは、番号を経路の線の番号へ直すこと**（`routeIndexMap`）。
+    //    合わせ直した線は点の数が違い、番号のままだと車線数を別の辺から引く
+    //    （実測: 72経路中1本・広島→福山で、同じ番号の点どうしが最大426mずれていた）
+    const map = snapped ? routeIndexMap(decode6(json.shape || ""), decode6(encodedShape)) : null;
+    const at = (i) => (map && map[i] !== undefined ? map[i] : i);
     // 隣り合う同じクラスをつなげて、線の数を減らす
     const spans = [];
-    for (const e of json.edges) {
+    for (const raw of json.edges) {
+      const e = { ...raw, begin_shape_index: at(raw.begin_shape_index), end_shape_index: at(raw.end_shape_index) };
       // ⚠️ **有料は区間(edge)から数えること。** 指示(maneuver)の旗は、一部でも
       //    有料を含むと丸ごう立つ。実測: 実際6.8kmの雁坂トンネルが28.4km（4倍）
       const toll = e.toll === true;
@@ -857,6 +887,24 @@ function forkSide(inHeading, outHeading, others) {
   if (branches.every((r) => r > mine)) return "left";
   if (branches.every((r) => r < mine)) return "right";
   return null;        // 3つに分かれる真ん中など
+}
+
+/** 原付が二段階右折になる、手前の道の片側の車線数（道路交通法34条5項: 3以上） */
+const TWO_STAGE_MIN_LANES = 3;
+
+/**
+ * 原付の二段階右折か（道路交通法34条5項）: 原付が、信号のある交差点で、手前の道が片側3車線以上のとき右折する。
+ *
+ * ⚠️ **「小回り」「二段階」の標識は分からない**（OSM に該当する項目が全国で0件）。法の既定だけで決める。
+ *    標識で小回りと決められた交差点でも「二段階右折」と言いうる（利用者の判断 2026-09-25 で承知の上）。
+ * ⚠️ 信号は OSM の信号機から自前で見ている（`atSignal`。曲がる地点から20m）。
+ *    実測（全国72区間・原付）: 右折1,165件のうち17件
+ */
+function isTwoStageRightTurn(step, displacement) {
+  return displacement === "moped50"
+    && (step.maneuver === "turnRight" || step.maneuver === "turnSharpRight")
+    && step.atSignal === true
+    && Number.isInteger(step.approachLaneCount) && step.approachLaneCount >= TWO_STAGE_MIN_LANES;
 }
 
 /** 分かれ道に数える道の種別（Valhalla の road_class）。脇道（residential など）は数えない */
@@ -1165,6 +1213,13 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
     for (const st of steps) {
       const sp = classSpans.find((x) => st.beginIndex >= x.begin && st.beginIndex < x.end);
       st.laneCount = sp ? sp.laneCount : null;
+      // ⚠️ **曲がる手前の道の車線数**（`approachLaneCount`）。アプリは「左折は左端・右折は右端の車線」
+      //    を推定して言う（利用者の判断 2026-09-25。道路交通法34条）。`laneCount` は曲がったあとの道なので別に持つ。
+      //    見るのは指示の始まりの点で終わる辺（1つ手前の点を含む区間）
+      const before = st.beginIndex > 0
+        ? classSpans.find((x) => st.beginIndex - 1 >= x.begin && st.beginIndex - 1 < x.end) : null;
+      st.approachLaneCount = before ? before.laneCount : null;
+      st.twoStageRightTurn = isTwoStageRightTurn(st, opts.displacement);
     }
   }
 
@@ -2201,4 +2256,5 @@ module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS,
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
   SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses, alternatesNoMoreFerry,
-  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, forkSide, forkSides };
+  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, forkSide, forkSides, routeIndexMap,
+  isTwoStageRightTurn };
