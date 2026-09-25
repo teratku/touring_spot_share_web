@@ -34,6 +34,7 @@ const { shouldSayFollowTheRoad } = require("./navGuide");
 const routeLoops = require("./routeLoops");
 const viaLoops = require("./viaLoops");
 const trafficSignals = require("./trafficSignals");
+const mopedTurnRules = require("./mopedTurnRules");
 
 /**
  * 曲がる地点から信号までの距離が、これ以内なら「信号のある交差点」とみなす。
@@ -889,21 +890,41 @@ function forkSide(inHeading, outHeading, others) {
   return null;        // 3つに分かれる真ん中など
 }
 
+/**
+ * 曲がる地点に入る向き（度）。30m 手前の点から曲がる地点への向き。
+ * ⚠️ 1点手前では短すぎて、交差点の中の細かい折れで向きがぶれる
+ */
+function approachHeading(points, index) {
+  let j = index, acc = 0;
+  while (j > 0 && acc < APPROACH_HEADING_METERS) { acc += metersBetween(points[j - 1], points[j]); j--; }
+  return j < index ? mopedTurnRules.bearing(points[j], points[index]) : null;
+}
+const APPROACH_HEADING_METERS = 30;
+
 /** 原付が二段階右折になる、手前の道の片側の車線数（道路交通法34条5項: 3以上） */
 const TWO_STAGE_MIN_LANES = 3;
 
 /**
  * 原付の二段階右折か（道路交通法34条5項）: 原付が、信号のある交差点で、手前の道が片側3車線以上のとき右折する。
+ * 標識があればそちらが先（「二段階」「小回り」。`ctx.sign`）。
  *
- * ⚠️ **「小回り」「二段階」の標識は分からない**（OSM に該当する項目が全国で0件）。法の既定だけで決める。
- *    標識で小回りと決められた交差点でも「二段階右折」と言いうる（利用者の判断 2026-09-25 で承知の上）。
- * ⚠️ 信号は OSM の信号機から自前で見ている（`atSignal`。曲がる地点から20m）。
- *    実測（全国72区間・原付）: 右折1,165件のうち17件
+ * ⚠️ **標識は JARTIC から引く**（OSM には全国で0件。`lib/mopedTurnRules.js`）。利用者の判断（2026-09-25）。
+ *    実測（全国72区間・原付）: 法の既定だけだと右折1,165件のうち17件（16か所）が二段階で、そのうち5か所に
+ *    小回りの標識があった（大阪駅前西は入る向きまで一致）。
+ * ⚠️ 信号は OSM（`atSignal`）か JARTIC（`ctx.jarticSignal`）のどちらか。どちらも曲がる地点から20m。
+ *
+ * @param {{sign?: "twoStage"|"smallTurn"|null, jarticSignal?: boolean}} ctx
  */
-function isTwoStageRightTurn(step, displacement) {
-  return displacement === "moped50"
-    && (step.maneuver === "turnRight" || step.maneuver === "turnSharpRight")
-    && step.atSignal === true
+function isTwoStageRightTurn(step, displacement, ctx = {}) {
+  if (displacement !== "moped50") return false;
+  if (!(step.maneuver === "turnRight" || step.maneuver === "turnSharpRight")) return false;
+  // ⚠️ **標識が先。** 「二段階」の標識は2車線以下でも二段階、「小回り」の標識は3車線以上でも小回り
+  //    （JARTIC。`lib/mopedTurnRules.js`）。標識は信号のある交差点にしか立たないので信号は見ない
+  if (ctx.sign === "twoStage") return true;
+  if (ctx.sign === "smallTurn") return false;
+  // 法の既定: 信号のある交差点（OSM か JARTIC）で、手前が片側3車線以上
+  const signal = step.atSignal === true || ctx.jarticSignal === true;
+  return signal
     && Number.isInteger(step.approachLaneCount) && step.approachLaneCount >= TWO_STAGE_MIN_LANES;
 }
 
@@ -1219,7 +1240,17 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
       const before = st.beginIndex > 0
         ? classSpans.find((x) => st.beginIndex - 1 >= x.begin && st.beginIndex - 1 < x.end) : null;
       st.approachLaneCount = before ? before.laneCount : null;
-      st.twoStageRightTurn = isTwoStageRightTurn(st, opts.displacement);
+      // ⚠️ **標識と JARTIC の信号は原付の右折だけ引く**（ほかでは使わない）
+      let ctx = {};
+      if (opts.displacement === "moped50" && (st.maneuver === "turnRight" || st.maneuver === "turnSharpRight")) {
+        const at = points[st.beginIndex];
+        const sign = mopedTurnRules.ruleAt(at, approachHeading(points, st.beginIndex), mopedTurnRules.load().rules);
+        ctx = { sign: sign ? sign.kind : null,
+                jarticSignal: trafficSignals.isNear(at, SIGNAL_RADIUS_METERS, trafficSignals.JARTIC_FILE) };
+        // 判定の材料（検査と調べ物のため。アプリへは渡さない）
+        st.mopedTurnSign = ctx.sign;
+      }
+      st.twoStageRightTurn = isTwoStageRightTurn(st, opts.displacement, ctx);
     }
   }
 
@@ -2257,4 +2288,4 @@ module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
   SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses, alternatesNoMoreFerry,
   roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, forkSide, forkSides, routeIndexMap,
-  isTwoStageRightTurn };
+  isTwoStageRightTurn, approachHeading };

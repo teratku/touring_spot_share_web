@@ -21,11 +21,20 @@ const FILE = path.join(__dirname, "..", "data", "traffic-signals.bin");
 /** 緯度1度あたりの距離（m）。経度は緯度で縮むので、その都度かける */
 const METERS_PER_DEGREE = 111320;
 
-let points = null;   // Int32Array（[緯度, 経度, 緯度, 経度, …]）
+/**
+ * JARTIC の信号（`admin/buildJarticMopedTurns.js` が作る。形は同じ）。
+ * ⚠️ OSM より多い（実測: 原付の右折387か所で、OSM に無く JARTIC にある信号が20m以内に21か所）。
+ *    いまは原付の二段階右折の判定だけに使う（案内の「信号を〜」は OSM のまま）
+ */
+const JARTIC_FILE = path.join(__dirname, "..", "data", "jartic-signals.bin");
+/** ファイルごとの点（Int32Array。[緯度, 経度, 緯度, 経度, …]）。
+ *  ⚠️ **ファイルごとに持つこと。** 1つだけ持つと、2つ目のファイルを頼んでも1つ目を返す */
+const cache = new Map();
 
 /** 読み込む（1回だけ）。ファイルが無ければ空で動く（信号を言わないだけ） */
 function load(file = FILE) {
-  if (points) return points;
+  if (cache.has(file)) return cache.get(file);
+  let points;
   try {
     const buf = fs.readFileSync(file);
     points = new Int32Array(buf.buffer, buf.byteOffset, Math.floor(buf.length / 4));
@@ -33,11 +42,12 @@ function load(file = FILE) {
     console.error(`信号データを読めません（案内は信号なしで出します）: ${e.message}`);
     points = new Int32Array(0);
   }
+  cache.set(file, points);
   return points;
 }
 
 /** 読み直す（検査用） */
-function reset() { points = null; }
+function reset() { cache.clear(); }
 
 /** 点の数 */
 function count(file) { return load(file).length / 2; }
@@ -112,4 +122,4 @@ function search(all, target) {
   return lo;
 }
 
-module.exports = { isNear, nearestMeters, count, load, reset, FILE, METERS_PER_DEGREE };
+module.exports = { isNear, nearestMeters, count, load, reset, FILE, JARTIC_FILE, METERS_PER_DEGREE };

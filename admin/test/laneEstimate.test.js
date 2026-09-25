@@ -102,8 +102,8 @@ test("曲がる手前の道の車線数を指示ごとに持つ（大阪駅前�
     assert.ok(umeda && umeda.maneuver === "turnLeft", `材料が悪い（${d}）: 梅田２中で左折していない`);
     assert.strictEqual(west.approachLaneCount, 4, d);
     assert.strictEqual(umeda.approachLaneCount, 2, d);
-    // 原付だけ二段階右折（信号あり・片側4車線）
-    assert.strictEqual(west.twoStageRightTurn, d === "moped50", d);
+    // ⚠️ 片側4車線・信号ありだが、小回りの標識がある（JARTIC。`mopedTurnRules.test.js`）ので原付でも小回り
+    assert.strictEqual(west.twoStageRightTurn, false, d);
     assert.strictEqual(umeda.twoStageRightTurn, false, d);
   }
 });

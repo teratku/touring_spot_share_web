@@ -25,6 +25,8 @@ export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin"
 {
   echo "===== $(date '+%Y-%m-%d %H:%M:%S') 開始 ====="
   node fetchJarticRestrictions.js --all
+  # 原付の右折方法の標識と信号（⚠️ 配信するにはイメージを作り直すこと）
+  node buildJarticMopedTurns.js
   echo "===== $(date '+%Y-%m-%d %H:%M:%S') 終了 ====="
 } >> "$LOG" 2>&1
 

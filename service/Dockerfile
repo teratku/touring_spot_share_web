@@ -36,6 +36,10 @@ COPY admin/data/japan-prefectures.geojson /app/admin/data/japan-prefectures.geoj
 # ⚠️ **信号（1.56MB）も入れること。** 入れ忘れると案内が「この交差点で」に
 #    ならないだけで**エラーは出ない**（読めなければ信号なしとして動く）
 COPY admin/data/traffic-signals.bin /app/admin/data/traffic-signals.bin
+# ⚠️ **原付の右折方法の標識と JARTIC の信号**（`admin/buildJarticMopedTurns.js` が作る）。
+#    入れ忘れると黙って法の既定だけで決める（二段階右折を言いすぎる）
+COPY admin/data/jartic-moped-turns.json /app/admin/data/jartic-moped-turns.json
+COPY admin/data/jartic-signals.bin /app/admin/data/jartic-signals.bin
 COPY service/package.json /app/service/package.json
 RUN cd /app/service && npm install --omit=dev
 
