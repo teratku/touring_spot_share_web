@@ -32,6 +32,7 @@
 const fs = require("fs");
 const path = require("path");
 const admin = require("firebase-admin");
+const publishLog = require("./lib/publishLog");
 
 const PROJECT_ID = "biketeilen";
 const BUCKET = "biketeilen.appspot.com";
@@ -225,6 +226,21 @@ async function main() {
   }, { merge: true });
 
   console.log(`\n完了。索引 ${COLLECTION}/_index を更新しました（${Object.keys(index).length}県）`);
+
+  // ⚠️ **配信した記録を残す**（調整ツールの「配信の記録」。`lib/publishLog.js`）。
+  //    索引まで書き終えてから書くこと（途中で落ちたものを配信したことにしない）
+  for (const t of targets) {
+    publishLog.append({
+      kind: "roads",
+      prefecture: t.data.prefecture,
+      romaji: t.data.romaji,
+      generation: t.data.generation,
+      // 世代が上がった＝中身が変わり、この県を持つ全ユーザーが落とし直す
+      bumped: bumped.includes(t),
+      count: t.data.count,
+      indexOnly: INDEX_ONLY,
+    });
+  }
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

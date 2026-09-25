@@ -95,11 +95,16 @@
   .muted { color:var(--muted); font-size:11px; }
 
   /* 配信の確認 */
-  #publishModal { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex;
+  #publishModal, #publishLogModal { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex;
                   align-items:center; justify-content:center; z-index:1000; }
-  #publishModal .sheet { background:#fff; border-radius:12px; width:min(720px, 92vw);
+  #publishModal .sheet, #publishLogModal .sheet { background:#fff; border-radius:12px; width:min(720px, 92vw);
                   max-height:86vh; display:flex; flex-direction:column; padding:16px; gap:8px; }
-  #publishModal h3 { margin:0; font-size:16px; }
+  #publishModal h3, #publishLogModal h3 { margin:0; font-size:16px; }
+  /* 配信の記録 */
+  #pubLogTableWrap { flex:1; overflow:auto; min-height:180px; }
+  #pubLogTable td { white-space:nowrap; }
+  #pubLogTable tr.failed td { color:#c92a2a; }
+  .pubLast { font-size:12px; padding:6px 10px; background:#f6f8fa; border-radius:6px; }
   .log { flex:1; overflow:auto; background:#0f1720; color:#d5dae0; border-radius:8px;
          padding:10px; font:11px/1.5 ui-monospace,monospace; white-space:pre-wrap; min-height:180px; }
   .pubButtons { display:flex; gap:8px; align-items:center; }
@@ -145,14 +150,34 @@
        （実機で「通行規制のタブに配信ボタンが無いので、区間の手直しの配信を
        押せばよいか」と尋ねられた） -->
   <button class="primary" id="rPublishHeader" style="display:none">規制を配信…</button>
+  <!-- 直近どれを配信したか（`lib/publishLog.js`）。区間の手直しでも通行規制でも見られる -->
+  <button id="publishLogBtn">配信の記録</button>
   <button id="publish">配信…</button>
 </header>
+
+<!-- 配信の記録（新しい順） -->
+<div id="publishLogModal" style="display:none">
+  <div class="sheet">
+    <h3>配信の記録</h3>
+    <p class="muted" id="pubLogLead"></p>
+    <label class="muted"><input type="checkbox" id="pubLogOnlyPref"> <span id="pubLogOnlyPrefLabel">この県だけ</span></label>
+    <div id="pubLogTableWrap">
+      <table id="pubLogTable">
+        <thead><tr><th>日時</th><th>種類</th><th>県</th><th class="num">世代</th><th class="num">件数</th><th>どこから</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="pubButtons"><span class="spacer"></span><button id="pubLogClose">閉じる</button></div>
+  </div>
+</div>
 
 <!-- 配信の確認。本番へ書き込むので、必ず下見を挟ませる -->
 <div id="publishModal" style="display:none">
   <div class="sheet">
     <h3 id="pubTitle">配信</h3>
     <p class="muted" id="pubLead"></p>
+    <!-- この県を前に配信したのはいつか（`配信の記録` から） -->
+    <div id="pubLast" class="pubLast" style="display:none"></div>
     <div id="pubLog" class="log"></div>
     <div class="pubButtons">
       <button id="pubClose">閉じる</button>
@@ -418,8 +443,15 @@ const adjustedScore = (seg) =>
 const isCurated = (seg) => Object.keys(ov(seg)).length > 0;
 
 // ---------- 読み込み ----------
-async function loadPrefectures() {
+/**
+ * 県の一覧を読み（直し）て、選べる県を並べる。
+ *
+ * ⚠️ **`keep: true` のときは、見ている県を変えないこと。** 配信のあとに「調整N」を読み直すのにも使う。
+ *    毎回最初の県（栃木）を選び直していたため、配信が終わると栃木に戻っていた（実機で報告 2026-09-26）
+ */
+async function loadPrefectures({ keep = false } = {}) {
   const r = await (await fetch("/api/roads/prefectures")).json();
+  const tuneBefore = $("tunePref").value;
   for (const sel of [$("pref"), $("tunePref")]) {
     sel.innerHTML = "";
     for (const p of r.prefectures) {
@@ -430,11 +462,19 @@ async function loadPrefectures() {
       sel.appendChild(o);
     }
   }
+  if (keep && state.romaji) {
+    $("pref").value = state.romaji;
+    if (tuneBefore) $("tunePref").value = tuneBefore;
+    return;
+  }
   const first = r.prefectures.find((p) => p.romaji === "tochigi" && p.built) || r.prefectures.find((p) => p.built);
   if (first) { $("pref").value = first.romaji; $("tunePref").value = first.romaji; await loadPrefecture(first.romaji); }
 }
 
-async function loadPrefecture(romaji) {
+/**
+ * 1県を読み込む。`keepView: true` なら地図の位置を変えない（配信のあとに読み直すとき）
+ */
+async function loadPrefecture(romaji, { keepView = false } = {}) {
   if (state.dirty && !confirm(`保存していない調整が ${state.dirty}件 あります。破棄しますか？`)) {
     $("pref").value = state.romaji; return;
   }
@@ -460,7 +500,7 @@ async function loadPrefecture(romaji) {
   setDirty(0);
   drawAll();
   render();
-  fitPrefecture();
+  if (!keepView) fitPrefecture();
   setStatus(`${state.prefName}`);
 
   // 手直し済みの道をまとめて測り直す（1回の通信で済ませる）。
@@ -2085,6 +2125,7 @@ function openPublish() {
     "<strong>まず「下見」で中身を確かめてください。</strong>下見が通ると配信ボタンが押せるようになります。";
   $("pubLog").textContent = "";
   $("publishModal").style.display = "flex";
+  showLastPublish("roads", state.romaji, state.prefName);
 }
 
 async function runPublish(commit) {
@@ -2116,7 +2157,10 @@ async function runPublish(commit) {
     } else if (commit && j.ok) {
       publishReady = false;
       setStatus(`${j.prefecture} を配信しました`);
-      loadPrefectures();   // 一覧の「調整N」を更新
+      // 一覧の「調整N」を更新し、作り直した中身を読み直す。⚠️ 見ている県・地図の位置はそのまま
+      await loadPrefectures({ keep: true });
+      await loadPrefecture(state.romaji, { keepView: true });
+      showLastPublish("roads", state.romaji, state.prefName);
     }
   } catch (e) {
     log.textContent += `\n通信に失敗しました: ${e}\n`;
@@ -2156,6 +2200,7 @@ function rOpenPublish() {
     "⚠️ <b>出どころ（origin）が無いものは配信APIから外れ、経路が避けません。</b>下見の出力で確かめてください。";
   $("pubLog").textContent = "";
   $("publishModal").style.display = "flex";
+  showLastPublish("restrictions", R.romaji, R.prefName);
 }
 
 async function rRunPublish(commit) {
@@ -2173,7 +2218,10 @@ async function rRunPublish(commit) {
       rPublishReady = true;
       log.textContent += "\n\n下見が通りました。配信できます。";
     }
-    if (j.ok && commit) log.textContent += "\n\n配信しました。";
+    if (j.ok && commit) {
+      log.textContent += "\n\n配信しました。";
+      showLastPublish("restrictions", R.romaji, R.prefName);
+    }
     if (!j.ok) log.textContent += "\n\n❌ 失敗しました。上の出力を確かめてください。";
   } catch (e) {
     log.textContent += `\n通信に失敗しました: ${e.message}`;
@@ -2193,6 +2241,91 @@ $("rPublishHeader").onclick = () => {
   };
 };
 $("pubClose").onclick = () => { $("publishModal").style.display = "none"; };
+
+// ---------- 配信の記録 ----------
+//
+// ⚠️ 記録は配信する本体（`importRoadRecommend.js` / `importRestrictions.js`）が書く。画面から配信しても、
+//    手でコマンドを打って配信しても残る（`lib/publishLog.js`）。記録を始める前の配信は入っていない
+const PUBLISH_KIND_LABEL = { roads: "おすすめ道路", restrictions: "通行規制" };
+// ⚠️ `restored` は記録を始める前の配信を、世代が上がった日時（`road-generation.json`）から書き起こしたもの
+const PUBLISH_VIA_LABEL = { tool: "調整ツール", cli: "コマンド", restored: "世代から復元" };
+
+/** 「2026/09/26 00:12」 */
+function formatPublishedAt(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return String(iso || "");
+  const p2 = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}/${p2(d.getMonth() + 1)}/${p2(d.getDate())} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
+}
+
+async function fetchPublishLog() {
+  const r = await fetch("/api/publish-log?limit=500");
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+/**
+ * この県を前に配信したのはいつか（配信の確認画面の上）。
+ * ⚠️ 記録が無いときも黙らない。おすすめ道路は「世代が最後に上がった日時」を代わりに出す（下見では上がらない）
+ */
+async function showLastPublish(kind, romaji, prefName) {
+  const box = $("pubLast");
+  box.style.display = "";
+  box.textContent = "前回の配信を確かめています…";
+  try {
+    const log = await fetchPublishLog();
+    const last = (log.latest[kind] || {})[romaji];
+    if (last) {
+      const gen = kind === "roads" && last.generation ? `（世代 v${last.generation}${last.bumped ? "・上がった" : "・変わらず"}）` : "";
+      box.textContent = `${prefName} の前回の配信: ${formatPublishedAt(last.at)}${gen}`;
+    } else if (kind === "roads" && log.generations[romaji]) {
+      const g = log.generations[romaji];
+      box.textContent = `${prefName} の配信の記録はまだありません（記録を始める前の配信）。世代 v${g.generation} に上がったのは ${formatPublishedAt(g.updatedAt)}`;
+    } else {
+      box.textContent = `${prefName} の配信の記録はまだありません`;
+    }
+  } catch (e) {
+    box.textContent = `配信の記録を読めません: ${e.message}`;
+  }
+}
+
+/** 配信の記録の表（新しい順）。「この県だけ」は、いま開いているタブの県で絞る */
+async function openPublishLog() {
+  const onRestrict = $("rPublishHeader").style.display !== "none";
+  const romaji = onRestrict ? R.romaji : state.romaji;
+  const prefName = onRestrict ? R.prefName : state.prefName;
+  $("pubLogOnlyPrefLabel").textContent = `${prefName || "この県"}だけ`;
+  $("publishLogModal").style.display = "flex";
+  const tbody = $("pubLogTable").querySelector("tbody");
+  tbody.innerHTML = "<tr><td colspan=\"6\" class=\"muted\">読み込み中…</td></tr>";
+  let log;
+  try { log = await fetchPublishLog(); }
+  catch (e) { tbody.innerHTML = ""; $("pubLogLead").textContent = `配信の記録を読めません: ${e.message}`; return; }
+  const draw = () => {
+    const rows = log.entries.filter((e) => !$("pubLogOnlyPref").checked || e.romaji === romaji);
+    $("pubLogLead").textContent = log.entries.length
+      ? `本番へ配信したもの（新しい順・${rows.length}件）。下見は入りません。記録を始める前の配信も入っていません。`
+      : "まだ記録がありません。次に配信したものから残ります。";
+    tbody.innerHTML = "";
+    for (const e of rows) {
+      const tr = document.createElement("tr");
+      const gen = e.kind === "roads" && e.generation ? `v${e.generation}${e.bumped ? " ↑" : ""}` : "";
+      for (const [text, cls] of [[formatPublishedAt(e.at), ""], [PUBLISH_KIND_LABEL[e.kind] || e.kind, ""],
+                                 [e.prefecture || "", ""], [gen, "num"], [e.count ?? "", "num"],
+                                 [PUBLISH_VIA_LABEL[e.via] || e.via || "", ""]]) {
+        const td = document.createElement("td");
+        td.textContent = String(text);
+        if (cls) td.className = cls;
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+  };
+  $("pubLogOnlyPref").onchange = draw;
+  draw();
+}
+$("publishLogBtn").onclick = openPublishLog;
+$("pubLogClose").onclick = () => { $("publishLogModal").style.display = "none"; };
 // ⚠️ ここで割り当てないこと。行き先は**開いた入口**（おすすめ道路／規制）が決める。
 //    ここに置くと、規制の入口から開いても最後にこちらで上書きされてしまう
 

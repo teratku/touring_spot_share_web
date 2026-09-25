@@ -22,6 +22,7 @@
 const fs = require("fs");
 const path = require("path");
 const admin = require("firebase-admin");
+const publishLog = require("./lib/publishLog");
 const { ROMAJI } = require("./lib/prefectureRomaji");
 const { isSellable } = require("./lib/restrictionOrigin");
 
@@ -185,6 +186,16 @@ async function main() {
     console.log(`  ⬆️  ${t.prefecture} → ${COLLECTION}/${t.data.romaji}`);
   }
   console.log(`\n完了（${targets.length}県）`);
+
+  // ⚠️ **配信した記録を残す**（調整ツールの「配信の記録」。`lib/publishLog.js`）
+  for (const t of targets) {
+    publishLog.append({
+      kind: "restrictions",
+      prefecture: t.prefecture,
+      romaji: t.data.romaji,
+      count: t.data.restrictions.length,
+    });
+  }
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

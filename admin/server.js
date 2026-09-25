@@ -28,6 +28,7 @@ const { normalizeOverride, isEmptyOverride,
 const { execFile } = require("child_process");
 const { validateRally } = require("./lib/rallyValidation");
 const { ROMAJI, REGION } = require("./lib/prefectures");
+const publishLog = require("./lib/publishLog");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
 const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
@@ -428,12 +429,29 @@ const PUBLISH_TIMEOUT_MS = 10 * 60 * 1000;
 function run(script, args) {
   return new Promise((resolve) => {
     execFile("node", ["--max-old-space-size=8192", path.join(__dirname, script), ...args],
-      { cwd: __dirname, timeout: PUBLISH_TIMEOUT_MS, maxBuffer: 32 * 1024 * 1024 },
+      // ⚠️ 画面から配信したことを記録に残す（`lib/publishLog.js` の `via`）
+      { cwd: __dirname, timeout: PUBLISH_TIMEOUT_MS, maxBuffer: 32 * 1024 * 1024,
+        env: { ...process.env, PUBLISH_VIA: "tool" } },
       (error, stdout, stderr) => {
         resolve({ ok: !error, code: error ? (error.code ?? 1) : 0, stdout, stderr: stderr || (error ? String(error) : "") });
       });
   });
 }
+
+/**
+ * 配信の記録（新しい順）と、県ごとの最新・世代。
+ * ⚠️ 記録は配信する本体が書く（`lib/publishLog.js`）。記録を始める前の配信は入っていない。
+ *    その県の「世代が最後に上がった日時」は `road-generation.json` で分かる（下見では上がらない）
+ */
+app.get("/api/publish-log", (req, res) => {
+  const limit = Math.max(1, Math.min(1000, Number(req.query.limit) || 200));
+  const entries = publishLog.read({ limit: 100000 });
+  let generations = {};
+  try {
+    generations = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "road-generation.json"), "utf8"));
+  } catch { /* まだ無い */ }
+  res.json({ entries: entries.slice(0, limit), latest: publishLog.latestByPrefecture(entries), generations });
+});
 
 app.post("/api/roads/publish/:romaji", async (req, res) => {
   const { romaji } = req.params;
