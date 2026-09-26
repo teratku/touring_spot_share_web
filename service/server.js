@@ -33,6 +33,7 @@ const { PrefectureLocator } = require("../admin/lib/prefectureLocator");
 const { ROMAJI } = require("../admin/lib/prefectureRomaji");
 const { buildRouteResponse } = require("./lib/buildRoute");
 const { buildSnapResponse } = require("./lib/snapRoads");
+const { buildSapaResponse } = require("./lib/sapa");
 
 const PORT = process.env.PORT || 8080;
 /** ⚠️ Cloud Run は 0.0.0.0 で待つこと。127.0.0.1 だと外から繋がらない */
@@ -152,6 +153,16 @@ app.post("/v1/route", requireAuth, async (req, res) => {
  */
 app.post("/v1/snap", requireAuth, async (req, res) => {
   const out = await buildSnapResponse(req.body || {}, { baseUrl: VALHALLA_URL });
+  res.status(out.status).json(out.body);
+});
+
+/**
+ * 経路から寄れる高速の SA/PA（アプリの「SA/PA の一覧」「次の SA/PA まで」）。
+ *
+ * ⚠️ **認証を外さないこと。** 候補ごとに Valhalla で寄り道を引く（1本で1秒ほど）
+ */
+app.post("/v1/sapa", requireAuth, async (req, res) => {
+  const out = await buildSapaResponse(req.body || {}, { baseUrl: VALHALLA_URL });
   res.status(out.status).json(out.body);
 });
 

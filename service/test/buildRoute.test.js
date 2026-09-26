@@ -370,7 +370,8 @@ test("管理の窓口を載せていない", () => {
   const server = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
   const routes = [...server.matchAll(/app\.(get|post|put|delete)\("([^"]+)"/g)].map((m) => m[2]);
   // ⚠️ `/v1/snap` はアプリの「なぞる」が使う（道路に載せるだけ。管理の窓口ではない）
-  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/route", "/v1/snap"],
+  // ⚠️ `/v1/sapa` はアプリの SA/PA の一覧が使う（経路から寄れる SA/PA を返すだけ。`docs/sapa-plan.md`）
+  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/route", "/v1/sapa", "/v1/snap"],
     `余計な窓口が載っている: ${routes.join(", ")}`);
 });
 

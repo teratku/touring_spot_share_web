@@ -42,6 +42,8 @@ COPY admin/data/jartic-moped-turns.json /app/admin/data/jartic-moped-turns.json
 COPY admin/data/jartic-signals.bin /app/admin/data/jartic-signals.bin
 # ⚠️ スマートIC（ETC専用）の料金所。無いと車載器なしの乗り手を黙ってスマートICへ通す（lib/smartIcGates.js）
 COPY admin/data/smart-ic-gates.json /app/admin/data/smart-ic-gates.json
+# ⚠️ 高速の SA/PA（`admin/buildSapa.js` が作る）。無いと `/v1/sapa` が黙って空を返す
+COPY admin/data/sapa.json /app/admin/data/sapa.json
 COPY service/package.json /app/service/package.json
 RUN cd /app/service && npm install --omit=dev
 
