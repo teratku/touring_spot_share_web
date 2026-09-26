@@ -127,6 +127,9 @@ function toAppRoute(route) {
         restrictionHits: route.restrictionHits,
         restrictionSkipped: route.restrictionSkipped,
         restrictionPrefectures: route.restrictionPrefectures,
+        // ⚠️ **避けきれなかったスマートIC（ETC専用）は必ず返す。** ETC車載器が無いと出入りできない。
+        //    車載器なし（`etc: false`）で頼まれたときだけ入る
+        etcOnlyIcs: route.etcOnlyIcs,
   };
 }
 
@@ -134,7 +137,7 @@ async function buildRouteResponse(body, deps = {}) {
   // ⚠️ `excludeTolls` を取り出し忘れないこと。下で渡しているのに取り出しておらず
   //    ReferenceError で窓口ごと500を返した前例がある（`stopAt` で同じことをやった）
   const { from, to, vias, variant, displacement, avoidHighways, avoidTolls, excludeTolls,
-          avoidFerries, alternates,
+          avoidFerries, alternates, etc,
           arriveOnNearSide, roadNameStyle, announce, guidance,
           at, isHoliday, stopAt, throughStopAt, heading, headingTolerance, viaHeadings,
           legConditions } = body || {};
@@ -174,6 +177,9 @@ async function buildRouteResponse(body, deps = {}) {
       // ⚠️ **フェリーは既定で避ける。** 外すのは `false` を明示されたときだけ
       //    （古いアプリは渡してこない。渡さなければこれまでどおり避ける）
       avoidFerries: avoidFerries !== false,
+      // ⚠️ **ETC車載器が無いときだけスマートIC（ETC専用）を外す。** 外すのは `false` を明示されたときだけ
+      //    （古いアプリは渡してこない。渡さなければ車載器ありとみなす＝これまでどおり）
+      avoidEtcOnly: etc === false,
       // ⚠️ **別の道も一緒に頼む。** 立ち寄り先があると返らない（Valhalla の性質）
       alternates: Number(alternates) || 0,
       arriveOnNearSide, roadNameStyle,

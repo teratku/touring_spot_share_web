@@ -47,6 +47,7 @@ const SIGNAL_RADIUS_METERS = 20;
 const { applicable: applicableRestrictions, hitsOnRoute, excludePolygonsFor }
   = require("./restrictionAvoid");
 const { spansOnLine } = require("./restrictionOverlap");
+const smartIcGates = require("./smartIcGates");
 
 const { encode } = require("./polyline");
 const { applyRealisticTime } = require("./realisticTime");
@@ -1656,6 +1657,8 @@ async function routeWithValhalla(from, to, opts = {}) {
   let shimanamiUsed = false;
   let highwayTries = 1;
   let ferryTries = 1;
+  //: スマートIC（ETC専用）を外すために何回引き直したか
+  let etcOnlyTries = 0;
   let sideTried = false;
   let sideGaveUp = false;
   //: 無駄な輪を何本見つけ、何本消せたか（画面には出さない。検査と調べもの用）
@@ -1864,6 +1867,36 @@ async function routeWithValhalla(from, to, opts = {}) {
             // ⚠️ 引けなければ元のまま。有料を通ることは `tollUnavoidableMeters` で伝わる
             if (keep) body.exclude_polygons = keep; else delete body.exclude_polygons;
           }
+        }
+      }
+    }
+
+    // ⚠️ **ETC車載器が無ければ、スマートIC（ETC専用）を通さない。**
+    //    利用者の要望（2026-09-26）。アプリは車載器が無いときだけ `etc: false` を送る
+    //    （`avoidEtcOnly`）。Valhalla は ETC 専用かどうかを知らないので、有料の禁止と同じく
+    //    **通ったゲートだけを塞いで引き直す**（`lib/smartIcGates.js` の説明を読むこと）。
+    // ⚠️ **本命だけを見ないこと。** 代替がスマートICを通ることがある（有料の禁止で踏んだのと同じ）
+    // ⚠️ **塞いだままにすること。** あとに続く引き直し（規制・左側に到着）が塞ぎ無しで戻す
+    // ⚠️ 引けなくなったら（目的地がスマートICの奥など）元のまま。通ることは `etcOnlyIcs` で伝わる
+    if (json && json.trip && opts.avoidEtcOnly && (!bike || bike.canUseExpressway)) {
+      const gates = opts.smartIcGates || smartIcGates.load();
+      const blocked = new Set();
+      for (let i = 0; i < smartIcGates.EXCLUDE_TRIES; i++) {
+        const trips = [json.trip,
+                       ...(json.alternates || []).map((a) => a && a.trip).filter(Boolean)];
+        const hits = [...new Set(trips.flatMap((t) => smartIcGates.gatesOnRoute(pointsOfTrip(t), gates)))]
+          .filter((g) => !blocked.has(g));
+        if (!hits.length) break;
+        hits.forEach((g) => blocked.add(g));
+        const keep = body.exclude_polygons;
+        body.exclude_polygons = [...(keep || []), ...smartIcGates.boxesFor(hits)];
+        etcOnlyTries++;
+        const detoured = await ask();
+        if (detoured && detoured.trip) {
+          json = detoured;
+        } else {
+          if (keep) body.exclude_polygons = keep; else delete body.exclude_polygons;
+          break;
         }
       }
     }
@@ -2245,6 +2278,13 @@ async function routeWithValhalla(from, to, opts = {}) {
   //    範囲外として黙って捨てる（実機で報告 2026-09-20:
   //    同じ規制なのに候補によって赤い点線が出たり出なかったりした）
   withSpansOn(result, restrictionRules);
+  // ⚠️ **避けきれなかったスマートIC（ETC専用）は必ず返す。** 黙って通させない
+  //    （車載器が無いと出入りできない）。アプリはこれを見て知らせる
+  const etcGates = opts.avoidEtcOnly ? (opts.smartIcGates || smartIcGates.load()) : null;
+  if (etcGates) {
+    result.etcOnlyTries = etcOnlyTries;
+    result.etcOnlyIcs = smartIcGates.icNames(smartIcGates.gatesOnRoute(pointsOfTrip(json.trip), etcGates));
+  }
   // ⚠️ **代替も1本ずつ照合すること。** 「塞ぎは `body` に溜めてあるから代替も
   //    安全側になる」という前提で空にしていたが、**塞ぐと経路が引けないときは
   //    塞ぎを外して引き直す**ので、その前提が崩れる。実機で報告（2026-09-20):
@@ -2275,6 +2315,10 @@ async function routeWithValhalla(from, to, opts = {}) {
       });
       // ⚠️ 本命と同じく、返す線で数え直す
       withSpansOn(alt, restrictionRules);
+      if (etcGates) {
+        alt.etcOnlyTries = 0;
+        alt.etcOnlyIcs = smartIcGates.icNames(smartIcGates.gatesOnRoute(pointsOfTrip(a.trip), etcGates));
+      }
       result.alternates.push(alt);
     }
   }

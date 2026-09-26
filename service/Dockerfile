@@ -40,6 +40,8 @@ COPY admin/data/traffic-signals.bin /app/admin/data/traffic-signals.bin
 #    入れ忘れると黙って法の既定だけで決める（二段階右折を言いすぎる）
 COPY admin/data/jartic-moped-turns.json /app/admin/data/jartic-moped-turns.json
 COPY admin/data/jartic-signals.bin /app/admin/data/jartic-signals.bin
+# ⚠️ スマートIC（ETC専用）の料金所。無いと車載器なしの乗り手を黙ってスマートICへ通す（lib/smartIcGates.js）
+COPY admin/data/smart-ic-gates.json /app/admin/data/smart-ic-gates.json
 COPY service/package.json /app/service/package.json
 RUN cd /app/service && npm install --omit=dev
 

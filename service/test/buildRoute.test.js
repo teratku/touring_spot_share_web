@@ -668,3 +668,32 @@ test("曲がる手前の車線数と原付の二段階右折をアプリへ渡�
     assert.ok(steps.every((x) => "approachLaneCount" in x && typeof x.twoStageRightTurn === "boolean"));
   }
 });
+
+// MARK: ETC車載器なし（スマートIC は ETC 専用）
+
+// 実測（2026-09-26）: 本庄の南から谷川岳PAへ。ふつうに引くと上里SAスマートIC（下り）から関越道に乗る
+const KAMISATO_FROM = [139.13044, 36.2469];
+const TANIGAWA = [138.93941, 36.78062];
+
+test("ETC車載器なし（etc: false）なら、スマートICを通らない経路をアプリへ返す", async (t) => {
+  if (await skipIfDown(t)) return;
+  const gatesLib = require("../../admin/lib/smartIcGates");
+  const gates = gatesLib.load();
+  const [ふつう, 車載器なし] = await Promise.all([
+    buildRouteResponse({ from: KAMISATO_FROM, to: TANIGAWA, displacement: "large", guidance: false }, { baseUrl: BASE }),
+    buildRouteResponse({ from: KAMISATO_FROM, to: TANIGAWA, displacement: "large", guidance: false, etc: false },
+                       { baseUrl: BASE }),
+  ]);
+  assert.strictEqual(車載器なし.status, 200, 車載器なし.body.error);
+  const used = (r) => gatesLib.icNames(gatesLib.gatesOnRoute(decode(r.body.route.polyline), gates));
+  assert.ok(used(ふつう).some((n) => /上里/.test(n)), `材料が悪い: ふつうに引いても上里SAスマートICを通らない（${used(ふつう)}）`);
+  assert.deepStrictEqual(used(車載器なし), [], "車載器なしなのにスマートICを通る");
+  // ⚠️ 避けきれなかったスマートICは必ず返す（ここでは避けられたので空）
+  assert.deepStrictEqual(車載器なし.body.route.etcOnlyIcs, []);
+  // 古いアプリ・車載器あり（etc を渡さない）は今までどおり。項目も返さない
+  assert.strictEqual(ふつう.body.route.etcOnlyIcs, undefined);
+  // ⚠️ `etc: true` や崩れた値で避けない（外すのは false を明示されたときだけ）
+  const 車載器あり = await buildRouteResponse(
+    { from: KAMISATO_FROM, to: TANIGAWA, displacement: "large", guidance: false, etc: "false" }, { baseUrl: BASE });
+  assert.ok(used(車載器あり).some((n) => /上里/.test(n)), "false 以外の値でスマートICを避けた");
+});

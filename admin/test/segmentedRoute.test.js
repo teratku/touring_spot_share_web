@@ -346,3 +346,15 @@ test("3つのまとまりでも番号と合計がずれない", async (t) => {
   assert.strictEqual(km.expressway + km.toll + km.surface,
     r.kindSpans.reduce((a, s) => a + s.meters, 0), "種別ごとの距離が区間の合計と合わない");
 });
+
+test("避けきれなかったスマートIC（ETC専用）は、まとまりごとに足し合わせる", async (t) => {
+  if (await skipIfDown(t)) return;
+  // ⚠️ `...last` のままだと前のまとまりで通るスマートICを黙って落とす（ETCが無いと出入りできない）
+  const r = await base();
+  const merged = seg.mergeRuns([{ ...r, etcOnlyIcs: ["前のスマートIC"], etcOnlyTries: 2 },
+                                { ...r, etcOnlyIcs: ["後のスマートIC", "前のスマートIC"], etcOnlyTries: 1 }], [true]);
+  assert.deepStrictEqual(merged.etcOnlyIcs, ["前のスマートIC", "後のスマートIC"]);
+  assert.strictEqual(merged.etcOnlyTries, 3);
+  // 車載器ありで引いたもの（項目が無い）は、足しても項目を作らない
+  assert.ok(!("etcOnlyIcs" in seg.mergeRuns([r, r], [true])), "頼まれていないのに ETC の項目を返した");
+});

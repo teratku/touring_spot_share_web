@@ -145,6 +145,12 @@ function mergeRuns(parts, stopAfter, runs) {
     restrictionHits: uniqueById(parts.flatMap((p) => p.restrictionHits || [])),
     restrictionSkipped: uniqueById(parts.flatMap((p) => p.restrictionSkipped || [])),
     restrictionPrefectures: [...new Set(parts.flatMap((p) => p.restrictionPrefectures || []))],
+    // ⚠️ **避けきれなかったスマートIC はまとまりごとに足し合わせること。** `...last` のままだと
+    //    前のまとまりで通るスマートICを黙って落とす（ETCが無いと出入りできない）
+    ...(parts.some((p) => Array.isArray(p.etcOnlyIcs)) ? {
+      etcOnlyTries: sum("etcOnlyTries"),
+      etcOnlyIcs: [...new Set(parts.flatMap((p) => p.etcOnlyIcs || []))],
+    } : {}),
     lengthMeters: sum("lengthMeters"),
     durationSeconds: steps.reduce((a, s) => a + (Number(s.durationSeconds) || 0), 0),
     timeAdjust: parts.reduce((acc, p) => {
