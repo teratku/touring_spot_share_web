@@ -123,7 +123,9 @@ test("見るのは曲がる地点。その指示の終点ではない", async (t
   const route = await routeWithValhalla([139.7016, 35.6580], [139.7005, 35.6900],
                                         { displacement: "large" });
   assert.ok(!route.error, route.error);
-  const near = (p) => signals.nearestMeters(p, 300) <= SIGNAL_RADIUS_METERS;
+  // ⚠️ 信号は OSM か JARTIC のどちらか（`isNearAny`。2026-09-26）
+  const near = (p) => signals.nearestMeters(p, 300) <= SIGNAL_RADIUS_METERS
+    || signals.nearestMeters(p, 300, signals.JARTIC_FILE) <= SIGNAL_RADIUS_METERS;
   const turns = route.steps.filter((s) => s.maneuver.startsWith("turn"));
   assert.ok(turns.length >= 3, `材料が悪い: 曲がる指示が ${turns.length} 件`);
 
@@ -135,4 +137,87 @@ test("見るのは曲がる地点。その指示の終点ではない", async (t
   const noSignal = turns.filter((s) => !near(route.points[s.beginIndex]));
   assert.ok(noSignal.length >= 1, "材料が悪い: 曲がる地点に信号の無い角が無い");
   assert.ok(noSignal.every((s) => !s.atSignal), "信号の無い交差点に印を付けている");
+});
+
+// MARK: 手前の信号を数える（利用者の判断 2026-09-26: 直前は「2つ目の信号を右です」）
+
+test("OSM か JARTIC のどちらかにあれば信号とみなす", () => {
+  const lat = 35.7, lng = 139.5;
+  signals.reset();
+  const withSignal = makeFile([[lng, lat]]);
+  const empty = makeFile([[lng + 0.1, lat + 0.1]]);
+  assert.strictEqual(signals.isNearAny([lng, lat], 20, [withSignal, empty]), true, "1つ目にだけある信号を見落とした");
+  assert.strictEqual(signals.isNearAny([lng, lat], 20, [empty, withSignal]), true, "2つ目にだけある信号を見落とした");
+  assert.strictEqual(signals.isNearAny([lng, lat], 20, [empty, empty]), false, "どちらにも無いのに信号にした");
+  signals.reset();
+});
+
+/** 北へまっすぐ 500m の経路（10mおき）。曲がる地点は北の端（番号50） */
+function northLine(lat, lng) {
+  return Array.from({ length: 51 }, (_, i) => [lng, lat + (i * 10) * M_LAT]);
+}
+
+test("曲がる地点の手前の信号交差点を、近い順に距離で返す", () => {
+  const lat = 35.7, lng = 139.5, ex = mLng(lat);
+  const line = northLine(lat, lng);
+  const turnAt = lat + 500 * M_LAT;
+  const at = (back, side = 0) => [lng + side * ex, turnAt - back * M_LAT];
+  signals.reset();
+  const file = makeFile([
+    at(0), at(-12),          // 曲がる交差点そのもの（数えない）
+    at(95), at(125),         // 1つの大きな交差点（停止線が30m離れる）→ 中心110m
+    at(200),                 // 2つ目
+    at(260, 30),             // 経路から30m横（別の道）→ 通らない
+    at(360),                 // 300mより先 → 数えない
+  ]);
+  const got = signals.signalsBefore(line, 50, { atSignal: true, files: [file] });
+  assert.strictEqual(got.length, 2, `交差点の数が違う: ${JSON.stringify(got)}`);
+  assert.ok(Math.abs(got[0] - 110) <= 8, `1つ目の距離が違う: ${got[0]}`);
+  assert.ok(Math.abs(got[1] - 200) <= 8, `2つ目の距離が違う: ${got[1]}`);
+  signals.reset();
+});
+
+test("停止線が40mより離れたら別の交差点として数える", () => {
+  const lat = 35.7, lng = 139.5;
+  const line = northLine(lat, lng);
+  const turnAt = lat + 500 * M_LAT;
+  signals.reset();
+  const file = makeFile([[lng, turnAt - 100 * M_LAT], [lng, turnAt - 160 * M_LAT]]);
+  const got = signals.signalsBefore(line, 50, { atSignal: false, files: [file] });
+  assert.strictEqual(got.length, 2, `60m離れた信号を1つにまとめた: ${JSON.stringify(got)}`);
+  signals.reset();
+});
+
+test("曲がる地点に信号が無いときは、すぐ手前の信号も返す（信号を過ぎて、と言うため）", () => {
+  const lat = 35.7, lng = 139.5;
+  const line = northLine(lat, lng);
+  const turnAt = lat + 500 * M_LAT;
+  signals.reset();
+  const file = makeFile([[lng, turnAt - 15 * M_LAT]]);
+  const noSignal = signals.signalsBefore(line, 50, { atSignal: false, files: [file] });
+  assert.strictEqual(noSignal.length, 1, "曲がる地点の手前の信号を落とした");
+  // 曲がる地点に信号があるなら、それは曲がる交差点そのもの
+  assert.deepStrictEqual(signals.signalsBefore(line, 50, { atSignal: true, files: [file] }), [],
+    "曲がる交差点の信号を手前の信号として数えた");
+  signals.reset();
+});
+
+test("経路の指示に手前の信号までの距離を付けてアプリへ渡す", async (t) => {
+  if (await skipIfDown(t)) return;
+  const { buildRouteResponse } = require("../../service/lib/buildRoute");
+  // 市街地（甲府→富士吉田）。実測: 甲府警察署前の左折の手前に信号が3つ（102・221・288m）
+  const out = await buildRouteResponse({ from: [138.5683, 35.6620], to: [138.8077, 35.4872], displacement: "large", guidance: false },
+                                       { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  const steps = out.body.route.steps;
+  assert.ok(steps.every((s) => Array.isArray(s.signalsBefore) && s.signalsBefore.every(Number.isInteger)), "形が違う");
+  const counted = steps.filter((s) => s.signalsBefore.length);
+  assert.ok(counted.length >= 3, `手前の信号を数えた指示が少ない: ${counted.length}`);
+  for (const s of counted) {
+    assert.ok(s.signalsBefore.every((d, i, a) => d > 0 && d <= 300 && (i === 0 || d > a[i - 1])), `近い順・300m以内でない: ${s.signalsBefore}`);
+  }
+  // ⚠️ 曲がる交差点そのものの信号は入れない（入れると「2つ目の信号を右です」と1つ多く数える）
+  const atSignal = counted.filter((s) => s.atSignal);
+  assert.ok(atSignal.length >= 2, "材料が悪い: 信号のある曲がり角で手前に信号がある所が少ない");
+  assert.ok(atSignal.every((s) => s.signalsBefore[0] > 30), `曲がる交差点の信号を数えた: ${atSignal.map((s) => s.signalsBefore[0])}`);
 });

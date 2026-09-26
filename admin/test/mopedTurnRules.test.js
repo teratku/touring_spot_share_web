@@ -227,8 +227,15 @@ test("標識が無ければ法の既定（則武一丁目）", async (t) => {
 
 test("OSM に無い信号も JARTIC にあれば信号のある交差点とみなす（石井）", async (t) => {
   if (await skipIfDown(t)) return;
-  const s = await rightTurn([140.2423, 36.3918], [140.2390, 36.3930], "moped50", "石井");
-  assert.strictEqual(s.atSignal, false, "材料が悪い: OSM に信号がある");
+  const r = await routeWithValhalla([140.2423, 36.3918], [140.2390, 36.3930], { displacement: "moped50" });
+  assert.ok(!r.error, r.error);
+  const s = r.steps.find((x) => x.maneuver === "turnRight" && x.intersectionName === "石井");
+  assert.ok(s, "材料が悪い: 石井で右折していない");
+  const at = r.points[s.beginIndex];
+  assert.strictEqual(trafficSignals.isNear(at, 20), false, "材料が悪い: OSM に信号がある");
+  assert.strictEqual(trafficSignals.isNear(at, 20, trafficSignals.JARTIC_FILE), true, "材料が悪い: JARTIC に信号が無い");
+  // ⚠️ 案内の「信号を」も OSM か JARTIC のどちらか（2026-09-26。手前の信号を数えるのと同じ物差し）
+  assert.strictEqual(s.atSignal, true, "JARTIC にだけある信号を信号とみなしていない");
   assert.ok(s.approachLaneCount >= 3, "材料が悪い");
   assert.strictEqual(s.mopedTurnSign, null);
   assert.strictEqual(s.twoStageRightTurn, true);

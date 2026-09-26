@@ -1174,9 +1174,15 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
         //    Valhalla は信号を持っていないので OSM から自前で見る
         //    （`admin/lib/trafficSignals.js`）。実測: 曲がる19件のうち
         //    信号のある交差点は 0〜10m に14件、次に近いのは81m。20mで分かれる
-        atSignal: trafficSignals.isNear(points[indexOf(m.begin_shape_index || 0)],
-                                        SIGNAL_RADIUS_METERS),
+        //    ⚠️ **OSM か JARTIC のどちらか**（2026-09-26。手前の信号を数えるのと同じ物差しにする。
+        //    片方だけだと、曲がる地点の信号を「手前の信号」と数え違える）
+        atSignal: trafficSignals.isNearAny(points[indexOf(m.begin_shape_index || 0)],
+                                           SIGNAL_RADIUS_METERS),
       });
+      // ⚠️ **手前300mにある信号交差点までの距離**（アプリが「2つ目の信号を右です」と数える）。
+      //    曲がる地点そのものの信号は入れない（`trafficSignals.signalsBefore`）
+      const made = steps[steps.length - 1];
+      made.signalsBefore = trafficSignals.signalsBefore(points, made.beginIndex, { atSignal: made.atSignal });
     }
     // ⚠️ **この区間の最後の指示が「着いた」にあたる。** Valhalla は区間ごとに
     //    到着の maneuver を返すので、その1つに印を付ける
