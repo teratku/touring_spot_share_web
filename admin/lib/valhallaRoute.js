@@ -1521,6 +1521,13 @@ async function routeWithValhalla(from, to, opts = {}) {
     viaHeadings.push(rawHeadings[index]);
   }
   const destination = { lat: to[1], lon: to[0] };
+  // ⚠️ **着く向き**（`toHeading`）。最初の経由地までの行き方違いを引くとき
+  //    （`segmentedRoute.withHeadAlternates`）、おすすめ道路の入口へ道に沿った向きで着かせる。
+  //    本命と同じ向きで入らないと、つないだ先の区間でその場で向きを変えることになる
+  if (Number.isFinite(opts.toHeading)) {
+    destination.heading = ((opts.toHeading % 360) + 360) % 360;
+    destination.heading_tolerance = 45;
+  }
   // ⚠️ **走っている向きを渡すと、その場で向きを変えさせなくなる。**
   //    渡さないと「水道道路を南西方向です」＝いきなり逆を向けと言われる。
   //    渡すと「北東方向です → 左 → 左」と、そのまま進んで小道で回り込む形になる

@@ -358,3 +358,147 @@ test("避けきれなかったスマートIC（ETC専用）は、まとまりご
   // 車載器ありで引いたもの（項目が無い）は、足しても項目を作らない
   assert.ok(!("etcOnlyIcs" in seg.mergeRuns([r, r], [true])), "頼まれていないのに ETC の項目を返した");
 });
+
+// MARK: 経由地があるときの行き方違い（利用者の要望 2026-09-26: おすすめ道路でも複数出てほしい）
+
+/** 手で作る結果（つなぐ処理が読む項目だけ） */
+function fakePart(points, { seconds = 600, uTurns = 0, alternates = [], arrive = true } = {}) {
+  const last = points.length - 1;
+  const steps = [
+    { maneuver: "depart", valhallaType: 1, beginIndex: 0, endIndex: last, distanceMeters: 1000, durationSeconds: seconds, roadKind: "surface" },
+    ...(arrive ? [{ maneuver: "arrive", valhallaType: 4, beginIndex: last, endIndex: last, distanceMeters: 0, durationSeconds: 0, roadKind: "surface", isLegEnd: true }] : []),
+  ];
+  return { points, steps, kindSpans: [], wastefulLoopSpans: [], classSpans: null, lengthMeters: 1000,
+           durationSeconds: seconds, uTurns, alternates };
+}
+
+/** 呼ばれ方を記録する経路の関数 */
+function recorder(answers) {
+  const calls = [];
+  const route = async (from, to, opts) => {
+    calls.push({ from, to, opts });
+    return answers[calls.length - 1];
+  };
+  return { calls, route };
+}
+
+const A = [139.0, 35.0], V1 = [139.1, 35.1], V2 = [139.2, 35.2], B = [139.3, 35.3];
+
+test("経由地があれば、最初の経由地までを代替つきで引き、残りを1回引いてつなぐ", async () => {
+  const main = fakePart([A, V1, V2, B], { seconds: 1200 });
+  const alt1 = fakePart([A, [139.05, 35.02], V1], { seconds: 700 });
+  const alt2 = fakePart([A, [139.02, 35.07], V1], { seconds: 750 });
+  const head = fakePart([A, V1], { seconds: 600, alternates: [alt1, alt2] });
+  const tail = fakePart([V1, V2, B], { seconds: 600 });
+  const { calls, route } = recorder([head, tail]);
+  const opts = { vias: [V1, V2], viaHeadings: [250, null], stopAt: [1], throughStopAt: [1], alternates: 2, arriveOnNearSide: true };
+  const out = await seg.withHeadAlternates(main, A, B, opts, route);
+  assert.strictEqual(calls.length, 2);
+  // 最初の経由地まで: 経由地なし・本命と同じ向きで着く・代替を頼む・着く側の寄せはしない
+  assert.deepStrictEqual([calls[0].from, calls[0].to], [A, V1]);
+  assert.deepStrictEqual(calls[0].opts.vias, []);
+  assert.strictEqual(calls[0].opts.toHeading, 250, "入口へ本命と同じ向きで着かせていない");
+  assert.strictEqual(calls[0].opts.alternates, 2);
+  assert.strictEqual(calls[0].opts.arriveOnNearSide, false, "経由地で着く側に寄せている");
+  // 最初の経由地から先: 残りの経由地・番号を振り直す・着いた向きで出発・代替は頼まない
+  assert.deepStrictEqual([calls[1].from, calls[1].to], [V1, B]);
+  assert.deepStrictEqual(calls[1].opts.vias, [V2]);
+  assert.deepStrictEqual(calls[1].opts.stopAt, [0], "立ち寄り先の番号を振り直していない");
+  assert.deepStrictEqual(calls[1].opts.throughStopAt, [0], "通り抜けの番号を振り直していない");
+  assert.strictEqual(calls[1].opts.heading, 250, "最初の経由地で折り返させる向きで出発している");
+  assert.strictEqual(calls[1].opts.alternates, 0);
+  assert.strictEqual(calls[1].opts.arriveOnNearSide, true, "最後の目的地の寄せを落とした");
+  // 本命はそのまま、代替は2本。線は「入口まで」＋「入口から先」
+  assert.strictEqual(out.steps, main.steps, "本命を差し替えた");
+  assert.strictEqual(out.alternates.length, 2);
+  assert.deepStrictEqual(out.alternates[0].points, [A, [139.05, 35.02], V1, V2, B]);
+  assert.deepStrictEqual(out.alternates[1].points, [A, [139.02, 35.07], V1, V2, B]);
+  // ⚠️ 最初の経由地は通るだけ（止まらない）なので、そこでの到着・出発は言わない
+  assert.ok(!out.alternates[0].steps.slice(0, -1).some((s) => s.maneuver === "arrive"), "通るだけの経由地で到着と言う");
+  assert.strictEqual(out.alternates[0].durationSeconds, 1300);
+});
+
+test("最初の経由地が立ち寄り先なら、そこでの到着を残す", async () => {
+  const main = fakePart([A, V1, B], { seconds: 1200 });
+  const head = fakePart([A, V1], { seconds: 600, alternates: [fakePart([A, [139.05, 35.02], V1], { seconds: 700 })] });
+  const tail = fakePart([V1, B], { seconds: 600 });
+  const { route } = recorder([head, tail]);
+  const out = await seg.withHeadAlternates(main, A, B, { vias: [V1], stopAt: [0], alternates: 2 }, route);
+  const arrivals = out.alternates[0].steps.filter((s) => s.maneuver === "arrive");
+  assert.strictEqual(arrivals.length, 2, "立ち寄り先での到着を消した");
+});
+
+test("つないだ先が本命と食い違うときは、代替を足さない（入口から別の道に吸い付いた）", async () => {
+  const main = fakePart([A, V1, B], { seconds: 1200 });
+  const head = fakePart([A, V1], { seconds: 600, alternates: [fakePart([A, [139.05, 35.02], V1], { seconds: 700 })] });
+  // 実測・高崎神流秩父線: 入口から先が林道に吸い付き、本命より大幅に長い
+  const slowTail = fakePart([V1, B], { seconds: 1200 });
+  const out = await seg.withHeadAlternates(main, A, B, { vias: [V1], alternates: 2 }, recorder([head, slowTail]).route);
+  assert.strictEqual(out.alternates, main.alternates, "食い違うのに代替を足した");
+  // 2割＋2分までは許す
+  const okTail = fakePart([V1, B], { seconds: 1200 * 1.2 + 120 - 600 });
+  const ok = await seg.withHeadAlternates(main, A, B, { vias: [V1], alternates: 2 }, recorder([head, okTail]).route);
+  assert.strictEqual(ok.alternates.length, 1, "許す範囲なのに足さなかった");
+});
+
+test("本命より多くUターンする代替は落とす", async () => {
+  const main = fakePart([A, V1, B], { seconds: 1200, uTurns: 0 });
+  const tangled = fakePart([A, [139.05, 35.02], V1], { seconds: 700 });
+  tangled.steps.splice(1, 0, { maneuver: "uturnLeft", valhallaType: 13, beginIndex: 1, endIndex: 1, distanceMeters: 0, durationSeconds: 0, roadKind: "surface" });
+  tangled.steps[0].endIndex = 1;
+  tangled.steps[1].endIndex = tangled.points.length - 1;
+  const clean = fakePart([A, [139.02, 35.07], V1], { seconds: 750 });
+  const head = fakePart([A, V1], { seconds: 600, alternates: [tangled, clean] });
+  const tail = fakePart([V1, B], { seconds: 600 });
+  const out = await seg.withHeadAlternates(main, A, B, { vias: [V1], alternates: 2 }, recorder([head, tail]).route);
+  assert.strictEqual(out.alternates.length, 1, "Uターンする代替を残した");
+  assert.deepStrictEqual(out.alternates[0].points[1], [139.02, 35.07]);
+  // 全部落ちたら本命だけ
+  const onlyTangled = fakePart([A, V1], { seconds: 600, alternates: [tangled] });
+  const none = await seg.withHeadAlternates(main, A, B, { vias: [V1], alternates: 2 }, recorder([onlyTangled, tail]).route);
+  assert.strictEqual(none.alternates, main.alternates);
+});
+
+test("経由地が無い・代替を頼まれていない・もう代替があるときは引かない", async () => {
+  const main = fakePart([A, V1, B], { seconds: 1200 });
+  for (const [label, m, opts] of [
+    ["経由地なし", main, { vias: [], alternates: 2 }],
+    ["代替を頼まれていない", main, { vias: [V1], alternates: 0 }],
+    ["もう代替がある", { ...main, alternates: [fakePart([A, B])] }, { vias: [V1], alternates: 2 }],
+  ]) {
+    const { calls, route } = recorder([]);
+    const out = await seg.withHeadAlternates(m, A, B, opts, route);
+    assert.strictEqual(calls.length, 0, `${label}なのに引いた`);
+    assert.strictEqual(out, m);
+  }
+});
+
+test("おすすめ道路を行き先にしても、行き方違いが返る（Valhalla）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // 新座 → 塩原矢板線（入口・中継点が経由地）。実測: 経由地があると代替0本だった
+  //    （配信データの「栃木県:1」の始まり・まん中・終わり。入口の向きは道に沿った -72°）
+  const entry = [139.9126, 36.8432], mid = [139.8256, 36.9258], end = [139.8314, 36.9625];
+  const route = await seg.routeWithValhallaSegmented(NIIZA, end, {
+    displacement: "large", vias: [entry, mid], viaHeadings: [-72, null], alternates: 2 });
+  assert.ok(!route.error, route.error);
+  assert.ok(route.alternates.length >= 1, "経由地があると行き方違いが出ない");
+  for (const alt of route.alternates) {
+    assertWellFormed(alt);
+    assert.ok(alt.points.some((p) => meters(p, mid) < 100), "代替がおすすめ道路を通っていない");
+    assert.notDeepStrictEqual(alt.points, route.points, "本命と同じ線");
+  }
+});
+
+test("着く向きを指定できる（最初の経由地へ本命と同じ向きで着かせるため）", async (t) => {
+  if (await skipIfDown(t)) return;
+  // 塩原矢板線の入口（両向きに走れる道）。道に沿った向きは -72°
+  const entry = [139.9126, 36.8432];
+  const along = await routeWithValhalla(NIIZA, entry, { displacement: "large", toHeading: -72 });
+  const against = await routeWithValhalla(NIIZA, entry, { displacement: "large", toHeading: 108 });
+  assert.ok(!along.error && !against.error, along.error || against.error);
+  const diff = (a, b) => Math.abs(((a - b + 540) % 360) - 180);
+  // ⚠️ 入口は交差点の角にあり、道に沿った向き（-72°）は南から入っても満たす（実測 357°で着く）。
+  //    だから「逆向きを頼めば別の向きで着く」ことで、向きが効いていると見る
+  assert.ok(diff(seg.endBearing(against.points), 108) < 60, `頼んだ向きで着いていない: ${seg.endBearing(against.points)}`);
+  assert.ok(diff(seg.endBearing(along.points), seg.endBearing(against.points)) > 60, "向きを頼んでも着き方が変わらない");
+});

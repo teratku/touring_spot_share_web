@@ -205,7 +205,7 @@ async function routeWithValhallaSegmented(from, to, opts = {}) {
   // ⚠️ **数が合わなければ区間ごとには引かない。** ずれた条件で引くと、
   //    利用者が避けたい区間で有料・高速に乗せることになる
   if (conditions.length !== vias.length + 1 || !hasMixedConditions(conditions)) {
-    return routeWithValhalla(from, to, rest);
+    return withHeadAlternates(await routeWithValhalla(from, to, rest), from, to, rest);
   }
   const runs = splitRuns(conditions);
   const stopAt = Array.isArray(opts.stopAt) ? opts.stopAt : [];
@@ -262,7 +262,64 @@ async function routeWithValhallaSegmented(from, to, opts = {}) {
   return mergeRuns(parts, stopAfter, runs);
 }
 
+/**
+ * 経由地（立ち寄り先・おすすめ道路）がある経路に、**最初の経由地までの行き方違い**を足す。
+ *
+ * ⚠️ **Valhalla は経由地があると代替を返さない**（2点のときだけ）。利用者の要望（2026-09-26）:
+ *    「ルートが1つしか出ないことがある。おすすめ道路でも複数出てほしい」。
+ *    実測（新座から12か所・行き先1つ）: 代替は24回中22回返る（候補の平均 2.6〜2.9本）。
+ *    1本になるのは経由地があるとき（おすすめ道路を行き先にすると入口・中継点が経由地になる）。
+ * 【作り方】最初の経由地まで（2点）を代替つきで引き、最初の経由地から先を1回引いて、
+ *    代替ごとにつなぐ（`mergeRuns`。区間ごとの条件と同じつなぎ方）。
+ * ⚠️ **最初の経由地へは本命と同じ向きで着かせる**（`toHeading`）。つないだ先は、その向きで出発する
+ * ⚠️ **つないだ先が本命と食い違ったら足さない。** 最初の経由地から出発させると、別の道に吸い付くことがある
+ *    （実測・高崎神流秩父線: 入口から先が林道東御荷鉾線6.2km・123分を通り、代替が本命の2.3倍の時間になった）。
+ *    入口までと入口から先の合計が本命より2割（＋2分）以上長ければ、本命だけ返す（`TAIL_SLACK`）
+ * ⚠️ **本命より多くUターンする代替は落とす。** 入口の向きに合わせるため、入口を通り過ぎて
+ *    戻ってくる代替がある（実測・犬掛館山線・甲府山梨線・御坂みち）
+ * ⚠️ 引けなければ本命だけ返す（今までどおり）。区間ごとに条件が違う経路では足さない
+ * @param main 経由地つきで引いた本命（`routeWithValhalla` の結果）
+ * @param route 経路を引く関数（検査で差し替える）
+ */
+async function withHeadAlternates(main, from, to, opts = {}, route = routeWithValhalla) {
+  const vias = Array.isArray(opts.vias) ? opts.vias : [];
+  const want = Number(opts.alternates) || 0;
+  if (!main || main.error || want <= 0 || !vias.length) return main;
+  if (Array.isArray(main.alternates) && main.alternates.length) return main;
+  const stopAt = Array.isArray(opts.stopAt) ? opts.stopAt : [];
+  const throughStopAt = Array.isArray(opts.throughStopAt) ? opts.throughStopAt : [];
+  const viaHeadings = Array.isArray(opts.viaHeadings) ? opts.viaHeadings : [];
+  const later = (list) => list.filter((i) => Number.isInteger(i) && i > 0).map((i) => i - 1);
+  const head = await route(from, vias[0], {
+    ...opts, vias: [], stopAt: [], throughStopAt: [], viaHeadings: [],
+    toHeading: viaHeadings[0],
+    // ⚠️ 着く側の寄せは最後だけ（経由地で寄せると、そこへ回り込む遠回りになる）
+    arriveOnNearSide: false,
+    alternates: want,
+  });
+  if (!head || head.error || !Array.isArray(head.alternates) || !head.alternates.length) return main;
+  const tail = await route(vias[0], to, {
+    ...opts,
+    vias: vias.slice(1), stopAt: later(stopAt), throughStopAt: later(throughStopAt),
+    viaHeadings: viaHeadings.slice(1),
+    // ⚠️ **最初の経由地で折り返させない。** 着いた向きのまま出発する
+    heading: Number.isFinite(viaHeadings[0]) ? viaHeadings[0] : endBearing(head.points),
+    headingTolerance: undefined,
+    alternates: 0,
+  });
+  if (!tail || tail.error) return main;
+  const seconds = (r) => Number(r.durationSeconds) || 0;
+  if (seconds(head) + seconds(tail) > seconds(main) * TAIL_SLACK.ratio + TAIL_SLACK.seconds) return main;
+  const stopAfter = [stopAt.includes(0)];
+  const alternates = head.alternates
+    .map((alt) => ({ ...mergeRuns([alt, tail], stopAfter), alternates: [] }))
+    .filter((alt) => (alt.uTurns || 0) <= (main.uTurns || 0));
+  return alternates.length ? { ...main, alternates } : main;
+}
+/** つないだ本命（入口まで＋入口から先）が、経由地つきの本命よりこれ以上長ければつながない */
+const TAIL_SLACK = { ratio: 1.2, seconds: 120 };
+
 module.exports = {
-  routeWithValhallaSegmented, mergeRuns, splitRuns, hasMixedConditions, endBearing,
+  routeWithValhallaSegmented, withHeadAlternates, mergeRuns, splitRuns, hasMixedConditions, endBearing,
   ARRIVAL_TYPES, DEPARTURE_TYPES,
 };
