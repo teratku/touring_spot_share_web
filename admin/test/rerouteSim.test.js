@@ -160,22 +160,44 @@ test("往復ルートで行きの目的地を通過済みにしない", () => {
 
 // MARK: 区間の数え方
 
-test("経路の区間は止まる場所で数える・アプリの数え方は通るだけの点があるとずれる", () => {
+test("経路の区間は止まる場所で数える（通るだけの点は区間を作らない）", () => {
   // 通る点 T1・T2 → 立ち寄り先 S → 最終目的地 D。サーバは S と D でしか区間を分けない
   const legs = [leg(35.01, { isUserWaypoint: false }), leg(35.02, { isUserWaypoint: false }),
                 leg(35.03), leg(35.04)];
   const route = northRoute(5, { legEndAfter: [2] });
-  // 区間0（S まで）の間は T1 から
   assert.strictEqual(S.routeLegIndexForStep(route.steps, 1), 0);
-  assert.strictEqual(S.stopLegsIndex(0, legs), 0);
-  // S を過ぎた（区間1）。本当は D（3番）へ向かっている
   assert.strictEqual(S.routeLegIndexForStep(route.steps, 4), 1, "到着の印を数えていない");
-  assert.strictEqual(S.stopLegsIndex(1, legs), 3, "止まる場所で数えていない");
-  // ⚠️ **アプリは「区間 i は legs[i]」としている。** ずれを画面で見せるため、そのまま残す
-  assert.strictEqual(S.appLegsIndex(1, legs), 1, "アプリの数え方と違う（ずれを見せられない）");
-  // 通るだけの点が無ければ一致する
+  assert.deepStrictEqual(S.routeLegEnds(legs), [2, 3]);
+  // 区間の行き先（到着を知らせる相手）
+  assert.strictEqual(S.routeLegEndIndex(0, legs), 2, "区間0の行き先が S でない");
+  assert.strictEqual(S.routeLegEndIndex(1, legs), 3);
+  // 区間の最初の行き先（引き直しはここから）
+  assert.strictEqual(S.routeLegStartIndex(0, legs), 0, "区間0の中継点を飛ばしている");
+  // ⚠️ **S を過ぎたら D から。** 2026-09-27 までのアプリは「区間1＝legs[1]＝T2」と数えていた
+  assert.strictEqual(S.routeLegStartIndex(1, legs), 3, "S を過ぎたのに手前の行き先から引き直す");
+  // 通るだけの点が無ければ、区間 i＝i 番目の行き先
   const plain = [leg(35.03), leg(35.04)];
-  assert.strictEqual(S.appLegsIndex(1, plain), S.stopLegsIndex(1, plain));
+  assert.deepStrictEqual([S.routeLegStartIndex(1, plain), S.routeLegEndIndex(1, plain)], [1, 1]);
+});
+
+test("最後の行き先は立ち寄り先でなくても区間の終わり（なぞっただけの経路）", () => {
+  // ⚠️ サーバは最後の行き先で必ず区間を終える（止まる場所の番号は最後を除いて数える）
+  const legs = [leg(35.01, { isUserWaypoint: false }), leg(35.02, { isUserWaypoint: false })];
+  assert.deepStrictEqual(S.routeLegEnds(legs), [1], "最後の行き先で区間を終えていない");
+  assert.strictEqual(S.routeLegEndIndex(0, legs), 1, "区間0の行き先が最後の点でない");
+  assert.strictEqual(S.routeLegStartIndex(0, legs), 0);
+});
+
+test("立ち寄り先を過ぎて引き直すと、通過済みの立ち寄り先へ戻らない", async () => {
+  // ⚠️ この画面で再現した壊れ方: 通る点 → S → 終点で、S を過ぎて終点の近くで外れた（止まっていて向きが無い）。
+  //    アプリは S へ戻る経路（終点1km手前で19.3km）を引いていた
+  const route = northRoute(3, { legEndAfter: [0] });
+  const legs = [leg(35.004, { isUserWaypoint: false }), leg(35.009), leg(35.027)];
+  const fetch = fakeFetch((b) => straightTo(b));
+  const out = await S.simulateReroute({ route, legs, position: [139.0001, 35.0225], heading: null,
+                                        bike: { displacement: "large" }, fetchRoute: fetch });
+  assert.deepStrictEqual(fetch.calls[0].vias, [], "通過済みの立ち寄り先を経由させている");
+  assert.deepStrictEqual(out.remaining, [2]);
 });
 
 test("外れた地点から、外れる前にいたステップを選ぶ", () => {

@@ -131,31 +131,32 @@ function routeLegIndexForStep(steps, stepIndex) {
 }
 
 /**
- * 経路の区間番号 → `legs` の番号（**アプリの数え方**。ナビを始めた直後の `NavRouteLegMap`）。
+ * 経路の区間ごとの終わり（`legs` の番号）。止まる場所（立ち寄り先）と最後の行き先
+ * （アプリの `NavRouteLegMap(requested:offset:routeLegCount:)` の `ends`）。
  *
- * ⚠️ アプリは「候補画面で全区間を組んだ経路なので、区間 i は `legs[i]`」としている。
- *    サーバは**止まる場所でしか区間を分けない**ので、通るだけの点（おすすめ道路の中継点・
- *    なぞった点）が立ち寄り先より前にあると、ここは `stopLegsIndex` とずれる。
- *    **ずれを見せるために、アプリと同じ数え方のまま残してある**
+ * ⚠️ **サーバは止まる場所でしか区間を分けない。** 通るだけの点（おすすめ道路の中継点・なぞった点）は
+ *    区間を作らない。2026-09-27 までアプリは「区間 i＝i 番目の行き先」と数えていて、立ち寄り先を過ぎて
+ *    全体を引き直すと通過済みの立ち寄り先へ戻らせた（この画面で再現して直した）
  */
-function appLegsIndex(routeLeg, legs) {
-  return Math.min(Math.max(routeLeg, 0), Math.max(legs.length - 1, 0));
+function routeLegEnds(legs) {
+  return legs.map((l, i) => i).filter((i) => i === legs.length - 1 || legs[i].isUserWaypoint);
+}
+
+/** 経路の区間番号 → その区間の**行き先**（区間の終わりの立ち寄り先）の `legs` の番号（`legsIndex(forRouteLeg:)`） */
+function routeLegEndIndex(routeLeg, legs) {
+  const ends = routeLegEnds(legs);
+  return ends[Math.min(Math.max(routeLeg, 0), ends.length - 1)] ?? 0;
 }
 
 /**
- * 経路の区間番号 → その区間で最初に向かう `legs` の番号（止まる場所で数えた対応）。
- *
- * 区間 k は、k 番目の立ち寄り先の次から始まる。最後の行き先は立ち寄り先でなくても区間の終わり
+ * 経路の区間番号 → その区間で**最初に向かう**行き先の `legs` の番号（`firstLegsIndex(forRouteLeg:)`）。
+ * ⚠️ 引き直しはここから始めて、通り過ぎたものを `firstLegAhead` で飛ばす
  */
-function stopLegsIndex(routeLeg, legs) {
+function routeLegStartIndex(routeLeg, legs) {
   if (routeLeg <= 0) return 0;
-  let seen = 0;
-  for (let i = 0; i < legs.length - 1; i++) {
-    if (!legs[i].isUserWaypoint) continue;
-    seen++;
-    if (seen === routeLeg) return i + 1;
-  }
-  return Math.max(legs.length - 1, 0);
+  const ends = routeLegEnds(legs);
+  const prev = ends[Math.min(routeLeg, ends.length) - 1];
+  return Math.min(prev + 1, Math.max(legs.length - 1, 0));
 }
 
 // MARK: ① 外れた分だけ繋ぐ（NavRouteSplice）
@@ -440,12 +441,13 @@ async function simulateReroute({ route, legs, position, heading = null, bike = {
   const at = stepAtPosition(route, position, heading);
   if (!at) return { strategy: "failed", trace: [{ kind: "noRoute" }] };
   const routeLeg = routeLegIndexForStep(route.steps, at.stepIndex);
-  const appIndex = appLegsIndex(routeLeg, legs);
-  const byStops = stopLegsIndex(routeLeg, legs);
+  const destination = routeLegEndIndex(routeLeg, legs);
+  const start = routeLegStartIndex(routeLeg, legs);
+  // いま向かっている行き先（アプリの `legsIndexAhead`）: 区間の最初の行き先から、通り過ぎたものを飛ばす
+  const ahead = firstLegAhead(indexed, start, position, heading);
   trace.push({ kind: "position", stepIndex: at.stepIndex, lateralMeters: Math.round(at.lateralMeters),
-               routeLeg, legsIndex: appIndex, stopLegsIndex: byStops });
-  const base = { position, heading, stepIndex: at.stepIndex, onRoute: at.onRoute,
-                 legsIndex: appIndex, stopLegsIndex: byStops };
+               routeLeg, destination, start });
+  const base = { position, heading, stepIndex: at.stepIndex, onRoute: at.onRoute, destination };
 
   // ① 外れた分だけ引き直して、元の続きに繋ぐ
   const found = rejoinSearch(route.steps, at.stepIndex);
@@ -454,7 +456,8 @@ async function simulateReroute({ route, legs, position, heading = null, bike = {
   } else {
     const rejoinAt = found.index;
     const rejoinPoint = route.points[route.steps[rejoinAt].beginIndex];
-    const sample = indexed[appIndex] || indexed[0];
+    // 有料・高速の条件は、いま向かっている行き先の区間のもの
+    const sample = indexed[ahead] || indexed[0];
     // 合流点までの1区間だけ。⚠️ 到着案内を出させない（止まる場所にしない）
     const bridge = { destination: rejoinPoint, isUserWaypoint: false, index: null,
                      avoidTolls: sample.avoidTolls, avoidHighways: sample.avoidHighways,
@@ -468,15 +471,14 @@ async function simulateReroute({ route, legs, position, heading = null, bike = {
                  directMeters: Math.round(distance(position, rejoinPoint)) });
     if (spliced) {
       return { ...base, strategy: "rejoin", route: spliced, rejoinPoint,
-               remaining: indexed.slice(appIndex).map((l) => l.index), trace, discarded };
+               remaining: indexed.slice(ahead).map((l) => l.index), trace, discarded };
     }
     if (ok) discarded.push({ kind: "detour", points: detour.points });
   }
 
   // ② 全体を引き直す。⚠️ 通り過ぎた行き先は残さない（残すと「戻れ」と案内される）
-  const current = firstLegAhead(indexed, appIndex, position, heading);
-  trace.push({ kind: "firstLegAhead", from: appIndex, to: current });
-  const remaining = indexed.slice(current);
+  trace.push({ kind: "firstLegAhead", from: start, to: ahead });
+  const remaining = indexed.slice(ahead);
   if (!remaining.length) return { ...base, strategy: "none", trace, discarded };
 
   const first = await ask("whole", remaining, heading);
@@ -530,7 +532,7 @@ async function simulateReroute({ route, legs, position, heading = null, bike = {
 
 module.exports = {
   simulateReroute, rerouteBody, legPlan,
-  stepAtPosition, routeLegIndexForStep, appLegsIndex, stopLegsIndex,
+  stepAtPosition, routeLegIndexForStep, routeLegEnds, routeLegEndIndex, routeLegStartIndex,
   rejoinSearch, rejoinStepIndex, splice, isReasonable,
   startsWithUTurn, forwardNudge, firstLegAhead,
   tollCausingLegIndex, offendingWaypointIndices, problemLegIndices,

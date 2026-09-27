@@ -1502,15 +1502,12 @@ function rrTraceRows(t, name) {
   const names = (list) => list.map((i) => `「${escapeHtml(name(i))}」`).join("");
   const km = (m) => fmtM(Math.round(m || 0));
   switch (t.kind) {
-    case "position": {
-      const rows = [["位置", `外れる前にいた所: 指示${t.stepIndex + 1}（経路から${t.lateralMeters}m）・経路の区間${t.routeLeg + 1}`]];
-      if (t.legsIndex !== t.stopLegsIndex) {
-        rows.push(["ずれ", `<strong>アプリの数え方ではいま「${escapeHtml(name(t.legsIndex))}」へ向かっていることになる。</strong>`
-          + `止まる場所で数えると「${escapeHtml(name(t.stopLegsIndex))}」`
-          + "（通るだけの点は経路の区間を作らないので、区間の番号と行き先の番号がずれる）", "warn"]);
-      }
-      return rows;
-    }
+    case "position":
+      // ⚠️ 経路の区間は止まる場所で分かれる（通るだけの点は区間を作らない）。区間の行き先と、
+      //    区間の最初の行き先（引き直しはここから）を分けて出す
+      return [["位置", `外れる前にいた所: 指示${t.stepIndex + 1}（経路から${t.lateralMeters}m）・`
+        + `経路の区間${t.routeLeg + 1}（行き先「${escapeHtml(name(t.destination))}」`
+        + (t.start !== t.destination ? `・最初は「${escapeHtml(name(t.start))}」` : "") + "）"]];
     case "rejoinSkipped":
       return [["①", { legEnd:"繋がない: 1.5km 先までに立ち寄り先がある（跨ぐとその立ち寄り先が黙って消える）",
                       short:"繋がない: 到着まで1.5km 無い", outOfRange:"繋がない: 指示の番号が範囲外" }[t.reason]]];
