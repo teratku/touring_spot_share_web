@@ -87,6 +87,23 @@
   .ln.on { background:#fff9db; }
   .ln.warn .kd { background:#fff4e6; color:var(--warn); }
   #rrLog { max-height:260px; overflow:auto; }
+
+  /* 排気量ごとの数値 */
+  .tune-wrap { overflow-x:auto; margin-top:4px; }
+  table.tune { border-collapse:collapse; font-size:11px; width:100%; }
+  table.tune th, table.tune td { padding:3px 4px; border-bottom:1px solid #f0f2f4; text-align:left; font-weight:400; vertical-align:middle; }
+  table.tune thead th { color:var(--muted); white-space:nowrap; }
+  table.tune td.label { white-space:nowrap; }
+  table.tune .key { display:block; font:10px/1.2 ui-monospace,Menlo,monospace; color:var(--muted); }
+  table.tune input { width:58px; font:inherit; font-variant-numeric:tabular-nums; padding:2px 4px;
+                     border:1px solid var(--line); border-radius:4px; background:#fff; }
+  table.tune input.wide { width:100%; min-width:120px; }
+  table.tune input:disabled { background:#f4f6f8; color:var(--muted); }
+  table.tune input.changed { border-color:var(--warn); background:#fff4e6; }
+  table.tune .note { color:var(--muted); font-size:10px; }
+  .tune-badge { font-size:10px; padding:1px 7px; border-radius:9px; background:#fff4e6; color:var(--warn);
+                margin-left:6px; font-weight:600; }
+  .v .used { color:var(--muted); font:10px/1.4 ui-monospace,Menlo,monospace; }
   #rrLog .ln span:last-child { flex:1; }
 
   /* 曲がる指示 */
@@ -263,6 +280,24 @@
         <strong>原付二種</strong>は幹線寄り・60km/h。<br>
         <strong>軽二輪・大型</strong>は Valhalla 側につまみが無い（8通り試して
         経路が1mも変わらなかった）。ただし既定でもともと幹線寄りに走る。</p>
+      <div id="tuneBox" style="margin-top:10px">
+        <h2 style="margin:0">排気量ごとの数値 <span id="tuneBadge" class="tune-badge" hidden>変えた値で引く（アプリと違う条件）</span></h2>
+        <div class="tune-wrap"><table class="tune" id="tuneTable"></table></div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px">
+          <button id="tuneReset" type="button" disabled style="white-space:nowrap">既定に戻す</button>
+          <span id="tuneCosting" class="hint" style="margin:0"></span>
+        </div>
+        <p class="hint">選んでいる排気量で Valhalla に渡している数値（<code>lib/valhallaRoute.js</code> の
+          <code>DISPLACEMENTS</code>・<code>ROAD_CLASS_TIERS</code>・<code>VARIANTS</code>・<code>HIGHWAY_LADDER</code>）。
+          <strong>変えるとこの画面の経路だけに効く</strong>（アプリ・配信APIの数値は変わらない。本番を変えるならコードの表を直す）。
+          空欄（「なし」）は渡さない（Valhalla の既定）。<br>
+          ⚠️ 125cc以下の高速（<code>use_highways</code>）は法令で0に固定。「高速回避」「有料回避」のチェックもこの数値より後に効く。<br>
+          ⚠️ <code>use_primary</code> が効くのは原付（<code>motor_scooter</code>）だけ。軽二輪・大型（<code>motorcycle</code>）では
+          8通り試して経路が1mも変わらなかった。<br>
+          ⚠️ 船の重みは「フェリーに乗ってよい」を付けたときだけ効く。高速を避ける段は、軽二輪・大型で高速を外すとき
+          （高速回避・楽しい案）に緩い方から試して、高速が混ざらない一番ゆるい値を採る。<br>
+          案ごとの「渡した値」は、引いたあと下の案の一覧に出る。</p>
+      </div>
       <div style="margin-top:8px"><button class="go" id="run" disabled>引く</button></div>
     </div>
 
@@ -732,6 +767,10 @@ async function run() {
     ...(checked("noEtc") ? { etc:false } : {}),
     ...(checked("allowFerry") ? { avoidFerries:false } : {}),
   };
+  // ⚠️ 画面で変えた排気量ごとの数値。変えていなければ送らない（＝アプリと同じ条件）
+  const tuning = tuningBody();
+  if (tuning) bike.tuning = tuning;
+  state.lastTuning = tuning || null;
   const corridorScale = Number(val("corridor")) || 1;
   const minScore = Number(val("minScore")) || undefined;
   const funCount = Number(document.getElementById("funCount").value) || 0;
@@ -979,7 +1018,11 @@ function renderVariants() {
                        + `<span style="color:var(--muted)">（避けられない航路）</span>` : "")
         + (roads ? ` ／ <strong>おすすめ${roads}本</strong>` : "")
         + hitText + overText + triesText
-        + (kinds ? `<br>${kinds}` : "") + `</span>`;
+        + (kinds ? `<br>${kinds}` : "")
+        + (r.costingOptions ? `<br><span class="used">渡した値: ${escapeHtml(usedText(r.costingOptions))}`
+          + (tuningTouches(state.lastTuning, r.variant) ? `（<span style="color:var(--warn)">画面で変えた数値</span>）` : "")
+          + `</span>` : "")
+        + `</span>`;
     }
     el.innerHTML = `${sw}<span class="name">${v.label}</span>${right}`;
     el.onclick = () => {
@@ -1360,6 +1403,138 @@ async function checkStatus() {
   }
 }
 
+// MARK: 排気量ごとの数値
+
+/**
+ * 選んでいる排気量で Valhalla に渡している数値を出して、変えて試せるようにする。
+ * 利用者の要望（2026-09-27）:「各排気量で設定している数値も表示して変更できるようにして確認できるようにしたい」。
+ *
+ * ⚠️ **既定の値はサーバから取る**（`/api/valhalla/displacement-settings`。`costingOptionsFor` が組み立てた値）。
+ *    画面に書き写すと、コードの表を直したときに画面だけ古いまま残る
+ * ⚠️ **変えた値だけを `tuning` で送る。** 何も変えていなければ送らない（＝アプリと同じ条件で引く）
+ */
+const tune = { settings:null };
+const TUNE_VARIANTS = [["shortest", "最短"], ["normal", "ふつう"], ["fun", "楽しい"]];
+const TUNE_WEIGHTS = [["use_primary", "幹線の使い方"], ["use_highways", "高速の使い方"]];
+
+async function loadTuning() {
+  try {
+    const got = await (await fetch("/api/valhalla/displacement-settings")).json();
+    tune.settings = got.displacements || null;
+  } catch (e) { tune.settings = null; }
+  renderTuning();
+}
+
+const tuneDefaults = () => tune.settings && tune.settings[document.getElementById("displacement").value];
+const fmtNum = (v) => (v === undefined || v === null ? "" : String(v));
+
+function renderTuning() {
+  const table = document.getElementById("tuneTable");
+  const d = tuneDefaults();
+  if (!d) { table.innerHTML = `<tr><td class="note">数値を取れていない（サーバを確かめる）</td></tr>`; return; }
+  const scooter = d.costing === "motor_scooter";
+  const input = (id, value, extra = "") =>
+    `<input type="number" step="0.05" min="0" max="1" id="${id}" value="${fmtNum(value)}" placeholder="なし" title="空欄＝渡さない（Valhalla の既定）" ${extra}>`;
+  const rows = [];
+  rows.push(`<thead><tr><th></th>${TUNE_VARIANTS.map(([, l]) => `<th>${l}</th>`).join("")}</tr></thead>`);
+  rows.push(`<tr><td class="label">最高速度<span class="key">top_speed km/h</span></td><td colspan="3">`
+    + `<input type="number" step="1" min="10" max="252" id="tune-topSpeed" value="${fmtNum(d.topSpeed)}" placeholder="なし" title="空欄＝渡さない">`
+    + ` <span class="note">所要時間と、これより速い道への罰</span></td></tr>`);
+  for (const [key, label] of TUNE_WEIGHTS) {
+    // ⚠️ 125cc以下の高速は法令で0に固定（画面では緩められない）
+    const locked = key === "use_highways" && !d.canUseExpressway;
+    rows.push(`<tr><td class="label">${label}<span class="key">${key}</span></td>`
+      + TUNE_VARIANTS.map(([v]) => `<td>${input(`tune-${v}-${key}`, (d.variants[v] || {})[key],
+          locked ? "disabled title=\"125cc以下は法令で0\"" : "")}</td>`).join("") + `</tr>`);
+  }
+  rows.push(`<tr><td class="label">船の重み<span class="key">use_ferry</span></td><td colspan="3">`
+    + input("tune-ferryWeight", d.ferryWeight) + ` <span class="note">「フェリーに乗ってよい」のときだけ</span></td></tr>`);
+  rows.push(`<tr><td class="label">高速を避ける段<span class="key">use_highways</span></td><td colspan="3">`
+    + (d.highwayLadder
+      ? `<input type="text" class="wide" id="tune-ladder" value="${d.highwayLadder.join(", ")}">`
+      : `<span class="note">—（原付は高速に乗らない）</span>`) + `</td></tr>`);
+  table.innerHTML = rows.join("");
+  document.getElementById("tuneCosting").textContent =
+    `costing: ${d.costing}` + (scooter ? "" : "（use_primary は効かない）");
+  table.querySelectorAll("input").forEach((el) => { el.oninput = markTuning; });
+  markTuning();
+}
+
+/** 入力欄の数値。空欄は null（渡さない）、読めなければ undefined（変えていない扱い） */
+function tuneValue(id) {
+  const el = document.getElementById(id);
+  if (!el || el.disabled) return undefined;
+  if (el.value.trim() === "") return null;
+  const n = Number(el.value);
+  return Number.isFinite(n) ? n : undefined;
+}
+
+/** 段の並び（「0.5, 0.3, 0.15, 0」）。読めなければ undefined */
+function tuneLadder() {
+  const el = document.getElementById("tune-ladder");
+  if (!el) return undefined;
+  const parts = el.value.split(/[,、\s]+/).filter(Boolean).map(Number);
+  return parts.length && parts.every((n) => Number.isFinite(n) && n >= 0 && n <= 1) ? parts : undefined;
+}
+
+/**
+ * 既定と違う値だけを集めた `tuning`。何も変えていなければ undefined（送らない）。
+ * ⚠️ 既定が「渡す」ものを空欄にしたときだけ null（渡さない）を送る
+ */
+function tuningBody() {
+  const d = tuneDefaults();
+  if (!d) return undefined;
+  const out = {};
+  const mark = [];
+  const differs = (now, was) => now !== undefined && !(now === (was ?? null));
+  const top = tuneValue("tune-topSpeed");
+  if (differs(top, d.topSpeed)) { out.topSpeed = top; mark.push("tune-topSpeed"); }
+  const ferry = tuneValue("tune-ferryWeight");
+  if (ferry !== null && differs(ferry, d.ferryWeight)) { out.ferryWeight = ferry; mark.push("tune-ferryWeight"); }
+  for (const [v] of TUNE_VARIANTS) {
+    for (const [key] of TUNE_WEIGHTS) {
+      const id = `tune-${v}-${key}`;
+      const now = tuneValue(id);
+      if (!differs(now, (d.variants[v] || {})[key])) continue;
+      out.variants = out.variants || {};
+      out.variants[v] = out.variants[v] || {};
+      out.variants[v][key] = now;
+      mark.push(id);
+    }
+  }
+  const ladder = tuneLadder();
+  if (ladder && d.highwayLadder && ladder.join(",") !== d.highwayLadder.join(",")) {
+    out.highwayLadder = ladder;
+    mark.push("tune-ladder");
+  }
+  tune.changed = mark;
+  return Object.keys(out).length ? out : undefined;
+}
+
+/** 変えた欄に色を付け、変えた値で引くことを見せる */
+function markTuning() {
+  tuningBody();
+  const changed = new Set(tune.changed || []);
+  document.querySelectorAll("#tuneTable input").forEach((el) => el.classList.toggle("changed", changed.has(el.id)));
+  document.getElementById("tuneBadge").hidden = !changed.size;
+  document.getElementById("tuneReset").disabled = !changed.size;
+}
+
+/**
+ * 画面で変えた値が、その案に効いたか（案ごとの重みは変えた案だけ・最高速度などは全部の案）。
+ * ⚠️ 「ふつう」だけ変えたのに「最短」にも印を付けると、どの案が変わったのか分からない
+ */
+function tuningTouches(t, variant) {
+  if (!t) return false;
+  return "topSpeed" in t || "ferryWeight" in t || "highwayLadder" in t || !!(t.variants && t.variants[variant]);
+}
+
+/** 引いた案で実際に渡した値（`costingOptions`）を短く並べる */
+function usedText(o) {
+  const keys = ["top_speed", "use_primary", "use_highways", "use_tolls", "shortest", "use_ferry"];
+  return keys.filter((k) => o[k] !== undefined).map((k) => `${k} ${o[k]}`).join("・") || "既定のまま";
+}
+
 // MARK: 外れたときの引き直しを試す
 
 /** 立ち寄る経由地の番号（サーバの `stopAt`）。⚠️ 立ち寄る点で経路の区間が分かれる */
@@ -1562,6 +1737,7 @@ async function rrRun() {
   const val = (id) => document.getElementById(id).value;
   const checked = (id) => document.getElementById(id).checked;
   const legs = rrLegs(base);
+  const tuning = tuningBody();
   const body = {
     // ⚠️ **画面の線をそのまま送る。** サーバで引き直すと、画面の案と違う経路から外れたことになる
     route:{ points:base.points, steps:base.steps, classSpans:base.classSpans,
@@ -1573,6 +1749,8 @@ async function rrRun() {
     ...(checked("noEtc") ? { etc:false } : {}),
     ...(checked("allowFerry") ? { avoidFerries:false } : {}),
     ...rideWhen(),
+    // ⚠️ 画面で変えた排気量ごとの数値も、引き直しに重ねる
+    ...(tuning ? { tuning } : {}),
   };
   state.lastRequest = { ...body, route:`（画面の案「${rr.base}」の線 ${base.points.length}点・指示${base.steps.length}）` };
   document.getElementById("rrRun").disabled = true;
@@ -1640,6 +1818,10 @@ document.getElementById("paint").onchange = (e) => {
 document.getElementById("run").onclick = run;
 document.getElementById("rawKind").onchange = showRaw;
 document.getElementById("rrPlace").onclick = () => rrSetPlacing(!rr.placing);
+// 排気量を変えたら、その排気量の既定の数値に入れ替える（変えた値は捨てる）
+document.getElementById("displacement").addEventListener("change", renderTuning);
+document.getElementById("tuneReset").onclick = renderTuning;
+loadTuning();
 document.getElementById("rrRun").onclick = rrRun;
 document.getElementById("rrHeading").oninput = (e) => {
   rr.heading = Number(e.target.value) || 0;

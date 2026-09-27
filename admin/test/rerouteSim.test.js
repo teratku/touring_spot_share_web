@@ -471,7 +471,8 @@ test("窓口はアプリと同じ引き方で1本ずつ引き、楽しい道の�
   assert.ok(at > 0, "引き直しの窓口が無い");
   const body = server.slice(at, server.indexOf("\n});", at));
   assert.ok(body.includes("const opts = routeOptionsFromBody(body, { restrictionsFor });"), "アプリと同じ関数で条件を作っていない");
-  assert.ok(body.includes("return routeWithValhallaSegmented(body.from, body.to, opts);"), "アプリと同じ引き方でない");
+  // 画面で変えた排気量ごとの数値（`tuning`）だけはアプリの条件の上に重ねる（変えていなければ null）
+  assert.ok(body.includes("return routeWithValhallaSegmented(body.from, body.to, { ...opts, tuning });"), "アプリと同じ引き方でない");
   assert.ok(body.includes("heading: Number.isFinite(heading) ? heading : null,"), "向きの無い依頼を受けられない");
   assert.ok(server.includes("r.autoVias = refined.picked.waypoints;"), "楽しい道の案が中継点を返していない");
 });

@@ -51,7 +51,8 @@ test("配信APIと調整ツールが、同じ関数で条件を作って同じ�
   assert.ok(svc.includes("route = await routeWithValhallaSegmented(from, to, opts);"), "配信APIの引き方が違う");
   const admin = read("admin", "server.js");
   assert.ok(admin.includes("const opts = routeOptionsFromBody(req.body,"), "画面の口が条件を別に組んでいる");
-  assert.ok(admin.includes("const out = await routeWithValhallaSegmented(from, to, { ...opts, costing, excludePolygons });"),
+  // ⚠️ 画面で変えた排気量ごとの数値（`tuning`）は重ねるが、変えていなければ null（＝アプリと同じ条件）
+  assert.ok(admin.includes("const out = await routeWithValhallaSegmented(from, to,\n      { ...opts, costing, excludePolygons, tuning: sanitizeTuning(req.body.tuning) });"),
     "画面の口の引き方がアプリと違う（区間ごとの条件・経由地の行き方違いが抜ける）");
   // 楽しい道の口も、条件の土台は同じ
   assert.ok(admin.includes("const baseOpts = routeOptionsFromBody({ ...req.body, alternates: 0 },"), "楽しい道の条件の土台が違う");

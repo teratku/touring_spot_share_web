@@ -31,7 +31,7 @@ const { ROMAJI, REGION } = require("./lib/prefectures");
 const publishLog = require("./lib/publishLog");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
-const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
+const { routeWithValhalla, displacementSettings, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
 // ⚠️ **経路の条件はアプリの配信API（route-api）と同じ関数で作る**（利用者の要望 2026-09-27:
 //    Web とアプリのルート生成が同じ条件になるか確認したい）。画面で別に組むと既定がずれる
 const { routeOptionsFromBody } = require("../service/lib/buildRoute");
@@ -43,6 +43,8 @@ const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
 const { simulateReroute } = require("./lib/rerouteSim");
 const { restrictionScopeOptions } = require("./lib/restrictionScope");
+// ⚠️ **排気量ごとの数値を画面で変えて試す値。** 配信API（routeOptionsFromBody）には通さない
+const { sanitizeTuning } = require("./lib/costingTuning");
 const { spokenRoadName } = require("./lib/navName");
 const { ATTRIBUTION, normalizeOrigin, isSellable } = require("./lib/restrictionOrigin");
 const { toAppManeuver } = require("./lib/navManeuver");
@@ -681,6 +683,15 @@ function restrictionsForScope(scope, includeUnverified) {
   return (pts) => restrictionsForPrefectures(pts, flags);
 }
 
+/**
+ * 排気量ごとの数値（`costing`・top_speed・船の重み・案ごとの use_primary / use_highways・高速を避ける段）。
+ * 利用者の要望（2026-09-27）: 画面に出して、変えて試せるように。
+ * ⚠️ 値は `costingOptionsFor` が実際に組み立てたもの（別に書き写さない）
+ */
+app.get("/api/valhalla/displacement-settings", (_req, res) => {
+  res.json({ displacements: displacementSettings() });
+});
+
 app.post("/api/valhalla/route", async (req, res) => {
   const { costing, excludePolygons, includeUnverified, restrictionScope } = req.body || {};
   // ⚠️ **アプリと同じ関数で条件を作る**（`routeOptionsFromBody`）。画面だけの条件（costing・塞ぐ範囲）はその上に足す
@@ -694,7 +705,9 @@ app.post("/api/valhalla/route", async (req, res) => {
     // ⚠️ **楽しい道はこの口では選ばない。** 最短・ふつうに混ぜないため、
     //    自動で選ぶのは /api/valhalla/fun-routes の方だけにしてある
     // ⚠️ **アプリと同じ引き方**（`routeWithValhallaSegmented`。区間ごとの条件・経由地があるときの行き方違いも）
-    const out = await routeWithValhallaSegmented(from, to, { ...opts, costing, excludePolygons });
+    // ⚠️ 画面で変えた排気量ごとの数値（`tuning`）は、アプリの条件の上に重ねる（変えていなければ null）
+    const out = await routeWithValhallaSegmented(from, to,
+      { ...opts, costing, excludePolygons, tuning: sanitizeTuning(req.body.tuning) });
     if (out.error) return res.status(502).json(out);
     res.json(out);
   } catch (e) {
@@ -775,6 +788,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       //    ⚠️ 日時を渡さなければ時間の判断をしない（＝時間指定つきも避ける対象になる）
       const routeFn = (autoVias) => routeWithValhalla(from, to,
         { ...baseOpts, vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
+          tuning: sanitizeTuning(req.body.tuning),
           stopAt: Array.isArray(stopAt) ? stopAt : [], at: rideAt, isHoliday: !!isHoliday });
 
       // ⚠️ **実際に引いてから、余計に走らせている道を外す。**
@@ -872,6 +886,7 @@ app.post("/api/valhalla/reroute", async (req, res) => {
   }
   if (!ok(position)) return res.status(400).json({ error: "position は [経度, 緯度] で要ります" });
   const restrictionsFor = restrictionsForScope(restrictionScope, includeUnverified);
+  const tuning = sanitizeTuning(req.body.tuning);
   try {
     const out = await simulateReroute({
       route, legs, position,
@@ -879,7 +894,8 @@ app.post("/api/valhalla/reroute", async (req, res) => {
       bike: { displacement, etc, avoidFerries, at, isHoliday },
       fetchRoute: async (body) => {
         const opts = routeOptionsFromBody(body, { restrictionsFor });
-        return routeWithValhallaSegmented(body.from, body.to, opts);
+        // ⚠️ 画面で変えた排気量ごとの数値も、引き直しの1本ずつに重ねる
+        return routeWithValhallaSegmented(body.from, body.to, { ...opts, tuning });
       },
     });
     res.json(out);

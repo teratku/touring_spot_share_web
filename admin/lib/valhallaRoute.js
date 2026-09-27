@@ -1466,14 +1466,23 @@ function thinThroughPoints(middle, limit) {
   return middle.filter((p, i) => p.type !== "through" || keep.has(i));
 }
 
-async function routeWithValhalla(from, to, opts = {}) {
-  const variant = VARIANTS[opts.variant] || VARIANTS.normal;
+/**
+ * 排気量・案・回避の指定から、Valhalla に渡す `costing` と `costing_options` を組み立てる。
+ *
+ * ⚠️ **組み立てはここだけ。** 経路を引く `routeWithValhalla` と、調整ツールの画面に数値を出す
+ *    `displacementSettings` が同じものを使う（別に書くと、画面に出る値と実際に渡す値がずれる）。
+ * @param opts.tuning 調整ツールの画面で変えた値（`lib/costingTuning.js`）。⚠️ 配信APIからは来ない
+ */
+function costingOptionsFor(opts = {}) {
+  const variantKey = VARIANTS[opts.variant] ? opts.variant : "normal";
+  const variant = VARIANTS[variantKey];
   // ⚠️ **排気量が指定されたら costing もそれで決める。**
   //    50cc に motorcycle を使うと高速に乗る経路が出る
   const bike = DISPLACEMENTS[opts.displacement] || null;
   const costing = opts.costing || (bike ? bike.costing : "motor_scooter");
   // ⚠️ costing ごとの設定を選ぶ。無ければ空（既定のまま）
   const variantOptions = { ...(variant[costing] || {}) };
+  const tuning = opts.tuning || null;
 
   // ⚠️ **道路クラスの重みが効くのは motor_scooter だけ。**
   //    motorcycle に混ぜても経路が変わらないので入れない（無駄な設定を増やさない）
@@ -1484,7 +1493,17 @@ async function routeWithValhalla(from, to, opts = {}) {
     Object.assign(variantOptions, tier[opts.variant] || tier.normal);
   }
   // ⚠️ **排気量ごとの走り方。** 所要時間もこれで正しくなる（DISPLACEMENTS 参照）
-  if (bike && bike.topSpeed) variantOptions.top_speed = bike.topSpeed;
+  //    画面で変えたとき（`tuning.topSpeed`）はそちら。null なら渡さない
+  const topSpeed = tuning && "topSpeed" in tuning ? tuning.topSpeed : (bike && bike.topSpeed);
+  if (topSpeed) variantOptions.top_speed = topSpeed;
+
+  // 調整ツールの画面で変えた案ごとの重み。null は「渡さない」。
+  // ⚠️ **船・回避の指定・法令より前に重ねること。** 画面の値で法令を緩められてはいけない
+  const tuned = tuning && tuning.variants && tuning.variants[variantKey];
+  for (const [k, v] of Object.entries(tuned || {})) {
+    if (v === null) delete variantOptions[k];
+    else variantOptions[k] = v;
+  }
 
   // ⚠️ **船に乗せない。** `shortest` のときは効かないので、下で塞ぎ直す
   //    （FERRY_EXCLUDE_DEGREES の説明を読むこと）
@@ -1495,7 +1514,8 @@ async function routeWithValhalla(from, to, opts = {}) {
     variantOptions.use_ferry = 0;
     variantOptions.use_rail_ferry = 0;
   } else {
-    variantOptions.use_ferry = (bike && bike.ferryWeight) || FERRY_WEIGHT_WHEN_ALLOWED;
+    variantOptions.use_ferry = (tuning && tuning.ferryWeight != null ? tuning.ferryWeight : null)
+      ?? ((bike && bike.ferryWeight) || FERRY_WEIGHT_WHEN_ALLOWED);
   }
 
   // ⚠️ **重ねる順番を変えないこと。** 案の作り分け → 画面の回避指定 →
@@ -1503,6 +1523,38 @@ async function routeWithValhalla(from, to, opts = {}) {
   if (opts.avoidHighways) variantOptions.use_highways = 0;
   if (opts.avoidTolls) variantOptions.use_tolls = 0;
   if (bike && !bike.canUseExpressway) variantOptions.use_highways = 0;
+  return { costing, bike, variantOptions, avoidFerries };
+}
+
+/**
+ * 排気量ごとの数値の一覧（調整ツールの画面に出す）。
+ *
+ * ⚠️ 案ごとの値は `costingOptionsFor` が実際に組み立てたもの（回避の指定なし・船は避ける）
+ */
+function displacementSettings() {
+  const out = {};
+  for (const [key, bike] of Object.entries(DISPLACEMENTS)) {
+    const variants = {};
+    for (const v of Object.keys(VARIANTS)) {
+      variants[v] = costingOptionsFor({ displacement: key, variant: v }).variantOptions;
+    }
+    out[key] = {
+      costing: bike.costing,
+      canUseExpressway: bike.canUseExpressway,
+      topSpeed: bike.topSpeed || null,
+      ferryWeight: bike.ferryWeight || FERRY_WEIGHT_WHEN_ALLOWED,
+      variants,
+      // 高速を避けるときの段（`use_highways` が効くのは motorcycle だけ）
+      highwayLadder: bike.costing === "motorcycle" ? HIGHWAY_LADDER.slice() : null,
+    };
+  }
+  return out;
+}
+
+async function routeWithValhalla(from, to, opts = {}) {
+  const { costing, bike, variantOptions, avoidFerries } = costingOptionsFor(opts);
+  // 高速を避けるときに試す段。調整ツールの画面で変えたときはそちら
+  const highwayLadder = (opts.tuning && opts.tuning.highwayLadder) || HIGHWAY_LADDER;
   // ⚠️ **重なった経由地をまとめること。** 同じ点が続くと Valhalla が
   //    `leg_shape_index not set for intermediate location` で失敗する。
   //    実測: 陣馬街道の出口と和田林道の入口が**0m**（同じ交差点）で、
@@ -1817,7 +1869,7 @@ async function routeWithValhalla(from, to, opts = {}) {
     if (json && json.trip && costing === "motorcycle"
         && opts.highwayLadder !== false
         && variantOptions.use_highways === 0) {
-      for (const level of HIGHWAY_LADDER) {
+      for (const level of highwayLadder) {
         if (level === 0) break;                       // 0 は既に引いてある
         body.costing_options[costing] = { ...variantOptions, use_highways: level };
         highwayTries++;
@@ -2338,7 +2390,8 @@ async function routeWithValhalla(from, to, opts = {}) {
   return result;
 }
 
-module.exports = { routeWithValhalla, locationType, decode6, MANEUVER, VARIANTS, DISPLACEMENTS,
+module.exports = { routeWithValhalla, costingOptionsFor, displacementSettings, FERRY_WEIGHT_WHEN_ALLOWED,
+  locationType, decode6, MANEUVER, VARIANTS, DISPLACEMENTS,
   thinThroughPoints, VIA_THINNING_STEPS,
   ROAD_CLASS_TIERS, ROAD_CLASS_COLORS, HIGHWAY_LADDER, MAX_SIDE_DETOUR_METERS,
   adminSpans,
