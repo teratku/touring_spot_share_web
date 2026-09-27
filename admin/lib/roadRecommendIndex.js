@@ -102,13 +102,21 @@ function prefecturesWithin(center, radiusKm) {
  * @param {[number,number]} destination [経度, 緯度]
  * @returns {{segments, prefectures}}
  */
-function segmentsBetween(origin, destination) {
+/**
+ * 出発地と目的地のあいだに掛かる県（ローマ字）。
+ * ⚠️ 手元のデータでも本番のデータ（`lib/deliveredRoads.js`）でも同じ県を読むこと（どちらもここを通す）
+ */
+function prefecturesBetween(origin, destination) {
   const center = [(origin[0] + destination[0]) / 2, (origin[1] + destination[1]) / 2];
   // 直線距離（km）。ざっくりで足りる（どの県を読むかの判断にしか使わない）
   const dLat = (destination[1] - origin[1]) * 111.0;
   const dLng = (destination[0] - origin[0]) * 111.0 * Math.cos((center[1] * Math.PI) / 180);
   const spanKm = Math.hypot(dLat, dLng);
-  const romajis = prefecturesWithin(center, Math.max(MIN_RADIUS_KM, spanKm));
+  return prefecturesWithin(center, Math.max(MIN_RADIUS_KM, spanKm));
+}
+
+function segmentsBetween(origin, destination) {
+  const romajis = prefecturesBetween(origin, destination);
 
   const segments = [];
   for (const romaji of romajis) {
@@ -125,4 +133,4 @@ function segmentsBetween(origin, destination) {
 /** 索引を捨てる（データを作り直したあとなど） */
 function clearIndex() { index = null; builtFrom = null; }
 
-module.exports = { segmentsBetween, prefecturesWithin, build, clearIndex, MIN_RADIUS_KM, DIR };
+module.exports = { segmentsBetween, prefecturesBetween, prefecturesWithin, build, clearIndex, MIN_RADIUS_KM, DIR };

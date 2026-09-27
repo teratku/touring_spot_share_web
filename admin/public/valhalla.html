@@ -154,6 +154,42 @@
     <div class="bar">
       <h2>おすすめ道路を通す</h2>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+        <label style="font-size:11px;color:var(--muted)">選び方
+          <select id="funSelection">
+            <option value="app" selected>アプリと同じ</option>
+            <option value="web">Web（まわり方だけ・本数と寄り道を選ぶ）</option>
+          </select></label>
+        <label style="font-size:11px;color:var(--muted)">データ
+          <select id="roadData">
+            <option value="local" selected>手元（調整中）</option>
+            <option value="delivered">本番（配信中）</option>
+          </select></label>
+      </div>
+      <div id="funAppBox">
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+          <label style="font-size:11px;color:var(--muted)">アプリのつまみ
+            <input type="range" id="funWeight" min="0" max="100" step="1" value="100"
+                   style="width:110px;vertical-align:middle"></label>
+          <span id="funWeightText" style="font-size:11px;font-variant-numeric:tabular-nums"></span>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+          <label style="font-size:11px;color:var(--muted)">選ぶ道
+            <select id="funPick">
+              <option value="random" selected>ランダム（アプリと同じ・毎回変わる）</option>
+              <option value="top">点数のいちばん高い道（毎回同じ）</option>
+            </select></label>
+        </div>
+        <p class="hint"><strong>アプリのルート候補画面と同じ選び方</strong>（<code>lib/appFunRoute.js</code>。
+          アプリの <code>FunRouteBuilder</code> を移したもの。同じ入力で選ぶ道・通す順・経由地がアプリと一致することを確かめてある）:
+          まわり方（北・東・南・西）＋予算違い（たっぷり・ひかえめ）を並べ、顔ぶれが同じ案はまとめる。最大5本。
+          遠回りは<strong>ふつうのルートの距離</strong>を基準に測り、進み具合も<strong>ふつうのルートの形</strong>に沿って見る。
+          点数の差が8以内の上位5本から<strong>ランダム</strong>に選ぶので、アプリでも毎回違う道になる。
+          札の付いた道は曲率の下限を300→150に緩め、二輪通行禁止・通行止めと300m以上重なる道は候補から外す。<br>
+          つまみはアプリと同じ: 0%で入れない、入れると寄り道1.1倍〜100%で3.0倍まで（アプリで楽しい道を入れた直後は100%）。<br>
+          ⚠️ 選んだあと経路を引く部分（3通りの条件で引く・Uターンを見つけた道を外して選び直す）はアプリと同じではない。</p>
+      </div>
+      <div id="funWebBox" hidden>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
         <label style="font-size:11px;color:var(--muted)">回り込みの広さ
           <select id="corridor">
             <option value="1" selected>ふつう ×1</option>
@@ -200,6 +236,8 @@
         <br>両端のあいだに掛かる<strong>県を全部まとめて</strong>見て、
         点数の高い道から予算に収まるぶんだけ通す。<br>⚠️ 最短・ふつうには入れない。
         <br>⚠️ <strong>引いてみてUターンした道は外す</strong>（外したぶんは別の道で埋め直す）。</p>
+      </div>
+      <p class="hint" id="funSourceNote"></p>
       <div style="display:flex;gap:6px;align-items:center;margin-top:8px">
         <select id="pref"><option value="">県を選んで手で足す…</option></select>
         <select id="road" disabled><option value="">道を選ぶ…</option></select>
@@ -462,8 +500,14 @@ const ALT_COLORS = ["#4dabf7", "#a5d8ff"];
       同じ顔ぶれの方角はまとめられるので、先頭の方角の色を使う。 */
 const FUN_COLORS = {
   north:"#1971c2", east:"#e8590c", south:"#c2255c", west:"#2f9e44",
+  // アプリと同じ選び方の予算違い（"budget:generous" など）
+  generous:"#7048e8", modest:"#0c8599",
 };
-const funColor = (kind) => FUN_COLORS[String(kind).replace("side:", "")] || "#e8590c";
+const funColor = (kind) => FUN_COLORS[String(kind).replace("side:", "").replace("budget:", "")] || "#e8590c";
+/* 予算違いの案の表示名（アプリの「たっぷり」「ひかえめ」）。⚠️ サーバは鍵だけ返す */
+const BUDGET_LABEL = { generous:"たっぷり", modest:"ひかえめ" };
+/** 楽しい道の案の表示名。予算違いならそちら、それ以外はまわり方 */
+const funLabel = (p) => (p && p.budgetKind ? BUDGET_LABEL[p.budgetKind] || p.budgetKind : sidesLabel(p && p.sides));
 
 /* ⚠️ **表示名は画面で作る。** サーバは鍵（north/east/south/west）だけ返す。
       海外へ出す前提なので、APIの応答に日本語を混ぜない。 */
@@ -775,6 +819,15 @@ async function run() {
   const minScore = Number(val("minScore")) || undefined;
   const funCount = Number(document.getElementById("funCount").value) || 0;
   const budgetRatio = Number(document.getElementById("budget").value) || undefined;
+  // ⚠️ **選び方とデータ。** 「アプリと同じ」はアプリのつまみ（0〜1）で入れるかを決める（0なら入れない）
+  const funSelection = val("funSelection");
+  const funWeight = Number(val("funWeight")) / 100;
+  const funSource = {
+    selection: funSelection, dataSource: val("roadData"),
+    ...(funSelection === "app" ? { funWeight, pick: val("funPick") } : {}),
+  };
+  const wantsFun = funSelection === "app" ? funWeight >= 0.01 : funCount > 0;
+  state.funSource = null;
   document.getElementById("run").disabled = true;
   state.results = {};
   state.variants = [];
@@ -824,7 +877,7 @@ async function run() {
    */
   async function addFunRoutes({ corridorScale, budgetRatio, suffix }) {
     const body = { from:state.from, to:state.to, vias:state.vias, stopAt:viaStopAt(),
-                   funCount, budgetRatio, corridorScale, minScore, maxVariants:3, ...bike };
+                   funCount, budgetRatio, corridorScale, minScore, maxVariants:3, ...bike, ...funSource };
     state.lastRequest = body;
     const got = await post("/api/valhalla/fun-routes", body);
     if (got.error) {
@@ -835,6 +888,8 @@ async function run() {
       return 0;
     }
     let added = 0;
+    // どのデータから・どの選び方で選んだか（本番なら県ごとの世代）
+    if (!suffix) { state.funSource = got; renderFunSource(); }
     (got.routes || []).forEach((r) => {
       // ⚠️ **同じ経路は出さない。** 実測で ×3 と ×5、2.0倍と 3.0倍が同じになった
       const sig = routeSignature(r);
@@ -842,7 +897,7 @@ async function run() {
       if (sig) seen.add(sig);
       const key = suffix ? `fun:${r.kind}${suffix}` : `fun:${r.kind}`;
       state.results[key] = r;
-      const base = sidesLabel(r.funPick && r.funPick.sides);
+      const base = funLabel(r.funPick);
       state.variants.push({ key, label: suffix ? `${base}${suffix}` : base,
                             color:funColor(r.kind) });
       if (!suffix && added === 0 && !state.selected.startsWith("fun:")) state.selected = key;
@@ -859,12 +914,12 @@ async function run() {
     return added;
   }
 
-  if (funCount > 0) {
+  if (wantsFun) {
     state.selected = "normal";
     await addFunRoutes({ corridorScale, budgetRatio });
 
-    // ③ 設定を変えて比べる。⚠️ **時間が掛かる**ので明示したときだけ
-    if (checked("sweep")) {
+    // ③ 設定を変えて比べる。⚠️ **時間が掛かる**ので明示したときだけ（Web の選び方のときだけ）
+    if (funSelection === "web" && checked("sweep")) {
       // ⚠️ いま使った値はもう出してある。同じ呼び出しを繰り返さない
       for (const c of stepsOf("corridor")) {
         if (c === corridorScale) continue;
@@ -1403,6 +1458,51 @@ async function checkStatus() {
   }
 }
 
+// MARK: 楽しい道の選び方とデータ
+
+/** つまみ（0〜100%）→ 表示。アプリの `NavRoutePreference.detourBudgetRatio` と同じ（1.1〜3.0倍） */
+function funWeightText(percent) {
+  if (percent < 1) return "0%・楽しい道を入れない";
+  const ratio = 1.1 + (3.0 - 1.1) * Math.min(1, percent / 100);
+  return `${percent}%・寄り道${ratio.toFixed(2)}倍まで`;
+}
+
+/** 選び方に合わせて、使う欄だけを出す */
+function syncFunControls() {
+  const app = document.getElementById("funSelection").value === "app";
+  document.getElementById("funAppBox").hidden = !app;
+  document.getElementById("funWebBox").hidden = app;
+  document.getElementById("funWeightText").textContent = funWeightText(Number(document.getElementById("funWeight").value));
+}
+
+/**
+ * どのデータから・どの選び方で選んだかを出す。
+ * ⚠️ **本番を選んだら、県ごとの世代と手元と中身が同じかを必ず出す。** 手元で直して配信していない県は
+ *    アプリと違う道を選ぶ（実測 2026-09-28: 東京都は本番 v2・手元 v4）
+ */
+function renderFunSource() {
+  const el = document.getElementById("funSourceNote");
+  const g = state.funSource;
+  if (!g || g.error) { el.innerHTML = ""; return; }
+  const parts = [];
+  if (g.dataSource === "delivered") {
+    const vs = (g.versions || []).map((v) => `${escapeHtml(v.prefecture)} v${v.generation}`
+      + (v.sameAsLocal === false ? `<strong style="color:var(--warn)">（手元 v${v.localGeneration} と中身が違う）</strong>` : ""));
+    parts.push(`<strong>本番（配信中）</strong>のデータから選んだ: ${vs.join("・") || "—"}`
+      + ((g.missing || []).length ? `<br>⚠️ 本番に無い: ${escapeHtml(g.missing.join("・"))}` : ""));
+  } else {
+    parts.push("<strong>手元（調整中）</strong>のデータから選んだ（配信していない変更も入る）");
+  }
+  if (g.app) {
+    const a = g.app;
+    parts.push(`<strong>アプリと同じ選び方</strong>: つまみ${Math.round(a.funWeight * 100)}%（寄り道${a.budgetRatio.toFixed(2)}倍まで）・`
+      + `ふつうのルート${(a.baselineMeters / 1000).toFixed(1)}kmを基準・候補${a.usableCount}本`
+      + (a.blockedCount ? `（規制と重なる${a.blockedCount}本を外した）` : "")
+      + `・選ぶ道: ${a.pick === "top" ? "点数のいちばん高い道" : "ランダム"}`);
+  }
+  el.innerHTML = parts.join("<br>");
+}
+
 // MARK: 排気量ごとの数値
 
 /**
@@ -1818,6 +1918,9 @@ document.getElementById("paint").onchange = (e) => {
 document.getElementById("run").onclick = run;
 document.getElementById("rawKind").onchange = showRaw;
 document.getElementById("rrPlace").onclick = () => rrSetPlacing(!rr.placing);
+document.getElementById("funSelection").onchange = syncFunControls;
+document.getElementById("funWeight").oninput = syncFunControls;
+syncFunControls();
 // 排気量を変えたら、その排気量の既定の数値に入れ替える（変えた値は捨てる）
 document.getElementById("displacement").addEventListener("change", renderTuning);
 document.getElementById("tuneReset").onclick = renderTuning;

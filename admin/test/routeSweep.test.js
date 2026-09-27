@@ -83,5 +83,6 @@ test("比べるのは、明示したときだけ", () => {
   // ⚠️ **時間が掛かる**（実測: 回り込み4通りで23秒、寄り道3通りで9秒）。既定で走らせない
   assert.ok(/id="sweep"/.test(html), "切り替えが無い");
   assert.ok(!/id="sweep" checked/.test(html), "既定で比べるようになっている");
-  assert.ok(/if \(checked\("sweep"\)\) \{/.test(code), "切り替えを見ていない");
+  // ⚠️ 比べるのは Web の選び方のときだけ（アプリと同じ選び方には回り込み・寄り道の選択肢が無い。2026-09-28）
+  assert.ok(/if \(funSelection === "web" && checked\("sweep"\)\) \{/.test(code), "切り替えを見ていない");
 });

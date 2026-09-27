@@ -38,7 +38,10 @@ const { routeOptionsFromBody } = require("../service/lib/buildRoute");
 const { routeWithValhallaSegmented } = require("./lib/segmentedRoute");
 const { buildSideVariants, selectFunRoads } = require("./lib/funRouteSelect");
 const { toGpx, toSimctl } = require("./lib/gpx");
-const { segmentsBetween } = require("./lib/roadRecommendIndex");
+const { segmentsBetween, prefecturesBetween } = require("./lib/roadRecommendIndex");
+// ⚠️ **アプリと同じ選び方**（`FunRouteBuilder` を移したもの）と、**本番に配信中のデータ**（読むだけ）
+const appFun = require("./lib/appFunRoute");
+const { createDeliveredRoads } = require("./lib/deliveredRoads");
 const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
 const { simulateReroute } = require("./lib/rerouteSim");
@@ -750,10 +753,40 @@ app.post("/api/valhalla/gpx", (req, res) => {
   res.send(made.text);
 });
 
+/** 本番のおすすめ道路を読む部品。⚠️ 使うときに初めて作る（Storage を触らない起動もあるため） */
+let delivered = null;
+const deliveredRoads = () => delivered
+  || (delivered = createDeliveredRoads({ db, bucket: admin.storage().bucket("biketeilen.appspot.com") }));
+
+/**
+ * 楽しい道の候補（おすすめ道路の区間）を、手元か本番から集める。
+ * ⚠️ どちらも同じ県を読む（`prefecturesBetween`）。本番は県ごとの世代と、手元と中身が同じかも返す
+ */
+async function funSegmentsBetween(from, to, dataSource) {
+  if (dataSource !== "delivered") return { ...segmentsBetween(from, to), dataSource: "local" };
+  const prefectures = prefecturesBetween(from, to);
+  const got = await deliveredRoads().segmentsFor(prefectures);
+  return { segments: got.segments, prefectures, dataSource: "delivered", versions: got.versions, missing: got.missing };
+}
+
+/**
+ * 県（ローマ字）の登録済みの規制を全部。**アプリが楽しい道の候補を絞るときと同じ**
+ * （アプリは Firestore の road_restrictions を出どころで絞らずに読む。二普協も入る）
+ */
+function restrictionsForRomajis(romajis) {
+  const out = [];
+  for (const romaji of romajis) {
+    const file = path.join(__dirname, "data", "road-restrictions", `${romaji}.json`);
+    try { out.push(...(JSON.parse(fs.readFileSync(file, "utf8")).restrictions || [])); } catch (e) { /* 登録なし */ }
+  }
+  return out;
+}
+
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons, funCount, budgetRatio,
           corridorScale, minScore, displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          at, isHoliday, includeUnverified, restrictionScope, stopAt } = req.body || {};
+          at, isHoliday, includeUnverified, restrictionScope, stopAt,
+          selection, funWeight, pick: pickMode, dataSource } = req.body || {};
   // ⚠️ 条件の土台はアプリと同じ（フェリー・ETC・車線数など。`routeOptionsFromBody`）。
   //    ⚠️ **楽しい道の選び方はアプリと別物**（アプリは端末の `FunRouteBuilder`・配信したデータ。
   //    こちらはサーバの `buildSideVariants`・手元のデータ）。選ばれる道はそろわない
@@ -765,14 +798,50 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
   }
   try {
     const rideAt = at ? new Date(at) : undefined;
-    const near = segmentsBetween(from, to);
-    // ⚠️ **まわり方は選ばせず、全部作って並べる。**
-    //    同じ顔ぶれになる方角（南西へ向かう旅の「北」と「西」など）は
-    //    buildSideVariants がまとめる
-    const built = buildSideVariants(from, to, near.segments,
-      { count: funCount || 4, budgetRatio, corridorScale, minScore });
-    const picks = built.variants;
-    const sideEmpties = built.empties;
+    // ⚠️ 候補の道は手元か本番か（画面で選ぶ）。本番は読むだけ
+    const near = await funSegmentsBetween(from, to, dataSource);
+    let picks;
+    let sideEmpties = [];
+    let appInfo = null;
+    if (selection === "app") {
+      // ⚠️ **アプリと同じ選び方**（`lib/appFunRoute.js`）。遠回りの基準と進み具合の形は
+      //    ふつうのルート（アプリは楽しい道を入れる前に選んでいた案）から取る
+      const plain = await routeWithValhallaSegmented(from, to,
+        { ...baseOpts, vias: Array.isArray(vias) ? vias : [], variant: "normal", costing, excludePolygons,
+          tuning: sanitizeTuning(req.body.tuning) });
+      if (!plain || plain.error) return res.status(502).json({ error: (plain && plain.error) || "ふつうのルートが引けません" });
+      // つまみ（0〜1）。渡されなければ全開（アプリで楽しい道を入れた直後と同じ）
+      const weight = Number.isFinite(funWeight) ? funWeight : 1;
+      const built = appFun.appFunVariants({
+        origin: from, destination: to, segments: near.segments, funWeight: weight,
+        baselineMeters: plain.lengthMeters, referencePolyline: plain.points,
+        // ⚠️ アプリの既定（通れない道を自動で避ける）と同じく、規制と重なる道を候補から外す
+        restrictions: req.body.avoidRestrictions === false ? [] : restrictionsForRomajis(near.prefectures),
+        displacement, at: rideAt,
+        choose: pickMode === "top" ? appFun.topChoice : appFun.randomChoice,
+      });
+      appInfo = { funWeight: weight, budgetRatio: appFun.detourBudgetRatio(weight), pick: pickMode === "top" ? "top" : "random",
+                  baselineMeters: plain.lengthMeters, usableCount: built.usableCount, blockedCount: built.blockedCount };
+      picks = built.variants.map((v) => ({
+        ...v,
+        // まわり方の案は "side:north"、予算違いは "budget:generous" / "budget:modest"
+        kind: v.sides.length ? `side:${v.sides[0]}` : `budget:${v.kind}`,
+        considered: built.usableCount,
+        estimatedMeters: Math.round(v.detourRatio * v.baselineMeters),
+        uTurnOnly: v.uTurnOnly.map((s) => ({ id: s.id, name: s.name })),
+        // ⚠️ 往復の原因を外して選び直すときも同じ選び方・同じ条件で
+        rebuildWith: (banIds) => appFun.build({ ...built.common, ...v.recipe, kind: v.kind,
+                                                side: v.recipe.side || undefined, excluding: banIds }),
+      }));
+    } else {
+      // ⚠️ **まわり方は選ばせず、全部作って並べる。**
+      //    同じ顔ぶれになる方角（南西へ向かう旅の「北」と「西」など）は
+      //    buildSideVariants がまとめる
+      const built = buildSideVariants(from, to, near.segments,
+        { count: funCount || 4, budgetRatio, corridorScale, minScore });
+      picks = built.variants;
+      sideEmpties = built.empties;
+    }
 
     const routes = [];
     const seen = new Set();
@@ -795,10 +864,12 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）。
       //    ⚠️ 原因を外したら**案を丸ごと組み立て直す**。1本ずつ抜く方式では、
       //       楽しい道が1本しかない案で何もできず往復が残った
-      const rebuild = (banIds) => {
-        const usable = near.segments.filter((s) => !banIds.has(s.id));
-        return selectFunRoads(from, to, usable, pick.pickOptions);
-      };
+      const rebuild = pick.rebuildWith
+        ? (banIds) => pick.rebuildWith(banIds) || { segments: [], waypoints: [] }
+        : (banIds) => {
+          const usable = near.segments.filter((s) => !banIds.has(s.id));
+          return selectFunRoads(from, to, usable, pick.pickOptions);
+        };
       const refined = await dropBacktrackingRoads(pick, to, rebuild, routeFn,
         { bannedIds: bannedForever });
       const r = refined.route;
@@ -849,16 +920,21 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
         routeCalls: refined.calls,
         //: 楽しい道が無くなった（原因を外し切った）
         ranOut: refined.ranOut,
+        //: 選び方（"app"＝アプリと同じ）と、予算違いの案の性格（generous / modest）
+        selection: selection === "app" ? "app" : "web",
+        budgetKind: pick.rebuildWith && !pick.sides.length ? pick.kind.replace("budget:", "") : null,
       };
       routes.push(r);
     }
+    // ⚠️ どのデータから選んだか（本番なら県ごとの世代・手元と同じか）と、アプリの選び方の条件も返す
+    const source = { dataSource: near.dataSource, versions: near.versions || null, missing: near.missing || null, app: appInfo };
     if (!routes.length) {
-      return res.json({ routes: [], prefectures: near.prefectures, sideEmpties,
+      return res.json({ routes: [], prefectures: near.prefectures, sideEmpties, ...source,
                         note: "この範囲に通せるおすすめ道路がありません" });
     }
     // ⚠️ 候補が無かった方角も返す。「出ない」のか「試していない」のかが
     //    分からないと、画面で誤解される
-    res.json({ routes, prefectures: near.prefectures, sideEmpties });
+    res.json({ routes, prefectures: near.prefectures, sideEmpties, ...source });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
