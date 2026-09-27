@@ -137,18 +137,25 @@ function toAppRoute(route) {
   };
 }
 
-async function buildRouteResponse(body, deps = {}) {
+/**
+ * アプリの依頼から、経路を引く条件を作る。
+ *
+ * ⚠️ **調整ツールの画面（`admin/server.js` の `/api/valhalla/route`）もこれを通す**
+ *    （利用者の要望 2026-09-27: Web とアプリのルート生成が同じ条件になるか確認したい）。
+ *    実測: 画面が別に条件を組んでいたため、既定が違い（目的地の手前の車線側・未確認の規制候補）、
+ *    同じ出発地・目的地24本のうち5本で道が違った。**条件を足すときはここだけ直すこと**
+ * @returns 条件（`routeWithValhallaSegmented` の `opts`）。from / to が無ければ null
+ */
+function routeOptionsFromBody(body, deps = {}) {
   // ⚠️ `excludeTolls` を取り出し忘れないこと。下で渡しているのに取り出しておらず
   //    ReferenceError で窓口ごと500を返した前例がある（`stopAt` で同じことをやった）
   const { from, to, vias, variant, displacement, avoidHighways, avoidTolls, excludeTolls,
           avoidFerries, alternates, etc,
-          arriveOnNearSide, roadNameStyle, announce, guidance,
+          arriveOnNearSide, roadNameStyle,
           at, isHoliday, stopAt, throughStopAt, heading, headingTolerance, viaHeadings,
           legConditions } = body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
-  if (!ok(from) || !ok(to)) {
-    return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
-  }
+  if (!ok(from) || !ok(to)) return null;
 
   // ⚠️ **区間ごとの条件は、形が正しいときだけ使う。** 崩れた値で区間ごとに引くと、
   //    避けたい区間で有料・高速に乗せることになる。使わないときは全体の条件で引く
@@ -159,45 +166,55 @@ async function buildRouteResponse(body, deps = {}) {
     ? legConditions.map((c) => ({ avoidTolls: c.avoidTolls, avoidHighways: c.avoidHighways }))
     : undefined;
 
+  return {
+    legConditions: conditions,
+    vias: Array.isArray(vias) ? vias : [],
+    // ⚠️ **止まる場所（立ち寄り先）の番号。** ここが空だと経由地が全部
+    //    「通るだけ」になり、着いても知らせられない
+    stopAt: Array.isArray(stopAt) ? stopAt : [],
+    // ⚠️ **おすすめ道路の終点。** 立ち寄るが、その場で引き返させない
+    //    （`admin/lib/valhallaRoute.js` の `locationType` を読むこと）
+    throughStopAt: Array.isArray(throughStopAt) ? throughStopAt.filter(Number.isInteger) : [],
+    // ⚠️ **走っている向き。** 引き直しのときに渡すと、その場で向きを変えさせず
+    //    そのまま進んで小道で回り込む経路になる（`lib/valhallaRoute.js`）
+    heading, headingTolerance,
+    // ⚠️ おすすめ道路の入口に「道に沿った向き」を渡すと、行って戻らず回り込む
+    viaHeadings,
+    variant: variant || "normal",
+    displacement, avoidHighways, avoidTolls, excludeTolls,
+    // ⚠️ **フェリーは既定で避ける。** 外すのは `false` を明示されたときだけ
+    //    （古いアプリは渡してこない。渡さなければこれまでどおり避ける）
+    avoidFerries: avoidFerries !== false,
+    // ⚠️ **ETC車載器が無いときだけスマートIC（ETC専用）を外す。** 外すのは `false` を明示されたときだけ
+    //    （古いアプリは渡してこない。渡さなければ車載器ありとみなす＝これまでどおり）
+    avoidEtcOnly: etc === false,
+    // ⚠️ **別の道も一緒に頼む。** 立ち寄り先があると返らない（Valhalla の性質）
+    alternates: Number(alternates) || 0,
+    arriveOnNearSide, roadNameStyle,
+    // ⚠️ **車線数を取るために測る。** かつては通信を減らすため false にしていたが、
+    //    「曲がったあとどの車線にいればよいか」を言うのに要る（実機の要望）。
+    //    実測で増えるのは誤差のうち（11km: 128→78ms / 82km: 218→178ms・3回平均。
+    //    Valhalla は同じコンテナの中なので往復が軽い）
+    withRoadClass: true,
+    baseUrl: deps.baseUrl,
+    restrictionsFor: deps.restrictionsFor,
+    // ⚠️ 渡さなければ時間の判断をしない（時間限定の規制も避ける＝避けすぎ側）
+    at: at ? new Date(at) : undefined,
+    isHoliday: !!isHoliday,
+  };
+}
+
+async function buildRouteResponse(body, deps = {}) {
+  const { from, to, announce, guidance } = body || {};
+  const opts = routeOptionsFromBody(body, deps);
+  if (!opts) {
+    return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
+  }
+
   let route;
   try {
     // ⚠️ **区間ごとの条件が無ければ、いつもの引き方そのもの**（`routeWithValhallaSegmented` が委ねる）
-    route = await routeWithValhallaSegmented(from, to, {
-      legConditions: conditions,
-      vias: Array.isArray(vias) ? vias : [],
-      // ⚠️ **止まる場所（立ち寄り先）の番号。** ここが空だと経由地が全部
-      //    「通るだけ」になり、着いても知らせられない
-      stopAt: Array.isArray(stopAt) ? stopAt : [],
-      // ⚠️ **おすすめ道路の終点。** 立ち寄るが、その場で引き返させない
-      //    （`admin/lib/valhallaRoute.js` の `locationType` を読むこと）
-      throughStopAt: Array.isArray(throughStopAt) ? throughStopAt.filter(Number.isInteger) : [],
-      // ⚠️ **走っている向き。** 引き直しのときに渡すと、その場で向きを変えさせず
-      //    そのまま進んで小道で回り込む経路になる（`lib/valhallaRoute.js`）
-      heading, headingTolerance,
-      // ⚠️ おすすめ道路の入口に「道に沿った向き」を渡すと、行って戻らず回り込む
-      viaHeadings,
-      variant: variant || "normal",
-      displacement, avoidHighways, avoidTolls, excludeTolls,
-      // ⚠️ **フェリーは既定で避ける。** 外すのは `false` を明示されたときだけ
-      //    （古いアプリは渡してこない。渡さなければこれまでどおり避ける）
-      avoidFerries: avoidFerries !== false,
-      // ⚠️ **ETC車載器が無いときだけスマートIC（ETC専用）を外す。** 外すのは `false` を明示されたときだけ
-      //    （古いアプリは渡してこない。渡さなければ車載器ありとみなす＝これまでどおり）
-      avoidEtcOnly: etc === false,
-      // ⚠️ **別の道も一緒に頼む。** 立ち寄り先があると返らない（Valhalla の性質）
-      alternates: Number(alternates) || 0,
-      arriveOnNearSide, roadNameStyle,
-      // ⚠️ **車線数を取るために測る。** かつては通信を減らすため false にしていたが、
-      //    「曲がったあとどの車線にいればよいか」を言うのに要る（実機の要望）。
-      //    実測で増えるのは誤差のうち（11km: 128→78ms / 82km: 218→178ms・3回平均。
-      //    Valhalla は同じコンテナの中なので往復が軽い）
-      withRoadClass: true,
-      baseUrl: deps.baseUrl,
-      restrictionsFor: deps.restrictionsFor,
-      // ⚠️ 渡さなければ時間の判断をしない（時間限定の規制も避ける＝避けすぎ側）
-      at: at ? new Date(at) : undefined,
-      isHoliday: !!isHoliday,
-    });
+    route = await routeWithValhallaSegmented(from, to, opts);
   } catch (e) {
     return { status: 500, body: { error: e.message } };
   }
@@ -223,4 +240,4 @@ async function buildRouteResponse(body, deps = {}) {
   };
 }
 
-module.exports = { buildRouteResponse };
+module.exports = { buildRouteResponse, routeOptionsFromBody };

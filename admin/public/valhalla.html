@@ -85,6 +85,9 @@
   .ln.afterTurn .kd { background:#e7f5ff; color:#1c7ed6; }
   .ln.longStretch .kd { background:#f3f0ff; color:#7048e8; }
   .ln.on { background:#fff9db; }
+  .ln.warn .kd { background:#fff4e6; color:var(--warn); }
+  #rrLog { max-height:260px; overflow:auto; }
+  #rrLog .ln span:last-child { flex:1; }
 
   /* 曲がる指示 */
   #steps { flex:1; overflow-y:auto; }
@@ -126,7 +129,9 @@
       <div class="pt"><span class="tag">始点</span><span class="val empty" id="v-from">まだ</span></div>
       <div class="pt"><span class="tag">終点</span><span class="val empty" id="v-to">まだ</span></div>
       <div class="pt"><span class="tag">経由</span><span class="val empty" id="v-via">なし</span></div>
-      <p class="hint">1回目＝始点、2回目＝終点、3回目以降＝経由地。<kbd>右クリック</kbd>で全部消す。</p>
+      <p class="hint">1回目＝始点、2回目＝終点、3回目以降＝経由地。<kbd>右クリック</kbd>で全部消す。<br>
+        経由地の丸をクリックすると<strong>立ち寄る（塗り）／通るだけ（白抜き）</strong>が切り替わる。
+        既定は立ち寄る（アプリの立ち寄り先と同じ。着いたら区間が分かれる）。切り替えたら引き直すこと。</p>
     </div>
 
     <div class="bar">
@@ -205,7 +210,11 @@
         <label style="font-size:11px;color:var(--muted)">
           <input type="checkbox" id="avoidTolls"> 有料回避</label>
         <label style="font-size:11px;color:var(--muted)">
-          <input type="checkbox" id="arriveOnNearSide"> 目的地は手前の車線側</label>
+          <input type="checkbox" id="arriveOnNearSide" checked> 目的地は手前の車線側</label>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="noEtc"> ETC車載器なし</label>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="allowFerry"> フェリーに乗ってよい</label>
       </div>
       <div class="row">
         <label style="font-size:11px;color:var(--muted)">
@@ -215,8 +224,12 @@
           <input type="checkbox" id="rideHoliday" disabled> 祝日</label>
       </div>
       <div class="row">
-        <label style="font-size:11px;color:var(--muted)">
-          <input type="checkbox" id="includeUnverified" checked> 未確認の JARTIC 候補も避ける</label>
+        <label style="font-size:11px;color:var(--muted)">避ける規制
+          <select id="restrictionScope">
+            <option value="app" selected>アプリと同じ（二普協を除く）</option>
+            <option value="all">登録済み全部（二普協も）</option>
+            <option value="unverified">登録済み全部＋未確認の JARTIC 候補</option>
+          </select></label>
       </div>
       <p class="hint">⚠️ <strong>登録済みの規制があるのは25県だけ。</strong>
         候補はあるのに登録が0件の県が14ある（富山98・福岡21・広島21・岡山12 など）。
@@ -225,9 +238,9 @@
         単位とは限らない。<strong>避けすぎて走れる道を回り込むことがある</strong>
         （実測: 候補を跨ぐ26区間・原付で合計距離 +14.5%、10/26本で経路が変わった）。
         避けた規制は<strong>確認済みと未確認を分けて</strong>出す。<br>
-        ⚠️ <strong>この画面では既定でオン</strong>（開発者が全部見るための道具なので）。
-        <strong>窓口の既定はオフ</strong>——アプリと販売APIの挙動を黙って変えないため、
-        混ぜたい側が <code>includeUnverified</code> を明示する。</p>
+        ⚠️ <strong>既定は「アプリと同じ」</strong>（2026-09-27。アプリの配信APIは売ってよい出どころだけを避け、
+        <strong>二普協の61件は避けない</strong>。この画面が全部避けていたため、原付の渋谷→お台場で
+        レインボー橋を通るかどうかが食い違っていた）。条件は配信APIと同じ関数（<code>routeOptionsFromBody</code>）で作る。</p>
       <p class="hint">⚠️ <strong>125cc以下は高速・自動車専用道を通れない（法令）。</strong>
         チェックを外しても乗らない。</p>
       <p class="hint">⚠️ <strong>走る日時を決めると、その時刻に効いている規制だけを避ける。</strong>
@@ -347,6 +360,34 @@
       <div id="driveNow" class="now"></div>
       <div id="driveLog"></div>
     </div>
+    <div class="bar" id="rrBox">
+      <h2>外れたときの引き直しを試す</h2>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <button id="rrPlace" disabled>外れた地点を置く</button>
+        <button class="go" id="rrRun" disabled>引き直す</button>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:6px">
+        <label style="font-size:11px;color:var(--muted)">走っている向き
+          <input type="range" id="rrHeading" min="0" max="359" step="1" value="0" style="width:130px;vertical-align:middle"></label>
+        <span id="rrHeadingText" style="font-size:11px;font-variant-numeric:tabular-nums;min-width:32px">—</span>
+        <label style="font-size:11px;color:var(--muted)">
+          <input type="checkbox" id="rrNoHeading"> 向きが取れない（止まっている）</label>
+      </div>
+      <div id="rrNow" class="now quiet">案を選んで「外れた地点を置く」を押し、地図をクリックする。</div>
+      <div id="rrLog"></div>
+      <p class="hint"><strong>アプリと同じ手順で引き直す</strong>（<code>lib/rerouteSim.js</code>。アプリの
+        <code>NavigationController</code> を移したもの）:
+        ① 1.5km 先の区切りへ戻る道だけ引いて元の続きに繋ぐ（立ち寄り先は跨がない・直線の3倍を超える大回りなら諦める）
+        → ② 通り過ぎた行き先を飛ばして全体を引き直す。いきなり向きを変えさせる形なら進行方向100m先を挟んで、
+        中継点のせいで往復・有料に乗るならその中継点を落として、もう一度だけ引く。
+        どの依頼も向きつきで引けなければ向き無しで引き直す。<br>
+        ⚠️ <strong>外れる前にいた所は、経路のいちばん近い所とみなす</strong>（アプリは案内が追っていた指示を使う）。<br>
+        ⚠️ <strong>なぞれないもの</strong>（走ってきた経過が要る）: わざと無視したおすすめ道路・立ち寄り先を諦める判断、
+        とばした立ち寄り先、20秒の打ち切り。<br>
+        ⚠️ 時刻は「走る日時」を決めていればその時刻、無ければ今（アプリは常に今）。避ける規制は上の設定に従う。<br>
+        地点の印はドラッグで動かせる。引き直した案は「引き直し」として並ぶので、指示の一覧や「走らせる」もそのまま使える。
+        灰色の点線は、手順の途中で引いたが使わなかった経路。</p>
+    </div>
     <div id="variants"></div>
     <div id="steps"></div>
   </div>
@@ -375,10 +416,12 @@
 /* ⚠️ **最短・ふつうに、おすすめ道路を混ぜないこと。**
       混ぜてしまい「最短なのに遠回りしている」と報告された。
       経由地なしで引くのが最短・ふつう、楽しい道を通すのは別の口。 */
+// ⚠️ **アプリの候補は「ふつう」とその代替（alternates）だけ。** 「最短」は比べるためにこの画面だけで出す
 const PLAIN = [
-  { key:"shortest", label:"最短",   color:"#868e96" },
-  { key:"normal",   label:"ふつう", color:"#1c7ed6" },
+  { key:"shortest", label:"最短（比較用）", color:"#868e96" },
+  { key:"normal",   label:"ふつう", color:"#1c7ed6", alternates:2 },
 ];
+const ALT_COLORS = ["#4dabf7", "#a5d8ff"];
 /* ⚠️ 案の色は**まわり方**で決める。kind は "side:north" のようにサーバが付ける
       （lib/funRouteSelect.js の buildSideVariants）。
       同じ顔ぶれの方角はまとめられるので、先頭の方角の色を使う。 */
@@ -420,6 +463,7 @@ function routeSignature(r) {
 
 const state = {
   from:null, to:null, vias:[],
+  viaStops:[],         // 経由地ごとに立ち寄るか（false＝通るだけ）。⚠️ 既定は立ち寄る（アプリの立ち寄り先と同じ）
   roads:{},            // 手で足せるおすすめ道路（番号 → 区間）
   variants:[],         // 出せた案（最短・ふつう・楽しい◯通り）を並び順に
   results:{},          // key → 応答 or {error}
@@ -439,7 +483,12 @@ function initMap() {
     center:{ lat:35.6642, lng:138.5684 }, zoom:10,
     mapTypeControl:false, streetViewControl:false, fullscreenControl:false,
   });
-  state.map.addListener("click", (e) => addPoint([e.latLng.lng(), e.latLng.lat()]));
+  state.map.addListener("click", (e) => {
+    const p = [e.latLng.lng(), e.latLng.lat()];
+    // ⚠️ 引き直しの地点を置いている間は、経由地を足さない
+    if (rr.placing) rrPlaceAt(p);
+    else addPoint(p);
+  });
   // ⚠️ 右クリックの既定のメニューを出さない。出ると点が消えたのか分からなくなる
   state.map.addListener("rightclick", () => clearPoints());
   loadPrefectures();
@@ -451,7 +500,7 @@ window.initMap = initMap;
 function addPoint(p) {
   if (!state.from) state.from = p;
   else if (!state.to) state.to = p;
-  else state.vias.push(p);
+  else { state.vias.push(p); state.viaStops.push(true); }
   redrawMarkers();
   renderPoints();
 }
@@ -459,7 +508,9 @@ function addPoint(p) {
 function clearPoints() {
   state.from = state.to = null;
   state.vias = [];
+  state.viaStops = [];
   state.results = {};
+  rrReset();
   redrawMarkers();
   renderPoints();
   renderVariants();
@@ -472,17 +523,29 @@ function clearPoints() {
 function redrawMarkers() {
   state.markers.forEach((m) => m.setMap(null));
   state.markers = [];
-  const put = (p, label, color) => {
-    if (!p) return;
-    state.markers.push(new google.maps.Marker({
-      position:{ lat:p[1], lng:p[0] }, map:state.map, label,
-      icon:{ path:google.maps.SymbolPath.CIRCLE, scale:7, fillColor:color,
-             fillOpacity:1, strokeColor:"#fff", strokeWeight:2 },
-    }));
+  const put = (p, label, color, hollow) => {
+    if (!p) return null;
+    const m = new google.maps.Marker({
+      position:{ lat:p[1], lng:p[0] }, map:state.map,
+      label: hollow ? { text:label, color } : label,
+      icon:{ path:google.maps.SymbolPath.CIRCLE, scale:7, fillColor: hollow ? "#fff" : color,
+             fillOpacity:1, strokeColor: hollow ? color : "#fff", strokeWeight:2 },
+    });
+    state.markers.push(m);
+    return m;
   };
   put(state.from, "S", "#2b8a3e");
   put(state.to, "G", "#c92a2a");
-  state.vias.forEach((p, i) => put(p, String(i + 1), "#1c7ed6"));
+  state.vias.forEach((p, i) => {
+    const m = put(p, String(i + 1), "#1c7ed6", state.viaStops[i] === false);
+    m.setTitle(state.viaStops[i] === false ? "通るだけ（クリックで立ち寄るに）" : "立ち寄る（クリックで通るだけに）");
+    // ⚠️ 立ち寄る／通るだけで経路の区間の分かれ方が変わる。引き直しを試すときの行き先にも効く
+    m.addListener("click", () => {
+      state.viaStops[i] = state.viaStops[i] === false;
+      redrawMarkers();
+      renderPoints();
+    });
+  });
 }
 
 function clearLines() {
@@ -637,6 +700,7 @@ function drawLines() {
   drawFunMarks();
   drawBacktrackMarks();
   renderLegend();
+  rrSync();
   const r = state.results[state.selected];
   if (r && r.points && r.points.length) {
     const b = new google.maps.LatLngBounds();
@@ -662,8 +726,11 @@ async function run() {
     // ⚠️ **渡さなければ時間の判断をしない。** 走る時刻が分からないのに
     //    「いまは通れる」と決めてはいけない（時間限定の規制も避ける対象になる）
     ...rideWhen(),
-    // ⚠️ 未確認の候補を混ぜるかどうか。**既定は混ぜない**（避けすぎる恐れがある）
-    includeUnverified: checked("includeUnverified"),
+    // ⚠️ **避ける規制の範囲。既定はアプリと同じ**（売ってよい出どころだけ。二普協は外れる）
+    restrictionScope: val("restrictionScope"),
+    // ⚠️ アプリと同じく、車載器が無いときだけ `etc: false`・船に乗ってよいときだけ `avoidFerries: false`
+    ...(checked("noEtc") ? { etc:false } : {}),
+    ...(checked("allowFerry") ? { avoidFerries:false } : {}),
   };
   const corridorScale = Number(val("corridor")) || 1;
   const minScore = Number(val("minScore")) || undefined;
@@ -672,6 +739,7 @@ async function run() {
   document.getElementById("run").disabled = true;
   state.results = {};
   state.variants = [];
+  rrReset();
   renderVariants();
 
   const post = async (path, body) => {
@@ -687,10 +755,18 @@ async function run() {
 
   // ① 最短・ふつう。⚠️ **おすすめ道路は通さない**（経由地は手で置いたぶんだけ）
   for (const v of PLAIN) {
-    const body = { from:state.from, to:state.to, vias:state.vias, variant:v.key, ...bike };
+    const body = { from:state.from, to:state.to, vias:state.vias, stopAt:viaStopAt(), variant:v.key, ...bike,
+                   ...(v.alternates ? { alternates:v.alternates } : {}) };
     state.lastRequest = body;
-    state.results[v.key] = await post("/api/valhalla/route", body);
+    const got = await post("/api/valhalla/route", body);
+    state.results[v.key] = got;
     state.variants.push({ key:v.key, label:v.label, color:v.color });
+    // ⚠️ **アプリと同じく代替も並べる**（行き先1つのとき。おすすめ道路などの経由地があれば最初の経由地までの行き方違い）
+    (got && !got.error && Array.isArray(got.alternates) ? got.alternates : []).forEach((alt, i) => {
+      const key = `${v.key}:alt${i + 1}`;
+      state.results[key] = alt;
+      state.variants.push({ key, label:`${v.label}・代替${i + 1}`, color:ALT_COLORS[i % ALT_COLORS.length] });
+    });
     renderVariants(); drawLines();
   }
 
@@ -708,7 +784,7 @@ async function run() {
    * @returns 出せた本数（0 なら「その設定では新しい経路が出ない」）
    */
   async function addFunRoutes({ corridorScale, budgetRatio, suffix }) {
-    const body = { from:state.from, to:state.to, vias:state.vias,
+    const body = { from:state.from, to:state.to, vias:state.vias, stopAt:viaStopAt(),
                    funCount, budgetRatio, corridorScale, minScore, maxVariants:3, ...bike };
     state.lastRequest = body;
     const got = await post("/api/valhalla/fun-routes", body);
@@ -836,7 +912,8 @@ function renderPoints() {
   };
   set("v-from", fmt(state.from));
   set("v-to", fmt(state.to));
-  const via = state.vias.length ? `${state.vias.length}点` : null;
+  const stops = state.viaStops.filter((x) => x !== false).length;
+  const via = state.vias.length ? `${state.vias.length}点（立ち寄る${stops}・通るだけ${state.vias.length - stops}）` : null;
   set("v-via", via);
   document.getElementById("run").disabled = !(state.from && state.to);
 }
@@ -1283,6 +1360,275 @@ async function checkStatus() {
   }
 }
 
+// MARK: 外れたときの引き直しを試す
+
+/** 立ち寄る経由地の番号（サーバの `stopAt`）。⚠️ 立ち寄る点で経路の区間が分かれる */
+const viaStopAt = () => state.vias.map((_, i) => i).filter((i) => state.viaStops[i] !== false);
+
+/**
+ * 外れた地点と向きを置いて、アプリと同じ手順で引き直す（`/api/valhalla/reroute`・`lib/rerouteSim.js`）。
+ *
+ * ⚠️ **引き直す元は「地点を置いたときに選んでいた案」。** 引き直した結果を選んだまま置き直しても、
+ *    元の案から外れたことにする（引き直しの引き直しは、区間の対応がアプリと違ってくるので試さない）
+ * ⚠️ 行き先の並びは画面で組む: 手で置いた経由地（立ち寄る／通るだけ）→ 楽しい道の中継点
+ *    （通るだけ・おすすめ道路）→ 終点。サーバの楽しい道はこの順で経由地を渡している
+ */
+const rr = { placing:false, base:null, position:null, heading:0, marker:null, marks:[] };
+const RR_COLOR = "#ae3ec9";
+const RR_LABEL = {
+  rejoin:"外れた分だけ引き直して、元の続きに繋いだ",
+  whole:"全体を引き直した",
+  nudged:"進行方向へ誘導して、全体を引き直した",
+  trimmed:"問題の中継点を落として、全体を引き直した",
+  failed:"引けなかった（アプリは元の経路のまま案内を続ける）",
+  none:"向かう行き先が無い",
+};
+const RR_SHORT = { rejoin:"繋いだ", whole:"全体", nudged:"誘導して全体", trimmed:"中継点を落として全体" };
+const RR_PURPOSE = { rejoin:"合流点まで", whole:"全体", nudge:"誘導点を挟んで", trim:"中継点を落として" };
+
+const rrBaseKey = () => (state.selected === "reroute" ? rr.base : state.selected);
+const rrUsable = (r) => !!(r && !r.error && Array.isArray(r.points) && r.points.length >= 2 && Array.isArray(r.steps));
+
+function rrNow(text, quiet) {
+  const el = document.getElementById("rrNow");
+  el.innerHTML = text;
+  el.classList.toggle("quiet", !!quiet);
+}
+
+function rrSync() {
+  document.getElementById("rrPlace").disabled = !rrUsable(state.results[rrBaseKey()]);
+  document.getElementById("rrRun").disabled = !(rr.position && rrUsable(state.results[rr.base]));
+  const noHeading = document.getElementById("rrNoHeading").checked;
+  document.getElementById("rrHeading").disabled = noHeading;
+  document.getElementById("rrHeadingText").textContent = noHeading ? "なし" : `${rr.heading}°`;
+}
+
+function rrClearMarks() {
+  rr.marks.forEach((m) => m.setMap(null));
+  rr.marks = [];
+}
+
+/** 引き直しの結果と地点を全部消す（引き直すたび・点を消したとき） */
+function rrReset() {
+  rrClearMarks();
+  if (rr.marker) { rr.marker.setMap(null); rr.marker = null; }
+  rr.base = null;
+  rr.position = null;
+  delete state.results.reroute;
+  state.variants = state.variants.filter((v) => v.key !== "reroute");
+  document.getElementById("rrLog").innerHTML = "";
+  rrNow("案を選んで「外れた地点を置く」を押し、地図をクリックする。", true);
+  rrSetPlacing(false);
+}
+
+function rrSetPlacing(on) {
+  rr.placing = on;
+  document.getElementById("rrPlace").textContent = on ? "やめる（地図をクリックして置く）" : "外れた地点を置く";
+  if (!state.map) return;
+  state.map.setOptions({ draggableCursor: on ? "crosshair" : null });
+  // ⚠️ 線の上をクリックしても地図に届くようにする（線がクリックを吸うと置けない）
+  Object.values(state.lines).concat(state.kindLines).forEach((l) => l.setOptions({ clickable: !on }));
+}
+
+function rrBearing(a, b) {
+  const rad = (d) => d * Math.PI / 180;
+  const y = Math.sin(rad(b[0] - a[0])) * Math.cos(rad(b[1]));
+  const x = Math.cos(rad(a[1])) * Math.sin(rad(b[1]))
+    - Math.sin(rad(a[1])) * Math.cos(rad(b[1])) * Math.cos(rad(b[0] - a[0]));
+  return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
+}
+
+/** いちばん近い区間の向き（置いた地点の既定の向き＝経路に沿って走っていた） */
+function rrRouteBearingNear(points, p) {
+  const k = Math.cos(p[1] * Math.PI / 180);
+  let best = 0, bestD = Infinity;
+  for (let i = 1; i < points.length; i++) {
+    const [ax, ay] = [(points[i - 1][0] - p[0]) * k, points[i - 1][1] - p[1]];
+    const [bx, by] = [(points[i][0] - p[0]) * k, points[i][1] - p[1]];
+    const vx = bx - ax, vy = by - ay, len = vx * vx + vy * vy;
+    const t = len ? Math.max(0, Math.min(1, -(ax * vx + ay * vy) / len)) : 0;
+    const d = Math.hypot(ax + vx * t, ay + vy * t);
+    if (d < bestD) { bestD = d; best = i; }
+  }
+  return rrBearing(points[best - 1], points[best]);
+}
+
+function rrDrawPosition() {
+  const noHeading = document.getElementById("rrNoHeading").checked;
+  const icon = noHeading
+    ? { path:google.maps.SymbolPath.CIRCLE, scale:8, fillColor:RR_COLOR, fillOpacity:1, strokeColor:"#fff", strokeWeight:2 }
+    : { path:google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale:6, rotation:rr.heading,
+        fillColor:RR_COLOR, fillOpacity:1, strokeColor:"#fff", strokeWeight:2 };
+  if (!rr.marker) {
+    rr.marker = new google.maps.Marker({ map:state.map, draggable:true, zIndex:95, title:"外れた地点（ドラッグで動かせる）" });
+    rr.marker.addListener("dragend", (e) => { rr.position = [e.latLng.lng(), e.latLng.lat()]; });
+  }
+  rr.marker.setPosition({ lat:rr.position[1], lng:rr.position[0] });
+  rr.marker.setIcon(icon);
+}
+
+function rrPlaceAt(p) {
+  const key = rrBaseKey();
+  const r = state.results[key];
+  rrSetPlacing(false);
+  if (!rrUsable(r)) return;
+  rrClearMarks();
+  rr.base = key;
+  rr.position = p;
+  rr.heading = Math.round(rrRouteBearingNear(r.points, p)) % 360;
+  document.getElementById("rrHeading").value = rr.heading;
+  rrDrawPosition();
+  const v = state.variants.find((x) => x.key === key);
+  rrNow(`「${escapeHtml(v ? v.label : key)}」から外れた地点を置いた。向きは近くの経路の向き（${rr.heading}°）。`
+    + "違う向きで走っていたことにするなら、つまみで変える。", true);
+  rrSync();
+}
+
+/** 引き直しに渡す行き先の並び */
+function rrLegs(r) {
+  const common = { avoidTolls:document.getElementById("avoidTolls").checked,
+                   avoidHighways:document.getElementById("avoidHighways").checked };
+  const hand = state.vias.map((p, i) => ({ ...common, destination:p,
+    isUserWaypoint:state.viaStops[i] !== false, isRoadCourse:false,
+    name:`経由地${i + 1}${state.viaStops[i] === false ? "（通るだけ）" : ""}` }));
+  // ⚠️ 楽しい道の中継点は「通るだけ・おすすめ道路」。引き直しは作り分け（fun＝高速を外す）を引き継ぐ
+  const auto = (r.autoVias || []).map((p, i) => ({ ...common, destination:p,
+    isUserWaypoint:false, isRoadCourse:true, name:`楽しい道の中継点${i + 1}` }));
+  return [...hand, ...auto, { ...common, destination:state.to, isUserWaypoint:true, isRoadCourse:false, name:"終点" }];
+}
+
+/** 判断の記録を日本語にする。⚠️ 文はここで作る（サーバは鍵だけ返す） */
+function rrTraceRows(t, name) {
+  const names = (list) => list.map((i) => `「${escapeHtml(name(i))}」`).join("");
+  const km = (m) => fmtM(Math.round(m || 0));
+  switch (t.kind) {
+    case "position": {
+      const rows = [["位置", `外れる前にいた所: 指示${t.stepIndex + 1}（経路から${t.lateralMeters}m）・経路の区間${t.routeLeg + 1}`]];
+      if (t.legsIndex !== t.stopLegsIndex) {
+        rows.push(["ずれ", `<strong>アプリの数え方ではいま「${escapeHtml(name(t.legsIndex))}」へ向かっていることになる。</strong>`
+          + `止まる場所で数えると「${escapeHtml(name(t.stopLegsIndex))}」`
+          + "（通るだけの点は経路の区間を作らないので、区間の番号と行き先の番号がずれる）", "warn"]);
+      }
+      return rows;
+    }
+    case "rejoinSkipped":
+      return [["①", { legEnd:"繋がない: 1.5km 先までに立ち寄り先がある（跨ぐとその立ち寄り先が黙って消える）",
+                      short:"繋がない: 到着まで1.5km 無い", outOfRange:"繋がない: 指示の番号が範囲外" }[t.reason]]];
+    case "request": {
+      const where = t.legs.map((i) => escapeHtml(i == null ? "合流点・誘導点" : name(i))).join(" → ");
+      const hd = t.heading == null ? "向きなし" : `向き${Math.round(t.heading)}°`;
+      const lead = t.retryWithoutHeading ? "向きつきで引けないので向き無しで: " : "";
+      const res = t.ok ? km(t.lengthMeters) : `<span class="err">引けない（${escapeHtml(shorten(t.error))}）</span>`;
+      return [["依頼", `${lead}${RR_PURPOSE[t.purpose] || t.purpose}（${where}・${hd}）→ ${res}`, t.ok ? "" : "warn"]];
+    }
+    case "rejoin":
+      if (t.spliced) return [["①", `繋いだ: 戻る道 ${km(t.detourMeters)}（合流点まで直線 ${km(t.directMeters)}）。その先は元の経路のまま`]];
+      if (!t.ok) return [["①", "戻る道が引けない → 全体を引き直す", "warn"]];
+      return [["①", `大回り: 戻る道 ${km(t.detourMeters)} が直線 ${km(t.directMeters)} の3倍を超える → 全体を引き直す`, "warn"]];
+    case "firstLegAhead": {
+      const passed = [];
+      for (let i = t.from; i < t.to; i++) passed.push(i);
+      return [["②", passed.length
+        ? `通り過ぎた${names(passed)}を飛ばして「${escapeHtml(name(t.to))}」から引き直す`
+        : `「${escapeHtml(name(t.to))}」から引き直す`]];
+    }
+    case "uTurn":
+      return [["向き", t.nudge ? "いきなり向きを変えさせる形 → 進行方向100m先を挟んでもう一度だけ引く"
+        : t.reason === "noHeading" ? "いきなり向きを変えさせる形。向きが無いので挟まない"
+        : "いきなり向きを変えさせる形。目的地が背後なので挟まない（向きを変えるのが正しい）", "warn"]];
+    case "nudgeResult":
+      return [["向き", t.fixed ? "挟んだら向き直しが消えた"
+        : t.ok ? "挟んでも向き直しが残る → 挟まない経路を使う" : "挟んだら引けない → 挟まない経路を使う"]];
+    case "problemLegs":
+      return [["中継点", `往復・有料の原因: ${names(t.dropped)} → 落としてもう一度だけ引く`, "warn"]];
+    case "trimResult":
+      return [["中継点", t.good ? "落としたら直った" : "直らない → 落とさない経路を使う"]];
+    case "noRoute":
+      return [["✗", "元の経路が無い", "warn"]];
+    default:
+      return [];
+  }
+}
+
+function rrMark(p, label, title) {
+  rr.marks.push(new google.maps.Marker({
+    position:{ lat:p[1], lng:p[0] }, map:state.map, title, zIndex:94,
+    label:{ text:label, color:"#fff", fontSize:"10px" },
+    icon:{ path:google.maps.SymbolPath.CIRCLE, scale:8, fillColor:RR_COLOR,
+           fillOpacity:0.9, strokeColor:"#fff", strokeWeight:2 },
+  }));
+}
+
+async function rrRun() {
+  const base = state.results[rr.base];
+  if (!rr.position || !rrUsable(base)) return;
+  const val = (id) => document.getElementById(id).value;
+  const checked = (id) => document.getElementById(id).checked;
+  const legs = rrLegs(base);
+  const body = {
+    // ⚠️ **画面の線をそのまま送る。** サーバで引き直すと、画面の案と違う経路から外れたことになる
+    route:{ points:base.points, steps:base.steps, classSpans:base.classSpans,
+            funRoads:base.funRoads, restrictionHits:base.restrictionHits },
+    legs, position:rr.position,
+    heading: checked("rrNoHeading") ? null : rr.heading,
+    displacement:val("displacement"),
+    restrictionScope:val("restrictionScope"),
+    ...(checked("noEtc") ? { etc:false } : {}),
+    ...(checked("allowFerry") ? { avoidFerries:false } : {}),
+    ...rideWhen(),
+  };
+  state.lastRequest = { ...body, route:`（画面の案「${rr.base}」の線 ${base.points.length}点・指示${base.steps.length}）` };
+  document.getElementById("rrRun").disabled = true;
+  rrNow("引き直しています…", true);
+  let out;
+  try {
+    const res = await fetch("/api/valhalla/reroute", { method:"POST",
+      headers:{ "Content-Type":"application/json" }, body:JSON.stringify(body) });
+    out = await res.json();
+  } catch (e) { out = { error:e.message }; }
+  rrShow(out, legs);
+}
+
+function rrShow(out, legs) {
+  rrClearMarks();
+  delete state.results.reroute;
+  state.variants = state.variants.filter((v) => v.key !== "reroute");
+  if (out.error) {
+    rrNow(`<span class="err">✗ ${escapeHtml(out.error)}</span>`);
+    rrSync();
+    return;
+  }
+  const name = (i) => (legs[i] ? legs[i].name : `#${i}`);
+  const rows = (out.trace || []).flatMap((t) => rrTraceRows(t, name));
+  document.getElementById("rrLog").innerHTML = rows.map(([kd, text, cls]) =>
+    `<div class="ln ${cls || ""}"><span class="kd">${kd}</span><span>${text}</span></div>`).join("");
+  const r = out.route;
+  const left = (out.remaining || []).map((i) => `「${escapeHtml(name(i))}」`).join(" → ");
+  rrNow(`${RR_LABEL[out.strategy] || escapeHtml(out.strategy)}`
+    + (r ? `　${fmtM(Math.round(r.lengthMeters))}・${Math.round(r.durationSeconds / 60)}分・Uターン${r.uTurns ?? "—"}` : "")
+    + (left ? `<br><span style="font-weight:400;font-size:12px">行き先: ${left}</span>` : ""));
+
+  // 使わなかった経路は灰色の点線
+  for (const d of out.discarded || []) {
+    rr.marks.push(new google.maps.Polyline({
+      path:d.points.map((p) => ({ lat:p[1], lng:p[0] })), map:state.map, clickable:false, zIndex:5,
+      strokeOpacity:0,
+      icons:[{ icon:{ path:"M 0,-1 0,1", strokeOpacity:0.7, strokeColor:"#868e96", scale:3 }, offset:"0", repeat:"12px" }],
+    }));
+  }
+  if (out.onRoute) rrMark(out.onRoute, "元", "外れる前にいたとみなした所");
+  if (out.rejoinPoint) rrMark(out.rejoinPoint, "合", "合流点（ここから元の経路の続き）");
+  if (out.nudge) rrMark(out.nudge, "誘", "向き直しを避ける誘導点（進行方向100m先）");
+
+  if (r) {
+    state.results.reroute = r;
+    state.variants.push({ key:"reroute", label:`引き直し（${RR_SHORT[out.strategy] || out.strategy}）`, color:RR_COLOR });
+    state.selected = "reroute";
+  }
+  renderVariants(); drawLines(); renderSteps(); renderPicked(); showRaw();
+  driveReset();
+}
+
 // MARK: こまごま
 
 const escapeHtml = (s) => String(s).replace(/[&<>"]/g,
@@ -1296,6 +1642,17 @@ document.getElementById("paint").onchange = (e) => {
 };
 document.getElementById("run").onclick = run;
 document.getElementById("rawKind").onchange = showRaw;
+document.getElementById("rrPlace").onclick = () => rrSetPlacing(!rr.placing);
+document.getElementById("rrRun").onclick = rrRun;
+document.getElementById("rrHeading").oninput = (e) => {
+  rr.heading = Number(e.target.value) || 0;
+  if (rr.marker) rrDrawPosition();
+  rrSync();
+};
+document.getElementById("rrNoHeading").onchange = () => {
+  if (rr.marker) rrDrawPosition();
+  rrSync();
+};
 renderPoints();
 // ⚠️ 引く前は案が無い。VARIANTS を決め打ちで出していた頃の名残で
 //    「まだ引いていないのに3案並ぶ」ことがないようにする

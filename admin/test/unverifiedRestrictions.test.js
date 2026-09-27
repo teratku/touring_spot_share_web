@@ -44,14 +44,30 @@ test("既定では未確認を混ぜない", () => {
   const server = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
   assert.ok(/if \(!opts\.includeUnverified\) continue;/.test(server),
     "旗が無くても候補を読んでいる");
-  // 3つの窓口すべてが旗を通す
-  const wired = (server.match(/restrictionsForPrefectures\(pts, \{ includeUnverified \}\)/g) || []).length;
-  assert.strictEqual(wired, 3, `旗を通している窓口が ${wired} 個（3個のはず）`);
+  // 4つの窓口すべてが、避ける規制の範囲を通す（2026-09-27 から範囲で選ぶ。`restrictionsForScope`。
+  // 4つ目は引き直しを試す窓口 /api/valhalla/reroute）
+  const wired = (server.match(/restrictionsForScope\(restrictionScope, includeUnverified\)/g) || []).length;
+  assert.strictEqual(wired, 4, `範囲を通している窓口が ${wired} 個（4個のはず）`);
   // 受け取っていない窓口があると、実行時に落ちる
   // ⚠️ **並びの最後だと決めつけないこと。** `includeUnverified` の後ろに
   //    `stopAt` を足したとたん 3個が 0個に見え、直っているのに落ちた
-  const got = (server.match(/includeUnverified[^}]*\} = req\.body/g) || []).length;
-  assert.strictEqual(got, 3, `旗を受け取っている窓口が ${got} 個（3個のはず）`);
+  const got = (server.match(/includeUnverified, restrictionScope[^}]*\} = req\.body/g) || []).length;
+  assert.strictEqual(got, 4, `範囲を受け取っている窓口が ${got} 個（4個のはず）`);
+  // ⚠️ 範囲から旗を作るのは `lib/restrictionScope.js` だけ（下の検査で動きを確かめる）
+  assert.ok(server.includes("const flags = restrictionScopeOptions(scope, includeUnverified);"),
+    "範囲の読み方を窓口ごとに持っている");
+});
+
+test("避ける規制の範囲: 渡さなければアプリと同じ・古い画面の旗も効く", () => {
+  const { restrictionScopeOptions: o } = require("../lib/restrictionScope");
+  // ⚠️ **範囲を渡さなければアプリと同じ**（売ってよい出どころだけ。未確認は混ぜない）
+  assert.deepStrictEqual(o(undefined, undefined), { includeUnverified: false, sellableOnly: true },
+    "範囲を渡さないとアプリと違う規制を避ける");
+  assert.deepStrictEqual(o("app", true), { includeUnverified: false, sellableOnly: true }, "「アプリと同じ」が効いていない");
+  assert.deepStrictEqual(o("all"), { includeUnverified: false, sellableOnly: false }, "登録済み全部になっていない");
+  assert.deepStrictEqual(o("unverified"), { includeUnverified: true, sellableOnly: false }, "未確認を混ぜていない");
+  // 古い画面は旗だけを送ってくる
+  assert.deepStrictEqual(o(undefined, true), { includeUnverified: true, sellableOnly: false }, "古い画面の旗を無視している");
 });
 
 test("すでに登録済みの候補を、二重に数えない", () => {
@@ -75,7 +91,7 @@ test("販売APIには、未確認を混ぜる道が無い", () => {
 
 test("画面が、確認済みと未確認を分けて出す", () => {
   const html = fs.readFileSync(path.join(__dirname, "..", "public", "valhalla.html"), "utf8");
-  assert.ok(/id="includeUnverified"/.test(html), "混ぜるかどうかの切り替えが無い");
+  assert.ok(/id="restrictionScope"/.test(html) && /<option value="unverified">/.test(html), "混ぜるかどうかの切り替えが無い");
   assert.ok(/h\.verified !== false/.test(html) && /h\.verified === false/.test(html),
     "確認済みと未確認を分けていない");
   assert.ok(/未確認の規制の上を通る/.test(html), "未確認の見出しが無い");
@@ -85,11 +101,12 @@ test("画面が、確認済みと未確認を分けて出す", () => {
   assert.ok(built.includes("hitText"), "hitText を表示に足していない");
 });
 
-test("画面は既定でオン、窓口は既定でオフ", () => {
-  // ⚠️ **道具と窓口で既定を分ける。** 画面は開発者が全部見るためのものなので混ぜる。
-  //    窓口を既定オンにすると、アプリと販売APIの挙動が黙って変わる
+test("画面も窓口も既定はアプリと同じ（未確認は混ぜない・二普協は避けない）", () => {
+  // ⚠️ **利用者の判断（2026-09-27）: 画面の既定をアプリに合わせる。** 以前は画面だけ既定で混ぜていたため、
+  //    同じ出発地・目的地でも画面とアプリで道が違った（24本中5本）
   const html = fs.readFileSync(path.join(__dirname, "..", "public", "valhalla.html"), "utf8");
-  assert.ok(/id="includeUnverified" checked/.test(html), "画面の既定がオフになっている");
+  assert.ok(/<option value="app" selected>/.test(html), "画面の既定がアプリと違う");
+  assert.ok(/id="arriveOnNearSide" checked/.test(html), "目的地の手前の車線側がアプリと違う（アプリは常にオン）");
   const server = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
   assert.ok(!/includeUnverified = true/.test(server), "窓口の既定がオンになっている");
   assert.ok(/if \(!opts\.includeUnverified\) continue;/.test(server),

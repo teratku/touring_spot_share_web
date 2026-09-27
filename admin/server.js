@@ -32,11 +32,17 @@ const publishLog = require("./lib/publishLog");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
 const { routeWithValhalla, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
+// ⚠️ **経路の条件はアプリの配信API（route-api）と同じ関数で作る**（利用者の要望 2026-09-27:
+//    Web とアプリのルート生成が同じ条件になるか確認したい）。画面で別に組むと既定がずれる
+const { routeOptionsFromBody } = require("../service/lib/buildRoute");
+const { routeWithValhallaSegmented } = require("./lib/segmentedRoute");
 const { buildSideVariants, selectFunRoads } = require("./lib/funRouteSelect");
 const { toGpx, toSimctl } = require("./lib/gpx");
 const { segmentsBetween } = require("./lib/roadRecommendIndex");
 const { dropBacktrackingRoads, blame } = require("./lib/funRouteRefine");
 const { simulate } = require("./lib/navSimulate");
+const { simulateReroute } = require("./lib/rerouteSim");
+const { restrictionScopeOptions } = require("./lib/restrictionScope");
 const { spokenRoadName } = require("./lib/navName");
 const { ATTRIBUTION, normalizeOrigin, isSellable } = require("./lib/restrictionOrigin");
 const { toAppManeuver } = require("./lib/navManeuver");
@@ -667,23 +673,28 @@ function restrictionsForPrefectures(routePoints, opts = {}) {
   return { restrictions: usable, prefectures };
 }
 
+/**
+ * 画面で選ぶ規制の範囲（`app` が既定＝アプリと同じ。`all`・`unverified` は `lib/restrictionScope.js`）。
+ */
+function restrictionsForScope(scope, includeUnverified) {
+  const flags = restrictionScopeOptions(scope, includeUnverified);
+  return (pts) => restrictionsForPrefectures(pts, flags);
+}
+
 app.post("/api/valhalla/route", async (req, res) => {
-  const { from, to, vias, variant, costing, excludePolygons,
-          displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          at, isHoliday, includeUnverified, stopAt } = req.body || {};
-  const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
-  if (!ok(from) || !ok(to)) {
+  const { costing, excludePolygons, includeUnverified, restrictionScope } = req.body || {};
+  // ⚠️ **アプリと同じ関数で条件を作る**（`routeOptionsFromBody`）。画面だけの条件（costing・塞ぐ範囲）はその上に足す
+  const opts = routeOptionsFromBody(req.body,
+    { restrictionsFor: restrictionsForScope(restrictionScope, includeUnverified) });
+  if (!opts) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
   }
   try {
+    const { from, to } = req.body;
     // ⚠️ **楽しい道はこの口では選ばない。** 最短・ふつうに混ぜないため、
     //    自動で選ぶのは /api/valhalla/fun-routes の方だけにしてある
-    const out = await routeWithValhalla(from, to,
-      { vias, variant, costing, excludePolygons,
-        displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-        restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
-        stopAt: Array.isArray(stopAt) ? stopAt : [],
-        at: at ? new Date(at) : undefined, isHoliday: !!isHoliday });
+    // ⚠️ **アプリと同じ引き方**（`routeWithValhallaSegmented`。区間ごとの条件・経由地があるときの行き方違いも）
+    const out = await routeWithValhallaSegmented(from, to, { ...opts, costing, excludePolygons });
     if (out.error) return res.status(502).json(out);
     res.json(out);
   } catch (e) {
@@ -729,7 +740,12 @@ app.post("/api/valhalla/gpx", (req, res) => {
 app.post("/api/valhalla/fun-routes", async (req, res) => {
   const { from, to, vias, costing, excludePolygons, funCount, budgetRatio,
           corridorScale, minScore, displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          at, isHoliday, includeUnverified, stopAt } = req.body || {};
+          at, isHoliday, includeUnverified, restrictionScope, stopAt } = req.body || {};
+  // ⚠️ 条件の土台はアプリと同じ（フェリー・ETC・車線数など。`routeOptionsFromBody`）。
+  //    ⚠️ **楽しい道の選び方はアプリと別物**（アプリは端末の `FunRouteBuilder`・配信したデータ。
+  //    こちらはサーバの `buildSideVariants`・手元のデータ）。選ばれる道はそろわない
+  const baseOpts = routeOptionsFromBody({ ...req.body, alternates: 0 },
+    { restrictionsFor: restrictionsForScope(restrictionScope, includeUnverified) });
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
     return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
@@ -758,10 +774,8 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       //    効いている規制だけを避ける（`lib/restrictionAvoid.js`）。
       //    ⚠️ 日時を渡さなければ時間の判断をしない（＝時間指定つきも避ける対象になる）
       const routeFn = (autoVias) => routeWithValhalla(from, to,
-        { vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
-          displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
-        stopAt: Array.isArray(stopAt) ? stopAt : [], at: rideAt, isHoliday: !!isHoliday });
+        { ...baseOpts, vias: handVias.concat(autoVias), variant: "fun", costing, excludePolygons,
+          stopAt: Array.isArray(stopAt) ? stopAt : [], at: rideAt, isHoliday: !!isHoliday });
 
       // ⚠️ **実際に引いてから、余計に走らせている道を外す。**
       //    選ぶ側（直線の幾何）では見えない（lib/funRouteRefine.js 参照）。
@@ -793,6 +807,9 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       // ⚠️ **到着のための切り返しは、道のせいではない。** 分けて出さないと
       //    「Uターン1」だけが見えて、直せない不具合に見える
       r.arrivalUTurns = refined.arrivalUTurns || 0;
+      // ⚠️ **自動で通した中継点も返す。** 引き直しを試す（/api/valhalla/reroute）には、
+      //    この案をどの点を通して引いたかが要る（手で置いた経由地の後ろに並ぶ）
+      r.autoVias = refined.picked.waypoints;
       // ⚠️ **避けきれなかった規制は必ず出す。** 黙って通させない
       // ⚠️ **表示名は返さない。** 呼ぶ側が `funPick.sides` から作る
       r.funRoads = refined.picked.segments.map((s) => ({
@@ -834,6 +851,44 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
 });
 
 /**
+ * 外れたときの引き直しを、**アプリと同じ手順で**試す（利用者の要望 2026-09-27:
+ * 「web でリルートのテストができるようにしたい」）。
+ *
+ * 画面から、いま出ている経路・行き先の並び・外れた地点と向きを受け取り、
+ * `lib/rerouteSim.js`（アプリの `NavigationController` を移したもの）で引き直す。
+ * ⚠️ **1本ずつの引き方もアプリと同じ**（`routeOptionsFromBody` → `routeWithValhallaSegmented`）。
+ *    避ける規制の範囲だけは画面で選べる（既定はアプリと同じ）
+ * ⚠️ **画面から経路をそのまま送ってもらう。** ここで引き直すと、画面に出ている案と違う経路から外れたことになる
+ */
+app.post("/api/valhalla/reroute", async (req, res) => {
+  const { route, legs, position, heading, displacement, etc, avoidFerries, at, isHoliday,
+          includeUnverified, restrictionScope } = req.body || {};
+  const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
+  if (!route || !Array.isArray(route.points) || !Array.isArray(route.steps) || route.points.length < 2) {
+    return res.status(400).json({ error: "route（points と steps）が要ります" });
+  }
+  if (!Array.isArray(legs) || !legs.length || !legs.every((l) => l && ok(l.destination))) {
+    return res.status(400).json({ error: "legs（destination を [経度, 緯度] で）が要ります" });
+  }
+  if (!ok(position)) return res.status(400).json({ error: "position は [経度, 緯度] で要ります" });
+  const restrictionsFor = restrictionsForScope(restrictionScope, includeUnverified);
+  try {
+    const out = await simulateReroute({
+      route, legs, position,
+      heading: Number.isFinite(heading) ? heading : null,
+      bike: { displacement, etc, avoidFerries, at, isHoliday },
+      fetchRoute: async (body) => {
+        const opts = routeOptionsFromBody(body, { restrictionsFor });
+        return routeWithValhallaSegmented(body.from, body.to, opts);
+      },
+    });
+    res.json(out);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
  * ナビの窓口。**アプリがそのまま食べられる形**でルートと案内を返す。
  *
  * ⚠️ **`/api/valhalla/fun-routes` とは目的が違う。** あちらは確認ツールの画面用で、
@@ -852,7 +907,7 @@ app.post("/api/nav/route", async (req, res) => {
   //    この窓口が丸ごと ReferenceError で 500 を返していた（テスト16件が落ちた）
   const { from, to, vias, variant, funCount, budgetRatio, corridorScale, minScore,
           displacement, avoidHighways, avoidTolls, arriveOnNearSide,
-          announce, guidance, roadNameStyle, includeUnverified, stopAt,
+          announce, guidance, roadNameStyle, includeUnverified, restrictionScope, stopAt,
           heading, headingTolerance, viaHeadings } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!ok(from) || !ok(to)) {
@@ -867,7 +922,8 @@ app.post("/api/nav/route", async (req, res) => {
     //    （`lib/restrictionAvoid.js`）。`at` を渡さなければ時間の判断をしない
     const drawOptions = { variant: kind, displacement, avoidHighways, avoidTolls,
                           arriveOnNearSide, roadNameStyle, withRoadClass: false,
-                          restrictionsFor: (pts) => restrictionsForPrefectures(pts, { includeUnverified }),
+                          // ⚠️ 既定はアプリと同じ規制（`restrictionsForScope`）
+                          restrictionsFor: restrictionsForScope(restrictionScope, includeUnverified),
                           // ⚠️ **止まる場所（立ち寄り先）の番号。** 空だと経由地が
                           //    全部「通るだけ」になり、着いても知らせられない
                           stopAt: Array.isArray(stopAt) ? stopAt : [],
