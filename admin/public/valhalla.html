@@ -445,6 +445,14 @@
         <span id="rrHeadingText" style="font-size:11px;font-variant-numeric:tabular-nums;min-width:32px">—</span>
         <label style="font-size:11px;color:var(--muted)">
           <input type="checkbox" id="rrNoHeading"> 向きが取れない（止まっている）</label>
+        <label style="font-size:11px;color:var(--muted)">速さ
+          <select id="rrSpeed">
+            <option value="">分からない</option>
+            <option value="20">20km/h</option>
+            <option value="40" selected>40km/h</option>
+            <option value="60">60km/h</option>
+            <option value="80">80km/h</option>
+          </select></label>
       </div>
       <div id="rrNow" class="now quiet">案を選んで「外れた地点を置く」を押し、地図をクリックする。</div>
       <div id="rrLog"></div>
@@ -453,10 +461,12 @@
         ① 1.5km 先の区切りへ戻る道だけ引いて元の続きに繋ぐ（立ち寄り先は跨がない・直線の3倍を超える大回りなら諦める）
         → ② 通り過ぎた行き先を飛ばして全体を引き直す。いきなり向きを変えさせる形なら進行方向100m先を挟んで、
         中継点のせいで往復・有料に乗るならその中継点を落として、もう一度だけ引く。
-        どの依頼も向きつきで引けなければ向き無しで引き直す。<br>
+        どの依頼も向きつきで引けなければ向き無しで引き直す。
+        最初の動きが近すぎれば（150m か速さ10秒ぶんの長い方より手前）、いまの道の先から引き直して手前を継ぐ
+        （道の先が無い・1km 超の大回りなら元のまま。止まっていれば避けない）。<br>
         ⚠️ <strong>外れる前にいた所は、経路のいちばん近い所とみなす</strong>（アプリは案内が追っていた指示を使う）。<br>
         ⚠️ <strong>なぞれないもの</strong>（走ってきた経過が要る）: わざと無視したおすすめ道路・立ち寄り先を諦める判断、
-        とばした立ち寄り先、20秒の打ち切り。<br>
+        とばした立ち寄り先、20秒の打ち切り、空回りしたら止める判断（新しい経路に乗れないまま3回続けたら）。<br>
         ⚠️ 時刻は「走る日時」を決めていればその時刻、無ければ今（アプリは常に今）。避ける規制は上の設定に従う。<br>
         地点の印はドラッグで動かせる。引き直した案は「引き直し」として並ぶので、指示の一覧や「走らせる」もそのまま使える。
         灰色の点線は、手順の途中で引いたが使わなかった経路。</p>
@@ -1796,6 +1806,7 @@ function rrTraceRows(t, name) {
     case "rejoin":
       if (t.spliced) return [["①", `繋いだ: 戻る道 ${km(t.detourMeters)}（合流点まで直線 ${km(t.directMeters)}）。その先は元の経路のまま`]];
       if (!t.ok) return [["①", "戻る道が引けない → 全体を引き直す", "warn"]];
+      if (t.tooSoon) return [["①", "繋いだ先の曲がりが近すぎる → 繋がずに全体を引き直す", "warn"]];
       return [["①", `大回り: 戻る道 ${km(t.detourMeters)} が直線 ${km(t.directMeters)} の3倍を超える → 全体を引き直す`, "warn"]];
     case "firstLegAhead": {
       const passed = [];
@@ -1815,6 +1826,16 @@ function rrTraceRows(t, name) {
       return [["中継点", `往復・有料の原因: ${names(t.dropped)} → 落としてもう一度だけ引く`, "warn"]];
     case "trimResult":
       return [["中継点", t.good ? "落としたら直った" : "直らない → 落とさない経路を使う"]];
+    case "ahead": {
+      const lead = `最初の動きが近すぎる（${km(t.firstMeters)}・${km(t.threshold)}未満）`;
+      if (t.ok) {
+        return [["近い角", `${lead} → いまの道の先から引き直した: 最初の動き ${km(t.firstAfter)}・`
+          + `${t.extraMeters >= 0 ? "+" : "−"}${km(Math.abs(t.extraMeters))}`]];
+      }
+      return [["近い角", lead + " → " + ({ snap:"道の先が無い（T字路など）ので元のまま",
+        extra:"1km を超える大回りになるので元のまま", notPast:"先から引いた出発点が角の手前に吸われたので元のまま",
+        failed:"先から引けないので元のまま" }[t.reason] || escapeHtml(t.reason)), "warn"]];
+    }
     case "noRoute":
       return [["✗", "元の経路が無い", "warn"]];
     default:
@@ -1844,6 +1865,8 @@ async function rrRun() {
             funRoads:base.funRoads, restrictionHits:base.restrictionHits },
     legs, position:rr.position,
     heading: checked("rrNoHeading") ? null : rr.heading,
+    // ⚠️ 止まっているなら速さ0（近い角でも避けない）。「分からない」は送らない（避ける）
+    ...(checked("rrNoHeading") ? { speedKmh:0 } : val("rrSpeed") !== "" ? { speedKmh:Number(val("rrSpeed")) } : {}),
     displacement:val("displacement"),
     restrictionScope:val("restrictionScope"),
     ...(checked("noEtc") ? { etc:false } : {}),

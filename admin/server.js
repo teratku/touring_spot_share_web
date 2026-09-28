@@ -951,7 +951,7 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
  * ⚠️ **画面から経路をそのまま送ってもらう。** ここで引き直すと、画面に出ている案と違う経路から外れたことになる
  */
 app.post("/api/valhalla/reroute", async (req, res) => {
-  const { route, legs, position, heading, displacement, etc, avoidFerries, at, isHoliday,
+  const { route, legs, position, heading, speedKmh, displacement, etc, avoidFerries, at, isHoliday,
           includeUnverified, restrictionScope } = req.body || {};
   const ok = (p) => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite);
   if (!route || !Array.isArray(route.points) || !Array.isArray(route.steps) || route.points.length < 2) {
@@ -967,6 +967,8 @@ app.post("/api/valhalla/reroute", async (req, res) => {
     const out = await simulateReroute({
       route, legs, position,
       heading: Number.isFinite(heading) ? heading : null,
+      // ⚠️ 画面は km/h・アプリ（CLLocation）は m/s
+      speed: Number.isFinite(speedKmh) && speedKmh >= 0 ? speedKmh / 3.6 : null,
       bike: { displacement, etc, avoidFerries, at, isHoliday },
       fetchRoute: async (body) => {
         const opts = routeOptionsFromBody(body, { restrictionsFor });

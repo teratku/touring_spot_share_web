@@ -19,11 +19,14 @@
  *      ・中継点のせいで往復・有料に乗るなら、その中継点を落としてもう一度だけ引く
  *   どの引き直しも「向きつきで引けなければ向き無しで」引き直す。
  *
+ *   どの依頼も、最初の動きが近すぎれば「いまの道の先」から引き直して頭を継ぐ（`NavRerouteAhead`）。
+ *
  * ⚠️ **点は `[経度, 緯度]`。** Swift 側は `CLLocationCoordinate2D`（緯度が先）。
  * ⚠️ **なぞれないもの**（走ってきた経過が要る。画面では置いた1点しか分からない）:
  *    ・`dropCount`（わざと無視したおすすめ道路・立ち寄り先を諦める）… 最接近の距離と「着いた」区間が要る
  *    ・とばした立ち寄り先（`skippedLegIDs`）
  *    ・前の引き直しが返らないあいだの見送り・20秒の打ち切り
+ *    ・引き直しの空回り（新しい経路に乗れないまま3回続けたら止める。`NavigationEngine.admitReroute`）
  */
 "use strict";
 
@@ -52,6 +55,20 @@ const ON_TOLL_ROAD_METERS = 50;
 const MAX_APEX_DISTANCE_METERS = 1_500;
 /** 往復とみなす沿線距離の下限（`NavDetourTrim.minAlongGapMeters`） */
 const DETOUR_MIN_ALONG_GAP_METERS = 100;
+/** 最初の動きがこれより近ければ、その先から引き直す（`NavRerouteAhead.minFirstActionMeters`） */
+const AHEAD_MIN_METERS = 150;
+/** 速いときは、この秒数で走る距離まで広げる（`NavRerouteAhead.reactionSeconds`） */
+const AHEAD_REACTION_SECONDS = 10;
+/** これより遅ければ（m/s）ずらさない（`NavRerouteAhead.stoppedSpeed`） */
+const AHEAD_STOPPED_SPEED = 3;
+/** ずらした出発点が道に乗らなかったとみなす距離（`NavRerouteAhead.maxSnapMeters`） */
+const AHEAD_MAX_SNAP_METERS = 30;
+/** ずらして増えてよい距離（`NavRerouteAhead.maxExtraMeters`） */
+const AHEAD_MAX_EXTRA_METERS = 1_000;
+/** 角での向きを、これだけ手前から測る（`NavRerouteAhead.bearingBackMeters`） */
+const AHEAD_BEARING_BACK_METERS = 20;
+/** ずらした出発点は、角をこれだけ抜けた先に乗っていること（`NavRerouteAhead.minPastMeters`） */
+const AHEAD_MIN_PAST_METERS = 1;
 
 // MARK: 幾何（NavGeometry.swift と同じ式）
 
@@ -266,6 +283,141 @@ function forwardNudge(current, heading, destination, meters = NUDGE_METERS) {
   return pointFrom(current, heading, meters);
 }
 
+// MARK: 近すぎる曲がりを避ける（NavRerouteAhead）
+
+/*
+ * ⚠️ **利用者の判断（2026-09-28）:「近すぎる曲がりは避ける」。** 実機で「道を外れたときに直近だと
+ *    戻るのに慌ててしまう」。曲がり損ねて直進し 80m 先で引き直すと（7経路47か所で実測）、
+ *    最初の動きが 100m 未満が55%・50m 未満が30%（「14m 先を左」など）。
+ * 直し方: 最初の動きが近すぎたら、**いまの道をそのまま進んだ先を出発点にして引き直し**、
+ *    手前の線（いまの道・近い角をまっすぐ抜ける所）を頭に継ぐ。近い角は曲がらずに通り過ぎる。
+ *    実測（150m）: 27か所すべて最初の動きが150m以上・増えた距離の中央値 +294m。
+ * ⚠️ **通るだけの点（向きつき）を挟む形にしないこと。** 同じ27か所で、100m 未満が11か所残り、
+ *    10か所で点が別の道に吸われた（出発点をずらす方が素直に道の先から引ける）。
+ * ⚠️ 道の先が無い（T字路など＝ずらした点が道に乗らない）・大回り（+1km 超）なら元の経路のまま。
+ *    山道では抜け道が無く +2〜6km になった（4か所）
+ */
+
+/**
+ * 「動き」に数えない指示（そのまま進む・到着・合流）。⚠️ アプリの `NavRerouteAhead.passive` と同じ。
+ * ⚠️ 到着は `none` で見分ける（`isLegEnd` では見ない。Google の形は走る指示に `isLegEnd` が付く）
+ */
+const PASSIVE_MANEUVERS = new Set(["straight", "none", "merge"]);
+
+/** 最初の動き（曲がる・分岐など）までの距離と、その指示の番号。無ければ null */
+function firstAction(route) {
+  const steps = (route && route.steps) || [];
+  let meters = 0;
+  for (let i = 0; i < steps.length; i++) {
+    if (i > 0 && !PASSIVE_MANEUVERS.has(steps[i].maneuver)) return { meters, stepIndex: i };
+    meters += steps[i].distanceMeters || 0;
+  }
+  return null;
+}
+
+/**
+ * これより近い動きは避ける距離（m）。止まっていれば null（近い角でも落ち着いて曲がれる）。
+ * ⚠️ 速さが分からない（null）ときは避ける（慌てさせない方に倒す）
+ */
+function aheadThreshold(speed) {
+  if (speed != null && speed >= 0 && speed < AHEAD_STOPPED_SPEED) return null;
+  return Math.max(AHEAD_MIN_METERS, (speed != null && speed > 0 ? speed : 0) * AHEAD_REACTION_SECONDS);
+}
+
+/**
+ * 最初の動きが近すぎるなら、引き直す出発点（いまの道を近い角でまっすぐ抜けた先）。要らなければ null。
+ * @returns {{origin, heading, prefix, firstMeters, threshold}}
+ *   prefix: 経路の頭から近い角までの線（引き直した経路の頭に継ぐ）
+ */
+function aheadPlan(route, speed) {
+  const threshold = aheadThreshold(speed);
+  if (threshold == null) return null;
+  const first = firstAction(route);
+  if (!first || first.meters >= threshold) return null;
+  const corner = route.steps[first.stepIndex].beginIndex;
+  const prefix = route.points.slice(0, corner + 1);
+  if (prefix.length < 2) return null;
+  let along = 0;
+  for (let k = 1; k < prefix.length; k++) along += distance(prefix[k - 1], prefix[k]);
+  // 角での向き（少し手前から）
+  let j = prefix.length - 2, back = 0;
+  while (j > 0 && back < AHEAD_BEARING_BACK_METERS) { back += distance(prefix[j], prefix[j + 1]); j--; }
+  const heading = bearing(prefix[Math.max(j, 0)], prefix[prefix.length - 1]);
+  const origin = pointFrom(prefix[prefix.length - 1], heading, Math.max(threshold - along, 0));
+  return { origin, heading, prefix, firstMeters: first.meters, threshold };
+}
+
+/**
+ * ずらした出発点から引いた経路（`shifted`）の頭に、手前の線を継ぐ。使えなければ `{ reason }`。
+ * reason: "snap"（道の先が無い）/ "notPast"（角の手前に吸われた）/ "extra"（大回り）
+ */
+function joinAhead(plan, shifted, original) {
+  const start = shifted.points[0];
+  if (distance(plan.origin, start) > AHEAD_MAX_SNAP_METERS) return { reason: "snap" };
+  const prefix = plan.prefix;
+  // ⚠️ **角を抜けた先に乗っていること。** 角の手前（いま走っている道）に吸われると、同じ近い角で
+  //    曲がる経路が返り、継ぎ目で後戻りする線になる（距離だけ見ると遠くなったように見える）
+  const corner = prefix[prefix.length - 1];
+  const past = distance(corner, start) * Math.cos(rad(angleDelta(plan.heading, bearing(corner, start))));
+  if (!(past >= AHEAD_MIN_PAST_METERS)) return { reason: "notPast" };
+  const shift = prefix.length;
+  let added = distance(prefix[prefix.length - 1], start);
+  for (let k = 1; k < prefix.length; k++) added += distance(prefix[k - 1], prefix[k]);
+  added = Math.round(added);
+  if ((shifted.lengthMeters || 0) + added - (original.lengthMeters || 0) > AHEAD_MAX_EXTRA_METERS) {
+    return { reason: "extra" };
+  }
+  // 継いだ線の所要時間は、元の経路の同じ所の速さで見積もる
+  const first = firstAction(original);
+  const head = original.steps.slice(0, first ? first.stepIndex : 0);
+  const headMeters = head.reduce((a, s) => a + (s.distanceMeters || 0), 0);
+  const headSeconds = head.reduce((a, s) => a + (s.durationSeconds || 0), 0);
+  const addedSeconds = headMeters > 0 ? Math.round(added * headSeconds / headMeters) : 0;
+
+  const steps = shifted.steps.map((s, i) => (i === 0
+    ? { ...s, beginIndex: 0, endIndex: s.endIndex + shift,
+        distanceMeters: (s.distanceMeters || 0) + added, durationSeconds: (s.durationSeconds || 0) + addedSeconds }
+    : { ...s, beginIndex: s.beginIndex + shift, endIndex: s.endIndex + shift }));
+  const points = prefix.concat(shifted.points);
+  // 頭の区切りは元の経路から（角と継ぎ目の間まで伸ばす）
+  const last = prefix.length - 1;
+  const spansWithHead = (headFrom, tail) => {
+    const headSpans = (headFrom || []).filter((sp) => sp.begin < last)
+      .map((sp) => ({ ...sp, end: Math.min(sp.end, last) }));
+    if (headSpans.length) headSpans[headSpans.length - 1].end = last + 1;
+    return headSpans.concat(shiftSpans(tail, 0, shift));
+  };
+  const classSpans = spansWithHead(original.classSpans, shifted.classSpans);
+  const kindMeters = {};
+  for (const s of steps) kindMeters[s.roadKind || "surface"] = (kindMeters[s.roadKind || "surface"] || 0) + (s.distanceMeters || 0);
+  // ⚠️ **知っている項目だけで組み直すこと（`splice` と同じ）。** 丸ごと写すと、点の番号を持つ項目
+  //    （無駄な輪の区切りなど）が継いだ分ずれたまま残る
+  const joined = {
+    points, steps,
+    lengthMeters: (shifted.lengthMeters || 0) + added,
+    durationSeconds: (shifted.durationSeconds || 0) + addedSeconds,
+    uTurns: steps.filter((s) => String(s.maneuver).startsWith("uturn")).length,
+    classSpans, classMeters: metersBy(classSpans, points, "roadClass"), kindMeters,
+    ...(shifted.kindSpans ? { kindSpans: spansWithHead(original.kindSpans, shifted.kindSpans) } : {}),
+    funRoads: shifted.funRoads, restrictionHits: shifted.restrictionHits,
+    // ⚠️ 頭に継いだ長さ。向き直しの確かめ（`startsWithUTurn`）を飛ばす印
+    aheadMeters: added,
+  };
+  return { route: joined };
+}
+
+/**
+ * 繋いだ経路の最初の動きが、**繋いだ先（元の経路）の曲がり**で、しかも近すぎるか。
+ * そうなら繋がずに全体を引き直す（戻る道に曲がりが無いので、ずらして引くこともできない）。
+ * ⚠️ 実測: 47か所中2か所（元の経路が回り込んで外れた地点のそばを通る形。38m・47m 先を左）
+ */
+function rejoinTurnsTooSoon(detour, spliced, speed) {
+  const threshold = aheadThreshold(speed);
+  if (threshold == null || firstAction(detour)) return false;
+  const first = firstAction(spliced);
+  return !!first && first.meters < threshold;
+}
+
 // MARK: どの行き先から引き直すか（NavWaypointSkip）
 
 /**
@@ -410,21 +562,43 @@ const usable = (r) => !!(r && !r.error && Array.isArray(r.points) && r.points.le
  *                 最後が最終目的地
  * @param position 外れた地点 `[経度, 緯度]`
  * @param heading  進行方向（度）。止まっていて取れないなら null
+ * @param speed    速さ（m/s）。分からなければ null（近すぎる曲がりは避ける）
  * @param fetchRoute `(body) => Promise<経路>`。`rerouteBody` の形を受け取って1本引く
  * @returns `{ strategy, route, trace, ... }`
  *   strategy: "rejoin"（繋いだ）/ "whole"（全体）/ "nudged"（誘導点を挟んだ）/ "trimmed"（中継点を落とした）/
  *             "failed"（引けない＝元の経路のまま）/ "none"（行き先が無い）
  *   trace: 判断の記録（画面が日本語にする。⚠️ ここで文を作らない）
  */
-async function simulateReroute({ route, legs, position, heading = null, bike = {}, fetchRoute }) {
+async function simulateReroute({ route, legs, position, heading = null, speed = null, bike = {}, fetchRoute }) {
   const trace = [];
   const discarded = [];
   const indexed = legs.map((l, index) => ({ ...l, index }));
   const safe = async (body) => {
     try { return await fetchRoute(body); } catch (e) { return { error: e.message }; }
   };
+  /**
+   * 最初の動きが近すぎるなら、いまの道の先から引き直して頭を継ぐ（`NavRerouteAhead`）。
+   * ⚠️ ずらした依頼は**向きつきの1回だけ**（向き無しにすると道の先に乗らない）。駄目なら元の経路
+   */
+  const avoidNearTurn = async (purpose, reqLegs, got) => {
+    const plan = aheadPlan(got, speed);
+    if (!plan) return got;
+    const shifted = await safe(rerouteBody(plan.origin, reqLegs, plan.heading, bike));
+    const joined = usable(shifted) ? joinAhead(plan, shifted, got) : { reason: "failed" };
+    trace.push({ kind: "ahead", purpose, firstMeters: Math.round(plan.firstMeters), threshold: Math.round(plan.threshold),
+                 ok: !!joined.route, reason: joined.reason || null,
+                 firstAfter: joined.route ? Math.round(firstAction(joined.route)?.meters ?? joined.route.lengthMeters) : null,
+                 extraMeters: joined.route ? Math.round(joined.route.lengthMeters - got.lengthMeters) : null });
+    if (!joined.route) return got;
+    discarded.push({ kind: "near", points: got.points });
+    return joined.route;
+  };
   /** `requestReroute`: 向きつきで引けなければ向き無しで引き直す */
   const ask = async (purpose, reqLegs, reqHeading) => {
+    const got = await askOnce(purpose, reqLegs, reqHeading);
+    return usable(got) ? avoidNearTurn(purpose, reqLegs, got) : got;
+  };
+  const askOnce = async (purpose, reqLegs, reqHeading) => {
     const got = await safe(rerouteBody(position, reqLegs, reqHeading, bike));
     trace.push({ kind: "request", purpose, legs: reqLegs.map((l) => (l.index ?? null)),
                  heading: reqHeading, ok: usable(got), lengthMeters: usable(got) ? got.lengthMeters : null,
@@ -465,8 +639,11 @@ async function simulateReroute({ route, legs, position, heading = null, bike = {
     const detour = await ask("rejoin", [bridge], heading);
     const ok = usable(detour);
     const reasonable = ok && isReasonable(detour, position, rejoinPoint);
-    const spliced = reasonable ? splice(detour, route, rejoinAt) : null;
-    trace.push({ kind: "rejoin", rejoinAt, ok, reasonable, spliced: !!spliced,
+    const joined = reasonable ? splice(detour, route, rejoinAt) : null;
+    // ⚠️ 繋いだ先の曲がりが近すぎるなら繋がない（全体を引き直し、そちらで近い角を避ける）
+    const tooSoon = !!joined && rejoinTurnsTooSoon(detour, joined, speed);
+    const spliced = tooSoon ? null : joined;
+    trace.push({ kind: "rejoin", rejoinAt, ok, reasonable, tooSoon, spliced: !!spliced,
                  detourMeters: ok ? detour.lengthMeters : null,
                  directMeters: Math.round(distance(position, rejoinPoint)) });
     if (spliced) {
@@ -489,8 +666,9 @@ async function simulateReroute({ route, legs, position, heading = null, bike = {
   const done = (strategy, r, legsUsed, extra = {}) => ({
     ...base, strategy, route: r, remaining: legsUsed.map((l) => l.index), trace, discarded, ...extra });
 
-  // ⚠️ いきなり向きを変えさせる形なら、進行方向100m先を挟んでもう一度だけ引く
-  if (startsWithUTurn(first.steps)) {
+  // ⚠️ いきなり向きを変えさせる形なら、進行方向100m先を挟んでもう一度だけ引く。
+  //    ⚠️ 近すぎる曲がりを避けて先から引いた経路は挟まない（最初の動きは十分先。戻る形はそのための回り込み）
+  if (startsWithUTurn(first.steps) && !first.aheadMeters) {
     const nudge = forwardNudge(position, heading, remaining[0].destination);
     trace.push({ kind: "uTurn", nudge: !!nudge,
                  reason: nudge ? null : (heading == null ? "noHeading" : "destinationBehind") });
@@ -535,9 +713,12 @@ module.exports = {
   stepAtPosition, routeLegIndexForStep, routeLegEnds, routeLegEndIndex, routeLegStartIndex,
   rejoinSearch, rejoinStepIndex, splice, isReasonable,
   startsWithUTurn, forwardNudge, firstLegAhead,
+  firstAction, aheadThreshold, aheadPlan, joinAhead, rejoinTurnsTooSoon,
   tollCausingLegIndex, offendingWaypointIndices, problemLegIndices,
   bearing, angleDelta, pointFrom,
   MIN_AHEAD_METERS, MAX_DETOUR_RATIO, NUDGE_METERS, AHEAD_TOLERANCE_DEGREES, HEAD_STEP_COUNT,
   PASSED_METERS, BEHIND_TOLERANCE_DEGREES, ON_TOLL_ROAD_METERS,
   MAX_APEX_DISTANCE_METERS, DETOUR_MIN_ALONG_GAP_METERS,
+  AHEAD_MIN_METERS, AHEAD_REACTION_SECONDS, AHEAD_STOPPED_SPEED, AHEAD_MAX_SNAP_METERS,
+  AHEAD_MAX_EXTRA_METERS, AHEAD_BEARING_BACK_METERS, AHEAD_MIN_PAST_METERS, PASSIVE_MANEUVERS,
 };

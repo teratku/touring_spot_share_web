@@ -295,12 +295,16 @@ function fakeFetch(answer) {
   return fn;
 }
 
-/** 渡された行き先まで、北へ真っすぐ行く経路（先頭の曲がりを指定できる） */
+/**
+ * 渡された行き先まで、北へ真っすぐ行く経路（先頭の曲がりを指定できる）。
+ * ⚠️ 指示は1つ400m（最初の動きを150m より先に置く）。近すぎる曲がりを避ける処理を走らせないため。
+ *    そちらは「近すぎる曲がり」のテストが自前の材料で試す
+ */
 function straightTo(body, maneuvers = ["straight"]) {
   const from = body.from, to = body.to;
   const points = Array.from({ length: 11 }, (_, k) => [from[0] + (to[0] - from[0]) * k / 10,
                                                         from[1] + (to[1] - from[1]) * k / 10]);
-  const steps = maneuvers.map((m, i) => ({ maneuver: m, distanceMeters: 100, durationSeconds: 10,
+  const steps = maneuvers.map((m, i) => ({ maneuver: m, distanceMeters: 400, durationSeconds: 40,
     beginIndex: i === 0 ? 0 : 10, endIndex: 10, roadKind: "surface" }));
   steps.push({ maneuver: "none", isLegEnd: true, distanceMeters: 0, beginIndex: 10, endIndex: 10 });
   const len = Math.round(Math.hypot((to[0] - from[0]) * 91_000, (to[1] - from[1]) * 111_000));
@@ -436,6 +440,167 @@ test("通り過ぎた立ち寄り先から引き直さない", async () => {
   assert.deepStrictEqual(out.remaining, [1]);
 });
 
+// MARK: 近すぎる曲がりを避ける（NavRerouteAheadTests と同じ場面）
+
+/*
+ * ⚠️ 利用者の判断（2026-09-28）:「近すぎる曲がりは避ける」。実機で「道を外れたときに直近だと戻るのに
+ *    慌ててしまう」。曲がり損ねて直進し 80m 先で引き直すと、最初の動きが 100m 未満が55%（7経路47か所）
+ */
+
+/** 北へ進み、`turnAt` m 先で左へ曲がる経路（点は10m ごと）。最後に到着 */
+function nearTurn(from, turnAt = 60, total = 800) {
+  const per = 10 / 111_195;
+  const n = Math.round(total / 10);
+  const points = Array.from({ length: n + 1 }, (_, k) => [from[0], from[1] + k * per]);
+  const corner = Math.round(turnAt / 10);
+  return {
+    points, lengthMeters: total, durationSeconds: total / 10,
+    steps: [
+      { maneuver: "straight", distanceMeters: turnAt, durationSeconds: turnAt / 10, beginIndex: 0, endIndex: corner, roadKind: "surface" },
+      { maneuver: "turnLeft", distanceMeters: total - turnAt, durationSeconds: (total - turnAt) / 10,
+        beginIndex: corner, endIndex: n, roadKind: "surface" },
+      { maneuver: "none", isLegEnd: true, distanceMeters: 0, durationSeconds: 0, beginIndex: n, endIndex: n },
+    ],
+    classSpans: [{ roadClass: "secondary", begin: 0, end: n, meters: total }],
+  };
+}
+const POS = [139.001, 35.0135];
+const north = (p, m) => p[1] + m / 111_195;
+/** 行き先は近い角の経路の終わり（800m 先）。⚠️ ずれると先から引いた経路が「大回り」になる */
+const NEAR_DEST = [{ destination: [139.001, north(POS, 800)], isUserWaypoint: true }];
+
+test("近い角を避ける距離は150mか速さ10秒ぶんの長い方・止まっていれば避けない（アプリの値）", () => {
+  assert.strictEqual(S.aheadThreshold(null), 150, "速さが分からないときに避けない");
+  assert.strictEqual(S.aheadThreshold(11.1), 150, "時速40km で150m でない");
+  assert.strictEqual(S.aheadThreshold(20), 200, "速いのに速さ10秒ぶんまで広げない");
+  assert.strictEqual(S.aheadThreshold(0), null, "止まっているのに避ける");
+  assert.strictEqual(S.aheadThreshold(2.9), null, "時速10km で避ける（止まっているとみなす）");
+  assert.strictEqual(S.aheadThreshold(3), 150);
+  assert.deepStrictEqual([S.AHEAD_MIN_METERS, S.AHEAD_REACTION_SECONDS, S.AHEAD_STOPPED_SPEED,
+                          S.AHEAD_MAX_SNAP_METERS, S.AHEAD_MAX_EXTRA_METERS],
+                         [150, 10, 3, 30, 1000], "アプリ（NavRerouteAhead）の値と違う");
+});
+
+test("最初の動きは、そのまま進む・合流・到着を数えない", () => {
+  const r = nearTurn(POS, 60);
+  assert.deepStrictEqual(S.firstAction(r), { meters: 60, stepIndex: 1 });
+  const merged = { ...r, steps: [r.steps[0], { ...r.steps[1], maneuver: "merge" }, r.steps[2]] };
+  assert.strictEqual(S.firstAction(merged), null, "合流を曲がりに数えた");
+  assert.strictEqual(S.firstAction({ steps: [r.steps[0], r.steps[2]] }), null, "到着を曲がりに数えた");
+});
+
+test("最初の動きが近すぎれば、いまの道を角でまっすぐ抜けた先から引き直して頭を継ぐ", async () => {
+  const fetch = fakeFetch((b, n) => (n === 1 ? nearTurn(b.from, 60) : straightTo(b)));
+  const out = await S.simulateReroute({ route: northRoute(2), legs: NEAR_DEST, position: POS, heading: 0,
+                                        speed: 11.1, bike: { displacement: "large" }, fetchRoute: fetch });
+  assert.strictEqual(fetch.calls.length, 2, "先から引き直していない: " + JSON.stringify(out.trace));
+  const again = fetch.calls[1];
+  // ⚠️ 角（60m 先）をまっすぐ抜けて、出発点から 150m の所
+  assert.ok(Math.abs(again.from[1] - north(POS, 150)) < 1e-6 && Math.abs(again.from[0] - POS[0]) < 1e-6,
+            "ずらした出発点が道の150m 先でない: " + again.from);
+  assert.ok(Math.abs(again.heading) < 1, "角での向き（北）を渡していない: " + again.heading);
+  assert.deepStrictEqual(out.route.points[0], POS, "頭に手前の線を継いでいない");
+  assert.strictEqual(out.route.steps[0].distanceMeters, 400 + 150, "継いだ長さを最初の指示に足していない");
+  assert.ok(Math.abs(out.route.lengthMeters - 800) <= 2, "継いだ経路の長さが違う（650m ＋ 手前150m）: " + out.route.lengthMeters);
+  assert.ok(out.trace.some((t) => t.kind === "ahead" && t.ok && t.firstMeters === 60), JSON.stringify(out.trace));
+});
+
+test("止まっていれば近い角でも避けない", async () => {
+  const fetch = fakeFetch((b) => nearTurn(b.from, 60));
+  const out = await S.simulateReroute({ route: northRoute(2), legs: NEAR_DEST, position: POS, heading: 0,
+                                        speed: 0, bike: { displacement: "large" }, fetchRoute: fetch });
+  assert.strictEqual(fetch.calls.length, 1, "止まっているのに先から引き直した");
+  assert.strictEqual(S.firstAction(out.route).meters, 60);
+});
+
+test("道の先が無い（ずらした点が道に乗らない）なら元の経路のまま", async () => {
+  // T字路: まっすぐ抜けた先に道が無く、40m 横の道に吸われる
+  const fetch = fakeFetch((b, n) => (n === 1 ? nearTurn(b.from, 60) : straightTo({ ...b, from: [b.from[0] + 40 / 91_000, b.from[1]] })));
+  const out = await S.simulateReroute({ route: northRoute(2), legs: NEAR_DEST, position: POS, heading: 0,
+                                        speed: 11.1, bike: { displacement: "large" }, fetchRoute: fetch });
+  assert.strictEqual(S.firstAction(out.route).meters, 60, "道に乗らない出発点の経路を使った");
+  assert.ok(out.trace.some((t) => t.kind === "ahead" && t.reason === "snap"), JSON.stringify(out.trace));
+});
+
+test("1km を超える大回りなら元の経路のまま", async () => {
+  const fetch = fakeFetch((b, n) => (n === 1 ? nearTurn(b.from, 60)
+    : { ...straightTo(b), lengthMeters: 650 + 1100 }));
+  const out = await S.simulateReroute({ route: northRoute(2), legs: NEAR_DEST, position: POS, heading: 0,
+                                        speed: 11.1, bike: { displacement: "large" }, fetchRoute: fetch });
+  assert.strictEqual(S.firstAction(out.route).meters, 60, "大回りの経路を使った");
+  assert.ok(out.trace.some((t) => t.kind === "ahead" && t.reason === "extra"), JSON.stringify(out.trace));
+});
+
+test("ずらした出発点が角の手前に吸われたら元の経路のまま", async () => {
+  // 角は140m 先・ずらした出発点はその10m 先。20m 手前（角の10m 手前＝いま走っている道）に吸われ、
+  // 同じ角で曲がる経路が返る。⚠️ 継ぐと後戻りする線になり、距離だけ見ると遠くなったように見える
+  const fetch = fakeFetch((b, n) => {
+    if (n === 1) return nearTurn(b.from, 140);
+    const r = straightTo({ ...b, from: [b.from[0], b.from[1] - 20 / 111_195] }, ["straight", "turnRight"]);
+    r.steps[0].distanceMeters = 0;
+    r.steps[1].beginIndex = 0;
+    return r;
+  });
+  const out = await S.simulateReroute({ route: northRoute(2), legs: NEAR_DEST, position: POS, heading: 0,
+                                        speed: 11.1, bike: { displacement: "large" }, fetchRoute: fetch });
+  assert.strictEqual(S.firstAction(out.route).meters, 140, "角の手前に吸われた経路を継いだ");
+  assert.ok(out.trace.some((t) => t.kind === "ahead" && t.reason === "notPast"), JSON.stringify(out.trace));
+});
+
+test("先から引いた経路には向き直しの誘導点を挟まない", async () => {
+  // ⚠️ 近い角を通り過ぎたので、戻る形（右・右）になるのは当然。最初の動きは十分先
+  const fetch = fakeFetch((b, n) => (n === 1 ? nearTurn(b.from, 60) : straightTo(b, ["straight", "turnRight", "turnRight"])));
+  const out = await S.simulateReroute({ route: northRoute(2), legs: NEAR_DEST, position: POS, heading: 0,
+                                        speed: 11.1, bike: { displacement: "large" }, fetchRoute: fetch });
+  assert.strictEqual(fetch.calls.length, 2, "誘導点を挟んで引き直した: " + JSON.stringify(out.trace));
+  assert.strictEqual(out.strategy, "whole");
+  assert.ok(out.route.aheadMeters > 0, "先から引いた印が無い");
+});
+
+test("繋いだ先の曲がりが近すぎるなら、繋がずに全体を引き直す", async () => {
+  // 戻る道は40m・曲がり無し。繋いだ先（元の経路）の曲がりが40m 先になる
+  const short = (b) => ({ ...straightTo(b), lengthMeters: 40,
+    steps: [{ maneuver: "straight", distanceMeters: 40, durationSeconds: 4, beginIndex: 0, endIndex: 10 },
+            { maneuver: "none", isLegEnd: true, distanceMeters: 0, beginIndex: 10, endIndex: 10 }] });
+  const route = northRoute();
+  const run = (speed) => {
+    const fetch = fakeFetch((b, n) => (n === 1 ? short({ ...b, from: [139.0, route.points[route.steps[2].beginIndex][1] - 40 / 111_195] })
+      : straightTo(b)));
+    return S.simulateReroute({ route, legs: [leg(35.045)], position: [139.0003, route.points[route.steps[2].beginIndex][1] - 40 / 111_195],
+                               heading: 0, speed, bike: { displacement: "large" }, fetchRoute: fetch });
+  };
+  const moving = await run(11.1);
+  assert.strictEqual(moving.strategy, "whole", JSON.stringify(moving.trace));
+  assert.ok(moving.trace.some((t) => t.kind === "rejoin" && t.tooSoon), "近すぎる理由を残していない");
+  const stopped = await run(0);
+  assert.strictEqual(stopped.strategy, "rejoin", "止まっているのに繋がなかった");
+  // ⚠️ 戻る道自身に曲がりがあるなら、そちらは先から引いて避ける（繋ぐのはやめない）
+  const step = (maneuver, distanceMeters, isLegEnd = false) => ({ maneuver, distanceMeters, isLegEnd });
+  const withTurn = { steps: [step("straight", 20), step("turnLeft", 20), step("none", 0, true)] };
+  assert.strictEqual(S.rejoinTurnsTooSoon(withTurn, withTurn, 11.1), false, "戻る道自身の曲がりで繋ぐのをやめた");
+  // 繋いだ先の曲がりが十分先なら繋ぐ
+  const plain = { steps: [step("straight", 40), step("none", 0, true)] };
+  const far = { steps: [step("straight", 400), step("turnRight", 1000), step("none", 0, true)] };
+  assert.strictEqual(S.rejoinTurnsTooSoon(plain, far, 11.1), false, "繋いだ先の曲がりが400m 先なのに繋がない");
+});
+
+test("継いだ経路は点の番号・距離・区切りを付け替える", () => {
+  const original = nearTurn(POS, 60);
+  const plan = S.aheadPlan(original, 11.1);
+  assert.ok(plan, "計画が無い");
+  assert.strictEqual(plan.prefix.length, 7, "頭の線は角まで（10m ごと7点）");
+  const shifted = { ...straightTo({ from: plan.origin, to: [139.001, 35.02] }),
+                    classSpans: [{ roadClass: "tertiary", begin: 0, end: 10, meters: 500 }] };
+  const joined = S.joinAhead(plan, shifted, original).route;
+  assert.ok(joined, "継げない");
+  assert.strictEqual(joined.points.length, 7 + 11);
+  assert.deepStrictEqual(joined.steps.map((s) => [s.beginIndex, s.endIndex]), [[0, 17], [17, 17]], "点の番号を付け替えていない");
+  assert.strictEqual(joined.lengthMeters, shifted.lengthMeters + 150, "継いだ長さを足していない");
+  assert.strictEqual(joined.aheadMeters, 150);
+  assert.deepStrictEqual(joined.classSpans.map((sp) => [sp.roadClass, sp.begin, sp.end]),
+                         [["secondary", 0, 7], ["tertiary", 7, 17]], "区切りを付け替えていない");
+});
+
 // MARK: 画面と窓口の配線
 
 const fs = require("fs");
@@ -463,6 +628,21 @@ test("手で置いた経由地は既定で立ち寄り先として引く（ア�
     "ふつう・楽しい道の両方で止まる場所を送っていない");
   assert.ok(html.includes("else { state.vias.push(p); state.viaStops.push(true); }"), "経由地の既定が立ち寄るでない");
   assert.ok(html.includes("const viaStopAt = () => state.vias.map((_, i) => i).filter((i) => state.viaStops[i] !== false);"));
+});
+
+test("速さは画面が km/h で送り、窓口が m/s にして引き直しに渡す（止まっていれば0・分からなければ送らない）", () => {
+  // ⚠️ 近すぎる曲がりを避けるかは速さで決まる（アプリは CLLocation の m/s）
+  const html = read("public", "valhalla.html");
+  assert.ok(html.includes("...(checked(\"rrNoHeading\") ? { speedKmh:0 } : val(\"rrSpeed\") !== \"\" ? { speedKmh:Number(val(\"rrSpeed\")) } : {}),"),
+    "画面が速さを送っていない（止まっているときは0・分からなければ送らない）");
+  const speedBox = (html.match(/<select id="rrSpeed">[\s\S]*?<\/select>/) || [""])[0];
+  assert.ok(speedBox.includes("<option value=\"40\" selected>40km/h</option>"), "既定の速さが時速40km でない");
+  assert.ok(speedBox.includes("<option value=\"\">分からない</option>"), "速さが分からない場合を選べない");
+  const server = read("server.js");
+  const at = server.indexOf("app.post(\"/api/valhalla/reroute\"");
+  const body = server.slice(at, server.indexOf("\n});", at));
+  assert.ok(body.includes("speed: Number.isFinite(speedKmh) && speedKmh >= 0 ? speedKmh / 3.6 : null,"), "窓口が速さを m/s にして渡していない");
+  assert.ok(body.includes("const { route, legs, position, heading, speedKmh,"), "窓口が速さを受け取っていない");
 });
 
 test("窓口はアプリと同じ引き方で1本ずつ引き、楽しい道の案は通した中継点を返す", () => {
