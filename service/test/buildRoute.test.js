@@ -3,7 +3,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const fs = require("fs");
 const path = require("path");
-const { buildRouteResponse } = require("../lib/buildRoute");
+const { buildRouteResponse, buildCorridorResponse } = require("../lib/buildRoute");
 const { isSellable } = require("../../admin/lib/restrictionOrigin");
 const { decode } = require("../../admin/lib/polyline");
 
@@ -371,7 +371,8 @@ test("管理の窓口を載せていない", () => {
   const routes = [...server.matchAll(/app\.(get|post|put|delete)\("([^"]+)"/g)].map((m) => m[2]);
   // ⚠️ `/v1/snap` はアプリの「なぞる」が使う（道路に載せるだけ。管理の窓口ではない）
   // ⚠️ `/v1/sapa` はアプリの SA/PA の一覧が使う（経路から寄れる SA/PA を返すだけ。`docs/sapa-plan.md`）
-  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/route", "/v1/sapa", "/v1/snap"],
+  // ⚠️ `/v1/route/corridors` はアプリの「別の道筋を探す」が使う（経路を返すだけ。2026-09-28）
+  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/route", "/v1/route/corridors", "/v1/sapa", "/v1/snap"],
     `余計な窓口が載っている: ${routes.join(", ")}`);
 });
 
@@ -697,4 +698,51 @@ test("ETC車載器なし（etc: false）なら、スマートICを通らない�
   const 車載器あり = await buildRouteResponse(
     { from: KAMISATO_FROM, to: TANIGAWA, displacement: "large", guidance: false, etc: "false" }, { baseUrl: BASE });
   assert.ok(used(車載器あり).some((n) => /上里/.test(n)), "false 以外の値でスマートICを避けた");
+});
+
+// MARK: 道筋の違う候補（アプリの「別の道筋を探す」。利用者の判断 2026-09-28）
+
+const AKAGI = [139.184589, 36.548285];   // 赤城大沼
+const NOBIDOME = [139.573984, 35.796818]; // 新座・野火止
+
+test("道筋違い: 両端が無ければ断り、立ち寄り先があれば探さずに空で返す", async () => {
+  assert.strictEqual((await buildCorridorResponse({ from: TOKYO }, {})).status, 400, "両端が無いのに通した");
+  let called = 0;
+  const out = await buildCorridorResponse({ from: TOKYO, to: HAKONE, vias: [[139.4, 35.4]] },
+    { routeFn: async () => { called++; return {}; }, locateFn: async () => null });
+  assert.strictEqual(out.status, 200);
+  assert.deepStrictEqual(out.body.routes, [], "立ち寄り先があるのに探した");
+  assert.strictEqual(out.body.skipped, "stops");
+  assert.strictEqual(called, 0, "立ち寄り先があるのに Valhalla を引いた");
+});
+
+test("道筋違い: 本命が引けなければ 502・本命は代替を頼まない", async () => {
+  const seen = [];
+  const out = await buildCorridorResponse({ from: TOKYO, to: HAKONE, alternates: 2 },
+    { routeFn: async (f, t, o) => { seen.push(o); return { error: "No path" }; }, locateFn: async () => null });
+  assert.strictEqual(out.status, 502);
+  assert.strictEqual(out.body.error, "No path");
+  assert.strictEqual(seen[0].alternates, 0, "本命に Valhalla の代替まで頼んだ（使わないのに遅くなる）");
+});
+
+test("道筋違い: /v1/route と同じ形・出典つきで返す（赤城大沼→新座・251cc以上）", async (t) => {
+  if (await skipIfDown(t)) return;
+  const body = { from: AKAGI, to: NOBIDOME, displacement: "large", avoidTolls: true, avoidHighways: true, arriveOnNearSide: true };
+  const out = await buildCorridorResponse(body, { baseUrl: BASE });
+  assert.strictEqual(out.status, 200, out.body.error);
+  assert.ok(out.body.routes.length >= 1, "道筋違いが1本も無い");
+  const plain = await buildRouteResponse({ ...body, guidance: false }, { baseUrl: BASE });
+  assert.deepStrictEqual(Object.keys(out.body.routes[0]).sort(), Object.keys(plain.body.route).sort(),
+    "/v1/route の経路と形が違う（アプリが読めない）");
+  assert.ok(decode(out.body.routes[0].polyline).length > 100, "線が読めない");
+  assert.ok(/OpenStreetMap contributors/.test((out.body.attribution || []).join("\n")), "出典が無い");
+});
+
+test("道筋違い: 窓口は認証つきで、アプリと同じ規制で引く", () => {
+  const server = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
+  const at = server.indexOf('app.post("/v1/route/corridors", requireAuth,');
+  assert.ok(at > 0, "認証つきの窓口が無い");
+  const body = server.slice(at, server.indexOf("\n});", at));
+  assert.ok(body.includes("buildCorridorResponse(req.body || {}, {"), "道筋違いの組み立てを使っていない");
+  assert.ok(body.includes("baseUrl: VALHALLA_URL, restrictionsFor: restrictionsForRoute,"), "アプリと同じ規制で引いていない");
 });

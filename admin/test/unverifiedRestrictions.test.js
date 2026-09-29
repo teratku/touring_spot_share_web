@@ -44,15 +44,16 @@ test("既定では未確認を混ぜない", () => {
   const server = fs.readFileSync(path.join(__dirname, "..", "server.js"), "utf8");
   assert.ok(/if \(!opts\.includeUnverified\) continue;/.test(server),
     "旗が無くても候補を読んでいる");
-  // 4つの窓口すべてが、避ける規制の範囲を通す（2026-09-27 から範囲で選ぶ。`restrictionsForScope`。
-  // 4つ目は引き直しを試す窓口 /api/valhalla/reroute）
+  // 6つの窓口すべてが、避ける規制の範囲を通す（2026-09-27 から範囲で選ぶ。`restrictionsForScope`。
+  // 4つ目は引き直しを試す窓口 /api/valhalla/reroute・5つ目は別の道筋 /api/valhalla/corridors・
+  // 6つ目は排気量で走れるか /api/valhalla/passability。2026-09-28）
   const wired = (server.match(/restrictionsForScope\(restrictionScope, includeUnverified\)/g) || []).length;
-  assert.strictEqual(wired, 4, `範囲を通している窓口が ${wired} 個（4個のはず）`);
+  assert.strictEqual(wired, 6, `範囲を通している窓口が ${wired} 個（6個のはず）`);
   // 受け取っていない窓口があると、実行時に落ちる
   // ⚠️ **並びの最後だと決めつけないこと。** `includeUnverified` の後ろに
   //    `stopAt` を足したとたん 3個が 0個に見え、直っているのに落ちた
   const got = (server.match(/includeUnverified, restrictionScope[^}]*\} = req\.body/g) || []).length;
-  assert.strictEqual(got, 4, `範囲を受け取っている窓口が ${got} 個（4個のはず）`);
+  assert.strictEqual(got, 6, `範囲を受け取っている窓口が ${got} 個（6個のはず）`);
   // ⚠️ 範囲から旗を作るのは `lib/restrictionScope.js` だけ（下の検査で動きを確かめる）
   assert.ok(server.includes("const flags = restrictionScopeOptions(scope, includeUnverified);"),
     "範囲の読み方を窓口ごとに持っている");

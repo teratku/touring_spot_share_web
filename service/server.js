@@ -31,7 +31,7 @@ const admin = require("firebase-admin");
 const { isSellable } = require("../admin/lib/restrictionOrigin");
 const { PrefectureLocator } = require("../admin/lib/prefectureLocator");
 const { ROMAJI } = require("../admin/lib/prefectureRomaji");
-const { buildRouteResponse } = require("./lib/buildRoute");
+const { buildRouteResponse, buildCorridorResponse } = require("./lib/buildRoute");
 const { buildSnapResponse } = require("./lib/snapRoads");
 const { buildSapaResponse } = require("./lib/sapa");
 
@@ -141,6 +141,17 @@ app.get("/health", (_req, res) => res.json({ ok: true }));
  */
 app.post("/v1/route", requireAuth, async (req, res) => {
   const out = await buildRouteResponse(req.body || {}, {
+    baseUrl: VALHALLA_URL, restrictionsFor: restrictionsForRoute,
+  });
+  res.status(out.status).json(out.body);
+});
+
+/**
+ * 道筋の違う候補（アプリの「別の道筋を探す」。利用者の判断 2026-09-28: 押したときだけ）。
+ * ⚠️ 体は `/v1/route` と同じ。立ち寄り先があるときは空で返す
+ */
+app.post("/v1/route/corridors", requireAuth, async (req, res) => {
+  const out = await buildCorridorResponse(req.body || {}, {
     baseUrl: VALHALLA_URL, restrictionsFor: restrictionsForRoute,
   });
   res.status(out.status).json(out.body);

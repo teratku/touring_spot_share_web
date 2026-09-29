@@ -175,6 +175,7 @@ function pageTuning(settings, inputs) {
   const src = [
     grab(/const TUNE_VARIANTS = [^\n]+/),
     grab(/const TUNE_WEIGHTS = [^\n]+/),
+    grab(/const TUNE_SECONDS = [^\n]+/),
     grab(/function tuneValue\(id\) \{[\s\S]*?\n\}/),
     grab(/function tuneLadder\(\) \{[\s\S]*?\n\}/),
     grab(/function tuningBody\(\) \{[\s\S]*?\n\}/),
@@ -216,6 +217,51 @@ test("画面: 変えていなければ送らず、変えた欄だけを送る", 
   assert.deepStrictEqual(pageTuning(large, { ...base, "tune-ladder": { value: "0.7, 0.4, 0" } }), { highwayLadder: [0.7, 0.4, 0] });
 });
 
+// MARK: 126cc以上の生活道路と幹線（利用者の要望 2026-09-28）
+
+/*
+ * ⚠️ 利用者の要望（2026-09-28）:「126cc以上も生活道路と幹線道路の重みを変えてみたい」。
+ *    126cc以上（motorcycle）に use_primary は効かない。効くのは最高速度（下げると県道・生活道路寄り）と
+ *    曲がる手間（maneuver_penalty・上げると幹線寄り。既定5秒）
+ */
+
+test("曲がる手間（秒）を受け取り、範囲の外は捨て、変えた案だけに重なる", () => {
+  assert.deepStrictEqual(sanitizeTuning({ variants: { normal: { maneuver_penalty: 60 } } }),
+    { variants: { normal: { maneuver_penalty: 60 } } }, "曲がる手間を受け取らない");
+  assert.deepStrictEqual(sanitizeTuning({ variants: { normal: { maneuver_penalty: 12.6 } } }),
+    { variants: { normal: { maneuver_penalty: 13 } } }, "秒を丸めていない");
+  assert.deepStrictEqual(sanitizeTuning({ variants: { fun: { maneuver_penalty: null } } }),
+    { variants: { fun: { maneuver_penalty: null } } }, "「渡さない」を受け取れない");
+  assert.strictEqual(sanitizeTuning({ variants: { normal: { maneuver_penalty: -1 } } }), null, "負の秒を通した");
+  assert.strictEqual(sanitizeTuning({ variants: { normal: { maneuver_penalty: 301 } } }), null, "300秒を超えて通した");
+  assert.strictEqual(sanitizeTuning({ variants: { normal: { maneuver_penalty: "60" } } }), null, "文字を通した");
+  const tuning = sanitizeTuning({ variants: { normal: { maneuver_penalty: 60 } } });
+  assert.strictEqual(costingOptionsFor({ variant: "normal", displacement: "large", tuning }).variantOptions.maneuver_penalty, 60,
+    "変えた案に渡していない");
+  assert.strictEqual(costingOptionsFor({ variant: "fun", displacement: "large", tuning }).variantOptions.maneuver_penalty, undefined,
+    "変えていない案にも渡した");
+});
+
+test("画面: 126cc以上は幹線の使い方を押せず、曲がる手間を変えて送れる", () => {
+  const html = read("public", "valhalla.html");
+  assert.ok(html.includes('const useless = key === "use_primary" && !scooter;'), "126cc以上でも幹線の使い方を押せる（効かない）");
+  assert.ok(html.includes(': useless ? "disabled title=\\"126cc以上（motorcycle）では効かない\\"" : ""'), "効かない欄を無効にしていない");
+  assert.ok(/const keys = \[[^\]]*"maneuver_penalty"/.test(html), "引いた案の「渡した値」に曲がる手間が出ない");
+  const large = displacementSettings().large;
+  const base = {
+    "tune-topSpeed": { value: "" }, "tune-ferryWeight": { value: 0.5 },
+    "tune-shortest-use_primary": { value: "", disabled: true }, "tune-normal-use_primary": { value: "", disabled: true },
+    "tune-fun-use_primary": { value: "", disabled: true },
+    "tune-shortest-use_highways": { value: "" }, "tune-normal-use_highways": { value: "" }, "tune-fun-use_highways": { value: 0 },
+    "tune-shortest-maneuver_penalty": { value: "" }, "tune-normal-maneuver_penalty": { value: "" },
+    "tune-fun-maneuver_penalty": { value: "" },
+    "tune-ladder": { value: "0.5, 0.3, 0.15, 0" },
+  };
+  assert.strictEqual(pageTuning(large, base), undefined, "何も変えていないのに曲がる手間を送る");
+  assert.deepStrictEqual(pageTuning(large, { ...base, "tune-normal-maneuver_penalty": { value: 60 } }),
+    { variants: { normal: { maneuver_penalty: 60 } } }, "変えた曲がる手間を送っていない");
+});
+
 // MARK: 実際の経路で
 
 async function up() {
@@ -238,4 +284,22 @@ test("実際の経路: 原付一種の幹線の使い方を上げると幹線を
   assert.strictEqual(plain.costingOptions.use_primary, 0.05, "材料が悪い: 既定が変わった");
   assert.strictEqual(tuned.costingOptions.use_primary, 1, "渡した値に出ていない");
   assert.ok(big(tuned) > big(plain) + 5000, `幹線が増えていない: ${big(plain)}m → ${big(tuned)}m`);
+});
+
+test("実際の経路: 126cc以上は曲がる手間を上げると幹線寄り、最高速度を下げると幹線が減る（Valhalla）", async (t) => {
+  if (!(await up())) return t.skip(`Valhalla が居ない（${BASE}）`);
+  const { routeWithValhalla } = require("../lib/valhallaRoute");
+  const main = (r) => { const c = r.classMeters || {};
+    return ((c.motorway || 0) + (c.trunk || 0) + (c.primary || 0)) / Object.values(c).reduce((a, b) => a + b, 0); };
+  const draw = (from, to, tuning) => routeWithValhalla(from, to,
+    { variant: "normal", displacement: "large", avoidTolls: true, ...(tuning ? { tuning: sanitizeTuning(tuning) } : {}) });
+  // 前橋→草津: 曲がる手間60秒で幹線 92→99%（7区間の実測）
+  const [mb, mt] = [[139.0634, 36.3895], [138.5960, 36.6200]];
+  const plainM = await draw(mb, mt), turnM = await draw(mb, mt, { variants: { normal: { maneuver_penalty: 60 } } });
+  assert.strictEqual(turnM.costingOptions.maneuver_penalty, 60, "渡した値に出ていない");
+  assert.ok(main(turnM) > main(plainM) + 0.03, `曲がる手間で幹線が増えない: ${main(plainM).toFixed(2)} → ${main(turnM).toFixed(2)}`);
+  // 名古屋→犬山: 最高速度40で幹線 97→34%
+  const [nb, nt] = [[136.8815, 35.1709], [136.9440, 35.3880]];
+  const plainN = await draw(nb, nt), slowN = await draw(nb, nt, { topSpeed: 40 });
+  assert.ok(main(slowN) < main(plainN) - 0.2, `最高速度で幹線が減らない: ${main(plainN).toFixed(2)} → ${main(slowN).toFixed(2)}`);
 });

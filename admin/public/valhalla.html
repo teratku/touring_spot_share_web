@@ -61,6 +61,12 @@
   .pt .tag { width:52px; font-size:11px; color:var(--muted); }
   .pt .val { flex:1; font:11px/1.4 ui-monospace,Menlo,monospace; color:#333; }
   .pt .val.empty { color:#b0b6bd; }
+  /* 排気量で走れるか（アプリの札と同じ色分け） */
+  .pass { display:inline-block; font-size:10px; font-weight:600; padding:1px 7px; border-radius:6px; margin-left:4px; }
+  .pass.ok { color:var(--ok, #2b8a3e); background:#ebfbee; }
+  .pass.conditional { color:var(--warn); background:#fff4e6; }
+  .pass.blocked { color:var(--ng); background:#fff5f5; }
+  .pass.wait { color:var(--muted); background:#f4f6f8; }
 
   /* 案 */
   #variants { display:flex; flex-direction:column; }
@@ -146,7 +152,15 @@
       <div class="pt"><span class="tag">始点</span><span class="val empty" id="v-from">まだ</span></div>
       <div class="pt"><span class="tag">終点</span><span class="val empty" id="v-to">まだ</span></div>
       <div class="pt"><span class="tag">経由</span><span class="val empty" id="v-via">なし</span></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px">
+        <button id="swapTrip" type="button" disabled title="アプリと同じく並びをまるごと逆にする（始点→経由→終点 ⇒ 終点→経由を逆順→始点）">⇄ 入れ替え</button>
+        <button id="hereFrom" type="button">現在地を始点に</button>
+        <button id="hereTo" type="button">現在地を終点に</button>
+        <span id="hereNote" class="hint" style="margin:0"></span>
+      </div>
       <p class="hint">1回目＝始点、2回目＝終点、3回目以降＝経由地。<kbd>右クリック</kbd>で全部消す。<br>
+        <strong>現在地</strong>にした端は、<strong>引くたびに現在地を取り直す</strong>（アプリと同じ。30秒より古い位置は使わない）。
+        「入れ替え」は並びをまるごと逆にする（手で足したおすすめ道路も逆向きに走る）。<br>
         経由地の丸をクリックすると<strong>立ち寄る（塗り）／通るだけ（白抜き）</strong>が切り替わる。
         既定は立ち寄る（アプリの立ち寄り先と同じ。着いたら区間が分かれる）。切り替えたら引き直すこと。</p>
     </div>
@@ -242,7 +256,9 @@
         <select id="pref"><option value="">県を選んで手で足す…</option></select>
         <select id="road" disabled><option value="">道を選ぶ…</option></select>
       </div>
-      <p class="hint">手で足した道も、自動で選んだぶんと一緒に通る。</p>
+      <div id="manualRoads"></div>
+      <p class="hint">手で足した道も、自動で選んだぶんと一緒に通る。
+        選んだ道には<strong>いまの排気量で走れるか</strong>を出す（アプリと同じ判定。登録済みの規制だけで見る）。</p>
     </div>
 
     <div id="picked" class="bar" hidden>
@@ -331,12 +347,18 @@
           空欄（「なし」）は渡さない（Valhalla の既定）。<br>
           ⚠️ 125cc以下の高速（<code>use_highways</code>）は法令で0に固定。「高速回避」「有料回避」のチェックもこの数値より後に効く。<br>
           ⚠️ <code>use_primary</code> が効くのは原付（<code>motor_scooter</code>）だけ。軽二輪・大型（<code>motorcycle</code>）では
-          8通り試して経路が1mも変わらなかった。<br>
+          8通り試して経路が1mも変わらなかった（欄は押せない）。軽二輪・大型で生活道路と幹線の割合を動かすなら、
+          <strong>最高速度</strong>（下げると県道・生活道路寄り）と<strong>曲がる手間</strong>（<code>maneuver_penalty</code>・上げると幹線寄り。既定5秒）。
+          7区間の実測: 幹線 既定93% → 最高速度60で87%・40で71%／曲がる手間60秒で95%。区間によっては逆に動く（川越→所沢は最高速度40で幹線73→92%）。<br>
           ⚠️ 船の重みは「フェリーに乗ってよい」を付けたときだけ効く。高速を避ける段は、軽二輪・大型で高速を外すとき
           （高速回避・楽しい案）に緩い方から試して、高速が混ざらない一番ゆるい値を採る。<br>
           案ごとの「渡した値」は、引いたあと下の案の一覧に出る。</p>
       </div>
-      <div style="margin-top:8px"><button class="go" id="run" disabled>引く</button></div>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <button class="go" id="run" disabled>引く</button>
+        <button id="corridorRun" disabled title="アプリの「別の道筋を探す」と同じ。本命の中ほど〜後半から横へずらした幹線の点を通して、後半まで別の道を走る案を最大2本探す（立ち寄り先があるときは探さない）">別の道筋を探す</button>
+        <span id="corridorNote" class="note"></span>
+      </div>
     </div>
 
     <div class="bar" style="font-size:11px;color:var(--muted)">
@@ -505,6 +527,8 @@ const PLAIN = [
   { key:"normal",   label:"ふつう", color:"#1c7ed6", alternates:2 },
 ];
 const ALT_COLORS = ["#4dabf7", "#a5d8ff"];
+/** 道筋違い（「別の道筋を探す」）の色 */
+const CORRIDOR_COLORS = ["#e8590c", "#f08c00"];
 /* ⚠️ 案の色は**まわり方**で決める。kind は "side:north" のようにサーバが付ける
       （lib/funRouteSelect.js の buildSideVariants）。
       同じ顔ぶれの方角はまとめられるので、先頭の方角の色を使う。 */
@@ -554,6 +578,8 @@ const state = {
   from:null, to:null, vias:[],
   viaStops:[],         // 経由地ごとに立ち寄るか（false＝通るだけ）。⚠️ 既定は立ち寄る（アプリの立ち寄り先と同じ）
   roads:{},            // 手で足せるおすすめ道路（番号 → 区間）
+  manualRoads:[],      // 手で足した道（{ name, polyline }）。走れるかを出すため
+  fromHere:false, toHere:false,   // 現在地にした端か。⚠️ 引くたびに取り直す
   variants:[],         // 出せた案（最短・ふつう・楽しい◯通り）を並び順に
   results:{},          // key → 応答 or {error}
   selected:"normal",
@@ -587,8 +613,8 @@ window.initMap = initMap;
 
 
 function addPoint(p) {
-  if (!state.from) state.from = p;
-  else if (!state.to) state.to = p;
+  if (!state.from) { state.from = p; state.fromHere = false; }
+  else if (!state.to) { state.to = p; state.toHere = false; }
   else { state.vias.push(p); state.viaStops.push(true); }
   redrawMarkers();
   renderPoints();
@@ -596,8 +622,16 @@ function addPoint(p) {
 
 function clearPoints() {
   state.from = state.to = null;
+  state.fromHere = state.toHere = false;
   state.vias = [];
   state.viaStops = [];
+  state.manualRoads = [];
+  renderManualRoads();
+  forgetResults();
+}
+
+/** 引いた結果だけを消す（地点は残す）。⚠️ 地点を変えたのに前の経路が残って見えないように */
+function forgetResults() {
   state.results = {};
   rrReset();
   redrawMarkers();
@@ -802,6 +836,12 @@ function drawLines() {
 
 async function run() {
   if (!state.from || !state.to) return;
+  // ⚠️ **現在地にした端は、引く前に取り直す**（アプリと同じ。前に取った位置のまま引かない）
+  if (state.fromHere || state.toHere) {
+    try { await refreshHere(); } catch (e) {
+      document.getElementById("hereNote").textContent = `✗ ${e.message}（前の位置のまま引く）`;
+    }
+  }
   // ⚠️ **costing は排気量から決める。** 画面で直接選ばせない
   //    （50cc に motorcycle を渡すと高速に乗る経路が出る）
   const val = (id) => document.getElementById(id).value;
@@ -824,6 +864,8 @@ async function run() {
   // ⚠️ 画面で変えた排気量ごとの数値。変えていなければ送らない（＝アプリと同じ条件）
   const tuning = tuningBody();
   if (tuning) bike.tuning = tuning;
+  // 「別の道筋を探す」は、引いたときと同じ条件で探す
+  state.lastBike = bike;
   state.lastTuning = tuning || null;
   const corridorScale = Number(val("corridor")) || 1;
   const minScore = Number(val("minScore")) || undefined;
@@ -838,7 +880,7 @@ async function run() {
   };
   const wantsFun = funSelection === "app" ? funWeight >= 0.01 : funCount > 0;
   state.funSource = null;
-  document.getElementById("run").disabled = true;
+  document.getElementById("run").disabled = true; document.getElementById("corridorRun").disabled = true;
   state.results = {};
   state.variants = [];
   rrReset();
@@ -942,7 +984,7 @@ async function run() {
     }
   }
 
-  document.getElementById("run").disabled = false;
+  document.getElementById("run").disabled = false; document.getElementById("corridorRun").disabled = false;
   renderVariants();
   drawLines();
   renderSteps();
@@ -972,7 +1014,11 @@ function renderPicked() {
   list.innerHTML = r.funRoads.map((f, i) =>
     `<div class="pt"><span class="tag">${i + 1}本目</span>`
     + `<span class="val">${escapeHtml(f.name)}　`
-    + `${f.lengthKm.toFixed(1)}km・${Math.round(f.score)}点・曲率${Math.round(f.curviness)}</span></div>`).join("");
+    + `${f.lengthKm.toFixed(1)}km・${Math.round(f.score)}点・曲率${Math.round(f.curviness)}`
+    + `<span class="pass wait" data-pass="${i}">走れるか確かめています…</span></span></div>`).join("");
+  // ⚠️ **通した道は走れるかを必ず出す**（利用者の要望 2026-09-28。引いたときの排気量で見る）
+  fillPassability(list, r.funRoads.map((f, i) => ({ key:String(i), polyline:f.polyline })),
+                  (state.lastBike || {}).displacement, (state.lastBike || {}).restrictionScope);
   const p = r.funPick || {};
   const notes = [];
   // ⚠️ **候補が無かった方角も出す。** 黙って消すと「北まわりが出ない」のか
@@ -1014,12 +1060,16 @@ function renderPoints() {
     el.textContent = text || "まだ";
     el.classList.toggle("empty", !text);
   };
-  set("v-from", fmt(state.from));
-  set("v-to", fmt(state.to));
+  const here = (on) => on ? "（現在地）" : "";
+  set("v-from", state.from ? fmt(state.from) + here(state.fromHere) : null);
+  set("v-to", state.to ? fmt(state.to) + here(state.toHere) : null);
+  document.getElementById("swapTrip").disabled = !(state.from && state.to);
   const stops = state.viaStops.filter((x) => x !== false).length;
   const via = state.vias.length ? `${state.vias.length}点（立ち寄る${stops}・通るだけ${state.vias.length - stops}）` : null;
   set("v-via", via);
   document.getElementById("run").disabled = !(state.from && state.to);
+  // ⚠️ 地点が変わったら、引き直すまで探させない（前の条件で探すことになる）
+  document.getElementById("corridorRun").disabled = true;
 }
 
 function renderVariants() {
@@ -1439,8 +1489,10 @@ document.getElementById("road").onchange = (e) => {
   if (!s) return;
   // ⚠️ start / end は [緯度, 経度]。この画面は [経度, 緯度] で通しているので入れ替える
   state.vias.push([s.start[1], s.start[0]], [s.end[1], s.end[0]]);
+  state.manualRoads.push({ name:s.name, polyline:s.polyline });
   redrawMarkers();
   renderPoints();
+  renderManualRoads();
 };
 
 // MARK: Valhalla が居るか
@@ -1526,6 +1578,8 @@ function renderFunSource() {
 const tune = { settings:null };
 const TUNE_VARIANTS = [["shortest", "最短"], ["normal", "ふつう"], ["fun", "楽しい"]];
 const TUNE_WEIGHTS = [["use_primary", "幹線の使い方"], ["use_highways", "高速の使い方"]];
+/** 案ごとの秒数（`lib/costingTuning.js` の SECONDS_KEYS と同じ） */
+const TUNE_SECONDS = [["maneuver_penalty", "曲がる手間"]];
 
 async function loadTuning() {
   try {
@@ -1553,9 +1607,18 @@ function renderTuning() {
   for (const [key, label] of TUNE_WEIGHTS) {
     // ⚠️ 125cc以下の高速は法令で0に固定（画面では緩められない）
     const locked = key === "use_highways" && !d.canUseExpressway;
+    // ⚠️ 126cc以上（motorcycle）に use_primary は効かない（押せても何も変わらない）
+    const useless = key === "use_primary" && !scooter;
     rows.push(`<tr><td class="label">${label}<span class="key">${key}</span></td>`
       + TUNE_VARIANTS.map(([v]) => `<td>${input(`tune-${v}-${key}`, (d.variants[v] || {})[key],
-          locked ? "disabled title=\"125cc以下は法令で0\"" : "")}</td>`).join("") + `</tr>`);
+          locked ? "disabled title=\"125cc以下は法令で0\""
+          : useless ? "disabled title=\"126cc以上（motorcycle）では効かない\"" : "")}</td>`).join("") + `</tr>`);
+  }
+  for (const [key, label] of TUNE_SECONDS) {
+    rows.push(`<tr><td class="label">${label}<span class="key">${key} 秒</span></td>`
+      + TUNE_VARIANTS.map(([v]) => `<td><input type="number" step="5" min="0" max="300" id="tune-${v}-${key}" `
+          + `value="${fmtNum((d.variants[v] || {})[key])}" placeholder="なし（既定5）" title="空欄＝渡さない（Valhalla の既定5秒）"></td>`).join("")
+      + `</tr>`);
   }
   rows.push(`<tr><td class="label">船の重み<span class="key">use_ferry</span></td><td colspan="3">`
     + input("tune-ferryWeight", d.ferryWeight) + ` <span class="note">「フェリーに乗ってよい」のときだけ</span></td></tr>`);
@@ -1564,8 +1627,10 @@ function renderTuning() {
       ? `<input type="text" class="wide" id="tune-ladder" value="${d.highwayLadder.join(", ")}">`
       : `<span class="note">—（原付は高速に乗らない）</span>`) + `</td></tr>`);
   table.innerHTML = rows.join("");
+  // ⚠️ 126cc以上は use_primary が効かない。効くつまみの目安を出す（7区間の実測）
   document.getElementById("tuneCosting").textContent =
-    `costing: ${d.costing}` + (scooter ? "" : "（use_primary は効かない）");
+    `costing: ${d.costing}` + (scooter ? "" : "（幹線の使い方は効かない。最高速度を下げると県道・生活道路寄り〈40で幹線93→71%〉、"
+      + "曲がる手間を上げると幹線寄り〈60秒で93→95%〉）");
   table.querySelectorAll("input").forEach((el) => { el.oninput = markTuning; });
   markTuning();
 }
@@ -1602,7 +1667,7 @@ function tuningBody() {
   const ferry = tuneValue("tune-ferryWeight");
   if (ferry !== null && differs(ferry, d.ferryWeight)) { out.ferryWeight = ferry; mark.push("tune-ferryWeight"); }
   for (const [v] of TUNE_VARIANTS) {
-    for (const [key] of TUNE_WEIGHTS) {
+    for (const [key] of [...TUNE_WEIGHTS, ...TUNE_SECONDS]) {
       const id = `tune-${v}-${key}`;
       const now = tuneValue(id);
       if (!differs(now, (d.variants[v] || {})[key])) continue;
@@ -1641,7 +1706,7 @@ function tuningTouches(t, variant) {
 
 /** 引いた案で実際に渡した値（`costingOptions`）を短く並べる */
 function usedText(o) {
-  const keys = ["top_speed", "use_primary", "use_highways", "use_tolls", "shortest", "use_ferry"];
+  const keys = ["top_speed", "use_primary", "use_highways", "maneuver_penalty", "use_tolls", "shortest", "use_ferry"];
   return keys.filter((k) => o[k] !== undefined).map((k) => `${k} ${o[k]}`).join("・") || "既定のまま";
 }
 
@@ -1927,6 +1992,130 @@ function rrShow(out, legs) {
   driveReset();
 }
 
+// MARK: 別の道筋を探す（アプリと同じ。利用者の判断 2026-09-28: 押したときだけ探す）
+
+async function corridorRun() {
+  const note = document.getElementById("corridorNote");
+  const button = document.getElementById("corridorRun");
+  if (!state.from || !state.to || !state.lastBike) return;
+  if (state.vias.length) { note.textContent = "立ち寄り先があるときは探さない（アプリと同じ）"; return; }
+  button.disabled = true;
+  note.textContent = "探しています…";
+  const began = performance.now();
+  let out;
+  try {
+    const res = await fetch("/api/valhalla/corridors", { method:"POST", headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify({ from:state.from, to:state.to, vias:[], variant:"normal", ...state.lastBike }) });
+    out = await res.json();
+  } catch (e) { out = { error:e.message }; }
+  button.disabled = false;
+  if (out.error) { note.textContent = `✗ ${out.error}`; return; }
+  // 前に探したぶんは消して並べ直す
+  state.variants = state.variants.filter((v) => !v.key.startsWith("corridor:"));
+  for (const k of Object.keys(state.results)) if (k.startsWith("corridor:")) delete state.results[k];
+  (out.routes || []).forEach((r, i) => {
+    const key = `corridor:${i + 1}`;
+    state.results[key] = r;
+    const c = r.corridor || {};
+    state.variants.push({ key, color:CORRIDOR_COLORS[i % CORRIDOR_COLORS.length],
+      label:`道筋違い${i + 1}（+${Math.round(100 * ((c.timeRatio || 1) - 1))}%・本命の${Math.round(100 * (c.awayEndShare || 0))}%まで別の道）` });
+  });
+  note.textContent = `${(out.routes || []).length}本（${out.tried ?? 0}通り試した・${Math.round(performance.now() - began)}ms）`;
+  renderVariants(); drawLines();
+}
+
+// MARK: 並びの入れ替え・現在地（アプリの NavTripOrder と同じ考え方）
+
+/**
+ * 並びをまるごと逆にする（始点→経由→終点 ⇒ 終点→経由を逆順→始点）。
+ * ⚠️ 利用者の判断（2026-09-28）: アプリと同じく**まるごと逆**。手で足したおすすめ道路（入口・出口の対）も
+ *    逆向きに走ることになる。立ち寄る／通るだけの印も一緒に並べ替える
+ */
+function swapTrip() {
+  if (!state.from || !state.to) return;
+  // ⚠️ 手で足した道は印を積まずに入るので、先に長さを揃えてから逆にする
+  const stops = state.vias.map((_, i) => state.viaStops[i] !== false);
+  [state.from, state.to] = [state.to, state.from];
+  [state.fromHere, state.toHere] = [state.toHere, state.fromHere];
+  state.vias.reverse();
+  state.viaStops = stops.reverse();
+  forgetResults();
+}
+
+/** いまの現在地（[経度, 緯度]）。⚠️ 30秒より古い位置は使わない（アプリの `freshLocationMaxAge`） */
+function locateHere() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) { reject(new Error("このブラウザでは現在地を取れません")); return; }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => resolve([pos.coords.longitude, pos.coords.latitude]),
+      (err) => reject(new Error(err.code === 1 ? "位置情報が許可されていません" : "現在地を取れませんでした")),
+      { enableHighAccuracy:true, timeout:10_000, maximumAge:30_000 });
+  });
+}
+
+async function setHere(end) {
+  const note = document.getElementById("hereNote");
+  note.textContent = "現在地を取っています…";
+  try {
+    const p = await locateHere();
+    if (end === "from") { state.from = p; state.fromHere = true; } else { state.to = p; state.toHere = true; }
+    note.textContent = "";
+    forgetResults();
+  } catch (e) { note.textContent = `✗ ${e.message}`; }
+}
+
+/** 現在地にした端を取り直す（引く直前） */
+async function refreshHere() {
+  const p = await locateHere();
+  if (state.fromHere) state.from = p;
+  if (state.toHere) state.to = p;
+  redrawMarkers();
+  renderPoints();
+}
+
+// MARK: 排気量で走れるか（アプリの RoadPassability と同じ判定。`lib/roadPassability.js`）
+
+/** 同じ道・同じ条件は聞き直さない（表示のたびに問い合わせない） */
+const passCache = new Map();
+
+/**
+ * `box` の中の `[data-pass=key]` に札を入れる。
+ * ⚠️ **確かめられないときに「走れます」と出さないこと。** 形が無い・通信に失敗したら、そう書く
+ */
+async function fillPassability(box, roads, displacement, scope) {
+  const want = roads.filter((r) => r.polyline && !passCache.has(`${displacement}|${scope}|${r.polyline}`));
+  if (want.length) {
+    try {
+      const res = await fetch("/api/valhalla/passability", { method:"POST", headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({ roads:want, displacement, restrictionScope:scope }) });
+      const out = await res.json();
+      for (const x of out.results || []) {
+        const road = want.find((r) => r.key === x.key);
+        if (road && !x.error) passCache.set(`${displacement}|${scope}|${road.polyline}`, x);
+      }
+    } catch (e) { /* 下で「確かめられませんでした」と出す */ }
+  }
+  for (const r of roads) {
+    const el = box.querySelector(`[data-pass="${r.key}"]`);
+    if (!el) continue;
+    const x = r.polyline ? passCache.get(`${displacement}|${scope}|${r.polyline}`) : null;
+    el.className = `pass ${x ? x.verdict : "wait"}`;
+    el.textContent = x ? x.label : "走れるか確かめられませんでした";
+    el.title = x ? `見た県: ${(x.prefectures || []).join("・") || "なし"}` : "";
+  }
+}
+
+/** 手で足した道と、いまの排気量で走れるか */
+function renderManualRoads() {
+  const box = document.getElementById("manualRoads");
+  if (!state.manualRoads.length) { box.innerHTML = ""; return; }
+  box.innerHTML = state.manualRoads.map((m, i) =>
+    `<div class="pt"><span class="tag">手で${i + 1}</span><span class="val">${escapeHtml(m.name)}`
+    + `<span class="pass wait" data-pass="${i}">走れるか確かめています…</span></span></div>`).join("");
+  fillPassability(box, state.manualRoads.map((m, i) => ({ key:String(i), polyline:m.polyline })),
+                  document.getElementById("displacement").value, document.getElementById("restrictionScope").value);
+}
+
 // MARK: こまごま
 
 const escapeHtml = (s) => String(s).replace(/[&<>"]/g,
@@ -1939,6 +2128,13 @@ document.getElementById("paint").onchange = (e) => {
   drawLines();
 };
 document.getElementById("run").onclick = run;
+document.getElementById("corridorRun").onclick = corridorRun;
+document.getElementById("swapTrip").onclick = swapTrip;
+document.getElementById("hereFrom").onclick = () => setHere("from");
+document.getElementById("hereTo").onclick = () => setHere("to");
+// ⚠️ 排気量・避ける規制を変えたら、手で足した道の札を出し直す（通した道は引いたときの条件のまま）
+document.getElementById("displacement").addEventListener("change", renderManualRoads);
+document.getElementById("restrictionScope").addEventListener("change", renderManualRoads);
 document.getElementById("rawKind").onchange = showRaw;
 document.getElementById("rrPlace").onclick = () => rrSetPlacing(!rr.placing);
 document.getElementById("funSelection").onchange = syncFunControls;

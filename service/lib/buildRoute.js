@@ -21,6 +21,8 @@ const { normalized: normalizedAnnounce } = require("../../admin/lib/navGuide");
 const { ATTRIBUTION } = require("../../admin/lib/restrictionOrigin");
 const { encode: encodePolyline } = require("../../admin/lib/polyline");
 const { toAppManeuver } = require("../../admin/lib/navManeuver");
+const { corridorAlternates, makeLocate } = require("../../admin/lib/corridorAlternates");
+const { BASE: DEFAULT_VALHALLA } = require("../../admin/lib/valhallaRoute");
 
 /**
  * @param {object} body    受け取った依頼
@@ -240,4 +242,46 @@ async function buildRouteResponse(body, deps = {}) {
   };
 }
 
-module.exports = { buildRouteResponse, routeOptionsFromBody };
+/**
+ * **道筋の違う候補**（アプリの「別の道筋を探す」）。`/v1/route` と同じ体で受け、同じ形の経路を返す。
+ *
+ * ⚠️ 利用者の判断（2026-09-28）: 押したときだけ探す（最初の候補の表示は今の速さのまま）。
+ *    作り方は `admin/lib/corridorAlternates.js`（本命の中ほど〜後半から横へずらした幹線の点を通す）。
+ * ⚠️ **立ち寄り先があるときは探さない**（空で返す。区間ごとに道筋を変えると組み合わせが増える）。
+ * ⚠️ Valhalla を十数回引く（4本ずつ同時に）。手元で1〜6秒
+ * @param deps.routeFn / deps.locateFn 差し替え用（テスト）。渡さなければ本物
+ */
+async function buildCorridorResponse(body, deps = {}) {
+  const { from, to } = body || {};
+  const opts = routeOptionsFromBody(body, deps);
+  if (!opts) {
+    return { status: 400, body: { error: "from / to は [経度, 緯度] で要ります" } };
+  }
+  if ((opts.vias || []).length) {
+    return { status: 200, body: { routes: [], skipped: "stops", attribution: ATTRIBUTION } };
+  }
+  let out;
+  try {
+    out = await corridorAlternates(from, to, { ...opts, alternates: 0 }, {
+      routeFn: deps.routeFn || routeWithValhallaSegmented,
+      locateFn: deps.locateFn || makeLocate(opts.baseUrl || DEFAULT_VALHALLA),
+    });
+  } catch (e) {
+    return { status: 500, body: { error: e.message } };
+  }
+  if (!out.main || out.main.error) {
+    return { status: 502, body: { error: (out.main && out.main.error) || "経路が引けません" } };
+  }
+  return {
+    status: 200,
+    body: {
+      // ⚠️ `/v1/route` の `route` と同じ形（アプリは同じ読み方で候補にする）
+      routes: out.alternates.map((a) => toAppRoute(a.route)),
+      tried: out.tried,
+      // ⚠️ **消さないこと。** OSM の ODbL と JARTIC の規約が求めている
+      attribution: ATTRIBUTION,
+    },
+  };
+}
+
+module.exports = { buildRouteResponse, buildCorridorResponse, routeOptionsFromBody };

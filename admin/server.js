@@ -32,6 +32,8 @@ const publishLog = require("./lib/publishLog");
 const { roadsAtPoint, GRID_DIR } = require("./lib/roadsAtPoint");
 const { routeBetween } = require("./lib/roadRoute");
 const { routeWithValhalla, displacementSettings, BASE: VALHALLA_URL } = require("./lib/valhallaRoute");
+const { corridorAlternates, makeLocate } = require("./lib/corridorAlternates");
+const roadPassability = require("./lib/roadPassability");
 // ⚠️ **経路の条件はアプリの配信API（route-api）と同じ関数で作る**（利用者の要望 2026-09-27:
 //    Web とアプリのルート生成が同じ条件になるか確認したい）。画面で別に組むと既定がずれる
 const { routeOptionsFromBody } = require("../service/lib/buildRoute");
@@ -719,6 +721,59 @@ app.post("/api/valhalla/route", async (req, res) => {
 });
 
 /**
+ * **道筋の違う候補**（アプリの「別の道筋を探す」と同じ。`lib/corridorAlternates.js`）。
+ * ⚠️ 利用者の判断（2026-09-28）: アプリでは押したときだけ探す。画面でも同じく押したときだけ
+ * ⚠️ 条件は `/api/valhalla/route` と同じ（アプリと同じ関数・避ける規制の範囲・画面で変えた数値）。
+ *    立ち寄り先があるときは探さない（配信APIと同じ）
+ */
+app.post("/api/valhalla/corridors", async (req, res) => {
+  const { includeUnverified, restrictionScope } = req.body || {};
+  const opts = routeOptionsFromBody(req.body,
+    { restrictionsFor: restrictionsForScope(restrictionScope, includeUnverified) });
+  if (!opts) return res.status(400).json({ error: "from / to は [経度, 緯度] で要ります" });
+  if ((opts.vias || []).length) return res.json({ routes: [], skipped: "stops" });
+  try {
+    const { from, to } = req.body;
+    const tuning = sanitizeTuning(req.body.tuning);
+    const routeFn = (f, t, o) => routeWithValhallaSegmented(f, t, { ...o, tuning });
+    const out = await corridorAlternates(from, to, { ...opts, alternates: 0 },
+      { routeFn, locateFn: makeLocate(VALHALLA_URL) });
+    if (!out.main || out.main.error) return res.status(502).json(out.main || { error: "経路が引けません" });
+    res.json({
+      tried: out.tried,
+      // ⚠️ どう選んだかも添える（画面で「本命の何%まで別の道か」を出す）
+      routes: out.alternates.map((a) => ({ ...a.route, corridor: {
+        via: a.via, timeRatio: a.timeRatio, overlap: a.overlap, awayMeters: a.awayMeters, awayEndShare: a.awayEndShare,
+      } })),
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+/**
+ * **おすすめ道路を、乗り手の排気量で走れるか**（アプリの札と同じ判定。`lib/roadPassability.js`）。
+ *
+ * ⚠️ 利用者の要望（2026-09-28）:「おすすめ道路を選択、選ばれたときはかならずユーザーの排気量によって
+ *    走れるか否かを表示」「web もルート生成の追加を入れて欲しい」
+ * ⚠️ 規制の範囲は経路と同じ（画面の「避ける規制」。既定はアプリと同じ＝売ってよい出どころだけ）
+ * ⚠️ 県は道の形から決める（道の ID から取らない。県境をまたぐ道は両方の県を読む）
+ */
+app.post("/api/valhalla/passability", (req, res) => {
+  const { includeUnverified, restrictionScope, roads, displacement } = req.body || {};
+  if (!Array.isArray(roads)) return res.status(400).json({ error: "roads（[{ key, polyline }]）が要ります" });
+  const restrictionsFor = restrictionsForScope(restrictionScope, includeUnverified);
+  const results = roads.slice(0, 50).map((road) => {
+    const points = road && road.polyline ? decodePolylineServer(road.polyline) : [];
+    if (points.length < 2) return { key: road && road.key, error: "道の形がありません" };
+    const { restrictions, prefectures } = restrictionsFor(points);
+    const result = roadPassability.evaluate([points], restrictions, displacement);
+    return { key: road.key, ...result, label: roadPassability.label(result, displacement), prefectures };
+  });
+  res.json({ results });
+});
+
+/**
  * 楽しい道を通したルートを、**何通りか**返す。
  *
  * ⚠️ **最短・ふつうと分けてあること。** 同じ口で作ると、最短にまで
@@ -900,6 +955,8 @@ app.post("/api/valhalla/fun-routes", async (req, res) => {
       r.funRoads = refined.picked.segments.map((s) => ({
         id: s.id, name: s.name, lengthKm: s.lengthKm,
         score: s.score, curviness: s.curviness, start: s.start, end: s.end,
+        // ⚠️ **道の形も返す。** 画面が排気量で走れるかを確かめるのに要る（`/api/valhalla/passability`）
+        polyline: s.polyline,
       }));
       r.funPick = {
         // ⚠️ **「県」ではなく「地域」。** 海外では州・県・地方と呼び名が変わる。
