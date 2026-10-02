@@ -502,3 +502,120 @@ test("着く向きを指定できる（最初の経由地へ本命と同じ向�
   assert.ok(diff(seg.endBearing(against.points), 108) < 60, `頼んだ向きで着いていない: ${seg.endBearing(against.points)}`);
   assert.ok(diff(seg.endBearing(along.points), seg.endBearing(against.points)) > 60, "向きを頼んでも着き方が変わらない");
 });
+
+// MARK: 立ち寄り先が複数あるときの行き方違い（利用者の要望 2026-10-01: 複数のスポット選択でもルートの複数生成がやりたい）
+
+const C2 = [139.15, 35.15];
+
+/** 区間ごとの答え（代替つき）。本命は A→V1→B（V1 で立ち寄る） */
+function twoLegs({ leg1Alts = 2, leg2Alts = 2, altSeconds = 650 } = {}) {
+  const mk = (from, to, n, tag) => Array.from({ length: n }, (_, i) =>
+    fakePart([from, [from[0] + 0.03 + i * 0.01, from[1] + 0.05 - i * 0.02], to], { seconds: altSeconds, tag }));
+  const leg1 = fakePart([A, V1], { seconds: 600, alternates: mk(A, V1, leg1Alts) });
+  const leg2 = fakePart([V1, B], { seconds: 600, alternates: mk(V1, B, leg2Alts) });
+  return { leg1, leg2 };
+}
+
+test("立ち寄り先で区切った区間ごとに代替を頼み、j 本目どうし（無ければ本命）をつなぐ", async () => {
+  const main = fakePart([A, V1, B], { seconds: 1200 });
+  const { leg1, leg2 } = twoLegs({ leg2Alts: 1 });
+  const { calls, route } = recorder([leg1, leg2]);
+  const opts = { vias: [V1], stopAt: [0], alternates: 2, arriveOnNearSide: true, heading: 90, headingTolerance: 45 };
+  const out = await seg.withLegAlternates(main, A, B, opts, route);
+  assert.deepStrictEqual(calls.map((c) => [c.from, c.to]), [[A, V1], [V1, B]], "立ち寄り先で区切っていない");
+  assert.ok(calls.every((c) => c.opts.alternates === 2 && c.opts.vias.length === 0), "区間ごとに代替を頼んでいない");
+  assert.deepStrictEqual(calls.map((c) => c.opts.arriveOnNearSide), [false, true], "立ち寄り先で着く側に寄せている");
+  assert.deepStrictEqual([calls[0].opts.heading, calls[1].opts.heading], [90, undefined], "出発の向きを2区間目にも当てた");
+  assert.strictEqual(out.steps, main.steps, "本命を差し替えた");
+  assert.strictEqual(out.alternates.length, 2);
+  // 1本目は両区間の1本目、2本目は1区間目の2本目＋2区間目の本命
+  assert.deepStrictEqual(out.alternates[0].points, [...leg1.alternates[0].points, ...leg2.alternates[0].points.slice(1)]);
+  assert.deepStrictEqual(out.alternates[1].points, [...leg1.alternates[1].points, ...leg2.points.slice(1)]);
+  // ⚠️ 立ち寄り先に着いたら区間が分かれる（到着を残す）
+  assert.strictEqual(out.alternates[0].steps.filter((s) => s.maneuver === "arrive").length, 2, "立ち寄り先での到着を消した");
+});
+
+test("おすすめ道路の区間は入口までの行き方違い、終点からは着いた向きのまま出る", async () => {
+  // 本命 A→[入口 V1→終点 V2]→B。V2 は引き返さない立ち寄り先（おすすめ道路の終点）
+  const main = fakePart([A, V1, V2, B], { seconds: 1800 });
+  const roadPart = fakePart([A, V1, V2], { seconds: 900 });
+  const head = fakePart([A, V1], { seconds: 400, alternates: [fakePart([A, C2, V1], { seconds: 450 })] });
+  const tail = fakePart([V1, V2], { seconds: 500 });
+  const lastPart = fakePart([V2, B], { seconds: 900, alternates: [fakePart([V2, [139.25, 35.22], B], { seconds: 950 })] });
+  const { calls, route } = recorder([roadPart, head, tail, lastPart]);
+  const opts = { vias: [V1, V2], viaHeadings: [30, null], stopAt: [1], throughStopAt: [1], alternates: 2 };
+  const out = await seg.withLegAlternates(main, A, B, opts, route);
+  assert.deepStrictEqual(calls.map((c) => [c.from, c.to]), [[A, V2], [A, V1], [V1, V2], [V2, B]]);
+  assert.deepStrictEqual(calls[0].opts.vias, [V1], "道の入口を通していない");
+  assert.strictEqual(calls[1].opts.toHeading, 30, "道の入口へ道なりの向きで着かせていない");
+  // 終点 V2 からは、道を走り終えた向き（V1→V2）のまま出る
+  assert.ok(Number.isFinite(calls[3].opts.heading), "道の終点で折り返させる向きで出発している");
+  assert.strictEqual(out.alternates.length, 1);
+  assert.deepStrictEqual(out.alternates[0].points, [A, C2, V1, V2, [139.25, 35.22], B], "道の中を変えた／つなぎ方が違う");
+});
+
+test("本命よりUターンが多い・1.25倍より遅い・本命とほぼ同じ案は出さない", async () => {
+  const main = fakePart([A, V1, B], { seconds: 1200, uTurns: 0 });
+  assert.deepStrictEqual([seg.LEG_MAX_TIME_RATIO, seg.LEG_SAME_OVERLAP], [1.25, 0.95]);
+  // 遅い（650×2=1300 は通る・900×2=1800 は 1.25倍=1500 を超える）
+  const slow = twoLegs({ altSeconds: 900 });
+  const outSlow = await seg.withLegAlternates(main, A, B, { vias: [V1], stopAt: [0], alternates: 2 }, recorder([slow.leg1, slow.leg2]).route);
+  assert.strictEqual(outSlow.alternates, main.alternates, "1.25倍より遅い案を出した");
+  // Uターンが多い
+  const tangled = twoLegs();
+  // ⚠️ つないだ案のUターンは曲がる指示から数え直される（`uTurns` の値を書き換えても効かない）
+  tangled.leg1.alternates.forEach((alt) => {
+    alt.steps.splice(1, 0, { maneuver: "uturnLeft", valhallaType: 13, beginIndex: 1, endIndex: 1, distanceMeters: 0, durationSeconds: 0, roadKind: "surface" });
+    alt.steps[0].endIndex = 1;
+    alt.steps[1].endIndex = alt.points.length - 1;
+  });
+  tangled.leg2.alternates = [];
+  const outTangled = await seg.withLegAlternates(main, A, B, { vias: [V1], stopAt: [0], alternates: 2 }, recorder([tangled.leg1, tangled.leg2]).route);
+  assert.strictEqual(outTangled.alternates, main.alternates, "Uターンの多い案を出した");
+  // 本命と同じ線
+  const same = { leg1: fakePart([A, V1], { seconds: 600, alternates: [fakePart([A, V1], { seconds: 610 })] }), leg2: fakePart([V1, B], { seconds: 600 }) };
+  const outSame = await seg.withLegAlternates(main, A, B, { vias: [V1], stopAt: [0], alternates: 2 }, recorder([same.leg1, same.leg2]).route);
+  assert.strictEqual(outSame.alternates, main.alternates, "本命と同じ線を別の案として出した");
+});
+
+test("立ち寄り先が無ければ最初の経由地までの行き方違い・区間が引けなければ本命だけ", async () => {
+  const main = fakePart([A, V1, B], { seconds: 1200 });
+  // 立ち寄り先なし（おすすめ道路1本だけ）→ 入口まで＋入口から先の2回
+  const head = fakePart([A, V1], { seconds: 600, alternates: [fakePart([A, C2, V1], { seconds: 650 })] });
+  const tail = fakePart([V1, B], { seconds: 600 });
+  const noStops = recorder([head, tail]);
+  const out = await seg.withLegAlternates(main, A, B, { vias: [V1], alternates: 2 }, noStops.route);
+  assert.deepStrictEqual(noStops.calls.map((c) => [c.from, c.to]), [[A, V1], [V1, B]], "立ち寄り先が無いのに区間で区切った");
+  assert.strictEqual(out.alternates.length, 1);
+  // 2区間目が引けない
+  const broken = recorder([twoLegs().leg1, { error: "No path" }]);
+  const failed = await seg.withLegAlternates(main, A, B, { vias: [V1], stopAt: [0], alternates: 2 }, broken.route);
+  assert.strictEqual(failed, main, "区間が引けないのに本命以外を返した");
+});
+
+test("経路を引く入口（区間ごとの条件がそろっているとき）は、区間ごとの行き方違いを通す", () => {
+  const src = require("fs").readFileSync(require("path").join(__dirname, "..", "lib", "segmentedRoute.js"), "utf8");
+  assert.ok(src.includes("return withLegAlternates(await routeWithValhalla(from, to, rest), from, to, rest);"),
+    "立ち寄り先が複数のときに行き方違いを作っていない");
+});
+
+test("実際の経路: 新座→長野原→渋川→赤城大沼（125cc以下・有料と高速を避ける）で、行き方違いが出る（Valhalla）", async (t) => {
+  const { BASE } = require("../lib/valhallaRoute");
+  try { if (!(await fetch(`${BASE}/status`, { signal: AbortSignal.timeout(2000) })).ok) throw 0; } catch (e) { return t.skip(`Valhalla が居ない（${BASE}）`); }
+  const { routeOptionsFromBody } = require("../../service/lib/buildRoute");
+  const { overlapRatio } = require("../lib/corridorAlternates");
+  // 書き出してもらった経路（ツーリング4・2026-09-28）
+  const from = [139.57398429344204, 35.79681815622602];
+  const vias = [[138.68447833333335, 36.547171666666664], [139.07755, 36.51429]];
+  const to = [139.184589469935, 36.54828517235494];
+  const opts = routeOptionsFromBody({ from, to, vias, stopAt: [0, 1], displacement: "small125", avoidTolls: true,
+    avoidHighways: true, arriveOnNearSide: true, alternates: 2 }, { restrictionsFor: async () => ({ restrictions: [], prefectures: [] }) });
+  const out = await seg.routeWithValhallaSegmented(from, to, opts);
+  assert.ok(!out.error, out.error);
+  assert.ok(out.alternates.length >= 1, "立ち寄り先が複数なのに行き方違いが出ない");
+  for (const alt of out.alternates) {
+    assert.ok(alt.durationSeconds <= out.durationSeconds * 1.25, "本命より大幅に遅い");
+    assert.ok(overlapRatio(alt.points, out.points) < 0.95, "本命と同じ線");
+    assert.strictEqual(alt.steps.filter((s) => s.isLegEnd).length, 3, "立ち寄り先で区間が分かれていない");
+  }
+});

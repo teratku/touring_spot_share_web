@@ -20,6 +20,7 @@
  * ・⚠️ 切り替え地点が**立ち寄り先と重なる**ときは、到着と出発をそのまま残す。
  */
 const { routeWithValhalla } = require("./valhallaRoute");
+const { overlapRatio } = require("./corridorAlternates");
 const { encode } = require("./polyline");
 
 /** 到着の指示（Valhalla の 4/5/6） */
@@ -205,7 +206,7 @@ async function routeWithValhallaSegmented(from, to, opts = {}) {
   // ⚠️ **数が合わなければ区間ごとには引かない。** ずれた条件で引くと、
   //    利用者が避けたい区間で有料・高速に乗せることになる
   if (conditions.length !== vias.length + 1 || !hasMixedConditions(conditions)) {
-    return withHeadAlternates(await routeWithValhalla(from, to, rest), from, to, rest);
+    return withLegAlternates(await routeWithValhalla(from, to, rest), from, to, rest);
   }
   const runs = splitRuns(conditions);
   const stopAt = Array.isArray(opts.stopAt) ? opts.stopAt : [];
@@ -319,7 +320,78 @@ async function withHeadAlternates(main, from, to, opts = {}, route = routeWithVa
 /** つないだ本命（入口まで＋入口から先）が、経由地つきの本命よりこれ以上長ければつながない */
 const TAIL_SLACK = { ratio: 1.2, seconds: 120 };
 
+/**
+ * 立ち寄り先が**複数**ある経路に、**区間ごとの行き方違い**を作って組み合わせた候補を足す。
+ *
+ * ⚠️ 利用者の要望（2026-10-01）:「複数のスポット選択でもルートの複数生成がやりたい」。判断: 区間ごとに作って組み合わせる。
+ *    立ち寄り先で区切った区間ごとに代替を頼み（おすすめ道路の区間は入口までの行き方違い＝`withHeadAlternates`）、
+ *    j 本目の候補は「各区間の j 本目の代替（無ければ本命）」をつなぐ。
+ * ⚠️ 実測（書き出してもらった経路6本×排気量2通り＝16回・手元の Valhalla）:
+ *      16回とも2本出た・所要は本命の0.98〜1.13倍・本命と重ならない部分27〜81%。
+ *      本命よりUターンの多い案が2回あった（落とす）。引く時間は1.5〜2.2倍（Valhalla が3〜9回増える）
+ * ⚠️ **おすすめ道路の中（入口から終点まで）は変えない。** 変えるのは立ち寄り先から次の入口・立ち寄り先までの行き方
+ * ⚠️ 立ち寄り先が無ければ（おすすめ道路1本だけなど）、今までどおり最初の経由地までの行き方違い
+ * @param route 経路を引く関数（検査で差し替える）
+ */
+async function withLegAlternates(main, from, to, opts = {}, route = routeWithValhalla) {
+  const vias = Array.isArray(opts.vias) ? opts.vias : [];
+  const want = Number(opts.alternates) || 0;
+  if (!main || main.error || want <= 0 || !vias.length) return main;
+  if (Array.isArray(main.alternates) && main.alternates.length) return main;
+  const stopAt = Array.isArray(opts.stopAt) ? opts.stopAt : [];
+  const stops = [...new Set(stopAt)].filter((i) => Number.isInteger(i) && i >= 0 && i < vias.length).sort((a, b) => a - b);
+  if (!stops.length) return withHeadAlternates(main, from, to, opts, route);
+  const throughStopAt = Array.isArray(opts.throughStopAt) ? opts.throughStopAt : [];
+  const viaHeadings = Array.isArray(opts.viaHeadings) ? opts.viaHeadings : [];
+  const pointAt = (i) => (i < 0 ? from : i >= vias.length ? to : vias[i]);
+  const bounds = [-1, ...stops, vias.length];
+  const parts = [];
+  for (let k = 0; k + 1 < bounds.length; k++) {
+    const a = bounds[k], b = bounds[k + 1];
+    const isLast = b >= vias.length;
+    const inside = (list) => list.filter((i) => Number.isInteger(i) && i > a && i < b).map((i) => i - a - 1);
+    // ⚠️ **引き返させない立ち寄り先（おすすめ道路の終点）からは、着いた向きのまま出る。** 縛らないと来た道を戻る
+    const heading = k === 0 ? opts.heading
+      : throughStopAt.includes(a) && parts[k - 1] ? endBearing(parts[k - 1].points) : undefined;
+    const partOpts = {
+      ...opts,
+      vias: vias.slice(a + 1, b), stopAt: inside(stopAt), throughStopAt: inside(throughStopAt),
+      viaHeadings: viaHeadings.slice(a + 1, b),
+      heading, headingTolerance: k === 0 ? opts.headingTolerance : undefined,
+      // ⚠️ 着く側の寄せは最後だけ（立ち寄り先で寄せると、そこへ回り込む遠回りになる）
+      arriveOnNearSide: isLast ? opts.arriveOnNearSide : false,
+      alternates: want,
+    };
+    let part = await route(pointAt(a), pointAt(b), partOpts);
+    if ((!part || part.error) && Number.isFinite(heading)) {
+      part = await route(pointAt(a), pointAt(b), { ...partOpts, heading: undefined });
+    }
+    if (!part || part.error) return main;
+    if (partOpts.vias.length) part = await withHeadAlternates(part, pointAt(a), pointAt(b), partOpts, route);
+    parts.push(part);
+  }
+  // ⚠️ 区切りはどれも立ち寄り先（着いたら区間が分かれる）
+  const stopAfter = parts.slice(0, -1).map(() => true);
+  const seconds = (r) => Number(r.durationSeconds) || 0;
+  const alternates = [];
+  for (let j = 0; j < want; j++) {
+    if (!parts.some((p) => Array.isArray(p.alternates) && p.alternates[j])) continue;
+    const merged = { ...mergeRuns(parts.map((p) => (p.alternates || [])[j] || p), stopAfter), alternates: [] };
+    // ⚠️ 本命よりUターンが多い・本命より大幅に遅い案は出さない（別の道筋と同じ上限）
+    if ((merged.uTurns || 0) > (main.uTurns || 0)) continue;
+    if (seconds(merged) > seconds(main) * LEG_MAX_TIME_RATIO) continue;
+    // ⚠️ 本命とほぼ同じ線なら出さない（区間の代替がどれも本命と重なっていた）
+    if (overlapRatio(merged.points, main.points) >= LEG_SAME_OVERLAP) continue;
+    alternates.push(merged);
+  }
+  return alternates.length ? { ...main, alternates } : main;
+}
+/** 区間の行き方違いをつないだ案の所要の上限（本命の何倍まで）。別の道筋（`corridorAlternates.MAX_TIME_RATIO`）と同じ */
+const LEG_MAX_TIME_RATIO = 1.25;
+/** 本命とこれ以上重なっていれば同じ案とみなす */
+const LEG_SAME_OVERLAP = 0.95;
+
 module.exports = {
-  routeWithValhallaSegmented, withHeadAlternates, mergeRuns, splitRuns, hasMixedConditions, endBearing,
-  ARRIVAL_TYPES, DEPARTURE_TYPES,
+  routeWithValhallaSegmented, withHeadAlternates, withLegAlternates, mergeRuns, splitRuns, hasMixedConditions, endBearing,
+  ARRIVAL_TYPES, DEPARTURE_TYPES, LEG_MAX_TIME_RATIO, LEG_SAME_OVERLAP,
 };
