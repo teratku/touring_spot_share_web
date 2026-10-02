@@ -44,6 +44,8 @@ COPY admin/data/jartic-signals.bin /app/admin/data/jartic-signals.bin
 COPY admin/data/smart-ic-gates.json /app/admin/data/smart-ic-gates.json
 # ⚠️ 高速の SA/PA（`admin/buildSapa.js` が作る）。無いと `/v1/sapa` が黙って空を返す
 COPY admin/data/sapa.json /app/admin/data/sapa.json
+# ⚠️ 道の駅（`admin/buildMichiNoEki.js` が作る）。無いと `/v1/michinoeki` が黙って空を返す
+COPY admin/data/michinoeki.json /app/admin/data/michinoeki.json
 COPY service/package.json /app/service/package.json
 RUN cd /app/service && npm install --omit=dev
 

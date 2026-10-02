@@ -34,6 +34,7 @@ const { ROMAJI } = require("../admin/lib/prefectureRomaji");
 const { buildRouteResponse, buildCorridorResponse } = require("./lib/buildRoute");
 const { buildSnapResponse } = require("./lib/snapRoads");
 const { buildSapaResponse } = require("./lib/sapa");
+const { buildMichiNoEkiResponse } = require("./lib/michiNoEki");
 
 const PORT = process.env.PORT || 8080;
 /** ⚠️ Cloud Run は 0.0.0.0 で待つこと。127.0.0.1 だと外から繋がらない */
@@ -174,6 +175,16 @@ app.post("/v1/snap", requireAuth, async (req, res) => {
  */
 app.post("/v1/sapa", requireAuth, async (req, res) => {
   const out = await buildSapaResponse(req.body || {}, { baseUrl: VALHALLA_URL });
+  res.status(out.status).json(out.body);
+});
+
+/**
+ * **休憩に寄る道の駅**（アプリの「道の駅で休憩」）。経路の線と走る時間から、間隔ごとに寄り道の少ない道の駅を返す。
+ * ⚠️ 利用者の要望（2026-10-01）。中身は `lib/michiNoEki.js`・判断は `admin/lib/michiNoEki.js`
+ * ⚠️ **認証を外さないこと。** Valhalla の CPU を使う
+ */
+app.post("/v1/michinoeki", requireAuth, async (req, res) => {
+  const out = await buildMichiNoEkiResponse(req.body || {}, { baseUrl: VALHALLA_URL });
   res.status(out.status).json(out.body);
 });
 
