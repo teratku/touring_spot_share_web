@@ -3,7 +3,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const fs = require("fs");
 const path = require("path");
-const { TAG_LABELS_JA, PRESET_TAGS, toKey, toKeys, labelJa, isTagKey }
+const { TAG_LABELS_JA, PRESET_TAGS, toKey, toKeys, labelJa, isTagKey, AUTO_EXCLUDED_TAGS, isAutoSelectable }
   = require("../lib/roadTags");
 
 /**
@@ -154,4 +154,18 @@ test("配信データに日本語の札が残っていない", (t) => {
   }
   assert.deepStrictEqual(found.slice(0, 5), [],
     `日本語の札が残っている（${found.length}件）`);
+});
+
+// ⚠️ 利用者の判断（2026-10-03）:「ルート生成時に、おすすめ道路の札で林道ぎみは選択されないようにする」
+// ⚠️ 2026-10-03 追記:「砂利は選べないようにする」。「要注意」は外さない
+test("ルートを作るときに自動では選ばない札は林道ぎみと砂利道だけ。鍵でも古い日本語でも見る", () => {
+  assert.deepStrictEqual([...AUTO_EXCLUDED_TAGS], ["forest", "gravel"], "アプリの FunRouteBuilder.autoExcludedTags と違う");
+  for (const tags of [["forest"], ["林道ぎみ"], [" 林道ぎみ "], ["快走", "forest"],
+                      ["gravel"], ["砂利道"], ["winding", "caution", "gravel"]]) {
+    assert.strictEqual(isAutoSelectable({ tags }), false, `外していない: ${tags}`);
+  }
+  for (const tags of [undefined, [], ["winding"], ["caution"], ["快走"], ["要注意"]]) {
+    assert.strictEqual(isAutoSelectable({ tags }), true, `林道ぎみ・砂利道以外で外した: ${tags}`);
+  }
+  assert.strictEqual(isAutoSelectable(undefined), true);
 });

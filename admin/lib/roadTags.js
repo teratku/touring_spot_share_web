@@ -76,7 +76,22 @@ function toKeys(tags) {
   return out;
 }
 
+/**
+ * ルートを作るときに自動では選ばない札（鍵）。
+ *
+ * ⚠️ 利用者の判断（2026-10-03）:「ルート生成時に、おすすめ道路の札で林道ぎみは選択されないようにする」
+ *    「砂利は選べないようにする」。実測（手元の配信データ 6,931区間）: 林道ぎみ 76区間・砂利道 1区間
+ *    （八本松松井田線 91.8点）。点数の高い峠に付いている。「要注意」（219区間）は外さない
+ * ⚠️ アプリの `FunRouteBuilder.autoExcludedTags` と揃えること（appFunRoute.js・funRouteSelect.js が使う）
+ */
+const AUTO_EXCLUDED_TAGS = new Set(["forest", "gravel"]);
+
+/** 自動で選んでよい区間か。古い配信データの日本語の札（「林道ぎみ」「砂利道」）も鍵に直して見る */
+const isAutoSelectable = (segment) =>
+  !((segment && segment.tags) || []).some((t) => AUTO_EXCLUDED_TAGS.has(toKey(t)));
+
 /** 鍵 → 日本語。知らない鍵はそのまま返す（＝自由記述はそのまま出る） */
 const labelJa = (key) => TAG_LABELS_JA[key] || key;
 
-module.exports = { TAG_LABELS_JA, PRESET_TAGS, JA_TO_KEY, isTagKey, toKey, toKeys, labelJa };
+module.exports = { TAG_LABELS_JA, PRESET_TAGS, JA_TO_KEY, isTagKey, toKey, toKeys, labelJa,
+  AUTO_EXCLUDED_TAGS, isAutoSelectable };

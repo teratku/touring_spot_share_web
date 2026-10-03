@@ -39,6 +39,23 @@ test("アプリの FunRouteBuilder と同じ道・同じ順・同じ経由地を
   }
 });
 
+// ⚠️ 利用者の判断（2026-10-03）:「ルート生成時に、おすすめ道路の札で林道ぎみは選択されないようにする」
+test("林道ぎみ・砂利道の札が付いた道は、点数の高い峠でもどの案にも選ばない（6区間×まわり方4・たっぷり）", () => {
+  let near = 0;
+  for (const t of parity.trips) {
+    const forest = new Set(t.segments.filter((s) => (s.tags || []).some((x) => x === "forest" || x === "gravel"))
+      .map((s) => s.id));
+    near += forest.size;
+    const common = { origin: t.from, destination: t.to, segments: t.segments, funWeight: t.funWeight,
+                     baselineMeters: t.baselineMeters, referenceAxis: t.referenceAxis, choose: F.topChoice };
+    for (const r of [...F.SIDE_ORDER.map((side) => F.build({ ...common, side })), F.build(common)]) {
+      const picked = r ? r.segments.filter((s) => forest.has(s.id)).map((s) => s.name) : [];
+      assert.deepStrictEqual(picked, [], `${t.name}: 林道ぎみ・砂利道の道を選んだ`);
+    }
+  }
+  assert.ok(near >= 10, `材料が悪い（林道ぎみの道が ${near} 本しかない）`);
+});
+
 test("規制と重なって外れる道がアプリと同じ（大型・原付一種）", () => {
   const c = parity.restrictionCase;
   for (const d of ["large", "moped50"]) {

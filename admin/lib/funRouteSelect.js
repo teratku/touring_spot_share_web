@@ -21,6 +21,8 @@
  */
 "use strict";
 
+const { isAutoSelectable } = require("./roadTags");
+
 // MARK: 定数（FunRouteBuilder.swift の実測値。⚠️ 勝手に変えないこと）
 
 /** ルート生成が自分で選ぶときの点数の下限。平地の県の「数合わせ」を落とす */
@@ -380,8 +382,10 @@ function selectFunRoads(origin, destination, segments, opts = {}) {
   //      市街地   明治通り71 / 市電通り70 / 新川通り68 / 競馬場通り66 / 祝田通り66
   //    72あたりで切ると市街地だけ落ちる（ただし檜原街道71・秩父上名栗線71も落ちる）
   const minScore = Number.isFinite(opts.minScore) ? opts.minScore : MIN_AUTO_SCORE;
+  // ⚠️ 林道ぎみ・砂利道（roadTags.js の AUTO_EXCLUDED_TAGS）は自動では選ばない。アプリの FunRouteBuilder と同じ
   const inCorridor = (segments || []).filter((s) =>
     s.score >= minScore
+    && isAutoSelectable(s)
     && Array.isArray(s.start) && Array.isArray(s.end)
     && isWithinCorridor(s, origin, destination, directDistance, opts.corridorScale));
   const candidates = side == null ? inCorridor

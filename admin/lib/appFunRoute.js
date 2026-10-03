@@ -30,6 +30,7 @@
 const { distance, project } = require("./navGeometry");
 const { decode } = require("./polyline");
 const { applicable } = require("./restrictionAvoid");
+const { isAutoSelectable } = require("./roadTags");
 
 // MARK: 定数（FunRouteBuilder.swift の値。⚠️ 勝手に変えないこと）
 
@@ -411,7 +412,8 @@ function build(o) {
   const corridorScale = o.corridorScale ?? 1;
   const choose = o.choose || randomChoice;
 
-  const inCorridor = segments.filter((s) => s.score >= MIN_AUTO_SCORE && !excluding.has(s.id)
+  // ⚠️ 林道ぎみ・砂利道（roadTags.js の AUTO_EXCLUDED_TAGS）は自動では選ばない。アプリの FunRouteBuilder と同じ
+  const inCorridor = segments.filter((s) => s.score >= MIN_AUTO_SCORE && isAutoSelectable(s) && !excluding.has(s.id)
     && isWithinCorridor(s, origin, destination, directDistance, axis, corridorScale));
   if (!inCorridor.length) return null;
   let candidates = inCorridor;

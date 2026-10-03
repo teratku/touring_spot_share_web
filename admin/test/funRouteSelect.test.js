@@ -32,7 +32,7 @@ function seg(o) {
   return {
     id: o.id || o.name, name: o.name,
     score: o.score ?? 80, lengthKm: o.lengthKm ?? 5, curviness: o.curviness ?? 600,
-    start: o.start, end: o.end,
+    start: o.start, end: o.end, tags: o.tags,
   };
 }
 
@@ -54,6 +54,21 @@ test("点数の低い道は自動では選ばない", () => {
     `${MIN_AUTO_SCORE}点未満の道を選んでいる`);
   // コリドー自体は通ることを確かめておく（落ちた理由が点数であること）
   assert.ok(isWithinCorridor(low, KOFU, FUJI, dd), "そもそもコリドーで落ちている");
+});
+
+// ⚠️ 利用者の判断（2026-10-03）:「ルート生成時に、おすすめ道路の札で林道ぎみは選択されないようにする」
+test("林道ぎみ・砂利道の札が付いた道は、点数が高くても自動では選ばない（鍵でも古い日本語でも）", () => {
+  const dd = distance(KOFU, FUJI);
+  const at = { start: [35.60, 138.65], end: [35.59, 138.66] };
+  const forest = seg({ name: "林道ぎみ", score: 99, tags: ["winding", "forest"], ...at });
+  const legacy = seg({ name: "古い札", score: 98, tags: ["林道ぎみ"], ...at });
+  const gravel = seg({ name: "砂利道", score: 97, tags: ["winding", "caution", "gravel"], ...at });
+  assert.ok(isWithinCorridor(forest, KOFU, FUJI, dd), "材料が悪い（そもそもコリドーで落ちている）");
+  const out = selectFunRoads(KOFU, FUJI, [forest, legacy, gravel], { count: 4 });
+  assert.deepStrictEqual(out.segments.map((s) => s.name), [], "林道ぎみ・砂利道の道を自動で選んだ");
+  const plain = seg({ name: "峠", score: 99, tags: ["winding", "caution"], ...at });
+  assert.deepStrictEqual(selectFunRoads(KOFU, FUJI, [plain], { count: 4 }).segments.map((s) => s.name), ["峠"],
+    "林道ぎみ以外の札で落とした");
 });
 
 test("曲がっていない道は「楽しい道」として選ばない", () => {
