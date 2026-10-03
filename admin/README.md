@@ -499,6 +499,21 @@ cd ../.. && firebase emulators:exec --only firestore --project biketeilen \
 ```
 
 ⚠️ 依存を `admin/test-rules/` に分けてあるのは、ESM が `NODE_PATH` を見ないため。
+
+#### ファイル置き場のルールを確かめる
+
+`storage.rules`（2026-10-03）。それまで本番は**誰でも一覧・読み書き・削除できた**（ルート記録のバックアップ＝走った軌跡を含む）。
+バックアップは本人だけ、公開の投稿は誰でも読めてログインした人が書ける、マスタ（`Json/`・グリッド）は書けない、
+ここに無い場所は拒否。**置き場を足したら `storage.rules` にも足すこと**（漏れると保存が黙って失敗する）。
+
+```bash
+cd admin/test-rules && npm install      # 初回だけ
+cd ../.. && firebase emulators:exec --only storage --project biketeilen \
+  "node admin/test-rules/storage.rules.test.mjs"
+```
+
+⚠️ 保存済みのダウンロード URL（`?alt=media&token=…`）はルールを通らない。画面の写真は URL で読んでいるので、
+締めても表示は壊れない。ルールが効くのは SDK の読み書き・`getDownloadURL`・一覧。
 別の場所に入れて実行しようとすると `ERR_MODULE_NOT_FOUND` になる（一度そう書いて踏んだ）。
 
 開発者が読み書きできること・他人と未ログインが弾かれること・配信データ（`road_recommend`）が

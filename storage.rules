@@ -1,0 +1,76 @@
+rules_version = '2';
+// =====================================================================
+//  Cloud Storage セキュリティルール（2026-10-03）
+//
+//  以前は `match /{allPaths=**} { allow read, write: if true; }` で、ログインしていない人でも
+//  すべてのファイルを一覧・読み書き・削除できた（ルート記録のバックアップ＝走った軌跡を含む）。
+//  プライバシーポリシー8「バックアップなど公開しない情報は本人だけが読み書きできる」に合わせて締める。
+//
+//  方針（firestore.rules と同じ）:
+//   1) 非公開（バックアップ）は本人だけ。置き場に uid が入っているので、それで本人を確かめる
+//   2) 公開の投稿（スポットの写真・プロフィール画像・共有ルート）は誰でも読める・ログインした人が書ける
+//      （名前に uid が入っていないので本人までは確かめられない。Firestore の投稿と同じ扱い）
+//   3) マスタ（Json・地図のグリッド）は誰でも読める・書けない（管理は Admin SDK。ルールを通らない）
+//   4) ここに無い場所は既定で拒否
+//
+//  ⚠️ 保存済みのダウンロード URL（?alt=media&token=…）はルールを通らない。画面に出している写真は
+//     URL で読んでいるので、ここを締めても表示は壊れない。ルールが効くのは SDK の読み書き・
+//     getDownloadURL・一覧
+//  ⚠️ 中身の種類（contentType）では絞らない。アプリには種類を付けずに上げているところがある
+//     （共有ルートの表紙の付け替えなど）
+//  ⚠️ 置き場を足したらここにも足すこと（漏れると、その保存が黙って失敗する）。
+//     確かめ方は admin/README.md「ファイル置き場のルールを確かめる」
+// =====================================================================
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return request.auth != null && request.auth.uid == uid; }
+    // 開発者（ブログの画像）。firestore.rules の isDev() と揃えること
+    function isDev() {
+      return request.auth != null
+          && request.auth.token.email in ["little_busters_rin_takuya@yahoo.co.jp"];
+    }
+    // 上げるファイルの大きさの上限（MB）。削除のときは request.resource が無いので通す
+    function within(mb) {
+      return request.resource == null || request.resource.size < mb * 1024 * 1024;
+    }
+
+    // ========== 非公開：本人だけ ==========
+    // ルート記録のバックアップ（RouteBackupManager）。線の JSON は復元で最大 50MB まで読む
+    match /route_backups/{uid}/{allPaths=**} {
+      allow read, write: if isOwner(uid) && within(60);
+    }
+    // 選んだスポットの控え（locationDetail.swift は {uid}.json、searchResultView.swift は {uid}_locations.json）
+    match /selectedLocationBackup/{fileName} {
+      allow read, write: if signedIn()
+        && (fileName == request.auth.uid + ".json" || fileName.matches(request.auth.uid + "_.*"))
+        && within(20);
+    }
+    // 古いルートの控え（searchResultView.swift: {uid}_routes_{n}.json）
+    match /routeBackups/{fileName} {
+      allow read, write: if signedIn() && fileName.matches(request.auth.uid + "_.*") && within(60);
+    }
+
+    // ========== 公開の投稿：誰でも読める・ログインした人が書ける ==========
+    match /images/{fileName}    { allow read: if true; allow write: if signedIn() && within(20); } // スポット・コメントの写真
+    match /iconImage/{fileName} { allow read: if true; allow write: if signedIn() && within(20); } // スポットの一覧用の小さい写真
+    match /userIcon/{fileName}  { allow read: if true; allow write: if signedIn() && within(20); } // プロフィール画像
+    // 共有ルート（routes/{id}/cover.jpg・routes/JSON/{file}）
+    match /routes/{allPaths=**} { allow read: if true; allow write: if signedIn() && within(60); }
+
+    // ========== 問い合わせの画像：ログインした人だけ ==========
+    match /inquiryDetailImage/{fileName} { allow read, write: if signedIn() && within(20); }
+
+    // ========== ブログの画像：誰でも読める・開発者だけ書ける ==========
+    match /blog_images/{fileName}     { allow read: if true; allow write: if isDev() && within(20); }
+    match /blog_thumbnails/{fileName} { allow read: if true; allow write: if isDev() && within(20); }
+
+    // ========== マスタ：誰でも読める・アプリからは書けない ==========
+    // ⚠️ アプリにはグリッドを上げるコード（routeSaveMainView.swift uploadGridCSV・RouteRecordView.swift
+    //    uploadGridBoundaries）が残っているが、開く画面が無い（2026-10-03 に確認）
+    match /Json/{allPaths=**}        { allow read: if true; allow write: if false; }
+    match /grids_empty/{allPaths=**} { allow read: if true; allow write: if false; }
+    match /grid_boundaries.csv       { allow read: if true; allow write: if false; }
+  }
+}

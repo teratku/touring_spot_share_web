@@ -4,7 +4,8 @@
   "type": "module",
   "description": "firestore.rules をエミュレータで確かめる。admin 本体の依存とは分けている（重いのと、普段の node --test では使わないため）",
   "scripts": {
-    "test": "firebase emulators:exec --only firestore --project biketeilen 'node roadReviews.rules.test.mjs'"
+    "test": "firebase emulators:exec --only firestore --project biketeilen 'node roadReviews.rules.test.mjs'",
+    "test:storage": "cd ../.. && firebase emulators:exec --only storage --project biketeilen 'node admin/test-rules/storage.rules.test.mjs'"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^5.0.0",

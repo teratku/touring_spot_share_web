@@ -1,0 +1,17 @@
+{
+  "name": "functions-auth",
+  "description": "アカウントが消えたときに動く関数（第1世代）。Node.js 24 は第1世代で動かないので、functions/ とは分けて Node.js 22 にしている",
+  "scripts": {
+    "test": "node --test test/",
+    "deploy": "firebase deploy --only functions:auth"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.6.0",
+    "firebase-functions": "^7.0.0"
+  },
+  "private": true
+}
