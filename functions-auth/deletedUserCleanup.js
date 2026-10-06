@@ -28,6 +28,7 @@ function privateDocPaths(uid) {
     `micinoEkiBackUp/${uid}`,
     `selectedLocationBackup/${uid}`,
     `userInfo/${uid}`, // プロフィール・バッジ
+    `user_taste/${uid}`, // 選んだおすすめ道路・スポットの記録（2026-10-06）
   ];
 }
 

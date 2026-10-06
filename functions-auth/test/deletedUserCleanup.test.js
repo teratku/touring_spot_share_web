@@ -31,7 +31,8 @@ test("アプリから消せない課金の状態と紹介の記録、本人だ�
   const { db, bucket, deleted } = fakes();
   assert.deepStrictEqual(await cleanupDeletedUser("u1", { db, bucket }), []);
   for (const path of ["subscriptions/u1", "referralRewards/u1", "referralRewardEvents/u1",
-                      "users/u1", "route_backups/u1", "user_stats/u1", "road_completion/u1", "userInfo/u1"]) {
+                      "users/u1", "route_backups/u1", "user_stats/u1", "road_completion/u1", "userInfo/u1",
+                      "user_taste/u1"]) {
     assert.ok(deleted.includes(path), `消していない: ${path}`);
   }
   assert.ok(deleted.includes("storage:route_backups/u1/"), "ルート記録のバックアップのファイルを消していない");

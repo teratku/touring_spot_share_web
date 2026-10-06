@@ -63,6 +63,9 @@ service cloud.firestore {
     match /route_backups/{uid}/{doc=**}   { allow read, write: if isOwner(uid); } // ルートバックアップ本体＋配下(routes等)
     match /selectedLocationBackup/{uid}   { allow read, write: if isOwner(uid); } // 選択スポットのバックアップ
     match /micinoEkiBackUp/{uid}          { allow read, write: if isOwner(uid); } // 道の駅コレクションのバックアップ
+    // 選んだおすすめ道路・スポットの記録（2026-10-06。好み・似たものの提案に使う。アプリの RiderChoices.swift）。
+    // ⚠️ 本人だけ。何を選んだかは他人に見せない（人気の集計は Cloud Functions が数だけ別に持つ）
+    match /user_taste/{uid}               { allow read, write: if isOwner(uid); }
 
     // users/{uid}：touringPlans / stamps。プロフィールで他人分も閲覧されうるので read 公開、write は本人のみ
     match /users/{uid}/{doc=**} {
