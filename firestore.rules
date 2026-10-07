@@ -66,6 +66,13 @@ service cloud.firestore {
     // 選んだおすすめ道路・スポットの記録（2026-10-06。好み・似たものの提案に使う。アプリの RiderChoices.swift）。
     // ⚠️ 本人だけ。何を選んだかは他人に見せない（人気の集計は Cloud Functions が数だけ別に持つ）
     match /user_taste/{uid}               { allow read, write: if isOwner(uid); }
+    // みんなの人気（2026-10-07。選んだ人数。Cloud Functions の popularityRanking が1日1回書く）。
+    // ⚠️ 数と名前だけで誰が選んだかは入っていない（3人以上のものだけ）。アプリからは書かせない
+    match /popularity/{doc}               { allow read: if true; allow write: if false; }
+    // 自分のいいねをまとめて読む（2026-10-07。好みの材料。アプリの RiderSignals.swift の collectionGroup("yaehCount")）。
+    // ⚠️ 本人の分だけ（userID が自分のもの）。スポットごとのいいねは imagedownload の配下ルールで誰でも読めるが、
+    //    ある人のいいねを全部並べることは他人にはさせない。索引（yaehCount.userID のコレクショングループ）が要る
+    match /{path=**}/yaehCount/{id}       { allow read: if signedIn() && resource.data.userID == request.auth.uid; }
 
     // users/{uid}：touringPlans / stamps。プロフィールで他人分も閲覧されうるので read 公開、write は本人のみ
     match /users/{uid}/{doc=**} {

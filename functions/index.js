@@ -488,3 +488,18 @@ exports.winBackNotification = onSchedule(
     );
     return null;
   });
+// =====================================================
+// みんなの人気（選んだ人数）を1日1回数える（popularity.js）
+// =====================================================
+// アプリの「選んだ記録」（user_taste/{uid}）から、道とスポットごとに選んだ人数を数え、
+// 3人以上のものだけを公開の popularity/roads・popularity/spots に書く（誰が選んだかは書かない）。
+const { refreshPopularity } = require("./popularity");
+
+exports.popularityRanking = onSchedule(
+  { schedule: "every day 04:00", timeZone: "Asia/Tokyo" },
+  async () => {
+    const result = await refreshPopularity(db, admin.firestore.FieldValue);
+    console.log(`popularityRanking: ${result.people}人の記録から 道${result.roads}件 スポット${result.spots}件`);
+    return null;
+  }
+);

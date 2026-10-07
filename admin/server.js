@@ -1949,6 +1949,31 @@ app.post("/api/rally-cover/:rallyId", (req, res) => {
 });
 
 // 開発者用：ユーザーの購読状態を確認（admin SDK で読取。user_stats/{uid}.subscription は iOS が保存）。
+// =====================================================
+// 利用者の好みと行き先（開発者だけ・読むだけ）。画面は public/riders.html（http://127.0.0.1:4317/riders）
+// =====================================================
+// ⚠️ 利用者の要望（2026-10-07）: 全員の確認は開発者だけの web の画面で、どんな場所によく行くかを地図で見て、
+//    今後の開発に活かしたい。⚠️ 誰かは返さない（番号だけ）。計算は lib/riderInsights.js（アプリと同じ重み）
+const { buildInsights, loadRiderData } = require("./lib/riderInsights");
+let ridersCache = null; // { t, insights }
+const RIDERS_TTL_MS = 60 * 60 * 1000;
+
+app.get("/riders", (_req, res) => sendHtml(res, "riders.html"));
+app.get("/api/riders/insights", async (req, res) => {
+  const fresh = req.query.refresh === "1";
+  if (!fresh && ridersCache && Date.now() - ridersCache.t < RIDERS_TTL_MS) {
+    return res.json({ ...ridersCache.insights, cachedAt: new Date(ridersCache.t).toISOString() });
+  }
+  try {
+    const data = await loadRiderData(db);
+    const insights = buildInsights(data, (lng, lat) => restrictionLocator.locate(lng, lat));
+    ridersCache = { t: Date.now(), insights };
+    res.json({ ...insights, cachedAt: new Date(ridersCache.t).toISOString() });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.get("/api/user/:uid", async (req, res) => {
   const uid = String(req.params.uid || "").trim();
   if (!uid) return res.status(400).json({ error: "uid が必要です" });

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>利用者の好みと行き先</title>
+<!--
+  開発者だけが見る画面（127.0.0.1 の管理ツール・本番を読むだけ）。
+  ⚠️ 利用者の要望（2026-10-07）: 全員の確認は開発者だけの web の画面で、どんな場所によく行くかを地図で見て、
+     今後の開発に活かしたい。⚠️ 誰かは出さない（利用者 #番号だけ）。中身は lib/riderInsights.js
+-->
+<style>
+  :root { --teal:#00A8C6; --ink:#1f2d3d; --line:#e4e9ee; --muted:#78909c; --bg:#f4f7f9;
+          --post:#0e7490; --like:#e11d48; --review:#d97706; --plan:#4f46e5; --choice:#16a34a; }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif; color:var(--ink); background:var(--bg); display:flex; flex-direction:column; }
+  header { background:linear-gradient(90deg,var(--teal),#0bbed6); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  header h1 { font-size:17px; margin:0; }
+  header .pill { font-size:11px; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:999px; }
+  header .spacer { flex:1; }
+  header button { border:1px solid rgba(255,255,255,.6); background:transparent; color:#fff; border-radius:8px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  header button:focus-visible, .user:focus-visible, .src:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+  .main { flex:1; display:flex; min-height:0; }
+  aside { width:400px; max-width:45vw; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:12px; border-right:1px solid var(--line); background:#fff; }
+  #map { flex:1; min-height:300px; }
+  h2 { font-size:13px; margin:0 0 6px; color:var(--muted); letter-spacing:.04em; }
+  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .card { background:var(--bg); border-radius:8px; padding:8px; text-align:center; }
+  .card b { display:block; font-size:18px; font-variant-numeric:tabular-nums; }
+  .card span { font-size:11px; color:var(--muted); }
+  .sources { display:flex; flex-wrap:wrap; gap:6px; }
+  .src { display:inline-flex; align-items:center; gap:5px; font-size:12px; border:1px solid var(--line); border-radius:999px; padding:4px 10px; cursor:pointer; background:#fff; user-select:none; }
+  .src i { width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .src.off { opacity:.35; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  td { padding:3px 4px; border-bottom:1px solid var(--line); }
+  td.n { text-align:right; font-variant-numeric:tabular-nums; color:var(--muted); width:56px; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .user { border:1px solid var(--line); border-radius:10px; padding:8px 10px; cursor:pointer; display:flex; flex-direction:column; gap:4px; }
+  .user.sel { border-color:var(--teal); box-shadow:0 0 0 2px rgba(0,168,198,.2); }
+  .user .top { display:flex; gap:8px; align-items:baseline; }
+  .user .top b { font-size:13px; }
+  .user .chips { display:flex; flex-wrap:wrap; gap:4px; }
+  .chip { font-size:11px; border-radius:999px; padding:1px 7px; color:#fff; font-variant-numeric:tabular-nums; }
+  .taste { font-size:11px; color:var(--muted); }
+  .muted { color:var(--muted); font-size:12px; }
+  .err { color:#c0392b; font-size:13px; }
+  .note { font-size:11px; color:var(--muted); line-height:1.5; }
+  @media (max-width:760px) { .main { flex-direction:column; } aside { width:auto; max-width:none; max-height:50vh; border-right:none; border-bottom:1px solid var(--line); } }
+</style>
+</head>
+<body>
+  <header>
+    <h1>🧭 利用者の好みと行き先</h1>
+    <span class="pill">ローカル開発用 · 本番を読むだけ</span>
+    <span class="spacer"></span>
+    <span id="stamp" class="pill"></span>
+    <button id="all" type="button" hidden>全員に戻す</button>
+    <button id="refresh" type="button">最新を読む</button>
+  </header>
+  <div class="main">
+    <aside>
+      <div id="status" class="muted">読み込んでいます…</div>
+      <section>
+        <h2>全体</h2>
+        <div class="cards" id="cards"></div>
+      </section>
+      <section>
+        <h2>地図に出す材料</h2>
+        <div class="sources" id="sources"></div>
+        <p class="note">升目（約11km）ごとの件数を丸の大きさで表します。色はいちばん多い材料。利用者を選ぶと、その人の行き先だけを出します。</p>
+      </section>
+      <section class="cols">
+        <div><h2>よく行く県</h2><table id="prefs"></table></div>
+        <div><h2>投稿の札</h2><table id="tags"></table></div>
+      </section>
+      <section class="cols">
+        <div><h2>おすすめポイント</h2><table id="points"></table></div>
+        <div><h2>近くの道の種類</h2><table id="highways"></table></div>
+      </section>
+      <section>
+        <h2>利用者（活動の多い順・誰かは出しません）</h2>
+        <div id="users" style="display:flex;flex-direction:column;gap:6px"></div>
+      </section>
+    </aside>
+    <div id="map"></div>
+  </div>
+<script>
+const SOURCES = [
+  ["post", "投稿", "--post"], ["like", "いいね", "--like"], ["review", "口コミ", "--review"],
+  ["plan", "プラン", "--plan"], ["choice", "選んだ", "--choice"],
+];
+const SOURCE_LABEL = Object.fromEntries(SOURCES.map(([k, l]) => [k, l]));
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const colorOf = (k) => css((SOURCES.find((s) => s[0] === k) || [, , "--muted"])[2]);
+// アプリの SpotPoint / RoadTag の表示名（知らない鍵はそのまま）
+const POINT_LABEL = { scenic: "景色・絶景", winding: "ワインディング", gourmet: "グルメ", cafe: "カフェ", onsen: "温泉",
+  rest: "休憩・道の駅", photo: "写真映え", history: "歴史・神社仏閣", nature: "自然（滝・湖・花）", sea: "海・海岸", bikeparking: "バイクを停めやすい" };
+const TAG_LABEL = { scenic: "絶景", winding: "ワインディング", flowing: "快走", forest: "林道ぎみ", caution: "要注意", gravel: "砂利道", deadend: "行き止まり", toll: "有料道路" };
+const HW_LABEL = { motorway: "高速", trunk: "国道（幹線）", primary: "国道・主要道", secondary: "県道", tertiary: "一般道", unclassified: "生活道路", residential: "住宅地の道" };
+const CURVY_LABEL = { "curvy:high": "曲がりの多い道", "curvy:mid": "ほどよく曲がる道", "curvy:low": "まっすぐな道" };
+function featureLabel(f) {
+  const [k, v] = [f.slice(0, f.indexOf(":")), f.slice(f.indexOf(":") + 1)];
+  if (k === "pt") return POINT_LABEL[v] || v;
+  if (k === "genre") return "#" + v;
+  if (k === "tag") return TAG_LABEL[v] || v;
+  if (k === "hw") return HW_LABEL[v] || v;
+  return CURVY_LABEL[f] || f;
+}
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+let data = null, map = null, overlays = [], selected = null, mapReady = false;
+const active = new Set(SOURCES.map((s) => s[0]));
+
+function table(id, rows, label = (x) => x) {
+  document.getElementById(id).innerHTML = rows.length
+    ? rows.slice(0, 15).map(([k, n]) => `<tr><td>${esc(label(k))}</td><td class="n">${n}</td></tr>`).join("")
+    : `<tr><td class="muted">まだありません</td></tr>`;
+}
+
+function render() {
+  const t = data.totals;
+  document.getElementById("cards").innerHTML = [
+    ["人", t.people], ["投稿", t.posts], ["いいね", t.likes], ["口コミ", t.reviews],
+    ["プラン", t.plans], ["選んだ", t.choices], ["札つき投稿", t.withTag], ["近くの道つき", t.withRoad],
+  ].map(([l, n]) => `<div class="card"><b>${n}</b><span>${l}</span></div>`).join("");
+  document.getElementById("sources").innerHTML = SOURCES.map(([k, l]) =>
+    `<span class="src ${active.has(k) ? "" : "off"}" role="button" tabindex="0" data-k="${k}"><i style="background:${colorOf(k)}"></i>${l}</span>`).join("");
+  table("prefs", data.prefectures);
+  table("tags", data.tags);
+  table("points", data.spotPoints, (k) => POINT_LABEL[k] || k);
+  table("highways", data.highways, (k) => HW_LABEL[k] || k);
+  document.getElementById("users").innerHTML = data.users.map((u) => {
+    const chips = SOURCES.filter(([k]) => u.counts[k] > 0)
+      .map(([k, l]) => `<span class="chip" style="background:${colorOf(k)}">${l} ${u.counts[k]}</span>`).join("");
+    const taste = (list) => list.map(([f, w, src]) => `${esc(featureLabel(f))} ${Math.round(w * 100)}%（${SOURCE_LABEL[src] || src}）`).join("・");
+    return `<div class="user ${selected === u.no ? "sel" : ""}" role="button" tabindex="0" data-no="${u.no}">
+      <div class="top"><b>利用者 #${u.no}</b><span class="muted">${esc(u.areas.map(([p, n]) => `${p} ${n}`).join("・") || "場所なし")}</span></div>
+      <div class="chips">${chips}</div>
+      ${u.spotTaste.length ? `<div class="taste">スポット: ${taste(u.spotTaste)}</div>` : ""}
+      ${u.roadTaste.length ? `<div class="taste">道: ${taste(u.roadTaste)}</div>` : ""}
+    </div>`;
+  }).join("") || `<div class="muted">まだ材料がありません</div>`;
+  document.getElementById("all").hidden = selected == null;
+  drawMap();
+}
+
+function clearMap() { overlays.forEach((o) => o.setMap(null)); overlays = []; }
+
+function drawMap() {
+  if (!mapReady || !data) return;
+  clearMap();
+  const info = new google.maps.InfoWindow();
+  if (selected != null) {
+    const u = data.users.find((x) => x.no === selected);
+    const bounds = new google.maps.LatLngBounds();
+    for (const p of (u ? u.points : []).filter((p) => active.has(p.source))) {
+      const m = new google.maps.Circle({ map, center: p, radius: 400, strokeWeight: 1, strokeColor: "#fff",
+        fillColor: colorOf(p.source), fillOpacity: 0.85 });
+      overlays.push(m);
+      bounds.extend(p);
+    }
+    if (!bounds.isEmpty()) map.fitBounds(bounds, 40);
+    return;
+  }
+  const cells = data.grid.map((c) => {
+    const counts = Object.entries(c.bySource).filter(([k]) => active.has(k));
+    const total = counts.reduce((s, [, n]) => s + n, 0);
+    const top = counts.sort((a, b) => b[1] - a[1])[0];
+    return { ...c, shown: total, color: top ? colorOf(top[0]) : null };
+  }).filter((c) => c.shown > 0);
+  for (const c of cells) {
+    const circle = new google.maps.Circle({ map, center: { lat: c.lat, lng: c.lng }, radius: 1800 * Math.sqrt(c.shown),
+      strokeWeight: 1, strokeColor: c.color, fillColor: c.color, fillOpacity: 0.35, clickable: true });
+    circle.addListener("click", () => {
+      const lines = Object.entries(c.bySource).map(([k, n]) => `${SOURCE_LABEL[k] || k} ${n}`).join("・");
+      info.setContent(`<div style="font-size:12px">${lines}<br>${c.people}人の行き先</div>`);
+      info.setPosition({ lat: c.lat, lng: c.lng });
+      info.open(map);
+    });
+    overlays.push(circle);
+  }
+}
+
+async function load(refresh) {
+  const status = document.getElementById("status");
+  status.textContent = "読み込んでいます…";
+  status.className = "muted";
+  try {
+    const res = await fetch("/api/riders/insights" + (refresh ? "?refresh=1" : ""));
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    data = json;
+    if (selected != null && !data.users.some((u) => u.no === selected)) selected = null;
+    status.textContent = "";
+    document.getElementById("stamp").textContent = "読んだ時刻 " + new Date(json.cachedAt).toLocaleString("ja-JP");
+    render();
+  } catch (e) {
+    status.textContent = "読めませんでした: " + e.message;
+    status.className = "err";
+  }
+}
+
+function activate(el, fn) {
+  el.addEventListener("click", fn);
+  el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(e); } });
+}
+activate(document.getElementById("sources"), (e) => {
+  const k = e.target.closest(".src")?.dataset.k;
+  if (!k) return;
+  active.has(k) ? active.delete(k) : active.add(k);
+  render();
+});
+activate(document.getElementById("users"), (e) => {
+  const no = Number(e.target.closest(".user")?.dataset.no);
+  if (!no) return;
+  selected = selected === no ? null : no;
+  render();
+});
+document.getElementById("all").addEventListener("click", () => {
+  selected = null;
+  render();
+  if (map) { map.setCenter({ lat: 36.2, lng: 138.3 }); map.setZoom(6); }
+});
+document.getElementById("refresh").addEventListener("click", () => load(true));
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), { center: { lat: 36.2, lng: 138.3 }, zoom: 6,
+    mapTypeControl: false, streetViewControl: false });
+  mapReady = true;
+  drawMap();
+}
+window.initMap = initMap;
+load(false);
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>
+</body>
+</html>
