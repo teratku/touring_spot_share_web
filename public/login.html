@@ -259,16 +259,20 @@
         font-size: 12pt;
       }
     </style>
+    <link rel="stylesheet" href="/site.css?v=6">
+    <style>
+      /* 共通の見た目（/site.css）に合わせる上書き */
+      body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
+      .ts-page .login-card { background: var(--ts-surface); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); }
+    </style>
     <script src="/menu.js?v=5" defer></script>
 </head>
 
-  <body>
+  <body class="ts-page">
     <div id="app">
       <!-- ヘッダー -->
-      <header>
-        <div class="header-content">
-          <span class="header-title">ツーリングスポットシェア</span>
-        </div>
+      <header class="ts-header">
+        <h1 class="ts-header__title">ツーリングスポットシェア</h1>
       </header>
 
       <!-- メインコンテンツ -->
@@ -283,7 +287,7 @@
 
           <!-- ログインカード -->
           <div class="login-card">
-            <h1 class="card-title">ログイン</h1>
+            <h2 class="card-title">ログイン</h2>
 
             <!-- エラーメッセージ -->
             <div v-if="errorMessage" class="error-message">
@@ -335,7 +339,7 @@
             </div>
 
             <!-- ログインボタン -->
-            <button class="btn-login" type="submit" :disabled="isLoading">
+            <button class="btn-login ts-btn ts-btn--block" type="submit" :disabled="isLoading">
               <span v-if="isLoading">
                 <span class="spinner"></span>ログイン中...
               </span>
@@ -351,8 +355,14 @@
         </div>
       </main>
 
-      <footer>
-        <small>&copy; 2025 ツーリングスポットシェア</small>
+      <footer class="ts-footer">
+        <nav aria-label="サイトの案内">
+          <a href="/about.html">アプリ紹介</a>
+          <a href="/support.html">サポート</a>
+          <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+          <a href="/termsofservice/termsofservice.html">利用規約</a>
+        </nav>
+        <div>© ツーリングスポットシェア（biketeilen）</div>
       </footer>
     </div>
 

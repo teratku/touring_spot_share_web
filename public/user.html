@@ -1674,15 +1674,28 @@
       }
     </style>
     <script src="/menu.js?v=5" defer></script>
+    <link rel="stylesheet" href="/site.css?v=6">
+    <style>
+      body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
+      .ts-header .header-content { display: flex; align-items: center; gap: 10px; width: 100%; }
+      .ts-header h1 { color: #fff; }
+      /* ⚠️ 狭い画面では題名とタブ3つが1行に入らず、題名が1文字ずつ縦に割れる。タブは2行目に回す */
+      @media (max-width: 600px) {
+        .ts-header .header-content { flex-wrap: wrap; }
+        .ts-header h1 { font-size: 20px; white-space: nowrap; }
+        .ts-header .tab-buttons { width: 100%; }
+        .ts-header .tab-btn { flex: 1; font-size: 14px; padding: 8px 6px; text-align: center; }
+      }
+    </style>
 </head>
   
-  <body>
+  <body class="ts-page">
     <div id="app">
       <!-- ヘッダー -->
-      <header>
+      <header class="ts-header">
         <div class="header-content">
           <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
-          <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
+          <button class="back-btn ts-header__back" @click="goBack" aria-label="戻る">←</button>
           <h1>👤 ユーザー詳細</h1>
           
           <!-- タブ切り替えボタン -->
@@ -1774,7 +1787,7 @@
           <div class="error-icon">⚠️</div>
           <h3>エラーが発生しました</h3>
           <p>{{ error }}</p>
-          <button class="back-btn" @click="goBack" style="margin-top: 24px; background: #E63946;">
+          <button class="ts-btn ts-btn--danger" @click="goBack" style="margin-top: 24px;">
             戻る
           </button>
         </div>
@@ -2014,8 +2027,14 @@
             </div>
           </div>
         </template>
-        <footer class="page-footer">
-          <p>© 2025 ツーリングスポットシェア All rights reserved.</p>
+        <footer class="page-footer ts-footer">
+          <nav aria-label="サイトの案内">
+            <a href="/about.html">アプリ紹介</a>
+            <a href="/support.html">サポート</a>
+            <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+            <a href="/termsofservice/termsofservice.html">利用規約</a>
+          </nav>
+          <div>© ツーリングスポットシェア（biketeilen）</div>
         </footer>
       </div>
 

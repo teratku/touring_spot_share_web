@@ -1,0 +1,151 @@
+/*
+ * site.css — サイト全体で共通の見た目（色・文字・見出し・ボタン・カード・フッター）
+ *
+ * ⚠️ 利用者の要望（2026-10-07）:「web の UI/UX：全体の UI を統一」。
+ *    基準は今のサイトでいちばん多い作り（青緑 #00A8C6 → 緑 #228B22 のグラデーションの見出し・
+ *    左上のメニュー（menu.js）・iOS の灰色の地）。アプリと同じ色にそろえる。
+ * ⚠️ ページ固有の CSS とぶつからないよう、部品の名前はすべて ts- で始める。
+ *    色はこのファイルの変数（--ts-…）だけを使う（ページに #00A8C6 を直に書かない）
+ * 使い方: <link rel="stylesheet" href="/site.css?v=6">
+ * ⚠️ **中身を変えたら、全ページの ?v= を上げること。** ホスティングは css を1年キャッシュする
+ *    （firebase.json の Cache-Control: immutable）。上げないと、配信しても古い見た目のまま
+ */
+
+:root {
+  --ts-teal: #00A8C6;
+  --ts-green: #228B22;
+  --ts-teal-ink: #007E95;          /* 白地の上の文字・リンク（コントラスト用に濃く） */
+  --ts-gradient: linear-gradient(135deg, var(--ts-teal), var(--ts-green));
+  --ts-bg: #F2F2F7;                /* 地 */
+  --ts-surface: #FFFFFF;           /* カード */
+  --ts-surface-2: #F7F9FA;         /* カードの中の区切り */
+  --ts-text: #1C1C1E;
+  --ts-text-2: #5B6670;            /* 補足 */
+  --ts-line: #E3E8EC;
+  --ts-danger: #D93838;
+  --ts-radius: 16px;
+  --ts-radius-s: 10px;
+  --ts-shadow: 0 1px 2px rgba(16, 24, 32, .06), 0 4px 16px rgba(16, 24, 32, .06);
+  --ts-font: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --ts-header-h: 64px;
+  --ts-max: 960px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ts-teal-ink: #4FD3EA;
+    --ts-bg: #000000;
+    --ts-surface: #1C1C1E;
+    --ts-surface-2: #2C2C2E;
+    --ts-text: #F2F2F7;
+    --ts-text-2: #A1A8AE;
+    --ts-line: #38383A;
+    --ts-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+  }
+}
+
+/* ---------- 地と文字 ---------- */
+body.ts-page {
+  margin: 0;
+  background: var(--ts-bg);
+  color: var(--ts-text);
+  font-family: var(--ts-font);
+  /* ⚠️ 文字の大きさは決めない（ブラウザの標準 16px のまま）。決めると、今までのページの文字がそろって小さくなる */
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+/* ⚠️ :where で強さを0にする（ボタンなどの部品の文字色に勝たないように） */
+:where(.ts-page) a { color: var(--ts-teal-ink); }
+.ts-main { max-width: var(--ts-max); margin: 0 auto; padding: 16px; box-sizing: border-box; }
+.ts-h2 { font-size: 18px; margin: 24px 0 10px; text-wrap: balance; }
+.ts-muted { color: var(--ts-text-2); font-size: 13px; }
+
+/* ---------- 見出し（ページの上） ----------
+ * ⚠️ 左上はメニューのボタン（menu.js・幅42px）が重なるので空けておく */
+.ts-header {
+  background: var(--ts-gradient);
+  color: #fff;
+  min-height: var(--ts-header-h);
+  padding: 12px 16px 12px 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* ⚠️ 中に .header-content がある前からの見出しは、menu.js が .header-content の左を 54px 空ける。
+ *    ここでも 64px 空けると二重になり、狭い画面で題名が1文字ずつ縦に割れる */
+.ts-header:has(> .header-content) { padding-left: 16px; }
+/* ⚠️ 色は白をはっきり指定する（ページの「h1 { color: … }」に負けて灰色になる） */
+.ts-header__title { margin: 0; color: #fff; font-size: 18px; font-weight: 700; line-height: 1.3; text-wrap: balance; }
+.ts-header__sub { margin: 2px 0 0; color: #fff; font-size: 13px; opacity: .9; }
+.ts-header__back {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--ts-radius-s);
+  background: rgba(255, 255, 255, .2); color: #fff; text-decoration: none; font-size: 18px; flex-shrink: 0;
+}
+/* ⚠️ 戻るは <a> でも <button>（Vue の @click）でも同じ見た目にする */
+button.ts-header__back { border: none; cursor: pointer; font: inherit; }
+/* 見出しの右端のリンク（「トップ」など） */
+.ts-header__action { margin-left: auto; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
+  padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .2); }
+/* 見出しの右端（利用者の名前・ログアウトなど）。⚠️ 中身はページの JS が入れる */
+.ts-header__right { margin-left: auto; display: flex; align-items: center; gap: 8px; color: #fff; font-size: 13px; }
+.ts-header__right img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+.ts-header__right button { background: rgba(255, 255, 255, .2); color: #fff; border: none; border-radius: 999px;
+  padding: 6px 12px; font: 600 12px/1.2 var(--ts-font); cursor: pointer; white-space: nowrap; }
+/* ⚠️ 狭い画面で名前やボタンが2行に割れないように。名前は長ければ「…」で切る */
+.ts-header__right span { white-space: nowrap; max-width: 7em; overflow: hidden; text-overflow: ellipsis; }
+.ts-header__title { min-width: 0; }
+.ts-header--hero { padding: 72px 20px 52px; flex-direction: column; text-align: center; }
+.ts-header--hero .ts-header__title { font-size: 26px; }
+.ts-header--hero .ts-header__sub { font-size: 15px; max-width: 34em; }
+
+/* ---------- カード ---------- */
+.ts-card {
+  background: var(--ts-surface);
+  border-radius: var(--ts-radius);
+  box-shadow: var(--ts-shadow);
+  padding: 16px;
+}
+.ts-card + .ts-card { margin-top: 12px; }
+.ts-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+
+/* ---------- ボタン ----------
+ * 主（ts-btn）: 青緑の塗り。副（ts-btn--ghost）: 青緑の線。危険（ts-btn--danger） */
+.ts-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 10px 20px; box-sizing: border-box;
+  border: none; border-radius: 12px;
+  background: var(--ts-teal); color: #fff;
+  font: 600 15px/1.2 var(--ts-font); text-decoration: none; cursor: pointer;
+}
+.ts-btn:hover { filter: brightness(1.05); }
+.ts-btn:disabled { opacity: .5; cursor: default; }
+.ts-btn--ghost { background: transparent; color: var(--ts-teal-ink); box-shadow: inset 0 0 0 1.5px var(--ts-teal); }
+.ts-btn--danger { background: var(--ts-danger); }
+.ts-btn--block { display: flex; width: 100%; }
+.ts-btn:focus-visible, .ts-header__back:focus-visible, .ts-footer a:focus-visible {
+  outline: 3px solid var(--ts-teal); outline-offset: 2px;
+}
+
+/* ---------- 小さな札 ---------- */
+.ts-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 999px;
+  background: rgba(0, 168, 198, .12); color: var(--ts-teal-ink); font-size: 12px; font-weight: 600;
+}
+
+/* ---------- フッター ---------- */
+.ts-footer {
+  margin-top: 32px; padding: 24px 16px 32px;
+  border-top: 1px solid var(--ts-line);
+  background: var(--ts-surface);
+  color: var(--ts-text-2); font-size: 13px; text-align: center;
+}
+.ts-footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-bottom: 10px; }
+.ts-footer a { color: var(--ts-text-2); text-decoration: none; }
+.ts-footer a:hover { color: var(--ts-teal-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ts-btn, .ts-header__back { transition: none; }
+}

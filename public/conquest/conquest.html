@@ -486,8 +486,13 @@ body {
 .nav-link.active { background:var(--primary); color:white; border-color:var(--primary); }
 </style>
   <script src="/menu.js?v=5" defer></script>
+<link rel="stylesheet" href="/site.css?v=6">
+<style>
+body.ts-page{background:var(--ts-bg);color:var(--ts-text)}
+.ts-page .ts-header__right .user-name{color:#fff}
+</style>
 </head>
-<body>
+<body class="ts-page">
 
 <!-- ===== Login Screen ===== -->
 <div id="loginScreen" class="login-screen" style="display:none;">
@@ -506,17 +511,15 @@ body {
 <div id="appScreen" style="display:none;">
 
     <!-- Header -->
-    <div class="header">
-        <div class="header-left">
-            <a href="/">← トップ</a>
-            <h1>都道府県制覇マップ</h1>
-        </div>
-        <div class="header-right">
+    <header class="ts-header">
+        <a class="ts-header__back" href="/" aria-label="トップへ">◀</a>
+        <h1 class="ts-header__title">都道府県制覇マップ</h1>
+        <div class="ts-header__right">
             <img id="userIcon" class="user-icon" src="" alt="" style="display:none;">
             <span id="userName" class="user-name"></span>
             <button class="btn-logout" onclick="handleLogout()">ログアウト</button>
         </div>
-    </div>
+    </header>
 
     <!-- Nav Links -->
     <div style="max-width:1200px;margin:0 auto;padding:16px 24px 0;">
@@ -996,5 +999,14 @@ function showLoading(show) {
     }
 }
 </script>
+    <footer class="ts-footer">
+        <nav aria-label="サイトの案内">
+            <a href="/about.html">アプリ紹介</a>
+            <a href="/support.html">サポート</a>
+            <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+            <a href="/termsofservice/termsofservice.html">利用規約</a>
+        </nav>
+        <div>© ツーリングスポットシェア（biketeilen）</div>
+    </footer>
 </body>
 </html>

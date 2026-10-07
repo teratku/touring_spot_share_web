@@ -398,19 +398,30 @@
         .table-wrap th { background: #1F2A21; }
       }
     </style>
+    <link rel="stylesheet" href="/site.css?v=6">
+    <style>
+      /* 共通の見た目（/site.css）に合わせる上書き。⚠️ 中身の見出し・表・注意の枠はこのページの CSS のまま */
+      body.ts-page { padding: 0; min-height: 100vh; background: var(--ts-bg); color: var(--ts-text); }
+      .ts-page .container { max-width: var(--ts-max); margin: -28px auto 0; position: relative;
+        background: var(--ts-surface); color: var(--ts-text); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); }
+      .ts-page .button-group { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 24px; }
+      .ts-header .meta { margin: 8px 0 0; font-size: 13px; color: #fff; opacity: .9; }
+      .ts-page .section h2 { color: var(--ts-teal-ink); }
+      .ts-page .container > .subtitle { font-size: 15px; line-height: 1.7; color: var(--ts-text-2); text-align: left; margin: 0 0 24px; }
+    </style>
     <script src="/menu.js?v=5" defer></script>
 </head>
   
-  <body>
+  <body class="ts-page">
+    <header class="ts-header ts-header--hero">
+      <h1 class="ts-header__title">📋 利用規約</h1>
+      <p class="meta">2026年10月7日 改定</p>
+    </header>
+    <div class="ts-main">
     <div class="container">
-      <div class="header">
-        <div class="header-icon" role="img" aria-label="利用規約"></div>
-        <h1>利用規約</h1>
-        <p class="subtitle">
-          この利用規約（以下「本規約」）は、ツーリングスポットシェア運営者（以下「運営者」）が提供するスマートフォンアプリ「ツーリングスポットシェア」とウェブサイト（https://biketeilen.web.app）（以下あわせて「本サービス」）の利用条件を定めるものです。本サービスを利用するすべての方（以下「ユーザー」）は、本規約に同意したうえで本サービスを利用するものとします。
-        </p>
-        <p class="meta">2026年10月7日 改定</p>
-      </div>
+      <p class="subtitle">
+        この利用規約（以下「本規約」）は、ツーリングスポットシェア運営者（以下「運営者」）が提供するスマートフォンアプリ「ツーリングスポットシェア」とウェブサイト（https://biketeilen.web.app）（以下あわせて「本サービス」）の利用条件を定めるものです。本サービスを利用するすべての方（以下「ユーザー」）は、本規約に同意したうえで本サービスを利用するものとします。
+      </p>
 
       <div class="section">
         <h2>第1条（適用）</h2>
@@ -424,7 +435,7 @@
       <div class="section">
         <h2>第2条（アカウント登録）</h2>
         <ol>
-          <li>スポットの投稿、ルートのバックアップや共有など一部の機能は、アカウント（メールアドレスとパスワード）を登録した方が利用できます。</li>
+          <li>スポットの投稿、ルートのバックアップや共有など一部の機能は、アカウント（メールアドレスとパスワード、または Apple・Google でのサインイン）を登録した方が利用できます。</li>
           <li>未成年の方は、親権者など法定代理人の同意を得たうえで、登録・利用（有料プランの購入を含みます）をしてください。</li>
           <li>運営者は、登録を申請した方が次のいずれかに当たると判断した場合、登録を承認しないことがあります。その理由を開示する義務は負いません。
             <ul class="plain">
@@ -440,8 +451,8 @@
       <div class="section">
         <h2>第3条（アカウントの管理）</h2>
         <ol>
-          <li>ユーザーは、自分の責任でメールアドレスとパスワードを管理し、第三者に利用させたり、譲渡・貸与したりしてはなりません。</li>
-          <li>登録されたメールアドレスとパスワードでログインされた場合、そのアカウントのユーザー本人による利用とみなします。</li>
+          <li>ユーザーは、自分の責任でメールアドレスとパスワード（Apple・Google でサインインした場合はそのアカウント）を管理し、第三者に利用させたり、譲渡・貸与したりしてはなりません。</li>
+          <li>登録されたメールアドレスとパスワード、または登録に使った Apple・Google のアカウントでログインされた場合、そのアカウントのユーザー本人による利用とみなします。</li>
         </ol>
       </div>
 
@@ -626,17 +637,24 @@
       </div>
 
       <div class="button-group">
-        <a href="/" class="btn-primary" aria-label="トップページへ戻る">
+        <a href="/" class="ts-btn" aria-label="トップページへ戻る">
           トップページへ戻る
         </a>
-        <a href="/privacypolicy/privacypolicy.html" class="btn-secondary" aria-label="プライバシーポリシーを見る">
+        <a href="/privacypolicy/privacypolicy.html" class="ts-btn ts-btn--ghost" aria-label="プライバシーポリシーを見る">
           プライバシーポリシーを見る
         </a>
       </div>
 
-      <div class="footer">
-        <p>© 2025–2026 ツーリングスポットシェア</p>
-      </div>
     </div>
+    </div>
+    <footer class="ts-footer">
+      <nav aria-label="サイトの案内">
+        <a href="/about.html">アプリ紹介</a>
+        <a href="/support.html">サポート</a>
+        <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+        <a href="/termsofservice/termsofservice.html">利用規約</a>
+      </nav>
+      <div>© ツーリングスポットシェア（biketeilen）</div>
+    </footer>
   </body>
 </html>

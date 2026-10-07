@@ -1800,9 +1800,15 @@
 
     </style>
     <script src="/menu.js?v=5" defer></script>
+    <link rel="stylesheet" href="/site.css?v=6">
+    <style>
+      body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
+      .ts-header .header-content { display: flex; align-items: center; gap: 10px; width: 100%; }
+      .ts-header h1 { color: #fff; }
+    </style>
 </head>
   
-  <body>
+  <body class="ts-page">
     <div id="app">
       <!-- ヘッダー -->
       <header>
@@ -2084,8 +2090,14 @@
           </div>
         </template>
 
-        <footer class="page-footer" :class="{ 'has-app-banner': !appBannerDismissed }">
-          <p>© 2025 ツーリングスポットシェア All rights reserved.</p>
+        <footer class="page-footer ts-footer" :class="{ 'has-app-banner': !appBannerDismissed }">
+          <nav aria-label="サイトの案内">
+            <a href="/about.html">アプリ紹介</a>
+            <a href="/support.html">サポート</a>
+            <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+            <a href="/termsofservice/termsofservice.html">利用規約</a>
+          </nav>
+          <div>© ツーリングスポットシェア（biketeilen）</div>
         </footer>
       </div>
 

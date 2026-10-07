@@ -248,17 +248,25 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="/site.css?v=6">
+    <style>
+      /* 共通の見た目（/site.css）に合わせる上書き */
+      body.ts-page { display: block; padding: 0; min-height: 100vh; background: var(--ts-bg); color: var(--ts-text); }
+      .ts-page .container { max-width: 560px; margin: -28px auto 0; position: relative; text-align: center;
+        background: var(--ts-surface); color: var(--ts-text); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); }
+      .ts-page .container h2, .ts-page .container p { color: var(--ts-text-2); font-size: 15px; }
+      .ts-page .button-group { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+    </style>
     <script src="/menu.js?v=5" defer></script>
 </head>
   
-  <body>
+  <body class="ts-page">
+    <header class="ts-header ts-header--hero">
+      <h1 class="ts-header__title">🧭 ページが見つかりません</h1>
+      <p class="ts-header__sub">お探しのページは存在しないようです</p>
+    </header>
+    <div class="ts-main">
     <div class="container">
-      <div class="icon-container">
-        <div class="icon" role="img" aria-label="404エラー"></div>
-      </div>
-      
-      <h1>ページが見つかりません</h1>
-      <h2>お探しのページは存在しないようです</h2>
       
       <p>
         申し訳ございません。お探しのページは削除されたか、<br>
@@ -271,25 +279,25 @@
       </p>
       
       <div class="button-group">
-        <a href="/" class="btn-primary" aria-label="トップページへ戻る">
+        <a href="/" class="ts-btn" aria-label="トップページへ戻る">
           トップページへ戻る
         </a>
         
-        <a href="javascript:history.back()" class="btn-secondary" aria-label="前のページへ戻る">
+        <a href="javascript:history.back()" class="ts-btn ts-btn--ghost" aria-label="前のページへ戻る">
           前のページへ戻る
         </a>
       </div>
       
-      <div class="decoration">
-        <p class="decoration-text">
-          ツーリングスポットシェア
-        </p>
-      </div>
     </div>
-    <div class="decoration">
-      <p class="decoration-text">
-        © 2025 ツーリングスポットシェア All rights reserved.
-      </p>
     </div>
+    <footer class="ts-footer">
+      <nav aria-label="サイトの案内">
+        <a href="/about.html">アプリ紹介</a>
+        <a href="/support.html">サポート</a>
+        <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+        <a href="/termsofservice/termsofservice.html">利用規約</a>
+      </nav>
+      <div>© ツーリングスポットシェア（biketeilen）</div>
+    </footer>
   </body>
 </html>

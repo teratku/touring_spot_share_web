@@ -837,16 +837,22 @@
       }
     </style>
     <script src="/menu.js?v=5" defer></script>
+    <link rel="stylesheet" href="/site.css?v=6">
+    <style>
+      body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
+      .ts-header .header-content { display: flex; align-items: center; gap: 10px; width: 100%; }
+      .ts-header h1 { color: #fff; }
+    </style>
 </head>
   
-  <body>
+  <body class="ts-page">
     <div id="app">
       <!-- ヘッダー -->
-      <header>
+      <header class="ts-header">
         <div class="header-content">
           <div class="header-left">
             <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
-            <button class="back-btn" @click="goBack" aria-label="戻る">←</button>
+            <button class="back-btn ts-header__back" @click="goBack" aria-label="戻る">←</button>
             <div>
               <h1>📝 ツーリングブログ</h1>
               <div class="subtitle">体験記・スポット・ルート解説をシェア</div>
@@ -1139,8 +1145,14 @@
           <p>読み込み中...</p>
         </div>
 
-        <footer class="page-footer">
-          <p>© 2025 ツーリングスポットシェア All rights reserved.</p>
+        <footer class="page-footer ts-footer">
+          <nav aria-label="サイトの案内">
+            <a href="/about.html">アプリ紹介</a>
+            <a href="/support.html">サポート</a>
+            <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+            <a href="/termsofservice/termsofservice.html">利用規約</a>
+          </nav>
+          <div>© ツーリングスポットシェア（biketeilen）</div>
         </footer>
       </div>
     </div>

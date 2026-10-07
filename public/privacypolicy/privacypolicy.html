@@ -381,19 +381,30 @@
         .table-wrap th { background: #1F2A21; }
       }
     </style>
+    <link rel="stylesheet" href="/site.css?v=6">
+    <style>
+      /* 共通の見た目（/site.css）に合わせる上書き。⚠️ 中身の見出し・表・注意の枠はこのページの CSS のまま */
+      body.ts-page { padding: 0; min-height: 100vh; background: var(--ts-bg); color: var(--ts-text); }
+      .ts-page .container { max-width: var(--ts-max); margin: -28px auto 0; position: relative;
+        background: var(--ts-surface); color: var(--ts-text); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); }
+      .ts-page .button-group { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 24px; }
+      .ts-header .meta { margin: 8px 0 0; font-size: 13px; color: #fff; opacity: .9; }
+      .ts-page .section h2 { color: var(--ts-teal-ink); }
+      .ts-page .container > .subtitle { font-size: 15px; line-height: 1.7; color: var(--ts-text-2); text-align: left; margin: 0 0 24px; }
+    </style>
     <script src="/menu.js?v=5" defer></script>
 </head>
   
-  <body>
+  <body class="ts-page">
+    <header class="ts-header ts-header--hero">
+      <h1 class="ts-header__title">🔒 プライバシーポリシー</h1>
+      <p class="meta">2026年10月7日 改定</p>
+    </header>
+    <div class="ts-main">
     <div class="container">
-      <div class="header">
-        <div class="header-icon" role="img" aria-label="プライバシー保護"></div>
-        <h1>プライバシーポリシー</h1>
-        <p class="subtitle">
-          ツーリングスポットシェア運営者（以下「運営者」）は、スマートフォンアプリ「ツーリングスポットシェア」とウェブサイト（https://biketeilen.web.app）（以下あわせて「本サービス」）で取り扱う利用者（以下「ユーザー」）の情報について、個人情報の保護に関する法律その他の法令を守り、次のとおり取り扱います。
-        </p>
-        <p class="meta">2026年10月7日 改定</p>
-      </div>
+      <p class="subtitle">
+        ツーリングスポットシェア運営者（以下「運営者」）は、スマートフォンアプリ「ツーリングスポットシェア」とウェブサイト（https://biketeilen.web.app）（以下あわせて「本サービス」）で取り扱う利用者（以下「ユーザー」）の情報について、個人情報の保護に関する法律その他の法令を守り、次のとおり取り扱います。
+      </p>
 
       <div class="section">
         <h2>1. 取得する情報</h2>
@@ -588,17 +599,24 @@
       </div>
 
       <div class="button-group">
-        <a href="/" class="btn-primary" aria-label="トップページへ戻る">
+        <a href="/" class="ts-btn" aria-label="トップページへ戻る">
           トップページへ戻る
         </a>
-        <a href="/termsofservice/termsofservice.html" class="btn-secondary" aria-label="利用規約を見る">
+        <a href="/termsofservice/termsofservice.html" class="ts-btn ts-btn--ghost" aria-label="利用規約を見る">
           利用規約を見る
         </a>
       </div>
 
-      <div class="footer">
-        <p>© 2025–2026 ツーリングスポットシェア</p>
-      </div>
     </div>
+    </div>
+    <footer class="ts-footer">
+      <nav aria-label="サイトの案内">
+        <a href="/about.html">アプリ紹介</a>
+        <a href="/support.html">サポート</a>
+        <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+        <a href="/termsofservice/termsofservice.html">利用規約</a>
+      </nav>
+      <div>© ツーリングスポットシェア（biketeilen）</div>
+    </footer>
   </body>
 </html>

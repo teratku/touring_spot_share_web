@@ -49,12 +49,15 @@
   .maphead { display:flex; align-items:center; gap:10px; padding:6px 8px; font-size:13px; }
   .pill { background:rgba(0,168,198,.12); color:var(--teal); padding:3px 10px; border-radius:999px; font-weight:700; font-size:12px; }
 </style>
+  <link rel="stylesheet" href="/site.css?v=6">
+  <style>
+    body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
+  </style>
 </head>
-<body>
-  <header>
-    <h1>🗺️ バックアップルート</h1>
-    <span style="flex:1"></span>
-    <a href="/index.html">トップ</a>
+<body class="ts-page">
+  <header class="ts-header">
+    <h1 class="ts-header__title">🗺️ バックアップルート</h1>
+    <a class="ts-header__action" href="/index.html">トップ</a>
   </header>
 
   <div id="root">
@@ -374,5 +377,14 @@
   function fmtKm(m){ return m<1000 ? Math.round(m)+'m' : (m/1000).toFixed(1)+'km'; }
   function distanceOf(pts){ var R=6371000, t=0; for(var i=1;i<pts.length;i++){ var a=pts[i-1],b=pts[i]; var dLat=(b.lat-a.lat)*Math.PI/180, dLng=(b.lng-a.lng)*Math.PI/180; var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2); t+=2*R*Math.asin(Math.sqrt(s)); } return t; }
 </script>
+  <footer class="ts-footer">
+    <nav aria-label="サイトの案内">
+      <a href="/about.html">アプリ紹介</a>
+      <a href="/support.html">サポート</a>
+      <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+      <a href="/termsofservice/termsofservice.html">利用規約</a>
+    </nav>
+    <div>© ツーリングスポットシェア（biketeilen）</div>
+  </footer>
 </body>
 </html>

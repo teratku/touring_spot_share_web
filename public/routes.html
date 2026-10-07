@@ -253,17 +253,18 @@
     }
   </style>
   <script src="/menu.js?v=5" defer></script>
+  <link rel="stylesheet" href="/site.css?v=6">
+  <style>
+    body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
+  </style>
 </head>
-<body>
+<body class="ts-page">
 
 <div id="app" v-cloak>
   <!-- ヘッダー -->
-  <header>
-    <div class="header-content">
-      <a class="back-btn" href="/" title="ホームへ">◀</a>
-      <div class="header-title">🛣️ ルートを探す</div>
-      <div style="width:40px"></div>
-    </div>
+  <header class="ts-header">
+    <a class="ts-header__back" href="/" title="ホームへ" aria-label="ホームへ">◀</a>
+    <h1 class="ts-header__title">🛣️ ルートを探す</h1>
   </header>
 
   <!-- ローディング -->
@@ -480,5 +481,14 @@ createApp({
   }
 }).mount('#app');
 </script>
+  <footer class="ts-footer">
+    <nav aria-label="サイトの案内">
+      <a href="/about.html">アプリ紹介</a>
+      <a href="/support.html">サポート</a>
+      <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+      <a href="/termsofservice/termsofservice.html">利用規約</a>
+    </nav>
+    <div>© ツーリングスポットシェア（biketeilen）</div>
+  </footer>
 </body>
 </html>

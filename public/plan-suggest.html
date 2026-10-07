@@ -150,8 +150,13 @@
       .addbar { background: rgba(20,20,22,.96); border-color:#2c2c2e; }
     }
   </style>
+<link rel="stylesheet" href="/site.css?v=6">
+<style>
+body.ts-page{background:var(--ts-bg);color:var(--ts-text)}
+button.ts-header__action{border:none;cursor:pointer;font-family:inherit}
+</style>
 </head>
-<body>
+<body class="ts-page">
 <div id="app" v-cloak>
 
   <!-- ローディング -->
@@ -163,20 +168,19 @@
   <div class="center" v-else-if="!currentUser">
     <span style="font-size:46px">🔒</span>
     <p>ログインが必要です</p>
-    <button class="login-btn" @click="goLogin">ログインする</button>
+    <button class="login-btn ts-btn" @click="goLogin">ログインする</button>
   </div>
 
   <template v-else>
-    <div class="sheet-head">
-      <button class="close-btn" @click="close">閉じる</button>
-      <div class="sheet-title">🎲 おまかせ提案</div>
-      <div class="spacer"></div>
-    </div>
+    <header class="ts-header">
+      <h1 class="ts-header__title">🎲 おまかせ提案</h1>
+      <button class="ts-header__action" type="button" @click="close">閉じる</button>
+    </header>
 
     <div class="body">
       <!-- 対象プラン -->
       <p class="hint" style="margin-bottom:14px">
-        追加先：<strong style="color:#00A8C6">{{ targetLabel }}</strong>
+        追加先：<strong style="color:var(--ts-teal-ink)">{{ targetLabel }}</strong>
         <span v-if="!isNewPlan"> （{{ existingCount }}/{{ SPOT_LIMIT }}）・あと {{ remainingCapacity }} 件追加できます</span>
       </p>
 
