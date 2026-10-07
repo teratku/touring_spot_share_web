@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>画像の確認</title>
+<!--
+  開発者だけが見る画面（127.0.0.1 の管理ツール）。セーフサーチ（Cloud Vision）で印が付いた画像を見て判断する。
+  ⚠️ 利用者の判断（2026-10-07）: 引っかかった画像は開発者が判断する（画像は消さない）。
+     ここで付けるのは「問題なし」だけ。投稿を消すときは今までの手順で消す。中身は lib/moderationReview.js
+-->
+<style>
+  :root { --teal:#00A8C6; --ink:#1f2d3d; --line:#e4e9ee; --muted:#78909c; --bg:#f4f7f9; --warn:#c0392b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+  header { background:linear-gradient(90deg,var(--teal),#0bbed6); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  header h1 { font-size:17px; margin:0; }
+  header .pill { font-size:11px; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:999px; }
+  header .spacer { flex:1; }
+  header button { border:1px solid rgba(255,255,255,.6); background:transparent; color:#fff; border-radius:8px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  .wrap { max-width:1100px; margin:16px auto; padding:0 16px; }
+  .note { font-size:12px; color:var(--muted); line-height:1.6; margin:0 0 12px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+  .photo { position:relative; aspect-ratio:4/3; background:#e9eef1; cursor:pointer; border:none; padding:0; }
+  .photo img { width:100%; height:100%; object-fit:cover; filter:blur(18px); transition:filter .2s; }
+  .photo.shown img { filter:none; }
+  .photo span { position:absolute; inset:auto 8px 8px auto; font-size:11px; background:rgba(0,0,0,.55); color:#fff; padding:2px 8px; border-radius:999px; }
+  .photo:focus-visible, button:focus-visible { outline:2px solid var(--teal); outline-offset:2px; }
+  .body { padding:10px 12px; display:flex; flex-direction:column; gap:6px; font-size:13px; }
+  .reasons { display:flex; flex-wrap:wrap; gap:4px; }
+  .reason { font-size:11px; color:#fff; background:var(--warn); border-radius:999px; padding:1px 8px; }
+  .muted { color:var(--muted); font-size:12px; word-break:break-all; }
+  .ok { border:none; border-radius:8px; padding:8px 12px; font-size:13px; font-weight:700; cursor:pointer; background:var(--teal); color:#fff; }
+  .ok:disabled { opacity:.5; }
+  .empty { text-align:center; color:var(--muted); padding:40px 0; }
+  .err { color:var(--warn); font-size:13px; }
+  @media (prefers-reduced-motion: reduce) { .photo img { transition:none; } }
+</style>
+</head>
+<body>
+  <header>
+    <h1>🛡️ 画像の確認</h1>
+    <span class="pill">ローカル開発用 · 本番を読む・「問題なし」だけ書く</span>
+    <span class="spacer"></span>
+    <button id="reload" type="button">読み直す</button>
+  </header>
+  <div class="wrap">
+    <p class="note">セーフサーチ（Cloud Vision）で印が付いた画像です。画像はぼかしてあります（押すと見えます）。問題がなければ「問題なし」を押してください。
+      投稿を消すときは、今までの手順（通報の処理）で消してください。</p>
+    <div id="status" class="muted">読み込んでいます…</div>
+    <div id="grid" class="grid"></div>
+  </div>
+<script>
+const KIND = { post: "投稿の写真", userIcon: "プロフィール画像" };
+const REASON = { adult: "成人向け", violence: "暴力", racy: "きわどい", medical: "医療" };
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+async function load() {
+  const status = document.getElementById("status");
+  const grid = document.getElementById("grid");
+  status.textContent = "読み込んでいます…"; status.className = "muted";
+  try {
+    const res = await fetch("/api/moderation/pending");
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    status.textContent = json.items.length ? `${json.items.length}件` : "";
+    grid.innerHTML = json.items.length ? json.items.map((it) => `
+      <article class="card" data-id="${esc(it.id)}">
+        <button class="photo" type="button" aria-label="画像を見る"><img src="${esc(it.url)}" alt="" loading="lazy"><span>押すと見える</span></button>
+        <div class="body">
+          <div class="reasons">${it.reasons.map((r) => { const [k, lv] = r.split(":"); return `<span class="reason">${esc(REASON[k] || k)} ${esc(lv)}</span>`; }).join("")}</div>
+          <div>${esc(KIND[it.kind] || it.kind)}${it.spot ? `：${esc(it.spot.name || "（名前なし）")} <span class="muted">${esc(it.spot.place)}</span>` : ""}</div>
+          <div class="muted">${it.spot ? `投稿 ${esc(it.spot.id)} · ` : ""}${esc(it.path)}</div>
+          <div class="muted">${it.flaggedAt ? new Date(it.flaggedAt).toLocaleString("ja-JP") : ""}</div>
+          <button class="ok" type="button">問題なし</button>
+        </div>
+      </article>`).join("") : `<div class="empty">確認待ちの画像はありません</div>`;
+  } catch (e) {
+    status.textContent = "読めませんでした: " + e.message; status.className = "err";
+  }
+}
+
+document.getElementById("grid").addEventListener("click", async (e) => {
+  const photo = e.target.closest(".photo");
+  if (photo) { photo.classList.toggle("shown"); return; }
+  const ok = e.target.closest(".ok");
+  if (!ok) return;
+  const card = ok.closest(".card");
+  ok.disabled = true;
+  try {
+    const res = await fetch("/api/moderation/ok", { method: "POST", headers: { "Content-Type": "application/json" },
+                                                     body: JSON.stringify({ id: card.dataset.id }) });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    card.remove();
+    if (!document.querySelector(".card")) document.getElementById("grid").innerHTML = `<div class="empty">確認待ちの画像はありません</div>`;
+  } catch (err) {
+    ok.disabled = false;
+    alert("付けられませんでした: " + err.message);
+  }
+});
+document.getElementById("reload").addEventListener("click", load);
+load();
+</script>
+</body>
+</html>

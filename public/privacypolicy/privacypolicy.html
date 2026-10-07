@@ -401,6 +401,7 @@
         <h3>（1）アカウントとプロフィール</h3>
         <ul class="plain">
           <li>メールアドレスとパスワード（ログインに使います。パスワードは Firebase Authentication が暗号化して管理し、運営者は見ることができません）</li>
+          <li>Apple または Google でサインインした場合は、そのサービスから受け取る識別子・メールアドレス（Apple の「メールを非公開」を選んだ場合は転送用のアドレス）・名前（ログインに使います。Apple・Google のパスワードを運営者が受け取ることはありません）</li>
           <li>ユーザー名、プロフィール画像、プロフィールに入力した内容</li>
         </ul>
         <h3>（2）投稿と交流</h3>
@@ -460,7 +461,7 @@
           <li>投稿したスポット（写真・文章・場所）、口コミ、コメント、いいね、フォロー</li>
           <li>共有したルート（走行の軌跡を含みます）</li>
           <li>統計と走破率、ツーリングプラン、スタンプ</li>
-          <li>おすすめ道路・スポットを選んだ人数（3人以上が選んだものに限ります。誰が選んだかは表示しません）</li>
+          <li>おすすめ道路・スポットを選んだ人数と、道を走った人数（どちらも3人以上のものに限ります。誰かは表示しません）</li>
         </ul>
         <p>ルートを共有するときは、自宅など知られたくない場所が含まれていないか確かめてください。投稿や共有したルートは、いつでも削除できます。</p>
       </div>
@@ -493,7 +494,10 @@
               <tr><td>Google LLC</td><td>Firebase Cloud Messaging、In-App Messaging、App Check、Installations</td><td>通知用のトークン、アプリの識別子、端末が正規のものかを確かめる情報</td><td>通知、アプリ内のお知らせ、不正な利用の防止</td></tr>
               <tr><td>Google LLC</td><td>Google AdMob（アプリ）、Google AdSense（ウェブサイト）</td><td>端末やブラウザの情報、IP アドレス、広告の表示やクリックの情報、Cookie（ウェブサイト）</td><td>広告の表示</td></tr>
               <tr><td>Google LLC</td><td>Google アナリティクス（ウェブサイト）</td><td>閲覧したページ、ブラウザの情報、Cookie</td><td>ウェブサイトの利用状況の分析</td></tr>
+              <tr><td>Google LLC</td><td>Google Cloud Vision（セーフサーチ）</td><td>投稿した写真、プロフィール画像</td><td>不適切な画像の確認（印が付いた画像は運営者が確かめます）</td></tr>
               <tr><td>Apple Inc.</td><td>WeatherKit</td><td>天気を調べる場所の位置</td><td>天気の表示</td></tr>
+              <tr><td>Apple Inc.</td><td>Apple でサインイン</td><td>サインインの要求と結果（識別子・メールアドレス・名前）</td><td>ログイン</td></tr>
+              <tr><td>Google LLC</td><td>Google でサインイン</td><td>サインインの要求と結果（識別子・メールアドレス・名前）</td><td>ログイン</td></tr>
               <tr><td>Apple Inc.</td><td>App Store（アプリ内課金）</td><td>購入の情報</td><td>有料プランの購入と確認</td></tr>
             </tbody>
           </table>

@@ -493,13 +493,39 @@ exports.winBackNotification = onSchedule(
 // =====================================================
 // アプリの「選んだ記録」（user_taste/{uid}）から、道とスポットごとに選んだ人数を数え、
 // 3人以上のものだけを公開の popularity/roads・popularity/spots に書く（誰が選んだかは書かない）。
+// 走行記録（road_completion/{uid}）から道の名前ごとに走った人数も数え、popularity/ridden に書く（2026-10-07）。
 const { refreshPopularity } = require("./popularity");
 
 exports.popularityRanking = onSchedule(
   { schedule: "every day 04:00", timeZone: "Asia/Tokyo" },
   async () => {
     const result = await refreshPopularity(db, admin.firestore.FieldValue);
-    console.log(`popularityRanking: ${result.people}人の記録から 道${result.roads}件 スポット${result.spots}件`);
+    console.log(`popularityRanking: ${result.people}人の記録から 道${result.roads}件 スポット${result.spots}件・` +
+                `${result.riders}人の走行記録から 道の名前${result.ridden}件`);
     return null;
   }
 );
+
+// =====================================================
+// 投稿画像のセーフサーチ（imageModeration.js）
+// =====================================================
+// 投稿の写真（images/）とプロフィール画像（userIcon/）が上がったら Cloud Vision で調べ、
+// 引っかかったものだけを image_moderation に控える（開発者だけが読める。画像は消さない＝人が判断する）。
+// ⚠️ バケットは US の複数地域なので us-central1 に置く。Vision API を有効にしてから配信すること
+const { onObjectFinalized } = require("firebase-functions/v2/storage");
+const { moderateImage } = require("./imageModeration");
+let visionClient = null;
+
+exports.moderateUploadedImage = onObjectFinalized({ region: "us-central1", memory: "256MiB" }, async (event) => {
+  if (!visionClient) {
+    const vision = require("@google-cloud/vision");
+    visionClient = new vision.ImageAnnotatorClient();
+  }
+  const annotate = async (uri) => {
+    const [result] = await visionClient.safeSearchDetection(uri);
+    return (result && result.safeSearchAnnotation) || {};
+  };
+  const result = await moderateImage(event.data, { annotate, db, FieldValue: admin.firestore.FieldValue });
+  if (result.flagged) console.log(`moderateUploadedImage: 印を付けた ${event.data.name} ${result.reasons.join(",")}`);
+  return null;
+});

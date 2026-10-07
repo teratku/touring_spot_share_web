@@ -188,6 +188,18 @@ node setRallyStatus.js --year 2026 --status paused           # 年度一括
 - 好みの決め方はアプリ（`RiderSignals.swift`）と同じ（`lib/riderInsights.js`。重み: 投稿・プラン 1.0／★4以上の口コミ 0.8／いいね 0.6／選んだ記録は回数）。片方だけ変えない
 - 投稿の「近くの道」は、この画面では道の種類だけを使う（アプリは配信データから道を引き当てて札・曲がり具合まで使う）
 
+### 画像の確認（`/moderation`・開発者だけ・本番を読み「問題なし」だけ書く）
+
+| メソッド | パス | 用途 |
+|---|---|---|
+| GET | `/moderation` | 画面（moderation.html）。セーフサーチで印が付いた画像（ぼかして出し、押すと見える）と、その写真を使っている投稿 |
+| GET | `/api/moderation/pending` | まだ判断していない印（`image_moderation` の status: pending）。中身は `lib/moderationReview.js` |
+| POST | `/api/moderation/ok` | `{id}` に「問題なし」（status: ok）を付ける。⚠️ ID は「images%2Fa.jpg」の形なので URL ではなく本文で渡す |
+
+- 印は関数 `moderateUploadedImage`（`functions/imageModeration.js`）が付ける。投稿の写真（images/）とプロフィール画像（userIcon/）だけ
+- 印の基準: 成人向け・暴力は LIKELY 以上、きわどい・医療は VERY_LIKELY だけ（海辺の写真などで印だらけにしない）
+- ⚠️ 画像は消さない（利用者の判断 2026-10-07: 開発者が判断する）。消すときは今までの手順で
+
 ---
 
 ## 7. ファイル構成

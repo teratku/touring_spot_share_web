@@ -123,6 +123,9 @@ service cloud.firestore {
     // ⚠️ 開発者だけ。一般ユーザーに書かせると配信内容を左右できてしまう。
     // ⚠️ ドキュメントIDは道路のまとめキー（"r:埼玉県|361|secondary"）。
     match /road_reviews/{id}         { allow read, write: if isDev(); }
+    // 投稿画像のセーフサーチで印が付いた画像（2026-10-07。Cloud Functions の moderateUploadedImage が書く）。
+    // ⚠️ 開発者だけが読む（どの画像が疑われたかを他人に見せない）。「問題なし」の印は開発者が付ける
+    match /image_moderation/{id}     { allow read, update: if isDev(); allow create, delete: if false; }
 
     // ========== 公開ソーシャル：read 公開・write 認証済みのみ ==========
     // プロフィール（＋ badges / followUser / yaehCount 等の配下）。フォロー/問い合わせで他人配下にも書くため write=認証済み

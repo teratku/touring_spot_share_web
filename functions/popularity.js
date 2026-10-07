@@ -60,16 +60,44 @@ function tallyPopularity(docs, nowMs, { minUsers = MIN_USERS, recentDays = RECEN
 }
 
 /**
- * user_taste を全部読んで数え、公開の popularity/roads・popularity/spots に書く。
- * ⚠️ 1日1回。読む数は人数ぶん（1人1文書）
+ * 道を走った人の数（走行記録 road_completion/{uid} の riddenRoadNames）。
+ *
+ * ⚠️ 利用者のメモ（2026-10-07 に実装）:「道路ごとの投稿スポット数・写真の数・行った人の数（ビーナスラインの例）」。
+ * ⚠️ **名前はそのまま数える**（揃えるのはアプリの `RoadDexDataManager.normalizeRoadName`。全角・半角の変換などを
+ *    ここで真似るとずれる）。アプリは揃えた名前ごとに人数の大きい方を使う（同じ人を二重に数えないため合計しない）
+ * ⚠️ 3人以上だけ（人気と同じ。少ないと誰が走ったか推測されやすい）
+ * @param {Array<object>} docs road_completion の文書の中身
+ * @returns {Array<{name: string, users: number}>} 人数の多い順
+ */
+function tallyRiders(docs, { minUsers = MIN_USERS, maxItems = MAX_ITEMS * 5 } = {}) {
+  const byName = new Map();
+  for (const doc of docs) {
+    const names = new Set(((doc && doc.riddenRoadNames) || []).filter((n) => typeof n === "string" && n.trim()));
+    for (const name of names) byName.set(name, (byName.get(name) || 0) + 1);
+  }
+  return [...byName.entries()]
+    .filter(([, users]) => users >= minUsers)
+    .map(([name, users]) => ({ name, users }))
+    .sort((a, b) => b.users - a.users || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+    .slice(0, maxItems);
+}
+
+/**
+ * user_taste と road_completion を全部読んで数え、公開の popularity/roads・spots・ridden に書く。
+ * ⚠️ 1日1回。読む数は人数ぶん（1人1文書ずつ）
  */
 async function refreshPopularity(db, FieldValue, nowMs = Date.now()) {
-  const snapshot = await db.collection("user_taste").select("roads", "spots").get();
+  const [snapshot, completion] = await Promise.all([
+    db.collection("user_taste").select("roads", "spots").get(),
+    db.collection("road_completion").select("riddenRoadNames").get(),
+  ]);
   const { roads, spots } = tallyPopularity(snapshot.docs.map((d) => d.data()), nowMs);
+  const ridden = tallyRiders(completion.docs.map((d) => d.data()));
   const meta = { minUsers: MIN_USERS, recentDays: RECENT_DAYS, updatedAt: FieldValue.serverTimestamp() };
   await db.doc("popularity/roads").set({ ...meta, items: roads });
   await db.doc("popularity/spots").set({ ...meta, items: spots });
-  return { people: snapshot.size, roads: roads.length, spots: spots.length };
+  await db.doc("popularity/ridden").set({ minUsers: MIN_USERS, updatedAt: FieldValue.serverTimestamp(), items: ridden });
+  return { people: snapshot.size, roads: roads.length, spots: spots.length, riders: completion.size, ridden: ridden.length };
 }
 
-module.exports = { tallyPopularity, refreshPopularity, MIN_USERS, RECENT_DAYS, MAX_ITEMS };
+module.exports = { tallyPopularity, tallyRiders, refreshPopularity, MIN_USERS, RECENT_DAYS, MAX_ITEMS };

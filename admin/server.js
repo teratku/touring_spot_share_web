@@ -1974,6 +1974,34 @@ app.get("/api/riders/insights", async (req, res) => {
   }
 });
 
+// =====================================================
+// セーフサーチで印が付いた画像（開発者が判断する）。画面は public/moderation.html（http://127.0.0.1:4317/moderation）
+// =====================================================
+// ⚠️ 利用者の判断（2026-10-07）: 引っかかった画像は開発者が判断する。ここで書くのは「問題なし」だけ
+const { loadPendingFlags } = require("./lib/moderationReview");
+
+app.get("/moderation", (_req, res) => sendHtml(res, "moderation.html"));
+app.get("/api/moderation/pending", async (_req, res) => {
+  try {
+    res.json({ items: await loadPendingFlags(db) });
+  } catch (e) {
+    res.status(500).json({ error: e.message, items: [] });
+  }
+});
+// ⚠️ ID は「images%2Fa.jpg」のように / を符号にした形。URL の途中に置くと Express が戻してしまうので本文で受ける
+app.post("/api/moderation/ok", async (req, res) => {
+  const id = String((req.body && req.body.id) || "");
+  if (!id || id.includes("/")) return res.status(400).json({ error: "id が正しくありません" });
+  try {
+    await db.collection("image_moderation").doc(id).update({
+      status: "ok", reviewedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.get("/api/user/:uid", async (req, res) => {
   const uid = String(req.params.uid || "").trim();
   if (!uid) return res.status(400).json({ error: "uid が必要です" });
