@@ -466,9 +466,13 @@ app.get("/api/publish-log", (req, res) => {
   res.json({ entries: entries.slice(0, limit), latest: publishLog.latestByPrefecture(entries), generations });
 });
 
+// 本番に上がっている内容と同じかを確かめる（lib/publishSame.js）
+const { compareWithDeployed, needsConfirm } = require("./lib/publishSame");
+
 app.post("/api/roads/publish/:romaji", async (req, res) => {
   const { romaji } = req.params;
   const commit = req.body && req.body.commit === true;
+  const confirmSame = req.body && req.body.confirmSame === true;
   const prefecture = Object.keys(ROMAJI).find((n) => ROMAJI[n] === romaji);
   if (!prefecture) return res.status(400).json({ error: "県が分かりません: " + romaji });
 
@@ -477,6 +481,20 @@ app.post("/api/roads/publish/:romaji", async (req, res) => {
   const built = await run("buildRoadRecommend.js", ["--build", "--prefecture", prefecture]);
   steps.push({ name: "再生成", ...built });
   if (!built.ok) return res.json({ ok: false, steps });
+
+  // ⚠️ 本番に上がっている内容と同じなら、配信するか聞く（利用者の要望 2026-10-07）。
+  //    画面で確かめたあと（confirmSame）だけ書き込む。比べられない（古い配信に指紋が無い）ときは止めない
+  let comparison = { same: null };
+  try {
+    comparison = await compareWithDeployed({ db, dataDir: path.join(__dirname, "data", "road-recommend"), romaji });
+  } catch (e) {
+    steps.push({ name: "本番との比べ", ok: false, stdout: "", stderr: `本番の記録を読めませんでした: ${e.message}` });
+  }
+  if (needsConfirm({ commit, same: comparison.same, confirmSame })) {
+    steps.push({ name: "配信を止めました", ok: true,
+                 stdout: "本番に上がっている内容と同じです（中身の指紋が一致）。配信するか確かめてください。" });
+    return res.json({ ok: false, needsConfirm: true, sameAsDeployed: true, prefecture, steps });
+  }
 
   // 2. 検証（--commit を付けなければ書き込まない）
   const importArgs = ["--prefecture", prefecture];
@@ -491,7 +509,7 @@ app.post("/api/roads/publish/:romaji", async (req, res) => {
     generation = g[romaji] || null;
   } catch { /* まだ無い */ }
 
-  res.json({ ok: imported.ok, commit, prefecture, generation, steps });
+  res.json({ ok: imported.ok, commit, prefecture, generation, sameAsDeployed: comparison.same, steps });
 });
 
 // ========== 通行規制（road_restrictions）==========

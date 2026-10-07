@@ -2113,10 +2113,13 @@ $("tab-tune").onclick = () => { showTab("tune"); renderTuning(); };
 
 // ---------- 配信 ----------
 let publishReady = false;
+/** 下見で分かった「本番に上がっている内容と同じか」（true / false / null＝分からない） */
+let publishSame = null;
 
 function openPublish() {
   if (state.dirty) { alert(`未保存の調整が ${state.dirty}件 あります。先に保存してください。`); return; }
   publishReady = false;
+  publishSame = null;
   $("pubGo").disabled = true;
   // ⚠️ ここは**区間の手直しで選んでいる県**（`state.romaji`）。規制タブの県ではない
   $("pubTitle").textContent = `${state.prefName} を配信（おすすめ道路）`;
@@ -2128,14 +2131,20 @@ function openPublish() {
   showLastPublish("roads", state.romaji, state.prefName);
 }
 
-async function runPublish(commit) {
+/** 本番と同じ中身を配信するときの確認（利用者の要望 2026-10-07: 同じなら配信するか聞く） */
+function confirmSamePublish() {
+  return confirm(`${state.prefName} は、本番に上がっている内容と同じです（中身の指紋が一致）。\n\n` +
+                 "配信しても世代は上がらず、端末のデータは変わりません。\nそれでも配信しますか？");
+}
+
+async function runPublish(commit, confirmSame = false) {
   const log = $("pubLog");
   log.textContent = (commit ? "配信中…" : "下見中…") + "（再生成に十数秒かかります）\n";
   $("pubDry").disabled = true; $("pubGo").disabled = true;
   try {
     const r = await fetch(`/api/roads/publish/${state.romaji}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ commit }),
+      body: JSON.stringify({ commit, confirmSame }),
     });
     const j = await r.json();
     let text = "";
@@ -2147,13 +2156,21 @@ async function runPublish(commit) {
       text += "\n";
     }
     if (j.generation) text += `世代: v${j.generation.generation}（内容が変わると自動で上がります）\n`;
+    if (j.sameAsDeployed === true) text += "⚠️ 本番に上がっている内容と同じです。配信しても端末のデータは変わりません\n";
+    else if (j.sameAsDeployed === false) text += "本番に上がっている内容と違います（配信すると世代が上がります）\n";
     if (j.error) text += `エラー: ${j.error}\n`;
     log.textContent = text;
     log.scrollTop = log.scrollHeight;
 
-    if (!commit && j.ok) {
+    if (j.needsConfirm) {
+      // ⚠️ 下見のあとに中身が本番と同じになった・下見を通さずに呼ばれた、のどちらでも聞く
+      publishSame = true;
+      if (confirmSamePublish()) return runPublish(true, true);
+      setStatus("本番と同じ中身なので、配信しませんでした");
+    } else if (!commit && j.ok) {
       publishReady = true;
-      setStatus("下見が通りました。配信できます");
+      publishSame = j.sameAsDeployed;
+      setStatus(j.sameAsDeployed === true ? "下見が通りました（本番と同じ中身です）" : "下見が通りました。配信できます");
     } else if (commit && j.ok) {
       publishReady = false;
       setStatus(`${j.prefecture} を配信しました`);
@@ -2176,6 +2193,11 @@ $("publish").onclick = () => {
   //    一度規制を配信したあとに戻さないと、**おすすめ道路のつもりで規制を配信する**
   $("pubDry").onclick = () => runPublish(false);
   $("pubGo").onclick = () => {
+    // ⚠️ 本番と同じ中身なら、それでも配信するかを聞く（利用者の要望 2026-10-07）
+    if (publishSame === true) {
+      if (confirmSamePublish()) runPublish(true, true);
+      return;
+    }
     // 本番へ書き込む直前の最後の確認。県名を出して取り違えを防ぐ
     if (!confirm(`${state.prefName} を本番に配信します。\n\n世代が上がっていれば、この県のデータを持つ全ユーザーが落とし直します。\n実行しますか？`)) return;
     runPublish(true);
