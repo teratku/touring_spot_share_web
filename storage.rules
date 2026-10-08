@@ -31,40 +31,47 @@ service firebase.storage {
       return request.auth != null
           && request.auth.token.email in ["little_busters_rin_takuya@yahoo.co.jp"];
     }
-    // 上げるファイルの大きさの上限（MB）。削除のときは request.resource が無いので通す
+    // 上げるファイルの大きさの上限（MB）。⚠️ **作る・上書きする（create / update）ときだけ使うこと。**
+    //    読み込み・削除では request.resource が「無い」ので、本番の評価器は
+    //    「Property resource is undefined」のエラーで拒否する（2026-10-09 に Rules API の test で確認。
+    //    手元のエミュレーターはここを通してしまうので気づけなかった。Web のバックアップルートが本人なのに読めなかった）
     function within(mb) {
-      return request.resource == null || request.resource.size < mb * 1024 * 1024;
+      return request.resource.size < mb * 1024 * 1024;
     }
 
     // ========== 非公開：本人だけ ==========
     // ルート記録のバックアップ（RouteBackupManager）。線の JSON は復元で最大 50MB まで読む
     match /route_backups/{uid}/{allPaths=**} {
-      allow read, write: if isOwner(uid) && within(60);
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid) && within(60);
     }
     // 選んだスポットの控え（locationDetail.swift は {uid}.json、searchResultView.swift は {uid}_locations.json）
     match /selectedLocationBackup/{fileName} {
-      allow read, write: if signedIn()
+      allow read, delete: if signedIn()
+        && (fileName == request.auth.uid + ".json" || fileName.matches(request.auth.uid + "_.*"));
+      allow create, update: if signedIn()
         && (fileName == request.auth.uid + ".json" || fileName.matches(request.auth.uid + "_.*"))
         && within(20);
     }
     // 古いルートの控え（searchResultView.swift: {uid}_routes_{n}.json）
     match /routeBackups/{fileName} {
-      allow read, write: if signedIn() && fileName.matches(request.auth.uid + "_.*") && within(60);
+      allow read, delete: if signedIn() && fileName.matches(request.auth.uid + "_.*");
+      allow create, update: if signedIn() && fileName.matches(request.auth.uid + "_.*") && within(60);
     }
 
     // ========== 公開の投稿：誰でも読める・ログインした人が書ける ==========
-    match /images/{fileName}    { allow read: if true; allow write: if signedIn() && within(20); } // スポット・コメントの写真
-    match /iconImage/{fileName} { allow read: if true; allow write: if signedIn() && within(20); } // スポットの一覧用の小さい写真
-    match /userIcon/{fileName}  { allow read: if true; allow write: if signedIn() && within(20); } // プロフィール画像
+    match /images/{fileName}    { allow read: if true; allow delete: if signedIn(); allow create, update: if signedIn() && within(20); } // スポット・コメントの写真
+    match /iconImage/{fileName} { allow read: if true; allow delete: if signedIn(); allow create, update: if signedIn() && within(20); } // スポットの一覧用の小さい写真
+    match /userIcon/{fileName}  { allow read: if true; allow delete: if signedIn(); allow create, update: if signedIn() && within(20); } // プロフィール画像
     // 共有ルート（routes/{id}/cover.jpg・routes/JSON/{file}）
-    match /routes/{allPaths=**} { allow read: if true; allow write: if signedIn() && within(60); }
+    match /routes/{allPaths=**} { allow read: if true; allow delete: if signedIn(); allow create, update: if signedIn() && within(60); }
 
     // ========== 問い合わせの画像：ログインした人だけ ==========
-    match /inquiryDetailImage/{fileName} { allow read, write: if signedIn() && within(20); }
+    match /inquiryDetailImage/{fileName} { allow read, delete: if signedIn(); allow create, update: if signedIn() && within(20); }
 
     // ========== ブログの画像：誰でも読める・開発者だけ書ける ==========
-    match /blog_images/{fileName}     { allow read: if true; allow write: if isDev() && within(20); }
-    match /blog_thumbnails/{fileName} { allow read: if true; allow write: if isDev() && within(20); }
+    match /blog_images/{fileName}     { allow read: if true; allow delete: if isDev(); allow create, update: if isDev() && within(20); }
+    match /blog_thumbnails/{fileName} { allow read: if true; allow delete: if isDev(); allow create, update: if isDev() && within(20); }
 
     // ========== マスタ：誰でも読める・アプリからは書けない ==========
     // ⚠️ アプリにはグリッドを上げるコード（routeSaveMainView.swift uploadGridCSV・RouteRecordView.swift

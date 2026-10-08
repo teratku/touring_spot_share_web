@@ -548,6 +548,12 @@ cd ../.. && firebase emulators:exec --only storage --project biketeilen \
   "node admin/test-rules/storage.rules.test.mjs"
 ```
 
+⚠️ **エミュレーターで通っても本番で拒否されることがある**（2026-10-09: 読み込みにも大きさの上限 `within()` を
+掛けていて、本番の評価器では `request.resource` が無く「Property resource is undefined」で拒否。Web のバックアップルートが
+本人なのに読めなかった。エミュレーターは通していた）。上限は `create, update` だけに掛ける（`admin/test/storageRulesShape.test.js`）。
+本番の評価器では Rules API の test で確かめられる（規則の中身と試す要求を渡すだけ・データに触れない）:
+`POST https://firebaserules.googleapis.com/v1/projects/biketeilen:test`（`{source:{files:[…]}, testSuite:{testCases:[…]}}`）
+
 ⚠️ 保存済みのダウンロード URL（`?alt=media&token=…`）はルールを通らない。画面の写真は URL で読んでいるので、
 締めても表示は壊れない。ルールが効くのは SDK の読み書き・`getDownloadURL`・一覧。
 別の場所に入れて実行しようとすると `ERR_MODULE_NOT_FOUND` になる（一度そう書いて踏んだ）。
