@@ -22,6 +22,8 @@
     { icon: '🏅', label: 'バッジ', href: '/badges/badges.html' },
     { icon: '🛤️', label: '道路コンプリート率', href: '/completion/completion.html' },
     { icon: '🗺️', label: 'バックアップルート', href: '/my-routes.html', auth: 'in' },
+    // Web でルートを作ってアプリに送る（サブスク限定。2026-10-08。中でサブスクを確かめる）
+    { icon: '🧭', label: 'ルートを作る', href: '/route-maker.html', auth: 'in' },
     { icon: '👤', label: 'マイページ', href: '#mypage', auth: 'in', mypage: true },
     { sep: true },
     { icon: '🛟', label: 'サポート', href: '/support.html' },

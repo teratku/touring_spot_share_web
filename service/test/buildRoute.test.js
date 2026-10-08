@@ -373,7 +373,9 @@ test("管理の窓口を載せていない", () => {
   // ⚠️ `/v1/sapa` はアプリの SA/PA の一覧が使う（経路から寄れる SA/PA を返すだけ。`docs/sapa-plan.md`）
   // ⚠️ `/v1/route/corridors` はアプリの「別の道筋を探す」が使う（経路を返すだけ。2026-09-28）
   // ⚠️ `/v1/michinoeki` はアプリの「道の駅で休憩」が使う（経路から寄る道の駅を返すだけ。2026-10-03）
-  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/michinoeki", "/v1/route", "/v1/route/corridors", "/v1/sapa", "/v1/snap"],
+  // ⚠️ `/v1/web/route` は Web の「ルートを作る」が使う（経路を返すだけ・サブスク確認つき。2026-10-08）
+  assert.deepStrictEqual(routes.sort(), ["/health", "/v1/michinoeki", "/v1/route", "/v1/route/corridors", "/v1/sapa", "/v1/snap",
+                                         "/v1/web/route"],
     `余計な窓口が載っている: ${routes.join(", ")}`);
 });
 

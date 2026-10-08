@@ -466,6 +466,33 @@ app.get("/api/publish-log", (req, res) => {
   res.json({ entries: entries.slice(0, limit), latest: publishLog.latestByPrefecture(entries), generations });
 });
 
+/**
+ * 走った道の感想（アプリの RoadFeedback.swift が road_feedback に書く）を道ごとにまとめて返す。
+ *
+ * ⚠️ 利用者の判断（2026-10-08）: まず調整ツールだけに出す。札は画面で人が採用する（ここは読むだけ）
+ * ⚠️ 誰が書いたかは返さない（人数とひとことだけ。`lib/roadFeedback.js`）
+ * 読み取り回数を抑えるため1時間メモリにためる。?refresh=1 で取り直す。
+ */
+const { summarizeFeedback } = require("./lib/roadFeedback");
+let feedbackCache = null; // { t, feedback }
+
+app.get("/api/roads/feedback", async (req, res) => {
+  const fresh = req.query.refresh === "1";
+  if (!fresh && feedbackCache && Date.now() - feedbackCache.t < REVIEWS_TTL_MS) {
+    return res.json({ feedback: feedbackCache.feedback, cached: true });
+  }
+  try {
+    const snap = await db.collection("road_feedback").get();
+    const docs = [];
+    snap.forEach((doc) => docs.push(doc.data() || {}));
+    const feedback = summarizeFeedback(docs);
+    feedbackCache = { t: Date.now(), feedback };
+    res.json({ feedback, cached: false });
+  } catch (e) {
+    res.status(500).json({ error: e.message, feedback: {} });
+  }
+});
+
 // 本番に上がっている内容と同じかを確かめる（lib/publishSame.js）
 const { compareWithDeployed, needsConfirm } = require("./lib/publishSame");
 

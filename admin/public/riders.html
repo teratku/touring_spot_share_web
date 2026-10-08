@@ -124,6 +124,8 @@ function render() {
   document.getElementById("cards").innerHTML = [
     ["人", t.people], ["投稿", t.posts], ["いいね", t.likes], ["口コミ", t.reviews],
     ["プラン", t.plans], ["選んだ", t.choices], ["札つき投稿", t.withTag], ["近くの道つき", t.withRoad],
+    // 走った道の感想（2026-10-08）。⚠️ 古いサーバの応答には無いので 0 にする
+    ["道の感想", t.feedbackAnswers || 0], ["感想を答えた人", t.feedbackRiders || 0],
   ].map(([l, n]) => `<div class="card"><b>${n}</b><span>${l}</span></div>`).join("");
   document.getElementById("sources").innerHTML = SOURCES.map(([k, l]) =>
     `<span class="src ${active.has(k) ? "" : "off"}" role="button" tabindex="0" data-k="${k}"><i style="background:${colorOf(k)}"></i>${l}</span>`).join("");

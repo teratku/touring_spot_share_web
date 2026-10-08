@@ -123,6 +123,52 @@ service cloud.firestore {
     // ⚠️ 開発者だけ。一般ユーザーに書かせると配信内容を左右できてしまう。
     // ⚠️ ドキュメントIDは道路のまとめキー（"r:埼玉県|361|secondary"）。
     match /road_reviews/{id}         { allow read, write: if isDev(); }
+    // 走った道の感想（2026-10-08。アプリの RoadFeedback.swift。夜の通知で聞く）。
+    // ⚠️ 本人だけが書けて読める（文書IDは「uid_道のまとめキー」・中身の uid も本人）。
+    //    調整ツールが Admin SDK で読んで集計し、札は人が採用する（配信へ自動では流さない。road_reviews と同じ考え）。
+    // ⚠️ 形は RoadFeedback.payload と同じにすること（鍵・判定・札・注意・ひとことの長さ）
+    function isValidRoadFeedback(d) {
+      return d.keys().hasOnly(['uid', 'roadID', 'roadName', 'verdict', 'tags', 'cautions', 'note', 'rideKm', 'rodeAt', 'updatedAt'])
+        && d.keys().hasAll(['uid', 'roadID', 'verdict', 'updatedAt'])
+        && d.verdict in ['good', 'ok', 'bad']
+        && d.roadID is string && d.roadID.size() > 0 && d.roadID.size() <= 300
+        && (!('roadName' in d) || (d.roadName is string && d.roadName.size() <= 100))
+        && (!('tags' in d) || (d.tags is list && d.tags.size() <= 4
+              && d.tags.hasOnly(['scenic', 'winding', 'flowing', 'forest'])))
+        && (!('cautions' in d) || (d.cautions is list && d.cautions.size() <= 4
+              && d.cautions.hasOnly(['rough', 'narrow', 'traffic', 'gravel'])))
+        && (!('note' in d) || (d.note is string && d.note.size() <= 200))
+        && (!('rideKm' in d) || (d.rideKm is number && d.rideKm >= 0 && d.rideKm < 2000))
+        && (!('rodeAt' in d) || d.rodeAt is timestamp)
+        && d.updatedAt == request.time;
+    }
+    // Web で作ったルート（2026-10-08。public/route-maker.html が書き、アプリの「保存したルート」に出す。サブスク限定）。
+    // ⚠️ 本人だけ（出発地が自宅のことがある）。users/{uid} の下は誰でも読めるので、そこには置かない。
+    //    アプリが書くのは「開いた時刻」（openedAt）だけ
+    function isValidWebRoute(d) {
+      return d.keys().hasOnly(['name', 'planId', 'planName', 'createdAt', 'startsAtCurrentLocation', 'origin',
+                               'destinations', 'conditions', 'chosen'])
+        && d.name is string && d.name.size() > 0 && d.name.size() <= 100
+        && d.destinations is list && d.destinations.size() >= 1 && d.destinations.size() <= 10
+        && d.conditions is map
+        && d.startsAtCurrentLocation is bool
+        && (!('chosen' in d) || d.chosen is map)
+        && d.createdAt == request.time;
+    }
+    // 親の文書は中身を持たない。⚠️ 退会でアプリが消しにくる（AccountDeletion の .document）ので、本人に消させる
+    match /web_routes/{uid} { allow read, delete: if isOwner(uid); }
+    match /web_routes/{uid}/routes/{id} {
+      allow read, delete: if isOwner(uid);
+      allow create: if isOwner(uid) && isValidWebRoute(request.resource.data);
+      allow update: if isOwner(uid) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['openedAt']);
+    }
+    match /road_feedback/{id} {
+      allow read, delete: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create, update: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && id.matches(request.auth.uid + '_.+')
+        && isValidRoadFeedback(request.resource.data);
+    }
     // 投稿画像のセーフサーチで印が付いた画像（2026-10-07。Cloud Functions の moderateUploadedImage が書く）。
     // ⚠️ 開発者だけが読む（どの画像が疑われたかを他人に見せない）。「問題なし」の印は開発者が付ける
     match /image_moderation/{id}     { allow read, update: if isDev(); allow create, delete: if false; }

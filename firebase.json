@@ -79,6 +79,13 @@
     ],
     "rewrites": [
       {
+        "source": "/v1/web/**",
+        "run": {
+          "serviceId": "route-api",
+          "region": "asia-northeast1"
+        }
+      },
+      {
         "source": "/blog/blog-detail.html",
         "function": "blogSSR"
       },

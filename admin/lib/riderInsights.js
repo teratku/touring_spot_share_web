@@ -1,4 +1,5 @@
 "use strict";
+const { countFeedback } = require("./roadFeedback");
 
 /**
  * 利用者の好みと行き先（開発者だけが見る画面 /riders の中身）。
@@ -234,6 +235,8 @@ function buildInsights(data, locate = () => null) {
       reviews: users.reduce((s, u) => s + u.counts.review, 0),
       plans: users.reduce((s, u) => s + u.counts.plan, 0),
       choices: users.reduce((s, u) => s + u.counts.choice, 0),
+      // 走った道の感想（2026-10-08。アプリの RoadFeedback.swift）。どれくらい答えてもらえているかを数える
+      ...feedbackTotals(data.feedback),
     },
     tags: top(tags, 50), spotPoints: top(spotPoints, 50), highways: top(highways, 10),
     prefectures: top(prefectures, 47),
@@ -248,13 +251,20 @@ function buildInsights(data, locate = () => null) {
  *   取り消しても残るので使わない
  * - プランは users/{uid}/touringPlans
  */
+/** 走った道の感想の数（回答数・答えた人・道の数）。⚠️ 中身（ひとこと）は /riders では使わない */
+function feedbackTotals(feedback) {
+  const c = countFeedback(feedback || []);
+  return { feedbackAnswers: c.answers, feedbackRiders: c.riders, feedbackRoads: c.roads };
+}
+
 async function loadRiderData(db) {
-  const [postsSnap, likesSnap, womSnap, plansSnap, tasteSnap] = await Promise.all([
+  const [postsSnap, likesSnap, womSnap, plansSnap, tasteSnap, feedbackSnap] = await Promise.all([
     db.collection("imagedownload").select("userID", "lat", "lng", "tag", "points", "road").get(),
     db.collectionGroup("yaehCount").select("userID").get(),
     db.collection("wordOfMouth").select("postUserID", "locationDocID", "womAssessment").get(),
     db.collectionGroup("touringPlans").select("spots").get(),
     db.collection("user_taste").select("roads", "spots").get(),
+    db.collection("road_feedback").select("uid", "roadID", "verdict").get(),
   ]);
   const posts = postsSnap.docs.map((d) => {
     const x = d.data();
@@ -279,7 +289,8 @@ async function loadRiderData(db) {
     plans.push({ userID: owner.id, spots });
   }
   const tastes = tasteSnap.docs.map((d) => ({ userID: d.id, ...(d.data() || {}) }));
-  return { posts, likes, reviews, plans, tastes };
+  const feedback = feedbackSnap.docs.map((d) => d.data() || {});
+  return { posts, likes, reviews, plans, tastes, feedback };
 }
 
 module.exports = { SOURCE_WEIGHT, REVIEW_MIN, GRID_DEG, roadFeatures, spotFeatures, tasteFromEvidence, buildInsights, loadRiderData };

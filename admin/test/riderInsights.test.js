@@ -82,6 +82,7 @@ test("本番から読むのは必要な項目だけで、いいねはスポッ�
     wordOfMouth: snap([["wordOfMouth/w1", { postUserID: "V", locationDocID: "s1", womAssessment: 5 }]]),
     touringPlans: snap([["users/W/touringPlans/p1", { spots: [{ spotId: "s1", lat: 35, lng: 139, roadId: "r:x" }] }]]),
     user_taste: snap([["user_taste/W", { spots: {} }]]),
+    road_feedback: snap([["road_feedback/W_r:x", { uid: "W", roadID: "r:x", verdict: "good" }]]),
   };
   const query = (name) => ({ select: (...f) => { selected[name] = f; return { get: async () => tables[name] }; } });
   const db = { collection: query, collectionGroup: query };
@@ -93,4 +94,7 @@ test("本番から読むのは必要な項目だけで、いいねはスポッ�
   assert.deepStrictEqual(data.plans, [{ userID: "W", spots: [{ spotId: "s1", lat: 35, lng: 139, isRoad: false, roadID: "r:x" }] }],
     "プランの持ち主を親から取っていない");
   assert.deepStrictEqual(data.tastes.map((t) => t.userID), ["W"]);
+  // 走った道の感想は数えるだけ（ひとことは読まない。2026-10-08）
+  assert.deepStrictEqual(selected.road_feedback, ["uid", "roadID", "verdict"], "感想のひとことまで読んでいる");
+  assert.strictEqual(R.buildInsights(data).totals.feedbackAnswers, 1, "感想の数を合計に出していない");
 });

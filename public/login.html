@@ -12,7 +12,6 @@
     <!-- リソースヒント -->
 
     <!-- Vue.js 3 -->
-    <script src="/vendor/vue.global.prod.js"></script>
 
     <!-- Firebase SDKs -->
     <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -187,6 +186,8 @@
         align-items: center;
         gap: 8px;
       }
+      /* ⚠️ display を決めているので、hidden 属性だけでは隠れない */
+      .error-message[hidden] { display: none; }
 
       /* ========== ボタン ========== */
       .btn-login {
@@ -265,7 +266,7 @@
       body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
       .ts-page .login-card { background: var(--ts-surface); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); }
     </style>
-    <script src="/menu.js?v=5" defer></script>
+    <script src="/menu.js?v=6" defer></script>
 </head>
 
   <body class="ts-page">
@@ -290,66 +291,39 @@
             <h2 class="card-title">ログイン</h2>
 
             <!-- エラーメッセージ -->
-            <div v-if="errorMessage" class="error-message">
+            <div id="error" class="error-message" hidden>
               <span>⚠️</span>
-              <span>{{ errorMessage }}</span>
+              <span id="errorText"></span>
             </div>
 
             <!-- ⚠️ 認証情報の入力は必ず <form> で囲む。
                  div に input を並べただけだと、Chrome のパスワード保護が
                  「安全に送信されるか」を判断できず、フィッシング扱いされる
                  （Search Console:「ユーザー ログインでフィッシングの可能性を検出」）。
-                 送信自体は Vue が止めるが、要素としては正規のフォームにしておく。 -->
-            <form action="/login.html" method="post" @submit.prevent="login">
+                 送信自体はスクリプトが止めるが、要素としては正規のフォームにしておく。 -->
+            <form id="loginForm" action="/login.html" method="post" novalidate>
             <!-- メールアドレス -->
             <div class="form-group">
               <label class="form-label" for="email">メールアドレス</label>
-              <input
-                id="email"
-                v-model="email"
-                type="email"
-                class="form-input"
-                :class="{ error: emailError }"
-                placeholder="example@email.com"
-                autocomplete="email"
-                @keyup.enter="login"
-                @input="clearErrors"
-              >
+              <input id="email" type="email" class="form-input" placeholder="example@email.com" autocomplete="email">
             </div>
 
             <!-- パスワード -->
             <div class="form-group">
               <label class="form-label" for="password">パスワード</label>
               <div class="password-wrapper">
-                <input
-                  id="password"
-                  v-model="password"
-                  :type="showPassword ? 'text' : 'password'"
-                  class="form-input"
-                  :class="{ error: passwordError }"
-                  placeholder="パスワードを入力"
-                  autocomplete="current-password"
-                  @keyup.enter="login"
-                  @input="clearErrors"
-                >
-                <button class="password-toggle" type="button" @click="showPassword = !showPassword">
-                  {{ showPassword ? '🙈' : '👁️' }}
-                </button>
+                <input id="password" type="password" class="form-input" placeholder="パスワードを入力" autocomplete="current-password">
+                <button id="togglePassword" class="password-toggle" type="button" aria-label="パスワードを表示">👁️</button>
               </div>
             </div>
 
             <!-- ログインボタン -->
-            <button class="btn-login ts-btn ts-btn--block" type="submit" :disabled="isLoading">
-              <span v-if="isLoading">
-                <span class="spinner"></span>ログイン中...
-              </span>
-              <span v-else>ログイン</span>
-            </button>
+            <button id="loginButton" class="btn-login ts-btn ts-btn--block" type="submit">ログイン</button>
             </form>
 
             <!-- フッターリンク -->
             <div class="footer-links">
-              <a href="#" @click.prevent="forgotPassword">パスワードをお忘れですか？</a>
+              <a href="#" id="forgotLink">パスワードをお忘れですか？</a>
             </div>
           </div>
         </div>
@@ -367,7 +341,10 @@
     </div>
 
     <script>
-      const { createApp } = Vue;
+      // ⚠️ **Vue を使わないこと。** このページには Content-Security-Policy（firebase.json）が付いていて
+      //    'unsafe-eval' を許していない。Vue はページの中に書いたテンプレートをその場で組み立てるときに
+      //    eval を使うので止められ、「読み込みに失敗しました」になっていた（2026-10-08 に報告）。
+      //    ログイン画面は認証情報を扱うので、制限を緩めずに素の JavaScript で書く。
 
       // Firebase の読み込みを待つ
       function waitForFirebase() {
@@ -407,112 +384,96 @@
         return messages[code] || `ログインに失敗しました (${code})`;
       }
 
+      // ログインしたあとに戻る先。⚠️ このサイトの中（/ で始まり // でない）だけ。外のサイトへは飛ばさない
+      function redirectTarget() {
+        const redirect = new URLSearchParams(window.location.search).get('redirect') || '';
+        return /^\/(?!\/)/.test(redirect) ? redirect : '/index.html';
+      }
+
       document.addEventListener('DOMContentLoaded', async function () {
+        const $ = (id) => document.getElementById(id);
+        const email = $('email');
+        const password = $('password');
+        const button = $('loginButton');
+        let isLoading = false;
+
+        function showError(message, { emailError = false, passwordError = false } = {}) {
+          $('errorText').textContent = message;
+          $('error').hidden = !message;
+          email.classList.toggle('error', emailError);
+          password.classList.toggle('error', passwordError);
+        }
+        function clearErrors() { showError(''); }
+
+        function setLoading(on) {
+          isLoading = on;
+          button.disabled = on;
+          button.innerHTML = on ? '<span class="spinner"></span>ログイン中...' : 'ログイン';
+        }
+
         try {
           await waitForFirebase();
-
-          const app = createApp({
-            data() {
-              return {
-                email: '',
-                password: '',
-                showPassword: false,
-                isLoading: false,
-                errorMessage: '',
-                emailError: false,
-                passwordError: false,
-              };
-            },
-
-            async mounted() {
-              // すでにログイン済みの場合はトップページへリダイレクト
-              firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                  const redirect = new URLSearchParams(window.location.search).get('redirect');
-                  window.location.href = redirect || '/index.html';
-                }
-              });
-            },
-
-            methods: {
-              clearErrors() {
-                this.errorMessage = '';
-                this.emailError = false;
-                this.passwordError = false;
-              },
-
-              validate() {
-                if (!this.email) {
-                  this.emailError = true;
-                  this.errorMessage = 'メールアドレスを入力してください';
-                  return false;
-                }
-                if (!this.password) {
-                  this.passwordError = true;
-                  this.errorMessage = 'パスワードを入力してください';
-                  return false;
-                }
-                return true;
-              },
-
-              async login() {
-                if (this.isLoading) return;
-                this.clearErrors();
-
-                if (!this.validate()) return;
-
-                this.isLoading = true;
-
-                try {
-                  await firebase.auth().signInWithEmailAndPassword(
-                    this.email.trim(),
-                    this.password
-                  );
-                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('login', { method: 'password' });
-                  // onAuthStateChanged で自動リダイレクト
-                } catch (error) {
-                  console.error('ログインエラー:', error);
-                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('login_failed', { error_code: error.code });
-                  this.errorMessage = getAuthErrorMessage(error.code);
-
-                  // エラーの種類に応じてフィールドをハイライト
-                  if (error.code === 'auth/invalid-email') {
-                    this.emailError = true;
-                  } else {
-                    this.emailError = true;
-                    this.passwordError = true;
-                  }
-                } finally {
-                  this.isLoading = false;
-                }
-              },
-
-              async forgotPassword() {
-                if (!this.email) {
-                  this.emailError = true;
-                  this.errorMessage = 'パスワードリセットにはメールアドレスを入力してください';
-                  return;
-                }
-
-                try {
-                  await firebase.auth().sendPasswordResetEmail(this.email.trim());
-                  if (window.TSSAnalytics) window.TSSAnalytics.logEvent('password_reset_requested', {});
-                  this.errorMessage = '';
-                  alert(`${this.email} にパスワードリセットメールを送信しました`);
-                } catch (error) {
-                  console.error('パスワードリセットエラー:', error);
-                  this.errorMessage = getAuthErrorMessage(error.code);
-                }
-              },
-            },
-          });
-
-          app.mount('#app');
         } catch (error) {
           console.error('初期化エラー:', error);
           document.getElementById('app').innerHTML =
             '<div style="text-align:center;padding:40px;color:#E63946;">読み込みに失敗しました。ページを再読み込みしてください。</div>';
+          return;
         }
+
+        // すでにログイン済みの場合はトップページへリダイレクト
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) window.location.href = redirectTarget();
+        });
+
+        email.addEventListener('input', clearErrors);
+        password.addEventListener('input', clearErrors);
+
+        $('togglePassword').addEventListener('click', () => {
+          const show = password.type === 'password';
+          password.type = show ? 'text' : 'password';
+          $('togglePassword').textContent = show ? '🙈' : '👁️';
+          $('togglePassword').setAttribute('aria-label', show ? 'パスワードを隠す' : 'パスワードを表示');
+        });
+
+        $('loginForm').addEventListener('submit', async (event) => {
+          event.preventDefault();
+          if (isLoading) return;
+          clearErrors();
+          if (!email.value) { showError('メールアドレスを入力してください', { emailError: true }); return; }
+          if (!password.value) { showError('パスワードを入力してください', { passwordError: true }); return; }
+
+          setLoading(true);
+          try {
+            await firebase.auth().signInWithEmailAndPassword(email.value.trim(), password.value);
+            if (window.TSSAnalytics) window.TSSAnalytics.logEvent('login', { method: 'password' });
+            // onAuthStateChanged で自動リダイレクト
+          } catch (error) {
+            console.error('ログインエラー:', error);
+            if (window.TSSAnalytics) window.TSSAnalytics.logEvent('login_failed', { error_code: error.code });
+            // エラーの種類に応じてフィールドをハイライト
+            showError(getAuthErrorMessage(error.code),
+                      { emailError: true, passwordError: error.code !== 'auth/invalid-email' });
+          } finally {
+            setLoading(false);
+          }
+        });
+
+        $('forgotLink').addEventListener('click', async (event) => {
+          event.preventDefault();
+          if (!email.value) {
+            showError('パスワードリセットにはメールアドレスを入力してください', { emailError: true });
+            return;
+          }
+          try {
+            await firebase.auth().sendPasswordResetEmail(email.value.trim());
+            if (window.TSSAnalytics) window.TSSAnalytics.logEvent('password_reset_requested', {});
+            clearErrors();
+            alert(`${email.value.trim()} にパスワードリセットメールを送信しました`);
+          } catch (error) {
+            console.error('パスワードリセットエラー:', error);
+            showError(getAuthErrorMessage(error.code));
+          }
+        });
       });
     </script>
   </body>

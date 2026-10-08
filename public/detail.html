@@ -39,6 +39,8 @@
     <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/init.js"></script>
     <script defer src="/analytics.js"></script>
+    <!-- サブスクの状態（プランの上限を決める。2026-10-08） -->
+    <script defer src="/subscription.js"></script>
 
     <!-- Google Maps API -->
     <script>
@@ -839,7 +841,7 @@
       }
       .touring-add-btn:hover { opacity: 0.85; }
     </style>
-    <script src="/menu.js?v=5" defer></script>
+    <script src="/menu.js?v=6" defer></script>
     <link rel="stylesheet" href="/site.css?v=6">
     <style>
       body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
@@ -1265,6 +1267,14 @@
               }
             },
             async mounted() {
+              // ⚠️ プランの上限はサブスクで変わる（無料: プラン3つ・1プラン3件／サブスク: プラン無制限・1プラン10件。
+              //    アプリの TouringPlanLimits と同じ。利用者の判断 2026-10-08）
+              if (window.TSSSubscription) {
+                window.TSSSubscription.onReady((s) => {
+                  this.touringPlanLimit = s.isSubscribed ? Number.POSITIVE_INFINITY : 3;
+                  this.touringSpotLimit = s.isSubscribed ? 10 : 3;
+                });
+              }
               try {
                 await waitForFirebase();
                 

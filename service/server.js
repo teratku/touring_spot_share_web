@@ -148,6 +148,20 @@ app.post("/v1/route", requireAuth, async (req, res) => {
 });
 
 /**
+ * **Web からのルート作成**（サブスクの人だけ。利用者の判断 2026-10-08）。体と応答は `/v1/route` と同じ。
+ * ⚠️ ホスティング（biketeilen.web.app）から転送して届く（firebase.json の rewrites `/v1/web/**`）。
+ *    同じドメインになるので CORS は要らない。⚠️ アプリの `/v1/route` にはサブスクを掛けない
+ */
+const { makeRequireSubscription } = require("./lib/webAccess");
+const requireSubscription = makeRequireSubscription(db);
+app.post("/v1/web/route", requireAuth, requireSubscription, async (req, res) => {
+  const out = await buildRouteResponse(req.body || {}, {
+    baseUrl: VALHALLA_URL, restrictionsFor: restrictionsForRoute,
+  });
+  res.status(out.status).json(out.body);
+});
+
+/**
  * 道筋の違う候補（アプリの「別の道筋を探す」。利用者の判断 2026-09-28: 押したときだけ）。
  * ⚠️ 体は `/v1/route` と同じ。立ち寄り先があるときは空で返す
  */
