@@ -20,7 +20,7 @@
 <script defer src="/__/firebase/init.js"></script>
 <script defer src="/subscription.js"></script>
 <!-- ⚠️ defer にしないこと（下のページ内のスクリプトが読み込みの途中で使う） -->
-<script src="/route-maker-lib.js?v=4"></script>
+<script src="/route-maker-lib.js?v=5"></script>
 <!-- 楽しい道・距離ガバの選び方（admin/lib から作る生成物・アプリの FunRouteBuilder と答え合わせ済み） -->
 <script src="/route-maker-fun.js?v=1"></script>
 <!-- 県の外接矩形（おすすめ道路を取りに行く県を決める。アプリの PrefectureData と同じ値） -->
@@ -398,6 +398,8 @@
         origin = split.origin; originName = split.originName; dests = split.dests;
         if (!dests.length) throw new Error("最初の場所のほかに行き先がありません");
       }
+      // ⚠️ 引く前に、道の行き先が有料かを知っておく（知らないまま有料を避けて引くと、選んだ有料の道を通らない遠回りになる）
+      await resolveRoadTolls(dests);
       var fit = fitted(dests, MAX_DESTINATION_POINTS);
       var cond = conditions();
       var token = await fb.user.getIdToken();
@@ -424,11 +426,55 @@
     }
   }
 
+  /**
+   * 道の行き先が有料かを配信データから引き当てる（アプリの resolvingRoadTolls・EnjoyableRoadsService.road(withID:)）。
+   * ⚠️ 取れなければ有料の扱いをしないだけ（今までどおり引く）
+   */
+  async function resolveRoadTolls(dests) {
+    var roads = dests.filter(function (d) { return d.kind === "road" && d.roadID && !d.toll; });
+    if (!roads.length || typeof PREFECTURES === "undefined") return;
+    try {
+      var names = RM.prefecturesFor(roads.map(RM.roadPathOf), PREFECTURES);
+      var segments = await loadSegments(names);
+      roads.forEach(function (d) {
+        var t = RM.tollOfRoad(d.roadID, segments);
+        if (t) { d.toll = t.toll; d.tollKm = t.km; }
+      });
+    } catch (e) { /* 取れなければ有料の扱いをしないだけ */ }
+  }
+
+  /**
+   * 有料の注意（アプリの chosenTollRoadNotice・tollUnavoidableNotice。利用者の要望 2026-10-11）。
+   * 有料を使わない区間で選んだ有料の道・行き先へ行くのに避けられなかった有料（行き先ごと。分けられない分は今までの1行）
+   */
+  function tollNoticesOf(c, cond) {
+    var r = lastRequest, out = [];
+    var dests = r ? r.fitted : [], defaults = RM.legDefaults(cond);
+    var chosenRoads = RM.chosenTollRoads(dests, defaults);
+    chosenRoads.forEach(function (i) {
+      var d = dests[i];
+      out.push({ text: "選んだ「" + d.name + "」は" + (d.toll === "full" ? "有料道路" : "一部が有料" + (d.tollKm ? "（" + km(d.tollKm * 1000) + "）" : ""))
+                       + "（選んだ道なので通ります）" });
+    });
+    if (!(c.tollUnavoidableMeters > 0)) return out;
+    var avoids = dests.map(function (d) { return RM.effectiveLeg(d.legSetting, defaults).avoidTolls; });
+    var split = dests.length ? RM.unavoidableTolls(c.steps, c.tollUnavoidableMeters, avoids, chosenRoads)
+      : { byDestination: [], unattributedMeters: c.tollUnavoidableMeters };
+    split.byDestination.forEach(function (t) {
+      out.push({ text: "「" + dests[t.destinationIndex].name + "」へは有料道路" +
+                       (t.roadNames.length ? "（" + t.roadNames.join("・") + " " + km(t.meters) + "）" : " " + km(t.meters)) + "を通ります" });
+    });
+    if (!split.byDestination.length || split.unattributedMeters > 0) {
+      out.push({ text: "避けきれない有料 " + km(split.byDestination.length ? split.unattributedMeters : c.tollUnavoidableMeters) });
+    }
+    return out;
+  }
+
   /** 候補の注意（避けきれなかった有料・規制・ETC 専用 IC・フェリー・U ターン） */
   function noticesOf(c, cond) {
     var out = [];
     if ((c.restrictionHits || []).length) out.push({ text: "規制のある道 " + c.restrictionHits.length + "か所", severe: true });
-    if (cond.avoidTolls && c.tollUnavoidableMeters > 0) out.push({ text: "避けきれない有料 " + km(c.tollUnavoidableMeters) });
+    out = out.concat(tollNoticesOf(c, cond));
     if (cond.etc === false && (c.etcOnlyIcs || []).length) out.push({ text: "ETC 専用の IC " + c.etcOnlyIcs.length + "か所", severe: true });
     if (cond.avoidFerries && c.ferryMeters > 0) out.push({ text: "フェリー " + km(c.ferryMeters) });
     if (c.uTurns > 0) out.push({ text: "U ターン " + c.uTurns + "回" });
@@ -701,6 +747,8 @@
       var searchable = legs.length < dests.length
         ? RM.filterFunSegments(usable, plain.path, dests.map(function (d) { return { lat: d.lat, lng: d.lng }; }), legs, F.geometry, F.appFun)
         : usable;
+      // ⚠️ 有料を使わない区間では、有料のおすすめ道路を楽しい道に選ばない（アプリの funSegmentsRespectingTolls）
+      searchable = RM.funSegmentsRespectingTolls(searchable, dests, defaults, plain.path, F.geometry, F.appFun);
       var built = F.appFun.appFunVariants({ origin: pairOf(r.origin), destination: pairOf(goal), segments: searchable,
         funWeight: cond.funWeight, baselineMeters: plain.totalDistanceMeters, referencePolyline: plain.path.map(pairOf), taste: taste });
       var ctx = { generation: gen, origin: r.origin, goal: goal, dests: dests, cond: cond, baseline: plain.totalDistanceMeters,

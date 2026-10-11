@@ -61,6 +61,8 @@ const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
 const { midFrom, kmlUrl, parseKml } = require("./lib/myMapsKml");
 const { decode: decodePolylineServer, encode: encodePolyline } = require("./lib/polyline");
+const { mountPublicSite } = require("./lib/publicSite");
+const { cellKeysInBounds, parseCellKey, cellWays } = require("./lib/osmGridLayer");
 
 const PROJECT_ID = "biketeilen";
 const PORT = process.env.PORT || 4317;
@@ -102,7 +104,12 @@ function sendHtml(res, file) {
 }
 
 // ⚠️ .html への直アクセスもここで受ける。static に任せると差し込みが効かない
-app.get(/^\/[\w-]+\.html$/, (req, res) => sendHtml(res, path.basename(req.path)));
+// ⚠️ 管理ツールに無い .html は次へ回す（公開サイトのページ。最後の `mountPublicSite` が受ける）
+app.get(/^\/[\w-]+\.html$/, (req, res, next) => {
+  const file = path.basename(req.path);
+  if (!fs.existsSync(path.join(__dirname, "public", file))) return next();
+  sendHtml(res, file);
+});
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (_req, res) => sendHtml(res, "rally-builder.html"));
@@ -1746,6 +1753,29 @@ app.get("/api/restrictions/roads/:romaji", (req, res) => {
  * 一番近い道路（元の候補と違う名前でもよい）へ乗り移れるようにする。
  * 1県 0.2MB 程度なのでまるごと返してよい。
  */
+/**
+ * 手元の OSM の道（グリッドCSV）を地図に重ねる（/roads の「OSMの道」）。`lib/osmGridLayer.js`
+ * ⚠️ 線を引く経路探索と同じ道だけ。画面は見えているマスの一覧を聞いてから、マスごとに取りに来る
+ */
+app.get("/api/roads/osm-cells", (req, res) => {
+  if (!fs.existsSync(GRID_DIR)) return res.status(404).json({ error: `道路CSVが見つかりません: ${GRID_DIR}`, cells: [] });
+  const [s, w, n, e] = ["s", "w", "n", "e"].map((k) => Number(req.query[k]));
+  const r = cellKeysInBounds({ s, w, n, e });
+  if (r.error) return res.status(400).json(r);
+  res.json(r);
+});
+
+app.get("/api/roads/osm-cell/:key", async (req, res) => {
+  if (!parseCellKey(req.params.key)) return res.status(400).json({ error: "マスの形が違います（例 1256_3197）" });
+  try {
+    const ways = await cellWays(req.params.key);
+    if (!ways) return res.status(404).json({ error: "そのマスのファイルがありません", ways: [] });
+    res.json({ key: req.params.key, ways });
+  } catch (e) {
+    res.status(500).json({ error: e.message, ways: [] });
+  }
+});
+
 app.get("/api/restrictions/roads-all/:romaji", (req, res) => {
   const index = loadRoadIndex(req.params.romaji);
   if (!index) {
@@ -2106,7 +2136,11 @@ app.get("/api/referrals/:uid", async (req, res) => {
   }
 });
 
+// 公開サイト（../public。例: /conquest/conquest.html）。⚠️ **最後に付けること**（管理ツールの画面と窓口を先に）
+mountPublicSite(app, path.join(__dirname, "..", "public"));
+
 app.listen(PORT, HOST, () => {
   console.log(`🛠  スタンプラリー ビルダー: http://${HOST}:${PORT}`);
+  console.log(`   公開サイト: http://${HOST}:${PORT}/index.html（例: /conquest/conquest.html）`);
   console.log("   ローカル専用。Firestore 認証は importRallies.js と同じ（serviceAccount.json / ADC）。");
 });

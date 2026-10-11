@@ -130,6 +130,13 @@
   th,td { border-bottom:1px solid var(--line); padding:3px 8px; text-align:left; }
   td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
   .up { color:var(--ok); } .down { color:#c92a2a; }
+  /* 手元の OSM の道（地図の左上） */
+  .osm-ctl { margin:10px; padding:6px 8px; background:#fff; border-radius:8px;
+             box-shadow:0 1px 4px rgba(0,0,0,.25); font:12px/1.4 -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;
+             max-width:320px; }
+  .osm-ctl .osm-note { color:var(--muted); margin-top:3px; font-variant-numeric:tabular-nums; }
+  .osm-ctl .osm-hover { margin-top:3px; color:#222; font-weight:600; }
+  .osm-ctl .osm-hover:empty { display:none; }
 </style>
 </head>
 <body>
@@ -203,6 +210,7 @@
       <button class="chip" data-filter="voiced" title="アプリの「走った道の感想」で答えてもらえた道">走った人の声</button>
       <button class="chip" data-filter="restricted">規制と重なる</button>
       <button class="chip" data-filter="unpaved">未舗装あり</button>
+      <button class="chip" data-filter="toll" title="有料・一部有料の道（自動の判定と人が決めた値）">有料</button>
       <button class="chip" data-filter="hidden">非表示</button>
       <button id="reloadReviews" title="アプリで付けた評価と走った人の声を取り直す（1時間ためています）">⟳ 評価</button>
       <span class="spacer"></span>
@@ -391,6 +399,51 @@ function unpavedDetail(seg) {
   return `<br><span style="color:${strong ? "#e8590c" : "var(--muted)"}">`
     + `⛰ ${escapeHtml(u.label)} ${(u.unpavedMeters / 1000).toFixed(1)}km`
     + `（この区間の${Math.round(u.ratio * 100)}%）</span>`;
+}
+
+/**
+ * 有料かどうか（利用者の要望 2026-10-11: 道ごとに有料かどうかを記載し、アプリにも出す）。
+ *
+ * 配信データの `toll`（"full" 有料・"partial" 一部有料）は生成のときに決まる（`lib/roadToll.js`。
+ * OSM の toll=yes の道と線を重ねた自動の判定に、ここで人が決めた値を上書きしたもの）。
+ * ⚠️ 人が決めた値は保存してから**再生成**で配信データに入る。画面ではすぐ反映して見せる（`tollOf`）
+ */
+const TOLL_LABELS = { full: "有料", partial: "一部有料", none: "無料" };
+
+/** 自動の判定（人が決める前の値）。生成のときに人の値があれば `tollAuto` に残してある */
+function tollAutoOf(seg) {
+  if (!seg) return { kind: null, km: null };
+  if (seg.tollAuto) return { kind: seg.tollAuto === "none" ? null : seg.tollAuto, km: seg.tollAutoKm ?? null };
+  return { kind: seg.toll || null, km: seg.tollKm ?? null };
+}
+
+/** いま効いている値（人が決めた値 → 自動の判定）。"full"・"partial"・null（無料） */
+function tollOf(seg, o) {
+  const setting = o && o.toll;
+  if (setting === "none") return null;
+  if (setting === "full" || setting === "partial") return setting;
+  return tollAutoOf(seg).kind;
+}
+
+/** 一覧に出す印。無料なら空 */
+function tollBadge(seg, o) {
+  const kind = tollOf(seg, o);
+  if (!kind) return "";
+  const km = seg.tollKm ?? tollAutoOf(seg).km;
+  const title = `${TOLL_LABELS[kind]}${km != null ? ` ${Number(km).toFixed(1)}km` : ""}`
+    + `${(seg.tollNames || []).length ? `（${seg.tollNames.join("・")}）` : ""}${o && o.toll ? "・人が決めた" : ""}`;
+  return `<span class="verdict" style="color:${kind === "full" ? "#c92a2a" : "#e8590c"}"`
+    + ` title="${escapeHtml(title)}">¥</span>`;
+}
+
+/** 詳細に出す1行。無料なら空 */
+function tollDetail(seg, o) {
+  const kind = tollOf(seg, o);
+  if (!kind) return "";
+  const km = seg.tollKm ?? tollAutoOf(seg).km;
+  return `<br><span style="color:${kind === "full" ? "#c92a2a" : "#e8590c"}">`
+    + `¥ ${TOLL_LABELS[kind]}${km != null ? ` ${Number(km).toFixed(1)}km` : ""}`
+    + `${(seg.tollNames || []).length ? `（${escapeHtml(seg.tollNames.join("・"))}）` : ""}</span>`;
 }
 
 const $ = (id) => document.getElementById(id);
@@ -662,6 +715,8 @@ function render() {
   else if (state.filter === "restricted") list = list.filter((r) => state.restricted[r.seg.id]);
   // ⚠️ 少しでも未舗装があれば出す。割合の高いものは印の色が変わる
   else if (state.filter === "unpaved") list = list.filter((r) => r.seg.unpaved);
+  // ⚠️ 一部有料も出す。人が決めた値もすぐ効かせる（`tollOf`）
+  else if (state.filter === "toll") list = list.filter((r) => tollOf(r.seg, r.o));
   else list = list.filter((r) => !r.o.hidden);   // 既定では非表示を隠す
 
   if (q) list = list.filter((r) => r.seg.name.includes(q) || (r.o.title || "").includes(q));
@@ -698,13 +753,15 @@ function render() {
     // ⚠️ **砂利道は一覧で分かるようにする。** 見た目が同じ「県道◯◯線」でも、
     //    半分が未舗装なら行く前に知りたい（OSM の surface / tracktype より）
     const unpavedMark = unpavedBadge(r.seg);
+    // ⚠️ **有料の道は一覧で分かるようにする**（赤＝有料・橙＝一部有料）
+    const tollMark = tollBadge(r.seg, r.o);
     // 走った人の声（人数）。⚠️ 札は人が採用する。ここでは「声がある」ことだけ見せる
     const fb = feedbackOf(r.seg);
     const voiceMark = fb ? `<span class="verdict" title="走った人の声 ${fb.total}人">🗣${fb.total}</span>` : "";
     div.innerHTML =
       `<span class="rank">${i + 1}</span>` +
       `<span class="name">${escapeHtml(r.o.title || r.seg.name)}</span>` +
-      `<span class="mark">${bannedMark}${verdictMark}${voiceMark}${unpavedMark}${marks.join("")}</span>` +
+      `<span class="mark">${bannedMark}${verdictMark}${voiceMark}${tollMark}${unpavedMark}${marks.join("")}</span>` +
       `<span class="sub">${metricsOf(r.seg).lengthKm.toFixed(0)}km</span>` +
       `<span class="score">${r.score.toFixed(1)}</span>`;
     div.onclick = () => select(r.seg);
@@ -774,9 +831,257 @@ function initMap() {
   state.map = new google.maps.Map($("map"), {
     center: { lat: 36.75, lng: 139.6 }, zoom: 9, mapTypeControl: false, streetViewControl: false,
   });
+  setupOsmLayer();
   loadWeights().then(loadPrefectures);
 }
 window.initMap = initMap;
+
+// ---------- 手元の OSM の道（グリッドCSV） ----------
+/**
+ * 手元の OSM の道を地図に敷く（左上の「OSMの道」）。
+ *
+ * 【なぜ要るか】
+ * 利用者の要望（2026-10-11）: 道を足す・直すときに、線がどこを通るか確かめたい。
+ * 線は `/api/restrictions/route`（CSVの道をたどる経路探索）で引く。たどるのはランプや短い道も含む。
+ * 足す画面の青い線（道路の索引）はそれらを落とし、索引のある県でしか出ず、一度に500本までで、
+ * そこに無い道を線が通ると、どこを通ったのか分からなかった。
+ *
+ * ⚠️ **全部は読まない。** 見えているマス（0.1度）だけをサーバに聞き、読んだマスは覚えておく
+ *    （`lib/osmGridLayer.js`。全国で266MB・4,587マス）。
+ * ⚠️ **線は1枚のキャンバスに描く。** `google.maps.Polyline` を数万本置くと地図が固まる
+ *    （東京の中心は1マスで約5千本）。
+ * ⚠️ 寄っているとき（`OSM_MIN_ZOOM` 以上）だけ出す。
+ * ⚠️ キャンバスは押せない（`pointer-events:none`）。道を足すクリックの邪魔をしない。
+ *    名前はマウスを乗せたときに出す（地図の mousemove で近い線を探す）。
+ */
+const OSM_MIN_ZOOM = 13;
+/** 覚えておくマスの数（見えていないマスから捨てる） */
+const OSM_CACHE_CELLS = 80;
+/** マウスがこの距離（画面の点）まで近づいたら、その道の名前を出す */
+const OSM_HOVER_PX = 6;
+/** 種類ごとの太さ。⚠️ 色は1つ（地図の区間の色と混ざらない濃い灰色）。名前の無い道は点線（いまの CSV には無い） */
+const OSM_WIDTH = { motorway: 2.6, trunk: 2.4, primary: 2.2, secondary: 1.9, tertiary: 1.6,
+                    unclassified: 1.2, residential: 1.0 };
+const OSM_COLOR = "rgba(33,37,41,0.6)";
+const OSM_HIGHLIGHT = "#fab005";
+
+const osm = {
+  on: false, layer: null, cells: new Map(), visible: [], seq: 0, zoom: null,
+  note: "", hover: null, ctl: null, pending: new Set(),
+};
+
+/** 緯度経度 → 世界座標（倍率0・256点四方のメルカトル） */
+function osmWorld(lat, lng) {
+  const s = Math.sin((lat * Math.PI) / 180);
+  return [((lng + 180) / 360) * 256, (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * 256];
+}
+
+/** サーバの1マス分を、描くための形にする（世界座標と枠を先に作っておく） */
+function osmPrepareCell(ways) {
+  return ways.map((w) => {
+    const pts = decodePolyline(w.p);
+    const xy = new Float64Array(pts.length * 2);
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    pts.forEach((p, k) => {
+      const [x, y] = osmWorld(p.lat, p.lng);
+      xy[k * 2] = x; xy[k * 2 + 1] = y;
+      if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+    });
+    return { id: w.i, name: w.n, highway: w.h, ref: w.r, xy, box: [x0, y0, x1, y1] };
+  });
+}
+
+/** いま見えているマスの道（まだ届いていないマスは飛ばす） */
+function osmVisibleWays() {
+  const out = [];
+  for (const k of osm.visible) { const c = osm.cells.get(k); if (c) out.push(...c); }
+  return out;
+}
+
+function setupOsmLayer() {
+  class OsmCanvasLayer extends google.maps.OverlayView {
+    onAdd() {
+      const make = () => {
+        const c = document.createElement("canvas");
+        c.style.cssText = "position:absolute;pointer-events:none;";
+        this.getPanes().overlayLayer.appendChild(c);
+        return c;
+      };
+      this.canvas = make();
+      this.hl = make();
+    }
+    onRemove() { this.canvas.remove(); this.hl.remove(); }
+    // ⚠️ 地図を動かすたびに呼ばれる。描き直しは止まったとき（idle）だけにする。
+    //    動かしている間はキャンバスが地図と一緒に動くので、そのままでよい。倍率が変わったら隠す
+    draw() {
+      if (osm.zoom !== this.getMap().getZoom()) { this.canvas.style.display = "none"; this.hl.style.display = "none"; }
+    }
+    /** いまの見え方で描き直す。見えている範囲の上下左右に半分ずつ余白を足し、少し動かしても欠けない */
+    render() {
+      const map = this.getMap(), proj = this.getProjection(), b = map.getBounds();
+      if (!map || !proj || !b) return;
+      const z = map.getZoom(), scale = 2 ** z, dpr = window.devicePixelRatio || 1;
+      const ne = proj.fromLatLngToDivPixel(b.getNorthEast()), sw = proj.fromLatLngToDivPixel(b.getSouthWest());
+      const w = ne.x - sw.x, h = sw.y - ne.y;
+      const left = sw.x - w / 2, top = ne.y - h / 2, cw = w * 2, ch = h * 2;
+      // 世界座標（倍率0）→ 地図の div の座標へのずらし
+      const [rx, ry] = osmWorld(b.getSouthWest().lat(), b.getSouthWest().lng());
+      const offX = sw.x - rx * scale, offY = sw.y - ry * scale;
+      this.frame = { z, scale, left, top, offX, offY, dpr };
+      for (const c of [this.canvas, this.hl]) {
+        c.style.left = left + "px"; c.style.top = top + "px";
+        c.style.width = cw + "px"; c.style.height = ch + "px";
+        c.width = Math.round(cw * dpr); c.height = Math.round(ch * dpr);
+        c.style.display = "";
+      }
+      osm.zoom = z;
+      const ctx = this.canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, cw, ch);
+      if (!osm.on || z < OSM_MIN_ZOOM) return;
+      // 枠の外の道は描かない（世界座標の枠で比べる）
+      const vx0 = (left - offX) / scale, vy0 = (top - offY) / scale;
+      const vx1 = (left + cw - offX) / scale, vy1 = (top + ch - offY) / scale;
+      ctx.strokeStyle = OSM_COLOR; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      for (const way of osmVisibleWays()) {
+        const [x0, y0, x1, y1] = way.box;
+        if (x1 < vx0 || x0 > vx1 || y1 < vy0 || y0 > vy1) continue;
+        ctx.lineWidth = OSM_WIDTH[way.highway] || 1.4;
+        ctx.setLineDash(way.name ? [] : [4, 3]);
+        this.path(ctx, way);
+        ctx.stroke();
+      }
+      this.drawHighlight();
+    }
+    path(ctx, way) {
+      const { scale, left, top, offX, offY } = this.frame, xy = way.xy;
+      ctx.beginPath();
+      for (let k = 0; k < xy.length; k += 2) {
+        const x = xy[k] * scale + offX - left, y = xy[k + 1] * scale + offY - top;
+        if (k === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+    }
+    drawHighlight() {
+      if (!this.frame) return;
+      const ctx = this.hl.getContext("2d"), { dpr } = this.frame;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, this.hl.width, this.hl.height);
+      if (!osm.on || !osm.hover) return;
+      ctx.strokeStyle = OSM_HIGHLIGHT; ctx.lineWidth = 5; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      this.path(ctx, osm.hover);
+      ctx.stroke();
+    }
+  }
+  osm.layer = new OsmCanvasLayer();
+  osm.layer.setMap(state.map);
+
+  const ctl = document.createElement("div");
+  ctl.className = "osm-ctl";
+  ctl.innerHTML = `<label><input type="checkbox" id="osmToggle"> OSMの道（線が通れる道）</label>
+    <div class="osm-note" id="osmNote"></div><div class="osm-hover" id="osmHover"></div>`;
+  state.map.controls[google.maps.ControlPosition.TOP_LEFT].push(ctl);
+  osm.ctl = ctl;
+  // ⚠️ 地図の部品は地図ができてから DOM に入る。入る前に getElementById で探さないこと
+  const toggle = ctl.querySelector("#osmToggle");
+  try { osm.on = localStorage.getItem("roads.osmLayer") === "1"; } catch { osm.on = false; }
+  toggle.checked = osm.on;
+  toggle.onchange = () => {
+    osm.on = toggle.checked;
+    try { localStorage.setItem("roads.osmLayer", osm.on ? "1" : "0"); } catch { /* 覚えられなくても動く */ }
+    osm.hover = null;
+    refreshOsm();
+  };
+  state.map.addListener("idle", refreshOsm);
+  let hoverAt = 0;
+  state.map.addListener("mousemove", (e) => {
+    const now = performance.now();
+    if (now - hoverAt < 50) return;
+    hoverAt = now;
+    osmHoverAt(e.latLng);
+  });
+  state.map.addListener("mouseout", () => { if (osm.hover) { osm.hover = null; osm.layer.drawHighlight(); renderOsmNote(); } });
+}
+
+function renderOsmNote() {
+  if (!osm.ctl) return;
+  osm.ctl.querySelector("#osmNote").textContent = osm.on ? osm.note : "";
+  const h = osm.hover;
+  osm.ctl.querySelector("#osmHover").textContent = osm.on && h
+    ? `${h.name || "（名前なし）"}・${h.highway}${h.ref ? "・" + h.ref : ""}（way ${h.id}）` : "";
+}
+
+/** 止まったときに、見えているマスを聞いて足りないマスを取りに行き、描き直す */
+async function refreshOsm() {
+  const layer = osm.layer;
+  if (!layer) return;
+  const z = state.map.getZoom();
+  if (!osm.on) { osm.note = ""; layer.render(); renderOsmNote(); return; }
+  if (z < OSM_MIN_ZOOM) {
+    osm.visible = []; osm.hover = null;
+    osm.note = `寄ると出ます（倍率${OSM_MIN_ZOOM}から・いま${z}）`;
+    layer.render(); renderOsmNote(); return;
+  }
+  const b = state.map.getBounds();
+  if (!b) return;
+  const seq = ++osm.seq;
+  const q = `s=${b.getSouthWest().lat()}&w=${b.getSouthWest().lng()}&n=${b.getNorthEast().lat()}&e=${b.getNorthEast().lng()}`;
+  let r;
+  try { r = await (await fetch(`/api/roads/osm-cells?${q}`)).json(); }
+  catch (e) { osm.note = "読めません: " + e.message; renderOsmNote(); return; }
+  // ⚠️ 返ってくる前に地図を動かしたら、古い答えは捨てる（新しい方が描く）
+  if (seq !== osm.seq) return;
+  if (r.error) { osm.note = r.error; renderOsmNote(); return; }
+  if (r.tooMany) { osm.visible = []; osm.hover = null; osm.note = "範囲が広すぎます。もう少し寄ってください"; layer.render(); renderOsmNote(); return; }
+  osm.visible = r.cells;
+  // ⚠️ 前に乗せた道の名前を残さない（別の場所へ移っても出たままになる）。次にマウスを動かせば探し直す
+  osm.hover = null;
+  // 見えていないマスから捨てる
+  for (const k of [...osm.cells.keys()]) {
+    if (osm.cells.size <= OSM_CACHE_CELLS) break;
+    if (!osm.visible.includes(k)) osm.cells.delete(k);
+  }
+  const missing = r.cells.filter((k) => !osm.cells.has(k) && !osm.pending.has(k));
+  const countNote = () => {
+    const ways = osmVisibleWays().length, loading = osm.visible.filter((k) => !osm.cells.has(k)).length;
+    osm.note = `${ways.toLocaleString()}本（${osm.visible.length}マス）${loading ? `・読み込み中 ${loading}マス` : ""}`;
+  };
+  countNote(); layer.render(); renderOsmNote();
+  await Promise.all(missing.map(async (k) => {
+    osm.pending.add(k);
+    try {
+      const d = await (await fetch(`/api/roads/osm-cell/${k}`)).json();
+      if (d.ways) osm.cells.set(k, osmPrepareCell(d.ways));
+    } catch { /* 次に止まったときにまた取りに行く */ }
+    finally { osm.pending.delete(k); }
+    if (seq === osm.seq) { countNote(); layer.render(); renderOsmNote(); }
+  }));
+}
+
+/** マウスの近くの道（画面の点で `OSM_HOVER_PX` 以内）を探して光らせる */
+function osmHoverAt(latLng) {
+  const f = osm.layer && osm.layer.frame;
+  if (!osm.on || !f || f.z < OSM_MIN_ZOOM || !latLng) return;
+  const [wx, wy] = osmWorld(latLng.lat(), latLng.lng());
+  const px = wx * f.scale, py = wy * f.scale, tol = OSM_HOVER_PX / f.scale;
+  let best = null, bestD = OSM_HOVER_PX;
+  for (const way of osmVisibleWays()) {
+    const [x0, y0, x1, y1] = way.box;
+    if (wx < x0 - tol || wx > x1 + tol || wy < y0 - tol || wy > y1 + tol) continue;
+    const xy = way.xy;
+    for (let k = 2; k < xy.length; k += 2) {
+      const d = osmSegmentDistance(px, py, xy[k - 2] * f.scale, xy[k - 1] * f.scale, xy[k] * f.scale, xy[k + 1] * f.scale);
+      if (d < bestD) { bestD = d; best = way; }
+    }
+  }
+  if (best !== osm.hover) { osm.hover = best; osm.layer.drawHighlight(); renderOsmNote(); }
+}
+
+/** 点から線分までの距離（画面の点） */
+function osmSegmentDistance(px, py, ax, ay, bx, by) {
+  const dx = bx - ax, dy = by - ay, len = dx * dx + dy * dy;
+  const t = len ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len)) : 0;
+  return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
+}
 
 /** 全区間の線を1度だけ作る。選択のたびに作り直すと地図がちらつく */
 /**
@@ -1854,6 +2159,7 @@ function renderEditor() {
            + (changed ? ' <span class="muted">（手直し後の実測）</span>' : ""); })()}<br>
       素点 ${metricsOf(seg).score.toFixed(1)}${o.boost ? ` → <strong>${adjustedScore(seg).toFixed(1)}</strong>` : ""}
       ${unpavedDetail(seg)}
+      ${tollDetail(seg, o)}
     </div>
 
     <label>ストリートビュー</label>
@@ -1915,6 +2221,14 @@ function renderEditor() {
     <input type="text" id="e-tags-free" value="${escapeHtml((o.tags || []).filter((t) => !PRESET_TAGS.includes(t)).map(tagLabel).join(","))}"
            placeholder="その他（カンマ区切り）" style="margin-top:5px">
 
+    <label>有料（アプリの道に出る・ルート生成は有料を使わない区間でこの道を選ばない）</label>
+    <div class="chips" id="e-toll">
+      ${[["", `自動（${(() => { const a = tollAutoOf(seg); return a.kind ? `${TOLL_LABELS[a.kind]}${a.km != null ? ` ${Number(a.km).toFixed(1)}km` : ""}` : "無料"; })()}）`],
+         ["full", "有料"], ["partial", "一部有料"], ["none", "無料"]]
+        .map(([v, l]) => `<button class="chip ${(o.toll || "") === v ? "on" : ""}" data-toll="${v}">${escapeHtml(l)}</button>`).join("")}
+    </div>
+    <div class="muted" style="font-size:11px; margin-top:3px">自動は OSM の有料の道（toll=yes）と線を重ねた判定。外れていたら選ぶ（保存して再生成で配信データに入る）</div>
+
     <label>一覧から外す</label>
     <button class="chip ${o.hidden ? "on" : ""}" id="e-hidden">${o.hidden ? "🚫 外している" : "一覧に出す"}</button>
 
@@ -1965,6 +2279,13 @@ function renderEditor() {
     b.onclick = () => { b.classList.toggle("on"); apply(); };
   });
   $("e-hidden").onclick = () => { $("e-hidden").classList.toggle("on"); apply(); };
+  // 有料（どれか1つ）
+  box.querySelectorAll("#e-toll [data-toll]").forEach((b) => {
+    b.onclick = () => {
+      box.querySelectorAll("#e-toll [data-toll]").forEach((x) => x.classList.toggle("on", x === b));
+      apply();
+    };
+  });
   for (const id of ["e-boost", "e-title", "e-note", "e-tags-free"]) {
     $(id).onchange = apply;
   }
@@ -1982,7 +2303,7 @@ function renderEditor() {
  */
 function isEmptyEdit(o) {
   return !o.hidden && !o.boost && !o.title && !o.note
-         && !(o.tags || []).length && !o.shape;
+         && !(o.tags || []).length && !o.shape && !o.toll;
 }
 
 /** 編集パネルの内容を state に反映（保存はしない） */
@@ -2006,6 +2327,8 @@ function apply() {
     title: $("e-title").value.trim() || null,
     note: $("e-note").value.trim() || null,
     tags: [...new Set([...preset, ...free])],
+    // 空（自動）は null。⚠️ サーバも "full"・"partial"・"none" 以外は自動に戻す（`normalizeOverride`）
+    toll: (document.querySelector("#e-toll .chip.on") || {}).dataset?.toll || null,
   };
   // ⚠️ 足した道は「空だから消す」をしないこと。名前と形が本体なので、
   //    札を外しただけで道そのものが消える

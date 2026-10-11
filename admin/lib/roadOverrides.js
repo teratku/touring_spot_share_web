@@ -36,6 +36,9 @@ function overrideKey(segment) {
   return `${segment.name}@${round(segment.start[0])},${round(segment.start[1])}`;
 }
 
+/** 有料かどうかを人が決めるときの値 */
+const TOLL_SETTINGS = ["full", "partial", "none"];
+
 /** 調整1件の既定値 */
 function normalizeOverride(raw = {}) {
   return {
@@ -61,6 +64,13 @@ function normalizeOverride(raw = {}) {
      *    「6.0km・曲率123」と出したまま実際は3kmの線、という嘘が配信される。
      */
     shape: typeof raw.shape === "string" && raw.shape.trim() ? raw.shape.trim() : null,
+    /**
+     * 有料かどうかを人が決めたもの。`"full"`（有料）・`"partial"`（一部有料）・`"none"`（無料）。
+     * null は自動の判定のまま（`roadToll.js`。OSM の `toll=yes` と線を重ねる）。
+     * ⚠️ 利用者の要望（2026-10-11）: 道ごとに有料かどうかを記載。自動の判定が外れたら（OSM が古い・
+     *    有料道路の入口に触れるだけ等）ここで直す
+     */
+    toll: TOLL_SETTINGS.includes(raw.toll) ? raw.toll : null,
     /** 誰がいつ触ったかの控え（運用の手がかり。配信には載せない） */
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : null,
   };
@@ -92,6 +102,7 @@ function normalizeAdded(raw = {}) {
     title: o.title,
     note: o.note,
     tags: o.tags,
+    toll: o.toll,
     updatedAt: o.updatedAt,
   };
 }
@@ -131,6 +142,8 @@ function buildAddedSegment(entry) {
     name: a.name, ref: "", highway: a.highway,
     osmId: null, spotCount: 0, tags: a.tags,
     title: a.title, note: a.note,
+    // ⚠️ 有料かどうかの判定は生成の最後（`roadToll.applyToll`）。人が決めた値だけ渡しておく
+    ...(a.toll ? { tollSetting: a.toll } : {}),
   };
   const built = reshape(skeleton, a.shape);
   if (built === skeleton) return null;          // 線が壊れている（点が足りない）
@@ -194,7 +207,7 @@ function reshape(segment, encoded) {
 /** 何も指定していない調整か（空の調整はファイルに残さない） */
 function isEmptyOverride(o) {
   const n = normalizeOverride(o);
-  return !n.hidden && n.boost === 0 && !n.title && !n.note && n.tags.length === 0 && !n.shape;
+  return !n.hidden && n.boost === 0 && !n.title && !n.note && n.tags.length === 0 && !n.shape && !n.toll;
 }
 
 /**
@@ -238,6 +251,8 @@ function applyOverrides(segments, overrides = {}, added = {}) {
     if (o.title) next.title = o.title;
     if (o.note) next.note = o.note;
     if (o.tags.length) next.tags = o.tags;
+    // ⚠️ 有料かどうかはここでは決めない。生成の最後（`roadToll.applyToll`）が自動の判定と合わせて決める
+    if (o.toll) next.tollSetting = o.toll;
     result.push(next);
   }
 
@@ -300,5 +315,5 @@ function fuzzyMatch(segment, entries, used) {
 module.exports = {
   overrideKey, applyOverrides, normalizeOverride, isEmptyOverride, reshape,
   normalizeAdded, isValidAdded, buildAddedSegment,
-  KEY_PRECISION, FUZZY_MATCH_METERS, JAPAN_BOUNDS, MIN_ADDED_METERS,
+  KEY_PRECISION, FUZZY_MATCH_METERS, JAPAN_BOUNDS, MIN_ADDED_METERS, TOLL_SETTINGS,
 };

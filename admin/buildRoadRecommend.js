@@ -28,6 +28,7 @@ const { stitch } = require("./lib/roadStitcher");
 const { extract, score } = require("./lib/funSegments");
 const { simplify, encode, decode: decodePolyline } = require("./lib/polyline");
 const { applyOverrides } = require("./lib/roadOverrides");
+const { loadTollIndex, applyToll } = require("./lib/roadToll");
 const { blockedSegments } = require("./lib/restrictionOverlap");
 const { loadSurfaces, measureUnpaved, key: surfaceKey } = require("./lib/roadSurface");
 const {
@@ -76,7 +77,11 @@ function writeGenerations(all) {
 /** 配信する中身のハッシュ。並び順・点数・説明・ポリラインが変われば変わる */
 function contentHash(segments) {
   const payload = segments.map((s) =>
-    [s.name, s.title || "", s.note || "", (s.tags || []).join("|"), s.score, s.polyline].join("\u0001")
+    [s.name, s.title || "", s.note || "", (s.tags || []).join("|"), s.score, s.polyline]
+      // ⚠️ **有料の道だけ足す。** 全部の区間に足すと、有料の道が無い県まで指紋が変わり、
+      //    配信し直すまでアプリが「新しい版」を落とし直し続ける（`road_recommend/<県>` の contentHash）
+      .concat(s.toll ? [`toll:${s.toll}:${s.tollKm ?? ""}`] : [])
+      .join("\u0001")
   ).join("\u0002");
   return crypto.createHash("sha1").update(payload).digest("hex").slice(0, 12);
 }
@@ -367,6 +372,13 @@ async function build() {
 
   console.log(`入力: ${INPUT_DIR}（${files.length}ファイル）`);
   if (ONLY_PREFECTURE) console.log(`対象: ${ONLY_PREFECTURE} のみ`);
+  // ⚠️ **有料の道のデータが無ければ判定しない**（有料の印が付かないだけ。人が決めた値は付く）。
+  //    黙らないこと: 付かないまま配信すると、アプリの「有料」とルート生成の基準が効かない
+  const tollIndex = loadTollIndex();
+  if (!tollIndex) {
+    console.log("⚠️ 有料の道のデータ（data/toll-ways.json）がありません。有料の判定をしません。"
+      + "作り方は buildTollWays.js の先頭に書いてあります");
+  }
 
   // 県ごとに断片を集める。全国を一度に持つとメモリが厳しいので、
   // 対象県が指定されていればそれ以外は捨てる
@@ -473,6 +485,9 @@ async function build() {
       console.log(`  🚫 ${pref}: 二輪が通れない規制と重なる ${blocked.size}本をおすすめから外しました`);
       adjusted.segments = adjusted.segments.filter((_, i) => !blocked.has(i));
     }
+    // ⚠️ **有料かどうかは調整を当てたあとの線で測る。** 手で形を直した道・手で足した道も同じ物差しで
+    //    （利用者の要望 2026-10-11: 道ごとに有料かどうかを記載。`lib/roadToll.js`）
+    adjusted.segments = applyToll(adjusted.segments, tollIndex);
     if (adjusted.unmatched.length) {
       console.log(`  ⚠️ ${pref}: 当たらなかった調整が ${adjusted.unmatched.length}件` +
                   `（${adjusted.unmatched.slice(0, 3).join(" / ")}${adjusted.unmatched.length > 3 ? " …" : ""}）`);

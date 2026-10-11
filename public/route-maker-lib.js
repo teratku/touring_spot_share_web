@@ -146,9 +146,13 @@
       }
       points.push({ lat: d.lat, lng: d.lng });
     });
+    // ⚠️ 選んだ有料の道の上だけ有料を許す（NavTollRoads。点は出発地＋全部の点。最後の点を外す前に作る）
+    var defaults = legDefaults(cond);
+    var gapPoints = [origin].concat(points);
     var last = points.pop();
     // ⚠️ 立ち寄り先ごとの有料・高速は、地点のあいだごとの条件にして混ざっているときだけ渡す。全体は一番厳しい組み合わせ
-    var gaps = gapConditions(dests, legDefaults(cond));
+    var gaps = allowingChosenTollRoads(gapConditions(dests, defaults), gapPoints,
+      chosenTollRoads(dests, defaults).map(function (i) { return roadPathOf(dests[i]); }));
     var strict = strictest(gaps);
     var body = { from: pair(origin), to: pair(last), vias: points.map(pair), displacement: cond.displacement,
                  avoidTolls: strict.avoidTolls, avoidHighways: strict.avoidHighways, avoidFerries: cond.avoidFerries,
@@ -447,6 +451,133 @@
     });
   }
 
+  // ---- 有料のおすすめ道路（アプリの RoadToll・NavTollRoads。利用者の要望 2026-10-11） ----
+  // ⚠️ 判断: 有料を使わない設定で有料の道を選んだら、警告して、その道の上だけ有料を通す。
+  //    有料を使わない区間では、有料のおすすめ道路を楽しい道に選ばない。**アプリを変えたらここも直す**
+
+  /** 区間が有料か（RoadToll.of）。"full"・"partial"・null。⚠️ 古い配信データの札「有料道路」も有料 */
+  function tollKind(seg) {
+    if (seg && (seg.toll === "full" || seg.toll === "partial")) return seg.toll;
+    return ((seg && seg.tags) || []).some(function (t) { return t === "toll" || t === "有料道路"; }) ? "full" : null;
+  }
+
+  /** まとめた道（RoadToll.merged）。全部が有料なら有料、どれかが有料なら一部有料 */
+  function mergedToll(kinds) {
+    if (!kinds.some(function (k) { return !!k; })) return null;
+    return kinds.every(function (k) { return k === "full"; }) ? "full" : "partial";
+  }
+
+  /** 区間が属する道のID（EnjoyableRoadsService.groupKey。手直しした区間は "s:区間ID"）。プランの roadId と同じ */
+  function roadKeyOf(seg) {
+    if (seg.reshaped === true || (Number(seg.boost) || 0) !== 0) return "s:" + seg.id;
+    var pref = String(seg.id || "").split(":")[0], ref = String(seg.ref || "").trim();
+    return ref ? "r:" + pref + "|" + ref + "|" + seg.highway : "n:" + pref + "|" + seg.name + "|" + seg.highway;
+  }
+
+  /** 道のIDから有料を引き当てる（EnjoyableRoadsService.road(withID:) → ScoredRoad.toll / tollKm）。無料・見つからなければ null */
+  function tollOfRoad(roadID, segments) {
+    if (!roadID) return null;
+    var parts = (segments || []).filter(function (s) { return roadKeyOf(s) === roadID; });
+    var kind = mergedToll(parts.map(tollKind));
+    if (!kind) return null;
+    var km = parts.reduce(function (a, s) {
+      var k = tollKind(s);
+      return a + (!k ? 0 : s.tollKm != null ? Number(s.tollKm) : k === "full" ? Number(s.lengthKm) || 0 : 0);
+    }, 0);
+    return { toll: kind, km: km > 0 ? km : null };
+  }
+
+  /** 道の通り道（入口 →〜→ ゴール。NavDestination.roadPath） */
+  function roadPathOf(d) { return (d.approach || []).concat([{ lat: d.lat, lng: d.lng }]); }
+
+  /** 有料を使わない区間で選んだ、有料のおすすめ道路（行き先の番号。NavTollRoads.chosenTollRoads） */
+  function chosenTollRoads(dests, defaults) {
+    return dests.map(function (d, i) {
+      return d.kind === "road" && d.toll && roadPathOf(d).length >= 2 && effectiveLeg(d.legSetting, defaults).avoidTolls ? i : -1;
+    }).filter(function (i) { return i >= 0; });
+  }
+
+  /**
+   * 地点のあいだごとの条件のうち、選んだ有料の道の上（通り道の続いた2点のあいだ）だけ有料を許す
+   * （NavTollRoads.allowingChosenTollRoads）。⚠️ 番号ではなく座標で見分ける（楽しい道の経由地が挟まるため）
+   */
+  function allowingChosenTollRoads(conds, points, roadPaths) {
+    if (points.length !== conds.length + 1 || !roadPaths.length) return conds;
+    var same = function (a, b) { return Math.abs(a.lat - b.lat) < 1e-7 && Math.abs(a.lng - b.lng) < 1e-7; };
+    return conds.map(function (c, g) {
+      if (!c.avoidTolls) return c;
+      var a = points[g], b = points[g + 1];
+      var inside = roadPaths.some(function (path) {
+        for (var k = 1; k < path.length; k++) if (same(path[k - 1], a) && same(path[k], b)) return true;
+        return false;
+      });
+      return inside ? { avoidTolls: false, avoidHighways: c.avoidHighways } : c;
+    });
+  }
+
+  /**
+   * 楽しい道の候補のうち、有料のおすすめ道路は有料を使ってよい区間の上にあるものだけ（NavTollRoads.funSegmentsRespectingTolls）。
+   * ⚠️ 一部有料の道も外す（走れば有料の所を通る）
+   */
+  function funSegmentsRespectingTolls(segments, dests, defaults, route, geo, fun, forceAvoid) {
+    if (!segments.some(tollKind)) return segments;
+    var free = function (s) { return !tollKind(s); };
+    if (forceAvoid) return segments.filter(free);
+    if (!dests.length) return defaults.avoidTolls ? segments.filter(free) : segments;
+    var allowed = dests.map(function (d, i) { return effectiveLeg(d.legSetting, defaults).avoidTolls ? -1 : i; })
+      .filter(function (i) { return i >= 0; });
+    if (allowed.length === dests.length) return segments;
+    if (!allowed.length) return segments.filter(free);
+    var kept = filterFunSegments(segments.filter(function (s) { return !free(s); }), route,
+      dests.map(function (d) { return { lat: d.lat, lng: d.lng }; }), allowed, geo, fun);
+    return segments.filter(function (s) { return free(s) || kept.indexOf(s) >= 0; });
+  }
+
+  /** これより短い有料は知らせない（料金所の手前の切れ端など。NavTollRoads.minimumMeters） */
+  var TOLL_NOTICE_MIN_METERS = 100;
+
+  /**
+   * 行き先ごとの「避けられなかった有料」（NavTollRoads.unavoidableTolls）。
+   * 一般道の有料（指示の tollMeters）がある区間はその行き先のせい。残り（有料の高速）は、高速を通る区間が1つだけなら
+   * その行き先のせい。分けられなければ unattributedMeters に残す
+   */
+  function unavoidableTolls(steps, totalMeters, legAvoids, skip) {
+    if (!(totalMeters > 0)) return { byDestination: [], unattributedMeters: 0 };
+    var legs = [[]];
+    (steps || []).forEach(function (st) { legs[legs.length - 1].push(st); if (st.isLegEnd) legs.push([]); });
+    if (legs.length > 1 && !legs[legs.length - 1].length) legs.pop();
+    if (legs.length !== legAvoids.length) return { byDestination: [], unattributedMeters: totalMeters };
+    var considered = legs.map(function (_, k) { return k; })
+      .filter(function (k) { return legAvoids[k] && (skip || []).indexOf(k) < 0; });
+    var meters = {}, names = {};
+    var addNames = function (k, list) {
+      list.forEach(function (st) {
+        var n = st.roadName;
+        names[k] = names[k] || [];
+        if (n && names[k].indexOf(n) < 0 && names[k].length < 2) names[k].push(n);
+      });
+    };
+    considered.forEach(function (k) {
+      var tolled = legs[k].filter(function (st) { return (st.tollMeters || 0) > 0; });
+      var m = tolled.reduce(function (a, st) { return a + st.tollMeters; }, 0);
+      if (m > 0) { meters[k] = m; addNames(k, tolled); }
+    });
+    var rest = totalMeters - Object.keys(meters).reduce(function (a, k) { return a + meters[k]; }, 0);
+    if (rest >= TOLL_NOTICE_MIN_METERS) {
+      var express = considered.filter(function (k) { return legs[k].some(function (st) { return (st.expresswayMeters || 0) > 0; }); });
+      if (express.length === 1) {
+        var k = express[0];
+        meters[k] = (meters[k] || 0) + rest;
+        addNames(k, legs[k].filter(function (st) { return (st.expresswayMeters || 0) > 0; }));
+        rest = 0;
+      }
+    }
+    var list = Object.keys(meters).map(Number).sort(function (a, b) { return a - b; })
+      .filter(function (k) { return meters[k] >= TOLL_NOTICE_MIN_METERS; })
+      .map(function (k) { return { destinationIndex: k, meters: meters[k], roadNames: names[k] || [] }; });
+    return { byDestination: list, unattributedMeters: rest >= TOLL_NOTICE_MIN_METERS ? rest : 0 };
+  }
+
   /**
    * 楽しい道の案を引くときの体（RouteCandidatesView.requestDrawnRouteCandidatesWithOwnEngine）。
    * ⚠️ 楽しい道の経由地は立ち寄り先のあいだに挟む。区間ごとの有料・高速は、決めた区間があるときだけ
@@ -457,8 +588,13 @@
     var seq = viaSequence(origin, waypoints.map(latLng), stops, geo);
     var defaults = legDefaults(cond);
     var hasOverrides = dests.some(function (d) { var s = d.legSetting || {}; return s.avoidTolls != null || s.avoidHighways != null; });
-    var lc = hasOverrides ? mixedOrNil(funGapConditions(seq.vias.length, seq.stopAt, dests,
-      { avoidTolls: defaults.avoidTolls, avoidHighways: defaults.avoidHighways, highwaysForbidden: defaults.highwaysForbidden, funRoads: true })) : null;
+    var funDefaults = { avoidTolls: defaults.avoidTolls, avoidHighways: defaults.avoidHighways, highwaysForbidden: defaults.highwaysForbidden, funRoads: true };
+    var gaps = hasOverrides ? funGapConditions(seq.vias.length, seq.stopAt, dests, funDefaults)
+      : seq.vias.concat([null]).map(function () { return { avoidTolls: defaults.avoidTolls, avoidHighways: defaults.avoidHighways }; });
+    // ⚠️ 選んだ有料の道の上だけ有料を許す（NavTollRoads）。楽しい道の経由地が挟まっても座標で見分ける
+    // ⚠️ 出発地・経由地・最後の点はどれも {lat, lng}（体に入れるときに pair で並べ替える）
+    var lc = mixedOrNil(allowingChosenTollRoads(gaps, [origin].concat(seq.vias, [last]),
+      chosenTollRoads(dests, funDefaults).map(function (i) { return roadPathOf(dests[i]); })));
     var strict = lc ? strictest(lc) : { avoidTolls: defaults.avoidTolls, avoidHighways: defaults.avoidHighways };
     var body = { from: pair(origin), to: pair(last), vias: seq.vias.map(pair), displacement: cond.displacement,
                  avoidTolls: strict.avoidTolls, avoidHighways: strict.avoidHighways, avoidFerries: cond.avoidFerries,
@@ -641,7 +777,10 @@
               viaSequence: viaSequence, funGapConditions: funGapConditions, funLegs: funLegs, legRanges: legRanges,
               filterFunSegments: filterFunSegments, buildFunBody: buildFunBody, segmentNearestTo: segmentNearestTo,
               funCulprits: funCulprits, variantLabel: variantLabel, detourText: detourText,
-              mergeCandidates: mergeCandidates, shapeOverlap: shapeOverlap, tasteFromChoices: tasteFromChoices };
+              mergeCandidates: mergeCandidates, shapeOverlap: shapeOverlap, tasteFromChoices: tasteFromChoices,
+              tollKind: tollKind, mergedToll: mergedToll, roadKeyOf: roadKeyOf, tollOfRoad: tollOfRoad, roadPathOf: roadPathOf,
+              chosenTollRoads: chosenTollRoads, allowingChosenTollRoads: allowingChosenTollRoads,
+              funSegmentsRespectingTolls: funSegmentsRespectingTolls, unavoidableTolls: unavoidableTolls };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TSSRouteMaker = api;
 })(typeof window !== "undefined" ? window : this);

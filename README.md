@@ -26,6 +26,13 @@ firebase serve --only hosting          # もしくは firebase emulators:start
 ```
 > `file://` で直接開くと Firebase/Maps が動かないため、必ずローカルサーバ経由で。
 
+管理ツール（`admin/server.js`・`http://127.0.0.1:4317`）を立てていれば、そこでも開ける（`admin/lib/publicSite.js`）。
+例: `/conquest/conquest.html`・`/dev/feedback.html`・`/spot-pickup.html`・`/index.html`
+- `/` は管理ツール（ラリービルダー）。管理ツールに無いパスだけを公開サイトが受ける
+- `/__/firebase/…`（SDK と init.js）は本番のホスティングへ転送する（5002 と同じく本番の Firestore・ログインを使う）
+- Hosting の書き換え（`/v1/web/**`・ブログの詳細・共有リンク `/s/` `/u/` `/r/`・`/sitemap.xml`）は無い
+- 保存（localStorage）はポートごとに別。`spot-pickup.html` は先に同じポートの `index.html` を開いてスポットを読み込む
+
 ---
 
 ## 2. デプロイ（公開）

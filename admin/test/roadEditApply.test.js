@@ -47,6 +47,8 @@ test("空の判定がサーバ側と揃っている", () => {
   const cases = [
     {}, { shape: "abc" }, { hidden: true }, { boost: 3 }, { title: "名" },
     { note: "説明" }, { tags: ["絶景"] }, { tags: [] }, { boost: 0, tags: [] },
+    // ⚠️ 有料だけ決めた調整（2026-10-11）。片方だけ空とみなすと、画面で決めた値が保存で消える
+    { toll: "none" }, { toll: "full" }, { toll: null },
   ];
   for (const o of cases) {
     assert.strictEqual(isEmptyEdit(o), isEmptyOverride(o),

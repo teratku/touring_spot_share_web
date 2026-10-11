@@ -52,14 +52,23 @@ const MAX_RADIUS = 3000;
 /** 地図に返す線の粗さ。区間を切るのに使うだけなので粗くてよい */
 const TOLERANCE = 15;
 
-function gridFileName(lat, lng) {
+/** その点が入るマスの番号 */
+function gridCell(lat, lng) {
   // ⚠️ **0.1 で割らないこと。** `Math.floor(139.1 / 0.1)` は 1390 になる
   //    （139.1/0.1 = 1390.9999999999998）。マスの境目ちょうどを指したとき
   //    1つ手前のマスを読み、エラーも出ないまま「道が無い」ように見える。
   //    10 を掛ける方は 139.1*10 = 1391.0000000000002 で正しく丸まる。
-  const a = Math.floor(lat * 10) + 900;
-  const b = Math.floor(lng * 10) + 1800;
+  return { a: Math.floor(lat * 10) + 900, b: Math.floor(lng * 10) + 1800 };
+}
+
+/** マスの番号からファイル名 */
+function cellFileName(a, b) {
   return `roads_grid_${a}_${b}.csv`;
+}
+
+function gridFileName(lat, lng) {
+  const { a, b } = gridCell(lat, lng);
+  return cellFileName(a, b);
 }
 
 /**
@@ -175,6 +184,6 @@ function lengthOf(points) {
 }
 
 module.exports = {
-  roadsAtPoint, gridFileName, gridFilesFor, distanceToLine,
+  roadsAtPoint, gridFileName, gridCell, cellFileName, gridFilesFor, distanceToLine,
   GRID_DIR, DEFAULT_RADIUS, MAX_RADIUS, TARGET_HIGHWAYS,
 };
