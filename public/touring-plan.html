@@ -14,6 +14,8 @@
 
   <!-- Vue.js 3 -->
   <script src="/vendor/vue.global.prod.js"></script>
+  <!-- プランのおすすめ道路（通り道・説明・地図の線。利用者の要望 2026-10-11） -->
+  <script src="/plan-road-lib.js?v=1"></script>
 
   <!-- Firebase SDKs -->
   <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -586,7 +588,8 @@
 
             <!-- 経路サマリー（距離・所要時間・ナビ） -->
             <div class="route-summary-bar" v-if="plan.spots.length >= 1">
-              <template v-if="plan.spots.length >= 2">
+              <!-- ⚠️ 道1本だけでも入口とゴールの2点がある（mapsStops） -->
+              <template v-if="stopCount(plan) >= 2">
                 <div class="route-stat route-stat-loading" v-if="!plan.routeInfo || plan.routeInfo.loading">
                   <span class="mini-spinner"></span>距離を計算中...
                 </div>
@@ -632,12 +635,14 @@
                 @drop="onDrop(plan, index)"
                 @dragend="onDragEnd"
                 @click="openSpotDetail(spot)"
-                :title="spot.spotId ? 'スポット詳細を表示' : 'カスタムピンは詳細ページがありません'"
+                :title="roadSubtitle(spot) ? 'おすすめ道路（詳細はアプリで見られます）' : spot.spotId ? 'スポット詳細を表示' : 'カスタムピンは詳細ページがありません'"
               >
                 <div class="spot-order-badge">{{ index + 1 }}</div>
                 <div class="spot-info">
                   <div class="spot-name">{{ spot.name }}</div>
-                  <div class="spot-address" v-if="spot.address">{{ spot.address }}</div>
+                  <!-- ⚠️ おすすめ道路はアプリが入れた道（通り道を持つ）。以前は「カスタムピン」と出ていた -->
+                  <div class="spot-address" v-if="roadSubtitle(spot)">🛣️ {{ roadSubtitle(spot) }}</div>
+                  <div class="spot-address" v-else-if="spot.address">{{ spot.address }}</div>
                   <div class="spot-address" v-else>📌 カスタムピン</div>
                 </div>
                 <div class="spot-actions">
@@ -645,6 +650,7 @@
                   <button class="delete-spot-btn" @click.stop="confirmDeleteSpot(plan, index)" title="スポットを削除">🗑</button>
                 </div>
                 <span v-if="spot.spotId" class="spot-item-link-icon">🔗</span>
+                <span v-else-if="roadSubtitle(spot)" class="spot-item-no-link">🛣️</span>
                 <span v-else class="spot-item-no-link">📌</span>
               </div>
             </div>
@@ -729,6 +735,8 @@ function waitForMaps() {
     }
   });
 }
+
+const PlanRoads = window.TSSPlanRoads;
 
 createApp({
   setup() {
@@ -870,6 +878,20 @@ createApp({
 
       const bounds = new google.maps.LatLngBounds();
 
+      // ⚠️ おすすめ道路は通り道を金色で描く（アプリのルート候補の地図で、おすすめ道路の区間に使っている色）。
+      //    入口に小さな印。番号の印はゴール（spot.lat/lng はアプリがゴールで保存している）
+      plan.spots.forEach((spot) => {
+        const road = PlanRoads.roadPath(spot);
+        if (!road.length) return;
+        road.forEach((p) => bounds.extend(p));
+        new google.maps.Polyline({ path: road, strokeColor: '#E0A100', strokeOpacity: 0.95, strokeWeight: 6, zIndex: 2, map });
+        new google.maps.Marker({
+          position: road[0], map, zIndex: 3, title: spot.name + '（入口）',
+          icon: { path: google.maps.SymbolPath.CIRCLE, fillColor: '#E0A100', fillOpacity: 1,
+                  strokeColor: 'white', strokeWeight: 2, scale: 6 },
+        });
+      });
+
       plan.spots.forEach((spot, index) => {
         const pos = { lat: spot.lat, lng: spot.lng };
         bounds.extend(pos);
@@ -901,13 +923,15 @@ createApp({
         marker.addListener('click', () => infoWindow.open(map, marker));
       });
 
-      if (plan.spots.length > 1) {
+      // ⚠️ 道1本だけでも通り道に寄せる
+      const linePoints = PlanRoads.routePoints(plan.spots);
+      if (linePoints.length > 1) {
         map.fitBounds(bounds, { top: 30, bottom: 30, left: 30, right: 30 });
       }
 
-      // ルートライン
-      if (plan.spots.length > 1) {
-        const path = plan.spots.map(s => ({ lat: s.lat, lng: s.lng }));
+      // ルートライン（⚠️ 道は通り道に沿って。ゴールの点だけで結ぶと、道を走らない直線になる）
+      if (linePoints.length > 1) {
+        const path = linePoints;
         new google.maps.Polyline({
           path,
           geodesic: true,
@@ -920,15 +944,7 @@ createApp({
     }
 
     // ========== 経路の距離・所要時間（P2/P3） ==========
-    function haversineKm(a, b) {
-      const R = 6371; // km
-      const toRad = d => d * Math.PI / 180;
-      const dLat = toRad(b.lat - a.lat);
-      const dLng = toRad(b.lng - a.lng);
-      const lat1 = toRad(a.lat), lat2 = toRad(b.lat);
-      const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
-      return 2 * R * Math.asin(Math.sqrt(h));
-    }
+    // 直線距離は PlanRoads.distance（道は通り道の長さ）
     function formatKm(km) { return km.toFixed(1) + ' km'; }
     function formatDuration(totalMinutes) {
       const m = Math.max(1, Math.round(totalMinutes));
@@ -942,8 +958,12 @@ createApp({
     const DIRECTIONS_API_ENABLED = false;
 
     // 展開中プランの距離・所要時間を算出（Directions有効時は道路距離、無効/失敗時は直線距離で概算）
+    /** 経路の立ち寄りの数（道は入口とゴールの2点。PlanRoads.mapsStops） */
+    function stopCount(plan) { return PlanRoads.mapsStops(plan.spots || []).length; }
+
     async function computeRouteInfo(plan) {
-      if (!plan.spots || plan.spots.length < 2) { plan.routeInfo = null; return; }
+      const stops = PlanRoads.mapsStops(plan.spots || []);
+      if (stops.length < 2) { plan.routeInfo = null; return; }
       plan.routeInfo = { loading: true };
 
       // 1) Google Directions（道路距離・実所要時間）— 有効化されている場合のみ試行
@@ -952,10 +972,10 @@ createApp({
           await waitForMaps();
           if (google.maps && google.maps.DirectionsService) {
             const svc = new google.maps.DirectionsService();
-            const origin = { lat: plan.spots[0].lat, lng: plan.spots[0].lng };
-            const last = plan.spots[plan.spots.length - 1];
-            const destination = { lat: last.lat, lng: last.lng };
-            const waypoints = plan.spots.slice(1, -1).map(s => ({ location: { lat: s.lat, lng: s.lng }, stopover: true }));
+            // ⚠️ 道は入口とゴールを立ち寄りにする（PlanRoads.mapsStops）
+            const origin = stops[0];
+            const destination = stops[stops.length - 1];
+            const waypoints = stops.slice(1, -1).map(s => ({ location: s, stopover: true }));
             const result = await new Promise((resolve, reject) => {
               svc.route(
                 { origin, destination, waypoints, travelMode: google.maps.TravelMode.DRIVING },
@@ -974,24 +994,26 @@ createApp({
       }
 
       // 2) フォールバック：直線距離の合計 + 平均35km/h で概算
-      let km = 0;
-      for (let i = 1; i < plan.spots.length; i++) km += haversineKm(plan.spots[i - 1], plan.spots[i]);
+      // ⚠️ 道は通り道の長さで数える（PlanRoads.routePoints）
+      const km = PlanRoads.pathMeters(PlanRoads.routePoints(plan.spots)) / 1000;
       const minutes = (km / 35) * 60;
       plan.routeInfo = { loading: false, approx: true, distanceText: formatKm(km), durationText: formatDuration(minutes) };
     }
 
     // Googleマップで経路を開く（スポットを経由地に。APIキー/課金不要）
     function openInGoogleMaps(plan) {
-      if (!plan.spots || plan.spots.length === 0) return;
+      // ⚠️ 道は入口とゴールを経由地にする（ゴールだけだと道を通らない。PlanRoads.mapsStops）
+      const stops = PlanRoads.mapsStops(plan.spots || []);
+      if (stops.length === 0) return;
       const base = 'https://www.google.com/maps/dir/?api=1';
       const fmt = s => `${s.lat},${s.lng}`;
       let url;
-      if (plan.spots.length === 1) {
-        url = `${base}&destination=${fmt(plan.spots[0])}&travelmode=driving`;
+      if (stops.length === 1) {
+        url = `${base}&destination=${fmt(stops[0])}&travelmode=driving`;
       } else {
-        const origin = fmt(plan.spots[0]);
-        const destination = fmt(plan.spots[plan.spots.length - 1]);
-        const mid = plan.spots.slice(1, -1).map(fmt).join('|');
+        const origin = fmt(stops[0]);
+        const destination = fmt(stops[stops.length - 1]);
+        const mid = stops.slice(1, -1).map(fmt).join('|');
         url = `${base}&origin=${origin}&destination=${destination}&travelmode=driving`;
         if (mid) url += `&waypoints=${encodeURIComponent(mid)}`;
       }
@@ -1146,7 +1168,7 @@ createApp({
       togglePlan, confirmDeletePlan, deletePlan,
       confirmDeleteSpot, deleteSpot,
       onDragStart, onDragOver, onDrop, onDragEnd,
-      openSpotDetail, openInGoogleMaps,
+      openSpotDetail, openInGoogleMaps, roadSubtitle: PlanRoads.roadSubtitle, stopCount,
       goBack, goToLogin
     };
   }
