@@ -1,45 +1,19 @@
 {
  "prefecture": "大阪府",
  "romaji": "osaka",
- "generation": 4,
- "contentHash": "90d55af5b1dd",
- "builtAt": "2026-08-26T09:40:08.374Z",
+ "generation": 5,
+ "contentHash": "0ebbd4608f0f",
+ "builtAt": "2026-10-07T14:35:35.224Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
- "count": 123,
+ "count": 50,
  "segments": [
   {
    "id": "大阪府:0",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "東阪三日市線",
-   "ref": "209",
-   "highway": "secondary",
-   "lengthKm": 4.88,
-   "curviness": 628.6,
-   "flow": 29.2,
-   "turnCount": 105,
-   "score": 82.4,
-   "baseScore": 82.4,
-   "spotCount": 0,
-   "polyline": "saeqEivrzXcCSy@m@_EmLD{ApB}FIq@cBzAwGyEeBb@iCg@iB|AkGg@aBZ{@_@E^zAzAF|Az@z@Gh@a@FaEmCcFM{CuAyIcAuBaCcD_Bp@eDrL{HbCiHvDGnB_Bi@{Gb@aCnBeBHgAmBmGmB]u@sABo@nA_COyBlBiBnAiD_@mCfAgBOsC|Be@dEmFW{A{B]}BjBsE{DoCc@}BgDrB{C",
-   "pointCount": 56,
-   "start": [
-    34.437538,
-    135.596688
-   ],
-   "end": [
-    34.446525,
-    135.620896
-   ]
-  },
-  {
-   "id": "大阪府:1",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "上河内富田林線",
@@ -49,8 +23,8 @@
    "curviness": 803.9,
    "flow": 31.1,
    "turnCount": 132,
-   "score": 82.4,
-   "baseScore": 82.4,
+   "score": 96.9,
+   "baseScore": 96.9,
    "spotCount": 0,
    "polyline": "einqEuv{zXgDmV|Bs@xAcFvBW`B}A`E]~BqCjFIdFqAdC?`K_Bx@oB]_Cz@q@bDr@t@`DzBx@fCq@dAgBfANfA_@dEtA|BgAfArCnB\\vAqA|G^|ApC~K`@jCq@tB^|Dc@bAiATeCv@mAjAn@dF}BnAb@?o@uBgBzDgCVp@]~BdCp@FrAlBnD?rCbCOXv@j@F`BgDk@_AReA~AO\\e@UaBrAeC@eEfAwC|BgCdA@",
    "pointCount": 62,
@@ -61,42 +35,42 @@
    "end": [
     34.455953,
     135.655014
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大阪府:1",
+   "region": "osaka",
+   "regionName": "大阪府",
+   "name": "東阪三日市線",
+   "ref": "209",
+   "highway": "secondary",
+   "lengthKm": 4.88,
+   "curviness": 628.6,
+   "flow": 29.2,
+   "turnCount": 105,
+   "score": 96.8,
+   "baseScore": 96.8,
+   "spotCount": 0,
+   "polyline": "saeqEivrzXcCSy@m@_EmLD{ApB}FIq@cBzAwGyEeBb@iCg@iB|AkGg@aBZ{@_@E^zAzAF|Az@z@Gh@a@FaEmCcFM{CuAyIcAuBaCcD_Bp@eDrL{HbCiHvDGnB_Bi@{Gb@aCnBeBHgAmBmGmB]u@sABo@nA_COyBlBiBnAiD_@mCfAgBOsC|Be@dEmFW{A{B]}BjBsE{DoCc@}BgDrB{C",
+   "pointCount": 56,
+   "start": [
+    34.437538,
+    135.596688
+   ],
+   "end": [
+    34.446525,
+    135.620896
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
    "id": "大阪府:2",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国崎野間口線",
-   "ref": "605",
-   "highway": "secondary",
-   "lengthKm": 3.5,
-   "curviness": 713.1,
-   "flow": 31.2,
-   "turnCount": 80,
-   "score": 81.9,
-   "baseScore": 81.9,
-   "spotCount": 0,
-   "polyline": "ohetEeuzyX~CpLPbE_@jAaDl@[lAP~Ah@gCdEY|DrEtAs@mAcD`@kA`DjCPbBv@xAcBtBe@~IfCvFzA~BjDPlBdBHWhDxBnCf@fJdKfAzEdBdBl@fLO`D\\`Cq@hEs@xAo@`LmAhBq@|CJvBt@|B",
-   "pointCount": 38,
-   "start": [
-    34.930158,
-    135.473627
-   ],
-   "end": [
-    34.921358,
-    135.449795
-   ],
-   "unpaved": {
-    "unpavedMeters": 1678,
-    "totalMeters": 3502,
-    "ratio": 0.479,
-    "surface": "unpaved",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "大阪府:3",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "堺かつらぎ線",
@@ -106,8 +80,8 @@
    "curviness": 730.6,
    "flow": 28.3,
    "turnCount": 243,
-   "score": 81.8,
-   "baseScore": 81.8,
+   "score": 96.3,
+   "baseScore": 96.3,
    "spotCount": 0,
    "polyline": "qpypEgedzXxCy@~AXzC~Gj@ZnCsBdHw@zCn@nHLrB`AVZI`AlCfG|AjAChBlBtAb@xDlG`GJtAyA~FBz@hAIbD{Ch@@tC~BxEj@bAq@xBVh@w@jBHhDqBhCg@fCBvCcAhCT|@c@`BAtD`@^r@|@PfBcCv@SjHe@xB|@pEyBvCvBtB{@hBoB~AMpJhDjAe@xDjCpV|BzAhAdJiBfC@hDdArBjCxACBgA}@gBMgBuAiA_CaFnD{EIe@aC]RwAu@kDxBgFZNAn@aA`Aa@tB`AfBCbB`D{@hADd@a@nANAb@}AtAsDvG~@tAlEeA^zEiA^Ih@xAdB\\ArEeHvAh@j@Wl@cC\\Bf@tAvEtAf@`BjAnADvAaC|BeAzBzD|@vBzAbBJ|AtBC`Cz@|BdCpADsDoAcAeCwHsCeC~C}ApDY^TE`@kB^K`@",
    "pointCount": 119,
@@ -118,10 +92,14 @@
    "end": [
     34.332276,
     135.513166
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大阪府:4",
+   "id": "大阪府:3",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "亀岡能勢線",
@@ -131,8 +109,8 @@
    "curviness": 846.5,
    "flow": 35.7,
    "turnCount": 76,
-   "score": 81.7,
-   "baseScore": 81.7,
+   "score": 96.1,
+   "baseScore": 96.1,
    "spotCount": 0,
    "polyline": "}lntEkupyX|LiJD}Ca@yBbDiHj@Lr@vCf@HP_@kBkQTSXlBZBq@sFq@]eAl@m@bAe@dD_@@`BwGjGkKFmE_@m@}EuAg@yB_BkA`AyAJmBbA_B@k@s@gAt@{BiBWP{As@wB`@aA]w@{Bq@aAPQ[VoA~A^h@e@yAwFKmE",
    "pointCount": 45,
@@ -143,10 +121,14 @@
    "end": [
     34.975609,
     135.442398
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大阪府:5",
+   "id": "大阪府:4",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "河内長野かつらぎ線",
@@ -156,8 +138,8 @@
    "curviness": 528.1,
    "flow": 28.3,
    "turnCount": 111,
-   "score": 81.3,
-   "baseScore": 81.3,
+   "score": 95.5,
+   "baseScore": 95.5,
    "spotCount": 0,
    "polyline": "{t}pEi|dzXyAqBX_F]qAmDoBkAuB_@}BBkFsDqDAkGoBmFmDc@qBgBgCjAeCmA_GNg@wAq@`@u@dCcBvByBqBwFy@_F_GqBKoBf@OkBsCmBWiCqBv@eDG{F_BoBuCUaBkBkD{C{A[mAsBOgAu@GoAaBuEmA{@{EqHcBgEuBwAwGyB{CcC}Ia@i@RaA`C}AOe@r@oBqB{BjAgErFgDrB{Bi@_GPqDc@WmBaBmA_FeHqLsH{AzDyAfB",
    "pointCount": 64,
@@ -168,10 +150,14 @@
    "end": [
     34.437913,
     135.547834
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大阪府:6",
+   "id": "大阪府:5",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "余野茨木線",
@@ -181,8 +167,8 @@
    "curviness": 534.9,
    "flow": 27.1,
    "turnCount": 130,
-   "score": 81.1,
-   "baseScore": 81.1,
+   "score": 95.3,
+   "baseScore": 95.3,
    "spotCount": 0,
    "polyline": "}zbtEgq~yXd@gCKaAaDyCkCkLr@qGbG}EBiBcA_GJkAnEsIdSiR~GgDxCoErDmBcAiG~CkKuAiHzAaChBChBgApCUz@}@b@mEh@aAEkEt@sAA}Al@sArA{@D_FrAo@ViAbAi@?mC`AoBk@gCb@aBk@eCjCiFbA]b@yFbBiAxC\\f@eAp@I|GrDbAjDdD|BHzBh@|@lBi@fAgA~HNrArA~Et@jByFvD}AfBwDRyDoAqDL}@jBQrAb@jBy@zAn@|BeAtDExA`@zBqAdCZx@k@]iCnA]",
    "pointCount": 74,
@@ -193,10 +179,14 @@
    "end": [
     34.888236,
     135.530517
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:7",
+   "id": "大阪府:6",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "忍頂寺福井線",
@@ -206,8 +196,8 @@
    "curviness": 563.5,
    "flow": 26.6,
    "turnCount": 66,
-   "score": 80.5,
-   "baseScore": 80.5,
+   "score": 94.6,
+   "baseScore": 94.6,
    "spotCount": 0,
    "polyline": "_kzsEuohzXjIgFzDgFv@?t@pAv@[z@l@dBUh@fFj@r@rIfAjAy@hBB|AcCrCJxAcDfFLzAcBpCbAbAiDdDNt@o@tADzEeB`C{BhDoAxCVpC_AdDAxG}DjFw@jBuAdI|A~DH",
    "pointCount": 34,
@@ -218,10 +208,13 @@
    "end": [
     34.850434,
     135.550218
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:8",
+   "id": "大阪府:7",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "堺かつらぎ線",
@@ -231,8 +224,8 @@
    "curviness": 545.7,
    "flow": 27.6,
    "turnCount": 69,
-   "score": 79.8,
-   "baseScore": 79.8,
+   "score": 93.9,
+   "baseScore": 93.9,
    "spotCount": 0,
    "polyline": "kubqEmxbzXnGAnEaClHSzTiKpBJzAzArAi@xAbBvBNdAlAdARfCqA|LKbBqB|@InFvA~RVHiBl@_@~CtBrCr@dCe@hAh@ZiAfCEtA`BnEPh@yAnAsLg@{Gf@G`@~ArCU",
    "pointCount": 34,
@@ -243,10 +236,13 @@
    "end": [
     34.399937,
     135.520352
+   ],
+   "tags": [
+    "caution"
    ]
   },
   {
-   "id": "大阪府:9",
+   "id": "大阪府:8",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "大野天野線",
@@ -256,8 +252,8 @@
    "curviness": 500.8,
    "flow": 26.5,
    "turnCount": 103,
-   "score": 78.1,
-   "baseScore": 78.1,
+   "score": 91.8,
+   "baseScore": 91.8,
    "spotCount": 0,
    "polyline": "irjqEqbhzXvC[dBoCh@mDzAc@`E{FhEJf@_AtB{@bATx@{@p@mChAM|BiCdCe@fCoBhIcCdFzBpCXQ|EwBxDBtF_AtG@|DrChDr@hBv@AjCxBlDnArAxEbEbGtJjC~AzBlFhBpEzDv@|DfCjEdG\\tEdClE|DtB?fExAvJC`J|@pIrBvI}@vO@q@oBVcB`@G",
    "pointCount": 50,
@@ -268,10 +264,14 @@
    "end": [
     34.430738,
     135.531548
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大阪府:10",
+   "id": "大阪府:9",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "豊中亀岡線",
@@ -281,8 +281,8 @@
    "curviness": 486.4,
    "flow": 26.5,
    "turnCount": 173,
-   "score": 76.4,
-   "baseScore": 76.4,
+   "score": 90,
+   "baseScore": 90,
    "spotCount": 0,
    "polyline": "ywbtEm|jzXpHq@t@g@j@|AQbC\\d@lAoB^}Cd@YrBpCt@wAVNNlGhAwBl@Wt@|BKxAtCvAjAdDzBdDF`Cy@rA?lAtFn@xDlB|EzGb@dGbBdC\\pD~CtGr@|DKxGdAdBnIzBzFrFnCOpRzJvD@rBfJlCnBrA|BrAn@ZbCtAp@fHbAtCzD~FhDvHrGpEEvFhCrCg@x@XtHdLfAvDlCdAz@pC|BxBcCpHYvGqBdEEbJiClGf@vDc@|@DlHa@hCpA|En@X|BeAzAx@vF}@hFj@zEtCn@jCdBzBNnDxGdHhCdBfG`AhJnOxF|A|BrBdCfElGbAnE`Cl@xACpETb@~CW|AX",
    "pointCount": 90,
@@ -293,10 +293,14 @@
    "end": [
     34.867629,
     135.501512
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:11",
+   "id": "大阪府:10",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "茨木摂津線",
@@ -306,8 +310,8 @@
    "curviness": 436.4,
    "flow": 28.2,
    "turnCount": 191,
-   "score": 75,
-   "baseScore": 75,
+   "score": 88.3,
+   "baseScore": 88.3,
    "spotCount": 0,
    "polyline": "q||sEqzjzX_CZqAhDqHb@Ib@X\\fDIIfCVT~Du@^x@cD~DaFvCWhAgAp@DrByBb@g@bAUnEVb@hBH`Aa@z@jAjBFl@m@f@d@@t@cB~DNrBwEfCsCLkAzIkJdBUvC{@nAgEaA_BVmBnCi@jC{@x@eBhF{@n@mAtGbHkD~DZrBz@pASp@aDrDKPoCv@eC`@Hv@bCtA~@rCsBzCj@rCOzCkCr@\\rA`Dn@RhNn@hLeC|FrB|@?lZyKtCeIbLU|@fGp@ZbFDp@jA?hChC~AzAtCnG`SpIvh@vH{@jHyI\\oB_@iBdCoCx@OzDbFnCnHl@hDx@X~@[vIbVbI`OrG~FjGjDnKvCxD\\fl@dAxFm@BTjDcBbQaS~DgCbMkCfJI",
    "pointCount": 102,
@@ -318,6 +322,39 @@
    "end": [
     34.835304,
     135.526759
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大阪府:11",
+   "region": "osaka",
+   "regionName": "大阪府",
+   "name": "国道308号",
+   "ref": "308",
+   "highway": "trunk",
+   "lengthKm": 3.19,
+   "curviness": 555.3,
+   "flow": 25.3,
+   "turnCount": 70,
+   "score": 87.7,
+   "baseScore": 87.7,
+   "spotCount": 0,
+   "polyline": "stqrE{ea{Xg@rDaCjEw@rGoDrGEh@bA|AA|C{@z@_@rCsAnA}A@?`AaA\\k@`AEpAhBbCRpBiC|BaA`Gy@|Bw@\\eB|FgC`KCbB_ErJM~Cr@jBNpBUtHZ`C_@bKb@~KcEnMX~F",
+   "pointCount": 35,
+   "start": [
+    34.665861,
+    135.670857
+   ],
+   "end": [
+    34.673162,
+    135.640823
+   ],
+   "title": "暗峠",
+   "tags": [
+    "caution"
    ]
   },
   {
@@ -331,8 +368,8 @@
    "curviness": 465.8,
    "flow": 24.9,
    "turnCount": 95,
-   "score": 74.3,
-   "baseScore": 74.3,
+   "score": 87.3,
+   "baseScore": 87.3,
    "spotCount": 0,
    "polyline": "i`eqEgzmzXpGhAx@cDrDiDPgB[wBl@_DjB]dCpAtAA|AuFbBwAj@yFdBwF{BaGUqBb@aFjBkExBc@hAcAWeGlBaBfCkEvBkPFyCd@cABqCh@{AC}BxB}D@aFfByCzCqAlM_Rw@yAB_Jt@mFJiFpAeFnB{DWiB@qIn@a@dAqCtCkCr@iFo@{D\\_ASkBl@qAjAsIzBiF",
    "pointCount": 52,
@@ -343,85 +380,14 @@
    "end": [
     34.420328,
     135.614943
+   ],
+   "tags": [
+    "flowing",
+    "caution"
    ]
   },
   {
    "id": "大阪府:13",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道308号",
-   "ref": "308",
-   "highway": "trunk",
-   "lengthKm": 3.19,
-   "curviness": 555.3,
-   "flow": 25.3,
-   "turnCount": 70,
-   "score": 74.3,
-   "baseScore": 74.3,
-   "spotCount": 0,
-   "polyline": "stqrE{ea{Xg@rDaCjEw@rGoDrGEh@bA|AA|C{@z@_@rCsAnA}A@?`AaA\\k@`AEpAhBbCRpBiC|BaA`Gy@|Bw@\\eB|FgC`KCbB_ErJM~Cr@jBNpBUtHZ`C_@bKb@~KcEnMX~F",
-   "pointCount": 35,
-   "start": [
-    34.665861,
-    135.670857
-   ],
-   "end": [
-    34.673162,
-    135.640823
-   ]
-  },
-  {
-   "id": "大阪府:14",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "市道九条梅田線",
-   "ref": "",
-   "highway": "primary",
-   "lengthKm": 6.74,
-   "curviness": 409.4,
-   "flow": 32.8,
-   "turnCount": 84,
-   "score": 72.4,
-   "baseScore": 72.4,
-   "spotCount": 0,
-   "polyline": "egxrEml|yXjGbMFzHi@xUVbHjIlV`CfElCxApANtNa@vj@_JJYqD~As^bFsUvA_FiB}AcBoCcKyFmNr@}g@oGaLeDeMe@wOp@iR{LgUA`@rHlM",
-   "pointCount": 27,
-   "start": [
-    34.699545,
-    135.482469
-   ],
-   "end": [
-    34.700955,
-    135.491445
-   ]
-  },
-  {
-   "id": "大阪府:15",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪高槻京都線",
-   "ref": "14;102;134",
-   "highway": "primary",
-   "lengthKm": 5.53,
-   "curviness": 406.2,
-   "flow": 47.8,
-   "turnCount": 47,
-   "score": 71.9,
-   "baseScore": 71.9,
-   "spotCount": 0,
-   "polyline": "_{wrE{~azXZ?oa@n@_\\Wgq@dAsFC{FeBec@xKe@WXt@J]|b@yKjGpA~KRbd@y@td@Da@H",
-   "pointCount": 17,
-   "start": [
-    34.6976,
-    135.511018
-   ],
-   "end": [
-    34.702961,
-    135.51078
-   ]
-  },
-  {
-   "id": "大阪府:16",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "富田林五条線",
@@ -431,8 +397,8 @@
    "curviness": 413,
    "flow": 23.8,
    "turnCount": 200,
-   "score": 71.2,
-   "baseScore": 71.2,
+   "score": 83.6,
+   "baseScore": 83.6,
    "spotCount": 0,
    "polyline": "aylqEopwzXzTs@`J{AfLSpEyB`DeDbHUfKxDrHzEbDf@fBhAfESpBrBdDHt@jAlAVlAnAhCXjC~EfE`DtCDfF`Ab@f@|E^vHgFzFWxD_G~OyIbSiWpBuEdBeBlA}J~AoCzCG|@w@bAiDdDuBtEe@t@y@\\mCbAaB@_ElFkAX}BpCsCbBq@pCKxDcBtA}GlCBlAe@|BoB\\mCzFl@hD]dA_ABkBXYbLn@`Bv@fA]~AdAbB{BfAeGl@ChHxCxB`CrFBTcCU{B`AiGDoDfBuAUsB~@{DkAcHZqAzA}@b@_Jt@]~FbDtAaGnGoGfBe@zJDrC{BCcCr@qAv@iE|@c@nB@NaDv@_AzD@t@iFhCmCn@oGpCuDvAwHbDoJnCkMdA{AxATzAyC",
    "pointCount": 104,
@@ -443,10 +409,14 @@
    "end": [
     34.403983,
     135.666319
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:17",
+   "id": "大阪府:14",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "萩谷西五百住線",
@@ -456,8 +426,8 @@
    "curviness": 402.2,
    "flow": 24,
    "turnCount": 120,
-   "score": 69.9,
-   "baseScore": 69.9,
+   "score": 82.2,
+   "baseScore": 82.2,
    "spotCount": 0,
    "polyline": "yxusEcuqzXqEzDuJrMgDbAiFVsNzGgF|@gCpAcHt@iFxE_GHuK`BaCdAwCUgCrAwC`@_KnFaDwBgB~A}FsB{H`@iDbB{D|EsALy@m@gBCgBkAuADmBrAaC]yAv@Y~@VhE|CpHLxAsDpY{FrEaA~AcCrAwDfGiGs@L}Ba@kA{CyBgBa@_BkB]u@KmC}B_D}Am@YsBqCyA{Co@yAyDoBoA{@Bm@`AwCo@qAt@{D}@iFKiGiA{A}AwBBaBgBiE}Aw@uAsCuA",
    "pointCount": 68,
@@ -468,60 +438,14 @@
    "end": [
     34.899741,
     135.579494
-   ]
-  },
-  {
-   "id": "大阪府:18",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "勝山通",
-   "ref": "173",
-   "highway": "primary",
-   "lengthKm": 3.53,
-   "curviness": 376.8,
-   "flow": 39.1,
-   "turnCount": 34,
-   "score": 69.4,
-   "baseScore": 69.4,
-   "spotCount": 0,
-   "polyline": "y}orEqhczXnA{BF}BnCkPvE_UpA}LpA{v@fBmZh@wwA",
-   "pointCount": 9,
-   "start": [
-    34.657092,
-    135.517686
    ],
-   "end": [
-    34.653299,
-    135.554995
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大阪府:19",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "竹内河南線",
-   "ref": "704",
-   "highway": "secondary",
-   "lengthKm": 3.65,
-   "curviness": 414.5,
-   "flow": 23.3,
-   "turnCount": 65,
-   "score": 69.1,
-   "baseScore": 69.1,
-   "spotCount": 0,
-   "polyline": "ippqE}|_{XrB|@`@zGo@pFRtJmApHhAxE`AvAFlDjBtIlBb@fGbL@rDzAdCMpGnBpCYrEr@xEEv@}BdDErDa@pA{A|AkBfI`A`DsAvFBtGwFrBgBpCxBfKw@bHnCnBX|L",
-   "pointCount": 33,
-   "start": [
-    34.496211,
-    135.664306
-   ],
-   "end": [
-    34.494257,
-    135.630269
-   ]
-  },
-  {
-   "id": "大阪府:20",
+   "id": "大阪府:15",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "能勢猪名川線",
@@ -531,8 +455,8 @@
    "curviness": 386.9,
    "flow": 24.3,
    "turnCount": 82,
-   "score": 68.8,
-   "baseScore": 68.8,
+   "score": 80.8,
+   "baseScore": 80.8,
    "spotCount": 0,
    "polyline": "exltEctjyXpDlBxJg@zBuCtIeCnHcH~Bw@fHPhFrApB~AdD|@pKuDfCjBrB^jDoApAfBRbBqD~Bm@rAf@l@rCGdK}GzQu@zGR`TaIdBjBpD`KL`E^VlBYv@b@]pDxC|A^nBhBzCEr@mCbA}@dEaClAKr@~@h@~BUnAnEhBhBbDvAbFzF",
    "pointCount": 46,
@@ -543,35 +467,13 @@
    "end": [
     34.937106,
     135.382682
-   ]
-  },
-  {
-   "id": "大阪府:21",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "城北公園通",
-   "ref": "",
-   "highway": "primary",
-   "lengthKm": 3.64,
-   "curviness": 363.3,
-   "flow": 30,
-   "turnCount": 44,
-   "score": 68.5,
-   "baseScore": 68.5,
-   "spotCount": 0,
-   "polyline": "{~zrEgy_zX_@cGcFe`@[wERgSqAcJL]{@cIoIkZfEnLjE|XhAtK]rSrEj\\z@xL\\z@",
-   "pointCount": 16,
-   "start": [
-    34.713576,
-    135.499881
    ],
-   "end": [
-    34.713487,
-    135.499886
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:22",
+   "id": "大阪府:16",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "加賀田片添線",
@@ -581,8 +483,8 @@
    "curviness": 400.9,
    "flow": 22.2,
    "turnCount": 102,
-   "score": 67.9,
-   "baseScore": 67.9,
+   "score": 79.7,
+   "baseScore": 79.7,
    "spotCount": 0,
    "polyline": "}ndqEajmzXJdFnCMfIv@dJxDjFx@|FlFjR`DrDc@`JlA~FsDjAeCdC_@hNoInDeA~AAlI~@`BsApD[tDbDfHvB`@xCp@r@zBVv@l@jG`@n@|@FxDrBpAxBrClAU`A{AfDxDtD|AtGyB~DbCpCeA~C~ClGbBnAxCb@NxFaAjEb@d@}AdGuEpG}BfEk@jCqA",
    "pointCount": 48,
@@ -593,60 +495,14 @@
    "end": [
     34.391293,
     135.563258
-   ]
-  },
-  {
-   "id": "大阪府:23",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "八尾茨木線",
-   "ref": "15",
-   "highway": "primary",
-   "lengthKm": 5.04,
-   "curviness": 347.9,
-   "flow": 27.4,
-   "turnCount": 64,
-   "score": 67.5,
-   "baseScore": 67.5,
-   "spotCount": 0,
-   "polyline": "wrsrEgipzXkFg@qHbIuGzD_KWqVjEmZ{EuExKaa@gOi@k@e@Pj@jBeAnAuE_HeDxBoB]mFkDsDmEeC~BwBB{FqF_EImB{A_CFmDgBgMTsAu@{CVwAp@iBiBeF}B}@_CcB_BkAcFu@i@",
-   "pointCount": 35,
-   "start": [
-    34.675799,
-    135.58436
    ],
-   "end": [
-    34.714186,
-    135.589772
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大阪府:24",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "伏見柳谷高槻線",
-   "ref": "79",
-   "highway": "primary",
-   "lengthKm": 6.78,
-   "curviness": 386.1,
-   "flow": 24,
-   "turnCount": 109,
-   "score": 67.4,
-   "baseScore": 67.4,
-   "spotCount": 0,
-   "polyline": "{dwsE}hxzXeCcM{M[uBgB_O{DoA}EaHp@{CdB_DzI_JbIgGxB{Eh@?xHaBbC_NbEs@_@wEgJc@CyC|CcEbC_Gx@uCbEuDzB{BzFgB|@eBzBk@WgBaKoBeAwGWy@{AEsEcAmA_H~@qDkBwGdBwF}@{DhAmKh@sCZkCdAoCBkAm@yF_@sI}DoAt@kABiBpB{Ay@_DiIoKt@qDmDi@cBgC~Bs@?",
-   "pointCount": 55,
-   "start": [
-    34.857896,
-    135.62527
-   ],
-   "end": [
-    34.905821,
-    135.624783
-   ]
-  },
-  {
-   "id": "大阪府:25",
+   "id": "大阪府:17",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "国道310号",
@@ -656,8 +512,8 @@
    "curviness": 416.3,
    "flow": 24.2,
    "turnCount": 259,
-   "score": 67.1,
-   "baseScore": 67.1,
+   "score": 79.3,
+   "baseScore": 79.3,
    "spotCount": 0,
    "polyline": "suiqEqdmzX|y@eIbDqK?sAiAoAoI_ENmCxHn@fAyA`AJ|E{AhAwB|EyB`A{B`C{Bx@uCdC}AbF}HzDqA~CoUlBmDfCuK`KoDhFZdCaAn@iIqAyEYaE^kKdB}KfAkCtHaFVsFsAiFv@}BrCoB`DCf@yCnAoBI{DtA_DfA_AfCa@dD{GbCo@zBDf@uDtAuA|EUjB_DtJcD`IaGhAW|Bf@pAc@jCsCzAkDbAeGxD}EzCz@rC[`@iAUmF`@aC~BEvBiC`E{KnB}C~@aFjB_D\\aFlDaFtBsHlCiA}@{EDwEX{@lAQlClAfCm@lHFlIkCpBmBtEtAjCRdCpChCi@|CHxCwBbBNrFoAlBqF|EqA|AtAt@E`CkCfA}BrHgGpBi@rBqJlBoFtBwBvDcIr@_FKiDVqDzDoKbAqAfFyBlAcBbCkA[_@yG~AsA}Ay@R]hA]IAe@|AcBnBpAnBm@bC{FvABv@_AOaIr@gBi@yE|@ArB~BdAe@bAoEe@oBl@{AU_BrAu@~FcT",
    "pointCount": 136,
@@ -668,35 +524,41 @@
    "end": [
     34.385689,
     135.657126
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:26",
+   "id": "大阪府:18",
    "region": "osaka",
    "regionName": "大阪府",
-   "name": "吹田箕面線",
-   "ref": "121",
-   "highway": "secondary",
-   "lengthKm": 3.38,
-   "curviness": 351.6,
-   "flow": 25.3,
-   "turnCount": 47,
-   "score": 66.8,
-   "baseScore": 66.8,
+   "name": "伏見柳谷高槻線",
+   "ref": "79",
+   "highway": "primary",
+   "lengthKm": 6.78,
+   "curviness": 386.1,
+   "flow": 24,
+   "turnCount": 109,
+   "score": 79.3,
+   "baseScore": 79.3,
    "spotCount": 0,
-   "polyline": "}ydsEsqazXiL~CeCKaEoAmCVeB|AyDzGoBvAgCp@eHv@oJPyS}@oBf@m@pA_Ez@q@UsBrB_En@sGc@_@`@SnHYZyE?}I_Bc@k@_@uEi@Ya@_CeAkBoCkCeJsF",
-   "pointCount": 31,
+   "polyline": "{dwsE}hxzXeCcM{M[uBgB_O{DoA}EaHp@{CdB_DzI_JbIgGxB{Eh@?xHaBbC_NbEs@_@wEgJc@CyC|CcEbC_Gx@uCbEuDzB{BzFgB|@eBzBk@WgBaKoBeAwGWy@{AEsEcAmA_H~@qDkBwGdBwF}@{DhAmKh@sCZkCdAoCBkAm@yF_@sI}DoAt@kABiBpB{Ay@_DiIoKt@qDmDi@cBgC~Bs@?",
+   "pointCount": 55,
    "start": [
-    34.763992,
-    135.508896
+    34.857896,
+    135.62527
    ],
    "end": [
-    34.789525,
-    135.507526
+    34.905821,
+    135.624783
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:27",
+   "id": "大阪府:19",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "父鬼和気線",
@@ -706,8 +568,8 @@
    "curviness": 350.5,
    "flow": 22.3,
    "turnCount": 115,
-   "score": 65.2,
-   "baseScore": 65.2,
+   "score": 76.6,
+   "baseScore": 76.6,
    "spotCount": 0,
    "polyline": "yadqEq|vyXnAE|n@oYjZ{ApMJjD}@tEOvDx@zFQzKrGlUvDhJYbAo@jAAjBvBxFhBxBvB~CDrC}DtBkAbOqCtBaAvA}B`D~Ap@WbCsFLgC`Cu@dAyC]aCv@uFO_EZwDhAuBO{ARi@fD{@|@t@vAAj@lAbDx@xFwB~J~@nDk@hGaKlG}AlDmDlCZ`Az@dFe@hGp@vE{@zC`BnDyAvAX^W",
    "pointCount": 56,
@@ -718,35 +580,13 @@
    "end": [
     34.376785,
     135.46901
-   ]
-  },
-  {
-   "id": "大阪府:28",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "勝山通",
-   "ref": "173",
-   "highway": "primary",
-   "lengthKm": 3.86,
-   "curviness": 289.1,
-   "flow": 34.8,
-   "turnCount": 32,
-   "score": 63.9,
-   "baseScore": 63.9,
-   "spotCount": 0,
-   "polyline": "y_prE}qbzXbAgVz@aChAaJpH{[lAeKBuRbAea@zBqa@f@owA",
-   "pointCount": 10,
-   "start": [
-    34.657413,
-    135.514074
    ],
-   "end": [
-    34.653297,
-    135.555087
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:29",
+   "id": "大阪府:20",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "岸和田牛滝山貝塚線",
@@ -756,8 +596,8 @@
    "curviness": 372.6,
    "flow": 20.6,
    "turnCount": 143,
-   "score": 63.6,
-   "baseScore": 63.6,
+   "score": 74.8,
+   "baseScore": 74.8,
    "spotCount": 0,
    "polyline": "qbypEi`ryXe@nA^jAhDfAbEFvBlCyA~JHvLr@zGnBhF|BvApBYzDpAtCyE~@[X`@kC`JaCzDWnEy@vAXbDc@vWqEzEuClAm@`CeBDo@hAMvEfDfA\\|@QlJk@tAsCnEsA~@_AEaB_Bu@mBkC]eCZyJ[uGcFkClC{FTgCqAaByCuCKyBuDoCYwA\\uCbFSjB~DrDj@nAFxA}K|RuBfImAd@}GeAiBhB}F|KkCIaEbAqAvEqGbKo@bDqGpQmIw@cCLwCxAcIhH",
    "pointCount": 70,
@@ -768,135 +608,13 @@
    "end": [
     34.402285,
     135.388316
-   ]
-  },
-  {
-   "id": "大阪府:30",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "富田林泉大津線",
-   "ref": "38",
-   "highway": "primary",
-   "lengthKm": 3.37,
-   "curviness": 285.7,
-   "flow": 33.2,
-   "turnCount": 29,
-   "score": 63.5,
-   "baseScore": 63.5,
-   "spotCount": 0,
-   "polyline": "m{lqEsbuyXeCcEj@gZwAgQbEyf@eF{Nd@gQScGp@uEfLfAJ}CjGaKIaLtAoBk@cBnGoEoGnE",
-   "pointCount": 17,
-   "start": [
-    34.477507,
-    135.445063
    ],
-   "end": [
-    34.474553,
-    135.473028
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "大阪府:31",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "南港通",
-   "ref": "42",
-   "highway": "primary",
-   "lengthKm": 3.81,
-   "curviness": 266.2,
-   "flow": 30.8,
-   "turnCount": 33,
-   "score": 62.4,
-   "baseScore": 62.4,
-   "spotCount": 0,
-   "polyline": "a}hrEsmfzX~AonDk@loA",
-   "pointCount": 3,
-   "start": [
-    34.621133,
-    135.533861
-   ],
-   "end": [
-    34.620872,
-    135.549074
-   ]
-  },
-  {
-   "id": "大阪府:32",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "泉佐野打田線",
-   "ref": "62",
-   "highway": "primary",
-   "lengthKm": 3.06,
-   "curviness": 263.1,
-   "flow": 31,
-   "turnCount": 26,
-   "score": 61.9,
-   "baseScore": 61.9,
-   "spotCount": 0,
-   "polyline": "cr|pEe}ayXoa@rKwJVWpEsBzKkHrDwLpR{H}G@e@X^qKnQyErLmHhE}HfO",
-   "pointCount": 14,
-   "start": [
-    34.394101,
-    135.346915
-   ],
-   "end": [
-    34.413544,
-    135.330344
-   ]
-  },
-  {
-   "id": "大阪府:33",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪高石線",
-   "ref": "28",
-   "highway": "primary",
-   "lengthKm": 4.76,
-   "curviness": 249.6,
-   "flow": 28.3,
-   "turnCount": 42,
-   "score": 61.7,
-   "baseScore": 61.7,
-   "spotCount": 0,
-   "polyline": "of|qE{a_zXdIcDlNjGbIbH|@bHfA~@nBhGjK}BtAdGzC|H|BTtBzEzDt@J|BtBxBRjAlCQ~H{BpHa@fO{DzL_@@~UyFfj@kK~_@FxB~@|Ah@vC",
-   "pointCount": 27,
-   "start": [
-    34.556076,
-    135.496141
-   ],
-   "end": [
-    34.537024,
-    135.469942
-   ]
-  },
-  {
-   "id": "大阪府:34",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "土佐堀通",
-   "ref": "168",
-   "highway": "tertiary",
-   "lengthKm": 5.19,
-   "curviness": 215,
-   "flow": 28.6,
-   "turnCount": 39,
-   "score": 61.1,
-   "baseScore": 61.1,
-   "spotCount": 0,
-   "polyline": "czvrEmb_zX`G`J|HnJ|CdCfFfQ\\HrK~Yk@c@sHsSmGeTeWg[y@wUvByb@d@sFtCqL`D{GPyQrAcXU{EcIiW",
-   "pointCount": 20,
-   "start": [
-    34.692344,
-    135.496228
-   ],
-   "end": [
-    34.691476,
-    135.522251
-   ]
-  },
-  {
-   "id": "大阪府:35",
+   "id": "大阪府:21",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "野間出野一庫線",
@@ -906,8 +624,8 @@
    "curviness": 338.3,
    "flow": 19,
    "turnCount": 100,
-   "score": 61.1,
-   "baseScore": 61.1,
+   "score": 71.7,
+   "baseScore": 71.7,
    "spotCount": 0,
    "polyline": "{|atEwxpyXuDNkF{BgFa@eBTmBgB{B]iBTwArBy@\\cCEcD}@eCt@oCgCuB_GcMoE{ANyHrFkAPcWmDqAl@oGzKoBPqE}AqA{Au@{BiB}AcAFAcBbBoEu@gEoC}A{DzAcBFm@WMcEoAmCaBa@iCn@aC@_AkBYmGs@}ByB}@oEQoEoI}AkA}@}DAuHjAqLgM_Qw@aN",
    "pointCount": 52,
@@ -918,10 +636,14 @@
    "end": [
     34.946886,
     135.44476
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:36",
+   "id": "大阪府:22",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "泉佐野打田線",
@@ -931,8 +653,8 @@
    "curviness": 341.8,
    "flow": 19.5,
    "turnCount": 161,
-   "score": 60.9,
-   "baseScore": 60.9,
+   "score": 71.6,
+   "baseScore": 71.6,
    "spotCount": 0,
    "polyline": "e`npEihhyXwKfDsB`HgI|BaAhFk@|@aThBi@AiCkBwBvD}EIi@dDiAh@gCoB{@gCkCZ{@uAKiBuCVkAmAa@BiD~EgA|G{A~AeAMqBqBsGmJqIxGoCe@s@wAIqBu@g@mFfDgA~AmBNoHq@yDcHs@cDoA{@eLfDyJzE[fA@dFgB|HEhB_AzB}EhCcKjCuGrH{CpB}DrIPbBbAnBQ|BwIzNeBtAcDrF_HbGoX`EyG_D_G^aDu@_CFuO`FgAdBWrGoFoA}H`@kHc@oFz@iDSuPl@",
    "pointCount": 72,
@@ -943,10 +665,14 @@
    "end": [
     34.382285,
     135.354581
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:37",
+   "id": "大阪府:23",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "森屋狭山線",
@@ -956,8 +682,8 @@
    "curviness": 305.4,
    "flow": 21.3,
    "turnCount": 59,
-   "score": 60.5,
-   "baseScore": 60.5,
+   "score": 71.1,
+   "baseScore": 71.1,
    "spotCount": 0,
    "polyline": "acmqEo}pzX~CoDRcDdGcIo@iHd@yB?sFfAyBNeBe@uGuCsJp@yHoAwIRkChD{O[cGlA}Dw@iHfDyC|VqFvGu@|@oAeAeLy@s@sCm@o@{BtDaNy@iFE}KgByErDqB",
    "pointCount": 31,
@@ -968,60 +694,13 @@
    "end": [
     34.470569,
     135.622216
-   ]
-  },
-  {
-   "id": "大阪府:38",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "美原太子線",
-   "ref": "32",
-   "highway": "primary",
-   "lengthKm": 5.1,
-   "curviness": 281.2,
-   "flow": 23.9,
-   "turnCount": 60,
-   "score": 60.2,
-   "baseScore": 60.2,
-   "spotCount": 0,
-   "polyline": "c_uqEmovzXgMbXyGbEDjRmEKNn`@QdEpCtIDxDIdAeBjD@lDw@pDZpEu@lBeClCq@hHkC`GN~Jg@vBwFtBwAvA}@~DgBr@cBxB{ETC~b@_ArEwExLlBvKCnFiChKoDbATtE",
-   "pointCount": 34,
-   "start": [
-    34.519065,
-    135.616069
    ],
-   "end": [
-    34.532158,
-    135.569837
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:39",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "今里筋",
-   "ref": "173",
-   "highway": "primary",
-   "lengthKm": 4.34,
-   "curviness": 227.1,
-   "flow": 41.1,
-   "turnCount": 24,
-   "score": 60.1,
-   "baseScore": 60.1,
-   "spotCount": 0,
-   "polyline": "{`rrE_fhzXfO`Bx@OxPbB`ZzATZ`VhAjBj@pb@dEpZtCX[dRhBzDBV\\zMS`K`@x_@A",
-   "pointCount": 17,
-   "start": [
-    34.667825,
-    135.542877
-   ],
-   "end": [
-    34.629491,
-    135.538419
-   ]
-  },
-  {
-   "id": "大阪府:40",
+   "id": "大阪府:24",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "枚方亀岡線",
@@ -1031,8 +710,8 @@
    "curviness": 313,
    "flow": 21.2,
    "turnCount": 98,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.7,
+   "baseScore": 70.7,
    "spotCount": 0,
    "polyline": "}cysEulszXaKu@yUiH}CNcFc@kL~CoBCgFcBqJbCkKjNkA`@iH?s@c@i@kBiAsAmi@_Nue@jA}Fn@gDdBmA_@wCgDiCeBgA?kB~Bq@FyGeCk@L_DvEq@HqCeEqDj@k@[cA{A_AeGaAk@eA~@a@dGs@dAeCE}DcAm@PSbEz@rGm@~AaB[{@uC{BJ}AbBc@~B{ApAq@s@GmFWu@kBqBaDW",
    "pointCount": 55,
@@ -1043,10 +722,39 @@
    "end": [
     34.916435,
     135.60132
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:41",
+   "id": "大阪府:25",
+   "region": "osaka",
+   "regionName": "大阪府",
+   "name": "大阪生駒線",
+   "ref": "8",
+   "highway": "primary",
+   "lengthKm": 8.61,
+   "curviness": 313.5,
+   "flow": 20.6,
+   "turnCount": 131,
+   "score": 70.6,
+   "baseScore": 70.6,
+   "spotCount": 0,
+   "polyline": "owxrEiv~zXsDjE}ClBiDd@qBYuC{D}ToIwAkAeA{CT}IoA}CsBm@mEt@}EiFsGcDyAeJmCgHUiYwAkLXyClDuJ?eBuBcGn@sCxK_EtK}GtB_Cm@tA{DtCeJrFqHvB_AzABxA`BzDN`BiErOz@`PNjWnCdHlAlIj@x@jGrCdE|E~Eq@jBl@bA`CEdJnBnDlUdJ`CbKwE`PN`B|Dn@bFgCRu@Y{ArAoFh@YdBX`AoANyBd@CWdC{@|BuAL",
+   "pointCount": 65,
+   "start": [
+    34.702157,
+    135.658132
+   ],
+   "end": [
+    34.703566,
+    135.654479
+   ]
+  },
+  {
+   "id": "大阪府:26",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "富田林泉大津線",
@@ -1056,8 +764,8 @@
    "curviness": 300.3,
    "flow": 21.6,
    "turnCount": 98,
-   "score": 59.8,
-   "baseScore": 59.8,
+   "score": 70.3,
+   "baseScore": 70.3,
    "spotCount": 0,
    "polyline": "s`mqEwrlzXm@bBhAhGs@~G|Hn\\uBdCeAlF{@A[h@Jt@|D~BjNZnE`AbBrAzGj@~B~FD|FbAbGvEpErEpHDfAo@tBI|J^jDr@bBRrIgAtCwC~AwEdIa@dCcAr@{BKy@vBR~@zDhEbElCtDlAvFfJ~@nKc@dDcAzAuCxAa@|DyBnEoBjH{DtAqHi@uGzAuGtF{IzNiEvDwH|DsGxBsCT}CzCcCpF{F`C",
    "pointCount": 57,
@@ -1068,185 +776,14 @@
    "end": [
     34.484538,
     135.515509
-   ]
-  },
-  {
-   "id": "大阪府:42",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "都島通",
-   "ref": "",
-   "highway": "primary",
-   "lengthKm": 8.03,
-   "curviness": 204,
-   "flow": 31.5,
-   "turnCount": 52,
-   "score": 59.6,
-   "baseScore": 59.6,
-   "spotCount": 0,
-   "polyline": "a~yrEmrczXBb@n@yE}Dif@rBe~@QwDmHeJqUmTyCiFgEiOrE~NvCfFjUdT`I~JqBlgAdDbd@oFdY_HzYPxEvBhEvg@ns@`FjGjBbA",
-   "pointCount": 23,
-   "start": [
-    34.708327,
-    135.519273
    ],
-   "end": [
-    34.701909,
-    135.499268
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:43",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "堺かつらぎ線",
-   "ref": "61",
-   "highway": "primary",
-   "lengthKm": 3.53,
-   "curviness": 217.1,
-   "flow": 36.5,
-   "turnCount": 21,
-   "score": 59.2,
-   "baseScore": 59.2,
-   "spotCount": 0,
-   "polyline": "uluqEq`{yX[?{GpKoEjF_HvBg^xHzCK`[aHrI}E|KcPCc@j_@wl@Z@vJaK",
-   "pointCount": 14,
-   "start": [
-    34.521227,
-    135.475447
-   ],
-   "end": [
-    34.51405,
-    135.484871
-   ]
-  },
-  {
-   "id": "大阪府:44",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "新なにわ筋; 大阪臨海線",
-   "ref": "29",
-   "highway": "primary",
-   "lengthKm": 3.77,
-   "curviness": 213.3,
-   "flow": 29.8,
-   "turnCount": 27,
-   "score": 59.1,
-   "baseScore": 59.1,
-   "spotCount": 0,
-   "polyline": "cmrrE}e}yXsAHtAg@HZjn@o@zMuH|H^|VWpBb@pDhCrBbE`DbKLSeA_EyEqKcFuCeYFyH_@sMdH",
-   "pointCount": 19,
-   "start": [
-    34.669782,
-    135.48655
-   ],
-   "end": [
-    34.662103,
-    135.486993
-   ]
-  },
-  {
-   "id": "大阪府:45",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "天満橋筋",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.4,
-   "curviness": 183.3,
-   "flow": 33.6,
-   "turnCount": 24,
-   "score": 58.9,
-   "baseScore": 58.9,
-   "spotCount": 0,
-   "polyline": "cxwrEijczXqXkAsZ~KgSbCul@wE[Rfe@~D|I]T^nPmBhYyKjYZ",
-   "pointCount": 12,
-   "start": [
-    34.697136,
-    135.517974
-   ],
-   "end": [
-    34.697131,
-    135.518083
-   ]
-  },
-  {
-   "id": "大阪府:46",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "市道赤川天王寺線",
-   "ref": "",
-   "highway": "primary",
-   "lengthKm": 6.22,
-   "curviness": 195.6,
-   "flow": 30.4,
-   "turnCount": 40,
-   "score": 58.7,
-   "baseScore": 58.7,
-   "spotCount": 0,
-   "polyline": "uzxrEsjezXb@Q}KrBcFpGeRtBee@}[{cAqExbAbEpf@z\\bR}C~C_FlBiA|Q_CbBZrQhL",
-   "pointCount": 15,
-   "start": [
-    34.70267,
-    135.528265
-   ],
-   "end": [
-    34.697803,
-    135.526381
-   ]
-  },
-  {
-   "id": "大阪府:47",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道25号",
-   "ref": "25;165;170",
-   "highway": "trunk",
-   "lengthKm": 7.8,
-   "curviness": 242.4,
-   "flow": 41.1,
-   "turnCount": 46,
-   "score": 58.5,
-   "baseScore": 58.5,
-   "spotCount": 0,
-   "polyline": "}rirEewkzXcAf\\uEvHgB~FiB~CijAxlBoCfP__@`oArFmSlBoEjR{n@`EoU^Gf^kn@ZAnJaQ\\CnGmKnBkEn@[",
-   "pointCount": 20,
-   "start": [
-    34.624633,
-    135.560987
-   ],
-   "end": [
-    34.629693,
-    135.548794
-   ]
-  },
-  {
-   "id": "大阪府:48",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "堺泉北環状線",
-   "ref": "208",
-   "highway": "secondary",
-   "lengthKm": 3.38,
-   "curviness": 179.8,
-   "flow": 28.9,
-   "turnCount": 21,
-   "score": 58.3,
-   "baseScore": 58.3,
-   "spotCount": 0,
-   "polyline": "ghjqEca}yXiFfAeEdD{Sbl@}E`G{MpKzMqKhEaGbTol@hEiDpFw@{CqS",
-   "pointCount": 12,
-   "start": [
-    34.464202,
-    135.485781
-   ],
-   "end": [
-    34.464985,
-    135.489075
-   ]
-  },
-  {
-   "id": "大阪府:49",
+   "id": "大阪府:27",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "岸和田港塔原線",
@@ -1256,8 +793,8 @@
    "curviness": 291.6,
    "flow": 20.1,
    "turnCount": 108,
-   "score": 58,
-   "baseScore": 58,
+   "score": 68.2,
+   "baseScore": 68.2,
    "spotCount": 0,
    "polyline": "afbqEkinyXrD_AlCDnJiEbCkBpK^dGrD`EN|B`AjBH|GqAjChAjBJv@m@D}L~ByCvDLpAbFxC|AjQkEj@uAf@oJjCiKdFkIx@{CFeLdAsHSyAeA}AY}D|@w@`FpAjAk@pLmOpHaH~@Tt@~ChAdAdJrB|Aw@tBxBlBv@dDa@|CLbCu@~JrBnDF|BcD|DsCjE]zUsHzHJfLjD~E_@rEcBnFEh@yChEcD",
    "pointCount": 58,
@@ -1268,10 +805,13 @@
    "end": [
     34.372765,
     135.431453
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:50",
+   "id": "大阪府:28",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "余野茨木線",
@@ -1281,8 +821,8 @@
    "curviness": 274.7,
    "flow": 20.6,
    "turnCount": 52,
-   "score": 57.9,
-   "baseScore": 57.9,
+   "score": 68,
+   "baseScore": 68,
    "spotCount": 0,
    "polyline": "oqxsEumfzXmA}IPaDrI}JbDgAZ{AxEqD@iByAuAk@qC?kBb@uAdI_@vDzA`F@nAcAr@oCQaG^eA`CoAdHr@hE]fJkHdLoOd@iCxAObCwC|j@}LdGiC",
    "pointCount": 29,
@@ -1293,35 +833,13 @@
    "end": [
     34.840977,
     135.553978
-   ]
-  },
-  {
-   "id": "大阪府:51",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "高田久々知線",
-   "ref": "338",
-   "highway": "secondary",
-   "lengthKm": 3.26,
-   "curviness": 158.1,
-   "flow": 43,
-   "turnCount": 12,
-   "score": 56.8,
-   "baseScore": 56.8,
-   "spotCount": 0,
-   "polyline": "cw`sEezvyXs@dmAXe|@t@wp@[v_@",
-   "pointCount": 5,
-   "start": [
-    34.743056,
-    135.453953
    ],
-   "end": [
-    34.743056,
-    135.453953
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:52",
+   "id": "大阪府:29",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "和歌山貝塚線",
@@ -1331,8 +849,8 @@
    "curviness": 293.6,
    "flow": 19.6,
    "turnCount": 58,
-   "score": 56.7,
-   "baseScore": 56.7,
+   "score": 66.6,
+   "baseScore": 66.6,
    "spotCount": 0,
    "polyline": "strpEykqxXnBlChDyCzIc@`CmJ`FyEzLcEpDwGjLqHzESjCaDtAgElG}CdANbC|BpGlArN`HtFw@xMRd@U@sAl@g@~GzAvHmB~Wr@",
    "pointCount": 25,
@@ -1343,85 +861,14 @@
    "end": [
     34.313628,
     135.270166
-   ]
-  },
-  {
-   "id": "大阪府:53",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道479号",
-   "ref": "479",
-   "highway": "trunk",
-   "lengthKm": 4.05,
-   "curviness": 229.1,
-   "flow": 32,
-   "turnCount": 29,
-   "score": 56.7,
-   "baseScore": 56.7,
-   "spotCount": 0,
-   "polyline": "qanrEgkjzXrELN\\p[rDjc@`ShIfAv^tAfVST`@fq@s@l[XtBk@",
-   "pointCount": 12,
-   "start": [
-    34.647446,
-    135.553957
    ],
-   "end": [
-    34.612184,
-    135.549121
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:54",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道2号",
-   "ref": "2",
-   "highway": "trunk",
-   "lengthKm": 8.66,
-   "curviness": 206.5,
-   "flow": 33.8,
-   "turnCount": 53,
-   "score": 56.3,
-   "baseScore": 56.3,
-   "spotCount": 0,
-   "polyline": "mkwrEa`}yX~FtRg@jd@PzBx@bBe@CaD~FmXn\\ij@hd@iDtDyXbj@D`@cPf\\wEdMsE`GwJfHwIlJ_ApC_@jDOzX?_ZzAuGfCsDhPmM~GcIdIgTxd@a`AxCmDrDcC",
-   "pointCount": 29,
-   "start": [
-    34.69511,
-    135.485615
-   ],
-   "end": [
-    34.704937,
-    135.464034
-   ]
-  },
-  {
-   "id": "大阪府:55",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "谷町筋",
-   "ref": "30",
-   "highway": "primary",
-   "lengthKm": 3.59,
-   "curviness": 169.4,
-   "flow": 40.6,
-   "turnCount": 15,
-   "score": 56.2,
-   "baseScore": 56.2,
-   "spotCount": 0,
-   "polyline": "}`prEaqbzXb@[bIz@`KDfPY`WbCdBt@mZwCuFZqTGcI{@[g@_u@kHxHn@",
-   "pointCount": 14,
-   "start": [
-    34.65759,
-    135.51393
-   ],
-   "end": [
-    34.664636,
-    135.515356
-   ]
-  },
-  {
-   "id": "大阪府:56",
+   "id": "大阪府:30",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "枚方富田林泉佐野線",
@@ -1431,8 +878,8 @@
    "curviness": 237.7,
    "flow": 21.4,
    "turnCount": 90,
-   "score": 55.8,
-   "baseScore": 55.8,
+   "score": 65.7,
+   "baseScore": 65.7,
    "spotCount": 0,
    "polyline": "onfqEwbjzXvLdS`B|D~MzG`E~D`AjErMzKjAtB?nB~@fEpC~GUj@{DzBaBnCsAjFAlEXdAx\\tK~@nCrBpAOhEnApBnA`@xGAxA]dC|Bd@`DWvK|AvI~GjHpCnFLzAa@rGz@fEpBnBGfCgDhFYpHqBfGeBnJaEzHiCzA}AzFExBeB`@yBnDo@rFs@jSXbF?bN^fDoGf[cBhFeF`KzE|@hNbGjD_@`F^",
    "pointCount": 58,
@@ -1443,10 +890,14 @@
    "end": [
     34.427049,
     135.489589
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:57",
+   "id": "大阪府:31",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "木ノ本岬線",
@@ -1456,8 +907,8 @@
    "curviness": 288.7,
    "flow": 16.8,
    "turnCount": 80,
-   "score": 55.6,
-   "baseScore": 55.6,
+   "score": 65.2,
+   "baseScore": 65.2,
    "spotCount": 0,
    "polyline": "cgmpE{|vwXbEhDtDbAlBGpEmBtAmAtAwDlD{AvImMtD_ChHoMtAeG~@sAfDaBvM_@dD`@z@u@jAmErGg@|Bx@tEPdGsBxEp@hCpAxB{@`Gc@xCnAlB|CzEDbBhAjAxAx@xEdAtAjCLjDgClA?zOzHjJrBfBlDJ~B",
    "pointCount": 40,
@@ -1468,310 +919,13 @@
    "end": [
     34.281681,
     135.130249
-   ]
-  },
-  {
-   "id": "大阪府:58",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "深井畑山宿院線",
-   "ref": "197",
-   "highway": "secondary",
-   "lengthKm": 4.65,
-   "curviness": 182.6,
-   "flow": 24.3,
-   "turnCount": 35,
-   "score": 55.6,
-   "baseScore": 55.6,
-   "spotCount": 0,
-   "polyline": "ca}qE_`}yXpKqN|DwDjFiSt@o@xHqAfHwEt^sh@nC}BvBOlHtCpVfCvAOlNeMhM}StC]j@g@j@cAE_JrLRz@a@r@nBlAc@jKxAdDdE",
-   "pointCount": 25,
-   "start": [
-    34.560345,
-    135.485605
    ],
-   "end": [
-    34.528905,
-    135.506331
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:59",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "尼崎平野線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.09,
-   "curviness": 137.2,
-   "flow": 28.3,
-   "turnCount": 15,
-   "score": 55.4,
-   "baseScore": 55.4,
-   "spotCount": 0,
-   "polyline": "sknrEqp`zXh@c@b@kCnLi{@zGi`@cMt{@eC|JoEnYJzA",
-   "pointCount": 9,
-   "start": [
-    34.649056,
-    135.503611
-   ],
-   "end": [
-    34.649001,
-    135.50315
-   ]
-  },
-  {
-   "id": "大阪府:60",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "八尾茨木線",
-   "ref": "15",
-   "highway": "primary",
-   "lengthKm": 4.75,
-   "curviness": 182.7,
-   "flow": 24.8,
-   "turnCount": 35,
-   "score": 54.6,
-   "baseScore": 54.6,
-   "spotCount": 0,
-   "polyline": "slpsEypnzXuCC{CnGkDhEvDcEzDqGvi@h@h@bAOhHvPLzIrFxOiArg@d@vK}EnWYfXuVz@e@dHm@lAo@bAeB",
-   "pointCount": 20,
-   "start": [
-    34.823301,
-    135.57533
-   ],
-   "end": [
-    34.790594,
-    135.578378
-   ]
-  },
-  {
-   "id": "大阪府:61",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道308号",
-   "ref": "308",
-   "highway": "trunk",
-   "lengthKm": 3.29,
-   "curviness": 193.2,
-   "flow": 48.8,
-   "turnCount": 13,
-   "score": 54.1,
-   "baseScore": 54.1,
-   "spotCount": 0,
-   "polyline": "octrE_ilzXm@hMXpB_AnQdaA`FubAuE~@yO|@mD",
-   "pointCount": 8,
-   "start": [
-    34.678479,
-    135.563837
-   ],
-   "end": [
-    34.678508,
-    135.561518
-   ]
-  },
-  {
-   "id": "大阪府:62",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "南千里茨木停車場線",
-   "ref": "129",
-   "highway": "secondary",
-   "lengthKm": 4.94,
-   "curviness": 211.2,
-   "flow": 20.5,
-   "turnCount": 51,
-   "score": 54.1,
-   "baseScore": 54.1,
-   "spotCount": 0,
-   "polyline": "}tmsEw{czXy@fCEnEcA`E`E|FvHlHfCl@lNx@vI]~DVvDvApOdMpFfClGh@jN[yMt@cIu@yEaCiOgMuDuA{DYqJZwPoAyBwAeLqMcAMsC|@_DcDk@sA_@kM",
-   "pointCount": 30,
-   "start": [
-    34.80927,
-    135.520762
-   ],
-   "end": [
-    34.812186,
-    135.521165
-   ]
-  },
-  {
-   "id": "大阪府:63",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "堺狭山線",
-   "ref": "34",
-   "highway": "primary",
-   "lengthKm": 4.24,
-   "curviness": 150.8,
-   "flow": 26.6,
-   "turnCount": 24,
-   "score": 54,
-   "baseScore": 54,
-   "spotCount": 0,
-   "polyline": "q~pqEqvhzXwAvDcKlPs@lDKvD\\rAIdFlAr\\hNl{@iNm{@Ps@uAeb@[}@nAiJdKoPbAgE",
-   "pointCount": 16,
-   "start": [
-    34.498493,
-    135.545525
-   ],
-   "end": [
-    34.498493,
-    135.545525
-   ]
-  },
-  {
-   "id": "大阪府:64",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "淀川通",
-   "ref": "16",
-   "highway": "tertiary",
-   "lengthKm": 4.08,
-   "curviness": 104.3,
-   "flow": 35.5,
-   "turnCount": 12,
-   "score": 53.7,
-   "baseScore": 53.7,
-   "spotCount": 0,
-   "polyline": "k`{rE_lyyXuSukAcHaQpGzPlg@rrC",
-   "pointCount": 5,
-   "start": [
-    34.713819,
-    135.46704
-   ],
-   "end": [
-    34.710752,
-    135.45572
-   ]
-  },
-  {
-   "id": "大阪府:65",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "岸和田牛滝山貝塚線",
-   "ref": "40",
-   "highway": "primary",
-   "lengthKm": 4.1,
-   "curviness": 123.6,
-   "flow": 28.2,
-   "turnCount": 18,
-   "score": 53.5,
-   "baseScore": 53.5,
-   "spotCount": 0,
-   "polyline": "wqlqE{lmyXza@uo@`AiFTeSrAaFhc@im@fNsNBa@xKmJxb@aP|PiF",
-   "pointCount": 11,
-   "start": [
-    34.475956,
-    135.405745
-   ],
-   "end": [
-    34.450596,
-    135.434872
-   ]
-  },
-  {
-   "id": "大阪府:66",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "熊野大阪線",
-   "ref": "134",
-   "highway": "secondary",
-   "lengthKm": 3.11,
-   "curviness": 266.8,
-   "flow": 16.6,
-   "turnCount": 50,
-   "score": 53.5,
-   "baseScore": 53.5,
-   "spotCount": 0,
-   "polyline": "}aesE{_~yXeDGcDv@gIbHiBYeD_DeFcBqPWgFkAoEQ{CeBeCaD}BW{H`BqAdA_@fBy@~Uw@x@eLzHyCl@k@dBsK_BiC~A}Cp@a@hA",
-   "pointCount": 25,
-   "start": [
-    34.765269,
-    135.490703
-   ],
-   "end": [
-    34.787651,
-    135.484186
-   ]
-  },
-  {
-   "id": "大阪府:67",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "岸和田牛滝山貝塚線",
-   "ref": "40",
-   "highway": "primary",
-   "lengthKm": 7.51,
-   "curviness": 248.7,
-   "flow": 18,
-   "turnCount": 104,
-   "score": 53.4,
-   "baseScore": 53.4,
-   "spotCount": 0,
-   "polyline": "wlxpEwwuyXkKtDmHiEoBYaDyBuFkB{D_EkB_@kBiD}B[yBwAwJuAaD}B}BPaDfFoJzG{B~E?vMe@dEfApG?bBo@xJcAnBiAlF\\rGSdA_RfPmHtEeCn@cD@kIeFkD|AkCJk@s@k@{Dg@_@iCJk@[k@aB}HQaC_B}EkAyHp@sHjCkDNgHiEyCi@qD\\wRmAqDP_A_@sByCiDcAyM_@_YzCmDeAyAeAiD_@",
-   "pointCount": 58,
-   "start": [
-    34.372759,
-    135.448444
-   ],
-   "end": [
-    34.425419,
-    135.440323
-   ]
-  },
-  {
-   "id": "大阪府:68",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "鳥飼仁和寺大橋有料道路",
-   "ref": "15",
-   "highway": "primary",
-   "lengthKm": 3.45,
-   "curviness": 124.5,
-   "flow": 47.7,
-   "turnCount": 9,
-   "score": 53.3,
-   "baseScore": 53.3,
-   "spotCount": 0,
-   "polyline": "q_fsEsfszX{O~RYC}a@ji@}GpGyGfEbQiM|t@aaA",
-   "pointCount": 8,
-   "start": [
-    34.770008,
-    135.599296
-   ],
-   "end": [
-    34.769743,
-    135.599833
-   ]
-  },
-  {
-   "id": "大阪府:69",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "和歌山貝塚線",
-   "ref": "64",
-   "highway": "primary",
-   "lengthKm": 4.97,
-   "curviness": 205.7,
-   "flow": 21.3,
-   "turnCount": 48,
-   "score": 53,
-   "baseScore": 53,
-   "spotCount": 0,
-   "polyline": "{t}pEqg|xXtNvJzASvDjEjJvQxNbEbMhGpBtBd@WxCfJ`Rld@p@dAbCpAhAxGvCvAXlHrA`HxClJ|HjR\\RrIiB|B^pF~EpDbKhA~A|@hGtEpFpJBfDf@dDrB",
-   "pointCount": 30,
-   "start": [
-    34.399659,
-    135.317846
-   ],
-   "end": [
-    34.369776,
-    135.284372
-   ]
-  },
-  {
-   "id": "大阪府:70",
+   "id": "大阪府:32",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "茨木亀岡線",
@@ -1781,8 +935,8 @@
    "curviness": 231.2,
    "flow": 17.6,
    "turnCount": 131,
-   "score": 52.4,
-   "baseScore": 52.4,
+   "score": 61.6,
+   "baseScore": 61.6,
    "spotCount": 0,
    "polyline": "gdwsEewlzXwJlE_Dt@yDTcL]sCdAg\\tj@gEfD{DtB}F~AsLHcDd@cFbC}I|GcG`B{@wC}Au@yRjBkDGuEeA_FcDqCqDo@iDPyHq@eCqKoI}FeCwF{@mc@u@{A[gBuAgBoEaFcEsLgCqByBuBs@{L_J}@cB_@aCsBsB_EEoF~A{JCi@hBNnG{@bHqAlAwCOwAaBGoBjAsEnB{Be@uBoB_BmDKcBsDuJhB[m@c@gIw@k@o@j@cAzCg@bGyBzBmFxLiEhCqE|@uDxHsFvBmCdEsCdB",
    "pointCount": 71,
@@ -1793,10 +947,14 @@
    "end": [
     34.925047,
     135.561438
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:71",
+   "id": "大阪府:33",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "岬加太港線",
@@ -1806,8 +964,8 @@
    "curviness": 238.2,
    "flow": 17.9,
    "turnCount": 76,
-   "score": 52.2,
-   "baseScore": 52.2,
+   "score": 61.4,
+   "baseScore": 61.4,
    "spotCount": 0,
    "polyline": "uekpE}gnwXaDgEwDgLkCkMeLqKoIcSuEaFcBc@oBkBQsFoByB{AeIiCoFmIqCkD{CeBiERkJvA_GFuB`CoFj@mFWsANqCvB_GlIsNd@aHsD_K{GeIwCyMP}IcAeIpBkEtGaGl@oCuA_NTsArBuDLiBmEwK",
    "pointCount": 39,
@@ -1818,110 +976,14 @@
    "end": [
     34.316234,
     135.133158
-   ]
-  },
-  {
-   "id": "大阪府:72",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪中央環状線",
-   "ref": "2",
-   "highway": "primary",
-   "lengthKm": 5.15,
-   "curviness": 178.1,
-   "flow": 22.4,
-   "turnCount": 41,
-   "score": 52.2,
-   "baseScore": 52.2,
-   "spotCount": 0,
-   "polyline": "geksE_r~yXsFgIeEeE{Es@sBuAaB{Cy@uGkJ}KiFeAqA}AkCmRQ{HcDkJbCug@MuTtAcG~AcCbMeEvLmS|RqJjI_JzLuYNwD}@aG@qFTRYtB",
-   "pointCount": 27,
-   "start": [
-    34.796516,
-    135.493602
    ],
-   "end": [
-    34.793405,
-    135.535299
+   "tags": [
+    "scenic",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:73",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "平野守口線",
-   "ref": "159",
-   "highway": "secondary",
-   "lengthKm": 5.38,
-   "curviness": 190.2,
-   "flow": 19.3,
-   "turnCount": 53,
-   "score": 51.9,
-   "baseScore": 51.9,
-   "spotCount": 0,
-   "polyline": "g~urEirlzXsDw@wFd@}ItF}Cd@oGAmAeAeBIeIFwG|AoEXuISpAjNi[cD_VYun@}DgEnBcJ`@cI~EkC[mG}BkEeEyIaDy@j@aSbD{MxP",
-   "pointCount": 26,
-   "start": [
-    34.68788,
-    135.565334
-   ],
-   "end": [
-    34.731108,
-    135.56014
-   ]
-  },
-  {
-   "id": "大阪府:74",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪高槻京都線",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 3.62,
-   "curviness": 195.1,
-   "flow": 21.4,
-   "turnCount": 33,
-   "score": 51.9,
-   "baseScore": 51.9,
-   "spotCount": 0,
-   "polyline": "{~qsE}`xzXmHmHkAyCg@{b@UwDw@uC{FqHuVeUoEwHd@BtBhGtCnDrUvRpDhE~AnHHta@|BjG",
-   "pointCount": 17,
-   "start": [
-    34.831339,
-    135.623994
-   ],
-   "end": [
-    34.832713,
-    135.625508
-   ]
-  },
-  {
-   "id": "大阪府:75",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "京阪国道",
-   "ref": "1;163",
-   "highway": "trunk",
-   "lengthKm": 7.14,
-   "curviness": 133.8,
-   "flow": 30.8,
-   "turnCount": 31,
-   "score": 51.4,
-   "baseScore": 51.4,
-   "spotCount": 0,
-   "polyline": "gzwrEqpdzXBo@YOd@cLmOkwAw@ub@a~Aa@s}@_SgO{EmLwMiC_EiAiDgRmYwWi]uFwI",
-   "pointCount": 15,
-   "start": [
-    34.697478,
-    135.52409
-   ],
-   "end": [
-    34.73962,
-    135.565802
-   ]
-  },
-  {
-   "id": "大阪府:76",
+   "id": "大阪府:34",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "国道423号",
@@ -1931,8 +993,8 @@
    "curviness": 249.3,
    "flow": 18.6,
    "turnCount": 159,
-   "score": 51.2,
-   "baseScore": 51.2,
+   "score": 60.4,
+   "baseScore": 60.4,
    "spotCount": 0,
    "polyline": "cyvsEkqtyXgFyCyHMoAgIwBkE{TmE{@^{@xEn@xEhBtCF|@y@`CkD`@}@eC_CeAgCaFKqBqC{AQi@`@iGsDmFk@uCiAa@kHhCq@OgHmHuBo@gGBuCw@sBf@]sDzAcMW}C_AyBwC}ByGU}@e@gLoPyCwBkI[oE}CmFyAoDwHDuIcEgFwDgHwByBwG_BaBgA_JoKiEyKsCyDsHAkA_AoFiNBqK]mB}@i@_FKqHv@wDeAcCsBaDiJaEiBoHv@eOc@sAe@}A}CuCeDuF}DwDmJsEyG}A_HwHsEwHwC}LyLyLmCsGqEkDYwCvA_FzF{Ev@cF~DsACmCoA}Kq@k@ZmDxGmCpBiD`A",
    "pointCount": 90,
@@ -1943,185 +1005,14 @@
    "end": [
     34.931405,
     135.490393
-   ]
-  },
-  {
-   "id": "大阪府:77",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪伊丹線",
-   "ref": "41",
-   "highway": "primary",
-   "lengthKm": 3.56,
-   "curviness": 122.4,
-   "flow": 25.6,
-   "turnCount": 17,
-   "score": 51.1,
-   "baseScore": 51.1,
-   "spotCount": 0,
-   "polyline": "yhlrEk|}yXpDe@xP}JZs@VuGWjIiMbIcFjBmyAu@mh@X",
-   "pointCount": 10,
-   "start": [
-    34.638365,
-    135.490144
    ],
-   "end": [
-    34.659025,
-    135.490207
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:78",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "日根野羽倉崎線",
-   "ref": "248",
-   "highway": "secondary",
-   "lengthKm": 3.99,
-   "curviness": 123,
-   "flow": 23.4,
-   "turnCount": 21,
-   "score": 50.8,
-   "baseScore": 50.8,
-   "spotCount": 0,
-   "polyline": "myxpEabayXeAnDiFlIyF`H~Br@fClB~IlMgArXjBxc@sA\\}JtPsf@l^gA~BmHnX}KbIgDzE",
-   "pointCount": 16,
-   "start": [
-    34.374788,
-    135.342573
-   ],
-   "end": [
-    34.387746,
-    135.31001
-   ]
-  },
-  {
-   "id": "大阪府:79",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "第二阪和国道",
-   "ref": "26",
-   "highway": "trunk",
-   "lengthKm": 3.87,
-   "curviness": 133.5,
-   "flow": 28.7,
-   "turnCount": 18,
-   "score": 50.5,
-   "baseScore": 50.5,
-   "spotCount": 0,
-   "polyline": "c}tqEkiuyXnD~D~Yxh@nGbHdPpNIVZEn`@v\\pDpBlMhDRd@jQtBtG`C|HhFl@?dSlS",
-   "pointCount": 16,
-   "start": [
-    34.518742,
-    135.446141
-   ],
-   "end": [
-    34.491298,
-    135.422396
-   ]
-  },
-  {
-   "id": "大阪府:80",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "槇尾山仏並線",
-   "ref": "228",
-   "highway": "secondary",
-   "lengthKm": 4.08,
-   "curviness": 220.4,
-   "flow": 16.1,
-   "turnCount": 56,
-   "score": 50.5,
-   "baseScore": 50.5,
-   "spotCount": 0,
-   "polyline": "yx|pEo}`zXeCpHr@`Fa@jJoAjAyBvOy@zAeE@yQmEqCLwGzAmDfBaMz@uJnIkFx@aBfB}@hE_A|@_EGaD`DqEpBiLGqHfCwINsBr@iIvGgMfBuBzA",
-   "pointCount": 28,
-   "start": [
-    34.395173,
-    135.505679
-   ],
-   "end": [
-    34.423769,
-    135.48884
-   ]
-  },
-  {
-   "id": "大阪府:81",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "岸和田牛滝山貝塚線",
-   "ref": "40",
-   "highway": "primary",
-   "lengthKm": 4.03,
-   "curviness": 117,
-   "flow": 24.8,
-   "turnCount": 19,
-   "score": 50.2,
-   "baseScore": 50.2,
-   "spotCount": 0,
-   "polyline": "cwgqE}asyXem@xT_IfFwRjRwe@zo@}A`GAtRoA`FqObWeQhW",
-   "pointCount": 10,
-   "start": [
-    34.451218,
-    135.434708
-   ],
-   "end": [
-    34.476008,
-    135.405824
-   ]
-  },
-  {
-   "id": "大阪府:82",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "南港通",
-   "ref": "42",
-   "highway": "primary",
-   "lengthKm": 3.52,
-   "curviness": 118.5,
-   "flow": 24.6,
-   "turnCount": 17,
-   "score": 49.9,
-   "baseScore": 49.9,
-   "spotCount": 0,
-   "polyline": "isirEky_zXErDlAfEfEzH`@hBw@~ZFfErCbTpE|j@bCzVb@h@LlBxAloA",
-   "pointCount": 13,
-   "start": [
-    34.624687,
-    135.4999
-   ],
-   "end": [
-    34.620248,
-    135.462551
-   ]
-  },
-  {
-   "id": "大阪府:83",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "茨木摂津線",
-   "ref": "1",
-   "highway": "primary",
-   "lengthKm": 4.5,
-   "curviness": 144.4,
-   "flow": 22.4,
-   "turnCount": 29,
-   "score": 49.9,
-   "baseScore": 49.9,
-   "spotCount": 0,
-   "polyline": "enlsEmefzX?`Aj@p@dAWnE_OrCcCtn@qCbVsUxJcElD_EgFnEwHfEgVpUsm@fCiA\\cBfB_EhNgFzH",
-   "pointCount": 18,
-   "start": [
-    34.80307,
-    135.532546
-   ],
-   "end": [
-    34.803515,
-    135.530566
-   ]
-  },
-  {
-   "id": "大阪府:84",
+   "id": "大阪府:35",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "国道168号",
@@ -2131,8 +1022,8 @@
    "curviness": 221.3,
    "flow": 19.5,
    "turnCount": 114,
-   "score": 49.9,
-   "baseScore": 49.9,
+   "score": 58.9,
+   "baseScore": 58.9,
    "spotCount": 0,
    "polyline": "im_sEq|f{XkH`CqHvFgFfAmHH}Et@wApAcAvCuBvCmGlBeFR}Cv@uBjBmCjFsAfAiIWcA}AQ}B_@IQ`@n@fFq@fCPlFi@bDg@f@aGv@sEeAmBkA{JuAkAp@uFtJoEa@yFuBiC~@aAjG{AhA}@@qAq@uECqBxBBtD]lAuEfC_MjN{S`MmOjAmBfFcIrCkEjDeHpDuK~CkKdJ}Eb@iAwCa@GyFrE{E~GqDbCwMtEqFN{BpByRxZkNtGoK`HmARiDhD_HxDcGbA{HcAyAvDeGhEiH`I",
    "pointCount": 72,
@@ -2143,10 +1034,13 @@
    "end": [
     34.808355,
     135.656489
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:85",
+   "id": "大阪府:36",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "国道371号",
@@ -2156,8 +1050,8 @@
    "curviness": 230.6,
    "flow": 18.8,
    "turnCount": 112,
-   "score": 49.8,
-   "baseScore": 49.8,
+   "score": 58.8,
+   "baseScore": 58.8,
    "spotCount": 0,
    "polyline": "urzpEgtszXuDJqEm@_DfAmKFwDbE{BnFiBt@{B`CqCh@ePlS}GnAeD~AsGk@uKrEwC|BeEi@eDdBaCRuBxAuCM_DdBmBzDoHhHuHiBuAF}GvB}B|AaDGcFtHgBlAwGP{D|@}HnLeJtFyAlBgAnHQpI[|AuCj@u@a@aEvA{BtBaChLqFhQ{ChC_UlLoArAy@jC}AbMyBlIoRt`@wDjCsEf@oTkFyC?uCt@gBnAeCxDwKfZj@_B",
    "pointCount": 61,
@@ -2168,60 +1062,13 @@
    "end": [
     34.444855,
     135.553484
-   ]
-  },
-  {
-   "id": "大阪府:86",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "枚方茨木線",
-   "ref": "139",
-   "highway": "secondary",
-   "lengthKm": 3.77,
-   "curviness": 179.8,
-   "flow": 18.3,
-   "turnCount": 37,
-   "score": 49.8,
-   "baseScore": 49.8,
-   "spotCount": 0,
-   "polyline": "qwosEs|wzXhC~G~@pM~D`Kz@HfEeAb@\\AnB{AtAaCjFA~ExCtRjEdGt@dC@tLpEv[g@lg@gErJCr`@}FlI",
-   "pointCount": 20,
-   "start": [
-    34.819926,
-    135.623297
    ],
-   "end": [
-    34.81698,
-    135.58716
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:87",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "南港通",
-   "ref": "42",
-   "highway": "primary",
-   "lengthKm": 3.76,
-   "curviness": 123.9,
-   "flow": 23.3,
-   "turnCount": 20,
-   "score": 49.2,
-   "baseScore": 49.2,
-   "spotCount": 0,
-   "polyline": "sxhrEw_xyXn@}LqBkpA[aDPWcOewAv@qb@uH}QBsD",
-   "pointCount": 9,
-   "start": [
-    34.620418,
-    135.459956
-   ],
-   "end": [
-    34.62463,
-    135.499869
-   ]
-  },
-  {
-   "id": "大阪府:88",
+   "id": "大阪府:37",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "国道309号",
@@ -2231,8 +1078,8 @@
    "curviness": 228.3,
    "flow": 18.6,
    "turnCount": 62,
-   "score": 48.5,
-   "baseScore": 48.5,
+   "score": 57.3,
+   "baseScore": 57.3,
    "spotCount": 0,
    "polyline": "a~jqEudyzXxP]rEyAvIm@f@u@RwDfBiElDyAtGwM|D}AdBcF`FkD^qB@gH~AwHRwGbBuMpAaEwAaEiFeA]g@T{Pw@{JNuGj@qB|B}BdBeElB{BrCiB^qIr@_AdE{BfCeHjIqE~F{J|IqE\\mAPeK",
    "pointCount": 38,
@@ -2243,210 +1090,13 @@
    "end": [
     34.446907,
     135.667798
-   ]
-  },
-  {
-   "id": "大阪府:89",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "城見通",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.47,
-   "curviness": 134.2,
-   "flow": 20.3,
-   "turnCount": 23,
-   "score": 48.5,
-   "baseScore": 48.5,
-   "spotCount": 0,
-   "polyline": "wawrEalezXxF_D^oA{@cj@uCqL_C}m@P`N|An^tCbM|@ti@[`AkFfE",
-   "pointCount": 12,
-   "start": [
-    34.693562,
-    135.528494
    ],
-   "end": [
-    34.693543,
-    135.5284
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:90",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道170号",
-   "ref": "170",
-   "highway": "trunk",
-   "lengthKm": 3.18,
-   "curviness": 94.7,
-   "flow": 30.2,
-   "turnCount": 10,
-   "score": 47.8,
-   "baseScore": 47.8,
-   "spotCount": 0,
-   "polyline": "y|xrE_a{zXvh@zHhY|@vy@pFbUh@|Ed@|MvDrDZ",
-   "pointCount": 8,
-   "start": [
-    34.703006,
-    135.63936
-   ],
-   "end": [
-    34.674779,
-    135.634799
-   ]
-  },
-  {
-   "id": "大阪府:91",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "泉大津美原線",
-   "ref": "36;210",
-   "highway": "primary",
-   "lengthKm": 3.01,
-   "curviness": 161.5,
-   "flow": 19.4,
-   "turnCount": 25,
-   "score": 47.8,
-   "baseScore": 47.8,
-   "spotCount": 0,
-   "polyline": "w{uqEsrgzXq@gQq@gEsAwAy@yEo@cV_DeTSqKaByVqASPuUqEwFiBqJcCqG_OgR",
-   "pointCount": 15,
-   "start": [
-    34.523645,
-    135.539776
-   ],
-   "end": [
-    34.531597,
-    135.569407
-   ]
-  },
-  {
-   "id": "大阪府:92",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "枚方交野寝屋川線",
-   "ref": "18",
-   "highway": "primary",
-   "lengthKm": 4.97,
-   "curviness": 138.5,
-   "flow": 20.3,
-   "turnCount": 34,
-   "score": 47.8,
-   "baseScore": 47.8,
-   "spotCount": 0,
-   "polyline": "ytcsEgtxzXRbMmCft@{@zb@FhGJyYdDyeAI{KZuPi@iEkDaKmBkL_@wInAoQvJuQpFaE",
-   "pointCount": 16,
-   "start": [
-    34.758052,
-    135.62708
-   ],
-   "end": [
-    34.756234,
-    135.643461
-   ]
-  },
-  {
-   "id": "大阪府:93",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪狭山線",
-   "ref": "26",
-   "highway": "primary",
-   "lengthKm": 3.09,
-   "curviness": 136.5,
-   "flow": 21.1,
-   "turnCount": 20,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "ugerE}cezXI_UvGp@hM[xLgAjCVzI|Dfe@iD`WoLvFkEdGaD`MeM",
-   "pointCount": 12,
-   "start": [
-    34.602352,
-    135.527195
-   ],
-   "end": [
-    34.579294,
-    135.536999
-   ]
-  },
-  {
-   "id": "大阪府:94",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "第二阪和国道",
-   "ref": "26",
-   "highway": "trunk",
-   "lengthKm": 3.67,
-   "curviness": 102.6,
-   "flow": 26.9,
-   "turnCount": 14,
-   "score": 47.5,
-   "baseScore": 47.5,
-   "spotCount": 0,
-   "polyline": "aerqE}dryX|KnGbJvBZYhObBjFxA~HbEp|@||@~@jB|WfX~G`GrIrL",
-   "pointCount": 12,
-   "start": [
-    34.504645,
-    135.430067
-   ],
-   "end": [
-    34.477972,
-    135.40835
-   ]
-  },
-  {
-   "id": "大阪府:95",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪和泉泉南線",
-   "ref": "30",
-   "highway": "primary",
-   "lengthKm": 4.41,
-   "curviness": 164.2,
-   "flow": 18.1,
-   "turnCount": 40,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "}h}pE{y`yXuJuUnChFpOv`@`GvJ`EjB|RlE~CtCrP`VtB|AhDz@nHm@fDL|CxA`FfEgDsDmE_CqDSyGn@_GiByRmXsE{C",
-   "pointCount": 22,
-   "start": [
-    34.397745,
-    135.341263
-   ],
-   "end": [
-    34.391143,
-    135.335148
-   ]
-  },
-  {
-   "id": "大阪府:96",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "吹田箕面線",
-   "ref": "121",
-   "highway": "secondary",
-   "lengthKm": 3.36,
-   "curviness": 119.4,
-   "flow": 20,
-   "turnCount": 20,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "}{ksEyv`zX{NfDoLjAuJQIViNaA}VeGgHEsGlBqLbI{EzDeG|ImDpDsPxHwIyGyFyH",
-   "pointCount": 16,
-   "start": [
-    34.800146,
-    135.504607
-   ],
-   "end": [
-    34.827148,
-    135.500691
-   ]
-  },
-  {
-   "id": "大阪府:97",
+   "id": "大阪府:38",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "枚方富田林泉佐野線",
@@ -2456,8 +1106,8 @@
    "curviness": 155.8,
    "flow": 16.8,
    "turnCount": 100,
-   "score": 47,
-   "baseScore": 47,
+   "score": 55.2,
+   "baseScore": 55.2,
    "spotCount": 0,
    "polyline": "yx~pEmxayXlWrGj@qIpCqF~BkJtDmJZsIwAsO~Fsh@a@a_@^_HnLaZnByNC_EsBkGgH_K_EwHsAaHoBcDm@uCZqAdDcA`BwAy@{D{@qAjAoHmBoJOuD@}HdBeNeBgIgBwE_AsH{DiK}DmHeAeMaC_F}B{IDcHm@cA}CsBw@yAeM{y@kGkQ@kJdAuIIqE{AwDwDmFy@eEeAwB}JsH{@eCUyDrAyVtAgFNsJiAmL{DgGc@qCw@eA",
    "pointCount": 61,
@@ -2468,85 +1118,13 @@
    "end": [
     34.413036,
     135.446257
-   ]
-  },
-  {
-   "id": "大阪府:98",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "我堂金岡線",
-   "ref": "192",
-   "highway": "secondary",
-   "lengthKm": 3.49,
-   "curviness": 109.2,
-   "flow": 20,
-   "turnCount": 19,
-   "score": 46.7,
-   "baseScore": 46.7,
-   "spotCount": 0,
-   "polyline": "uu~qEcmdzXcCW{DyBaLuQqEyCyCQaw@tAPWpLa@|m@YvE|ChJxOrBlBxB|@",
-   "pointCount": 14,
-   "start": [
-    34.568745,
-    135.523535
    ],
-   "end": [
-    34.569379,
-    135.52377
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:99",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "第二阪和国道",
-   "ref": "26",
-   "highway": "trunk",
-   "lengthKm": 3.99,
-   "curviness": 126.1,
-   "flow": 24,
-   "turnCount": 21,
-   "score": 46.5,
-   "baseScore": 46.5,
-   "spotCount": 0,
-   "polyline": "onjqEsqkyXlRvQl@@lm@fm@@f@~FdFrBpCbCnExD`L`Hbc@pCfK|FtKlWp_@dG`F",
-   "pointCount": 14,
-   "start": [
-    34.465195,
-    135.396261
-   ],
-   "end": [
-    34.442304,
-    135.364533
-   ]
-  },
-  {
-   "id": "大阪府:100",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道171号",
-   "ref": "171",
-   "highway": "trunk",
-   "lengthKm": 3.1,
-   "curviness": 74.8,
-   "flow": 33.2,
-   "turnCount": 7,
-   "score": 46.5,
-   "baseScore": 46.5,
-   "spotCount": 0,
-   "polyline": "_dnsEezvyX~CpMr@vJ_A`{AEm]t@u|@",
-   "pointCount": 6,
-   "start": [
-    34.811683,
-    135.453954
-   ],
-   "end": [
-    34.810696,
-    135.44975
-   ]
-  },
-  {
-   "id": "大阪府:101",
+   "id": "大阪府:39",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "吉野下田尻線",
@@ -2556,8 +1134,8 @@
    "curviness": 157.5,
    "flow": 15.8,
    "turnCount": 48,
-   "score": 46.4,
-   "baseScore": 46.4,
+   "score": 54.4,
+   "baseScore": 54.4,
    "spotCount": 0,
    "polyline": "ydmtEwsuyXdH|EtDp@nCbH`ErBdE`ElRpb@tCzAbBjHpEhG`CrFnOtMhF\\bCxAhLnQ`ErDfGVnEvDzIvCtHj@fGnBdD^jF_C`CDdQeD`HUlC{@xEI",
    "pointCount": 28,
@@ -2568,60 +1146,13 @@
    "end": [
     34.936047,
     135.425582
-   ]
-  },
-  {
-   "id": "大阪府:102",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "鳥取吉見泉佐野線",
-   "ref": "250",
-   "highway": "secondary",
-   "lengthKm": 6.1,
-   "curviness": 141.7,
-   "flow": 15.7,
-   "turnCount": 55,
-   "score": 45.7,
-   "baseScore": 45.7,
-   "spotCount": 0,
-   "polyline": "q|}pEgbxxXjGdHbBhFrDbGlAtDtDlFzGlGbFtHtIbEnFpHrJbZnNxQ`CpGzCbExQbPl@@zHjGjBfDvBrBjGdC`PzRfCpFbGzQnGvW~BhENpSi@nG`AtCxC~DOvFrErMtB|B",
-   "pointCount": 32,
-   "start": [
-    34.400886,
-    135.296516
    ],
-   "end": [
-    34.369059,
-    135.246239
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:103",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "大阪中央環状線",
-   "ref": "2",
-   "highway": "primary",
-   "lengthKm": 3.65,
-   "curviness": 126.8,
-   "flow": 19.3,
-   "turnCount": 24,
-   "score": 45.7,
-   "baseScore": 45.7,
-   "spotCount": 0,
-   "polyline": "wjarE{hrzXyL|QwDjCsBSwJqF}G|BmHd[eBrCqCrAoVl@{Q|A{TXqAi[aKCaNmA",
-   "pointCount": 15,
-   "start": [
-    34.582364,
-    135.594538
-   ],
-   "end": [
-    34.60716,
-    135.589931
-   ]
-  },
-  {
-   "id": "大阪府:104",
+   "id": "大阪府:40",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "島能勢線",
@@ -2631,8 +1162,8 @@
    "curviness": 139.9,
    "flow": 15.7,
    "turnCount": 36,
-   "score": 45,
-   "baseScore": 45,
+   "score": 52.7,
+   "baseScore": 52.7,
    "spotCount": 0,
    "polyline": "iyltE{alyXl@|Nr@dCMrHXbE}AjKeOvWoG|BwBpCoChKyBdC_DbHy@rEuBvFiBhOyEvDqDjJaC`CgIta@qBjQt@fJwDbN",
    "pointCount": 22,
@@ -2643,10 +1174,14 @@
    "end": [
     34.982193,
     135.360715
+   ],
+   "tags": [
+    "scenic",
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:105",
+   "id": "大阪府:41",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "甘南備川向線",
@@ -2656,8 +1191,8 @@
    "curviness": 160,
    "flow": 13.6,
    "turnCount": 50,
-   "score": 44.5,
-   "baseScore": 44.5,
+   "score": 52.1,
+   "baseScore": 52.1,
    "spotCount": 0,
    "polyline": "utnqEyhtzX`N`AjMyBdIRpGhB~E`@zI|FnG|AjAAtGmB|ETvHqAfFrBzObBrCdAhLq@~NFnAZhHzFrA^`DSjEoCvBKlG{DjC@nEpAzKy@dE}@",
    "pointCount": 28,
@@ -2668,35 +1203,13 @@
    "end": [
     34.450133,
     135.602592
-   ]
-  },
-  {
-   "id": "大阪府:106",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "第二阪和国道",
-   "ref": "26",
-   "highway": "trunk",
-   "lengthKm": 3.99,
-   "curviness": 111.6,
-   "flow": 22.3,
-   "turnCount": 20,
-   "score": 44.1,
-   "baseScore": 44.1,
-   "spotCount": 0,
-   "polyline": "_njqE}rkyXpRjRDn@|u@vt@~DzGhDhIjKfi@rCzJjDxHxXp`@dH`G",
-   "pointCount": 11,
-   "start": [
-    34.465117,
-    135.396474
    ],
-   "end": [
-    34.442176,
-    135.364565
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:107",
+   "id": "大阪府:42",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "泉佐野岩出線",
@@ -2706,8 +1219,8 @@
    "curviness": 162,
    "flow": 13.8,
    "turnCount": 56,
-   "score": 43.5,
-   "baseScore": 43.5,
+   "score": 51.1,
+   "baseScore": 51.1,
    "spotCount": 0,
    "polyline": "ynqpEcuwxX~Q{E|AyAnDqHrAoAtIyAnBkA|BoGhBqBdBg@dGI~As@`BcCzH}S|FcGjBaDjBqAlD@lGrEpIx@pHq@bEmBjR}@bCFfL`DvWmBpDv@|GdGxCnAlPF",
    "pointCount": 30,
@@ -2718,10 +1231,13 @@
    "end": [
     34.300147,
     135.305119
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:108",
+   "id": "大阪府:43",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "豊能池田線",
@@ -2731,8 +1247,8 @@
    "curviness": 130.3,
    "flow": 14.5,
    "turnCount": 35,
-   "score": 43.3,
-   "baseScore": 43.3,
+   "score": 50.7,
+   "baseScore": 50.7,
    "spotCount": 0,
    "polyline": "qlzsEoevyXmB~FmIvGeCpDy@vDsA`SiAfC}CvAoACmGkCuDu@k]y@eDw@aBcB_AsCwE}\\}@kCmCaC{ToIcE|Q}AjC}Q~D",
    "pointCount": 22,
@@ -2743,10 +1259,13 @@
    "end": [
     34.898485,
     135.447748
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:109",
+   "id": "大阪府:44",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "和歌山阪南線",
@@ -2756,8 +1275,8 @@
    "curviness": 121.3,
    "flow": 14,
    "turnCount": 54,
-   "score": 42.9,
-   "baseScore": 42.9,
+   "score": 50.3,
+   "baseScore": 50.3,
    "spotCount": 0,
    "polyline": "kunpEk`|wXzLdOfMpEn@Cn@aBhAaZt@mCfA_BdXsQtSuCdK{GnG_AbC\\`BjAvUf^xIjCrHhFp_@vSfEJbFwBxF}DbDo@vBBvMlEp@t@l@nEr@nAzJjEfALnFiBrBIdKtBtDvC",
    "pointCount": 33,
@@ -2768,10 +1287,13 @@
    "end": [
     34.278226,
     135.147113
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:110",
+   "id": "大阪府:45",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "堺富田林線",
@@ -2781,8 +1303,8 @@
    "curviness": 137.3,
    "flow": 14.4,
    "turnCount": 50,
-   "score": 42.6,
-   "baseScore": 42.6,
+   "score": 50,
+   "baseScore": 50,
    "spotCount": 0,
    "polyline": "{twqEsnlzXuL{L~A{BzE_CtFcIpDeBlEGxBs@tMeOpGmFnVgF`FmGvMoMfFqInGiFdCs@bOcAfFdBdBC`Ak@tDyFvCsBd@gA`AuJpEuId@}B@{DcDcLR{IfEkOhMyF",
    "pointCount": 31,
@@ -2793,60 +1315,13 @@
    "end": [
     34.504879,
     135.5975
-   ]
-  },
-  {
-   "id": "大阪府:111",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "新なにわ筋;大阪臨海線",
-   "ref": "29",
-   "highway": "primary",
-   "lengthKm": 3.01,
-   "curviness": 87.6,
-   "flow": 18.9,
-   "turnCount": 14,
-   "score": 42.6,
-   "baseScore": 42.6,
-   "spotCount": 0,
-   "polyline": "{vjrE_l|yX_EuBwAKmk@\\yKoEcKIaLcFiu@`C{@uDoAgQ",
-   "pointCount": 10,
-   "start": [
-    34.630381,
-    135.482403
    ],
-   "end": [
-    34.654356,
-    135.488314
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:112",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道309号",
-   "ref": "309",
-   "highway": "trunk",
-   "lengthKm": 3.32,
-   "curviness": 101.4,
-   "flow": 21.1,
-   "turnCount": 16,
-   "score": 42.1,
-   "baseScore": 42.1,
-   "spotCount": 0,
-   "polyline": "uwnqEgfuzXx@mBjBkBt]wMlEcDtC_F`Pgg@kOzf@gCzEuFjEq]rMeBdBq@fB",
-   "pointCount": 13,
-   "start": [
-    34.487146,
-    135.609477
-   ],
-   "end": [
-    34.48708,
-    135.609441
-   ]
-  },
-  {
-   "id": "大阪府:113",
+   "id": "大阪府:46",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "堺かつらぎ線",
@@ -2856,8 +1331,8 @@
    "curviness": 124.5,
    "flow": 15,
    "turnCount": 33,
-   "score": 41.9,
-   "baseScore": 41.9,
+   "score": 49.2,
+   "baseScore": 49.2,
    "spotCount": 0,
    "polyline": "gziqEomazX~O|AlG~ArKj@tMhQ~NqAbMBjI}@pJbBdDYpBRnO|DxFp@hJhE|BrNnSjVdEGvI~@vDU",
    "pointCount": 19,
@@ -2868,10 +1343,13 @@
    "end": [
     34.430549,
     135.495751
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:114",
+   "id": "大阪府:47",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "国道477号",
@@ -2881,8 +1359,8 @@
    "curviness": 163.1,
    "flow": 14.6,
    "turnCount": 90,
-   "score": 41.5,
-   "baseScore": 41.5,
+   "score": 49,
+   "baseScore": 49,
    "spotCount": 0,
    "polyline": "wyktEwmxyXhKdOrCl@~EiAtDb@tQrTvSjGrVvRjDn@pHS~GlBtJfAzFy@rLdBbD`EzCxL`H~H`U~MfGlAbHnF`EOzKaJrImElE{Fz@eD~CmFxAsEjE}@zBkCnFcBhNhClH`F|IUvEdJ|Ar@dFd@`JzC|@f@~CpEvIbA|BgClGg@|KdJ",
    "pointCount": 43,
@@ -2893,60 +1371,13 @@
    "end": [
     34.903101,
     135.443073
-   ]
-  },
-  {
-   "id": "大阪府:115",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "茨木摂津線",
-   "ref": "1",
-   "highway": "primary",
-   "lengthKm": 5.79,
-   "curviness": 108.5,
-   "flow": 14.6,
-   "turnCount": 43,
-   "score": 41.1,
-   "baseScore": 41.1,
-   "spotCount": 0,
-   "polyline": "cgpsE{rezX~O{AP[rT~ApEsPbHe_@pDoFrD}AlDM`c@`F`FlEbF~LJbIgErYeCvIqPdZwGpJoChBcFn@qEaAgBmAwVkYsA}Ck@aFP{EfBeH",
-   "pointCount": 26,
-   "start": [
-    34.822418,
-    135.529576
    ],
-   "end": [
-    34.816023,
-    135.529868
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:116",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "吹田箕面線",
-   "ref": "121;135",
-   "highway": "secondary",
-   "lengthKm": 3.64,
-   "curviness": 80.4,
-   "flow": 13.3,
-   "turnCount": 22,
-   "score": 38.9,
-   "baseScore": 38.9,
-   "spotCount": 0,
-   "polyline": "qfisEuu`zXeAcDcB{BiK{GyFmBsESiPpA_h@rR}QtCaPv@wPmBsSiFmE[cIhAwHjF",
-   "pointCount": 15,
-   "start": [
-    34.786488,
-    135.504433
-   ],
-   "end": [
-    34.817061,
-    135.503669
-   ]
-  },
-  {
-   "id": "大阪府:117",
+   "id": "大阪府:48",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "柏原駒ヶ谷千早赤阪線",
@@ -2956,8 +1387,8 @@
    "curviness": 71.3,
    "flow": 13.3,
    "turnCount": 32,
-   "score": 37.6,
-   "baseScore": 37.6,
+   "score": 44.1,
+   "baseScore": 44.1,
    "spotCount": 0,
    "polyline": "mbwqEwrwzXrNNjEaBhCeD|GoOpIgHbu@LfUfJ~^t@rFwAjKmHhHyMbCsCvy@mAlJiGfg@]rIwB",
    "pointCount": 17,
@@ -2968,10 +1399,13 @@
    "end": [
     34.480438,
     135.632474
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "大阪府:118",
+   "id": "大阪府:49",
    "region": "osaka",
    "regionName": "大阪府",
    "name": "大阪臨海線",
@@ -2981,8 +1415,8 @@
    "curviness": 107.5,
    "flow": 11.6,
    "turnCount": 29,
-   "score": 37.4,
-   "baseScore": 37.4,
+   "score": 43.8,
+   "baseScore": 43.8,
    "spotCount": 0,
    "polyline": "okcrEctyyXfKT`ToF|CVxAdB`@tC_E|UVnEfApBvTrThEtCtEfAtEEbOmBnQPvLzF",
    "pointCount": 16,
@@ -2993,108 +1427,11 @@
    "end": [
     34.572088,
     135.45743
-   ]
-  },
-  {
-   "id": "大阪府:119",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道170号",
-   "ref": "170",
-   "highway": "trunk",
-   "lengthKm": 3.07,
-   "curviness": 129.3,
-   "flow": 10.7,
-   "turnCount": 37,
-   "score": 34.5,
-   "baseScore": 34.5,
-   "spotCount": 0,
-   "polyline": "atdqE{whzXbM`GhBxBpAbDn@zDn@x^n@hDjBxDjFbDhKf@dEdAfFtFvAzI@hE{EvV_@|Df@hExDdKR~F]rC",
-   "pointCount": 20,
-   "start": [
-    34.435371,
-    135.545738
    ],
-   "end": [
-    34.425336,
-    135.520132
-   ]
-  },
-  {
-   "id": "大阪府:120",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "第二阪和国道",
-   "ref": "26",
-   "highway": "trunk",
-   "lengthKm": 3.13,
-   "curviness": 68.1,
-   "flow": 14.2,
-   "turnCount": 15,
-   "score": 33.7,
-   "baseScore": 33.7,
-   "spotCount": 0,
-   "polyline": "i}bqEsqayXpErOdBnDzD|EzDlC|i@bTzJ~GtIjN~`@r}@Eb@",
-   "pointCount": 10,
-   "start": [
-    34.426614,
-    135.345061
-   ],
-   "end": [
-    34.407278,
-    135.322217
-   ]
-  },
-  {
-   "id": "大阪府:121",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道480号",
-   "ref": "480",
-   "highway": "trunk",
-   "lengthKm": 3.68,
-   "curviness": 74.8,
-   "flow": 13.1,
-   "turnCount": 21,
-   "score": 33.4,
-   "baseScore": 33.4,
-   "spotCount": 0,
-   "polyline": "kgeqEqu{yXiGjBuP`@cQzM_EvGiD~AoYtCqKyDy`@Gwd@~e@mHnS",
-   "pointCount": 11,
-   "start": [
-    34.438463,
-    135.478809
-   ],
-   "end": [
-    34.466537,
-    135.464535
-   ]
-  },
-  {
-   "id": "大阪府:122",
-   "region": "osaka",
-   "regionName": "大阪府",
-   "name": "国道310号",
-   "ref": "310",
-   "highway": "trunk",
-   "lengthKm": 3.68,
-   "curviness": 68.4,
-   "flow": 13.3,
-   "turnCount": 19,
-   "score": 33.2,
-   "baseScore": 33.2,
-   "spotCount": 0,
-   "polyline": "}y~qEcq|yXpA_BjHuPL_Ec@kH~HaNxDkClP}Gz\\gHlDaBrDqFvF{W~AkEji@go@",
-   "pointCount": 14,
-   "start": [
-    34.569431,
-    135.483222
-   ],
-   "end": [
-    34.547263,
-    135.509434
+   "tags": [
+    "flowing"
    ]
   }
  ],
- "hiddenCount": 4
+ "hiddenCount": 77
 }

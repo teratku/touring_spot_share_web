@@ -344,3 +344,50 @@ test("画面: 既定はアプリと同じ選び方・手元のデータ。本番
   assert.strictEqual(funLabel({ budgetKind: "modest", sides: [] }), "ひかえめ", "予算違いの案に名前が付かない");
   assert.strictEqual(funLabel({ sides: ["north"] }), "northまわり");
 });
+
+// MARK: 好み・距離ガバ（2026-10-09。Web のルート作成でも同じ選び方を使う）
+
+test("好み（選んだ道の記録）と距離ガバの段でも、アプリの FunRouteBuilder と同じ道・同じ順を選ぶ", () => {
+  const tb = JSON.parse(read("test", "fixtures-app-fun-taste-boost.json"));
+  const { roadFeatures } = require("../lib/riderInsights");
+  const W = tb.weights;
+  const affinity = (f) => (f.length ? f.reduce((a, k) => a + (W[k] || 0), 0) / f.length : 0);
+  const taste = (s) => affinity(roadFeatures(s.tags || [], s.highway, s.curviness));
+  const canon = (v) => JSON.stringify(v, (k, x) => (x && typeof x === "object" && !Array.isArray(x)
+    ? Object.fromEntries(Object.entries(x).sort()) : x));
+  let changedByTaste = 0;
+  parity.trips.forEach((t, i) => {
+    const e = tb.trips[i].expected;
+    assert.strictEqual(tb.trips[i].name, t.name, "材料の並びが違う");
+    const common = { origin: t.from, destination: t.to, segments: t.segments, funWeight: t.funWeight,
+                     baselineMeters: t.baselineMeters, referenceAxis: t.referenceAxis, choose: F.topChoice };
+    for (const side of F.SIDE_ORDER) {
+      const withTaste = dump(F.build({ ...common, side, taste }));
+      assert.strictEqual(canon(withTaste), canon(e[`taste:side:${side}`]), `${t.name} ${side}まわり（好み）`);
+      if ((withTaste || {}).ids + "" !== (t.expected[`side:${side}`] || {}).ids + "") changedByTaste++;
+      assert.strictEqual(canon(dump(F.build({ ...common, side, corridorScale: 3, budgetRatio: 4.0 }))),
+        canon(e[`boost3:side:${side}`]), `${t.name} ${side}まわり（距離ガバ 幅3・4倍）`);
+      assert.strictEqual(canon(dump(F.build({ ...common, side, corridorScale: 5, budgetRatio: 5.0, taste }))),
+        canon(e[`boost5:side:${side}`]), `${t.name} ${side}まわり（距離ガバ 幅5・5倍・好み）`);
+    }
+    const generous = dump(F.build({ ...common, taste }));
+    assert.strictEqual(canon(generous), canon(e["taste:generous"]), `${t.name} たっぷり（好み）`);
+    if ((generous || {}).ids + "" !== (t.expected.generous || {}).ids + "") changedByTaste++;
+    assert.deepStrictEqual(t.segments.map((s) => [s.id, Math.round(taste(s) * 1e6) / 1e6]), e.affinity,
+      `${t.name}: 道の特徴（RiderChoices.segmentFeatures）か好みの度合いがアプリと違う`);
+  });
+  assert.ok(changedByTaste >= 2, `材料が悪い（好みで選ぶ道が変わる案が ${changedByTaste} しかない）`);
+  const pool = parity.trips[0].segments.slice(0, 4);
+  assert.deepStrictEqual(tb.choiceRandoms.map((r) => F.tasteWeightedChoice(pool, taste, () => r).id), tb.choicePicks,
+    "好みで重みを付けた抽選がアプリと違う");
+});
+
+test("距離ガバの段（幅2・つまみのまま → 幅3・4倍 → 幅5・5倍）と、いまの段・次の段", () => {
+  assert.deepStrictEqual(F.BOOST_STEPS, [{ corridorScale: 2, budgetRatio: null }, { corridorScale: 3, budgetRatio: 4.0 },
+                                         { corridorScale: 5, budgetRatio: 5.0 }], "FunRouteBuilder.boostSteps と違う");
+  assert.deepStrictEqual([1, 2, 3, 5].map(F.boostLevel), [0, 1, 2, 3]);
+  assert.deepStrictEqual(F.nextBoost(1), F.BOOST_STEPS[0]);
+  assert.deepStrictEqual(F.nextBoost(3), F.BOOST_STEPS[2]);
+  assert.strictEqual(F.nextBoost(5), null, "最後の段の先があることになっている");
+  assert.ok(F.TASTE_BONUS_MAX < F.SAME_QUALITY_SCORE_BAND, "好みだけで、ずっと点数の低い道を選ばせてしまう");
+});

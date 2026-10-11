@@ -24,6 +24,8 @@
  * ⚠️ **点は `[経度, 緯度]`。** 配信データの `start` / `end` は `[緯度, 経度]`（アプリと同じ）なので入口で入れ替える。
  * ⚠️ 経路を引いたあと（Uターンを見つけた道を外して選び直す・3通りの条件で引く）はアプリと同じではない。
  *    ここが揃えるのは**どの道をどの順で通すか**まで
+ * ⚠️ 2026-10-09: 好み（`taste`。選んだ道の記録から作る）での並べ方・抽選と、距離ガバの段（`BOOST_STEPS`）を
+ *    アプリに追いつかせた（Web のルート作成でも使う。`public/route-maker-fun.js` はここから作る生成物）
  */
 "use strict";
 
@@ -58,6 +60,24 @@ const MODEST_DETOUR_RATIO = 1.35;
 /** 「もっと寄り道」の探す幅・予算（ルート候補画面は予算違いを2案までにしているので使われない） */
 const WIDE_CORRIDOR_SCALE = 2.0;
 const WIDE_DETOUR_RATIO = 3.0;
+/** 好みで上乗せする点数の上限。⚠️ `SAME_QUALITY_SCORE_BAND`（8）より小さく（好みだけでずっと低い道を選ばせない） */
+const TASTE_BONUS_MAX = 6;
+/** 抽選で好みに近い道に掛ける重み（1 ＋ これ × 好みの度合い） */
+const TASTE_CHOICE_WEIGHT = 2;
+/**
+ * 距離ガバブーストの段（回り込む幅の倍率と遠回りの上限。`budgetRatio` が null ならつまみのとおり）。
+ * ⚠️ 幅と上限を一緒に上げる（幅だけでは上限3倍で頭打ち。`FunRouteBuilder.boostSteps`）
+ */
+const BOOST_STEPS = [
+  { corridorScale: 2, budgetRatio: null },
+  { corridorScale: 3, budgetRatio: 4.0 },
+  { corridorScale: 5, budgetRatio: 5.0 },
+];
+/** いまの幅で何段まで進めたか（0〜段の数） */
+const boostLevel = (corridor) => BOOST_STEPS.filter((s) => s.corridorScale <= corridor).length;
+/** いまの幅の次の段（もう無ければ null） */
+const nextBoost = (corridor) => BOOST_STEPS.find((s) => s.corridorScale > corridor) || null;
+
 /** 「別ルート」とみなす重なりの上限 */
 const MAX_VARIANT_OVERLAP = 0.5;
 const MAX_BACKWARD_EXCURSION_METERS = 1_000;
@@ -383,8 +403,23 @@ function detourBudgetRatio(funWeight) {
   return MIN_DETOUR_RATIO + (MAX_DETOUR_RATIO - MIN_DETOUR_RATIO) * t;
 }
 
-/** 同じくらい良い道からランダムに1本（アプリの既定） */
+/** 同じくらい良い道からランダムに1本（好みが無いときのアプリの既定） */
 const randomChoice = (pool) => (pool.length ? pool[Math.floor(Math.random() * pool.length)] : null);
+
+/**
+ * 好みで重みを付けたランダム（`FunRouteBuilder.tasteWeightedChoice`）。好みが無ければふつうのランダム。
+ * 好みにぴったりの道は3倍当たりやすい
+ */
+function tasteWeightedChoice(pool, taste, random = Math.random) {
+  if (!taste || !pool.length) return pool.length ? pool[Math.floor(random() * pool.length)] : null;
+  const weights = pool.map((s) => 1 + TASTE_CHOICE_WEIGHT * Math.max(0, Math.min(1, taste(s))));
+  let r = random() * weights.reduce((a, b) => a + b, 0);
+  for (let i = 0; i < pool.length; i++) {
+    if (r < weights[i]) return pool[i];
+    r -= weights[i];
+  }
+  return pool[pool.length - 1];
+}
 /** 点数のいちばん高い道（毎回同じになる。見比べるとき用） */
 const topChoice = (pool) => pool[0] || null;
 
@@ -398,7 +433,8 @@ const sameSegments = (a, b) => a.segments.length === b.segments.length
  * @param o.funWeight つまみ（0〜1）。予算は `budgetRatio` を渡さなければこれから
  * @param o.baselineMeters ふつうのルートの距離。無ければ直線×1.6
  * @param o.referenceAxis 進み具合を測る形（`directionAxis` で間引いたもの）。無ければ直線
- * @param o.choose 同じくらい良い道から1本選ぶ関数（既定はランダム）
+ * @param o.choose 同じくらい良い道から1本選ぶ関数（既定は好みで重みを付けたランダム）
+ * @param o.taste 好みにどれだけ近いか（区間 → 0〜1）。渡さなければ好みを使わない
  */
 function build(o) {
   const { origin, destination, segments } = o;
@@ -410,7 +446,10 @@ function build(o) {
   const budget = baseline * (o.budgetRatio ?? detourBudgetRatio(o.funWeight));
   const excluding = o.excluding || new Set();
   const corridorScale = o.corridorScale ?? 1;
-  const choose = o.choose || randomChoice;
+  const taste = typeof o.taste === "function" ? o.taste : null;
+  const choose = o.choose || ((pool) => tasteWeightedChoice(pool, taste));
+  // ⚠️ 好みは**上乗せ**で並べる（最大 TASTE_BONUS_MAX 点）。同じくらい良い道の中で好みに近い道を先に集める
+  const ranked = (s) => s.score + TASTE_BONUS_MAX * (taste ? taste(s) : 0);
 
   // ⚠️ 林道ぎみ・砂利道（roadTags.js の AUTO_EXCLUDED_TAGS）は自動では選ばない。アプリの FunRouteBuilder と同じ
   const inCorridor = segments.filter((s) => s.score >= MIN_AUTO_SCORE && isAutoSelectable(s) && !excluding.has(s.id)
@@ -427,7 +466,7 @@ function build(o) {
   }
 
   // ⚠️ 道の良さ（点数）で選び、距離は予算に収まるかだけに使う
-  const byScore = candidates.slice().sort((a, b) => b.score - a.score);
+  const byScore = candidates.slice().sort((a, b) => ranked(b) - ranked(a));
   const chosen = [];
   const limit = Math.max(1, Math.min(o.maxSegmentCount ?? MAX_SEGMENTS, MAX_SEGMENTS));
   while (chosen.length < limit) {
@@ -436,11 +475,11 @@ function build(o) {
     let bestScore = null;
     for (const candidate of byScore) {
       if (chosen.some((s) => s.id === candidate.id)) continue;
-      if (bestScore !== null && bestScore - candidate.score > SAME_QUALITY_SCORE_BAND) break;
+      if (bestScore !== null && bestScore - ranked(candidate) > SAME_QUALITY_SCORE_BAND) break;
       const trial = orderedByProgress(chosen.concat([candidate]), origin, destination, axis);
       const length = pathLength(trial, origin, destination, axis);
       if (!(length <= budget)) continue;
-      if (bestScore === null) bestScore = candidate.score;
+      if (bestScore === null) bestScore = ranked(candidate);
       pool.push(candidate);
       if (pool.length >= RANDOM_POOL_SIZE) break;
     }
@@ -611,7 +650,7 @@ function appFunVariants(o) {
   const referenceAxis = Array.isArray(o.referencePolyline) && o.referencePolyline.length >= 2
     ? directionAxis(o.referencePolyline) : null;
   const common = { origin: o.origin, destination: o.destination, segments: usable, funWeight: o.funWeight,
-                   baselineMeters: o.baselineMeters, referenceAxis, choose: o.choose,
+                   baselineMeters: o.baselineMeters, referenceAxis, choose: o.choose, taste: o.taste,
                    maxSegmentCount: o.maxSegmentCount ?? MAX_SEGMENTS };
   const sideVariants = buildSideVariants(common);
   const budgetVariants = buildVariants({ ...common, maxVariants: 2 });
@@ -631,6 +670,7 @@ module.exports = {
   appFunVariants, build, buildSideVariants, buildVariants, detourBudgetRatio, directionAxis,
   isWithinCorridor, sideBearing, orderedByProgress, traversal, pathLength, waypointsFor, twoOptImprove,
   worstBackwardExcursion, isBlockedByRestrictions, overlapMeters, randomChoice, topChoice, polylineOf,
+  tasteWeightedChoice, boostLevel, nextBoost, BOOST_STEPS, TASTE_BONUS_MAX, TASTE_CHOICE_WEIGHT,
   MAX_SEGMENTS, SAME_QUALITY_SCORE_BAND, RANDOM_POOL_SIZE, MIN_AUTO_SCORE, MIN_CURVINESS, TAGGED_MIN_CURVINESS,
   MODEST_DETOUR_RATIO, MIN_DETOUR_RATIO, MAX_DETOUR_RATIO, MIN_FUN_WEIGHT, CIRCUITY_FACTOR,
   MIN_CUT_FRACTION, MIN_CUT_SAVINGS_METERS, MATCH_TOLERANCE_METERS, MIN_OVERLAP_METERS, SIDE_ORDER,

@@ -1,45 +1,19 @@
 {
  "prefecture": "東京都",
  "romaji": "tokyo",
- "generation": 4,
- "contentHash": "ba0a21178d65",
- "builtAt": "2026-08-26T09:40:08.420Z",
+ "generation": 5,
+ "contentHash": "91d278f7cd77",
+ "builtAt": "2026-10-07T14:24:21.580Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
- "count": 150,
+ "count": 53,
  "segments": [
   {
    "id": "東京都:0",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "奥多摩周遊道路",
-   "ref": "206",
-   "highway": "secondary",
-   "lengthKm": 18.74,
-   "curviness": 542.3,
-   "flow": 24.5,
-   "turnCount": 415,
-   "score": 85.3,
-   "baseScore": 80.7,
-   "spotCount": 2,
-   "polyline": "o_jyE}oloYkBwJ}JmBq@uAe@sDpAyCvCwDD_EbCy@Zs@G_AoBsCVmD}@gBDiA`AwAjCc@^yEzAsCbA@jDhB|@OL_Ak@_EvB_JjEpA|FYxFjFx@u@D{El@QdC~@nCgDbAYbDhFvDdC|ANv@wAoBcFJwBpKsAlCfB~@Bp@sAa@_LVu@lER`E`BzJ}BbC{HxHmJ@gA}@s@}MrCqCnBeAg@g@iAj@wAhHuDhAkCnCuCEmExAuGuAmCCcBzBoItBgDW}@}CkAwAcCy@Eg@l@k@fIkAZeCaB_AFs@lF{BbCm@Ig@gAu@eJ{Cs@aCb@iKdJuAXuD{@kGxDoDjAk@]f@iCrBaCj@gESmF^cArFoDtEj@jCc@`BRpFeBfCiBd@aBByEn@}C@eKvBkAvCk@PaASsGXu@bA|@`@rF|@|AHlC`@|@`Kh@xBdBrGbBpBtG|JjAzAx@jA]nCsFjK}@dCgE|CnAfE?tApAj@@j@q@n@uFfDqAj@d@r@nHzE@xBmBnCo@dA_BpBoAxAsC~Dr@`@vAwAhBK`AnDbFLnAa@`@eCCUhEi@RwBYu@lCiDvBUfAx@l@~FPr@tEb@f@jDgAp@ZRvDcBbBeAvEjAlF_BhIbBnBvE@pCfDl@k@K}@eDwCqBKe@gA|AeDp@uGdCwGFeClAoBKwGj@sHr@UrBb@Tc@?_DxB}ClLeE`AgCnDyBn@h@E~@yCp@}@pCcKxGa@lAVtAl@ZxDk@dG\\lMmGx@d@p@|Cn@R\\oD{@kEK_E",
-   "pointCount": 204,
-   "start": [
-    35.773525,
-    139.005589
-   ],
-   "end": [
-    35.727376,
-    139.043193
-   ]
-  },
-  {
-   "id": "東京都:1",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "八丈循環線",
@@ -49,8 +23,8 @@
    "curviness": 572.7,
    "flow": 29,
    "turnCount": 510,
-   "score": 84.8,
-   "baseScore": 84.8,
+   "score": 99.7,
+   "baseScore": 99.7,
    "spotCount": 0,
    "polyline": "guciEskitYCeF`BeKj@}@WyBXcEtCoC_AuFLoA|@oA|CCf@i@Uc@iDkA{AIKo@lHkAEs@}Ag@Os@j@c@jBR`@e@AsA`E{BIq@wBP[a@h@m@dBYzAcBK]aCQwCsAMi@bKm@@g@yASKm@lA_AfDm@v@eAa@oBhB_@iCe@c@w@|GoAAu@oBUA]xAs@nCW~EqDYi@cGl@UaAvBmBDu@}Dd@SWhGkFOy@kCBGaCdDeBd@sB|@cAuCYj@wCo@{BuCfAY[lBwC@yEyCcDoAgDXwB_CmCXWvEDToArBYyAgE|C_Ft@PtAq@Lu@q@eDfBgBdBOa@yBkA{@g@oABo@b@KjBdBzDz@hAqAS}AnABjAw@nAfC~@PLl@c@hB^VjBeAN{FxEwBvA_CjHHn@mAtCGd@VMtAjBv@t@_@Aq@cBHP_BaAeAr@gAFuAkC_E~@aFpAy@`@TIhAZl@zCz@iArBp@vA`CFpBa@pAs@|@_B^?gApGt@b@zEyChBwD^eBMeGt@e@V`@VfM|BwDvAYfBx@f@jIlL~@p@s@fA}GbJiGzG~@~A{@~AcDd@d@LzAr@^j@g@v@kEf@QzBhDhAX`Ae@nAkEtCu@lAmCvBqBjDoAv@HbB`FlEnBHtDz@dD_@nDCfKxBrIhA|IbBjCfDjJbCpZG`Gl@nDk@hI~A`DaArG~Ap@`EyAlBhAt@zEtDzFi@nDVd@lMc@hAa@|Mh@pEvCnFrFxB|J]`KwBbCKrBpCrFxAfNlC~Ed@jGcA|HIhFyDpPm@fAwJzHqBdIcBzCgAdHzAtDdBdBTrAyEfXcB~D}@v@kEt@oDlG_AdDWjEkCpGsAxXcEnDyDrGgJzD{V`@aKc@w@g@_AuCcAiAwBs@sEY}JtCsCvDuIrCoNt@wRhEcHOeNmIgCcFiD_DeG_XuDDoDhByBpKcDpH}BjLwLzb@cAvEI~E_E~F",
    "pointCount": 257,
@@ -61,6 +35,39 @@
    "end": [
     33.111199,
     139.773488
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "東京都:1",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "奥多摩周遊道路",
+   "ref": "206",
+   "highway": "secondary",
+   "lengthKm": 18.74,
+   "curviness": 542.3,
+   "flow": 24.5,
+   "turnCount": 415,
+   "score": 99.4,
+   "baseScore": 94.8,
+   "spotCount": 2,
+   "polyline": "o_jyE}oloYkBwJ}JmBq@uAe@sDpAyCvCwDD_EbCy@Zs@G_AoBsCVmD}@gBDiA`AwAjCc@^yEzAsCbA@jDhB|@OL_Ak@_EvB_JjEpA|FYxFjFx@u@D{El@QdC~@nCgDbAYbDhFvDdC|ANv@wAoBcFJwBpKsAlCfB~@Bp@sAa@_LVu@lER`E`BzJ}BbC{HxHmJ@gA}@s@}MrCqCnBeAg@g@iAj@wAhHuDhAkCnCuCEmExAuGuAmCCcBzBoItBgDW}@}CkAwAcCy@Eg@l@k@fIkAZeCaB_AFs@lF{BbCm@Ig@gAu@eJ{Cs@aCb@iKdJuAXuD{@kGxDoDjAk@]f@iCrBaCj@gESmF^cArFoDtEj@jCc@`BRpFeBfCiBd@aBByEn@}C@eKvBkAvCk@PaASsGXu@bA|@`@rF|@|AHlC`@|@`Kh@xBdBrGbBpBtG|JjAzAx@jA]nCsFjK}@dCgE|CnAfE?tApAj@@j@q@n@uFfDqAj@d@r@nHzE@xBmBnCo@dA_BpBoAxAsC~Dr@`@vAwAhBK`AnDbFLnAa@`@eCCUhEi@RwBYu@lCiDvBUfAx@l@~FPr@tEb@f@jDgAp@ZRvDcBbBeAvEjAlF_BhIbBnBvE@pCfDl@k@K}@eDwCqBKe@gA|AeDp@uGdCwGFeClAoBKwGj@sHr@UrBb@Tc@?_DxB}ClLeE`AgCnDyBn@h@E~@yCp@}@pCcKxGa@lAVtAl@ZxDk@dG\\lMmGx@d@p@|Cn@R\\oD{@kEK_E",
+   "pointCount": 204,
+   "start": [
+    35.773525,
+    139.005589
+   ],
+   "end": [
+    35.727376,
+    139.043193
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
@@ -74,8 +81,8 @@
    "curviness": 774.2,
    "flow": 31.2,
    "turnCount": 363,
-   "score": 84,
-   "baseScore": 84,
+   "score": 98.7,
+   "baseScore": 98.7,
    "spotCount": 0,
    "polyline": "me{mEuo~rYkN}PBi@^EhAzA|FvCdCgAbA_CyAeDkDoCsAQkAmBwAoHAm@hAsBYeD}CyCc@uEDk@nBuA~Cs@zCkBG{@aAi@OeDuGo@jAyC}AiAS_A^y@lBy@MkBdAiAe@mAJa@rG}CyAcBb@wCrAsAdAMf@eAtACc@oApEoBDaBlAo@y@o@QmB~@e@v@{A|BQzBb@xM{ApBb@j@qD~B~@bD~DlBb@d@xAdAbAdAD~CpCxEiBtB_BLu@wA{BHm@tGZhDq@nAh@hB}BjBa@b@wAxA[~B}B?c@{E{EsDq@YaCt@aCu@q@e@kG_B_DGeEzDoBdJvB^o@E}Gh@u@Jp@e@`BhAxFW|Cr@U`@iHfBTTnEb@nA`EtEnChA[`@oF{BaAB_CnDvB~ACzBTPxBs@pAZrB|CxCPXMVwBvBQl@wCp@FlBjDrEgBnDxCdElHdGxBtDEd@yAIuD~BcDpByAzAyCnAK|BdAt@jAd@YmEmFcAKmB|@_BxBcEvAcAGViHeAkBdBaH?qH_B_@sAuBeCL}@a@A]~@\\nEo@h@|AvBNr@jBPhIh@fAvBWzIaLr@K~GPtDg@p@|@x@rHLXd@Uy@}Ms@{Bo@]sCfB_CeBeAiCyDzCyAFe@gAz@sIUw@gAu@EuCkEcDk@yEq@OcAv@mBsDyBD",
    "pointCount": 181,
@@ -86,6 +93,10 @@
    "end": [
     33.868647,
     139.629077
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
@@ -99,8 +110,8 @@
    "curviness": 763.4,
    "flow": 32.4,
    "turnCount": 154,
-   "score": 82.8,
-   "baseScore": 82.8,
+   "score": 97.3,
+   "baseScore": 97.3,
    "spotCount": 0,
    "polyline": "gzuxEkkupYk@rAiB`B@fHaApGbBjIzAbCr@~DF~Cn@xAJvB|AbHrCpDjAdFMzDp@xEwCt@i@x@xBdFsDzDpDtFgApFfB~BhDjATdDt@lAhDm@rDrApDlBd@xA`CvCDn@mAzC|AtDgDrPrB`HtCfB~CvLhCnBhAxFh@TlEk@f@nAWrBt@hC@bB|BzBW|Al@rDKpFk@jCSdF}@rApATvCbCmEw@eDjF}@`AYQRWDh@`@?pAs@vBJVhAnADxBjD|BeCvBL{ATy@zB}AdBgAMeAcAqAXdALpAvBhCd@Zr@",
    "pointCount": 79,
@@ -111,35 +122,14 @@
    "end": [
     35.657623,
     139.168281
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "東京都:4",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "十里木御嶽停車場線",
-   "ref": "201",
-   "highway": "secondary",
-   "lengthKm": 4.78,
-   "curviness": 1261.7,
-   "flow": 43.7,
-   "turnCount": 138,
-   "score": 82.3,
-   "baseScore": 82.3,
-   "spotCount": 0,
-   "polyline": "kroyE}ompY_@vDv@`DxHxFjArBbBtGdC`BtB\\|AvB`BfEd@`DLvKpBzJdCjELlCh@|@K`E`Ag@c@zAhA_@y@vDtAiAd@JYx@jAa@jAHs@vBfCkAoAfC~CaArADyApBMtHi@jAjBi@UhAv@T|@iB\\jA|DiAnBqBpBvEzAKbAw@hDnFpBy@`@pEQfAn@~Bs@fCxCrCbAc@s@pAc@?ZTnEO^a@]{@dAq@`I[zC_F]aAFaB",
-   "pointCount": 63,
-   "start": [
-    35.80214,
-    139.174552
-   ],
-   "end": [
-    35.783625,
-    139.153857
-   ]
-  },
-  {
-   "id": "東京都:5",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "神津本道",
@@ -149,8 +139,8 @@
    "curviness": 683.1,
    "flow": 30,
    "turnCount": 93,
-   "score": 82.1,
-   "baseScore": 82.1,
+   "score": 96.5,
+   "baseScore": 96.5,
    "spotCount": 0,
    "polyline": "e`xoE}oepYeDqQoDcEoAsCq@qEsBgC}G[gAzAgBu@iAn@i@{A_BcAeA`@iArEwApA}@pL}ABo@m@V}AQiCqB{@qAp@eDNw@x@yCt@s@bFsLh@eCbACjAp@bAZbDiCxEZf@pBQtAx@Cp@m@\\iAy@mB`@q@[aAeDyCaDIwBsAq@_CgFwGeD_N_C",
    "pointCount": 47,
@@ -161,35 +151,13 @@
    "end": [
     34.227945,
     139.137749
-   ]
-  },
-  {
-   "id": "東京都:6",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "水根本宿線",
-   "ref": "205",
-   "highway": "secondary",
-   "lengthKm": 3.51,
-   "curviness": 733.1,
-   "flow": 28.6,
-   "turnCount": 90,
-   "score": 81.9,
-   "baseScore": 81.9,
-   "spotCount": 0,
-   "polyline": "kzcyEstzoY~CyEDeD~AcCt@{Dd@@b@tAtA@yAYEgBtDmF?g@mAeCuB]i@aBtI}Fp@eCMs@eBYy@}@m@wBNcCnD_E`GeBDw@aAmDNoB~AaBrAZbASl@iB|AaBAq@kAcAa@oARqBxC{DmBsDpA_DbC][qIfCmB`@eA_@mIpAuBbB?dCcAnA{B",
-   "pointCount": 48,
-   "start": [
-    35.741976,
-    139.078017
    ],
-   "end": [
-    35.732171,
-    139.103146
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:7",
+   "id": "東京都:5",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "大島循環線旧道",
@@ -199,8 +167,8 @@
    "curviness": 827.7,
    "flow": 29.4,
    "turnCount": 94,
-   "score": 81.8,
-   "baseScore": 81.8,
+   "score": 96.2,
+   "baseScore": 96.2,
    "spotCount": 0,
    "polyline": "q{hsEy`xqYeBh@_AyBn@sAQm@oDg@s@wCw@c@wBLq@oAnAoHnAi@bEn@Zs@y@sAa@gCiFqBAaAhBeAhISSuAcF{Dq@gBNS`ChBhBd@nC[Ms@cCeAeAqAHq@lBM@aAyGkEyBoE~@kCq@yBb@mExDgDzAcFzAi@E{@uAcCb@kK",
    "pointCount": 44,
@@ -211,10 +179,13 @@
    "end": [
     34.785405,
     139.411622
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:8",
+   "id": "東京都:6",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "御神火スカイライン",
@@ -224,8 +195,8 @@
    "curviness": 634.6,
    "flow": 27,
    "turnCount": 137,
-   "score": 81.7,
-   "baseScore": 81.7,
+   "score": 96.1,
+   "baseScore": 96.1,
    "spotCount": 0,
    "polyline": "ymasEkcqqYhBaF`BiBV}G~AmFi@oF`@eCaBwBfAcKwEaGQiAbFgEnFl@xAq@Ls@y@sBuDwEuCeH|Bb@`A`Bp@DaA_D{AgBcAyEPYfEHJi@}CqBiBBkC~@[_Ax@_BpHsAjCb@Na@wFaDwA{CgEoB}JbBcEKSyAhCkFyAkEn@Q~B|@fB|Bb@DxGoC`FjAnCy@rDb@lD_BnCx@jCaAV`@a@tBhAhBpGqAlEpA~CDDaAmDaCoBiGA}@",
    "pointCount": 64,
@@ -236,10 +207,14 @@
    "end": [
     34.739117,
     139.380815
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "東京都:9",
+   "id": "東京都:7",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "和田林道",
@@ -249,8 +224,8 @@
    "curviness": 820.8,
    "flow": 31.8,
    "turnCount": 79,
-   "score": 81.7,
-   "baseScore": 81.7,
+   "score": 96,
+   "baseScore": 96,
    "spotCount": 0,
    "polyline": "cksxEwhlpYT~AhAfBa@DcBkBu@n@?pDiE|IJvC_A|AEbEdBpFvB|BNbEVUFgEyAyC|@{@pC~AvAbEtAhBbBl@a@XsCsBmBa@ZjB_@xCaEj@ZZdAU|Bb@Np@cC_@uJtDQb@~DzEdMxA`AnAt@vC",
    "pointCount": 39,
@@ -261,10 +236,15 @@
    "end": [
     35.656111,
     139.154828
+   ],
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
-   "id": "東京都:10",
+   "id": "東京都:8",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "山梨県道33号上野原あきる野線",
@@ -274,8 +254,8 @@
    "curviness": 727.8,
    "flow": 29.7,
    "turnCount": 75,
-   "score": 80.2,
-   "baseScore": 80.2,
+   "score": 94.4,
+   "baseScore": 94.4,
    "spotCount": 0,
    "polyline": "szzxE_u_pYuGjEoDv@mEFm@h@H|AbBZjAxA`Bf@XhB`AjAj@tE_@Km@cDwBeDeDaAaBTc@[gBiEAuAzByEvCFJ}AkAiEnAaA~AEHsAfB_BXgBm@g@eHtBo@Ki@mEuByBwB_ApAwE?oI}@{Bq@IMn@x@hCe@h@yAsC",
    "pointCount": 43,
@@ -286,10 +266,13 @@
    "end": [
     35.701659,
     139.111375
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "東京都:11",
+   "id": "東京都:9",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "上野原あきる野線",
@@ -299,8 +282,8 @@
    "curviness": 541.8,
    "flow": 27.5,
    "turnCount": 109,
-   "score": 80.1,
-   "baseScore": 80.1,
+   "score": 94.3,
+   "baseScore": 94.3,
    "spotCount": 0,
    "polyline": "wjvxE}~|oYgDmEyCmLgAcA_@sAe@CZzCgBzEvBxAvApEBlDq@xBmA~AU`EmHxCCs@pAi@X}@I{GwCgNaAeAuBi@e@aAVgBvB_@dAkFKiBaBqBkAe@NsBeAgDgA[}BPQoDiEuCaBFgBzBq@iBqC_@_GhBr@cFg@aAoFB{D_@qBqAsC?w@wCRaAjM_B@_ByAwFeFwAeDQum@YuEfA",
    "pointCount": 55,
@@ -311,10 +294,13 @@
    "end": [
     35.695943,
     139.103678
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "東京都:12",
+   "id": "東京都:10",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "神津本道",
@@ -324,8 +310,8 @@
    "curviness": 525.8,
    "flow": 26.6,
    "turnCount": 94,
-   "score": 79.5,
-   "baseScore": 79.5,
+   "score": 93.5,
+   "baseScore": 93.5,
    "spotCount": 0,
    "polyline": "msvoE_jipYs@nAg@FkKeDEVdLvFdD}@pBiEfCsBhF}@dARy@lDiBpAm@xAZdDmA|EEnDk@|CaBnBq@xFgE~I}EnAmAvBoCjB_EbLkBfAcBlDP^`C_Dh@`A|AOIpC^XvA_DnAgAl@Xi@~HaA~BqBd@c@zELp@tDhDCxLa@xCw@v@cQsCkGFoJnD",
    "pointCount": 48,
@@ -336,10 +322,13 @@
    "end": [
     34.208278,
     139.132968
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:13",
+   "id": "東京都:11",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "利島一周道路",
@@ -349,8 +338,8 @@
    "curviness": 494.4,
    "flow": 24.9,
    "turnCount": 153,
-   "score": 76.7,
-   "baseScore": 76.7,
+   "score": 90.2,
+   "baseScore": 90.2,
    "spotCount": 0,
    "polyline": "wmtqEcnaqYEgHz@eNiDeFuDiB}Fk@kAiAgG}AiDW{CqAkAHCs@h@WdC`@zAOI{@cCL}A[y@d@Y]pAyA~EFp@q@Y_@oJy@oA`@aCxEc@OtBkGpAuB|Am@fAiBzBqAdFaAXwAe@mAiHcAqDf@uBnAaCPsEbFoBdE}@j@mCfFoAdAaA|FHzBqAfEsApKQ~OfElHzBTvDtBnEjLzCrCt@hBpChAr@~ApBrAp@vApCTIm@_CoAeC}FuA_B{B_KCaJl@PSpBz@hDzElGbDvBzIzB`I_BxGaFnBqHNwL",
    "pointCount": 77,
@@ -361,67 +350,13 @@
    "end": [
     34.516276,
     139.276662
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:14",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "十里木御嶽停車場線",
-   "ref": "201",
-   "highway": "secondary",
-   "lengthKm": 3.73,
-   "curviness": 516.6,
-   "flow": 24.4,
-   "turnCount": 79,
-   "score": 76.6,
-   "baseScore": 76.6,
-   "spotCount": 0,
-   "polyline": "ehiyEqpkpY`@{BvA[n@{@d@kEzAsCkAmFt@aDsAiAGo@pBsEtBu@`AkAjCXtBo@~HQtD|@`AlBfBx@dEInGsDhEjE~A`@bCu@fBuDjDbApBaD~CR|@c@\\q@`@yEhFo@^{CU}B{FsE}@_HJeCfAeCxEeDrAYdBgCbA}DxDyB",
-   "pointCount": 43,
-   "start": [
-    35.769789,
-    139.164408
-   ],
-   "end": [
-    35.751478,
-    139.182115
-   ],
-   "unpaved": {
-    "unpavedMeters": 499,
-    "totalMeters": 3733,
-    "ratio": 0.134,
-    "surface": "gravel",
-    "label": "砂利"
-   }
-  },
-  {
-   "id": "東京都:15",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "日原街道",
-   "ref": "204",
-   "highway": "secondary",
-   "lengthKm": 10.8,
-   "curviness": 470.2,
-   "flow": 24.4,
-   "turnCount": 208,
-   "score": 75.2,
-   "baseScore": 75.2,
-   "spotCount": 0,
-   "polyline": "{}yyE_msoYbIj@pCvAfEk@n@`AdAHpDjC|FtK~Ec@hDaFfEAtEcB|D~AbArAjA{@pB|AzAO~EkId@}JqAgCj@yADkC_AiAk@}BLoEhAiCDaBiBeAUoAPiA{AiBC}NaAuGR_DpFgSZwDY{FiDsKKcGr@kGQaDf@mB|G{AQ_Dn@cB|A@z@i@r@w@hAoDVgBY{ERyBcCyFl@eAj@gHlGqAfJ|ElG{HKa@_FiAeA_CRsBvAuAdBa@vDBzAh@dBhBxAEvFmElBa@bAx@dA|CrE`@nKkCtIg@nA}AxBk@`CwBlDyG?eDu@wBP_BjI_GAuD_AqCLoAbEcA|BJrEeDfB}BpJ_BnAoGm@sGhDeDp@yKhFx@bB{AjA_CfCWBo@{@_BP_AbFiDdI~@`HoCzEcA",
-   "pointCount": 106,
-   "start": [
-    35.855178,
-    139.040956
-   ],
-   "end": [
-    35.807454,
-    139.09581
-   ]
-  },
-  {
-   "id": "東京都:16",
+   "id": "東京都:12",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "三原山登山道路",
@@ -431,8 +366,8 @@
    "curviness": 464.4,
    "flow": 24.5,
    "turnCount": 183,
-   "score": 74.8,
-   "baseScore": 74.8,
+   "score": 87.9,
+   "baseScore": 87.9,
    "spotCount": 0,
    "polyline": "_x_sE}suqYoCeBeDeE{Aq@wCGqBhB_APaBMkAgA}@qCSwDeNoZDcH_FkTaG{HqTgJmATuBpCoCOsCn@cA_@[iA}A}a@k@e@wCImD~JcErDaCxRiAhCbAfCGvAmAn@sAqBi@HbBrKAzAw@HaKiNeAHc@lA@rBbBj@b@x@_@`@mBK?j@fApAKfMmCxETh@fBl@u@rMbAzCnC~CLx@Yv@u@PsEsA{@REdA|@xFyAvDDrDkCzBh@vEu@\\gD}@cCiG{J~Cy@lAl@nOaFvEKvAj@bDk@dCzGbCXvBvB`FNxBk@fCwA~@yDaCcCqCaBZOxFf@hCOhCRvBaAxFmDdEM~Ew@xBR|A",
    "pointCount": 93,
@@ -443,10 +378,14 @@
    "end": [
     34.769562,
     139.362419
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "東京都:17",
+   "id": "東京都:13",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "檜原街道",
@@ -456,8 +395,8 @@
    "curviness": 398.8,
    "flow": 21.8,
    "turnCount": 368,
-   "score": 70.7,
-   "baseScore": 67.8,
+   "score": 82.6,
+   "baseScore": 79.7,
    "spotCount": 1,
    "polyline": "c_ayE}zsoYbBgEu@mCD{@jBuCn@{BmA{BpA}K@oDxA}DtD}E|AuHJkCxBsCa@wBFcD_DmNhB_KjBaB|@oOfBSlGnAjFyHlFyDjAoFuAiBlA_Hw@mDpDiB~EcAbAoEu@}BOcGnAuAp@ElAb@rBxBd@@`DgGtEoEjAsK]sEsEiDSgAd@kB`AqApDqBt@cFdAkCgGuRHqDtCqF~@}GxD}FhI{Gb@iDxAaBfAkDlGiFbB}JlCgBzG_LdDoAvCiCt@kFhDeEEuCt@gE[o@mCl@u@QKqFdBsE|CwDVaBwC_JeEmF_B{G`@kB|CuBLsAm@}@gGsBe@oAl@kEOuCdAmEKaBuBkEDkBjA{E[w@uBy@W}@fAeC~F_AdAw@v@sC]{BsAiCCwAh@e@bDXh@m@i@uBaFuGuBkDKaAXu@xB?fEyBfEiEBeA}@kCGsIc@McDfBs@]IaALmGdHqHXwA_D{GgAmF}KsJwD_T_CiETyIfBuRM_AaDg@yFnDeD?{BhBsE~Ao@xA|@hCa@rBqAzAgEbAkFJgHaBsBuEqE_FsAJqF|FwBr@iBQwBoC}@FgLlKCjApA~@Rx@]vD{@d@uCq@aA^k@lAe@tFy@|@{ADoCeACgCr@}CSy@gEiAiDQO_F`D{Vh@wLu@eO\\mDnAcBdEh@nAs@xAaQIuHr@mAxCWv@qHg@wLeB_IyBw@sEt@i@q@z@gEj@eIpFoJXsLWgD",
    "pointCount": 191,
@@ -468,60 +407,14 @@
    "end": [
     35.723108,
     139.176593
-   ]
-  },
-  {
-   "id": "東京都:18",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "明治通り",
-   "ref": "122",
-   "highway": "primary",
-   "lengthKm": 3.32,
-   "curviness": 398,
-   "flow": 36.7,
-   "turnCount": 36,
-   "score": 70.6,
-   "baseScore": 70.6,
-   "spotCount": 0,
-   "polyline": "m{cyEahysY{IoGi_@ej@oJoP_F|DwBw@u@mCyBuCGq@cFaFeDqJ_By@xCaEsBdEJd@r@z@jDvJhE|D`ElJjBT`GkF",
-   "pointCount": 21,
-   "start": [
-    35.742149,
-    139.726247
    ],
-   "end": [
-    35.75081,
-    139.737528
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "東京都:19",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "浅川相模湖線",
-   "ref": "516",
-   "highway": "secondary",
-   "lengthKm": 4.75,
-   "curviness": 388.8,
-   "flow": 24,
-   "turnCount": 77,
-   "score": 68.5,
-   "baseScore": 68.5,
-   "spotCount": 0,
-   "polyline": "kdpxE}x_qYg@rFRnJ`BbJzDzG\\xAvDx`@|@bDo@dDgFfGfAlMIdG`@fEmAjGKvF{@|F\\bFp@zAp@NpBcAt@`AsBrETxE}@bABrHs@pCPnJkAjRx@tFu@~G\\lCoAnJb@~CdDhK]\\QeBq@gAWFz@tA\\lDLvK",
-   "pointCount": 41,
-   "start": [
-    35.641181,
-    139.268147
-   ],
-   "end": [
-    35.639272,
-    139.222567
-   ]
-  },
-  {
-   "id": "東京都:20",
+   "id": "東京都:14",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "十里木御嶽停車場線",
@@ -531,8 +424,8 @@
    "curviness": 407.2,
    "flow": 21.6,
    "turnCount": 74,
-   "score": 67.2,
-   "baseScore": 67.2,
+   "score": 78.9,
+   "baseScore": 78.9,
    "spotCount": 0,
    "polyline": "_kayEqjppYq@nCp@xBIjAm@b@iBSq@hBBpQgCfBcCl@yE\\{BYy@s@u@eCBgFi@kDkEaCsEb@wAcAQeBh@wF]g@iA?}DvE}@HaDyAsDsJwCw@kLxBeElBcE]eCpAmAfAWbAB~Av@hCmB`IuEHsD|CgCpFsEtDoF\\",
    "pointCount": 42,
@@ -543,35 +436,14 @@
    "end": [
     35.751223,
     139.182149
-   ]
-  },
-  {
-   "id": "東京都:21",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "外苑西通り",
-   "ref": "418",
-   "highway": "secondary",
-   "lengthKm": 9.33,
-   "curviness": 292,
-   "flow": 30,
-   "turnCount": 91,
-   "score": 66.9,
-   "baseScore": 66.9,
-   "spotCount": 0,
-   "polyline": "uruxEchwsYfF_IlAaJnA{B|DsB|EArCd@hIsCdAw@vC{FfBwAjE}@jSoAbEv@xJhEdEz@rJIbS}BhStFtF~CuFuD{Q{EEVuSnBkKLeE_AsNsGyLLuMzCo@KqElIsAfA}HxBeIWwDlAoBxBiB~KiF`HgHlMeHrEwa@?gJeDeJaA{GmJuAk@sZS_En@gE?gK~E",
-   "pointCount": 49,
-   "start": [
-    35.66907,
-    139.716022
    ],
-   "end": [
-    35.691359,
-    139.714599
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "東京都:22",
+   "id": "東京都:15",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "三宅循環線",
@@ -581,8 +453,8 @@
    "curviness": 348.7,
    "flow": 21.7,
    "turnCount": 473,
-   "score": 66.5,
-   "baseScore": 66.5,
+   "score": 78.2,
+   "baseScore": 78.2,
    "spotCount": 0,
    "polyline": "or~nEwmirYa@mB}BkDoFmFgAyCyBsBeAJmArAoE?a@[WwAu@Us@jCa@LsA{DaD`DcAaJkAoA]cCsFFaCl@{Ds@mEh@sBo@ImBiBy@McCwDB{A{DqAo@G}Do@sAk@MaBv@eAgCaAo@eHt@uA}@C}Ce@McExEkHbF]k@`DqFIq@{Ar@}BUoD|BuCAgHaF{BgOb@qEy@oAmBF_BjE_C|Ai@Qi@kCiBzBeG~A}De@}Gt@mMEaDiCw@yAsEmLa@qEaAc@mCb@mAOyCcD}@kBiGaFsEoBaAkFmDeEa@aHhGoQc@wDx@aIWsO}@{DoCoDgE_L_@uEx@cG_BkEQsHaCyC[gDo@_B?qLw@kGt@cI?qFbBkGfAwHrAwC|CmNjBwE~CuZfBcGXsFnEsFpAaLjIwNf@aCjDmA~@iE`BkBxA{GhI{HtGiC~HYva@}I~HpFzDcCpCw@Z`Aw@jBdBjBl@pC^BZiH|Dq@lBuAtC_ItEJfE|DhBb@~B}AbAoDxCeEfF\\jIw@~@b@v@|CrC|BtI|BtDXpFfCpA@bAe@n@sGbA[rEbHdSdMhKu@hFwAhHPpShIzESnFf@jGpDbCfDvCrBlA|Hr@jMlBhDrBrAhHdJjBxH|A~Bd@jC`MtSpArHuBlKj@pKdEbCnFxFxApC~B`A~GfAjEbCbBpDLzC{AbDBjA~B|FbEbEf@dBK`CsAvDh@~EGhBcDtE[jBZrApCvBdAhBTtVq@rCTjFUnBj@hEpAzC_@tBeBnDd@fGsAbMtAzCxD|BdAbDHhBy@vHkBzH{HpJgFdMqJhI?pHsKf\\qEjIwDlBaDgAcEbA_LrEwL`KgHzAuBlBaAR_Iw@uDxB{Ef@cBvAyH|A{AvCaDx@}AQ_OiGs@_A_LaEyGfA_Ax@oBgCsCiAm@j@sAG",
    "pointCount": 237,
@@ -593,10 +465,13 @@
    "end": [
     34.08248,
     139.482589
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:23",
+   "id": "東京都:16",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "あじさいレインボーライン",
@@ -606,8 +481,8 @@
    "curviness": 395.3,
    "flow": 21.5,
    "turnCount": 79,
-   "score": 66.5,
-   "baseScore": 66.5,
+   "score": 78.1,
+   "baseScore": 78.1,
    "spotCount": 0,
    "polyline": "eucsEivxqYcEqHiAqGTiKjCaHMw@oBcBa@sAIkW~@uGc@wA}CaCeBiU{CmBLuEoCqD_AkCFgA`@]dC^bAUj@yBK}DuEuLoGsCs@eAZyAbC}@d@aAu@yHw@a@y@p@QvA\\vBm@r@oBMc@_A[qY|AgClCuAlA}BnDsB",
    "pointCount": 42,
@@ -618,160 +493,13 @@
    "end": [
     34.762165,
     139.429945
-   ]
-  },
-  {
-   "id": "東京都:24",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "競馬場通り",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.15,
-   "curviness": 328.8,
-   "flow": 26.6,
-   "turnCount": 39,
-   "score": 66.4,
-   "baseScore": 66.4,
-   "spotCount": 0,
-   "polyline": "qbuxEspkrYTz@t@ZSlDeDrNUjCvA`_@`DpDfFdC[fK^gDBmF{EwBcC_Cc@qAqAs\\ZaE~CkN?mDk@@e@w@ByG{CyDcIs@",
-   "pointCount": 24,
-   "start": [
-    35.666485,
-    139.492102
    ],
-   "end": [
-    35.668904,
-    139.494532
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "東京都:25",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "祝田通り",
-   "ref": "301",
-   "highway": "primary",
-   "lengthKm": 5.45,
-   "curviness": 320.4,
-   "flow": 34.9,
-   "turnCount": 50,
-   "score": 66.4,
-   "baseScore": 66.4,
-   "spotCount": 0,
-   "polyline": "{awxEoa_tYfZpQp_@pOtJdChRp@hLrA\\r@FpD^r@|HtBfGdEpGx@lAnAmC{BiGk@kF{CoHwB]w@OiDk@{@}IeBgT}@q[oJiM_GwHeFULuQaK",
-   "pointCount": 27,
-   "start": [
-    35.676618,
-    139.755918
-   ],
-   "end": [
-    35.676801,
-    139.755875
-   ]
-  },
-  {
-   "id": "東京都:26",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "外堀通り",
-   "ref": "405",
-   "highway": "secondary",
-   "lengthKm": 5.87,
-   "curviness": 279.4,
-   "flow": 31,
-   "turnCount": 53,
-   "score": 65.4,
-   "baseScore": 65.4,
-   "spotCount": 0,
-   "polyline": "mn{xEenatYdAwCl@MDXg@K{D|JsFvVmC`Cu@bD[zG@fT_BfIJn@qAbJoAtc@Yn@RrE|@rE\\KhEnGlGdE|TtRfRxLvI`MqHeKyGkG_JqFqUmRqFiC}DkEeAsBw@wMWSBqI",
-   "pointCount": 34,
-   "start": [
-    35.699113,
-    139.768187
-   ],
-   "end": [
-    35.703297,
-    139.749208
-   ]
-  },
-  {
-   "id": "東京都:27",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "多摩モノレール通り",
-   "ref": "149",
-   "highway": "secondary",
-   "lengthKm": 3.04,
-   "curviness": 286,
-   "flow": 34.8,
-   "turnCount": 25,
-   "score": 64.9,
-   "baseScore": 64.9,
-   "spotCount": 0,
-   "polyline": "gswxEu~zqYyDxF_Bt@{BNsFqCk\\kKa@N{GsBD[mPoF|BxAlUhGRf@l\\fKjFhC`Fq@nDkH",
-   "pointCount": 17,
-   "start": [
-    35.679397,
-    139.407308
-   ],
-   "end": [
-    35.679477,
-    139.407375
-   ]
-  },
-  {
-   "id": "東京都:28",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "外堀通り",
-   "ref": "405",
-   "highway": "secondary",
-   "lengthKm": 6.31,
-   "curviness": 263.4,
-   "flow": 38.6,
-   "turnCount": 43,
-   "score": 64.5,
-   "baseScore": 64.5,
-   "spotCount": 0,
-   "polyline": "gqxxEuabtY`JfDxJxFHh@d@Mj\\|QbNzJzAvCt@ZrWfZpErAgEaBeYc[uBoDwMuIy\\_QKm@a@NkWkMoC?}LrF{J|Iq@pHcOqBwVCuCm@wHwEd@P",
-   "pointCount": 28,
-   "start": [
-    35.684202,
-    139.771315
-   ],
-   "end": [
-    35.698102,
-    139.768693
-   ]
-  },
-  {
-   "id": "東京都:29",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "日比谷通り",
-   "ref": "1;20",
-   "highway": "secondary",
-   "lengthKm": 3.27,
-   "curviness": 275.2,
-   "flow": 47.4,
-   "turnCount": 19,
-   "score": 64.3,
-   "baseScore": 64.3,
-   "spotCount": 0,
-   "polyline": "gmxxEak`tYSc@yHyAy@L{[wF|AIlPlCvSbF^Stp@tOzA`AEn@rJrJPc@jNzHJp@zDpB",
-   "pointCount": 17,
-   "start": [
-    35.683556,
-    139.762571
-   ],
-   "end": [
-    35.669612,
-    139.755352
-   ]
-  },
-  {
-   "id": "東京都:30",
+   "id": "東京都:17",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "国道139号",
@@ -781,8 +509,8 @@
    "curviness": 376.9,
    "flow": 21.3,
    "turnCount": 58,
-   "score": 64.3,
-   "baseScore": 59.8,
+   "score": 75.1,
+   "baseScore": 70.5,
    "spotCount": 2,
    "polyline": "kygyEmwgoY_@sBqBgCe@aDd@wC|CqF~@_GFcHrAyDd@oFe@wAuBu@}@cAgA{JaAIcK~C{A}BuDwB_BIkB{ACaCqAyGBoEb@qAGsBsAmAcC^uOtGyC[yDw@kCyA}AeEkGgI",
    "pointCount": 33,
@@ -793,135 +521,13 @@
    "end": [
     35.775612,
     139.000473
-   ]
-  },
-  {
-   "id": "東京都:31",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "靖国通り",
-   "ref": "302",
-   "highway": "primary",
-   "lengthKm": 4.9,
-   "curviness": 286.3,
-   "flow": 42.5,
-   "turnCount": 33,
-   "score": 64.1,
-   "baseScore": 64.1,
-   "spotCount": 0,
-   "polyline": "{_zxE}r{sYnBtKYjAHkAmGg\\gHiZqFgY}AsRPgA[EWcET_@{@kg@|AyCl@WbDyEn@wG}@eImFgSLqHWc@X_@FoCb@{k@d@yGUc@xAuYNR",
-   "pointCount": 28,
-   "start": [
-    35.691658,
-    139.738229
    ],
-   "end": [
-    35.694885,
-    139.784359
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "東京都:32",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "四ツ目通り",
-   "ref": "465",
-   "highway": "secondary",
-   "lengthKm": 7.97,
-   "curviness": 251.4,
-   "flow": 43.6,
-   "turnCount": 46,
-   "score": 64.1,
-   "baseScore": 64.1,
-   "spotCount": 0,
-   "polyline": "cvxxEeyjtYcl@lBwCp@g@@G[@ZgHZq@W_Bb@g@YuLXgp@fCaThC`NgB|VuAb]oA~IDfhAoFrp@|@|McAb\\o@aZd@aPz@",
-   "pointCount": 23,
-   "start": [
-    35.684975,
-    139.816027
-   ],
-   "end": [
-    35.676569,
-    139.815952
-   ]
-  },
-  {
-   "id": "東京都:33",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "内堀通り",
-   "ref": "401",
-   "highway": "primary",
-   "lengthKm": 8.52,
-   "curviness": 272.3,
-   "flow": 30.5,
-   "turnCount": 76,
-   "score": 64,
-   "baseScore": 64,
-   "spotCount": 0,
-   "polyline": "syyxEqd_tYUc@`AaMh@q@j@eDvCuDrKiCFc@zHrAtDbCpIxB|f@pXw@v@oD`LdClOB`HcLfLgC`IuMzGwHr@nHqAhL_Gv@w@tBeHtIoIx@mIoB}Nt@cAnD{Kmg@uX}HqBeDwBmIwAWa@yKvCeDpFi@nDRz@_AhL_LnE{DdM_DtFyDtA`EkA`CwEdEuNfCwA\\w@lBH",
-   "pointCount": 49,
-   "start": [
-    35.690664,
-    139.756413
-   ],
-   "end": [
-    35.691417,
-    139.756079
-   ]
-  },
-  {
-   "id": "東京都:34",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "水根本宿線",
-   "ref": "205",
-   "highway": "secondary",
-   "lengthKm": 7.43,
-   "curviness": 322.3,
-   "flow": 19.8,
-   "turnCount": 121,
-   "score": 64,
-   "baseScore": 61.1,
-   "spotCount": 1,
-   "polyline": "yxayEcv_pYPw@k@yFXkK`AqGUeDcFgHwABmBy@}B_FF{@pB}AzAqFFyC}@}DkCkC{Ao@c@uBNyAdDeFN{DbAqAfBk@dB{E?s@yH}MgCcCuA}CuAl@yC~LkBnDoHhE{TyEqAuAcBc@NoDyGgXz@}ElCmIrD{DnDeAvCaGQoF`@qBEgKpA}FhCs@d@m@|@sHa@oDgB_Gd@oBn@]vEFlHaD`DuCbDOjFfBpGjEjFc@lGXfCmDn@aHlL{G",
-   "pointCount": 64,
-   "start": [
-    35.73149,
-    139.103856
-   ],
-   "end": [
-    35.726579,
-    139.147412
-   ]
-  },
-  {
-   "id": "東京都:35",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "目白通り",
-   "ref": "8",
-   "highway": "primary",
-   "lengthKm": 4.54,
-   "curviness": 281,
-   "flow": 31.9,
-   "turnCount": 40,
-   "score": 63.6,
-   "baseScore": 63.6,
-   "spotCount": 0,
-   "polyline": "yx{xEwl}sYgJjP{_@jIe@zAaFpn@Ph@_ElNMvCoLjCGUvBw@|HsAYSV{B~DiOZSrFap@x^wIdEyFnDkI",
-   "pointCount": 20,
-   "start": [
-    35.700768,
-    139.747479
-   ],
-   "end": [
-    35.700827,
-    139.747551
-   ]
-  },
-  {
-   "id": "東京都:36",
+   "id": "東京都:18",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "大島循環線",
@@ -931,8 +537,8 @@
    "curviness": 303,
    "flow": 21.8,
    "turnCount": 370,
-   "score": 63.5,
-   "baseScore": 63.5,
+   "score": 74.7,
+   "baseScore": 74.7,
    "spotCount": 0,
    "polyline": "c|urEstxqY~HyIj@_BzAyQ~A_JDwMzAyOlAqGh@sLxBeJxEsHcAeJ@gGaD_XI_LiCaM`AmOfC_JXsHzDyWqEr@gAa@iBVeD}Be@?aE~Gi@B}BeDiL}@}EoC}AkC?q@zFaZDyCuA}AoG{@gEqB{Ci@{EqCwAsAcGuPqE}CiBSkEnBsCdCsOlXeDhBTZ|CFbDrHbDxBvClEhGv@~A|@pBlCvFx@TlAWrD|EwBlAl@RpAwF`O_@[vAeFUu@wHrKyIbAeLzHqCO}CaGAmCxBoFAo@o@CeCrCaEb@q@]kEwIgD|AqMm@Ya@b@iAQg@yGlA@y@dCuATw@iGcD{@V_BlC_ChKIzFg@tAoAd@{AWyFcIe@v@}@jG{@n@uBi@yC{CkAHuBpBuDx@gBq@uB`@uEaAuDCaM{Di@`@HtEg@ZgCiFeGyGu@XEvDg@b@aE_G_BxA_EfH{A`@gIo@wEh@mQ}IcBUyAf@{CtDiFk@aF~B_EkCq@A_CxCcC\\wAtAuBmDsC~@{AMiKgL{Bm@gBt@_JhMyMdN}Ib@gLtHmIa@mM~DoAGiFmBeMb@cBg@_@gAeA_@wRbMmFzIoA\\w@{@AqAzCmH|FyJdRsJl@{AvAs@hAwCaBh@aJq@oEpCmAP_CMuBy@{CDwYrKyKlJuDlEu@dC?|CcHjKi@`CcLxEoEzD}BpFcFxPaBlDoCnCo@zF|@rHoBtGcFnFyA|CKzMgLnj@PrDfF~W|AvSr@jBfBx@",
    "pointCount": 195,
@@ -943,35 +549,13 @@
    "end": [
     34.784321,
     139.3921
-   ]
-  },
-  {
-   "id": "東京都:37",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "外苑東通り",
-   "ref": "319",
-   "highway": "primary",
-   "lengthKm": 3.13,
-   "curviness": 287.7,
-   "flow": 41,
-   "turnCount": 22,
-   "score": 63.5,
-   "baseScore": 63.5,
-   "spotCount": 0,
-   "polyline": "axvxEymxsYhDsFpNaF}AsItHkBhVaDbOqUnEyEjE_L`FiVQGaFfVuDbLeFrE",
-   "pointCount": 14,
-   "start": [
-    35.675047,
-    139.722047
    ],
-   "end": [
-    35.664413,
-    139.73112
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:38",
+   "id": "東京都:19",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "式根本道",
@@ -981,8 +565,8 @@
    "curviness": 314.3,
    "flow": 23.5,
    "turnCount": 50,
-   "score": 63,
-   "baseScore": 63,
+   "score": 74,
+   "baseScore": 74,
    "spotCount": 0,
    "polyline": "cfopEw_tpYeGm@mCgCoDaJkJeFoD?aBvAmAtCoAj@kBHsASqD{Ce@uBJw@xLaGl@oAnA]xEmEzGEvImFaA{f@rElD~BvHhLjG`AyGt@SjAVvGvE",
    "pointCount": 28,
@@ -993,85 +577,13 @@
    "end": [
     34.321534,
     139.218929
-   ]
-  },
-  {
-   "id": "東京都:39",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "町田平山八王子線",
-   "ref": "155",
-   "highway": "secondary",
-   "lengthKm": 8.35,
-   "curviness": 275.3,
-   "flow": 25,
-   "turnCount": 92,
-   "score": 63,
-   "baseScore": 63,
-   "spotCount": 0,
-   "polyline": "owdxE_f~qYsDrCgEbIeJrCiJxHwMnFiGzJsEfEuEzH}LlOeCxKW`DFnDfAfIS|CiM`SiBxGq@AYn@qAoAkIi@}CT{D`CsAcAyBd@[aA}@OI{@{CF{C~AkABeB}C}EoCeByGeFzLmHxIKYsE|CoUjIiDEiTkHc@JmLgDkFGuI`BL_@dI{AdGNp`@~M|Db@pWgJzDkCvCeD",
-   "pointCount": 53,
-   "start": [
-    35.582803,
-    139.423842
    ],
-   "end": [
-    35.611337,
-    139.399813
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:40",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "野猿街道",
-   "ref": "20",
-   "highway": "primary",
-   "lengthKm": 3.74,
-   "curviness": 273.9,
-   "flow": 41,
-   "turnCount": 25,
-   "score": 62.9,
-   "baseScore": 62.9,
-   "spotCount": 0,
-   "polyline": "sspxEos_rYkCiPw@sBgAcAwU_L{Ce@DYEX_j@aGuH{AnD`Ajq@dHIVpXzMlAhCbCfO",
-   "pointCount": 16,
-   "start": [
-    35.643621,
-    139.431124
-   ],
-   "end": [
-    35.643779,
-    139.431243
-   ]
-  },
-  {
-   "id": "東京都:41",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "多摩モノレール通り",
-   "ref": "156",
-   "highway": "secondary",
-   "lengthKm": 3.45,
-   "curviness": 243.3,
-   "flow": 33.6,
-   "turnCount": 25,
-   "score": 62.3,
-   "baseScore": 62.3,
-   "spotCount": 0,
-   "polyline": "y`kxEkz}qYzEeBtSwP|JyDTNiK~DsTnQeErAc[sB{QHoPoDL]a@K]X_JuBgDHhD[nI~A",
-   "pointCount": 18,
-   "start": [
-    35.615011,
-    139.421981
-   ],
-   "end": [
-    35.625644,
-    139.423534
-   ]
-  },
-  {
-   "id": "東京都:42",
+   "id": "東京都:20",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "甲州街道",
@@ -1081,8 +593,8 @@
    "curviness": 382.3,
    "flow": 21.8,
    "turnCount": 175,
-   "score": 62.2,
-   "baseScore": 62.2,
+   "score": 73.5,
+   "baseScore": 73.5,
    "spotCount": 0,
    "polyline": "igpxE_aaqYT|@tIpKdEnDbRrDtCMjIkBfBDvHhGzFN`ElBvEtIvBvHt@nGbBzB~M`BnHF|MxDzJk@fAj@^x@MjBgEnGd@dI}BrRrAfKzBzB~DnBbBfEp@vF`B~_@bAvIs@hKe@jAeEtBqGl@kCzH@|Di@^{B?uAjC\\dEpBjEzCpQiBlEqDdBgB`FJxChCdDVhGe@nAiCh@@f@xBxCDnEs@rBwBrCr@pApEy@hDnB~CuA|@NFzA_C`AwA|BBv@`@ZvGAxA`@pFgCpBUj@d@QbE_@dAwDf@{EhBs@v@B`Ab@j@bHHnBp@`@xASbAgBbAgAlBsA`@cBIcA`BoAXKpArAtC",
    "pointCount": 91,
@@ -1093,85 +605,14 @@
    "end": [
     35.617381,
     139.213454
-   ]
-  },
-  {
-   "id": "東京都:43",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "山手通り",
-   "ref": "317",
-   "highway": "primary",
-   "lengthKm": 13.01,
-   "curviness": 232.3,
-   "flow": 28.5,
-   "turnCount": 106,
-   "score": 62.1,
-   "baseScore": 62.1,
-   "spotCount": 0,
-   "polyline": "svqxEsnrsYmBhBvDaGdRc_@hJaMlo@ig@hb@iVfIkG|Vck@?}@^CdI_UxLaUn@eDOiFXaBjLuIfDcQ}@qGHkAl@}@xGqD`AkEgCsBe@sA^wUgAyFoDoGoNyMXNvMrLxDxGx@~FQ|U`@fAjCzBYlCk@lAaIfFOtB^`IcClNeM`I[vAPrEc@pEqDrE{GtMqIzU?|@c@FmVnj@eJzHoWxN_H|Euo@vf@",
-   "pointCount": 56,
-   "start": [
-    35.649222,
-    139.691465
    ],
-   "end": [
-    35.643974,
-    139.699615
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "東京都:44",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "明治通り",
-   "ref": "306",
-   "highway": "primary",
-   "lengthKm": 8.97,
-   "curviness": 241.1,
-   "flow": 31.3,
-   "turnCount": 69,
-   "score": 62.1,
-   "baseScore": 62.1,
-   "spotCount": 0,
-   "polyline": "q|`yE{kjtYeCzDmDfn@aCvWz@ro@cJ`PyHbQeArAeHpEm@bA_Prw@sEbg@mEpJ`EwJjFyf@~J}f@bC{ObA}AbIsFnLmTh@gAKa@^EhFiIcA_p@lHuhAtA_C",
-   "pointCount": 27,
-   "start": [
-    35.726967,
-    139.813898
-   ],
-   "end": [
-    35.727139,
-    139.81383
-   ]
-  },
-  {
-   "id": "東京都:45",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環七通り",
-   "ref": "318",
-   "highway": "primary",
-   "lengthKm": 3.58,
-   "curviness": 260.5,
-   "flow": 32.1,
-   "turnCount": 29,
-   "score": 62,
-   "baseScore": 62,
-   "spotCount": 0,
-   "polyline": "cpyxEwjksYzVwHhe@wC~_@{NkDx@oZxMgc@jBkMbEaBDmHlB",
-   "pointCount": 10,
-   "start": [
-    35.689144,
-    139.655001
-   ],
-   "end": [
-    35.689275,
-    139.655103
-   ]
-  },
-  {
-   "id": "東京都:46",
+   "id": "東京都:21",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "青梅街道",
@@ -1181,8 +622,8 @@
    "curviness": 284.5,
    "flow": 20,
    "turnCount": 422,
-   "score": 61.7,
-   "baseScore": 55.9,
+   "score": 71.8,
+   "baseScore": 66.1,
    "spotCount": 3,
    "polyline": "mipyEejppYKdDbBzGhFlElMtDvAfBlBji@kAjCoDv@kXcDmD|@mCrHM|E|B|FtEvE\\rBY|AeIvGmGjA{HpDmNpRw@nH~@|BvD`EjHNtBh@tB|Bj@zDcBnIaMpP}Hz@mJ~CeAbEX`EG`Ur@vDtD`ERhCGrA{EfNq@bEDvTl@vE`CzHd@tF~@jAzBn@zAbFUt@gIdGkBvC?pDt@dBrCtCr@`FtCbEbArIjBnDxBdB^jBPpDyC`J@bDc@dC`@`DFrFrAdEnAjB~EdCpAtBdCx@dSbNzK|J|JfRv@rD?jBeAbD{GnEoNjCuC~AuBpCgA`Em@jGLlK`DnG~ExBvBdDv@dCrD~A~ClErAb@tEA`DnCfBrF`@pDc@vCcDpEAzJvDrDjHE|A~@LtBsAjDe@|ErG~Pn@`FbLlTpGpCxBrBPvCsCvJSjCq@pAFvIg@zKJtBxB|HD~U|EzFg@lAuDpAYn@jA|\\w@bFpBjEk@|KaAlCKvBhXjZv@X~@E`A_A`@qBFcDlD_Fv@]x@VbAtCfBrBNdHvAQtD_IvFkArBxBSvB}B|GKfNfB|N|BhDrBnAZhC}AvAuFz@_D}@}AFm@VIz@`D~AzFjOObEbIdNz@pL~BtAExCmBlGjAhFcAzDtC`RpD`IrIJlCnDgBtLyBnGs@bIg@jAMpDr@jJnBrIi@`BDp@dGvI`D\\rDk@`DfB\\|@e@pBwHpKsGjCQl@dBlFj@rJvA~CpDlE`@tHiAxD}A~@kFv@eD|EsErDw@rAcBz@yBtC?jGbJfLn@hG[rGgC|FuDpBsAxBoD~CcM~Do@x@[bCVjDp@nD~BpCp@zI{AxDkCf@qBnBu@fCiCxSm@j@iDB}B`AuApBBhB",
    "pointCount": 227,
@@ -1193,410 +634,14 @@
    "end": [
     35.788147,
     138.964175
-   ]
-  },
-  {
-   "id": "東京都:47",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "府中街道",
-   "ref": "9",
-   "highway": "primary",
-   "lengthKm": 4.23,
-   "curviness": 249.9,
-   "flow": 29.4,
-   "turnCount": 36,
-   "score": 61.6,
-   "baseScore": 61.6,
-   "spotCount": 0,
-   "polyline": "misxEksjrYfA{@rDDjYeBF\\pVmBmVnAC\\}VdAwAScEj@eAr@}D|S_BrFaRpQyFfCcPn@kM`J{NjAiGnD",
-   "pointCount": 20,
-   "start": [
-    35.657352,
-    139.487417
    ],
-   "end": [
-    35.672073,
-    139.475831
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "東京都:48",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "綱島街道",
-   "ref": "2",
-   "highway": "primary",
-   "lengthKm": 5.57,
-   "curviness": 236,
-   "flow": 31.3,
-   "turnCount": 42,
-   "score": 61.1,
-   "baseScore": 61.1,
-   "spotCount": 0,
-   "polyline": "{gdxEkbmsYiKCqDg@r@d@xWFxRdFlY`P~\\pOd@n@nf@bVug@sW_]qOqXcOaPeFeKs@",
-   "pointCount": 15,
-   "start": [
-    35.580303,
-    139.663899
-   ],
-   "end": [
-    35.580303,
-    139.664002
-   ]
-  },
-  {
-   "id": "東京都:49",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "桜田通り",
-   "ref": "1",
-   "highway": "trunk",
-   "lengthKm": 9.13,
-   "curviness": 281,
-   "flow": 37.2,
-   "turnCount": 69,
-   "score": 61.1,
-   "baseScore": 61.1,
-   "spotCount": 0,
-   "polyline": "u{oxEgozsYwQiI]R_EkMwI}QwL}Hc@aU{V{AKW{QGG[|j@`C?xU~LhIpJlRfExLhWnLpj@|EnIhLnDtHpCxCTfApAvAv@NxC`ElHbOhANHh@jFxBi@w@iGqB@i@oCkE_@C}IeNCs@sFoE}DaIoJoN_g@qEqFuBe@H",
-   "pointCount": 42,
-   "start": [
-    35.639788,
-    139.732519
-   ],
-   "end": [
-    35.639983,
-    139.732468
-   ]
-  },
-  {
-   "id": "東京都:50",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "多摩ニュータウン通り",
-   "ref": "158",
-   "highway": "secondary",
-   "lengthKm": 4.92,
-   "curviness": 220.1,
-   "flow": 27.1,
-   "turnCount": 40,
-   "score": 60.5,
-   "baseScore": 60.5,
-   "spotCount": 0,
-   "polyline": "_ykxEggwqY_FiHgVyJcEcEoRqfAJeLvAmNbBkHqDtZ?vMpFl\\f@LWf@vG~^~@~BbDjChXlLvB~CdAlCGd@",
-   "pointCount": 20,
-   "start": [
-    35.618881,
-    139.388202
-   ],
-   "end": [
-    35.618916,
-    139.388013
-   ]
-  },
-  {
-   "id": "東京都:51",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "東八道路",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 10.34,
-   "curviness": 210.2,
-   "flow": 32.9,
-   "turnCount": 66,
-   "score": 60.3,
-   "baseScore": 60.3,
-   "spotCount": 0,
-   "polyline": "ibxxEulvrY@wDSGT]hC}u@k@qg@p@cb@KiMkJsvAmCwJeKqQe@wDrJui@pNgYhFqUPn@cA~HqB~IiOxZqJjj@d@|CpJvPjB`GbAzHj@|VpGfx@e@to@Z~f@Q\\",
-   "pointCount": 29,
-   "start": [
-    35.681807,
-    139.547791
-   ],
-   "end": [
-    35.681193,
-    139.557702
-   ]
-  },
-  {
-   "id": "東京都:52",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環七通り",
-   "ref": "318",
-   "highway": "primary",
-   "lengthKm": 10.38,
-   "curviness": 202.9,
-   "flow": 28.5,
-   "turnCount": 74,
-   "score": 59.9,
-   "baseScore": 59.9,
-   "spotCount": 0,
-   "polyline": "qejxE{jrsY`LcRp`@oXxOeTdZmy@`Zen@bHiBrk@iHlFiBpFkIhAmDjFm[jDqYxCmPFuDgA}GcIoQuGgZaHaWFu@u@iAc@gEbAnEKn@`@PtEnTvJb_@hIzQr@rGcGrd@sI`h@o@lBcGhJ}CrA",
-   "pointCount": 34,
-   "start": [
-    35.61065,
-    139.690858
-   ],
-   "end": [
-    35.582852,
-    139.72039
-   ]
-  },
-  {
-   "id": "東京都:53",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "中央通り",
-   "ref": "4;6;14;17",
-   "highway": "trunk",
-   "lengthKm": 3.68,
-   "curviness": 280.1,
-   "flow": 32.2,
-   "turnCount": 32,
-   "score": 59.8,
-   "baseScore": 59.8,
-   "spotCount": 0,
-   "polyline": "awvxEkratYut@ea@_E_AkbApZiJ}BdAAfDbAVb@hB@`h@mO",
-   "pointCount": 10,
-   "start": [
-    35.674886,
-    139.768855
-   ],
-   "end": [
-    35.688623,
-    139.772977
-   ]
-  },
-  {
-   "id": "東京都:54",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "白山通り",
-   "ref": "301",
-   "highway": "primary",
-   "lengthKm": 3.83,
-   "curviness": 225.3,
-   "flow": 41.1,
-   "turnCount": 21,
-   "score": 59.8,
-   "baseScore": 59.8,
-   "spotCount": 0,
-   "polyline": "c~zxEen_tY__@fPY_@{AHQk@]h@}d@dJO[gZfFme@|EgChAmWfX{GfDoJz@aBt@{AhB",
-   "pointCount": 16,
-   "start": [
-    35.696499,
-    139.757946
-   ],
-   "end": [
-    35.727908,
-    139.745041
-   ]
-  },
-  {
-   "id": "東京都:55",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "尾久橋通り",
-   "ref": "58",
-   "highway": "primary",
-   "lengthKm": 3.2,
-   "curviness": 227.6,
-   "flow": 40.4,
-   "turnCount": 18,
-   "score": 59.7,
-   "baseScore": 59.7,
-   "spotCount": 0,
-   "polyline": "k~ayEgpatYmB~Age@iC|@`@hc@fB`TkXdUeTlKqRwKdR",
-   "pointCount": 9,
-   "start": [
-    35.732384,
-    139.768518
-   ],
-   "end": [
-    35.726061,
-    139.775545
-   ]
-  },
-  {
-   "id": "東京都:56",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "靖国通り",
-   "ref": "302",
-   "highway": "primary",
-   "lengthKm": 3.3,
-   "curviness": 224.8,
-   "flow": 30.9,
-   "turnCount": 24,
-   "score": 59.6,
-   "baseScore": 59.6,
-   "spotCount": 0,
-   "polyline": "_tzxEgsdtYsAdZ[d@B`NK|GYl@y@pj@tFzSt@jHi@`GaEbGaAdC?~NQr@ZjWXRXtDQfAXBvAvR",
-   "pointCount": 20,
-   "start": [
-    35.694885,
-    139.784359
-   ],
-   "end": [
-    35.695122,
-    139.74941
-   ]
-  },
-  {
-   "id": "東京都:57",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "靖国通り",
-   "ref": "4;5;302",
-   "highway": "primary",
-   "lengthKm": 6.8,
-   "curviness": 211.5,
-   "flow": 27.7,
-   "turnCount": 52,
-   "score": 59.5,
-   "baseScore": 59.5,
-   "spotCount": 0,
-   "polyline": "}kzxEc`tsYBp@]m@OqGdGg_@ZCv@mEdDah@m@eJh@}IaF{[C}Ib@iLdEuMl@kOWkF{DkUAfAhDdSXhFq@dPmDfLWjWfFd\\i@bIl@zKuBx_@oCrLFrA_F|YGrJ",
-   "pointCount": 31,
-   "start": [
-    35.693591,
-    139.699378
-   ],
-   "end": [
-    35.693591,
-    139.699378
-   ]
-  },
-  {
-   "id": "東京都:58",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "中央通り",
-   "ref": "17",
-   "highway": "secondary",
-   "lengthKm": 3.75,
-   "curviness": 194.7,
-   "flow": 31.7,
-   "turnCount": 23,
-   "score": 59.4,
-   "baseScore": 59.4,
-   "spotCount": 0,
-   "polyline": "c{}xEybctY[f@YvJf@r@nHfDxOzBpHbDjp@nCjBz@ss@eFoHaD_QsCaHeD^cKQ{C",
-   "pointCount": 15,
-   "start": [
-    35.711378,
-    139.776608
-   ],
-   "end": [
-    35.711471,
-    139.777215
-   ]
-  },
-  {
-   "id": "東京都:59",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "国際通り",
-   "ref": "462",
-   "highway": "secondary",
-   "lengthKm": 3.03,
-   "curviness": 189.5,
-   "flow": 47.9,
-   "turnCount": 12,
-   "score": 58.7,
-   "baseScore": 58.7,
-   "spotCount": 0,
-   "polyline": "gc|xE_wetYmAHiRuCa@PwLaAwRuDsMwAcVu@gFBoPlHum@xAZY",
-   "pointCount": 12,
-   "start": [
-    35.702445,
-    139.79008
-   ],
-   "end": [
-    35.728783,
-    139.790789
-   ]
-  },
-  {
-   "id": "東京都:60",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "第一京浜",
-   "ref": "15",
-   "highway": "trunk",
-   "lengthKm": 16.85,
-   "curviness": 224.6,
-   "flow": 36,
-   "turnCount": 105,
-   "score": 58.5,
-   "baseScore": 58.5,
-   "spotCount": 0,
-   "polyline": "uxgxEgr{sYZL{ZcLsToPgBo@qq@zKaLb@i@YiL~@_GjC_M~HeElAeHa@oQzBwUOaMeBiU_G_@Nyc@}SoIqHAs@aIoOoCsHBy@}AkE_EkRwKaDwb@aCYi@eTaBif@s_@Cp@x@t@nd@n]bUfBFe@pF`@rMbA`@h@Lc@p@FVf@jHn@`KvCl@|@|CpP`FjLbAxCIb@~GtNr@ZlAdCjElDxKtFdH`B~OdIfShFtJzAzMb@lOU~MiCb@^hEZj[}OlMy@?]~KUtp@kKvB|@tRhO",
-   "pointCount": 70,
-   "start": [
-    35.598355,
-    139.738121
-   ],
-   "end": [
-    35.603048,
-    139.740274
-   ]
-  },
-  {
-   "id": "東京都:61",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "上之根大通り",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.01,
-   "curviness": 190,
-   "flow": 27.2,
-   "turnCount": 28,
-   "score": 58.4,
-   "baseScore": 58.4,
-   "spotCount": 0,
-   "polyline": "idmxEep_rYjReH|PoDnE?pZtCvSe@lFsAqNjByJ\\i[yDwJ\\wKdDeRxH{NlJb@M",
-   "pointCount": 15,
-   "start": [
-    35.625813,
-    139.430586
-   ],
-   "end": [
-    35.628136,
-    139.428729
-   ]
-  },
-  {
-   "id": "東京都:62",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "明治通り",
-   "ref": "416",
-   "highway": "primary",
-   "lengthKm": 7.11,
-   "curviness": 227.4,
-   "flow": 24.9,
-   "turnCount": 65,
-   "score": 58.1,
-   "baseScore": 58.1,
-   "spotCount": 0,
-   "polyline": "qi|xEiyusY`a@vETURZzQ`CvE@Nz@fPtHrQ|KjT}DlGiC`Ta@rLqHzNkChMeFlCUpo@vc@|B^lVi@pHyBbBkApOmTfIwI~BgAlJgAlBkA~HwIvAwKRoJ",
-   "pointCount": 29,
-   "start": [
-    35.70345,
-    139.70853
-   ],
-   "end": [
-    35.648382,
-    139.715152
-   ]
-  },
-  {
-   "id": "東京都:63",
+   "id": "東京都:22",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "青梅日の出線",
@@ -1606,8 +651,8 @@
    "curviness": 279.7,
    "flow": 20.5,
    "turnCount": 53,
-   "score": 58.1,
-   "baseScore": 58.1,
+   "score": 68.2,
+   "baseScore": 68.2,
    "spotCount": 0,
    "polyline": "wseyEulzpY}EtH_GjB_CvD_K|HmAjBsDlAaCzCaF~KsG~CkD`H{ChAiDnFcHbC}BtFuD|EeIlGaBtBaJ`G_EhAmCzBiArBsEdB_KnBa@fDkB`Bk@hCoFIkFaB",
    "pointCount": 29,
@@ -1618,460 +663,13 @@
    "end": [
     35.778268,
     139.218032
-   ]
-  },
-  {
-   "id": "東京都:64",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "北本通り",
-   "ref": "122",
-   "highway": "trunk",
-   "lengthKm": 3.98,
-   "curviness": 245.5,
-   "flow": 30.6,
-   "turnCount": 32,
-   "score": 57.7,
-   "baseScore": 57.7,
-   "spotCount": 0,
-   "polyline": "qchyEcf{sYzMcG~`@VnGv@hGwEJPgD`CuBl@s]eBsGDsS`JwSvDc]nImEh@_Q[sBR",
-   "pointCount": 16,
-   "start": [
-    35.763932,
-    139.736182
    ],
-   "end": [
-    35.777002,
-    139.733127
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:65",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "旧海岸通り",
-   "ref": "316",
-   "highway": "primary",
-   "lengthKm": 4.05,
-   "curviness": 188.3,
-   "flow": 40.2,
-   "turnCount": 19,
-   "score": 57.6,
-   "baseScore": 57.6,
-   "spotCount": 0,
-   "polyline": "{goxEkf}sYq\\uH`s@xOnc@~AtUyAsTjBgEM}^{B{TkE",
-   "pointCount": 9,
-   "start": [
-    35.636623,
-    139.746463
-   ],
-   "end": [
-    35.636623,
-    139.746463
-   ]
-  },
-  {
-   "id": "東京都:66",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "葛西橋通り",
-   "ref": "475",
-   "highway": "secondary",
-   "lengthKm": 5.31,
-   "curviness": 158.8,
-   "flow": 35.2,
-   "turnCount": 24,
-   "score": 57.6,
-   "baseScore": 57.6,
-   "spotCount": 0,
-   "polyline": "w}vxEuuktYtDhxCNjCrEzUmFcW}C_|C",
-   "pointCount": 6,
-   "start": [
-    35.67596,
-    139.820589
-   ],
-   "end": [
-    35.675894,
-    139.820682
-   ]
-  },
-  {
-   "id": "東京都:67",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "鶴川街道",
-   "ref": "19",
-   "highway": "primary",
-   "lengthKm": 6.08,
-   "curviness": 181.7,
-   "flow": 27.6,
-   "turnCount": 40,
-   "score": 57.4,
-   "baseScore": 57.4,
-   "spotCount": 0,
-   "polyline": "smoxE{yorYkAeMoA{Ceg@m{@]AAk@wCoFia@_s@sEcF_OqFlPpGdBdBhc@|u@xG`Npc@pu@tBhEhAlK",
-   "pointCount": 17,
-   "start": [
-    35.637541,
-    139.514062
-   ],
-   "end": [
-    35.637453,
-    139.514072
-   ]
-  },
-  {
-   "id": "東京都:68",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "明治通り",
-   "ref": "416",
-   "highway": "primary",
-   "lengthKm": 10.84,
-   "curviness": 221.4,
-   "flow": 23.8,
-   "turnCount": 101,
-   "score": 57.3,
-   "baseScore": 57.3,
-   "spotCount": 0,
-   "polyline": "itqxEy{wsY`BkE|BiOtDeHh@gCMwOqA{Hu@sSLuBnBaGh@iHQc@k@nIiBjFQ`Cv@hT~@lFVbQa@`CwCrF@nBeBnK}BbIElBpBnWY|FsAdJ_JnJkBhAiJdAgCjAwCdFkHrGeMpQ{GbCmX`@_DYwo@sc@oBNoFtBoDdC{OzCoLjH}UIyFdCgSjEkb@iUMuAcEFmf@wFqTuA",
-   "pointCount": 51,
-   "start": [
-    35.648849,
-    139.719174
-   ],
-   "end": [
-    35.704338,
-    139.708556
-   ]
-  },
-  {
-   "id": "東京都:69",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "江戸通り",
-   "ref": "407",
-   "highway": "trunk",
-   "lengthKm": 5.83,
-   "curviness": 229.2,
-   "flow": 35.2,
-   "turnCount": 38,
-   "score": 57.2,
-   "baseScore": 57.2,
-   "spotCount": 0,
-   "polyline": "{eyxEqyatYa@UtEfDpMdEyMmD}DeDcNqk@_LqUaTe[iMyFiWmOyWo\\uImGeGwCaE{DgF}CkIuGkGiHoGiFrGxEtO|OhBv@",
-   "pointCount": 22,
-   "start": [
-    35.687499,
-    139.770009
-   ],
-   "end": [
-    35.710542,
-    139.797645
-   ]
-  },
-  {
-   "id": "東京都:70",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "中原街道",
-   "ref": "2",
-   "highway": "primary",
-   "lengthKm": 12.14,
-   "curviness": 181.1,
-   "flow": 26.2,
-   "turnCount": 84,
-   "score": 57.1,
-   "baseScore": 57.1,
-   "spotCount": 0,
-   "polyline": "kskxEe}vsYnJn\\rCvCtWdPhVlItAhA|DzOjc@zt@z@xELnKb@zDjDpO|DjIxGzHnLzFbQrDnMdL|Nv`@`CbOaCsM{DmMaGuPsA_BiLkKyUcGgGiDaIaIkEmJaCoLo@qGI}Kw@iE}Si_@}FwHeG}KmDeOuAkAcVmIm[qRi@w@kJe]{Oe]_DwCyG_C",
-   "pointCount": 44,
-   "start": [
-    35.617979,
-    139.71427
-   ],
-   "end": [
-    35.622836,
-    139.720559
-   ]
-  },
-  {
-   "id": "東京都:71",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環八通り",
-   "ref": "311",
-   "highway": "primary",
-   "lengthKm": 4.38,
-   "curviness": 177.1,
-   "flow": 31,
-   "turnCount": 25,
-   "score": 57,
-   "baseScore": 57,
-   "spotCount": 0,
-   "polyline": "wxwxEyncsYaQ_EcJLug@cEg[_Ga`@lEBWgk@bKg`AxD",
-   "pointCount": 9,
-   "start": [
-    35.68028,
-    139.614685
-   ],
-   "end": [
-    35.718773,
-    139.614062
-   ]
-  },
-  {
-   "id": "東京都:72",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "府中街道",
-   "ref": "16;17",
-   "highway": "primary",
-   "lengthKm": 4,
-   "curviness": 180.2,
-   "flow": 42.4,
-   "turnCount": 17,
-   "score": 57,
-   "baseScore": 57,
-   "spotCount": 0,
-   "polyline": "w{eyEasfrYfs@D{k@HqaAgB_C{@_`@_ZaNuD",
-   "pointCount": 7,
-   "start": [
-    35.752438,
-    139.466894
-   ],
-   "end": [
-    35.770237,
-    139.472859
-   ]
-  },
-  {
-   "id": "東京都:73",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "本郷通り",
-   "ref": "17",
-   "highway": "secondary",
-   "lengthKm": 6.83,
-   "curviness": 163.5,
-   "flow": 26.6,
-   "turnCount": 42,
-   "score": 57,
-   "baseScore": 57,
-   "spotCount": 0,
-   "polyline": "_c}xEw~_tY`K{@zGwDzOuYlFnBROaG_B}OjX@h@}CrCkCx@wWbBcs@hMyDhBkYpSmT|C{D~CcQhHoSnPqNdIZc@vCc@tH{E~S_QnRiIfDkC",
-   "pointCount": 26,
-   "start": [
-    35.707522,
-    139.760601
-   ],
-   "end": [
-    35.726376,
-    139.753356
-   ]
-  },
-  {
-   "id": "東京都:74",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "津久井広域道路",
-   "ref": "510",
-   "highway": "secondary",
-   "lengthKm": 3.41,
-   "curviness": 210.1,
-   "flow": 21.1,
-   "turnCount": 34,
-   "score": 56.9,
-   "baseScore": 54,
-   "spotCount": 1,
-   "polyline": "{lexEudeqYhBzPlB~E~ElD~LrBhH~EbH~JbHjPxAbGeKyWyFyIyH{FoNmCyE{DiBcFwB}SPtB",
-   "pointCount": 17,
-   "start": [
-    35.586216,
-    139.295628
-   ],
-   "end": [
-    35.586302,
-    139.295592
-   ]
-  },
-  {
-   "id": "東京都:75",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環八通り",
-   "ref": "311",
-   "highway": "primary",
-   "lengthKm": 5.92,
-   "curviness": 169.8,
-   "flow": 37.2,
-   "turnCount": 27,
-   "score": 56.9,
-   "baseScore": 56.9,
-   "spotCount": 0,
-   "polyline": "et_xEwcysY`RiYjBaH~@y[~AsUYcFr@cQfCo\\rFuf@rF}IhM{IlE}FbLc`@vLg]hBgIj@o@`Ns`@}N`a@]zB",
-   "pointCount": 19,
-   "start": [
-    35.556675,
-    139.725559
-   ],
-   "end": [
-    35.54095,
-    139.770654
-   ]
-  },
-  {
-   "id": "東京都:76",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "奥多摩あきる野線",
-   "ref": "184",
-   "highway": "secondary",
-   "lengthKm": 7.03,
-   "curviness": 277.1,
-   "flow": 18.2,
-   "turnCount": 107,
-   "score": 56.8,
-   "baseScore": 56.8,
-   "spotCount": 0,
-   "polyline": "gidyEm|xpYqCpAwBhDsBjIuDfIwSlDqFe@yAZ}AbB}BpJ{FjB{AtAoAlDe@vFuDzCiBzDoA|Rw@jBeCxCwCh@qDlDiF`@yDhAaKnIcBnGAxATjAzC|DKr@uGfB}GvFoA|C{GhDgDrE}@EcFgD{B[_O|GGtAlBpCFnAkEpCwAtDdCfKoAhFRxGiDjEiAvE{DvAcDjEUzIyEnJaCrU[bI",
-   "pointCount": 54,
-   "start": [
-    35.74436,
-    139.232871
-   ],
-   "end": [
-    35.779342,
-    139.184136
-   ]
-  },
-  {
-   "id": "東京都:77",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環八通り",
-   "ref": "311",
-   "highway": "primary",
-   "lengthKm": 4.38,
-   "curviness": 170.2,
-   "flow": 28.7,
-   "turnCount": 26,
-   "score": 56.5,
-   "baseScore": 56.5,
-   "spotCount": 0,
-   "polyline": "ii_yE{jcsYf`AyDjv@{MlScB~VlF|AI~]hDfUb@nR~E",
-   "pointCount": 9,
-   "start": [
-    35.718773,
-    139.614062
-   ],
-   "end": [
-    35.680251,
-    139.614585
-   ]
-  },
-  {
-   "id": "東京都:78",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環七通り",
-   "ref": "318",
-   "highway": "primary",
-   "lengthKm": 4.19,
-   "curviness": 169.7,
-   "flow": 32.3,
-   "turnCount": 22,
-   "score": 56.4,
-   "baseScore": 56.4,
-   "spotCount": 0,
-   "polyline": "marxEsllsYsTjAu^LyMaAgBJtNr@pWPfQqAdaAsB|OoBrQwI",
-   "pointCount": 11,
-   "start": [
-    35.650954,
-    139.66042
-   ],
-   "end": [
-    35.636734,
-    139.66316
-   ]
-  },
-  {
-   "id": "東京都:79",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "白山通り",
-   "ref": "17",
-   "highway": "primary",
-   "lengthKm": 3.19,
-   "curviness": 175.3,
-   "flow": 34.9,
-   "turnCount": 16,
-   "score": 56.4,
-   "baseScore": 56.4,
-   "spotCount": 0,
-   "polyline": "e_ayE{_}sYzAq@~JaAdFcCbZeZbCu@~o@eHrNyCNe@nc@aJz@GJj@x@Ol@d@|CaA",
-   "pointCount": 15,
-   "start": [
-    35.727392,
-    139.745417
-   ],
-   "end": [
-    35.700932,
-    139.755515
-   ]
-  },
-  {
-   "id": "東京都:80",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "早稲田通り",
-   "ref": "438",
-   "highway": "primary",
-   "lengthKm": 4.96,
-   "curviness": 209.9,
-   "flow": 24.2,
-   "turnCount": 43,
-   "score": 55.8,
-   "baseScore": 55.8,
-   "spotCount": 0,
-   "polyline": "sz}xEggrsY`@kErAwEzE}H{BwEeEcFuAeD}CiQ{DwIw@eDYyH|AgF`GoM|CkTjGgO`BeQrPwMvBcE|Be_@hCkK[_W|@a@vDe^jG_M",
-   "pointCount": 24,
-   "start": [
-    35.711301,
-    139.690282
-   ],
-   "end": [
-    35.702236,
-    139.738194
-   ]
-  },
-  {
-   "id": "東京都:81",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "第一京浜",
-   "ref": "15",
-   "highway": "trunk",
-   "lengthKm": 3.97,
-   "curviness": 212.3,
-   "flow": 32.4,
-   "turnCount": 26,
-   "score": 55.6,
-   "baseScore": 55.6,
-   "spotCount": 0,
-   "polyline": "_sdxEyg{sYsLh@]g@sQ`By^qA{INsE{@_JcDSa@yF}AfXbI~GFpSrBxPFbMwARo@fHo@nD?pKjC",
-   "pointCount": 19,
-   "start": [
-    35.582077,
-    139.736448
-   ],
-   "end": [
-    35.580043,
-    139.735981
-   ]
-  },
-  {
-   "id": "東京都:82",
+   "id": "東京都:23",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "秋川街道",
@@ -2081,8 +679,8 @@
    "curviness": 262.6,
    "flow": 20.3,
    "turnCount": 52,
-   "score": 55.4,
-   "baseScore": 55.4,
+   "score": 65.2,
+   "baseScore": 65.2,
    "spotCount": 0,
    "polyline": "yidyE_~xpYtAzEdD|G`E`EpCvAxJ}@xGpDdCBdHaBpIiIrBBbMlN`GtM}AXmBxB]o@t@yB@sBxAmFbBuBrMwD`K{@nDyD^sFnAaBtAMvQdBrJqBnDzA",
    "pointCount": 29,
@@ -2093,10 +691,13 @@
    "end": [
     35.718295,
     139.23188
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:83",
+   "id": "東京都:24",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "陣馬街道",
@@ -2106,8 +707,8 @@
    "curviness": 259.6,
    "flow": 18,
    "turnCount": 83,
-   "score": 55.2,
-   "baseScore": 55.2,
+   "score": 64.7,
+   "baseScore": 64.7,
    "spotCount": 0,
    "polyline": "ijvxE_h~pYd@hDjQlPlBzCd@dKlCdMpBhCz@~Bz@dIjA|DN`DGn@}AhBgGzBkD~F~AvUtDdJhA|G{@dSq@h@mHFcCtCaC`AyHjTEjEpEnFp@xF{@vFiCvG}@\\{FuAcD~@k@tApA`JnBhEy@lNt@xClChCbF[jDgCfFr@p@fBmA|E",
    "pointCount": 43,
@@ -2118,710 +719,13 @@
    "end": [
     35.670161,
     139.21509
-   ]
-  },
-  {
-   "id": "東京都:84",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "蔵前橋通り",
-   "ref": "315",
-   "highway": "primary",
-   "lengthKm": 4.36,
-   "curviness": 147.9,
-   "flow": 29.3,
-   "turnCount": 22,
-   "score": 55.1,
-   "baseScore": 55.1,
-   "spotCount": 0,
-   "polyline": "gd_yEumrtYnN`UifA}cBqG}Lm]kj@l`@tn@",
-   "pointCount": 6,
-   "start": [
-    35.71796,
-    139.855152
    ],
-   "end": [
-    35.727784,
-    139.869305
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:85",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "第二京浜",
-   "ref": "1",
-   "highway": "trunk",
-   "lengthKm": 3.18,
-   "curviness": 209.1,
-   "flow": 44.4,
-   "turnCount": 15,
-   "score": 55,
-   "baseScore": 55,
-   "spotCount": 0,
-   "polyline": "sdcxE{yssYlWjKzF`A~y@sElHt@PW|`@`JlH~CXMHZvXnI",
-   "pointCount": 11,
-   "start": [
-    35.574656,
-    139.698375
-   ],
-   "end": [
-    35.547211,
-    139.692657
-   ]
-  },
-  {
-   "id": "東京都:86",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "永代通り",
-   "ref": "10",
-   "highway": "primary",
-   "lengthKm": 8.66,
-   "curviness": 148.2,
-   "flow": 26.7,
-   "turnCount": 48,
-   "score": 55,
-   "baseScore": 55,
-   "spotCount": 0,
-   "polyline": "uxuxEqwgtYlAqIp@if@VoAwBaeBW_BFeIvAsEzGcGrBaGzHu_@ImJIbJ{Ide@sAzCuFtEqAxE]zKjC~wAq@fu@sA`J_Vjs@eNlTD{@hHaK",
-   "pointCount": 25,
-   "start": [
-    35.670033,
-    139.800407
-   ],
-   "end": [
-    35.674541,
-    139.790782
-   ]
-  },
-  {
-   "id": "東京都:87",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "丸八通り",
-   "ref": "476",
-   "highway": "secondary",
-   "lengthKm": 3.24,
-   "curviness": 141.7,
-   "flow": 27,
-   "turnCount": 17,
-   "score": 54.9,
-   "baseScore": 54.9,
-   "spotCount": 0,
-   "polyline": "s~{xEqjntY`ESnI`BdYcBZR`e@cK~QiAfkA~T",
-   "pointCount": 8,
-   "start": [
-    35.701696,
-    139.83417
-   ],
-   "end": [
-    35.67339,
-    139.832968
-   ]
-  },
-  {
-   "id": "東京都:88",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "永代通り",
-   "ref": "1;20",
-   "highway": "trunk",
-   "lengthKm": 3.98,
-   "curviness": 199.5,
-   "flow": 44.1,
-   "turnCount": 18,
-   "score": 54.8,
-   "baseScore": 54.8,
-   "spotCount": 0,
-   "polyline": "gzxxE{a`tYtDuZSi@nB}N`@a@hBaNKi@^QnUiw@vBaFUE}BrFsUnw@Jh@_@XgBtM?|ByA|K_@RoDtY",
-   "pointCount": 20,
-   "start": [
-    35.68564,
-    139.761103
-   ],
-   "end": [
-    35.68574,
-    139.761316
-   ]
-  },
-  {
-   "id": "東京都:89",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "明治通り",
-   "ref": "306",
-   "highway": "primary",
-   "lengthKm": 3.26,
-   "curviness": 148.2,
-   "flow": 40.2,
-   "turnCount": 12,
-   "score": 54.7,
-   "baseScore": 54.7,
-   "spotCount": 0,
-   "polyline": "uf~xEk_mtYnGsGjBw@xe@dRdUfBveBoGQD",
-   "pointCount": 7,
-   "start": [
-    35.713234,
-    139.82726
-   ],
-   "end": [
-    35.68522,
-    139.826655
-   ]
-  },
-  {
-   "id": "東京都:90",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "新府中街道",
-   "ref": "17",
-   "highway": "primary",
-   "lengthKm": 5.43,
-   "curviness": 132.7,
-   "flow": 45,
-   "turnCount": 16,
-   "score": 54.5,
-   "baseScore": 54.5,
-   "spotCount": 0,
-   "polyline": "opzxEeherYzU@bO`Ad`ArCrXc@[ZgWZur@yBw\\oBuh@PfX?",
-   "pointCount": 11,
-   "start": [
-    35.694317,
-    139.46003
-   ],
-   "end": [
-    35.69323,
-    139.459932
-   ]
-  },
-  {
-   "id": "東京都:91",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "蔵前橋通り",
-   "ref": "315",
-   "highway": "primary",
-   "lengthKm": 5.75,
-   "curviness": 130.9,
-   "flow": 37.6,
-   "turnCount": 20,
-   "score": 54.4,
-   "baseScore": 54.4,
-   "spotCount": 0,
-   "polyline": "e_|xEwsltYj@wm@_AyHqMmQaQqR|[l`@~AjCp@dCPxEYvl@bExgBg@wImAaw@",
-   "pointCount": 13,
-   "start": [
-    35.701788,
-    139.825399
-   ],
-   "end": [
-    35.701397,
-    139.819315
-   ]
-  },
-  {
-   "id": "東京都:92",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "外堀通り",
-   "ref": "405",
-   "highway": "secondary",
-   "lengthKm": 9.6,
-   "curviness": 189.2,
-   "flow": 21.1,
-   "turnCount": 86,
-   "score": 54.3,
-   "baseScore": 54.3,
-   "spotCount": 0,
-   "polyline": "cazxE{|zsYfIfMnBbI`StEdLrAl@BnPkHlFiHrFoC~@kD\\iMx@qBd[_NfPaWlAeJWc@x@}Kw@wKzP_u@`EoNCy@wP`w@aC`Ka@VIrBx@nKi@hJe@TgAvLqNzUs[vNk@nA{@`Os@zB_G|CwFnHsQtHcJ_AkT}E{@gAaBuH_FkGcAg@",
-   "pointCount": 43,
-   "start": [
-    35.691864,
-    139.734698
-   ],
-   "end": [
-    35.69176,
-    139.733986
-   ]
-  },
-  {
-   "id": "東京都:93",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "芋窪街道",
-   "ref": "43",
-   "highway": "primary",
-   "lengthKm": 3.39,
-   "curviness": 140.3,
-   "flow": 34,
-   "turnCount": 14,
-   "score": 54.3,
-   "baseScore": 54.3,
-   "spotCount": 0,
-   "polyline": "mydyEkt|qY]H|VCrmAiM`x@DtXqL",
-   "pointCount": 6,
-   "start": [
-    35.74695,
-    139.4159
-   ],
-   "end": [
-    35.717445,
-    139.420304
-   ]
-  },
-  {
-   "id": "東京都:94",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "日光街道",
-   "ref": "4",
-   "highway": "trunk",
-   "lengthKm": 6.19,
-   "curviness": 187.7,
-   "flow": 27.7,
-   "turnCount": 42,
-   "score": 54.3,
-   "baseScore": 54.3,
-   "spotCount": 0,
-   "polyline": "wsiyEujhtYpw@{@f`@lHba@zKrDx@d@Wdi@fMjEF`FkAlEQnElAlF~C~IvAvJhJIc@vMtKpOtE{OkE{HsFaOeOaJoBiFsBy@P",
-   "pointCount": 23,
-   "start": [
-    35.771643,
-    139.803472
-   ],
-   "end": [
-    35.740039,
-    139.797705
-   ]
-  },
-  {
-   "id": "東京都:95",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "笹目通り",
-   "ref": "443",
-   "highway": "secondary",
-   "lengthKm": 3.47,
-   "curviness": 136.8,
-   "flow": 26.4,
-   "turnCount": 18,
-   "score": 54.1,
-   "baseScore": 54.1,
-   "spotCount": 0,
-   "polyline": "uwcyE_scsYnM~@iMsAuYcIyRiHw^iHYNkMwBmHEam@vEgKeA",
-   "pointCount": 11,
-   "start": [
-    35.741548,
-    139.615362
-   ],
-   "end": [
-    35.767309,
-    139.619879
-   ]
-  },
-  {
-   "id": "東京都:96",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "伏見通り",
-   "ref": "7",
-   "highway": "secondary",
-   "lengthKm": 5.67,
-   "curviness": 133.7,
-   "flow": 25.3,
-   "turnCount": 30,
-   "score": 53.6,
-   "baseScore": 53.6,
-   "spotCount": 0,
-   "polyline": "ei`yEgjxrYzM`@vg@hVec@yTaCk@_a@kBahAdEiRwA_tAiO",
-   "pointCount": 9,
-   "start": [
-    35.723875,
-    139.557642
-   ],
-   "end": [
-    35.75523,
-    139.560053
-   ]
-  },
-  {
-   "id": "東京都:97",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "東村山東大和線",
-   "ref": "128",
-   "highway": "secondary",
-   "lengthKm": 4.16,
-   "curviness": 209.3,
-   "flow": 20.3,
-   "turnCount": 43,
-   "score": 53.5,
-   "baseScore": 53.5,
-   "spotCount": 0,
-   "polyline": "{sgyEoufrYsAnBmEvANdA~GpF{CvU@`BxBzJdBlNzJjTnFpX~BlEpCbMdBbBnDpLCbKlBtDfGzFg@nNhAzKpA~DDjH{@xLZjFn@hCKdB",
-   "pointCount": 26,
-   "start": [
-    35.761416,
-    139.467282
-   ],
-   "end": [
-    35.752658,
-    139.427054
-   ]
-  },
-  {
-   "id": "東京都:98",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環八通り",
-   "ref": "311",
-   "highway": "primary",
-   "lengthKm": 4.06,
-   "curviness": 161.7,
-   "flow": 25.2,
-   "turnCount": 26,
-   "score": 53.4,
-   "baseScore": 53.4,
-   "spotCount": 0,
-   "polyline": "{knxEsmesYhPaENe@|JyB`@RnUqFtEaFzRka@xC}Ddf@mPb^mNxBoFzKuk@",
-   "pointCount": 13,
-   "start": [
-    35.632136,
-    139.624736
-   ],
-   "end": [
-    35.604672,
-    139.648813
-   ]
-  },
-  {
-   "id": "東京都:99",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "めじろ台グリーンヒル通り",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 6.65,
-   "curviness": 183.5,
-   "flow": 21,
-   "turnCount": 58,
-   "score": 53.3,
-   "baseScore": 53.3,
-   "spotCount": 0,
-   "polyline": "olnxEclhqYxYlMhOn@hD|AhBtCpL~\\ZzCJlQxBvGdG|G~Ax@~UTaVEgB_AeG}GeBkF{@uWaMa^}AuBiDyA{Ni@gXsMsFg@kF|@{WlOo\\~LZD",
-   "pointCount": 27,
-   "start": [
-    35.632235,
-    139.312176
-   ],
-   "end": [
-    35.642952,
-    139.307111
-   ]
-  },
-  {
-   "id": "東京都:100",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "鎌倉街道",
-   "ref": "18",
-   "highway": "primary",
-   "lengthKm": 3.32,
-   "curviness": 124.6,
-   "flow": 29.6,
-   "turnCount": 14,
-   "score": 53.2,
-   "baseScore": 53.2,
-   "spotCount": 0,
-   "polyline": "yuixE}_brYiQjAW]_j@xB}HiAeRzBsIAUZ{s@sAB_AmMs\\",
-   "pointCount": 11,
-   "start": [
-    35.60813,
-    139.443354
-   ],
-   "end": [
-    35.635278,
-    139.447614
-   ]
-  },
-  {
-   "id": "東京都:101",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環七通り",
-   "ref": "318",
-   "highway": "primary",
-   "lengthKm": 5.02,
-   "curviness": 109.4,
-   "flow": 36.6,
-   "turnCount": 15,
-   "score": 52.9,
-   "baseScore": 52.9,
-   "spotCount": 0,
-   "polyline": "{~jyE{wjtY[h~A~Ap`BZ^PpOq@`|@?pk@UTTf@?tYSV",
-   "pointCount": 11,
-   "start": [
-    35.778541,
-    139.815823
-   ],
-   "end": [
-    35.778315,
-    139.760552
-   ]
-  },
-  {
-   "id": "東京都:102",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "大久保通り",
-   "ref": "433",
-   "highway": "secondary",
-   "lengthKm": 3.27,
-   "curviness": 167.1,
-   "flow": 22.8,
-   "turnCount": 24,
-   "score": 52.8,
-   "baseScore": 52.8,
-   "spotCount": 0,
-   "polyline": "q|{xEkpvsYGoKp@oNUoD`H}[pAiWIyJbAcL{@sIkK}_@wJaMm@iJlBiGrAgNg@rF",
-   "pointCount": 15,
-   "start": [
-    35.701369,
-    139.712216
-   ],
-   "end": [
-    35.702736,
-    139.743675
-   ]
-  },
-  {
-   "id": "東京都:103",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "鎌倉街道",
-   "ref": "18",
-   "highway": "primary",
-   "lengthKm": 3.3,
-   "curviness": 116.3,
-   "flow": 29.5,
-   "turnCount": 13,
-   "score": 52.7,
-   "baseScore": 52.7,
-   "spotCount": 0,
-   "polyline": "{`oxEmzbrYdNr]p}@xBfTaC~HhAvi@wBF_@pPy@",
-   "pointCount": 8,
-   "start": [
-    35.635498,
-    139.447588
-   ],
-   "end": [
-    35.608366,
-    139.443405
-   ]
-  },
-  {
-   "id": "東京都:104",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "野猿街道",
-   "ref": "20",
-   "highway": "primary",
-   "lengthKm": 3.74,
-   "curviness": 197.7,
-   "flow": 21.7,
-   "turnCount": 34,
-   "score": 52.5,
-   "baseScore": 52.5,
-   "spotCount": 0,
-   "polyline": "}onxEahsqY[jLk@jF_AjCsAnAqLlEge@|b@mB`DmBhMrAiK~CcFhS{Q|OoPlLmEjA_AfAgDj@_FZiL",
-   "pointCount": 18,
-   "start": [
-    35.632787,
-    139.36785
-   ],
-   "end": [
-    35.632846,
-    139.367925
-   ]
-  },
-  {
-   "id": "東京都:105",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "品川埠頭線",
-   "ref": "480",
-   "highway": "secondary",
-   "lengthKm": 4.24,
-   "curviness": 163,
-   "flow": 22.3,
-   "turnCount": 31,
-   "score": 52.4,
-   "baseScore": 52.4,
-   "spotCount": 0,
-   "polyline": "mklxE_t~sYBqDo@oCoA}A}Ag@kW`@kDe@gKNwD~@kBrFmCvx@zBwx@\\sBx@wAfCy@~MQfDo@lWc@hCbAlAbBf@tCChE",
-   "pointCount": 22,
-   "start": [
-    35.621835,
-    139.753758
-   ],
-   "end": [
-    35.62166,
-    139.753659
-   ]
-  },
-  {
-   "id": "東京都:106",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "甲州街道",
-   "ref": "20",
-   "highway": "trunk",
-   "lengthKm": 3.88,
-   "curviness": 214.9,
-   "flow": 23.8,
-   "turnCount": 35,
-   "score": 52,
-   "baseScore": 52,
-   "spotCount": 0,
-   "polyline": "kgyxEmnssY_GcTg@wHuAuGm@sKt@qEfBiCvEiM`DwQP_JaAeMMh@~@~OWtEiB|L{EpOkBnDu@lFZhJnBlRrInXmAkB",
-   "pointCount": 22,
-   "start": [
-    35.687742,
-    139.696552
-   ],
-   "end": [
-    35.687742,
-    139.696552
-   ]
-  },
-  {
-   "id": "東京都:107",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "新武蔵境通り",
-   "ref": "12",
-   "highway": "primary",
-   "lengthKm": 3.48,
-   "curviness": 172.8,
-   "flow": 23.1,
-   "turnCount": 26,
-   "score": 52,
-   "baseScore": 52,
-   "spotCount": 0,
-   "polyline": "{szxEe~vrYu|@rAgGmAaZ}NuD_@_MV_HuB|AjAzCv@nOQbC\\xUzKlIzB",
-   "pointCount": 13,
-   "start": [
-    35.694859,
-    139.550594
-   ],
-   "end": [
-    35.705095,
-    139.55034
-   ]
-  },
-  {
-   "id": "東京都:108",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "東京環状",
-   "ref": "16",
-   "highway": "trunk",
-   "lengthKm": 8.56,
-   "curviness": 199.6,
-   "flow": 23.4,
-   "turnCount": 73,
-   "score": 51.8,
-   "baseScore": 51.8,
-   "spotCount": 0,
-   "polyline": "k_uxEc|kqYid@_IiJuCsCBkHxAuBQ}BcAoA{Ay@yDuJmq@mCgHmQeKg@BD]{EkD}CmDkD}B_B]cPdAeLsC_C?iChBwDvJaBfAsBNww@oTeJmDkW`o@gJrJ{MrJkYsIwQuAYk@{FwCyFuG{CwAeBY{MlB",
-   "pointCount": 38,
-   "start": [
-    35.665984,
-    139.330101
-   ],
-   "end": [
-    35.727488,
-    139.342898
-   ]
-  },
-  {
-   "id": "東京都:109",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "明治通り",
-   "ref": "416",
-   "highway": "primary",
-   "lengthKm": 3.07,
-   "curviness": 152.2,
-   "flow": 24.6,
-   "turnCount": 19,
-   "score": 51.8,
-   "baseScore": 51.8,
-   "spotCount": 0,
-   "polyline": "qo~xEskvsY{@q@_Y}I}`@tL}L}AxLnAz`@uLdYjJjLpF",
-   "pointCount": 9,
-   "start": [
-    35.714648,
-    139.711457
-   ],
-   "end": [
-    35.712812,
-    139.7105
-   ]
-  },
-  {
-   "id": "東京都:110",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "津久井道",
-   "ref": "3",
-   "highway": "primary",
-   "lengthKm": 3.1,
-   "curviness": 219.5,
-   "flow": 19.4,
-   "turnCount": 35,
-   "score": 51.5,
-   "baseScore": 51.5,
-   "spotCount": 0,
-   "polyline": "}eixEahnrY@rDfAhEvNlQlEbClOvBqOeBcCcAeIeJwEcHcBmGX}Py@uF_KoNkEeQiEsH",
-   "pointCount": 16,
-   "start": [
-    35.605586,
-    139.506093
-   ],
-   "end": [
-    35.609673,
-    139.516453
-   ]
-  },
-  {
-   "id": "東京都:111",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "青梅街道",
-   "ref": "4;5",
-   "highway": "primary",
-   "lengthKm": 4.76,
-   "curviness": 123,
-   "flow": 25.5,
-   "turnCount": 23,
-   "score": 51.4,
-   "baseScore": 51.4,
-   "spotCount": 0,
-   "polyline": "gg{xEgnhsYwGf[cLl]sJtS{EbPpFmP`FiJ`GiP~Lwb@vBoKp@_RO{^o@gTCkg@",
-   "pointCount": 14,
-   "start": [
-    35.697964,
-    139.640201
-   ],
-   "end": [
-    35.698044,
-    139.657846
-   ]
-  },
-  {
-   "id": "東京都:112",
+   "id": "東京都:25",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "八王子城山線",
@@ -2831,8 +735,8 @@
    "curviness": 183.2,
    "flow": 15.8,
    "turnCount": 52,
-   "score": 50.8,
-   "baseScore": 48,
+   "score": 59.1,
+   "baseScore": 56.2,
    "spotCount": 1,
    "polyline": "etgxE{rhqYqH_@gKiBu@o@aAyCcAw@}G?_KeBqEd@oEhE}E`BeFlGwJ~HgDeAcAcAgC{MyAgCiBm@mIPeFiBoF|@kJ~DeIpAsA[}JwHwGPmIbDkE`DcGlAmHhEuF{F",
    "pointCount": 31,
@@ -2843,35 +747,13 @@
    "end": [
     35.632405,
     139.313693
-   ]
-  },
-  {
-   "id": "東京都:113",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "海岸通り",
-   "ref": "316",
-   "highway": "primary",
-   "lengthKm": 3.19,
-   "curviness": 183.3,
-   "flow": 20.9,
-   "turnCount": 28,
-   "score": 50.5,
-   "baseScore": 50.5,
-   "spotCount": 0,
-   "polyline": "ofixEyi~sYwFxCkAbCWrE~@|NhYrGpMn@lGlKbBtA`RvDpI|DxQpLhBl@tB@|BcAvOiS",
-   "pointCount": 16,
-   "start": [
-    35.605683,
-    139.75213
    ],
-   "end": [
-    35.586534,
-    139.742362
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:114",
+   "id": "東京都:26",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "秋川街道",
@@ -2881,8 +763,8 @@
    "curviness": 218.7,
    "flow": 17.1,
    "turnCount": 75,
-   "score": 50.3,
-   "baseScore": 50.3,
+   "score": 59.1,
+   "baseScore": 59.1,
    "spotCount": 0,
    "polyline": "k~lyEyq~pYtEkCHkI\\mAlMaBbBPzGvErF\\bVoI`D_@bWzGlBlBrAdDvB|F~@vGj@`AhAXfI]nEz@jEaBrCBfAx@t@dBd@lJn@hBhPbFxA`A\\vBYlJv@dBpDvDHnBcAhGpFxQlAl@tFXlFhC|GlApA[hDkFhB?x@nAzBtSjAbCpCvC",
    "pointCount": 45,
@@ -2893,160 +775,13 @@
    "end": [
     35.752253,
     139.241397
-   ]
-  },
-  {
-   "id": "東京都:115",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "三ツ目通り",
-   "ref": "319",
-   "highway": "primary",
-   "lengthKm": 4.83,
-   "curviness": 121,
-   "flow": 24.4,
-   "turnCount": 24,
-   "score": 50.3,
-   "baseScore": 50.3,
-   "spotCount": 0,
-   "polyline": "izpxE_ejtY~BCd@\\eGp@iI@o`@~C_Cx@cPtAyJdGsLbLuU~JaJh@gQMqHeBQXuh@cGut@rC",
-   "pointCount": 17,
-   "start": [
-    35.644685,
-    139.812797
    ],
-   "end": [
-    35.684827,
-    139.806359
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:116",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "平山通り",
-   "ref": "155",
-   "highway": "secondary",
-   "lengthKm": 4.83,
-   "curviness": 140.5,
-   "flow": 21.2,
-   "turnCount": 32,
-   "score": 50.2,
-   "baseScore": 50.2,
-   "spotCount": 0,
-   "polyline": "}rsxEqctqY^oQfAmD|BwBtTiPbNyEbN{NxUsI|NkQ~X}@|^uTnBcBfJwNvGuO|OwEhEg@Xa@kJbC",
-   "pointCount": 18,
-   "start": [
-    35.658872,
-    139.372248
-   ],
-   "end": [
-    35.628147,
-    139.397979
-   ]
-  },
-  {
-   "id": "東京都:117",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "東京環状",
-   "ref": "16",
-   "highway": "trunk",
-   "lengthKm": 9.85,
-   "curviness": 171.5,
-   "flow": 23.1,
-   "turnCount": 73,
-   "score": 50,
-   "baseScore": 50,
-   "spotCount": 0,
-   "polyline": "s_ayEwlnqYhLkBnD^|BbBC`@jFfGrF|CrSjAhX~IfS{MhEiEbXmq@|RhIln@hOjBKdBcAxDqJxCmBjCF~KnChPcAlC`ApFdHfJ~GpPhJtA~EvJzs@v@jBxB~AlE~@pH}AxC@v_@jJtNfBjNzCvRzBmb@eG",
-   "pointCount": 37,
-   "start": [
-    35.727456,
-    139.343001
-   ],
-   "end": [
-    35.665984,
-    139.330101
-   ]
-  },
-  {
-   "id": "東京都:118",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "瀬田貫井線",
-   "ref": "427",
-   "highway": "secondary",
-   "lengthKm": 3.64,
-   "curviness": 163.6,
-   "flow": 19.8,
-   "turnCount": 30,
-   "score": 50,
-   "baseScore": 50,
-   "spotCount": 0,
-   "polyline": "uhuxEgwhsYuFDiKwCoSaBqNeF}DSoZfC_EjAmAjBuKGaE|BeF`Ao]V_I`F][oEfB{HzJqIeD",
-   "pointCount": 18,
-   "start": [
-    35.667471,
-    139.641643
-   ],
-   "end": [
-    35.698229,
-    139.638893
-   ]
-  },
-  {
-   "id": "東京都:119",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "所沢街道",
-   "ref": "4",
-   "highway": "primary",
-   "lengthKm": 5.93,
-   "curviness": 156.4,
-   "flow": 21.1,
-   "turnCount": 44,
-   "score": 49.9,
-   "baseScore": 49.9,
-   "spotCount": 0,
-   "polyline": "mfgyEifmrYrDkI|@eGvBoFlNeKfEkHhCuApFUxBkBlGwLjF}MzFe`@jD_MlLgKrKoP|Vkf@vFqI^GdD}K`GmCrKyH|A}CrA}EzQk_@eNnY",
-   "pointCount": 25,
-   "start": [
-    35.75927,
-    139.500693
-   ],
-   "end": [
-    35.731809,
-    139.541514
-   ]
-  },
-  {
-   "id": "東京都:120",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "八王子城山線",
-   "ref": "506",
-   "highway": "secondary",
-   "lengthKm": 3.48,
-   "curviness": 144.8,
-   "flow": 21,
-   "turnCount": 24,
-   "score": 49.8,
-   "baseScore": 49.8,
-   "spotCount": 0,
-   "polyline": "u|rxEcmkqYi^iEfh@bGtEdBvDnCzR`[zCpDbCRvHsDhCKpExAtDrFpQjLnBB~HiD",
-   "pointCount": 15,
-   "start": [
-    35.655311,
-    139.327702
-   ],
-   "end": [
-    35.637766,
-    139.318676
-   ]
-  },
-  {
-   "id": "東京都:121",
+   "id": "東京都:27",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "大島循環線",
@@ -3056,8 +791,8 @@
    "curviness": 178.1,
    "flow": 16.6,
    "turnCount": 124,
-   "score": 49.7,
-   "baseScore": 49.7,
+   "score": 58.4,
+   "baseScore": 58.4,
    "spotCount": 0,
    "polyline": "izgsEy_sqYjBfGvDfDts@nQ~It@vEG`FfBbOpBlLxCdJvE~H`@~FdBnCpCfG|BzYn@fMkBfDgAfCI`EuEfF}BxEGjE`BfKtAnHiDzCc@hAL`FzDhItBhE|FlC~@fE~DpClAdPfBxIHjBo@~FiGnFHrGhCxCuAbLfCz@MvAaBh@kI|EkI`AqDdAA|BlBrCg@vEsCdBwFjBmDpDeD~AiEtC}AdCEhCsAvNqB`CgAlBqKjJgNbBcEhB_NpBeHLaEhEmKbMaIvFaL`@sBb@KnIcQdCiC",
    "pointCount": 71,
@@ -3068,35 +803,13 @@
    "end": [
     34.695025,
     139.385394
-   ]
-  },
-  {
-   "id": "東京都:122",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "新荒川堤防線",
-   "ref": "449",
-   "highway": "secondary",
-   "lengthKm": 3.31,
-   "curviness": 172.4,
-   "flow": 19,
-   "turnCount": 30,
-   "score": 49.7,
-   "baseScore": 49.7,
-   "spotCount": 0,
-   "polyline": "osfyE_oetY}@mFSyJgBiSo@m]hCoVzAiG|A}EpGaM~FiItHgIlLsJxLeI`@Hf@w@vJaF|DgD",
-   "pointCount": 17,
-   "start": [
-    35.75624,
-    139.7888
    ],
-   "end": [
-    35.744033,
-    139.81743
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:123",
+   "id": "東京都:28",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "八丈循環線",
@@ -3106,8 +819,8 @@
    "curviness": 183.8,
    "flow": 18.1,
    "turnCount": 33,
-   "score": 49.6,
-   "baseScore": 49.6,
+   "score": 58.2,
+   "baseScore": 58.2,
    "spotCount": 0,
    "polyline": "e`hiEm}etYlBuB|C_GpBsAjHcC~CEjB_BdECbDw@dDcC|YqL~FuEfAKPuRj@}FaD{IoC{NA}DtAeF`I_I|CaMh@O",
    "pointCount": 22,
@@ -3118,35 +831,13 @@
    "end": [
     33.126802,
     139.813556
-   ]
-  },
-  {
-   "id": "東京都:124",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "日本橋芝浦大森線",
-   "ref": "316",
-   "highway": "primary",
-   "lengthKm": 3.22,
-   "curviness": 151.1,
-   "flow": 22.1,
-   "turnCount": 22,
-   "score": 49.6,
-   "baseScore": 49.6,
-   "spotCount": 0,
-   "polyline": "k~exE{xatYfCaAlDh@dNtOpA`EPrcA_@eKMut@k@cD}@qBqKsLyDkAcCv@",
-   "pointCount": 13,
-   "start": [
-    35.589017,
-    139.769904
    ],
-   "end": [
-    35.588904,
-    139.769612
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:125",
+   "id": "東京都:29",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "墨堤通り",
@@ -3156,8 +847,8 @@
    "curviness": 142.8,
    "flow": 20.2,
    "turnCount": 37,
-   "score": 49.6,
-   "baseScore": 49.6,
+   "score": 58.2,
+   "baseScore": 58.2,
    "spotCount": 0,
    "polyline": "iz~xEgaitYwJuHMcDe^wR_KIuLoAsPeE_SmN}F{FqHk@cCLkQrGwC~BiHfIqKtTKdBlDt[ObTwAvNeCxL{GlOeB`A",
    "pointCount": 22,
@@ -3171,57 +862,7 @@
    ]
   },
   {
-   "id": "東京都:126",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "柚木街道",
-   "ref": "20",
-   "highway": "primary",
-   "lengthKm": 8.03,
-   "curviness": 143.1,
-   "flow": 20.9,
-   "turnCount": 55,
-   "score": 49.3,
-   "baseScore": 49.3,
-   "spotCount": 0,
-   "polyline": "gyjxEarnqYEtFUgAjBoi@GaE{B{NuG_U[eEK{R_@yCiCsDiN_E{CwC}Mgc@oK{i@oLyRoGoTS@zGzTlLxRrAlErIzb@rMpb@jDfD`NxDjCzD^tC^dX|G`VdBbK\\`I",
-   "pointCount": 31,
-   "start": [
-    35.613797,
-    139.343853
-   ],
-   "end": [
-    35.613333,
-    139.349766
-   ]
-  },
-  {
-   "id": "東京都:127",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "八王子バイパス",
-   "ref": "16",
-   "highway": "trunk",
-   "lengthKm": 6.15,
-   "curviness": 194.7,
-   "flow": 21.4,
-   "turnCount": 56,
-   "score": 49.2,
-   "baseScore": 49.2,
-   "spotCount": 0,
-   "polyline": "svwxEerpqYdUyBlDf@lMbEbJtAxC?rIsA@TrQiB|NhClFAdCg@nDyBzMkMvB{@hCIxE`BlLtJNl@TIvK|KnB~@~BLjRsBdO{EzFDt^zJzWpRhCbAvDJrP_E|EA",
-   "pointCount": 32,
-   "start": [
-    35.679935,
-    139.354107
-   ],
-   "end": [
-    35.628801,
-    139.348925
-   ]
-  },
-  {
-   "id": "東京都:128",
+   "id": "東京都:30",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "八丈循環線",
@@ -3231,8 +872,8 @@
    "curviness": 173.6,
    "flow": 16.7,
    "turnCount": 85,
-   "score": 49,
-   "baseScore": 49,
+   "score": 57.5,
+   "baseScore": 57.5,
    "spotCount": 0,
    "polyline": "imciEiz~sYkDlBcCpE_FzEcAxDkLnLuApMi@rAuEfDuPrD}J~EcOxE{IhFiNt@gJq@mUsCoDkCkM_AiFeCuGiBsI{HkHM_KiKsGqC{@mAeAwJwAsDVqPgCcEoAwMwC_JdAsQc@yTrB_IZuF|AmElAgKn@}AjAwArAa@FcB`Am@vD{MhByBzFoDvImKhB}D",
    "pointCount": 47,
@@ -3243,110 +884,13 @@
    "end": [
     33.149109,
     139.78039
-   ]
-  },
-  {
-   "id": "東京都:129",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "東八道路",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 3.44,
-   "curviness": 117.2,
-   "flow": 23.7,
-   "turnCount": 17,
-   "score": 49,
-   "baseScore": 49,
-   "spotCount": 0,
-   "polyline": "opyxEwclrYcAmId@aVDoo@~JubA~CmKhToe@hEaK@s@jAaBb@eC",
-   "pointCount": 11,
-   "start": [
-    35.689203,
-    139.495159
    ],
-   "end": [
-    35.681611,
-    139.530612
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:130",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "第二京浜",
-   "ref": "1",
-   "highway": "trunk",
-   "lengthKm": 3.88,
-   "curviness": 103.4,
-   "flow": 28.7,
-   "turnCount": 14,
-   "score": 48.6,
-   "baseScore": 48.6,
-   "spotCount": 0,
-   "polyline": "uu}wEstrsYrHdCUL_l@oSce@{JiCeAeDIgv@tEmDGkCe@wf@_Sa@J",
-   "pointCount": 12,
-   "start": [
-    35.546668,
-    139.69242
-   ],
-   "end": [
-    35.577001,
-    139.699561
-   ]
-  },
-  {
-   "id": "東京都:131",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環七通り",
-   "ref": "318",
-   "highway": "primary",
-   "lengthKm": 3.28,
-   "curviness": 130.3,
-   "flow": 22.5,
-   "turnCount": 19,
-   "score": 48.6,
-   "baseScore": 48.6,
-   "spotCount": 0,
-   "polyline": "{ffxEgzwsYmFnAgAbBkUpe@oHxOmT`p@yO`Tm^`UcEpFg@`B",
-   "pointCount": 10,
-   "start": [
-    35.590375,
-    139.718921
-   ],
-   "end": [
-    35.609358,
-    139.692708
-   ]
-  },
-  {
-   "id": "東京都:132",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "川崎街道",
-   "ref": "20",
-   "highway": "primary",
-   "lengthKm": 12.19,
-   "curviness": 157.2,
-   "flow": 18.2,
-   "turnCount": 105,
-   "score": 48.5,
-   "baseScore": 48.5,
-   "spotCount": 0,
-   "polyline": "wyqxEqicrYz@sFrD}M|RuZ`GqQxBuB`LgFhAyA`AeDJoBuC{JcBqB{FuBuCgC{Mw[o@kQx@eLg@wCiCoGg@}[gDqXsAkPj@}EfM_TlRmj@`AuH\\}Ys@h[y@bGgRbj@sLzSe@`GvCba@fBlKb@tWfCfGh@vCy@bMl@nPxLfZjCtCfGzB`BxAfCfG^pDgA`FyAxB_LdFmCpCsGzSqOrSuAhCEfA",
-   "pointCount": 53,
-   "start": [
-    35.649719,
-    139.450005
-   ],
-   "end": [
-    35.648674,
-    139.453302
-   ]
-  },
-  {
-   "id": "東京都:133",
+   "id": "東京都:31",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "サンセットパームライン",
@@ -3356,8 +900,8 @@
    "curviness": 174.5,
    "flow": 16.2,
    "turnCount": 56,
-   "score": 48,
-   "baseScore": 48,
+   "score": 56.3,
+   "baseScore": 56.3,
    "spotCount": 0,
    "polyline": "{acsEwhpqYeCfF}@l@sB?}MdF}PjAsU]_DoB}@aEuN_EwDFqLzAkL~E{GBeM|B{Hw@aNAyCg@oCuAaBmGqBuCuYuFgCcDsDa@qB{CmCwGiFiHoBcAaAcCeEcA{GoD",
    "pointCount": 31,
@@ -3368,110 +912,13 @@
    "end": [
     34.796144,
     139.361179
-   ]
-  },
-  {
-   "id": "東京都:134",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "鶴川街道",
-   "ref": "139",
-   "highway": "primary",
-   "lengthKm": 5.28,
-   "curviness": 177.4,
-   "flow": 17.3,
-   "turnCount": 54,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "}`oxEojlrYzCzJjAzAfNdLjQtHbDzBtAfCx@dDd@rRjAdEbE|DxMtFhJ|JrApD`AlLzAlEzOxOrOpLlHlJ`F~LxCpA`FoChALH`AeBjC@~@dAnAfG`Br@|EfJOpNdC~FcA",
-   "pointCount": 32,
-   "start": [
-    35.635506,
-    139.496238
    ],
-   "end": [
-    35.603175,
-    139.463506
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:135",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "千歳通り",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.7,
-   "curviness": 151.6,
-   "flow": 17,
-   "turnCount": 42,
-   "score": 47.1,
-   "baseScore": 47.1,
-   "spotCount": 0,
-   "polyline": "u{oxEiufsY_BjA{Fx@yHnK{GpVmAtH}Bz@_BhC}EV{DnSuCnG_OhSiAxCsKdLyB~DyAjFaIyAkJj@gY~L{FkBcOyAiTcFoKj@",
-   "pointCount": 23,
-   "start": [
-    35.639787,
-    139.631086
-   ],
-   "end": [
-    35.671713,
-    139.608977
-   ]
-  },
-  {
-   "id": "東京都:136",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "青梅街道",
-   "ref": "5;16",
-   "highway": "primary",
-   "lengthKm": 4.38,
-   "curviness": 112.3,
-   "flow": 21.4,
-   "turnCount": 23,
-   "score": 46.9,
-   "baseScore": 46.9,
-   "spotCount": 0,
-   "polyline": "ae`yEk`}rY^dr@Rj@g@`[HbRe@jJ}EzXy@pHNfB]`DkBtOiC|NeDlI_OnYXdGxAfF{Ivn@",
-   "pointCount": 17,
-   "start": [
-    35.72321,
-    139.581659
-   ],
-   "end": [
-    35.730542,
-    139.535639
-   ]
-  },
-  {
-   "id": "東京都:137",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "鎌倉街道",
-   "ref": "18;3",
-   "highway": "primary",
-   "lengthKm": 5.67,
-   "curviness": 120.2,
-   "flow": 17,
-   "turnCount": 40,
-   "score": 46.8,
-   "baseScore": 43.9,
-   "spotCount": 1,
-   "polyline": "q}}wEix`rYcIwC{KiHu_@su@wAsAoJB{Gp@aBrAgLnPqBn@oNdAyIxGgWNwAWwAyAkLsYkAmBeBkAaO}CiUfB}E@uKyAgOaEPSfOrE",
-   "pointCount": 25,
-   "start": [
-    35.54793,
-    139.437012
-   ],
-   "end": [
-    35.584913,
-    139.449333
-   ]
-  },
-  {
-   "id": "東京都:138",
+   "id": "東京都:32",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "檜原街道",
@@ -3481,8 +928,8 @@
    "curviness": 160.1,
    "flow": 17.7,
    "turnCount": 40,
-   "score": 46.7,
-   "baseScore": 46.7,
+   "score": 54.9,
+   "baseScore": 54.9,
    "spotCount": 0,
    "polyline": "ky`yEkdopYs@_NzBiUFmFuBuCcFY{@u@YiFyCgEJqCo@mIyCmEwBmV\\kCnDuI`GsElB{JxAiBrA}EjB_IHuB_FeWiByX`@mO{@wJaAyCuE}FgDqH",
    "pointCount": 28,
@@ -3493,160 +940,13 @@
    "end": [
     35.730228,
     139.225879
-   ]
-  },
-  {
-   "id": "東京都:139",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "清砂大橋通り",
-   "ref": "10",
-   "highway": "secondary",
-   "lengthKm": 3.6,
-   "curviness": 103,
-   "flow": 19.5,
-   "turnCount": 19,
-   "score": 45.9,
-   "baseScore": 45.9,
-   "spotCount": 0,
-   "polyline": "yotxEcqrtYgFhLwAdM_Ctu@gAnR?|GSmF|FouAlAcFrJaRz@uF",
-   "pointCount": 11,
-   "start": [
-    35.663488,
-    139.855704
    ],
-   "end": [
-    35.662373,
-    139.85845
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:140",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "外苑東通り",
-   "ref": "319",
-   "highway": "primary",
-   "lengthKm": 3.41,
-   "curviness": 102.8,
-   "flow": 20.6,
-   "turnCount": 17,
-   "score": 45.3,
-   "baseScore": 45.3,
-   "spotCount": 0,
-   "polyline": "cs{xE{gysY|YrFpPtEpEvBxOdQf]`BjUnCz_@oPpBiBbBeDrNkF",
-   "pointCount": 11,
-   "start": [
-    35.699857,
-    139.726222
-   ],
-   "end": [
-    35.671746,
-    139.724549
-   ]
-  },
-  {
-   "id": "東京都:141",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "八王子バイパス",
-   "ref": "16",
-   "highway": "trunk",
-   "lengthKm": 5.66,
-   "curviness": 169.6,
-   "flow": 18.8,
-   "turnCount": 51,
-   "score": 45.2,
-   "baseScore": 45.2,
-   "spotCount": 0,
-   "polyline": "awmxEaqoqYuE@wP~DeFYeYgSsPiEqN}F_GNqNvEOWqRvByBKiB{@yIgIa@@{@yA{@[eKgK}EyAeCLwBv@iPpPcFdBmF@sSyCgERkM~ByHL_Hu@sNmE",
-   "pointCount": 30,
-   "start": [
-    35.628811,
-    139.348811
-   ],
-   "end": [
-    35.675526,
-    139.354422
-   ]
-  },
-  {
-   "id": "東京都:142",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "東八道路",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 4.48,
-   "curviness": 92.3,
-   "flow": 20.7,
-   "turnCount": 20,
-   "score": 45.1,
-   "baseScore": 45.1,
-   "spotCount": 0,
-   "polyline": "waxxEkasrY{A|Gu\\pt@}AlHHp@mKncAi@`{@v@dO|FrV\\tDkBjk@",
-   "pointCount": 11,
-   "start": [
-    35.681719,
-    139.530623
-   ],
-   "end": [
-    35.688394,
-    139.483914
-   ]
-  },
-  {
-   "id": "東京都:143",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環八通り",
-   "ref": "311",
-   "highway": "primary",
-   "lengthKm": 3.75,
-   "curviness": 127.3,
-   "flow": 18.4,
-   "turnCount": 26,
-   "score": 45,
-   "baseScore": 45,
-   "spotCount": 0,
-   "polyline": "wfixE{misYiDjToAtDuE|Cu`Ax^_B|A}Uxc@yC`DuSjFuAx@u[jGeD`B",
-   "pointCount": 12,
-   "start": [
-    35.605721,
-    139.645259
-   ],
-   "end": [
-    35.632631,
-    139.624579
-   ]
-  },
-  {
-   "id": "東京都:144",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "環七通り",
-   "ref": "318",
-   "highway": "primary",
-   "lengthKm": 3.23,
-   "curviness": 96.6,
-   "flow": 20.8,
-   "turnCount": 15,
-   "score": 45,
-   "baseScore": 45,
-   "spotCount": 0,
-   "polyline": "cecyEctmsYx~@vfAhDfDtClA|f@x@pi@B",
-   "pointCount": 6,
-   "start": [
-    35.738579,
-    139.666738
-   ],
-   "end": [
-    35.713566,
-    139.653715
-   ]
-  },
-  {
-   "id": "東京都:145",
+   "id": "東京都:33",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "鍛冶谷相模原線",
@@ -3656,8 +956,8 @@
    "curviness": 120.4,
    "flow": 13.6,
    "turnCount": 31,
-   "score": 44.7,
-   "baseScore": 40.1,
+   "score": 51.7,
+   "baseScore": 47.1,
    "spotCount": 2,
    "polyline": "qvjxE}adqYj@fBrKyFbDyIlByJnJkLlCuEjLkErFiD`OyO|KaDxSlB`JqBlUc@hD{A`MmJ",
    "pointCount": 16,
@@ -3668,35 +968,13 @@
    "end": [
     35.587422,
     139.305494
-   ]
-  },
-  {
-   "id": "東京都:146",
-   "region": "tokyo",
-   "regionName": "東京都",
-   "name": "川越街道",
-   "ref": "254",
-   "highway": "trunk",
-   "lengthKm": 3.66,
-   "curviness": 159.9,
-   "flow": 19.5,
-   "turnCount": 30,
-   "score": 44.5,
-   "baseScore": 44.5,
-   "spotCount": 0,
-   "polyline": "o~hyEiajsYgD|PwI|Q{D|VwDvIwNrPf@wAfMmNdDoHzD}VvKsVjLes@",
-   "pointCount": 12,
-   "start": [
-    35.768242,
-    139.648369
    ],
-   "end": [
-    35.766752,
-    139.65449
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:147",
+   "id": "東京都:34",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "若郷新島港線",
@@ -3706,8 +984,8 @@
    "curviness": 115.9,
    "flow": 16.4,
    "turnCount": 27,
-   "score": 44,
-   "baseScore": 44,
+   "score": 51.6,
+   "baseScore": 51.6,
    "spotCount": 0,
    "polyline": "otypEuq`qYja@rPfO`Cb@p@mG~p@iCxOoC|FyFtGmCvEUrA~FtBbZbX`NxO~BdEL`D",
    "pointCount": 15,
@@ -3718,10 +996,13 @@
    "end": [
     34.366932,
     139.244445
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:148",
+   "id": "東京都:35",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "吉野街道",
@@ -3731,8 +1012,8 @@
    "curviness": 146.7,
    "flow": 14.5,
    "turnCount": 84,
-   "score": 43.9,
-   "baseScore": 43.9,
+   "score": 51.6,
+   "baseScore": 51.6,
    "spotCount": 0,
    "polyline": "wanyEijupYqFhCyM`CmOrMsF`D}C~DgFxOUvH`Bpi@v@`F|A`FL~BgCdNg@dGgCtKJdGjArCbBnBlO|C|AfAz@`BTzBo@fIZ`BCpLdFzM_@hHmAbCgFhDaI`@{LGyApBs@lC\\fIK`CcCjFmAtFeD~AqFFcCt@_CpAwIfIe@dBd@bCxQvLr@fAT~Bo@nQcTjXuFzBoClCqOpE",
    "pointCount": 52,
@@ -3743,10 +1024,13 @@
    "end": [
     35.815733,
     139.152155
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "東京都:149",
+   "id": "東京都:36",
    "region": "tokyo",
    "regionName": "東京都",
    "name": "奥多摩街道",
@@ -3756,8 +1040,8 @@
    "curviness": 107.4,
    "flow": 16.7,
    "turnCount": 46,
-   "score": 43.2,
-   "baseScore": 43.2,
+   "score": 50.8,
+   "baseScore": 50.8,
    "spotCount": 0,
    "polyline": "e_kyEsjdqYdB}EvQeLfFqKfDaD|Bu@rN}AfQ{J~MsArI_E|FyFrAmHfC_FpKwJ|BkAtHeBnQg]rWmUlHoJ~AaAx[wGvDuCtCaA`T{Z`ExA`PuMvSqVvHkG~GgL",
    "pointCount": 29,
@@ -3768,8 +1052,411 @@
    "end": [
     35.727809,
     139.33484
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "東京都:37",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "芝溝街道",
+   "ref": "57",
+   "highway": "primary",
+   "lengthKm": 3.32,
+   "curviness": 115.2,
+   "flow": 17.4,
+   "turnCount": 22,
+   "score": 50.7,
+   "baseScore": 50.7,
+   "spotCount": 0,
+   "polyline": "__dxEuz{qYeByDo@Ss@uT}H{HuCeMqAqIe@yLiDy^sHgUw@gTeI_UIoXwAwJ",
+   "pointCount": 14,
+   "start": [
+    35.57888,
+    139.411789
+   ],
+   "end": [
+    35.587625,
+    139.445573
+   ]
+  },
+  {
+   "id": "東京都:38",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "高輪麻布線",
+   "ref": "415",
+   "highway": "secondary",
+   "lengthKm": 5.22,
+   "curviness": 107.6,
+   "flow": 15.6,
+   "turnCount": 36,
+   "score": 50.7,
+   "baseScore": 50.7,
+   "spotCount": 0,
+   "polyline": "shuxE{{{sYnD`BfHb@rV|DtIhF~Er@hBBzIgCvVzBjGc@rN@~Q|ErNxGRl@iPwHwQmEaLCoHd@sWqB{IvCcA?qGcAyGwEuLsB",
+   "pointCount": 24,
+   "start": [
+    35.667456,
+    139.739656
+   ],
+   "end": [
+    35.663311,
+    139.738296
+   ]
+  },
+  {
+   "id": "東京都:39",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "青梅街道",
+   "ref": "411",
+   "highway": "trunk",
+   "lengthKm": 4.93,
+   "curviness": 162,
+   "flow": 16.6,
+   "turnCount": 48,
+   "score": 50.3,
+   "baseScore": 50.3,
+   "spotCount": 0,
+   "polyline": "unlyEca~pY{@xEcFpIkAvIeBg@wGU_Al]cA~BKlG|Bz[lChQrMdWnFpArHVjAf@nCjHDbCk@bBqFpFiZrRgJdAqDvBoFh@kCvAwE`EiDfB}ArF}FvH",
+   "pointCount": 28,
+   "start": [
+    35.786188,
+    139.259221
+   ],
+   "end": [
+    35.797151,
+    139.223141
+   ]
+  },
+  {
+   "id": "東京都:40",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "墨堤通り",
+   "ref": "461",
+   "highway": "secondary",
+   "lengthKm": 4.43,
+   "curviness": 108.1,
+   "flow": 15.5,
+   "turnCount": 31,
+   "score": 50.3,
+   "baseScore": 50.3,
+   "spotCount": 0,
+   "polyline": "_m_yE{titYoWyM_ZeBuP{CsRoOcFkGyKg@wRdHiL~MkLrTC|AzDdYH|EKnMg@|GuAzLgB|F",
+   "pointCount": 17,
+   "start": [
+    35.719362,
+    139.810215
+   ],
+   "end": [
+    35.744429,
+    139.797717
+   ]
+  },
+  {
+   "id": "東京都:41",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "奥多摩街道",
+   "ref": "29",
+   "highway": "primary",
+   "lengthKm": 3.03,
+   "curviness": 118.6,
+   "flow": 16.4,
+   "turnCount": 22,
+   "score": 49.7,
+   "baseScore": 49.7,
+   "spotCount": 0,
+   "polyline": "_ayxE{m|qYqKdJ_J\\aDlDo@pCgHj{@kBpGwNvNqDnQmCnE_@bGyBbNyDnL",
+   "pointCount": 13,
+   "start": [
+    35.68672,
+    139.414856
+   ],
+   "end": [
+    35.699378,
+    139.387888
+   ]
+  },
+  {
+   "id": "東京都:42",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "大師橋瓦斯橋線",
+   "ref": "主102",
+   "highway": "tertiary",
+   "lengthKm": 3.28,
+   "curviness": 116.1,
+   "flow": 14.6,
+   "turnCount": 26,
+   "score": 49.5,
+   "baseScore": 49.5,
+   "spotCount": 0,
+   "polyline": "io|wEi~usYf@uCgGyT_MaIwBcCuIw^KiIuF}Q{@aMmB}NIwGd@uDlBmFvCgEjD{[JoK",
+   "pointCount": 16,
+   "start": [
+    35.540534,
+    139.709327
+   ],
+   "end": [
+    35.545967,
+    139.741516
+   ]
+  },
+  {
+   "id": "東京都:43",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "鶴川街道",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 3.59,
+   "curviness": 113.6,
+   "flow": 13.1,
+   "turnCount": 31,
+   "score": 49.1,
+   "baseScore": 46.2,
+   "spotCount": 1,
+   "polyline": "}j`xEq~brYgEcMaBkBwFcDkKgEg[{GqD]yFJ]sEoD{Iw@eFAuQ`CcOGyGe@cBeQqQeHkDkEkA{IfAmEg@",
+   "pointCount": 20,
+   "start": [
+    35.560308,
+    139.448246
+   ],
+   "end": [
+    35.580754,
+    139.469856
+   ]
+  },
+  {
+   "id": "東京都:44",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "秋川街道",
+   "ref": "32",
+   "highway": "primary",
+   "lengthKm": 4.53,
+   "curviness": 116.9,
+   "flow": 14.3,
+   "turnCount": 37,
+   "score": 48.1,
+   "baseScore": 48.1,
+   "spotCount": 0,
+   "polyline": "id~xEmzxpYvBsDdP}k@~FgKpIaFtBmDbC_Lf@iIBsRfBwDbE{P`EaKnBmMf@yIr@qA|D{Bj@_A`BqLGsJ~DmJvCqLlC{DxF{\\",
+   "pointCount": 23,
+   "start": [
+    35.712849,
+    139.232548
+   ],
+   "end": [
+    35.696268,
+    139.276319
+   ]
+  },
+  {
+   "id": "東京都:45",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "日野バイパス",
+   "ref": "20",
+   "highway": "trunk",
+   "lengthKm": 5.14,
+   "curviness": 103.2,
+   "flow": 18.3,
+   "turnCount": 29,
+   "score": 47.7,
+   "baseScore": 47.7,
+   "spotCount": 0,
+   "polyline": "{xvxEmi_rYgBgH]mHR_OO}fAeCyJ}EoIxExG|BfJF|tAv@tMtCrJjY~p@xBzKRzG",
+   "pointCount": 15,
+   "start": [
+    35.675181,
+    139.42951
+   ],
+   "end": [
+    35.669889,
+    139.417492
+   ]
+  },
+  {
+   "id": "東京都:46",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "大和バイパス",
+   "ref": "16",
+   "highway": "trunk",
+   "lengthKm": 3.57,
+   "curviness": 115.7,
+   "flow": 17.2,
+   "turnCount": 24,
+   "score": 46.9,
+   "baseScore": 46.9,
+   "spotCount": 0,
+   "polyline": "y`wwEohgrYoAdEcAvLs@bC{Bbk@yBlLcFjGoPtLdPgMlH{JxAsKtByg@I{IfA{HtAkE",
+   "pointCount": 15,
+   "start": [
+    35.512608,
+    139.470315
+   ],
+   "end": [
+    35.512744,
+    139.470798
+   ]
+  },
+  {
+   "id": "東京都:47",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "北野街道",
+   "ref": "173",
+   "highway": "secondary",
+   "lengthKm": 3.75,
+   "curviness": 98.9,
+   "flow": 12,
+   "turnCount": 31,
+   "score": 45.6,
+   "baseScore": 45.6,
+   "spotCount": 0,
+   "polyline": "kupxEqelqYeA`IXlDfIvTdBpC|ArH`K~PpA~D~D|E~SrRzBlF?~GqAzUtApSqI~h@PtC`BjH`@xF",
+   "pointCount": 18,
+   "start": [
+    35.643904,
+    139.331612
+   ],
+   "end": [
+    35.635135,
+    139.295489
+   ]
+  },
+  {
+   "id": "東京都:48",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "八丈空港道路",
+   "ref": "216",
+   "highway": "secondary",
+   "lengthKm": 3.91,
+   "curviness": 90.7,
+   "flow": 12.2,
+   "turnCount": 29,
+   "score": 45.3,
+   "baseScore": 45.3,
+   "spotCount": 0,
+   "polyline": "}qciEyletYpMjl@jPlRpBjEf@tCH`EuCbYRjC`AlBbp@~YjLhAfBm@z@eApAuKhDqEdGiQ",
+   "pointCount": 16,
+   "start": [
+    33.119191,
+    139.788446
+   ],
+   "end": [
+    33.100188,
+    139.771808
+   ]
+  },
+  {
+   "id": "東京都:49",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "町田街道",
+   "ref": "47",
+   "highway": "primary",
+   "lengthKm": 3.96,
+   "curviness": 89.8,
+   "flow": 11.1,
+   "turnCount": 32,
+   "score": 45.3,
+   "baseScore": 42.4,
+   "spotCount": 1,
+   "polyline": "qlixEynfqYsQxSqKjc@{FzN{ClDyA`@yRLkMbKmMjAeJvBuKtGsPhFeCC_Cy@aG_IqByAiQsF",
+   "pointCount": 17,
+   "start": [
+    35.606654,
+    139.302368
+   ],
+   "end": [
+    35.634646,
+    139.287669
+   ]
+  },
+  {
+   "id": "東京都:50",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "環七通り",
+   "ref": "318",
+   "highway": "primary",
+   "lengthKm": 3.9,
+   "curviness": 66.7,
+   "flow": 14.5,
+   "turnCount": 18,
+   "score": 44.3,
+   "baseScore": 44.3,
+   "spotCount": 0,
+   "polyline": "c}gyEajvsYpE`S~E`^dPx_AxQr]fz@zoA",
+   "pointCount": 6,
+   "start": [
+    35.762904,
+    139.711212
+   ],
+   "end": [
+    35.745492,
+    139.674816
+   ]
+  },
+  {
+   "id": "東京都:51",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "滝山街道",
+   "ref": "411",
+   "highway": "trunk",
+   "lengthKm": 3.72,
+   "curviness": 129.8,
+   "flow": 13.1,
+   "turnCount": 37,
+   "score": 43.5,
+   "baseScore": 43.5,
+   "spotCount": 0,
+   "polyline": "yrcyE}cdqYcIb@kFwAyFpAkQbAwFgBsBIa\\vIsCmAqJ{N{G_FaHcBiW}CmIdBgFsE{Ee@qD`@eGlCiE|DaBpD",
+   "pointCount": 20,
+   "start": [
+    35.740765,
+    139.290385
+   ],
+   "end": [
+    35.771207,
+    139.292107
+   ]
+  },
+  {
+   "id": "東京都:52",
+   "region": "tokyo",
+   "regionName": "東京都",
+   "name": "東京環状",
+   "ref": "16",
+   "highway": "trunk",
+   "lengthKm": 3.37,
+   "curviness": 69.4,
+   "flow": 9.8,
+   "turnCount": 24,
+   "score": 35.3,
+   "baseScore": 35.3,
+   "spotCount": 0,
+   "polyline": "sukxEk_nqY{Qi@{Cd@wZdVqC~@qCOsY{I_K@oNgC_Rm@mUvDoJlGwIlB",
+   "pointCount": 13,
+   "start": [
+    35.618339,
+    139.340857
+   ],
+   "end": [
+    35.646892,
+    139.336751
    ]
   }
  ],
- "hiddenCount": 1
+ "hiddenCount": 114
 }

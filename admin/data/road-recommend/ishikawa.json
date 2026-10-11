@@ -1,45 +1,19 @@
 {
  "prefecture": "石川県",
  "romaji": "ishikawa",
- "generation": 6,
- "contentHash": "949cc4e7725e",
- "builtAt": "2026-08-26T09:40:08.428Z",
+ "generation": 7,
+ "contentHash": "5c3fb144f4f3",
+ "builtAt": "2026-10-07T14:27:39.606Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
  "count": 150,
  "segments": [
   {
    "id": "石川県:0",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "百海七尾線",
-   "ref": "289",
-   "highway": "secondary",
-   "lengthKm": 9.02,
-   "curviness": 670,
-   "flow": 28.9,
-   "turnCount": 209,
-   "score": 83.3,
-   "baseScore": 83.3,
-   "spotCount": 0,
-   "polyline": "wj`aFaymcY\\~@a@dBtBzCnEXt@v@`AjGqAnBo@rE`FnIoC`FaFbAu@p@At@xCfBXx@jDdBD|@oAt@Cp@x@h@dBBr@zCd@\\MzE`@Xt@fD`CrBjAnC{@rDfA|H{ApJRjHhBzNUrCRbCrArCN`CBrFkCpAWbARfAjAv@?rEQ\\mACmA|AWjE_DMx@fDqBt@iDc@d@vAy@nF}@DyAqAc@^cBpGOtCp@tBmCrAh@z@FfBnDc@pBjAnCFLrCqAhBbAbAjAHbAkANyA`@ESfCiAzDIzBXdAWrCjBxDf@~Fp@dA}AlBa@`DkDjEc@rAdDlDCnCmBhDuA~@o@bBkEdCcBbEiAlHeLjPcDdMyH|Ne@~BuDdG_@dCeKzR[tXq@rD",
-   "pointCount": 102,
-   "start": [
-    37.034835,
-    137.04609
-   ],
-   "end": [
-    37.043067,
-    136.973505
-   ]
-  },
-  {
-   "id": "石川県:1",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "五十洲亀部田線",
@@ -49,8 +23,8 @@
    "curviness": 616.7,
    "flow": 29.4,
    "turnCount": 126,
-   "score": 82.7,
-   "baseScore": 82.7,
+   "score": 97.2,
+   "baseScore": 97.2,
    "spotCount": 0,
    "polyline": "{f}bFyl}aYJu@hAc@rAmDE}Ct@qB_@uC^wFfBqC|Ck@j@aAxFyDrAgFNkEyA}DCaF{IkPaGiP_@sALk@fACrAvBtC~@zAkCrBjDlAHlB_Bd@qP\\Q~ChA|CPXo@gAmEHk@bAy@`CY~GjDxAJpAfDlAPpDk@j@zDp@dAtAs@G{Bv@qApAz@zDx@pDiDtB~BtBr@t@`CbBrAhCy@dEv@|C_AbMtJzDjFrEOj@iA{B{EY}C^s@bBGj@oBgDgHyBoA?yA",
    "pointCount": 68,
@@ -61,10 +35,14 @@
    "end": [
     37.324974,
     136.818894
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:2",
+   "id": "石川県:1",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "函屋酒井線",
@@ -74,8 +52,8 @@
    "curviness": 739.1,
    "flow": 31,
    "turnCount": 123,
-   "score": 82.4,
-   "baseScore": 82.4,
+   "score": 96.9,
+   "baseScore": 96.9,
    "spotCount": 0,
    "polyline": "_tn`FgudbYeBWoCpDe@fBz@lFUjCjAvA}@fC|@n@Jv@}@fC}BtBrBrD?|@c@AkA{BwARc@gA|AeD_@{BkD_Ai@@[r@~@hArABAd@{Dx@}@uBg@C]bDoAhBRd@r@H?v@qD~AmAeAy@mF}AeBqDxBu@AoBi@gCeDqBQw@Xm@hDgBd@qBsAmGv@}@g@i@qA_AKeJtNoEtBoAxAqAc@bAtCWjGu@hAyB\\oGjHy@zEqIpBuIhLcIlEiDl@{B`B",
    "pointCount": 66,
@@ -86,35 +64,14 @@
    "end": [
     36.969541,
     136.817226
-   ]
-  },
-  {
-   "id": "石川県:3",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "城山線",
-   "ref": "177",
-   "highway": "secondary",
-   "lengthKm": 4.84,
-   "curviness": 674.3,
-   "flow": 31.7,
-   "turnCount": 103,
-   "score": 82.3,
-   "baseScore": 82.3,
-   "spotCount": 0,
-   "polyline": "yi{`Fi|acYgDa@c@_CRoEeDaIm@e@uBJuFhDq@fBCnD}CScCrGa@GMgBmBxCuBi@E`@`B`AGt@iJsDAf@nC~ADr@kEl@e@yDkBuBg@E_CbEsDlAgAhCcAr@qC|AoC{@[dDhBtBd@zDs@zAb@vCg@I]}@IqBs@B_@xGcAfBmPtLcM|NuAx@wH~A}D|BgC`Hk@D}BrIcB|Aw@rE",
-   "pointCount": 54,
-   "start": [
-    37.009094,
-    136.985173
    ],
-   "end": [
-    37.033243,
-    136.967802
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:4",
+   "id": "石川県:2",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "押水福岡線",
@@ -124,8 +81,8 @@
    "curviness": 841.5,
    "flow": 34.6,
    "turnCount": 278,
-   "score": 82.1,
-   "baseScore": 82.1,
+   "score": 96.7,
+   "baseScore": 96.7,
    "spotCount": 0,
    "polyline": "mft_FgexaYgRUsX_MzF_HtMeKtEeJnFwHf@sOfAiEpAh@dKI`CeApBEHwQpDo@dC`BbCaB\\yEjMyCl@cOOk@sBAwCzAY[fBqBGkC\\y@zBsAbCWd@s@kAmCwCEEs@dEFtBnAf@lCpAPb@e@HgB~A{BY_EZkCtC[vAn@pCaDf@Hn@xA`B}A`C`DnAeBhB|AhBbDn@mJCoF|@s@lBf@XWVsDlBcAtHx@p@tAh@A_@iDn@iK~BoAPgD`Au@s@yBn@Y~@dA|@Cb@}D~BaCf@FWtAVf@nAu@|@pB~Aq@vA`AXo@ImBvA`@n@[tAkGtAnA`Ba@f@pA~@eBh@d@dAgAr@vBxA{Bz@jDp@M~AcCJzAdAnA|GOnCh@XeDl@k@OaB]a@aAPaClCi@O]_AVcE[y@aA]b@sCw@g@cAwCgCsBd@wAz@MRg@F_ExAgLYuBTkC`FiAHkBiBEI}Ag@MUlBm@x@cBRa@`Cg@Sk@kDeAUQq@ViBoB{LJw@cAqDVeB",
    "pointCount": 140,
@@ -136,10 +93,14 @@
    "end": [
     36.781737,
     136.822128
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:5",
+   "id": "石川県:3",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "良川磯辺線",
@@ -149,8 +110,8 @@
    "curviness": 668.5,
    "flow": 27.3,
    "turnCount": 156,
-   "score": 82.1,
-   "baseScore": 82.1,
+   "score": 96.6,
+   "baseScore": 96.6,
    "spotCount": 0,
    "polyline": "gul`FicwbYrBfApAbF[|B_AAgC}DoAu@oFdDUx@nDnMa@hCsAxCUlFgA`Cs@zJb@dH]xAqF@uAcAeFkHi@\\KdCi@`@s@Q}AaCF`Bz@lCsAdD{BZiHw@y@|EfAjAxACf@xAKf@iCtAJdCo@bEQrM[`@k@MBaDYIqCzD{At@Or@x@|JwCGoFlFa@r@AdDkAlBLnC[GcBwKgGtEkA]QgBuDmC\\wAlByAnAwBFu@]IkDhCkMpG_HnKmGzE_DxA_BhCiDu@uDd@",
    "pointCount": 72,
@@ -161,10 +122,13 @@
    "end": [
     36.958116,
     136.903506
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "石川県:6",
+   "id": "石川県:4",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "鹿西氷見線",
@@ -174,8 +138,8 @@
    "curviness": 681.4,
    "flow": 32.7,
    "turnCount": 74,
-   "score": 81.9,
-   "baseScore": 81.9,
+   "score": 96.3,
+   "baseScore": 96.3,
    "spotCount": 0,
    "polyline": "kij`FigobYoCbAaBrDeB`A?bAfAzDcBzGiEhFK|Bo@~A_GrHkCjAqBtByAvDmBpBsBAKbAwAt@UjA~Ar@kAxCsBfAuB]ChDcEJUpBiBXe@W|AkAs@g@mDpDgI|EU`FsCzC`F~Gd@lGnClIFnAa@`AqJ~E",
    "pointCount": 40,
@@ -186,10 +150,14 @@
    "end": [
     36.935885,
     136.865752
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:7",
+   "id": "石川県:5",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "谷北六呂師線",
@@ -199,8 +167,8 @@
    "curviness": 600.6,
    "flow": 27.2,
    "turnCount": 93,
-   "score": 81.5,
-   "baseScore": 81.5,
+   "score": 95.8,
+   "baseScore": 95.8,
    "spotCount": 0,
    "polyline": "}yl{Egxp`Ya@kAsDQ}B{CaLy@{CeDmBsEoC}AsAoBt@_@|DIdHdE\\m@w@oAgIqDkAiAoGgBwGXeAg@Pq@pBXhDiB|OhB~BnBdD@O}CyAkEwCm@}BqDS^J`BvCrDg@PiA}@cHqJi@gFuBYbAtCEz@o@f@oBmAqFSq@HsAxAoAEiCaC",
    "pointCount": 46,
@@ -211,35 +179,14 @@
    "end": [
     36.126297,
     136.579666
-   ]
-  },
-  {
-   "id": "石川県:8",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "岩間一里野線",
-   "ref": "53",
-   "highway": "primary",
-   "lengthKm": 8.57,
-   "curviness": 608,
-   "flow": 27.4,
-   "turnCount": 190,
-   "score": 81.2,
-   "baseScore": 81.2,
-   "spotCount": 0,
-   "polyline": "gqi|E{tnaYM{Bh@{DH}HzKQ~CbAlDBv@MxDmDKu@sCgAUeAx@oDlDeB|BsF\\sGQsH`@mGKmA}AuACq@nBYtDsBFmB|CwGzBoKzADrAlAXxBl@PpA?bAm@tA^lDoBpBjAtDj@Fk@aA}Ai@mEfBy@t@kA\\{DxAkEbBcA`AoBnAi@hG_JoAoA_Dv@qBdCgJhCoDjFwACcCr@kBIgAgAu@eD\\iBxCoAt@cAhC?xByAvDmFfCaGvIwAzCsBtHkC|GkKfEp@lB}BpCj@bCiB|B[pEkEa@_BrDqDW{BRs@`LuCdEiDxA\\MkBv@eB`Co@?iE\\c@z@ACcAbENfD{@tB`@dBw@t@L~@uAvCBbFvBpA]",
-   "pointCount": 97,
-   "start": [
-    36.26276,
-    136.722864
    ],
-   "end": [
-    36.227114,
-    136.761482
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:9",
+   "id": "石川県:6",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "輪島浦上線",
@@ -249,8 +196,8 @@
    "curviness": 545.2,
    "flow": 25.3,
    "turnCount": 110,
-   "score": 81.1,
-   "baseScore": 78.2,
+   "score": 94.9,
+   "baseScore": 92,
    "spotCount": 1,
    "polyline": "}xecF_ldbYv@t@EdErDjDlCB~Ak@t@p@}@|Hx@dCZlDnCxDb@fCdAxAFhIgAdBE~DfAlDDtDrB^`@j@|@zHSfFj@nCdChA~KfBtAzAkBhLRjFbCjDa@jHbHtArBvAx@~BQfBuErKP|AfEhB?hBj@x@pFrB~AFDj@s@T}CaAo@d@xKxCtEzId@zCOzBgC~CkC^q@jAL~ChBtH\\fG",
    "pointCount": 55,
@@ -261,10 +208,14 @@
    "end": [
     37.376701,
     136.795359
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:10",
+   "id": "石川県:7",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "花園藤野線",
@@ -274,8 +225,8 @@
    "curviness": 535.2,
    "flow": 24.8,
    "turnCount": 316,
-   "score": 80.1,
-   "baseScore": 80.1,
+   "score": 94.2,
+   "baseScore": 94.2,
    "spotCount": 0,
    "polyline": "u|u`F{nncYGxCmChG^dBvAtB`@nIa@xFvCdJXfI]tDqC~GrAfId@pHh@hBkCnINlM{EtHeAhEAfBr@bEfBxBdNjEt@xQWx@wD`Dl@xDSjDfAfDE`Cb@xAhF_Al@fANdD_ExIyEpD{FjMEjApBjCkA|JxAfGqBvIf@zDcBtCmBzAi@fB]bImCn@Yd@w@`IeH|Kk@bCJbHyAdEgHkAuFzAqCrEmB~@TdBu@~D_CfCZxDe@jGk@X}A_Bo@@yChGq@bDeAfASpBwHvFxBtFdD|CzAbFs@dFyBjG`@jJSxAcH|FoAnB?|CdAfBPdCg@nBiBR[j@L`Ei@@{EoEmAzAiCp@s@bDAtByA`AqB`@wBSyCcDYsAmA|B}AXO`BcGs@iBLgAz@yEw@q@}@UcAx@yBGm@iBa@kCt@kAqDy@]sDrQiBe@]`@L~BdAhC\\hDa@bCqBzAmA{Gi@HSbCi@|@sADg@o@VcDW{@wCfAe@EwAoBsB?m@}@\\uCoHCi@WcEaIqCi@kCrD{BjAsK`CgDnDsGnDcIQiDzBsCRqB_B}FIqEgByCNeBdA",
    "pointCount": 151,
@@ -286,35 +237,14 @@
    "end": [
     37.028949,
     136.965797
-   ]
-  },
-  {
-   "id": "石川県:11",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "白山公園線",
-   "ref": "33",
-   "highway": "primary",
-   "lengthKm": 5.12,
-   "curviness": 566.1,
-   "flow": 26.8,
-   "turnCount": 108,
-   "score": 79.9,
-   "baseScore": 79.9,
-   "spotCount": 0,
-   "polyline": "utn{Ew~qaY|AtDv@lISrAnApDv@dHrBjHFzMaBrXV`@|@{AGnFcAbGb@zP~BtIdGtHPhL~F`IdElIdA\\vCa@vAdAnAxBb@dIk@bBc@~L[~B_CnAz@PnAe@jDqHz@uDlAaBXReA~AoAvIDrCsBlHuAcAcDr@}@lA~DS|DjD`CaKVA",
-   "pointCount": 45,
-   "start": [
-    36.125068,
-    136.739796
    ],
-   "end": [
-    36.115917,
-    136.705724
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:12",
+   "id": "石川県:8",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "氷見田鶴浜線",
@@ -324,8 +254,8 @@
    "curviness": 553.2,
    "flow": 25.6,
    "turnCount": 136,
-   "score": 79.1,
-   "baseScore": 79.1,
+   "score": 93.1,
+   "baseScore": 93.1,
    "spotCount": 0,
    "polyline": "cas`FwlubYgDe^vAuNlAW`B|Fp@\\bEsDxDqB|BuCn@JPz@p@V|DgAI`CXj@tEVxA}@b@lAdB~@t@AfA_BRoB{@kBaDaC@gB~Dy@~BqAv@iGf@gAhE^dB]Z_AAgCh@aAxDb@nGcCbAsExAsBCiC}EcGeDeC_@cARs@tAEjL|ClDpGrEo@l@i@`@mBzAUjByB`FFvCcAHoAsAoACs@fBaAfAkCjDc@lAiAJw@w@uDtAcExFKtCgBlAsCdBe@b@uAfFiBfEdA`JWzDq@",
    "pointCount": 72,
@@ -336,10 +266,14 @@
    "end": [
     36.937329,
     136.947193
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:13",
+   "id": "石川県:9",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "高屋出田線",
@@ -349,8 +283,8 @@
    "curviness": 440,
    "flow": 23.8,
    "turnCount": 193,
-   "score": 72.7,
-   "baseScore": 72.7,
+   "score": 85.4,
+   "baseScore": 85.4,
    "spotCount": 0,
    "polyline": "ya~cFuspdYzFuMpDoFlGaBxCb@`Cq@hEn@xK}AvBf@hHqDbDkFtCHfAu@hDsGQyChHcGd@gB~@u@d@wBpBgC|@kHc@mBlCe@tCcFxAYPy@UeBnAy@~COpCzCCrH`AtD_@xD`@zCfGhGd@zAhA~@zAxCjG|GxCIdAo@fCXr@jAvFe@hFtAlApEp@`@nBk@PkAQaDhA}BdFy@b@_BvD?vBt@lBDtBlCz@P`Dy@zDcGr@UpAZ|EdFPoArBs@NeC`EkEc@_EdCoIRsDzAcA|Dw@vCgE~BwHtGmGdEiHjGiF`@_F`CkAlEaI|CuBhBuMxEcNtI{H|Ka@fEmFxNo@bM}KxG}@tM}P`DxG",
    "pointCount": 91,
@@ -361,10 +295,14 @@
    "end": [
     37.450116,
     137.260821
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:14",
+   "id": "石川県:10",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "上黒丸大谷線",
@@ -374,8 +312,8 @@
    "curviness": 440.2,
    "flow": 24.2,
    "turnCount": 105,
-   "score": 72.2,
-   "baseScore": 72.2,
+   "score": 84.8,
+   "baseScore": 84.8,
    "spotCount": 0,
    "polyline": "_`rcFsnedYwBr@{BpC_Br@gEYmAZeC{A_BG{ByE{BPy@c@sDA{IjD]jDoExFcAXwF{AwD`FkCKyAm@yAj@aDHs@aD_Cq@uDPwBqBwCCyAmAcGiKaAiIm@sBgCoDu@oC_EwDkDuAuC}BeIBkC`AqCzCoA[{GnAmFsAsBvAaC_@yGeFyDs@eLhCmBtE{Fr@iC`BsCj@cB~DaHwAeAhBcBd@mCkC{Bi@",
    "pointCount": 57,
@@ -386,35 +324,14 @@
    "end": [
     37.495595,
     137.170814
-   ]
-  },
-  {
-   "id": "石川県:15",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "倉谷土清水線",
-   "ref": "207",
-   "highway": "secondary",
-   "lengthKm": 14.33,
-   "curviness": 427.5,
-   "flow": 23.5,
-   "turnCount": 261,
-   "score": 72.1,
-   "baseScore": 72.1,
-   "spotCount": 0,
-   "polyline": "ee{}EizgaYrFwInAqMbE}MhG{I|HqI`DyGlAoEbDqDfFwJr@}EjBaDr@mCjF_EtDwG~FgF|BwDfD{C~F_A`C{AvBcKnCiIp@qHfA_DdDeDxELvFkDtCoDtCqB|Do@lEiIpBaBfNsEfBsEfCmDzGeGjJ_DvCrBfDf@x@u@v@iCjDg@xF~C|DbAdC@tAw@p@uBx@m@jEnC`BCf@v@dEZEdCb@h@bDRvLvD`BjDbCxArEi@pC|@zGVhAv@xAdCrFxCdFlA|E|F`KnFfJcB~C`AnB@nC}@rEuDdBfAbKGpEoArEcI|FRzBzAt@y@lDH~CwB|BSxEqBrBK~B}AbDeGj@eEjA_DhFcAUcFdJeLNgBm@sF~@wBpD}DeAoIn@}HjBb@rAq@lBQpAZjAc@`AwFbBmD^qDb@_Ap@mFAmE|@a@^cAGiA_BgDYyBHoDdCkBk@qFo@aAMsAx@FfGxHnE`@b@a@ZcJRgBX?`BpL`AJ`BuA",
-   "pointCount": 128,
-   "start": [
-    36.516826,
-    136.687889
    ],
-   "end": [
-    36.431228,
-    136.747434
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:16",
+   "id": "石川県:11",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "小滝北川線",
@@ -424,8 +341,8 @@
    "curviness": 432.2,
    "flow": 24,
    "turnCount": 90,
-   "score": 71.4,
-   "baseScore": 71.4,
+   "score": 83.8,
+   "baseScore": 83.8,
    "spotCount": 0,
    "polyline": "q|lbFmcwaYu@Es@rAeAvGVvAWvBx@jAiATQnA\\lDjClBn@pBf@hJuBdBaEyBcAHqB`FWxDfBxC|Ew@bAdAa@xLtAbIHfEe@bCmD`BgAfCfA|Ot@`A`CTVlA_@hCqClCe@|An@pYlAhHjCE~DlEr@vJ|DpKlH|IZdBaAvAuM|@uBh@qCpBcFp@iEjF",
    "pointCount": 48,
@@ -436,10 +353,14 @@
    "end": [
     37.265139,
     136.727858
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:17",
+   "id": "石川県:12",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "旧若山上戸線",
@@ -449,8 +370,8 @@
    "curviness": 408.2,
    "flow": 23.8,
    "turnCount": 114,
-   "score": 70,
-   "baseScore": 70,
+   "score": 82.2,
+   "baseScore": 82.2,
    "spotCount": 0,
    "polyline": "iykcFsxgdYNqJaBkCg@gEw@qBwAeC{Cm@oIgMuCgI|@eGcAmE]_Sg@wAyCw@M}Ap@cA`Ew@fAeFbByC\\_Es@IsDnB{D`A}Ag@_AkJu@iCHo@n@MbAjAj@kEO}CoA_FmDcG@iIl@mBa@iJhBeLQcA`@{GlDgDd@uAdB{@lBmDj@}C|A{AhBm@bF_HjByG`EeDt@sAnC}Pa@_MxH{Qi@qKdIuV`BcBYoJlA{C",
    "pointCount": 58,
@@ -461,10 +382,14 @@
    "end": [
     37.41713,
     137.237289
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:18",
+   "id": "石川県:13",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "高岡羽咋線",
@@ -474,8 +399,8 @@
    "curviness": 449,
    "flow": 22.9,
    "turnCount": 93,
-   "score": 69.8,
-   "baseScore": 69.8,
+   "score": 82.1,
+   "baseScore": 82.1,
    "spotCount": 0,
    "polyline": "ukw_Fm{hbYy@bBw@TeF_CeGn@eBoByB|AaF~Ao@lAe@pEg@hA{IfH{BpDsDXiDw@wBj@q@jDEpGkAtBuEh@qG`FuBCaBr@mDe@u@rA|AbIw@|A{BBY^KpCZ|CG`K[pBy@r@aEb@UrE}AzAcC^y@~AYdCyANaB{@{BfCS|B}CdEMbHsAxA_BnFoA~JEjF_@x@mFpCcBdD",
    "pointCount": 53,
@@ -486,10 +411,14 @@
    "end": [
     36.850289,
     136.827851
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:19",
+   "id": "石川県:14",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "五十洲亀部田線",
@@ -499,8 +428,8 @@
    "curviness": 406.3,
    "flow": 23.5,
    "turnCount": 117,
-   "score": 69.7,
-   "baseScore": 69.7,
+   "score": 81.9,
+   "baseScore": 81.9,
    "spotCount": 0,
    "polyline": "kx|bFgsraYbGuEnAsE_@cNgC_KkLeRiAaDgC{CiEyAuG_FyLsG_AiC@aGqE}Q?iBbBuLdBsB~CcB~CkDxD?`JmM`Bv@|C@hBuAZeDdDx@NmBnAaATyAbAmAuB{GKuE`BAn@sBzA`AnBm@KiEgA_FF}AtDiLdDkDtAuIjAaAZ}Fp@s@tDKxAy@nBmL`BmB|ACrCfBzJ_@bAi@FkAa@_AiDcAc@gAu@mCSiEpBcDvAeAtBsI",
    "pointCount": 62,
@@ -511,35 +440,14 @@
    "end": [
     37.333911,
     136.792594
-   ]
-  },
-  {
-   "id": "石川県:20",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "小原土清水線",
-   "ref": "114",
-   "highway": "secondary",
-   "lengthKm": 10.67,
-   "curviness": 373.3,
-   "flow": 24.4,
-   "turnCount": 163,
-   "score": 69.1,
-   "baseScore": 69.1,
-   "spotCount": 0,
-   "polyline": "ovr}EmkdaY{DaBaAB_DrG{EOgDfHg@m@OoEqBgJ_CSeCyBkBx@c@eDJwB_FcCsDu@iB?g@b@cAnCI`Cc@VuAcBMkEw@c@cIXmChH{@j@uIaDkBMgDf@mEqEmJm@qHnBcCxC{B|@kGgBqQoAmFuAyAu@sAyBiBUkDkCmHuBaMwA{Hr@qBvBeCa@{HdBqA~@aFr@cDtCwBHrAs@s@mADm@dBcChDyKBoAaAiF_CgFPuA`AqA^}HdAmArEo@rD\\|@w@vCwIZ{B@gLUwAw@_AeJo@_A_AAgBkIgD[^]xDSnHi@f@eAaAs@zA_HaBuBtAmn@|CcEsC{CkEeHqDsI{AwJQoHXoCdAuB|BmFbB",
-   "pointCount": 94,
-   "start": [
-    36.473517,
-    136.670149
    ],
-   "end": [
-    36.535838,
-    136.688256
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:21",
+   "id": "石川県:15",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "林道城石線",
@@ -549,8 +457,8 @@
    "curviness": 417.1,
    "flow": 21.6,
    "turnCount": 63,
-   "score": 67.6,
-   "baseScore": 67.6,
+   "score": 79.4,
+   "baseScore": 79.4,
    "spotCount": 0,
    "polyline": "ofq`Fo_|bYkAkF}C{ACoDmAaCJyAc@uFuBgDw@sCmAoAaCs@oDaKgB{A{Bs@{EkKuCuB}@Q{EpA{Gq@yEzB_DkBuAAoCvDuEReGpGw@PgDaA_DcEeCDaBiAcBS}AwAeFg@{B_C",
    "pointCount": 34,
@@ -561,6 +469,185 @@
    "end": [
     36.978914,
     136.96768
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:16",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "末吉七尾線",
+   "ref": "116",
+   "highway": "secondary",
+   "lengthKm": 9.64,
+   "curviness": 368.8,
+   "flow": 22.4,
+   "turnCount": 159,
+   "score": 78.5,
+   "baseScore": 78.5,
+   "spotCount": 0,
+   "polyline": "g{`aFgzlbYvCbGRdDlBfBp@dDRpIhDpAv@rA@xGrChNGrDjCnEdR|M`Du@nDeCXk@@{Bf@u@fMoBdFp@pAlBv@jCPhEt@vBCbDsDvI{BpAsAQFfBwAvAyA^Cr@aCpBaA~BoDhCPb@~Ag@Lp@}BfNoArAe@`BWbLXnFY~@BbCy@tEcCcBm@ZFp@hBtBpC|@xKb[Yh@wAgAQXPz@dHxHjBxDr@rEhF`CvApBRpAYnFpBhHQfH^lCdGdJxDdNbE`GxAhKrCxGtArBrHpGxGfMzJhOxGbDbHlFzCnDxFOvClB~HtQzGtKJzE",
+   "pointCount": 83,
+   "start": [
+    37.037478,
+    136.877319
+   ],
+   "end": [
+    37.004451,
+    136.806711
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "石川県:17",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "輪島富来線",
+   "ref": "51",
+   "highway": "primary",
+   "lengthKm": 11.32,
+   "curviness": 381.7,
+   "flow": 22.7,
+   "turnCount": 190,
+   "score": 78.5,
+   "baseScore": 78.5,
+   "spotCount": 0,
+   "polyline": "sp~bFmljbYpBc@zBeBRcFzBeAn@aADqIdAaDpASlDp@jFYjJ|AdAeFcBgMjDaFtAw@`FXfDfDhEJzGvHdBX~Bu@hCtCrAj@lBQhMqGtB_@zCoB|@BdDhEhEhBnElEnCvHt@RfEqAdBHfDdCbCxFjDdBvD_@vA|@xC}B`BO|A`DtDvAzGjInAl@`CDtDjJnG\\`ZtTjHSrBdBlDApD`CfDr@`EPrCiApBDrBx@x@dCrCVfAn@rBnDhN`MzCzMlD|@~@|@f@fB~BlAZlDxAc@SnHnAxJMbCLhAxA`CpFpApIcDtHbAtGiAp@cAd@oE~AJbDy@bCqEbBaA`BLtLdEdAjDpGpEdFpLHhBiCzH^lErD`GtEfOzAhB",
+   "pointCount": 98,
+   "start": [
+    37.353223,
+    136.864869
+   ],
+   "end": [
+    37.280928,
+    136.834146
+   ],
+   "tags": [
+    "winding",
+    "flowing",
+    "caution"
+   ]
+  },
+  {
+   "id": "石川県:18",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "丸山加賀線",
+   "ref": "43",
+   "highway": "primary",
+   "lengthKm": 11.14,
+   "curviness": 353.6,
+   "flow": 24.6,
+   "turnCount": 160,
+   "score": 78.4,
+   "baseScore": 78.4,
+   "spotCount": 0,
+   "polyline": "kcl|Egh|_YfDwEiIiTeEgHk@wGMyTcF_URuErII~HgFbDcDlGmAm@cEpLcGnAuB~@a@tJWvEuBhHB`Do@pFuDrBwIrHqDbb@u@~LcBdCkB~B_KXsD{CoVs@gCoAgBwCAmGkL}@}GmCyJaAeSF{E`ByBjI}BhDgFrNgD~EoC~E[pCvAjFx@nDeAh@qA?kEh@iBrHiJ|IwTdCyDGy@iAaAAaA`CiB`A}FlBeBsAzCAdB~AaDjCsAvDy@|EBk@}AC}A`CaJeALqDnGuCc@jCW\\k@yAVwAa@oAd@bAaBlBi@jB}AdBsD`LeAUiA",
+   "pointCount": 81,
+   "start": [
+    36.275902,
+    136.464835
+   ],
+   "end": [
+    36.237182,
+    136.528911
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:19",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "池田江崎線",
+   "ref": "222",
+   "highway": "secondary",
+   "lengthKm": 4.47,
+   "curviness": 378.3,
+   "flow": 22.9,
+   "turnCount": 74,
+   "score": 78.4,
+   "baseScore": 78.4,
+   "spotCount": 0,
+   "polyline": "gpkbFmqoaYfCoEjAmOnAwB\\wDxCwLeAwGxDcJIgHgBeIByI~BoDbDwPnKcQjAqEMmFbAmAxBSvAeCQqAwAmACaArBcBlBAxD{JFmCl@yA~FYhBy@hBsG~BeDxA{AjCa@x@q@\\_Bg@gCe@u@cBi@f@uDdDUbC`BxHdB",
+   "pointCount": 42,
+   "start": [
+    37.25588,
+    136.727431
+   ],
+   "end": [
+    37.23959,
+    136.762732
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:20",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "布橋出合線",
+   "ref": "167",
+   "highway": "secondary",
+   "lengthKm": 9.77,
+   "curviness": 369.6,
+   "flow": 22.2,
+   "turnCount": 163,
+   "score": 78.3,
+   "baseScore": 78.3,
+   "spotCount": 0,
+   "polyline": "ygy|Euse`YQsA\\_J}EcDqCo@kAwAqAyFoIwQGgC{@mBq@wEnAeDUaGtAwBtDcDhBsEl@{CVqGhAiBtA_H_B}@c@}IXyHSiLc@mCJcCw@eEv@aGi@eJcBeESuDcCaFmDy[qDmGJqEqCqHfFwMnEcRc@wBpA{KI}F|DwLLmDoAsFkDsEsAsEgHyFu@uHuAeCD_Cc@iBRyCqAeDMeCg@c@SwBsCgDiLtAk@_@`AsAdEu@`@qAfAg@yAcLhCgDh@{BKuI`@}Ce@iCfAkJAkDkHoB{HHuFeAaCkEwKmJcGuKkFeFeBm@uGA",
+   "pointCount": 80,
+   "start": [
+    36.34317,
+    136.512753
+   ],
+   "end": [
+    36.362536,
+    136.596355
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "石川県:21",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "輪島浦上線",
+   "ref": "38",
+   "highway": "primary",
+   "lengthKm": 9.04,
+   "curviness": 394.5,
+   "flow": 21.9,
+   "turnCount": 163,
+   "score": 78.1,
+   "baseScore": 78.1,
+   "spotCount": 0,
+   "polyline": "ydacFaszaY`FaBzCTfGeBxBiF|EcDtB{DbBkAhAkDdAkHvJ}CfBcCpGwBfEgCvEfAbFKjElBjBjB|AEfCoD`@oHl@kBrFm@jC}H~E{Dp@qCHhBcFbHoAhERnBaAjBn@pAz@L`LmBlGvAtFeA`DFxAiAxGyBp@JdF~F~@AvAwA`E{@jCzFhEA`DnDxEUdBbDPdCl@h@bAkAl@aF[iDp@kE}@sHpAmAhLwD|F`BrFjIhDxKpE`A|AxA`EUtCcBxDfAhEeBtFbBlPCfKgDd@kAfF}ClOi@nAe@dCcCpFyC~AkJ",
+   "pointCount": 77,
+   "start": [
+    37.366691,
+    136.784008
+   ],
+   "end": [
+    37.308662,
+    136.798074
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
@@ -574,8 +661,8 @@
    "curviness": 255.6,
    "flow": 20.2,
    "turnCount": 379,
-   "score": 67.4,
-   "baseScore": 59.3,
+   "score": 77.8,
+   "baseScore": 69.7,
    "spotCount": 6,
    "polyline": "utpaFk`gcY`Bg@lAmHgGsKjJmIxFkA`D_CvA{D`AuLtBuDf@uHiCsCkDsAsFqGqBwFzAoC@uLs@wC_C_BkAgDh@mC_@{B}@GwDhAy@c@wC}HQ}L{BaB{DmF}@{GgGgF_DqEyD}CqAn@oCwDa@lAcCbBImC_D_OgBg@yFpCuIxJ}ArCgHjAwCw@}B~BeMxF{PnQuEp@mBjAkILkBiAmOsTeGaH}JyPyEeE}DuKaASuYbDoIkAm@x@}AbOm@bB}@l@uOnC{CbEaGxDgCdDeNfGqFrHPhG~EhEt@vBEjC{AvEZdAjJ~D~EIpDfFrElEnCbH`MlIxFjChI~AvIk@dHpCxIv@bBzAbAjEtAdAjBi@`AmEdEaBfBh@vDzDbIqC~A`@lDjIx@`@jCMZh@QbMyEvE_@jAV|CoCdEErBdCv@XtFd@l@nEaDvAChI~OyApGMvCmCrGB`BdGvB`LuAxEcCbDoGdDGfHfT`CxElAxGr@vNa@dMo@xC_D{A_H{AwH`@_B_@{GC{AdBWpF_BlJTfDlCjHBjA}EbWaDd[zDdKtDbF`@rElFbSOfCeBrEsHtDyG|IyCvFuEbDo@lIsCrF}CpOmGvMNv@pAXdEmBjBLrBhAfD|EL`FeC|FUtJvB~MRhHbCfGvC`N`B~@vG@dCpBRpCkBzV{D~KXlFzKrMvJbWxJtK|CtIxEbHjBlK`G|C~A|C~@hJg@dFaB~BmDzB_GrIhC`AvAKlRqMzN}SjEcNrFkIlEeJxF}E`AmG|BeCfG{@nKqJn@eBnAuO~@qC",
    "pointCount": 203,
@@ -586,160 +673,15 @@
    "end": [
     37.115795,
     136.941345
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "石川県:23",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "末吉七尾線",
-   "ref": "116",
-   "highway": "secondary",
-   "lengthKm": 9.64,
-   "curviness": 368.8,
-   "flow": 22.4,
-   "turnCount": 159,
-   "score": 66.8,
-   "baseScore": 66.8,
-   "spotCount": 0,
-   "polyline": "g{`aFgzlbYvCbGRdDlBfBp@dDRpIhDpAv@rA@xGrChNGrDjCnEdR|M`Du@nDeCXk@@{Bf@u@fMoBdFp@pAlBv@jCPhEt@vBCbDsDvI{BpAsAQFfBwAvAyA^Cr@aCpBaA~BoDhCPb@~Ag@Lp@}BfNoArAe@`BWbLXnFY~@BbCy@tEcCcBm@ZFp@hBtBpC|@xKb[Yh@wAgAQXPz@dHxHjBxDr@rEhF`CvApBRpAYnFpBhHQfH^lCdGdJxDdNbE`GxAhKrCxGtArBrHpGxGfMzJhOxGbDbHlFzCnDxFOvClB~HtQzGtKJzE",
-   "pointCount": 83,
-   "start": [
-    37.037478,
-    136.877319
-   ],
-   "end": [
-    37.004451,
-    136.806711
-   ]
-  },
-  {
-   "id": "石川県:24",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "布橋出合線",
-   "ref": "167",
-   "highway": "secondary",
-   "lengthKm": 9.77,
-   "curviness": 369.6,
-   "flow": 22.2,
-   "turnCount": 163,
-   "score": 66.7,
-   "baseScore": 66.7,
-   "spotCount": 0,
-   "polyline": "ygy|Euse`YQsA\\_J}EcDqCo@kAwAqAyFoIwQGgC{@mBq@wEnAeDUaGtAwBtDcDhBsEl@{CVqGhAiBtA_H_B}@c@}IXyHSiLc@mCJcCw@eEv@aGi@eJcBeESuDcCaFmDy[qDmGJqEqCqHfFwMnEcRc@wBpA{KI}F|DwLLmDoAsFkDsEsAsEgHyFu@uHuAeCD_Cc@iBRyCqAeDMeCg@c@SwBsCgDiLtAk@_@`AsAdEu@`@qAfAg@yAcLhCgDh@{BKuI`@}Ce@iCfAkJAkDkHoB{HHuFeAaCkEwKmJcGuKkFeFeBm@uGA",
-   "pointCount": 80,
-   "start": [
-    36.34317,
-    136.512753
-   ],
-   "end": [
-    36.362536,
-    136.596355
-   ]
-  },
-  {
-   "id": "石川県:25",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "輪島富来線",
-   "ref": "51",
-   "highway": "primary",
-   "lengthKm": 11.32,
-   "curviness": 381.7,
-   "flow": 22.7,
-   "turnCount": 190,
-   "score": 66.7,
-   "baseScore": 66.7,
-   "spotCount": 0,
-   "polyline": "sp~bFmljbYpBc@zBeBRcFzBeAn@aADqIdAaDpASlDp@jFYjJ|AdAeFcBgMjDaFtAw@`FXfDfDhEJzGvHdBX~Bu@hCtCrAj@lBQhMqGtB_@zCoB|@BdDhEhEhBnElEnCvHt@RfEqAdBHfDdCbCxFjDdBvD_@vA|@xC}B`BO|A`DtDvAzGjInAl@`CDtDjJnG\\`ZtTjHSrBdBlDApD`CfDr@`EPrCiApBDrBx@x@dCrCVfAn@rBnDhN`MzCzMlD|@~@|@f@fB~BlAZlDxAc@SnHnAxJMbCLhAxA`CpFpApIcDtHbAtGiAp@cAd@oE~AJbDy@bCqEbBaA`BLtLdEdAjDpGpEdFpLHhBiCzH^lErD`GtEfOzAhB",
-   "pointCount": 98,
-   "start": [
-    37.353223,
-    136.864869
-   ],
-   "end": [
-    37.280928,
-    136.834146
-   ]
-  },
-  {
-   "id": "石川県:26",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "池田江崎線",
-   "ref": "222",
-   "highway": "secondary",
-   "lengthKm": 4.47,
-   "curviness": 378.3,
-   "flow": 22.9,
-   "turnCount": 74,
-   "score": 66.7,
-   "baseScore": 66.7,
-   "spotCount": 0,
-   "polyline": "gpkbFmqoaYfCoEjAmOnAwB\\wDxCwLeAwGxDcJIgHgBeIByI~BoDbDwPnKcQjAqEMmFbAmAxBSvAeCQqAwAmACaArBcBlBAxD{JFmCl@yA~FYhBy@hBsG~BeDxA{AjCa@x@q@\\_Bg@gCe@u@cBi@f@uDdDUbC`BxHdB",
-   "pointCount": 42,
-   "start": [
-    37.25588,
-    136.727431
-   ],
-   "end": [
-    37.23959,
-    136.762732
-   ]
-  },
-  {
-   "id": "石川県:27",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "丸山加賀線",
-   "ref": "43",
-   "highway": "primary",
-   "lengthKm": 11.14,
-   "curviness": 353.6,
-   "flow": 24.6,
-   "turnCount": 160,
-   "score": 66.5,
-   "baseScore": 66.5,
-   "spotCount": 0,
-   "polyline": "kcl|Egh|_YfDwEiIiTeEgHk@wGMyTcF_URuErII~HgFbDcDlGmAm@cEpLcGnAuB~@a@tJWvEuBhHB`Do@pFuDrBwIrHqDbb@u@~LcBdCkB~B_KXsD{CoVs@gCoAgBwCAmGkL}@}GmCyJaAeSF{E`ByBjI}BhDgFrNgD~EoC~E[pCvAjFx@nDeAh@qA?kEh@iBrHiJ|IwTdCyDGy@iAaAAaA`CiB`A}FlBeBsAzCAdB~AaDjCsAvDy@|EBk@}AC}A`CaJeALqDnGuCc@jCW\\k@yAVwAa@oAd@bAaBlBi@jB}AdBsD`LeAUiA",
-   "pointCount": 81,
-   "start": [
-    36.275902,
-    136.464835
-   ],
-   "end": [
-    36.237182,
-    136.528911
-   ]
-  },
-  {
-   "id": "石川県:28",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "輪島浦上線",
-   "ref": "38",
-   "highway": "primary",
-   "lengthKm": 9.04,
-   "curviness": 394.5,
-   "flow": 21.9,
-   "turnCount": 163,
-   "score": 66.4,
-   "baseScore": 66.4,
-   "spotCount": 0,
-   "polyline": "ydacFaszaY`FaBzCTfGeBxBiF|EcDtB{DbBkAhAkDdAkHvJ}CfBcCpGwBfEgCvEfAbFKjElBjBjB|AEfCoD`@oHl@kBrFm@jC}H~E{Dp@qCHhBcFbHoAhERnBaAjBn@pAz@L`LmBlGvAtFeA`DFxAiAxGyBp@JdF~F~@AvAwA`E{@jCzFhEA`DnDxEUdBbDPdCl@h@bAkAl@aF[iDp@kE}@sHpAmAhLwD|F`BrFjIhDxKpE`A|AxA`EUtCcBxDfAhEeBtFbBlPCfKgDd@kAfF}ClOi@nAe@dCcCpFyC~AkJ",
-   "pointCount": 77,
-   "start": [
-    37.366691,
-    136.784008
-   ],
-   "end": [
-    37.308662,
-    136.798074
-   ]
-  },
-  {
-   "id": "石川県:29",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "珠洲里線",
@@ -749,8 +691,8 @@
    "curviness": 367.2,
    "flow": 23.4,
    "turnCount": 138,
-   "score": 66,
-   "baseScore": 66,
+   "score": 77.7,
+   "baseScore": 77.7,
    "spotCount": 0,
    "polyline": "azmcF_zycY`FbRzF`Dx@dGhBxBrD~HrFHf@hCX~M~AnDEzQxAnLtArCLdEn@nCaHdQaBhLuFvLwBjB]xBoAbAUtBt@jGjBpBExBoAnAAh@rC\\vCxBBlC}@`EBdA`CnK~DnH@jAk@pAjChLQnEpAzDq@|JhB|BtH|_@~BfFUbDzEtEr@~Cu@jFHxSu@vBAvAeBhCWrDwAdDaBjCqEtAiIHeEiBcAt@qAxGiAxBOfB\\|B}@~AIpDuBpBkCzGYpE}@zDiCtDiClBiCzHm@lFxBbJkDhL",
    "pointCount": 74,
@@ -761,35 +703,14 @@
    "end": [
     37.432359,
     137.027765
-   ]
-  },
-  {
-   "id": "石川県:30",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "仮生堅田線",
-   "ref": "213",
-   "highway": "secondary",
-   "lengthKm": 7.71,
-   "curviness": 378.2,
-   "flow": 21.1,
-   "turnCount": 138,
-   "score": 65.9,
-   "baseScore": 65.9,
-   "spotCount": 0,
-   "polyline": "cjo~EgkxaYaA~IcD~DoDq@aHh@yEqB{DlEg@jDG|D^fA|CPp@t@TbC}BxBIl@jA`ElCnFy@|BmElEfAzEaArDjN~QxD~Jc@dDkDxEeGrEaCdJPnBfCbEf@tFjCnCxAxKCvCaCnGo@|Dz@`CF`GuAnD~DlFpBhHtBpBY~Ct@lACz@gBz@E|@vFtAv@tAfAzFbAbBxGbEpAdDvCPbDtIzGxL`@xDpAjDtBfKUfLaJjQiBbGE~A`AhChDdC`DnFhJ~I",
-   "pointCount": 66,
-   "start": [
-    36.620024,
-    136.772517
    ],
-   "end": [
-    36.61257,
-    136.709656
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:31",
+   "id": "石川県:24",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道416号",
@@ -799,8 +720,8 @@
    "curviness": 380.8,
    "flow": 24,
    "turnCount": 475,
-   "score": 65.7,
-   "baseScore": 65.7,
+   "score": 77.6,
+   "baseScore": 77.6,
    "spotCount": 0,
    "polyline": "o_r{Ek`g`Yi@_AeAD{A|AyCjA]k@Du@}AoAyJVgA{AV}AMm@eBgAkBAmBmBBg@vBsBCu@a@Aq@fAsEMV}@~Bo@kB_Cw@CqC~AArCg@LqByCSyAqAuBImA|@wBOaCwCoDwBzA{@{@q@sELu@|Cc@e@qBz@yAyAwBkBr@cApBkAd@}BpDQlBcMhGoJi@aLb@iCq@oCZgAbC}GjEcAZ}BYwFxHgRmBaLBiCaAiJhDwB`BcEn@sIlF{K}AgDoHqCqDiAJeCdBmCXuCe@kUtDkBs@}Ho@kFuDyAsEgFgDcA\\wI`JsBbAwBe@}IsFmATcBtBsDR_AS}@_BkAa@oUd@yNuDwChAmAk@wBcDsFPkHmFuQiDyBsBmIz@cHsB_@a@SaD_Bk@qC|AsDKkCq@yGcFyAuBgJPoInHoKfDiDg@wCcDk@eDiDuB{ASk@z@IvGm@l@}Nq@iDgCoEhG}Cf@_DxCiFJyAw@{CeG}ByBiCWiCViHmAiFiKs@wDgAaBiCkBuK}CFsCoEsA{@gAmEyBgFmFoBl@m@m@cDc@oGIwChBuE|F{@\\oEKkBl@cCvAmCnF}Al@{@lAqA@}@~@}HjCqFNeMvBaGJkFYsBiB_Id@mGkAeC\\cCe@yDj@kAM_DgDkAGiE|BqCp@iExFmF?eFzFEp@{CnEaGfEeBToEpCeCfFo@^{Al@cCgDcA_@cBfCoBcBkHh@uAjHkC{HG{B_@[cFx@[eAsCGcAdBu@PUuAqAwAqCMiIiBcEKkCn@BdA{Ae@gB~@c@p@fAvBkIaEwBp@eEdDiJQgCx@}Cs@qFN}Ce@}IJeEj@iOoDkG_E}F{ImCgA}TeBiRCgBb@uB`BqBzFiKzGiKd@sF`F}KhBiBFeKaCqBR_Bx@{CjJsBdCsA^kKCqCb@cDpDi@lCsBhYkE|GqAbES`Hm@xCuFzK}D`OiM~RwC|C}C~A{Jj@cHpCgEHwJ}A}DIeCf@kCtC",
    "pointCount": 259,
@@ -811,10 +732,73 @@
    "end": [
     36.356868,
     136.50358
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:32",
+   "id": "石川県:25",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "仮生堅田線",
+   "ref": "213",
+   "highway": "secondary",
+   "lengthKm": 7.71,
+   "curviness": 378.2,
+   "flow": 21.1,
+   "turnCount": 138,
+   "score": 77.5,
+   "baseScore": 77.5,
+   "spotCount": 0,
+   "polyline": "cjo~EgkxaYaA~IcD~DoDq@aHh@yEqB{DlEg@jDG|D^fA|CPp@t@TbC}BxBIl@jA`ElCnFy@|BmElEfAzEaArDjN~QxD~Jc@dDkDxEeGrEaCdJPnBfCbEf@tFjCnCxAxKCvCaCnGo@|Dz@`CF`GuAnD~DlFpBhHtBpBY~Ct@lACz@gBz@E|@vFtAv@tAfAzFbAbBxGbEpAdDvCPbDtIzGxL`@xDpAjDtBfKUfLaJjQiBbGE~A`AhChDdC`DnFhJ~I",
+   "pointCount": 66,
+   "start": [
+    36.620024,
+    136.772517
+   ],
+   "end": [
+    36.61257,
+    136.709656
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:26",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "我谷今立塔尾線",
+   "ref": "153",
+   "highway": "secondary",
+   "lengthKm": 11.52,
+   "curviness": 263.4,
+   "flow": 32.3,
+   "turnCount": 94,
+   "score": 77,
+   "baseScore": 73.4,
+   "spotCount": 0,
+   "polyline": "ao_|Ewze_Y`AmLnFiFNu@qJ}Jc@wEkCgHeCeECwFbBiEe@cJhAaJvC{DpIaGbBkCc@iEcK{TYqEpCeTlIyJnLcE~@}Ad@aCY_DgC_JI_H{BiEn@}Fc@{Gc@oAeEyEWyEj@aBhDgDhOaI`IoNp@wR}L}NI{GZ_B`DsGhMmIz@{AMgBoCyCsAiFGmM\\sAdCiCHgB_@}Ch@qBxCgCrE_@p@m@PaAa@_GoAaFg@yFsAuAmC^o@k@FwAjBeD}GwIZiEiEkAk@cAf@qROiD`@_DmB_EgBoBGsB`@uBQk@mBcAV_FOyBi@o@sBa@}@uBeFZsIuEqBFgAc@mFiK{AmFwC}DaAkFcBoBiAiFo@y@_EWaF}AwB_C",
+   "pointCount": 96,
+   "start": [
+    36.21121,
+    136.35004
+   ],
+   "end": [
+    36.21739,
+    136.44598
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "石川県:27",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "阿手尾小屋線",
@@ -824,8 +808,8 @@
    "curviness": 369.7,
    "flow": 22.3,
    "turnCount": 69,
-   "score": 65.6,
-   "baseScore": 65.6,
+   "score": 77,
+   "baseScore": 77,
    "spotCount": 0,
    "polyline": "sap|E_~q`YjExIjDh@pAtA\\nA{BdYNt[ZvDq@nM_ErAiCg@oBaBuJV_Cn@Ql@\\dBsBhB_JwBo@lBsA|AyIdGuHwAaC?iFt@gDIkHbCgD]eCfAi@bGnA`GLfFvFdHbAT",
    "pointCount": 33,
@@ -836,10 +820,14 @@
    "end": [
     36.309083,
     136.551982
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:33",
+   "id": "石川県:28",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "河内藤瀬線",
@@ -849,8 +837,8 @@
    "curviness": 333.3,
    "flow": 23,
    "turnCount": 175,
-   "score": 65.4,
-   "baseScore": 65.4,
+   "score": 76.9,
+   "baseScore": 76.9,
    "spotCount": 0,
    "polyline": "ircbFothbY~AuE~HrG`ExBnFTdBWvDiCzCwJ~DsAhCgDvGkBnBcDlDkDZBPbBpLhJNfOjDjBzEtJfCvAlGNbN`Dd@T\\pDf@t@nFoCqAnCx@hIeAvDmAnAhD`HRlCvE|JH`CZT|AyAvCb@dDkA|Cj@jEkDxHoBjElD~DI~BwApAO`Gp@xAoElGoJz@ShC`@lFgBjB?lAxD`BPbDvBvAYR{F`GqA~EtDhMtBjC|AG`A|ArHvHhApCdCzB|LpCrHrBdB`MhFxBTfGE|B}BfAOzBdAvFpFxDnAhAfFfGnDx@xEAnTbCxDhBhAJx@cD|IgH@}@VUn@f@dMOhIbBlOjGfCzAxAfBG|EcBfL~AxD|I|CzOdE`G",
    "pointCount": 98,
@@ -861,10 +849,14 @@
    "end": [
     37.148409,
     136.812834
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:34",
+   "id": "石川県:29",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "長浦中島線",
@@ -874,8 +866,8 @@
    "curviness": 320.8,
    "flow": 23.8,
    "turnCount": 89,
-   "score": 64.5,
-   "baseScore": 64.5,
+   "score": 75.8,
+   "baseScore": 75.8,
    "spotCount": 0,
    "polyline": "cdsaFysobY`DaLt@w@xDu@rBcFxC_DhIbBvDs@~Bl@dAlD\\NjE\\lC[lDj@`CpBpFAzBhBp@vBlAlArDxJPxAShKnCdFdAtI~@zAZbBkAtEHf@h@cArCBNz@jE|EzECbIdBd@dHQrAaClBeC|HkCdEyCn@y@x@}DdMBhDrBlQlAdCxGfGp@jGpAfDNdBWtHmBhB[vJwZve@tOvQ",
    "pointCount": 54,
@@ -886,10 +878,14 @@
    "end": [
     37.114784,
     136.852064
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:35",
+   "id": "石川県:30",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "滝又三井線",
@@ -899,8 +895,8 @@
    "curviness": 356.4,
    "flow": 21.7,
    "turnCount": 78,
-   "score": 64.4,
-   "baseScore": 64.4,
+   "score": 75.6,
+   "baseScore": 75.6,
    "spotCount": 0,
    "polyline": "ayxbFg{jbYd@QlEdBvCQlAy@hAoCdAk@tHXfIbBdFqFzH{EdCwOhDiFvHuQz@{Fe@eDj@}CAwBlAmFxJwRd@qImDeDCuBwAcFEwCgGsFuAi@u@sDmFeFsBaEeAyCBaB}AkIcA_Bl@sB\\cIgK}FrAmHsBcA",
    "pointCount": 39,
@@ -911,35 +907,13 @@
    "end": [
     37.316996,
     136.902668
-   ]
-  },
-  {
-   "id": "石川県:36",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "大屋杉山線",
-   "ref": "279",
-   "highway": "secondary",
-   "lengthKm": 3.71,
-   "curviness": 332.4,
-   "flow": 23.7,
-   "turnCount": 52,
-   "score": 64.3,
-   "baseScore": 64.3,
-   "spotCount": 0,
-   "polyline": "gjycFywaeY~D}DtD_J|Cj@`B}@~Do@|BjBlBtEfBlBfFAbJjGlKpAvC~A\\t@HrGxBpEt@|@vGzA|B~Av@jBbEs@jA_EfIc@fU_JbB{Ax@mBrBlBjLCzFxDlFH",
-   "pointCount": 30,
-   "start": [
-    37.490445,
-    137.312125
    ],
-   "end": [
-    37.463032,
-    137.308962
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "石川県:37",
+   "id": "石川県:31",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "穴水剱地線",
@@ -949,8 +923,8 @@
    "curviness": 327.1,
    "flow": 22.3,
    "turnCount": 375,
-   "score": 64,
-   "baseScore": 64,
+   "score": 75.4,
+   "baseScore": 75.4,
    "spotCount": 0,
    "polyline": "}nfbFmnrbYdAhDpBv@e@be@mCfFrEzJvGpJpBlBpCZzDnDXtD]~ByDdHaGdCgD|IsIbON~F_@jEj@lHGzQp@~GrI|JtHxAbDtEb@tCHnTp@tKExDdAdCzAdBhDlB`EvHr@ZtHxL|DjErKtFbBb@pGDfAr@bAbFx@nLhDvHvAnBrCTrHhCtGbMhCxAJv@i@dBB~@`CpBhCtElGrNo@`DoHbIcCzFkLvAoFe@gCzDiBpA}@~BDhEeI~Lm@nC?hBqCnEmBnAuCxI}JlNoAfF{EfCuA_@_Bf@{EAcHkCyEW}AaBiAYgAoCkBKwA|@oChTbAfCIpEkCfK@dEmGrGg@fQh@nAbCjBz@~BrEj@hC~B~@fGDrEdDnN|DfF|DpBd@vGyB~BBrDf@jBxAfBB|FZbBbBxDbBbAx@pCbAt@g@~DoBjDuBnByElAeRi@qE|I?`A~@dCv@|NaGdKN~@bCxC?jDmCxKgD~FqCpBuAxDWhC}Bz@_DXkBjECnKYrAn@`G}E~KuDpBgDf@_FOaCw@kF~@cHCq@v@l@vIa@bCXfGjBjGhCpCu@|JzBrDIxApApGz@v@x@]vC`AjE?ThB~Af@fEoBrBGhBu@p@lDCnBwArDQdDdDr@a@dCsBhBmFs@qBr@gA~B_@fG_ElKgB`B_@~Cv@nF`CrDzA|Fo@~HFfCeCtCzBpElL`Kg@zAG|DbC~D\\nHxBtDpCtH|DfFyAhMP~BrAdBjAbDaAbJf@zJaDjCW|@dAtMzFtKr@f@FhNdDf_@EjC~AvMc@rIDdHeAxB{AjA{@tC",
    "pointCount": 208,
@@ -961,10 +935,14 @@
    "end": [
     37.230922,
     136.70545
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:38",
+   "id": "石川県:32",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "芝原石引町線",
@@ -974,8 +952,8 @@
    "curviness": 346.4,
    "flow": 20.3,
    "turnCount": 222,
-   "score": 63.9,
-   "baseScore": 63.9,
+   "score": 75.1,
+   "baseScore": 75.1,
    "spotCount": 0,
    "polyline": "a|_~EsshaYBsG~@oDjBqBdCy@u@}Gf@sEz@_BxK_IrA}IzBwIEiCw@}AiGcBeBqB{@yBJwEfDyHxBuNq@uFgCeBk@oACcDt@eCzBaClAWvFTtBe@dF{Id@eCLsGqAiPn@aGCyBuIkHu@aCk@cHDyB~CaKp@}LbA_BnE_BtFiFhDuAvGmR~FqE~Fu@`GcGnAgCq@uOmA{IkAkS{BcFiByHNsLy@gCByEt@_FjHqQ~NmJrGc@vB{B~Be@lByB|Aa@IkBuFwF[yA{@i@KgA`EYBwC`@a@r@tFaArAD^nAXxEaAfCtCHhAr@v@tBz@xAOz@`@d@zAw@pC}AdCX~@|Ae@dBoBbDWdAiAhE_AjH?zRwBhA^|@rAhAT~C{AzEAxAvAjGrB`C`EfCxAhCPbD`BnGtAfFvDdCz@rDzCfCjE|PzKfCrC",
    "pointCount": 113,
@@ -986,10 +964,14 @@
    "end": [
     36.493814,
     136.754361
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:39",
+   "id": "石川県:33",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "羽咋田鶴浜線",
@@ -999,8 +981,8 @@
    "curviness": 333.2,
    "flow": 20.5,
    "turnCount": 134,
-   "score": 62.6,
-   "baseScore": 62.6,
+   "score": 73.5,
+   "baseScore": 73.5,
    "spotCount": 0,
    "polyline": "ork`Fmx}aYsFdG}Cq@{Cn@kHS{B_D}FwByCEeBgDsB?eBw@oD]e@w@}@aGe@a@uGxG}AUcA}BgVnE_Gc@sJ@eA_BeBcAuGgA{EoHeGsCg@cAAcCs@wEwDqAgA{AaBc@yAsD_DyB}IqAoJqEyCcJ}EaF}EgCmVgHaGw@mGNgCaB{BvAuABsD{AsJyI_D~B]bCsA`@{AtCeCtBoNIaGqAm@`FsDrMyBlBaJrBuBrBaAbD]bHwA`EmBlAwGd@wEvBo@_Bm@S",
    "pointCount": 67,
@@ -1011,35 +993,14 @@
    "end": [
     36.988143,
     136.807575
-   ]
-  },
-  {
-   "id": "石川県:40",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "我谷今立塔尾線",
-   "ref": "153",
-   "highway": "secondary",
-   "lengthKm": 13.29,
-   "curviness": 324.5,
-   "flow": 20.2,
-   "turnCount": 214,
-   "score": 62.5,
-   "baseScore": 62.5,
-   "spotCount": 0,
-   "polyline": "ao_|Ewze_Y`AmLnFiFNu@qJ}Jc@wEkCgHeCeECwFbBiEe@cJhAaJvC{DpIaGbBkCc@iEcK{TYqEpCeTlIyJnLcE~@}Ad@aCY_DgC_JI_H{BiEn@}Fc@{Gc@oAeEyEWyEj@aBhDgDhOaI`IoNp@wR}L}NI{GZ_B`DsGhMmIz@{AMgBoCyCsAiFGmM\\sAdCiCHgB_@}Ch@qBxCgCrE_@p@m@PaAa@_GoAaFg@yFsAuAmC^o@k@FwAjBeD}GwIZiEiEkAk@cAf@qROiD`@_DmB_EgBoBGsB`@uBQk@mBcAV_FOyBi@o@sBa@}@uBeFZsIuEqBFgAc@mFiK{AmFwC}DaAkFcBoBiAiFo@y@_EWaF}AwB_CcE?gDzCkBVuB|AyF|HgGtBoFp@cEvBkAvDcAnA_GlByEhDuBrG}Eu@",
-   "pointCount": 110,
-   "start": [
-    36.21121,
-    136.350041
    ],
-   "end": [
-    36.229876,
-    136.437747
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:41",
+   "id": "石川県:34",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "小木時長線",
@@ -1049,8 +1010,8 @@
    "curviness": 345.9,
    "flow": 20.3,
    "turnCount": 71,
-   "score": 62.3,
-   "baseScore": 62.3,
+   "score": 73.1,
+   "baseScore": 73.1,
    "spotCount": 0,
    "polyline": "eztbFchndYiAj@wB|D}AXwAgA{IwNc@]qCV}BvBVvGeCdCiJbBw@lAqDbAeBfGwDh@oBhAgHnKqEfBoJlIuMfEmJdIaMbEFfAzAtBj@fCpAvBbAlHjD~Dp@`DdChFe@~DLlCq@zAYtCcEM",
    "pointCount": 36,
@@ -1061,10 +1022,13 @@
    "end": [
     37.323258,
     137.190859
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:42",
+   "id": "石川県:35",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "丸山加賀線",
@@ -1074,8 +1038,8 @@
    "curviness": 328.8,
    "flow": 22,
    "turnCount": 97,
-   "score": 61.9,
-   "baseScore": 61.9,
+   "score": 72.8,
+   "baseScore": 72.8,
    "spotCount": 0,
    "polyline": "{ml|Ess{_YkKfIiBvC{CGk@~B_CoAgBzBmHzB_@xA{@X{DSuLpF_BzAm@jDgKxPwBhIkF`IaCdHtCvJl@vGWnAsCpEwGrA_IR_ExCgBdHgAzAcDtA{ApBeCbAs@`AkKbCk@xAmC|@mFxIiLtG{ObPuJbFeGbJyDzAsApAaAnJPvCYjBiH_CuK_@cFfI",
    "pointCount": 47,
@@ -1086,10 +1050,14 @@
    "end": [
     36.317868,
     136.422439
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:43",
+   "id": "石川県:36",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "珠洲里線",
@@ -1099,8 +1067,8 @@
    "curviness": 349.8,
    "flow": 19.7,
    "turnCount": 183,
-   "score": 61.8,
-   "baseScore": 61.8,
+   "score": 72.7,
+   "baseScore": 72.7,
    "spotCount": 0,
    "polyline": "qwscF}dodYf@j@\\tEdBnFdClCb@vAe@`NaArECjDzBtJ~CvGlAxJqAd\\b@jA|BzBlBpI_@|Hh@|GkArIRlKbAnJc@pG?nH^fDlBfChAhIqA|GCvDt@lAbDO~@fANtAcAdFnAdHnA~Ak@nHn@r@pAa@tAf@x@rEzBtBnBbFCbFtAxD{@xERvBrDhFlE?|@r@^dJ~@jFVp@zBhAv@pHfAGdBuAbAfA\\tDSpBuDxKK`ErE|B`ArBrArM[rAiAdAWrB`BxBbAzHbEjKZjBI`E`B|BzAJv@hAlBrMCjDf@bG~BvHGzCb@lCbKrPj@dChBbD|@dEhApAfEvACzCkAxDXrEj@pDxDrDHlHtB~GdFfApHuDlBp@",
    "pointCount": 97,
@@ -1111,35 +1079,15 @@
    "end": [
     37.433885,
     137.123453
-   ]
-  },
-  {
-   "id": "石川県:44",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "与呂見藤波線",
-   "ref": "275",
-   "highway": "secondary",
-   "lengthKm": 3.96,
-   "curviness": 313.9,
-   "flow": 21.8,
-   "turnCount": 57,
-   "score": 61.5,
-   "baseScore": 61.5,
-   "spotCount": 0,
-   "polyline": "imybFag_cY{AsE_KiGcEeIsIXwIoJo@Eg@zAaEe@mAdC}Ap@eLiBy@oAe@_Bg@uGiCoBT}CeBeB_EmLDmIxAqMqDiHkBwQ}E}OAwHuAgH_@qLiCyFIsC",
-   "pointCount": 29,
-   "start": [
-    37.327091,
-    136.971528
    ],
-   "end": [
-    37.344376,
-    137.001308
+   "tags": [
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "石川県:45",
+   "id": "石川県:37",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "種七窪線",
@@ -1149,8 +1097,8 @@
    "curviness": 300.4,
    "flow": 22.4,
    "turnCount": 59,
-   "score": 61.3,
-   "baseScore": 61.3,
+   "score": 72.1,
+   "baseScore": 72.1,
    "spotCount": 0,
    "polyline": "syb_F{duaYuBfBaBvCyB~@cDjEs@VTf@hBy@l@^w@lCNhBe@hDa@pMhDdGfFdVsApHZlGiDzBMlAfBdUvBrDNvEcMtm@BjEjBjFk@~Es@jBpA`J?`EqAzCiEzAoCt_@",
    "pointCount": 32,
@@ -1161,10 +1109,14 @@
    "end": [
     36.724144,
     136.713928
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:46",
+   "id": "石川県:38",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "丸岡川西線",
@@ -1174,8 +1126,8 @@
    "curviness": 317.8,
    "flow": 21.6,
    "turnCount": 62,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.7,
+   "baseScore": 70.7,
    "spotCount": 0,
    "polyline": "mzy{Eik}~XdCmGHsA_EeDQuBd@kDrIoJ`BqE^gDpAq@|FCtA}AHiBYsAwBFY[MaDqBcHM_DnCmDLeEdD}FrAyIbDqAhC}FvFeFnQiSrEkDjHqA`FjAlAv@hEs@tEjAjLh@lJyALiA",
    "pointCount": 36,
@@ -1186,35 +1138,13 @@
    "end": [
     36.161559,
     136.331295
-   ]
-  },
-  {
-   "id": "石川県:47",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "鈴ヶ嶺矢波線",
-   "ref": "288",
-   "highway": "secondary",
-   "lengthKm": 10.91,
-   "curviness": 272.8,
-   "flow": 21.3,
-   "turnCount": 140,
-   "score": 59.9,
-   "baseScore": 59.9,
-   "spotCount": 0,
-   "polyline": "gg}bFog{cYjAbIdCjEtE}@dBrCr@@|HkHdAQxAp@`DtEnEfAfQbJbDrGfEdFdArFtAVbHrKj@vAMxHXzBtJlMpCb@rAiClOgKtHfUtIhRZfFjAzCxCr@fFpDhOhDpGbHtBbExB~Hh@hF`BpCr@nClAbBvD~BhDa@hCLjCm@nEvAfPhBrBr@rEBdH_EpHyJhC}@~CEfDdCdCvGFbGlBhBx@`CfFzDnDwB|CHv@i@bAsCdEaPzCoEj@sDNwLhE{LnGoAfH^pEkGh@KjZf@bM{BnGRlKwP|BcBLmDyAe@UmANq@",
-   "pointCount": 78,
-   "start": [
-    37.346596,
-    137.114962
    ],
-   "end": [
-    37.277997,
-    137.097629
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:48",
+   "id": "石川県:39",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "小松鳥越鶴来線",
@@ -1224,8 +1154,8 @@
    "curviness": 278.7,
    "flow": 21.2,
    "turnCount": 321,
-   "score": 59.8,
-   "baseScore": 59.8,
+   "score": 70.4,
+   "baseScore": 70.4,
    "spotCount": 0,
    "polyline": "{zg|Eu{j`YyBmBgHtAiAK_@g@C{AzBaFj@{Fs@{I[WgCh@gEkDM}J_@wAiJaKYyABuIsGiEaD{Jk@uCf@sGIcGe@}BJoCkBcOoBaHiFmKkFgA{FcG_CgAeB_FF}FcM{Ow@{C_BlBmBRuEyAiDwCaGHkD~AyE_BcCR{Es@oB}@bAiG_BD{Az@aAUa@y@CqBaCcFcF{@}B{A{DRgCdAsExHaCDPcC_@aAfAgCaCk@}@wDyCsEQ{BgBm@c@sAwBRuBpPsAUsGlFi@~DD~BmB_@_F~Dm@{@kEwAeJm@eAgBWkDtDoLn@uGm@uP}AyDqCmAeFTyAvBkBx@y@DmDqBiAaERmEpAwEzAaBr@yFs@{@aLiByAeGcCq[uAaCqFcCsCkHd@cHxBmDdCyAbCqELqCg@qAqDqBqIPuH{AgW{\\yBiAkEKcCkAoN_LsAaE}BiBe@gBg@Q{EpC}A~C_GjFwIpDwADaIsBmIt@eC|@kArCsCvB_GtAqKfGmOlE_MUyN{H{DmGgC_CmEeAcFd@iCjAiGzFaEpMsOtPyHx@oGqEsAOgEtB{Cf@uErCgBEoHuB_Q~A{Dm@gN~A_GfEyApCyAnGqBbDwClBcKtDuB~AmBXqC_AcCuBaEwFePwYiCy@mMgBsUjDiAdAsBrGo@h@iNWaHmAeDsA}BqBgAiDiD{DyP_OkHmH}DcGgLwJgEwN",
    "pointCount": 182,
@@ -1236,35 +1166,44 @@
    "end": [
     36.396789,
     136.61459
+   ],
+   "tags": [
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "石川県:49",
+   "id": "石川県:40",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "松任宇ノ気線",
-   "ref": "8;25",
-   "highway": "primary",
-   "lengthKm": 4.72,
-   "curviness": 219.7,
-   "flow": 28,
-   "turnCount": 37,
-   "score": 59.8,
-   "baseScore": 59.8,
+   "name": "鈴ヶ嶺矢波線",
+   "ref": "288",
+   "highway": "secondary",
+   "lengthKm": 10.91,
+   "curviness": 272.8,
+   "flow": 21.3,
+   "turnCount": 140,
+   "score": 70.4,
+   "baseScore": 70.4,
    "spotCount": 0,
-   "polyline": "mnl~Eq`x`YeEeIqFkNI_FdCkOVmF_AgL_@e@g@aFoS}f@qA_BmXsRoPyRmYeG}DaC}FcHiCzDpCiEtF|GjDxBbX|F",
-   "pointCount": 21,
+   "polyline": "gg}bFog{cYjAbIdCjEtE}@dBrCr@@|HkHdAQxAp@`DtEnEfAfQbJbDrGfEdFdArFtAVbHrKj@vAMxHXzBtJlMpCb@rAiClOgKtHfUtIhRZfFjAzCxCr@fFpDhOhDpGbHtBbExB~Hh@hF`BpCr@nClAbBvD~BhDa@hCLjCm@nEvAfPhBrBr@rEBdH_EpHyJhC}@~CEfDdCdCvGFbGlBhBx@`CfFzDnDwB|CHv@i@bAsCdEaPzCoEj@sDNwLhE{LnGoAfH^pEkGh@KjZf@bM{BnGRlKwP|BcBLmDyAe@UmANq@",
+   "pointCount": 78,
    "start": [
-    36.605353,
-    136.60697
+    37.346596,
+    137.114962
    ],
    "end": [
-    36.61835,
-    136.632793
+    37.277997,
+    137.097629
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:50",
+   "id": "石川県:41",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "与呂見藤波線",
@@ -1274,8 +1213,8 @@
    "curviness": 290.6,
    "flow": 19.9,
    "turnCount": 153,
-   "score": 59.8,
-   "baseScore": 59.8,
+   "score": 70.2,
+   "baseScore": 70.2,
    "spotCount": 0,
    "polyline": "mf|bFi|pcYtGNjDpEdF}AhIfCzF{@nJiFrHfEhEoBbC^bAUzB_HWaFlCeFdDg@r@eBp@{Jv@}BwAiG@qDzC{DhAKvB|@hGoBtAcEdCaOhDsGnIeLrAaFsC}IS}NpAiCjHuEnEqH?sJuBwHGuBx@eOzBgIpIgLzEeLjKoOhCqPLyD_A}EyCsFA}@fAcCdFmCbAmAO{Gb@_CnA}Bv@uKr@sD@wD^mAjDiE[eUhA_BvBy@nBqB[sBgBKMaA`EcBbAaGb@wGdB_InAwBzGuG`BiDReIm@kCFiHrAmGXsIvDyBxD{Er@uEr@{AjEQ`@cA",
    "pointCount": 83,
@@ -1286,10 +1225,13 @@
    "end": [
     37.300391,
     137.143018
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:51",
+   "id": "石川県:42",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "大谷狼煙飯田線",
@@ -1299,8 +1241,8 @@
    "curviness": 264.8,
    "flow": 19.1,
    "turnCount": 301,
-   "score": 59.8,
-   "baseScore": 56.9,
+   "score": 69.9,
+   "baseScore": 67,
    "spotCount": 1,
    "polyline": "er{cF}nidYmBaF{@uHaC_LYcJ}B_Ho@{FoJqNeFoEa@sAT{C|EoBhCcILiEg@_Fr@mIYoKw@eIwHgV}ImOsDcEgD{BuGoBeFwEo@yAe@yGw@mDeCsE}C{ByFwIEeAjEaFlAcK}AgFaAiJ}@qBuHiLmDwDqC_Bn@}Fx@mCHqD|AwGeAiOaCgF{KcJoBSmG`BkAUg@s@bAcTc@_FoAoFM}H\\aJh@e@d@XDv@g@`Hh@j@n@YNsIu@oBcF{@wAaBm@{OjBmPOiKgCcGqB{HqHqFuAyKkIcM~@iI~@}BxDeDz@wJdCuEjF}PmBaOiDoI_IcJY{AP}Br@gDxCkGdA}E~E_DxFcIxCwOLkHrCcAjA{GtBsE}Esq@_CmIAuNkAuP}@cGj@mOiCqPKaDhAkElEl@bPsCtDx@fDuCbDg@pA{@dAsEr@cAtAUtBX`CyAbC@fC_OzFkJfEaKbKeDpHEz@mCzBsApAoEpAuAViCSk@yAz@_@g@tB{IQeJlCcFtCiAGuDxEiB`EkJ~Dk@|BcDvDiAfPtExAWvE}CbCJZf@R|DbCtF~FxAjA|A`@|CM|Ep@dBbFjC`F\\lErCrCQzFxB|JbJbJbBpEqA",
    "pointCount": 158,
@@ -1311,60 +1253,43 @@
    "end": [
     37.484249,
     137.339738
-   ]
-  },
-  {
-   "id": "石川県:52",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "久川馬場線",
-   "ref": "260",
-   "highway": "secondary",
-   "lengthKm": 5.41,
-   "curviness": 306.5,
-   "flow": 19.8,
-   "turnCount": 84,
-   "score": 59.7,
-   "baseScore": 59.7,
-   "spotCount": 0,
-   "polyline": "upabFittaYeCsAkAaCgBgA}@F_Bz@oC~C_HtAqClCeCpEqHjEwCrK{AhB]nBl@xIfAbF?tBoFpFgFbLmB|@eA`BmCrI}DvDuE~By@|Cj@`JM|@eEn@iBjAmD`FmDnCw@dDaC|Am@K{DcEcJcB}DEsD~Ak@zCvAfAhD~@NvDcDbD{Ah@oCFgEeBgAVwBdHc@tD@jLg@zL",
-   "pointCount": 51,
-   "start": [
-    37.204746,
-    136.753486
    ],
-   "end": [
-    37.231276,
-    136.721283
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:53",
+   "id": "石川県:43",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "上安原昭和町線",
-   "ref": "196",
+   "name": "長浦小牧線",
+   "ref": "256",
    "highway": "secondary",
    "lengthKm": 3.15,
-   "curviness": 200,
-   "flow": 27.4,
-   "turnCount": 23,
-   "score": 58.9,
-   "baseScore": 58.9,
+   "curviness": 189.4,
+   "flow": 29.9,
+   "turnCount": 20,
+   "score": 69.2,
+   "baseScore": 66.8,
    "spotCount": 0,
-   "polyline": "wyf~Esvz`YoAjCuLvOm@dBdOmSnB{GpAyQqAWuIN`Bok@hB_WdBaDhDsQrEeN",
-   "pointCount": 14,
+   "polyline": "ywsaFi~pbYlE`INtA]zHtLzRo@tILxHaBjGsDtBwCnJwBbAIxC}AxF}ArNuDb@mGfCiCxEyCzB{KxPaFfDqBbFsCtC",
+   "pointCount": 22,
    "start": [
-    36.576436,
-    136.620739
+    37.13421,
+    136.89845
    ],
    "end": [
-    36.574377,
-    136.641766
+    37.14319,
+    136.87159
+   ],
+   "reshaped": true,
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:54",
+   "id": "石川県:44",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "輪島山田線",
@@ -1374,8 +1299,8 @@
    "curviness": 291,
    "flow": 19.6,
    "turnCount": 279,
-   "score": 58.8,
-   "baseScore": 58.8,
+   "score": 69.2,
+   "baseScore": 69.2,
    "spotCount": 0,
    "polyline": "iwpbFszkcYVNaBo@aFRgIxD_IsHmBi@uEd@{CxB{C|GsIoA}@jIwCp@aA~AOhBl@jHQnA_D~@cAzBuGfAuBjA}JlIkDsBg@BuHvIaFnKwF~[qEbGEdB|@lD}B`C{@~DQbLVrBzHnInBrI@pGcBlLaCzBqCnF{Av@e@vAZ|DjFbKgKlEiFzNwEf@wCImEiDiAEaDtAiCxBqDnA{BrCyG`BsAu@{BiEkGcGiE_@aCwBuFb@cAlAcCrKtBfNC~Bo@`CuAjBkH`C_EpC{BjEsAbLj@hAKnB_B~CCrDkBlGSzJLvBfCjB`@~AbAnP~BbJBtAyAbDaM~EoFvGWjBVtCtB~BVnAgAhHeDfMYhHcAlDn@tMiBxEgBr@iA`D}CtCHv@xBnCpE~AhF|ExAnG@`CoFhKTlHU~@kIdAw@x@gEdTmEhIQrIhA~F^dEMxA_BbBuFpAiBrBi@fB}@rK@fE|CzFlDzDxBn@|AOp@z@_@`CgLhIq@zBf@`DlCzA~GfIdJnA|FxC~CnFfAbGfAnCNzEtBzHtB|@bEf@nGrCrDfF|AvFhAtHiBdO{J`XgAfJ{A`Do@rD",
    "pointCount": 151,
@@ -1386,35 +1311,14 @@
    "end": [
     37.32582,
     136.90238
-   ]
-  },
-  {
-   "id": "石川県:55",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "漆原下出線",
-   "ref": "271",
-   "highway": "secondary",
-   "lengthKm": 8.8,
-   "curviness": 275.9,
-   "flow": 19.9,
-   "turnCount": 122,
-   "score": 58.5,
-   "baseScore": 58.5,
-   "spotCount": 0,
-   "polyline": "qghbFoiybYcCAyJfBaCdCy@JgAa@wCbB_Fn@qHhHaFy@eDTyEjCe@xDuBpDwCU}CfAmKlJwFxGeOxGaMRuBlA}BrCgBc@{CgEoAyCaAm@g@v@ChHcAtAcBGkAgAg@q@SaBqBoCoBzAYz@uAVwGvD}Ei@mBp@qCJoE_IiB_BgFUmF~@_IsEoAUiDL_F`BsEn@kBI_Bz@gA@qAzCoDxAgCOmEaCqHpD}DhFkErBsOKgOdFaXxQmCfDmE~HiAhD[bLo@zD{GvNiIhIuB|F",
-   "pointCount": 71,
-   "start": [
-    37.239134,
-    136.941201
    ],
-   "end": [
-    37.302564,
-    136.912343
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:56",
+   "id": "石川県:45",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "鮭尾比良線",
@@ -1424,8 +1328,8 @@
    "curviness": 288.8,
    "flow": 18.5,
    "turnCount": 161,
-   "score": 58.4,
-   "baseScore": 58.4,
+   "score": 68.5,
+   "baseScore": 68.5,
    "spotCount": 0,
    "polyline": "}~tbFgxdcYlEtJ`EjE~CZjDaB|AKdD`@tEbD~HdSpCbBrAzBj@`NzAvGk@vGDpCrAdE|ArAjOxCrCuAbDLjKkHnIBzBa@tDuBlAEvHpAzKxSrI~BbEZtDhBnEZxHnBzLcFpEcJvEmDbCk@lF\\nB\\hBlAzF|KzEhGdHjBlFg@lAZ\\lA\\nInAnBjAFjC{AhC}H~CyAvC{Dl@Tz@hDr@~@~E`AfCgA|@N~MxJrClDrAS`B{DtAQ~BdCdDn@|NzLnDvGpE`FrH@|BbJQdFjCtFRdErCbClGbLvBv@bCbKhDxANp@hCzA",
    "pointCount": 80,
@@ -1436,110 +1340,14 @@
    "end": [
     37.236661,
     136.961114
-   ]
-  },
-  {
-   "id": "石川県:57",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "富来中島線",
-   "ref": "23",
-   "highway": "primary",
-   "lengthKm": 11.72,
-   "curviness": 256.1,
-   "flow": 18.9,
-   "turnCount": 159,
-   "score": 58.2,
-   "baseScore": 55.3,
-   "spotCount": 1,
-   "polyline": "yxsaFktoaY_GyGeAeCeDuDoH^_LyFg@wGgDyDa@eOkGg^oAiEgEyIgEaEwBaHi@gOa@gCMwOgCgFAcF\\iAxBa@|AmCRoAWmCjCsHg@cJu@sDbAkE@wCcCwPcEmFuBwAaFyHk@wD}@oBp@uEFoIdAeD^sEJeJeBiLkEeGsAoFv@m@pB`@v@x@~@}@nASdAdBt@]AmBbA_Bl@oDOcItAoH?_F|BsHaC_HeD_BEw@nDgEHyCd@sAfB_BfFqAj@eAH}AcGmMg@gHs@iCkTySqBuNN_BfFsKtA}IfAcDfP{VnJuJ|GmLnEyAbKZlElEhANfF}AjC@xEaChD_EnJuE`AeE",
-   "pointCount": 89,
-   "start": [
-    37.134367,
-    136.727899
    ],
-   "end": [
-    37.132081,
-    136.822461
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:58",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "向瀬杉野屋線",
-   "ref": "231",
-   "highway": "secondary",
-   "lengthKm": 3.04,
-   "curviness": 297.5,
-   "flow": 19.6,
-   "turnCount": 46,
-   "score": 58.1,
-   "baseScore": 58.1,
-   "spotCount": 0,
-   "polyline": "q_c`F{h`bY|AkF@_EzKtCfCK`GqE`CsGxK_Lz@qBFwF~DkC~@sBd@{Eu@yDNsA`AOzD`C~FUjBiBzFgKfAuCfA_IbBuCrIyCnIhB",
-   "pointCount": 25,
-   "start": [
-    36.88457,
-    136.8131
-   ],
-   "end": [
-    36.866786,
-    136.829973
-   ]
-  },
-  {
-   "id": "石川県:59",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "福浦港中島線",
-   "ref": "48",
-   "highway": "primary",
-   "lengthKm": 4.27,
-   "curviness": 242.6,
-   "flow": 19.5,
-   "turnCount": 53,
-   "score": 58.1,
-   "baseScore": 53.5,
-   "spotCount": 2,
-   "polyline": "_hkaFytvaY`BbNIrDz@xDvLxO|GxD`Yv_@v@xCN|LtDnDx@fJpCzHfAnJIdIzDdMHlBa@fAiCpAsGGc@v@d@hNmBhFC~A~@dHzB`CvApEw@vFy@JmFrDu@w@",
-   "pointCount": 30,
-   "start": [
-    37.090719,
-    136.763813
-   ],
-   "end": [
-    37.082041,
-    136.726952
-   ]
-  },
-  {
-   "id": "石川県:60",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "深谷中浜線",
-   "ref": "49",
-   "highway": "primary",
-   "lengthKm": 4.17,
-   "curviness": 270.8,
-   "flow": 19.5,
-   "turnCount": 58,
-   "score": 58.1,
-   "baseScore": 55.2,
-   "spotCount": 1,
-   "polyline": "}}uaF{ceaYnIl@bJ_@|BuB`HsK|AwDAcCqAeKyBwHuE{H_AoEVaHl@yAnASdDlAjBqCdBgMyCgKmAuI_FcLaLeK_G_@aC_AaBH{CmCuC}@iBMeAbAu@OgE}D{DkJeAeHE}E",
-   "pointCount": 33,
-   "start": [
-    37.145434,
-    136.674055
-   ],
-   "end": [
-    37.150997,
-    136.703263
-   ]
-  },
-  {
-   "id": "石川県:61",
+   "id": "石川県:46",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "能都穴水線",
@@ -1549,8 +1357,8 @@
    "curviness": 278.5,
    "flow": 19.2,
    "turnCount": 346,
-   "score": 58,
-   "baseScore": 58,
+   "score": 68.3,
+   "baseScore": 68.3,
    "spotCount": 0,
    "polyline": "{pkbF}ttcYzFaBvEeGbHl@jBc@jEqCvCElGzExCzFhChI`C|B`CnHNvJ`A~@fD`B|EiAdENdFhHlHjAfB~BrA\\bC[~ARlJlFxKdAzBjC~CbLdD|CfVnEpEKpGqA`KtAvO}DzC_ClCtArCI~DvG|Ej@k@tD|AnBnB?|DrGbCxA`@~CIlBv@~BM~BzAbD`Ax@|Er@dA~BnBvAp@fBrDpEcGpT{@rG@bGj@hBxErFrAnDoAhILzBdClC`Bv@~BEt@l@~AjD{@dDFjAdA|ApB`A`BzD{@bF`B|KgCnGKpEr@jFe@hE`@lCdCbDr@zLIfHdBhPdC?|BwLzBa@`Ab@d@zAxA~QnAfEph@cEnDdDtIfDbE~D?lNdAhEtDv@bGWjGTh@tCxBjCj@`FnAnE~BpAz@fChFrAf@dA}AlLdB~KMhC{KjIqCr@gHVyEfDg@zADbFeCxEr@nCk@hAeIvDsHb@wD~AuDnL{C|CmArDeC`C}GfAwLhM_EpNsFfFoMrVq@vD?lBl@xCbJpNj@hCrCtYD`Ow@hBaFjB{CMsDiAqDAk@pAj@dFKnEgKFyBxBsB\\@rEpId@l@pA}AhGaDtFmCdIuGlG{Bt@oLd@{GhCcFpDqFtJiChAwB?cKuEmQkCiDmAsJcPsEsAoH}GcI_QeCmBkEk@oCeF@yEYe@sAIyGnI",
    "pointCount": 177,
@@ -1561,35 +1369,72 @@
    "end": [
     37.235069,
     136.966778
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:62",
+   "id": "石川県:47",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "金沢小松線",
-   "ref": "22",
-   "highway": "primary",
-   "lengthKm": 3.15,
-   "curviness": 196.1,
-   "flow": 30.9,
-   "turnCount": 20,
-   "score": 57.7,
-   "baseScore": 57.7,
+   "name": "向瀬杉野屋線",
+   "ref": "231",
+   "highway": "secondary",
+   "lengthKm": 3.04,
+   "curviness": 297.5,
+   "flow": 19.6,
+   "turnCount": 46,
+   "score": 68.2,
+   "baseScore": 68.2,
    "spotCount": 0,
-   "polyline": "_zt}E}uo`YrIoBjBDlYtI`Ip@lP|PX|ErDrCjZ`n@|A`@[fEfAFzAhBrGlDh@nAfOz@",
-   "pointCount": 16,
+   "polyline": "q_c`F{h`bY|AkF@_EzKtCfCK`GqE`CsGxK_Lz@qBFwF~DkC~@sBd@{Eu@yDNsA`AOzD`C~FUjBiBzFgKfAuCfA_IbBuCrIyCnIhB",
+   "pointCount": 25,
    "start": [
-    36.484319,
-    136.564309
+    36.88457,
+    136.8131
    ],
    "end": [
-    36.462698,
-    136.547321
+    36.866786,
+    136.829973
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:63",
+   "id": "石川県:48",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "富来中島線",
+   "ref": "23",
+   "highway": "primary",
+   "lengthKm": 11.72,
+   "curviness": 256.1,
+   "flow": 18.9,
+   "turnCount": 159,
+   "score": 67.9,
+   "baseScore": 65,
+   "spotCount": 1,
+   "polyline": "yxsaFktoaY_GyGeAeCeDuDoH^_LyFg@wGgDyDa@eOkGg^oAiEgEyIgEaEwBaHi@gOa@gCMwOgCgFAcF\\iAxBa@|AmCRoAWmCjCsHg@cJu@sDbAkE@wCcCwPcEmFuBwAaFyHk@wD}@oBp@uEFoIdAeD^sEJeJeBiLkEeGsAoFv@m@pB`@v@x@~@}@nASdAdBt@]AmBbA_Bl@oDOcItAoH?_F|BsHaC_HeD_BEw@nDgEHyCd@sAfB_BfFqAj@eAH}AcGmMg@gHs@iCkTySqBuNN_BfFsKtA}IfAcDfP{VnJuJ|GmLnEyAbKZlElEhANfF}AjC@xEaChD_EnJuE`AeE",
+   "pointCount": 89,
+   "start": [
+    37.134367,
+    136.727899
+   ],
+   "end": [
+    37.132081,
+    136.822461
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "石川県:49",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "珠洲穴水線",
@@ -1599,8 +1444,8 @@
    "curviness": 299.9,
    "flow": 18.4,
    "turnCount": 198,
-   "score": 57.7,
-   "baseScore": 57.7,
+   "score": 67.9,
+   "baseScore": 67.9,
    "spotCount": 0,
    "polyline": "iqgcFalqdYb@fBHrEkBxJAfCfA`G\\jH~CnIHdOf@`G~A`F~@dK|AbC_@vCkBvFmBnCKlBHtFvArJs@pFDlJs@nI{@bDCdDnAnJk@|JZtFZdBtArBb@bE_AfMvR|[dDhD~BlEy@tGl@xEMlAwKhKm@tAElI~@lEbFnGjF\\~@v@vAjHwDnRE`Hc@rCz@vEeAlDrA`DLfBcB~Nq@lAdA`AtDnAlArAtB@nElDvBvGx@lF~A~DnCh@|BrAnBvBRxA~@xAfGlF|@vD}ArGh@nLxBr@~DmBtAiDnAM`BzArBTfBdCrArDq@|GiDzJqAjBs@jI~@jGzD|G_@dGn@~GE`D{C`C[xCf@vJfCfDPxHlAhI}AtHaB~AeCn@i@|@kDzQAtJ}@rCEpBLlClBfH",
    "pointCount": 104,
@@ -1611,10 +1456,42 @@
    "end": [
     37.383311,
     137.116242
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:64",
+   "id": "石川県:50",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "深谷中浜線",
+   "ref": "49",
+   "highway": "primary",
+   "lengthKm": 4.17,
+   "curviness": 270.8,
+   "flow": 19.5,
+   "turnCount": 58,
+   "score": 67.8,
+   "baseScore": 64.9,
+   "spotCount": 1,
+   "polyline": "}}uaF{ceaYnIl@bJ_@|BuB`HsK|AwDAcCqAeKyBwHuE{H_AoEVaHl@yAnASdDlAjBqCdBgMyCgKmAuI_FcLaLeK_G_@aC_AaBH{CmCuC}@iBMeAbAu@OgE}D{DkJeAeHE}E",
+   "pointCount": 33,
+   "start": [
+    37.145434,
+    136.674055
+   ],
+   "end": [
+    37.150997,
+    136.703263
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:51",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "石川県道161号大杉長谷線",
@@ -1624,8 +1501,8 @@
    "curviness": 230.7,
    "flow": 23.5,
    "turnCount": 34,
-   "score": 57.5,
-   "baseScore": 57.5,
+   "score": 67.6,
+   "baseScore": 67.6,
    "spotCount": 0,
    "polyline": "c}w|Emd_`Y~JmQvAeAjIaDzDu@fDFh@gCrHuBnL|@|InBpCUlFaBfPx@tKgAzF_C~CuDtLeGlFiEpCa@jIhCrErDnBD",
    "pointCount": 22,
@@ -1636,10 +1513,43 @@
    "end": [
     36.308721,
     136.487423
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:65",
+   "id": "石川県:52",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "福浦港中島線",
+   "ref": "48",
+   "highway": "primary",
+   "lengthKm": 4.27,
+   "curviness": 242.6,
+   "flow": 19.5,
+   "turnCount": 53,
+   "score": 67.5,
+   "baseScore": 63,
+   "spotCount": 2,
+   "polyline": "_hkaFytvaY`BbNIrDz@xDvLxO|GxD`Yv_@v@xCN|LtDnDx@fJpCzHfAnJIdIzDdMHlBa@fAiCpAsGGc@v@d@hNmBhFC~A~@dHzB`CvApEw@vFy@JmFrDu@w@",
+   "pointCount": 30,
+   "start": [
+    37.090719,
+    136.763813
+   ],
+   "end": [
+    37.082041,
+    136.726952
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:53",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "五十里深見線",
@@ -1649,8 +1559,8 @@
    "curviness": 271.1,
    "flow": 20.3,
    "turnCount": 50,
-   "score": 57.4,
-   "baseScore": 57.4,
+   "score": 67.4,
+   "baseScore": 67.4,
    "spotCount": 0,
    "polyline": "qnbcFqemcYQhFw@|Ckb@pb@sAdDSnDl@dJm@bH{@jCaD`CcBzEg@xCAtFo@nD`AzJxApBRrAg@jEn@jEeAxJ{A|CoAbAkD}@o@N]bCeCr@aCpKNzDzD~J|A~AbAbC^fD",
    "pointCount": 32,
@@ -1661,35 +1571,14 @@
    "end": [
     37.382849,
     137.009542
-   ]
-  },
-  {
-   "id": "石川県:66",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "松任美川線",
-   "ref": "104",
-   "highway": "secondary",
-   "lengthKm": 5.55,
-   "curviness": 210.3,
-   "flow": 23.8,
-   "turnCount": 49,
-   "score": 57.2,
-   "baseScore": 57.2,
-   "spotCount": 0,
-   "polyline": "ep{}Eipn`Yg@xEgD|EsT|JG|E`@dAY|IfFjC|ACwBxVa@jKzMBjCg@bBbF|KhSnDdMlSfCZ`L`GlAhApA~ChArIpG|GbIpFtUtGrLvChPjGbOtC|Rx@nC",
-   "pointCount": 29,
-   "start": [
-    36.518585,
-    136.55829
    ],
-   "end": [
-    36.500961,
-    136.516023
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:67",
+   "id": "石川県:54",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "吉原寺井線",
@@ -1699,8 +1588,8 @@
    "curviness": 163.3,
    "flow": 29.4,
    "turnCount": 17,
-   "score": 57.1,
-   "baseScore": 57.1,
+   "score": 67.2,
+   "baseScore": 67.2,
    "spotCount": 0,
    "polyline": "_}m}Escb`YgG?gA~o@uN_@qZhS}GvAyBfAuGdHiUnm@y@c@oAvE",
    "pointCount": 11,
@@ -1711,85 +1600,13 @@
    "end": [
     36.465247,
     136.473281
-   ]
-  },
-  {
-   "id": "石川県:68",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "長浦小牧線",
-   "ref": "256",
-   "highway": "secondary",
-   "lengthKm": 3.6,
-   "curviness": 261.5,
-   "flow": 20.5,
-   "turnCount": 46,
-   "score": 56.9,
-   "baseScore": 56.9,
-   "spotCount": 0,
-   "polyline": "iktaF{fqbYV{@jBaAjD\\~HpJlE`INtA]zHtLzRo@tILxHaBjGsDtBwCnJwBbAIxC}AxF}ArNuDb@mGfCiCxEyCzB{KxPaFfDqBbFsCtC",
-   "pointCount": 26,
-   "start": [
-    37.137326,
-    136.899816
    ],
-   "end": [
-    37.143188,
-    136.871589
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:69",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "滝ヶ原栄谷線",
-   "ref": "154",
-   "highway": "secondary",
-   "lengthKm": 3.69,
-   "curviness": 229.1,
-   "flow": 22.2,
-   "turnCount": 38,
-   "score": 56.4,
-   "baseScore": 56.4,
-   "spotCount": 0,
-   "polyline": "qpq|Es~o_YbAuKlAwAj@wGbEd@zHcd@_@kB`BeI{CgMCkAdFkTDyRj@yCdBqB|V}C`JWfBy@hAcCdFiDzAgCFyL`AcM",
-   "pointCount": 22,
-   "start": [
-    36.303613,
-    136.401863
-   ],
-   "end": [
-    36.290195,
-    136.432102
-   ]
-  },
-  {
-   "id": "石川県:70",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "野崎向田線",
-   "ref": "258",
-   "highway": "secondary",
-   "lengthKm": 3.37,
-   "curviness": 174.3,
-   "flow": 18.4,
-   "turnCount": 32,
-   "score": 56,
-   "baseScore": 49.3,
-   "spotCount": 4,
-   "polyline": "e~saFw{fcY\\qGrBcIYiGj@_JjHkIrDkCn@aBHaD]oCsHiImAaE?cBpDiKvEuCbA{BpAqI`CuIjBuPzD_KdCkEdAqEvAaCQ{MnD}L",
-   "pointCount": 25,
-   "start": [
-    37.135228,
-    137.010679
-   ],
-   "end": [
-    37.126695,
-    137.043083
-   ]
-  },
-  {
-   "id": "石川県:71",
+   "id": "石川県:55",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "羽咋田鶴浜線",
@@ -1799,8 +1616,8 @@
    "curviness": 257,
    "flow": 18.8,
    "turnCount": 81,
-   "score": 55.8,
-   "baseScore": 55.8,
+   "score": 65.4,
+   "baseScore": 65.4,
    "spotCount": 0,
    "polyline": "{|`aFic_bYbAuCfBqBzB_ArBl@hEaJhEe@jGRlMo@rCR|B~Bb@pBxFxGd@xDhBvCUzC~AlGpCfB~DGhCmBhH{AfE?x@i@hAuDjDmC|AoCbDgQjBaElByH|LsHxGeMdK{G|I_AzK`F~Eq@rDrB~K|@nKzCfL|@r@GhA}ChD}BxL{A",
    "pointCount": 43,
@@ -1811,35 +1628,14 @@
    "end": [
     36.996035,
     136.817212
-   ]
-  },
-  {
-   "id": "石川県:72",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "二俣古屋谷線",
-   "ref": "211",
-   "highway": "secondary",
-   "lengthKm": 5.61,
-   "curviness": 251.5,
-   "flow": 19.1,
-   "turnCount": 74,
-   "score": 55.6,
-   "baseScore": 55.6,
-   "spotCount": 0,
-   "polyline": "o_c~EkbvaYeBaCkDc@\\oC_AeB}DfBkD}AeS{@uLdB}GqE}H}CcCeBoIh@wFeBoE~@iH~CuDdDmBhCuCtHyDpBkBrBkKrE_F`E}Ah@oC~PcBzElA|G_AfLeAjB{ClAwBlCgEtLq@zGo@|@uBtAiAJoKaFuEkAkBNyDrCoBRsAo@oGgI",
-   "pointCount": 43,
-   "start": [
-    36.556882,
-    136.760857
    ],
-   "end": [
-    36.594239,
-    136.74662
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:73",
+   "id": "石川県:56",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "蛸島港線",
@@ -1849,8 +1645,8 @@
    "curviness": 234.2,
    "flow": 22.9,
    "turnCount": 32,
-   "score": 55.6,
-   "baseScore": 55.6,
+   "score": 65.4,
+   "baseScore": 65.4,
    "spotCount": 0,
    "polyline": "moocFyfaeYoAq@iDbRwDfGqAnScA~AHtH{AbH_DlI_BpKiJa@eIoG_H]oCaAi@jUvFpl@",
    "pointCount": 16,
@@ -1861,10 +1657,71 @@
    "end": [
     37.449246,
     137.28597
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:74",
+   "id": "石川県:57",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "二俣古屋谷線",
+   "ref": "211",
+   "highway": "secondary",
+   "lengthKm": 5.61,
+   "curviness": 251.5,
+   "flow": 19.1,
+   "turnCount": 74,
+   "score": 65.3,
+   "baseScore": 65.3,
+   "spotCount": 0,
+   "polyline": "o_c~EkbvaYeBaCkDc@\\oC_AeB}DfBkD}AeS{@uLdB}GqE}H}CcCeBoIh@wFeBoE~@iH~CuDdDmBhCuCtHyDpBkBrBkKrE_F`E}Ah@oC~PcBzElA|G_AfLeAjB{ClAwBlCgEtLq@zGo@|@uBtAiAJoKaFuEkAkBNyDrCoBRsAo@oGgI",
+   "pointCount": 43,
+   "start": [
+    36.556882,
+    136.760857
+   ],
+   "end": [
+    36.594239,
+    136.74662
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "石川県:58",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "野崎向田線",
+   "ref": "258",
+   "highway": "secondary",
+   "lengthKm": 3.37,
+   "curviness": 174.3,
+   "flow": 18.4,
+   "turnCount": 32,
+   "score": 64.6,
+   "baseScore": 57.9,
+   "spotCount": 4,
+   "polyline": "e~saFw{fcY\\qGrBcIYiGj@_JjHkIrDkCn@aBHaD]oCsHiImAaE?cBpDiKvEuCbA{BpAqI`CuIjBuPzD_KdCkEdAqEvAaCQ{MnD}L",
+   "pointCount": 25,
+   "start": [
+    37.135228,
+    137.010679
+   ],
+   "end": [
+    37.126695,
+    137.043083
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "石川県:59",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "庵鵜浦大田新線",
@@ -1874,8 +1731,8 @@
    "curviness": 213.4,
    "flow": 17.1,
    "turnCount": 142,
-   "score": 55.4,
-   "baseScore": 52.5,
+   "score": 64.5,
+   "baseScore": 61.6,
    "spotCount": 1,
    "polyline": "okiaFo}fcYqAK}E_CkCDoBm@gFkFmDyJaBaBaC]yQ@qEiBsB{A{CmEaI}UeCwCgJwDaK]aJaFvFuLtKyJV_ErAcEpCoBpBP|C{@PuCy@qPZ_B~B{DAcEu@}AeLcEu@cASaBd@gCvEiEdHuMvEuCfRiBxT~JlFzIlA`@hAQfBoAfLuQdCu@pFGtG{Gd@_B@aCoBiKF_AxE_H`@sCY_CvGuH`DcBzFpBnAvFp@l@hAMjI{ErCFrIdB~GdDvWTxDfBfDvCx@zDj@r@~HhBrDI|EqDjCk@|Ql@~DpEzEx@hE]xCnAtCNxHxC",
    "pointCount": 81,
@@ -1886,85 +1743,14 @@
    "end": [
     37.047642,
     137.047352
-   ]
-  },
-  {
-   "id": "石川県:75",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "輪島浦上線",
-   "ref": "38",
-   "highway": "primary",
-   "lengthKm": 3.54,
-   "curviness": 188.7,
-   "flow": 20.2,
-   "turnCount": 33,
-   "score": 55,
-   "baseScore": 50.4,
-   "spotCount": 2,
-   "polyline": "mafcFczobYwQyCJgLkV{I}MrOWxCBbKiArLoMhf@}@rLyJzHy@rAU`BNnIqBhIbB|F?~J",
-   "pointCount": 17,
-   "start": [
-    37.391747,
-    136.892658
    ],
-   "end": [
-    37.406201,
-    136.872264
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:76",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "豊田笠師保停車場線",
-   "ref": "253",
-   "highway": "secondary",
-   "lengthKm": 4.3,
-   "curviness": 214.1,
-   "flow": 21.4,
-   "turnCount": 43,
-   "score": 54.9,
-   "baseScore": 54.9,
-   "spotCount": 0,
-   "polyline": "c`iaF_bibYuMkE}EbDu@tBe@`CIpGhFrPPpL[fA{BjBuGUqCjAcC~BgA~CKtHg@xCcJhKThB[nH}B~Nk@bXeFtKiAlB}EvDmDl@oChEuKzHwDi@gQxB",
-   "pointCount": 29,
-   "start": [
-    37.079217,
-    136.858075
-   ],
-   "end": [
-    37.098842,
-    136.828432
-   ]
-  },
-  {
-   "id": "石川県:77",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "清水小坂線",
-   "ref": "210",
-   "highway": "secondary",
-   "lengthKm": 7.61,
-   "curviness": 235.4,
-   "flow": 18.7,
-   "turnCount": 96,
-   "score": 54.7,
-   "baseScore": 54.7,
-   "spotCount": 0,
-   "polyline": "m{h~EmjeaYxDyIh@iEnBeFpEmDzEcKdHuGR_Hd@Ml@iHbEoLrI_FbCuEvGmHtHsNnGiEbE}ELeAq@iBb@am@j@iBhBsB`AgIpLwN|AcFdAmH|DsJjBiCbCqAhDk@dLrAfDy@bB_BtNu_@BqGhAaDOoBZyDj@yBtCeCbAmDlAqJ@_Cd@y@v@}@xBWhBqBvEz@vB}@|CzAfI}AnIn@bBhAxBtDd@D|@s@",
-   "pointCount": 56,
-   "start": [
-    36.586953,
-    136.675108
-   ],
-   "end": [
-    36.548278,
-    136.729942
-   ]
-  },
-  {
-   "id": "石川県:78",
+   "id": "石川県:60",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "能都内浦線",
@@ -1974,8 +1760,8 @@
    "curviness": 228.4,
    "flow": 19.3,
    "turnCount": 239,
-   "score": 54.7,
-   "baseScore": 54.7,
+   "score": 64.3,
+   "baseScore": 64.3,
    "spotCount": 0,
    "polyline": "wfvbFsfadYnLwN`B_DHUgCkBfB}CmAeEtBoCzEsLVkE~KiUsAqX\\mEjBeDi@oCHkAbD{DxDwL~A}@vDLvB_@fCuB~@{C@_FuBcKaAgBOmD}AsEAwDr@gJdEoEz@sBdC{WwAcFuCs@eCmBNaElA_Co@_E}A}AKmBXoEbBgDnAm@zBExAmAvCsNa@_Os@aAiDe@g@i@kA{DcCeRcCoHAmBdAeDHiBSgA}CyE[oDoAk@R{MuF}JZ}V`Ka^lA{KxJgVk@wCOg@sEjCyByBePtC}NxKaCl@uBIoBm@cBaBiEuKiS_MaAcBwBwHf@mMb@eCpAeC|R}QxFmC`DeEtAgDlCuMHqE[uAwCqGeDaDmHuB_Cb@kCKeJiDmIcBsNaHuB_GyDqDwE_KyHiXqD{DgNkBy@g@_@cB@eH{CkFoDcAaCh@wCjCYlIsApF{@~GsQ|PkGfLc@pCs@tSmAvGsGbBeDFcOpEwHXoKmNaFtGwDdAkJx@yOnQiR|FaH|GlCvHx@`IdFdJ",
    "pointCount": 134,
@@ -1986,10 +1772,70 @@
    "end": [
     37.351706,
     137.236475
+   ],
+   "tags": [
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "石川県:79",
+   "id": "石川県:61",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "清水小坂線",
+   "ref": "210",
+   "highway": "secondary",
+   "lengthKm": 7.61,
+   "curviness": 235.4,
+   "flow": 18.7,
+   "turnCount": 96,
+   "score": 64.2,
+   "baseScore": 64.2,
+   "spotCount": 0,
+   "polyline": "m{h~EmjeaYxDyIh@iEnBeFpEmDzEcKdHuGR_Hd@Ml@iHbEoLrI_FbCuEvGmHtHsNnGiEbE}ELeAq@iBb@am@j@iBhBsB`AgIpLwN|AcFdAmH|DsJjBiCbCqAhDk@dLrAfDy@bB_BtNu_@BqGhAaDOoBZyDj@yBtCeCbAmDlAqJ@_Cd@y@v@}@xBWhBqBvEz@vB}@|CzAfI}AnIn@bBhAxBtDd@D|@s@",
+   "pointCount": 56,
+   "start": [
+    36.586953,
+    136.675108
+   ],
+   "end": [
+    36.548278,
+    136.729942
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:62",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "輪島浦上線",
+   "ref": "38",
+   "highway": "primary",
+   "lengthKm": 3.54,
+   "curviness": 188.7,
+   "flow": 20.2,
+   "turnCount": 33,
+   "score": 63.9,
+   "baseScore": 59.3,
+   "spotCount": 2,
+   "polyline": "mafcFczobYwQyCJgLkV{I}MrOWxCBbKiArLoMhf@}@rLyJzHy@rAU`BNnIqBhIbB|F?~J",
+   "pointCount": 17,
+   "start": [
+    37.391747,
+    136.892658
+   ],
+   "end": [
+    37.406201,
+    136.872264
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:63",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "柳田里線",
@@ -1999,8 +1845,8 @@
    "curviness": 227.5,
    "flow": 18.6,
    "turnCount": 108,
-   "score": 54.3,
-   "baseScore": 54.3,
+   "score": 63.7,
+   "baseScore": 63.7,
    "spotCount": 0,
    "polyline": "knbcFeoucYoAZ_PIkGpAuFpJc@fDN~D[bFoAtCyA@uFiByGdFeCJgBx@wCa@wDrA_CpDeMhFuAJyEgAgDbA{BbHmBh@kDjD}Dq@yBNwAv@{HLcCsAeA@eBtAm@rDkA_@uBLaFfGw@rByGdDmJjOcH~M}BrCc@fHqAbCqAl@oFh@yK^yEzB}@hAm@tGB`Oc@pHVrEyC`Yy@lBcFjBwPzLyDzA}DrCkIpVsJzIsMlByPw@eC~A{B|GiDpF",
    "pointCount": 64,
@@ -2011,85 +1857,14 @@
    "end": [
     37.429665,
     137.036213
-   ]
-  },
-  {
-   "id": "石川県:80",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "金平寺井線",
-   "ref": "165",
-   "highway": "secondary",
-   "lengthKm": 4.74,
-   "curviness": 174.1,
-   "flow": 22.9,
-   "turnCount": 36,
-   "score": 53.9,
-   "baseScore": 53.9,
-   "spotCount": 0,
-   "polyline": "ymk}Eolb`YvHgTr@_F~A?xAqCdBqA~Eq@Bmk@nHkB~BVbZSxReBnIrAvSkCdG^pHfB`DaDxCoAdKoJlC{F`CsC|Gm@zQhB~DbA",
-   "pointCount": 24,
-   "start": [
-    36.436292,
-    136.496235
    ],
-   "end": [
-    36.404075,
-    136.514298
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:81",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "七尾能登島公園線",
-   "ref": "47",
-   "highway": "primary",
-   "lengthKm": 6,
-   "curviness": 186.9,
-   "flow": 14.9,
-   "turnCount": 75,
-   "score": 53.9,
-   "baseScore": 46.4,
-   "spotCount": 5,
-   "polyline": "otmaFil|bYyAmO}E}HYeFp@{GsAiO\\cDfIeEvF{NUoGo@q@kDk@m@gAAuAxA}GGkBm@gB{@aAwJyEyBoHqGyEwCcJwD{GuEwDoIwJwGoCqEeIyDuQsDwFuEyAgGyEyH?aGyD}FJkEcBuYcE{GeFaMmC",
-   "pointCount": 38,
-   "start": [
-    37.102962,
-    136.957011
-   ],
-   "end": [
-    37.131414,
-    136.998233
-   ]
-  },
-  {
-   "id": "石川県:82",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "桂谷川島線",
-   "ref": "263",
-   "highway": "secondary",
-   "lengthKm": 3.9,
-   "curviness": 239.9,
-   "flow": 18.3,
-   "turnCount": 51,
-   "score": 53.7,
-   "baseScore": 53.7,
-   "spotCount": 0,
-   "polyline": "ouhbFswfbY{EsCoB}KiEwGEcH{CqGw@qEiE_FgAsEeFoGQcBiAsBVcDqBkCY_Mm@_GwBaMeE}OUiGNgMyCqE}GgE{@}FoE{JA{Gk@oC{C_EsD}BmBiG",
-   "pointCount": 29,
-   "start": [
-    37.241358,
-    136.846177
-   ],
-   "end": [
-    37.256527,
-    136.882777
-   ]
-  },
-  {
-   "id": "石川県:83",
+   "id": "石川県:64",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "輪島富来線",
@@ -2099,8 +1874,8 @@
    "curviness": 244.7,
    "flow": 18.2,
    "turnCount": 129,
-   "score": 53.6,
-   "baseScore": 53.6,
+   "score": 63.1,
+   "baseScore": 63.1,
    "spotCount": 0,
    "polyline": "mifbFemabY|@v@pMVrC~@xBi@xAaBfAApA`B~@jElEDtAvEfRpFbEh@xBrDvNvFfHnHvDr@bDAlKzDtE?|F~FfDbB|EpF`JxE`BbGfDnDfCv@~FdG~E~@~CbDxI`En@DbCqArAFZl@NtExAx@~CNpIeAnALZh@HhDjE`I`CdAjEbEvN`GnCjGxJdDlDhCfAdCjD^~Iy@|JrBlCxDRhGfHlHrCjIxLpE|HvHxAT|Ai@jGaJxAu@jR~FzNtWrA|JD|MxAzE",
    "pointCount": 68,
@@ -2111,10 +1886,42 @@
    "end": [
     37.162068,
     136.773203
+   ],
+   "tags": [
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "石川県:84",
+   "id": "石川県:65",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "桂谷川島線",
+   "ref": "263",
+   "highway": "secondary",
+   "lengthKm": 3.9,
+   "curviness": 239.9,
+   "flow": 18.3,
+   "turnCount": 51,
+   "score": 63,
+   "baseScore": 63,
+   "spotCount": 0,
+   "polyline": "ouhbFswfbY{EsCoB}KiEwGEcH{CqGw@qEiE_FgAsEeFoGQcBiAsBVcDqBkCY_Mm@_GwBaMeE}OUiGNgMyCqE}GgE{@}FoE{JA{Gk@oC{C_EsD}BmBiG",
+   "pointCount": 29,
+   "start": [
+    37.241358,
+    136.846177
+   ],
+   "end": [
+    37.256527,
+    136.882777
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:66",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "粟生小松線",
@@ -2124,8 +1931,8 @@
    "curviness": 174.6,
    "flow": 21.6,
    "turnCount": 58,
-   "score": 53.3,
-   "baseScore": 53.3,
+   "score": 62.6,
+   "baseScore": 62.6,
    "spotCount": 0,
    "polyline": "k{n}E{ud`YdE|VjD`Cz@vBfH~Exf@`m@jElArC`BhRhA`@bLA~N|AjEbEzDr@HVrUhAxT`LtOrAjLx@dCtJzHdBrCzFxOb@|GZj@xExBdDNz@d@~A`C|UhTzHnDhEnGtFrEdAnDJnG|G`^ZjH",
    "pointCount": 36,
@@ -2136,10 +1943,13 @@
    "end": [
     36.417676,
     136.450285
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:85",
+   "id": "石川県:67",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "瀬領粟津線",
@@ -2149,8 +1959,8 @@
    "curviness": 223.6,
    "flow": 18.9,
    "turnCount": 44,
-   "score": 53.1,
-   "baseScore": 53.1,
+   "score": 62.3,
+   "baseScore": 62.3,
    "spotCount": 0,
    "polyline": "{mw|Em|x_YjAwE_CyVyEaDwDsKeC{D}F{EcCeEaDq@_AyC?eQx@wIvBsFjBqJhDs@z@{BiAoEmEaEkCoGgDwEoBeIHa@dLsDrAiAjKsTBkC",
    "pointCount": 26,
@@ -2161,35 +1971,41 @@
    "end": [
     36.336238,
     136.479616
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:86",
+   "id": "石川県:68",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "白山公園線",
-   "ref": "33",
+   "name": "七尾能登島公園線",
+   "ref": "47",
    "highway": "primary",
-   "lengthKm": 13.3,
-   "curviness": 219.7,
-   "flow": 18,
-   "turnCount": 162,
-   "score": 52.4,
-   "baseScore": 52.4,
-   "spotCount": 0,
-   "polyline": "gcy{Eoi{`YtB}BjDiHvHmDhJ{@`IVhBYhAw@jIiMbGaCzCsEbF{KdC_Nb@cG|CwIxFqHx@iCLwHq@kNPuIw@yJd@qCdIoVw@gFNsD`@WhGxCl@@jCmBzAeIIuHTw@l@g@tEu@fC}AlOyTzE{AlAIpGxAjF}AtJxBhCtBdN`BzJnDvFrDvBLzNcCrMYhJxAjLUhKp@nPgKbC_EjFcQ~C}GbEcDbEkBpAqBpDsLbMiHtAaDp@iFrMmNxAoCv@yDtE_CtD{EzBmJpGuGlA_KB}DfCoBtA{Be@eAuDNyAh@i@s@CkD]sAPoGsB{UI}GmCqKFmFsAkDb@uG_DqHOqLoAy@",
-   "pointCount": 89,
+   "lengthKm": 6,
+   "curviness": 186.9,
+   "flow": 14.9,
+   "turnCount": 75,
+   "score": 62,
+   "baseScore": 54.5,
+   "spotCount": 5,
+   "polyline": "otmaFil|bYyAmO}E}HYeFp@{GsAiO\\cDfIeEvF{NUoGo@q@kDk@m@gAAuAxA}GGkBm@gB{@aAwJyEyBoHqGyEwCcJwD{GuEwDoIwJwGoCqEeIyDuQsDwFuEyAgGyEyH?aGyD}FJkEcBuYcE{GeFaMmC",
+   "pointCount": 38,
    "start": [
-    36.178605,
-    136.623764
+    37.102962,
+    136.957011
    ],
    "end": [
-    36.115292,
-    136.705627
+    37.131414,
+    136.998233
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:87",
+   "id": "石川県:69",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "氷見志雄線",
@@ -2199,8 +2015,8 @@
    "curviness": 233.7,
    "flow": 17.4,
    "turnCount": 44,
-   "score": 52.1,
-   "baseScore": 52.1,
+   "score": 61.2,
+   "baseScore": 61.2,
    "spotCount": 0,
    "polyline": "is}_Fit_bYuI{B[uBaEwG[mIVkFy@{HjDeLoFoTsC}FgIyHyB_Q_AyBmEoCsI}@u@i@oAsFwCcBiAcD{EkAa@mAw@mKmBoK",
    "pointCount": 23,
@@ -2211,35 +2027,14 @@
    "end": [
     36.870416,
     136.837269
-   ]
-  },
-  {
-   "id": "石川県:88",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "末吉七尾線",
-   "ref": "116",
-   "highway": "secondary",
-   "lengthKm": 6.07,
-   "curviness": 179.8,
-   "flow": 19.9,
-   "turnCount": 55,
-   "score": 51.8,
-   "baseScore": 51.8,
-   "spotCount": 0,
-   "polyline": "uraaF{cpbYb@u@fBnBpABj@cCPkJl@uGjFuCvBsEt@}Ex@sc@l@{CQ_AsA}BiH}F{CEiGqGyDkGKsK_BgI_@oAsHgKm@oBgBwOoDgCsN_BsDo@yA_A{VaWkKcTwFoD_@{Ab@aIu@_I}NaZ\\sIkCyU",
-   "pointCount": 37,
-   "start": [
-    37.041225,
-    136.894216
    ],
-   "end": [
-    37.06016,
-    136.944737
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:89",
+   "id": "石川県:70",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道360号",
@@ -2249,8 +2044,8 @@
    "curviness": 247.8,
    "flow": 20,
    "turnCount": 96,
-   "score": 51.7,
-   "baseScore": 51.7,
+   "score": 61.1,
+   "baseScore": 61.1,
    "spotCount": 0,
    "polyline": "}en|E{}`aYnKoQ|FcFrDeIXaA[yHZgCjIyKjCaKhDcG~CmO`BwTj@sCJsFtAcIrAoDvImMPqH~@iCvBoB|DKlA\\|@eCJeBwB{@Qw@LgAa@cFx@sDKuAbB}DEgApAoF`@sEnBaCt@cCwAoFEcFwBkDy@}CGaEqB{P?sBrAqICiBaEaHFcAnCeFbAiDNkG}@cEn@oHrC{GzCiCzAaHzIaQrAa@fGl@xAcAtHsThCmDz@mEfEiENs@",
    "pointCount": 64,
@@ -2261,10 +2056,42 @@
    "end": [
     36.26276,
     136.722864
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:90",
+   "id": "石川県:71",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "末吉七尾線",
+   "ref": "116",
+   "highway": "secondary",
+   "lengthKm": 6.07,
+   "curviness": 179.8,
+   "flow": 19.9,
+   "turnCount": 55,
+   "score": 60.9,
+   "baseScore": 60.9,
+   "spotCount": 0,
+   "polyline": "uraaF{cpbYb@u@fBnBpABj@cCPkJl@uGjFuCvBsEt@}Ex@sc@l@{CQ_AsA}BiH}F{CEiGqGyDkGKsK_BgI_@oAsHgKm@oBgBwOoDgCsN_BsDo@yA_A{VaWkKcTwFoD_@{Ab@aIu@_I}NaZ\\sIkCyU",
+   "pointCount": 37,
+   "start": [
+    37.041225,
+    136.894216
+   ],
+   "end": [
+    37.06016,
+    136.944737
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:72",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "輪島富来線",
@@ -2274,8 +2101,8 @@
    "curviness": 241.4,
    "flow": 16.7,
    "turnCount": 86,
-   "score": 51.5,
-   "baseScore": 51.5,
+   "score": 60.5,
+   "baseScore": 60.5,
    "spotCount": 0,
    "polyline": "{nnbFsxfbYbEfBxAtAzCNpB[v@XxJnJ|BtEx@nOZ|@xDdCh@hIrEhD^nAYbCgHlJYpAXtBnFrEdApBqAzH?`Cn@fBrBvArEZtDOrJmCnF|A~@zA`CzIlDtG`CzNvDdFdET~JiIlMgEnAAtCr@|KpHtClFJtDf@b@jF|@hMh@~DxAtCg@hPU",
    "pointCount": 47,
@@ -2286,10 +2113,42 @@
    "end": [
     37.236461,
     136.818302
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:91",
+   "id": "石川県:73",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "我谷今立塔尾線",
+   "ref": "153",
+   "highway": "secondary",
+   "lengthKm": 5.63,
+   "curviness": 133,
+   "flow": 22.7,
+   "turnCount": 33,
+   "score": 60.3,
+   "baseScore": 58.4,
+   "spotCount": 0,
+   "polyline": "uff|Ekmw_Ya@pCyAv@eEzEuA|FZpEYfCuE|IwApEYrJaEtE_J`Ya@vNhBtKTnIzBlGC|Bq@hByL~PgC`LwAbD_@~DcFdPu@~@{EOgDv@{QrNgCnA_F~@mB|DcDxCoMp[mIzI}NbEwBxA",
+   "pointCount": 35,
+   "start": [
+    36.24571,
+    136.44006
+   ],
+   "end": [
+    36.27146,
+    136.39361
+   ],
+   "reshaped": true,
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:74",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "折戸飯田線",
@@ -2299,8 +2158,8 @@
    "curviness": 225,
    "flow": 17.1,
    "turnCount": 96,
-   "score": 51.1,
-   "baseScore": 51.1,
+   "score": 60,
+   "baseScore": 60,
    "spotCount": 0,
    "polyline": "wc_dFij{dYpBrAxARxFHhGa@hHt@nCk@bKpAvKyBbCmAfJzA|NyBbDHbCwAfCa@D_BpAmAnIt@lFmClDbB|FtAfCtC~@RzK@zBwA~Qy@hE`AjDM`GsA`FcDdD[pGyDfGeAxCLpFyCpFKxBgBj@{EvB}C|Fv@`IdH|Cz@`EMd`@sGjEx@fLfGvIz@nNkChEeKdBsA",
    "pointCount": 50,
@@ -2311,10 +2170,14 @@
    "end": [
     37.459753,
     137.286479
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:92",
+   "id": "石川県:75",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "深田片野下福田線",
@@ -2324,8 +2187,8 @@
    "curviness": 186.1,
    "flow": 18.1,
    "turnCount": 60,
-   "score": 50.6,
-   "baseScore": 50.6,
+   "score": 59.4,
+   "baseScore": 59.4,
    "spotCount": 0,
    "polyline": "ouy|Ee`~~XlEzGpAhExBxDxErOxClFjCzH|IxHfBdCXpBK~KvJ`IjQrAdL~E|EdKvX`ZbHfI|AjD`@gAFsDrBiDx@kGoAcJL_U\\mDxBeBdBUxFhClC]dG|AjEiA`K{IgAePTeB~@m@bJS",
    "pointCount": 36,
@@ -2336,35 +2199,13 @@
    "end": [
     36.314232,
     136.299267
-   ]
-  },
-  {
-   "id": "石川県:93",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "国道249号",
-   "ref": "249",
-   "highway": "trunk",
-   "lengthKm": 10.3,
-   "curviness": 212.4,
-   "flow": 17.6,
-   "turnCount": 124,
-   "score": 50.6,
-   "baseScore": 47.7,
-   "spotCount": 1,
-   "polyline": "yvvaFkanaYeDTiQmEyIJqD|@eUvSuCbAiOxAsNrLaF\\{IoDwKrC{Im@mT|EmBeAuBoHw@Qc@PmClGwChBgBNuHoA{DqEgIEuFbAkF?iOmJgTmE}C?qJdEkD`EsB~DwFr@yMtJo@rBeAzLw@bCeBtAyZgE_I~FcHmAsFrA{CAC|A`Bp@Rf@]bAwEg@sG?kTvAaBlCc@xHf@v@|BL\\jAuCjC_HlLcI|F{EjK_BQuBeDuBoNoGyK",
-   "pointCount": 63,
-   "start": [
-    37.149407,
-    136.719737
    ],
-   "end": [
-    37.223075,
-    136.702623
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:94",
+   "id": "石川県:76",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "鈴ヶ嶺矢波線",
@@ -2374,8 +2215,8 @@
    "curviness": 207.4,
    "flow": 17.4,
    "turnCount": 44,
-   "score": 50.6,
-   "baseScore": 50.6,
+   "score": 59.4,
+   "baseScore": 59.4,
    "spotCount": 0,
    "polyline": "i{ccFy_{cYvNtBpGaDlDYvLvAv@]vBiDhDj@rAUfCyEjDeCfMy@~AeBdNeDxAlBvDhCxLXdIrGtG`KjHtErGlNfIrGfEfI",
    "pointCount": 23,
@@ -2386,35 +2227,42 @@
    "end": [
     37.352569,
     137.106684
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:95",
+   "id": "石川県:77",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "鍋谷寺畠線",
-   "ref": "297",
-   "highway": "secondary",
-   "lengthKm": 5.54,
-   "curviness": 214.6,
-   "flow": 15.6,
-   "turnCount": 76,
-   "score": 50.2,
-   "baseScore": 50.2,
-   "spotCount": 0,
-   "polyline": "}_h}Eacm`Yh@qAZkGyD_O_@mEaBkFgBu\\iFmP{A_KQgQvB_SvBqC`BiErPoNxDeKrAwAhKsBzJuHhLT`Fe@|ByAxCoEtByAfFeOjBmCjAiKxCiPzF_MnBcBzBeExEeDpBsC",
-   "pointCount": 32,
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 10.3,
+   "curviness": 212.4,
+   "flow": 17.6,
+   "turnCount": 124,
+   "score": 59.3,
+   "baseScore": 56.4,
+   "spotCount": 1,
+   "polyline": "yvvaFkanaYeDTiQmEyIJqD|@eUvSuCbAiOxAsNrLaF\\{IoDwKrC{Im@mT|EmBeAuBoHw@Qc@PmClGwChBgBNuHoA{DqEgIEuFbAkF?iOmJgTmE}C?qJdEkD`EsB~DwFr@yMtJo@rBeAzLw@bCeBtAyZgE_I~FcHmAsFrA{CAC|A`Bp@Rf@]bAwEg@sG?kTvAaBlCc@xHf@v@|BL\\jAuCjC_HlLcI|F{EjK_BQuBeDuBoNoGyK",
+   "pointCount": 63,
    "start": [
-    36.418708,
-    136.551053
+    37.149407,
+    136.719737
    ],
    "end": [
-    36.400253,
-    136.597246
+    37.223075,
+    136.702623
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:96",
+   "id": "石川県:78",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "珠洲穴水線",
@@ -2424,8 +2272,8 @@
    "curviness": 194.3,
    "flow": 17.7,
    "turnCount": 120,
-   "score": 50.2,
-   "baseScore": 50.2,
+   "score": 59,
+   "baseScore": 59,
    "spotCount": 0,
    "polyline": "kwubFe|_cYXeBg@oDc@yOh@yB|OuIlQkQxDsA`DMfIbAnNFlFbApDnBbBxBdBpEf@bEGlGiCbTv@zXxA`FzUzSnErKfGlJvIdDrQfNzG|GnPzBnEjCdQvWrJlRjJvE|Qj@xHoAjAsCOeDzF{AjAn@[zKd@p@rAe@lDd@xDWlOf@nJiFtI@jAl@zE~GjEfAbH^`A~@zEvAbLtPfDp@lFq@~HlIzBL`Ds@bI|CfD[fCxBfEWLvB|CQz@Z",
    "pointCount": 64,
@@ -2436,60 +2284,14 @@
    "end": [
     37.238035,
     136.941155
-   ]
-  },
-  {
-   "id": "石川県:97",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "内尾口直海線",
-   "ref": "181",
-   "highway": "secondary",
-   "lengthKm": 8.23,
-   "curviness": 173.7,
-   "flow": 17.9,
-   "turnCount": 80,
-   "score": 50.1,
-   "baseScore": 50.1,
-   "spotCount": 0,
-   "polyline": "ugz|EozeaYQpCcErIqBbQfAxJwBrGmGjFyCpE_KvDu@x@q@fAqCnOy@jBiMzMqCtGiQpPgL`@uErBeSGaDlAeAdCmK`HmB~EeFhAk@hAcFvC_GbBa@hBqGfHgBbEwAvO{@|CeGpEg@`DgDlFuDjAsMrIoLjDgNDeFlEmOo@iLyAuMlGqK|MuCn@kKm@_IfF",
-   "pointCount": 47,
-   "start": [
-    36.348275,
-    136.677685
    ],
-   "end": [
-    36.403191,
-    136.631447
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "石川県:98",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "中尾津幡線",
-   "ref": "212",
-   "highway": "secondary",
-   "lengthKm": 4.4,
-   "curviness": 190.8,
-   "flow": 17.5,
-   "turnCount": 48,
-   "score": 50,
-   "baseScore": 50,
-   "spotCount": 0,
-   "polyline": "ukx~EmesaYzC}HrCwBt\\s^~EwB~GaFfD_GLaIz@}AlH_D|IXpL{AjKeCxHyMvDaB`H}JfDsChBsFrEOzDuBfD_@~B\\dGuFhF^|H{DhBuBvAY",
-   "pointCount": 27,
-   "start": [
-    36.666345,
-    136.745993
-   ],
-   "end": [
-    36.635071,
-    136.770268
-   ]
-  },
-  {
-   "id": "石川県:99",
+   "id": "石川県:79",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "内浦柳田線",
@@ -2499,8 +2301,8 @@
    "curviness": 228,
    "flow": 15.8,
    "turnCount": 104,
-   "score": 50,
-   "baseScore": 50,
+   "score": 58.8,
+   "baseScore": 58.8,
    "spotCount": 0,
    "polyline": "uu}bFy`rdYPzEjAzEBbKlBdU{AlMa@|P`BtEfDfOzB|Fn@vFe@vIJzFkAnCe@vG_B~HqAbDX~F_F~JTzArBlA\\~@PvKoA~J?|MsEfR\\~I_ClP?vCi@zDkA`B{EpBqE`@cAfASfAA~HnCpD`@|DmCvDm@hEaAbC[nET~JgB|DGnCz@|LG|EtCjOXzFpAtHyBrHiEjEs@`Hq@lBgBlB",
    "pointCount": 55,
@@ -2511,10 +2313,42 @@
    "end": [
     37.355169,
     137.158545
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:100",
+   "id": "石川県:80",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "中尾津幡線",
+   "ref": "212",
+   "highway": "secondary",
+   "lengthKm": 4.4,
+   "curviness": 190.8,
+   "flow": 17.5,
+   "turnCount": 48,
+   "score": 58.6,
+   "baseScore": 58.6,
+   "spotCount": 0,
+   "polyline": "ukx~EmesaYzC}HrCwBt\\s^~EwB~GaFfD_GLaIz@}AlH_D|IXpL{AjKeCxHyMvDaB`H}JfDsChBsFrEOzDuBfD_@~B\\dGuFhF^|H{DhBuBvAY",
+   "pointCount": 27,
+   "start": [
+    36.666345,
+    136.745993
+   ],
+   "end": [
+    36.635071,
+    136.770268
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:81",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "瓜生能瀬線",
@@ -2524,8 +2358,8 @@
    "curviness": 205.2,
    "flow": 15.5,
    "turnCount": 100,
-   "score": 49.9,
-   "baseScore": 49.9,
+   "score": 58.5,
+   "baseScore": 58.5,
    "spotCount": 0,
    "polyline": "kk~~EivoaY{CkFDuF}Cg`@DeE}BwDmEkM{JaKkDuIwKcGqCwEaBiGqHkKeHy@}BgFeIeM}JTsFv@uD]_TqKeCmC_C_FsIuFsAoD{EoFiBaGiEuIiCeC{A_DiCuCOcJaCiEsEcM`@cHpA}CqB}IyC}B}HO_Cu@yBsBuHwL_GcEk@eAgBu@cAgD?mGmAmHeDwAeDsC",
    "pointCount": 49,
@@ -2536,10 +2370,13 @@
    "end": [
     36.738135,
     136.784624
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:101",
+   "id": "石川県:82",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "池崎徳田線",
@@ -2549,8 +2386,8 @@
    "curviness": 189.8,
    "flow": 17.5,
    "turnCount": 49,
-   "score": 49.9,
-   "baseScore": 49.9,
+   "score": 58.5,
+   "baseScore": 58.5,
    "spotCount": 0,
    "polyline": "{x`aF{wrbYhGkCOcIpAaEx@uFfAyBdCsAnKkCjCoBjLuXjR_UtBwEfK}KfHaBtAaA\\sAUeGPkBdBeEzFcFfIsEhNlE~IOjMwEzJQjBoAb@mAdGrH",
    "pointCount": 28,
@@ -2561,35 +2398,13 @@
    "end": [
     37.007741,
     136.931
-   ]
-  },
-  {
-   "id": "石川県:102",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "我谷今立塔尾線",
-   "ref": "153",
-   "highway": "secondary",
-   "lengthKm": 7.09,
-   "curviness": 188.3,
-   "flow": 16.7,
-   "turnCount": 80,
-   "score": 49.8,
-   "baseScore": 49.8,
-   "spotCount": 0,
-   "polyline": "e{c|Ekxv_YmDb@eFwAsFOwGuBuJeJoGyDcOs@eIlBa@pCyAv@eEzEuA|FZpEYfCuE|IwApEYrJaEtE_J`Ya@vNhBtKTnIzBlGC|Bq@hByL~PgC`LwAbD_@~DcFdPu@~@{EOgDv@{QrNgCnA_F~@mB|DcDxCoMp[mIzI}NbEwBxA",
-   "pointCount": 43,
-   "start": [
-    36.233632,
-    136.436705
    ],
-   "end": [
-    36.271456,
-    136.393608
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:103",
+   "id": "石川県:83",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "黒川横山線",
@@ -2599,8 +2414,8 @@
    "curviness": 192.7,
    "flow": 16.3,
    "turnCount": 77,
-   "score": 49.6,
-   "baseScore": 49.6,
+   "score": 58.2,
+   "baseScore": 58.2,
    "spotCount": 0,
    "polyline": "obm_FkdvaYfBxNhAvA`HlDvG~ArEsEhDh@xDu@jEsBbD}CzB[|E|A|B|AtA`EpCjEjFF~@`@nBhKrCnEXtAIzBeCxEYzB`A|JdB`ExCzBbJ`K|PrCvKpDhJxFlGlH|B~HlJtNj@|CXrUmFxi@D|IjAhHO|@qBhB}@vWm@fG",
    "pointCount": 42,
@@ -2611,10 +2426,14 @@
    "end": [
     36.746085,
     136.716028
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:104",
+   "id": "石川県:84",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "金平寺井線",
@@ -2624,8 +2443,8 @@
    "curviness": 165.9,
    "flow": 18.3,
    "turnCount": 49,
-   "score": 49.4,
-   "baseScore": 49.4,
+   "score": 58,
+   "baseScore": 58,
    "spotCount": 0,
    "polyline": "ygd}E{{e`YtTQvDs@r@fGjCvEhFxChKvI`QpTjC`BfADlB_DxBOv[bEz@l@`@lAx@|GhC~D`V~H`Mp@jIdDPl@WpG^j@rEBrIbElN|EjL~BzGj@fHpFhFGdDjBvFh@",
    "pointCount": 32,
@@ -2636,10 +2455,13 @@
    "end": [
     36.358598,
     136.493048
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:105",
+   "id": "石川県:85",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道249号",
@@ -2649,8 +2471,8 @@
    "curviness": 221.9,
    "flow": 15.8,
    "turnCount": 122,
-   "score": 49.3,
-   "baseScore": 46.4,
+   "score": 57.6,
+   "baseScore": 54.8,
    "spotCount": 1,
    "polyline": "_zfcFwwvbYqGsNi@wHb@yEvDmG@yDkA{BcFeEe@wBGmEg@oAgGcB}AsAYyBh@{DW_CsBcDuDsDMgAdAaEHiBgFkNGoCl@gJ[sCuIuJ{Kq_@yH}I{J_DmBuHuCiDoByGB}FtBmI_AcJj@qB|EcFZaBO}C{MiOkNoS}B}BuDgAaA{@{B{GgI{GgAyDoBsQ}BaHu@wFgDiE{AqDcB{MkDqKGcHcEgFU}Es@wBiAm@uDGyAeAi@kBg@kGmIuL",
    "pointCount": 64,
@@ -2661,35 +2483,13 @@
    "end": [
     37.428267,
     137.004684
-   ]
-  },
-  {
-   "id": "石川県:106",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "松任宇ノ気線",
-   "ref": "8",
-   "highway": "primary",
-   "lengthKm": 6.9,
-   "curviness": 145.3,
-   "flow": 20.5,
-   "turnCount": 49,
-   "score": 48.9,
-   "baseScore": 48.9,
-   "spotCount": 0,
-   "polyline": "yaq~Eqw|`YfKuMuGnGqBdE{TuZrD{EeCQeZwLkLkHcCmCmKyD{KwGmTeR_AsAcCmImH_GyJiGeCu@wMJiXeGeNyJiH{JuI{B{IiHsJyEaLqJ_KeAsScR",
-   "pointCount": 28,
-   "start": [
-    36.628926,
-    136.631126
    ],
-   "end": [
-    36.67483,
-    136.665034
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:107",
+   "id": "石川県:86",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "新保矢田野線",
@@ -2699,8 +2499,8 @@
    "curviness": 156.1,
    "flow": 17.9,
    "turnCount": 42,
-   "score": 48.3,
-   "baseScore": 48.3,
+   "score": 56.6,
+   "baseScore": 56.6,
    "spotCount": 0,
    "polyline": "mky|Eqro_Y_B|EuQnS_GaHiFqBgGA}J|AaDD{DQeHuBsEpc@iE~Mf@`RKvNdAjHfDxGHlE{BAqErAeDW{KsD{CJiQ|U{BvBuEnBkHrH",
    "pointCount": 26,
@@ -2711,10 +2511,13 @@
    "end": [
     36.368269,
     136.374167
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:108",
+   "id": "石川県:87",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "深谷中浜線",
@@ -2724,8 +2527,8 @@
    "curviness": 195,
    "flow": 15.8,
    "turnCount": 96,
-   "score": 48.1,
-   "baseScore": 48.1,
+   "score": 56.5,
+   "baseScore": 56.5,
    "spotCount": 0,
    "polyline": "}fdbF}bjaYGpAwB|EXfFn@j@`NnCpB`AxDdGnIbD~AzAnBtGfEhJl@|FfBtBlAjLhJ`R`BdAjCFrIiDxGdBzBD~A}@nKoOdGaEvSwCdIa@`DlCbA|BxCtAdDvCjM~CnLr@|JgCvI`AbKbH`DtMrAhC~CvCrHxDjKt@tApArBdEfDzBbB@bCcA`Ff@hEhGxCdBzACvE}BbDcEhLyH|HU",
    "pointCount": 53,
@@ -2736,10 +2539,15 @@
    "end": [
     37.164255,
     136.677367
+   ],
+   "tags": [
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "石川県:109",
+   "id": "石川県:88",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "粟津正院線",
@@ -2749,8 +2557,8 @@
    "curviness": 178.4,
    "flow": 16,
    "turnCount": 58,
-   "score": 48.1,
-   "baseScore": 48.1,
+   "score": 56.4,
+   "baseScore": 56.4,
    "spotCount": 0,
    "polyline": "mmrcFex_eYkCoAsJIgLwBuBmBqMiSqBcUsGeOuBmReB{EFeIeAiL}@}@cEmA{LuOo@sCE}JaAiG_AqBqF_GaCuIsH{CcCgFy@o@iQsFuFIs@k@u@yDoEaDwHyHuL_Ca@o@",
    "pointCount": 32,
@@ -2761,60 +2569,13 @@
    "end": [
     37.484499,
     137.339665
-   ]
-  },
-  {
-   "id": "石川県:110",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "山中伊切線",
-   "ref": "39",
-   "highway": "primary",
-   "lengthKm": 5.47,
-   "curviness": 161.4,
-   "flow": 18.4,
-   "turnCount": 48,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "scy|Eich_YrCDvDpBdQbV|C`HfCnCjBz@z_@bDjBOhB{@rE{GhE_E|D_BbHo@g@sCO_KoCiKcCiT_@yb@FcHd@qEKsP`@c@?}FxAeDuCgLo@q`@PyK]eGTk@hFsBXcA",
-   "pointCount": 32,
-   "start": [
-    36.3425,
-    136.361647
    ],
-   "end": [
-    36.325781,
-    136.39091
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:111",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "鶴来水島美川線",
-   "ref": "103",
-   "highway": "secondary",
-   "lengthKm": 3.21,
-   "curviness": 141.7,
-   "flow": 18.9,
-   "turnCount": 24,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "uzs}Ekwh`Y{@oDgFmHa@eBG_Ed@cP|E_PpKke@eCwGSeFjIeJlDko@|Kx@pDy@xEcE",
-   "pointCount": 15,
-   "start": [
-    36.479306,
-    136.528696
-   ],
-   "end": [
-    36.471865,
-    136.557224
-   ]
-  },
-  {
-   "id": "石川県:112",
+   "id": "石川県:89",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "土川浜田線",
@@ -2824,8 +2585,8 @@
    "curviness": 157.1,
    "flow": 16.8,
    "turnCount": 46,
-   "score": 47.3,
-   "baseScore": 47.3,
+   "score": 55.5,
+   "baseScore": 55.5,
    "spotCount": 0,
    "polyline": "kcoaF}z_bYh@yWlEuAxGgFtAiDbC{BjBqExFwCjGkBvFg@xF{ArMkAl@o@SyBRcKqAeNR_KaAwKeBoDoEyCoGgJkH{Oi@wEf@cNbAiFIoGoHuQcFcF}B}HhOeH",
    "pointCount": 30,
@@ -2836,10 +2597,13 @@
    "end": [
     37.103978,
     136.849835
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:113",
+   "id": "石川県:90",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "福浦港中島線",
@@ -2849,8 +2613,8 @@
    "curviness": 188.8,
    "flow": 15.1,
    "turnCount": 76,
-   "score": 46.7,
-   "baseScore": 46.7,
+   "score": 54.9,
+   "baseScore": 54.9,
    "spotCount": 0,
    "polyline": "atqaFitebYyAbQfA~I\\~MzCxI~AxNlDxDfUfKZfBy@`IfAbIpBlCnBv@hCHfB|AxAjFTnJlBxJhC`EbBxHtCrH`ApAtF|CdBxEHjD|@dESzFbBlGm@fK`DhNTzDu@lQ}D~KSrHr@dObBjBtHPxCbBpBlCzInBfEdM",
    "pointCount": 41,
@@ -2861,35 +2625,13 @@
    "end": [
     37.103431,
     136.786138
-   ]
-  },
-  {
-   "id": "石川県:114",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "鶴来水島美川線",
-   "ref": "103",
-   "highway": "secondary",
-   "lengthKm": 4.82,
-   "curviness": 96.4,
-   "flow": 20.2,
-   "turnCount": 23,
-   "score": 46.5,
-   "baseScore": 46.5,
-   "spotCount": 0,
-   "polyline": "ujp}Egxu`YiYta@WtF}O~q@{BzM_@tNxCzT|N|b@d@hE_@dEcFrNkBtVEhn@[qVPqC",
-   "pointCount": 15,
-   "start": [
-    36.461394,
-    136.595397
    ],
-   "end": [
-    36.467624,
-    136.554956
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:115",
+   "id": "石川県:91",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "珠洲穴水線",
@@ -2899,8 +2641,8 @@
    "curviness": 167.4,
    "flow": 15.1,
    "turnCount": 149,
-   "score": 46.5,
-   "baseScore": 46.5,
+   "score": 54.6,
+   "baseScore": 54.6,
    "spotCount": 0,
    "polyline": "omybFmhecYeRpJwD{@sSY{EeA{FgDeSgEaDp@mH`ImHl@{I_C_E}FmLqCcD}AwFaXeGiI{JeDmAoBoBmKKoJ{BuEy@kDq@sLmIwCaDCeR_E}@uA[kH{FgQwAiBuH_DeDuFe@iCw@gSl@_EzBkHj@wII_Hd@sKs@OcGtA_GaBmEyBcCsCuDuAiDeEeJc@qB}EoDoDCwK|HwYqAyGkAaReBqIdEkMHwFtBuUsEi]kA_CuHmIiAmDhBg[hCaKeAyJlBkCnDwA`H}JNoEwA{IfEyStS__@r@iDpEkJ",
    "pointCount": 73,
@@ -2911,10 +2653,14 @@
    "end": [
     37.367442,
     137.098008
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:116",
+   "id": "石川県:92",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道157号",
@@ -2924,8 +2670,8 @@
    "curviness": 224.6,
    "flow": 16.7,
    "turnCount": 49,
-   "score": 46.1,
-   "baseScore": 46.1,
+   "score": 54.5,
+   "baseScore": 54.5,
    "spotCount": 0,
    "polyline": "wmo{Ewyr`YnNxBfF]fBkBfG_SdBsApSvGtCIdBeE_CqH?{@hCmHtB_@jHpEx@fArA~E|BtAfLt@xMcBhCfBd@`Cc@zK^pFfFzW",
    "pointCount": 24,
@@ -2936,10 +2682,14 @@
    "end": [
     36.108548,
     136.575967
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:117",
+   "id": "石川県:93",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "珠洲広域農道",
@@ -2949,8 +2699,8 @@
    "curviness": 156.3,
    "flow": 14.3,
    "turnCount": 63,
-   "score": 45.3,
-   "baseScore": 45.3,
+   "score": 53.1,
+   "baseScore": 53.1,
    "spotCount": 0,
    "polyline": "y~tcFouxdYkBjDu@pGcAlM]dTeCfJgDnEeAnCa@bR]tBcAhBoFlEaAfBMnJj@tAnAf@hGoApD~C`Pbc@|@dFp@dMpE|LpAnBdBx@dF?pBp@|CdDbBnDdAxHyAvXl@hQp@xAjAx@vGpCfF~@bBdC\\zDcC|KKnCxAhO",
    "pointCount": 40,
@@ -2961,10 +2711,14 @@
    "end": [
     37.458737,
     137.213928
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:118",
+   "id": "石川県:94",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "能登サンセットライン（羽咋広域農道）",
@@ -2974,8 +2728,8 @@
    "curviness": 136.4,
    "flow": 14.6,
    "turnCount": 94,
-   "score": 45.1,
-   "baseScore": 45.1,
+   "score": 52.9,
+   "baseScore": 52.9,
    "spotCount": 0,
    "polyline": "is}_Fit_bY~NlD`Gi@bFqCrDg@dPfFfMjArL_BtMyKnEcA~GbAnMpFtGC|MzJd^zKxB|Bv@fChBfTCbTdBlKhBjDtF~DRtAe@zG~GxN`Bh@tAg@h@iAh@uFvC}CbFyCbH}@jClAzEzGdBpAnOzAzB|DbAvHx@dCxFtFxMtDxAIvEyBnRPxCl@vA`Bf@bB~AvSvAdDlW`TdWbMnIpJf@bBAxBeBbGO|BrBlJ",
    "pointCount": 57,
@@ -2986,35 +2740,14 @@
    "end": [
     36.791834,
     136.767948
-   ]
-  },
-  {
-   "id": "石川県:119",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "志賀富来線",
-   "ref": "36",
-   "highway": "primary",
-   "lengthKm": 3.05,
-   "curviness": 123.3,
-   "flow": 14,
-   "turnCount": 27,
-   "score": 45.1,
-   "baseScore": 40.5,
-   "spotCount": 2,
-   "polyline": "uxhaFk}oaYeEu@_IsFiPJ}Dx@{[jOyBVwKoBwI}D_PkAyOcJaERoFzFoCl@aDcAkDwD",
-   "pointCount": 16,
-   "start": [
-    37.078032,
-    136.729342
    ],
-   "end": [
-    37.103298,
-    136.73108
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:120",
+   "id": "石川県:95",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "高松津幡線旧道",
@@ -3024,8 +2757,8 @@
    "curviness": 130.5,
    "flow": 16.6,
    "turnCount": 29,
-   "score": 45,
-   "baseScore": 45,
+   "score": 52.8,
+   "baseScore": 52.8,
    "spotCount": 0,
    "polyline": "sxa_FazkaY`M_JpAwCxFcGzDgItJgMtG}DpRoGvO{NhBqKxF}LdN_@|Dd@lE|A|LsCrZmCh@y@",
    "pointCount": 17,
@@ -3036,35 +2769,13 @@
    "end": [
     36.687531,
     136.726405
-   ]
-  },
-  {
-   "id": "石川県:121",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "小塩潮津線",
-   "ref": "148",
-   "highway": "secondary",
-   "lengthKm": 4.82,
-   "curviness": 122.2,
-   "flow": 16.4,
-   "turnCount": 36,
-   "score": 44.7,
-   "baseScore": 44.7,
-   "spotCount": 0,
-   "polyline": "spz|Ecwg_YlB~El@xIl@dC[vNcRxPiC\\eBpAuBxZAdJ}AlEqEdc@KlF@nL|Mpo@]hl@pAfIPrQd@x@jC`Af@~@CvJTz@",
-   "pointCount": 23,
-   "start": [
-    36.349697,
-    136.359704
    ],
-   "end": [
-    36.351341,
-    136.311078
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:122",
+   "id": "石川県:96",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道157号",
@@ -3074,8 +2785,8 @@
    "curviness": 197.2,
    "flow": 16.1,
    "turnCount": 73,
-   "score": 44.6,
-   "baseScore": 44.6,
+   "score": 52.6,
+   "baseScore": 52.6,
    "spotCount": 0,
    "polyline": "ydq|E_q~`YnKh@fDk@lQcJhH}KvGEfFzAjCs@bDItIdC~WEvAe@dFyE~Gc]nAu@pAVdBnDBbOe@jGZpArA`AjFj@rH~C~G[~FyCzMClA{BJeEl@gBv@[fACxJvCzAhH|CxDfCdYn@zBlAzBnDtCfElBbGjA",
    "pointCount": 40,
@@ -3086,10 +2797,14 @@
    "end": [
     36.263152,
     136.636037
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:123",
+   "id": "石川県:97",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "橋立港線",
@@ -3099,8 +2814,8 @@
    "curviness": 133.5,
    "flow": 16.8,
    "turnCount": 48,
-   "score": 44.6,
-   "baseScore": 44.6,
+   "score": 52.5,
+   "baseScore": 52.5,
    "spotCount": 0,
    "polyline": "omq|Eut~~XyEjAqDSwSmR}OaFeEm@aFAqEvAiF`JuHtFwAwFgAcAs_@aFgG`GcJp@iGtL}DdFuDvAsKBuNmFmNtAsKWeIiEmTpNkJ~C{BCk\\mF}CP",
    "pointCount": 28,
@@ -3111,10 +2826,41 @@
    "end": [
     36.351341,
     136.311078
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:124",
+   "id": "石川県:98",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "小塩潮津線",
+   "ref": "148",
+   "highway": "secondary",
+   "lengthKm": 4.82,
+   "curviness": 122.2,
+   "flow": 16.4,
+   "turnCount": 36,
+   "score": 52.4,
+   "baseScore": 52.4,
+   "spotCount": 0,
+   "polyline": "spz|Ecwg_YlB~El@xIl@dC[vNcRxPiC\\eBpAuBxZAdJ}AlEqEdc@KlF@nL|Mpo@]hl@pAfIPrQd@x@jC`Af@~@CvJTz@",
+   "pointCount": 23,
+   "start": [
+    36.349697,
+    136.359704
+   ],
+   "end": [
+    36.351341,
+    136.311078
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:99",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "小松辰口線",
@@ -3124,8 +2870,8 @@
    "curviness": 150.4,
    "flow": 14.9,
    "turnCount": 89,
-   "score": 44.5,
-   "baseScore": 44.5,
+   "score": 52.3,
+   "baseScore": 52.3,
    "spotCount": 0,
    "polyline": "uwn}E}nu`YdJgCxBmDhAiJh@qAdCcCpCk@nDt@zBdCv@rCJxP\\~AnH|LbD`BlBDzBo@pL}NbMcHhESnGlBt@hEfAzBb@xDlB~AjIzDpPnUlCvF`CfC]fJh@`Ki@vG{AnCyDv@WnCfDdm@c@hRv@bBvA~LnEnHbEhNlHrK`CnF~JvLzM~GdFfKzBtCfCvAr]fCnEhB`FjGr@bClApR",
    "pointCount": 52,
@@ -3136,35 +2882,41 @@
    "end": [
     36.410989,
     136.544714
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:125",
+   "id": "石川県:100",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "串加賀線",
-   "ref": "145",
-   "highway": "secondary",
-   "lengthKm": 3.77,
-   "curviness": 155.7,
-   "flow": 13.6,
-   "turnCount": 43,
-   "score": 44.1,
-   "baseScore": 44.1,
-   "spotCount": 0,
-   "polyline": "}vu|Esig_Yn@v@pDnAnDzC|BnJlBnCOnIx@jLhJrVp@|NUvIp@dNpBxRd@vKr@lD~C|J~AfBpC`G`DfOfGlGbGtVvCtC",
-   "pointCount": 22,
+   "name": "志賀富来線",
+   "ref": "36",
+   "highway": "primary",
+   "lengthKm": 3.05,
+   "curviness": 123.3,
+   "flow": 14,
+   "turnCount": 27,
+   "score": 52.1,
+   "baseScore": 47.5,
+   "spotCount": 2,
+   "polyline": "uxhaFk}oaYeEu@_IsFiPJ}Dx@{[jOyBVwKoBwI}D_PkAyOcJaERoFzFoCl@aDcAkDwD",
+   "pointCount": 16,
    "start": [
-    36.325115,
-    136.357542
+    37.078032,
+    136.729342
    ],
    "end": [
-    36.312288,
-    136.320932
+    37.103298,
+    136.73108
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:126",
+   "id": "石川県:101",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道360号",
@@ -3174,8 +2926,8 @@
    "curviness": 164.9,
    "flow": 16.8,
    "turnCount": 101,
-   "score": 44,
-   "baseScore": 44,
+   "score": 52,
+   "baseScore": 52,
    "spotCount": 0,
    "polyline": "ic}|Es_z`YrEbKnBlK_CpDyAzEnAjKdNtRzAtOSxF}@rCwP|Wa@zBExGu@pC}HpNgFjGqB~FuHzEwN|\\eI~J_Dk@wDHyCzARbAhGsAlBVtAhCp@~E}AhK_EdEq@fBbAdJaBhTyE~MT`J~CrJhAvJxD|D|E|Hx@pDq@nFmFzRj@jHKxBkGzM]xGkBrFmBz^wAbBiHrAwBzAaBrEm@lIwAvD_l@hu@sKvE",
    "pointCount": 56,
@@ -3186,10 +2938,13 @@
    "end": [
     36.387758,
     136.52812
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:127",
+   "id": "石川県:102",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道160号",
@@ -3199,8 +2954,8 @@
    "curviness": 192.2,
    "flow": 16.6,
    "turnCount": 43,
-   "score": 44,
-   "baseScore": 44,
+   "score": 51.9,
+   "baseScore": 51.9,
    "spotCount": 0,
    "polyline": "qvcaFatjcYcCxFOvEjFtWy@`PFpChCnJfE|IPbL_@fDkFxJq@fKiCdA[v@NjAlCvDCnFyCjHiAdGkGjGzOhq@pD~E",
    "pointCount": 22,
@@ -3211,10 +2966,13 @@
    "end": [
     37.050656,
     136.993362
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:128",
+   "id": "石川県:103",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "宇出津町野線",
@@ -3224,8 +2982,8 @@
    "curviness": 143.1,
    "flow": 13.4,
    "turnCount": 216,
-   "score": 44,
-   "baseScore": 44,
+   "score": 51.7,
+   "baseScore": 51.7,
    "spotCount": 0,
    "polyline": "yyvbFcn`dYyAdM_EvKiBrBeJrFuEpF[xDVrMSzD_EvMmDvDeFvIaKfI_AxAiAnEaCpD{CrBcEdAcHVgBYeCeCmAqLgA_EeAu@kFmAmARgEdFwB|G{AnByHlAqDsAgBIuBfAuB|DmAl@mLa@kIbBgAxBaA`HgAvBcFdBsEpEsUjIqKbMiJ~f@iCnEa@fB^`Nk@xDsFzDgDr@gBjAuGzJ_EtDcMpCmId@eCM{GiB_CcBqB_FmAqAuJ}FwFaJoXtAoGsD}FeFyLuF_BoCi@mE\\cInB{EIgI{HmOqAqK}@{CmBoCqBsA}Fk@}RzGqHnIoHxE_D~N}@fLkJ|c@{AjDwErGqAHiIkEaIeB{JsEyB[aB|@cCvG{H~CcCvBaBbDmDvLuC`CmCOiFcCiCUiDZaEzBm^qCsUlDcH`E{FpLmCXmDq@yB^qF|GiL`GsLhCuKWcOnAsKtB_LrOsJdAeIbEkKdQgEpC",
    "pointCount": 121,
@@ -3236,10 +2994,42 @@
    "end": [
     37.444353,
     137.079984
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:129",
+   "id": "石川県:104",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "串加賀線",
+   "ref": "145",
+   "highway": "secondary",
+   "lengthKm": 3.77,
+   "curviness": 155.7,
+   "flow": 13.6,
+   "turnCount": 43,
+   "score": 51.6,
+   "baseScore": 51.6,
+   "spotCount": 0,
+   "polyline": "}vu|Esig_Yn@v@pDnAnDzC|BnJlBnCOnIx@jLhJrVp@|NUvIp@dNpBxRd@vKr@lD~C|J~AfBpC`G`DfOfGlGbGtVvCtC",
+   "pointCount": 22,
+   "start": [
+    36.325115,
+    136.357542
+   ],
+   "end": [
+    36.312288,
+    136.320932
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:105",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "能登内浦広域農道",
@@ -3249,8 +3039,8 @@
    "curviness": 138.9,
    "flow": 13.4,
    "turnCount": 79,
-   "score": 43.8,
-   "baseScore": 43.8,
+   "score": 51.4,
+   "baseScore": 51.4,
    "spotCount": 0,
    "polyline": "inwbFstrdY}CnMDnCdArGOlCkAdBeFtCgApCMfDzD`Tr@fRpAhKUtLVjK[vG`B|NYdNm@dFvA`LQp^rA~QQtFz@`BpChBn@dCoCpO~@vIWrWpD`Y?|D}DjLmAdUaApDoD|C{VzEeC|AmB~BiAzD_DpWsAbEcDlEaRjJ}BtD",
    "pointCount": 43,
@@ -3261,10 +3051,13 @@
    "end": [
     37.329205,
     137.161017
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:130",
+   "id": "石川県:106",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "七尾輪島線",
@@ -3274,8 +3067,8 @@
    "curviness": 138.6,
    "flow": 14.7,
    "turnCount": 77,
-   "score": 43.5,
-   "baseScore": 43.5,
+   "score": 51.1,
+   "baseScore": 51.1,
    "spotCount": 0,
    "polyline": "kmebFyzrbYyLfF{E[kAv@ePzEkJuAgCfAyIwBqDrXu@xBkAnAuQ|EcNoBkDd@w@|@_EjKqYhf@iIxTaEvCkJtAiCpAsAnBsB|IgB|DmCzBcBj@_F@wPyDaEC_VrEyDM{By@uJ_IiI{AcFsG{FgF}CmB_FmAyLKoDbBcIdJiEr@cBYmFiDqFi@aG_G",
    "pointCount": 46,
@@ -3286,10 +3079,13 @@
    "end": [
     37.284429,
     136.888543
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:131",
+   "id": "石川県:107",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "穴水門前線",
@@ -3299,8 +3095,8 @@
    "curviness": 147.1,
    "flow": 13.8,
    "turnCount": 99,
-   "score": 43.5,
-   "baseScore": 43.5,
+   "score": 51.1,
+   "baseScore": 51.1,
    "spotCount": 0,
    "polyline": "ammbFgflbYgAbGsGrIuChUgApBaLxIcA|CQvDDpJfEfUHfIdClFdCnBlAxBt@zGzBbIKpBgAnCqMjKyDxGsPdS_AzCJrHiBpEuGpEeEbGkMpH{IrJqEdI_@`UoEtm@s@zByDzEw@tBoAzT{EbIkCzBoAbCiAnCkBlMNbGdCdIIbAgBbCQdAlApI~@fQsA|F@xHvAlGrA`PcAnKgDlIwCzCgQ`A",
    "pointCount": 55,
@@ -3311,110 +3107,13 @@
    "end": [
     37.291832,
     136.789112
-   ]
-  },
-  {
-   "id": "石川県:132",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "国道159号",
-   "ref": "159;249",
-   "highway": "trunk",
-   "lengthKm": 3.69,
-   "curviness": 131.5,
-   "flow": 20.2,
-   "turnCount": 24,
-   "score": 43.4,
-   "baseScore": 43.4,
-   "spotCount": 0,
-   "polyline": "}g~~E_umaY`LoDdA}@hv@mYlEs@pEEvOlBVb@sI?mLkBqGh@e}@|]",
-   "pointCount": 12,
-   "start": [
-    36.696472,
-    136.71776
    ],
-   "end": [
-    36.695466,
-    136.718125
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:133",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "能登サンセットライン（能登外浦広域農道）",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.93,
-   "curviness": 92.4,
-   "flow": 14,
-   "turnCount": 26,
-   "score": 43.3,
-   "baseScore": 40.4,
-   "spotCount": 1,
-   "polyline": "qkqaFqbsaYgGbN}AvBuCfBs`@pMiCFqBk@yFoFoCcAyk@PmIkDkWbGwCDsCkAuWsSsAe@gEIsBp@sBhB",
-   "pointCount": 19,
-   "start": [
-    37.122006,
-    136.745531
-   ],
-   "end": [
-    37.153928,
-    136.743964
-   ]
-  },
-  {
-   "id": "石川県:134",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "山中伊切線旧道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.56,
-   "curviness": 120.3,
-   "flow": 15.3,
-   "turnCount": 28,
-   "score": 43.2,
-   "baseScore": 43.2,
-   "spotCount": 0,
-   "polyline": "}om|E_|m_YgHqE{Es@qJbBcOj@wGqBuEGed@lE{BCaUzCiQH_LdBiMHkMfEqCc@mCsB_@A_@dA",
-   "pointCount": 18,
-   "start": [
-    36.283029,
-    136.391198
-   ],
-   "end": [
-    36.313968,
-    136.38942
-   ]
-  },
-  {
-   "id": "石川県:135",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "金沢小松線",
-   "ref": "22",
-   "highway": "primary",
-   "lengthKm": 10.21,
-   "curviness": 104.2,
-   "flow": 16.4,
-   "turnCount": 65,
-   "score": 43.2,
-   "baseScore": 43.2,
-   "spotCount": 0,
-   "polyline": "u`}}Eup_aYaDuK_BuOoByEiDoCkb@cQ}CcDgBaGMgFR{BxQm~@TiXSU_Cs_ABiFc@kFkAiEoKgRmFgGsFuCdCf@lEjDlOzXxAdGdAnRzBvhAa@zHyRn`AV`JrBnFjCdCbb@bQrCnBfCvFvAlNlA~FfFdK",
-   "pointCount": 37,
-   "start": [
-    36.526349,
-    136.645391
-   ],
-   "end": [
-    36.525715,
-    136.644323
-   ]
-  },
-  {
-   "id": "石川県:136",
+   "id": "石川県:108",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "志賀田鶴浜線",
@@ -3424,8 +3123,8 @@
    "curviness": 139.4,
    "flow": 13.4,
    "turnCount": 143,
-   "score": 43.2,
-   "baseScore": 43.2,
+   "score": 50.7,
+   "baseScore": 50.7,
    "spotCount": 0,
    "polyline": "mj~`FcaobYpJdJnAj@hCRpFoApI?xIvB~KCjKrHhKr@vFlFfCrAvK`@`CbBfSjYjCvBzSfBzCnA|B|BpBnFX|BV`QbAhGtT~ZtFl\\dCrCbRrGt@v@`HzOzApTa@jLRjL[hOjCrLxGbJjApDH~D_BfICjCrB`TnEpZPnE[`F_E~N}Cy@gDlBqD?eGdGIrBdBvD@|BmBdOaC~GuAn@k@lFNtV|BxKk@~I~@rJKtM\\nCdDhKrAfIxEts@BlGi@vB{DhG_BbEyHpJoH`EiLnBkD?aBl@sBrEmGzG",
    "pointCount": 75,
@@ -3436,35 +3135,42 @@
    "end": [
     36.995521,
     136.780503
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:137",
+   "id": "石川県:109",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "小松山中線",
-   "ref": "11",
-   "highway": "primary",
-   "lengthKm": 5.04,
-   "curviness": 96.3,
-   "flow": 18,
-   "turnCount": 27,
-   "score": 43.1,
-   "baseScore": 43.1,
+   "name": "山中伊切線旧道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.56,
+   "curviness": 120.3,
+   "flow": 15.3,
+   "turnCount": 28,
+   "score": 50.6,
+   "baseScore": 50.6,
    "spotCount": 0,
-   "polyline": "aei|Eehi_Y_M`JcLHoA`@oOpMoDvFeUzOsGrFsDdFmTxCyZFiDcEgA]ya@gC_Ai@aDyEeBeAsA}BmFmQ_@yF_MeMkDa\\",
-   "pointCount": 22,
+   "polyline": "}om|E_|m_YgHqE{Es@qJbBcOj@wGqBuEGed@lE{BCaUzCiQH_LdBiMHkMfEqCc@mCsB_@A_@dA",
+   "pointCount": 18,
    "start": [
-    36.260813,
-    136.367547
+    36.283029,
+    136.391198
    ],
    "end": [
-    36.296065,
-    136.371319
+    36.313968,
+    136.38942
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:138",
+   "id": "石川県:110",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "金沢鶴来線",
@@ -3474,8 +3180,8 @@
    "curviness": 149.3,
    "flow": 14.7,
    "turnCount": 38,
-   "score": 43.1,
-   "baseScore": 43.1,
+   "score": 50.6,
+   "baseScore": 50.6,
    "spotCount": 0,
    "polyline": "six}Eyd{`YfIjAfEfC|FPpFdAzFlEjIHxVdGdNlEpGtF|E`BzEvCnHjBrACnGcEtKMtJz@hGyB~DLpB~@tDTtPkG",
    "pointCount": 22,
@@ -3486,60 +3192,13 @@
    "end": [
     36.470521,
     136.61729
-   ]
-  },
-  {
-   "id": "石川県:139",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "串加賀線旧道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.45,
-   "curviness": 129.1,
-   "flow": 14.4,
-   "turnCount": 31,
-   "score": 42.9,
-   "baseScore": 42.9,
-   "spotCount": 0,
-   "polyline": "uj~|Ecvs_YbNdBfHsAlBPpKfM|HxGrLzC|B|AlFpGfN|Y~AxDxC|MdCvEjJbInCzDvH~A|ViD",
-   "pointCount": 17,
-   "start": [
-    36.369225,
-    136.420983
    ],
-   "end": [
-    36.344895,
-    136.403594
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:140",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "七尾輪島線",
-   "ref": "1;7",
-   "highway": "primary",
-   "lengthKm": 12.18,
-   "curviness": 100.7,
-   "flow": 12.6,
-   "turnCount": 97,
-   "score": 42.8,
-   "baseScore": 39.9,
-   "spotCount": 1,
-   "polyline": "}tsbFgwpbYwPiCiLzAcSeSaJiEaDPgFbCgDZoHeBsKiFwL}AeCh@iA|@wMnOyCpAgD^wF_AuDmCcImI{DgAeESgElAqE|FgClAoFvGaGvEgBTiQw@yJPcMnD{T_BmB{@yFgFaDsOkFwLcAcAaD}@aLHcCk@aVuXaVwOmBk@uCBmBr@aJfIaLtMyDdB}DIqNwC{DUePpFgUpD{CDqDkAcSqScMg@kGfAmErDqSHiMpNaNlFcCF",
-   "pointCount": 62,
-   "start": [
-    37.297593,
-    136.897322
-   ],
-   "end": [
-    37.393701,
-    136.904632
-   ]
-  },
-  {
-   "id": "石川県:141",
+   "id": "石川県:111",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道304号",
@@ -3549,8 +3208,8 @@
    "curviness": 170.4,
    "flow": 16.1,
    "turnCount": 52,
-   "score": 42.6,
-   "baseScore": 42.6,
+   "score": 50.3,
+   "baseScore": 50.3,
    "spotCount": 0,
    "polyline": "icl~EubnaYUyFNmBhGiKjB{QrHmNfGsFdBwJpF}L`@}DM{TPeT^qDt@uBtHsKpNgNpDgJcCwFoBuJt@aGnByEVwF}@eDgCqE_AkEaBaBkEuHs@{Ck@oMJaO",
    "pointCount": 30,
@@ -3561,10 +3220,41 @@
    "end": [
     36.595112,
     136.767464
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:142",
+   "id": "石川県:112",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "能登サンセットライン（能登外浦広域農道）",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.93,
+   "curviness": 92.4,
+   "flow": 14,
+   "turnCount": 26,
+   "score": 50.2,
+   "baseScore": 47.3,
+   "spotCount": 1,
+   "polyline": "qkqaFqbsaYgGbN}AvBuCfBs`@pMiCFqBk@yFoFoCcAyk@PmIkDkWbGwCDsCkAuWsSsAe@gEIsBp@sBhB",
+   "pointCount": 19,
+   "start": [
+    37.122006,
+    136.745531
+   ],
+   "end": [
+    37.153928,
+    136.743964
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:113",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "小松山中線",
@@ -3574,8 +3264,8 @@
    "curviness": 121.9,
    "flow": 15.7,
    "turnCount": 31,
-   "score": 42.4,
-   "baseScore": 42.4,
+   "score": 49.8,
+   "baseScore": 49.8,
    "spotCount": 0,
    "polyline": "qmv|E}{w_YqDuKcNmNcMmDoAByx@fe@gFpI{@zC}AxKQjTeI`GcVrDeEdNeHhLqAr@",
    "pointCount": 15,
@@ -3586,60 +3276,42 @@
    "end": [
     36.354174,
     136.426671
-   ]
-  },
-  {
-   "id": "石川県:143",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "興津刈安線",
-   "ref": "219",
-   "highway": "secondary",
-   "lengthKm": 4.15,
-   "curviness": 127.4,
-   "flow": 13.5,
-   "turnCount": 39,
-   "score": 42.3,
-   "baseScore": 42.3,
-   "spotCount": 0,
-   "polyline": "}|y~EauzaY_DPqClByAlH{CtGwTtRiK~DyBTyJyCsFm@mARkDjBeF~HgCpAaJxLeKlHoAUuVuM_PsEq@mBTuJmCgSwAyDcCsC",
-   "pointCount": 24,
-   "start": [
-    36.67423,
-    136.784329
    ],
-   "end": [
-    36.701817,
-    136.782048
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:144",
+   "id": "石川県:114",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "松任宇ノ気線",
-   "ref": "8",
+   "name": "七尾輪島線",
+   "ref": "1;7",
    "highway": "primary",
-   "lengthKm": 3.45,
-   "curviness": 146.3,
-   "flow": 14,
-   "turnCount": 36,
-   "score": 42.2,
-   "baseScore": 42.2,
-   "spotCount": 0,
-   "polyline": "ga}~Ee}eaYkM}OaFaEwF{D{GaBqIuIuHwCoDqCkDoA_FyEyDeAgGkHeHuEwAiBeE{KmDuB{BmDqDeK{GqBwDeDuB{CwI{G",
-   "pointCount": 22,
+   "lengthKm": 12.18,
+   "curviness": 100.7,
+   "flow": 12.6,
+   "turnCount": 97,
+   "score": 49.7,
+   "baseScore": 46.8,
+   "spotCount": 1,
+   "polyline": "}tsbFgwpbYwPiCiLzAcSeSaJiEaDPgFbCgDZoHeBsKiFwL}AeCh@iA|@wMnOyCpAgD^wF_AuDmCcImI{DgAeESgElAqE|FgClAoFvGaGvEgBTiQw@yJPcMnD{T_BmB{@yFgFaDsOkFwLcAcAaD}@aLHcCk@aVuXaVwOmBk@uCBmBr@aJfIaLtMyDdB}DIqNwC{DUePpFgUpD{CDqDkAcSqScMg@kGfAmErDqSHiMpNaNlFcCF",
+   "pointCount": 62,
    "start": [
-    36.690282,
-    136.67811
+    37.297593,
+    136.897322
    ],
    "end": [
-    36.714646,
-    136.700431
+    37.393701,
+    136.904632
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:145",
+   "id": "石川県:115",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道157号",
@@ -3649,8 +3321,8 @@
    "curviness": 185.4,
    "flow": 14.1,
    "turnCount": 76,
-   "score": 42,
-   "baseScore": 42,
+   "score": 49.6,
+   "baseScore": 49.6,
    "spotCount": 0,
    "polyline": "qqx{E{i{`YjCZpMfHtCdFfCpAhPsDxNhE~LhRhHjBlI`ElFEzAj@nH|H|Fz@rDxBjGzP~DpGbAvCA`HxBnH@|JtAtIoAvPdAvGx@|@pJpDrFlHnDnN`DdGn@|LbIlKn@n@nBXlEeBrCB",
    "pointCount": 35,
@@ -3661,60 +3333,41 @@
    "end": [
     36.142162,
     136.586818
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:146",
+   "id": "石川県:116",
    "region": "ishikawa",
    "regionName": "石川県",
-   "name": "金沢井波線",
-   "ref": "27",
-   "highway": "primary",
-   "lengthKm": 4.61,
-   "curviness": 148.6,
-   "flow": 13.2,
-   "turnCount": 52,
-   "score": 42,
-   "baseScore": 42,
+   "name": "興津刈安線",
+   "ref": "219",
+   "highway": "secondary",
+   "lengthKm": 4.15,
+   "curviness": 127.4,
+   "flow": 13.5,
+   "turnCount": 39,
+   "score": 49.6,
+   "baseScore": 49.6,
    "spotCount": 0,
-   "polyline": "{kb~E_kiaYR{Ey@yL^oFdSi`@lLqLzA}EQcGmCkPmBeCwG{Dg@eBByAn@{Az@g@~FVjImIhJoVKqB_CwFcA_FF}Na@{DeBsDeIwJyBkFm@kDIgInCqQ",
-   "pointCount": 29,
+   "polyline": "}|y~EauzaY_DPqClByAlH{CtGwTtRiK~DyBTyJyCsFm@mARkDjBeF~HgCpAaJxLeKlHoAUuVuM_PsEq@mBTuJmCgSwAyDcCsC",
+   "pointCount": 24,
    "start": [
-    36.553737,
-    136.695675
+    36.67423,
+    136.784329
    ],
    "end": [
-    36.549051,
-    136.737267
+    36.701817,
+    136.782048
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "石川県:147",
-   "region": "ishikawa",
-   "regionName": "石川県",
-   "name": "氷見田鶴浜線",
-   "ref": "18",
-   "highway": "primary",
-   "lengthKm": 3.91,
-   "curviness": 138,
-   "flow": 14.2,
-   "turnCount": 38,
-   "score": 42,
-   "baseScore": 42,
-   "spotCount": 0,
-   "polyline": "updaF}npbYbDdChJnMfShDhFK~XyKrSWdBl@fDtDxBO~DkAdBgBIgDlA{DrRsUbFoMhDcDnPuA`FRdHhCdCD",
-   "pointCount": 21,
-   "start": [
-    37.056273,
-    136.895986
-   ],
-   "end": [
-    37.026795,
-    136.90237
-   ]
-  },
-  {
-   "id": "石川県:148",
+   "id": "石川県:117",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "国道364号",
@@ -3724,8 +3377,8 @@
    "curviness": 147.9,
    "flow": 15.3,
    "turnCount": 123,
-   "score": 41.8,
-   "baseScore": 41.8,
+   "score": 49.4,
+   "baseScore": 49.4,
    "spotCount": 0,
    "polyline": "gzz{E_md_Y}IcBwLMyGsAsGwD}EsAwEeGaCiAwDd@}FvFaFp@iECaHmEkDI_Cq@qHiJoJaB_E}A_GY_Ch@_C{DcAf@}@_@sA_FkDuDoN}CuSz@cBQwB_C}CoNgRmQsAyBo@uEs@cAiGIsKrDeDxB}AC_NwJ_BeDuIaJ{GmJuP{I}EaJaTmIqOgBaJHgRoHcDi@iEHyFzD_EhGqK~BoHvDoH~SmGrKqFhGuCzHiCxBeMlIuFhBoEfEeLdDkGXuJtEeMdCoLvDkLzNoWzM",
    "pointCount": 69,
@@ -3736,10 +3389,70 @@
    "end": [
     36.283672,
     136.348425
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "石川県:149",
+   "id": "石川県:118",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "金沢井波線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 4.61,
+   "curviness": 148.6,
+   "flow": 13.2,
+   "turnCount": 52,
+   "score": 49.3,
+   "baseScore": 49.3,
+   "spotCount": 0,
+   "polyline": "{kb~E_kiaYR{Ey@yL^oFdSi`@lLqLzA}EQcGmCkPmBeCwG{Dg@eBByAn@{Az@g@~FVjImIhJoVKqB_CwFcA_FF}Na@{DeBsDeIwJyBkFm@kDIgInCqQ",
+   "pointCount": 29,
+   "start": [
+    36.553737,
+    136.695675
+   ],
+   "end": [
+    36.549051,
+    136.737267
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:119",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "氷見田鶴浜線",
+   "ref": "18",
+   "highway": "primary",
+   "lengthKm": 3.91,
+   "curviness": 138,
+   "flow": 14.2,
+   "turnCount": 38,
+   "score": 49.3,
+   "baseScore": 49.3,
+   "spotCount": 0,
+   "polyline": "updaF}npbYbDdChJnMfShDhFK~XyKrSWdBl@fDtDxBO~DkAdBgBIgDlA{DrRsUbFoMhDcDnPuA`FRdHhCdCD",
+   "pointCount": 21,
+   "start": [
+    37.056273,
+    136.895986
+   ],
+   "end": [
+    37.026795,
+    136.90237
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:120",
    "region": "ishikawa",
    "regionName": "石川県",
    "name": "松本木津線",
@@ -3749,8 +3462,8 @@
    "curviness": 97.6,
    "flow": 15.4,
    "turnCount": 21,
-   "score": 41.8,
-   "baseScore": 41.8,
+   "score": 49,
+   "baseScore": 49,
    "spotCount": 0,
    "polyline": "_gz}E}_e`Y~DySSsF`CqLdOuXnFoLrBeI~ByC`CsFlA_JbGmS`Xwc@|AiIg@{FwAgFDy@",
    "pointCount": 16,
@@ -3761,8 +3474,736 @@
    "end": [
     36.499275,
     136.541472
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "石川県:121",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "田鶴浜堀松線",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 7.28,
+   "curviness": 132,
+   "flow": 13.4,
+   "turnCount": 72,
+   "score": 49,
+   "baseScore": 49,
+   "spotCount": 0,
+   "polyline": "wafaFgqebYpAvGtLnQb@tEc@rHnAhGjAfB`LzJvBxDr@dKShItg@by@rG`EjHrKhYxHzLjKx`@lMfCnBnLbPlCrAzHv@bCz@t@xA`BjK|AnC|JbJlB`ArFh@zE|Ej@dDuAbPp@jC`CjCt@hC}@xKbAdDpE~C",
+   "pointCount": 37,
+   "start": [
+    37.064119,
+    136.840039
+   ],
+   "end": [
+    37.022822,
+    136.786419
+   ]
+  },
+  {
+   "id": "石川県:122",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号旧道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 6.57,
+   "curviness": 104.2,
+   "flow": 13.7,
+   "turnCount": 50,
+   "score": 48.8,
+   "baseScore": 48.8,
+   "spotCount": 0,
+   "polyline": "wpecFy|rdY{R}EyDoEmJcFob@gDcLgHy_@u@eJuDsEyEmB_EgHuHwN|BiP_DgEwDuk@uT_IuG_DyEoHkGmMqQyF_MqDcFiFsOwE{IyN~A",
+   "pointCount": 24,
+   "start": [
+    37.389075,
+    137.236126
+   ],
+   "end": [
+    37.439524,
+    137.265174
+   ]
+  },
+  {
+   "id": "石川県:123",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 13.97,
+   "curviness": 150.4,
+   "flow": 14.3,
+   "turnCount": 147,
+   "score": 48.7,
+   "baseScore": 48.7,
+   "spotCount": 0,
+   "polyline": "m{oaFsvhbYqLyGeAoAmA}De@gH}A}C{A{@{GGeGkCuH?aHgEaQa@_Eb@}JaC{K`@iMzDaTQ{Bi@}BiDY{Ku@qCqAeBuVe[mIoAiFaDyJqOcKkJwGuIyCk@}F\\{@y@cAqDwAcAqGd@cDq@mAeA{A}EoAw@qDy@gDGqHt@yQwGeC_E?}Ap@eCUeCiCyD}EwDcDkAsIL}Bm@kNaNyJcFcBuLq@eAsRgF_OaQsByAoGqBoFZiBo@{@iBaCwQiAaBqFeBkUg@gEwBsAgDWmHs@oCeCkGeBgAeDw@cD@yTrFeCvBmI`NgFxBiE]{KaG}J}DyDk@}OhCcMe@uJnGkFdA",
+   "pointCount": 86,
+   "start": [
+    37.11431,
+    136.856255
+   ],
+   "end": [
+    37.21591,
+    136.906414
+   ]
+  },
+  {
+   "id": "石川県:124",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道160号",
+   "ref": "160",
+   "highway": "trunk",
+   "lengthKm": 12.57,
+   "curviness": 148.5,
+   "flow": 14.6,
+   "turnCount": 128,
+   "score": 48.7,
+   "baseScore": 48.7,
+   "spotCount": 0,
+   "polyline": "uqq`F{zncYwA_@eEdAiI_Bs@q@_B_HiHqJgAi@eIUeHwD}HpDgCbEiHbHoSfM{K`F{D?sJ{BaFfDoIg@{E`DyOjB_Dg@sHiL_Aw@}Cm@mDkEsUcE_Cn@cQnOgFpCuF`BmEhD}JjF_JGoi@bFyHeB{JgLcBcAiZ_KyABeIxCqIOkEZuRzNqH`E{COgG_C{ITkCrAkCjCwQ~BqEgA{BgEs@e@}CIkHtBeBAsXqGaBAiAx@a@fBXpC|@dC?hBeDvJqArGJ~CtFnQG`JoD~MeJxEuBlC",
+   "pointCount": 72,
+   "start": [
+    36.959152,
+    137.051501
+   ],
+   "end": [
+    37.050511,
+    137.032115
+   ]
+  },
+  {
+   "id": "石川県:125",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道471号",
+   "ref": "471",
+   "highway": "trunk",
+   "lengthKm": 9.5,
+   "curviness": 149.9,
+   "flow": 14.7,
+   "turnCount": 97,
+   "score": 48.4,
+   "baseScore": 48.4,
+   "spotCount": 0,
+   "polyline": "cxq_FspvaYlAqJrCwMx@mCzBqDtH|EvDUbBgBtEeN~HgCfBClXjFtAp@rH~R~@~IhGrMrClC~M`C`QiBpHzC`BN`DeAxCwEhBsAtViDdFcCnDOpDeFvGmFrOeYlCoCxCY`GrAlGBlJrIrARpAc@tSiT~FkSrGiItCaKtFuIzF_ChBwD`Jj@xCOtH{ApAmA`FgObF__@GsDmBoM",
+   "pointCount": 52,
+   "start": [
+    36.796342,
+    136.763137
+   ],
+   "end": [
+    36.736818,
+    136.795114
+   ]
+  },
+  {
+   "id": "石川県:126",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 20.18,
+   "curviness": 131.6,
+   "flow": 14.4,
+   "turnCount": 185,
+   "score": 48,
+   "baseScore": 48,
+   "spotCount": 0,
+   "polyline": "mafbF{isbYwD{@iDz@qb@zXsCoB}BsOb@mD~BcGe@mg@gA_MdBqLBaDg@}T_C}KxCgY{DuLcF}GgEcCe@iBh@iE`EmKlNqLxA}BpGwPz@iFUkLNmIwIgOg@yF|@kFB_C{FiMs@aEAgNzGwNnFwe@iCqNoIkNmCiOiCm@oDdB{BRyJuCoAuA[oAOuM`AqVYqCcAwAwEa@kC_AiA}AsByH_IyMoDkEkF}CoBuBeEuRaFyEyCiHkF{GmE}K}C_AiFf@gIi@cK\\eBUuJgDgI}@aHwEgILyGeDqDiMqFgGeDgHcIcM}@yHXuOs@eB}F}EwEsWGuEcAgDqVuUmGqKmJ}BkAkB?wE|FiQi@iIZoEbHc]|Lwg@tLkK~Z}PpDiDfYiHdFyLtAs\\hAuF",
+   "pointCount": 100,
+   "start": [
+    37.227913,
+    136.910542
+   ],
+   "end": [
+    37.264516,
+    137.066911
+   ]
+  },
+  {
+   "id": "石川県:127",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "珠洲広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 9.32,
+   "curviness": 117.1,
+   "flow": 11.4,
+   "turnCount": 96,
+   "score": 47.9,
+   "baseScore": 47.9,
+   "spotCount": 0,
+   "polyline": "gujcFelcdYzJbFfGjAjC@tHgB~Cp@zGzCxDJhCv@hA|Al@fD_AxXF~GvFd]bBtBxJzCtCxBrBxD~BlJpKzI`DzAzIh@rM}DvOkRtKqIpJoDpL_JxG{B~BqBlLaPrBiAjGo@bGfD`Dr@|PiApC\\~FlCbCvBhA|BnBvLxB`Ex@vQvFrRbAjPdBpDbDxCr@pBFfDoC~SM|HbAzGfCzJd@jPzBtG",
+   "pointCount": 54,
+   "start": [
+    37.415401,
+    137.156674
+   ],
+   "end": [
+    37.364693,
+    137.117917
+   ]
+  },
+  {
+   "id": "石川県:128",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "金沢井波線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 3.4,
+   "curviness": 128.7,
+   "flow": 13.7,
+   "turnCount": 32,
+   "score": 47.8,
+   "baseScore": 47.8,
+   "spotCount": 0,
+   "polyline": "cwa~EqjtaYo@cHaBsFqX_g@qGmGgA{B@qEnFiLjA}F?kEyA_HeI}RwBoDkJyFmGf@kAw@cEcGwA_GI_KcC}F",
+   "pointCount": 20,
+   "start": [
+    36.550417,
+    136.751933
+   ],
+   "end": [
+    36.563739,
+    136.781059
+   ]
+  },
+  {
+   "id": "石川県:129",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "金沢小松線",
+   "ref": "22;111",
+   "highway": "primary",
+   "lengthKm": 4.53,
+   "curviness": 95.3,
+   "flow": 15.4,
+   "turnCount": 28,
+   "score": 47.7,
+   "baseScore": 47.7,
+   "spotCount": 0,
+   "polyline": "k{g}E_ig`Yi@zUbAbGpBpDf_@lc@|HtDpx@~IvSrGvOlGtF|E~CjE`ErJzHrUfF`If@tDYhF",
+   "pointCount": 16,
+   "start": [
+    36.417982,
+    136.521279
+   ],
+   "end": [
+    36.389509,
+    136.492898
+   ]
+  },
+  {
+   "id": "石川県:130",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "小松加賀線",
+   "ref": "20",
+   "highway": "primary",
+   "lengthKm": 4.91,
+   "curviness": 113.6,
+   "flow": 13.9,
+   "turnCount": 40,
+   "score": 47.6,
+   "baseScore": 47.6,
+   "spotCount": 0,
+   "polyline": "_ju|Ekj__YsF`AgFeA_LgNqKmH}KwDcOwPaRsM{A_EBmLiBwGiDqCwPqGeC_Dk@qBwBm_@qG[}QvAcWaA}Fr@gNyBcE}F",
+   "pointCount": 22,
+   "start": [
+    36.323045,
+    136.316699
+   ],
+   "end": [
+    36.356313,
+    136.341587
+   ]
+  },
+  {
+   "id": "石川県:131",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道305号",
+   "ref": "305;365",
+   "highway": "trunk",
+   "lengthKm": 6,
+   "curviness": 141.5,
+   "flow": 15.2,
+   "turnCount": 56,
+   "score": 47.5,
+   "baseScore": 47.5,
+   "spotCount": 0,
+   "polyline": "e_q|Eqvc_YyCVoIeAuCb@cG|CoHpGkAjDh@jLxH`UxDvQJzBi@lZ_FrJoA`@qDGLdErIfTjDfBjDzDtBhKWxEkF`QoBbKCtMrEdQxC~[vAdDpDjDj@zEE`CuFxZgCjG?pEvBpE",
+   "pointCount": 34,
+   "start": [
+    36.30083,
+    136.339128
+   ],
+   "end": [
+    36.302844,
+    136.285523
+   ]
+  },
+  {
+   "id": "石川県:132",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 22.69,
+   "curviness": 135,
+   "flow": 13.4,
+   "turnCount": 228,
+   "score": 47.5,
+   "baseScore": 47.5,
+   "spotCount": 0,
+   "polyline": "{ukbFcdtcY~CyOLoFWmCyDiLBeB`BaI@aBgBaF_CaAqQ~AsGk@uN_H}FsF_I}K}AoAqIsBwHSgCeBcCqEaBmAoRVmJqCgE{DkD{LQoDf@_EIkFoBcLmAuDkXw]_JoPsJwH_BwCm@uEd@kK_@oFqFmSqBgOyE}IkDwWgGgRwAgBqEaCuAoBkFgUeIkOmAyAkGdEuKJoBOwG}C{B_@oNv@qKsCiMeH{IsCaB{AaEyPg@yEEeExByOH_FuAcGaCwGaC{DY_BTcDjE{IBoDuAaDyAoAyK}A}LcFiD{J~@cNiBmTfAwJk@oFmC{Lf@eIGsM\\_BdCmDLwCg@{HoAwH_IyMsN}RoC{Fg@iDOgVkD_Jg@qK?oIsGiOsBeBuD_AwLxF}BJkJaG_JgMaAwFLmJYqGkC_EgIaGmBwDeAmEK{GzAwIB}Hk@iIqCaQkBsAyDYsCrDkCtAcEpAqB_@cEeHwDyCaGkHuDmKyJwPaKhJsMvHkCRgCoA{GwMqKsHaG{@eLj@",
+   "pointCount": 133,
+   "start": [
+    37.256779,
+    137.078579
+   ],
+   "end": [
+    37.364193,
+    137.237388
+   ]
+  },
+  {
+   "id": "石川県:133",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "能登サンセットライン（能登外浦広域農道）",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 8.39,
+   "curviness": 101.8,
+   "flow": 11.4,
+   "turnCount": 75,
+   "score": 46.6,
+   "baseScore": 46.6,
+   "spotCount": 0,
+   "polyline": "ad{aFcinaYmEdDiEbAkN}@cCq@{m@s^iDeCsTgX}ByFoEiVyAmBaHcFsHiQgCkBoBc@_Lp@qDs@aYsYuDwBaD_@iX?qMtHgDdAcCF}IcBmDj@uIjJcCbBgCRgNqAqTbHkDaBcIqIkF_@uD`BwFdMeEhBcFCiDkAuOcM",
+   "pointCount": 40,
+   "start": [
+    37.172014,
+    136.720977
+   ],
+   "end": [
+    37.235093,
+    136.742071
+   ]
+  },
+  {
+   "id": "石川県:134",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "珠洲道路",
+   "ref": "303",
+   "highway": "primary",
+   "lengthKm": 4.1,
+   "curviness": 132.5,
+   "flow": 11.6,
+   "turnCount": 47,
+   "score": 46.2,
+   "baseScore": 46.2,
+   "spotCount": 0,
+   "polyline": "i~|bF_rucY|AbGHrD}D~TRhElAnE`@|D_ArJb@fIAxMyBhL@jFx@bD|DrGlKfDxC`DjAlGKpKpAnF~BtGnB`DdHbEjCnFVtHoEjs@",
+   "pointCount": 25,
+   "start": [
+    37.345172,
+    137.085915
+   ],
+   "end": [
+    37.338505,
+    137.045303
+   ]
+  },
+  {
+   "id": "石川県:135",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "湯涌街道",
+   "ref": "10",
+   "highway": "primary",
+   "lengthKm": 4.93,
+   "curviness": 114.3,
+   "flow": 12.5,
+   "turnCount": 45,
+   "score": 46.1,
+   "baseScore": 46.1,
+   "spotCount": 0,
+   "polyline": "_|~}Es|gaYfAeEfFoDxCwD~MiKlF}FdAwCnBcNp@kA~OaKtQeApEs@hD}A|GmHrDmG`Qge@pAo@rK_@lIqGnAaFv@iWzA{DhDoCnAcCj@{Mh@gCfAsBrHmH",
+   "pointCount": 28,
+   "start": [
+    36.535838,
+    136.688256
+   ],
+   "end": [
+    36.507148,
+    136.724096
+   ]
+  },
+  {
+   "id": "石川県:136",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "山中伊切線",
+   "ref": "39",
+   "highway": "primary",
+   "lengthKm": 3.21,
+   "curviness": 113.9,
+   "flow": 12.6,
+   "turnCount": 29,
+   "score": 45.4,
+   "baseScore": 45.4,
+   "spotCount": 0,
+   "polyline": "}pm|E{{m_Y`FElHhA`NeGxKaCnDkBrTeAvFpA~S_BtN`@jGjAbH~DhGp@vNeFhIpC`CnC",
+   "pointCount": 16,
+   "start": [
+    36.283193,
+    136.391179
+   ],
+   "end": [
+    36.255693,
+    136.3917
+   ]
+  },
+  {
+   "id": "石川県:137",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道8号",
+   "ref": "8",
+   "highway": "trunk",
+   "lengthKm": 3.45,
+   "curviness": 120.8,
+   "flow": 15.4,
+   "turnCount": 27,
+   "score": 45.3,
+   "baseScore": 45.3,
+   "spotCount": 0,
+   "polyline": "gkx|Eipw_YcFwGsGyFoQw[{JuJiKqFsJ{B}e@aBwJmBkD{BkDqDuEyGYwAoIyO{DyE",
+   "pointCount": 15,
+   "start": [
+    36.338605,
+    136.440528
+   ],
+   "end": [
+    36.363462,
+    136.459658
+   ]
+  },
+  {
+   "id": "石川県:138",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道8号",
+   "ref": "8",
+   "highway": "trunk",
+   "lengthKm": 4.63,
+   "curviness": 113.5,
+   "flow": 15.4,
+   "turnCount": 34,
+   "score": 45.2,
+   "baseScore": 45.2,
+   "spotCount": 0,
+   "polyline": "gdx|Emaw_YoAgF{FoKkKuJeOgWOeAiJaJoIiGqI{BsLwAea@gAsHwBsEeDkCcD}C{FYwAkMoSwGqFkZeOaDgDgCqF",
+   "pointCount": 21,
+   "start": [
+    36.337483,
+    136.438146
+   ],
+   "end": [
+    36.370405,
+    136.465014
+   ]
+  },
+  {
+   "id": "石川県:139",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 5.82,
+   "curviness": 131.7,
+   "flow": 13.7,
+   "turnCount": 56,
+   "score": 45.1,
+   "baseScore": 45.1,
+   "spotCount": 0,
+   "polyline": "yj|bFgbfbYcCgG}GoJ_AkCmC}Pj@kNmBoE{D{EiAwCUwBVkMqBqIeQgWoBgAkEGmBq@_OaQgCqAmCLuS~G{G_@w@g@yKoPqGiFcEKaFeBqAkA}BeD_BiH_DuCcDyF_DgBiGaGiCwCqCoFwRiQ",
+   "pointCount": 36,
+   "start": [
+    37.342049,
+    136.842761
+   ],
+   "end": [
+    37.37675,
+    136.882063
+   ]
+  },
+  {
+   "id": "石川県:140",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 5.11,
+   "curviness": 131.9,
+   "flow": 13.5,
+   "turnCount": 50,
+   "score": 44.7,
+   "baseScore": 44.7,
+   "spotCount": 0,
+   "polyline": "}xfbFmfkaYgHfDoIbKiCzAsClDcG~By@@aNkEeGUaF}BgFoEcFm@mCgD_D}GcGcEiB{B{@aCMwFrB{LI}GcBuFmDuE{BcFuAmAaEi@sMuJqEcFmEuJsXwPgMcD_HiIiHcD",
+   "pointCount": 32,
+   "start": [
+    37.23167,
+    136.705189
+   ],
+   "end": [
+    37.265301,
+    136.72792
+   ]
+  },
+  {
+   "id": "石川県:141",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "寺畠小松線",
+   "ref": "54",
+   "highway": "primary",
+   "lengthKm": 3.31,
+   "curviness": 85.7,
+   "flow": 13.5,
+   "turnCount": 21,
+   "score": 44.4,
+   "baseScore": 44.4,
+   "spotCount": 0,
+   "polyline": "mrh}Ewh|_YnBeYpEy`@tDmn@m@yCkDoGm@sD~AaWNqMUkD_B{EoG}IyAmDeBsGiA_O",
+   "pointCount": 15,
+   "start": [
+    36.421669,
+    136.464922
+   ],
+   "end": [
+    36.423187,
+    136.499842
+   ]
+  },
+  {
+   "id": "石川県:142",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "珠洲道路",
+   "ref": "303",
+   "highway": "primary",
+   "lengthKm": 5.07,
+   "curviness": 111.5,
+   "flow": 10.9,
+   "turnCount": 52,
+   "score": 44.2,
+   "baseScore": 44.2,
+   "spotCount": 0,
+   "polyline": "su`cFkqfdYPpDz@rDtEzJhG~TpGdQrElDxJlAvBx@jClCtAnD`Hxh@IvPX~EvEnSIpDqBrHK~Cr@zDfCfFh@jEw@bK}FpRYvFf@rC`CpEbK|K~CvEf@pBr@zK`BlE",
+   "pointCount": 31,
+   "start": [
+    37.364261,
+    137.172857
+   ],
+   "end": [
+    37.349482,
+    137.12441
+   ]
+  },
+  {
+   "id": "石川県:143",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "大谷道路",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 3.01,
+   "curviness": 155,
+   "flow": 12.3,
+   "turnCount": 38,
+   "score": 44.2,
+   "baseScore": 44.2,
+   "spotCount": 0,
+   "polyline": "{|vcFeykdYvO|EtA?rCmAzAgC|DqM|CwE~EqTxIoK|Bm@|BZfB~AjCtEhCfAbMa@xEaCpBoEd@yGUyEsBwKIkFZoD",
+   "pointCount": 22,
+   "start": [
+    37.478059,
+    137.199714
+   ],
+   "end": [
+    37.462481,
+    137.215173
+   ]
+  },
+  {
+   "id": "石川県:144",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道8号",
+   "ref": "8",
+   "highway": "trunk",
+   "lengthKm": 4.45,
+   "curviness": 109.4,
+   "flow": 14.7,
+   "turnCount": 33,
+   "score": 44.1,
+   "baseScore": 44.1,
+   "spotCount": 0,
+   "polyline": "szq|Eere_YvFrRnCnFdNn_@j@~GyBxUFpH|Hl^tKhw@fDrPpAvC`A`F\\tGcA|^Tv@ErIf@dFlDfJ",
+   "pointCount": 18,
+   "start": [
+    36.305218,
+    136.348667
+   ],
+   "end": [
+    36.295021,
+    136.302328
+   ]
+  },
+  {
+   "id": "石川県:145",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 4.01,
+   "curviness": 115,
+   "flow": 11.5,
+   "turnCount": 40,
+   "score": 43.8,
+   "baseScore": 40.9,
+   "spotCount": 1,
+   "polyline": "ihnaFsstaYjAaIrAgExKkM`BWdHVfJiC~WsLxEcGdG{E~Mq@t@m@bOa^bB}BrDoA`CG`K`ErHp@fDiBlGaIhHkE`FgI",
+   "pointCount": 22,
+   "start": [
+    37.106133,
+    136.753383
+   ],
+   "end": [
+    37.077539,
+    136.773657
+   ]
+  },
+  {
+   "id": "石川県:146",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道249号",
+   "ref": "249",
+   "highway": "trunk",
+   "lengthKm": 5.02,
+   "curviness": 75.5,
+   "flow": 13.5,
+   "turnCount": 28,
+   "score": 43.4,
+   "baseScore": 40.5,
+   "spotCount": 1,
+   "polyline": "e~}_FyywaYlv@hCl`@lM|J`I|r@vXrKp@tJdGbA~BfAn@jAX~G]fFbAjGfFnGfCtDb@xGo@rQkHnMnB",
+   "pointCount": 18,
+   "start": [
+    36.858746,
+    136.76973
+   ],
+   "end": [
+    36.816425,
+    136.7574
+   ]
+  },
+  {
+   "id": "石川県:147",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "珠洲道路",
+   "ref": "303",
+   "highway": "primary",
+   "lengthKm": 4.98,
+   "curviness": 88.6,
+   "flow": 11.6,
+   "turnCount": 38,
+   "score": 43.3,
+   "baseScore": 43.3,
+   "spotCount": 0,
+   "polyline": "}wzbFyygcY~@hEtGrO`@lDJpLnA~ElBhChHnFhSb]l@bEAhPlDrz@lBzHvKtVzAnBrItG|GtPvD|B|OVbDe@pGsCnGo@rBZnE`D",
+   "pointCount": 24,
+   "start": [
+    37.333906,
+    137.015493
+   ],
+   "end": [
+    37.310207,
+    136.976979
+   ]
+  },
+  {
+   "id": "石川県:148",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "国道8号",
+   "ref": "8",
+   "highway": "trunk",
+   "lengthKm": 4.24,
+   "curviness": 100.3,
+   "flow": 14.2,
+   "turnCount": 30,
+   "score": 42.8,
+   "baseScore": 42.8,
+   "spotCount": 0,
+   "polyline": "a}o|Eyq|~XmBgFcAmIt@gSQuAXyOa@{K{AgJs@mAkDaOmLuy@}EkUe@sLzByWi@kHyA_FkLuWcFeP",
+   "pointCount": 18,
+   "start": [
+    36.295365,
+    136.302534
+   ],
+   "end": [
+    36.304473,
+    136.346979
+   ]
+  },
+  {
+   "id": "石川県:149",
+   "region": "ishikawa",
+   "regionName": "石川県",
+   "name": "高松津幡線",
+   "ref": "59",
+   "highway": "primary",
+   "lengthKm": 3.51,
+   "curviness": 81.5,
+   "flow": 11.9,
+   "turnCount": 24,
+   "score": 42.5,
+   "baseScore": 42.5,
+   "spotCount": 0,
+   "polyline": "{sk_FujpaY~Gd@jKuAzCZ`YjPtCnCpEpGvFlCjCnCpBdAfMXjIc@vWl@|QzHhJl@fEjB|Q@",
+   "pointCount": 17,
+   "start": [
+    36.764941,
+    136.731474
+   ],
+   "end": [
+    36.73549,
+    136.722385
    ]
   }
  ],
- "hiddenCount": 1
+ "hiddenCount": 30
 }

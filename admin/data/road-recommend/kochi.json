@@ -1,15 +1,14 @@
 {
  "prefecture": "高知県",
  "romaji": "kochi",
- "generation": 2,
- "contentHash": "810a6610d2de",
- "builtAt": "2026-08-26T09:40:08.457Z",
+ "generation": 3,
+ "contentHash": "ff1f4cc56daa",
+ "builtAt": "2026-10-07T14:44:47.966Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
  "count": 150,
  "segments": [
@@ -24,8 +23,8 @@
    "curviness": 615.4,
    "flow": 28.1,
    "turnCount": 656,
-   "score": 85,
-   "baseScore": 85,
+   "score": 100,
+   "baseScore": 100,
    "spotCount": 0,
    "polyline": "eytiEkhdjXfAv@bBSxE`@bAn@tAg@fAv@d@a@bEKdA\\xAeAbBKjA\\HcAnCiB|CuDjAALa@a@oCr@eGJuFaB}LeEuIzDq@~@gAr@GXhAa@tH|@zCvHrEpBhC|A`@d@UAmAdB[f@_A[kFxBs@pB_E|@S`DdAzD|OzAdAvDMl@r@I|B~@dAq@lFzC|KxAr@pEL\\^`@zA[bFtA|ESbGt@dB~BZbEaEzA{CnDGpCiAlC\\rC`Hz@d@`JqAbBcBbCfDe@h@@t@|DbCwAxERvA`BfBrDNbDtKnBs@bDBpCjBrDj@|Ak@t@{Bx@IpHdClCPlAi@Z_A`B@v@oE`AdBhB@r@_BDyD~@_AnBmSj@wBp@o@zCdB~AtBjE|CvCpEd@zBvAyArAEbBN~BrAHe@_AmDVaAt@UlEr@bC`DlCc@pFzBdBuBlCs@Zi@KwDjCy@h@mA`O{Ct@}AzAq@bFL~DnC?p@oB^qFKk@`Bl@hAT`CrCz@FfBx@rASl@i@t@eBGg@rAoA?k@xBo@b@oDeCaAeDs@Ok@hBAnDcBb@a@t@AlAbAvCwBnAIt@lD{AWoEpCmBn@Tn@vExEjBpAe@^kAjA_AzAAhCyAjEx@h@dBdBtArCaGzBk@L}Aj@aA`CBtAaA`AJkAh@cAvAgBBWlEeB^u@vBBxAx@bDS~Dk@AgByCsBZwCoB{AhBRvDoAj@PjEuBdBExAlBfAzBrCiBnCdCjBjDrFQfAkC|Ar@`Cu@dCJxB~A_EJwCfD[hAsBi@uBqBiD|@q@Bg@mAwHl@a@fI`JvCdB`Dh@~AdCh@JbAaAdAQLc@sAmCKuAe@gMb@a@F|Cx@zAp@lGfBbCbFzC`BvClIvC`A`C|@t@bDr@~Ci@dBr@FdA_AjC^rArDiAzDMbDy@rCDdCq@dCbB`Fo@pDpBvDyA`AuAbDS`BaBpCt@zDuBfDKtJp@fBgHvDoBR}BfBgDfKiBdEaDlBSNg@WaD`AeBlCl@dB{@pCMNwDbCkAtAf@|@KLsDpCcDp@CzAdAzB~CdBDlAoHbBg@p@iBlC{AjA{CpAsAr@ItB`ClATnGcBlHeDh@LvAdDvHe@xETxAsGjC}FnBkIdDoCxBgEc@cFdAsCpBg@xC~@tDeCnASvHbB|J{O`DsAjE@bEoEbLuF`DkEjQsJz@iBUaKd@mB|B_A~Cv@~AtAjBCP{AbD{HlAoItAcBxCaBjAuB`@oHsC}CMuAXmBlGaAxBmA`AqBEcDcAyA[gBKgHr@oFhBa@fFoI`FaDxAl@nEpG",
    "pointCount": 342,
@@ -36,6 +35,10 @@
    "end": [
     33.071504,
     132.927633
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -45,22 +48,27 @@
    "name": "安満地福良線",
    "ref": "357",
    "highway": "secondary",
-   "lengthKm": 28.63,
-   "curviness": 794.4,
-   "flow": 31.7,
-   "turnCount": 717,
-   "score": 84.9,
-   "baseScore": 84.9,
+   "lengthKm": 26.54,
+   "curviness": 653.3,
+   "flow": 50.3,
+   "turnCount": 345,
+   "score": 99.8,
+   "baseScore": 99.9,
    "spotCount": 0,
-   "polyline": "{}egEcqshXvCyEtCsAnEaLHaDUwAiAmAyBs@iKtFs@YgAwCkBr@eAAmBbCgA_BsAhA_CSSp@pEhE`@hCc@lAeBf@wBfBP~@`Bp@@pBeAt@oALwBbBkAnGIjE[|@yBk@{AaCm@Fm@fA{ACa@~BkC}AkBpDw@~HkCfCmBf@i@u@?yFmAuCr@}@dDoAhAcBuAyBlAqBeBwBCm@hCmFk@_ADwAsDKcBs@FgF}DcIdD[X_@LeDnBm@GcDrAeE_@aA^sC]B{@zAkAfEuHdGyOIuB{@oIdB}Jl@y@cBeDyAkEb@w@q@aAcFyA_BGyAz@kC}@e@qEBeBnBmElCiADwAoBHgCo@eAHoAa@uANwGj@uCgBUeC`AoAe@sAcAiBkEwAjAe@AuDyHiBp@]rA?t@bAzBa@fEcAt@iBLc@lBoBCStEoAj@eAfDwAAgBdF_B\\_ArAmCw@mDgIj@uAqEyBFaA|@kAOcBv@cErCBLc@w@kBDuFuDASi@ReC{@_CxAaBD_C|CqBPiCbAk@Hq@_@y@uBaARmBw@oC\\aA}@k@UiBZaBMmAc@KyAbAw@KiCaIgC_AOx@jAvL~@hBRhFr@vCg@\\mAe@{@kAgDo@mElDuBBoFqBu@v@b@`@gAbA_Ad@oAWf@tAlC]Jh@kARsA~EgC`Bw@xDkGyBo@tCz@`AGlAbAh@@nA|@r@CzBS\\kBNs@k@eAzA^zBk@ZeBc@OnBcAhAHpA[b@sD`@cCuDo@Z[~CcB`Ca@IEo@p@}AIiA}AdAe@y@yAfBaC`@w@qCqAJIsDmAz@e@c@DyF{A[y@l@e@{@mCe@cCf@uDKQ[n@yCSeAr@_Cy@YiDLqBoALuC|@gAr@uCi@kCa@e@wC?iBi@cEb@q@}ARqBgAaBFqBqAPo@oBiAi@M}AfCiCNaCmFXwAiE_DjAkAoBEcAmB_Ac@}CsAIEkAeCkB]yB{@{@J}A_Au@s@aD{FsCiCqCIkDlEeCP{Bq@_@}@`A}DLuBqEQiDj@{AbFT|DaCXo@So@iBGC_BgAg@YkCkCYHiBoB_@h@}CyAI_@_AjAuAQeBh@{A[_@cD`@i@gCdA{A_@iAjAp@y@fBLz@b@JjDsA|DSlCu@lBbEp@d@gB{DQuDJuDtBgItBiBjEYnPwKdIqCzIyLF}@aCwAc@kCw@yAJ_GU{CWo@mAi@[qAnAcBaBaCg@?gC`DmEnDmEv@_AWgCTkAtDa@}@EmCe@y@_Am@mCUcGhBcDxDaCn@aEYcGqCmBYwB_CmGyD_CyByA{FoAuAaCsA}G}@gBqFqF_IHgAjBsC`JwAnCjAjDnGjFbCtLC|GeCtE_G`BoFEmIqB}KlAcC",
-   "pointCount": 366,
+   "polyline": "oofgEy`thXc@lAeBf@wBfBP~@`Bp@@pBeAt@oALwBbBkAnGIjE[|@yBk@{AaCm@Fm@fA{ACa@~BkC}AkBpDw@~HkCfCmBf@i@u@?yFmAuCr@}@dDoAhAcBuAyBlAqBeBwBCm@hCmFk@_ADwAsDKcBs@FgF}DcIdD[X_@LeDnBm@GcDrAeE_@aA^sC]B{@zAkAfEuHdGyOIuB{@oIdB}Jl@y@cBeDyAkEb@w@q@aAcFyA_BGyAz@kC}@e@qEBeBnBmElCiADwAoBHgCo@eAHoAa@uANwGj@uCgBUeC`AoAe@sAcAiBkEwAjAe@AuDyHiBp@]rA?t@bAzBa@fEcAt@iBLc@lBoBCStEoAj@eAfDwAAgBdF_B\\_ArAmCw@mDgIj@uAqEyBFaA|@kAOcBv@cErCBLc@w@kBDuFuDASi@ReC{@_CxAaBD_C|CqBPiCbAk@Hq@_@y@uBaARmBw@oC\\aA}@k@UiBZaBMmAc@KyAbAw@KiCaIgC_AOx@jAvL~@hBRhFr@vCg@\\mAe@{@kAgDo@mElDuBBoFqBu@v@b@`@gAbA_Ad@oAWf@tAlC]Jh@kARsA~EgC`Bw@xDkGyBo@tCz@`AGlAbAh@@nA|@r@CzBS\\kBNs@k@eAzA^zBk@ZeBc@OnBcAhAHpA[b@sD`@cCuDo@Z[~CcB`Ca@IEo@p@}AIiA}AdAe@y@yAfBaC`@w@qCqAJIsDmAz@e@c@DyF{A[y@l@e@{@mCe@cCf@uDKQ[n@yCSeAr@_Cy@YiDLqBoALuC|@gAr@uCi@kCa@e@wC?iBi@cEb@q@}ARqBgAaBFqBqAPo@oBiAi@M}AfCiCNaCmFXwAiE_DjAkAoBEcAmB_Ac@}CsAIEkAeCkB]yB{@{@J}A_Au@s@aD{FsCiCqCIkDlEeCP{Bq@_@}@`A}DLuBqEQiDj@{AbFT|DaCXo@So@iBGC_BgAg@YkCkCYHiBoB_@h@}CyAI_@_AjAuAQeBh@{A[_@cD`@i@gCdA{A_@iAjAp@y@fBLz@b@JjDsA|DSlCu@lBbEp@d@gB{DQuDJuDtBgItBiBjEYnPwKdIqCzIyLF}@aCwAc@kCw@yAJ_GU{CWo@mAi@[qAnAcBaBaCg@?gC`DmEnDmEv@_AWgCTkAtDa@}@EmCe@y@_Am@mCUcGhBcDxDaCn@aEYcGqCmBYwB_CmGyD_CyByA{FoAuAaCsA}G}@gBqFqF_IHgAjBsC`JwAnCjAjDnGjFbCtLC|GeCtE_G`BoFEmIqB}KlAcC",
+   "pointCount": 347,
    "start": [
-    32.80366,
-    132.651863
+    32.80648,
+    132.65437
    ],
    "end": [
-    32.872316,
-    132.721051
+    32.87232,
+    132.72105
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -74,8 +82,8 @@
    "curviness": 746.6,
    "flow": 33,
    "turnCount": 471,
-   "score": 84.5,
-   "baseScore": 84.5,
+   "score": 99.4,
+   "baseScore": 99.4,
    "spotCount": 0,
    "polyline": "_tclEkszoXUTgAcBoCxAu@pA}AGuB_Ai@vDk@h@gAWoCsEg@`AsA^d@pBi@^UlAwCANlCbEnCAfBbBhEYf@yASOr@VhBxAt@d@vBaGrE[KBiAWSmBTuAq@u@tAsAMFoDG]aB]i@yFwA@oA|Dk@XeEk@i@i@Ai@r@kEyEhBiAiA{DXs@e@mByDoCaCe@XlBfBfCjFbBbApFnAJdBbDbDvC|AnAL?hAtBpEfBjA~AOjBt@~AxEz@j@bBC|FhFfBj@OdDdBv@p@xA[fKfB`@hAyA~@Ai@~CgBxB`CEzAuA|AQKf@uAn@Ep@nBpAtBeBO~BtBfElAeBDaCtBqAjA~A_@h@{@e@Yf@bBlBVED}AhAbBjBoCp@`D|A`@`C_DdAzClAwAZ\\JrFbAm@vBFxEwFDf@qBxDuEbEy@|Be@PgBaAe@JvAnFbAd@jA~Bz@NpBnEdB^?tB~B~Ad@~CtB|ChBlAf@jBdCn@hBhClCA~BhCtDj@r@tDxF`@jAv@|B~Fy@bGPdAjRjTxOnKbDvFxDhNg@hF`CtHW|B^lMp@jCzDtFxFjDjL`DpAlA|HxA|AxBnFrArAq@d@tApB[QfBl@r@n@~CdAXlBONlAbBd@^|@Ad@iB\\E^`Ad@Hr@sDtCWtAnCp@`CsAjCz@Hh@q@jBVf@n@TpFOUtBtCL\\zBxBb@WpA|ANDtBy@tA[Up@mAGu@kCJHcBsAgAStAx@`@cAbBv@p@fAKWvAvCpInE`BxCxCp@IfAsAt@tBpGnJnL`KnMtTvDfUbAn@hCxEtDjBzEpEjD~LlV`JhCo@hCwDbB[fBPpJxG\\rABnEv@zIjArBtNlF|Jr@z\\hPpEnDdOpA",
    "pointCount": 234,
@@ -86,6 +94,10 @@
    "end": [
     33.538312,
     133.742401
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -99,8 +111,8 @@
    "curviness": 729.6,
    "flow": 29.4,
    "turnCount": 519,
-   "score": 84.5,
-   "baseScore": 84.5,
+   "score": 99.4,
+   "baseScore": 99.4,
    "spotCount": 0,
    "polyline": "iuhlEuqinXkDd@gDiEW|DwAe@c@\\mAGe@wAo@M?sAsCKm@c@YNb@lCc@hEc@Di@aAwAz@}A_BiAhAmABi@|Ak@?aBkAz@sLaAoCD{BiEWiAjAkGMwGoFRiDiAUeA~@qB_A{@fBoAo@cBFg@e@O{AcA_@wAyCWNDnBc@ZIoA{ByE_CoA}B{C{DsAmF{EaDmAOq@`@{@y@sBaDGoAo@eE}Fw@Em@aA_@IwBdDeF\\iAiClBeFa@cCZsAlAoAbDBt@qBkCoAkAmBs@qNe@{BcFmEMkLgAUiBdBuB}@C}AzG}ESaJb@aB}A{DEkAaA}AqBg@a@aAaHDeEnCm@WJgFqB}He@mId@m@~Ab@f@cAz@E|AeAjDH`@{@yBcCJkDcDwBYeByBi@oA_CoCwByFaAWk@N_Bg@wAiGuDF{FtD_F?wC]SoBpAwBiB{@tAgEhB[o@HoEUi@oFgAqCdByE^k@|Cs@Z}@cA?iDcDaA_BwAwDkNmBKe@ZDpCfBzE~@|Hm@|Da@N?pE[VwCIy@fCm@C{@yB_A{@n@iJeAoQo@aB}DsCCqB{@mAO}B@kCp@uB_@}@uAw@FkEoGgMOqB{AyDmAsARoCYiBcFiD{DiHRiEiDkEh@{EeEk@B}@~BeF[yBRuAwAqGeCCiBy@}Ev@uEcAqBt@yAkAP}Bk@_CTsArKhBxCDh@sArAc@FkBjAcDnDvC`FdAlAdC`Ap@zBo@pAb@|AcA|BJjBy@dF|@xChDzAeAa@iDl@gBm@oBeA_@yAuBcCDcAyAm@IuAlBmAAu@lB[Mn@{ChAk@h@kAzCUtA`AVy@a@w@kGI{AbAqBwD}DaCq@cBAgEhAaDvE_GzAeAnCiFy@oFgCqG_CmD[_IdAeJn@}AzAUlJ~BnIpEfH_@pDiHt@oHhBoDTwBrAgD~AqB~EM",
    "pointCount": 250,
@@ -118,7 +130,11 @@
     "ratio": 0.17,
     "surface": "unpaved",
     "label": "未舗装"
-   }
+   },
+   "tags": [
+    "winding",
+    "caution"
+   ]
   },
   {
    "id": "高知県:4",
@@ -131,8 +147,8 @@
    "curviness": 617.3,
    "flow": 28.6,
    "turnCount": 408,
-   "score": 84.3,
-   "baseScore": 84.3,
+   "score": 99.2,
+   "baseScore": 99.2,
    "spotCount": 0,
    "polyline": "_wygEm_kjXUl@qEbDsL\\oGhEh@|I~@hC@fASjBmB`FuG~FsE|@f@|CmAbDwCbA_FxDaDdFMnEz@jBPlC|@bB`GdEXh@I~@cIIoAXqBk@i@hA{BnMqAQsEyDw@ZoAnD_Al@yNeEwQpHiA|LExG`AxCC|@eBhEcCnCiCrAiB~ByA~@uFtAUbA\\lCe@~DwErCeAhCErDv@tBm@J]q@k@uD{DQeBaB_@DAf@|AvAbBZpAvAr@pDm@zAxBpAn@lBz@z@?hAm@`AoCdBsAm@{DfAqDYqKh@{BaA[uDs@JqAcAAyCgB}A[mB_DLO\\jBzC?p@o@~@|@|@_@jB~@hABlBj@n@Kr@iEqAeDDiAaAgA\\wB[BfAt@r@NbAmCvAbEnDt@COrAwE~@_Cm@eC|Bs@cCi@OqAfCiChBZeGwHmEtAgAnCp@xBMh@w@WmEuAgAm@cD_AWX~DhA~AOnBsIiBKpBiBhAoEw@qApARv@hF~@|AzBQ^}B^_@p@B`BsD|@wBSg@jBmAs@wA_Do@EwBnCBtE_A@eBuAkAUkBd@sAUUr@b@tBoB`@_@r@wBG_A_AeBXIhBaClBRlAxBxBxBRfCk@lAt@bBvEuAb@uAy@iBbAuCa@aCxADlEuC~G^jFSv@kByAa@qHrCoDAmDcAmCI{AyAcC?mFs@cEuFeJOeGgBeEs@iEyHyEcEfAeDeA{BPaDg@mE{C}FiGgBBmCfBeBnGoH^eDmBcHiB{AyG}BFeE{ToEcN_HgPsEsD{IeO_CwHoBuB",
    "pointCount": 209,
@@ -143,6 +159,10 @@
    "end": [
     32.979452,
     132.916682
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -156,8 +176,8 @@
    "curviness": 615.2,
    "flow": 27.6,
    "turnCount": 453,
-   "score": 84.1,
-   "baseScore": 84.1,
+   "score": 98.9,
+   "baseScore": 98.9,
    "spotCount": 0,
    "polyline": "{jvjEo_pkXaIaGaAiEwDqFWoDVaEt@aAOs@mDqAeG?y@_AIu@sEyEyFs@cC_Iy@_A}LIk@e@m@aDfAwH@_GkBu@wCjAq@Mu@iBN}Bd@y@xEqBBc@yBD{CcBaHiMF_ArAmC~Ag@Rk@cAkFEwDZaArA@hCxBZOTuH_@cLk@[cCrG{Bd@qDyAwEuFiB_AmC]oAcAWaBTaBrEy@^a@iCmDwCmG[cScAeGqBPiAt@cHmD_Eb@sAWmDwDkBkFiDnDM`Cj@|C[fAuCXwAYgA`B}E`BiA{CeBMiAp@iBwA`@{E[oA{CjBqCkBoA@IkGeCeBP}@xB}@oAuCDu@t@KjEdAv@GPe@g@eFeAu@JgCmFwE[cDjC_AlBRnCyEBaG|DuC_@eGPcAv@FhClE|@Z|@wA`A[SmCTu@fA?r@m@|ANCq@mBgEb@sFZMvA|@~@eBdCgA}@yAO_Bc@f@BzBqBB{@kEs@]{ApBsBn@h@fDyAz@EtAyAr@wBiK_BMeAyAQqCsBcBeB`E}B|Lg@GvAcPdBcLpByAGqCtB}H`@wI`BkH}@_F~@mA~Ae@z@uAkAeLxFpAvAUNsAcAaDPyApFmHjDWfC{EpAC~AbBlAZvBaB~A`Jj@f@|A_Ad@qBlAi@jCyE`FlBB`B`@PnAOn@sAw@yDyC}CK{@Va@fEQnAiBU_D}A{@O{@dBuDNiEo@iAgC}@o@qCj@iDiBoEQ{BxA{D{@yDGiD|E_KjAcFw@e@eHBmFqAy@sAI_FZmBvBsBT_AwFz@aB_BLiCd@y@|DaEbDoAlAgDeCwFcEgFs@wEj@}IhC}EV_IeDmFuFiCiCeGLoAbAwApEmAtB{E",
    "pointCount": 229,
@@ -168,6 +188,10 @@
    "end": [
     33.398988,
     133.231973
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -181,8 +205,8 @@
    "curviness": 677.3,
    "flow": 28.6,
    "turnCount": 371,
-   "score": 84.1,
-   "baseScore": 84.1,
+   "score": 98.9,
+   "baseScore": 98.9,
    "spotCount": 0,
    "polyline": "eoakE_qskXp@hAXnErBfFElBpAbEHtEm@hIn@jK]hDPlJc@|@a@lEyAzDTrDOpEzA`E@tFoExJDbBn@z@fBFbCy@rAkB`Ba@XnHj@xAxAr@a@`Gz@rAtEbAT~DQvA\\jAvA|@`BWd@XRrC}@f@Ov@zBlAX`EdA]|Bd@wAvDAlCV`@l@SdAb@VxCmAxCLtAgBlA?zCp@^n@OVq@`ErAn@rAhExD\\~A_@fDh@dDyBrCp@xCa@Dw@sBtAgEK]{AbEwCtCJr@|Ap@}@pBL~ApAnAbBLPjAd@RVm@s@yCR_@lBnDjCt@XxBnB[|@Rd@tB?tBp@x@|C_ABq@{@m@KcAxB_BgA}DqCKW]?aE{@}Dd@qBV?SxAx@n@MzAh@lANtBl@cB{@mBXcDX`Dp@n@z@hDNc@iA{FX}B`HvB|AHr@e@zBfA|AsBNgGQuB{@_DgAuASyBq@{A|EqEvC_Fs@cL}BiDu@}HKsEf@_Ee@qB|@sCjF[rBuBpBc@tGoGhEJTc@GaCx@mDnAP~AlDnEjFnBR|AkBA{@mAgDF}@ZGbBd@H|AlAdBpJm@fCzExB`CbHvDdEPnAYhAwC|BkAdFd@pHpDfA`EDrBzA~At@B|AqAjAyDnB}CxDmBbEdAbDsAl@aBb@mIp@eAjBS`Ed@tBqAxByHj@i@bDi@lBcFtJg@fAyC`AgIlCCxIfAxBG`DgAbFeQ",
    "pointCount": 194,
@@ -193,6 +217,10 @@
    "end": [
     33.383792,
     133.131491
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -206,8 +234,8 @@
    "curviness": 614.1,
    "flow": 29,
    "turnCount": 343,
-   "score": 84.1,
-   "baseScore": 84.1,
+   "score": 98.9,
+   "baseScore": 98.9,
    "spotCount": 0,
    "polyline": "kidkEssejXl@oA~BmBBoGbCkHnB}AdCk@bBmBBsBdCiDb@gDcBgEDc@ZDp@rBjBtAo@nFw@tB`@\\pBgGF{DdCeEbCiAlBErBoBzAEByAz@{BdGkBjFgFjAsCtBq@fBqBLi@c@uARsAxDuBhCgJ|@cHCcE^uA|E_CJuDfCeA|CyDpFy@dCuGlDqOy@aP\\sFt@sBiJa_@sCwFgAGe@k@PwCWqEj@qDh@{NYqF`AkCD}A_MkNsAsCiAiFAcFuBeEoBqLmB}C~@kFdC}A~Dy@Vw@yAcEmCqCIsAz@wI}AiDgAkK{@cAqBt@Sk@lBsFl@aFt@eBLqJg@{CHmAs@wAeAmIqCsEoAaAQX~@|@jAfDFjBi@iBgG_GkA[sC`@_Dm@qAeC}@yD{CeAq@kA]eCwAu@u@mF@kC_CqGBiAe@x@NnA]_AW_HiDkDoB}@mAqBmCG`CsBfAcEw@e@}B|Ds@Qn@yHuAaK}AwDp@kFgCeBKs@hAmChEuBrAsAbEcIXgB[uDpBqEVyBa@s@cCk@qAnBcAb@a@jBaAbAyA]qBdBeAwAkAh@mAUaAvBy@^mAkAgH^g@i@rA_CPcCbDoBJuCpCE|AoB`@CCx@sCjDb@v@xBGpEcBjBoEdE{CdImBEe@iC^sAYvA?~BiBLoB~@qAReExBeA",
    "pointCount": 178,
@@ -218,6 +246,10 @@
    "end": [
     33.445197,
     133.012481
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -231,8 +263,8 @@
    "curviness": 826.9,
    "flow": 32.4,
    "turnCount": 387,
-   "score": 84,
-   "baseScore": 84,
+   "score": 98.8,
+   "baseScore": 98.8,
    "spotCount": 0,
    "polyline": "qocmEgrsmXhEuI_GqBo@mCcA`Ak@IoA{APwBQYeC_@eDaDqAaCsAGi@m@_AcDpAqCmCIc@uB^gCOgDrAsAkAW_@m@@_CoAcCq@A}BhHqIqIcL_BaDcD{CZwCaAwByBgCWSmAV{BwA_BwAAm@g@IiAl@eD}Aq@WqBaCk@cB}CkCoBq@qADoBjEqGnBq@|B^xBiAJo@eBu@Go@vAgAJ}AbCiDHmCxB_Cn@qBjFi@\\nEvAo@bDFkAaDIeClA_HlDgDxAuGpBa@e@yD?wEp@m@hDxDf@@E}BpBuCe@oBLq@xA\\dAq@vB`Bt@OdAiBrFWrAcBtAN`AuAjATpB}Ax@}Bx@]zBv@f@rA_@fIj@`@rAuBjCyAg@iDhAuC|D_@dEhBhAeAc@qBJm@~B`@tAq@rBJnBt@`AuBpEtGrD`Cf@MVs@y@yGuD{DgBoFHwCzF_AcBwCP_Af@_@pB?hDuBbBsDtDkAU_DoCmB]sAXuAQuAPeBnC}@?kDdDg@rBqChAuDTyDtCRX|B~BpAGtC^~D|C}BpDQVxBvAbBrCEiAbDIrBjDyAbAn@nAcApD`FbC{BvHbPp@h@x@QRk@sAmCeBaLyAeEb@_CeEmBQqAsBX{CWgAkBeAa@oAwDC{Cw@e@{AnAwBgBkC}DaH_CqBwAlAoA`BW~Ar@~AeAXqA`Cp@b@gCvBy@UoAZm@b@AnBbBhAqAt@@?uDg@oAxBw@",
    "pointCount": 195,
@@ -243,6 +275,10 @@
    "end": [
     33.755887,
     133.52934
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -256,8 +292,8 @@
    "curviness": 899.7,
    "flow": 35,
    "turnCount": 333,
-   "score": 83.8,
-   "baseScore": 83.8,
+   "score": 98.5,
+   "baseScore": 98.5,
    "spotCount": 0,
    "polyline": "wc}gEywyiXeIaJmWyCwMyFc@g@EmC}@A_AhAeD{AIaBo@q@IeIqAm@y@~CuAP_BiANwAeCgCUcAWS}AZ_D{BVc@`DzBrBaB`@jBlEpCWs@gDmBd@{EU[oC`CuAa@_A}AyHUq@Ho@lAmCiAcC|Am@qHwFpEsACjAqF~A{BMyAu@q@MiBpAoAmBC_GxFBeFy@yBu@?wAnAs@Dh@uCMk@gEcBqCDHiBu@]]}@YqDhAcDwG}DHm@nAs@dA{BsG}Aa@mCiEAJ{AvB_BlAeExDPYoDfCoCD{AzC}C{GTsAi@_AfA}Ac@YfByCh@yBvA{CmD|AkCAqBq@i@_Ab@mBm@wAz@gDS}@\\fAjDg@pBoESkAuA[BcAjE{AkAm@wAwB?aCeDaA`CExAkBlDu@HaCoA[hB}ADP|Be@j@{CcA}@aA}@rB{@`@eAIuA`A]tAgA_B]jDs@n@aCVA_FgCvBu@ERyCiG|AkGYw@lAm@HWiAn@cF]gCoAi@WbBkAf@DbCyDiB~BoCCwAiCk@_ByFcBBwAw@eJyR{Yae@mE{EsAiF{BeF",
    "pointCount": 152,
@@ -268,6 +304,11 @@
    "end": [
     32.977629,
     132.886573
+   ],
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
@@ -281,8 +322,8 @@
    "curviness": 745.1,
    "flow": 33.2,
    "turnCount": 293,
-   "score": 83.8,
-   "baseScore": 83.8,
+   "score": 98.5,
+   "baseScore": 98.5,
    "spotCount": 0,
    "polyline": "cgxiEm||kXeDwE}@_CEsToByM}CuIuYgMgJwIcCkGqJeMgQmXaHkOg@a@gDPaAq@yGuTkBeAPaBsBcDnAsH_@}CsA}A{BS{C}BA_EeAkAgAuE]kKcBbEmCFw@`@AlD{@^{Dw@y@eBeBs@{AwF|BdFtA^dAtAj@?sA}B_Bk@cCeLaCvAa@nIiBdBKhAnBvCp@lDj@d@jBQU|BbARP|AbB`BsBb@aDMg@jBs@d@sAoFy@h@w@kBw@MY{@iF{@i@wD@kFeAkCFwAoEkIh@kBIaA}@_BoDYs@_AAm@hAsBy@wAOyC}@YgBd@gEuAgBkEkA}@{A}GsAyBqBDk@xBh@pBKh@eC_@XvDWj@oA{By@f@iA{@_AtAaAaAaABnAcD@yDp@_BiAEc@{A[VeAdHoBlBwClAWcAxA{D?eDgBdCcA]}@jCeABgBtAg@GEqCwAhCo@G]u@eARaB}@xAqDwGvEuIXyI{EC}@n@cBQuBo@wAwBy@{CmImF|B{IRStN",
    "pointCount": 137,
@@ -293,6 +334,10 @@
    "end": [
     33.278095,
     133.237674
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -306,8 +351,8 @@
    "curviness": 691.5,
    "flow": 28.4,
    "turnCount": 288,
-   "score": 83.6,
-   "baseScore": 83.6,
+   "score": 98.4,
+   "baseScore": 98.4,
    "spotCount": 0,
    "polyline": "cj`gEqlqjXx@aAtGmA\\mEf@GxA~Ab@A?wEp@nDxAnCxD[a@~A{ErB_@rAjAIdCcB~Av@zAo@fA|AfDeBaAgEHuAxAmDzBsCx@q@xGTxCeBPuQOy@wBiAG{ATq@jAm@rFbApAyA\\{Ai@gE}Bo@|AmAX{FuGgDLqAnCHXKCi@k@c@iCFiA_ADkDkBoD_@mFp@gClB{C|AE`Bp@zAsAEwFxBqGlAoAIoGbBeEf@]hBZvBcAx@F~ApAbAxA_@rBZnAq@~AZh@f@iAL_GlBaADmCrAaAzFAHoDpDwDj@HdBjDhBpAbDoCrAA`@zA}AhC?fAj@h@dCF\\_@?iCxAeAp@uC@eAw@qCNo@~Gs@xDHn@kClA}@fD^bBs@vBDh@e@r@iD|@eArEuBtCAjBw@z@DfCxBdC|FnBiC`DX`BsD`A]zBlEl@d@~BRnAhBf@FpCqDMaA_DwDXy@zF{@nIzBbAvAj@F|BaHzCgBzCj@|BGnHuHfDqAd@gJ^]V^S|Bb@tCv@b@T_@GiC|@}C|E{Gj@DZl@FlHxB^P}@kAuBvCcE",
    "pointCount": 152,
@@ -318,35 +363,14 @@
    "end": [
     32.726992,
     133.005718
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "高知県:12",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "板の川大用線",
-   "ref": "380",
-   "highway": "secondary",
-   "lengthKm": 11.58,
-   "curviness": 695.8,
-   "flow": 29.7,
-   "turnCount": 271,
-   "score": 83.6,
-   "baseScore": 83.6,
-   "spotCount": 0,
-   "polyline": "}m~hEimdjX{@cAQyC|BqFF{AiCoM{DsGP}ArBqEwBgD|@}AM}@w@G_@aAx@kDg@_CoAcBsAEoDfBuERaA}@}@_Fy@wA_CyByAH_K`IuCrA[f@e@`GyFhB}@xBQS`@_BhEyBVu@UsB_CqDfAuA@yCsAkC^_@hBPvAtDx@\\l@Q|B_DI_G\\oAQoFd@s@jAI~@cDReG}AmHfA}O|@gByEQqCvAu@?mByBw@l@yEgIB`C}BmBo@CUbC{@C\\r@y@rB_@Pw@e@z@iBEq@}@i@eBv@EWpB}B|@gDzAqAJuA]_AuBkAu@oA_CYy@gEkEiCLuDbC{DVyByA{D}AuBi@uEs@eBsA{B{ByAw@mByAu@gAaBcB~@wFXuC|Ce@[xCkGvB{A|CQxAmB~BbBlBo@vAgGbGfBfBGZcDnAo@ZsACaBm@kBp@iB_AiAAcDi@yC`@yEMsFbHqKpFmCdEcErBkO`C_HtB{@tEtDzBkDvCQg@qFjEyFcCgEy@}F}@M_AkD",
-   "pointCount": 137,
-   "start": [
-    33.092951,
-    132.90213
-   ],
-   "end": [
-    33.099666,
-    132.963297
-   ]
-  },
-  {
-   "id": "高知県:13",
    "region": "kochi",
    "regionName": "高知県",
    "name": "松原窪川線",
@@ -356,8 +380,8 @@
    "curviness": 657.4,
    "flow": 28.7,
    "turnCount": 269,
-   "score": 83.6,
-   "baseScore": 83.6,
+   "score": 98.4,
+   "baseScore": 98.4,
    "spotCount": 0,
    "polyline": "abjjEmerjXm@oBj@a@@iAyA}BmCcBgBbBg@a@}AoJNyG_@iBmBx@wABcFiGsFgEyAaCi@mEaAeBvAoFcFwCSgFkEWuBwBL{Cr@aA@_HlC{@G{EXm@bEgAl@iB]iBwE{@y@cDk@_@gBT}H|DmBDiAsAB_AvC{Dp@_CDoB[_CwB}Eo@uDkEwFuBf@}@MiEeFcE|@}IwEiAoAe@gBXoBhCcG`@wEnDwCfAaJrEd@tA}@bBQvAsFnC_BxA}Bh@oFs@uDjBkHlFZvDsAvBKtAuCdBvEj@`@|CoCfByFlAYb@eEhFDcBqCpCkAp@{AzDpCbCuAnAtAjIpBoDwIPaAtA_AKcCbH[vCz@vAjChAgAlEg@hAmBeAu@qFOeA{DeBoAAe@`A{@~Ci@f@yArAo@n@qA|Eq@l@oB~Bh@NaEpGaBWgAwB{Bw@Q_AaD_C_CeBfBuB~@yA}@{@kC{DnBy@eIaB[e@qAyB}@{DuFyCsBi@yAeDTm@cFgAqA",
    "pointCount": 131,
@@ -375,7 +399,41 @@
     "ratio": 0.119,
     "surface": "dirt",
     "label": "土"
-   }
+   },
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
+   ]
+  },
+  {
+   "id": "高知県:13",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "高知伊予三島線",
+   "ref": "6",
+   "highway": "primary",
+   "lengthKm": 29.97,
+   "curviness": 890.4,
+   "flow": 32.1,
+   "turnCount": 831,
+   "score": 98.3,
+   "baseScore": 98.3,
+   "spotCount": 0,
+   "polyline": "_~xlEu{hmXdB~Ep@|FRISgCZoC}@eGbCkD^}Dd@JdAzDjA~A`E|AbCu@`GiHbAg@tATfAW~@iEpAa@t@cAbAJxB~AxA|E`CtAx@e@u@yEX{@lBL|Ao@lCAhBeCq@?gAfAcCo@tCcAmBWEgHk@aBV_I[qI[sAuA{@_@qD`AaClDuATs@yE]iAj@{B{D`@]g@}Du@oBKgCw@kBLgB]{@b@qAkAsGbAwCEu@nFsE|@sBa@eBfBkDn@mDpH{AvA\\zAqFtAl@|@{@zGeBx@VLvCbCnAMhAqAtBv@hFxBxDdEvAlBnCfDm@zBmExClDrCuAfE}L`AN`E`DRkIt@y@vCe@Xy@OqDeDyDFyJ`AsCn@Ax@mAe@sB{@i@?uH{AkF@cJl@mCdAIXu@_@kLpB_ATf@qAx@BvB\\~D`A`A{@jBz@vCfBVM|GhBGv@fDtAjA^Ox@qC`@KdB|@^|B~@tAdCQpAlBrA[ZpAz@x@a@zDcAlADx@d@`@bHhAAnB|A|Dl@Ob@aDfCkApApAzCa@v@nB`Af@bBKxAqAdAh@dAi@l@Xz@fDnCY`BqAFqAx@{A`FCjAx@v@]bAh@pAOZoAn@MnAaFdC]|A`BdAa@IfDh@\\lCyCbC|@nAmBn@MR~Av@Jk@dEt@tEq@|B}Ad@H`EnBt@fEw@n@NMdCdAhAJjDgC`BIf@pFjAObCd@jC^XrDOrA|EnBU|B^hB`CdA{BzBOKpFv@fBrAwBjBMp@V`@vC|@x@X@d@oAlAFpBfFk@hBDxA|C|F|AeBH_AjB{Ct@GzCrB|@{@|B]d@u@qB]gCvAkAiAuAYeCfA\\gEG{Dk@{BoAiBJcE\\nDpDdFP|@UxCvBgAfAHdG_BfBsEhFp@HdBkBvHl@pA]j@LrAzA|Bx@tEArA{@dCmA`@t@vFVc@]_DbAUzAoHvAiBe@aFqAaAg@{B`@{GbCiFw@iBz@@n@zAgC`NHdA~@d@XYy@k@Ci@lDoOy@qCwBi@sA\\[m@|D{AtDb@xAeAxGaBlAaEbBs@t@qA|@yFjA{@p@eDtCgBgCoBgDGgAeAeAqEJmApEtCvCZtCUhFfAl@a@bCiFdCaAnAwCfBa@d@cBu@qBp@W~Ab@fBtCdBnAvBvD`BbAtGCbBsAlAsDlBKFb@{A\\wAnDe@rBNZ|CqGjDOdAgCpEvAvEsBnCvAd@zA`A~@~@JdAk@xARnDxDhCFnA_A~AeDQoJ|A}@~Ab@v@SBaAwAuAnAq@N{DhCqAvAyF?aClAsA|BkGpBc@vALhA~@~@jCfATdGsGxCkAfEi@rBmGBoClAqChAy@pCChBu@rAoDO{BpA?pAeAzTj@`DuAhBCrAoBxDw@xB_BlBJ`FoA~BLh@iBjFMp@qAlHnAhAiAjBEbCaCl@qC_@qHPm@`AeB|Co@",
+   "pointCount": 383,
+   "start": [
+    33.720157,
+    133.416426
+   ],
+   "end": [
+    33.607277,
+    133.466637
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
   },
   {
    "id": "高知県:14",
@@ -388,8 +446,8 @@
    "curviness": 758.3,
    "flow": 31.1,
    "turnCount": 259,
-   "score": 83.5,
-   "baseScore": 83.5,
+   "score": 98.2,
+   "baseScore": 98.2,
    "spotCount": 0,
    "polyline": "shfkEa`fkXpAoBBsD~B~@TyBrAq@y@gIh@kCY}F\\a@r@RjBfC`EnBpBdC|IbAtChClDaEGkCnB}BJsAn@m@~AZt@~CShAnAt@Gz@|@\\?p@`Ab@Pt@`Bj@EiKhAeDq@iAJiCvA{Ac@qCfBoAu@kB~@cAJgBt@c@jCyFvAaAbIAjDbGvAbAXrDfBcCzFKv@}@~AY~BPjCpGtAhAJ[oA_D{@_HwB][c@rGcEvBS~C{AvBTfCs@dEeCtCKvF|CxC`@bWyHrClB^}AbBi@h@eDjAjEn@\\fAmAvAgK\\YxC^eBH?vAaAzCJfBpDaDjBf@lAa@r@fApExBjBa@rAqBdA\\vCwAnBEtKlIpCKbAmAfBQvCgDvAwJ{AiKoE_@cAgAsFk@gDkDqC_AaA}CsAs@}@ImB~@Iq@~AyAiBqBwAmDuBoBT]|D[rAeA`BqM}@}DJ_C{BeCqAaG",
    "pointCount": 123,
@@ -400,85 +458,14 @@
    "end": [
     33.423267,
     133.104654
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "高知県:15",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "高知伊予三島線",
-   "ref": "6",
-   "highway": "primary",
-   "lengthKm": 29.97,
-   "curviness": 890.4,
-   "flow": 32.1,
-   "turnCount": 831,
-   "score": 83.5,
-   "baseScore": 83.5,
-   "spotCount": 0,
-   "polyline": "_~xlEu{hmXdB~Ep@|FRISgCZoC}@eGbCkD^}Dd@JdAzDjA~A`E|AbCu@`GiHbAg@tATfAW~@iEpAa@t@cAbAJxB~AxA|E`CtAx@e@u@yEX{@lBL|Ao@lCAhBeCq@?gAfAcCo@tCcAmBWEgHk@aBV_I[qI[sAuA{@_@qD`AaClDuATs@yE]iAj@{B{D`@]g@}Du@oBKgCw@kBLgB]{@b@qAkAsGbAwCEu@nFsE|@sBa@eBfBkDn@mDpH{AvA\\zAqFtAl@|@{@zGeBx@VLvCbCnAMhAqAtBv@hFxBxDdEvAlBnCfDm@zBmExClDrCuAfE}L`AN`E`DRkIt@y@vCe@Xy@OqDeDyDFyJ`AsCn@Ax@mAe@sB{@i@?uH{AkF@cJl@mCdAIXu@_@kLpB_ATf@qAx@BvB\\~D`A`A{@jBz@vCfBVM|GhBGv@fDtAjA^Ox@qC`@KdB|@^|B~@tAdCQpAlBrA[ZpAz@x@a@zDcAlADx@d@`@bHhAAnB|A|Dl@Ob@aDfCkApApAzCa@v@nB`Af@bBKxAqAdAh@dAi@l@Xz@fDnCY`BqAFqAx@{A`FCjAx@v@]bAh@pAOZoAn@MnAaFdC]|A`BdAa@IfDh@\\lCyCbC|@nAmBn@MR~Av@Jk@dEt@tEq@|B}Ad@H`EnBt@fEw@n@NMdCdAhAJjDgC`BIf@pFjAObCd@jC^XrDOrA|EnBU|B^hB`CdA{BzBOKpFv@fBrAwBjBMp@V`@vC|@x@X@d@oAlAFpBfFk@hBDxA|C|F|AeBH_AjB{Ct@GzCrB|@{@|B]d@u@qB]gCvAkAiAuAYeCfA\\gEG{Dk@{BoAiBJcE\\nDpDdFP|@UxCvBgAfAHdG_BfBsEhFp@HdBkBvHl@pA]j@LrAzA|Bx@tEArA{@dCmA`@t@vFVc@]_DbAUzAoHvAiBe@aFqAaAg@{B`@{GbCiFw@iBz@@n@zAgC`NHdA~@d@XYy@k@Ci@lDoOy@qCwBi@sA\\[m@|D{AtDb@xAeAxGaBlAaEbBs@t@qA|@yFjA{@p@eDtCgBgCoBgDGgAeAeAqEJmApEtCvCZtCUhFfAl@a@bCiFdCaAnAwCfBa@d@cBu@qBp@W~Ab@fBtCdBnAvBvD`BbAtGCbBsAlAsDlBKFb@{A\\wAnDe@rBNZ|CqGjDOdAgCpEvAvEsBnCvAd@zA`A~@~@JdAk@xARnDxDhCFnA_A~AeDQoJ|A}@~Ab@v@SBaAwAuAnAq@N{DhCqAvAyF?aClAsA|BkGpBc@vALhA~@~@jCfATdGsGxCkAfEi@rBmGBoClAqChAy@pCChBu@rAoDO{BpA?pAeAzTj@`DuAhBCrAoBxDw@xB_BlBJ`FoA~BLh@iBjFMp@qAlHnAhAiAjBEbCaCl@qC_@qHPm@`AeB|Co@",
-   "pointCount": 383,
-   "start": [
-    33.720157,
-    133.416426
-   ],
-   "end": [
-    33.607277,
-    133.466637
-   ]
-  },
-  {
-   "id": "高知県:16",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "千本山魚梁瀬線",
-   "ref": "370",
-   "highway": "secondary",
-   "lengthKm": 10.49,
-   "curviness": 733.7,
-   "flow": 28.9,
-   "turnCount": 266,
-   "score": 83.5,
-   "baseScore": 83.5,
-   "spotCount": 0,
-   "polyline": "weelEuroqXsDkGcFgDi@sCmAU_CsBgAR{A_@d@nBcAj@@\\p@v@lABt@nACzDqAhAjBhCq@lB{AL}CiDaExBiBEe@~@WjEcD`Cm@@g@eAa@Fi@lBj@jBo@nCuAd@q@`EVz@[VqH|AmB}@m@kAaAR_CgB{Bp@sEkAA|BcBjD`@vCcAx@kBK}ApCi@~CoCx@^jC_D`@gDq@gDsB]NLfHtBhDBjCgBfCaF`BSxDoBjCw@IaA{AeA_HcDn@oIXmAQe@k@KiC`@w@rFUV[oCwDT}He@c@qEpAkBjA}AtGqASgDsB{@Pi@~Ge@lAiAz@cAa@iAcCaCR}B[o@b@]dDu@|@iEgBgEtB_Cq@{@cBhBaCm@wEhDy@AkB{CReBeGq@u@o@JqBdDsD_Aa@tGiCdE|BbCxExBfAhACvAeBnCTp@dFT|@p@GpBsCpDz@bEeA|I\\lAfDfBpBxBb@vBk@nAyBRuC{C_AI_A`FnC`@?bC{AnBqAdEgFr@",
-   "pointCount": 134,
-   "start": [
-    33.619002,
-    134.106193
-   ],
-   "end": [
-    33.6554,
-    134.081562
-   ]
-  },
-  {
-   "id": "高知県:17",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "大木屋丸山線",
-   "ref": "369",
-   "highway": "secondary",
-   "lengthKm": 10.52,
-   "curviness": 666,
-   "flow": 28,
-   "turnCount": 250,
-   "score": 83.5,
-   "baseScore": 83.5,
-   "spotCount": 0,
-   "polyline": "wyklEyy|qXv@NrA}@hBRhBuBYjB_At@Kt@`BBrAg@tBZz@xFe@jCh@LtBiAlC|EQ|ClBq@jA~BrC|B\\xEpBjCHvDhAfCbAD~@z@`BtDdExFrCxGtFnB|A|NpAVlAbBLdE~BlLjBxDn@vDhCrAsAdDFpAX^dC^t@z@fDdJdCb@dBfFUf@gBj@AtA|BdDrDvAjBtFHlCn@Xx@aAnAd@tDtFr@hHfCPpA~@R~Ak@jAInCp@jHsAc@cElBm@e@yADyBtCx@pGoBhFt@vKtAb@lE?jJdEnAkBfDfBdFgAf@NdAxAoAjBc@|MrBnB|GoAX`Ew@dD~@rGtCfCbDjAjB~CgDvD}B\\Z|CnAXrEaCxBh@l@mFpBYpAcAtErGrBnAsBnBFf@tFl@`@|AEjDh@hFl@LfDvEZ`BpFdE~AvCvJVrBzFtD~DPt@",
-   "pointCount": 116,
-   "start": [
-    33.652915,
-    134.173892
-   ],
-   "end": [
-    33.612572,
-    134.111168
-   ]
-  },
-  {
-   "id": "高知県:18",
    "region": "kochi",
    "regionName": "高知県",
    "name": "上穴内本山線",
@@ -488,8 +475,8 @@
    "curviness": 657.7,
    "flow": 27.5,
    "turnCount": 352,
-   "score": 83.5,
-   "baseScore": 83.5,
+   "score": 98.2,
+   "baseScore": 98.2,
    "spotCount": 0,
    "polyline": "e``mEgrlnXdAmAbFMb@iEn@m@jG_DdCa@vAeDdCu@bB}AtFs@bBr@jBlD|L}DxB|@~AmAz@gExD^jBbCpCBpCkAtD~@n@}@GsCvC{AHqCx@}BNsCZQd@pAjIhEt@Nz@m@f@bBpNhGzDDlBz@pB|DfDdC~Bd@~BrBxCYxBx@`Ca@rA|EhAYxDeFjG{@r@qEdBp@x@w@zCu@ZuCb@WtCl@h@|CfBz@QpEj@`Av@OnAwAhCA|E~A`BbCdCGTeC~GqJd@cBGsBfA}CGkCZeAcAoCtAqAu@mGhByFfBPj@`BhFxE`E[lDmC|BMpBlEs@nBtBjARhA`Bb@|AtDpA_@lE{IbEoDp@fIdApCpHUjCx@~BgFbCWZa@oAiFAcEjDwAfAqBdEG^sC|@S`@p@_AzG{BfAqBQw@rBTdBrAnBRhCh@T\\{Ac@wCN{@~GeB^sCpAwBj@i@fA@pAyABmEzB{EBkC|AyA[wEvBiEnBoAKiAgFsBBeBv@e@lHb@hCgFjCmAB_Cj@eCu@uBBsApB_@lCpBvBYhEoIxDgCD`A_ExFVn@zEo@rBgAfFfCdBTrCtBrAc@~Df@fBSdE`E?~H\\p@f@BjAuBjAkGu@yRpA{Aj@sEvCN",
    "pointCount": 167,
@@ -500,10 +487,14 @@
    "end": [
     33.681359,
     133.625875
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:19",
+   "id": "高知県:16",
    "region": "kochi",
    "regionName": "高知県",
    "name": "大方大正線",
@@ -513,8 +504,8 @@
    "curviness": 632.8,
    "flow": 27.9,
    "turnCount": 656,
-   "score": 83.3,
-   "baseScore": 83.3,
+   "score": 98.1,
+   "baseScore": 98.1,
    "spotCount": 0,
    "polyline": "}xniEas}jXlDB^~LX~@`DyA~HaHz@mF_F}GN_J~BkCxCWrA@lE`CpB_IzBiF|GwBPeAaA_EfAaEq@gD?uBnBqCzAa@pCTfDmD~Ao@lALvC~Bb@~C`CrD\\bFbC`EdDaAlAcCn@]vDm@pE^j@cANaBdAu@fA?jIlCr@sBWwDNsBpBeC~Cs@xCxAx@Un@mAz@}EhCoBpCm@tAsBhCqATmAc@eAtDqGQwJjB_AhBnAdA`BA|AlChCt@~FbAnDzAPtAs@tA`@pAlFbCfDVtCsDz_@hGlS@rDl@nBa@RsAsC]GNpGdFvDjDHlBwAj@Lg@lAyCzA~Cz@Hn@uB]sCx@rBtERg@a@gB\\Ed@tA_@zGrAz@JdAnAxB`BvAj@tD\\[GqCoBwE[yBLw@pCzH~AnBKrDrCgB`CVtMzN~GdCl@~A|AbA`@dB~@XfBoBm@}EV}ApBuA~B|@xCId@gBT{Fh@KxAh@d@qD`AoBpBHbBhFhEyCxGb@tAhA^fBrBqAf@gB}CiBJwBwAeB@mEp@}@lDLAo@cBiABgBv@y@fD{@Hm@yAiDFsBiCf@DkCl@iAbCi@j@q@pAmCSoCxBL`EqCjBOhAuCjBi@hBoBl@TJnB^Zd@QTeCf@a@jB@r@tBhI`@fCjBc@aBNa@ZzAdAdALjA|AnAhA~B_@qCgA{B?kB_@aA`@iAKkAf@oAqDoAvFdAb@b@UhAJrFbB`DfDhCf@a@\\oBtAZXZh@fItDjCcCkDZmBOcBh@uAJ}B~GcDnDMFyD~DJCsJrDJhAvDz@yDxD~C|BqAz@lAdBe@lApBjDZhAwCSeDRoAp@P~BtDxBD?nCv@|@z@~Cu@N{B{G_Ax@_AqAU~AjA|Cs@jBgANaHuAcBdBBf@hCe@`E~B~AR~Bk@jBbAlE[r@hAfAGhBn@H~Bf@h@r@Yv@wBpDhBvA[j@u@^gCzAoBzDXtDmCrARvC{@pDpEzCaA~EEvGiB~EYrCt@xDiEdDqAvC~@~D~EvBv@~Ls@bHcD~AMzDZpFSlFr@zK]lGtAfI|FvBb@dDo@xDuElJ_@vCgApAN|ExDrA@x@q@tAeDRwKUuJ|FmFjBy@hCK`g@hItB?dAeAlDyIpAy@pUuBhDgAtAcBnDgKlHcEV_Bi@mDh@cBhLm@t@cA[qBpAcDrJaDzA{A",
    "pointCount": 316,
@@ -525,35 +516,14 @@
    "end": [
     33.039904,
     133.054183
-   ]
-  },
-  {
-   "id": "高知県:20",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "宿毛篠山公園線",
-   "ref": "382",
-   "highway": "secondary",
-   "lengthKm": 8.56,
-   "curviness": 795.7,
-   "flow": 30.4,
-   "turnCount": 224,
-   "score": 83.2,
-   "baseScore": 83.2,
-   "spotCount": 0,
-   "polyline": "kovhEkzuhXKW_JO_AuCx@yB?}@uDw@_@cGp@eF`@ROlFd@pC`D^^SKe@mCa@Yg@L{CnAgDFaDsAe@aBTaBoC~AtArGm@Y_@wAFuBo@{B_Dw@G`AoEcIjN{EnEgGlDwB~CkAc@mAiB|At@d@KhBqElA{A?a@W@uAdAa@|AQKOmAn@uBImDzAqCxBz@vAaBi@gDl@cB?mC`@c@|A`@VWgAgN\\q@rDkBTsDjAyCa@oCMpCcBpBe@rBgC`AaAA{AfAo@tBb@lCc@Ge@uCn@qDj@_A|DuB_@wBb@eBy@qFtAqCqAn@u@xAPbF{@tBcDzB}BzCKkB|AcGGcP{@qCeBg@eAoDZkDm@iJa@u@s@HoFfDg@tBc@aB`B_EpAgAe@qBrBuFnLA`BpD`BmE",
-   "pointCount": 107,
-   "start": [
-    33.052223,
-    132.663583
    ],
-   "end": [
-    33.058418,
-    132.688308
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:21",
+   "id": "高知県:17",
    "region": "kochi",
    "regionName": "高知県",
    "name": "伊野仁淀線",
@@ -563,8 +533,8 @@
    "curviness": 747.4,
    "flow": 31.4,
    "turnCount": 571,
-   "score": 83.2,
-   "baseScore": 83.2,
+   "score": 98,
+   "baseScore": 98,
    "spotCount": 0,
    "polyline": "wemkEmepkXh@gAoAyDsB_A}BNaAyFaCoCJy@zBwAg@kAEkBfAwEcFmDgJ_NZq@gAoAQeEu@iAy@DeBrDaD{@a@yCYO[NDv@e@~@eEvAiAo@{BuE{CcDIkCyE`DkAcAI_@fAuAl@aDH_EqBW@gF_D`CaCiACq@xAaBz@cCcCPQUN}Bm@s@LmCiAu@CeFiAqAJmCq@@g@y@}@n@sAIZtBeCNUdD}A_BUHYfDy@|Ax@`DsAlBr@zC@jEi@t@yBo@YhAY]JsArCLJwByAcF`AiBiBcCD_CbAkBoAcDf@eAxDy@F}Ac@iBlB]IiBjBe@n@_E_CuKqCaChDnAtAbEx@e@dA`@x@qAhA`@jAaAoALgAi@mA`AsAoAS{CyEe@G[lBKt@`@dBeANlCbAc@h@|Ad@q@PyEt@kAK_F~@oEdA]`ERjBd@dBlBdB_CxCNFuC`Ak@n@uApBv@pAbF~AvAjHTlBzAt@iAsBgAeISCqBu@a@oBeF{AoAuHr@k@xBcAF_Bm@q@yAA{BqAIfBe@h@zDfAd@XEV_Bn@q@rFq@l@aB\\GtAAx@jBzAYd@fCrBc@Sk@k@p@o@BC}CmBAcBsCgDm@w@dC}DDg@a@rBuHhAwBjCa@{AcDt@kISiE`@_Dq@WyF~C_@JI_@lAyAnB_AlCa@~B_Bj@@At@{@zAWrCf@`HTHOsJr@yAlB_B@o@c@yAuAX{@aA}DfAgAm@_@}@?{IoIqESaDj@}HFmLlCkJF}A{AaFyJaH_FeMaAUoBqGCgEqAgDYgDBaJWoBoBsCs@wDPcHW{Hi@SmAlAuAM{B}BsFeDeAcB?{CfE_NuEaVMeD}@}Ew@s@aE^{COsNyCiBmDmBmBGoH^mEcA}C}AqBm@K{@d@gA|Dg@d@mBZs@YdAcCx@_FuEkFdAcAdCxA~AcAgBuIJwAtA_DTaE_@u@yCU}IoFuAgL~DiIjDZr@_ChAiArAOZeAbAu@LiAa@_A{DqBqDyDgFqPNsOg@_BeAiR|AeEL_GrBaEGcIvAqEwAgHeBqCeCaA}AiDuQgG",
    "pointCount": 286,
@@ -575,10 +545,14 @@
    "end": [
     33.530844,
     133.246139
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:22",
+   "id": "高知県:18",
    "region": "kochi",
    "regionName": "高知県",
    "name": "柳瀬越知線",
@@ -588,8 +562,8 @@
    "curviness": 563.5,
    "flow": 29.1,
    "turnCount": 170,
-   "score": 83.2,
-   "baseScore": 83.2,
+   "score": 97.9,
+   "baseScore": 97.9,
    "spotCount": 0,
    "polyline": "ectkEqzilXkD^sCkBiF{Voa@N{AYeAkA_HwPqImI_EiBc@o@KuI_@qBaIoWw@yE{ByCUiBl@kGl@yAjLsBdA}Az@}C@sBkAoFCaJbEmXzDiLeBwFoBe@[sDr@iJxAcD]O_BtAeAJc@}AeBq@s@kA}Cg@JxBtC|F[lBkALImAt@WDg@yJsKFo@tBiDt@_@p@eBlA|@bCg@bB`BxB`@x@_BFmAeAkC?qE{A{@h@gAmBgBeBBW]bBmCAc@kBiAqD|@S_@TwBy@_AV_BKmAkDuBCeBvEaCqAkCuESi@mA|@gEWqAcBwAEi@nCcEC]kGgE}FyBGgA",
    "pointCount": 88,
@@ -600,85 +574,14 @@
    "end": [
     33.550627,
     133.311413
-   ]
-  },
-  {
-   "id": "高知県:23",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "羽尾琴浜線",
-   "ref": "216",
-   "highway": "secondary",
-   "lengthKm": 9,
-   "curviness": 876.5,
-   "flow": 32.6,
-   "turnCount": 242,
-   "score": 83.2,
-   "baseScore": 83.2,
-   "spotCount": 0,
-   "polyline": "g~rkEgluoXeCGcLeGoKU_CyCwAm@eBZiEvEsAZoKkGmNo@}DgBqF_@qAoA_BoF~DmGpAwDkA]{@hCk@Pu@q@q@sByBEhCkMSq@kFlEQsAs@GIgA{@Qm@eAe@NIzAeAn@_@q@{AGu@}CwB~AwCsDcCJqD_Cu@\\SpAeAlAi@Yu@iCw@DaAnAeBl@mAcAiBXyAoAi@zAg@L{@cCCsBeCFZuAjAu@Ae@yBiAu@HsAnAo@S|@mCG}BiD?s@aCiBy@q@mB}C`@kAu@eDOkAzAyA`@{Bu@Tk@hCXrAqBlDK|Bh@@y@}ASsCsBaDJwCgCgGmCo@VElA{@dBy@CB_J_CqBxAu@?k@]k@aBSBiB{BVBgBs@o@wAQLcAjBq@Ps@aDyCcAkBcBt@yAa@zBsELyAcCaDwFgAUoAqAuAD}Fq@C}DvCy@GeC`As@zF",
-   "pointCount": 121,
-   "start": [
-    33.52564,
-    133.808204
    ],
-   "end": [
-    33.568546,
-    133.83455
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:24",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "沖ノ島循環線",
-   "ref": "358",
-   "highway": "secondary",
-   "lengthKm": 8.37,
-   "curviness": 799.7,
-   "flow": 31.4,
-   "turnCount": 213,
-   "score": 83.1,
-   "baseScore": 83.1,
-   "spotCount": 0,
-   "polyline": "aazfEunahXz@rD{@zCcCrCwCwAa@J~BxB\\|C~B~DDl@[Vs@wBqBKGqB[M?dBv@`BBxAhB`DfAbAf@KrCaHPyA`EcBjAoD|BZjDhEVvBnA|@t@zA`Bj@fCzDB~A_AhDs@nGTt@pBf@SpDaErJT`AhCdBw@fDvAtD~C~B~I~AnBeApAsDtCiEbDu@f@PFzCfCJ\\zCfCG`AuAx@AtApE~@`@t@`BMrB}@xAbBtEr@lIfB_ApCmFp@gDdBuA|@eC~@]TmAtEq@d@i@MmCnC]r@uB}@{BFo@nE[~@}BfA@p@p@p@@fA}BhAWLsAgAaDtAwEdAeAs@eFdGQpBo@Tv@aDd@Ep@xAUzBr@b@cA~@PbDw@fIOnBb@lCEn@z@`IdExF|MxAWDeDrAc@",
-   "pointCount": 108,
-   "start": [
-    32.74273,
-    132.559306
-   ],
-   "end": [
-    32.709831,
-    132.548307
-   ]
-  },
-  {
-   "id": "高知県:25",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "志和仁井田線",
-   "ref": "326",
-   "highway": "secondary",
-   "lengthKm": 8.35,
-   "curviness": 593.8,
-   "flow": 28.3,
-   "turnCount": 175,
-   "score": 83.1,
-   "baseScore": 83.1,
-   "spotCount": 0,
-   "polyline": "{vxiEiv~kXBiBh@eAbC]|C{Dt@{JbB_@zAJxFfC`GTvBcB\\mC_@uAgEmD{AaC}HuSyAkBkMo[wEg]p@wHEeNwAeCDgEtBq@r@mBiA_Fr@eCK_A}AwB_BgFsCe@iAw@mAt@cCq@rAyHhDoCx@uDuDj@iBtBgD~ASc@PqFkCkAp@oBtBeA{@kFTeBzAyAJuCO]wBRwBiAkC@`CaGHwB|@cD_AuABy@fBfCgAdFLnB}@lAHd@|@YfCVxF}Bd@P[bBb@rB[hAb@zAcBxEApAt@AtAoA|HyC|@Zo@nBH\\pBGtBcBSe@eBjAYMBoCz@sBcDyFV}CQkB_BuHgBqDi@wD",
-   "pointCount": 92,
-   "start": [
-    33.227505,
-    133.200534
-   ],
-   "end": [
-    33.229367,
-    133.244378
-   ]
-  },
-  {
-   "id": "高知県:26",
+   "id": "高知県:19",
    "region": "kochi",
    "regionName": "高知県",
    "name": "夜須物部線",
@@ -688,8 +591,8 @@
    "curviness": 876.5,
    "flow": 33.8,
    "turnCount": 600,
-   "score": 83.1,
-   "baseScore": 83.1,
+   "score": 97.9,
+   "baseScore": 97.9,
    "spotCount": 0,
    "polyline": "oyvkEotloXoEuJcHaK{@aGaDcLgGsFoHyOkFqBsMgIqEoFsZeU{H_KeEqAaA{@[}@IgKcA{MWkAuFuIHuC|@_C}BsBt@yGxAyDIu@yE}J{FeHo@yGkAyDaDgCe@iCsCwG{AaA}Ba@cCoDqCJsDyAaAp@{@lDoBjAqAGsGoDiBeCCqGu@yB}BKqAcBcEyB_EcGyH_ArAiAU{EcAgBcAaGkAcB@sAkAqBq@qC{EcCiE`@rCcEA_@eDtD_AjC^TnFeAnAL@fEnATXjAa@zBLzD`BzE_@h@uDw@iA^uBy@mCh@jB|@Y|CtATjAdAgBeAcC?f@sBcDgCfBiBtAR|@k@fCAjAc@gDwI{@Sa@`BwAVgD}@kIEJyE`AcDaDW@_B`AwA{AwAa@wAuBKwBjAkAc@_BkJ{AkAl@uBu@mErGlBi@_BbAiBkAkC~@eAByAhBg@fC?BiCjAkAe@aEjBoCRmAaA_CCoAiBgAo@l@d@t@LrCeDMxBhBAt@cBr@|AtFeA\\wAaAw@DoArAG|@wAyB[`Ew@^@tAeAl@eB@wAg@YaBzAeCG}@yGh@o@yBBa@pB]g@cAbBiAc@sExAIHqA|@a@y@iACqBsHbBaBEO~B}ATX~AWb@}BJo@e@e@d@u@{@eBnB]m@i@P{Cc@CuEQ{@[CaBnAeAbC]bCi@m@y@RkAg@p@{AwDqD_B\\kEqCu@sCByAgCaCQsFqAt@cA_AeAnC}@s@iClANpEkA~@IvDwAe@cDXNeGZiASiANmCYQiC|Ay@w@sBtAyCuApAiEg@wBjAaD_@eAeEXo@kBqCl@aAqBaEbBi@~@sAm@_@aAoC_Ay@fCcBsC{B}Am@Zg@tBiBGqHpGoBXe@}AuA?s@mF_Aq@_AkCqAL?kB}A{BPmAuBeBcALhAw@b@bAjBl@PfClANnAdAdAzCn@TuG}MkAe@cAeB_@aBfAqCy@iDhBcFc@_HsAr@aEAy@e@iA}BiCu@cCqBS{B}@oAcAoFoCy@k@w@YkGuBqDIwCuBwAi@oDeBiBd@kDyBd@",
    "pointCount": 279,
@@ -700,117 +603,131 @@
    "end": [
     33.628495,
     133.853612
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:27",
+   "id": "高知県:20",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "大川土佐線",
-   "ref": "265",
+   "name": "羽尾琴浜線",
+   "ref": "216",
    "highway": "secondary",
-   "lengthKm": 10.15,
-   "curviness": 699.4,
-   "flow": 27.5,
-   "turnCount": 258,
-   "score": 83,
-   "baseScore": 83,
+   "lengthKm": 9,
+   "curviness": 876.5,
+   "flow": 32.6,
+   "turnCount": 242,
+   "score": 97.9,
+   "baseScore": 97.9,
    "spotCount": 0,
-   "polyline": "_{dmE{esmXGdB|@lCw@tCi@jLo@tBsB`C[nDzA~IvAfBpB|GxB|AJxE~CPV^ObAoB|B?vDxB@~BhCeElCiAbJr@zBdCfBVdBmA`ByAn@iCgBc@Tq@xBt@fAx@pDOf@_FwA}Cp@Wt@cB\\i@|@}CHqExD}EfBw@rA`@jHSnEfBnBNfAg@lCtBnA[v@{Ab@BrAr@`BgAzECxB^b@pADPv@}BfBo@fCaAr@w@lBNzAwCdBw@bGt@fAv@rFp@f@dDdHFpG~BZ\\dB]t@kCPa@bDmBtFqAbHaAtI\\pC{AhBt@tEpBvBTvDnDG}@|Fj@lFxBpIk@dDj@lAtC|B_FxBkAvGb@rAmCrAOzCgEfAsCrBwFhQCzHt@tJGvCg@tBh@vB~@f@|FnBrAU\\\\YfC^lFQrFhArFk@j@oHo@sH~@iCg@eBeBpAmB",
-   "pointCount": 116,
+   "polyline": "g~rkEgluoXeCGcLeGoKU_CyCwAm@eBZiEvEsAZoKkGmNo@}DgBqF_@qAoA_BoF~DmGpAwDkA]{@hCk@Pu@q@q@sByBEhCkMSq@kFlEQsAs@GIgA{@Qm@eAe@NIzAeAn@_@q@{AGu@}CwB~AwCsDcCJqD_Cu@\\SpAeAlAi@Yu@iCw@DaAnAeBl@mAcAiBXyAoAi@zAg@L{@cCCsBeCFZuAjAu@Ae@yBiAu@HsAnAo@S|@mCG}BiD?s@aCiBy@q@mB}C`@kAu@eDOkAzAyA`@{Bu@Tk@hCXrAqBlDK|Bh@@y@}ASsCsBaDJwCgCgGmCo@VElA{@dBy@CB_J_CqBxAu@?k@]k@aBSBiB{BVBgBs@o@wAQLcAjBq@Ps@aDyCcAkBcBt@yAa@zBsELyAcCaDwFgAUoAqAuAD}Fq@C}DvCy@GeC`As@zF",
+   "pointCount": 121,
    "start": [
-    33.781116,
-    133.469263
+    33.52564,
+    133.808204
    ],
    "end": [
-    33.791336,
-    133.395811
+    33.568546,
+    133.83455
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:28",
+   "id": "高知県:21",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "野見港線",
-   "ref": "284",
+   "name": "沖ノ島循環線",
+   "ref": "358",
    "highway": "secondary",
-   "lengthKm": 6.85,
-   "curviness": 595.8,
-   "flow": 29.6,
-   "turnCount": 138,
-   "score": 82.9,
-   "baseScore": 82.9,
+   "lengthKm": 8.37,
+   "curviness": 799.7,
+   "flow": 31.4,
+   "turnCount": 213,
+   "score": 97.8,
+   "baseScore": 97.8,
    "spotCount": 0,
-   "polyline": "oewjEuavlXJtMnJhBPvFlBlIzAxA|@NDnAe@|BtBXAmD|@FlAk@hAnDbAh@GbChCbAk@xAiENg@v@AzAu@pAwDb@m@tAwA|@ArCmDdCyAxCFlAzAjAd@vAQfC`B?m@~ByAl@qAIkEv@aDpAaF~EmAo@uEf@gAQsAx@QbBq@bAgACuBbB{Bd@}D}@j@iAFaB}@uK{C{E_Ag@_AHeEbCWxAcBvCS~FkM`JO~D}@jBuCIaB~AoQfI{CH}GdGUtDk@`@_NkEgDb@oLzKkIdB",
-   "pointCount": 73,
+   "polyline": "aazfEunahXz@rD{@zCcCrCwCwAa@J~BxB\\|C~B~DDl@[Vs@wBqBKGqB[M?dBv@`BBxAhB`DfAbAf@KrCaHPyA`EcBjAoD|BZjDhEVvBnA|@t@zA`Bj@fCzDB~A_AhDs@nGTt@pBf@SpDaErJT`AhCdBw@fDvAtD~C~B~I~AnBeApAsDtCiEbDu@f@PFzCfCJ\\zCfCG`AuAx@AtApE~@`@t@`BMrB}@xAbBtEr@lIfB_ApCmFp@gDdBuA|@eC~@]TmAtEq@d@i@MmCnC]r@uB}@{BFo@nE[~@}BfA@p@p@p@@fA}BhAWLsAgAaDtAwEdAeAs@eFdGQpBo@Tv@aDd@Ep@xAUzBr@b@cA~@PbDw@fIOnBb@lCEn@z@`IdExF|MxAWDeDrAc@",
+   "pointCount": 108,
    "start": [
-    33.383445,
-    133.320114
+    32.74273,
+    132.559306
    ],
    "end": [
-    33.41001,
-    133.292413
+    32.709831,
+    132.548307
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:29",
+   "id": "高知県:22",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "新改停車場線",
-   "ref": "253",
+   "name": "宿毛篠山公園線",
+   "ref": "382",
    "highway": "secondary",
-   "lengthKm": 6.94,
-   "curviness": 882,
-   "flow": 32.1,
-   "turnCount": 191,
-   "score": 82.9,
-   "baseScore": 82.9,
+   "lengthKm": 8.56,
+   "curviness": 795.7,
+   "flow": 30.4,
+   "turnCount": 224,
+   "score": 97.8,
+   "baseScore": 97.8,
    "spotCount": 0,
-   "polyline": "_rllEkjynXf@e@xAb@n@w@pAvBzAIfAfArAi@bC~D`Co@pHzBa@}CqB{DVgCiB{@m@oCeCw@`BgHmB_Cd@aEUgC~EkDz@F`Az@bCBb@^Cn@{Ap@GpAg@j@v@F`@uBjA]rB_Ey@cAwDs@s@cB~BsEzF{DeA_Ae@}Cv@YxCF|@mD~AlCvA_@|@dAxAkCrBvDjBDh@WXiAz@[@kDdAcAlIbC|Au@WoAp@aAg@eBNuAkA{D[{FcBiAmAcOl@qBsCsDPSfA`BtCY}AwAgAsFo@i@aF}@y@b@oCA}DaBqIoGyBcC{@sCCiBbJgFhCuEaBcDuAcAm@kFuAKaBiB",
-   "pointCount": 88,
+   "polyline": "kovhEkzuhXKW_JO_AuCx@yB?}@uDw@_@cGp@eF`@ROlFd@pC`D^^SKe@mCa@Yg@L{CnAgDFaDsAe@aBTaBoC~AtArGm@Y_@wAFuBo@{B_Dw@G`AoEcIjN{EnEgGlDwB~CkAc@mAiB|At@d@KhBqElA{A?a@W@uAdAa@|AQKOmAn@uBImDzAqCxBz@vAaBi@gDl@cB?mC`@c@|A`@VWgAgN\\q@rDkBTsDjAyCa@oCMpCcBpBe@rBgC`AaAA{AfAo@tBb@lCc@Ge@uCn@qDj@_A|DuB_@wBb@eBy@qFtAqCqAn@u@xAPbF{@tBcDzB}BzCKkB|AcGGcP{@qCeBg@eAoDZkDm@iJa@u@s@HoFfDg@tBc@aB`B_EpAgAe@qBrBuFnLA`BpD`BmE",
+   "pointCount": 107,
    "start": [
-    33.6568,
-    133.664536
+    33.052223,
+    132.663583
    ],
    "end": [
-    33.650069,
-    133.695592
+    33.058418,
+    132.688308
+   ],
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
    ]
   },
   {
-   "id": "高知県:30",
+   "id": "高知県:23",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "日向谷高野子線",
-   "ref": "284",
+   "name": "志和仁井田線",
+   "ref": "326",
    "highway": "secondary",
-   "lengthKm": 6.58,
-   "curviness": 555.7,
-   "flow": 28.4,
-   "turnCount": 129,
-   "score": 82.8,
-   "baseScore": 82.8,
+   "lengthKm": 8.35,
+   "curviness": 593.8,
+   "flow": 28.3,
+   "turnCount": 175,
+   "score": 97.8,
+   "baseScore": 97.8,
    "spotCount": 0,
-   "polyline": "c~wjE{`{iXM`Dp@xBzAnAnCTj@bEfDrBfCpC|D|H`EjBlBdC|Ap@xAzBoB~EgDbD{D^cDxB}B[wATWfGyFzCeBdBqDUw@aBi@p@aCHkHiGSr@hCtLtAfArAzCjEdAs@vBuEUq@vAaCXa@dDsEMG^`B~BV`BbBl@JfBnBUfG|AxAKx@|@jD`@jAxEYzBTf@h@aHWqBqAyAHw@rFZ`BaA`@LPt@yAlE|ArHYlAJjC_AlD^zIlDbPlCbDjBpG`DxEpAnOsAzE",
-   "pointCount": 71,
+   "polyline": "{vxiEiv~kXBiBh@eAbC]|C{Dt@{JbB_@zAJxFfC`GTvBcB\\mC_@uAgEmD{AaC}HuSyAkBkMo[wEg]p@wHEeNwAeCDgEtBq@r@mBiA_Fr@eCK_A}AwB_BgFsCe@iAw@mAt@cCq@rAyHhDoCx@uDuDj@iBtBgD~ASc@PqFkCkAp@oBtBeA{@kFTeBzAyAJuCO]wBRwBiAkC@`CaGHwB|@cD_AuABy@fBfCgAdFLnB}@lAHd@|@YfCVxF}Bd@P[bBb@rB[hAb@zAcBxEApAt@AtAoA|HyC|@Zo@nBH\\pBGtBcBSe@eBjAYMBoCz@sBcDyFV}CQkB_BuHgBqDi@wD",
+   "pointCount": 92,
    "start": [
-    33.387376,
-    132.85406
+    33.227505,
+    133.200534
    ],
    "end": [
-    33.382146,
-    132.818594
+    33.229367,
+    133.244378
    ],
-   "unpaved": {
-    "unpavedMeters": 1464,
-    "totalMeters": 6585,
-    "ratio": 0.222,
-    "surface": "dirt",
-    "label": "土"
-   }
+   "tags": [
+    "winding",
+    "caution"
+   ]
   },
   {
-   "id": "高知県:31",
+   "id": "高知県:24",
    "region": "kochi",
    "regionName": "高知県",
    "name": "南国伊野線",
@@ -820,8 +737,8 @@
    "curviness": 836.2,
    "flow": 32.3,
    "turnCount": 478,
-   "score": 82.8,
-   "baseScore": 82.8,
+   "score": 97.5,
+   "baseScore": 97.5,
    "spotCount": 0,
    "polyline": "kjwkEkpkmXoP|DaA_EqKcFeCeDsC`AwF[oAm@cFLqFvAu@w@yChB}BkA{CAkA}@qA`ByE{@aBzAaF@oA{AoBJe@kEYWi@TRtBa@`@]oCoA}AhB[F{CiAiBa@uC{@_BHeG][UNVvC[fFx@dBW|Bb@Z_HpChC^lAbAMjAb@z@EnAeClBtAsBk@cBDeAeImB~A}B~CsAAu@eCw@q@iAjAuAFkBsAg@WsA}BoBwBi@pCmDxA?^iAIyAsFqCtCcBGqDkBuB`AuAu@gC~@qCiDsAiAgBqBb@LwDSS{@K_CbA[SCgCW[uCjBg@qCoADi@o@@oAyB[e@f@\\xAMbAiAGwA`An@`CMvAbAnAs@jAP^bBa@r@Xj@|B|BjBsBlAPpA~@|@UpAd@pCg@fAiBGw@cBcCq@e@mBi@Ji@`BmBqAsAd@_@jAaBDgAa@wCZ_AdCb@dDErF}C|@aA`BiASW`@OhGxAnCeBr@Kd@|CpGg@bC\\jEgB[kD}FsCbBeA|Ao@lEaDfHDrEm@Dq@y@g@L]j@UxDe@Fi@i@w@yE_BBuAjDHvBa@`Eq@dBUEEmIuAkBiAUoD|BgDMsAzAsDsAaBBcAvBcBL}@bAgB`@gAdBDbAwAOw@\\kB]w@fAm@IoAcD_D]{BwCw@~@cAqAgAWyByC{@Gy@qKuCoAiC_EiAe@yA`Bo@AJcDY}AaEyEe@uCyBeCmC|A_B?lDyFRiAqBkDyFyFn@gHoAcCeBG_@}AXcCsAqFN_Cy@gHmCKkBd@[hMa@l@eAPsBLWUbBU~AgAVsLh@uAlC{B]o@L}@fCoBxDc@p@sAh@eCq@yGFkCdEyFjA_FdD_ItBiQ_@cKu@gHcAwCg@eJdBqF]u@yBq@_BmBk@{CB}C",
    "pointCount": 243,
@@ -832,35 +749,72 @@
    "end": [
     33.604314,
     133.466895
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:32",
+   "id": "高知県:25",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "清王新田貝ノ川線",
-   "ref": "352",
+   "name": "野見港線",
+   "ref": "284",
    "highway": "secondary",
-   "lengthKm": 16.91,
-   "curviness": 610.8,
-   "flow": 26.2,
-   "turnCount": 394,
-   "score": 82.6,
-   "baseScore": 82.6,
+   "lengthKm": 6.85,
+   "curviness": 595.8,
+   "flow": 29.6,
+   "turnCount": 138,
+   "score": 97.4,
+   "baseScore": 97.4,
    "spotCount": 0,
-   "polyline": "{jigEinaiXn@rAfAd@i@zANNzBoB~@}CQ{@kEwDx@qCc@uFtAUNe@_Ck@oA`Bu@cA{@B{AiDm@}CdCkDHgApBeDTX[`GJf@XE?yAf@s@ZyE~@mDBsBc@cAqBs@oAyCiEaEoAsFMeF_D{Iv@{IjA}D@oHlC}D`FmMHyFv@uDbDi@vBtAnAHnFoD`NuF|@sDIsEaD{GI_BPyAdAiArB_@hAbBfDrA`BIz@|@tCJ`Bi@`@oBe@cB`@{@@uAsBaJ]cFNuCjAyCjDkDpHcBjCoGr@e@NiBbBeEdAAnCzBbDLx@Wh@yAg@aCx@}Go@qBlC_HOqC^kAt@g@SuA`Ag@TqAv@i@zA`ApAQv@ZfDzE~Ce@XqQnBiJrFkCdFc@|EsDtERhDk@p@wBbB{BTuA]aAiC_BI}AvDwA|AaBf@wBdBX|Bm@tCzAXiCjAyAhC]`Ar@EzBXNf@oBLaDjA[z@XTw@dCgAvAiB~CjA|DmBnAAp@eFnBqC`AoErDc@`CbD`ClHrBp@fCy@dBqBxA{GxEf@pCiBv@sBf@gLh@wCgC}HdEH`BiAfBmDBqD_AkDhAmCEwA|DeEbBONc@y@sAcC_@sGyGDgEhAo@pAiCG}@aBsAGg@jEkDpHz@`BQf@Yp@oC`DtEvCZxAaB`AsDCuBcBcCNwK|@GtClChAExFiDtAwCGcDuCcGJ}AlD}@hHApIs@`A{BrAi@nFeH~@g@",
-   "pointCount": 195,
+   "polyline": "oewjEuavlXJtMnJhBPvFlBlIzAxA|@NDnAe@|BtBXAmD|@FlAk@hAnDbAh@GbChCbAk@xAiENg@v@AzAu@pAwDb@m@tAwA|@ArCmDdCyAxCFlAzAjAd@vAQfC`B?m@~ByAl@qAIkEv@aDpAaF~EmAo@uEf@gAQsAx@QbBq@bAgACuBbB{Bd@}D}@j@iAFaB}@uK{C{E_Ag@_AHeEbCWxAcBvCS~FkM`JO~D}@jBuCIaB~AoQfI{CH}GdGUtDk@`@_NkEgDb@oLzKkIdB",
+   "pointCount": 73,
    "start": [
-    32.821099,
-    132.723095
+    33.383445,
+    133.320114
    ],
    "end": [
-    32.762861,
-    132.813616
+    33.41001,
+    133.292413
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:33",
+   "id": "高知県:26",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "新改停車場線",
+   "ref": "253",
+   "highway": "secondary",
+   "lengthKm": 6.94,
+   "curviness": 882,
+   "flow": 32.1,
+   "turnCount": 191,
+   "score": 97.4,
+   "baseScore": 97.4,
+   "spotCount": 0,
+   "polyline": "_rllEkjynXf@e@xAb@n@w@pAvBzAIfAfArAi@bC~D`Co@pHzBa@}CqB{DVgCiB{@m@oCeCw@`BgHmB_Cd@aEUgC~EkDz@F`Az@bCBb@^Cn@{Ap@GpAg@j@v@F`@uBjA]rB_Ey@cAwDs@s@cB~BsEzF{DeA_Ae@}Cv@YxCF|@mD~AlCvA_@|@dAxAkCrBvDjBDh@WXiAz@[@kDdAcAlIbC|Au@WoAp@aAg@eBNuAkA{D[{FcBiAmAcOl@qBsCsDPSfA`BtCY}AwAgAsFo@i@aF}@y@b@oCA}DaBqIoGyBcC{@sCCiBbJgFhCuEaBcDuAcAm@kFuAKaBiB",
+   "pointCount": 88,
+   "start": [
+    33.6568,
+    133.664536
+   ],
+   "end": [
+    33.650069,
+    133.695592
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "高知県:27",
    "region": "kochi",
    "regionName": "高知県",
    "name": "石鎚公園線",
@@ -870,8 +824,8 @@
    "curviness": 627.2,
    "flow": 27.3,
    "turnCount": 568,
-   "score": 82.6,
-   "baseScore": 82.6,
+   "score": 97.3,
+   "baseScore": 97.3,
    "spotCount": 0,
    "polyline": "}}ylEiatlX}@pKiB~GaCxDcBp@mCtCaBjDeA~\\FrNTxKnCzRs@lDsBfDu@dE}BzDDjGkCe@mBTBn@nAjBpBp@[bCRbCoBxBk@nGmAfCwD|@eHgA}B\\{@p@dEjAlEzE~Cc@?~DhAlAn@pDeGvGdBj@zHMN`AeAhQzBn@hBxCfDTnEzApAvCETkFGsCrA}@nAe@fAKfEkAV~AfE@~BoBlBcBS}Bx@xB`C{BzDq@|DBxBcE_@]V~EbHe@zA}BvACn@lA`@bDWPb@QlIq@`C{@bAi@DkAaEkEeAo@N`@nLa@rBBlDkAlE\\b@~B?rBvEs@`GkCvAMv@hF`EdAVxD@xCmARdE`FrLd@xCIjAkE|FCbDb@jCh@x@rGzBlBaA~AkBp@Ih@nCDbFeA~AuCpBeAlBq@hEsCbG\\rRk@N{CgDqB_AeBXqBpC_BMQf@bA|A[jBVrI{@tDoA`CwD\\wElEgCv@kAhDgHrK}FpBqHnHc@~@^hAW`A}AZkCq@wAVeBnE{@rEqFf@yEvFgBx@}AxBsBpAkAlBUxBs@XW~CiDvDwDtKMjIfAfDwDtDwEnKo@nEn@|ApDzBpCvCx@|BExDoAjCaD]}@\\gC|HuGgB}BrA@fBzBjFt@d@?f@_BvGaCfA}@lB~@nBjB^f@jBtF|GMh@_CrAQbAT`C`CpA{@~DlA|@fCXLp@c@nAb@l@~@m@x@n@hAjExDbD`B~GfDdEbAvHlBjGu@bDJ~EvAxFUDuDcFUmGRqBoA@o@m@KyAwAgCsBiLsCeEaBOc@\\w@`FcAjCKhCnAy@PNe@hE{@tAu@~Cq@\\kAiCw@g@cAIWXtBlCN`Er@lBw@xGaA`C\\Rp@]dAqBnAu@j@aCp@k@PqBr@g@PrAa@`J_BrB}AxHsC`BkApD}CrCDb@lCx@Nf@iChF?zB_DDiAj@VhBiBVk@fBHvBhChAa@fE|@x@FrAgArDrDxEd@]p@iE`@BuAzIw@GgD}DuA[iAf@{@iA[aBm@u@NuA_@gBaBgFeBeCqA{Ge@?",
    "pointCount": 278,
@@ -882,35 +836,14 @@
    "end": [
     33.757479,
     133.170418
-   ]
-  },
-  {
-   "id": "高知県:34",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "末清夜須線",
-   "ref": "222",
-   "highway": "secondary",
-   "lengthKm": 5.46,
-   "curviness": 852.8,
-   "flow": 32.8,
-   "turnCount": 142,
-   "score": 82.5,
-   "baseScore": 82.5,
-   "spotCount": 0,
-   "polyline": "{wzkE}_roXwAlBoA}@yN[gGiCqHnCgBQ{BvCoLp@kAm@wBJ}B}GcDmAeBRo@iBmBe@kCkC}@kCeASm@kBuCe@kCeEUsCs@yAq@t@XnFS`AiEeBkA?gA`BoAR_BoBqBm@@l@jClDYfD_@NB}DgAm@iAoBoBN`@wBoBoAMk@LWtDV^e@kEa@gBiBg@dCyGr@{B|@FlCjCf@i@hCp@`DkAgBa@oCmAmA_@_CkCkBBmC_BJiAmAiAF}GoDmEaEcAM",
-   "pointCount": 68,
-   "start": [
-    33.565576,
-    133.790875
    ],
-   "end": [
-    33.594621,
-    133.799578
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:35",
+   "id": "高知県:28",
    "region": "kochi",
    "regionName": "高知県",
    "name": "安芸物部線",
@@ -920,8 +853,8 @@
    "curviness": 702,
    "flow": 28.1,
    "turnCount": 380,
-   "score": 82.5,
-   "baseScore": 82.5,
+   "score": 97.2,
+   "baseScore": 97.2,
    "spotCount": 0,
    "polyline": "aaglEah~oX{BS{AeBk@}Db@yEk@aBaDBmDhBeBKwAgFr@{AAgAgGaCSgF{@_De@MyA|BeAd@iAG_@k@OgEbBiCfE}AHkAu@i@uHfCaCjB_F~I{De@{Bf@cAYuAh@_B_@aHx@w@m@j@i@s@uCC}BoCsAuBqCE_Bl@_EgEqEGsBdB_GGy@iEVeEeASvAVvDfAtB_@l@s@wA{@a@eCEeD}AoAyEo@Aw@bCw@n@gC@_AyBAoDd@iFp@aBo@QoB~@uCw@YgBdAwDS}@mBKiB{@[LJrBm@|@{D[mF^{BaDJeDqCAeAj@[z@gCNFnB~AvEPnAU^uB{EkAy@DkA}@kAaE`AgCe@k@u@PeBhEyMz@KlAj@t@]Ei@yAuCiCkAeIuHSiB\\sB]eAgEb@_@v@o@H_@rDeBnBe@AHkEuAaL\\yCi@mCu@}@o@yGsAa@{Cx@kD`DKvCuAnAq@pBg@q@VgDSqBaAeB{Bs@{DdBu@bEA`Fm@`Cu@C{C{FmAw@y@@o@l@AxLn@lAfASl@\\Y|F}@Nm@_@_IwI_Cl@wDtDkBlI\\x@Q|@u@@aAqAqCgApAvJ@jCtAhBaBj@}AhD}@ToDc@gAiB[DlBvI?z@qAjB\\|BcF_BaEP}CyAgBmDMkF]y@a@B{D|IaDv@c@lBjAzGyAxEgGpBqB`DHrAkBN}@zFDpClAzEbB~@Fx@{BUsAqAoAU@{AkAmAeE`@",
    "pointCount": 195,
@@ -932,35 +865,43 @@
    "end": [
     33.687564,
     133.863945
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:36",
+   "id": "高知県:29",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "蕨野大比線",
-   "ref": "220",
+   "name": "清王新田貝ノ川線",
+   "ref": "352",
    "highway": "secondary",
-   "lengthKm": 5.44,
-   "curviness": 629.5,
-   "flow": 28.3,
-   "turnCount": 121,
-   "score": 82.5,
-   "baseScore": 82.5,
+   "lengthKm": 16.91,
+   "curviness": 610.8,
+   "flow": 26.2,
+   "turnCount": 394,
+   "score": 97.1,
+   "baseScore": 97.1,
    "spotCount": 0,
-   "polyline": "sdrlEcx|oXwGsCgCuBo@cC~@wDSmBeF`BsC{BiCwFQwG}@cCwBgAaCqDu@Ye@}AuDMgBqAqAl@cEcC_Al@u@CiLgEuAoAqG{@uLoDoCkBwFaAoEyEeGeNCeBb@mB~C_D~FnCzNNX]`A^ViBc@gDdDuCSmErC}@?cBrC_My@kHbDkB~Dn@?qCrBTvAz@fAyA|A^r@mBjEj@",
-   "pointCount": 53,
+   "polyline": "{jigEinaiXn@rAfAd@i@zANNzBoB~@}CQ{@kEwDx@qCc@uFtAUNe@_Ck@oA`Bu@cA{@B{AiDm@}CdCkDHgApBeDTX[`GJf@XE?yAf@s@ZyE~@mDBsBc@cAqBs@oAyCiEaEoAsFMeF_D{Iv@{IjA}D@oHlC}D`FmMHyFv@uDbDi@vBtAnAHnFoD`NuF|@sDIsEaD{GI_BPyAdAiArB_@hAbBfDrA`BIz@|@tCJ`Bi@`@oBe@cB`@{@@uAsBaJ]cFNuCjAyCjDkDpHcBjCoGr@e@NiBbBeEdAAnCzBbDLx@Wh@yAg@aCx@}Go@qBlC_HOqC^kAt@g@SuA`Ag@TqAv@i@zA`ApAQv@ZfDzE~Ce@XqQnBiJrFkCdFc@|EsDtERhDk@p@wBbB{BTuA]aAiC_BI}AvDwA|AaBf@wBdBX|Bm@tCzAXiCjAyAhC]`Ar@EzBXNf@oBLaDjA[z@XTw@dCgAvAiB~CjA|DmBnAAp@eFnBqC`AoErDc@`CbD`ClHrBp@fCy@dBqBxA{GxEf@pCiBv@sBf@gLh@wCgC}HdEH`BiAfBmDBqD_AkDhAmCEwA|DeEbBONc@y@sAcC_@sGyGDgEhAo@pAiCG}@aBsAGg@jEkDpHz@`BQf@Yp@oC`DtEvCZxAaB`AsDCuBcBcCNwK|@GtClChAExFiDtAwCGcDuCcGJ}AlD}@hHApIs@`A{BrAi@nFeH~@g@",
+   "pointCount": 195,
    "start": [
-    33.685378,
-    133.845945
+    32.821099,
+    132.723095
    ],
    "end": [
-    33.694005,
-    133.872342
+    32.762861,
+    132.813616
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:37",
+   "id": "高知県:30",
    "region": "kochi",
    "regionName": "高知県",
    "name": "城川檮原線",
@@ -970,8 +911,8 @@
    "curviness": 575.9,
    "flow": 27.2,
    "turnCount": 476,
-   "score": 82.4,
-   "baseScore": 82.4,
+   "score": 97,
+   "baseScore": 97,
    "spotCount": 0,
    "polyline": "ab~jEuesiX_BrBe@jEkAb@cASY`AoIq@oCuB_C@U\\lAx@D|@|Av@b@jA`H|FWv@}FvDo@dBl@ZjGHhAlDvAhAt@Yv@mCzCTJd@i@~ALlChDjBqCdCe@IeC_EaEiAoByB}AVgAgAsBnAqB}@kAhCkChAy@tAqBR[wB}Dk@Wk@bC}C]wBtCq@F_AiDoBsAKkBn@eF}B|@uHhEiA`AcAKcA_@WaMDu@Sk@aAPqBW{AlAsAJsAzEgAPe@gEo@qAZaDeAAaAt@s@q@cBhA}@AsAoBuAU}Bu@_BXoBsBgDkAkDxDaC?kDjCd@vB`B`B{BL}ArByAz@ClBrA`@GlAuHiBY_Au@iAyDb@w@rA^Hq@yHsHMoBaAaB_AoEwA_@sBRuByAw@yDJsEs@iEaGeIcDgHq@e@u@PaA`Dq@IWm@HqDc@aB|AuEQ{Bf@~@DdDj@f@VWu@iAHqBu@kCeAiSXIV~BTFOsEb@aMwBeB_AcHo@gAs@kGgAgD|@uEaAiDN_G_@oDyAiBiBcGsCcFVcEdCyBDe@eEaHMaDrGeAr@sAj@}FdA}ChAs@zDg@zC_GzBaCfCw@pFj@zBk@~@eEZ_F`BcEQkCiBwFCyAlA{DjHkEn@{FlCwIzEiCjAIzLzHbRaBEgAaCcEUgDjCiLfGeFtCW|FeDhB_@vJXrCpBl@~HzAbCdFfCbIDrCpBx@w@bB_GrDcFjSsP~Fc@hB`AjS~ArIoEdBsCLuDw@qBmGkHhD}BdJgCjBEpNvIvGj@~Am@j@cANyCk@eFR_Af@YjCp@zCJzC_@x@b@f@dBt@bKlC|BbAdIpAfBjA@pB_BtBkHhEz@`EzHtBj@`BaErCsCs@uBbNog@jCkC`I_A",
    "pointCount": 233,
@@ -982,10 +923,14 @@
    "end": [
     33.377334,
     132.895274
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:38",
+   "id": "高知県:31",
    "region": "kochi",
    "regionName": "高知県",
    "name": "香北赤岡線",
@@ -995,8 +940,8 @@
    "curviness": 588,
    "flow": 27.9,
    "turnCount": 302,
-   "score": 82.4,
-   "baseScore": 82.4,
+   "score": 97,
+   "baseScore": 97,
    "spotCount": 0,
    "polyline": "w_llEuqroX`HiHx@}ADuC\\o@jBy@dJY|CeDjAaNEkBeAgCDgApAqAjEqB~@uAsAuGBwC`@_BvBiE|EWdB{C~Cy@[mCRk@rGsExDsElA_@dBHfHdCb@bAD~B`AvBdDbAzECvD`CjErEfEAlDaBxK`DzF|ItANbB}@lBhAA~A_A|Bf@x@pM_@nCbC|DzN\\nDrA^tLY~ArBQ`D`Ap@lAAlB_BtAf@nFSpAcB`@gD`C\\r@e@xBHvA_@vBhAxAJMpAcCpDLpGd@`AnDnAMvDj@fG~DbHBlIgA`@_McB_@\\`LhGX~AhCbClAtE~B`@dDfE]~Aw@z@sCp@sEhCjCoAdDe@zGaDs@{Cs@w@MmBgDsBLq@bD[|B`@~@gBG`ExAxAl@LzAaBJ|Ao@pD`Bb@FvArAu@`@x@hAGHgBTGMvCkAnAs@ES_AaBz@qBqBm@\\vBrDrBr@WfCrBu@h@LnAxDhAbAOrApAl@dHlJtBl@rG~FrBp@hApC`B?`CpCrAdGnKhWtE`BdDhJ`CrAbBpCtMjM`GtHdCfHzMfMzBtD",
    "pointCount": 147,
@@ -1007,10 +952,72 @@
    "end": [
     33.588633,
     133.759715
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:39",
+   "id": "高知県:32",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "末清夜須線",
+   "ref": "222",
+   "highway": "secondary",
+   "lengthKm": 5.46,
+   "curviness": 852.8,
+   "flow": 32.8,
+   "turnCount": 142,
+   "score": 97,
+   "baseScore": 97,
+   "spotCount": 0,
+   "polyline": "{wzkE}_roXwAlBoA}@yN[gGiCqHnCgBQ{BvCoLp@kAm@wBJ}B}GcDmAeBRo@iBmBe@kCkC}@kCeASm@kBuCe@kCeEUsCs@yAq@t@XnFS`AiEeBkA?gA`BoAR_BoBqBm@@l@jClDYfD_@NB}DgAm@iAoBoBN`@wBoBoAMk@LWtDV^e@kEa@gBiBg@dCyGr@{B|@FlCjCf@i@hCp@`DkAgBa@oCmAmA_@_CkCkBBmC_BJiAmAiAF}GoDmEaEcAM",
+   "pointCount": 68,
+   "start": [
+    33.565576,
+    133.790875
+   ],
+   "end": [
+    33.594621,
+    133.799578
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "高知県:33",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "蕨野大比線",
+   "ref": "220",
+   "highway": "secondary",
+   "lengthKm": 5.44,
+   "curviness": 629.5,
+   "flow": 28.3,
+   "turnCount": 121,
+   "score": 97,
+   "baseScore": 97,
+   "spotCount": 0,
+   "polyline": "sdrlEcx|oXwGsCgCuBo@cC~@wDSmBeF`BsC{BiCwFQwG}@cCwBgAaCqDu@Ye@}AuDMgBqAqAl@cEcC_Al@u@CiLgEuAoAqG{@uLoDoCkBwFaAoEyEeGeNCeBb@mB~C_D~FnCzNNX]`A^ViBc@gDdDuCSmErC}@?cBrC_My@kHbDkB~Dn@?qCrBTvAz@fAyA|A^r@mBjEj@",
+   "pointCount": 53,
+   "start": [
+    33.685378,
+    133.845945
+   ],
+   "end": [
+    33.694005,
+    133.872342
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "高知県:34",
    "region": "kochi",
    "regionName": "高知県",
    "name": "南国伊野線",
@@ -1020,8 +1027,8 @@
    "curviness": 633.4,
    "flow": 27.9,
    "turnCount": 328,
-   "score": 82.3,
-   "baseScore": 82.3,
+   "score": 96.9,
+   "baseScore": 96.9,
    "spotCount": 0,
    "polyline": "}lflEe~snXj@pAo@fAiElBmBdCsFpAcHd@kE}BwAI}AjNwDAaDp@sJvNgF|EeAfMlArGX|FgBhHBjMmFdWbAnKpAvFEdD~@hFcBxPmBdEN`Dk@dI`@fB@|IfBdDl@bLeBeEyANFgCaCsCQaCWGcB|AuCUpAnArBp@dAtAL|Ao@hBs@^^hBvAt@fASVZWrA}BvCAjDjAr@dAEL|@_@`B`Bn@JrB|AzBY|@mB_FcCoABj@bB|B|AdIFbFdAjBi@|Ei@x@rAjF]bD\\hCe@pHiAVk@~@s@BsAoAwAIe@aAu@ZaB[fClBExEtCcBxB~Ch@lBx@JfAi@`AjABxEaAlIPvGfBdBpAbE\\u@o@eBn@Ef@lD?zDl@SW_ER]XLPbCuBtP?~Cu@nBG~Fk@^qAi@Sb@vAzAf@`IL~Eu@xAc@rEnA`El@dG_@lEvChL_@`DVjH{AjGr@~BkAr@I`AdGxAfBvBfCQ\\Zq@|BBtBsCtCeAdFTlB|DjG?|@qAtDHvFv@tAxCb@b@z@IxAwD|Aw@`AQlAEpAj@dA|E`ARfCeF|YHxArBdCHv@cC`FT|GiBvH",
    "pointCount": 158,
@@ -1032,10 +1039,14 @@
    "end": [
     33.634243,
     133.534031
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:40",
+   "id": "高知県:35",
    "region": "kochi",
    "regionName": "高知県",
    "name": "弘瀬高知線",
@@ -1045,8 +1056,8 @@
    "curviness": 716.3,
    "flow": 30.9,
    "turnCount": 110,
-   "score": 82.3,
-   "baseScore": 82.3,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
    "polyline": "agalEad{mXvBnDnANjCmAl@zAhAt@MvCa@dAnBhBEtBd@zAcAbDhEHnCvBc@lCmAlAq@tB\\\\zCU`E~BvBnETc@k@mCl@qBiBmAQoBqA}@GgAzAmBc@}@FgCu@i@_A}C~Eq@IkB`AyBYsClEnCPhAzBrDdMStGgBzE^fHwJ`DGj@e@nDcRlBeDzB{@rD_H|EqBjBz@tClDzAm@tAqB",
    "pointCount": 55,
@@ -1057,10 +1068,14 @@
    "end": [
     33.577584,
     133.515234
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:41",
+   "id": "高知県:36",
    "region": "kochi",
    "regionName": "高知県",
    "name": "香北野市線",
@@ -1070,8 +1085,8 @@
    "curviness": 635.3,
    "flow": 27.2,
    "turnCount": 184,
-   "score": 82.3,
-   "baseScore": 82.3,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
    "polyline": "}|ilEymkoXtFaAdOvGhGg@bDnA|IkBjAwCdAM^o@fDwND{HnBeExCw@jLo@rBkAbJyApAHf@d@|AbFQlDXfBzAv@tDg@jFwFpDqAMgCl@w@|DXjD_AxAkApB\\fBzDhC?nEzAj@bB~@\\D|AvAn@dEbIzFhBxBOpDjCpCy@}@dBl@pC}@jFClCt@x@OcDd@eD|@ETwAtA[{@tAv@pEO|AvBdEqAjDqAz@?dB|Ez@fDjDjBDjAdCdD~A~BrIjBBj@gD`@U`CvBr@HfB_Et@Lp@dCrAbBF|BzAt@Fp@sAtDiBl@yBhGkE|Ac@jC^hA|EpB`AtBrCn@",
    "pointCount": 87,
@@ -1082,10 +1097,14 @@
    "end": [
     33.604333,
     133.742602
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:42",
+   "id": "高知県:37",
    "region": "kochi",
    "regionName": "高知県",
    "name": "高知本山線",
@@ -1095,8 +1114,8 @@
    "curviness": 571.4,
    "flow": 26.5,
    "turnCount": 647,
-   "score": 82.1,
-   "baseScore": 82.1,
+   "score": 96.7,
+   "baseScore": 96.7,
    "spotCount": 0,
    "polyline": "or|kEqs`nXoBh@_DjEwDzAkGqBqKkAuGcLu@eCHkD_@[cFSsDaGDqFgFImC{AyIyAcAq@wBgCJw@xBIvDgDp@wFxBR^i@_EoEZcFSu@q@DuBfEyBbAkCh@u@iCc@EwCzBcJrAqBxE_DBmEjAyDeAiA_As@yEeAcBlAmCEaAqD]q@k@KoAhAoCGu@}Bq@gAuAkBKa@k@Uk@l@}BaBWmAeA]iARyC_BDcB{@}CfB{EYgCxAA~@rAjDwDrJaEdBiElF|@dFa@bAkEhAoDAiBnAqFV{DdAwDo@_CtBo@dDcE|KcBCiAmDwAi@kBt@gBbEoIt@qFdImGdE_Fl@mDdFi@~Em@nAeGl@iHdHs@hBQnF{@fAuHjBqDpCmKgAmGuAmJ~@wEy@wBnA{@vBGpIRjFdAlCCnEa@rA}EnDUtF_@p@oD}AuJl@eCqB_DAuAsCgCeBAmGaBuB{RiCi@hATx@rE|AzFxFvAtHw@lCDlDi@]QkCj@iCq@eAyDiBY{Bk@u@mBk@{Af@eDoDkCS{@t@oAc@iB|AUxAsA`CoC@k@hDqA@eFpF@hCsAF_BfCKdBoEqAU|BqAfBsASkApEkA|@a@QgA}FeEnAs@r@}A_@aF~@_A`Aw@|Ea@b@yAiA_B^kBQEiA`CcBDkC_@}@{CoBiDq@q@qC{AmB}F{@u@PiCjEyAv@_Py@Rj@lDBjBp@nBhClAu@|BLf@w@f@DAf@o@^kCVg@rAiCAw@uAyAi@wDh@gCy@sHbA_HrCiJk@c@j@bAKvE`Al@h@cB_@}CbAiAy@mBXg@r@e@dDcA^[k@?aDaAg@[Rv@zAMpAe@LIiBaA_CLi@|Ai@LwBz@g@AgB`@kB[c@aBhGgG`Dr@jEoBpMXjCiPxm@iErEd@fBe@tDqD`@s@|AgAb@CdDqEdKi@tCgHtC_Ef@e@vMuBvBaF`BqDi@uA_AkAJmBkByCvAeBy@cB?kBuCDeEd@cBmCcCEgBmCq@c@aHaEqE`@{J}DSiAq@mCL_AYeD{Ds@iBQoG{A_IcB_AiCTeFoD_BsBuBO{@eByCoCeC]oCmBqEoAoBqB[sDwE_Fi@{CaBuARgE`C`AbA@~@lA~Ch@jBbE`CjBd@EIyHbCkKq@W_GdC_Aq@K}Aj@iCpCgAtAeE`JsDNmDm@}BcDXoC`BaCaCeBCmCxEiE`CgK~@eFEmD`BuDp@kBvAgA]",
    "pointCount": 322,
@@ -1107,35 +1126,14 @@
    "end": [
     33.712734,
     133.524437
-   ]
-  },
-  {
-   "id": "高知県:43",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "香北野市線",
-   "ref": "385",
-   "highway": "secondary",
-   "lengthKm": 9.78,
-   "curviness": 601,
-   "flow": 26.6,
-   "turnCount": 221,
-   "score": 82.1,
-   "baseScore": 82.1,
-   "spotCount": 0,
-   "polyline": "sjblE{phoXlAxBlCnAtFoEhD{@Ic@uBx@eAc@qBv@JiAtDaAx@qAjBv@rACnBpDdB~AMdAmCrAxBtFr@f@zA_CdAa@`EhA?eAoCw@g@eApBgBW}C^{@hCEXjAi@pCjAlCbIhFfD|FjDj@v@~@LlAgA~BKzBh@nFrCrIH|Cx@|DSlFtGhCVz@GxCvDrCdIvNpAd@jDKdAlEpARdC[lAlBfFfAt@r@jAzDNlE|ClDbB@lEiCxBLbKtE|DrEzFdEn@tBOlCmCv@w@pAzBrDVdEzD^rB|A~Bb@zApBxDj@Uj@_EKcBlABv@|BmBzEbBUl@qDmAwA`BoBh@Dn@hDwAv@@jD`Gh@Ll@aDfEsGtCrAdEjE|ArDl@pPlC|CnA`FObErAfCs@r@}JaFcAT]jBpCvL",
-   "pointCount": 108,
-   "start": [
-    33.604415,
-    133.742377
    ],
-   "end": [
-    33.569376,
-    133.701413
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:44",
+   "id": "高知県:38",
    "region": "kochi",
    "regionName": "高知県",
    "name": "四国カルスト公園線",
@@ -1145,8 +1143,8 @@
    "curviness": 861.5,
    "flow": 33.5,
    "turnCount": 265,
-   "score": 81.9,
-   "baseScore": 81.9,
+   "score": 96.5,
+   "baseScore": 96.5,
    "spotCount": 0,
    "polyline": "gqdkEmg|jXQr@n@`CiHfEw@|Be@tEsBzCZiG_@a@?~By@rCoEnDuBbIcBrAa@Kz@sBa@oBlAoBr@YC_@yBfA_A?SnCiAbBwEUoDtBbC}ClCDb@]GqCn@gA}CyE|ApDu@vA?~@kAAwAsA}Cr@[v@VnAMh@gChCgBn@o@nD_C\\gCbBm@|AaAUDbC{BlDO[pAyBEg@kDrEaFfCQQtBsAAg@kC`BcEcA_C@yBhCI]pAyBvBeA~ADn@cA|Aq@][cDlAoD}@}DzG_EvCaCXuCdEa@?|BsDIcC~@g@tAR@[aBa@yBTEvCa@p@qAd@{ASaCt@d@bDbA^Nr@LvBYjA`@|A]hAxAvBH`HZVdBk@p@bBVpFUfBaAdBCpBfBrBnDlMPnBx@vASTq@WaBuCeBoA}@kEu@gAiAu@}@NMz@XtArEnJfBjND~FvAtCy@fGo@i@l@aB?}AyBiCoAkHiAiAy@aCsA}@c@wB{C}AeA}A{AcD}@{EsEyDeG_Im@LKnB",
    "pointCount": 140,
@@ -1157,10 +1155,14 @@
    "end": [
     33.476942,
     133.003417
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:45",
+   "id": "高知県:39",
    "region": "kochi",
    "regionName": "高知県",
    "name": "土佐佐川線",
@@ -1170,8 +1172,8 @@
    "curviness": 659,
    "flow": 31.4,
    "turnCount": 213,
-   "score": 81.9,
-   "baseScore": 81.9,
+   "score": 96.5,
+   "baseScore": 96.5,
    "spotCount": 0,
    "polyline": "ykkkE}{`mXqAfFNbGUbD{FfKu@zMh@zHdClHTfJg@\\_CCeAj@sGxLwCjCsAGiAvBBbCiAr@c@dBNsBx@WRk@_@{Cb@oAe@_AtGaHAiBbAKpC_GaDxEoBWEbB}Al@_@xByIdAb@bD}@dB|@|AwAtA{@tEqB~ECr@n@~AMn@eD~FgA~DNvAwAr@JhDq@dDr@fA~BSr@^FnAi@`C|@`ADrAlA`@TzAfBr@TxA~@xAc@tDRxBiBdHdArDAhBeAhGiBxFmCrDd@~LhCxFzAbHrM|RnCxFdD~CzBfEbGrSk@nGo@lAp@zAKjA^n@IrC^bEIsF\\oFZ?Y~HvCtQe@pBuA`@dAjF^UWuDrAAfAiDj@d@c@dC{@h@Mr@~@`K~BfGDtHq@pOi@vFs@vA",
    "pointCount": 107,
@@ -1182,35 +1184,40 @@
    "end": [
     33.486776,
     133.307186
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:46",
+   "id": "高知県:40",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "興津窪川線",
-   "ref": "52",
-   "highway": "primary",
-   "lengthKm": 9.12,
-   "curviness": 585.1,
-   "flow": 29,
-   "turnCount": 184,
-   "score": 81.8,
-   "baseScore": 81.8,
+   "name": "香北野市線",
+   "ref": "385",
+   "highway": "secondary",
+   "lengthKm": 9.78,
+   "curviness": 601,
+   "flow": 26.6,
+   "turnCount": 221,
+   "score": 96.5,
+   "baseScore": 96.5,
    "spotCount": 0,
-   "polyline": "gzsiEyq}kX`M|D~h@`e@xPz@nEi@jCkBxMuRvDcCdGQv@q@IuA}@a@{JfDeAkA@uEmBk@a@mCxCaANy@_FsHdBmBzBAtAi@^oAk@_BLsAnENfA_AXcE~AeBbAKV^Kx@sCt@GhEcBpAeCLV|EiFvB?d@lDpC`A`HhAY`D{CvCOpHaF~AWHv@mE|MPh@tGmAzB}BhC`Eh@eAr@Ul@vBd@Bj@u@fBj@Ni@s@}F~@}DhAsBu@{Er@cDpBqCcAuBC_BR_BrAqBlBcBzDp@`Gs@lCuAbAJlD|B`ETt@mAdGXrBw@zEsHzFqRx@sGsB{C~FwD",
-   "pointCount": 85,
+   "polyline": "sjblE{phoXlAxBlCnAtFoEhD{@Ic@uBx@eAc@qBv@JiAtDaAx@qAjBv@rACnBpDdB~AMdAmCrAxBtFr@f@zA_CdAa@`EhA?eAoCw@g@eApBgBW}C^{@hCEXjAi@pCjAlCbIhFfD|FjDj@v@~@LlAgA~BKzBh@nFrCrIH|Cx@|DSlFtGhCVz@GxCvDrCdIvNpAd@jDKdAlEpARdC[lAlBfFfAt@r@jAzDNlE|ClDbB@lEiCxBLbKtE|DrEzFdEn@tBOlCmCv@w@pAzBrDVdEzD^rB|A~Bb@zApBxDj@Uj@_EKcBlABv@|BmBzEbBUl@qDmAwA`BoBh@Dn@hDwAv@@jD`Gh@Ll@aDfEsGtCrAdEjE|ArDl@pPlC|CnA`FObErAfCs@r@}JaFcAT]jBpCvL",
+   "pointCount": 108,
    "start": [
-    33.202443,
-    133.194693
+    33.604415,
+    133.742377
    ],
    "end": [
-    33.165614,
-    133.209625
-   ]
+    33.569376,
+    133.701413
+   ],
+   "title": "龍河洞スカイライン"
   },
   {
-   "id": "高知県:47",
+   "id": "高知県:41",
    "region": "kochi",
    "regionName": "高知県",
    "name": "窪川中土佐線",
@@ -1220,8 +1227,8 @@
    "curviness": 536.3,
    "flow": 28.8,
    "turnCount": 321,
-   "score": 81.8,
-   "baseScore": 81.8,
+   "score": 96.4,
+   "baseScore": 96.4,
    "spotCount": 0,
    "polyline": "wehjEepzkXcFxFaFlAsOtIsAfH{@r@kAtEaAj@Y~AwBpA{@zAZl@nBj@cCnFuCvAwArDuRnSqBfD{AdAf@rGdAxA_AtCXpBShGn@ZtB}@Zz@]t@cD|AqAtA{AhEe@nD}FtJmEhPoCdAcH?mA|@eD~Ig@ViDUe@XaArBgE~RyGbDiFzGkCzAoKj@cBqHDkCnJiU]oI{CsOgFsE_FeH_UwCcGmByHaJ}DcKgEiRwAsBAoAfA{Ch@_Mk@{BeC_B}AoNTqDlAsCScDrBiAXuCnB|@tCu@dHvDeAoPx@oAq@mC~@qBnA_@TiBiDiGa@mEhB_C~@MdAgE{A}AlAaBpBY^kBhAcBj@qJoBwAXoGO{Nr@sA[mFnBuDm@mATuBp@_AnCeAvBn@t@MGg@qA_@{@sDdBy@r@_EvDUxByAhD_@cCyB_B@O[RsCh@}@~Ai@PgBdCC|@mAnEk@e@sBiB?{EeD}ASCs@`CgCzABx@eDbCzClC[|@s@bARdAo@Qs@mCoBhF{@?iAuAk@S}AuALaA{@_EWOo@bAkAxABj@_CrAlAfG]LcBiAsCrCfAdGW\\o@qBcIg@aKxCsHSuH~@eKCiGy@cFwJwV",
    "pointCount": 162,
@@ -1232,35 +1239,44 @@
    "end": [
     33.331184,
     133.223868
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:48",
+   "id": "高知県:42",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "板の川大用線",
-   "ref": "380",
-   "highway": "secondary",
-   "lengthKm": 10.47,
-   "curviness": 546.8,
-   "flow": 26.1,
-   "turnCount": 219,
-   "score": 81.6,
-   "baseScore": 81.6,
+   "name": "興津窪川線",
+   "ref": "52",
+   "highway": "primary",
+   "lengthKm": 9.12,
+   "curviness": 585.1,
+   "flow": 29,
+   "turnCount": 184,
+   "score": 96.3,
+   "baseScore": 96.3,
    "spotCount": 0,
-   "polyline": "qerhEcbcjXyCB{IwF{FyBuCeC}GwCgFY_KNe@l@mFfA}Ek@]tBkC`EmFjDKpJkArCq@`@mCUyDsIcE{CuCxBBrEc@j@qCdAsHPwCbAaAhA}GrAkDtFgCrBfDbBt@nBGpBeA~@_CAcAf@g@jCThC]f@cCx@y@hA_ACwAv@k@vHwDrEk@fCiA~@mBRwA_BeDw@wBAy@`CmBdBo@tBCfDs@`AMvG}@jCkCa@sC{BOcAk@MkBV_BxAcFrMt@rCxCjD@lAcDfDS]v@_CC_CsBNy@Y{At@wBzHyBzDaDdJyEfCaE`Ok@b@sESqC\\sFmK}DMsC{D}FoAgD@iCkEMkC}@qA}B_AU_EiAcCPwBWk@kE{@{@aBwBiBaAkCiCo@uAuBiAcEiD_EdCfAdAIkB{@MaC}A}@o@}DiAlFmBjB",
-   "pointCount": 112,
+   "polyline": "gzsiEyq}kX`M|D~h@`e@xPz@nEi@jCkBxMuRvDcCdGQv@q@IuA}@a@{JfDeAkA@uEmBk@a@mCxCaANy@_FsHdBmBzBAtAi@^oAk@_BLsAnENfA_AXcE~AeBbAKV^Kx@sCt@GhEcBpAeCLV|EiFvB?d@lDpC`A`HhAY`D{CvCOpHaF~AWHv@mE|MPh@tGmAzB}BhC`Eh@eAr@Ul@vBd@Bj@u@fBj@Ni@s@}F~@}DhAsBu@{Er@cDpBqCcAuBC_BR_BrAqBlBcBzDp@`Gs@lCuAbAJlD|B`ETt@mAdGXrBw@zEsHzFqRx@sGsB{C~FwD",
+   "pointCount": 85,
    "start": [
-    33.030171,
-    132.89522
+    33.202443,
+    133.194693
    ],
    "end": [
-    33.086348,
-    132.879795
+    33.165614,
+    133.209625
+   ],
+   "tags": [
+    "winding",
+    "caution",
+    "deadend"
    ]
   },
   {
-   "id": "高知県:49",
+   "id": "高知県:43",
    "region": "kochi",
    "regionName": "高知県",
    "name": "魚梁瀬公園線",
@@ -1270,8 +1286,8 @@
    "curviness": 642.5,
    "flow": 29.4,
    "turnCount": 175,
-   "score": 81.6,
-   "baseScore": 81.6,
+   "score": 96,
+   "baseScore": 96,
    "spotCount": 0,
    "polyline": "ih}kEc{oqXcH^kEfD{FtAa@p@SzD_C|@m@Cc@cAhAsCOuBoGg@eCRkGkCy@NKtCsAJw@lA_CJOvD{AA_Ai@sC~@{AkBzAuFzA}Be@eBWiF^iIWa@iDi@yGrA[Ta@`C{BViAtA{CoAkDlBGjAhCpBGrBqDbDy@hC}BuA{@@yBhEmBjB_@lC}@b@GlArCvAHt@aBp@a@dAeAVyAvCSnDRhDa@^{AaEwBeBlAiFs@mBCiCuA_ByGT{CoAmAp@uEDo@]oAqCkEZqCgAsDuFaPlCkEw@iCmCg@}Oj@}Ew@{AaC{AoGs@mD|ByCdEaBc@{FxJbBxCRzAaEs@qClBy@|Ay@O",
    "pointCount": 92,
@@ -1282,10 +1298,14 @@
    "end": [
     33.619002,
     134.106193
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:50",
+   "id": "高知県:44",
    "region": "kochi",
    "regionName": "高知県",
    "name": "沖ノ島循環線",
@@ -1295,8 +1315,8 @@
    "curviness": 680.1,
    "flow": 27,
    "turnCount": 119,
-   "score": 81.4,
-   "baseScore": 81.4,
+   "score": 95.7,
+   "baseScore": 95.7,
    "spotCount": 0,
    "polyline": "wnufE{qbhXg@mL~@oAhEaBQu@}Bh@sBGw@z@iAC}@j@eChEKfDy@pCwBjAa@pDiF~B]vBoAa@mBoB_An@i@KcA}Do@c@uBC{IpC}AmBc@{Cm@c@mAjBaCx@_AjCeCrBe@kK}F_CWiBoA@wA_A{Aj@gBSaJt@q@z@Nv@nBbBhApCbBtADzBo@fCGpCU`@eCXwAjEc@\\}DoB_FNcBj@CtBt@fEY|CNzBm@jB@rA}A`B",
    "pointCount": 62,
@@ -1307,35 +1327,14 @@
    "end": [
     32.739477,
     132.556001
-   ]
-  },
-  {
-   "id": "高知県:51",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "公団幹線林道日吉松野線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 5.95,
-   "curviness": 574.2,
-   "flow": 26.3,
-   "turnCount": 130,
-   "score": 81.1,
-   "baseScore": 81.1,
-   "spotCount": 0,
-   "polyline": "uzujEkxyiXiAMe@wEwE}HVwAhCDHkAqA_@eDuCsCl@Ms@p@}@nASjCh@~FwBhAdAvAED~B\\j@xE\\r@uAh@KbBdCGrAqAfDDxEXz@jCvCxBjEr@LjCu@|AxBdAq@rCoFd@sGtETbC}D`AUhCtEVdBY`EaAlEbA~HgBzBSzCh@|@pEfB`EgGyBgIJoBlE_IrAyHbBy@bDeFcBoJ`@{Cf@MfCp@nJg@lEkFz@Ep@zC|AfC_@fDt@xA~@c@xB}EvBg@\\u@",
-   "pointCount": 69,
-   "start": [
-    33.376591,
-    132.847583
    ],
-   "end": [
-    33.357202,
-    132.853862
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:52",
+   "id": "高知県:45",
    "region": "kochi",
    "regionName": "高知県",
    "name": "公団幹線林道東津野城川線（東線）",
@@ -1345,8 +1344,8 @@
    "curviness": 549.1,
    "flow": 24.4,
    "turnCount": 402,
-   "score": 80.9,
-   "baseScore": 80.9,
+   "score": 95.1,
+   "baseScore": 95.1,
    "spotCount": 0,
    "polyline": "u`yjEumrjXiByCeDeAeF_@mC}@sIQwBvCe@nCeCdEkH~FkD\\c@t@SfC{EpDRtAhHBdE`E~@R`@oAa@_ExBcD~@M~AnIa@`D}DpF_A`@sJaFmAAu@xCsCDk@b@O~@h@tAEbAaCrFqAV{@sAm@kG_KuAmDjB{@uAmAB]i@DmAr@yAzGeGKw@sBmAa@gBJu@nFeEVaAYw@sBWqAyAqDfAcAgAVeDgEJ{@qC{BYkAmAV}@lCsA`@gBw@sCwAs@uAgItDiAX{ACsDh@i@~@V|BxCtAb@lBaIGs@wGiKTaJuEu@yAsCu@KmBtBEpEw@TuH{A}CwHcAUuOlCuBtAuEu@qBXoDdBwDMqBhAuEdA{EjDqCQmCt@yBCuAOsDiBy@h@uCpHeAxIo@p@eDAiAWmE}DWeEkAcGAyFqBgFyEqBsBkDaCE}FqAiDkBeDf@mCo@iLx@iCyBQgEqCsF{@UeA|A{@Pg@}F]m@eCs@i@kCaCIyByBkBK}AoCgE}DaGuAwBwHwBkCwCo@o@_D{@o@eDo@{BnGqCEk@oCkCaBeAsB_AMyAlCAjFuDfCsAtEe@Zi@KkAsBeCz@aA]sAgCf@}CS{@cACwEjCo@CYm@KeDk@i@gF~FoAHaAeCZ_E}A}As@qBkAu@Qy@Vw@hCaAnBwEB{I~BsDe@kB@{Bc@s@aCMsAbDoB`BuIbAiA[yBeC_CJuCa@yAoBy@@Wp@?rF}BhD?nE{@nBDfGdA`I_ArB",
    "pointCount": 201,
@@ -1357,67 +1356,14 @@
    "end": [
     33.469726,
     132.999112
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:53",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "中津公園線",
-   "ref": "363",
-   "highway": "secondary",
-   "lengthKm": 7.9,
-   "curviness": 542.3,
-   "flow": 26.1,
-   "turnCount": 164,
-   "score": 80.9,
-   "baseScore": 80.9,
-   "spotCount": 0,
-   "polyline": "qgykEakqkXyHb@sH]o@f@pBtHw@fDbAiBMsDn@qAj@SnATsB\\YjAZhBIzCgDpCcAvGu@r@e@hBgBt@Ur@bBrL}@hKv@vR[dAeBdAoCbG|@bFBxCgBzEJlBi@`O{@rEq@z@uH@qBrAmBnD_Db@a@x@WzB|CrIyCdJrCzG_AxCkExBUvFcAdCr@zKf@lBKdCmEbIoEdB_AzDUnGu@~AkEhBqAxBeBnAqAhDaC|CFrElDpFqDkDtBlDFpAa@t@GvC{Cr@aCbBYzFn@tHY|Je@hB}BdCqDvH}@r@j@lBTjG",
-   "pointCount": 78,
-   "start": [
-    33.557852,
-    133.132172
-   ],
-   "end": [
-    33.577318,
-    133.073213
-   ]
-  },
-  {
-   "id": "高知県:54",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "中村宿毛線",
-   "ref": "46",
-   "highway": "primary",
-   "lengthKm": 7.86,
-   "curviness": 542.3,
-   "flow": 27.5,
-   "turnCount": 155,
-   "score": 80.6,
-   "baseScore": 80.6,
-   "spotCount": 0,
-   "polyline": "yichEywqjXFf@i@d@S|HcCfFZbBlEVnArAxIpA~BApLbR@`FtA`DxBHfEaB|A^hEpSfAvAxChAnAhF~AdPmBzINxAdCzCW`BrAJrDhC|AnGpDzB\\t@BzHrAdFQbCuEzHkJtKRlEuAbFgAn@yBUuChDbB|Ar@jEg@v@Q~Bn@vKb@^vAA`AfFuBrEkBh@eDQwA~@dGpDTv@EvB~A|BStAb@hAa@jE`ChABxBtD|Bh@vAJ|D|@nAcBnB?j@hDvIh@xD\\j@jAQx@~@~@JlDxLrAj@nFpJ~IW`CjB",
-   "pointCount": 78,
-   "start": [
-    32.954049,
-    132.97037
-   ],
-   "end": [
-    32.93521,
-    132.912917
-   ],
-   "unpaved": {
-    "unpavedMeters": 3167,
-    "totalMeters": 7859,
-    "ratio": 0.403,
-    "surface": "unpaved",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "高知県:55",
+   "id": "高知県:46",
    "region": "kochi",
    "regionName": "高知県",
    "name": "奈良香北線",
@@ -1427,8 +1373,8 @@
    "curviness": 649.7,
    "flow": 26.7,
    "turnCount": 82,
-   "score": 80.6,
-   "baseScore": 80.6,
+   "score": 94.8,
+   "baseScore": 94.8,
    "spotCount": 0,
    "polyline": "ktflEqotoX`@e@fB^j@}@bKmDBsBqDsCaBcE\\wAxB[i@cBFiB|AeC`CyAtE@lB}M|EuBjDYf@{El@eAbIv@Fk@_DmDG{A^s@dASvCtAq@sGjAgEvGxGx@JzAgH_AgGIgDxAsFcAkDd@M",
    "pointCount": 37,
@@ -1439,10 +1385,14 @@
    "end": [
     33.61494,
     133.822301
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:56",
+   "id": "高知県:47",
    "region": "kochi",
    "regionName": "高知県",
    "name": "重倉笠ノ川線",
@@ -1452,8 +1402,8 @@
    "curviness": 523.6,
    "flow": 26.6,
    "turnCount": 207,
-   "score": 80.5,
-   "baseScore": 80.5,
+   "score": 94.7,
+   "baseScore": 94.7,
    "spotCount": 0,
    "polyline": "esalEccdnXqJaImC_FGkArBkDByAy@w@sBk@cEqJo@wEeYzAyAeCsDgA{CsCg@qGHaG{@gDFkAtA}CPaCoB}ELsJWsBq@gBwCoA{AgGiAoAaAgCkAK_@oAeBWWaBuAWG{AgAdAe@UoAmERaB_@eANaDr@aBT}CUKyAlBO{Be@u@kCxAi@eCPgCf@oADyDsAe@mAnAmCdAcB}ARgDyAeCmAnC_ACi@pAqBr@CxCc@|Ai@ESk@KkFpAmNa@cIxAmEf@}N~BcCLeBUoBcDuDOsAf@mCnA{Bc@oEeAgCRmEzAqBn@mDMsJe@kA{D{@a@sAfA_DdCcAlC^~@YtA_BpAkDDsAgDaNo@}FLw@zAcAp@yAf@oIl@gCCuCdAc@jCx@nBKnFwClCe@jK}HbAqCb@{JjAiIdJgK|EeBlA}Bt@gIpCqH",
    "pointCount": 115,
@@ -1464,35 +1414,44 @@
    "end": [
     33.607985,
     133.628434
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:57",
+   "id": "高知県:48",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "十和吉野線",
-   "ref": "106",
+   "name": "大川土佐線",
+   "ref": "265",
    "highway": "secondary",
-   "lengthKm": 6.77,
-   "curviness": 534,
-   "flow": 26,
-   "turnCount": 139,
-   "score": 80,
-   "baseScore": 80,
+   "lengthKm": 9.76,
+   "curviness": 498,
+   "flow": 43.8,
+   "turnCount": 111,
+   "score": 94.2,
+   "baseScore": 97.6,
    "spotCount": 0,
-   "polyline": "qxyiEeaziXgB|FuCdFiCtA`BrIInAaHfGqABq@e@o@qEkGuFyEc@}@v@oAdDnApFI~@qCdCkKfGg@|@JvEm@nAjAzEAtC_Ol\\iCjBCbA`AzDeE`BuBnBs@fE{ClB_AdB{Cl@oBxAMxAZ`@CbAaCvD@lAnD~HiAvBJzBqBpHlGhMq@jD@`CsAL_@lE`@~Eh@vAH|GzD`Bd@~AtAbBIxBn@jArK|DlBdCnCbBtA~DzAhBt@~Cg@DqBwA[sAq@c@gADSh@nBBTpCpAb@f@bF",
-   "pointCount": 72,
+   "polyline": "_{dmE{esmXGdB|@lCw@tCi@jLo@tBsB`C[nDzA~IvAfBpB|GxB|AJxE~CPV^ObAoB|B?vDxB@~BhCeElCiAbJr@zBdCfBVdBmA`ByAn@iCgBc@Tq@xBt@fAx@pDOf@_FwA}Cp@Wt@cB\\i@|@}CHqExD}EfBw@rA`@jHSnEfBnBNfAg@lCtBnA[v@{Ab@BrAr@`BgAzECxB^b@pADPv@}BfBo@fCaAr@w@lBNzAwCdBw@bGt@fAv@rFp@f@dDdHFpG~BZ\\dB]t@kCPa@bDmBtFqAbHaAtI\\pC{AhBt@tEpBvBTvDnDG}@|Fj@lFxBpIk@dDj@lAtC|B_FxBkAvGb@rAmCrAOzCgEfAsCrBwFhQCzHt@tJGvCg@tBh@vB~@f@|FnBrAU\\\\YfC^lFQrFhArFk@j@oHo@sH~@",
+   "pointCount": 113,
    "start": [
-    33.232894,
-    132.848985
+    33.78112,
+    133.46926
    ],
    "end": [
-    33.243248,
-    132.804076
+    33.79055,
+    133.39455
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:58",
+   "id": "高知県:49",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道439号",
@@ -1502,8 +1461,8 @@
    "curviness": 926,
    "flow": 32.2,
    "turnCount": 459,
-   "score": 79.1,
-   "baseScore": 79.1,
+   "score": 93.4,
+   "baseScore": 93.4,
    "spotCount": 0,
    "polyline": "u_piEe`rjXl@hQjExGd@hGdEeDvHWXmCr@s@l@yB`FsBLd@{AbAQxAjDLhBnCzARRlGqA`DNjA\\TfDcEvAqD~Ba@lAj@tB}Al@ZlAUWbAmCz@eAjBaBe@eCtJVrBwBv@s@xAjBtElBH~CiAvEm@~AbAzA_AvCzAzBc@fBlAvB}Bt@LbAm@NiE~@HhBkBvA`EfB|@`AfIfDIxAb@I}FoAqDJ}@jAeBYaB~@_AWyBLcDjBgApF|F~@fC~@aA^eD~@{AQeAaBsBEoC`B_CwAyCt@iBaCoCnAgANuAbA{@pAh@x@s@lC~@lAiA|@MzBnAd@?d@s@vFBhBrB|ARpFeL|C{Af@\\TdBw@z@W|Bw@t@CzE`ApAdB\\c@xC|@fBClElBOf@f@lD^zBmD|@UtA|I|CaCtHKFzBfBr@nA~AhDwB`@nAhEgBbBCH{ClAa@IkDjC_Bj@cF`AcBbAl@GzEv@lBa@pA?vBdE|BtHf@Ck@}Gy@cBoAYiAzAy@Ni@}@_Ag@eB|Au@RiAxBt@r@oArDi@gAoFtAWW}G~BA~@zAdCmA|@tEf@^zAGp@~AjCdBz@iAg@qCv@y@^}Ej@iAnAnAApCf@lDpCc@ZTgDxFb@lAk@jACvA|At@~AE\\p@SdAPrBnB|@^|B`AOlB~@lAeD`@GZdClBfCb@vBrBXs@tBThBY`Kt@dA`B^r@|AfBl@z@rAU~@mEdBDfCrBjAP|BrK`AtBs@~DqN`GeFbGmN`EkD",
    "pointCount": 203,
@@ -1514,60 +1473,14 @@
    "end": [
     33.122579,
     132.965183
-   ]
-  },
-  {
-   "id": "高知県:59",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "大豊物部線",
-   "ref": "49",
-   "highway": "primary",
-   "lengthKm": 14.79,
-   "curviness": 497.1,
-   "flow": 28.2,
-   "turnCount": 261,
-   "score": 79.1,
-   "baseScore": 79.1,
-   "spotCount": 0,
-   "polyline": "e|emEg{cpXIhBdCnApLICs@eBm@xCAlBdDhCvAdAF~@u@xCqFdCoA\\sC`AsA?iDpFuCMg@aAEH_@nA]`CxAjFPtAv@xBk@XyEjBV`@g@}@eChDeIx@i@|Eo@dCwAbDkDfAsEtA^rBuAjFo@dF~ApKj@dHGnElA~KgBjBcBrF_@vF_EpBkEV`@s@rBjBhB|CaGtJkAlAuCKmDnCeFh@JhCrIr@b@jFNhGcDhB}An@gB{EnBi@wB|DcEd@iA@{AoBsFgCkCMsARs@rCeCjB}HL}AgCkHDw@fASrCbBvJN|EdCfAaBbA_@jAxApDIvFtA~BdBdBhGj@f@jBYvHoDzAJfCtAv@q@n@vDxFtBSvAxBxFd@tD~B@z@w@|EpAL`AfG~AxBtBt@rBhAfKnC~FlBYJrBbE`@bCg@fFlCzE`@bBvCzACv@}@fGtAxAEdAiAfAp@jCT`DaAtBf@nEtCjA|BfApEjKJfAh@bIzIzAt@jBbJpD`FdBxArCNvD|AfCpDfF~ChEjFbEv@fAbCjDrAlC|EtBP|HkA`FrDnAtEpDfGtDjBr@IdAd@`FgBnBV",
-   "pointCount": 152,
-   "start": [
-    33.786434,
-    133.882276
    ],
-   "end": [
-    33.695934,
-    133.874677
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:60",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "久保大宮線",
-   "ref": "217",
-   "highway": "secondary",
-   "lengthKm": 15.28,
-   "curviness": 494.2,
-   "flow": 26.2,
-   "turnCount": 288,
-   "score": 78.9,
-   "baseScore": 78.9,
-   "spotCount": 0,
-   "polyline": "grulE}_cpXUx@x@dItBzAy@rCKbFzFhDGbBmB`IjBp@l@bCqAbBw@dEoBb@J|E_AhBi@DcF}E_BbAe@dBsC]oBrCuA^u@lByCX}AnGuBhAHrAgCjBxAx@^vBa@fBuBz@y@nCZ\\|B@y@vNfCDdAhDtA~@xAWxA{Ac@vCX|CdDfBlGa@~El@hGiCjF`AdDfBbHSjJjEtH`ApGfDdGvIZnBdClFLxCjDzCpArE|AzL`AnCfBdAtDd@zAw@zC|CbCNhC~@|HjHZ|B_ApBnC}BlAr@fCzFhBjA^nEfBxC|GfEvAjCxDnBNxAi@r@DrAxDjAjBjCVpC[pCd@hB~DbAjGvExBq@vAuAjANpDfDBdDfBl@G~Bp@d@vAtDzCfEr@tDlABpAi@|@PjEtChFhFx@vBFdLjDrNxDxKjBhD`BlHhBvCtCxBp@`Bn@dFa@`D~@jB?rCp@fCl@jHdHvM|GbTxClQJpAe@~DnD~Ud@fe@pExSDzBsAj@HpAx@~@jE^KvGfA|BbCn@nGiE\\Fd@rAt@HlMmD|CJxB[",
-   "pointCount": 144,
-   "start": [
-    33.702921,
-    133.877911
-   ],
-   "end": [
-    33.647864,
-    133.778929
-   ]
-  },
-  {
-   "id": "高知県:61",
+   "id": "高知県:50",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道439号",
@@ -1577,8 +1490,8 @@
    "curviness": 650.8,
    "flow": 28.6,
    "turnCount": 254,
-   "score": 78.6,
-   "baseScore": 78.6,
+   "score": 92.8,
+   "baseScore": 92.8,
    "spotCount": 0,
    "polyline": "epkmEqf{oX~CxAbBbB|EzAbBy@rAVx@lF|@x@jBLhBdBhAvEs@rAX|BwB^aBvD_Bp@mApDXh@nA[|C~B|CZb@fCv@~@FjC~Aa@zBr@nBtCi@jDl@b@x@pD`EvD_@vA}AfAY~@`Cn@nAU`BvBP`DbA`BOjCp@xBfAlAq@hCb@vAFpCv@`BSv@dCB`@j@b@rDiD`Dz@~@K`ApCe@`DmCjAXXpEbDrFtE|CdB|DhEbEjDAMrB~AnGU~E{BfCaBNk@t@xBlBObDRjBqArBbBdEi@|BuFbDcBpB~CtBm@|@NVdDJdF`E`AvBEnBZn@vBU`BlAhA~J~AnCJzBpAlElAzAPxA|B~Bk@pAbCQj@v@TdGjEtPrAjBrG|DrAjDXdE]zCwGpMq@pM{HrMw@dC]nE`B|MlDrDhB`GjE`JHfF}BfO`@|A`CpDFnC}@rBaF`EqEdJoAZgCg@{BH{CnBcADUn@",
    "pointCount": 126,
@@ -1589,10 +1502,43 @@
    "end": [
     33.795335,
     133.756745
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:62",
+   "id": "高知県:51",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "久保大宮線",
+   "ref": "217",
+   "highway": "secondary",
+   "lengthKm": 15.28,
+   "curviness": 494.2,
+   "flow": 26.2,
+   "turnCount": 288,
+   "score": 92.7,
+   "baseScore": 92.7,
+   "spotCount": 0,
+   "polyline": "grulE}_cpXUx@x@dItBzAy@rCKbFzFhDGbBmB`IjBp@l@bCqAbBw@dEoBb@J|E_AhBi@DcF}E_BbAe@dBsC]oBrCuA^u@lByCX}AnGuBhAHrAgCjBxAx@^vBa@fBuBz@y@nCZ\\|B@y@vNfCDdAhDtA~@xAWxA{Ac@vCX|CdDfBlGa@~El@hGiCjF`AdDfBbHSjJjEtH`ApGfDdGvIZnBdClFLxCjDzCpArE|AzL`AnCfBdAtDd@zAw@zC|CbCNhC~@|HjHZ|B_ApBnC}BlAr@fCzFhBjA^nEfBxC|GfEvAjCxDnBNxAi@r@DrAxDjAjBjCVpC[pCd@hB~DbAjGvExBq@vAuAjANpDfDBdDfBl@G~Bp@d@vAtDzCfEr@tDlABpAi@|@PjEtChFhFx@vBFdLjDrNxDxKjBhD`BlHhBvCtCxBp@`Bn@dFa@`D~@jB?rCp@fCl@jHdHvM|GbTxClQJpAe@~DnD~Ud@fe@pExSDzBsAj@HpAx@~@jE^KvGfA|BbCn@nGiE\\Fd@rAt@HlMmD|CJxB[",
+   "pointCount": 144,
+   "start": [
+    33.702921,
+    133.877911
+   ],
+   "end": [
+    33.647864,
+    133.778929
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "高知県:52",
    "region": "kochi",
    "regionName": "高知県",
    "name": "本川大杉線",
@@ -1602,8 +1548,8 @@
    "curviness": 522.9,
    "flow": 25.1,
    "turnCount": 358,
-   "score": 78.3,
-   "baseScore": 78.3,
+   "score": 92.2,
+   "baseScore": 92.2,
    "spotCount": 0,
    "polyline": "yeemEkksmXUoCf@wBy@eEh@{G`DiGd@gD~BqGaB_GsCqE_CaByCKwAqB{B?gAf@cAuBiEnAq@k@S}Ai@e@kERc@yDoA[{G}EuB{IeAmAKoIuE{DeAJa@pCcCbDyFsCO}@r@eGrCuD_AsCBiAvCeHdNuPfCwJrD}GdGuGtFGh@kCtAmCDoDnBaFYcD`BwNj@_AxBo@tBkCr@qBzDu@zC{ErEoAzCLzB_BdAZ`AzD~Ca@rDqDvCsAxBKd@kCxAcB~Cd@tD}@fErBbADhFaF~D{G|@aEtAcAHu@eAeCnBaDyBgHhBqCTwA_AgAaCQ?gAfA}ARqAyEyFEcAfBeDlApBjCd@fDlDhAEdBiA`CHhAkFs@mETk@zAk@\\sAs@}CFu@^YvECf@kDhBeCqAoEN{@zFEpBdC|BAbA[jA{AxDg@b@sEv@_@nTjNrCv@x@rEj@K|@sAbB}Fb@[pGvGjC{@zAnCzCf@~ClDt@C^kEvA_AT_A{BkD|@yCEu@yBeAiDXyDuBWy@\\y@nE_CdBcBhB_@tAaFlD@r@iCcA_EpAsCGyDuByCR{E}CgCIaEqBcBu@mCwByB[wG{C}AT_F_BgAaETg@u@PsAjCqCbGyJNcGfBsE{AyM_B}@_JxDe@|@z@jBU^c@Wu@iCLm@jBwAjCqHzI{LpBg@lOZ",
    "pointCount": 180,
@@ -1614,35 +1560,14 @@
    "end": [
     33.747241,
     133.558125
-   ]
-  },
-  {
-   "id": "高知県:63",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "久保大宮線",
-   "ref": "217",
-   "highway": "secondary",
-   "lengthKm": 9.52,
-   "curviness": 483.5,
-   "flow": 26.8,
-   "turnCount": 172,
-   "score": 78,
-   "baseScore": 78,
-   "spotCount": 0,
-   "polyline": "un|lEg`hpXoAu@iCr@wAUiEwCuCgDEwBoAqAiBOiCkAsBaCyDyByFLqBg@a@aBKgE_BkIgB}DUaCcAoCwCuBKyFoAkDNaEmIsE{AuBcB@aBwAC}CmByGs@h@C`EiAr@yBwAoCgFyAWkAyE\\iF{AmDdA{AB{Ay@yB_CmAeAsGqA}BmA{AgBLc@Yw@qB}HgG}Aj@oEwHqCg@_CcBkB{FyAsBMsIwCPiBmAg@cALiBkAaBrAoOeAgK_@wLQeBsA_C_@mBiAuAi@cFu@m@i@gB~@cAhB_G}CaAyAiBwAyDiBf@{FgCgB{HsJgJaDiIyFCk@`Au@CsFuCeDwDkAk@L}Bm@_Gz@yCNiFWo@iAKoAvAyB}AkA_GvAsFc@wEaE{Ei@iDcAeA",
-   "pointCount": 102,
-   "start": [
-    33.738193,
-    133.903559
    ],
-   "end": [
-    33.780832,
-    133.969946
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:64",
+   "id": "高知県:53",
    "region": "kochi",
    "regionName": "高知県",
    "name": "宗呂中村線",
@@ -1652,8 +1577,8 @@
    "curviness": 520.2,
    "flow": 24.1,
    "turnCount": 197,
-   "score": 77.9,
-   "baseScore": 77.9,
+   "score": 91.5,
+   "baseScore": 91.5,
    "spotCount": 0,
    "polyline": "iijgEqsoiXqD_BcEs@wDsCyKDaDe@a@rDvA^Vl@cDlBwD`Gm@AyAiBsBi@o@NaAt@a@`DwE`Bk@`D{C^}@pBcDhB{AEsByAc@uB{B_@sDbBaJdJiFRkCoBy@EoH|AsDfBoAYwEgFc@gDuC{Fa@gD}BIiDzDkD|BwAN_AiAdDgCBeAo@eB{F?kDzAo@mC_HuB{CZwCvAeBhBC`DuBXgAv@_AC_Ar@e@Kg@oA}Ef@{F}A{B~@eBMeCdC{DTgD|@iGiBq@h@KpEi@~AoAHaAqCsAa@y@lBkA~@AzBk@n@eD_AsC}BoBHyFmBoBsBkBj@kCxDyBY{BxB{CDqFvAiFs@qDcBuBNyA]qDbBmKoDcIyH{Au@aJKmB\\yAe@",
    "pointCount": 100,
@@ -1664,10 +1589,14 @@
    "end": [
     32.889272,
     132.792777
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:65",
+   "id": "高知県:54",
    "region": "kochi",
    "regionName": "高知県",
    "name": "南国伊野線",
@@ -1677,8 +1606,8 @@
    "curviness": 513.3,
    "flow": 25.7,
    "turnCount": 225,
-   "score": 77.7,
-   "baseScore": 77.7,
+   "score": 91.5,
+   "baseScore": 91.5,
    "spotCount": 0,
    "polyline": "gghlEm}~mXzFxF|EdNB|Cs@~Gu@bBiCfBgIRcAxA[nDvFjGfIfBzIjGpB|GrK`Q\\`Bw@xJhAhGaDdOBv@dDbCxA~KrAf@vG_BtARTtB{AvVnAbDlCn@hD|CnCf@_@`BwH|@mBdDdE`VoCtDi@bBEpEfB|IWPgD{AsAEiB~@eBjDz@vA`Am@^uBbAEtEtBtDk@h@b@Ef@cBjAqDrFP~MVXt@Q|@pAhB~@]tAjA|@F|@tB`Bp@jBYtAt@^zA`DjFlAfA~@lA@lB|BkDhAgCsAoEGoBeBcB~AAh@xB@~AhBrCPhD|B|HrBDnChCfAPUs@mAJ]bIeCzCU|@oCBuBtIvK~Aj@n@fCtAZ|AB`Cm@hFwF`BaApBU|AtAJhDpC~Ct@tH`AdA`H|AxGiFfGwBt@p@P|AfBvDv@l@",
    "pointCount": 112,
@@ -1689,42 +1618,14 @@
    "end": [
     33.602389,
     133.471631
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:66",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "大用大方線",
-   "ref": "336",
-   "highway": "secondary",
-   "lengthKm": 12.32,
-   "curviness": 484.8,
-   "flow": 25.6,
-   "turnCount": 233,
-   "score": 77.4,
-   "baseScore": 77.4,
-   "spotCount": 0,
-   "polyline": "uwrhEo_{jXaBjDyHxDiC~HaAfA{WzFsK@yI|LcAxEuHnDkJzAwBjC{D|Ao@bBk@xHv@hB`BhA?fBgChFcE|AeBbEo@?cCaBgFaA_AoAaIb@iByCaA?w@p@o@hDt@pH?vFq@|AcDbBOvAd@nDfGzTM|MsAjGwBtCoFrA}DvDiDv@uBi@uCgEwAQkBxA_ArBw@xGo@fAyDOs@v@_FtPsIGeAn@gBzCoAj@oDGaBw@yF~HyDk@_Bj@_Bi@sCdCcEsAiCnAmBI_CtBHxA{ExD_H~@_CpAmBQ}ApAm@~AqB~@gIcAmAtA{Ed@iCoDsCO_BZFlAeDAK|B{@?mGyBqAsBgAi@}@uBt@}CsBw@HsDe@S_@iBqFfMiAl@eAaAi@H}@hAmBzF_Bf@}@pAe@fBTbDw@zAu@|EgDxG}BhCqBQ_@^cDtMeBzA[bCgMbFl@v@Bv@SrAiCfE?nBf@|@",
-   "pointCount": 121,
-   "start": [
-    33.033071,
-    133.017675
-   ],
-   "end": [
-    33.101265,
-    132.962658
-   ],
-   "unpaved": {
-    "unpavedMeters": 1883,
-    "totalMeters": 12322,
-    "ratio": 0.153,
-    "surface": "unpaved",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "高知県:67",
+   "id": "高知県:55",
    "region": "kochi",
    "regionName": "高知県",
    "name": "室戸スカイライン",
@@ -1734,8 +1635,8 @@
    "curviness": 501.4,
    "flow": 24.8,
    "turnCount": 186,
-   "score": 77.3,
-   "baseScore": 77.3,
+   "score": 90.9,
+   "baseScore": 90.9,
    "spotCount": 0,
    "polyline": "wb}iEeq|qXqA_AqJy@uCp@m@Up@eAfIg@~BPNk@c@YwCZiC}@oD\\g@ONm@fCFfC_AvA^jAOpB_@X}@oEwPwDwCaDw@sBNiEbByGYyGt@sSuEyCjDi@]U_D{AR_@rBc@P[[AkDuBu@qAdAa@xDyCw@eHvCiBuCoBLsBaBcAKqCnBsCKqAtAuG~Ce@~@b@vC{A~As@H_BuBuCi@oLxGkFgB{BuD{FkCoGcAqI`AaCu@aAxAVbDk@p@qC|@?|CoAhDeA@e@q@_BqFuATE|Fg@zAaC|Cq@bCR~KoAbMeJjS{@xJmBdEEhAXd@jDQj@`AYzAeChBqArFtBjHGjEr@lCI~J]bCZhB?zF",
    "pointCount": 96,
@@ -1746,35 +1647,14 @@
    "end": [
     33.288711,
     134.151144
-   ]
-  },
-  {
-   "id": "高知県:68",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "佐喜浜吉良川線",
-   "ref": "368",
-   "highway": "secondary",
-   "lengthKm": 14.55,
-   "curviness": 488.2,
-   "flow": 24.5,
-   "turnCount": 290,
-   "score": 76.9,
-   "baseScore": 76.9,
-   "spotCount": 0,
-   "polyline": "eq_kEilyqXhGfHhIjAv@aCAgApBk@zE\\p@kIbAeBf@j@l@hF`B~Cr@QfEmE~@Tl@vB~CcEjCqA`Bf@`BrDrB}@jBTXb@@lE{AfBeB`@xArEw@nC[~GJpFuAlBCrA|DxBzA~DlHbIlA`@bCaFjCW`At@zEvIrAFxCsAlCHxLlGnF~D|MjChFe@pEX~F_DpChAjDuAXVQvB\\bCiBhGJhCp@dAjGfB|BMrIgEVuBsAyFT}@dF[jBjEnBGrAc@Tu@g@_H|CTzByBVVc@jDZpBSzC`AlEYvBx@`Av@vCtBhCx@D|@aC`@KZxEvAhDnJzKnAd@hCs@vCGdCmBnEp@xC|BlAfI|EtArAtA~MvBlBbAtBbE~CxABvEw@hBeFl@rDlB^tBo@tAcAPwC~FaEzAZdHhAXdEwAnBLzAjCRvAq@|CyAX\\xBdDlBpJ`@rB~@zBpEm@rL`AtNrEtF~AGrBkBbAQbDn@v@xBBvAwBfFDbA~FbGhGrSdEdAd@l@kAfEkLfCsCbCmBlCy@tDRtEdDdH|E`G",
-   "pointCount": 144,
-   "start": [
-    33.426268,
-    134.156365
    ],
-   "end": [
-    33.36604,
-    134.097423
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:69",
+   "id": "高知県:56",
    "region": "kochi",
    "regionName": "高知県",
    "name": "浦ノ内仏坂多ノ郷停車場線",
@@ -1784,8 +1664,8 @@
    "curviness": 467.2,
    "flow": 26.4,
    "turnCount": 172,
-   "score": 76.7,
-   "baseScore": 76.7,
+   "score": 90.2,
+   "baseScore": 90.2,
    "spotCount": 0,
    "polyline": "u~_kEis~lXg@Ti@pBnAhIs@hHJ|J|AtIf@hLiCxMaAdPcC|EeEZ_CrBo@zAtAfEjF`GtAfDxF`GhB|MjAf@nCa@yAhHoEvGa@nDVxBs@cCF}Ae@s@r@{C{AzCRrAYz@d@zCe@pC~ChEvAjGlA|AT|JtAhDSt@_CrBcC|@eBtC^j@dBMpArBc@nCfAz@^zBXbGh@hBKpDq@VO}B}CyA}A_Gk@a@c@Z@lCl@~FtAdHrB~CbCtA~AlBvDoCr@qBhAYdBGrBjBxBZ|A}@jBS`CpC|BbHhHzGdBdMvDlLoBpCJbEl@z@xCZrDfDtJ`V|@hDi@dGrBrNjDpCfEzGvErNQrM",
    "pointCount": 90,
@@ -1796,10 +1676,14 @@
    "end": [
     33.411162,
     133.294134
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:70",
+   "id": "高知県:57",
    "region": "kochi",
    "regionName": "高知県",
    "name": "東祖谷山大杉停車場線",
@@ -1809,8 +1693,8 @@
    "curviness": 461.4,
    "flow": 26.3,
    "turnCount": 123,
-   "score": 75.7,
-   "baseScore": 75.7,
+   "score": 89,
+   "baseScore": 89,
    "spotCount": 0,
    "polyline": "klgmEu{joX|Qbg@nBrB`BjE~@TBhBfD`GtAdLpAjC_AdJRvDr@bAAxA`AnB{@rBQbG^hBK|Hh@zDn@hAvKlGlBKlCj@e@hBbAhCe@|DaBpBaApDaAN{DbHmCjLX`At@j@bGfBUrAoCg@Cj@vDrFvF~Kl@dEbA`Cx@xEdAtB|DvSf@RJnASh@cBLc@jAuBIsBhCaAxC_Al@{FzBeDOeB|@aAfBB`DqAtBGrCnFzTdGnJAlC`BjJbAn@tA?`A|B",
    "pointCount": 67,
@@ -1821,60 +1705,14 @@
    "end": [
     33.783496,
     133.696903
-   ]
-  },
-  {
-   "id": "高知県:71",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "林道小田・池川線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 20.71,
-   "curviness": 483.1,
-   "flow": 22.8,
-   "turnCount": 438,
-   "score": 75.6,
-   "baseScore": 75.6,
-   "spotCount": 0,
-   "polyline": "qiglEymikX{CAs@_AdAwDq@mEvAoA`@oAQoKh@gA|ACzCzB`CSbBvChCg@dB`DbC|@j@KnAmBpI?bFyLv@NrDrDnCy@|CGn@p@p@`F~AdA`AzBfBh@zAjBhDdAt@e@t@mH_@aFTcA`CXzBbDlD]fCtChDLtBcCjGUjA_HfAwBGkCiCoEQsA?gEp@cC_@aDp@iBSeCx@mCc@m@qCu@C{@`AwBoAeCGsC{IcD|@sKgE}CgDo@w@qCtA{B?aA{CiCeEqAYg@ZkArBUl@i@w@eFhBaCqC}K}AeBy@yC}@AoClA_D_AwAtEsCpC{@Hw@yBVeEuCoG{DiDaA_CqCKk@s@jCwSbAuCfCNjAvBhBbAlC~Cz@?h@i@h@yCjAcCOiF|@aEUoCd@}BU}@eBeBMiA`C}E?mFf@iEXg@p@CdBzFfAhIhC\\dBjB`@pSfAvEvFlLhCrDjFxAbEpDdFlCnIbM|AdAhApDXtDrCnE~AzErCfCrAFpH_FhBiEfEwCrAmC~A@`CbBEdBoAzAoHfEWdA?|HaDxFeDlCf@bG{GzHQbARdEsAbE^z@dC~@~D[hCPt@i@j@oBbC_AfIfClGAbA^`@|Cm@lSq@vAwDt@}@dEh@tAxBtAbBTRjBo@|CmG`DQhB~@tDx@v@jC`@hDmAtENpBjBdBFZnAgAbDoBbByK|DWdBp@nCSz@wBJyCzB}CuAsClAsBhFy@fEeGtEiBzF~AxFbC`FlDlAZj@DtGw@lEfCzAlB`EG~KjAzClATzE_BnEx@pDfB~BsBpAa@hDx@bD|EClDaEbPc@|FVpAlB^",
-   "pointCount": 216,
-   "start": [
-    33.629848,
-    133.09165
    ],
-   "end": [
-    33.595182,
-    133.06977
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:72",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "安居公園線",
-   "ref": "362",
-   "highway": "secondary",
-   "lengthKm": 8.41,
-   "curviness": 476,
-   "flow": 24.6,
-   "turnCount": 163,
-   "score": 75.4,
-   "baseScore": 75.4,
-   "spotCount": 0,
-   "polyline": "cddlEuw{kXwM`@sRkBwEdB{FMaGzA_EaCaDRmBgBcAQqCkFiFuEgF_A_CmFuBo@UiB{Du@mEmHiBk@kEI}JoGcGy@kItAoBe@}I?K{Cl@{Hg@sC}Et@i@yCwCgAmGtAaGhFwBd@s@KqEcEoGY}BpEm@jEgCqBQyBqBy@aFvCoBL}@u@{BNyBrB}@Ho@bAcG`AcCaDy@WiB_FcFuCwEnCeBLcAfBW|FuBpB_IOyGdCiEV{@xCmA|@oCiAkBRu@rCgF~BkCvBoB~@kD[}BnAaLfOaDv@",
-   "pointCount": 74,
-   "start": [
-    33.613622,
-    133.185394
-   ],
-   "end": [
-    33.674119,
-    133.187496
-   ]
-  },
-  {
-   "id": "高知県:73",
+   "id": "高知県:58",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道494号",
@@ -1884,8 +1722,8 @@
    "curviness": 514.7,
    "flow": 26.3,
    "turnCount": 319,
-   "score": 75.3,
-   "baseScore": 75.3,
+   "score": 88.9,
+   "baseScore": 88.9,
    "spotCount": 0,
    "polyline": "qfblEo_xkXVxDqAxFeD@}ByAyHqPcBeJgI_Y{DuFsC}@cBlAb@zA@dHs@nB{AhAaAxDaKt@cBjCuChA}@tB_Aw@iK_@q@sAaCk@gSt@wGaAcAr@gAtDeC|KGlCmFrEmKdCy@lAcHV}G}@_D`AiFF{BdAuDvGkBaAsAl@aAG{@vCh@|HYxBuB`CaCn@sGnJ[bBuAf@Ul@KpHyA~B]`CXpTx@`B@|Bm@|AExAeApAnAlCd@tHjAbIHnQcB`GQ`Dd@`D|BfG`@pFiAbOcBvA]dEgD|FbAxFWjDr@jGRz@v@DLd@oGdOvB~FpAn@tBo@pCoGbAICxCyBvJyC`EhAZrC_@hDlB|ACdCpBtALb@dBRzEcBpDe@vCmCrEdDlGhBpIdB|BwChEk@nG}BvCIbHdAdDeAvFl@rEm@fEErG]jCk@rBy@p@Tv@pAEXhAiA|DYtIeBt@^rBg@jBvB~FlEaAdAnBNvDc@`E\\hIO^mCRvCtCUbC|@jBJpGa@lAeBnAkGzAqAlAxG`AXd@sBhDe@fGEtBjAzE]bByFtEiFCgEtABt@fBj@DxAtAiAbA^_AAqC`D]i@LwAy@`D",
    "pointCount": 158,
@@ -1896,35 +1734,14 @@
    "end": [
     33.641281,
     133.075177
-   ]
-  },
-  {
-   "id": "高知県:74",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "高知春野線",
-   "ref": "37",
-   "highway": "primary",
-   "lengthKm": 13.08,
-   "curviness": 424.8,
-   "flow": 29.7,
-   "turnCount": 187,
-   "score": 74.3,
-   "baseScore": 74.3,
-   "spotCount": 0,
-   "polyline": "odykEun|mXzGw@`IJ~c@lKx[d[hJvMjBfAvCDrFxE|AG~DaG|C`@bCoA~CvHdAVjB]tAbBfFj@`B`HlDzCf@|EW|Et@jBlAb@|SJbChBhApDRlHvE~MfAt@vGYfEoCpKr@bBe@pCj@dD?~DkCtFgA|@q@`BA`k@xJvE}Ava@pIpIBlC|AjPjClIoD`JfDjc@eOlC]jLA|DiB|Bp@P_@q@yCb@s@AaAj@a@c@vDl@pAfABx@lBaCl@|FMBi@cB}ALg@jBlBhAtCrBh@bA]zA|@jACd@v@`Cf@zAlApAq@By@p@i@k@j@N`AaAr@VlASf@aFeBdArAVbBdAAz@|@jGo@Nv@t@X~DdGrLjMlF~C`Y`G|D~D",
-   "pointCount": 97,
-   "start": [
-    33.557357,
-    133.51675
    ],
-   "end": [
-    33.466798,
-    133.485556
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:75",
+   "id": "高知県:59",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道439号",
@@ -1934,8 +1751,8 @@
    "curviness": 501.1,
    "flow": 24.7,
    "turnCount": 608,
-   "score": 74,
-   "baseScore": 74,
+   "score": 87.3,
+   "baseScore": 87.3,
    "spotCount": 0,
    "polyline": "{}~iEafsjXsBdE_AjE_@|FC~@~@v@fArCQfCTnIsAdGo@d@kAGi@gAo@Yc@Ph@fGiDpDq@Ho@vAsAPoApEkBt@JrAcBnC{@^a@dB}AdBeEbCs@[G_BkAaAyFBwAoA{@hAaCPc@fAeAP{ClCc@QmAiDqANXnHx@rAqAvFsB`BBb@rA^IxDgBbKc@r@OdC}@r@B`AyAhHoBlUAnNcAxCgEX_FcAoIkGWgI~@kFfC{Dd@oBWiEgBcJ{@XeBaAc@^kBFeBuBe@pC}AH_HxDmCIq@aADnDsFaA_BZ{@e@_@r@uFtBoAfBw@JmDzHkBhHE~Qi@Ok@_DgC{CmGwC?cCYa@}A`CuD_AaBTqAaA{AjAuD?g@]cBd@mFzFi@jBBdJo@v@gAGaJrBoAEw@i@mBP{XdJ}Fm@aCiE@eDlDmFNqAnCm@pGaJdGuTzAYXqDv@iASy@h@kBxBsFpD}ELuHc@eCiA{B_LkOwDyDyIcGgHoAmEeBoFjCmBYiAnA_Cr@c@yBF}Bi@gBxAkJD}DfDmArDE|Cj@hEnBpBvCxKpIfDn@|DBjD}AdBmChCeBjA}LMoCmBuDyFwCaGGkBgB_DeMNaG]{AgAiB{HcGeJiEsH?oE~F_EtWoFvJyAr@oABiIgDuDGoCfB}FlIkB~AmT~IcPrDuAbBwB|G_IzEwBfDa@xCIt^i@pD{AnDmAxAqHvE}Dl@wH?qGq@{BgBIiAxGoO@cDeBcEeA{@sCaAeHlBeG_Aa@i@I_Gk@{CsC_BiE[uBlAgAtBiCvT}@jAkBLoAo@}@kB}@uK}BiEiCwBgCe@}@w@mCWe@yBJm@xBWdDb@p@e@bByDDsC}AwCsAc@eFDiBuBPqAdFoIr@sKkAcByC{AgEk@eF@kC_OBwDw@{AiBqAwBE{BdEi@tFZjCe@fCgBVoCyA\\wGnAcIUsCk@wAf@gBQUyAVmAmAo@yBcAoLl@wKImFmA{EuAmCsAgAcBO}A`AiBxDYvBh@pB]hF}GhH}H~C]}@bAuAMoCvByBMmBsCaBmAeBwCdCwBLgGkJg@iFuAyC",
    "pointCount": 283,
@@ -1946,35 +1763,14 @@
    "end": [
     33.363956,
     132.987801
-   ]
-  },
-  {
-   "id": "高知県:76",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "中土佐佐賀線",
-   "ref": "25",
-   "highway": "primary",
-   "lengthKm": 11.01,
-   "curviness": 478.7,
-   "flow": 23.5,
-   "turnCount": 224,
-   "score": 73.5,
-   "baseScore": 73.5,
-   "spotCount": 0,
-   "polyline": "qhzhEe}kkXYUgFb@}D_CaHaAiKr@eHwD_F@mB~@iEoTt@}J`CqGuAiDQsC}AuB_GLwDmAsCyFqCcCoA{CcCDsB_Bk@iBLyIaAiCeD}Ce@wD_EsCy@mC?_EuBgEYcBq@_@kB?sAh@_F_@gEnDqIbB_AKi@_AEiFmAe@qCT{AgBWuG{@wACw@lAu@bBjBhAHj@k@r@qC~BsCBiAi@a@mDZoDy@uCrAgIiCaFLeEiEoA_CyCeBuBaI_CkB_@gDiBqAaEoKeHWkEpCmE\\sBkCyI}@wCbBmSpCcC|@}JsFwA{Aj@yCu@cEJyCi@w@mAr@iBDmBvB_BRuC`B_FScEwBqBsFe@J]bBu@j@sIWgC}AqDu@}ApAeC?gAs@a@sDo@Lk@fCaAn@wBg@gCXeBq@_AXgDMiBn@aFc@vBlCTpA",
-   "pointCount": 112,
-   "start": [
-    33.071612,
-    133.104348
    ],
-   "end": [
-    33.134684,
-    133.141867
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:77",
+   "id": "高知県:60",
    "region": "kochi",
    "regionName": "高知県",
    "name": "住次郎佐賀線",
@@ -1984,8 +1780,8 @@
    "curviness": 465.9,
    "flow": 23.2,
    "turnCount": 172,
-   "score": 73.5,
-   "baseScore": 73.5,
+   "score": 86.4,
+   "baseScore": 86.4,
    "spotCount": 0,
    "polyline": "unfiE{{{jXnAxAt@fEvCh@hAtArAfFpAfBq@bAMlBrEfHdF`F`C~Ds@xKHtBcDhAmDJcA\\Ip@b@vDrEpFdHjTdF|Ep@zA?dIhAhL`ApE_@|@aDnA[|BB`DbBtC|@d@zJ[`Bb@bB`DhAr@|GMIbEz@fBxBRjBkBfAKrAn@j@|Cp@hFmCpBs@dC[dE`ChB~BEf@fDdB~AFj@mBpFeDA_An@QjAVjDh@jCt@|@nExBvAS~C`A`@~@cA`LsHpAk@xBLtD{@jBgAf@u@~BrArCpEn@p@r@Bn@mChEqCtKoCl@cBq@_BNiEcA{B?{A|@MhAB~AdCjIYlEfB~F~@|@hACjBcDnBg@tC|Av@pDEnD",
    "pointCount": 95,
@@ -1996,35 +1792,14 @@
    "end": [
     33.119741,
     132.965863
-   ]
-  },
-  {
-   "id": "高知県:78",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "奥の谷日比原線",
-   "ref": "294",
-   "highway": "secondary",
-   "lengthKm": 6.11,
-   "curviness": 462,
-   "flow": 23.9,
-   "turnCount": 118,
-   "score": 73.5,
-   "baseScore": 73.5,
-   "spotCount": 0,
-   "polyline": "goplEorylXy@{FBsHgAkFMuEiCyHKgH]aCoCcG}CKoAiBy@Yz@wAZoDi@qDeG{AqBuCq@mGzAqDl@kEeFmB}EmG[aCk@}@kEeCyDZhAeHEoJi@gAgDb@}CUc@c@?mArEqJkBqEWiGk@oBG{EgAkAOqDqAaA`BcGH_Ci@y@}@B{CvBw@ENsDa@kEmFiFkDcGw@cKd@eEzB_HSeIvA{B`@}BkAaFiDcEqD_@[}A}@}@",
-   "pointCount": 62,
-   "start": [
-    33.676837,
-    133.338159
    ],
-   "end": [
-    33.693516,
-    133.386994
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:79",
+   "id": "高知県:61",
    "region": "kochi",
    "regionName": "高知県",
    "name": "谷地日下停車場線",
@@ -2034,8 +1809,8 @@
    "curviness": 442.6,
    "flow": 24.3,
    "turnCount": 131,
-   "score": 72.8,
-   "baseScore": 72.8,
+   "score": 85.6,
+   "baseScore": 85.6,
    "spotCount": 0,
    "polyline": "kxtkEsy`mXpU}@`KlF|EbB|G[dBlBdDrHbDnEnHzEbIz@pAhDA~IvCxFpGxEzE~AjDLp@j@x@fLfBfHdBbDtAbFdL|H`CfIrDtAv@QpAkB`AL?dCz@fEnErFjAHjAtAb@`DvCzBdBzDlBbBe@~EPtBxCnIhBx@hCfIbAbHpDlEWXkBqBeCg@w@_BEnBlE`EGpCw@jCrAvAdB]|BJpDtBdABr@|@\\YC_BlAoBf@t@hBNhAbA|DbAtD}AtBMxFfA|AO",
    "pointCount": 68,
@@ -2046,35 +1821,14 @@
    "end": [
     33.495252,
     133.338234
-   ]
-  },
-  {
-   "id": "高知県:80",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "畑山栃木線",
-   "ref": "210",
-   "highway": "secondary",
-   "lengthKm": 14.2,
-   "curviness": 449.5,
-   "flow": 22.7,
-   "turnCount": 281,
-   "score": 72.8,
-   "baseScore": 72.8,
-   "spotCount": 0,
-   "polyline": "k~flE}{kpXKk@\\i@dMaGfGItDx@hGtJpEbFdLzGdJtDtFxG~I~HzB`EjD|LjB~AlBGfJsGxDwA`Av@b@bCNjInF`DxBw@nC_IpDxBnDsCxAOx@j@~AjE^@pAsA`BH|BlGnDdDvAXhJy@lBp@j@k@XmDnBoDxErAnBoElEEt@y@?iBoAwFQkDPeAhB}Ar@}B@yC}@_EX_BlFqAjFtAXfCeCdFWbBLtArJjFlBsChBOvBtBrC~FrBSvCgBxA}GtBaBvDz@~DjDrBn@vAsAwAmKv@{Dr@i@fDb@lBOrCeBbAgBeCoB_C~AaDgDMiBb@sE{@gIBiCfA_@pC~ArFc@jLtH\\k@[qEjAoC~AQdAcAjERhBrAnB~Df@pG~DlD|@nBEdBeBbDTrBl@`A~ABjA}AhAUvFXvBv@jAOhItC~A_@^`JcB~CMtDrFjIz@jGv@qBrCq@rDKhC~@rAWlFhHtClHp@H|C_B~Fd@fE`CbBxFAjGy@zC{CxEEr@dBdEtCn@h@z@c@bI",
-   "pointCount": 138,
-   "start": [
-    33.628063,
-    133.923348
    ],
-   "end": [
-    33.55701,
-    133.90162
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:81",
+   "id": "高知県:62",
    "region": "kochi",
    "regionName": "高知県",
    "name": "弘瀬高知線",
@@ -2084,8 +1838,8 @@
    "curviness": 488.3,
    "flow": 22,
    "turnCount": 73,
-   "score": 72.5,
-   "baseScore": 72.5,
+   "score": 85.2,
+   "baseScore": 85.2,
    "spotCount": 0,
    "polyline": "}~elEyxxmX~D|DjB~CdACtBuBrBE~BRx@jBl@P~BO`BgBzBy@bEpAzB_DnGkDvB[~AaKl@InCz@dBw@z@aB|@mGdBuBh@eB?uA}@wBT}CcA}E\\aBW{Bd@yBAuCqAiDbA_IlB_ErGmFdEo@pCiCtAT",
    "pointCount": 39,
@@ -2096,10 +1850,14 @@
    "end": [
     33.606587,
     133.514046
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:82",
+   "id": "高知県:63",
    "region": "kochi",
    "regionName": "高知県",
    "name": "磯谷本山線",
@@ -2109,8 +1867,8 @@
    "curviness": 438.1,
    "flow": 24.4,
    "turnCount": 91,
-   "score": 72.1,
-   "baseScore": 72.1,
+   "score": 84.7,
+   "baseScore": 84.7,
    "spotCount": 0,
    "polyline": "gvdmEuhynX]{EhA{CnAq@xHo@dCyGZ_Br@_VjAaIaA}CmB_BsDBqLgBmHOyCkD}ADyCyCoCk@cBoShDgOPeYa@yA`@c@G}C{@mDDyEkA{C_Aw@oIc@cD{CNqAfEf@cCoDy@{FCaBr@mDCcLsAcL[c@mAN_Ae@l@aA~CqA",
    "pointCount": 43,
@@ -2121,10 +1879,14 @@
    "end": [
     33.78787,
     133.701902
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:83",
+   "id": "高知県:64",
    "region": "kochi",
    "regionName": "高知県",
    "name": "岡本大方線",
@@ -2134,8 +1896,8 @@
    "curviness": 426.7,
    "flow": 24.1,
    "turnCount": 165,
-   "score": 72,
-   "baseScore": 72,
+   "score": 84.6,
+   "baseScore": 84.6,
    "spotCount": 0,
    "polyline": "eonhEekujXaIrSiA`AiF^sFlCqBX{K~Hs@O_A_Cy@g@sCfB_Dj@{CnDkMr@q@xDj@nAElAiAnEMtDRbAvDhDf@pAXhC}@jBuF`AqDuAcEJ]d@ErDWLoC}C{BcHoLiGiIk@yGxEyD{@kB|BsFkAaFqGyDDmBrCrCdQg@xEr@nFi@`DmJlCeCSaGiBcBHiEfKsCdCaFzBuAdG`A~C{@jCDdBwAhBKjBvAbDJdDvBdJ~@dAf@KRy@kBaDIuAr@w@t@l@dBjG@`I|@zAFlCu@hCN~BaAbC`@jCiAxBxAzFq@zBuALw@hAaApIdOvLc@hCeFlLpIbF?X",
    "pointCount": 87,
@@ -2146,85 +1908,14 @@
    "end": [
     33.041973,
     132.943713
-   ]
-  },
-  {
-   "id": "高知県:84",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "安芸物部線",
-   "ref": "29",
-   "highway": "primary",
-   "lengthKm": 7.92,
-   "curviness": 447.6,
-   "flow": 24.3,
-   "turnCount": 146,
-   "score": 71.7,
-   "baseScore": 71.7,
-   "spotCount": 0,
-   "polyline": "}_alEuwcpXlDNbBzEbDfD~CxApD~EpEb@xBvArNs@bLwC\\oF~@o@vBxCtAjI~Af@n@M`FsRa@kDxB}HbCy@v@kBdC{Ad@yAlBf@\\wAxBRtB{AU}BoDu@wA{C|AiEpCWbAkABoAaAuAGgArB?dDqApDt@hE{BxDp@pEo@`@aAFwCa@iDuCcG\\u@vCBzDmBdECzCyBzDkHxJoBlAs@zAsChAu@jE`AjDJb@S`@sBhC_@|CH|CbApE`@fFk@~@g@rBcD`EwBxB_DvBqAXcBbNnE|EzD~LxMvFxClHrB",
-   "pointCount": 76,
-   "start": [
-    33.597591,
-    133.881705
    ],
-   "end": [
-    33.54951,
-    133.896201
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:85",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "林道 小田・池川線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 7.56,
-   "curviness": 439.5,
-   "flow": 22.8,
-   "turnCount": 146,
-   "score": 71.3,
-   "baseScore": 71.3,
-   "spotCount": 0,
-   "polyline": "q_nkEa`~jXYwAL_Ab@C|AvAlAwARkAWkFb@o@z@?pBjAlBnEpBVx@lClB~@z@jDhAjAj@Ch@mAeC_OReAnA_B?gB{BmAs@cCgBiAo@qA}CSaEuC_@oEkF}JcCaCkAE{EvCwGdAe@aAYqEiC_G~CkI~CgBd@y@Im@{Am@yDj@q@k@gBuCuBkAgCyCoFuMkDuAeFWsDaCwIyCaCIoDt@iDaFyCaCsJwCyDRyBsAqJB_Ch@uE|Gk@tDaAX{JeBaAcBmAu@sC?cLeCcDv@uCyA}GoAgB_BqEqBuCd@aCcAcCpAqDw@",
-   "pointCount": 79,
-   "start": [
-    33.500245,
-    133.033133
-   ],
-   "end": [
-    33.5358,
-    133.056758
-   ]
-  },
-  {
-   "id": "高知県:86",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "大久保伊尾木線",
-   "ref": "207",
-   "highway": "secondary",
-   "lengthKm": 23.42,
-   "curviness": 400.1,
-   "flow": 22.7,
-   "turnCount": 413,
-   "score": 70.4,
-   "baseScore": 70.4,
-   "spotCount": 0,
-   "polyline": "cmlkE_|lpXmG}DcPcH_\\{_@qImAyFmC_C{Bs@qEoFqNuA}KGyLyAgFuDyEiD{BwFwGoD}@{@`AkE@mD_@uDuAeCeHUiIeA_EwBaEwC_CkDa@_D`@iDhCoANeAdJwBpF}CiHuC{AsGJ_CfAkDtIuBvBcCE}BsEyBoAiK{CqSiDmBXkApHu@pAiPm@kAjBeAa@gA`AwEaAwB_G?qDcA}@d@gBSaA}BgBeFoAwGzCkE~Ji@`CuAx@kCMuCfAwJeELuHyAyFgAiBiDhAaAAsGiD{A|Bc@tBeInA{BiAiOw@QeKdAs@hCcIz@a@r@{BpCk@w@uHyCoAuFqIu@iC{HmG}HoCoDmDaDqFmFuBmAiDyAsAkEeBuCc@{OnAcDdA_Fa@qAaCh@sEvD_FrCoA`@sAGeG}AgCwDo@oOrCsGmIWhBqEpCO~Ca@h@c@_@uAiHcDaAqCjAoCoFqA{@iBUoC\\oE}@cByGiFoE{DYkIjAmF~CWq@JeCzCeITyB}IiWmAmAaD[{BvBkAxEo@f@qCsNHqCsCkE{BaAsAwAgAD_C`EWlFj@jEvB~FlBvBArAyK|GkEy@oCzA[|@@xB|@tEIn@yH{A_Eh@iEhHgBH}DzB}Cu@mA}AmB]cD`@kBpCGlDcCOsCvAyB`Fo@WHaCsBaAcAqDqBqBiB_EgAiDwBwNgEcDu@uBSmCs@Oo@j@eFp@{Au@S{CrCyDfAeGmCcD[oAp@wGMgFcByDyAyAcBCy@x@b@|ESnIiEhHa@tGw@z@",
-   "pointCount": 199,
-   "start": [
-    33.492178,
-    133.928481
-   ],
-   "end": [
-    33.61505,
-    133.989253
-   ]
-  },
-  {
-   "id": "高知県:87",
+   "id": "高知県:65",
    "region": "kochi",
    "regionName": "高知県",
    "name": "横浪黒潮ライン",
@@ -2234,8 +1925,8 @@
    "curviness": 423.3,
    "flow": 23,
    "turnCount": 344,
-   "score": 70.3,
-   "baseScore": 70.3,
+   "score": 82.8,
+   "baseScore": 82.8,
    "spotCount": 0,
    "polyline": "otbkEk_mmXN_Ab@OlJnBjBs@bAmh@f@iDxGeF|BkFrCoAjDLpHsC`@gATiEqA}Ex@kDh@m@lCO~@u@dN{UfHcEtAiD`Ad@BzDr@nAbACbDeCn@^HfCd@l@dE_A~@JCvEoCfDfAlGt@ZxCeAr@PZvF`A`AxD~@v@jCqA|CPlDsEH]zFgCvBIjHrBvD}@zDpDbAN~@Y~D`DhB|AnDlGhBzB~BhB|GkC|DD~AxHfEnAhLlChB^|@kAhFsEhKgBfKAdE`A`JdAX|C_EhB{@lBW|@j@JtByBhDs@nD^hAtD|AZj@]hCuB\\[v@hApKf@lAbHnGxEfBNp@s@rE|ClBWfAuCrBkBfJI|DbAlIrB`D|ErC|BhGjEbCdExGbFrDdF\\bA`BcAnLGlIr@`AhDVd@d@?v@sA`DUzCrFjLg@t@_DKiAz@sBbFInDwDzBMbFb@zApD`D~@bBdL`c@y@fF?zEqA|EClAhCjA|@nFpDnBX~Aa@vEkClE`AbDGz@wC`AkEvFeFl@i@`A`@v@|EVpAtCnDaCt@DfDhJXdCiBbAeAtDeBfBuM~@wAbAYrCfBlKsA|GfBhEaC`GuLnHwBWgCkDo@OoHrKyCJmBnCoCmAw@TCnAdEvDl@nJItD_ArCsCdEeD|L{@h@mDR",
    "pointCount": 174,
@@ -2246,10 +1937,14 @@
    "end": [
     33.417427,
     133.34795
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:88",
+   "id": "高知県:66",
    "region": "kochi",
    "regionName": "高知県",
    "name": "宮ノ上川北線",
@@ -2259,8 +1954,8 @@
    "curviness": 423.2,
    "flow": 23.3,
    "turnCount": 79,
-   "score": 69.9,
-   "baseScore": 69.9,
+   "score": 82.1,
+   "baseScore": 82.1,
    "spotCount": 0,
    "polyline": "w|vkEcjfpXZcGcAoMzEaGpD}LdGuHbEiBfDNzBaB|AeD|EaAYqAuBoCU}AeFeDg@_Dn@Av@xAlCCdAg@rBpAPyElIwRnCyAnE?rV`FxCGjDeBdC^bD]fEz@nC}CrBkA`BKrCbAjEZhDpG",
    "pointCount": 37,
@@ -2271,35 +1966,14 @@
    "end": [
     33.522956,
     133.91148
-   ]
-  },
-  {
-   "id": "高知県:89",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "国道493号",
-   "ref": "493",
-   "highway": "trunk",
-   "lengthKm": 29.94,
-   "curviness": 445.3,
-   "flow": 24,
-   "turnCount": 555,
-   "score": 69.8,
-   "baseScore": 69.8,
-   "spotCount": 0,
-   "polyline": "evhkEesiqXiAoDgAkAcBUcFjHkD|CmCZ}ASsFgGkD}O}AwAgA\\cDpEkArFmBrDsE`Eg@IkG{J{EqK_DdCiCqCiF_McE{YsG{RaFqH_AmCuPuGkDiCkEyH{BuQkByEmEoDoMsDgD{CgBkDsA{HAaM[wARgB]gGf@wQe@wLRqDwAsJ}@gCyDsBgC{Lo@h@CbE_A`Gn@|J{AvCmAp@}EhAwCuAoBD_AkDe@SeFtA_EaDcB@KuC{@Yq@iBNk@vBe@XkF_CeNdCaDhBm@|BLd@Wl@qHEiEl@oANgC_IaGwG_CGaEcHHsFr@gAa@k@oAHaHpAcExCiDvDwK|CyPw@iNaJ}UbAcKzBgDdCcBhEmAbJY~DgCjDObFxClCJ`D~@fFmBhAiFOgIaAsGLgH~AgGbB{C~DwCnFcA~B}CEqNaDsJpBeDd@qD?{@wAwEDu@hAq@xCZb@a@DiAe@sBeCkBuHqBcE?eDx@mGpIoKF}EdA{DSwAo@}@uDj@eJ_AyEsB}AiAKmALgExBsC?kAy@a@sADcF[cAmCmCyAqEn@kBzC_Bf@qBGsKdAsJSuAcBiDqFuEzAiAvAcE{@u@{Cl@i@kABaDg@_EvBoF}BiFbAcFAuA{C_F^aB~BqAP_AwCuC[iA~@eFTqJ^{Bk@wBMcDj@Ol@~C~AgAfB[xA|AlAmA~FoLf@kEy@aErBoKTuGQaDT[fAz@nAHh@e@yB_FPq@jBk@dAmAa@uDbAe@~@t@VMO_F`@y@p@UhDXhAk@Eq@wCkCDqAf@StAn@|@qCj@_@fCTfBoCpB[rCcExBiBv@iHgDaC^}DlAwCm@{F^iEbDaEBwAo@eA^a@t@|Dq@~BoA|AIxA|AbIx@Vk@mIzAyCjBqIc@gJdAuA~@}CCkCvBaBrDsHd@IjC~AtJuEt@_Dm@kERq@`Cg@~Ax@hB{@dDINwE~AcC^{Ct@eAKwBs@qBrAeAXkAu@uBE_Bw@_BAgDh@sC]cDTgDu@iGaD_B_AwE}EvBiCb@m@_@j@gDAkBaBmBcCkIiB_DsAJAcDeGcMiI_I{B{JqG}H",
-   "pointCount": 283,
-   "start": [
-    33.473147,
-    134.075554
    ],
-   "end": [
-    33.506694,
-    134.253896
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:90",
+   "id": "高知県:67",
    "region": "kochi",
    "regionName": "高知県",
    "name": "庄田伊野線",
@@ -2309,8 +1983,8 @@
    "curviness": 381.8,
    "flow": 23.5,
    "turnCount": 352,
-   "score": 69.8,
-   "baseScore": 69.8,
+   "score": 82.1,
+   "baseScore": 82.1,
    "spotCount": 0,
    "polyline": "wmskEwymlXcDsOmAuCsG}DsF?lA}KIwFcA_C_HkCm@yDPsAf@a@nD\\`OwPz@uJ@kLaBmEcDsBg@eAbCyAxBKjA}AlDQxBaBKmBeEsA{ByBmK_CoEyB}DsHqAeIgDlBkDhEaIoDiA_CqBsKyBkAwEqHgCoJoBZqBiAqBpA{Im@}F`MoF~Ck@k@g@kDZc@~ACjA}CiAwB_AQsDr@qKkEcE{@{CyEC}@rCiDp@}CrBaEAqDfA_C`Cw@Ti@Ye@aC`@kAuAvAmADoCxAKx@u@`BRfA_DtD_ECeAhBuJs@JgHlJmBb@cBq@gAqBd@gGUeA_Cw@gAuBqAb@aE?qEgCkAcBKuCeB}@aBqDqBaA{@uA{@oCd@{BmCkAR_DaC]aC}AK}Ii@E[cAgBe@w@{@mAuDGcCoB{CuC{HaFiHoEgEqCaIe@sI`BmI`GqC~G|@rIgBdBy@jAkDJqBsBwAg@wBcBsBh@cFrBsEFgAiBgGkB}K_KoLo@mBcIEiW}DgOjEeN`AoDE}BdBsCR{Bq@yCJwAk@aDeF_@kCDoGdAiHdAqCxCcBxEnAnAbCbFlAhBhBfG}DvMgAvF_CfBF~CwCjFeIlFcExE~CnA?v@wCoBeFWsBfA{CbFmDzA{BnC{AjEqE|BQtA{@LeAWmAf@w@xN{KpBm@hEkFt@kF`BqEC{BhCaOfBmD`@gE`CaGdAuIbBwEv_@c[jQuDvCqA",
    "pointCount": 187,
@@ -2321,35 +1995,14 @@
    "end": [
     33.540646,
     133.394304
-   ]
-  },
-  {
-   "id": "高知県:91",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "思地川口線",
-   "ref": "292",
-   "highway": "secondary",
-   "lengthKm": 3.95,
-   "curviness": 388,
-   "flow": 25.5,
-   "turnCount": 60,
-   "score": 69.5,
-   "baseScore": 69.5,
-   "spotCount": 0,
-   "polyline": "itblEke`mXfAJtAeAt@p@_@dDf@b@nAvEdBxAd@tMdBfCXW_AcBdAw@tBnBfUzAbUnGpLhI|Bb@tEeArDeDfBNjFaCjQ@rC|@hCxDzApGdBhRp@dBjAr@xGw@jC\\lAwA",
-   "pointCount": 32,
-   "start": [
-    33.605967,
-    133.371895
    ],
-   "end": [
-    33.580474,
-    133.358897
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:92",
+   "id": "高知県:68",
    "region": "kochi",
    "regionName": "高知県",
    "name": "松原窪川線",
@@ -2359,8 +2012,8 @@
    "curviness": 377.1,
    "flow": 23.2,
    "turnCount": 248,
-   "score": 68.7,
-   "baseScore": 68.7,
+   "score": 80.8,
+   "baseScore": 80.8,
    "spotCount": 0,
    "polyline": "{~hjEgb_kXvAx@~Db@r@yBGuCpAkBgByGcAuItAaIsAcB]_FRi@bB_@RyFy@yBqBMMo@|CgEPyB}CqC{@_HoCqE`AiBSmCf@o@nAPpBvBb@?KyKjBoARiBm@kBL_BkA_BsCi@yBdC[KnAiG]eGnA}CUeHp@oEi@sCaFiDMaAjCqK`G`C|BmDh@uBcAiBh@kADoCaAsAiCHgDyAkGDQgD`CoDfAqDFsJf@WpH^Z{CO_EzD_I^qEZe@fC[|CeFlBoGX{CoCwEaAyH`@w@`GkCnAcH@eFeCqDuFXsCsFKmAd@y@dF{A|BqEvDiDf@{BbB{CYyI~CwFzFgDjHyAbD}DpCg@jGkH~E{AbBK`CbAlBFlE_AzB?`PhBdGaA|CkCvDgBnI{IfEiGbA_ErAeAjCz@dL~LzLdHbDPtIgBzDqFxDkKhMsUXoBEsEdBwGnFuDxO}HtBkBjDg@vLf@~JjBnKd@tGBpNgBjKsGlD{F",
    "pointCount": 130,
@@ -2371,10 +2024,44 @@
    "end": [
     33.253441,
     133.121285
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:93",
+   "id": "高知県:69",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道493号",
+   "ref": "493",
+   "highway": "trunk",
+   "lengthKm": 26.6,
+   "curviness": 369.6,
+   "flow": 38,
+   "turnCount": 259,
+   "score": 80.8,
+   "baseScore": 82.4,
+   "spotCount": 0,
+   "polyline": "w|kkEipkqXsG{RaFqH_AmCuPuGkDiCkEyH{BuQkByEmEoDoMsDgD{CgBkDsA{HAaM[wARgB]gGf@wQe@wLRqDwAsJ}@gCyDsBgC{Lo@h@CbE_A`Gn@|J{AvCmAp@}EhAwCuAoBD_AkDe@SeFtA_EaDcB@KuC{@Yq@iBNk@vBe@XkF_CeNdCaDhBm@|BLd@Wl@qHEiEl@oANgC_IaGwG_CGaEcHHsFr@gAa@k@oAHaHpAcExCiDvDwK|CyPw@iNaJ}UbAcKzBgDdCcBhEmAbJY~DgCjDObFxClCJ`D~@fFmBhAiFOgIaAsGLgH~AgGbB{C~DwCnFcA~B}CEqNaDsJpBeDd@qD?{@wAwEDu@hAq@xCZb@a@DiAe@sBeCkBuHqBcE?eDx@mGpIoKF}EdA{DSwAo@}@uDj@eJ_AyEsB}AiAKmALgExBsC?kAy@a@sADcF[cAmCmCyAqEn@kBzC_Bf@qBGsKdAsJSuAcBiDqFuEzAiAvAcE{@u@{Cl@i@kABaDg@_EvBoF}BiFbAcFAuA{C_F^aB~BqAP_AwCuC[iA~@eFTqJ^{Bk@wBMcDj@Ol@~C~AgAfB[xA|AlAmA~FoLf@kEy@aErBoKTuGQaDT[fAz@nAHh@e@yB_FPq@jBk@dAmAa@uDbAe@~@t@VMO_F`@y@p@UhDXhAk@Eq@wCkCDqAf@StAn@|@qCj@_@fCTfBoCpB[rCcExBiBv@iHgDaC^}DlAwCm@{F^iEbDaEBwAo@eA^a@t@|Dq@~BoA|AIxA|AbIx@Vk@mIzAyCjBqIc@gJdAuA~@}CCkCvBaBrDsHd@IjC~AtJuEt@_Dm@kERq@`Cg@~Ax@hB{@dDINwE~AcC^{Ct@eAKwBs@qBrAeAXkAu@uBE_Bw@_BAgDh@sC]cDTgDu@iGaD_B_AwE}EvBiCb@m@_@j@gDAkBaBmBcCkIiB_DsAJAcDeGcMiI_I{B{JqG}H",
+   "pointCount": 261,
+   "start": [
+    33.48956,
+    134.08533
+   ],
+   "end": [
+    33.50669,
+    134.2539
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "高知県:70",
    "region": "kochi",
    "regionName": "高知県",
    "name": "中土佐佐賀線",
@@ -2384,8 +2071,8 @@
    "curviness": 383.2,
    "flow": 23.6,
    "turnCount": 292,
-   "score": 68.2,
-   "baseScore": 68.2,
+   "score": 80.4,
+   "baseScore": 80.4,
    "spotCount": 0,
    "polyline": "_fwiEgfflXIuA`B{EQi@gBw@Wu@GkIcDqCeGeKcCFuBnAeAw@?yAmBy@CcDlAg@d@kAvA]Xu@YaA{DcBOiBgF`CeMH_@i@BuAhCyDWYoC\\kBiA_E`DiEE}Av@mIdAwJw@}E{DeBqEsByAeA?cBrAa@Q_AgBJuBdAk@Di@aDgFg@\\q@bCuEpB?fArApACr@w@~CoA`A_CrFhEdEx@B`BsAZ|ApAd@MlAwA\\}@~AaDpB`@nAdD`DVj@Mp@}Dy@cCbCo@wA_Be@SgALgGi@qAkIpBiI\\kGqDiARuBjBmEs@eFb@yH~JwJbToFrGcE~BsA|HgFnEyDx@oGlDcJ|CoFxIiBg@kB^kChFyIzC}D?qEfIkCbAM`BeAz@gD^aDo@q@P_AvA{@PiBoCkCgAy@yEu@mAwFy@{CoBoD[{BgIcCJ{B~@cEuAc@wCrBgFf@mNkHkAmOyGgEy@gI_@op@|@oRzHwF\\mKyAaHwC{P{BqFuD_HiBeENcGhAqO~DoFM}O_FcMiAcOfHgAxFDjGk@fF{F`MkBnIkCpBiGpBeA~A`@lHSpG}@jHb@xM",
    "pointCount": 151,
@@ -2396,35 +2083,14 @@
    "end": [
     33.32458,
     133.223763
-   ]
-  },
-  {
-   "id": "高知県:94",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "篠山公園線",
-   "ref": "332",
-   "highway": "secondary",
-   "lengthKm": 12.07,
-   "curviness": 384.2,
-   "flow": 21.9,
-   "turnCount": 212,
-   "score": 67.7,
-   "baseScore": 67.7,
-   "spotCount": 0,
-   "polyline": "upthEslrhXPk@lD_@ZyEjBeCk@eDpBgCbBgFzBwDEoCiA{ABg@pBcBtE}H`FoCzA_DfDwCVmAO_B_C_Dp@CfB{A|COdBs@nB_B|D{FlD{ARsCjBbBx@KzC{CxAwD~Bn@~AKt@w@DaDpAK~BqAt@EnDdBtBQJfAbARnDsAdAyBbC_B`IgAzE~BhCgAdCeEIaH|@{A~A_ATeDvAgCzGq@jBgAz@yAVeBaB{GKuBl@oFt@_BrBuAfC_@tGIfEfA`Gg@xE}CZgASkD`D_Gn@g@hEi@vEcDtGsJlJSfLmFdFcExA[pCv@pFxEzCbAn@fAFlCp@vAtIbFhE?dGcDfG_F|Ca@hQClFyFhA]hJ|CdBIlBsCV_EbFsExAGzJzB~Ee@pDyAbDYzAwDNiOzD}BnAOnEf@zIrGfAb@\\UrAlDtHdJLrA]nAiDpBSjFiAC",
-   "pointCount": 119,
-   "start": [
-    33.042188,
-    132.646019
    ],
-   "end": [
-    32.970113,
-    132.684327
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:95",
+   "id": "高知県:71",
    "region": "kochi",
    "regionName": "高知県",
    "name": "須崎仁ノ線",
@@ -2434,8 +2100,8 @@
    "curviness": 401.3,
    "flow": 22.2,
    "turnCount": 237,
-   "score": 67.7,
-   "baseScore": 67.7,
+   "score": 79.7,
+   "baseScore": 79.7,
    "spotCount": 0,
    "polyline": "ia~jEuk|lXiCkHuFmKkAsKqAmE`@iESuAkGwFgIcEgDg@gEdAsBaAeD@qAk@{AkBa@aGyDwB]eF_BwBoB}Fc@qEj@{FtAqE_AsDl@iIlBkBf@{BbA}AhBaAPu@c@mAcEwAwA{DwAePLmD|@wBK{CgAkBMeE}DqAuCwEEgCrAkDAiA}E_FoEIsAy@sC}FcK{LPmDc@sAkE}BkCUwBwBiFd@oEQkDj@_CkAiCgE_G{Cc@kCr@cC]oDt@cDGeA_C{DmEE}AyEGgFcAqEHqCpEkChByEfEu@~@y@x@mB_@qDr@kBjAOlBp@b@k@u@yD?yGcAeDkBA_Ak@n@wFjCoALy@eAsEAcCi@s@qCcA}BnBwBk@cDkCc@\\k@dCcBToBoDiDYwC{RnCmSjBuA~ADxGvIlDbAzFoAxD^lJuCjFE`CkDZ{B`BaBn@{BhCaA?aF[kBVuCrF{CX_K_GuEt@qDUeB_IkLyKuA",
    "pointCount": 126,
@@ -2446,35 +2112,44 @@
    "end": [
     33.442156,
     133.437503
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:96",
+   "id": "高知県:72",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "佐喜浜吉良川線",
-   "ref": "368",
+   "name": "篠山公園線",
+   "ref": "332",
    "highway": "secondary",
    "lengthKm": 12.07,
-   "curviness": 385.4,
-   "flow": 21.7,
-   "turnCount": 214,
-   "score": 67.6,
-   "baseScore": 67.6,
+   "curviness": 384.2,
+   "flow": 21.9,
+   "turnCount": 212,
+   "score": 79.5,
+   "baseScore": 79.5,
    "spotCount": 0,
-   "polyline": "elckE_}}qXoABuDaB}BKcDcCqEy@Y`@f@dDaA~@qFmNyETo@aAi@kDkBK_F{Cw@BqBlAgFb@_@_CEoGo@iAeFqDn@}CoDsC_@eF@eBr@w@UcCkDwBeBXeCxAkBL{AeAU}@?aBv@eC]oE~@qFlCgGlB}@hF\\n@d@zAbEBjA~AbAlF`A`DhB~C@rBnB`M~EfCCpAyBd@I~BzAxCPvBxChC`@~@xCzEhAbAMtBkBjCy@lB}B@eD_B}DJkAtNtDzAu@bCDdVuD|LtHfNxFnHhBrCLzHpCzFChBu@v@iEfA}AjFgCdE_AfJmMzEcMn@sIz@}ApJ_@`Bj@dEnDlEbA~EmA^aACkCrAcAzBbAdB_@zBpC`I~BzWgA~PsIz@qBtAiIdAaCrFgElAwBpDb@`EqAhBmEoAgCxB}G",
-   "pointCount": 109,
+   "polyline": "upthEslrhXPk@lD_@ZyEjBeCk@eDpBgCbBgFzBwDEoCiA{ABg@pBcBtE}H`FoCzA_DfDwCVmAO_B_C_Dp@CfB{A|COdBs@nB_B|D{FlD{ARsCjBbBx@KzC{CxAwD~Bn@~AKt@w@DaDpAK~BqAt@EnDdBtBQJfAbARnDsAdAyBbC_B`IgAzE~BhCgAdCeEIaH|@{A~A_ATeDvAgCzGq@jBgAz@yAVeBaB{GKuBl@oFt@_BrBuAfC_@tGIfEfA`Gg@xE}CZgASkD`D_Gn@g@hEi@vEcDtGsJlJSfLmFdFcExA[pCv@pFxEzCbAn@fAFlCp@vAtIbFhE?dGcDfG_F|Ca@hQClFyFhA]hJ|CdBIlBsCV_EbFsExAGzJzB~Ee@pDyAbDYzAwDNiOzD}BnAOnEf@zIrGfAb@\\UrAlDtHdJLrA]nAiDpBSjFiAC",
+   "pointCount": 119,
    "start": [
-    33.445947,
-    134.179519
+    33.042188,
+    132.646019
    ],
    "end": [
-    33.399487,
-    134.208115
+    32.970113,
+    132.684327
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:97",
+   "id": "高知県:73",
    "region": "kochi",
    "regionName": "高知県",
    "name": "足摺岬公園線",
@@ -2484,8 +2159,8 @@
    "curviness": 381.6,
    "flow": 22.7,
    "turnCount": 318,
-   "score": 67.4,
-   "baseScore": 67.4,
+   "score": 79.3,
+   "baseScore": 79.3,
    "spotCount": 0,
    "polyline": "}uxfEwjsjX~AkAfA}CGwIjBgGLqBiB_H}FkIAyCbAmAnJoBvDuF`@}Cw@kH~BkF|AcJ|@kBpHoIdBU`D|@bAMfGoNbAYpDTtAsDDaG{E_FaAaNJaD|C}DT_AQoB}BaEj@WfB`Cr@_@JmOxEcSKoEb@qJ{EwNuA_@eF^sDiCqC_AwGl@oAbAi@jDeAlA_H~@kF|AmGzDwMxAiSbFuGYwB~@sB{@aDRuDvAeMvAuJhGwZxBo@|@@bEs@d@uCo@cClB_GoDuDy@cJrAmKqAoMzEuE|CoAfBK`D}CvAy@hB@`CeA`BwB]qE`CaCCeAyA{DjAmI}FiBg@sAHmBvAiDfGsCBsErAcRvQuFlAwCbB{AbBm@~B_Ar@qBPyB}@kCuFqEcBuG~BqApHh@fDxAvBTjDaBxB}A~EiOlG{@|@mAfH\\~IuAxCSvBgBhCm@nFmC~IGrJ}E~XRnA|CnCl@rAaAz@YyA}@[s@pEcBuD}C~A_@rDiA~@yDvHxAlHnEMh@h@O|AeCg@YtAPt@pAr@ZlDpAbBHt@gFeBw@gCs@[yA`Bo@jCB`LfBjA~EvKoA~CbFBdLtAtE~I~FdBz@|A`A|E",
    "pointCount": 157,
@@ -2496,10 +2171,14 @@
    "end": [
     32.789112,
     132.9612
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:98",
+   "id": "高知県:74",
    "region": "kochi",
    "regionName": "高知県",
    "name": "秋丸佐賀線",
@@ -2509,8 +2188,8 @@
    "curviness": 369.6,
    "flow": 22.9,
    "turnCount": 167,
-   "score": 67.4,
-   "baseScore": 67.4,
+   "score": 79.3,
+   "baseScore": 79.3,
    "spotCount": 0,
    "polyline": "gueiE{~nkXqL`FcFV_HjHsD^yBfBsHtCiE|CwFlBwGtEwKhMmE`PgBfC_Dr@cBuCiFK_HdBiDpCiG|IeEvOyA`CeAbE_BnBeCfJqAfCaAf@eCnIuAF}FwGsB]m@u@aAwEgEAIf@fB~BRzBhBhCwAnDtBW`BvAKf@wCrAlBjAJj@yBjBQhAbAfARhC^\\dAgBt@Bv@pBE|@k@\\h@fE`@Xt@[\\z@yIzOgAvLq@lBaGnLuIrHAhF_ChJbAvMOdCeAb@gJd@gAz@_AdD{CjD_Da@qHf@iFk@cKxG}DfEm@|AcFz`@sCzLqBpF}C\\yGIyEsAmJdE",
    "pointCount": 85,
@@ -2521,10 +2200,14 @@
    "end": [
     33.179929,
     133.060655
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:99",
+   "id": "高知県:75",
    "region": "kochi",
    "regionName": "高知県",
    "name": "磯谷本山線",
@@ -2534,8 +2217,8 @@
    "curviness": 377.5,
    "flow": 21.8,
    "turnCount": 183,
-   "score": 67,
-   "baseScore": 67,
+   "score": 78.7,
+   "baseScore": 78.7,
    "spotCount": 0,
    "polyline": "}i`mEmgknXeCmIkHXgAu@wCV}EuDoBuDyAyFuAs@yBaDSaDuAqD@gDj@}CjGiFt@oJvDsO{@{FC{BNm@zA}@NiCa@uAp@oDDuC_AuGH_Dw@{FMgGq@iAuBy@{BuBuAz@cABuDqDgGHwHwLTmBcCiFaD{D}AmHLsDt@eCX{EfBsC~CwBXeBUy@sAi@aDx@cBE{Cx@g@|@iAuAu@G}@d@i@nAkHgGeAuBc@aE^yBuA_I\\wDWeDf@gA^mHdBqBfBaFjHwMhBoBlBoFdIeJ^mAEqAwBeDuHmBiCqCuDsNy@qNAqNc@oAeAZ{DzOqBxEsFjCqBlCqEbAgDsCoAqH{BeEJoCwDDwD}CKcAV_@|BFxCxAnAK~CkD`AcCn@cFRkI",
    "pointCount": 102,
@@ -2546,10 +2229,15 @@
    "end": [
     33.778026,
     133.659896
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:100",
+   "id": "高知県:76",
    "region": "kochi",
    "regionName": "高知県",
    "name": "公団幹線林道東津野城川線（西線）",
@@ -2559,8 +2247,8 @@
    "curviness": 383,
    "flow": 21.1,
    "turnCount": 218,
-   "score": 66.9,
-   "baseScore": 66.9,
+   "score": 78.6,
+   "baseScore": 78.6,
    "spotCount": 0,
    "polyline": "inckEaxuiXnGE|HkAjAwAj@mE~AgA|@b@n@hEn@t@~LnBbDm@xC~@dBdExA`AvA|BnDfCF~@cAbCj@hDqArEZf@vEpApAhLbCvBt@Bl@u@FcGy@cKdBcIz@MxD`B`EgCdEJ|E}D~HLbDaErLaA|DT~@_AxEoL?eDtDyAhCaIn@KvBfArCYpAqDfDsDnKoCnDuFlAMpHhBpOzLrIG~Ej@dBt@bAq@l@aEbAeAjBvAt@DjIcChGwGj@GvCxApAY|DcGPaNhEeMRgC[kD~DsGHyM~CkEcB{F?aAdB{DAqAkAcC`AyD|By@v@kAJ}Ai@aGn@}AhAK~CxArAObCgBvAZv@`B|@dHzBpD|@zDjAfBnCnBbB`DdEhAFzGdAt@rBmAzA_F~AsBpb@uRt@cBZ{EjBaBv@mC~AwA",
    "pointCount": 109,
@@ -2571,10 +2259,14 @@
    "end": [
     33.379349,
     132.854918
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:101",
+   "id": "高知県:77",
    "region": "kochi",
    "regionName": "高知県",
    "name": "日ノ御子土佐山田線",
@@ -2584,8 +2276,8 @@
    "curviness": 358.4,
    "flow": 23.5,
    "turnCount": 112,
-   "score": 66.8,
-   "baseScore": 66.8,
+   "score": 78.5,
+   "baseScore": 78.5,
    "spotCount": 0,
    "polyline": "qjllEu{ooXW`JnA~M~G`LvCnNy@|@Ct@dBXd@jF|@`BZdDtAjDiAnAGhBa@n@Ll@rCRtHbHnCnFnDbEpGrN|B|CHnBhDtA`IlTxC`MGjNjA`Oo@tLgBbAId@V\\jCBb@|@EjOp@tE|DrJdEbG`@lDrBdFh@~B~@`QnBbIg@rGXxEO|We@~CoAbBXzGk@dE`CtIq@bEJbAv@nA|@PZuClBcA|No@",
    "pointCount": 58,
@@ -2596,10 +2288,14 @@
    "end": [
     33.635209,
     133.717432
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:102",
+   "id": "高知県:78",
    "region": "kochi",
    "regionName": "高知県",
    "name": "川登中村線",
@@ -2609,8 +2305,8 @@
    "curviness": 351.4,
    "flow": 22.6,
    "turnCount": 193,
-   "score": 66.3,
-   "baseScore": 66.3,
+   "score": 77.9,
+   "baseScore": 77.9,
    "spotCount": 0,
    "polyline": "mpjhE}zijXgJ|GoI`I_@bBoBz@u@lDy@pAyDtAoAtC_EfDuAt@sAEsAtC}ItGu@vBoEjHqA`EiHdKiDhHm@dEsAvDPfF{@xAeBpHZjCi@zCTbQe@jAYhHiBfHZtEnAjF?hEqBzG[dHqDjOyAfAyDv@_FG_OhAeIpGyLvM_G`J_ElBaBpBmDxBUh@f@bCk@tBm@x@gCz@FzCu@pBw@f@IxAqAnAgBdEQvAn@~GO~CbA`AfB|IxEbHVlAdBbAhAu@f@DhDzCj@`B~JsDfAt@dBq@tFhAhNkG~C@h@nFw@l_@oI~KcBdEDdB|BzHJvCYlAqB~CaDxC_CrEeE~AiMnAmKuHg@oAoCk@aAyAmA^sBu@_B_BcCvAsBs@sDD}JdHuFdBg@w@iF}BcJiOa@K",
    "pointCount": 104,
@@ -2621,10 +2317,14 @@
    "end": [
     33.032037,
     132.860938
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:103",
+   "id": "高知県:79",
    "region": "kochi",
    "regionName": "高知県",
    "name": "七里仁井田線",
@@ -2634,8 +2334,8 @@
    "curviness": 363.5,
    "flow": 22.8,
    "turnCount": 58,
-   "score": 65.5,
-   "baseScore": 65.5,
+   "score": 76.9,
+   "baseScore": 76.9,
    "spotCount": 0,
    "polyline": "on~iEkerkXYIs@wDkDcVrAsQhC{Br@sEdDwCc@iCG_Gt@}@dD]lHTpCp@fDErAu@xJw@hFyATw@[wCPkIhBiJc@k@{Ca@KsAZ_@lEK~CgAr@gAq@wGXcCMwDrD{T",
    "pointCount": 33,
@@ -2646,10 +2346,14 @@
    "end": [
     33.245978,
     133.162308
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:104",
+   "id": "高知県:80",
    "region": "kochi",
    "regionName": "高知県",
    "name": "久礼須崎線",
@@ -2659,8 +2363,8 @@
    "curviness": 351.3,
    "flow": 22.4,
    "turnCount": 123,
-   "score": 65.4,
-   "baseScore": 65.4,
+   "score": 76.8,
+   "baseScore": 76.8,
    "spotCount": 0,
    "polyline": "itljEg~clXaEoc@sG}Ia@wNyDqBcCoE@_B~@iBBgBsGkDaAyA_AaIoFqWIoBZ}B~EiGd@{Ec@oBmDqHUyJcAqFcAiAyCt@aDi@sCkDgJeCmCaE`FeSD}B[mAuEbAwBiBkCd@iEpHmGxGsD~AwCu@{DxA}B{BaAiFeA}A}C[y@gB^iBOc@oCn@uCxDqATuCrBkBP{DiDkCUgE}DiDeAwD[}F}BcJlD?v@bAxApA`FOlB_FnG{F|@iBpCe@dD{AvA",
    "pointCount": 66,
@@ -2671,10 +2375,14 @@
    "end": [
     33.363895,
     133.257533
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:105",
+   "id": "高知県:81",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道494号",
@@ -2684,8 +2392,8 @@
    "curviness": 400.6,
    "flow": 25.4,
    "turnCount": 50,
-   "score": 64.9,
-   "baseScore": 64.9,
+   "score": 76.6,
+   "baseScore": 76.6,
    "spotCount": 0,
    "polyline": "oqjkEmfolXoO}GeEgIiByH{C{Be@eC_CNsBmAUh@\\rAwBnBsE{BkMXkJsI}@aD{@eAgB{@_BT_ExDkBg@mD`CqCEGiMe@_EXwEqCkS",
    "pointCount": 26,
@@ -2696,10 +2404,14 @@
    "end": [
     33.500274,
     133.299861
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:106",
+   "id": "高知県:82",
    "region": "kochi",
    "regionName": "高知県",
    "name": "中平梼原線",
@@ -2709,8 +2421,8 @@
    "curviness": 330.7,
    "flow": 23.8,
    "turnCount": 195,
-   "score": 64.7,
-   "baseScore": 64.7,
+   "score": 76.2,
+   "baseScore": 76.2,
    "spotCount": 0,
    "polyline": "s{tjEkfgjXdEaAbGLxE_DzLQxFo@xCkMPgF~GaKtBc_@qCAkCcA{AgB]qBD}AfDsKJiCwByD}Cg@oFwCu@yE`BoCvDKtHiBfBsArEwApA{A@wD_GeKHiI{@s@?iAhCIjGuHX{D_D{HW_Kr@_EpEcMrCyC|JoDzJ|@~XgLtGR~AhBd@vEsA~VJxD`@dAWxAd@`CpBzCa@~IPnE]`AN~F~BfAlDgAdM`Az@nCWtCmCnI@lApI~F|CHdCkAjCMXXfBi@pDd@dDbENfC~EuCz@r@tD^tAi@Rz@pBVlIvGtB|@fE}@jBwBx@aEZoOy@qAoGoAsCJiBr@}@i@gEEo@}AiAk@sLyW\\uE`AaCfAeA`BOvBj@jGfKfElDnNtBfMcGbAaCzGcFp@gD}@kEwHmSYcJeCUi@kD",
    "pointCount": 110,
@@ -2721,10 +2433,14 @@
    "end": [
     33.330437,
     132.954565
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:107",
+   "id": "高知県:83",
    "region": "kochi",
    "regionName": "高知県",
    "name": "川之江大豊線",
@@ -2734,8 +2450,8 @@
    "curviness": 370.5,
    "flow": 21.2,
    "turnCount": 213,
-   "score": 64.7,
-   "baseScore": 64.7,
+   "score": 76.1,
+   "baseScore": 76.1,
    "spotCount": 0,
    "polyline": "cxrmEomvnXhESxBeAbBjEtAn@vBd@nIe@t@u@A{D^uAjBgCvFmC~@sD|DsGhAoFrCqFzBRbCjA|AB`DcBfEQlAeBzDqAhAZjEbFr@N~Cq@jBcAM{DjCuLpAiBrDSx@~B~D|DrCh@~B{EzEw@UaHxAmCjDqAhNxAjDbBpAD`@e@fAaHzBoAzG}@lDb@|IyBrMj@hDvDbFuJrCQvBuAb@kFlDmGtCBfAbAtCp@ZxAdA\\`CArMwBhBvBdAdCdAlGv@@lH}B|LbJrEhAhIn@v@m@nCaH`DaBdF|@lDfHtD~AjAo@~EoJlCoBrBl@fFXvC|AtANhHgEdEeApAVz@|@XfGfAxBzEMlDxBdAxCx@X`Iw@rD{A`@sD|AiCZ{BlAk@`D|@r@~@`AlQ_ApGr@~CbK[jKx@~FtDdDpE`BdA",
    "pointCount": 110,
@@ -2746,60 +2462,14 @@
    "end": [
     33.771537,
     133.657467
-   ]
-  },
-  {
-   "id": "高知県:108",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "高知空港線",
-   "ref": "13",
-   "highway": "primary",
-   "lengthKm": 3.33,
-   "curviness": 302.3,
-   "flow": 38.7,
-   "turnCount": 26,
-   "score": 64.5,
-   "baseScore": 64.5,
-   "spotCount": 0,
-   "polyline": "kcvkEyx|nX|E\\_H_@uRfAg@~@MhH]\\cCFI|HuWj^Ox@y@U_d@\\}Kf@wOiD`LjDhEV",
-   "pointCount": 17,
-   "start": [
-    33.541816,
-    133.682213
    ],
-   "end": [
-    33.55832,
-    133.672592
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:109",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "黒尊口屋内線",
-   "ref": "381",
-   "highway": "secondary",
-   "lengthKm": 18.71,
-   "curviness": 329.2,
-   "flow": 20,
-   "turnCount": 308,
-   "score": 63.1,
-   "baseScore": 63.1,
-   "spotCount": 0,
-   "polyline": "mq~hEqmqiXtBiA|@@vCtNwAr@Wz@mD`ByHbHjC|FyAtCU~CmFlG}AzEUfBNrIyCjCsHjDsCvCMdCvBlCtE~@v@tB|EhDlAzFdDbAxEZDhA~@r@~BfGtG\\|FoAnBVAzA_PbKm@zB[vHbAnClB`AnLu@vHxD^|Bw@|BeDbDeFxCaCbEiCcAqANsJdPgBz@{F`AuB~B_@bFr@vGqApFA|CxB`JLvJqBdF_KfKo@zGf@hB`Cr@nP{FbIAhDmAxACv@fAHtDfCrExAzJbAvAlEjBFjEkCrE}CfAoCJuIsCaCp@eAfA[zDp@dCAnC^lBa@zAFbKaDpFKnCzE~Sj@bHUjEqDbD{@lFkAvBeOtMaGvDqHnL{HnIqEdJcA~E\\pC_FhKiBnCeCfA_FdEWzC`A~DmBvAp@`DlAr@dKF^\\c@xMRlJ{@`AiC`A}CSqB`@iCtD_AbFqBlF}Ad@cDF_GxFuG|AwHtWiEzFwF`KuGdTw@v@aCBoApAqCdPLn@~A|@f@xAjAhFZpFqAhBaEjA_AnBDhBrAfDQtBkBbAyPrAoCnFo@hIwFhB{BbJqBfBwBj@",
-   "pointCount": 151,
-   "start": [
-    33.093506,
-    132.804893
-   ],
-   "end": [
-    33.127404,
-    132.678961
-   ]
-  },
-  {
-   "id": "高知県:110",
+   "id": "高知県:84",
    "region": "kochi",
    "regionName": "高知県",
    "name": "中村宿毛線",
@@ -2809,8 +2479,8 @@
    "curviness": 330.1,
    "flow": 21.3,
    "turnCount": 288,
-   "score": 62.9,
-   "baseScore": 62.9,
+   "score": 74,
+   "baseScore": 74,
    "spotCount": 0,
    "polyline": "qi|gEk|xiX~ErKfG`CrEbDrNvOhDBrDn@fDm@rEoBlKlD`BhAjIbL`HxMxClAhIEjFjAnC@zCjBjBDrA_Af@kCdCsBfF|MvD`FvGvFvJvBpBbBAlAiFlFgAxDD|ZbCvEVtA}@|Pz@lKuAbKa@xKuEvHWbCmBvFA|BxBjHpDbVTjFfE~NrAxHpB~Bx@`DoH~FSbBPlAjErG|C~AxABlBgBzAZ\\dA`@tJzCtDy@PcCaAmDt@}FxGaA\\uGoCiCqEmASeBxAg@lAi@~FqAz@Mt@FbBnBdE@fAg@f@aEOy@hBNfChBhEs@rAq@zSg@dG_AzDGvD[TuGoCiAEeEx@yBtDkAR]v@sA@|AbDm@|GvC~CqAZqBrGX|G_CtQmAzA{EtAWlA~DbDDvAy@|EbCjFWlERhBhFlHtFG`CnAf@nErA|EhGzIT~By@vDJ|@~@\\dCu@nAN`BtIdAhBnHYhDvAh@hAdCpPtAlApCTfCfC?vTx@vC~A^lPH`EgCdGoBzGXtAeAfB_@jBf@~DrFGxA{ArDgBtAeEbA_ErBg@tF\\pC}B|PuBbHoJpQyDfCl@jCOrC",
    "pointCount": 154,
@@ -2821,10 +2491,14 @@
    "end": [
     32.88519,
     132.723286
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:111",
+   "id": "高知県:85",
    "region": "kochi",
    "regionName": "高知県",
    "name": "中村下田ノ口線",
@@ -2834,8 +2508,8 @@
    "curviness": 345.1,
    "flow": 21.3,
    "turnCount": 172,
-   "score": 62.9,
-   "baseScore": 62.9,
+   "score": 74,
+   "baseScore": 74,
    "spotCount": 0,
    "polyline": "}iahEa}tjXu@}CEoKiB{BgCyAyGOsHnBc@}@yBcAoGw@oObAcL[mEwAaB\\eAs@UuBcAqAXmD{AgAsLs@mDXkEuA{AuAsAKoFlAkDB}AwBi@yCwBgBfAaFk@cAaFLwCn@iBc@c@^a@zBw@l@mCVaBo@iFn@kDuFiDc@yE}BoVy@}At@qHdMwDjAs@i@}@kFmFiFq@OgFdAqDsAqGEiCr@q@g@eFsJaE_@gAaAgIcCkA?}@~AwBdAcCU]mBa@OgFfCkFb@kD~CwADiAeA_BoDu@sMeAaCaGkCiINeBmAcBkEyEAkLwEuAF_IvC}AjLaC~D_BpHqMzOeF~AoFI{JdBuBoAaAwFqCZ",
    "pointCount": 92,
@@ -2846,10 +2520,14 @@
    "end": [
     33.017792,
     132.999288
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:112",
+   "id": "高知県:86",
    "region": "kochi",
    "regionName": "高知県",
    "name": "甲殿弘岡上線",
@@ -2859,8 +2537,8 @@
    "curviness": 314.8,
    "flow": 22.3,
    "turnCount": 94,
-   "score": 62.7,
-   "baseScore": 62.7,
+   "score": 73.7,
+   "baseScore": 73.7,
    "spotCount": 0,
    "polyline": "quikEq}{mXiHcEiCbAsELB`CyD?Q[kDUwCp@qFdHcA|DaBlAk@tBgBvCkBrH}ErKqDpMiCtDsBxFOpBbCrQqApCFjH}@tFiBtEKrDgAbDErD}CfLeDvZvChHjBfAXx@FlDoBxGT`KdCtWrAnCRnIiBnBG`GqCdNmExJgAnGiAjByBvJz@zDx@tJWdELpFa@F",
    "pointCount": 51,
@@ -2871,35 +2549,13 @@
    "end": [
     33.494412,
     133.456762
-   ]
-  },
-  {
-   "id": "高知県:113",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "坂瀬吉野線",
-   "ref": "264",
-   "highway": "secondary",
-   "lengthKm": 9.21,
-   "curviness": 336.8,
-   "flow": 19.9,
-   "turnCount": 156,
-   "score": 62.5,
-   "baseScore": 62.5,
-   "spotCount": 0,
-   "polyline": "{tkmEaidnXz@hAtCiClFRhM}@pHkI~Bq@tJdAdEnBtG}@hAp@vCnEfB\\|BeAhBmFz@c@`JjNLpAm@rCK~CTlBtAdChDxAjC?fRfHhBGxCmBlAIxJvCrCL|GeCnH@nDc@TiAdB_AfBqEnCwD~ByAjDLvC`Ev@H^oA`@kJzBiBnBTpFfCvBFz@e@XgBt@mAbEe@jHpHzCbA`Dk@tJwD`D|@tCQfBiBrAwLn@q@xBRdAn@`EtIzEbErBjD^?hBoCbDi@zEjBrEKnAwAhBgGvB]bEnAfB{ANcB}BgDgA{ChAwEdA_ApBT|AtCpF`FbIl@xFvDnDX",
-   "pointCount": 86,
-   "start": [
-    33.815977,
-    133.556807
    ],
-   "end": [
-    33.753832,
-    133.558055
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "高知県:114",
+   "id": "高知県:87",
    "region": "kochi",
    "regionName": "高知県",
    "name": "繁藤西町線",
@@ -2909,8 +2565,8 @@
    "curviness": 325.9,
    "flow": 21.7,
    "turnCount": 54,
-   "score": 62,
-   "baseScore": 62,
+   "score": 72.8,
+   "baseScore": 72.8,
    "spotCount": 0,
    "polyline": "a`jlE_h}nXz@\\dCc@b@yDhFoF~DyAxBrAbF\\nA}AnBuFbACx@oAbBi@lAwAhEkBpBMvA_BxESdKbDxCtD|Bn@nB`HxExF|ApIbKjI~AbCnBvGr@xFpCj@`Az@`E`@zHrFpFbC",
    "pointCount": 33,
@@ -2921,10 +2577,14 @@
    "end": [
     33.619541,
     133.676744
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:115",
+   "id": "高知県:88",
    "region": "kochi",
    "regionName": "高知県",
    "name": "安田東洋線",
@@ -2934,8 +2594,8 @@
    "curviness": 315.7,
    "flow": 19.9,
    "turnCount": 475,
-   "score": 61.4,
-   "baseScore": 61.4,
+   "score": 72.2,
+   "baseScore": 72.2,
    "spotCount": 0,
    "polyline": "qpskEmcuqXy@nCI`Dx@lBzDhCfAhB]hEcBx@eD`EuO~AePcE_GeGyGBmB~@cD|FgFfCWl@?jBjBpJEhC{@vCaBjBeMzB{@j@S~BdD~GlAjLrCnNfA`KCpIw@fGyBrE{AnAkE`AyDMkNmJ[gB?kGeBoJqAeE}CkCsAT{A`DwIhJoBlI_BrAgBj@gDHuEu@uB}@gEgFwAk@yB~@wFxHiFjBuKoAwIoBaHfAkOj@wAqByBcI{@yAuR}ImHkF}@~AQhEfCzH`BbIH~FoAzQ\\vAjCbEr@pDHrCoA`EsBp@mWqBkA_@}@iAOsCfAyLImKbAwI[QgA~AqFrSkBxA`Dm@v@h@yBnFmApIoAhEeC~@e@vAR~@rBLVdEuEtB_D`FqA`@}CUi@x@fA~BnC~AhBGf@b@vCT`Av@jB`G~ClDIzVb@tBrBhCVjD|@lAdIj@|A|APrBfBjEFdAcDdGdClEu@jGhA`CNzCnAp@zCuBlG`G`A`CUhDxAjBTbAu@tDkCjCcDvA]j@HlAzDhF`Df@hC|AlCRbC~BVfBOtAcDt@eAdC^bEcAbEdAhBrFwAhBz@DdA}BxDWdCzApCrDAvA|AV`D{@jCsAvAThClBzAdEhIe@rDn@~AjH|BnBjBVtDg@zArB`HzARjEaAdBr@NzAlAnCg@zD?bBb@pAtCl@hAx@|HHr@fAzD\\fBhBvOjFdExB`CQvBf@zBS|BmAlPeNtVqD~EsBvCBnBfClBz@fAGfC_BnDIbJbBbFi@pGvB~AEfCyAfA\\Z|Aq@zGcEvHa@fEd@~CrB`EYfB}AfBg@pDXhBx@nAvChBzD~IzBvAvC@fArAn@`D|@b@dBq@rBkGz@_AhDwAtBb@f@rB[pJjAbDjKpJdFtI|NhKrEhIxS`YHz@}@xE|@jD`F~GjLnIhDjFvAbFhChW~BbFtBfB~EtBjCNjBqAdE}GjTeFzBlAdA`DAj@cBL{@tAGbBv@nDtCvCfGb@",
    "pointCount": 260,
@@ -2946,35 +2606,14 @@
    "end": [
     33.500606,
     134.011521
-   ]
-  },
-  {
-   "id": "高知県:116",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "小味野々川口線",
-   "ref": "328",
-   "highway": "secondary",
-   "lengthKm": 8.44,
-   "curviness": 307.6,
-   "flow": 20.8,
-   "turnCount": 125,
-   "score": 61.3,
-   "baseScore": 61.3,
-   "spotCount": 0,
-   "polyline": "w_siEypgkX}@BkIoD{HfAeDcCoEUmDsCkBO{M`MqOhKaBvGy@xGkGe@aAcAqDkNyC{HoCyDsCl@uCdBaCrGIrFiErAcChBsHeIgD{BsCXkEvGsI|CaEFgCtCaHn@eAf@RzGQ~AmA`AwBFwGpEwIvQqAxFQfHsDdMDlGWp@oLfI}GpCy@fBmHtAcD~C[fCkD|D{K`C{ElC_G`BiBtA_C{AMhCm@R}DLmDuBi@sAoG|A{BrBkCnLc@`@",
-   "pointCount": 64,
-   "start": [
-    33.198202,
-    133.081885
    ],
-   "end": [
-    33.251641,
-    133.053139
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:117",
+   "id": "高知県:89",
    "region": "kochi",
    "regionName": "高知県",
    "name": "下山越知線",
@@ -2984,8 +2623,8 @@
    "curviness": 268.8,
    "flow": 23,
    "turnCount": 59,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.6,
+   "baseScore": 70.6,
    "spotCount": 0,
    "polyline": "qtqkEskplX_FjCiEpDqCnEqDhCsGjD}I`CiBhBmEtAc@|BV|GnErJjGvEv@`Bi@xD_AvByBpAmEf@kJcBkGlCeI|IeIpNmClB_AdBt@vDlDrG|@fZrAdEzB~@v@fC_AbGt@vKvAjAv@bBoBhIlBbOrEgB",
    "pointCount": 37,
@@ -2996,10 +2635,13 @@
    "end": [
     33.529941,
     133.255471
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "高知県:118",
+   "id": "高知県:90",
    "region": "kochi",
    "regionName": "高知県",
    "name": "山川野市線",
@@ -3009,8 +2651,8 @@
    "curviness": 292.4,
    "flow": 20.6,
    "turnCount": 96,
-   "score": 59.8,
-   "baseScore": 59.8,
+   "score": 70.2,
+   "baseScore": 70.2,
    "spotCount": 0,
    "polyline": "wj~kEiqpoX|@rA`NzHxAzBf@pCaDlHwF~E_P_EYLn@jIrAdDl@zIuE`LqCrL}A`AyAk@_@tCbCdDrFfEZ~E]`BLp@rFoAxEeFzM_IdCRhDbMDjE_AnAqI~@[b@Lr@rGfFhCz@tBGhK}DdAxAxCjAhCvBpAd\\qCfOb@|CzEjFxG`DdBhBxDjB|FtAdMpK|AzCjCxA",
    "pointCount": 50,
@@ -3021,10 +2663,14 @@
    "end": [
     33.566423,
     133.74719
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:119",
+   "id": "高知県:91",
    "region": "kochi",
    "regionName": "高知県",
    "name": "間崎布堂ヶ谷線",
@@ -3034,8 +2680,8 @@
    "curviness": 285.3,
    "flow": 21.5,
    "turnCount": 49,
-   "score": 59.3,
-   "baseScore": 59.3,
+   "score": 69.7,
+   "baseScore": 69.7,
    "spotCount": 0,
    "polyline": "ydrgEgonjXjEsIxJkIp@}AhBgAVu@Y}A{KiIi@uCGcF_DuJyAiNJwPWiFRuFSsEp@mJdBoK?qMi@yDp@mBGwIY_BsAaBiBTS~AiAAk@yCaCeF]gIs@m@",
    "pointCount": 31,
@@ -3046,10 +2692,13 @@
    "end": [
     32.868218,
     132.986267
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "高知県:120",
+   "id": "高知県:92",
    "region": "kochi",
    "regionName": "高知県",
    "name": "弘岡下種崎線",
@@ -3059,8 +2708,8 @@
    "curviness": 288.2,
    "flow": 20.4,
    "turnCount": 93,
-   "score": 59.3,
-   "baseScore": 59.3,
+   "score": 69.7,
+   "baseScore": 69.7,
    "spotCount": 0,
    "polyline": "{`okE_}umX|CcFh@uE~ByB`Do@vE}EnD]dFd@fFjBn@Oh@_Br@cJv@aD~Bgk@ScA{FoGAo@bAmAd@_Ci@cD}BaDlAcEz@wIMqB|@uAlAkHLeHrEkGp@}CjB}AbE@hDu@hCzA`Bu@`LuQ|IqTRwHo@sJkB}FbBoGEeAqAuCsCiAmBaF_BmBkGc@iIiBuG|@{EaAgAaE_@eE{A{DY_E",
    "pointCount": 53,
@@ -3071,10 +2720,13 @@
    "end": [
     33.497801,
     133.531193
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "高知県:121",
+   "id": "高知県:93",
    "region": "kochi",
    "regionName": "高知県",
    "name": "田井大瀬線",
@@ -3084,8 +2736,8 @@
    "curviness": 275.3,
    "flow": 21.9,
    "turnCount": 54,
-   "score": 59.3,
-   "baseScore": 59.3,
+   "score": 69.6,
+   "baseScore": 69.6,
    "spotCount": 0,
    "polyline": "ug_mEyadnXkFcGcAeJeBiIzJkNhC_[?eHgA}HoLiGoE{EiD{M?gEo@_FuBsCqCKIqCg@aB_KwQqAmEcDeDbAsBCsEuCsBB_AjBeBU{Ld@uI`AyFfBcERgB",
    "pointCount": 30,
@@ -3096,35 +2748,13 @@
    "end": [
     33.760077,
     133.593928
-   ]
-  },
-  {
-   "id": "高知県:122",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "桂浜はりまや線",
-   "ref": "34",
-   "highway": "primary",
-   "lengthKm": 3.43,
-   "curviness": 247.3,
-   "flow": 25.7,
-   "turnCount": 33,
-   "score": 59,
-   "baseScore": 59,
-   "spotCount": 0,
-   "polyline": "}tlkEswenXyBxBS|@pDv_@}GtKu@tM}F`JkC~JgZ`@e@xQnA`IhD|H_A`EfBtCd@lDcG`BkQnAI{C",
-   "pointCount": 18,
-   "start": [
-    33.493433,
-    133.564257
    ],
-   "end": [
-    33.504117,
-    133.540953
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "高知県:123",
+   "id": "高知県:94",
    "region": "kochi",
    "regionName": "高知県",
    "name": "土佐清水宿毛線",
@@ -3134,8 +2764,8 @@
    "curviness": 280.8,
    "flow": 19.7,
    "turnCount": 399,
-   "score": 58.9,
-   "baseScore": 58.9,
+   "score": 69.3,
+   "baseScore": 69.3,
    "spotCount": 0,
    "polyline": "m_chEq|oiXnJyEbF{@zCsA|AyAbHiLfMkJxKoOvJ}EfAJbB`C|C@rEmDrIiChAgBl@_E`@a@dCYdEmBhEXdCjCpD_@|Cj@tAk@pBmFReGSqIdAaEzAcBt\\oStCeElE?zBmBdAcD?oCm@[{Cf@cB}CHgFpAsCsA_M\\_A~DuBhAmFrAu@hBuDSwDl@eEaCqHcB_NVqQxFmSzBcDlFeClEXvAWrGyFfBu@`BK~Er@`G}AhB_D`EaChFqFnHkC|ECnInFjEhAtBCfEqBLeHhAsFqA{ENsFgDsGqD}RmDeGuDkL@oB~CsQg@kEiBsCF_BnGcDbCEt@TrJjJvBVlIoEvF{AjIuDvPyQ`@gBwB{EFyDxDaK~CcBnLeAvH`@n@e@bFqLcCwHyGeD}BI{D{DTwBfBgFnEwCx@iBBkBgCgQ}AyGgE{DeHmKsD{CcDoG{AkH@aIh@eAzD{ChDe@vBT`Cp@fAfA~@vJ|D~Az@~ApCtBlCN~DkAxDaEdCwE~D{C`EkIwAyDyF}A{GeMqEkFIsIXkBt@_@rGJ`AbBW~Dz@tCnGzChD_@~BiDlEqJvBcJKwC^kA`C~@z@fF`BbAxCxHtFz@dDlCfE?t@mANsEa@iGwBkFAqEnBqHxBu@h@_Cf@a@vCS`EgJCs@wH}P_CoD{AiAh@m@xGeB|CiGzAi@_@}Bx@wCmAaEkDuDe@uB\\_ANsEsCyV}CkEmBeAsBd@kCjEiF@kBuCsCh@_DvCs@q@mH_Ks@{CGyM`BuMfDaJvUoAxG_AdQiHlPsTdFe@~JqGp@kCb@iGzH}G",
    "pointCount": 209,
@@ -3146,10 +2776,14 @@
    "end": [
     32.864624,
     132.950294
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:124",
+   "id": "高知県:95",
    "region": "kochi",
    "regionName": "高知県",
    "name": "本川大杉線",
@@ -3159,8 +2793,8 @@
    "curviness": 293.8,
    "flow": 19.2,
    "turnCount": 257,
-   "score": 58.5,
-   "baseScore": 58.5,
+   "score": 68.9,
+   "baseScore": 68.9,
    "spotCount": 0,
    "polyline": "qpemEc{qmXzBbK`BpEtA`BQpBhAjAb@zB?dDx@xDYxBZ|FUtFy@xEyBfEcCxAmDn@mBbBsEv@yCnD{BnAmA|CFbCcA~Bx@vBIzCv@`D]zB~@~B\\fH}AtPMxIaC~Bg@tBuAz@zAdCpA`OnAhAbBvDdAtFKnFeAlE}E|NWdCsBtDtAnLxBpHhCpN~@~KKfL_ExJWvHsB`EoDhM}ChBSl@fA~LyAvECzAjBnK~AjCjDrCRnAy@nBsC^eBpAkASyBbAeBvDc@bImAxD{D~FsFhDaArB{BbAoAfCu@vFzBtKJpCmDvD_DVuBvC_A`ES`Gx@zDk@xGoBxF]nELvI_A|DPrJdDdGdCx@|GnErJvCrEdDt@lDzDdI~BlI~E`Kh@vEhA|CpCfDlBfAhFDbA`AjAdJ{AxIlBvDnDfD`DtA~C`DtDZ`CrAdFzLpCpD~Kb@nC|FXlDtAzBzCjCrMzGlCfDhC~AP`A]~Gd@rJm@jFZbApEbDH~@yBpFcAnLcG~JkEpFg@vEfA|EKtCrE|RH|FzArCbDxB",
    "pointCount": 141,
@@ -3171,10 +2805,44 @@
    "end": [
     33.772507,
     133.319289
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:125",
+   "id": "高知県:96",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "高知春野線",
+   "ref": "37",
+   "highway": "primary",
+   "lengthKm": 8.42,
+   "curviness": 171.3,
+   "flow": 31.4,
+   "turnCount": 46,
+   "score": 67.9,
+   "baseScore": 87.6,
+   "spotCount": 0,
+   "polyline": "odykEun|mXzGw@`IJ~c@lKx[d[hJvMjBfAvCDrFxE|AG~DaG|C`@bCoA~CvHdAVjB]tAbBfFj@`B`HlDzCf@|EW|Et@jBlAb@|SJbChBhApDRlHvE~MfAt@vGYfEoCpKr@bBe@pCj@dD?~DkCtFgA|@q@`BA`k@xJvE}Ava@pIpIBlC|AjPjClIoD`JfD",
+   "pointCount": 48,
+   "start": [
+    33.55736,
+    133.51675
+   ],
+   "end": [
+    33.49352,
+    133.49273
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "高知県:97",
    "region": "kochi",
    "regionName": "高知県",
    "name": "大河内朝倉停車場線",
@@ -3184,8 +2852,8 @@
    "curviness": 274.3,
    "flow": 19.5,
    "turnCount": 69,
-   "score": 57.2,
-   "baseScore": 57.2,
+   "score": 67.1,
+   "baseScore": 67.1,
    "spotCount": 0,
    "polyline": "mx~kEiatmXQzEvPhA`FdBlBnBpAAxCuC`FaK`C_PhC_Ax@qClAaAjIcBzBh@|J[nIeApAg@`@gAjGmAbLKtFyFfDcGnFmCxF^lDY|A{AjPoAzDmAjByA~CuEdSk]nB}K|A]",
    "pointCount": 33,
@@ -3196,60 +2864,14 @@
    "end": [
     33.552323,
     133.492775
-   ]
-  },
-  {
-   "id": "高知県:126",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "春野赤岡線",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 6.15,
-   "curviness": 216.9,
-   "flow": 23.8,
-   "turnCount": 56,
-   "score": 56.3,
-   "baseScore": 56.3,
-   "spotCount": 0,
-   "polyline": "g_okEssqmXdu@lB|C[fCyBjBa@`SqKnGeBpGeJ`IrClKWjFvA|BpBq@`EbAjDpBi@|BuAdAeBvUii@jL}JnGmIvCYfC}A~FsOfDgDpDwK|DoD~D[`DyAzI}QvBuHv@uFaAqC",
-   "pointCount": 32,
-   "start": [
-    33.505316,
-    133.461221
    ],
-   "end": [
-    33.465046,
-    133.488094
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:127",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "柏島二ツ石線",
-   "ref": "43",
-   "highway": "primary",
-   "lengthKm": 4.6,
-   "curviness": 316.7,
-   "flow": 17.2,
-   "turnCount": 85,
-   "score": 56.2,
-   "baseScore": 56.2,
-   "spotCount": 0,
-   "polyline": "cnagEaurhXhAfJMfDqCtLZjH|A~CfA|@lHrB|DvCbBAvBgF~CiAjBsBjDJ~CnEzC[hBaDfECxBe@rDyBrDqFdC}BbAIj@\\Tt@D`IjBdDNdAg@pAkDdBeAfHTfBlDxJy@lHGlOr@vJi@|HcEpFmCvAwBcAgDgDuAiESB",
-   "pointCount": 43,
-   "start": [
-    32.780658,
-    132.647367
-   ],
-   "end": [
-    32.771216,
-    132.628157
-   ]
-  },
-  {
-   "id": "高知県:128",
+   "id": "高知県:98",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道439号",
@@ -3259,8 +2881,8 @@
    "curviness": 285.6,
    "flow": 21,
    "turnCount": 249,
-   "score": 56.2,
-   "baseScore": 56.2,
+   "score": 66.4,
+   "baseScore": 66.4,
    "spotCount": 0,
    "polyline": "mqgkEahhkXrDEbHrCr@nARjHdApBWp@e@MkAmBKiDw@c@g@TrBfPN|G|@~AnDvCQx@}IeCg@kB^_F_DyBEqBs@eA[Pp@lACpC`BhB}A`KjCdDnBtHbFdAtFbEfCTjA~Ab@An@yAfCbAn_@xh@p@~F~E?NZQn@oBtAiF~BsEtHh@vKy@nE}AlCCnEiAhDlD~NoApBoA`FU|FoBdBwC|FEfAd@vBcAtE`@hCGjEhA|CnCdB^fAi@pM_B`DInApArExAjBzAn@BbAeBlE_FtCkA|CqCfDiA`KH|GvBjCvBjFnCnDtK~HtHfAjBbAdGvLdNnId@bGxCvFfObL`A`C`CdLjB~OjCxDbG|CfElOnAhBhRdFhLbAdJq@vLaEdEo@jG{G~Nq^t@WrIj@zBqBlBkFbE{B`NHbB[|CkC~IqSnM}BdGqBvNkKzAK|Jv@tIwAxCaDvEsUbBqBvBT`EtEhIrNjCxChBXvLi@nBtHjBxAlBEpEaDpCu@|YbA",
    "pointCount": 132,
@@ -3271,10 +2893,45 @@
    "end": [
     33.39153,
     133.023809
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:129",
+   "id": "高知県:99",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "柏島二ツ石線",
+   "ref": "43",
+   "highway": "primary",
+   "lengthKm": 4.6,
+   "curviness": 316.7,
+   "flow": 17.2,
+   "turnCount": 85,
+   "score": 66.1,
+   "baseScore": 66.1,
+   "spotCount": 0,
+   "polyline": "cnagEaurhXhAfJMfDqCtLZjH|A~CfA|@lHrB|DvCbBAvBgF~CiAjBsBjDJ~CnEzC[hBaDfECxBe@rDyBrDqFdC}BbAIj@\\Tt@D`IjBdDNdAg@pAkDdBeAfHTfBlDxJy@lHGlOr@vJi@|HcEpFmCvAwBcAgDgDuAiESB",
+   "pointCount": 43,
+   "start": [
+    32.780658,
+    132.647367
+   ],
+   "end": [
+    32.771216,
+    132.628157
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing",
+    "deadend"
+   ]
+  },
+  {
+   "id": "高知県:100",
    "region": "kochi",
    "regionName": "高知県",
    "name": "宿毛宗呂下川口線",
@@ -3284,8 +2941,8 @@
    "curviness": 258.9,
    "flow": 18.7,
    "turnCount": 274,
-   "score": 56.1,
-   "baseScore": 56.1,
+   "score": 66,
+   "baseScore": 66,
    "spotCount": 0,
    "polyline": "q_tgEuwaiX\\eBmAyIt@iIzImThI_JjAo@nA?`Gz@fDrAvAMvEmG~BkFbEwC`CR~F~FfD?rDiCjEuF~R}L|AmBr@qD_@oJv@mIRkJwCkRxBwHa@_MvB{Ez@iE?gDcBoEd@mDlIErAS~B_BrBL`Ik@jCyGtCWdAyDlC?xGqHpCkBnA_@tDNCw@_DqCJ_B|@m@lE_@bMwKr@_EtEZ|B}AxAUl@_Ab@uCGsF]iAuCwBw@wEpDyDvAwIpGyDhG{@dBw@hCiGnC{AbW}FdGm@tCeDh@_C|EwCB{D`BcDe@yD\\qHrByEdHeH_@eAgBy@z@oBGu@}GiD]mBlHmAzEaFLaBYcDe@kAaAe@xCwHzAm@dGI|F{@bEgJXcEs@uH`A{Wh@uCzAiCvE_Bp@sAB{FaDmDc@yCt@mBlKgB|@w@|BwQtAgFrAo@jJj@vD[tBkAfJ_JrE{A~C_DbDcBrEk@hI}ElPM`F`CjGzEhEn@nAi@vCgEpAq@rK`BnMeAxCRfGhBzEIxAc@fA}B|@uIFuItAmSbCeDdMgIdC{DLcCqBsWG}LdEiWf@_BjA_A`MsA",
    "pointCount": 149,
@@ -3296,10 +2953,14 @@
    "end": [
     32.781545,
     132.843872
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:130",
+   "id": "高知県:101",
    "region": "kochi",
    "regionName": "高知県",
    "name": "奈比賀川北線",
@@ -3309,8 +2970,8 @@
    "curviness": 247.2,
    "flow": 19.9,
    "turnCount": 74,
-   "score": 56.1,
-   "baseScore": 56.1,
+   "score": 65.9,
+   "baseScore": 65.9,
    "spotCount": 0,
    "polyline": "a`skE_mqpX`@~CnAvCJtCd@^bF}@jCkG~@qIdAiAj@TdA`F~AlDxAfBdCf@xCoArBiEpC}KlB}C`C_ApA`Bd@hDnAhD~AfPhAj@dBdDlEpAnI_B`JzCbKfG`AtAj@rCp@vXhBnCzChJlA|LtHpK`ItHzCpGrE`F`GdJ`FvQpCpN|B|EbA|D",
    "pointCount": 44,
@@ -3321,10 +2982,13 @@
    "end": [
     33.49675,
     133.921197
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "高知県:131",
+   "id": "高知県:102",
    "region": "kochi",
    "regionName": "高知県",
    "name": "西土佐松野線",
@@ -3334,8 +2998,8 @@
    "curviness": 249.9,
    "flow": 18.6,
    "turnCount": 275,
-   "score": 55.5,
-   "baseScore": 55.5,
+   "score": 65.3,
+   "baseScore": 65.3,
    "spotCount": 0,
    "polyline": "a`kiEmcpiX~DjClBbDvEpOd@`HjGvS~EdFzP~BLnBShAmD|BqAxC|NxMr@nCzBp@zBlCpCx@fEKbMkF~B~AZdA}@zGd@pCpBnAhD@fGqJdEuOhFeChCiDb@gIoDyEi@uB`BkC|Cs@n@Xh@jAtBdL`EjHdBjAxCLhDoBx@AvI`VtAnA`GbBr@rAkP|OgGtA}D`Fu@tCoCvAtFrMDxBuFAuIcC{At@sChKaA~KeKvOsFzAyPX_CnAkC^qChBmBnEa@dCKlBj@|BtBfCpGnB~@rAe@|BqCjA{CrGkB|@kBmAiA{B}BZkFuBqDOyEtC}CzLqFjIiCrFe@vBCjDxDhHbGnCdFxDpE|@|AeAfAoBn@sCO{AeGgKHiBpAsDrEo@pIl@xCOtGkBpBsA`CwCfCiAnC@nCt@b@d@Gv@eEdEu@bF\\|Mx@tHKvAuAtBgBz@kFX{HhGcBhEh@nA`F`DtMf@p@`Ad@tCg@|@wKfHoDvJuOjVsIjGmCfRwBjX_E~IiCrTeG|EgItLcLpIsAbIqAbf@_BhB}LxDsDfDk@`FD~H_A|KFnEe@|AsArA",
    "pointCount": 146,
@@ -3346,10 +3010,14 @@
    "end": [
     33.162185,
     132.698578
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:132",
+   "id": "高知県:103",
    "region": "kochi",
    "regionName": "高知県",
    "name": "龍河洞公園線",
@@ -3359,8 +3027,8 @@
    "curviness": 269.4,
    "flow": 18.6,
    "turnCount": 64,
-   "score": 54.5,
-   "baseScore": 54.5,
+   "score": 64.1,
+   "baseScore": 64.1,
    "spotCount": 0,
    "polyline": "mvalEawfoXqGwNaFcGeA_HiCwEcCeBaB{CwEkEgF_@iIfC}BdL}BxB[dFe@lA}DdDcAd@gI{@yAdA_AlFgDzEqC~Bq@zAgAnHdBzHcBvDSxDdDvHsGjIg@rI\\pR^rCnBzBfBvGPxC_@~B",
    "pointCount": 35,
@@ -3371,110 +3039,14 @@
    "end": [
     33.616761,
     133.715374
-   ]
-  },
-  {
-   "id": "高知県:133",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "春野赤岡線",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 3.36,
-   "curviness": 256.6,
-   "flow": 19.6,
-   "turnCount": 44,
-   "score": 54.2,
-   "baseScore": 54.2,
-   "spotCount": 0,
-   "polyline": "wyjkEy``nXO`At@tIUrEr@tGpI|^fBhFRvC|BjAfBvElChEjAl@~IbYf@zFiE~Am@dAtAjD~AtIdCjDrCNbAf@vC|GxHrI~FnEjCR",
-   "pointCount": 25,
-   "start": [
-    33.48396,
-    133.535014
    ],
-   "end": [
-    33.471384,
-    133.506533
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:134",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "高知南環状線",
-   "ref": "36",
-   "highway": "primary",
-   "lengthKm": 3.95,
-   "curviness": 245.5,
-   "flow": 20.2,
-   "turnCount": 48,
-   "score": 54.2,
-   "baseScore": 54.2,
-   "spotCount": 0,
-   "polyline": "ibqkEkv~mXgHh@uFsAwAcAbFjB~EVhWoGhE[jRdE~Bm@lG_EdBWdBr@vFbGtIzBjMiGk@sCeCkDt@wAHaH~FyHrA{ItAmDf@WoC_UcCiH",
-   "pointCount": 26,
-   "start": [
-    33.516055,
-    133.528218
-   ],
-   "end": [
-    33.500296,
-    133.541883
-   ]
-  },
-  {
-   "id": "高知県:135",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "長者佐川線",
-   "ref": "302",
-   "highway": "secondary",
-   "lengthKm": 8.98,
-   "curviness": 211.1,
-   "flow": 19.4,
-   "turnCount": 98,
-   "score": 54,
-   "baseScore": 54,
-   "spotCount": 0,
-   "polyline": "semkEoeclXa@Wg@aCIkE`B{FEkDkAqAsJd@aDuChHySfAmObAqEdA{AjEcC`@}LbBuFdAgI|DoDbAyBeIu_@@gDZmHl@wCrJiNXiLfByW|AgKlBoFLqG_AkJjAoJYiMmHuUyCeEoDmIcGkJwD}DmAHeBzB_CpAaCw@kKVoGg@{KkCoIgLqDoBcAeBvOoMhFcDMyDvGCnD_EeAsHZmCMuMyBmK",
-   "pointCount": 56,
-   "start": [
-    33.496104,
-    133.223438
-   ],
-   "end": [
-    33.501666,
-    133.294276
-   ]
-  },
-  {
-   "id": "高知県:136",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "出口古津賀線",
-   "ref": "339",
-   "highway": "secondary",
-   "lengthKm": 3.79,
-   "curviness": 249.9,
-   "flow": 17.9,
-   "turnCount": 53,
-   "score": 53.9,
-   "baseScore": 53.9,
-   "spotCount": 0,
-   "polyline": "wnihEefwjXaAdEgFtImDfA[r@HtHlAzIH|Ja@`EyAtDY~EeDzD}AlHgAzAh@pEe@lE|@xHgC`GBdApDrKfFlJRtIoAxH?nDtFpL`@|Io@|DD|DpDrLOfB",
-   "pointCount": 30,
-   "start": [
-    32.985557,
-    132.998273
-   ],
-   "end": [
-    32.986559,
-    132.962021
-   ]
-  },
-  {
-   "id": "高知県:137",
+   "id": "高知県:104",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道439号",
@@ -3484,8 +3056,8 @@
    "curviness": 291.7,
    "flow": 19.1,
    "turnCount": 138,
-   "score": 53.9,
-   "baseScore": 53.9,
+   "score": 63.7,
+   "baseScore": 63.7,
    "spotCount": 0,
    "polyline": "ig{lEs}~mX~LjJ`K`ERtByClFNbFz@jBhHrFz@xEaAtCiF~CuDnEa@bBNlB`AvAvMJrC|@zCvSzFxIhAvDdBxBvAtDzAhKfCfE`HnDhGoBtDuCtCh@xDiAdCGvFxBdB|InALfAyArEw@dCmA~CCpATtAvBnEtBhEtH|FxDdJ`NrFnLjEhFlCnAdCvCzDzIbCxK@fD\\|@jBb@tDwCbAGvB`CjAjCnEhExBpHPvBuDlFeAn@PhCbB`Cd@xDzA|CpA|@j@vBzHhHZtBdGzEtKz^",
    "pointCount": 71,
@@ -3496,10 +3068,14 @@
    "end": [
     33.688197,
     133.472078
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:138",
+   "id": "高知県:105",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道494号",
@@ -3509,8 +3085,8 @@
    "curviness": 306.7,
    "flow": 19,
    "turnCount": 77,
-   "score": 53.8,
-   "baseScore": 53.8,
+   "score": 63.5,
+   "baseScore": 63.5,
    "spotCount": 0,
    "polyline": "sy_kEynqlXaBrJJdEpAdDzFdGjAlG_@vDkAlDaE~FoYhSsG~AqDIsCw@gDaBuHaGuDeAaDLgKfDmN~@kBm@g@cBy@[cEr@aAlGx@bGeB^a@tIyBv@w@jDeDbDsBtFuDhD_AbCeE~A_E^mJmA",
    "pointCount": 36,
@@ -3521,10 +3097,14 @@
    "end": [
     33.453344,
     133.275841
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:139",
+   "id": "高知県:106",
    "region": "kochi",
    "regionName": "高知県",
    "name": "足摺岬公園線",
@@ -3534,8 +3114,8 @@
    "curviness": 252.6,
    "flow": 17.8,
    "turnCount": 96,
-   "score": 53.3,
-   "baseScore": 53.3,
+   "score": 62.6,
+   "baseScore": 62.6,
    "spotCount": 0,
    "polyline": "chagEmuojXO{GbDYbHp@dCiBhHoUc@{BwBiCkCeB_@sCpAqBrG}@`E~@dB~BWjNz@|HQ`InEzE_@hAiBlAMlAn@bBhD|AnAtDnEdB|Es@`GD~K~BvGcAzFKbByAhAsFjDwJZmEy@wTx@sC~@cAtBs@tFArIyFxI}@`A_B~@oGjCiCrDGfNrEnADfDiCrD?nDuCvI{DpMmB",
    "pointCount": 52,
@@ -3546,35 +3126,13 @@
    "end": [
     32.744473,
     132.972731
-   ]
-  },
-  {
-   "id": "高知県:140",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "有岡川登線",
-   "ref": "50",
-   "highway": "primary",
-   "lengthKm": 9.84,
-   "curviness": 233.7,
-   "flow": 18.1,
-   "turnCount": 127,
-   "score": 52.9,
-   "baseScore": 52.9,
-   "spotCount": 0,
-   "polyline": "yaehE_kviXgFnAeJpEcNjDwCoAyRg@oSmLkL|@sMi@wWgFgBs@mE_EgI\\iGjB}ByAuC_@{FbBwIbHeAlEeAtLq@fAyNd@_PaDmH}FuF{IuBIwBbB}@Lg@c@cAkD{CS}@s@sEaQTeLtBoDjCIZw@uB}CiDmBoA{EaDiG}DMiCgAsDyDwFAoJ}EiCPoGgAuCt@kDJoFqAsA}A_CMaImL_DK}BiCiAwT|AaGDsBmDcIsGgDu@ZmCvEwAXqP}I",
-   "pointCount": 65,
-   "start": [
-    32.963012,
-    132.830077
    ],
-   "end": [
-    33.028085,
-    132.856145
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "高知県:141",
+   "id": "高知県:107",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道439号",
@@ -3584,8 +3142,8 @@
    "curviness": 252.5,
    "flow": 20.4,
    "turnCount": 137,
-   "score": 52.9,
-   "baseScore": 52.9,
+   "score": 62.5,
+   "baseScore": 62.5,
    "spotCount": 0,
    "polyline": "sowkEmaqkXVmDvIgCjBNhEbChEtHhAlEjA`AxADbFgIfFa@~FlFxGxKrCz@`MuNhCPj@wCtCoFfAqH`CgBnAGxBr@nA|HpBx@zFA|F~FnA^fAs@nBeFn@sJAyHt@q@dB`BnCbAxDM`N{BzGn@`FnFnAL|FkAlExBfLXdCOtAiCd@kDxAcCvFmApIjFbAIpDaAbEcHfFi@dFnDfGdBzGxG`E|LpKxGvEvQbB`@fEY|@f@nBxD|@vIn@lBjNxCxWrO|CpCrFlK|AdBf@dCc@fEoCtEwItKaA~CnAdJk@|Ox@`K~BfGbBnBbA\\jFK",
    "pointCount": 81,
@@ -3596,10 +3154,44 @@
    "end": [
     33.486176,
     133.102788
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:142",
+   "id": "高知県:108",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "有岡川登線",
+   "ref": "50",
+   "highway": "primary",
+   "lengthKm": 9.84,
+   "curviness": 233.7,
+   "flow": 18.1,
+   "turnCount": 127,
+   "score": 62.2,
+   "baseScore": 62.2,
+   "spotCount": 0,
+   "polyline": "yaehE_kviXgFnAeJpEcNjDwCoAyRg@oSmLkL|@sMi@wWgFgBs@mE_EgI\\iGjB}ByAuC_@{FbBwIbHeAlEeAtLq@fAyNd@_PaDmH}FuF{IuBIwBbB}@Lg@c@cAkD{CS}@s@sEaQTeLtBoDjCIZw@uB}CiDmBoA{EaDiG}DMiCgAsDyDwFAoJ}EiCPoGgAuCt@kDJoFqAsA}A_CMaImL_DK}BiCiAwT|AaGDsBmDcIsGgDu@ZmCvEwAXqP}I",
+   "pointCount": 65,
+   "start": [
+    32.963012,
+    132.830077
+   ],
+   "end": [
+    33.028085,
+    132.856145
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "高知県:109",
    "region": "kochi",
    "regionName": "高知県",
    "name": "窪川船戸線",
@@ -3609,8 +3201,8 @@
    "curviness": 216.5,
    "flow": 17.1,
    "turnCount": 380,
-   "score": 52.5,
-   "baseScore": 52.5,
+   "score": 61.8,
+   "baseScore": 61.8,
    "spotCount": 0,
    "polyline": "}exjEyojkXzCxA[_Id@cAlBw@hE@xFvCbIiDiAcEh@wIbB{BxEcD|EaGTeIoDuIS{CPeB`CaDP_DiFeEu@mDl@uCdCyBfCaGm@uJRyTbAoLl@cA~CkB`AiCi@sOTiBfEiGnJoC`FcHtAu@zFc@`EzGfDfB`CB`B}BdMmF|CuCfD}HjAoAlNsHjEZdDWjAwDcAsNh@gAhCyA|COvFvAjAxAbBjF~BvCzAxAxD|@nBaAdHsNpCkAnESrL^rGvEpIt@vAc@nFuFnEuBbLcA`POdHdBv@hDjBzBrG|SjLvQjArI?jB{A`CuFdC{AHwE_AoQiIkA@}B~@kAtD_@lLbDpJvElJGhFeAhCu@^kIyC{DVkEzAcAlD_CjCk@tCnAzIvJnTnCpAd@hBrGdC`ErCnBnCnAfD|BT`BbC@jBwDxFs@rCDnA~@|BbC`BrDh@zIwBhNgHfGQfB`B@hDyArDj@lDf@h@~KlChFO`BuA|AGFh@oAzB_A~GDnCt@~D|FxF`GjAxZmCfI|CfDi@pCgE?{IvBaZ^uBnBgDfDiCbGyBz\\qAfJVrFv@xAv@pBzFlAvHm@xDoEnDgCr@yGL}Cz@wLjGcBbC\\`JdB|BnDn@nJiAxKyGrEwEdIyF`IcElGqGjKoH`JuAjIlBdC?jKkApJ}DhC{BrT{ZtBmBrCP`ExCfMStC`BbEBnKkApGwEb@wANgE`CyHdL_P~GeOzC{C`Kf@t`@{@nTFxFi@fDeCfAcB|DcSYoDuDiEoB}FT_GlEoOa@iMj@kC",
    "pointCount": 202,
@@ -3621,35 +3213,14 @@
    "end": [
     33.256686,
     133.136817
-   ]
-  },
-  {
-   "id": "高知県:143",
-   "region": "kochi",
-   "regionName": "高知県",
-   "name": "住次郎佐賀線",
-   "ref": "367",
-   "highway": "secondary",
-   "lengthKm": 3.11,
-   "curviness": 236.1,
-   "flow": 17.1,
-   "turnCount": 43,
-   "score": 52,
-   "baseScore": 52,
-   "spotCount": 0,
-   "polyline": "qyeiEw|hkXjB}CfBsFzGmLvAuGnLeKzGwDlGgPvCk@xFBlF{ElHaAfBLjDzA~Hx@xD_AvCyBzA`ChBr@pGcEfHFzCkA",
-   "pointCount": 22,
-   "start": [
-    33.130652,
-    133.088924
    ],
-   "end": [
-    33.108803,
-    133.102251
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "高知県:144",
+   "id": "高知県:110",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道32号",
@@ -3659,8 +3230,8 @@
    "curviness": 256.3,
    "flow": 18,
    "turnCount": 272,
-   "score": 51.8,
-   "baseScore": 51.8,
+   "score": 61.1,
+   "baseScore": 61.1,
    "spotCount": 0,
    "polyline": "it{lEoyznXt@aFB{P~@uCnAuZr@uBrD}D~K_DvIhB`NoDtSGlTkF|OeChIFpGkCfIaAbGcB|ANzD|BzCx@nEBhQqFzI}HbMcG~@AzEtCnG?`Ae@tFoG|CuAzc@|O|Bb@dBMrDsErAqEL}Fq@_NLkB|BuDzAe@xElBxE~JvEtGrCnBnFnNbBzMSvR|AdKhApCtItKlH~DjDnHZpBc@pBcFjCDlNpFhTbDdFfErCpDdKfChBfGx@lHu@fI_DdG@lA~@dHpUhAn@nADfDgDfA[|@v@rAhE`AR`UgGx@iBc@yJhAc@rBrE|FjD~AfBx@bDAtE^fA`AKrAwEtAu@xDvBfEjH|FOdEjCnJp@vFlDhDe@p@Z\\`AMzE~FpFOpFnC~BhDzK`EnAr@z@NzB}@|HrBvBXlG~CzCIdA_B~Cd@fEjAlAbG`@fGhDpB|K|D~FhA`@|BYpBeGvAgBjDv@~CgAr@Fv@jAdCtK|CbCaB`GRlAv@R|FsBrDhAhB}ElG@|CyK",
    "pointCount": 134,
@@ -3671,10 +3242,14 @@
    "end": [
     33.624643,
     133.63877
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:145",
+   "id": "高知県:111",
    "region": "kochi",
    "regionName": "高知県",
    "name": "宿毛津島線",
@@ -3684,8 +3259,8 @@
    "curviness": 211.8,
    "flow": 16.5,
    "turnCount": 384,
-   "score": 51.7,
-   "baseScore": 51.7,
+   "score": 60.8,
+   "baseScore": 60.8,
    "spotCount": 0,
    "polyline": "eebhEogciXiCiCgIiFoHi@gEcDcGgIJqIoA{AeDkBuBqCeEoRmCwEmKeHeLAwCmA}CeCkAeEt@cOm@o\\_AwA_JmAuF{F}DeHkAuJmHqSmLcGoOcDaJoDmIqHc[yNkF`AqA`Ao@zCElLoBfEyHpEyIT{FrCaChCwD`Kw@n@sABoEuAoDQiBn@sF~EwDdBaFCgDoAwClB_CVoJFuMnAgGgAqDzBmB|DiExSs@`O`ClRUfBu@b@kAMkEeB_FkDiFi@iChAkG~GeFvDwH|@mDoBaBFsBr@qCrCWpAh@pGfDfHX|Eq@r@kCr@iAvA{DnP_E~J{H~JuCbGmH`Cy@v@m@vCLzAzEhNZrBKpCmAfCqIvFs@rDeB~BmDzCwEj@aBqEyCyAMqGw@qB}G_@eJ_DkAR]j@i@`FFvI_CrIl@tG`E~JTrOY`BkBlCcH`GuBv@gGTcK~LuP`DqCnDc@tA@lAl@hA~I`BtBjB`G`SpDrFt@`PoGpKcBbAcBJkL{A{DsGmHyFuAXsHvH{AHgG{@q@v@GvAbE|ID~D[jBoAtCeBzA_OuBcATy@~@k@dD@tC|C~DNnCwAnCeF`FcAtHqC|HoCv@aH}CcFgFaJkAqI_D_CGoA`CgBfKqBhHOtJw@jAiBr@eC@uGyAaDiD{@oD?uCz@yEYaOsC[yKTwIsB{@JiFjGmE`CqAtD{BSiDhIwA`B{Bn@aQq@oDhAcGzNcEdPyDxGgAf@oBtCoAzBo@vCiChBgCZoDLyBmA{Bt@oAtDnCzMm@|EKrXfCnFdC`BnBfDp@zLQlJu@jEqDnEw@dCf@~GIxC",
    "pointCount": 213,
@@ -3696,10 +3271,14 @@
    "end": [
     33.088711,
     132.654943
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:146",
+   "id": "高知県:112",
    "region": "kochi",
    "regionName": "高知県",
    "name": "国道195号",
@@ -3709,8 +3288,8 @@
    "curviness": 245.5,
    "flow": 17.6,
    "turnCount": 419,
-   "score": 51.3,
-   "baseScore": 51.3,
+   "score": 60.6,
+   "baseScore": 60.6,
    "spotCount": 0,
    "polyline": "igolE}ryoXf@yE{AkDkC_BsDS_Ai@mQeS{GkM}EiD}AuDcCgBsBmDwVaSiE_F_LiGqAaBWcBv@qJxFqEzGiCvCeExAaHQuNmCaIwAuQeAyBgFwF}TwMkFyJmE{L{GmGyBuFuMsPbAmHnFoArC}HtC{VEqBuAgCsG{DoBl@kLjIaKkBgAmAiEqSiCeZ}@{EjA}EFeDjAaDLkCgCaO_B{EyAyJcA}BcE_GaB{@uARcBrAoAFoY{DkFuDgDqGcBaIYeE`BsEbEkD@uAeFyHeDgYiAiDgBmA_M{AyAkHd@yHhBmE~EgH}AeJ{DqKoWeNuB{A{AgCJkLdCgDl@qL`EyJi@aEkAeAiE_@_CwKsImOyBuKTmCjAwDAyA{IqHqC{FwB}KsJyDsF`EyAEsCgAgGiKSeE`@cJnEyHI_NdAyBjDyCP}Ai@iAcD_@{@q@uCqKsAiBiBSkFv@aDlDmARuD}K@}JmCqDEcCj@cApCkAhJqLdAqDCgDoFoUkHkF}@yALiIa@wC}@iAaFqCqAwB}Ac[m@aCcIaIwEyLuH{FcJePJeBzHgMtBaO?}CkMoRmHqYwRa\\kAaFcDyHcBiIiGiHcEeCWk@NqEi@cB}@m@qMmCm@_B@{FyAyAaDTsIrEqA@wAk@kCsHsCmD|AkIJmDiAqKk@aBoA{@_Dg@kEtDoD`AkBuAaB}Dy@McAj@u@xBMzCc@DEuDhCwF`BKrAnA|@MUyFzBkDKgBuEiHH_El@m@lCt@~@}D`CoCkAeDxAyBAeAmCuF^oFkAeBcBe@iAsA",
    "pointCount": 205,
@@ -3721,35 +3300,64 @@
    "end": [
     33.766194,
     134.047987
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "高知県:147",
+   "id": "高知県:113",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "高知土佐線",
-   "ref": "38",
+   "name": "土居五台山線",
+   "ref": "32",
    "highway": "primary",
-   "lengthKm": 7.73,
-   "curviness": 196.9,
-   "flow": 18.3,
-   "turnCount": 83,
-   "score": 50.4,
-   "baseScore": 50.4,
+   "lengthKm": 4.71,
+   "curviness": 160.6,
+   "flow": 21.6,
+   "turnCount": 35,
+   "score": 59.3,
+   "baseScore": 59.3,
    "spotCount": 0,
-   "polyline": "korkEwmlmXCaFiAsEaZ_UiGs_@uPuYaNyH{BaEsB}GgC}B@_Gy@}Ev@_DvAeSbAsBbG{@|@_AMqBuDeEJuEi@{GqCoEuAiM^qWlDcFd@wCoDo@aDwCqB}TkBcC{DiBiBeBsSmXsIrAqJNiPhH{AD}Ao@u@cAwAwEeBs@`@kOuEkRy@w@",
-   "pointCount": 44,
+   "polyline": "unwkE_zunX\\fZdAZpBlLhCvDXdBr@rTK~Oh@xDIbGp@lOH|OpCjRtAtUAfFbA`FtCdo@~@dCb@hD?jCs@nDr@rK}AN^bJWbT",
+   "pointCount": 25,
    "start": [
-    33.523255,
-    133.434676
+    33.54875,
+    133.64656
    ],
    "end": [
-    33.55234,
-    133.491486
+    33.543894,
+    133.597636
    ]
   },
   {
-   "id": "高知県:148",
+   "id": "高知県:114",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "桂浜はりまや線",
+   "ref": "34",
+   "highway": "primary",
+   "lengthKm": 3.31,
+   "curviness": 177.8,
+   "flow": 21,
+   "turnCount": 28,
+   "score": 59.2,
+   "baseScore": 59.2,
+   "spotCount": 0,
+   "polyline": "sbukEsfcnX[FbIgAn_@tD|Jk@`BPlAbAzFfLbLlI|BrGfBxAfSmBpEjBdBHnEmCnB[t\\rFbHb@",
+   "pointCount": 18,
+   "start": [
+    33.536579,
+    133.551297
+   ],
+   "end": [
+    33.509989,
+    133.544287
+   ]
+  },
+  {
+   "id": "高知県:115",
    "region": "kochi",
    "regionName": "高知県",
    "name": "柏島二ツ石線",
@@ -3759,8 +3367,8 @@
    "curviness": 228.3,
    "flow": 16.1,
    "turnCount": 97,
-   "score": 50.3,
-   "baseScore": 50.3,
+   "score": 59.1,
+   "baseScore": 59.1,
    "spotCount": 0,
    "polyline": "otigEww~hX`IjPhA~@tC`@lIwEnGgBtCIxLpAhIbGlN~FZrBoBrFG|A\\p@rCpA`JlH~@|I[`NvBzFtD~@v@hApCnMGxG~BhJn@h@rD`@zDbDbIrClA?rF}Av@L`GxN~CrAtB`DfJdBVjFyAbEClJoAbDx@fQ`HjL`@|FzC~F`An@nBLpEe@dHfBpE`DfBtD^`C",
    "pointCount": 50,
@@ -3771,33 +3379,866 @@
    "end": [
     32.787147,
     132.667303
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "高知県:116",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "岩目地西佐川停車場線",
+   "ref": "297",
+   "highway": "secondary",
+   "lengthKm": 3.26,
+   "curviness": 185.7,
+   "flow": 18.3,
+   "turnCount": 33,
+   "score": 58.6,
+   "baseScore": 58.6,
+   "spotCount": 0,
+   "polyline": "}mpkEaiolXqHcAaJuImGqBgEkEsAaEs@_a@wCuJEuIi@}Cw@qAj@}BEoEkCcK}AaREuIoCgOd@oM[mHT[",
+   "pointCount": 20,
+   "start": [
+    33.512793,
+    133.285446
+   ],
+   "end": [
+    33.521972,
+    133.315221
+   ]
+  },
+  {
+   "id": "高知県:117",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道441号",
+   "ref": "441",
+   "highway": "trunk",
+   "lengthKm": 17.57,
+   "curviness": 226.3,
+   "flow": 17.8,
+   "turnCount": 223,
+   "score": 58.5,
+   "baseScore": 58.5,
+   "spotCount": 0,
+   "polyline": "{weiEurriXl@wBxAoUUsG~BePnB{DtEmBxDe@~BI`G|A~AlAnC|EdGxDfFtGxC|FxExDdErHlCv@tBsCjLu_@rEyJfAiExCgHvMqMxMmFzDPfAgA~AjA`Sd@zJfB`CxAbDtGGpCb@~C|AjBeBhBOhFw@`Ac@xCaIhNAxAeBlAcArBeBnHRbIzBdPpBdEU|ANhAlI|H|HnKvEpBx@cAnC|@t@MrOwIrFo@nBuBvKaFnEaFhAiCjGaC~@{ArAi@zBTlDW|FyB~G{EpLeLlCu@rFd@bLa@rNuFrFwDdHgAhEyHpGsTvDqGnEmBzNaO|JLxBu@vAHhDbFhMrMtGhO~FtDzBd@rAS~BmBdBcGvF}KrAiPo@yR|B_KxAwN|@qCrE{EnOeK|DoLlEcGdMeFbFcG`PeIbJ}HhGeCxF_EnBoD",
+   "pointCount": 108,
+   "start": [
+    33.130383,
+    132.81083
+   ],
+   "end": [
+    33.033026,
+    132.848983
+   ]
+  },
+  {
+   "id": "高知県:118",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "高知北環状線",
+   "ref": "44",
+   "highway": "primary",
+   "lengthKm": 3.46,
+   "curviness": 159.8,
+   "flow": 21.3,
+   "turnCount": 26,
+   "score": 58.3,
+   "baseScore": 58.3,
+   "spotCount": 0,
+   "polyline": "ci}kEql`nXAiJSOfCgu@eDqm@DaCd@eBmLyIeLOoCw@gCqDmAsFNcIhIc[jCcF`B{A",
+   "pointCount": 16,
+   "start": [
+    33.578583,
+    133.536885
+   ],
+   "end": [
+    33.581752,
+    133.567989
+   ]
+  },
+  {
+   "id": "高知県:119",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "作屋影野停車場線",
+   "ref": "323",
+   "highway": "secondary",
+   "lengthKm": 5.17,
+   "curviness": 185.4,
+   "flow": 16.5,
+   "turnCount": 58,
+   "score": 57.5,
+   "baseScore": 57.5,
+   "spotCount": 0,
+   "polyline": "wt~iE_`qkXeDV}BrDkAn@}EGuDcAcGgHsFaEkEwE_]aQsHiHkHeFq@oEyBwGaDkDgAgFaA_B_H{EPyCjAwDk@gDoBmDGeEy@uFxAoBr@uEuAyRJ}BlFmUt@yFdB}EvQ{Yf@wK",
+   "pointCount": 33,
+   "start": [
+    33.257875,
+    133.1304
+   ],
+   "end": [
+    33.272048,
+    133.167958
+   ]
+  },
+  {
+   "id": "高知県:120",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "八幡大津線",
+   "ref": "252",
+   "highway": "secondary",
+   "lengthKm": 3.79,
+   "curviness": 119.9,
+   "flow": 21.7,
+   "turnCount": 21,
+   "score": 57.5,
+   "baseScore": 57.5,
+   "spotCount": 0,
+   "polyline": "{n|kEudnnXyACDqDqp@}g@cQ{FaA{AQwAf@iNkAmDkCgBg_@c_@cNyD_]gZo@I",
+   "pointCount": 14,
+   "start": [
+    33.574376,
+    133.607312
+   ],
+   "end": [
+    33.599548,
+    133.631253
+   ]
+  },
+  {
+   "id": "高知県:121",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道321号",
+   "ref": "321",
+   "highway": "trunk",
+   "lengthKm": 4.97,
+   "curviness": 192,
+   "flow": 21.2,
+   "turnCount": 45,
+   "score": 57.4,
+   "baseScore": 57.4,
+   "spotCount": 0,
+   "polyline": "eabgEopijXAyWqCsAwBsBsEmAcDyGAsF`AuEo@qF{DeEDg[z@gC~M_PvErAvMbA|Lk_A}@mPcNw@eGeAuBoEuHqAeHpD}Ks@",
+   "pointCount": 23,
+   "start": [
+    32.783705,
+    132.928244
+   ],
+   "end": [
+    32.789112,
+    132.9612
+   ]
+  },
+  {
+   "id": "高知県:122",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道194号",
+   "ref": "194",
+   "highway": "trunk",
+   "lengthKm": 29.96,
+   "curviness": 214,
+   "flow": 16.7,
+   "turnCount": 384,
+   "score": 57.3,
+   "baseScore": 57.3,
+   "spotCount": 0,
+   "polyline": "{a}kEs}|lXlGlCxOVnEeBhDR|QgBlD{AxBX~Fi@pPpDhH`Jp@rDXdLQlCgD`GiEt@cFH{GfI]lAcArUt@~HdZvg@tAzIeAdIuAbBkUfHkNtI}Ed@kMzNoDlGyCtJsEfYoAfD_JnO}ApEi@V_FKcHpGeEbAwJ|EoMjR}ErDsPhAaG{AeCPsPpKiJ|@kJxHsAa@oEyEaBCqLzHoDfFoAXkLe@eIxEsHvI_Cx@_G_AsHcJuGwE_R|AwFeAqHqFkHgA}HmCwEFaFnBkDtCsCt@uAIuBkBqCuLkAwA_DWkJrCgI}@sAcBeB_IqDu@sCcD}C{@mEqDcUuHsAeAAcElC}IlCyFdDuDnAgEo@cDyDsGOmFzAyC|FsFl@kBAsAiFsLqAyE{AUiGpBwBg@{B{BeF_IiOgMuAoDUyCNgC|BcGL_BcC{EaAuDVqWSkAu@eAmEoBoG`@cN_CmDO{EhAaAfAcBfH}AnCmHbF{DzAeAbIeFxCsCK}DaBcEZwGUeHvDaDVqBbAiQw@yLbEkHmDgHy@_GuH}Ho@wDuJaBkAuFgBmE{FaN@qB`AqCNeJ_@sDx@iEJyEtAaDsAuEq@wGpCsG_@qCxC}D`Ba@n@JfJ_@`BwAy@w@iEkBoFgG}@[j@ZtBxEXn@h@bElPB|E`@x@v@Ap@iA~DsLdAkHv@c@dGbAdC_@`C~CbELpJnNjAt@|Dv@f@v@g@lC{GhEcCzEZzBpBtAkCjFIrEbDha@LnT\\fClCdEZ~AcA`DoCzA",
+   "pointCount": 198,
+   "start": [
+    33.577417,
+    133.355297
+   ],
+   "end": [
+    33.68704,
+    133.314371
+   ]
+  },
+  {
+   "id": "高知県:123",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "橋上平田線",
+   "ref": "353",
+   "highway": "secondary",
+   "lengthKm": 4.06,
+   "curviness": 171,
+   "flow": 17.3,
+   "turnCount": 40,
+   "score": 56.8,
+   "baseScore": 56.8,
+   "spotCount": 0,
+   "polyline": "sxehEqgpiXyPdVj@|QfAnGR~JpC`MhEhHhIfSvEvDBhCyCbByDNcDtB{@fMwHbMkGlHmAhFgBjN}@dCkC`BqIaAyALwArAoD`I",
+   "pointCount": 24,
+   "start": [
+    32.966664,
+    132.798815
+   ],
+   "end": [
+    32.975437,
+    132.766419
+   ]
+  },
+  {
+   "id": "高知県:124",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "上分多ノ郷線",
+   "ref": "315",
+   "highway": "secondary",
+   "lengthKm": 5.75,
+   "curviness": 167.6,
+   "flow": 16.9,
+   "turnCount": 57,
+   "score": 56.7,
+   "baseScore": 56.7,
+   "spotCount": 0,
+   "polyline": "ac~jEckflXqFsHo@gQo@uD|@yIiAmHV_JuB{OfDqv@`AyBvEqDfBgE|DuBzDeGlGkTnAk@tFa@fKgF|Dk@|@o@lBeWKsA{AeDnB}EdEiOE_BiAsDo@oFkOcNm@iAoCcVXoChBuD",
+   "pointCount": 33,
+   "start": [
+    33.418892,
+    133.239702
+   ],
+   "end": [
+    33.41222,
+    133.291035
+   ]
+  },
+  {
+   "id": "高知県:125",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "土佐道路",
+   "ref": "56;197",
+   "highway": "trunk",
+   "lengthKm": 3.49,
+   "curviness": 134.4,
+   "flow": 24.7,
+   "turnCount": 19,
+   "score": 56.2,
+   "baseScore": 56.2,
+   "spotCount": 0,
+   "polyline": "gltkEmeumX}AaEcb@{o@iMi^qFe`@w@sCqBgC{JiGwXm^J]cDqQ",
+   "pointCount": 11,
+   "start": [
+    33.532996,
+    133.479429
+   ],
+   "end": [
+    33.550217,
+    133.509442
+   ]
+  },
+  {
+   "id": "高知県:126",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "船津野根線",
+   "ref": "101",
+   "highway": "secondary",
+   "lengthKm": 6.07,
+   "curviness": 183.4,
+   "flow": 14.9,
+   "turnCount": 75,
+   "score": 55.8,
+   "baseScore": 55.8,
+   "spotCount": 0,
+   "polyline": "{}okEs|krXaHlC}JbBw@`AoDlKgAnA_MvAeIGuLrLyBzD}@vDuC~d@u@rBeBhBiJdGmCf@sCu@}F{FyCwAmJpAkGpDMlGm@tByD~ByCp@cCFwCi@gAeAi@cDLyBfBgEv@yFC}D\\cClGgPqAmIaHwWs@qF}AsDu@EwEnFuErCqBtD",
+   "pointCount": 43,
+   "start": [
+    33.510216,
+    134.251141
+   ],
+   "end": [
+    33.539301,
+    134.245399
+   ]
+  },
+  {
+   "id": "高知県:127",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "北本町領石線",
+   "ref": "384",
+   "highway": "secondary",
+   "lengthKm": 5.95,
+   "curviness": 130.9,
+   "flow": 18.1,
+   "turnCount": 43,
+   "score": 55.3,
+   "baseScore": 55.3,
+   "spotCount": 0,
+   "polyline": "owzkEktdnXHaLqk@|BaYmEgDqC{F}McPsIoBcBkUcb@gBcBaGsC}AgByF}UaAaBqMuIgDh@q@QyAcDiF_GAoAjBaCd@iCKsXoB{R`@kJw@aCeJwG_EsGSuD",
+   "pointCount": 29,
+   "start": [
+    33.565523,
+    133.558615
+   ],
+   "end": [
+    33.597513,
+    133.596844
+   ]
+  },
+  {
+   "id": "高知県:128",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "伊野仁淀線",
+   "ref": "18",
+   "highway": "primary",
+   "lengthKm": 9.63,
+   "curviness": 173.5,
+   "flow": 15.6,
+   "turnCount": 107,
+   "score": 55,
+   "baseScore": 55,
+   "spotCount": 0,
+   "polyline": "}uvkEwuglXgEWiFh@_D`AsFi@qGcDiCc@m@kAcE}A{CgDmDAgDkDkEe@uZ{d@mBoEaEqUY}FiB{F}CqD{BqEiRsToK_RwBuJc@yF`B_PW_IuHoL}DkI{@}HuDeO^_Sx@wDbAeBdCiBjDSxBRtGfBpGdEjEwG[eKeJ}JgHqL}HoDyFaAwD?{BtCcB`AqFjBsCH}Fa@wCoAsBaCyAc@eJsZkA}FGoC|@_K{@cAaGsB",
+   "pointCount": 59,
+   "start": [
+    33.544794,
+    133.246518
+   ],
+   "end": [
+    33.583074,
+    133.308446
+   ]
+  },
+  {
+   "id": "高知県:129",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "春野赤岡線",
+   "ref": "14",
+   "highway": "primary",
+   "lengthKm": 3.81,
+   "curviness": 164.9,
+   "flow": 17.5,
+   "turnCount": 36,
+   "score": 54.8,
+   "baseScore": 54.8,
+   "spotCount": 0,
+   "polyline": "a{tkE_twnXoAaHqD}HsFij@K{KV_JrEyFr@qDCePaAcJOaOj@{B|CgDVaDuAwCyEeDsFTkEbCgFEKml@",
+   "pointCount": 20,
+   "start": [
+    33.535372,
+    133.655839
+   ],
+   "end": [
+    33.540778,
+    133.689265
+   ]
+  },
+  {
+   "id": "高知県:130",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "志和仁井田線",
+   "ref": "326",
+   "highway": "secondary",
+   "lengthKm": 5.99,
+   "curviness": 160.4,
+   "flow": 15.2,
+   "turnCount": 63,
+   "score": 54.5,
+   "baseScore": 54.5,
+   "spotCount": 0,
+   "polyline": "ilxiEec}kXcMjFc_@xXmANqDm@sNgNsJyEcB}F}@_AwJaAcL\\wL|EuBnCuEfCiIvHyE~KeA|b@iBlBeM`BoI?oCiAiEaE{F[mEkDkEg@}CLsAk@qB{Cw@iLkEy@eIeK}Bw@mD{C",
+   "pointCount": 33,
+   "start": [
+    33.225811,
+    133.19235
+   ],
+   "end": [
+    33.266315,
+    133.188445
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "高知県:131",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "下田港線",
+   "ref": "20",
+   "highway": "primary",
+   "lengthKm": 7.02,
+   "curviness": 137.5,
+   "flow": 17.9,
+   "turnCount": 54,
+   "score": 54.2,
+   "baseScore": 54.2,
+   "spotCount": 0,
+   "polyline": "i~ghEmkojX~HaUlEcCdEsE~AkKvIi[pEaGbe@kXdHgBfWyJnC_CjDuAfVsR~GgKtHqEb[DvOsHxFcFz@_B`@oDaDkSjD}KxCqGjVrFAdAqEvB{ElHgEuBuDeFmBw@",
+   "pointCount": 30,
+   "start": [
+    32.977811,
+    132.958146
+   ],
+   "end": [
+    32.942365,
+    132.99394
+   ]
+  },
+  {
+   "id": "高知県:132",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "高知南環状線",
+   "ref": "36",
+   "highway": "primary",
+   "lengthKm": 6.05,
+   "curviness": 169.2,
+   "flow": 15.8,
+   "turnCount": 65,
+   "score": 54.1,
+   "baseScore": 54.1,
+   "spotCount": 0,
+   "polyline": "glokEsovmXe@iBg@_MgBsGDmMd@_FkBiC_@cBd@qCjKyKHaB}@yHjF_P?wKcH_XuAgVsB}Jm@cBeCaCiB}JeI{U{A}TlBcIh@qHFwLiCoE}@yCyFcHmBsE`BcMlFkEfEyHp@mCGoCeEeLbAqF?kD",
+   "pointCount": 37,
+   "start": [
+    33.507398,
+    133.48618
+   ],
+   "end": [
+    33.511448,
+    133.544551
+   ]
+  },
+  {
+   "id": "高知県:133",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道33号",
+   "ref": "33",
+   "highway": "trunk",
+   "lengthKm": 19.18,
+   "curviness": 187.1,
+   "flow": 16.2,
+   "turnCount": 222,
+   "score": 54,
+   "baseScore": 54,
+   "spotCount": 0,
+   "polyline": "kbzkEc{`lXiDt@}AdAy[rg@uJjIkLxGgBlB{BrGwBxCw@bEpAhDl@rM}@zNgDfOkHlJkDhCoAbLNjNfBlROdA_ClCG|Ff@bIbD|LvHxB~@|@F~@cBtN|EtRr@lJvAvFfD~GfPxPvEpC|AnBJpGlAvLElDpEbHlBnBhDbAjJmDfC_C~CkAzHm@rGZjTvKdFnFJ|EkA~Qf@nJrCtIOjD{@zA_DrB{GpBiCG_Ah@uFnHyChJ{@vILrCpAdDdAj@tDB|OoBlInDtGZdL`FbSEbBfAx@bE~AvCr@`FpCfDrEl@vE}DjDfAzCPj@p@g@fPyAdDCzEy@lF_FzF_Bl@yCBuAbEwGtBoFpMmEdBe@~@xGrP~FbG`IbFf@tAOnLcCpCk@|JaAhBaJzEoCjF{ClHn@jGr@fCx@|@fBv@nBJdAdAbWja@N`By@hMdCjPpAdAlD`@tCxCzDx@rA~@pAxCb@nHu@bGeAv@{CX}@n@yBvGoEdCqBjF",
+   "pointCount": 127,
+   "start": [
+    33.56214,
+    133.211539
+   ],
+   "end": [
+    33.541671,
+    133.076148
+   ]
+  },
+  {
+   "id": "高知県:134",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "仁井田竹中線",
+   "ref": "247",
+   "highway": "secondary",
+   "lengthKm": 5.14,
+   "curviness": 135,
+   "flow": 16.5,
+   "turnCount": 42,
+   "score": 53.7,
+   "baseScore": 53.7,
+   "spotCount": 0,
+   "polyline": "qpvkEohmnXs@wKNyF[sCiCkE_G{G}@yC`@sCjBgDxCyOD{BaBuKkA_FiB_DuBeAsDoEgM_HwA{E{KkRkOkp@AkHh@mIi@qGD_H}CwAiD{FwJoEqIcG{JuCaBsCgE}A",
+   "pointCount": 31,
+   "start": [
+    33.543929,
+    133.602801
+   ],
+   "end": [
+    33.563893,
+    133.645787
+   ]
+  },
+  {
+   "id": "高知県:135",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "土佐道路",
+   "ref": "56;197",
+   "highway": "trunk",
+   "lengthKm": 4.51,
+   "curviness": 105.6,
+   "flow": 23.8,
+   "turnCount": 20,
+   "score": 53.5,
+   "baseScore": 53.5,
+   "spotCount": 0,
+   "polyline": "wktkEseumXqBgF}a@kn@}Lu^wFia@o@iBqCoDcJuFoYy^cD_Ru@obA",
+   "pointCount": 11,
+   "start": [
+    33.532923,
+    133.479459
+   ],
+   "end": [
+    33.55063,
+    133.520329
+   ]
+  },
+  {
+   "id": "高知県:136",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "後免中島高知線",
+   "ref": "249",
+   "highway": "secondary",
+   "lengthKm": 9.61,
+   "curviness": 127,
+   "flow": 15.9,
+   "turnCount": 77,
+   "score": 53.5,
+   "baseScore": 53.5,
+   "spotCount": 0,
+   "polyline": "mn}kEsctnXeFPwLxC{AjJ{HvUwJtbAsBvYiBvIc@xKyB`RTnF|BpMlL|UrLpKvBzDlAzNbB~F{AxEJv@tFpDvFbB_AjYHnE`GjGlAbC\\`TaAvMcCfKoLlXO`BJxRvApG`CnT}@zEpF`KtZbu@tJhK~Dx@~DzH",
+   "pointCount": 39,
+   "start": [
+    33.579426,
+    133.637863
+   ],
+   "end": [
+    33.57137,
+    133.549855
+   ]
+  },
+  {
+   "id": "高知県:137",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道56号",
+   "ref": "56;381",
+   "highway": "trunk",
+   "lengthKm": 4.54,
+   "curviness": 183.9,
+   "flow": 18.2,
+   "turnCount": 46,
+   "score": 53.4,
+   "baseScore": 53.4,
+   "spotCount": 0,
+   "polyline": "e`xjEacmlXxRrMhCYjJmEnGdAzGqAdCf@t]zVrD`^hA~@~C]`CrCjCg@r@ZJvAaBbIBdChKtOxBf@fJgB~A@~\\bK`An@jChF|IxK",
+   "pointCount": 25,
+   "start": [
+    33.387707,
+    133.274253
+   ],
+   "end": [
+    33.357965,
+    133.252804
+   ]
+  },
+  {
+   "id": "高知県:138",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道56号",
+   "ref": "56",
+   "highway": "trunk",
+   "lengthKm": 19.36,
+   "curviness": 176.9,
+   "flow": 16.2,
+   "turnCount": 211,
+   "score": 53.3,
+   "baseScore": 53.3,
+   "spotCount": 0,
+   "polyline": "iitiEynskX|Ig@~ElBzVtAbDqA`EqEzKoDlBr@~HxKpIbEvBTpEUlHmC`Gs@pFHjB|@fCtCrMhFvEdAlHtEvDt@bD~AhMDvAZzZjZhAP`Ia@lFp@tE{Cr@}AOoAeCuCkAsEhDcMn@wE`DqFrBkHMuCgByB_@eBbAeJz@w@nACpBtAZdAKpAmCdFpAjHWvI`@tBtDdJrCbAvLyDrCNdJrGnB`DpGtApHfF~`@~a@tI~QDzAeAxG~@hCnQfAzZuH|LR|DjAdEfClAnFbG~EnIhBjEfCvBdKlAjAjADrFqAlCwI`Bs@|I`BlDMjKtBfFXtF|JtCzChA?dEkBpE_AnC\\`CrB^rAcCfLDrEvAr@hG[`GtAbGjGdGbMzAv^jCtPN~G\\rArAxAnA\\r\\TdE`DjB|GxAbBzA`@jFIvGtAfIzDrCfDfDdBpELhCeCfBsFpCoT`B}AbFwAhKuLdCyAtIgBrOzD",
+   "pointCount": 123,
+   "start": [
+    33.204855,
+    133.14301
+   ],
+   "end": [
+    33.082891,
+    133.101552
+   ]
+  },
+  {
+   "id": "高知県:139",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "中村宿毛線",
+   "ref": "46",
+   "highway": "primary",
+   "lengthKm": 6.08,
+   "curviness": 179.4,
+   "flow": 14,
+   "turnCount": 78,
+   "score": 52.9,
+   "baseScore": 52.9,
+   "spotCount": 0,
+   "polyline": "kw~gEg{cjXkAdBCzCr@rAnDfCzC`HtAhRvAnKIfO~@rI}@zIr@lFEtJrA|FiAlRfCjQxLnKjGzA~JnMZnAa@tJb@|DxAzCjGnH`Fx@jE{B~COjEqB|AJfAr@`BxBrAlFh@dR`DvFfCj@tEq@dFiHrEoDfFc@|DqAtIT",
+   "pointCount": 41,
+   "start": [
+    32.930615,
+    132.899236
+   ],
+   "end": [
+    32.905386,
+    132.861017
+   ]
+  },
+  {
+   "id": "高知県:140",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道194号",
+   "ref": "194",
+   "highway": "trunk",
+   "lengthKm": 15.4,
+   "curviness": 189.1,
+   "flow": 15.4,
+   "turnCount": 189,
+   "score": 52.9,
+   "baseScore": 52.9,
+   "spotCount": 0,
+   "polyline": "_wtlEm|slXuBf@iHiAcFDyAX}B~AeA@{EsAeCwCsA_@oDlAeBpE_At@wAAoBgB}Be@_ATiBjBwAVcAYeCeC_E]{CuF_Bs@}MfCgIm@iLbIaBf@uAEeEcBaSiA}CiCgAeF|@qJ[mC}D}FoBcFgEcDqAqCeA{YkJ{TeB_JwAeBeDeBwAqCo@yCUmO{@cBwDiDs@sDcA_ByB_A_KrCmEHyEs@kDj@cMhEgGBeHaAiTfJgGTiDr@gJjJmNGsGxGaA@uEmC_DxBeEnAeAS}C}BaL}@{C\\mClAuf@xh@sFpJo@lDWfHvAdMjBpIsBdKBtGyB|FgBzAsHz@mEaBeBG_G|C{FIiI~BuDdEsD`G}E`DwBjGqD~EaA~H{F|NkFrGcDlIgAx@_GpAaFvD}E|AyDhDoEzA_BhDoD|O",
+   "pointCount": 107,
+   "start": [
+    33.698557,
+    133.309028
+   ],
+   "end": [
+    33.795818,
+    133.287921
+   ]
+  },
+  {
+   "id": "高知県:141",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道321号",
+   "ref": "321",
+   "highway": "trunk",
+   "lengthKm": 14.05,
+   "curviness": 176.6,
+   "flow": 16.3,
+   "turnCount": 152,
+   "score": 52.8,
+   "baseScore": 52.8,
+   "spotCount": 0,
+   "polyline": "_dzgEyckjX`PfDnFm@rBmBtIgRrG{CvFsFpGbApGYzEdBxXjDxBa@xFqDdBa@xJdDbDRlNwFbH_HjDeBfBYlGPrJ{CrRkChEaC`E}CpIiKhFiIpFmMv@i@zAPnK|KrI{@pVjCxBhAfIvHrARbEyBfCcGpGoFbDiK~F_DfD{EvNfAvIw@|A`BKpFV|A~@j@|DZnBe@fBwA~B}FdAmAjGeA`DsBnAMpCbAhB~BrFd@tCzE`Bb@dK{CZeA@oGfHsJtA[vGfAhAg@zCwDlHIbB|A`EjKfBpPO|FhArLtC|EjBxMvA~DtBnA|p@}LzQ_JtBsA\\mAiAmIEwCZcAjEaFtF_D",
+   "pointCount": 88,
+   "start": [
+    32.907041,
+    132.936445
+   ],
+   "end": [
+    32.809798,
+    132.954354
+   ]
+  },
+  {
+   "id": "高知県:142",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道439号",
+   "ref": "439;494",
+   "highway": "trunk",
+   "lengthKm": 8.09,
+   "curviness": 171.1,
+   "flow": 17.5,
+   "turnCount": 79,
+   "score": 52.7,
+   "baseScore": 52.7,
+   "spotCount": 0,
+   "polyline": "ykdlE{e_lX~ApLvCbKTtGbCvI@xBeBxIoAjEcEbFm@lDXlHlAbKpE|JlDbEvFfCbDhExAhFjApLtC`MDfH\\rC`Nvf@tAtCjB|ArHhDpGrG`Dh@`Ew@rDpA`LlA`AhD^pFbApCdAt@hQqArb@rJnGyCxBY~HjGjF?fCs@pBqCT{AMsJj@k@pFLjCfCjGKtC_CtCwIbH{DvFoF",
+   "pointCount": 52,
+   "start": [
+    33.614848,
+    133.20302
+   ],
+   "end": [
+    33.574108,
+    133.166442
+   ]
+  },
+  {
+   "id": "高知県:143",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道439号",
+   "ref": "439",
+   "highway": "trunk",
+   "lengthKm": 10.16,
+   "curviness": 191.1,
+   "flow": 15.4,
+   "turnCount": 126,
+   "score": 52.4,
+   "baseScore": 52.4,
+   "spotCount": 0,
+   "polyline": "gtbmE_mxnXqGjIiAlCw@hQdAfLnDxA~IxOnDjDxBjDX~CiAfGoQ~\\gBpFkEhHeA|Gq@dKCzG|@nCdAbAjCIlFqFhQ_IlDsDbDeAlCDlHbCbAl@`@dA`@bDMfGiAlF{@rJsClHmChBqFfBkBpBg@vCLvK\\nBxBrEvIvCvT~O|AdQc@lLvAnLxAdDfF|Gt@|Bd@fEH~IbBjE]zNaItMkCxACr@p@f@pG\\pAOvBgBpDj@RhFzAhEKbJ\\nDgApEuMzHmBxCeA`GFlGRbDdAvD",
+   "pointCount": 71,
+   "start": [
+    33.769804,
+    133.659837
+   ],
+   "end": [
+    33.758824,
+    133.586619
+   ]
+  },
+  {
+   "id": "高知県:144",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道56号",
+   "ref": "56;381",
+   "highway": "trunk",
+   "lengthKm": 22.87,
+   "curviness": 160,
+   "flow": 16.1,
+   "turnCount": 228,
+   "score": 52.2,
+   "baseScore": 52.2,
+   "spotCount": 0,
+   "polyline": "cmqjEy|flXh@vFg@pDcAfCKtBnAbFt@~GrAf@xE{AtB?tH~ApEjD~Kr@dDrBtAlDrAbOhIjb@`@fB`ApAf\\|BzNP`QhElD{@~Q_NdEm@jEh@rAp@zAvBfAhDhAt@jMcCbCd@p@bAX~AT~Tx@fAjDdBnGtAnB`MQbBaEjDi@`DdDhOj@|FIvCoCbL_H~Jy@xCb@|AlE`Af@dBkEpVpA`BdNLv@zBi@bBqAvAiGhAcAxDyChBGxBfDzKMvAoCrGOdHt@hBtEe@hCdA|MlJX`Cs@|DvBzHpClDhH@fI`CrNxFdAjC|@v@|HzApKvE~JnBtF^jDnC`FzAtJxKvFpLdCfDrPcCjCCrPbF~Hc@~B}D|AcH|@mBvF_F~B_@vT|AdNMfJhCbBvAjKdOrFvPjAp@|GlA|BDlAa@bGqEdNoFhDwDbAa@dHjBlTdDnLnEhJpLpDfD|_@rUzJn@xTUpErArb@t]xHlJfE`Lre@zS`F|KfFjDbGvJ~IhCxHX`OfNpErB",
+   "pointCount": 130,
+   "start": [
+    33.353942,
+    133.242533
+   ],
+   "end": [
+    33.21994,
+    133.141067
+   ]
+  },
+  {
+   "id": "高知県:145",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "桂浜宝永線",
+   "ref": "35",
+   "highway": "primary",
+   "lengthKm": 4.26,
+   "curviness": 149.2,
+   "flow": 15.9,
+   "turnCount": 40,
+   "score": 52.1,
+   "baseScore": 52.1,
+   "spotCount": 0,
+   "polyline": "e~pkEergnXqI}@kGGoDx@wBvCaKEqOlE{LdBaFpEuAzNu@~BuNzEwIKcMyCqGoTN}La@cCeA{@ySeGs@EmI`CmG`Z",
+   "pointCount": 22,
+   "start": [
+    33.515386,
+    133.573626
+   ],
+   "end": [
+    33.543443,
+    133.569913
+   ]
+  },
+  {
+   "id": "高知県:146",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "高知南環状線",
+   "ref": "36",
+   "highway": "primary",
+   "lengthKm": 5.53,
+   "curviness": 138.7,
+   "flow": 16,
+   "turnCount": 48,
+   "score": 51.9,
+   "baseScore": 51.9,
+   "spotCount": 0,
+   "polyline": "s`wkEyjjmXp@B`GgIjIyFnMmNzIqHpKqGrBgHpE}D`C]nC^fPlLhWrFlFeBhLcAtJ}DzQu@dJoClR{I|AsCdJuExETr@Wp@qDnCgGJaBMmCsDmJ]uBDkDtCqP",
+   "pointCount": 31,
+   "start": [
+    33.546498,
+    133.423966
+   ],
+   "end": [
+    33.510165,
+    133.447107
+   ]
+  },
+  {
+   "id": "高知県:147",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道32号",
+   "ref": "32",
+   "highway": "trunk",
+   "lengthKm": 18.84,
+   "curviness": 169.4,
+   "flow": 15.4,
+   "turnCount": 208,
+   "score": 51.8,
+   "baseScore": 51.8,
+   "spotCount": 0,
+   "polyline": "uonmEwwqoXrFl@zEc@`FrA|IxDhH~EpFtHbEdRhDlKxCfGl@nEfHpHdChIlEjHnCbBlDf@tChB`KvNvAfArCl@|BxApCN~FxBpJChBbBlMhFdItHvCrEfAVzCo@bAJ|DzD|HrRnLzQdBvFvB|DwBlE~@xE`Mj\\jFfJxDzLbAjFH`Jf@hEM`K}Ct^hFtLbEjFzD`Ar@nAOfAqB`CkElIiAhEFtA`GtPfClCjI`QlAjHfDpG^vEdA|Da@zEeF~FcAf@qDBeF|AiG|K_@tBCzHxAhJrAlEH`E|HtJf@tE~AtC~@~EtApCvCR`DqCbEaAzBsAlABlFdIhF|StAhBlFfEtDxAjYnG~CvBtC`QbErIhBrHfCbFHpGqA~F?lE|CnVpB|IbOfQtGpBrAnBO|AwAxBgIvEkArA]nCb@tAdAfAnVnEtEw@lKwDnMeDzG^|BtAfDrD|GdBxG}BfQh@",
+   "pointCount": 119,
+   "start": [
+    33.83051,
+    133.789557
+   ],
+   "end": [
+    33.747455,
+    133.66366
+   ]
+  },
+  {
+   "id": "高知県:148",
+   "region": "kochi",
+   "regionName": "高知県",
+   "name": "国道439号",
+   "ref": "439;441",
+   "highway": "trunk",
+   "lengthKm": 12.03,
+   "curviness": 175.7,
+   "flow": 15.4,
+   "turnCount": 137,
+   "score": 51.5,
+   "baseScore": 51.5,
+   "spotCount": 0,
+   "polyline": "glbiEe_qjXpCHlLcArCD`CdAhKfIbLbTrAbAzADdIkC~AaAlFeGdKPfBpAv@tI`BlChIChDwBtDTvGpErFbClBxCBzFv@dBnDg@nH}EzEUrEb@`GhBzLrAdD?rT|QrH{A`E\\tE`FfBnGxKjR|FdGxFhK`FlFxB~@fKs@lIx@tFiEvFmI~BKfBgAd^iHjIEdJwA~Hr@jJfCdJ|@vDbDrJxMxEpBpGn@hJdG|@jFw@tDHtAfJrEdCnDv@jCjCbCp@jHB~DbBzDfANjGiCdCwEp@_@`Hq@dEHdAb@zMfO|CtA",
+   "pointCount": 77,
+   "start": [
+    33.113157,
+    132.966427
+   ],
+   "end": [
+    33.026908,
+    132.93191
    ]
   },
   {
    "id": "高知県:149",
    "region": "kochi",
    "regionName": "高知県",
-   "name": "新居中島線",
-   "ref": "282",
-   "highway": "secondary",
-   "lengthKm": 4.16,
-   "curviness": 185.2,
-   "flow": 18.3,
+   "name": "横浪公園線",
+   "ref": "47",
+   "highway": "primary",
+   "lengthKm": 3.96,
+   "curviness": 157.3,
+   "flow": 14.8,
    "turnCount": 42,
-   "score": 50.3,
-   "baseScore": 50.3,
+   "score": 51.4,
+   "baseScore": 51.4,
    "spotCount": 0,
-   "polyline": "ivlkEkgnmXy@gAzB_JfC?hJiDlPoUvCUzFgFvLkBbO_KdM}GjCQdBu@dCqEnH{CnC_DfLwDjCsChCgFrAe@nb@x@nBc@rBuAxE_G",
-   "pointCount": 24,
+   "polyline": "i{_kE{m~lXgC`DsHzB_CjDqGbAaObKaACmCgCyCqAaDcEiIc@gDhAaJpNqKv[gMxTeIdH_IhDyCdC}DjOqC~FwB|AaFKiBzA",
+   "pointCount": 23,
    "start": [
-    33.493651,
-    133.443903
+    33.427895,
+    133.363015
    ],
    "end": [
-    33.463011,
-    133.463231
+    33.453804,
+    133.342008
    ]
   }
  ],
- "hiddenCount": 0
+ "hiddenCount": 36
 }

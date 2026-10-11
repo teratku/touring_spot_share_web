@@ -1,46 +1,19 @@
 {
  "prefecture": "栃木県",
  "romaji": "tochigi",
- "generation": 7,
- "contentHash": "dafc78ad49c5",
- "builtAt": "2026-08-26T09:40:08.422Z",
+ "generation": 8,
+ "contentHash": "1e49239a4002",
+ "builtAt": "2026-10-07T14:20:59.597Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
  "count": 150,
  "segments": [
   {
    "id": "栃木県:0",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "もみじライン",
-   "ref": "19",
-   "highway": "primary",
-   "lengthKm": 27.42,
-   "curviness": 620.9,
-   "flow": 27.6,
-   "turnCount": 616,
-   "score": 92.6,
-   "baseScore": 83,
-   "spotCount": 2,
-   "polyline": "kzt`FewftYd@wAPd@s@bEfAxAOnD~Cn@?fDhBX|BzAdDKfDaCzDwAxMz@p@tDhCb@J\\a@h@}DF_Aj@qBzCDzAtApAvOxFvAlD~I|@~AjEtBh@vAzBpDn@jCzFr@rFnAnCrCrAhCpGjF`DzAxCxEJzAcAMg@kCZqBWWqAvAyBbC`@vFo@rBhCf@~Bq@hDxDdBTfA}@rB{EdDZhGj@dAnCdB~B`G_@|@eDLc@t@c@bQr@zH}CjHt@bLtBzGzBrE`H|GjLvF`BnCbBFxC}@nDtBtDcBtEUhEj@tCcAd@t@ObAs@hAqErBArA~AjAxEJdAUnCcChBIZ`AUrCfCrAb@fA[~@mBfAIv@vBhAjC`DlDl@~AbDt@b@nBEpKwJzGuAvCKjAuAjCiArB`@vCu@|JnDbJZhJmDf@b@?h@gDjLnBlBFbCsDv@Kt@nERtCnDZhDn@v@lD@pD|@`JB?|@uAlCH`Ji@nD`AtLrCdEzEDnBzB~DbC|ENrBhBD`Cp@fA|HVrFwFzDOrFpDvCKvAjErCFtD}Dv@aDjB_Bx@_Ew@wF|DId@sA@sCzA{@HkD~AeBAs@sAoBt@qCAqD|EwBbAd@T~C`EhElA~DzClAjCfC~@pE|EpHt@XrBw@`@LOp@wD~ANrA|D?hBd@n@_@`@kB`@Y~AfAzCJ~BeA~BN~GcAn@b@jC~FnCxBdCQlFdA~DeB|EpDl@a@j@iF`Dy@BzBuBx@Oh@b@pF~DfH\\]MaElC[At@aBp@tBfC{AzBw@pC{Cx@wB~AuD@iDlD{@tBHp@f@CpA_DrAHpAaA|AxB`D\\v@yEb@SxEtEhAqB?}DZQtJxFpBgB~BRpCvAzDiDZRQ`BkBb@m@vByDe@aBf@kBvIh@Jd@gDdCoBzAVjB`CtB]pAh@`@IbAeCn@Q`EtDnCEp@j@ApAe@\\s@PoBq@q@fCi@aBo@SKzGo@EeA{AWLF|CeA~@ThBiBzBVn@rBdAA~@aAr@HtD{Ad@V`DmBxFfCnCXrEpBq@fAdD`@GbA_E`D}B`G~E~C]bBd@lBg@|@dB`AcAvC]xAuA~AtANkAaA{Cp@_FzA_AjE|DN|AtAbCf@bHx@p@Na@iAaD@wBkBqMUg@aCu@h@o@hDjBDhCnDpMdClArFL|JtBrC|D~Af@tClD",
-   "pointCount": 313,
-   "start": [
-    36.975903,
-    139.795228
-   ],
-   "end": [
-    36.863386,
-    139.717056
-   ],
-   "boost": 5
-  },
-  {
-   "id": "栃木県:1",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "中宮祠足尾線",
@@ -50,8 +23,8 @@
    "curviness": 676.4,
    "flow": 27.3,
    "turnCount": 83,
-   "score": 88.7,
-   "baseScore": 81.2,
+   "score": 102.9,
+   "baseScore": 95.4,
    "spotCount": 5,
    "polyline": "wl`_FmghrYReAq@eFe@]{CEw@}@DuEgAeH_Aq@sDF_BuBi@_FZgCaB}Ao@qC_Cb@wEaA}Ap@SnAc@ViAi@aDZqBgA}BmJt@gEk@}DzAcD@wA_@iAoAaAi@mFo@Ci@~Aw@LmCwIsAUcA_CsJqCiAiCaCeAwAsCoATkAfCwAsAi@F",
    "pointCount": 45,
@@ -62,6 +35,38 @@
    "end": [
     36.723757,
     139.494383
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:1",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "塩原矢板線",
+   "ref": "56",
+   "highway": "primary",
+   "lengthKm": 27.24,
+   "curviness": 745.5,
+   "flow": 31.5,
+   "turnCount": 645,
+   "score": 101.1,
+   "baseScore": 98.2,
+   "spotCount": 1,
+   "polyline": "e}z_Fst}tYSvHaCfEu@bG}@lAwO`L_ExE_AjCqEpE}BxDgH~AgClA{AlBiEdAkFjDeA`C_EbCqIlPwEjDiE`GuFtKmG|HiFfEqUv_@eOdRLzEpGpKh@jCtGvDoEhDi@lAXLbCmAnEbA^~@A`A}AjDHrDmJhL{@|BLxDh@nASfAk@b@Y`D}@dBlAfCBbA_@z@{Az@Ip@|FvE\\dAq@xA}Ap@{BaB{AlDiDjAo@tCiDdAgEhDaAa@_A_Ds@s@iB`AcASy@~@wBf@gCfBiCf@c@fBr@rD}ErFe@tCy@zAsDbCgEh@cEjCwABcAxCyD`EiB|CaDlA{LfIcBhGgE`EeA~DaDTwGzBkAB_FnFs@fCaCdDuAx@w@zBgBn@kAvCaBnA{AtD]ZuAKgFbI{Dy@sA~AeBXAwCm@sAoC@YkBoAJmCpBmA?uBpEiBXe@tAcDJA`DYr@eCD}@iB}C`CyCC}C|C_@OS_BWDgAtCcGzGWtBvBlAJh@uDfBPn@rACUn@{At@zA@L\\sBbA]dB_D_As@mAoE?kEaCqC~@gC?_QrUqCTkJaF}@Dg@jBdDjCvAzHGvB{@pCB~Dy@Jy@o@sCcFiCa@oCLyAeBeCeAiASqAvAmByBcAJg@fAm@As@_BkAOYaAyBuB}@cGoBYo@v@eCRArAxAJ~@jAPjCdAz@T~AfDhA?fA~@|BcAtBJj@bBEtBeAjDnAKnCkAhDnDr@TbAgCjFe@g@fAqB@y@g@BkAdDUg@h@wAs@Lk@dDf@|J_@fAgANq@m@mAkEyAaBQn@jApBEfAg@FsAiEGoDwApBuAB{@|@kBkA_ClDTd@xAsA^\\s@nCcA\\aACy@aAqBq@i@{A}A@cAiCeBFu@mBg@MeC|AY|As@h@h@nAo@hBt@~BkATkDeAArEg@v@o@Qw@oAw@mFe@Iy@fBaBj@Uz@LnAw@r@h@nBs@bBbBzEEt@e@JgG_F}@yHw@]mDf@_AwERoAm@YL_B}EoBImEeBIKuAqAa@y@lAaAWYmAgA_AaEEqCsFg@dA}D`BUnA_@Ls@ESqA}@Ei@aAw@lAqDs@Dj@~C|AYb@eIcFLa@rEg@A{@aAj@yBCaAi@gB`BAfA]JQ_BR}Em@QaAzBw@HKiBaCoHoB?w@e@WaAgAh@gD}AeCFgBs@mBsAuBaEcHaBkDyCgASu@cBeAE{AiAsBVkGU?]vENvCu@vF|ANm@wDm@[c@nDRh@WmEuBiEIuIwC",
+   "pointCount": 338,
+   "start": [
+    36.84323,
+    139.912577
+   ],
+   "end": [
+    36.96246,
+    139.831391
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
@@ -75,8 +80,8 @@
    "curviness": 541.8,
    "flow": 25.4,
    "turnCount": 111,
-   "score": 87,
-   "baseScore": 79.6,
+   "score": 101,
+   "baseScore": 93.5,
    "spotCount": 5,
    "polyline": "{sf_F{nlrY~BT~ChBfJpCtChDvBvGbBfCtLvC|@zAxHfD^v@FdH`AhDbFrEl@xFp@z@rA]dC}CtCPn@]zFeKTqEj@]t@h@v@tDh@|JlBz@v@|Ah@IQyAyBoBh@yCpBkBd@_BoDiFPaB|@cBNmGuDyDcA?aAzCkC\\qAnAgBBBpE}AzDdAfCo@~AaA@qBeA}BoDzAcC^}BfBs@dAcE~AQbAsArCu@nAmDnB}A",
    "pointCount": 60,
@@ -87,6 +92,9 @@
    "end": [
     36.723757,
     139.494383
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
@@ -100,8 +108,8 @@
    "curviness": 530,
    "flow": 25.8,
    "turnCount": 206,
-   "score": 86.9,
-   "baseScore": 80.2,
+   "score": 101,
+   "baseScore": 94.3,
    "spotCount": 4,
    "polyline": "caq_FoijsYNpI]jHeCbJcCvDQlK_AnIsDzKcBlB}BdAu@xAcC\\uDU}@r@uJ@iBh@wDe@oZ|@}JrDwQdCeHdIwDNsAp@kCSWuDm@Qy@fFaGfPiAfFoDhCo@hHaHbFaBbD_CrBoCxHm@LW_@nBmF_@m@u@`@cCtHwDxA}A}@S`AXjDYnBwBq@cF~BcB{@_Ge@a@z@`@v@`DxAh@hG{CjAu@bB_Du@UzBsAlDkB`Bg@DUm@rAcAzAeDUqGfDb@pBkACk@qC{AqDX{BhEd@dBcAbBi@ViB]}@~B_BtAUrAk@ZUWHy@nGyL\\uCW}AsCHmCtAyBA}Ay@}CLcA_CBaBqAyBsCi@iAd@oAaBu@KiBDeGpBkFKuArEf@zEvAnCFnAm@l@wGp@",
    "pointCount": 105,
@@ -112,35 +120,14 @@
    "end": [
     36.840603,
     139.616789
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "栃木県:4",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "田沼唐沢山公園線",
-   "ref": "115",
-   "highway": "secondary",
-   "lengthKm": 3.22,
-   "curviness": 794.6,
-   "flow": 39.4,
-   "turnCount": 65,
-   "score": 86.3,
-   "baseScore": 81.8,
-   "spotCount": 2,
-   "polyline": "iw}|Es}|rYrEuL`MiR`C}B`H}DdE{LxH__@fA_@dAfBfCpBXOcAaBIoC_BmBrAyG_BUAYfDSt@`AGkAuBi@Ha@hCh@f@zBPeAk@}Bh@ChAjCIaDbAlD`D@l@xAdCE",
-   "pointCount": 33,
-   "start": [
-    36.366132,
-    139.581224
-   ],
-   "end": [
-    36.353708,
-    139.59749
-   ]
-  },
-  {
-   "id": "栃木県:5",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "栗山日光線",
@@ -150,8 +137,8 @@
    "curviness": 500.1,
    "flow": 24.9,
    "turnCount": 499,
-   "score": 86.3,
-   "baseScore": 78.8,
+   "score": 100.1,
+   "baseScore": 92.7,
    "spotCount": 5,
    "polyline": "gei_FqtdsYeA_@eCFai@vNoM}DsHYoDuD_Ek@eNv@_Jo@uCaA{GeHgJgDgA?}@jAs@zFgDbDaJlB_MvEqEk@sFbCaCF}Bo@i@Tm@~AiC|KyClEiDvHMpF|DxBf@pAClAu@z@iEf@eDdC^fJe@vBuGnIgGdF_DnEgD~AaDtIiDnMaAL[o@d@iEm@Wq@`@m@rCCbEoApD@tAx@|Bc@jAqAc@gAkFeAW]fAf@pEgExE{Bz@i@kAF{MYm@q@?]~@b@dCObDmGtJ}@@UoAtB{BJy@Ye@mGf@uDSe@NOr@dA|B?fAw@fAsANaA]sCcDyB|AwAS{AmGgCuDa@_Hg@o@y@@uAtGcBzBqAT_B{AkAUwAb@D|AdG`ITtAi@p@wBHsBjGyB~AK|F|@rH_@z@_ANsHgBuDvAwD{HeBi@cF?oAr@cAhCQbHkR|FmAq@kKkPqAAsAbA@bDWz@s@Hi@i@EgCuAwAUiAfB}Cx@mFdB{CIkByA?yBbFiBr@uAxAs@Fa@s@Lw@jBy@Zu@yAmDVqBdDcFdEmCAw@aAoBn@cFgAaLt@iAlCn@\\s@M}@cFgByFa@wAn@iD`FeHjDuQiB_Bw@eEuFgFkDwFeMy@Gg@x@hBzIUz@q@R{FqGmJmAkDqFiHwEaIuA{@{Ai@_JGiOlEeLVeEa@cCcCgD_@eEqCPcDiEmAMwL~G}Lh@m@j@q@hDiDlHuDu@uBDmBrA{B{@oE\\{C~BwAaBaBhA{GD{LuBWv@h@`AvCt@kC`De@[EcBe@@CbCUXa@YCmBy@_Df@uBg@]y@vCv@lFKbCQ`@g@MBqCk@{Dk@[[jJd@|Be@hAiB`AJp@pAr@ElFXrB_@f@gHzBaDu@aCuET_@`CPrAaA|BBv@a@DoAkCcCFkCoA?wCjAmBiA_DEyB_BaDKgC_Fh@yAbCk@P{@Ya@eCPeDpFm@?Io@hAkCFcCc@gAyE}DB{AlAaBy@eC",
    "pointCount": 263,
@@ -162,60 +149,45 @@
    "end": [
     36.86705,
     139.616476
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:5",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "もみじライン",
+   "ref": "19",
+   "highway": "primary",
+   "lengthKm": 27.42,
+   "curviness": 620.9,
+   "flow": 27.6,
+   "turnCount": 616,
+   "score": 100,
+   "baseScore": 97.8,
+   "spotCount": 2,
+   "polyline": "kzt`FewftYd@wAPd@s@bEfAxAOnD~Cn@?fDhBX|BzAdDKfDaCzDwAxMz@p@tDhCb@J\\a@h@}DF_Aj@qBzCDzAtApAvOxFvAlD~I|@~AjEtBh@vAzBpDn@jCzFr@rFnAnCrCrAhCpGjF`DzAxCxEJzAcAMg@kCZqBWWqAvAyBbC`@vFo@rBhCf@~Bq@hDxDdBTfA}@rB{EdDZhGj@dAnCdB~B`G_@|@eDLc@t@c@bQr@zH}CjHt@bLtBzGzBrE`H|GjLvF`BnCbBFxC}@nDtBtDcBtEUhEj@tCcAd@t@ObAs@hAqErBArA~AjAxEJdAUnCcChBIZ`AUrCfCrAb@fA[~@mBfAIv@vBhAjC`DlDl@~AbDt@b@nBEpKwJzGuAvCKjAuAjCiArB`@vCu@|JnDbJZhJmDf@b@?h@gDjLnBlBFbCsDv@Kt@nERtCnDZhDn@v@lD@pD|@`JB?|@uAlCH`Ji@nD`AtLrCdEzEDnBzB~DbC|ENrBhBD`Cp@fA|HVrFwFzDOrFpDvCKvAjErCFtD}Dv@aDjB_Bx@_Ew@wF|DId@sA@sCzA{@HkD~AeBAs@sAoBt@qCAqD|EwBbAd@T~C`EhElA~DzClAjCfC~@pE|EpHt@XrBw@`@LOp@wD~ANrA|D?hBd@n@_@`@kB`@Y~AfAzCJ~BeA~BN~GcAn@b@jC~FnCxBdCQlFdA~DeB|EpDl@a@j@iF`Dy@BzBuBx@Oh@b@pF~DfH\\]MaElC[At@aBp@tBfC{AzBw@pC{Cx@wB~AuD@iDlD{@tBHp@f@CpA_DrAHpAaA|AxB`D\\v@yEb@SxEtEhAqB?}DZQtJxFpBgB~BRpCvAzDiDZRQ`BkBb@m@vByDe@aBf@kBvIh@Jd@gDdCoBzAVjB`CtB]pAh@`@IbAeCn@Q`EtDnCEp@j@ApAe@\\s@PoBq@q@fCi@aBo@SKzGo@EeA{AWLF|CeA~@ThBiBzBVn@rBdAA~@aAr@HtD{Ad@V`DmBxFfCnCXrEpBq@fAdD`@GbA_E`D}B`G~E~C]bBd@lBg@|@dB`AcAvC]xAuA~AtANkAaA{Cp@_FzA_AjE|DN|AtAbCf@bHx@p@Na@iAaD@wBkBqMUg@aCu@h@o@hDjBDhCnDpMdClArFL|JtBrC|D~Af@tClD",
+   "pointCount": 313,
+   "start": [
+    36.975903,
+    139.795228
+   ],
+   "end": [
+    36.863386,
+    139.717056
+   ],
+   "boost": 5,
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "栃木県:6",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "塩原矢板線",
-   "ref": "56",
-   "highway": "primary",
-   "lengthKm": 27.24,
-   "curviness": 745.5,
-   "flow": 31.5,
-   "turnCount": 645,
-   "score": 86.3,
-   "baseScore": 83.4,
-   "spotCount": 1,
-   "polyline": "e}z_Fst}tYSvHaCfEu@bG}@lAwO`L_ExE_AjCqEpE}BxDgH~AgClA{AlBiEdAkFjDeA`C_EbCqIlPwEjDiE`GuFtKmG|HiFfEqUv_@eOdRLzEpGpKh@jCtGvDoEhDi@lAXLbCmAnEbA^~@A`A}AjDHrDmJhL{@|BLxDh@nASfAk@b@Y`D}@dBlAfCBbA_@z@{Az@Ip@|FvE\\dAq@xA}Ap@{BaB{AlDiDjAo@tCiDdAgEhDaAa@_A_Ds@s@iB`AcASy@~@wBf@gCfBiCf@c@fBr@rD}ErFe@tCy@zAsDbCgEh@cEjCwABcAxCyD`EiB|CaDlA{LfIcBhGgE`EeA~DaDTwGzBkAB_FnFs@fCaCdDuAx@w@zBgBn@kAvCaBnA{AtD]ZuAKgFbI{Dy@sA~AeBXAwCm@sAoC@YkBoAJmCpBmA?uBpEiBXe@tAcDJA`DYr@eCD}@iB}C`CyCC}C|C_@OS_BWDgAtCcGzGWtBvBlAJh@uDfBPn@rACUn@{At@zA@L\\sBbA]dB_D_As@mAoE?kEaCqC~@gC?_QrUqCTkJaF}@Dg@jBdDjCvAzHGvB{@pCB~Dy@Jy@o@sCcFiCa@oCLyAeBeCeAiASqAvAmByBcAJg@fAm@As@_BkAOYaAyBuB}@cGoBYo@v@eCRArAxAJ~@jAPjCdAz@T~AfDhA?fA~@|BcAtBJj@bBEtBeAjDnAKnCkAhDnDr@TbAgCjFe@g@fAqB@y@g@BkAdDUg@h@wAs@Lk@dDf@|J_@fAgANq@m@mAkEyAaBQn@jApBEfAg@FsAiEGoDwApBuAB{@|@kBkA_ClDTd@xAsA^\\s@nCcA\\aACy@aAqBq@i@{A}A@cAiCeBFu@mBg@MeC|AY|As@h@h@nAo@hBt@~BkATkDeAArEg@v@o@Qw@oAw@mFe@Iy@fBaBj@Uz@LnAw@r@h@nBs@bBbBzEEt@e@JgG_F}@yHw@]mDf@_AwERoAm@YL_B}EoBImEeBIKuAqAa@y@lAaAWYmAgA_AaEEqCsFg@dA}D`BUnA_@Ls@ESqA}@Ei@aAw@lAqDs@Dj@~C|AYb@eIcFLa@rEg@A{@aAj@yBCaAi@gB`BAfA]JQ_BR}Em@QaAzBw@HKiBaCoHoB?w@e@WaAgAh@gD}AeCFgBs@mBsAuBaEcHaBkDyCgASu@cBeAE{AiAsBVkGU?]vENvCu@vF|ANm@wDm@[c@nDRh@WmEuBiEIuIwC",
-   "pointCount": 338,
-   "start": [
-    36.84323,
-    139.912577
-   ],
-   "end": [
-    36.96246,
-    139.831391
-   ]
-  },
-  {
-   "id": "栃木県:7",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "益子公園線",
-   "ref": "262",
-   "highway": "secondary",
-   "lengthKm": 6.75,
-   "curviness": 777.8,
-   "flow": 32.4,
-   "turnCount": 162,
-   "score": 85.7,
-   "baseScore": 82.8,
-   "spotCount": 1,
-   "polyline": "sxp}EkibvYfO_OjCiGpIn@jJiA|@{DpCqBvD}EbAoFtFaE`EmInBmA\\gDsEaIkAOl@yEg@oBhAaByBt@D`B}@jDgBdAUjBY}Bv@oBiAXXgEaAqC`@kBcAw@t@_@e@e@DaEOe@iD]OmAjB}AnD\\xB{ClCj@pBSbFaD|V_Bq@sDoAAu@q@aBHIo@z@oCAaAeBQu@uB]XApBiABq@}C}CcE[mDoAaAn@_BJqCzF^t@iKfBiDoAmCwEeDq@}Gf@iDcAsHiAaCzBqEKeF",
-   "pointCount": 72,
-   "start": [
-    36.463623,
-    140.100216
-   ],
-   "end": [
-    36.450764,
-    140.138592
-   ]
-  },
-  {
-   "id": "栃木県:8",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "藤原宇都宮線",
@@ -225,8 +197,8 @@
    "curviness": 664.2,
    "flow": 29.6,
    "turnCount": 298,
-   "score": 85.2,
-   "baseScore": 82.3,
+   "score": 99.8,
+   "baseScore": 96.9,
    "spotCount": 1,
    "polyline": "q}{_FitktYbAvMoBhP_E`DJbArBl@XnAiBjKwBz^q@FUc@@_JcC{@cG`@gDtByO_@mHhCoDpGvBdI|BhEiCtC?z@\\`@~DPvAr@fB~Sn@r@bCh@wCzBIbAhD~AjBJjArAI|@cAhAaA^_BOO~@bGdDWbEdApD~BjA|AzBiAlK{DdGgCvHa@`@qAMo@hBsAUrC~EqAbAJ`AbEFvFzBuFPmA_@cCrAFXbBg@g@|AbBW|BzBoAn@_TfU{GtCmB?o@bATjBs@v@aArDRf@vBb@SlBoAxBh@tCWpBl@^bDa@@vIp@pClD`BRj@cCCvAnC_ATjCvFvBY^n@SrAcDdAKz@tBl@|AxDE`Bt@nCvElE`AlCeBxAkANuB}BmBo@r@jCeAtCwAvAx@dED`CiDvEiCjAi@hCs@p@bBzFi@lEk@h@oBI_B`BvDvBr@vDf@|KfE`EXvCuCbA`D~@Zj@ZhW_AjRn@vKc@jCBdBbBbJx@p@zCd@j@`A_@`CmExGOpBbFjN",
    "pointCount": 137,
@@ -237,35 +209,14 @@
    "end": [
     36.855963,
     139.729531
-   ]
-  },
-  {
-   "id": "栃木県:9",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須甲子線",
-   "ref": "290",
-   "highway": "secondary",
-   "lengthKm": 3.65,
-   "curviness": 708.1,
-   "flow": 29.7,
-   "turnCount": 87,
-   "score": 84.8,
-   "baseScore": 81.9,
-   "spotCount": 1,
-   "polyline": "ipoaFcmouYUy@_C{A]y@RcA`Cs@EoAy@KqB`Ba@OIu@pHkEfAkBGw@uE_@aCt@_ElEMxDgB~CeBhCeAHI_AfAsAFqDcCwJ{BsDo@kKsE{BaHGwBqDmDwCd@s@hBjBl@UkDqIs@P{@dCoCpD}@ICg@xCaCIaAm@HcCrCw@pBg@EAoApAkDSuC",
-   "pointCount": 49,
-   "start": [
-    37.112525,
-    140.003535
    ],
-   "end": [
-    37.123092,
-    140.014205
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:10",
+   "id": "栃木県:7",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "黒部西川線",
@@ -275,8 +226,8 @@
    "curviness": 585.5,
    "flow": 28.3,
    "turnCount": 462,
-   "score": 84.6,
-   "baseScore": 84.6,
+   "score": 99.5,
+   "baseScore": 99.5,
    "spotCount": 0,
    "polyline": "g|_`FuuasYgDhJp@hQaBbWc@PScBU?YbCk@Z@mB|@yB[[iCxEsAa@k@ZYjBrAfFCx@yChBMk@jBwAGc@o@NwFnHD`AhE_@^fAOzBVv@bBi@n@\\uD|FiAzGoDjEe@jGi@|AeDrA_E\\oFQoG`CaBYoAViC~EsDbBOlAz@dFkA`GiCnAgFDuCt@mCjC[`CWKRoCq@MkBlE_@`Cu@qDw@kAyCiA{@FkFlQ_HpMkBlGsFpJoC`HyIrEaEdGoCfC_C~DMzDsDfGg@dD}@v@gDKcDfDiBz@cAxC\\fDw@jBUtBwBbC{BW`AxAoE|BsEhHkEr@Cb@t@^Id@gDKcCd@cEnE[C@cA`DiGY[cG~HqFlAwBbBuAnEmCdBEzCcDhBFp@|BfAWnCkBlA{@tBmC|@o@tCKjEiD~EsAcFPmCm@wDu@qAiAcNyAkBQwDaBwIgCcGNeGjAuAd@IxCrAkCuBwCbAu@xCeBfALbB}@xBlC`CeC|At@^hBGTb@oDdD|@x@g@zAl@zDUlAYEkAaDeCiAmAiDcHuIeK}BwBaCwD@}DyAg@r@oAhI~@dDrAlBUlDTrEUv@i@AEiCi@yBHeBkFkIiGqDeDPwDmC{G_@uAs@wBaD_CsAi@iCgBwCmGe@w@`AcCLaFmCcDlAsCaCkCo@{AsAeFAmF}AgCn@kGvE}BJ}AyB{ABGoAc@g@gBLHaBwAwCq@kFiB{CqIo@m@mCeAo@iFKcBlCwBd@mEo@wCgCg@yDiDwDmHkT_BgBi@?q@`Au@}@|@{DiD_K_EeE_CpFs@ZYyBj@iEScBiD}BmAkECgCs@k@kADf@gDwBeDk@iE{C}FiEgEeAyH@iE}@uCAqARoBbF_KRqGr@oAXuDsAaGwA[aDsGaHmR",
    "pointCount": 240,
@@ -293,7 +244,36 @@
    ]
   },
   {
-   "id": "栃木県:11",
+   "id": "栃木県:8",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "那須甲子線",
+   "ref": "290",
+   "highway": "secondary",
+   "lengthKm": 3.65,
+   "curviness": 708.1,
+   "flow": 29.7,
+   "turnCount": 87,
+   "score": 99.2,
+   "baseScore": 96.3,
+   "spotCount": 1,
+   "polyline": "ipoaFcmouYUy@_C{A]y@RcA`Cs@EoAy@KqB`Ba@OIu@pHkEfAkBGw@uE_@aCt@_ElEMxDgB~CeBhCeAHI_AfAsAFqDcCwJ{BsDo@kKsE{BaHGwBqDmDwCd@s@hBjBl@UkDqIs@P{@dCoCpD}@ICg@xCaCIaAm@HcCrCw@pBg@EAoApAkDSuC",
+   "pointCount": 49,
+   "start": [
+    37.112525,
+    140.003535
+   ],
+   "end": [
+    37.123092,
+    140.014205
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:9",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "ボルケーノハイウェイ",
@@ -303,8 +283,8 @@
    "curviness": 747.7,
    "flow": 33.3,
    "turnCount": 168,
-   "score": 84.4,
-   "baseScore": 81.5,
+   "score": 98.8,
+   "baseScore": 95.9,
    "spotCount": 1,
    "polyline": "uplaFc{nuY}J~@o@g@~BmDrCmA`D{DHsA_@kAcBk@oFn@mEjFyY~QiCCsCwDs@CHjHlBzAaFZiCy@Qp@jDzBrDt@nAxHEx@wIzBcH`HmBjG_GVaDhAaFbE}BtDe@OKmFyCOgEb@OfAnBzAQ|AyDf@aBrAmAsBe@@sFhGaCBoArI@jD_AhFmABa@yEaASu@~BkC~@yCrDa@nE_@ICwCaBDd@rCGhBqA|@DmBsALg@xB}AhCq@AEkBmARwBy@Kl@p@pC_CH\\jEa@^iA]JtAUf@_CSqAeDgASMb@d@p@LpBeAqA}B\\Bd@jA?Zb@gBbIUzD",
    "pointCount": 89,
@@ -315,60 +295,14 @@
    "end": [
     37.128218,
     139.976487
-   ]
-  },
-  {
-   "id": "栃木県:12",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "第二いろは坂",
-   "ref": "120",
-   "highway": "trunk",
-   "lengthKm": 7.19,
-   "curviness": 831.3,
-   "flow": 29.9,
-   "turnCount": 200,
-   "score": 83.7,
-   "baseScore": 77.9,
-   "spotCount": 3,
-   "polyline": "krf_FsirrY_AlBH`B`BlAdB]vEgHbEgNGoDr@?|AnCh@IAm@{BuCaAqFRgD^y@d@AXl@k@fCDnAbFxGtBlAfCpDfE~BF{@sCwA_AoAeBcEJg@b@?`BdDbF`D`EvGrDbEf@fBD~C}@rELp@z@Mt@oFbBs@v@NAr@_BjCsAhGl@b@|@uDhBsAn@R?l@mEbIh@f@lAgDz@HqBrHLj@^?XsC|@Bm@zIr@ICqBlAyDn@d@gA|Cj@zC^HNa@}@oBNeAvAI|@|AUtCgChAm@|@@hA~@xBMrAw@h@sBuA{AXe@`A[rFk@EiAgBkAzB}@So@cCXkD_@_BiEtAs@zBaBfB]pKg@~@kDkA{DjAk@i@_@_C}Bf@iAqCEoEW]",
-   "pointCount": 103,
-   "start": [
-    36.7391,
-    139.526817
    ],
-   "end": [
-    36.736788,
-    139.517012
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:13",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "庚申山公園線",
-   "ref": "293",
-   "highway": "secondary",
-   "lengthKm": 5.36,
-   "curviness": 494.4,
-   "flow": 26.8,
-   "turnCount": 99,
-   "score": 83.6,
-   "baseScore": 77.9,
-   "spotCount": 3,
-   "polyline": "{zo~Eyw~qYwBbLyDj@}@rAaCnAeC|DmBvAaLm@iCrGAhCaAn@oB^cEqB_Dv@gBMeAoDY{EsAu@{CvEcG`@kBbA{AhDkB`BaFsBeGvAgF~DeEf@w@dAI|D_BbATbEgA|AaJ_@iC|EwCh@uNwAQlH_AfGeCo@qAuEyAyAwBr@wAvCsCvBwJrAyDdHgCbJk@rEj@bDErA",
-   "pointCount": 50,
-   "start": [
-    36.622701,
-    139.426693
-   ],
-   "end": [
-    36.655527,
-    139.406114
-   ]
-  },
-  {
-   "id": "栃木県:14",
+   "id": "栃木県:10",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "小来川清滝線",
@@ -378,8 +312,8 @@
    "curviness": 544.1,
    "flow": 28,
    "turnCount": 283,
-   "score": 83.6,
-   "baseScore": 83.6,
+   "score": 98.3,
+   "baseScore": 98.3,
    "spotCount": 0,
    "polyline": "qqg_FsezrYZfBtH|JT_A[uAiCsEPgMhCmLLaDsAoFk@kK}BcHP{@hNoE`@qA~CiAlDZbF{@zAyBvHlB|Ey@T}AaCkB?eApB|A`EJ`Bi@^fA{AjE~A~Bj@UhAkClBuAQgCq@gALe@lBxC?u@}@eBHe@pBjC`Ce@tDhBdAgCiAqAD{@bCvAKu@p@E`@hBxAkBzEgCqBVDo@rBmA`AN`AqBbFeBdAkAHy@}AhAoCn@c@KAm@bEcIvCqBnAsF|@|BZoDfDkE^BCpA^LvAyDbGgBzCuDdGxAtCIjBv@zCw@xDd@|FyA~BiBf@J`AbB~Ah@fI?rAeAtDtAhDg@`BsBvOeArDtAv@`AhFd@pKoB~GhIdBp@~EyBnBiHjCi@x@q@|EKr_@mSbCa@pFlB`ESrDcAh@iBgAkK\\cF_BmEpCuHq@}DZwApEiBjAiBlDy@fAoDhEmGzE}@|BcDlLsHdA}CvBm@hDoEpCsA`AsApBe@lDgE~DiA`BBhCnAdBs@tHcLlSoSrEkO|B}EzAqAlH_C`BqA",
    "pointCount": 141,
@@ -390,142 +324,43 @@
    "end": [
     36.663364,
     139.623093
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "栃木県:15",
+   "id": "栃木県:11",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "栗山舘岩線",
-   "ref": "350",
-   "highway": "secondary",
-   "lengthKm": 14.11,
-   "curviness": 660.3,
-   "flow": 27.4,
-   "turnCount": 340,
-   "score": 83.4,
-   "baseScore": 83.4,
-   "spotCount": 0,
-   "polyline": "qrh`FmxurYYx@j@bEIdAmAcBe@?aChDiAAg@|A?~AiB\\aAUOb@rBtCC|Ar@bBGjBqAfB@`D}AvDOxD`@~AKnA_GbGx@hCgApBQjFk@He@s@eAcIq@yAu@]yBLwCqA_CxAy@hBRlC_@t@iI}@{JnEi@QyB_GgBmAuDO{DaAmEX}CiCuBYwBZwE_@cBdDw@kBgASy@cAuCW_AiAwBWmCfAcBKmB|AqD@wBrAmAvByBMwAh@sAlEaB_@{BTiBfElArEWv@}Dy@uCh@{AMgAl@gHk@_Dl@{AbCQlC{ApDLzAtAlBf@hGfBtCO`AwAQiB{BeDuAgLeBsFlDsD]yB`@iEhCs@zC_AbAqHbDkBFuAe@iFd@yAs@yCFkDcBiAdBo@nDeCXiAhAwBy@oDRqB|E}DzAWxBl@pGf@v@AxAeBlCBlAsAX}AfGq@V}AWmDuBcAv@NhDg@lBzBfGApGq@`BqCr@oBjB]dD^pBQv@mAx@iFNqEiCs@qCmBC_Au@sCm@sEkEy@PShDr@pEg@rC|EzDqA~B?pBfAhEfBZ\\fAo@VyCiBcDaGg@cDg@FEzAtA`Le@KYaC}DaF[oAa@IKf@jAvFtCxHrBnB`B`@Ub@gA@yAiAKn@dAv@nDf@vCjF?l@o@FcCeF_Fi@eIiE",
-   "pointCount": 179,
-   "start": [
-    36.913205,
-    139.544549
-   ],
-   "end": [
-    36.976963,
-    139.502642
-   ],
-   "unpaved": {
-    "unpavedMeters": 13131,
-    "totalMeters": 14107,
-    "ratio": 0.931,
-    "surface": "compacted",
-    "label": "締固め"
-   }
-  },
-  {
-   "id": "栃木県:16",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "中塩原板室那須線",
-   "ref": "266",
-   "highway": "secondary",
-   "lengthKm": 10.01,
-   "curviness": 678,
-   "flow": 28.8,
-   "turnCount": 236,
-   "score": 83.4,
-   "baseScore": 83.4,
-   "spotCount": 0,
-   "polyline": "swz`FypjtYWq@|@{A|AvFrAr@xCfEBrAm@tAt@lFfD_GpDpBCkAqAqD^kAtAMzChFdAsAeAiIX}E|BZbIeCbMxJdBd@MrGz@TtCWh@bDNYi@eDmCMSq@l@kCtCeDiB~EvCdAlAnEfAlAoBlBMz@rBnK]XuB]qCVw@r@v@|EPtKV]\\cNt@GhEnCnAFhBiIw@aDB_Db@c@dD?tBs@Ab@cFzBdAzGwBtM_@XyEEGv@lAxEAxA{@t@aFx@sAt@?h@`Bm@bIa@t@kA@{Cb@k@tFJZyAIaEhBcCpA{FDiBnCa@NqB\\Yb@lAQvAwC`CV~GyBtCt@jDUnBu@jBcDrAeAnAu@jDj@fCp@SZ}Dh@{@vCkApDwGF}CpCeDvIhEhDqCjBc@pUhAvDqA~E`CfNiA|By@",
-   "pointCount": 111,
-   "start": [
-    37.006184,
-    139.81469
-   ],
-   "end": [
-    36.977839,
-    139.80631
-   ]
-  },
-  {
-   "id": "栃木県:17",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "第一いろは坂",
+   "name": "第二いろは坂",
    "ref": "120",
    "highway": "trunk",
-   "lengthKm": 5.51,
-   "curviness": 1190.5,
-   "flow": 43.2,
-   "turnCount": 152,
-   "score": 83.3,
-   "baseScore": 77.5,
+   "lengthKm": 7.19,
+   "curviness": 831.3,
+   "flow": 29.9,
+   "turnCount": 200,
+   "score": 97.8,
+   "baseScore": 92,
    "spotCount": 3,
-   "polyline": "{jg_FsfnrYwAyB_FoBoAgEmEyCJ[lFtCXvARCe@iBkDaDg@iCsCaAs@{CvA~BhA\\NWeBgAwCoIlDlGsCcJXSzB|FqBqITMdEzIgCoJ~F|GIwBwBgB}@gC{Aw@rB`@lAvBu@wC`BpB_@_BvBx@Bg@uAa@lC]UpBXNrAqJhAiALqBXJGjAd@m@aAwD{BhAnAkBuAp@YOrCaBeDP`DoANwDh@cCNeG~AeB^cB~G_HhHqN",
-   "pointCount": 64,
-   "start": [
-    36.743016,
-    139.505863
-   ],
-   "end": [
-    36.739931,
-    139.525665
-   ]
-  },
-  {
-   "id": "栃木県:18",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "黒磯田島線",
-   "ref": "369",
-   "highway": "secondary",
-   "lengthKm": 3.39,
-   "curviness": 539.3,
-   "flow": 26.9,
-   "turnCount": 68,
-   "score": 83,
-   "baseScore": 80.1,
-   "spotCount": 1,
-   "polyline": "aodaFao`uYsIlEgDLSb@ZhAKbAgBGo@`@`@hAKn@qCy@sGjBY|E_@p@iChAcDnEsKvEgGpMoDfAGn@v@bDq@jA}@b@}DaAGvArA`F_@bBmBOgDoCwA}C{CMgBbBoE|M_DfGoEPkAj@gFc@i@f@",
-   "pointCount": 38,
-   "start": [
-    37.056005,
-    139.927052
-   ],
-   "end": [
-    37.076155,
-    139.911292
-   ]
-  },
-  {
-   "id": "栃木県:19",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "柏倉葛生線",
-   "ref": "210",
-   "highway": "secondary",
-   "lengthKm": 7,
-   "curviness": 1036.8,
-   "flow": 34.2,
-   "turnCount": 212,
-   "score": 82.9,
-   "baseScore": 82.9,
-   "spotCount": 0,
-   "polyline": "w~d}EsdcsYtHkOtKsArHt@y@qGZ}ArAI|EbI|@F]}FHiDb@YzAjA`@_BIsCb@eFk@{@{CR{Bm@@c@jAa@tBoCQwBZ{A[m@mAV}AoAGqBeCuAGc@lCqBkA{CJu@tEGn@eAY]wA`AwEIO`Bz@dBYZg@w@OaDp@wAbAEIsBhFiJ@aAq@iBIeH|AyEhC@NvAZFhCyAv@aB_DqAzAgDDyAqAWkBdA[c@bCeA`@iCg@[c@PUpCmB_AgBfAa@eAd@uCoAWOi@dByAq@qAPg@~@tBeAzAnAVZnA\\Af@oCdAWd@wAxAs@d@oAd@dAUvBlBL|AxBEu@gCaDy@uEiB`@k@gAvDuBdBoHb@PMbCx@|@|CeEbBkATwB",
+   "polyline": "krf_FsirrY_AlBH`B`BlAdB]vEgHbEgNGoDr@?|AnCh@IAm@{BuCaAqFRgD^y@d@AXl@k@fCDnAbFxGtBlAfCpDfE~BF{@sCwA_AoAeBcEJg@b@?`BdDbF`D`EvGrDbEf@fBD~C}@rELp@z@Mt@oFbBs@v@NAr@_BjCsAhGl@b@|@uDhBsAn@R?l@mEbIh@f@lAgDz@HqBrHLj@^?XsC|@Bm@zIr@ICqBlAyDn@d@gA|Cj@zC^HNa@}@oBNeAvAI|@|AUtCgChAm@|@@hA~@xBMrAw@h@sBuA{AXe@`A[rFk@EiAgBkAzB}@So@cCXkD_@_BiEtAs@zBaBfB]pKg@~@kDkA{DjAk@i@_@_C}Bf@iAqCEoEW]",
    "pointCount": 103,
    "start": [
-    36.403156,
-    139.613061
+    36.7391,
+    139.526817
    ],
    "end": [
-    36.391841,
-    139.641684
+    36.736788,
+    139.517012
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:20",
+   "id": "栃木県:12",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "鹿沼足尾線",
@@ -535,8 +370,8 @@
    "curviness": 827.3,
    "flow": 33,
    "turnCount": 483,
-   "score": 82.9,
-   "baseScore": 82.9,
+   "score": 97.6,
+   "baseScore": 97.6,
    "spotCount": 0,
    "polyline": "wsq~EcierY|@XlC]xCuA~HzAlCsA~AErKnDzBfDtE|BdDFvJ`DJe@iBy@@[vChAXc@oG_Ba@}Af@wAxCyBkC`EV`@j@iBhE{AxA}A[rAcBbBmBXHr@t@FdBkBfBk@jDkFaCtGgCvAj@P`CaB~@kCzCeEv@QvAeFTVmAtCd@nB{A@UZArAy@TK~@}@fAMrDj@KVs@KyAz@uBfAUX}@x@`@jEkA_@aBv@iAfDFx@w@nCZ|@Yi@yC_AQT_DwADP_CkAO|@aBKw@wDHLoAjBwDYcEsBCuDbIgAGmBnBwBEo@{A{@[fAkBxBrA`AoAp@@~AiA|@}EfBeDLcDw@iBLk@dB{@RsEk@aACcAjBaCP}CdBk@h@sAh@ERRUvCr@VzAyEtCOfCt@v@Qj@qCpCeAcAqBp@qC\\QOtCdBbFgA^kAjDdBqBjAUb@_AEoC^XJtAyAdEd@H~@aA|@qEHmGvAmFc@cBlA{@hBuDm@uAvA_FpAk@_BmEn@WxF~@]gC~AmBMw@b@wCfBpAj@dG~Cq@k@{CjBi@Y_Cr@{BWi@qA]uAF@eCtA_BhBd@lCKpAwHLnBc@~AEdCeCf@c@v@|BtCc@dDPtCiA`BYnDt@_@ViCzAkBCcGpCeBr@kBdB_@Dj@{@v@]lB{@jAf@Rf@g@n@oCXPI`AVIxAqDbAaGbB}C~@eHd@mA`CsBb@iDlCeIb@iH~DeBjEwI|BuBViAe@wBJeA`DaBh@gDdByCnAgFhFeH`EcC~DwNxCcBv@aH~FkOf@YnCtArC_DhBvAvAJbCkGlAoAtHsAnIkHd@aBNmEqBuHK}NTgEzC_NhIkMzCsK`AoNjAcEUuP^cL~A{F|BiEbRgM",
    "pointCount": 236,
@@ -547,10 +382,101 @@
    "end": [
     36.573468,
     139.540903
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:21",
+   "id": "栃木県:13",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "柏倉葛生線",
+   "ref": "210",
+   "highway": "secondary",
+   "lengthKm": 7,
+   "curviness": 1036.8,
+   "flow": 34.2,
+   "turnCount": 212,
+   "score": 97.5,
+   "baseScore": 97.5,
+   "spotCount": 0,
+   "polyline": "w~d}EsdcsYtHkOtKsArHt@y@qGZ}ArAI|EbI|@F]}FHiDb@YzAjA`@_BIsCb@eFk@{@{CR{Bm@@c@jAa@tBoCQwBZ{A[m@mAV}AoAGqBeCuAGc@lCqBkA{CJu@tEGn@eAY]wA`AwEIO`Bz@dBYZg@w@OaDp@wAbAEIsBhFiJ@aAq@iBIeH|AyEhC@NvAZFhCyAv@aB_DqAzAgDDyAqAWkBdA[c@bCeA`@iCg@[c@PUpCmB_AgBfAa@eAd@uCoAWOi@dByAq@qAPg@~@tBeAzAnAVZnA\\Af@oCdAWd@wAxAs@d@oAd@dAUvBlBL|AxBEu@gCaDy@uEiB`@k@gAvDuBdBoHb@PMbCx@|@|CeEbBkATwB",
+   "pointCount": 103,
+   "start": [
+    36.403156,
+    139.613061
+   ],
+   "end": [
+    36.391841,
+    139.641684
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "栃木県:14",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "第一いろは坂",
+   "ref": "120",
+   "highway": "trunk",
+   "lengthKm": 5.51,
+   "curviness": 1190.5,
+   "flow": 43.2,
+   "turnCount": 152,
+   "score": 97.3,
+   "baseScore": 91.5,
+   "spotCount": 3,
+   "polyline": "{jg_FsfnrYwAyB_FoBoAgEmEyCJ[lFtCXvARCe@iBkDaDg@iCsCaAs@{CvA~BhA\\NWeBgAwCoIlDlGsCcJXSzB|FqBqITMdEzIgCoJ~F|GIwBwBgB}@gC{Aw@rB`@lAvBu@wC`BpB_@_BvBx@Bg@uAa@lC]UpBXNrAqJhAiALqBXJGjAd@m@aAwD{BhAnAkBuAp@YOrCaBeDP`DoANwDh@cCNeG~AeB^cB~G_HhHqN",
+   "pointCount": 64,
+   "start": [
+    36.743016,
+    139.505863
+   ],
+   "end": [
+    36.739931,
+    139.525665
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:15",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "黒磯田島線",
+   "ref": "369",
+   "highway": "secondary",
+   "lengthKm": 3.39,
+   "curviness": 539.3,
+   "flow": 26.9,
+   "turnCount": 68,
+   "score": 97.1,
+   "baseScore": 94.2,
+   "spotCount": 1,
+   "polyline": "aodaFao`uYsIlEgDLSb@ZhAKbAgBGo@`@`@hAKn@qCy@sGjBY|E_@p@iChAcDnEsKvEgGpMoDfAGn@v@bDq@jA}@b@}DaAGvArA`F_@bBmBOgDoCwA}C{CMgBbBoE|M_DfGoEPkAj@gFc@i@f@",
+   "pointCount": 38,
+   "start": [
+    37.056005,
+    139.927052
+   ],
+   "end": [
+    37.076155,
+    139.911292
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:16",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "草久足尾線",
@@ -560,8 +486,8 @@
    "curviness": 636.9,
    "flow": 28.2,
    "turnCount": 275,
-   "score": 82.2,
-   "baseScore": 82.2,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
    "polyline": "ann~E_vgrYk@_CmA_AO{AdBoFBmB|CcDlA_LcAc@yMjDuBH}CxAi@KeCeFmB}He@oLq@}BYcGg@s@uBVc@Wc@qEaAwA_EqDoCw@m@mAg@cGb@wI|@qBOyAuCwIaAq@oG{OuGwG{@aEQeEu@wADqBk@o@}HuC_HuAoF`AmCfC[zDZr@jBd@d@p@RhCq@zByBzBwAE_CsBmEy@iC}Eu@YyBNoAoBaGlJsAVcCaDa@A}@nCiDlDyOoD_CFqFvAiVgEe@qDwAoBWkDo@eAg@F{ApBuB`@_AtCq@j@I}@jA{BrBgIQu@c@Vy@tDo@NkCiEu@M}A_ByABsAuA{Bm@_@gBgB{@O}AtBw@MaD_AeB^_Bs@eDx@eCSqAwAe@aAoB}CMQm@pBD`Be@jGjCf@gAkD}BNs@nBRAs@yCS_A}A{Ag@@q@fC\\`AqAU[uBAhBeBA}@_GsFIo@VUrBt@fAi@x@{@JgBxAo@FsCdBmAK}@}Bp@]_@~@oBgBw@Kk@G}MpFcHbGmN@yAcCAaAcAfCkN",
    "pointCount": 144,
@@ -572,35 +498,44 @@
    "end": [
     36.653424,
     139.527635
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:22",
+   "id": "栃木県:17",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "草久粟野線",
-   "ref": "246",
+   "name": "田沼唐沢山公園線",
+   "ref": "115",
    "highway": "secondary",
-   "lengthKm": 3.48,
-   "curviness": 1105.1,
-   "flow": 32.6,
-   "turnCount": 118,
-   "score": 81.9,
-   "baseScore": 81.9,
-   "spotCount": 0,
-   "polyline": "ubo~EajtrYMyA{@Xa@_@fAe@lAJGaCoA]WeCoAl@m@s@W}DP_CYw@XMp@n@Zu@mA}@ScARi@pD_Bv@eF~@sAxDkApBVxAk@LuAu@wAeDjBaAQ@_AnAkCpAU~@uAvBs@r@oAvE_@vBfCnBjA`Bg@zA`BzAF^k@xBm@V{B`CiGL}ApCC{As@Eq@rBf@pCKtDqAhBsCrAzAjBl@bD_@^cA",
+   "lengthKm": 3.91,
+   "curviness": 927.2,
+   "flow": 65.9,
+   "turnCount": 55,
+   "score": 96.4,
+   "baseScore": 96.1,
+   "spotCount": 2,
+   "polyline": "oe||Ekv_sYfA_@dAfBfCpBXOcAaBIoC_BmBrAyG_BUAYfDSt@`AGkAuBi@Ha@hCh@f@zBPeAk@}Bh@ChAjCIaDbAlD`D@l@xAdCE??~@cChE_Cs@tA{BxACf@^BbDgCnBqCRf@s@^qAjEX|@jC|BjFcDdE}@dBLxApAo@cBmFcBAiC~As@h@kDt@uAh@CNhBZP`GuAtF^~HyGpCU",
    "pointCount": 58,
    "start": [
-    36.61883,
-    139.537129
+    36.35816,
+    139.59542
    ],
    "end": [
-    36.605565,
-    139.550225
+    36.34355,
+    139.60186
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "栃木県:23",
+   "id": "栃木県:18",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "中塩原板室那須線",
@@ -610,8 +545,8 @@
    "curviness": 719.6,
    "flow": 29.6,
    "turnCount": 86,
-   "score": 81.9,
-   "baseScore": 81.9,
+   "score": 96.3,
+   "baseScore": 96.3,
    "spotCount": 0,
    "polyline": "okdaFsfauYr@pCkFtKdAhEdBz@fBAnIuAtEgCr@d@{@rFmArDB`FiAvFiAj@q@tCmCmA{@BExBuG}@_Gt@kAuAoBXm@f@y@jCv@zDjD`BDj@w@ViDeBy@aBoA\\s@|@Td@vAS`CjBYhCf@dGm@`Bt@dE|D{AlCKn@fCnCZE~C",
    "pointCount": 44,
@@ -622,10 +557,43 @@
    "end": [
     37.055809,
     139.914975
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:24",
+   "id": "栃木県:19",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "草久粟野線",
+   "ref": "246",
+   "highway": "secondary",
+   "lengthKm": 3.48,
+   "curviness": 1105.1,
+   "flow": 32.6,
+   "turnCount": 118,
+   "score": 96.2,
+   "baseScore": 96.2,
+   "spotCount": 0,
+   "polyline": "ubo~EajtrYMyA{@Xa@_@fAe@lAJGaCoA]WeCoAl@m@s@W}DP_CYw@XMp@n@Zu@mA}@ScARi@pD_Bv@eF~@sAxDkApBVxAk@LuAu@wAeDjBaAQ@_AnAkCpAU~@uAvBs@r@oAvE_@vBfCnBjA`Bg@zA`BzAF^k@xBm@V{B`CiGL}ApCC{As@Eq@rBf@pCKtDqAhBsCrAzAjBl@bD_@^cA",
+   "pointCount": 58,
+   "start": [
+    36.61883,
+    139.537129
+   ],
+   "end": [
+    36.605565,
+    139.550225
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:20",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "ボルケーノハイウェイ",
@@ -635,8 +603,8 @@
    "curviness": 524.6,
    "flow": 27.5,
    "turnCount": 78,
-   "score": 81.5,
-   "baseScore": 78.6,
+   "score": 95.4,
+   "baseScore": 92.5,
    "spotCount": 1,
    "polyline": "wcnaFsunuYw@qC}@IwFxAuCzEx@wFtAoCCg@aA[mI|B_H[iAu@k@wAAqGgEaC{Gv@oBnEkDX}CdAkCzDqBdFeB`AUr@Jn@l@JlF}B~BxAd@bBi@tHi@`@_DKkAhAeFpWeEfJFtCsAhBOnCwBdC@p@pAlADl@c@j@wB@eA~DBbDiAbCZv@",
    "pointCount": 47,
@@ -647,10 +615,14 @@
    "end": [
     37.121221,
     139.984198
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:25",
+   "id": "栃木県:21",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "川俣温泉川治線",
@@ -660,8 +632,8 @@
    "curviness": 593.9,
    "flow": 26.6,
    "turnCount": 84,
-   "score": 79.2,
-   "baseScore": 79.2,
+   "score": 93.2,
+   "baseScore": 93.2,
    "spotCount": 0,
    "polyline": "_ua`FwhmrYi@NDdB_CvFOvJy@x@}Cd@e@h@B`ArA~@_ChCCjBq@xCDxAfAlARpEdA|AXlEn@hAjCl@bAdDjDnU?jE_AlA]pBoCfDeBDyAdA}@lJqDnGRp@hAq@hABjEpDhArK?rKeB`ABtDgBPzBbE?zFsAnGkBjD",
    "pointCount": 43,
@@ -672,10 +644,14 @@
    "end": [
     36.879761,
     139.468476
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "栃木県:26",
+   "id": "栃木県:22",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "那須黒羽茂木線",
@@ -685,8 +661,8 @@
    "curviness": 460.4,
    "flow": 25.4,
    "turnCount": 226,
-   "score": 78.7,
-   "baseScore": 74.2,
+   "score": 91.9,
+   "baseScore": 87.3,
    "spotCount": 2,
    "polyline": "yc_~E{awvYqHxHkCpJqAdBuM`J}Gj@wLdDwHpIaGhD_E`AcCFsHS_A_AkEDsAg@eMZqKyAoPsH}Dh@yASgHuGoD_GgB}AsGeC_K}AcAoC}BwMmFaK_AeImCmDuDkAkBBwWfDeAsDn@hQfA`GMlDb@fB_BjK`@xAdCbCy@rCr@|Ha@?gAsCqBc@gFz@wExBqH?mApASjBtB?lA~BNfBc@fFe@TuB_AkBfAgDmBoAr@_@bB_Ax@kBaDi@?aBtAoBkAWg@h@mASqBqBQgA}@GeEaEYXqC]w@qBq@kCHmFjFCzB{@rAUvCyEzAqA|CqBxA}DzGe@tCkCfFkDdAwBSu@~D_DvBWbBb@~Al@R|Ao@~Eh@RbBz@nAJtAcB|Bm@tB?lBhDXbBzCv@Pz@Qb@}@^FCjEkBSk@n@Hp@hBhBhAjEwBnGkA`AOvCaCbDmArDmGvJsGxF",
    "pointCount": 121,
@@ -697,10 +673,14 @@
    "end": [
     36.597455,
     140.176259
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "栃木県:27",
+   "id": "栃木県:23",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "松田大月線",
@@ -710,8 +690,8 @@
    "curviness": 470.5,
    "flow": 30.2,
    "turnCount": 93,
-   "score": 77.6,
-   "baseScore": 77.6,
+   "score": 91.3,
+   "baseScore": 91.3,
    "spotCount": 0,
    "polyline": "su}|EqeerYa@l@qEfB{\\tYuHmAeGiEgH{BsUo@iBT_HjDqLrIiUjUq@hCObGq@|AeDt@aBpEgChAwBvEwBK`BlBOtB_AjApCDTh@_F@MeB~@mAc@YoAv@?nCu@z@qCo@m@yA_Aj@o@`BcDf@@vAyAz@El@nBq@f@cA\\b@cBvCeCpLeHfLkCdJmDpHKbP]fB",
    "pointCount": 50,
@@ -722,10 +702,13 @@
    "end": [
     36.398415,
     139.430981
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "栃木県:28",
+   "id": "栃木県:24",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "上藤生大州線",
@@ -735,8 +718,8 @@
    "curviness": 494.6,
    "flow": 24.3,
    "turnCount": 180,
-   "score": 76.4,
-   "baseScore": 76.4,
+   "score": 89.7,
+   "baseScore": 89.7,
    "spotCount": 0,
    "polyline": "wps}E_o{qYeGyBqCcCuEOcLsJeADmCpCkAXyKgAuG_Fw@\\qAvEuK~BoDjEmJbDcKQ{CcDoFpBaKg@qB}AeBWuCmFsCkAkCjBMfCi@x@{AMuBiDkBDe@[sHlAuBtBgGMi@}@`@sCWuBaEoAaAqBcDmCcAiFsAIiC{AsK{MkBSgBf@sBrBiA@kAqAuB{GmDl@mEwBiDjA}DqAaB{A}GcBFo@tAqA{AsAk@cBd@yBeA}BT{CiBgBIkBnA_D?iBeEuGqAYcCb@sEwBOkAh@yHwBgEYoCwEcB{A{BqIcAgDcCsAQwARmHpLaAVq@{@_@mBmBgAUq@DuAz@qAN_BOuD{@k@",
    "pointCount": 91,
@@ -747,10 +730,13 @@
    "end": [
     36.534195,
     139.436522
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "栃木県:29",
+   "id": "栃木県:25",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "東古屋上寺島線",
@@ -760,8 +746,8 @@
    "curviness": 475.8,
    "flow": 26.3,
    "turnCount": 99,
-   "score": 76.3,
-   "baseScore": 76.3,
+   "score": 89.7,
+   "baseScore": 89.7,
    "spotCount": 0,
    "polyline": "}cv_FwaftYfDwIGuKYwBrA}GkAcFiAaC_@aE}BqAwCkDsAD{A~@aBqBfBqF]aBp@eC@yErAuAWyD`@i@~A@TwAvAiAZkC|A@~BaB|@Rf@_@EoEXsBOe@kAQAg@n@c@~@b@`@rAObCj@FTiFo@eDtBgJX{GbJiRxAaH~BeDjAiDT_FbEiNfKuKrEuGfDkLxDwIOqEf@sBrEiGnIiH",
    "pointCount": 56,
@@ -772,10 +758,14 @@
    "end": [
     36.804319,
     139.836618
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "栃木県:30",
+   "id": "栃木県:26",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "前日光林道",
@@ -785,8 +775,8 @@
    "curviness": 481.1,
    "flow": 24.6,
    "turnCount": 88,
-   "score": 74.8,
-   "baseScore": 74.8,
+   "score": 87.9,
+   "baseScore": 87.9,
    "spotCount": 0,
    "polyline": "ahn~EkvtrYaEeBAwD[}@aD{@wAr@g@nDgBzCEzGmAxCmAHyHkCiEr@a@{@p@iFQwBk@{DgByDi@CcFfEiEmCwIB_Cp@kDnC{GFYrAn@zH[rA}DuAgBgBi@NWrD]NkB_AWV]`ERtGu@hAgFsFcCcFuBiBy@mB}Bb@oDtEoGvBuIbFW~A^nC|CnC",
    "pointCount": 49,
@@ -797,10 +787,13 @@
    "end": [
     36.638211,
     139.533534
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "栃木県:31",
+   "id": "栃木県:27",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "山内牧野線",
@@ -810,8 +803,8 @@
    "curviness": 412.5,
    "flow": 22.6,
    "turnCount": 58,
-   "score": 73.9,
-   "baseScore": 68.1,
+   "score": 85.8,
+   "baseScore": 80,
    "spotCount": 3,
    "polyline": "ijg~EcpyvYmGMmCzAwC_A{@}@kA_HmDzBuEl@oA[y@mArI_KhDQNoA}CoKiCoCyAgFVaOq@qG{FsFmAyHs@{BqAgAMuDsBu@k@sAyC{SlBmFKoD",
    "pointCount": 28,
@@ -822,10 +815,13 @@
    "end": [
     36.588119,
     140.241433
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:32",
+   "id": "栃木県:28",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "鹿沼日光線",
@@ -835,8 +831,8 @@
    "curviness": 399.1,
    "flow": 24.7,
    "turnCount": 282,
-   "score": 73,
-   "baseScore": 70.1,
+   "score": 85.5,
+   "baseScore": 82.6,
    "spotCount": 1,
    "polyline": "ceh_FsjdsY|DhBzHw[fGnBxIeF`BoBb@oBzDwB~AwCRt@kC`F`@`@zCwE`@aB~Bq@rD{GdF{B`EcGhHYnDpDhAqCMbHaAlDl@Fx@aCt@mGjF}BbCiIjEsA\\yCjGgJjA{D`F{HAyBdAcG`@V`@fDrDfD^K`BkE_@aDTeB~EeHpC_@`AoHnCa@Ng@_AoJh@eFjQKvEfApNeBjBeAz@qBbJuEnAhD`GtHdFxJ~BhQ~C|LhPxNfEdG`I|DzMrAvGvBzJOhShP~JhEzAjC~ClMpDfC`Fx@rDvD~HzAxFjCfETvBw@fDEbCeCnIqB|EiCtQw@`FbAnKlI|DdAbEGzYkD`GpAzBAdFvDpF~InERtCrAz@rBAlBhDbF\\rChCjFt@~@`JvBz@hAr@rBLdFjDrHh@Ab@q@eAiCRw@nE`DnF~@tCaBvDoFpDmCXXQbB|AnB\\fDdAkA`AL|@dEVAbAwDbBlBh@iAb@FpAhDb@IQkAwBcD^y@lC`BxHlAdH|Gh@tCpE~CbBxDdAd@hEm@tEdD",
    "pointCount": 139,
@@ -847,35 +843,14 @@
    "end": [
     36.638907,
     139.607667
-   ]
-  },
-  {
-   "id": "栃木県:33",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "矢又大内線",
-   "ref": "232",
-   "highway": "secondary",
-   "lengthKm": 4.11,
-   "curviness": 388.2,
-   "flow": 26.1,
-   "turnCount": 61,
-   "score": 73,
-   "baseScore": 70.1,
-   "spotCount": 1,
-   "polyline": "{xa_FwsvvYBe@_@E?gBr@kV`MsWdAcI`IcL~K{K`JeHdCeDnFyLpK{HrJc@rDjCnDj@|AMZcBYeCyDyJ_GaTIoDs@cD@}Ds@Tm@a@S^YqAb@aA`FC^kA",
-   "pointCount": 31,
-   "start": [
-    36.714535,
-    140.204278
    ],
-   "end": [
-    36.700122,
-    140.23402
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:34",
+   "id": "栃木県:29",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "中藤岡線",
@@ -885,8 +860,8 @@
    "curviness": 428.9,
    "flow": 25.6,
    "turnCount": 58,
-   "score": 72,
-   "baseScore": 72,
+   "score": 84.7,
+   "baseScore": 84.7,
    "spotCount": 0,
    "polyline": "mwa}EqecsYpE{E|@qD^cGpV}X~D_KrEiF`@wCjEY|AzBd@HxA[z@XvB{@H~DiBx@~AfFRzDVDP]i@sHdC}BdBmE_@gE`IPvEoDrOyClJHdBy@",
    "pointCount": 29,
@@ -897,10 +872,13 @@
    "end": [
     36.367308,
     139.627036
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:35",
+   "id": "栃木県:30",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "桐生田沼線",
@@ -910,8 +888,8 @@
    "curviness": 449.7,
    "flow": 24.3,
    "turnCount": 155,
-   "score": 72,
-   "baseScore": 72,
+   "score": 84.7,
+   "baseScore": 84.7,
    "spotCount": 0,
    "polyline": "}is}Ekb|qYj@mBj@WxChDn@BnBsAnAgDg@mHzBoDiBoEN_GnCuGLaFxEiJdB]tJhBzI|CjBQ`@]?}@_EsCm@oBPcApAU`@q@qAkCf@{BjKeDhI}H|EMlDbArD{@x@_CpBkAvD}ElGJnByBxBYfCb@bC}@dCwBrEVz@qBvEg@zAs@jB_ErEiFvAcK]_BK{JrC_P}CiH^oDSqDNK\\tBB{Cz@oEWuJtCb@L_@wC}B_AuEsGoPuKmQs@}DsAsVdCmEp@wHHiGo@gQtNyJ",
    "pointCount": 72,
@@ -922,60 +900,13 @@
    "end": [
     36.451385,
     139.469201
-   ]
-  },
-  {
-   "id": "栃木県:36",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "山内上境線",
-   "ref": "171",
-   "highway": "secondary",
-   "lengthKm": 7.23,
-   "curviness": 372.7,
-   "flow": 20.4,
-   "turnCount": 132,
-   "score": 71.6,
-   "baseScore": 64.9,
-   "spotCount": 4,
-   "polyline": "qkt~EsbrvYrOcDzD\\jFo@zF`A`Bq@rDcEvC]lDPvAe@n@wAE{Ep@mFnCuGHsF~AyG|BmEbDsA`CmEbF}FhA_EjAqIxHgMlL_LdE]`IhEjHcDxEk@tDzA`A?hC_CxByDzIaFfEyGbJgEpCPfBkB|C}@jBeDhC[fByAdAuBCoG\\{AvAeDnBe@GaEx@uG^WpEVlBuEhC_CbA_CXgSb@uDhAgCw@eAaCIZ{BsBaEkAs@Fm@bAi@`@uDgA]uAT",
-   "pointCount": 66,
-   "start": [
-    36.645845,
-    140.181057
    ],
-   "end": [
-    36.607682,
-    140.224254
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:37",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "松田葉鹿線",
-   "ref": "219",
-   "highway": "secondary",
-   "lengthKm": 3.46,
-   "curviness": 441.7,
-   "flow": 23.9,
-   "turnCount": 64,
-   "score": 71.3,
-   "baseScore": 71.3,
-   "spotCount": 0,
-   "polyline": "ale}Eew_rYgE\\sE_BeFBeB_AcC_DqKkFeN{C_BaAeDf@uDm@qB`E{AlAgCEiPvJcHxIeE`Dq@bDw@dAyAQuAeCqFwAaA^wDQR~@lF?Xr@yF|Fh@`BYr@uAh@JjBm@jD",
-   "pointCount": 33,
-   "start": [
-    36.405287,
-    139.431714
-   ],
-   "end": [
-    36.427475,
-    139.425457
-   ]
-  },
-  {
-   "id": "栃木県:38",
+   "id": "栃木県:31",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "山本下大羽線",
@@ -985,8 +916,8 @@
    "curviness": 382.8,
    "flow": 24.4,
    "turnCount": 65,
-   "score": 71.1,
-   "baseScore": 68.2,
+   "score": 83.1,
+   "baseScore": 80.2,
    "spotCount": 1,
    "polyline": "ubn}EgtgvYhKFzAv@xAlBpC`@fMw@`Ht@~FaD|Lg@dElBfFjArCzBxGzBlEz@|ECxDbBvBa@nIp@nFnBZx@iBhASrFlCt@Xz@OrAvAz@C|AoA~B@bAvAbB|BFa@dFaFpHX`NdDhE|DtM",
    "pointCount": 36,
@@ -997,10 +928,13 @@
    "end": [
     36.426187,
     140.110336
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "栃木県:39",
+   "id": "栃木県:32",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "名草小俣線",
@@ -1010,8 +944,8 @@
    "curviness": 411,
    "flow": 24.1,
    "turnCount": 119,
-   "score": 70.6,
-   "baseScore": 70.6,
+   "score": 83,
+   "baseScore": 83,
    "spotCount": 0,
    "polyline": "kod}E}~grY{EjDoDz@gEvBwL`AcEtEaAZ_C^qFcAwHvBqD|F_Ej@{BbEiAnFyB~BoEjBkBbF_HdJm@fK_FdPk@dHkCnJHrCy@|CZz@nCJ~AdAPbBs@rBeDlAGh@|IQrAfCR`Cm@v@qB`@K~@rEJdB~CfCRh@rCbB~@vAlBj@ARaB|@gAp@b@w@pJsK~M{@bDDtCxBpISlHPpHyBvUPbWoBbDJ`@xBVf@n@GtAiBlB~BrCHlF",
    "pointCount": 64,
@@ -1022,10 +956,42 @@
    "end": [
     36.415652,
     139.424257
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:40",
+   "id": "栃木県:33",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "山内上境線",
+   "ref": "171",
+   "highway": "secondary",
+   "lengthKm": 7.23,
+   "curviness": 372.7,
+   "flow": 20.4,
+   "turnCount": 132,
+   "score": 82.9,
+   "baseScore": 76.2,
+   "spotCount": 4,
+   "polyline": "qkt~EsbrvYrOcDzD\\jFo@zF`A`Bq@rDcEvC]lDPvAe@n@wAE{Ep@mFnCuGHsF~AyG|BmEbDsA`CmEbF}FhA_EjAqIxHgMlL_LdE]`IhEjHcDxEk@tDzA`A?hC_CxByDzIaFfEyGbJgEpCPfBkB|C}@jBeDhC[fByAdAuBCoG\\{AvAeDnBe@GaEx@uG^WpEVlBuEhC_CbA_CXgSb@uDhAgCw@eAaCIZ{BsBaEkAs@Fm@bAi@`@uDgA]uAT",
+   "pointCount": 66,
+   "start": [
+    36.645845,
+    140.181057
+   ],
+   "end": [
+    36.607682,
+    140.224254
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:34",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "仙波鍋山線",
@@ -1035,8 +1001,8 @@
    "curviness": 422.3,
    "flow": 23.2,
    "turnCount": 106,
-   "score": 70.2,
-   "baseScore": 70.2,
+   "score": 82.4,
+   "baseScore": 82.4,
    "spotCount": 0,
    "polyline": "_tn}EytfsYrAnHI|DrBtDc@vOgDjI\\dHcFpNq@pJj@`Fs@t@oDjAa@x@b@xDA~E}A`CTrCy@tD~@zFOlH]j@mDrAwB|D}BBmAr@\\h@|DJrCmDpF_BGf@uD`BwAjC@tBj@lCn@t@C`DjDfI`Al@bFHj@b@~@dHx@VpHk@vCxFhNjC|JdHdF\\r@bBMjDzCrBnFoCjAIdLrEzFE",
    "pointCount": 54,
@@ -1047,60 +1013,14 @@
    "end": [
     36.438926,
     139.594494
-   ]
-  },
-  {
-   "id": "栃木県:41",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "黒磯田島線",
-   "ref": "369",
-   "highway": "secondary",
-   "lengthKm": 7.98,
-   "curviness": 389.2,
-   "flow": 21.3,
-   "turnCount": 146,
-   "score": 69.7,
-   "baseScore": 66.8,
-   "spotCount": 1,
-   "polyline": "kekaFsj|tY{ANoCa@gDu@{@iAk@?iAt@QhCkGvBeE_@s@cBoM|E}IbBmD^iEmCyExDiDLmCcBwAwDyDcDgAEiF{BgSeDwAn@oAfByCxA}CKcE|BwCXk@f@a@r@]bFT|ChAnAv@UbAp@j@tBm@zDyAdEmCpBwDj@qA|C@zAlCxHa@dIkB`Kb@fGSjJu@nCsIbOL`BbChETjCc@vC_DrH}@tLwAhCsEfAq@`AHnAjArCDpDu@hBInDgB`BFnD{@tCfBfIFpCu@nBqCdCeCfI_A~@WrA{@h@mFlToFnEAbM",
-   "pointCount": 78,
-   "start": [
-    37.090303,
-    139.905856
    ],
-   "end": [
-    37.125678,
-    139.859828
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:42",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "牧野大沢線",
-   "ref": "274",
-   "highway": "secondary",
-   "lengthKm": 5.37,
-   "curviness": 351.5,
-   "flow": 19.7,
-   "turnCount": 96,
-   "score": 68.2,
-   "baseScore": 62.4,
-   "spotCount": 3,
-   "polyline": "kch~EqxyvYi@zCwAtC}HnE{AfBy@~BeAf@_EzEHhCtAnE]hB}CfBgEm@U`DqD`FeCzImB`CkCr@cDiDkA_C_EgB{BF{FhE}@rSf@fIs@rHqBxFiFj@w@fAqDkC}BTwBq@mCmDmGXkGm@iGuHm@TcHjOwAViEcAy@_B_@kCpAsE@cBg@kDmBgDMsDkBkLb@qJ",
-   "pointCount": 49,
-   "start": [
-    36.583096,
-    140.220407
-   ],
-   "end": [
-    36.609412,
-    140.211075
-   ]
-  },
-  {
-   "id": "栃木県:43",
+   "id": "栃木県:35",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "上横倉下岡本線",
@@ -1110,8 +1030,8 @@
    "curviness": 367.2,
    "flow": 26,
    "turnCount": 75,
-   "score": 67.6,
-   "baseScore": 67.6,
+   "score": 79.5,
+   "baseScore": 79.5,
    "spotCount": 0,
    "polyline": "}su~EonrtYtDmD`NcDzK}Hr@{DOcHzA{JrEuF`FmJrBhAfAaCQeDcBqAAg@v@m@[yCrB{HU_AiDi@pCkEEkC^NTlA^M_AmEmBiAvBmF\\qJbDyMLgDwCaSj@gOiBwKNmMhAwOzEi_@ViLrBqGAmBu@cD",
    "pointCount": 40,
@@ -1122,35 +1042,42 @@
    "end": [
     36.641197,
     139.902599
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:44",
+   "id": "栃木県:36",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "日本ロマンチック街道",
-   "ref": "120",
-   "highway": "trunk",
-   "lengthKm": 6.18,
-   "curviness": 405.3,
-   "flow": 21.4,
-   "turnCount": 117,
-   "score": 65.5,
-   "baseScore": 62.6,
-   "spotCount": 1,
-   "polyline": "skq_Fq~_rYuFxLaAtGy@bBeALuDmA_BP{DtAcKzGsC^wDxCiAUuCaDy@UaKlCmDMiCh@kJN}AjAiCnNxGjR{@bHg@|@uD^iCzBAtAhB|HAlAiDzC?lAfA|CGbB}B`DwApHmAvCcAzJXrGcCrXh@vAvC`@Rr@sB|AuCK[yAC}Hm@q@Qx@ZbFwCrH@tBr@hAtGaAh@TF`AmDAcChHy@`Ao@GeBcBeFN",
-   "pointCount": 60,
+   "name": "牧野大沢線",
+   "ref": "274",
+   "highway": "secondary",
+   "lengthKm": 5.37,
+   "curviness": 351.5,
+   "flow": 19.7,
+   "turnCount": 96,
+   "score": 79.1,
+   "baseScore": 73.3,
+   "spotCount": 3,
+   "polyline": "kch~EqxyvYi@zCwAtC}HnE{AfBy@~BeAf@_EzEHhCtAnE]hB}CfBgEm@U`DqD`FeCzImB`CkCr@cDiDkA_C_EgB{BF{FhE}@rSf@fIs@rHqBxFiFj@w@fAqDkC}BTwBq@mCmDmGXkGm@iGuHm@TcHjOwAViEcAy@_B_@kCpAsE@cBg@kDmBgDMsDkBkLb@qJ",
+   "pointCount": 49,
    "start": [
-    36.79434,
-    139.432894
+    36.583096,
+    140.220407
    ],
    "end": [
-    36.816558,
-    139.3981
+    36.609412,
+    140.211075
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "栃木県:45",
+   "id": "栃木県:37",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "県民の森矢板線",
@@ -1160,8 +1087,8 @@
    "curviness": 322.1,
    "flow": 20.2,
    "turnCount": 159,
-   "score": 64.9,
-   "baseScore": 62,
+   "score": 75.7,
+   "baseScore": 72.8,
    "spotCount": 1,
    "polyline": "kmv_Fkt}tY`CxLPvDc@xGuBvKwCfCcDl@{ApAoBxFqBbDkFlP_BzBkGxDmAzEkBzDs@`EeJzHcGhIaFtCaMdOoAtCmAz@yEhHaBnEyC~QsCjJoEzEgChEg@bCqCfBEvGmBfBaArCcEvFgAdMyGhLg@\\Uo@lCoIOq@k@XaLvTqA|@iEj@kEnFaDn@sAnAy@dFj@|DGpB{EnK?bE}@tFi@`PmBnC[hCyCrGgKdO}AvF}A^aE|FBt@bAVxBmC|B{@dDsClAh@hAdC@xA_B|DQbFgCjJ{ClB}@rBuEtCcC`GeBhAiAEqApDgFfCsHdH",
    "pointCount": 81,
@@ -1172,60 +1099,44 @@
    "end": [
     36.861852,
     139.836568
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:46",
+   "id": "栃木県:38",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "上永野下永野線",
-   "ref": "199",
-   "highway": "secondary",
-   "lengthKm": 9.81,
-   "curviness": 336.9,
-   "flow": 22,
-   "turnCount": 150,
-   "score": 64.5,
-   "baseScore": 64.5,
-   "spotCount": 0,
-   "polyline": "k~w}E{d_sYoBdGqAdNaDlJoDxG}ChDwJfHiBlToG~NgApFwC`GiGnI{FjLwChIaJvCcGOqBp@aLpNy@E{CsBmBAeCgAeBj@}A~AKtRq@^iBIaD{CiBbASbA^nDdEnQh@lJ{AfCcDq@wBjBsAnKwBxC{DzJuHe@oCkCqKoEgBoBcDeAkDWgL`KaCbEkCz@eHWwC|K}AhBg@?{B}D[AqBlGKnB[DgH[kFiGQoCy@kBmGcCgA`AqApGwA~CoBd@qDSuBpAwBg@{A|@q@nAd@l@[fEcBjAk@lA}D`CIlApA|FvCFm@~GiBxDVr@",
-   "pointCount": 82,
+   "name": "日本ロマンチック街道",
+   "ref": "120",
+   "highway": "trunk",
+   "lengthKm": 31.09,
+   "curviness": 294,
+   "flow": 37,
+   "turnCount": 247,
+   "score": 75.4,
+   "baseScore": 73.9,
+   "spotCount": 1,
+   "polyline": "skq_Fq~_rYuFxLaAtGy@bBeALuDmA_BP{DtAcKzGsC^wDxCiAUuCaDy@UaKlCmDMiCh@kJN}AjAiCnNxGjR{@bHg@|@uD^iCzBAtAhB|HAlAiDzC?lAfA|CGbB}B`DwApHmAvCcAzJXrGcCrXh@vAvC`@Rr@sB|AuCK[yAC}Hm@q@Qx@ZbFwCrH@tBr@hAtGaAh@TF`AmDAcChHy@`Ao@GeBcBeFN??qj@x^sJ~Aw@jAh@dI[xEdAJhAeDrAQd@bAMxAsCzBEx@lATtAgAl@LNp@_BrEj@hCIbA_Bn@SjArJfR`I~Lz@zBV~Ce@~Eu@pAqGrB}C~EyBxHgBbLiC|GGzBd@xEvDpIvBjId@dGEhC}A`IMnIqB`LnGrTbE`GhJ|BdGYbD~GpEvBvBc@~B{FfBGvChH~DlBZ|@MdByFbEm@lClAdE|@_@BsCd@_AbBb@NrAmBbFyElCJvAhDi@xFwG|@HRdA_@fAsClAsAlGeAxBKtCkNrFiJ}HcAiFtAqFMaAa@KsEhCsCy@qIcHs@ICdA|ClKtC~C~Ce@\\x@kD|L_E|FaDnIoBbLD|@Xl@fGzBzJB~Cx@z@~Bv@dQlGtHvCpOvB[p@mEz@mAvKpBvAv@\\nBUzFNtDvGlORvDgF~KmAz@_Be@sE}FqAe@u@t@xDhL{A|GtGrCRzD`EtHJbEyCzCM`B|@p@nCB`J{AfALzAhAfBrKwBzG\\zNrFlSr@YHgA_AoLXs@`AJzC`PLpJxExJ]fH`AxEpOnMbHlIhGpQnFfHjApH{@hGh@zBzKnCfCvBj@zI~DlKhEzYzEdIGhAcBzDBt@lEfCrDrFhAxGjBrEAfBmElDa@tA~BlTA|H`@lAxC`Bl@`APlEhBvEDzEjGlQ~BbPnDbEtGlLbIzYzEbIfDjIx@v@lL~DxIzJ~BvGnKrIvAvDtB`K",
+   "pointCount": 251,
    "start": [
-    36.500377,
-    139.592621
+    36.79434,
+    139.43289
    ],
    "end": [
-    36.550295,
-    139.540934
+    36.77335,
+    139.23064
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:47",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "大子那須線",
-   "ref": "28",
-   "highway": "primary",
-   "lengthKm": 5.05,
-   "curviness": 364.1,
-   "flow": 21.9,
-   "turnCount": 84,
-   "score": 63.6,
-   "baseScore": 63.6,
-   "spotCount": 0,
-   "polyline": "ugo`FinyvYv@~Cw@bEgFzCeCuA_@Z`CvEmD~FgArGKxRqCdH}EvC}AlCmF|DyFx@u@dBsDfC}GzHKnDjBlMvDdL|B~Bj@nJKfBv@pGk@vLgBhAy@pEmCpFDfDc@tBT`GQlC_BlDmDlEyIbDoAlFiAbNkE|Ck@|FcCnB",
-   "pointCount": 41,
-   "start": [
-    36.947311,
-    140.218772
-   ],
-   "end": [
-    36.962443,
-    140.175763
-   ]
-  },
-  {
-   "id": "栃木県:48",
+   "id": "栃木県:39",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "東野田古河線",
@@ -1235,8 +1146,8 @@
    "curviness": 251.4,
    "flow": 32.7,
    "turnCount": 33,
-   "score": 63.2,
-   "baseScore": 63.2,
+   "score": 74.3,
+   "baseScore": 74.3,
    "spotCount": 0,
    "polyline": "}pg|EiqhtY`KWzMzMXpBGtGlVrj@`@fJjAXHfEt@G\\pUvDC^\\dDxGfApInDMh@|FzGXtGlUjExI|E`StK~KzEtG",
    "pointCount": 23,
@@ -1247,10 +1158,13 @@
    "end": [
     36.231873,
     139.770272
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "栃木県:49",
+   "id": "栃木県:40",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "草久粟野線",
@@ -1260,8 +1174,8 @@
    "curviness": 344.6,
    "flow": 20.6,
    "turnCount": 66,
-   "score": 62.4,
-   "baseScore": 62.4,
+   "score": 73.2,
+   "baseScore": 73.2,
    "spotCount": 0,
    "polyline": "u}g~Egh{rYqMlAgBbA}BnG^hGMxA{JnFaBxKaFa@{CfE_AZeHgAsCvBkEjA{AxE_CjDy@d@wAa@UbADtHkCxH}DfEgE_AmBFi@h@oAtIcBzDe@rFk@hBIjD{@`BsCfCcEhA{JUoFsAc@zD",
    "pointCount": 36,
@@ -1272,10 +1186,13 @@
    "end": [
     36.605408,
     139.5504
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:50",
+   "id": "栃木県:41",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "つくば益子線",
@@ -1285,8 +1202,8 @@
    "curviness": 266.1,
    "flow": 25.5,
    "turnCount": 36,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.8,
+   "baseScore": 70.8,
    "spotCount": 0,
    "polyline": "gcm}Eop_vYcNxAmBqA}No@}CNeMeJcKCuB]w@d@y@~C{DpCsALgCiBwB[wMgGu@?oB{G\\yBgFcYKgCx@gGf@}@a@iEsIvAuNeA",
    "pointCount": 25,
@@ -1297,10 +1214,13 @@
    "end": [
     36.467312,
     140.097722
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:51",
+   "id": "栃木県:42",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "会津西街道",
@@ -1310,8 +1230,8 @@
    "curviness": 264.2,
    "flow": 20.5,
    "turnCount": 387,
-   "score": 59.7,
-   "baseScore": 55.1,
+   "score": 69.7,
+   "baseScore": 65.1,
    "spotCount": 2,
    "polyline": "_ox_FqaxsYu@ZwUqCmDkAmFeEgE_AwBkAyNp@gIUoXka@yHeHsIcSy@s@{D?kFdBcCzCqIlEsHhGqAzBqAfGsGvCsDnVcCfFwDdNs@ZkGBcIoCaBP]tAf@~DnIzCPhBw@t@uAg@oAp@cDX{AbFVnCMdC}B~Am@tCoB|B}CjK_BlC}BnIcInMmB~@_ISgGlAoTnMyJtLiA?qG}DqAwDcFuC{AUgGVwHkB{EmEwGa@qDaAs@m@q@qDu@cA_Dw@iCqB_DMeBeA}A~C_ASgFwEOsGh@cGcCKwFdEN`K{AbESjInBvJt@tK_@UcA_JeGwPEgK]e@m@DmDnDk@bEgBtDiAt@aBhDoAf@k@bCqDo@uK|A}AvCqEJiK|DgRtCw[bN}@dAaAnFiKlHkEfM_D|EwDcEZyBDwIS}@k@a@qARkDa@wBu@aBkBCyAy@kAeIeDq@cBuA\\kFe@yB}@qIrIiDh@kBs@u@xCkJ|DkBAoAaF_AK}@x@g@hEc@CeA{A]tDwFdCmBmCaM_GiJuGqH_AuCkGmAiAsGwAeOSmFfBaDjFaBzIbAtIg@xAkEFqBw@aC?wDhAmGgA_CtAaB|CyG|CmBS_AsAcBmQ{AkBcJcCwIt@wGhHqEdVEnBv@jHtEjFBvDsFfDuMfD{F{BqAqBqBgHqDwF{@a@uBfAuDhIqCdAeDkA_KiIcF_AoIuEqGi@gEt@}DCwCv@}A[aHyNyDmFwI}Xa@gFcEiSiA}JsEsQkFaEkNkDyJwHqEoGyGaHiJaYaPoLmN}M_NwDmIy@yDiByZ}U",
    "pointCount": 206,
@@ -1322,10 +1242,14 @@
    "end": [
     37.013826,
     139.729003
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:52",
+   "id": "栃木県:43",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "宇都宮今市線",
@@ -1335,8 +1259,8 @@
    "curviness": 261.4,
    "flow": 19.6,
    "turnCount": 167,
-   "score": 59.3,
-   "baseScore": 56.4,
+   "score": 69.3,
+   "baseScore": 66.4,
    "spotCount": 1,
    "polyline": "iks~E_fysYw@hG}AzDmEbDuG|IgClMk@lQeDhFkO|EsChBaLvCqHtNwFnGaElDgHhCgBdGyB`DgU`NeA^cEI{Fd@eLpEiJtB{O@wGrCuDhEuL~EiAfAmJbRqBtIcMrL}FlMmCpBgAbI}BzAsI{@q@v@i@xBoDfCwMrDsGj@yMfMqErLqIpCeBEsCgAoKbB}@YgJgLkAsFaAu@l@gGyAiF}BhEeFUcBvAw@k@JoAWY{CnBwAYmBv@iBOsAtEcA^eBzCcE\\wF|KsEzWb@mKp@gBg@cHwA{B_GcCkE[{DwAiHkAaBLsDpBwDEaDkDsLhBoGzC",
    "pointCount": 83,
@@ -1347,10 +1271,14 @@
    "end": [
     36.721909,
     139.679463
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:53",
+   "id": "栃木県:44",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "藤原宇都宮線",
@@ -1360,8 +1288,8 @@
    "curviness": 279.1,
    "flow": 19.3,
    "turnCount": 87,
-   "score": 59.1,
-   "baseScore": 56.2,
+   "score": 69,
+   "baseScore": 66.1,
    "spotCount": 1,
    "polyline": "w_|_F_altYX_LiDoIa@_ENiCYeA_E_@gG`GkI~CgB?{@g@SyDJkCp@gBfM_P~EoDj@yB@qCtCqB~GqMlEeCtCeGE_@uCa@qB_BuCIB_AhEc@jClApG_AdIjAhEkCtTz@fH}AdNSlIqCp@XdCrD`Bz@tHzCfLtClAw@XaEjAe@vGrAlKyAxKfA",
    "pointCount": 47,
@@ -1372,10 +1300,14 @@
    "end": [
     36.822541,
     139.839256
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:54",
+   "id": "栃木県:45",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "那須烏山御前山線",
@@ -1385,8 +1317,8 @@
    "curviness": 227.8,
    "flow": 20.7,
    "turnCount": 81,
-   "score": 59,
-   "baseScore": 54.4,
+   "score": 68.7,
+   "baseScore": 64.1,
    "spotCount": 2,
    "polyline": "e~u~Es{mvY`AaJGaL_@wCsEoPf`@gXtDgK|CiNmAqLQaJcDwT?wNeAgSrBqMrGqV^oJ{@cMwBwHmCgFf@SrBdBfCi@BtDpARpEqGXeD`A}AM_FlC}NrAoEt@aMyBgIkC{NI}Bv@{ApJiCdBqC`@cFxDsQb@yFxI_DbGOlAkABwD",
    "pointCount": 44,
@@ -1397,10 +1329,14 @@
    "end": [
     36.638272,
     140.224093
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:55",
+   "id": "栃木県:46",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "芳賀茂木線",
@@ -1410,8 +1346,8 @@
    "curviness": 266.2,
    "flow": 18.9,
    "turnCount": 62,
-   "score": 58.9,
-   "baseScore": 56,
+   "score": 68.6,
+   "baseScore": 65.8,
    "spotCount": 1,
    "polyline": "ade~Eq_cvYcA{GYyOnAgGA}Bo@_IiCeHsAmGPoHUoIsAiGbB}IXcE_HcDs@{DmBKyLcEmEcDe@yA~AiTIsIb@kCvB{Fb@mKnAkGIgCkC}HV}GU_GzDqBLqH~@}C|FaAh@iB",
    "pointCount": 34,
@@ -1422,35 +1358,43 @@
    "end": [
     36.570914,
     140.144712
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:56",
+   "id": "栃木県:47",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "小山環状線",
-   "ref": "33;173",
-   "highway": "primary",
-   "lengthKm": 3.53,
-   "curviness": 202.6,
-   "flow": 37.6,
-   "turnCount": 19,
-   "score": 58.3,
-   "baseScore": 58.3,
-   "spotCount": 0,
-   "polyline": "cgz|Eu`dtY_C[cIl@_C`GYtEaEOkq@`EiAa]bUiBo@iT`DaN@id@uE@",
-   "pointCount": 13,
+   "name": "那須高原スカイライン",
+   "ref": "266",
+   "highway": "secondary",
+   "lengthKm": 9.41,
+   "curviness": 173.6,
+   "flow": 26.3,
+   "turnCount": 62,
+   "score": 68.1,
+   "baseScore": 57.2,
+   "spotCount": 1,
+   "polyline": "eeiaF__puYjBfU?xEkA~H?lIwEnO_@dQnAdJCtEcDdSeGxCyCIm@nAp@zA~I`CjDbDr@zBFfFW`B{InPgDhIe@xCtC~Jk@lMjApBxEh@rAz@|CtFx@bF}@dTExMyC`Mt@|MYzG??@xAn@lA`FjBlFzE`H|DpBlCbI|`@RpHj@rAtK`MTtBYdFzCbKz@LbBuAxBwCjF{Kt@k@x@?dB`Dn@vHnBrEIdKpAhAjFSbIiCvDuEnHeGxEUhR{E",
+   "pointCount": 65,
    "start": [
-    36.348181,
-    139.781386
+    37.08003,
+    140.0064
    ],
    "end": [
-    36.357559,
-    139.795172
+    37.05749,
+    139.94138
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:57",
+   "id": "栃木県:48",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "国道294号旧道",
@@ -1460,8 +1404,8 @@
    "curviness": 297.3,
    "flow": 19.4,
    "turnCount": 47,
-   "score": 57.9,
-   "baseScore": 57.9,
+   "score": 67.9,
+   "baseScore": 67.9,
    "spotCount": 0,
    "polyline": "s`a~EyanvYxAmBvAm@tG~CpAHz@c@pLeRlDoSvDoGtAqIjBkEpIyF~CmHzEeIn@YzEF~@i@jCqI?uF|DkL{A}A}BTmFyD",
    "pointCount": 23,
@@ -1472,35 +1416,13 @@
    "end": [
     36.534277,
     140.182016
-   ]
-  },
-  {
-   "id": "栃木県:58",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "大通り",
-   "ref": "1",
-   "highway": "trunk",
-   "lengthKm": 4.33,
-   "curviness": 241.5,
-   "flow": 30.8,
-   "turnCount": 34,
-   "score": 57.6,
-   "baseScore": 57.6,
-   "spotCount": 0,
-   "polyline": "mmc~EiuztYu@lFSD{G`n@_A|TmAxJP|@[hQUr@o@|WP`@i@tIqDlOgL`UvHqNdD{J`BeIfAqLv@}k@Vy@",
-   "pointCount": 20,
-   "start": [
-    36.559105,
-    139.89733
    ],
-   "end": [
-    36.561498,
-    139.883325
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:59",
+   "id": "栃木県:49",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "塩原街道(湯の香ライン)",
@@ -1510,8 +1432,8 @@
    "curviness": 260.6,
    "flow": 25.8,
    "turnCount": 53,
-   "score": 57,
-   "baseScore": 57,
+   "score": 67.5,
+   "baseScore": 67.5,
    "spotCount": 0,
    "polyline": "cmr`FmnvtYhKmHrA{B^}BhJeChO{J`DkAdAgHeB_E~As@|CKd@eClDwCtDuGtAqDLgDhBkA@qBq@iCLaEU}@mFuEmG_IoGyDo@cBPuB~Jq^dHtPzV~Djc@so@NwAhD}C",
    "pointCount": 32,
@@ -1522,35 +1444,14 @@
    "end": [
     36.942017,
     139.906654
-   ]
-  },
-  {
-   "id": "栃木県:60",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "黒羽街道",
-   "ref": "461",
-   "highway": "tertiary",
-   "lengthKm": 3.15,
-   "curviness": 220.1,
-   "flow": 20.4,
-   "turnCount": 34,
-   "score": 56.8,
-   "baseScore": 53.9,
-   "spotCount": 1,
-   "polyline": "gk``FupuuYEkGbI}PVqPdAqErBcCDiFpCuHJqEv@_Du@aL`@cFh@w@oJga@kAgHOmGcSaOgByBcCyGSyC",
-   "pointCount": 20,
-   "start": [
-    36.871082,
-    140.03483
    ],
-   "end": [
-    36.874029,
-    140.065314
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:61",
+   "id": "栃木県:50",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "二宮宇都宮線",
@@ -1560,8 +1461,8 @@
    "curviness": 231.7,
    "flow": 22.2,
    "turnCount": 33,
-   "score": 56.3,
-   "baseScore": 56.3,
+   "score": 66.2,
+   "baseScore": 66.2,
    "spotCount": 0,
    "polyline": "kta}EumguYaKe@eDiBwEJaNnHcB~AmE~AaBAaD~@aG`GmFrIeRbAiRHkKzCeE~Ay@bD_Hz@QnEuAHoEpEeAnAc@bC",
    "pointCount": 22,
@@ -1572,10 +1473,13 @@
    "end": [
     36.410652,
     139.951581
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:62",
+   "id": "栃木県:51",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "深沢岩瀬線",
@@ -1585,8 +1489,8 @@
    "curviness": 233.9,
    "flow": 19.6,
    "turnCount": 109,
-   "score": 55.7,
-   "baseScore": 55.7,
+   "score": 65.4,
+   "baseScore": 65.4,
    "spotCount": 0,
    "polyline": "yup}Es`pvYnCaArA@|HnGbINnLNpQeFvKpAjHbCxGxEzFVlGpBtHBtCrArDdE~H`FjN~DvD\\lKjElGjA|EhDrEKdEbAlLtF`BhFv@j@|H[tCjCxObBfHpBfEjCxKbAbCt@bYuAzHvCjSXlF~ElJlBdBbBbDvFpH\\z@v@RpDvAjA~B^~@s@H~AoBxBDhAxB`Gl@DfAuBh@P_@lAyC`Bc@fAn@xG~BjJ`@nMS`AkBvBaDlXRlB",
    "pointCount": 63,
@@ -1597,110 +1501,13 @@
    "end": [
     36.402088,
     140.13575
-   ]
-  },
-  {
-   "id": "栃木県:63",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "石裂上日向線",
-   "ref": "240",
-   "highway": "secondary",
-   "lengthKm": 12.07,
-   "curviness": 209.2,
-   "flow": 17.2,
-   "turnCount": 147,
-   "score": 55.2,
-   "baseScore": 52.3,
-   "spotCount": 1,
-   "polyline": "etc~Ey_usYbEzEJjFeF~Sn@jb@KtGw@vHc@zPeCvFeCvCcHfDoShUeIfCyASkCyA_AJ{N`[yE|CsJnCiGzGs@hCgCfWgBzEsBv@oDJc@d@k@bNyArEsBpDoLlKgO|CwA`A}CfFmDpR_KfV_C`I_CtDmCzY^xGIpO_ApL{ArGS~Ja@zB{CpH{FhCiAjA_FzOaA\\qCk@g@`@aEdPi@tMe@tBcCnCoDsAoA`@yB|B{ArEH|Fj@`EAdHiA^}Ba@e@l@SfCLfC`BrGgCpFt@tGzF|Mg@xCwBp@OrAb@jJrCzIgA~CElBiEjCWjC",
-   "pointCount": 80,
-   "start": [
-    36.560192,
-    139.704451
    ],
-   "end": [
-    36.602907,
-    139.602002
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:64",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "足利環状線",
-   "ref": "40",
-   "highway": "primary",
-   "lengthKm": 9.18,
-   "curviness": 119,
-   "flow": 23.7,
-   "turnCount": 46,
-   "score": 55.1,
-   "baseScore": 50.6,
-   "spotCount": 2,
-   "polyline": "{iu|Ei|irYu@_@yAvAmEzE}DtGgG`PgG~TcJf@cNm@_LgCsw@mJyJ}CwKzSeGdHaBhDwOx}@~B|DnDfTfLzJxu@nT[jKV|EzDnNdCjDj@vHwIbW[vAJ`Abc@fb@~CPpLsC`CxQbCdC|@F",
-   "pointCount": 34,
-   "start": [
-    36.323018,
-    139.483729
-   ],
-   "end": [
-    36.329321,
-    139.431312
-   ]
-  },
-  {
-   "id": "栃木県:65",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "日本ロマンチック街道",
-   "ref": "120",
-   "highway": "trunk",
-   "lengthKm": 8.55,
-   "curviness": 191.9,
-   "flow": 18.6,
-   "turnCount": 88,
-   "score": 55.1,
-   "baseScore": 47,
-   "spotCount": 6,
-   "polyline": "{jg_FsfnrYv@jA~Q|MvArPObTcAtFAzIkCrOmDbNvAxNBnN}B|Ww@bCgEfHcCxOyAlEeM~U_LzOgGfY}BrAqOjBeB`A_AzA_@bGxAtJf@zIt@dB|CnBLbA}JxO}FpBoHz@sAzAW`BXzBnBxGpCrCCtAmAAu@{CkBwBaEGSi@LeDm@gAiDo@gBdB}AMsAiIyB_CiG_AqO@sGqAwIlB}LpE",
-   "pointCount": 55,
-   "start": [
-    36.743016,
-    139.505863
-   ],
-   "end": [
-    36.770432,
-    139.451664
-   ]
-  },
-  {
-   "id": "栃木県:66",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "例幣使街道",
-   "ref": "3",
-   "highway": "primary",
-   "lengthKm": 3.51,
-   "curviness": 206.1,
-   "flow": 24.1,
-   "turnCount": 30,
-   "score": 55,
-   "baseScore": 55,
-   "spotCount": 0,
-   "polyline": "a}_}EoszsYfDF|QfHlA~O~@U|A|D~AjApEZtBx@xIxIrEvCfH`IzSlDv@|`@j@bDxEbBpHlIhBjA`RtEtCA",
-   "pointCount": 20,
-   "start": [
-    36.377295,
-    139.733204
-   ],
-   "end": [
-    36.355055,
-    139.712479
-   ]
-  },
-  {
-   "id": "栃木県:67",
+   "id": "栃木県:52",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "鹿沼下野線",
@@ -1710,8 +1517,8 @@
    "curviness": 165.7,
    "flow": 26,
    "turnCount": 41,
-   "score": 55,
-   "baseScore": 55,
+   "score": 64.9,
+   "baseScore": 64.9,
    "spotCount": 0,
    "polyline": "m|o}EyrrtYoBfAwCdEw@~CoClT}QgAyHt@yFOoFf@eHkBqS_@uKvCeJdFqEzAbCth@rA|M?dFcDCyIxA{NbJaHfB_@jDqF]}AZLdNcP_Fgu@nByP|BoDQ[z@",
    "pointCount": 30,
@@ -1722,10 +1529,41 @@
    "end": [
     36.500625,
     139.832186
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:68",
+   "id": "栃木県:53",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "例幣使街道",
+   "ref": "3",
+   "highway": "primary",
+   "lengthKm": 3.51,
+   "curviness": 206.1,
+   "flow": 24.1,
+   "turnCount": 30,
+   "score": 64.8,
+   "baseScore": 64.8,
+   "spotCount": 0,
+   "polyline": "a}_}EoszsYfDF|QfHlA~O~@U|A|D~AjApEZtBx@xIxIrEvCfH`IzSlDv@|`@j@bDxEbBpHlIhBjA`RtEtCA",
+   "pointCount": 20,
+   "start": [
+    36.377295,
+    139.733204
+   ],
+   "end": [
+    36.355055,
+    139.712479
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:54",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "例幣使街道",
@@ -1735,8 +1573,8 @@
    "curviness": 172.4,
    "flow": 26.2,
    "turnCount": 23,
-   "score": 54.8,
-   "baseScore": 54.8,
+   "score": 64.6,
+   "baseScore": 64.6,
    "spotCount": 0,
    "polyline": "mo{|EwovsYrBb@t@Y|ThRtK`NfC~EhAVrOhRzH`RbBvBtObFbl@lJnDdBvBhCfAtPe@|@",
    "pointCount": 16,
@@ -1747,10 +1585,69 @@
    "end": [
     36.330911,
     139.691284
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:69",
+   "id": "栃木県:55",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "石裂上日向線",
+   "ref": "240",
+   "highway": "secondary",
+   "lengthKm": 12.07,
+   "curviness": 209.2,
+   "flow": 17.2,
+   "turnCount": 147,
+   "score": 64.3,
+   "baseScore": 61.4,
+   "spotCount": 1,
+   "polyline": "etc~Ey_usYbEzEJjFeF~Sn@jb@KtGw@vHc@zPeCvFeCvCcHfDoShUeIfCyASkCyA_AJ{N`[yE|CsJnCiGzGs@hCgCfWgBzEsBv@oDJc@d@k@bNyArEsBpDoLlKgO|CwA`A}CfFmDpR_KfV_C`I_CtDmCzY^xGIpO_ApL{ArGS~Ja@zB{CpH{FhCiAjA_FzOaA\\qCk@g@`@aEdPi@tMe@tBcCnCoDsAoA`@yB|B{ArEH|Fj@`EAdHiA^}Ba@e@l@SfCLfC`BrGgCpFt@tGzF|Mg@xCwBp@OrAb@jJrCzIgA~CElBiEjCWjC",
+   "pointCount": 80,
+   "start": [
+    36.560192,
+    139.704451
+   ],
+   "end": [
+    36.602907,
+    139.602002
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:56",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "足利環状線",
+   "ref": "40",
+   "highway": "primary",
+   "lengthKm": 9.18,
+   "curviness": 119,
+   "flow": 23.7,
+   "turnCount": 46,
+   "score": 64.2,
+   "baseScore": 59.6,
+   "spotCount": 2,
+   "polyline": "{iu|Ei|irYu@_@yAvAmEzE}DtGgG`PgG~TcJf@cNm@_LgCsw@mJyJ}CwKzSeGdHaBhDwOx}@~B|DnDfTfLzJxu@nT[jKV|EzDnNdCjDj@vHwIbW[vAJ`Abc@fb@~CPpLsC`CxQbCdC|@F",
+   "pointCount": 34,
+   "start": [
+    36.323018,
+    139.483729
+   ],
+   "end": [
+    36.329321,
+    139.431312
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:57",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "芳賀茂木線",
@@ -1760,8 +1657,8 @@
    "curviness": 221.6,
    "flow": 17.6,
    "turnCount": 50,
-   "score": 54.8,
-   "baseScore": 51.9,
+   "score": 63.8,
+   "baseScore": 60.9,
    "spotCount": 1,
    "polyline": "i~a~Eor|uYoCKeImBmIb@{Dg@eCn@qFjDcEuG{AaEaC}I}CwPcC}Hg@eDYaJuByDa@kBrA_LaCmKrAsa@IoE|@{C`GyFNs@_AwAgCjBuB@o@g@Y_[",
    "pointCount": 28,
@@ -1772,85 +1669,42 @@
    "end": [
     36.563177,
     140.100615
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:70",
+   "id": "栃木県:58",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "中藤岡線",
-   "ref": "282",
-   "highway": "secondary",
-   "lengthKm": 3.48,
-   "curviness": 136.3,
-   "flow": 21.6,
-   "turnCount": 22,
-   "score": 54.4,
-   "baseScore": 49.8,
-   "spotCount": 2,
-   "polyline": "exv|EsaisYuTqNVvi@oIi@qS`@yQgCaIn@uAj@_AnBc@`HmFrPsLzL}GpE{@zERtM",
-   "pointCount": 15,
+   "name": "日本ロマンチック街道",
+   "ref": "120",
+   "highway": "trunk",
+   "lengthKm": 8.55,
+   "curviness": 191.9,
+   "flow": 18.6,
+   "turnCount": 88,
+   "score": 63.7,
+   "baseScore": 55.6,
+   "spotCount": 6,
+   "polyline": "{jg_FsfnrYv@jA~Q|MvArPObTcAtFAzIkCrOmDbNvAxNBnN}B|Ww@bCgEfHcCxOyAlEeM~U_LzOgGfY}BrAqOjBeB`A_AzA_@bGxAtJf@zIt@dB|CnBLbA}JxO}FpBoHz@sAzAW`BXzBnBxGpCrCCtAmAAu@{CkBwBaEGSi@LeDm@gAiDo@gBdB}AMsAiIyB_CiG_AqO@sGqAwIlB}LpE",
+   "pointCount": 55,
    "start": [
-    36.330432,
-    139.643299
+    36.743016,
+    139.505863
    ],
    "end": [
-    36.349302,
-    139.627664
+    36.770432,
+    139.451664
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:71",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "赤見本町線",
-   "ref": "237",
-   "highway": "secondary",
-   "lengthKm": 3.42,
-   "curviness": 139.4,
-   "flow": 26.5,
-   "turnCount": 18,
-   "score": 54.4,
-   "baseScore": 54.4,
-   "spotCount": 0,
-   "polyline": "g}u|EkbzrYpMnCiMcDoGpT{AfDyBpAgg@xOsBrAeA`BgD`KeD|NkKrWyBvUjAfEHpC}@pG",
-   "pointCount": 16,
-   "start": [
-    36.326124,
-    139.566622
-   ],
-   "end": [
-    36.340018,
-    139.543257
-   ]
-  },
-  {
-   "id": "栃木県:72",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "宇都宮向田線",
-   "ref": "64;176",
-   "highway": "primary",
-   "lengthKm": 7.06,
-   "curviness": 244.9,
-   "flow": 16,
-   "turnCount": 108,
-   "score": 54.2,
-   "baseScore": 51.3,
-   "spotCount": 1,
-   "polyline": "}oo~EqrjvYlGfQz@pLy@xD{BdDeAzDqAhBEvBNj@lBj@fAdD~AlBO~D|AdCr@lCs@lDAjDpAf@jA`BfBJhA`AvCzJvExI`D`PEjM`A|HdIjJj@tBApG\\tC_BfILlF]rG^pB|DjFFtBwApFkDfD_@dBZlBjF~KP|Ld@dF`FhNv@zHhA~ExK|TBhGjA`ExNdEtC|EdRvTt@jFkBfI",
-   "pointCount": 54,
-   "start": [
-    36.620953,
-    140.142653
-   ],
-   "end": [
-    36.601485,
-    140.077503
-   ]
-  },
-  {
-   "id": "栃木県:73",
+   "id": "栃木県:59",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "川俣温泉川治線",
@@ -1860,8 +1714,8 @@
    "curviness": 264.6,
    "flow": 17.8,
    "turnCount": 92,
-   "score": 53.9,
-   "baseScore": 53.9,
+   "score": 63.3,
+   "baseScore": 63.3,
    "spotCount": 0,
    "polyline": "uo~_FsysrYf@o@fCm@f@eAEs@oEgLcDmD{@eCSqC\\eCiDyMNaOkEeJcB{ATcHSqC_DyKuCwFJyCn@sAzMyGa@{Pb@}DzBeDrDoAxAiBUqDaD_Ck@aE@qBvC}HT}EmEkScJ_Ms@iBeAcG?gJyAyIKwDeEwEdA{Ke@sDTqT_AgFf@eH_AeEs@sH}BoJ",
    "pointCount": 48,
@@ -1872,35 +1726,69 @@
    "end": [
     36.868017,
     139.593519
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:74",
+   "id": "栃木県:60",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "西小塙真岡線",
-   "ref": "257",
+   "name": "中藤岡線",
+   "ref": "282",
    "highway": "secondary",
-   "lengthKm": 3.2,
-   "curviness": 221.8,
-   "flow": 16.5,
-   "turnCount": 43,
-   "score": 53.5,
-   "baseScore": 50.6,
-   "spotCount": 1,
-   "polyline": "mdj}Eqt~uY@mD}CeLsAcAcC}HwCsDcAoDjG_e@UsCmBoEUwE|ByOdCeGlCwCv@gCeB_HlC}F~EsGSgH`@cBvD{D|NuG",
-   "pointCount": 22,
+   "lengthKm": 3.48,
+   "curviness": 136.3,
+   "flow": 21.6,
+   "turnCount": 22,
+   "score": 63.1,
+   "baseScore": 58.5,
+   "spotCount": 2,
+   "polyline": "exv|EsaisYuTqNVvi@oIi@qS`@yQgCaIn@uAj@_AnBc@`HmFrPsLzL}GpE{@zERtM",
+   "pointCount": 15,
    "start": [
-    36.429669,
-    140.081531
+    36.330432,
+    139.643299
    ],
    "end": [
-    36.424914,
-    140.110999
+    36.349302,
+    139.627664
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:75",
+   "id": "栃木県:61",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "宇都宮向田線",
+   "ref": "64;176",
+   "highway": "primary",
+   "lengthKm": 7.06,
+   "curviness": 244.9,
+   "flow": 16,
+   "turnCount": 108,
+   "score": 63.1,
+   "baseScore": 60.2,
+   "spotCount": 1,
+   "polyline": "}oo~EqrjvYlGfQz@pLy@xD{BdDeAzDqAhBEvBNj@lBj@fAdD~AlBO~D|AdCr@lCs@lDAjDpAf@jA`BfBJhA`AvCzJvExI`D`PEjM`A|HdIjJj@tBApG\\tC_BfILlF]rG^pB|DjFFtBwApFkDfD_@dBZlBjF~KP|Ld@dF`FhNv@zHhA~ExK|TBhGjA`ExNdEtC|EdRvTt@jFkBfI",
+   "pointCount": 54,
+   "start": [
+    36.620953,
+    140.142653
+   ],
+   "end": [
+    36.601485,
+    140.077503
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:62",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "牧野大沢線",
@@ -1910,8 +1798,8 @@
    "curviness": 216.2,
    "flow": 20.1,
    "turnCount": 34,
-   "score": 53.4,
-   "baseScore": 53.4,
+   "score": 62.7,
+   "baseScore": 62.7,
    "spotCount": 0,
    "polyline": "cwx~EmtxvY`RgCtCmBfE}ExFyBfEeG`LoD~JSpCiAnGk@nHMdD^lAo@xBd@hBMtH`BjM_AvA{DjDyA~Ed@nEkAvK^",
    "pointCount": 22,
@@ -1922,10 +1810,13 @@
    "end": [
     36.641804,
     140.221744
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:76",
+   "id": "栃木県:63",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "塩原街道(湯の香ライン)",
@@ -1935,8 +1826,8 @@
    "curviness": 210.3,
    "flow": 18.4,
    "turnCount": 123,
-   "score": 53.4,
-   "baseScore": 53.4,
+   "score": 62.6,
+   "baseScore": 62.6,
    "spotCount": 0,
    "polyline": "qnr`F}kvtYaCrI}AlAkBI[\\B~BaDvMb@fOy@bC_@pI^jDfAvCdAhKYxFq@~Ab@|BElB_ExGkEbEkChOp@|AvCbC^fCjFbDfBbF`I|JD~@rC|GlA`Q~A|DHnB}AxDwBvMw@pAwQlGqJnAeCvCAfG~AfGrNfOp@bIQ~ByDvKcBh@[rDeB~GwD`FkGfPmOhCiJ~OmQjv@b@dIKlEeGfOcC`XyFbPsAh\\TnG\\dAaHzR{@xLyBzDgA|GsCjIoE|D_ErH",
    "pointCount": 66,
@@ -1947,60 +1838,42 @@
    "end": [
     36.986689,
     139.7771
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:77",
+   "id": "栃木県:64",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "蛭畑須佐木線",
-   "ref": "343",
+   "name": "西小塙真岡線",
+   "ref": "257",
    "highway": "secondary",
-   "lengthKm": 4.19,
-   "curviness": 169.4,
+   "lengthKm": 3.2,
+   "curviness": 221.8,
    "flow": 16.5,
    "turnCount": 43,
-   "score": 53.4,
-   "baseScore": 47.6,
-   "spotCount": 3,
-   "polyline": "giy_FyzsvYqIxVaDlAoChD}DzHsEbFeCfJEnL|FnGfOnHlH`QhGfGtF^~HOzD~ClC`AzEJbObE`B`BdArC`Hx@xCfCvCjGbEfOz@l@xBD",
-   "pointCount": 26,
+   "score": 62.2,
+   "baseScore": 59.3,
+   "spotCount": 1,
+   "polyline": "mdj}Eqt~uY@mD}CeLsAcAcC}HwCsDcAoDjG_e@UsCmBoEUwE|ByOdCeGlCwCv@gCeB_HlC}F~EsGSgH`@cBvD{D|NuG",
+   "pointCount": 22,
    "start": [
-    36.83492,
-    140.190046
+    36.429669,
+    140.081531
    ],
    "end": [
-    36.820274,
-    140.162582
+    36.424914,
+    140.110999
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:78",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "白沢街道",
-   "ref": "125",
-   "highway": "secondary",
-   "lengthKm": 3.04,
-   "curviness": 147.4,
-   "flow": 24.9,
-   "turnCount": 18,
-   "score": 53.3,
-   "baseScore": 53.3,
-   "spotCount": 0,
-   "polyline": "{cq~EyybuY}GsKeBuG?kHcSnB_AoBu@GgBb@eRlKsQ~BiOxGwYjE_RkW",
-   "pointCount": 13,
-   "start": [
-    36.629259,
-    139.939014
-   ],
-   "end": [
-    36.651513,
-    139.942622
-   ]
-  },
-  {
-   "id": "栃木県:79",
+   "id": "栃木県:65",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "湯本大島線",
@@ -2010,8 +1883,8 @@
    "curviness": 167.4,
    "flow": 18.6,
    "turnCount": 66,
-   "score": 53.1,
-   "baseScore": 50.2,
+   "score": 61.9,
+   "baseScore": 59,
    "spotCount": 1,
    "polyline": "iqoaFsepuYgDxDo@Bx@kGC{DtD}JhBa[nCoL[eSn@{J|CcIc@_GtAcMxHmLdAe@vC`@h@U~@yFv@eB`KoC|BoIfMoHhE}H~Pgb@n@{GnCsFKsGlAoRjFmW~CcLfGuMlJoOjD{OzRqLtAF~LdEbBB~CiAtIoI",
    "pointCount": 39,
@@ -2022,35 +1895,41 @@
    "end": [
     37.081839,
     140.066839
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:80",
+   "id": "栃木県:66",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "芳賀茂木線",
-   "ref": "338",
+   "name": "蛭畑須佐木線",
+   "ref": "343",
    "highway": "secondary",
-   "lengthKm": 4.87,
-   "curviness": 207.3,
-   "flow": 16,
-   "turnCount": 63,
-   "score": 52.7,
-   "baseScore": 49.8,
-   "spotCount": 1,
-   "polyline": "acf~EmmsvYHxV{@dIoDbAyG}EmAI_F`CsFbHaDdBe@bA?lAbBvExBjBrCpFtDbBtHpLnFpGzIrDdC`FAfLiCtEAxClBfEbCxL~IrIrAjEtC|DjEjDnBnKi@jJ`AjFWrQzA~FvD~E",
-   "pointCount": 34,
+   "lengthKm": 4.19,
+   "curviness": 169.4,
+   "flow": 16.5,
+   "turnCount": 43,
+   "score": 61.6,
+   "baseScore": 55.9,
+   "spotCount": 3,
+   "polyline": "giy_FyzsvYqIxVaDlAoChD}DzHsEbFeCfJEnL|FnGfOnHlH`QhGfGtF^~HOzD~ClC`AzEJbObE`B`BdArC`Hx@xCfCvCjGbEfOz@l@xBD",
+   "pointCount": 26,
    "start": [
-    36.572807,
-    140.187905
+    36.83492,
+    140.190046
    ],
    "end": [
-    36.564773,
-    140.148959
+    36.820274,
+    140.162582
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:81",
+   "id": "栃木県:67",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "鹿沼足尾線",
@@ -2060,8 +1939,8 @@
    "curviness": 233.1,
    "flow": 17.8,
    "turnCount": 105,
-   "score": 52.3,
-   "baseScore": 52.3,
+   "score": 61.5,
+   "baseScore": 61.5,
    "spotCount": 0,
    "polyline": "qo{}EapasYq@`AeFxCkGfC_BzDi@bN{DpM?jCzAlNyBpHgJxD{CDyMsGiAfCYrCbApJE|CgBnCkX|DqMUuEbBeB`BgBlExB~SQnD[j@wAb@mCaAaEgFeEmB}LiAkPT{Cq@wCaBy@TEdDrCpE\\tBKrDsAfHqBbCqJpAyDi@eBt@yAdBmJxYFrB|CvGClBeAbAiKhDyEfDZrBbH`Cn@j@DlAcFdDmI|Pq@z@qAV",
    "pointCount": 60,
@@ -2072,10 +1951,14 @@
    "end": [
     36.556689,
     139.56225
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:82",
+   "id": "栃木県:68",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "藤原宇都宮線",
@@ -2085,8 +1968,8 @@
    "curviness": 191.9,
    "flow": 21.8,
    "turnCount": 34,
-   "score": 52.2,
-   "baseScore": 52.2,
+   "score": 61.5,
+   "baseScore": 61.5,
    "spotCount": 0,
    "polyline": "gxb_FyyxtYMx@Ec@hBgCdDeMpWwKbVcNhB{AhHeMbKsCjOwb@tBqDnA{@dDO~Bb@UvEn@zQfCjFtAlAlOrDrDnEr@tE",
    "pointCount": 22,
@@ -2097,35 +1980,41 @@
    "end": [
     36.696603,
     139.896708
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:83",
+   "id": "栃木県:69",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "例幣使街道",
-   "ref": "8",
+   "name": "芳賀茂木線",
+   "ref": "338",
    "highway": "secondary",
-   "lengthKm": 5.13,
-   "curviness": 96.7,
-   "flow": 26.1,
-   "turnCount": 19,
-   "score": 51.9,
-   "baseScore": 51.9,
-   "spotCount": 0,
-   "polyline": "mfr|E{bsrYrMlQeFtPWzBjBlNbBzu@aLxf@cRnX|GjHhn@lXuDzNuLhVdLz\\",
-   "pointCount": 13,
+   "lengthKm": 4.87,
+   "curviness": 207.3,
+   "flow": 16,
+   "turnCount": 63,
+   "score": 61.3,
+   "baseScore": 58.4,
+   "spotCount": 1,
+   "polyline": "acf~EmmsvYHxV{@dIoDbAyG}EmAI_F`CsFbHaDdBe@bA?lAbBvExBjBrCpFtDbBtHpLnFpGzIrDdC`FAfLiCtEAxClBfEbCxL~IrIrAjEtC|DjEjDnBnKi@jJ`AjFWrQzA~FvD~E",
+   "pointCount": 34,
    "start": [
-    36.307106,
-    139.530855
+    36.572807,
+    140.187905
    ],
    "end": [
-    36.302137,
-    139.486144
+    36.564773,
+    140.148959
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:84",
+   "id": "栃木県:70",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "矢板那珂川線",
@@ -2135,8 +2024,8 @@
    "curviness": 209,
    "flow": 19.1,
    "turnCount": 76,
-   "score": 51.8,
-   "baseScore": 51.8,
+   "score": 60.9,
+   "baseScore": 60.9,
    "spotCount": 0,
    "polyline": "_it_Fq|ouYgDhPhEx@`AhGFrFdAlBhChBqAfWcDrHPdHsBbI}ApBw@vCqEfDgFvJaErKThHw@bD@fCzDvI@xJ{B|HoLbO}H~PsB|IRlFe@vCaH`LzEtH}D|MyDfIpBt_@jDlOhCzGnDjEdBzHpCfEvMvDfDB~@`@vD~ElEjJ",
    "pointCount": 42,
@@ -2147,10 +2036,13 @@
    "end": [
     36.810116,
     139.942792
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:85",
+   "id": "栃木県:71",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "名草小俣線",
@@ -2160,8 +2052,8 @@
    "curviness": 205.3,
    "flow": 17.5,
    "turnCount": 90,
-   "score": 51.7,
-   "baseScore": 51.7,
+   "score": 60.6,
+   "baseScore": 60.6,
    "spotCount": 0,
    "polyline": "alg}Eii}qYAjEaBxFNdFcCdCS|@j@~JmAhOLbc@dFlJUlEhA~DuAvCApEfB~E|CtCO`G|DnGDtDnAjFa@hM`@fGrK~IdG`I|A~DbDnAdEAtEfBfHq@jKyElIhElJc@nEn@fCWpCj@pDUnDlCbCjDhHrAtNhIhOvQlDxBjEd@vU{@~NfBlFk@hIrBzBfBxDzA",
    "pointCount": 49,
@@ -2172,10 +2064,14 @@
    "end": [
     36.375615,
     139.374732
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:86",
+   "id": "栃木県:72",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "下大羽益子線",
@@ -2185,8 +2081,8 @@
    "curviness": 214.2,
    "flow": 18.3,
    "turnCount": 38,
-   "score": 51.7,
-   "baseScore": 51.7,
+   "score": 60.6,
+   "baseScore": 60.6,
    "spotCount": 0,
    "polyline": "udr}EishvYjEtCnMxCbA`BpA~GJjAg@dD{DvDc@fBTxArCjGyAhFIzBhA|D@pFgA~FaDr[K`E^jDkA~Fu@fKdJdJdEpAvH|Hl@`K",
    "pointCount": 25,
@@ -2197,110 +2093,13 @@
    "end": [
     36.464263,
     140.104044
-   ]
-  },
-  {
-   "id": "栃木県:87",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須高原スカイライン",
-   "ref": "266",
-   "highway": "secondary",
-   "lengthKm": 5.22,
-   "curviness": 186.6,
-   "flow": 16.2,
-   "turnCount": 60,
-   "score": 51.7,
-   "baseScore": 48.8,
-   "spotCount": 1,
-   "polyline": "eeiaF__puYjBfU?xEkA~H?lIwEnO_@dQnAdJCtEcDdSeGxCyCIm@nAp@zA~I`CjDbDr@zBFfFW`B{InPgDhIe@xCtC~Jk@lMjApBxEh@rAz@|CtFx@bF}@dTExMyC`Mt@|MYzG",
-   "pointCount": 34,
-   "start": [
-    37.080029,
-    140.006403
    ],
-   "end": [
-    37.081046,
-    139.956797
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:88",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "親園南金丸線",
-   "ref": "170",
-   "highway": "secondary",
-   "lengthKm": 3.04,
-   "curviness": 189.4,
-   "flow": 19.9,
-   "turnCount": 29,
-   "score": 51.5,
-   "baseScore": 51.5,
-   "spotCount": 0,
-   "polyline": "oqx_FyrxuYrElBpOcArS|BpLHnDpA`BfCzDrUtFxOwFzU{DpGGpEaFtIaBlFwAMSlN",
-   "pointCount": 16,
-   "start": [
-    36.831121,
-    140.05053
-   ],
-   "end": [
-    36.822782,
-    140.030861
-   ]
-  },
-  {
-   "id": "栃木県:89",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須黒羽茂木線",
-   "ref": "27",
-   "highway": "primary",
-   "lengthKm": 10.41,
-   "curviness": 160.4,
-   "flow": 16.4,
-   "turnCount": 102,
-   "score": 51.4,
-   "baseScore": 46.8,
-   "spotCount": 2,
-   "polyline": "i`~_FuvfvYhDiDdJqAfLyIvL]lE_BrEc@tEkElI}CbHcAfFcBrL@vEg@tBmAvI{@pOlFdJjAlEOzGkBhPgA`FiAtD_CtCqHdAqLp@aE`@c@`D}@hIkH`MmF`Z_Bn@}JtBsHpAEjEkPhCcGxBoBdD}LtHcEb@k@DqC}A}G}AiDuYiYqC{DcMqHyDiFwAaEBaSbCwDnPuG|LjFfC\\~BwAzF_AdCwDrF}B`D]dFaE|EHtOaF",
-   "pointCount": 60,
-   "start": [
-    36.859089,
-    140.12283
-   ],
-   "end": [
-    36.804345,
-    140.170986
-   ]
-  },
-  {
-   "id": "栃木県:90",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "蛭田喜連川線",
-   "ref": "167",
-   "highway": "secondary",
-   "lengthKm": 8.64,
-   "curviness": 154.6,
-   "flow": 15.4,
-   "turnCount": 87,
-   "score": 51.3,
-   "baseScore": 46.7,
-   "spotCount": 2,
-   "polyline": "gao_Fy|zuY~JxCbCfEbE~B|GTxLdFfNzKdFxAhCbFfA|FvChGfExCxFnBvC|FrKbFlBbCb@fBzE_EzEcC~NyLvVgN`DsCrDkGzOkGbDhIzKbOb@pG[tErCjO`ArLbApAdLlG|LnFrBlFrH~KzCbVjBtE|HnGjIIjCbAhHxFtPjC`GbHxInHtIp@tEUhA^",
-   "pointCount": 47,
-   "start": [
-    36.782435,
-    140.062369
-   ],
-   "end": [
-    36.724565,
-    140.027866
-   ]
-  },
-  {
-   "id": "栃木県:91",
+   "id": "栃木県:73",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "下伊勢畑増井線",
@@ -2310,8 +2109,8 @@
    "curviness": 227.1,
    "flow": 16.3,
    "turnCount": 53,
-   "score": 51,
-   "baseScore": 51,
+   "score": 59.8,
+   "baseScore": 59.8,
    "spotCount": 0,
    "polyline": "ct~}Ee_wvY\\wEc@{E|DsEhBeIFuD|CcFxE{AvBsCnDi@jEAfGjCbAAf@i@jBaJB{Cs@mCkHoI_@sBPcBdBmEXoCBwGeB}Mz@iLo@sLp@oGhCqGb@eC]mMdAsI}@qJ",
    "pointCount": 32,
@@ -2322,10 +2121,41 @@
    "end": [
     36.526903,
     140.239104
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:92",
+   "id": "栃木県:74",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "那須黒羽茂木線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 10.41,
+   "curviness": 160.4,
+   "flow": 16.4,
+   "turnCount": 102,
+   "score": 59.6,
+   "baseScore": 55,
+   "spotCount": 2,
+   "polyline": "i`~_FuvfvYhDiDdJqAfLyIvL]lE_BrEc@tEkElI}CbHcAfFcBrL@vEg@tBmAvI{@pOlFdJjAlEOzGkBhPgA`FiAtD_CtCqHdAqLp@aE`@c@`D}@hIkH`MmF`Z_Bn@}JtBsHpAEjEkPhCcGxBoBdD}LtHcEb@k@DqC}A}G}AiDuYiYqC{DcMqHyDiFwAaEBaSbCwDnPuG|LjFfC\\~BwAzF_AdCwDrF}B`D]dFaE|EHtOaF",
+   "pointCount": 60,
+   "start": [
+    36.859089,
+    140.12283
+   ],
+   "end": [
+    36.804345,
+    140.170986
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:75",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "黒磯棚倉線",
@@ -2335,8 +2165,8 @@
    "curviness": 202,
    "flow": 19.6,
    "turnCount": 35,
-   "score": 50.7,
-   "baseScore": 50.7,
+   "score": 59.6,
+   "baseScore": 59.6,
    "spotCount": 0,
    "polyline": "gln`FcwivYtA~AvFtAmBfO^xGbBrEiBvI\\`Il@nCvJtMOhMXtH]tFaErLiBxM_GxOC~@tA|FcCdLYxEiIbMc@bBcCxA",
    "pointCount": 23,
@@ -2347,10 +2177,41 @@
    "end": [
     36.945164,
     140.10557
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:93",
+   "id": "栃木県:76",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "蛭田喜連川線",
+   "ref": "167",
+   "highway": "secondary",
+   "lengthKm": 8.64,
+   "curviness": 154.6,
+   "flow": 15.4,
+   "turnCount": 87,
+   "score": 59.4,
+   "baseScore": 54.8,
+   "spotCount": 2,
+   "polyline": "gao_Fy|zuY~JxCbCfEbE~B|GTxLdFfNzKdFxAhCbFfA|FvChGfExCxFnBvC|FrKbFlBbCb@fBzE_EzEcC~NyLvVgN`DsCrDkGzOkGbDhIzKbOb@pG[tErCjO`ArLbApAdLlG|LnFrBlFrH~KzCbVjBtE|HnGjIIjCbAhHxFtPjC`GbHxInHtIp@tEUhA^",
+   "pointCount": 47,
+   "start": [
+    36.782435,
+    140.062369
+   ],
+   "end": [
+    36.724565,
+    140.027866
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:77",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "仙波葛生線",
@@ -2360,8 +2221,8 @@
    "curviness": 201.7,
    "flow": 17.1,
    "turnCount": 56,
-   "score": 50.5,
-   "baseScore": 50.5,
+   "score": 59.2,
+   "baseScore": 59.2,
    "spotCount": 0,
    "polyline": "kiu}EoqwrYhG{DpAaGjGkFrAqBvNaKpBqChDe@nB{B|IuEpAyBZaEzA{AxMgHtAoBnAm@dEwGrEgBxGt@`F}@fCcKbLwJjQij@hEqIdCeAjFg@pIgG^mAIsDpBkExCaE",
    "pointCount": 31,
@@ -2372,10 +2233,13 @@
    "end": [
     36.456512,
     139.586058
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:94",
+   "id": "栃木県:78",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "小川大金停車場線",
@@ -2385,8 +2249,8 @@
    "curviness": 161.4,
    "flow": 18.6,
    "turnCount": 85,
-   "score": 50.2,
-   "baseScore": 50.2,
+   "score": 59,
+   "baseScore": 59,
    "spotCount": 0,
    "polyline": "_z{~EehdvY}@gNiBoEwDiEmD{I_@wDgLnKuAxE}FrCwFlIwExAqDpEaE|AeBqAuB[sGgFuEKqJoCiOyAcM~@qJvEaGYiQtDec@FaSpD}GN_GjB_D{@sH]eCoBeF}MaAcAeDkAwLLqBm@_Se[qB_BkE{AyDXaFi@eMoFyDwCsMmDe@o@{MhEcByH_AqBcLcIcAaDqB}BuEu@yZdF{HN_Ei@sBeC",
    "pointCount": 55,
@@ -2397,35 +2261,42 @@
    "end": [
     36.758362,
     140.126148
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:95",
+   "id": "栃木県:79",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "真岡那須烏山線",
-   "ref": "61",
-   "highway": "primary",
-   "lengthKm": 4.89,
-   "curviness": 161.2,
-   "flow": 21.3,
-   "turnCount": 37,
-   "score": 50.1,
-   "baseScore": 50.1,
+   "name": "南方須佐木線",
+   "ref": "321",
+   "highway": "secondary",
+   "lengthKm": 2.73,
+   "curviness": 119.1,
+   "flow": 23.2,
+   "turnCount": 14,
+   "score": 58.6,
+   "baseScore": 56.9,
    "spotCount": 0,
-   "polyline": "wa_~E_yzuYyg@hAaRqD}g@~DJkE_AcCkJXmJjBeAnAeB@yN}J}BgEkO{J{MoDmCiCKiA}Lb@}IlAqFqB}`@eA",
-   "pointCount": 20,
+   "polyline": "abf`F{o{vYuHk@wKkIiJuAuBeAqEmEmCoAkV{B{ExAkEV}HsCiS{J_CuDqDqAmBQmAt@mIqC",
+   "pointCount": 17,
    "start": [
-    36.536757,
-    140.061763
+    36.90033,
+    140.22926
    ],
    "end": [
-    36.577209,
-    140.06902
+    36.92292,
+    140.23791
+   ],
+   "reshaped": true,
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:96",
+   "id": "栃木県:80",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "国道461号",
@@ -2435,8 +2306,8 @@
    "curviness": 158.2,
    "flow": 16.8,
    "turnCount": 149,
-   "score": 49.9,
-   "baseScore": 44.1,
+   "score": 57.9,
+   "baseScore": 52.1,
    "spotCount": 3,
    "polyline": "q`~_FwrevYv@cNmAeBuFsRyMyM_Be@yDTu@_BwIhBaRHq@oP}FcQFmHaBmQDaFrCoYe@qR~@gRq@cGrRep@`AeI~BqIfC{NXqG`D_PzD}E~DkJ`E_C`DqObIqF`YiIzPl@lKpFtHbAnHy@bCiCrDa@^_AIeBmAyCoFsH}A{EfA{VxAoGxBiB`B}C~GuHnEJdDyA`GuExPeShDi@rX\\zK~B`GkDjKyCvJwLzDgKReErGiHjBq@hWqQ~@gGOgBZoE|EaIpUuKtCqC`AcE{@cKTwE`BsB|P}HvCiC~EOxFwCj^kC|DP~Es@`Ch@",
    "pointCount": 80,
@@ -2447,10 +2318,14 @@
    "end": [
     36.799292,
     140.218306
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:97",
+   "id": "栃木県:81",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "福原小川線",
@@ -2460,8 +2335,8 @@
    "curviness": 144.6,
    "flow": 16.9,
    "turnCount": 46,
-   "score": 49.7,
-   "baseScore": 46.8,
+   "score": 57.7,
+   "baseScore": 54.9,
    "spotCount": 1,
    "polyline": "exn_Fa_evYoBxEcCdKyWvWyL~P_B`ImClEoBzHaKbX]`H{AfFmDjSyB`AqIt[yA~LB~LmE|GeBpUyApFmJdTuCjDTjHkGlSt@tCOpJ",
    "pointCount": 25,
@@ -2472,110 +2347,13 @@
    "end": [
     36.801889,
     140.062673
-   ]
-  },
-  {
-   "id": "栃木県:98",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "真岡上三川線",
-   "ref": "47;320",
-   "highway": "primary",
-   "lengthKm": 3.12,
-   "curviness": 99.2,
-   "flow": 25.8,
-   "turnCount": 12,
-   "score": 49.5,
-   "baseScore": 49.5,
-   "spotCount": 0,
-   "polyline": "a_l}EaajuYZ~IRL|J|tAfIlh@`Q`t@p@|Hk@vE",
-   "pointCount": 8,
-   "start": [
-    36.439046,
-    139.976009
    ],
-   "end": [
-    36.432336,
-    139.942637
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:99",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "佐野バイパス",
-   "ref": "50",
-   "highway": "trunk",
-   "lengthKm": 3.11,
-   "curviness": 138,
-   "flow": 26.8,
-   "turnCount": 16,
-   "score": 49.4,
-   "baseScore": 49.4,
-   "spotCount": 0,
-   "polyline": "qss|EkjlsYm@eOP_MSi@zE{w@i@zE}Chr@Yp@GvHx@bUdHn_@",
-   "pointCount": 11,
-   "start": [
-    36.314332,
-    139.660061
-   ],
-   "end": [
-    36.312879,
-    139.654337
-   ]
-  },
-  {
-   "id": "栃木県:100",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須黒羽茂木線",
-   "ref": "27",
-   "highway": "primary",
-   "lengthKm": 4.12,
-   "curviness": 174.9,
-   "flow": 16.4,
-   "turnCount": 44,
-   "score": 49.3,
-   "baseScore": 46.4,
-   "spotCount": 1,
-   "polyline": "abq_FupovYjCXfEdCvB}ApHqMlFLnFuCnDAnCjBfGtBbEKdEf@vDsBnB{EvDsEtFjAtSm@rGtD|LJfKfGjEtAhEzIbKhKlZtGnBC",
-   "pointCount": 25,
-   "start": [
-    36.792811,
-    140.16795
-   ],
-   "end": [
-    36.76027,
-    140.164158
-   ]
-  },
-  {
-   "id": "栃木県:101",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須黒羽茂木線",
-   "ref": "27",
-   "highway": "primary",
-   "lengthKm": 3.49,
-   "curviness": 150.4,
-   "flow": 16.4,
-   "turnCount": 32,
-   "score": 49.2,
-   "baseScore": 44.6,
-   "spotCount": 2,
-   "polyline": "ca~~EmbpvYxLu@dFkBjIJfGy@dHZdFdDX|@KjCnCfAbGhJbH`FbJpCbDPvK_Ajg@zB~\\lCt@xC",
-   "pointCount": 18,
-   "start": [
-    36.695382,
-    140.170787
-   ],
-   "end": [
-    36.666702,
-    140.163953
-   ]
-  },
-  {
-   "id": "栃木県:102",
+   "id": "栃木県:82",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "栗山今市線",
@@ -2585,8 +2363,8 @@
    "curviness": 185.6,
    "flow": 16.9,
    "turnCount": 45,
-   "score": 49,
-   "baseScore": 49,
+   "score": 57.5,
+   "baseScore": 57.5,
    "spotCount": 0,
    "polyline": "ofk_F{xosYbBgItEiJrD_FzBkBfG{AhBwEp@k@nFEfJeEhEYfEnCbALjFoBbGlBpGv@nA_@`CkD|@UjN|ErJ`ArIw@xHoCvEHzIw@Tw\\n@}FlBkJb@m@",
    "pointCount": 29,
@@ -2597,60 +2375,69 @@
    "end": [
     36.735556,
     139.693697
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:103",
+   "id": "栃木県:83",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "辰街道",
-   "ref": "158",
-   "highway": "secondary",
-   "lengthKm": 5.55,
-   "curviness": 134.9,
-   "flow": 16.6,
-   "turnCount": 45,
-   "score": 48.9,
-   "baseScore": 46,
+   "name": "那須黒羽茂木線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 4.12,
+   "curviness": 174.9,
+   "flow": 16.4,
+   "turnCount": 44,
+   "score": 57.4,
+   "baseScore": 54.5,
    "spotCount": 1,
-   "polyline": "_db~E_zcuYnThIrMmC|OpDxAaI|EKhDkAjVlAbQaB|IvCpR`@xEjBnEbElLY`MfAnGw@tHvAdOmBlLfAtEmCnNr@tVwHhDNdKbCzBY",
+   "polyline": "abq_FupovYjCXfEdCvB}ApHqMlFLnFuCnDAnCjBfGtBbEKdEf@vDsBnB{EvDsEtFjAtSm@rGtD|LJfKfGjEtAhEzIbKhKlZtGnBC",
    "pointCount": 25,
    "start": [
-    36.552478,
-    139.944157
+    36.792811,
+    140.16795
    ],
    "end": [
-    36.505124,
-    139.943227
+    36.76027,
+    140.164158
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:104",
+   "id": "栃木県:84",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "雀宮真岡線",
-   "ref": "193",
-   "highway": "secondary",
-   "lengthKm": 3.73,
-   "curviness": 138.9,
-   "flow": 16.7,
-   "turnCount": 31,
-   "score": 48.6,
-   "baseScore": 45.7,
-   "spotCount": 1,
-   "polyline": "_ns}Eqm~tYwFpFmHxL^`WyAfUmCdIeBxLy@lHKvJiCrM\\tF_CbFyFra@e@dOwAxGm@nh@",
-   "pointCount": 16,
+   "name": "那須黒羽茂木線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 3.49,
+   "curviness": 150.4,
+   "flow": 16.4,
+   "turnCount": 32,
+   "score": 57,
+   "baseScore": 52.4,
+   "spotCount": 2,
+   "polyline": "ca~~EmbpvYxLu@dFkBjIJfGy@dHZdFdDX|@KjCnCfAbGhJbH`FbJpCbDPvK_Ajg@zB~\\lCt@xC",
+   "pointCount": 18,
    "start": [
-    36.477276,
-    139.916569
+    36.695382,
+    140.170787
    ],
    "end": [
-    36.485181,
-    139.877616
+    36.666702,
+    140.163953
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:105",
+   "id": "栃木県:85",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "小来川文挾石那田線",
@@ -2660,8 +2447,8 @@
    "curviness": 191,
    "flow": 15.7,
    "turnCount": 63,
-   "score": 48.6,
-   "baseScore": 48.6,
+   "score": 56.9,
+   "baseScore": 56.9,
    "spotCount": 0,
    "polyline": "kgu~Eq~esY`MuJlD{DnJaCxCoHK}IeB_JiBaEmJ{Lb@cBxCmEbAoDIqGaBqECoAnBeJHuByAkE[aFNkAxByDFmAWsAoB{Cw@}Et@iC~AkBfLeCbBmAh@oALgCiC{JNe^dAwNzDcWKyFbF}M`AaG",
    "pointCount": 38,
@@ -2672,60 +2459,41 @@
    "end": [
     36.641237,
     139.67447
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:106",
+   "id": "栃木県:86",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "南方須佐木線",
-   "ref": "321",
+   "name": "辰街道",
+   "ref": "158",
    "highway": "secondary",
-   "lengthKm": 3.07,
-   "curviness": 197.8,
-   "flow": 16,
-   "turnCount": 38,
-   "score": 48.5,
-   "baseScore": 48.5,
-   "spotCount": 0,
-   "polyline": "abf`F{o{vYuHk@wKkIiJuAuBeAqEmEmCoAkV{B{ExAkEV}HsCiS{J_CuDqDqAmBQmAt@mIqC}PgA",
-   "pointCount": 18,
+   "lengthKm": 5.55,
+   "curviness": 134.9,
+   "flow": 16.6,
+   "turnCount": 45,
+   "score": 56.8,
+   "baseScore": 53.9,
+   "spotCount": 1,
+   "polyline": "_db~E_zcuYnThIrMmC|OpDxAaI|EKhDkAjVlAbQaB|IvCpR`@xEjBnEbElLY`MfAnGw@tHvAdOmBlLfAtEmCnNr@tVwHhDNdKbCzBY",
+   "pointCount": 25,
    "start": [
-    36.900328,
-    140.229262
+    36.552478,
+    139.944157
    ],
    "end": [
-    36.925786,
-    140.238269
+    36.505124,
+    139.943227
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:107",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "八溝グリーンライン",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.95,
-   "curviness": 187.7,
-   "flow": 15.8,
-   "turnCount": 59,
-   "score": 48.4,
-   "baseScore": 48.4,
-   "spotCount": 0,
-   "polyline": "ybc_FgxkvYhAlE\\bPuDzNYhEbCzQl@`L`FxJ~DzAhFV~E|DbGlCv@fKfDjVdC|DnA|DdDhDzD`P?`F`@~BhGrFj@dT^dChJhJ~@fGr@dAtBZrFwBzAZ`AhA|BjKi@|P",
-   "pointCount": 32,
-   "start": [
-    36.721246,
-    140.148676
-   ],
-   "end": [
-    36.703953,
-    140.105514
-   ]
-  },
-  {
-   "id": "栃木県:108",
+   "id": "栃木県:87",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "豊原停車場線",
@@ -2735,8 +2503,8 @@
    "curviness": 173.1,
    "flow": 17.1,
    "turnCount": 43,
-   "score": 48.4,
-   "baseScore": 48.4,
+   "score": 56.8,
+   "baseScore": 56.8,
    "spotCount": 0,
    "polyline": "kvhaFmuhvY`DgGxDcBpFg@`BcBzByGzHuFzBcDdFuCzHgRzDeCdBcCfDeJpGiIrEmKnDoA~QbAd^cMxFqFhEg@tE}GmDq@uDCuGyAaGsE",
    "pointCount": 25,
@@ -2747,260 +2515,69 @@
    "end": [
     37.056175,
     140.156383
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:109",
+   "id": "栃木県:88",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "富田バイパス",
-   "ref": "11",
-   "highway": "primary",
-   "lengthKm": 4.21,
-   "curviness": 161.4,
-   "flow": 19.4,
-   "turnCount": 35,
-   "score": 48.3,
-   "baseScore": 48.3,
+   "name": "八溝グリーンライン",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.95,
+   "curviness": 187.7,
+   "flow": 15.8,
+   "turnCount": 59,
+   "score": 56.7,
+   "baseScore": 56.7,
    "spotCount": 0,
-   "polyline": "qtx|EwissYaK}BiFwDiBmDmCcJmL}QcEcN|ChMdM|RzC|InEzFhEtBlLlCz\\nEfFpA`DbB`DxCpEjImByEwFsGiDmBaGyA",
-   "pointCount": 22,
+   "polyline": "ybc_FgxkvYhAlE\\bPuDzNYhEbCzQl@`L`FxJ~DzAhFV~E|DbGlCv@fKfDjVdC|DnA|DdDhDzD`P?`F`@~BhGrFj@dT^dChJhJ~@fGr@dAtBZrFwBzAZ`AhA|BjKi@|P",
+   "pointCount": 32,
    "start": [
-    36.340091,
-    139.695798
+    36.721246,
+    140.148676
    ],
    "end": [
-    36.334836,
-    139.69475
-   ]
-  },
-  {
-   "id": "栃木県:110",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "上久我栃木線",
-   "ref": "177",
-   "highway": "secondary",
-   "lengthKm": 3.61,
-   "curviness": 196.1,
-   "flow": 15.4,
-   "turnCount": 46,
-   "score": 48.1,
-   "baseScore": 48.1,
-   "spotCount": 0,
-   "polyline": "atb~EknlsYHaDfC{SdC_CnA_DhB{BxCqBnDuJrCiBjBkGdAm@bE_@xMb@lBmA~CoEZgANsG]mHp@eIlBoHhFyJhI{JhBiJpFeHhAaLbFeJ",
-   "pointCount": 26,
-   "start": [
-    36.55505,
-    139.660703
+    36.703953,
+    140.105514
    ],
-   "end": [
-    36.537804,
-    139.69021
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:111",
+   "id": "栃木県:89",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "折戸西那須野線",
-   "ref": "259",
+   "name": "雀宮真岡線",
+   "ref": "193",
    "highway": "secondary",
-   "lengthKm": 5.43,
-   "curviness": 141.5,
-   "flow": 15.4,
-   "turnCount": 50,
-   "score": 48.1,
-   "baseScore": 45.3,
+   "lengthKm": 3.73,
+   "curviness": 138.9,
+   "flow": 16.7,
+   "turnCount": 31,
+   "score": 56.5,
+   "baseScore": 53.6,
    "spotCount": 1,
-   "polyline": "kzm`FmdguYub@tE}NgCiCC}MbBgMdGwHtB{DbGwHdG}D`HuFlDcFzGsGhEmOnZqEjP}ExGoGvC_DdLMtFmFbKqA~J{@lCGxDvA|Fe@vFz@zGk@|CZ~CkDbG",
-   "pointCount": 29,
+   "polyline": "_ns}Eqm~tYwFpFmHxL^`WyAfUmCdIeBxLy@lHKvJiCrM\\tF_CbFyFra@e@dOwAxGm@nh@",
+   "pointCount": 16,
    "start": [
-    36.940056,
-    139.961191
+    36.477276,
+    139.916569
    ],
    "end": [
-    36.971795,
-    139.926052
+    36.485181,
+    139.877616
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:112",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "大子黒羽線",
-   "ref": "13",
-   "highway": "primary",
-   "lengthKm": 4.97,
-   "curviness": 153.1,
-   "flow": 14.1,
-   "turnCount": 54,
-   "score": 47.8,
-   "baseScore": 43.2,
-   "spotCount": 2,
-   "polyline": "mkz_Fk~|vYaOnIeCbDo@lCeCnSl@tRqB~MBfO{ClNkBxOH~MrBlVz@zBfDtCj@rAC|KzAvGu@rJhC|FK~Go@nC~BvLNnLfAvFtGvLj@dFuC~GwFzFgEpC",
-   "pointCount": 29,
-   "start": [
-    36.84039,
-    140.2367
-   ],
-   "end": [
-    36.84393,
-    140.187824
-   ]
-  },
-  {
-   "id": "栃木県:113",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "黒田市塙真岡線",
-   "ref": "163",
-   "highway": "secondary",
-   "lengthKm": 15.28,
-   "curviness": 127.7,
-   "flow": 14.1,
-   "turnCount": 138,
-   "score": 47.7,
-   "baseScore": 44.8,
-   "spotCount": 1,
-   "polyline": "uzv}EihavY}Dt@aHlDwGGmOhDoOhJmQbCqBt@yGbAmHw@qOjAeGpC{Qk@_QcEmUqRcBw@mQuCqJzCmMl@mEu@cBkB]gFJ_GsJcBeJoDuBiDo@cG_F{GsBgB_FgBsDgCcJ[cJgCqJvBkKz@wGtA{SrAmL_AoKnAyQyDuO`@{EyAoFg@mSBwCdA{Jh@wCe@qKiFa]iLiNuJqGgIkE}CcImNqNwJeBaCcDsHsEuCgPqRkFkEk@eC?yG_CkWToJ}DyJcDwFYcHcC{GEkRy@{AqKyHiGaM\\qDzB{Ck@oFj@aGw@aFp@_I",
-   "pointCount": 77,
-   "start": [
-    36.494668,
-    140.094925
-   ],
-   "end": [
-    36.600339,
-    140.150486
-   ]
-  },
-  {
-   "id": "栃木県:114",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "小砂小口線",
-   "ref": "224",
-   "highway": "secondary",
-   "lengthKm": 3.87,
-   "curviness": 158.2,
-   "flow": 14.2,
-   "turnCount": 43,
-   "score": 47.7,
-   "baseScore": 44.8,
-   "spotCount": 1,
-   "polyline": "cyi_FsakvYiOiJsGeAgFcCkKkAwHgBqDoBuHGwLcBsKiEaCj@aEpDiPgC_KMiB\\kCvBiEaAsJL_ImCiFiSmMaM",
-   "pointCount": 21,
-   "start": [
-    36.755538,
-    140.145055
-   ],
-   "end": [
-    36.786376,
-    140.156254
-   ]
-  },
-  {
-   "id": "栃木県:115",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "豊原大島線",
-   "ref": "305",
-   "highway": "secondary",
-   "lengthKm": 4.89,
-   "curviness": 157.7,
-   "flow": 17.1,
-   "turnCount": 45,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "mkgaFa`cvYwLcE_KnAcc@nUy@hAoBrHcAdAaZrGkJxG}GxB{DzD}GfA{CtC}DfJ{Dx@wHImK{D}@@cHbJuGVkFlCs@hAkA|FyDpAcBhGgXnD",
-   "pointCount": 26,
-   "start": [
-    37.070786,
-    140.103854
-   ],
-   "end": [
-    37.108499,
-    140.085139
-   ]
-  },
-  {
-   "id": "栃木県:116",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "国道122号",
-   "ref": "122",
-   "highway": "trunk",
-   "lengthKm": 6.8,
-   "curviness": 171.5,
-   "flow": 16,
-   "turnCount": 73,
-   "score": 47.6,
-   "baseScore": 43,
-   "spotCount": 2,
-   "polyline": "{e__FosnrYr@j@`Ei@~BZfClBfB`GnA|@zD^vDaA|AHrBzGdIvQnFtGfFvClIhBjFhCxDG|@\\t@tBz@pN~@nBlElD`DlFhEnD|GdJbXbP|GhOhExEzCvBhFbAvEtFrF|DlMpUnFzF^hCPtJ~DnAvB|Bf@vBu@hGj@jRtDjHpCfPxD~IlB`ChDn@",
-   "pointCount": 46,
-   "start": [
-    36.701264,
-    139.507916
-   ],
-   "end": [
-    36.661477,
-    139.459514
-   ]
-  },
-  {
-   "id": "栃木県:117",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須黒羽茂木線",
-   "ref": "27",
-   "highway": "primary",
-   "lengthKm": 4.32,
-   "curviness": 151.3,
-   "flow": 14.2,
-   "turnCount": 46,
-   "score": 47.6,
-   "baseScore": 43,
-   "spotCount": 2,
-   "polyline": "mum~EagpvYeIGqFaBwHxAcB[}IoGkC]yLzCkLq@_GLmGlAmM~FcDVaCq@oD_FsCqAgBgBiH_CkIxAcNxFgIgEcOOyJ{D_HqAmKwGyDJ",
-   "pointCount": 26,
-   "start": [
-    36.611589,
-    140.171531
-   ],
-   "end": [
-    36.64788,
-    140.175884
-   ]
-  },
-  {
-   "id": "栃木県:118",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "真岡上三川線",
-   "ref": "47;320",
-   "highway": "primary",
-   "lengthKm": 4.8,
-   "curviness": 72,
-   "flow": 24.7,
-   "turnCount": 14,
-   "score": 47.5,
-   "baseScore": 47.5,
-   "spotCount": 0,
-   "polyline": "{hk}Ekw`uYoBcKAqEb@oEfTg_An@{HoAeIsNum@mIck@cIk~@aFgw@",
-   "pointCount": 11,
-   "start": [
-    36.435496,
-    139.928378
-   ],
-   "end": [
-    36.439568,
-    139.979573
-   ]
-  },
-  {
-   "id": "栃木県:119",
+   "id": "栃木県:90",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "日光北街道",
@@ -3010,8 +2587,8 @@
    "curviness": 182.3,
    "flow": 21,
    "turnCount": 37,
-   "score": 47.5,
-   "baseScore": 47.5,
+   "score": 56.2,
+   "baseScore": 56.2,
    "spotCount": 0,
    "polyline": "wei_Fgv|sYaC_FqFuFcAsFw@aAqE{ByFm@}N_FwEcCaCuC]m@zLgSmLoNmEgCmFlAuC]eRmPjDuRuA_B]yM}BmL@qc@lB{K",
    "pointCount": 23,
@@ -3022,60 +2599,97 @@
    "end": [
     36.767413,
     139.776399
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:120",
+   "id": "栃木県:91",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "宇都宮テクノ街道",
-   "ref": "64",
+   "name": "真岡上三川線",
+   "ref": "47;320",
    "highway": "primary",
-   "lengthKm": 3.15,
-   "curviness": 176.3,
-   "flow": 17.9,
-   "turnCount": 31,
-   "score": 47.4,
-   "baseScore": 47.4,
+   "lengthKm": 4.8,
+   "curviness": 72,
+   "flow": 24.7,
+   "turnCount": 14,
+   "score": 56,
+   "baseScore": 56,
    "spotCount": 0,
-   "polyline": "c`h~EyaeuYhAzFdErEpc@`JxOtHnClEdA~IBkCu@}EqCwEkPaHk@Jo]uGcEsAmDiEkAoG",
-   "pointCount": 16,
+   "polyline": "{hk}Ekw`uYoBcKAqEb@oEfTg_An@{HoAeIsNum@mIck@cIk~@aFgw@",
+   "pointCount": 11,
    "start": [
-    36.582581,
-    139.950533
+    36.435496,
+    139.928378
    ],
    "end": [
-    36.582703,
-    139.950561
+    36.439568,
+    139.979573
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:121",
+   "id": "栃木県:92",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "南方須佐木線",
-   "ref": "321",
+   "name": "豊原大島線",
+   "ref": "305",
    "highway": "secondary",
-   "lengthKm": 3.92,
-   "curviness": 131.3,
-   "flow": 13.9,
-   "turnCount": 37,
-   "score": 47.4,
-   "baseScore": 42.8,
-   "spotCount": 2,
-   "polyline": "qj}_FwpxvYgDuAkHlC}IqBsDiCsEyFoJcFoC}EaAc@kA\\iBfBgTvCuQYyHiCcGr@eMaAsJCwFz@wDe@wT?eLbAoFIuEuA",
-   "pointCount": 23,
+   "lengthKm": 4.89,
+   "curviness": 157.7,
+   "flow": 17.1,
+   "turnCount": 45,
+   "score": 56,
+   "baseScore": 56,
+   "spotCount": 0,
+   "polyline": "mkgaFa`cvYwLcE_KnAcc@nUy@hAoBrHcAdAaZrGkJxG}GxB{DzD}GfA{CtC}DfJ{Dx@wHImK{D}@@cHbJuGVkFlCs@hAkA|FyDpAcBhGgXnD",
+   "pointCount": 26,
    "start": [
-    36.855605,
-    140.214038
+    37.070786,
+    140.103854
    ],
    "end": [
-    36.888872,
-    140.218205
+    37.108499,
+    140.085139
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:122",
+   "id": "栃木県:93",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "折戸西那須野線",
+   "ref": "259",
+   "highway": "secondary",
+   "lengthKm": 5.43,
+   "curviness": 141.5,
+   "flow": 15.4,
+   "turnCount": 50,
+   "score": 55.9,
+   "baseScore": 53.1,
+   "spotCount": 1,
+   "polyline": "kzm`FmdguYub@tE}NgCiCC}MbBgMdGwHtB{DbGwHdG}D`HuFlDcFzGsGhEmOnZqEjP}ExGoGvC_DdLMtFmFbKqA~J{@lCGxDvA|Fe@vFz@zGk@|CZ~CkDbG",
+   "pointCount": 29,
+   "start": [
+    36.940056,
+    139.961191
+   ],
+   "end": [
+    36.971795,
+    139.926052
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:94",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "石末真岡線",
@@ -3085,8 +2699,8 @@
    "curviness": 109.2,
    "flow": 20.5,
    "turnCount": 20,
-   "score": 47.3,
-   "baseScore": 47.3,
+   "score": 55.5,
+   "baseScore": 55.5,
    "spotCount": 0,
    "polyline": "u|m}EkjquYxPz@ux@oDgu@iSw\\sBuHsDuDK{JcFmK|@iEE",
    "pointCount": 10,
@@ -3097,35 +2711,13 @@
    "end": [
     36.47609,
     140.019569
-   ]
-  },
-  {
-   "id": "栃木県:123",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "今泉川田線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.93,
-   "curviness": 136.8,
-   "flow": 18.5,
-   "turnCount": 29,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "}b`~Eax{tYcJkF}J{@aCRoPdKcDt@mRyAoLyBgQcAXWpPfAnLtBnQhAtDy@`OaJxD]~Jz@hGhDxDhDjCv@",
-   "pointCount": 20,
-   "start": [
-    36.542075,
-    139.902891
    ],
-   "end": [
-    36.540874,
-    139.902179
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:124",
+   "id": "栃木県:95",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "大子那須線",
@@ -3135,8 +2727,8 @@
    "curviness": 151.2,
    "flow": 17.9,
    "turnCount": 68,
-   "score": 47.1,
-   "baseScore": 47.1,
+   "score": 55.5,
+   "baseScore": 55.5,
    "spotCount": 0,
    "polyline": "_yw`FkinvYyXtI_A~@aAxCAnDl@jEy@zBoCtAgGMcAh@q@pEeCdDXjGiDtJ]xHaAhAsHrDiHlPkTvWgHnFuLbSkDrNr@vIm@fJcC~FwS~ZkInPeLjNqCB{@~BmMQaC|@{E^}HjEqErEkHxQwFjDcOz@{ZhUiB`EuCrU",
    "pointCount": 41,
@@ -3147,135 +2739,69 @@
    "end": [
     37.037883,
     140.104184
-   ]
-  },
-  {
-   "id": "栃木県:125",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "小俣桐生線",
-   "ref": "227",
-   "highway": "secondary",
-   "lengthKm": 3.91,
-   "curviness": 157.8,
-   "flow": 16.7,
-   "turnCount": 37,
-   "score": 47,
-   "baseScore": 47,
-   "spotCount": 0,
-   "polyline": "wve}Ec_rqYTiB`BgAnGLrE~AfCRtNtEbOfOpMdBlD}DlCuEBoHnCoJlFeFzQ_ChM~EpAcCzBoI~LqOfG{C`KqBfFyG",
-   "pointCount": 22,
-   "start": [
-    36.407001,
-    139.361296
    ],
-   "end": [
-    36.379375,
-    139.37116
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:126",
+   "id": "栃木県:96",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "常陸太田那須烏山線",
-   "ref": "29",
-   "highway": "primary",
-   "lengthKm": 4.69,
-   "curviness": 143.4,
-   "flow": 14,
-   "turnCount": 48,
-   "score": 47,
-   "baseScore": 42.4,
+   "name": "国道122号",
+   "ref": "122",
+   "highway": "trunk",
+   "lengthKm": 6.8,
+   "curviness": 171.5,
+   "flow": 16,
+   "turnCount": 73,
+   "score": 55.4,
+   "baseScore": 50.8,
    "spotCount": 2,
-   "polyline": "may~Ek_xvYoIfOoAtE\\bL{Ex\\fG~SxDnGCvPZ`EnDpKhCfNlF`FlF|C~CbHfEjBnFbHvB~JtGrIbEhSlOfMXhANdIbI|InB`D",
-   "pointCount": 24,
+   "polyline": "{e__FosnrYr@j@`Ei@~BZfClBfB`GnA|@zD^vDaA|AHrBzGdIvQnFtGfFvClIhBjFhCxDG|@\\t@tBz@pN~@nBlElD`DlFhEnD|GdJbXbP|GhOhExEzCvBhFbAvEtFrF|DlMpUnFzF^hCPtJ~DnAvB|Bf@vBu@hGj@jRtDjHpCfPxD~IlB`ChDn@",
+   "pointCount": 46,
    "start": [
-    36.66983,
-    140.211264
+    36.701264,
+    139.507916
    ],
    "end": [
-    36.655549,
-    140.168646
+    36.661477,
+    139.459514
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:127",
+   "id": "栃木県:97",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "草久粟野線",
-   "ref": "246",
+   "name": "黒田市塙真岡線",
+   "ref": "163",
    "highway": "secondary",
-   "lengthKm": 3.98,
-   "curviness": 180.2,
-   "flow": 15,
-   "turnCount": 48,
-   "score": 46.9,
-   "baseScore": 46.9,
-   "spotCount": 0,
-   "polyline": "uia~EsxdsYcDbIqBlIk@tWy@dIy@\\kFaA}AXwB`AkEfFuCd@gJwDyDO_CxHyMvTmBnAiGhAgFjBqG~GqBhI_@zMoGtTFlEh@xCzCtEl@nBSlAcA~@",
-   "pointCount": 28,
+   "lengthKm": 15.28,
+   "curviness": 127.7,
+   "flow": 14.1,
+   "turnCount": 138,
+   "score": 55.4,
+   "baseScore": 52.5,
+   "spotCount": 1,
+   "polyline": "uzv}EihavY}Dt@aHlDwGGmOhDoOhJmQbCqBt@yGbAmHw@qOjAeGpC{Qk@_QcEmUqRcBw@mQuCqJzCmMl@mEu@cBkB]gFJ_GsJcBeJoDuBiDo@cG_F{GsBgB_FgBsDgCcJ[cJgCqJvBkKz@wGtA{SrAmL_AoKnAyQyDuO`@{EyAoFg@mSBwCdA{Jh@wCe@qKiFa]iLiNuJqGgIkE}CcImNqNwJeBaCcDsHsEuCgPqRkFkEk@eC?yG_CkWToJ}DyJcDwFYcHcC{GEkRy@{AqKyHiGaM\\qDzB{Ck@oFj@aGw@aFp@_I",
+   "pointCount": 77,
    "start": [
-    36.548268,
-    139.621376
+    36.494668,
+    140.094925
    ],
    "end": [
-    36.5659,
-    139.592444
+    36.600339,
+    140.150486
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:128",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須烏山矢板線",
-   "ref": "25",
-   "highway": "primary",
-   "lengthKm": 5.71,
-   "curviness": 168.3,
-   "flow": 16.9,
-   "turnCount": 57,
-   "score": 46.9,
-   "baseScore": 46.9,
-   "spotCount": 0,
-   "polyline": "gsx~EaehvYkClRsAvD}CbC}GjAmCjBaK~OaD~K{MbPaCzI_LdIyAdFuM|CeBjEuBv@eThD`BlV}FpIk@tDeJ|PaArDy@fAsBl@kDxCkPvJ{ErJaEfEiDnA{CjKgHpIsHwA",
-   "pointCount": 31,
-   "start": [
-    36.66756,
-    140.130253
-   ],
-   "end": [
-    36.701101,
-    140.089789
-   ]
-  },
-  {
-   "id": "栃木県:129",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "那須烏山矢板線",
-   "ref": "25",
-   "highway": "primary",
-   "lengthKm": 4.47,
-   "curviness": 173.8,
-   "flow": 16.9,
-   "turnCount": 46,
-   "score": 46.9,
-   "baseScore": 46.9,
-   "spotCount": 0,
-   "polyline": "q_p_FgbmuYmG|E_DtHiDzEiFtBkAbBgAnKMvJx@`MeC|SsAhFqGxL}CfCkC~@lCrTMhB}BfH_ItGxBvGb@~Fs@zGgFlI_AfJJ~CfE~NpBnChCnAtA|AjIxP",
-   "pointCount": 29,
-   "start": [
-    36.787287,
-    139.991561
-   ],
-   "end": [
-    36.794064,
-    139.95062
-   ]
-  },
-  {
-   "id": "栃木県:130",
+   "id": "栃木県:98",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "会津西街道",
@@ -3285,8 +2811,8 @@
    "curviness": 171.3,
    "flow": 20,
    "turnCount": 71,
-   "score": 46.9,
-   "baseScore": 46.9,
+   "score": 55.4,
+   "baseScore": 55.4,
    "spotCount": 0,
    "polyline": "w|c_F_fqsYoH{DoNkB_CqBcQaHvBmK{@aCu@yFyDeHsOsM_F{Gs@}AmAkJaCsHaU}WaLaGuUiDyEwCgKuAiNcAuBl@_FNcHyA_Ms@oM`GyAwC{AgGiFw[wBqCyZdFqBgAiCb@}NlKmH|HyGs@iJoFwGbBqF^mIcBaNrM",
    "pointCount": 40,
@@ -3297,35 +2823,181 @@
    "end": [
     36.783757,
     139.709997
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:131",
+   "id": "栃木県:99",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "町道大宮佐貫線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.55,
-   "curviness": 180.9,
-   "flow": 14.9,
+   "name": "小砂小口線",
+   "ref": "224",
+   "highway": "secondary",
+   "lengthKm": 3.87,
+   "curviness": 158.2,
+   "flow": 14.2,
    "turnCount": 43,
-   "score": 46.7,
-   "baseScore": 46.7,
-   "spotCount": 0,
-   "polyline": "szi_FocjtYA}FoBuKKeKjCuLrAeDlEkClFqGr@sAhAgGvPmJfHeChJArDlAdQyCbE_TzCwEfBqFv@o@`Ek@jBkE~EaChCcG",
-   "pointCount": 23,
+   "score": 55.4,
+   "baseScore": 52.5,
+   "spotCount": 1,
+   "polyline": "cyi_FsakvYiOiJsGeAgFcCkKkAwHgBqDoBuHGwLcBsKiEaCj@aEpDiPgC_KMiB\\kCvBiEaAsJL_ImCiFiSmMaM",
+   "pointCount": 21,
    "start": [
-    36.755777,
-    139.812562
+    36.755538,
+    140.145055
    ],
    "end": [
-    36.736617,
-    139.836609
+    36.786376,
+    140.156254
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:132",
+   "id": "栃木県:100",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "大子黒羽線",
+   "ref": "13",
+   "highway": "primary",
+   "lengthKm": 4.97,
+   "curviness": 153.1,
+   "flow": 14.1,
+   "turnCount": 54,
+   "score": 55.3,
+   "baseScore": 50.7,
+   "spotCount": 2,
+   "polyline": "mkz_Fk~|vYaOnIeCbDo@lCeCnSl@tRqB~MBfO{ClNkBxOH~MrBlVz@zBfDtCj@rAC|KzAvGu@rJhC|FK~Go@nC~BvLNnLfAvFtGvLj@dFuC~GwFzFgEpC",
+   "pointCount": 29,
+   "start": [
+    36.84039,
+    140.2367
+   ],
+   "end": [
+    36.84393,
+    140.187824
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:101",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "小俣桐生線",
+   "ref": "227",
+   "highway": "secondary",
+   "lengthKm": 3.91,
+   "curviness": 157.8,
+   "flow": 16.7,
+   "turnCount": 37,
+   "score": 55.1,
+   "baseScore": 55.1,
+   "spotCount": 0,
+   "polyline": "wve}Ec_rqYTiB`BgAnGLrE~AfCRtNtEbOfOpMdBlD}DlCuEBoHnCoJlFeFzQ_ChM~EpAcCzBoI~LqOfG{C`KqBfFyG",
+   "pointCount": 22,
+   "start": [
+    36.407001,
+    139.361296
+   ],
+   "end": [
+    36.379375,
+    139.37116
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:102",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "那須黒羽茂木線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 4.32,
+   "curviness": 151.3,
+   "flow": 14.2,
+   "turnCount": 46,
+   "score": 55.1,
+   "baseScore": 50.5,
+   "spotCount": 2,
+   "polyline": "mum~EagpvYeIGqFaBwHxAcB[}IoGkC]yLzCkLq@_GLmGlAmM~FcDVaCq@oD_FsCqAgBgBiH_CkIxAcNxFgIgEcOOyJ{D_HqAmKwGyDJ",
+   "pointCount": 26,
+   "start": [
+    36.611589,
+    140.171531
+   ],
+   "end": [
+    36.64788,
+    140.175884
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:103",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "那須烏山矢板線",
+   "ref": "25",
+   "highway": "primary",
+   "lengthKm": 5.71,
+   "curviness": 168.3,
+   "flow": 16.9,
+   "turnCount": 57,
+   "score": 55.1,
+   "baseScore": 55.1,
+   "spotCount": 0,
+   "polyline": "gsx~EaehvYkClRsAvD}CbC}GjAmCjBaK~OaD~K{MbPaCzI_LdIyAdFuM|CeBjEuBv@eThD`BlV}FpIk@tDeJ|PaArDy@fAsBl@kDxCkPvJ{ErJaEfEiDnA{CjKgHpIsHwA",
+   "pointCount": 31,
+   "start": [
+    36.66756,
+    140.130253
+   ],
+   "end": [
+    36.701101,
+    140.089789
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:104",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "那須烏山矢板線",
+   "ref": "25",
+   "highway": "primary",
+   "lengthKm": 4.47,
+   "curviness": 173.8,
+   "flow": 16.9,
+   "turnCount": 46,
+   "score": 55.1,
+   "baseScore": 55.1,
+   "spotCount": 0,
+   "polyline": "q_p_FgbmuYmG|E_DtHiDzEiFtBkAbBgAnKMvJx@`MeC|SsAhFqGxL}CfCkC~@lCrTMhB}BfH_ItGxBvGb@~Fs@zGgFlI_AfJJ~CfE~NpBnChCnAtA|AjIxP",
+   "pointCount": 29,
+   "start": [
+    36.787287,
+    139.991561
+   ],
+   "end": [
+    36.794064,
+    139.95062
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:105",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "日光北街道",
@@ -3335,8 +3007,8 @@
    "curviness": 186.1,
    "flow": 18.7,
    "turnCount": 79,
-   "score": 46.6,
-   "baseScore": 46.6,
+   "score": 55.1,
+   "baseScore": 55.1,
    "spotCount": 0,
    "polyline": "mfl_Fc|ntYbDuPEqHw@{C{AiCyHaGqA}Bw@uDEcKaCyGB`@]?eBq@sGo@qUtDY_DgYet@uAwHsB_SeCyBiDkGqFaGuDcC[eAuDwAsGkFaCuGSqHeCqK}NyNkJ{ByBiCQaCtCoV`IwYNuH_BgBsHYoCaCmEaLsAwIBwCzAoLO_C_AoA}HaCyHyI}@aB]gD",
    "pointCount": 49,
@@ -3347,85 +3019,125 @@
    "end": [
     36.799615,
     139.900126
-   ]
-  },
-  {
-   "id": "栃木県:133",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "小口黒羽線",
-   "ref": "298",
-   "highway": "secondary",
-   "lengthKm": 6.15,
-   "curviness": 139.3,
-   "flow": 13.6,
-   "turnCount": 63,
-   "score": 46.6,
-   "baseScore": 43.7,
-   "spotCount": 1,
-   "polyline": "o}j_FmtkvYc@tB{@t@_KLsNlC_An@k@nExBhFXlDOlCo@|@iYrH{KtG_IjCgGn@yCvA_GhA_D~A{DjFmQpA_NaEiMhCeRuBeMIeLjAwA`A{ClEiEfD_JnB{G{@kGgDiIY_LiBaJwH}Om@",
-   "pointCount": 35,
-   "start": [
-    36.761357,
-    140.148067
    ],
-   "end": [
-    36.809407,
-    140.136714
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:134",
+   "id": "栃木県:106",
    "region": "tochigi",
    "regionName": "栃木県",
-   "name": "小金井結城線",
-   "ref": "147;214",
+   "name": "草久粟野線",
+   "ref": "246",
    "highway": "secondary",
-   "lengthKm": 3.65,
-   "curviness": 108.8,
-   "flow": 16.5,
-   "turnCount": 24,
-   "score": 46.5,
-   "baseScore": 43.6,
-   "spotCount": 1,
-   "polyline": "yzr|EkhvtYgOhFiHjGoLF{YjIkD^_NImM~CkFzB_FtJiG|DmTpF}ItAoDnJgGp@wOK",
-   "pointCount": 16,
-   "start": [
-    36.310373,
-    139.874781
-   ],
-   "end": [
-    36.340183,
-    139.862546
-   ]
-  },
-  {
-   "id": "栃木県:135",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "宇都宮栃木線",
-   "ref": "2;3",
-   "highway": "primary",
-   "lengthKm": 3.53,
-   "curviness": 121.2,
-   "flow": 20.4,
-   "turnCount": 21,
-   "score": 46.3,
-   "baseScore": 46.3,
+   "lengthKm": 3.98,
+   "curviness": 180.2,
+   "flow": 15,
+   "turnCount": 48,
+   "score": 54.9,
+   "baseScore": 54.9,
    "spotCount": 0,
-   "polyline": "cha}Em~zsYIwHgEsNuMoRuLmXoLmFmLwQ_C{AgHaOoYwu@uBgHk@aEEhAzAvG",
-   "pointCount": 14,
+   "polyline": "uia~EsxdsYcDbIqBlIk@tWy@dIy@\\kFaA}AXwB`AkEfFuCd@gJwDyDO_CxHyMvTmBnAiGhAgFjBqG~GqBhI_@zMoGtTFlEh@xCzCtEl@nBSlAcA~@",
+   "pointCount": 28,
    "start": [
-    36.384181,
-    139.734952
+    36.548268,
+    139.621376
    ],
    "end": [
-    36.400821,
-    139.762858
+    36.5659,
+    139.592444
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:136",
+   "id": "栃木県:107",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "町道大宮佐貫線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.55,
+   "curviness": 180.9,
+   "flow": 14.9,
+   "turnCount": 43,
+   "score": 54.7,
+   "baseScore": 54.7,
+   "spotCount": 0,
+   "polyline": "szi_FocjtYA}FoBuKKeKjCuLrAeDlEkClFqGr@sAhAgGvPmJfHeChJArDlAdQyCbE_TzCwEfBqFv@o@`Ek@jBkE~EaChCcG",
+   "pointCount": 23,
+   "start": [
+    36.755777,
+    139.812562
+   ],
+   "end": [
+    36.736617,
+    139.836609
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:108",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "南方須佐木線",
+   "ref": "321",
+   "highway": "secondary",
+   "lengthKm": 3.92,
+   "curviness": 131.3,
+   "flow": 13.9,
+   "turnCount": 37,
+   "score": 54.7,
+   "baseScore": 50.2,
+   "spotCount": 2,
+   "polyline": "qj}_FwpxvYgDuAkHlC}IqBsDiCsEyFoJcFoC}EaAc@kA\\iBfBgTvCuQYyHiCcGr@eMaAsJCwFz@wDe@wT?eLbAoFIuEuA",
+   "pointCount": 23,
+   "start": [
+    36.855605,
+    140.214038
+   ],
+   "end": [
+    36.888872,
+    140.218205
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:109",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "常陸太田那須烏山線",
+   "ref": "29",
+   "highway": "primary",
+   "lengthKm": 4.69,
+   "curviness": 143.4,
+   "flow": 14,
+   "turnCount": 48,
+   "score": 54.4,
+   "baseScore": 49.8,
+   "spotCount": 2,
+   "polyline": "may~Ek_xvYoIfOoAtE\\bL{Ex\\fG~SxDnGCvPZ`EnDpKhCfNlF`FlF|C~CbHfEjBnFbHvB~JtGrIbEhSlOfMXhANdIbI|InB`D",
+   "pointCount": 24,
+   "start": [
+    36.66983,
+    140.211264
+   ],
+   "end": [
+    36.655549,
+    140.168646
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:110",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "杉山石末線",
@@ -3435,8 +3147,8 @@
    "curviness": 149.6,
    "flow": 15.5,
    "turnCount": 63,
-   "score": 46.2,
-   "baseScore": 46.2,
+   "score": 54.1,
+   "baseScore": 54.1,
    "spotCount": 0,
    "polyline": "}yq~EanquYDoDrCcJDiM`@cE`JeTV_EYiElOiHtBqLdAsCnGgFvEcHrG_EqA{XiC_Q{GsUw@cOb@{Bv@oAxUyRnAgCaAsZ~AyJeCeK?mKlCuH~AgRvIaQfBgIfCkEcAyZ",
    "pointCount": 32,
@@ -3447,10 +3159,69 @@
    "end": [
     36.617712,
     140.076169
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:137",
+   "id": "栃木県:111",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "小口黒羽線",
+   "ref": "298",
+   "highway": "secondary",
+   "lengthKm": 6.15,
+   "curviness": 139.3,
+   "flow": 13.6,
+   "turnCount": 63,
+   "score": 54.1,
+   "baseScore": 51.2,
+   "spotCount": 1,
+   "polyline": "o}j_FmtkvYc@tB{@t@_KLsNlC_An@k@nExBhFXlDOlCo@|@iYrH{KtG_IjCgGn@yCvA_GhA_D~A{DjFmQpA_NaEiMhCeRuBeMIeLjAwA`A{ClEiEfD_JnB{G{@kGgDiIY_LiBaJwH}Om@",
+   "pointCount": 35,
+   "start": [
+    36.761357,
+    140.148067
+   ],
+   "end": [
+    36.809407,
+    140.136714
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:112",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "小金井結城線",
+   "ref": "147;214",
+   "highway": "secondary",
+   "lengthKm": 3.65,
+   "curviness": 108.8,
+   "flow": 16.5,
+   "turnCount": 24,
+   "score": 54,
+   "baseScore": 51.1,
+   "spotCount": 1,
+   "polyline": "yzr|EkhvtYgOhFiHjGoLF{YjIkD^_NImM~CkFzB_FtJiG|DmTpF}ItAoDnJgGp@wOK",
+   "pointCount": 16,
+   "start": [
+    36.310373,
+    139.874781
+   ],
+   "end": [
+    36.340183,
+    139.862546
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:113",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "小林逆面線",
@@ -3460,8 +3231,8 @@
    "curviness": 162.1,
    "flow": 14.5,
    "turnCount": 75,
-   "score": 46.1,
-   "baseScore": 46.1,
+   "score": 54,
+   "baseScore": 54,
    "spotCount": 0,
    "polyline": "iea_Fo_qtY~HqDhJqIz@oCGkN~CgRi@iCcF_H?yOmGeMPuBdCcGpHmAxJmLdKlCtH~D|OaAhN{TjA}FfEaC|AaE`K_Mf@oAjAiJ`JkPjA_B~EcChD{CrFgIxGiE`K{C|DTpFe@bE`@|UmIlM_C",
    "pointCount": 36,
@@ -3472,10 +3243,13 @@
    "end": [
     36.674641,
     139.88797
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:138",
+   "id": "栃木県:114",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "大田原氏家線",
@@ -3485,8 +3259,8 @@
    "curviness": 175.6,
    "flow": 16,
    "turnCount": 37,
-   "score": 45.8,
-   "baseScore": 45.8,
+   "score": 53.8,
+   "baseScore": 53.8,
    "spotCount": 0,
    "polyline": "yyn_FgjmuY`DjAhLtKdFl@|FbGzDp@bCnE|OsJdCu@h[pBlLbEvHh@pHnElAxBtAbF~A|ApBNxGk@|ElBv@rA`BlInArB",
    "pointCount": 22,
@@ -3497,10 +3271,13 @@
    "end": [
     36.755579,
     139.98164
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:139",
+   "id": "栃木県:115",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "飯茂木線",
@@ -3510,8 +3287,8 @@
    "curviness": 141.8,
    "flow": 15.2,
    "turnCount": 72,
-   "score": 45.6,
-   "baseScore": 45.6,
+   "score": 53.5,
+   "baseScore": 53.5,
    "spotCount": 0,
    "polyline": "}w|}E}sovYtGjFhAdBx@bDxAzAnCBlJkDlGJp@t@zA~Ht@lAtG\\bNzIzR|AhGhCnE|CrJhChDR`HuEvBa@tI?hRyEdKbAvCyDpDeC`Y\\~G{@jNkH|CL`JpD`Ti@~Bf@dDzBhD^rBo@|L}JzF}OxEuIhDiEzB{M~CeJ~M{MjCi@nD?~C{@r@y@",
    "pointCount": 46,
@@ -3522,10 +3299,13 @@
    "end": [
     36.466261,
     140.177826
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:140",
+   "id": "栃木県:116",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "日光今市線",
@@ -3535,8 +3315,8 @@
    "curviness": 134.6,
    "flow": 16.1,
    "turnCount": 52,
-   "score": 45.6,
-   "baseScore": 45.6,
+   "score": 53.5,
+   "baseScore": 53.5,
    "spotCount": 0,
    "polyline": "umi_F}masYwAgCqHxAkB_@yAeDzJwI`GsL`AsGFcXr@kLzEgLr@sFzEuF|GiOr@iKdCyQmBwKC{EbG_j@kBwWtDyZhAuBlDcDh@wAKgQjB_J`HuOz@cJ|CuIbB_NFkJ",
    "pointCount": 31,
@@ -3547,35 +3327,13 @@
    "end": [
     36.741924,
     139.664465
-   ]
-  },
-  {
-   "id": "栃木県:141",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "東小屋黒羽線",
-   "ref": "182",
-   "highway": "secondary",
-   "lengthKm": 4.61,
-   "curviness": 99.3,
-   "flow": 13.9,
-   "turnCount": 33,
-   "score": 45.6,
-   "baseScore": 41,
-   "spotCount": 2,
-   "polyline": "ks~_FmsevYXfQ_NxF_IjNmU`QqJ~CoK`JuGjB}KpFmFpKeWzOuCzHmAhJiAfBkM|FyNtCyKxJkE~FmKxH",
-   "pointCount": 19,
-   "start": [
-    36.862141,
-    140.117187
    ],
-   "end": [
-    36.89337,
-    140.087967
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:142",
+   "id": "栃木県:117",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "つくば真岡線",
@@ -3585,8 +3343,8 @@
    "curviness": 133.2,
    "flow": 16.9,
    "turnCount": 64,
-   "score": 45.2,
-   "baseScore": 45.2,
+   "score": 53.1,
+   "baseScore": 53.1,
    "spotCount": 0,
    "polyline": "kr_}EiasuY_Gd@W[B_Bs@g@qDmAuECcHwD_Dg@mOcG{F`JwAh@sAG}_@kTuFgAqFDaItCsExEyBbFeGjSaI|MoF~EeKzFiJpLaIk@}EnCoDnEyDpKgD|ByFJiDa@gRiHwMjAoUyEyNbAgKFcRvEoEbEwA\\eNyDsX{JkBrJ",
    "pointCount": 42,
@@ -3597,10 +3355,13 @@
    "end": [
     36.437667,
     140.010729
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:143",
+   "id": "栃木県:118",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "秋山葛生線",
@@ -3610,8 +3371,8 @@
    "curviness": 150.9,
    "flow": 15.1,
    "turnCount": 42,
-   "score": 45.2,
-   "baseScore": 45.2,
+   "score": 53,
+   "baseScore": 53,
    "spotCount": 0,
    "polyline": "yur}EkfwrYmLrGsFhHyHrDsKnC{NtHyBxBsD|GwFnAyJpFeEjH{HfCqEHuCbAcAdAsB`DyHjV_DfGeCfBuFpIO|Ad@pE_BjJPbIq@bKiA~GaBtA",
    "pointCount": 27,
@@ -3622,60 +3383,13 @@
    "end": [
     36.498502,
     139.522441
-   ]
-  },
-  {
-   "id": "栃木県:144",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "銅街道",
-   "ref": "122",
-   "highway": "trunk",
-   "lengthKm": 5.48,
-   "curviness": 146.5,
-   "flow": 14.1,
-   "turnCount": 57,
-   "score": 45.2,
-   "baseScore": 39.4,
-   "spotCount": 3,
-   "polyline": "w`r~EwearY`Bz@dDxG~@pI~AlF|D|ErAdFpLtGnCfExCtBpDA~Aq@vDhAzIxNfJnDvEfFnBlFjCpRxOr^\\|BXfRhA~ElG~HrBbEjOtTpFbGpCrAnBStAgA~CyJbIgExRbG",
-   "pointCount": 32,
-   "start": [
-    36.633884,
-    139.439158
    ],
-   "end": [
-    36.602152,
-    139.404721
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:145",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "例幣使街道",
-   "ref": "141;270",
-   "highway": "primary",
-   "lengthKm": 3.86,
-   "curviness": 151.5,
-   "flow": 16.7,
-   "turnCount": 35,
-   "score": 45.1,
-   "baseScore": 45.1,
-   "spotCount": 0,
-   "polyline": "mnt|EimisYwAfFwBvDsE|FeJvGaHbKoC`JwB|Mu@fQjCnMpFdb@_@nCv@jGo@l@a@rD}AtDt@jNaCxSgD~NiDxJZfEzBlE",
-   "pointCount": 22,
-   "start": [
-    36.318633,
-    139.645168
-   ],
-   "end": [
-    36.325716,
-    139.607082
-   ]
-  },
-  {
-   "id": "栃木県:146",
+   "id": "栃木県:119",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "宇都宮那須烏山線",
@@ -3685,8 +3399,8 @@
    "curviness": 136.9,
    "flow": 17.4,
    "turnCount": 37,
-   "score": 45.1,
-   "baseScore": 45.1,
+   "score": 53,
+   "baseScore": 53,
    "spotCount": 0,
    "polyline": "wiw~EstzuY\\oFpAcGvXsm@pEiHd@oE}AoMOiIcAeJ~Dqh@wEoCoHK}@_@}JcV_BwLvGuHnAwCrGkI`BmJpJoWxBgDf@}G",
    "pointCount": 22,
@@ -3697,10 +3411,13 @@
    "end": [
     36.653902,
     140.104791
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:147",
+   "id": "栃木県:120",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "那須グリーンライン",
@@ -3710,8 +3427,8 @@
    "curviness": 161.4,
    "flow": 15.3,
    "turnCount": 63,
-   "score": 45.1,
-   "baseScore": 45.1,
+   "score": 52.9,
+   "baseScore": 52.9,
    "spotCount": 0,
    "polyline": "o}daFosuuYwAaFyHuCqCoCWsAF{E[cBqP}P{Ip@iVoGcJ}EqDkE_FmJyKsC}MuKgE[qBcE{AyAeLwE{G}JwH_JiFqJkIs@kGiHuCeBmBUqHb@gNsEmCcEgHkPgCiCcCc@wF|BoGbIuAO",
    "pointCount": 35,
@@ -3722,35 +3439,13 @@
    "end": [
     37.100906,
     140.064492
-   ]
-  },
-  {
-   "id": "栃木県:148",
-   "region": "tochigi",
-   "regionName": "栃木県",
-   "name": "旧静藤岡線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.75,
-   "curviness": 144.9,
-   "flow": 15,
-   "turnCount": 46,
-   "score": 44.9,
-   "baseScore": 44.9,
-   "spotCount": 0,
-   "polyline": "ucm|EcbhsYcMbE_HtEaClE_D~@cEX}RwA_Jj@wOaCsHpB{@_AuAyEcIiFiE}MgBqDo@wGsByFqSqJkGkGyLkHaFeGqDyB{AoDEwEu@}G{AqCoAo@qGw@gJI",
-   "pointCount": 29,
-   "start": [
-    36.281075,
-    139.63826
    ],
-   "end": [
-    36.314722,
-    139.654837
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "栃木県:149",
+   "id": "栃木県:121",
    "region": "tochigi",
    "regionName": "栃木県",
    "name": "作原田沼線",
@@ -3760,8 +3455,8 @@
    "curviness": 122,
    "flow": 15.7,
    "turnCount": 67,
-   "score": 44.9,
-   "baseScore": 44.9,
+   "score": 52.7,
+   "baseScore": 52.7,
    "spotCount": 0,
    "polyline": "yjc}EctzrYoLcKgDsAyPa@wU_G{Lf@gDgAw@zBb@bKiUnI}MbIoLx@_IpCeIvGwElBcFpFaBfE_E`Q_DrEyPbe@gDnMkFdF_G|HeD~BmA|B}BhH_DlVsArDgFtCuF}@kR]mPqFsHy@sJiCiBpAmCnEuGv\\mIpHeGlBsJfM",
    "pointCount": 40,
@@ -3772,8 +3467,724 @@
    "end": [
     36.451693,
     139.531195
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:122",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "旧静藤岡線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.75,
+   "curviness": 144.9,
+   "flow": 15,
+   "turnCount": 46,
+   "score": 52.6,
+   "baseScore": 52.6,
+   "spotCount": 0,
+   "polyline": "ucm|EcbhsYcMbE_HtEaClE_D~@cEX}RwA_Jj@wOaCsHpB{@_AuAyEcIiFiE}MgBqDo@wGsByFqSqJkGkGyLkHaFeGqDyB{AoDEwEu@}G{AqCoAo@qGw@gJI",
+   "pointCount": 29,
+   "start": [
+    36.281075,
+    139.63826
+   ],
+   "end": [
+    36.314722,
+    139.654837
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:123",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "小来川文挾石那田線",
+   "ref": "149",
+   "highway": "secondary",
+   "lengthKm": 3.28,
+   "curviness": 140.1,
+   "flow": 15.9,
+   "turnCount": 29,
+   "score": 52.6,
+   "baseScore": 52.6,
+   "spotCount": 0,
+   "polyline": "kyx~Eu_ktYf@`@`CvHKfPtBpH|AvRdE`HxAlEzCxDnBdEzDjDjApDhErH~@jKnBpGdA~HJ`GlHjX~J|Uj@hH",
+   "pointCount": 20,
+   "start": [
+    36.66854,
+    139.81707
+   ],
+   "end": [
+    36.656644,
+    139.784735
+   ]
+  },
+  {
+   "id": "栃木県:124",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "東小屋黒羽線",
+   "ref": "182",
+   "highway": "secondary",
+   "lengthKm": 4.61,
+   "curviness": 99.3,
+   "flow": 13.9,
+   "turnCount": 33,
+   "score": 52.6,
+   "baseScore": 48,
+   "spotCount": 2,
+   "polyline": "ks~_FmsevYXfQ_NxF_IjNmU`QqJ~CoK`JuGjB}KpFmFpKeWzOuCzHmAhJiAfBkM|FyNtCyKxJkE~FmKxH",
+   "pointCount": 19,
+   "start": [
+    36.862141,
+    140.117187
+   ],
+   "end": [
+    36.89337,
+    140.087967
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:125",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "田原街道",
+   "ref": "63",
+   "highway": "primary",
+   "lengthKm": 4.85,
+   "curviness": 129.3,
+   "flow": 17.4,
+   "turnCount": 36,
+   "score": 52.5,
+   "baseScore": 52.5,
+   "spotCount": 0,
+   "polyline": "wko~Es|{tYkKuAErBqClEsQ`BiLsBaH}C_GxAmJx@cHEyHgBsVsJgEZeCx@yIVyOjGePfAwFkAaGHwP`EuSjC_CBcGaBeL}AgC?",
+   "pointCount": 25,
+   "start": [
+    36.62028,
+    139.903617
+   ],
+   "end": [
+    36.661749,
+    139.90234
+   ]
+  },
+  {
+   "id": "栃木県:126",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "水戸街道",
+   "ref": "123",
+   "highway": "trunk",
+   "lengthKm": 6.51,
+   "curviness": 173.4,
+   "flow": 17.4,
+   "turnCount": 65,
+   "score": 52.4,
+   "baseScore": 52.4,
+   "spotCount": 0,
+   "polyline": "yf{}Ei|gvYcJoXt@iQ?iL}@{DgDeBqIq@mCwAyAoByQwi@g@oFHiOsAiEiH{CoJ_@oCkEdB}C~Gkb@OmL`AsOm@qQu@CUq@UiN_AyIA_EdA{E~F_I`@}DaAgGmAqDQsH}b@mO|@iI",
+   "pointCount": 34,
+   "start": [
+    36.517085,
+    140.128848
+   ],
+   "end": [
+    36.533531,
+    140.185631
+   ]
+  },
+  {
+   "id": "栃木県:127",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "銅街道",
+   "ref": "122",
+   "highway": "trunk",
+   "lengthKm": 5.48,
+   "curviness": 146.5,
+   "flow": 14.1,
+   "turnCount": 57,
+   "score": 52.3,
+   "baseScore": 46.6,
+   "spotCount": 3,
+   "polyline": "w`r~EwearY`Bz@dDxG~@pI~AlF|D|ErAdFpLtGnCfExCtBpDA~Aq@vDhAzIxNfJnDvEfFnBlFjCpRxOr^\\|BXfRhA~ElG~HrBbEjOtTpFbGpCrAnBStAgA~CyJbIgExRbG",
+   "pointCount": 32,
+   "start": [
+    36.633884,
+    139.439158
+   ],
+   "end": [
+    36.602152,
+    139.404721
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:128",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "栗山今市線",
+   "ref": "245",
+   "highway": "secondary",
+   "lengthKm": 3.08,
+   "curviness": 141.5,
+   "flow": 15.6,
+   "turnCount": 28,
+   "score": 52.3,
+   "baseScore": 52.3,
+   "spotCount": 0,
+   "polyline": "cpk_FwnosYyHdD_G|AkDI_B|@{LvAu_@|ToArBs@`GeAz@mEt@uV`XcCtEgG|GmFbDiDr@iIlE",
+   "pointCount": 17,
+   "start": [
+    36.764335,
+    139.676117
+   ],
+   "end": [
+    36.787484,
+    139.659547
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "栃木県:129",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "稲沢高久線",
+   "ref": "178",
+   "highway": "secondary",
+   "lengthKm": 8.83,
+   "curviness": 138.9,
+   "flow": 14.1,
+   "turnCount": 87,
+   "score": 52.3,
+   "baseScore": 52.3,
+   "spotCount": 0,
+   "polyline": "ajn`FmtivYuF`HyAvEqDbDaEvGsQbPiK|EgEhE}N_BuJWeBDaFnBuAW}CuB_Iv@qDhAkBdDkInJyFtN`C~N@fDkJlO{@xEiDjKeAvM}DxKaDfU?pCnCnHx@~IEjCgB|B_NtE_D`FDrAtC|Hr@jI_@b]mIdLuCjIwLpOyGpNuKrJaCbKuFlHiCrFN|ApLjQz@xB",
+   "pointCount": 49,
+   "start": [
+    36.942569,
+    140.137835
+   ],
+   "end": [
+    36.979645,
+    140.070548
+   ]
+  },
+  {
+   "id": "栃木県:130",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "国道121号",
+   "ref": "121",
+   "highway": "trunk",
+   "lengthKm": 8.72,
+   "curviness": 126.1,
+   "flow": 20,
+   "turnCount": 55,
+   "score": 52.2,
+   "baseScore": 52.2,
+   "spotCount": 0,
+   "polyline": "edu}EgxavY~RnClFcAhHFrP~BxM{FbWLfFcA~HA|Dn@}AxEkCnNaAvZb@xAhA~@|`@vOjArA`@|Aw@`IfAtG}AdJ?pLoNaByJmCgI}@eFlT_EfHkQrUaFfJqHpWxMd`@oBhJpCd[nCbTCrNeCpIgD~P",
+   "pointCount": 37,
+   "start": [
+    36.48595,
+    140.097477
+   ],
+   "end": [
+    36.474657,
+    140.043581
+   ]
+  },
+  {
+   "id": "栃木県:131",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "茂木バイパス",
+   "ref": "123",
+   "highway": "trunk",
+   "lengthKm": 4.16,
+   "curviness": 167.6,
+   "flow": 18.3,
+   "turnCount": 38,
+   "score": 52.2,
+   "baseScore": 52.2,
+   "spotCount": 0,
+   "polyline": "md}}EkcqvYu@pM}@lGgDrLGlD\\|CC}HvDcNj@qQv@uClDqGv@qDBoB{AcLCcD~Haf@RmHw@uEmUwq@wDcEoJsFaDiF",
+   "pointCount": 22,
+   "start": [
+    36.52695,
+    140.176058
+   ],
+   "end": [
+    36.531914,
+    140.20233
+   ]
+  },
+  {
+   "id": "栃木県:132",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "国道294号",
+   "ref": "294",
+   "highway": "trunk",
+   "lengthKm": 7.73,
+   "curviness": 198.3,
+   "flow": 15,
+   "turnCount": 102,
+   "score": 52,
+   "baseScore": 52,
+   "spotCount": 0,
+   "polyline": "}x}}Em{lvYqC}Gk@gJs@wA{DoC_Bi@gBBoEbBiCO}IwKuCw@gJ@{CyBsC}@uAb@eI~KaDfBcCMqO_ImCh@iCdCuBhIqCxAaChCmDpLwAjBoN`I_BTkHaGaCU_FtCqDzDaITsJjIwHxEwLxCkFxB_BjAkDfF}KjIcA?}ByBoCI_Aj@mBzDeEtEuBIuJaGyDoAqBVyNvIiDXgA]gCgEk@gCbBoO}DuJmA{@",
+   "pointCount": 58,
+   "start": [
+    36.53023,
+    140.154307
+   ],
+   "end": [
+    36.583725,
+    140.149597
+   ]
+  },
+  {
+   "id": "栃木県:133",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "今市氏家線",
+   "ref": "62",
+   "highway": "primary",
+   "lengthKm": 3.27,
+   "curviness": 122.1,
+   "flow": 18.1,
+   "turnCount": 22,
+   "score": 52,
+   "baseScore": 52,
+   "spotCount": 0,
+   "polyline": "ixd_Fs~{tYgIhF{CvKwDvSF~LsB`SiBrJq@zIuHnS_AfO[jO|WoAhAnQHlL",
+   "pointCount": 14,
+   "start": [
+    36.729813,
+    139.903942
+   ],
+   "end": [
+    36.732072,
+    139.875153
+   ]
+  },
+  {
+   "id": "栃木県:134",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "真岡岩瀬線",
+   "ref": "119",
+   "highway": "secondary",
+   "lengthKm": 3.9,
+   "curviness": 106.5,
+   "flow": 17.3,
+   "turnCount": 24,
+   "score": 51.9,
+   "baseScore": 51.9,
+   "spotCount": 0,
+   "polyline": "wik}EwgruYdEcXbAcCzDcFfPuk@xAiCbHcDbGiAjH{EnAyAfHaP`TnMbY~RxHaP`BmFf@sCXyJ",
+   "pointCount": 17,
+   "start": [
+    36.435641,
+    140.018043
+   ],
+   "end": [
+    36.414082,
+    140.038203
+   ]
+  },
+  {
+   "id": "栃木県:135",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "古峰原街道",
+   "ref": "58",
+   "highway": "primary",
+   "lengthKm": 5.11,
+   "curviness": 130.4,
+   "flow": 13.9,
+   "turnCount": 48,
+   "score": 51.7,
+   "baseScore": 48.8,
+   "spotCount": 1,
+   "polyline": "{dt~E{n|rY^_AfD}ArHcI~AcHP_L^mCpD}J~GgNCqFoBuQLgIW}DmAaGeFuF]kJjBsI|GmLtD{YVWtGHtReCbUwIpRg@nHy@~EuElA{CbBoR",
+   "pointCount": 28,
+   "start": [
+    36.64478,
+    139.578864
+   ],
+   "end": [
+    36.623762,
+    139.617075
+   ]
+  },
+  {
+   "id": "栃木県:136",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "芳賀市貝バイパス",
+   "ref": "69",
+   "highway": "primary",
+   "lengthKm": 5.68,
+   "curviness": 98.3,
+   "flow": 18.6,
+   "turnCount": 30,
+   "score": 51.7,
+   "baseScore": 51.7,
+   "spotCount": 0,
+   "polyline": "gua~Eq}uuYgCjIu_@`]u@NoEvGoKb^yWbm@{FpYz@wBnEqU~Xko@jDyMz@_GbBuErDcF~Aw@f_@w]rA_D~AiJ",
+   "pointCount": 19,
+   "start": [
+    36.550122,
+    140.036891
+   ],
+   "end": [
+    36.549973,
+    140.037947
+   ]
+  },
+  {
+   "id": "栃木県:137",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "那須黒羽茂木線",
+   "ref": "27",
+   "highway": "primary",
+   "lengthKm": 3.03,
+   "curviness": 135.5,
+   "flow": 17.1,
+   "turnCount": 24,
+   "score": 51.7,
+   "baseScore": 51.7,
+   "spotCount": 0,
+   "polyline": "exg_Fs`nvYpLjEfGxDxA~Cp@rLbA~FdAjAxEnAlL{@fQdCtEUvPdBrRt@pBW`As@pAoErJ]dKoD",
+   "pointCount": 18,
+   "start": [
+    36.74515,
+    140.160256
+   ],
+   "end": [
+    36.721936,
+    140.154675
+   ]
+  },
+  {
+   "id": "栃木県:138",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "日本ロマンチック街道",
+   "ref": "120;122",
+   "highway": "trunk",
+   "lengthKm": 3.7,
+   "curviness": 140.5,
+   "flow": 20,
+   "turnCount": 26,
+   "score": 51.7,
+   "baseScore": 51.7,
+   "spotCount": 0,
+   "polyline": "mmi_FkmasY|AbDX|Ei@jK{EnXhBpUfJ~Tp@zKrI|r@lG`P~C|BjD~FdBrUtAdF~F|HzCtB",
+   "pointCount": 16,
+   "start": [
+    36.753665,
+    139.60422
+   ],
+   "end": [
+    36.744094,
+    139.567135
+   ]
+  },
+  {
+   "id": "栃木県:139",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "宇都宮笠間線",
+   "ref": "1;163",
+   "highway": "primary",
+   "lengthKm": 8.4,
+   "curviness": 135.7,
+   "flow": 15.2,
+   "turnCount": 75,
+   "score": 51.5,
+   "baseScore": 51.5,
+   "spotCount": 0,
+   "polyline": "ugt}EwsevYlIuGtDoLfNgNbIwOpAuQb@eBnIwH`FuArEkKjByP@{Fw@uJiCiHImCjAaFdCeEj@sG~B}Hf@_ExB_f@YiFp@wDHeFa@aFaH{R[uCbAyBtEwC`FaAfBmAtB}HjI_FxEgGd@uH_Hml@z@oI~DgExGaApOcOzEwC|RwEtC}IlA_AxIc@~GcB",
+   "pointCount": 46,
+   "start": [
+    36.481392,
+    140.117242
+   ],
+   "end": [
+    36.45056,
+    140.187271
+   ]
+  },
+  {
+   "id": "栃木県:140",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "羽生田街道",
+   "ref": "155",
+   "highway": "secondary",
+   "lengthKm": 3.89,
+   "curviness": 146.2,
+   "flow": 14.2,
+   "turnCount": 40,
+   "score": 51.5,
+   "baseScore": 51.5,
+   "spotCount": 0,
+   "polyline": "_x~}EocqtYpAY|AVnNpM`LtIfD|D`GnDjBtBvNjFxC|BjBjFzC~\\p@nC|AbAxBYpCb@fHcA|ATdJ~NnJ`R^|BErPp@bDbBfAfKN",
+   "pointCount": 25,
+   "start": [
+    36.535198,
+    139.848399
+   ],
+   "end": [
+    36.511986,
+    139.82296
+   ]
+  },
+  {
+   "id": "栃木県:141",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "今市氏家線",
+   "ref": "62",
+   "highway": "primary",
+   "lengthKm": 3.11,
+   "curviness": 95,
+   "flow": 19.7,
+   "turnCount": 15,
+   "score": 51.5,
+   "baseScore": 51.5,
+   "spotCount": 0,
+   "polyline": "kre_FmjrtYaArDuMraAc@tMhAbRSxEjm@lLfHtBpIx@zCtBsArG",
+   "pointCount": 11,
+   "start": [
+    36.733978,
+    139.854634
+   ],
+   "end": [
+    36.72562,
+    139.831569
+   ]
+  },
+  {
+   "id": "栃木県:142",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "下都賀西部広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.61,
+   "curviness": 140.8,
+   "flow": 14.5,
+   "turnCount": 35,
+   "score": 51.4,
+   "baseScore": 51.4,
+   "spotCount": 0,
+   "polyline": "iuw|EcwisYgSiKeBeCMmT{CgMNmH_C}Fm@yEuBaE[gBlAoOc@yNyDwEyH}SuN{FyPyK{@_Bo@uDIuHq@sI",
+   "pointCount": 20,
+   "start": [
+    36.335089,
+    139.646739
+   ],
+   "end": [
+    36.349699,
+    139.677997
+   ]
+  },
+  {
+   "id": "栃木県:143",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "上久我栃木線",
+   "ref": "177;280",
+   "highway": "secondary",
+   "lengthKm": 3.41,
+   "curviness": 162.5,
+   "flow": 13.2,
+   "turnCount": 42,
+   "score": 51.4,
+   "baseScore": 51.4,
+   "spotCount": 0,
+   "polyline": "e`j~EoagsYzK|KjGzBfHlLzJpExFv@xHFfF`DvEj@xOaAxDiAbEZlA}@nAyHB{BiAmI\\wEnHkNn@{Hz@sCjIeIbBaF",
+   "pointCount": 22,
+   "start": [
+    36.592832,
+    139.633036
+   ],
+   "end": [
+    36.571578,
+    139.639147
+   ]
+  },
+  {
+   "id": "栃木県:144",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "栃木佐野線",
+   "ref": "75",
+   "highway": "primary",
+   "lengthKm": 3.91,
+   "curviness": 129.5,
+   "flow": 12.4,
+   "turnCount": 41,
+   "score": 51.3,
+   "baseScore": 46.7,
+   "spotCount": 2,
+   "polyline": "_a||EanesYlEvAtGfL`CdBlQ`@`EfBdM`BrGxB|IvMxErA`FbF`FEpCr@~GnFzEtG~IvClJtJtZfDdHbEjN\\",
+   "pointCount": 20,
+   "start": [
+    36.357442,
+    139.624805
+   ],
+   "end": [
+    36.326483,
+    139.608607
+   ]
+  },
+  {
+   "id": "栃木県:145",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "横山街道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.77,
+   "curviness": 126,
+   "flow": 15,
+   "turnCount": 40,
+   "score": 51.3,
+   "baseScore": 51.3,
+   "spotCount": 0,
+   "polyline": "wzp~EegrtY|CaT~DqG`CkKnImQlJwDjAeBpDmSReMzC}EzAkFnFoJTsLvAoHlIkLlCcSf_@kk@jJmD`DgNrAsKfBmE",
+   "pointCount": 21,
+   "start": [
+    36.627801,
+    139.854109
+   ],
+   "end": [
+    36.606424,
+    139.897403
+   ]
+  },
+  {
+   "id": "栃木県:146",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "栃木二宮線",
+   "ref": "44",
+   "highway": "primary",
+   "lengthKm": 3.71,
+   "curviness": 127.2,
+   "flow": 16.8,
+   "turnCount": 28,
+   "score": 51.2,
+   "baseScore": 51.2,
+   "spotCount": 0,
+   "polyline": "}ta}Ei`|sYbJoEqDqf@qAuGaA__@eA}AkKkCw@gAQsAz@aMrJqi@aBsIKaR`BaIHuFuAoGeDuJ]uC",
+   "pointCount": 18,
+   "start": [
+    36.386232,
+    139.740369
+   ],
+   "end": [
+    36.388043,
+    139.776833
+   ]
+  },
+  {
+   "id": "栃木県:147",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "芳賀広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 7.9,
+   "curviness": 125.6,
+   "flow": 14,
+   "turnCount": 71,
+   "score": 51,
+   "baseScore": 51,
+   "spotCount": 0,
+   "polyline": "}~w}EyrkvYpBzBxDrBlOrBlBtFbAr@xTT|QdCbCnA~BjFhAxEQfP\\xDxA~FfBzEjDvE|FbCjDlJx@nYeAtHAdMsAzX_CfLBtEcA`DlHdUdGpXbBhC`DdCnA|BdBlGhAnNvG|SjIxGZ|@LjRqBtGaExe@UlM{BzUXrH",
+   "pointCount": 41,
+   "start": [
+    36.500474,
+    140.147813
+   ],
+   "end": [
+    36.478155,
+    140.078508
+   ]
+  },
+  {
+   "id": "栃木県:148",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "杉山石末線",
+   "ref": "176",
+   "highway": "secondary",
+   "lengthKm": 4,
+   "curviness": 131.7,
+   "flow": 14.6,
+   "turnCount": 36,
+   "score": 51,
+   "baseScore": 51,
+   "spotCount": 0,
+   "polyline": "ail~Egd_vYrFyEfFmIVmAl@{MkAwI^aI~CiLvFqFpFgCtFmIlAwDvB{BjPyCtIoJ|FuA`NgAzMuElE_@rMlAdLw@rGiF~AoC",
+   "pointCount": 23,
+   "start": [
+    36.604493,
+    140.084044
+   ],
+   "end": [
+    36.578617,
+    140.106544
+   ]
+  },
+  {
+   "id": "栃木県:149",
+   "region": "tochigi",
+   "regionName": "栃木県",
+   "name": "矢板塩谷線",
+   "ref": "242",
+   "highway": "secondary",
+   "lengthKm": 4.27,
+   "curviness": 149.7,
+   "flow": 13.1,
+   "turnCount": 49,
+   "score": 50.8,
+   "baseScore": 50.8,
+   "spotCount": 0,
+   "polyline": "coo_Fw{~tYdEfE~DxH~EdG`EzT~BdGxBtBhCfFpDjAdCF~Ju@nDgB~HGfJjCnGxGtBrDXfPdC|N|Bz@vIa@dNjDjLChBjAjDtEbGdCpF`Iz@hC",
+   "pointCount": 27,
+   "start": [
+    36.784662,
+    139.918841
+   ],
+   "end": [
+    36.757054,
+    139.895103
    ]
   }
  ],
- "hiddenCount": 1
+ "hiddenCount": 26
 }

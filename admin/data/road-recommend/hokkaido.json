@@ -1,20 +1,50 @@
 {
  "prefecture": "北海道",
  "romaji": "hokkaido",
- "generation": 7,
- "contentHash": "c13e26d73f67",
- "builtAt": "2026-08-26T09:40:08.362Z",
+ "generation": 8,
+ "contentHash": "92af5da0d048",
+ "builtAt": "2026-10-07T14:13:07.602Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
  "count": 150,
  "segments": [
   {
    "id": "北海道:0",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "中央東線",
+   "ref": "919",
+   "highway": "secondary",
+   "lengthKm": 10.99,
+   "curviness": 514.3,
+   "flow": 28.1,
+   "turnCount": 201,
+   "score": 93.6,
+   "baseScore": 95.6,
+   "spotCount": 0,
+   "polyline": "ucmaGyew{YdCdHhAtMtC}Cre@nEvAdBiCrQrCdGz@f@dJ{BtCd@fE`GtAdEzAIh@`@d@nACxB`BxBA~G`AhARjAAjAsCtFlBzD~ClAXYCkB~@o@jCtDvA]vAqCbAjAfDGV^Vl@Oj@uA\\aB|EoAFEl@|@jAeAvDaAtAiAVsAiBeCDu@iBo@Rd@zGv@nD{@l@c@tAq@JeCoAqAB{@mB]?s@`CiBp@Y|APh@bGw@xFjFl@pB~@}AzAq@~B|@tBkDl@oCxCkAhBkC~An@~DbEhCm@rCwIdAmA`Ap@j@dI`@lAjEz@~@q@xCqHu@_FLgAhBcCvAs@rEfApD}@|ChE|Cr@vDoC`ZtDdJaAtGrCfBhB~@nCjARZzAo@tGn@|FcBhFj@lKsBbKmAjQJvKeHpMiC`NwD|@iDtD}@pGcAtCFv@dBrB_A`HFnB",
+   "pointCount": 115,
+   "start": [
+    42.343147,
+    141.026372
+   ],
+   "end": [
+    42.310066,
+    140.979298
+   ],
+   "boost": -2,
+   "tags": [
+    "winding",
+    "flowing",
+    "caution"
+   ]
+  },
+  {
+   "id": "北海道:1",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "城岱スカイライン",
@@ -24,8 +54,8 @@
    "curviness": 312.3,
    "flow": 20.3,
    "turnCount": 219,
-   "score": 81.9,
-   "baseScore": 61.9,
+   "score": 92.8,
+   "baseScore": 72.8,
    "spotCount": 0,
    "polyline": "sjv~FuvxyYuBaNo@eA}@G_AzAp@pHy@vCqF`AuElDk@UeDkHoA?eCvFkAjImAx@eAo@sCoI}@K{CrCcAIaDmMg@g@gABi@bAa@bN_DxHmAjJmClGiAlH_BjA_EDm@cADeC~@}@fCQp@wA~A}M\\yQ_AcC}FgGcMuScAyDa@sIx@{FvAy@hG|GlBGv@sCPkGiA}@wE~AoDqGw@YaAh@eAvBiDlK_Bl@uD}B{EoIqCwHmAu@kDvAeAfCUlChE`WD|Aa@pAcMfKmL|Em]fCoAk@_CcFsEW}AXmA`CP~HgDzG`ArFa@hDTdFe@`C{@~@oE|AsF~IaAtFuAtBiAEo@sAl@_HK_As@u@iANcBjKkFbCuBfE}@j@_AQ_@eASaMqC{Fi@{KaDkMeHqIeDyByCk@eJTaC}@yLgSeA{@}Lg@yGdA_LkFqJ|DeEvFkEvDgLnC{FpDc@yCsB{FuBw@",
    "pointCount": 120,
@@ -44,7 +74,7 @@
    ]
   },
   {
-   "id": "北海道:1",
+   "id": "北海道:2",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "鹿追糠平線",
@@ -54,8 +84,8 @@
    "curviness": 320.4,
    "flow": 21.7,
    "turnCount": 442,
-   "score": 81.2,
-   "baseScore": 63.2,
+   "score": 92.5,
+   "baseScore": 74.5,
    "spotCount": 0,
    "polyline": "c~{fGw_dhZeAcEuHcDyAqC@_Cb@uAlHyKLcBg@mB_Ce@{HhFkCp@qKu@kG|@{AsBR}ClFwErAkChHoj@a@yA{CoEFeNsDsFHqFyCkKe@}IsAgBkDw@aAoAXaHcAmE|@cGIaB_A}AqGsFeKsCeJwFeGmBeB^oDvDcBK_KzB}@K}FaF{BqPu@iBcZkXuBqCmBq@yB@yJxAsEvB}Dm@gOoUiHkGf@qGKqBzAmFm@mAaAEiDxGoGbCcAOaCuCKuAl@wDa@eK_@sAgBlA]hHm@j@qKY_ScGkAgDd@wCQgEoAuDiC_Ee@_Fi@L{@`Gc@`@aBUiByD_B]mDdDuFxNkGdAwBtBqAtCsCdAaBDeA}@eAsI{@}AsANkEjFiCF}@eBiA{KwAaAmDDiBcAsCsNa_@eLkDyDiMoZwCo@uFf@yEwIaIaAq@q@uKuYcFgCs@yHgAiFE_Dd@aD{@mHkFcJ{@{EiDiEaSwCuDaBiIhBaEqBmFxEwAf@eJcDiAlAuChKyGtJsAfAaDGwBlFaBtBcGj@_CrAuCD{Cx@}MzGgHe@Hy@|Du@t]cXbD_GjAcJCwB}@uB_J}GeAwCm@qEXoA|CLfFkB`@yCE{Ec@yAqD}Bo@uAmAmKc@aVoH{[eA}@cE^sCnG{B|BeAb@mFBmI`J{Ah@qBE_As@s@_KG}I}@mDyAmCwCk@mQrFa@u@Hm@`HeFVoAm@a@oGrAgAUmAgDJgAjDsGrEmMh@{C`@qQs@iC{EoAmA_B_Hg\\g@oCB_]gAQsAb@kDqCwD?{FqCu@JWr@f@xA~Bp@vBlChA|DHxJUt@m@\\mGUUp@RtGqBhDIdA\\jAvEjE\\rBs@t@_GqH}GgTcAv@bDvJF|AYPs@QiLqXqBDe@f@l@dEkAn@}@aDsAgOaAF{@fDmAJ}GoM{AiI",
    "pointCount": 240,
@@ -76,7 +106,7 @@
    ]
   },
   {
-   "id": "北海道:2",
+   "id": "北海道:3",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "大平ジオパークロード",
@@ -86,8 +116,8 @@
    "curviness": 295.8,
    "flow": 20.8,
    "turnCount": 241,
-   "score": 79.5,
-   "baseScore": 61.5,
+   "score": 90.3,
+   "baseScore": 72.3,
    "spotCount": 0,
    "polyline": "y}_kGa}xiZtApG_@xAsAUaDsD_E[mE~AuNvKkEb@_At@oAbE_BlTaApBwAc@eC_Re@cAc@^t@hKc@nIpG~M[tAoEfBIfApCrBfErNrDtC|EzIvAFfAqB@eBu@}B^oDy@_CnFiGx@wGAkNT_@j@n@QdGVvB~G`LM~@eClAi@vAaAzPDn_@aNdU}DfCk@bBhAj_@`HjMkPjNsWmt@y]mMkE_AcAdBn@~Hj@fBvB|AZ~Ag@|AeAJoIaCwCwBuE{EaFiIyAcBoAYe@`@e@dGmDfBg@`AEnAvBpHmBrJ]vLaAhBmE`A}@dD`@fGfA|B~FhDdFr@lCId@l@?vA{@rAeMnA_DFqE{AiDcEyG{RgCeTZ}GOsBuBaLyHoSiBiMsBsE}CcEk@eIu@eCeIeNqCaBcGv@}EbFuEe@yDnHkA`AiJgE{@BqCnDcDaDyC`@m@t@MpB`GvS\\zDu@jCuIz@iIpFsLjFy@BeCgB_B]aIzAgDxC",
    "pointCount": 127,
@@ -106,7 +136,7 @@
    ]
   },
   {
-   "id": "北海道:3",
+   "id": "北海道:4",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "京極定山渓線",
@@ -116,8 +146,8 @@
    "curviness": 305.3,
    "flow": 21.5,
    "turnCount": 154,
-   "score": 79.4,
-   "baseScore": 60.6,
+   "score": 90.2,
+   "baseScore": 71.4,
    "spotCount": 0,
    "polyline": "swheGkcm|Ys@]k@RMhCg@x@cEf@cBhD}FhGiCfKoGpGgEtVyGjMyAfJeGxJ_EnEg@|HgCdMkDzE}JzY{AhCwUfQ`@vEvD|LVpMx@jF[xB}BvBuGnPKhCCzM~@bLvBhK\\dFc@dFeCzM?hDjAhD~@nGv@lKDxJx@dAjCj@rAMvFcDdADr@t@hC|Iv@`@rDa@lBZtJvL?pBmAjEIjDsAxHnA`CnCa@t@b@HdMmApE^rEjAlGpClET~B_@bCL|@`CtFh@fGfC`AlCpGsA`KnB`CZpDiDpH?p@nDtIYdDhDxTg@jIbA~CY~AgCbCKhA~CfG^BtBuDtAbBbB^zCxFDzDt@`C",
    "pointCount": 91,
@@ -136,37 +166,6 @@
    ]
   },
   {
-   "id": "北海道:4",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "中央東線",
-   "ref": "919",
-   "highway": "secondary",
-   "lengthKm": 10.99,
-   "curviness": 514.3,
-   "flow": 28.1,
-   "turnCount": 201,
-   "score": 79.3,
-   "baseScore": 81.3,
-   "spotCount": 0,
-   "polyline": "ucmaGyew{YdCdHhAtMtC}Cre@nEvAdBiCrQrCdGz@f@dJ{BtCd@fE`GtAdEzAIh@`@d@nACxB`BxBA~G`AhARjAAjAsCtFlBzD~ClAXYCkB~@o@jCtDvA]vAqCbAjAfDGV^Vl@Oj@uA\\aB|EoAFEl@|@jAeAvDaAtAiAVsAiBeCDu@iBo@Rd@zGv@nD{@l@c@tAq@JeCoAqAB{@mB]?s@`CiBp@Y|APh@bGw@xFjFl@pB~@}AzAq@~B|@tBkDl@oCxCkAhBkC~An@~DbEhCm@rCwIdAmA`Ap@j@dI`@lAjEz@~@q@xCqHu@_FLgAhBcCvAs@rEfApD}@|ChE|Cr@vDoC`ZtDdJaAtGrCfBhB~@nCjARZzAo@tGn@|FcBhFj@lKsBbKmAjQJvKeHpMiC`NwD|@iDtD}@pGcAtCFv@dBrB_A`HFnB",
-   "pointCount": 115,
-   "start": [
-    42.343147,
-    141.026372
-   ],
-   "end": [
-    42.310066,
-    140.979298
-   ],
-   "boost": -2,
-   "tags": [
-    "winding",
-    "flowing",
-    "caution"
-   ]
-  },
-  {
    "id": "北海道:5",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -177,8 +176,8 @@
    "curviness": 473,
    "flow": 23.7,
    "turnCount": 82,
-   "score": 73.4,
-   "baseScore": 73.4,
+   "score": 86.2,
+   "baseScore": 86.2,
    "spotCount": 0,
    "polyline": "irymGy_rbZlAsACgBoByIeBgBoElAeCvFs@a@XgHgBkG|BmDLcGvCcB`@gAAgAwAwB_E{@aEiMiAK{AhAw@i@AcFpBcIO{AsB}EC{EgAqAiEA_A_DXaBpCgEBcCaBwHZqGpA{A`F{@z@uANqB_AgDmEsC_AgGuDgKtKkY",
    "pointCount": 43,
@@ -206,8 +205,8 @@
    "curviness": 407.6,
    "flow": 24.6,
    "turnCount": 232,
-   "score": 71.8,
-   "baseScore": 71.8,
+   "score": 84.4,
+   "baseScore": 84.4,
    "spotCount": 0,
    "polyline": "_`|hG}h_oZfGqCpAmDwAm@gBeCuAaHf@gIiAqLNuFkAqHh@oCV}IUkHy@[q@lCmDjGg@Cs@gA_GsAcEqBgGyPRoGOoCUsB}@mAKaAb@iFp@k@XnD~BdHXjCdCnCf@yAs@oKv@oA|A]vBmHjGbBjBs@PqB{BmM`@iCdByChBiG`C{OzAgDdAiFpE}JPaKe@aK}CwOgHcOk@yE\\wEyDwBSsDaB_BAqFwByAq@{Ds@cATgHqDcMyDyGuIv@kH}@qDqF{@}GqA_@q@p@A~Gk@nBiC\\uBkBi@@eC~DcCt@eApJY^uCYcKtDe@KCe@zAoBnD{IzCuAnAgGpAoAJ_CjBeI|CsBAu@k@AgIdHcEoBPqAvBNd@w@\\qCKyFb@wBn@e@|JEz@}DdEwBzBoJZeFWo@qAFqGrFuBNnAc[hAeFYc@oAJuMnEq@KQoLkDyJfAiOeEiT@eJ_@gC_b@ca@oCcE",
    "pointCount": 125,
@@ -234,8 +233,8 @@
    "curviness": 409.3,
    "flow": 24.9,
    "turnCount": 120,
-   "score": 71.2,
-   "baseScore": 71.2,
+   "score": 83.7,
+   "baseScore": 83.7,
    "spotCount": 0,
    "polyline": "aulaG{mh{Y~IrShGRrNbDbAr@XlDsApEfA~H@jDe@xCcDjGIvErDwCxBqC~CwK`I}HlFaDxDmJb@qMe@iGvAsRzHdAx@v@|EmJhAy@vB}D|AE`ChB|Ak@y@sCQsFmAkAWcCeC}El@kCtCoA`EfAnBqBhCzDnCi@~BoAjB_F~Cv@|@s@n@sBDmFt@wAl@f@z@vC_B~JtBhBcDpDmAdEBhAz@P`@yDdEaDxAwEBiDbAwC`CeO@gF]cJuJmPs@gK",
    "pointCount": 65,
@@ -262,8 +261,8 @@
    "curviness": 408.3,
    "flow": 24.3,
    "turnCount": 150,
-   "score": 70.9,
-   "baseScore": 70.9,
+   "score": 83.3,
+   "baseScore": 83.3,
    "spotCount": 0,
    "polyline": "oeehGqogeZTkKhBqLvBeDbB{ElAEzCnDs@pIHhB`@p@z@@nHyGhQ^z@aAlBiGdHyF~BqKX_G`@iAnNuFp@y@hBcQ~CiL\\_Gf@sAhDoD`BwIbAeKzBgDhGoAvBmCxA{HdD_JvBmNjGiFnBoF@}ByCsFBiClAgAhDMzAqA|H__@`DuDTgEbA_A`HNtBgA`GmMfCwHpDkEzEyAtBeCl@mCpF}DAcAw@?cCh@mFlDkAMM}@V}@~C}ClAWzBsChAPPy@aBaGgBJmB}AyCZ[}@PYtAZnDwBjCM~AeA^Pf@hCzAHRkA}@gBHqC{BY{@u@RgAzBSA_B",
    "pointCount": 88,
@@ -292,8 +291,8 @@
    "curviness": 342.5,
    "flow": 24.5,
    "turnCount": 102,
-   "score": 66.6,
-   "baseScore": 66.6,
+   "score": 78.3,
+   "baseScore": 78.3,
    "spotCount": 0,
    "polyline": "co{hGah{aZtE}G~KeJ`IgW`FuLl@uFtFWt@^QpWlJtQfE|BvGTbFe@|ImEzDo@zQaA|EJjMuBvCyDjCmHr@qFz@}AjH_Cb@f@If@kDn@Ob@Rp@~BCdIqHr@RzAzCt@FM{Ev@qItJgNbAZv@rEp@d@lBNnAkAhEi@jF`BbC~DzDWNeAgBuD~DiB^uBUsBcBmA@q@`FpBpDfVjSlKs@pDxBlB",
    "pointCount": 57,
@@ -321,8 +320,8 @@
    "curviness": 379.7,
    "flow": 23,
    "turnCount": 63,
-   "score": 65.2,
-   "baseScore": 65.2,
+   "score": 76.7,
+   "baseScore": 76.7,
    "spotCount": 0,
    "polyline": "opblGo`dtZiK}@sBsAeDwQcJwJaLwWcCoDiCKqFpByCBeNkC[s@VgDg@w@uFPw@a@?qDnAaEc@qD|AoBx@sCUaByAkAIeBjC_GtCoC`DeNjEyF_@wEw@i@o@x@oAdGoA?IgAjBwJ",
    "pointCount": 35,
@@ -350,8 +349,8 @@
    "curviness": 341.6,
    "flow": 21.6,
    "turnCount": 238,
-   "score": 65,
-   "baseScore": 65,
+   "score": 76.4,
+   "baseScore": 76.4,
    "spotCount": 0,
    "polyline": "aefbGm}p|YyFuDgEsKgFyEiBaAkI_@oF}B{KoKqB_UDeBvAiCfIiDjCeFx@qGe@eIiB}FcFuGaHeF}I_DuAsFhAmLe@g@aBnJmE~Oh@d@xEUfDhC|FzOHnBk@fA}@DaR_LcLiCuDqDo@?g@d@oFjPBhEoCb@e@fE{ElEaFdCuEvGcExDuF`Ce@jCmAv@cDjA_C[{@zAaKlAcEgAeIVmEs@qCdAu@kDcGcAcB|DsBnCgAZ}BlDO|A`BdHYzBaBKuCiCw@wBgAg@sEzAgDJuA`Ba@nCPjDvCbCb@zA_BnG@zBjBpDt@fGpEdKlR|T|F~CdCvFt@g@hAkD~HkIvAFtB|ArBwAnAnFWrDb@pCK~BoBrCd@vEnD|D\\zBfBfAdBLzHfFxDc@^_Ak@wIwDiDJ{@dIfEx@jB|@xFhArAfQInA_@rAeBbB_ItCyAp@cA^sE~@uBfFgBvC^bA|A~BtJjDlBnBS`GiEtAUlA`@xCfEvBh@jUeK",
    "pointCount": 129,
@@ -380,8 +379,8 @@
    "curviness": 326.7,
    "flow": 20.6,
    "turnCount": 261,
-   "score": 63.3,
-   "baseScore": 63.3,
+   "score": 74.4,
+   "baseScore": 74.4,
    "spotCount": 0,
    "polyline": "_sidGkouxYqASaAb@qDdLqB\\yB]cCiEoFeGiBkHiEcF}AgKuFoG}E{JoDeEkG_FeOcH_BwHkBuCmAuFwGaCyJFsLwFaKeC}MsFgCeBiCkH{EcDoAaC_D_BcDkDeLuGmSwBiJHuNkCyFj@}LpE}H{@uOdAiCkC[^B|B[n@sEz@oDgE{De@m@mEeCkCu@sEk@A]fAHnDz@hFWzC_HP{K`FyECiApB_F`CkIQoBpBk@bDsEUqCnB?dBrB`BAhAq@r@gDBgCv@cA[a@oG_D{G[aG]a@y@PsAxAq@fE_GlGc@hDAbE}B`DoFxBgBpBqGjAs@a@B_BdCuAhB_EjCmA~ByD`@uKrBqGlAeH[gB}@Qa@^o@tEwC`F{Er@_ElBy@k@IwArCeKRyBk@yBiAHsAtAwBvEe@~HaBpG}HxF{G?eBs@qIiHgEAaFmCqHsF{@kDw@aAkAFqBpCiBe@[y@FwA}AiC?uEu@_AqBm@}E~@uI_@eF_BiFoD}BeEaAuEl@kAnBMl@}BvByAPs@eDqE}BcF_E[wD^wLzDiJI",
    "pointCount": 145,
@@ -410,8 +409,8 @@
    "curviness": 350.2,
    "flow": 21.1,
    "turnCount": 154,
-   "score": 62.9,
-   "baseScore": 62.9,
+   "score": 74,
+   "baseScore": 74,
    "spotCount": 0,
    "polyline": "iybiGi_zpZ`CkKlHiN\\gBn@oUr@sAdC_Aj@cAk@mKRiBbCgFrBg@xERn@~@S`E`@v@r@J|LwMxBm@xEl@tAjCfFaApCvE~E`DrAk@|BuE~@[\\jAe@nEb@j@z@q@hAwIW}AgG]kLmP{BpAgAEg@eAVaJo@i@kE[i@{AbAy@hCz@pEN`F~A~FbDjFbH`As@Q}AwHsLcHcAiDsE}EyB{DiDy@{ImEkEZyBrARzItMzArAhHVjEvAbCoBz@CxItF~DJnGlHbFfKzAr@jKaHhRo@nFmBbIErFhBtDkDnEOhGiC~Fw@",
    "pointCount": 79,
@@ -439,8 +438,8 @@
    "curviness": 311.7,
    "flow": 21.9,
    "turnCount": 140,
-   "score": 62.8,
-   "baseScore": 62.8,
+   "score": 73.8,
+   "baseScore": 73.8,
    "spotCount": 0,
    "polyline": "c|~kGmiu_ZUuE{CmKUeHvC{U~EuNUmNxGcXxMgRpEgEfAmD~@qRmHc_@@_C|OeWbHwHvAmCb@sBd@uMa@cFg@uAqGyGuM_Hs@aAcDsI_BcRcBuIgHmDmEUeBzAeFiAqDsC}AkEyHoJyBoA?kLbB}IU_Jx@{EhE}FjDaBdFy@vCwDRqE{@yD]}K{EkHyCyCUuEbAwI^BD|Bb@LvAyHJyDxAkH_A{FhGkDzCgL~@_@n@TOhCr@Vd@CvBcCY{BoBNyAyBcEVXaA`BgAb@wAlCcBhByR",
    "pointCount": 74,
@@ -476,8 +475,8 @@
    "curviness": 322.8,
    "flow": 22,
    "turnCount": 51,
-   "score": 60.6,
-   "baseScore": 60.6,
+   "score": 71.2,
+   "baseScore": 71.2,
    "spotCount": 0,
    "polyline": "wqblG_qffZbL\\vDtC~@fFc@pMl@zBbAE^e@pByNdFyFfFyBl@qF`AQrAlA|GyGx@PdBnBrAXlAy@rCuE|@Wd@\\h@`D~@v@~DXvDoBtBKfFzB`NlKv@hBt@dH`CdEpKjEtAnA",
    "pointCount": 34,
@@ -505,8 +504,8 @@
    "curviness": 268.1,
    "flow": 22.4,
    "turnCount": 113,
-   "score": 60.4,
-   "baseScore": 60.4,
+   "score": 71,
+   "baseScore": 71,
    "spotCount": 0,
    "polyline": "ezsaGshvuYtAKvXwQ~FcJ~`@kVzDdK|DrDfCYnCdBjRjAAsDoAwE@mAh@UlFpIxJzFnBoBdAzAhDsAdFKnAcAlCKTe@?gFpBy@tAl@tCnGtAj@hCoCpF{@jD\\bL}@fD`AfKLvGmDtGcBrFcI~GPtGeD~IeHrBOfJ`D|FEpHvHpGzPDnDqAnGLzAx@|A~KzKrBfDpIjH|B`DlCbAp@fAf@zGd@xA`DnBb@dAm@`HRdAlBr@vEeCrBC|PdNdHlOpAzM",
    "pointCount": 67,
@@ -535,8 +534,8 @@
    "curviness": 316.8,
    "flow": 20.4,
    "turnCount": 60,
-   "score": 60.4,
-   "baseScore": 60.4,
+   "score": 70.9,
+   "baseScore": 70.9,
    "spotCount": 0,
    "polyline": "ovmbG}dxhZzLhOpEfBvGhH~CxKv@v@z@C~AcB^qAm@mCbCyIYgDoDaG`@yChAi@bBJpAvB~GdT~HrCbE~EfAMx@kAG{BeJkJM_CdAcCxBVnHtHrNvEzECfHeCbFn@",
    "pointCount": 32,
@@ -564,8 +563,8 @@
    "curviness": 334.5,
    "flow": 18.4,
    "turnCount": 89,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.5,
+   "baseScore": 70.5,
    "spotCount": 0,
    "polyline": "wsdeGakhyYwQiLu@_C]qFfA{C|DuAnAgBReBWaLzEgIIyCcCaEBaDn@iAnHyFjAmBh@kN^mBhA_AbEk@nAgCBwBe@qBcJkKwBoFkA{KdCyHLcBoEqLLwBhAkAzFr@nFSlCo@z@aBKaDq@_A_OsGcBwBKkBl@_B~Dq@x@kBG{AoCuD_@cBNsDb@_ArBoA",
    "pointCount": 49,
@@ -594,8 +593,8 @@
    "curviness": 325.9,
    "flow": 19,
    "turnCount": 77,
-   "score": 59.9,
-   "baseScore": 59.9,
+   "score": 70.3,
+   "baseScore": 70.3,
    "spotCount": 0,
    "polyline": "_hwgGe_vmZMiByAuBcFQu@\\iC~BiD`A`@jKeBrDaBhGaBI{@qAmAe@yE~@aDqCyBsJ}@gA_IqBmFx@wDU]q@BmAfBwEEiBmAeAqHOwAqAQkD`BgEDgCeDsJy@aF_F}Eq@}Ik@yBkD}EsB_FaMmPkCoAoCX}FjG{A`Hi@zO",
    "pointCount": 43,
@@ -631,8 +630,8 @@
    "curviness": 294,
    "flow": 21.4,
    "turnCount": 55,
-   "score": 59.8,
-   "baseScore": 59.8,
+   "score": 70.3,
+   "baseScore": 70.3,
    "spotCount": 0,
    "polyline": "}|ymG{p|bZZyHs@eGy@oSnBoQz@i}@nC_Hn@oI|ImFlAaBqAkNzAShDrBp@m@JyBaAwHnCgDPwCy@gJoC{@[y@jB}F}@mC[sKnEoDrBgKjF}N",
    "pointCount": 27,
@@ -661,8 +660,8 @@
    "curviness": 292,
    "flow": 21.4,
    "turnCount": 54,
-   "score": 59.7,
-   "baseScore": 59.7,
+   "score": 70.1,
+   "baseScore": 70.1,
    "spotCount": 0,
    "polyline": "}~sfGomh{YhUod@lJyF`MoDjNuHfH?bAaCCsIh@_AnAXxBnGdAD^gAmB}KX}Ax@NjClFhA@f@q@JiAwAsFSiC`@}J|AsFgBkYx@cLYwB\\cE_@qJd@kI",
    "pointCount": 30,
@@ -690,8 +689,8 @@
    "curviness": 308.5,
    "flow": 19,
    "turnCount": 94,
-   "score": 59.2,
-   "baseScore": 59.2,
+   "score": 69.5,
+   "baseScore": 69.5,
    "spotCount": 0,
    "polyline": "wivgG_bgmZlAUdAx@|@hGrDhOvClE`Ff@jC`B|BZrD_Et@iCL{HtHqQZ{GYoKToOdA{EvB_DrIwFnKuAjAwBfFsDn@}A@{KiDiIc@gJNiOr@[d@^x@`V`@~Ar@HzBqFbCuAfBuDdEgApDPt@k@lAoCfAqIdBwEMoHvCa@j@w@oAkP}ByFqGeIJuCdBsB",
    "pointCount": 49,
@@ -720,8 +719,8 @@
    "curviness": 294.8,
    "flow": 19.6,
    "turnCount": 249,
-   "score": 58.9,
-   "baseScore": 58.9,
+   "score": 69.2,
+   "baseScore": 69.2,
    "spotCount": 0,
    "polyline": "qrhfGsnraZlA{GfH_HfIoArC_DxLgGjGyA`GgCfHXlGgAxBNhHbFhH~@|ClBxNQlMeGd`@lFtDhArBbBzFvLvABd@]TuA}A_KV}ClAqB`KuIZa@BcBsAy@aHrAuHcBk@u@EaApD{KpDsGjBmAl@`@?bCkGlN^|AdBFrAcAhCcEdE{JnAiAfBr@|@|Fl@jAbKxAv@|@b@lBGdBwDnGZ~An@AdGyEzBuElAR@jBgCrEqGtSDhAt@h@r@OtDcJzN_K@kFl@uAbAh@lAxJ|AvBtFbE`GbA~EfFdBEpG{GbAOfA`@z@zC_AdO|AxEDfHf@`AjCnAjCxFhL`K|AJ|GiE~EHt@m@PiA{@gKJcEnAaFfCyDvA{@xCR~BpC|BxEdB~Ll@v@jAUPiBiBmEi@cDOsUa@eCkCeG{@y@}A?oCdBo@Oc@gA\\wAzCwDzBsAfCObDpB`HhNrA`@bFe@FeAa@k@sD\\cAs@UiBp@eJOgCcCaDsGqCAwBj@o@rEt@nLtJdHzDzGxAdJtD~EpDbPvWpCpArAlC~BfBtDbF",
    "pointCount": 144,
@@ -749,8 +748,8 @@
    "curviness": 317.8,
    "flow": 18.1,
    "turnCount": 63,
-   "score": 58.3,
-   "baseScore": 58.3,
+   "score": 68.4,
+   "baseScore": 68.4,
    "spotCount": 0,
    "polyline": "qsvfGudajZfE_@jC_Dz@{Ad@cKbD{DlBwGjBqAhDw@vE_GEoCoE_Dw@{Bu@_El@gC~ASbDnEdDJtFa@|IiFrBaD`@eCRmJf@aAhAk@dEtB~@CbFwG~GiErAsCr@aHlDcGlEgObCuB",
    "pointCount": 34,
@@ -778,8 +777,8 @@
    "curviness": 274.2,
    "flow": 20.6,
    "turnCount": 59,
-   "score": 58.1,
-   "baseScore": 58.1,
+   "score": 68.2,
+   "baseScore": 68.2,
    "spotCount": 0,
    "polyline": "uhwbGasfzYw@hAgA{BmFFiGsDyR_CeDuAoDEoEkAmI|BqBMeIeD_NmMmLkG_I{KwEs@uF~BeFsAeGDq@e@y@}CcAa@_CfEiAH}CyG_ByKcJ_FgA^yDpJo@zNyDbHkBL",
    "pointCount": 32,
@@ -807,8 +806,8 @@
    "curviness": 300.1,
    "flow": 18.4,
    "turnCount": 78,
-   "score": 57.9,
-   "baseScore": 57.9,
+   "score": 67.9,
+   "baseScore": 67.9,
    "spotCount": 0,
    "polyline": "wqqaGkbq{YyJ_OkBaEw@yDsEwEoGcDo@gFTgBbBo@fDfCtIfDfBw@pAuCpAQv@|@jA|FbBpCpBhCvAEh@qAMuAyFoHcKm\\?iDxAsEpHkFlCq@hSDxH`DfCGxBgCpE{QvAwA|Ah@X~@MrBaDtEJvBfA`A~Ag@jByCzDkAvBgB",
    "pointCount": 43,
@@ -836,8 +835,8 @@
    "curviness": 265.9,
    "flow": 19.9,
    "turnCount": 96,
-   "score": 57.6,
-   "baseScore": 57.6,
+   "score": 67.6,
+   "baseScore": 67.6,
    "spotCount": 0,
    "polyline": "mqwcGugocZcKVbKWUvEzAhPtAlFxDhI`F|ElMrG|UnUvC|EzAtI{B~XjBjFjB_@|EeD`I@~C{DrAi@tNx@`Da@rCjB|AJhCo@tJbCvA_A~BgF`DHfBkA~AKnBzAbCFvEgC`AeDnEOpEd@|E`D`B`GjCrCjBtFxHpDv@pE@tE`@~@nDKdC}@tCHnSdNrDJhAe@vDyHlCwAtBj@pBrC",
    "pointCount": 54,
@@ -865,8 +864,8 @@
    "curviness": 197.8,
    "flow": 25,
    "turnCount": 35,
-   "score": 57.2,
-   "baseScore": 57.2,
+   "score": 67.2,
+   "baseScore": 67.2,
    "spotCount": 0,
    "polyline": "gvngGeeyiZc@uAnDsGImAkDxB{F~HyDn@ElC}E|EsFp@iHqJmN\\{c@o@wJ{CyJOqCJoQdGkLkA[cBlSmk@xEqYxBcD",
    "pointCount": 22,
@@ -888,34 +887,6 @@
    "id": "北海道:29",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "豊浦京極線",
-   "ref": "97",
-   "highway": "primary",
-   "lengthKm": 3.01,
-   "curviness": 311.9,
-   "flow": 18.8,
-   "turnCount": 50,
-   "score": 56.8,
-   "baseScore": 56.8,
-   "spotCount": 0,
-   "polyline": "at~bGmu{yYpJbFzBQvEyBdJxA|@_B[kByDkAu@wABwAdA{A`NyIbBVpB`CbAR~@m@|AeE|A}A~RgFlBNvA|@|DxHjFtElBjE|A|A`BPdEaAjEuDp@FX|@",
-   "pointCount": 30,
-   "start": [
-    42.596654,
-    140.72167
-   ],
-   "end": [
-    42.576674,
-    140.723514
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:30",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "阿寒標茶線",
    "ref": "243",
    "highway": "secondary",
@@ -923,8 +894,8 @@
    "curviness": 238.5,
    "flow": 20.3,
    "turnCount": 127,
-   "score": 56.8,
-   "baseScore": 56.8,
+   "score": 66.8,
+   "baseScore": 66.8,
    "spotCount": 0,
    "polyline": "sqwfGofppZcEFoJxF{BI}IsKaXgMqH_GiMeEoc@nHJmDl@eA|GgBhBkBZwBKoJnAeBnG}DZmBc@_CeCkAkNfBeBQs@s@mBmPaHuJmDqGiAmDoGaf@iFaJgEkNqDyFkEgCoM\\iLaJcGcBmE_FsHqDsNgCiAqJbAaGAsG`AoC@gAU_@sDByAqD_FY}@uFr@iDGy@gCKqCuB|BmKq@{BLkAdDyA|Vgb@`@mDAkIYwBaAsA{BYsIbGgBZkMoCiSOmA{@oAeCsHuRg@kE",
    "pointCount": 70,
@@ -942,6 +913,34 @@
    ]
   },
   {
+   "id": "北海道:30",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "豊浦京極線",
+   "ref": "97",
+   "highway": "primary",
+   "lengthKm": 3.01,
+   "curviness": 311.9,
+   "flow": 18.8,
+   "turnCount": 50,
+   "score": 66.7,
+   "baseScore": 66.7,
+   "spotCount": 0,
+   "polyline": "at~bGmu{yYpJbFzBQvEyBdJxA|@_B[kByDkAu@wABwAdA{A`NyIbBVpB`CbAR~@m@|AeE|A}A~RgFlBNvA|@|DxHjFtElBjE|A|A`BPdEaAjEuDp@FX|@",
+   "pointCount": 30,
+   "start": [
+    42.596654,
+    140.72167
+   ],
+   "end": [
+    42.576674,
+    140.723514
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
    "id": "北海道:31",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -952,8 +951,8 @@
    "curviness": 257.5,
    "flow": 19.1,
    "turnCount": 128,
-   "score": 56.7,
-   "baseScore": 56.7,
+   "score": 66.6,
+   "baseScore": 66.6,
    "spotCount": 0,
    "polyline": "uzpaGahiuYtL`PfCxFhE~@lDhGnD~@fGzExIyAlF_EnEiA|AnAnAlHjA\\xMyEzPwB~LdC~JGfEt@|WiCdIeFrBqN|IoH|ByG|HoBjEDxAj@hGnGvAfHhAhBpFrArB}@rEsHrH_GnEfAzD}AhHMpJyLSqIgEkF{NoAuIoGc@iCGuOiAeBaBW]_An@_AvA^`@i@o@eFn@}LZ_At@a@rFD`@q@NaCv@cAjC_AjEYvBkA`CgCtCaGdEqEUmFbBuDkEwGQeAeB}Z",
    "pointCount": 68,
@@ -981,8 +980,8 @@
    "curviness": 260.5,
    "flow": 18.9,
    "turnCount": 125,
-   "score": 56.7,
-   "baseScore": 56.7,
+   "score": 66.6,
+   "baseScore": 66.6,
    "spotCount": 0,
    "polyline": "yi{bGchjzY_HnBsIfAgCIwAxB}CpAwAm@{AjA_DIoOrHgHIaN~EyHrFiExHgC~AuUkAaHwBaFtAuKh@uKiH}DcF}DwHQsDf@_DGcAaA_CcIuJ{CyGeAaE~BkKB{Bc@cBgNSoFtCeDt@aDg@sBoBgASyFaJ}EwFSoHfCuHWoAmB?}LeGaGNaDeBk@yBaDsEc@uDf@aD{AmC{@kDkBkB{@MkBp@}@u@WwB^aE[w@aWkCcBPyFhC}N}DuNePqFyLyGaC",
    "pointCount": 67,
@@ -1003,25 +1002,25 @@
    "id": "北海道:33",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "美沢美馬牛線",
-   "ref": "824",
-   "highway": "secondary",
-   "lengthKm": 5.61,
-   "curviness": 144.4,
-   "flow": 24.6,
-   "turnCount": 33,
-   "score": 56.6,
-   "baseScore": 53.7,
-   "spotCount": 1,
-   "polyline": "chshGi_vdZvDnbAIdDuBfOtM`TuFlJ{ArEMbPuCrSkAbBwJdFm@pBy@pKe@`BgZvZiTfQgXpI`@`Fq@tCuDnFaJvFuDtDQvAVv@xFfJyKnK",
-   "pointCount": 26,
+   "name": "国道40号",
+   "ref": "40",
+   "highway": "trunk",
+   "lengthKm": 3.65,
+   "curviness": 224,
+   "flow": 32.7,
+   "turnCount": 25,
+   "score": 66.5,
+   "baseScore": 66.5,
+   "spotCount": 0,
+   "polyline": "yh}sGem}_ZuBpDcDtC}w@d`@ur@h@uFj@I]_A|@NVa@Bg@~BU~ViBbb@{E|\\",
+   "pointCount": 14,
    "start": [
-    43.521457,
-    142.494774
+    45.375011,
+    141.713634
    ],
    "end": [
-    43.540561,
-    142.444716
+    45.397428,
+    141.691061
    ],
    "tags": [
     "flowing"
@@ -1031,34 +1030,6 @@
    "id": "北海道:34",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "十勝岳温泉美瑛線",
-   "ref": "966",
-   "highway": "secondary",
-   "lengthKm": 5.18,
-   "curviness": 284.1,
-   "flow": 17.9,
-   "turnCount": 82,
-   "score": 56.5,
-   "baseScore": 56.5,
-   "spotCount": 0,
-   "polyline": "qcehG_rseZ|HtGjCCjJqClChCf@nBLjZfGnJtEjCv@vFAvE|AjDf@T~Ke@`H~BrHiBdBoClC{J|CeGr@kLh@}@hAWrCxB\\jI~@bCbAR~CwBfDi@lFxCxKvDdBtGHnG~A|O~@dBtAFfDiGlBgAdCbAtCnHpA`ApBs@|CwEdEpA",
-   "pointCount": 43,
-   "start": [
-    43.449045,
-    142.646236
-   ],
-   "end": [
-    43.418921,
-    142.631234
-   ],
-   "tags": [
-    "winding"
-   ]
-  },
-  {
-   "id": "北海道:35",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "国道334号",
    "ref": "334",
    "highway": "trunk",
@@ -1066,8 +1037,8 @@
    "curviness": 308.4,
    "flow": 19.3,
    "turnCount": 326,
-   "score": 56.3,
-   "baseScore": 56.3,
+   "score": 66.5,
+   "baseScore": 66.5,
    "spotCount": 0,
    "polyline": "iltkGe{duZaJdL_DjO}@lBoBdAkF]yAl@uExFgLbIiGzJoBxFUfGp@dMyDpOgDbZzAn^kArD{DjH_@tBExIgAlJMfHuDlVl@fZcBnFuDnDo@fE`@zCrBvBrEb@pCuBnCv@lCOjAh@lCbF^pBC`Nr@rMkDdUFpC|@~DGnAg@l@aAQs@}DIeHaAaJt@wOKmBcGyHsAO{@hAB~BjDjCVhAm@zAwCIo@lAZzGKzH_CdPEnKe@vHiAl@w@iAq@mYc@iAu@SgAt@iHxSDlBrAdDQ`BaA\\wFmCoBAs@z@P~AnDpBtAbFrCvA`@`Ac@|AqAEiBiAqB{DeACc@hBjBnG`CrD|IzEfFvFdA`EUvIhG`IKpAkAPiC_FcIiDoFdAyAvBJrDjKpQz@~DIjSe@bBgBvB@|Av@l@vJYz@cBxAeIx@kAbAYrA^`A|AxBlH@fC_AhA_FpAyOfBk@tA]xJo@rDgFlNyBzAwAOcAcAoHsQ}Aa@gGx@sDyG{@H}AxCaAn@kDy@}CdC_D}CeB]kAh@gCfE_KRyFmEaKZ_KkE{ANoBvCMxA\\vCrK`KdAjFOhCcAjCuGbDs@fAC~BtApIIjBm@jAsJtFiADu@uAJeBxFqDx@{AHyBg@aBeKcFcDJgBv@cBdBoIzOCnBdBjMMfJc@`CcBzAaIV{CfB",
    "pointCount": 179,
@@ -1085,7 +1056,7 @@
    ]
   },
   {
-   "id": "北海道:36",
+   "id": "北海道:35",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "国道241号",
@@ -1095,8 +1066,8 @@
    "curviness": 311.3,
    "flow": 19.1,
    "turnCount": 323,
-   "score": 56.2,
-   "baseScore": 56.2,
+   "score": 66.4,
+   "baseScore": 66.4,
    "spotCount": 0,
    "polyline": "q``hGwgxnZ{@gBMyAbAu_@fAcErMuWt@{HaAkHeJ}QiAoDUsDZuMuHm[sLcYmAyAoBOkEjCsBJiMyAmBsAe@aBeByQcE{N{FqMqJ_ImBaDm@_GZmNq@}CmAwAqA_@}B^_C`EO~BnAzJCzEeApEwBlCqDdAuNSkCiAuAqBcAkFR{E`AwC|EeGt@cDK{Mf@}G]mEuAaDmEsEaCWkD^}Bo@kEiIcFeF_AeEXoJp@yEhSyc@p@_CBoEyWex@[{Bp@sGOyAk@cAcDyAmA}BQaDj@mIo@mAuACgCxCkInGaBvDLlGa@`CqDrByB~E}BEeBgBwAmK_HqBoKeL]yBbAwFSwBeL{Q_@qELiHlB}EqBsGL_Bh@q@dAI|DhE`A_@ZcAJmI]cHm@wBaCoBGyAn@i@jCAp@}@j@kQd@kAn@GfEdFrCjRb@f@d@KfEiNg@yCMqIj@}EG{@kBwCaAaHqEcDsA_DoDRqAiAGcIyDiGWoALcCeCyCeC{HHmGb@[|BZXg@?_DjBe@d@s@g@wDmBk@g@aAo@mLJcCdAsBrAcAfE`Ar@aBcEsNcDv@_AaC@}@xAqBC{DdA}DsEa@sByCdAuG{@cFvAaDsA}B]cJ|AkHVcFuBkFAuL_AaN{AaF",
    "pointCount": 168,
@@ -1114,28 +1085,56 @@
    ]
   },
   {
+   "id": "北海道:36",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "十勝岳温泉美瑛線",
+   "ref": "966",
+   "highway": "secondary",
+   "lengthKm": 5.18,
+   "curviness": 284.1,
+   "flow": 17.9,
+   "turnCount": 82,
+   "score": 66.3,
+   "baseScore": 66.3,
+   "spotCount": 0,
+   "polyline": "qcehG_rseZ|HtGjCCjJqClChCf@nBLjZfGnJtEjCv@vFAvE|AjDf@T~Ke@`H~BrHiBdBoClC{J|CeGr@kLh@}@hAWrCxB\\jI~@bCbAR~CwBfDi@lFxCxKvDdBtGHnG~A|O~@dBtAFfDiGlBgAdCbAtCnHpA`ApBs@|CwEdEpA",
+   "pointCount": 43,
+   "start": [
+    43.449045,
+    142.646236
+   ],
+   "end": [
+    43.418921,
+    142.631234
+   ],
+   "tags": [
+    "winding"
+   ]
+  },
+  {
    "id": "北海道:37",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "国道40号",
-   "ref": "40",
-   "highway": "trunk",
-   "lengthKm": 3.65,
-   "curviness": 224,
-   "flow": 32.7,
-   "turnCount": 25,
-   "score": 56.2,
-   "baseScore": 56.2,
-   "spotCount": 0,
-   "polyline": "yh}sGem}_ZuBpDcDtC}w@d`@ur@h@uFj@I]_A|@NVa@Bg@~BU~ViBbb@{E|\\",
-   "pointCount": 14,
+   "name": "美沢美馬牛線",
+   "ref": "824",
+   "highway": "secondary",
+   "lengthKm": 5.61,
+   "curviness": 144.4,
+   "flow": 24.6,
+   "turnCount": 33,
+   "score": 66,
+   "baseScore": 63.2,
+   "spotCount": 1,
+   "polyline": "chshGi_vdZvDnbAIdDuBfOtM`TuFlJ{ArEMbPuCrSkAbBwJdFm@pBy@pKe@`BgZvZiTfQgXpI`@`Fq@tCuDnFaJvFuDtDQvAVv@xFfJyKnK",
+   "pointCount": 26,
    "start": [
-    45.375011,
-    141.713634
+    43.521457,
+    142.494774
    ],
    "end": [
-    45.397428,
-    141.691061
+    43.540561,
+    142.444716
    ],
    "tags": [
     "flowing"
@@ -1152,8 +1151,8 @@
    "curviness": 244.7,
    "flow": 19.1,
    "turnCount": 341,
-   "score": 56,
-   "baseScore": 56,
+   "score": 65.9,
+   "baseScore": 65.9,
    "spotCount": 0,
    "polyline": "cc_eGcn}xY|NoBzAF|ChC`AhDcAld@_BxDu@j@mFaAkBdAgDrEw@lEZvE~H~TvBnAzF_Aj@kA_@gO|AuClEuBbAJp@fAI`JRt@jB~@lBs@h@wDgCkQPiBhAy@tAJn@x@lArN|@zBfJ`ExCa@t@wBM{BuEcFc@cBv@oJ_@oIZgC|Bq@dA`A\\rAWfNbA`B~BRvAwBQw_@fAaEtDeGjDiAhKGtZ{I^oALyFbDgIuBeLPiDpDuJnDqCAiBwA{Er@yMwGcHSmBp@iA`FkAj@kN`GsCV}Bk@s@mBYoP`@qO_OsAwFd@iE~DgJbFo\\pAcD`B{AxCc@|NjEtClD`HsArJnApBIpAuBh@sKjBwInEuHzEqEtH`@fAc@nOgRt@IlAp@~ArGxFU|Fl@bAf@~BjE|DtBz@m@CuBwCy@}D{EuFaCa@s@b@gBhHgCzBLdNjN|Ft[pFlFdAxDhAz@j@k@A}@oIaSaAmKJoAn@{@~AAzHrGb@|@IlL`BxBpBI~AeCfEc^fKoKpC}A`BWfAb@bNjVlElE~@|BfArIBvDe@|CqDjLEbB^~AjJ|JxKhBjCk@p@gAbBiOrCmCdCeEn@SrFQjGvCjGx@rBdDrKdBtACpCiBrVgJ~AiCtBgHzCgGvGyXpCuDnCqAvYuHpCUhOh@dEmCz@eCRcEUcBwAoCsAoAkBMeFfBgDLkAuBAsB|@uBfVqIvMjCJ}HyAwCeOc@oWsMi@wG\\yIKwEyLyo@",
    "pointCount": 193,
@@ -1183,8 +1182,8 @@
    "curviness": 248.7,
    "flow": 18.6,
    "turnCount": 401,
-   "score": 55.9,
-   "baseScore": 55.9,
+   "score": 65.8,
+   "baseScore": 65.8,
    "spotCount": 0,
    "polyline": "auw`GgmtrYtE|Cb@fAHxFiAdAo@xBtBnCTfBErJZfBpCfCfBX`CnEbPzM}@pGiErGjBdIdBxDdAnFbBjBn@xDrBzBj@lD~GpBp@p@`BjG\\dFsHfKp@nGpEbO|G`@nGs@f@z@~BuB~Bq@h@v@XrDzEfFrF`DlGLhFpGjCoBdD`CbEgBdAcBn@K`B|D|Aj@d@jEU`D~@hAfH}AfBfApAcC|B}AzHjBbEWzHqDVTHdDcAbEPtBj@v@|C`AbBkAxB]zBqBv@C\\bBaAnDh@`AxBH\\`@YtDPxAhQrGv@jA|DhOnAhQ~CjJpYrc@tDlKoCl@o@bDpDhIs@|OXrDzBvK?nCm@jCuB`CgA^cMHkO~EwD_@sDaEsBkAcCE}BzA{FzVq@vPm@bE}AdCeBdAmF\\cD|AqA|E@xHk@~Em[ji@kBbFiBxMgBlB_GbBy@jBr@`L_C`R\\vBxAzArCQpVsQ~COvC~Bf@nBbDf\\{@pSaCrOn@bE`BrC|Ap@vBEhKcElM|@x@k@pBgFfJoGjGuMzBSfA`B?pA_DzG_AfJcE|H{CvJlApPfA~DvEbFjEzIhInAjEpF|JrEnCvCdEfBtPvO|@jAnFxNdAd@`Mf@dGvFrLxHtBq@bImMxPwEzEqDhFcG`DeAlIEjA~An@lF~@~BbVnHnEi@tDoE~GuAdFkGjC{AtISdElCdDj@nD}BbDiH`IkAbLwGbLaElEgG`EqDxPgJtEEtKyHvCaA~BKfMhCxNkCfLU|FjClHr@hJhFhHxBnH~ExRw@dF|B`QbCvHyHnBMpDdBrAa@|NcU|AoB`D}A",
    "pointCount": 209,
@@ -1211,8 +1210,8 @@
    "curviness": 257,
    "flow": 19.2,
    "turnCount": 61,
-   "score": 55.8,
-   "baseScore": 55.8,
+   "score": 65.5,
+   "baseScore": 65.5,
    "spotCount": 0,
    "polyline": "cqtgGgqrjZi@cAEuArKih@f@mAtBeApRpC|OdNbBgAfBwF`CMtHbQ|EhDt@LdAg@\\kBYyAuEsGBeMrA{@jGpCfE?t@s@PaFq@kDcJ}NeKqm@DmAjCcE^cBRqP",
    "pointCount": 31,
@@ -1240,8 +1239,8 @@
    "curviness": 254.8,
    "flow": 16.8,
    "turnCount": 250,
-   "score": 55.4,
-   "baseScore": 55.4,
+   "score": 65,
+   "baseScore": 65,
    "spotCount": 0,
    "polyline": "qfkqGeh_cZlK|Mx@dGOrDs@nCkXra@e@dBJhDdC|DnJjAdC|B~D|IdCpNbHzOhB|CjNpLrDlJXnBeAhMT`K]|AiAvAeBd@wIgCkAjAGhCbBfBzDInE`C|JzB`DeAnCqE~Ba@vA|@bF`Jb@vDc@nAuAb@qAgAqBkEeAUu@^m@`B?nAdElNHpA]rBwAlAyAGgCcGeBk@sAbBcDnJq@|HFlBvDlFn@dG`ClFDhCc@jB_MjHoIqA{ARuFxIwGlCiSz@wAnBuA|FqDlCk@xBpBrODhOxDbLQhLnAxIhBpCrHpEfA`Bl@rCl@bUu@`Sk@nDuHbOeA|D]nH@tSf@pEfBjEhHhYhDpJJtBW`BgBbBcDFmEnAaAc@kC_FyAP_@bAc@rK_G~FkFzO{BxAsDNkAjA]dBW`QcElI{GdF}GwA}AjAsB`E}E`@wAfAa@lBHxAvBdD~BrArFSx@rADbBe@hAoEhAy@t@StBZnAlA|@hKn@t@`BGzB}G`LwBfByY`JgDjDwC`H",
    "pointCount": 135,
@@ -1270,8 +1269,8 @@
    "curviness": 241.6,
    "flow": 18.1,
    "turnCount": 173,
-   "score": 55.3,
-   "baseScore": 55.3,
+   "score": 64.9,
+   "baseScore": 64.9,
    "spotCount": 0,
    "polyline": "}pgfGonhdZRoCeAwOyBiJ_CeGqD{FYeBj@cDnBqDrBaNnH_OnCsLa@aK{A_IxAyMeCwJSwKTcCpB_CdF}PcByFkAwAoBe@qFgD}K{@}BqAcBgFiAkAgI{AoF_CVuAlQqD|@{@SmBuHsGjBwEJ_FaA}EvAcFVmGxAiIIuAkDkFwNeOeDe@_F~A{CK{JaHwAcFmETiQoFu@eAkBeKaJoLaGsCog@{^w@eE`CoIHqBcBoOLiAtV}Nj@uA{@wIpAgXg@wC_EqFoCgBeAmFkEyA_DaEeBaAaEWqGd@g@i@i@iCaAc@{EjB}BpEiAXaCsAkDV{Ac@sF}EeCsEcDZcA]oFuFaHwQ_KqOeAkDGaC",
    "pointCount": 92,
@@ -1299,8 +1298,8 @@
    "curviness": 250.8,
    "flow": 19.2,
    "turnCount": 54,
-   "score": 55.2,
-   "baseScore": 55.2,
+   "score": 64.8,
+   "baseScore": 64.8,
    "spotCount": 0,
    "polyline": "qunmGud}`ZaAhCsDbBcBoE}Am@yAHoY`KwHjA_G`JyN|C[zAd@lA|Dh@jFa@j@\\HrAuGvGqCtM}G|QqFfGwBdAyBCcEsAsHsEiCu@mB{CoBgA_BuEyJqEeBg@iEFyDvBgA|A",
    "pointCount": 33,
@@ -1321,6 +1320,37 @@
    "id": "北海道:44",
    "region": "hokkaido",
    "regionName": "北海道",
+   "name": "宿志別振内停車場線",
+   "ref": "638",
+   "highway": "secondary",
+   "lengthKm": 8.3,
+   "curviness": 471.2,
+   "flow": 25.7,
+   "turnCount": 152,
+   "score": 64.5,
+   "baseScore": 89.5,
+   "spotCount": 0,
+   "polyline": "ghxcGg}vcZyAyI?oBdEwGv@sCyBuPk@cRLeDfBeJHmKXcBtCuEnSwCvF}D~FyAxAoAbAcMhLuYpAkGNsItG{N`AqHbB_BdEaBr@iBr@gGBiI`AiDlAsNYoKtCaJxAuIuBsOrCe@vBkES_D_BiASmBrCaAzCjHzCi@dAqANkBbBmA|AqIhAs@Yk@uAPg@nDwBnA_FwD_@cDkA{@k@aBTcCwAiAm@{GaAoD_Bm@k@gAuAW_@}Bz@wB]{@eBcA\\q@`DCn@mAI}@oBmABu@bHPXuAuBuABw@lCr@vAKpIcN`ByA",
+   "pointCount": 79,
+   "start": [
+    42.727884,
+    142.335722
+   ],
+   "end": [
+    42.7083,
+    142.402277
+   ],
+   "boost": -25,
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
+   ]
+  },
+  {
+   "id": "北海道:45",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "占冠穂別線（支線）",
    "ref": "610",
    "highway": "secondary",
@@ -1328,8 +1358,8 @@
    "curviness": 259.8,
    "flow": 18.1,
    "turnCount": 57,
-   "score": 54.8,
-   "baseScore": 54.8,
+   "score": 64.3,
+   "baseScore": 64.3,
    "spotCount": 0,
    "polyline": "qcbeG_k~cZ`Db@zF_A`IvBbCg@`DTpD}BxD|B`DeAvCF`Cy@`Ez@fEcCxD^nDcA`AdAv@pFfB|@tCuAbD}EfA_@zb@_ArMfGxAW`LuHpSnL|B|CpBhHt@n@fBH",
    "pointCount": 30,
@@ -1347,7 +1377,7 @@
    ]
   },
   {
-   "id": "北海道:45",
+   "id": "北海道:46",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "名寄遠別線",
@@ -1357,8 +1387,8 @@
    "curviness": 271.4,
    "flow": 17.2,
    "turnCount": 66,
-   "score": 54.7,
-   "baseScore": 54.7,
+   "score": 64.2,
+   "baseScore": 64.2,
    "spotCount": 0,
    "polyline": "_szmGygucZqBcJg@uTk@oCm@s@mKsBiD?uHnG{A`@}@eBlA_DH}AgAaC_Bs@sHNkB{DkFIIkC~@u@tG~A~CGxCwApP{ObIe@lDcE`DkOtAiCnN{GbEoHnCcC~JeDfDwG",
    "pointCount": 32,
@@ -1376,7 +1406,7 @@
    ]
   },
   {
-   "id": "北海道:46",
+   "id": "北海道:47",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "高見西舎線",
@@ -1386,8 +1416,8 @@
    "curviness": 264.5,
    "flow": 17.7,
    "turnCount": 57,
-   "score": 54.6,
-   "baseScore": 54.6,
+   "score": 64.1,
+   "baseScore": 64.1,
    "spotCount": 0,
    "polyline": "usx`G}k_gZu@p@UtA`@lBbAXrG{@j@n@JtAoA|AyHBwEhD_A~A}E|_@eCzIVrEvCpHMlBeGdFwAxGu@rAkGTqArAgEbTc@`Pm@zCoBxBaYvRkAbFLbO",
    "pointCount": 29,
@@ -1405,7 +1435,35 @@
    ]
   },
   {
-   "id": "北海道:47",
+   "id": "北海道:48",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "美唄達布岩見沢線",
+   "ref": "687",
+   "highway": "secondary",
+   "lengthKm": 5.36,
+   "curviness": 104.5,
+   "flow": 33,
+   "turnCount": 17,
+   "score": 63.8,
+   "baseScore": 63.8,
+   "spotCount": 0,
+   "polyline": "{`vfGgh_`Zen@f_@DtA~Phs@wQ|Om@xAeAdSoK`iAE`]_AdEah@~e@fDrGcNfX",
+   "pointCount": 13,
+   "start": [
+    43.207982,
+    141.72308
+   ],
+   "end": [
+    43.226698,
+    141.67342
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:49",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "苫前小平線",
@@ -1415,8 +1473,8 @@
    "curviness": 225.5,
    "flow": 19.5,
    "turnCount": 62,
-   "score": 54.2,
-   "baseScore": 54.2,
+   "score": 63.7,
+   "baseScore": 63.7,
    "spotCount": 0,
    "polyline": "qiwkGqxi`Z}HlG}Prh@eIth@}DfJ]rFsJbNcBtAmGKiO_FeHcFiGeKsFcEcMkCsIRuBcDuBsAwHfGyGc@qCtD}L}KeDO_FvCmDfHgBnAkFs@mBlC{G{@}CbA",
    "pointCount": 29,
@@ -1442,63 +1500,6 @@
    ]
   },
   {
-   "id": "北海道:48",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "美唄達布岩見沢線",
-   "ref": "687",
-   "highway": "secondary",
-   "lengthKm": 5.36,
-   "curviness": 104.5,
-   "flow": 33,
-   "turnCount": 17,
-   "score": 54.1,
-   "baseScore": 54.1,
-   "spotCount": 0,
-   "polyline": "{`vfGgh_`Zen@f_@DtA~Phs@wQ|Om@xAeAdSoK`iAE`]_AdEah@~e@fDrGcNfX",
-   "pointCount": 13,
-   "start": [
-    43.207982,
-    141.72308
-   ],
-   "end": [
-    43.226698,
-    141.67342
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:49",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "望来当別線",
-   "ref": "527",
-   "highway": "secondary",
-   "lengthKm": 3.46,
-   "curviness": 261.8,
-   "flow": 17.1,
-   "turnCount": 53,
-   "score": 53.8,
-   "baseScore": 53.8,
-   "spotCount": 0,
-   "polyline": "wh|fG}vo~YqThJmDtGgDpBkC~NsCdG_@tK]hA_AH}A{CkAI[|@g@fIm@rB{HzDwDnJ}InKi@tDr@hIC`EoAvDuE~Fi@nCCfGyDfFi@bBu@zW",
-   "pointCount": 27,
-   "start": [
-    43.239959,
-    141.479667
-   ],
-   "end": [
-    43.255944,
-    141.449693
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
    "id": "北海道:50",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -1509,8 +1510,8 @@
    "curviness": 200.6,
    "flow": 22.3,
    "turnCount": 50,
-   "score": 53.7,
-   "baseScore": 53.7,
+   "score": 63.2,
+   "baseScore": 63.2,
    "spotCount": 0,
    "polyline": "y{g_GupkyYYuC^yGtFaOd@uG~AqCjCuB~BwGQ_EaBwGpBqHTqCe@aEqFmIcAaEaDaAm@}@MiBpAm_@aHiK_AmMjNmDla@eN^sAoCySvDgBz^rG`YnKdE}UH{F",
    "pointCount": 30,
@@ -1531,6 +1532,35 @@
    "id": "北海道:51",
    "region": "hokkaido",
    "regionName": "北海道",
+   "name": "望来当別線",
+   "ref": "527",
+   "highway": "secondary",
+   "lengthKm": 3.46,
+   "curviness": 261.8,
+   "flow": 17.1,
+   "turnCount": 53,
+   "score": 63.1,
+   "baseScore": 63.1,
+   "spotCount": 0,
+   "polyline": "wh|fG}vo~YqThJmDtGgDpBkC~NsCdG_@tK]hA_AH}A{CkAI[|@g@fIm@rB{HzDwDnJ}InKi@tDr@hIC`EoAvDuE~Fi@nCCfGyDfFi@bBu@zW",
+   "pointCount": 27,
+   "start": [
+    43.239959,
+    141.479667
+   ],
+   "end": [
+    43.255944,
+    141.449693
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:52",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "士別滝上線",
    "ref": "61",
    "highway": "primary",
@@ -1538,8 +1568,8 @@
    "curviness": 253.7,
    "flow": 18.6,
    "turnCount": 64,
-   "score": 53.6,
-   "baseScore": 53.6,
+   "score": 63,
+   "baseScore": 63,
    "spotCount": 0,
    "polyline": "wqblGqkffZc@bDmArC_IjKiChA{E[kGeGuEeBmCoJiCd@_AtKf@~Ne@~G{@dG}FzMaBhNE~BnApE}@fNeF`EwB~CaBx@{PM_C~AoDj@c@z@k@|HkAvCeJrJw@YcBgE_BPe@`B\\dIUxBuGjH}G|CoA~D",
    "pointCount": 38,
@@ -1557,7 +1587,7 @@
    ]
   },
   {
-   "id": "北海道:52",
+   "id": "北海道:53",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "洞爺湖登別線",
@@ -1567,8 +1597,8 @@
    "curviness": 231.1,
    "flow": 18.2,
    "turnCount": 182,
-   "score": 53.4,
-   "baseScore": 53.4,
+   "score": 62.8,
+   "baseScore": 62.8,
    "spotCount": 0,
    "polyline": "}izbG{fm{YXyDfA}CnF{E~KqCtFmDdKa@dKkHn^sNbEcF|BoAv@sE`BaCx@sEx@o@~@RU`Et@r@dD?fDmArHm@dG_Cf@sAdCuWOcBiByCLaAf@s@hD]xA}@vAwIjCuDrKyAvAu@hAoShGcBdAgCXoVgLqk@@uBxCwLdCq@vGtAfSL~MfIzGdPrBGt@{AIeBsBuHAeBnBuP|GgJ]iDiB_@_JnHyGnAiFg@sKsEyAeBQqANoCnAcBtScJvIeJLeAo@{CsIeFeBgB{@mCr@wOrFiIUcOaImCsNeHmFsHeC}AeBHaElBsGiGy@sDUw\\qAeDY{EeDkD{Dr@eA]kA_BoIsTl@}NkA}C{@a@_CViHvBkBGcDeCw@}As@sGdAcS",
    "pointCount": 99,
@@ -1586,34 +1616,6 @@
    ]
   },
   {
-   "id": "北海道:53",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "古平神恵内線",
-   "ref": "998",
-   "highway": "secondary",
-   "lengthKm": 8.52,
-   "curviness": 251.7,
-   "flow": 15.9,
-   "turnCount": 135,
-   "score": 53.4,
-   "baseScore": 53.4,
-   "spotCount": 0,
-   "polyline": "myvfGwozxY[_BHoBfBsKvAmAxGzBnIuDpCDnTbPbCo@l@wCw@}C{EiG_BoGSuGbAgLa@aD_CwCeFwDg@uBs@cKeFmC_FuJoEeFk@uCWeGsF{Ja@gBNcDp@{AfBg@jATpAbBlBfFpB`KzAtDvGfFpDFhHyGl@gA\\}CiAqNqBsDmJwBwAkAi@{L}BmMf@uCtEeDtC{@rH]jCqA|CmEfDsNMsE_CqSoA{DeCwCiBm@}Ip@mBiDBsDx@_FhAiCrEoFB{BmAgG_CuDcA_FsAwA{AV{DjDkBH",
-   "pointCount": 73,
-   "start": [
-    43.211908,
-    140.551797
-   ],
-   "end": [
-    43.20933,
-    140.601265
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
    "id": "北海道:54",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -1624,8 +1626,8 @@
    "curviness": 243.5,
    "flow": 17.8,
    "turnCount": 151,
-   "score": 53.4,
-   "baseScore": 53.4,
+   "score": 62.8,
+   "baseScore": 62.8,
    "spotCount": 0,
    "polyline": "c__kGiw`cZyE`FeNz[}CbKEdSa@vBgCnEe@~BDxBn@pB`GxGV|As@dBmD|@c@zAXtGSdFv@`GIz@sDhFh@nMwGvMmE^}ApCgAbV{EhIb@lIUdCcDnGcBxGwCdGcAvFiBrEB`Er@tFp@z@dEjAx@dBWlCeEzHSnDbCtHxCfGzEhQPnBo@bCgKnBiN{I_Ce@sCn@aHfFuCWkBuCYgKa@iB}@iAcHsBsHiIwAu@eBKgJdA{BYaA_AsBcKDsC|AuGs@kB{E\\}EsBwIjHyDp@eLiBiBwAgB_DqCs@sAj@kAvEb@tDtBtGC~GcHfYgNde@yJcHmH_M",
    "pointCount": 84,
@@ -1645,35 +1647,6 @@
    "id": "北海道:55",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "忠別清水線",
-   "ref": "718",
-   "highway": "secondary",
-   "lengthKm": 4.76,
-   "curviness": 230.5,
-   "flow": 18.3,
-   "turnCount": 60,
-   "score": 53.3,
-   "baseScore": 53.3,
-   "spotCount": 0,
-   "polyline": "ga~gGyz`gZ}T}CyAf@eGbGwC{CoFSeIpNoBfAy@pBqDlB_C|IVpIk@dH}@pB@bNsB`FmBxI}@tMu@ZoCCgCsA}CuEaBaTiByBcPq@aG`@aLcB}NmFaJoAuJxEoGlA",
-   "pointCount": 31,
-   "start": [
-    43.412842,
-    142.878051
-   ],
-   "end": [
-    43.44307,
-    142.867175
-   ],
-   "tags": [
-    "winding",
-    "forest"
-   ]
-  },
-  {
-   "id": "北海道:56",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "根室浜中釧路線",
    "ref": "142",
    "highway": "primary",
@@ -1681,8 +1654,8 @@
    "curviness": 201.6,
    "flow": 18.9,
    "turnCount": 317,
-   "score": 53.2,
-   "baseScore": 53.2,
+   "score": 62.6,
+   "baseScore": 62.6,
    "spotCount": 0,
    "polyline": "edoeGk`erZhRzInGbBrN}xA~SqCzBz@dHlIdDNzKuLld@uQdAIjKtC|A?tI}JpGcK`Ak@lHaA`HG|EqBxSaEhHAjEiElCmAdGmKlAs@nBOnBp@tFjJzGzC|CxDrAr@rCGjAy@lAaDXu_@l@aGlDwO`@sAzRwWxA_AnDXdIrJrI~DzQlNnArAhD`LbEdJxDtAnMj@_G`l@cElIS`O~BtH~@`A`QnGr@tAr@lHhHlJJbC_BjMFdd@`AlD`GlGJdCiC~HrD`KL|EwQjo@cBbCgFfEuLlGgCzDgCfUn@`EnEhG|AtG{Crc@hBtJc@nCqC|FmCvSkB`C_FpAs@xABvDfBjFBvAqAdGUnK_BpCeB`AmH[mA`@mGtLo@~DhBxHCxBiAlJcAnC{DvCwHRy@~@wAfJaBfB_Gk@wARm@|@uIxd@gGpKqB~SFpBx@pB~C`B`@v@tAfKxBpE{@lJzBfLCxFb@zA~J~CnAlA`@rCKtFhDlGKpCsApCKjAMxSuE|IGbAjAfIj@lMpDjJbCvPuA~K`@pDpCzEhDpQe@dO`AtF{AdXj@l`@fCfJDnI{A~ImDfIlBdZ}CnNoG`QIhBrEbQZjHaArINlEhGbMvA`TjD~JQtFrDfA~@tG~EzCRn@g@|AgD@gA_AgA{EwDKa@|@^dAxBg@f@^PjKv@hFr@ZlCu@f@f@kApFvB~Ge@jRJ~Gh@jD",
    "pointCount": 182,
@@ -1700,7 +1673,95 @@
    ]
   },
   {
+   "id": "北海道:56",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "古平神恵内線",
+   "ref": "998",
+   "highway": "secondary",
+   "lengthKm": 8.52,
+   "curviness": 251.7,
+   "flow": 15.9,
+   "turnCount": 135,
+   "score": 62.6,
+   "baseScore": 62.6,
+   "spotCount": 0,
+   "polyline": "myvfGwozxY[_BHoBfBsKvAmAxGzBnIuDpCDnTbPbCo@l@wCw@}C{EiG_BoGSuGbAgLa@aD_CwCeFwDg@uBs@cKeFmC_FuJoEeFk@uCWeGsF{Ja@gBNcDp@{AfBg@jATpAbBlBfFpB`KzAtDvGfFpDFhHyGl@gA\\}CiAqNqBsDmJwBwAkAi@{L}BmMf@uCtEeDtC{@rH]jCqA|CmEfDsNMsE_CqSoA{DeCwCiBm@}Ip@mBiDBsDx@_FhAiCrEoFB{BmAgG_CuDcA_FsAwA{AV{DjDkBH",
+   "pointCount": 73,
+   "start": [
+    43.211908,
+    140.551797
+   ],
+   "end": [
+    43.20933,
+    140.601265
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
    "id": "北海道:57",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "北海道道746号高見西舎線 (Takami Nishicha line)",
+   "ref": "746",
+   "highway": "secondary",
+   "lengthKm": 4.57,
+   "curviness": 323.9,
+   "flow": 23.9,
+   "turnCount": 62,
+   "score": 62.5,
+   "baseScore": 75.5,
+   "spotCount": 0,
+   "polyline": "ebiaG{dffZLuF|@uFfDqGTwCiAyO|AcHf@wJn@gAjBhCx@XnF{C|BqFvAh@bD}B`BEnDdClBX|Bs@nH}J`@}APaFpAaDWeI^qBnGoBxF{FhC_FjL_J|@yG~@yBtDaBjAgB`BeGnDuBrDaE~H_AhHuF~BcI`AkH",
+   "pointCount": 40,
+   "start": [
+    42.322426,
+    142.741423
+   ],
+   "end": [
+    42.298167,
+    142.775273
+   ],
+   "boost": -13,
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
+   ]
+  },
+  {
+   "id": "北海道:58",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "忠別清水線",
+   "ref": "718",
+   "highway": "secondary",
+   "lengthKm": 4.76,
+   "curviness": 230.5,
+   "flow": 18.3,
+   "turnCount": 60,
+   "score": 62.5,
+   "baseScore": 62.5,
+   "spotCount": 0,
+   "polyline": "ga~gGyz`gZ}T}CyAf@eGbGwC{CoFSeIpNoBfAy@pBqDlB_C|IVpIk@dH}@pB@bNsB`FmBxI}@tMu@ZoCCgCsA}CuEaBaTiByBcPq@aG`@aLcB}NmFaJoAuJxEoGlA",
+   "pointCount": 31,
+   "start": [
+    43.412842,
+    142.878051
+   ],
+   "end": [
+    43.44307,
+    142.867175
+   ],
+   "tags": [
+    "winding",
+    "forest"
+   ]
+  },
+  {
+   "id": "北海道:59",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "道道1025号 静内浦河線",
@@ -1710,8 +1771,8 @@
    "curviness": 236.9,
    "flow": 17.8,
    "turnCount": 53,
-   "score": 53.1,
-   "baseScore": 53.1,
+   "score": 62.3,
+   "baseScore": 62.3,
    "spotCount": 0,
    "polyline": "kttaGmmqdZzFmFjBFfH`EzCvHlA`AJiAuAaFJsA|@_ArDmAbFeFpP{k@zA_ClBw@`V{AbGqDvE_@rHsGfBcFrDw@bCmCn@wBE}Gv@qA`BEpGpChBUvNuP",
    "pointCount": 29,
@@ -1728,35 +1789,7 @@
    ]
   },
   {
-   "id": "北海道:58",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "夕張長沼線",
-   "ref": "1008",
-   "highway": "secondary",
-   "lengthKm": 4.78,
-   "curviness": 199.4,
-   "flow": 17,
-   "turnCount": 56,
-   "score": 53.1,
-   "baseScore": 50.2,
-   "spotCount": 1,
-   "polyline": "q~ieGqd``ZQy\\dAmC~E{Db@{BUwCwCmEe@eBXcEpU{PzNmYpFsElAcCW}EcIoMyAaA{De@{@iB?u@`@oAtDoEtAeErCkOfB{QDmD_AsKeBaJnAkOiAwLHsI`A}CzGyJt@mE",
-   "pointCount": 33,
-   "start": [
-    42.982329,
-    141.727612
-   ],
-   "end": [
-    42.973312,
-    141.774453
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:59",
+   "id": "北海道:60",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "相生津別停車場線",
@@ -1766,8 +1799,8 @@
    "curviness": 216.8,
    "flow": 18.2,
    "turnCount": 87,
-   "score": 53,
-   "baseScore": 53,
+   "score": 62.2,
+   "baseScore": 62.2,
    "spotCount": 0,
    "polyline": "mq|hGmvanZxOnNbGRtEfDlEr@pElC`OxEbA~AlAdHjHtJrAn@zJ@zF|GbHrAjKfHlBpIpDdG`@fB]fBiCnEu@jFoDdBi@hAFnRr@hOr@nC~FlGjEpAl[gHxE_Cl@d@NjAGvGc@jCeAxAuJnDi@fAL|A`A^hDqAtDIbF|BrH@Trd@q@bDaEtFeBhFkBf[DlDfKeB",
    "pointCount": 50,
@@ -1784,7 +1817,7 @@
    ]
   },
   {
-   "id": "北海道:60",
+   "id": "北海道:61",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "北海道道285号豊浦洞爺線 (Toyoura Toya line)",
@@ -1794,8 +1827,8 @@
    "curviness": 245.2,
    "flow": 17.3,
    "turnCount": 48,
-   "score": 52.8,
-   "baseScore": 52.8,
+   "score": 62,
+   "baseScore": 62,
    "spotCount": 0,
    "polyline": "o`hcGqvpzY}M~SFzBt@nAzDXx@j@`@nAIjCkYpf@q@|Dx@|FdC|BxA\\hAEbBeApCiDbAMhBdA^hCa@lBoFxEeAnBYfCt@fFhBlIbAdBxKpL`IzEj@lBMrD",
    "pointCount": 30,
@@ -1812,7 +1845,7 @@
    ]
   },
   {
-   "id": "北海道:61",
+   "id": "北海道:62",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "遠軽雄武線",
@@ -1822,8 +1855,8 @@
    "curviness": 254.2,
    "flow": 18.1,
    "turnCount": 51,
-   "score": 52.7,
-   "baseScore": 52.7,
+   "score": 62,
+   "baseScore": 62,
    "spotCount": 0,
    "polyline": "mapmGitsgZkMoCwB\\o@vAI~BTzOuAhE_BlBiBr@yLsCiBViBbEmAlJi@hTLzC|CvIbApAnARrEgAt@dAXnEaDnDK~BnE~FjAtDbEtb@@xBqAdKMhHyFO",
    "pointCount": 30,
@@ -1840,36 +1873,35 @@
    ]
   },
   {
-   "id": "北海道:62",
+   "id": "北海道:63",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "阿寒標茶線",
-   "ref": "243",
+   "name": "夕張長沼線",
+   "ref": "1008",
    "highway": "secondary",
-   "lengthKm": 10.5,
-   "curviness": 222,
-   "flow": 16.8,
-   "turnCount": 139,
-   "score": 52.6,
-   "baseScore": 52.6,
-   "spotCount": 0,
-   "polyline": "g|dfGsiwnZ]}Dy@wC{Mo^u@_NgA{AuK_D}@iA@wBx@kAbAGtCpAv@Qv@aB?cA}@{AsGBo@k@WuARcBtCiGv@}DrByRSsCu@u@{ACyFdFyBF}DgFiJiDeDqKcG}FqDeAaHf@_Cu@aNwV}PgLgAkBM_DvBuU|@yClGwKXiD[gBsA{AeQiGm@sAOoBxCqPpJkMz@yBL_F]gGyAeFqEmI}IgDcHyNFwBp@kAhF{@nA_CWkCkCwFdAsJcAwBgLkGeAyAk@qB[iO~BkZf@yB`C{EnEiFf@iDqDmV}Ic[eBeCuJ{F",
-   "pointCount": 78,
+   "lengthKm": 4.78,
+   "curviness": 199.4,
+   "flow": 17,
+   "turnCount": 56,
+   "score": 61.8,
+   "baseScore": 58.9,
+   "spotCount": 1,
+   "polyline": "q~ieGqd``ZQy\\dAmC~E{Db@{BUwCwCmEe@eBXcEpU{PzNmYpFsElAcCW}EcIoMyAaA{De@{@iB?u@`@oAtDoEtAeErCkOfB{QDmD_AsKeBaJnAkOiAwLHsI`A}CzGyJt@mE",
+   "pointCount": 33,
    "start": [
-    43.120204,
-    144.139936
+    42.982329,
+    141.727612
    ],
    "end": [
-    43.147983,
-    144.226606
+    42.973312,
+    141.774453
    ],
    "tags": [
-    "winding",
     "flowing"
    ]
   },
   {
-   "id": "北海道:63",
+   "id": "北海道:64",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "上士別和寒線",
@@ -1879,8 +1911,8 @@
    "curviness": 199.3,
    "flow": 18.7,
    "turnCount": 96,
-   "score": 52.6,
-   "baseScore": 52.6,
+   "score": 61.8,
+   "baseScore": 61.8,
    "spotCount": 0,
    "polyline": "}_ykGsqpdZeFkBcC{By@qDcAaRgA{BqEw@y@y@yA_RaCmBcMsEcAyBXuB|OcHpC{C?qBa@u@gH{A}AmA]{AHeA~@w@bIcBVeAOqB}AkAoT`AmR[yM_HuL{J{SwHgAyCJiDd@mAjQ{T`FaJhDqIfFqH`KqI`HiAdGfAnDSx@yB[}C{HaDiKwAq@cBFsAfC_G[{CeAu@_IzFuMtDwm@iFkKuBkEnAyGcBaGK",
    "pointCount": 58,
@@ -1898,7 +1930,36 @@
    ]
   },
   {
-   "id": "北海道:64",
+   "id": "北海道:65",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "阿寒標茶線",
+   "ref": "243",
+   "highway": "secondary",
+   "lengthKm": 10.5,
+   "curviness": 222,
+   "flow": 16.8,
+   "turnCount": 139,
+   "score": 61.7,
+   "baseScore": 61.7,
+   "spotCount": 0,
+   "polyline": "g|dfGsiwnZ]}Dy@wC{Mo^u@_NgA{AuK_D}@iA@wBx@kAbAGtCpAv@Qv@aB?cA}@{AsGBo@k@WuARcBtCiGv@}DrByRSsCu@u@{ACyFdFyBF}DgFiJiDeDqKcG}FqDeAaHf@_Cu@aNwV}PgLgAkBM_DvBuU|@yClGwKXiD[gBsA{AeQiGm@sAOoBxCqPpJkMz@yBL_F]gGyAeFqEmI}IgDcHyNFwBp@kAhF{@nA_CWkCkCwFdAsJcAwBgLkGeAyAk@qB[iO~BkZf@yB`C{EnEiFf@iDqDmV}Ic[eBeCuJ{F",
+   "pointCount": 78,
+   "start": [
+    43.120204,
+    144.139936
+   ],
+   "end": [
+    43.147983,
+    144.226606
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:66",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "大沼公園線",
@@ -1908,8 +1969,8 @@
    "curviness": 210.2,
    "flow": 17.2,
    "turnCount": 145,
-   "score": 52.4,
-   "baseScore": 52.4,
+   "score": 61.5,
+   "baseScore": 61.5,
    "spotCount": 0,
    "polyline": "c~f_GapsyYsFoNmQ_EkAaCq@eIoAqCgQkPiAyBeAiH`DgVPsXcD}]yF}OgToQyAWiDz@yAWcD}JcJaCy@{@g@qBUyG}BqE{F_G{^sAwDyAwJzC{HbHmDtNVnHdB|Cb@pGpBbBtG|LrE`NvJdJfE~KbDjD`@xBJpGOrAsBnCn@nFfBxGhFtIzChLjGbJh@|BHrDbDdC|A~FBdG{BrFOfDpB~I`CnEh@tDmAfIiEhFu@jEj@~DrE`CdArCy@hBwEzBWlBb@zCn@p@pAJlHkAdEeBvJjHnB|FfFvB`ILfDvArAQhDsCfNwA",
    "pointCount": 79,
@@ -1927,35 +1988,7 @@
    ]
   },
   {
-   "id": "北海道:65",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "中足寄愛冠線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.8,
-   "curviness": 233.3,
-   "flow": 17.4,
-   "turnCount": 51,
-   "score": 52.4,
-   "baseScore": 52.4,
-   "spotCount": 0,
-   "polyline": "aghgGiqikZm@iDbJoT`TkOrBmDb@iDw@iLoFqIcBuFoBa`@dB_DbEu@nBuA`AUrEj@\\kErAaGFsDhAaEOwAoBkDa@{DoByAqFiI_D_KWkIvDyR",
-   "pointCount": 27,
-   "start": [
-    43.301129,
-    143.577973
-   ],
-   "end": [
-    43.296154,
-    143.613605
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:66",
+   "id": "北海道:67",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "新富神里線",
@@ -1965,8 +1998,8 @@
    "curviness": 190.9,
    "flow": 17.8,
    "turnCount": 197,
-   "score": 52.3,
-   "baseScore": 52.3,
+   "score": 61.4,
+   "baseScore": 61.4,
    "spotCount": 0,
    "polyline": "qmlcGkreyY@uE{Dsu@uLgVKiBd@cA~@BdDzDr@@dGwPvB_LZ{H_@iC_EmHMaBhSue@zA_AlICdAk@bT}`@yB{H_A}KcAoEiByCiLgKeAcBVeDtEoEUyByG}DiGsIs@F}@rARnEWhBsAZ{@aAgAoh@o@kAgDmAYoBnCwEGuF^cApHoC~E}FPgDgDyI@uCx@iBrHcH`A}CNwEh@_CrEsJrQwD`HHhBv@vAfCVfJfAnCpAf@nBErFmDjAcHjCsH`BsPpAiBzGgFlFyItCqMpD}KTkCo@}GEkFd@uClFoHdEaNx@}GrRu`@rDcFl@gCyIqCiTaC_ABuDrBeBi@uWwRu@kBaAuIoEuEmI{NiOyHyP_CeDiHqOiAaXmUc^nCuBa@mSgK{Gg@}RvAkKcFwFjBgH{EoEeGiQiCiEZ",
    "pointCount": 108,
@@ -1984,7 +2017,35 @@
    ]
   },
   {
-   "id": "北海道:67",
+   "id": "北海道:68",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "中足寄愛冠線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.8,
+   "curviness": 233.3,
+   "flow": 17.4,
+   "turnCount": 51,
+   "score": 61.4,
+   "baseScore": 61.4,
+   "spotCount": 0,
+   "polyline": "aghgGiqikZm@iDbJoT`TkOrBmDb@iDw@iLoFqIcBuFoBa`@dB_DbEu@nBuA`AUrEj@\\kErAaGFsDhAaEOwAoBkDa@{DoByAqFiI_D_KWkIvDyR",
+   "pointCount": 27,
+   "start": [
+    43.301129,
+    143.577973
+   ],
+   "end": [
+    43.296154,
+    143.613605
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:69",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "北檜山大成線",
@@ -1994,8 +2055,8 @@
    "curviness": 213.1,
    "flow": 17.3,
    "turnCount": 101,
-   "score": 52.1,
-   "baseScore": 52.1,
+   "score": 61.2,
+   "baseScore": 61.2,
    "spotCount": 0,
    "polyline": "wenaGguctYuG}BqG{@cFeCw@aBCiBdDaQaAuFiAoCJsEaDoHsEiCoCaJ{B{AKaAfAoDAiBkAuDLkBg@mBwBoAuDYcA_DeGwIsAiFmCgEqCyBcLwAkD}AyDo@yCJmCw@gDmFaD}OsHeNyGoHaJiEi@{Ae@_IgAoBeL{BsImG{LsEsAD}GfEiB?cGaEwE{FmAi@cTzAyAYq@uBN}BtAoFnFmJt@{EmBov@i@yDyCeEiO}F",
    "pointCount": 60,
@@ -2012,63 +2073,6 @@
    ]
   },
   {
-   "id": "北海道:68",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "大野上磯線",
-   "ref": "756",
-   "highway": "secondary",
-   "lengthKm": 4.33,
-   "curviness": 190.7,
-   "flow": 19.6,
-   "turnCount": 42,
-   "score": 51.9,
-   "baseScore": 51.9,
-   "spotCount": 0,
-   "polyline": "o{s~FydlyYpKm@zI}E^~AfFqEfEpA|N}@`LeDdIg@pFiCdXPxIcB`Lx@tMkIlB?jGnBpC]|J}H|Oi\\hKmKdCoAk@yH",
-   "pointCount": 22,
-   "start": [
-    41.886159,
-    140.642214
-   ],
-   "end": [
-    41.852755,
-    140.657352
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:69",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "福住女満別線",
-   "ref": "249",
-   "highway": "secondary",
-   "lengthKm": 6.85,
-   "curviness": 211.4,
-   "flow": 17.4,
-   "turnCount": 83,
-   "score": 51.9,
-   "baseScore": 51.9,
-   "spotCount": 0,
-   "polyline": "emijGc}joZlEhDbHnJbBdE|@`KpI`^o@bLZbHn@hCpEfErGjA~IhF|Ip[l@zFQjAaJbLwF~KIhBZ~@tDvCp@vDAlBsShc@CvBlAhKI`Bg@|@_GzCcEfL@|^`FjFhEzJPfB}@tBsDf@qA`CLvYm@dBwB`BYvARzAxB~C?dCkGlJmJ|KY~Bt@`D",
-   "pointCount": 47,
-   "start": [
-    43.798755,
-    144.24034
-   ],
-   "end": [
-    43.79734,
-    144.174257
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
    "id": "北海道:70",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -2079,8 +2083,8 @@
    "curviness": 249.8,
    "flow": 18.5,
    "turnCount": 277,
-   "score": 51.8,
-   "baseScore": 51.8,
+   "score": 61.2,
+   "baseScore": 61.2,
    "spotCount": 0,
    "polyline": "u__fG}_i{YlByRQia@`BaHp@oI`BcKkBoWb@kAdD_B\\iBYaBmA_B_TeFm@o@W{Bt@_C`FcEzW_d@|@wELcDg@mPcA}HsAoAyGfAwBa@eB{AmDqHgG}HsA_G}@sAiB~@eDpGgClBqAp@wCJqBgByImOiFmDcA_BqAuI_@{Nu@eBiNgCiAkAyCsHqBwAoPCmIkAuAuAmE{JgGwC_FeE{G}@kLjBiBGkJ}F}I]yHqDyKgAsJuDeH@_EgByAZ{BjCeFk@cElDaDn@}Bg@sKmH{QiCkE{DkA[{AlAoCfGmEXgDdFiCd@{HiBsGwJaF^}A[mG{IeCu@yHbAgA~@_F~MqBzJg@n@aA@y@cA@}B`E{L`BiIjBsDE_BsA?_D~HwE`EcB`Hy@^g@a@E}@hAcGv@eC|DwFCiBqA_@wAlAiDzEuBxHsALc@}AfAaLOiPqAkAqAd@eEjSy@x@mAKw@uBh@qUUqAiAu@yHdEiC|HiHbIKnDtClQkBxLK~Le@lBsA~@sGPkDnFeAn@mI]u@h@c@`BVtB|IfRxDh@~@r@N~Ai@pD^hBdC`AdHoF~CEfBfBd@zBK~AsCjD{GzEiRrJqG~FeBxCkCaBiH}H",
    "pointCount": 158,
@@ -2101,6 +2105,63 @@
    "id": "北海道:71",
    "region": "hokkaido",
    "regionName": "北海道",
+   "name": "大野上磯線",
+   "ref": "756",
+   "highway": "secondary",
+   "lengthKm": 4.33,
+   "curviness": 190.7,
+   "flow": 19.6,
+   "turnCount": 42,
+   "score": 60.9,
+   "baseScore": 60.9,
+   "spotCount": 0,
+   "polyline": "o{s~FydlyYpKm@zI}E^~AfFqEfEpA|N}@`LeDdIg@pFiCdXPxIcB`Lx@tMkIlB?jGnBpC]|J}H|Oi\\hKmKdCoAk@yH",
+   "pointCount": 22,
+   "start": [
+    41.886159,
+    140.642214
+   ],
+   "end": [
+    41.852755,
+    140.657352
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:72",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "福住女満別線",
+   "ref": "249",
+   "highway": "secondary",
+   "lengthKm": 6.85,
+   "curviness": 211.4,
+   "flow": 17.4,
+   "turnCount": 83,
+   "score": 60.9,
+   "baseScore": 60.9,
+   "spotCount": 0,
+   "polyline": "emijGc}joZlEhDbHnJbBdE|@`KpI`^o@bLZbHn@hCpEfErGjA~IhF|Ip[l@zFQjAaJbLwF~KIhBZ~@tDvCp@vDAlBsShc@CvBlAhKI`Bg@|@_GzCcEfL@|^`FjFhEzJPfB}@tBsDf@qA`CLvYm@dBwB`BYvARzAxB~C?dCkGlJmJ|KY~Bt@`D",
+   "pointCount": 47,
+   "start": [
+    43.798755,
+    144.24034
+   ],
+   "end": [
+    43.79734,
+    144.174257
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:73",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美和豊浦停車場線",
    "ref": "702",
    "highway": "secondary",
@@ -2108,8 +2169,8 @@
    "curviness": 222.5,
    "flow": 16.4,
    "turnCount": 100,
-   "score": 51.7,
-   "baseScore": 51.7,
+   "score": 60.7,
+   "baseScore": 60.7,
    "spotCount": 0,
    "polyline": "megcGonxyYtI|AvAtC?dC_EbRRzBzCvG`BvBpK`BfItH`CaAdBqO~@{B`By@`EEjBxJfLfHhBPdJ_CnFwJzDtCnBQxUoX`CWjH\\vHpBbAs@xEkJzAs@jBf@|DvEjFJfIqCnAn@jCnDrB`@hBi@~DsEdBi@pHjAbGdDjAFdHsJ`EgArC`A~GzJxHlCxK}CvVyQfDg@zDt@",
    "pointCount": 51,
@@ -2126,7 +2187,7 @@
    ]
   },
   {
-   "id": "北海道:72",
+   "id": "北海道:74",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "から沢泥沢線",
@@ -2136,8 +2197,8 @@
    "curviness": 136.3,
    "flow": 23,
    "turnCount": 30,
-   "score": 51.6,
-   "baseScore": 51.6,
+   "score": 60.7,
+   "baseScore": 60.7,
    "spotCount": 0,
    "polyline": "e{tfGo|odZrJgAlD^pE`CbAYdXok@jBy@hEBj@m@t@yDDeDsF}oAiM^yK}@GcVgEmf@sShCeBzAmE`HwCxFOzXy@~B",
    "pointCount": 22,
@@ -2155,35 +2216,7 @@
    ]
   },
   {
-   "id": "北海道:73",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "美馬牛神楽線",
-   "ref": "580",
-   "highway": "secondary",
-   "lengthKm": 8.26,
-   "curviness": 160.2,
-   "flow": 17,
-   "turnCount": 78,
-   "score": 51.4,
-   "baseScore": 48.5,
-   "spotCount": 1,
-   "polyline": "udxhGydhdZeHhCoFk@iu@vGBfCkC|J{JjKgIvEyBbCKvCtBfHiCd@oZjT_LzCuD|FcBpAcBMuNaGk]xF{JqAoDr@aGxDoa@zK}IhGkAjCVxEbAlAjDnAjA`DQvD_DlBcKfAmHwAeBn@eEnD{Ef@qNgBmPQgBg@wBiBmAkCyBgIeDwAwPnE",
-   "pointCount": 44,
-   "start": [
-    43.546512,
-    142.423975
-   ],
-   "end": [
-    43.606646,
-    142.400398
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:74",
+   "id": "北海道:75",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "国道333号",
@@ -2193,8 +2226,8 @@
    "curviness": 249.1,
    "flow": 18.9,
    "turnCount": 162,
-   "score": 51.4,
-   "baseScore": 51.4,
+   "score": 60.7,
+   "baseScore": 60.7,
    "spotCount": 0,
    "polyline": "obwjG{ichZ^hBvG|GfClFfJ|GpL~NpJpFb@bD_@jAgAr@kT_C_D}BmJyOaAY[`A|Bva@]dAgA`@s@u@sDwN_FeIcB_JcC_Io@c@{@v@}@bMR`Ku@bJ_BFyEaKaAy@gCP}@`B_AnKB`F~Kpf@LvCc@fJwA`EqB|AsG`EqFfA_BdA{@jByAvIgChH_@dH{@`C{A`B_GjCiFnIKhBp@nC`LzE\\x@QdBiDv@{@`BJtIfBlEXzB_AlBuLxEa@jMaF`Ob@vTtAbBvF`@f@`Bc@|A_JnLJdLfAlFm@~AiDt@o@fBbAdWu@hEoGxKEjBv@xFmAhY}D~FuBxHyC`E_A|E_DpIWnCX`Li@zQdB|I_@bB",
    "pointCount": 92,
@@ -2212,7 +2245,7 @@
    ]
   },
   {
-   "id": "北海道:75",
+   "id": "北海道:76",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "士別滝上線",
@@ -2222,8 +2255,8 @@
    "curviness": 227,
    "flow": 17.1,
    "turnCount": 115,
-   "score": 51.4,
-   "baseScore": 51.4,
+   "score": 60.5,
+   "baseScore": 60.5,
    "spotCount": 0,
    "polyline": "indlGghagZ`@vFE`HqDtWoAxO}D`JC|DvFbMdH|FbHvNbI`AbBjAfIvUGxC_HhUNnClD|I`@rDaBzBkFpAcElFs@~BXtH`@rBfA~A|IfDlB|AjCnKjCvCzLEfApATtC[dBkAz@oEp@qG_@gB`@u@|B?rAvA`Ka@hAqANaCaAaC}BmHkVgAuAcATgGlUnBxf@bC~JKfBs@OmDgJgHwKcVqO_BOa@xAn@jCnHfHzLfP|ApE",
    "pointCount": 61,
@@ -2241,35 +2274,6 @@
    ]
   },
   {
-   "id": "北海道:76",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "林道大山線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.29,
-   "curviness": 217.6,
-   "flow": 17.3,
-   "turnCount": 54,
-   "score": 51.4,
-   "baseScore": 51.4,
-   "spotCount": 0,
-   "polyline": "czpmGe}xiZsElG@dDj@z@lAPzByB|@MbD~AbF|LzQxWfC|MfIxP@xB}DxFkAn@aB_@cEaPiL}QmHcGoFR_Ct@gHdOiD|BsBa@uCqCkCeI}IqE{AH}JlFmDr@",
-   "pointCount": 30,
-   "start": [
-    44.328177,
-    143.328987
-   ],
-   "end": [
-    44.338015,
-    143.318789
-   ],
-   "tags": [
-    "flowing",
-    "caution"
-   ]
-  },
-  {
    "id": "北海道:77",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -2280,8 +2284,8 @@
    "curviness": 210.9,
    "flow": 17.7,
    "turnCount": 138,
-   "score": 51.3,
-   "baseScore": 51.3,
+   "score": 60.3,
+   "baseScore": 60.3,
    "spotCount": 0,
    "polyline": "_z{cG{nb~Yt@gCt@[xLzBlCdDhGBjCxAfD`@fHoDpBO|VxCbBSlE_FnD}BpKkEtDb@jBiAfHhAdFiC|B?rEbA^tA_@tALbApGrDlCmAdDj@bGfHrBdAlF~IxAdEjFkEbMqR|HmDxDeFnF}ApI{J|Gu@hHmDbIShOmPhBUdFrApBSzBkDrEqOfSwPrAkClBeHvKcEvFhAfBWz@{@~AmKe@qJh@{DxOkOr@sBT{Dr@}ArHmCx@aBV_Dp@{A|C_@fAcAxD}Zi@kIZ}BfFiKnF{VjCsHzDuCpVyBdKuHtKyBvK_G",
    "pointCount": 77,
@@ -2308,8 +2312,8 @@
    "curviness": 211.9,
    "flow": 16.8,
    "turnCount": 238,
-   "score": 51.3,
-   "baseScore": 51.3,
+   "score": 60.3,
+   "baseScore": 60.3,
    "spotCount": 0,
    "polyline": "mitdGoteyYvAe@zDlB~FKzCqAjAcBjAsDvBkRh@yLzBoFj@cFrCiCj@eBUkBs@w@yIy@wAw@yBqHyFcDqDcPGuBl@wA~JaAdAaBEmB_DeO@kPcAeFyAoBuBkA{Ne@wAu@gGoSsDyGcAiAuLoGeGkLuFaEwG{TuFwKcKyN{JqDoEd@aRKyBqCi@qDd@aDbCiEo@yAqBdBqBtFw@xDc@lGe@Vu@k@w@}BHuEnDgV^s@bJgC|@iBq@eQ}AuG_LoDsA?sPlGqCy@{CoCiC[yAj@a@z@c@bGgBr@kI}CsEkEcBuCiB{FsBwLGgIjAoDdB_BhRqH\\qCs@kBsAa@mAZ{UfLyAOy@mBTwCn[k^xAoEOmEiAeCwB{@iGQqAq@uAsBkJmh@SaHb@qh@g@qJXyDzKki@`BoB`FcBdAiArByE`@aCKqEkDgNa@{DReDfBqEf@gNaAgCiEiCi@aAg@yDX{JfFgK|E`@rA_@b@{@pAuJ|G}EbHqQOiGw@cD{MaJ_FuQjBs]",
    "pointCount": 132,
@@ -2330,93 +2334,6 @@
    "id": "北海道:79",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "然別余市線",
-   "ref": "755",
-   "highway": "secondary",
-   "lengthKm": 6.8,
-   "curviness": 179.5,
-   "flow": 19.1,
-   "turnCount": 64,
-   "score": 51.3,
-   "baseScore": 51.3,
-   "spotCount": 0,
-   "polyline": "}amfGczbzYl@hCvHzKrAv@~Ft@tCtC\\|@RlFpAjE_BlJBtBv@|B|@n@dJzAdDtFtL?nHlIzMrLfCbAhH|@jBdBdE`JhKsLzAqJpFdLfB`@fA?jB_BlDwIhPoIjAJlDxCvNzG|WjVbFlLbPfRhAx@zFjAlDnE~H|S@jKuBbT",
-   "pointCount": 42,
-   "start": [
-    43.162068,
-    140.758257
-   ],
-   "end": [
-    43.120768,
-    140.723915
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:80",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "八雲中部広域農道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.3,
-   "curviness": 184.4,
-   "flow": 19.3,
-   "turnCount": 41,
-   "score": 51.2,
-   "baseScore": 51.2,
-   "spotCount": 0,
-   "polyline": "y~{`Ge~~vYbPzGx@bAtDlLxFtI}BnKXjDzB`HzFtHrFpDpIfCvEdDbQ|BPz@o@rFp@tChD^dH~FfAGxAqA~FsNVwJuC{P`C}V@yEUmAkHqKy@mM",
-   "pointCount": 28,
-   "start": [
-    42.255326,
-    140.246911
-   ],
-   "end": [
-    42.239229,
-    140.246006
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:81",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "北海道道746号高見西舎線 (Takami Nishicha line)",
-   "ref": "746",
-   "highway": "secondary",
-   "lengthKm": 4.57,
-   "curviness": 323.9,
-   "flow": 23.9,
-   "turnCount": 62,
-   "score": 51.2,
-   "baseScore": 64.2,
-   "spotCount": 0,
-   "polyline": "ebiaG{dffZLuF|@uFfDqGTwCiAyO|AcHf@wJn@gAjBhCx@XnF{C|BqFvAh@bD}B`BEnDdClBX|Bs@nH}J`@}APaFpAaDWeI^qBnGoBxF{FhC_FjL_J|@yG~@yBtDaBjAgB`BeGnDuBrDaE~H_AhHuF~BcI`AkH",
-   "pointCount": 40,
-   "start": [
-    42.322426,
-    142.741423
-   ],
-   "end": [
-    42.298167,
-    142.775273
-   ],
-   "boost": -13,
-   "tags": [
-    "winding",
-    "forest",
-    "caution"
-   ]
-  },
-  {
-   "id": "北海道:82",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "小樽定山渓線",
    "ref": "1",
    "highway": "primary",
@@ -2424,8 +2341,8 @@
    "curviness": 205.4,
    "flow": 17.9,
    "turnCount": 144,
-   "score": 51.2,
-   "baseScore": 51.2,
+   "score": 60.3,
+   "baseScore": 60.3,
    "spotCount": 0,
    "polyline": "q_efGqwx{YdM`O|D~B|ANjVeDxG~DbA@d@iAE_AyD}AKu@fEe@J}@mFqBEgA|KZhAkAzAkGnDkG|KkB`GiFdG_Bl@}Ah@qHh@}AfByBtFaBl@iARwRdCcMhLuPbD}IdOgOrHqOfCo@dCzAh@vA`AbMz@tBxAvA`Dh@fMk@vA{@^_Du@gBsICoCw@{CeDwAsFKcDh@_N_Byf@dHqa@v@}BfHmL`FgEpLkk@jBaClEs@tHyD|ImCxQ?lAL`A~@tFbObCj@jByA\\sBQgCaEyG_A}FFqZz@mPa@wB_DsEKcClCeOjAcNpC_JtFgVzF}JdBi@",
    "pointCount": 82,
@@ -2443,66 +2360,92 @@
    ]
   },
   {
-   "id": "北海道:83",
+   "id": "北海道:80",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "宿志別振内停車場線",
-   "ref": "638",
-   "highway": "secondary",
-   "lengthKm": 8.3,
-   "curviness": 471.2,
-   "flow": 25.7,
-   "turnCount": 152,
-   "score": 51.1,
-   "baseScore": 76.1,
+   "name": "林道大山線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.29,
+   "curviness": 217.6,
+   "flow": 17.3,
+   "turnCount": 54,
+   "score": 60.3,
+   "baseScore": 60.3,
    "spotCount": 0,
-   "polyline": "ghxcGg}vcZyAyI?oBdEwGv@sCyBuPk@cRLeDfBeJHmKXcBtCuEnSwCvF}D~FyAxAoAbAcMhLuYpAkGNsItG{N`AqHbB_BdEaBr@iBr@gGBiI`AiDlAsNYoKtCaJxAuIuBsOrCe@vBkES_D_BiASmBrCaAzCjHzCi@dAqANkBbBmA|AqIhAs@Yk@uAPg@nDwBnA_FwD_@cDkA{@k@aBTcCwAiAm@{GaAoD_Bm@k@gAuAW_@}Bz@wB]{@eBcA\\q@`DCn@mAI}@oBmABu@bHPXuAuBuABw@lCr@vAKpIcN`ByA",
-   "pointCount": 79,
+   "polyline": "czpmGe}xiZsElG@dDj@z@lAPzByB|@MbD~AbF|LzQxWfC|MfIxP@xB}DxFkAn@aB_@cEaPiL}QmHcGoFR_Ct@gHdOiD|BsBa@uCqCkCeI}IqE{AH}JlFmDr@",
+   "pointCount": 30,
    "start": [
-    42.727884,
-    142.335722
+    44.328177,
+    143.328987
    ],
    "end": [
-    42.7083,
-    142.402277
+    44.338015,
+    143.318789
    ],
-   "boost": -25,
    "tags": [
-    "winding",
-    "forest",
+    "flowing",
     "caution"
    ]
   },
   {
-   "id": "北海道:84",
+   "id": "北海道:81",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "町道 幾代線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.06,
-   "curviness": 188.9,
-   "flow": 19.3,
-   "turnCount": 30,
-   "score": 50.9,
-   "baseScore": 50.9,
+   "name": "然別余市線",
+   "ref": "755",
+   "highway": "secondary",
+   "lengthKm": 6.8,
+   "curviness": 179.5,
+   "flow": 19.1,
+   "turnCount": 64,
+   "score": 60.2,
+   "baseScore": 60.2,
    "spotCount": 0,
-   "polyline": "qjuaG{xjuYsFuGiGeEsEiKwCwBgF_BwJaF{A`Kg@dAaOh@cQ_N}KyFJ_QrBeF{@mQuBcCwKqD",
-   "pointCount": 17,
+   "polyline": "}amfGczbzYl@hCvHzKrAv@~Ft@tCtC\\|@RlFpAjE_BlJBtBv@|B|@n@dJzAdDtFtL?nHlIzMrLfCbAhH|@jBdBdE`JhKsLzAqJpFdLfB`@fA?jB_BlDwIhPoIjAJlDxCvNzG|WjVbFlLbPfRhAx@zFjAlDnE~H|S@jKuBbT",
+   "pointCount": 42,
    "start": [
-    42.385211,
-    139.979818
+    43.162068,
+    140.758257
    ],
    "end": [
-    42.403108,
-    139.996071
+    43.120768,
+    140.723915
    ],
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "北海道:85",
+   "id": "北海道:82",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "八雲中部広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.3,
+   "curviness": 184.4,
+   "flow": 19.3,
+   "turnCount": 41,
+   "score": 60.1,
+   "baseScore": 60.1,
+   "spotCount": 0,
+   "polyline": "y~{`Ge~~vYbPzGx@bAtDlLxFtI}BnKXjDzB`HzFtHrFpDpIfCvEdDbQ|BPz@o@rFp@tChD^dH~FfAGxAqA~FsNVwJuC{P`C}V@yEUmAkHqKy@mM",
+   "pointCount": 28,
+   "start": [
+    42.255326,
+    140.246911
+   ],
+   "end": [
+    42.239229,
+    140.246006
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:83",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "士別滝上線",
@@ -2512,8 +2455,8 @@
    "curviness": 172.6,
    "flow": 22,
    "turnCount": 26,
-   "score": 50.9,
-   "baseScore": 50.9,
+   "score": 59.9,
+   "baseScore": 59.9,
    "spotCount": 0,
    "polyline": "uoglGa|_fZqC~L}FrDKpF_DpEgCbIAvNjEjBf@v@ApWsSfiA_HlSsEzJ`GlF`BrO",
    "pointCount": 15,
@@ -2530,7 +2473,7 @@
    ]
   },
   {
-   "id": "北海道:86",
+   "id": "北海道:84",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "洞爺湖登別線",
@@ -2540,8 +2483,8 @@
    "curviness": 207.3,
    "flow": 16.6,
    "turnCount": 239,
-   "score": 50.8,
-   "baseScore": 50.8,
+   "score": 59.8,
+   "baseScore": 59.8,
    "spotCount": 0,
    "polyline": "qzubGs}a|YzEwPb@w@dDkApA}F{@gE`AwETgIq@aAgCKw@wAC_BfBqFFyA}BaDMoDrBuFxE}GMiH`@mDpDuFtCmHdMcL?iCuC}Dd@aBnWGf@Px@dDjAt@h@e@|@gDjBoBzBE|BlA`BFjDoDAsDn@mC~Cs@jDJ~@g@jBgBbAkGjGgDvDcApAd@zG|J|E~BzSaEzLc@hHaDdB`@bD`ElLxJfIhAzCKzAy@hBwEv@aGY}Jp@{DdBwBbCm@rL?~NhEfBfDT|Bg@nIHbC|A~DfBhAfCF`I}D|QoBxDgCbAgC~Bo`@hAaH`N}QjG}Q`DsGL{BWaBoGkSDkChA_C~Bo@ve@vGpAhAnQzXxC~@xAQdKqGfU{HpCiFv@uPrDmJz@_FtCil@lAwFnGcRd@uE`HX`Da@hDmCpBuFReCO{Ok@{CmFkNKgEzAcHpAwBpF}BfAaBzLwa@rIo_@HwE_BeMAaCdAsI~@gBfCu@vJlDtIiBh]tBjC{@tBsB",
    "pointCount": 129,
@@ -2559,6 +2502,62 @@
    ]
   },
   {
+   "id": "北海道:85",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "美馬牛神楽線",
+   "ref": "580",
+   "highway": "secondary",
+   "lengthKm": 8.26,
+   "curviness": 160.2,
+   "flow": 17,
+   "turnCount": 78,
+   "score": 59.8,
+   "baseScore": 56.9,
+   "spotCount": 1,
+   "polyline": "udxhGydhdZeHhCoFk@iu@vGBfCkC|J{JjKgIvEyBbCKvCtBfHiCd@oZjT_LzCuD|FcBpAcBMuNaGk]xF{JqAoDr@aGxDoa@zK}IhGkAjCVxEbAlAjDnAjA`DQvD_DlBcKfAmHwAeBn@eEnD{Ef@qNgBmPQgBg@wBiBmAkCyBgIeDwAwPnE",
+   "pointCount": 44,
+   "start": [
+    43.546512,
+    142.423975
+   ],
+   "end": [
+    43.606646,
+    142.400398
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:86",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "町道 幾代線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 3.06,
+   "curviness": 188.9,
+   "flow": 19.3,
+   "turnCount": 30,
+   "score": 59.7,
+   "baseScore": 59.7,
+   "spotCount": 0,
+   "polyline": "qjuaG{xjuYsFuGiGeEsEiKwCwBgF_BwJaF{A`Kg@dAaOh@cQ_N}KyFJ_QrBeF{@mQuBcCwKqD",
+   "pointCount": 17,
+   "start": [
+    42.385211,
+    139.979818
+   ],
+   "end": [
+    42.403108,
+    139.996071
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
    "id": "北海道:87",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -2569,8 +2568,8 @@
    "curviness": 203.1,
    "flow": 15.8,
    "turnCount": 156,
-   "score": 50.7,
-   "baseScore": 50.7,
+   "score": 59.5,
+   "baseScore": 59.5,
    "spotCount": 0,
    "polyline": "w`yqGuhbbZfBzQe@bC_E`JkBfQjLho@gFzk@sH|K{FbWmS`]_AlEsArPiBfGiItH{IbGiB_@oFcGyAAgAp@sB|Gc@pKsCjFsA`GN~Zp@~Cx@l@n@?hDkCrA`At@tJa@bK\\~DrJrKrANdCk@zDrGpFl@jFfHzCbJtDvEPfDaAbDoHvESfCv@lAlANvCiDnBWnAx@PfBu@~C{EhCoDfFkD|AmGj@aAtBOzGs@tCuA`BaGbB_BjAaFhJm@|CFpEz@dIxA|DrJzHrKzPzHvD`B`DlFvRu@rMMvQoEhKsDzPyCbDeJvAkBjAoClEkEhKSvE",
    "pointCount": 81,
@@ -2590,62 +2589,6 @@
    "id": "北海道:88",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "東藻琴豊富線",
-   "ref": "995",
-   "highway": "secondary",
-   "lengthKm": 16.65,
-   "curviness": 193.9,
-   "flow": 15.8,
-   "turnCount": 204,
-   "score": 50.6,
-   "baseScore": 50.6,
-   "spotCount": 0,
-   "polyline": "madjGiiaoZzBiGRaDOiDoI}m@CsEp@uEdBeD~LsJxCuEvPgk@hE{SdAiIbDuH~BoCfFiDvGeIbIgEtAyBt@sGw@kEgDcD_CKyXtCiBm@eFyEoMkCkCcDwNyb@_CcByHiAqBoBsEkUCgDfAwDdGmE^wA?sCsAkCy@WcIHiDm@q@gAWkDfAsDhPmJh@{Cg@kCuAsAoAMkFlA}B}BKuEvC{JPoDs@yCiEaGc@uDNkCp@{BhC_CdG{Az@aBNsB[{Bw@kAoOqH}@oCDuB~AgKhBmDpCClJdE|II`Cs@bF}FrMkB`Ft@zEErIbFxGhGfCNlAgBDgCmEqIOuCbF{I|BqR`BqHr@}AvF_FdJ}C~AoArDcF\\wDcBqFkIaEoAuBO}B^sBvDcEf@kC{@mBoFsAeC_CsAmCYwFbBwHW_DwDuEgGqDq@iBkBqdAeB}QqEyI{IaFiGgI",
-   "pointCount": 117,
-   "start": [
-    43.771274,
-    144.191093
-   ],
-   "end": [
-    43.766997,
-    144.3161
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:89",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "新富様似停車場線",
-   "ref": "233",
-   "highway": "secondary",
-   "lengthKm": 5.16,
-   "curviness": 194,
-   "flow": 17.6,
-   "turnCount": 57,
-   "score": 50.5,
-   "baseScore": 50.5,
-   "spotCount": 0,
-   "polyline": "qyq`Gs|ygZnLc@jInFrBTtFa@lC|@lXja@r@~C~@jQhDnB`C@`MoKtC}Ax^gDdO}BxGdCtBrEzAjJfCzFp@nIvEjLG|FbAPx@cC|BqBx@h@fAxEQrB_ClFiAdJLzF}CpO",
-   "pointCount": 32,
-   "start": [
-    42.203295,
-    143.006339
-   ],
-   "end": [
-    42.175604,
-    142.98167
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:90",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "岩内洞爺線",
    "ref": "66",
    "highway": "primary",
@@ -2653,8 +2596,8 @@
    "curviness": 204.2,
    "flow": 18.4,
    "turnCount": 61,
-   "score": 50.5,
-   "baseScore": 50.5,
+   "score": 59.4,
+   "baseScore": 59.4,
    "spotCount": 0,
    "polyline": "{~odGsqdyYX`CuCnOgBvDyGnE{B`DeAnDw@vIy@fCuDhD_IfBqAfBw@`EdBlSKtOr@|HfBzL~CfMxHxLr@pBJnDcAnXf@jClDtFyKzIqAjBEf_@hClJKjCkAdAiBk@}BsHmBs@}AnCoAtEOv[x@bB|E`DfBhF",
    "pointCount": 39,
@@ -2671,6 +2614,62 @@
    ]
   },
   {
+   "id": "北海道:89",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "東藻琴豊富線",
+   "ref": "995",
+   "highway": "secondary",
+   "lengthKm": 16.65,
+   "curviness": 193.9,
+   "flow": 15.8,
+   "turnCount": 204,
+   "score": 59.4,
+   "baseScore": 59.4,
+   "spotCount": 0,
+   "polyline": "madjGiiaoZzBiGRaDOiDoI}m@CsEp@uEdBeD~LsJxCuEvPgk@hE{SdAiIbDuH~BoCfFiDvGeIbIgEtAyBt@sGw@kEgDcD_CKyXtCiBm@eFyEoMkCkCcDwNyb@_CcByHiAqBoBsEkUCgDfAwDdGmE^wA?sCsAkCy@WcIHiDm@q@gAWkDfAsDhPmJh@{Cg@kCuAsAoAMkFlA}B}BKuEvC{JPoDs@yCiEaGc@uDNkCp@{BhC_CdG{Az@aBNsB[{Bw@kAoOqH}@oCDuB~AgKhBmDpCClJdE|II`Cs@bF}FrMkB`Ft@zEErIbFxGhGfCNlAgBDgCmEqIOuCbF{I|BqR`BqHr@}AvF_FdJ}C~AoArDcF\\wDcBqFkIaEoAuBO}B^sBvDcEf@kC{@mBoFsAeC_CsAmCYwFbBwHW_DwDuEgGqDq@iBkBqdAeB}QqEyI{IaFiGgI",
+   "pointCount": 117,
+   "start": [
+    43.771274,
+    144.191093
+   ],
+   "end": [
+    43.766997,
+    144.3161
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:90",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "新富様似停車場線",
+   "ref": "233",
+   "highway": "secondary",
+   "lengthKm": 5.16,
+   "curviness": 194,
+   "flow": 17.6,
+   "turnCount": 57,
+   "score": 59.2,
+   "baseScore": 59.2,
+   "spotCount": 0,
+   "polyline": "qyq`Gs|ygZnLc@jInFrBTtFa@lC|@lXja@r@~C~@jQhDnB`C@`MoKtC}Ax^gDdO}BxGdCtBrEzAjJfCzFp@nIvEjLG|FbAPx@cC|BqBx@h@fAxEQrB_ClFiAdJLzF}CpO",
+   "pointCount": 32,
+   "start": [
+    42.203295,
+    143.006339
+   ],
+   "end": [
+    42.175604,
+    142.98167
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
    "id": "北海道:91",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -2681,8 +2680,8 @@
    "curviness": 171.3,
    "flow": 20.7,
    "turnCount": 38,
-   "score": 50.1,
-   "baseScore": 50.1,
+   "score": 59,
+   "baseScore": 59,
    "spotCount": 0,
    "polyline": "eaihG}tppZcD}Dy@yCcIqf@mDoJqMaTkBy@eTqAsIuGmDgAaEPoMtDqBoJGiDlDePFaFu@aEiIeXv@{DnG{EiBaG}F_A`C}RMaCkCoMJ_E",
    "pointCount": 26,
@@ -2709,8 +2708,8 @@
    "curviness": 200.8,
    "flow": 16.9,
    "turnCount": 52,
-   "score": 50.1,
-   "baseScore": 50.1,
+   "score": 58.8,
+   "baseScore": 58.8,
    "spotCount": 0,
    "polyline": "qalfGqcjoZwFiF_EoN}DiHw@sGmA}@gEPAeBlCqDBuBc@wAwCuAaAoAeBiIcGeBqKnAaJeF_AiAyJkWb@eLsCgNW{OsEqOcHe^LsChG_b@`D_I",
    "pointCount": 27,
@@ -2737,8 +2736,8 @@
    "curviness": 206.7,
    "flow": 16.7,
    "turnCount": 44,
-   "score": 50,
-   "baseScore": 50,
+   "score": 58.6,
+   "baseScore": 58.6,
    "spotCount": 0,
    "polyline": "mhtcGqekzY@sCoAwKt@qSoBoO@mChA{GhGqFdGwTvGuLf@_HWi`@_ByJxBoAp@gBnDwVjAwB~CSv@h@v@xBRhXfBzA|B}@",
    "pointCount": 23,
@@ -2758,6 +2757,31 @@
    "id": "北海道:94",
    "region": "hokkaido",
    "regionName": "北海道",
+   "name": "霧多布岬線",
+   "ref": "1039",
+   "highway": "secondary",
+   "lengthKm": 3.97,
+   "curviness": 149.6,
+   "flow": 20.5,
+   "turnCount": 29,
+   "score": 58.6,
+   "baseScore": 58.6,
+   "spotCount": 0,
+   "polyline": "yw|eGik_uZkDxDeItBsAfJuB~Hi@tH`BdSb@jLjCjSQzI~BjNTtWlB`J~H~G_BdNu@~A{@VoDc@oE`AzJpfA",
+   "pointCount": 20,
+   "start": [
+    43.078532,
+    145.164211
+   ],
+   "end": [
+    43.079132,
+    145.123116
+   ]
+  },
+  {
+   "id": "北海道:95",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上藻別上渚滑停車場線",
    "ref": "553",
    "highway": "secondary",
@@ -2765,8 +2789,8 @@
    "curviness": 225.3,
    "flow": 15.5,
    "turnCount": 49,
-   "score": 50,
-   "baseScore": 50,
+   "score": 58.6,
+   "baseScore": 58.6,
    "spotCount": 0,
    "polyline": "wa~lGq`{iZnErRBdIpB`QhA`DrCxDj@tBtC|Ze@fCeFxBQrCj@nA|D|@jBvAbEdJl@bCHpCsBhK?tCl@vE}@hNdCzIVpCOpCkAfEoAxAaJhAoHfG",
    "pointCount": 28,
@@ -2783,31 +2807,6 @@
    ]
   },
   {
-   "id": "北海道:95",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "霧多布岬線",
-   "ref": "1039",
-   "highway": "secondary",
-   "lengthKm": 3.97,
-   "curviness": 149.6,
-   "flow": 20.5,
-   "turnCount": 29,
-   "score": 49.9,
-   "baseScore": 49.9,
-   "spotCount": 0,
-   "polyline": "yw|eGik_uZkDxDeItBsAfJuB~Hi@tH`BdSb@jLjCjSQzI~BjNTtWlB`J~H~G_BdNu@~A{@VoDc@oE`AzJpfA",
-   "pointCount": 20,
-   "start": [
-    43.078532,
-    145.164211
-   ],
-   "end": [
-    43.079132,
-    145.123116
-   ]
-  },
-  {
    "id": "北海道:96",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -2818,8 +2817,8 @@
    "curviness": 169.9,
    "flow": 19,
    "turnCount": 34,
-   "score": 49.8,
-   "baseScore": 49.8,
+   "score": 58.4,
+   "baseScore": 58.4,
    "spotCount": 0,
    "polyline": "k_ckGm`eoZ~Gk]`AoBpBQlU~LnAs@hEqQ`BoBdBFhPvGnCBdBcC~Hwb@nAsChC[d]|PzBJlB}BdGyYlC_CfAD",
    "pointCount": 21,
@@ -2839,34 +2838,6 @@
    "id": "北海道:97",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "砂川歌志内線",
-   "ref": "1027",
-   "highway": "secondary",
-   "lengthKm": 11.98,
-   "curviness": 171,
-   "flow": 16.9,
-   "turnCount": 121,
-   "score": 49.7,
-   "baseScore": 49.7,
-   "spotCount": 0,
-   "polyline": "sophGqryaZ{A~@kASiPiVyC}BkDi@qC\\iC~AmGhLcCpAkCMqQ}HuE?gCfBkDxEgBpFB~Cd@`CdCtC~LJnDlAxAfC`CtJx@`AlD{Bx@oFrD@`B{@dAT?zJp@rDjJfInFhQc@pBsD~D]pABlApCjD@hD}AbIqDhCeAbBcBhXmAbFuAvBm[tWoAhCY`CTfEhJxe@pArC~GlHzAnEzCjVbBrYwCnQW`VsArFgFrHkBrGaD|c@hAdf@vCzNrFxKl@~Kq@jVn@vW_Arr@oSaD",
-   "pointCount": 69,
-   "start": [
-    43.507302,
-    142.021691
-   ],
-   "end": [
-    43.519115,
-    141.929591
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:98",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "遠軽雄武線",
    "ref": "137",
    "highway": "primary",
@@ -2874,8 +2845,8 @@
    "curviness": 184,
    "flow": 16.3,
    "turnCount": 329,
-   "score": 49.7,
-   "baseScore": 49.7,
+   "score": 58.4,
+   "baseScore": 58.4,
    "spotCount": 0,
    "polyline": "qd~kGaiqjZ}BbIdAxTaL~c@DbJaDja@gP~Nu@vAyUzdAsBd@kKkFwAO{HbIaMpEgMfT@fKmHlNIvKiAdE}AhBaGtDcBjIiHnIkF`D{HbAeWb[g@xCZbIxA`AzFWp@z@D`CsDhMqAxBqCdBgIdBaBxCKvB`@`CvHvQ`Ex^?fCcCjIVbFhAtBxBpAnPM`BXdBbBtCdH|H`@`H~DhE|Lx@zWk@rEqAtBaF~DsHbOmB?uCqEeBg@gKpHmAVaMsDeNqQgAq@aCZaAxBs@`JqIpF_MfSq@~CApMe@xDqBrI_CbEqBdHqEdB_Bm@eB_LViLUs@kAEo@`BiAzJBbMf@|Fa@xBkNjIwItSmAb@wF?sCrAwAxBuC`IhRnIhLhKdOv]~ElTzMlGqBbIsB|Du@lFK~LbAzGFfD{BbLObLp@nNhA|GMhCe@jAcAbA{BTwToFqEMaOrCiCdAwDnDyAPwAsAi@kHk@wAuDkEgCUw@`@mD~H}D`GeCdIIzH{DvHTrDlCnGf@nCk@pDuEnEWrC`AxGw@lKh@fB|EtFjChIbFfJ`Ax@zADlDaCrFoAtLcG~Be@nAVdDlDtFrBx@tA`AjKfH|UxCtHEdG`AbKS~C{AzF|AjMw@~Hd@jIu@zIxBrJc@rWfCxLpB`]~ErYz@rUhCzJpBbPpAfDdEzFVzCm@nCiFzHeM|NiH`NyHlKqAtD",
    "pointCount": 181,
@@ -2892,31 +2863,56 @@
    ]
   },
   {
-   "id": "北海道:99",
+   "id": "北海道:98",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "瑞穂東川線",
-   "ref": "611",
+   "name": "砂川歌志内線",
+   "ref": "1027",
    "highway": "secondary",
-   "lengthKm": 6.25,
-   "curviness": 198.7,
-   "flow": 15.9,
-   "turnCount": 78,
-   "score": 49.6,
-   "baseScore": 49.6,
+   "lengthKm": 11.98,
+   "curviness": 171,
+   "flow": 16.9,
+   "turnCount": 121,
+   "score": 58.3,
+   "baseScore": 58.3,
    "spotCount": 0,
-   "polyline": "aoziGsireZfSwN`BwBdLmn@fDdE|EzPpBxBxCVvHyB~B`AbM|NdCn@rKh@~CdBr@dAh@hD@jBiA`IApEd@~CdAlA~CpAfH}@pJfDrC?f@tGWpD}FzOq@lEp@zEhBpCbCh@nIaC~GwD|ByDz@mCp@kIc@qXbAoCbBaAjDb@|D`HLhMV|Dr@xB",
-   "pointCount": 45,
+   "polyline": "sophGqryaZ{A~@kASiPiVyC}BkDi@qC\\iC~AmGhLcCpAkCMqQ}HuE?gCfBkDxEgBpFB~Cd@`CdCtC~LJnDlAxAfC`CtJx@`AlD{Bx@oFrD@`B{@dAT?zJp@rDjJfInFhQc@pBsD~D]pABlApCjD@hD}AbIqDhCeAbBcBhXmAbFuAvBm[tWoAhCY`CTfEhJxe@pArC~GlHzAnEzCjVbBrYwCnQW`VsArFgFrHkBrGaD|c@hAdf@vCzNrFxKl@~Kq@jVn@vW_Arr@oSaD",
+   "pointCount": 69,
    "start": [
-    43.722254,
-    142.639777
+    43.507302,
+    142.021691
    ],
    "end": [
-    43.692436,
-    142.63263
+    43.519115,
+    141.929591
    ],
    "tags": [
     "flowing"
+   ]
+  },
+  {
+   "id": "北海道:99",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "船泊港利礼公園線",
+   "ref": "507",
+   "highway": "secondary",
+   "lengthKm": 10.35,
+   "curviness": 172.7,
+   "flow": 17,
+   "turnCount": 105,
+   "score": 58.3,
+   "baseScore": 58.3,
+   "spotCount": 0,
+   "polyline": "aantGspx{YhKdCjIaEzF_BvMBnAg@zF_HjCs@dFFvImIhLyA~F`@vJaBbBlDxN`KxDkClC`BhC`C`MhUtA`OaA~HFlDjArFjCdGr@`MnE`TpBxEjCvWAdD{FxV_CtROhMqDnSg@dHwItTiAjI{EnCwBhG{G|HeE|@k@lAOdEg@lB}M`OkL~@yGkBk@n@qBjNwB`FqJlEaJzAkEdCoBbHQjI{MxNwHhXkBjCmCp@_FkBmPvD",
+   "pointCount": 60,
+   "start": [
+    45.460813,
+    141.033219
+   ],
+   "end": [
+    45.463138,
+    140.968024
    ]
   },
   {
@@ -2930,8 +2926,8 @@
    "curviness": 186.4,
    "flow": 16,
    "turnCount": 125,
-   "score": 49.6,
-   "baseScore": 49.6,
+   "score": 58.2,
+   "baseScore": 58.2,
    "spotCount": 0,
    "polyline": "qwokG}oncZtDSdK{FvK_ArDb@`KhE`DPlO{FvQ}BhBlA`CbFvBjIbEnFrBhK~CpC|Tu@xNdC|MiBzQ~D|DdEvBj@rD_A|HKdE}@fGTjIuEvG{ApP[fEkCdC_HnBiVdAyFtI_V|C{ClELrOnM`A`BrHl@nD_C^qA@sCpAqBjAOhDrBnB}BzFwDl@yBe@qFJwAfEu@nAiB`AMnEz@~@bBgCvWh@~BnBtA~DaFvDkLhF}DxGeDvPqUrEqIlBkBlD_@hAX|KtOnAh@~BOzE}B",
    "pointCount": 70,
@@ -2951,31 +2947,6 @@
    "id": "北海道:101",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "船泊港利礼公園線",
-   "ref": "507",
-   "highway": "secondary",
-   "lengthKm": 10.35,
-   "curviness": 172.7,
-   "flow": 17,
-   "turnCount": 105,
-   "score": 49.6,
-   "baseScore": 49.6,
-   "spotCount": 0,
-   "polyline": "aantGspx{YhKdCjIaEzF_BvMBnAg@zF_HjCs@dFFvImIhLyA~F`@vJaBbBlDxN`KxDkClC`BhC`C`MhUtA`OaA~HFlDjArFjCdGr@`MnE`TpBxEjCvWAdD{FxV_CtROhMqDnSg@dHwItTiAjI{EnCwBhG{G|HeE|@k@lAOdEg@lB}M`OkL~@yGkBk@n@qBjNwB`FqJlEaJzAkEdCoBbHQjI{MxNwHhXkBjCmCp@_FkBmPvD",
-   "pointCount": 60,
-   "start": [
-    45.460813,
-    141.033219
-   ],
-   "end": [
-    45.463138,
-    140.968024
-   ]
-  },
-  {
-   "id": "北海道:102",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "椴法華港線",
    "ref": "231",
    "highway": "secondary",
@@ -2983,8 +2954,8 @@
    "curviness": 192.6,
    "flow": 17.3,
    "turnCount": 37,
-   "score": 49.5,
-   "baseScore": 49.5,
+   "score": 58.1,
+   "baseScore": 58.1,
    "spotCount": 0,
    "polyline": "w_i~F{{m|YI}@{CcGkAiI|HkFlE{IjHqUhAwUxCcLtEsHlNwMfEkF|AyFbEaXfBcFrByCOi@v@wCEwAsCuI_@eEeAkD",
    "pointCount": 22,
@@ -3009,35 +2980,35 @@
    ]
   },
   {
-   "id": "北海道:103",
+   "id": "北海道:102",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "上社名渕上湧別線",
-   "ref": "336",
+   "name": "瑞穂東川線",
+   "ref": "611",
    "highway": "secondary",
-   "lengthKm": 5.2,
-   "curviness": 184.5,
-   "flow": 17.1,
-   "turnCount": 56,
-   "score": 49.5,
-   "baseScore": 49.5,
+   "lengthKm": 6.25,
+   "curviness": 198.7,
+   "flow": 15.9,
+   "turnCount": 78,
+   "score": 58.1,
+   "baseScore": 58.1,
    "spotCount": 0,
-   "polyline": "q}dlGgfpjZvGfAjN[pDpCpQ`_@hJrNzAvM^pA`Ax@pBeArAyFvA}B|OuDxByBn@aCBuB}BsP@kFrFiOdGe@l@gGjAiDjAr@r@dJlAhD~FdEdLxLpGxElFjAfXu@zFvAlFw@lD~@",
-   "pointCount": 33,
+   "polyline": "aoziGsireZfSwN`BwBdLmn@fDdE|EzPpBxBxCVvHyB~B`AbM|NdCn@rKh@~CdBr@dAh@hD@jBiA`IApEd@~CdAlA~CpAfH}@pJfDrC?f@tGWpD}FzOq@lEp@zEhBpCbCh@nIaC~GwD|ByDz@mCp@kIc@qXbAoCbBaAjDb@|D`HLhMV|Dr@xB",
+   "pointCount": 45,
    "start": [
-    44.103449,
-    143.448203
+    43.722254,
+    142.639777
    ],
    "end": [
-    44.071102,
-    143.442735
+    43.692436,
+    142.63263
    ],
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "北海道:104",
+   "id": "北海道:103",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "野束清住線",
@@ -3047,8 +3018,8 @@
    "curviness": 159.5,
    "flow": 18.7,
    "turnCount": 49,
-   "score": 49.4,
-   "baseScore": 49.4,
+   "score": 58,
+   "baseScore": 58,
    "spotCount": 0,
    "polyline": "uoceGixsxYdBdEtA`Mg@ni@cApCmAl@_Cc@qMcOcAuMeGgK_A}NeA{BmBgA}BCaCrAmArC}A|KoAlBmAZ}HiCq`@oIiJq@}A`CcFxa@oFgEgAMcx@zAWcX",
    "pointCount": 28,
@@ -3065,6 +3036,34 @@
    ]
   },
   {
+   "id": "北海道:104",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "上社名渕上湧別線",
+   "ref": "336",
+   "highway": "secondary",
+   "lengthKm": 5.2,
+   "curviness": 184.5,
+   "flow": 17.1,
+   "turnCount": 56,
+   "score": 58,
+   "baseScore": 58,
+   "spotCount": 0,
+   "polyline": "q}dlGgfpjZvGfAjN[pDpCpQ`_@hJrNzAvM^pA`Ax@pBeArAyFvA}B|OuDxByBn@aCBuB}BsP@kFrFiOdGe@l@gGjAiDjAr@r@dJlAhD~FdEdLxLpGxElFjAfXu@zFvAlFw@lD~@",
+   "pointCount": 33,
+   "start": [
+    44.103449,
+    143.448203
+   ],
+   "end": [
+    44.071102,
+    143.442735
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
    "id": "北海道:105",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -3075,8 +3074,8 @@
    "curviness": 179.4,
    "flow": 16.5,
    "turnCount": 92,
-   "score": 49.3,
-   "baseScore": 49.3,
+   "score": 57.9,
+   "baseScore": 57.9,
    "spotCount": 0,
    "polyline": "}xx`GezcwYx@aNzZmMpLgSzBkJdEiHfC}HpAo@xKaAxIsNlCqCpDgB~@uAVuWkAeBwDsBkCuCeAcRgHaQQsCfAeRbFeTpFkJjDwP~BiGPiCWwBkAuAyEcC}AkB}DmIgMyKw@gEb@wB|C_G|EwDnCuIrDkCDqHlEsJb@oGcDu\\\\sCpBgCv@SvNbD|BW~@u@vEmI|CgPzIeHt@_BBuA",
    "pointCount": 53,
@@ -3096,118 +3095,6 @@
    "id": "北海道:106",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "遠野別保線",
-   "ref": "1003",
-   "highway": "secondary",
-   "lengthKm": 7.6,
-   "curviness": 170.5,
-   "flow": 17.3,
-   "turnCount": 75,
-   "score": 49.3,
-   "baseScore": 49.3,
-   "spotCount": 0,
-   "polyline": "y|leGqoypZkLzDuKqFyBeGyHmE}BWwFj@mEaAiGFmGjC_G`PiOfPgR^kGjF}@SeE{EkJa@{G_HeIwCeMg@kSjF_LqEiVyBiI?}OeK}DvCqA~FkAv@Q{BzA_GDaBsB}JaBgCaEuCoBcFmDoCqFaJeEcMu@kKeD{JiD_FgBmHsKcK",
-   "pointCount": 43,
-   "start": [
-    42.997414,
-    144.478808
-   ],
-   "end": [
-    43.051019,
-    144.498034
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:107",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "東山富良野停車場線",
-   "ref": "253",
-   "highway": "secondary",
-   "lengthKm": 4.47,
-   "curviness": 208,
-   "flow": 15.5,
-   "turnCount": 60,
-   "score": 49.3,
-   "baseScore": 49.3,
-   "spotCount": 0,
-   "polyline": "yxfgGm~{dZpDVjCnDjEr`@dGx\\r@rB`B`BzGbEhBDbBo@dBcC`HqSzB}AvAJpAdAp@jBtBfLlCrC~AP~@a@n@iA`AeGt@c@tAL`HrO~PpHlEvCdBrFEtE]bBaDbFmN`N_BpDEfAn@zCdCbB",
-   "pointCount": 36,
-   "start": [
-    43.293731,
-    142.525352
-   ],
-   "end": [
-    43.276745,
-    142.501016
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:108",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "奈江富良野線 (Nae Furano Line)",
-   "ref": "759;851",
-   "highway": "secondary",
-   "lengthKm": 10.55,
-   "curviness": 140.3,
-   "flow": 15.7,
-   "turnCount": 94,
-   "score": 49.3,
-   "baseScore": 46.5,
-   "spotCount": 1,
-   "polyline": "af|gGenbdZaPcFcCxPqBnEsMdGeHjAeEnDYbBPlC~DdHhEjBbIc@jB`@|CbDrCfH^nGqAxQ^`PeAtDgDrAmSsJoDf@wHnFiDEyNoCcK_LgG}BsB_@kQT}d@cIqCf@cDtHcDl@eB[yg@cOwH_AiLuCy@{As@{OwBwA_NmAqHmBgLTaQdD}BAsC_A}HaFiNqEuAqAeMySsKoDcIwKgBu@gCReI~C{CVyBaAwBiC",
-   "pointCount": 58,
-   "start": [
-    43.403372,
-    142.394747
-   ],
-   "end": [
-    43.469492,
-    142.39593
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:109",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "静内浦河線",
-   "ref": "1025",
-   "highway": "secondary",
-   "lengthKm": 5.43,
-   "curviness": 163.9,
-   "flow": 18.2,
-   "turnCount": 49,
-   "score": 49.2,
-   "baseScore": 49.2,
-   "spotCount": 0,
-   "polyline": "ao`aGwrmeZzQfHbG{Sn@kEHcOj@yGwBmJT}Jk@aLo@aCwCsDyJiGkL}LgJkBiBmFWmEbCoIhGqMfYoTtBwDt@oOSqC}@yAoHoC{@kAaA}DLqFjEsOfN`FnKoW",
-   "pointCount": 30,
-   "start": [
-    42.27841,
-    142.615638
-   ],
-   "end": [
-    42.271749,
-    142.657105
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:110",
-   "region": "hokkaido",
-   "regionName": "北海道",
    "name": "大津長節線",
    "ref": "912",
    "highway": "secondary",
@@ -3215,8 +3102,8 @@
    "curviness": 119.8,
    "flow": 21.2,
    "turnCount": 34,
-   "score": 49.2,
-   "baseScore": 49.2,
+   "score": 57.8,
+   "baseScore": 57.8,
    "spotCount": 0,
    "polyline": "cqocG}|vkZ`QnToLfQY|A\\dC`a@zj@zAvA~@a@jN{SpGtI~EbDnf@vl@nItKfDhHQ~AwEfCmEjH{CfHiDfC}IpCwC|CeD|HiB~U_Lb`@_CbCkHfC",
    "pointCount": 26,
@@ -3233,7 +3120,63 @@
    ]
   },
   {
-   "id": "北海道:111",
+   "id": "北海道:107",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "遠野別保線",
+   "ref": "1003",
+   "highway": "secondary",
+   "lengthKm": 7.6,
+   "curviness": 170.5,
+   "flow": 17.3,
+   "turnCount": 75,
+   "score": 57.8,
+   "baseScore": 57.8,
+   "spotCount": 0,
+   "polyline": "y|leGqoypZkLzDuKqFyBeGyHmE}BWwFj@mEaAiGFmGjC_G`PiOfPgR^kGjF}@SeE{EkJa@{G_HeIwCeMg@kSjF_LqEiVyBiI?}OeK}DvCqA~FkAv@Q{BzA_GDaBsB}JaBgCaEuCoBcFmDoCqFaJeEcMu@kKeD{JiD_FgBmHsKcK",
+   "pointCount": 43,
+   "start": [
+    42.997414,
+    144.478808
+   ],
+   "end": [
+    43.051019,
+    144.498034
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:108",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "東山富良野停車場線",
+   "ref": "253",
+   "highway": "secondary",
+   "lengthKm": 4.47,
+   "curviness": 208,
+   "flow": 15.5,
+   "turnCount": 60,
+   "score": 57.8,
+   "baseScore": 57.8,
+   "spotCount": 0,
+   "polyline": "yxfgGm~{dZpDVjCnDjEr`@dGx\\r@rB`B`BzGbEhBDbBo@dBcC`HqSzB}AvAJpAdAp@jBtBfLlCrC~AP~@a@n@iA`AeGt@c@tAL`HrO~PpHlEvCdBrFEtE]bBaDbFmN`N_BpDEfAn@zCdCbB",
+   "pointCount": 36,
+   "start": [
+    43.293731,
+    142.525352
+   ],
+   "end": [
+    43.276745,
+    142.501016
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:109",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "達布石狩沼田停車場線",
@@ -3243,8 +3186,8 @@
    "curviness": 167.3,
    "flow": 15.5,
    "turnCount": 273,
-   "score": 49.2,
-   "baseScore": 49.2,
+   "score": 57.8,
+   "baseScore": 57.8,
    "spotCount": 0,
    "polyline": "ydzjG}{eaZ{GoPmBkBiDMeYtHkAdC}B~Nw@tAuBdAqQvCgG{DsD@uFkOkUeOcJc_@aDyRgCoDeD}A}Cg@kM|BmBxAu@tDr@bIw@hGgAlAwE_@iAtADtA`BpFKpCg@dAgBdAcGpAeEjCoEuAeFJ_FbJoAt@uB@kDyAsE\\gEY_CiA{AuDaBaIyAgM_AaBc^iFgJqGqBa@qB`@aGfE{Qm@_JpB}C]uSwSeJcPuFkBcF{I{CwBwJ{MmGoD}BUgRpHkGJiD|@_CnBkH`TuAvAcIpCaAfBoBlHkAjA_FtBoCfNqSvWoPbXcBtBqKvD_AbAe@rFl@pCvApAhM~B|ApC^pDOpBeEtIuBjZgD~GmEzC{IWeC\\sQdM}KR{FiAgCf@wHlDkIrGg@vAMvF{@vDuPj]e@nIeBbHJdBrBtD\\`CqBzMy@fCeH~JcFjL{BZsFgBcCDoJhE_CzJcPhBuB|DeDf@sH_@sDsBiEc@mEkFiG}DsD_I{BoA_\\SyMlBmTrMaHdAuBtBuEnJyCjAeC@mPiG{EVaDtCsDfMoBdCkCh@yI{BoBh@sAvA_AvCoBdMgLr[_DfP_TdU_A`Es@lUeE`J}BX",
    "pointCount": 153,
@@ -3262,7 +3205,35 @@
    ]
   },
   {
-   "id": "北海道:112",
+   "id": "北海道:110",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "静内浦河線",
+   "ref": "1025",
+   "highway": "secondary",
+   "lengthKm": 5.43,
+   "curviness": 163.9,
+   "flow": 18.2,
+   "turnCount": 49,
+   "score": 57.7,
+   "baseScore": 57.7,
+   "spotCount": 0,
+   "polyline": "ao`aGwrmeZzQfHbG{Sn@kEHcOj@yGwBmJT}Jk@aLo@aCwCsDyJiGkL}LgJkBiBmFWmEbCoIhGqMfYoTtBwDt@oOSqC}@yAoHoC{@kAaA}DLqFjEsOfN`FnKoW",
+   "pointCount": 30,
+   "start": [
+    42.27841,
+    142.615638
+   ],
+   "end": [
+    42.271749,
+    142.657105
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:111",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "東大里瀬棚停車場線",
@@ -3272,8 +3243,8 @@
    "curviness": 162.1,
    "flow": 17.2,
    "turnCount": 96,
-   "score": 49.1,
-   "baseScore": 49.1,
+   "score": 57.6,
+   "baseScore": 57.6,
    "spotCount": 0,
    "polyline": "aqlbGe}ztY|TjMxBgGdNeGjBO|R|HzMnHfMp@bCSxHqCzGC|DdGf@nCAnFfAp@j@gAUyGsCgKJ_A|@KvAdD~ExCdLhNhc@|MrDbBbJfHtD~@lHTfIrDrKhCUzWZpDxGdOrC~NxBtGfAnLxAbBhF`B|CpExG|BzFs@jGFjN{BxI`AjH{@nQpAtHtC`K]lIvBcCxU_KrT}Cl^HfP",
    "pointCount": 53,
@@ -3290,7 +3261,7 @@
    ]
   },
   {
-   "id": "北海道:113",
+   "id": "北海道:112",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "美唄富良野線",
@@ -3300,8 +3271,8 @@
    "curviness": 215,
    "flow": 15.6,
    "turnCount": 102,
-   "score": 49.1,
-   "baseScore": 49.1,
+   "score": 57.6,
+   "baseScore": 57.6,
    "spotCount": 0,
    "polyline": "oatgGe~bbZdEgEpJwDnFmHzDiD|AwCrBwKfCsD`De@xNbG|A_ApAkIjA[~Cz@zAM|EiNz@kHnCqKpB}@hDt@bASpFwEn@_Bc@oKlC{LMkDq@eC_D_DeSsE_FaCcCkEy@oIZsWl@oFtA}CrKyKfAkCNeCwAyN|CmV`AcBjAc@hHd@lA{AVaBoAiJkBoFwByLVkCfDgG`@oCc@gFeFcIk@}DfD}Z",
    "pointCount": 55,
@@ -3318,6 +3289,34 @@
    ]
   },
   {
+   "id": "北海道:113",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "奈江富良野線 (Nae Furano Line)",
+   "ref": "759;851",
+   "highway": "secondary",
+   "lengthKm": 10.55,
+   "curviness": 140.3,
+   "flow": 15.7,
+   "turnCount": 94,
+   "score": 57.4,
+   "baseScore": 54.5,
+   "spotCount": 1,
+   "polyline": "af|gGenbdZaPcFcCxPqBnEsMdGeHjAeEnDYbBPlC~DdHhEjBbIc@jB`@|CbDrCfH^nGqAxQ^`PeAtDgDrAmSsJoDf@wHnFiDEyNoCcK_LgG}BsB_@kQT}d@cIqCf@cDtHcDl@eB[yg@cOwH_AiLuCy@{As@{OwBwA_NmAqHmBgLTaQdD}BAsC_A}HaFiNqEuAqAeMySsKoDcIwKgBu@gCReI~C{CVyBaAwBiC",
+   "pointCount": 58,
+   "start": [
+    43.403372,
+    142.394747
+   ],
+   "end": [
+    43.469492,
+    142.39593
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
    "id": "北海道:114",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -3328,8 +3327,8 @@
    "curviness": 181.3,
    "flow": 16.7,
    "turnCount": 57,
-   "score": 48.9,
-   "baseScore": 48.9,
+   "score": 57.4,
+   "baseScore": 57.4,
    "spotCount": 0,
    "polyline": "e`rjGar|oZvJkOxJuGxIcJfIsF`BsCz@m@vHm@|At@`GpH~DrZoBzHeBzCJdBfAIrEuHtAG^~BaFtb@uDfIqCtCwGnDgArIiDjHgGhEmRt@mOrUwDjCmHpBwE~EwHzB",
    "pointCount": 31,
@@ -3356,8 +3355,8 @@
    "curviness": 188.3,
    "flow": 15.4,
    "turnCount": 102,
-   "score": 48.9,
-   "baseScore": 48.9,
+   "score": 57.3,
+   "baseScore": 57.3,
    "spotCount": 0,
    "polyline": "c_blGerkaZcEo@{GbB}Be@cGqKyFeNIaKeA}DyD_GkG{Bq@uFHqKpCiTkDuM{AiLsB_CaIuAuJSuDgC_AiBm@cDEkXmJeUmDsDmIoCeGsIeEoBiQT{C|BkG[kD|CiE]iEpDyDxHqFhAsBjOk@vAsATkJmDsB`@wKrKUjAFtKa@`D{I~PaCzBeKtCsErDaDl@eDpBeKo@iE|AkCRuB{@gEyDsDc@",
    "pointCount": 56,
@@ -3384,8 +3383,8 @@
    "curviness": 170.6,
    "flow": 17,
    "turnCount": 61,
-   "score": 48.7,
-   "baseScore": 48.7,
+   "score": 57.1,
+   "baseScore": 57.1,
    "spotCount": 0,
    "polyline": "acy~Fi|{vYv@oARuB{GkL|C}NvB{B~GiApCmA|IiHhYif@pE}P`AgBhIqBtF`EzAe@`AmAx@yC@kU|A}Ft@uJhAaC`DiAvEYnBcCx@yCzE__@fDeHrEqFI{CiOiYyD}KuBsAoL}AoIsG_AkMBcK",
    "pointCount": 36,
@@ -3412,8 +3411,8 @@
    "curviness": 191.3,
    "flow": 16.4,
    "turnCount": 39,
-   "score": 48.6,
-   "baseScore": 48.6,
+   "score": 57,
+   "baseScore": 57,
    "spotCount": 0,
    "polyline": "uqw}Fa`_yYj@TdNqCfHiLrDsB|BAxB|@fG|InCrH?nEeQlh@GjDtDtIG|HvBtNlB`GlBx@bCaB|@@rI`FxAjBdDvIzB`C",
    "pointCount": 23,
@@ -3440,8 +3439,8 @@
    "curviness": 188.2,
    "flow": 16.2,
    "turnCount": 51,
-   "score": 48.6,
-   "baseScore": 48.6,
+   "score": 57,
+   "baseScore": 57,
    "spotCount": 0,
    "polyline": "y|mfG_{{{YcDfMJhD|@fCpAlAnd@bRjClBxAxBhAxDd@tHUhD}AbGoG`HqAdCs@lDAxFxCtOg@vLs@pEc@z@kD{DyEEI`E_DvMgA`AeGdB}BjBqCxEcA~Dc@bFFnF|ErY]jJ",
    "pointCount": 33,
@@ -3468,8 +3467,8 @@
    "curviness": 199.9,
    "flow": 15.9,
    "turnCount": 99,
-   "score": 48.4,
-   "baseScore": 48.4,
+   "score": 56.9,
+   "baseScore": 56.9,
    "spotCount": 0,
    "polyline": "ob_aG_s|uYrAdOgAvJBbChKxVpAfOaAfJ?jCtBvM~Cz_@qBtMq@lOkCf[cArBgH~FsHjKuFlBmAnAxCjAdHmA|F{BdALx@xAgDbNBjDrAhFFzB{CzKs@tGd@|Li@rDOnGjAbMSvMXjFt@~BdEnAp@zAF|A_@rBwJhQe@lCCtF~@|CbI|JzDbB`G}@xBiA~EsLpFcD`IsJpBJzAdBx@zDg@xC",
    "pointCount": 55,
@@ -3497,8 +3496,8 @@
    "curviness": 205.3,
    "flow": 16.2,
    "turnCount": 62,
-   "score": 48.4,
-   "baseScore": 48.4,
+   "score": 56.9,
+   "baseScore": 56.9,
    "spotCount": 0,
    "polyline": "wrmcGwmdzYfI|EnC?|DeAzBNlIjIhBp@hDa@`FkDdFTpJbDnDbEjApBXbCiBxI`@fE`NzJhA`D?tCg@~BaF~Ei@zBJlC`EhHrEbOKdBaEzGKdC\\hA`M`MpFlO`QdIjGNzAl@tAlBpGnQrDtC",
    "pointCount": 37,
@@ -3519,6 +3518,66 @@
    "id": "北海道:121",
    "region": "hokkaido",
    "regionName": "北海道",
+   "name": "上長和萩原線",
+   "ref": "981",
+   "highway": "secondary",
+   "lengthKm": 6.1,
+   "curviness": 274.2,
+   "flow": 29.4,
+   "turnCount": 57,
+   "score": 56.7,
+   "baseScore": 76.7,
+   "spotCount": 0,
+   "polyline": "snkbGau|zYrBKHw@aLor@tF_Cp@oElAKbDkBVaAhJ`AlMsFh@Rh@zCrZ}R~LvEIzD`EuNtGdCzS_NbDXdC`EtMQzGiC|LhB|GMnJrDvGcC|XwBrAR|ApA~GhLhQhF",
+   "pointCount": 32,
+   "start": [
+    42.498498,
+    140.89057
+   ],
+   "end": [
+    42.458732,
+    140.902945
+   ],
+   "boost": -20,
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
+   ]
+  },
+  {
+   "id": "北海道:122",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "白老大滝線",
+   "ref": "86",
+   "highway": "primary",
+   "lengthKm": 16.35,
+   "curviness": 182.4,
+   "flow": 15.7,
+   "turnCount": 190,
+   "score": 56.7,
+   "baseScore": 56.7,
+   "spotCount": 0,
+   "polyline": "}rfcGg}_}Y{CpQaEpGkDnTiDhLkDxG_LnJmL|TsCpGi@vIoClEY`H_DtEmB`Lp@jHMpAgDxRv@lJEzC}CzOuQd`@K`Ef@tJQhCk@xA_DhDs@`Cy@pMnC|MOtBiBrAqFmCuEc@kAn@u@nB@|ChAlKxOxZCfBy@r@sFp@mEhF}@LcBiA}AaJ_Cw@eBz@e@bCz@zFSfBe@r@{FTcAfA]`B|AdMxCjHr@hEA~J{D`FiAH}@e@cEcH}@@kD`CkB\\y\\m@eD[iO_IyAFgAvAE|C~EbMTrD{BrLQvOkO~b@qC|O_Dxi@A|QiB|L@~QqA|OHvBxAjFJhBkBtJSpDx@lOv@vBnDvEhAxMhHbS?rCkB`F^tKl@lBdFbHdAnDl@nYeAvH}GzOaAlEgEv`@_@|OsAdDsCzC",
+   "pointCount": 106,
+   "start": [
+    42.637431,
+    141.234922
+   ],
+   "end": [
+    42.677567,
+    141.089957
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:123",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "美川黒松内線",
    "ref": "523",
    "highway": "secondary",
@@ -3526,8 +3585,8 @@
    "curviness": 135.4,
    "flow": 17.7,
    "turnCount": 111,
-   "score": 48.3,
-   "baseScore": 48.3,
+   "score": 56.7,
+   "baseScore": 56.7,
    "spotCount": 0,
    "polyline": "ip|cGm_kvYxGm[lEkIdAgJ~DmGfGqMz@cDK}E}BuT`AiKBcIkCq\\r@}EhGyNdBuGnCyLbA_IxCsGt@mGu@yB{Be@kGhA}AqBo@gD}EoJgDuKyG}EiEgKUmDoAgD{CkEmBcQCaD|BmSzB_K`DgLxAqCjMoHt@_Av@yDc@eM{@}CqB_D}BuBmPmCaHqF_AuCG}CbA}DxL{Pzl@uUzEu@tHsExWeSrCyC|JcYhJaIvB}DnAcKhDqNvAkClDgBrNiArH_G`E_@lHtB`ZkCzBkA`ByCp@oF}BqQNgD~DgOtB{EbCmBjIm@jCwAdBoDd@iFpAsDpCsBzIiAxBwC|@kFCsH~AuJ",
    "pointCount": 86,
@@ -3546,7 +3605,7 @@
    ]
   },
   {
-   "id": "北海道:122",
+   "id": "北海道:124",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "三ノ原ニセコ線",
@@ -3556,8 +3615,8 @@
    "curviness": 160,
    "flow": 16.4,
    "turnCount": 102,
-   "score": 48.3,
-   "baseScore": 48.3,
+   "score": 56.7,
+   "baseScore": 56.7,
    "spotCount": 0,
    "polyline": "ypedGi_zyYbFc@hDaF|AYxMbIvQjIzARtA}@fEoTcByXpBoKhHeLlEkK~MwLlBuIIgJyAmG@gBdHiXWwAuBeDYgBHeBxSiTdCkAnFs@`EsFlDoRzCqKUcIRqCl@eAfP}F|BT`BxBvF`ShCfDt@NjFmA|GQtCgBpHj@jGsHdKaE~G_JTwCeAmMLyCtNaTuG{H{@kDoAyt@mAcMaAiDqE_IkUgJwP_b@",
    "pointCount": 57,
@@ -3575,63 +3634,6 @@
    ]
   },
   {
-   "id": "北海道:123",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "白老大滝線",
-   "ref": "86",
-   "highway": "primary",
-   "lengthKm": 16.35,
-   "curviness": 182.4,
-   "flow": 15.7,
-   "turnCount": 190,
-   "score": 48.2,
-   "baseScore": 48.2,
-   "spotCount": 0,
-   "polyline": "}rfcGg}_}Y{CpQaEpGkDnTiDhLkDxG_LnJmL|TsCpGi@vIoClEY`H_DtEmB`Lp@jHMpAgDxRv@lJEzC}CzOuQd`@K`Ef@tJQhCk@xA_DhDs@`Cy@pMnC|MOtBiBrAqFmCuEc@kAn@u@nB@|ChAlKxOxZCfBy@r@sFp@mEhF}@LcBiA}AaJ_Cw@eBz@e@bCz@zFSfBe@r@{FTcAfA]`B|AdMxCjHr@hEA~J{D`FiAH}@e@cEcH}@@kD`CkB\\y\\m@eD[iO_IyAFgAvAE|C~EbMTrD{BrLQvOkO~b@qC|O_Dxi@A|QiB|L@~QqA|OHvBxAjFJhBkBtJSpDx@lOv@vBnDvEhAxMhHbS?rCkB`F^tKl@lBdFbHdAnDl@nYeAvH}GzOaAlEgEv`@_@|OsAdDsCzC",
-   "pointCount": 106,
-   "start": [
-    42.637431,
-    141.234922
-   ],
-   "end": [
-    42.677567,
-    141.089957
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:124",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "火散布茶内停車場線",
-   "ref": "599",
-   "highway": "secondary",
-   "lengthKm": 11.39,
-   "curviness": 164.2,
-   "flow": 15.8,
-   "turnCount": 118,
-   "score": 48.2,
-   "baseScore": 48.2,
-   "spotCount": 0,
-   "polyline": "ovueGaretZmBr@aFmAaDtBkIxAuG|BwITeJlFsCrE_BfLkPvT{EhMmBvBaNf@sA|@uDvGkC|AgNYyGb@gGaCmFpDoAVkBy@aDwGqDcBgHy@aH~@cAiAmAoEiAi@iAPeBfCwBg@cAiAgBwFsIeDoEXwJzDeF`HgC`AyF\\oIkEiGQ}B_CsMs[oOyFcWsCoJzEuGnAeZa@{CkC}FoIe@{E_AaD_C_GkDeFuPlO}NbFgZfAgJIkGrB{Yy@eBjA_EvKiBzBkBc@gFaG",
-   "pointCount": 67,
-   "start": [
-    43.042479,
-    145.032173
-   ],
-   "end": [
-    43.129693,
-    145.027415
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
    "id": "北海道:125",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -3642,8 +3644,8 @@
    "curviness": 97.8,
    "flow": 22.3,
    "turnCount": 17,
-   "score": 48.2,
-   "baseScore": 48.2,
+   "score": 56.6,
+   "baseScore": 56.6,
    "spotCount": 0,
    "polyline": "okdqGiogeZ_BOu`@f[}Eh@iQaEcUb@iD]q]_d@{^jr@kAf@gT`@gEa@yAz@",
    "pointCount": 13,
@@ -3663,6 +3665,65 @@
    "id": "北海道:126",
    "region": "hokkaido",
    "regionName": "北海道",
+   "name": "火散布茶内停車場線",
+   "ref": "599",
+   "highway": "secondary",
+   "lengthKm": 11.39,
+   "curviness": 164.2,
+   "flow": 15.8,
+   "turnCount": 118,
+   "score": 56.5,
+   "baseScore": 56.5,
+   "spotCount": 0,
+   "polyline": "ovueGaretZmBr@aFmAaDtBkIxAuG|BwITeJlFsCrE_BfLkPvT{EhMmBvBaNf@sA|@uDvGkC|AgNYyGb@gGaCmFpDoAVkBy@aDwGqDcBgHy@aH~@cAiAmAoEiAi@iAPeBfCwBg@cAiAgBwFsIeDoEXwJzDeF`HgC`AyF\\oIkEiGQ}B_CsMs[oOyFcWsCoJzEuGnAeZa@{CkC}FoIe@{E_AaD_C_GkDeFuPlO}NbFgZfAgJIkGrB{Yy@eBjA_EvKiBzBkBc@gFaG",
+   "pointCount": 67,
+   "start": [
+    43.042479,
+    145.032173
+   ],
+   "end": [
+    43.129693,
+    145.027415
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:127",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "然別峡線",
+   "ref": "1088",
+   "highway": "secondary",
+   "lengthKm": 11.35,
+   "curviness": 339,
+   "flow": 22.4,
+   "turnCount": 172,
+   "score": 56.5,
+   "baseScore": 76.5,
+   "spotCount": 0,
+   "polyline": "}t}fGa``hZyBGaFsBm[kIoByAqB_E_Ac@{B@aFlBuENwKmDiTgAcCZsGlEa`@lDyEbIuB~@iBEeH{BcHuG}BUsB`@gBlCsArHoHpDu@EyH_IaBIqHbHmJb@qIzDwUi@kRjIgCf@qC[iCpBuGsEyDs@aD`@oBbC_ANiEaCuQoEcE?eHvAcGLmFqCcC\\wEkG}BiGmLoFo@Fy@fAq@EVeI}CsKo@Fo@xBuAn@{FmAy@sDa@oGi@LSdAy@nNiBn@kBUeEiDa@zEsAjAScI`@iB_@Qs@`AYdLWX]e@k@_L[V?~C[nAuIp@w@}JeEqIyBmCW}COlDb@~ByGrA",
+   "pointCount": 89,
+   "start": [
+    43.24703,
+    143.037615
+   ],
+   "end": [
+    43.326468,
+    143.044905
+   ],
+   "boost": -20,
+   "tags": [
+    "winding",
+    "flowing",
+    "forest"
+   ]
+  },
+  {
+   "id": "北海道:128",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "上雨紛台場線",
    "ref": "937",
    "highway": "secondary",
@@ -3670,8 +3731,8 @@
    "curviness": 194.9,
    "flow": 15.2,
    "turnCount": 54,
-   "score": 48.1,
-   "baseScore": 48.1,
+   "score": 56.4,
+   "baseScore": 56.4,
    "spotCount": 0,
    "polyline": "wpuiG}tvcZ`AdBfG`Ej@pFcAnDwBhAeERoBzBYzEvCpIBjCeAbD}GbHmA^cDm@uIcKuH{DsCU{MjA}@X_JjNyHz@iQfJsIxCcCV_Ga@kB\\cJbMkAv@wCPkKgEgBS",
    "pointCount": 32,
@@ -3688,62 +3749,6 @@
    ]
   },
   {
-   "id": "北海道:127",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "北進平取線",
-   "ref": "933",
-   "highway": "secondary",
-   "lengthKm": 10.85,
-   "curviness": 177.1,
-   "flow": 14.8,
-   "turnCount": 130,
-   "score": 48,
-   "baseScore": 48,
-   "spotCount": 0,
-   "polyline": "sx`dG}eqbZsJbBmJoAZnIYjB_DxCsDlAq@|@QjAl@bIEtCkBzHgCbToFtKaCrHgE`F_A|CIzC|AhPQjEoGjToGjMc@~M{DzRj@nMKjBsCzOcEjI}@xOw@fCqE`Gy@PiDw@wAzA@nB^v@~I~HzBpD~@bElAbNGtJwCjNWzJaC|LnEpTJ`PbD~Ig@hIhAnG{FhKwF|PmFdJgEfZqBdHkFhKg@jDPzCt@pB|O|V`GtG`@tH_@tET~MY|C_ApCeCjCqItE{JzCwBdBoBbFUfL",
-   "pointCount": 71,
-   "start": [
-    42.771456,
-    142.142551
-   ],
-   "end": [
-    42.794019,
-    142.036676
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:128",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "新町富里線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.8,
-   "curviness": 175.9,
-   "flow": 16.2,
-   "turnCount": 52,
-   "score": 48,
-   "baseScore": 48,
-   "spotCount": 0,
-   "polyline": "cv|cG_dfaZfLbApBp@|IpI`MWdK~C`IhLhA~IdC|K~EdG~CnHtG|FpMxOl@tBb@xFz@vBrIgDbFnRtAhKWhJRzFz@`@xLTnEfKJ`GjAbFnAv[v@zCdBhC",
-   "pointCount": 29,
-   "start": [
-    42.750576,
-    141.922081
-   ],
-   "end": [
-    42.724509,
-    141.885872
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
    "id": "北海道:129",
    "region": "hokkaido",
    "regionName": "北海道",
@@ -3754,8 +3759,8 @@
    "curviness": 180.7,
    "flow": 16.6,
    "turnCount": 91,
-   "score": 48,
-   "baseScore": 48,
+   "score": 56.4,
+   "baseScore": 56.4,
    "spotCount": 0,
    "polyline": "ydokGg_bdZx@LrSoLxB[xBh@nAzAbA|CpGdc@|AfCrCf@`Bu@bA{A|HqUXiDa@sIVkBlAaAjATxJbRj@|BVvIh@tCpJvKhDpJp@bEb@fQbAxCjBr@bFWhMyHrC]tWvE|XzNjIhNxLnI`A~CYtI^fBbArAlGxDrA~DSbG_F`KFvAp@fAnAF`AcAhI__@rAqAhEeApH_E`EPdDvClGxCdWxS",
    "pointCount": 55,
@@ -3782,8 +3787,8 @@
    "curviness": 153.5,
    "flow": 16.5,
    "turnCount": 100,
-   "score": 48,
-   "baseScore": 48,
+   "score": 56.4,
+   "baseScore": 56.4,
    "spotCount": 0,
    "polyline": "eqzkGq`jmZrFyJxH|GbMs@pE`AvDAhEaBxSnHhULjMrK`DtFld@hm@vCxBpBB~KkBhWtCnJoCxb@pJdEyBvFqAjIkEhGi@~H|@dDzA|JvIvK|F~CzFtApAbHvDjEh@rApDhAlA|AC`K}CnKO~Hy@~AbBa@`J`A`CtHCzDnFvEJrLbH`Es@`TsQrBSpF|AnCs@|BqEz@yK~@kE~CuCzCJvCxCz@lEz@jSu@zM`ChL",
    "pointCount": 58,
@@ -3804,6 +3809,62 @@
    "id": "北海道:131",
    "region": "hokkaido",
    "regionName": "北海道",
+   "name": "北進平取線",
+   "ref": "933",
+   "highway": "secondary",
+   "lengthKm": 10.85,
+   "curviness": 177.1,
+   "flow": 14.8,
+   "turnCount": 130,
+   "score": 56.3,
+   "baseScore": 56.3,
+   "spotCount": 0,
+   "polyline": "sx`dG}eqbZsJbBmJoAZnIYjB_DxCsDlAq@|@QjAl@bIEtCkBzHgCbToFtKaCrHgE`F_A|CIzC|AhPQjEoGjToGjMc@~M{DzRj@nMKjBsCzOcEjI}@xOw@fCqE`Gy@PiDw@wAzA@nB^v@~I~HzBpD~@bElAbNGtJwCjNWzJaC|LnEpTJ`PbD~Ig@hIhAnG{FhKwF|PmFdJgEfZqBdHkFhKg@jDPzCt@pB|O|V`GtG`@tH_@tET~MY|C_ApCeCjCqItE{JzCwBdBoBbFUfL",
+   "pointCount": 71,
+   "start": [
+    42.771456,
+    142.142551
+   ],
+   "end": [
+    42.794019,
+    142.036676
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:132",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "新町富里線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.8,
+   "curviness": 175.9,
+   "flow": 16.2,
+   "turnCount": 52,
+   "score": 56.3,
+   "baseScore": 56.3,
+   "spotCount": 0,
+   "polyline": "cv|cG_dfaZfLbApBp@|IpI`MWdK~C`IhLhA~IdC|K~EdG~CnHtG|FpMxOl@tBb@xFz@vBrIgDbFnRtAhKWhJRzFz@`@xLTnEfKJ`GjAbFnAv[v@zCdBhC",
+   "pointCount": 29,
+   "start": [
+    42.750576,
+    141.922081
+   ],
+   "end": [
+    42.724509,
+    141.885872
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:133",
+   "region": "hokkaido",
+   "regionName": "北海道",
    "name": "丹羽今金線",
    "ref": "936",
    "highway": "secondary",
@@ -3811,8 +3872,8 @@
    "curviness": 124.4,
    "flow": 19.2,
    "turnCount": 41,
-   "score": 47.8,
-   "baseScore": 47.8,
+   "score": 56.2,
+   "baseScore": 56.2,
    "spotCount": 0,
    "polyline": "mr~aGmsbuYpS{DvBcAbGs_@vJmThBc@|HvA`BMnJwJrA_ELgL}GaKcAkEHqDzDk\\k@qDeDmE[wD|Mcs@nCgFp@kDkEaaArCi^gEq_@kRqZ",
    "pointCount": 25,
@@ -3829,7 +3890,7 @@
    ]
   },
   {
-   "id": "北海道:132",
+   "id": "北海道:134",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "泉川西春別線",
@@ -3839,8 +3900,8 @@
    "curviness": 151.5,
    "flow": 17.8,
    "turnCount": 40,
-   "score": 47.8,
-   "baseScore": 47.8,
+   "score": 56.1,
+   "baseScore": 56.1,
    "spotCount": 0,
    "polyline": "u{tgGwmerZz@cAxA[z@XnMhQv@TxIw@zMpCrOpHhTpRtAHxFuBnCVpAtAjCjGhTcNpBcCpAeI_Tga@iFuN}AUcLhB}MqPaNiFwBcB",
    "pointCount": 25,
@@ -3857,7 +3918,7 @@
    ]
   },
   {
-   "id": "北海道:133",
+   "id": "北海道:135",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "野花南芦別線",
@@ -3867,8 +3928,8 @@
    "curviness": 160.1,
    "flow": 16.3,
    "turnCount": 75,
-   "score": 47.7,
-   "baseScore": 47.7,
+   "score": 56,
+   "baseScore": 56,
    "spotCount": 0,
    "polyline": "wsjhG__jcZq@?e@vCyBtDmAxJsCtGmCzBqCSoAlB{DdCkEl@qC`BqG`BwDaAsHiH_Du@uIfDiBnBiHtS}Ktr@?tP|BlS}@dMk@hCeFjFyBvGiCfCmAhHaD`I_IfFuK\\}KvFyAxDe@hLaFzOoj@le@wC`AwDfEoA`D_C~KZbKWbBgEbHwIlK_Ab@i@i@",
    "pointCount": 46,
@@ -3885,7 +3946,7 @@
    ]
   },
   {
-   "id": "北海道:134",
+   "id": "北海道:136",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "川東道路",
@@ -3895,8 +3956,8 @@
    "curviness": 164.3,
    "flow": 17.2,
    "turnCount": 34,
-   "score": 47.7,
-   "baseScore": 47.7,
+   "score": 56,
+   "baseScore": 56,
    "spotCount": 0,
    "polyline": "qnglGgsjnZxBp@dDjDjFrAjFArJgEfQM~Fv@|IhDvIbHlF|NjA\\tDk@pBNfT`O|MjMdLjNzIrIcDzMFh@",
    "pointCount": 20,
@@ -3913,35 +3974,35 @@
    ]
   },
   {
-   "id": "北海道:135",
+   "id": "北海道:137",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "北海道道519号滝之町伊達線",
-   "ref": "519",
-   "highway": "secondary",
-   "lengthKm": 5.31,
-   "curviness": 172.6,
-   "flow": 15.8,
-   "turnCount": 58,
-   "score": 47.6,
-   "baseScore": 47.6,
+   "name": "国道452号",
+   "ref": "452",
+   "highway": "trunk",
+   "lengthKm": 29.94,
+   "curviness": 203.3,
+   "flow": 16.1,
+   "turnCount": 379,
+   "score": 55.9,
+   "baseScore": 55.9,
    "spotCount": 0,
-   "polyline": "obvbGw`~zYvJwIBkDyCaFWgBlFsOPoFwAyQRaBfBsCrJnLxI`P~SlSpAdFbA~NrErJjCdLpBfDdMhKhB~ErDbS~@hBlBf@dHsBtBDzB|AnHpK`C`ApCE`Bs@nGaHhJ_QfGsC",
-   "pointCount": 33,
+   "polyline": "olggG_zibZ@jDsA|K@jD`HtRbBjVmKdg@aAjKVhDdCjGfLdMvHn\\lAr@vFL|Yha@vJ|GpBdEdBdIdCvGBfBqAzE\\~BfBf@`HmCdBj@`AvAb@`EyAdHLzBz@`AlIlCl@vBOxGVlB`G~FnAlCjA~T~I~r@x@nEhBvEnG|IbH~FtAvI~@XhEi@pCzA`AfCr@~FfAbB|F^lHrBvIn@~BpC|@tHt@|@`AIdCsDfBEpHxHnAfFr@z@~@BdC_CzAU|JlEtHt@|AvA~D~InAf@vHJtBt@~QnMpFjK|KqSdEyPjBcEfV}R|G{@vAaB?wDwEqH}@uDOqKfBwEfDaBbNmAzG}EjRmGpCcDlCgHbMaLlKqPxBsAhFDnBq@fJgNvNsHhHqIhDWfKpGlIzAr`@kCjBuAxDuFhEg@rAqAfCuHpEuG\\wKfA_CdLiB|FmDbEl@xAQtGmFbPaUtAy@nFnAnGk@zFnBvFaD|Dc@nDuAbIA|At@t@nBt@zPjAv@hAQj@mAd@cGp@wB`Aw@bGk@fAq@v@oBh@gHjAiBnDqBpA?`Av@~B~ExB`@`BuBt@eHtI{EdEuItBH|EfFrBa@`B_D^wBQiA_CaDGkAp@eEqCaGE_Cp@cAjEa@p@iA~@cFpAkBjb@mKdFfAbGUdFfBrIh@dBArDsAhP~I|D]nA}@hB{E`EoAzBsF`HaGtB}HtNmX|@_AzGaChBaBjLuY|CwC~CSfBd@hStMjU}@hCkBpD{Gr@sG@oLvAaG|Cy@rG~@hBKlVmLrCnAjIhT",
+   "pointCount": 199,
    "start": [
-    42.552876,
-    140.897565
+    43.296884,
+    142.104795
    ],
    "end": [
-    42.52525,
-    140.889271
+    43.11963,
+    142.100002
    ],
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "北海道:136",
+   "id": "北海道:138",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "居辺本別線",
@@ -3951,8 +4012,8 @@
    "curviness": 175.7,
    "flow": 16.2,
    "turnCount": 41,
-   "score": 47.6,
-   "baseScore": 47.6,
+   "score": 55.9,
+   "baseScore": 55.9,
    "spotCount": 0,
    "polyline": "wolfGoefjZ_Eym@XuEhBoEzMqR|FgSpBmDhHmHz@uFa@kGw@yCuAgB{Ao@oDAkJrEmD\\cBo@aAwAq@cCMqC~@aFpBgBbJAlBk@|BoBvFwLhBwM",
    "pointCount": 27,
@@ -3969,35 +4030,35 @@
    ]
   },
   {
-   "id": "北海道:137",
+   "id": "北海道:139",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "望来当別線",
-   "ref": "527",
-   "highway": "secondary",
-   "lengthKm": 9.31,
-   "curviness": 160,
-   "flow": 15.7,
-   "turnCount": 95,
-   "score": 47.5,
-   "baseScore": 47.5,
+   "name": "国道391号",
+   "ref": "391",
+   "highway": "trunk",
+   "lengthKm": 5.92,
+   "curviness": 215,
+   "flow": 17.9,
+   "turnCount": 71,
+   "score": 55.9,
+   "baseScore": 55.9,
    "spotCount": 0,
-   "polyline": "}r_gGypi~YyEdGmBpAkE|B{Gn@gC~CqOiTgRiJuL{C}TcO_EoDmJ}@wEwFsDwHyDwBaIgBiCwD_BEqGjFeBj@aJk@_JmD{HwIyFuMgJ{Me@sBLiGi@oAqASgAl@}CdS_Ap@sAUe@oCx@}JC_CSm@kAa@gAz@oGhSmGhKqI`[a@~CnAj\\q@tBkDhEc@`EdBzMl@`\\Or`@_@jFwOfZgBnFoJbS",
-   "pointCount": 54,
+   "polyline": "qnxiGwmzpZ~B|CjExCnf@|UzDtH|@t@lBr@hL|@~EjBtDxCxNbS|PnGjBjCpCxGpCnCrNbCfMJzGnE^xBcArECxB|@hC`EpGPzB]rAqAh@w@[aCiEgAA{@z@?|C|HzIX~Am@dCaGjAk@hC^tAnFbHpAnMd@bApB^~OwInHkA",
+   "pointCount": 43,
    "start": [
-    43.256951,
-    141.447971
+    43.711932,
+    144.483639
    ],
    "end": [
-    43.305048,
-    141.427394
+    43.678619,
+    144.453447
    ],
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "北海道:138",
+   "id": "北海道:140",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "雨竜旭川線",
@@ -4007,8 +4068,8 @@
    "curviness": 71.2,
    "flow": 23.9,
    "turnCount": 9,
-   "score": 47.5,
-   "baseScore": 47.5,
+   "score": 55.9,
+   "baseScore": 55.9,
    "spotCount": 0,
    "polyline": "k}}jGsqucZhF{HvLqDtJlCxc@dEzQxCza@do@bTyV",
    "pointCount": 8,
@@ -4025,7 +4086,88 @@
    ]
   },
   {
-   "id": "北海道:139",
+   "id": "北海道:141",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "北海道道519号滝之町伊達線",
+   "ref": "519",
+   "highway": "secondary",
+   "lengthKm": 5.31,
+   "curviness": 172.6,
+   "flow": 15.8,
+   "turnCount": 58,
+   "score": 55.8,
+   "baseScore": 55.8,
+   "spotCount": 0,
+   "polyline": "obvbGw`~zYvJwIBkDyCaFWgBlFsOPoFwAyQRaBfBsCrJnLxI`P~SlSpAdFbA~NrErJjCdLpBfDdMhKhB~ErDbS~@hBlBf@dHsBtBDzB|AnHpK`C`ApCE`Bs@nGaHhJ_QfGsC",
+   "pointCount": 33,
+   "start": [
+    42.552876,
+    140.897565
+   ],
+   "end": [
+    42.52525,
+    140.889271
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:142",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "望来当別線",
+   "ref": "527",
+   "highway": "secondary",
+   "lengthKm": 9.31,
+   "curviness": 160,
+   "flow": 15.7,
+   "turnCount": 95,
+   "score": 55.7,
+   "baseScore": 55.7,
+   "spotCount": 0,
+   "polyline": "}r_gGypi~YyEdGmBpAkE|B{Gn@gC~CqOiTgRiJuL{C}TcO_EoDmJ}@wEwFsDwHyDwBaIgBiCwD_BEqGjFeBj@aJk@_JmD{HwIyFuMgJ{Me@sBLiGi@oAqASgAl@}CdS_Ap@sAUe@oCx@}JC_CSm@kAa@gAz@oGhSmGhKqI`[a@~CnAj\\q@tBkDhEc@`EdBzMl@`\\Or`@_@jFwOfZgBnFoJbS",
+   "pointCount": 54,
+   "start": [
+    43.256951,
+    141.447971
+   ],
+   "end": [
+    43.305048,
+    141.427394
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:143",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "国道453号",
+   "ref": "453",
+   "highway": "trunk",
+   "lengthKm": 21.9,
+   "curviness": 182.8,
+   "flow": 17.8,
+   "turnCount": 225,
+   "score": 55.6,
+   "baseScore": 55.6,
+   "spotCount": 0,
+   "polyline": "egzdG_dt}YfN`HjHjG`DDtNcNrDkGtEgPnL{Q`D{B|GcA~DqDzMwAxAw@|AmC`ByO`S_X~K}E~JiKfAAjBbAjNzW|FbFdJzLrGbXbBvEtBrArKtAnBjAbDhHpA`J`AnClE|ErFxJ|GjGxEjIjEdOhGxNn@jJcB~LFtAdNrQhDpJp@zJKrKXbCrY|^bEtKlL|S|C`KrBfErBxJzCxDvD|Mx@NxCaEtDQOuEdBqDAgGfBkRz@uC`AQv@Rl@rB~BlLrAhCTpEb@x@vCHxAnCn@NrFwGpDg@|ADfAr@r@|FCxNeAhAcCg@mAh@RhBdDfB|E|ApBAlMeD|EXxH[dF|AnKyE`BYvAVrBtCb@vCdAf_@uAjZd@vBlAp@dBu@bJmMrDiD`Dm@~IHhPgB|A_A^kAGaEcCaEa@oDp@eCpM{Tr@cEAgBiD{RVuWhBwLzDaOlBkDtXuSnB}F^mY[yBiDmIgBwVmDcFPkAx@DdEdH~F`PzExHnBfKrAtA|FdAUcJy@mBwCwCe@uBQaIkEsHyBcH",
+   "pointCount": 139,
+   "start": [
+    42.901788,
+    141.338399
+   ],
+   "end": [
+    42.802273,
+    141.326465
+   ]
+  },
+  {
+   "id": "北海道:144",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "塘路厚岸線",
@@ -4035,8 +4177,8 @@
    "curviness": 142.1,
    "flow": 15.3,
    "turnCount": 228,
-   "score": 47.4,
-   "baseScore": 47.4,
+   "score": 55.6,
+   "baseScore": 55.6,
    "spotCount": 0,
    "polyline": "eyneGsdwqZsFhDyAnIaA|AiYjKsHxH_MZyJiEsC_@{CdAeK~G}UgDyIhCaBhAuAbDoA|J_KvQmAhAuFhBbGrg@qAb@KjArAlJKbB[\\aMm@mD`EiHfAiG`HmC|JyCpEMnCf@hK_BnJgArA}HhE{F`BgBtBw@`CH~IWpCgGpRsO~WsGpEiDvEi@bIsAxD_VfNgKdCuCtCiG~@wKlEcEn@wHcBa[[aFzAqFCyKhAeKQoAo@qFwGuAqHsAoBqIa@oGuBcFWcNdE{Ei@}OxBcO_AiCVwJdD{HlIiP`AiKzE}YlHyKrH_BXeF}A_C}AiMsNwT{SyDgH{CmD_AFuFfGkJbEoFpAaCs@oCqHaBkBkD]gDpBcAzA{A|HwDlG}AzKuG`M}DfD}IpCeI`AcAr@}BtIaFpG}@bGwB~FqAdHcPjWyF`C{@fAmAxNkAhYmAbJe@xJm@bDeD~IaAxIZ`CbGrO`ClKrAnHKpFy@vCcPx\\ApMqBjHeVbJwF`@cD`EyKrHuAnBQ`ErBnJ~@fTcDxOqF~a@E|BrA|Jq@nF",
    "pointCount": 139,
@@ -4054,117 +4196,7 @@
    ]
   },
   {
-   "id": "北海道:140",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "野塚婦美線",
-   "ref": "913",
-   "highway": "secondary",
-   "lengthKm": 6.06,
-   "curviness": 178.4,
-   "flow": 15,
-   "turnCount": 72,
-   "score": 47.4,
-   "baseScore": 47.4,
-   "spotCount": 0,
-   "polyline": "wtmgGmvxxYaLi@aLuGcBWeAh@mBzFgAjL_GlWcGnMItc@Q`DkApDuIjI_JnDcBNeH_AaQtHsDKeG}AsDbAkAdBe@`CeAhOeAvAyEhCk@fARzI}B`LBlHmEdFkCbFeC|RWzG{JlFsHIwAh@{Np[",
-   "pointCount": 37,
-   "start": [
-    43.328925,
-    140.542625
-   ],
-   "end": [
-    43.361432,
-    140.499861
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "北海道:141",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "国道452号",
-   "ref": "452",
-   "highway": "trunk",
-   "lengthKm": 29.94,
-   "curviness": 203.3,
-   "flow": 16.1,
-   "turnCount": 379,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "olggG_zibZ@jDsA|K@jD`HtRbBjVmKdg@aAjKVhDdCjGfLdMvHn\\lAr@vFL|Yha@vJ|GpBdEdBdIdCvGBfBqAzE\\~BfBf@`HmCdBj@`AvAb@`EyAdHLzBz@`AlIlCl@vBOxGVlB`G~FnAlCjA~T~I~r@x@nEhBvEnG|IbH~FtAvI~@XhEi@pCzA`AfCr@~FfAbB|F^lHrBvIn@~BpC|@tHt@|@`AIdCsDfBEpHxHnAfFr@z@~@BdC_CzAU|JlEtHt@|AvA~D~InAf@vHJtBt@~QnMpFjK|KqSdEyPjBcEfV}R|G{@vAaB?wDwEqH}@uDOqKfBwEfDaBbNmAzG}EjRmGpCcDlCgHbMaLlKqPxBsAhFDnBq@fJgNvNsHhHqIhDWfKpGlIzAr`@kCjBuAxDuFhEg@rAqAfCuHpEuG\\wKfA_CdLiB|FmDbEl@xAQtGmFbPaUtAy@nFnAnGk@zFnBvFaD|Dc@nDuAbIA|At@t@nBt@zPjAv@hAQj@mAd@cGp@wB`Aw@bGk@fAq@v@oBh@gHjAiBnDqBpA?`Av@~B~ExB`@`BuBt@eHtI{EdEuItBH|EfFrBa@`B_D^wBQiA_CaDGkAp@eEqCaGE_Cp@cAjEa@p@iA~@cFpAkBjb@mKdFfAbGUdFfBrIh@dBArDsAhP~I|D]nA}@hB{E`EoAzBsF`HaGtB}HtNmX|@_AzGaChBaBjLuY|CwC~CSfBd@hStMjU}@hCkBpD{Gr@sG@oLvAaG|Cy@rG~@hBKlVmLrCnAjIhT",
-   "pointCount": 199,
-   "start": [
-    43.296884,
-    142.104795
-   ],
-   "end": [
-    43.11963,
-    142.100002
-   ]
-  },
-  {
-   "id": "北海道:142",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "国道391号",
-   "ref": "391",
-   "highway": "trunk",
-   "lengthKm": 5.92,
-   "curviness": 215,
-   "flow": 17.9,
-   "turnCount": 71,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "qnxiGwmzpZ~B|CjExCnf@|UzDtH|@t@lBr@hL|@~EjBtDxCxNbS|PnGjBjCpCxGpCnCrNbCfMJzGnE^xBcArECxB|@hC`EpGPzB]rAqAh@w@[aCiEgAA{@z@?|C|HzIX~Am@dCaGjAk@hC^tAnFbHpAnMd@bApB^~OwInHkA",
-   "pointCount": 43,
-   "start": [
-    43.711932,
-    144.483639
-   ],
-   "end": [
-    43.678619,
-    144.453447
-   ]
-  },
-  {
-   "id": "北海道:143",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "北見白糠線",
-   "ref": "143",
-   "highway": "primary",
-   "lengthKm": 7.71,
-   "curviness": 186,
-   "flow": 15.6,
-   "turnCount": 92,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "mamfGksgmZkEmHoCKeC|AoHrNiC\\oB_AiJ}LoBIuAjAyJ`ToAx@kI~AcB~BcC|G{AhAsCg@uEeIsB{@kCnAiG`IwCjAkH]eGd@kIuBqIdB}NmFoDL}AbCkBfHeItFaNpR_CdAoILkBjAeAhDe@rKgBhCoIrAkFeAkOBoB|@eEfJuCxByCEmF{B}B[_C^}AfAs@tAk@xEkGdw@wAxDyCjA",
-   "pointCount": 54,
-   "start": [
-    43.16199,
-    143.895739
-   ],
-   "end": [
-    43.213787,
-    143.865507
-   ],
-   "unpaved": {
-    "unpavedMeters": 2462,
-    "totalMeters": 7713,
-    "ratio": 0.319,
-    "surface": "compacted",
-    "label": "締固め"
-   }
-  },
-  {
-   "id": "北海道:144",
+   "id": "北海道:145",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "麓郷山部停車場線",
@@ -4174,8 +4206,8 @@
    "curviness": 137.5,
    "flow": 17.1,
    "turnCount": 74,
-   "score": 47.3,
-   "baseScore": 47.3,
+   "score": 55.6,
+   "baseScore": 55.6,
    "spotCount": 0,
    "polyline": "i{ggG_iidZO|Jb@dD|FpRrCbj@sHzSc@~Hq@hCsBxBuFp@{B`BsO`b@rJbDzHrAph@`AxHtD`LtKdBv@vYrIbEDjCtBvOjE|@O~A{CfCPrIfEbVrI|MhB|Qs@~VmKvB\\lC_CzC\\nLgBhCPdDpE|Az@dEFhPrEfRj@lI}A~Bdc@",
    "pointCount": 42,
@@ -4193,43 +4225,41 @@
     "ratio": 0.174,
     "surface": "gravel",
     "label": "砂利"
-   }
-  },
-  {
-   "id": "北海道:145",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "上猿払浅茅野線",
-   "ref": "732",
-   "highway": "secondary",
-   "lengthKm": 11.96,
-   "curviness": 152.9,
-   "flow": 15.6,
-   "turnCount": 117,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "kn|rG{aacZfE|BlJvBxf@fw@eAvQcEzJ^tGkAdFIjD~BnIE`EiEpVY~JoJtWw\\`WmD|Ec@bGZjBtGrFf@xBkBzJ{C|WKnNq@`NsDlGaAvFnCbDlCfHxCdBtC`E`CdLDdHrDnNdHtM`I~FtHvM|FjHhTvPxG|AhGYlHxBxB~AzGlK|LbEvGGtGnBtIiD~CW`FrAlD`CbBlF`J|LvBzHKvDhF|MfBxGfAjAxGhCzNaBjCHri@~KpC`B",
-   "pointCount": 62,
-   "start": [
-    45.206943,
-    142.223823
-   ],
-   "end": [
-    45.161939,
-    142.132887
-   ],
-   "unpaved": {
-    "unpavedMeters": 10653,
-    "totalMeters": 11957,
-    "ratio": 0.891,
-    "surface": "",
-    "tracktype": "grade3",
-    "label": "砂利・土"
-   }
+   },
+   "tags": [
+    "flowing"
+   ]
   },
   {
    "id": "北海道:146",
+   "region": "hokkaido",
+   "regionName": "北海道",
+   "name": "野塚婦美線",
+   "ref": "913",
+   "highway": "secondary",
+   "lengthKm": 6.06,
+   "curviness": 178.4,
+   "flow": 15,
+   "turnCount": 72,
+   "score": 55.6,
+   "baseScore": 55.6,
+   "spotCount": 0,
+   "polyline": "wtmgGmvxxYaLi@aLuGcBWeAh@mBzFgAjL_GlWcGnMItc@Q`DkApDuIjI_JnDcBNeH_AaQtHsDKeG}AsDbAkAdBe@`CeAhOeAvAyEhCk@fARzI}B`LBlHmEdFkCbFeC|RWzG{JlFsHIwAh@{Np[",
+   "pointCount": 37,
+   "start": [
+    43.328925,
+    140.542625
+   ],
+   "end": [
+    43.361432,
+    140.499861
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "北海道:147",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "洞爺公園洞爺線",
@@ -4239,8 +4269,8 @@
    "curviness": 189.2,
    "flow": 15.7,
    "turnCount": 71,
-   "score": 47.2,
-   "baseScore": 47.2,
+   "score": 55.5,
+   "baseScore": 55.5,
    "spotCount": 0,
    "polyline": "_dhcGciwzY}E}Ou@yFDuF|BgC}@iLlAcHz@uB~JcIrAeCEiN~EuLxFmK]mJ~AuIlBqDdG}G|DiCnF}H~D}A`CKfAmAlDuK?_KzB}HdDgGzC}A~DuDdE_IfNcOzFgBhLnAlHgBfBsArDuIp@kFzAgFJsF~BsH`DqGlDgC",
    "pointCount": 41,
@@ -4251,10 +4281,13 @@
    "end": [
     42.61773,
     140.913428
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "北海道:147",
+   "id": "北海道:148",
    "region": "hokkaido",
    "regionName": "北海道",
    "name": "江別奈井江線",
@@ -4264,8 +4297,8 @@
    "curviness": 123.2,
    "flow": 21,
    "turnCount": 24,
-   "score": 47.2,
-   "baseScore": 47.2,
+   "score": 55.5,
+   "baseScore": 55.5,
    "spotCount": 0,
    "polyline": "ilxfGkyt_ZwAsByD}K}FlF}Bl@{BKaDiBaUyVeDcAk\\PgDy@mDuE_c@kw@mPaIeHRmARyCjCwCdJqGwO",
    "pointCount": 19,
@@ -4276,58 +4309,40 @@
    "end": [
     43.248829,
     141.68736
-   ]
-  },
-  {
-   "id": "北海道:148",
-   "region": "hokkaido",
-   "regionName": "北海道",
-   "name": "豊富遠別線",
-   "ref": "256",
-   "highway": "secondary",
-   "lengthKm": 5.33,
-   "curviness": 183.6,
-   "flow": 14.6,
-   "turnCount": 67,
-   "score": 47.2,
-   "baseScore": 47.2,
-   "spotCount": 0,
-   "polyline": "ewcpG}`aaZcGuCgPu\\_BkAaE{@iBnAOhHoAhGm@~GyArBsHnA_F}@sCwBqDmHkDmAsBn@wIlJeBl@wD_A_AqAsEkR?qFbB{KqAuOmAeCuFuDuGsLm@qBk@cKwB{C{Es@sHeCkHnCwPAyAp@eR~P_Cr@",
-   "pointCount": 37,
-   "start": [
-    44.75267,
-    141.895991
    ],
-   "end": [
-    44.785241,
-    141.910686
+   "tags": [
+    "flowing"
    ]
   },
   {
    "id": "北海道:149",
    "region": "hokkaido",
    "regionName": "北海道",
-   "name": "上猿払清浜線",
-   "ref": "889",
-   "highway": "secondary",
-   "lengthKm": 17,
-   "curviness": 170.8,
-   "flow": 13.6,
-   "turnCount": 214,
-   "score": 47.2,
-   "baseScore": 47.2,
+   "name": "士別滝上線",
+   "ref": "61",
+   "highway": "primary",
+   "lengthKm": 3.23,
+   "curviness": 167.9,
+   "flow": 18.1,
+   "turnCount": 30,
+   "score": 55.4,
+   "baseScore": 55.4,
    "spotCount": 0,
-   "polyline": "gfutGsz_aZ`BiPCqRtCeHZ_CcC}WNqE|AiIHcCw@wC{GsFmDoFs@eCIsDzE{P?iOx@kEvVmTzAoCx@sDFqHeIir@dEy^zAgD|A[`G~AdCA`UeHrJ`C~CAxDsBrIaN~EeBnCV|IbEnGB|DbCtA?v@w@bBgFtFuH`De[tBaEvBs@vB\\dGbHtK|@vAbAvEzGjE`@lCqB|L}QjAkD~@oI`AmCrGoEpEs@pEF|Ap@~A~BbB|GfAhBnHzBfBpAbIbU~J~JbB\\nKUfLfCtDzAvFdFhBr@`Ju@zBNbTfOlE\\pVwHvDeDbAmCj@iEm@oS`@oFxBiEpLwMtBq@~BPhBlArD~EjB|@nIOvCuBtIkXQiJj@sKuAwHIwCj@{DzA_CjBw@dJ\\hBe@dBmB`CmHzBwAlDz@|CtHrC`BjCk@|E}GzCg@tBr@zElFzD|KtA~@zA@",
-   "pointCount": 115,
+   "polyline": "grflG{xfgZKbUxAhNrAnh@~ArTnA|DjBPx@eACcC{A_J?_Y^}JWeTTwA~@eAdBNlD`E|E|BbD`OxCvH",
+   "pointCount": 20,
    "start": [
-    45.497475,
-    141.88986
+    44.111881,
+    142.908463
    ],
    "end": [
-    45.407448,
-    141.959141
+    44.105294,
+    142.898543
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   }
  ],
- "hiddenCount": 118
+ "hiddenCount": 120
 }

@@ -1,15 +1,14 @@
 {
  "prefecture": "大分県",
  "romaji": "oita",
- "generation": 2,
- "contentHash": "d3660085044a",
- "builtAt": "2026-08-26T09:40:08.372Z",
+ "generation": 3,
+ "contentHash": "693e9be24100",
+ "builtAt": "2026-10-07T14:48:41.258Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
  "count": 150,
  "segments": [
@@ -24,8 +23,8 @@
    "curviness": 678.3,
    "flow": 28.1,
    "turnCount": 483,
-   "score": 84.4,
-   "baseScore": 84.4,
+   "score": 99.3,
+   "baseScore": 99.3,
    "spotCount": 0,
    "polyline": "w__iEintdXjAzDEhDZz@`Cp@~FpDTpDpAnCy@xCb@rCpFl@rC`G^tBC~BcBpFBfKVhBxAvBtCNtCpBhFt@f@g@fBcHtAUvB}BfCLdBqAdAzCfJtDhBg@bEXRnCfDRz@jAPjBpBfCr@vBtD_FvEJ`@wApEwFfFJFoD`B}AlHXtD_@f@{@dAQbDhCvBFlA}@vAkCzCjA\\w@Y{BzAbC\\Gg@mFxCfFP~F`B`BrFn@hAtAxBlRArGjAJhDq@nCgDl@sCXS\\Zr@~K~@`Bo@dCjAzCc@fCJhGq@xEEpDbA~DaA~@Ex@f@|@rAj@Hh@m@zAjAr@Fl@sCrDAlBr@~Ai@nIg@jBgDlDwEaCaBpAOn@~@zJnCENdDpBTlBrDbBHBf@qAtA{@`CgFeDe@LUxBcB[kCwAo@mC_Da@i@kC}@Ra@xAgBYaAhE}At@oBWkAmB}AQ{BaBuCOk@hA`AnBj@dD`@Ya@cEl@Ex@dCjDnDbAdEpA~BBhAo@HyAaDuDn@Np@nCb@b@fClAzAiDbFsCpB{@nD`@PfAwCl@Yr@Tr@tAzBGCr@yEVcBnC?b@\\Jn@kAh@KnDtAOh@}A?sBdAUl@T`AxAxAdDRh@ApAyArBFxDfEb@jBJhGk@|F\\zDg@pJ}BxC{IjBe@d@H~@x@z@d@tFaBhGyDpDgBF_DiA_C{BwFYkAr@VbE{BpDy@tCaBlAcCV}AzBoBjAsADaE{AQh@T|BcAhCkBcAiAmBuBbAqBw@Qy@a@AH`C|@dCW`H{@zAmCd@rGbCx@bCJhDtH`GdEKhGqEjEjA~A~Ad@|BaAhCd@bDQjEgAvAeEnA[|ALr@jBfApAbHMzBxBfD|@?|BvAt@c@`C{JLqFtDoI~A_@~CdAjCuBpGc@pAh@lA~A",
    "pointCount": 243,
@@ -36,6 +35,11 @@
    "end": [
     33.067014,
     131.928927
+   ],
+   "tags": [
+    "winding",
+    "caution",
+    "deadend"
    ]
   },
   {
@@ -49,8 +53,8 @@
    "curviness": 613.2,
    "flow": 28.1,
    "turnCount": 282,
-   "score": 83.8,
-   "baseScore": 83.8,
+   "score": 98.5,
+   "baseScore": 98.5,
    "spotCount": 0,
    "polyline": "_m`hEcnyaX{@{Kf@iCnA{AfAMvBx@tAC`H}K~@e@pADlCjCnB[lHkKlAe@vBAvAy@hCoFrAuJ|AuBhAWhJNzCe@p@uAd@kIhBkD`Af@lD|FvA`@dAOvAqAb@aChBsDpHeGrAiJ_AiLj@oAhCPl@wA`@ePC}Be@y@oF}Af@eMf@u@zDDdS_F^qALiGx@U|BfAb@Mf@uMbEcIMkBqEuHP{BrB}DZ_HxDmH}@uOr@{GvBuCmBgHq@iOkC}@y@iB|AsHWsDnAgG`EaGpCsGjDYjAqIZB^dDr@TxDeFbK{F|BiNpCR|AtAjB}@b@y@LcFn@m@v@`@bAIb@gEp@y@dCv@l@YbB}Fd@qF`@Kt@rAtASv@c@PcAzAa@F_CZWf@`@v@eAR_C`Am@bAsDnA{OaB~@BsEr@iFxBmCw@uA~BsAc@mBd@mAOyAZ_Be@EaBzCgBb@a@a@\\cDe@y@wDnEUwCj@iCAyCw@B{BdBs@_Am@n@m@sAm@E}AvBKfBm@k@MwF",
    "pointCount": 137,
@@ -61,35 +65,14 @@
    "end": [
     32.902412,
     131.615434
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "大分県:2",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "臼杵大南線",
-   "ref": "206",
-   "highway": "secondary",
-   "lengthKm": 13.35,
-   "curviness": 579.5,
-   "flow": 30.5,
-   "turnCount": 254,
-   "score": 83.8,
-   "baseScore": 83.8,
-   "spotCount": 0,
-   "polyline": "ukjiEcfrbXpAgCvH}XhCCf@_Ap@yDZgHo@kGlByEhARlA]jAwEjAcAh@cDxBDvBmGpDmFl@sEpAiBn@MtA|@zBP@_@}@q@F]hA]fA{A`AAt@nAt@N?uDhAEnBsD~BW?aA{@]}@}Aj@{AlE?V[uBiEHq@tA{@cBqABgCxBSOoAoC_DrAcDlD}C~D\\nA`AbAMl@{Aa@mBTaBhAsA`E{At@yBYo@VgAj@s@jBYpCeB|@\\t@xCXoAjAG{@wBCcDdAoA|@X\\UkBkCZe@tCPFa@{AoAM{@hBiB^gC|EyCP{@bD_@rHBjE_BvZg@j@sFNmHwAsKBmToG{MwIcIgJcQwKqWMwGfCgNIuFpCcEb@mD|E{HnAoROw@aMuIs@cFwDwGy@U}Dh@cEgE?wD`BBd@a@Om@kC}@s@uCLuBlB}CFw@u@sDEqMpB{F?cAs@yCwBaE{GqDi@cADwEw@eCP{@`BiAn@qAg@kFoDcGgEaBuBgPoFyE",
-   "pointCount": 136,
-   "start": [
-    33.154033,
-    131.661939
-   ],
-   "end": [
-    33.13943,
-    131.755476
-   ]
-  },
-  {
-   "id": "大分県:3",
    "region": "oita",
    "regionName": "大分県",
    "name": "山移大島線",
@@ -99,8 +82,8 @@
    "curviness": 614.7,
    "flow": 28.8,
    "turnCount": 275,
-   "score": 83.8,
-   "baseScore": 83.8,
+   "score": 98.5,
+   "baseScore": 98.5,
    "spotCount": 0,
    "polyline": "qf|jE_xo_XhA`EzCpDG`@_AI_@lB?~A`@bAf@?SgBh@c@jAnAt@KlBl@v@~Ej@cCz@n@zAGBpEbCmALzBp@H`@`Br@Mb@_AVJg@zBd@rG`CZ~@v@lDOt@zEg@lAFrD|@fCgAd@cAhB@dCh@yCdC]vExFhCw@xAnB`DGjChBnDWRt@}DzCIxAzF~CxCl@~Dc@vO}GpE\\bFaAhD|AlC^MlBqCzDAvBtApXdAbB?tAv@p@J`DlApD{AhIcCxCg@dBqBfBy@tEJrNvCjFYvDjAvBBbBcDlBaBE{@bGyFdA_BtBoCXo@xAqEYaE\\_C}A}DkFiB[WcBiCcCmA}B}B}@]l@M`Cw@n@mBRkDi@InBoB|@kA|DoDlBw@lCeApAm@H_By@yAt@yFLWfBkJhJyHzBwJHmImAkC|@{CDoDv@qLwC}BaDqEn@oIrPuBnHyBjC_BrAoOrDqJxHiBdDcDpIK~A`BtJbFpGz@zFaEbBw@|@uA~H",
    "pointCount": 133,
@@ -111,10 +94,14 @@
    "end": [
     33.428105,
     131.100312
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:4",
+   "id": "大分県:3",
    "region": "oita",
    "regionName": "大分県",
    "name": "古江丸市尾線",
@@ -124,8 +111,8 @@
    "curviness": 612,
    "flow": 27.8,
    "turnCount": 301,
-   "score": 83.7,
-   "baseScore": 83.7,
+   "score": 98.4,
+   "baseScore": 98.4,
    "spotCount": 0,
    "polyline": "gfcgEop{cXzJfDtE^|BQvAsA@gFfA_AjL`C|OvLrQ`GlB`FhAjA`EjBxBZrMqAzAcBr@gGp@}AtBu@zETjDqBf@oC[yFtAqAOcBhDmBvFa@jBoAv@gD`AmAVwC~ADzEtArEy@zB~Ap@iCh@YnApB`A`GhAk@xHdBlHu@jCeAnBRBl@y@bAMjB|Bj@bAnBeAjAQ|Ai@d@xAhCBn@c@lAwClCPlDpA`@tOaJjE^jBdGlFrDbBjDr@b@?~F|E~LrB|KE`G|AhE|A|AjCzElF~DvBz@jCTtCs@p@~@a@lAf@t@vGa@oBlDNr@tB[h@rBj@\\rDqAa@fCZfBbBlA|AKPbAnCtAb@nAb@BVk@iCaET{A`@UiBg@iBHK[TWfGXTpAtBr@xBjH|DxEj@bGzBGp@x@hB_@PW[oDfBkH~AG`@_A`A[tCfAf@gBhBJlE}Fd@@~ClC`DaG~AShDfApBaFtHv@|ES`BkBPqCjAw@~BDtEjDOf@qEcBcANmArHaCfFG|CmCzC|@rA`EdAH|@aAfBiKxFcFvEAf@",
    "pointCount": 147,
@@ -136,31 +123,68 @@
    "end": [
     32.72664,
     131.848591
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:4",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "緒方高千穂線",
+   "ref": "7",
+   "highway": "primary",
+   "lengthKm": 29.97,
+   "curviness": 667.3,
+   "flow": 30.2,
+   "turnCount": 663,
+   "score": 98.3,
+   "baseScore": 98.3,
+   "spotCount": 0,
+   "polyline": "qoggEqd|`X_GL?kEkAa@iCDqBaBmBqFqBu@E_Cp@o@W_ClC}CqCaDcBs@GkBWMe@n@qAnD}Fv@q@a@RqBa@mBeBw@w@kD@oB]c@_ClBi@dBqC^qAbAmASmC{BeAiC_EcEg@wCNmHlCeB`B@^c@mAwCEsAwCPoEqAaDsBgBUb@_EgAeBDcDe@e@KzE`@zBiBtCStBvE`AnFdDkBlCaChARpAe@nB`AhDc@xGcAhCjCQjAp@fBxGtDbCNzBl@nAvCfAs@r@Dv@fDw@OvAhAbAkAPSb@rAf@d@|@yAvHpAjEm@UwBqF}AXwEuE_@VQvCa@V_C}DQuAiCsCKmFoEeByBgCsDkBaBwCg@cCcBsBTeGiBcB{EqKn@aEtBcDAcHgBs@_A{AaD_AFqBcAk@kAuBeBeAc@mByCgCIqB_AiBwBg@ZaDxAu@oBwE@oA_@o@PeAwD@qDwEeAfAiCw@qD^aBoAc@_B{A^k@]a@yBsATiAi@Es@iAeBQoCuAsEkBGiCgByBgGeAsA{CsAaEW{B_AkCt@oCqA_@iB\\sDq@}CiCsBwDJcGyDeDkLcBo@iFDsDuEqA^[wBcC]uAhAYiCeCu@iDhAWp@_EeAeCZCg@l@y@cA}AG_CeCN[{DoACeAkAoAIQmCoBmDo@?i@nBcBv@yB}CSuBmBk@U_B{Cc@gAxH_BVu@gBuBq@_AkAmDTsGoC}IWcCiCoA[uD]_BhCwBgBsCn@Ir@_B^yDwAkAb@_FuFaEgBcCsCyBo@_AjDThFx@rAcAfA\\`Fk@TgAm@yAjBw@N}AaAQgEe@I}At@g@e@n@uC|@mAsBuB@mDe@oBuDDgBrCuAwAiBfA{AY_@UQiATqE_@gBc@U_GEsDrAmBeAqAxB{@Xg@kBJkCkB}DaAO}@^kAk@mBV{BcCe@?_BfDf@lEk@VuAiBw@sC|@iJo@aCaAEuDfAcGmA}C^gCeD{A_@qATaBtDYnCd@xLmFzDe@`HiA^mBCgCoBkAB}BnAwA{AyAKVkBUsBoCJkCwAPy@zBwAEuDcEoBdAeCS_AeBc@wBPeAy@s@uGDaHkF?WxDw@VaFoGc@Bq@eB_F~FoBJi@g@R|A|@RShCyAX_EqAkG`BkE\\{ACkDiAgFU{FwBmWfAyC_AmJG}@g@s@mCo@g@mGdAkFkCwAQcHz@uE|CqHfBs]~B{ASwCqDcGwE_FmA{DtAoFRaGfAeMUqDyAmJaIi@wCkGiEwEmBcK{AeIxAuK_AyXkHaDaCcCeD",
+   "pointCount": 343,
+   "start": [
+    32.81161,
+    131.385209
+   ],
+   "end": [
+    32.965229,
+    131.450666
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "大分県:5",
    "region": "oita",
    "regionName": "大分県",
-   "name": "臼杵坂ノ市線",
-   "ref": "205",
-   "highway": "secondary",
-   "lengthKm": 12.03,
-   "curviness": 557.5,
-   "flow": 28.1,
-   "turnCount": 239,
-   "score": 83.7,
-   "baseScore": 83.7,
+   "name": "日田鹿本線",
+   "ref": "9",
+   "highway": "primary",
+   "lengthKm": 29.95,
+   "curviness": 755.1,
+   "flow": 30.3,
+   "turnCount": 746,
+   "score": 98.3,
+   "baseScore": 98.3,
    "spotCount": 0,
-   "polyline": "elxiEspccXqRhKrf@uWfHUbD}@rNwJrHcDrD{@nNo@jNiCfIi@U@hAaElBqE`PsM|FoCtAcBhB_FhAyI`CgKpDeFpEiBhDkHgBkR_CkI`@_J\\{@hEuChCmGVmCvD{F_CqA{EDHu@tB^bA{AzBm@`FmDnAG|@u@r@PNvAs@lC}BzBKxCZ~@fDV@x@y@vCyAp@Gd@hEjAxCaC`Ba@n@Pf@nKr@nASxBx@Z~@Qn@gElDiApAgCk@uGfB_GfAGr@pCt@^fEaAXb@CfCfAv@@fCdD|AMdCjA`E_AzBLfD|Ej@pB|@lAwAf@@lCxDWnBzAFX~BvAn@rBpCxC}Bj@cB|@A~@rAm@nC?lCj@n@j@Yj@_ClFeFJeAm@cEgAg@a@n@P`F_@j@c@EsC}GuBcC?aB`AWhC`BhByA~C[t@{@aAaEl@}@tJpEpBgA",
-   "pointCount": 117,
+   "polyline": "osfiEe~y}WeBdAo@kAaJT_Bm@Hi@~Bk@tE]p@}@EmDiByBm@mEyBcCN}@tAS[cDx@wFeB{EAuBkKrDoCoAoBnAo@o@aAcDbEsFPuD}@oAwCKkAyAm@Zc@pAy@_@IaChA{@VuBlBgCyAgGeCJgB}@}Cd@[_@g@cFe@q@gBg@kAH_CrAiB~CcAd@W}@n@wDx@_Bs@q@iFOh@yBaAkC~@{ACs@eBsA}A^GqAmBOs@~AmBcAuBpBg@ICuC`BqDE{@{CcI_BgAsAsGE}B`@y@o@e@sB`@i@u@zA{Az@eCQi@r@gA_AeIh@cFqAqAlAkC_@{D}@QmBgBuFfAcCgGqDEqCiBaAFeBhBgBDs@t@_E}@`@qCz@iAaCcJKwDwAoE@eBu@]o@t@YIk@qBeCcCu@RKj@c@W[Zx@rAdB@]h@_AJoA}@aAb@iBgAmBRaA{Ad@sDm@qA`As@JsBUqDaCaHKmDiAmA_@sCaAWMk@Aw@rCgE[iLkBwDeBm@}@uAHg@|Ae@pA{A^FBlCp@@No@s@mEeDgIy@rBmBa@}AbAuAOaBdCoCN_GqCaAd@uBaAeCcENcCsAPkAsA?vBwABEhEmCx@HpBe@tBg@`@`@lE{@hCp@xIl@WhC_G|AaArD|@UrDfAh@pAuHKcAqAu@p@q@hBdAd@fBnCjBjAvFCnBhA`Ji@hCa@~KzBxCJhDn@x@JvAgCfBe@|BaBbDc@lCkBiAkBpCo@BeA{BsBv@]f@`@vAg@zB@vBoEfHiEtBqDhAeCiAuD[yA_Hc@S_AjIUZcAk@M\\GvBtA`Bm@dCnANvEvCPx@qGrDGp@yAt@KdAzAhAItBvAnFv@D~BaDv@[t@dBKfBhAh@JjAwAfCsCPUjCkD\\aAUs@l@lAtAd@vD`ApCSbCyErHqEhAq@rBEjCeAtBqDp@e@oAEgKe@o@eAGn@sIeB{EiBiADaD{@qBHcArAcAb@yAS}FOiAi@e@{C@HqAy@i@JmAs@_Ap@kGmBkDQyAuAIc@m@yA?|@hBqBpEmDcBmCMmB_Ce@Lo@hCgAbAoAJwJ]iH\\uGw@qQNcLu@mCcB}FVoB`BeBHu@p@_Ca@}Gb@JzCgA^aEsDvDkDyASZaBEyB`BYKq@cEgB{@lBkHl@x@sBfBm@t@cDmBxBcG}D_DpDqAj@c@hAeBx@dBuKs@gCu@y@wBz@}@jBmCBiD}BmMo@cB_@wAmAc@iBh@oG{@{IIwGmAoEAsEg@mCNeEiKuIQiEg@eAkDLyCm@wAiNk@g@_EWyEmD_AqCpAcIi@i@_C`AgA?aD{AYk@WmH}BsFqC_AkEf@eBQmAgBmA_GcFcCqBcDiEa@cDzAcFOgCh@sGwGmB}@qIYmD{BmE`@u@U",
+   "pointCount": 372,
    "start": [
-    33.225787,
-    131.750657
+    33.134801,
+    130.882429
    ],
    "end": [
-    33.177031,
-    131.776941
+    33.239679,
+    130.947639
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -174,8 +198,8 @@
    "curviness": 620.8,
    "flow": 28.9,
    "turnCount": 244,
-   "score": 83.6,
-   "baseScore": 83.6,
+   "score": 98.3,
+   "baseScore": 98.3,
    "spotCount": 0,
    "polyline": "uxwiEc{d~WlHlBdED~BdAdCeBfCrElFP|EdBbBa@xGLjMkFxHaKxAkGbCGfAk@|IuNjBaAnDWzA}@lEo@f@cCbFrAzBI`FdBoAyCeCm@e@mB~BqBZsAgBwHpAsI`@{Nc@oD\\K\\zAXWG_EaAWe@qAt@_DScDvEoEOu@oARd@qBi@_BZwBlAkBt@W~AJbDjBHiD~DwA@gGrBs@dBgGvAqA}AY`DiCdASj@}BO_FhByGQaB}A{AnDa@vBtBv@SkDiGyAYgA~AoEyCqAGoCpBgDwC_AVg@nAcC@uCzCwC~@{@|BcDpBaJyAyE~@s@a@mAmCsIhCu@_Aq@cEsCJuEqA_ExB_Cq@eJuFgBPeBdAu@G}BoBk@aBgBeBqAaE_DeCcIoMwDyAs@{ACsBoAq@wBiDIuDuDoGm@mCqBqA}J{@wEvAqFgGsAWCuA]a@",
    "pointCount": 118,
@@ -186,85 +210,14 @@
    "end": [
     33.227322,
     130.983551
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "大分県:7",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "緒方高千穂線",
-   "ref": "7",
-   "highway": "primary",
-   "lengthKm": 29.97,
-   "curviness": 667.3,
-   "flow": 30.2,
-   "turnCount": 663,
-   "score": 83.5,
-   "baseScore": 83.5,
-   "spotCount": 0,
-   "polyline": "qoggEqd|`X_GL?kEkAa@iCDqBaBmBqFqBu@E_Cp@o@W_ClC}CqCaDcBs@GkBWMe@n@qAnD}Fv@q@a@RqBa@mBeBw@w@kD@oB]c@_ClBi@dBqC^qAbAmASmC{BeAiC_EcEg@wCNmHlCeB`B@^c@mAwCEsAwCPoEqAaDsBgBUb@_EgAeBDcDe@e@KzE`@zBiBtCStBvE`AnFdDkBlCaChARpAe@nB`AhDc@xGcAhCjCQjAp@fBxGtDbCNzBl@nAvCfAs@r@Dv@fDw@OvAhAbAkAPSb@rAf@d@|@yAvHpAjEm@UwBqF}AXwEuE_@VQvCa@V_C}DQuAiCsCKmFoEeByBgCsDkBaBwCg@cCcBsBTeGiBcB{EqKn@aEtBcDAcHgBs@_A{AaD_AFqBcAk@kAuBeBeAc@mByCgCIqB_AiBwBg@ZaDxAu@oBwE@oA_@o@PeAwD@qDwEeAfAiCw@qD^aBoAc@_B{A^k@]a@yBsATiAi@Es@iAeBQoCuAsEkBGiCgByBgGeAsA{CsAaEW{B_AkCt@oCqA_@iB\\sDq@}CiCsBwDJcGyDeDkLcBo@iFDsDuEqA^[wBcC]uAhAYiCeCu@iDhAWp@_EeAeCZCg@l@y@cA}AG_CeCN[{DoACeAkAoAIQmCoBmDo@?i@nBcBv@yB}CSuBmBk@U_B{Cc@gAxH_BVu@gBuBq@_AkAmDTsGoC}IWcCiCoA[uD]_BhCwBgBsCn@Ir@_B^yDwAkAb@_FuFaEgBcCsCyBo@_AjDThFx@rAcAfA\\`Fk@TgAm@yAjBw@N}AaAQgEe@I}At@g@e@n@uC|@mAsBuB@mDe@oBuDDgBrCuAwAiBfA{AY_@UQiATqE_@gBc@U_GEsDrAmBeAqAxB{@Xg@kBJkCkB}DaAO}@^kAk@mBV{BcCe@?_BfDf@lEk@VuAiBw@sC|@iJo@aCaAEuDfAcGmA}C^gCeD{A_@qATaBtDYnCd@xLmFzDe@`HiA^mBCgCoBkAB}BnAwA{AyAKVkBUsBoCJkCwAPy@zBwAEuDcEoBdAeCS_AeBc@wBPeAy@s@uGDaHkF?WxDw@VaFoGc@Bq@eB_F~FoBJi@g@R|A|@RShCyAX_EqAkG`BkE\\{ACkDiAgFU{FwBmWfAyC_AmJG}@g@s@mCo@g@mGdAkFkCwAQcHz@uE|CqHfBs]~B{ASwCqDcGwE_FmA{DtAoFRaGfAeMUqDyAmJaIi@wCkGiEwEmBcK{AeIxAuK_AyXkHaDaCcCeD",
-   "pointCount": 343,
-   "start": [
-    32.81161,
-    131.385209
-   ],
-   "end": [
-    32.965229,
-    131.450666
-   ]
-  },
-  {
-   "id": "大分県:8",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "日田鹿本線",
-   "ref": "9",
-   "highway": "primary",
-   "lengthKm": 29.95,
-   "curviness": 755.1,
-   "flow": 30.3,
-   "turnCount": 746,
-   "score": 83.5,
-   "baseScore": 83.5,
-   "spotCount": 0,
-   "polyline": "osfiEe~y}WeBdAo@kAaJT_Bm@Hi@~Bk@tE]p@}@EmDiByBm@mEyBcCN}@tAS[cDx@wFeB{EAuBkKrDoCoAoBnAo@o@aAcDbEsFPuD}@oAwCKkAyAm@Zc@pAy@_@IaChA{@VuBlBgCyAgGeCJgB}@}Cd@[_@g@cFe@q@gBg@kAH_CrAiB~CcAd@W}@n@wDx@_Bs@q@iFOh@yBaAkC~@{ACs@eBsA}A^GqAmBOs@~AmBcAuBpBg@ICuC`BqDE{@{CcI_BgAsAsGE}B`@y@o@e@sB`@i@u@zA{Az@eCQi@r@gA_AeIh@cFqAqAlAkC_@{D}@QmBgBuFfAcCgGqDEqCiBaAFeBhBgBDs@t@_E}@`@qCz@iAaCcJKwDwAoE@eBu@]o@t@YIk@qBeCcCu@RKj@c@W[Zx@rAdB@]h@_AJoA}@aAb@iBgAmBRaA{Ad@sDm@qA`As@JsBUqDaCaHKmDiAmA_@sCaAWMk@Aw@rCgE[iLkBwDeBm@}@uAHg@|Ae@pA{A^FBlCp@@No@s@mEeDgIy@rBmBa@}AbAuAOaBdCoCN_GqCaAd@uBaAeCcENcCsAPkAsA?vBwABEhEmCx@HpBe@tBg@`@`@lE{@hCp@xIl@WhC_G|AaArD|@UrDfAh@pAuHKcAqAu@p@q@hBdAd@fBnCjBjAvFCnBhA`Ji@hCa@~KzBxCJhDn@x@JvAgCfBe@|BaBbDc@lCkBiAkBpCo@BeA{BsBv@]f@`@vAg@zB@vBoEfHiEtBqDhAeCiAuD[yA_Hc@S_AjIUZcAk@M\\GvBtA`Bm@dCnANvEvCPx@qGrDGp@yAt@KdAzAhAItBvAnFv@D~BaDv@[t@dBKfBhAh@JjAwAfCsCPUjCkD\\aAUs@l@lAtAd@vD`ApCSbCyErHqEhAq@rBEjCeAtBqDp@e@oAEgKe@o@eAGn@sIeB{EiBiADaD{@qBHcArAcAb@yAS}FOiAi@e@{C@HqAy@i@JmAs@_Ap@kGmBkDQyAuAIc@m@yA?|@hBqBpEmDcBmCMmB_Ce@Lo@hCgAbAoAJwJ]iH\\uGw@qQNcLu@mCcB}FVoB`BeBHu@p@_Ca@}Gb@JzCgA^aEsDvDkDyASZaBEyB`BYKq@cEgB{@lBkHl@x@sBfBm@t@cDmBxBcG}D_DpDqAj@c@hAeBx@dBuKs@gCu@y@wBz@}@jBmCBiD}BmMo@cB_@wAmAc@iBh@oG{@{IIwGmAoEAsEg@mCNeEiKuIQiEg@eAkDLyCm@wAiNk@g@_EWyEmD_AqCpAcIi@i@_C`AgA?aD{AYk@WmH}BsFqC_AkEf@eBQmAgBmA_GcFcCqBcDiEa@cDzAcFOgCh@sGwGmB}@qIYmD{BmE`@u@U",
-   "pointCount": 372,
-   "start": [
-    33.134801,
-    130.882429
-   ],
-   "end": [
-    33.239679,
-    130.947639
-   ]
-  },
-  {
-   "id": "大分県:9",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "西大山大野日田線",
-   "ref": "698",
-   "highway": "secondary",
-   "lengthKm": 10.36,
-   "curviness": 719.6,
-   "flow": 28.9,
-   "turnCount": 258,
-   "score": 83.5,
-   "baseScore": 83.5,
-   "spotCount": 0,
-   "polyline": "idwiE{dz}WmA~GwDvGFvDg@Eo@_EgKKmBr@{@nB?nIc@@yAuCaDuB_Cb@mCtBwCfA}@s@~FuJCs@qEoBqDcFeChBGa@bCiC?i@}AA_DsDgBjCcCfBu@BwDyDGyEm@]mB?gEqC@fA`CfDxAz@aAfC|@rEfCT\\pBoAxA{CzAf@tFeF`@e@zBcA^}@pAEn@Zf@fCvAHp@mBVyFq@{@z@_CBu@|ANbBzCb@oA`JwAbAoBSy@fAsB]i@PHbA|BxCl@pDdAlBDhC[~@sAZc@vDm@V}@fBeC|IoCdBNdB{A|L|@nHhD`D|@pBl@Fr@u@fC`ChBm@|@eBVFr@tBFpIcAhBInB{AhBYxCmDzCsA\\mA~AGrEeApKkBvFqEDmErDcCc@uBf@eAnABhEsAhC_Gk@oBoBm@iD{Aq@cC^sAs@k@oBgA@yIlD_BLyEnCwA_@oApAgDcF_DF{CqB",
-   "pointCount": 124,
-   "start": [
-    33.219406,
-    130.883498
-   ],
-   "end": [
-    33.255096,
-    130.849459
-   ]
-  },
-  {
-   "id": "大分県:10",
    "region": "oita",
    "regionName": "大分県",
    "name": "佐賀関循環線",
@@ -274,8 +227,8 @@
    "curviness": 679.2,
    "flow": 28.6,
    "turnCount": 259,
-   "score": 83.5,
-   "baseScore": 83.5,
+   "score": 98.2,
+   "baseScore": 98.2,
    "spotCount": 0,
    "polyline": "ey|iEsb{cXs@a@Q}@l@eJO}AuDuDiK}DHsKU_BiCwBuAkClCcI~BaA_B_Bd@{AjBu@WvBpAbA\\lAb@G_@uCx@}C?qDeFgHgDh@_@SW{@Ty@QaCa@cA}Ay@oAiBKiG}D}AkBoCwJ[_DhA_@tBqCfBQpByALk@c@O_CoFoGTwD}@sCcGm@qBcB_BiKO_EiCiJlBuGZaFc@WeB~@e@k@ToGnB_Ch@iC~Dx@VtA[pC|D@fErEEp@eAhAdB_@|@~BzCfDzBNdEzBfAIrAgAhCYjDxC|AHJvCoArDn@fBlA`B`B|@pFa@TlE`@l@jCl@jAqBhA?fClB|@~BhE|@t@M|BsB`FU`G~ETz@aA`@@jCvCzDLpAjDXExFvArBB~Cq@dBwB`@_A`Ev@~JvBtCFhB}AnH}EbAiAvBc@rD~@rG_@f@v@z@`BHzAvCbGnChDmAtE?vH`AzCpAjCk@PbA",
    "pointCount": 125,
@@ -286,10 +239,14 @@
    "end": [
     33.238506,
     131.874447
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:11",
+   "id": "大分県:8",
    "region": "oita",
    "regionName": "大分県",
    "name": "神原玉来線",
@@ -299,8 +256,8 @@
    "curviness": 588.9,
    "flow": 31.5,
    "turnCount": 144,
-   "score": 83,
-   "baseScore": 83,
+   "score": 97.6,
+   "baseScore": 97.6,
    "spotCount": 0,
    "polyline": "}}_hEgm|`X|HkNnD~AlEd@jAUhBp@|CkB~Ec@~@RzAfBjCaApB_EnG}DdCg@tCp@dAzCf@h@lAL`Am@PoCt@wAx@ItBnClBHdG{FhAn@Z|EtA`D~FfBlF^`KmDbGcA`Ar@tDv@lEzCf@~ABlCl@|B]rCn@nInBjEv@`EcAbFN`GfJbUfAhIpBfBdBtE`DpAXhBdAg@`CExB|BdCRzBzDlCEhN~LxE|MhDpApAnEzCzE^lBzAw@f@NtA~PdA`AzBc@w@vB|AMUn@f@Jo@\\d@Ru@^fENbHhC",
    "pointCount": 76,
@@ -311,10 +268,14 @@
    "end": [
     32.893229,
     131.358101
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:12",
+   "id": "大分県:9",
    "region": "oita",
    "regionName": "大分県",
    "name": "鯛生菊池線",
@@ -324,8 +285,8 @@
    "curviness": 698.1,
    "flow": 28.5,
    "turnCount": 190,
-   "score": 83,
-   "baseScore": 83,
+   "score": 97.6,
+   "baseScore": 97.6,
    "spotCount": 0,
    "polyline": "ku`iE_|v}W|@EnCmCfKgBdCcAx@FzErC`F{@lBDpHnDdDT|KyEzPmB|CzAfAdBk@rA}D`C}AxBiDpAc@zDt@j@l@|BhBPh@c@CiA]q@cCi@JsBlCu@xBkC|CgApDkEC{A}@oA@eAoAcAM}Bn@]dGGfBm@z@wCvASjA_A`Fp@s@`CoAjAGhGo@~C`AzBxErDn@a@?eFv@o@LjBnAZ~@~CfBhChA[r@oCh@_@b@RbAxDxBbBbASl@wAlAHr@{ArF|D@rCtA`@SfBnDpAxFkAiBwEh@SvCf@j@s@]kBwCsEFqBx@SfDpApEe@rDjBbDjEMx@s@PoFiCsARDjAlD`G`Cx@rHsA",
    "pointCount": 93,
@@ -336,10 +297,14 @@
    "end": [
     33.070858,
     130.864127
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:13",
+   "id": "大分県:10",
    "region": "oita",
    "regionName": "大分県",
    "name": "川原上野田線",
@@ -349,8 +314,8 @@
    "curviness": 782.4,
    "flow": 30.5,
    "turnCount": 191,
-   "score": 83,
-   "baseScore": 83,
+   "score": 97.6,
+   "baseScore": 97.6,
    "spotCount": 0,
    "polyline": "su~hEqql~W~@j@`AuB|@e@hC|@vGg@|ErDp@hF^\\tB^pDE|EpAjClDxAZbCdClCf@~@nAnFAxG~BxHbLvAHlBnAtAq@bGbBVvAsC?zBrBBbBSd@}AFQh@|A`@dB_@fAn@tAAR^wA|BpBN`B|AbF_@zDaBRJQtBx@gApBA`CvDTM?gAlBRxCY|@dA?xAn@F|Ak@y@oAjBT\\zAbAl@nAvCIdChBpBqA`JlB`DcAzCPjDSlE{EfMI`FZXl@Y|FgHtB{@rAuC|@?HdAc@xAwDpF?fBw@^cAdFsAbBhDzEn@|Ad@pF`FvJfCJrAjBd@tCp@_@k@oB^g@vAN|@t@^nDlEW",
    "pointCount": 95,
@@ -361,35 +326,14 @@
    "end": [
     33.062421,
     130.946346
-   ]
-  },
-  {
-   "id": "大分県:14",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "朝田日田線",
-   "ref": "106",
-   "highway": "secondary",
-   "lengthKm": 6.42,
-   "curviness": 711,
-   "flow": 28,
-   "turnCount": 163,
-   "score": 82.8,
-   "baseScore": 82.8,
-   "spotCount": 0,
-   "polyline": "q{~iEa~w}Wb@`B{@nA@dAtBt@lDcCl@NJz@aApFpAdCvA~@cF|Dz@bEgAxHlBnJ?zHpI~Gy@pBy@dHd@H|DiEbEe@jAF\\j@Ej@cCp@kA~D_Dq@FbJPd@nA\\dBrD?~@aChIXjB|@dANnEYrFqAbBMcB}@VYn@s@@iDcBsBKyCmCeD_@_@d@g@lDkHf@yA|CcD|AuCrCE~@q@\\iAdD}C[_Cb@iApEqAbCqAZyC`CwCJ{BdBcBRwArBsG}@cC|CoItCq@jA_@|Dq@`BoDl@iCvAwAnAeA`C",
-   "pointCount": 76,
-   "start": [
-    33.258966,
-    130.872174
    ],
-   "end": [
-    33.275983,
-    130.837852
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:15",
+   "id": "大分県:11",
    "region": "oita",
    "regionName": "大分県",
    "name": "大入島北循環線",
@@ -399,8 +343,8 @@
    "curviness": 592.6,
    "flow": 27.6,
    "turnCount": 162,
-   "score": 82.6,
-   "baseScore": 82.6,
+   "score": 97.1,
+   "baseScore": 97.1,
    "spotCount": 0,
    "polyline": "sukhE}jedXlAeCi@}@WuGaCaAsCCsBcBoDiAc@iDuEyG_CkGmEkA{AkE}G}Kq@WaAd@mAhCgAg@iAT_Ae@M_EqBq@DyBmAwDwDSkAs@{@f@uCc@oBjAaCFwEkBgBqCF}B`@w@aRgUmAf@l@zEgAnAu@tCp@vGUfBt@xBw@tEZpE}D`I|EtCRp@NfDYjDc@lAyAh@Et@t@tAb@|DjDj@^bD`EjN~Fb@bAwAEaCp@qAx@QvARzBfCb@tAJ~CjApAnBp@zCMrLwCvDJxFu@rA|@vRk@tAh@xCOpCbEfCErAxArCMz@eA",
    "pointCount": 81,
@@ -411,10 +355,15 @@
    "end": [
     32.996898,
     131.923834
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:16",
+   "id": "大分県:12",
    "region": "oita",
    "regionName": "大分県",
    "name": "挾間野津原線",
@@ -424,8 +373,8 @@
    "curviness": 566.7,
    "flow": 28.9,
    "turnCount": 110,
-   "score": 82.6,
-   "baseScore": 82.6,
+   "score": 97.1,
+   "baseScore": 97.1,
    "spotCount": 0,
    "polyline": "qiriEoetaXa@yEBuIxCJhBwEXZb@tV^TrFkAZeCq@uV^q@dKl@`FSfBu@xCkFhAL`BlCfAZ|JkEzB|BxIrE|CiA~ChArCg@|Dr@dFsChAeE|BaC~BmFdC_BlLuCrAnCxAz@zB}AfCdD`@@p@qBiAPSe@x@s@\\}A|B}@{AgAC{Aw@_BbAqDjAa@pAwCfBeBzEa@jDkBjBIb@sDbBaAvCsD",
    "pointCount": 56,
@@ -436,60 +385,14 @@
    "end": [
     33.165005,
     131.524418
-   ]
-  },
-  {
-   "id": "大分県:17",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "御泊奥江線",
-   "ref": "613",
-   "highway": "secondary",
-   "lengthKm": 5.01,
-   "curviness": 828,
-   "flow": 33.2,
-   "turnCount": 125,
-   "score": 82.4,
-   "baseScore": 82.4,
-   "spotCount": 0,
-   "polyline": "islgEkbyaXfAkAlAjAh@]w@eA_@aCmDmEa@iBgEsDYyFaAiBU{FgBiD?cBl@oAMqAt@}@u@_Bd@}AcA{BBsEeCwAuAEu@kD}@{Ak@oDLoBiAQg@qA\\kCvAT~CgBOo@wCc@IaAz@{AAqBdAiCjAHX[wBkA}Bd@s@qAuBe@i@{B[FHtEgA`@oC}IVwB`CeAfEpBp@K[kDRqC~CsARo@K_GVmBHsRdBcEUqFzFsHtDeB`E_H",
-   "pointCount": 65,
-   "start": [
-    32.837812,
-    131.533342
    ],
-   "end": [
-    32.838072,
-    131.567706
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:18",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "西大山大野日田線",
-   "ref": "698",
-   "highway": "secondary",
-   "lengthKm": 4.86,
-   "curviness": 654.4,
-   "flow": 29.7,
-   "turnCount": 107,
-   "score": 82.4,
-   "baseScore": 82.4,
-   "spotCount": 0,
-   "polyline": "g~xiEia~}WdBd@SxC^n@vGbEL[wAaCaCoHRq@`BaAhEkA?i@_A}@KaDRAn@`CrAElA~B?dBfEdAfDtErBiAjImObDsAfBCd`@dBhE`Ff@pA@fBhBIzAp@S`AeBn@PnAh@F`GoB`BcCYeE|@a@TuAzA}A{@cCPkCi@iCz@}A\\uEmCmDb@qFq@yLf@}Cz@_@s@{F~AaFpC{A",
-   "pointCount": 54,
-   "start": [
-    33.228675,
-    130.903406
-   ],
-   "end": [
-    33.209498,
-    130.917275
-   ]
-  },
-  {
-   "id": "大分県:19",
+   "id": "大分県:13",
    "region": "oita",
    "regionName": "大分県",
    "name": "野津宇目線",
@@ -499,8 +402,8 @@
    "curviness": 572.9,
    "flow": 29,
    "turnCount": 267,
-   "score": 82.3,
-   "baseScore": 82.3,
+   "score": 97,
+   "baseScore": 97,
    "spotCount": 0,
    "polyline": "ainhEeszbXdHTjEmEfIgAbEoA`MsGbDHfQ~G~IXdGoAv@s@pAyDtC{B|ISxFrE|A|GnIvQnAbEbGbMtBdCrDv@|Fg@rH@~IeAjL\\bCt@vDfF|HbZdDtArFoAlA^XxAeBdEVlCpCxArBS`DdI|BrKzAt@`CfDpA@nB|AnFnJdA|IpD~DvE|CrAQ~DpDjCo@zAn@vA~Bv@X\\tBjBhCrFfMdGjCjAdIpBr@bAzBlGdFzCpAdClDlAWm@x@[zB^An@gB~Av@DmBdBk@w@k@PmAoEAK{Bl@~@fGaAvBqCfAdC[v@\\vAzBqA`@ZUtA|Ba@b@hAb@D^~Bq@lBrA|@m@zBtBEh@`@@tEY`AdDdBFd@WzEqAlDaCxCE~AE]D\\tH}ClBTL}@bCqB~B]dBTlAmBnCmApB_CfCcAl@iBrB]tAuB`AcHhCeCjDQnA`AfAGZ_AzDuCzCuGfCaBlHQlHiItGd@lAn@hASpArBpC}@",
    "pointCount": 131,
@@ -511,60 +414,43 @@
    "end": [
     32.931469,
     131.6733
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:20",
+   "id": "大分県:14",
    "region": "oita",
    "regionName": "大分県",
-   "name": "川原上野田線",
-   "ref": "712",
+   "name": "西大山大野日田線",
+   "ref": "698",
    "highway": "secondary",
-   "lengthKm": 4.62,
-   "curviness": 849.4,
-   "flow": 30.4,
-   "turnCount": 129,
-   "score": 82.3,
-   "baseScore": 82.3,
+   "lengthKm": 4.86,
+   "curviness": 654.4,
+   "flow": 29.7,
+   "turnCount": 107,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
-   "polyline": "kmxhEsjc~WLgAxB{AUs@wB}@?_AtAqAtB]A}@eB_BrBcBVwAYu@_BaA~@uBq@gCPsGuCi@e@m@KoAb@e@dCDv@}Bl@a@fEhBj@k@CwBz@u@|AArA~@pBs@@sAiAmGvA}Go@oGv@sEhBiAH_BhAyBKkA{FmD]aBcBCQoHwCiAs@_BkBaBuAqDHnIs@tDb@f@nACB~EpAdEkCj@cB|AkD|@y@nEpBxAV~CM~@{@h@q@pBOhB^|E",
-   "pointCount": 65,
+   "polyline": "g~xiEia~}WdBd@SxC^n@vGbEL[wAaCaCoHRq@`BaAhEkA?i@_A}@KaDRAn@`CrAElA~B?dBfEdAfDtErBiAjImObDsAfBCd`@dBhE`Ff@pA@fBhBIzAp@S`AeBn@PnAh@F`GoB`BcCYeE|@a@TuAzA}A{@cCPkCi@iCz@}A\\uEmCmDb@qFq@yLf@}Cz@_@s@{F~AaFpC{A",
+   "pointCount": 54,
    "start": [
-    33.06214,
-    130.930498
+    33.228675,
+    130.903406
    ],
    "end": [
-    33.062477,
-    130.94174
+    33.209498,
+    130.917275
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:21",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "臼杵津久見線",
-   "ref": "217",
-   "highway": "secondary",
-   "lengthKm": 4.54,
-   "curviness": 678.3,
-   "flow": 28.5,
-   "turnCount": 108,
-   "score": 82.3,
-   "baseScore": 82.3,
-   "spotCount": 0,
-   "polyline": "qc`iEaaucXpAm@l@qIpBJt@sAY{BcDaFA_AhCYbL~Bx@e@h@}Ac@aDpAoBeAgBG{@vB}A~@cDUm@uDu@FmAvBeCi@}@uCqA`@}BaBgCD{@jC[dC~@tFyAnFfDBfA}A\\}E{C_C\\i@x@`@rAjFrC@dB_AfA@h@xA|AbCfGvDhDUjCgDhEZz@xBcCfDgJtCkElCeCXaBGcDz@sBtHN",
-   "pointCount": 55,
-   "start": [
-    33.101527,
-    131.840331
-   ],
-   "end": [
-    33.090078,
-    131.850525
-   ]
-  },
-  {
-   "id": "大分県:22",
+   "id": "大分県:15",
    "region": "oita",
    "regionName": "大分県",
    "name": "成仏杵築線",
@@ -574,8 +460,8 @@
    "curviness": 1071,
    "flow": 35,
    "turnCount": 143,
-   "score": 82.3,
-   "baseScore": 82.3,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
    "polyline": "qm|kEa{ibXq@d@|@dBS^uA}Ba@ZLlAw@|@NhAwBxHzANMzDqDrKXZj@oAn@E?rCv@zAgBm@]pDqBLmBeDuEPId@bAzBEh@qBd@oDKXrEcAxBy@A{BiDoBIu@z@ShDg@z@oC}By@CcCvB{BWsB`@yC]}BtBqB_AiHMd@jHsCk@i@jB`AxIo@PsC}@a@dDmCgCiDf@YdCXzFkBfBuB]OrAu@x@N|AyCoB}@fFg@d@",
    "pointCount": 64,
@@ -586,110 +472,43 @@
    "end": [
     33.59362,
     131.600899
-   ]
-  },
-  {
-   "id": "大分県:23",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "大分大野線",
-   "ref": "41",
-   "highway": "primary",
-   "lengthKm": 12.12,
-   "curviness": 593.2,
-   "flow": 29.3,
-   "turnCount": 245,
-   "score": 82.2,
-   "baseScore": 82.2,
-   "spotCount": 0,
-   "polyline": "itciE}h`bXdFc@jAaCjDm@GuAmBwB{Cg@aAqAw@h@mAwA[JUbBoA{ByEwCcDZoE_AkFb@gHyAcFp@{Aw@gCz@_BGuAfB}@YeBlAoAScDqBcF@{AsE_KqEQqATmBiCS}AsAqCWaAmBqAaAeA}EwEyA[eCkC`CkFwAiAoBf@gBy@g@@wCw@k@_BE}BzAgLuA}Db@yIWs@]qBd@mJqCwDRFlAU`@qCgCa@\\a@pCc@Lo@k@cAmGu@y@s@Za@hBs@cEmAMy@h@k@bCy@wBPaDYa@o@CcB~@e@}@m@HiB{@eA{AKtCuBsAiCX`@sCY}@_DK}DzA{A{C}AW\\gCYkAaCe@yLTiLeIcD@aFbB_CM_BqAeB_EuA}AeJgE{Bj@uEfEqLpAyCkCqBq@wH{@cElBmAJ_K{C}DY}Ay@aISiBiAkD^mDSgRjFwCq@wOZwc@xM_GZkInN",
-   "pointCount": 122,
-   "start": [
-    33.11957,
-    131.570232
    ],
-   "end": [
-    33.202404,
-    131.587136
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:24",
+   "id": "大分県:16",
    "region": "oita",
    "regionName": "大分県",
-   "name": "百枝大野線",
-   "ref": "693",
+   "name": "臼杵津久見線",
+   "ref": "217",
    "highway": "secondary",
-   "lengthKm": 11.9,
-   "curviness": 547.3,
-   "flow": 26.5,
-   "turnCount": 246,
-   "score": 82.1,
-   "baseScore": 82.1,
+   "lengthKm": 4.54,
+   "curviness": 678.3,
+   "flow": 28.5,
+   "turnCount": 108,
+   "score": 96.7,
+   "baseScore": 96.7,
    "spotCount": 0,
-   "polyline": "khthEmwsaXfAbCjBjBb@o@?mD|DcAxBuDBoHw@kByBsAmAsCa@yFD}F`@kBxM{WzEsE|BoAvRuG`IuLbCkGxWsJnCuEtC_NzCkDr@}FxEcHn@uClAoBbDzBpB|EbCnCxC{DnAIhBdFvBj@l@~Cz@@jAsB|A|ArCh@pFm@`D~A^dE`AoAp@kEfDDb@{AtCqAd@qBlBB~Aw@fAtAhAw@@u@nAKtBiCfEi@dAuAfBBZe@VgEiAuFfAm@L{AhAW~AcFpAuAb@cCcAkAEq@xAiEaCyA_A{AYaBRcGi@}CGuDsAcCeByA`CwEg@gCH_AxBgBkCsAGk@vAoDzA[@}Bx@qAe@cBpBmBzAaG~HkH\\oEtFkDzI_K~@wCbB_BZiAmDiO}FeMi@iFj@oC{A}@}@aBuCa@m@o@iEiN}@yIjAgErHwClAiAlAsCs@kC|A{C\\_Dd@_@",
-   "pointCount": 117,
+   "polyline": "qc`iEaaucXpAm@l@qIpBJt@sAY{BcDaFA_AhCYbL~Bx@e@h@}Ac@aDpAoBeAgBG{@vB}A~@cDUm@uDu@FmAvBeCi@}@uCqA`@}BaBgCD{@jC[dC~@tFyAnFfDBfA}A\\}E{C_C\\i@x@`@rAjFrC@dB_AfA@h@xA|AbCfGvDhDUjCgDhEZz@xBcCfDgJtCkElCeCXaBGcDz@sBtHN",
+   "pointCount": 55,
    "start": [
-    33.040857,
-    131.505993
+    33.101527,
+    131.840331
    ],
    "end": [
-    33.000097,
-    131.578272
+    33.090078,
+    131.850525
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:25",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "文珠山浜線",
-   "ref": "544",
-   "highway": "secondary",
-   "lengthKm": 4.13,
-   "curviness": 550.5,
-   "flow": 28,
-   "turnCount": 81,
-   "score": 82.1,
-   "baseScore": 82.1,
-   "spotCount": 0,
-   "polyline": "eealEioebXqBUkA{@iCNuAaDqCo@r@{BgBw@wAT_EaAqA\\kE[{A_@qBaB_BmDk@uEwA{BX[dDvBz@OcCuCgDkHmFwCJUfBXEo@uF}C}BJ`A}D_Da@e@mC{CuHaJoNYeEb@gEo@gH_AwC}FoJcA}DsByBmEoLaHcF",
-   "pointCount": 42,
-   "start": [
-    33.598432,
-    131.596849
-   ],
-   "end": [
-    33.617623,
-    131.62292
-   ]
-  },
-  {
-   "id": "大分県:26",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "小川穴井迫線",
-   "ref": "699",
-   "highway": "secondary",
-   "lengthKm": 12.01,
-   "curviness": 538.6,
-   "flow": 27,
-   "turnCount": 240,
-   "score": 82,
-   "baseScore": 82,
-   "spotCount": 0,
-   "polyline": "w|bhEwzv`XcL`@aBzIiDjIsCfByCEoCj@sAxAInGh@h@lCT~AtA^pCSfEjB|EQhBzB`AAxDgAdA@fBuA|ESpJ~@bOhCzJ_Az@{BW_BZeBbBO`Dz@nPU`@qADm@v@GrAx@|BkCrG{FvAu@pCqFxHoDS}@Z{JfKFbBjDjGo@pD}C`BaH|A{DnCqAxDaAd@oB{AyAOwE{BqBaCwQaIg@iB}BmAFxMoAzICbQm@dAoDy@{F`FcArCcDa@gDlDKhFwAhBN|Bk@jB`EvBVhCq@|@kBd@{BqBwDCg@\\KtD{@wCk@|CaAOiAuAqB`@mCqBuDsAyA@}@v@yAYqCx@sArEoCmBsJdCUdDaDdAs@iB_DyAsAmD{CwAs@mAcEc@eHoBgAvGwD]oE`Bi@jB{Al@y@rAkD`LyC~Bm@zAgItEaGSi@eAAuAsB}@eEi@sBgC{D}@",
-   "pointCount": 118,
-   "start": [
-    32.951961,
-    131.358039
-   ],
-   "end": [
-    33.006452,
-    131.307325
-   ]
-  },
-  {
-   "id": "大分県:27",
+   "id": "大分県:17",
    "region": "oita",
    "regionName": "大分県",
    "name": "日田鹿本線",
@@ -699,8 +518,8 @@
    "curviness": 635,
    "flow": 29.2,
    "turnCount": 221,
-   "score": 81.9,
-   "baseScore": 81.9,
+   "score": 96.5,
+   "baseScore": 96.5,
    "spotCount": 0,
    "polyline": "}ofiE}xy}WbCnCHbCi@vFR`@hEsFfBgAb@}Ax@_@zDt@vFaBfANnBrDIz@|@jFf@b@h@k@R_ClCyInAEtFpDpAy@|@pAfDiDbCGt@bCLbCrEzErDzA~DZfBr@fFvHrGvDjH`B|FlIfNvNzHjNrBT~DWzC~@jBjCfPtAjAtD~BbAEfCZhA`CzDt@lDvGfKOfFlAbFaAfNtDfN[p@y@O_B}Fi@ARnG`AtCaCzAu@fB`A|CPxEx@?hBsBv@J?pCoAbG`AN~CiC|@Rx@nB}@xBhEjGDdFhCUzBtAvAPxDhDb@vCrD~CzB^dCiAx@dATpBjAvArALTc@eAeC@q@~AQz@yAdB@tA{AZlChCLd@xB`ATl@rGnCSMkEh@SFpCl@zCO`@_A@S~@k@Xj@zAmArA_@lB_C@]gA",
    "pointCount": 113,
@@ -711,10 +530,101 @@
    "end": [
     33.089546,
     130.83815
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:28",
+   "id": "大分県:18",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "百枝大野線",
+   "ref": "693",
+   "highway": "secondary",
+   "lengthKm": 11.9,
+   "curviness": 547.3,
+   "flow": 26.5,
+   "turnCount": 246,
+   "score": 96.5,
+   "baseScore": 96.5,
+   "spotCount": 0,
+   "polyline": "khthEmwsaXfAbCjBjBb@o@?mD|DcAxBuDBoHw@kByBsAmAsCa@yFD}F`@kBxM{WzEsE|BoAvRuG`IuLbCkGxWsJnCuEtC_NzCkDr@}FxEcHn@uClAoBbDzBpB|EbCnCxC{DnAIhBdFvBj@l@~Cz@@jAsB|A|ArCh@pFm@`D~A^dE`AoAp@kEfDDb@{AtCqAd@qBlBB~Aw@fAtAhAw@@u@nAKtBiCfEi@dAuAfBBZe@VgEiAuFfAm@L{AhAW~AcFpAuAb@cCcAkAEq@xAiEaCyA_A{AYaBRcGi@}CGuDsAcCeByA`CwEg@gCH_AxBgBkCsAGk@vAoDzA[@}Bx@qAe@cBpBmBzAaG~HkH\\oEtFkDzI_K~@wCbB_BZiAmDiO}FeMi@iFj@oC{A}@}@aBuCa@m@o@iEiN}@yIjAgErHwClAiAlAsCs@kC|A{C\\_Dd@_@",
+   "pointCount": 117,
+   "start": [
+    33.040857,
+    131.505993
+   ],
+   "end": [
+    33.000097,
+    131.578272
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:19",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "文珠山浜線",
+   "ref": "544",
+   "highway": "secondary",
+   "lengthKm": 4.13,
+   "curviness": 550.5,
+   "flow": 28,
+   "turnCount": 81,
+   "score": 96.5,
+   "baseScore": 96.5,
+   "spotCount": 0,
+   "polyline": "eealEioebXqBUkA{@iCNuAaDqCo@r@{BgBw@wAT_EaAqA\\kE[{A_@qBaB_BmDk@uEwA{BX[dDvBz@OcCuCgDkHmFwCJUfBXEo@uF}C}BJ`A}D_Da@e@mC{CuHaJoNYeEb@gEo@gH_AwC}FoJcA}DsByBmEoLaHcF",
+   "pointCount": 42,
+   "start": [
+    33.598432,
+    131.596849
+   ],
+   "end": [
+    33.617623,
+    131.62292
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:20",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "小川穴井迫線",
+   "ref": "699",
+   "highway": "secondary",
+   "lengthKm": 12.01,
+   "curviness": 538.6,
+   "flow": 27,
+   "turnCount": 240,
+   "score": 96.4,
+   "baseScore": 96.4,
+   "spotCount": 0,
+   "polyline": "w|bhEwzv`XcL`@aBzIiDjIsCfByCEoCj@sAxAInGh@h@lCT~AtA^pCSfEjB|EQhBzB`AAxDgAdA@fBuA|ESpJ~@bOhCzJ_Az@{BW_BZeBbBO`Dz@nPU`@qADm@v@GrAx@|BkCrG{FvAu@pCqFxHoDS}@Z{JfKFbBjDjGo@pD}C`BaH|A{DnCqAxDaAd@oB{AyAOwE{BqBaCwQaIg@iB}BmAFxMoAzICbQm@dAoDy@{F`FcArCcDa@gDlDKhFwAhBN|Bk@jB`EvBVhCq@|@kBd@{BqBwDCg@\\KtD{@wCk@|CaAOiAuAqB`@mCqBuDsAyA@}@v@yAYqCx@sArEoCmBsJdCUdDaDdAs@iB_DyAsAmD{CwAs@mAcEc@eHoBgAvGwD]oE`Bi@jB{Al@y@rAkD`LyC~Bm@zAgItEaGSi@eAAuAsB}@eEi@sBgC{D}@",
+   "pointCount": 118,
+   "start": [
+    32.951961,
+    131.358039
+   ],
+   "end": [
+    33.006452,
+    131.307325
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:21",
    "region": "oita",
    "regionName": "大分県",
    "name": "前津江星野線",
@@ -724,8 +634,8 @@
    "curviness": 643.7,
    "flow": 27.7,
    "turnCount": 90,
-   "score": 81.8,
-   "baseScore": 81.8,
+   "score": 96.1,
+   "baseScore": 96.1,
    "spotCount": 0,
    "polyline": "qjviEqnv}Wv@|E|AhBFxB`B~D@hHw@hH`@pHcArDHtDw@hFnBlNG|IZtA~BnB`D|EXfJ_Ae@]uEqAs@qC[eA_Cg@LD`@hDnIo@nEnAtDd@JXsAZIzE|B{BjLvBr@|B@rAq@`A|AzAA_GpEC`B~EzArBiA",
    "pointCount": 41,
@@ -736,10 +646,14 @@
    "end": [
     33.209777,
     130.839714
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:29",
+   "id": "大分県:22",
    "region": "oita",
    "regionName": "大分県",
    "name": "高崎大分線",
@@ -749,8 +663,8 @@
    "curviness": 557.7,
    "flow": 26.8,
    "turnCount": 127,
-   "score": 81.6,
-   "baseScore": 81.6,
+   "score": 95.9,
+   "baseScore": 95.9,
    "spotCount": 0,
    "polyline": "s`xiEkkyaX@mBwA{@uBh@iCvDk@@yCcFq@cG{BsDiASyEdBu@Mo@}@iAkEFyAzFmIf@gB[sL_BsFl@qFLqG}Nm@aFrEuATk@qAc@I}DhCeDlDa@pAeB\\aA|CwAjAaC{@XgB~BmFBiAeInBwAz@k@QGwBdAyBvB}AzAOfBuB?o@s@oAdAsDHoBoBWOe@tBkB`AwFbD{CRsF`Bw@~DaKf@wEzA}CcDmJ_Aw@c@mC}CZkCnAa@SfB{Cd@eEs@iJiBgE",
    "pointCount": 68,
@@ -761,10 +675,14 @@
    "end": [
     33.23628,
     131.564865
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:30",
+   "id": "大分県:23",
    "region": "oita",
    "regionName": "大分県",
    "name": "別府一の宮線",
@@ -774,8 +692,8 @@
    "curviness": 868.6,
    "flow": 34.7,
    "turnCount": 161,
-   "score": 81.3,
-   "baseScore": 81.3,
+   "score": 95.7,
+   "baseScore": 95.7,
    "spotCount": 0,
    "polyline": "cm}iEs_k`Xn@A~CnBjDLxCkF~@iFzDAh@nBhCa@dHbCz@iDdBqB`DeBs@aAaDi@Cc@|CcC`EZOmBoBo@}BT]kB`CwDhBW^kAdA^x@YLw@aBqC@u@lFq@@yB~B][aBbAeAGeCjCiAg@cD{DXp@_EO}@{BR][h@oAP_G`@Kx@|@r@g@N_AiAuCa@QmA\\[_@m@wC^s@dALLYyBmGqAPeBtFyBm@sAfAk@nBiPtGcAlBg@m@v@_DaAQUm@jBcCjBL`FiChG}EnAsCdBeJVaPWkB|EuD@oHfAwBc@kBZiC",
    "pointCount": 82,
@@ -786,10 +704,14 @@
    "end": [
     33.241816,
     131.325104
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:31",
+   "id": "大分県:24",
    "region": "oita",
    "regionName": "大分県",
    "name": "宇目清川線",
@@ -799,8 +721,8 @@
    "curviness": 532.6,
    "flow": 26.7,
    "turnCount": 437,
-   "score": 80.8,
-   "baseScore": 80.8,
+   "score": 95.1,
+   "baseScore": 95.1,
    "spotCount": 0,
    "polyline": "uemgEey`bXgCVcCy@{ApBcFv@AxCqB?iAsBWLBrAUBwAE}@k@cHC[cBsBt@sEkDaDHkAr@eCdEmIn@eFhF_@jAPrKe@tAiDDoD`BgAmA}@jCiEnCgDVsBhA}Bk@[hAqBZZbB_AxG_BnBiCM}JsHc@n@fAzA{@v@_CDgA`By@o@iAn@o@aA{@zAPhBoAbCc@?kAsAu@pAn@tBWx@kCVeDw@yDtBkBpBgGzCkAzF{@v@Q`B_B~BaBtR}AzDo@EE_DiB}@nAkCu@cCsCl@FrDfAhDgApJeDd@}@p@i@Ma@lA_B_@cGpEcCx@Id@n@vA~@KnBv@`ACHt@iAdB`AZFvB_BO{@TKh@iAw@wAJuBtBKYpAoDoFF_Ar@wCToBhEoA`HmBlAs@pAaCz@gArNeJt@qAfBqD^iC`EyQiImJV_GuCyE{NqBmBO}DiAqDcAeAgC_AgANcCnD_Eb@}DhBiNz@cKdBwCy@cDuH{BWoEnDwBrHuB?uCoBaBd@o@bAw@jKmApBoEpCcA`JqA\\iGWeA|@[v@PfFcAvBs@PkN_Ce@wAgBSeLvIaDWcCmAcEQqA^yBvByKxEyMl@sCjG}KzE_BhFoBlA{GcBmA}AuAqDcE|@uKkB_BvCY|ArCfKKrAkD`@uC`K{AbBoAZ}B`D{Hx@gCx@{C~Dy@jDTpHeAtFNpAdClDTpBmA`Dc@hDmAR}GeBeWp@m@fAw@tGgCrIkHdDkAE{DkDoA?mAt@uDyBcHqKkDuDgBmGaBcA{Db@eF|CeD~@uAGeCcAyD|AmB|AyHfCiAScEoCwMkEoBDqG`B",
    "pointCount": 217,
@@ -811,10 +733,14 @@
    "end": [
     32.970984,
     131.516437
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:32",
+   "id": "大分県:25",
    "region": "oita",
    "regionName": "大分県",
    "name": "三重弥生線",
@@ -824,8 +750,8 @@
    "curviness": 539.6,
    "flow": 25.3,
    "turnCount": 639,
-   "score": 80.4,
-   "baseScore": 80.4,
+   "score": 94.7,
+   "baseScore": 94.7,
    "spotCount": 0,
    "polyline": "waihEybdbXzA_AzAcE~DiEbEgNjEcIjFaNfEyD~E{GxAuHtDyCz@yAj@eEwBkGDkD|HaJxAc@nI~B~CKtC^vI_IZiC`Aa@tCHzAkCvBq@fCErDTpBv@jFfKtDhD^eHh@iBdFwA~AhAd@]jBqHvCd@|B~FdCRrH{CfDWl@u@b@cDd@q@~B\\rApAzAd@l@GlAyBhA_@vB\\d@n@t@`DlB~BlB`GjCxEtDl@xBGbBkFzBi@bAhA|BrFhFnCbAfGjChBdDg@nAJzBbDxBjAj@bCt@z@pD_AX{A?sEjBwDxAZa@r@[~E|AjAhAMt@|@nA[hAb@pAy@|@f@NwC~Bg@|DuBhAE^t@`AS|AsE~@iAh@eDb@[dCnAnBYjAz@pL\\vBeG{A{ELqC_@qCf@iBa@wB`@}Dt@_B\\uDMe@{AQi@aA\\]pDTx@]XfApA\\rAcBn@EdCkBXdCO~@b@DRo@[aBp@qFv@XDfAxAH@dB\\i@GuAcBwC?oA^kEvBiHv@_LcA}CLeCc@}@@iBmAmBTcDkAyAg@eBo@cRcAkA_CtAcAaAVgBfA}@a@cBt@yFi@mCzAwBPeAQmEsAiBE}Br@eE^_@tDn@|@_BMyDw@_BoCWPaBxA_Ct@]bHBZjCpAj@j@I~AwCd@iDxBuA`AkBrCoCJ{ItC@tA_D?iByDuBi@mB~C_D]iCeBoDIaAp@y@pBSHaBhAiBDmDyFqE}AWeA~@{@_@{@cCeAiI}AgC_AQmBdBqAi@iAiGAiC{@cDXkAjCcB^mCv@w@Ga@uBNc@wAkBiAyAqBsBASmAqA~@wAS_AbAwAMsDaKaCV{BjBs@Be@Ok@iBsAjBkEoD}BAwD|AoAKeC}EMsEfDkJr@_D?mB`@a@u@uBt@qB{@eCPuFdGiHjGq@`EwA\\y@LeH|Ca@~EiF?w@oAkCiCkA{EoLgDqC@_A~CgA~FMnFqIfAu@tBIt@u@nAgFl@GpA|@hBm@~CkCF_AgAqACiAxE{CVcCiAkDcCs@a@w@fFeDvAkBSkGx@oCf@aHxMsGfAiEhCaCdO_U^sDiAoDyHuIKuDaJePuCiOwB}BaAWi@RoK~J_GtBcIc@qIwDyH|@oF}CcKaBoH{Ds@{AsC}NqHeOcDsVSyKs@mBcD_EwBaKiDoFiFsE{GkD_DIqBcAiEqKUmFjHaT",
    "pointCount": 316,
@@ -836,35 +762,14 @@
    "end": [
     32.942639,
     131.738284
-   ]
-  },
-  {
-   "id": "大分県:33",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "川上玖珠線",
-   "ref": "679",
-   "highway": "secondary",
-   "lengthKm": 4.95,
-   "curviness": 577.5,
-   "flow": 25.8,
-   "turnCount": 111,
-   "score": 80.4,
-   "baseScore": 80.4,
-   "spotCount": 0,
-   "polyline": "magjEyip_Xw@aBAmCuCEsAiBCkCc@iAwDIqFyEsEcB{AoByFj@}BcCHwFe@oAwB_CoAc@iBsC_DYy@{@V}Ii@iCn@uGrDgKc@u@eHbAa@u@Zc@hCIrDkCzBe@rBcDhBwA|@wCp@h@InFq@`Ej@l@lHyREoH^a@P^QbCxAvAX|AoApCb@b@n@g@z@{E{AaDw@qHl@mJpBsD~@cEQ_G",
-   "pointCount": 55,
-   "start": [
-    33.300868,
-    131.160775
    ],
-   "end": [
-    33.304818,
-    131.18724
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:34",
+   "id": "大分県:26",
    "region": "oita",
    "regionName": "大分県",
    "name": "庄内久住線",
@@ -874,8 +779,8 @@
    "curviness": 588.5,
    "flow": 29.5,
    "turnCount": 65,
-   "score": 80.3,
-   "baseScore": 80.3,
+   "score": 94.5,
+   "baseScore": 94.5,
    "spotCount": 0,
    "polyline": "{ojiEibjaXf@qAxDvAfGgIlB?bFkEhFa@hB~DxEfDh@vB`B~BfE{@|EpE~D|@FfHuAzBSpAvBdBlAlEH`KYp@iDv@?rAx@pByAxB_@rBd@lBvCtB?jCd@tBw@nDaBf@XtBoBpEb@ZtAc@fCV",
    "pointCount": 37,
@@ -886,10 +791,43 @@
    "end": [
     33.143522,
     131.441307
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:35",
+   "id": "大分県:27",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "川上玖珠線",
+   "ref": "679",
+   "highway": "secondary",
+   "lengthKm": 4.95,
+   "curviness": 577.5,
+   "flow": 25.8,
+   "turnCount": 111,
+   "score": 94.5,
+   "baseScore": 94.5,
+   "spotCount": 0,
+   "polyline": "magjEyip_Xw@aBAmCuCEsAiBCkCc@iAwDIqFyEsEcB{AoByFj@}BcCHwFe@oAwB_CoAc@iBsC_DYy@{@V}Ii@iCn@uGrDgKc@u@eHbAa@u@Zc@hCIrDkCzBe@rBcDhBwA|@wCp@h@InFq@`Ej@l@lHyREoH^a@P^QbCxAvAX|AoApCb@b@n@g@z@{E{AaDw@qHl@mJpBsD~@cEQ_G",
+   "pointCount": 55,
+   "start": [
+    33.300868,
+    131.160775
+   ],
+   "end": [
+    33.304818,
+    131.18724
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:28",
    "region": "oita",
    "regionName": "大分県",
    "name": "日之影宇目線",
@@ -899,8 +837,8 @@
    "curviness": 857.4,
    "flow": 32.7,
    "turnCount": 79,
-   "score": 80.2,
-   "baseScore": 80.2,
+   "score": 94.3,
+   "baseScore": 94.3,
    "spotCount": 0,
    "polyline": "q~ggEahsaX_AxLcCrJUvEh@lI]tEtAdAa@fBnBnD_AzEhAJ~BtBXpC]f@}Bp@eBhBl@@fByAdBXx@k@l@oH_AwAAw@z@wAg@eAN{AWeAbB{DCfE|@fAE`AlAhAd@pBhAdBQx@x@zEj@tA`CxBVdDlApD",
    "pointCount": 40,
@@ -911,10 +849,14 @@
    "end": [
     32.809895,
     131.488454
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:36",
+   "id": "大分県:29",
    "region": "oita",
    "regionName": "大分県",
    "name": "大泊浜徳浦線",
@@ -924,8 +866,8 @@
    "curviness": 572.8,
    "flow": 25.6,
    "turnCount": 93,
-   "score": 80,
-   "baseScore": 80,
+   "score": 94,
+   "baseScore": 94,
    "spotCount": 0,
    "polyline": "kxdiEmgzcXRbIuFlCh@bDw@jD}@XqDg@LnGlFvGxDtArAjDn@G`@kBOgAj@}@`Ak@~BZn@fAg@vFB~B\\n@bBs@dBPd@pAHhDdHDfAz@xC`KNvCxEbHnAfDMzKl@`Ea@tCi@z@D~@vBfB`BqBfMpENb@JlFrBpHuA~GgEjH",
    "pointCount": 44,
@@ -936,10 +878,14 @@
    "end": [
     33.115505,
     131.840158
+   ],
+   "tags": [
+    "scenic",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:37",
+   "id": "大分県:30",
    "region": "oita",
    "regionName": "大分県",
    "name": "南小国上津江線",
@@ -949,8 +895,8 @@
    "curviness": 620.6,
    "flow": 25.8,
    "turnCount": 81,
-   "score": 79.8,
-   "baseScore": 79.8,
+   "score": 93.8,
+   "baseScore": 93.8,
    "spotCount": 0,
    "polyline": "sh}hEaon~Wx@{ApC]vCqA|@oBoCeG]oJ{@wHTw@lC_@dDcDh@wAfCl@BcDfBJxC_BrAuHnB{Dt@O`AxAvCTtBpAnA_Bf@sFhBUbBzA~@P|D{DLkA{@}IyBmFbAgAd@cCeAcDRi@hB{@JoErAmB`A}CSwCPcA",
    "pointCount": 41,
@@ -961,10 +907,14 @@
    "end": [
     33.075605,
     131.009483
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:38",
+   "id": "大分県:31",
    "region": "oita",
    "regionName": "大分県",
    "name": "大泊浜徳浦線",
@@ -974,8 +924,8 @@
    "curviness": 543.8,
    "flow": 26,
    "turnCount": 80,
-   "score": 79.8,
-   "baseScore": 79.8,
+   "score": 93.8,
+   "baseScore": 93.8,
    "spotCount": 0,
    "polyline": "aceiE{cadXq@dEuEjBgAlKmDdBeB][j@jA~@|Cg@fB|@fHaAtAT`EjP|@hAbDxAt@pDx@tAArI|C~H]xCt@lBDxDd@jCPtM|B|@n@nA\\hBi@fC\\dBGvAnAjAIjAyAdCoD?w@nB|AzKr@pAFnBOlJqB|K",
    "pointCount": 40,
@@ -986,10 +936,14 @@
    "end": [
     33.123001,
     131.872596
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:39",
+   "id": "大分県:32",
    "region": "oita",
    "regionName": "大分県",
    "name": "国道388号",
@@ -999,8 +953,8 @@
    "curviness": 562.7,
    "flow": 28.3,
    "turnCount": 346,
-   "score": 79.2,
-   "baseScore": 79.2,
+   "score": 93.6,
+   "baseScore": 93.6,
    "spotCount": 0,
    "polyline": "ioegEkuedXc@|QTdJhAdBbF|@rBvCrG|CvCjCfFnS`KzXr@tIc@zFrBlFb@xGeB|EmCdDmWtLkHxAiLX{PxMyCtCuA|Ce@dDKdLTzDvBtHbCfEpHnGdLN|CeAjNvIdF~@hBChC}BjDh@|MlLtB~Df@tBVhP}AxPbC|KzClFtDzCCrBjAjDiBrDPvBaBCY\\BdBh@jAyAnBRbCbA|AzC@bBp@MfA}BnAQnAfAj@n@xBtAXfBrBcAhBr@r@|BVrCsEjBvBfB}A`@HNpDhBjC?|BdAx@yArAKn@bArAfC`@d@zDq@`@bBxBBfAmBnBwAZ}@fBk@rEoC?Qp@dF^JqCfBsBVZm@`Bh@`BbCQzAlAuCzF}AK{D`EV~A_Ar@c@|AgCI@jAs@fApA`BpAw@tBdApA[hAb@hAUpA~@vEPI~AeCpFjE~A?tA~AnFfBjB]dAyAZmA`FWsBi@a@kC|AaAw@q@VMcF_DuB}@PiAfAMrBiBjGy@_@e@uCg@WQhJ`@LbAo@`@Rr@~JnDpAb@nEdB`D|DbE~DX`AdI[jF|EdLfFtEtEnNfA~@xMlC|HnD~@nARbBUlKmE~KSjBhD`IxD|A|@lA?tT",
    "pointCount": 163,
@@ -1011,35 +965,44 @@
    "end": [
     32.773111,
     131.817284
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:40",
+   "id": "大分県:33",
    "region": "oita",
    "regionName": "大分県",
-   "name": "緑資源幹線林道 宇目・小国線 緒方・竹田区間",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 14.22,
-   "curviness": 533.7,
-   "flow": 23.4,
-   "turnCount": 325,
-   "score": 78.7,
-   "baseScore": 78.7,
+   "name": "臼杵坂ノ市線",
+   "ref": "205",
+   "highway": "secondary",
+   "lengthKm": 10.53,
+   "curviness": 487.5,
+   "flow": 45.9,
+   "turnCount": 112,
+   "score": 93.5,
+   "baseScore": 98.4,
    "spotCount": 0,
-   "polyline": "eoqgEkex`XAcBc@SgCZgD`CgBsA{@EiBrBa@@eAs@aAmBeADyChBwDQgCuAyCLe@wEmEuBcCwKyAc@mDh@]f@W~DnBhH}ClFbAtEmEfDcCDkEiE{@j@qB~EsDWsB|BsC]sCqDyChA{De@yCgDq@F_C|Bq@Fy@q@kBoF_DmEDoA`AuCKmAgCcHyCyA]cGgHcEo@BuBxBiA?uDoDKaBv@_EeAqGj@gCwBuE?aBxCgEzAsGkAiEOqDeBmCcDoCkAyDnF_J`FyCx@qBb@cE}BoBLmHiBi@}EtBuGvAsH\\iEcKGuC{@uDVyD}@oBkAu@eEjAaGwCPsEeBuB`@oDsDoCCkAp@s@zCk@|CyCwAoHz@{BnC_B`@kAqAaGEcFa@c@_FEy@y@k@gF|@wDeBiCJ_DkDoGoEsB@_ArAiC{AqDHkDkFcFm@wF}AaAkDp@mBsB_DaAUYBeCm@mBLyCqEKYk@HmBbCeDeBcKVmAzAsBZ}BwB_DkAqPJyAlFkGt@U~Cr@rD{ArKnCdCiFlDu@JmBgBoDBcA|BaAt@wBtB[f@eAo@qBeDoDcByF",
-   "pointCount": 151,
+   "polyline": "{nwiEu}ccXbD}@rNwJrHcDrD{@nNo@jNiCfIi@U@hAaElBqE`PsM|FoCtAcBhB_FhAyI`CgKpDeFpEiBhDkHgBkR_CkI`@_J\\{@hEuChCmGVmCvD{F_CqA{EDHu@tB^bA{AzBm@`FmDnAG|@u@r@PNvAs@lC}BzBKxCZ~@fDV@x@y@vCyAp@Gd@hEjAxCaC`Ba@n@Pf@nKr@nASxBx@Z~@Qn@gElDiApAgCk@uGfB_GfAGr@pCt@^fEaAXb@CfCfAv@@fCdD|AMdCjA`E_AzBLfD|Ej@pB|@lAwAf@@lCxDWnBzAFX~BvAn@rBpCxC}Bj@cB|@A~@rAm@nC?lCj@n@j@Yj@_ClFeFJeAm@cEgAg@a@n@P`F_@j@c@EsC}GuBcC?aB`AWhC`BhByA~C[t@{@aAaEl@}@tJpEpBgA",
+   "pointCount": 114,
    "start": [
-    32.86275,
-    131.364857
+    33.2211,
+    131.75275
    ],
    "end": [
-    32.900151,
-    131.436448
+    33.17703,
+    131.77694
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:41",
+   "id": "大分県:34",
    "region": "oita",
    "regionName": "大分県",
    "name": "吉野原犬飼線",
@@ -1049,8 +1012,8 @@
    "curviness": 501.1,
    "flow": 26.4,
    "turnCount": 176,
-   "score": 78.7,
-   "baseScore": 78.7,
+   "score": 92.6,
+   "baseScore": 92.6,
    "spotCount": 0,
    "polyline": "u_diEozxbXnCKlDpBpJbBhJvDzM`DzAWDqCr@fCfE@FdD{A~FzCpEbBh@fEtDlGd@vDxHzIlBfIeAlBr@LdCt@b@dASt@{@R_ExBq@VqCrCMMqC|AHrCg@xA_AtDQLcBxAyBbCcAbE?dFeFCc@`Cy@|AAiChHHd@dGrBrBIvEfB~AzBhDr@rBxAtAhC`ElElCTdHgBjHQ|AnDhC|C|BrH|DvA`AlAx@zFzBbApAvBdFxDhB`CXzAvDj@hHxDdBxEvGxGdAj@tCE\\hCzC`DjMpAnC`DfBVnCzBxI~C|@CzAgA`Cb@dCfBz@`CvDnEtAIxEkD_B~T\\r@",
    "pointCount": 88,
@@ -1061,10 +1024,43 @@
    "end": [
     33.062147,
     131.666228
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:42",
+   "id": "大分県:35",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "緑資源幹線林道 宇目・小国線 緒方・竹田区間",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 14.22,
+   "curviness": 533.7,
+   "flow": 23.4,
+   "turnCount": 325,
+   "score": 92.5,
+   "baseScore": 92.5,
+   "spotCount": 0,
+   "polyline": "eoqgEkex`XAcBc@SgCZgD`CgBsA{@EiBrBa@@eAs@aAmBeADyChBwDQgCuAyCLe@wEmEuBcCwKyAc@mDh@]f@W~DnBhH}ClFbAtEmEfDcCDkEiE{@j@qB~EsDWsB|BsC]sCqDyChA{De@yCgDq@F_C|Bq@Fy@q@kBoF_DmEDoA`AuCKmAgCcHyCyA]cGgHcEo@BuBxBiA?uDoDKaBv@_EeAqGj@gCwBuE?aBxCgEzAsGkAiEOqDeBmCcDoCkAyDnF_J`FyCx@qBb@cE}BoBLmHiBi@}EtBuGvAsH\\iEcKGuC{@uDVyD}@oBkAu@eEjAaGwCPsEeBuB`@oDsDoCCkAp@s@zCk@|CyCwAoHz@{BnC_B`@kAqAaGEcFa@c@_FEy@y@k@gF|@wDeBiCJ_DkDoGoEsB@_ArAiC{AqDHkDkFcFm@wF}AaAkDp@mBsB_DaAUYBeCm@mBLyCqEKYk@HmBbCeDeBcKVmAzAsBZ}BwB_DkAqPJyAlFkGt@U~Cr@rD{ArKnCdCiFlDu@JmBgBoDBcA|BaAt@wBtB[f@eAo@qBeDoDcByF",
+   "pointCount": 151,
+   "start": [
+    32.86275,
+    131.364857
+   ],
+   "end": [
+    32.900151,
+    131.436448
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:36",
    "region": "oita",
    "regionName": "大分県",
    "name": "深耶馬玖珠線",
@@ -1074,8 +1070,8 @@
    "curviness": 513.3,
    "flow": 24.8,
    "turnCount": 221,
-   "score": 78.3,
-   "baseScore": 78.3,
+   "score": 92,
+   "baseScore": 92,
    "spotCount": 0,
    "polyline": "olwjE}`{_XpJ_JhBo@pFvAvAF|Bo@hBjCfCbAjBJ`CzDrCNpBx@rEkB~CMh@FHzA|BSzEmDp@CtCpC~BhJ`BlBnEa@zBnCdCb@bEnBvBYxBvFnDxBdKj@vAbAAvAXVnJX`@WYeBNwCtB]~@RTbAqA`Aw@~Ec@l@aC\\Mn@pCk@fHmLhJeDhI{@~EoCrGnAhCu@rCpAdIgCl@ZjB~Dl@@hBqBp@^KjC\\x@nDKbA~HlGyAtD~BxIjAlAOrD~@lAbFlHrDl@pB@`ClCrCbCjIhD~EfEvBNxAvBzDFbAtFfF`ArC?lBbAIjHvDI~@yBvCAzB_AfEk@d@kABGb@zBbMdDvFvBzBh@~ABfFh@nB]vHr@xFUlCL|K[hDlCpI\\lDzDfAhHF`ItH",
    "pointCount": 107,
@@ -1086,35 +1082,14 @@
    "end": [
     33.326136,
     131.175334
-   ]
-  },
-  {
-   "id": "大分県:43",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "小河内香々地線",
-   "ref": "653",
-   "highway": "secondary",
-   "lengthKm": 5.41,
-   "curviness": 507.1,
-   "flow": 25.9,
-   "turnCount": 106,
-   "score": 77.9,
-   "baseScore": 77.9,
-   "spotCount": 0,
-   "polyline": "{aglEerzaXlBu@nFo@hAu@vQyRpGcCzEwElBsH\\mInB{M~AiE~BkCr@eBvCeRVoE~GyRFiDhAoCrCx@^pBrGqAlBqBxCJjDmAxG|@tI?lFeCn@{BnAeAA_Bh@BhCvCpBw@d@xA`@JjAkB?mBr@qBd@In@dAbAI|AuBj@mBrBJh@rD|@j@d@g@v@kHtAlAfBD~@zDl@CXg@EeEv@N",
-   "pointCount": 55,
-   "start": [
-    33.628617,
-    131.540986
    ],
-   "end": [
-    33.598884,
-    131.567432
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:44",
+   "id": "大分県:37",
    "region": "oita",
    "regionName": "大分県",
    "name": "日ノ影宇目線",
@@ -1124,8 +1099,8 @@
    "curviness": 506.7,
    "flow": 25.5,
    "turnCount": 341,
-   "score": 77.7,
-   "baseScore": 77.7,
+   "score": 91.5,
+   "baseScore": 91.5,
    "spotCount": 0,
    "polyline": "q~ggEahsaXHgE\\q@hDHpCzBh@w@aBqDQiBaCu@B}Ci@aCfAqBsC_CVg@~CmAnARf@aCdCq@MuAeBcAH}ClBQIgAyEmE_BaD~BuBfCSBiBiDqDKk@v@w@|Bi@Ho@aGsEsAKeBh@G}BaByAuApAmAsAk@kG|@}Bq@mCkFoExB_A`CHtA]bAcBC{@{Ci@mAy@wFo@iCbAsBI{@a[jAuHvAyAk@_Aj@gAq@kBlAwAy@qC~BeCd@_DjC?|BhFx@aBAcFr@qAxBThAo@lA|A`CaA`FfBd@yAKgHrCoBrCYjJnDLo@Yk@{E_CuAcBgIa@gCqByDd@yC_A}CRkCmAkDD{HaFeHu@gOcLeAaD_G{CJsAeAmDuAc@uCeCsDoGiD}@[k@`@mDKkByDiJa@_@kFk@iCaI_GiCiByG{BoAMeBrAoBB}CqAaCuFeFcAqHHkEuD{HjByHMiBwAmAwDv@cHKuBoE`@iE{AqH_FqB}CiC_BoHDkBbNqb@PoDcAgFC_C|@qClE}FhAgGfGyLFoHYaDmAgDqLoQaAcEGeCf@cEpEoKJkDi@oCoBsCaF}DoG{VeF_MwABwBuCr@sEsAyDj@aFAsUYkAgE}Dd@wJ",
    "pointCount": 162,
@@ -1136,10 +1111,43 @@
    "end": [
     32.843587,
     131.618041
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:45",
+   "id": "大分県:38",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "小河内香々地線",
+   "ref": "653",
+   "highway": "secondary",
+   "lengthKm": 5.41,
+   "curviness": 507.1,
+   "flow": 25.9,
+   "turnCount": 106,
+   "score": 91.5,
+   "baseScore": 91.5,
+   "spotCount": 0,
+   "polyline": "{aglEerzaXlBu@nFo@hAu@vQyRpGcCzEwElBsH\\mInB{M~AiE~BkCr@eBvCeRVoE~GyRFiDhAoCrCx@^pBrGqAlBqBxCJjDmAxG|@tI?lFeCn@{BnAeAA_Bh@BhCvCpBw@d@xA`@JjAkB?mBr@qBd@In@dAbAI|AuBj@mBrBJh@rD|@j@d@g@v@kHtAlAfBD~@zDl@CXg@EeEv@N",
+   "pointCount": 55,
+   "start": [
+    33.628617,
+    131.540986
+   ],
+   "end": [
+    33.598884,
+    131.567432
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:39",
    "region": "oita",
    "regionName": "大分県",
    "name": "百枝浅瀬野津線",
@@ -1149,8 +1157,8 @@
    "curviness": 483.8,
    "flow": 29.5,
    "turnCount": 60,
-   "score": 77.7,
-   "baseScore": 77.7,
+   "score": 91.4,
+   "baseScore": 91.4,
    "spotCount": 0,
    "polyline": "g|xhEqerbXlDnCfA|FvCfC]pBpArCwBGFzB{BdCc@tBkAdBHl@nQfBx^lJ|CyE`@GpArEu@|AJpA\\ThDg@d@jDzAlCAhCn@`@pBKtAnA`@fD{AhEdBrD|@nAdEpBfR~MfA|BCxB",
    "pointCount": 35,
@@ -1161,10 +1169,14 @@
    "end": [
     33.046933,
     131.64209
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:46",
+   "id": "大分県:40",
    "region": "oita",
    "regionName": "大分県",
    "name": "田野宝泉寺停車場線",
@@ -1174,8 +1186,8 @@
    "curviness": 490.4,
    "flow": 25.6,
    "turnCount": 190,
-   "score": 77.5,
-   "baseScore": 77.5,
+   "score": 91.1,
+   "baseScore": 91.1,
    "spotCount": 0,
    "polyline": "obqiE{sp_XpEyDjHmBfD@~ErCrCKpD`@z@w@jBiF~@aAJr@kCvHzBpAx@{FbEuHxBkAlAgB`E}AdBmM~AwERoEZUlIkAnDBzCh@nGlDrEgDv@@Hp@o@hCyD|AMxEl@xBrRsDhDcFA{CnEg@CcCyA{A_@kEdBgBr@_CpCiELq@e@{Cz@aBYy@{ASuAoAg@kDf@kA`GeD\\qChBbA\\pA_DdBJlDjCbAfArAcBbGz@`A~Cp@YtEmAd@lCnAItA{@lAVlEv@XhGyAjI_@fABxA|@@gCtA_DLcCx@w@^}AK{ERiA|D}MxCqC_AeFOmErAoE`AaJnAkB@}Cc@aEtA_I|FgOrAyH|DwMrDqEzEiCAkDgAcEt@yJtAcB",
    "pointCount": 99,
@@ -1186,10 +1198,14 @@
    "end": [
     33.150752,
     131.201452
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:47",
+   "id": "大分県:41",
    "region": "oita",
    "regionName": "大分県",
    "name": "湯平温泉線",
@@ -1199,8 +1215,8 @@
    "curviness": 492.2,
    "flow": 25.2,
    "turnCount": 216,
-   "score": 77.4,
-   "baseScore": 77.4,
+   "score": 91,
+   "baseScore": 91,
    "spotCount": 0,
    "polyline": "gesiEi`u`XhBnFzA~@~A[bGuF~@Cf@`@~A`FbD`G~AvH|BrGLpBu@bGlG`Ju@~EoGfK}@xFGpHeAx@cCjJcCzDr@`F@xDlAhBbCZ`AvDHmAcBsFFaDyAcET[bEdHzDhDnAlChCdAvAhBrC|AdGhBbCDb@rAnBz@d@lAa@|BsAj@gDOeC}@sCv@sCw@qDh@gFOqDvHiCv@wAvAwEn@WpAtDvF~B`@rEjDJlAeBnAb@tAnBrAtIwA`AeAxAuEK`FeDbF@h@r@L~@aBjA?XlBaAfElGjAxBo@FfCwCjD?`@pENtChDfE\\f@`CChBjCbB?|E`@dBdFtAOj@{@BkEfC?bB`B`EyAtA]xAKvFcCvDy@~^XbElCfITbE_A`EeDrDq@dBWjIqBfKLpLtAvDR`JkCrEuBfB",
    "pointCount": 110,
@@ -1211,10 +1227,14 @@
    "end": [
     33.189581,
     131.281892
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:48",
+   "id": "大分県:42",
    "region": "oita",
    "regionName": "大分県",
    "name": "田野宝泉寺停車場線",
@@ -1224,8 +1244,8 @@
    "curviness": 491.7,
    "flow": 26.5,
    "turnCount": 56,
-   "score": 76.6,
-   "baseScore": 76.6,
+   "score": 90,
+   "baseScore": 90,
    "spotCount": 0,
    "polyline": "goiiEqgx_Xs@cFPo@vJe@pG_ClCWhBmAz@qEvCsEw@kG~B{CdD?nFmGvAsCdHcB`AsArFaAtAsEKo@_BqAg@yBhAuL`BkEpGcFRu@SiC_DhBs@_@`B}CUaC",
    "pointCount": 30,
@@ -1236,10 +1256,14 @@
    "end": [
     33.137006,
     131.220362
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:49",
+   "id": "大分県:43",
    "region": "oita",
    "regionName": "大分県",
    "name": "津久見野津線",
@@ -1249,8 +1273,8 @@
    "curviness": 464.8,
    "flow": 24.6,
    "turnCount": 487,
-   "score": 76.4,
-   "baseScore": 76.4,
+   "score": 89.8,
+   "baseScore": 89.8,
    "spotCount": 0,
    "polyline": "u{{hEohucXy@`HyBhJoBdRtApU\\fBbCvDzAbEVdN`ClFpDbCr@jAxNdc@XhGu@tDd@tEjA|BlIrIdBfE`@rP|CdGkAhDt@tDnCdBHjAWpAsC|BeArDgCrAAxApAx@xFi@pA{Dl@c@|H|@fDpI`CdBT~ExBjGhC~@rA~GvD~DhBzEdAdAZ~BfBnAzBLf@xAfAt@}Al@uAsAkFFpEhARlCZ^jAu@hB@nAj@GVwBSmCxAyBeDvAtEnAZ|B}@|FpCwFw@kClAUv@^zB@vF_DM_AsAFv@`AnA`D~@r@{@ZaFx@cA|Cd@hDtBrGFTWSgC|@[j@wAlMyCtEZpB~AhCd@pHJfRhHpDdDtGxL~`@~RdDfGnCvSw@hBoG`Gx@NlFuCj@FH|@_D`CaAbEcFfAeAgEkD?uGoCo@{@b@{Bc@}Bq@TaAUmBlDmAt@eByAU_Ei@xC\\~FbCdCt@bChAnA}@dHlHvCjAhGzCxApBnBx@zFdBvBrB^l@l@LjAm@nBmAl@_GPwD~AmCjICrEoAzAeCr@cA~Fo@x@yCpA}C`@mAaBh@aDWoCcAcCaAQQ^lAzEkC~DmGmAoA`AaBIBxAkBh@ZrB}ALU\\xDnHi@zCuAT_@v@n@fBFdBuDpBiBlBoDrNgGpDaAi@g@yCk@[wBtAmDv@wDdCiFx@kApAJhCuCvFuAnFeDdCmJDq@nAa@xCJtFfBtHl@z@nBdAzIlBf@~@AlDt@|@dO~@|BjBvFo@fErN|FrGfAzFrA~@jDd@rFlFbIhCxCbBvB`Kh@~I~EdRhJzItDnJTt@qAhACjEgBzIn@pG_AvJFxI_EjHc@vDjAdKpCbE`@tBcAfIdAnHaDdIS`KjAnDO`D}@zCC|Cl@vBfH`HzBxE",
    "pointCount": 233,
@@ -1261,35 +1285,14 @@
    "end": [
     33.043547,
     131.69255
-   ]
-  },
-  {
-   "id": "大分県:50",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "木田神崎線",
-   "ref": "715",
-   "highway": "secondary",
-   "lengthKm": 6.08,
-   "curviness": 460.3,
-   "flow": 26.9,
-   "turnCount": 104,
-   "score": 76,
-   "baseScore": 76,
-   "spotCount": 0,
-   "polyline": "etziEktkcX|LiAvGyExMwBfB_BlD_GrIcEze@wIRv@pB|@nJVrOy@x@r@jGiD|FeBfAnBnCbB`Hv@JhDfBxED`C`BxAl@zAXxCQbGdAtDfA|AlD`CnAzF|ApBN~Bp@dA`D~@vDDlCsAtE@nDaFl@pEiAn@YhDr@|C{B~Bl@fBt@J~CcAnCtAp@jFpHfKrBs@G}Cb@j@",
-   "pointCount": 51,
-   "start": [
-    33.237309,
-    131.792219
    ],
-   "end": [
-    33.198968,
-    131.782298
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:51",
+   "id": "大分県:44",
    "region": "oita",
    "regionName": "大分県",
    "name": "豊後くろしおライン（県南地区広域農道）",
@@ -1299,8 +1302,8 @@
    "curviness": 480.9,
    "flow": 24.5,
    "turnCount": 154,
-   "score": 75.5,
-   "baseScore": 75.5,
+   "score": 88.8,
+   "baseScore": 88.8,
    "spotCount": 0,
    "polyline": "iovgEwuqdXvNq@rGxBnBO|BiETyFgAkFbDcDFeA{AsB_ECw@{@mBi@iCwD_Du@UkAp@kCaAaBZ_KyBqDeGiAyCwEs@AaAxAu@R_EmASwAx@u@`Dh@xE_@|BpBvCt@xCc@|AbCzBd@bDtHnBfAv@~BnDxBn@zBlBTpB[dCzCzEx@pD`FbHzC`FfE|@nB|CzCrBh@pEbEjHhCF`BiCfEGpArNjKlCvDiAhGh@tC{AxACjCgCjAKjArDxAnDUhChGYpAgCjCwD~@FnFUn@wDG_@`@Br@`DhFeBhH|@rBGxT",
    "pointCount": 78,
@@ -1311,10 +1314,14 @@
    "end": [
     32.870927,
     131.967061
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:52",
+   "id": "大分県:45",
    "region": "oita",
    "regionName": "大分県",
    "name": "東山庄内線",
@@ -1324,8 +1331,8 @@
    "curviness": 478.6,
    "flow": 24.4,
    "turnCount": 164,
-   "score": 75.3,
-   "baseScore": 75.3,
+   "score": 88.5,
+   "baseScore": 88.5,
    "spotCount": 0,
    "polyline": "{w_jEsxeaXpNrHnDHx@pAbB^l@tAcB|BPj@pFr@nChB~B`@zHnGNpI_CrDPjF}GnFiCz@{AhD@dAzARvCuAtHrCrDuD|D]vBwEpEnEJvAxBzC`BJzDmAnBPDg@cCsAXu@nAIbE|Ad@|AmBbDt@|@~A]pAiAdD]h@uApCkBv@{ArBc@lAmAdAqBlAcGjCgD@iBtBoDlAeH~Bm@dFpBdCwB\\gAXiIrBqMdDqEhAoEvBcA`@uH`C{FrB?zFbFzA_@vAwBdAe@fAPfAjAj@CvBeAnBkEpJiGxCs@zBmC|@[`E^lL|GlFlAnKoGtDx@dAEzA{@",
    "pointCount": 85,
@@ -1336,10 +1343,14 @@
    "end": [
     33.219643,
     131.441544
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:53",
+   "id": "大分県:46",
    "region": "oita",
    "regionName": "大分県",
    "name": "天瀬阿蘇線",
@@ -1349,8 +1360,8 @@
    "curviness": 513.1,
    "flow": 24.2,
    "turnCount": 92,
-   "score": 75,
-   "baseScore": 75,
+   "score": 88.2,
+   "baseScore": 88.2,
    "spotCount": 0,
    "polyline": "yukiE_in~WkD}B}@cBMaMbAqCe@q@cAPmAjAw@~A[hCsBfCiFiBoBoBuB\\mGGoC_D_@qFq@?}AlDeFMqCoFkE}AkPuO]cEsAAw@dAc@BeB{CqA{@}HDsBpDqEb@_AnAg@pBeAC_@mA`@oElAkDlAyAn@aEcAwDIgBlAmInAgDyJsG",
    "pointCount": 45,
@@ -1361,10 +1372,44 @@
    "end": [
     33.181038,
     131.003824
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:54",
+   "id": "大分県:47",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "朝田日田線",
+   "ref": "106",
+   "highway": "secondary",
+   "lengthKm": 3,
+   "curviness": 445,
+   "flow": 37.1,
+   "turnCount": 36,
+   "score": 88.2,
+   "baseScore": 97.3,
+   "spotCount": 0,
+   "polyline": "_d~iEyos}WMcB}@VYn@s@@iDcBsBKyCmCeD_@_@d@g@lDkHf@yA|CcD|AuCrCE~@q@\\iAdD}C[_Cb@iApEqAbCqAZyC`CwCJ{BdBcBRwArBsG}@cC|CoItCq@jA_@|Dq@`BoDl@iCvAwAnAeA`C",
+   "pointCount": 38,
+   "start": [
+    33.2552,
+    130.84941
+   ],
+   "end": [
+    33.27598,
+    130.83785
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:48",
    "region": "oita",
    "regionName": "大分県",
    "name": "別府挾間線",
@@ -1374,8 +1419,8 @@
    "curviness": 478.2,
    "flow": 26.2,
    "turnCount": 90,
-   "score": 74.7,
-   "baseScore": 74.7,
+   "score": 87.9,
+   "baseScore": 87.9,
    "spotCount": 0,
    "polyline": "oisiEchuaX}Fo@cGxDmGvAcAv@i@rAQlDpDfKHdAg@d@cC{ByDaAeLrBeKu@Sz@uAPe@cAo@iIiAOeAtFkAb@sAU^tD_@|@d@jA_A|AJrA}CrFEbDcAVWy@L}H}AaBUkFq@m@qH[}@i@kB_K_B}BgADmDwNkFkFaDaRCkUoAcDkHiH",
    "pointCount": 46,
@@ -1386,10 +1431,14 @@
    "end": [
     33.221815,
     131.524241
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:55",
+   "id": "大分県:49",
    "region": "oita",
    "regionName": "大分県",
    "name": "大分大野線",
@@ -1399,8 +1448,8 @@
    "curviness": 463.6,
    "flow": 25.4,
    "turnCount": 236,
-   "score": 74.4,
-   "baseScore": 74.4,
+   "score": 87.6,
+   "baseScore": 87.6,
    "spotCount": 0,
    "polyline": "e}thEifuaX[k@VsIqHeD}CE{JhC{AAyOiEwGGiF}CcFw@qHkHwE_KsIeJqEDoEfBsRkD}Ep@iAW]i@A_DuAwByE{BgA_BmE}AoAoDiAeAsEnDuAGwBoAoFr@sAy@mBxAiOgDcDAgBb@}BgBsCEeCp@yBsEmFmCoC[_D{ByBS_E_HsHgJuD{KViGWuA}FkEgEoKmEyBsBsEeEqEgCwIyK}FmBgB{A_OhEePDoE}AcFwB_C{BaFcGmDyDcE{BsA_PUmJ}CeIqGbApDk@xAaJtAq@cAS`BkA}@{@uBBhAa@b@cDcBcCp@_Bg@_BFYz@QGwAcDgABo@y@qAYs@}AgFyE`@_@tBp@Eo@iGaD_BOf@kB]gAkAKj@qDcAkDgHcAgA}@qBa@cAaB_BeM\\qBrAqA_Fq@oANgFdEh@t@fDm@fAl@jCU",
    "pointCount": 114,
@@ -1411,10 +1460,45 @@
    "end": [
     33.119154,
     131.56905
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:56",
+   "id": "大分県:50",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "大分大野線",
+   "ref": "41",
+   "highway": "primary",
+   "lengthKm": 9.98,
+   "curviness": 429.8,
+   "flow": 45.2,
+   "turnCount": 95,
+   "score": 87.5,
+   "baseScore": 96.8,
+   "spotCount": 0,
+   "polyline": "{veiEo}`bXcDqBcF@{AsE_KqEQqATmBiCS}AsAqCWaAmBqAaAeA}EwEyA[eCkC`CkFwAiAoBf@gBy@g@@wCw@k@_BE}BzAgLuA}Db@yIWs@]qBd@mJqCwDRFlAU`@qCgCa@\\a@pCc@Lo@k@cAmGu@y@s@Za@hBs@cEmAMy@h@k@bCy@wBPaDYa@o@CcB~@e@}@m@HiB{@eA{AKtCuBsAiCX`@sCY}@_DK}DzA{A{C}AW\\gCYkAaCe@yLTiLeIcD@aFbB_CM_BqAeB_EuA}AeJgE{Bj@uEfEqLpAyCkCqBq@wH{@cElBmAJ_K{C}DY}Ay@aISiBiAkD^mDSgRjFwCq@wOZwc@xM_GZkInN",
+   "pointCount": 97,
+   "start": [
+    33.13022,
+    131.57352
+   ],
+   "end": [
+    33.2024,
+    131.58714
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "forest",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:51",
    "region": "oita",
    "regionName": "大分県",
    "name": "臼杵津久見線",
@@ -1424,8 +1508,8 @@
    "curviness": 471.9,
    "flow": 22.9,
    "turnCount": 181,
-   "score": 73.7,
-   "baseScore": 73.7,
+   "score": 86.5,
+   "baseScore": 86.5,
    "spotCount": 0,
    "polyline": "izciEknocXmAmNuFyCe@{AzC{MGwBaByIa@sGx@oFIoGzDyGJuEWoCcB}CqCKk@c@_FqJiCiAsGaAm@{@RkCzDeD|@mBOeEv@qLpFqIbAWvItIjEfA`DbDtCAvDaDDiErAaDQoCtAuCg@{ExAeAlJtFvJzJlHzEbElA|AALm@g@_AiHoHBsEwBiABcAn@YhBhArE`@dAyAbDiARs@g@gCwE_DoAoBc@iEuDcA{AmB_@}El@eBvAwAAyDh@o@v@PJv@_EfIzBbEdEn@`Dq@pAZJbAcBxDvB`CdAg@|AeD|@o@dA\\HvA\\Rn@OhB_CxCh@Hx@eAhBl@`FfClAz@bEn@R",
    "pointCount": 91,
@@ -1436,10 +1520,14 @@
    "end": [
     33.104836,
     131.840585
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:57",
+   "id": "大分県:52",
    "region": "oita",
    "regionName": "大分県",
    "name": "別府山香線",
@@ -1449,8 +1537,8 @@
    "curviness": 421.4,
    "flow": 25.3,
    "turnCount": 255,
-   "score": 73.4,
-   "baseScore": 73.4,
+   "score": 86.3,
+   "baseScore": 86.3,
    "spotCount": 0,
    "polyline": "ywfjEu}maXyKqAen@vLcLo@mImBsKWaI_BiFqF]_A@eFwAaIu@qAuHaAePvMoIPmA~EuDaAwAd@SzBX`KYp@g@AmHiFeA{AkAkI|F_Gh@aCmAeGs@uAqHy@}@{@qByKy@_L{A\\mBhEaGl@sAbA}@bCf@vGYbCwBfCaCTwCiA_B}DPmOk@wG_B}AkCAgBjA]~A~@|RkGb@y@fBDdC_@l@uCyAeA\\Wz@ChGk@hCcC~CcC~Ao@~AEbElB|Bq@|B@bO{@rAUxFz@tCCv@{F`@q@oGcAqAGiBaFQwB{DcAg@iO`GuFq@uDnCqDj@U^Lf@dCp@rCbGDrBoBxI]JwCkF_BeA_BImB|@`CpPw@bPhAtDGhBo@|@qCDcE~@eDdDgAM{CuBkAB}@t@eAfGk@H{@iDwAf@k@hB[vEb@zChC`EU~AsMkFmA}CeCg@YxEe@`AR`@fA{@d@Jl@|DcA`@iBkBuDkAYmAcCoCaCqAeAnCJnBk@hC^pCiDtEm@@cIaHkFb@sH{@_Fp@",
    "pointCount": 139,
@@ -1461,10 +1549,14 @@
    "end": [
     33.371172,
     131.455383
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:58",
+   "id": "大分県:53",
    "region": "oita",
    "regionName": "大分県",
    "name": "赤木吹原佐伯線",
@@ -1474,8 +1566,8 @@
    "curviness": 425.2,
    "flow": 23.9,
    "turnCount": 362,
-   "score": 72.9,
-   "baseScore": 72.9,
+   "score": 85.7,
+   "baseScore": 85.7,
    "spotCount": 0,
    "polyline": "eexgEalicXpAaAjB?nCjBjNfFzEWrMkFpGfCxH~JxCx@bHXjL_GlCLlCc@vGyCjIyBvAmBp@gG`DiDtDeChGcA`E^zFgBlHvEhCVxA_@tCoDu@cDtAcCEgFt@iDWiDpBqEq@qJbBcKg@uEkEiLEkCq@}Bd@{Bc@oBh@Iv@aB_Bs@Q{BcAk@HqDc@DE}@l@kA}A{@TmCq@Z[e@p@uC_CzA_@Su@cB^cAiAcAJgAwA{@ZaAOuAaCeC}@qBVqEIsGkA}FeCsB_@yEu@{AgFAqCwHBe@|CIhCgAr@qBQWkBfAaBL}Ba@wBz@wD@aB{CkC_LiDeG}BqAwEtCgByA}@iE{Bu@CuDyAiB~AoGw@_@kFKoCwGoA@eEpBmG@cHz@m@YMaBr@iDiAkB|AcAP_BgBaEQaBzGaHDkA_FiEiDt@uDUo@y@q@iDgKgKy@DuApBsAh@eDGu@uJhB}RgC_BwDPqAu@y@kBUcGRwBfAuC[cCNqG]UoE|@gDcBkA{EYiH_DgLgHsPoE{NmFgMo@GkArA}Bh@cIkCuCkKuFyHcHk@eLuCcFdAeLuEyXmIqDH{BxAeC|CsAvHaBbBgL|@sMwDcOnFqAa@wFgGkQkBgQsLq@aD_@}Kz@kP_AkLlAil@",
    "pointCount": 170,
@@ -1486,10 +1578,14 @@
    "end": [
     32.937032,
     131.880068
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:59",
+   "id": "大分県:54",
    "region": "oita",
    "regionName": "大分県",
    "name": "梶寄浦佐伯線",
@@ -1499,8 +1595,8 @@
    "curviness": 427.2,
    "flow": 23.5,
    "turnCount": 433,
-   "score": 72.8,
-   "baseScore": 72.8,
+   "score": 85.6,
+   "baseScore": 85.6,
    "spotCount": 0,
    "polyline": "uxahEyqaeXxDBxAtF[|A}BhA_@fBoBZy@zBlCjFr@dDBzAu@fAfApA?vBk@~@x@lJw@zDc@f@wB`@HnF_CtKw@|@yD`BkE~Ds@tBB|ChFhDrCtF@vJmAlG`@j@xA\\dAlHm@rAeB\\m@t@p@nHeAjDqFjKG|AfKlP`AhEpD|BbApAzGs@~@{B|Cd@~@yBx@KrA|BbEZn@r@jG{@fCfEtA`Ho@zB_C`AWxA^`Bx@Z\\v@x@rE~@rBb@xDQfDaB`Hu@~@sBd@}AlDGjBR`@bBb@vE`Fl@hCF`ElFbBr@~D|CpBzA`CYhElBzAH|AOx@gBt@_@dA`AxAbCS~@d@XvAu@vFpFEbAd@r@tAX~F]dAq@bAuBByDvEaCn@i@dC^p@jJjCr@~CEfCzDjBRlD_BhHgChB}@Gs@aAkDt@iAaAqE}AmD~CCfB|ArHAlBs@jCcFlGwCSkCqBuDUm@k@mBS{@cAoBQ{A}AwBi@mA_AOeCe@i@}@MgCt@uDrGs@lEdCjh@bAR`Bg@hAf@z@hDq@rALf@hFkBlClBn@bEWxCcBrFq@x@OpC~@X|AhBhDk@lCyAz@DlCfEt@dJc@`Dc@j@kABqArAgBn@JxAhAbAt@~BMxBy@rCgApB}KpKgAzCkBpd@z@zKrCbJPnBOxIo@`F_A|AcE|AaD|BuBpCyBhAcGfGuBp@mDpGaDvBeB`EgDxCsHhCoDeB{@F{@`Ae@jDuC|BsCbEwCt@mBtAoE]yAZsB`D\\vFiBzDT|BfElCv@tAjACvAwCxGJ~Ar@`ChDInJf@tDxEnDxItJ_@xYkA~P{EzPi@jAyAl@wAzDtKdL@fEdCBjJ`Bf@dAKhDXxAl@\\fDF|@~@nCAvEbGNbBiB|EpCrGt@lDrBrDc@bNP|BlEdIfClNnCjE",
    "pointCount": 240,
@@ -1511,10 +1607,15 @@
    "end": [
     32.943294,
     131.907545
+   ],
+   "tags": [
+    "winding",
+    "caution",
+    "deadend"
    ]
   },
   {
-   "id": "大分県:60",
+   "id": "大分県:55",
    "region": "oita",
    "regionName": "大分県",
    "name": "円座中津線",
@@ -1524,8 +1625,8 @@
    "curviness": 430.9,
    "flow": 24,
    "turnCount": 262,
-   "score": 72.8,
-   "baseScore": 72.8,
+   "score": 85.6,
+   "baseScore": 85.6,
    "spotCount": 0,
    "polyline": "wfdkEc{n`XbFxItGjFBbEt@~E`JfSpBtGxF|FjMnApR~EnHa@pEeAvEr@rE_@`Bh@x@bCuAlRuDvSQhEs@lC}DdHQnGc@|Bv@hTg@hCnAxGDzJQzAyA|Be@nBk@|Fd@`IyA`CoBnHaBzPJhJ[pLbBtKCxHk@xCcC|DcAjDsAbSkEhDyHhOKv@f@r@zCiBZ^]lDmBjAy@hDyBdPaASw@wG_GN[]zA}CzAc@h@}AMeA}@eAXcC}Bi@e@oCy@JeCtD_E_AmA}Bk@r@hAzC{@~AsLYaAt@w@dD{@ZoDkCoC`AwChCcE|HyAnEeA\\a@|B_@BQsF|BmFkBwRVGrAvA^{@I}HmBmC?gBe@QwBr@eBkAc@oCo@y@sBQm@o@XoGyA]k@iAmCEeE{BgB{CgBs@gEkEqCoEw@qC}AQqCcBiH`@qEe@sFfFm@EoAcBaACwAz@qBtEgFq@kEpD}HqBqHRa@lBg@`@cEiAaEbGuBNiA|@",
    "pointCount": 130,
@@ -1536,10 +1637,14 @@
    "end": [
     33.477123,
     131.265337
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:61",
+   "id": "大分県:56",
    "region": "oita",
    "regionName": "大分県",
    "name": "大入島南循環線",
@@ -1549,8 +1654,8 @@
    "curviness": 454.5,
    "flow": 23,
    "turnCount": 180,
-   "score": 72.7,
-   "baseScore": 72.7,
+   "score": 85.4,
+   "baseScore": 85.4,
    "spotCount": 0,
    "polyline": "gukhEwyedXlBqAf@sAE}@kB_HaAeJg@aAsCuAMcDkAgG~AeDNkG~@sATgEsGqNbGeN|L{EbBxA}@|Dt@tGvCrClCBV\\MtAkAhCJtBdBhCjErBbAvF`C`Ce@nCHbB~BzGf@nD`AbAzGdCzA`DdIhCjBjIvAlB|O|FxGhAlBvCGrAsBpGaEQaAt@gAfIKbDZzAzBvEfEtEPbA_@dBuCx@oA~AHdKyA`CiDtBwFa@yGF_CuBuCx@s@tBDzA~@dDCh@g@VgAA}DeB_BqCaIgF_D{A{C@YmCy@wAh@qD{@eC_DcC}ANgAiBUgBdByI_A}Cq@OgA|Ai@@qDeDp@wHhAcAP_AkAqDmAaA",
    "pointCount": 93,
@@ -1561,10 +1666,14 @@
    "end": [
     32.996898,
     131.923834
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:62",
+   "id": "大分県:57",
    "region": "oita",
    "regionName": "大分県",
    "name": "渋見成恒中津線",
@@ -1574,8 +1683,8 @@
    "curviness": 405.5,
    "flow": 26.3,
    "turnCount": 147,
-   "score": 72.6,
-   "baseScore": 72.6,
+   "score": 85.4,
+   "baseScore": 85.4,
    "spotCount": 0,
    "polyline": "idxkEmgx_Xr@cCjBqCnA?xCbBfJuErKaNtBiHdIcMlE_EnDeAnGK~HeAlNmFpBKDyErBqNpH?nJ_AxJKnSlFpR~A\\lALxHvBz@dBrBpIbFdDdD?bJlC~L|FfLxFbG`BnCdCzA`BhFKnAdC{@aAtCFf@xCeBn@qDCgBtA[vA\\`BgDf@aCn@YRbAKdEn@jC{@xCxAdBq@|BD~G}BfBbCHlAoC|@E`@TvAbE`Ax@|ATWh@aCr@sA}@g@^v@jBa@hAtAz@t@nCMhJcBnOxApITzDo@vGcDpHo@fEp@tIUpJXtL",
    "pointCount": 80,
@@ -1586,10 +1695,14 @@
    "end": [
     33.511436,
     131.176913
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:63",
+   "id": "大分県:58",
    "region": "oita",
    "regionName": "大分県",
    "name": "両子山武蔵線",
@@ -1599,8 +1712,8 @@
    "curviness": 422.4,
    "flow": 26.1,
    "turnCount": 178,
-   "score": 72.2,
-   "baseScore": 72.2,
+   "score": 85,
+   "baseScore": 85,
    "spotCount": 0,
    "polyline": "ul{kEuqgbXeAtAkBOoCpAiBa@|MmYnE}DlBe@hC{CrGgBzDuCzQ{AxEcA`GkClIKxFsFjCkAdFgBvEH~L_JdJmBdH{G`G}DbFk@bEb@zRuFpOwChEmFbN_BbJ_Cnf@wGrCeATmAzJmIl@aH]gCt@IzCnBhA{DbBKrBuGn@A|@nAjC?^cId@UbBn@CqHf@QjAt@bEQjBgD]oGbAuEQ_Ak@]yHt@oHg@k@dAD`DuAbA}DsD_@{DsD[kCyAu@rB~@fCIfCeAh@yD_EcASe@aB{E{F\\KlF`Eh@UI{@iAGmDiE{GqBYvEoFBuBp@_AfBo@PO_FlBwBdE_K",
    "pointCount": 88,
@@ -1611,10 +1724,14 @@
    "end": [
     33.528661,
     131.645374
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:64",
+   "id": "大分県:59",
    "region": "oita",
    "regionName": "大分県",
    "name": "中津留轟牧口停車場線",
@@ -1624,8 +1741,8 @@
    "curviness": 410.8,
    "flow": 23.7,
    "turnCount": 294,
-   "score": 71.5,
-   "baseScore": 71.5,
+   "score": 84,
+   "baseScore": 84,
    "spotCount": 0,
    "polyline": "iiwgEqjzaX`BtCnFbBrFvDnClFnFlG~PvAtEdClC|FhFzOq@|HX`DhAx@~Cf@hBdBjA_@t@d@pAxBhAfJvArFt@~@|EFlBa@nI~AjH@tBtEk@fLzAxFyKrIiApCoCzJQjNeEvGyA`Zw@lBqD`CaHa@}Bh@e@fAkBr@_F`@uCk@{ChAcBS_NtDiAr@sBpEi@tE[ICkBmA`@K_B{BOi@fAk@Fg@aBw@R[w@u@IiDbD\\pDIxCfAtB}AjBk@vB_FpB?jBcApAL|CsAt@}@`CL|C{Cf@_AlAUbATlC}A`F\\lBmAhDeApG}BzCWtByGIk@Yy@~@gDL{DfCmDjAy@|CiBnCaFz@_@`@m@[gAT_BpEeKlFiDPkHgBaADeBzBcBhG_DJ}ChB]OgAyBkBiIE{JZ{Ei@u@@_Bq@wANgEm@cFgA{CSkCmCiDoBK]uCqE{NkDcQiFqGqGgBq@iAgE{BuB}CkHkG}KiCkBcAyDyHoFu@{C`@eL[mDjAkAEsNnC_LAeE`@wGaCsBx@_B@_GmBeDDsHwBcB@{AoC}Aw@gBkCsAS_DmCeAwHwBwIaGcJmJ}F",
    "pointCount": 153,
@@ -1636,10 +1753,14 @@
    "end": [
     32.950415,
     131.512635
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:65",
+   "id": "大分県:60",
    "region": "oita",
    "regionName": "大分県",
    "name": "飯田高原中村線",
@@ -1649,8 +1770,8 @@
    "curviness": 419.4,
    "flow": 25.5,
    "turnCount": 170,
-   "score": 71.4,
-   "baseScore": 71.4,
+   "score": 84,
+   "baseScore": 84,
    "spotCount": 0,
    "polyline": "_~jiEge|_XgI~B_OwEcX|@kDqBuEeG{JwA{AFqI~DcAjC{@bHwBvCaLdFmAEoA_BoASaFtEoCT}BjBFjAzAbAvDMrAv@`DFbDjAHdAoAJOf@~BvEvBzAMr@m@@aGaJg@\\nDzFUXmAYc@eBUf@T|@fE`BI\\mBIfAr@|@GGb@_BLu@e@qA{Ba@_DyA_B_HqBo@VgBxEsIlGo@I{DyEyJzCuKNyDzEiKdE{GYiD~BsHt@iD`BeS~@cHfFaGRiKdEcCNyFm@wB`@}AbCwBdAqB}@qCzAqCnFsEpF_EN}BmBcF`@qA`FsBbDd@tCOj@sCxAsAhCoBxAqFnAcD{@wDReE_EiDWmFqC",
    "pointCount": 94,
@@ -1661,10 +1782,14 @@
    "end": [
     33.218714,
     131.201536
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:66",
+   "id": "大分県:61",
    "region": "oita",
    "regionName": "大分県",
    "name": "菅原山浦線",
@@ -1674,8 +1799,8 @@
    "curviness": 400.5,
    "flow": 24,
    "turnCount": 232,
-   "score": 70.8,
-   "baseScore": 70.8,
+   "score": 83.2,
+   "baseScore": 83.2,
    "spotCount": 0,
    "polyline": "uf`jEag~~W^oAwB_HP]xE|Gt@[x@}E~@iA~FnChLP|De@bGlC|Ae@fCcC~DDrC_BhEHhJiDtAUxDn@lEWrBy@rDkFCuAx@qCrFoF~@uOpCYT_@a@gIjCyGEu@kBkCf@wDIoH`@QdBdElHbBlD{Cn@_GdFkE~@oB\\_ClKmGdBcE`GeDx@IbBpB|CbJfBhC`A|@zFjBhIGzDsBnWXfGvAjImCxJEfFoCnHjAhFw@vDeBxD\\h@oBfJiCBa@eAI}Bv@zAeClDkBeDd@`AeAfGoC|@sAtAGvBaA|@wAjG_AdDoDzFUoAuAIgAfA`AlE`AvBMbC_BpDR~DlDjAJtFgCzFLnJgFnHCnC_ApAqA`CyEfDsD|FkPxB}I`EwGjBcApA_ClCq@bFeEpGkDbHaHdEcAhDkBrBwOjMwKrE_LnB{IkAgKHqC",
    "pointCount": 114,
@@ -1686,10 +1811,14 @@
    "end": [
     33.18114,
     131.120883
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:67",
+   "id": "大分県:62",
    "region": "oita",
    "regionName": "大分県",
    "name": "奥豊後グリーンロード（大野川上流広域農道）",
@@ -1699,8 +1828,8 @@
    "curviness": 400.1,
    "flow": 23.8,
    "turnCount": 252,
-   "score": 70.7,
-   "baseScore": 70.7,
+   "score": 83.1,
+   "baseScore": 83.1,
    "spotCount": 0,
    "polyline": "}__hEmrj`X_CkBsAqDeA]aIxBaFcAeNzC}E_@kAwAgAyC_CeOq@i@m@\\IbFq@t@}FUqDmCeAN?`BzFtDMdAwCa@cD}CaEu@cDh@{BdBy@nBCrCg@NUe@KiGqAwBuAPe@Uv@}Do@iCcAaAL{CkAgE`BwFnBaCToC}BmEmG[k@x@[~DFhJcGdE_@v@gDpRRxDqEbKaBt@gHiA{FDcAf@oFnHyDlOeAtQyGrD}DvJg@zT?lY_JrFeDjFcDbCsAxHmDlHr@|C?dB]jEa@x@q@g@r@{C]m@wA`CuCpAcB`BkBMiAsBlEyX~EsLCmAs@w@eBf@iBbJo@j@iD{@cCaFeAPk@rBt@xDcCb@[r@t@~DUv@w@FwCmC_BXwGhFGr@x@pBUhAaACcF}CCyBs@{DNaIlB}E~Bs@j@mAMsCZaC`BaDHiA?aDmAoAeAd@aCvFuELmUjPoBzBsCrHqAz@mRd@gMkAeAkAc@kEm@uA{Ai@aHYsAv@O`A`DvEPrAk@j@mCS{@`@_BrCSxCk@`@",
    "pointCount": 141,
@@ -1711,10 +1840,14 @@
    "end": [
     32.991713,
     131.271797
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:68",
+   "id": "大分県:63",
    "region": "oita",
    "regionName": "大分県",
    "name": "夷堅来線",
@@ -1724,8 +1857,8 @@
    "curviness": 393.8,
    "flow": 25.4,
    "turnCount": 93,
-   "score": 70.4,
-   "baseScore": 70.4,
+   "score": 82.8,
+   "baseScore": 82.8,
    "spotCount": 0,
    "polyline": "ugflEee{aXxDlBi@|CwC|C}EnHDbAfA`BCb@qDp@^fCbAvAo@nBNnDf@DVkCpBS\\{@~@Br@p@tCBt@rAhCtLQvA\\zAjB`@lBdDpBn@Jf@uDfCsHjMgDrDSpB{LnZsC|JcClBn@jGm@dAuCpB^nEcAtDgAdBo@fD_IfLwGjQwBpIeBbBcJzC_FnF}GlEwGbGuFfB}BhCmAbDmFrI",
    "pointCount": 54,
@@ -1736,10 +1869,14 @@
    "end": [
     33.642458,
     131.500225
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:69",
+   "id": "大分県:64",
    "region": "oita",
    "regionName": "大分県",
    "name": "緑資源幹線林道 宇目・小国線 竹田・荻区間",
@@ -1749,8 +1886,8 @@
    "curviness": 422.5,
    "flow": 22.6,
    "turnCount": 174,
-   "score": 70.3,
-   "baseScore": 70.3,
+   "score": 82.6,
+   "baseScore": 82.6,
    "spotCount": 0,
    "polyline": "u~rgE{hi`XqB]aDnAwDiAaFbA{ReCcAoHByBmA{C}Da@sAh@m@z@?|@nCtHf@zCdC~DqAr@wDQc@h@I`GmC|Ke@x@yA\\gAxCjBrECr@sDx@n@zGwC|AgA_@}AiI{LsLaBc@iB`@mD{CgBk@_CGo@`@UpAtB`CdD~Ht@\\fB_CnAHhAxBh@pEpCdAtAbBOfA}AlBKbF_CdCc@fBnA`GhDhBS`BmADyFwG{EgDg@KQj@lB`FlE`G`ChLB|BoGhD}A`Fj@~GtCxEn@`CcB`MrEdILnBi@lE}@lBcBHiH_HwBuE}Aa@_BxAuA~DVjEm@pEgHdNsAPu@[eHiLqDvDcCdAoBGiE}A",
    "pointCount": 91,
@@ -1761,10 +1898,14 @@
    "end": [
     32.896358,
     131.258005
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:70",
+   "id": "大分県:65",
    "region": "oita",
    "regionName": "大分県",
    "name": "四浦港津井浦線",
@@ -1774,8 +1915,8 @@
    "curviness": 401.6,
    "flow": 23.4,
    "turnCount": 198,
-   "score": 70,
-   "baseScore": 70,
+   "score": 82.3,
+   "baseScore": 82.3,
    "spotCount": 0,
    "polyline": "}vvhEu`gdXfCeBNqEdBkGTqWgAaFuFyI{@mGhC{NpHgGpIyM|@qCVwNqHuN{A{E}@gH?mDbAwBtCoArCgD~B}JxF}Id@oJg@yFLwCjAaFr@uIxCcLl@mE@aHwA}FcB}CJyBjBeESiHw@sDEyBq@cEwBmFiCmDeAo@cBf@cDUqJoBqI_Kk@uBCyCtCaGAyBcG_M}F_FuB_DeBmJl@oDSgDf@mD{F_FoBuC`@e@jApA\\k@gCgFs@uFyBeC{@NeClDiCvAyB{@mBA}AaAiALsBuBo@Hy@pAh@jCcBrDa@`D{D^AvAr@vD[fA}E{AmBeCw@?g@h@s@QkAsCmGt@}B]iDjCLx@jCnBn@lAdAb@jAtK_@lC`CfHO`CZdHZb@lCK\\`AOxBYQKaBe@fC@`Bh@jB",
    "pointCount": 108,
@@ -1786,10 +1927,14 @@
    "end": [
     33.068101,
     131.990775
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:71",
+   "id": "大分県:66",
    "region": "oita",
    "regionName": "大分県",
    "name": "宝珠山日田線",
@@ -1799,8 +1944,8 @@
    "curviness": 381.4,
    "flow": 23.8,
    "turnCount": 265,
-   "score": 69.7,
-   "baseScore": 69.7,
+   "score": 81.9,
+   "baseScore": 81.9,
    "spotCount": 0,
    "polyline": "ai_kEwy{}WZyGeAyDdCoDr@SjF`@nDyAvAqAp@qBbC_@jCqAvF\\`BYfEbAnF`FdIlBjLoQdMw@pEVnDkApCrABa@qAoDyBy@o@mAR_D[}B`@qHM{EaB{AYqBmCc@KiBiAm@k@yB]}Eq@_@}CBO{@s@m@PcAYeAaAUsAn@}JHoAs@qFMqHwAkEmCyD_@kBn@HiBg@y@OqBsBxAuBwAqFnB_AaBa@GNzDsCH[GEo@bAgAs@m@_@_B_@\\TpAMnAiAzCg@PuD_GoAgEs@g@kAb@sAhEgAFH|CqBzA?n@n@`AXGzLwVjCoBr@uAf@wLKqHdEyM|AwLG}B{AgEEoBlF_K~@i@hFh@lCw@nBwArA{BpAqElEuCrD{EtDiBjDD|Dy@~DN~CqCvIgAjAs@dHObH{C|HaB~CiEfGkF~@wG~GkHnBe@jId@vIaB`JcE`I{GtF`@fDhDpE`BrNnJhANhSs@zKwAxI]rB_CnU{PdKqAfEaDhUsZhG_M`EuEfDeMvFwMjF{EvFYxAm@r@sAPcB",
    "pointCount": 142,
@@ -1811,10 +1956,14 @@
    "end": [
     33.363519,
     130.959271
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:72",
+   "id": "大分県:67",
    "region": "oita",
    "regionName": "大分県",
    "name": "田野庄内線（ぐるっとくじゅう周遊道路）",
@@ -1824,8 +1973,8 @@
    "curviness": 366.4,
    "flow": 24.7,
    "turnCount": 221,
-   "score": 69.4,
-   "baseScore": 69.4,
+   "score": 81.6,
+   "baseScore": 81.6,
    "spotCount": 0,
    "polyline": "_~jiEge|_XM_Ed@_J`AoD@kOk@oEzAqFdKuRpEyRy@sF_A{AiGmCaQgSwAsCQuE\\yAvRcXlBaB{IcSy@mE{CwAqIaIp@cB~KgL`KgP|FkAv@q@xEoLnFEzDkEhEMfLuDlSiNzBuD|DgRU{Cw@_BhCyGf@gFlGcLJaHlFiPzHiFpKhArIS~AfAvAo@hD?v@cAxGmSeAmElAqEpA_BhDV`AUXeH^o@zB@dAw@nBQ`DjAfCw@KkCfBuD@yC_BcQgDgG`BoEB_AsBuAgFGxBsEnAaHmBM|@{C}@sA]{Ba@Ux@}DyBkL`@eBnDuDdGu@`CuAvBB^iCrBgBZoHpAuCg@aAsBIc@iA`@k@bD{@Pg@Sy@mBsAPaArA[T}@}C}BKcAxC_BHa@[}@cEo@cAmAU}C|@eEOiEk@yAaEiCS_AhCcOjCwBvBiGq@oMp@wHcAoF",
    "pointCount": 119,
@@ -1836,10 +1985,15 @@
    "end": [
     33.123736,
     131.331644
+   ],
+   "title": "ぐるっとくじゅう周遊道路",
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:73",
+   "id": "大分県:68",
    "region": "oita",
    "regionName": "大分県",
    "name": "大分臼杵線",
@@ -1849,8 +2003,8 @@
    "curviness": 409.2,
    "flow": 23.4,
    "turnCount": 256,
-   "score": 69.4,
-   "baseScore": 69.4,
+   "score": 81.6,
+   "baseScore": 81.6,
    "spotCount": 0,
    "polyline": "wmsiEgaybX|RtClA_ChFsBlEkEvD}L|DoH`DgJQkUrBSbGzApFLzPuPnLuInBeEt@g@~L_Br@i@h@gDfAq@^aAHiDdCwCBuEcAkCe@yDbFwHdEz@fCy@nBiA|@kB^kC`DoAbCX`@hBvA@dCoDMoC[Fc@~Ba@COk@t@iFnBgC`GStBiDrAd@rCw@^i@_@}A\\sAnBuArDFv@]Gi@uAg@gCgHoCHImEZc@j@VL~BvA[z@~@pB@hA~Ch@YZkBpCkApAeBpAe@vO`DlH{@xEcBz@`@rBpCpD}BnEdBtJ}@dHfDxEa@dFrEdAWpBuBvDh@bDhDlCBpG|CtBrGxED~Bh@xDwArEXjCa@vNwQzFwBn@oBA{ToAqCgAkFBqBl@uBEcCaAwC_FwFw@wGgCgDa@iDRwDq@oCkD}D{Dw@cAy@i@yBX}MdA_IxC{FpDcAxGiFh@_FtDkLTaCUgGoAeJwB_HSyCp@eHfFoKPiDWuJ",
    "pointCount": 130,
@@ -1861,35 +2015,14 @@
    "end": [
     33.13913,
     131.768889
-   ]
-  },
-  {
-   "id": "大分県:74",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "産山小池野線",
-   "ref": "216",
-   "highway": "secondary",
-   "lengthKm": 3.24,
-   "curviness": 389.4,
-   "flow": 25.3,
-   "turnCount": 50,
-   "score": 69.1,
-   "baseScore": 69.1,
-   "spotCount": 0,
-   "polyline": "gofhEs__`XgIqU}AwKeDaCoKmOkCmQQyMc@wAyAu@iCSgFvAiB[eBqBSx@t@hCcDv@oAhA{@bDP|FfEjBx@xAZrBlBbB_@r@cGsH{Bo@cCAmAq@mAN",
-   "pointCount": 29,
-   "start": [
-    32.970277,
-    131.235944
    ],
-   "end": [
-    32.982325,
-    131.24718
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:75",
+   "id": "大分県:69",
    "region": "oita",
    "regionName": "大分県",
    "name": "田野庄内線",
@@ -1899,8 +2032,8 @@
    "curviness": 382.5,
    "flow": 23.6,
    "turnCount": 190,
-   "score": 69.1,
-   "baseScore": 69.1,
+   "score": 81.2,
+   "baseScore": 81.2,
    "spotCount": 0,
    "polyline": "ugniEunbaXdJfL|@nCp@tHxCvEnCdBvNb@~AhA~FtAVtAUzBfKlHv@`F}BrHKpEtFjJxBpHd@|H`EvJbLrKdDpHlIbHlEdBfAdHpJrDjBUpCqB`HjDrGa@j@fBxChDbD\\fAo@tC|AhD|Uz@`N~@vCDpA|@Zp@fBbAVtCbFZzAa@rC}@jARb@s@bAi@lCv@x@?`D~CxBR|@i@vFPfH_@h@cAHeCzCgDpBa@hBrClAlBOXlL|FrIbCZn@hAt@lDTxEiB|BBtEiAbF~E|CVn@xAtFQhHp[js@xC\\pAeAnDxAxAdC`DbCh@BhBoAxKdGfHxRfArNdMzMz@dC`BnKnBhCbA|CRlE",
    "pointCount": 91,
@@ -1911,10 +2044,14 @@
    "end": [
     33.123736,
     131.331644
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:76",
+   "id": "大分県:70",
    "region": "oita",
    "regionName": "大分県",
    "name": "新城山香線",
@@ -1924,8 +2061,8 @@
    "curviness": 376.8,
    "flow": 24,
    "turnCount": 169,
-   "score": 68.9,
-   "baseScore": 68.9,
+   "score": 81,
+   "baseScore": 81,
    "spotCount": 0,
    "polyline": "}qlkE{mvaXcGpEsFtIqF~AcCMuNgFuVwC{DZw\\xJ{Ee@}Of@qMkAcMEm@u@k@gD{C{HuEl@{M}A{E{DwE{GoE{Cu@wC{FcBsCyB_CqGYwDuAmC{@EUh@nBfCq@jD}FpCqCSeCbFqAp@m@YmAsCiCgAEuC]}@kEUgEgFuG}BmB{QyCcJiDaFcI{HsDaJA{ArAmG|CmGU_HnB_Lm@kGXgEi@SqAvCgDz@aBmBl@{AMi@{CEBy@pB{@LuA{D[aK_DgAuF{DwB?_A~AkAcBuA_@yA}AI{Ah@BhAxAt@MbAs@AmBgB_AHHjFg@jAoEImIhHgDvGYdIwDjD",
    "pointCount": 88,
@@ -1936,10 +2073,14 @@
    "end": [
     33.552997,
     131.544736
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:77",
+   "id": "大分県:71",
    "region": "oita",
    "regionName": "大分県",
    "name": "落合斉藤線",
@@ -1949,8 +2090,8 @@
    "curviness": 384.8,
    "flow": 22.5,
    "turnCount": 272,
-   "score": 68.6,
-   "baseScore": 68.6,
+   "score": 80.6,
+   "baseScore": 80.6,
    "spotCount": 0,
    "polyline": "clekEebu_XdAl@jAGbCsClBU~GbCzK\\nAnBj@lDtAjDdHbD~HjFhFh@nI`EtHeA`EpBtDf@hGhDfJnDfFOpH{C~HwAzNkExFBlMw@bCNrEoAhJmKlD{@bAw@hDiHvCeChBmD~@oFvAoCbDcL~BsDjHiHzIeDpGsG|FuCbGeBvDRr@YbC}HBmC{EmYNqJg@}FmAgEjGyOx@y@@_AeAkDLmAhD_BxAsHZ?pBfC`AM\\kA]{@sBsAG_JyBiJk@c@iEUs@{@~AwBy@{FfBuE_A{ETOrBtA~@g@X_C}AyEFwA^Kz@|AfAZZaAX}I^OlBzArBcCh@{Bs@cB_Fx@uDeBw@Di@xAu@Ir@mGYmAaBcA`@sAHmGwBWCm@tCaDjCqJBaBsA_BBg@nEa@~@kAVp@cAjBJp@l@TvKiD|BoClDiJ~AsFBmDtE_F`Au@rEiAzDHfCsBlG]nHXdEwGbDaB`@qE|EkOFgIhCaJCqG~B}DPaBS}@gCsCKcFaAcI}BkD@kDkEaDkEoS_CoE",
    "pointCount": 141,
@@ -1961,10 +2102,14 @@
    "end": [
     33.395879,
     131.264081
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:78",
+   "id": "大分県:72",
    "region": "oita",
    "regionName": "大分県",
    "name": "成仏杵築線",
@@ -1974,8 +2119,8 @@
    "curviness": 358.1,
    "flow": 24.9,
    "turnCount": 150,
-   "score": 68.5,
-   "baseScore": 68.5,
+   "score": 80.5,
+   "baseScore": 80.5,
    "spotCount": 0,
    "polyline": "cq~jEgojbXuDiA}JkFo@~CaGfHcVzT_E|IDnQvB`N\\dG}OpSoBhD{B~HyAx@}TiCoAm@oCmE{AgAyZ{KgEaAqESkDyBeFcA_IQqMuGaHFoFaAqIY{AyAgDeA_CmDcDqAaEbAwF\\sDhDoFlCO~@gF|HgApC_Dd@wDnCz@xE{@zEkFAsAkCkAlA{C^u@|AiAk@eF~@mB{A}GLaCaAcAfA^fCm@lAYk@OaKgCkLyGiIyEgDaHyLwBGNaDyDyHg@ZUrD}@h@]lBeB`Ay@dBaABQnBs@^qA}@gC`@aIs@eE~@[{E",
    "pointCount": 79,
@@ -1986,10 +2131,14 @@
    "end": [
     33.485928,
     131.613783
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:79",
+   "id": "大分県:73",
    "region": "oita",
    "regionName": "大分県",
    "name": "別府挾間線",
@@ -1999,8 +2148,8 @@
    "curviness": 429.8,
    "flow": 21.3,
    "turnCount": 202,
-   "score": 68.3,
-   "baseScore": 68.3,
+   "score": 80.3,
+   "baseScore": 80.3,
    "spotCount": 0,
    "polyline": "s`xiEkkyaXyDzVsBrBiA|CoBPiLsAkSlAoDmB}C~@oDa@aBpBq@bDgCbEcClBeAO_A\\}A~Cs@fDkOxGoAjA_Cd@wDhD{B^oBhBaFDdAfDvA`Ab@fHo@xAaD`An@vDKnAg@d@oABuFeDy@D[jAn@xB?jAgG`HsArEoFjDwE~EqEjAsA~Am@dELvAhFzH~A~Iv@bAxDpApCjGIdBmAbCyC|A}D\\wCpGw@p@s@NsAs@c@qEz@qC`AQt@n@G`CsA^eFuFBsA`AuCi@sB_AQy@Ze@~AYvEcArAkSt@qB_AeCaGcAiAiHoAkCiEeAUkAZq@fB~@xEEvA{@hAgABeDgEcE@eAa@}FuGe@_CVcKkBmE{B{@qBf@cA~AoAlGk@p@eALCqFkB_G",
    "pointCount": 103,
@@ -2011,60 +2160,14 @@
    "end": [
     33.270053,
     131.509797
-   ]
-  },
-  {
-   "id": "大分県:80",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "朝田日田線",
-   "ref": "106",
-   "highway": "secondary",
-   "lengthKm": 8.42,
-   "curviness": 399.3,
-   "flow": 22,
-   "turnCount": 153,
-   "score": 68.2,
-   "baseScore": 68.2,
-   "spotCount": 0,
-   "polyline": "i|_jE{qy}WcCwDViEoDeKQyGxAgBbDsAdD~AnASJiEfDwARaBkBOgE{BeIrA}LIoB{AqB{Ci@mD}BAaFcIgDgBkCKaCl@gB|Ak@~B}@fAuGu@iCp@uEEkCmDcDQmEcDgER_Cq@k@}@YeC}BaDiGa@aHwBkEsHqCeBkEWgHoEoEq@aFx@iEuAuDdB_AsAcAsD_JyFuGcMSqA~AcC]}C}Cy@m@iFyBmBmBeDaAkH_EkBu@KeDbB{AEiClAoE~F}CfAcCjByIl@cHu@}FqBb@gEe@uAsNwHsEoA",
-   "pointCount": 75,
-   "start": [
-    33.264212,
-    130.880458
    ],
-   "end": [
-    33.313217,
-    130.911423
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:81",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "別府一の宮線",
-   "ref": "11",
-   "highway": "primary",
-   "lengthKm": 15.36,
-   "curviness": 397.8,
-   "flow": 22.4,
-   "turnCount": 273,
-   "score": 67.8,
-   "baseScore": 67.8,
-   "spotCount": 0,
-   "polyline": "e{~iEwd{`XxAAtAr@bAe@Fy@i@cAgEqBiFDwFcBaD{CeDcGuBp@kDfFsAYUcARu@xCsBfDkEtAXzFzHfAn@lD`@x@wBWs@mGyEIiNYaBuAqAmC{@gAqB\\sUiAyBeGoBgDu`@yDgMkG{HJeQy@sIwAkAsGMaAa@sHwH_CwAkDaFcG}BmAyCCwGZ{BjGoHtP}AnBk@|DaC`CaFMuGeC_J_CkFnFqSNwCeA{AsAMuFbDqAM]q@r@eDJaDzCqBb@uABiCf@i@fBIrCuBp@uAUy@iAYoCp@qAcA_BMo@mALyC_@iDlBwF~CiD`@uByCcTPwHuBgD{@yFoDwBcAmEg@@Qv@lA`FEzAk@f@_G\\uAk@{FcHaKoDwAqE_@qGx@oAvDu@LiBw@cDg@MS^j@pAKvAq@Zu@Q_@cEkCuCmBkDg@qCz@wFc@w@cAGe@f@\\`Di@dCkBd@cBdCuEbAqAEuI{FuIsHKaAfAyDDoGUgAeCsBaEy@gDoBgGxFoA~EcJgA[yAhBiBfAgC|ByARkAeJ_DgJkA`QdD",
-   "pointCount": 144,
-   "start": [
-    33.258909,
-    131.380123
-   ],
-   "end": [
-    33.290072,
-    131.459403
-   ]
-  },
-  {
-   "id": "大分県:82",
+   "id": "大分県:74",
    "region": "oita",
    "regionName": "大分県",
    "name": "山内新殿線",
@@ -2074,8 +2177,8 @@
    "curviness": 382.7,
    "flow": 23.9,
    "turnCount": 68,
-   "score": 67.8,
-   "baseScore": 67.8,
+   "score": 79.7,
+   "baseScore": 79.7,
    "spotCount": 0,
    "polyline": "kayhEer`bXpE|B`CIdAw@xCz@pCfB`DdEfEk@tCzAnCc@`AhC`BcCSwAt@mBb@QhBdAbPeMpCaFA_AaA}BCmElEyOpK{O|@yHrA{@vCQl@o@~@_DJuEjB}DdAwGbTgZzBgBfEoAbDmFjAw@",
    "pointCount": 36,
@@ -2086,10 +2189,78 @@
    "end": [
     33.041471,
     131.594181
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:83",
+   "id": "大分県:75",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "別府一の宮線",
+   "ref": "11",
+   "highway": "primary",
+   "lengthKm": 18.98,
+   "curviness": 306,
+   "flow": 35.6,
+   "turnCount": 163,
+   "score": 79.4,
+   "baseScore": 56.1,
+   "spotCount": 0,
+   "polyline": "wz`jEyux`XS_Dd@aC|@_BvKmD??tFsDjA}C|CuBjFqMvCcFBm@i@_@mBvAm@OMm@tA{EEyH`E{FnEmB|Ih@dFjCbAe@Fy@??i@cAgEqBiFDwFcBaD{CeDcGuBp@kDfFsAYUcARu@xCsBfDkEtAXzFzHfAn@lD`@x@wBWs@mGyEIiNYaBuAqAmC{@gAqB\\sUiAyBeGoBgDu`@yDgMkG{HJeQy@sIwAkAsGMaAa@sHwH_CwAkDaFcG}BmAyCCwGZ{BjGoHtP}AnBk@|DaC`CaFMuGeC_J_CkFnFqSNwCeA{AsAMuFbDqAM]q@r@eDJaDzCqBb@uABiCf@i@fBIrCuBp@uAUy@iAYoCp@qAcA_BMo@mALyC_@iDlBwF~CiD`@uByCcTPwHuBgD{@yFoDwBcAmEg@@Qv@lA`FEzAk@f@_G\\uAk@{FcHaKoDwAqE_@qGx@oAvDu@LiBw@cDg@MS^j@pAKvAq@Zu@Q_@cEkCuCmBkDg@qCz@wFc@w@cAGe@f@\\`Di@dCkBd@cBdCuEbAqAEuI{FuIsHKaAfAyDDoGUgAeCsBaEy@gDoBgGxFoA~EcJgA[yAhBiBfAgC|ByA??VaA_@c@}GcBgm@}IyRRwZ_@uBu@gSmM",
+   "pointCount": 169,
+   "start": [
+    33.26908,
+    131.36749
+   ],
+   "end": [
+    33.30978,
+    131.46407
+   ],
+   "reshaped": true,
+   "title": "やまなみハイウェイ",
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:76",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "別府一の宮線",
+   "ref": "11",
+   "highway": "primary",
+   "lengthKm": 18.98,
+   "curviness": 306,
+   "flow": 35.6,
+   "turnCount": 163,
+   "score": 79.4,
+   "baseScore": 79.8,
+   "spotCount": 0,
+   "polyline": "wz`jEyux`XS_Dd@aC|@_BvKmD??tFsDjA}C|CuBjFqMvCcFBm@i@_@mBvAm@OMm@tA{EEyH`E{FnEmB|Ih@dFjCbAe@Fy@??i@cAgEqBiFDwFcBaD{CeDcGuBp@kDfFsAYUcARu@xCsBfDkEtAXzFzHfAn@lD`@x@wBWs@mGyEIiNYaBuAqAmC{@gAqB\\sUiAyBeGoBgDu`@yDgMkG{HJeQy@sIwAkAsGMaAa@sHwH_CwAkDaFcG}BmAyCCwGZ{BjGoHtP}AnBk@|DaC`CaFMuGeC_J_CkFnFqSNwCeA{AsAMuFbDqAM]q@r@eDJaDzCqBb@uABiCf@i@fBIrCuBp@uAUy@iAYoCp@qAcA_BMo@mALyC_@iDlBwF~CiD`@uByCcTPwHuBgD{@yFoDwBcAmEg@@Qv@lA`FEzAk@f@_G\\uAk@{FcHaKoDwAqE_@qGx@oAvDu@LiBw@cDg@MS^j@pAKvAq@Zu@Q_@cEkCuCmBkDg@qCz@wFc@w@cAGe@f@\\`Di@dCkBd@cBdCuEbAqAEuI{FuIsHKaAfAyDDoGUgAeCsBaEy@gDoBgGxFoA~EcJgA[yAhBiBfAgC|ByA??VaA_@c@}GcBgm@}IyRRwZ_@uBu@gSmM",
+   "pointCount": 169,
+   "start": [
+    33.26908,
+    131.36749
+   ],
+   "end": [
+    33.30978,
+    131.46407
+   ],
+   "reshaped": true,
+   "title": "やまなみハイウェイ",
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:77",
    "region": "oita",
    "regionName": "大分県",
    "name": "臼杵坂ノ市線",
@@ -2099,8 +2270,8 @@
    "curviness": 399,
    "flow": 21.7,
    "turnCount": 80,
-   "score": 67,
-   "baseScore": 67,
+   "score": 78.7,
+   "baseScore": 78.7,
    "spotCount": 0,
    "polyline": "}tniE{zhcXtCyC`@sGlCa@h@{BGaA_Au@d@iBaAkEUeHaEyDPcAdA`@dEzFRvHzBnIvCnGl@vGlA`CfBVvDgBfCnDvE|A`BA`E_AlCsElCDtD_BzGyFlBqDhBySlDcGTyBzBaC`B}DxAo@vOi@~HgJ",
    "pointCount": 38,
@@ -2111,10 +2282,44 @@
    "end": [
     33.155893,
     131.78977
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:84",
+   "id": "大分県:78",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "産山小池野線",
+   "ref": "216",
+   "highway": "secondary",
+   "lengthKm": 3.13,
+   "curviness": 316.3,
+   "flow": 39.6,
+   "turnCount": 25,
+   "score": 78.6,
+   "baseScore": 81.2,
+   "spotCount": 0,
+   "polyline": "gofhEs__`XgIqU}AwKeDaCoKmOkCmQQyMc@wAyAu@iCSgFvAiB[eBqBSx@t@hCcDv@oAhA{@bDP|FfEjBx@xAZrBlBbB_@r@cGsH{Bo@cCA",
+   "pointCount": 27,
+   "start": [
+    32.97028,
+    131.23594
+   ],
+   "end": [
+    32.98155,
+    131.24701
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:79",
    "region": "oita",
    "regionName": "大分県",
    "name": "久木野尾尾立線",
@@ -2124,8 +2329,8 @@
    "curviness": 377.6,
    "flow": 22.3,
    "turnCount": 95,
-   "score": 66.5,
-   "baseScore": 66.5,
+   "score": 78.1,
+   "baseScore": 78.1,
    "spotCount": 0,
    "polyline": "y_|jEoqdaXhC^xCu@xBp@RpAqAfGAzBnI`FjDlGjAv@pAJhAdB~CYjP`@|KpD\\~Be@l@kK`@cDbDFvAxBzCdFzDfDhFlCtAb@fBRhJp@NrCtEYbA_Hd@y@lADxCpA|Cx@n@dNtEdC|HvEnC~BjDnAxE@lAcAzCChBb@x@lCv@`A|AGzDuBbL{@rBiCvCkFdBgAzDgAtAF|B~BxJ",
    "pointCount": 54,
@@ -2136,10 +2341,14 @@
    "end": [
     33.393125,
     131.392819
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:85",
+   "id": "大分県:80",
    "region": "oita",
    "regionName": "大分県",
    "name": "赤根富来浦線",
@@ -2149,8 +2358,8 @@
    "curviness": 341.8,
    "flow": 23.5,
    "turnCount": 146,
-   "score": 66.1,
-   "baseScore": 66.1,
+   "score": 77.7,
+   "baseScore": 77.7,
    "spotCount": 0,
    "polyline": "m`blEofcbXtF_KvDwE`CuQzC{@v@{@Si@uALg@}AnDgA|@sA[}EkDkBuEcJh@MtCjCfAcBbFyBvDaLnBDlDuDv@r@|@?|@bBzAoAtCoFL}Ac@oBzAmH`C_Dx@sGfB{C~@Tv@cBk@gJt@}F`AiBMaDv@aCLgC~CgFPuA`BuBDu@@}Fe@o@\\}@o@oC`@eC_@yDp@}YoCsMmBgCIqJyCuKmBiPkHa]aBaLTgMm@qE]{Pw@kAw@sHhAuPyA{OgAiDaB_BgRqGmCgBaFsHqEgP{CwGsBsWuAqCTmC{AyZ",
    "pointCount": 76,
@@ -2161,10 +2370,14 @@
    "end": [
     33.603653,
     131.67239
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:86",
+   "id": "大分県:81",
    "region": "oita",
    "regionName": "大分県",
    "name": "池田大原線",
@@ -2174,8 +2387,8 @@
    "curviness": 376.5,
    "flow": 21.5,
    "turnCount": 107,
-   "score": 65.8,
-   "baseScore": 65.8,
+   "score": 77.3,
+   "baseScore": 77.3,
    "spotCount": 0,
    "polyline": "swqhEyoeaXyBeF_EqE_@aCf@sExAe@bJIhAu@rBcIE{Az@gDX_GdAExBdAv@UZwAb@QiCmGkDyC{B@eBz@sDy@w@AFTh@t@}B_N_DwGoBuMAkCn@}EeAcGz@}DDyBoAgPTyApCqGt@cLxEoT~@u^cBmGx@yHUoCj@_DdBkCj@_G`BkAd@iBtAcBxF{CDoAyA{DAyDrFkGtCgI",
    "pointCount": 54,
@@ -2186,35 +2399,14 @@
    "end": [
     33.023066,
     131.483634
-   ]
-  },
-  {
-   "id": "大分県:87",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "朝地直入線",
-   "ref": "209",
-   "highway": "secondary",
-   "lengthKm": 11.68,
-   "curviness": 331,
-   "flow": 22.6,
-   "turnCount": 171,
-   "score": 64.9,
-   "baseScore": 64.9,
-   "spotCount": 0,
-   "polyline": "}cnhEwfeaXa@rKsBtCJjCaBzTcHnKS~GgG~LRhHeBtEC~C`CpL_AlJkC~C}DzBcOnDaIB_Cs@aB@wEVoJjBoDsCGeAxAcItCoEYeC_Bu@iJhD_D~Ee@dEgDXcCrA__@sCyHlG}@?mBcAgBp@uAfBa@hEwBeCqD~AC{B]KyBnBoLpAkCpIG~F[p@oCPc@k@UgC_@e@u@FkFjGsIfFqAvByAjFIfChBtFA|AsEvKg@jGqBzEcSlIaAgC}JwOkAlAU|Ai@p@_Ej@iC~A}DJqDvC{C`@qBgBe@L@tBdAnDi@pBmHQgBfAQtBP~C{@xC]fNmKtPuCbBiEb@eFtO?fGW|@gInG",
-   "pointCount": 92,
-   "start": [
-    33.009429,
-    131.431642
    ],
-   "end": [
-    33.06881,
-    131.37779
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:88",
+   "id": "大分県:82",
    "region": "oita",
    "regionName": "大分県",
    "name": "別府庄内線",
@@ -2224,8 +2416,8 @@
    "curviness": 364.3,
    "flow": 21.8,
    "turnCount": 204,
-   "score": 64.8,
-   "baseScore": 64.8,
+   "score": 76.3,
+   "baseScore": 76.3,
    "spotCount": 0,
    "polyline": "i`ajEwigaXb@GrDrGzBt@m@lCEbC`A~CnAv@nE[zRtB|B`BnCdFhEzBzNTlBmAfDMxBlDnAR~@e@r@sCh@@nAfBjBc@jAuCu@gCJ_A~@Q|Av@r@WzB}B`@wBdDuCdDqFzCg@rC{FjBmBdIi@tF}D|BMrAs@bA|Ar@JlByDvCKz@}BvD|@`D?~A{@d@cBhCkBpCXhAkAtCe@nDtCrDEpG_DnCB`Di@pHyCjErAx@lB|Fx@uAnDA`Ah@p@dD[xC\\rCcBjGOpDpC`VnF`BjBxDtHpC~AbPR|L{@zMJtLjDhFl@zG{DpELbFpBrKe@dC{ArDy@vLa@dE~E|Gx@bAj@t@hBAhJpArBtM~AfEjDfPlIlAfBpBvGfAnAdXdHhGpIjBdHrCfA",
    "pointCount": 102,
@@ -2236,10 +2428,43 @@
    "end": [
     33.181182,
     131.426457
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:89",
+   "id": "大分県:83",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "朝地直入線",
+   "ref": "209",
+   "highway": "secondary",
+   "lengthKm": 11.68,
+   "curviness": 331,
+   "flow": 22.6,
+   "turnCount": 171,
+   "score": 76.2,
+   "baseScore": 76.2,
+   "spotCount": 0,
+   "polyline": "}cnhEwfeaXa@rKsBtCJjCaBzTcHnKS~GgG~LRhHeBtEC~C`CpL_AlJkC~C}DzBcOnDaIB_Cs@aB@wEVoJjBoDsCGeAxAcItCoEYeC_Bu@iJhD_D~Ee@dEgDXcCrA__@sCyHlG}@?mBcAgBp@uAfBa@hEwBeCqD~AC{B]KyBnBoLpAkCpIG~F[p@oCPc@k@UgC_@e@u@FkFjGsIfFqAvByAjFIfChBtFA|AsEvKg@jGqBzEcSlIaAgC}JwOkAlAU|Ai@p@_Ej@iC~A}DJqDvC{C`@qBgBe@L@tBdAnDi@pBmHQgBfAQtBP~C{@xC]fNmKtPuCbBiEb@eFtO?fGW|@gInG",
+   "pointCount": 92,
+   "start": [
+    33.009429,
+    131.431642
+   ],
+   "end": [
+    33.06881,
+    131.37779
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:84",
    "region": "oita",
    "regionName": "大分県",
    "name": "岩戸五馬日田線",
@@ -2249,8 +2474,8 @@
    "curviness": 341.2,
    "flow": 21.2,
    "turnCount": 257,
-   "score": 64.7,
-   "baseScore": 64.7,
+   "score": 76,
+   "baseScore": 76,
    "spotCount": 0,
    "polyline": "}xgjEwcg~WfC|BpEvAxDe@vE{DdG{GzAeHnD}FfCu@TqBpAaBdEqBfDsCrImMvFoBdAwG~BiAlBqB|@mD~CqC`Ho@hBq@vEaS~CuCjAkF`Ay@bB?hAy@nCm@~@sB|IwFdBwH[cJw@}EqE_HQuAxG_TnS{OnJqDzBG`EyAfCZhIgBdGkBvAcA`DoF`B}HlAgB|DiAdPgJfC}I{@iEPcBnD}HvF{@z@qGzEQj@jAlBgBz@hA~EbCrPk@tBaF`DqEYaEa@a@y@d@Ma@vBaFXqKx@gAfC_AdFK`F}HjDiBbDh@`ClAvEfEPdDnC\\v@YhDwHjFqB~CdFdFa@`CnAfC@zAtAvBNnAjAhLcBrDeAvDaDlAkCr@iCbBeXdBqNtAaC|EkD~Eh@fE]pDeH|G_CtEYpNLjGtAj@k@\\kBbIi@jMcFvBoCB}Ef@sB~CaA~@X~DdEpElAhAxF|DTlCqC`C?jBs@lGnBdAAtK}O",
    "pointCount": 125,
@@ -2261,35 +2486,14 @@
    "end": [
     33.208182,
     131.022843
-   ]
-  },
-  {
-   "id": "大分県:90",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "牧口徳田竹田線",
-   "ref": "410",
-   "highway": "secondary",
-   "lengthKm": 11.4,
-   "curviness": 356.9,
-   "flow": 20.5,
-   "turnCount": 198,
-   "score": 64.6,
-   "baseScore": 64.6,
-   "spotCount": 0,
-   "polyline": "azzgEyngaXY}B_CkDk@uD_CoCc@mGiAoCK_H_ByJE}GyD_Ge@yC@gDoCiEd@kIwDaP@qEeBwHcBeDy@kEiCqGs@aKwBeE^oEY_BNmImAeDaB{@cByCE}@f@wACcEuAkDWkHFg@xAs@pAyCMkCjA{BBmK]kFyCkFcKsCeAuBOyEo@uDh@_EdCoEI{CkCWcDmAsCiCcCTyCu@iE\\qJo@qHqG_DnAkBGkHcJgBo@{APiAfE_Ch@uCcD?gDkCV}B}@q@Xy@jBeDd@w@z@}Hq@qDz@mEBmDiA}FsDkHQ_J_HmQyEsK{EqHkBoJmImC]gL}DuF{F[gD]_@gARiAzA{Eh@iEkAaFAkFu@{BgBo@_D{BeDyCaAyDDmBcB",
-   "pointCount": 100,
-   "start": [
-    32.910567,
-    131.443165
    ],
-   "end": [
-    32.968975,
-    131.509548
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:91",
+   "id": "大分県:85",
    "region": "oita",
    "regionName": "大分県",
    "name": "鳥越湯布院線",
@@ -2299,8 +2503,8 @@
    "curviness": 328.2,
    "flow": 21.5,
    "turnCount": 330,
-   "score": 64.6,
-   "baseScore": 64.6,
+   "score": 76,
+   "baseScore": 76,
    "spotCount": 0,
    "polyline": "w`~iEo~v`X}Bd@cDkD}AGu@lAE`EyAdBmB`BiLjDuS_BqTkZkG~@aBgFiFj@cIgIcCUwDgCgCAuD}C{Cu@kCyCaDHeBmGyFcCGeCm@qBfAeEBoBa@k@aJnCkFcA_@|@AzBq@^g@YMuCw@Ug@d@]pBu@LmD_EuHqBmD{CEoAzCs@@_Ay@c@mIhAy@x@e@fCkBlA}HSeD~BqEcAyF]}@yD_B_BEuFuBwA{@sFuDaAoBqCyEZu@yE_EaDmBoDe\\ua@oCrFgGpFoCtIuAIgCyFyWtRcAxAkBBwHdHmBDoIfEkPpNkDt@gFnJY`D}A~BA`De@lBoKvK_AnBqAdA_O~D{KjF_Sb@eG~EoDi@oFbDgGzAwF`@{LjDcLJyCbB_@z@oCFqItDkGaAiLyHcBOeIt@uG}EuG]oH{B{Ko@}GXyExA{CGq@Z}@[c@d@gAc@e@p@aEjAeHXuBdAqCmDeEs@sDGwFj@qC_@oBf@eFHs@m@m@iC]CgIjDiAtAmBDgFzAsD[}D`EsMP_CfCiJKsHfDiC`@iFC}FbCkKFkFu@oEp@yEc@}DRqEtAuGGsDvAyB_AkCdAkFSkFpAwI`AgClBoFhHkEnCmEfAeLdIoGfQgB~I",
    "pointCount": 164,
@@ -2311,35 +2515,43 @@
    "end": [
     33.410888,
     131.346244
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:92",
+   "id": "大分県:86",
    "region": "oita",
    "regionName": "大分県",
-   "name": "栃野西大山線",
-   "ref": "647",
+   "name": "牧口徳田竹田線",
+   "ref": "410",
    "highway": "secondary",
-   "lengthKm": 4.72,
-   "curviness": 346.8,
-   "flow": 22.4,
-   "turnCount": 73,
-   "score": 64.4,
-   "baseScore": 64.4,
+   "lengthKm": 11.4,
+   "curviness": 356.9,
+   "flow": 20.5,
+   "turnCount": 198,
+   "score": 75.9,
+   "baseScore": 75.9,
    "spotCount": 0,
-   "polyline": "kiriE}mo~W~DjCdEnGhBrAbQz@~Fk@~GqHpDwAbDKz@^hFvGzHfD^Mh@}AhBUdD}B~@yBfEdDn@vAR`Au@|GLx@f@`@x@ClDnC`B@j@zCfEDnUcCn@b@VvDn@jBtMbExBjG`CbBjFhGrB?`FqChCk@nRvG",
-   "pointCount": 40,
+   "polyline": "azzgEyngaXY}B_CkDk@uD_CoCc@mGiAoCK_H_ByJE}GyD_Ge@yC@gDoCiEd@kIwDaP@qEeBwHcBeDy@kEiCqGs@aKwBeE^oEY_BNmImAeDaB{@cByCE}@f@wACcEuAkDWkHFg@xAs@pAyCMkCjA{BBmK]kFyCkFcKsCeAuBOyEo@uDh@_EdCoEI{CkCWcDmAsCiCcCTyCu@iE\\qJo@qHqG_DnAkBGkHcJgBo@{APiAfE_Ch@uCcD?gDkCV}B}@q@Xy@jBeDd@w@z@}Hq@qDz@mEBmDiA}FsDkHQ_J_HmQyEsK{EqHkBoJmImC]gL}DuF{F[gD]_@gARiAzA{Eh@iEkAaFAkFu@{BgBo@_D{BeDyCaAyDDmBcB",
+   "pointCount": 100,
    "start": [
-    33.194619,
-    130.992465
+    32.910567,
+    131.443165
    ],
    "end": [
-    33.160992,
-    130.980844
+    32.968975,
+    131.509548
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:93",
+   "id": "大分県:87",
    "region": "oita",
    "regionName": "大分県",
    "name": "山香国見線",
@@ -2349,8 +2561,8 @@
    "curviness": 361.4,
    "flow": 21.4,
    "turnCount": 227,
-   "score": 64.4,
-   "baseScore": 64.4,
+   "score": 75.8,
+   "baseScore": 75.8,
    "spotCount": 0,
    "polyline": "mkakEmvxaXqEcJeFNmEaE{C}@sBmCm@DyCnDmHmAgDPoDcByBY{FuE{Cc@eD_Ge@cDwCgDeAkDmAaBwCoAeBgCcLcG_DmCu@Rs@pBq@@MiDqBiAqHjF{CHNkCa@_@sDjDa@q@JgBe@aAcCoAwBRk@e@h@sIlBaGDoB]y@{@^AbC[t@cDHe@pDgAtBkCYcH`@oCuAmBoBcCx@MrBwB^Ke@`A{@iA}DiDyDe@_DcDuDq@_Cu@VS`D{BGgAyA}AoGsCuEaBoBsBy@yCuCc@_EqCyDs@sD|B_IFyC{Ei@mFyBsAaC_BcNmAmDcG{HqF}CyOoDqE\\iX~NaObE}MrMyHjAmAt@oB|DuB~OZnAWzAyHzOg@tBTzH}@pIcLdS}FsIkHcGkDcFc\\kLiCiGsHsM}GcFoCoHoJiG",
    "pointCount": 109,
@@ -2361,10 +2573,44 @@
    "end": [
     33.513807,
     131.560229
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:94",
+   "id": "大分県:88",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "色宮港木立線",
+   "ref": "501",
+   "highway": "secondary",
+   "lengthKm": 10.28,
+   "curviness": 241.9,
+   "flow": 32.7,
+   "turnCount": 76,
+   "score": 75.2,
+   "baseScore": 72,
+   "spotCount": 0,
+   "polyline": "iovgEivqdXk@tBaKtD_ERqCaAoD^uC`E}A\\iAs@eBmEiDgEwBe@uIlB{DjKoH`BaB]yEuDwBf@qCzBoCPqBi@gBkC}Eg@uGb@cCn@}GnFeDVaCs@gB{C_AQgCr@w@bAgBnIwCbB_B~DoJdHsBdEaB~AsEpAa@vFu@hAwDfBsEe@kA`OFfIgA`NZlKq@lFz@vBdFjDbBzJrE`Ea@zH`AbFGrAwZbf@wAAqBwEs@K_ArDn@vF_AjCuACo@_CoBVOl@N~Ol@bB|AnAvAfKhAbd@gBxM}GjVwAbD}AlK[x@gEdD{EfN",
+   "pointCount": 78,
+   "start": [
+    32.88837,
+    131.98709
+   ],
+   "end": [
+    32.93016,
+    131.92671
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:89",
    "region": "oita",
    "regionName": "大分県",
    "name": "大泊浜徳浦線",
@@ -2374,8 +2620,8 @@
    "curviness": 340.2,
    "flow": 20.9,
    "turnCount": 123,
-   "score": 63.3,
-   "baseScore": 63.3,
+   "score": 74.3,
+   "baseScore": 74.3,
    "spotCount": 0,
    "polyline": "eaciEei`dXRfApAdAjCp@xBAfBiEzAc@|EwF~GJ|BlCf@rFd@bA~Ax@`CjDzFrBtApA|@zHs@~DaDzFWlMqBZe@vABbA|@nAg@rCw@n@gA[gBZaDpFT`EjGxHn@nBGtBoAhDHpAhA~BhA|@dJlD`@nAA|E~BvDtGXvHlDt[dHlG~KrBxNdFhIjBdAzFoArGjAvCdHjBfAhArDdBtA\\rC_ClDwCfAmEnGqAp@q@nFhA`D~JhCzA|APxByBpGYrFnAdL",
    "pointCount": 67,
@@ -2386,10 +2632,14 @@
    "end": [
     33.090628,
     131.851859
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:95",
+   "id": "大分県:90",
    "region": "oita",
    "regionName": "大分県",
    "name": "下恵良九重線",
@@ -2399,8 +2649,8 @@
    "curviness": 301.1,
    "flow": 20.8,
    "turnCount": 433,
-   "score": 62.7,
-   "baseScore": 62.7,
+   "score": 73.8,
+   "baseScore": 73.8,
    "spotCount": 0,
    "polyline": "}{~iEmps_XwMuAyOTvAcIwB}Wg@wTbAeHBuFb@cBk@cJ`AaJQsBqAeEw@o@iP|CyEu@}ByAaEkICgDtC}KAkCw@eAsBAmGfD_BAeAs@}@oBeAmOwAcHZcFkBkCc@cCeCg@sHkH_Dc@_CNqE`AoDfCgEO_JbIaBf@iIiC}BuCJqC}FQ{L{E}C\\qBa@iDA}@b@{DQ{At@aBfBUrDcEfF@vBgA~CtAtF@xC^pBwAhPvCjI`@hCOdB_I`LqKdH}FrGgCd@wBtAyENkA`E{FbEwNxMaIeMcCsH}SwMuDqE}EsNvB_PNuFwB_ItCuCFcHgA}FuCe@_G}BPmJjDkEAiGaCsGgFuEuGqQ_BeL}ByIoEaJg@uVcGcUj@mS`CwIQ{F|B}MzBsG?}Co@eCaKiOOiBx@_KwB}FUyJaFoMcBoA_JRsB]}BsBgAgDiBsU?}DkAeJ|BaOoDoMm@qTRwEtCuQIcEh@wI_@wFFqHj@cJ]wGu@f@WnHk@^eCuG}DqF{EqB{JZsBsAmFv@qBmBi@wBcBYu@cAoTImEsA}Cp@}Xk@mGdAgLLgMbCsAbCRfKw@rBmI~DwUhIeCtDaGpFgG{C}DvAgB}A{EXkBy@qDS]MEsAuEgDmCTeCyBkDMaC_JPaA~@g@So@_BtBn@hIw@lKh@NbAkBfCPh@f@n@rCfBVNj@mCR_AuAmAYkEfBmBQiB}@iFC_BsHuFTwDmBs@uAaBTu@_@mDqOwDiH}By@iB}Do@gDkC}BuAoC}G}FkF{BaGcGyDaB}A{AeHmC}IaJk@wAFuAlCiFJiCm@wAkBk@m@qB",
    "pointCount": 216,
@@ -2411,10 +2661,14 @@
    "end": [
     33.386479,
     131.29633
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:96",
+   "id": "大分県:91",
    "region": "oita",
    "regionName": "大分県",
    "name": "三重野津原線",
@@ -2424,8 +2678,8 @@
    "curviness": 333.4,
    "flow": 20.5,
    "turnCount": 375,
-   "score": 62.6,
-   "baseScore": 62.6,
+   "score": 73.7,
+   "baseScore": 73.7,
    "spotCount": 0,
    "polyline": "yshhEe~yaX}@`SuCvMu@fLiBbOcExCwCrI_QvDeFhKaMhHcGrGoBzEiAxHZnJS`C{BvE}EzGsD\\aGoC}Ek@wAlBHhGq@pA{BS}C}AkFl@gEzBgEiC}HYiGl@yN?wc@oIkFx@iBIuAy@iFuJgBsAyDd@cHGkBw@}Gt@oLOyFdBeFzK}FtD{HzLgAlHuPvWqEpB}ZvC{E@kBc@wMqPqA}@mEs@uFhAcCEyB{A}AEmBwAoBc@aEoGc@cG[q@iBc@kCDaF|CqBD{Q|FcFzCoGbGuEpByEtHwDbB_DxEcABiA_Ae@sALyDwA_Ao@RiD|Fs@VeAKuAiB{@O_KnDy@Y{AoCmGq@{EfBiGEaIpFcBi@_AqBo@@[t@`@`CdDrCvA~BzBzInBbDFrBa@\\_Ba@aAqB[mDiADKr@f@|@@lAiBjF_BfBf@tC{ApB`@fAxBKHvAeKZe@~BwAbC_@xDoBjA_AbBi@E]s@Lw@`BqAZuIo@yAs@N]|BeAf@eEcFaCTaFhDqHKaA`AkAfDgBbBw@pDcDg@wCbAsAdD]hFeDvDeBb@_DgA_ApAiApN{L`SuAl@aKr@iEnH}DfCcCnCs@`CgHlGiHlAqEc@yJ~@{AbEiAv@}Ac@iDoD{EoHqAw@mEbBgIh@aDfCg@jAb@|Dc@~CLfBrErGlC`BfCNzAr@?~AwCfAe@fA@hAlAzFfAvAdE|BZjBg@nAgAn@mF}@cF`AqB|Du@?oBiB{@b@",
    "pointCount": 194,
@@ -2436,10 +2690,44 @@
    "end": [
     33.110888,
     131.464493
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:97",
+   "id": "大分県:92",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "ぐるっとくじゅう周遊道路",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 8.77,
+   "curviness": 226.5,
+   "flow": 33.1,
+   "turnCount": 60,
+   "score": 73.7,
+   "baseScore": 70.2,
+   "spotCount": 0,
+   "polyline": "kndiEwuq`X`CGjDeBhHyAe@qDgEyIM_EqAcJlCwOl@eA`B_@`@k@w@kLz@{@|BUx@w@aAuDHgAn@Q|Cd@|BqHnDsD~@SbJ{@xJtHbACvByALu@c@gAuDaD@gC`FcMvLkKrTo^rAoE|CiCbF}PhA}I??pNuIrDf@dBw@zByFIqDdFkBb@yIhCuD|GwC`KuArOqK|FiChF_FbBw@bNiCnJAvDaChCcJzE}CxGmN}@qGLiEkE{GE{A",
+   "pointCount": 63,
+   "start": [
+    33.12374,
+    131.33164
+   ],
+   "end": [
+    33.08164,
+    131.38796
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:93",
    "region": "oita",
    "regionName": "大分県",
    "name": "赤根真玉線",
@@ -2449,8 +2737,8 @@
    "curviness": 315.8,
    "flow": 21.9,
    "turnCount": 105,
-   "score": 62.6,
-   "baseScore": 62.6,
+   "score": 73.6,
+   "baseScore": 73.6,
    "spotCount": 0,
    "polyline": "s`_lEsivaXJsBc@aFf@}K`CuUFcJpAuJlAkUUqBsBaD_@eBjDw\\QmH}CyXgDqGeFuB}Ca@mEwDkFcJy@q@oC]sBaEgCaCgAuEeD}Ey@wEoC_E_@gE_D_I]qBoBqC?eBhAyDWoG{CaKn@sDk@s@yAj@EoCv@eAjAL|@gAb@kBxEkD\\}A~DmApBeHJaEmAuH{AoAoA_Fm@a@uC_HoCyAIyFwCsIkD_F_@qDsAeAEiF",
    "pointCount": 60,
@@ -2461,10 +2749,43 @@
    "end": [
     33.600125,
     131.584382
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:98",
+   "id": "大分県:94",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "国道500号",
+   "ref": "500",
+   "highway": "trunk",
+   "lengthKm": 21.92,
+   "curviness": 345.5,
+   "flow": 22.9,
+   "turnCount": 330,
+   "score": 73.3,
+   "baseScore": 73.3,
+   "spotCount": 0,
+   "polyline": "kyjkEcrs_XnL}AbBV~HpDxDX~FvAnCSjKqEbNaOvBk@zIpCxLrMz@j@|AFpAw@rCcEzTeFlEqBdH_FdEmElEmHxNsOfBeAlCw@hMc@nGaD`MKtDqAdHs@|@w@v@gHuFkJiA_DLsMgBiGTwH~AsLnDkIpAqL~E{PvB{ETiCoAuMFkBhE}CrAwB~DyL`CkLnAwWjAaFjDuGzDZhEcAfCuFtAaAdGgBrFuG|GmU~@}Gz@cCjGsIrDiI|CcD`GeDlGsHpA{EjH{BxCwHhBBL]yB?kBvAD_AzJcElBaDZLj@fAMrDw@hBBt@pAbFr@THk@oA{ElC_En@gDfFkE~E_IpFyAz@cAImAi@m@_BOuCb@q@y@tAkNi@MgBvB_@iBeA}@TyAnBg@Pc@iAoCV{DcB_JcAcAgDgAaCuCk@VCtBo@BsDsEgA_@yBXHjC]ZaBk@u@aBsBl@Oe@r@cF]aAqAEoC|Ay@_A`BqDnAwJd@RSvEj@Mh@qEa@cDK{JfAeDo@wBvBoFqAsBvB_Ag@mCrBUx@yAHy@g@iAxAy@i@qBbA]xFcJlDwBzBsDvDcDpBaHjN{OxB_FvBkAtCOfAgAn@}Ad@}F`CmBh@yAk@}KxAcLvCgIv@gJhCyHJkB[uCXyJ]_LcC{JoQah@`@gJe@gHD_FxCmIuAcEI{E",
+   "pointCount": 178,
+   "start": [
+    33.483896,
+    131.177456
+   ],
+   "end": [
+    33.413718,
+    131.314819
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:95",
    "region": "oita",
    "regionName": "大分県",
    "name": "奥豊後グリーンロード（大野川上流広域農道）",
@@ -2474,8 +2795,8 @@
    "curviness": 312.3,
    "flow": 19.9,
    "turnCount": 386,
-   "score": 62.3,
-   "baseScore": 62.3,
+   "score": 73.2,
+   "baseScore": 73.2,
    "spotCount": 0,
    "polyline": "whmiEaxbaXAkDqDgJ_FgHmHmCsAwAAkMd@yBpC_E|BqLzGeQrA}@~@\\\\`By@dL{A~Jn@vAbADtBuCnBiJ^aFdBoFx@_LxBgE?mFrAqHbAk@bFs@vBnAlEB~BnAdGqBpFY|DbAzBhDnKbAtGzEj\\NzCg@fBX`CvFpK`KpDpEdAbJpBrGdE|TeBjFmHbM}@`FrAjg@`CvFtHvI|@fCCvEmCdG`@|DtRxSlB`EnBjJdAbB`BD|LaCr@CpAv@vLpe@rD~FvMtN~Al@|Kn@|EdE`GeAjBLbDhIfCnBjAHtI{AzBp@lAtBV|ItBpMbBtGpArApJ^tA}@vAyBrBQxHnH|H?hCtAdFbJ[nM|AxFjDjGfFvA|BrBrCpJlAJjFmCdAkAr@ErHzFtEwAfHKzCxAb@dCT|RbIvGObFpDxGSlBmCtCMdF`@jIUnBiAhCKhCbAZ`HqD|@`AaBdFhA|BfLyCxCz@b@zAeCpD`@vBjFExBxFfDxBZzBh@VfBMV^a@zBO|H`Cf@zB_BnCl@hE_Ft@\\h@pDlBxDyBrJj@~KeAxU~HnOwGnKh@|C`@r@nBJ|CmElEP\\fBeArK|@tAjAO`K_GnG~AfHdE@~Da@zBuHzI?bApApBxCk@|A|C`DmEjAd@r@bBArJmD~CQt@\\`CqB`Cp@jBE~@iCzAkE^_@h@@vAh@z@hCXt@h@xBnHrBtC|GvF",
    "pointCount": 186,
@@ -2486,10 +2807,14 @@
    "end": [
     33.076032,
     131.318415
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:99",
+   "id": "大分県:96",
    "region": "oita",
    "regionName": "大分県",
    "name": "六種緒方線",
@@ -2499,8 +2824,8 @@
    "curviness": 313.2,
    "flow": 22.8,
    "turnCount": 51,
-   "score": 62.3,
-   "baseScore": 62.3,
+   "score": 73.2,
+   "baseScore": 73.2,
    "spotCount": 0,
    "polyline": "}{dhE}foaXxFBnOfGtPjA`MnD~@IzCgCpDcHlE{EnEyAtBgE`Gq@dAR|@z@LrCb@^`@qANyDtCoKbNkLh@{EdKD?iHmDoCe@iBG}Bl@}B?qBeCoBS_C",
    "pointCount": 30,
@@ -2511,6 +2836,102 @@
    "end": [
     32.94231,
     131.49628
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:97",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "別府一の宮線",
+   "ref": "11",
+   "highway": "primary",
+   "lengthKm": 20.2,
+   "curviness": 220.5,
+   "flow": 33.2,
+   "turnCount": 134,
+   "score": 73.1,
+   "baseScore": 72,
+   "spotCount": 0,
+   "polyline": "ai|hEatv_X}AnE~@bGc@rDf@jDm@j@{BqBr@yEKqA_GoDi@wFw@iCkFkEHi@dCeAXq@m@kCD{AnBiB[w@mAF{AtBV|CQjA_JnDwAhB^t@vCHbDz@tAtA@jBkBvIeAbCk@JUmA~A}BzAgGFgAi@iA_CGmJhCoDHsAu@EkBj@qAc@eClFuERwAc@cAyF}EkF_@mR{D}AyAq@iCWqN|CmJ^cFm@cBqLuNe@}GcEqD{CoFG_Br@sEfDeJSwCoBeJLqTq@sA{EeBiLaK_B{EfAeEfAwAOm@e@DyBdEk@pCRdCrBdGz@fAEp@gDq@sBl@sElDuCdIaCxByPqAaHwEJaAfD{D}D}DyDoGeBSqC`@{KkQyFo@kMuDkOkM_BKcs@pNcCPcCk@_BiBwGuTmFaK_CcQoAuD{BaCkJ{EeGuA??gn@lAyeAgG}PhFcDPiB{@_IoIgG}B{CoDsDqAgDmFeEi@u@{B{@sHsA}B{TuLsAHiAfAyE`N_ClDaW`RmT~GyDHsCw@cd@oRmCeC",
+   "pointCount": 137,
+   "start": [
+    33.08193,
+    131.19313
+   ],
+   "end": [
+    33.19001,
+    131.24602
+   ],
+   "reshaped": true,
+   "title": "やまなみハイウェイ",
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:98",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "山香国見線",
+   "ref": "31;34",
+   "highway": "primary",
+   "lengthKm": 21.56,
+   "curviness": 218.9,
+   "flow": 33.9,
+   "turnCount": 139,
+   "score": 73.1,
+   "baseScore": 72.3,
+   "spotCount": 0,
+   "polyline": "u{skE{y~aXyDeC_WuBiDiAyFQuBm@mIaIaC}@oIuJoUkNiDkFo@gDqD}@kBsC@qBtBsA@oAoIsIwSwOwDoKmFyDgC_@e`@tFgE_AgBmEv@kTg@kEyAqB{Am@wJwAkJqEyBb@kHfIq@m@HqC]cCgA]{BnEo@lGuB~Bi@A]k@f@kIWm@i@BaBtEk@bFyC~DmCnRa@f@yCe@wEoHsA[UjAhAvDHbCoCnOaF`DeCmBqDBuEy@w@X[pA`@dDG|BsFjOkBzJuBfAaHa@sBgD}BlA_EqBkIL{A{@]mC`BkIAaCeDsMcAkBkCaCiBqEi@gDaCmED_@\\BtCjCEwGdBwCa@y@kCBMyDc@s@qAlA{BFuBvA{C{DiB{@cLxCwFdD{FFuFdDmH`@eHyD_DfEy@VwDaB{JiB{@gA{BaHyFqBiEbAiFqBsC[_Jf@sH~AoM\\yD`AaEtDuA\\mMsFuG{By@H??yi@kDqEeBoNkC_Og@aPrAiP@cB`A}B~C{Cv@kQg@mY`BgOw@m]|BcDcBoCoI_DeC}ShByM`@as@kLcAm@u@zB",
+   "pointCount": 144,
+   "start": [
+    33.53035,
+    131.5627
+   ],
+   "end": [
+    33.67572,
+    131.59111
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:99",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "ファームロードWaita（小国広域農道）",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 12.49,
+   "curviness": 208.8,
+   "flow": 28.4,
+   "turnCount": 92,
+   "score": 73,
+   "baseScore": 72.2,
+   "spotCount": 0,
+   "polyline": "ijjiEgnf_Xa@oAaCuA_@kHcFwAcEcGwDaAyB_CeC_a@BoAtEyKx@u@|Cg@|@_A`DuElAgDt@s@`Do@p@y@hAwGnBMtAeDpAo@vBh@~LrGjNdOxAHz@i@lBmDhFRnEi@rAb@fEhH??lDzE~BlAbPsBtALpBr@|BlCjJH|ExC|B`CnFtArBYfHkJlDgB|AGlGItC\\xJfDjEJxHgCxABxAtEpC\\bASr@oB`DqUvAmEjAeBjAa@t@d@h@nBdAjQbAd@nCk@hG}CrH_HtBcA`Bb@fAhDXpOt@|Gj@hA~_@la@`HxCvRvMfBb@xESdOkEdDDbDeA`GlBdAM|FyClAsGpCgA~Ju@lAm@`LqPhBTpBtAjCXdAnD?xE~@fA",
+   "pointCount": 97,
+   "start": [
+    33.15381,
+    131.11028
+   ],
+   "end": [
+    33.08378,
+    131.116
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
@@ -2524,8 +2945,8 @@
    "curviness": 317.6,
    "flow": 20.3,
    "turnCount": 198,
-   "score": 62.1,
-   "baseScore": 62.1,
+   "score": 72.9,
+   "baseScore": 72.9,
    "spotCount": 0,
    "polyline": "gw}hE}dzaXtCeAhBlBhIfEfDHhAOnAiAxBc@jCcBnJcAlBb@`BfD`I~DvC\\dCg@lBJzC_A|B?jB|@tAlBnDSzB}GrFqCx@cDvBUh@gAxB]nB{DjC}AD{@uA_EFqJo@}AiCgC]kBlAoArA_EOgGd@sHrBqChCuJnE_GhD`@bCvDlDw@j@}@YkEN}AbAqBx@g@n@cC_D_KjDiFn@mBP{@]cC}E{AwEE{G|@aB[s@s@u@wGf@mCUkF|HuUd@{EpCiGxDoDn@qBf@uWrB{GFyGc@gAqHuF_AeCmCwBcMuP}IoOo@yCQwHo@i@gBl@cAWeCyEYaB^uFfAsDLkDdEkJ{@kKhAwEvH}I|FwAv\\iZhEsIfBuYwC_G{A}HkAmBwBgNyAcDMiDrAcN",
    "pointCount": 103,
@@ -2536,6 +2957,10 @@
    "end": [
     33.064034,
     131.622442
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -2549,8 +2974,8 @@
    "curviness": 322.1,
    "flow": 21.3,
    "turnCount": 77,
-   "score": 62,
-   "baseScore": 62,
+   "score": 72.8,
+   "baseScore": 72.8,
    "spotCount": 0,
    "polyline": "ilwgEa_gaX~@m@~@iG_@m@yCcAy@cFuAe@cC`@iAUgB_HiIsDiBa@wDRiF}IuO}M}C{IkGgD]u@CeAjDwMfJcDXe@IkCYm@s@EuAh@aAMiDsBeC\\gASUwPiCgDuBcQmE{FWcAjAaHgBqFQ{JeFeJoAmGyIoK}@aEJ_C",
    "pointCount": 43,
@@ -2561,35 +2986,14 @@
    "end": [
     32.911403,
     131.478013
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "大分県:102",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "国道500号",
-   "ref": "500",
-   "highway": "trunk",
-   "lengthKm": 21.92,
-   "curviness": 345.5,
-   "flow": 22.9,
-   "turnCount": 330,
-   "score": 62,
-   "baseScore": 62,
-   "spotCount": 0,
-   "polyline": "kyjkEcrs_XnL}AbBV~HpDxDX~FvAnCSjKqEbNaOvBk@zIpCxLrMz@j@|AFpAw@rCcEzTeFlEqBdH_FdEmElEmHxNsOfBeAlCw@hMc@nGaD`MKtDqAdHs@|@w@v@gHuFkJiA_DLsMgBiGTwH~AsLnDkIpAqL~E{PvB{ETiCoAuMFkBhE}CrAwB~DyL`CkLnAwWjAaFjDuGzDZhEcAfCuFtAaAdGgBrFuG|GmU~@}Gz@cCjGsIrDiI|CcD`GeDlGsHpA{EjH{BxCwHhBBL]yB?kBvAD_AzJcElBaDZLj@fAMrDw@hBBt@pAbFr@THk@oA{ElC_En@gDfFkE~E_IpFyAz@cAImAi@m@_BOuCb@q@y@tAkNi@MgBvB_@iBeA}@TyAnBg@Pc@iAoCV{DcB_JcAcAgDgAaCuCk@VCtBo@BsDsEgA_@yBXHjC]ZaBk@u@aBsBl@Oe@r@cF]aAqAEoC|Ay@_A`BqDnAwJd@RSvEj@Mh@qEa@cDK{JfAeDo@wBvBoFqAsBvB_Ag@mCrBUx@yAHy@g@iAxAy@i@qBbA]xFcJlDwBzBsDvDcDpBaHjN{OxB_FvBkAtCOfAgAn@}Ad@}F`CmBh@yAk@}KxAcLvCgIv@gJhCyHJkB[uCXyJ]_LcC{JoQah@`@gJe@gHD_FxCmIuAcEI{E",
-   "pointCount": 178,
-   "start": [
-    33.483896,
-    131.177456
-   ],
-   "end": [
-    33.413718,
-    131.314819
-   ]
-  },
-  {
-   "id": "大分県:103",
    "region": "oita",
    "regionName": "大分県",
    "name": "山北日田線",
@@ -2599,8 +3003,8 @@
    "curviness": 331.6,
    "flow": 21.2,
    "turnCount": 54,
-   "score": 61.9,
-   "baseScore": 61.9,
+   "score": 72.7,
+   "baseScore": 72.7,
    "spotCount": 0,
    "polyline": "cqgjEw|u}WiA{C_EgCRk@dBOv@m@x@iBq@oCh@qC[qT}DcJnAoEG_AaCwFcGxCsAI_BgB}@kD~A}DHiFbFqRPmW`BcDKeC_AcBgIDwKgEoDk@sD@",
    "pointCount": 29,
@@ -2611,6 +3015,39 @@
    "end": [
     33.311051,
     130.886511
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:103",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "俣水一畑線",
+   "ref": "709",
+   "highway": "secondary",
+   "lengthKm": 9.2,
+   "curviness": 306.1,
+   "flow": 21,
+   "turnCount": 134,
+   "score": 72.3,
+   "baseScore": 72.3,
+   "spotCount": 0,
+   "polyline": "orykEsvcbXlEbApFu@jEZ`ZvJvAO~B{Bz@If@|@?vC`Ax@|@a@l@oCfAQd@x@EhCr@d@vAyAdB~Av@Df@a@XgCzB@vBeA~@pAc@jBLp@d@NrAg@n@b@A~@gBfCDbAjDpB|BlCxEArE`CvCa@tEfDrCQ`Kj@z@_@|AcCpCoAvCkCpFw@jF?rBoB|CtApEr@fVkD~\\LhNaGbKiBnK{FzCK~MsC`Ls@`GoA`En@rYiBhG{BbE_@tKAxL_GhH}A|CLlFxAzEWhG}BlG}FbEmB|FyF",
+   "pointCount": 73,
+   "start": [
+    33.559598,
+    131.587781
+   ],
+   "end": [
+    33.487484,
+    131.594234
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
@@ -2624,8 +3061,8 @@
    "curviness": 338.9,
    "flow": 19.5,
    "turnCount": 95,
-   "score": 61.5,
-   "baseScore": 61.5,
+   "score": 72.2,
+   "baseScore": 72.2,
    "spotCount": 0,
    "polyline": "i{lhEa~``XdBGJqDr@qAdGMtD{BjAeBnAq@lGMdA]vDcDvImNdCa@tBdAxBB|Bg@jCgBvBlAJ{@{AaCQmBdBwEx@mGtCmHbAiHr@s@`DKxEeCFyA_AqDcGaH}A_DaAyEB_AfBaEMcCgAwD}D}B_FsU|CqK{AcGA{GzHkOp@oK`EqBXw@CgDwCoLUaE",
    "pointCount": 49,
@@ -2636,60 +3073,14 @@
    "end": [
     32.989379,
     131.286253
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
    "id": "大分県:105",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "ファームロードWaita（小国広域農道）",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.85,
-   "curviness": 331.2,
-   "flow": 20.6,
-   "turnCount": 62,
-   "score": 61.5,
-   "baseScore": 61.5,
-   "spotCount": 0,
-   "polyline": "ijjiEgnf_Xa@oAaCuA_@kHcFwAcEcGwDaAyB_CeC_a@BoAtEyKx@u@|Cg@|@_A`DuElAgDt@s@`Do@p@y@hAwGnBMtAeDpAo@vBh@~LrGjNdOxAHz@i@lBmDhFRnEi@rAb@fEhH",
-   "pointCount": 33,
-   "start": [
-    33.153814,
-    131.110276
-   ],
-   "end": [
-    33.1421,
-    131.124525
-   ]
-  },
-  {
-   "id": "大分県:106",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "俣水一畑線",
-   "ref": "709",
-   "highway": "secondary",
-   "lengthKm": 9.2,
-   "curviness": 306.1,
-   "flow": 21,
-   "turnCount": 134,
-   "score": 61.5,
-   "baseScore": 61.5,
-   "spotCount": 0,
-   "polyline": "orykEsvcbXlEbApFu@jEZ`ZvJvAO~B{Bz@If@|@?vC`Ax@|@a@l@oCfAQd@x@EhCr@d@vAyAdB~Av@Df@a@XgCzB@vBeA~@pAc@jBLp@d@NrAg@n@b@A~@gBfCDbAjDpB|BlCxEArE`CvCa@tEfDrCQ`Kj@z@_@|AcCpCoAvCkCpFw@jF?rBoB|CtApEr@fVkD~\\LhNaGbKiBnK{FzCK~MsC`Ls@`GoA`En@rYiBhG{BbE_@tKAxL_GhH}A|CLlFxAzEWhG}BlG}FbEmB|FyF",
-   "pointCount": 73,
-   "start": [
-    33.559598,
-    131.587781
-   ],
-   "end": [
-    33.487484,
-    131.594234
-   ]
-  },
-  {
-   "id": "大分県:107",
    "region": "oita",
    "regionName": "大分県",
    "name": "国道212号旧道",
@@ -2699,8 +3090,8 @@
    "curviness": 320.1,
    "flow": 21.5,
    "turnCount": 52,
-   "score": 61.4,
-   "baseScore": 61.4,
+   "score": 72.1,
+   "baseScore": 72.1,
    "spotCount": 0,
    "polyline": "ae|iEw|k~WSs@pBgDxBuP|KmWzBiI|@qAdB]dEuDnAsClAgAdDg@zFnCn@vBL~GQp@mBfAUzB~B~C`@`HfBbClEz@~CjB`CC~DbAvCk@vByAp@gDdEgBhCcDzBY|D_Cp@y@N_B",
    "pointCount": 34,
@@ -2711,60 +3102,14 @@
    "end": [
     33.227152,
     130.982951
-   ]
-  },
-  {
-   "id": "大分県:108",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "山香国見線",
-   "ref": "31;34",
-   "highway": "primary",
-   "lengthKm": 15.6,
-   "curviness": 307.7,
-   "flow": 21.6,
-   "turnCount": 222,
-   "score": 61.4,
-   "baseScore": 61.4,
-   "spotCount": 0,
-   "polyline": "u{skE{y~aXyDeC_WuBiDiAyFQuBm@mIaIaC}@oIuJoUkNiDkFo@gDqD}@kBsC@qBtBsA@oAoIsIwSwOwDoKmFyDgC_@e`@tFgE_AgBmEv@kTg@kEyAqB{Am@wJwAkJqEyBb@kHfIq@m@HqC]cCgA]{BnEo@lGuB~Bi@A]k@f@kIWm@i@BaBtEk@bFyC~DmCnRa@f@yCe@wEoHsA[UjAhAvDHbCoCnOaF`DeCmBqDBuEy@w@X[pA`@dDG|BsFjOkBzJuBfAaHa@sBgD}BlA_EqBkIL{A{@]mC`BkIAaCeDsMcAkBkCaCiBqEi@gDaCmED_@\\BtCjCEwGdBwCa@y@kCBMyDc@s@qAlA{BFuBvA{C{DiB{@cLxCwFdD{FFuFdDmH`@eHyD_DfEy@VwDaB{JiB{@gA{BaHyFqBiEbAiFqBsC[_Jf@sH~AoM\\yD`AaEtDuA\\mMsFuG{By@H",
-   "pointCount": 122,
-   "start": [
-    33.530349,
-    131.562701
    ],
-   "end": [
-    33.623725,
-    131.587424
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:109",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "色宮港木立線",
-   "ref": "501",
-   "highway": "secondary",
-   "lengthKm": 11.55,
-   "curviness": 310,
-   "flow": 20.1,
-   "turnCount": 178,
-   "score": 61.3,
-   "baseScore": 61.3,
-   "spotCount": 0,
-   "polyline": "ajwgEw}rdXlDa@bEsAdC|BbApCG~AyFhDmA|B?`Af@lAbEbCtBbAfCNp@p@nApHk@tBaKtD_ERqCaAoD^uC`E}A\\iAs@eBmEiDgEwBe@uIlB{DjKoH`BaB]yEuDwBf@qCzBoCPqBi@gBkC}Eg@uGb@cCn@}GnFeDVaCs@gB{C_AQgCr@w@bAgBnIwCbB_B~DoJdHsBdEaB~AsEpAa@vFu@hAwDfBsEe@kA`OFfIgA`NZlKq@lFz@vBdFjDbBzJrE`Ea@zH`AbFGrAwZbf@wAAqBwEs@K_ArDn@vF_AjCuACo@_CoBVOl@N~Ol@bB|AnAvAfKhAbd@gBxM}GjVwAbD}AlK[x@gEdD{EfN",
-   "pointCount": 92,
-   "start": [
-    32.892654,
-    131.993405
-   ],
-   "end": [
-    32.930161,
-    131.926712
-   ]
-  },
-  {
-   "id": "大分県:110",
+   "id": "大分県:106",
    "region": "oita",
    "regionName": "大分県",
    "name": "百枝浅瀬野津線",
@@ -2774,8 +3119,8 @@
    "curviness": 300.5,
    "flow": 22,
    "turnCount": 74,
-   "score": 61.2,
-   "baseScore": 61.2,
+   "score": 71.9,
+   "baseScore": 71.9,
    "spotCount": 0,
    "polyline": "wpnhE{`cbX|@eEa@mCqAy@mHcBgFsG}GkA_BgCAeEs@eC}@aB}C}BAw@oFuAgJcIwCyA`@eDhCgFe@m@WmCwCoBsDiGaBu@m@uAsIyIcAiEIoN_EmFv@sHCmN{D}h@oDqMy@g@wFg@oPg@_JwBeBgAu@iCaBoBu@_I",
    "pointCount": 40,
@@ -2786,35 +3131,14 @@
    "end": [
     33.03554,
     131.624175
-   ]
-  },
-  {
-   "id": "大分県:111",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "別府一の宮線",
-   "ref": "11",
-   "highway": "primary",
-   "lengthKm": 13.68,
-   "curviness": 317.5,
-   "flow": 20.9,
-   "turnCount": 208,
-   "score": 61.2,
-   "baseScore": 61.2,
-   "spotCount": 0,
-   "polyline": "ai|hEatv_X}AnE~@bGc@rDf@jDm@j@{BqBr@yEKqA_GoDi@wFw@iCkFkEHi@dCeAXq@m@kCD{AnBiB[w@mAF{AtBV|CQjA_JnDwAhB^t@vCHbDz@tAtA@jBkBvIeAbCk@JUmA~A}BzAgGFgAi@iA_CGmJhCoDHsAu@EkBj@qAc@eClFuERwAc@cAyF}EkF_@mR{D}AyAq@iCWqN|CmJ^cFm@cBqLuNe@}GcEqD{CoFG_Br@sEfDeJSwCoBeJLqTq@sA{EeBiLaK_B{EfAeEfAwAOm@e@DyBdEk@pCRdCrBdGz@fAEp@gDq@sBl@sElDuCdIaCxByPqAaHwEJaAfD{D}D}DyDoGeBSqC`@{KkQyFo@kMuDkOkM_BKcs@pNcCPcCk@_BiBwGuTmFaK_CcQoAuD{BaCkJ{EeGuA",
-   "pointCount": 111,
-   "start": [
-    33.081932,
-    131.193127
    ],
-   "end": [
-    33.13786,
-    131.240228
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:112",
+   "id": "大分県:107",
    "region": "oita",
    "regionName": "大分県",
    "name": "飯田高原中村線（ぐるっとくじゅう周遊道路）",
@@ -2824,8 +3148,8 @@
    "curviness": 321.9,
    "flow": 20.2,
    "turnCount": 247,
-   "score": 61.1,
-   "baseScore": 61.1,
+   "score": 71.9,
+   "baseScore": 71.9,
    "spotCount": 0,
    "polyline": "ai|hEatv_X`GCsAbG\\nDrBxBxDhAh@tA{@tEn@zMrDdGJ|NKvEeAfCcBlJcA`BkD~ByC`FiKlH}AGoL|EwFZeAbAmC^}GnCoBg@{BiCiHj@cDwCcAgF{ARw@~Co@\\}AmGwD{CsJuAuBB{CqByBk@eOCiIiC}CcGiA_EwAwAgEy@cB\\_@Wq@yCQqGo@}BHkCk@wCsCyCeLoEXcGSe@mCUwD|@qKNiAtD}DvBoBRmBy@qDgI_@uEtAqClGoDZkASuAwA{@{NRmAYa@o@CmAxAuCHeAgAwAiI~CoBYcAyBe@}EkDaDcDmFuFgAwAmAkAiMiDcPmJsIiAfC{GxEuAlCyEpEoMlBsDIqAqAuAkEgJuBuAp@sCfIkE`@gLkC}Ic@gNzGyAYiCwBqB[mGS{DxAkAY}@iBDgDi@mA}Cs@aKcFqAuB}AcAo@aG{F_MoEuDRqFSkGb@uEhAeCj@qDpDuCm@kQtDcGr@iF_N_B",
    "pointCount": 128,
@@ -2836,35 +3160,15 @@
    "end": [
     33.156962,
     131.221482
-   ]
-  },
-  {
-   "id": "大分県:113",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "別府庄内線",
-   "ref": "52",
-   "highway": "primary",
-   "lengthKm": 4.71,
-   "curviness": 309,
-   "flow": 23.1,
-   "turnCount": 63,
-   "score": 61.1,
-   "baseScore": 61.1,
-   "spotCount": 0,
-   "polyline": "_fejEqvjaXp@KfB_DnLmDtBuDTiOrCkMCkCw@{AmA_@}AHyDvAAY_BSuAqBAgCzBsJbB_DfLcHlDkHrAm@dDMjAoAd@wDCcDuCuIGsAn@wAtCeA~@yA\\}Vb@KjGiTfByAbTqBzKkP~@oFAcC",
-   "pointCount": 38,
-   "start": [
-    33.29136,
-    131.459774
    ],
-   "end": [
-    33.275644,
-    131.494021
+   "title": "ぐるっとくじゅう周遊道路",
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:114",
+   "id": "大分県:108",
    "region": "oita",
    "regionName": "大分県",
    "name": "天瀬阿蘇線",
@@ -2874,8 +3178,8 @@
    "curviness": 332.2,
    "flow": 19.6,
    "turnCount": 225,
-   "score": 61,
-   "baseScore": 61,
+   "score": 71.7,
+   "baseScore": 71.7,
    "spotCount": 0,
    "polyline": "unrhEqbn~WeB`AmAFcKiC{@v@IrAnBjAFh@eLg@_C~FU[P}Ca@_CkD}E?{F_EmCmGmNqIuFoB}CaGo@wDf@kCbDuI~@uErDiDMyC`BaC^cMlJeDHuCpB}APcD[uCf@sIeCkCDaBcCgBViCoDqHaEaLeDkHDwGn@wFe@sC`C_GaAkFZeDeAwEvC}CF_D~CcGeBuGnEmDkCmH{AmHaFqCC}FpCmF`KmEvDoBf@cJRmPbFGZbBrBOhAqDuCiEdBcAhLsCtFZpHcBzE}@zIcGMeEyAyCCwDeCoGgAgBaFsBeBgD^sEWkBfAyCBkFy@cGEgFqBaK?yEjJ}EnEsCxMeD`BiFRiAvAKxAp@bE]nDzCrGOfBwHvDeDnCmCp@_Ow@cFfGqAhC",
    "pointCount": 104,
@@ -2886,10 +3190,14 @@
    "end": [
     33.121184,
     130.967275
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:115",
+   "id": "大分県:109",
    "region": "oita",
    "regionName": "大分県",
    "name": "オレンジロード",
@@ -2899,8 +3207,8 @@
    "curviness": 313.8,
    "flow": 20.7,
    "turnCount": 90,
-   "score": 61,
-   "baseScore": 61,
+   "score": 71.7,
+   "baseScore": 71.7,
    "spotCount": 0,
    "polyline": "wxxkEwbzbXxGyI~H]dCpAbC|Ez@zDrAf@rEeBt@yFd@i@pCKpC{@pClBdAJ~IqDhAsAbBqEzHkFt@kAnBsXl@uAv@Gr@`AhAhORvTc@hM\\hAhAb@t@WtEiLzEG`CsCr@K|BtBrDbH|DtBfBhEhFj@f@]bCqHpA}FvASd@`E|BjCz@rPeDxU`@v@|@TjH{B",
    "pointCount": 49,
@@ -2911,10 +3219,14 @@
    "end": [
     33.528243,
     131.696887
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:116",
+   "id": "大分県:110",
    "region": "oita",
    "regionName": "大分県",
    "name": "日田山国線",
@@ -2924,8 +3236,8 @@
    "curviness": 306.9,
    "flow": 19.7,
    "turnCount": 185,
-   "score": 60.8,
-   "baseScore": 60.8,
+   "score": 71.3,
+   "baseScore": 71.3,
    "spotCount": 0,
    "polyline": "eazjEyiw~WvDfEdBXvJOvF~EpHpCp@f@z@bCxAbHZzF}@fFXnCsCfAcCKeBbCDlHuBrIuAxNXpJ{D|D_ClMVfCrEbFhHvDnAdDjEt@`FJdAxLvBbGnAnJbCfBdFzA`HxEnD`HpDlDpB~CdLxXxFnCfMBtGbEfBpCbAjF|BdGRhJ`IfXFnEn@lCxAhCfGTnBpAOxAy@nAqDrCwH|AQ|A}@|AD~EkAhCeBpAu[vL[^D|@fRr@vIkDdGSdEu@xDcEfC_BlF}A`IzBhBpEZ|C`DxHeDMAjCpCzA@j@{BvAsAQ[fBy@\\e@lEdAlDs@bDAlDlC~N`@fFdD`HxBrL",
    "pointCount": 89,
@@ -2936,10 +3248,14 @@
    "end": [
     33.365561,
     130.957989
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:117",
+   "id": "大分県:111",
    "region": "oita",
    "regionName": "大分県",
    "name": "小畑日田線",
@@ -2949,8 +3265,8 @@
    "curviness": 296.1,
    "flow": 19.7,
    "turnCount": 248,
-   "score": 60.5,
-   "baseScore": 60.5,
+   "score": 71.1,
+   "baseScore": 71.1,
    "spotCount": 0,
    "polyline": "ithjE}cd~W`@|BwAlNlXmNjIiDdBMbCyB~EsBzBBzFpCpQzDhEvBzB`D@vPxCnGfWbLzObOrH|BpCYxB{AtFT~JgAnKcFrCAhBmApE_GrJoD|OsBjHiCbHDrFcC~IhAzDiBrB{ElAgA|CvArBlElGlCnFp@bDxAr@nA?jDlC~BrINbCl@vEoCtAGfCr@vNb@bIpCdFbHvEzAxD`CjAbDWpCl@bCzBjD~DfCdC~Eb@rJ~EhIn@dJp@r@bCf@bApBM~AwCzFpAzFlB`ArDQ`CrEz@AfB_AvBBbLtClBnB`AtCrIvJ|DCpCcAjDpAtC}AfBjBnFtB`@vItFrEbAnBI|CcB|A]vAjAhKjA~ClEr@v@j@^nBeBtECpApChExCdBwBvEVfFlC`A~EFt@h@tClO`FtItFn@dDzJFhDiCdMj@`PE`HlCrI@`C~EfH`@rG~AvI|@`A~Ac@hCdBDpAeAnCIvEjBtC",
    "pointCount": 124,
@@ -2961,10 +3277,14 @@
    "end": [
     33.215295,
     130.864573
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:118",
+   "id": "大分県:112",
    "region": "oita",
    "regionName": "大分県",
    "name": "天ヶ瀬阿蘇線",
@@ -2974,8 +3294,8 @@
    "curviness": 319.2,
    "flow": 20,
    "turnCount": 188,
-   "score": 60.3,
-   "baseScore": 60.3,
+   "score": 71,
+   "baseScore": 71,
    "spotCount": 0,
    "polyline": "u}}iEcdv~WhAYrB_NpDsOnBeDxBkB~FeDjDc@nAn@zAxCvCxArAZzAg@bFFnErBa@gCjBm@|C`@nA{@vFgK|AkHt@s@bBYvFXjPSnBpBGxAmBzCVlAnKxB~Ag@xBmCpD^`Ac@l@}@b@cDbFAvB`CKtDdAzCrBx@`JWhIfFf@dEpH|HbAb@nBB|CwAzGyJhAi@rA^dGfGzBrKpAG`CiEdFwBzIVhBy@bH?~Cz@hAzBc@vC^lEpAjDzEjBVdCw@rDhCnDz@`G`GdCtFlIhDfD~@|BnDjS~@nOMfQr@|C|AfBhCn@bDEtM`AtFInB`@~@l@lCbFfBlBFfEdCvFfCxBtCv@`K{DjCnBrEz@xLpHdCxJyBhCMhB}@zB`@jE{BlIJjA",
    "pointCount": 101,
@@ -2986,10 +3306,14 @@
    "end": [
     33.188391,
     130.995078
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:119",
+   "id": "大分県:113",
    "region": "oita",
    "regionName": "大分県",
    "name": "メイプルファームロード耶馬（耶馬溪広域農道）",
@@ -2999,8 +3323,8 @@
    "curviness": 322.6,
    "flow": 20.2,
    "turnCount": 52,
-   "score": 60.3,
-   "baseScore": 60.3,
+   "score": 70.8,
+   "baseScore": 70.8,
    "spotCount": 0,
    "polyline": "{gujEkji_XnAmFMiHhAsCDuAQ_BkBeCy@eDy@LK|@jDfEFt@]h@uFqB}DhEgCjFeI~CgBIiGwBeCcCsI}RmBmGkD_BaCiDgC{AkC{HuFkGuJ{Cq@gE",
    "pointCount": 29,
@@ -3011,10 +3335,14 @@
    "end": [
     33.388873,
     131.138913
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:120",
+   "id": "大分県:114",
    "region": "oita",
    "regionName": "大分県",
    "name": "竹田五ヶ瀬線",
@@ -3024,8 +3352,8 @@
    "curviness": 286.1,
    "flow": 21.2,
    "turnCount": 268,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.7,
+   "baseScore": 70.7,
    "spotCount": 0,
    "polyline": "q~rgEini`XuIyBeA}CoCNu@We@e@g@cDeGJmBl@sAWs@qDs@iALwC{BqC_CRq@W`@yAg@mADoAtCwG_@aHzAqAL}ChAcEeFiC]HStBuAtAUhDuAj@kD_IDm@`Ao@M{Dg@cBzAgDAqDmCsB`AwAhCwAZmBeDwVoCmEeKuf@aDcJyHqa@uBiA_IVkEmDsEAiCg@uHaMyOgG_D@cDyCoMmFo@wAsBqLaC{DoBk@cMSkAQw@_Ac@cDtAsLiB{GyBqBcGEwBkBM_DtCmLm@aFkAwAwHqCiAqCPmDnDkG`@yBOeBsBmDc@iEuAcE{@eLgI{RwGyHiFsOuByI_F_IeA]oAV}BhD{BzAyFj@aEY{CqB_GwIaE{D_RsLmBOcDx@oAnDy@^_AU}GqGc@eAkJkq@[m@sDo@mEiH_d@kf@W{AHsJtBiEKeD}CwCqP_UqKdHoEb@_EvDaDxAmNNqCb@gHjE}@nCeAVoCoDcC_AiDhAcBiBuHyEoHV_D[gA_CCoG]eA{EuCw@aDoCw@}IbFyC~CiFhDgKz@KlLpCrGlGrK",
    "pointCount": 145,
@@ -3036,10 +3364,14 @@
    "end": [
     32.963981,
     131.38907
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:121",
+   "id": "大分県:115",
    "region": "oita",
    "regionName": "大分県",
    "name": "小挾間大分線",
@@ -3049,8 +3381,8 @@
    "curviness": 322,
    "flow": 18.8,
    "turnCount": 117,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.6,
+   "baseScore": 70.6,
    "spotCount": 0,
    "polyline": "uhuiE{rsaXiFfVWdGz@`Eo@lK{ElJs@fDsAvB_AnDcElFi@rBbAhHY`DLnBaCdKuAlC`@fBWvEuApChAfEAzBaDxHoLxKyB~DaAdGgCfDNhFxBzGq@pHZzDv@rCBhDmA|C?|LrAlHGnCj@jAVlC[nBx@lEIx@uBzC@rEgAfBwAvEgBvB[~GwA~FoB`CwErAe@pAKjEmGfEsAxBmVrBcA~@_Dv@s@x@aJrA",
    "pointCount": 59,
@@ -3061,60 +3393,14 @@
    "end": [
     33.231554,
     131.447524
-   ]
-  },
-  {
-   "id": "大分県:122",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "山袋久々姥線",
-   "ref": "660",
-   "highway": "secondary",
-   "lengthKm": 6.63,
-   "curviness": 298.9,
-   "flow": 20.4,
-   "turnCount": 97,
-   "score": 60.1,
-   "baseScore": 60.1,
-   "spotCount": 0,
-   "polyline": "mukkEe}g`X{Dm@oGFoGfAmFO}GmCyD_CcCaE_AeD@mDq@iE_B}D_EiE_DmAgDiFs@KcG|AoCiAyDcEaAeDoCmAcCwGcEu@aD{BgGuIwCwByBSqDgD_OmCkR}GgDJkEiBkFo@_Bt@eKjAwFQ}Bt@cA]wEFaXzEeC|DaB~@_DJcFtDeFa@gB|Bk@jCwD@qUmEi@d@KlAu@K",
-   "pointCount": 52,
-   "start": [
-    33.488392,
-    131.281626
    ],
-   "end": [
-    33.538678,
-    131.295918
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:123",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "オレンジロード",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.65,
-   "curviness": 286.8,
-   "flow": 22.3,
-   "turnCount": 47,
-   "score": 60.1,
-   "baseScore": 60.1,
-   "spotCount": 0,
-   "polyline": "kiklEahjbXjBkSd@wAlTIxA{@rAkCAyA}CiE}JcEk@sApGgPW_C_FoG?kB|K{CfHAn@_AwJ_]CcAX{@rEqA~EhAjAGv@{A]wD`@}B~Aq@~GL",
-   "pointCount": 28,
-   "start": [
-    33.650304,
-    131.621288
-   ],
-   "end": [
-    33.641268,
-    131.643017
-   ]
-  },
-  {
-   "id": "大分県:124",
+   "id": "大分県:116",
    "region": "oita",
    "regionName": "大分県",
    "name": "耶馬渓院内線",
@@ -3124,8 +3410,8 @@
    "curviness": 303.7,
    "flow": 20.2,
    "turnCount": 244,
-   "score": 60,
-   "baseScore": 60,
+   "score": 70.6,
+   "baseScore": 70.6,
    "spotCount": 0,
    "polyline": "cpwjE{iq_XRwD}EgAwA}@m@sLL_R|IsHdHqUvCeF^wLOqJlDoODcCqEuSeDyGqAaIuFwHwBkBuA{CiDiB]eF~AyNUgGPwApF{EjCkIfCmAHqCnDmA`B{D~@uJtA{A}@aCLkBy@mBLoBs@eDeE_HcB}Am@uHuAmFqAiAcAgCIwCiAyDa@yDoGoME_Bv@wD?yGn@mCrB_CNiAg@g@_BKsEyGqAo@mCBeA_C}DoEk@}FmBaGSsCiEqKmAeFMy@j@gA|Bi@dAeFbBqCh@cCWGi@rBoA|@sBdEkFfA]_@Ts@jDa@l@y@HyBcAuDj@SvA\\|@aAv@iKa@oCnAyBm@}Hl@_MjCqPdEkGJqB_BgBqG_UuEwKkFiPeCsC}AcF}Bq@kAFeAkBq@aFwImWg@mDc@kXoD_CiAcBuCqHcBwICkEl@{HkAeSqAeFKuN`@gMvCyI_AiOvCy^{B_Ph@yRgKkIBaB",
    "pointCount": 123,
@@ -3136,10 +3422,43 @@
    "end": [
     33.402698,
     131.30822
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:125",
+   "id": "大分県:117",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "山袋久々姥線",
+   "ref": "660",
+   "highway": "secondary",
+   "lengthKm": 6.63,
+   "curviness": 298.9,
+   "flow": 20.4,
+   "turnCount": 97,
+   "score": 70.5,
+   "baseScore": 70.5,
+   "spotCount": 0,
+   "polyline": "mukkEe}g`X{Dm@oGFoGfAmFO}GmCyD_CcCaE_AeD@mDq@iE_B}D_EiE_DmAgDiFs@KcG|AoCiAyDcEaAeDoCmAcCwGcEu@aD{BgGuIwCwByBSqDgD_OmCkR}GgDJkEiBkFo@_Bt@eKjAwFQ}Bt@cA]wEFaXzEeC|DaB~@_DJcFtDeFa@gB|Bk@jCwD@qUmEi@d@KlAu@K",
+   "pointCount": 52,
+   "start": [
+    33.488392,
+    131.281626
+   ],
+   "end": [
+    33.538678,
+    131.295918
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "大分県:118",
    "region": "oita",
    "regionName": "大分県",
    "name": "玖珠天瀬線",
@@ -3149,8 +3468,8 @@
    "curviness": 313.3,
    "flow": 20.1,
    "turnCount": 160,
-   "score": 59.9,
-   "baseScore": 59.9,
+   "score": 70.4,
+   "baseScore": 70.4,
    "spotCount": 0,
    "polyline": "wjcjEaxb_XeM~UaKtEmDzCkGhBWb@\\nA|Df@fBfAhBvFvDhDfAnGgC|DDxEw@pDuC~C{B|GmCdUyArDFhEo@tF_C~ALjAvBrBExAaBfAcGe@qMfC}Eg@k@b@qDhJ}@nF_AnAp@rBzD`CSbGg@~AuAG}@nAmAWc@l@RtBjAhCLjEoCxHWhF{AnCg@tIRvEa@zELlAhB~EbFpEz@hBVvLbCxIMnBy@`BErBpGpChCrEItCZdCaA|Qp@~GeA|GeAxCxBxLtAxDVjE~@rB]vJ`DzH`EnFvBxG~BtBxA`DDdA{BzLe@hIRn@vBfA`CfCfCtD|@xDMlFb@nLz@jBbDn@rE`F",
    "pointCount": 90,
@@ -3161,35 +3480,44 @@
    "end": [
     33.2846,
     131.006265
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:126",
+   "id": "大分県:119",
    "region": "oita",
    "regionName": "大分県",
-   "name": "ぐるっとくじゅう周遊道路",
+   "name": "オレンジロード",
    "ref": "",
    "highway": "tertiary",
-   "lengthKm": 4.9,
-   "curviness": 294.7,
-   "flow": 20.9,
-   "turnCount": 69,
-   "score": 59.8,
-   "baseScore": 59.8,
+   "lengthKm": 8.03,
+   "curviness": 181,
+   "flow": 32.3,
+   "turnCount": 45,
+   "score": 70.2,
+   "baseScore": 70.6,
    "spotCount": 0,
-   "polyline": "kndiEwuq`X`CGjDeBhHyAe@qDgEyIM_EqAcJlCwOl@eA`B_@`@k@w@kLz@{@|BUx@w@aAuDHgAn@Q|Cd@|BqHnDsD~@SbJ{@xJtHbACvByALu@c@gAuDaD@gC`FcMvLkKrTo^rAoE|CiCbF}PhA}I",
-   "pointCount": 38,
+   "polyline": "sgolE{ycbX`G_L`DeCjBi@zZyBzA_AV_BcA_h@x@yEp@cLxC_K`@yEzBcFpAcOrA}Ah]oLjF{H`Jc@pAy@`B{GtFwd@??jBkSd@wAlTIxA{@rAkCAyA}CiE}JcEk@sApGgPW_C_FoG?kB|K{CfHAn@_AwJ_]CcAX{@rEqA~EhAjAGv@{A]wD`@}B~Aq@~GL",
+   "pointCount": 49,
    "start": [
-    33.123736,
-    131.331644
+    33.6705,
+    131.5883
    ],
    "end": [
-    33.104182,
-    131.364907
+    33.64127,
+    131.64302
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:127",
+   "id": "大分県:120",
    "region": "oita",
    "regionName": "大分県",
    "name": "スカイファームロードひた（日田広域農道）",
@@ -3199,8 +3527,8 @@
    "curviness": 301.8,
    "flow": 20.7,
    "turnCount": 58,
-   "score": 59.7,
-   "baseScore": 59.7,
+   "score": 70.1,
+   "baseScore": 70.1,
    "spotCount": 0,
    "polyline": "gwmjEenh~WwJg@gKb@oNoNcDu@eJ_@kWeM{Cy@s@DyApAq@|GgBfCmIfDaJRd@~J|CnDrAlDtEBdDvArEZzA|@@lAiA\\{AgBoDN}BsAgClA}@?sDkEsC{As@BuBfB",
    "pointCount": 32,
@@ -3211,10 +3539,14 @@
    "end": [
     33.3546,
     130.954963
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:128",
+   "id": "大分県:121",
    "region": "oita",
    "regionName": "大分県",
    "name": "龍原挾間線",
@@ -3224,8 +3556,8 @@
    "curviness": 299.2,
    "flow": 19.7,
    "turnCount": 120,
-   "score": 59.7,
-   "baseScore": 59.7,
+   "score": 70.1,
+   "baseScore": 70.1,
    "spotCount": 0,
    "polyline": "e}riEeitaXtD_@bLdCzCvFxH`CdA|@`AfDd@hFjDnGb@fB{@xMXfCbDrExD\\zA|@t@xAx@`H|BxCvEzCbAdBnA~HjDrGlA`G`AvBmApCM|B^vDvCtD~@fF@pGa@rCRfCjDzFbFpFlEfJKpA{BnDZ~Fo@xNfB`Dd@bEvB~HpJdIvLlD~AnFlAlBzQzLv@pC`F|J|J\\`DlBfCvDt@RxDwGl@KjAp@j@rAThFaAlCPr@\\?z@uBQyIvCaBxCMrFnG~BcA",
    "pointCount": 67,
@@ -3236,10 +3568,14 @@
    "end": [
     33.161212,
     131.45861
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:129",
+   "id": "大分県:122",
    "region": "oita",
    "regionName": "大分県",
    "name": "玖珠広域農道",
@@ -3249,8 +3585,8 @@
    "curviness": 311.8,
    "flow": 19,
    "turnCount": 117,
-   "score": 59.7,
-   "baseScore": 59.7,
+   "score": 70.1,
+   "baseScore": 70.1,
    "spotCount": 0,
    "polyline": "}fyiEeav_XuGeAiBoCcAc@wIrB_C[yEmBoCyE}IeB_PtC}AIgBsAaAP_B~A_EjKkA^uAq@kBqDuBeAyCPqD`DcBVqFuCcFCmDcCy@AgClAyA]wAmAq@kBpB{Je@{BgBuBs@IuInBiI{EcK{Mv@gGWgCqFqE}AG_BvAyAR{D{DwDl@iAe@gDcJzC}JDmE{CsH_@qGaA_BaAKeA^wDfE}ChFmEbC}@lAK`ClAdFKhB]b@oATiPSgD_B{AgCgAa@",
    "pointCount": 67,
@@ -3261,10 +3597,14 @@
    "end": [
     33.273276,
     131.205811
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:130",
+   "id": "大分県:123",
    "region": "oita",
    "regionName": "大分県",
    "name": "弓立上戸次線",
@@ -3274,8 +3614,8 @@
    "curviness": 296,
    "flow": 19.6,
    "turnCount": 140,
-   "score": 59.6,
-   "baseScore": 59.6,
+   "score": 70,
+   "baseScore": 70,
    "spotCount": 0,
    "polyline": "{ceiEudpbXSbF|@xNq@~Lr@hK~@`DhDbDvFt@bIrD~BhFhC`BbEvHtA\\tIi@t@XhB~BrB~GSpCsChBa@zCeBbCVjIo@pFt@xIdClCvDvGrDdPChDkCvLkAfKp@vK_AnRu@dGR|@nEhFb@`Ba@nGgAtFxBpJyBpH|FtK|@xFIja@tDlFPnKnBhGc@pEL|AhC~HClFg@bE@zFhAlG{@xA_@fCDfDuAbDfAbCc@rBl@~BCvAkAxBE|Bc@dA_@@L_Ba@c@aCz@u@rCo@fR]lBoCrDeNdE",
    "pointCount": 73,
@@ -3286,10 +3626,14 @@
    "end": [
     33.118577,
     131.570032
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:131",
+   "id": "大分県:124",
    "region": "oita",
    "regionName": "大分県",
    "name": "笹倉久住線",
@@ -3299,8 +3643,8 @@
    "curviness": 288.4,
    "flow": 19.9,
    "turnCount": 144,
-   "score": 59.5,
-   "baseScore": 59.5,
+   "score": 69.9,
+   "baseScore": 69.9,
    "spotCount": 0,
    "polyline": "wiohEafk`X~@~Bd@dGfJtPv@fGjApBnB`CfC|AfDhAfFf@hCrAt@vAg@tJsB~BcAjCmBfB{@jCc@jOy@pBUhEoA|F^~IbEdExDb@n@nDIjAcDnHGfC|AfE?bC{CpKy@vKt@jBfGJ~@d@lAjBbDzJDpBoBhK`@zFk@nIZlAbCtC|@bE_C|Q|@xC[vCh@\\lBcAj@HpA~EzApB|A~@tEE`FrFh@~AQbFiB~LaFfDcKnJoB`IjAhCfEvB~GYjETh@JjAhB`Bf@?XiCZ@`Cy@vFiCpGeApHAvMk@xEr@rQr@~D`E`EZ~@IjBiBrFiAvOzApBdKhD~FQ",
    "pointCount": 86,
@@ -3311,10 +3655,14 @@
    "end": [
     32.999748,
     131.219022
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:132",
+   "id": "大分県:125",
    "region": "oita",
    "regionName": "大分県",
    "name": "田野野上線",
@@ -3324,8 +3672,8 @@
    "curviness": 292.3,
    "flow": 19.8,
    "turnCount": 138,
-   "score": 59.5,
-   "baseScore": 59.5,
+   "score": 69.9,
+   "baseScore": 69.9,
    "spotCount": 0,
    "polyline": "_a|iEkfa`XfBkArA?jFfJ|DjApB}@tCwGZyGaBeKiCoIuA}STgBhCiFf@kJjBiG@eBe@yBNmAxAo@tDYnGoF~C}AvB_D`JoBrIeE`DIhG{CtGDnElBfHj@`ClB~BOpF|@|BEvDgDxFmCjA}AxCkAhCiEjCg@fJg@`Hz@~LT~@LlB~AdJeEvBNnAoA`BUbEhBbDGlCjBfB_@dC~BvFRnC|@nJqAzKuF~AMrAvB[`HwAlCqHtGChCcBnFg@~Ff@|OhBbFp@bKxBpEh@tDh@FpCgPfBwB~@yCtAm@j@qD",
    "pointCount": 77,
@@ -3336,10 +3684,14 @@
    "end": [
     33.197144,
     131.259784
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:133",
+   "id": "大分県:126",
    "region": "oita",
    "regionName": "大分県",
    "name": "日田玖珠線",
@@ -3349,8 +3701,8 @@
    "curviness": 261.1,
    "flow": 21.6,
    "turnCount": 326,
-   "score": 59.3,
-   "baseScore": 59.3,
+   "score": 69.8,
+   "baseScore": 69.8,
    "spotCount": 0,
    "polyline": "srijEuxd~WyFmBoECaIxFuFvFqKyGyD^yJs@wEbAoFBpAwI`Bc\\CkAy@kB@wI_BsLkA}ByCwCeDgIoAoGy@kAiRiHwRiJeAkFQsF^{BjEoLjGuKz@gCfFm`@jCmIrEku@_BkYrCoIlAyMHi[OuCyBgJbAw_@}BkCyEiBmCeCwB}GaCsNIoDj@qJsCmLKaCh@}BtDoFVwBc@{BaF{LMmKrBiIHyCy@kEkEgMiB{RdAuHnAu@tCGv@s@dA}DhGwMdDkElCuFbBmIRwKu@}NbAoFQcIfCwNb@o[pCiOeAoPj@sOc@uCByB`AwHB{GjA_An@aGzCwAa@qBkBuBl@UfBp@|IsGx@EpBmEMyHZ_Dk@uA^oBKaEhA}GLmEbBmDO}D|AoCzHeH_@_CLi@`HqHdEbBGcDlAlCxKm@z@q@e@kBmHeHWg@N{@tI_MzD|AuB{C`G}HB~EdAuAf@sB`@LM`BRRnAkCeA}AiDsAYkB}DoBuAqCxBxAxDt@zHnFtA^tHoAdDv@hDUfFl@Ni@jAQ|PyKjFyK`I}IlDeAnC{BtAqBpCkJKi@mHwEcMeB}EqGsOuA_GwCaF{@sGiEqC_@kCmCiE{HgCqKiAqBsPgPyEgG_JiCgDuGs@mLwC_JgAoa@dCqVnEgLlFcEbBsEvA{EW}G|BgH",
    "pointCount": 174,
@@ -3361,10 +3713,14 @@
    "end": [
     33.317265,
     131.138077
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:134",
+   "id": "大分県:127",
    "region": "oita",
    "regionName": "大分県",
    "name": "戸畑日田線",
@@ -3374,8 +3730,8 @@
    "curviness": 286.3,
    "flow": 19,
    "turnCount": 207,
-   "score": 59,
-   "baseScore": 59,
+   "score": 69.3,
+   "baseScore": 69.3,
    "spotCount": 0,
    "polyline": "q`fjEce}~WkCFiG`CeDrFyFnDwAnBEpAnC|I@xBcJ~JiBbJ}BnDa@nFFjBhF|Qe@zRgAdE^`E~@zCAbCyCzE}AH{CxDgA|CqGvDqC_Iw@aMq@[m@tJpBnIGf]kCpHR`I{AxCeAhOq@pDmF|MgEvFs@nE\\vMr@dGwDvGVzFWxMjAdKu@nGcBdHG~GaEzNUjCmA`AcBfGEtCpDrIKvM`CzIfBjDlJrEx@hADzJbA|D}AdEtAxEtIpFP`BhCtDrFnOk@pJoAbGu@nAgI~@iEUqAnAoArKxDxFvClOExDs@|EXxDgEtEH~EsGpD{ArFoErAmAhAiD`Jn@rKyLdR@`IsDbDB~Dx@|C]rDRvDg@bBBhI",
    "pointCount": 96,
@@ -3386,10 +3742,14 @@
    "end": [
     33.315714,
     130.948464
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:135",
+   "id": "大分県:128",
    "region": "oita",
    "regionName": "大分県",
    "name": "牧口徳田竹田線",
@@ -3399,8 +3759,8 @@
    "curviness": 301.8,
    "flow": 19.1,
    "turnCount": 94,
-   "score": 58.9,
-   "baseScore": 58.9,
+   "score": 69.1,
+   "baseScore": 69.1,
    "spotCount": 0,
    "polyline": "_x`hEei~`XzJoHpDyMdA}AlHoErDuFzIkCZiAIkDhBeDjAWbA`@fExD~CfGv@d@zAApAwAzAiFnCgCxIkNn@sDLiH}A_JnGyS`BqNpDaEjAmFe@{C{CiCa@eDuDoG~AoCb@}DEoChDoN_@mCBsE]eAMqFj@mHvAuFBiEfA{DbHyLGwAsA}BAeDcC_F",
    "pointCount": 48,
@@ -3411,35 +3771,14 @@
    "end": [
     32.923068,
     131.441759
-   ]
-  },
-  {
-   "id": "大分県:136",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "津民中摩線",
-   "ref": "646",
-   "highway": "secondary",
-   "lengthKm": 5.64,
-   "curviness": 311.8,
-   "flow": 18.5,
-   "turnCount": 95,
-   "score": 58.9,
-   "baseScore": 58.9,
-   "spotCount": 0,
-   "polyline": "}{{jEuh}~W_BhD}EnCaEHoHlBkEC_B\\wBvDiIjGBvFoDnEfA|FId@sFdCmEbFgDrAsAhDaBtAkJdDuJx@oBnAaDhEgEhB_HYgD`AeG~GcE~AmDzJyAD}BlA{L?oKpB}EkCyGFsCt@{EEsIjCiEsB}D]kGlByBhEkDrAyABsDrC",
-   "pointCount": 44,
-   "start": [
-    33.407506,
-    131.063312
    ],
-   "end": [
-    33.448869,
-    131.041138
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:137",
+   "id": "大分県:129",
    "region": "oita",
    "regionName": "大分県",
    "name": "緒方大野線",
@@ -3449,8 +3788,8 @@
    "curviness": 266.9,
    "flow": 20.1,
    "turnCount": 131,
-   "score": 58.3,
-   "baseScore": 58.3,
+   "score": 68.5,
+   "baseScore": 68.5,
    "spotCount": 0,
    "polyline": "yuehEs{naXcH}EmEfAkGvD{B`C}BxJy@XaASsDyFmDQ{KmRsPsCgHcDiHlB}AgFeGaF{@aEmDgBkBm@_Cn@mBa@gCNoBfDy@?GeAnBkFUeCkJuFaGkIeAKkClA_ELyFgAuDgI?aFcB_Ci@GqDEuDt@oCjDwAx@aFm@kCvA}C~DeAbCiKl@yF~CcCe@mBL_JaJw@ScRtDoEtDwF`BwHtFqSbC{@MgF{DgAQ}JN{KjBqM_@gBy@wD{EwK{\\_FcKqA}IiAeBmCaBqE}AeDcCkCg@",
    "pointCount": 72,
@@ -3461,10 +3800,14 @@
    "end": [
     33.034696,
     131.501675
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:138",
+   "id": "大分県:130",
    "region": "oita",
    "regionName": "大分県",
    "name": "オレンジロード",
@@ -3474,8 +3817,8 @@
    "curviness": 290,
    "flow": 19.3,
    "turnCount": 87,
-   "score": 58.3,
-   "baseScore": 58.3,
+   "score": 68.4,
+   "baseScore": 68.4,
    "spotCount": 0,
    "polyline": "eunkEuavbXPiAa@sLaByCe@_E_A}@sBFeQlNq@Aa@m@jE{TtDwJMiRmAcBo@LeAnB}CPa@d@QbBX`Di@vA}@P_Cm@kCl@cD{A}DRu@fAe@|FgBnCoBjAqEl@sBpCyFlDeGhAeErByIbA}ASwF{DaB?yOtJ_AH]cAFeKj@cH`BeEPgBqB_NGaLh@mKu@qBuDy@",
    "pointCount": 51,
@@ -3486,10 +3829,15 @@
    "end": [
     33.526915,
     131.696482
+   ],
+   "tags": [
+    "winding",
+    "flowing",
+    "caution"
    ]
   },
   {
-   "id": "大分県:139",
+   "id": "大分県:131",
    "region": "oita",
    "regionName": "大分県",
    "name": "緑資源幹線林道 宇目・小国線 竹田・荻区間",
@@ -3499,8 +3847,8 @@
    "curviness": 282.9,
    "flow": 18.9,
    "turnCount": 140,
-   "score": 58.2,
-   "baseScore": 58.2,
+   "score": 68.3,
+   "baseScore": 68.3,
    "spotCount": 0,
    "polyline": "ujsgEq_v`XfAzBzTtHhKdJzE|H~GjHfDtH`DdCfEjOi@vCwAv@_Aq@yEcIcEoCuAf@gBxDqBEaFwDmAIcAZcDrD}AFsCw@qEhGyExLoDtEPxDbB`DYzCPtAbDvKbAlB|ADfAhAI~FfAbJaAxEE`E^~LjAhG_AfFTtEu@`JpIrIHt@mAnE\\xAjC|@nGXxHpD`A`B_Ezb@cAlGaFzKmAp@_DCaBj@M|B`ApPEzC{@hB_GbDy@hBTrCbF|GTjAUrB_EtDTdE{@jDfIvNpD`EBfC}@rC",
    "pointCount": 74,
@@ -3511,10 +3859,14 @@
    "end": [
     32.868125,
     131.2874
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:140",
+   "id": "大分県:132",
    "region": "oita",
    "regionName": "大分県",
    "name": "野津宇目線",
@@ -3524,8 +3876,8 @@
    "curviness": 294.7,
    "flow": 19.1,
    "turnCount": 125,
-   "score": 57.4,
-   "baseScore": 57.4,
+   "score": 67.5,
+   "baseScore": 67.5,
    "spotCount": 0,
    "polyline": "aw{gEy~ybXtDtD~INtBzClBb@jBoAjBcFdCk@`D}BvMF`EgE|DaArKt@bFqGj@MxBzDfI~@xBvALbBm@xJl@`BrE_@fBfFhAl@pJ_BxE^hAxCMnGfBtBbG^lG~AzRtBnMfDpCtExAlGbFfGxBvAbEp@tGa@bJ~BjEB`HfC|DyAtEAvBuCbEsC|BNvCjFbCzBl@jFdB`BbB^D|E`B`GjAHjGsAvETrIlBdFWpAlAfB~F`HpAtHjD",
    "pointCount": 63,
@@ -3536,10 +3888,14 @@
    "end": [
     32.857853,
     131.681485
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:141",
+   "id": "大分県:133",
    "region": "oita",
    "regionName": "大分県",
    "name": "川上玖珠線",
@@ -3549,8 +3905,8 @@
    "curviness": 242.4,
    "flow": 21.6,
    "turnCount": 63,
-   "score": 57.3,
-   "baseScore": 57.3,
+   "score": 67.3,
+   "baseScore": 67.3,
    "spotCount": 0,
    "polyline": "_~kjEcwg`Xy@yC^eAEaEeBeIMcYh@cI_AiK~@w@JcECsJ_@eExB}HbBmOvDkG@wEjB}KvFyNfA}AvEwPd@iOQkMhFwa@HqLr@qDdBs@zBcGGgHzBeNi@wGwB_DsALw@oDxDgBr@wCGeHbA_A",
    "pointCount": 37,
@@ -3561,10 +3917,15 @@
    "end": [
     33.318039,
     131.335891
+   ],
+   "tags": [
+    "scenic",
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:142",
+   "id": "大分県:134",
    "region": "oita",
    "regionName": "大分県",
    "name": "東上戸原線",
@@ -3574,8 +3935,8 @@
    "curviness": 282.8,
    "flow": 19.1,
    "turnCount": 67,
-   "score": 57.3,
-   "baseScore": 57.3,
+   "score": 67.2,
+   "baseScore": 67.2,
    "spotCount": 0,
    "polyline": "}wmkEeyc_XdFi@pBsHJuFbDiDXmIYuEj@cFmAkCYcC`C}HRcGtCgEv@{FhGwDvBBrAa@jHuIlCQdFqBjCmBrDNjBmBrJyEpAyEnLeK`FqLtBiL~ByDbA{Q|A}AxIqBnFiF",
    "pointCount": 33,
@@ -3586,10 +3947,14 @@
    "end": [
     33.476572,
     131.129936
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:143",
+   "id": "大分県:135",
    "region": "oita",
    "regionName": "大分県",
    "name": "長良木立線",
@@ -3599,8 +3964,8 @@
    "curviness": 239.7,
    "flow": 22.3,
    "turnCount": 36,
-   "score": 57,
-   "baseScore": 57,
+   "score": 67,
+   "baseScore": 67,
    "spotCount": 0,
    "polyline": "_z}gEwc}cXaFuBmDqFmN{ZcIaGqBwCPkDa@mC@wKaD_IX}LQ_F{@eC\\wPyDiFiBP_DuA}DGsC_BYgAAuEiN}U",
    "pointCount": 22,
@@ -3611,10 +3976,14 @@
    "end": [
     32.94011,
     131.909226
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:144",
+   "id": "大分県:136",
    "region": "oita",
    "regionName": "大分県",
    "name": "別府一の宮線",
@@ -3624,8 +3993,8 @@
    "curviness": 286.2,
    "flow": 18,
    "turnCount": 238,
-   "score": 56.7,
-   "baseScore": 56.7,
+   "score": 66.7,
+   "baseScore": 66.7,
    "spotCount": 0,
    "polyline": "wmqiEo`a`X}IcRyAaB{ASaGr@oJmEsBcPPwGkAyHCeKy@iJjAaNvCmFdDaKdK_I~GeJ~CiGBmAgAyCeHoAg@_CJmE`AsHz@yBrIoL|DmIv@{Ec@_FkAgC{@i@iMSaAiDeI{H{GPoIlDmACo@}At@gKs@kDcA}@uAPiWxMuAPo@]{C{L{@iHuCoB{AgEoBs@s@_AJaFdCiNYgDw@oAoC{@aIFuHx@u@g@qBuFm@g@_HmA}FXuI|BoDmDeFn@eDAsJsBgE`BoABsB}BwDOcEsBeCWuI\\mCyD_AScLlHw@vB_@jGm@`AmDnA}AnK_@\\_C@s@j@m@rCwBnExApGAhAgEjDYdBR~Eo@zBsAr@wHhAkAmAOeFaAyBeNyB_DdAmBqBuASaA^qAbBNdE_ClGUdFoBpAkAhFw@^aAIo@{@i@cIkD{D_@wE}DcET{G}AwR{FqD}E_G_Cy@",
    "pointCount": 121,
@@ -3636,10 +4005,14 @@
    "end": [
     33.25029,
     131.295846
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "大分県:145",
+   "id": "大分県:137",
    "region": "oita",
    "regionName": "大分県",
    "name": "玖珠山国線",
@@ -3649,8 +4022,8 @@
    "curviness": 263.3,
    "flow": 18.9,
    "turnCount": 318,
-   "score": 56.7,
-   "baseScore": 56.7,
+   "score": 66.7,
+   "baseScore": 66.7,
    "spotCount": 0,
    "polyline": "u|bjE}tn_X}YoBoFbRnAxQiBnHc@~EwE|CeE~HqDdS}DhEgBn@kHs@cJjBoRkB_b@qH_JaDaK_ByKdAiHhBcFfDiI`CkNz@aLaB{SrAyJsAcDR{IuCyIgAyExAmFgEyBX}BtAeJd@{DrAwBvCUbBFfBlAzBR|B]hAwCbDEzFm@fC_BOyFf@uM~DoF`HmChBqCG}FtAuBeA{C?i@f@@bEmBt@a@t@n@|Hy@xCz@nB~EhDhE|GlMrEd@hEtDpCXlFSnAs@PaBhFm@h@FbC{A`H{CvB}FzAa@d@DfF{DfAObBf@`Ak@xD}CjA|@rBSrAqAn@aBAwBmCaEoCeIaEaBCyQpEmWjUyBGmD_C{@nDq@r@XzC|AtGT~CxAhB`BpF@xEiBpDcOtCgB`BuCbAuCvCsKpE{LdBuJ~CsD?sM|DyGmAeElFeFh@_MlF_AjHn@xGGpKtBfIdBlCdB|FQtCp@vCzAnBtDjCTbBoEnGs@hEApDaHbM}DjD{GrBcCtDiAvFuEbNoBvCuCrIgEpHiDbAaHd@eClCmDnA}Ix@yBQiKkDsBgHwC}CqDkAqEA}EyC}EYkCkAcBMsEx@kHvDqCc@iANoD|C_Cz@cDj@aM?}BhBuC|I",
    "pointCount": 162,
@@ -3661,10 +4034,14 @@
    "end": [
     33.406304,
     131.062076
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:146",
+   "id": "大分県:138",
    "region": "oita",
    "regionName": "大分県",
    "name": "和田大鶴停車場線",
@@ -3674,8 +4051,8 @@
    "curviness": 286.3,
    "flow": 17.4,
    "turnCount": 100,
-   "score": 56.4,
-   "baseScore": 56.4,
+   "score": 66.2,
+   "baseScore": 66.2,
    "spotCount": 0,
    "polyline": "motjEywz}W}@kAuCcJxAeA^wAQoBiAuAsFq@oGgCmCjAqBJoMoFeFaDwIsAwBqKyAkAcDkGwA_FcAw@{A}DqAcBgBsKkAmC[iE}MiReB_AyOT}FdCgEg@gEXeFqAiIlA_E~AiH|I?jBtCpReAxD}ClDsKWcIzAgHQsGcBqG|Es@FiC_A",
    "pointCount": 45,
@@ -3686,60 +4063,14 @@
    "end": [
     33.40751,
     130.898152
-   ]
-  },
-  {
-   "id": "大分県:147",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "国道500号",
-   "ref": "500",
-   "highway": "trunk",
-   "lengthKm": 6.4,
-   "curviness": 245.2,
-   "flow": 25.7,
-   "turnCount": 61,
-   "score": 56.3,
-   "baseScore": 56.3,
-   "spotCount": 0,
-   "polyline": "w~gjEs_saXh@haAYbIcAbCmAjA_\\lPyBxBs@bCyLlz@kFhVh@`EpH|HnOtYtCdCYdC`A~H{@`AmSlIqCfCoBxDHpA`A|BEnAwDdG{EnCsAzBQn@Z`Gi@Ks@gAw@Ii@j@EzAc@NaEkBmAcHnDyH",
-   "pointCount": 37,
-   "start": [
-    33.305555,
-    131.502178
    ],
-   "end": [
-    33.318331,
-    131.455885
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "大分県:148",
-   "region": "oita",
-   "regionName": "大分県",
-   "name": "玖珠広域農道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.94,
-   "curviness": 264.1,
-   "flow": 18.9,
-   "turnCount": 69,
-   "score": 56.1,
-   "baseScore": 56.1,
-   "spotCount": 0,
-   "polyline": "izejEct}~Wm@wAWyE}CwC_@gAS{JwA_Ff@wCdFuDGgBaGeGeCwDmCgAyDkGcMqEg@eA@qF}CmE_H}D}AiHhB{MQmBo@w@_EyAaDeIcB{@_DiFyB{AyEcNgCiPeAgBmIkHqFkKsAyH?wBd@gA~EwDfBqP",
-   "pointCount": 38,
-   "start": [
-    33.294609,
-    131.065144
-   ],
-   "end": [
-    33.310963,
-    131.105676
-   ]
-  },
-  {
-   "id": "大分県:149",
+   "id": "大分県:139",
    "region": "oita",
    "regionName": "大分県",
    "name": "緒方朝地線",
@@ -3749,8 +4080,8 @@
    "curviness": 266,
    "flow": 20.4,
    "turnCount": 65,
-   "score": 56,
-   "baseScore": 56,
+   "score": 65.9,
+   "baseScore": 65.9,
    "spotCount": 0,
    "polyline": "gxlhEe`haXfJa@lG_CrEsC~C@d@wAbCiBl@kEu@_CXa@zC~@zDzMlKzHb@e@\\qEpDk@fKsFxKgN|@Y`Ev@bEsCt@mIpB}F`AkAlAUtEf@`DSrGeAzEkChLiAzAsAnE}HzDeOpFkG~D}IjAc@pOo@",
    "pointCount": 37,
@@ -3761,8 +4092,266 @@
    "end": [
     32.969599,
     131.464583
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:140",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "玖珠広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 4.94,
+   "curviness": 264.1,
+   "flow": 18.9,
+   "turnCount": 69,
+   "score": 65.8,
+   "baseScore": 65.8,
+   "spotCount": 0,
+   "polyline": "izejEct}~Wm@wAWyE}CwC_@gAS{JwA_Ff@wCdFuDGgBaGeGeCwDmCgAyDkGcMqEg@eA@qF}CmE_H}D}AiHhB{MQmBo@w@_EyAaDeIcB{@_DiFyB{AyEcNgCiPeAgBmIkHqFkKsAyH?wBd@gA~EwDfBqP",
+   "pointCount": 38,
+   "start": [
+    33.294609,
+    131.065144
+   ],
+   "end": [
+    33.310963,
+    131.105676
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "大分県:141",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "大鶴熊取線",
+   "ref": "671",
+   "highway": "secondary",
+   "lengthKm": 8.34,
+   "curviness": 249.1,
+   "flow": 19.1,
+   "turnCount": 109,
+   "score": 65.7,
+   "baseScore": 65.7,
+   "spotCount": 0,
+   "polyline": "mwtjEsxz}W@{AtCcBvEsFbAmDIkBuDaN_EsUu@iBPoFhFaMfEqA|FaF`H{IvAoIuAwC_C}BY_Dj@SfD~@nB{@dCcDxCo@fD\\zFrBnCxDzA`ArCLtCyAtA{I_@}KdEkA`HeFtCcJVaDkCsF^_AnFpC~GpKnFn@rAyAcAqNyCwDoCcJr@gC`DkA`C}B`E{AdD}KFoBlE}HvDsRi@kLwIcn@gBoDMcE`@eFjI{N",
+   "pointCount": 58,
+   "start": [
+    33.370952,
+    130.886656
+   ],
+   "end": [
+    33.348619,
+    130.943814
+   ]
+  },
+  {
+   "id": "大分県:142",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "九重野荻線",
+   "ref": "695",
+   "highway": "secondary",
+   "lengthKm": 6.87,
+   "curviness": 258.7,
+   "flow": 18.5,
+   "turnCount": 96,
+   "score": 65.5,
+   "baseScore": 65.5,
+   "spotCount": 0,
+   "polyline": "qttgEk_m`X{Ep@eFbB}EdD}GjA_DbFuFpCg@nBYpS}A~H}AdAgBaAyEsGgHmBgBqEoB{A}B@aJrDgMsE}Eb@cC}HqJiJmDmIo@g@cADk@|@r@zHQdAs@`@kILaFnH}Br@}B]wFyQqAiCw@OeEvAgEnFkJl@qA|@u@rLiBjKv@dJs@pB_GfAmI{CoHbAiCxA{BbGsA|A_LvB",
+   "pointCount": 51,
+   "start": [
+    32.878967,
+    131.30758
+   ],
+   "end": [
+    32.920551,
+    131.295163
+   ]
+  },
+  {
+   "id": "大分県:143",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "西国東広域農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 20.97,
+   "curviness": 235.2,
+   "flow": 18.1,
+   "turnCount": 272,
+   "score": 65.3,
+   "baseScore": 65.3,
+   "spotCount": 0,
+   "polyline": "o{klE_`|aX~OuF|Ab@v@lCc@hBaJdJkG`PcEfD{@|DRhHkF`OHjAh@r@hHrAfMu@nLf@nF|BrGOjGvBxEWv@r@nErMz@fA|YjGpFThGWfNoEdBv@NlBo@pA}E^oAhBdAdOdEjC~RlINxQsArHp@bCrBd@|AgAXcBKkGh@mAvAWnAxAwCjQc@~Sv@dGo@dHuB`GTrB~Af@fAu@\\yIf@eCjC{DrCcBbBNfCxDv@@rEcBdARh@bAKrHsCpJm@h[d@bBpJ|K~C`IzArHtArNAjC}@rDj@jBfADv@}@nI{W`AcIrAgElAo@bAh@rK|QrPtGnBvAhC`F^pHpBlCfHnC|GxFfS~GlB_@rFyD`HuCvJkLbCInNfHbALfCmA|B}GzB_@~AbA|Ob[bAfAdBHzMeBjAuAjIqa@pAsAlAAvAjA~@~FtAhBrJv@lE~CtIxCtAlA~L|UtEfXvA`@pCsBjAh@lCnTx@fBzB@|DyFtHZvBeCnAGzKbU|@rJ\\t@z@V~CwAl@_AkAyH|@oFMqDl@qAhCm@~J|KhFdJrBf@|Ci@",
+   "pointCount": 143,
+   "start": [
+    33.653198,
+    131.548319
+   ],
+   "end": [
+    33.559054,
+    131.478893
+   ]
+  },
+  {
+   "id": "大分県:144",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "白地日田線",
+   "ref": "407",
+   "highway": "secondary",
+   "lengthKm": 10.16,
+   "curviness": 239,
+   "flow": 19,
+   "turnCount": 128,
+   "score": 65.2,
+   "baseScore": 65.2,
+   "spotCount": 0,
+   "polyline": "ejmjEuir~WqB`@uGBsFSkB{@mFmEmBgC_D{JoDmGkFyWgAmKoDkIe@}DfF_XCiH}EcKqOkRo@yA@mDeCoViBoFa@aG`AgBtB}ApCqGg@qLuDyJaCwDiBeA{ByEuCoN_CuBByCoBqK@qClBiH`AyHi@}Fx@}M]iADyFc@mC^_NiCwImB{A_@wA\\gB`CeEnBLl@_@g@aDj@aCQk@{Cp@gK{GyAgBmLuBsD_IkGOwDqBiDa@qCeCkGm@mH{DgIu@yEiCmLwDsBB{FlDyHzBwJ}A",
+   "pointCount": 71,
+   "start": [
+    33.332991,
+    131.007147
+   ],
+   "end": [
+    33.3723,
+    131.079078
+   ]
+  },
+  {
+   "id": "大分県:145",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "奥豊後グリーンロード（大野川上流広域農道）",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 15.7,
+   "curviness": 246.8,
+   "flow": 17.5,
+   "turnCount": 221,
+   "score": 65,
+   "baseScore": 65,
+   "spotCount": 0,
+   "polyline": "}`{hEu`o`XpBdBvBrK|ArDvIpI~C|FvI`H`B\\lF[nElAfLzLlDjGrGxCbHpFbCZ`Rg@pDvBnIfJjEr@bHjOtArElDlE~@nDhF`IxApAbMrFxHzOxD~DjCtTrDjI]bDNpDMz@sAtADrBfLtHbCnIvElGlFh@hAv@dMmBzDzA~B~LzAzMfKxChCxBjIng@bFjJ|CtEpIrDzDhEbExJlGrKhBlA`JrAtAdAD|AaBjDG~@rBnHY`G`DzD`ABxAqAnKqNhCiBxA`@jA`CjAt@nAChEkBjAj@Fz@yCnKb@vAtH{A|H}H|AYlE?tDfBdDJ\\bAYnF~@fAtDRdEsBbAcAtBcJxDeBhJsH|FYtB_IbDaAb@wAFeIh@qDbAwC`BwB~FmDzHqHz@NfDvEp@Jv@g@LkIz@oDqBqHt@uCzAeCb@gCgCkJQwBTwA~CsF",
+   "pointCount": 114,
+   "start": [
+    33.075509,
+    131.318027
+   ],
+   "end": [
+    32.991298,
+    131.270565
+   ]
+  },
+  {
+   "id": "大分県:146",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "臨港道路中津港線",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 5.08,
+   "curviness": 209.5,
+   "flow": 21.7,
+   "turnCount": 49,
+   "score": 64.8,
+   "baseScore": 64.8,
+   "spotCount": 0,
+   "polyline": "}}_lEwwb`X{IcI{EaBkEMgBj@eC~AcEbF_CdA{Dl@oTh@aFeAsQwQm^xAg@\\d@q@|^}AtRnS@WnDd@lZi@dDeBnFeGdHkBtCVpCpAxIbI",
+   "pointCount": 26,
+   "start": [
+    33.592155,
+    131.255161
+   ],
+   "end": [
+    33.592101,
+    131.255252
+   ]
+  },
+  {
+   "id": "大分県:147",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "国道442号",
+   "ref": "442",
+   "highway": "trunk",
+   "lengthKm": 10.08,
+   "curviness": 304.5,
+   "flow": 19.1,
+   "turnCount": 161,
+   "score": 64.7,
+   "baseScore": 64.7,
+   "spotCount": 0,
+   "polyline": "{nfiE}iy}Wt@{EwAcGD_FrA_Bv@JpAbGdAZZm@CaCn@eDjEgHQc@iBZk@eA`ByBVkCGgC_BaD@cNkCoT{A}GUeEkFoUTqBxA_CRaBm@yUg@uCPmN_EwMc@cIwBmCaB{DRiHgOaT}CiM{@mL_E}HwEgEa@uCb@uEr@uBdCqCzBWvCuF`AeE|AiBtBKbBaAnD{Dj@gDQ{Ht@kK|I}MhEqJGiGqA{LNiClC}D~AuFjB_C~Ao@nCIxGwB~AaC}@_MqDuIKkGmB{FmBsAwAkFHuDi@iBrDaCf@mCI_BoAqAwImAqEgCe@gAVyC",
+   "pointCount": 82,
+   "start": [
+    33.134057,
+    130.879189
+   ],
+   "end": [
+    33.13454,
+    130.964664
+   ]
+  },
+  {
+   "id": "大分県:148",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "臼杵上戸次線",
+   "ref": "25",
+   "highway": "primary",
+   "lengthKm": 3.75,
+   "curviness": 266.4,
+   "flow": 19.6,
+   "turnCount": 51,
+   "score": 64.5,
+   "baseScore": 64.5,
+   "spotCount": 0,
+   "polyline": "wpbiEivwbXkG|C}AvAkBlKiCdHyAzIOnDtAzD~@dGs@rGR~IlGfQ?|@yAjC_B`GIxDjD|GlBtGGbDz@~EnGhJ`D|GHxAuAfBAt@hEvGc@fBuBrAc@fA@|EcC`E@pAlBnE",
+   "pointCount": 33,
+   "start": [
+    33.11388,
+    131.690126
+   ],
+   "end": [
+    33.113066,
+    131.655815
+   ]
+  },
+  {
+   "id": "大分県:149",
+   "region": "oita",
+   "regionName": "大分県",
+   "name": "佐伯津久見線",
+   "ref": "36",
+   "highway": "primary",
+   "lengthKm": 8.15,
+   "curviness": 265.4,
+   "flow": 18.2,
+   "turnCount": 119,
+   "score": 64.3,
+   "baseScore": 64.3,
+   "spotCount": 0,
+   "polyline": "wwrhEya{cXrEpA~BnCzAjEdDpFn@bDJxDhAhCnGxEzGrA|D~G|@f@|AElB_Aj@kA?oCw@mDj@oA~@@`BfD|Aj@~FaA|DJpB_BrAoF`AQt@z@?rEfD|C~CpAbBhErAHfDgAbF`CpN}@dHhCrEZbB~A`BxDpG~EhARtFcBxB_F|AgA`IaAtEfC|AP|D{@tE{CzBGbC`AtEeBxH}@pGiBpU`EpA~@dApCx@v@dKvAvEsBvGqAfPwMf[wPxHdCvGhG|B`A",
+   "pointCount": 66,
+   "start": [
+    33.033082,
+    131.871174
+   ],
+   "end": [
+    32.974069,
+    131.863653
    ]
   }
  ],
- "hiddenCount": 0
+ "hiddenCount": 10
 }

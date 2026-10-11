@@ -146,8 +146,10 @@ service cloud.firestore {
     // ⚠️ 本人だけ（出発地が自宅のことがある）。users/{uid} の下は誰でも読めるので、そこには置かない。
     //    アプリが書くのは「開いた時刻」（openedAt）だけ
     function isValidWebRoute(d) {
+      // route … Web で選んだ道（経路サーバの応答を JSON の文字列に）。アプリは引き直さずにこれを出す（2026-10-09）
       return d.keys().hasOnly(['name', 'planId', 'planName', 'createdAt', 'startsAtCurrentLocation', 'origin',
-                               'destinations', 'conditions', 'chosen'])
+                               'destinations', 'conditions', 'chosen', 'route'])
+        && (!('route' in d) || (d.route is string && d.route.size() <= 1000000))
         && d.name is string && d.name.size() > 0 && d.name.size() <= 100
         && d.destinations is list && d.destinations.size() >= 1 && d.destinations.size() <= 10
         && d.conditions is map

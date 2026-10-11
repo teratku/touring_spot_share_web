@@ -1,45 +1,19 @@
 {
  "prefecture": "香川県",
  "romaji": "kagawa",
- "generation": 3,
- "contentHash": "f746ead692d7",
- "builtAt": "2026-08-26T09:40:08.456Z",
+ "generation": 4,
+ "contentHash": "f0aa5ce88a47",
+ "builtAt": "2026-10-07T14:43:19.183Z",
  "weights": {
-  "curviness": 0.35,
-  "flow": 0.25,
-  "length": 0.15,
-  "classRank": 0.1,
-  "popularity": 0.15
+  "curviness": 0.41,
+  "flow": 0.3,
+  "length": 0.18,
+  "classRank": 0.11
  },
- "count": 150,
+ "count": 111,
  "segments": [
   {
    "id": "香川県:0",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "紫雲出山線",
-   "ref": "232",
-   "highway": "secondary",
-   "lengthKm": 17.96,
-   "curviness": 674.5,
-   "flow": 28.5,
-   "turnCount": 425,
-   "score": 84.3,
-   "baseScore": 84.3,
-   "spotCount": 0,
-   "polyline": "e}~oE{ylnX_@~FvAdFScKlB_Jw@xJtBrJqB|DVbEcA|Cg@tEiCdCGnCd@MHcB`EmAA_Bp@gCfBc@nB{DDz@qAnE^A|A_DXZkA`EoAXCnB`InDVbBaA~ACiC_Be@oAxCoCWAZ~EbAn@nAzAVv@gBlAu@L{BpCaCFw@o@{@D_@fApBaCtDQrEkAl@aAjCqCGUvBoD~Bg@tB}@p@q@vBiGu@In@jAlAJ|@mAdAuBCGtCsCQeBrBgBSBfCwAdAz@rAVjB}CEm@fATlN`BpD}Cm@yBaCu@wBL{BWe@eA`Ba@nEqApB}BqAmLXqBwBkCdBhEtKm@jAmD~@wA|Bc@pBu@r@wVaKuDgEuGiDh@iCeDcEjAaC_AcC|@o@Ho@_AsBn@yAk@mAk@qGx@uGe@kFb@Q~@fBr@Rh@a@`HFfCt@hB]xCaCxCeIpAyJMaF~@kGE_D`E}DA{MrBG~AmDYcCr@yDoB{CQkAhAk@fIv@R}AeB{CvEcEdCj@~@cALu@aCkCNaD~GoEXq@gBiD{CyCBuAx@[j@zAz@NpAgCzE_ElEiA|BeCt@kEeAiCK{ArA_FdBoBx@KhAx@bBHtCpCvAoB`BAtBo@n@\\~@|BnCQdCeAxCoEhFyDpE_L`BeGh@qJuA}BmAwHsF_C_ByA@u@xAoCp@yFoAaNaCwEVeCg@aD~@yAdFm@bN`B|Dk@rAcBhBkGFcBcCqFI_DaE}Da@mBpHmTz@}H",
-   "pointCount": 196,
-   "start": [
-    34.242275,
-    133.600459
-   ],
-   "end": [
-    34.232605,
-    133.644809
-   ]
-  },
-  {
-   "id": "香川県:1",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "枌所西中徳線",
@@ -49,8 +23,8 @@
    "curviness": 696.6,
    "flow": 28.7,
    "turnCount": 315,
-   "score": 83.8,
-   "baseScore": 83.8,
+   "score": 98.5,
+   "baseScore": 98.5,
    "spotCount": 0,
    "polyline": "w{ooEyeupXU`@t@u@jBdCjAq@~DuFlFs@m@yA^_BhA}BfDgBr@yFE_AqAw@|@eEgB_A]wBb@aAhAWtC|ApAoCbCe@HmDu@yCdAqFtBeCEcCnB_D}HaReFkDu@_BX_DfCyAl@?zBbBf@IF_F\\iBz@s@xAf@\\SuC}B[aB^{@hCs@Ha@}@{CHeEoC{GAoBqD}DB}ArAuCgAScC{DJsApAqCtD{B^sCUwA`AoF}CeCgAqBu@eEzAaBQeESy@gDwDZkD`C_D}@wH`AqBUeDx@wA{@eDhAsADm@k@i@uCOLwD}AaDLm@lA[LiAs@_DTuF}@cDv@gEgAwGQuBTkAe@oCwBwHyAcBEeA{B_Ag@u@J}@rA_AnBJpCsCxCwAzAuF`@I|@hAXaAcCq@{CtEeAFoBnA{@]a@VyBaE{Co@e@v@qFfBW~@N~Ce@RgC{EsBZi@oAuF_BkJiFqAkBeO{FoBEkE_Eg@aCiBcDsM{CyGkNJ_F_Ec@kBmAkByGiLxC}G`@uAIaCaBaA?yCtDmBc@oCmFo@]}Dc@oENcEuA}SnA",
    "pointCount": 149,
@@ -61,10 +35,14 @@
    "end": [
     34.194248,
     134.042912
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:2",
+   "id": "香川県:1",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "橘大角坂手港線",
@@ -74,8 +52,8 @@
    "curviness": 750.3,
    "flow": 29.8,
    "turnCount": 309,
-   "score": 83.7,
-   "baseScore": 83.7,
+   "score": 98.4,
+   "baseScore": 98.4,
    "spotCount": 0,
    "polyline": "_onqEkp}rXO~@^xAtBdBxAmA\\gFhBZhAsAfBvCr@XfBgAhC_@xEdDzBqAXd@DxCrAHlApAz@iBYqJvCmDDeCt@q@tAJPgAbAw@`Eg@[qAd@aASsClAPf@{@`FcAdBzAvDsBd@oA@mCxA{BRsAtCB~CaCVaBaAsCTm@j@MxAj@t@xBBfCd@zAzDdEf@KhAgCnAa@f@qAhAa@p@rAw@bC\\dAzDg@hDRtAt@x@iAvDZTfBhB|BzAsBf@?xBlEhElE`MxGh@t@JnBa@zB|CnCxAeAhAAr@l@|@YvAdCf@FjBcBlAQ@fB~@bAI|AZt@bCrA~CPd@z@MdAmBtBCrFmAhEdEbDfDPpCdAfDbHzA|@bBgAjA@hA_BlDpBfBw@v@DxBrDlBiBpAHhBoCbBGvD{C`A{BbD}@fJiITiArDqBjGi@nBdAzGv@pBdAl@dAzBe@vB~@e@pCaB|AKlB}@~BsEJWtGyBh@cBoA}C`BoHNo@v@i@jFaBrBuFfDsKRyCk@{@sBqAYw@eAkBFeAs@aB^q@bE{Bb@eCbGiBr@{ApCkDzAyEnFgBlFmBVyA`CuDw@_EbBsAi@Ib@n@lB",
    "pointCount": 159,
@@ -86,10 +64,14 @@
    "end": [
     34.454799,
     134.323801
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:3",
+   "id": "香川県:2",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "多和三木線",
@@ -99,8 +81,8 @@
    "curviness": 759.4,
    "flow": 32.6,
    "turnCount": 252,
-   "score": 83.5,
-   "baseScore": 83.5,
+   "score": 98.2,
+   "baseScore": 98.2,
    "spotCount": 0,
    "polyline": "a_soEgm{qX`@lB}@xC{IhFoCn@{@pBuDc@sB~AeCZuAxAeCp@kBHgDu@mDnAoEfLwArAsBX}Fi@wH|CyDx@gDs@gG|@eDzAsBV}BhBaHp@oCvBIdGeApANzEg@xAo@[sAuCmBKVoEcASmAwBoAe@gCxBc@kAw@Og@dBuAa@mAfBqAiBo@McBhBSxAeCfARqAdBFS}BtCaE~BPb@e@KaGtBr@f@_BtDAEYgEs@cAt@}D[WfBkAj@oB{@P|Bo@`BgAs@_AFAjBo@`AiDo@cCf@]pCsBo@d@rBGj@q@\\oAiAgAp@iA[cBfCcAS_CkBi@tC]TkE{BgBxAu@eAcB[e@^DhAW^oBcArAZx@kChAUAmBlBnAn@iBzEaADm@}@}Ag@@eB`B_EPkDq@sCX{FuBaDdB_A~ByNwCaKvBqH[wS}DsVwBmEyBwDi@mGfBmMf@oGUmDkAoGiE",
    "pointCount": 124,
@@ -111,10 +93,14 @@
    "end": [
     34.243018,
     134.159163
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:4",
+   "id": "香川県:3",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "福田港神懸線",
@@ -124,8 +110,8 @@
    "curviness": 635.4,
    "flow": 28.4,
    "turnCount": 202,
-   "score": 83.3,
-   "baseScore": 83.3,
+   "score": 97.9,
+   "baseScore": 97.9,
    "spotCount": 0,
    "polyline": "qvyqE{}}rXEnC}Cv@e@t@D~F~@hJo@nGjAvDy@~AcDjA`ApDa@j@a@}A_@BLxH`BvIk@d@eC{Cn@lCGtE~@`ASZ_Be@MZbBlA|@MpAx@~FaAxAqC~@ZAhAyBfCc@rD_GxAMvAv@dAnDm@tEdBvCNpCsBvAWxDvBxCYhDb@\\|@AbDd@zC[pCpEpCr@nDf@KBs@iDsInCcLEgBcAgC~@ExBnD@dBw@`DPf@d@@|A{Hs@sFtCuDbBuLvBoC`CaA`AZtCzDlE|Aj@bC`A`Al@bDrG\\hEs@lGlCpHv@bBOXh@Yh@{BImCpAiEWYp@jFpB~Cb@|I}@tBf@lC[tI~Ed@zDtE}D~@LhC~B~@cBfDwA|CiDxDKtB}@pCj@hB~ClDrAJp@",
    "pointCount": 104,
@@ -136,10 +122,14 @@
    "end": [
     34.51199,
     134.325975
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:5",
+   "id": "香川県:4",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "大滝上西線",
@@ -149,8 +139,8 @@
    "curviness": 829.6,
    "flow": 30.7,
    "turnCount": 225,
-   "score": 83.1,
-   "baseScore": 83.1,
+   "score": 97.8,
+   "baseScore": 97.8,
    "spotCount": 0,
    "polyline": "_hhoEy_sqXaAxAM`FeBdF?jBlDiH\\aC~@[|A~AtBcHj@Io@zBSrFsB~@d@|@@~Am@bDiAhBr@lAy@r@HnEyCf@vAtFi@lA}BLEt@xA`ATvChDa@fBd@p@v@tBnGCxCm@xCtBmDlA}Dq@uBj@s@Ak@gAwCb@BjAlCTMgCgInGvKpAv@X~ByAbQb@~GwD~O|A|HNjFd@pBe@~Db@rA~B`CKrEfAhDwBnEUvC}BhDGlGcAfAOjCr@|CGxAaB^cArBVpAz@Db@j@MhA}A~AAl@lCtAFj@iBvAcBEoAb@wApDsBWwAxB_@pCqBxB[dDaDlCY|CgEi@i@Ns@vAuEAuC~Ag@hC}DfCm@`DyB`DkE~@F~Ck@zBkDrFuCpCa@`B",
    "pointCount": 102,
@@ -161,10 +151,14 @@
    "end": [
     34.136132,
     134.075559
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:6",
+   "id": "香川県:5",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "城山鴨川線",
@@ -174,8 +168,8 @@
    "curviness": 603.4,
    "flow": 30.6,
    "turnCount": 147,
-   "score": 83,
-   "baseScore": 83,
+   "score": 97.6,
+   "baseScore": 97.6,
    "spotCount": 0,
    "polyline": "emhpEgmepXFeAhByBmBePaHmEcBeDi@?aAbBa@KoAiJ^kEkE`@_C[QrCgDzAi@v@AdEcAnEgBlCi@?_A}@sAT_DzB{@vCeFZ_I_Ay@r@oBbFy@l@s@a@N{AtGcI`Ew@vDArDoDU_@{DrCmIm@gHpAdE{D`Ce@vFE|@aB|DeCFaAoAaBoAoE~@yD_AmDjGiEFg@s@aB^q@fDi@[oDNw@tC[}@kG~CATmEbAcBs@}Ak@DSvBoG~ES|AeI`DkBrD}@JuAkAk@?yHrEoBb@sAhC{FtAy@@c@kAbC{BCm@mIoB_EQmC_F",
    "pointCount": 82,
@@ -186,10 +180,14 @@
    "end": [
     34.308619,
     133.903835
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:7",
+   "id": "香川県:6",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "城山川津線",
@@ -199,8 +197,8 @@
    "curviness": 684.9,
    "flow": 31.3,
    "turnCount": 151,
-   "score": 82.9,
-   "baseScore": 82.9,
+   "score": 97.4,
+   "baseScore": 97.4,
    "spotCount": 0,
    "polyline": "emhpEgmepXf@|BcBk@ORpBzCOhB`@xA|At@rFPgBjAaGF?VlGzBi@ZuB]cDt@yGoEpD~DzBxFvB^zAlBrBBtCbIgAvERgEuAwBgBsA]FxAtAf@`CiD`NJlJ_A`@_FSgAXeDnAuAdBOoBc@zA_@eBnHaI{Ct@uD~B}DbFgGVcAlBh@v@KZw@e@NcCWC_AtD^dB_@jDrAnFD|FXxAdGpE`BpFhBvCvGjChCvEzEdGBbMzArFWlDXpBMrCtAdEY`D|J~X",
    "pointCount": 71,
@@ -211,6 +209,39 @@
    "end": [
     34.288053,
     133.854198
+   ],
+   "tags": [
+    "winding",
+    "caution"
+   ]
+  },
+  {
+   "id": "香川県:7",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "穴吹塩江線",
+   "ref": "106",
+   "highway": "secondary",
+   "lengthKm": 11.65,
+   "curviness": 577.5,
+   "flow": 26.9,
+   "turnCount": 250,
+   "score": 97.2,
+   "baseScore": 97.2,
+   "spotCount": 0,
+   "polyline": "_hhoEy_sqXa@]s@j@eArHwBzDO~Gg@f@sDAm@l@o@~CuA~AIbA_B\\{@rBXhCM`AeHP}DhF_@k@b@qDhDaBzB}BhAwCeIrCaC_@qBv@iEuC}DyMoAqAu@eCcC]oB{GaBqA|BMz@Xv@zA|Et@pCbD~@`C|@PmCkKy@s@}Bg@NuA_@gDv@r@PhBn@eD{DqCaByDmCuCkC]x@g@xB`@dGrFhCX?g@aBa@y@cA[qB}AcDl@Eh@zA~AdBfARD[wCcGaEe@yByBeB[yA`AqDQeMlWk@bE{Al@UnAiA|AVpEYx@uCpAFjBsApAIhFuBxJgB~Ea@tJaG|H}@hFmDx@gEpDqDwAc@~@b@lDQv@sGj@oDlCeAWuByCyCGsArA}B`Gi@xC_IlCoB_@o@sAKwJqEc@wAVoDtG]pDLzFgAzCwHlAoJ[qMbTyAr@eFPqBl@kBfBwAvDmCfEeFtD",
+   "pointCount": 122,
+   "start": [
+    34.126242,
+    134.123655
+   ],
+   "end": [
+    34.171442,
+    134.0965
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -224,8 +255,8 @@
    "curviness": 696.9,
    "flow": 30.1,
    "turnCount": 139,
-   "score": 82.7,
-   "baseScore": 82.7,
+   "score": 97.2,
+   "baseScore": 97.2,
    "spotCount": 0,
    "polyline": "mvipEipvqXm@kMuN_NiGaAeFsBsBHoByCyA\\cCSgAiDyCyB}D{@wGK}@o@SwBh@eBpEzAj@[Bw@sAyAI_Et@u@jCa@Ri@[aAkAu@}BcFRm@jEnBlAi@i@uCJ{Fv@qASuAmMuGaBlC_COa@vAyAe@{@vAa@E]eA}@a@cAyEd@kFsAmCJoD_DyA{@Te@nBmBDu@~AmBnAiD{Ba@DQhA[DaC{Cm@_CyARJq@nAo@lDSb@_@XkDbCsDnAmGa@uAsF_D{CcJiC{CoB{A}Ce@",
    "pointCount": 73,
@@ -236,56 +267,68 @@
    "end": [
     34.318634,
     134.170753
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "香川県:9",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "穴吹塩江線",
-   "ref": "106",
-   "highway": "secondary",
-   "lengthKm": 11.65,
-   "curviness": 577.5,
-   "flow": 26.9,
-   "turnCount": 250,
-   "score": 82.6,
-   "baseScore": 82.6,
+   "name": "塩江屋島西線",
+   "ref": "30",
+   "highway": "primary",
+   "lengthKm": 14.45,
+   "curviness": 657.5,
+   "flow": 30,
+   "turnCount": 317,
+   "score": 97.1,
+   "baseScore": 97.1,
    "spotCount": 0,
-   "polyline": "_hhoEy_sqXa@]s@j@eArHwBzDO~Gg@f@sDAm@l@o@~CuA~AIbA_B\\{@rBXhCM`AeHP}DhF_@k@b@qDhDaBzB}BhAwCeIrCaC_@qBv@iEuC}DyMoAqAu@eCcC]oB{GaBqA|BMz@Xv@zA|Et@pCbD~@`C|@PmCkKy@s@}Bg@NuA_@gDv@r@PhBn@eD{DqCaByDmCuCkC]x@g@xB`@dGrFhCX?g@aBa@y@cA[qB}AcDl@Eh@zA~AdBfARD[wCcGaEe@yByBeB[yA`AqDQeMlWk@bE{Al@UnAiA|AVpEYx@uCpAFjBsApAIhFuBxJgB~Ea@tJaG|H}@hFmDx@gEpDqDwAc@~@b@lDQv@sGj@oDlCeAWuByCyCGsArA}B`Gi@xC_IlCoB_@o@sAKwJqEc@wAVoDtG]pDLzFgAzCwHlAoJ[qMbTyAr@eFPqBl@kBfBwAvDmCfEeFtD",
-   "pointCount": 122,
+   "polyline": "qtqoEoakqXW{Cq@{AeZuMaNn@yA~BuE^M|Be@v@gBb@yCMyAxAkDbA{BAuAk@_Cz@cFeC_B{KgEkFkAoDaByB^iF`CyF@u@wBiBoB[u@m@q@_E{JkAgAaA}CwFkJ_F_K`DgJ_DgGsEoBGiAy@aB^gAa@s@`BwBKCcCUQyAN{@}B{CAiBt@gBWgGvBs@o@_AHqBy@AbBaAn@d@pBeGvDe@YQ{AeAwBNgBg@iAL{D{@Ue@|A}@m@g@oBqACNrBmAt@q@pAN`@z@Ev@dACb@sBzAXf@jAJLjAoAj@iBzBoAu@qCGt@tBp@s@n@^@pBfCUi@|DvBfBpAfCI\\oHoFeAwAcCm@qBb@eAScAqAr@{@I{@iFUm@wBpAwCGs@oCP}BiBqCBKw@v@qACq@iEB]o@R{Ce@SwAbAy@aDg@]oAh@o@bDg@YW{Aq@DSxAZnBsA|@[`DwCzDmH_AOk@VmAw@mAo@@q@lBm@NwAk@s@eBsBdC}RbB}DhBuLnCwK_@gRsEiH_A{EeB{AuBc@aDzAaIDiC_B_EaBaAuGy@iBHgUhMqItAkCmAgD{F}GiCqAiAgM_VyCs@yJ|@",
+   "pointCount": 160,
    "start": [
-    34.126242,
-    134.123655
+    34.174328,
+    134.082965
    ],
    "end": [
-    34.171442,
-    134.0965
+    34.258497,
+    134.107042
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "香川県:10",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "久保谷塩江線",
-   "ref": "154",
-   "highway": "secondary",
-   "lengthKm": 5.45,
-   "curviness": 676.1,
-   "flow": 28.3,
-   "turnCount": 130,
-   "score": 82.5,
-   "baseScore": 82.5,
+   "name": "込野観音寺線",
+   "ref": "6",
+   "highway": "primary",
+   "lengthKm": 12.98,
+   "curviness": 835.2,
+   "flow": 33,
+   "turnCount": 328,
+   "score": 96.9,
+   "baseScore": 96.9,
    "spotCount": 0,
-   "polyline": "yaboEcn}pXQaCaAyBeEyCkB{FqBe@_AcAaAgGiEJgAYyAuFoF{FY}DyG{AyDiBc@yGqG}DuDmAiEaFy@SiBV}GfF{CH_DfEWfACoA`BuBZoBKi@uAi@y@iBqF{B_CNmC}Ba@wAyDqBaAEmB~AcANS]RqAOoCwA{BcGy@}A`@EkA`C_BU]mCAHo@z@w@XoBeD{AYwAcETXaFi@wAwA}@R}@hDQIiAkDaImGs@Lu@xDyB]wB",
-   "pointCount": 66,
+   "polyline": "y~znEeamoXw@k@u@_Gm@QeBj@p@mBw@q@eC{I}@Q_Bn@{DnEw@pDcBd@o@~AeBn@f@oCdBaDu@iADe@rB{FlBgBWSgBr@s@xAgEdAuDzFEpAx@vCcBjAD`C_AXa@jBs@ZeAi@qBN\\dAwAd@?j@|DMV\\i@jDy@dBcDvAiBmBqBxAr@Rn@dBb@zEw@x@vAz@|@vCQ\\}BME^bAnBH~Dp@x@Y|BdBbAKhCbA`JWp@jAHXkAK{C}@eDZiAIqAg@sAeAMEa@\\iAg@{@b@m@CyBz@kAOv@Vx@xB`Fl@DDrBp@lCdB@]bCzBhAP|EbBXw@|D`EOaD|Fg@dDlC@hAs@TjAlAl@cEbBsDnCyCx@mG~H_AxBg@UaAt@tA_FfA]lAgChBgBZoBt@cAEq@qD`D_CLu@_@a@bCi@Jm@u@w@fDaDrBs@[g@gDWE`@|C|@xA~FeCPN]zAmCpAu@tA}@nH^bAfDfBrB|CM\\}Aq@wCA}Ae@sBx@_BaAqA?oD`A_I^cZpHaX_@kBvA_MlCkAYoEwEw@gCs@a@yJ`FsItAuDjEwDfCcC`HkG|@uDfBoEXuG|DyEu@mAJqHtHuFnD",
+   "pointCount": 161,
    "start": [
-    34.094535,
-    134.013304
+    34.058211,
+    133.765475
    ],
    "end": [
-    34.120587,
-    134.039288
+    34.101219,
+    133.734049
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
@@ -299,8 +342,8 @@
    "curviness": 1036.4,
    "flow": 37.6,
    "turnCount": 134,
-   "score": 82.4,
-   "baseScore": 82.4,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
    "polyline": "ubioEcd`nXUCc@kF{AsBy@NmFeOMwB|AuAb@HjE}B~M]rInJZtAx@Bz@bA`@Ah@pAd@lEO`Be@@CtD^V@vAg@b@VpBh@`@BlCAl@gAxAjBdFbAx@Cb@c@D{AmCYb@~@x@Iz@gCwBwD?kCxB{MnEaBiAcAyEv@oCKc@}FfEg@OFe@tBo@vEaKjBcAIk@sA|@a@QzAgAOaCpAkBCbA|@g@N|@zE\\xAYj@fCbAd@bA`Fx@t@fCHhAk@",
    "pointCount": 68,
@@ -311,85 +354,14 @@
    "end": [
     34.125915,
     133.533606
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
    "id": "香川県:12",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "塩江屋島西線",
-   "ref": "30",
-   "highway": "primary",
-   "lengthKm": 14.45,
-   "curviness": 657.5,
-   "flow": 30,
-   "turnCount": 317,
-   "score": 82.4,
-   "baseScore": 82.4,
-   "spotCount": 0,
-   "polyline": "qtqoEoakqXW{Cq@{AeZuMaNn@yA~BuE^M|Be@v@gBb@yCMyAxAkDbA{BAuAk@_Cz@cFeC_B{KgEkFkAoDaByB^iF`CyF@u@wBiBoB[u@m@q@_E{JkAgAaA}CwFkJ_F_K`DgJ_DgGsEoBGiAy@aB^gAa@s@`BwBKCcCUQyAN{@}B{CAiBt@gBWgGvBs@o@_AHqBy@AbBaAn@d@pBeGvDe@YQ{AeAwBNgBg@iAL{D{@Ue@|A}@m@g@oBqACNrBmAt@q@pAN`@z@Ev@dACb@sBzAXf@jAJLjAoAj@iBzBoAu@qCGt@tBp@s@n@^@pBfCUi@|DvBfBpAfCI\\oHoFeAwAcCm@qBb@eAScAqAr@{@I{@iFUm@wBpAwCGs@oCP}BiBqCBKw@v@qACq@iEB]o@R{Ce@SwAbAy@aDg@]oAh@o@bDg@YW{Aq@DSxAZnBsA|@[`DwCzDmH_AOk@VmAw@mAo@@q@lBm@NwAk@s@eBsBdC}RbB}DhBuLnCwK_@gRsEiH_A{EeB{AuBc@aDzAaIDiC_B_EaBaAuGy@iBHgUhMqItAkCmAgD{F}GiCqAiAgM_VyCs@yJ|@",
-   "pointCount": 160,
-   "start": [
-    34.174328,
-    134.082965
-   ],
-   "end": [
-    34.258497,
-    134.107042
-   ]
-  },
-  {
-   "id": "香川県:13",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "込野観音寺線",
-   "ref": "6",
-   "highway": "primary",
-   "lengthKm": 12.98,
-   "curviness": 835.2,
-   "flow": 33,
-   "turnCount": 328,
-   "score": 82.3,
-   "baseScore": 82.3,
-   "spotCount": 0,
-   "polyline": "y~znEeamoXw@k@u@_Gm@QeBj@p@mBw@q@eC{I}@Q_Bn@{DnEw@pDcBd@o@~AeBn@f@oCdBaDu@iADe@rB{FlBgBWSgBr@s@xAgEdAuDzFEpAx@vCcBjAD`C_AXa@jBs@ZeAi@qBN\\dAwAd@?j@|DMV\\i@jDy@dBcDvAiBmBqBxAr@Rn@dBb@zEw@x@vAz@|@vCQ\\}BME^bAnBH~Dp@x@Y|BdBbAKhCbA`JWp@jAHXkAK{C}@eDZiAIqAg@sAeAMEa@\\iAg@{@b@m@CyBz@kAOv@Vx@xB`Fl@DDrBp@lCdB@]bCzBhAP|EbBXw@|D`EOaD|Fg@dDlC@hAs@TjAlAl@cEbBsDnCyCx@mG~H_AxBg@UaAt@tA_FfA]lAgChBgBZoBt@cAEq@qD`D_CLu@_@a@bCi@Jm@u@w@fDaDrBs@[g@gDWE`@|C|@xA~FeCPN]zAmCpAu@tA}@nH^bAfDfBrB|CM\\}Aq@wCA}Ae@sBx@_BaAqA?oD`A_I^cZpHaX_@kBvA_MlCkAYoEwEw@gCs@a@yJ`FsItAuDjEwDfCcC`HkG|@uDfBoEXuG|DyEu@mAJqHtHuFnD",
-   "pointCount": 161,
-   "start": [
-    34.058211,
-    133.765475
-   ],
-   "end": [
-    34.101219,
-    133.734049
-   ]
-  },
-  {
-   "id": "香川県:14",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "鹿庭奥山線",
-   "ref": "263",
-   "highway": "secondary",
-   "lengthKm": 9.11,
-   "curviness": 606.8,
-   "flow": 27,
-   "turnCount": 205,
-   "score": 82.3,
-   "baseScore": 82.3,
-   "spotCount": 0,
-   "polyline": "wbqoEamvqXeAlBBxH{CdGwArAB~Cc@@iBoB_Dg@sAgDUcJ{@iAMTf@zAs@hBb@zBe@xB~@pFyAtCmJf@{AqCcBsAyEfCcABmBqDmDv@mDuBuPqAmFcBcDwBsCs@kByE{@o@cHReAkBuEHqHmAwBmA_QOwLaA{C{CiLgF}C{B}AeDSkE^o@CaAu@f@uBEmAeAYsAwAF}@hAe@eA}A{@gAeDkBy@q@_BsB?wA_AEqCwA_@_AaBi@KQp@Rx@|CpBGlBdAz@H~AhAlAfBPR`CnChEw@x@oFa@{BRs@{@mBSAi@_A_AqBEbBWxCzA|@YH_DaDoCwGuA[HBh@bARLd@uAV}EsEiE_AkDVeC[eKaJkE{AaHkH}EcDaDcFeA]",
-   "pointCount": 103,
-   "start": [
-    34.171475,
-    134.141132
-   ],
-   "end": [
-    34.220728,
-    134.15571
-   ]
-  },
-  {
-   "id": "香川県:15",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "小蓑前田東線",
@@ -399,8 +371,8 @@
    "curviness": 588.2,
    "flow": 29.8,
    "turnCount": 240,
-   "score": 82.2,
-   "baseScore": 82.2,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
    "polyline": "klqoE}jrqX_Fj@iAnDkE}A_LsAwChIw@PSr@gBLc@][r@}@@QbAs@r@}Bo@g@~@_A}BcAYkAvA_A|CmAx@eKyDmEqDcCgAoEaFqIcBqDrEkGbCo@~As@zFu@j@]oAZcEa@kAoBuA}E~@oBKEk@jBaABcAqB_AqBeEe@HQfBe@f@eCy@eCsBiAp@m@G[_Bu@i@a@Dw@bBm@DYgAt@w@`Bc@tAh@\\a@cEi@yDuDmApBm@s@_BLu@iAgBhAmAmBeD~AsAIUy@Pc@bBZ|BqBvBINs@mAMqBjAk@IO}@`AMNa@uAmBy@sDuEJk@{@b@_B_BpAm@@gBeDCy@aA]}EnB_Dd@kMmGiBDmAx@gBbEoArAcE~@{BrC{ABsEfDgJdA{DWgBzAw@pD[NsCe@QmGkB}AqDw@}A`@cCWoHjA[zAFzBk@d@gCu@wCz@cDa@cGcDiHvCeEi@kDuBiFiAgJnGqJhAyFSsGdA{SwA{SyFmY{C_AyHaA_CeHyByF?",
    "pointCount": 136,
@@ -411,35 +383,43 @@
    "end": [
     34.252128,
     134.127479
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:16",
+   "id": "香川県:13",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "田面富田西線",
-   "ref": "264",
+   "name": "鹿庭奥山線",
+   "ref": "263",
    "highway": "secondary",
-   "lengthKm": 4.09,
-   "curviness": 897.1,
-   "flow": 32.2,
-   "turnCount": 114,
-   "score": 82.1,
-   "baseScore": 82.1,
+   "lengthKm": 9.11,
+   "curviness": 606.8,
+   "flow": 27,
+   "turnCount": 205,
+   "score": 96.8,
+   "baseScore": 96.8,
    "spotCount": 0,
-   "polyline": "gczoE_tfrXVaCj@k@DcC_C_G}AoH~@iAxBUZ}Aw@y@wBY_@gFkBw@_AiB@sAxBDf@s@}CcC_BcEQcBd@kCkBwBs@oFaBkCwAyGoAgAgA_Ct@mBaAgAaA^\\gAKg@}@_@q@JuDoDIqARWjBp@_@cHoCgC?u@z@MOi@cE{Cj@wCgBYgAeCo@QU~Cv@fCs@X}@WeBoIFyDiAkEgEk@aBLeBaF",
-   "pointCount": 58,
+   "polyline": "wbqoEamvqXeAlBBxH{CdGwArAB~Cc@@iBoB_Dg@sAgDUcJ{@iAMTf@zAs@hBb@zBe@xB~@pFyAtCmJf@{AqCcBsAyEfCcABmBqDmDv@mDuBuPqAmFcBcDwBsCs@kByE{@o@cHReAkBuEHqHmAwBmA_QOwLaA{C{CiLgF}C{B}AeDSkE^o@CaAu@f@uBEmAeAYsAwAF}@hAe@eA}A{@gAeDkBy@q@_BsB?wA_AEqCwA_@_AaBi@KQp@Rx@|CpBGlBdAz@H~AhAlAfBPR`CnChEw@x@oFa@{BRs@{@mBSAi@_A_AqBEbBWxCzA|@YH_DaDoCwGuA[HBh@bARLd@uAV}EsEiE_AkDVeC[eKaJkE{AaHkH}EcDaDcFeA]",
+   "pointCount": 103,
    "start": [
-    34.217639,
-    134.22416
+    34.171475,
+    134.141132
    ],
    "end": [
-    34.229014,
-    134.251344
+    34.220728,
+    134.15571
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:17",
+   "id": "香川県:14",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "蒲野西村線",
@@ -449,8 +429,8 @@
    "curviness": 701.3,
    "flow": 27.6,
    "turnCount": 134,
-   "score": 82.1,
-   "baseScore": 82.1,
+   "score": 96.5,
+   "baseScore": 96.5,
    "spotCount": 0,
    "polyline": "goeqE}{krXoHuH}BiEMaDd@gCIsA_BaBu@kCcBwAyBUiC~A{BFoCeDgCy@}@nAm@?eC{D}@GwAz@mAnD{@{@sA@OiCsAz@wCoAw@_DaALw@`Do@P}@qBqBoBmCm@e@N}@pFWHeBeC_@yAiL}GiAwB}AgAgBC_BbAaAUc@oBfAuEeAiAiBBmAk@eAPoAi@_B~AaCyFwAUuAj@u@g@o@uAQ_C}@wAq@Cg@r@XnEW~@s@TcA]}A{BgEyC]yCoCVgEfBq@UmBmBoFyOkAeB",
    "pointCount": 73,
@@ -461,10 +441,14 @@
    "end": [
     34.470517,
     134.269981
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:18",
+   "id": "香川県:15",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "勝浦三野線",
@@ -474,8 +458,8 @@
    "curviness": 613.8,
    "flow": 26.8,
    "turnCount": 185,
-   "score": 82,
-   "baseScore": 82,
+   "score": 96.4,
+   "baseScore": 96.4,
    "spotCount": 0,
    "polyline": "eieoE_jvpXlElB|@dDtC|C|@H|BcB|DeHTcBUgCd@sBzC\\rDqA`FVlAjBjDnC^tIr@SfA}Ef@_@|B`DpGQ|DfFjE\\vBnRvDfJEhCVXr@m@^iEEeAsA{DPyF`@_@tIfAnFy@fHMdD|AtFJp@d@LhDlH\\v@jAhDg@hBfDxDbEb@pDInBkA|CwDtCKn@THhAcAtEy@pCRqAeDr@sABkGlAaCuAg@aBsBu@uBDs@nFwHjBc@nAwBxDhEZgCdEKWs@sDkCmAcDh@yADeClBaA_AkG~AoHrEcCj@mAlFiDpB_@fC~@NsB~DiIbEe@fEsB",
    "pointCount": 85,
@@ -486,10 +470,14 @@
    "end": [
     34.074553,
     133.98432
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:19",
+   "id": "香川県:16",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "大串鴨部線",
@@ -499,8 +487,8 @@
    "curviness": 806.3,
    "flow": 31.9,
    "turnCount": 85,
-   "score": 81.8,
-   "baseScore": 81.8,
+   "score": 96.2,
+   "baseScore": 96.2,
    "spotCount": 0,
    "polyline": "kpspEasdrX_EuCKm@bCgBbAyBjA@R[iDo@[cAbCiCvFBMkAdAyC{@aFlBgJFgDfAcAJyAd@Yn@r@G~BhCr@cBeA`@yBw@wDTaBl@_@`BbAjA}@tAxBdFN\\{Ay@}DjFsGdCqEjBsISkEdAuBDcBjAyBPcCbEmCpEa@",
    "pointCount": 43,
@@ -511,10 +499,14 @@
    "end": [
     34.337088,
     134.23355
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:20",
+   "id": "香川県:17",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "嶮岨山線",
@@ -524,8 +516,8 @@
    "curviness": 780.5,
    "flow": 32.4,
    "turnCount": 206,
-   "score": 81.7,
-   "baseScore": 81.7,
+   "score": 96.2,
+   "baseScore": 96.2,
    "spotCount": 0,
    "polyline": "}stqEqvtrXcITsAlAEa@zAmBdBu@`@iAeDiHqF]qBiByDZoAjAdDOxB|BbBd@@~Cs@nFWUU_EcBoA{C]gMtBuJlFN^bJmChH|AsFtLeGxGyExI{EpDi@LIWhBcCf@iGbB_EWy@oG`EcNhEsCxBcAvByBvBb@d@rBWLbDbBfAHj@m@rAWUBgAg@CAnCkFtHc@]x@oBGw@{A|Bg@XYShAyBCiAyEvCAe@xAuB?wA_CwC_Do@Er@tA@j@p@HrAa@lAqF|BC]hBeBSi@sFlEcAvCeB~@c@lBcBh@_BjBYhEs@eFd@qBhAuAOa@}BtCe@vCc@b@{@Ed@uAOWgB^m@~@eAVu@bEi@YEk@n@oEw@u@sGhFwSn@",
    "pointCount": 102,
@@ -536,10 +528,14 @@
    "end": [
     34.545882,
     134.28269
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:21",
+   "id": "香川県:18",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "観音寺佐野線",
@@ -549,8 +545,8 @@
    "curviness": 641.1,
    "flow": 29,
    "turnCount": 176,
-   "score": 81.6,
-   "baseScore": 81.6,
+   "score": 96,
+   "baseScore": 96,
    "spotCount": 0,
    "polyline": "ul{nEyx}nXjLkIxDgFnLqCfTPtB}CVeFpE?tAcEtBAjBuCjFbHp@]t@mGbAsAlCd@nArDbCzAhDaBbAgCnDkClGjBtC{@pDvDx@J~@nAbBt@|Ds@bE~CvBY|A`DrCI`DgE`BEpBbEtEzEIrEe@lCTj@zAUl@qDz@e@rI`G`EAn@X|BbBRvCpAgAp@CdChCEvFXf@h@WfB}EzDx@`AdJdClDd@a@a@qGh@{BbFzAhAG~@n@vAYx@dAlAYhARxA`B~BDpBjCAdBhBVZdDlAJ`DjD|@WX{AiAaA]_CxCeC@i@kEk@g@oBbGeDlB{Bx@yCnAW",
    "pointCount": 87,
@@ -561,43 +557,14 @@
    "end": [
     34.014129,
     133.687461
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:22",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "志度山川線",
-   "ref": "3",
-   "highway": "primary",
-   "lengthKm": 8.06,
-   "curviness": 809.4,
-   "flow": 31.7,
-   "turnCount": 206,
-   "score": 81.6,
-   "baseScore": 81.6,
-   "spotCount": 0,
-   "polyline": "}~qoE{c`rXx@mBJcBaDaG_H{EiCm@iD_Ci@u@AgAfGuSj@yGp@sBnAqA|Cm@rE{BlFkGxCuA?_DmEiOB}AyA}EtBYUaBb@e@vBWbETrB{JtAmDlJwI{GZa@OJ[xNoHFqAiA[kCf@?gAfC{@~ADbCmAR[McBlAgAqBaAiCL]}@~DcDn@{B`Ba@PiBqB[_Bd@qBGWcAhAyCyAiAfC[dAiAdD_@Nk@y@y@MiB{Cw@W_AeAu@bBgCl@KtBnA|GRn@rAb@Hb@eCo@iBzCiBFcEj@gCzDmADe@uAiC?iAzC`EM~Ab@rA~AgAlBr@n@iAr@IrEfC^jBiBhDMxAhFiC|BfDJ[{@oCkBgAx@sD}B{E",
-   "pointCount": 98,
-   "start": [
-    34.175993,
-    134.190855
-   ],
-   "end": [
-    34.160525,
-    134.229162
-   ],
-   "unpaved": {
-    "unpavedMeters": 5756,
-    "totalMeters": 8056,
-    "ratio": 0.715,
-    "surface": "unpaved",
-    "tracktype": "grade4",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "香川県:23",
+   "id": "香川県:19",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "徳島引田線",
@@ -607,8 +574,8 @@
    "curviness": 1188,
    "flow": 38.2,
    "turnCount": 157,
-   "score": 80.9,
-   "baseScore": 80.9,
+   "score": 95.2,
+   "baseScore": 95.2,
    "spotCount": 0,
    "polyline": "u~voEixpsXbAfAvANEfFlAlAi@~Eo@Li@i@dBmDW_@oAGRaCm@mAaABqBpEcBaASb@`Cv@zAaCn@IX~Du@bBOvBlEjAhBmBTbBhABhA`BYNq@uAqAAYo@iC~@y@i@cDUKe@v@oD_@Qi@nFrIhCiG`HF~@[z@r@fAc@fA`An@G\\sAy@`@aBaAy@d@oAu@mA|Ay@jAqDiE}@sF|@HXz@e@lCCtAt@AnAkC|AJnAsACsAx@oDRL`@jEfAJv@cG?qGeAwFrGyDc@kF`B",
    "pointCount": 74,
@@ -619,10 +586,14 @@
    "end": [
     34.20919,
     134.431382
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:24",
+   "id": "香川県:20",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "美馬塩江線",
@@ -632,8 +603,8 @@
    "curviness": 542.6,
    "flow": 26.2,
    "turnCount": 300,
-   "score": 80.3,
-   "baseScore": 80.3,
+   "score": 94.6,
+   "baseScore": 94.6,
    "spotCount": 0,
    "polyline": "wbcoE{qgqXEs@p@sAhBS`C}BaCuCqCNiDo@hAeCHeBiEeKgAo@cGe@sAkBaAUeEGMcAtBeE]_B_KeJmCmA}Cs@sDj@kEiAiDeCw@uCaK{KUf@rBzD|ApApCxG`G|IbBp@dDAjDjADfAyCy@uFSwCuCwCSqAaD}BE_A}Dy@JoA`BkBr@iJP?lCa@XeC_A{@kAm@C_HdEcCl@kAa@UTz@j@nCKGt@gESwFwK}@GcApA_BOmDlAyAMGl@xGw@fAd@lBk@\\t@D~Bn@v@|@vDvAt@?h@oCZaGyAm@|DwB|BeAnEiAxBYS@mA~@uJcAgAkIwAeE^sCiAkGVkPgIcHGsBeAwJ`CsDo@wCjAG_@jAi@h@gCk@`A{D`AoAaAmBqE}CgAsStByEw@{BdAeFqKsFcGwDsBgEQ{BHeAr@_@xAsAdBkAzImBxA_KOaFvAmWyCeD^eIw@uDfBmHGo@f@k@nBsDhAe@nD?nDqAd@i@jAwCh@wAjA_CsA}@aBaAx@mAKcBn@i@g@CoB|AiDPaF}A}AsHBiBgAi@{BIcIqB}P",
    "pointCount": 148,
@@ -644,35 +615,44 @@
    "end": [
     34.170948,
     134.08196
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:25",
+   "id": "香川県:21",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "石井引田線",
-   "ref": "34",
-   "highway": "primary",
-   "lengthKm": 4.98,
-   "curviness": 567.4,
-   "flow": 26.7,
-   "turnCount": 106,
-   "score": 79.7,
-   "baseScore": 79.7,
+   "name": "紫雲出山線",
+   "ref": "232",
+   "highway": "secondary",
+   "lengthKm": 14.1,
+   "curviness": 485.3,
+   "flow": 45.9,
+   "turnCount": 149,
+   "score": 93.9,
+   "baseScore": 99.1,
    "spotCount": 0,
-   "polyline": "m}koEiefsXiC~@_CEkAnBoCq@uIhCoBdA{AdCyFp@cEdFu@xBeG~BqClCaPdEiFrCuBUgBXgDvByBD{A_AsBBsFeBcHDeB[gMyI|F`Lk@tCcAhBBv@dDrDxAk@d@PcBzAaGqAgAoAI_AtA{Dq@}BcFvAIg@f@}A]_AsCkAaCh@a@Yf@oGy@u@K}A}@_AAmDPm@rAWp@gBxA{ARuBf@k@",
-   "pointCount": 56,
+   "polyline": "eb~oEwpknXfApBaCtDQrEkAl@aAjCqCGUvBoD~Bg@tB}@p@q@vBiGu@In@jAlAJ|@mAdAuBCGtCsCQeBrBgBSBfCwAdAz@rAVjB}CEm@fATlN`BpD}Cm@yBaCu@wBL{BWe@eA`Ba@nEqApB}BqAmLXqBwBkCdBhEtKm@jAmD~@wA|Bc@pBu@r@wVaKuDgEuGiDh@iCeDcEjAaC_AcC|@o@Ho@_AsBn@yAk@mAk@qGx@uGe@kFb@Q~@fBr@Rh@a@`HFfCt@hB]xCaCxCeIpAyJMaF~@kGE_D`E}DA{MrBG~AmDYcCr@yDoB{CQkAhAk@fIv@R}AeB{CvEcEdCj@~@cALu@aCkCNaD~GoEXq@gBiD{CyCBuAx@[j@zAz@NpAgCzE_ElEiA|BeCt@kEeAiCK{ArA_FdBoBx@KhAx@bBHtCpCvAoB`BAtBo@n@\\~@|BnCQdCeAxCoEhFyDpE_L`BeGh@qJuA}BmAwHsF_C_ByA@u@xAoCp@yFoAaNaCwEVeCg@aD~@yAdFm@bN`B|Dk@rAcBhBkGFcBcCqFI_DaE}Da@mBpHmTz@}H",
+   "pointCount": 151,
    "start": [
-    34.145033,
-    134.385652
+    34.23795,
+    133.59388
    ],
    "end": [
-    34.16918,
-    134.384346
+    34.2326,
+    133.64481
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:26",
+   "id": "香川県:22",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "大野原川之江線",
@@ -682,8 +662,8 @@
    "curviness": 522.8,
    "flow": 25.9,
    "turnCount": 278,
-   "score": 78.8,
-   "baseScore": 78.8,
+   "score": 92.7,
+   "baseScore": 92.7,
    "spotCount": 0,
    "polyline": "i|wnEej}nXXpCnBbEzBtBxEhLXvG^tAhBtC~EfD`@zCoA`GmBpQ|@jM`@pTcAfEiAfAwAzDm@tE`@xDgCnFGrPcBbGzBnDbDp@|CzBzBThEtCxD`GlDlClDrAzAfBl@bGg@tIF~JhAzHE`Hx@~Cn@tJ|DzM{AvFcB`ATrBmBzGMvCZThAgAfB@h@uD~Ao@jAr@j@xAg@dDnB`@lAiBzBMbB}@fBsCGeBh@w@fDCnEyAhA`@v@|B~CWjB`DdCUR}@{Ay@]aAk@aHd@{@bBGZoB|AcAP}E\\_@l@\\CbDiAtBS|BwB|AGf@`@n@bCpAfCo@jBtBbBy@bC`@bD`Ch@EtAeBj@DpInDf@v@}@lEf@bEwDdAG^n@lAtBh@hAxB}AlBxA~Cf@pJjAtBBx@{Al@wI{Dk@b@fJtJ~@vCt@fHrB`DuEvDgFbGsAfCuCzAc@`B^x@`D?nAz@Rz@BdDcApEeElC`AbBZ~F]zFTnA[Cc@mBm@LxApEvBrChBhEmCvFmB}Cu@Bf@zHmAxIx@lEjIlHlEpL|AjB",
    "pointCount": 144,
@@ -694,10 +674,14 @@
    "end": [
     34.016269,
     133.600603
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:27",
+   "id": "香川県:23",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "丸亀三好線",
@@ -707,8 +691,8 @@
    "curviness": 481.5,
    "flow": 28.9,
    "turnCount": 278,
-   "score": 78.3,
-   "baseScore": 78.3,
+   "score": 92.2,
+   "baseScore": 92.2,
    "spotCount": 0,
    "polyline": "sfsoE{m{oX`DcLbAmOdHiArFuBtRsLfGuKdPgQlRAvFwEvQkAdDvAjKCb^|FfP~@hIgB~CgBrO}L`DsAbHmGpEgBbFaJnH{J|AkHfEoZ`CyJxKeSCuDn@iE@aHfAuBR}BOgAaBaCUmDb@yCjAe@dAqCJ_Dw@aBFwD`@UrBj@zEuCdD}@h@_FxDmKn@k@xDSf@iBnAe@hLgMzKiDrDmCbIoBzB}BnDk@zEv@rB{BfEaChDqFlCa@fCxCw@H}AaCsCr@cBtGsDlCkApBFlE}BHGr@dDOHmFdAmAtEkCdAeCxJbGzC_@nD~@tCeAnA~Dh@zH|@`A`AF^tCbCfEa@zAr@hCbEnA~AhC`ChB`@v@?vBjChCl@tCrBhAWhGlB`DLfE{@fBxArGaArBjA^vA~DHvBb@IHkAcA_KLiBUm@Xk@hAn@pB`E~BdAf@|Al@HXdD}AhIApDfAi@lD_Kd@YXj@m@vBfBk@p@~AWbChAOW`CnBOZb@NjDx@`Ar@eEw@iFzBbAYkD`DFXWkAeCq@]g@oCnEuC",
    "pointCount": 144,
@@ -719,10 +703,14 @@
    "end": [
     34.101923,
     133.876407
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:28",
+   "id": "香川県:24",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "神の浦吉野線",
@@ -732,8 +720,8 @@
    "curviness": 505.7,
    "flow": 26.8,
    "turnCount": 81,
-   "score": 78.2,
-   "baseScore": 78.2,
+   "score": 92,
+   "baseScore": 92,
    "spotCount": 0,
    "polyline": "yzgqEodjrXdD`DxC~F|AfG@oFm@cGXUxDhPhB~@`@hCt@z@nEhBfCMlAZxAoAdDeFfA?~AxAhAlCvAtI|H`FxBg@`AyQv@cEdH_CbDqKzCdAxHjGfFlAxBQ\\\\_@^sIEWZP^tI`@tFuAhDLtD`B",
    "pointCount": 39,
@@ -744,10 +732,14 @@
    "end": [
     34.430706,
     134.238203
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:29",
+   "id": "香川県:25",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "多和脇線",
@@ -757,8 +749,8 @@
    "curviness": 515.8,
    "flow": 24.1,
    "turnCount": 67,
-   "score": 76,
-   "baseScore": 76,
+   "score": 89.3,
+   "baseScore": 89.3,
    "spotCount": 0,
    "polyline": "ipqoEyvbrXtFg@vA`BP~Ft@xE~@nA@`BhAbFh@n@jCPhDdBjG{DdLyBpFHhAbCx@h@`AgC~@x@jBA`BpDpCjBbGq@zG`ATnAEnGp@`AbBKnB}@rEv@nEMV^NfHnEpH",
    "pointCount": 33,
@@ -769,10 +761,14 @@
    "end": [
     34.15398,
     134.193023
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:30",
+   "id": "香川県:26",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "津田引田線",
@@ -782,8 +778,8 @@
    "curviness": 424.5,
    "flow": 27.4,
    "turnCount": 288,
-   "score": 75.8,
-   "baseScore": 75.8,
+   "score": 89.1,
+   "baseScore": 89.1,
    "spotCount": 0,
    "polyline": "i~dpEe}rrX}@qEHeF`Nqh@q@{Qv@uEiE}LgA_I}BqCoCk@c@}@v@wEiAwP`@{JhCqE|Cy@DeAnBuDN{FhB_BlD}IZyE|FuDxA}Bh@PhAvFbC`BfSoG~VgZvDiJ`GkIR_AMqEhHgXsJyDs@cADiBvIoPzGiK~EwNf@qCdFHzC}F~E_XnQml@C}CiDoTIgCFgDjDm\\_C}FeDcV~FwBaFwQc@cLi@wBgByBgKoIkKeGwBNyCnFwCjAw@UgAuGkCeCw@yBfDmH`GVBfBp@i@IwDwDh@c@c@tDsCpC_FNiAq@WuAr@iA?a@yCr@i@`DAn@u@?gBtAFtCu@|@iAM_AyCKSoBmAmAvC{CpBJB}Bv@oAP}B~G}BlAdBbCj@RoEaAcAKcAd@K|@pAl@ClAiBRoB~Ab@`BcAj@zBg@~DdBMjDaCe@YgBl@CgAnCW|DwCAw@g@i@iBdAiAa@Fu@tAaAvD\\dEzF|GcChJrCxE?dChD~ETpCgAv@cF`BqCvDPlHaF~JuAjBwAf@sAxD{@rHoEr@iHfCkB|BeD|@QvCfEdMvC",
    "pointCount": 147,
@@ -794,35 +790,14 @@
    "end": [
     34.22489,
     134.3997
-   ]
-  },
-  {
-   "id": "香川県:31",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松牟礼線",
-   "ref": "36;155",
-   "highway": "primary",
-   "lengthKm": 15.68,
-   "curviness": 430.8,
-   "flow": 23.5,
-   "turnCount": 288,
-   "score": 75.5,
-   "baseScore": 70.9,
-   "spotCount": 2,
-   "polyline": "c~wpEavrqXaI}BaCFi@n@YzFu@d@sAEaPoFoCgCsDeHkBaJuJeJ{EiBgBOqIfAaPoDsF[cOnE}JjFyDM}Bx@mEoB{CHqBuCoEuL_DcGiCqC}BH}@cAb@kE`BiCeAeIf@gBjAq@`ENfA}A_@{DTyJr@cGk@eC`DeAnBuJpEkHlCqAr@cAbCmHGeHjLaUdA_E?mD`B{ChBqJpFaF|Ek@`@{@d@gGbDrAzBiAt@}A|By@\\_AnAo@fBhAd@`Bd@R|Aw@f@mDrAkDh@g@lCG~@nBlD|BPhK^fAp@CrBeCjCh@`Ck@TaBxBmAHcCjAwANqC~@K\\`CzAdC^hCn@\\|B[d@\\z@nGnAtBvCkBZoAf@KxF`ErBF~Ao@lBmEnAOPr@o@pEpB`Ab@jDp@`AzBf@rA`CnE_Ex@\\AlB_BhCx@jEr@|@lAW|@wCfB]xB}EjHaCxGu@pEd@|EjBzBChQ{DjBoDz@i@tDlDhCgApFPjBxDrLhClB{AhDgAjCHpBpBfBh@lBlJpBbENjFf@pArGvKxAjAnB\\~Ba@nGgDrJcJtJ}Gf@gAZyEfDu@fAb@",
-   "pointCount": 150,
-   "start": [
-    34.370423,
-    134.122086
    ],
-   "end": [
-    34.335001,
-    134.15547
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:32",
+   "id": "香川県:27",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "京浜下新田線",
@@ -832,8 +807,8 @@
    "curviness": 487.2,
    "flow": 24,
    "turnCount": 126,
-   "score": 75.2,
-   "baseScore": 75.2,
+   "score": 88.3,
+   "baseScore": 88.3,
    "spotCount": 0,
    "polyline": "qdfpEq{vnXJX~BaAhCTpB|@hB}@`Bh@n@`ClC@v@tAtBGf@]h@kCvBcBvBiElGn@fBkAfA}BdAV@hElAjFo@`LlAhCVvBk@pAL~B_@jAyAnA}@xB}BTq@zJs@Am@mBcACYb@BbAbBrEMpJXlEdBfDtCxCxAj@rBgAvAhC@fEaApED`MpBhEhEpCjExAnUpE~AbFhHjBhAvEq@xC?lCVxBxAzCvLpI|Mv@_@bFp@`F_@VkGQ{Cl@",
    "pointCount": 65,
@@ -844,10 +819,14 @@
    "end": [
     34.258256,
     133.620037
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:33",
+   "id": "香川県:28",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "寒霞渓公園線",
@@ -857,8 +836,8 @@
    "curviness": 487.9,
    "flow": 23.2,
    "turnCount": 301,
-   "score": 74.2,
-   "baseScore": 74.2,
+   "score": 87.3,
+   "baseScore": 87.3,
    "spotCount": 0,
    "polyline": "}stqEqvtrXZkBc@aNxAsH{AiAmJyBiEwFy@_@}BDeG~Cu@?mAwDkDoBgAyAWeAt@yCaCaBWaAZ_AlDaA|AcCbC[b@g@H}DjByFJoHzEmNrEcKRkMcAwDoCyBAsA`A_AlKkDpAyDbCGvB{AdEaAlAeDgAwCBiAbDuCrBaDdSjDhA_@~FgFzDe@xAb@^`Am@dDrAfB?t@cHhFqEhKPr@r@Ih@{CnA}@nAmChDoAf@TO`AeCFi@^u@`DaAvABl@b@AbBgG|@?@n@iDfK?hClDk@hEvDpCOzAd@rBnGJdGnB`DRdEhAxAhMkA|HcFfC\\hBdBMtAu@lAiEdCgBrD{G|B{AdDoDZqAxBCdAf@dAvGtESzAkCn@IdB`BhF~BbAGtDdCPHdCbBpANt@s@f@mDMcCdBmE@kBz@?`BvB|CQhF|BnEgAjBeD`BM|@b@r@lEj@zGtCxCm@fEsB`EnBhDL\\`BeBzE@bAdEhFjAXvH_DtAsCV}BQu@i@QcDpCuA[?aC|BeKByA_@o@uI_Ey@aD^qBdAcA`FeAtLcH|BA`InBjFA",
    "pointCount": 151,
@@ -869,10 +848,14 @@
    "end": [
     34.491197,
     134.30315
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:34",
+   "id": "香川県:29",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "中徳三谷高松線",
@@ -882,8 +865,8 @@
    "curviness": 436.6,
    "flow": 26.4,
    "turnCount": 190,
-   "score": 73.5,
-   "baseScore": 73.5,
+   "score": 86.5,
+   "baseScore": 86.5,
    "spotCount": 0,
    "polyline": "szuoEqccqXkBoP~@yHd@aLyCyPe@[eBr@MY~@cC_Bi@_BRkAvAgDINk@vA[pAoBr@yCFmDb@{@yAo@EkBfBBn@mAcAwG?mBgAoEf@kD]s@oBuAe@tCyGVk@}BiBsCwA`AgEJgJyCAyCo@_CoCmE}Fu@_CgA{@sEHkEuC_K_CcC_BmFwDN{AjAeLrEwEuAqCH}AaAg@mGgDKIkAoAsAJeBmA}@cCI}CuBoAqB}Bk@QcBq@w@kBAqEtCk@`BN~@v@R|A{@aBlCoEa@gBt@mDTw@vDqBp@oFuA_EU_NoFyNeEuQiB}K_EyC]iEt@oGgBgKhJgCvAiAEeE{BaC_@uI|@wEtD{E~GkK`D{ExCqF~FsC|GyFfBcHr@uBi@kBcCcCsAqIuB}DPwIgCkGqD",
    "pointCount": 106,
@@ -894,35 +877,14 @@
    "end": [
     34.263544,
     134.070178
-   ]
-  },
-  {
-   "id": "香川県:35",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "引田滝宮線",
-   "ref": "102",
-   "highway": "secondary",
-   "lengthKm": 3.4,
-   "curviness": 464.7,
-   "flow": 23.9,
-   "turnCount": 66,
-   "score": 72.8,
-   "baseScore": 72.8,
-   "spotCount": 0,
-   "polyline": "}htoE{eisXhJgGxBaC~@oCJsFr@{Av@[hCPn@gH~BqA~AcDnBqLrAwD|BcD|@aF`BuDrBaAvFx@`DcDbGoC~@cC}BcEj@uA|@c@dBN|CsBn@p@AfDjBp@rGWpAy@tAyDrAMtC{EB_CdAgBiAkB",
-   "pointCount": 37,
-   "start": [
-    34.187829,
-    134.401104
    ],
-   "end": [
-    34.170416,
-    134.421383
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:36",
+   "id": "香川県:30",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "豊島循環線",
@@ -932,8 +894,8 @@
    "curviness": 426.3,
    "flow": 23.6,
    "turnCount": 223,
-   "score": 72,
-   "baseScore": 72,
+   "score": 84.6,
+   "baseScore": 84.6,
    "spotCount": 0,
    "polyline": "udoqEg|mqXu@nHkBdIbC~AnBKvBdAt@|@Z~Bk@t@cDp@aC{B}@OuCdEe@|BrCfCZzBb@XjPK~EjI|@dJo@|AcBlA{MxEy@jBkBa@qAtAkDjAgFV_ApB_Bz@s@~AoBO_@lBfAnEiBlGYzEkBfA_ClFl@jGqAnG|@tC?|AcAjEfB~ExBlCw@jGlA|CrEtBtGvMfQpHbAvAlThAlIkArD}IjBiAlAmBv@QlEbARe@o@eBNoAfAaAxGcClBkBhBLhBxCdAL~As@dDeDbDUhMaF|E[dDoDhBy@|BsNdB_Gq@cC_AiJqGcMOuBm@yAXk@bA|Db@NgBiOZqDgFmHi@yDyHcNgBqEeE{CkBiFaB{@qGcK]sAgB_BgB}KqC{A}ETyB|AaBpCiC|@l@rE[rBx@rGMjHaAhDmArAqAN}D}CoFaAq@LyClD",
    "pointCount": 113,
@@ -944,35 +906,14 @@
    "end": [
     34.486079,
     134.088665
-   ]
-  },
-  {
-   "id": "香川県:37",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "久保谷塩江線",
-   "ref": "154",
-   "highway": "secondary",
-   "lengthKm": 4.05,
-   "curviness": 457.6,
-   "flow": 22.9,
-   "turnCount": 81,
-   "score": 71.6,
-   "baseScore": 71.6,
-   "spotCount": 0,
-   "polyline": "yeioE{qcqXYYuBj@aGaE}A}AiCqGyBeByEcQu@{@C}AoEqCcA{FoGkKw@sFaDsFYkCkDaDDsKkDsHVeEs@_AiCWk@aADyDjA{HoB}FfAwCGkAy@kCoBeCDqGoAcGA{C{DmCiBiCG_Fr@kBgCmJ",
-   "pointCount": 38,
-   "start": [
-    34.131013,
-    134.044625
    ],
-   "end": [
-    34.145859,
-    134.079386
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:38",
+   "id": "香川県:31",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "津田川島線",
@@ -982,8 +923,8 @@
    "curviness": 453.4,
    "flow": 23.3,
    "turnCount": 168,
-   "score": 71.4,
-   "baseScore": 71.4,
+   "score": 84,
+   "baseScore": 84,
    "spotCount": 0,
    "polyline": "k{apEmnkrXdJ|FzIkBxCcBdOxE~HY|FgF`BYnG~BnChBxBiAvDPtBkAzD{@vDZlCbCdBg@rBgBtGhAdFuDjGjArDgCfLm@nHkE|GFhAyBVkE{@kITu@d@LbBdMnAGJaA}AeECoB`C_DtCoA|@mAYa@{AVmAm@`AwGIw@}@@wAfDm@AOi@`BcDrBaAxC@~DlCfBVl@]Au@i@Y{APQiAn@a@jBLjDpCdHrCtG|EjARxDyClFgChFCnBwEbFy@zDgEhAWv@|@UvByEvGFbAfAP`OcQ~G{CbGcF~@FTlA_CbBQv@vBfFt@`M",
    "pointCount": 84,
@@ -994,10 +935,14 @@
    "end": [
     34.209147,
     134.256771
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:39",
+   "id": "香川県:32",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "広島循環線",
@@ -1007,8 +952,8 @@
    "curviness": 405.5,
    "flow": 24,
    "turnCount": 228,
-   "score": 71.1,
-   "baseScore": 71.1,
+   "score": 83.6,
+   "baseScore": 83.6,
    "spotCount": 0,
    "polyline": "}yvpE{lcoXgJ|BaIfDuIdGiExA_A~@yWtMsDI}F`AeFxCeCR]UEmAgCXmCaA?o@dAmAOm@sFCoBlDkC`@mHbDErNyFnE}@dCeBn@MvCa@v@DvBpApCBbAsAjAo@hCVhEnAl@xCAj@dBpHhDlBiBbACxAVzC`CjCBbCm@tIvAvCpGzBjIVdJd@b@nAArHlEVrCxAp@`EbEn@_CjAq@dFnAzOKdPdBdExBnEdArB~DdEvAWfAeFdCCl@xH^fD|Cd@GtAiDlD}DvEiCg@eBvEuF|A}D`DkEU{BwBaFxCiMhB_ExIcGlCsCdFcAtAoAh@eCcAaFbB}Iw@sAcDiAaBqBGiNp@aE_@gIu@[aDdAgEDiCjC}N{@aMsFmEkG}Aa@cA}AmC[uBoEm@kCw@oGIiGv@{KxKuGVwB{A}AKy@?qAb@u@CsDsDiAcCcCmCoEgDmBaCiCkDo@",
    "pointCount": 121,
@@ -1019,10 +964,44 @@
    "end": [
     34.367162,
     133.726076
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:40",
+   "id": "香川県:33",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "高松牟礼線",
+   "ref": "36;155",
+   "highway": "primary",
+   "lengthKm": 15.13,
+   "curviness": 347.7,
+   "flow": 36.5,
+   "turnCount": 144,
+   "score": 82.1,
+   "baseScore": 83.5,
+   "spotCount": 2,
+   "polyline": "knxpEkprqXu@d@sAEaPoFoCgCsDeHkBaJuJeJ{EiBgBOqIfAaPoDsF[cOnE}JjFyDM}Bx@mEoB{CHqBuCoEuL_DcGiCqC}BH}@cAb@kE`BiCeAeIf@gBjAq@`ENfA}A_@{DTyJr@cGk@eC`DeAnBuJpEkHlCqAr@cAbCmHGeHjLaUdA_E?mD`B{ChBqJpFaF|Ek@`@{@d@gGbDrAzBiAt@}A|By@\\_AnAo@fBhAd@`Bd@R|Aw@f@mDrAkDh@g@lCG~@nBlD|BPhK^fAp@CrBeCjCh@`Ck@TaBxBmAHcCjAwANqC~@K\\`CzAdC^hCn@\\|B[d@\\z@nGnAtBvCkBZoAf@KxF`ErBF~Ao@lBmEnAOPr@o@pEpB`Ab@jDp@`AzBf@rA`CnE_Ex@\\AlB_BhCx@jEr@|@lAW|@wCfB]xB}EjHaCxGu@pEd@|EjBzBChQ{DjBoDz@i@tDlDhCgApFPjBxDrLhClB{AhDgAjCHpBpBfBh@lBlJpBbENjFf@pArGvKxAjAnB\\~Ba@nGgDrJcJtJ}Gf@gAZyEfDu@fAb@",
+   "pointCount": 146,
+   "start": [
+    34.37302,
+    134.12118
+   ],
+   "end": [
+    34.335,
+    134.15547
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "香川県:34",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "鴨川停車場五色台線",
@@ -1032,8 +1011,8 @@
    "curviness": 379.6,
    "flow": 23.9,
    "turnCount": 262,
-   "score": 69.6,
-   "baseScore": 69.6,
+   "score": 81.9,
+   "baseScore": 81.9,
    "spotCount": 0,
    "polyline": "oeqpEcuhpXg@m`@qCkCkAYqDByDpA{ABgBmAsA{B_@wKp@_DuAeEp@_DB}D`C}D~H_CtJgQJ`@kCtEcDdL}E~EOnClAlFnZwDVqAmBaAiGxA{Gn@]YXa@tBDlDu@tIqHdDMtDlBz@CbDkBbAcElEmCEk@m@KmCnBkIjCqJw@cAk@NYzB`@tBUpHuCtAaBzC}IzEaRtC}SAwDeAeF^kEo@qDzCcBpGmArEd@zDcFTyHwFmKeDqITa@fBQVk@RcGaAiAH_AlHcIrEoAfAeBTsJe@@i@`Bu@f@{CWqAsKB}@tBsF~BsCe@WuGVoExF{@FcVwHkHcFmFZmGkBoC{E{@gFe@cK{AkBsFj@sA_AyF]mDnAyHRsGiCyDL_Jw@g@aBIuB\\a@~AAN_@eDmAG_@~HmA`AoCw@sBkEk@_DFy@d@QxB}AxCu@rEaGdA}G~HyK~@uH|AiNd@{@^w@bBAw@tA_CtPqFc@s@kB\\qLBuBmALsApCyArJiSGaEiBmDm@fE",
    "pointCount": 138,
@@ -1044,35 +1023,14 @@
    "end": [
     34.35524,
     133.965173
-   ]
-  },
-  {
-   "id": "香川県:41",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "瀬戸大橋通り",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.2,
-   "curviness": 343.9,
-   "flow": 35.5,
-   "turnCount": 31,
-   "score": 68.6,
-   "baseScore": 68.6,
-   "spotCount": 0,
-   "polyline": "{kspEccmqXc@n{@u@fRbCtYJjIRHSIKkIwBuPYqGL_J`AaMF}`@",
-   "pointCount": 13,
-   "start": [
-    34.347016,
-    134.093463
    ],
-   "end": [
-    34.347101,
-    134.090068
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:42",
+   "id": "香川県:35",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "東谷岩崎線",
@@ -1082,8 +1040,8 @@
    "curviness": 423.9,
    "flow": 21.2,
    "turnCount": 84,
-   "score": 68,
-   "baseScore": 68,
+   "score": 79.9,
+   "baseScore": 79.9,
    "spotCount": 0,
    "polyline": "_pwoEc{fqXo@~Bt@zLwClFE`Ab@`A]dAsA`@_DeAoEV{CvF[lG{DvEaJiC}@r@FnB_@p@iEqAyABwAfB_@vBaA~AsCIuA\\_C]eFfTuGtAqCjCwBpEyIpGuAvC{ExDoClEg@xFaDxFcCbBoBrCo@`IqGzE",
    "pointCount": 39,
@@ -1094,10 +1052,14 @@
    "end": [
     34.227259,
     134.035131
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:43",
+   "id": "香川県:36",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "志度山川線",
@@ -1107,8 +1069,8 @@
    "curviness": 402.6,
    "flow": 23.2,
    "turnCount": 127,
-   "score": 67.8,
-   "baseScore": 67.8,
+   "score": 79.7,
+   "baseScore": 79.7,
    "spotCount": 0,
    "polyline": "q`}oEij|qXfE?~KgCnIbDzSi@pRgHPsBkCaUd@aMsAsJJiInBcCpFeDzB^fAgApCA`AsChDBjFoAlDpClEw@|BbAxCq@dBx@hEjFQrEnDt@KlGhDtEl@IDgDxAi@hAvAzCl@tAdAzFuAvCv@zBtBpBeA`AjAV|CdBIlAfBlDNnGlExFz@pDlHlEfAhBc@|GuHtCKzFhDvFh@lLvFtCxDt@lHv@xAvC`BpFh@",
    "pointCount": 59,
@@ -1119,10 +1081,14 @@
    "end": [
     34.187002,
     134.170857
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:44",
+   "id": "香川県:37",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "志度小田津田線",
@@ -1132,8 +1098,8 @@
    "curviness": 370.7,
    "flow": 22.9,
    "turnCount": 215,
-   "score": 67.8,
-   "baseScore": 67.8,
+   "score": 79.7,
+   "baseScore": 79.7,
    "spotCount": 0,
    "polyline": "{_ppEao`rXuAmMJwIu@yEDqAh@yArHmHxBoK`BuOwC_]yDgQuSoR{HeQ}BeCwEgCi@_AF_CvCcIGiAgCsGb@_DxBiD]qJ}AoE}DsBcAuAi@sBG_EdAaDa@oEr@qJcAeNk@{BiCyCaCX_Cs@Ym@XgCrBk@bBiBd@wIbE}GYcE`@eIi@iEeBuEKaBd@gDzCyAp@cA]iIzBeEOwAqBqDUkFtAcB`@iBrCDhEkBNcAqBiFpCsBnCCb@c@e@cDsBuFb@wBbCiBjAD~EjFbJl@tD`DjAXpKaBz@iCdCd@rBqBv@TdAtBt@J`FoJhE@vFt@jBe@fAT~BbFRfCtDpGrHjDzCb@ZpH|@@vAwDbBgBz@hB|Bp@BbHcCl@Ob@hBhE{@zBz@bCo@vEl@r@tASnD`AjFzFbGhDxFvJ`CbJzCExL|EdU_BtFmA",
    "pointCount": 114,
@@ -1144,10 +1110,14 @@
    "end": [
     34.300529,
     134.246
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:45",
+   "id": "香川県:38",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "国道436号",
@@ -1157,8 +1127,8 @@
    "curviness": 420.3,
    "flow": 23.8,
    "turnCount": 172,
-   "score": 66.4,
-   "baseScore": 66.4,
+   "score": 78.4,
+   "baseScore": 78.4,
    "spotCount": 0,
    "polyline": "azmqEib}rXsDwCiNiHq@eAeAuEi@HkAlC_Ci@cRxC_BwDkAyGRcDaAiGRkAfBmAVwBuA}GaGuHcBOkCxB_Cs@g@}@kAHcB{@mBdBqJi@cDpCy@vEyAfD}CxA_D@wFy@iIcCoGkDcDc@wFkF{@_DeFeGu@MgCl@{AaDsImB{J_EmHDcHaAeKO_IbAuDfBkIjBcC@aCoAeAqFoFcFaEAyDsA}Gu@mDD_Bh@w@m@QaBqAkCUd@`AfB^~De@rD]CwAaEs@k@_Lb@uCZqAtA_AfH{DEoA_A_Cr@j@nCgBfCbA|H~AlG]bAaCh@i@fANzA|AnC]~CkBlBmGn@{@bAgApEeAlBiKjE",
    "pointCount": 91,
@@ -1169,10 +1139,14 @@
    "end": [
     34.542532,
     134.343707
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:46",
+   "id": "香川県:39",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "本島循環線",
@@ -1182,8 +1156,8 @@
    "curviness": 354.2,
    "flow": 21.8,
    "turnCount": 211,
-   "score": 65.7,
-   "baseScore": 65.7,
+   "score": 77.3,
+   "baseScore": 77.3,
    "spotCount": 0,
    "polyline": "sz{pEyzjoXhJxE|@OtAaA|@mE`A{ApM{M`FEdFoEnL}GnIqCnCJhErBpHRzBpA`@MLs@O}Cj@_@x@pCg@bCD`BtD|D|E`BxAy@`FYjAuAr@sHqBcE{EuCMgB`@i@xDg@xEgBr@{@NoAi@kAqBcAyD}DYaCgB{Cf@aFcBqEwC_CwMwGiJwBmE{EyCmH{A_G{DiGaEeDk@iLqCYwF\\{C{@cDgEqDqAgFqEmBeDqAqGoFeD_CiFeEsSmAe@oCjAgCEcCsAiDbA}DQ}AdCbC~EUdEYlAqBfAEdEiBvBm@jBqBx@Qp@f@nBMxF_@nAmBz@cFFiAtEGfATXfDGp@b@BlAqCzFeHnBI^NdAlE|A~BxDxCdClGxAvLnJTtAq@xDTtCiBfBu@pCPpArAjBzC|@vDyAdCPhCnB|FxIbBlIi@jN{AvFUvEs@zCeHhLgB~JnEBtF|A",
    "pointCount": 120,
@@ -1194,10 +1168,14 @@
    "end": [
     34.390336,
     133.754213
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:47",
+   "id": "香川県:40",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "三都港平木線",
@@ -1207,8 +1185,8 @@
    "curviness": 352.7,
    "flow": 22,
    "turnCount": 163,
-   "score": 65.5,
-   "baseScore": 65.5,
+   "score": 77,
+   "baseScore": 77,
    "spotCount": 0,
    "polyline": "eqmqEepgrXpCiGv@aEtCoFzJkHpNtAvGSnHrDhABbBsFeBuF?_ExCqFjC}CfDsBvFmAfDsBjRjCtAmCoAuCt@sC|HqGtFmBvNc@`FjLrFhGdAvF`Bl@dE}@xBiCjH{ElBmQMeLmDqLH_FeAeF\\OzAb@rGeEtBLxC}BfH{AnALlA~AlBRt@tCvBZv@xARg@aBuD\\gCp@lBlGjAxC]~LhBtJmFnCGnDgA|GT`CfDdEj@lAzEbDjDfH|ClC~B`JlCnK~@Zx@WdAaEbFwBt@i@z@?fHeDvJiChL~ApApDpI\\hDe@xD",
    "pointCount": 79,
@@ -1219,10 +1197,14 @@
    "end": [
     34.429379,
     134.234316
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:48",
+   "id": "香川県:41",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "田浦坂手港線",
@@ -1232,8 +1214,8 @@
    "curviness": 370.8,
    "flow": 21.4,
    "turnCount": 108,
-   "score": 65.4,
-   "baseScore": 65.4,
+   "score": 76.8,
+   "baseScore": 76.8,
    "spotCount": 0,
    "polyline": "}`gqE}yqrXrAaBb@cC|AwB`EuCHeC{@iCeGaG}LkCiDXgBzB{ARqDxBkBdGoHvAqJr@iG~AuCG}Cp@qHoEUcHc@aCw@eAh@{Cg@wDcEwDWmA^{CjBKr@w@AuE|ByH[oCl@sBRsGk@o@wBZaBU_A[_@y@|A}Bb@_ElBiBtBsEbD}DlAcKcFkKiEqDm@gBoF_Gc@qBl@aF`HcHjFqJf@mG|EuF?qEyC}F",
    "pointCount": 58,
@@ -1244,10 +1226,15 @@
    "end": [
     34.459485,
     134.317365
+   ],
+   "tags": [
+    "scenic",
+    "flowing",
+    "deadend"
    ]
   },
   {
-   "id": "香川県:49",
+   "id": "香川県:42",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "土庄神懸線",
@@ -1257,8 +1244,8 @@
    "curviness": 347.2,
    "flow": 23.5,
    "turnCount": 149,
-   "score": 65,
-   "baseScore": 65,
+   "score": 76.5,
+   "baseScore": 76.5,
    "spotCount": 0,
    "polyline": "}stqEqvtrXuCxA|B\\uAlAYpAtB|GmAnEuBtC@nC^XHgDhDk@Cd@wAfAr@pE{@`FoD~@a@pBjAfEjAv@lHhAlKO|B`CFr@cDhK}A~I_BtBKnBz@zDpEnE`DfHqC|EkDpCwIvKaArB_@lDyBvBeCjJSrGwAfHt@bMk@vFaAlAfEpDnD|A`BnBpA|GNfHdBjGp@lFtBtEjB|IVj[dAfGHrFoCbJy@bGeFfA}@jA_AzEg@|Kb@zJxAjLPYi@wDI{Hb@}KZELfNrBnNXpFi@|EJhIf@nDExTaF|PY`Cp@pBdDtBrDpQ`B~C",
    "pointCount": 81,
@@ -1269,10 +1256,14 @@
    "end": [
     34.51439,
     134.217632
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:50",
+   "id": "香川県:43",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "国分寺中通線",
@@ -1282,8 +1273,8 @@
    "curviness": 348.5,
    "flow": 22.2,
    "turnCount": 253,
-   "score": 64.6,
-   "baseScore": 64.6,
+   "score": 76.1,
+   "baseScore": 76.1,
    "spotCount": 0,
    "polyline": "ma`pE}axpXfT@zGxFpDhAxIb@lBj@~A|AhAfExF~AnBJlIiChLqIfGaA`KeEvMwGlDgDxHkAnMwGpBg@fMl@jD}CzBh@vA]tAyB~G`CfBLrJYfFqBjI`A~FyBnAzALfJpAjBrCFtOiG|FcAjEUfEl@hFuGxB_BbAcC~FMnD_JpEu@rDgE`ASzMl@vL`GpKjDdGvFvAxDdKnD|JfLnFfChMlI|@zAhA~HbL|IxCpHxK`BjAp@t@fB\\vGzAlGpA^hIoEzBL|DbErAzI|G`LvK`DfCdC`A`CxEbApCdG`EDjD`BzCh@zG|CfB`CxEfBjESbJfBrCkBxBc@`Dt@t@vB]bDWIE{BoBaBgCpA|BBj@lDnAlCdCtCvALZdCfAeBbHt@xBG`Bu@bEwDxCk@rApAWz@oBxAxAfCP]u@aA?m@hCw@l@eAEaBo@eAX_@tChClF_B`@`F`@N|EgDbFYpCRtC}CnEY~BiCrCeAzAJ|CjC",
    "pointCount": 129,
@@ -1294,10 +1285,14 @@
    "end": [
     34.136116,
     133.964828
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:51",
+   "id": "香川県:44",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "上庄池田線",
@@ -1307,8 +1302,8 @@
    "curviness": 338.2,
    "flow": 22.7,
    "turnCount": 97,
-   "score": 64.5,
-   "baseScore": 64.5,
+   "score": 75.8,
+   "baseScore": 75.8,
    "spotCount": 0,
    "polyline": "qvpqE{pcrXDy@s@mBiCeDeEwOuA_Bi@cJl@eFMoB}FmFyG{CmD}LwT{_@@}FvLmPxBiJMwDhAwFtCwCNkW_CsCSoA`AkLxByHfEkFbEnBfEy@xDj@tCcAhCx@lCyAz@sCtAOdAz@p@rGfCjD]lBb@Rl@sA[iCzBNxD}BxBa@~@aFtA]~M|PzM`F~ElE",
    "pointCount": 48,
@@ -1319,10 +1314,13 @@
    "end": [
     34.485485,
     134.240516
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:52",
+   "id": "香川県:45",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "造田滝宮線",
@@ -1332,8 +1330,8 @@
    "curviness": 295,
    "flow": 20.7,
    "turnCount": 133,
-   "score": 63.5,
-   "baseScore": 60.6,
+   "score": 74,
+   "baseScore": 71.1,
    "spotCount": 1,
    "polyline": "qgpoEg~lpXmHpF?xGo@rB_@_@?kFiAa@aCb@iB_Io@g@gAt@ZrCmAbA?`Bw@`CaCn@iQWqM}G{PgEaCOuItAoKfI_IvBkAhAsCpFcDtM}F|M}IhJMvBlBfSaCjKqF`EaEjGqJhHwSxJkFn@}B}AcALkBtAyAlDS[`@mCKiAwDqBgDDyCaAqAqBaD}IEoEm@aEb@kNo@iAyBi@a@o@i@{HrBgIAgAq@wAuE}DmDe@}DoCcM_EwDaDmCk@oHMkGeAe@}@FuBq@{@oF_@qJ}CoBuDoEgD",
    "pointCount": 73,
@@ -1344,35 +1342,14 @@
    "end": [
     34.221487,
     133.927111
-   ]
-  },
-  {
-   "id": "香川県:53",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "田面富田西線",
-   "ref": "264",
-   "highway": "secondary",
-   "lengthKm": 6.04,
-   "curviness": 324.6,
-   "flow": 22.5,
-   "turnCount": 87,
-   "score": 63.5,
-   "baseScore": 63.5,
-   "spotCount": 0,
-   "polyline": "o`zoEugerXIzB}D_CsCr@k@g@eARiBa@eBT_Ar@}BUuFV{ASaBkAyGd@wEM}F}BuFl@mHAqBa@oBt@oBWyCl@c@gAoCAqSsGwFAcHaDuDaAqCIkEz@eBzEaA`AsFi@{GpAgDbBuEsAkN~AmG|GGhAtAxEWvAqA|@cABsE_BaB@aNlGyGa@}NxCeVcAaMH",
-   "pointCount": 50,
-   "start": [
-    34.217204,
-    134.217066
    ],
-   "end": [
-    34.265755,
-    134.212894
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:54",
+   "id": "香川県:46",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "枌所西造田線",
@@ -1382,8 +1359,8 @@
    "curviness": 330.1,
    "flow": 21.6,
    "turnCount": 77,
-   "score": 62.7,
-   "baseScore": 62.7,
+   "score": 73.6,
+   "baseScore": 73.6,
    "spotCount": 0,
    "polyline": "evpoEk{upXx@bEtE~JxDxA|En@f@p@RpIgFjH@n@bCUrCnFfCvAtMzMfEvB`E`FhCjG|BlB`@hCe@dIy@hEeBzC_BrK}BrBqDdGeArEuA~AoAjDiChCc@zFqAvEIdDyAdEa@rFqBpDdAvBJnAoE~RiElAk@xDx@lCKlBaCnAi@|@V`F]bF",
    "pointCount": 45,
@@ -1394,10 +1371,13 @@
    "end": [
     34.168239,
     133.932519
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:55",
+   "id": "香川県:47",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "千疋西分線",
@@ -1407,8 +1387,8 @@
    "curviness": 351.3,
    "flow": 20.7,
    "turnCount": 54,
-   "score": 62.5,
-   "baseScore": 62.5,
+   "score": 73.4,
+   "baseScore": 73.4,
    "spotCount": 0,
    "polyline": "m{yoE{ktpXpApCL|BzApAIn@yAj@LhAfF~E~Bl@`@lDn@rA|FBlGbEjJfCfCKxImCrEr@hDm@jIHjF~BlFF|CfCpEYjHfAnC~AfE~@nA`ARtF|@|Ds@~F",
    "pointCount": 30,
@@ -1419,35 +1399,13 @@
    "end": [
     34.195271,
     133.95445
-   ]
-  },
-  {
-   "id": "香川県:56",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "大屋冨築港宇多津線",
-   "ref": "186",
-   "highway": "secondary",
-   "lengthKm": 4.21,
-   "curviness": 230.2,
-   "flow": 32.3,
-   "turnCount": 30,
-   "score": 61.8,
-   "baseScore": 61.8,
-   "spotCount": 0,
-   "polyline": "{mnpE_n}oXb@hHeSPfFh~@x@hF]hDElXcAzCbBdB|RhIdDjF~KtKrDhGzAlEzGgH`HaC`KyJ\\aBa@mGeET",
-   "pointCount": 20,
-   "start": [
-    34.321737,
-    133.849437
    ],
-   "end": [
-    34.31211,
-    133.828879
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:57",
+   "id": "香川県:48",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "大串志度線",
@@ -1457,8 +1415,8 @@
    "curviness": 239.7,
    "flow": 26.3,
    "turnCount": 33,
-   "score": 60.7,
-   "baseScore": 60.7,
+   "score": 71.4,
+   "baseScore": 71.4,
    "spotCount": 0,
    "polyline": "ywqpEe`brXdAfEBxDdDrAbBtFHlBrB\\rB`CxAA\\\\lCfNj@p@hIgBzPzBpAvL~H|NrBrHxAnJ`HtTvEb\\l@tQlKz@",
    "pointCount": 22,
@@ -1469,35 +1427,13 @@
    "end": [
     34.321945,
     134.1731
-   ]
-  },
-  {
-   "id": "香川県:58",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "塩江香川高松自転車道線",
-   "ref": "269",
-   "highway": "secondary",
-   "lengthKm": 3.91,
-   "curviness": 278.1,
-   "flow": 23.1,
-   "turnCount": 47,
-   "score": 60.4,
-   "baseScore": 60.4,
-   "spotCount": 0,
-   "polyline": "k|uoEkkcqXaCv@y@jAkH|DgHnCmEd@oDe@g@xDeFxFwDrAwChD_@`BHdFc@dEgInD}D\\sGW_HbAuOcAgDr@iFfCmDTyGcBq`@gSM^cD_@_F^qBr@uAnA",
-   "pointCount": 29,
-   "start": [
-    34.196056,
-    134.04358
    ],
-   "end": [
-    34.225955,
-    134.036126
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:59",
+   "id": "香川県:49",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "五色台線",
@@ -1507,8 +1443,8 @@
    "curviness": 308,
    "flow": 19.3,
    "turnCount": 140,
-   "score": 60.1,
-   "baseScore": 60.1,
+   "score": 70.5,
+   "baseScore": 70.5,
    "spotCount": 0,
    "polyline": "sdqpE}hrpX{@nB?bAlAbGvB`EFhB{IdOiBlLuCtCkD~@eIVmOjHaLfB_DEoDuBuDw@cB`@]lBfBpKq@rJtBtIq@rB}Ed@qF`D{Cd@iHl@eFk@uFlFwDtA{EPy@_@_AaDk@i@aEb@_Bw@SkBN}J]gBu@{@iFs@wD{C{Ex@}D{@aAx@qBzGyDdDK~@n@~Di@lAkM`GuQ`@cL`JyESkBh@qF~EwFtBcDpIiFbDOr@dBrDg@zAu@CkE_D_BO[Xt@tAUbAeC}B}@OaLhBiJPkHxAoHWsAw@",
    "pointCount": 74,
@@ -1519,35 +1455,14 @@
    "end": [
     34.388759,
     133.927859
-   ]
-  },
-  {
-   "id": "香川県:60",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "瀬戸大橋通り",
-   "ref": "173",
-   "highway": "tertiary",
-   "lengthKm": 7.35,
-   "curviness": 186.1,
-   "flow": 32.6,
-   "turnCount": 42,
-   "score": 59.8,
-   "baseScore": 59.8,
-   "spotCount": 0,
-   "polyline": "{kspEojhqXTAiCrbA}BdZPbBk@lCo@`VA`Q_AdGEzEl@jJkD`LbEbSfDtTJ|a@s@|`@h@wYOqi@eD}S_EoQdE}Mk@oLn@wJO_CpAmg@",
-   "pointCount": 25,
-   "start": [
-    34.347024,
-    134.06904
    ],
-   "end": [
-    34.348287,
-    134.052996
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:61",
+   "id": "香川県:50",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "大浜仁尾線",
@@ -1557,8 +1472,8 @@
    "curviness": 299.5,
    "flow": 19.9,
    "turnCount": 109,
-   "score": 59.7,
-   "baseScore": 59.7,
+   "score": 70.1,
+   "baseScore": 70.1,
    "spotCount": 0,
    "polyline": "eb~oEwpknXFgAbBmB`DaIn@{EfCsAtFeHrAgEEcBaDaIO{B^sAfCwC^yFbAoDbDcDrF_DhRqHrAmDbHsEf@cHlAsAbE}@fExCdKf@xBIrAy@xBeG{@eFaAk@{BfAcCkCI{A\\sAhGmJfB_EXaOtHwYbAgAvBK|OpJ~@Lx@]hD_QtBgFjDkE@aBcAyDCeG\\e@nCGr@w@NkEjAuEx@[lCXxC{CEkAeCwHBoChAaArPqA",
    "pointCount": 62,
@@ -1569,10 +1484,14 @@
    "end": [
     34.206644,
     133.639835
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:62",
+   "id": "香川県:51",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "観音寺善通寺線",
@@ -1582,8 +1501,8 @@
    "curviness": 331.1,
    "flow": 19.8,
    "turnCount": 65,
-   "score": 59.3,
-   "baseScore": 59.3,
+   "score": 69.7,
+   "baseScore": 69.7,
    "spotCount": 0,
    "polyline": "}|uoEi{goXwC{KqGgJUiE_CoBRyCSeAqBsAw@mEmDcBkAwAkB{KiAu@oEr@qAQOoB|A}Dy@_ImNoNuHiU{CyCXwESmAyHeEyBoFaDqAcD@_Ag@w@}KuNuM",
    "pointCount": 30,
@@ -1594,10 +1513,14 @@
    "end": [
     34.215084,
     133.768641
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:63",
+   "id": "香川県:52",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "中讃南部広域農道",
@@ -1607,8 +1530,8 @@
    "curviness": 281,
    "flow": 19.8,
    "turnCount": 96,
-   "score": 58.4,
-   "baseScore": 58.4,
+   "score": 68.5,
+   "baseScore": 68.5,
    "spotCount": 0,
    "polyline": "_hsoEwdspXLpAk@aHeAiA{FmB_K`AmAg@oBaDiAc@wKlBkIj@}G~CkDn@gLm@aQoE{MZqL}@}@_@gCuDoIkAsE{CmF_HeBsGkAsAgCIkI~DaG?yBo@aA_BYsFzBgG@{AqAaGgBkEfBwD\\oImAgAsEvAgBu@{@gUhE{@tCF~A{BdDaK\\}FhAo@rCA|BwCBsAoC{ScEmFe@wB",
    "pointCount": 52,
@@ -1619,10 +1542,14 @@
    "end": [
     34.212428,
     133.990632
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:64",
+   "id": "香川県:53",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "屋形崎小江渕崎線",
@@ -1632,8 +1559,8 @@
    "curviness": 270.1,
    "flow": 19.6,
    "turnCount": 166,
-   "score": 58.4,
-   "baseScore": 58.4,
+   "score": 68.5,
+   "baseScore": 68.5,
    "spotCount": 0,
    "polyline": "_svqEugfrXn@j@jC@hDhAeAbEdA~KpDpEjAnCnB|AjBvExApB|@dHg@~CBrBdGrJpBvFG~FxEh[rCzBoChIlDrM_@xFxAfEpDK~@fAWrBeEbEgAlFLpFkA`MDxAh@\\rDDlFYnAtBvDrLk@lFAlEeAnJsA~G_BhEeIpMkRlSiDfCm@jAA`BlDxDh@zAoBvTN|@t@JdBcAl@FfCvFfDnCzBl@nAM~CsCzIaFfBSjFH`KpFdKeAjOt@xEGbLmBzCjAvAmCv@_@zAzAnBxFzFm@`@kAk@oF\\gBvDEfEyEpGGfHkGdJwFl@aAfFoVjJiMnGyEjCyD|BiLx@kNqD}Mx@aN",
    "pointCount": 89,
@@ -1644,60 +1571,14 @@
    "end": [
     34.488624,
     134.189541
-   ]
-  },
-  {
-   "id": "香川県:65",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松志度線",
-   "ref": "272",
-   "highway": "secondary",
-   "lengthKm": 3.03,
-   "curviness": 137.1,
-   "flow": 51.9,
-   "turnCount": 8,
-   "score": 58.3,
-   "baseScore": 55.4,
-   "spotCount": 1,
-   "polyline": "yonpEoghqXw@jKrBwt@x@sp@{@ySyL_aA",
-   "pointCount": 6,
-   "start": [
-    34.322052,
-    134.068563
    ],
-   "end": [
-    34.323973,
-    134.097009
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:66",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "中央通り",
-   "ref": "30;436",
-   "highway": "trunk",
-   "lengthKm": 4.78,
-   "curviness": 241.2,
-   "flow": 46.1,
-   "turnCount": 25,
-   "score": 57.7,
-   "baseScore": 57.7,
-   "spotCount": 0,
-   "polyline": "slrpEyfdqXdJ|@V^dm@xFVYtNF~TxJj@GTh@cCgBsPwGkNFgAKK_@}l@uF_@T}J}AOXk{@iF]a@",
-   "pointCount": 20,
-   "start": [
-    34.342024,
-    134.04797
-   ],
-   "end": [
-    34.351911,
-    134.049184
-   ]
-  },
-  {
-   "id": "香川県:67",
+   "id": "香川県:54",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "土庄福田線",
@@ -1707,8 +1588,8 @@
    "curviness": 269.5,
    "flow": 18.7,
    "turnCount": 371,
-   "score": 57.1,
-   "baseScore": 57.1,
+   "score": 67.2,
+   "baseScore": 67.2,
    "spotCount": 0,
    "polyline": "msnqEsm_rXiDoEcGoFZoE~A}Dl@uHcPcR{GwSuEcKu@kIkByEiH{EuD}HgC}CgBuF{D{DmC}G}GcEF_FSe@m@G}DbBgBoGqEe@uOoGwJBaHfAsCCsAm@_DsGeBcAaDPeLg@yJsCuGzAqGhC}BFwGsFiK?mBu@{AoBi@cC`B}B\\aDY{@wD{Cy@MgIvAkBa@wCaJJwG[}C~AeIjCL`AcATeMiDiJ{DgFeBmJ}@oTaCuGwA_BuP_JsEuAmI{FuAmCeDaDePo[cAeDiAoKkCyDsDuCI}@pA{DcAsE_Ay@qBBmB}@}BKkCyA{@iAi@gCoDwD{@oBu@gHHuK}DwLjA{Ig@}FFaCjB}I|BaCXeAm@}Sp@mBdAqMx@qDy@cLr@iLe@_BgBiBc@gFfA}IqA{MCmDfBqCBeDi@mEEaGsBgKEcF{AwJ`@kQrA}Mc@eC_AcB}Bh@oBk@eAuC_@_Dc@c@qBVcBxDsF~@{@e@c@gC_AoA{H_AyAgAqSe^gJ}e@_G_JcBgJmFmJS{B`@qGiAqCgAwHgCkEj@y@xBy@zFF~@sAF_B_DyJh@}A`Cy@bCqE`@mN_@mBoDyCo@uHBaGoCgH_CeL_C{GM}BpCeLtFx@h@p@FdAqBzIt@xB?dD|@nChC|AzD}A~F\\pCdJlAtA`AI|CuCrAeLnBqJq@uDkCaCc@iAUuI\\aAx@OlPxIfBfCpCf@hCzL|BlCp@DpJeErE]`Ah@vAxC|C|C~@lHxA|BtCn@xKuA",
    "pointCount": 195,
@@ -1719,10 +1600,14 @@
    "end": [
     34.542532,
     134.343707
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:68",
+   "id": "香川県:55",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "千疋西分線",
@@ -1732,8 +1617,8 @@
    "curviness": 268,
    "flow": 20.2,
    "turnCount": 45,
-   "score": 56.9,
-   "baseScore": 56.9,
+   "score": 66.8,
+   "baseScore": 66.8,
    "spotCount": 0,
    "polyline": "ej~oEalwpXfAbGfIvIvAdCzCtBhBtGjDpCZjFpCzDpAX~Te@xIzC`F_BvCR~By@pC^r@n@~@bDlClAhAfJfD`LnEvFvB|AfFQhK}Dx@jF",
    "pointCount": 26,
@@ -1744,35 +1629,14 @@
    "end": [
     34.217268,
     133.96633
-   ]
-  },
-  {
-   "id": "香川県:69",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松北バイパス",
-   "ref": "11",
-   "highway": "trunk",
-   "lengthKm": 11.22,
-   "curviness": 161.8,
-   "flow": 29.8,
-   "turnCount": 61,
-   "score": 56.8,
-   "baseScore": 53.9,
-   "spotCount": 1,
-   "polyline": "avrpEwnsqXzAlG`EjGvB~FxFfYv@vHpCtuBu@fhBVhHvDtZVfGg@jOaCjJyArNsFdgAkFdj@tGwu@nFcfAzDiNZeJ_@aPcDcWMq|@",
-   "pointCount": 23,
-   "start": [
-    34.343526,
-    134.126042
    ],
-   "end": [
-    34.339432,
-    134.088661
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:70",
+   "id": "香川県:56",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "府中造田線",
@@ -1782,8 +1646,8 @@
    "curviness": 259.9,
    "flow": 20.2,
    "turnCount": 129,
-   "score": 56.5,
-   "baseScore": 56.5,
+   "score": 66.4,
+   "baseScore": 66.4,
    "spotCount": 0,
    "polyline": "gc{oE_pppXrFU~FyCpCk@~U`@rDiDbOiHlGSrDwDdDrAdB@zKm@jKmCdCn@bJbNpD`BhDMz@_AgA}B\\aA`DFt@kBvFkEnBj@d@QGw@wAgAWyA`@_@tAR`Ac@~BcHrFg@`Av@lAdDpEbBdGAzCwBbG~@`BoCfQkNxEeLnNaIzEs@z@~@v@|F|GjJz@bDl@|GjAnC\\nChDlGMlIn@bHa@bFrApFxAnLJ`Fa@vHT`AtA`AfHmA|AFz@r@lGnOrDzBzElJbQrSj@rG`Kf^tIhGdJlC",
    "pointCount": 72,
@@ -1794,35 +1658,14 @@
    "end": [
     34.16259,
     133.924102
-   ]
-  },
-  {
-   "id": "香川県:71",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "坂出丸亀バイパス",
-   "ref": "11",
-   "highway": "trunk",
-   "lengthKm": 3.17,
-   "curviness": 229.7,
-   "flow": 29.2,
-   "turnCount": 25,
-   "score": 56.4,
-   "baseScore": 56.4,
-   "spotCount": 0,
-   "polyline": "webpEajpoXl@bF|H`RjEdFpLdJaO}KeFmHsEaNQkCcAqBPe@iB{I}BwJgA_CuD}QaRwa@",
-   "pointCount": 16,
-   "start": [
-    34.259003,
-    133.782246
    ],
-   "end": [
-    34.264587,
-    133.79542
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:72",
+   "id": "香川県:57",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "炭所農免農道",
@@ -1832,8 +1675,8 @@
    "curviness": 240.7,
    "flow": 21.1,
    "turnCount": 44,
-   "score": 56.2,
-   "baseScore": 56.2,
+   "score": 66,
+   "baseScore": 66,
    "spotCount": 0,
    "polyline": "{hqoEmbfpXNTi@wAEmU{CwIbCmJDqBYy@}KqCmIcHsJkBgEsIBwD_DuKqOsOmE{A_Nc@_J}I{FgCs@oC@uAvGaKz@iEUmDwDyD",
    "pointCount": 25,
@@ -1844,85 +1687,13 @@
    "end": [
     34.188903,
     133.920999
-   ]
-  },
-  {
-   "id": "香川県:73",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "丸亀詫間豊浜線",
-   "ref": "21",
-   "highway": "primary",
-   "lengthKm": 4.14,
-   "curviness": 161,
-   "flow": 26.7,
-   "turnCount": 25,
-   "score": 54.7,
-   "baseScore": 54.7,
-   "spotCount": 0,
-   "polyline": "eqmoEy{unXrI{EfGy@hAk@bHmNzYmX`PoRrd@fW~BjAj@KxGtMdFdH`G_EnSFGxJeAvOPzH",
-   "pointCount": 17,
-   "start": [
-    34.153308,
-    133.646855
    ],
-   "end": [
-    34.127718,
-    133.644869
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:74",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "綾川国分寺線",
-   "ref": "183",
-   "highway": "secondary",
-   "lengthKm": 4.36,
-   "curviness": 167.4,
-   "flow": 20.8,
-   "turnCount": 35,
-   "score": 54.4,
-   "baseScore": 51.5,
-   "spotCount": 1,
-   "polyline": "o_`pEqnkpXuJsFiX{C]iFg@m@uDm@}@u@cIkRwLjA_GkDeLmDeIkFkB}CgE_LcB{JcHeLIgHgAoK`@wNeQgGmCeG[{Gm@}AuF{F",
-   "pointCount": 24,
-   "start": [
-    34.247756,
-    133.921213
-   ],
-   "end": [
-    34.273052,
-    133.949405
-   ]
-  },
-  {
-   "id": "香川県:75",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松善通寺線",
-   "ref": "33",
-   "highway": "primary",
-   "lengthKm": 7.51,
-   "curviness": 150.7,
-   "flow": 25.7,
-   "turnCount": 44,
-   "score": 54,
-   "baseScore": 54,
-   "spotCount": 0,
-   "polyline": "wtrpEwg|pXqCgNaAwJ]aOJc_@qAuLNeMb@}BhMi\\pFkI|A}DzIun@~Hsp@Q`E}RhzA}@lCwHhMcM|]W`JtAlOc@h_@dAxV",
-   "pointCount": 22,
-   "start": [
-    34.343316,
-    134.007158
-   ],
-   "end": [
-    34.34424,
-    134.010242
-   ]
-  },
-  {
-   "id": "香川県:76",
+   "id": "香川県:58",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "川津丸亀線",
@@ -1932,8 +1703,8 @@
    "curviness": 162,
    "flow": 24.2,
    "turnCount": 24,
-   "score": 53.9,
-   "baseScore": 53.9,
+   "score": 63.3,
+   "baseScore": 63.3,
    "spotCount": 0,
    "polyline": "cygpEegooXaBgCuNmI_CmCiOed@SqCjAoHCgBoH{UgGcMcIcUgFsLi@]cHeSm@YkKqVyDcF",
    "pointCount": 17,
@@ -1944,85 +1715,41 @@
    "end": [
     34.304123,
     133.808509
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:77",
+   "id": "香川県:59",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "川津丸亀線",
-   "ref": "193",
+   "name": "綾川国分寺線",
+   "ref": "183",
    "highway": "secondary",
-   "lengthKm": 3.55,
-   "curviness": 170.5,
-   "flow": 23.3,
-   "turnCount": 26,
-   "score": 53.5,
-   "baseScore": 53.5,
-   "spotCount": 0,
-   "polyline": "czjpEqhuoX~LzXQV`DhIf@LtCrHCj@zHlOvKlZfHhPjCzJgA|LvOfe@pBdC~NpItAlBfAdE",
-   "pointCount": 17,
+   "lengthKm": 4.36,
+   "curviness": 167.4,
+   "flow": 20.8,
+   "turnCount": 35,
+   "score": 63.3,
+   "baseScore": 60.5,
+   "spotCount": 1,
+   "polyline": "o_`pEqnkpXuJsFiX{C]iFg@m@uDm@}@u@cIkRwLjA_GkDeLmDeIkFkB}CgE_LcB{JcHeLIgHgAoK`@wNeQgGmCeG[{Gm@}AuF{F",
+   "pointCount": 24,
    "start": [
-    34.303217,
-    133.80761
+    34.247756,
+    133.921213
    ],
    "end": [
-    34.287293,
-    133.775931
+    34.273052,
+    133.949405
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:78",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "善通寺大野原線",
-   "ref": "24",
-   "highway": "primary",
-   "lengthKm": 6.06,
-   "curviness": 230.3,
-   "flow": 19.7,
-   "turnCount": 71,
-   "score": 53.4,
-   "baseScore": 53.4,
-   "spotCount": 0,
-   "polyline": "{dzoEeynoX`N}HtAE~JfPlMpJ|D`GpKrBzAtD~JzA~@~@xAzEtAV~B_@~HmFx@In@|Ci@dLRfF`@n@fE|AzKgBrBiBrBmEvE_@`C{H~FvBxFEhCgDnA]dc@pElKiCvFA~FgB`DYtI|@~CjCjM`Tp@~H",
-   "pointCount": 38,
-   "start": [
-    34.217903,
-    133.774432
-   ],
-   "end": [
-    34.175718,
-    133.761852
-   ]
-  },
-  {
-   "id": "香川県:79",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "瀬居坂出港線",
-   "ref": "192",
-   "highway": "secondary",
-   "lengthKm": 4.83,
-   "curviness": 94.8,
-   "flow": 41.6,
-   "turnCount": 11,
-   "score": 53.4,
-   "baseScore": 53.4,
-   "spotCount": 0,
-   "polyline": "kwqpEsxzoXdGjv@h_AkLjRiKJ`@_RlKgv@~JsIn@eHax@",
-   "pointCount": 9,
-   "start": [
-    34.338624,
-    133.835783
-   ],
-   "end": [
-    34.338911,
-    133.835838
-   ]
-  },
-  {
-   "id": "香川県:80",
+   "id": "香川県:60",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "国道377号",
@@ -2032,8 +1759,8 @@
    "curviness": 275.8,
    "flow": 19.2,
    "turnCount": 166,
-   "score": 53.3,
-   "baseScore": 53.3,
+   "score": 62.9,
+   "baseScore": 62.9,
    "spotCount": 0,
    "polyline": "yrxoEip{rX?vAv@tB~KpKfDdFtEbC~ExMGjHiCzNc@jPnBdLdFzGr@xCrD~G`ApEkApFp@tFyAdJRjIyBhF^~DjBvEd@|CWxZfAvFp@vNdBnIhDrDrIbGJl@k@zBPdAzBzC|GtFf@|D[pB{ExGw@fEKhPq@~EH|Ei@|Dt@~DJfEy@tG@lClCnKBdA_AzCeChCyNhBcDhAcCGgA`BaFCwBbBoBXQzAnB`C`@bCI`AiCtFsB`LqAlAsDv@_CjBo@lAe@tEmB`B`DpGvG~BfAhA`@lBElHjHpMtDvBlInI|JfEzCxB\\y@aFsEG{Ax@gAlA\\|EyAbG}I~@o@bDi@tJPbG~DdGpAnA]",
    "pointCount": 92,
@@ -2044,10 +1771,43 @@
    "end": [
     34.191579,
     134.249474
+   ],
+   "tags": [
+    "winding",
+    "caution"
    ]
   },
   {
-   "id": "香川県:81",
+   "id": "香川県:61",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "善通寺大野原線",
+   "ref": "24",
+   "highway": "primary",
+   "lengthKm": 6.06,
+   "curviness": 230.3,
+   "flow": 19.7,
+   "turnCount": 71,
+   "score": 62.8,
+   "baseScore": 62.8,
+   "spotCount": 0,
+   "polyline": "{dzoEeynoX`N}HtAE~JfPlMpJ|D`GpKrBzAtD~JzA~@~@xAzEtAV~B_@~HmFx@In@|Ci@dLRfF`@n@fE|AzKgBrBiBrBmEvE_@`C{H~FvBxFEhCgDnA]dc@pElKiCvFA~FgB`DYtI|@~CjCjM`Tp@~H",
+   "pointCount": 38,
+   "start": [
+    34.217903,
+    133.774432
+   ],
+   "end": [
+    34.175718,
+    133.761852
+   ],
+   "tags": [
+    "winding",
+    "flowing"
+   ]
+  },
+  {
+   "id": "香川県:62",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "観音寺善通寺線",
@@ -2057,8 +1817,8 @@
    "curviness": 180.3,
    "flow": 22.5,
    "turnCount": 56,
-   "score": 53,
-   "baseScore": 53,
+   "score": 62.4,
+   "baseScore": 62.4,
    "spotCount": 0,
    "polyline": "kohoE{uvnX@gEjAuNfMmEiH}\\s@P}AcBaMsCwZkQ{FgG_BI}GnB[mF_G}YgCkKsCiFeB}GoCgUcBmFkBmBsKsBuCmAaFcGrFeS_DcBkFk@CqF{A_FqPiPqEqCgDy@uDkFaGaDqGuG}CyG{HeMgFuF",
    "pointCount": 37,
@@ -2069,10 +1829,13 @@
    "end": [
     34.158878,
     133.70126
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:82",
+   "id": "香川県:63",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "中讃南部広域農道",
@@ -2082,8 +1845,8 @@
    "curviness": 234.3,
    "flow": 17,
    "turnCount": 90,
-   "score": 52.8,
-   "baseScore": 52.8,
+   "score": 62,
+   "baseScore": 62,
    "spotCount": 0,
    "polyline": "chkoEme`pXwGeDaA_BU_Co@_Yt@uBlCkCX}@cBwO`@wCzBaHeB_ITaHoFoCoAqFcEyBSsA\\}BGmCgKyNwBoS_AyAcHsFoHoZgAiAcGyBy@}@YeB@uF_CqH_Au@uE[kGnBaBEeAy@eAcEMeCbEmI~BgHbAqVYyB}EkHgOuCcDkHsA{Is@eAqJ_A",
    "pointCount": 47,
@@ -2094,10 +1857,13 @@
    "end": [
     34.163055,
     133.915333
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:83",
+   "id": "香川県:64",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "田面入野山線",
@@ -2107,8 +1873,8 @@
    "curviness": 226.5,
    "flow": 17.6,
    "turnCount": 73,
-   "score": 52.7,
-   "baseScore": 52.7,
+   "score": 61.8,
+   "baseScore": 61.8,
    "spotCount": 0,
    "polyline": "e__pEiqprXfPyItAyCtCeCjAkFbA_BvXqOdKcPhFmDZgDcA_DFkA~@iArDi@tCeFvA{N~@}AxLkBlG}FfM`GhHmG~KM|NsHpABxDvA|KyGlIaDhFNvF~A`EgB|@H`DxBnLq@jAp@tDxFzB~@",
    "pointCount": 36,
@@ -2119,10 +1885,14 @@
    "end": [
     34.202506,
     134.295754
+   ],
+   "tags": [
+    "scenic",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:84",
+   "id": "香川県:65",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "大串鴨部線",
@@ -2132,8 +1902,8 @@
    "curviness": 234.1,
    "flow": 17.8,
    "turnCount": 40,
-   "score": 52.5,
-   "baseScore": 52.5,
+   "score": 61.6,
+   "baseScore": 61.6,
    "spotCount": 0,
    "polyline": "gyppEilirXrJcA|IwBj@JzCjE`CbAhLmG~@CbJzCtFcBjD`Iw@zFL|D`B|CNpCf@lArK|LrJ`FpDlGrAfAdSvI",
    "pointCount": 21,
@@ -2144,10 +1914,14 @@
    "end": [
     34.313237,
     134.226378
+   ],
+   "tags": [
+    "scenic",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:85",
+   "id": "香川県:66",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "千疋高松線",
@@ -2157,8 +1931,8 @@
    "curviness": 214.5,
    "flow": 18.2,
    "turnCount": 64,
-   "score": 52.4,
-   "baseScore": 52.4,
+   "score": 61.5,
+   "baseScore": 61.5,
    "spotCount": 0,
    "polyline": "ubyoEm`ypXAoCnDqDdCoGzBkRYqNmVqEoGAyIwAmGxBkGhFmF`BwDyB}L|AgGwCqGJ_FqB{EdAaGa@wKvCmEL_PtC}FgAsG^mBiBiMkAsAg@{CyC_Gk@gRnEsIXa@g@",
    "pointCount": 32,
@@ -2169,35 +1943,13 @@
    "end": [
     34.249183,
     133.999401
-   ]
-  },
-  {
-   "id": "香川県:86",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "屋島停車場屋島公園線",
-   "ref": "150",
-   "highway": "secondary",
-   "lengthKm": 9.47,
-   "curviness": 175.6,
-   "flow": 16.8,
-   "turnCount": 99,
-   "score": 52.4,
-   "baseScore": 49.5,
-   "spotCount": 1,
-   "polyline": "w{qpEezmqX_J_AgEpHeCtAyH?w@bCwEzDcm@lKyCfB{ExEmq@eMqLpBaSwBuC|@{B@gOxBoHBqEyAeJd@}Eg@mCmD}Co@mBsCDoBiCwJ`CoItGgKvHmHhBsDvEcFlK_IhIiBtG{GtEo@lGaJbJyEfLmK~EeAtUeMvIuCzDm@|CsBrJcBbRcKjRX",
-   "pointCount": 45,
-   "start": [
-    34.339322,
-    134.097151
    ],
-   "end": [
-    34.347745,
-    134.118731
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:87",
+   "id": "香川県:67",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "大串志度線",
@@ -2207,8 +1959,8 @@
    "curviness": 217.3,
    "flow": 18.6,
    "turnCount": 37,
-   "score": 52.2,
-   "baseScore": 52.2,
+   "score": 61.2,
+   "baseScore": 61.2,
    "spotCount": 0,
    "polyline": "w_vpEyidrX^_AtAg@xBiChBUhEtAfJhI~CAdA{@vDnBvA_AbC{HdJeCvCoBzDIpHlClHfGhJbKpI`Sh@hCUjHxC~K`@`O",
    "pointCount": 23,
@@ -2219,35 +1971,13 @@
    "end": [
     34.341657,
     134.200441
-   ]
-  },
-  {
-   "id": "香川県:88",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "三木牟礼線",
-   "ref": "38",
-   "highway": "primary",
-   "lengthKm": 9.29,
-   "curviness": 168.5,
-   "flow": 18.6,
-   "turnCount": 84,
-   "score": 52.1,
-   "baseScore": 49.2,
-   "spotCount": 1,
-   "polyline": "ygcpEwluqXcYaEgB`Pa@jBUC}JyFkDYqCnByIyBuH_@wMuDuEQcFqBic@sGsEiBuR}BqHiBsDiEeAc@oOcCiOf@aKwGiB?iJpCcEsAwEQoCoEw@e@mGt@}HMiKeFsGgA_S{FgD~@wFzEqBh@qCYyIkF{@Cy@j@eCpGkA|@}GdCwHb@iGvBkB?{HsCd@sGWc[{D}GaE{PuGaHMaEXyC",
-   "pointCount": 54,
-   "start": [
-    34.26445,
-    134.13596
    ],
-   "end": [
-    34.332012,
-    134.156986
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "香川県:89",
+   "id": "香川県:68",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "富田中津田線",
@@ -2257,8 +1987,8 @@
    "curviness": 179.5,
    "flow": 20.5,
    "turnCount": 41,
-   "score": 52.1,
-   "baseScore": 52.1,
+   "score": 61.1,
+   "baseScore": 61.1,
    "spotCount": 0,
    "polyline": "w}apEuvjrX}AEsG}B}BjE}FbSiB~IaAfYuHo@wEt@yb@uBkC{@kPqJwDeIaEoD}QuV[iC`BiFOaCaIuAkB{@m@{@m@aDeAgAkDIyEfCqCBuDiAkGiG",
    "pointCount": 28,
@@ -2269,35 +1999,41 @@
    "end": [
     34.286711,
     134.250305
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:90",
+   "id": "香川県:69",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "高松王越坂出線",
-   "ref": "16",
-   "highway": "primary",
-   "lengthKm": 7.69,
-   "curviness": 142.5,
-   "flow": 23.8,
-   "turnCount": 46,
-   "score": 51.9,
-   "baseScore": 51.9,
-   "spotCount": 0,
-   "polyline": "a}tpEwoxpX|AmJ`Qwe@rC_Qb@aIk@gKRmGz@mFrFoQnFkj@F{k@Dlk@eH`o@}DlM{@hFWzJNdIgArPmCfMcOv`@oBdKKdUnC~QkBsM]wN",
-   "pointCount": 25,
+   "name": "屋島停車場屋島公園線",
+   "ref": "150",
+   "highway": "secondary",
+   "lengthKm": 9.47,
+   "curviness": 175.6,
+   "flow": 16.8,
+   "turnCount": 99,
+   "score": 61,
+   "baseScore": 58.1,
+   "spotCount": 1,
+   "polyline": "w{qpEezmqX_J_AgEpHeCtAyH?w@bCwEzDcm@lKyCfB{ExEmq@eMqLpBaSwBuC|@{B@gOxBoHBqEyAeJd@}Eg@mCmD}Co@mBsCDoBiCwJ`CoItGgKvHmHhBsDvEcFlK_IhIiBtG{GtEo@lGaJbJyEfLmK~EeAtUeMvIuCzDm@|CsBrJcBbRcKjRX",
+   "pointCount": 45,
    "start": [
-    34.354891,
-    133.987962
+    34.339322,
+    134.097151
    ],
    "end": [
-    34.354937,
-    133.986068
+    34.347745,
+    134.118731
+   ],
+   "tags": [
+    "winding"
    ]
   },
   {
-   "id": "香川県:91",
+   "id": "香川県:70",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "本町小瀬土庄港線",
@@ -2307,8 +2043,8 @@
    "curviness": 193.5,
    "flow": 18.1,
    "turnCount": 104,
-   "score": 51.9,
-   "baseScore": 51.9,
+   "score": 60.9,
+   "baseScore": 60.9,
    "spotCount": 0,
    "polyline": "cimqE_z~qX|AtDjGbHS`Fb@hD~DpD@zAgArCEnAf@jFzBtIpEzIjIlI@pBt@zAvA|@hCjE`BxA~CdGlBjAnCh@`DdD|IbFrLxQrAlIp@~OfGpJlCbHn@`Gy@bCyRfIkVdNo@~BBjDx@jDlBrANhAaC~AcBbCgC~AsCPwFoEkWeAqQcEoYkQiF{IwAkEoB{BgG{Rr@eDKkDhAmSwA}I\\qFgBcEQ_FkB{E{GiGsAoC~BwStGiT?sAuAqB",
    "pointCount": 63,
@@ -2319,10 +2055,42 @@
    "end": [
     34.488067,
     134.175511
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:92",
+   "id": "香川県:71",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "三木牟礼線",
+   "ref": "38",
+   "highway": "primary",
+   "lengthKm": 9.29,
+   "curviness": 168.5,
+   "flow": 18.6,
+   "turnCount": 84,
+   "score": 60.7,
+   "baseScore": 57.8,
+   "spotCount": 1,
+   "polyline": "ygcpEwluqXcYaEgB`Pa@jBUC}JyFkDYqCnByIyBuH_@wMuDuEQcFqBic@sGsEiBuR}BqHiBsDiEeAc@oOcCiOf@aKwGiB?iJpCcEsAwEQoCoEw@e@mGt@}HMiKeFsGgA_S{FgD~@wFzEqBh@qCYyIkF{@Cy@j@eCpGkA|@}GdCwHb@iGvBkB?{HsCd@sGWc[{D}GaE{PuGaHMaEXyC",
+   "pointCount": 54,
+   "start": [
+    34.26445,
+    134.13596
+   ],
+   "end": [
+    34.332012,
+    134.156986
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "香川県:72",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "鴨川停車場五色台線",
@@ -2332,8 +2100,8 @@
    "curviness": 142.9,
    "flow": 22.8,
    "turnCount": 23,
-   "score": 51.3,
-   "baseScore": 51.3,
+   "score": 60.4,
+   "baseScore": 60.4,
    "spotCount": 0,
    "polyline": "u|kpEk`ipX{Ie]sGD}G~@wKhG{LdCuJ?cF{FsB]qUrGs^zOuCuK{PdIkK`IgAL",
    "pointCount": 15,
@@ -2344,10 +2112,13 @@
    "end": [
     34.335772,
     133.907233
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:93",
+   "id": "香川県:73",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "長尾丸亀線",
@@ -2357,8 +2128,8 @@
    "curviness": 193.8,
    "flow": 20.7,
    "turnCount": 32,
-   "score": 51.2,
-   "baseScore": 51.2,
+   "score": 60.2,
+   "baseScore": 60.2,
    "spotCount": 0,
    "polyline": "csvoE{|~oXfC|X|FnGjDjFb@zALpL_BzEH`GkA|FuGzKaHwDo@fAoIzCqTdLiD`A{@vBCbSuAhCsAVaUU",
    "pointCount": 20,
@@ -2369,35 +2140,13 @@
    "end": [
     34.211209,
     133.83472
-   ]
-  },
-  {
-   "id": "香川県:94",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松長尾大内線",
-   "ref": "10",
-   "highway": "primary",
-   "lengthKm": 10.85,
-   "curviness": 140.4,
-   "flow": 22.7,
-   "turnCount": 67,
-   "score": 51.2,
-   "baseScore": 51.2,
-   "spotCount": 0,
-   "polyline": "crbpEeearXt@{e@SsC}DwOiBeZo@mS|@}URkb@r@}ElFgPb@oDS{r@\\yHdBkMtOeh@fCcDjDuAd@FkE~AaCvCiMva@{BdKuAvSVlp@w@hFuE~MkAbH[z_@}@zWrClm@hEnPTxI_@|^Dbn@i@~H",
-   "pointCount": 35,
-   "start": [
-    34.260978,
-    134.196185
    ],
-   "end": [
-    34.261076,
-    134.187042
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:95",
+   "id": "香川県:74",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "財田上高瀬線",
@@ -2407,8 +2156,8 @@
    "curviness": 183.6,
    "flow": 19,
    "turnCount": 48,
-   "score": 51.1,
-   "baseScore": 51.1,
+   "score": 60,
+   "baseScore": 60,
    "spotCount": 0,
    "polyline": "ujgoEojtoXxAvBrHtFlEtEgAtAYfBBnHu@`Hl@rGmHfRgEvHiDtc@UvJb@rC_GpPq@Z_BmBoA_@_Dl@wFCyEk@{ET{Eu@uH`AqK[sR`J}KhBcInFgCzGqBfDYhHaAp@",
    "pointCount": 32,
@@ -2419,85 +2168,13 @@
    "end": [
     34.142173,
     133.771713
-   ]
-  },
-  {
-   "id": "香川県:96",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "大屋冨築港宇多津線",
-   "ref": "186",
-   "highway": "secondary",
-   "lengthKm": 6.34,
-   "curviness": 125.7,
-   "flow": 22.8,
-   "turnCount": 35,
-   "score": 51.1,
-   "baseScore": 51.1,
-   "spotCount": 0,
-   "polyline": "gispEigepXoOuj@aBqOIcK?xGxBtRbF|SjIxWhG~Ib`@nYbk@ar@bB|BvBnFvPxv@BtHsCzPCnBvA|DpKrQ",
-   "pointCount": 19,
-   "start": [
-    34.346603,
-    133.889326
    ],
-   "end": [
-    34.327035,
-    133.87154
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:97",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "丸亀詫間豊浜線",
-   "ref": "21",
-   "highway": "primary",
-   "lengthKm": 3,
-   "curviness": 212.9,
-   "flow": 19.4,
-   "turnCount": 33,
-   "score": 51,
-   "baseScore": 51,
-   "spotCount": 0,
-   "polyline": "ylcpEa{goXrDbB`BPdHkCbDDbPxLuM}J{Bs@uBDaHlCqCYcZ_SgMcDw@{@g@_HuM}O_EsA",
-   "pointCount": 17,
-   "start": [
-    34.265248,
-    133.738892
-   ],
-   "end": [
-    34.274976,
-    133.747212
-   ]
-  },
-  {
-   "id": "香川県:98",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "石井引田線",
-   "ref": "34",
-   "highway": "primary",
-   "lengthKm": 4.15,
-   "curviness": 213,
-   "flow": 18.8,
-   "turnCount": 47,
-   "score": 51,
-   "baseScore": 51,
-   "spotCount": 0,
-   "polyline": "qvqoEyvgsX_AiBkHpAkKOiCkDuBaA}DyDeDq@gGcDqH}GaKuBsHgLcAn@yCoC}OBoFrEeB^_MaBeFdBoJl@eI_BmDkE{B_BiRBmI{FwG}B",
-   "pointCount": 26,
-   "start": [
-    34.174647,
-    134.393565
-   ],
-   "end": [
-    34.20787,
-    134.403937
-   ]
-  },
-  {
-   "id": "香川県:99",
+   "id": "香川県:75",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "坂手港線",
@@ -2507,8 +2184,8 @@
    "curviness": 203.6,
    "flow": 19.7,
    "turnCount": 37,
-   "score": 50.9,
-   "baseScore": 50.9,
+   "score": 59.9,
+   "baseScore": 59.9,
    "spotCount": 0,
    "polyline": "u_mqEejxrXxIyRtd@}N|XrExDfCpEZrD~@|DdCdE|FhCDfC_EhE[bC|AdBdCd@?`@q@CcEgCeF[wE~@yClGwI~J}H",
    "pointCount": 22,
@@ -2519,10 +2196,13 @@
    "end": [
     34.454799,
     134.323801
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:100",
+   "id": "香川県:76",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "丸亀詫間豊浜線",
@@ -2532,8 +2212,8 @@
    "curviness": 180.1,
    "flow": 19.6,
    "turnCount": 52,
-   "score": 50.1,
-   "baseScore": 50.1,
+   "score": 58.9,
+   "baseScore": 58.9,
    "spotCount": 0,
    "polyline": "w{zoEwm~nXrMv@C|Of@`KhAhHbEfG~R`k@rCbMzAvAdDjAvHnMPbGoBtMB`FZvA|B`BnRjD|ChB|IBhB|A`@zBaArEf@rDx@pAdDtBbBhGdBfCfAxFgCp`@|BvHxAhBg@fLVpFnBxI",
    "pointCount": 34,
@@ -2544,35 +2224,43 @@
    "end": [
     34.200982,
     133.643548
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:101",
+   "id": "香川県:77",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "綾南・綾歌・満濃バイパス",
-   "ref": "32;377",
+   "name": "国道193号",
+   "ref": "193;492;377",
    "highway": "trunk",
-   "lengthKm": 3.84,
-   "curviness": 162.2,
-   "flow": 22.2,
-   "turnCount": 28,
-   "score": 50.1,
-   "baseScore": 47.2,
-   "spotCount": 1,
-   "polyline": "gw}oEcdepXfCtElL~_@r@lEZvNQh@lBzIbEzMbJlTdRl\\vCtGnHry@xDtJxH|G",
-   "pointCount": 14,
+   "lengthKm": 21.05,
+   "curviness": 141.3,
+   "flow": 23.6,
+   "turnCount": 126,
+   "score": 58.7,
+   "baseScore": 52.4,
+   "spotCount": 0,
+   "polyline": "{o|oE{k`qXvBmCrBuF~CqEbI}FdEaFvGqCjEIbN~@xDfAtN`InDf@|YiCvNeC`Ru@bCm@tIoNvMwJpHkDhGcHnIuDrFsDfGyAxD_ChAkCpAgUlAiF~FsCvJaC`E_ErEuId@oCiA{TXiLi@mMh@iB|D}Dp@cEo@iDgGeKD_Ff@cDxIoF~FkI|CsGnNu@jJXjHiC|CaHlBuQKgCgBiIx@qDlDiD~FyBhCLhKzDfD@hDo@nCwCxEoQA{CiB{GsEeYuGqXeCaHBgKsCcZgFaJ]gBb@sAjAWdHlChDxCtAC`A{@V}CuCiQvB_LlFgHkCuQaJ}OsEgF{@yDnA}KpDoGh@sBJgBq@wFjCcQCiCiCqPz@u[pAyD\\sCcBcID{H`A{CfE}FzAoEr@}LnDmFzAsKvIyGfAUhC|@|G^hFi@xDrA|AOhEwHvA_@vDd@rBcDbBoAvReKdB{FdCyAdCm@z@`@hAzCn@pItBtApANfFmA`MwLrFkDjJaAvDf@",
+   "pointCount": 129,
    "start": [
-    34.236205,
-    133.888817
+    34.2299,
+    134.0283
    ],
    "end": [
-    34.2219,
-    133.852384
+    34.14352,
+    134.15902
+   ],
+   "reshaped": true,
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:102",
+   "id": "香川県:78",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "炭所東琴平線",
@@ -2582,8 +2270,8 @@
    "curviness": 188.6,
    "flow": 17.6,
    "turnCount": 46,
-   "score": 49.9,
-   "baseScore": 49.9,
+   "score": 58.5,
+   "baseScore": 58.5,
    "spotCount": 0,
    "polyline": "k`uoEiuipXpDvDVjFlAjIbFvEzDvQjN|FrG~Oe@pB}CrBaBrCe@pD{AnCgDdKQrKbBxPtEfFbBpDtCpRrExJdMpOcI`M]hASdGeEpJ",
    "pointCount": 25,
@@ -2594,10 +2282,13 @@
    "end": [
     34.184015,
     133.874399
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:103",
+   "id": "香川県:79",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "神田高瀬線",
@@ -2607,8 +2298,8 @@
    "curviness": 202.9,
    "flow": 17,
    "turnCount": 37,
-   "score": 49.8,
-   "baseScore": 49.8,
+   "score": 58.4,
+   "baseScore": 58.4,
    "spotCount": 0,
    "polyline": "qxroE{tjoXuIfF}EXgBt@e@jAs@nLqDfI_EjP{BbAwFa@uBb@oJpIcAnDoBdDi@bDaAnBiFbC[fH}BpBkApCIbBr@fTbIfP",
    "pointCount": 23,
@@ -2619,10 +2310,13 @@
    "end": [
     34.191949,
     133.729513
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:104",
+   "id": "香川県:80",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "衣掛郷東線",
@@ -2632,8 +2326,8 @@
    "curviness": 186.9,
    "flow": 17.3,
    "turnCount": 53,
-   "score": 49.7,
-   "baseScore": 49.7,
+   "score": 58.3,
+   "baseScore": 58.3,
    "spotCount": 0,
    "polyline": "wmlpEugwpX\\y@sAwBqL{MqB_LuCuFsBcHuJmIeNuFiK}HmCaAsAgCeDsMeB}CkEwCiIiBiAwEeIyJ{OiG_@wAyDgF_EyCkF_C_CqEaDoCcCaAcEYmEuBqAeFAoBv@_DgBkKsIqC",
    "pointCount": 33,
@@ -2644,60 +2338,13 @@
    "end": [
     34.341642,
     134.014859
-   ]
-  },
-  {
-   "id": "香川県:105",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松南バイパス",
-   "ref": "11",
-   "highway": "trunk",
-   "lengthKm": 3.41,
-   "curviness": 121.7,
-   "flow": 34.6,
-   "turnCount": 12,
-   "score": 49.6,
-   "baseScore": 49.6,
-   "spotCount": 0,
-   "polyline": "kikpEuivpXeEcPWqTUq@~Gy`BAaKmF}l@[DkDi]",
-   "pointCount": 9,
-   "start": [
-    34.305664,
-    133.976746
    ],
-   "end": [
-    34.307643,
-    134.012936
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:106",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "綾川府中線",
-   "ref": "184",
-   "highway": "secondary",
-   "lengthKm": 4.5,
-   "curviness": 164.1,
-   "flow": 15.4,
-   "turnCount": 48,
-   "score": 49.3,
-   "baseScore": 46.4,
-   "spotCount": 1,
-   "polyline": "odapEa{kpXkCAkEpEkLpDeLZmJmBeNjAsKo@oEiCaGs@{FiFiDeBkD]ySP_HyJsBw@uB?{IzBgBjAcB~IcIzHKhK_@~@cLhEaC|FyBjBuN`G",
-   "pointCount": 27,
-   "start": [
-    34.253676,
-    133.92321
-   ],
-   "end": [
-    34.287642,
-    133.915666
-   ]
-  },
-  {
-   "id": "香川県:107",
+   "id": "香川県:81",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "三木津田線",
@@ -2707,8 +2354,8 @@
    "curviness": 220.1,
    "flow": 16.6,
    "turnCount": 46,
-   "score": 49.2,
-   "baseScore": 49.2,
+   "score": 57.8,
+   "baseScore": 57.8,
    "spotCount": 0,
    "polyline": "mqfpE}ruqXFsKqDwFi@mCIyIxAeK{AcJk@wI_GwXWoEh@eGqCiJLuAhBcB\\eA_@kIqCuGo@yIcCoKSeEmDsGxC{MlDgC~A}CXqB",
    "pointCount": 25,
@@ -2719,185 +2366,41 @@
    "end": [
     34.284372,
     134.171231
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:108",
+   "id": "香川県:82",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "原田琴平線",
-   "ref": "206",
+   "name": "綾川府中線",
+   "ref": "184",
    "highway": "secondary",
-   "lengthKm": 3.47,
-   "curviness": 156.5,
-   "flow": 19.4,
-   "turnCount": 28,
-   "score": 49.1,
-   "baseScore": 49.1,
-   "spotCount": 0,
-   "polyline": "irzoEc{toXed@hc@mKdC}ClFmBlBiP_BuFuBaI{EqCd@cDwJwInEgGJaKxFuVmBuBReEnB",
-   "pointCount": 16,
+   "lengthKm": 4.5,
+   "curviness": 164.1,
+   "flow": 15.4,
+   "turnCount": 48,
+   "score": 57.3,
+   "baseScore": 54.4,
+   "spotCount": 1,
+   "polyline": "odapEa{kpXkCAkEpEkLpDeLZmJmBeNjAsKo@oEiCaGs@{FiFiDeBkD]ySP_HyJsBw@uB?{IzBgBjAcB~IcIzHKhK_@~@cLhEaC|FyBjBuN`G",
+   "pointCount": 27,
    "start": [
-    34.220051,
-    133.805458
+    34.253676,
+    133.92321
    ],
    "end": [
-    34.246829,
-    133.798642
+    34.287642,
+    133.915666
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:109",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松長尾大内線",
-   "ref": "10",
-   "highway": "primary",
-   "lengthKm": 9.24,
-   "curviness": 164.8,
-   "flow": 18.8,
-   "turnCount": 81,
-   "score": 49.1,
-   "baseScore": 49.1,
-   "spotCount": 0,
-   "polyline": "s{`pEqhtrXcBhK@tDl@tHnC`JVzB[jl@zBhIrKrMlBtDvAfGRjGkD``@gFdRQvMwBj^wItj@yAtEhAuBx@_ErIcm@lAcTAeQv@{DjBmDlB_HlDca@i@aIyAkF}AqCuKoMwB_IPii@g@uEoCaJo@cF@mElBiMp@iAw@m@aBwN",
-   "pointCount": 41,
-   "start": [
-    34.252256,
-    134.294015
-   ],
-   "end": [
-    34.25278,
-    134.297125
-   ]
-  },
-  {
-   "id": "香川県:110",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "富田西鴨庄線",
-   "ref": "140;141",
-   "highway": "secondary",
-   "lengthKm": 4.01,
-   "curviness": 126.3,
-   "flow": 21.1,
-   "turnCount": 24,
-   "score": 49,
-   "baseScore": 49,
-   "spotCount": 0,
-   "polyline": "qnbpEisgrX_KnA{J_@Wd@oA|Cq@rEaBhYKbM}H[yW}DyPr@uW~h@_A~B_@jDkCvBkBzDsAdNBvFm@vFkMR",
-   "pointCount": 20,
-   "start": [
-    34.260412,
-    134.22917
-   ],
-   "end": [
-    34.282555,
-    134.206483
-   ]
-  },
-  {
-   "id": "香川県:111",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "山階多度津線",
-   "ref": "216",
-   "highway": "secondary",
-   "lengthKm": 3.03,
-   "curviness": 155.4,
-   "flow": 18.9,
-   "turnCount": 25,
-   "score": 48.4,
-   "baseScore": 48.4,
-   "spotCount": 0,
-   "polyline": "{gepEmzjoXpEjIvA~I~DlKvCtDfFn@pHaBtToJfQo@rEbEhHdOxBj@hNdIrBXxKy@~FcD",
-   "pointCount": 16,
-   "start": [
-    34.2747,
-    133.754147
-   ],
-   "end": [
-    34.25289,
-    133.745719
-   ]
-  },
-  {
-   "id": "香川県:112",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "羽方豊中線",
-   "ref": "225",
-   "highway": "secondary",
-   "lengthKm": 4.39,
-   "curviness": 170.1,
-   "flow": 17,
-   "turnCount": 44,
-   "score": 48.2,
-   "baseScore": 48.2,
-   "spotCount": 0,
-   "polyline": "gykoE}`ioXjB~Fx@xGdGvYQzLaAtEDrChFxIs@`DJzDiBhGeAtA}EnCr@nRI~Nz@nJgB|GJ`HaAlCKbB|@n[fD|c@k@xEnA`MmDjL",
-   "pointCount": 25,
-   "start": [
-    34.144359,
-    133.744949
-   ],
-   "end": [
-    34.14351,
-    133.700427
-   ]
-  },
-  {
-   "id": "香川県:113",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "込野観音寺線",
-   "ref": "6",
-   "highway": "primary",
-   "lengthKm": 4.54,
-   "curviness": 190.6,
-   "flow": 17,
-   "turnCount": 51,
-   "score": 48,
-   "baseScore": 48,
-   "spotCount": 0,
-   "polyline": "ybeoEycfoXqP|GaBlD_EjB]pAk@ZeFd@aDk@wBjGmKvd@BrFv@pF]hGVdEvBdFd@`HeAfJIvHrD`LgA~GCnDpC`\\pBnI?rKe@jDzEnJZfCh@dLkBtG",
-   "pointCount": 29,
-   "start": [
-    34.110053,
-    133.730054
-   ],
-   "end": [
-    34.11603,
-    133.688958
-   ]
-  },
-  {
-   "id": "香川県:114",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "高松坂出線",
-   "ref": "161",
-   "highway": "secondary",
-   "lengthKm": 4.38,
-   "curviness": 145.8,
-   "flow": 18.3,
-   "turnCount": 35,
-   "score": 47.8,
-   "baseScore": 47.8,
-   "spotCount": 0,
-   "polyline": "wbtpEulqpXwBaEcG}F_J{AsPYcDkAyBwCiAeGBuEvA_JzCeGhL}LzHeTfBeITuFIcc@cAuVuAeM~BlYVbY",
-   "pointCount": 20,
-   "start": [
-    34.350682,
-    133.951627
-   ],
-   "end": [
-    34.353441,
-    133.972956
-   ]
-  },
-  {
-   "id": "香川県:115",
+   "id": "香川県:83",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "国道377号",
@@ -2907,8 +2410,8 @@
    "curviness": 210.9,
    "flow": 16.7,
    "turnCount": 155,
-   "score": 47.1,
-   "baseScore": 47.1,
+   "score": 55.6,
+   "baseScore": 55.6,
    "spotCount": 0,
    "polyline": "c_soEqjjrXd@hFo@pGt@|Dj@~HOfJoCfPlAfBXlCvAzDMpD}BvHv@jGWtBkInIuKjDqFxJkLzFqGtHoHjAgAl@_AjBMtBZnB`FhIr@bEE~DwA`IKlC?jK|@jEhJfKlDvPtChCv@fCvDzE`DjJnIbH`GxMtChCxCpG`FlEdF|@bFtF|ELs@~ErAhDJnBuBtFkAtIyFnCwDb@{@l@c@fBGpH}AbDiMvFyApAe@|Bg@tUwBzDy@bDaDvDw@nEgAx@eFP_BfBnGpFjEPzAl@nBfHpAtA|NnDlBH~JaA~L?hIcAnEbA|A`B`N|UTzMtJzh@lA`BnI`C",
    "pointCount": 84,
@@ -2919,10 +2422,14 @@
    "end": [
     34.166314,
     134.152442
+   ],
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:116",
+   "id": "香川県:84",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "財田上高瀬線",
@@ -2932,8 +2439,8 @@
    "curviness": 177.5,
    "flow": 15.4,
    "turnCount": 45,
-   "score": 47,
-   "baseScore": 47,
+   "score": 55.1,
+   "baseScore": 55.1,
    "spotCount": 0,
    "polyline": "}xjoEqnmoXqBbGeE~CoBbCiFbBmCfE_GzFuDd@y@j@_B`LoAhCgDdCoFr@{EdFw@nHfBlDx@nG`DtLl@zP]|Ay@h@{El@iChCqDnAsYjW_DpBmC|EmEfF",
    "pointCount": 28,
@@ -2944,60 +2451,14 @@
    "end": [
     34.158044,
     133.739277
-   ]
-  },
-  {
-   "id": "香川県:117",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "坂出丸亀バイパス",
-   "ref": "11;319",
-   "highway": "trunk",
-   "lengthKm": 3.02,
-   "curviness": 97.3,
-   "flow": 26.8,
-   "turnCount": 11,
-   "score": 46.7,
-   "baseScore": 46.7,
-   "spotCount": 0,
-   "polyline": "eplpEsmepXgDyGg[miAfFiDb`A{c@nCkBfCwE",
-   "pointCount": 7,
-   "start": [
-    34.311869,
-    133.890336
    ],
-   "end": [
-    34.304246,
-    133.912032
+   "tags": [
+    "winding",
+    "flowing"
    ]
   },
   {
-   "id": "香川県:118",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "財田まんのう線",
-   "ref": "197",
-   "highway": "secondary",
-   "lengthKm": 4.88,
-   "curviness": 144.3,
-   "flow": 16.4,
-   "turnCount": 43,
-   "score": 46.2,
-   "baseScore": 46.2,
-   "spotCount": 0,
-   "polyline": "ormoE{u|oX{FsCqBuEsEkFwOyGqNuH{HiI[uALiFyEcNs@}F_BqBkMaG}@_AoAqIE}EoBqIwA}AqF{BgCcCwB]yHxFqKtT{AXaHaA}WfPaInAaKfFeCL",
-   "pointCount": 29,
-   "start": [
-    34.153517,
-    133.845576
-   ],
-   "end": [
-    34.185279,
-    133.858134
-   ]
-  },
-  {
-   "id": "香川県:119",
+   "id": "香川県:85",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "白鳥引田線",
@@ -3007,8 +2468,8 @@
    "curviness": 170.6,
    "flow": 15.7,
    "turnCount": 69,
-   "score": 46.1,
-   "baseScore": 46.1,
+   "score": 54.2,
+   "baseScore": 54.2,
    "spotCount": 0,
    "polyline": "yrxoEip{rX\\yGjCmLgBsPjD{Ni@iFn@q[{AqEO}FoEiQ]uGkAeHmDkNa@kJgE{MHsDkA}Jt@iCnAuLcFmc@_@oLcAmAwLaGsDsDsAiCaBs@oByFoDaECcIwDoMiBmCeFeBuAiAiCqMcAmBmCsAwD^_C~CYrBNt@",
    "pointCount": 40,
@@ -3019,85 +2480,70 @@
    "end": [
     34.225967,
     134.386965
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:120",
+   "id": "香川県:86",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "炭所西善通寺線",
-   "ref": "199;282",
+   "name": "財田まんのう線",
+   "ref": "197",
    "highway": "secondary",
-   "lengthKm": 4.1,
-   "curviness": 149.1,
-   "flow": 15.3,
-   "turnCount": 40,
-   "score": 45.2,
-   "baseScore": 45.2,
-   "spotCount": 0,
-   "polyline": "wmvoE{~{oXhJxIlD_HbAqLvCiHtDgRlDwJbDsDpCsGpAmStDiM`DiHtB}R|H_TvAoJ`HaOf@cH~FsX|E_F",
-   "pointCount": 19,
-   "start": [
-    34.198835,
-    133.841898
-   ],
-   "end": [
-    34.182942,
-    133.877201
-   ]
-  },
-  {
-   "id": "香川県:121",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "小蓑前田東線",
-   "ref": "42",
-   "highway": "primary",
-   "lengthKm": 4.94,
+   "lengthKm": 4.88,
    "curviness": 144.3,
-   "flow": 17,
-   "turnCount": 42,
-   "score": 45.2,
-   "baseScore": 45.2,
+   "flow": 16.4,
+   "turnCount": 43,
+   "score": 54.1,
+   "baseScore": 54.1,
    "spotCount": 0,
-   "polyline": "{ddpEmtsqXgNQcFxNeBzPmHOcq@cLkHj@{LBiFiC_E?wCp@}ErDeDvEgBt@yG}AwH@qJcE}M|@c@`NuApP~AtHApCeFjY",
-   "pointCount": 23,
+   "polyline": "ormoE{u|oX{FsCqBuEsEkFwOyGqNuH{HiI[uALiFyEcNs@}F_BqBkMaG}@_AoAqIE}EoBqIwA}AqF{BgCcCwB]yHxFqKtT{AXaHaA}WfPaInAaKfFeCL",
+   "pointCount": 29,
    "start": [
-    34.269101,
-    134.126945
+    34.153517,
+    133.845576
    ],
    "end": [
-    34.300287,
-    134.111192
+    34.185279,
+    133.858134
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:122",
+   "id": "香川県:87",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "国道438号",
-   "ref": "438",
+   "name": "国道377号",
+   "ref": "377",
    "highway": "trunk",
-   "lengthKm": 4.22,
-   "curviness": 148.7,
-   "flow": 20.2,
-   "turnCount": 31,
-   "score": 44.7,
-   "baseScore": 44.7,
+   "lengthKm": 9.47,
+   "curviness": 107,
+   "flow": 22.5,
+   "turnCount": 45,
+   "score": 53.6,
+   "baseScore": 50.9,
    "spotCount": 0,
-   "polyline": "s}`pEwv~oXcEz@kJyB_OrDwFk@_LdA}Rc@{IxByN@}Fi@o@ZaJqIqHyAoSo@_Fh@kYpHy[nEmIMkCz@",
-   "pointCount": 19,
+   "polyline": "{ayoEmgaqX\\|JvC`IxBdWa@`It@~JzFtVlDtIdExDl@~Ap@nEfAd^jCrHhGfJp@vGoAzF|AdJmFrRiAbKw@dl@yFfQvBzMUxFaG|MMjJm@vBgCzC{ChH_HfKeHdFsE~E}D~NwAxCiYpO_Ch@qE?iFpSc@nC@pD~A~Rs@pSo@hCsExJcFdDgA~AkAlKrPlA",
+   "pointCount": 47,
    "start": [
-    34.252578,
-    133.855963
+    34.2123,
+    134.03271
    ],
    "end": [
-    34.28913,
-    133.854239
+    34.22276,
+    133.94704
+   ],
+   "reshaped": true,
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:123",
+   "id": "香川県:88",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "高松王越坂出線",
@@ -3107,8 +2553,8 @@
    "curviness": 135.7,
    "flow": 15.2,
    "turnCount": 121,
-   "score": 44.5,
-   "baseScore": 44.5,
+   "score": 52.3,
+   "baseScore": 52.3,
    "spotCount": 0,
    "polyline": "ovrpEy{{pXYnDkBfF{D|GkDfKuOxVgIzUsOdQiFrXbApRyGvViEfTcDhIoBhRyDvIsKrGsBnCBdCpB~KQ~H_AzDaLrO{Q~K}AnGsGQkFlBuSn^W`FrDjMBrEaJtUi@pGo@~AkSpNsGiFwK]{H~Hq@lKf@~Fe@bAmP`BuJvCaG`GiAdD_@dHTdBx@`A`HrBzZtDnJdOxGdDhOd@fImEdGsIfBu@fBXxG`EbEjAdFdJdOrn@pAjJ?jBo@rC",
    "pointCount": 63,
@@ -3119,85 +2565,13 @@
    "end": [
     34.366409,
     133.91144
-   ]
-  },
-  {
-   "id": "香川県:124",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "まんのう善通寺線",
-   "ref": "200",
-   "highway": "secondary",
-   "lengthKm": 3.17,
-   "curviness": 146.1,
-   "flow": 15,
-   "turnCount": 31,
-   "score": 44.4,
-   "baseScore": 44.4,
-   "spotCount": 0,
-   "polyline": "utooEym`pXo@q@w@BoBfFqDlCwCTuFjBoGF_MfB{@bAaBzGeAlAqY`R_JrEiJdHmFpAsBtAoAhB{G|RgDhDkFfL",
-   "pointCount": 21,
-   "start": [
-    34.164113,
-    133.864771
    ],
-   "end": [
-    34.18624,
-    133.846659
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:125",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "国道193号",
-   "ref": "193;492;377",
-   "highway": "trunk",
-   "lengthKm": 23.5,
-   "curviness": 169.1,
-   "flow": 15.6,
-   "turnCount": 254,
-   "score": 44.4,
-   "baseScore": 44.4,
-   "spotCount": 0,
-   "polyline": "ozxoEkhaqXiQrB_Nb@qB]wQwJ{PyAqEHqEjB_GjHiJhHaCvCkFbKvBmCrBuF~CqEbI}FdEaFvGqCjEIbN~@xDfAtN`InDf@|YiCvNeC`Ru@bCm@tIoNvMwJpHkDhGcHnIuDrFsDfGyAxD_ChAkCpAgUlAiF~FsCvJaC`E_ErEuId@oCiA{TXiLi@mMh@iB|D}Dp@cEo@iDgGeKD_Ff@cDxIoF~FkI|CsGnNu@jJXjHiC|CaHlBuQKgCgBiIx@qDlDiD~FyBhCLhKzDfD@hDo@nCwCxEoQA{CiB{GsEeYuGqXeCaHBgKsCcZgFaJ]gBb@sAjAWdHlChDxCtAC`A{@V}CuCiQvB_LlFgHkCuQaJ}OsEgF{@yDnA}KpDoGh@sBJgBq@wFjCcQCiCiCqPz@u[pAyD\\sCcBcID{H`A{CfE}FzAoEr@}LnDmFzAsKvIyGfAUhC|@|G^hFi@xDrA|AOhEwHvA_@vDd@rBcDbBoAvReKdB{FdCyAdCm@z@`@hAzCn@pItBtApANfFmA`MwLrFkDjJaAvDf@",
-   "pointCount": 140,
-   "start": [
-    34.21112,
-    134.03286
-   ],
-   "end": [
-    34.143521,
-    134.159017
-   ]
-  },
-  {
-   "id": "香川県:126",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "大見吉津仁尾線",
-   "ref": "220",
-   "highway": "secondary",
-   "lengthKm": 4.61,
-   "curviness": 114.2,
-   "flow": 16.5,
-   "turnCount": 32,
-   "score": 44.2,
-   "baseScore": 44.2,
-   "spotCount": 0,
-   "polyline": "a_woEa|eoXqEhF{Dj@mC_ByFqI_D]iB~@qFxGu@`C]vDuB~GsDpb@OjF`@xTlMxMfGtK|UfPvAdLtChIlGju@JjK",
-   "pointCount": 21,
-   "start": [
-    34.201608,
-    133.728815
-   ],
-   "end": [
-    34.200018,
-    133.693043
-   ]
-  },
-  {
-   "id": "香川県:127",
+   "id": "香川県:89",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "三木津田線",
@@ -3207,8 +2581,8 @@
    "curviness": 134,
    "flow": 16.4,
    "turnCount": 46,
-   "score": 44.2,
-   "baseScore": 44.2,
+   "score": 52,
+   "baseScore": 52,
    "spotCount": 0,
    "polyline": "infpEso`rXeMwReAqCbEsu@M}EcQ[mAWcAeA_@eBm@oPsDeOkEyKuAaGiIaVuCmGmDiEtAsHkByKSaFlA}XnC}IhGaK`@gGsBuG}HuL^iFsJcQ",
    "pointCount": 27,
@@ -3219,10 +2593,13 @@
    "end": [
     34.29367,
     134.2439
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:128",
+   "id": "香川県:90",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "水主三本松線",
@@ -3232,8 +2609,8 @@
    "curviness": 143.5,
    "flow": 14.6,
    "turnCount": 33,
-   "score": 44,
-   "baseScore": 44,
+   "score": 51.6,
+   "baseScore": 51.6,
    "spotCount": 0,
    "polyline": "io{oEypurXaFwOiAgBgEuB}Da@_IeJsGgFcK{RsCoD}DoN[_Jb@aMcIwEkNmAaG{CkIpDiD}@mGkD_GJ",
    "pointCount": 19,
@@ -3244,60 +2621,13 @@
    "end": [
     34.245225,
     134.320375
-   ]
-  },
-  {
-   "id": "香川県:129",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "豊中三野線",
-   "ref": "35;224",
-   "highway": "primary",
-   "lengthKm": 5.29,
-   "curviness": 126.2,
-   "flow": 16.3,
-   "turnCount": 41,
-   "score": 43.5,
-   "baseScore": 43.5,
-   "spotCount": 0,
-   "polyline": "aenoEalaoXmAdMsBvEi_@nXmCpC_O`XqEhGgAfE{@rHgCEeLpCsBIwCvF_Bt@sEJsIg@y]aHoDAkJtDm@jAi@vFk@jBoHxI}Db@gBs@_DsFqO_TkDqBmJs@",
-   "pointCount": 29,
-   "start": [
-    34.156492,
-    133.705774
    ],
-   "end": [
-    34.192402,
-    133.689864
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:130",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "財田西豊中線",
-   "ref": "226",
-   "highway": "secondary",
-   "lengthKm": 3.68,
-   "curviness": 127.3,
-   "flow": 15.1,
-   "turnCount": 31,
-   "score": 43.5,
-   "baseScore": 43.5,
-   "spotCount": 0,
-   "polyline": "}{hoEqwdoXcBbD{DdQyNrSwd@^}Fz@{JlEiNVuEnEkEjAqCnFkFtAuGzEkGrCsGhF}P|Fw@dAa@nD",
-   "pointCount": 18,
-   "start": [
-    34.129427,
-    133.722972
-   ],
-   "end": [
-    34.156492,
-    133.705774
-   ]
-  },
-  {
-   "id": "香川県:131",
+   "id": "香川県:91",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "国道436号",
@@ -3307,8 +2637,8 @@
    "curviness": 160,
    "flow": 16.1,
    "turnCount": 141,
-   "score": 43.5,
-   "baseScore": 43.5,
+   "score": 51.4,
+   "baseScore": 51.4,
    "spotCount": 0,
    "polyline": "gxnqEoi}qXrHyPbCcDNwHh@oDzGaPfE|ClOx@IwQw@yCcEaC{MiCsFaCgDkCoMkN~AwM`ByFlBkBvMcHdBuC`AeDFmCeB{HPsGsB_EmAgJ~Ou|@`AkOfE_H|@}EEoByA{EKoHkCkITwHb@iByFwFe@iJ_FyR?cBzDgR_C_RnBcFvF_GzCwLhKeP`ByApGgAdBaBzC_MxCmF|CuCnCuIhHmLpBuLHcGn@iDm@kIdDoHu@wMToLpBuE^mDaAo_@wDiF{AoGz@_MYaCwGcHcBeDwE{XmB}F}EaKmHiCyHaFuC}Ey@iEJ{F~DaN",
    "pointCount": 79,
@@ -3319,85 +2649,13 @@
    "end": [
     34.479034,
     134.300061
-   ]
-  },
-  {
-   "id": "香川県:132",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "綾歌綾川線",
-   "ref": "278",
-   "highway": "secondary",
-   "lengthKm": 5.65,
-   "curviness": 96.3,
-   "flow": 13.3,
-   "turnCount": 41,
-   "score": 43.4,
-   "baseScore": 40.5,
-   "spotCount": 1,
-   "polyline": "kjzoEol_pXqDX}DwL_I_Re@mGxBmY]kIsN}_@mEmOYcEl@aKe@aGaCwKkF{Di@sAc@gPgG}VuFi]y@_C}DqCcAyAgDkNIoEnEot@w@uDkCmC",
-   "pointCount": 26,
-   "start": [
-    34.218782,
-    133.85944
    ],
-   "end": [
-    34.232752,
-    133.914234
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:133",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "国道377号",
-   "ref": "377",
-   "highway": "trunk",
-   "lengthKm": 9.61,
-   "curviness": 152.3,
-   "flow": 16.8,
-   "turnCount": 87,
-   "score": 43.1,
-   "baseScore": 43.1,
-   "spotCount": 0,
-   "polyline": "yayoE}eaqXAo@\\|JvC`IxBdWa@`It@~JzFtVlDtIdExDl@~Ap@nEfAd^jCrHhGfJp@vGoAzF|AdJmFrRiAbKw@dl@yFfQvBzMUxFaG|MMjJm@vBgCzC{ChH_HfKeHdFsE~E}D~NwAxCiYpO_Ch@qE?iFpSc@nC@pD~A~Rs@pSo@hCsExJcFdDgA~AkAlKrPlAc@vE",
-   "pointCount": 49,
-   "start": [
-    34.212291,
-    134.032475
-   ],
-   "end": [
-    34.222942,
-    133.94596
-   ]
-  },
-  {
-   "id": "香川県:134",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "綾南・綾歌・満濃バイパス",
-   "ref": "32;377",
-   "highway": "trunk",
-   "lengthKm": 6.87,
-   "curviness": 116.1,
-   "flow": 16.6,
-   "turnCount": 48,
-   "score": 43,
-   "baseScore": 40.1,
-   "spotCount": 1,
-   "polyline": "yvzoEk|}oXiDiAsFgDkC{CaC{FmCqTN[{Cc^qA_JiBsEsRc]_JkTgIwYc@{PuEsRYEoIuWcF{JaH_Uu[ez@sDcHaCoBoTeFgCwAiEeEoE}JyAwL",
-   "pointCount": 27,
-   "start": [
-    34.220771,
-    133.851735
-   ],
-   "end": [
-    34.251488,
-    133.912485
-   ]
-  },
-  {
-   "id": "香川県:135",
+   "id": "香川県:92",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "三木綾川線",
@@ -3407,8 +2665,8 @@
    "curviness": 130.3,
    "flow": 14.8,
    "turnCount": 68,
-   "score": 43,
-   "baseScore": 43,
+   "score": 50.5,
+   "baseScore": 50.5,
    "spotCount": 0,
    "polyline": "sh`pEmqnqXZ~Ea@hNcBlHgIjS_AdE_Cpf@d\\zDvXbMxEnGbI|VvEdDpCdElGfG|GjNBhBwA|OgCjEY|ANxAjDvHDbCsClLyBvCDjF]bAwBbEoDzDoAjV`AnNcArGTlEqG~OiE|UBn]~@~BvDhCpArBz@|N",
    "pointCount": 39,
@@ -3419,10 +2677,41 @@
    "end": [
     34.240179,
     134.033114
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:136",
+   "id": "香川県:93",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "綾歌綾川線",
+   "ref": "278",
+   "highway": "secondary",
+   "lengthKm": 5.65,
+   "curviness": 96.3,
+   "flow": 13.3,
+   "turnCount": 41,
+   "score": 50.4,
+   "baseScore": 47.5,
+   "spotCount": 1,
+   "polyline": "kjzoEol_pXqDX}DwL_I_Re@mGxBmY]kIsN}_@mEmOYcEl@aKe@aGaCwKkF{Di@sAc@gPgG}VuFi]y@_C}DqCcAyAgDkNIoEnEot@w@uDkCmC",
+   "pointCount": 26,
+   "start": [
+    34.218782,
+    133.85944
+   ],
+   "end": [
+    34.232752,
+    133.914234
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "香川県:94",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "綾歌綾川線",
@@ -3432,8 +2721,8 @@
    "curviness": 97.2,
    "flow": 12.4,
    "turnCount": 36,
-   "score": 42.4,
-   "baseScore": 39.5,
+   "score": 49.2,
+   "baseScore": 46.3,
    "spotCount": 1,
    "polyline": "ef}oEyvmpXjD_RiAgIo@kY_CkM|BmL~@eKrBqI_@qNsFwQsG_Ju@uHwPaYoA{GqFyHcCeGqFmEeZei@aEiC",
    "pointCount": 19,
@@ -3444,60 +2733,13 @@
    "end": [
     34.247002,
     133.975495
-   ]
-  },
-  {
-   "id": "香川県:137",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "岡田丸亀線",
-   "ref": "195",
-   "highway": "secondary",
-   "lengthKm": 4.5,
-   "curviness": 123.6,
-   "flow": 13.6,
-   "turnCount": 41,
-   "score": 42.2,
-   "baseScore": 42.2,
-   "spotCount": 0,
-   "polyline": "wpzoE}z}oXEdBa@f@yLtBmL~DaTgBeO?eV`EcEnBcKdAmEhByFfGaAvB{@xEkAdAwIEsE`@mRpJwGhAsQpFmEfDqEJ}XbJ",
-   "pointCount": 23,
-   "start": [
-    34.219797,
-    133.851508
    ],
-   "end": [
-    34.256743,
-    133.83775
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:138",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "丸井萩原豊浜線",
-   "ref": "241",
-   "highway": "secondary",
-   "lengthKm": 5.04,
-   "curviness": 106.7,
-   "flow": 14.2,
-   "turnCount": 38,
-   "score": 41.8,
-   "baseScore": 41.8,
-   "spotCount": 0,
-   "polyline": "iy_oEik}nXpDr@`RHnAh@r@|@tDdMjIvQtGj_@x@bK|BjKe@fE_D~Fo@`DDhJkBbKOpIy@xIA~I^xC|St\\GdK|Ct^jGfApDhBhQtD",
-   "pointCount": 25,
-   "start": [
-    34.082929,
-    133.685166
-   ],
-   "end": [
-    34.066147,
-    133.64361
-   ]
-  },
-  {
-   "id": "香川県:139",
+   "id": "香川県:95",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "西讃広域農道",
@@ -3507,8 +2749,8 @@
    "curviness": 132.1,
    "flow": 12.8,
    "turnCount": 33,
-   "score": 41.6,
-   "baseScore": 41.6,
+   "score": 48.7,
+   "baseScore": 48.7,
    "spotCount": 0,
    "polyline": "_hkoEkvhoXaCzA{JbDgG|@yAfAcP`SyHdEqAvAyRt\\WdCbAjPpAdCzGxFfDlOa@nEoE~GUhCdA`BbHxD",
    "pointCount": 19,
@@ -3519,35 +2761,13 @@
    "end": [
     34.150434,
     133.719332
-   ]
-  },
-  {
-   "id": "香川県:140",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "富熊宇多津線",
-   "ref": "191",
-   "highway": "secondary",
-   "lengthKm": 3.48,
-   "curviness": 121.7,
-   "flow": 12.8,
-   "turnCount": 33,
-   "score": 41.1,
-   "baseScore": 41.1,
-   "spotCount": 0,
-   "polyline": "_japEqhapX_Hz@{EDmEs@kIz@wHzB_JvHkDl@cLzFsGz@cOrI{D`GaLbHi[|FgG^_K[_Af@PpIQxF",
-   "pointCount": 19,
-   "start": [
-    34.254561,
-    133.869052
    ],
-   "end": [
-    34.281151,
-    133.855827
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:141",
+   "id": "香川県:96",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "善通寺大野原線",
@@ -3557,8 +2777,8 @@
    "curviness": 130.3,
    "flow": 13.3,
    "turnCount": 42,
-   "score": 40.8,
-   "baseScore": 40.8,
+   "score": 47.9,
+   "baseScore": 47.9,
    "spotCount": 0,
    "polyline": "yopoEucioXhD`ArF|EhCtAxNf@`FfCdBdCrAbFdAjBxAx@bMnC|DbKpInExD|EdKfGrFhMfBhBxKrD|LbHzKnJzBVbRQvA^|DrEp@bBpAzN~@rC",
    "pointCount": 27,
@@ -3569,60 +2789,13 @@
    "end": [
     34.138387,
     133.72182
-   ]
-  },
-  {
-   "id": "香川県:142",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "西讃南部地区大規模農道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 5.47,
-   "curviness": 107.8,
-   "flow": 12.6,
-   "turnCount": 47,
-   "score": 40.6,
-   "baseScore": 40.6,
-   "spotCount": 0,
-   "polyline": "gmdoEspjoXxKvRfFfRhKpPb@~BAhGb@xBpFrG^jAjBpLhCrIg@~LpDn]fHbQnBlOVfGY|M{@tA_PhIoCtB_EzFYtBN`DhBnFlIzIvJvMpBnAfStGjAtA\\bB",
-   "pointCount": 30,
-   "start": [
-    34.106604,
-    133.752577
    ],
-   "end": [
-    34.092084,
-    133.705613
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:143",
-   "region": "kagawa",
-   "regionName": "香川県",
-   "name": "丸亀詫間豊浜線",
-   "ref": "21",
-   "highway": "primary",
-   "lengthKm": 3.18,
-   "curviness": 121.5,
-   "flow": 13.8,
-   "turnCount": 28,
-   "score": 40.3,
-   "baseScore": 40.3,
-   "spotCount": 0,
-   "polyline": "ebuoEemvnXnBk@~G[lWtBxBjB`CnGbDhEpM~EdFChCyBvBeHv@g@tGe@~`@aAnJRpIrGnE|@zFK",
-   "pointCount": 18,
-   "start": [
-    34.191874,
-    133.649629
-   ],
-   "end": [
-    34.166172,
-    133.646461
-   ]
-  },
-  {
-   "id": "香川県:144",
+   "id": "香川県:97",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "国道438号",
@@ -3632,8 +2805,8 @@
    "curviness": 151.2,
    "flow": 13.5,
    "turnCount": 132,
-   "score": 40.3,
-   "baseScore": 40.3,
+   "score": 47.6,
+   "baseScore": 47.6,
    "spotCount": 0,
    "polyline": "efboEkh~pXMxMbEzNJjI_@vDiF`MeAtG_EtH_ApHiAfDqO~MoIpDgAdA{B~GsEhEkCtKeExF{BvKyAXyFsAyAlAs@`DGhEoFpIoClMb@jGGhEjCdM\\jJ_@dBwF`Gw@pH{FvEgF`H_DnB_Ef@}E_@qFyC{DaAsIlA}CnA}LvIoKg@yA^{A`CeDzKmCrEaCrBmEn@wKw@_Cp@gDxBsM`A}IbHqHlJiO|NwErL{CvEiH|\\}IhQiGpDqCx@sKAeC`@{PlIsE`GsDrCqBzEa@fCUdLgBnI",
    "pointCount": 71,
@@ -3644,10 +2817,70 @@
    "end": [
     34.157407,
     133.937919
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:145",
+   "id": "香川県:98",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "西讃南部地区大規模農道",
+   "ref": "",
+   "highway": "tertiary",
+   "lengthKm": 5.47,
+   "curviness": 107.8,
+   "flow": 12.6,
+   "turnCount": 47,
+   "score": 47.5,
+   "baseScore": 47.5,
+   "spotCount": 0,
+   "polyline": "gmdoEspjoXxKvRfFfRhKpPb@~BAhGb@xBpFrG^jAjBpLhCrIg@~LpDn]fHbQnBlOVfGY|M{@tA_PhIoCtB_EzFYtBN`DhBnFlIzIvJvMpBnAfStGjAtA\\bB",
+   "pointCount": 30,
+   "start": [
+    34.106604,
+    133.752577
+   ],
+   "end": [
+    34.092084,
+    133.705613
+   ],
+   "tags": [
+    "flowing"
+   ]
+  },
+  {
+   "id": "香川県:99",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "丸亀詫間豊浜線",
+   "ref": "21",
+   "highway": "primary",
+   "lengthKm": 3.18,
+   "curviness": 121.5,
+   "flow": 13.8,
+   "turnCount": 28,
+   "score": 47.3,
+   "baseScore": 47.3,
+   "spotCount": 0,
+   "polyline": "ebuoEemvnXnBk@~G[lWtBxBjB`CnGbDhEpM~EdFChCyBvBeHv@g@tGe@~`@aAnJRpIrGnE|@zFK",
+   "pointCount": 18,
+   "start": [
+    34.191874,
+    133.649629
+   ],
+   "end": [
+    34.166172,
+    133.646461
+   ],
+   "tags": [
+    "scenic",
+    "flowing"
+   ]
+  },
+  {
+   "id": "香川県:100",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "府中造田線",
@@ -3657,8 +2890,8 @@
    "curviness": 109.6,
    "flow": 13.8,
    "turnCount": 39,
-   "score": 40.2,
-   "baseScore": 40.2,
+   "score": 47.2,
+   "baseScore": 47.2,
    "spotCount": 0,
    "polyline": "ekhpEe_npXnEwCzGsArDeBfBh@lIlJhIlCnBWnHaElJyB~CMpBPxU`ItBHtI}@bJBnGiCpHkBjQkIbFsIjUeKtHuHdO_JhIcNzD@vIfD",
    "pointCount": 26,
@@ -3669,10 +2902,13 @@
    "end": [
     34.251381,
     133.944779
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:146",
+   "id": "香川県:101",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "詫間琴平線",
@@ -3682,8 +2918,8 @@
    "curviness": 117.5,
    "flow": 13.4,
    "turnCount": 33,
-   "score": 39.9,
-   "baseScore": 39.9,
+   "score": 46.8,
+   "baseScore": 46.8,
    "spotCount": 0,
    "polyline": "wjqoEeznoXfSyYd@cEjBgDxAkGr@}KSiE{EgPoCsQAgFl@yD|AkEPeH_ByMiBqC}@kDe@q`@{D}WeAcOXwC",
    "pointCount": 20,
@@ -3694,10 +2930,13 @@
    "end": [
     34.171892,
     133.812103
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:147",
+   "id": "香川県:102",
    "region": "kagawa",
    "regionName": "香川県",
    "name": "観音寺池田線",
@@ -3707,8 +2946,8 @@
    "curviness": 113.6,
    "flow": 12.7,
    "turnCount": 52,
-   "score": 39.6,
-   "baseScore": 39.6,
+   "score": 46.5,
+   "baseScore": 46.5,
    "spotCount": 0,
    "polyline": "ctfoEqofoXa@cC}Nq]oDwOCgCz@qHVqJ|IcX~Ukc@nD_LzAeAbF`@tIeGjLoMt@mBnAeILsJiFmYyKgSiHkEqDiFkHs@mDcD}HgEsDkIiF}H{@yF",
    "pointCount": 27,
@@ -3719,58 +2958,211 @@
    "end": [
     34.120573,
     133.780229
+   ],
+   "tags": [
+    "flowing"
    ]
   },
   {
-   "id": "香川県:148",
+   "id": "香川県:103",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "国分寺中通線",
-   "ref": "39",
+   "name": "善通寺府中線",
+   "ref": "18",
    "highway": "primary",
-   "lengthKm": 3.83,
-   "curviness": 104.7,
-   "flow": 13.8,
-   "turnCount": 29,
-   "score": 39.5,
-   "baseScore": 39.5,
+   "lengthKm": 6.11,
+   "curviness": 108.1,
+   "flow": 11.8,
+   "turnCount": 56,
+   "score": 45.3,
+   "baseScore": 45.3,
    "spotCount": 0,
-   "polyline": "mvfpEqyspXpHiRnIoHh\\qLrCuBnBmFdLin@bEkFfD}LlB}CvCmCpFiAlDyEjKyCrKaA`IzAhLQ",
+   "polyline": "}bdpEoh`pXIi]oDcMSwMpAc^_ByImFeJ{CaLyFeHiE}IsFuE{GmKuDyDsCwJ{AoSN}NsBaGW_CTsJz@{FZcIk@cFmHsLeM_DiK}GsBuByAeDu@oG{@cCaF}EeCmEiDoC{FaH",
+   "pointCount": 33,
+   "start": [
+    34.268786,
+    133.863917
+   ],
+   "end": [
+    34.290424,
+    133.918866
+   ]
+  },
+  {
+   "id": "香川県:104",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "善通寺大野原線",
+   "ref": "24",
+   "highway": "primary",
+   "lengthKm": 3.45,
+   "curviness": 91.7,
+   "flow": 13.7,
+   "turnCount": 23,
+   "score": 45.1,
+   "baseScore": 45.1,
+   "spotCount": 0,
+   "polyline": "ydfoEuk~nXxA`AbHhKzVtQ`BN`EaBzAIx[tPfBnBfB`HnJpM~DbEbJhGvRdJ|RbF|Cd@hCmB",
    "pointCount": 17,
    "start": [
-    34.282148,
-    133.963926
+    34.115488,
+    133.690355
    ],
    "end": [
-    34.257888,
-    133.987163
+    34.089784,
+    133.673466
    ]
   },
   {
-   "id": "香川県:149",
+   "id": "香川県:105",
    "region": "kagawa",
    "regionName": "香川県",
-   "name": "西讃南部地区大規模農道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.13,
-   "curviness": 121.6,
-   "flow": 10.9,
-   "turnCount": 35,
-   "score": 39.1,
-   "baseScore": 39.1,
+   "name": "石田東志度線",
+   "ref": "141",
+   "highway": "secondary",
+   "lengthKm": 3.62,
+   "curviness": 101.2,
+   "flow": 11.4,
+   "turnCount": 32,
+   "score": 45.1,
+   "baseScore": 45.1,
    "spotCount": 0,
-   "polyline": "iu|nEy_}nXlAhEF|Cc@rC}EpJu@nCGnDn@fO`BxGlI|LxDpKzIxJbDv_@IfFmAnFkIzKaBhE_@bHrApH",
+   "polyline": "knhpEwjarXgKbAgEcA{BB}PjEePjL_Dd@wR`@cDl@sGjE}BvFyEzDgZ~LgDtFyChO{AdCoAx@cOf@mGgB",
    "pointCount": 19,
    "start": [
-    34.066928,
-    133.683326
+    34.291103,
+    134.197081
    ],
    "end": [
-    34.064543,
-    133.65354
+    34.318944,
+    134.183393
+   ]
+  },
+  {
+   "id": "香川県:106",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "国道32号",
+   "ref": "32;319",
+   "highway": "trunk",
+   "lengthKm": 10.25,
+   "curviness": 116.5,
+   "flow": 13.3,
+   "turnCount": 90,
+   "score": 44.5,
+   "baseScore": 44.5,
+   "spotCount": 0,
+   "polyline": "_xroEceyoXtC|AvFjA`d@k@zAx@jBnFhBt@rVmFhDa@fDRjTxEfKdExIrFtGQdBZpA~@xDrKjAvAb[jAhKzJpChA`JPjDlBdCf@xVm@pJ\\rGe@|ANlBnAf_@ha@tEdCrFjAlExDbDxEhLfClBbAhA|B`AvH~FrJfBh@`LYdEd@~CfB`IzHfVxH`Ff@dC]tOiH|JbGzOzAt@m@tAwD`TqN",
+   "pointCount": 53,
+   "start": [
+    34.179997,
+    133.827543
+   ],
+   "end": [
+    34.098946,
+    133.802329
+   ]
+  },
+  {
+   "id": "香川県:107",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "国道377号",
+   "ref": "377",
+   "highway": "trunk",
+   "lengthKm": 4.67,
+   "curviness": 74.5,
+   "flow": 14.5,
+   "turnCount": 24,
+   "score": 41.3,
+   "baseScore": 41.3,
+   "spotCount": 0,
+   "polyline": "czdoEavboXjAbHo@pJNjDxS`p@vBpCrTpR|OhKpIxD~K@vE|RxAxK|D~RTtGhBdFrBvOHt^~@fCzGbI",
+   "pointCount": 19,
+   "start": [
+    34.10866,
+    133.712485
+   ],
+   "end": [
+    34.089078,
+    133.672672
+   ]
+  },
+  {
+   "id": "香川県:108",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "国道11号",
+   "ref": "11",
+   "highway": "trunk",
+   "lengthKm": 8.5,
+   "curviness": 78,
+   "flow": 11.6,
+   "turnCount": 57,
+   "score": 39.6,
+   "baseScore": 39.6,
+   "spotCount": 0,
+   "polyline": "}cznEejrnXtBjAvAhB`DzHdQjUz@fDfA`KzGnXvIrM|BxG|FpLvE|h@Q~Pb@lCnAjB`g@va@~FrGdBzCrAxEDxS`BhFjCnBtp@n\\bUvV~K`C|AtBjH`TnAtAfG|@`G?~MuBbN_FhCj@bPhJ",
+   "pointCount": 34,
+   "start": [
+    34.053914,
+    133.628673
+   ],
+   "end": [
+    34.00525,
+    133.570928
+   ]
+  },
+  {
+   "id": "香川県:109",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "国道11号",
+   "ref": "11",
+   "highway": "trunk",
+   "lengthKm": 4.65,
+   "curviness": 89.3,
+   "flow": 10.9,
+   "turnCount": 38,
+   "score": 38.6,
+   "baseScore": 38.6,
+   "spotCount": 0,
+   "polyline": "shnpEypdrXqEzCkB~BuDpHu@dG\\zGdBtK_CjLIdCTxAjJ|Vh@nHaAdGyIxQe@rG`@dDpQtf@x@bEXfFKrEuEve@wDpPo@lIgEbP",
+   "pointCount": 24,
+   "start": [
+    34.320901,
+    134.213413
+   ],
+   "end": [
+    34.323537,
+    134.167589
+   ]
+  },
+  {
+   "id": "香川県:110",
+   "region": "kagawa",
+   "regionName": "香川県",
+   "name": "国道11号",
+   "ref": "11",
+   "highway": "trunk",
+   "lengthKm": 3.64,
+   "curviness": 74,
+   "flow": 9.6,
+   "turnCount": 28,
+   "score": 35.6,
+   "baseScore": 35.6,
+   "spotCount": 0,
+   "polyline": "of{oEyogsXGbGgAzFwElJcBpBoGdD{G`A}ClA}q@x`@cBtEAnQqAvGc\\bb@oAhEaBjR",
+   "pointCount": 15,
+   "start": [
+    34.22328,
+    134.39245
+   ],
+   "end": [
+    34.24345,
+    134.365365
    ]
   }
  ],
- "hiddenCount": 0
+ "hiddenCount": 47
 }
