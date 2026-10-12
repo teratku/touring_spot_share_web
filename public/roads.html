@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>おすすめ道路 | ツーリングスポットシェア</title>
+<meta name="description" content="バイクで走って楽しいおすすめ道路を、地図と一覧で。アプリと同じおすすめ道路です。" />
+<link rel="canonical" href="https://biketeilen.web.app/roads.html" />
+<meta name="apple-itunes-app" content="app-id=1466607921" />
+<link rel="stylesheet" href="/site.css?v=6">
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
+<script defer src="/__/firebase/init.js"></script>
+<script defer src="/subscription.js"></script>
+<!-- 計算はアプリの発見タブの「道」と同じ決まり（roads-lib.js） -->
+<script src="/roads-lib.js?v=1"></script>
+<!-- 都道府県の範囲（どの県の配信を読むかを決める） -->
+<script src="/conquest/prefecture-data.js"></script>
+<script defer src="/analytics.js"></script>
+<script defer src="/menu.js?v=7"></script>
+<style>
+  /*
+   * おすすめ道路（利用者の要望 2026-10-12:「web にもアプリと同じようにおすすめ道路のリストを表示するようにしたい。
+   * サブスクの内容も含む」）。無料の人は上位3本・残りは「Plusで残り○件を見る」、Plus の人は全部（アプリと同じ）
+   */
+  .rd-controls { display: flex; flex-direction: column; gap: 10px; }
+  .rd-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .rd-row__label { font-size: 12px; color: var(--ts-text-2); width: 64px; flex: none; }
+  .rd-chip { border: 1.5px solid var(--ts-teal); background: transparent; color: var(--ts-teal-ink); border-radius: 999px;
+             padding: 5px 12px; font: 600 12px/1.2 var(--ts-font); cursor: pointer; }
+  .rd-chip[aria-pressed="true"] { background: var(--ts-teal); color: #fff; }
+  .rd-select { font: 14px var(--ts-font); padding: 6px 8px; border-radius: 8px; border: 1px solid #c8d3d8; background: var(--ts-surface); color: inherit; }
+  .rd-where { font-size: 13px; color: var(--ts-text-2); }
+  .rd-tier { font-size: 13px; margin: 12px 0 8px; color: var(--ts-text-2); }
+  .rd-map { width: 100%; height: 360px; border-radius: var(--ts-radius); overflow: hidden; margin-bottom: 12px; background: #e8eef0; }
+  .rd-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .rd-item { display: flex; gap: 12px; align-items: flex-start; background: var(--ts-surface); border-radius: var(--ts-radius);
+             box-shadow: var(--ts-shadow); padding: 12px 14px; cursor: pointer; border: 2px solid transparent; }
+  .rd-item[aria-selected="true"] { border-color: #E8590C; }
+  .rd-rank { flex: none; width: 26px; height: 26px; border-radius: 50%; background: #b8c3c8; color: #fff;
+             font: 700 12px/26px var(--ts-font); text-align: center; }
+  .rd-rank--top { background: var(--ts-teal); }
+  .rd-body { flex: 1; min-width: 0; }
+  .rd-name { font-weight: 600; font-size: 15px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .rd-tag { font-size: 11px; padding: 1px 7px; border-radius: 999px; background: rgba(0, 168, 198, .15); color: var(--ts-teal-ink); font-weight: 600; }
+  .rd-note { font-size: 13px; color: var(--ts-text-2); margin-top: 3px; }
+  .rd-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 5px; font-size: 12px; color: var(--ts-text-2); }
+  .rd-stars { color: var(--ts-teal); letter-spacing: 1px; }
+  .rd-stars .off { color: #c9d1d4; }
+  .rd-kind { font-size: 11px; padding: 1px 7px; border-radius: 999px; background: #eef2f4; }
+  .rd-toll { font-size: 11px; font-weight: 700; color: #C05A00; background: rgba(255, 149, 0, .14); padding: 1px 7px; border-radius: 6px; }
+  .rd-dist { flex: none; font-size: 12px; color: var(--ts-text-2); }
+  .rd-detail { margin-top: 8px; font-size: 13px; }
+  .rd-detail a { font-weight: 600; }
+  .rd-plus { display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: var(--ts-radius); margin-top: 8px;
+             background: rgba(0, 168, 198, .08); border: 1px solid rgba(0, 168, 198, .25); }
+  .rd-plus__title { font-weight: 700; }
+  .rd-plus__sub { font-size: 13px; color: var(--ts-text-2); margin-top: 2px; }
+  .rd-empty { text-align: center; padding: 28px 12px; color: var(--ts-text-2); }
+  @media (prefers-color-scheme: dark) {
+    .rd-kind { background: #2C2C2E; }
+    .rd-map { background: #1C1C1E; }
+    .rd-toll { color: #FFB340; }
+    .rd-select { border-color: #3A3A3C; }
+  }
+</style>
+</head>
+<body class="ts-page">
+  <header class="ts-header">
+    <div>
+      <h1 class="ts-header__title">⛰️ おすすめ道路</h1>
+      <p class="ts-header__sub">走って楽しい道を、地図と一覧で（アプリと同じおすすめ道路）</p>
+    </div>
+  </header>
+
+  <main class="ts-main">
+    <section class="ts-card rd-controls" aria-label="探し方">
+      <div class="rd-row">
+        <span class="rd-row__label">場所</span>
+        <button class="rd-chip" type="button" id="here">📍 現在地</button>
+        <select class="rd-select" id="pref" aria-label="都道府県から探す"><option value="">都道府県から…</option></select>
+        <span class="rd-where" id="where"></span>
+      </div>
+      <div class="rd-row" id="radius" role="group" aria-label="範囲"><span class="rd-row__label">範囲</span></div>
+      <div class="rd-row" id="filters" role="group" aria-label="絞り込み"><span class="rd-row__label">絞り込み</span></div>
+      <div class="rd-row">
+        <span class="rd-row__label">並べ替え</span>
+        <select class="rd-select" id="sort" aria-label="並べ替え"></select>
+      </div>
+    </section>
+
+    <p class="rd-tier" id="tier"></p>
+    <div class="rd-map" id="map" aria-label="おすすめ道路の地図"></div>
+    <ul class="rd-list" id="list" aria-live="polite"></ul>
+    <div id="plus"></div>
+  </main>
+
+  <footer class="ts-footer">
+    <nav aria-label="サイトの案内">
+      <a href="/about.html">アプリ紹介</a>
+      <a href="/support.html">サポート</a>
+      <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+      <a href="/termsofservice/termsofservice.html">利用規約</a>
+    </nav>
+    <div>© ツーリングスポットシェア（biketeilen）</div>
+  </footer>
+
+<script>
+(function () {
+  "use strict";
+  var R = window.TSSRoads;
+  /** ⚠️ 場所が取れないときの中心（東京駅）。黙って空の一覧にしない */
+  var FALLBACK = { lat: 35.681, lng: 139.767 };
+  var APP_STORE = "https://apps.apple.com/jp/app/id1466607921";
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+
+  var state = {
+    center: null, centerLabel: "", isHere: false,
+    radiusKm: 50, filter: { tags: [], kinds: [] }, sort: "score",
+    roads: [], all: [], popularity: {}, unlimited: false, loggedIn: false,
+    selectedId: null, loading: false, generation: 0,
+  };
+  var map = null, lines = [], index = null, files = {};
+
+  // ---- 配信データ（アプリと同じ: Firestore の road_recommend/_index → Storage の Json/road_recommend/） ----
+  async function recommendIndex() {
+    if (!index) {
+      var doc = await firebase.firestore().collection("road_recommend").doc("_index").get();
+      var p = (doc.exists && doc.data().prefectures) || {};
+      index = Object.keys(p).map(function (k) { return p[k]; }).filter(function (e) { return e && e.fileName; });
+    }
+    return index;
+  }
+  async function loadSegments(names) {
+    var entries = (await recommendIndex()).filter(function (e) { return names.indexOf(e.prefecture) >= 0; });
+    var lists = await Promise.all(entries.map(function (e) {
+      if (!files[e.fileName]) {
+        files[e.fileName] = fetch("https://firebasestorage.googleapis.com/v0/b/biketeilen.appspot.com/o/" +
+            encodeURIComponent("Json/road_recommend/" + e.fileName) + "?alt=media")
+          .then(function (r) { return r.ok ? r.json() : { segments: [] }; })
+          .then(function (f) { return f.segments || []; })
+          .catch(function () { delete files[e.fileName]; return []; });
+      }
+      return files[e.fileName];
+    }));
+    return [].concat.apply([], lists);
+  }
+
+  /** 範囲の道を読み直す（アプリの topRoads: 範囲の道を全部まとめ、一覧は上位に切る） */
+  async function load() {
+    if (!state.center) return;
+    var gen = ++state.generation;
+    state.loading = true; render();
+    try {
+      var names = R.prefecturesWithin(state.center, state.radiusKm, typeof PREFECTURES === "undefined" ? [] : PREFECTURES);
+      var segments = await loadSegments(names);
+      if (gen !== state.generation) return;
+      state.all = R.grouped(R.withinRadius(segments, state.center, state.radiusKm));
+      state.roads = R.limited(state.all, R.fetchLimit(state.radiusKm, 30));
+    } catch (e) {
+      console.error(e);
+      state.all = []; state.roads = [];
+    }
+    state.loading = false;
+    state.selectedId = null;
+    render();
+  }
+
+  // ---- 出す道 ----
+  function listed() {
+    return R.sortRoads(R.listRoads(state.roads, state.all, state.filter, R.fetchLimit(state.radiusKm, 30)),
+                       state.sort, state.center, state.popularity);
+  }
+  function visible() { return R.visibleForTier(listed(), state.unlimited); }
+  function lockedCount() { return Math.max(0, listed().length - visible().length); }
+  function onMap() { return R.mapRoads(state.all, visible(), state.filter, state.unlimited); }
+
+  // ---- 描く ----
+  function render() {
+    renderTier();
+    renderList();
+    renderPlus();
+    drawMap();
+  }
+
+  function renderTier() {
+    el("tier").textContent = state.unlimited
+      ? "Plus：範囲のおすすめ道路をすべて表示しています"
+      : "無料：上位" + R.FREE_VISIBLE_COUNT + "本を表示しています（Plus ですべて表示）";
+  }
+
+  function stars(n) {
+    var out = "";
+    for (var i = 0; i < 5; i++) out += i < n ? "◆" : '<span class="off">◆</span>';
+    return '<span class="rd-stars" title="曲がり具合 ' + n + '/5">' + out + "</span>";
+  }
+  function tollText(r) {
+    if (!r.toll) return "";
+    return '<span class="rd-toll">' + (r.toll === "full" ? "有料道路" : "一部が有料" + (r.tollKm ? "（" + r.tollKm.toFixed(1) + "km）" : "")) + "</span>";
+  }
+
+  function renderList() {
+    var list = el("list");
+    if (state.loading && !state.roads.length) { list.innerHTML = '<li class="rd-empty">おすすめ道路を探しています…</li>'; return; }
+    var items = visible();
+    if (!items.length) {
+      var wider = R.RADIUS_PRESETS.filter(function (k) { return k > state.radiusKm; })[0];
+      list.innerHTML = '<li class="rd-empty">' + (R.isFilterActive(state.filter) && state.roads.length
+        ? "条件に合うおすすめ道路がありません。絞り込みを外すと出ます"
+        : "この範囲のおすすめ道路が見つかりません" + (wider ? '<br><button class="ts-btn ts-btn--ghost" type="button" id="wider" style="margin-top:12px">' +
+            (R.isNationwide(wider) ? "全国" : wider + "km") + "に広げて探す</button>" : "")) + "</li>";
+      var w = el("wider");
+      if (w) w.onclick = function () { state.radiusKm = wider; renderRadius(); load(); };
+      return;
+    }
+    list.innerHTML = items.map(function (r, i) {
+      var tags = r.tags.slice(0, 2).map(function (t) { return '<span class="rd-tag">' + esc(R.tagLabel(t)) + "</span>"; }).join("");
+      var dist = state.center ? (R.distance(state.center, r.representative) / 1000).toFixed(0) + "km" : "";
+      var users = state.popularity[r.id];
+      var selected = r.id === state.selectedId;
+      return '<li class="rd-item" role="button" tabindex="0" data-id="' + esc(r.id) + '" aria-selected="' + selected + '">' +
+        '<span class="rd-rank' + (i < 3 ? " rd-rank--top" : "") + '">' + (i + 1) + "</span>" +
+        '<div class="rd-body"><div class="rd-name">' + esc(r.name) + tags + "</div>" +
+        (r.note ? '<div class="rd-note">' + esc(r.note) + "</div>" : "") +
+        '<div class="rd-meta">' + stars(R.windingStars(r.curvinessDegPerKm)) +
+        "<span>全長" + r.lengthKm.toFixed(0) + "km</span>" +
+        '<span class="rd-kind">' + esc(R.highwayLabel(r.highway)) + "</span>" + tollText(r) +
+        (users ? "<span>👥 " + users + "人が選びました</span>" : "") + "</div>" +
+        (selected ? detailOf(r) : "") + "</div>" +
+        (dist ? '<span class="rd-dist">' + dist + "</span>" : "") + "</li>";
+    }).join("");
+    list.querySelectorAll(".rd-item").forEach(function (li) {
+      var pick = function () { select(li.getAttribute("data-id")); };
+      li.onclick = function (e) { if (e.target.closest("a")) return; pick(); };
+      li.onkeydown = function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } };
+    });
+  }
+
+  function detailOf(r) {
+    var p = r.representative;
+    var parts = r.parts.length > 1
+      ? "<div>この道の区間: " + r.parts.map(function (x) { return esc(x.name) + "（" + Number(x.lengthKm).toFixed(1) + "km）"; }).join("・") + "</div>" : "";
+    return '<div class="rd-detail">' + parts +
+      "<div>曲がり " + Math.round(r.curvinessDegPerKm) + "°/km・点数 " + r.score.toFixed(1) + "</div>" +
+      '<div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=' + p.lat + "," + p.lng +
+      '" target="_blank" rel="noopener">Googleマップで入口を開く</a>' +
+      ' ・ <a href="' + APP_STORE + '" target="_blank" rel="noopener">アプリでルートにする</a></div></div>';
+  }
+
+  function renderPlus() {
+    var n = lockedCount(), box = el("plus");
+    if (state.unlimited || n <= 0) { box.innerHTML = ""; return; }
+    // ⚠️ Plus の登録はアプリだけ（App Store の課金）。同じアカウントでログインすると Web にも反映される
+    box.innerHTML = '<div class="rd-plus"><span aria-hidden="true">🔒</span><div style="flex:1">' +
+      '<div class="rd-plus__title">Plusで残り' + n + "件を見る</div>" +
+      '<div class="rd-plus__sub">周辺のおすすめ道路をすべて表示。Plus はアプリから登録でき、同じアカウントでログインすると Web にも反映されます。</div></div>' +
+      (state.loggedIn
+        ? '<a class="ts-btn" href="' + APP_STORE + '" target="_blank" rel="noopener">アプリで登録</a>'
+        : '<a class="ts-btn" href="/login.html">ログイン</a>') + "</div>";
+  }
+
+  // ---- 地図 ----
+  function drawMap() {
+    if (!map || !window.google) return;
+    lines.forEach(function (l) { l.setMap(null); });
+    lines = [];
+    var roads = onMap();
+    // ⚠️ 全国は重いので、見えている範囲の点数の高い順に上限まで（アプリの mapVisibleCap）
+    if (R.isNationwide(state.radiusKm) && state.unlimited) {
+      var b = map.getBounds();
+      if (b) roads = roads.filter(function (r) { return b.contains(r.representative); });
+      roads = roads.slice().sort(function (a, c) { return c.score - a.score; }).slice(0, R.NATIONWIDE_MAP_CAP);
+    }
+    roads.forEach(function (r) {
+      var selected = r.id === state.selectedId;
+      r.polylines.forEach(function (enc) {
+        var line = new google.maps.Polyline({
+          path: R.decodePolyline(enc), map: map, zIndex: selected ? 10 : 1,
+          strokeColor: selected ? "#E8590C" : "#00A8C6", strokeOpacity: selected ? 1 : 0.85, strokeWeight: selected ? 6 : 4,
+        });
+        line.addListener("click", function () { select(r.id); });
+        lines.push(line);
+      });
+    });
+  }
+
+  function select(id) {
+    state.selectedId = state.selectedId === id ? null : id;
+    renderList();
+    drawMap();
+    var r = state.all.filter(function (x) { return x.id === state.selectedId; })[0];
+    if (r && map) {
+      var b = new google.maps.LatLngBounds();
+      r.polylines.forEach(function (enc) { R.decodePolyline(enc).forEach(function (p) { b.extend(p); }); });
+      map.fitBounds(b, 40);
+      var li = document.querySelector('.rd-item[data-id="' + CSS.escape(id) + '"]');
+      if (li) li.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  }
+
+  window.onRoadsMapReady = function () {
+    map = new google.maps.Map(el("map"), { center: state.center || FALLBACK, zoom: 9, mapTypeControl: false, streetViewControl: false });
+    var t = null;
+    map.addListener("idle", function () {
+      if (!R.isNationwide(state.radiusKm)) return;
+      clearTimeout(t); t = setTimeout(drawMap, 200);
+    });
+    drawMap();
+  };
+
+  function moveMap() {
+    if (!map || !state.center) return;
+    map.setCenter(state.center);
+    map.setZoom(R.isNationwide(state.radiusKm) ? 6 : state.radiusKm >= 100 ? 8 : state.radiusKm >= 50 ? 9 : 10);
+  }
+
+  // ---- 操作 ----
+  function setCenter(center, label, isHere) {
+    state.center = center; state.centerLabel = label; state.isHere = isHere;
+    el("where").textContent = label;
+    el("here").setAttribute("aria-pressed", String(isHere));
+    moveMap();
+    load();
+  }
+
+  function useHere() {
+    if (!navigator.geolocation) { setCenter(FALLBACK, "場所が分からないため東京駅から", false); return; }
+    el("where").textContent = "現在地を確かめています…";
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      el("pref").value = "";
+      setCenter({ lat: pos.coords.latitude, lng: pos.coords.longitude }, "現在地から", true);
+    }, function () {
+      if (!state.center) setCenter(FALLBACK, "現在地が分からないため東京駅から（都道府県からも選べます）", false);
+      else el("where").textContent = "現在地が分かりませんでした";
+    }, { maximumAge: 300000, timeout: 10000 });
+  }
+
+  function renderRadius() {
+    var box = el("radius");
+    box.querySelectorAll("button").forEach(function (b) { b.remove(); });
+    R.RADIUS_PRESETS.forEach(function (km) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "rd-chip"; b.textContent = R.radiusLabel(km);
+      b.setAttribute("aria-pressed", String(km === state.radiusKm));
+      b.onclick = function () { state.radiusKm = km; renderRadius(); moveMap(); load(); };
+      box.appendChild(b);
+    });
+  }
+
+  function renderFilters() {
+    var box = el("filters");
+    box.querySelectorAll("button").forEach(function (b) { b.remove(); });
+    var add = function (label, list, key) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "rd-chip"; b.textContent = label;
+      b.setAttribute("aria-pressed", String(state.filter[list].indexOf(key) >= 0));
+      b.onclick = function () {
+        var arr = state.filter[list], i = arr.indexOf(key);
+        if (i >= 0) arr.splice(i, 1); else arr.push(key);
+        renderFilters(); state.selectedId = null; render();
+      };
+      box.appendChild(b);
+    };
+    R.FILTERABLE_TAGS.forEach(function (t) { add(R.tagLabel(t), "tags", t); });
+    R.KINDS.forEach(function (k) { add(k.label, "kinds", k.key); });
+  }
+
+  function init() {
+    renderRadius();
+    renderFilters();
+    var sort = el("sort");
+    sort.innerHTML = R.SORTS.map(function (s) { return '<option value="' + s.key + '">' + s.label + "</option>"; }).join("");
+    sort.onchange = function () { state.sort = sort.value; render(); };
+    var pref = el("pref");
+    (typeof PREFECTURES === "undefined" ? [] : PREFECTURES).forEach(function (pf) {
+      var o = document.createElement("option"); o.value = pf.name; o.textContent = pf.name; pref.appendChild(o);
+    });
+    pref.onchange = function () {
+      var pf = PREFECTURES.filter(function (x) { return x.name === pref.value; })[0];
+      if (!pf) return;
+      var b = pf.bounds;
+      setCenter({ lat: (b.latMin + b.latMax) / 2, lng: (b.lngMin + b.lngMax) / 2 }, pf.name + "の中心から", false);
+    };
+    el("here").onclick = useHere;
+
+    // みんなの人気（人気順・「○人が選びました」。誰でも読める）
+    firebase.firestore().doc("popularity/roads").get().then(function (d) {
+      state.popularity = R.popularRoadUsers(d.exists ? d.data() : {}); render();
+    }).catch(function () { /* 人気が読めなくても一覧は出す */ });
+
+    // ⚠️ サブスクの状態はログインが決まってから（subscription.js）。決まるまでは無料として出す
+    TSSSubscription.onReady(function (s) {
+      state.unlimited = !!s.isSubscribed; state.loggedIn = !!s.loggedIn; render();
+    });
+    useHere();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=onRoadsMapReady"></script>
+</body>
+</html>
