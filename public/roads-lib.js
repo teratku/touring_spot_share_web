@@ -240,6 +240,113 @@
     return out;
   }
 
+  // ---- 道筋とプランに入れる形（アプリの RoadEndpoints・TouringSpot。利用者の要望 2026-10-12:
+  //      「web のおすすめ道路をプランに追加できるようにする（アプリ同様の内容）」）----
+
+  /** 環状とみなす両端の近さ（m）。RoadEndpoints.loopToleranceMeters */
+  var LOOP_TOLERANCE_M = 150;
+  /** 経由地の間隔の目安（m）と途中の点の上限。RoadEndpoints.defaultMaxSpacingMeters / defaultMaxIntermediate */
+  var WAYPOINT_SPACING_M = 2000, WAYPOINT_MAX_INTERMEDIATE = 8;
+  /** 同じ道とみなす両端の近さ（m）。TouringSpot.sameRoadEndMeters */
+  var SAME_ROAD_END_M = 300;
+  /** 1プランに入れられる数（TouringPlanLimits: 無料3・サブスク10） */
+  function spotsPerPlan(subscribed) { return subscribed ? 10 : 3; }
+
+  function lengthOf(path) {
+    var m = 0;
+    for (var i = 1; i < path.length; i++) m += distance(path[i - 1], path[i]);
+    return m;
+  }
+  function pointIndexAt(path, target) {
+    var acc = 0;
+    for (var i = 1; i < path.length; i++) { acc += distance(path[i - 1], path[i]); if (acc >= target) return i; }
+    return path.length - 1;
+  }
+
+  /**
+   * ばらばらの区間の線を1本の道筋にする（RoadEndpoints.traversal）。いちばん長い線から、前と後ろの両方を見て
+   * いちばん近い組み合わせでつなぐ。両端が近ければ環状として、道なりに半分の所で切る。
+   * @param lines [[{lat, lng}]] @returns { path, lengthMeters, isLoop } または null
+   */
+  function traversal(lines) {
+    var parts = (lines || []).filter(function (l) { return l.length >= 2; }).map(function (l) { return l.slice(); });
+    if (!parts.length) return null;
+    var seedIndex = 0;
+    parts.forEach(function (l, i) { if (lengthOf(l) > lengthOf(parts[seedIndex])) seedIndex = i; });
+    var result = parts.splice(seedIndex, 1)[0];
+    while (parts.length) {
+      var front = result[0], back = result[result.length - 1], best = null;
+      parts.forEach(function (part, i) {
+        var head = part[0], tail = part[part.length - 1];
+        [[false, false, distance(back, head)], [false, true, distance(back, tail)],
+         [true, false, distance(front, tail)], [true, true, distance(front, head)]].forEach(function (o) {
+          if (!best || o[2] < best.gap) best = { i: i, atFront: o[0], flip: o[1], gap: o[2] };
+        });
+      });
+      var piece = parts.splice(best.i, 1)[0];
+      if (best.flip) piece.reverse();
+      result = best.atFront ? piece.concat(result) : result.concat(piece);
+    }
+    var total = lengthOf(result);
+    if (result.length < 2 || !(total > 0)) return null;
+    if (distance(result[0], result[result.length - 1]) <= LOOP_TOLERANCE_M) {
+      var cut = Math.max(1, Math.min(result.length - 2, pointIndexAt(result, total / 2)));
+      var half = result.slice(0, cut + 1);
+      return { path: half, lengthMeters: lengthOf(half), isLoop: true };
+    }
+    return { path: result, lengthMeters: total, isLoop: false };
+  }
+
+  /** 道筋（入口 → ゴール）を走らせる経由地列（RoadEndpoints.waypoints）。2km おき・途中8点まで。最後がゴール */
+  function waypointsAlong(path) {
+    if (path.length < 2) return path.slice();
+    var total = lengthOf(path);
+    var count = Math.max(0, Math.min(WAYPOINT_MAX_INTERMEDIATE, Math.ceil(total / WAYPOINT_SPACING_M) - 1));
+    if (count === 0) return [path[0], path[path.length - 1]];
+    var step = total / (count + 1), out = [path[0]];
+    for (var i = 1; i <= count; i++) out.push(path[pointIndexAt(path, step * i)]);
+    out.push(path[path.length - 1]);
+    return out;
+  }
+
+  /** 方位（度・真北から時計回り） */
+  function bearing(a, b) {
+    var r = Math.PI / 180, y = Math.sin((b.lng - a.lng) * r) * Math.cos(b.lat * r);
+    var x = Math.cos(a.lat * r) * Math.sin(b.lat * r) - Math.sin(a.lat * r) * Math.cos(b.lat * r) * Math.cos((b.lng - a.lng) * r);
+    return (Math.atan2(y, x) / r + 360) % 360;
+  }
+  /** 端の呼び名（「北の端」など。道の真ん中から見た方角。RoadEndpoints.endLabel） */
+  function endLabel(end, path) {
+    if (!path.length) return "端";
+    var names = ["北の端", "北東の端", "東の端", "南東の端", "南の端", "南西の端", "西の端", "北西の端"];
+    var i = Math.floor((bearing(path[Math.floor(path.length / 2)], end) + 22.5) / 45) % 8;
+    return names[(i + 8) % 8];
+  }
+
+  /**
+   * プランに入れる1件（アプリの TouringSpot.toDict と同じ形）。道全体を、goalAtEnd の向きで走る。
+   * ⚠️ 通り道は間引いた経由地（`waypointsAlong`）。並びは入口 → ゴール。lat/lng はゴール
+   */
+  function planRoadSpot(road, goalAtEnd, order) {
+    var t = traversal(road.polylines.map(decodePolyline));
+    if (!t) return null;
+    var path = goalAtEnd ? t.path : t.path.slice().reverse();
+    var points = waypointsAlong(path), goal = points[points.length - 1];
+    return { name: road.name, lat: goal.lat, lng: goal.lng, isCustomPin: true, order: order,
+             isRoad: true, path: points.map(function (p) { return { lat: p.lat, lng: p.lng }; }), roadId: road.id };
+  }
+
+  /** プランにもう入っている道か（TouringSpot.isSameRoad: 道のIDが同じ、または名前が同じで両端が近い） */
+  function isSameRoadInPlan(spot, road, ends) {
+    if (!spot || !spot.isRoad) return false;
+    if (spot.roadId && spot.roadId === road.id) return true;
+    var path = (spot.path || []).map(function (p) { return Array.isArray(p) ? { lat: p[0], lng: p[1] } : p; });
+    if (spot.name !== road.name || path.length < 2) return false;
+    var near = function (a, b) { return distance(a, b) <= SAME_ROAD_END_M; };
+    var a = path[0], b = path[path.length - 1];
+    return (near(a, ends[0]) && near(b, ends[1])) || (near(a, ends[1]) && near(b, ends[0]));
+  }
+
   /** Google Encoded Polyline → [{lat, lng}] */
   function decodePolyline(str) {
     var idx = 0, lat = 0, lng = 0, out = [];
@@ -257,7 +364,8 @@
   }
 
   var api = {
-    decodePolyline: decodePolyline,
+    decodePolyline: decodePolyline, traversal: traversal, waypointsAlong: waypointsAlong, endLabel: endLabel,
+    planRoadSpot: planRoadSpot, isSameRoadInPlan: isSameRoadInPlan, spotsPerPlan: spotsPerPlan, lengthOf: lengthOf,
     NATIONWIDE_KM: NATIONWIDE_KM, RADIUS_PRESETS: RADIUS_PRESETS, FREE_VISIBLE_COUNT: FREE_VISIBLE_COUNT,
     NATIONWIDE_MAP_CAP: NATIONWIDE_MAP_CAP, FILTERABLE_TAGS: FILTERABLE_TAGS, KINDS: KINDS, SORTS: SORTS,
     tagKey: tagKey, tagLabel: tagLabel, kindGroup: kindGroup, highwayLabel: highwayLabel, tollKind: tollKind, mergedToll: mergedToll,

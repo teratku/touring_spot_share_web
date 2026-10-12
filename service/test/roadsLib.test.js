@@ -135,3 +135,70 @@ test("画面は無料の人に上位3本と「Plusで残り○件」、Plus の�
     assert.doesNotMatch(page, /menu\.js\?v=6/, `${f} が古い menu.js を読む（1年キャッシュされるので新しい項目が出ない）`);
   }
 });
+
+// ---- プランに追加（アプリの RoadEndpoints・TouringSpot と同じ。利用者の要望 2026-10-12） ----
+const line = (pts) => pts.map(([lat, lng]) => ({ lat, lng }));
+
+test("ばらばらの区間を道なりにつなぎ、環状なら半分で切る（RoadEndpoints.traversal と同じ）", () => {
+  // 南北に並ぶ3つの断片を、順番と向きをばらばらに渡す
+  const a = line([[35.00, 139.0], [35.01, 139.0]]), b = line([[35.03, 139.0], [35.02, 139.0]]), c = line([[35.03, 139.0], [35.05, 139.0]]);
+  const t = R.traversal([a, b, c]);
+  assert.strictEqual(t.isLoop, false);
+  const lats = t.path.map((p) => p.lat);
+  assert.ok(lats.every((v, i) => i === 0 || v >= lats[i - 1]) || lats.every((v, i) => i === 0 || v <= lats[i - 1]),
+            "道筋が行ったり来たりしている: " + lats.join(","));
+  assert.ok(Math.abs(t.lengthMeters - 5560) < 200, `全長 ${t.lengthMeters}`);
+  const loop = R.traversal([line([[35.0, 139.0], [35.01, 139.0], [35.01, 139.01], [35.0, 139.01], [35.0, 139.0005]])]);
+  assert.strictEqual(loop.isLoop, true, "両端が近い道を環状とみなしていない");
+  assert.ok(loop.path.length < 5);
+  assert.strictEqual(R.traversal([]), null);
+});
+
+test("経由地は2kmおき・途中8点まで（RoadEndpoints.waypoints）、端の呼び名は道の真ん中から見た方角", () => {
+  const path = line(Array.from({ length: 101 }, (_, i) => [35 + i * 0.001, 139]));   // 約11.1km 北向き
+  const w = R.waypointsAlong(path);
+  assert.strictEqual(w.length, 2 + 5, "途中の点の数がアプリと違う（ceil(11.1/2)-1=5）");
+  assert.deepStrictEqual(w[0], path[0]);
+  assert.deepStrictEqual(w[w.length - 1], path[path.length - 1]);
+  const long = line(Array.from({ length: 1001 }, (_, i) => [35 + i * 0.001, 139]));   // 約111km
+  assert.strictEqual(R.waypointsAlong(long).length, 10, "途中8点の上限を超えた");
+  assert.strictEqual(R.waypointsAlong(line([[35, 139], [35.005, 139]])).length, 2, "短い道に途中の点を挟んだ");
+  assert.strictEqual(R.endLabel(path[path.length - 1], path), "北の端");
+  assert.strictEqual(R.endLabel(path[0], path), "南の端");
+});
+
+test("プランに入れる形はアプリと同じ（道全体・選んだ向き・lat/lng はゴール・道のIDを残す）。二重と上限も同じ", () => {
+  const { encode } = require("../../admin/lib/polyline");
+  const road = { id: "n:神奈川県|芦ノ湖スカイライン|tertiary", name: "芦ノ湖スカイライン",
+                 polylines: [encode(Array.from({ length: 51 }, (_, i) => [139.0, 35 + i * 0.001]))] };
+  const forward = R.planRoadSpot(road, true, 2);
+  assert.deepStrictEqual({ isRoad: forward.isRoad, isCustomPin: forward.isCustomPin, order: forward.order, roadId: forward.roadId },
+                         { isRoad: true, isCustomPin: true, order: 2, roadId: road.id });
+  assert.ok(forward.path[0].lat < forward.path[forward.path.length - 1].lat, "選んだ向きで通り道を並べていない");
+  assert.deepStrictEqual({ lat: forward.lat, lng: forward.lng }, forward.path[forward.path.length - 1], "lat/lng がゴールでない");
+  const backward = R.planRoadSpot(road, false, 0);
+  assert.ok(backward.path[0].lat > backward.path[backward.path.length - 1].lat, "逆向きを選んでも向きが変わらない");
+  assert.ok(forward.path.every((p) => Object.keys(p).join() === "lat,lng"), "通り道を {lat, lng} で保存していない（入れ子の配列は書けない）");
+  const ends = [forward.path[0], forward.path[forward.path.length - 1]];
+  assert.ok(R.isSameRoadInPlan({ isRoad: true, roadId: road.id, name: "x", path: [] }, road, ends), "同じIDの道を別の道とした");
+  assert.ok(R.isSameRoadInPlan({ isRoad: true, name: road.name, path: backward.path }, road, ends), "逆向きに入れた同じ道を見逃した");
+  assert.ok(!R.isSameRoadInPlan({ isRoad: true, name: "別の道", path: forward.path }, road, ends));
+  assert.ok(!R.isSameRoadInPlan({ name: road.name, lat: 35, lng: 139 }, road, ends), "スポットを道とした");
+  assert.ok(!R.isSameRoadInPlan({ name: road.name, path: forward.path }, road, ends), "道の印の無いものを道とした");
+  assert.deepStrictEqual([R.spotsPerPlan(false), R.spotsPerPlan(true)], [3, 10]);
+});
+
+test("画面: 選んだ道を先頭に出し、場所からの距離と分かるように書き、寄っても道を消さず、プランに追加する", () => {
+  const html = fs.readFileSync(path.join(__dirname, "..", "..", "public", "roads.html"), "utf8");
+  assert.match(html, /if \(sel\.length\) items = sel\.concat\(items\.filter\(function \(r\) \{ return r\.id !== state\.selectedId; \}\)\);/,
+               "選んだ道を一覧の先頭に出していない");
+  assert.match(html, /"ここから" \+ \(R\.distance\(state\.center, r\.representative\) \/ 1000\)/, "距離が道の長さと紛らわしい");
+  assert.match(html, /if \(b\) roads = roads\.filter\(function \(r\) \{ return b\.intersects\(boxOf\(r\)\); \}\);/,
+               "始点が画面の外に出ると道が消える");
+  assert.match(html, /var spot = R\.planRoadSpot\(road, state\.add\.goalAtEnd, plan\.spots\.length\);/);
+  assert.match(html, /if \(plan\.spots\.length >= limit\) \{/, "プランの上限を見ていない");
+  assert.match(html, /R\.isSameRoadInPlan\(sp, road, \[t\.path\[0\], t\.path\[t\.path\.length - 1\]\]\)/, "同じ道を二重に入れる");
+  assert.match(html, /\.update\(\{ spots: spots, updatedAt: firebase\.firestore\.FieldValue\.serverTimestamp\(\) \}\);/);
+  assert.match(html, /loadPlans\(\)\.then\(render\);/, "ログインしたときにプランを読んでいない");
+  assert.match(html, /\/roads-lib\.js\?v=2/, "部品を変えたのに読み込みの版を上げていない");
+});

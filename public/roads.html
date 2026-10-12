@@ -19,7 +19,7 @@
 <script defer src="/__/firebase/init.js"></script>
 <script defer src="/subscription.js"></script>
 <!-- 計算はアプリの発見タブの「道」と同じ決まり（roads-lib.js） -->
-<script src="/roads-lib.js?v=1"></script>
+<script src="/roads-lib.js?v=2"></script>
 <!-- 都道府県の範囲（どの県の配信を読むかを決める） -->
 <script src="/conquest/prefecture-data.js"></script>
 <script defer src="/analytics.js"></script>
@@ -63,6 +63,10 @@
   .rd-plus__title { font-weight: 700; }
   .rd-plus__sub { font-size: 13px; color: var(--ts-text-2); margin-top: 2px; }
   .rd-empty { text-align: center; padding: 28px 12px; color: var(--ts-text-2); }
+  .rd-add { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0, 0, 0, .08); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .rd-add__msg { font-size: 12px; width: 100%; }
+  .rd-add__msg.err { color: var(--ts-danger); }
+  .rd-add__msg.ok { color: var(--ts-green); }
   @media (prefers-color-scheme: dark) {
     .rd-kind { background: #2C2C2E; }
     .rd-map { background: #1C1C1E; }
@@ -127,7 +131,18 @@
     radiusKm: 50, filter: { tags: [], kinds: [] }, sort: "score",
     roads: [], all: [], popularity: {}, unlimited: false, loggedIn: false,
     selectedId: null, loading: false, generation: 0,
+    // プランに追加（利用者の要望 2026-10-12）。plans は本人のプラン、add は詳細の欄の選択と知らせ
+    plans: [], add: { goalAtEnd: true, planId: "", msg: "", ok: false, busy: false },
   };
+  /** 道の線をつないだ道筋（アプリの RoadEndpoints.traversal）と地図の枠。道ごとに1回だけ作る */
+  var travCache = {}, boxCache = {};
+  function trav(r) { return travCache[r.id] || (travCache[r.id] = R.traversal(r.polylines.map(R.decodePolyline))); }
+  function boxOf(r) {
+    if (boxCache[r.id]) return boxCache[r.id];
+    var b = new google.maps.LatLngBounds();
+    r.polylines.forEach(function (enc) { R.decodePolyline(enc).forEach(function (p) { b.extend(p); }); });
+    return (boxCache[r.id] = b);
+  }
   var map = null, lines = [], index = null, files = {};
 
   // ---- 配信データ（アプリと同じ: Firestore の road_recommend/_index → Storage の Json/road_recommend/） ----
@@ -221,9 +236,16 @@
       if (w) w.onclick = function () { state.radiusKm = wider; renderRadius(); load(); };
       return;
     }
-    list.innerHTML = items.map(function (r, i) {
+    // ⚠️ **選んだ道は一覧の先頭に出す**（利用者の要望 2026-10-12: 地図で選んでも一覧の下の方だと見えない）。順位の数字は元のまま
+    var rank = {};
+    items.forEach(function (r, i) { rank[r.id] = i; });
+    var sel = items.filter(function (r) { return r.id === state.selectedId; });
+    if (sel.length) items = sel.concat(items.filter(function (r) { return r.id !== state.selectedId; }));
+    list.innerHTML = items.map(function (r) {
+      var i = rank[r.id];
       var tags = r.tags.slice(0, 2).map(function (t) { return '<span class="rd-tag">' + esc(R.tagLabel(t)) + "</span>"; }).join("");
-      var dist = state.center ? (R.distance(state.center, r.representative) / 1000).toFixed(0) + "km" : "";
+      // ⚠️ 道の長さではなく、探している場所からの距離（「140km」を道の長さと読み違えた。利用者の報告 2026-10-12）
+      var dist = state.center ? "ここから" + (R.distance(state.center, r.representative) / 1000).toFixed(0) + "km" : "";
       var users = state.popularity[r.id];
       var selected = r.id === state.selectedId;
       return '<li class="rd-item" role="button" tabindex="0" data-id="' + esc(r.id) + '" aria-selected="' + selected + '">' +
@@ -237,9 +259,10 @@
         (selected ? detailOf(r) : "") + "</div>" +
         (dist ? '<span class="rd-dist">' + dist + "</span>" : "") + "</li>";
     }).join("");
+    wireAdd();
     list.querySelectorAll(".rd-item").forEach(function (li) {
       var pick = function () { select(li.getAttribute("data-id")); };
-      li.onclick = function (e) { if (e.target.closest("a")) return; pick(); };
+      li.onclick = function (e) { if (e.target.closest("a, button, select, .rd-add")) return; pick(); };
       li.onkeydown = function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } };
     });
   }
@@ -252,7 +275,78 @@
       "<div>曲がり " + Math.round(r.curvinessDegPerKm) + "°/km・点数 " + r.score.toFixed(1) + "</div>" +
       '<div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=' + p.lat + "," + p.lng +
       '" target="_blank" rel="noopener">Googleマップで入口を開く</a>' +
-      ' ・ <a href="' + APP_STORE + '" target="_blank" rel="noopener">アプリでルートにする</a></div></div>';
+      ' ・ <a href="' + APP_STORE + '" target="_blank" rel="noopener">アプリでルートにする</a></div>' + addPanel(r) + "</div>";
+  }
+
+  // ---- プランに追加（アプリと同じ形で保存する: 道全体を選んだ向きで・通り道は2kmおきの経由地。roads-lib の planRoadSpot） ----
+  function addPanel(r) {
+    if (!state.loggedIn) return '<div class="rd-add">プランに入れるには <a href="/login.html">ログイン</a></div>';
+    var t = trav(r);
+    if (!t) return "";
+    var a = R.endLabel(t.path[0], t.path), b = R.endLabel(t.path[t.path.length - 1], t.path);
+    var dirs = '<select class="rd-select" data-add="dir" aria-label="走る向き">' +
+      '<option value="1"' + (state.add.goalAtEnd ? " selected" : "") + ">" + a + " → " + b + "</option>" +
+      '<option value="0"' + (state.add.goalAtEnd ? "" : " selected") + ">" + b + " → " + a + "</option></select>";
+    if (!state.plans.length) {
+      return '<div class="rd-add">' + dirs + '<span class="rd-add__msg">プランがありません。<a href="/touring-plan.html">ツーリングプラン</a>で作ってから追加できます</span></div>';
+    }
+    var plans = '<select class="rd-select" data-add="plan" aria-label="追加するプラン">' + state.plans.map(function (p) {
+      return '<option value="' + esc(p.id) + '"' + (p.id === state.add.planId ? " selected" : "") + ">" + esc(p.name || "名前なしのプラン") +
+        "（" + p.spots.length + "/" + R.spotsPerPlan(state.unlimited) + "）</option>"; }).join("") + "</select>";
+    return '<div class="rd-add">' + dirs + plans +
+      '<button class="ts-btn" type="button" data-add="go"' + (state.add.busy ? " disabled" : "") + ">プランに追加</button>" +
+      (state.add.msg ? '<span class="rd-add__msg ' + (state.add.ok ? "ok" : "err") + '">' + state.add.msg + "</span>" : "") + "</div>";
+  }
+
+  function wireAdd() {
+    var box = el("list").querySelector(".rd-add");
+    if (!box) return;
+    var dir = box.querySelector('[data-add="dir"]'), plan = box.querySelector('[data-add="plan"]'), go = box.querySelector('[data-add="go"]');
+    if (dir) dir.onchange = function () { state.add.goalAtEnd = dir.value === "1"; state.add.msg = ""; };
+    if (plan) { if (!state.add.planId) state.add.planId = plan.value; plan.onchange = function () { state.add.planId = plan.value; state.add.msg = ""; }; }
+    if (go) go.onclick = function () { addToPlan(); };
+  }
+
+  async function loadPlans() {
+    var user = firebase.auth().currentUser;
+    if (!user) { state.plans = []; return; }
+    try {
+      var snap = await firebase.firestore().collection("users").doc(user.uid).collection("touringPlans").orderBy("createdAt", "asc").get();
+      state.plans = snap.docs.map(function (d) {
+        var x = d.data();
+        return { id: d.id, name: x.name, spots: (x.spots || []).slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); }) };
+      });
+    } catch (e) { console.error(e); state.plans = []; }
+    if (!state.plans.some(function (p) { return p.id === state.add.planId; })) state.add.planId = state.plans[0] ? state.plans[0].id : "";
+  }
+
+  async function addToPlan() {
+    var road = state.all.filter(function (x) { return x.id === state.selectedId; })[0];
+    var plan = state.plans.filter(function (p) { return p.id === state.add.planId; })[0];
+    var user = firebase.auth().currentUser;
+    if (!road || !plan || !user) return;
+    var t = trav(road), limit = R.spotsPerPlan(state.unlimited);
+    var done = function (msg, ok) { state.add.msg = msg; state.add.ok = ok; state.add.busy = false; renderList(); };
+    // ⚠️ 上限はアプリと同じ（無料3・サブスク10）。同じ道は二重に入れない（アプリの isSameRoad）
+    if (plan.spots.length >= limit) {
+      return done("「" + esc(plan.name || "") + "」はもう" + limit + "件入っています" + (state.unlimited ? "" : "（Plus は10件まで）"), false);
+    }
+    if (plan.spots.some(function (sp) { return R.isSameRoadInPlan(sp, road, [t.path[0], t.path[t.path.length - 1]]); })) {
+      return done("「" + esc(road.name) + "」はもうこのプランに入っています", false);
+    }
+    var spot = R.planRoadSpot(road, state.add.goalAtEnd, plan.spots.length);
+    if (!spot) return done("この道はプランに入れられません（道の形が読めません）", false);
+    state.add.busy = true; renderList();
+    try {
+      var spots = plan.spots.concat([spot]);
+      await firebase.firestore().collection("users").doc(user.uid).collection("touringPlans").doc(plan.id)
+        .update({ spots: spots, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      plan.spots = spots;
+      done("「" + esc(plan.name || "") + "」に追加しました（<a href=\"/touring-plan.html\">プランを見る</a>・アプリでもそのまま開けます）", true);
+    } catch (e) {
+      console.error(e);
+      done("追加できませんでした: " + esc(e.message), false);
+    }
   }
 
   function renderPlus() {
@@ -276,7 +370,8 @@
     // ⚠️ 全国は重いので、見えている範囲の点数の高い順に上限まで（アプリの mapVisibleCap）
     if (R.isNationwide(state.radiusKm) && state.unlimited) {
       var b = map.getBounds();
-      if (b) roads = roads.filter(function (r) { return b.contains(r.representative); });
+      // ⚠️ **道の一部でも見えていれば描く。** 始点だけで見ていたため、寄って始点・終点が画面の外に出ると道が消えた（利用者の報告 2026-10-12）
+      if (b) roads = roads.filter(function (r) { return b.intersects(boxOf(r)); });
       roads = roads.slice().sort(function (a, c) { return c.score - a.score; }).slice(0, R.NATIONWIDE_MAP_CAP);
     }
     roads.forEach(function (r) {
@@ -294,6 +389,7 @@
 
   function select(id) {
     state.selectedId = state.selectedId === id ? null : id;
+    state.add.msg = ""; state.add.goalAtEnd = true;
     renderList();
     drawMap();
     var r = state.all.filter(function (x) { return x.id === state.selectedId; })[0];
@@ -398,7 +494,8 @@
 
     // ⚠️ サブスクの状態はログインが決まってから（subscription.js）。決まるまでは無料として出す
     TSSSubscription.onReady(function (s) {
-      state.unlimited = !!s.isSubscribed; state.loggedIn = !!s.loggedIn; render();
+      state.unlimited = !!s.isSubscribed; state.loggedIn = !!s.loggedIn;
+      loadPlans().then(render);
     });
     useHere();
   }
