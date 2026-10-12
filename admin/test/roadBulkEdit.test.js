@@ -167,3 +167,17 @@ test("一覧の行にチェックがあり、押しても道の編集は開か�
   assert.ok(/e\.stopPropagation\(\)/.test(src), "チェックを押すと行の選択（編集）まで開く");
   assert.ok(/renderBulk\(list\)/.test(src), "まとめての欄を描き直していない");
 });
+
+test("「札なし」は札が1つも無い道だけ（非表示にした道は出さない）", () => {
+  // 利用者の要望（2026-10-12）:「札が付いていないものだけを表示する」
+  const isUntagged = new Function(`${fn("isUntagged")}; return isUntagged;`)();
+  assert.strictEqual(isUntagged({}), true);
+  assert.strictEqual(isUntagged({ tags: [] }), true);
+  assert.strictEqual(isUntagged({ tags: [], title: "名", boost: 3 }), true, "札以外の調整があると札なしに出ない");
+  assert.strictEqual(isUntagged({ tags: ["scenic"] }), false, "札がある道を札なしに出した");
+  assert.strictEqual(isUntagged({ hidden: true }), false, "非表示にした道まで札なしに出した");
+  const src = fn("render");
+  assert.ok(/state\.filter === "untagged"\) list = list\.filter\(\(r\) => isUntagged\(r\.o\)\)/.test(src),
+    "一覧の絞り込みに札なしが無い");
+  assert.ok(/data-filter="untagged"/.test(html), "札なしのボタンが無い");
+});
