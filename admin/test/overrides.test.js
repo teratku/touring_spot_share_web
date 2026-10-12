@@ -130,3 +130,31 @@ test("並び順は点数の降順に保たれる", () => {
   const scores = out.segments.map((s) => s.score);
   assert.deepStrictEqual(scores, [...scores].sort((a, b) => b - a));
 });
+
+// ---- 非表示にしても下の順位を繰り上げない（利用者の判断 2026-10-12） ----
+const { deliveredTop } = require("../lib/roadOverrides");
+
+test("非表示の道は印を付けて残せ（枠に数えるため）、手を入れた点数で並ぶ。既定では今までどおり外す", () => {
+  const list = [seg("A", 90), seg("B", 80), seg("C", 70)];
+  const key = overrideKey(list[1]);
+  const kept = applyOverrides(list, { [key]: { hidden: true, boost: 15 } }, {}, { keepHidden: true }).segments;
+  assert.deepStrictEqual(kept.map((s) => s.name), ["B", "A", "C"], "非表示の道を加点したあとの点数で並べていない");
+  assert.strictEqual(kept[0].hidden, true, "非表示の印を付けていない");
+  assert.ok(!("hidden" in kept[1]), "非表示でない道に印を付けた");
+  assert.deepStrictEqual(applyOverrides(list, { [key]: { hidden: true } }).segments.map((s) => s.name), ["A", "C"],
+                         "既定でも非表示の道を残した（ほかの呼び出し元が困る）");
+});
+
+test("配信する道は、非表示も枠に数えた上位から非表示を外したもの（下の順位を繰り上げない）", () => {
+  const ranked = [{ name: "a" }, { name: "b", hidden: true }, { name: "c" }, { name: "d" }, { name: "e", hidden: true }];
+  const r = deliveredTop(ranked, 3);
+  assert.deepStrictEqual(r.list.map((s) => s.name), ["a", "c"], "非表示の分を下の順位の道で埋めた");
+  assert.deepStrictEqual(r.visible.map((s) => s.name), ["a", "c", "d"]);
+  assert.strictEqual(r.hiddenCount, 2);
+  assert.ok(r.list.every((s) => !("hidden" in s)), "配信に非表示の印が残る");
+  const src = require("fs").readFileSync(require("path").join(__dirname, "..", "buildRoadRecommend.js"), "utf8");
+  assert.match(src, /applyOverrides\(segments, overrides\.overrides, overrides\.added, \{ keepHidden: true \}\)/,
+               "生成で非表示の道を残していない（枠に数えられない）");
+  assert.match(src, /const delivered = deliveredTop\(adjusted\.segments, TOP\);\n    const top = delivered\.list\.map\(/,
+               "生成で配信する道を枠に数えて決めていない");
+});

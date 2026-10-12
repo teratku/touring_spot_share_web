@@ -219,7 +219,7 @@ function isEmptyOverride(o) {
  *   applied   … 実際に当たった鍵
  *   unmatched … どの区間にも当たらなかった鍵（道が消えた・名前が変わった等。UIで知らせる）
  */
-function applyOverrides(segments, overrides = {}, added = {}) {
+function applyOverrides(segments, overrides = {}, added = {}, options = {}) {
   const entries = Object.entries(overrides).map(([key, value]) => ({
     key,
     override: normalizeOverride(value),
@@ -239,7 +239,8 @@ function applyOverrides(segments, overrides = {}, added = {}) {
 
     used.add(hit.key);
     const o = hit.override;
-    if (o.hidden) continue;   // 一覧から外す
+    // 一覧から外す。⚠️ `keepHidden` のときは印（hidden: true）を付けて残す（上位の枠に数えるため。`deliveredTop`）
+    if (o.hidden && !options.keepHidden) continue;
 
     // ⚠️ 形の直しを先に当てること。点数の加算は「直したあとの点数」に足す。
     //    逆にすると、切り詰めて点数が下がったぶんまで加算が食われる
@@ -253,6 +254,7 @@ function applyOverrides(segments, overrides = {}, added = {}) {
     if (o.tags.length) next.tags = o.tags;
     // ⚠️ 有料かどうかはここでは決めない。生成の最後（`roadToll.applyToll`）が自動の判定と合わせて決める
     if (o.toll) next.tollSetting = o.toll;
+    if (o.hidden) next.hidden = true;
     result.push(next);
   }
 
@@ -280,6 +282,24 @@ function applyOverrides(segments, overrides = {}, added = {}) {
     added: addedKeys,
     /** 足さなかった鍵（生成データに同じ道がある／線が壊れている） */
     addSkipped: skipped,
+  };
+}
+
+/**
+ * 配信する道を決める（点数の高い順に並んだ `ranked` から上位 `top` 本。非表示の道も枠に数える）。
+ *
+ * ⚠️ 利用者の判断（2026-10-12）:「非表示にしても下の順位の道を繰り上げない」。以前は非表示を外してから上位を数えたため、
+ *    非表示にするたびに151位以下の道が繰り上がり、札を付け終えた県に札の無い道が増えていた
+ *    （47県中36県が150本ちょうどまで埋まっていた。北海道は120本を非表示にして120本が繰り上がっていた）。
+ * ⚠️ 通行規制と重なって外す道は、これより前に外すこと（そちらは繰り上げる。人が決めたことではないため）
+ * @returns {{ list, visible, hiddenCount }} list = 配信する道、visible = 非表示を除いた全部（重みの試算・答え合わせ用）
+ */
+function deliveredTop(ranked, top) {
+  const visible = ranked.filter((s) => !s.hidden);
+  return {
+    list: ranked.slice(0, top).filter((s) => !s.hidden),
+    visible,
+    hiddenCount: ranked.length - visible.length,
   };
 }
 
@@ -313,7 +333,7 @@ function fuzzyMatch(segment, entries, used) {
 }
 
 module.exports = {
-  overrideKey, applyOverrides, normalizeOverride, isEmptyOverride, reshape,
+  overrideKey, applyOverrides, deliveredTop, normalizeOverride, isEmptyOverride, reshape,
   normalizeAdded, isValidAdded, buildAddedSegment,
   KEY_PRECISION, FUZZY_MATCH_METERS, JAPAN_BOUNDS, MIN_ADDED_METERS, TOLL_SETTINGS,
 };

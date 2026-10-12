@@ -27,7 +27,7 @@ const { PrefectureLocator } = require("./lib/prefectureLocator");
 const { stitch } = require("./lib/roadStitcher");
 const { extract, score } = require("./lib/funSegments");
 const { simplify, encode, decode: decodePolyline } = require("./lib/polyline");
-const { applyOverrides } = require("./lib/roadOverrides");
+const { applyOverrides, deliveredTop } = require("./lib/roadOverrides");
 const { loadTollIndex, applyToll } = require("./lib/roadToll");
 const { blockedSegments } = require("./lib/restrictionOverlap");
 const { loadSurfaces, measureUnpaved, key: surfaceKey } = require("./lib/roadSurface");
@@ -473,7 +473,8 @@ async function build() {
     // 開発者の調整（非表示・押し上げ・表示名・ひとこと）を当ててから並べる。
     // 調整は別ファイルに置いてあるので、再生成しても消えない。
     const overrides = readOverrides(pref);
-    const adjusted = applyOverrides(segments, overrides.overrides, overrides.added);
+    // ⚠️ 非表示の道も印を付けて残す（上位の枠に数えて、下の順位を繰り上げないため。`deliveredTop`）
+    const adjusted = applyOverrides(segments, overrides.overrides, overrides.added, { keepHidden: true });
 
     // ⚠️ **二輪が通れない道はおすすめから外す。** 生成もアプリも規制を見ていなかったため、
     //    二輪通行禁止の道がおすすめとして配信され、ルート生成が自分で選ぶことがあり得た。
@@ -506,7 +507,9 @@ async function build() {
     //    形を変えると表示が壊れるので、地域は**別の項目**として足す。
     //    こうすると新しい地域は `region: "tw-taipei"` を足すだけで済み、
     //    IDの中身が何であってもよくなる
-    const top = adjusted.segments.slice(0, TOP).map((s, i) => ({
+    // ⚠️ **非表示にした道も150本の枠に数える**（繰り上げない。利用者の判断 2026-10-12。`deliveredTop`）
+    const delivered = deliveredTop(adjusted.segments, TOP);
+    const top = delivered.list.map((s, i) => ({
       id: `${pref}:${i}`,
       //: 不透明な小文字ローマ字。海外もこの形（tw-taipei / de-bayern）
       region: romaji(pref),
@@ -515,7 +518,7 @@ async function build() {
       ...s,
     }));
     summary.push({ pref, chains: chains.length, segments: segments.length, kept: top.length,
-                   list: top, all: adjusted.segments, hidden: segments.length - adjusted.segments.length });
+                   list: top, all: delivered.visible, hidden: delivered.hiddenCount });
   }
 
   // 重み調整の画面用。配信はしない（ポリラインを含まないので軽い）。
