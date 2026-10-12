@@ -55,6 +55,9 @@
   .row .sub { color:var(--muted); font-size:11px; white-space:nowrap; }
   .row .score { font-variant-numeric:tabular-nums; min-width:36px; text-align:right; }
   .row .mark { font-size:10px; }
+  .row .pick { margin:0; align-self:center; cursor:pointer; }
+  #bulk { gap:6px; font-size:12px; }
+  #bulk label { display:flex; align-items:center; gap:4px; cursor:pointer; }
 
   /* 地図 */
   #map, #rMap { flex:1; min-width:280px; }
@@ -222,6 +225,8 @@
       </select>
     </div>
     <div class="warn" id="unmatched" style="display:none"></div>
+    <!-- まとめて手直し（利用者の要望 2026-10-12: 選択して一気に非表示などしたい） -->
+    <div class="bar wrap" id="bulk"></div>
     <div id="rows"></div>
     <div class="bar muted" id="count"></div>
   </div>
@@ -295,6 +300,8 @@ const state = {
   // ⚠️ overrides と混ぜないこと。あちらは「生成した道への調整」で、
   //    当たらなかったものは不具合として画面に出す。足した道は当たらなくて当たり前
   added: {}, addDraft: null,
+  // まとめて手直しする道（調整の鍵 `overrideKey` の集まり）と、最後に押した行の鍵（Shift の範囲の起点）
+  checked: new Set(), lastPick: null,
   // CSV（グリッドデータ）にある道。道を足すときだけ地図に出す。
   // ⚠️ 県ごとに1回だけ取る。北海道で6,012本あり、毎回取り直すと重い
   csvRoads: null, csvRoadsRomaji: null, csvLines: [], csvIdle: null, csvShow: true,
@@ -537,6 +544,8 @@ async function loadPrefecture(romaji, { keepView = false } = {}) {
   }
   setStatus("読み込み中…");
   state.romaji = romaji;
+  // ⚠️ 選んだ道は県ごと（別の県の道をまとめて手直ししない）
+  state.checked = new Set(); state.lastPick = null;
   const [seg, o] = await Promise.all([
     (await fetch(`/api/roads/segments/${romaji}`)).json(),
     (await fetch(`/api/roads/overrides/${romaji}`)).json(),
@@ -701,6 +710,74 @@ function addedSegments() {
   return built;
 }
 
+// ---------- まとめて手直し ----------
+/**
+ * 選んだ道をまとめて手直しする（利用者の要望 2026-10-12:「選択して一気に非表示などしたい」）。
+ *
+ * ⚠️ **1本ずつの編集（`apply`）と同じ置き場所・同じ決まりで書くこと。** 足した道は `state.added` が本体、
+ *    生成した道は `state.overrides`。生成した道の調整が空になったら消す（`isEmptyEdit`）。保存するまで配信には効かない
+ * ⚠️ 選んでおくのは調整の鍵（道路名＠始点。`overrideKey`）。順位や絞り込みが変わっても同じ道を指す
+ */
+function bulkEdit(edit) {
+  const segs = [...state.segments, ...addedSegments()].filter((s) => state.checked.has(overrideKey(s)));
+  for (const seg of segs) {
+    const key = overrideKey(seg);
+    const home = seg.added ? state.added : state.overrides;
+    const next = edit({ ...(home[key] || {}) });
+    if (!seg.added && isEmptyEdit(next)) delete state.overrides[key];
+    else home[key] = next;
+  }
+  if (segs.length) setDirty(state.dirty + segs.length);
+  setStatus(segs.length ? `${segs.length}本をまとめて手直ししました（S で保存）` : "道を選んでください");
+  render();
+  if (state.selected) renderEditor();
+}
+
+/** 行のチェック。Shift を押していれば、前に押した行からここまでを同じ状態にする */
+// ⚠️ 起点は行の番号でなく鍵で覚える。絞り込みや並べ替えで番号が変わると、別の範囲を選んでしまう
+function togglePick(index, range, on) {
+  const keys = state.visible.map(overrideKey);
+  const last = range && state.lastPick ? keys.indexOf(state.lastPick) : -1;
+  const from = last >= 0 ? Math.min(last, index) : index;
+  const to = last >= 0 ? Math.max(last, index) : index;
+  for (let i = from; i <= to; i++) { if (on) state.checked.add(keys[i]); else state.checked.delete(keys[i]); }
+  state.lastPick = keys[index];
+  render();
+}
+
+function renderBulk(list) {
+  const shown = list.map((r) => overrideKey(r.seg));
+  // ⚠️ 見えていない道（絞り込みで消えた・非表示にして消えた）は選んだままにしない。見えない道まで手直しすることになる
+  for (const k of [...state.checked]) if (!shown.includes(k)) state.checked.delete(k);
+  const n = state.checked.size, all = shown.length > 0 && shown.every((k) => state.checked.has(k));
+  const off = n ? "" : " disabled";
+  $("bulk").innerHTML =
+    `<label><input type="checkbox" id="bulkAll"${all ? " checked" : ""}> 表示中をすべて選ぶ</label>` +
+    `<span class="muted">${n}件を選択</span>` +
+    `<button id="bulkHide"${off}>非表示にする</button>` +
+    `<button id="bulkShow"${off}>表示に戻す</button>` +
+    `<select id="bulkTag">${PRESET_TAGS.map((t) => `<option value="${t}">${escapeHtml(tagLabel(t))}</option>`).join("")}</select>` +
+    `<button id="bulkTagAdd"${off}>札を付ける</button>` +
+    `<button id="bulkTagDel"${off}>札を外す</button>` +
+    `<button id="bulkClear"${off}>選択を外す</button>`;
+  $("bulkAll").onchange = (e) => {
+    state.checked = e.target.checked ? new Set(shown) : new Set();
+    state.lastPick = null;
+    render();
+  };
+  $("bulkHide").onclick = () => bulkEdit((o) => ({ ...o, hidden: true }));
+  $("bulkShow").onclick = () => bulkEdit((o) => ({ ...o, hidden: false }));
+  $("bulkTagAdd").onclick = () => {
+    const tag = $("bulkTag").value;
+    bulkEdit((o) => ({ ...o, tags: [...new Set([...(o.tags || []), tag])] }));
+  };
+  $("bulkTagDel").onclick = () => {
+    const tag = $("bulkTag").value;
+    bulkEdit((o) => ({ ...o, tags: (o.tags || []).filter((t) => t !== tag) }));
+  };
+  $("bulkClear").onclick = () => { state.checked = new Set(); state.lastPick = null; render(); };
+}
+
 function render() {
   const q = $("q").value.trim();
   // ⚠️ 足した道も同じ一覧に出す。別枠にしていたが、点数で並べて比べられないと
@@ -758,15 +835,20 @@ function render() {
     // 走った人の声（人数）。⚠️ 札は人が採用する。ここでは「声がある」ことだけ見せる
     const fb = feedbackOf(r.seg);
     const voiceMark = fb ? `<span class="verdict" title="走った人の声 ${fb.total}人">🗣${fb.total}</span>` : "";
+    const key = overrideKey(r.seg);
     div.innerHTML =
+      `<input type="checkbox" class="pick" title="まとめて手直しする道に選ぶ（Shift で範囲）"${state.checked.has(key) ? " checked" : ""}>` +
       `<span class="rank">${i + 1}</span>` +
       `<span class="name">${escapeHtml(r.o.title || r.seg.name)}</span>` +
       `<span class="mark">${bannedMark}${verdictMark}${voiceMark}${tollMark}${unpavedMark}${marks.join("")}</span>` +
       `<span class="sub">${metricsOf(r.seg).lengthKm.toFixed(0)}km</span>` +
       `<span class="score">${r.score.toFixed(1)}</span>`;
     div.onclick = () => select(r.seg);
+    const pick = div.querySelector(".pick");
+    pick.onclick = (e) => { e.stopPropagation(); togglePick(i, e.shiftKey, pick.checked); };
     rows.appendChild(div);
   });
+  renderBulk(list);
 
   const unpavedCount = state.segments.filter((x) => x.unpaved).length;
   const curatedCount = state.segments.filter(isCurated).length;
