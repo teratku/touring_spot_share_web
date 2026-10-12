@@ -240,6 +240,9 @@
     var rank = {};
     items.forEach(function (r, i) { rank[r.id] = i; });
     var sel = items.filter(function (r) { return r.id === state.selectedId; });
+    // ⚠️ **一覧に無い道を地図で選んだときも先頭に出す。** Plus の地図は範囲の道を全部描くが、一覧は上位120本まで。
+    //    一覧に無い道を選ぶと何も出ていなかった（利用者の報告 2026-10-12: 選択しているが一覧の上に出てこない）。順位の欄は「–」
+    if (!sel.length && state.selectedId) sel = onMap().filter(function (r) { return r.id === state.selectedId; });
     if (sel.length) items = sel.concat(items.filter(function (r) { return r.id !== state.selectedId; }));
     list.innerHTML = items.map(function (r) {
       var i = rank[r.id];
@@ -249,7 +252,8 @@
       var users = state.popularity[r.id];
       var selected = r.id === state.selectedId;
       return '<li class="rd-item" role="button" tabindex="0" data-id="' + esc(r.id) + '" aria-selected="' + selected + '">' +
-        '<span class="rd-rank' + (i < 3 ? " rd-rank--top" : "") + '">' + (i + 1) + "</span>" +
+        '<span class="rd-rank' + (i != null && i < 3 ? " rd-rank--top" : "") + '"' + (i == null ? ' title="一覧の上位に入っていない道"' : "") + ">" +
+          (i == null ? "–" : i + 1) + "</span>" +
         '<div class="rd-body"><div class="rd-name">' + esc(r.name) + tags + "</div>" +
         (r.note ? '<div class="rd-note">' + esc(r.note) + "</div>" : "") +
         '<div class="rd-meta">' + stars(R.windingStars(r.curvinessDegPerKm)) +

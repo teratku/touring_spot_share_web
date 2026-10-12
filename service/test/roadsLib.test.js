@@ -192,6 +192,9 @@ test("画面: 選んだ道を先頭に出し、場所からの距離と分かる
   const html = fs.readFileSync(path.join(__dirname, "..", "..", "public", "roads.html"), "utf8");
   assert.match(html, /if \(sel\.length\) items = sel\.concat\(items\.filter\(function \(r\) \{ return r\.id !== state\.selectedId; \}\)\);/,
                "選んだ道を一覧の先頭に出していない");
+  assert.match(html, /if \(!sel\.length && state\.selectedId\) sel = onMap\(\)\.filter\(function \(r\) \{ return r\.id === state\.selectedId; \}\);/,
+               "一覧の上位に無い道を地図で選ぶと先頭に出ない");
+  assert.match(html, /\(i == null \? "–" : i \+ 1\)/, "一覧に無い道に順位を付けた");
   assert.match(html, /"ここから" \+ \(R\.distance\(state\.center, r\.representative\) \/ 1000\)/, "距離が道の長さと紛らわしい");
   assert.match(html, /if \(b\) roads = roads\.filter\(function \(r\) \{ return b\.intersects\(boxOf\(r\)\); \}\);/,
                "始点が画面の外に出ると道が消える");
