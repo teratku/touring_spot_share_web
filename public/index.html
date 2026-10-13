@@ -1802,6 +1802,7 @@
 
     </style>
     <script src="/menu.js?v=7" defer></script>
+    <script src="/spot-points.js?v=1"></script>
     <link rel="stylesheet" href="/site.css?v=6">
     <style>
       body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
@@ -1902,7 +1903,7 @@
           <input 
             type="text" 
             class="search-input" 
-            placeholder="地域名、コメント、タグで検索..."
+            placeholder="地域名、コメント、タグ、道路名で検索..."
             v-model="searchQuery"
             @input="handleSearchInput"
           >
@@ -1927,6 +1928,23 @@
             >
               {{ region.label }}
             </button>
+          </div>
+        </div>
+        <!-- おすすめポイント（札）で絞り込む（利用者の要望 2026-10-13。アプリと同じ11種）。
+             ⚠️ 複数選んだら「どれかが付いている」スポット。文字の検索・地域と一緒に効く。古い投稿には札が無い -->
+        <div class="region-filter" role="group" aria-label="おすすめポイントで絞り込む">
+          <div class="region-chips">
+            <button
+              v-for="p in spotPointOptions"
+              :key="p.key"
+              class="region-chip point-chip"
+              :class="{ active: selectedPoints.includes(p.key) }"
+              :aria-pressed="selectedPoints.includes(p.key) ? 'true' : 'false'"
+              @click="togglePoint(p.key)"
+            >
+              <span aria-hidden="true">{{ p.icon }}</span> {{ p.label }}
+            </button>
+            <button v-if="selectedPoints.length" class="region-chip" @click="clearPoints">✕ 札を外す</button>
           </div>
         </div>
       </div>
@@ -2725,6 +2743,9 @@
                 showMenu: false,
                 searchQuery: '',
                 searchDebounceTimer: null,
+                // おすすめポイントの鍵（spot-points.js）。⚠️ 何も選んでいなければ絞らない
+                selectedPoints: [],
+                spotPointOptions: (window.TSSSpotPoints && window.TSSSpotPoints.POINTS) || [],
                 filteredLocations: [],
                 showTouringModal: false,       // ツーリング選択モーダル表示フラグ
                 touringPlans: [],              // ユーザーのプラン一覧
@@ -2783,6 +2804,9 @@
                 
                 // Firebaseから最新データを確認・取得
                 await this.checkAndUpdateFromFirebase();
+
+                // スポット詳細の札・タグから来たとき（/?point=onsen・/?q=タグ）はその条件で探す
+                this.applySearchFromUrl();
                 
                 window.addEventListener('scroll', this.handleScroll);
                 document.addEventListener('keydown', this.handleKeydown);
@@ -3218,7 +3242,7 @@
                 const self = this;
 
                 // 検索中かどうかで使用するロケーションを分岐
-                const locationsToShow = (this.searchQuery.trim() || this.selectedRegion !== 'all')
+                const locationsToShow = this.isFiltering()
                 ? this.filteredLocations
                 : this.locations;
 
@@ -3381,12 +3405,41 @@
                 }, 300); // 300ms後に検索実行
               },
 
+              // 文字・地域・おすすめポイントのどれかで絞っているか。
+              // ⚠️ 判定はここだけで行う（地図のマーカー・続きの読み込みが同じ判定を使う）
+              isFiltering() {
+                return !!this.searchQuery.trim() || this.selectedRegion !== 'all' || this.selectedPoints.length > 0;
+              },
+
+              togglePoint(key) {
+                const i = this.selectedPoints.indexOf(key);
+                if (i >= 0) this.selectedPoints.splice(i, 1); else this.selectedPoints.push(key);
+                this.performSearch();
+              },
+
+              clearPoints() {
+                this.selectedPoints = [];
+                this.performSearch();
+              },
+
+              applySearchFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+                const known = this.spotPointOptions.map(p => p.key);
+                const points = params.getAll('point').filter(k => known.includes(k));
+                const q = (params.get('q') || '').trim();
+                if (!points.length && !q) return;
+                this.selectedPoints = points;
+                this.searchQuery = q;
+                this.performSearch();
+              },
+
               // 検索実行
               performSearch() {
                 const query = this.searchQuery.trim().toLowerCase();
+                const SP = window.TSSSpotPoints;
                 
                 // 検索クエリが空の場合は全データを表示
-                if (!query && this.selectedRegion === 'all') {
+                if (!query && this.selectedRegion === 'all' && !this.selectedPoints.length) {
                   this.filteredLocations = [];
                   this.displayedLocations = [];
                   this.currentPage = 0;
@@ -3397,7 +3450,7 @@
                     this.createMarkers();
                   }
                   return;
-                } else if (!query) {
+                } else if (!query && !this.selectedPoints.length) {
                   this.performRegionFilter();
                   return;
                 }
@@ -3420,6 +3473,11 @@
                     const pref = location.administrative || '';
                     if (!prefList.some(p => pref.includes(p))) return false;
                   }
+                  // おすすめポイント（札）。⚠️ 複数選んだら「どれかが付いている」スポット
+                  if (SP && !SP.matchesPoints(location, this.selectedPoints)) return false;
+                  if (!query) return true;
+                  // ⚠️ アプリの SpotSearch と同じ顔ぶれで探す（名前・コメント・住所・タグ・そばの道・おすすめポイントの表示名）
+                  if (SP) return SP.matchesQuery(location, query);
                   // administrative(String)で検索
                   if (location.administrative && 
                       location.administrative.toLowerCase().includes(query)) {
@@ -3535,7 +3593,7 @@
 
                 if (scrollTop + clientHeight >= scrollHeight - 300) {
                   this.isLoadingMore = true;
-                  if (this.searchQuery.trim() || this.selectedRegion !== 'all') {
+                  if (this.isFiltering()) {
                     this.loadMoreSearchResults();
                   } else {
                     this.loadMoreDisplayedLocations();
@@ -3558,7 +3616,7 @@
                   this.isLoadingMore = true;
                   
                   // 検索中かどうかで処理を分岐
-                  if (this.searchQuery.trim() || this.selectedRegion !== 'all') {
+                  if (this.isFiltering()) {
                     this.loadMoreSearchResults();
                   } else {
                     this.loadMoreDisplayedLocations();

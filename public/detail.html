@@ -428,6 +428,22 @@
       .reviews-empty-emoji { font-size: 32px; display: block; margin-bottom: 8px; }
       .reviews-empty-sub { font-size: 11pt; color: #BBBBBB; margin-top: 6px; }
 
+      /* ========== おすすめポイント・そばの道・タグ（アプリの SpotExtrasSection・TagSection と同じ顔ぶれ） ========== */
+      .spot-extras { display: flex; flex-direction: column; gap: 14px; }
+      .spot-extras-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 8px; }
+      .spot-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .spot-chip {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 7px 12px; border-radius: 10px;
+        background: rgba(0, 168, 198, .12); color: #00788D;
+        font-size: 13px; font-weight: 600; text-decoration: none;
+      }
+      .spot-chip:hover, .spot-chip:focus-visible { background: rgba(0, 168, 198, .22); outline: none; }
+      .spot-chip--tag { background: #F1F1F1; color: #555; border-radius: 999px; }
+      .spot-chip--tag:hover, .spot-chip--tag:focus-visible { background: #E4E4E4; }
+      .spot-road { font-size: 14px; color: #333; }
+      .spot-extras-hint { font-size: 12px; color: #888; }
+
       /* ========== 詳細情報グリッド ========== */
       .detail-info-grid {
         display: grid;
@@ -842,6 +858,7 @@
       .touring-add-btn:hover { opacity: 0.85; }
     </style>
     <script src="/menu.js?v=7" defer></script>
+    <script src="/spot-points.js?v=1"></script>
     <link rel="stylesheet" href="/site.css?v=6">
     <style>
       body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
@@ -997,6 +1014,28 @@
                 <div class="info-value">{{ formatTimestamp(location.createTimeTimeStamp) }}</div>
               </div>
             </div>
+          </div>
+
+          <!-- おすすめポイント・そばの道・タグ（利用者の要望 2026-10-13:「web のスポット詳細にも札を表示させる」）。
+               ⚠️ 古い投稿には無い。何も無ければ欄ごと出さない。押すとトップのスポット検索でその札・タグを探す -->
+          <div v-if="spotPoints.length || spotRoad || spotTags.length" class="detail-card spot-extras">
+            <div v-if="spotPoints.length">
+              <div class="spot-extras-title">⭐ おすすめポイント</div>
+              <div class="spot-chips">
+                <a v-for="p in spotPoints" :key="p.key" class="spot-chip"
+                   :href="'/?point=' + encodeURIComponent(p.key)"
+                   :title="'「' + p.label + '」のスポットを探す'"><span aria-hidden="true">{{ p.icon }}</span>{{ p.label }}</a>
+              </div>
+            </div>
+            <div v-if="spotRoad" class="spot-road">🛣️ 近くの道: {{ spotRoad.name }}</div>
+            <div v-if="spotTags.length">
+              <div class="spot-extras-title">🏷️ タグ</div>
+              <div class="spot-chips">
+                <a v-for="t in spotTags" :key="t" class="spot-chip spot-chip--tag"
+                   :href="'/?q=' + encodeURIComponent(t)">#{{ t }}</a>
+              </div>
+            </div>
+            <div class="spot-extras-hint">押すと、同じおすすめポイント・タグのスポットを探せます</div>
           </div>
 
           <!-- ツーリングプランに追加ボタン -->
@@ -1250,6 +1289,10 @@
               };
             },
             computed: {
+              // おすすめポイント・そばの道・タグ（spot-points.js。アプリと同じ読み方）
+              spotPoints() { return this.location && window.TSSSpotPoints ? window.TSSSpotPoints.fromKeys(this.location.points) : []; },
+              spotRoad() { return this.location && window.TSSSpotPoints ? window.TSSSpotPoints.roadOf(this.location) : null; },
+              spotTags() { return this.location && window.TSSSpotPoints ? window.TSSSpotPoints.tagsOf(this.location) : []; },
               displayImageURLs() {
                 if (this.location?.locationImageURLs && this.location.locationImageURLs.length > 0) {
                   return this.location.locationImageURLs;
