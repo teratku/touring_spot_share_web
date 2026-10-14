@@ -46,10 +46,58 @@
       if (s.isRoad && path.length >= 2) {
         var goal = path[path.length - 1];
         return { name: s.name, kind: "road", lat: goal.lat, lng: goal.lng, approach: path.slice(0, -1),
-                 roadID: s.roadId || null, section: s.roadSection || null };
+                 roadID: s.roadId || null, section: s.roadSection || null,
+                 // ⚠️ 利用者が入れ替えた向き（アプリ・Web のプランで入れ替えると付く）。逆向きの知らせで戻さない
+                 keepsDirection: s.directionByUser === true,
+                 // ⚠️ プランのどのスポットか（入れ替えをプランに保存するため。並べ替え・読めない点の除外で番号がずれる）
+                 spot: s };
       }
-      return { name: s.name, kind: "place", lat: s.lat, lng: s.lng, approach: [] };
+      return { name: s.name, kind: "place", lat: s.lat, lng: s.lng, approach: [], spot: s };
     }).filter(function (d) { return ok(d); });
+  }
+
+  // ---- おすすめ道路の向き（アプリの NavRoadDirection と同じ決め方） ----
+  // ⚠️ 利用者の報告（2026-10-14）: 4つの候補がどれも輪になっていた。ぶどうまつたけラインを「北の入口→南の出口」で入れていて、
+  //    次の行き先（北東）へ戻る往復になっていた。逆向きなら往復が無い → 知らせて入れ替えられるようにする（アプリは前から）
+
+  /** これより短くなるときだけ「逆向きのほうがよい」とする（m。NavRoadDirection.minBacktrackMeters） */
+  var MIN_BACKTRACK_METERS = 800;
+
+  /** その道を逆に走ったとき、前後の行き先とのつながりが何m短くなるか（直線で比べる。道の長さはどちらも同じ） */
+  function flippedSavesMeters(entry, goal, previous, next) {
+    var asIs = roughDistance(previous, entry) + (next ? roughDistance(goal, next) : 0);
+    var flipped = roughDistance(previous, goal) + (next ? roughDistance(entry, next) : 0);
+    return asIs - flipped;
+  }
+
+  /**
+   * 向きが逆になっている道の番号（NavRoadDirection.reversedRoadIndices）。
+   * ⚠️ 利用者が入れ替えた道（keepsDirection）には手を出さない。⚠️ 次が道なら、その入口を見る
+   */
+  function reversedRoadIndices(dests, origin) {
+    var out = [];
+    dests.forEach(function (d, i) {
+      if (d.kind !== "road" || d.keepsDirection || !d.approach.length) return;
+      var previous = i === 0 ? origin : { lat: dests[i - 1].lat, lng: dests[i - 1].lng };
+      if (!previous) return;
+      var n = dests[i + 1];
+      var next = n ? (n.approach[0] || { lat: n.lat, lng: n.lng }) : null;
+      var saved = flippedSavesMeters(d.approach[0], { lat: d.lat, lng: d.lng }, previous, next);
+      if (saved >= MIN_BACKTRACK_METERS) out.push({ index: i, savedMeters: saved });
+    });
+    return out;
+  }
+
+  /** 道の入口と出口を入れ替える（通り道ごと裏返す。区間の呼び名も入れ替える）。道でなければそのまま */
+  function reversedRoad(d) {
+    if (!d || d.kind !== "road" || !d.approach.length) return d;
+    var pts = d.approach.concat([{ lat: d.lat, lng: d.lng }]).reverse();
+    var goal = pts[pts.length - 1];
+    var section = d.section && d.section.entry
+      ? Object.assign({}, d.section, { entry: d.section.goal, goal: d.section.entry }) : d.section;
+    return Object.assign({}, d, { lat: goal.lat, lng: goal.lng, approach: pts.slice(0, -1), section: section,
+                                  // ⚠️ 入れ替えた向きは利用者の意思。逆向きの知らせで戻さない
+                                  keepsDirection: true });
   }
 
   /** 地点が上限を超えるとき、道の途中の点だけを道ごとにまんべんなく間引く（入口とゴールは残す）。アプリの NavWaypointBudget.fitted と同じ */
@@ -783,6 +831,8 @@
               candidateColor: candidateColor, kindInfo: kindInfo,
               toDestinations: toDestinations, fitted: fitted, buildBody: buildBody, decodePolyline: decodePolyline,
               keepsAlternate: keepsAlternate,
+              flippedSavesMeters: flippedSavesMeters, reversedRoadIndices: reversedRoadIndices, reversedRoad: reversedRoad,
+              MIN_BACKTRACK_METERS: MIN_BACKTRACK_METERS,
               highwaysForbidden: highwaysForbidden, legDefaults: legDefaults, effectiveLeg: effectiveLeg, toggledLeg: toggledLeg,
               gapConditions: gapConditions, mixedOrNil: mixedOrNil, strictest: strictest,
               kindSegments: kindSegments, kindMeters: kindMeters, presentKinds: presentKinds,

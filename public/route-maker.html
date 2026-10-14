@@ -20,7 +20,8 @@
 <script defer src="/__/firebase/init.js"></script>
 <script defer src="/subscription.js"></script>
 <!-- ⚠️ defer にしないこと（下のページ内のスクリプトが読み込みの途中で使う） -->
-<script src="/route-maker-lib.js?v=6"></script>
+<script src="/plan-road-lib.js?v=2"></script>
+<script src="/route-maker-lib.js?v=7"></script>
 <!-- 楽しい道・距離ガバの選び方（admin/lib から作る生成物・アプリの FunRouteBuilder と答え合わせ済み） -->
 <script src="/route-maker-fun.js?v=1"></script>
 <!-- 県の外接矩形（おすすめ道路を取りに行く県を決める。アプリの PrefectureData と同じ値） -->
@@ -55,6 +56,15 @@
   .rm-stop__legs { grid-column: 2; display: flex; gap: 6px; }
   .rm-leg { font: inherit; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; cursor: pointer;
             border: 1px solid transparent; background: var(--ts-teal); color: #fff; }
+  .rm-flip { grid-column: 2; justify-self: start; font: inherit; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+             cursor: pointer; background: transparent; color: var(--ts-teal-ink); border: 1px solid var(--ts-line); }
+  .rm-flip:hover, .rm-flip:focus-visible { border-color: var(--ts-teal); outline: none; }
+  /* ⚠️ 色は注意の札（rm-tag--warn）と同じ。暗い表示は下の @media でそろえる */
+  .rm-hint { border: 1px solid color-mix(in srgb, #FF9500 45%, transparent); background: color-mix(in srgb, #FF9500 12%, transparent);
+             color: #C46A00; border-radius: 12px; padding: 10px 12px;
+             display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+  .rm-hint p { margin: 0; }
+  .rm-hint .ts-btn { align-self: flex-start; }
   .rm-leg.is-off { background: transparent; color: var(--ts-text-2); border-color: var(--ts-line); text-decoration: line-through; }
   .rm-leg:focus-visible, .rm-cand:focus-visible { outline: 2px solid var(--ts-teal); outline-offset: 2px; }
 
@@ -109,7 +119,7 @@
   .rm-panel [hidden] { display: none !important; }
   @media (prefers-color-scheme: dark) {
     .rm-sample { background: #1C1C1E; }
-    .rm-tag--toll, .rm-tag--warn { color: #FFB340; }
+    .rm-tag--toll, .rm-tag--warn, .rm-hint { color: #FFB340; }
   }
 </style>
 </head>
@@ -155,6 +165,8 @@
   var plans = [], candidates = [], chosen = 0, lastRequest = null;
   /** プランごと・行き先ごとの区間の設定（{avoidTolls, avoidHighways}。null は全体の設定に従う） */
   var legsByPlan = {};
+  /** 作ったあとに「逆向きのほうがよい」と出す道（プランの行き先の番号と縮む距離） */
+  var directionHints = [];
   var map = null, lines = [], markers = [];
   var mapsReady = false, onMapsReadyResolve = null;
   /** おすすめ道路（金色の縁）。索引は1回だけ読む・県のファイルは取り置く */
@@ -360,8 +372,18 @@
         '<span class="rm-stop__no">' + (isOrigin ? "出" : i + (originIsFirst ? 0 : 1)) + "</span>" +
         '<span class="rm-stop__name">' + (d.kind === "road" ? "🛣️ " : "📍 ") + esc(d.name) +
           (d.section && d.section.entry ? " <small>" + esc(d.section.entry) + " → " + esc(d.section.goal || "") + "</small>" : "") +
-          (isOrigin ? " <small>（出発地）</small>" : "") + "</span>" + chips + "</li>";
+          (isOrigin ? " <small>（出発地）</small>" : "") + "</span>" +
+        // ⚠️ おすすめ道路は入口と出口を入れ替えられる（アプリの立ち寄り先の一覧と同じ）
+        (d.kind === "road" && d.approach.length && !(i === 0 && !startsAtCurrent())
+          ? '<button type="button" class="rm-flip" data-i="' + i + '" aria-label="' + esc(d.name) + 'の入口と出口を入れ替える">⇄ 入口と出口を入れ替え</button>' : "") +
+        chips + "</li>";
     }).join("");
+    Array.prototype.forEach.call(el("stops").querySelectorAll(".rm-flip"), function (b) {
+      b.onclick = async function () {
+        b.disabled = true;
+        try { await flipPlanRoads([Number(b.dataset.i)]); showStops(); } catch (e) { setMsg(e.message, "err"); b.disabled = false; }
+      };
+    });
     Array.prototype.forEach.call(el("stops").querySelectorAll(".rm-leg"), function (b) {
       b.onclick = function () {
         var i = Number(b.dataset.i), legs = planLegs();
@@ -369,6 +391,45 @@
         renderStops();
       };
     });
+  }
+
+  /**
+   * おすすめ道路の入口と出口を入れ替えて、プランに保存する（利用者の要望 2026-10-14:「入れ替えるとそれをプランにも保存する」）。
+   * ⚠️ アプリ・Web のプラン画面と同じ形（TSSPlanRoads.reversedPlanSpot。directionByUser を付ける）。
+   * ⚠️ 番号は planDestinations() の番号。スポットは行き先が持っている元のスポット（d.spot）で探す
+   */
+  async function flipPlanRoads(indices) {
+    var plan = currentPlan(), dests = planDestinations();
+    var targets = indices.map(function (i) { return dests[i] && dests[i].spot; }).filter(Boolean);
+    if (!targets.length) return;
+    var spots = (plan.spots || []).map(function (s) {
+      return targets.indexOf(s) >= 0 ? window.TSSPlanRoads.reversedPlanSpot(s) : s;
+    });
+    await fb.db.collection("users").doc(fb.user.uid).collection("touringPlans").doc(plan.id).update({
+      spots: spots, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+    plan.spots = spots;
+  }
+
+  /**
+   * 逆向きのほうがよい道の知らせ（アプリの directionHints と同じ）。作ったあとに出し、押すと入れ替えて作り直す。
+   * ⚠️ 番号はプランの行き先の番号にそろえる（「最初の場所から」で出発地を分けると1つずれる）
+   */
+  function updateDirectionHints() {
+    directionHints = [];
+    var r = lastRequest;
+    if (!r || !r.origin) return;
+    var all = planDestinations(), offset = all.length - r.destinations.length;
+    directionHints = RM.reversedRoadIndices(r.destinations, r.origin)
+      // ⚠️ 最初の場所が道で、その入口を出発地にしているときは入れ替えない（出発地が変わる）
+      .filter(function (h) { return !(offset === 0 && h.index === 0 && !r.fromCurrent); })
+      .map(function (h) { return { index: h.index + offset, name: r.destinations[h.index].name, savedMeters: h.savedMeters }; });
+  }
+
+  function directionHintHtml() {
+    if (!directionHints.length) return "";
+    return '<div class="rm-hint"><p>' + directionHints.map(function (h) {
+      return "「" + esc(h.name) + "」は入口と出口を入れ替えると、前後の行き先とのつながりが約" + km(h.savedMeters) + "短くなります（行って戻る輪が減ります）";
+    }).join("<br>") + '</p><button type="button" class="ts-btn" id="flipHinted">向きを入れ替えて作り直す</button></div>';
   }
 
   function setMsg(text, kind) { var m = el("msg"); m.textContent = text; m.className = "rm-msg" + (kind ? " " + kind : ""); }
@@ -419,6 +480,7 @@
       lastRequest = { plan: plan, origin: origin, originName: originName, fromCurrent: fromCurrent, destinations: dests,
                       fitted: fit, conditions: cond };
       rr.spans = {}; funCtx = null; funGeneration++;
+      updateDirectionHints();
       renderCandidates(); drawRoutes();
       loadRecommendedRoads();
       setMsg(candidates.length ? "候補を選んで、アプリに送ってください" : "経路が見つかりませんでした", candidates.length ? "" : "err");
@@ -490,7 +552,7 @@
     var box = el("cands");
     if (!box) return;
     var r = lastRequest, cond = r ? r.conditions : conditions();
-    box.innerHTML = candidates.map(function (c, i) {
+    box.innerHTML = directionHintHtml() + candidates.map(function (c, i) {
       var on = i === chosen;
       var legs = r && r.destinations.length > 1 ? RM.legBreakdown(c, r.destinations) : [];
       var start = cond.rideAt ? cond.rideAt.getTime() : null, elapsed = 0;
@@ -510,6 +572,15 @@
         '<span class="rm-cand__sum">' + esc(RM.compositionSummary(c)) + "</span>" +
         (tags ? '<span class="rm-cand__tags">' + tags + "</span>" : "") + "</button>";
     }).join("");
+    var flipBtn = el("flipHinted");
+    if (flipBtn) flipBtn.onclick = async function () {
+      flipBtn.disabled = true;
+      try {
+        await flipPlanRoads(directionHints.map(function (h) { return h.index; }));
+        renderStops();
+        makeRoute();
+      } catch (e) { setMsg(e.message, "err"); flipBtn.disabled = false; }
+    };
     Array.prototype.forEach.call(box.querySelectorAll(".rm-cand"), function (b) {
       b.onclick = function () { chosen = Number(b.dataset.i); renderCandidates(); drawRoutes(); };
     });

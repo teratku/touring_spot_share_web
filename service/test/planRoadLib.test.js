@@ -25,7 +25,8 @@ test("通り道を読み（古い形の [緯度, 経度] も）、道でなけ�
 test("一覧の説明はアプリと同じ言い方（区間があれば入口 → ゴール、無ければ全長）", () => {
   assert.strictEqual(P.roadSubtitle({ ...road, roadSection: { entry: "北の端", goal: "南の端", meters: 3000 } }),
                      "おすすめ道路・北の端 → 南の端（3.0km）");
-  assert.match(P.roadSubtitle(road), /^おすすめ道路・全長 18\.\dkm$/, P.roadSubtitle(road));
+  // ⚠️ 2026-10-14 から区間の呼び名が無い道には向きを添える（入れ替えたのが分かるように）
+  assert.match(P.roadSubtitle(road), /^おすすめ道路・全長 18\.\dkm(（.+から.+へ）)?$/, P.roadSubtitle(road));
   assert.strictEqual(P.roadSubtitle(spot), null, "スポットを道と書いた");
 });
 
@@ -42,7 +43,7 @@ test("地図の線は道の通り道に沿い、Google マップには入口と�
 
 test("プラン画面は部品を読み込み、行・地図・距離・Googleマップで道を使う", () => {
   const html = fs.readFileSync(path.join(__dirname, "..", "..", "public", "touring-plan.html"), "utf8");
-  assert.match(html, /<script src="\/plan-road-lib\.js\?v=1"><\/script>/);
+  assert.match(html, /<script src="\/plan-road-lib\.js\?v=\d+"><\/script>/);
   assert.match(html, /v-if="roadSubtitle\(spot\)">🛣️ \{\{ roadSubtitle\(spot\) \}\}/, "一覧で道をカスタムピンと出している");
   assert.match(html, /const road = PlanRoads\.roadPath\(spot\);/, "地図に道の通り道を描いていない");
   assert.match(html, /const linePoints = PlanRoads\.routePoints\(plan\.spots\);/, "地図の線を道に沿わせていない");

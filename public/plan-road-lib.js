@@ -50,7 +50,42 @@
     if (s && s.entry && s.goal && isFinite(s.meters)) {
       return "おすすめ道路・" + s.entry + " → " + s.goal + "（" + (s.meters / 1000).toFixed(1) + "km）";
     }
-    return "おすすめ道路・全長 " + (pathMeters(roadPath(spot)) / 1000).toFixed(1) + "km";
+    var dir = travelDirection(spot);
+    // ⚠️ 区間の呼び名が無い道は、向き（「北から南へ」）を添える。無いと入れ替えても見た目が変わらない（利用者の要望 2026-10-14）
+    return "おすすめ道路・全長 " + (pathMeters(roadPath(spot)) / 1000).toFixed(1) + "km" + (dir ? "（" + dir + "）" : "");
+  }
+
+  var COMPASS = ["北", "北東", "東", "南東", "南", "南西", "西", "北西"];
+  function compass(bearing) { return COMPASS[Math.round((((bearing % 360) + 360) % 360) / 45) % 8]; }
+
+  /** 入口 → 出口の向き（「北から南へ」）。入口と出口が近すぎる・道でなければ null */
+  function travelDirection(spot) {
+    var path = roadPath(spot);
+    if (path.length < 2) return null;
+    var a = path[0], b = path[path.length - 1];
+    if (distance(a, b) < 300) return null;
+    var toRad = Math.PI / 180;
+    var y = Math.sin((b.lng - a.lng) * toRad) * Math.cos(b.lat * toRad);
+    var x = Math.cos(a.lat * toRad) * Math.sin(b.lat * toRad) - Math.sin(a.lat * toRad) * Math.cos(b.lat * toRad) * Math.cos((b.lng - a.lng) * toRad);
+    var bearing = Math.atan2(y, x) / toRad;
+    return compass(bearing + 180) + "から" + compass(bearing) + "へ";
+  }
+
+  /**
+   * おすすめ道路の入口と出口を入れ替えたスポット（アプリの TouringSpot.reversedRoad と同じ。Firestore にそのまま書ける形）。
+   * ⚠️ 通り道（path）ごと裏返し、lat/lng を新しい出口に、区間の呼び名（roadSection）の入口・出口を入れ替え、
+   *    利用者が向きを決めた印（directionByUser）を付ける（付けないとアプリのルート生成が勝手に向きを戻そうとする）。
+   * ⚠️ 通り道の点の形（{lat,lng} か古い [緯度, 経度]）は変えない。道でなければそのまま返す
+   */
+  function reversedPlanSpot(spot) {
+    var path = roadPath(spot);
+    if (path.length < 2) return spot;
+    var goal = path[0];
+    var copy = Object.assign({}, spot, { path: spot.path.slice().reverse(), lat: goal.lat, lng: goal.lng, directionByUser: true });
+    if (spot.roadSection && spot.roadSection.entry) {
+      copy.roadSection = Object.assign({}, spot.roadSection, { entry: spot.roadSection.goal, goal: spot.roadSection.entry });
+    }
+    return copy;
   }
 
   /**
@@ -82,6 +117,7 @@
   }
 
   var api = { roadPath: roadPath, isRoad: isRoad, pathMeters: pathMeters, roadSubtitle: roadSubtitle,
+              travelDirection: travelDirection, reversedPlanSpot: reversedPlanSpot,
               routePoints: routePoints, mapsStops: mapsStops, distance: distance };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TSSPlanRoads = api;

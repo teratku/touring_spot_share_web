@@ -40,5 +40,5 @@ test("サーバの応答と Web の受け取りで外している", () => {
   const page = fs.readFileSync(path.join(__dirname, "..", "..", "public", "route-maker.html"), "utf8");
   assert.ok(/return out\.route && RM\.keepsAlternate\(alt, out\.route, \{ avoidTolls: body\.avoidTolls, avoidHighways: body\.avoidHighways,/.test(page),
     "Web の受け取りで外していない（古いサーバのまま）");
-  assert.ok(/route-maker-lib\.js\?v=6/.test(page), "ブラウザに古い route-maker-lib.js が残る（?v= を上げる）");
+  assert.ok(/route-maker-lib\.js\?v=([6-9]|\d{2,})"/.test(page), "ブラウザに古い route-maker-lib.js が残る（?v= を上げる）");
 });
