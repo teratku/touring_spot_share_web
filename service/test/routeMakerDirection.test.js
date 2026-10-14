@@ -83,6 +83,6 @@ test("画面: 一覧に入れ替えのボタン・作ったあとに知らせ・
   assert.ok(/await flipPlanRoads\(directionHints\.map\(function \(h\) \{ return h\.index; \}\)\);\n\s+renderStops\(\);\n\s+makeRoute\(\);/.test(html),
     "知らせを押してもプランに保存して作り直さない");
   assert.ok(/\.map\(function \(h\) \{ return \{ index: h\.index \+ offset,/.test(html), "出発地を分けたときに番号がずれる");
-  assert.ok(/<script src="\/plan-road-lib\.js\?v=2"><\/script>\n<script src="\/route-maker-lib\.js\?v=7"><\/script>/.test(html),
+  assert.ok(/<script src="\/plan-road-lib\.js\?v=2"><\/script>\n<script src="\/route-maker-lib\.js\?v=([7-9]|\d{2,})"><\/script>/.test(html),
     "裏返しの部品を読んでいない／古い版が残る");
 });

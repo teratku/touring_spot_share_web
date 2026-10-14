@@ -21,7 +21,7 @@
 <script defer src="/subscription.js"></script>
 <!-- ⚠️ defer にしないこと（下のページ内のスクリプトが読み込みの途中で使う） -->
 <script src="/plan-road-lib.js?v=2"></script>
-<script src="/route-maker-lib.js?v=7"></script>
+<script src="/route-maker-lib.js?v=8"></script>
 <!-- 楽しい道・距離ガバの選び方（admin/lib から作る生成物・アプリの FunRouteBuilder と答え合わせ済み） -->
 <script src="/route-maker-fun.js?v=1"></script>
 <!-- 県の外接矩形（おすすめ道路を取りに行く県を決める。アプリの PrefectureData と同じ値） -->
@@ -44,19 +44,35 @@
   .rm-checks label.is-off { color: var(--ts-text-2); }
 
   /* 行き先の一覧（区間ごとの 有料・高速 の札。アプリの立ち寄り先の一覧と同じ） */
-  .rm-stops { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
-  .rm-stop { display: grid; grid-template-columns: 22px 1fr; gap: 2px 8px; align-items: start; }
-  .rm-stop__no { width: 22px; height: 22px; border-radius: 50%; background: #007AFF; color: #fff;
+  /* 行き先の並び（Google マップ・Yahoo! カーナビの行き先画面のような縦の並び。印を縦の線でつなぐ。2026-10-15） */
+  .rm-stops { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 0; font-size: 14px; }
+  .rm-stop { position: relative; display: grid; grid-template-columns: 26px 1fr auto; gap: 2px 10px; align-items: center; padding: 6px 0; }
+  /* 印をつなぐ線（印の後ろ）。最初の行は上半分、最後の行は下半分を出さない */
+  .rm-stop::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: var(--ts-line); }
+  .rm-stop.is-origin::before { top: 50%; }
+  .rm-stop.is-final::before { bottom: 50%; }
+  .rm-stop__no { position: relative; grid-column: 1; width: 26px; height: 26px; border-radius: 50%; background: #007AFF; color: #fff;
                  font-size: 12px; font-weight: 700; display: grid; place-items: center; }
-  .rm-stop.is-final .rm-stop__no { background: #FF3B30; }
+  .rm-stop.is-final .rm-stop__no { background: transparent; font-size: 18px; }
+  .rm-stop.is-road .rm-stop__no { background: var(--ts-green); }
   .rm-stop.is-origin .rm-stop__no { background: var(--ts-text-2); }
-  .rm-stop__name { line-height: 1.4; word-break: break-word; }
+  .rm-stop__name { grid-column: 2; line-height: 1.4; word-break: break-word; }
   .rm-stop__name small { color: var(--ts-text-2); }
   .rm-stop.is-road .rm-stop__name { color: var(--ts-green); }
-  .rm-stop__legs { grid-column: 2; display: flex; gap: 6px; }
+  /* その行き先へ向かう区間（行き先の上に小さく） */
+  .rm-stop__legs { grid-column: 2 / 4; display: flex; gap: 6px; align-items: center; }
+  .rm-stop__legarrow { color: var(--ts-text-2); font-size: 11px; }
+  .rm-stop__tools { grid-column: 3; display: flex; gap: 4px; }
+  .rm-tool { font: inherit; font-size: 13px; width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
+             border: 1px solid var(--ts-line); background: transparent; color: var(--ts-text-2); }
+  .rm-tool:hover:not(:disabled), .rm-tool:focus-visible { border-color: var(--ts-teal); color: var(--ts-teal-ink); outline: none; }
+  .rm-tool:disabled { opacity: 0.35; cursor: default; }
+  .rm-tool--remove:hover:not(:disabled) { border-color: #FF3B30; color: #FF3B30; }
+  .rm-stop[draggable="true"] { cursor: grab; }
+  .rm-stop.is-dragging { opacity: 0.5; }
   .rm-leg { font: inherit; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 999px; cursor: pointer;
             border: 1px solid transparent; background: var(--ts-teal); color: #fff; }
-  .rm-flip { grid-column: 2; justify-self: start; font: inherit; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  .rm-flip { grid-column: 2 / 4; justify-self: start; font: inherit; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
              cursor: pointer; background: transparent; color: var(--ts-teal-ink); border: 1px solid var(--ts-line); }
   .rm-flip:hover, .rm-flip:focus-visible { border-color: var(--ts-teal); outline: none; }
   /* ⚠️ 色は注意の札（rm-tag--warn）と同じ。暗い表示は下の @media でそろえる */
@@ -354,43 +370,129 @@
     renderStops(); renderCandidates(); drawRoutes(); setMsg("");
   }
 
-  /** 行き先の一覧（区間ごとの 有料・高速 の札つき） */
+  /**
+   * 行き先の一覧（Google マップ・Yahoo! カーナビの行き先画面のような縦の並び。利用者の要望 2026-10-15）。
+   * 出発地から目的地までを線でつなぎ、行き先ごとに ↑↓（ドラッグでも）・✕・入口と出口の入れ替え、出発地の行に ⇅（並びを逆に）。
+   * 区間ごとの 有料・高速・楽しい道 は、行き先の上（その行き先へ向かう区間）に小さく出す（アプリと同じ）。
+   * ⚠️ 並べ替え・削除・逆にするはプランに保存する（`savePlanOrder`。プラン画面・アプリと同じプラン）
+   */
   function renderStops() {
     var dests = planDestinations(), defaults = RM.legDefaults(conditions());
     var originIsFirst = !startsAtCurrent() && dests.length && dests[0].kind !== "road";
-    el("stops").innerHTML = dests.map(function (d, i) {
-      var isOrigin = originIsFirst && i === 0, isFinal = i === dests.length - 1;
+    var firstRoadOrigin = !startsAtCurrent() && dests.length && dests[0].kind === "road";
+    var stops = dests.map(function (d, i) { return { d: d, i: i }; }).filter(function (x) { return !(originIsFirst && x.i === 0); });
+    var editable = stops.length;   // 並べ替え・削除できる行き先の数
+    var startName = startsAtCurrent() ? "走るときの現在地" : originIsFirst ? dests[0].name : firstRoadOrigin ? dests[0].name + "の入口" : "";
+    var startRow = '<li class="rm-stop is-origin"><span class="rm-stop__no" aria-hidden="true">' + (startsAtCurrent() ? "◉" : "出") + "</span>" +
+      '<span class="rm-stop__name"><small>出発地</small><br>' + esc(startName) + "</span>" +
+      '<span class="rm-stop__tools"><button type="button" class="rm-tool" id="reverseStops" title="並びを逆にする（出発地とゴールを入れ替える）"' +
+        (dests.length < 2 ? " disabled" : "") + ' aria-label="並びを逆にする">⇅</button></span></li>';
+    el("stops").innerHTML = startRow + stops.map(function (x, k) {
+      var d = x.d, i = x.i, isFinal = i === dests.length - 1;
       var e = RM.effectiveLeg(d.legSetting, defaults);
-      var chips = isOrigin ? "" : '<div class="rm-stop__legs">' +
+      var chips = '<div class="rm-stop__legs"><span class="rm-stop__legarrow" aria-hidden="true">↓</span>' +
         '<button type="button" class="rm-leg' + (e.avoidTolls ? " is-off" : "") + '" data-i="' + i + '" data-key="avoidTolls" aria-pressed="' + !e.avoidTolls +
           '" aria-label="この区間で有料道路を使う">有料</button>' +
         (defaults.highwaysForbidden ? "" : '<button type="button" class="rm-leg' + (e.avoidHighways ? " is-off" : "") + '" data-i="' + i +
           '" data-key="avoidHighways" aria-pressed="' + !e.avoidHighways + '" aria-label="この区間で高速道路を使う">高速</button>') +
         (FUN ? '<button type="button" class="rm-leg' + (e.funRoads ? "" : " is-off") + '" data-i="' + i + '" data-key="funRoads" aria-pressed="' +
           e.funRoads + '" aria-label="この区間で楽しい道を通る">楽しい道</button>' : "") + "</div>";
-      return '<li class="rm-stop' + (d.kind === "road" ? " is-road" : "") + (isFinal ? " is-final" : "") + (isOrigin ? " is-origin" : "") + '">' +
-        '<span class="rm-stop__no">' + (isOrigin ? "出" : i + (originIsFirst ? 0 : 1)) + "</span>" +
-        '<span class="rm-stop__name">' + (d.kind === "road" ? "🛣️ " : "📍 ") + esc(d.name) +
-          (d.section && d.section.entry ? " <small>" + esc(d.section.entry) + " → " + esc(d.section.goal || "") + "</small>" : "") +
-          (isOrigin ? " <small>（出発地）</small>" : "") + "</span>" +
+      var tools = '<span class="rm-stop__tools">' +
+        '<button type="button" class="rm-tool" data-move="' + i + '" data-delta="-1"' + (k === 0 ? " disabled" : "") + ' aria-label="' + esc(d.name) + 'を前へ">↑</button>' +
+        '<button type="button" class="rm-tool" data-move="' + i + '" data-delta="1"' + (k === editable - 1 ? " disabled" : "") + ' aria-label="' + esc(d.name) + 'を後ろへ">↓</button>' +
+        // ⚠️ 最後の1つは消せない（行き先が無い経路は作れない）
+        '<button type="button" class="rm-tool rm-tool--remove" data-remove="' + i + '"' + (editable <= 1 ? " disabled" : "") + ' aria-label="' + esc(d.name) + 'をプランから外す">✕</button></span>';
+      return '<li class="rm-stop' + (d.kind === "road" ? " is-road" : "") + (isFinal ? " is-final" : "") + '" draggable="true" data-i="' + i + '">' +
+        chips +
+        '<span class="rm-stop__no">' + (isFinal ? "📍" : k + 1) + "</span>" +
+        '<span class="rm-stop__name">' + (d.kind === "road" ? "🛣️ " : "") + esc(d.name) +
+          (d.section && d.section.entry ? " <small>" + esc(d.section.entry) + " → " + esc(d.section.goal || "") + "</small>" : "") + "</span>" +
+        tools +
         // ⚠️ おすすめ道路は入口と出口を入れ替えられる（アプリの立ち寄り先の一覧と同じ）
         (d.kind === "road" && d.approach.length && !(i === 0 && !startsAtCurrent())
           ? '<button type="button" class="rm-flip" data-i="' + i + '" aria-label="' + esc(d.name) + 'の入口と出口を入れ替える">⇄ 入口と出口を入れ替え</button>' : "") +
-        chips + "</li>";
+        "</li>";
     }).join("");
-    Array.prototype.forEach.call(el("stops").querySelectorAll(".rm-flip"), function (b) {
+    var stopsEl = el("stops");
+    Array.prototype.forEach.call(stopsEl.querySelectorAll(".rm-flip"), function (b) {
       b.onclick = async function () {
         b.disabled = true;
         try { await flipPlanRoads([Number(b.dataset.i)]); showStops(); } catch (e) { setMsg(e.message, "err"); b.disabled = false; }
       };
     });
-    Array.prototype.forEach.call(el("stops").querySelectorAll(".rm-leg"), function (b) {
+    Array.prototype.forEach.call(stopsEl.querySelectorAll(".rm-leg"), function (b) {
       b.onclick = function () {
         var i = Number(b.dataset.i), legs = planLegs();
         legs[i] = RM.toggledLeg(legs[i], b.dataset.key, RM.legDefaults(conditions()));
         renderStops();
       };
     });
+    var guarded = function (fn) {
+      return async function () {
+        try { await fn(); showStops(); } catch (e) { setMsg(e.message || "プランを保存できませんでした", "err"); }
+      };
+    };
+    Array.prototype.forEach.call(stopsEl.querySelectorAll("[data-move]"), function (b) {
+      b.onclick = guarded(function () { return moveStop(Number(b.dataset.move), Number(b.dataset.move) + Number(b.dataset.delta)); });
+    });
+    Array.prototype.forEach.call(stopsEl.querySelectorAll("[data-remove]"), function (b) {
+      b.onclick = guarded(function () {
+        var d = planDestinations()[Number(b.dataset.remove)];
+        if (!d || !window.confirm("「" + d.name + "」をプランから外しますか？")) return Promise.resolve();
+        return removeStop(Number(b.dataset.remove));
+      });
+    });
+    var rev = el("reverseStops");
+    if (rev) rev.onclick = guarded(reverseStops);
+    // ドラッグで並べ替え（パソコン）。⚠️ スマホではドラッグが効かないので ↑↓ も置く
+    var dragFrom = null;
+    Array.prototype.forEach.call(stopsEl.querySelectorAll('li[draggable="true"]'), function (li) {
+      li.ondragstart = function (ev) { dragFrom = Number(li.dataset.i); li.classList.add("is-dragging"); ev.dataTransfer.effectAllowed = "move"; };
+      li.ondragend = function () { li.classList.remove("is-dragging"); };
+      li.ondragover = function (ev) { ev.preventDefault(); };
+      li.ondrop = function (ev) {
+        ev.preventDefault();
+        var to = Number(li.dataset.i);
+        if (dragFrom == null || dragFrom === to) return;
+        guarded(function () { return moveStop(dragFrom, to); })();
+        dragFrom = null;
+      };
+    });
+  }
+
+  /**
+   * プランの並びを保存する（並べ替え・削除・逆にする）。⚠️ order を振り直してから書く（プラン画面と同じ）。
+   * 区間ごとの設定（legsByPlan）は行き先の番号と一緒に並べ替える
+   */
+  async function savePlanOrder(nextSpots, nextLegs) {
+    var plan = currentPlan();
+    var spots = RM.withOrder(nextSpots);
+    await fb.db.collection("users").doc(fb.user.uid).collection("touringPlans").doc(plan.id).update({
+      spots: spots, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+    plan.spots = spots;
+    legsByPlan[currentPlanIndex()] = nextLegs;
+  }
+
+  /** 行き先の番号（planDestinations）で並べ替える。スポットは行き先が持つ元のスポットで探す */
+  function moveStop(from, to) {
+    var dests = planDestinations();
+    if (!dests[from] || !dests[to]) return Promise.resolve();
+    var order = RM.sortedSpots(currentPlan().spots || []);
+    var moved = RM.movedSpots(order, dests[from].spot, dests[to].spot);
+    return savePlanOrder(moved, RM.movedList(planLegs(), from, to));
+  }
+
+  function removeStop(i) {
+    var dests = planDestinations();
+    if (!dests[i]) return Promise.resolve();
+    var order = RM.sortedSpots(currentPlan().spots || []).filter(function (s) { return s !== dests[i].spot; });
+    var legs = planLegs().slice(); legs.splice(i, 1);
+    return savePlanOrder(order, legs);
+  }
+
+  /** 並びを逆にする（出発地とゴールを入れ替える）。⚠️ 区間ごとの設定は向きが変わるので外す */
+  function reverseStops() {
+    return savePlanOrder(RM.sortedSpots(currentPlan().spots || []).reverse(), []);
   }
 
   /**

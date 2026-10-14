@@ -100,6 +100,34 @@
                                   keepsDirection: true });
   }
 
+  // ---- プランの並び（行き先の並び替え・削除・逆にする。利用者の要望 2026-10-15） ----
+
+  /** プランのスポットを order の順に並べたもの（toDestinations と同じ並べ方） */
+  function sortedSpots(spots) {
+    return (spots || []).slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+  }
+
+  /** order を 0 から振り直したもの（プラン画面の並べ替えと同じ。元のスポットは書き換えない） */
+  function withOrder(list) {
+    return list.map(function (s, i) { return Object.assign({}, s, { order: i }); });
+  }
+
+  /** 配列の from 番目を to 番目へ動かしたもの */
+  function movedList(list, from, to) {
+    var out = (list || []).slice();
+    while (out.length <= Math.max(from, to)) out.push(undefined);
+    var item = out.splice(from, 1)[0];
+    out.splice(to, 0, item);
+    return out;
+  }
+
+  /** スポット（の参照）を、別のスポットのいた位置へ動かしたもの。見つからなければそのまま */
+  function movedSpots(sorted, spot, targetSpot) {
+    var from = sorted.indexOf(spot), to = sorted.indexOf(targetSpot);
+    if (from < 0 || to < 0 || from === to) return sorted.slice();
+    return movedList(sorted, from, to);
+  }
+
   /** 地点が上限を超えるとき、道の途中の点だけを道ごとにまんべんなく間引く（入口とゴールは残す）。アプリの NavWaypointBudget.fitted と同じ */
   function fitted(dests, maxPoints) {
     var total = dests.reduce(function (n, d) { return n + d.approach.length + 1; }, 0);
@@ -831,6 +859,7 @@
               candidateColor: candidateColor, kindInfo: kindInfo,
               toDestinations: toDestinations, fitted: fitted, buildBody: buildBody, decodePolyline: decodePolyline,
               keepsAlternate: keepsAlternate,
+              sortedSpots: sortedSpots, withOrder: withOrder, movedList: movedList, movedSpots: movedSpots,
               flippedSavesMeters: flippedSavesMeters, reversedRoadIndices: reversedRoadIndices, reversedRoad: reversedRoad,
               MIN_BACKTRACK_METERS: MIN_BACKTRACK_METERS,
               highwaysForbidden: highwaysForbidden, legDefaults: legDefaults, effectiveLeg: effectiveLeg, toggledLeg: toggledLeg,
