@@ -135,6 +135,22 @@
   function isoSeconds(date) { return date.toISOString().replace(/\.\d{3}Z$/, "Z"); }
 
   /** 経路サーバへの体（アプリの ValhallaRouteService.send と同じ形） */
+  /**
+   * 条件に合わない「別の道」を外す（利用者の判断 2026-10-14）。サーバの service/lib/alternateFilter.js・アプリの
+   * NavAlternateFilter.swift と同じ決まり: 本命より高速・避けきれない有料を 300m を超えて多く通る別の道は外す。
+   * ⚠️ 区間ごとに条件が違うときは外さない
+   */
+  var ALTERNATE_SLACK_METERS = 300;
+  function keepsAlternate(alt, main, cond) {
+    cond = cond || {};
+    if (cond.mixedLegs) return true;
+    var hw = function (r) { return Number(r && r.kindMeters && r.kindMeters.expressway) || 0; };
+    var toll = function (r) { return Number(r && r.tollUnavoidableMeters) || 0; };
+    if (cond.avoidHighways && hw(alt) > hw(main) + ALTERNATE_SLACK_METERS) return false;
+    if (cond.avoidTolls && toll(alt) > toll(main) + ALTERNATE_SLACK_METERS) return false;
+    return true;
+  }
+
   function buildBody(origin, dests, cond) {
     var pair = function (p) { return [p.lng, p.lat]; };
     var points = [], stopAt = [], throughStopAt = [];
@@ -766,6 +782,7 @@
               ROAD_KINDS: ROAD_KINDS, RECOMMENDED_EDGE_COLOR: RECOMMENDED_EDGE_COLOR, CANDIDATE_PALETTE: CANDIDATE_PALETTE,
               candidateColor: candidateColor, kindInfo: kindInfo,
               toDestinations: toDestinations, fitted: fitted, buildBody: buildBody, decodePolyline: decodePolyline,
+              keepsAlternate: keepsAlternate,
               highwaysForbidden: highwaysForbidden, legDefaults: legDefaults, effectiveLeg: effectiveLeg, toggledLeg: toggledLeg,
               gapConditions: gapConditions, mixedOrNil: mixedOrNil, strictest: strictest,
               kindSegments: kindSegments, kindMeters: kindMeters, presentKinds: presentKinds,

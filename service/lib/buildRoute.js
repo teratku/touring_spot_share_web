@@ -15,7 +15,8 @@
 
 // ⚠️ **区間ごとに条件が違うときも Valhalla で引く**（ナビは Valhalla 一択）。
 //    条件がそろっていれば、中で `routeWithValhalla` をそのまま呼ぶ
-const { routeWithValhallaSegmented } = require("../../admin/lib/segmentedRoute");
+const { routeWithValhallaSegmented, hasMixedConditions } = require("../../admin/lib/segmentedRoute");
+const { keepsAlternate } = require("./alternateFilter");
 const { simulate } = require("../../admin/lib/navSimulate");
 const { normalized: normalizedAnnounce } = require("../../admin/lib/navGuide");
 const { ATTRIBUTION } = require("../../admin/lib/restrictionOrigin");
@@ -226,7 +227,12 @@ async function buildRouteResponse(body, deps = {}) {
 
   const app = toAppRoute(route);
   // ⚠️ **代替も同じ形にする。** 立ち寄り先があると Valhalla が返さないので空になる
-  const alternateRoutes = (route.alternates || []).map(toAppRoute);
+  // ⚠️ **条件に合わない別の道は外す**（`lib/alternateFilter.js`。利用者の判断 2026-10-14）
+  const alternateRoutes = (route.alternates || []).map(toAppRoute)
+    .filter((alt) => keepsAlternate(alt, app, {
+      avoidTolls: !!opts.avoidTolls, avoidHighways: !!opts.avoidHighways,
+      mixedLegs: hasMixedConditions(opts.legConditions || []),
+    }));
 
   return {
     status: 200,

@@ -20,7 +20,7 @@
 <script defer src="/__/firebase/init.js"></script>
 <script defer src="/subscription.js"></script>
 <!-- ⚠️ defer にしないこと（下のページ内のスクリプトが読み込みの途中で使う） -->
-<script src="/route-maker-lib.js?v=5"></script>
+<script src="/route-maker-lib.js?v=6"></script>
 <!-- 楽しい道・距離ガバの選び方（admin/lib から作る生成物・アプリの FunRouteBuilder と答え合わせ済み） -->
 <script src="/route-maker-fun.js?v=1"></script>
 <!-- 県の外接矩形（おすすめ道路を取りに行く県を決める。アプリの PrefectureData と同じ値） -->
@@ -403,12 +403,17 @@
       var fit = fitted(dests, MAX_DESTINATION_POINTS);
       var cond = conditions();
       var token = await fb.user.getIdToken();
+      var body = buildBody(origin, fit, cond);
       var res = await fetch("/v1/web/route", { method: "POST",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-        body: JSON.stringify(buildBody(origin, fit, cond)) });
+        body: JSON.stringify(body) });
       var out = await res.json().catch(function () { return {}; });
       if (!res.ok) throw new Error(out.error || ("経路を作れませんでした（" + res.status + "）"));
-      candidates = [out.route].concat(out.alternates || []).filter(Boolean);
+      // ⚠️ **条件に合わない別の道は外す**（利用者の判断 2026-10-14。サーバでも外す。古いサーバ向けにここでも）
+      candidates = [out.route].concat((out.alternates || []).filter(function (alt) {
+        return out.route && RM.keepsAlternate(alt, out.route, { avoidTolls: body.avoidTolls, avoidHighways: body.avoidHighways,
+                                                                mixedLegs: !!body.legConditions });
+      })).filter(Boolean);
       candidates.forEach(function (c) { c.path = decodePolyline(c.polyline || ""); });
       chosen = 0;
       lastRequest = { plan: plan, origin: origin, originName: originName, fromCurrent: fromCurrent, destinations: dests,

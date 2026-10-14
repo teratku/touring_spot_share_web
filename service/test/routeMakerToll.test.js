@@ -118,5 +118,6 @@ test("画面は引く前に有料を引き当て、楽しい道の候補を絞�
   assert.match(html, /searchable = RM\.funSegmentsRespectingTolls\(searchable, dests, defaults, plain\.path, F\.geometry, F\.appFun\);/,
                "楽しい道の候補を有料で絞っていない");
   assert.match(html, /out = out\.concat\(tollNoticesOf\(c, cond\)\);/, "有料の注意を候補に出していない");
-  assert.match(html, /\/route-maker-lib\.js\?v=5/, "部品を変えたのに読み込みの版を上げていない（1年キャッシュされる）");
+  // ⚠️ 2026-10-14 に別の道の絞り込みで v=6 に上げた。5 以上であればよい
+  assert.match(html, /\/route-maker-lib\.js\?v=([5-9]|\d{2,})"/, "部品を変えたのに読み込みの版を上げていない（1年キャッシュされる）");
 });
