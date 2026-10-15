@@ -103,11 +103,11 @@ test("プラン画面は「＋ 追加」から3つのタブで足し、サブス
 test("地図・検索のスポットの印はまとめて出す（動作が重たい。利用者の要望 2026-10-16）", () => {
   assert.match(html, /<script defer src="https:\/\/unpkg\.com\/@googlemaps\/markerclusterer@\d+\.\d+\.\d+\/dist\/index\.min\.js"><\/script>/,
     "まとめる部品を版を決めて読んでいない（@latest は中身が勝手に変わる）");
-  assert.match(html, /spotClusterer = new MC\.MarkerClusterer\(\{ map: addMap, markers: addMarkers \}\);/, "印をまとめていない");
+  assert.match(html, /spotClusterer = new MC\.MarkerClusterer\(\{ map: addMap, markers: addMarkers, algorithm, renderer: clusterRenderer, onClusterClick \}\);/, "印をまとめていない");
   assert.match(html, /addMarkers = allSpots\.value\.map\(sp => \(spotMarkerById\[sp\.spotId\] = spotMarker\(sp, null\)\)\);/,
     "まとめるときに全部のスポットを渡していない");
   assert.match(html, /addMap\.addListener\('idle', \(\) => \{ if \(!spotClusterer\) drawSpotMarkers\(\); \}\);/, "動かすたびに印を作り直す（重い）");
-  assert.match(html, /if \(m\) m\.setIcon\(spotIcon\(sp\)\);/, "足したスポットを灰色に塗り直していない");
+  assert.match(html, /if \(m && m\.getIcon\(\) !== icon\) m\.setIcon\(icon\);/, "足したスポットを灰色に塗り直していない／全部に塗り直して重い");
   assert.match(html, /const shown = PA\.spotsInBounds\(/, "まとめる部品が読めないときの描き方が無い");
 });
 
@@ -136,4 +136,39 @@ test("地図の印を押したら写真・本文・おすすめポイント・�
     assert.ok(html.includes('v-if="' + part), "カードに出していない: " + part);
   }
   assert.match(html, /<script src="\/plan-add-lib\.js\?v=([2-9]|\d{2,})"><\/script>/, "部品を変えたのに読み込みの版を上げていない（1年キャッシュ）");
+});
+
+test("ズームアウトで重くならない（利用者の報告 2026-10-16）: 見えている範囲だけまとめ、印の絵を使い回す", () => {
+  assert.match(html, /new MC\.SuperClusterViewportAlgorithm\(\{ maxZoom: \d+, radius: \d+, viewportPadding: \d+ \}\)/,
+    "既定のまとめ方（日本中の印を毎回並べ直す）のまま");
+  assert.match(html, /if \(iconCache\[key\]\) return iconCache\[key\];/, "印の絵を毎回作っている");
+  assert.match(html, /icon: spotIcon\(sp\),\n\s+optimized: true \}\);/, "スポットの印を地図にまとめて描かせていない");
+  assert.ok(!/function spotIcon[\s\S]{0,200}SymbolPath/.test(html), "スポットの印が図形（1つずつ描かれて重い）のまま");
+  assert.match(html, /const size = count < 10 \? 30 : count < 100 \? 36 : count < 1000 \? 44 : 52;/, "まとまりの丸の大きさを段に分けていない");
+});
+
+test("地図で選んだ印がカードに隠れない・まとまりの丸を押したらカードを閉じる（利用者の報告 2026-10-16）", () => {
+  // 地図の高さ600・カード250 → 下から274px より下にある印は隠れる
+  assert.strictEqual(PA.hiddenByCard(35.5, 36, 35, 600, 250), false, "上半分の印まで動かす");
+  assert.strictEqual(PA.hiddenByCard(35.1, 36, 35, 600, 250), true, "カードの下の印を動かさない");
+  assert.strictEqual(PA.hiddenByCard(36.2, 36, 35, 600, 250), true, "地図の外の印を動かさない");
+  assert.strictEqual(PA.hiddenByCard(35.5, 35, 35, 600, 250), false);
+  assert.match(html, /const onClusterClick = \(event, cluster, map\) => \{ clearPicked\(\); map\.fitBounds\(cluster\.bounds\); \};/,
+    "まとまりの丸を押してもカードが残る");
+  assert.match(html, /algorithm, renderer: clusterRenderer, onClusterClick \}\);/);
+  assert.match(html, /m\.addListener\('click', \(\) => pickSpot\(sp\)\);/, "印を押してもカードを替えない");
+  assert.match(html, /function pickSpot\(sp\) \{\n\s+if \(pickedMarker\) \{ pickedMarker\.setMap\(null\); pickedMarker = null; \}/,
+    "前に検索・地図で選んだ赤い印が残る");
+  assert.match(html, /if \(!PA\.hiddenByCard\(p\.lat, north, south, el\.clientHeight, card\.offsetHeight\)\) return;/, "隠れるときだけ動かしていない");
+  assert.match(html, /@click="clearPicked" aria-label="選ぶのをやめる"/);
+});
+
+test("地図で押した所の名前は地点コードではなく住所（「XR9V+2J 千葉県館山市」と出ていた。2026-10-16）", () => {
+  const plus = { types: ["plus_code"], formatted_address: "XR9V+2J 千葉県館山市" };
+  const addr = { types: ["street_address"], formatted_address: "日本、〒294-0000 千葉県館山市大賀" };
+  assert.strictEqual(PA.readableGeocode([plus, addr]), addr, "地点コードを名前にした");
+  assert.strictEqual(PA.readableGeocode([plus]), plus, "地点コードしか無いのに何も返さない");
+  assert.strictEqual(PA.readableGeocode([]), null);
+  assert.strictEqual(PA.readableGeocode(undefined), null);
+  assert.match(html, /const first = PA\.readableGeocode\(geo && geo\.results\);/);
 });

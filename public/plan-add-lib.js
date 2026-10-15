@@ -163,7 +163,28 @@
              onMap: R.mapRoads(all, visible, { tags: [], kinds: [] }, unlimited) };
   }
 
+  /**
+   * 地図の下に重なるカードに、その緯度の印が隠れるか（隠れるなら地図を動かす）。
+   * 上下の位置は緯度の割合で近似する（地図1枚の範囲なら十分）。カードの上に少し余白（`margin` px）を見る
+   */
+  function hiddenByCard(lat, north, south, mapHeight, cardHeight, margin) {
+    if (!(north > south) || !(mapHeight > 0)) return false;
+    var y = (north - lat) / (north - south) * mapHeight;
+    return y < 0 || y > mapHeight - cardHeight - (margin == null ? 24 : margin);
+  }
+
+  /**
+   * 地図で押した所の名前に使う住所（逆ジオコーディングの結果から）。
+   * ⚠️ 最初の結果は地点コード（types に plus_code・「XR9V+2J 千葉県館山市」）のことがある。それ以外の最初のものを使う。
+   *    地点コードしか無ければそれを使う
+   */
+  function readableGeocode(results) {
+    var list = Array.isArray(results) ? results : [];
+    return list.filter(function (r) { return r && (r.types || []).indexOf("plus_code") < 0; })[0] || list[0] || null;
+  }
+
   var api = {
+    hiddenByCard: hiddenByCard, readableGeocode: readableGeocode,
     PAGE_SIZE: PAGE_SIZE, MAP_CAP: MAP_CAP, roadChoices: roadChoices,
     MAX_CARD_IMAGES: MAX_CARD_IMAGES, MAX_CARD_COMMENT: MAX_CARD_COMMENT, spotCard: spotCard,
     displayName: displayName, spotFromDoc: spotFromDoc, planSpotOf: planSpotOf, isSpotInPlan: isSpotInPlan, canAdd: canAdd,

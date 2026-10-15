@@ -19,7 +19,7 @@
   <!-- プランに追加（スポット一覧・地図・おすすめ道路。アプリのプランの「スポットを追加」と同じ。2026-10-16） -->
   <script src="/roads-lib.js?v=2"></script>
   <script src="/spot-points.js?v=1"></script>
-  <script src="/plan-add-lib.js?v=2"></script>
+  <script src="/plan-add-lib.js?v=3"></script>
   <script src="/place-search-lib.js?v=1"></script>
   <!-- 地図・検索のスポットの印をまとめて出す（利用者の要望 2026-10-16: 動作が重たい）。⚠️ 版を決めて読む（@latest にしない） -->
   <script defer src="https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js"></script>
@@ -850,7 +850,7 @@
             </div>
             <button type="button" class="add-btn" :disabled="addBusy || isAdded(mapPicked) || isFull"
                     @click="addSpot(mapPicked)">{{ isAdded(mapPicked) ? '追加済み' : '追加' }}</button>
-            <button type="button" class="add-close" @click="mapPicked = null" aria-label="選ぶのをやめる">✕</button>
+            <button type="button" class="add-close" @click="clearPicked" aria-label="選ぶのをやめる">✕</button>
           </div>
           <div v-if="pickedCard" class="add-card__body">
             <div v-if="pickedCard.images.length" class="add-card__photos">
@@ -1587,13 +1587,33 @@ createApp({
       });
     }
 
-    function spotIcon(sp) {
-      return { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillOpacity: 1, strokeColor: 'white', strokeWeight: 2,
-               fillColor: isAdded(sp) ? '#9E9E9E' : '#FF7A00' };
+    /**
+     * 印の絵は使い回す（利用者の報告 2026-10-16:「ズームアウトするとき処理が重たい」）。
+     * ⚠️ 図形（SymbolPath）の印は1つずつ描かれて重い。画像の印は地図がまとめて描ける（optimized）。色ごとに1つだけ作る
+     */
+    const iconCache = {};
+    function circleIcon(fill, size, label) {
+      const key = fill + size;
+      if (iconCache[key]) return iconCache[key];
+      const r = size / 2 - 1.5;
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '"><circle cx="' + size / 2 + '" cy="' + size / 2 +
+        '" r="' + r + '" fill="' + fill + '" stroke="white" stroke-width="' + (label ? 3 : 2) + '"' + (label ? ' fill-opacity="0.9"' : '') + '/></svg>';
+      return (iconCache[key] = { url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+                                 scaledSize: new google.maps.Size(size, size), anchor: new google.maps.Point(size / 2, size / 2) });
     }
+    function spotIcon(sp) { return circleIcon(isAdded(sp) ? '#9E9E9E' : '#FF7A00', 16); }
+    /** まとまりの丸（数で大きさを4段に分ける。絵は段ごとに使い回す） */
+    const clusterRenderer = {
+      render({ count, position }) {
+        const size = count < 10 ? 30 : count < 100 ? 36 : count < 1000 ? 44 : 52;
+        return new google.maps.Marker({ position, icon: circleIcon('#00A8C6', size, true), zIndex: 1000 + count,
+          label: { text: String(count), color: 'white', fontSize: '12px', fontWeight: 'bold' }, title: count + '件のスポット' });
+      },
+    };
     function spotMarker(sp, map) {
-      const m = new google.maps.Marker({ position: { lat: sp.lat, lng: sp.lng }, map, title: sp.name, zIndex: 3, icon: spotIcon(sp) });
-      m.addListener('click', () => { mapPicked.value = sp; placeResults.value = []; });
+      const m = new google.maps.Marker({ position: { lat: sp.lat, lng: sp.lng }, map, title: sp.name, zIndex: 3, icon: spotIcon(sp),
+                                         optimized: true });
+      m.addListener('click', () => pickSpot(sp));
       return m;
     }
 
@@ -1611,9 +1631,20 @@ createApp({
           addMarkers.forEach(m => m.setMap(null));
           spotMarkerById = {};
           addMarkers = allSpots.value.map(sp => (spotMarkerById[sp.spotId] = spotMarker(sp, null)));
-          spotClusterer = new MC.MarkerClusterer({ map: addMap, markers: addMarkers });
+          // ⚠️ **見えている範囲だけまとめる**（SuperClusterViewportAlgorithm）。既定のまとめ方は日本中の印を毎回並べ直し、
+          //    ズームアウトのたびに重かった（利用者の報告 2026-10-16）
+          const algorithm = MC.SuperClusterViewportAlgorithm
+            ? new MC.SuperClusterViewportAlgorithm({ maxZoom: 15, radius: 80, viewportPadding: 40 }) : undefined;
+          // ⚠️ まとまりの丸を押したら、開いているカードを閉じてから寄る（利用者の報告 2026-10-16: 前のスポットのカードが残り、
+          //    寄って広がった印がカードに隠れた）。寄り方は部品の既定と同じ（まとまりの範囲に合わせる）
+          const onClusterClick = (event, cluster, map) => { clearPicked(); map.fitBounds(cluster.bounds); };
+          spotClusterer = new MC.MarkerClusterer({ map: addMap, markers: addMarkers, algorithm, renderer: clusterRenderer, onClusterClick });
         } else {
-          allSpots.value.forEach(sp => { const m = spotMarkerById[sp.spotId]; if (m) m.setIcon(spotIcon(sp)); });
+          // ⚠️ 色が変わった印だけ塗り直す（全部に setIcon すると描き直しで重い）
+          allSpots.value.forEach(sp => {
+            const m = spotMarkerById[sp.spotId], icon = spotIcon(sp);
+            if (m && m.getIcon() !== icon) m.setIcon(icon);
+          });
         }
         return;
       }
@@ -1624,10 +1655,40 @@ createApp({
       addMarkers = shown.map(sp => spotMarker(sp, addMap));
     }
 
+    /** 選んでいる場所を外す（カードと、検索・地図で選んだ赤い印） */
+    function clearPicked() {
+      mapPicked.value = null;
+      if (pickedMarker) { pickedMarker.setMap(null); pickedMarker = null; }
+    }
+
+    /**
+     * 選んだ印がカードに隠れないよう、地図を動かす（カードの上の見えている所の真ん中へ）。
+     * ⚠️ カードは地図の下に重なっている。印を地図の真ん中に置くだけだと、カードが大きいとき隠れる（利用者の報告 2026-10-16）
+     */
+    async function keepVisible(p) {
+      await nextTick();
+      const card = document.querySelector('.add-card'), el = document.getElementById('add-map');
+      if (!addMap || !p || !el || !card || !addMap.getBounds()) return;
+      // ⚠️ 隠れるときだけ動かす（押すたびに地図が動くと落ち着かない）。上下の位置は緯度の割合で近似する
+      const b = addMap.getBounds(), north = b.getNorthEast().lat(), south = b.getSouthWest().lat();
+      if (!PA.hiddenByCard(p.lat, north, south, el.clientHeight, card.offsetHeight)) return;
+      addMap.panTo({ lat: p.lat, lng: p.lng });
+      addMap.panBy(0, Math.round(card.offsetHeight / 2));
+    }
+
+    /** みんなのスポットの印を押した: カードを替える（前に選んだ場所の赤い印は消す） */
+    function pickSpot(sp) {
+      if (pickedMarker) { pickedMarker.setMap(null); pickedMarker = null; }
+      mapPicked.value = sp;
+      placeResults.value = [];
+      keepVisible(sp);
+    }
+
     function showPicked(place) {
       mapPicked.value = place;
       if (pickedMarker) pickedMarker.setMap(null);
       pickedMarker = new google.maps.Marker({ position: { lat: place.lat, lng: place.lng }, map: addMap, zIndex: 6 });
+      keepVisible(place);
     }
 
     /** 地図の何もない所を押した: その場所の住所を名前にする（引けなければ座標） */
@@ -1637,7 +1698,8 @@ createApp({
       showPicked(Object.assign({}, base, { address: '地図で指定' }));
       try {
         const geo = await new google.maps.Geocoder().geocode({ location: p });
-        const first = geo && geo.results && geo.results[0];
+        // ⚠️ 最初の結果は地点コード（「XR9V+2J 千葉県館山市」）のことがある。名前として分かりにくいので住所を選ぶ
+        const first = PA.readableGeocode(geo && geo.results);
         if (first && mapPicked.value && mapPicked.value.id === base.id) {
           mapPicked.value = Object.assign({}, base, { id: first.place_id || base.id, name: PS.cleanAddress(first.formatted_address) || base.name,
                                                       address: '地図で指定', kind: 'address' });
@@ -1721,8 +1783,8 @@ createApp({
         if (!place) { placeStatus.value = 'この場所の位置を取得できませんでした'; return; }
       }
       placeStatus.value = ''; placeResults.value = [];
+      if (addMap && addMap.getZoom() < 14) addMap.setZoom(14);
       showPicked(place);
-      if (addMap) { addMap.panTo({ lat: place.lat, lng: place.lng }); if (addMap.getZoom() < 14) addMap.setZoom(14); }
     }
 
     // ---- おすすめ道路（おすすめ道路のページと同じ配信: road_recommend/_index → Storage） ----
@@ -1817,7 +1879,7 @@ createApp({
       spotsLoading, spotQuery, spotPoints, spotPage, spotPointOptions, pagedSpots, filteredSpotCount,
       mapPicked, pickedCard, placeQuery, placeResults, placeStatus,
       roadRadiusPresets, roadRadius, roadsLoading, roadChoices, roadSelectedId, roadGoalAtEnd,
-      openAdd, closeAdd, switchAddTab, isAdded, distanceFromCenter, toggleSpotPoint, addSpot,
+      openAdd, closeAdd, switchAddTab, clearPicked, isAdded, distanceFromCenter, toggleSpotPoint, addSpot,
       schedulePlaceSearch, pickPlaceResult, setRoadRadius, radiusLabel, roadTagText, roadEnds, roadInPlan, selectRoad, addRoad,
       loading, currentUser, plans, planLimit, spotLimit,
       showCreateModal, newPlanName, creating, planNameInput,
