@@ -110,3 +110,30 @@ test("地図・検索のスポットの印はまとめて出す（動作が重�
   assert.match(html, /if \(m\) m\.setIcon\(spotIcon\(sp\)\);/, "足したスポットを灰色に塗り直していない");
   assert.match(html, /const shown = PA\.spotsInBounds\(/, "まとめる部品が読めないときの描き方が無い");
 });
+
+test("地図の印を押したら写真・本文・おすすめポイント・タグ・近くの道・詳細へのリンクを出す（利用者の要望 2026-10-16）", () => {
+  const spot = PA.spotFromDoc("doc 1", { location_name: "鋸山", lat: 35.16, lng: 139.84, comment: "地獄のぞきが絶景\n階段が多い",
+    locationImageURLs: ["a", "", "b", "c", "d", "e"], points: ["scenic", "unknown", "photo"], tag: ["#絶景", " ", "千葉"],
+    road: { name: "国道127号", ref: "127" } });
+  const card = PA.spotCard(spot, SP);
+  assert.deepStrictEqual(card.images, ["a", "b", "c", "d"], "写真を4枚に収めていない／空を出した");
+  assert.deepStrictEqual(card.points.map((p) => p.label), ["景色・絶景", "写真映え"], "おすすめポイントをアプリの順・表示名で出していない（知らない鍵は落とす）");
+  assert.deepStrictEqual(card.tags, ["絶景", "千葉"], "タグの # を重ねた／空のタグを出した");
+  assert.strictEqual(card.road, "国道127号", "近くの道がスポット詳細と違う");
+  assert.strictEqual(card.comment, "地獄のぞきが絶景\n階段が多い");
+  assert.strictEqual(card.detailUrl, "/detail.html?id=doc%201");
+  // 名前の無い投稿は本文の1行目が見出し。同じ文を二度出さない
+  const noName = PA.spotCard(PA.spotFromDoc("x", { lat: 35, lng: 139, comment: "海の見えるカフェ\nランチがおいしい" }), SP);
+  assert.strictEqual(noName.comment, "ランチがおいしい", "見出しと同じ本文を二度出した");
+  assert.strictEqual(PA.spotCard(PA.spotFromDoc("y", { location_name: "長文", lat: 35, lng: 139, comment: "あ".repeat(300) }), SP).comment,
+                     "あ".repeat(PA.MAX_CARD_COMMENT) + "…", "長い本文を切っていない");
+  const bare = PA.spotCard(PA.spotFromDoc("z", { location_name: "A", lat: 35, lng: 139 }), SP);
+  assert.deepStrictEqual([bare.points, bare.tags, bare.road, bare.comment, bare.images], [[], [], null, "", []]);
+
+  assert.match(html, /const pickedCard = computed\(\(\) => \(mapPicked\.value && mapPicked\.value\.spotId \? PA\.spotCard\(mapPicked\.value, SP\) : null\)\);/,
+    "地図で選んだスポットのカードを作っていない");
+  for (const part of ["pickedCard.images", "pickedCard.points", "pickedCard.tags", "pickedCard.road", "pickedCard.comment", "pickedCard.detailUrl"]) {
+    assert.ok(html.includes('v-if="' + part), "カードに出していない: " + part);
+  }
+  assert.match(html, /<script src="\/plan-add-lib\.js\?v=([2-9]|\d{2,})"><\/script>/, "部品を変えたのに読み込みの版を上げていない（1年キャッシュ）");
+});

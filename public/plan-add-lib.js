@@ -16,6 +16,8 @@
 
   /** 一覧に一度に出す数（全件を並べると重い。「さらに表示」で足す） */
   var PAGE_SIZE = 60;
+  /** 地図の印を押したときのカードに出す写真の数・本文の長さ */
+  var MAX_CARD_IMAGES = 4, MAX_CARD_COMMENT = 200;
   /** 地図に一度に描くスポットの数（見えている範囲の近い順） */
   var MAP_CAP = 400;
 
@@ -43,9 +45,34 @@
       spotId: id, name: displayName(x), lat: lat, lng: lng,
       address: str(x.administrative) || str(x.locality) || null,
       imageUrl: images[0] || x.iconImageURL || null,
+      // 地図の印を押したときのカードに出す写真（枚数は spotCard で切る）
+      images: images,
       // 検索に使う元の項目（spot-points.js の haystack・matchesPoints がこの名前で読む）
       location_name: x.location_name, comment: x.comment, administrative: x.administrative, locality: x.locality,
       tag: x.tag, points: x.points, road: x.road,
+    };
+  }
+
+  /**
+   * 地図の印を押したときのカードの中身（利用者の要望 2026-10-16:「スポットの詳細や札、タグなどみれるとユーザーに優しい」）。
+   * おすすめポイント（札）・タグ・そばの道は spot-points.js（アプリの SpotPoint・SpotSearch の写し）と同じ読み方。
+   * ⚠️ 本文が見出しに使われているとき（名前が無い投稿）は、同じ文を二度出さない
+   * @param SP spot-points.js（TSSSpotPoints）
+   */
+  function spotCard(spot, SP) {
+    var road = SP.roadOf(spot);
+    var comment = str(spot.comment);
+    if (comment && !str(spot.location_name) && comment.split(/\r?\n/)[0].trim().slice(0, 40) === spot.name) {
+      comment = comment.split(/\r?\n/).slice(1).join("\n").trim();
+    }
+    return {
+      points: SP.fromKeys(spot.points).map(function (p) { return { icon: p.icon, label: p.label }; }),
+      tags: SP.tagsOf(spot).map(function (t) { return t.trim().replace(/^#/, ""); }),
+      // ⚠️ スポット詳細（detail.html の「近くの道」）と同じく名前だけ
+      road: road ? road.name : null,
+      comment: comment.length > MAX_CARD_COMMENT ? comment.slice(0, MAX_CARD_COMMENT) + "…" : comment,
+      images: (spot.images && spot.images.length ? spot.images : (spot.imageUrl ? [spot.imageUrl] : [])).slice(0, MAX_CARD_IMAGES),
+      detailUrl: spot.spotId ? "/detail.html?id=" + encodeURIComponent(spot.spotId) : null,
     };
   }
 
@@ -138,6 +165,7 @@
 
   var api = {
     PAGE_SIZE: PAGE_SIZE, MAP_CAP: MAP_CAP, roadChoices: roadChoices,
+    MAX_CARD_IMAGES: MAX_CARD_IMAGES, MAX_CARD_COMMENT: MAX_CARD_COMMENT, spotCard: spotCard,
     displayName: displayName, spotFromDoc: spotFromDoc, planSpotOf: planSpotOf, isSpotInPlan: isSpotInPlan, canAdd: canAdd,
     distance: distance, centerOf: centerOf, filteredSpots: filteredSpots, spotsInBounds: spotsInBounds,
     distanceLabel: distanceLabel, appended: appended,

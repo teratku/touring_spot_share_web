@@ -19,7 +19,7 @@
   <!-- プランに追加（スポット一覧・地図・おすすめ道路。アプリのプランの「スポットを追加」と同じ。2026-10-16） -->
   <script src="/roads-lib.js?v=2"></script>
   <script src="/spot-points.js?v=1"></script>
-  <script src="/plan-add-lib.js?v=1"></script>
+  <script src="/plan-add-lib.js?v=2"></script>
   <script src="/place-search-lib.js?v=1"></script>
   <!-- 地図・検索のスポットの印をまとめて出す（利用者の要望 2026-10-16: 動作が重たい）。⚠️ 版を決めて読む（@latest にしない） -->
   <script defer src="https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js"></script>
@@ -508,6 +508,18 @@
   .add-msg.ok { color: #1f8a3a; } .add-msg.err { color: #d93025; }
   .add-map { flex: 1; min-height: 240px; }
   .add-map--roads { flex: none; height: 220px; }
+  .add-card.add-card--spot { flex-direction: column; align-items: stretch; max-height: 62%; overflow-y: auto; }
+  .add-card__head { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+  .add-card--spot .add-card__head { flex: none; }
+  .add-card__body { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; }
+  .add-card__photos { display: flex; gap: 6px; overflow-x: auto; }
+  .add-card__photos img { height: 96px; width: auto; max-width: 160px; object-fit: cover; border-radius: 8px; flex: none; background: var(--ts-surface-2, #eee); }
+  .add-card__chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .add-card__point { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: color-mix(in srgb, #00A8C6 14%, transparent);
+                     color: var(--ts-teal-ink, #007d93); }
+  .add-card__tag { font-size: 12px; color: var(--ts-text-2, #777); }
+  .add-card__comment { margin: 0; font-size: 13px; line-height: 1.6; white-space: pre-line; color: var(--ts-text, #333); }
+  .add-card__link { font-size: 13px; font-weight: 600; color: var(--ts-teal-ink, #007d93); }
   .add-card { position: absolute; left: 12px; right: 12px; bottom: 12px; background: var(--ts-surface, #fff); border-radius: 12px;
               box-shadow: 0 6px 20px rgba(0,0,0,0.25); padding: 10px; display: flex; align-items: center; gap: 10px; }
   .add-maphint { position: absolute; left: 50%; transform: translateX(-50%); bottom: 14px; font-size: 12px; padding: 6px 12px;
@@ -826,16 +838,34 @@
           </ul>
         </div>
         <div id="add-map" class="add-map"></div>
-        <div class="add-card" v-if="mapPicked">
-          <img v-if="mapPicked.imageUrl" class="add-thumb" :src="mapPicked.imageUrl" alt="">
-          <span v-else class="add-thumb" aria-hidden="true">📍</span>
-          <div class="add-info">
-            <div class="add-name">{{ mapPicked.name }}</div>
-            <div class="add-sub">{{ mapPicked.spotId ? (mapPicked.address || 'みんなのスポット') : '📌 ' + (mapPicked.address || 'カスタムピンとして入れます') }}</div>
+        <!-- ⚠️ みんなのスポットは写真・本文・おすすめポイント（札）・タグ・近くの道まで見せる（利用者の要望 2026-10-16:
+             「スポットの詳細や札、タグなどみれるとユーザーに優しい」）。検索・地図で選んだ場所は名前と住所だけ -->
+        <div class="add-card" :class="{ 'add-card--spot': !!pickedCard }" v-if="mapPicked" role="region" :aria-label="mapPicked.name">
+          <div class="add-card__head">
+            <img v-if="!pickedCard && mapPicked.imageUrl" class="add-thumb" :src="mapPicked.imageUrl" alt="">
+            <span v-else-if="!pickedCard" class="add-thumb" aria-hidden="true">📍</span>
+            <div class="add-info">
+              <div class="add-name">{{ mapPicked.name }}</div>
+              <div class="add-sub">{{ mapPicked.spotId ? (mapPicked.address || 'みんなのスポット') : '📌 ' + (mapPicked.address || 'カスタムピンとして入れます') }}</div>
+            </div>
+            <button type="button" class="add-btn" :disabled="addBusy || isAdded(mapPicked) || isFull"
+                    @click="addSpot(mapPicked)">{{ isAdded(mapPicked) ? '追加済み' : '追加' }}</button>
+            <button type="button" class="add-close" @click="mapPicked = null" aria-label="選ぶのをやめる">✕</button>
           </div>
-          <button type="button" class="add-btn" :disabled="addBusy || isAdded(mapPicked) || isFull"
-                  @click="addSpot(mapPicked)">{{ isAdded(mapPicked) ? '追加済み' : '追加' }}</button>
-          <button type="button" class="add-close" @click="mapPicked = null" aria-label="選ぶのをやめる">✕</button>
+          <div v-if="pickedCard" class="add-card__body">
+            <div v-if="pickedCard.images.length" class="add-card__photos">
+              <img v-for="(src, k) in pickedCard.images" :key="k" :src="src" :alt="mapPicked.name + 'の写真' + (k + 1)" loading="lazy">
+            </div>
+            <div v-if="pickedCard.points.length" class="add-card__chips" aria-label="おすすめポイント">
+              <span v-for="p in pickedCard.points" :key="p.label" class="add-card__point">{{ p.icon }} {{ p.label }}</span>
+            </div>
+            <div v-if="pickedCard.tags.length" class="add-card__chips" aria-label="タグ">
+              <span v-for="t in pickedCard.tags" :key="t" class="add-card__tag">#{{ t }}</span>
+            </div>
+            <div v-if="pickedCard.road" class="add-sub">🛣️ 近くの道: {{ pickedCard.road }}</div>
+            <p v-if="pickedCard.comment" class="add-card__comment">{{ pickedCard.comment }}</p>
+            <a v-if="pickedCard.detailUrl" class="add-card__link" :href="pickedCard.detailUrl" target="_blank" rel="noopener">スポットの詳細を見る ↗</a>
+          </div>
         </div>
         <div class="add-maphint" v-else>地図・お店・スポットを押すか、検索して選びます（灰色は追加済み）</div>
       </div>
@@ -1421,6 +1451,8 @@ createApp({
     const travCache = {};
     function trav(r) { return travCache[r.id] || (travCache[r.id] = RL.traversal(r.polylines.map(RL.decodePolyline))); }
 
+    // 地図で選んだスポットのカードの中身（写真・札・タグ・近くの道・本文。検索・地図で選んだ場所は null）
+    const pickedCard = computed(() => (mapPicked.value && mapPicked.value.spotId ? PA.spotCard(mapPicked.value, SP) : null));
     const isFull = computed(() => !addPlan.value || !PA.canAdd(addPlan.value.spots, spotLimit.value));
     const filteredSpotList = computed(() => PA.filteredSpots(allSpots.value, spotQuery.value, spotPoints.value, center.value, SP));
     const filteredSpotCount = computed(() => filteredSpotList.value.length);
@@ -1783,7 +1815,7 @@ createApp({
     return {
       addTabs, addOpen, addPlan, addTab, addMsg, addMsgOk, addBusy, isFull, isSubscribed,
       spotsLoading, spotQuery, spotPoints, spotPage, spotPointOptions, pagedSpots, filteredSpotCount,
-      mapPicked, placeQuery, placeResults, placeStatus,
+      mapPicked, pickedCard, placeQuery, placeResults, placeStatus,
       roadRadiusPresets, roadRadius, roadsLoading, roadChoices, roadSelectedId, roadGoalAtEnd,
       openAdd, closeAdd, switchAddTab, isAdded, distanceFromCenter, toggleSpotPoint, addSpot,
       schedulePlaceSearch, pickPlaceResult, setRoadRadius, radiusLabel, roadTagText, roadEnds, roadInPlan, selectRoad, addRoad,
