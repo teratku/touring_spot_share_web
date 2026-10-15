@@ -16,6 +16,12 @@
   <script src="/vendor/vue.global.prod.js"></script>
   <!-- プランのおすすめ道路（通り道・説明・地図の線。利用者の要望 2026-10-11） -->
   <script src="/plan-road-lib.js?v=2"></script>
+  <!-- プランに追加（スポット一覧・地図・おすすめ道路。アプリのプランの「スポットを追加」と同じ。2026-10-16） -->
+  <script src="/roads-lib.js?v=2"></script>
+  <script src="/spot-points.js?v=1"></script>
+  <script src="/plan-add-lib.js?v=1"></script>
+  <script src="/place-search-lib.js?v=1"></script>
+  <script src="/conquest/prefecture-data.js"></script>
 
   <!-- Firebase SDKs -->
   <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
@@ -24,6 +30,7 @@
   <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
   <script defer src="/__/firebase/init.js"></script>
   <script defer src="/analytics.js"></script>
+  <script defer src="/subscription.js?v=2"></script>
 
   <!-- Google Maps API -->
   <script>
@@ -233,6 +240,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-bottom: 10px;
   }
   .spot-list-title { font-size: 13px; font-weight: bold; color: #555; }
@@ -454,6 +463,70 @@
       color: #AEAEB2;
     }
   }
+  /* ========== プランに追加（スポット一覧・地図・おすすめ道路。2026-10-16） ========== */
+  .add-open-btn { font-size: 12px; font-weight: bold; color: #fff; background: #00A8C6; border: none;
+                  padding: 5px 12px; border-radius: 14px; cursor: pointer; white-space: nowrap; }
+  .add-open-btn:focus-visible { outline: 2px solid #00A8C6; outline-offset: 2px; }
+  /* ⚠️ 共通メニューの丸いボタン（menu.js・z-index 100000〜）より上に出す（スマホ幅で見出しに重なっていた） */
+  .add-overlay { z-index: 100003; }
+  .add-panel { background: var(--ts-surface, #fff); color: var(--ts-text, #222); border-radius: 18px; width: 100%; max-width: 760px;
+               height: min(86vh, 820px); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .add-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px; }
+  .add-head b { font-size: 16px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .add-count { font-size: 12px; color: var(--ts-text-2, #777); white-space: nowrap; }
+  .add-close { font: inherit; font-size: 15px; width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
+               background: var(--ts-surface-2, #f2f2f2); color: var(--ts-text-2, #555); }
+  .add-tabs { display: flex; gap: 6px; padding: 0 16px 10px; }
+  .add-tab { flex: 1; font: inherit; font-size: 13px; font-weight: 700; padding: 8px 0; border-radius: 10px; cursor: pointer;
+             border: 1px solid var(--ts-line, #ddd); background: transparent; color: var(--ts-text-2, #555); }
+  .add-tab[aria-selected="true"] { background: #00A8C6; border-color: #00A8C6; color: #fff; }
+  .add-body { flex: 1; min-height: 0; display: flex; flex-direction: column; border-top: 1px solid var(--ts-line, #eee); }
+  .add-tools { padding: 10px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .add-search { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--ts-line, #ddd);
+                background: var(--ts-surface-2, #f7f7f7); color: inherit; font: inherit; font-size: 14px; }
+  .add-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
+  .add-chip { font: inherit; font-size: 12px; padding: 4px 10px; border-radius: 999px; white-space: nowrap; cursor: pointer;
+              border: 1px solid var(--ts-line, #ddd); background: transparent; color: var(--ts-text-2, #555); }
+  .add-chip[aria-pressed="true"] { background: color-mix(in srgb, #00A8C6 16%, transparent); border-color: #00A8C6; color: var(--ts-teal-ink, #007d93); }
+  .add-list { flex: 1; overflow-y: auto; list-style: none; margin: 0; padding: 0 8px 12px; }
+  .add-row { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 10px; }
+  .add-row:hover { background: var(--ts-surface-2, #f5f5f5); }
+  .add-thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex: none; background: var(--ts-surface-2, #eee);
+               display: grid; place-items: center; font-size: 20px; }
+  .add-info { flex: 1; min-width: 0; }
+  .add-name { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .add-sub { font-size: 12px; color: var(--ts-text-2, #888); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .add-btn { font: inherit; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 8px; cursor: pointer; flex: none;
+             border: none; background: #00A8C6; color: #fff; }
+  .add-btn:disabled { background: var(--ts-surface-2, #eee); color: var(--ts-text-2, #999); cursor: default; }
+  .add-empty { padding: 32px 16px; text-align: center; color: var(--ts-text-2, #888); font-size: 14px; }
+  .add-more { display: block; margin: 8px auto 0; font: inherit; font-size: 13px; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+              border: 1px solid var(--ts-line, #ddd); background: transparent; color: var(--ts-teal-ink, #007d93); }
+  .add-msg { padding: 8px 16px; font-size: 13px; border-top: 1px solid var(--ts-line, #eee); }
+  .add-msg.ok { color: #1f8a3a; } .add-msg.err { color: #d93025; }
+  .add-map { flex: 1; min-height: 240px; }
+  .add-map--roads { flex: none; height: 220px; }
+  .add-card { position: absolute; left: 12px; right: 12px; bottom: 12px; background: var(--ts-surface, #fff); border-radius: 12px;
+              box-shadow: 0 6px 20px rgba(0,0,0,0.25); padding: 10px; display: flex; align-items: center; gap: 10px; }
+  .add-maphint { position: absolute; left: 50%; transform: translateX(-50%); bottom: 14px; font-size: 12px; padding: 6px 12px;
+                 border-radius: 999px; background: rgba(0,0,0,0.65); color: #fff; white-space: nowrap; }
+  .add-mapsearch { position: absolute; z-index: 2; top: 10px; left: 12px; right: 12px; }
+  .add-mapsearch .add-search { background: var(--ts-surface, #fff); box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+  .add-results { list-style: none; margin: 4px 0 0; padding: 4px; max-height: 240px; overflow-y: auto; border-radius: 10px;
+                 background: var(--ts-surface, #fff); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+  .add-result { display: block; width: 100%; text-align: left; font: inherit; font-size: 14px; padding: 8px 10px; border: none;
+                border-radius: 8px; background: transparent; color: inherit; cursor: pointer; }
+  .add-result:hover, .add-result:focus-visible { background: var(--ts-surface-2, #f2f2f2); outline: none; }
+  .add-result small { display: block; font-size: 12px; color: var(--ts-text-2, #888); }
+  .add-road-detail { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .add-road-detail select { font: inherit; font-size: 13px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--ts-line, #ddd);
+                            background: var(--ts-surface-2, #fff); color: inherit; }
+  .add-tier { font-size: 12px; color: var(--ts-text-2, #777); }
+  .add-row.is-selected { background: color-mix(in srgb, #E0A100 14%, transparent); }
+  @media (max-width: 600px) {
+    .add-panel { height: 92vh; border-radius: 16px; }
+  }
+
   /* スポットアイテム クリック対応 */
   .spot-item {
     cursor: pointer;
@@ -513,7 +586,7 @@
       <div class="section-header">
         <div>
           <div class="section-title">マイツーリング</div>
-          <span class="plan-count-badge">{{ plans.length }} / {{ planLimit }}</span>
+          <span class="plan-count-badge">{{ plans.length }}{{ planLimit === Infinity ? '' : ' / ' + planLimit }}</span>
         </div>
         <div style="display:flex; gap:8px; align-items:center;">
           <a
@@ -614,6 +687,8 @@
             <div class="spot-list">
               <div class="spot-list-header">
                 <span class="spot-list-title">登録スポット ({{ plan.spots.length }}/{{ spotLimit }})</span>
+                <!-- ⚠️ アプリのプランの「スポットを追加」と同じ（スポット一覧・地図・おすすめ道路。利用者の要望 2026-10-16） -->
+                <button v-if="plan.spots.length < spotLimit" type="button" class="add-open-btn" @click.stop="openAdd(plan)">＋ 追加</button>
                 <a
                   v-if="plan.spots.length < spotLimit"
                   :href="'/plan-suggest.html?planId=' + plan.id"
@@ -693,6 +768,113 @@
     </div>
   </div>
 
+  <!-- ========== プランに追加（スポット一覧・地図・おすすめ道路。アプリのプランの「スポットを追加」と同じ。2026-10-16） ========== -->
+  <div class="modal-overlay add-overlay" v-if="addOpen" @click.self="closeAdd" @keyup.esc="closeAdd">
+    <div class="add-panel" role="dialog" aria-modal="true" :aria-label="'「' + (addPlan && addPlan.name) + '」に追加'">
+      <div class="add-head">
+        <b>「{{ addPlan && addPlan.name }}」に追加</b>
+        <span class="add-count">追加済み {{ addPlan ? addPlan.spots.length : 0 }} / {{ spotLimit }}</span>
+        <button type="button" class="add-close" @click="closeAdd" aria-label="閉じる">✕</button>
+      </div>
+      <div class="add-tabs" role="tablist">
+        <button v-for="t in addTabs" :key="t.key" type="button" class="add-tab" role="tab"
+                :aria-selected="addTab === t.key" @click="switchAddTab(t.key)">{{ t.label }}</button>
+      </div>
+
+      <!-- スポット一覧（検索・おすすめポイントで絞る。基準の場所から近い順） -->
+      <div class="add-body" v-if="addTab === 'spots'">
+        <div class="add-tools">
+          <input class="add-search" type="search" v-model="spotQuery" placeholder="スポット名・地域名・タグで検索" aria-label="スポットを検索"
+                 @input="spotPage = 1">
+          <div class="add-chips" role="group" aria-label="おすすめポイントで絞る">
+            <button v-for="p in spotPointOptions" :key="p.key" type="button" class="add-chip"
+                    :aria-pressed="spotPoints.indexOf(p.key) >= 0" @click="toggleSpotPoint(p.key)">{{ p.icon }} {{ p.label }}</button>
+          </div>
+        </div>
+        <div class="add-empty" v-if="spotsLoading">スポットを読み込んでいます…</div>
+        <div class="add-empty" v-else-if="!filteredSpotCount">条件に合うスポットがありません</div>
+        <ul class="add-list" v-else>
+          <li class="add-row" v-for="sp in pagedSpots" :key="sp.spotId">
+            <img v-if="sp.imageUrl" class="add-thumb" :src="sp.imageUrl" alt="" loading="lazy">
+            <span v-else class="add-thumb" aria-hidden="true">📍</span>
+            <div class="add-info">
+              <div class="add-name">{{ sp.name }}</div>
+              <div class="add-sub">{{ [sp.address, distanceFromCenter(sp)].filter(Boolean).join('・') }}</div>
+            </div>
+            <button type="button" class="add-btn" :disabled="addBusy || isAdded(sp) || isFull"
+                    @click="addSpot(sp)">{{ isAdded(sp) ? '追加済み' : '追加' }}</button>
+          </li>
+          <li v-if="pagedSpots.length < filteredSpotCount">
+            <button type="button" class="add-more" @click="spotPage++">さらに表示（残り {{ filteredSpotCount - pagedSpots.length }} 件）</button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 地図・検索（Web だけ。Google マップのように、検索・地図のクリック・お店や施設のクリックで場所を選ぶ。
+           みんなのスポットの印も押せる。いまプランに入っているスポット・道も重ねる。利用者の要望 2026-10-16） -->
+      <div class="add-body" v-show="addTab === 'map'" style="position:relative">
+        <div class="add-mapsearch">
+          <input class="add-search" type="search" v-model="placeQuery" placeholder="住所・施設名・座標で検索" aria-label="場所を検索"
+                 autocomplete="off" @input="schedulePlaceSearch(false)" @keydown.enter.prevent="schedulePlaceSearch(true)">
+          <ul class="add-results" v-if="placeResults.length || placeStatus">
+            <li v-if="placeStatus" class="add-sub" style="padding:8px 10px">{{ placeStatus }}</li>
+            <li v-for="(r, k) in placeResults" :key="r.id + k">
+              <button type="button" class="add-result" @click="pickPlaceResult(r)">{{ r.name }}<small v-if="r.address">{{ r.address }}</small></button>
+            </li>
+          </ul>
+        </div>
+        <div id="add-map" class="add-map"></div>
+        <div class="add-card" v-if="mapPicked">
+          <img v-if="mapPicked.imageUrl" class="add-thumb" :src="mapPicked.imageUrl" alt="">
+          <span v-else class="add-thumb" aria-hidden="true">📍</span>
+          <div class="add-info">
+            <div class="add-name">{{ mapPicked.name }}</div>
+            <div class="add-sub">{{ mapPicked.spotId ? (mapPicked.address || 'みんなのスポット') : '📌 ' + (mapPicked.address || 'カスタムピンとして入れます') }}</div>
+          </div>
+          <button type="button" class="add-btn" :disabled="addBusy || isAdded(mapPicked) || isFull"
+                  @click="addSpot(mapPicked)">{{ isAdded(mapPicked) ? '追加済み' : '追加' }}</button>
+          <button type="button" class="add-close" @click="mapPicked = null" aria-label="選ぶのをやめる">✕</button>
+        </div>
+        <div class="add-maphint" v-else>地図・お店・スポットを押すか、検索して選びます（灰色は追加済み）</div>
+      </div>
+
+      <!-- おすすめ道路（無料は上位3本。走る向きを決めて足す） -->
+      <div class="add-body" v-show="addTab === 'roads'">
+        <div id="add-road-map" class="add-map add-map--roads"></div>
+        <div class="add-tools">
+          <div class="add-chips" role="group" aria-label="探す範囲">
+            <button v-for="km in roadRadiusPresets" :key="km" type="button" class="add-chip" :aria-pressed="roadRadius === km"
+                    @click="setRoadRadius(km)">{{ radiusLabel(km) }}</button>
+          </div>
+          <div class="add-tier">{{ isSubscribed ? '範囲のおすすめ道路を表示しています' : '無料：上位3本を表示しています（Plus ですべて表示・アプリから登録できます）' }}</div>
+        </div>
+        <div class="add-empty" v-if="roadsLoading">おすすめ道路を探しています…</div>
+        <div class="add-empty" v-else-if="!roadChoices.visible.length">この範囲のおすすめ道路が見つかりません。範囲を広げてください</div>
+        <ul class="add-list" v-else>
+          <li class="add-row" v-for="(r, i) in roadChoices.visible" :key="r.id" :class="{ 'is-selected': r.id === roadSelectedId }"
+              style="flex-wrap:wrap; cursor:pointer" @click="selectRoad(r.id)">
+            <span class="add-thumb" aria-hidden="true">🛣️</span>
+            <div class="add-info">
+              <div class="add-name">{{ i + 1 }}. {{ r.name }}</div>
+              <div class="add-sub">全長{{ r.lengthKm.toFixed(0) }}km・{{ roadTagText(r) }}{{ distanceFromCenter(r.representative) ? '・ここから' + distanceFromCenter(r.representative) : '' }}</div>
+            </div>
+            <div v-if="r.id === roadSelectedId" class="add-road-detail" style="flex-basis:100%" @click.stop>
+              <select v-model="roadGoalAtEnd" aria-label="走る向き">
+                <option :value="true">{{ roadEnds(r)[0] }} → {{ roadEnds(r)[1] }}</option>
+                <option :value="false">{{ roadEnds(r)[1] }} → {{ roadEnds(r)[0] }}</option>
+              </select>
+              <button type="button" class="add-btn" :disabled="addBusy || isFull || roadInPlan(r)"
+                      @click="addRoad(r)">{{ roadInPlan(r) ? '追加済み' : 'プランに追加' }}</button>
+            </div>
+          </li>
+          <li v-if="roadChoices.locked > 0" class="add-tier" style="padding:8px 12px">ほか {{ roadChoices.locked }} 本は Plus で表示できます</li>
+        </ul>
+      </div>
+
+      <div class="add-msg" :class="addMsgOk ? 'ok' : 'err'" v-if="addMsg" role="status">{{ addMsg }}</div>
+    </div>
+  </div>
+
   <!-- ========== プラン削除確認モーダル ========== -->
   <div class="modal-overlay" v-if="showDeletePlanModal" @click.self="showDeletePlanModal = false">
     <div class="modal-box">
@@ -720,7 +902,7 @@
 </div><!-- /app -->
 
 <script>
-const { createApp, ref, onMounted, nextTick } = Vue;
+const { createApp, ref, onMounted, nextTick, computed, shallowRef } = Vue;
 
 // ========== Firebase 初期化待機 ==========
 function waitForFirebase() {
@@ -748,18 +930,23 @@ function waitForMaps() {
 }
 
 const PlanRoads = window.TSSPlanRoads;
+const PA = window.TSSPlanAdd, RL = window.TSSRoads, SP = window.TSSSpotPoints, PS = window.TSSPlaceSearch;
 
 createApp({
   setup() {
-    // ========== 定数 (サブスク未加入) ==========
+    // ========== 定数 ==========
+    // ⚠️ アプリの TouringPlanLimits と同じ（利用者の判断 2026-10-08）: 1プランのスポット・道は無料3・サブスク10、
+    //    プランの数は無料3・サブスク無制限。⚠️ 以前はサブスクを見ずにいつも無料の上限で出していた（2026-10-16 に直した）
     const PLAN_LIMIT_FREE = 3;
     const SPOT_LIMIT_FREE = 3;
+    const SPOT_LIMIT_SUBSCRIBED = 10;
 
     // ========== State ==========
     const loading = ref(true);
     const currentUser = ref(null);
     const plans = ref([]);
     const planLimit = ref(PLAN_LIMIT_FREE);
+    const isSubscribed = ref(false);
     const spotLimit = ref(SPOT_LIMIT_FREE);
 
     // モーダル
@@ -798,10 +985,19 @@ createApp({
         currentUser.value = user;
         loading.value = false;
         if (user) {
+          await applySubscriptionLimits();
           await loadPlans(user.uid);
         }
       });
     });
+
+    /** サブスク（特定の UID を含む。subscription.js）なら上限を広げる */
+    async function applySubscriptionLimits() {
+      const sub = window.TSSSubscription ? await window.TSSSubscription.forCurrentUser(true) : { isSubscribed: false };
+      isSubscribed.value = !!sub.isSubscribed;
+      planLimit.value = sub.isSubscribed ? Infinity : PLAN_LIMIT_FREE;
+      spotLimit.value = sub.isSubscribed ? SPOT_LIMIT_SUBSCRIBED : SPOT_LIMIT_FREE;
+    }
 
     // ========== プラン読み込み ==========
     async function loadPlans(uid) {
@@ -1198,7 +1394,369 @@ createApp({
       window.open(`/detail.html?id=${spot.spotId}`, '_blank');
     }
 
+
+    // ========== プランに追加（スポット一覧・地図と検索・おすすめ道路。2026-10-16） ==========
+    // 利用者の要望:「web のプラン追加でアプリと同じようにスポット/おすすめ道路などを追加できるようにしたい」
+    //   「web だけ、google map のように検索/マップクリックでプランに追加できるようにしたい」
+    // ⚠️ 計算は plan-add-lib.js（テストあり）。道は roads-lib.js（おすすめ道路のページと同じ）、場所は place-search-lib.js
+    const addTabs = [{ key: 'spots', label: '📋 スポット' }, { key: 'map', label: '🗺️ 地図・検索' }, { key: 'roads', label: '🛣️ 道' }];
+    const addOpen = ref(false), addPlan = ref(null), addTab = ref('spots');
+    const addMsg = ref(''), addMsgOk = ref(true), addBusy = ref(false);
+    const center = ref(null);
+    // スポット
+    const allSpots = shallowRef([]), spotsLoading = ref(false), spotQuery = ref(''), spotPoints = ref([]), spotPage = ref(1);
+    const spotPointOptions = (SP && SP.POINTS) || [];
+    // 地図・検索
+    const mapPicked = ref(null), placeQuery = ref(''), placeResults = ref([]), placeStatus = ref('');
+    let addMap = null, addMarkers = [], addOverlay = [], placeTimer = null, placeSeq = 0, placeToken = null, pickedMarker = null;
+    // 道
+    const roadRadiusPresets = RL.RADIUS_PRESETS, roadRadius = ref(50), roadsLoading = ref(false);
+    const roadChoices = shallowRef({ all: [], visible: [], locked: 0, onMap: [] });
+    const roadSelectedId = ref(null), roadGoalAtEnd = ref(true);
+    let roadMap = null, roadLines = [], roadIndex = null, roadFiles = {}, roadGen = 0;
+    const travCache = {};
+    function trav(r) { return travCache[r.id] || (travCache[r.id] = RL.traversal(r.polylines.map(RL.decodePolyline))); }
+
+    const isFull = computed(() => !addPlan.value || !PA.canAdd(addPlan.value.spots, spotLimit.value));
+    const filteredSpotList = computed(() => PA.filteredSpots(allSpots.value, spotQuery.value, spotPoints.value, center.value, SP));
+    const filteredSpotCount = computed(() => filteredSpotList.value.length);
+    const pagedSpots = computed(() => filteredSpotList.value.slice(0, spotPage.value * PA.PAGE_SIZE));
+
+    function setAddMsg(text, ok) { addMsg.value = text; addMsgOk.value = ok; }
+    function isAdded(sp) { return !!(sp && sp.spotId && addPlan.value && PA.isSpotInPlan(addPlan.value.spots, sp.spotId)); }
+    function distanceFromCenter(p) { return PA.distanceLabel(center.value, p); }
+    function toggleSpotPoint(key) {
+      const i = spotPoints.value.indexOf(key);
+      spotPoints.value = i >= 0 ? spotPoints.value.filter(k => k !== key) : spotPoints.value.concat([key]);
+      spotPage.value = 1;
+    }
+
+    async function openAdd(plan) {
+      addPlan.value = plan; addOpen.value = true; addTab.value = 'spots'; setAddMsg('', true);
+      mapPicked.value = null; roadSelectedId.value = null;
+      // 探す基準: プランの最後の場所 → 無ければ現在地（取れなければ東京駅）
+      center.value = PA.centerOf(plan.spots, null);
+      if (!center.value && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => { if (!center.value) { center.value = { lat: pos.coords.latitude, lng: pos.coords.longitude }; } },
+          () => {}, { timeout: 8000, maximumAge: 600000 });
+      }
+      loadAllSpots();
+    }
+    function closeAdd() { addOpen.value = false; addMap = null; roadMap = null; addMarkers = []; addOverlay = []; roadLines = []; }
+
+    /** みんなのスポット（imagedownload）。⚠️ 開いた最初の1回だけ読む（毎回全件を読まない） */
+    async function loadAllSpots() {
+      if (allSpots.value.length || spotsLoading.value) return;
+      spotsLoading.value = true;
+      try {
+        const snap = await db.collection('imagedownload').get();
+        allSpots.value = snap.docs.map(d => PA.spotFromDoc(d.id, d.data())).filter(Boolean);
+      } catch (e) {
+        console.error('スポット読み込みエラー:', e);
+        setAddMsg('スポットを読み込めませんでした: ' + (e.message || e), false);
+      } finally {
+        spotsLoading.value = false;
+        if (addTab.value === 'map') drawSpotMarkers();
+      }
+    }
+
+    async function switchAddTab(key) {
+      addTab.value = key;
+      await nextTick();
+      await waitForMaps();
+      if (key === 'map') initAddMap();
+      if (key === 'roads') { initRoadMap(); if (!roadChoices.value.all.length) loadRoads(); }
+    }
+
+    /** プランを保存して、プランの地図と距離を描き直す */
+    async function saveSpots(plan, newSpots) {
+      await db.collection('users').doc(currentUser.value.uid).collection('touringPlans').doc(plan.id)
+        .update({ spots: newSpots, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      plan.spots = newSpots;
+      await nextTick();
+      if (document.getElementById('map-' + plan.id)) initPlanMap(plan);
+      computeRouteInfo(plan);
+      drawAddOverlay();
+      drawSpotMarkers();
+    }
+
+    async function addItem(item, label) {
+      const plan = addPlan.value;
+      if (!plan || addBusy.value) return;
+      // ⚠️ 上限はアプリと同じ（無料3・サブスク10）
+      if (!PA.canAdd(plan.spots, spotLimit.value)) {
+        return setAddMsg('このプランは ' + spotLimit.value + ' 件までです' + (isSubscribed.value ? '' : '（Plus は10件まで）'), false);
+      }
+      addBusy.value = true;
+      try {
+        await saveSpots(plan, PA.appended(plan.spots, item));
+        setAddMsg('「' + label + '」を追加しました', true);
+        if (mapPicked.value && !mapPicked.value.spotId) { mapPicked.value = null; if (pickedMarker) { pickedMarker.setMap(null); pickedMarker = null; } }
+      } catch (e) {
+        console.error('追加エラー:', e);
+        setAddMsg('追加できませんでした: ' + (e.message || e), false);
+      } finally {
+        addBusy.value = false;
+      }
+    }
+
+    function addSpot(sp) {
+      if (!sp) return;
+      if (sp.spotId) {
+        if (isAdded(sp)) return setAddMsg('「' + sp.name + '」はもうこのプランに入っています', false);
+        return addItem(PA.planSpotOf(sp), sp.name);
+      }
+      // 検索・地図のクリックで選んだ場所はカスタムピン（ルート作成の場所検索と同じ形）
+      addItem(PS.placeSpot(sp), sp.name);
+      try {
+        const list = PS.readHistory(localStorage.getItem(PS.HISTORY_KEY));
+        localStorage.setItem(PS.HISTORY_KEY, JSON.stringify(PS.recordedHistory(list, sp)));
+      } catch (e) { /* 履歴は無くても使える */ }
+    }
+
+    // ---- 地図・検索 ----
+    function initAddMap() {
+      const el = document.getElementById('add-map');
+      if (!el) return;
+      if (!addMap) {
+        const c = center.value || { lat: 35.681, lng: 139.767 };
+        addMap = new google.maps.Map(el, { center: c, zoom: 11, disableDefaultUI: true, zoomControl: true, clickableIcons: true });
+        addMap.addListener('idle', drawSpotMarkers);
+        // ⚠️ 地図のクリックで場所を選ぶ（お店・施設を押したら、その名前で。Google マップと同じ）
+        addMap.addListener('click', (ev) => {
+          if (ev.placeId) { ev.stop(); pickPoi(ev.placeId, ev.latLng); }
+          else pickPoint(ev.latLng);
+        });
+      }
+      drawAddOverlay();
+      drawSpotMarkers();
+    }
+
+    /** いまプランに入っているスポット・道（番号と金色の線。プランの地図と同じ） */
+    function drawAddOverlay() {
+      if (!addMap || !addPlan.value) return;
+      addOverlay.forEach(o => o.setMap(null)); addOverlay = [];
+      addPlan.value.spots.forEach((spot, index) => {
+        const road = PlanRoads.roadPath(spot);
+        if (road.length) addOverlay.push(new google.maps.Polyline({ path: road, strokeColor: '#E0A100', strokeWeight: 6, zIndex: 2, map: addMap }));
+        addOverlay.push(new google.maps.Marker({ position: { lat: spot.lat, lng: spot.lng }, map: addMap, zIndex: 5,
+          label: { text: String(index + 1), color: 'white', fontWeight: 'bold', fontSize: '11px' },
+          icon: { path: google.maps.SymbolPath.CIRCLE, fillColor: '#00A8C6', fillOpacity: 1, strokeColor: 'white', strokeWeight: 2, scale: 12 },
+          title: (index + 1) + '. ' + spot.name }));
+      });
+    }
+
+    /** みんなのスポットの印（見えている範囲の近い順に PA.MAP_CAP まで。追加済みは灰色） */
+    function drawSpotMarkers() {
+      if (!addMap || !addMap.getBounds()) return;
+      const b = addMap.getBounds(), ne = b.getNorthEast(), sw = b.getSouthWest();
+      const shown = PA.spotsInBounds(allSpots.value, { south: sw.lat(), west: sw.lng(), north: ne.lat(), east: ne.lng() });
+      addMarkers.forEach(m => m.setMap(null));
+      addMarkers = shown.map(sp => {
+        const m = new google.maps.Marker({ position: { lat: sp.lat, lng: sp.lng }, map: addMap, title: sp.name, zIndex: 3,
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillOpacity: 1, strokeColor: 'white', strokeWeight: 2,
+                  fillColor: isAdded(sp) ? '#9E9E9E' : '#FF7A00' } });
+        m.addListener('click', () => { mapPicked.value = sp; placeResults.value = []; });
+        return m;
+      });
+    }
+
+    function showPicked(place) {
+      mapPicked.value = place;
+      if (pickedMarker) pickedMarker.setMap(null);
+      pickedMarker = new google.maps.Marker({ position: { lat: place.lat, lng: place.lng }, map: addMap, zIndex: 6 });
+    }
+
+    /** 地図の何もない所を押した: その場所の住所を名前にする（引けなければ座標） */
+    async function pickPoint(latLng) {
+      const p = { lat: latLng.lat(), lng: latLng.lng() };
+      const base = PS.coordinateCandidate(p);
+      showPicked(Object.assign({}, base, { address: '地図で指定' }));
+      try {
+        const geo = await new google.maps.Geocoder().geocode({ location: p });
+        const first = geo && geo.results && geo.results[0];
+        if (first && mapPicked.value && mapPicked.value.id === base.id) {
+          mapPicked.value = Object.assign({}, base, { id: first.place_id || base.id, name: PS.cleanAddress(first.formatted_address) || base.name,
+                                                      address: '地図で指定', kind: 'address' });
+        }
+      } catch (e) { /* 座標のまま使う */ }
+    }
+
+    /** お店・施設を押した: その名前で */
+    async function pickPoi(placeId, latLng) {
+      const p = { lat: latLng.lat(), lng: latLng.lng() };
+      showPicked({ id: placeId, name: '読み込み中…', address: null, lat: p.lat, lng: p.lng, kind: 'place' });
+      try {
+        const lib = await google.maps.importLibrary('places');
+        const service = new lib.PlacesService(addMap);
+        service.getDetails({ placeId, fields: ['name', 'formatted_address', 'geometry'] }, (place, status) => {
+          if (!mapPicked.value || mapPicked.value.id !== placeId) return;
+          const loc = place && place.geometry && place.geometry.location;
+          mapPicked.value = status === lib.PlacesServiceStatus.OK && place
+            ? { id: placeId, name: place.name, address: PS.cleanAddress(place.formatted_address) || null,
+                lat: loc ? loc.lat() : p.lat, lng: loc ? loc.lng() : p.lng, kind: 'place' }
+            : Object.assign(PS.coordinateCandidate(p), { address: '地図で指定' });
+        });
+      } catch (e) {
+        mapPicked.value = Object.assign(PS.coordinateCandidate(p), { address: '地図で指定' });
+      }
+    }
+
+    /** 検索（アプリの DestinationSearchService と同じ順: 座標なら通信しない → 場所の候補 → 0件なら住所として） */
+    function schedulePlaceSearch(immediate) {
+      clearTimeout(placeTimer);
+      const text = placeQuery.value.trim();
+      placeStatus.value = '';
+      if (!text) { placeResults.value = []; placeSeq++; return; }
+      if (!immediate && !PS.searchable(text)) { placeResults.value = []; return; }
+      placeTimer = setTimeout(() => runPlaceSearch(text), immediate ? 0 : 300);
+    }
+    async function runPlaceSearch(text) {
+      const seq = ++placeSeq;
+      placeStatus.value = '探しています…';
+      let found = [];
+      try { found = await searchPlaces(text); } catch (e) { found = []; }
+      if (seq !== placeSeq) return;
+      placeResults.value = found;
+      placeStatus.value = found.length ? '' : '見つかりませんでした。別のことばでお試しください';
+    }
+    async function searchPlaces(text) {
+      const c = PS.parseCoordinate(text);
+      if (c) return [PS.coordinateCandidate(c)];
+      let out = [];
+      try {
+        const lib = await google.maps.importLibrary('places');
+        if (!placeToken) placeToken = new lib.AutocompleteSessionToken();
+        const req = { input: text, language: 'ja', componentRestrictions: { country: 'jp' }, sessionToken: placeToken };
+        if (addMap && addMap.getCenter()) req.locationBias = { center: { lat: addMap.getCenter().lat(), lng: addMap.getCenter().lng() }, radius: 50000 };
+        const res = await new lib.AutocompleteService().getPlacePredictions(req);
+        out = ((res && res.predictions) || []).map(p => {
+          const f = p.structured_formatting || {};
+          return { id: p.place_id, name: f.main_text || p.description, address: f.secondary_text || null, kind: 'place' };
+        });
+      } catch (e) { out = []; }
+      if (out.length) return out;
+      try {
+        const geo = await new google.maps.Geocoder().geocode({ address: text, region: 'jp' });
+        return ((geo && geo.results) || []).slice(0, 5).map(r => ({ id: r.place_id, name: PS.cleanAddress(r.formatted_address), address: null,
+          lat: r.geometry.location.lat(), lng: r.geometry.location.lng(), kind: 'address' }));
+      } catch (e) { return []; }
+    }
+    async function pickPlaceResult(r) {
+      let place = r;
+      if (!isFinite(r.lat)) {
+        placeStatus.value = '位置を取得しています…';
+        try {
+          const lib = await google.maps.importLibrary('places');
+          const token = placeToken; placeToken = null;
+          place = await new Promise((resolve) => new lib.PlacesService(addMap).getDetails(
+            { placeId: r.id, fields: ['geometry'], sessionToken: token }, (pl, st) => {
+              const loc = pl && pl.geometry && pl.geometry.location;
+              resolve(st === lib.PlacesServiceStatus.OK && loc ? Object.assign({}, r, { lat: loc.lat(), lng: loc.lng() }) : null);
+            }));
+        } catch (e) { place = null; }
+        if (!place) { placeStatus.value = 'この場所の位置を取得できませんでした'; return; }
+      }
+      placeStatus.value = ''; placeResults.value = [];
+      showPicked(place);
+      if (addMap) { addMap.panTo({ lat: place.lat, lng: place.lng }); if (addMap.getZoom() < 14) addMap.setZoom(14); }
+    }
+
+    // ---- おすすめ道路（おすすめ道路のページと同じ配信: road_recommend/_index → Storage） ----
+    async function roadSegments(names) {
+      if (!roadIndex) {
+        const doc = await db.collection('road_recommend').doc('_index').get();
+        const p = (doc.exists && doc.data().prefectures) || {};
+        roadIndex = Object.keys(p).map(k => p[k]).filter(e => e && e.fileName);
+      }
+      const entries = roadIndex.filter(e => names.indexOf(e.prefecture) >= 0);
+      const lists = await Promise.all(entries.map(e => {
+        if (!roadFiles[e.fileName]) {
+          roadFiles[e.fileName] = fetch('https://firebasestorage.googleapis.com/v0/b/biketeilen.appspot.com/o/' +
+              encodeURIComponent('Json/road_recommend/' + e.fileName) + '?alt=media')
+            .then(r => r.ok ? r.json() : { segments: [] }).then(f => f.segments || [])
+            .catch(() => { delete roadFiles[e.fileName]; return []; });
+        }
+        return roadFiles[e.fileName];
+      }));
+      return [].concat.apply([], lists);
+    }
+    async function loadRoads() {
+      const c = center.value || { lat: 35.681, lng: 139.767 };
+      const gen = ++roadGen;
+      roadsLoading.value = true;
+      try {
+        const names = RL.prefecturesWithin(c, roadRadius.value, typeof PREFECTURES === 'undefined' ? [] : PREFECTURES);
+        const segments = await roadSegments(names);
+        if (gen !== roadGen) return;
+        roadChoices.value = PA.roadChoices(segments, c, roadRadius.value, isSubscribed.value, RL);
+      } catch (e) {
+        console.error('おすすめ道路の読み込みエラー:', e);
+        roadChoices.value = { all: [], visible: [], locked: 0, onMap: [] };
+      } finally {
+        if (gen === roadGen) { roadsLoading.value = false; drawRoadLines(); }
+      }
+    }
+    function setRoadRadius(km) { roadRadius.value = km; roadSelectedId.value = null; loadRoads(); }
+    function radiusLabel(km) { return RL.radiusLabel(km); }
+    function roadTagText(r) { return (r.tags || []).slice(0, 2).map(t => RL.tagLabel(t)).join('・') || RL.highwayLabel(r.highway); }
+    function roadEnds(r) {
+      const t = trav(r);
+      if (!t) return ['入口', '出口'];
+      return [RL.endLabel(t.path[0], t.path), RL.endLabel(t.path[t.path.length - 1], t.path)];
+    }
+    function roadInPlan(r) {
+      const t = trav(r);
+      return !!(addPlan.value && t && addPlan.value.spots.some(sp => RL.isSameRoadInPlan(sp, r, [t.path[0], t.path[t.path.length - 1]])));
+    }
+    function selectRoad(id) {
+      roadSelectedId.value = roadSelectedId.value === id ? null : id;
+      roadGoalAtEnd.value = true;
+      drawRoadLines();
+    }
+    function addRoad(r) {
+      if (roadInPlan(r)) return setAddMsg('「' + r.name + '」はもうこのプランに入っています', false);
+      const spot = RL.planRoadSpot(r, roadGoalAtEnd.value, addPlan.value.spots.length);
+      if (!spot) return setAddMsg('この道はプランに入れられません（道の形が読めません）', false);
+      addItem(spot, r.name);
+    }
+    function initRoadMap() {
+      const el = document.getElementById('add-road-map');
+      if (!el) return;
+      if (!roadMap) {
+        roadMap = new google.maps.Map(el, { center: center.value || { lat: 35.681, lng: 139.767 }, zoom: 9,
+                                             disableDefaultUI: true, zoomControl: true, clickableIcons: false });
+      }
+      drawRoadLines();
+    }
+    /** 道を描く（選んだ道は金色・ほかは青緑。押すと選ぶ） */
+    function drawRoadLines() {
+      if (!roadMap) return;
+      roadLines.forEach(l => l.setMap(null)); roadLines = [];
+      const bounds = new google.maps.LatLngBounds();
+      roadChoices.value.onMap.forEach(r => {
+        const sel = r.id === roadSelectedId.value;
+        r.polylines.forEach(enc => {
+          const path = RL.decodePolyline(enc);
+          if (!sel && !roadSelectedId.value) path.forEach(p => bounds.extend(p));
+          if (sel) path.forEach(p => bounds.extend(p));
+          const line = new google.maps.Polyline({ path, map: roadMap, strokeColor: sel ? '#E0A100' : '#00A8C6',
+            strokeWeight: sel ? 7 : 4, strokeOpacity: sel ? 1 : 0.8, zIndex: sel ? 3 : 1 });
+          line.addListener('click', () => selectRoad(r.id));
+          roadLines.push(line);
+        });
+      });
+      if (!bounds.isEmpty()) roadMap.fitBounds(bounds, 30);
+    }
+
     return {
+      addTabs, addOpen, addPlan, addTab, addMsg, addMsgOk, addBusy, isFull, isSubscribed,
+      spotsLoading, spotQuery, spotPoints, spotPage, spotPointOptions, pagedSpots, filteredSpotCount,
+      mapPicked, placeQuery, placeResults, placeStatus,
+      roadRadiusPresets, roadRadius, roadsLoading, roadChoices, roadSelectedId, roadGoalAtEnd,
+      openAdd, closeAdd, switchAddTab, isAdded, distanceFromCenter, toggleSpotPoint, addSpot,
+      schedulePlaceSearch, pickPlaceResult, setRoadRadius, radiusLabel, roadTagText, roadEnds, roadInPlan, selectRoad, addRoad,
       loading, currentUser, plans, planLimit, spotLimit,
       showCreateModal, newPlanName, creating, planNameInput,
       showDeletePlanModal, deletePlanTarget,

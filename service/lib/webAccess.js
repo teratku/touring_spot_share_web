@@ -13,6 +13,20 @@
 
 const PAID_TIERS = ["plus", "pro"];
 
+/**
+ * 加入の記録が無くてもサブスク（Pro）として扱う人の UID。
+ * ⚠️ **アプリの `InternalUsers.userIDs`（touringSpotShare/saveRoute/nav/InternalUsers.swift）と同じにすること。**
+ *    利用者の要望（2026-10-16）:「アプリの特定の uid だけフルを使用できるようにしているが、同じように web もしたい」。
+ *    画面側（public/subscription.js の INTERNAL_USER_IDS）とも同じ（service/test/webAccess.test.js が突き合わせる）
+ * ⚠️ **本人の許可なく他人の UID を足さないこと。** 判定を「空なら全員」のように緩めないこと
+ */
+const INTERNAL_USER_IDS = new Set([
+  "5elMKe1WEMPVP3LezAuoMwJbJE32",
+  "3X7lTlF7bTUOGkb5gWiiLol3a5W2",
+]);
+
+function isInternalUser(uid) { return typeof uid === "string" && INTERNAL_USER_IDS.has(uid); }
+
 function toDate(v) {
   if (!v) return null;
   if (typeof v.toDate === "function") return v.toDate();
@@ -31,6 +45,8 @@ function isActiveSubscription(data, now = new Date()) {
 function makeRequireSubscription(db, { now = () => new Date() } = {}) {
   return async function requireSubscription(req, res, next) {
     try {
+      // ⚠️ 特定の UID はアプリと同じく加入の記録が無くても通す
+      if (isInternalUser(req.user && req.user.uid)) return next();
       const snap = await db.collection("subscriptions").doc(req.user.uid).get();
       if (!isActiveSubscription(snap.exists ? snap.data() : null, now())) {
         return res.status(403).json({ error: "Web でのルート作成は、サブスク（Plus・Pro）の方だけ使えます" });
@@ -42,4 +58,4 @@ function makeRequireSubscription(db, { now = () => new Date() } = {}) {
   };
 }
 
-module.exports = { isActiveSubscription, makeRequireSubscription, PAID_TIERS };
+module.exports = { isActiveSubscription, makeRequireSubscription, PAID_TIERS, INTERNAL_USER_IDS, isInternalUser };

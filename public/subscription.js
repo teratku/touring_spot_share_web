@@ -17,6 +17,17 @@ window.TSSSubscription = (function () {
   let cache = null;
   let inflight = null;
 
+  /**
+   * 加入の記録が無くてもサブスク（Pro）として扱う人の UID。
+   * ⚠️ アプリの `InternalUsers.userIDs` と、経路サーバ（service/lib/webAccess.js の INTERNAL_USER_IDS）と同じにすること
+   *    （利用者の要望 2026-10-16:「アプリの特定の uid だけフルを使用できるようにしているが、同じように web もしたい」）。
+   * ⚠️ 本人の許可なく他人の UID を足さないこと
+   */
+  const INTERNAL_USER_IDS = [
+    "5elMKe1WEMPVP3LezAuoMwJbJE32",
+    "3X7lTlF7bTUOGkb5gWiiLol3a5W2",
+  ];
+
   function empty(extra) {
     return Object.assign(
       { loggedIn: false, isSubscribed: false, tier: "free", expiration: null, expired: false, noData: false },
@@ -33,6 +44,10 @@ window.TSSSubscription = (function () {
         if (typeof firebase === "undefined" || !firebase.auth) return empty({ error: "firebase未初期化" });
         const user = firebase.auth().currentUser;
         if (!user) return empty({ loggedIn: false });
+        if (INTERNAL_USER_IDS.indexOf(user.uid) >= 0) {
+          cache = { loggedIn: true, isSubscribed: true, tier: "pro", expiration: null, expired: false, noData: false, internal: true };
+          return cache;
+        }
         const doc = await firebase.firestore().collection("subscriptions").doc(user.uid).get();
         if (!doc.exists) {
           cache = empty({ loggedIn: true, noData: true });
