@@ -62,3 +62,29 @@ test("管理ツール（server.js）は無い .html を次へ回し、公開サ�
     .map((s) => src.lastIndexOf(s, listen)));
   assert.ok(lastRoute < mount, "公開サイトのあとに管理ツールの窓口がある（公開サイトが先に受けうる）");
 });
+
+test("Web の窓口（/v1/web/**）は本番のホスティングへ転送し、ログインの証と体をそのまま渡す（4317 で 404 だった）", async (t) => {
+  const { webApiTarget } = require("../lib/publicSite");
+  assert.strictEqual(webApiTarget("/v1/web/route"), `${HOSTING_ORIGIN}/v1/web/route`);
+  assert.strictEqual(webApiTarget("/v1/web/../admin"), null, "知らない形まで回した");
+  assert.strictEqual(webApiTarget("/v1/route"), null, "Web 用でない窓口まで回した");
+
+  // 転送先の代わり（受け取ったものを返す）
+  const upstream = express();
+  upstream.use(express.json());
+  upstream.post("/v1/web/route", (req, res) => res.status(201).json({ auth: req.get("authorization") || null, body: req.body }));
+  const up = upstream.listen(0, "127.0.0.1");
+  await new Promise((r) => up.once("listening", r));
+  t.after(() => up.close());
+
+  const app = express();
+  app.use(express.json());   // ⚠️ server.js は先に体を読んでいる。読んだあとでも渡せること
+  mountPublicSite(app, PUBLIC_DIR, { webApiOrigin: `http://127.0.0.1:${up.address().port}` });
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((r) => server.once("listening", r));
+  t.after(() => server.close());
+  const res = await fetch(`http://127.0.0.1:${server.address().port}/v1/web/route`, {
+    method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer tok" }, body: JSON.stringify({ a: 1 }) });
+  assert.strictEqual(res.status, 201, "転送先の状態を返していない");
+  assert.deepStrictEqual(await res.json(), { auth: "Bearer tok", body: { a: 1 } }, "ログインの証か体を落とした");
+});
