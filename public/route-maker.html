@@ -22,6 +22,8 @@
 <!-- ⚠️ defer にしないこと（下のページ内のスクリプトが読み込みの途中で使う） -->
 <script src="/plan-road-lib.js?v=2"></script>
 <script src="/route-maker-lib.js?v=8"></script>
+<!-- 場所を入力して探す（住所・施設名・座標。アプリの「目的地を決める」と同じ決めごと） -->
+<script src="/place-search-lib.js?v=1"></script>
 <!-- 楽しい道・距離ガバの選び方（admin/lib から作る生成物・アプリの FunRouteBuilder と答え合わせ済み） -->
 <script src="/route-maker-fun.js?v=1"></script>
 <!-- 県の外接矩形（おすすめ道路を取りに行く県を決める。アプリの PrefectureData と同じ値） -->
@@ -81,6 +83,30 @@
              display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
   .rm-hint p { margin: 0; }
   .rm-hint .ts-btn { align-self: flex-start; }
+  /* 行き先の名前・出発地は押すと場所を変えられる（アプリの行き先の並びと同じ） */
+  .rm-stop__pick { font: inherit; background: transparent; border: 0; padding: 0; text-align: left; color: inherit; cursor: pointer; }
+  .rm-stop__pick:hover .rm-stop__label, .rm-stop__pick:focus-visible .rm-stop__label { text-decoration: underline; }
+  .rm-stop__pick:focus-visible { outline: 2px solid var(--ts-teal); outline-offset: 2px; border-radius: 4px; }
+  .rm-add { align-self: flex-start; font: inherit; font-size: 14px; font-weight: 600; background: transparent; border: 0;
+            color: var(--ts-teal-ink); cursor: pointer; padding: 8px 0 0 2px; }
+  .rm-add:hover, .rm-add:focus-visible { text-decoration: underline; outline: none; }
+  /* 場所を探す欄（アプリの「目的地を決める」と同じ: 打つ前は最近の検索とヒント・打てば候補） */
+  .rm-search { margin-top: 10px; padding: 12px; border: 1px solid var(--ts-line); border-radius: 12px;
+               display: flex; flex-direction: column; gap: 8px; background: var(--ts-surface); }
+  .rm-search[hidden] { display: none; }
+  .rm-search__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14px; }
+  .rm-search__sub { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700;
+                    color: var(--ts-text-2); margin-top: 4px; }
+  .rm-results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; max-height: 320px; overflow-y: auto; }
+  .rm-result { display: flex; align-items: center; gap: 4px; }
+  .rm-result__pick { flex: 1; min-width: 0; text-align: left; font: inherit; font-size: 14px; background: transparent; border: 0;
+                     border-radius: 8px; padding: 7px 8px; color: var(--ts-text); cursor: pointer; }
+  .rm-result__pick:hover, .rm-result__pick:focus-visible { background: var(--ts-surface-2); outline: none; }
+  .rm-result__pick small { display: block; color: var(--ts-text-2); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rm-linkbtn { font: inherit; font-size: 12px; font-weight: 600; background: transparent; border: 0; padding: 0; color: var(--ts-teal-ink); cursor: pointer; }
+  .rm-linkbtn:hover, .rm-linkbtn:focus-visible { text-decoration: underline; outline: none; }
+  .rm-search__hints { margin: 0; padding-left: 18px; font-size: 12px; color: var(--ts-text-2); line-height: 1.7; }
+  .rm-place-actions { display: flex; flex-wrap: wrap; gap: 8px; }
   .rm-leg.is-off { background: transparent; color: var(--ts-text-2); border-color: var(--ts-line); text-decoration: line-through; }
   .rm-leg:focus-visible, .rm-cand:focus-visible { outline: 2px solid var(--ts-teal); outline-offset: 2px; }
 
@@ -195,6 +221,7 @@
 
   // 計算部分は route-maker-lib.js（テストあり。アプリと同じ決めごと）
   var RM = window.TSSRouteMaker;
+  var PS = window.TSSPlaceSearch;
   var MAX_DESTINATION_POINTS = RM.MAX_DESTINATION_POINTS, DISPLACEMENTS = RM.DISPLACEMENTS;
   var esc = RM.esc, km = RM.km, dur = RM.dur;
   var toDestinations = RM.toDestinations, fitted = RM.fitted, buildBody = RM.buildBody, decodePolyline = RM.decodePolyline;
@@ -261,10 +288,12 @@
           '<select id="plan" class="rm-select">' + plans.map(function (p, i) {
             return '<option value="' + i + '">' + esc(p.name || "プラン") + "（" + (p.spots || []).length + "件）</option>"; }).join("") + "</select>" +
           '<ol id="stops" class="rm-stops"></ol>' +
-          '<p class="rm-note">札を押すと、その行き先へ向かう区間だけ 有料・高速・楽しい道 を使う／使わないを変えられます（アプリの立ち寄り先の一覧と同じ）。</p></div>' +
+          '<button type="button" id="addStop" class="rm-add">＋ 行き先を追加</button>' +
+          '<div id="placeSearch" class="rm-search" hidden></div>' +
+          '<p class="rm-note">名前を押すと場所を変えられます（住所・施設名・座標で探せます）。札を押すと、その行き先へ向かう区間だけ 有料・高速・楽しい道 を使う／使わないを変えられます（アプリの立ち寄り先の一覧と同じ）。</p></div>' +
         '<div class="ts-card"><span class="rm-label">出発地</span><div class="rm-radios">' +
-          '<label><input type="radio" name="start" value="current" checked> 走るときの現在地から（アプリで開いたときの場所）</label>' +
-          '<label><input type="radio" name="start" value="first"> プランの最初の場所から</label></div></div>' +
+          '<label><input type="radio" name="start" value="current" id="startCurrent" checked> 走るときの現在地から（アプリで開いたときの場所）</label>' +
+          '<label><input type="radio" name="start" value="first" id="startFirst"> プランの最初の場所から</label></div></div>' +
         '<div class="ts-card"><label class="rm-label" for="disp">バイク</label>' +
           '<select id="disp" class="rm-select">' + DISPLACEMENTS.map(function (d) {
             return '<option value="' + d[0] + '"' + (d[0] === disp ? " selected" : "") + ">" + d[1] + "</option>"; }).join("") + "</select>" +
@@ -292,7 +321,8 @@
         '<button id="send" class="ts-btn ts-btn--block" hidden>このルートをアプリに送る</button>' +
         '<div id="msg" class="rm-msg" role="status"></div>' +
       '</div><div class="rm-mapbox"><div id="map" class="rm-map"></div><div id="legend" class="rm-legend"></div></div></div>';
-    el("plan").onchange = showStops;
+    el("plan").onchange = function () { closePlaceSearch(); showStops(); };
+    el("addStop").onclick = function () { openPlaceSearch("add", null); };
     Array.prototype.forEach.call(document.querySelectorAll('input[name="start"]'), function (r) { r.onchange = showStops; });
     ["disp", "etc", "tolls", "highways", "ferries", "funWeight"].forEach(function (id) {
       el(id).onchange = function () { saveSettings(); syncConditionUI(); renderStops(); };
@@ -366,6 +396,7 @@
   }
 
   function showStops() {
+    closePlaceSearch();
     candidates = []; lastRequest = null; rr.spans = {}; funCtx = null; funGeneration++;
     renderStops(); renderCandidates(); drawRoutes(); setMsg("");
   }
@@ -384,7 +415,8 @@
     var editable = stops.length;   // 並べ替え・削除できる行き先の数
     var startName = startsAtCurrent() ? "走るときの現在地" : originIsFirst ? dests[0].name : firstRoadOrigin ? dests[0].name + "の入口" : "";
     var startRow = '<li class="rm-stop is-origin"><span class="rm-stop__no" aria-hidden="true">' + (startsAtCurrent() ? "◉" : "出") + "</span>" +
-      '<span class="rm-stop__name"><small>出発地</small><br>' + esc(startName) + "</span>" +
+      '<button type="button" class="rm-stop__name rm-stop__pick" id="pickStart" aria-label="出発地を選ぶ（いま: ' + esc(startName) + '）"><small>出発地</small><br>' +
+        '<span class="rm-stop__label">' + esc(startName) + "</span></button>" +
       '<span class="rm-stop__tools"><button type="button" class="rm-tool" id="reverseStops" title="並びを逆にする（出発地とゴールを入れ替える）"' +
         (dests.length < 2 ? " disabled" : "") + ' aria-label="並びを逆にする">⇅</button></span></li>';
     el("stops").innerHTML = startRow + stops.map(function (x, k) {
@@ -405,8 +437,9 @@
       return '<li class="rm-stop' + (d.kind === "road" ? " is-road" : "") + (isFinal ? " is-final" : "") + '" draggable="true" data-i="' + i + '">' +
         chips +
         '<span class="rm-stop__no">' + (isFinal ? "📍" : k + 1) + "</span>" +
-        '<span class="rm-stop__name">' + (d.kind === "road" ? "🛣️ " : "") + esc(d.name) +
-          (d.section && d.section.entry ? " <small>" + esc(d.section.entry) + " → " + esc(d.section.goal || "") + "</small>" : "") + "</span>" +
+        '<button type="button" class="rm-stop__name rm-stop__pick" data-replace="' + i + '" aria-label="' + esc(d.name) + 'の場所を変える">' +
+          '<span class="rm-stop__label">' + (d.kind === "road" ? "🛣️ " : "") + esc(d.name) + "</span>" +
+          (d.section && d.section.entry ? " <small>" + esc(d.section.entry) + " → " + esc(d.section.goal || "") + "</small>" : "") + "</button>" +
         tools +
         // ⚠️ おすすめ道路は入口と出口を入れ替えられる（アプリの立ち寄り先の一覧と同じ）
         (d.kind === "road" && d.approach.length && !(i === 0 && !startsAtCurrent())
@@ -444,6 +477,10 @@
     });
     var rev = el("reverseStops");
     if (rev) rev.onclick = guarded(reverseStops);
+    el("pickStart").onclick = function () { openPlaceSearch("start", null); };
+    Array.prototype.forEach.call(stopsEl.querySelectorAll("[data-replace]"), function (b) {
+      b.onclick = function () { openPlaceSearch("replace", Number(b.dataset.replace)); };
+    });
     // ドラッグで並べ替え（パソコン）。⚠️ スマホではドラッグが効かないので ↑↓ も置く
     var dragFrom = null;
     Array.prototype.forEach.call(stopsEl.querySelectorAll('li[draggable="true"]'), function (li) {
@@ -535,6 +572,229 @@
   }
 
   function setMsg(text, kind) { var m = el("msg"); m.textContent = text; m.className = "rm-msg" + (kind ? " " + kind : ""); }
+
+  // ---- 場所を入力して探す（利用者の要望 2026-10-15:「目的地を決める」と同じように入力して位置を決めたい・履歴も共通化） ----
+  // ⚠️ 探し方はアプリの DestinationSearchService と同じ: 座標なら通信しない → Google の場所の候補 → 0件のときだけ住所として探す。
+  // ⚠️ 履歴は Web の中で共通（この端末のブラウザ。PS.HISTORY_KEY）。選んだ場所はプランに入れる（アプリ・プラン画面と同じプラン）
+  /** mode: "add"（足す）・"start"（出発地）・"replace"（target 番の行き先を変える） */
+  var placeCtx = { mode: null, target: null, results: [], timer: null, seq: 0, token: null, chosen: null, busy: "", error: "" };
+
+  function readPlaceHistory() { try { return PS.readHistory(localStorage.getItem(PS.HISTORY_KEY)); } catch (e) { return []; } }
+  function writePlaceHistory(list) { try { localStorage.setItem(PS.HISTORY_KEY, JSON.stringify(list)); } catch (e) { /* 保存できなくても使える */ } }
+
+  function openPlaceSearch(mode, target) {
+    var dests = planDestinations();
+    if (mode === "replace" && !dests[target]) return;
+    placeCtx.mode = mode; placeCtx.target = target; placeCtx.results = []; placeCtx.chosen = null; placeCtx.busy = ""; placeCtx.error = "";
+    // ⚠️ プランの上限（置き換えは数が増えない）
+    if (!PS.canAdd((currentPlan().spots || []).length, mode)) {
+      placeCtx.error = "このプランには " + PS.SPOTS_PER_PLAN + " 件まで入れられます。行き先を外してから入れてください。";
+    }
+    var title = mode === "start" ? "出発地を選ぶ" : mode === "replace" ? "「" + dests[target].name + "」を変える" : "行き先を追加";
+    var box = el("placeSearch");
+    box.innerHTML = '<div class="rm-search__head"><b>' + esc(title) + "</b>" +
+        '<button type="button" class="rm-tool" id="psClose" aria-label="閉じる">✕</button></div>' +
+      '<input id="psInput" class="rm-input" type="search" placeholder="住所・施設名・座標で検索" autocomplete="off" aria-label="住所・施設名・座標で検索">' +
+      '<div id="psBody"></div>';
+    box.hidden = false;
+    el("psClose").onclick = closePlaceSearch;
+    var input = el("psInput");
+    input.oninput = function () { schedulePlaceSearch(false); };
+    input.onkeydown = function (ev) {
+      if (ev.key === "Enter") { ev.preventDefault(); schedulePlaceSearch(true); }
+      if (ev.key === "Escape") closePlaceSearch();
+    };
+    renderPlaceBody();
+    input.focus();
+  }
+
+  function closePlaceSearch() {
+    var box = el("placeSearch");
+    if (!box) return;
+    clearTimeout(placeCtx.timer); placeCtx.seq++;
+    placeCtx.mode = null; placeCtx.chosen = null;
+    box.hidden = true; box.innerHTML = "";
+  }
+
+  /** 打つたびに走らせず、少し待ってから探す（アプリと同じ 2文字から・Enter ならすぐ） */
+  function schedulePlaceSearch(immediate) {
+    clearTimeout(placeCtx.timer);
+    var text = el("psInput").value.trim();
+    placeCtx.error = ""; placeCtx.chosen = null;
+    if (!text) { placeCtx.results = []; placeCtx.busy = ""; placeCtx.seq++; return renderPlaceBody(); }
+    if (!immediate && !PS.searchable(text)) { placeCtx.results = []; return renderPlaceBody(); }
+    placeCtx.timer = setTimeout(function () { runPlaceSearch(text); }, immediate ? 0 : 300);
+  }
+
+  async function runPlaceSearch(text) {
+    var seq = ++placeCtx.seq;
+    placeCtx.busy = "探しています…"; renderPlaceBody();
+    var found = [];
+    try { found = await searchPlaces(text); } catch (e) { found = []; }
+    if (seq !== placeCtx.seq) return;   // 打っている途中の古い結果は捨てる
+    placeCtx.busy = ""; placeCtx.results = found;
+    placeCtx.error = found.length ? "" : "見つかりませんでした。別のことばでお試しください";
+    renderPlaceBody();
+  }
+
+  /** 探す近く（地図の真ん中・無ければプランの最初の場所） */
+  function searchBias() {
+    if (map && map.getCenter()) return { lat: map.getCenter().lat(), lng: map.getCenter().lng() };
+    var d = planDestinations()[0];
+    return d ? { lat: d.lat, lng: d.lng } : null;
+  }
+
+  async function searchPlaces(text) {
+    var c = PS.parseCoordinate(text);
+    if (c) return [PS.coordinateCandidate(c)];
+    await waitMaps();
+    if (!window.google || !google.maps) throw new Error("地図を読み込めませんでした");
+    var out = [];
+    try {
+      var lib = await google.maps.importLibrary("places");
+      if (!placeCtx.token) placeCtx.token = new lib.AutocompleteSessionToken();
+      var req = { input: text, language: "ja", componentRestrictions: { country: "jp" }, sessionToken: placeCtx.token };
+      var bias = searchBias();
+      if (bias) req.locationBias = { center: bias, radius: 50000 };
+      var res = await new lib.AutocompleteService().getPlacePredictions(req);
+      out = ((res && res.predictions) || []).map(function (p) {
+        var f = p.structured_formatting || {};
+        return { id: p.place_id, name: f.main_text || p.description, address: f.secondary_text || null, kind: "place" };
+      });
+    } catch (e) { out = []; /* 場所の候補が使えないときは住所として探す */ }
+    if (out.length) return out;
+    try {
+      var geo = await new google.maps.Geocoder().geocode({ address: text, region: "jp" });
+      return ((geo && geo.results) || []).slice(0, 5).map(function (r) {
+        return { id: r.place_id, name: PS.cleanAddress(r.formatted_address), address: null,
+                 lat: r.geometry.location.lat(), lng: r.geometry.location.lng(), kind: "address" };
+      });
+    } catch (e) { return []; }
+  }
+
+  /** 候補の座標を決める（場所の候補は ID しか持たない） */
+  async function resolvePlace(candidate) {
+    if (isFinite(candidate.lat) && isFinite(candidate.lng)) return candidate;
+    var lib = await google.maps.importLibrary("places");
+    var service = new lib.PlacesService(map || document.createElement("div"));
+    var token = placeCtx.token;
+    placeCtx.token = null;   // 決まったら課金のまとまりを切る（アプリと同じ）
+    return new Promise(function (resolve) {
+      service.getDetails({ placeId: candidate.id, fields: ["geometry"], sessionToken: token }, function (place, status) {
+        var loc = place && place.geometry && place.geometry.location;
+        if (status !== lib.PlacesServiceStatus.OK || !loc) return resolve(null);
+        resolve(Object.assign({}, candidate, { lat: loc.lat(), lng: loc.lng() }));
+      });
+    });
+  }
+
+  function renderPlaceBody() {
+    var body = el("psBody");
+    if (!body) return;
+    var input = el("psInput"), text = input ? input.value.trim() : "", html = "";
+    if (placeCtx.chosen) {
+      // ⚠️ 足すときは置き場所を聞く（アプリの「ここをゴールにする／途中に寄る」と同じ）
+      html = '<p style="margin:0;font-size:14px">「' + esc(placeCtx.chosen.name) + "」をどこに入れますか？</p>" +
+        '<div class="rm-place-actions"><button type="button" class="ts-btn" data-place="goal">ゴールにする</button>' +
+        '<button type="button" class="ts-btn ts-btn--ghost" data-place="waypoint">途中に寄る</button>' +
+        '<button type="button" class="rm-linkbtn" data-place="cancel">やめる</button></div>';
+    } else if (placeCtx.busy) {
+      html = '<p class="rm-note" role="status" style="margin:0">' + esc(placeCtx.busy) + "</p>";
+    } else if (placeCtx.error) {
+      html = '<p class="rm-msg err" role="status" style="margin:0">' + esc(placeCtx.error) + "</p>";
+    } else if (text && placeCtx.results.length) {
+      html = '<ul class="rm-results">' + placeCtx.results.map(function (r, k) {
+        return '<li class="rm-result"><button type="button" class="rm-result__pick" data-result="' + k + '">' + esc(r.name) +
+          (r.address ? "<small>" + esc(r.address) + "</small>" : "") + "</button></li>";
+      }).join("") + "</ul>";
+    } else if (text) {
+      html = '<p class="rm-note" style="margin:0">' + PS.MIN_QUERY_LENGTH + "文字以上で探します（Enter ですぐ探します）</p>";
+    } else {
+      var history = readPlaceHistory();
+      if (placeCtx.mode === "start") {
+        html += '<ul class="rm-results"><li class="rm-result"><button type="button" class="rm-result__pick" id="psCurrent">◉ 走るときの現在地から' +
+          "<small>アプリで開いたときの場所から出ます</small></button></li></ul>";
+      }
+      if (history.length) {
+        html += '<div class="rm-search__sub"><span>最近の検索</span><button type="button" class="rm-linkbtn" id="psClear">履歴を消す</button></div>' +
+          '<ul class="rm-results">' + history.map(function (h, k) {
+            return '<li class="rm-result"><button type="button" class="rm-result__pick" data-history="' + k + '">↺ ' + esc(h.name) +
+              (h.address ? "<small>" + esc(h.address) + "</small>" : "") + "</button>" +
+              '<button type="button" class="rm-tool" data-forget="' + k + '" aria-label="' + esc(h.name) + 'を履歴から消す">✕</button></li>';
+          }).join("") + "</ul>";
+      }
+      html += '<div class="rm-search__sub"><span>こんな入力ができます</span></div><ul class="rm-search__hints">' +
+        "<li>施設名（例：七曲スカイパーク）</li><li>住所（例：静岡県掛川市）</li><li>座標（例：35.68, 139.76）</li></ul>";
+    }
+    body.innerHTML = html;
+    Array.prototype.forEach.call(body.querySelectorAll("[data-result]"), function (b) {
+      b.onclick = function () { pickCandidate(placeCtx.results[Number(b.dataset.result)]); };
+    });
+    var history2 = readPlaceHistory();
+    Array.prototype.forEach.call(body.querySelectorAll("[data-history]"), function (b) {
+      // ⚠️ 履歴は座標を持っているので探し直さない（アプリと同じ）
+      b.onclick = function () { placeChosen(history2[Number(b.dataset.history)]); };
+    });
+    Array.prototype.forEach.call(body.querySelectorAll("[data-forget]"), function (b) {
+      b.onclick = function () { writePlaceHistory(PS.removedHistory(history2, history2[Number(b.dataset.forget)].id)); renderPlaceBody(); };
+    });
+    if (el("psClear")) el("psClear").onclick = function () { writePlaceHistory([]); renderPlaceBody(); };
+    if (el("psCurrent")) el("psCurrent").onclick = function () { el("startCurrent").checked = true; showStops(); };
+    Array.prototype.forEach.call(body.querySelectorAll("[data-place]"), function (b) {
+      b.onclick = function () {
+        var place = placeCtx.chosen;
+        if (b.dataset.place === "cancel" || !place) { placeCtx.chosen = null; return renderPlaceBody(); }
+        applyPlace(place, b.dataset.place);
+      };
+    });
+  }
+
+  async function pickCandidate(candidate) {
+    if (!candidate) return;
+    placeCtx.busy = "位置を取得しています…"; renderPlaceBody();
+    var resolved = null;
+    try { resolved = await resolvePlace(candidate); } catch (e) { resolved = null; }
+    placeCtx.busy = "";
+    if (!resolved) { placeCtx.error = "この場所の位置を取得できませんでした"; return renderPlaceBody(); }
+    placeChosen(resolved);
+  }
+
+  /** 場所が決まったとき。足すなら置き場所を聞き、出発地・置き換えはすぐ入れる */
+  function placeChosen(place) {
+    if (!place) return;
+    if (placeCtx.mode === "add") { placeCtx.chosen = place; return renderPlaceBody(); }
+    applyPlace(place, placeCtx.mode);
+  }
+
+  /**
+   * 選んだ場所をプランに入れて保存する（プラン画面・アプリと同じプラン）。
+   * ⚠️ 出発地は最初に入れて「プランの最初の場所から」にする。それまでの出発地は最初の立ち寄り先に残る（アプリの NavTripOrder.choosingStart と同じ）。
+   * ⚠️ 区間ごとの設定は入れた位置を空ける（置き換えはその区間の設定を引き継ぐ。アプリと同じ）
+   */
+  async function applyPlace(place, mode) {
+    var plan = currentPlan(), sorted = RM.sortedSpots(plan.spots || []);
+    if (!PS.canAdd(sorted.length, mode)) {
+      placeCtx.chosen = null;
+      placeCtx.error = "このプランには " + PS.SPOTS_PER_PLAN + " 件まで入れられます。行き先を外してから入れてください。";
+      return renderPlaceBody();
+    }
+    var dests = planDestinations(), target = mode === "replace" && dests[placeCtx.target] ? dests[placeCtx.target].spot : null;
+    var legs = planLegs().slice();
+    if (mode !== "replace") legs.splice(PS.placedIndex(sorted.length, mode), 0, null);
+    placeCtx.chosen = null; placeCtx.busy = "プランに保存しています…"; renderPlaceBody();
+    try {
+      await savePlanOrder(PS.placedSpots(sorted, PS.placeSpot(place), mode, target), legs);
+    } catch (e) {
+      placeCtx.busy = ""; placeCtx.error = "プランを保存できませんでした: " + (e.message || e);
+      return renderPlaceBody();
+    }
+    writePlaceHistory(PS.recordedHistory(readPlaceHistory(), place));
+    if (mode === "start") el("startFirst").checked = true;
+    showStops();
+    setMsg(mode === "start" ? "出発地を「" + place.name + "」にしました（プランの最初に入れました）。"
+         : mode === "replace" ? "「" + place.name + "」に変えて、プランに保存しました。"
+         : "「" + place.name + "」をプランに入れました。", "ok");
+  }
 
   function currentPosition() {
     return new Promise(function (resolve, reject) {
