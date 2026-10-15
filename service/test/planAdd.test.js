@@ -99,3 +99,14 @@ test("プラン画面は「＋ 追加」から3つのタブで足し、サブス
   assert.match(html, /roadChoices\.value = PA\.roadChoices\(segments, c, roadRadius\.value, isSubscribed\.value, RL\);/, "無料の上限を見ていない");
   assert.match(html, /if \(allSpots\.value\.length \|\| spotsLoading\.value\) return;/, "開くたびにスポットを全件読む");
 });
+
+test("地図・検索のスポットの印はまとめて出す（動作が重たい。利用者の要望 2026-10-16）", () => {
+  assert.match(html, /<script defer src="https:\/\/unpkg\.com\/@googlemaps\/markerclusterer@\d+\.\d+\.\d+\/dist\/index\.min\.js"><\/script>/,
+    "まとめる部品を版を決めて読んでいない（@latest は中身が勝手に変わる）");
+  assert.match(html, /spotClusterer = new MC\.MarkerClusterer\(\{ map: addMap, markers: addMarkers \}\);/, "印をまとめていない");
+  assert.match(html, /addMarkers = allSpots\.value\.map\(sp => \(spotMarkerById\[sp\.spotId\] = spotMarker\(sp, null\)\)\);/,
+    "まとめるときに全部のスポットを渡していない");
+  assert.match(html, /addMap\.addListener\('idle', \(\) => \{ if \(!spotClusterer\) drawSpotMarkers\(\); \}\);/, "動かすたびに印を作り直す（重い）");
+  assert.match(html, /if \(m\) m\.setIcon\(spotIcon\(sp\)\);/, "足したスポットを灰色に塗り直していない");
+  assert.match(html, /const shown = PA\.spotsInBounds\(/, "まとめる部品が読めないときの描き方が無い");
+});

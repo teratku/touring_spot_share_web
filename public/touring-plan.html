@@ -21,6 +21,8 @@
   <script src="/spot-points.js?v=1"></script>
   <script src="/plan-add-lib.js?v=1"></script>
   <script src="/place-search-lib.js?v=1"></script>
+  <!-- 地図・検索のスポットの印をまとめて出す（利用者の要望 2026-10-16: 動作が重たい）。⚠️ 版を決めて読む（@latest にしない） -->
+  <script defer src="https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js"></script>
   <script src="/conquest/prefecture-data.js"></script>
 
   <!-- Firebase SDKs -->
@@ -1409,6 +1411,8 @@ createApp({
     // 地図・検索
     const mapPicked = ref(null), placeQuery = ref(''), placeResults = ref([]), placeStatus = ref('');
     let addMap = null, addMarkers = [], addOverlay = [], placeTimer = null, placeSeq = 0, placeToken = null, pickedMarker = null;
+    /** スポットの印をまとめる（markerclusterer）。⚠️ 読めなかったときは、見えている範囲の近い順に上限まで描く（PA.spotsInBounds） */
+    let spotClusterer = null, spotMarkerById = {};
     // 道
     const roadRadiusPresets = RL.RADIUS_PRESETS, roadRadius = ref(50), roadsLoading = ref(false);
     const roadChoices = shallowRef({ all: [], visible: [], locked: 0, onMap: [] });
@@ -1443,7 +1447,10 @@ createApp({
       }
       loadAllSpots();
     }
-    function closeAdd() { addOpen.value = false; addMap = null; roadMap = null; addMarkers = []; addOverlay = []; roadLines = []; }
+    function closeAdd() {
+      addOpen.value = false; addMap = null; roadMap = null; addMarkers = []; addOverlay = []; roadLines = [];
+      spotClusterer = null; spotMarkerById = {};
+    }
 
     /** みんなのスポット（imagedownload）。⚠️ 開いた最初の1回だけ読む（毎回全件を読まない） */
     async function loadAllSpots() {
@@ -1522,7 +1529,8 @@ createApp({
       if (!addMap) {
         const c = center.value || { lat: 35.681, lng: 139.767 };
         addMap = new google.maps.Map(el, { center: c, zoom: 11, disableDefaultUI: true, zoomControl: true, clickableIcons: true });
-        addMap.addListener('idle', drawSpotMarkers);
+        // ⚠️ まとめて出せるときは印を1回だけ作る（動かすたびに作り直すと重い）。まとめられないときだけ動かすたびに描き直す
+        addMap.addListener('idle', () => { if (!spotClusterer) drawSpotMarkers(); });
         // ⚠️ 地図のクリックで場所を選ぶ（お店・施設を押したら、その名前で。Google マップと同じ）
         addMap.addListener('click', (ev) => {
           if (ev.placeId) { ev.stop(); pickPoi(ev.placeId, ev.latLng); }
@@ -1547,19 +1555,41 @@ createApp({
       });
     }
 
-    /** みんなのスポットの印（見えている範囲の近い順に PA.MAP_CAP まで。追加済みは灰色） */
+    function spotIcon(sp) {
+      return { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillOpacity: 1, strokeColor: 'white', strokeWeight: 2,
+               fillColor: isAdded(sp) ? '#9E9E9E' : '#FF7A00' };
+    }
+    function spotMarker(sp, map) {
+      const m = new google.maps.Marker({ position: { lat: sp.lat, lng: sp.lng }, map, title: sp.name, zIndex: 3, icon: spotIcon(sp) });
+      m.addListener('click', () => { mapPicked.value = sp; placeResults.value = []; });
+      return m;
+    }
+
+    /**
+     * みんなのスポットの印（追加済みは灰色）。
+     * ⚠️ まとめて出す（markerclusterer。利用者の要望 2026-10-16:「動作が重たいため」）: 全部の印を1回だけ作り、近いものは数の丸にまとめる。
+     *    丸を押すと寄って広がる。足したら色だけ塗り直す
+     * ⚠️ まとめる部品が読めなかったら、見えている範囲の近い順に PA.MAP_CAP まで描く（以前のやり方）
+     */
     function drawSpotMarkers() {
-      if (!addMap || !addMap.getBounds()) return;
+      if (!addMap || !allSpots.value.length) return;
+      const MC = window.markerClusterer;
+      if (MC && MC.MarkerClusterer) {
+        if (!spotClusterer) {
+          addMarkers.forEach(m => m.setMap(null));
+          spotMarkerById = {};
+          addMarkers = allSpots.value.map(sp => (spotMarkerById[sp.spotId] = spotMarker(sp, null)));
+          spotClusterer = new MC.MarkerClusterer({ map: addMap, markers: addMarkers });
+        } else {
+          allSpots.value.forEach(sp => { const m = spotMarkerById[sp.spotId]; if (m) m.setIcon(spotIcon(sp)); });
+        }
+        return;
+      }
+      if (!addMap.getBounds()) return;
       const b = addMap.getBounds(), ne = b.getNorthEast(), sw = b.getSouthWest();
       const shown = PA.spotsInBounds(allSpots.value, { south: sw.lat(), west: sw.lng(), north: ne.lat(), east: ne.lng() });
       addMarkers.forEach(m => m.setMap(null));
-      addMarkers = shown.map(sp => {
-        const m = new google.maps.Marker({ position: { lat: sp.lat, lng: sp.lng }, map: addMap, title: sp.name, zIndex: 3,
-          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 7, fillOpacity: 1, strokeColor: 'white', strokeWeight: 2,
-                  fillColor: isAdded(sp) ? '#9E9E9E' : '#FF7A00' } });
-        m.addListener('click', () => { mapPicked.value = sp; placeResults.value = []; });
-        return m;
-      });
+      addMarkers = shown.map(sp => spotMarker(sp, addMap));
     }
 
     function showPicked(place) {
