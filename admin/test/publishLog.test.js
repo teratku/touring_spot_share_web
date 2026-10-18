@@ -133,7 +133,7 @@ test("画面のコードが構文として通る", () => {
 });
 
 /** `loadPrefectures` を、選択欄と通信を模して動かす */
-async function runLoadPrefectures(stateRomaji, opts) {
+async function runLoadPrefectures(stateRomaji, opts, search = "") {
   // ⚠️ ブラウザと同じく、選択肢を作り直すと値は空になり、最初の選択肢が選ばれる
   const sel = (initial) => {
     let value = initial;
@@ -144,8 +144,13 @@ async function runLoadPrefectures(stateRomaji, opts) {
   };
   const els = { pref: sel(stateRomaji || ""), tunePref: sel("tochigi") };
   const loaded = [];
+  const opened = [];
   const ctx = {
     $: (id) => els[id],
+    // ⚠️ 感想の一覧から来たとき（?pref=県&road=道）。2026-10-18
+    location: { search },
+    URLSearchParams,
+    openRoadFromLink: (key) => { opened.push(key); },
     state: { romaji: stateRomaji },
     document: { createElement: () => ({}) },
     fetch: async () => ({ json: async () => ({ prefectures: [
@@ -158,8 +163,19 @@ async function runLoadPrefectures(stateRomaji, opts) {
   vm.createContext(ctx);
   vm.runInContext(`${extract("async function loadPrefectures(")}; this.loadPrefectures = loadPrefectures;`, ctx);
   await ctx.loadPrefectures(opts);
-  return { els, loaded };
+  return { els, loaded, opened };
 }
+
+test("感想の一覧から ?pref=県&road=道 で来たら、その県を開いてその道を選ぶ", async () => {
+  const { els, loaded, opened } = await runLoadPrefectures(undefined, undefined, "?pref=gunma&road=r%3A群馬県%7C62%7Csecondary");
+  assert.strictEqual(els.pref.value, "gunma");
+  assert.deepStrictEqual(loaded, ["gunma"]);
+  assert.deepStrictEqual(opened, ["r:群馬県|62|secondary"]);
+  // 知らない県なら今までどおり栃木・道は選ばない
+  const other = await runLoadPrefectures(undefined, undefined, "?pref=nowhere&road=x");
+  assert.deepStrictEqual(other.loaded, ["tochigi"]);
+  assert.deepStrictEqual(other.opened, []);
+});
 
 test("配信のあとに一覧を読み直しても、見ている県のまま（栃木へ戻らない）", async () => {
   // 見ているのは群馬（一覧の先頭ではない）・重みの試算は栃木

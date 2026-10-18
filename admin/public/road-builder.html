@@ -374,8 +374,12 @@ function reviewKey(seg) {
   return key.replace(/\//g, "_");
 }
 const reviewOf = (seg) => state.reviews[reviewKey(seg)] || null;
-/** 走った人の声（`/api/roads/feedback`。鍵は reviewKey と同じ形） */
-const feedbackOf = (seg) => state.feedback[reviewKey(seg)] || null;
+/**
+ * 走った人の声（`/api/roads/feedback`）の鍵。⚠️ アプリは手直しした区間を1本の道として独立させ、鍵を
+ * `s:<区間ID>` にする（`EnjoyableRoadsService.grouped`）。手直しの無い道は reviewKey と同じ形
+ */
+const feedbackKeyOf = (seg) => (state.feedback["s:" + seg.id] ? "s:" + seg.id : reviewKey(seg));
+const feedbackOf = (seg) => state.feedback[feedbackKeyOf(seg)] || null;
 
 /* 舗装の状態（OSM の surface / tracktype より。lib/roadSurface.js が付ける）
 
@@ -532,8 +536,22 @@ async function loadPrefectures({ keep = false } = {}) {
     if (tuneBefore) $("tunePref").value = tuneBefore;
     return;
   }
-  const first = r.prefectures.find((p) => p.romaji === "tochigi" && p.built) || r.prefectures.find((p) => p.built);
+  // ⚠️ 感想の一覧（/feedback）の「調整画面で開く」から来たとき: ?pref=県&road=道の鍵 でその県・その道を開く（2026-10-18）
+  const params = new URLSearchParams(location.search);
+  const wanted = r.prefectures.find((p) => p.romaji === params.get("pref") && p.built);
+  const first = wanted || r.prefectures.find((p) => p.romaji === "tochigi" && p.built) || r.prefectures.find((p) => p.built);
   if (first) { $("pref").value = first.romaji; $("tunePref").value = first.romaji; await loadPrefecture(first.romaji); }
+  if (wanted && params.get("road")) openRoadFromLink(params.get("road"));
+}
+
+/** 感想の一覧から来た道を「走った人の声」で絞って選ぶ。見つからなければ知らせる */
+async function openRoadFromLink(key) {
+  await loadFeedback();
+  const chip = document.querySelector('[data-filter="voiced"]');
+  if (chip) chip.click();
+  const seg = state.segments.find((s) => feedbackKeyOf(s) === key || reviewKey(s) === key);
+  if (seg) select(seg);
+  else setStatus("感想の道がこの県の道に見つかりません（配信の版が変わった・まとめ方が違う）: " + key);
 }
 
 /**

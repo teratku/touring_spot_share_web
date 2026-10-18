@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>走った道の感想</title>
+<!--
+  開発者だけが見る画面（127.0.0.1 の管理ツール）。アプリの「走った道の感想」（road_feedback）を1件ずつ新しい順に見る。
+  ⚠️ 利用者の要望（2026-10-18）:「送付されたデータを開発者がwebで確認できるようにしたい」。読むだけ（書き込まない）。
+     道ごとのまとめと札の採用は調整画面（/roads の「走った人の声」）。各行の「調整画面で開く」からその道へ飛ぶ
+  ⚠️ 誰が書いたかは出さない（uid の短い指紋だけ。同じ人の答えかが分かればよい）。中身は lib/roadFeedback.js
+-->
+<style>
+  :root { --teal:#00A8C6; --ink:#1f2d3d; --line:#e4e9ee; --muted:#6b7f8c; --bg:#f4f7f9;
+          --good:#1e8e5a; --ok:#6b7f8c; --bad:#c86a12; --warn:#c0392b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+  header { background:linear-gradient(90deg,var(--teal),#0bbed6); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  header h1 { font-size:17px; margin:0; }
+  header .pill { font-size:11px; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:999px; }
+  header .spacer { flex:1; }
+  header button { border:1px solid rgba(255,255,255,.6); background:transparent; color:#fff; border-radius:8px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  .wrap { max-width:1000px; margin:16px auto; padding:0 16px; }
+  .note { font-size:12px; color:var(--muted); line-height:1.6; margin:0 0 12px; }
+  .summary { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:12px; }
+  .stat { background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px 14px; min-width:120px; }
+  .stat b { display:block; font-size:22px; font-variant-numeric:tabular-nums; }
+  .stat span { font-size:12px; color:var(--muted); }
+  .bar { display:flex; height:8px; border-radius:999px; overflow:hidden; background:var(--line); margin-top:8px; }
+  .bar i { display:block; height:100%; }
+  .filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:4px 0 12px; }
+  .chip { border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:999px; padding:5px 12px; font-size:13px; cursor:pointer; }
+  .chip.on { background:var(--teal); border-color:var(--teal); color:#fff; }
+  .filters select, .filters input[type=search] { border:1px solid var(--line); border-radius:8px; padding:6px 10px; font-size:13px; background:#fff; }
+  .filters input[type=search] { flex:1; min-width:180px; }
+  .filters label { font-size:13px; display:flex; align-items:center; gap:4px; }
+  .list { display:flex; flex-direction:column; gap:8px; }
+  .item { background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px; display:grid; grid-template-columns:auto 1fr auto; gap:6px 12px; align-items:start; }
+  .verdict { font-size:12px; font-weight:700; color:#fff; border-radius:999px; padding:3px 10px; white-space:nowrap; justify-self:start; }
+  .verdict.good { background:var(--good); } .verdict.ok { background:var(--ok); } .verdict.bad { background:var(--bad); }
+  .road { font-weight:700; font-size:15px; }
+  .road small { font-weight:400; color:var(--muted); margin-left:6px; font-size:12px; }
+  .tags { grid-column:2; display:flex; flex-wrap:wrap; gap:4px; }
+  .tag { font-size:11px; border-radius:999px; padding:1px 8px; background:#e6f6f9; color:#00788e; }
+  .tag.caution { background:#fdeee8; color:var(--warn); }
+  .quote { grid-column:2; font-size:14px; line-height:1.6; background:var(--bg); border-radius:8px; padding:6px 10px; white-space:pre-wrap; word-break:break-word; }
+  .meta { grid-column:2; font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .open { grid-column:3; grid-row:1; font-size:12px; color:var(--teal); text-decoration:none; white-space:nowrap; }
+  .open:hover { text-decoration:underline; }
+  .empty { text-align:center; color:var(--muted); padding:40px 0; }
+  .muted { color:var(--muted); font-size:12px; }
+  .err { color:var(--warn); font-size:13px; }
+  button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible { outline:2px solid var(--teal); outline-offset:2px; }
+  @media (max-width:600px) {
+    .item { grid-template-columns:1fr; }
+    .tags, .quote, .meta, .open { grid-column:1; grid-row:auto; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>🗣️ 走った道の感想</h1>
+    <span class="pill">ローカル開発用 · 本番を読むだけ</span>
+    <span class="spacer"></span>
+    <button id="reload" type="button" title="本番から取り直す（1時間ためています）">読み直す</button>
+  </header>
+  <div class="wrap">
+    <p class="note">アプリの「走った道の感想」で送られた答えです（新しい順）。答えた人は短い記号だけで、誰かは出しません。
+      札を採用するときは「調整画面で開く」からその道へ移ってください（道ごとのまとめは調整画面の「走った人の声」）。</p>
+    <div id="summary" class="summary"></div>
+    <div class="filters" role="group" aria-label="絞り込み">
+      <button class="chip on" type="button" data-verdict="">すべて</button>
+      <button class="chip" type="button" data-verdict="good">また走りたい</button>
+      <button class="chip" type="button" data-verdict="ok">ふつう</button>
+      <button class="chip" type="button" data-verdict="bad">いまいち</button>
+      <select id="pref" aria-label="県"><option value="">すべての県</option></select>
+      <label><input type="checkbox" id="withNote" /> ひとことあり</label>
+      <label><input type="checkbox" id="withCaution" /> 注意あり</label>
+      <input type="search" id="q" placeholder="道の名前・ひとことで探す" aria-label="道の名前・ひとことで探す" />
+    </div>
+    <div id="status" class="muted">読み込んでいます…</div>
+    <div id="list" class="list"></div>
+  </div>
+<script>
+const VERDICT = { good: "また走りたい", ok: "ふつう", bad: "いまいち" };
+const TAG = { scenic: "絶景", winding: "ワインディング", flowing: "快走", forest: "林道ぎみ" };
+const CAUTION = { rough: "路面が荒い", narrow: "狭い", traffic: "交通量が多い", gravel: "砂利" };
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const $ = (id) => document.getElementById(id);
+const state = { items: [], counts: null, verdict: "", pref: "", withNote: false, withCaution: false, q: "" };
+
+const day = (iso) => {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return `${d.getMonth() + 1}/${d.getDate()}`;
+};
+const when = (iso) => iso ? new Date(iso).toLocaleString("ja-JP", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
+
+async function load(refresh = false) {
+  $("status").textContent = "読み込んでいます…"; $("status").className = "muted";
+  try {
+    const res = await fetch("/api/feedback/list" + (refresh ? "?refresh=1" : ""));
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    state.items = json.items || [];
+    state.counts = json.counts || null;
+    const prefs = [...new Set(state.items.map((i) => i.prefecture).filter(Boolean))].sort();
+    const keep = state.pref;
+    $("pref").innerHTML = `<option value="">すべての県</option>` + prefs.map((p) => `<option value="${esc(p)}">${esc(p)}</option>`).join("");
+    $("pref").value = prefs.includes(keep) ? keep : "";
+    state.pref = $("pref").value;
+    $("status").textContent = json.cachedAt ? `${when(json.cachedAt)} に読んだ内容` : "";
+    render();
+  } catch (e) {
+    $("status").textContent = "読めませんでした: " + e.message; $("status").className = "err";
+  }
+}
+
+function filtered() {
+  const q = state.q.trim().toLowerCase();
+  return state.items.filter((i) =>
+    (!state.verdict || i.verdict === state.verdict)
+    && (!state.pref || i.prefecture === state.pref)
+    && (!state.withNote || i.note)
+    && (!state.withCaution || i.cautions.length)
+    && (!q || i.roadName.toLowerCase().includes(q) || i.note.toLowerCase().includes(q)));
+}
+
+function renderSummary(list) {
+  const c = state.counts;
+  const n = { good: 0, ok: 0, bad: 0 };
+  for (const i of list) n[i.verdict] += 1;
+  const total = list.length || 1;
+  const bar = ["good", "ok", "bad"].map((v) => `<i style="width:${(n[v] / total) * 100}%;background:var(--${v})" title="${VERDICT[v]} ${n[v]}件"></i>`).join("");
+  $("summary").innerHTML = `
+    <div class="stat"><b>${c ? c.answers : list.length}</b><span>回答（全部）</span></div>
+    <div class="stat"><b>${c ? c.riders : "-"}</b><span>答えた人</span></div>
+    <div class="stat"><b>${c ? c.roads : "-"}</b><span>道</span></div>
+    <div class="stat" style="flex:1;min-width:220px"><span>いま出している ${list.length}件：また走りたい ${n.good}・ふつう ${n.ok}・いまいち ${n.bad}</span><div class="bar">${bar}</div></div>`;
+}
+
+function render() {
+  const list = filtered();
+  renderSummary(list);
+  $("list").innerHTML = list.length ? list.map((i) => {
+    const tags = i.tags.map((t) => `<span class="tag">${esc(TAG[t] || t)}</span>`)
+      .concat(i.cautions.map((t) => `<span class="tag caution">⚠ ${esc(CAUTION[t] || t)}</span>`)).join("");
+    const meta = [i.rodeAt ? `${day(i.rodeAt)}に走った` : "", i.rideKm != null ? `約${i.rideKm}km` : "",
+                  i.sentAt ? `${when(i.sentAt)} 送信` : "", i.rider ? `答えた人 #${esc(i.rider)}` : ""].filter(Boolean).join(" ・ ");
+    const link = i.romaji ? `<a class="open" href="/roads?pref=${encodeURIComponent(i.romaji)}&road=${encodeURIComponent(i.key)}">調整画面で開く →</a>` : "";
+    return `<article class="item">
+      <span class="verdict ${esc(i.verdict)}">${esc(VERDICT[i.verdict] || i.verdict)}</span>
+      <div class="road">${esc(i.roadName || "（名前なし）")}<small>${esc(i.prefecture)}</small></div>
+      ${link}
+      ${tags ? `<div class="tags">${tags}</div>` : ""}
+      ${i.note ? `<div class="quote">${esc(i.note)}</div>` : ""}
+      <div class="meta">${meta}</div>
+    </article>`;
+  }).join("") : `<div class="empty">${state.items.length ? "条件に合う感想はありません" : "まだ感想は届いていません"}</div>`;
+}
+
+document.querySelectorAll("[data-verdict]").forEach((b) => {
+  b.onclick = () => {
+    document.querySelectorAll("[data-verdict]").forEach((x) => x.classList.remove("on"));
+    b.classList.add("on");
+    state.verdict = b.dataset.verdict;
+    render();
+  };
+});
+$("pref").onchange = (e) => { state.pref = e.target.value; render(); };
+$("withNote").onchange = (e) => { state.withNote = e.target.checked; render(); };
+$("withCaution").onchange = (e) => { state.withCaution = e.target.checked; render(); };
+$("q").oninput = (e) => { state.q = e.target.value; render(); };
+$("reload").onclick = () => load(true);
+load();
+</script>
+</body>
+</html>

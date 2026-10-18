@@ -480,7 +480,7 @@ app.get("/api/publish-log", (req, res) => {
  * ⚠️ 誰が書いたかは返さない（人数とひとことだけ。`lib/roadFeedback.js`）
  * 読み取り回数を抑えるため1時間メモリにためる。?refresh=1 で取り直す。
  */
-const { summarizeFeedback } = require("./lib/roadFeedback");
+const { summarizeFeedback, listFeedback, countFeedback } = require("./lib/roadFeedback");
 let feedbackCache = null; // { t, feedback }
 
 app.get("/api/roads/feedback", async (req, res) => {
@@ -497,6 +497,34 @@ app.get("/api/roads/feedback", async (req, res) => {
     res.json({ feedback, cached: false });
   } catch (e) {
     res.status(500).json({ error: e.message, feedback: {} });
+  }
+});
+
+/**
+ * 送られた感想の一覧（開発者だけ・読むだけ）。画面は public/feedback.html（http://127.0.0.1:4317/feedback）。
+ * ⚠️ 利用者の要望（2026-10-18）:「送付されたデータを開発者がwebで確認できるようにしたい」。
+ *    道ごとのまとめは調整画面（/roads の「走った人の声」）、ここは1件ずつ新しい順
+ * ⚠️ uid は返さない（短い指紋 rider だけ。同じ人の答えかが分かればよい）。1時間ためる・?refresh=1 で取り直す
+ */
+let feedbackListCache = null; // { t, items, counts }
+app.get("/feedback", (_req, res) => sendHtml(res, "feedback.html"));
+app.get("/api/feedback/list", async (req, res) => {
+  const fresh = req.query.refresh === "1";
+  if (!fresh && feedbackListCache && Date.now() - feedbackListCache.t < REVIEWS_TTL_MS) {
+    return res.json({ items: feedbackListCache.items, counts: feedbackListCache.counts,
+                      cachedAt: new Date(feedbackListCache.t).toISOString() });
+  }
+  try {
+    const snap = await db.collection("road_feedback").get();
+    const docs = [];
+    snap.forEach((doc) => docs.push(doc.data() || {}));
+    const items = listFeedback(docs, { romajiOf: ROMAJI });
+    feedbackListCache = { t: Date.now(), items, counts: countFeedback(docs) };
+    // 調整画面の「走った人の声」も同じ読み込みで新しくする
+    feedbackCache = { t: feedbackListCache.t, feedback: summarizeFeedback(docs) };
+    res.json({ items, counts: feedbackListCache.counts, cachedAt: new Date(feedbackListCache.t).toISOString() });
+  } catch (e) {
+    res.status(500).json({ error: e.message, items: [] });
   }
 });
 

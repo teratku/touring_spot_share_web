@@ -2204,7 +2204,55 @@ function countFeedback(docs) {
   };
 }
 
-module.exports = { summarizeFeedback, countFeedback, keyOf, VERDICTS, TAGS, CAUTIONS, CAUTION_LABELS };
+/** 道のまとめキー（"r:埼玉県|299|trunk"・"s:埼玉県:12"）の県 */
+function prefectureOf(roadID) {
+  const body = String(roadID || "").replace(/^[a-z]:/, "");
+  return body.split(/[|:]/)[0] || "";
+}
+
+/**
+ * 答えた人の見分け（uid の短い指紋。FNV-1a 32bit の16進6桁）。⚠️ uid そのものは画面に出さない（同じ人の答えかだけ分かればよい）
+ * ⚠️ `require("crypto")` を使わないこと。このファイルはブラウザ用のまとめ（public/route-maker-fun.js）にも入る
+ */
+function riderTag(uid) {
+  if (!uid) return "";
+  let h = 0x811c9dc5;
+  for (const ch of String(uid)) {
+    h ^= ch.codePointAt(0);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(16).padStart(8, "0").slice(0, 6);
+}
+
+/**
+ * 送られた感想を1件ずつ、新しい順に返す（開発者の一覧画面 /feedback 用。2026-10-18 利用者の要望
+ * 「送付されたデータを開発者がwebで確認できるようにしたい」）。形の崩れた文書は入れない。
+ * romajiOf: 県名 → 調整ツールの県の鍵（道の調整画面へ飛ぶのに使う）
+ */
+function listFeedback(docs, { romajiOf = {} } = {}) {
+  const out = [];
+  for (const d of docs || []) {
+    if (!d || !d.roadID || !VERDICTS.includes(d.verdict)) continue;
+    const prefecture = prefectureOf(d.roadID);
+    out.push({
+      key: keyOf(d.roadID),
+      roadName: d.roadName || "",
+      prefecture,
+      romaji: romajiOf[prefecture] || "",
+      verdict: d.verdict,
+      tags: (Array.isArray(d.tags) ? d.tags : []).filter((t) => TAGS.includes(t)),
+      cautions: (Array.isArray(d.cautions) ? d.cautions : []).filter((c) => CAUTIONS.includes(c)),
+      note: typeof d.note === "string" ? d.note.trim().slice(0, 200) : "",
+      rideKm: Number.isFinite(Number(d.rideKm)) ? Number(d.rideKm) : null,
+      rodeAt: toIso(d.rodeAt),
+      sentAt: toIso(d.updatedAt) || toIso(d.rodeAt),
+      rider: riderTag(d.uid),
+    });
+  }
+  return out.sort((a, b) => String(b.sentAt || "").localeCompare(String(a.sentAt || "")));
+}
+
+module.exports = { summarizeFeedback, countFeedback, listFeedback, prefectureOf, riderTag, keyOf, VERDICTS, TAGS, CAUTIONS, CAUTION_LABELS };
 
   },
   // ---- admin/lib/riderInsights.js ----
