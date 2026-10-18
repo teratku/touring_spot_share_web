@@ -40,6 +40,20 @@ const MIN_TAIL_SECONDS = 20 * 60;
 const MAX_TRIALS = 4;
 const TIMEOUT_MS = 15_000;
 
+// ---- ナビ中の「道の駅に寄る」（この先の道の駅の一覧） ----
+// 利用者の要望（2026-10-18）:「ナビ画面に道の駅追加ボタンが欲しい。近所の道の駅リストを表示して選択すると部分ルート生成し、
+// 道の駅にナビできるようにしたい」。判断: ルートの先で寄りやすい順（着く順・寄り道を実際に引く）・寄ってから元のルートの続き。
+//: これからの線からこの距離（m）以内の道の駅を出す（休憩より広く。選ぶのは乗り手）
+const AHEAD_NEAR_METERS = 3000;
+//: この先この距離（m）までの道の駅を出す
+const AHEAD_MAX_METERS = 80_000;
+//: 出す数（着く順）
+const AHEAD_MAX_RESULTS = 8;
+//: これ以上の遠回り（m）は出さない
+const AHEAD_MAX_EXTRA_METERS = 10_000;
+//: 寄り道を同時に引く数（Valhalla を詰まらせない）
+const AHEAD_CONCURRENCY = 4;
+
 function meters(lat1, lon1, lat2, lon2) {
   const k = Math.cos((lat1 * Math.PI) / 180) * 111320;
   return Math.hypot((lat1 - lat2) * 111320, (lon1 - lon2) * k);
@@ -78,18 +92,23 @@ function timeline(points, cum, durationSeconds, stepTimes) {
   return out;
 }
 
-/** 経路のそばの道の駅（いちばん近い点の番号と距離つき） */
-function stationsNear(points, stations) {
+/**
+ * 経路のそばの道の駅（いちばん近い点の番号と距離つき）。
+ * @param nearMeters 経路からこの距離（m）以内。既定は休憩の `NEAR_METERS`
+ */
+function stationsNear(points, stations, nearMeters = NEAR_METERS) {
   const out = [];
+  // ⚠️ 先に緯度経度の差で弾く（全部の点と測ると長い経路で待たされる）。幅は距離から決める
+  const dLat = nearMeters / 111320 * 1.35, dLon = nearMeters / 91000 * 1.35;
   for (const st of stations) {
     let best = Infinity, index = -1;
     for (let i = 0; i < points.length; i++) {
       const [lon, lat] = points[i];
-      if (Math.abs(lat - st.lat) > 0.02 || Math.abs(lon - st.lon) > 0.025) continue;
+      if (Math.abs(lat - st.lat) > dLat || Math.abs(lon - st.lon) > dLon) continue;
       const d = meters(lat, lon, st.lat, st.lon);
       if (d < best) { best = d; index = i; }
     }
-    if (index >= 0 && best <= NEAR_METERS) out.push({ station: st, index, offMeters: Math.round(best) });
+    if (index >= 0 && best <= nearMeters) out.push({ station: st, index, offMeters: Math.round(best) });
   }
   return out;
 }
@@ -98,7 +117,7 @@ function stationsNear(points, stations) {
  * その道の駅に寄れるか（経路の手前 → 道の駅 → 先 を引いて、まっすぐより余計に走る距離）。
  * @returns {{ok:boolean, extraMeters?:number, stop?:[number, number]}} stop は寄ると確かめた点（敷地の中の道）
  */
-async function checkStop(points, cum, cand, { ask, costing }) {
+async function checkStop(points, cum, cand, { ask, costing, maxExtraMeters = MAX_EXTRA_METERS }) {
   let i0 = cand.index;
   while (i0 > 0 && cum[cand.index] - cum[i0] < TRIAL_METERS) i0--;
   let i1 = cand.index;
@@ -117,7 +136,7 @@ async function checkStop(points, cum, cand, { ask, costing }) {
   try { json = await ask(body); } catch (e) { json = null; }
   if (!json || !json.trip || !Array.isArray(json.trip.legs) || json.trip.legs.length < 2) return { ok: false };
   const extra = (json.trip.summary.length || 0) * 1000 - direct;
-  if (!(extra < MAX_EXTRA_METERS)) return { ok: false, extraMeters: Math.round(extra) };
+  if (!(extra < maxExtraMeters)) return { ok: false, extraMeters: Math.round(extra) };
   const first = decode6(json.trip.legs[0].shape || "");
   const stop = first[first.length - 1];
   return { ok: true, extraMeters: Math.round(Math.max(0, extra)),
@@ -184,7 +203,53 @@ async function restStopsAlongRoute(points, opts = {}) {
   return out;
 }
 
+/**
+ * ナビ中に寄れる道の駅（この先の線のそばを、着く順に）。寄り道は実際に引いて確かめる（休憩と同じ `checkStop`）。
+ * @param points これから走る線 [[経度, 緯度], ...]（先頭がいまの場所）
+ * @param opts { baseUrl, costing, fetch, ask, stations }
+ * @returns [{ name, stop:[経度, 緯度], index, alongMeters, offMeters, extraMeters }]（着く順・最大 `AHEAD_MAX_RESULTS`）
+ */
+async function stationsAhead(points, opts = {}) {
+  if (!Array.isArray(points) || points.length < 2) return [];
+  const stations = opts.stations || load();
+  const fetchImpl = opts.fetch || globalThis.fetch;
+  const base = opts.baseUrl || process.env.VALHALLA_URL || "http://localhost:8002";
+  const ask = opts.ask || (async (body) => {
+    const res = await fetchImpl(`${base}/route`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body), signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    return res.json();
+  });
+  const cum = cumulative(points);
+  // ⚠️ 同じ名前は1つ（線の近くに同じ駅の点が重ならないように）。着く順に、試すぶんだけ
+  const seen = new Set();
+  const cands = stationsNear(points, stations, AHEAD_NEAR_METERS)
+    .filter((c) => cum[c.index] <= AHEAD_MAX_METERS)
+    .sort((a, b) => a.index - b.index || a.offMeters - b.offMeters)
+    .filter((c) => (seen.has(c.station.name) ? false : (seen.add(c.station.name), true)))
+    .slice(0, AHEAD_MAX_RESULTS + 4);
+  const checked = new Array(cands.length);
+  let next = 0;
+  async function worker() {
+    while (next < cands.length) {
+      const i = next++;
+      checked[i] = await checkStop(points, cum, cands[i],
+        { ask, costing: opts.costing || "motorcycle", maxExtraMeters: AHEAD_MAX_EXTRA_METERS });
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(AHEAD_CONCURRENCY, cands.length) }, worker));
+  return cands
+    .map((c, i) => ({ c, r: checked[i] }))
+    // ⚠️ 引けなかった・遠回りが大きすぎる駅は出さない（選んでも寄れない）
+    .filter(({ r }) => r && r.ok)
+    .slice(0, AHEAD_MAX_RESULTS)
+    .map(({ c, r }) => ({ name: c.station.name, stop: r.stop, index: c.index, alongMeters: Math.round(cum[c.index]),
+                          offMeters: c.offMeters, extraMeters: r.extraMeters }));
+}
+
 module.exports = {
-  load, timeline, stationsNear, checkStop, restStopsAlongRoute,
+  load, timeline, stationsNear, checkStop, restStopsAlongRoute, stationsAhead,
+  AHEAD_NEAR_METERS, AHEAD_MAX_METERS, AHEAD_MAX_RESULTS, AHEAD_MAX_EXTRA_METERS,
   NEAR_METERS, WINDOW_EARLY, WINDOW_LATE, WINDOW_LATER, TRIAL_METERS, MAX_EXTRA_METERS, MIN_TAIL_SECONDS, MAX_TRIALS, FILE,
 };

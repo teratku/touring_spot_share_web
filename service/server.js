@@ -34,7 +34,7 @@ const { ROMAJI } = require("../admin/lib/prefectureRomaji");
 const { buildRouteResponse, buildCorridorResponse } = require("./lib/buildRoute");
 const { buildSnapResponse } = require("./lib/snapRoads");
 const { buildSapaResponse } = require("./lib/sapa");
-const { buildMichiNoEkiResponse } = require("./lib/michiNoEki");
+const { buildMichiNoEkiResponse, buildMichiNoEkiAheadResponse } = require("./lib/michiNoEki");
 
 const PORT = process.env.PORT || 8080;
 /** ⚠️ Cloud Run は 0.0.0.0 で待つこと。127.0.0.1 だと外から繋がらない */
@@ -199,6 +199,16 @@ app.post("/v1/sapa", requireAuth, async (req, res) => {
  */
 app.post("/v1/michinoeki", requireAuth, async (req, res) => {
   const out = await buildMichiNoEkiResponse(req.body || {}, { baseUrl: VALHALLA_URL });
+  res.status(out.status).json(out.body);
+});
+
+/**
+ * **ナビ中に寄れる道の駅**（アプリのナビ画面の「道の駅」）。これから走る線のそばを着く順に、寄り道を実際に引いて返す。
+ * ⚠️ 利用者の要望（2026-10-18）。中身は `lib/michiNoEki.js`・判断は `admin/lib/michiNoEki.js` の `stationsAhead`
+ * ⚠️ **認証を外さないこと。** Valhalla の CPU を使う（道の駅ごとに寄り道を引く）
+ */
+app.post("/v1/michinoeki/ahead", requireAuth, async (req, res) => {
+  const out = await buildMichiNoEkiAheadResponse(req.body || {}, { baseUrl: VALHALLA_URL });
   res.status(out.status).json(out.body);
 });
 

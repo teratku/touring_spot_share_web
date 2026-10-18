@@ -10,7 +10,7 @@
  */
 "use strict";
 
-const { restStopsAlongRoute } = require("../../admin/lib/michiNoEki");
+const { restStopsAlongRoute, stationsAhead } = require("../../admin/lib/michiNoEki");
 const { DISPLACEMENTS } = require("../../admin/lib/valhallaRoute");
 const { decode } = require("../../admin/lib/polyline");
 const { MAX_POINTS } = require("./sapa");
@@ -63,4 +63,33 @@ async function buildMichiNoEkiResponse(body, deps = {}) {
   }
 }
 
-module.exports = { buildMichiNoEkiResponse, MICHINOEKI_ATTRIBUTION, INTERVALS };
+/**
+ * `/v1/michinoeki/ahead` の中身: ナビ中に寄れる道の駅（これから走る線のそばを着く順・寄り道つき）。
+ * ⚠️ 利用者の要望（2026-10-18）:「ナビ画面に道の駅追加ボタンが欲しい」。アプリは「道の駅」を押したときだけ呼ぶ
+ * ⚠️ 線は**いまの場所から先**（アプリが切って送る）。`alongMeters` はいまの場所からの距離
+ */
+async function buildMichiNoEkiAheadResponse(body, deps = {}) {
+  const { polyline, displacement } = body || {};
+  if (typeof polyline !== "string" || !polyline.length) {
+    return { status: 400, body: { error: "polyline（5桁の符号化した線）が要ります" } };
+  }
+  let points;
+  try { points = decode(polyline); } catch (e) { points = null; }
+  const ok = (p) => Array.isArray(p) && p.every(Number.isFinite) && Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90;
+  if (!Array.isArray(points) || points.length < 2 || points.length > MAX_POINTS || !points.every(ok)) {
+    return { status: 400, body: { error: `polyline は2〜${MAX_POINTS}点の線で要ります` } };
+  }
+  const bike = typeof displacement === "string" ? DISPLACEMENTS[displacement] : null;
+  try {
+    const stations = await stationsAhead(points, {
+      baseUrl: deps.baseUrl, fetch: deps.fetch, ask: deps.ask, stations: deps.stations,
+      // ⚠️ 寄り道は乗り手の乗り物で引く（原付は原付の道で）
+      costing: (bike && bike.costing) || "motorcycle",
+    });
+    return { status: 200, body: { stations, attribution: MICHINOEKI_ATTRIBUTION } };
+  } catch (e) {
+    return { status: 502, body: { error: e.message } };
+  }
+}
+
+module.exports = { buildMichiNoEkiResponse, buildMichiNoEkiAheadResponse, MICHINOEKI_ATTRIBUTION, INTERVALS };
