@@ -551,6 +551,9 @@ async function build() {
     fs.writeFileSync(file, JSON.stringify({
       prefecture: row.pref, romaji: r, generation: generations[r].generation,
       contentHash: hash,
+      // ⚠️ どの調整で作ったかの指紋。調整を保存したあと再生成していない県を、画面の「配信待ち」で見分ける（`lib/roadPending.js`）
+      overridesHash: require("./lib/roadPending").overridesSignatureOfFile(
+        path.join(__dirname, "data", "road-overrides", `${r}.json`)),
       builtAt: new Date().toISOString(),
       weights: require("./lib/funSegments").WEIGHTS,
       count: row.list.length,

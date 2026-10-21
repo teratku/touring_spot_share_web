@@ -159,6 +159,8 @@ async function runLoadPrefectures(stateRomaji, opts, search = "") {
       { name: "群馬県", romaji: "gunma", built: true, overrides: 0 },
     ] }) }),
     loadPrefecture: async (r) => { loaded.push(r); },
+    // 配信待ちの印（`lib/roadPending.js`）。本番を読むので、ここでは呼ばれたことだけ見る
+    refreshPending: () => {},
   };
   vm.createContext(ctx);
   vm.runInContext(`${extract("async function loadPrefectures(")}; this.loadPrefectures = loadPrefectures;`, ctx);

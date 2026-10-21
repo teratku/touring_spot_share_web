@@ -98,11 +98,23 @@
   .muted { color:var(--muted); font-size:11px; }
 
   /* 配信の確認 */
-  #publishModal, #publishLogModal { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex;
+  #publishModal, #publishLogModal, #pendingModal { position:fixed; inset:0; background:rgba(0,0,0,.35); display:flex;
                   align-items:center; justify-content:center; z-index:1000; }
-  #publishModal .sheet, #publishLogModal .sheet { background:#fff; border-radius:12px; width:min(720px, 92vw);
+  #publishModal .sheet, #publishLogModal .sheet, #pendingModal .sheet { background:#fff; border-radius:12px; width:min(720px, 92vw);
                   max-height:86vh; display:flex; flex-direction:column; padding:16px; gap:8px; }
-  #publishModal h3, #publishLogModal h3 { margin:0; font-size:16px; }
+  #publishModal h3, #publishLogModal h3, #pendingModal h3 { margin:0; font-size:16px; }
+  /* 配信待ち */
+  #pendingTableWrap { flex:1; overflow:auto; min-height:180px; }
+  #pendingTable td { vertical-align:top; }
+  /* ⚠️ 変わる道の欄が長いと、県名・件数が縦に折れて読めなくなる。そちらは折らない */
+  #pendingTable td:nth-child(-n+4), #pendingTable th { white-space:nowrap; }
+  .pstate { font-size:11px; padding:1px 7px; border-radius:999px; white-space:nowrap; }
+  .pstate.rebuild { background:#fff4e6; color:#d9480f; }
+  .pstate.publish { background:#e7f5ff; color:#1971c2; }
+  .pstate.unbuilt { background:#f1f3f5; color:#495057; }
+  .pdiff { font-size:11px; color:var(--muted); white-space:normal; max-width:420px; }
+  .pdiff b { color:#222; font-weight:600; }
+  #pendingBtn .badge { background:#1971c2; color:#fff; border-radius:999px; font-size:10px; padding:0 6px; margin-left:4px; }
   /* 配信の記録 */
   #pubLogTableWrap { flex:1; overflow:auto; min-height:180px; }
   #pubLogTable td { white-space:nowrap; }
@@ -161,6 +173,8 @@
        押せばよいか」と尋ねられた） -->
   <button class="primary" id="rPublishHeader" style="display:none">規制を配信…</button>
   <!-- 直近どれを配信したか（`lib/publishLog.js`）。区間の手直しでも通行規制でも見られる -->
+  <!-- 配信していない変更がある県（`lib/roadPending.js`）。配信の目安 -->
+  <button id="pendingBtn" title="直した・足したのに、まだ本番に配信していない県（県の一覧の ● ）">配信待ち<span class="badge" id="pendingBadge" style="display:none"></span></button>
   <button id="publishLogBtn">配信の記録</button>
   <button id="publish">配信…</button>
 </header>
@@ -181,6 +195,24 @@
   </div>
 </div>
 
+<!-- 配信待ちの県 -->
+<div id="pendingModal" style="display:none">
+  <div class="sheet">
+    <h3>配信待ちの県（おすすめ道路）</h3>
+    <p class="muted" id="pendingLead"></p>
+    <div id="pendingTableWrap">
+      <table id="pendingTable">
+        <thead><tr><th>県</th><th>状態</th><th class="num">本番</th><th class="num">手元</th><th>変わる道</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="pubButtons">
+      <button id="pendingRefresh" title="本番を読み直す（10分ためています）">⟳ 本番を読み直す</button>
+      <span class="spacer"></span><button id="pendingClose">閉じる</button>
+    </div>
+  </div>
+</div>
+
 <!-- 配信の確認。本番へ書き込むので、必ず下見を挟ませる -->
 <div id="publishModal" style="display:none">
   <div class="sheet">
@@ -188,6 +220,8 @@
     <p class="muted" id="pubLead"></p>
     <!-- この県を前に配信したのはいつか（`配信の記録` から） -->
     <div id="pubLast" class="pubLast" style="display:none"></div>
+    <!-- 本番と比べて何が変わるか（`/api/roads/pending/:romaji/diff`）。下見のあとに作り直した中身で出し直す -->
+    <div id="pubDiff" class="pubLast" style="display:none"></div>
     <div id="pubLog" class="log"></div>
     <div class="pubButtons">
       <button id="pubClose">閉じる</button>
@@ -461,8 +495,13 @@ function tollDetail(seg, o) {
 const $ = (id) => document.getElementById(id);
 const setStatus = (t) => { $("status").textContent = t; };
 
-/** ⚠️ lib/roadOverrides.js の overrideKey と同じ式にすること */
+/**
+ * ⚠️ lib/roadOverrides.js の overrideKey と同じ式にすること。
+ * ⚠️ 生成で調整を当てた道は、当てた調整の鍵（seg.overrideKey）を持っている。形を直して始点が動いても、それで探す
+ *    （始点から作り直すと鍵が変わり、同じ鍵の古い調整を拾う。富士山スカイライン 2026-10-21）
+ */
 function overrideKey(seg) {
+  if (seg && typeof seg.overrideKey === "string" && seg.overrideKey) return seg.overrideKey;
   const r = (v) => (Math.round(v / 0.01) * 0.01).toFixed(2);
   return seg.name + "@" + r(seg.start[0]) + "," + r(seg.start[1]);
 }
@@ -531,6 +570,8 @@ async function loadPrefectures({ keep = false } = {}) {
       sel.appendChild(o);
     }
   }
+  // 配信待ちの印は本番を読むので待たない（届いたら県の一覧に付け足す）
+  refreshPending();
   if (keep && state.romaji) {
     $("pref").value = state.romaji;
     if (tuneBefore) $("tunePref").value = tuneBefore;
@@ -588,6 +629,8 @@ async function loadPrefecture(romaji, { keepView = false } = {}) {
   render();
   if (!keepView) fitPrefecture();
   setStatus(`${state.prefName}`);
+  // ⚠️ 開いた県は自分で描くので、点線からは外し直す（前の県の道を点線で出し直す）
+  drawRegistered();
 
   // 手直し済みの道をまとめて測り直す（1回の通信で済ませる）。
   // ⚠️ 待たずに先へ進めること。数が多いと数百ミリ秒かかり、その間
@@ -944,6 +987,7 @@ function initMap() {
     center: { lat: 36.75, lng: 139.6 }, zoom: 9, mapTypeControl: false, streetViewControl: false,
   });
   setupOsmLayer();
+  setupRegisteredLayer();
   loadWeights().then(loadPrefectures);
 }
 window.initMap = initMap;
@@ -1584,6 +1628,127 @@ function clearExtendPreview() {
   }
 }
 
+// ---------- ほかの県に登録済みの道 ----------
+
+/**
+ * ほかの県で登録済みのおすすめ道路を、地図に茶色の点線で出す（左上の「ほかの県で登録済みの道」）。
+ *
+ * 【なぜ要るか】
+ * この画面は開いた1県しか読まない。地図をほかの県まで動かしても、そちらで登録済みの道は線が出ず、
+ * 「まだ無い」ように見えて同じ道を足してしまっていた（2026-10-21 利用者の報告。福島県に蔵王エコーライン（宮城・山形の道）、
+ * 埼玉県に上野原丹波山線（山梨・東京の道）など）。
+ * ⚠️ 一覧と照合はサーバ（`lib/roadCrossPrefecture.js`）。ここで判定を書かない
+ * ⚠️ 線は押せる。押すと「○○県で登録済み」と、その県を開くボタンが出る
+ * ⚠️ 既定で出す（見えないことが原因なので）。寄るまでは出さない（県全体の倍率8では800本を超え、地図が点線で埋まった。
+ *    2026-10-21 画面で確認）。県境のあたりで足すときに見えれば足りる
+ */
+/**
+ * ⚠️ 茶色の点線にする。薄い灰色の実線は地図の道路（灰色）に紛れて見えなかった（2026-10-21 画面で確認）。
+ *    濃い灰色は「OSMの道」の層と同じなので使わない。この県の線（青緑）・選んだ道（橙）・足す線（紫）とも見分けが付く
+ */
+const REG_COLOR = "#8d5524";
+const REG_MIN_ZOOM = 10;
+const reg = { on: true, lines: [], info: null, timer: null, seq: 0, note: null };
+
+function setupRegisteredLayer() {
+  const ctl = document.createElement("div");
+  ctl.className = "osm-ctl";
+  ctl.innerHTML = `<label><input type="checkbox" id="regToggle"> ほかの県で登録済みの道（茶色の点線）</label>
+    <div class="osm-note" id="regNote"></div>`;
+  state.map.controls[google.maps.ControlPosition.TOP_LEFT].push(ctl);
+  // ⚠️ 地図の部品は地図ができてから DOM に入る。getElementById ではなく ctl から探す
+  const toggle = ctl.querySelector("#regToggle");
+  reg.note = ctl.querySelector("#regNote");
+  try { reg.on = localStorage.getItem("roads.registeredLayer") !== "0"; } catch { reg.on = true; }
+  toggle.checked = reg.on;
+  toggle.onchange = () => {
+    reg.on = toggle.checked;
+    try { localStorage.setItem("roads.registeredLayer", reg.on ? "1" : "0"); } catch { /* 覚えられなくても動く */ }
+    drawRegistered();
+  };
+  reg.info = new google.maps.InfoWindow();
+  state.map.addListener("idle", () => { clearTimeout(reg.timer); reg.timer = setTimeout(drawRegistered, 250); });
+}
+
+function clearRegistered() {
+  for (const line of reg.lines) line.setMap(null);
+  reg.lines = [];
+}
+
+async function drawRegistered() {
+  if (!reg.note) return;
+  // ⚠️ 地図を続けて動かすと返事の順が入れ替わる。最後に頼んだものだけ描く
+  const seq = ++reg.seq;
+  const zoom = state.map.getZoom();
+  if (!reg.on || !state.romaji || zoom < REG_MIN_ZOOM) {
+    clearRegistered();
+    reg.note.textContent = reg.on && zoom < REG_MIN_ZOOM ? "寄ると出ます" : "";
+    return;
+  }
+  const b = state.map.getBounds();
+  if (!b) return;
+  const sw = b.getSouthWest(), ne = b.getNorthEast();
+  let r;
+  try {
+    r = await (await fetch(`/api/roads/registered?west=${sw.lng()}&south=${sw.lat()}&east=${ne.lng()}`
+                           + `&north=${ne.lat()}&exclude=${encodeURIComponent(state.romaji)}`)).json();
+  } catch (e) {
+    reg.note.textContent = "読めませんでした: " + (e.message || e);
+    return;
+  }
+  if (seq !== reg.seq) return;
+  clearRegistered();
+  for (const road of r.roads || []) {
+    const line = new google.maps.Polyline({
+      path: decodePolyline(road.polyline), map: state.map,
+      // 線そのものは透明にして、点線の印だけ描く。押せるように太さは残す
+      strokeColor: REG_COLOR, strokeOpacity: 0, strokeWeight: 8, zIndex: 0,
+      icons: [{ icon: { path: "M 0,-1 0,1", strokeColor: REG_COLOR, strokeOpacity: road.hidden ? 0.35 : 0.85, scale: 3 },
+                offset: "0", repeat: "10px" }],
+    });
+    line.addListener("click", (e) => showRegistered(road, e.latLng));
+    reg.lines.push(line);
+  }
+  const n = (r.roads || []).length;
+  reg.note.textContent = r.truncated ? `多いので${n}本だけ出しています。寄ってください` : n ? `${n}本` : "この範囲には無し";
+}
+
+/** 登録済みの道の出どころ（一覧・吹き出しで同じ言い方にする） */
+function registeredSourceText(road) {
+  return (road.source === "added" ? "手で足した道・未生成" : "生成済み") + (road.hidden ? "・非表示" : "");
+}
+
+function showRegistered(road, at) {
+  const div = document.createElement("div");
+  div.style.fontSize = "12px";
+  div.innerHTML = `<b>${escapeHtml(road.title || road.name)}</b><br>
+    ${escapeHtml(road.prefecture)}で登録済み（${registeredSourceText(road)}）<br>
+    <button style="margin-top:6px">${escapeHtml(road.prefecture)}を開く</button>`;
+  div.querySelector("button").onclick = () => openRegistered(road);
+  reg.info.setContent(div);
+  reg.info.setPosition(at);
+  reg.info.open(state.map);
+}
+
+/**
+ * 登録済みの道がある県を開いて、その道を選ぶ。開いている県の道ならそのまま選ぶ。
+ * ⚠️ 地図の位置は変えない（いま見ている場所の道を確かめたいので）
+ */
+async function openRegistered(road) {
+  if (reg.info) reg.info.close();
+  if (road.romaji !== state.romaji) {
+    $("pref").value = road.romaji;
+    await loadPrefecture(road.romaji, { keepView: true });
+    // 未保存の調整があって破棄しなかったときは開かない（`loadPrefecture` が元の県に戻す）
+    if (state.romaji !== road.romaji) return;
+  } else {
+    cancelAddRoad();
+  }
+  const seg = allSegments().find((x) => overrideKey(x) === road.key);
+  if (seg) select(seg, { pan: false });
+  else setStatus(`${road.prefecture}の「${road.name}」が一覧に見つかりません（生成し直して名前や場所が変わった）`);
+}
+
 // ---------- 道を足す ----------
 
 /**
@@ -1680,6 +1845,8 @@ async function connectAddRoad() {
     return;
   }
   d.shape = r.polyline;
+  // ⚠️ 線が変わったら照合をやり直す（前の線の結果のまま「それでも足す」させない）
+  d.check = null;
   if (d.line) d.line.setMap(null);
   d.line = new google.maps.Polyline({
     path: decodePolyline(r.polyline), map: state.map,
@@ -1926,6 +2093,7 @@ function useCsvRoad(road, { partial = false } = {}) {
   d.markers = []; d.from = null; d.to = null;
   if (d.line) d.line.setMap(null);
   d.shape = road.polyline;
+  d.check = null;
   d.name = d.name || road.name;
   d.highway = road.highway || d.highway || "secondary";
   d.line = new google.maps.Polyline({
@@ -1955,7 +2123,7 @@ function renderAddPanel() {
              : !d.from ? "道路名で探すか、地図で<strong>始点</strong>をクリック"
              : !d.to ? "地図で<strong>終点</strong>をクリック"
              : "つないでいます…";
-  box.innerHTML = `
+  box.innerHTML = (d.check ? addCheckHtml(d.check) : "") + `
     <div class="bar wrap" style="gap:6px">
       <span class="muted">${step}</span>
       <span class="spacer"></span>
@@ -2031,20 +2199,63 @@ function renderAddPanel() {
   $("addName").oninput = keep;
   $("addHighway").onchange = keep;
   $("addCommit").onclick = () => { keep(); commitAddRoad(); };
+  if (d.check) {
+    if ($("addToSuggested")) $("addToSuggested").onclick = () => { keep(); addToSuggestedPrefecture(); };
+    $("addForce").onclick = () => { keep(); commitAddRoad({ force: true }); };
+    for (const b of box.querySelectorAll("[data-open-overlap]")) {
+      b.onclick = () => openRegistered(d.check.overlaps[Number(b.dataset.openOverlap)]);
+    }
+  }
 }
 
-/** 下書きを `state.added` に入れる（保存ボタンでファイルに書かれる） */
-function commitAddRoad() {
+/**
+ * 足した道の鍵。
+ * ⚠️ 鍵の作り方はサーバ側（`overrideKey`）と揃えること。ずれると、次に読み込んだとき同じ道が二重に見える
+ */
+function addedKeyOf(name, shape) {
+  const pts = decodePolyline(shape);
+  const round = (v) => (Math.round(v / 0.01) * 0.01).toFixed(2);
+  return `${name}@${round(pts[0].lat)},${round(pts[0].lng)}`;
+}
+
+/**
+ * 下書きを `state.added` に入れる（保存ボタンでファイルに書かれる）。
+ *
+ * ⚠️ **入れる前に全県と照合する**（`/api/roads/check-add`）。次のときは止めて選ばせる:
+ *    ・開いている県をほとんど通らない道（「この道の9割は宮城県です」→「宮城県に足す」）
+ *    ・登録済みの道と重なる道（ほかの県の道も含む）→「開く」で確かめるか「それでも足す」
+ *    （2026-10-21 利用者の報告: ほかの県の道が見えず、同じ道を別の県に足していた）
+ * ⚠️ 照合できなかったら止めずに知らせる（サーバが古いなどで足せなくなるより良い）
+ */
+async function commitAddRoad({ force = false } = {}) {
   const d = state.addDraft;
   if (!d || !d.shape) return;
   const name = (d.name || "").trim();
   if (!name) { setStatus("道路名を入れてください"); return; }
-  const pts = decodePolyline(d.shape);
-  // ⚠️ 鍵の作り方はサーバ側（`overrideKey`）と揃えること。ずれると、次に読み込んだとき
-  //    同じ道が二重に見える
-  const round = (v) => (Math.round(v / 0.01) * 0.01).toFixed(2);
-  const key = `${name}@${round(pts[0].lat)},${round(pts[0].lng)}`;
+  const key = addedKeyOf(name, d.shape);
   if (state.added[key]) { setStatus("同じ名前・同じ場所の道が既にあります"); return; }
+  if (!force) {
+    const shapeAsked = d.shape;
+    setStatus("ほかの県の道と照合しています…");
+    let check = null;
+    try {
+      check = await (await fetch("/api/roads/check-add", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ romaji: state.romaji, shape: d.shape }),
+      })).json();
+    } catch (e) {
+      setStatus("ほかの県の道と照合できませんでした（足します）: " + (e.message || e));
+    }
+    // ⚠️ 待っている間に下書きを閉じた・線を引き直したなら何もしない（古い線の結果で止めない）
+    if (state.addDraft !== d || d.shape !== shapeAsked) return;
+    if (check && !check.error && (check.suggested || (check.overlaps || []).length)) {
+      d.check = check;
+      renderAddPanel();
+      setStatus(check.suggested ? `この道はほとんど${check.suggested.name}を通ります。下で選んでください`
+                                : "登録済みの道と重なっています。下で確かめてください");
+      return;
+    }
+  }
   state.added[key] = { name, highway: d.highway || "secondary", shape: d.shape, tags: [], boost: 0 };
   cancelAddRoad();
   // ⚠️ **地図にも描き直すこと。** 一覧だけ描き直すと、足した道が地図に出ない
@@ -2058,6 +2269,56 @@ function commitAddRoad() {
   render();
   // 足した道が見えるところまで寄せる
   select(addedSegments().find((seg) => overrideKey(seg) === key));
+}
+
+/**
+ * 足す道を、照合で分かった県へ足す（「宮城県に足す」）。
+ * ⚠️ その県のファイルへ**すぐ保存される**（この県の「保存」とは別）。この県には入れない
+ */
+async function addToSuggestedPrefecture() {
+  const d = state.addDraft;
+  if (!d || !d.check || !d.check.suggested) return;
+  const target = d.check.suggested;
+  // ⚠️ 照合のあとで名前を直していることがある。いまの名前で鍵を作る
+  const name = (d.name || "").trim();
+  if (!name) { setStatus("道路名を入れてください"); return; }
+  const key = addedKeyOf(name, d.shape);
+  let r;
+  try {
+    r = await (await fetch(`/api/roads/added/${target.romaji}`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key, added: { name, highway: d.highway || "secondary", shape: d.shape, tags: [], boost: 0 } }),
+    })).json();
+  } catch (e) {
+    setStatus(`${target.name}に足せませんでした: ` + (e.message || e)); return;
+  }
+  if (!r.ok) { setStatus(`${target.name}に足せませんでした: ${r.error}`); return; }
+  cancelAddRoad();
+  drawRegistered();
+  setStatus(`「${name}」を${target.name}に足して保存しました（${state.prefName}には入れていません）。`
+            + `配信するには${target.name}を開いて再生成してください`);
+}
+
+/** 照合の結果（足す前に止めたとき）。割合は百分率で出す */
+function addCheckHtml(check) {
+  const pct = (v) => `${Math.round(v * 100)}%`;
+  const parts = [];
+  if (check.suggested) {
+    parts.push(`<div>この道の<b>${pct(check.suggested.share)}は${escapeHtml(check.suggested.name)}</b>です`
+      + `（${escapeHtml(state.prefName)}は${pct(check.suggested.ownShare)}）。</div>`);
+  }
+  if ((check.overlaps || []).length) {
+    parts.push(`<div style="margin-top:4px">登録済みの道と重なっています:</div>`
+      + check.overlaps.slice(0, 6).map((o, i) => `<div class="bar" style="gap:6px; padding:2px 0">
+          <span style="flex:1">${escapeHtml(o.prefecture)}「${escapeHtml(o.title || o.name)}」 ${pct(o.fraction)}
+            <span class="muted">（${registeredSourceText(o)}）</span></span>
+          <button data-open-overlap="${i}">開く</button></div>`).join(""));
+  }
+  parts.push(`<div class="bar wrap" style="gap:6px; padding:6px 0 0">
+      ${check.suggested ? `<button class="primary" id="addToSuggested">${escapeHtml(check.suggested.name)}に足す</button>` : ""}
+      <button id="addForce">それでも${escapeHtml(state.prefName)}に足す</button>
+    </div>`);
+  return `<div class="warn" id="addCheck" style="font-size:12px">${parts.join("")}</div>`;
 }
 
 // ---------- ストリートビュー ----------
@@ -2464,6 +2725,8 @@ async function save() {
     ? `／⚠️ ${j.rejected.length}本は足せませんでした（短すぎる・日本の外）` : "";
   const added = j.addedCount ? `・足した道 ${j.addedCount}本` : "";
   setStatus(`保存しました（調整 ${j.count}件${added}）${rejected}。配信するには再生成が必要です`);
+  // 保存した県は「再生成が要る」になる。県の一覧の印と「配信待ち」の数を付け直す
+  refreshPending();
 }
 
 // ---------- 重みの試算 ----------
@@ -2616,7 +2879,149 @@ function openPublish() {
   $("pubLog").textContent = "";
   $("publishModal").style.display = "flex";
   showLastPublish("roads", state.romaji, state.prefName);
+  showPublishDiff(state.romaji);
 }
+
+// ---------- 配信待ち ----------
+
+/**
+ * 直した・足したのに、まだ本番に配信していない県（`lib/roadPending.js`）。
+ *
+ * 利用者の要望（2026-10-21）「修正/追加した都道府県がわかるようにしたい。配信する目安にしたい」。
+ * 福島県を配信したら、狙った5本だけでなく前回の配信（10/07）のあとで非表示にした道もまとめて出て、
+ * 150本 → 121本になった。配信する前に、どの県にどれだけ溜まっているかを見えるようにする。
+ *   再生成が要る … 調整を保存したあと、まだ作り直していない（配信すると作り直して出る）
+ *   配信待ち     … 作り直した中身が本番と違う
+ * ⚠️ 本番は読むだけ。県の一覧（左上）にも印を付ける
+ */
+const PENDING_LABEL = { rebuild: "再生成が要る", publish: "配信待ち", unbuilt: "未生成" };
+const pending = { list: [], diffs: {} };
+
+async function refreshPending({ refresh = false } = {}) {
+  try {
+    const r = await (await fetch("/api/roads/pending" + (refresh ? "?refresh=1" : ""))).json();
+    if (r.error) throw new Error(r.error);
+    pending.list = r.prefectures || [];
+    pending.fetchedAt = r.fetchedAt;
+  } catch (e) {
+    pending.error = e.message || String(e);
+    return;
+  }
+  pending.error = null;
+  const waiting = pending.list.filter((p) => p.state === "rebuild" || p.state === "publish");
+  $("pendingBadge").style.display = waiting.length ? "" : "none";
+  $("pendingBadge").textContent = String(waiting.length);
+  // 県の一覧に印（頭に ●）。⚠️ 短くすること。後ろに「・配信待ち」と足したら選ぶ欄が伸びて「＋ 道を足す」が押し出された
+  // ⚠️ 読み直すたびに二重に付かないよう、印を外してから付ける
+  for (const sel of [$("pref"), $("tunePref")]) {
+    for (const o of sel.options) {
+      const p = pending.list.find((x) => x.romaji === o.value);
+      o.textContent = (p && (p.state === "rebuild" || p.state === "publish") ? "● " : "") + o.textContent.replace(/^● /, "");
+    }
+  }
+}
+
+/** 変わる道の一言（増える・消える・変わる）。名前は数本だけ出す */
+function pendingDiffText(d) {
+  const names = (list) => list.slice(0, 4).map((x) => escapeHtml(x.name)).join("、") + (list.length > 4 ? ` ほか${list.length - 4}本` : "");
+  const parts = [];
+  if (d.added.length) parts.push(`<b>増える ${d.added.length}本</b>（${names(d.added)}）`);
+  if (d.removed.length) parts.push(`<b>消える ${d.removed.length}本</b>（${names(d.removed)}）`);
+  if (d.changed.length) parts.push(`<b>変わる ${d.changed.length}本</b>（${names(d.changed)}）`);
+  return parts.length ? parts.join(" / ") : "道の顔ぶれ・札・形は同じ（点数や並びだけ違う）";
+}
+
+async function fetchPendingDiff(romaji) {
+  const r = await (await fetch(`/api/roads/pending/${romaji}/diff`)).json();
+  if (r.error) throw new Error(r.error);
+  pending.diffs[romaji] = r;
+  return r;
+}
+
+async function openPending() {
+  $("pendingModal").style.display = "flex";
+  $("pendingLead").textContent = "本番を読んでいます…";
+  await refreshPending();
+  drawPending();
+}
+
+function drawPending() {
+  const tbody = $("pendingTable").querySelector("tbody");
+  if (pending.error) { $("pendingLead").textContent = `読めませんでした: ${pending.error}`; tbody.innerHTML = ""; return; }
+  const rows = pending.list.filter((p) => p.state !== "same");
+  $("pendingLead").innerHTML = rows.length
+    ? `本番と違う県が <b>${rows.length}県</b> あります。「再生成が要る」は調整を保存したあと作り直していない県です`
+      + `（配信すると作り直して出ます。「差を見る」で先に手元だけ作り直して確かめられます）。本番は ${formatPublishedAt(pending.fetchedAt)} に読んだもの。`
+    : "配信していない変更はありません（全県が本番と同じ）。";
+  tbody.innerHTML = "";
+  for (const p of rows) {
+    const tr = document.createElement("tr");
+    const dep = p.deployed ? `${p.deployed.count}本<br><span class="muted">${formatPublishedAt(p.deployed.updatedAt)}</span>` : "—";
+    const loc = p.local ? `${p.local.count}本` : "—";
+    const d = pending.diffs[p.romaji];
+    tr.innerHTML = `<td>${escapeHtml(p.name)}</td>
+      <td><span class="pstate ${p.state}">${PENDING_LABEL[p.state] || p.state}</span></td>
+      <td class="num">${dep}</td><td class="num">${loc}</td>
+      <td class="pdiff">${d ? pendingDiffText(d) : ""}</td>
+      <td style="white-space:nowrap"><button data-diff="${p.romaji}">差を見る</button>
+        <button data-open="${p.romaji}">開く</button></td>`;
+    tbody.appendChild(tr);
+  }
+  for (const b of tbody.querySelectorAll("[data-diff]")) b.onclick = () => showPendingDiff(b.dataset.diff, b);
+  for (const b of tbody.querySelectorAll("[data-open]")) {
+    b.onclick = async () => {
+      $("pendingModal").style.display = "none";
+      if (b.dataset.open === state.romaji) return;
+      $("pref").value = b.dataset.open;
+      await loadPrefecture(b.dataset.open);
+    };
+  }
+}
+
+/**
+ * 1県の差を出す。「再生成が要る」県は、先に手元だけ作り直す（本番には書かない）。
+ * ⚠️ 作り直さずに比べると、保存した調整が入っていない古い中身との差になる
+ */
+async function showPendingDiff(romaji, button) {
+  const p = pending.list.find((x) => x.romaji === romaji);
+  const cell = button.closest("tr").querySelector(".pdiff");
+  button.disabled = true;
+  try {
+    if (p && (p.state === "rebuild" || p.state === "unbuilt")) {
+      cell.textContent = "手元だけ作り直しています（十数秒・本番には書きません）…";
+      const r = await (await fetch(`/api/roads/rebuild/${romaji}`, { method: "POST" })).json();
+      if (!r.ok) throw new Error(r.stderr || r.error || "作り直せませんでした");
+    }
+    cell.textContent = "本番と比べています…";
+    await fetchPendingDiff(romaji);
+    await refreshPending();
+    drawPending();
+  } catch (e) {
+    cell.textContent = `確かめられませんでした: ${e.message || e}`;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+/** 配信の確認画面に、本番と比べて何が変わるかを出す */
+async function showPublishDiff(romaji) {
+  const box = $("pubDiff");
+  box.style.display = "";
+  box.textContent = "本番と比べています…";
+  try {
+    const d = await fetchPendingDiff(romaji);
+    if (romaji !== state.romaji) return;
+    const head = `本番 ${d.deployedCount}本 → 配信すると ${d.localCount}本。`;
+    box.innerHTML = (d.rebuildNeeded ? "⚠️ 保存した調整がまだ作り直されていません（下見で作り直すと正しい差が出ます）。<br>" : "")
+      + head + pendingDiffText(d);
+  } catch (e) {
+    box.textContent = `本番と比べられません: ${e.message || e}`;
+  }
+}
+
+$("pendingBtn").onclick = openPending;
+$("pendingClose").onclick = () => { $("pendingModal").style.display = "none"; };
+$("pendingRefresh").onclick = async () => { $("pendingLead").textContent = "本番を読み直しています…"; await refreshPending({ refresh: true }); drawPending(); };
 
 /** 本番と同じ中身を配信するときの確認（利用者の要望 2026-10-07: 同じなら配信するか聞く） */
 function confirmSamePublish() {
@@ -2657,6 +3062,8 @@ async function runPublish(commit, confirmSame = false) {
     } else if (!commit && j.ok) {
       publishReady = true;
       publishSame = j.sameAsDeployed;
+      // ⚠️ 下見で作り直したので、変わる道を出し直す（開いたときは前の生成物で出している）
+      showPublishDiff(state.romaji);
       setStatus(j.sameAsDeployed === true ? "下見が通りました（本番と同じ中身です）" : "下見が通りました。配信できます");
     } else if (commit && j.ok) {
       publishReady = false;
@@ -2665,6 +3072,9 @@ async function runPublish(commit, confirmSame = false) {
       await loadPrefectures({ keep: true });
       await loadPrefecture(state.romaji, { keepView: true });
       showLastPublish("roads", state.romaji, state.prefName);
+      // 本番が変わったので、配信待ちを読み直す
+      await refreshPending({ refresh: true });
+      showPublishDiff(state.romaji);
     }
   } catch (e) {
     log.textContent += `\n通信に失敗しました: ${e}\n`;

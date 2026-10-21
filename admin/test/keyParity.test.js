@@ -36,6 +36,13 @@ test("画面と Node で鍵が一致する", () => {
   }
 });
 
+test("生成で当てた調整の鍵を持っている道は、画面も Node もその鍵を使う（始点から作り直さない）", () => {
+  const browserKey = new Function(`${match[0]}; return overrideKey;`)();
+  const seg = { name: "富士山スカイライン", start: [35.32966, 138.80198], overrideKey: "富士山スカイライン@35.34,138.80" };
+  assert.strictEqual(overrideKey(seg), "富士山スカイライン@35.34,138.80");
+  assert.strictEqual(browserKey(seg), overrideKey(seg));
+});
+
 test("鍵は道路名を保つ（@ を含む名前でも壊れない）", () => {
   const key = overrideKey({ name: "変な@名前", start: [35.5, 139.5] });
   // parseKey は最後の @ で切るので、名前に @ があっても復元できる

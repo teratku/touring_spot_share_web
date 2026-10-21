@@ -218,3 +218,30 @@ test("点数は100で頭打ち", () => {
   const boosted = applyOverrides([seg], { [key]: { shape, boost: 50 } }).segments[0];
   assert.ok(boosted.score <= 100, `100 を超えている: ${boosted.score}`);
 });
+
+/**
+ * 形を直して始点が動いても、調整の鍵は当てた調整のまま（2026-10-21 富士山スカイライン・静岡）。
+ * 動いた始点の鍵が、前に非表示にした古い調整の鍵と同じになり、調整ツールが古いほうを拾って
+ * 一覧から消え、切り直した線もその古い調整に入って配信に乗らなかった。
+ */
+test("形を直して始点が動いても、生成した道は当てた調整の鍵を持つ", () => {
+  const { applyOverrides, overrideKey } = require("../lib/roadOverrides");
+  const { encode } = require("../lib/polyline");
+  const raw = [[138.8040, 35.3420], [138.8030, 35.3380], [138.8020, 35.3340], [138.8010, 35.3300], [138.8000, 35.3260]];
+  const seg = { name: "富士山スカイライン", polyline: encode(raw), start: [35.342, 138.804], end: [35.326, 138.8],
+                highway: "secondary", score: 80, lengthKm: 2, curviness: 100, flow: 30, turnCount: 10 };
+  const keyA = overrideKey(seg);                                  // 富士山スカイライン@35.34,138.80
+  const moved = raw.slice(2);                                     // 始点が 35.334 へ（鍵は @35.33）
+  const keyB = "富士山スカイライン@35.33,138.80";
+  assert.notStrictEqual(keyA, keyB);
+  const out = applyOverrides([seg], {
+    [keyA]: { shape: encode(moved), tags: ["scenic"] },
+    [keyB]: { hidden: true },                                     // 古い非表示の調整（どの道にも当たらない）
+  }).segments;
+  assert.strictEqual(out.length, 1);
+  assert.strictEqual(out[0].start[0], 35.334);
+  // ⚠️ 始点から作ると keyB になってしまう。当てた調整の鍵（keyA）で探せること
+  assert.strictEqual(out[0].overrideKey, keyA);
+  assert.strictEqual(overrideKey(out[0]), keyA);
+  assert.deepStrictEqual(out[0].tags, ["scenic"]);
+});

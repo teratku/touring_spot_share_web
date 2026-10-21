@@ -32,6 +32,11 @@ const FUZZY_MATCH_METERS = 3000;
  * @param {{name: string, start: [number, number]}} segment start は [緯度, 経度]
  */
 function overrideKey(segment) {
+  // ⚠️ **生成で調整を当てた道は、当てた調整の鍵を持っている（`applyOverrides` が付ける）。それを使う。**
+  //    形を直すと始点が動き、始点から作った鍵が変わる。調整ツールは生成した後の道を読むので、
+  //    動いた始点の鍵で調整を探して見失い、同じ鍵の別の調整（前に非表示にした古いもの）を拾っていた。
+  //    富士山スカイライン（静岡）を切り直した線がその古い調整に入り、一覧から消えて配信にも乗らなかった（2026-10-21 利用者の報告）
+  if (segment && typeof segment.overrideKey === "string" && segment.overrideKey) return segment.overrideKey;
   const round = (v) => (Math.round(v / KEY_PRECISION) * KEY_PRECISION).toFixed(2);
   return `${segment.name}@${round(segment.start[0])},${round(segment.start[1])}`;
 }
@@ -245,6 +250,8 @@ function applyOverrides(segments, overrides = {}, added = {}, options = {}) {
     // ⚠️ 形の直しを先に当てること。点数の加算は「直したあとの点数」に足す。
     //    逆にすると、切り詰めて点数が下がったぶんまで加算が食われる
     let next = o.shape ? reshape(segment, o.shape) : { ...segment };
+    // ⚠️ 当てた調整の鍵を残す（`overrideKey`）。形を直して始点が動いても、調整ツールが同じ調整を見つけられるように
+    next.overrideKey = hit.key;
     if (o.boost !== 0) {
       next.score = Number(Math.max(0, Math.min(100, next.score + o.boost)).toFixed(1));
       next.boost = o.boost;

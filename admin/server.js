@@ -434,6 +434,158 @@ app.put("/api/roads/overrides/:romaji", (req, res) => {
 });
 
 /**
+ * ほかの県に登録済みの道（`lib/roadCrossPrefecture.js`）。
+ *
+ * 【なぜ要るか】調整ツールは開いた1県しか読まないので、ほかの県で登録済みの道が地図に出ず、
+ *   同じ道を別の県に足してしまっていた（2026-10-21 利用者の報告。福島県に蔵王エコーライン、埼玉県に上野原丹波山線など）。
+ * ⚠️ 一覧はファイルが変わったときだけ作り直す（全県で約6,500本・作るのに0.1秒ほど）。
+ *    保存・生成のたびに変わるので、ファイルの更新時刻を指紋にする。
+ */
+const crossPref = require("./lib/roadCrossPrefecture");
+let roadCatalogCache = { sig: null, roads: [] };
+function roadCatalog() {
+  const sig = ["road-recommend", "road-overrides"].map((kind) => {
+    const dir = roadDir(kind);
+    if (!fs.existsSync(dir)) return "";
+    return fs.readdirSync(dir).filter((f) => f.endsWith(".json"))
+      .map((f) => `${f}:${fs.statSync(path.join(dir, f)).mtimeMs}`).join("|");
+  }).join("#");
+  if (roadCatalogCache.sig !== sig) roadCatalogCache = { sig, roads: crossPref.buildCatalog(path.join(__dirname, "data")) };
+  return roadCatalogCache.roads;
+}
+
+/** 地図の範囲にある、ほかの県の登録済みの道（開いている県は exclude で除く） */
+app.get("/api/roads/registered", (req, res) => {
+  const box = ["west", "south", "east", "north"].map((k) => Number(req.query[k]));
+  if (box.some((v) => !Number.isFinite(v))) return res.status(400).json({ error: "範囲が要ります", roads: [] });
+  res.json(crossPref.roadsInBounds(roadCatalog(), box, { exclude: req.query.exclude || null }));
+});
+
+/**
+ * 足す前の確かめ: どの県を通るか・登録済みの道と重なるか。
+ * ⚠️ 開いている県の道も照合に入れる（保存済みのもの）。ただし同じ鍵の道は外す（直している道そのもの）
+ */
+app.post("/api/roads/check-add", (req, res) => {
+  const { romaji, shape, key } = req.body || {};
+  if (!romaji || !shape) return res.status(400).json({ error: "県と線が要ります" });
+  const points = decodePolylineServer(shape);
+  if (points.length < 2) return res.status(400).json({ error: "線が短すぎます" });
+  const shares = crossPref.prefectureShares(points, (lng, lat) => restrictionLocator.locate(lng, lat));
+  const catalog = roadCatalog().filter((r) => !(r.romaji === romaji && key && r.key === key));
+  res.json({
+    shares,
+    suggested: crossPref.suggestedPrefecture(shares, romaji),
+    overlaps: crossPref.findOverlaps(points, catalog),
+  });
+});
+
+/**
+ * 足す道を、開いている県ではなく別の県へ足す（「宮城県に足す」）。
+ * ⚠️ その県のファイルへ**すぐ書く**（開いている県の「保存」を待たない）。その県の調整とほかの足した道には触れない
+ * ⚠️ 同じ鍵がすでにあれば足さない（上書きすると、その県で直した中身が消える）
+ */
+app.post("/api/roads/added/:romaji", (req, res) => {
+  const { key, added } = req.body || {};
+  if (!key || !added) return res.status(400).json({ ok: false, error: "鍵と道が要ります" });
+  const r = crossPref.appendAdded(roadDir("road-overrides"), req.params.romaji, key, normalizeAdded(added));
+  if (!r.ok) return res.status(409).json({ ok: false, error: r.reason });
+  res.json({ ok: true });
+});
+
+/**
+ * 配信待ちの県（`lib/roadPending.js`）。
+ *
+ * 利用者の要望（2026-10-21）「修正/追加した都道府県がわかるようにしたい。配信する目安にしたい」。
+ * ⚠️ 本番は読むだけ（Firestore の `road_recommend/<県>` と、Storage の配信ファイル）。書かない
+ * ⚠️ 本番の県一覧は10分ためる（47件を読む）。配信したあとは refresh=1 で読み直す
+ */
+const roadPending = require("./lib/roadPending");
+let deployedRoadsCache = { at: 0, byRomaji: null };
+async function deployedRoads({ refresh = false } = {}) {
+  if (!refresh && deployedRoadsCache.byRomaji && Date.now() - deployedRoadsCache.at < 10 * 60 * 1000) {
+    return deployedRoadsCache.byRomaji;
+  }
+  const snap = await db.collection("road_recommend").get();
+  const byRomaji = {};
+  for (const doc of snap.docs) {
+    if (doc.id.startsWith("_")) continue;
+    const d = doc.data();
+    const at = d.updatedAt && d.updatedAt.toDate ? d.updatedAt.toDate().toISOString() : (d.updatedAt || null);
+    byRomaji[doc.id] = { count: d.count, contentHash: d.contentHash || null, generation: d.generation,
+                         fileName: d.fileName || null, updatedAt: at };
+  }
+  deployedRoadsCache = { at: Date.now(), byRomaji };
+  return byRomaji;
+}
+
+function readJsonOrNull(file) {
+  try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch { return null; }
+}
+
+/** 全県の状態（配信待ち・再生成が要る・同じ） */
+app.get("/api/roads/pending", async (req, res) => {
+  let deployed;
+  try { deployed = await deployedRoads({ refresh: req.query.refresh === "1" }); }
+  catch (e) { return res.status(502).json({ error: `本番を読めません: ${e.message}`, prefectures: [] }); }
+  const prefectures = Object.keys(ROMAJI).map((name) => {
+    const romaji = ROMAJI[name];
+    const local = readJsonOrNull(path.join(roadDir("road-recommend"), `${romaji}.json`));
+    const ovFile = path.join(roadDir("road-overrides"), `${romaji}.json`);
+    const overrides = readJsonOrNull(ovFile);
+    const mtime = fs.existsSync(ovFile) ? fs.statSync(ovFile).mtimeMs : null;
+    const dep = deployed[romaji] || null;
+    return {
+      name, romaji,
+      ...roadPending.pendingStatus({ local, overrides, overridesMtimeMs: mtime, deployed: dep }),
+      deployed: dep && { count: dep.count, updatedAt: dep.updatedAt, generation: dep.generation },
+      local: local && { count: local.count, builtAt: local.builtAt, hiddenCount: local.hiddenCount ?? null },
+      overridesSavedAt: mtime ? new Date(mtime).toISOString() : null,
+    };
+  });
+  res.json({ prefectures, fetchedAt: new Date(deployedRoadsCache.at).toISOString() });
+});
+
+/** 本番の配信ファイル（名前に世代が入っていて中身は変わらないので、ためておく） */
+const deployedFileCache = new Map();
+async function deployedSegments(fileName) {
+  if (deployedFileCache.has(fileName)) return deployedFileCache.get(fileName);
+  const [buf] = await admin.storage().bucket("biketeilen.appspot.com").file(`Json/road_recommend/${fileName}`).download();
+  const segments = JSON.parse(buf.toString("utf8")).segments || [];
+  deployedFileCache.set(fileName, segments);
+  return segments;
+}
+
+/** 1県の、本番と手元の差（増える道・消える道・変わる道）。手元は**いまの生成物**（再生成が要るなら先に再生成する） */
+app.get("/api/roads/pending/:romaji/diff", async (req, res) => {
+  const { romaji } = req.params;
+  const local = readJsonOrNull(path.join(roadDir("road-recommend"), `${romaji}.json`));
+  if (!local) return res.status(404).json({ error: "まだ生成していません" });
+  try {
+    const dep = (await deployedRoads())[romaji];
+    const before = dep && dep.fileName ? await deployedSegments(dep.fileName) : [];
+    const diff = roadPending.diffDelivered(before, local.segments || []);
+    const ovFile = path.join(roadDir("road-overrides"), `${romaji}.json`);
+    const status = roadPending.pendingStatus({ local, overrides: readJsonOrNull(ovFile),
+      overridesMtimeMs: fs.existsSync(ovFile) ? fs.statSync(ovFile).mtimeMs : null, deployed: dep || null });
+    res.json({ romaji, ...status, deployedCount: dep ? dep.count : 0, localCount: local.count,
+               deployedAt: dep ? dep.updatedAt : null, ...diff });
+  } catch (e) {
+    res.status(502).json({ error: `本番の配信ファイルを読めません: ${e.message}` });
+  }
+});
+
+/**
+ * 手元だけ作り直す（本番には書かない）。配信待ちの差を、いまの調整で確かめるため。
+ * ⚠️ 1県ずつ。世代の控え（road-generation.json）は手元で上がるが、本番の世代は配信するときに決まる
+ */
+app.post("/api/roads/rebuild/:romaji", async (req, res) => {
+  const prefecture = Object.keys(ROMAJI).find((n) => ROMAJI[n] === req.params.romaji);
+  if (!prefecture) return res.status(400).json({ ok: false, error: "県が分かりません" });
+  const built = await run("buildRoadRecommend.js", ["--build", "--prefecture", prefecture]);
+  res.json({ ok: built.ok, stderr: built.ok ? "" : (built.stderr || "").slice(-2000) });
+});
+
+/**
  * 再生成 → 配信 をまとめて実行する。
  *
  * ⚠️ 本番の Firestore と Storage に書き込む。
@@ -448,13 +600,21 @@ const PUBLISH_TIMEOUT_MS = 10 * 60 * 1000;
 
 function run(script, args) {
   return new Promise((resolve) => {
-    execFile("node", ["--max-old-space-size=8192", path.join(__dirname, script), ...args],
+   // ⚠️ 起動できないとき execFile はその場で例外を投げる。捕まえないとサーバごと落ちるので、失敗として返す
+   try {
+    // ⚠️ **"node" と名前で呼ばないこと。** PATH の先頭の node が別の CPU 向け（nvm の x86_64 版）だと
+    //    起動できず（spawn -86）、例外でサーバごと落ちて画面は「Failed to fetch」になった（2026-10-21）。
+    //    いまサーバを動かしている node（process.execPath）をそのまま使う
+    execFile(process.execPath, ["--max-old-space-size=8192", path.join(__dirname, script), ...args],
       // ⚠️ 画面から配信したことを記録に残す（`lib/publishLog.js` の `via`）
       { cwd: __dirname, timeout: PUBLISH_TIMEOUT_MS, maxBuffer: 32 * 1024 * 1024,
         env: { ...process.env, PUBLISH_VIA: "tool" } },
       (error, stdout, stderr) => {
         resolve({ ok: !error, code: error ? (error.code ?? 1) : 0, stdout, stderr: stderr || (error ? String(error) : "") });
       });
+   } catch (e) {
+    resolve({ ok: false, code: 1, stdout: "", stderr: `${script} を起動できませんでした: ${e.message}` });
+   }
   });
 }
 
