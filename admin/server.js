@@ -57,7 +57,7 @@ const { ROMAJI: PREF_ROMAJI } = require("./lib/prefectureRomaji");
 const { PrefectureLocator } = require("./lib/prefectureLocator");
 const restrictionLocator = new PrefectureLocator();
 const { normalized: normalizedAnnounce } = require("./lib/navGuide");
-const { normalizeHours, normalizeDays } = require("./lib/restrictionTime");
+const { normalizeHours, normalizeDays, normalizePeriod, monthsOfPeriod } = require("./lib/restrictionTime");
 const { findOverlaps } = require("./lib/restrictionOverlap");
 const { midFrom, kmlUrl, parseKml } = require("./lib/myMapsKml");
 const { decode: decodePolylineServer, encode: encodePolyline } = require("./lib/polyline");
@@ -738,6 +738,7 @@ app.post("/api/roads/publish/:romaji", async (req, res) => {
 //
 // 候補   data/restriction-candidates/<romaji>.json … 二普協の一覧から作った下書き
 //        data/restriction-osm/<romaji>.json        … OSM のタグから拾った下書き
+//        data/restriction-osm-season/<romaji>.json … OSM から拾った冬季閉鎖など毎年の閉鎖の下書き
 // 登録   data/road-restrictions/<romaji>.json      … 開発者が確認して確定したもの（配信対象）
 //
 // ⚠️ 候補はそのまま配信しない。ジオコーディングの精度が場所によって大きく違い、
@@ -760,13 +761,15 @@ app.get("/api/restrictions/candidates/:romaji", (req, res) => {
   const { romaji } = req.params;
   const jmpsa = readCandidateFile("restriction-candidates", romaji);
   const osm = readCandidateFile("restriction-osm", romaji);
+  // 冬季閉鎖など毎年の閉鎖（`fetchOsmSeasonalClosures.js`）。期間を確かめて登録する
+  const season = readCandidateFile("restriction-osm-season", romaji);
   // ⚠️ **JARTIC は公安委員会の規制そのもの。** 曜日・時間が入っているのはここだけ
   //    （OSM の日本データに曜日は0件・二普協の一覧にも無い）
   const jartic = readCandidateFile("restriction-jartic", romaji);
 
   // ⚠️ 1つしか無くても 404 にしないこと。OSM 側だけがある県（石川・新潟・大阪など）で
   //    「候補が未生成です」と出て、拾えているはずの規制が見えなくなる
-  if (!jmpsa && !osm && !jartic) {
+  if (!jmpsa && !osm && !jartic && !season) {
     return res.status(404).json({
       error: "候補が未生成です。node fetchJarticRestrictions.js --prefecture <県名>"
            + "（または fetchOsmRestrictions.js / buildRestrictionCandidates.js）を実行してください。",
@@ -774,19 +777,21 @@ app.get("/api/restrictions/candidates/:romaji", (req, res) => {
     });
   }
 
-  const errors = [jmpsa, osm, jartic].filter((d) => d && d.error).map((d) => d.error);
+  const errors = [jmpsa, osm, jartic, season].filter((d) => d && d.error).map((d) => d.error);
   res.json({
     prefecture: (jartic && jartic.prefecture) || (jmpsa && jmpsa.prefecture)
-      || (osm && osm.prefecture) || "",
+      || (osm && osm.prefecture) || (season && season.prefecture) || "",
     romaji,
     // ⚠️ **JARTIC を先頭に。** 出どころが公安委員会で、曜日・時間まで入っている。
     //    次が OSM（区間が道なりに繋がっていて確かめやすい）、最後が二普協
     candidates: [...((jartic && jartic.candidates) || []),
                  ...((osm && osm.candidates) || []),
+                 ...((season && season.candidates) || []),
                  ...((jmpsa && jmpsa.candidates) || [])],
     sourceUrl: jmpsa && jmpsa.sourceUrl,
     sourceFetchedAt: jmpsa && jmpsa.sourceFetchedAt,
     osmBuiltAt: osm && osm.builtAt,
+    osmSeasonBuiltAt: season && season.builtAt,
     osmAttribution: osm && osm.attribution,
     // ⚠️ **出典は必ず一緒に返すこと。** JARTIC の規約が求めている
     jarticAttribution: jartic && jartic.attribution,
@@ -1840,7 +1845,11 @@ app.put("/api/restrictions/:romaji", (req, res) => {
       prefecture: String(r.prefecture || ""),
       polyline: String(r.polyline),
       note: r.note ? String(r.note) : null,
-      activeMonths: Array.isArray(r.activeMonths) ? r.activeMonths.filter((m) => m >= 1 && m <= 12) : null,
+      // ⚠️ 期間（11-15〜04-24）があるときは、月を期間から作り直す（期間を知らない古いアプリ・Web 向け）。
+      //    手で選んだ月と期間が食い違ったまま配信すると、アプリと Web で閉まる月が変わる
+      activeMonths: normalizePeriod(r.activePeriod) ? monthsOfPeriod(r.activePeriod)
+        : Array.isArray(r.activeMonths) ? r.activeMonths.filter((m) => m >= 1 && m <= 12) : null,
+      activePeriod: normalizePeriod(r.activePeriod),
       // 効いている曜日・時間帯。おかしな値は保存しない（`lib/restrictionTime.js`）
       activeDays: normalizeDays(r.activeDays),
       includesHoliday: r.includesHoliday === true,

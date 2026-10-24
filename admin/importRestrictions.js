@@ -25,6 +25,7 @@ const admin = require("firebase-admin");
 const publishLog = require("./lib/publishLog");
 const { ROMAJI } = require("./lib/prefectureRomaji");
 const { isSellable } = require("./lib/restrictionOrigin");
+const { normalizePeriod } = require("./lib/restrictionTime");
 
 const PROJECT_ID = "biketeilen";
 const COLLECTION = "road_restrictions";
@@ -94,6 +95,10 @@ function validate(data) {
     }
     if (r.activeMonths && r.activeMonths.some((m) => m < 1 || m > 12)) {
       problems.push(`${at}: 月の指定がおかしい`);
+    }
+    // ⚠️ 期間（冬季閉鎖の日付）はアプリがそのまま読む。読めない形を通すと通年の閉鎖に見える
+    if (r.activePeriod && !normalizePeriod(r.activePeriod)) {
+      problems.push(`${at}: 期間の書き方がおかしい（11-15 のように月-日）`);
     }
     // ⚠️ **経路が避けるのは、配信APIに載るものだけ**（`restrictionOrigin.js`）。
     //    出どころが無い・売れないものは、一覧に出ても**経路は通る**

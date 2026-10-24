@@ -3477,6 +3477,9 @@ function rScheduleLabel(c) {
   const hours = base.activeHours;
   const names = ["月", "火", "水", "木", "金", "土", "日"];
   const parts = [];
+  // 冬季閉鎖の日付（アプリと同じ「11/15〜4/24」）
+  if (base.activePeriod) parts.push(`${rPeriodText(base.activePeriod.from)}〜${rPeriodText(base.activePeriod.to)}`);
+  else if (base.kind === "winterClosure") parts.push("期間なし");
   if (days && days.length) parts.push(days.map((d) => names[d - 1]).join("・"));
   if (holiday) parts.push("祝");
   if (hours && hours.from && hours.to) parts.push(`${hours.from}〜${hours.to}`);
@@ -3672,6 +3675,8 @@ function rEditorDefaults(candidate, saved, isSaved) {
     minCc: base.minCc ?? "",
     maxCc: base.maxCc ?? "",
     months: base.activeMonths ?? [],
+    // 冬季閉鎖の日付（毎年くり返す・"11-15" の形）。あれば月より先に効く
+    period: base.activePeriod ?? null,
     days: base.activeDays ?? [],
     hours: base.activeHours ?? {},
     holiday: base.includesHoliday ?? false,
@@ -3757,6 +3762,17 @@ function rRenderEditor(c) {
       22:00〜05:00 のように日をまたぐ指定もできます。
     </div>
 
+    <label>閉まる期間（冬季閉鎖の日付。毎年くり返す）</label>
+    <div class="boostRow">
+      <input type="text" id="r-pfrom" placeholder="11/15" value="${escapeHtml(rPeriodText((initial.period || {}).from))}">
+      <span class="muted">〜</span>
+      <input type="text" id="r-pto" placeholder="4/24" value="${escapeHtml(rPeriodText((initial.period || {}).to))}">
+    </div>
+    <div class="muted" style="font-size:11px; margin-top:2px">
+      アプリに「11/15〜4/24 冬季閉鎖」と出ます。入れると下の「月」は期間から作り直します（古いアプリ向け）。<br>
+      ⚠️ 開通日・閉鎖日は年で変わります。道路管理者の発表で確かめ、確認日も直すこと。
+    </div>
+
     <label>効いている月（冬季閉鎖など。未選択なら通年）</label>
     <div class="chips" id="r-months">
       ${[...Array(12)].map((_, i) => `<button class="chip ${months.includes(i+1) ? "on" : ""}" data-month="${i+1}">${i+1}</button>`).join("")}
@@ -3839,7 +3855,11 @@ function rApplyEdit() {
   if (!c || !R.seg) return;
   const path = R.seg.getPath().getArray().map((p) => ({ lat: p.lat(), lng: p.lng() }));
   const kind = (document.querySelector("#r-kind .chip.on") || {}).dataset?.kind || "noMotorcycle";
-  const months = [...document.querySelectorAll("#r-months .chip.on")].map((b) => Number(b.dataset.month));
+  const period = rReadPeriod();
+  if (period === false) return;
+  // ⚠️ 期間があれば月は期間から作る（保存する側 server.js も同じに作り直す）
+  const months = period ? rMonthsOfPeriod(period)
+    : [...document.querySelectorAll("#r-months .chip.on")].map((b) => Number(b.dataset.month));
   const days = [...document.querySelectorAll("#r-days [data-day].on")].map((b) => Number(b.dataset.day));
   const min = Number($("r-min").value), max = Number($("r-max").value);
   // ⚠️ **名前を空のまま保存しないこと。** 保存APIは名前の無い規制を黙って捨てる
@@ -3853,6 +3873,7 @@ function rApplyEdit() {
     polyline: encodePolyline(path),
     note: $("r-note").value.trim() || null,
     activeMonths: months.length ? months : null,
+    activePeriod: period,
     activeDays: days.length && days.length < 7 ? days : null,
     includesHoliday: $("r-holiday").classList.contains("on"),
     activeHours: rReadHours(),
@@ -3883,6 +3904,44 @@ function rApplyEdit() {
  *    アプリ側で終日と区別できない。サーバ側（lib/restrictionTime.js）でも
  *    同じ規則で弾いているが、画面でも知らせる。
  */
+/** "11-15" → "11/15"（入力欄に出す形） */
+function rPeriodText(value) {
+  const m = String(value || "").match(/^(\d{2})-(\d{2})$/);
+  return m ? `${Number(m[1])}/${Number(m[2])}` : "";
+}
+
+/** "11/15"・"11-15" → "11-15"。読めなければ null */
+function rParsePeriodDay(text) {
+  const m = String(text || "").trim().match(/^(\d{1,2})[/-](\d{1,2})$/);
+  if (!m) return null;
+  const month = Number(m[1]), day = Number(m[2]);
+  const last = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+  if (!last || day < 1 || day > last) return null;
+  return `${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+/**
+ * 閉まる期間を読む。空なら null・おかしければ false（登録しない）。
+ * ⚠️ `lib/restrictionTime.js` の `normalizePeriod` と同じ決まり（片方だけは不可）
+ */
+function rReadPeriod() {
+  const fromText = ($("r-pfrom").value || "").trim();
+  const toText = ($("r-pto").value || "").trim();
+  if (!fromText && !toText) return null;
+  const from = rParsePeriodDay(fromText), to = rParsePeriodDay(toText);
+  if (!from || !to) { rSetStatus("閉まる期間は 11/15 のように月/日で、始まりと終わりの両方を入れてください"); return false; }
+  return { from, to };
+}
+
+/** 期間がかかる月（`lib/restrictionTime.js` の `monthsOfPeriod` と同じ） */
+function rMonthsOfPeriod(period) {
+  const first = Number(period.from.slice(0, 2)), last = Number(period.to.slice(0, 2));
+  if (first === last && period.from > period.to) return [...Array(12)].map((_, i) => ((first - 1 + i) % 12) + 1);
+  const months = [];
+  for (let m = first; ; m = (m % 12) + 1) { months.push(m); if (m === last) break; }
+  return months;
+}
+
 function rReadHours() {
   const from = ($("r-from").value || "").trim();
   const to = ($("r-to").value || "").trim();

@@ -1036,6 +1036,14 @@ module.exports = {
  *
  * ⚠️ **日をまたぐ指定を落とさないこと。** 「22:00〜05:00」は実在する（夜間規制）。
  *    from > to のときは、またぐものとして扱う。
+ *
+ *   activePeriod … { from: "11-15", to: "04-24" }。毎年くり返す期間（両端の日を含む）。未指定なら通年
+ *
+ * ⚠️ 利用者の要望（2026-10-24）:「スカイラインとかの走れなくなる日付を表示」。冬季閉鎖は
+ *    「11月中旬〜4月下旬」のように月の途中で切られるので、月（`activeMonths`）では日付を出せない。
+ *    **期間を持つときも `activeMonths` を一緒に書く**（期間がかかる月）。期間を知らない古いアプリ・
+ *    Web はそちらを見る（月の途中の日は閉まっている側に倒れる＝走れると言ってしまうよりよい）。
+ * ⚠️ **年をまたぐ期間（11-15〜04-24）を落とさないこと。** 冬季閉鎖はほぼすべてこれ。
  */
 "use strict";
 
@@ -1079,6 +1087,74 @@ function normalizeDays(days) {
   return set;
 }
 
+/** "11-15"・"11/15"・"1115" → 1115（月×100＋日）。読めなければ null */
+function parseMonthDay(text) {
+  if (typeof text !== "string") return null;
+  const m = text.trim().match(/^(\d{1,2})[-/]?(\d{2})$|^(\d{1,2})[-/](\d{1,2})$/);
+  if (!m) return null;
+  const month = Number(m[1] ?? m[3]);
+  const day = Number(m[2] ?? m[4]);
+  if (!(month >= 1 && month <= 12)) return null;
+  // ⚠️ 2月29日は通す（うるう年の閉鎖の終わりに書かれる）
+  const last = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+  if (!(day >= 1 && day <= last)) return null;
+  return month * 100 + day;
+}
+
+/** 1115 → "11-15" */
+function formatMonthDay(value) {
+  return `${String(Math.floor(value / 100)).padStart(2, "0")}-${String(value % 100).padStart(2, "0")}`;
+}
+
+/**
+ * 期間を保存できる形に整える。おかしな値は null。
+ * ⚠️ 片方だけは通さない（終わりの無い冬季閉鎖は「通年」と区別できない）。同じ日は1日だけの閉鎖として通す
+ */
+function normalizePeriod(period) {
+  if (!period) return null;
+  const from = parseMonthDay(period.from);
+  const to = parseMonthDay(period.to);
+  if (from === null || to === null) return null;
+  return { from: formatMonthDay(from), to: formatMonthDay(to) };
+}
+
+/** その月日（1115 の形）が期間に入るか。年をまたぐ期間も扱う */
+function periodContains(period, monthDay) {
+  const p = normalizePeriod(period);
+  if (!p) return true;
+  const from = parseMonthDay(p.from);
+  const to = parseMonthDay(p.to);
+  return from <= to ? monthDay >= from && monthDay <= to
+                    : monthDay >= from || monthDay <= to;
+}
+
+/** 期間がかかる月（古いアプリ向けの `activeMonths`）。並びは期間の始まりから */
+function monthsOfPeriod(period) {
+  const p = normalizePeriod(period);
+  if (!p) return null;
+  const first = Math.floor(parseMonthDay(p.from) / 100);
+  const last = Math.floor(parseMonthDay(p.to) / 100);
+  const months = [];
+  // ⚠️ 同じ月の中で終わりが始まりより前（4/24〜4/10）は、ほぼ1年なので12か月すべて
+  if (first === last && parseMonthDay(p.from) > parseMonthDay(p.to)) {
+    for (let i = 0; i < 12; i++) months.push(((first - 1 + i) % 12) + 1);
+    return months;
+  }
+  for (let m = first; ; m = (m % 12) + 1) {
+    months.push(m);
+    if (m === last) break;
+  }
+  return months;
+}
+
+/** "11/15〜4/24" */
+function describePeriod(period) {
+  const p = normalizePeriod(period);
+  if (!p) return "";
+  const text = (v) => `${Math.floor(v / 100)}/${v % 100}`;
+  return `${text(parseMonthDay(p.from))}〜${text(parseMonthDay(p.to))}`;
+}
+
 /**
  * その日時に規制が効いているか。
  *
@@ -1087,6 +1163,8 @@ function normalizeDays(days) {
  * @param {object} options { isHoliday: boolean } 祝日かどうかは呼び出し側が渡す
  */
 function isActiveAt(restriction, at, options = {}) {
+  if (restriction.activePeriod
+      && !periodContains(restriction.activePeriod, (at.getMonth() + 1) * 100 + at.getDate())) return false;
   const days = normalizeDays(restriction.activeDays);
   if (days) {
     // ⚠️ JavaScript の getDay() は 0=日。1=月〜7=日 に直してから比べる
@@ -1108,6 +1186,8 @@ function isActiveAt(restriction, at, options = {}) {
 /** 画面や一覧に出す説明。指定が無ければ空 */
 function describe(restriction) {
   const parts = [];
+  const period = describePeriod(restriction.activePeriod);
+  if (period) parts.push(period);
   const days = normalizeDays(restriction.activeDays);
   if (days) {
     const names = ["月", "火", "水", "木", "金", "土", "日"];
@@ -1119,7 +1199,10 @@ function describe(restriction) {
   return parts.join(" ");
 }
 
-module.exports = { parseHm, formatHm, normalizeHours, normalizeDays, isActiveAt, describe };
+module.exports = {
+  parseHm, formatHm, normalizeHours, normalizeDays, isActiveAt, describe,
+  parseMonthDay, normalizePeriod, periodContains, monthsOfPeriod, describePeriod,
+};
 
   },
   // ---- admin/lib/restrictionAvoid.js ----

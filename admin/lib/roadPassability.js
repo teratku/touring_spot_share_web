@@ -18,6 +18,7 @@ const { overlapMeters, MIN_OVERLAP_METERS } = require("./appFunRoute");
 const { appliesToRange } = require("./restrictionOverlap");
 const { DISPLACEMENT_CC } = require("./restrictionAvoid");
 const { decode } = require("./polyline");
+const { describePeriod } = require("./restrictionTime");
 
 /** 走れなくなる種類（アプリの `RoadRestrictionKind.blocksRiding`） */
 const BLOCKS_RIDING = new Set(["noMotorcycle", "winterClosure", "closed"]);
@@ -44,8 +45,11 @@ function minutesOf(text) {
  */
 function scheduleOf(r) {
   const parts = [];
+  // ⚠️ 期間（11/15〜4/24）があれば月の代わりに出す（アプリの `RoadPassability.schedule(of:)` と同じ）
+  const period = describePeriod(r.activePeriod);
   const months = Array.isArray(r.activeMonths) ? r.activeMonths : [];
-  if (months.length && months.length < 12) parts.push(`${months.join("・")}月`);
+  if (period) parts.push(period);
+  else if (months.length && months.length < 12) parts.push(`${months.join("・")}月`);
   const days = Array.isArray(r.activeDays) ? r.activeDays : [];
   if (days.length && days.length < 7) {
     parts.push(days.slice().sort((a, b) => a - b).filter((d) => d >= 1 && d <= 7).map((d) => DAY_NAMES[d - 1]).join("・"));

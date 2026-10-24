@@ -108,13 +108,18 @@ out geom;`;
  * @returns {object|null} 取れなければ null（**その県だけ諦めて次へ進む**）
  */
 async function overpass(prefecture) {
+  return overpassWith(prefecture, buildQuery(prefecture));
+}
+
+/** クエリを指定して叩く（冬季閉鎖の候補 `fetchOsmSeasonalClosures.js` も使う） */
+async function overpassWith(prefecture, query) {
   for (let attempt = 1; attempt <= MAX_RETRY; attempt++) {
     let res;
     try {
       res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ data: buildQuery(prefecture) }),
+        body: new URLSearchParams({ data: query }),
       });
     } catch (e) {
       console.warn(`     ⚠️ ${prefecture}: 繋がらない（${e.message}）`);
@@ -331,7 +336,7 @@ async function main() {
   console.log(`   http://127.0.0.1:4317/roads`);
 }
 
-module.exports = { buildQuery, buildCandidates, toFragments, MIN_CHAIN_METERS };
+module.exports = { buildQuery, buildCandidates, toFragments, alreadyRegistered, membersOf, overpassWith, MIN_CHAIN_METERS };
 
 if (require.main === module) {
   main().catch((e) => { console.error(e); process.exit(1); });
