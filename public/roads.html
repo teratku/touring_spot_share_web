@@ -23,7 +23,7 @@
 <!-- 都道府県の範囲（どの県の配信を読むかを決める） -->
 <script src="/conquest/prefecture-data.js"></script>
 <script defer src="/analytics.js?v=2"></script>
-<script defer src="/menu.js?v=7"></script>
+<script defer src="/menu.js?v=8"></script>
 <style>
   /*
    * おすすめ道路（利用者の要望 2026-10-12:「web にもアプリと同じようにおすすめ道路のリストを表示するようにしたい。
@@ -38,6 +38,8 @@
   .rd-select { font: 14px var(--ts-font); padding: 6px 8px; border-radius: 8px; border: 1px solid #c8d3d8; background: var(--ts-surface); color: inherit; }
   .rd-where { font-size: 13px; color: var(--ts-text-2); }
   .rd-tier { font-size: 13px; margin: 12px 0 8px; color: var(--ts-text-2); }
+  .rd-winter { font-size: 13px; margin: 12px 0 0; color: var(--ts-text-2); }
+  .rd-winter a { font-weight: 600; }
   .rd-map { width: 100%; height: 360px; border-radius: var(--ts-radius); overflow: hidden; margin-bottom: 12px; background: #e8eef0; }
   .rd-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
   .rd-item { display: flex; gap: 12px; align-items: flex-start; background: var(--ts-surface); border-radius: var(--ts-radius);
@@ -99,6 +101,8 @@
       </div>
     </section>
 
+    <!-- 冬季閉鎖の一覧へ（利用者の要望 2026-10-25。アプリはおすすめ道路の右上の雪から開く） -->
+    <p class="rd-winter"><a href="/winter-closures.html">❄️ 冬季閉鎖の一覧</a>（スカイラインや峠道が閉まる期間）</p>
     <p class="rd-tier" id="tier"></p>
     <div class="rd-map" id="map" aria-label="おすすめ道路の地図"></div>
     <ul class="rd-list" id="list" aria-live="polite"></ul>

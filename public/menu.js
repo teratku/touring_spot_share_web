@@ -16,6 +16,8 @@
     { icon: '🛣️', label: 'ルートを探す', href: '/routes.html' },
     // おすすめ道路（アプリの発見タブの「道」と同じ一覧。利用者の要望 2026-10-12）
     { icon: '⛰️', label: 'おすすめ道路', href: '/roads.html' },
+    // 冬季閉鎖（アプリと同じ一覧。利用者の要望 2026-10-25）
+    { icon: '❄️', label: '冬季閉鎖', href: '/winter-closures.html' },
     { icon: '🏍️', label: 'ツーリングプラン', href: '/touring-plan.html' },
     { icon: '📝', label: 'ブログ', href: '/blog/blog.html' },
     { sep: true },

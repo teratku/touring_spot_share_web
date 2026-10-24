@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>冬季閉鎖 | ツーリングスポットシェア</title>
+<meta name="description" content="スカイラインや峠道の冬季閉鎖の期間を、都道府県ごとに。いま閉鎖中の道・まもなく閉まる道がひと目で分かります。" />
+<link rel="canonical" href="https://biketeilen.web.app/winter-closures.html" />
+<meta name="apple-itunes-app" content="app-id=1466607921" />
+<link rel="stylesheet" href="/site.css?v=6">
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
+<script defer src="/__/firebase/init.js"></script>
+<!-- 並べ方はアプリの「冬季閉鎖」と同じ（winter-closures-lib.js） -->
+<script src="/winter-closures-lib.js?v=1"></script>
+<script src="/roads-lib.js?v=2"></script>
+<script src="/conquest/prefecture-data.js"></script>
+<script defer src="/analytics.js?v=2"></script>
+<script defer src="/menu.js?v=8"></script>
+<style>
+  /*
+   * 冬季閉鎖（利用者の要望 2026-10-25:「webにも表示できるようにしたい」→ 利用者の判断「新しい『冬季閉鎖』ページ」）。
+   * アプリの WinterClosureListView と同じく 閉鎖中 → まもなく閉鎖（30日以内）→ 通れる。Web は全国でも見られる
+   */
+  .wc-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .wc-chip { border: 1.5px solid var(--ts-teal); background: transparent; color: var(--ts-teal-ink); border-radius: 999px;
+             padding: 5px 12px; font: 600 12px/1.2 var(--ts-font); cursor: pointer; }
+  .wc-chip[aria-pressed="true"] { background: var(--ts-teal); color: #fff; }
+  .wc-select { font: 14px var(--ts-font); padding: 6px 8px; border-radius: 8px; border: 1px solid #c8d3d8; background: var(--ts-surface); color: inherit; }
+  .wc-where { font-size: 13px; color: var(--ts-text-2); }
+  .wc-summary { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+  .wc-pill { font: 600 12px/1 var(--ts-font); padding: 6px 10px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+  .wc-pill--closed { background: rgba(217, 56, 56, .12); color: #B42828; }
+  .wc-pill--soon { background: rgba(255, 149, 0, .15); color: #A55400; }
+  .wc-pill--open { background: rgba(91, 102, 112, .12); color: var(--ts-text-2); }
+  .wc-section { margin-top: 18px; }
+  .wc-section h2 { font-size: 13px; letter-spacing: .04em; color: var(--ts-text-2); margin: 0 0 8px; font-weight: 700; }
+  .wc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .wc-item { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: start;
+             background: var(--ts-surface); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); padding: 12px 14px;
+             border-left: 4px solid transparent; }
+  .wc-item--closed { border-left-color: #D93838; }
+  .wc-item--soon { border-left-color: #FF9500; }
+  .wc-icon { font-size: 18px; line-height: 1.3; }
+  .wc-name { font-weight: 700; font-size: 15px; }
+  .wc-pref { font-size: 11px; font-weight: 600; color: var(--ts-text-2); margin-left: 6px; }
+  .wc-period { font-size: 14px; color: var(--ts-text); font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .wc-note { font-size: 12px; color: var(--ts-text-2); margin-top: 4px; line-height: 1.5; max-width: 60ch; overflow-wrap: anywhere; }
+  .wc-meta { font-size: 11px; color: var(--ts-text-2); margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .wc-status { font-size: 13px; font-weight: 700; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .wc-status--closed { color: #C62828; }
+  .wc-status--soon { color: #B85E00; }
+  .wc-empty { text-align: center; padding: 28px 12px; color: var(--ts-text-2); }
+  .wc-foot { font-size: 12px; color: var(--ts-text-2); margin-top: 20px; line-height: 1.6; }
+  @media (max-width: 520px) {
+    .wc-item { grid-template-columns: auto 1fr; }
+    .wc-status { grid-column: 2; text-align: left; white-space: normal; }
+  }
+  @media (prefers-color-scheme: dark) {
+    .wc-select { border-color: #3A3A3C; }
+    .wc-pill--closed { background: rgba(255, 69, 58, .18); color: #FF8A80; }
+    .wc-pill--soon { background: rgba(255, 159, 10, .18); color: #FFB340; }
+    .wc-status--closed { color: #FF8A80; }
+    .wc-status--soon { color: #FFB340; }
+  }
+</style>
+</head>
+<body class="ts-page">
+  <header class="ts-header">
+    <div>
+      <h1 class="ts-header__title">❄️ 冬季閉鎖</h1>
+      <p class="ts-header__sub">スカイラインや峠道が閉まる期間（アプリと同じ情報）</p>
+    </div>
+  </header>
+
+  <main class="ts-main">
+    <section class="ts-card wc-controls" aria-label="探し方">
+      <button class="wc-chip" type="button" id="here">📍 現在地の県</button>
+      <select class="wc-select" id="pref" aria-label="都道府県"><option value="">全国</option></select>
+      <span class="wc-where" id="where"></span>
+    </section>
+
+    <div class="wc-summary" id="summary" aria-live="polite"></div>
+    <div id="sections"><p class="wc-empty">冬季閉鎖を読み込んでいます…</p></div>
+
+    <p class="wc-foot">
+      登録済みの冬季閉鎖だけを出しています（すべてではありません）。開通日・閉鎖日は年や雪の具合で変わり、
+      閉鎖の前後に夜間通行止めになる道もあります。出かける前に道路管理者の発表で確かめてください。<br>
+      走れるおすすめ道路は <a href="/roads.html">おすすめ道路</a> で探せます。
+    </p>
+  </main>
+
+  <footer class="ts-footer">
+    <nav aria-label="サイトの案内">
+      <a href="/about.html">アプリ紹介</a>
+      <a href="/support.html">サポート</a>
+      <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+      <a href="/termsofservice/termsofservice.html">利用規約</a>
+    </nav>
+    <div>© ツーリングスポットシェア（biketeilen）</div>
+  </footer>
+
+<script>
+(function () {
+  "use strict";
+  var W = window.TSSWinter, R = window.TSSRoads;
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  /** 前に見た県（この端末だけ） */
+  var SAVED = "winterClosures.prefecture";
+  var state = { all: null, failed: false, prefecture: "" };
+
+  function saved() { try { return localStorage.getItem(SAVED) || ""; } catch (e) { return ""; } }
+  function save(v) { try { localStorage.setItem(SAVED, v); } catch (e) { /* 覚えられなくても動く */ } }
+
+  // ---- 配信データ（アプリと同じ Firestore の road_restrictions。誰でも読める） ----
+  async function loadAll() {
+    try {
+      var snap = await firebase.firestore().collection("road_restrictions").get();
+      var list = [];
+      snap.forEach(function (doc) {
+        var d = doc.data() || {};
+        (d.restrictions || []).forEach(function (r) {
+          if (r && r.kind === "winterClosure") list.push(Object.assign({ prefecture: d.prefecture || "" }, r));
+        });
+      });
+      state.all = list;
+    } catch (e) {
+      console.error(e);
+      state.failed = true;
+    }
+    render();
+  }
+
+  /** 道の線のまん中（Googleマップで開く場所） */
+  function midpoint(r) {
+    try {
+      var pts = R.decodePolyline(r.polyline || "");
+      return pts.length ? pts[Math.floor(pts.length / 2)] : null;
+    } catch (e) { return null; }
+  }
+
+  function render() {
+    var box = el("sections"), summary = el("summary");
+    if (state.failed) {
+      summary.innerHTML = "";
+      box.innerHTML = '<p class="wc-empty">冬季閉鎖を読み込めませんでした。通信を確かめて、もう一度開いてください。</p>';
+      return;
+    }
+    if (!state.all) return;
+    var raw = state.all.filter(function (r) { return !state.prefecture || r.prefecture === state.prefecture; });
+    var byId = {};
+    raw.forEach(function (r) { byId[r.id] = r; });
+    var entries = W.entries(raw, new Date());
+    var count = function (s) { return entries.filter(function (e) { return e.status === s; }).length; };
+    summary.innerHTML = entries.length
+      ? '<span class="wc-pill wc-pill--closed">閉鎖中 ' + count("closed") + '</span>' +
+        '<span class="wc-pill wc-pill--soon">まもなく閉鎖 ' + count("soon") + '</span>' +
+        '<span class="wc-pill wc-pill--open">通れる ' + count("open") + "</span>"
+      : "";
+    if (!entries.length) {
+      box.innerHTML = '<p class="wc-empty">' + (state.prefecture ? esc(state.prefecture) + "に" : "") +
+        "登録された冬季閉鎖はまだありません。</p>";
+      return;
+    }
+    var html = "";
+    [["closed", "閉鎖中"], ["soon", "まもなく閉鎖（30日以内）"], ["open", "通れる"]].forEach(function (s) {
+      var rows = entries.filter(function (e) { return e.status === s[0]; });
+      if (!rows.length) return;
+      html += '<section class="wc-section"><h2>' + s[1] + '</h2><ul class="wc-list">' + rows.map(function (e) {
+        var p = midpoint(byId[e.id] || {});
+        var status = W.statusText(e);
+        return '<li class="wc-item wc-item--' + e.status + '">' +
+          '<span class="wc-icon" aria-hidden="true">❄️</span>' +
+          "<div><div><span class=\"wc-name\">" + esc(e.name) + "</span>" +
+            (state.prefecture ? "" : '<span class="wc-pref">' + esc(e.prefecture) + "</span>") + "</div>" +
+            '<div class="wc-period">' + esc(e.schedule || "期間は確認中") + "</div>" +
+            (e.note ? '<div class="wc-note">' + esc(e.note) + "</div>" : "") +
+            '<div class="wc-meta">' + (e.checkedAt ? "<span>" + esc(String(e.checkedAt).slice(0, 10)) + " 時点の情報</span>" : "") +
+              (p ? '<a href="https://www.google.com/maps/search/?api=1&query=' + p.lat + "," + p.lng +
+                   '" target="_blank" rel="noopener">Googleマップで場所を見る</a>' : "") + "</div></div>" +
+          (status ? '<span class="wc-status wc-status--' + e.status + '">' + esc(status) + "</span>" : "<span></span>") +
+          "</li>";
+      }).join("") + "</ul></section>";
+    });
+    box.innerHTML = html;
+  }
+
+  function setPrefecture(name, label) {
+    state.prefecture = name;
+    el("pref").value = name;
+    el("where").textContent = label || "";
+    save(name);
+    render();
+  }
+
+  function useHere() {
+    var btn = el("here");
+    if (!navigator.geolocation) { el("where").textContent = "現在地が分からないため、都道府県から選んでください"; return; }
+    el("where").textContent = "現在地を確かめています…";
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var name = W.prefectureAt(pos.coords.latitude, pos.coords.longitude, typeof PREFECTURES === "undefined" ? [] : PREFECTURES);
+      btn.setAttribute("aria-pressed", "true");
+      if (name) setPrefecture(name, "現在地から");
+      else el("where").textContent = "現在地の県が分かりませんでした";
+    }, function () {
+      el("where").textContent = "現在地が分からないため、都道府県から選んでください";
+    }, { maximumAge: 300000, timeout: 10000 });
+  }
+
+  function init() {
+    var pref = el("pref");
+    (typeof PREFECTURES === "undefined" ? [] : PREFECTURES).forEach(function (pf) {
+      var o = document.createElement("option"); o.value = pf.name; o.textContent = pf.name; pref.appendChild(o);
+    });
+    pref.onchange = function () { el("here").setAttribute("aria-pressed", "false"); setPrefecture(pref.value, ""); };
+    el("here").onclick = useHere;
+    // ⚠️ 位置の許可は押したときだけ求める。最初は前に見た県（無ければ全国）
+    setPrefecture(saved(), "");
+    loadAll();
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+</body>
+</html>

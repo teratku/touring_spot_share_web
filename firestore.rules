@@ -116,7 +116,10 @@ service cloud.firestore {
     // 二輪の通行規制（開発者が確認して登録したもの）。
     // 都道府県警察／二普協の公開情報をもとに、区間形状はこちらで作っている。
     // 投入は admin/importRestrictions.js（Admin SDK）。
-    match /road_restrictions/{id}    { allow read: if true; allow write: if false; }
+    // 通行規制（アプリ・Web が読む）。配信は調整ツール（Admin SDK）。
+    // ⚠️ 開発者は公開サイトの /dev/winter-closures.html から冬季閉鎖を直接足す・直す・消す（利用者の判断 2026-10-25）。
+    //    調整ツールは配信の前にその変更を手元へ取り込む（admin/lib/restrictionWebSync.js）
+    match /road_restrictions/{id}    { allow read: if true; allow write: if isDev(); }
     // おすすめ道路の評価（アプリの開発者向け画面で、走った実感を貯めるところ）。
     // 配信データ（road_recommend）とは別物で、ここに貯めた評価を admin の
     // 調整ツール（road-builder）が読み、人が選んで調整に取り込む。

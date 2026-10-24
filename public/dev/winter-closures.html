@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow">
+<title>冬季閉鎖の登録（開発用）</title>
+<link rel="stylesheet" href="/site.css?v=6">
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/init.js"></script>
+<script src="/winter-closures-lib.js?v=1"></script>
+<script src="/roads-lib.js?v=2"></script>
+<script src="/conquest/prefecture-data.js"></script>
+<style>
+  /*
+   * 冬季閉鎖の登録（開発用）。利用者の判断（2026-10-25）:「開発用webでも追加できるようにしたい」→ 公開サイトの /dev ページ。
+   * 本番の road_restrictions/<romaji> に直接書く（書けるのは開発者のアカウントだけ。firestore.rules の isDev）。
+   * ⚠️ 調整ツールの配信（importRestrictions.js --commit）は県を丸ごと上書きする。配信の前に、ここで足した・直した・消したものを
+   *    手元へ取り込む（restriction.editedOnWeb・doc.deletedOnWeb。admin/lib/restrictionWebSync.js）
+   */
+  .dv-badge { background: #B42828; color: #fff; font: 700 11px/1 var(--ts-font); padding: 4px 8px; border-radius: 999px; margin-left: 8px; }
+  .dv-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .dv-input, .dv-select, .dv-text { font: 14px var(--ts-font); padding: 7px 9px; border-radius: 8px; border: 1px solid #c8d3d8;
+                                     background: var(--ts-surface); color: inherit; box-sizing: border-box; }
+  .dv-date { width: 5.5em; font-variant-numeric: tabular-nums; }
+  .dv-name { flex: 1; min-width: 12em; }
+  .dv-text { width: 100%; min-height: 3.2em; resize: vertical; }
+  .dv-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .dv-item { background: var(--ts-surface); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); padding: 12px 14px;
+             display: flex; flex-direction: column; gap: 8px; }
+  .dv-meta { font-size: 12px; color: var(--ts-text-2); display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .dv-web { font-weight: 700; color: var(--ts-teal-ink); }
+  .dv-msg { font-size: 13px; min-height: 1.4em; }
+  .dv-msg.err { color: var(--ts-danger); }
+  .dv-msg.ok { color: var(--ts-green); }
+  .dv-hit { display: flex; justify-content: space-between; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ts-line); font-size: 14px; }
+  .dv-hit small { color: var(--ts-text-2); }
+  .dv-hits { max-height: 280px; overflow: auto; }
+  .dv-picked { font-size: 13px; color: var(--ts-text-2); }
+  .dv-login { max-width: 360px; margin: 24px auto; display: flex; flex-direction: column; gap: 10px; }
+  label.dv-label { font-size: 12px; color: var(--ts-text-2); }
+  @media (prefers-color-scheme: dark) {
+    .dv-input, .dv-select, .dv-text { border-color: #3A3A3C; }
+  }
+</style>
+</head>
+<body class="ts-page">
+  <header class="ts-header">
+    <div>
+      <h1 class="ts-header__title">❄️ 冬季閉鎖の登録<span class="dv-badge">開発用</span></h1>
+      <p class="ts-header__sub">本番の冬季閉鎖を直接足す・日付を直す・消す（アプリと Web の一覧にすぐ出ます）</p>
+    </div>
+    <div class="ts-header__right" id="who"></div>
+  </header>
+
+  <main class="ts-main">
+    <section id="login" class="ts-card dv-login" hidden>
+      <strong>開発者ログイン</strong>
+      <input class="dv-input" id="email" type="email" placeholder="メールアドレス" autocomplete="username">
+      <input class="dv-input" id="password" type="password" placeholder="パスワード" autocomplete="current-password">
+      <button class="ts-btn" type="button" id="loginBtn">ログイン</button>
+      <div class="dv-msg err" id="loginMsg"></div>
+    </section>
+
+    <div id="app" hidden>
+      <section class="ts-card dv-row">
+        <select class="dv-select" id="pref" aria-label="都道府県"></select>
+        <span class="dv-msg" id="msg" role="status"></span>
+      </section>
+
+      <h2 class="ts-h2">登録されている冬季閉鎖</h2>
+      <ul class="dv-list" id="list"></ul>
+
+      <h2 class="ts-h2">冬季閉鎖を足す</h2>
+      <section class="ts-card" style="display:flex;flex-direction:column;gap:10px">
+        <label class="dv-label" for="q">おすすめ道路から道を選ぶ（その県の配信中の道）</label>
+        <input class="dv-input" id="q" type="search" placeholder="道路名・番号（例: スカイライン、292）">
+        <div class="dv-hits" id="hits"></div>
+        <div class="dv-picked" id="picked">道を選んでください</div>
+        <div class="dv-row">
+          <input class="dv-input dv-name" id="newName" placeholder="アプリに出す名前（例: 志賀草津道路）">
+        </div>
+        <div class="dv-row">
+          <input class="dv-input dv-date" id="newFrom" placeholder="11/15" inputmode="numeric" aria-label="閉まる日">
+          <span>〜</span>
+          <input class="dv-input dv-date" id="newTo" placeholder="4/24" inputmode="numeric" aria-label="閉まる最後の日">
+          <span class="dv-picked">終わりは「開通日の前日」</span>
+        </div>
+        <textarea class="dv-text" id="newNote" placeholder="閉まる区間・何年の何時から何時か・出どころ（例: 天狗山ゲート〜渋峠 17.9km。2026〜27年は 11/11 13時〜4/21 10時（群馬県））"></textarea>
+        <div class="dv-row">
+          <button class="ts-btn" type="button" id="addBtn">本番に足す</button>
+          <span class="dv-msg" id="addMsg"></span>
+        </div>
+      </section>
+      <p class="ts-muted" style="margin-top:16px">
+        ⚠️ 調整ツールで規制を配信するときは、ここでの変更を先に手元へ取り込みます（importRestrictions.js が自動で行う。取り込むだけなら --pull）。
+        公開の一覧: <a href="/winter-closures.html">/winter-closures.html</a>
+      </p>
+    </div>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+  var W = window.TSSWinter, R = window.TSSRoads;
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  var SAVED = "devWinter.prefecture";
+  var state = { prefecture: "", doc: null, segments: [], picked: null, busy: false };
+  var db = null;
+
+  function today() {
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function say(id, text, ok) { var m = el(id); m.textContent = text || ""; m.className = "dv-msg" + (text ? (ok ? " ok" : " err") : ""); }
+  function romaji() { return W.ROMAJI[state.prefecture]; }
+
+  /** 閉まる期間を読む。空・片方だけ・ありえない日付は null */
+  function readPeriod(fromText, toText) {
+    return W.normalizePeriod({ from: (fromText || "").trim(), to: (toText || "").trim() });
+  }
+
+  // ---- 本番の読み書き（road_restrictions/<romaji>） ----
+  async function loadDoc() {
+    state.doc = null; render();
+    var snap = await db.collection("road_restrictions").doc(romaji()).get();
+    state.doc = snap.exists ? snap.data() : { restrictions: [] };
+    render();
+  }
+
+  /**
+   * 県の規制を1回の取引で書き換える（ほかの人・調整ツールの配信と重なっても、読んだ中身の上に足す）。
+   * ⚠️ 冬季閉鎖以外の規制（二輪通行禁止など）は触らない
+   */
+  async function mutate(change) {
+    var ref = db.collection("road_restrictions").doc(romaji());
+    await db.runTransaction(async function (tx) {
+      var snap = await tx.get(ref);
+      var data = snap.exists ? snap.data() : {};
+      var list = (data.restrictions || []).slice();
+      var deleted = (data.deletedOnWeb || []).slice();
+      change(list, deleted);
+      tx.set(ref, {
+        prefecture: state.prefecture, romaji: romaji(), count: list.length, restrictions: list,
+        deletedOnWeb: deleted, updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      }, { merge: true });
+    });
+    await loadDoc();
+  }
+
+  function stamp(r, period) {
+    r.activePeriod = period;
+    r.activeMonths = W.monthsOfPeriod(period);
+    r.checkedAt = today();
+    // ⚠️ 調整ツールが配信の前に取り込む印（admin/lib/restrictionWebSync.js）
+    r.editedOnWeb = new Date().toISOString();
+    return r;
+  }
+
+  // ---- 一覧 ----
+  function render() {
+    var list = el("list");
+    if (!state.doc) { list.innerHTML = '<li class="ts-muted">読み込んでいます…</li>'; return; }
+    var items = (state.doc.restrictions || []).filter(function (r) { return r.kind === "winterClosure"; });
+    if (!items.length) { list.innerHTML = '<li class="ts-muted">この県の冬季閉鎖はまだありません</li>'; return; }
+    var entries = W.entries(items, new Date());
+    var status = {};
+    entries.forEach(function (e) { status[e.id] = W.statusText(e) || (e.status === "closed" ? "閉鎖中" : ""); });
+    list.innerHTML = items.map(function (r) {
+      var p = W.normalizePeriod(r.activePeriod) || {};
+      return '<li class="dv-item" data-id="' + esc(r.id) + '">' +
+        '<div class="dv-row"><input class="dv-input dv-name" data-f="name" value="' + esc(r.name) + '" aria-label="名前"></div>' +
+        '<div class="dv-row"><input class="dv-input dv-date" data-f="from" value="' + esc(W.periodText(p.from)) + '" placeholder="11/15" aria-label="閉まる日">' +
+          "<span>〜</span>" +
+          '<input class="dv-input dv-date" data-f="to" value="' + esc(W.periodText(p.to)) + '" placeholder="4/24" aria-label="閉まる最後の日">' +
+          '<span class="dv-picked">' + esc(status[r.id] || "") + "</span></div>" +
+        '<textarea class="dv-text" data-f="note" aria-label="メモ">' + esc(r.note || "") + "</textarea>" +
+        '<div class="dv-meta"><span>' + esc(r.id) + "</span><span>確認日 " + esc(r.checkedAt || "-") + "</span>" +
+          (r.editedOnWeb ? '<span class="dv-web">開発用Webで変更（' + esc(String(r.editedOnWeb).slice(0, 16).replace("T", " ")) + "）</span>" : "") + "</div>" +
+        '<div class="dv-row"><button class="ts-btn" type="button" data-act="save">日付・メモを保存</button>' +
+          '<button class="ts-btn ts-btn--danger" type="button" data-act="del">消す</button>' +
+          '<span class="dv-msg" data-msg></span></div></li>';
+    }).join("");
+    list.querySelectorAll(".dv-item").forEach(function (li) {
+      var id = li.getAttribute("data-id");
+      var msg = li.querySelector("[data-msg]");
+      var f = function (k) { return li.querySelector('[data-f="' + k + '"]').value; };
+      li.querySelector('[data-act="save"]').onclick = async function () {
+        var period = readPeriod(f("from"), f("to"));
+        if (!period) { msg.className = "dv-msg err"; msg.textContent = "期間は 11/15 のように、始まりと終わりの両方を入れてください"; return; }
+        if (!f("name").trim()) { msg.className = "dv-msg err"; msg.textContent = "名前を入れてください"; return; }
+        try {
+          await mutate(function (list) {
+            var r = list.filter(function (x) { return x.id === id; })[0];
+            if (!r) throw new Error("本番に見つかりません（ほかで消された可能性）");
+            r.name = f("name").trim();
+            r.note = f("note").trim() || null;
+            stamp(r, period);
+          });
+          say("msg", "保存しました（" + state.prefecture + "）", true);
+        } catch (e) { msg.className = "dv-msg err"; msg.textContent = "保存できませんでした: " + e.message; }
+      };
+      li.querySelector('[data-act="del"]').onclick = async function () {
+        if (!confirm("「" + f("name") + "」を本番から消します。アプリと Web の一覧からも消えます。よろしいですか？")) return;
+        try {
+          await mutate(function (list, deleted) {
+            var at = list.findIndex(function (x) { return x.id === id; });
+            if (at >= 0) list.splice(at, 1);
+            if (deleted.indexOf(id) < 0) deleted.push(id);
+          });
+          say("msg", "消しました（" + state.prefecture + "）", true);
+        } catch (e) { msg.className = "dv-msg err"; msg.textContent = "消せませんでした: " + e.message; }
+      };
+    });
+  }
+
+  // ---- 足す（おすすめ道路から道を選ぶ） ----
+  async function loadSegments() {
+    state.segments = []; state.picked = null; renderHits(); renderPicked();
+    try {
+      var doc = await db.collection("road_recommend").doc("_index").get();
+      var p = (doc.exists && doc.data().prefectures) || {};
+      var entry = Object.keys(p).map(function (k) { return p[k]; }).filter(function (e) { return e && e.prefecture === state.prefecture; })[0];
+      if (!entry) return;
+      var res = await fetch("https://firebasestorage.googleapis.com/v0/b/biketeilen.appspot.com/o/" +
+        encodeURIComponent("Json/road_recommend/" + entry.fileName) + "?alt=media");
+      state.segments = res.ok ? ((await res.json()).segments || []) : [];
+    } catch (e) { console.error(e); }
+    renderHits();
+  }
+
+  function renderHits() {
+    var q = el("q").value.trim();
+    var box = el("hits");
+    if (!q) { box.innerHTML = state.segments.length ? '<p class="ts-muted">' + state.segments.length + "本の道から探せます</p>" : ""; return; }
+    var hits = state.segments.filter(function (s) {
+      return (s.name || "").indexOf(q) >= 0 || String(s.ref || "").split(";").indexOf(q) >= 0;
+    }).slice(0, 40);
+    box.innerHTML = hits.length ? hits.map(function (s) {
+      return '<div class="dv-hit"><span>' + esc(s.name) + (s.ref ? " <small>(" + esc(s.ref) + ")</small>" : "") +
+        " <small>" + Number(s.lengthKm).toFixed(1) + "km・" + esc(s.id) + "</small></span>" +
+        '<button class="ts-btn ts-btn--ghost" type="button" data-pick="' + esc(s.id) + '">選ぶ</button></div>';
+    }).join("") : '<p class="ts-muted">見つかりません</p>';
+    box.querySelectorAll("[data-pick]").forEach(function (b) {
+      b.onclick = function () {
+        state.picked = state.segments.filter(function (s) { return s.id === b.getAttribute("data-pick"); })[0] || null;
+        if (state.picked && !el("newName").value.trim()) el("newName").value = state.picked.name || "";
+        renderPicked();
+      };
+    });
+  }
+
+  function renderPicked() {
+    var s = state.picked;
+    if (!s) { el("picked").textContent = "道を選んでください"; return; }
+    var pts = R.decodePolyline(s.polyline || "");
+    var a = pts[0], b = pts[pts.length - 1];
+    el("picked").innerHTML = "選んだ道: <strong>" + esc(s.name) + "</strong>（" + Number(s.lengthKm).toFixed(1) + "km）" +
+      (a ? ' <a href="https://www.google.com/maps/dir/?api=1&origin=' + a.lat + "," + a.lng + "&destination=" + b.lat + "," + b.lng +
+        '" target="_blank" rel="noopener">Googleマップで確かめる</a>' : "");
+  }
+
+  async function add() {
+    var s = state.picked;
+    var name = el("newName").value.trim();
+    var period = readPeriod(el("newFrom").value, el("newTo").value);
+    if (!s) return say("addMsg", "おすすめ道路から道を選んでください");
+    if (!name) return say("addMsg", "名前を入れてください");
+    if (!period) return say("addMsg", "期間は 11/15 のように、始まりと終わりの両方を入れてください");
+    var id = "winter-" + romaji() + "-web" + Date.now().toString(36);
+    try {
+      await mutate(function (list) {
+        list.push(stamp({
+          id: id, kind: "winterClosure", name: name, prefecture: state.prefecture, polyline: s.polyline,
+          note: el("newNote").value.trim() || null,
+          activeDays: null, includesHoliday: false, activeHours: null, minCc: null, maxCc: null,
+          // ⚠️ 道路管理者の発表を見て入れるもの（調整ツールの出どころ survey と同じ）。dev-web は「ここで足した」の印
+          source: "dev-web", origin: "survey",
+        }, period));
+      });
+      say("addMsg", "「" + name + "」を足しました（アプリ・Web の一覧に出ます）", true);
+      el("newName").value = ""; el("newFrom").value = ""; el("newTo").value = ""; el("newNote").value = "";
+      state.picked = null; renderPicked();
+    } catch (e) { say("addMsg", "足せませんでした: " + e.message); }
+  }
+
+  // ---- ログインと県 ----
+  function setPrefecture(name) {
+    state.prefecture = name;
+    try { localStorage.setItem(SAVED, name); } catch (e) { /* 覚えられなくても動く */ }
+    say("msg", "");
+    loadDoc().catch(function (e) { say("msg", "読み込めませんでした: " + e.message); });
+    loadSegments();
+  }
+
+  function init() {
+    db = firebase.firestore();
+    var pref = el("pref");
+    (typeof PREFECTURES === "undefined" ? [] : PREFECTURES).forEach(function (pf) {
+      var o = document.createElement("option"); o.value = pf.name; o.textContent = pf.name; pref.appendChild(o);
+    });
+    var saved = "";
+    try { saved = localStorage.getItem(SAVED) || ""; } catch (e) { /* なし */ }
+    pref.value = saved || "長野県";
+    pref.onchange = function () { setPrefecture(pref.value); };
+    el("q").oninput = renderHits;
+    el("addBtn").onclick = add;
+    el("loginBtn").onclick = async function () {
+      say("loginMsg", "");
+      try { await firebase.auth().signInWithEmailAndPassword(el("email").value.trim(), el("password").value); }
+      catch (e) { say("loginMsg", "ログインできませんでした: " + (e.code || e.message)); }
+    };
+    firebase.auth().onAuthStateChanged(function (user) {
+      el("login").hidden = !!user;
+      el("app").hidden = !user;
+      el("who").innerHTML = user ? "<span>" + esc(user.email || user.uid) + '</span><button type="button" id="logout">ログアウト</button>' : "";
+      if (user) {
+        el("logout").onclick = function () { firebase.auth().signOut(); };
+        // ⚠️ 書けるかは firestore.rules（isDev）が決める。開発者でなければ保存で「権限がない」と出る
+        setPrefecture(pref.value);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+</body>
+</html>

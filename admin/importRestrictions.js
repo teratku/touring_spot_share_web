@@ -12,6 +12,9 @@
  *   node importRestrictions.js --all                      # 検証のみ（既定・書き込まない）
  *   node importRestrictions.js --prefecture 茨城県 --commit
  *   node importRestrictions.js --all --commit
+ *   node importRestrictions.js --all --pull               # 開発用Web（/dev/winter-closures.html）の変更を手元へ取り込むだけ
+ *
+ * ⚠️ --commit は配信の前に、開発用Webで本番に足した・直した・消した冬季閉鎖を手元へ取り込む（`lib/restrictionWebSync.js`）。
  *
  * ⚠️ 本番の Firestore に書き込みます。まず --commit 無しで確認してください。
  * ⚠️ 誤った区間を配信すると「通れない」と誤案内することになる。
@@ -26,6 +29,7 @@ const publishLog = require("./lib/publishLog");
 const { ROMAJI } = require("./lib/prefectureRomaji");
 const { isSellable } = require("./lib/restrictionOrigin");
 const { normalizePeriod } = require("./lib/restrictionTime");
+const { mergeWebEdits } = require("./lib/restrictionWebSync");
 
 const PROJECT_ID = "biketeilen";
 const COLLECTION = "road_restrictions";
@@ -34,6 +38,8 @@ const DATA_DIR = path.join(__dirname, "data", "road-restrictions");
 const args = process.argv.slice(2);
 const argVal = (n) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
 const COMMIT = args.includes("--commit");
+/** 開発用 Web（/dev/winter-closures.html）で本番に足した・直した・消したものを手元へ取り込むだけ（配信しない） */
+const PULL = args.includes("--pull");
 const ALL = args.includes("--all");
 const ONLY = argVal("--prefecture");
 
@@ -124,8 +130,54 @@ function validate(data) {
   return Object.assign(problems, { notSellable });
 }
 
+function initDb() {
+  if (!admin.apps.length) {
+    const keyPath = path.join(__dirname, "serviceAccount.json");
+    admin.initializeApp({
+      projectId: PROJECT_ID,
+      credential: fs.existsSync(keyPath)
+        ? admin.credential.cert(require(keyPath))
+        : admin.credential.applicationDefault(),
+    });
+  }
+  return admin.firestore();
+}
+
+/**
+ * 開発用 Web で本番に足した・直した・消したものを手元の data/road-restrictions へ取り込む（`lib/restrictionWebSync.js`）。
+ * ⚠️ **配信の前に必ず通す。** 配信は県の規制を丸ごと上書きするので、取り込まないと /dev の変更が消える・戻る
+ */
+async function pullWebEdits(db) {
+  const romajis = ONLY ? [ROMAJI[ONLY]] : Object.values(ROMAJI);
+  let changed = 0;
+  for (const romaji of romajis) {
+    if (!romaji) continue;
+    const snap = await db.collection(COLLECTION).doc(romaji).get();
+    if (!snap.exists) continue;
+    const file = path.join(DATA_DIR, `${romaji}.json`);
+    const local = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : { romaji, restrictions: [] };
+    const merged = mergeWebEdits(local.restrictions, snap.data());
+    const n = merged.added.length + merged.updated.length + merged.removed.length;
+    if (!n) continue;
+    changed += n;
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.writeFileSync(file, JSON.stringify({ romaji, updatedAt: new Date().toISOString(),
+      count: merged.restrictions.length, restrictions: merged.restrictions }, null, 1) + "\n");
+    const pref = Object.keys(ROMAJI).find((k) => ROMAJI[k] === romaji);
+    console.log(`  ⬇️  ${pref}: 開発用Webの変更を取り込んだ（足した ${merged.added.length}・直した ${merged.updated.length}・消した ${merged.removed.length}）`);
+  }
+  if (!changed) console.log("  開発用Webの変更はありません");
+  return changed;
+}
+
 async function main() {
   if (!ALL && !ONLY) { console.error("--all か --prefecture <県名> を指定してください"); process.exit(1); }
+  if (PULL || COMMIT) {
+    console.log("開発用Webの変更を確かめています…");
+    await pullWebEdits(initDb());
+    if (PULL) return;
+    console.log("");
+  }
   if (!fs.existsSync(DATA_DIR)) {
     console.error(`登録された規制がありません: ${DATA_DIR}\n  /roads の「通行規制」タブで登録してください`);
     process.exit(1);
@@ -168,16 +220,7 @@ async function main() {
   if (bad) { console.error(`\n${bad}県に問題があります。投入を中止しました`); process.exit(1); }
   if (!COMMIT) { console.log("\n書き込むには --commit を付けてください"); return; }
 
-  if (!admin.apps.length) {
-    const keyPath = path.join(__dirname, "serviceAccount.json");
-    admin.initializeApp({
-      projectId: PROJECT_ID,
-      credential: fs.existsSync(keyPath)
-        ? admin.credential.cert(require(keyPath))
-        : admin.credential.applicationDefault(),
-    });
-  }
-  const db = admin.firestore();
+  const db = initDb();
   for (const t of targets) {
     await db.collection(COLLECTION).doc(t.data.romaji).set({
       prefecture: t.prefecture,
@@ -187,6 +230,8 @@ async function main() {
       // 出典を明記する。二普協・都道府県警察の情報をもとに自前で区間を作っている
       attribution: "都道府県警察／日本二輪車普及安全協会の公開情報をもとに作成",
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      // ⚠️ /dev で消した印は取り込み済み（pullWebEdits）。残すと次の取り込みで同じ id を足し直したときに消える
+      deletedOnWeb: admin.firestore.FieldValue.delete(),
     }, { merge: true });
     console.log(`  ⬆️  ${t.prefecture} → ${COLLECTION}/${t.data.romaji}`);
   }
