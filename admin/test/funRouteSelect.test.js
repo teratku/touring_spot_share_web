@@ -722,7 +722,8 @@ test("応答に日本語が混ざっていない", () => {
       //    note       ひとこと説明
       //    regionName 地域の表示名（山梨県）。鍵は別に `region` がある
       //    どれも人が読むための固有の文字列で、鍵にはできない
-      if (/\.(name|id|title|note|regionName)$/.test(path)) return;
+      //    overrideKey 当てた調整の鍵（道路名＋始点。id と同じく道路名が入る。2026-10-21 `lib/roadOverrides.js`）
+      if (/\.(name|id|title|note|regionName|overrideKey)$/.test(path)) return;
       assert.ok(!japanese.test(value), `${path} に日本語が入っている: ${value}`);
     } else if (Array.isArray(value)) {
       value.forEach((v, i) => walk(v, `${path}[${i}]`));

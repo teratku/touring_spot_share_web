@@ -115,5 +115,7 @@ test("画面は寄ったときだけ見えているマスを取りに行き、�
   assert.match(refresh, /if \(seq !== osm\.seq\) return;/, "古い答えで描き直している");
   assert.match(refresh, /osm\.visible = r\.cells;\n.*\n  osm\.hover = null;/, "前に乗せた道の名前が、別の場所へ移っても残る");
   assert.match(html, /c\.style\.cssText = "position:absolute;pointer-events:none;";/, "キャンバスが道を足すクリックを奪う");
-  assert.match(html, /setupOsmLayer\(\);\n {2}loadWeights\(\)/, "地図を作ったときに OSM の道を用意していない");
+  // ⚠️ 間に別の層（ほかの県の登録済みの道 `setupRegisteredLayer`）が入っても通るように、initMap の中にあるかで見る。
+  //    ⚠️ html 全体に assert.match を掛けて落ちると、失敗の文に4千行の画面がそのまま入り、止まったように見える（2026-10-24）
+  assert.ok(/setupOsmLayer\(\);/.test(grab("initMap")), "地図を作ったときに OSM の道を用意していない");
 });
