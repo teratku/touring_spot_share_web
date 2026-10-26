@@ -71,6 +71,9 @@ service cloud.firestore {
     match /popularity/{doc}               { allow read: if true; allow write: if false; }
     // 走りの速さの集計（2026-10-26。Cloud Functions の roadPaceStats が1日1回書く。3人以上の道だけ・uid なし）
     match /road_pace_stats/{doc}          { allow read: if true; allow write: if false; }
+    // 走りの速さの解析の記録（2026-10-26。関数 runRoadPaceAnalysis と admin の buildRoadPaceOffline.js が書く）。
+    // ⚠️ どの共有ルート・バックアップを使ったか（ID）が入るので開発者だけ
+    match /road_pace_runs/{id}            { allow read: if isDev(); allow write: if false; }
     // 自分のいいねをまとめて読む（2026-10-07。好みの材料。アプリの RiderSignals.swift の collectionGroup("yaehCount")）。
     // ⚠️ 本人の分だけ（userID が自分のもの）。スポットごとのいいねは imagedownload の配下ルールで誰でも読めるが、
     //    ある人のいいねを全部並べることは他人にはさせない。索引（yaehCount.userID のコレクショングループ）が要る

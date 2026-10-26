@@ -512,7 +512,7 @@ exports.popularityRanking = onSchedule(
 // アプリで「走りの速さの解析に協力する」をオンにした人の道ごとの要約（road_pace）から、
 // 3人以上走った道だけ、区分（快走路・流れがよい・ゆっくり走る道・止まりがち）と平均の速さを
 // 公開の road_pace_stats/roads に書く（誰が走ったかは書かない）。2026-10-26
-const { refreshRoadPace } = require("./roadPace");
+const { refreshRoadPace, loadPaceDocs, tallyRoadPace, MIN_USERS: PACE_MIN_USERS } = require("./roadPace");
 
 exports.roadPaceStats = onSchedule(
   { schedule: "every day 04:30", timeZone: "Asia/Tokyo" },
@@ -522,6 +522,71 @@ exports.roadPaceStats = onSchedule(
     return null;
   }
 );
+
+// =====================================================
+// 走りの速さの解析をページから始める（roadPaceOffline.js・2026-10-26）
+// =====================================================
+// 利用者の要望「解析開始は Web ページで実施したい」「前回から更新されているかも確認できるようにしたい」。
+// /dev/road-pace.html から呼ぶ。開発者だけ（firestore.rules の isDev と同じ一覧）。
+//   roadPaceAnalysisStatus … 前回の解析からの変化（増えた共有ルート・バックアップ・同意の変化・アプリから届いた要約）と過去の記録
+//   runRoadPaceAnalysis    … 共有ルートと同意した人のバックアップを計算して road_pace_offline を作り直し、公開の集計（road_pace_stats）も作り直す
+const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const paceOffline = require("./roadPaceOffline");
+/** ⚠️ firestore.rules の isDev() と同じにすること（test/roadPaceAnalysis.test.js が見ている） */
+const DEV_EMAILS = ["little_busters_rin_takuya@yahoo.co.jp"];
+
+function requireDev(request) {
+  const email = request.auth && request.auth.token && request.auth.token.email;
+  if (!email || !DEV_EMAILS.includes(email)) throw new HttpsError("permission-denied", "開発者だけが使えます");
+  return email;
+}
+
+/** 集計の今の様子（計算できた道・公開に届いた道・走った人） */
+async function paceSummary() {
+  const docs = await loadPaceDocs(db);
+  const all = tallyRoadPace(docs, { minUsers: 1 });
+  return {
+    roads: all.length,
+    publicRoads: all.filter((r) => r.users >= PACE_MIN_USERS).length,
+    riders: new Set(docs.map((d) => d.uid)).size,
+  };
+}
+
+function runView(d) {
+  const x = d.data() || {};
+  return { id: d.id, ranAt: paceOffline.millis(x.ranAt) || null, by: x.by || "", via: x.via || "",
+           stat: x.stat || {}, before: x.before || null, after: x.after || null };
+}
+
+exports.roadPaceAnalysisStatus = onCall({ region: "asia-northeast1", timeoutSeconds: 120 }, async (request) => {
+  requireDev(request);
+  const [inputs, last, runs, stats] = await Promise.all([
+    paceOffline.collectInputs(db), paceOffline.lastRun(db),
+    db.collection(paceOffline.RUNS).orderBy("ranAt", "desc").limit(10).get(),
+    db.collection("road_pace_stats").doc("roads").get(),
+  ]);
+  const app = await paceOffline.appUploads(db, last ? paceOffline.millis(last.ranAt) : 0);
+  return {
+    pending: paceOffline.pendingSince(last, inputs, app),
+    runs: runs.docs.map(runView),
+    statsUpdatedAt: stats.exists ? paceOffline.millis(stats.data().updatedAt) : null,
+    summary: await paceSummary(),
+  };
+});
+
+exports.runRoadPaceAnalysis = onCall({ region: "asia-northeast1", timeoutSeconds: 540, memory: "1GiB" }, async (request) => {
+  const by = requireDev(request);
+  const lines = [];
+  const log = (m) => { lines.push(m); console.log(`runRoadPaceAnalysis: ${m}`); };
+  const before = await paceSummary();
+  const inputs = await paceOffline.collectInputs(db);
+  const { store, stat } = await paceOffline.computeOffline({ db, bucket: admin.storage().bucket(), inputs, log });
+  await paceOffline.writeOffline(db, store, admin.firestore.FieldValue);
+  await refreshRoadPace(db, admin.firestore.FieldValue);
+  const after = await paceSummary();
+  await paceOffline.recordRun(db, admin.firestore.FieldValue, { by, via: "web", inputs, stat, before, after });
+  return { stat, before, after, log: lines.slice(-200) };
+});
 
 // =====================================================
 // 投稿画像のセーフサーチ（imageModeration.js）

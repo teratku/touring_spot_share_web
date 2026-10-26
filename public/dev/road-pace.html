@@ -11,6 +11,7 @@
 <script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
 <script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-functions-compat.js"></script>
 <script defer src="/__/firebase/init.js"></script>
 <script src="/road-pace-lib.js?v=1"></script>
 <script src="/roads-lib.js?v=2"></script>
@@ -49,6 +50,24 @@
   .rp-private { font-size: 11px; color: var(--ts-text-2); }
   .rp-hist { display: inline-flex; gap: 1px; align-items: flex-end; height: 18px; vertical-align: middle; }
   .rp-hist i { display: block; width: 5px; background: var(--ts-teal); border-radius: 1px; }
+  .rp-run { display: grid; gap: 10px; margin-bottom: 14px; }
+  /* ⚠️ 中の表（min-width）で欄ごと横に広がらないように */
+  .rp-run > * { min-width: 0; }
+  .rp-run__head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+  .rp-run__title { font-weight: 700; }
+  .rp-run__state { font-size: 13px; color: var(--ts-text-2); }
+  .rp-pill { font: 700 12px/1 var(--ts-font); padding: 5px 10px; border-radius: 999px; }
+  .rp-pill--todo { background: rgba(232, 89, 12, .14); color: #B4460A; }
+  .rp-pill--ok { background: rgba(14, 159, 110, .14); color: #0B7A55; }
+  .rp-changes { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
+  .rp-changes b { font-variant-numeric: tabular-nums; }
+  .rp-result { font-size: 13px; padding: 10px 12px; border-radius: var(--ts-radius-s); background: var(--ts-surface-2); }
+  .rp-log { max-height: 160px; overflow: auto; font: 11px/1.5 ui-monospace, monospace; white-space: pre-wrap; color: var(--ts-text-2); margin-top: 6px; }
+  table.rp-hist-table { min-width: 620px; }
+  @media (prefers-color-scheme: dark) {
+    .rp-pill--todo { color: #FFB27A; }
+    .rp-pill--ok { color: #5FE0B0; }
+  }
   .rp-login { max-width: 360px; margin: 24px auto; display: flex; flex-direction: column; gap: 10px; }
   .rp-input { font: 14px var(--ts-font); padding: 7px 9px; border-radius: 8px; border: 1px solid #c8d3d8; background: var(--ts-surface); color: inherit; }
   .rp-msg { font-size: 13px; color: var(--ts-danger); min-height: 1.4em; }
@@ -77,6 +96,29 @@
     </section>
 
     <div id="app" hidden>
+      <!-- 解析（利用者の要望 2026-10-26: 解析開始はページで・前回から更新されているかも確認できるように） -->
+      <section class="ts-card rp-run" aria-label="解析">
+        <div class="rp-run__head">
+          <div>
+            <div class="rp-run__title">解析（共有ルート・同意した人のバックアップの計算 ＋ 公開の集計）</div>
+            <div class="rp-run__state" id="runState">前回の解析を確かめています…</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span id="runPill"></span>
+            <button class="ts-btn" type="button" id="runBtn" disabled>解析を始める</button>
+          </div>
+        </div>
+        <div class="rp-changes" id="runChanges"></div>
+        <div class="rp-result" id="runResult" hidden></div>
+        <details>
+          <summary class="rp-run__state" style="cursor:pointer">これまでの解析</summary>
+          <div class="rp-table-wrap" style="margin-top:8px">
+            <table class="rp rp-hist-table"><thead><tr>
+              <th>日時</th><th>どこから</th><th>共有ルート</th><th>バックアップ</th><th>読めない</th><th>計算できた道</th><th>公開の道</th><th>走った人</th>
+            </tr></thead><tbody id="runRows"></tbody></table>
+          </div>
+        </details>
+      </section>
       <div class="rp-summary" id="summary"></div>
       <div class="rp-controls" id="labels" role="group" aria-label="区分で絞る"></div>
       <div class="rp-controls">
@@ -279,12 +321,76 @@
     drawMap();
   };
 
+  // ---- 解析（関数 roadPaceAnalysisStatus・runRoadPaceAnalysis。開発者だけ） ----
+  var fns = null;
+  function callable(name) {
+    if (!fns) fns = firebase.app().functions("asia-northeast1");
+    return fns.httpsCallable(name, { timeout: 560000 });
+  }
+  function when(ms) { return ms ? new Date(ms).toLocaleString("ja-JP", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "-"; }
+  function arrow(b, a, k) { return b && a ? b[k] + " → <b>" + a[k] + "</b>" : (a ? "<b>" + a[k] + "</b>" : "-"); }
+
+  async function loadStatus() {
+    el("runState").textContent = "前回の解析を確かめています…";
+    try {
+      var r = (await callable("roadPaceAnalysisStatus")({})).data;
+      var p = r.pending;
+      el("runState").innerHTML = (p.lastRunAt ? "前回の解析 " + when(p.lastRunAt) : "まだ解析していません") +
+        "・公開の集計 " + when(r.statsUpdatedAt) + "（毎朝4:30にも自動）";
+      el("runPill").innerHTML = p.needsRun ? '<span class="rp-pill rp-pill--todo">前回から更新あり</span>' : '<span class="rp-pill rp-pill--ok">前回から変化なし</span>';
+      var item = function (label, v) { return "<span>" + label + " <b>" + v + "</b></span>"; };
+      el("runChanges").innerHTML =
+        item("増えた共有ルート", p.newShared) + item("消えた共有ルート", p.goneShared) +
+        item("増えた・更新されたバックアップ", p.newBackups) + item("消えたバックアップ", p.goneBackups) +
+        item("同意した人", p.consentUsers + "（+" + p.consentAdded + " / -" + p.consentRemoved + "）") +
+        item("共有ルートを外した人", "+" + p.excludeAdded + " / -" + p.excludeRemoved) +
+        item("アプリから届いた要約（前回以降）", p.appSince + " / " + p.appDocs) +
+        item("使う共有ルート", p.sharedTotal) + item("使うバックアップ", p.backupTotal);
+      el("runRows").innerHTML = r.runs.length ? r.runs.map(function (x) {
+        return "<tr><td>" + when(x.ranAt) + "</td><td>" + esc(x.via === "web" ? "ページ" : x.via === "pc" ? "PC" : x.via) + "</td>" +
+          '<td class="num">' + (x.stat.sharedUsed || 0) + " / " + (x.stat.shared || 0) + '</td><td class="num">' + (x.stat.backupUsed || 0) + " / " + (x.stat.backup || 0) + "</td>" +
+          '<td class="num">' + (x.stat.failed || 0) + '</td><td class="num">' + arrow(x.before, x.after, "roads") + '</td><td class="num">' + arrow(x.before, x.after, "publicRoads") +
+          '</td><td class="num">' + arrow(x.before, x.after, "riders") + "</td></tr>";
+      }).join("") : '<tr><td colspan="8">まだありません</td></tr>';
+      el("runBtn").disabled = false;
+      el("runBtn").className = p.needsRun ? "ts-btn" : "ts-btn ts-btn--ghost";
+    } catch (e) {
+      console.error(e);
+      el("runState").textContent = "前回の解析を読めませんでした: " + (e.message || e.code);
+      el("runBtn").disabled = false;
+    }
+  }
+
+  async function runAnalysis() {
+    if (!confirm("共有ルートと、同意した人のバックアップを計算し直し、公開の集計も作り直します（1〜数分）。始めますか？")) return;
+    el("runBtn").disabled = true;
+    el("runBtn").textContent = "解析しています…";
+    var box = el("runResult");
+    box.hidden = false;
+    box.innerHTML = "解析しています。このページを開いたままお待ちください…";
+    try {
+      var r = (await callable("runRoadPaceAnalysis")({})).data;
+      box.innerHTML = "✅ 解析が終わりました。共有ルート " + r.stat.sharedUsed + " / " + r.stat.shared + "本・バックアップ " +
+        r.stat.backupUsed + " / " + r.stat.backup + "本・読めない " + r.stat.failed + "<br>計算できた道 " + arrow(r.before, r.after, "roads") +
+        "・公開の道 " + arrow(r.before, r.after, "publicRoads") + "・走った人 " + arrow(r.before, r.after, "riders") +
+        '<div class="rp-log">' + esc((r.log || []).join("\n")) + "</div>";
+      state.fitted = false;
+      await load();
+    } catch (e) {
+      console.error(e);
+      box.innerHTML = "解析できませんでした: " + esc(e.message || e.code);
+    }
+    el("runBtn").textContent = "解析を始める";
+    await loadStatus();
+  }
+
   // ---- 操作 ----
   function init() {
     el("pref").onchange = function () { state.pref = el("pref").value; state.fitted = false; render(); };
     el("min").onchange = function () { state.min = Number(el("min").value); render(); };
     el("src").onchange = function () { state.src = el("src").value; render(); };
     el("reload").onclick = function () { state.fitted = false; load(); };
+    el("runBtn").onclick = runAnalysis;
     document.querySelectorAll("th[data-sort]").forEach(function (th) {
       th.onclick = function () {
         var k = th.getAttribute("data-sort");
@@ -301,7 +407,7 @@
       el("login").hidden = !!user;
       el("app").hidden = !user;
       el("who").innerHTML = user ? "<span>" + esc(user.email || user.uid) + '</span><button type="button" id="logout">ログアウト</button>' : "";
-      if (user) { el("logout").onclick = function () { firebase.auth().signOut(); }; load(); }
+      if (user) { el("logout").onclick = function () { firebase.auth().signOut(); }; load(); loadStatus(); }
     });
   }
 
