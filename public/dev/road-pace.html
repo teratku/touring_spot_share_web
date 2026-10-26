@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow">
+<title>走りの速さ（開発用）</title>
+<link rel="stylesheet" href="/site.css?v=6">
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/init.js"></script>
+<script src="/road-pace-lib.js?v=1"></script>
+<script src="/roads-lib.js?v=2"></script>
+<style>
+  /*
+   * 走りの速さ（開発用）。利用者の要望（2026-10-26）:「web では計算したものがわかるようにしたい。別のページで」→
+   * 判断「一旦開発者のみで」。アプリから届いた要約（road_pace）と PC で計算した分（road_pace_offline。共有ルート・
+   * 同意した人のバックアップ）を、関数と同じ決まり（road-pace-lib.js）で **1人から** 集計して、地図と一覧で見せる。
+   * ⚠️ 公開（アプリ・Web のおすすめ道路）に出るのは3人以上の道だけ。ここは開発者だけ（firestore.rules の isDev）
+   */
+  /* ⚠️ 下の display:flex がログイン欄の hidden を打ち消していた（ログインしてもログイン欄が残る） */
+  [hidden] { display: none !important; }
+  .dv-badge { background: #B42828; color: #fff; font: 700 11px/1 var(--ts-font); padding: 4px 8px; border-radius: 999px; margin-left: 8px; }
+  .rp-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+  .rp-stat { background: var(--ts-surface); border-radius: var(--ts-radius-s); box-shadow: var(--ts-shadow); padding: 10px 12px; }
+  .rp-stat b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+  .rp-stat span { font-size: 12px; color: var(--ts-text-2); }
+  .rp-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0 10px; }
+  .rp-chip { border: 1.5px solid var(--c, var(--ts-teal)); background: transparent; color: var(--ts-text); border-radius: 999px;
+             padding: 5px 11px; font: 600 12px/1.2 var(--ts-font); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+  .rp-chip[aria-pressed="true"] { background: var(--c, var(--ts-teal)); color: #fff; }
+  .rp-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); display: inline-block; }
+  .rp-chip[aria-pressed="true"] .rp-dot { background: #fff; }
+  .rp-select { font: 14px var(--ts-font); padding: 6px 8px; border-radius: 8px; border: 1px solid #c8d3d8; background: var(--ts-surface); color: inherit; }
+  .rp-map { width: 100%; height: 420px; border-radius: var(--ts-radius); overflow: hidden; background: #e8eef0; }
+  .rp-note { font-size: 12px; color: var(--ts-text-2); margin: 8px 0 14px; line-height: 1.6; }
+  .rp-table-wrap { overflow-x: auto; background: var(--ts-surface); border-radius: var(--ts-radius); box-shadow: var(--ts-shadow); }
+  table.rp { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 760px; }
+  table.rp th, table.rp td { padding: 8px 10px; border-bottom: 1px solid var(--ts-line); text-align: left; white-space: nowrap; }
+  table.rp th { font-size: 11px; color: var(--ts-text-2); font-weight: 700; position: sticky; top: 0; background: var(--ts-surface); cursor: pointer; }
+  table.rp td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.rp tr { cursor: pointer; }
+  table.rp tr[aria-selected="true"] td { background: rgba(0, 168, 198, .1); }
+  .rp-label { font-weight: 700; padding: 2px 8px; border-radius: 6px; color: #fff; font-size: 11px; }
+  .rp-public { font-size: 11px; font-weight: 700; color: var(--ts-green); }
+  .rp-private { font-size: 11px; color: var(--ts-text-2); }
+  .rp-hist { display: inline-flex; gap: 1px; align-items: flex-end; height: 18px; vertical-align: middle; }
+  .rp-hist i { display: block; width: 5px; background: var(--ts-teal); border-radius: 1px; }
+  .rp-login { max-width: 360px; margin: 24px auto; display: flex; flex-direction: column; gap: 10px; }
+  .rp-input { font: 14px var(--ts-font); padding: 7px 9px; border-radius: 8px; border: 1px solid #c8d3d8; background: var(--ts-surface); color: inherit; }
+  .rp-msg { font-size: 13px; color: var(--ts-danger); min-height: 1.4em; }
+  @media (prefers-color-scheme: dark) {
+    .rp-select, .rp-input { border-color: #3A3A3C; }
+    .rp-map { background: #1C1C1E; }
+  }
+</style>
+</head>
+<body class="ts-page">
+  <header class="ts-header">
+    <div>
+      <h1 class="ts-header__title">🏍️ 走りの速さ<span class="dv-badge">開発用</span></h1>
+      <p class="ts-header__sub">アプリから届いた分と、共有ルート・バックアップから計算した分を、道ごとに集計して確かめる</p>
+    </div>
+    <div class="ts-header__right" id="who"></div>
+  </header>
+
+  <main class="ts-main">
+    <section id="login" class="ts-card rp-login" hidden>
+      <strong>開発者ログイン</strong>
+      <input class="rp-input" id="email" type="email" placeholder="メールアドレス" autocomplete="username">
+      <input class="rp-input" id="password" type="password" placeholder="パスワード" autocomplete="current-password">
+      <button class="ts-btn" type="button" id="loginBtn">ログイン</button>
+      <div class="rp-msg" id="loginMsg"></div>
+    </section>
+
+    <div id="app" hidden>
+      <div class="rp-summary" id="summary"></div>
+      <div class="rp-controls" id="labels" role="group" aria-label="区分で絞る"></div>
+      <div class="rp-controls">
+        <select class="rp-select" id="pref" aria-label="都道府県"><option value="">すべての県</option></select>
+        <select class="rp-select" id="min" aria-label="人数">
+          <option value="1">1人以上</option><option value="2">2人以上</option><option value="3">3人以上（公開と同じ）</option>
+        </select>
+        <select class="rp-select" id="src" aria-label="出どころ">
+          <option value="">すべての出どころ</option><option value="app">アプリから届いた分を含む</option>
+          <option value="shared">共有ルートを含む</option><option value="backup">バックアップを含む</option>
+        </select>
+        <button class="ts-btn ts-btn--ghost" type="button" id="reload">⟳ 読み直す</button>
+      </div>
+      <div class="rp-map" id="map" aria-label="走りの速さの地図"></div>
+      <p class="rp-note" id="note"></p>
+      <div class="rp-table-wrap">
+        <table class="rp">
+          <thead><tr>
+            <th data-sort="name">道</th><th data-sort="label">区分</th><th data-sort="kmh">平均</th><th data-sort="p85">流れ</th>
+            <th data-sort="stopPct">止まり</th><th data-sort="stopsPer10km">止まった/10km</th><th data-sort="users">人</th>
+            <th data-sort="rides">回</th><th>出どころ</th><th>人ごとの平均（0〜90km/h）</th><th>公開</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+  var P = window.TSSRoadPace, R = window.TSSRoads;
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  var state = { docs: [], all: [], shapes: {}, labels: P.ORDER.slice(), pref: "", min: 1, src: "",
+                sort: "users", desc: true, selected: null, loading: false };
+  var map = null, lines = [];
+
+  // ---- 読む（開発者だけ読める。firestore.rules の isDev） ----
+  async function load() {
+    state.loading = true; render();
+    var db = firebase.firestore();
+    try {
+      var both = await Promise.all([db.collection("road_pace").get(), db.collection("road_pace_offline").get()]);
+      var docs = [];
+      both[0].forEach(function (d) { docs.push(d.data()); });
+      both[1].forEach(function (d) { docs = docs.concat(P.offlineDocs(d.data())); });
+      state.docs = docs;
+      state.all = P.tally(docs, { minUsers: 1 });
+      state.riders = new Set(docs.map(function (d) { return d.uid; })).size;
+      fillPrefectures();
+      await loadShapes();
+      el("note").textContent = "";
+    } catch (e) {
+      console.error(e);
+      el("note").textContent = "読めませんでした: " + e.message + "（開発者のアカウントでログインしているか確かめてください）";
+    }
+    state.loading = false;
+    render();
+  }
+
+  /** 道の形（配信中のおすすめ道路から。アプリ・Web と同じ道の鍵で引く） */
+  async function loadShapes() {
+    var prefs = {};
+    state.all.forEach(function (r) { var p = P.prefectureOfKey(r.key); if (p) prefs[p] = true; });
+    var idx = await firebase.firestore().collection("road_recommend").doc("_index").get();
+    var entries = Object.values((idx.exists && idx.data().prefectures) || {}).filter(function (e) { return e && prefs[e.prefecture]; });
+    var lists = await Promise.all(entries.map(function (e) {
+      return fetch("https://firebasestorage.googleapis.com/v0/b/biketeilen.appspot.com/o/" +
+          encodeURIComponent("Json/road_recommend/" + e.fileName) + "?alt=media")
+        .then(function (r) { return r.ok ? r.json() : { segments: [] }; })
+        .then(function (f) { return f.segments || []; }).catch(function () { return []; });
+    }));
+    R.grouped([].concat.apply([], lists)).forEach(function (road) {
+      state.shapes[road.id] = road.polylines.map(R.decodePolyline);
+    });
+  }
+
+  function fillPrefectures() {
+    var names = {};
+    state.all.forEach(function (r) { var p = P.prefectureOfKey(r.key); if (p) names[p] = (names[p] || 0) + 1; });
+    var sel = el("pref"), keep = sel.value;
+    sel.innerHTML = '<option value="">すべての県</option>' + Object.keys(names).sort().map(function (n) {
+      return '<option value="' + esc(n) + '">' + esc(n) + "（" + names[n] + "）</option>";
+    }).join("");
+    sel.value = keep;
+  }
+
+  // ---- 出す道 ----
+  function shown() {
+    var list = state.all.filter(function (r) {
+      return r.users >= state.min && state.labels.indexOf(r.label) >= 0 &&
+        (!state.pref || P.prefectureOfKey(r.key) === state.pref) &&
+        (!state.src || (r.sources[state.src] || 0) > 0);
+    });
+    var k = state.sort, dir = state.desc ? -1 : 1;
+    return list.sort(function (a, b) {
+      var x = a[k], y = b[k];
+      if (x == null) return 1; if (y == null) return -1;
+      return (x < y ? -1 : x > y ? 1 : 0) * dir || (b.users - a.users);
+    });
+  }
+
+  function render() {
+    renderSummary();
+    renderLabels();
+    renderRows();
+    drawMap();
+  }
+
+  function renderSummary() {
+    var pub = state.all.filter(function (r) { return r.users >= P.MIN_USERS; }).length;
+    var src = { app: 0, shared: 0, backup: 0 };
+    state.all.forEach(function (r) { Object.keys(r.sources).forEach(function (s) { src[s] = (src[s] || 0) + r.sources[s]; }); });
+    var stat = function (v, l) { return '<div class="rp-stat"><b>' + v + "</b><span>" + l + "</span></div>"; };
+    el("summary").innerHTML = state.loading ? stat("…", "読み込み中") :
+      stat(state.all.length, "計算できた道") + stat(pub, "公開に届いた道（3人以上）") + stat(state.riders || 0, "走った人") +
+      stat(src.app || 0, "アプリから届いた回") + stat(src.shared || 0, "共有ルートの回") + stat(src.backup || 0, "バックアップの回");
+  }
+
+  function renderLabels() {
+    var counts = {};
+    state.all.forEach(function (r) { counts[r.label] = (counts[r.label] || 0) + 1; });
+    el("labels").innerHTML = P.ORDER.map(function (k) {
+      return '<button type="button" class="rp-chip" style="--c:' + P.COLORS[k] + '" data-label="' + k + '" aria-pressed="' +
+        (state.labels.indexOf(k) >= 0) + '"><span class="rp-dot"></span>' + P.LABELS[k] + " " + (counts[k] || 0) + "</button>";
+    }).join("") + '<span class="rp-note" style="margin:0">快走路 ' + P.FAST_KMH + "km/h 以上・流れがよい " + P.SMOOTH_KMH +
+      "〜" + P.FAST_KMH + "・止まりがち＝止まっていた時間 " + P.STOPGO_PCT + "% 以上</span>";
+    el("labels").querySelectorAll("[data-label]").forEach(function (b) {
+      b.onclick = function () {
+        var k = b.getAttribute("data-label"), i = state.labels.indexOf(k);
+        if (i >= 0) state.labels.splice(i, 1); else state.labels.push(k);
+        render();
+      };
+    });
+  }
+
+  function histHtml(h) {
+    var max = Math.max.apply(null, h.concat([1]));
+    return '<span class="rp-hist" title="' + h.map(function (n, i) { return i * 10 + "km/h〜: " + n + "人"; }).join(" / ") + '">' +
+      h.map(function (n) { return '<i style="height:' + Math.max(n ? 3 : 1, Math.round(n / max * 18)) + 'px;opacity:' + (n ? 1 : .25) + '"></i>'; }).join("") + "</span>";
+  }
+
+  function renderRows() {
+    var list = shown();
+    if (state.loading) { el("rows").innerHTML = '<tr><td colspan="11">読み込んでいます…</td></tr>'; return; }
+    if (!list.length) { el("rows").innerHTML = '<tr><td colspan="11">当てはまる道がありません</td></tr>'; return; }
+    el("rows").innerHTML = list.map(function (r) {
+      var srcs = Object.keys(r.sources).map(function (s) { return (P.SOURCES[s] || s) + " " + r.sources[s]; }).join("・");
+      return '<tr data-key="' + esc(r.key) + '" aria-selected="' + (r.key === state.selected) + '">' +
+        "<td>" + esc(r.name || r.key) + '<br><span class="rp-private">' + esc(P.prefectureOfKey(r.key)) + (state.shapes[r.key] ? "" : "・形なし") + "</span></td>" +
+        '<td><span class="rp-label" style="background:' + P.COLORS[r.label] + '">' + P.LABELS[r.label] + "</span></td>" +
+        '<td class="num">' + r.kmh + 'km/h</td><td class="num">' + r.p85 + 'km/h</td><td class="num">' + r.stopPct + "%</td>" +
+        '<td class="num">' + (r.stopsPer10km == null ? "-" : r.stopsPer10km) + '</td><td class="num">' + r.users + '</td><td class="num">' + r.rides + "</td>" +
+        "<td>" + esc(srcs) + "</td><td>" + histHtml(r.hist) + "</td>" +
+        "<td>" + (r.users >= P.MIN_USERS ? '<span class="rp-public">公開中</span>' : '<span class="rp-private">あと' + (P.MIN_USERS - r.users) + "人</span>") + "</td></tr>";
+    }).join("");
+    el("rows").querySelectorAll("tr[data-key]").forEach(function (tr) {
+      tr.onclick = function () { select(tr.getAttribute("data-key")); };
+    });
+  }
+
+  // ---- 地図 ----
+  function drawMap() {
+    if (!map || !window.google) return;
+    lines.forEach(function (l) { l.setMap(null); });
+    lines = [];
+    var bounds = new google.maps.LatLngBounds(), any = false;
+    shown().forEach(function (r) {
+      var shape = state.shapes[r.key];
+      if (!shape) return;
+      var sel = r.key === state.selected;
+      shape.forEach(function (path) {
+        var line = new google.maps.Polyline({ path: path, map: map, strokeColor: P.COLORS[r.label],
+          strokeOpacity: sel ? 1 : 0.85, strokeWeight: sel ? 7 : (r.users >= P.MIN_USERS ? 5 : 3), zIndex: sel ? 10 : r.users });
+        line.addListener("click", function () { select(r.key); });
+        lines.push(line);
+        path.forEach(function (p) { bounds.extend(p); any = true; });
+      });
+    });
+    if (any && !state.selected && !state.fitted) { map.fitBounds(bounds, 30); state.fitted = true; }
+  }
+
+  function select(key) {
+    state.selected = state.selected === key ? null : key;
+    renderRows(); drawMap();
+    var shape = state.shapes[state.selected];
+    if (shape && map) {
+      var b = new google.maps.LatLngBounds();
+      shape.forEach(function (path) { path.forEach(function (p) { b.extend(p); }); });
+      map.fitBounds(b, 50);
+    }
+    var tr = document.querySelector('tr[data-key="' + CSS.escape(key) + '"]');
+    if (tr) tr.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  window.onRoadPaceMapReady = function () {
+    map = new google.maps.Map(el("map"), { center: { lat: 36.2, lng: 138.3 }, zoom: 6, mapTypeControl: false, streetViewControl: false });
+    drawMap();
+  };
+
+  // ---- 操作 ----
+  function init() {
+    el("pref").onchange = function () { state.pref = el("pref").value; state.fitted = false; render(); };
+    el("min").onchange = function () { state.min = Number(el("min").value); render(); };
+    el("src").onchange = function () { state.src = el("src").value; render(); };
+    el("reload").onclick = function () { state.fitted = false; load(); };
+    document.querySelectorAll("th[data-sort]").forEach(function (th) {
+      th.onclick = function () {
+        var k = th.getAttribute("data-sort");
+        state.desc = state.sort === k ? !state.desc : k !== "name";
+        state.sort = k; renderRows();
+      };
+    });
+    el("loginBtn").onclick = async function () {
+      el("loginMsg").textContent = "";
+      try { await firebase.auth().signInWithEmailAndPassword(el("email").value.trim(), el("password").value); }
+      catch (e) { el("loginMsg").textContent = "ログインできませんでした: " + (e.code || e.message); }
+    };
+    firebase.auth().onAuthStateChanged(function (user) {
+      el("login").hidden = !!user;
+      el("app").hidden = !user;
+      el("who").innerHTML = user ? "<span>" + esc(user.email || user.uid) + '</span><button type="button" id="logout">ログアウト</button>' : "";
+      if (user) { el("logout").onclick = function () { firebase.auth().signOut(); }; load(); }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=onRoadPaceMapReady"></script>
+</body>
+</html>

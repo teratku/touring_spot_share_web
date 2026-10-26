@@ -202,9 +202,12 @@ service cloud.firestore {
     }
     // PC で計算した走りの速さ（2026-10-26。admin の buildRoadPaceOffline.js が共有ルートと同意した人のバックアップから書く）。
     // 本人は読めるだけ。退会は functions-auth の cleanupDeletedUser が消す
-    match /road_pace_offline/{uid} { allow read: if isOwner(uid); allow write: if false; }
+    // ⚠️ 開発者は全員分を読める（/dev/road-pace.html で計算の結果を確かめる。利用者の判断 2026-10-26「一旦開発者のみで」）
+    match /road_pace_offline/{uid} { allow read: if isOwner(uid) || isDev(); allow write: if false; }
     match /road_pace/{id} {
       allow read, delete: if signedIn() && resource.data.uid == request.auth.uid;
+      // 開発者は全員分を読める（/dev/road-pace.html）
+      allow read: if isDev();
       allow create, update: if signedIn()
         && request.resource.data.uid == request.auth.uid
         && id.matches(request.auth.uid + '_.+')

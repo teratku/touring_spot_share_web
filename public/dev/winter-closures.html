@@ -22,6 +22,8 @@
    * ⚠️ 調整ツールの配信（importRestrictions.js --commit）は県を丸ごと上書きする。配信の前に、ここで足した・直した・消したものを
    *    手元へ取り込む（restriction.editedOnWeb・doc.deletedOnWeb。admin/lib/restrictionWebSync.js）
    */
+  /* ⚠️ 下の display:flex がログイン欄の hidden を打ち消していた（ログインしてもログイン欄が残る） */
+  [hidden] { display: none !important; }
   .dv-badge { background: #B42828; color: #fff; font: 700 11px/1 var(--ts-font); padding: 4px 8px; border-radius: 999px; margin-left: 8px; }
   .dv-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
   .dv-input, .dv-select, .dv-text { font: 14px var(--ts-font); padding: 7px 9px; border-radius: 8px; border: 1px solid #c8d3d8;
