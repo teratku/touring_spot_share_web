@@ -47,10 +47,19 @@ function labelOf({ kmh, stopPct }) {
  *   hist … 人ごとの平均の速さの分布（10km/h ごと・[0-10, 10-20, … 90+]）。調整ツールで見る
  */
 function tallyRoadPace(docs, { minUsers = MIN_USERS, maxItems = MAX_ITEMS } = {}) {
-  const byRoad = new Map();
+  // ⚠️ 同じ人の同じ道は1票にまとめる（アプリから届いた分 road_pace と PC で計算した分 road_pace_offline の両方があるとき）
+  const merged = new Map();
   for (const doc of docs) {
     if (!doc || typeof doc.roadID !== "string" || !doc.roadID || typeof doc.uid !== "string") continue;
-    const rides = (Array.isArray(doc.rides) ? doc.rides : [])
+    const key = doc.uid + "\u0000" + doc.roadID;
+    const m = merged.get(key) || { uid: doc.uid, roadID: doc.roadID, roadName: "", rides: [] };
+    if (typeof doc.roadName === "string" && doc.roadName) m.roadName = doc.roadName;
+    m.rides.push(...(Array.isArray(doc.rides) ? doc.rides : []));
+    merged.set(key, m);
+  }
+  const byRoad = new Map();
+  for (const doc of merged.values()) {
+    const rides = doc.rides
       .filter((r) => r && r.cc !== "moped50" && Number.isFinite(r.kmh) && Number.isFinite(r.km) && r.km > 0);
     if (!rides.length) continue;
     // 1人を1票に（その人の回の中央値）
@@ -92,9 +101,22 @@ function tallyRoadPace(docs, { minUsers = MIN_USERS, maxItems = MAX_ITEMS } = {}
  * 集計して公開の road_pace_stats/roads に書く。
  * 形: { roads: { <道の鍵>: {name, users, rides, kmh, p85, stopPct, stopsPer10km, label, hist} }, labels, updatedAt }
  */
+/** PC で計算した分（road_pace_offline/{uid} の roads）を road_pace と同じ形の並びに */
+function offlineDocs(data) {
+  if (!data || typeof data.uid !== "string" || !data.roads || typeof data.roads !== "object") return [];
+  return Object.entries(data.roads).map(([roadID, v]) => ({
+    uid: data.uid, roadID, roadName: (v && v.name) || "", rides: (v && v.rides) || [],
+  }));
+}
+
+/** 集計の元をすべて読む（アプリから届いた分と、共有ルート・同意した人のバックアップから PC で計算した分） */
+async function loadPaceDocs(db) {
+  const [online, offline] = await Promise.all([db.collection("road_pace").get(), db.collection("road_pace_offline").get()]);
+  return [...online.docs.map((d) => d.data()), ...offline.docs.flatMap((d) => offlineDocs(d.data()))];
+}
+
 async function refreshRoadPace(db, FieldValue) {
-  const snap = await db.collection("road_pace").get();
-  const docs = snap.docs.map((d) => d.data());
+  const docs = await loadPaceDocs(db);
   const list = tallyRoadPace(docs);
   const roads = {};
   for (const r of list) {
@@ -107,4 +129,4 @@ async function refreshRoadPace(db, FieldValue) {
   return { docs: docs.length, roads: list.length };
 }
 
-module.exports = { tallyRoadPace, labelOf, median, refreshRoadPace, LABELS, MIN_USERS, FAST_KMH, SMOOTH_KMH, STOPGO_PCT };
+module.exports = { tallyRoadPace, labelOf, median, refreshRoadPace, loadPaceDocs, offlineDocs, LABELS, MIN_USERS, FAST_KMH, SMOOTH_KMH, STOPGO_PCT };

@@ -200,6 +200,9 @@ service cloud.firestore {
       allow create: if isOwner(uid) && isValidWebRoute(request.resource.data);
       allow update: if isOwner(uid) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['openedAt']);
     }
+    // PC で計算した走りの速さ（2026-10-26。admin の buildRoadPaceOffline.js が共有ルートと同意した人のバックアップから書く）。
+    // 本人は読めるだけ。退会は functions-auth の cleanupDeletedUser が消す
+    match /road_pace_offline/{uid} { allow read: if isOwner(uid); allow write: if false; }
     match /road_pace/{id} {
       allow read, delete: if signedIn() && resource.data.uid == request.auth.uid;
       allow create, update: if signedIn()

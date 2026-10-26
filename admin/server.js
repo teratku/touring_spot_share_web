@@ -667,7 +667,7 @@ app.get("/api/roads/feedback", async (req, res) => {
  *    ここは開発者用なので **1人から** 数える（`minUsers: 1`。何人分か分かるよう users を必ず見せる）。
  *    集計の決まりは Cloud Functions と同じ（functions/roadPace.js をそのまま使う）。uid は返さない
  */
-const { tallyRoadPace, MIN_USERS: PACE_MIN_USERS } = require("../functions/roadPace");
+const { tallyRoadPace, loadPaceDocs, MIN_USERS: PACE_MIN_USERS } = require("../functions/roadPace");
 let paceCache = null; // { t, pace }
 app.get("/api/roads/pace", async (req, res) => {
   const fresh = req.query.refresh === "1";
@@ -675,9 +675,8 @@ app.get("/api/roads/pace", async (req, res) => {
     return res.json({ pace: paceCache.pace, minPublicUsers: PACE_MIN_USERS, cached: true });
   }
   try {
-    const snap = await db.collection("road_pace").get();
-    const docs = [];
-    snap.forEach((doc) => docs.push(doc.data() || {}));
+    // アプリから届いた分と PC で計算した分（buildRoadPaceOffline.js）の両方
+    const docs = await loadPaceDocs(db);
     const pace = {};
     for (const r of tallyRoadPace(docs, { minUsers: 1 })) { const { key, ...rest } = r; pace[key] = rest; }
     paceCache = { t: Date.now(), pace };

@@ -57,3 +57,14 @@ test("規則: 本人だけ書けて読めて、集計は誰でも読めて誰も
   assert.ok(/match \/road_pace\/\{id\}[\s\S]*?request\.resource\.data\.uid == request\.auth\.uid[\s\S]*?isValidRoadPace/.test(rules));
   assert.ok(rules.includes("match /road_pace_stats/{doc}          { allow read: if true; allow write: if false; }"));
 });
+
+test("アプリから届いた分と PC で計算した分は、同じ人の同じ道なら1票", () => {
+  const { offlineDocs } = require("../roadPace");
+  const out = tallyRoadPace([
+    doc("a", "r:x", [ride(40)]),
+    ...offlineDocs({ uid: "a", roads: { "r:x": { name: "テスト峠線", rides: [ride(60, { cc: "unknown", src: "shared" })] } } }),
+    doc("b", "r:x", [ride(50)]), doc("c", "r:x", [ride(52)]),
+  ]);
+  assert.strictEqual(out[0].users, 3, "同じ人を2人と数えた");
+  assert.strictEqual(out[0].rides, 4);
+});
