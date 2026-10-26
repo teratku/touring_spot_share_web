@@ -58,6 +58,12 @@
   .rd-kind { font-size: 11px; padding: 1px 7px; border-radius: 999px; background: #eef2f4; }
   .rd-toll { font-size: 11px; font-weight: 700; color: #C05A00; background: rgba(255, 149, 0, .14); padding: 1px 7px; border-radius: 6px; }
   .rd-dist { flex: none; font-size: 12px; color: var(--ts-text-2); }
+  .rd-pace { font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 6px; font-variant-numeric: tabular-nums; }
+  .rd-pace--fast { color: #00785A; background: rgba(0, 140, 102, .13); }
+  .rd-pace--smooth { color: #007E95; background: rgba(0, 168, 198, .13); }
+  .rd-pace--slow { color: #8A5A2B; background: rgba(160, 110, 60, .14); }
+  .rd-pace--stopgo { color: #B05A00; background: rgba(255, 149, 0, .15); }
+  .rd-pace-detail { margin-top: 4px; }
   .rd-detail { margin-top: 8px; font-size: 13px; }
   .rd-detail a { font-weight: 600; }
   .rd-plus { display: flex; gap: 12px; align-items: center; padding: 14px; border-radius: var(--ts-radius); margin-top: 8px;
@@ -73,6 +79,10 @@
     .rd-kind { background: #2C2C2E; }
     .rd-map { background: #1C1C1E; }
     .rd-toll { color: #FFB340; }
+    .rd-pace--fast { color: #4FD1A5; }
+    .rd-pace--smooth { color: #5ED3EA; }
+    .rd-pace--slow { color: #D9A877; }
+    .rd-pace--stopgo { color: #FFB340; }
     .rd-select { border-color: #3A3A3C; }
   }
 </style>
@@ -134,6 +144,8 @@
     center: null, centerLabel: "", isHere: false,
     radiusKm: 50, filter: { tags: [], kinds: [] }, sort: "score",
     roads: [], all: [], popularity: {}, unlimited: false, loggedIn: false,
+    // 走った人の速さ（road_pace_stats/roads。3人以上走った道だけ。利用者の判断 2026-10-26）
+    pace: {},
     selectedId: null, loading: false, generation: 0,
     // プランに追加（利用者の要望 2026-10-12）。plans は本人のプラン、add は詳細の欄の選択と知らせ
     plans: [], add: { goalAtEnd: true, planId: "", msg: "", ok: false, busy: false },
@@ -221,6 +233,20 @@
     for (var i = 0; i < 5; i++) out += i < n ? "◆" : '<span class="off">◆</span>';
     return '<span class="rd-stars" title="曲がり具合 ' + n + '/5">' + out + "</span>";
   }
+  /** 走りの速さの区分（アプリの RoadPaceStat.labelText と同じ言葉） */
+  var PACE_LABELS = { fast: "快走路", smooth: "流れがよい", slow: "ゆっくり走る道", stopgo: "止まりがち" };
+  function paceChip(r) {
+    var p = state.pace[r.id];
+    if (!p || !PACE_LABELS[p.label]) return "";
+    return '<span class="rd-pace rd-pace--' + p.label + '" title="' + p.users + '人の走りから">' +
+      PACE_LABELS[p.label] + " " + p.kmh + "km/h</span>";
+  }
+  function paceDetail(r) {
+    var p = state.pace[r.id];
+    if (!p || !PACE_LABELS[p.label]) return "";
+    return '<div class="rd-pace-detail">走った人の速さ: <strong>' + PACE_LABELS[p.label] + "</strong>・平均 " + p.kmh +
+      "km/h（流れの速さ " + p.p85 + "km/h・止まっていた時間 " + p.stopPct + "%・" + p.users + "人の走りから）</div>";
+  }
   function tollText(r) {
     if (!r.toll) return "";
     return '<span class="rd-toll">' + (r.toll === "full" ? "有料道路" : "一部が有料" + (r.tollKm ? "（" + r.tollKm.toFixed(1) + "km）" : "")) + "</span>";
@@ -262,7 +288,7 @@
         (r.note ? '<div class="rd-note">' + esc(r.note) + "</div>" : "") +
         '<div class="rd-meta">' + stars(R.windingStars(r.curvinessDegPerKm)) +
         "<span>全長" + r.lengthKm.toFixed(0) + "km</span>" +
-        '<span class="rd-kind">' + esc(R.highwayLabel(r.highway)) + "</span>" + tollText(r) +
+        '<span class="rd-kind">' + esc(R.highwayLabel(r.highway)) + "</span>" + tollText(r) + paceChip(r) +
         (users ? "<span>👥 " + users + "人が選びました</span>" : "") + "</div>" +
         (selected ? detailOf(r) : "") + "</div>" +
         (dist ? '<span class="rd-dist">' + dist + "</span>" : "") + "</li>";
@@ -281,6 +307,7 @@
       ? "<div>この道の区間: " + r.parts.map(function (x) { return esc(x.name) + "（" + Number(x.lengthKm).toFixed(1) + "km）"; }).join("・") + "</div>" : "";
     return '<div class="rd-detail">' + parts +
       "<div>曲がり " + Math.round(r.curvinessDegPerKm) + "°/km・点数 " + r.score.toFixed(1) + "</div>" +
+      paceDetail(r) +
       '<div style="margin-top:6px"><a href="https://www.google.com/maps/search/?api=1&query=' + p.lat + "," + p.lng +
       '" target="_blank" rel="noopener">Googleマップで入口を開く</a>' +
       ' ・ <a href="' + APP_STORE + '" target="_blank" rel="noopener">アプリでルートにする</a></div>' + addPanel(r) + "</div>";
@@ -499,6 +526,11 @@
     firebase.firestore().doc("popularity/roads").get().then(function (d) {
       state.popularity = R.popularRoadUsers(d.exists ? d.data() : {}); render();
     }).catch(function () { /* 人気が読めなくても一覧は出す */ });
+
+    // 走った人の速さ（誰でも読める。3人以上走った道だけ入っている）
+    firebase.firestore().doc("road_pace_stats/roads").get().then(function (d) {
+      state.pace = (d.exists && d.data().roads) || {}; render();
+    }).catch(function () { /* 読めなくても一覧は出す */ });
 
     // ⚠️ サブスクの状態はログインが決まってから（subscription.js）。決まるまでは無料として出す
     TSSSubscription.onReady(function (s) {

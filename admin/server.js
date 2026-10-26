@@ -661,6 +661,33 @@ app.get("/api/roads/feedback", async (req, res) => {
 });
 
 /**
+ * 走った人の速さ（アプリの RoadPace が road_pace に書く道ごとの要約）を道ごとにまとめて返す。
+ *
+ * ⚠️ 利用者の判断（2026-10-26）: 調整ツールでも見る（公開の集計 road_pace_stats は3人以上の道だけ）。
+ *    ここは開発者用なので **1人から** 数える（`minUsers: 1`。何人分か分かるよう users を必ず見せる）。
+ *    集計の決まりは Cloud Functions と同じ（functions/roadPace.js をそのまま使う）。uid は返さない
+ */
+const { tallyRoadPace, MIN_USERS: PACE_MIN_USERS } = require("../functions/roadPace");
+let paceCache = null; // { t, pace }
+app.get("/api/roads/pace", async (req, res) => {
+  const fresh = req.query.refresh === "1";
+  if (!fresh && paceCache && Date.now() - paceCache.t < REVIEWS_TTL_MS) {
+    return res.json({ pace: paceCache.pace, minPublicUsers: PACE_MIN_USERS, cached: true });
+  }
+  try {
+    const snap = await db.collection("road_pace").get();
+    const docs = [];
+    snap.forEach((doc) => docs.push(doc.data() || {}));
+    const pace = {};
+    for (const r of tallyRoadPace(docs, { minUsers: 1 })) { const { key, ...rest } = r; pace[key] = rest; }
+    paceCache = { t: Date.now(), pace };
+    res.json({ pace, minPublicUsers: PACE_MIN_USERS, cached: false });
+  } catch (e) {
+    res.status(500).json({ error: e.message, pace: {} });
+  }
+});
+
+/**
  * 送られた感想の一覧（開発者だけ・読むだけ）。画面は public/feedback.html（http://127.0.0.1:4317/feedback）。
  * ⚠️ 利用者の要望（2026-10-18）:「送付されたデータを開発者がwebで確認できるようにしたい」。
  *    道ごとのまとめは調整画面（/roads の「走った人の声」）、ここは1件ずつ新しい順

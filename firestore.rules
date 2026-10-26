@@ -69,6 +69,8 @@ service cloud.firestore {
     // みんなの人気（2026-10-07。選んだ人数。Cloud Functions の popularityRanking が1日1回書く）。
     // ⚠️ 数と名前だけで誰が選んだかは入っていない（3人以上のものだけ）。アプリからは書かせない
     match /popularity/{doc}               { allow read: if true; allow write: if false; }
+    // 走りの速さの集計（2026-10-26。Cloud Functions の roadPaceStats が1日1回書く。3人以上の道だけ・uid なし）
+    match /road_pace_stats/{doc}          { allow read: if true; allow write: if false; }
     // 自分のいいねをまとめて読む（2026-10-07。好みの材料。アプリの RiderSignals.swift の collectionGroup("yaehCount")）。
     // ⚠️ 本人の分だけ（userID が自分のもの）。スポットごとのいいねは imagedownload の配下ルールで誰でも読めるが、
     //    ある人のいいねを全部並べることは他人にはさせない。索引（yaehCount.userID のコレクショングループ）が要る
@@ -130,6 +132,37 @@ service cloud.firestore {
     // ⚠️ 本人だけが書けて読める（文書IDは「uid_道のまとめキー」・中身の uid も本人）。
     //    調整ツールが Admin SDK で読んで集計し、札は人が採用する（配信へ自動では流さない。road_reviews と同じ考え）。
     // ⚠️ 形は RoadFeedback.payload と同じにすること（鍵・判定・札・注意・ひとことの長さ）
+    // 走りの速さの要約（2026-10-26。アプリの RoadPace が書く。設定で選んだ人だけ）。
+    // ⚠️ 道ごとの数字だけ。線・時刻は入れさせない（日は「年-月」まで）
+    function isValidRoadPaceRide(r) {
+      return r is map
+        && r.keys().hasOnly(['ym', 'km', 'kmh', 'p85', 'stops', 'stopPct', 'cc'])
+        && r.ym is string && r.ym.matches('^[0-9]{4}-[0-9]{2}$')
+        && r.km is number && r.km >= 0 && r.km < 500
+        && r.kmh is number && r.kmh >= 0 && r.kmh <= 200
+        && r.p85 is number && r.p85 >= 0 && r.p85 <= 200
+        && r.stops is int && r.stops >= 0 && r.stops < 1000
+        && r.stopPct is int && r.stopPct >= 0 && r.stopPct <= 100
+        && r.cc in ['moped50', 'small125', 'medium250', 'large'];
+    }
+    function isValidRoadPace(d) {
+      return d.keys().hasOnly(['uid', 'roadID', 'roadName', 'rides', 'updatedAt'])
+        && d.keys().hasAll(['uid', 'roadID', 'rides', 'updatedAt'])
+        && d.roadID is string && d.roadID.size() > 0 && d.roadID.size() <= 300
+        && (!('roadName' in d) || (d.roadName is string && d.roadName.size() <= 100))
+        && d.rides is list && d.rides.size() >= 1 && d.rides.size() <= 10
+        && isValidRoadPaceRide(d.rides[0])
+        && (d.rides.size() < 2 || isValidRoadPaceRide(d.rides[1]))
+        && (d.rides.size() < 3 || isValidRoadPaceRide(d.rides[2]))
+        && (d.rides.size() < 4 || isValidRoadPaceRide(d.rides[3]))
+        && (d.rides.size() < 5 || isValidRoadPaceRide(d.rides[4]))
+        && (d.rides.size() < 6 || isValidRoadPaceRide(d.rides[5]))
+        && (d.rides.size() < 7 || isValidRoadPaceRide(d.rides[6]))
+        && (d.rides.size() < 8 || isValidRoadPaceRide(d.rides[7]))
+        && (d.rides.size() < 9 || isValidRoadPaceRide(d.rides[8]))
+        && (d.rides.size() < 10 || isValidRoadPaceRide(d.rides[9]))
+        && d.updatedAt == request.time;
+    }
     function isValidRoadFeedback(d) {
       return d.keys().hasOnly(['uid', 'roadID', 'roadName', 'verdict', 'tags', 'cautions', 'note', 'rideKm', 'rodeAt', 'updatedAt'])
         && d.keys().hasAll(['uid', 'roadID', 'verdict', 'updatedAt'])
@@ -166,6 +199,13 @@ service cloud.firestore {
       allow read, delete: if isOwner(uid);
       allow create: if isOwner(uid) && isValidWebRoute(request.resource.data);
       allow update: if isOwner(uid) && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['openedAt']);
+    }
+    match /road_pace/{id} {
+      allow read, delete: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create, update: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && id.matches(request.auth.uid + '_.+')
+        && isValidRoadPace(request.resource.data);
     }
     match /road_feedback/{id} {
       allow read, delete: if signedIn() && resource.data.uid == request.auth.uid;

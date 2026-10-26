@@ -361,6 +361,7 @@ const state = {
   // 選んだ道の両端に出す印（既定で出す）
   endMarkers: [],
   reviews: {},          // アプリの評価ツールで付いた評価（読むだけ）
+  pace: {},             // 走った人の速さ（アプリの RoadPace の道ごとの要約を1人から集計。読むだけ。2026-10-26）
   feedback: {},         // 走った人の声（アプリの「走った道の感想」。道ごとの人数。読むだけ。2026-10-08）
   // 通行規制と重なっているおすすめ道路（区間id → 重なっている規制の一覧）
   restricted: {},
@@ -612,6 +613,7 @@ async function loadPrefecture(romaji, { keepView = false } = {}) {
     loadRestricted(romaji),
     loadReviews(),
     loadFeedback(),
+    loadPace(),
   ]);
   state.segments = seg.segments || [];
   state.prefName = seg.prefecture || "";
@@ -676,6 +678,16 @@ async function loadFeedback({ refresh = false } = {}) {
     state.feedback = r.feedback || {};
   } catch {
     state.feedback = {};
+  }
+}
+
+async function loadPace({ refresh = false } = {}) {
+  if (!refresh && Object.keys(state.pace).length) return;
+  try {
+    const r = await (await fetch("/api/roads/pace" + (refresh ? "?refresh=1" : ""))).json();
+    state.pace = r.pace || {};
+  } catch {
+    state.pace = {};
   }
 }
 
@@ -2459,6 +2471,29 @@ function reviewBlock(seg) {
  *    （声をそのまま配信へ流さない。少ない数や思い違いがそのまま出てしまう）
  */
 const FEEDBACK_CAUTIONS = { rough: "路面が荒い", narrow: "狭い", traffic: "交通量が多い", gravel: "砂利" };
+/**
+ * 編集パネルに出す「走った人の速さ」（アプリの RoadPace）。無ければ何も出さない。
+ * ⚠️ ここは1人から出す。公開（アプリ・Web）は3人以上の道だけ（functions/roadPace.js の MIN_USERS）
+ */
+const PACE_LABELS = { fast: "快走路", smooth: "流れがよい", slow: "ゆっくり走る道", stopgo: "止まりがち" };
+function paceBlock(seg) {
+  const p = state.pace[feedbackKeyOf(seg)] || state.pace[reviewKey(seg)];
+  if (!p) return "";
+  const max = Math.max(1, ...p.hist);
+  const bars = p.hist.map((n, i) => `<div title="${i * 10}〜${i === 9 ? "" : i * 10 + 10}km/h: ${n}人"
+      style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:2px">
+      <div style="width:100%;height:${Math.round(n / max * 36)}px;background:var(--accent, #00A8C6);border-radius:2px"></div>
+      <span class="muted" style="font-size:9px">${i * 10}</span></div>`).join("");
+  return `
+    <label>走った人の速さ（${p.users}人・${p.rides}回）${p.users < 3 ? '<span class="muted">　※3人未満なので公開されていません</span>' : ""}</label>
+    <div class="review">
+      <div><strong>${PACE_LABELS[p.label] || p.label}</strong>・平均 ${p.kmh}km/h ・ 流れ ${p.p85}km/h ・
+           止まっていた ${p.stopPct}% ・ 止まった ${p.stopsPer10km ?? "-"}回/10km</div>
+      <div style="display:flex;gap:2px;height:52px;margin-top:6px">${bars}</div>
+      <div class="muted">人ごとの平均の速さ（km/h）</div>
+    </div>`;
+}
+
 function feedbackBlock(seg) {
   const fb = feedbackOf(seg);
   if (!fb) return "";
@@ -2557,6 +2592,7 @@ function renderEditor() {
     </div>
 
     ${reviewBlock(seg)}
+    ${paceBlock(seg)}
     ${feedbackBlock(seg)}
 
     <label>道の形</label>
@@ -2833,7 +2869,7 @@ $("addRoad").onclick = () => {
 
 $("reloadReviews").onclick = async () => {
   setStatus("評価を取り直しています…");
-  await Promise.all([loadReviews({ refresh: true }), loadFeedback({ refresh: true })]);
+  await Promise.all([loadReviews({ refresh: true }), loadFeedback({ refresh: true }), loadPace({ refresh: true })]);
   render();
   renderEditor();
   const n = Object.keys(state.reviews).length;

@@ -507,6 +507,23 @@ exports.popularityRanking = onSchedule(
 );
 
 // =====================================================
+// おすすめ道路ごとの走りの速さを1日1回集計する（roadPace.js）
+// =====================================================
+// アプリで「走りの速さの解析に協力する」をオンにした人の道ごとの要約（road_pace）から、
+// 3人以上走った道だけ、区分（快走路・流れがよい・ゆっくり走る道・止まりがち）と平均の速さを
+// 公開の road_pace_stats/roads に書く（誰が走ったかは書かない）。2026-10-26
+const { refreshRoadPace } = require("./roadPace");
+
+exports.roadPaceStats = onSchedule(
+  { schedule: "every day 04:30", timeZone: "Asia/Tokyo" },
+  async () => {
+    const result = await refreshRoadPace(db, admin.firestore.FieldValue);
+    console.log(`roadPaceStats: ${result.docs}件の要約から 道${result.roads}件`);
+    return null;
+  }
+);
+
+// =====================================================
 // 投稿画像のセーフサーチ（imageModeration.js）
 // =====================================================
 // 投稿の写真（images/）とプロフィール画像（userIcon/）が上がったら Cloud Vision で調べ、
