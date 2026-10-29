@@ -1030,6 +1030,12 @@
         font-weight: 600;
       }
 
+      /* スポット付きのルート（共有のときにアプリが spotCount を書く・2026-10-29 利用者の要望） */
+      .route-spots {
+        color: #C2620A;
+        font-weight: 600;
+      }
+
       /* ========== クラスタ詳細パネル ========== */
       .cluster-panel {
         position: fixed;
@@ -2007,6 +2013,10 @@
                         <span>📍</span>
                         <span>距離: {{ (route.distance / 1000).toFixed(1) }} km</span>
                       </div>
+                      <div v-if="route.spotCount > 0" class="route-meta-row route-spots">
+                        <span>📷</span>
+                        <span>スポット {{ route.spotCount }}</span>
+                      </div>
                       <div class="route-meta-row">
                         <span>🗓</span>
                         <span>{{ formatRouteDate(route.createdAt) }}</span>
@@ -2296,6 +2306,7 @@
                 
                 <div class="route-list-item-meta">
                   <span>📏 {{ (route.distance / 1000).toFixed(1) }} km</span>
+                  <span v-if="route.spotCount > 0" class="route-spots">📷 スポット {{ route.spotCount }}</span>
                   <span>📅 {{ formatRouteDate(route.createdAt) }}</span>
                 </div>
               </div>

@@ -161,6 +161,17 @@
       border-radius: 20px;
       backdrop-filter: blur(2px);
     }
+    /* スポット付きのルート（共有のときにアプリが spotCount を書く・2026-10-29 利用者の要望）。地図のスポットの印と同じオレンジ */
+    .route-spot-chip {
+      position: absolute;
+      right: 10px; bottom: 10px;
+      background: #E07A12;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
     .route-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
     .route-title {
       font-size: 15px;
@@ -301,6 +312,7 @@
           >
           <div v-else class="route-cover-placeholder">🛣️</div>
           <span class="route-distance-chip" v-if="route.distance">📏 {{ formatDistance(route.distance) }}</span>
+          <span class="route-spot-chip" v-if="route.spotCount > 0">📷 スポット {{ route.spotCount }}</span>
         </div>
         <div class="route-body">
           <div class="route-title">{{ displayTitle(route) }}</div>
