@@ -13,3 +13,6 @@ data/restriction-candidates/
 # OSM から拾った候補（自動生成の中間物）。fetchOsmRestrictions.js で作り直せる。
 # ⚠️ 配信するのは、これを見て人が登録した data/road-restrictions/ の方
 data/restriction-osm/
+
+# 毎週の「今週閉まる道」の画像（buildWeeklyClosures.js）。画像は git に入れない
+generated/weekly-closures/

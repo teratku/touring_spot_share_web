@@ -834,6 +834,22 @@ node buildRoadIndex.js --prefecture 茨城県   # 先に道路の索引を作る
 （道路長は直線距離を下回れない）ことに気付けたのは、全件を並べて見比べたから。
 1件ずつの地図確認だけでは見えにくい矛盾が、一覧なら見つけやすい。
 
+## 8. X の「今週閉まる道」の画像（毎週）
+
+本番の冬季閉鎖（road_restrictions を**読むだけ**）から、X 用の画像（1600×900）と投稿文を作る。
+
+```bash
+node buildWeeklyClosures.js                    # 明日から8日（水曜に走らせて木曜21時に投稿する前提）
+node buildWeeklyClosures.js --from 2027-04-15  # 日付を指定（春は「今週開く道」になる）
+```
+
+- 出力は `generated/weekly-closures/<始まりの日>/card.png`・`post.txt`（git には入れない）
+- 毎週水曜18時（10〜6月）に Claude の予定の作業「【毎週水曜】今週閉まる道の X 画像」が走らせて、画像と文を送ってくる。**投稿は自分で**
+- 今冬の発表が無い道（メモに「未発表」）は「例年の日付」の札・投稿文では「*」。発表が出たら開発用 Web で直してから作り直す
+- 時刻はメモの「11/11 13時」を拾えたときだけ出る
+- 投稿文は X の数え方（日本語は2・URL は23）で 280 に収まるまで行を減らす（`lib/weeklyClosures.js` の `xLength`）
+- 画像は Chrome の headless で撮る（`/Applications/Google Chrome.app` が要る）
+
 ---
 
 # 信号データ（案内の「この交差点で」）
