@@ -1337,6 +1337,8 @@
                     position: { lat: m.lat, lng: m.lng }, map: map, title: spot.name, icon: icon, zIndex: 10
                   });
                   marker.addListener('click', () => {
+                    // ⚠️ 写真の分だけ吹き出しが高い。地図の上の端にある印だと吹き出しの上が切れたので、印を真ん中へ寄せてから開く
+                    map.panTo(marker.getPosition());
                     spotInfoWindow.setContent(this.spotInfoContent(spot));
                     spotInfoWindow.open({ map: map, anchor: marker });
                   });
