@@ -615,6 +615,7 @@
       }
     </style>
     <script src="/menu.js?v=8" defer></script>
+    <script src="/route-spots.js?v=1" defer></script>
     <link rel="stylesheet" href="/site.css?v=6">
     <style>
       body.ts-page { background: var(--ts-bg); color: var(--ts-text); }
@@ -854,6 +855,7 @@
       let map = null;
       let routePath = null;
       let markers = [];
+      let spotInfoWindow = null;  // スポットの印を押したときの吹き出し（1つを使い回す）
 
       document.addEventListener('DOMContentLoaded', async function() {
         try {
@@ -1287,12 +1289,88 @@
                   const bounds = new google.maps.LatLngBounds();
                   coordinates.forEach(coord => bounds.extend(coord));
                   map.fitBounds(bounds);
+
+                  // ルートに登録されたスポット（アプリと同じく、共有する範囲の中だけ）
+                  this.showSpotMarkers();
                   console.log('Map bounds adjusted');
 
                   console.log('Route displayed on map successfully!');
                 } catch (error) {
                   console.error('Error displaying route on map:', error);
                 }
+              },
+
+              // 🆕 スポットの印を出し、押したら名前・写真と「詳細を見る」を出す（2026-10-29 利用者の要望）
+              //    選び方は route-spots.js（アプリの SharedRouteShareText.spotMarkers の写し）。投稿していないスポットは出さない
+              //    ⚠️ 印の spotID はドキュメントの ID のことも、項目 spotID のこともある（アプリの openSpotDetail と同じ探し方）
+              async showSpotMarkers() {
+                if (!map || !window.TSSRouteSpots || !this.routeData) return;
+                const list = TSSRouteSpots.spotMarkers(this.routeData);
+                if (!list.length) return;
+                const db = firebase.firestore();
+                const col = db.collection('imagedownload');
+                if (!spotInfoWindow) spotInfoWindow = new google.maps.InfoWindow();
+                const icon = {
+                  url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">' +
+                    '<circle cx="18" cy="18" r="16" fill="#F28C28" stroke="#fff" stroke-width="3"/>' +
+                    '<rect x="10" y="13" width="16" height="11" rx="2" fill="#fff"/>' +
+                    '<rect x="14" y="10.5" width="8" height="4" rx="1" fill="#fff"/>' +
+                    '<circle cx="18" cy="18.5" r="3.4" fill="#F28C28"/></svg>'),
+                  scaledSize: new google.maps.Size(36, 36),
+                  anchor: new google.maps.Point(18, 18)
+                };
+                for (const m of list) {
+                  let doc = null;
+                  try {
+                    doc = await col.doc(m.spotID).get();
+                    if (!doc.exists) {
+                      const q = await col.where('spotID', '==', m.spotID).limit(1).get();
+                      doc = q.docs[0] || null;
+                    }
+                  } catch (e) {
+                    console.warn('スポットの取得に失敗:', m.spotID, e);
+                  }
+                  if (!doc || !doc.exists) continue;
+                  const spot = TSSRouteSpots.spotSummary(doc.id, doc.data());
+                  const marker = new google.maps.Marker({
+                    position: { lat: m.lat, lng: m.lng }, map: map, title: spot.name, icon: icon, zIndex: 10
+                  });
+                  marker.addListener('click', () => {
+                    spotInfoWindow.setContent(this.spotInfoContent(spot));
+                    spotInfoWindow.open({ map: map, anchor: marker });
+                  });
+                  markers.push(marker);
+                }
+              },
+
+              // 吹き出しの中身（投稿された名前は textContent で入れる）
+              spotInfoContent(spot) {
+                const box = document.createElement('div');
+                box.style.cssText = 'max-width:220px;font-family:inherit';
+                if (spot.image) {
+                  const img = document.createElement('img');
+                  img.src = spot.image;
+                  img.alt = '';
+                  img.style.cssText = 'width:100%;height:120px;object-fit:cover;border-radius:8px;display:block;margin-bottom:8px';
+                  box.appendChild(img);
+                }
+                const name = document.createElement('div');
+                name.textContent = spot.name;
+                name.style.cssText = 'font-weight:700;font-size:15px;color:#0B3A48';
+                box.appendChild(name);
+                if (spot.area) {
+                  const area = document.createElement('div');
+                  area.textContent = spot.area;
+                  area.style.cssText = 'font-size:12px;color:#5A7A84;margin-top:2px';
+                  box.appendChild(area);
+                }
+                const link = document.createElement('a');
+                link.href = spot.url;
+                link.textContent = '詳細を見る →';
+                link.style.cssText = 'display:inline-block;margin-top:8px;font-weight:700;color:#00839B;text-decoration:none';
+                box.appendChild(link);
+                return box;
               },
 
               async downloadRoute() {
