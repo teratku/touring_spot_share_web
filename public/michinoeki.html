@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>道の駅マップ | ツーリングスポットシェア</title>
+<meta name="description" content="全国の道の駅を地図で。行った道の駅と、まだの道の駅、都道府県ごとの達成数がひと目で分かります。" />
+<link rel="canonical" href="https://biketeilen.web.app/michinoeki.html" />
+<meta name="apple-itunes-app" content="app-id=1466607921" />
+<link rel="stylesheet" href="/site.css?v=6">
+<script defer src="/__/firebase/12.4.0/firebase-app-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-firestore-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-auth-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-storage-compat.js"></script>
+<script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
+<script defer src="/__/firebase/init.js"></script>
+<!-- 点と都道府県の数え方はアプリの「道の駅マップ」と同じ（michinoeki-map.js） -->
+<script src="/michinoeki-map.js?v=1"></script>
+<script defer src="/analytics.js?v=2"></script>
+<script defer src="/menu.js?v=9"></script>
+<style>
+  /*
+   * 道の駅マップ（利用者の要望 2026-10-30:「道の駅マップみたいなものがあるとわかりやすい」→「webも同じようにしたい」）。
+   * アプリの MichiNoEkiMapView と同じく、訪問済み=緑・まだ=灰色の点、すべて/訪問済み/まだ、都道府県ごとの n/全数。
+   * ⚠️ 訪問はアプリの端末の中にある。Web はクラウドのバックアップ（micinoEkiBackUp/{uid}）を読む。
+   *    アプリの実績 › 道の駅「Webの道の駅マップにも出す」をオンにした人は、訪問が増えるたびに書かれる
+   * ⚠️ ログインしていなくても一覧（全駅・灰色）は見られる
+   */
+  .me-main { max-width: 1120px; }
+  .me-summary { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; }
+  .me-count { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+  .me-count b { font-size: 32px; line-height: 1; color: var(--ts-green); }
+  .me-count span { font-size: 15px; color: var(--ts-text-2); }
+  .me-bar { grid-column: 1 / -1; height: 8px; border-radius: 999px; background: var(--ts-surface-2); overflow: hidden; }
+  .me-bar > i { display: block; height: 100%; background: var(--ts-gradient); border-radius: inherit; min-width: 4px; }
+  .me-note { grid-column: 1 / -1; font-size: 13px; color: var(--ts-text-2); line-height: 1.6; margin: 0; }
+  .me-note a { font-weight: 600; }
+  .me-seg { display: inline-flex; background: var(--ts-surface-2); border-radius: 10px; padding: 3px; gap: 2px; }
+  .me-seg button { border: none; background: transparent; color: var(--ts-text); font: 600 13px/1.2 var(--ts-font);
+                   padding: 7px 14px; border-radius: 8px; cursor: pointer; }
+  .me-seg button[aria-pressed="true"] { background: var(--ts-surface); box-shadow: 0 1px 3px rgba(16, 24, 32, .15); }
+  .me-seg button:focus-visible, .me-pref:focus-visible, .me-recent button:focus-visible { outline: 3px solid var(--ts-teal); outline-offset: 2px; }
+
+  .me-layout { display: grid; grid-template-columns: 1fr 300px; gap: 12px; margin-top: 12px; align-items: start; }
+  .me-mapwrap { position: relative; border-radius: var(--ts-radius); overflow: hidden; box-shadow: var(--ts-shadow); background: var(--ts-surface-2); }
+  #map { height: min(72vh, 680px); min-height: 360px; }
+  .me-legend { position: absolute; top: 10px; left: 10px; display: flex; gap: 10px; align-items: center;
+               background: var(--ts-surface); color: var(--ts-text); border-radius: 999px; padding: 5px 12px;
+               font-size: 12px; box-shadow: var(--ts-shadow); }
+  .me-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 4px; border: 1.5px solid #fff; }
+  .me-dot--v { background: var(--ts-green); }
+  .me-dot--u { background: #8E8E93; width: 8px; height: 8px; }
+  .me-card { position: absolute; left: 10px; right: 10px; bottom: 10px; background: var(--ts-surface); color: var(--ts-text);
+             border-radius: 14px; box-shadow: 0 6px 24px rgba(0, 0, 0, .2); padding: 14px 44px 14px 16px; }
+  .me-card[hidden] { display: none; }
+  .me-card h3 { margin: 0; font-size: 17px; }
+  .me-card .pref { font-size: 12px; color: var(--ts-text-2); margin-top: 2px; }
+  .me-card .visits { font-size: 14px; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .me-card .visits.v { color: var(--ts-green); font-weight: 600; }
+  .me-card .visits.u { color: var(--ts-text-2); }
+  .me-card .first { font-size: 12px; color: var(--ts-text-2); margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .me-card .links { margin-top: 8px; font-size: 13px; }
+  .me-close { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; border-radius: 50%; border: none;
+              background: var(--ts-surface-2); color: var(--ts-text-2); font-size: 16px; cursor: pointer; }
+
+  .me-side { display: flex; flex-direction: column; gap: 12px; }
+  .me-side h2 { font-size: 13px; letter-spacing: .04em; color: var(--ts-text-2); margin: 0 0 8px; font-weight: 700; }
+  .me-prefs { list-style: none; margin: 0; padding: 0; max-height: min(60vh, 520px); overflow: auto; display: flex; flex-direction: column; gap: 2px; }
+  .me-pref { width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; align-items: center; text-align: left;
+             border: none; background: transparent; color: var(--ts-text); padding: 7px 8px; border-radius: 8px;
+             font: 14px/1.3 var(--ts-font); cursor: pointer; }
+  .me-pref:hover { background: var(--ts-surface-2); }
+  .me-pref[aria-pressed="true"] { background: rgba(0, 168, 198, .12); }
+  .me-pref .n { font-size: 12px; color: var(--ts-text-2); font-variant-numeric: tabular-nums; }
+  .me-pref .mini { grid-column: 1 / -1; height: 4px; border-radius: 999px; background: var(--ts-surface-2); overflow: hidden; }
+  .me-pref .mini > i { display: block; height: 100%; background: var(--ts-green); }
+  .me-pref.done .name::after { content: " 👑"; }
+  .me-recent { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .me-recent button { width: 100%; display: flex; justify-content: space-between; gap: 8px; border: none; background: var(--ts-surface-2);
+                      color: var(--ts-text); border-radius: 8px; padding: 8px 10px; font: 14px/1.3 var(--ts-font); cursor: pointer; text-align: left; }
+  .me-recent .d { font-size: 12px; color: var(--ts-text-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .me-empty { font-size: 13px; color: var(--ts-text-2); margin: 0; }
+  .me-error { padding: 28px 12px; text-align: center; color: var(--ts-text-2); }
+
+  @media (max-width: 860px) {
+    .me-layout { grid-template-columns: 1fr; }
+    #map { height: 62vh; }
+    .me-prefs { max-height: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 4px; }
+  }
+  @media (max-width: 520px) {
+    .me-summary { grid-template-columns: 1fr; }
+    .me-seg { width: 100%; }
+    .me-seg button { flex: 1; }
+  }
+</style>
+</head>
+<body class="ts-page">
+  <header class="ts-header">
+    <div>
+      <h1 class="ts-header__title">🚏 道の駅マップ</h1>
+      <p class="ts-header__sub">行った道の駅と、まだの道の駅（アプリの実績と同じ）</p>
+    </div>
+  </header>
+
+  <main class="ts-main me-main">
+    <section class="ts-card me-summary" aria-label="訪問の数">
+      <div class="me-count" aria-live="polite"><b id="visited">–</b><span id="total">/ – 駅に行きました</span></div>
+      <div class="me-seg" role="group" aria-label="表示する道の駅">
+        <button type="button" data-filter="all" aria-pressed="true">すべて</button>
+        <button type="button" data-filter="visited" aria-pressed="false">訪問済み</button>
+        <button type="button" data-filter="unvisited" aria-pressed="false">まだ</button>
+      </div>
+      <div class="me-bar" aria-hidden="true"><i id="bar" style="width:0"></i></div>
+      <p class="me-note" id="note">道の駅を読み込んでいます…</p>
+    </section>
+
+    <div class="me-layout">
+      <div class="me-mapwrap">
+        <div id="map" role="region" aria-label="道の駅の地図"></div>
+        <div class="me-legend" aria-hidden="true"><span><i class="me-dot me-dot--v"></i>訪問済み</span><span><i class="me-dot me-dot--u"></i>まだ</span></div>
+        <div class="me-card" id="card" hidden aria-live="polite"></div>
+      </div>
+      <aside class="me-side">
+        <section class="ts-card" aria-labelledby="recent-h" id="recent-box" hidden>
+          <h2 id="recent-h">直近の訪問</h2>
+          <ul class="me-recent" id="recent"></ul>
+        </section>
+        <section class="ts-card" aria-labelledby="pref-h">
+          <h2 id="pref-h">都道府県ごと</h2>
+          <ul class="me-prefs" id="prefs"></ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="ts-footer">
+    <nav aria-label="サイトの案内">
+      <a href="/about.html">アプリ紹介</a>
+      <a href="/support.html">サポート</a>
+      <a href="/privacypolicy/privacypolicy.html">プライバシーポリシー</a>
+      <a href="/termsofservice/termsofservice.html">利用規約</a>
+    </nav>
+    <div>© ツーリングスポットシェア（biketeilen）</div>
+  </footer>
+
+<script>
+(function () {
+  "use strict";
+  var M = window.TSSMichiNoEki;
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+  var MASTER_DOC = "MicinoEki/Er8LxHYCLfcEu9Oy7dTE";
+  var MASTER_CACHE = "michinoeki.master";
+  var GREEN = "#228B22", GRAY = "#8E8E93", TEAL = "#00A8C6";
+
+  var state = { master: null, visits: [], items: [], filter: "all", selected: null, prefecture: "",
+                user: null, backupDate: null, autoSync: false, failed: false };
+  var map = null, markers = {}, mapsWaiters = [];
+
+  window.onMichiNoEkiMapsReady = function () { mapsWaiters.splice(0).forEach(function (f) { f(); }); mapsWaiters = null; };
+  function whenMaps(f) { if (mapsWaiters === null) f(); else mapsWaiters.push(f); }
+
+  function fmtDate(t) { var d = new Date(t); return d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate(); }
+
+  // ---- 読み込み ----
+  async function loadMaster(db) {
+    var doc = await db.doc(MASTER_DOC).get();
+    var fileName = doc.exists ? doc.data().fileName : null;
+    if (!fileName) throw new Error("no fileName");
+    try {
+      var cached = JSON.parse(localStorage.getItem(MASTER_CACHE) || "null");
+      if (cached && cached.fileName === fileName && Array.isArray(cached.list)) return cached.list;
+    } catch (e) { /* 読めなければ取り直す */ }
+    var url = await firebase.storage().ref("Json/" + fileName).getDownloadURL();
+    var list = await (await fetch(url)).json();
+    try { localStorage.setItem(MASTER_CACHE, JSON.stringify({ fileName: fileName, list: list })); } catch (e) { /* 入らなくてもよい */ }
+    return list;
+  }
+
+  async function loadVisits(db, uid) {
+    var snap = await db.collection("micinoEkiBackUp").doc(uid).get();
+    if (!snap.exists) return { visits: [], date: null, autoSync: false };
+    var data = snap.data() || {};
+    return { visits: M.parseBackup(data.backupData) || [],
+             date: data.backupDate && data.backupDate.toDate ? data.backupDate.toDate() : null,
+             autoSync: data.autoSync === true };
+  }
+
+  function rebuild() {
+    state.items = M.items(state.master || [], state.visits);
+    render();
+  }
+
+  // ---- 表示 ----
+  function render() {
+    var items = state.items;
+    var visited = items.filter(M.isVisited).length;
+    el("visited").textContent = state.user ? visited : "–";
+    el("total").textContent = "/ " + items.length.toLocaleString() + " 駅に行きました";
+    el("bar").style.width = (items.length && state.user ? (visited / items.length * 100) : 0) + "%";
+    renderNote();
+    renderPrefs();
+    renderRecent();
+    renderMarkers();
+    renderCard();
+  }
+
+  function renderNote() {
+    var n = el("note");
+    if (state.failed) { n.textContent = "道の駅を読み込めませんでした。時間をおいて開き直してください。"; return; }
+    if (!state.master) { n.textContent = "道の駅を読み込んでいます…"; return; }
+    if (!state.user) {
+      n.innerHTML = '全国 ' + state.items.length.toLocaleString() + ' 駅の道の駅です。<a href="/login.html?redirect=' + encodeURIComponent("/michinoeki.html") +
+        '">ログイン</a>すると、アプリで記録した訪問が緑で出ます。';
+      return;
+    }
+    var how = "アプリの「実績」›「道の駅訪問」で「Webの道の駅マップにも出す」をオンにすると、訪問を記録するたびにここへ届きます。";
+    if (!state.backupDate) { n.textContent = "まだアプリから訪問が届いていません。" + how; return; }
+    n.textContent = state.autoSync
+      ? "アプリから " + fmtDate(state.backupDate) + " に届いた訪問を出しています。"
+      : "アプリのバックアップ（" + fmtDate(state.backupDate) + "）の訪問を出しています。" + how;
+  }
+
+  function renderPrefs() {
+    var prefs = M.prefectures(state.items);
+    var html = '<li><button type="button" class="me-pref" data-pref="" aria-pressed="' + (state.prefecture === "") + '"><span class="name">全国</span><span class="n"></span></button></li>';
+    html += prefs.map(function (p) {
+      var pct = p.total ? Math.round(p.visited / p.total * 100) : 0;
+      return '<li><button type="button" class="me-pref' + (p.complete && state.user ? " done" : "") + '" data-pref="' + esc(p.name) + '" aria-pressed="' + (state.prefecture === p.name) + '">' +
+        '<span class="name">' + esc(p.name) + '</span><span class="n">' + (state.user ? p.visited : "–") + " / " + p.total + '</span>' +
+        '<span class="mini" aria-hidden="true"><i style="width:' + (state.user ? pct : 0) + '%"></i></span></button></li>';
+    }).join("");
+    el("prefs").innerHTML = html;
+  }
+
+  function renderRecent() {
+    var list = state.user ? M.recent(state.items, 5) : [];
+    el("recent-box").hidden = !list.length;
+    el("recent").innerHTML = list.map(function (r) {
+      return '<li><button type="button" data-id="' + esc(r.id) + '"><span>' + esc(r.name) + '</span><span class="d">' + fmtDate(r.date) + '</span></button></li>';
+    }).join("");
+  }
+
+  function icon(item, selected) {
+    var v = M.isVisited(item);
+    return { path: google.maps.SymbolPath.CIRCLE, fillColor: v ? GREEN : GRAY, fillOpacity: v ? 1 : .85,
+             strokeColor: selected ? TEAL : "#fff", strokeWeight: selected ? 4 : (v ? 2 : 1.5),
+             scale: selected ? (v ? 11 : 9) : (v ? 7 : 4.5) };
+  }
+
+  function renderMarkers() {
+    if (!map) return;
+    state.items.forEach(function (item) {
+      var m = markers[item.id];
+      if (!m) {
+        m = new google.maps.Marker({ position: { lat: item.lat, lng: item.lng }, title: item.name, optimized: true });
+        m.addListener("click", function () { select(item.id, false); });
+        markers[item.id] = m;
+      }
+      var sel = item.id === state.selected;
+      m.setIcon(icon(item, sel));
+      m.setZIndex(sel ? 3 : (M.isVisited(item) ? 2 : 1));
+      var shown = sel || M.shows(state.filter, item);
+      if (shown !== (m.getMap() === map)) m.setMap(shown ? map : null);
+    });
+  }
+
+  function renderCard() {
+    var card = el("card");
+    var item = state.items.find(function (i) { return i.id === state.selected; });
+    if (!item) { card.hidden = true; card.innerHTML = ""; return; }
+    var dates = item.visitDates;
+    var visits = !state.user
+      ? '<div class="visits u">ログインすると訪問が出ます</div>'
+      : dates.length
+        ? '<div class="visits v">✓ 訪問 ' + dates.length + '回・最後 ' + fmtDate(dates[dates.length - 1]) + '</div>' +
+          (dates.length > 1 ? '<div class="first">はじめて ' + fmtDate(dates[0]) + '</div>' : "")
+        : '<div class="visits u">まだ訪問していません</div>';
+    var gmaps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(item.lat + "," + item.lng);
+    card.innerHTML = '<button type="button" class="me-close" aria-label="閉じる">✕</button>' +
+      '<h3>' + esc(item.name) + '</h3>' + (item.prefecture ? '<div class="pref">' + esc(item.prefecture) + '</div>' : "") + visits +
+      '<div class="links"><a href="' + gmaps + '" target="_blank" rel="noopener">Google マップで開く</a></div>';
+    card.hidden = false;
+    card.querySelector(".me-close").onclick = function () { select(null); };
+  }
+
+  function select(id, pan) {
+    state.selected = id;
+    renderMarkers();
+    renderCard();
+    var item = id && state.items.find(function (i) { return i.id === id; });
+    if (item && pan && map) { map.panTo({ lat: item.lat, lng: item.lng }); if (map.getZoom() < 10) map.setZoom(11); }
+  }
+
+  function fit(prefecture) {
+    if (!map) return;
+    var list = state.items.filter(function (i) { return !prefecture || i.prefecture === prefecture; });
+    if (!list.length) return;
+    if (list.length === 1) { map.setCenter({ lat: list[0].lat, lng: list[0].lng }); map.setZoom(11); return; }
+    var b = new google.maps.LatLngBounds();
+    list.forEach(function (i) { b.extend({ lat: i.lat, lng: i.lng }); });
+    map.fitBounds(b, 24);
+  }
+
+  function initMap() {
+    map = new google.maps.Map(el("map"), {
+      center: { lat: 37.5, lng: 137.5 }, zoom: 5, streetViewControl: false, mapTypeControl: false,
+      fullscreenControl: true, clickableIcons: false, gestureHandling: "greedy"
+    });
+    map.addListener("click", function () { select(null); });
+    if (state.items.length) { renderMarkers(); fit(""); }
+  }
+
+  // ---- 操作 ----
+  document.querySelectorAll(".me-seg button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.filter = b.getAttribute("data-filter");
+      document.querySelectorAll(".me-seg button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      renderMarkers();
+    });
+  });
+  el("prefs").addEventListener("click", function (e) {
+    var b = e.target.closest(".me-pref"); if (!b) return;
+    state.prefecture = b.getAttribute("data-pref") || "";
+    state.selected = null;
+    renderPrefs(); renderMarkers(); renderCard();
+    fit(state.prefecture);
+    if (window.innerWidth <= 860) el("map").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+  el("recent").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-id]"); if (!b) return;
+    select(b.getAttribute("data-id"), true);
+    if (window.innerWidth <= 860) el("map").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  // ---- 起動 ----
+  var s = document.createElement("script");
+  s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCBayWrK7IGm5Ceow4uQ_kt02Y2YJaKdG4&callback=onMichiNoEkiMapsReady";
+  s.async = true;
+  document.head.appendChild(s);
+  whenMaps(initMap);
+
+  window.addEventListener("load", function () {
+    var tries = 0;
+    (function ready() {
+      if (typeof firebase === "undefined" || !firebase.firestore || !firebase.storage) {
+        if (tries++ < 50) return setTimeout(ready, 100);
+        state.failed = true; renderNote(); return;
+      }
+      var db = firebase.firestore();
+      loadMaster(db).then(function (list) {
+        state.master = list;
+        rebuild();
+        if (map) fit("");
+      }).catch(function (e) { console.warn("道の駅の一覧を読めなかった", e); state.failed = true; renderNote(); });
+      firebase.auth().onAuthStateChanged(function (user) {
+        state.user = user || null;
+        if (!user) { state.visits = []; state.backupDate = null; rebuild(); return; }
+        loadVisits(db, user.uid).then(function (r) {
+          state.visits = r.visits; state.backupDate = r.date; state.autoSync = r.autoSync;
+          rebuild();
+        }).catch(function (e) { console.warn("訪問を読めなかった", e); rebuild(); });
+      });
+    })();
+  });
+})();
+</script>
+</body>
+</html>

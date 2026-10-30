@@ -25,6 +25,8 @@
     { icon: '🗾', label: '都道府県制覇マップ', href: '/conquest/conquest.html' },
     { icon: '🏅', label: 'バッジ', href: '/badges/badges.html' },
     { icon: '🛤️', label: '道路コンプリート率', href: '/completion/completion.html' },
+    // 道の駅マップ（アプリの実績と同じ。2026-10-30。訪問はアプリの「Webの道の駅マップにも出す」で届く）
+    { icon: '🚏', label: '道の駅マップ', href: '/michinoeki.html' },
     { icon: '🗺️', label: 'バックアップルート', href: '/my-routes.html', auth: 'in' },
     // Web でルートを作ってアプリに送る（サブスク限定。2026-10-08。中でサブスクを確かめる）
     { icon: '🧭', label: 'ルートを作る', href: '/route-maker.html', auth: 'in' },
