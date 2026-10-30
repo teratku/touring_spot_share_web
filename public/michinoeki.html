@@ -20,6 +20,7 @@
 <script defer src="/__/firebase/init.js"></script>
 <!-- 点と都道府県の数え方はアプリの「道の駅マップ」と同じ（michinoeki-map.js） -->
 <script src="/michinoeki-map.js?v=1"></script>
+<script defer src="https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js"></script>
 <script defer src="/analytics.js?v=2"></script>
 <script defer src="/menu.js?v=9"></script>
 <style>
@@ -160,7 +161,7 @@
 
   var state = { master: null, visits: [], items: [], filter: "all", selected: null, prefecture: "",
                 user: null, backupDate: null, autoSync: false, failed: false };
-  var map = null, markers = {}, mapsWaiters = [];
+  var map = null, markers = {}, mapsWaiters = [], clusterer = null, clusterKey = null, clusterSel = null, iconCache = {}, itemsVersion = 0;
 
   window.onMichiNoEkiMapsReady = function () { mapsWaiters.splice(0).forEach(function (f) { f(); }); mapsWaiters = null; };
   function whenMaps(f) { if (mapsWaiters === null) f(); else mapsWaiters.push(f); }
@@ -193,6 +194,7 @@
 
   function rebuild() {
     state.items = M.items(state.master || [], state.visits);
+    itemsVersion += 1;
     render();
   }
 
@@ -246,15 +248,68 @@
     }).join("");
   }
 
-  function icon(item, selected) {
-    var v = M.isVisited(item);
-    return { path: google.maps.SymbolPath.CIRCLE, fillColor: v ? GREEN : GRAY, fillOpacity: v ? 1 : .85,
-             strokeColor: selected ? TEAL : "#fff", strokeWeight: selected ? 4 : (v ? 2 : 1.5),
-             scale: selected ? (v ? 11 : 9) : (v ? 7 : 4.5) };
+  /** 丸の絵（大きさ・色ごとに1回だけ作って使い回す） */
+  function dotIcon(fill, stroke, strokeW, r) {
+    var key = [fill, stroke, strokeW, r].join("|");
+    if (iconCache[key]) return iconCache[key];
+    var size = 2 * (r + strokeW);
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '"><circle cx="' + size / 2 + '" cy="' + size / 2 +
+      '" r="' + (r + strokeW / 2) + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '"/></svg>';
+    return (iconCache[key] = { url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg),
+                               scaledSize: new google.maps.Size(size, size), anchor: new google.maps.Point(size / 2, size / 2) });
   }
 
+  function icon(item, selected) {
+    var v = M.isVisited(item);
+    if (selected) return dotIcon(v ? GREEN : GRAY, TEAL, 4, v ? 10 : 8);
+    return v ? dotIcon(GREEN, "#fff", 2, 6) : dotIcon(GRAY, "#fff", 1.5, 4.5);
+  }
+
+  /**
+   * まとまりの丸。訪問済みの割合を緑の扇で描き、真ん中に駅の数（絵は大きさ×割合10段ごとに使い回す）
+   * ⚠️ 未ログイン・「まだ」で絞ったときは全部灰色、「訪問済み」で絞ったときは全部緑になる
+   */
+  function clusterIcon(count, visited) {
+    var size = count < 10 ? 32 : count < 50 ? 38 : count < 200 ? 46 : 54;
+    var step = visited === 0 ? 0 : visited === count ? 10 : Math.min(9, Math.max(1, Math.round(visited / count * 10)));
+    var key = "c|" + size + "|" + step;
+    if (iconCache[key]) return iconCache[key];
+    var c = size / 2, r = c - 2, inner = r - 5;
+    var ring;
+    if (step === 0 || step === 10) {
+      ring = '<circle cx="' + c + '" cy="' + c + '" r="' + r + '" fill="' + (step ? GREEN : GRAY) + '"/>';
+    } else {
+      var a = step / 10 * 2 * Math.PI, x = c + r * Math.sin(a), y = c - r * Math.cos(a);
+      ring = '<circle cx="' + c + '" cy="' + c + '" r="' + r + '" fill="' + GRAY + '"/>' +
+        '<path d="M' + c + ',' + c + ' L' + c + ',' + (c - r) + ' A' + r + ',' + r + ' 0 ' + (a > Math.PI ? 1 : 0) + ',1 ' + x.toFixed(2) + ',' + y.toFixed(2) + ' Z" fill="' + GREEN + '"/>';
+    }
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '">' +
+      '<circle cx="' + c + '" cy="' + c + '" r="' + (r + 1) + '" fill="#fff"/>' + ring +
+      '<circle cx="' + c + '" cy="' + c + '" r="' + inner + '" fill="#1f2d2a" fill-opacity=".72"/></svg>';
+    return (iconCache[key] = { url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg),
+                               scaledSize: new google.maps.Size(size, size), anchor: new google.maps.Point(c, c) });
+  }
+
+  var clusterRenderer = {
+    render: function (cluster) {
+      var visited = cluster.markers.filter(function (m) { return m.meVisited; }).length;
+      var count = cluster.count;
+      return new google.maps.Marker({ position: cluster.position, icon: clusterIcon(count, visited), zIndex: 1000 + count,
+        label: { text: String(count), color: "white", fontSize: count < 100 ? "12px" : "11px", fontWeight: "bold" },
+        title: count + "駅" + (state.user ? "（訪問済み " + visited + "）" : "") });
+    }
+  };
+
+  /**
+   * 地図の点。⚠️ まとめて出す（markerclusterer。利用者の要望 2026-10-30:「重たいため」）: 全駅の点は1回だけ作り、
+   * 近いものは数の丸にまとめる（丸を押すと寄って広がる）。見えている範囲だけまとめる（SuperClusterViewportAlgorithm）
+   * ⚠️ 選んだ駅はまとめず、いつも地図に出す（まとまりの中に隠れないように）
+   * ⚠️ 絞り込み・選択・訪問が変わったときだけ入れ直す。色は変わった点だけ塗り直す（全部に setIcon すると重い）
+   * ⚠️ まとめる部品が読めなかったら、前のやり方（全部の点を直接出す）
+   */
   function renderMarkers() {
     if (!map) return;
+    var shown = [], selMarker = null;
     state.items.forEach(function (item) {
       var m = markers[item.id];
       if (!m) {
@@ -262,12 +317,39 @@
         m.addListener("click", function () { select(item.id, false); });
         markers[item.id] = m;
       }
-      var sel = item.id === state.selected;
-      m.setIcon(icon(item, sel));
-      m.setZIndex(sel ? 3 : (M.isVisited(item) ? 2 : 1));
-      var shown = sel || M.shows(state.filter, item);
-      if (shown !== (m.getMap() === map)) m.setMap(shown ? map : null);
+      var sel = item.id === state.selected, ic = icon(item, sel);
+      m.meVisited = M.isVisited(item);
+      if (m.getIcon() !== ic) { m.setIcon(ic); m.setZIndex(sel ? 3 : (m.meVisited ? 2 : 1)); }
+      if (sel) selMarker = m;
+      else if (M.shows(state.filter, item)) shown.push(m);
     });
+    var MC = window.markerClusterer;
+    if (!(MC && MC.MarkerClusterer)) {
+      state.items.forEach(function (item) {
+        var m = markers[item.id], on = m === selMarker || M.shows(state.filter, item);
+        if (on !== (m.getMap() === map)) m.setMap(on ? map : null);
+      });
+      return;
+    }
+    var key = state.filter + "|" + state.selected + "|" + itemsVersion;
+    if (!clusterer) {
+      // ⚠️ 部品より先に地図が出来ていたら、直接出していた点を下ろしてから任せる
+      state.items.forEach(function (item) { var m = markers[item.id]; if (m !== selMarker && m.getMap()) m.setMap(null); });
+      clusterer = new MC.MarkerClusterer({
+        map: map, markers: shown, renderer: clusterRenderer,
+        algorithm: new MC.SuperClusterViewportAlgorithm({ maxZoom: 13, radius: 70, viewportPadding: 60 }),
+        onClusterClick: function (e, cluster, m) { select(null); m.fitBounds(cluster.bounds, 40); }
+      });
+    } else if (key !== clusterKey) {
+      // ⚠️ 前に選んでいた点は外で出していたので、先に下ろす（絞り込みで外れたり見えない範囲だと残ってしまう）
+      if (clusterSel && clusterSel !== selMarker) clusterSel.setMap(null);
+      clusterer.clearMarkers(true);
+      // ⚠️ 部品が地図に付く前（onAdd の前）に描かせると落ちる（getProjection が null）。付いたら部品が自分で描く
+      clusterer.addMarkers(shown, !clusterer.getProjection());
+    }
+    clusterKey = key;
+    clusterSel = selMarker;
+    if (selMarker && selMarker.getMap() !== map) selMarker.setMap(map);
   }
 
   function renderCard() {
