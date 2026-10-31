@@ -1059,6 +1059,10 @@ function withSpansOn(built, rules) {
 
 //: 本線の途中の偽の出口として扱う長さの上限（m）。実測の東京料金所は84m
 const FALSE_EXIT_METERS = 400;
+/** 道の分かれ目で指示を分けるとき、前後それぞれに要る長さ。短いと曲がる案内と重なって喋りすぎる */
+const ROAD_FORK_MIN_METERS = 150;
+/** 道の分かれ目で「直進」と言える曲がりの大きさ（度）。これ以上は「右方向」「左方向」 */
+const ROAD_FORK_STRAIGHT_DEGREES = 30;
 
 /**
  * 本線の途中の「出口」→「寄る」を、手前の指示にまとめる。まとめた数を返す。
@@ -1100,6 +1104,115 @@ function mergeFalseExits(steps, points) {
     merged++;
   }
   return merged;
+}
+
+/**
+ * いま走っている道が別の出口へ分かれ、経路は名前の違う道へ進む点を探す。
+ *
+ * ⚠️ **実機の報告（2026-10-31）**: 国道125号と県道3号の分かれ目（36.1201,139.6795）。
+ *    125号は右へ38度それ、経路はまっすぐ3号へ入る。Valhalla は「まっすぐなら案内は要らない」と
+ *    指示を分けず、`125` の名前のまま24km の1指示にする。アプリは「125号線をあと○キロです」と
+ *    言い続け、利用者は125号の続きへ右に入った。
+ * ⚠️ **名前が変わるだけの点は入れないこと**（路線の境目ごとに「直進です」と喋る）。
+ *    手前の道の続きが**進める出口として別にある**ときだけ。`from_edge_name_consistency` がその印
+ * ⚠️ `driveability: "backward"` はこちらへ入ってくる側なので出口ではない
+ *
+ * @param {Array} edges `/trace_attributes` の edges
+ * @returns {Array<{begin:number,end:number,names:string[],turn:number}>} 番号は線の点
+ */
+function findRoadForks(edges) {
+  const out = [];
+  for (let i = 0; i + 1 < (edges || []).length; i++) {
+    const e = edges[i], next = edges[i + 1];
+    const names = e.names || [], nextNames = next.names || [];
+    if (!names.length || !nextNames.length || names.some((n) => nextNames.includes(n))) continue;
+    const others = ((e.end_node || {}).intersecting_edges || []);
+    if (!others.some((x) => x.from_edge_name_consistency
+        && (x.driveability === "forward" || x.driveability === "both"))) continue;
+    const turn = ((next.begin_heading - e.end_heading + 540) % 360) - 180;
+    out.push({ begin: e.end_shape_index, end: e.end_shape_index, names: nextNames, turn });
+  }
+  return out;
+}
+
+/** `findRoadForks` の材料を取る。失敗したら null（指示を分けないだけ。経路は返す） */
+async function roadForkSpans(encodedShape, costing, baseUrl) {
+  try {
+    const res = await fetch(`${baseUrl || BASE}/trace_attributes`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        encoded_polyline: encodedShape,
+        costing,
+        shape_match: "walk_or_snap",
+        filters: {
+          attributes: ["edge.names", "edge.begin_heading", "edge.end_heading", "edge.end_shape_index",
+                       "node.intersecting_edge.from_edge_name_consistency",
+                       "node.intersecting_edge.driveability"],
+          action: "include",
+        },
+      }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+    const json = await res.json();
+    return json && Array.isArray(json.edges) ? findRoadForks(json.edges) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * 指示を、道が分かれる点で2つに分ける。分けた数を返す。
+ *
+ * ⚠️ 読み上げ名・県を決めるより**前**に呼ぶこと（`_maneuver` から決まる）
+ * ⚠️ 分かれ目が曲がる地点のすぐそばなら分けない（その曲がる案内で足りる。喋りすぎる）
+ * ⚠️ 高速は分けない。JCT は Valhalla が指示を出す
+ * ⚠️ 向きは曲がる指示の形で渡す。アプリは更新なしで「県道3号線へ直進します」と読む
+ */
+function splitStepsAtRoadForks(steps, points, forks) {
+  const lengthOf = (a, b) => {
+    let m = 0;
+    for (let i = a; i < b; i++) m += metersBetween(points[i], points[i + 1]);
+    return m;
+  };
+  let split = 0;
+  for (const fork of forks || []) {
+    const at = fork.begin;
+    const i = steps.findIndex((s) => s.beginIndex < at && at < s.endIndex);
+    if (i < 0 || steps[i].roadKind === "expressway") continue;
+    const s = steps[i];
+    const head = lengthOf(s.beginIndex, at), tail = lengthOf(at, s.endIndex);
+    if (head < ROAD_FORK_MIN_METERS || tail < ROAD_FORK_MIN_METERS) continue;
+    const type = fork.turn >= ROAD_FORK_STRAIGHT_DEGREES ? 9 : fork.turn <= -ROAD_FORK_STRAIGHT_DEGREES ? 16 : 8;
+    const headShare = head / (head + tail);
+    const after = {
+      ...s,
+      maneuver: MANEUVER[type],
+      valhallaType: type,
+      instruction: `${{ 8: "直進", 9: "右方向", 16: "左方向" }[type]}です。その先${fork.names.join("/")}です。`,
+      roadName: fork.names.join("／"),
+      roadNames: fork.names,
+      _maneuver: { street_names: fork.names },
+      intersectionName: null,
+      towardNames: towardNames({}),
+      exitNames: exitNames({}),
+      exitNumbers: exitNumbers({}),
+      branchNames: branchNames({}),
+      isCurvyAhead: shouldSayFollowTheRoad(points.slice(at, s.endIndex + 1)),
+      distanceMeters: s.distanceMeters - Math.round(s.distanceMeters * headShare),
+      durationSeconds: s.durationSeconds - Math.round(s.durationSeconds * headShare),
+      beginIndex: at,
+      atSignal: trafficSignals.isNearAny(points[at], SIGNAL_RADIUS_METERS),
+    };
+    after.signalsBefore = trafficSignals.signalsBefore(points, at, { atSignal: after.atSignal });
+    s.distanceMeters -= after.distanceMeters;
+    s.durationSeconds -= after.durationSeconds;
+    s.endIndex = at;
+    s.isCurvyAhead = shouldSayFollowTheRoad(points.slice(s.beginIndex, at + 1));
+    steps.splice(i + 1, 0, after);
+    split++;
+  }
+  return split;
 }
 
 async function buildResult(trip, opts, costing, variantOptions, 診断) {
@@ -1195,6 +1308,11 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
   // ⚠️ **料金所の偽の出口をまとめる**（`mergeFalseExits`）。区間の切れ目の印を付けた後、
   //    読み上げ名・時間の補正より前
   const 偽の出口 = mergeFalseExits(steps, points);
+
+  // ⚠️ **道が分かれる点で指示を分ける**（`findRoadForks`）。読み上げ名を決める前。
+  //    ⚠️ 近道の確かめ（`withRoadClass: false`）は経路1本につき何度も呼ぶので測らない
+  const 道の分かれ目 = opts.withAdmins === false || opts.withRoadClass === false ? 0 : splitStepsAtRoadForks(steps, points,
+    await spansOverLegs(trip, legMaps, (sh) => roadForkSpans(sh, costing, opts.baseUrl)));
 
   // ⚠️ **読み上げに要る**（「県道36号線」の「県道」）。切るときは
   //    `withAdmins: false` を渡すこと。実測30msなので既定では取る
@@ -1376,6 +1494,8 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
     polyline: encode(points),     // 5桁。このツールの他の線と揃える
     steps,
     uTurns: steps.filter((s) => s.maneuver.startsWith("uturn")).length,
+    //: 道が分かれる点で分けた指示の数（`splitStepsAtRoadForks`）
+    roadForkSplits: 道の分かれ目,
     //: 手前の指示にまとめた偽の出口の数（料金所の車線の描き方で出る。`mergeFalseExits`）
     falseExitsMerged: 偽の出口,
     //: 小道に入って戻ってくる形。見つけた数と、塞いで消せた数
@@ -2397,5 +2517,5 @@ module.exports = { routeWithValhalla, costingOptionsFor, displacementSettings, F
   adminSpans,
   FERRY_EXCLUDE_DEGREES, FERRY_EXCLUDE_TRIES, FERRY_MANEUVER,
   SHIMANAMI, shimanamiLocations, chainEntry, bridgePasses, alternatesNoMoreFerry,
-  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, forkSide, forkSides, routeIndexMap,
+  roadClassSpans, speedSpans, SIGNAL_RADIUS_METERS, BASE, mergeFalseExits, findRoadForks, splitStepsAtRoadForks, forkSide, forkSides, routeIndexMap,
   isTwoStageRightTurn, approachHeading };

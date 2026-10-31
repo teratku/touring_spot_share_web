@@ -145,7 +145,10 @@ test("近道の確かめと、種類17の無い経路では /trace_attributes �
   const asked = [];
   const original = globalThis.fetch;
   globalThis.fetch = (url, init) => {
-    if (String(url).endsWith("/trace_attributes") && /intersecting_edge/.test((init || {}).body || "")) asked.push(url);
+    // ⚠️ 道の分かれ目（`roadForkSpans`）は別の測り。経路を出すたび1回なので数えない
+    const body = (init || {}).body || "";
+    if (String(url).endsWith("/trace_attributes") && /intersecting_edge/.test(body)
+        && !/from_edge_name_consistency/.test(body)) asked.push(url);
     return original(url, init);
   };
   try {
