@@ -94,6 +94,13 @@ class LeaveAloneTest(unittest.TestCase):
         self.assertEqual(changes, {})
         self.assertGreater(stats["両方向の線が重なる（m）"], 150)
 
+    def test_上下線の片方がそばの農道に当たっても両方向のまま(self):
+        ways = ways_of(road(1, *NORTH), road(2, (3, 8, 0), (4, 8, 200), kind="track"))
+        lines = [line((6, 0), (6, 200)), line((-6, 200), (-6, 0))]
+        changes, stats = changes_of(lines, ways)
+        self.assertEqual(changes, {})
+        self.assertGreater(stats["両方向の線が重なる（m）"], 150)
+
     def test_歩道の線を隣の車道に当てない(self):
         ways = ways_of(road(1, *NORTH), road(2, (3, 5, 0), (4, 5, 200), kind="footway"))
         self.assertEqual(changes_of([line((5, 0), (5, 200))], ways)[0], {})

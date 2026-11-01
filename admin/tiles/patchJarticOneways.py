@@ -16,6 +16,8 @@ JARTIC の一方通行を、OSM の oneway として PBF に足す。
    逆向きの線が同じ道に重なるもの（分離帯のある道を OSM が1本で描いている）
    曲がる規制が使う way の途中まで（切ると relation が壊れる）
 ⚠️ 歩道も当てる先に入れること。歩道の線を隣の車道と取り違えないため。
+⚠️ 線が農道や歩道に当たったら、すぐ横の車道の票としても数える。上下線の片方が農道に取られると、
+   残りの1本だけが票を入れ、2車線の道の途中が一方通行になる（春日部 36.0170, 139.6769）。
 ⚠️ 同じ向きの一方通行がそばにあれば、線はその道の話。上下線に分かれた道の反対側を裏返さない。
 
 使い方:
@@ -91,9 +93,9 @@ def distance_to(q, a, b):
 
 
 def match(q, heading, grid):
-    """点の話をしている道 → (way, 線分, way の向きに沿うか) / None"""
+    """点の話をしている道 → (way, 線分, way の向きに沿うか) / None と、そばの平行な線分 [(way id, 線分, 沿うか)]"""
     x, y = int(q[0] / CELL), int(q[1] / CELL)
-    seen, nearest, same = set(), None, None
+    seen, nearest, same, beside = set(), None, None, []
     for dx in (-1, 0, 1):
         for dy in (-1, 0, 1):
             for way, i in grid.get((x + dx, y + dy), ()):
@@ -108,38 +110,44 @@ def match(q, heading, grid):
                     continue
                 d = distance_to(q, a, b)
                 forward = gap < 90
-                if d <= NEAR_METERS and (nearest is None or d < nearest[0]):
-                    nearest = (d, way, i, forward)
+                if d <= NEAR_METERS:
+                    beside.append((way.id, i, forward))
+                    if nearest is None or d < nearest[0]:
+                        nearest = (d, way, i, forward)
                 if d <= SAME_WAY_METERS and way.oneway == (1 if forward else -1) and (same is None or d < same[0]):
                     same = (d, way, i, forward)
-    return (same or nearest or (None,))[1:] or None
+    return (same or nearest or (None,))[1:] or None, beside
 
 
 def collect_votes(oneways, ways):
-    """線分ごとに、線が沿った長さ → {way id: {線分: [順向き, 逆向き]}}, 数え"""
+    """線分ごとに、線が沿った長さ → {way id: {線分: [順向き, 逆向き, そばの順向き, そばの逆向き]}}, 数え"""
     grid = defaultdict(list)
     for way in ways.values():
         for i in range(len(way.nodes) - 1):
             for c in cells_of(way.nodes[i:i + 2]):
                 grid[c].append((way, i))
-    votes = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0]))
+    votes = defaultdict(lambda: defaultdict(lambda: [0.0, 0.0, 0.0, 0.0]))
     stats = Counter()
     for item in oneways:
         for line in item["lines"]:
             hits, total = [], 0.0
             for q, heading, length in samples(line):
                 total += length
-                hit = match(q, heading, grid)
+                hit, beside = match(q, heading, grid)
                 if hit:
-                    hits.append((hit, length))
-            matched = sum(length for _, length in hits)
+                    hits.append((hit, beside, length))
+            matched = sum(length for _, _, length in hits)
             stats["線の長さ"] += total
             if total == 0 or matched < total * MIN_LINE_MATCH:
                 stats["道が見つからない線"] += 1
                 continue
             stats["道に当たった線"] += 1
-            for (way, i, forward), length in hits:
+            for (way, i, forward), beside, length in hits:
                 votes[way.id][i][0 if forward else 1] += length
+                if way.tags.get("highway") not in DRIVABLE:
+                    for wid, seg, along in beside:
+                        if wid != way.id:
+                            votes[wid][seg][2 if along else 3] += length
     return votes, stats
 
 
@@ -149,10 +157,11 @@ def runs_of(way, seg_votes):
     lengths = [meters(way.nodes[i][1:], way.nodes[i + 1][1:]) for i in range(n)]
     marks = [0] * n
     both = 0.0
-    for i, (ahead, back) in seg_votes.items():
+    for i, (ahead, back, beside_ahead, beside_back) in seg_votes.items():
         if ahead + back < MIN_COVER * lengths[i]:
             continue
-        if min(ahead, back) >= BOTH_WAYS * (ahead + back):
+        ahead_all, back_all = ahead + beside_ahead, back + beside_back
+        if min(ahead_all, back_all) >= BOTH_WAYS * (ahead_all + back_all):
             both += lengths[i]
             continue
         marks[i] = 1 if ahead > back else -1
