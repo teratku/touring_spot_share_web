@@ -8,7 +8,7 @@
 "use strict";
 const test = require("node:test");
 const assert = require("node:assert");
-const { findRoadForks, splitStepsAtRoadForks } = require("../lib/valhallaRoute");
+const { findRoadForks, findTurnChoices, splitStepsAtRoadForks } = require("../lib/valhallaRoute");
 
 const R125 = ["125", "国道125号"];
 const R3 = ["さいたま栗橋線", "3", "主要地方道さいたま栗橋線"];
@@ -116,4 +116,68 @@ test("分かれ目が無ければ何も変えない", () => {
   assert.strictEqual(splitStepsAtRoadForks(steps, line(19), null), 0);
   assert.strictEqual(splitStepsAtRoadForks(steps, line(19), []), 0);
   assert.strictEqual(steps.length, 1);
+});
+
+/** 片側の本線 → 29m 渡る → 西の道。実データの円阿弥（北）の形 */
+const road = (begin_heading, driveability = "both", extra = {}) => ({
+  begin_heading, driveability, use: "road", road_class: "tertiary", ...extra,
+});
+const on = (end_shape_index, heading, length, others) => ({
+  end_shape_index, begin_heading: heading, end_heading: heading, length,
+  end_node: { intersecting_edges: others || [] },
+});
+const ENNAMI = [
+  on(10, 134, 0.3, [road(137, "forward", { road_class: "trunk" }), road(89)]),
+  on(12, 269, 0.029, [road(159), road(314, "forward", { road_class: "trunk" }),
+                      road(134, "backward", { road_class: "trunk" }), road(206)]),
+  on(20, 267, 0.3),
+];
+
+test("円阿弥（北）: 本線を渡った先の3本のうち、いちばん手前の道", () => {
+  assert.deepStrictEqual(findTurnChoices(ENNAMI)[0], { begin: 10, end: 10, count: 3, position: 1 });
+});
+
+test("十字路は同じ側に1本だけなので言わない", () => {
+  const edges = [on(10, 0, 0.3, [road(0, "forward"), road(270)]), on(20, 90, 0.3)];
+  assert.deepStrictEqual(findTurnChoices(edges), []);
+});
+
+test("奥の道・真ん中の道を数える", () => {
+  const three = (out, others) => [on(10, 0, 0.3, others.map((h) => road(h))), on(20, out, 0.3)];
+  assert.strictEqual(findTurnChoices(three(40, [90, 130]))[0].position, 3);
+  assert.strictEqual(findTurnChoices(three(90, [40, 130]))[0].position, 2);
+  assert.strictEqual(findTurnChoices(three(90, [40, 130]))[0].count, 3);
+});
+
+test("左へ曲がるときは左の道だけ数える", () => {
+  const edges = [on(10, 0, 0.3, [road(90), road(300), road(45)]), on(20, 260, 0.3)];
+  assert.deepStrictEqual(findTurnChoices(edges)[0], { begin: 10, end: 10, count: 2, position: 1 });
+});
+
+test("入ってくる道・自転車道・店の出入り口・進めない道は数えない", () => {
+  for (const other of [road(45, "backward"), road(45, "forward", { use: "cycleway" }),
+                       road(45, "forward", { use: "pedestrian_crossing" }),
+                       road(45, "both", { road_class: "service_other" }),
+                       { begin_heading: 45, use: "road", road_class: "tertiary" }]) {
+    assert.deepStrictEqual(findTurnChoices([on(10, 0, 0.3, [other]), on(20, 90, 0.3)]), [], JSON.stringify(other));
+  }
+});
+
+test("直進に近い道・反対車線は曲がる道に数えない", () => {
+  assert.deepStrictEqual(findTurnChoices([on(10, 0, 0.3, [road(10), road(175)]), on(20, 90, 0.3)]), []);
+});
+
+test("経路が直進なら言わない", () => {
+  assert.deepStrictEqual(findTurnChoices([on(10, 0, 0.3, [road(90), road(45)]), on(20, 5, 0.3)]), []);
+});
+
+test("35mより先の点の道は同じ交差点に数えない", () => {
+  const edges = [on(10, 0, 0.3), on(12, 90, 0.04, [road(40)]), on(20, 90, 0.3)];
+  assert.deepStrictEqual(findTurnChoices(edges), []);
+});
+
+test("辺が足りなくても落ちない", () => {
+  assert.deepStrictEqual(findTurnChoices([]), []);
+  assert.deepStrictEqual(findTurnChoices(null), []);
+  assert.deepStrictEqual(findTurnChoices([on(10, 0, 0.3, [road(90)])]), []);
 });

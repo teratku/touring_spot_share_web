@@ -78,6 +78,9 @@ function toAppRoute(route) {
     // ⚠️ **種類17（分岐を直進）で左右どちらの道へ分かれるか**（"left" / "right"）。
     //    アプリは「左車線に入ります」と言う。分からなければ null（今までどおり「分岐を直進」）
     forkSide: step.forkSide === "left" || step.forkSide === "right" ? step.forkSide : null,
+    // ⚠️ **同じ側に道が何本もある曲がり角で、どれに入るか**（{count, position}。手前から数える）。
+    //    アプリは「3本あるうちいちばん手前の道です」と言う。古いアプリは読まない
+    turnChoice: step.turnChoice || null,
     // ⚠️ **曲がる手前の道の片側の車線数。** アプリは2以上のとき「左折は左端・右折は右端の車線」を推定して言う。
     //    無い・1のときは黙ること（車線数を作らない）
     approachLaneCount: Number.isInteger(step.approachLaneCount) ? step.approachLaneCount : null,
