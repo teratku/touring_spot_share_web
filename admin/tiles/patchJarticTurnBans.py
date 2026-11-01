@@ -18,6 +18,10 @@ JARTIC の「指定方向外進行禁止」を、曲がる規制（OSM の restr
    埼玉で 399本中268本がこれになった（ランダムな400経路では迂回できて気づけなかった）。
 ⚠️ **指定方向に合う出口が1本も無い交差点では確定しない**（標識の交差点ではない）。必ず出口が残る。
 
+⚠️ **車線ごとの標識が1本の way に重なる。** 直進専用と左折専用の進入路が手前で合流して描かれていると、
+   2枚の標識が同じ way・同じ交差点に当たり、両方を禁じると全部の出口が塞がる（埼玉2か所）。
+   どれかの標識が許している出口は禁じない。
+
 ⚠️ **両方向の道は via で切ること。** Valhalla は from/to を way の番号で見るので、via が way の
    途中だと「その way の両側」が一度に禁止になる（右折だけ禁止のつもりが左折も塞ぐ）。
    切った way は新しい番号にする。⚠️ 他の曲がる規制が使っている way は切らず、その出口を見送る。
@@ -200,10 +204,15 @@ def exits_ahead(by_node, way, i, step):
     return out
 
 
+def exit_key(way, i, step, to, j, s):
+    return way.id, i, step, to.id, j, s
+
+
 def follow(ban, by_node, way, i, step):
-    """停止線から道なりに進み、禁じる出口を集める → ([(way, 添字, 向き, to, 添字, 向き, 種類)], 交差点が合ったか)"""
+    """停止線から道なりに進み、禁じる出口を集める
+    → ([(way, 添字, 向き, to, 添字, 向き, 種類)], 交差点が合ったか, 許す出口の鍵)"""
     prev, walked = ban["at"], 0.0
-    made, pending, matched = [], [], False
+    made, pending, matched, opened = [], [], False, set()
 
     def is_allowed(e):
         return any(abs(diff(e[4], a)) <= ALLOWED_TOLERANCE for a in ban["allowed"])
@@ -230,6 +239,7 @@ def follow(ban, by_node, way, i, step):
             pending += [turn_of(here, e) for e in exits if not is_allowed(e) and e is not ahead]
             if any(is_allowed(e) for e in exits):
                 matched = True
+                opened |= {exit_key(way, i, step, e[0], e[1], e[2]) for e in exits if is_allowed(e)}
                 stop = ahead is None or not is_allowed(ahead)
                 if ahead is not None and stop:
                     pending.append(turn_of(here, ahead))
@@ -240,7 +250,7 @@ def follow(ban, by_node, way, i, step):
             elif ahead is None:
                 break             # 指定方向の無い突き当たり。標識の交差点を見失った
         way, i, step = ahead[0], ahead[1] + ahead[2], ahead[2]
-    return made, matched
+    return made, matched, opened
 
 
 def plan(bans, ways):
@@ -254,7 +264,8 @@ def plan(bans, ways):
         for c in cells_of(way.nodes):
             grid[c].append(way)
 
-    turns, stats = [], Counter()
+    found_all, opened = [], set()
+    stats = Counter()
     for ban in bans:
         at, heading = ban["at"], ban["inHeading"]
         c = (int(at[0] / CELL), int(at[1] / CELL))
@@ -268,10 +279,18 @@ def plan(bans, ways):
             stats["入ってくる道が見つからない"] += 1
             continue
         _, way, seg, step = found
-        made, matched = follow(ban, by_node, way, seg + 1 if step == 1 else seg, step)
-        turns += [(*t, ban["key"]) for t in made]
-        if made:
+        made, matched, allowed = follow(ban, by_node, way, seg + 1 if step == 1 else seg, step)
+        found_all.append((ban, made, matched))
+        opened |= allowed
+
+    turns = []
+    for ban, made, matched in found_all:
+        kept = [t for t in made if exit_key(*t[:6]) not in opened]
+        turns += [(*t, ban["key"]) for t in kept]
+        if kept:
             stats["禁止を作れた"] += 1
+        elif made:
+            stats["別の車線の標識が許している"] += 1
         else:
             stats["禁じる出口が無い（すでに合っている）" if matched else "指定方向に合う交差点が無い"] += 1
     return turns, stats

@@ -41,6 +41,25 @@ def kinds(turns):
     return sorted((t[3].id, t[6]) for t in turns)
 
 
+class LaneSignsTest(unittest.TestCase):
+    """直進専用と左折専用の進入路が、手前で1本に合流して描かれている（慶應通り・東京環状）"""
+
+    def merged(self):
+        return ways_of(road(1, (1, 0, -100), (2, 0, 0), (3, 0, 100)),
+                       road(2, (4, -100, 0), (2, 0, 0), kind="unclassified"))
+
+    def test_別の標識が許す出口は禁じない(self):
+        turns, stats = plan([sign(0), sign(270)], self.merged())
+        self.assertEqual(kinds(turns), [])
+        self.assertEqual(stats["別の車線の標識が許している"], 2)
+
+    def test_同じ交差点でも誰も許さない出口は禁じる(self):
+        ways = ways_of(road(1, (1, 0, -100), (2, 0, 0), (3, 0, 100)),
+                       road(2, (4, -100, 0), (2, 0, 0), (5, 100, 0)))
+        turns, _ = plan([sign(0), sign(270)], ways)
+        self.assertEqual(set(kinds(turns)), {(2, "no_right_turn")})
+
+
 class CrossroadTest(unittest.TestCase):
     def crossroad(self):
         return ways_of(road(1, (1, 0, -100), (2, 0, 0), (3, 0, 100)),
