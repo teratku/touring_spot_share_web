@@ -23,6 +23,9 @@ JARTIC の一方通行を、OSM の oneway として PBF に足す。
 使い方:
   python3 admin/tiles/patchJarticOneways.py in.osm.pbf admin/data/jartic-oneways.json out.osm.pbf
 
+⚠️ **線の点の順が進む向きとは限らない。** 県ごとに、OSM の登録と比べて向きが合う県だけ使う（trusted_oneways）。
+   全県に当てると東京と大阪で本物の一方通行を裏返す。合わない県の線は使わない（裏返しも足しもしない）。
+
 ⚠️ **順番: しまなみ → この道具 → patchJarticTurnBans.py。** 曲がる禁止は一方通行を見て組み立てる。
    番号も、足す way がファイルの中で番号順になるよう、こちらを小さくしてある。
 """
@@ -48,6 +51,8 @@ MIN_COVER = 0.6        # 線分のこれだけ線が通れば、覆われたと�
 BOTH_WAYS = 0.3        # 逆向きの線がこれだけ重なれば、両方向の道
 MIN_RUN_METERS = 30    # これより短い連なりは触らない
 GAP_METERS = 20        # 連なりの間のこれ以下の隙間と、way の端までの余りは埋める
+MAX_AGAINST = 0.02     # 県の線のうち OSM の登録と逆でよい割合。合う県は 1.5% まで、合わない県は 5% から
+MIN_AGREE_METERS = 20000  # これだけ OSM の登録と重ならない県は、向きを確かめられない
 NEW_ID = 2_900_000_000 # 切った way の番号。OSM（約15億）と重ねず、曲がる禁止の 30億より小さく
 
 
@@ -227,6 +232,24 @@ def plan(votes, ways, keep_ids):
     return changes, stats
 
 
+def trusted_oneways(oneways, ways, keep_ids):
+    """線の向きが OSM の登録と合う県の線だけ → (使う線, {県: (合う m, 逆 m, 使うか)})"""
+    by_prefecture = defaultdict(list)
+    for item in oneways:
+        by_prefecture[item["prefecture"]].append(item)
+    kept, report = [], {}
+    for prefecture, items in by_prefecture.items():
+        votes, _ = collect_votes(items, ways)
+        _, stats = plan(votes, ways, keep_ids)
+        agree = stats["もう合っている（m）"]
+        against = stats["裏返した（m）"] + stats["逆向きの一部なので見送り（m）"]
+        use = agree >= MIN_AGREE_METERS and against <= MAX_AGAINST * (agree + against)
+        report[prefecture] = (round(agree), round(against), use)
+        if use:
+            kept += items
+    return kept, report
+
+
 def make_change(changes, ways):
     """way を切って向きを付ける → (書き換える way, 足す way)"""
     modified, created = {}, []
@@ -257,11 +280,15 @@ def main():
     with open(list_path, encoding="utf-8") as f:
         oneways = json.load(f)["oneways"]
     ways = read_ways(src, oneways)
-    votes, line_stats = collect_votes(oneways, ways)
-    changes, stats = plan(votes, ways, restricted_ways(src))
+    keep_ids = restricted_ways(src)
+    trusted, report = trusted_oneways(oneways, ways, keep_ids)
+    for prefecture, (agree, against, use) in report.items():
+        print(f"{prefecture}: 登録と合う {agree // 1000}km・逆 {against // 1000}km → {'使う' if use else '使わない'}")
+    votes, line_stats = collect_votes(trusted, ways)
+    changes, stats = plan(votes, ways, keep_ids)
     modified, created = make_change(changes, ways)
     write(src, dst, modified, created, [])
-    print(f"一方通行 {len(oneways)}件: {dict(line_stats)}")
+    print(f"一方通行 {len(oneways)}件のうち {len(trusted)}件を使う: {dict(line_stats)}")
     print({k: round(v) for k, v in stats.items()})
     print(f"書き換えた way {len(modified)}本・切って足した way {len(created)}本")
     changed = stats["一方通行にした（m）"] + stats["裏返した（m）"]

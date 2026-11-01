@@ -13,7 +13,7 @@ import sys
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "tiles"))
-from patchJarticOneways import collect_votes, make_change, plan  # noqa: E402
+from patchJarticOneways import MIN_AGREE_METERS, collect_votes, make_change, plan, trusted_oneways  # noqa: E402
 from patchJarticTurnBans import Way  # noqa: E402
 
 M = 1 / 111320   # 緯度で1m
@@ -183,6 +183,36 @@ class PartOfWayTest(unittest.TestCase):
         changes, stats = changes_of([line((0, 200), (0, 100))], ways)
         self.assertEqual(changes, {})
         self.assertAlmostEqual(stats["逆向きの一部なので見送り（m）"], 100, delta=2)
+
+
+class TrustedPrefectureTest(unittest.TestCase):
+    LONG = MIN_AGREE_METERS + 1000
+
+    def lines_of(self, prefecture, north, south, x):
+        """一方通行に登録した道と、北向きの線 north 本・南向きの線 south 本"""
+        items = []
+        ways = {}
+        for i in range(north + south):
+            wid = x + i
+            e = wid * 30
+            ways[wid] = road(wid, (wid * 2, e, 0), (wid * 2 + 1, e, self.LONG / (north + south)), oneway="yes")
+            ends = (e, 0), (e, self.LONG / (north + south))
+            items.append({**line(*(ends if i < north else ends[::-1])), "prefecture": prefecture})
+        return items, ways
+
+    def test_登録と合う県だけ使う(self):
+        good, ways_good = self.lines_of("埼玉県", 100, 1, 1000)
+        bad, ways_bad = self.lines_of("東京都", 20, 80, 2000)
+        kept, report = trusted_oneways(good + bad, {**ways_good, **ways_bad}, set())
+        self.assertEqual(kept, good)
+        self.assertTrue(report["埼玉県"][2])
+        self.assertFalse(report["東京都"][2])
+
+    def test_登録と重ならない県は確かめられないので使わない(self):
+        items = [{**line((0, 0), (0, 200)), "prefecture": "秋田県"}]
+        kept, report = trusted_oneways(items, ways_of(road(1, *NORTH, oneway="yes")), set())
+        self.assertEqual(kept, [])
+        self.assertFalse(report["秋田県"][2])
 
 
 if __name__ == "__main__":

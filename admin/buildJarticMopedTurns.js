@@ -158,9 +158,9 @@ async function main() {
       for (const s of got.signals) signals.push(s);
       c.signals += got.signals.length;
       const ban = banFromRow(row);
-      if (ban) { turnBans.push(ban); c.turnBans++; }
+      if (ban) { turnBans.push({ ...ban, prefecture: t.prefecture }); c.turnBans++; }
       const oneway = onewayFromRow(row);
-      if (oneway) { oneways.push(oneway); c.oneways++; }
+      if (oneway) { oneways.push({ ...oneway, prefecture: t.prefecture }); c.oneways++; }
       const laneRow = laneRowFrom(row);
       if (laneRow) laneRows.push(laneRow);
     });

@@ -15,7 +15,7 @@ import unittest
 from collections import Counter
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "tiles"))
-from patchJarticTurnBans import Way, make_change, plan  # noqa: E402
+from patchJarticTurnBans import Way, make_change, plan, trusted_bans  # noqa: E402
 
 M = 1 / 111320   # 緯度で1m
 
@@ -39,6 +39,30 @@ def sign(*allowed, at=(0, -10), heading=0):
 
 def kinds(turns):
     return sorted((t[3].id, t[6]) for t in turns)
+
+
+class TrustedPrefectureTest(unittest.TestCase):
+    AHEAD = {"inHeading": 0, "allowed": [0, 270], "prefecture": "埼玉県"}
+    BEHIND = {"inHeading": 0, "allowed": [180], "prefecture": "東京都"}
+
+    def test_後ろへ進めと書かれた行が少ない県はその行だけ捨てる(self):
+        items = [self.AHEAD] * 99 + [{**self.BEHIND, "prefecture": "埼玉県"}]
+        kept, report = trusted_bans(items)
+        self.assertEqual(kept, [self.AHEAD] * 99)
+        self.assertEqual(report["埼玉県"], (1, 100, True))
+
+    def test_後ろへ進めと書かれた行が多い県は全部使わない(self):
+        items = [{**self.AHEAD, "prefecture": "東京都"}] * 90 + [self.BEHIND] * 10
+        kept, report = trusted_bans(items)
+        self.assertEqual(kept, [])
+        self.assertEqual(report["東京都"], (10, 100, False))
+
+    def test_曲がる方向の標識は読める(self):
+        for allowed in ([90], [270], [90, 270], [0, 90, 270], [110]):
+            self.assertEqual(len(trusted_bans([{**self.AHEAD, "allowed": allowed}])[0]), 1, allowed)
+
+    def test_斜め後ろだけの標識は読めない(self):
+        self.assertEqual(trusted_bans([{**self.AHEAD, "allowed": [125, 235]}] * 1)[1]["埼玉県"][2], False)
 
 
 class LaneSignsTest(unittest.TestCase):

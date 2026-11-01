@@ -198,7 +198,8 @@ test("小回りの標識があれば、片側3車線以上でも二段階と言�
   assert.strictEqual(west.mopedTurnSign, "smallTurn");
   assert.strictEqual(west.twoStageRightTurn, false);
   // 税関本庁前（兵庫）: 点だけの標識（5m）。手前は片側3車線・信号あり
-  const kobe = await rightTurn([135.2016, 34.6863], [135.1970, 34.6879], "moped50", "税関本庁前");
+  // ⚠️ 手前の第4突堤は南西へ来ると右折できない（JARTIC の指定方向外）。突堤の南から入る
+  const kobe = await rightTurn([135.2012, 34.6835], [135.1970, 34.6879], "moped50", "税関本庁前");
   assert.ok(kobe.approachLaneCount >= 3 && kobe.atSignal, "材料が悪い");
   assert.strictEqual(kobe.mopedTurnSign, "smallTurn");
   assert.strictEqual(kobe.twoStageRightTurn, false);

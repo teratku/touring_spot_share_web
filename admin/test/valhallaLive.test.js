@@ -864,14 +864,24 @@ test("最短の案でも船に乗らない", async (t) => {
   //    `use_ferry` も `ferry_cost` も無視される。船は地図の上ではまっすぐ短いため
   //    必ず選ばれる。実測: 557.7km 12.8時間・うち船229.5km
   //    （陸まわりは583.9km 6.3時間。**26km縮めるために6.5時間よけい**）
+  // ⚠️ 2026-11 のタイルからこの組は1回目から陸を通る。引き直しの確かめは次のテスト
   const r = await routeWithValhalla(TOKYO, AKITA,
     { variant: "shortest", displacement: "large" });
   assert.ok(!r.error, `経路が引けない: ${r.error}`);
   assert.strictEqual(r.ferryMeters, 0,
     `船に ${(r.ferryMeters / 1000).toFixed(0)}km 乗っている`);
-  assert.ok(r.ferryTries > 1, "船を外すために引き直していない（材料が悪い）");
   assert.ok(!r.steps.some((x) => x.valhallaType === FERRY_MANEUVER),
     "指示に船が残っている");
+});
+
+test("最短の案が船を選んでも、引き直して陸を通る（新潟→秋田）", async (t) => {
+  if (await skipIfDown(t)) return;
+  const r = await routeWithValhalla([139.05, 37.92], [140.1, 39.72],
+    { variant: "shortest", displacement: "large" });
+  assert.ok(!r.error, `経路が引けない: ${r.error}`);
+  assert.strictEqual(r.ferryMeters, 0,
+    `船に ${(r.ferryMeters / 1000).toFixed(0)}km 乗っている`);
+  assert.ok(r.ferryTries > 1, "船を外すために引き直していない（材料が悪い）");
 });
 
 test("ふつう・楽しいの案でも船に乗らない", async (t) => {

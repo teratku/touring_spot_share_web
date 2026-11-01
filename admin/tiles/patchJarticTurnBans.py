@@ -13,6 +13,10 @@ JARTIC の「指定方向外進行禁止」を、曲がる規制（OSM の restr
 
 ⚠️ osmium コマンド（Intel 版）はこの Mac で動かないので pyosmium を使う（pip3 install --user osmium）。
 
+⚠️ **座標の書き方が県で違う。** 東京は `進入方向(座標)` が規制場所の先にあり、そのまま読むと全部の標識で
+   進んでよい方向が後ろになる。茨城などは行で混ざる。後ろへ進めと書いてある行は向きを読めていない合図なので
+   捨て、そういう行が多い県は残りの行も信じない（trusted_bans）。
+
 ⚠️ **枝分かれしていない点で禁止を作らないこと。** 道の途中の点や way の継ぎ目も「直進の出口」に
    見えるので、そこで no_straight_on を作ると交差点の手前で道が切れ、許された曲がりまで通れなくなる。
    埼玉で 399本中268本がこれになった（ランダムな400経路では迂回できて気づけなかった）。
@@ -45,6 +49,9 @@ DRIVABLE = {"motorway", "trunk", "primary", "secondary", "tertiary", "unclassifi
             "motorway_link", "trunk_link", "primary_link", "secondary_link", "tertiary_link",
             "living_street", "service"}
 CELL = 0.0005          # 約50m
+BEHIND_ANY = 150       # 進んでよい方向にこれだけ後ろ向きのものがあれば、向きを読めていない行
+BEHIND_ALL = 120       # 進んでよい方向がすべてこれ以上後ろ向きでも同じ
+MAX_BEHIND = 0.04      # 県の行のうち向きを読めていない行の割合。合う県は 3% まで、合わない県は 6% から
 FIND_METERS = 30       # 標識から入ってくる道までの許し
 AHEAD_METERS = 35      # 停止線から見る範囲（広い交差点・中央分離帯の奥の点まで届く長さ）
 FAR_METERS = 100       # 上の範囲に標識の交差点が無いとき探す限り（標識が手前に立っていることがある）
@@ -296,6 +303,28 @@ def plan(bans, ways):
     return turns, stats
 
 
+def reads_backward(ban):
+    """進んでよい方向が後ろ向き＝進入方向か指定方向を読めていない行か"""
+    gaps = [abs(diff(a, ban["inHeading"])) for a in ban["allowed"]]
+    return max(gaps) >= BEHIND_ANY or min(gaps) >= BEHIND_ALL
+
+
+def trusted_bans(bans):
+    """向きを読める県の、向きを読める行だけ → (使う行, {県: (読めない行, 行, 使うか)})"""
+    by_prefecture = defaultdict(list)
+    for ban in bans:
+        by_prefecture[ban["prefecture"]].append(ban)
+    kept, report = [], {}
+    for prefecture, items in by_prefecture.items():
+        good = [b for b in items if not reads_backward(b)]
+        behind = len(items) - len(good)
+        use = behind <= MAX_BEHIND * len(items)
+        report[prefecture] = (behind, len(items), use)
+        if use:
+            kept += good
+    return kept, report
+
+
 def make_change(turns, keep_ids):
     """way を切り、足す relation を組む → (書き換える way, 足す way, 足す relation, 数え)"""
     cuts = defaultdict(set)   # way id → 切る添字
@@ -390,7 +419,9 @@ def main():
         raise SystemExit(__doc__)
     src, bans_path, dst = sys.argv[1:]
     with open(bans_path, encoding="utf-8") as f:
-        bans = json.load(f)["bans"]
+        bans, report = trusted_bans(json.load(f)["bans"])
+    for prefecture, (behind, total, use) in report.items():
+        print(f"{prefecture}: 向きを読めない行 {behind}/{total} → {'使う' if use else '使わない'}")
     ways = read_ways(src, bans)
     turns, stats = plan(bans, ways)
     modified, created, relations, written = make_change(turns, restricted_ways(src))
