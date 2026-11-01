@@ -47,19 +47,36 @@ function isAllDay(row, index) {
 }
 
 /**
+ * いつでも掛かる規制か。⚠️ タイルは時刻を持てないので、これを満たす行だけ焼く。
+ * ⚠️ 除外の列も見ること。「日曜・休日を除く」は規制時間が 0〜2400 のまま除外曜日に入る（埼玉の指定方向外 60行）。
+ */
+function isAlwaysOn(row) {
+  const filled = (name) => String(row[name] || "").trim() !== "";
+  if (!isAllDay(row, 1) || filled("規制曜日コード1")) return false;
+  // ⚠️ 2組目があるのは「平日は○時、休日は○時」の形。1組目だけ見て終日と決めない
+  if (filled("規制時間2_開始") || filled("規制曜日コード2")) return false;
+  for (let i = 1; i <= 5; i++) {
+    if (filled(`対象期間${i}_開始`) || filled(`除外期間${i}_開始`)) return false;
+    if (filled(`除外時間${i}_開始`) || filled(`除外曜日コード${i}`)) return false;
+  }
+  return true;
+}
+
+/** 二輪に掛かる規制か（対象が「車両」「自動車」で、二輪が除かれていない） */
+function bindsTwoWheelers(row) {
+  const target = vehicleBits(row["対象車両コード1_A"]);
+  if (!target.has(VEHICLE_A_ALL) && !target.has(VEHICLE_A_MOTOR)) return false;
+  const excluded = vehicleBits(row["除外車両コード1_D"]);
+  return !TWO_WHEEL_D.some((b) => excluded.has(b));
+}
+
+/**
  * CSV の1行を、焼ける禁止へ。焼かない行は null。
  * @returns {{at:[number,number], inHeading:number, allowed:number[], key:string}|null}
  */
 function banFromRow(row) {
   if (String(row["共通規制種別コード"] || "").trim() !== TURN_BAN_KIND) return null;
-  if (!isAllDay(row, 1) || String(row["規制曜日コード1"] || "").trim()) return null;
-  // ⚠️ 2組目があるのは「平日は○時、休日は○時」の形。1組目だけ見て終日と決めない
-  if (String(row["規制時間2_開始"] || "").trim() || String(row["規制曜日コード2"] || "").trim()) return null;
-
-  const target = vehicleBits(row["対象車両コード1_A"]);
-  if (!target.has(VEHICLE_A_ALL) && !target.has(VEHICLE_A_MOTOR)) return null;
-  const excluded = vehicleBits(row["除外車両コード1_D"]);
-  if (TWO_WHEEL_D.some((b) => excluded.has(b))) return null;
+  if (!isAlwaysOn(row) || !bindsTwoWheelers(row)) return null;
 
   const at = point(row["規制場所の経度緯度"]);
   const entry = point(row["進入方向(座標)"]);
@@ -75,4 +92,4 @@ function banFromRow(row) {
   };
 }
 
-module.exports = { banFromRow, TURN_BAN_KIND };
+module.exports = { banFromRow, isAlwaysOn, bindsTwoWheelers, TURN_BAN_KIND };

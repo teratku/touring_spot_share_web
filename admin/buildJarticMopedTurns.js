@@ -7,6 +7,8 @@
  *   admin/data/jartic-moped-turns.json  … 標識（`lib/mopedTurnRules.js` が読む）
  *   admin/data/jartic-signals.bin       … 信号（`lib/trafficSignals.js` と同じ形: 緯度・経度を 1e6 倍した Int32 の組、緯度順）
  *   admin/data/jartic-turn-bans.json    … 指定方向外進行禁止（`lib/jarticTurnBans.js`。`tiles/patchJarticTurnBans.py` がタイルに焼く）
+ *   admin/data/jartic-oneways.json      … 一方通行（`lib/jarticOneways.js`。`tiles/patchJarticOneways.py` がタイルに焼く）
+ *   admin/data/jartic-lanes.json        … 進入路の車線数（`lib/jarticLanes.js`。イメージに入れて経路の案内で引く）
  *
  * 【なぜ要るか】
  * 原付の二段階右折は標識で変えられるが、OSM には標識が無い（全国0件）。JARTIC にはある。
@@ -31,6 +33,8 @@ const { spawn } = require("child_process");
 const { ROMAJI } = require("./lib/prefectureRomaji");
 const { placesFromGeometry, KINDS } = require("./lib/mopedTurnRules");
 const { banFromRow } = require("./lib/jarticTurnBans");
+const { onewayFromRow } = require("./lib/jarticOneways");
+const { laneRowFrom, pairApproaches } = require("./lib/jarticLanes");
 
 const CATALOG = "https://www.jartic.or.jp/d/opendata/opendata.json";
 const BASE = "https://www.jartic.or.jp/d/opendata";
@@ -40,6 +44,8 @@ const POLITE_DELAY_MS = 2000;
 const OUT_RULES = path.join(__dirname, "data", "jartic-moped-turns.json");
 const OUT_SIGNALS = path.join(__dirname, "data", "jartic-signals.bin");
 const OUT_TURN_BANS = path.join(__dirname, "data", "jartic-turn-bans.json");
+const OUT_ONEWAYS = path.join(__dirname, "data", "jartic-oneways.json");
+const OUT_LANES = path.join(__dirname, "data", "jartic-lanes.json");
 /** 信号の共通規制種別コード（定周期・押ボタン・集中制御など） */
 const SIGNAL_KIND = "98";
 
@@ -142,9 +148,10 @@ async function main() {
   })).filter((t) => t.prefecture && (!ONLY || t.prefecture === ONLY));
   console.log(`JARTIC 交通規制情報 ${typeD.targetMonth}（公開 ${typeD.releaseDay}）${targets.length}都道府県`);
 
-  const rules = [], signals = [], turnBans = [], counts = {};
+  const rules = [], signals = [], turnBans = [], oneways = [], approaches = [], counts = {};
   for (const t of targets) {
-    const c = { twoStage: 0, smallTurn: 0, signals: 0, turnBans: 0, rows: 0 };
+    const c = { twoStage: 0, smallTurn: 0, signals: 0, turnBans: 0, oneways: 0, approaches: 0, rows: 0 };
+    const laneRows = [];
     c.rows = await eachRow(t.link, (row) => {
       const got = fromRow(row, t.prefecture);
       for (const r of got.rules) { rules.push(r); c[r.kind]++; }
@@ -152,14 +159,21 @@ async function main() {
       c.signals += got.signals.length;
       const ban = banFromRow(row);
       if (ban) { turnBans.push(ban); c.turnBans++; }
+      const oneway = onewayFromRow(row);
+      if (oneway) { oneways.push(oneway); c.oneways++; }
+      const laneRow = laneRowFrom(row);
+      if (laneRow) laneRows.push(laneRow);
     });
+    const paired = pairApproaches(laneRows);
+    approaches.push(...paired);
+    c.approaches = paired.length;
     counts[t.prefecture] = c;
-    console.log(`${t.prefecture}  二段階 ${c.twoStage}・小回り ${c.smallTurn}・信号 ${c.signals}・曲がる禁止 ${c.turnBans}（${c.rows}行）`);
+    console.log(`${t.prefecture}  二段階 ${c.twoStage}・小回り ${c.smallTurn}・信号 ${c.signals}・曲がる禁止 ${c.turnBans}・一方通行 ${c.oneways}・進入路 ${c.approaches}（${c.rows}行）`);
     await new Promise((r) => setTimeout(r, POLITE_DELAY_MS));
   }
   const data = toOutput(rules, counts, typeD, new Date());
   if (ONLY) {
-    console.log(`（確かめだけ。書き出さない）標識 ${rules.length}・信号 ${signals.length}・曲がる禁止 ${turnBans.length}`);
+    console.log(`（確かめだけ。書き出さない）標識 ${rules.length}・信号 ${signals.length}・曲がる禁止 ${turnBans.length}・一方通行 ${oneways.length}・進入路 ${approaches.length}`);
     return;
   }
   fs.writeFileSync(OUT_RULES, JSON.stringify(data));
@@ -170,6 +184,10 @@ async function main() {
   const { rules: _, ...head } = toOutput([], counts, typeD, new Date());
   fs.writeFileSync(OUT_TURN_BANS, JSON.stringify({ ...head, bans: turnBans }));
   console.log(`書き出した: 曲がる禁止 ${turnBans.length}件 → ${OUT_TURN_BANS}`);
+  fs.writeFileSync(OUT_ONEWAYS, JSON.stringify({ ...head, oneways }));
+  console.log(`書き出した: 一方通行 ${oneways.length}件 → ${OUT_ONEWAYS}`);
+  fs.writeFileSync(OUT_LANES, JSON.stringify({ ...head, approaches }));
+  console.log(`書き出した: 進入路 ${approaches.length}件 → ${OUT_LANES}`);
 }
 
 if (require.main === module) {

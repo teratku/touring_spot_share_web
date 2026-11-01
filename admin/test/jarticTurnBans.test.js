@@ -35,6 +35,12 @@ test("時間・曜日つきは焼かない（朝だけの規制で一日中曲�
   assert.strictEqual(banFromRow({ ...MIHASHI, "規制時間2_開始": "700" }), null);
 });
 
+test("除外の曜日・時間・期間がある行は焼かない（日曜・休日を除く、など）", () => {
+  for (const name of ["除外曜日コード1", "除外曜日コード2", "除外時間1_開始", "除外期間1_開始", "対象期間1_開始"]) {
+    assert.strictEqual(banFromRow({ ...MIHASHI, [name]: "3" }), null, name);
+  }
+});
+
 test("進入方向が規制場所と同じ点の行は向きが分からないので焼かない", () => {
   assert.strictEqual(banFromRow({ ...MIHASHI, "進入方向(座標)": MIHASHI["規制場所の経度緯度"] }), null);
 });

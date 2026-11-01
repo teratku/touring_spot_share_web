@@ -40,6 +40,8 @@ COPY admin/data/traffic-signals.bin /app/admin/data/traffic-signals.bin
 #    入れ忘れると黙って法の既定だけで決める（二段階右折を言いすぎる）
 COPY admin/data/jartic-moped-turns.json /app/admin/data/jartic-moped-turns.json
 COPY admin/data/jartic-signals.bin /app/admin/data/jartic-signals.bin
+# ⚠️ 進入路の車線数（同じく `buildJarticMopedTurns.js`）。入れ忘れると黙って OSM の車線数で案内する
+COPY admin/data/jartic-lanes.json /app/admin/data/jartic-lanes.json
 # ⚠️ スマートIC（ETC専用）の料金所。無いと車載器なしの乗り手を黙ってスマートICへ通す（lib/smartIcGates.js）
 COPY admin/data/smart-ic-gates.json /app/admin/data/smart-ic-gates.json
 # ⚠️ 高速の SA/PA（`admin/buildSapa.js` が作る）。無いと `/v1/sapa` が黙って空を返す

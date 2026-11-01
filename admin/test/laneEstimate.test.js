@@ -91,6 +91,27 @@ const skipIfDown = async (t) => (await up()) ? false : t.skip(`Valhalla が居�
 const OSAKA_FROM = [135.4950, 34.7020];
 const OSAKA_TO = [135.4925, 34.6960];
 
+test("進入路の車線数は JARTIC を OSM より先に使い、ほかの曲がり角は変えない", async (t) => {
+  if (await skipIfDown(t)) return;
+  const jarticLanes = require("../lib/jarticLanes");
+  const load = jarticLanes.load;
+  jarticLanes.load = () => [];
+  try {
+    const plain = await routeWithValhalla(OSAKA_FROM, OSAKA_TO, { displacement: "small125" });
+    const index = plain.steps.findIndex((x) => x.intersectionName === "大阪駅前西");
+    const at = plain.points[plain.steps[index].beginIndex];
+    const back = plain.points[plain.steps[index].beginIndex - 1];
+    jarticLanes.load = () => jarticLanes.endsOf([{ a: back, b: at, lanes: 6 }]);
+    const fixed = await routeWithValhalla(OSAKA_FROM, OSAKA_TO, { displacement: "small125" });
+    assert.strictEqual(fixed.steps[index].approachLaneCount, 6);
+    fixed.steps.forEach((step, i) => {
+      if (i !== index) assert.strictEqual(step.approachLaneCount, plain.steps[i].approachLaneCount, String(i));
+    });
+  } finally {
+    jarticLanes.load = load;
+  }
+});
+
 test("曲がる手前の道の車線数を指示ごとに持つ（大阪駅前西・梅田２中）", async (t) => {
   if (await skipIfDown(t)) return;
   for (const d of ["moped50", "small125", "large"]) {

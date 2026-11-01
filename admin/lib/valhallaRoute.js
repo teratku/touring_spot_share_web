@@ -35,6 +35,7 @@ const routeLoops = require("./routeLoops");
 const viaLoops = require("./viaLoops");
 const trafficSignals = require("./trafficSignals");
 const mopedTurnRules = require("./mopedTurnRules");
+const jarticLanes = require("./jarticLanes");
 
 /**
  * 曲がる地点から信号までの距離が、これ以内なら「信号のある交差点」とみなす。
@@ -902,6 +903,10 @@ function approachHeading(points, index) {
 }
 const APPROACH_HEADING_METERS = 30;
 
+/** 入っておく車線を言う曲がり方（アプリの `NavLaneEstimate` と同じ） */
+const LANE_TURNS = new Set(["turnLeft", "turnSharpLeft", "turnSlightLeft",
+  "turnRight", "turnSharpRight", "turnSlightRight"]);
+
 /** 原付が二段階右折になる、手前の道の片側の車線数（道路交通法34条5項: 3以上） */
 const TWO_STAGE_MIN_LANES = 3;
 
@@ -1442,6 +1447,13 @@ async function buildResult(trip, opts, costing, variantOptions, 診断) {
       const before = st.beginIndex > 0
         ? classSpans.find((x) => st.beginIndex - 1 >= x.begin && st.beginIndex - 1 < x.end) : null;
       st.approachLaneCount = before ? before.laneCount : null;
+      // ⚠️ **進入路の車線数は JARTIC が先。** OSM は道の途中の数で、右折レーンで増えた数ではない
+      //    （`lib/jarticLanes.js`）。二段階右折の「片側3車線以上」もこの数で決める
+      if (LANE_TURNS.has(st.maneuver)) {
+        const approach = jarticLanes.approachAt(points[st.beginIndex], approachHeading(points, st.beginIndex),
+          jarticLanes.load());
+        if (approach) st.approachLaneCount = approach.lanes;
+      }
       // ⚠️ **標識と JARTIC の信号は原付の右折だけ引く**（ほかでは使わない）
       let ctx = {};
       if (opts.displacement === "moped50" && (st.maneuver === "turnRight" || st.maneuver === "turnSharpRight")) {
