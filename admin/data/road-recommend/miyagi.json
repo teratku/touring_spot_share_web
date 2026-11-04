@@ -1,16 +1,17 @@
 {
  "prefecture": "宮城県",
  "romaji": "miyagi",
- "generation": 5,
- "contentHash": "7f3962a3bbb6",
- "builtAt": "2026-10-11T10:56:18.130Z",
+ "generation": 6,
+ "contentHash": "300a23f4b9a4",
+ "overridesHash": "2f364bafe02e",
+ "builtAt": "2026-10-21T12:27:14.874Z",
  "weights": {
   "curviness": 0.41,
   "flow": 0.3,
   "length": 0.18,
   "classRank": 0.11
  },
- "count": 150,
+ "count": 133,
  "segments": [
   {
    "id": "宮城県:0",
@@ -36,6 +37,7 @@
     38.509444,
     141.45541
    ],
+   "overrideKey": "石巻雄勝線@38.47,141.38",
    "tags": [
     "winding",
     "flowing"
@@ -65,6 +67,7 @@
     38.774595,
     141.444317
    ],
+   "overrideKey": "馬籠志津川線@38.69,141.46",
    "tags": [
     "winding"
    ]
@@ -93,6 +96,7 @@
     38.139212,
     140.509906
    ],
+   "overrideKey": "青根蔵王線@38.15,140.54",
    "tags": [
     "winding",
     "caution"
@@ -123,6 +127,7 @@
     140.55834
    ],
    "reshaped": true,
+   "overrideKey": "蔵王エコーライン@38.13,140.43",
    "tags": [
     "winding",
     "flowing"
@@ -152,6 +157,7 @@
     37.892661,
     140.522327
    ],
+   "overrideKey": "白石国見線@37.95,140.54",
    "tags": [
     "winding"
    ]
@@ -180,6 +186,7 @@
     38.676047,
     141.445613
    ],
+   "overrideKey": "志津川登米線@38.66,141.30",
    "tags": [
     "winding"
    ]
@@ -208,6 +215,7 @@
     38.367136,
     141.485189
    ],
+   "overrideKey": "女川牡鹿線線@38.40,141.49",
    "tags": [
     "winding"
    ]
@@ -244,6 +252,7 @@
     "label": "未舗装"
    },
    "reshaped": true,
+   "overrideKey": "釜谷大須雄勝線@38.55,141.47",
    "tags": [
     "winding",
     "flowing"
@@ -273,6 +282,7 @@
     38.227783,
     140.467387
    ],
+   "overrideKey": "国道286号@38.22,140.53",
    "tags": [
     "winding",
     "caution"
@@ -302,6 +312,7 @@
     38.349329,
     141.482475
    ],
+   "overrideKey": "牡鹿半島公園線;コバルトライン@38.41,141.46",
    "tags": [
     "winding",
     "flowing"
@@ -331,6 +342,7 @@
     37.97099,
     140.273535
    ],
+   "overrideKey": "国道399号@37.95,140.34",
    "tags": [
     "winding",
     "flowing"
@@ -361,6 +373,7 @@
     140.62393
    ],
    "reshaped": true,
+   "overrideKey": "平松梁川線@37.83,140.72",
    "tags": [
     "winding"
    ]
@@ -389,6 +402,7 @@
     38.883581,
     141.622566
    ],
+   "overrideKey": "大島浪板線@38.86,141.62",
    "tags": [
     "winding",
     "flowing"
@@ -418,6 +432,7 @@
     37.938779,
     140.679998
    ],
+   "overrideKey": "越河角田線@37.93,140.61",
    "tags": [
     "winding"
    ]
@@ -446,6 +461,7 @@
     38.662413,
     140.864844
    ],
+   "overrideKey": "岩出山宮崎線@38.61,140.79",
    "tags": [
     "winding",
     "flowing"
@@ -453,6 +469,46 @@
   },
   {
    "id": "宮城県:15",
+   "region": "miyagi",
+   "regionName": "宮城県",
+   "name": "蔵王ハイライン",
+   "ref": "",
+   "highway": "tertiary",
+   "osmId": null,
+   "spotCount": 0,
+   "tags": [
+    "winding",
+    "flowing"
+   ],
+   "title": null,
+   "note": null,
+   "polyline": "k_ugFaufxYoJ}Lc@AEh@dBfGRnFaAxFz@hGq@z@aAc@cCyRe@kBa@Q[v@|@tG}BtIqAzBHf@",
+   "pointCount": 18,
+   "start": [
+    38.12358,
+    140.45025
+   ],
+   "end": [
+    38.12747,
+    140.44666
+   ],
+   "lengthKm": 1.64,
+   "curviness": 435.6,
+   "flow": 44.7,
+   "turnCount": 16,
+   "score": 86.4,
+   "baseScore": 86.4,
+   "added": true,
+   "toll": "full",
+   "tollKm": 1.64,
+   "tollNames": [
+    "蔵王ハイライン"
+   ],
+   "tollAuto": "full",
+   "tollAutoKm": 1.64
+  },
+  {
+   "id": "宮城県:16",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "牡鹿半島公園線",
@@ -475,13 +531,14 @@
     38.320484,
     141.515157
    ],
+   "overrideKey": "牡鹿半島公園線@38.35,141.48",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:16",
+   "id": "宮城県:17",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "築館栗駒公園線",
@@ -504,13 +561,14 @@
     38.944634,
     140.80479
    ],
+   "overrideKey": "築館栗駒公園線@38.91,140.88",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:17",
+   "id": "宮城県:18",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "大島浪板線",
@@ -533,12 +591,13 @@
     38.912974,
     141.587343
    ],
+   "overrideKey": "大島浪板線@38.88,141.61",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:18",
+   "id": "宮城県:19",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "気仙沼本吉線",
@@ -561,13 +620,14 @@
     38.886654,
     141.552046
    ],
+   "overrideKey": "気仙沼本吉線@38.79,141.51",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:19",
+   "id": "宮城県:20",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "最上鬼首線",
@@ -591,13 +651,14 @@
     140.6471
    ],
    "reshaped": true,
+   "overrideKey": "最上鬼首線@38.79,140.60",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:20",
+   "id": "宮城県:21",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "定義仙台線",
@@ -620,6 +681,7 @@
     38.293818,
     140.725859
    ],
+   "overrideKey": "定義仙台線@38.34,140.69",
    "tags": [
     "winding",
     "flowing",
@@ -627,7 +689,7 @@
    ]
   },
   {
-   "id": "宮城県:21",
+   "id": "宮城県:22",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "桝沢吉岡線",
@@ -650,13 +712,14 @@
     38.471106,
     140.7094
    ],
+   "overrideKey": "桝沢吉岡線@38.47,140.78",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:22",
+   "id": "宮城県:23",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "牡鹿半島公園線;コバルトライン",
@@ -680,13 +743,14 @@
     141.45894
    ],
    "reshaped": true,
+   "overrideKey": "牡鹿半島公園線;コバルトライン@38.44,141.45",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:23",
+   "id": "宮城県:24",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "牡鹿半島公園線",
@@ -709,10 +773,11 @@
     38.32028,
     141.51529
    ],
-   "reshaped": true
+   "reshaped": true,
+   "overrideKey": "牡鹿半島公園線@38.30,141.51"
   },
   {
-   "id": "宮城県:24",
+   "id": "宮城県:25",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "気仙沼唐桑線",
@@ -736,13 +801,14 @@
     141.64843
    ],
    "reshaped": true,
+   "overrideKey": "気仙沼唐桑線@38.91,141.59",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:25",
+   "id": "宮城県:26",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "名取村田線",
@@ -765,13 +831,14 @@
     38.169783,
     140.769728
    ],
+   "overrideKey": "名取村田線@38.18,140.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:26",
+   "id": "宮城県:27",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "泊崎半島線",
@@ -794,13 +861,14 @@
     38.733207,
     141.537857
    ],
+   "overrideKey": "泊崎半島線@38.72,141.53",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:27",
+   "id": "宮城県:28",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "北上津山線",
@@ -823,6 +891,7 @@
     38.627796,
     141.347791
    ],
+   "overrideKey": "北上津山線@38.55,141.42",
    "tags": [
     "winding",
     "flowing",
@@ -830,7 +899,7 @@
    ]
   },
   {
-   "id": "宮城県:28",
+   "id": "宮城県:29",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "鬼首吹上線",
@@ -853,6 +922,7 @@
     38.801538,
     140.669826
    ],
+   "overrideKey": "鬼首吹上線@38.80,140.65",
    "tags": [
     "winding",
     "flowing",
@@ -860,7 +930,7 @@
    ]
   },
   {
-   "id": "宮城県:29",
+   "id": "宮城県:30",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "岩入一迫線",
@@ -884,6 +954,7 @@
     140.71159
    ],
    "reshaped": true,
+   "overrideKey": "岩入一迫線@38.77,140.83",
    "tags": [
     "winding",
     "flowing",
@@ -891,7 +962,7 @@
    ]
   },
   {
-   "id": "宮城県:30",
+   "id": "宮城県:31",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "石巻鮎川線",
@@ -915,13 +986,14 @@
     141.46943
    ],
    "reshaped": true,
+   "overrideKey": "石巻鮎川線@38.41,141.41",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:31",
+   "id": "宮城県:32",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "泉ヶ丘熊ヶ根線",
@@ -944,13 +1016,14 @@
     38.366869,
     140.772932
    ],
+   "overrideKey": "泉ヶ丘熊ヶ根線@38.33,140.70",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:32",
+   "id": "宮城県:33",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "鳴子小野田線",
@@ -973,13 +1046,14 @@
     38.680152,
     140.757392
    ],
+   "overrideKey": "鳴子小野田線@38.73,140.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:33",
+   "id": "宮城県:34",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "丸森梁川線",
@@ -1003,13 +1077,14 @@
     140.6225
    ],
    "reshaped": true,
+   "overrideKey": "丸森梁川線@37.91,140.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:34",
+   "id": "宮城県:35",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "有壁若柳線",
@@ -1032,13 +1107,14 @@
     38.843958,
     141.116784
    ],
+   "overrideKey": "有壁若柳線@38.87,141.12",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:35",
+   "id": "宮城県:36",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "青麻線",
@@ -1061,13 +1137,14 @@
     38.337797,
     140.939304
    ],
+   "overrideKey": "青麻線@38.31,140.94",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:36",
+   "id": "宮城県:37",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "相馬亘理線旧道",
@@ -1090,12 +1167,13 @@
     37.891705,
     140.92977
    ],
+   "overrideKey": "相馬亘理線旧道@37.93,140.91",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:37",
+   "id": "宮城県:38",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "鳴子小野田線",
@@ -1118,6 +1196,7 @@
     38.661226,
     140.740386
    ],
+   "overrideKey": "鳴子小野田線@38.62,140.77",
    "tags": [
     "winding",
     "flowing",
@@ -1125,7 +1204,7 @@
    ]
   },
   {
-   "id": "宮城県:38",
+   "id": "宮城県:39",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道457号線",
@@ -1148,6 +1227,7 @@
     38.710148,
     140.832141
    ],
+   "overrideKey": "国道457号線@38.75,140.87",
    "tags": [
     "winding",
     "flowing",
@@ -1155,7 +1235,7 @@
    ]
   },
   {
-   "id": "宮城県:39",
+   "id": "宮城県:40",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "丸森霊山線",
@@ -1186,13 +1266,14 @@
     "label": "未舗装"
    },
    "reshaped": true,
+   "overrideKey": "丸森霊山線@37.92,140.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:40",
+   "id": "宮城県:41",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道457号",
@@ -1216,13 +1297,14 @@
     140.60188
    ],
    "reshaped": true,
+   "overrideKey": "国道457号@38.12,140.57",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:41",
+   "id": "宮城県:42",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "白石丸森線",
@@ -1245,13 +1327,14 @@
     37.936668,
     140.695144
    ],
+   "overrideKey": "白石丸森線@37.99,140.64",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:42",
+   "id": "宮城県:43",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "上八瀬気仙沼線",
@@ -1274,13 +1357,14 @@
     38.98766,
     141.507144
    ],
+   "overrideKey": "上八瀬気仙沼線@38.91,141.55",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:43",
+   "id": "宮城県:44",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "馬籠東和線",
@@ -1303,13 +1387,14 @@
     38.747757,
     141.320846
    ],
+   "overrideKey": "馬籠東和線@38.77,141.44",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:44",
+   "id": "宮城県:45",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "石川矢吹線",
@@ -1332,13 +1417,14 @@
     37.951037,
     140.65141
    ],
+   "overrideKey": "石川矢吹線@37.99,140.64",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:45",
+   "id": "宮城県:46",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "秋保温泉川崎線",
@@ -1361,13 +1447,14 @@
     38.22463,
     140.728749
    ],
+   "overrideKey": "秋保温泉川崎線@38.20,140.66",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:46",
+   "id": "宮城県:47",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道398号",
@@ -1391,13 +1478,14 @@
     141.4261
    ],
    "reshaped": true,
+   "overrideKey": "国道398号@38.44,141.47",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:47",
+   "id": "宮城県:48",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "南蔵王白石線",
@@ -1421,13 +1509,14 @@
     140.5412
    ],
    "reshaped": true,
+   "overrideKey": "南蔵王白石線@38.01,140.62",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:48",
+   "id": "宮城県:49",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "相馬大内線",
@@ -1450,12 +1539,13 @@
     37.827486,
     140.851837
    ],
+   "overrideKey": "相馬大内線@37.87,140.83",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:49",
+   "id": "宮城県:50",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "金山新地停車場線",
@@ -1478,13 +1568,14 @@
     37.889349,
     140.911199
    ],
+   "overrideKey": "金山新地停車場線@37.89,140.81",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:50",
+   "id": "宮城県:51",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道398号",
@@ -1508,13 +1599,14 @@
     140.58708
    ],
    "reshaped": true,
+   "overrideKey": "国道398号@38.86,140.78",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:51",
+   "id": "宮城県:52",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "角田山元線旧道",
@@ -1537,12 +1629,13 @@
     37.919951,
     140.886235
    ],
+   "overrideKey": "角田山元線旧道@37.94,140.89",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:52",
+   "id": "宮城県:53",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "越河角田線",
@@ -1565,13 +1658,14 @@
     37.957707,
     140.69217
    ],
+   "overrideKey": "越河角田線@37.96,140.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:53",
+   "id": "宮城県:54",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "亘理村田蔵王線",
@@ -1595,12 +1689,13 @@
     140.67358
    ],
    "reshaped": true,
+   "overrideKey": "亘理村田蔵王線@38.08,140.70",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:54",
+   "id": "宮城県:55",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "仙台山寺線",
@@ -1624,13 +1719,14 @@
     140.55294
    ],
    "reshaped": true,
+   "overrideKey": "仙台山寺線@38.27,140.65",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:55",
+   "id": "宮城県:56",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "女川牡鹿線線",
@@ -1653,13 +1749,14 @@
     38.435302,
     141.446307
    ],
+   "overrideKey": "女川牡鹿線線@38.42,141.46",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:56",
+   "id": "宮城県:57",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "河南南郷線",
@@ -1682,12 +1779,13 @@
     38.483435,
     141.189753
    ],
+   "overrideKey": "河南南郷線@38.50,141.16",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:57",
+   "id": "宮城県:58",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "気仙沼唐桑線",
@@ -1710,12 +1808,13 @@
     38.893095,
     141.652044
    ],
+   "overrideKey": "気仙沼唐桑線@38.86,141.67",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:58",
+   "id": "宮城県:59",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道347号",
@@ -1739,13 +1838,14 @@
     140.74134
    ],
    "reshaped": true,
+   "overrideKey": "国道347号@38.60,140.54",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:59",
+   "id": "宮城県:60",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "文字下細倉線",
@@ -1768,13 +1868,14 @@
     38.824695,
     140.911398
    ],
+   "overrideKey": "文字下細倉線@38.79,140.89",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:60",
+   "id": "宮城県:61",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "西成田宮床線",
@@ -1797,13 +1898,14 @@
     38.39302,
     140.908751
    ],
+   "overrideKey": "西成田宮床線@38.40,140.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:61",
+   "id": "宮城県:62",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "沼倉鳴子線",
@@ -1827,12 +1929,13 @@
     140.71159
    ],
    "reshaped": true,
+   "overrideKey": "沼倉鳴子線@38.85,140.64",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:62",
+   "id": "宮城県:63",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "女川牡鹿線",
@@ -1855,13 +1958,14 @@
     38.403685,
     141.487338
    ],
+   "overrideKey": "女川牡鹿線@38.42,141.46",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:63",
+   "id": "宮城県:64",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "南蔵王七ヶ宿線",
@@ -1884,13 +1988,14 @@
     37.986621,
     140.454542
    ],
+   "overrideKey": "南蔵王七ヶ宿線@38.08,140.57",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:64",
+   "id": "宮城県:65",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "蔵王川崎線",
@@ -1913,13 +2018,14 @@
     38.1697,
     140.643972
    ],
+   "overrideKey": "蔵王川崎線@38.12,140.60",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:65",
+   "id": "宮城県:66",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "河南登米線",
@@ -1942,12 +2048,13 @@
     38.528406,
     141.223049
    ],
+   "overrideKey": "河南登米線@38.47,141.21",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:66",
+   "id": "宮城県:67",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "柳沢中新田線",
@@ -1970,12 +2077,13 @@
     38.614339,
     140.758503
    ],
+   "overrideKey": "柳沢中新田線@38.60,140.79",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:67",
+   "id": "宮城県:68",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道457号",
@@ -1998,6 +2106,7 @@
     38.103659,
     140.563978
    ],
+   "overrideKey": "国道457号@38.02,140.62",
    "tags": [
     "winding",
     "flowing",
@@ -2005,7 +2114,7 @@
    ]
   },
   {
-   "id": "宮城県:68",
+   "id": "宮城県:69",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "大迫松山線",
@@ -2028,12 +2137,13 @@
     38.518746,
     141.054964
    ],
+   "overrideKey": "大迫松山線@38.47,141.05",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:69",
+   "id": "宮城県:70",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "古川登米線",
@@ -2056,12 +2166,13 @@
     38.633539,
     141.224285
    ],
+   "overrideKey": "古川登米線@38.65,141.28",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:70",
+   "id": "宮城県:71",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "宮城県道27号奥松島松島公園線",
@@ -2085,12 +2196,13 @@
     141.169
    ],
    "reshaped": true,
+   "overrideKey": "宮城県道27号奥松島松島公園線@38.33,141.16",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:71",
+   "id": "宮城県:72",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "瀬峰豊里線",
@@ -2114,12 +2226,13 @@
     141.1223
    ],
    "reshaped": true,
+   "overrideKey": "瀬峰豊里線@38.63,141.13",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:72",
+   "id": "宮城県:73",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "涌谷津山線",
@@ -2143,12 +2256,13 @@
     141.25259
    ],
    "reshaped": true,
+   "overrideKey": "涌谷津山線@38.59,141.28",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:73",
+   "id": "宮城県:74",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "角田大内線",
@@ -2171,12 +2285,13 @@
     37.913184,
     140.851228
    ],
+   "overrideKey": "角田大内線@37.89,140.82",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:74",
+   "id": "宮城県:75",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "大河原高倉線",
@@ -2199,12 +2314,13 @@
     38.001042,
     140.711627
    ],
+   "overrideKey": "大河原高倉線@37.97,140.69",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:75",
+   "id": "宮城県:76",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "白石柴田線",
@@ -2227,12 +2343,13 @@
     38.044575,
     140.741939
    ],
+   "overrideKey": "白石柴田線@38.01,140.62",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:76",
+   "id": "宮城県:77",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "最上小野田線",
@@ -2255,13 +2372,14 @@
     38.647197,
     140.698297
    ],
+   "overrideKey": "最上小野田線@38.62,140.73",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:77",
+   "id": "宮城県:78",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道108号",
@@ -2284,13 +2402,14 @@
     38.793734,
     140.666511
    ],
+   "overrideKey": "国道108号@38.75,140.72",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:78",
+   "id": "宮城県:79",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "焼切原農道",
@@ -2313,13 +2432,14 @@
     38.661035,
     140.790098
    ],
+   "overrideKey": "焼切原農道@38.61,140.78",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:79",
+   "id": "宮城県:80",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "花山一迫線",
@@ -2342,12 +2462,13 @@
     38.791296,
     140.845495
    ],
+   "overrideKey": "花山一迫線@38.79,140.88",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:80",
+   "id": "宮城県:81",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "東和登米線",
@@ -2370,12 +2491,13 @@
     38.74061,
     141.311631
    ],
+   "overrideKey": "東和登米線@38.71,141.29",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:81",
+   "id": "宮城県:82",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道457号",
@@ -2399,13 +2521,14 @@
     140.98477
    ],
    "reshaped": true,
+   "overrideKey": "国道457号@38.89,140.95",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:82",
+   "id": "宮城県:83",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "蔵王大河原線",
@@ -2428,12 +2551,13 @@
     38.0893,
     140.660816
    ],
+   "overrideKey": "蔵王大河原線@38.05,140.72",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:83",
+   "id": "宮城県:84",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "築館登米線",
@@ -2457,12 +2581,13 @@
     141.15086
    ],
    "reshaped": true,
+   "overrideKey": "築館登米線@38.73,141.05",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:84",
+   "id": "宮城県:85",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "亘理大河原川崎線",
@@ -2485,12 +2610,13 @@
     38.034745,
     140.847454
    ],
+   "overrideKey": "亘理大河原川崎線@38.01,140.81",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:85",
+   "id": "宮城県:86",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "岩出山上蝦沢線",
@@ -2513,12 +2639,13 @@
     38.649677,
     140.954407
    ],
+   "overrideKey": "岩出山上蝦沢線@38.66,140.88",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:86",
+   "id": "宮城県:87",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "小野田三本木線",
@@ -2541,12 +2668,13 @@
     38.544967,
     140.866352
    ],
+   "overrideKey": "小野田三本木線@38.53,140.89",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:87",
+   "id": "宮城県:88",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "大鳥沢辺線",
@@ -2570,12 +2698,13 @@
     140.98366
    ],
    "reshaped": true,
+   "overrideKey": "大鳥沢辺線@38.80,141.03",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:88",
+   "id": "宮城県:89",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "石巻雄勝線",
@@ -2598,12 +2727,13 @@
     38.448175,
     141.348351
    ],
+   "overrideKey": "石巻雄勝線@38.43,141.31",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:89",
+   "id": "宮城県:90",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "涌谷三本木線",
@@ -2626,12 +2756,13 @@
     38.526165,
     141.113012
    ],
+   "overrideKey": "涌谷三本木線@38.54,141.06",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:90",
+   "id": "宮城県:91",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "河南米山線",
@@ -2654,12 +2785,13 @@
     38.539719,
     141.237939
    ],
+   "overrideKey": "河南米山線@38.51,141.20",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:91",
+   "id": "宮城県:92",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "岩沼蔵王線",
@@ -2683,12 +2815,13 @@
     140.84106
    ],
    "reshaped": true,
+   "overrideKey": "岩沼蔵王線@38.12,140.72",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:92",
+   "id": "宮城県:93",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "東和薄衣線",
@@ -2711,13 +2844,14 @@
     38.729578,
     141.287159
    ],
+   "overrideKey": "東和薄衣線@38.79,141.26",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "宮城県:93",
+   "id": "宮城県:94",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "岩沼蔵王線",
@@ -2740,12 +2874,13 @@
     38.095255,
     140.66004
    ],
+   "overrideKey": "岩沼蔵王線@38.12,140.69",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:94",
+   "id": "宮城県:95",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "清水下狼塚線",
@@ -2768,12 +2903,13 @@
     38.615133,
     140.91372
    ],
+   "overrideKey": "清水下狼塚線@38.60,140.90",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:95",
+   "id": "宮城県:96",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "碁石富岡線",
@@ -2796,13 +2932,14 @@
     38.197718,
     140.723268
    ],
+   "overrideKey": "碁石富岡線@38.16,140.70",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:96",
+   "id": "宮城県:97",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "払川町向線",
@@ -2825,13 +2962,14 @@
     38.711522,
     141.510405
    ],
+   "overrideKey": "払川町向線@38.73,141.45",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:97",
+   "id": "宮城県:98",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "塩釜吉岡線",
@@ -2854,12 +2992,13 @@
     38.329086,
     140.98298
    ],
+   "overrideKey": "塩釜吉岡線@38.32,141.01",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:98",
+   "id": "宮城県:99",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "気仙沼陸前高田線",
@@ -2882,12 +3021,13 @@
     38.987181,
     141.552926
    ],
+   "overrideKey": "気仙沼陸前高田線@38.94,141.58",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:99",
+   "id": "宮城県:100",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "大河原高倉線",
@@ -2910,12 +3050,13 @@
     38.036028,
     140.735103
    ],
+   "overrideKey": "大河原高倉線@38.00,140.72",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:100",
+   "id": "宮城県:101",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "河南登米線",
@@ -2938,12 +3079,13 @@
     38.65113,
     141.281489
    ],
+   "overrideKey": "河南登米線@38.58,141.26",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:101",
+   "id": "宮城県:102",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道457号線",
@@ -2966,12 +3108,13 @@
     38.765258,
     140.863686
    ],
+   "overrideKey": "国道457号線@38.81,140.98",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:102",
+   "id": "宮城県:103",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "河南築館線",
@@ -2994,12 +3137,13 @@
     38.650095,
     141.075616
    ],
+   "overrideKey": "河南築館線@38.61,141.09",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:103",
+   "id": "宮城県:104",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "丸森柴田線",
@@ -3022,12 +3166,13 @@
     37.901862,
     140.800166
    ],
+   "overrideKey": "丸森柴田線@38.01,140.81",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:104",
+   "id": "宮城県:105",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "塩釜吉岡線",
@@ -3051,12 +3196,13 @@
     140.92419
    ],
    "reshaped": true,
+   "overrideKey": "塩釜吉岡線@38.35,140.96",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:105",
+   "id": "宮城県:106",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "県道30号河北桃生線",
@@ -3079,12 +3225,13 @@
     38.524879,
     141.304627
    ],
+   "overrideKey": "県道30号河北桃生線@38.57,141.27",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:106",
+   "id": "宮城県:107",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "県道仙台村田線",
@@ -3107,12 +3254,13 @@
     38.220191,
     140.787343
    ],
+   "overrideKey": "県道仙台村田線@38.27,140.84",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:107",
+   "id": "宮城県:108",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "塩釜七ヶ浜多賀城線",
@@ -3135,12 +3283,13 @@
     38.302352,
     141.03335
    ],
+   "overrideKey": "塩釜七ヶ浜多賀城線@38.29,141.04",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:108",
+   "id": "宮城県:109",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "鳴子池月線",
@@ -3163,12 +3312,13 @@
     38.740394,
     140.777792
    ],
+   "overrideKey": "鳴子池月線@38.73,140.83",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:109",
+   "id": "宮城県:110",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道398号",
@@ -3192,12 +3342,13 @@
     141.44939
    ],
    "reshaped": true,
+   "overrideKey": "国道398号@38.71,141.28",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:110",
+   "id": "宮城県:111",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "馬場只越線",
@@ -3220,12 +3371,13 @@
     38.905921,
     141.648782
    ],
+   "overrideKey": "馬場只越線@38.93,141.63",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:111",
+   "id": "宮城県:112",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "蔵王コスモスライン",
@@ -3248,13 +3400,14 @@
     38.155254,
     140.61319
    ],
+   "overrideKey": "蔵王コスモスライン@38.05,140.62",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:112",
+   "id": "宮城県:113",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道457号",
@@ -3277,13 +3430,14 @@
     38.285992,
     140.690475
    ],
+   "overrideKey": "国道457号@38.19,140.65",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "宮城県:113",
+   "id": "宮城県:114",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道45号",
@@ -3306,12 +3460,13 @@
     38.968464,
     141.632044
    ],
+   "overrideKey": "国道45号@38.93,141.62",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:114",
+   "id": "宮城県:115",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "亘理大河原川崎線",
@@ -3334,12 +3489,13 @@
     38.092772,
     140.730758
    ],
+   "overrideKey": "亘理大河原川崎線@38.13,140.72",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:115",
+   "id": "宮城県:116",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "県道仙台村田線",
@@ -3362,12 +3518,13 @@
     38.191692,
     140.767504
    ],
+   "overrideKey": "県道仙台村田線@38.22,140.79",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:116",
+   "id": "宮城県:117",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "文字上尾松線",
@@ -3390,12 +3547,13 @@
     38.88232,
     140.859398
    ],
+   "overrideKey": "文字上尾松線@38.82,140.94",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:117",
+   "id": "宮城県:118",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "栗駒岩出山線",
@@ -3418,12 +3576,13 @@
     38.674462,
     140.872977
    ],
+   "overrideKey": "栗駒岩出山線@38.73,140.96",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:118",
+   "id": "宮城県:119",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "涌谷田尻線",
@@ -3446,12 +3605,13 @@
     38.533441,
     141.130721
    ],
+   "overrideKey": "涌谷田尻線@38.58,141.07",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:119",
+   "id": "宮城県:120",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "竹谷大和線",
@@ -3474,12 +3634,13 @@
     38.439309,
     141.028639
    ],
+   "overrideKey": "竹谷大和線@38.44,141.10",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:120",
+   "id": "宮城県:121",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "石巻河北線",
@@ -3502,12 +3663,13 @@
     38.510351,
     141.309132
    ],
+   "overrideKey": "石巻河北線@38.45,141.31",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:121",
+   "id": "宮城県:122",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "仙台岩沼線",
@@ -3530,12 +3692,13 @@
     38.135422,
     140.846384
    ],
+   "overrideKey": "仙台岩沼線@38.20,140.86",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:122",
+   "id": "宮城県:123",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "鹿島台高清水線",
@@ -3558,12 +3721,13 @@
     38.598811,
     141.025952
    ],
+   "overrideKey": "鹿島台高清水線@38.58,141.03",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:123",
+   "id": "宮城県:124",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "古川一迫線",
@@ -3586,12 +3750,13 @@
     38.61295,
     140.943792
    ],
+   "overrideKey": "古川一迫線@38.72,140.95",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:124",
+   "id": "宮城県:125",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "東和登米線",
@@ -3615,12 +3780,13 @@
     141.28841
    ],
    "reshaped": true,
+   "overrideKey": "東和登米線@38.65,141.29",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:125",
+   "id": "宮城県:126",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "仙台三本木線",
@@ -3643,12 +3809,13 @@
     38.483843,
     140.942787
    ],
+   "overrideKey": "仙台三本木線@38.44,140.93",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:126",
+   "id": "宮城県:127",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "古川登米線",
@@ -3671,12 +3838,13 @@
     38.60535,
     141.104399
    ],
+   "overrideKey": "古川登米線@38.60,141.06",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:127",
+   "id": "宮城県:128",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "泉ヶ丘熊ヶ根線",
@@ -3699,12 +3867,13 @@
     38.292818,
     140.686563
    ],
+   "overrideKey": "泉ヶ丘熊ヶ根線@38.32,140.71",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:128",
+   "id": "宮城県:129",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "新田米山線",
@@ -3727,12 +3896,13 @@
     38.685787,
     141.094945
    ],
+   "overrideKey": "新田米山線@38.63,141.19",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:129",
+   "id": "宮城県:130",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "国道457号",
@@ -3756,12 +3926,13 @@
     140.80211
    ],
    "reshaped": true,
+   "overrideKey": "国道457号@38.38,140.81",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:130",
+   "id": "宮城県:131",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "中田栗駒線",
@@ -3784,12 +3955,13 @@
     38.782215,
     141.123154
    ],
+   "overrideKey": "中田栗駒線@38.72,141.21",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "宮城県:131",
+   "id": "宮城県:132",
    "region": "miyagi",
    "regionName": "宮城県",
    "name": "県道2号石巻鮎川線",
@@ -3812,511 +3984,11 @@
     38.309703,
     141.490957
    ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:132",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "国道346号",
-   "ref": "346",
-   "highway": "trunk",
-   "lengthKm": 9.94,
-   "curviness": 153.5,
-   "flow": 19.8,
-   "turnCount": 77,
-   "score": 54.2,
-   "baseScore": 54.2,
-   "spotCount": 0,
-   "polyline": "utwjFsiw|YeDkC|@aTuCgBrGwVYe@cLwM{MwDqAcJsNHcKaBuIoDySuNEg@~C{IAq@}GyE_OsFkA}BwDaSsAgBgKmAyARqWfVeIjGgBn@{BH{Bi@gTgOeQWaE|AyKbI}LnFm@`AmAzIsCxCaDvA_Hp@yFfCwBXwH}@mLqEkBFcKpNmMxMyFxKwEvG{FsK{KaO{KqFqMc@",
-   "pointCount": 51,
-   "start": [
-    38.628754,
-    141.190817
-   ],
-   "end": [
-    38.693375,
-    141.206382
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:133",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "古川佐沼線",
-   "ref": "1",
-   "highway": "primary",
-   "lengthKm": 7.02,
-   "curviness": 109.6,
-   "flow": 19.7,
-   "turnCount": 39,
-   "score": 54.1,
-   "baseScore": 54.1,
-   "spotCount": 0,
-   "polyline": "{c{jF}zc|YpArJ]jHoGlTiQxg@CvCbBhHoBbBqMvQyDnDsC}AyA{IaHtDwTrVyFzEyEpDaM|GgGkRwAoHuD}GkBqFmBuQkD_Nb@eJEoKeOkh@AgC|BgNfFcl@OsS",
-   "pointCount": 30,
-   "start": [
-    38.646537,
-    141.091193
-   ],
-   "end": [
-    38.669983,
-    141.102044
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:134",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "亘理大河原川崎線",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 6.87,
-   "curviness": 183.9,
-   "flow": 14.4,
-   "turnCount": 88,
-   "score": 53.9,
-   "baseScore": 53.9,
-   "spotCount": 0,
-   "polyline": "ss}gFogoyYdAgC\\cGwAgHEkE~@cDdD}CtAoCX}BH_MvD}LCuDeB}IRoChBcDhMwGnCuDr@qPtAgCnFkEl@yAdCsS~GaWwEux@f@}FxKsNpCy@zIi@d[lI|A?jDmBrB?tHjIlA\\xAY~@iAZmBw@aH`@aCfAmApEOnBqAlBsG[aLj@uAhG{G",
-   "pointCount": 46,
-   "start": [
-    38.167777,
-    140.658002
-   ],
-   "end": [
-    38.141002,
-    140.708446
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:135",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "秋保温泉線",
-   "ref": "131",
-   "highway": "secondary",
-   "lengthKm": 3.9,
-   "curviness": 161.3,
-   "flow": 15.3,
-   "turnCount": 41,
-   "score": 53.9,
-   "baseScore": 53.9,
-   "spotCount": 0,
-   "polyline": "{jlhFghvyYpAcKhEqLhJaFfC_CnSyDnEaSzE}DlEkBlDmDlBqJBsB~HyV\\eGlAyEl@qNbFuLfBuBZsLl@iDtDgJjI_O",
-   "pointCount": 22,
-   "start": [
-    38.243184,
-    140.693964
-   ],
-   "end": [
-    38.224407,
-    140.727642
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:136",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "国道45号",
-   "ref": "45",
-   "highway": "trunk",
-   "lengthKm": 10.29,
-   "curviness": 216.3,
-   "flow": 15,
-   "turnCount": 148,
-   "score": 53.9,
-   "baseScore": 53.9,
-   "spotCount": 0,
-   "polyline": "abikFqxx~Y]uQg@mCoHwEsEcGgEyAiBoBqByHk@{QwA_HcB_EiByBoBgA}BOcDzAyIpIaDbBmDGcHcCmBJgBz@gBxCwAhHVnDlBzFKtBe@jAqFxDsEzGiAl@}CGGcAm@ToEyA}DOe@t@oBU_A`@oA~Am@~C`@`N{@~BmA`AaDDyJsBqKv@_G_EqGIuFgDqF`ByFMgCj@oEjEsDbIkFrEsDpIwEhD_CxC_EtNsEvTD`Lk@bE{AfCaIjGuJbBmKzDgXeCoCBoOpG{DTqHqA}CmByAyCcAiKu@yA}AeA{DRkLjH",
-   "pointCount": 78,
-   "start": [
-    38.71793,
-    141.526006
-   ],
-   "end": [
-    38.781927,
-    141.510713
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:137",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "仙台三本木線",
-   "ref": "56",
-   "highway": "primary",
-   "lengthKm": 3.96,
-   "curviness": 169.9,
-   "flow": 16,
-   "turnCount": 42,
-   "score": 53.6,
-   "baseScore": 53.6,
-   "spotCount": 0,
-   "polyline": "ekkiFu`f{YlBxDu@tNd@lD~IfOlIpJ~Bx@@jQdI`T~@jSnDrM|CpHrApI|BrD|AxJzBnI`Ek@lHj@|DUbN\\pGbFtJrB",
-   "pointCount": 22,
-   "start": [
-    38.401947,
-    140.938509
-   ],
-   "end": [
-    38.382554,
-    140.908097
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:138",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "真山高清水線",
-   "ref": "167",
-   "highway": "secondary",
-   "lengthKm": 4.8,
-   "curviness": 151.2,
-   "flow": 15.4,
-   "turnCount": 47,
-   "score": 53.6,
-   "baseScore": 53.6,
-   "spotCount": 0,
-   "polyline": "qddkFqvd{YjA{EMcJpAgJzKuXtBiDEsBeCyFk@kQtB_DtLgYrOeYhDgJ`AgIHwCq@uMkFmJ_CqNi@}ImE}EMoAjAsCjBcJvCaGrFmE|GkCbDoCrF_I",
-   "pointCount": 28,
-   "start": [
-    38.692731,
-    140.931775
-   ],
-   "end": [
-    38.680616,
-    140.977358
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:139",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "砂田線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.39,
-   "curviness": 155.6,
-   "flow": 15.2,
-   "turnCount": 45,
-   "score": 53.5,
-   "baseScore": 53.5,
-   "spotCount": 0,
-   "polyline": "}w|jF{e}zYcC_F}GqGoDmBuAwBmB_IuEwHuAqKgDiGeJqBaF~CyBHu[cXmBe@qEnAiBo@m@gC]_IyAaIoAwC{FgGwDmM{B{@kIy@oJoE_HwSkIsM",
-   "pointCount": 27,
-   "start": [
-    38.654867,
-    140.893259
-   ],
-   "end": [
-    38.682042,
-    140.922742
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:140",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "栗駒金成線",
-   "ref": "182",
-   "highway": "secondary",
-   "lengthKm": 7.12,
-   "curviness": 155.6,
-   "flow": 14.4,
-   "turnCount": 77,
-   "score": 53.5,
-   "baseScore": 53.5,
-   "spotCount": 0,
-   "polyline": "yjclFizc|YEpG}AfIQzHoEjKc@pIcAxGyDxLgHpZyCjGqF`HeFtX}CfGE~Cx@jB|InJhDxGbHtG`FpBnDhFs@zY`ArQ|FrU|CrDnBtEl@jGlA`FArKoDlOr@~MdAz@fGNvBvDlJdDfBvE|BlCnAnDtL~LhCpAtEdLXbKd@|B",
-   "pointCount": 42,
-   "start": [
-    38.852445,
-    141.091086
-   ],
-   "end": [
-    38.841997,
-    141.024339
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:141",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "古川登米線",
-   "ref": "15",
-   "highway": "primary",
-   "lengthKm": 5.41,
-   "curviness": 132.3,
-   "flow": 17.9,
-   "turnCount": 40,
-   "score": 53.4,
-   "baseScore": 53.4,
-   "spotCount": 0,
-   "polyline": "sbqjFqnm{Y\\cIs@gBqDuCoHmDgLsCcFgLoG}G]kApDmPrEcLbL}^pAyJDkMjBc\\iByG^gImBaPx@mUaJei@e@eHJkBxAE~Fao@UqC",
-   "pointCount": 25,
-   "start": [
-    38.595135,
-    140.976567
-   ],
-   "end": [
-    38.598311,
-    141.030434
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:142",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "花泉迫線",
-   "ref": "190",
-   "highway": "secondary",
-   "lengthKm": 7.47,
-   "curviness": 154,
-   "flow": 14.2,
-   "turnCount": 81,
-   "score": 53.3,
-   "baseScore": 53.3,
-   "spotCount": 0,
-   "polyline": "k~skFgea}YjDv@nLs@r@r@pAhEjFpA|InIlMuAv\\d@jRaA~@jBt@pQhPpa@fC~ChRvKxApBrBnF`L~Ix@pCtAjQhApClExApBGrQ}C~GbBdBYtFeH|BsAfH]xHlDdC@xTkF`AZ~HjKhCtB|EvHnD|AxExEdFdB|A`KtErK",
-   "pointCount": 41,
-   "start": [
-    38.77366,
-    141.241321
-   ],
-   "end": [
-    38.72154,
-    141.210759
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:143",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "栗原西部広域農道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 8.39,
-   "curviness": 129.7,
-   "flow": 15.8,
-   "turnCount": 69,
-   "score": 53.3,
-   "baseScore": 53.3,
-   "spotCount": 0,
-   "polyline": "g`pkF{{e{Y_FcFkBcAo]x@aXaMqGyE}DsLiA}Gb@cHuBq\\k@qBgA}@_SwFmA}@w@qBeB_PoAyEoC_S~Bqm@]eIpByUyAoOhAwNYeBeD{Fo@cGyCsIe@qIcD}MPkGU{Bm@oAcJkI}AgCm@mD?gJu@wC{RmG_EcHuAmAqEw@yE{BoNxB_MkGoEiE",
-   "pointCount": 45,
-   "start": [
-    38.753476,
-    140.937738
-   ],
-   "end": [
-    38.790681,
-    141.002794
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:144",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "米山迫線",
-   "ref": "199",
-   "highway": "secondary",
-   "lengthKm": 4.16,
-   "curviness": 136.7,
-   "flow": 16.3,
-   "turnCount": 35,
-   "score": 53.2,
-   "baseScore": 53.2,
-   "spotCount": 0,
-   "polyline": "usbkF{nx|YzS~GZ|@jCE`PzBjRdIlQjObLnQ~ElDtElFhE`I|BrIPjBi@bJNfCrBrInHxMtA~Kd@lLlCrFzIvFdEzF",
-   "pointCount": 22,
-   "start": [
-    38.68491,
-    141.196782
-   ],
-   "end": [
-    38.659898,
-    141.166838
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:145",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "国道342号",
-   "ref": "342",
-   "highway": "trunk",
-   "lengthKm": 3.86,
-   "curviness": 196.8,
-   "flow": 17.3,
-   "turnCount": 44,
-   "score": 53.1,
-   "baseScore": 53.1,
-   "spotCount": 0,
-   "polyline": "umfkFkog}Yf@kF]qNUiAuB_B[cDRwBdDiLNeC]sCyC_J|FeEfFUpJ`DpXKhTt@dJbAhFyCpCc@vIpH~KnB|@]`C}CxAe@lGd@nIm@",
-   "pointCount": 26,
-   "start": [
-    38.704425,
-    141.273664
-   ],
-   "end": [
-    38.681422,
-    141.284671
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:146",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "小島豊里線",
-   "ref": "230",
-   "highway": "secondary",
-   "lengthKm": 5.22,
-   "curviness": 145.3,
-   "flow": 15.2,
-   "turnCount": 50,
-   "score": 53,
-   "baseScore": 53,
-   "spotCount": 0,
-   "polyline": "wgsjF}ia}YuPkYeHkGkRoI_E[{GrAwGoAwEeBqDyCuCuDeCiAqBIwE~HgCr@kCCqBs@oBgDmBqAyFl@kB[yByEmEeO_E{FuEuDwBOiLz@gNa@yHj@eQyA}Al@_DvDyGrByFnDgIhB",
-   "pointCount": 34,
-   "start": [
-    38.606202,
-    141.242073
-   ],
-   "end": [
-    38.64616,
-    141.254509
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:147",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "有壁若柳線",
-   "ref": "185",
-   "highway": "secondary",
-   "lengthKm": 4.26,
-   "curviness": 155.6,
-   "flow": 14.7,
-   "turnCount": 45,
-   "score": 53,
-   "baseScore": 53,
-   "spotCount": 0,
-   "polyline": "yw_lFazi|YdNt@jAbAdCvFhCzBbXtIdFqB`BKdMfDdFGfG~CdEd@lHWfIbC`I`AzIaB|EgF`JuCjG}@hZdOnBwD`CeZf@sBz@e@",
-   "pointCount": 24,
-   "start": [
-    38.834054,
-    141.12177
-   ],
-   "end": [
-    38.801693,
-    141.121725
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "宮城県:148",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "国道346号",
-   "ref": "346",
-   "highway": "trunk",
-   "lengthKm": 3.13,
-   "curviness": 182.4,
-   "flow": 18.4,
-   "turnCount": 31,
-   "score": 52.9,
-   "baseScore": 52.9,
-   "spotCount": 0,
-   "polyline": "gfvkFk~q~Y|AsHlAuKkAwAoAuDuHm[_F}IqByFcFoI_VvC}CoC^aBpB}C\\mBo@iTqAyNDoCbGyRz@o@|AZ",
-   "pointCount": 20,
-   "start": [
-    38.785163,
-    141.491103
-   ],
-   "end": [
-    38.791595,
-    141.516967
-   ]
-  },
-  {
-   "id": "宮城県:149",
-   "region": "miyagi",
-   "regionName": "宮城県",
-   "name": "県道仙台村田線",
-   "ref": "31",
-   "highway": "primary",
-   "lengthKm": 4.16,
-   "curviness": 167.6,
-   "flow": 15.2,
-   "turnCount": 46,
-   "score": 52.7,
-   "baseScore": 52.7,
-   "spotCount": 0,
-   "polyline": "}n_hFs~dzYxGqAnIg@~@NvCdE`Fx@nHlD~CvIbBxOxDxKjAvPhFtVtGrB~GqB|EtBlBrDxC~KTpJ`AfExM`JlIxIhH~@l@pGxFzL",
-   "pointCount": 24,
-   "start": [
-    38.177269,
-    140.769216
-   ],
-   "end": [
-    38.15396,
-    140.740675
-   ],
+   "overrideKey": "県道2号石巻鮎川線@38.33,141.47",
    "tags": [
     "flowing"
    ]
   }
  ],
- "hiddenCount": 18
+ "hiddenCount": 19
 }

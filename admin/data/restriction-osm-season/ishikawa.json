@@ -1,0 +1,50 @@
+{
+ "prefecture": "石川県",
+ "romaji": "ishikawa",
+ "builtAt": "2026-10-24T12:58:32.619Z",
+ "count": 1,
+ "source": "openstreetmap",
+ "sourceUrl": "https://www.openstreetmap.org/",
+ "attribution": "© OpenStreetMap contributors（ODbL）",
+ "candidates": [
+  {
+   "id": "osmw-ishikawa-114216982",
+   "prefecture": "石川県",
+   "city": "",
+   "sourceRoad": "白山白川郷ホワイトロード",
+   "matchedName": "白山白川郷ホワイトロード",
+   "from": "",
+   "to": "",
+   "target": "access:conditional=no @ (Nov-Jun; Jun-Aug 00:00-07:00,19:00-24:00; Sep-Nov 00:00-08:00,18:00-24:00)",
+   "targetLabel": "二輪すべて",
+   "confidence": "OSM",
+   "reason": "OSM の access:conditional=no @ (Nov-Jun; Jun-Aug 00:00-07:00,19:00-24:00; Sep-Nov 00:00-08:00,18:00-24:00) から期間を読んだ（ほかに時間の規制も書かれている）。毎年の開通日・閉鎖日を道路管理者の発表で確かめること",
+   "chainPolyline": "qti|EmbebYzRvMOjDpAnCKpBeBfCuEPoDpBjAlB`MnIJbEdBvF_BlDyDh@]`Aj@pB~FfAoArFp@jDv@`@|@aC~C_BrDvAnBlFnBzAlBpJdD`CbD?bAzAT`DyDfG`AhFMtBsD~D|DpF@hAcCrCyAtJ{EhDr@lEa@vB}Dn@mDbFuJgCaAZEtGzBdNWhFhBaBiAwG\\{Bs@eCRoAzCArCdBnAqBfDuAbFS~HmOlEcCQaDv@_CvFmE^_CUmEbAoFnBwBUyA|@sGu@aFxAaLd@WRl@uAhK~@pEFxEqArOd@zC]vJoEjFaDxNyD|FaDhLsDjB}AlIuHzJ]jFwJpFAdCoAbDaCReNtG_BnEd@hDzCt@nAxEwA|Ai@fCmDdBBvIgEvD}ApHgE`DOlDqAnB\\fJdC~ES|B~CxDnBjFIfE|@zCO`GhAhFc@hDNpFlCxHl@l_@",
+   "polyline": "qti|EmbebYzRvMOjDpAnCKpBeBfCuEPoDpBjAlB`MnIJbEdBvF_BlDyDh@]`Aj@pB~FfAoArFp@jDv@`@|@aC~C_BrDvAnBlFnBzAlBpJdD`CbD?bAzAT`DyDfG`AhFMtBsD~D|DpF@hAcCrCyAtJ{EhDr@lEa@vB}Dn@mDbFuJgCaAZEtGzBdNWhFhBaBiAwG\\{Bs@eCRoAzCArCdBnAqBfDuAbFS~HmOlEcCQaDv@_CvFmE^_CUmEbAoFnBwBUyA|@sGu@aFxAaLd@WRl@uAhK~@pEFxEqArOd@zC]vJoEjFaDxNyD|FaDhLsDjB}AlIuHzJ]jFwJpFAdCoAbDaCReNtG_BnEd@hDzCt@nAxEwA|Ai@fCmDdBBvIgEvD}ApHgE`DOlDqAnB\\fJdC~ES|B~CxDnBjFIfE|@zCO`GhAhFc@hDNpFlCxHl@l_@",
+   "lengthMeters": 14219,
+   "geocode": null,
+   "kind": "winterClosure",
+   "minCc": null,
+   "maxCc": null,
+   "activePeriod": {
+    "from": "11-01",
+    "to": "06-30"
+   },
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "fragmentCount": 38,
+   "alreadyRegistered": false
+  }
+ ]
+}

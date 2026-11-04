@@ -1,16 +1,17 @@
 {
  "prefecture": "兵庫県",
  "romaji": "hyogo",
- "generation": 5,
- "contentHash": "faf2f2c06c21",
- "builtAt": "2026-10-11T10:56:18.109Z",
+ "generation": 6,
+ "contentHash": "925f4c27b5cd",
+ "overridesHash": "724aa21c41a8",
+ "builtAt": "2026-10-21T12:27:14.847Z",
  "weights": {
   "curviness": 0.41,
   "flow": 0.3,
   "length": 0.18,
   "classRank": 0.11
  },
- "count": 150,
+ "count": 90,
  "segments": [
   {
    "id": "兵庫県:0",
@@ -36,6 +37,7 @@
     34.523612,
     134.881487
    ],
+   "overrideKey": "室津志筑線@34.44,134.90",
    "tags": [
     "winding",
     "caution"
@@ -65,6 +67,7 @@
     35.376301,
     134.644951
    ],
+   "overrideKey": "大屋関宮線@35.33,134.67",
    "tags": [
     "winding",
     "caution"
@@ -94,6 +97,7 @@
     34.737229,
     135.15849
    ],
+   "overrideKey": "明石神戸宝塚線@34.79,135.32",
    "tags": [
     "winding",
     "flowing"
@@ -123,6 +127,7 @@
     35.145866,
     135.269682
    ],
+   "overrideKey": "本郷東浜谷線@35.09,135.25",
    "tags": [
     "winding",
     "caution"
@@ -130,31 +135,6 @@
   },
   {
    "id": "兵庫県:4",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "生穂育波線",
-   "ref": "123",
-   "highway": "secondary",
-   "lengthKm": 8.38,
-   "curviness": 690.5,
-   "flow": 29.2,
-   "turnCount": 198,
-   "score": 97.8,
-   "baseScore": 97.8,
-   "spotCount": 0,
-   "polyline": "oqhqEc{mvXcJlCoFn@aDhDaEfBeA`C_At@yDKcDxAwKi@wArAwCEaGiD{HrCiDmBuBj@_AiBkAm@yB\\cKmCa@sAyCmBkBb@YmC_CuBaM_DuG`BeBY_@bAFfE_Bk@y@zAkABqEbC{@BmGtEiE`Gp@jCShB}CKi@`@q@rCy@PwA`B\\pA_@|@mATHrBmEIaAv@e@~BoAo@k@LwCrEYdDu@EmA{BiAVyBWw@zA_E|@}ApBeBd@qAtAmBDg@w@i@sEXeBO}@gD_@kBv@yDVy@Wq@gBg@SuBjAyBG{@tDw@z@oCu@qHnEw@[IaCw@]mC`DuBl@WpE_A~@c@lBaBfA}AR_CvB}NjALzE{ClEsCdA_AfAo@xGuAtB",
-   "pointCount": 99,
-   "start": [
-    34.455442,
-    134.9165
-   ],
-   "end": [
-    34.511416,
-    134.896384
-   ]
-  },
-  {
-   "id": "兵庫県:5",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "赤花薬王寺線",
@@ -177,6 +157,7 @@
     35.432098,
     135.036109
    ],
+   "overrideKey": "赤花薬王寺線@35.48,135.02",
    "tags": [
     "winding",
     "forest",
@@ -184,7 +165,7 @@
    ]
   },
   {
-   "id": "兵庫県:6",
+   "id": "兵庫県:5",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "奥再度ドライブウェイ",
@@ -207,13 +188,14 @@
     34.738856,
     135.172237
    ],
+   "overrideKey": "奥再度ドライブウェイ@34.70,135.18",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:7",
+   "id": "兵庫県:6",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "中山綾部線",
@@ -236,13 +218,14 @@
     35.192983,
     135.2168
    ],
+   "overrideKey": "中山綾部線@35.14,135.16",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:8",
+   "id": "兵庫県:7",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "久斗山今岡線",
@@ -265,13 +248,14 @@
     35.586402,
     134.548691
    ],
+   "overrideKey": "久斗山今岡線@35.58,134.49",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:9",
+   "id": "兵庫県:8",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "野島浦線",
@@ -294,6 +278,7 @@
     34.537564,
     134.99007
    ],
+   "overrideKey": "野島浦線@34.56,134.95",
    "tags": [
     "winding",
     "flowing",
@@ -301,7 +286,7 @@
    ]
   },
   {
-   "id": "兵庫県:10",
+   "id": "兵庫県:9",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "仁井黒谷線",
@@ -324,13 +309,14 @@
     34.527357,
     134.946096
    ],
+   "overrideKey": "仁井黒谷線@34.51,134.90",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:11",
+   "id": "兵庫県:10",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "桑原栗柄線",
@@ -353,13 +339,14 @@
     35.169001,
     135.249284
    ],
+   "overrideKey": "桑原栗柄線@35.13,135.22",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:12",
+   "id": "兵庫県:11",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "天谷佐田線",
@@ -389,13 +376,14 @@
     "surface": "unpaved",
     "label": "未舗装"
    },
+   "overrideKey": "天谷佐田線@35.43,134.96",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:13",
+   "id": "兵庫県:12",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "杉生能勢線",
@@ -418,13 +406,14 @@
     35.018076,
     135.332509
    ],
+   "overrideKey": "杉生能勢線@35.04,135.36",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:14",
+   "id": "兵庫県:13",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "加美宍粟線",
@@ -447,13 +436,14 @@
     35.111169,
     134.604798
    ],
+   "overrideKey": "加美宍粟線@35.11,134.68",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:15",
+   "id": "兵庫県:14",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "畑宮田線",
@@ -476,13 +466,14 @@
     35.343897,
     134.789373
    ],
+   "overrideKey": "畑宮田線@35.36,134.82",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:16",
+   "id": "兵庫県:15",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "奥山精道線",
@@ -505,13 +496,14 @@
     34.729133,
     135.303926
    ],
+   "overrideKey": "奥山精道線@34.76,135.29",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:17",
+   "id": "兵庫県:16",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "安乎鮎原線",
@@ -534,12 +526,13 @@
     34.390909,
     134.841576
    ],
+   "overrideKey": "安乎鮎原線@34.39,134.88",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:18",
+   "id": "兵庫県:17",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "裏六甲ドライブウェイ",
@@ -563,13 +556,14 @@
     135.23083
    ],
    "reshaped": true,
+   "overrideKey": "裏六甲ドライブウェイ@34.77,135.21",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:19",
+   "id": "兵庫県:18",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "中藤加悦線",
@@ -592,13 +586,14 @@
     35.500684,
     135.044303
    ],
+   "overrideKey": "中藤加悦線@35.51,135.03",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:20",
+   "id": "兵庫県:19",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "町道七坂八峠線",
@@ -621,13 +616,14 @@
     35.613406,
     134.387794
    ],
+   "overrideKey": "町道七坂八峠線@35.61,134.37",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:21",
+   "id": "兵庫県:20",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "倭文五色線",
@@ -650,13 +646,14 @@
     34.347004,
     134.79871
    ],
+   "overrideKey": "倭文五色線@34.37,134.80",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:22",
+   "id": "兵庫県:21",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "多賀洲本線",
@@ -679,13 +676,14 @@
     34.388977,
     134.837177
    ],
+   "overrideKey": "多賀洲本線@34.36,134.87",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:23",
+   "id": "兵庫県:22",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "表六甲ドライブウェイ",
@@ -708,13 +706,14 @@
     34.753002,
     135.221183
    ],
+   "overrideKey": "表六甲ドライブウェイ@34.74,135.23",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:24",
+   "id": "兵庫県:23",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "朝来出石線",
@@ -737,13 +736,14 @@
     35.373895,
     134.860576
    ],
+   "overrideKey": "朝来出石線@35.44,134.86",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:25",
+   "id": "兵庫県:24",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "山東大江線",
@@ -766,13 +766,14 @@
     35.430641,
     135.049103
    ],
+   "overrideKey": "山東大江線@35.42,135.03",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:26",
+   "id": "兵庫県:25",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "村岡小代線",
@@ -795,6 +796,7 @@
     35.420493,
     134.600405
    ],
+   "overrideKey": "村岡小代線@35.46,134.54",
    "tags": [
     "scenic",
     "winding",
@@ -802,7 +804,7 @@
    ]
   },
   {
-   "id": "兵庫県:27",
+   "id": "兵庫県:26",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "豊岡竹野線",
@@ -825,13 +827,14 @@
     35.619354,
     134.811715
    ],
+   "overrideKey": "豊岡竹野線@35.61,134.84",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:28",
+   "id": "兵庫県:27",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "奥野コウノトリの郷停車場線",
@@ -854,13 +857,14 @@
     35.553703,
     134.85381
    ],
+   "overrideKey": "奥野コウノトリの郷停車場線@35.54,134.88",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:29",
+   "id": "兵庫県:28",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "国道482号",
@@ -883,13 +887,14 @@
     35.462006,
     134.541109
    ],
+   "overrideKey": "国道482号@35.35,134.49",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:30",
+   "id": "兵庫県:29",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "下滝野市川線",
@@ -912,13 +917,14 @@
     34.965594,
     134.840704
    ],
+   "overrideKey": "下滝野市川線@34.99,134.80",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:31",
+   "id": "兵庫県:30",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "湯谷和田線",
@@ -941,13 +947,14 @@
     35.517635,
     134.522852
    ],
+   "overrideKey": "湯谷和田線@35.49,134.56",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:32",
+   "id": "兵庫県:31",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "洲本灘賀集線",
@@ -970,13 +977,14 @@
     34.252973,
     134.901957
    ],
+   "overrideKey": "洲本灘賀集線@34.30,134.93",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:33",
+   "id": "兵庫県:32",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "下立杭柏原線",
@@ -999,13 +1007,14 @@
     35.058479,
     135.127363
    ],
+   "overrideKey": "下立杭柏原線@35.08,135.11",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:34",
+   "id": "兵庫県:33",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "山東大江線",
@@ -1028,13 +1037,14 @@
     35.37763,
     134.972226
    ],
+   "overrideKey": "山東大江線@35.42,135.01",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:35",
+   "id": "兵庫県:34",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "丸味竹田線",
@@ -1057,6 +1067,7 @@
     35.557468,
     134.468268
    ],
+   "overrideKey": "丸味竹田線@35.51,134.55",
    "title": "但馬アルペンロード",
    "tags": [
     "winding",
@@ -1064,7 +1075,7 @@
    ]
   },
   {
-   "id": "兵庫県:36",
+   "id": "兵庫県:35",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "床瀬神鍋高原線",
@@ -1087,13 +1098,14 @@
     35.498387,
     134.675406
    ],
+   "overrideKey": "床瀬神鍋高原線@35.53,134.71",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:37",
+   "id": "兵庫県:36",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "千種新宮線",
@@ -1116,13 +1128,14 @@
     35.050375,
     134.447654
    ],
+   "overrideKey": "千種新宮線@35.15,134.45",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:38",
+   "id": "兵庫県:37",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "明神安乎線",
@@ -1145,13 +1158,14 @@
     34.448508,
     134.802251
    ],
+   "overrideKey": "明神安乎線@34.43,134.82",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:39",
+   "id": "兵庫県:38",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "大津西有年線",
@@ -1174,13 +1188,14 @@
     34.78292,
     134.36085
    ],
+   "overrideKey": "大津西有年線@34.83,134.35",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:40",
+   "id": "兵庫県:39",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "切畑多田院線",
@@ -1203,13 +1218,14 @@
     34.864654,
     135.398958
    ],
+   "overrideKey": "切畑多田院線@34.86,135.35",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:41",
+   "id": "兵庫県:40",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "甲山大師道",
@@ -1232,13 +1248,14 @@
     34.775114,
     135.315352
    ],
+   "overrideKey": "甲山大師道@34.76,135.33",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:42",
+   "id": "兵庫県:41",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "香美久美浜線",
@@ -1261,6 +1278,7 @@
     35.651778,
     134.827377
    ],
+   "overrideKey": "香美久美浜線@35.63,134.63",
    "tags": [
     "scenic",
     "winding",
@@ -1268,7 +1286,7 @@
    ]
   },
   {
-   "id": "兵庫県:43",
+   "id": "兵庫県:42",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "豊岡竹野線",
@@ -1291,6 +1309,7 @@
     35.620038,
     134.812086
    ],
+   "overrideKey": "豊岡竹野線@35.66,134.76",
    "tags": [
     "scenic",
     "winding",
@@ -1298,7 +1317,7 @@
    ]
   },
   {
-   "id": "兵庫県:44",
+   "id": "兵庫県:43",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "多賀洲本線",
@@ -1321,13 +1340,14 @@
     34.467778,
     134.848634
    ],
+   "overrideKey": "多賀洲本線@34.41,134.84",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:45",
+   "id": "兵庫県:44",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "加悦但東線",
@@ -1350,13 +1370,14 @@
     35.478994,
     135.044271
    ],
+   "overrideKey": "加悦但東線@35.49,135.00",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:46",
+   "id": "兵庫県:45",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "阿万福良湊線",
@@ -1379,13 +1400,14 @@
     34.257525,
     134.722571
    ],
+   "overrideKey": "阿万福良湊線@34.22,134.73",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:47",
+   "id": "兵庫県:46",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "賀茂春日線",
@@ -1408,13 +1430,14 @@
     35.171437,
     135.095434
    ],
+   "overrideKey": "賀茂春日線@35.19,135.05",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:48",
+   "id": "兵庫県:47",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "多賀相生線",
@@ -1438,13 +1461,14 @@
     134.39723
    ],
    "reshaped": true,
+   "overrideKey": "多賀相生線@34.94,134.38",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:49",
+   "id": "兵庫県:48",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "岩屋生野線",
@@ -1467,13 +1491,14 @@
     35.093541,
     134.835335
    ],
+   "overrideKey": "岩屋生野線@35.17,134.81",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:50",
+   "id": "兵庫県:49",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "佐野仁井岩屋線",
@@ -1497,13 +1522,14 @@
     135.01608
    ],
    "reshaped": true,
+   "overrideKey": "佐野仁井岩屋線@34.47,134.94",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:51",
+   "id": "兵庫県:50",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "山田新温泉線",
@@ -1527,13 +1553,14 @@
     134.54919
    ],
    "reshaped": true,
+   "overrideKey": "山田新温泉線@35.62,134.50",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:52",
+   "id": "兵庫県:51",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "才金宗行線",
@@ -1556,13 +1583,14 @@
     35.037345,
     134.349463
    ],
+   "overrideKey": "才金宗行線@35.02,134.31",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:53",
+   "id": "兵庫県:52",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "吉永下徳久線",
@@ -1585,13 +1613,14 @@
     34.900235,
     134.258498
    ],
+   "overrideKey": "吉永下徳久線@34.97,134.33",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:54",
+   "id": "兵庫県:53",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "国道429号",
@@ -1614,13 +1643,14 @@
     35.245697,
     134.756204
    ],
+   "overrideKey": "国道429号@35.18,134.56",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:55",
+   "id": "兵庫県:54",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "高雄有年横尾線",
@@ -1643,13 +1673,14 @@
     34.79501,
     134.410469
    ],
+   "overrideKey": "高雄有年横尾線@34.83,134.40",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:56",
+   "id": "兵庫県:55",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "宝塚唐櫃線",
@@ -1672,13 +1703,14 @@
     34.796902,
     135.219787
    ],
+   "overrideKey": "宝塚唐櫃線@34.82,135.32",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:57",
+   "id": "兵庫県:56",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "三田篠山線",
@@ -1701,43 +1733,14 @@
     35.069558,
     135.22076
    ],
+   "overrideKey": "三田篠山線@34.93,135.24",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:58",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "芦有ドライブウェイ",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 6.68,
-   "curviness": 379.9,
-   "flow": 23.7,
-   "turnCount": 107,
-   "score": 80.1,
-   "baseScore": 80.1,
-   "spotCount": 0,
-   "polyline": "edhsEkivxXbA_Be@cDeAu@}BHo@fAOvDgBrCMbAdBzErE|G]pF|A~CBrFz@zEm@|DZ~Lu]hm@eFlNcFfU{AT{B}BwCNyAiBs@{CgBMyAfBUtApHpPGdEYl@wCtAsBRcCtA{EpAeAUs@mAC_Fd@eAxBeAEiBsAOiJhAw@qALsIe@a@wCl@c@bAe@jFRz@jChAPh@QlA}BrBzAnE?fAmBfCiApD_FrCiAhE{K`Ai@rFb@tC",
-   "pointCount": 63,
-   "start": [
-    34.780986,
-    135.287419
-   ],
-   "end": [
-    34.80067,
-    135.252783
-   ],
-   "toll": "full",
-   "tollKm": 6.62,
-   "tollNames": [
-    "芦有ドライブウェイ"
-   ]
-  },
-  {
-   "id": "兵庫県:59",
+   "id": "兵庫県:57",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "宍粟香寺線",
@@ -1760,13 +1763,14 @@
     34.910752,
     134.738962
    ],
+   "overrideKey": "宍粟香寺線@34.91,134.68",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:60",
+   "id": "兵庫県:58",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "木曽上中田線",
@@ -1789,13 +1793,14 @@
     34.436467,
     134.883551
    ],
+   "overrideKey": "木曽上中田線@34.42,134.86",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:61",
+   "id": "兵庫県:59",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "雪彦山線",
@@ -1818,13 +1823,14 @@
     35.060031,
     134.665135
    ],
+   "overrideKey": "雪彦山線@35.03,134.67",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:62",
+   "id": "兵庫県:60",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "三尾浜坂線",
@@ -1847,13 +1853,14 @@
     35.656819,
     134.505293
    ],
+   "overrideKey": "三尾浜坂線@35.63,134.45",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:63",
+   "id": "兵庫県:61",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "鳥飼浦洲本線",
@@ -1876,12 +1883,13 @@
     34.352283,
     134.80867
    ],
+   "overrideKey": "鳥飼浦洲本線@34.34,134.84",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:64",
+   "id": "兵庫県:62",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "坂越御崎加里屋線",
@@ -1904,12 +1912,13 @@
     34.766063,
     134.423357
    ],
+   "overrideKey": "坂越御崎加里屋線@34.74,134.41",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:65",
+   "id": "兵庫県:63",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "上笹千本停車場線",
@@ -1932,12 +1941,13 @@
     34.947423,
     134.55212
    ],
+   "overrideKey": "上笹千本停車場線@34.94,134.51",
    "tags": [
     "caution"
    ]
   },
   {
-   "id": "兵庫県:66",
+   "id": "兵庫県:64",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "千種新宮線",
@@ -1960,12 +1970,13 @@
     34.93494,
     134.454146
    ],
+   "overrideKey": "千種新宮線@34.96,134.45",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:67",
+   "id": "兵庫県:65",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "下相野森線",
@@ -1988,12 +1999,13 @@
     34.9465,
     135.15549
    ],
+   "overrideKey": "下相野森線@34.93,135.12",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:68",
+   "id": "兵庫県:66",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "国道429号",
@@ -2016,13 +2028,14 @@
     35.236225,
     134.941864
    ],
+   "overrideKey": "国道429号@35.17,134.79",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:69",
+   "id": "兵庫県:67",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "大屋波賀線",
@@ -2045,13 +2058,14 @@
     35.326469,
     134.638961
    ],
+   "overrideKey": "大屋波賀線@35.28,134.55",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:70",
+   "id": "兵庫県:68",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "八代石井線",
@@ -2074,12 +2088,13 @@
     35.480416,
     134.708555
    ],
+   "overrideKey": "八代石井線@35.50,134.74",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:71",
+   "id": "兵庫県:69",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "塩瀬宝塚線",
@@ -2102,12 +2117,13 @@
     34.916737,
     135.311566
    ],
+   "overrideKey": "塩瀬宝塚線@34.82,135.33",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:72",
+   "id": "兵庫県:70",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "西脇口吉川神戸線",
@@ -2130,13 +2146,14 @@
     34.813625,
     135.093935
    ],
+   "overrideKey": "西脇口吉川神戸線@34.86,135.07",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:73",
+   "id": "兵庫県:71",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "一宮生野線",
@@ -2159,13 +2176,14 @@
     35.156258,
     134.614628
    ],
+   "overrideKey": "一宮生野線@35.16,134.79",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:74",
+   "id": "兵庫県:72",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "鮎原江井線",
@@ -2188,42 +2206,13 @@
     34.399235,
     134.818295
    ],
+   "overrideKey": "鮎原江井線@34.46,134.82",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:75",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "芦有ドライブウェイ",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.74,
-   "curviness": 350.4,
-   "flow": 21.9,
-   "turnCount": 60,
-   "score": 74.9,
-   "baseScore": 74.9,
-   "spotCount": 0,
-   "polyline": "qmhsEwmvxXuAeDC{Dq@sCFy@d@a@z@TtDxDjFs@rI|IjEbDr@UhAuDbBMhQvSpKjJzC~GbBt@jKaFrFa@RsAkAeDv@iAnIKpGfBzCs@x@eAh@cFjJkDr@sAGsDzDiB",
-   "pointCount": 32,
-   "start": [
-    34.782486,
-    135.28812
-   ],
-   "end": [
-    34.759992,
-    135.288899
-   ],
-   "toll": "full",
-   "tollKm": 3.71,
-   "tollNames": [
-    "芦有ドライブウェイ"
-   ]
-  },
-  {
-   "id": "兵庫県:76",
+   "id": "兵庫県:73",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "壷根坂越線",
@@ -2246,12 +2235,13 @@
     34.764688,
     134.430632
    ],
+   "overrideKey": "壷根坂越線@34.77,134.46",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:77",
+   "id": "兵庫県:74",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "大和北条停車場線",
@@ -2274,12 +2264,13 @@
     34.997446,
     134.875506
    ],
+   "overrideKey": "大和北条停車場線@34.93,134.84",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:78",
+   "id": "兵庫県:75",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "平木南山線",
@@ -2302,12 +2293,13 @@
     34.918787,
     135.072578
    ],
+   "overrideKey": "平木南山線@34.96,135.07",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:79",
+   "id": "兵庫県:76",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "能勢猪名川線",
@@ -2330,12 +2322,13 @@
     34.905319,
     135.374719
    ],
+   "overrideKey": "能勢猪名川線@34.94,135.38",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:80",
+   "id": "兵庫県:77",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "養父宍粟線",
@@ -2358,13 +2351,14 @@
     35.345278,
     134.686106
    ],
+   "overrideKey": "養父宍粟線@35.20,134.65",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:81",
+   "id": "兵庫県:78",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "日高竹野線",
@@ -2387,13 +2381,14 @@
     35.592293,
     134.741746
    ],
+   "overrideKey": "日高竹野線@35.50,134.75",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:82",
+   "id": "兵庫県:79",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "国道176号",
@@ -2416,12 +2411,13 @@
     34.830554,
     135.287953
    ],
+   "overrideKey": "国道176号@34.82,135.32",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:83",
+   "id": "兵庫県:80",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "上三河平福線",
@@ -2444,12 +2440,13 @@
     35.069059,
     134.421268
    ],
+   "overrideKey": "上三河平福線@35.05,134.37",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:84",
+   "id": "兵庫県:81",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "阿万福良湊線",
@@ -2472,13 +2469,14 @@
     34.288216,
     134.665262
    ],
+   "overrideKey": "阿万福良湊線@34.26,134.73",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:85",
+   "id": "兵庫県:82",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "市場佐用線",
@@ -2501,13 +2499,14 @@
     35.053027,
     134.365258
    ],
+   "overrideKey": "市場佐用線@35.05,134.31",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:86",
+   "id": "兵庫県:83",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "平荘魚橋線",
@@ -2530,12 +2529,13 @@
     34.794322,
     134.825208
    ],
+   "overrideKey": "平荘魚橋線@34.80,134.86",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:87",
+   "id": "兵庫県:84",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "明神安乎線",
@@ -2558,12 +2558,13 @@
     34.391551,
     134.894034
    ],
+   "overrideKey": "明神安乎線@34.41,134.86",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:88",
+   "id": "兵庫県:85",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "新田大沢線",
@@ -2586,12 +2587,13 @@
     34.886141,
     135.121974
    ],
+   "overrideKey": "新田大沢線@34.91,135.12",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "兵庫県:89",
+   "id": "兵庫県:86",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "横坂下徳久線",
@@ -2614,12 +2616,13 @@
     35.02126,
     134.371496
    ],
+   "overrideKey": "横坂下徳久線@35.00,134.40",
    "tags": [
     "caution"
    ]
   },
   {
-   "id": "兵庫県:90",
+   "id": "兵庫県:87",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "与布土桑市線",
@@ -2642,13 +2645,14 @@
     35.263603,
     134.819669
    ],
+   "overrideKey": "与布土桑市線@35.28,134.88",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:91",
+   "id": "兵庫県:88",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "西脇篠山線",
@@ -2671,13 +2675,14 @@
     35.002548,
     134.999175
    ],
+   "overrideKey": "西脇篠山線@35.06,135.14",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "兵庫県:92",
+   "id": "兵庫県:89",
    "region": "hyogo",
    "regionName": "兵庫県",
    "name": "国道429号",
@@ -2700,1480 +2705,12 @@
     35.15808,
     134.389575
    ],
+   "overrideKey": "国道429号@35.15,134.49",
    "tags": [
     "flowing",
     "caution"
    ]
-  },
-  {
-   "id": "兵庫県:93",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "豊岡日高線",
-   "ref": "713",
-   "highway": "secondary",
-   "lengthKm": 7.76,
-   "curviness": 283.1,
-   "flow": 21.6,
-   "turnCount": 102,
-   "score": 70.8,
-   "baseScore": 70.8,
-   "spotCount": 0,
-   "polyline": "g{swEc}ruX_C{AoCQyI`BaMfHsNMoDb@uJaB_HiGaFkBmEgDqCcAqOA}EvBO{@t@oBaBqBdBiAWmCvAq@Ro@qDmEsAaEzAoTSuGwA}@_Na@sEwByLcBuKo@o@|@b@~@rD@bBpBnCAb@|@]v@aHoA{WrEoKQsSrC_EKoGh@}Ay@uBwDs]_Csc@rC_A^gAfB_Hb@",
-   "pointCount": 50,
-   "start": [
-    35.496364,
-    134.778577
-   ],
-   "end": [
-    35.548397,
-    134.788654
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "兵庫県:94",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "神戸六甲線",
-   "ref": "",
-   "highway": "primary",
-   "lengthKm": 3.24,
-   "curviness": 324.3,
-   "flow": 21.4,
-   "turnCount": 49,
-   "score": 70.6,
-   "baseScore": 70.6,
-   "spotCount": 0,
-   "polyline": "wl`sEqzjxXr@~@~Cc@tF_Jz@a@nEOnAeCvB[PsAs@kCBoBdCdDdEpCpMY~Dq@|KzBlHaCdF{@bDVdF[tEpC|J{AbBm@zEoExBqGtCgDjBsM",
-   "pointCount": 27,
-   "start": [
-    34.741401,
-    135.228728
-   ],
-   "end": [
-    34.718789,
-    135.237811
-   ]
-  },
-  {
-   "id": "兵庫県:95",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "千種新宮線",
-   "ref": "154",
-   "highway": "secondary",
-   "lengthKm": 9.18,
-   "curviness": 307.5,
-   "flow": 19.3,
-   "turnCount": 146,
-   "score": 70.6,
-   "baseScore": 70.6,
-   "spotCount": 0,
-   "polyline": "chptEioosXgEi@kBcBbA}B}EsEsBgEwKZeG_DyHqBoNxDiAt@oCtJsAvA_DIeJeImKsByBzAqAfGkC~FqBN_@cA|@mLsAmDoAWiCz@sAnAyAGcKpCuEWuDlDiCjHeCt@cDm@yG{EuBgHoBiBwK`A{DKyAk@wI{H}CZoDvAsAMk@_AuAoIqDmCq@ImCfBcCe@oInGaCiAyBkDoBq@uA{B_DkB_K_@_CnAsBhEkD|DuB|DeBRkCiFcH_Cq@cIi@gAkAi@{DHmCwAQeEpAmFHwBkEwSwAoDeDk@{E_DgCo@}AqAmA{CcBmA",
-   "pointCount": 79,
-   "start": [
-    34.986421,
-    134.433334
-   ],
-   "end": [
-    35.045918,
-    134.452167
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "兵庫県:96",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "若桜湯村温泉線",
-   "ref": "103",
-   "highway": "secondary",
-   "lengthKm": 6.25,
-   "curviness": 304.1,
-   "flow": 20.2,
-   "turnCount": 94,
-   "score": 70.6,
-   "baseScore": 70.6,
-   "spotCount": 0,
-   "polyline": "am~wEsp{sXrArBPxAwAzFqBn[dAxAdRbIpA@pKuEpIk@xJuFbFIlB|BhHXpAuALgAeBwDC_B|BeDpA{Dr@W\\r@e@rBNz@tIjLtCx@jIo@vIzBbFlDxBfF~B}@hFaGdB_ApEw@lFFlBl@~GnJtD|PBlE{AvFh@pCrAp@rK|@nFvEjEnBaBxBQdAhAnB~BSnBqGrAx@",
-   "pointCount": 51,
-   "start": [
-    35.550415,
-    134.494976
-   ],
-   "end": [
-    35.516131,
-    134.477642
-   ]
-  },
-  {
-   "id": "兵庫県:97",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "塩屋丸山線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.42,
-   "curviness": 278.8,
-   "flow": 22.7,
-   "turnCount": 42,
-   "score": 70.3,
-   "baseScore": 70.3,
-   "spotCount": 0,
-   "polyline": "iynrEevnwX[qJeDwJyBqVcByDaM{J{`@e@z@fAnBb@v@nDnC~BjA\\dBMdBlA`AlC|DjDV~BdC`FjQfNxBlIhCnBb@ClDbF",
-   "pointCount": 23,
-   "start": [
-    34.651254,
-    135.084668
-   ],
-   "end": [
-    34.650378,
-    135.083526
-   ]
-  },
-  {
-   "id": "兵庫県:98",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "野村明石線",
-   "ref": "377",
-   "highway": "secondary",
-   "lengthKm": 3.44,
-   "curviness": 273.9,
-   "flow": 23,
-   "turnCount": 41,
-   "score": 70.2,
-   "baseScore": 70.2,
-   "spotCount": 0,
-   "polyline": "o{bsEckwvXgJtHyI|EuPpBeE`DiAIsGhBiF|EeCKiGxBuAfBkD}A`BzK_DhPL|AbSrK{EvF{TvDaJlJ",
-   "pointCount": 19,
-   "start": [
-    34.754004,
-    134.965138
-   ],
-   "end": [
-    34.770954,
-    134.947595
-   ]
-  },
-  {
-   "id": "兵庫県:99",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "国道250号",
-   "ref": "250",
-   "highway": "trunk",
-   "lengthKm": 21.2,
-   "curviness": 338.5,
-   "flow": 20.4,
-   "turnCount": 351,
-   "score": 70,
-   "baseScore": 70,
-   "spotCount": 0,
-   "polyline": "wihsEmgctXoAhKgIdGC|BtB|Ha@fAwCnCApAnJfEhBbC`CKtD`Dv@lCUzDTrAzN~EdC|Cc@|DXx@zGCtDjCnE`@rAr@bExEx@dMh@`@xCDnB`Dt@dEA~DpEh@l@f@fAzLMlEpA`CU`AsBzAj@xD?tJgB|LaBzAsB}@[aAReDkAkAiFpBcAEm@y@_@eDgAc@oDbC_HbBqAlBU`CrDzNxAbAbFv@\\lAi@pBNpApC`BpDpD@|A}AnAYvAnAdKpAn@jFmAhBpDzBp@rBdBdD{AzBdB@nA}AbGgJc@aA|@EnAhAjDiArKx@nCdHbE`BnDFlBaBhIgC~EEv@r@`AhBW~@`@rAdLh@d@lBEr@bEIn@sCnIkEpC}DvE@zA|AnGQdCgCdAwDPuKkBwIyI{CeAsIqAsOhAyCa@uIiG_OeHqEoGyDmLkAeAoA@aDjE]fJoAdMaClHoD|C_DjEiC~AmClEcGbE_McGcEa@cEoBeBOoB^wGxDcBnCiDzB_RbS{AvDW~FlAfSpDhBvAjBfBdLlEpJ]jIlKxOdA`@bCCvAbDpAj@`GMlK~BxC}@p@NfB|CtDfDfC~HtJdH|BlJnJnGjEdBnBvDtF[dCtElGtCjEjGvDSjEtDtGcBvA^j@dAlAjKjFh@nIdMlF|J^nDYzShDKfDbA",
-   "pointCount": 175,
-   "start": [
-    34.781884,
-    134.534467
-   ],
-   "end": [
-    34.7709,
-    134.424441
-   ]
-  },
-  {
-   "id": "兵庫県:100",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "富島久留麻線",
-   "ref": "71",
-   "highway": "primary",
-   "lengthKm": 7.11,
-   "curviness": 326,
-   "flow": 19.3,
-   "turnCount": 120,
-   "score": 69.8,
-   "baseScore": 69.8,
-   "spotCount": 0,
-   "polyline": "ejvqEa`{vXaAxCyH~M@bD~ArC?fBuEtCkFlF{AxBkCfH\\~BzDpFcC`I[pFZ~HlEbM^xF}@rEpAvKWjAwBrCXhEuAdFtBdGp@vFbCpFAjAw@pBf@~FoLxQgB~A_AdCgBxAcAdDuJhBwAdAkAdE[lDmDxDCxD}@vDQ`GkCtAkErGcDr@s@jBw@DuAiAs@PEfAjBpB^~DCdIr@zM{@bGe@dA{EnDsBnDuC|FuC`KwF|BoE|G",
-   "pointCount": 62,
-   "start": [
-    34.525947,
-    134.983853
-   ],
-   "end": [
-    34.545446,
-    134.923243
-   ]
-  },
-  {
-   "id": "兵庫県:101",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "福岡出合線",
-   "ref": "269",
-   "highway": "secondary",
-   "lengthKm": 8.63,
-   "curviness": 273.2,
-   "flow": 21.1,
-   "turnCount": 112,
-   "score": 69.8,
-   "baseScore": 69.8,
-   "spotCount": 0,
-   "polyline": "ipyvEi`qtX]FgAzCuBjSwC~Ii@lEP~QzAxFh@|FyCtDcBd@sBCkCv@oAm@oE_@w@pBcEvBsArHqBjGyFIsBjBuDDe@b@_ApEaC~B{Bv@yEAyDdCcSaJaQsE_EwMeD{CqDwG}L]uGrI}W_EwPpJyJfAoGwBeKcIuEoBiCQgDsDmOzA}TgLuEwAmHeKwHeIoDMqDmDyCFeF{@KgGoEuByBf@",
-   "pointCount": 55,
-   "start": [
-    35.361494,
-    134.605008
-   ],
-   "end": [
-    35.418296,
-    134.601161
-   ]
-  },
-  {
-   "id": "兵庫県:102",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "相生宍粟線",
-   "ref": "44",
-   "highway": "primary",
-   "lengthKm": 6.36,
-   "curviness": 300,
-   "flow": 21,
-   "turnCount": 91,
-   "score": 69.5,
-   "baseScore": 69.5,
-   "spotCount": 0,
-   "polyline": "ydktEmousXVwM}@}BmAScGn@gFCyT_DiAm@mHqM]gGf@gKe@wCcIcNqByIcHsEcDoHyC}D_F{@uEsDyHsOgHsIwBsAwDQeG_FsKqBmTgHeFsDyFgAsCuCmAwJoB?]yA_FaAaF}C}@A{JaIyC{GKaG_C_EJaBuEsEa@kC",
-   "pointCount": 42,
-   "start": [
-    34.960288,
-    134.464072
-   ],
-   "end": [
-    34.998949,
-    134.504261
-   ],
-   "unpaved": {
-    "unpavedMeters": 1437,
-    "totalMeters": 6356,
-    "ratio": 0.226,
-    "surface": "unpaved",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "兵庫県:103",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "切畑道場線",
-   "ref": "327",
-   "highway": "secondary",
-   "lengthKm": 11.78,
-   "curviness": 252.7,
-   "flow": 21.7,
-   "turnCount": 137,
-   "score": 69.5,
-   "baseScore": 69.5,
-   "spotCount": 0,
-   "polyline": "weysEm{zxXnAtBjBu@rBmBjAGnHnBh@AjB_BpBpAjG`AxE[rBh@hFaExD]nGzItAj@~AcBjCjGfBdGFvAlAlCRtQgBv@xB~GsApDq@j@y@CaJyDgF_E}C[{@n@s@xAe@rDrB~XeAhEKvJuA`@oEcCoA?cAn@gBzFrCrNjDxIhAtLiA`IkMtc@fBbPKlLiA~I~IdEPvHnBbL?jJk@zDmBhCkAh@}GJ{CgAeHyGmCcI}Ai@uBb@TbHeAbDi@vGx@pXtEnJhFpH|ArHCzCeG`HkPlLaFnC_MjEwFrNxCvObHbX^dWPnC`AtC",
-   "pointCount": 80,
-   "start": [
-    34.868282,
-    135.310787
-   ],
-   "end": [
-    34.870474,
-    135.233781
-   ],
-   "unpaved": {
-    "unpavedMeters": 1570,
-    "totalMeters": 11779,
-    "ratio": 0.133,
-    "surface": "ground",
-    "label": "地面"
-   }
-  },
-  {
-   "id": "兵庫県:104",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "上内膳塩尾線",
-   "ref": "469",
-   "highway": "secondary",
-   "lengthKm": 4.76,
-   "curviness": 273.6,
-   "flow": 21.7,
-   "turnCount": 60,
-   "score": 69.4,
-   "baseScore": 69.4,
-   "spotCount": 0,
-   "polyline": "ic~pE_bgvXtAf@bCUbBdD`BExBlBdFm@pGd@lEdCtGdBhFXlIzD`Fd@vIxFnMfBj@p@PvBh@`@xCaAvCv@~AbDzBlBs@`Er@jCnAbA`X`CjOaHnBWjNhD`GnFjAb@dDBfE|AjIlIfIjAf@dAXfH",
-   "pointCount": 37,
-   "start": [
-    34.40197,
-    134.881761
-   ],
-   "end": [
-    34.365995,
-    134.866121
-   ]
-  },
-  {
-   "id": "兵庫県:105",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "関宮小代線",
-   "ref": "87",
-   "highway": "primary",
-   "lengthKm": 14.74,
-   "curviness": 271.1,
-   "flow": 21.4,
-   "turnCount": 187,
-   "score": 69.2,
-   "baseScore": 69.2,
-   "spotCount": 0,
-   "polyline": "gd|vEc_xtXpCfIbFfHtAz@~G|@tBhBxBnDrVbe@~CvO~HxOZdBCxC{GdMk@bHy@jCLzM|@hCnCrBpA~BtHrSjD~GvBnJHfCcB|Kg@bM`@jEwCzZTtOiAfGIvCiHfJm@zJw@xBqEdCaBhDqEvEgH`D}@hAw@~C`A~EcD|H@dG}AdIcAjCwDzDuAlDDlBlFhWHfi@iEvPvBhRi@z`@t@`MhAhEl@`GO`B}@|@b@`E_@vMpChIJlBi@bDpArEG|@gBpCMzEV~CkAlBaB|GaJ`R_@jCoCxAkBE]kBqB{@v@yBxE^r@a@x@aEUeE\\{Ci@OgA~C{Ar@l@mDo@cB_HfA{Am@cAyGjCwGrBmA[_AeE|AkD|GyAp@UmIjBiDIi@oFlGkDhJkFhHwHlAeJ`Hs@k@",
-   "pointCount": 104,
-   "start": [
-    35.374917,
-    134.640665
-   ],
-   "end": [
-    35.384039,
-    134.533067
-   ]
-  },
-  {
-   "id": "兵庫県:106",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "町分久美浜線",
-   "ref": "706",
-   "highway": "secondary",
-   "lengthKm": 8.09,
-   "curviness": 227.6,
-   "flow": 23,
-   "turnCount": 80,
-   "score": 68.3,
-   "baseScore": 68.3,
-   "spotCount": 0,
-   "polyline": "snnwEwwdvXb@Bp@fAuAkAwa@GqCpBoXjJ_e@AeCu@_EmCqFAaTmHX}Vw@uCoAkAcC]yRbBmXq@cCo@}D{CuC}@VmF@w[uBuXmEcEgIuSoBw@kV{@oDcDeLsA{FgEoAoC[iDk@kA}BmAaCJQaIqBqCk@aEpAkDNsJ_CaIU{C}BoB",
-   "pointCount": 44,
-   "start": [
-    35.468741,
-    134.869884
-   ],
-   "end": [
-    35.5177,
-    134.904503
-   ]
-  },
-  {
-   "id": "兵庫県:107",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "川西篠山線",
-   "ref": "12",
-   "highway": "primary",
-   "lengthKm": 13.29,
-   "curviness": 263.9,
-   "flow": 21,
-   "turnCount": 167,
-   "score": 68.1,
-   "baseScore": 68.1,
-   "spotCount": 0,
-   "polyline": "usptEw`_yXyDu@{F`A_IoDiDMqLdBsNvEcBOiCeBiCk@sL`CiI_@qFpCuGjBsEjEuHjBuBFkOcAuBkHgA_JsAwFwAeBsGQwA\\kSbKwAfG@pDe@vELzOiC|FwCxCLv@`CD`BnR_@hBkCrE?hMiB~MuB`YsF~NtAzQo@fB_ElDkGdDiA`IyAlCcJpC{ACmGgDm@{A]uEgAwBiIgCSp@rCp@@`@iDa@aEfAmC|BaDq@aCiCcAYo[dLuDw@gA}@Kp@x@~@M~@qA[uAVgRzGPn@bD{@Rj@gC|AYtFcGlW_ChC{HpM_G|FoC`AyAcC_DaAg_@tYyB~@qRImKxEaDj@oIgBwCC",
-   "pointCount": 90,
-   "start": [
-    34.988273,
-    135.332118
-   ],
-   "end": [
-    35.065476,
-    135.28419
-   ]
-  },
-  {
-   "id": "兵庫県:108",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "香美久美浜線",
-   "ref": "11",
-   "highway": "primary",
-   "lengthKm": 7.63,
-   "curviness": 239.9,
-   "flow": 23.5,
-   "turnCount": 78,
-   "score": 68,
-   "baseScore": 68,
-   "spotCount": 0,
-   "polyline": "sjpxEiz{uXCgAzGsV{DcEyEkPjL_U~c@gGx@q@nIaQhBwBdA[h`AaBpi@kQ{CeNcAeNeCmGnAgO{BiFDgDe@aFz@gFKsB_FiDeB{C]cC{AsBcLcG}BoDa@gB~@oGi@gGdC{FReFv@oDnBgEMiAgBuB|@o@@wAXQfAZ^nBpAf@@aF",
-   "pointCount": 44,
-   "start": [
-    35.642182,
-    134.824207
-   ],
-   "end": [
-    35.619188,
-    134.872445
-   ]
-  },
-  {
-   "id": "兵庫県:109",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "岩野辺山崎線",
-   "ref": "429",
-   "highway": "secondary",
-   "lengthKm": 10.59,
-   "curviness": 255.7,
-   "flow": 20.2,
-   "turnCount": 134,
-   "score": 67.9,
-   "baseScore": 67.9,
-   "spotCount": 0,
-   "polyline": "{m{tEkv~sXaI~B}HLaBw@oDiFoH}C}VtEaHc@mE`Co@dAuErTo@nAgGnAwHtEuJzBsElBs@dAy@fIaBdDkJlIaPpIuLvAuNZ_Da@cCaByPvCmQl@uPqBaHgCeIkA{FqBgF^_Du@qBfAyDT}DwDcN_HqBCoJvAmL_DyIOkB{@sH_@_CwF_EqBcAaBiBi@iAkCmD[}FsC}CgCuCKeCu@uB~@}DcAuC|@oFmC}C^sEiEqEg@gDXuD]oCuAq@aBo@?uAfBsDb@mDoDqAHiJeDeCSAe@t@SIa@iAR{A}@aEs@mBn@",
-   "pointCount": 78,
-   "start": [
-    35.043664,
-    134.511259
-   ],
-   "end": [
-    35.127106,
-    134.511691
-   ]
-  },
-  {
-   "id": "兵庫県:110",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "長坂垂水線",
-   "ref": "488",
-   "highway": "secondary",
-   "lengthKm": 5.19,
-   "curviness": 218.6,
-   "flow": 21,
-   "turnCount": 54,
-   "score": 67.7,
-   "baseScore": 64.8,
-   "spotCount": 1,
-   "polyline": "uakrE{_iwXuFt@{Bq@oByBs@}ByKsKsEmBqDgC_@eCmLiHqCsDu_@oPmMwAoH{KcCqBgJsDsPj@oJeEuKeBhMxBtIfDtPi@~K~ErJ~M|LpA",
-   "pointCount": 25,
-   "start": [
-    34.632112,
-    135.055499
-   ],
-   "end": [
-    34.647028,
-    135.065907
-   ]
-  },
-  {
-   "id": "兵庫県:111",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "山手幹線",
-   "ref": "",
-   "highway": "primary",
-   "lengthKm": 5.07,
-   "curviness": 180.3,
-   "flow": 39.7,
-   "turnCount": 23,
-   "score": 67.7,
-   "baseScore": 67.7,
-   "spotCount": 0,
-   "polyline": "uzzrE}ajxXqp@gyCmJu|@_EoSgAkC\\ZxEbW~Jzz@",
-   "pointCount": 8,
-   "start": [
-    34.712906,
-    135.224789
-   ],
-   "end": [
-    34.720825,
-    135.249742
-   ]
-  },
-  {
-   "id": "兵庫県:112",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "下佐曽利笹尾線",
-   "ref": "319",
-   "highway": "secondary",
-   "lengthKm": 4.5,
-   "curviness": 253.3,
-   "flow": 21.5,
-   "turnCount": 53,
-   "score": 67.6,
-   "baseScore": 67.6,
-   "spotCount": 0,
-   "polyline": "mfitEcg~xXlClJ|InGnGaBrB~@bAxAbBf@hAfGnDcAtBCnOlHjIfGtB\\v@vNfB`GjML`DjAxFRhJ{CbFF`JrJ~LxHnC~EvDrBfLpAfFFzHrDhEg@vF_C",
-   "pointCount": 29,
-   "start": [
-    34.950305,
-    135.32802
-   ],
-   "end": [
-    34.917468,
-    135.311152
-   ]
-  },
-  {
-   "id": "兵庫県:113",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "日影養父線",
-   "ref": "267",
-   "highway": "secondary",
-   "lengthKm": 9.26,
-   "curviness": 251.8,
-   "flow": 20.3,
-   "turnCount": 115,
-   "score": 67.4,
-   "baseScore": 67.4,
-   "spotCount": 0,
-   "polyline": "okewEu}~tX^mJxBwFx@yHhBcDs@iEfCsGj@oD`@_@VsFhAaA@sDa@yDx@gGn@y@FsAjAmCfBwHOiB_BiDa@oEuEgRjA{Hd@{NzAyH@oCi@gDN{BpGkHdGkBz@oB~@oFtAaC{AsB]qEsB}IjBgDf@}BDcF`E_Ff@qEYcGj@uHv@sBrCyCd@oAi@cUd@wJb@wDhF{KSwPzC{UfCu]B}PnCcKfBeb@lDeNx@mOj@eBfDkZvFkCuAsG{@yS",
-   "pointCount": 63,
-   "start": [
-    35.422161,
-    134.67627
-   ],
-   "end": [
-    35.406385,
-    134.769032
-   ]
-  },
-  {
-   "id": "兵庫県:114",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "塩田三日月線",
-   "ref": "433",
-   "highway": "secondary",
-   "lengthKm": 8.97,
-   "curviness": 259.1,
-   "flow": 19.7,
-   "turnCount": 118,
-   "score": 67.3,
-   "baseScore": 67.3,
-   "spotCount": 0,
-   "polyline": "cootEsrpsXcEsCsEy@yHaG{BaN_KsNqBgA}RkEgUcRsDeEuAiFmAwMcEmNiB_R{CmFkD[wA_BgCgj@`@kM]_BcBgCsHwFgC_@uH{C{DeEoDLsCtBqFDwH~AmHo@qDdAqKR{FkBcDGgM|B}EJ{E|AmEg@kHqCcEBkFkD~C}BnB_Gg@cA^gFa@sBc@OaAxB]eAR_Bu@gBDmC_AeIhAaOKiDcOmTiGyD",
-   "pointCount": 57,
-   "start": [
-    34.982419,
-    134.438983
-   ],
-   "end": [
-    35.030699,
-    134.490778
-   ],
-   "unpaved": {
-    "unpavedMeters": 2475,
-    "totalMeters": 8975,
-    "ratio": 0.276,
-    "surface": "unpaved",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "兵庫県:115",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "高松線",
-   "ref": "",
-   "highway": "primary",
-   "lengthKm": 8.8,
-   "curviness": 192.2,
-   "flow": 22.8,
-   "turnCount": 74,
-   "score": 66.9,
-   "baseScore": 64,
-   "spotCount": 1,
-   "polyline": "_asrEww`xXpLlDjn@fBtAGrS_H`A?xAn@pNbNbBtEpBzNb@pGJjUrBrOTbVWfFxErQPrMhA~EnApCxGlGvMf]kNa]iHqJsByIg@eKeE{QVe\\sCwUs@_\\wCoNu@eBwNmNwAi@yTdGuEO",
-   "pointCount": 35,
-   "start": [
-    34.672962,
-    135.177082
-   ],
-   "end": [
-    34.663759,
-    135.17582
-   ]
-  },
-  {
-   "id": "兵庫県:116",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "山本伊丹線",
-   "ref": "332",
-   "highway": "secondary",
-   "lengthKm": 4.1,
-   "curviness": 191.4,
-   "flow": 25.3,
-   "turnCount": 31,
-   "score": 66.9,
-   "baseScore": 66.9,
-   "spotCount": 0,
-   "polyline": "cqosEgniyXz@]v@yBZ}JzQmLeAgFOuEdXkLjKgAnJeCbCiG~IcClCgDfGqExEu@fBqA`JqDnS}GpF_FdDaB}@iHjEg@|BeAtJiJ",
-   "pointCount": 24,
-   "start": [
-    34.818904,
-    135.385476
-   ],
-   "end": [
-    34.791377,
-    135.408043
-   ]
-  },
-  {
-   "id": "兵庫県:117",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "高田上郡線",
-   "ref": "385",
-   "highway": "secondary",
-   "lengthKm": 4.62,
-   "curviness": 278.2,
-   "flow": 18.9,
-   "turnCount": 68,
-   "score": 66.7,
-   "baseScore": 66.7,
-   "spotCount": 0,
-   "polyline": "okwsEeusrXhGlIfApFIrAoBfCyIbAsAbBIvDj@|CpDzGhIpEZ~C_AbByA|@oKlEsDbGwEhNw@ZkGKsIpI`@rHe@bCOdSzApGAtDd@~@f@jEMpEm@pBQbIoCvIh@|AEnJkArB[rBf@jHuAbDmCdCsArC",
-   "pointCount": 39,
-   "start": [
-    34.858961,
-    134.290906
-   ],
-   "end": [
-    34.867319,
-    134.252541
-   ],
-   "unpaved": {
-    "unpavedMeters": 2090,
-    "totalMeters": 4620,
-    "ratio": 0.452,
-    "surface": "unpaved",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "兵庫県:118",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "岸田諸寄線",
-   "ref": "262",
-   "highway": "secondary",
-   "lengthKm": 4.86,
-   "curviness": 276.6,
-   "flow": 18.9,
-   "turnCount": 71,
-   "score": 66.7,
-   "baseScore": 66.7,
-   "spotCount": 0,
-   "polyline": "}gkxE}znsXvHh@nGE|BdDfE~Qp@lAxBjAvDg@v@p@pKaD`GsHbHeF`OkQnEqAtHxAjC}AbBgDfNnIdG_@fDdBtBoAxA?vCvBvHbJlJhE~H@tFwAnCGtI{DtBAfEdAtLkBp@|A",
-   "pointCount": 33,
-   "start": [
-    35.616149,
-    134.430069
-   ],
-   "end": [
-    35.579345,
-    134.429025
-   ]
-  },
-  {
-   "id": "兵庫県:119",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "赤崎久谷停車場線",
-   "ref": "261",
-   "highway": "secondary",
-   "lengthKm": 3.09,
-   "curviness": 206.5,
-   "flow": 24.5,
-   "turnCount": 26,
-   "score": 66.7,
-   "baseScore": 66.7,
-   "spotCount": 0,
-   "polyline": "ocnxE_{|sXxOZf@|@|RvAfGtEOsSlE_Qm@kIqCqPyQkc@mCyM{@cBoAq@WJZhO",
-   "pointCount": 15,
-   "start": [
-    35.630802,
-    134.501762
-   ],
-   "end": [
-    35.627809,
-    134.516723
-   ]
-  },
-  {
-   "id": "兵庫県:120",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "西宮豊中線",
-   "ref": "606",
-   "highway": "secondary",
-   "lengthKm": 4.32,
-   "curviness": 146.3,
-   "flow": 28.8,
-   "turnCount": 22,
-   "score": 66.5,
-   "baseScore": 66.5,
-   "spotCount": 0,
-   "polyline": "yh`sEi`cyXsJdBoHNM{f@cAsCcEuEKa_@oAcs@_@u@qFcD_A_C_Fcd@kJvBcOClAcIG{DcHaT",
-   "pointCount": 17,
-   "start": [
-    34.740775,
-    135.35253
-   ],
-   "end": [
-    34.754323,
-    135.386623
-   ]
-  },
-  {
-   "id": "兵庫県:121",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "国道477号",
-   "ref": "477",
-   "highway": "trunk",
-   "lengthKm": 3.66,
-   "curviness": 314.4,
-   "flow": 21.3,
-   "turnCount": 54,
-   "score": 66.1,
-   "baseScore": 66.1,
-   "spotCount": 0,
-   "polyline": "k_`tEevtyXfFdEhFvJ|EpCrYn^`K`IlBdDp@JrB_A|BbC~D`@~Cy@rBd@hBQl@hBxDfFPfC`BtC`@rBzA`AdAdCxEo@bErDbJpEdJjHtCjK~AbDBfA",
-   "pointCount": 28,
-   "start": [
-    34.903101,
-    135.443073
-   ],
-   "end": [
-    34.87898,
-    135.420536
-   ]
-  },
-  {
-   "id": "兵庫県:122",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "茅野福岡線",
-   "ref": "531",
-   "highway": "secondary",
-   "lengthKm": 4.84,
-   "curviness": 279.8,
-   "flow": 18,
-   "turnCount": 75,
-   "score": 66,
-   "baseScore": 66,
-   "spotCount": 0,
-   "polyline": "}~awEs}gtXiAwF\\{CQaEl@oCe@mEz@mKF_JZ}@rBwAj@uEbF{GjAoFFgIhBQMoA{BeGwB{CeC_BaEqHoI_FmAaG_JiP{AyEgFaC}EoT_GwNcC}B{AsCoEwA}GkF[yAFcEsD}NXeE[kDqCsG{AkA",
-   "pointCount": 38,
-   "start": [
-    35.404793,
-    134.558498
-   ],
-   "end": [
-    35.418248,
-    134.601115
-   ]
-  },
-  {
-   "id": "兵庫県:123",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "尾崎志筑線",
-   "ref": "464",
-   "highway": "secondary",
-   "lengthKm": 6.76,
-   "curviness": 254,
-   "flow": 18.9,
-   "turnCount": 91,
-   "score": 65.5,
-   "baseScore": 65.5,
-   "spotCount": 0,
-   "polyline": "{roqEcecvXbAaCVoCz@c@bBwC|Dh@xHpDxIErEhApF}GzEqB|Aj@tA|D|Cr@tECfH}DbDoExIqAhEgHdAYdGDtHkLbPqKxB_CtNmG|FoFjK{EzBoInHgG|AuEtEQxG}FtLuBpCiAh@g@l@kCxCcBlBBrDkA~DoFhEdApLsBpDaE~AmEJiAq@iD`@wAnB{BrIeGdCaD",
-   "pointCount": 50,
-   "start": [
-    34.491499,
-    134.861775
-   ],
-   "end": [
-    34.443406,
-    134.891637
-   ]
-  },
-  {
-   "id": "兵庫県:124",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "上佐曽利木器線",
-   "ref": "323",
-   "highway": "secondary",
-   "lengthKm": 4.74,
-   "curviness": 251.6,
-   "flow": 19.5,
-   "turnCount": 61,
-   "score": 65.5,
-   "baseScore": 65.5,
-   "spotCount": 0,
-   "polyline": "svftEi~{xX?m@l@xGpApBlAbGi@nTj@tD?|EqAdJnAjZsAfJEnGs@`HoClEq@dG@hBjA~Gw@fF?zDmA`C`@~B]zEJf@lDzAhBdH|BtDLpR~FnQfJzP|@rCLdD_AhK{CjJbAtIOd@",
-   "pointCount": 35,
-   "start": [
-    34.937539,
-    135.316366
-   ],
-   "end": [
-    34.933666,
-    135.269032
-   ]
-  },
-  {
-   "id": "兵庫県:125",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "夢野白川線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 7.6,
-   "curviness": 213.6,
-   "flow": 18.7,
-   "turnCount": 87,
-   "score": 65.4,
-   "baseScore": 62.5,
-   "spotCount": 1,
-   "polyline": "_jvrEyfswXdIpDzCjEbBjLZ`ICxDyA`LnA_IAaJg@cIeBoLaC{CyGyBgCgCUoBH_XU{AoBuD}FqEg@eBNgCbE{H`@mCe@eCqEqI_ByE_Gah@JcFfCgK|AsPgBgUjBkGbDgGpCyBxGwChAeBNoBUuAmD{OXgBrZiPtA}BtAeF`E{DzCK`LbCnAc@dCqCeElC_CB",
-   "pointCount": 50,
-   "start": [
-    34.689759,
-    135.107813
-   ],
-   "end": [
-    34.68186,
-    135.152128
-   ]
-  },
-  {
-   "id": "兵庫県:126",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "神戸三木線",
-   "ref": "22",
-   "highway": "primary",
-   "lengthKm": 6.96,
-   "curviness": 241.1,
-   "flow": 18.3,
-   "turnCount": 92,
-   "score": 65.2,
-   "baseScore": 62.3,
-   "spotCount": 1,
-   "polyline": "k|prEedzwXz@nE`@h_@tEjPpBtEOxBiK`DaH`JmLjFkK`H{Cz@qG~HFpGYv@mJvAcAn@]vADrBkA|C{R`^uApAwBnPcHrFoHx@qB~@oJ_D{F\\qCbBgCvFaAf@sFS{E}AgFc@}AVoHdFm@~@BzFoCjFjBrEBtA_GbJ_BR{DmAyFvDcDn@_EFcC~FQzD",
-   "pointCount": 48,
-   "start": [
-    34.661978,
-    135.143226
-   ],
-   "end": [
-    34.697328,
-    135.100328
-   ]
-  },
-  {
-   "id": "兵庫県:127",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "明石神戸宝塚線",
-   "ref": "16",
-   "highway": "primary",
-   "lengthKm": 6.53,
-   "curviness": 204.9,
-   "flow": 23.5,
-   "turnCount": 57,
-   "score": 65.1,
-   "baseScore": 65.1,
-   "spotCount": 0,
-   "polyline": "cr|rEerwwXEjNn@tCl[`\\~DpB\\rA@mAqAAwCgBa\\a]a@cCTkN_BqQoGiOiBqAuUuEeFiGgM}K{DmIqBoBwBU}MzAgKeCoOqVeBo@iBVpCvA|F_r@aBiMCiGd@iApBq@",
-   "pointCount": 32,
-   "start": [
-    34.721779,
-    135.130112
-   ],
-   "end": [
-    34.7391,
-    135.158973
-   ]
-  },
-  {
-   "id": "兵庫県:128",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "伊丹豊中線",
-   "ref": "99",
-   "highway": "primary",
-   "lengthKm": 3.59,
-   "curviness": 160.1,
-   "flow": 27.4,
-   "turnCount": 21,
-   "score": 64.9,
-   "baseScore": 64.9,
-   "spotCount": 0,
-   "polyline": "arhsE{fpyXjApOiBsRIkElBoQUoP|Asz@_Aro@ExZaBdRXlH",
-   "pointCount": 11,
-   "start": [
-    34.783206,
-    135.420143
-   ],
-   "end": [
-    34.783206,
-    135.420143
-   ]
-  },
-  {
-   "id": "兵庫県:129",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "東河内安富線",
-   "ref": "430",
-   "highway": "secondary",
-   "lengthKm": 15.01,
-   "curviness": 229.2,
-   "flow": 18.7,
-   "turnCount": 184,
-   "score": 64.9,
-   "baseScore": 64.9,
-   "spotCount": 0,
-   "polyline": "a|duE_iytXf@hCSjAX|C~A~Ff@jFbAjEIpJpGl@pHeEdKdGjFhE`BJzDkBp@JbA|ApGzC|BzDrG~GvAnChF|EjFfBbGWnI`@pFk@xBnAhKvTbCr@`E?zElDbD?dElE|AAxBiBfAO`DlAzDeDfAJxA~@~CDxGbJlBpG~C|ERbKv@vBfHhBnJ?pHlI|DdAjM|VvEhAjE[f@`EnAfCjGbCbGtL`@~BKnBw@`AuBv@G`AnBlAdBlDlCnBdDxObAVbEQpJ}EdCHjGhQ|NfOnHgBzTsIrY?z@i@fAwC~F}BlTwA~QRbK~ArIrD`O`RtBd@~DO`Bd@lHjL|ENnM{@xIuC~KyApDmBh[}@nDh@hOzGnInFxKj@",
-   "pointCount": 96,
-   "start": [
-    35.092005,
-    134.647364
-   ],
-   "end": [
-    34.987032,
-    134.595293
-   ],
-   "unpaved": {
-    "unpavedMeters": 2518,
-    "totalMeters": 15014,
-    "ratio": 0.168,
-    "surface": "unpaved",
-    "label": "未舗装"
-   }
-  },
-  {
-   "id": "兵庫県:130",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "黒石三田線",
-   "ref": "141",
-   "highway": "secondary",
-   "lengthKm": 4.68,
-   "curviness": 209.7,
-   "flow": 21.8,
-   "turnCount": 45,
-   "score": 64.8,
-   "baseScore": 64.8,
-   "spotCount": 0,
-   "polyline": "{v~sEgigxXbGoDjLqE~FmHf@cBd@oInFwJ`E_Yn@kAjDsBsBmLcAwApFw\\nA}BbBq@zBNxMfEdKxEtAvCzD~U{CcUqAeDuAmAsIyC_QcEgCbAyAbE",
-   "pointCount": 27,
-   "start": [
-    34.896617,
-    135.210598
-   ],
-   "end": [
-    34.888071,
-    135.230034
-   ]
-  },
-  {
-   "id": "兵庫県:131",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "上村養父線",
-   "ref": "255",
-   "highway": "secondary",
-   "lengthKm": 6.32,
-   "curviness": 243.6,
-   "flow": 18.8,
-   "turnCount": 82,
-   "score": 64.6,
-   "baseScore": 64.6,
-   "spotCount": 0,
-   "polyline": "qsawE{_`vX[rDJrB`CxClCwAdAExDhBpBZnChBjEcBhFNvExAtBHjCjAxFP~Cv@xGjGtE~A~AtAdA`DMfAmFtB}@hAe@`CFbFdDpERfA_CpEcDdKy@b\\`@r@nDtAjIdGfCfE`B~EtFnHxBnJdEjM~A|OzArEfEwCjF@~DfB`Ej@zArCbHtFhFzB`Gv@vBKvNwDpEmD",
-   "pointCount": 51,
-   "start": [
-    35.402968,
-    134.845578
-   ],
-   "end": [
-    35.371431,
-    134.811968
-   ]
-  },
-  {
-   "id": "兵庫県:132",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "洲本五色線",
-   "ref": "46",
-   "highway": "primary",
-   "lengthKm": 10.24,
-   "curviness": 242.3,
-   "flow": 19.4,
-   "turnCount": 128,
-   "score": 64.3,
-   "baseScore": 64.3,
-   "spotCount": 0,
-   "polyline": "{c`qEegtuXoBsKLiBjTcSz@{BtA{KnB}H]_BkGcGLgFjBkGSgE~@mFC}CdBsEzBsBxKqUl@wDPiGl@kBvBsBmAmBNeAVc@~Dw@bFkFp@wGf@o@z@EzCpAjFKjGqDfGoFhHcTdD}GlDuDbCqLjHoE|@_AbAuCr@_FrBcFp@iEjBsDpDq]oBiI@cHdFiHvA}En@o@pGFnByBC{AgBmDOwF~QeKxBsCrDiI~AkApEiAhAvDbABTcA[}CL{A|E_H`DgIf_@yRp@cCJcOhA{KvHaNhAcA",
-   "pointCount": 73,
-   "start": [
-    34.412304,
-    134.785308
-   ],
-   "end": [
-    34.369523,
-    134.865374
-   ]
-  },
-  {
-   "id": "兵庫県:133",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "切畑猪名川線",
-   "ref": "324",
-   "highway": "secondary",
-   "lengthKm": 4.63,
-   "curviness": 259.7,
-   "flow": 18,
-   "turnCount": 67,
-   "score": 64.3,
-   "baseScore": 64.3,
-   "spotCount": 0,
-   "polyline": "}n}sEulgyXiDpEs@fDNrCgCtLfBbFxDfFtCrIShX_AdHzAvItAzR~CzDx@lClC~SSbFRhCfDrJxIdHVhC[`Fh@rBlAxAnCTn@tBxBfCXxDlAjBDlCxAlBXfC|BzBhFzIL|Ch@hB`LpK",
-   "pointCount": 36,
-   "start": [
-    34.890232,
-    135.374989
-   ],
-   "end": [
-    34.87745,
-    135.332249
-   ]
-  },
-  {
-   "id": "兵庫県:134",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "明石神戸宝塚線",
-   "ref": "16",
-   "highway": "primary",
-   "lengthKm": 6.88,
-   "curviness": 233.6,
-   "flow": 20.1,
-   "turnCount": 80,
-   "score": 63.7,
-   "baseScore": 63.7,
-   "spotCount": 0,
-   "polyline": "qbvrEgcgwXoLoPeGoBgBeDMaWmIi[}B{Mi@uH_IqKuAqEcDmGi@cD_A_]z@cGOmAzHmGdCmF|C}M~B_CiDcOsMm\\qDaG}@yEJmNzCyIrAsLLiFzAgBRsAi@cOiEi@}Bx@oAo@k@cCuAyBiBKeCaD]uDJuBy@}FiB_AkBmC_Du@aBkA",
-   "pointCount": 44,
-   "start": [
-    34.688566,
-    135.045799
-   ],
-   "end": [
-    34.703961,
-    135.107084
-   ]
-  },
-  {
-   "id": "兵庫県:135",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "白浜姫路停車場線",
-   "ref": "402",
-   "highway": "secondary",
-   "lengthKm": 3.11,
-   "curviness": 123.5,
-   "flow": 27.4,
-   "turnCount": 14,
-   "score": 63.7,
-   "baseScore": 63.7,
-   "spotCount": 0,
-   "polyline": "gdpsE}pcuXpGkYxDhClC|E~UiI~i@fOdDAvEu@|EkFlIkCtIuHnQmM",
-   "pointCount": 12,
-   "start": [
-    34.821962,
-    134.699832
-   ],
-   "end": [
-    34.799031,
-    134.707319
-   ]
-  },
-  {
-   "id": "兵庫県:136",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "国道482号",
-   "ref": "482",
-   "highway": "trunk",
-   "lengthKm": 4.29,
-   "curviness": 289.4,
-   "flow": 20.4,
-   "turnCount": 61,
-   "score": 63.5,
-   "baseScore": 63.5,
-   "spotCount": 0,
-   "polyline": "wiswEkc`uX`EiF~C{Hg@mLuC_EQaBTuAzI}B^ZMjF`@p@lCwBbF_@~@qBoBoHdL{DfB{BDm@mDkGdDw[@gOrEuPbCcCxE}InAiA~EoB|FaEbMy@fFsBjB{AbD{H",
-   "pointCount": 31,
-   "start": [
-    35.493563,
-    134.682302
-   ],
-   "end": [
-    35.476101,
-    134.711372
-   ]
-  },
-  {
-   "id": "兵庫県:137",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "口小野矢根線",
-   "ref": "247",
-   "highway": "secondary",
-   "lengthKm": 8.22,
-   "curviness": 236.8,
-   "flow": 17.9,
-   "turnCount": 109,
-   "score": 63.5,
-   "baseScore": 63.5,
-   "spotCount": 0,
-   "polyline": "ubuwEi}gvXdAcCBuCsDqT_DsGaAoDqDqBqCaEqACgDpB}AmAc@iKdCoKe@oJHyCn@kBnBa@hAdAr@lCn@d@x@Cr@iAB}C`@eAnEwAvAcG|FkFbUam@l@_Gg@kK|F}I~Aa@jEdBbAKj@aBG}CbAeAfARvBzDbBf@nFk@nFwCfF[zBeC`BsJlEgFvA{@zEo@`OkGnH{JvA}@bSgBzJyDdH}D|IqA`P]hF}CxS{ArDtA~DH",
-   "pointCount": 60,
-   "start": [
-    35.502671,
-    134.886128
-   ],
-   "end": [
-    35.464296,
-    134.930237
-   ]
-  },
-  {
-   "id": "兵庫県:138",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "姫路神河線",
-   "ref": "67",
-   "highway": "primary",
-   "lengthKm": 11.04,
-   "curviness": 239.6,
-   "flow": 18.4,
-   "turnCount": 144,
-   "score": 63.1,
-   "baseScore": 63.1,
-   "spotCount": 0,
-   "polyline": "ks`uEww_uXnM~@fCw@zDJrCsDrFk@pE{FrGmEtNq@`J_EbAsA\\mDlBkDb@GdEjD`BD`Du@dNlFlHjAzHDr@t@~@fFlBv@vJ~HbCk@t@NpAq@|HxFvEs@xBRhLfJ|BdHbKpHdCe@hD}Kj@UpDxFbGr@Z^wAbFOtFyC`Nf@VGzBf@pArDt@vGeA~BR`JpD~FJpBU|BoAvUuT|@oAdBsFdEkGbKwIrJ_DhBIdGnBpGp@hENbFq@~GwF`BwFrBmClDoAfEa@rD~BfAEjLyIxPkSfB[zQ`GlMoIzPwB",
-   "pointCount": 76,
-   "start": [
-    35.070145,
-    134.680436
-   ],
-   "end": [
-    34.991887,
-    134.68806
-   ]
-  },
-  {
-   "id": "兵庫県:139",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "神戸明石線",
-   "ref": "21",
-   "highway": "primary",
-   "lengthKm": 3.11,
-   "curviness": 195.3,
-   "flow": 23.4,
-   "turnCount": 26,
-   "score": 63,
-   "baseScore": 63,
-   "spotCount": 0,
-   "polyline": "{kvrEwacxXi@EmNiYyFqTW\\fDdLzV|g@pC~MvBfFjStWvFnC`Fl@nDlE",
-   "pointCount": 13,
-   "start": [
-    34.690063,
-    135.188922
-   ],
-   "end": [
-    34.681613,
-    135.178305
-   ]
-  },
-  {
-   "id": "兵庫県:140",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "国道171号",
-   "ref": "171",
-   "highway": "trunk",
-   "lengthKm": 4.05,
-   "curviness": 174.5,
-   "flow": 41.6,
-   "turnCount": 17,
-   "score": 63,
-   "baseScore": 63,
-   "spotCount": 0,
-   "polyline": "w~ksEyfryXkBuBcGe@_u@s@JoUBnTz_@jAz]TbBlGbDrX~Bfd@",
-   "pointCount": 11,
-   "start": [
-    34.8006,
-    135.430371
-   ],
-   "end": [
-    34.79884,
-    135.419669
-   ]
-  },
-  {
-   "id": "兵庫県:141",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "小野藍本線",
-   "ref": "75",
-   "highway": "primary",
-   "lengthKm": 7.93,
-   "curviness": 237.1,
-   "flow": 19,
-   "turnCount": 99,
-   "score": 63,
-   "baseScore": 63,
-   "spotCount": 0,
-   "polyline": "}yetEqoqwXaB{@yFuJIu@f@yBQuAwDuB_G_HsDaBmBsBmBoF`@eE{@{Dk@[sDE{@u@MoBb@sBjGqNFoGuA_VaByDsBcB_[{I}@qF}BcDgDeNuHaDqCcIeCsCkCcAmBiEwEmF}Ag@aD^_HKoBoC_GaEiJqJq@iA`@cNj@cFm@oCsFyKuBmJyCcE}A@wOuDyHwEcBeBkAkCiBOmWce@yCiDcE}BReJ",
-   "pointCount": 56,
-   "start": [
-    34.932955,
-    135.098967
-   ],
-   "end": [
-    34.972656,
-    135.156919
-   ]
-  },
-  {
-   "id": "兵庫県:142",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "平木南山線",
-   "ref": "313",
-   "highway": "secondary",
-   "lengthKm": 3.42,
-   "curviness": 193.6,
-   "flow": 21.4,
-   "turnCount": 31,
-   "score": 62.5,
-   "baseScore": 62.5,
-   "spotCount": 0,
-   "polyline": "y_~sEa`mwX_AnIcB]}YmWyAuB_BuEkB{P}@}B}A}A{C{@oIj@eI[dAzOg@|GyBzDk@vLs@pDoD~FmApGqJuCiNJ",
-   "pointCount": 21,
-   "start": [
-    34.892929,
-    135.07601
-   ],
-   "end": [
-    34.910905,
-    135.074108
-   ]
-  },
-  {
-   "id": "兵庫県:143",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "宍粟香寺線",
-   "ref": "80",
-   "highway": "primary",
-   "lengthKm": 8.44,
-   "curviness": 219.3,
-   "flow": 19.5,
-   "turnCount": 95,
-   "score": 62.4,
-   "baseScore": 62.4,
-   "spotCount": 0,
-   "polyline": "_pjtEuyltXU|GqAvE@hFwBdDgBtGWnIPtAa@lBVnCm@fDvAHa@fBVnAkEdHiCfPu@zBK`EyD~KyBhj@lBl`@kDV_H~BoD`@iKaDuQnCaHgG}KuNwBi@kDGiCf@wOfJsBzDq@jDgC`b@y@vEcBdDyApA_HxBuBrAaEtK}AdH_F`n@@fC`BpFhEhE|CrHXtB_AfDqMdMrAwA",
-   "pointCount": 51,
-   "start": [
-    34.956961,
-    134.583467
-   ],
-   "end": [
-    34.985171,
-    134.52395
-   ]
-  },
-  {
-   "id": "兵庫県:144",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "下庄佐用線",
-   "ref": "240",
-   "highway": "secondary",
-   "lengthKm": 5.51,
-   "curviness": 233.4,
-   "flow": 17.6,
-   "turnCount": 73,
-   "score": 62.3,
-   "baseScore": 62.3,
-   "spotCount": 0,
-   "polyline": "knutEcnasXuPqA_CToA`AqCjFkQvJmAvAmB`FaFtEyElC_EgAqIkFkBUuN~E_JlGk@bAs@~FoMnP_P]gHhDwQfCiC~BkFkBuEU{FhJiGcA}BlBk@rFX|FW`AmAt@_EDoDz@i@lAZ~BOhB}ArFyBh@uDsB",
-   "pointCount": 39,
-   "start": [
-    35.013019,
-    134.36146
-   ],
-   "end": [
-    35.051917,
-    134.340555
-   ]
-  },
-  {
-   "id": "兵庫県:145",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "相生壷根公園線",
-   "ref": "568",
-   "highway": "secondary",
-   "lengthKm": 4.17,
-   "curviness": 216.3,
-   "flow": 19.2,
-   "turnCount": 47,
-   "score": 62.2,
-   "baseScore": 62.2,
-   "spotCount": 0,
-   "polyline": "eclsEwqssXp@c@zCEtCvA~IfBzEZbCzAvKyAfDJbCgBnBaDtFBhVtMlFxGvCEjDi@`HuMpSyOdCg@hD`@hEa@bLnBzBfE|@JhAy@bBoDlDcDzBcI`G}DtBe@",
-   "pointCount": 30,
-   "start": [
-    34.801311,
-    134.454201
-   ],
-   "end": [
-    34.769602,
-    134.459403
-   ]
-  },
-  {
-   "id": "兵庫県:146",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "加美八千代線",
-   "ref": "143",
-   "highway": "secondary",
-   "lengthKm": 13.06,
-   "curviness": 202.3,
-   "flow": 18.2,
-   "turnCount": 145,
-   "score": 62.2,
-   "baseScore": 62.2,
-   "spotCount": 0,
-   "polyline": "gsrtE_zlvXyOrFsU`UaFpJiStXuSfKmBjHDdGo@nGzCd\\oExMqHhDo@jEm@`AoAR{GuB}JSqVmDkH{IcCsAyM`@_At@mAhCaA|L}DhMuI~HyF~BkDnCeH~AiHvCeArBM|Da@tAeFlCiZvFuPm@mJ|ByP}B{IP}OeA{El@cGsA}DfCgCpFmHxByEw@wY{I{RYkB`@eDEkDzAqC|BeAjBeEfCmGQ_JnAwDuAw@yAYqKh@g@xBJPa@iBwEYVn@lCaDLu@pDe@\\}DkOaB}D{JaIwE{UNiDw@gE",
-   "pointCount": 74,
-   "start": [
-    34.998442,
-    134.911201
-   ],
-   "end": [
-    35.082555,
-    134.885579
-   ]
-  },
-  {
-   "id": "兵庫県:147",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "西神中央線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.39,
-   "curviness": 163.3,
-   "flow": 23.1,
-   "turnCount": 24,
-   "score": 62.1,
-   "baseScore": 62.1,
-   "spotCount": 0,
-   "polyline": "kgzrE}hbwXs@K}^pWqY~DsDFoDfAsFnFsQn_@`Qu_@vAgBlDaCxLwBtKu@",
-   "pointCount": 13,
-   "start": [
-    34.709822,
-    135.021112
-   ],
-   "end": [
-    34.716976,
-    135.016748
-   ]
-  },
-  {
-   "id": "兵庫県:148",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "名谷下畑線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.84,
-   "curviness": 206.6,
-   "flow": 19.8,
-   "turnCount": 40,
-   "score": 62.1,
-   "baseScore": 62.1,
-   "spotCount": 0,
-   "polyline": "{gprEumnwXlE~LpDlDnC|@|KdAxHfG~Bz@fEIxGoB{GbCqFIaL{HgK_AaFoB}B}CyDcLuDnBkArBS`EfA|JtErIf@pBUxJfD`I@rLUhD",
-   "pointCount": 26,
-   "start": [
-    34.658701,
-    135.083306
-   ],
-   "end": [
-    34.657874,
-    135.070454
-   ]
-  },
-  {
-   "id": "兵庫県:149",
-   "region": "hyogo",
-   "regionName": "兵庫県",
-   "name": "国道176号",
-   "ref": "176",
-   "highway": "trunk",
-   "lengthKm": 4.31,
-   "curviness": 195.9,
-   "flow": 25.6,
-   "turnCount": 33,
-   "score": 62.1,
-   "baseScore": 62.1,
-   "spotCount": 0,
-   "polyline": "_yosEgt}xXkBoD_@oD\\_NnA_FbHeOrDqEl@@vYsNfNaZrE}TbGsTu@StBePNsBUcAoHaDMaIcQma@oDaEwGcF",
-   "pointCount": 21,
-   "start": [
-    34.820165,
-    135.324998
-   ],
-   "end": [
-    34.815125,
-    135.361516
-   ],
-   "tags": [
-    "flowing"
-   ]
   }
  ],
- "hiddenCount": 57
+ "hiddenCount": 116
 }

@@ -1,16 +1,17 @@
 {
  "prefecture": "秋田県",
  "romaji": "akita",
- "generation": 5,
- "contentHash": "709b531dd72a",
- "builtAt": "2026-10-11T10:56:18.249Z",
+ "generation": 6,
+ "contentHash": "27a236ed2686",
+ "overridesHash": "2adc8b45cf76",
+ "builtAt": "2026-10-21T12:27:14.931Z",
  "weights": {
   "curviness": 0.41,
   "flow": 0.3,
   "length": 0.18,
   "classRank": 0.11
  },
- "count": 150,
+ "count": 117,
  "segments": [
   {
    "id": "秋田県:0",
@@ -37,6 +38,7 @@
     139.94551
    ],
    "reshaped": true,
+   "overrideKey": "鳥海ブルーライン@39.11,139.98",
    "boost": 10,
    "tags": [
     "scenic",
@@ -68,6 +70,7 @@
     38.967608,
     140.526595
    ],
+   "overrideKey": "秋ノ宮小安温泉線@39.01,140.63",
    "tags": [
     "winding",
     "caution"
@@ -97,6 +100,7 @@
     39.085079,
     140.718276
    ],
+   "overrideKey": "小安温泉椿川線@39.04,140.64",
    "tags": [
     "winding",
     "caution"
@@ -127,6 +131,7 @@
     140.97583
    ],
    "reshaped": true,
+   "overrideKey": "八幡平アスピーテライン@40.01,140.80",
    "boost": 16,
    "tags": [
     "winding",
@@ -158,6 +163,7 @@
     140.6736
    ],
    "reshaped": true,
+   "overrideKey": "比内森吉線@40.04,140.57",
    "boost": 15,
    "title": "くまげらエコーライン",
    "tags": [
@@ -191,6 +197,7 @@
     140.37234
    ],
    "reshaped": true,
+   "overrideKey": "鴻屋梺線@39.19,140.34",
    "tags": [
     "winding",
     "caution"
@@ -220,6 +227,7 @@
     39.389295,
     140.229697
    ],
+   "overrideKey": "楢渕横渡線@39.31,140.26",
    "tags": [
     "winding",
     "flowing"
@@ -250,6 +258,7 @@
     140.08744
    ],
    "reshaped": true,
+   "overrideKey": "象潟矢島線@39.17,140.01",
    "tags": [
     "winding",
     "caution"
@@ -280,6 +289,7 @@
     140.83456
    ],
    "reshaped": true,
+   "overrideKey": "国道454号@40.50,140.83",
    "tags": [
     "flowing"
    ]
@@ -308,6 +318,7 @@
     39.449245,
     140.099364
    ],
+   "overrideKey": "本荘岩城線@39.50,140.08",
    "tags": [
     "winding",
     "flowing"
@@ -337,7 +348,8 @@
     39.27487,
     139.97357
    ],
-   "reshaped": true
+   "reshaped": true,
+   "overrideKey": "仁賀保矢島館合線@39.23,140.13"
   },
   {
    "id": "秋田県:11",
@@ -364,6 +376,7 @@
     140.82854
    ],
    "reshaped": true,
+   "overrideKey": "国道103号@40.45,140.94",
    "boost": 10,
    "tags": [
     "winding",
@@ -394,6 +407,7 @@
     39.487297,
     140.043254
    ],
+   "overrideKey": "国道341号@39.56,140.21",
    "tags": [
     "winding",
     "flowing",
@@ -425,6 +439,7 @@
     140.12092
    ],
    "reshaped": true,
+   "overrideKey": "久保秋田線@39.84,140.11",
    "tags": [
     "flowing"
    ]
@@ -453,6 +468,7 @@
     39.252017,
     140.685261
    ],
+   "overrideKey": "南郷黒沢線@39.27,140.70",
    "title": "バードハイライン",
    "tags": [
     "winding",
@@ -483,6 +499,7 @@
     39.282032,
     140.274997
    ],
+   "overrideKey": "仁賀保矢島館合線@39.23,140.15",
    "tags": [
     "winding",
     "flowing",
@@ -513,6 +530,7 @@
     39.380356,
     140.122934
    ],
+   "overrideKey": "本荘岩城線@39.45,140.11",
    "tags": [
     "winding",
     "flowing"
@@ -542,6 +560,7 @@
     39.172712,
     140.713247
    ],
+   "overrideKey": "国道397号@39.15,140.76",
    "tags": [
     "winding",
     "flowing"
@@ -571,6 +590,7 @@
     40.305959,
     140.189582
    ],
+   "overrideKey": "小滝二ツ井線@40.22,140.22",
    "tags": [
     "winding"
    ]
@@ -600,6 +620,7 @@
     140.27676
    ],
    "reshaped": true,
+   "overrideKey": "十文字羽後鳥海線@39.14,140.31",
    "tags": [
     "winding",
     "flowing"
@@ -629,6 +650,7 @@
     39.805801,
     140.798399
    ],
+   "overrideKey": "西山生保内線@39.77,140.76",
    "tags": [
     "winding",
     "flowing"
@@ -666,6 +688,7 @@
     "label": "未舗装"
    },
    "reshaped": true,
+   "overrideKey": "長岡冬師城内線@39.21,139.96",
    "title": "鳥海グリーンライン",
    "tags": [
     "winding",
@@ -696,6 +719,7 @@
     39.946827,
     139.720142
    ],
+   "overrideKey": "男鹿半島線@39.88,139.85",
    "tags": [
     "scenic",
     "winding",
@@ -726,6 +750,7 @@
     40.333953,
     140.22231
    ],
+   "overrideKey": "きみまち阪公園素波里湖線@40.31,140.23",
    "tags": [
     "winding"
    ]
@@ -754,6 +779,7 @@
     39.291973,
     140.372947
    ],
+   "overrideKey": "林道三ツ森山線@39.30,140.31",
    "tags": [
     "winding",
     "flowing"
@@ -817,6 +843,7 @@
     38.979325,
     140.76556
    ],
+   "overrideKey": "仁郷大湯線@38.98,140.71",
    "title": "栗駒ロマンティック街道",
    "tags": [
     "winding",
@@ -847,6 +874,7 @@
     40.417937,
     140.686515
    ],
+   "overrideKey": "国道282号@40.39,140.70",
    "tags": [
     "winding",
     "flowing"
@@ -877,6 +905,7 @@
     140.27476
    ],
    "reshaped": true,
+   "overrideKey": "琴丘上小阿仁線@40.04,140.18",
    "tags": [
     "winding"
    ]
@@ -906,6 +935,7 @@
     140.03163
    ],
    "reshaped": true,
+   "overrideKey": "冬師西目線@39.32,140.01",
    "tags": [
     "winding",
     "flowing"
@@ -935,6 +965,7 @@
     39.924917,
     139.905685
    ],
+   "overrideKey": "入道崎寒風山線@39.94,139.84",
    "tags": [
     "winding",
     "flowing"
@@ -964,6 +995,7 @@
     39.840412,
     140.635242
    ],
+   "overrideKey": "上桧木内玉川線@39.81,140.59",
    "tags": [
     "winding",
     "flowing"
@@ -993,6 +1025,7 @@
     39.284182,
     140.613498
    ],
+   "overrideKey": "横手東成瀬線@39.17,140.72",
    "tags": [
     "winding",
     "caution"
@@ -1023,6 +1056,7 @@
     140.64465
    ],
    "reshaped": true,
+   "overrideKey": "湯沢栗駒公園線@39.03,140.57",
    "title": "コスモスライン",
    "tags": [
     "winding",
@@ -1053,6 +1087,7 @@
     39.522438,
     140.308281
    ],
+   "overrideKey": "西仙北南外線@39.46,140.32",
    "tags": [
     "winding"
    ]
@@ -1081,6 +1116,7 @@
     39.298094,
     140.631074
    ],
+   "overrideKey": "外山落合線@39.35,140.66",
    "tags": [
     "winding",
     "caution"
@@ -1111,6 +1147,7 @@
     139.70253
    ],
    "reshaped": true,
+   "overrideKey": "入道崎八望台北浦線@39.97,139.76",
    "tags": [
     "flowing"
    ]
@@ -1140,6 +1177,7 @@
     139.84578
    ],
    "reshaped": true,
+   "overrideKey": "男鹿半島線@39.91,139.90",
    "tags": [
     "winding"
    ]
@@ -1168,6 +1206,7 @@
     38.979364,
     140.714083
    ],
+   "overrideKey": "国道398号@38.93,140.72",
    "tags": [
     "winding",
     "caution"
@@ -1197,6 +1236,7 @@
     40.272004,
     140.768641
    ],
+   "overrideKey": "雪沢十和田毛馬内線@40.28,140.69",
    "tags": [
     "winding",
     "caution"
@@ -1227,6 +1267,7 @@
     140.63539
    ],
    "reshaped": true,
+   "overrideKey": "国道341号@40.04,140.82",
    "tags": [
     "winding",
     "flowing"
@@ -1256,6 +1297,7 @@
     39.781353,
     140.102273
    ],
+   "overrideKey": "上新城土崎港線@39.80,140.13",
    "tags": [
     "flowing"
    ]
@@ -1285,6 +1327,7 @@
     140.76934
    ],
    "reshaped": true,
+   "overrideKey": "国道342号@39.02,140.73",
    "tags": [
     "winding",
     "flowing"
@@ -1315,6 +1358,7 @@
     140.2336
    ],
    "reshaped": true,
+   "overrideKey": "きみまち阪公園素波里湖線@40.27,140.26",
    "tags": [
     "flowing"
    ]
@@ -1344,6 +1388,7 @@
     140.42145
    ],
    "reshaped": true,
+   "overrideKey": "ワインロード@39.37,140.44",
    "tags": [
     "flowing"
    ]
@@ -1372,6 +1417,7 @@
     39.739855,
     140.716722
    ],
+   "overrideKey": "田沢湖西木線@39.75,140.60",
    "tags": [
     "scenic",
     "winding",
@@ -1402,6 +1448,7 @@
     40.119981,
     140.367735
    ],
+   "overrideKey": "国道285号旧道@40.10,140.35",
    "tags": [
     "winding",
     "flowing"
@@ -1431,6 +1478,7 @@
     39.281941,
     140.114708
    ],
+   "overrideKey": "西滝沢館線@39.34,140.12",
    "tags": [
     "flowing"
    ]
@@ -1460,6 +1508,7 @@
     140.39999
    ],
    "reshaped": true,
+   "overrideKey": "揚の下岩脇線@40.10,140.44",
    "tags": [
     "flowing"
    ]
@@ -1489,6 +1538,7 @@
     140.4554
    ],
    "reshaped": true,
+   "overrideKey": "唐松宇津野線@39.66,140.35",
    "tags": [
     "winding",
     "flowing"
@@ -1518,6 +1568,7 @@
     39.192415,
     140.411965
    ],
+   "overrideKey": "国道398号@39.28,140.29",
    "tags": [
     "winding",
     "flowing"
@@ -1547,6 +1598,7 @@
     40.156836,
     140.786699
    ],
+   "overrideKey": "根瀬尾去沢線@40.08,140.79",
    "tags": [
     "flowing"
    ]
@@ -1575,6 +1627,7 @@
     39.334138,
     140.068464
    ],
+   "overrideKey": "南由利原鮎川線@39.24,140.05",
    "tags": [
     "winding",
     "flowing"
@@ -1604,6 +1657,7 @@
     39.364157,
     140.35813
    ],
+   "overrideKey": "横手大森大内線@39.43,140.23",
    "tags": [
     "winding",
     "flowing",
@@ -1634,6 +1688,7 @@
     39.218909,
     140.145658
    ],
+   "overrideKey": "鳥海矢島線@39.11,140.29",
    "tags": [
     "flowing"
    ]
@@ -1663,6 +1718,7 @@
     140.81848
    ],
    "reshaped": true,
+   "overrideKey": "大館十和田湖線@40.36,140.78",
    "tags": [
     "winding",
     "flowing"
@@ -1692,6 +1748,7 @@
     39.015065,
     140.657878
    ],
+   "overrideKey": "国道398号@38.99,140.71",
    "tags": [
     "winding",
     "flowing"
@@ -1721,6 +1778,7 @@
     40.215549,
     140.224929
    ],
+   "overrideKey": "高屋敷茶屋下線@40.09,140.24",
    "tags": [
     "winding",
     "flowing"
@@ -1750,6 +1808,7 @@
     40.256022,
     140.796937
    ],
+   "overrideKey": "十二所花輪大湯線@40.19,140.71",
    "tags": [
     "winding",
     "flowing"
@@ -1779,6 +1838,7 @@
     40.20011,
     140.356422
    ],
+   "overrideKey": "木戸石鷹巣線@40.18,140.30",
    "tags": [
     "flowing"
    ]
@@ -1807,6 +1867,7 @@
     39.154455,
     140.312878
    ],
+   "overrideKey": "十文字羽後鳥海線@39.19,140.39",
    "tags": [
     "flowing"
    ]
@@ -1835,6 +1896,7 @@
     39.965905,
     139.897526
    ],
+   "overrideKey": "払戸琴川線@39.97,139.87",
    "tags": [
     "flowing"
    ]
@@ -1863,6 +1925,7 @@
     40.067221,
     140.148214
    ],
+   "overrideKey": "能代五城目線@40.10,140.08",
    "tags": [
     "flowing"
    ]
@@ -1891,6 +1954,7 @@
     39.91797,
     139.851142
    ],
+   "overrideKey": "国道101号@40.06,139.94",
    "tags": [
     "flowing"
    ]
@@ -1919,6 +1983,7 @@
     39.155683,
     139.960101
    ],
+   "overrideKey": "鳥海公園小滝線@39.19,139.94",
    "tags": [
     "flowing"
    ]
@@ -1947,6 +2012,7 @@
     39.526415,
     140.233067
    ],
+   "overrideKey": "本荘西仙北角館線@39.54,140.42",
    "tags": [
     "flowing"
    ]
@@ -1975,6 +2041,7 @@
     39.771819,
     140.231738
    ],
+   "overrideKey": "太平山八田線@39.74,140.18",
    "tags": [
     "flowing"
    ]
@@ -2003,6 +2070,7 @@
     39.8698,
     140.067608
    ],
+   "overrideKey": "古井内大久保停車場線@39.85,140.13",
    "tags": [
     "flowing"
    ]
@@ -2031,6 +2099,7 @@
     39.896382,
     140.460382
    ],
+   "overrideKey": "国道105号@39.86,140.58",
    "tags": [
     "winding",
     "flowing"
@@ -2060,6 +2129,7 @@
     40.330688,
     140.457278
    ],
+   "overrideKey": "白沢田代線@40.34,140.54",
    "tags": [
     "winding"
    ]
@@ -2088,6 +2158,7 @@
     40.417037,
     140.858777
    ],
+   "overrideKey": "国道454号@40.47,140.83",
    "tags": [
     "winding"
    ]
@@ -2116,6 +2187,7 @@
     40.362176,
     140.591722
    ],
+   "overrideKey": "林道 花矢線@40.34,140.54",
    "tags": [
     "winding",
     "flowing"
@@ -2145,6 +2217,7 @@
     40.276702,
     140.067578
    ],
+   "overrideKey": "旧・常盤峰浜線@40.32,140.04",
    "tags": [
     "winding",
     "flowing"
@@ -2174,6 +2247,7 @@
     40.097555,
     140.023472
    ],
+   "overrideKey": "金光寺鵜川線@40.12,140.07",
    "tags": [
     "winding",
     "flowing"
@@ -2203,6 +2277,7 @@
     39.971488,
     139.739866
    ],
+   "overrideKey": "男鹿半島線@39.96,139.72",
    "tags": [
     "flowing"
    ]
@@ -2231,6 +2306,7 @@
     40.405485,
     140.865279
    ],
+   "overrideKey": "大館十和田湖線@40.41,140.82",
    "tags": [
     "winding"
    ]
@@ -2259,6 +2335,7 @@
     40.14164,
     140.730362
    ],
+   "overrideKey": "比内大葛鹿角線@40.21,140.59",
    "tags": [
     "flowing"
    ]
@@ -2287,6 +2364,7 @@
     39.706883,
     140.587002
    ],
+   "overrideKey": "田沢湖畔線@39.73,140.70",
    "tags": [
     "winding",
     "caution"
@@ -2316,6 +2394,7 @@
     39.532569,
     140.58715
    ],
+   "overrideKey": "長信田羽後長野停車場線@39.55,140.55",
    "tags": [
     "flowing"
    ]
@@ -2344,6 +2423,7 @@
     39.184634,
     139.993323
    ],
+   "overrideKey": "象潟矢島線@39.20,139.90",
    "tags": [
     "flowing"
    ]
@@ -2372,6 +2452,7 @@
     39.751665,
     140.644022
    ],
+   "overrideKey": "相内潟潟野線@39.71,140.63",
    "tags": [
     "flowing"
    ]
@@ -2400,6 +2481,7 @@
     39.539741,
     140.530928
    ],
+   "overrideKey": "角館長野線@39.56,140.53",
    "tags": [
     "flowing"
    ]
@@ -2428,6 +2510,7 @@
     39.189824,
     140.187908
    ],
+   "overrideKey": "大川端伏見線@39.17,140.16",
    "tags": [
     "flowing"
    ]
@@ -2456,6 +2539,7 @@
     39.238533,
     139.94629
    ],
+   "overrideKey": "上郷仁賀保線@39.26,139.97",
    "tags": [
     "flowing"
    ]
@@ -2484,6 +2568,7 @@
     40.374201,
     140.963175
    ],
+   "overrideKey": "田代平大清水線@40.36,140.92",
    "tags": [
     "flowing"
    ]
@@ -2512,6 +2597,7 @@
     39.62844,
     140.195366
    ],
+   "overrideKey": "秋田御所野雄和線@39.66,140.17",
    "tags": [
     "flowing"
    ]
@@ -2540,6 +2626,7 @@
     39.345969,
     140.575125
    ],
+   "overrideKey": "みずほの里ロード@39.31,140.58",
    "tags": [
     "flowing"
    ]
@@ -2568,6 +2655,7 @@
     40.041488,
     140.566439
    ],
+   "overrideKey": "比内森吉線@40.05,140.43",
    "tags": [
     "flowing"
    ]
@@ -2596,6 +2684,7 @@
     39.370117,
     140.354811
    ],
+   "overrideKey": "湯の又前田線@39.43,140.36",
    "tags": [
     "flowing"
    ]
@@ -2624,6 +2713,7 @@
     39.637346,
     140.505931
    ],
+   "overrideKey": "日三市角館線@39.61,140.55",
    "tags": [
     "flowing"
    ]
@@ -2652,6 +2742,7 @@
     39.212612,
     140.396999
    ],
+   "overrideKey": "出羽グリーンロード（出羽丘陵広域農道）@39.28,140.37",
    "tags": [
     "winding",
     "flowing"
@@ -2682,6 +2773,7 @@
     140.57525
    ],
    "reshaped": true,
+   "overrideKey": "雄平フルーツライン@39.21,140.56",
    "tags": [
     "flowing"
    ]
@@ -2710,6 +2802,7 @@
     40.051769,
     139.952832
    ],
+   "overrideKey": "男鹿街道@40.09,139.98",
    "tags": [
     "flowing"
    ]
@@ -2738,6 +2831,7 @@
     39.899297,
     140.458733
    ],
+   "overrideKey": "河辺阿仁線@39.92,140.56",
    "tags": [
     "flowing"
    ]
@@ -2766,6 +2860,7 @@
     39.169398,
     140.318272
    ],
+   "overrideKey": "羽後向田館合線@39.27,140.26",
    "tags": [
     "flowing"
    ]
@@ -2794,6 +2889,7 @@
     39.371714,
     140.471674
    ],
+   "overrideKey": "湯沢雄物川大曲線@39.34,140.45",
    "tags": [
     "flowing"
    ]
@@ -2822,6 +2918,7 @@
     39.572683,
     140.521774
    ],
+   "overrideKey": "角館長野線@39.60,140.52",
    "tags": [
     "flowing"
    ]
@@ -2850,6 +2947,7 @@
     39.55351,
     140.248075
    ],
+   "overrideKey": "出羽グリーンロード@39.63,140.27",
    "tags": [
     "flowing"
    ]
@@ -2878,6 +2976,7 @@
     39.584455,
     140.172405
    ],
+   "overrideKey": "雄和岩城線@39.55,140.09",
    "tags": [
     "flowing"
    ]
@@ -2906,6 +3005,7 @@
     40.255583,
     140.103007
    ],
+   "overrideKey": "旧・常盤峰浜線@40.23,140.14",
    "tags": [
     "flowing"
    ]
@@ -2934,6 +3034,7 @@
     40.374772,
     140.886859
    ],
+   "overrideKey": "国道104号@40.33,140.94",
    "tags": [
     "flowing"
    ]
@@ -2962,6 +3063,7 @@
     39.530658,
     140.228985
    ],
+   "overrideKey": "秋田雄和本荘線@39.44,140.13",
    "tags": [
     "flowing"
    ]
@@ -2990,6 +3092,7 @@
     40.044598,
     140.139171
    ],
+   "overrideKey": "琴丘上小阿仁線@40.04,140.09",
    "tags": [
     "flowing"
    ]
@@ -3018,6 +3121,7 @@
     39.200137,
     140.320772
    ],
+   "overrideKey": "鴻屋梺線@39.23,140.31",
    "tags": [
     "flowing"
    ]
@@ -3046,6 +3150,7 @@
     39.471789,
     140.527127
    ],
+   "overrideKey": "千畑大曲線@39.49,140.58",
    "tags": [
     "flowing"
    ]
@@ -3074,6 +3179,7 @@
     39.580789,
     140.261145
    ],
+   "overrideKey": "雄和協和線@39.63,140.20",
    "tags": [
     "flowing"
    ]
@@ -3102,6 +3208,7 @@
     39.462639,
     140.369445
    ],
+   "overrideKey": "神岡南外東由利線@39.49,140.43",
    "tags": [
     "flowing"
    ]
@@ -3130,6 +3237,7 @@
     39.601375,
     140.099322
    ],
+   "overrideKey": "川添下浜停車場線@39.61,140.06",
    "tags": [
     "flowing"
    ]
@@ -3158,6 +3266,7 @@
     39.415101,
     140.589432
    ],
+   "overrideKey": "みずほの里ロード@39.37,140.58",
    "tags": [
     "flowing"
    ]
@@ -3186,6 +3295,7 @@
     39.537475,
     140.449905
    ],
+   "overrideKey": "土川神岡線@39.50,140.43",
    "tags": [
     "flowing"
    ]
@@ -3214,6 +3324,7 @@
     40.277395,
     140.069663
    ],
+   "overrideKey": "旧・常盤峰浜線@40.27,140.10",
    "tags": [
     "flowing"
    ]
@@ -3242,6 +3353,7 @@
     39.269262,
     139.923156
    ],
+   "overrideKey": "小出金浦線@39.25,139.95",
    "tags": [
     "flowing"
    ]
@@ -3270,6 +3382,7 @@
     39.950693,
     140.159319
    ],
+   "overrideKey": "能代五城目線@40.04,140.14",
    "tags": [
     "winding",
     "flowing"
@@ -3299,6 +3412,7 @@
     40.237756,
     140.149955
    ],
+   "overrideKey": "山谷富根停車場線@40.27,140.16",
    "tags": [
     "flowing"
    ]
@@ -3327,6 +3441,7 @@
     39.754138,
     140.137714
    ],
+   "overrideKey": "秋田昭和線@39.81,140.09",
    "tags": [
     "flowing"
    ]
@@ -3355,6 +3470,7 @@
     39.545275,
     140.207775
    ],
+   "overrideKey": "国道341号@39.58,140.27",
    "tags": [
     "flowing"
    ]
@@ -3383,935 +3499,12 @@
     39.535408,
     140.438654
    ],
+   "overrideKey": "本荘西仙北角館線@39.59,140.55",
    "tags": [
     "winding",
     "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:117",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "秋田八郎潟線",
-   "ref": "15",
-   "highway": "primary",
-   "lengthKm": 8.4,
-   "curviness": 149.4,
-   "flow": 14.8,
-   "turnCount": 85,
-   "score": 52.1,
-   "baseScore": 52.1,
-   "spotCount": 0,
-   "polyline": "edrrFmnuvYvD`Wl@|AtB~ApP^hA~@hArCA|FoDt]TxA|BxDZdJkHjYKnPaAvDaBbB{@|EXnIeA`BwAx@qInAkAp@eMjd@e@pI\\tJKxFIpCq@zCiFfNwTnVeF~BqD`JwHhGyCpR}DlKa@vEkDbOa@rNiCpEeI|FaGqA_I{EwBFcSdSkHnF{MdBuC|@gB~A",
-   "pointCount": 48,
-   "start": [
-    39.911233,
-    140.198308
-   ],
-   "end": [
-    39.93938,
-    140.130178
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:118",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "国道101号",
-   "ref": "101",
-   "highway": "trunk",
-   "lengthKm": 4.25,
-   "curviness": 113.4,
-   "flow": 21.9,
-   "turnCount": 22,
-   "score": 52,
-   "baseScore": 52,
-   "spotCount": 0,
-   "polyline": "qgvsFwbouYe@lPz@ry@bAxH|GjOt@fFu@`m@eVr~@jUhMlBlM|VbH",
-   "pointCount": 11,
-   "start": [
-    40.096094,
-    140.001875
-   ],
-   "end": [
-    40.089957,
-    139.960751
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:119",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "河辺阿仁線",
-   "ref": "308",
-   "highway": "secondary",
-   "lengthKm": 7.7,
-   "curviness": 137,
-   "flow": 14.1,
-   "turnCount": 75,
-   "score": 51.9,
-   "baseScore": 51.9,
-   "spotCount": 0,
-   "polyline": "yjjqFyhgwY|LdKxBzD|DzBjDlIzAnB`J~BzCzBdIpLfA~Hz@fBxJ|ClCjCbMdY~GpFvFvPrF`KfGjDlCdDpN~F|FpG`FxBnIvFhC`AlCHxBpA|FX`NnNzApCdCnKbAdHn@jMr@fB~KjHrNhCvDfCpRnBrAdCrFpU~PrNlI~CjJgD",
-   "pointCount": 42,
-   "start": [
-    39.707486,
-    140.289567
-   ],
-   "end": [
-    39.655876,
-    140.239836
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:120",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "鹿角広域農道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.14,
-   "curviness": 123.5,
-   "flow": 16,
-   "turnCount": 32,
-   "score": 51.8,
-   "baseScore": 51.8,
-   "spotCount": 0,
-   "polyline": "_|{tFgalzYM{D`@yBv@mApM_LzGyCtC^jCfBlCsAfA@rTzFhN|KpAZj@a@zDaJtYmZ|ViNnDeAla@dAxCpA|GxHtC\\",
-   "pointCount": 22,
-   "start": [
-    40.288795,
-    140.805482
-   ],
-   "end": [
-    40.257235,
-    140.813179
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:121",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "秋田岩見船岡線",
-   "ref": "28",
-   "highway": "primary",
-   "lengthKm": 9.09,
-   "curviness": 144.4,
-   "flow": 14.6,
-   "turnCount": 90,
-   "score": 51.7,
-   "baseScore": 51.7,
-   "spotCount": 0,
-   "polyline": "}_kqFynjwYD~IUbCaFlIsJdHgAzBQ`BVpDfEbL~ApJpGnHsPjN{HvDwJDkIuDsCGaPvHyDv@cGBkLxCoKzFeA|QrCxP\\xMo@dUXhHtApGwAzImBnXeJdVuFlFaAjGg@rIw@dAsFbDcBnE?bDrChUpBf]MxIu@|CaKjT_E~OiBvBuIdEcBvDXfi@",
-   "pointCount": 47,
-   "start": [
-    39.710874,
-    140.305894
-   ],
-   "end": [
-    39.739412,
-    140.228722
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:122",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "田山花輪線",
-   "ref": "195",
-   "highway": "secondary",
-   "lengthKm": 20.16,
-   "curviness": 337.6,
-   "flow": 41.8,
-   "turnCount": 163,
-   "score": 51.5,
-   "baseScore": 86.3,
-   "spotCount": 0,
-   "polyline": "sujtFgoizYv@mI?aJbAeF|B_DlSwJ~@_BfAkGdHeJp@sBbEwd@_A}PfMkd@lCe`@t@yEHmKhEsP{@iEx@WpBcKk@oS\\q@bALvDuQeAmE_@ZCpC{@t@iHaA{ByA`EsEReCzB}H}BlDgDfCaAHrBuCz@mC]_FjFZz@c@x@aOvCgMv@BvBvJv@|AdBe@dCaFbA?h@u@}BWhBaAj@gCU{CdAuBPqHrBmRb@GH~Bn@TxBoBtDkA_@iCgBeCkBcFMsB??]c@OhCYNu@aDLkIq@?m@sBcCiD_CcACoBg@OaBp@gC{@iBiBu@aCOrB_@H}BiH{FuCm@^vEjCo@N_GcCmBqBkAaDwB}@kB}DkC}Mi@q@J{GeA{CQuDJu@h@WvCbBF[gBaDaBcAtEuC`EnBpAW`BkI?mBeAaEyDeIJeEpCkDfBwDrDwAjFX`Dq@hDuCjCsNxCaJhBqI~IqPZeMfEw\\hBaH~CcGtLcPxNg[vFiZhP_RfD{BzBaHjFsFjGqJrGyBjGyEj@j@C~D\\l@tEGz@}FfAwBlFqBjGuEdHsCnG_H~Ga@nDgBbDyDLgC_@qFh@oAtD]lFwDfBeBP{BrDMvCkBtEcAlC|@fFd@tEiBdFJ`EgAtG[",
-   "pointCount": 166,
-   "start": [
-    40.20074,
-    140.79236
-   ],
-   "end": [
-    40.14193,
-    140.9365
-   ],
-   "reshaped": true,
-   "boost": -32,
-   "tags": [
-    "winding",
-    "caution"
-   ]
-  },
-  {
-   "id": "秋田県:123",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "土川中仙線",
-   "ref": "256",
-   "highway": "secondary",
-   "lengthKm": 4.34,
-   "curviness": 149.2,
-   "flow": 13.5,
-   "turnCount": 48,
-   "score": 51.2,
-   "baseScore": 51.2,
-   "spotCount": 0,
-   "polyline": "cxkpFavmxY|EdAfFyBzEuQbB{C~E{B|FkGvOqFpAuAdCqG~B{BhBuDz@uKo@cJjA{GdCkDpHyDpFoKCcNjB}I@cEqIiXuQoVwDmZ",
-   "pointCount": 24,
-   "start": [
-    39.550904,
-    140.486247
-   ],
-   "end": [
-    39.540928,
-    140.523146
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:124",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "神岡南外東由利線",
-   "ref": "30",
-   "highway": "primary",
-   "lengthKm": 7.84,
-   "curviness": 134.6,
-   "flow": 14.9,
-   "turnCount": 71,
-   "score": 51,
-   "baseScore": 51,
-   "spotCount": 0,
-   "polyline": "oa}nFeeawYiExF}CrA}Ki@oGiBiDqCqBuDmAiEyAyLcAsAmIo@gGdD}H^kB{@e@sB?}Lq@mCDyFh@_CMiFYg@wJgFkXZkN}EmBoJ@mAdG}XJaF_C_UuHcXgBiCmBi@cJBgHmBwOyN{VgE{HbAkSsH_Ow@yOwEaFVyK~G{IU",
-   "pointCount": 43,
-   "start": [
-    39.311758,
-    140.258274
-   ],
-   "end": [
-    39.360705,
-    140.292198
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:125",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "能代五城目線",
-   "ref": "4",
-   "highway": "primary",
-   "lengthKm": 6.93,
-   "curviness": 142.4,
-   "flow": 14.5,
-   "turnCount": 68,
-   "score": 51,
-   "baseScore": 51,
-   "spotCount": 0,
-   "polyline": "c~htFm}`vY|OzDjD[`EuAdC{Db@}Hd@{BfEoInJgGzNmEtB_BnHmOzIyC~DeDvGkK`HkQzBiBzB]tm@JpF|AdDpDpAb@~Ae@dHkFdCaDtAOxDPzBpFnFtF|Gl@|FbMbIZnFkDhCVpSx_@rHlIdJvMfD`J",
-   "pointCount": 38,
-   "start": [
-    40.191857,
-    140.093194
-   ],
-   "end": [
-    40.142605,
-    140.095497
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:126",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "国道107号",
-   "ref": "107",
-   "highway": "trunk",
-   "lengthKm": 3.25,
-   "curviness": 188.4,
-   "flow": 16.1,
-   "turnCount": 38,
-   "score": 50.9,
-   "baseScore": 50.9,
-   "spotCount": 0,
-   "polyline": "mv_oFkgsvYu@hFh@tKaC~S`@nN{@tHuAlBgEb@cChAcIbK}ExIe@zI_@`AmBH{DyEgA_@{GnCeJzB_DlDuDfJ}AhHB|AnBpGfAvL",
-   "pointCount": 24,
-   "start": [
-    39.325354,
-    140.186942
-   ],
-   "end": [
-    39.337665,
-    140.161166
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:127",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "神岡南外東由利線",
-   "ref": "30",
-   "highway": "primary",
-   "lengthKm": 7.43,
-   "curviness": 119,
-   "flow": 15.8,
-   "turnCount": 56,
-   "score": 50.7,
-   "baseScore": 50.7,
-   "spotCount": 0,
-   "polyline": "kqxoFuzuwYvGkBvK_BpCnAzCpFjClB|b@hHfH}@zBVjHbFfMfMvC@lFwBpDc@|NpBxDgAjHzGr^v^pJbNpBfHbCnEnA`EWhJrDpOy@zOl@tJrIpHpTp^rTlO`HpOQdCsDjEMhCjJxY",
-   "pointCount": 34,
-   "start": [
-    39.452536,
-    140.364115
-   ],
-   "end": [
-    39.407363,
-    140.318839
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:128",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "真坂五城目線",
-   "ref": "220",
-   "highway": "secondary",
-   "lengthKm": 4.51,
-   "curviness": 124.7,
-   "flow": 14.4,
-   "turnCount": 39,
-   "score": 50.5,
-   "baseScore": 50.5,
-   "spotCount": 0,
-   "polyline": "gp}rFym~uYn@aIbD_L`H?fFsJz@aN^ok@`F_\\`DgBvIp@~AUf]eNxEoE~EqBnC_FzSiVxAkDbCqRvCaFFaGtAqH",
-   "pointCount": 21,
-   "start": [
-    39.969478,
-    140.08045
-   ],
-   "end": [
-    39.947762,
-    140.117377
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:129",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "湯沢栗駒公園線",
-   "ref": "51",
-   "highway": "primary",
-   "lengthKm": 4.86,
-   "curviness": 143.3,
-   "flow": 14.5,
-   "turnCount": 48,
-   "score": 50.4,
-   "baseScore": 50.4,
-   "spotCount": 0,
-   "polyline": "qvlmFwluxY\\gCYyEuD{EjC}H`B_CvC_Bn@qDdA}AxGyCvNaJzAuA~@wBn@{MfDqYdA}Rc@aKdEgKnA_HbE{J@kNhGmRfByCtG}EpMsShHmGvJwFrKZzBg@",
-   "pointCount": 29,
-   "start": [
-    39.064254,
-    140.525717
-   ],
-   "end": [
-    39.042675,
-    140.566679
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:130",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "秋田北野田線",
-   "ref": "62",
-   "highway": "primary",
-   "lengthKm": 6.18,
-   "curviness": 122.6,
-   "flow": 15.5,
-   "turnCount": 49,
-   "score": 50.3,
-   "baseScore": 50.3,
-   "spotCount": 0,
-   "polyline": "cjlqFopqvYwEzCvE{CxCiEfAuCpHg[vAcLbBqUs@{JgBcKCqDXaDzAaG\\cGlCmFdAkEdCyDjDyJxNiMvIsJlNub@dFgHpEgJrH}DnIiL|DwHtBo@|F\\dR}E`DaCpEgJlCuCjLMpH~@",
-   "pointCount": 34,
-   "start": [
-    39.717622,
-    140.178155
-   ],
-   "end": [
-    39.687226,
-    140.225241
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:131",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "出羽グリーンロード（出羽丘陵広域農道）",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.17,
-   "curviness": 131.4,
-   "flow": 13.7,
-   "turnCount": 40,
-   "score": 50,
-   "baseScore": 50,
-   "spotCount": 0,
-   "polyline": "qy`pFknkwYwErFgGzEwBv@sQsCuIuQeByA}Nn@kGwAoADuEpC_DxKaPvLwGvCgOrA{J|FoErA]^_Ebe@aAzEkBlC{C~AoCPmEk@",
-   "pointCount": 24,
-   "start": [
-    39.494805,
-    140.310937
-   ],
-   "end": [
-    39.523345,
-    140.296425
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:132",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "水沢西仙北線",
-   "ref": "252",
-   "highway": "secondary",
-   "lengthKm": 8.71,
-   "curviness": 122,
-   "flow": 13.1,
-   "turnCount": 81,
-   "score": 50,
-   "baseScore": 50,
-   "spotCount": 0,
-   "polyline": "cbvpF_y`xYdEwEnEeBlJeI|A]r@x@dI|TtK|BzJgA`[YpHqBtJInLfAnHmAjFIjEz@vEvBjQnLvOE|EhBlEl@dKu@zOtFrBdClFfLzCpDzEzCvEpHzPxIpMbArJfDdBtBxApKzEbGnKrC`N|I`EvDvElKz@lFo@|Nb@rKK`D{DbKIlAvGjXdBhC",
-   "pointCount": 46,
-   "start": [
-    39.603702,
-    140.420161
-   ],
-   "end": [
-    39.544885,
-    140.383686
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:133",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "福館阿仁前田線",
-   "ref": "214",
-   "highway": "secondary",
-   "lengthKm": 3.94,
-   "curviness": 136.1,
-   "flow": 13.4,
-   "turnCount": 40,
-   "score": 50,
-   "baseScore": 50,
-   "spotCount": 0,
-   "polyline": "w|nsFmzqwY]eEwHoSIyYm@oGBmC|@yFnLmZJyFaAoIBwE|DyY|EgGx@yBDqO_AgE_IcGeByC{BuRaG}LLwV",
-   "pointCount": 21,
-   "start": [
-    40.058519,
-    140.343592
-   ],
-   "end": [
-    40.060163,
-    140.38499
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:134",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "大館十和田湖線",
-   "ref": "2",
-   "highway": "primary",
-   "lengthKm": 13.54,
-   "curviness": 113.9,
-   "flow": 13.9,
-   "turnCount": 111,
-   "score": 49.3,
-   "baseScore": 49.3,
-   "spotCount": 0,
-   "polyline": "u~ztFytsyYnAoD~CoQCaCk@gCsC}HeVyYe_@oT_HmCmNwXaAyHw@iVcA_FyHcG{@uDmD_IcEaD}SkKaNyEmBuAw@yAuCwR{DoPiCaEmDaBqO_BaOeHmKm@o_@_TuEkGmAaIGoRn@uDvDuFn@oFyHy_Am@}A{Bc@aPbGw@A_AqAk@iIBgF~@iCnAw@jCAzFdExBn@zBa@dCaD^uEsFwXkA_BqCwAaN\\gDScEgB}IeJ{PaYiMuLgEoH{LkCqBmAyG}OcMaQgBy@mOaBcCoA",
-   "pointCount": 68,
-   "start": [
-    40.284108,
-    140.680614
-   ],
-   "end": [
-    40.349623,
-    140.775091
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:135",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "白沢田代線",
-   "ref": "68",
-   "highway": "primary",
-   "lengthKm": 4.88,
-   "curviness": 137.4,
-   "flow": 13.7,
-   "turnCount": 49,
-   "score": 49.1,
-   "baseScore": 49.1,
-   "spotCount": 0,
-   "polyline": "uoauF_egxY`ODnK`A`GY~IgBbFuFdDw@jDuBjN}AjDrB`VeDlGyF|BkMbGcI`IeE|HmC`AwAnBaGzEaGtIgGpDwAvFqFzJpAtIeB|DExNnHdJjA",
-   "pointCount": 27,
-   "start": [
-    40.317555,
-    140.452801
-   ],
-   "end": [
-    40.278896,
-    140.466996
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:136",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "四ツ屋神岡線",
-   "ref": "67",
-   "highway": "primary",
-   "lengthKm": 3.44,
-   "curviness": 120.7,
-   "flow": 15.4,
-   "turnCount": 27,
-   "score": 49,
-   "baseScore": 49,
-   "spotCount": 0,
-   "polyline": "}|`pF{tbxYuXqIpDs[RiQ[oF{@iA}FsO_K}L}@uBg@iKgDyVoEwMmBkK{F{QgA}MyAiE",
-   "pointCount": 16,
-   "start": [
-    39.495348,
-    140.429744
-   ],
-   "end": [
-    39.507114,
-    140.46253
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:137",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "秋田岩見船岡線",
-   "ref": "28",
-   "highway": "primary",
-   "lengthKm": 6.89,
-   "curviness": 110.1,
-   "flow": 14.9,
-   "turnCount": 51,
-   "score": 48.9,
-   "baseScore": 48.9,
-   "spotCount": 0,
-   "polyline": "uknqFgiuvYn@|D@lH_BlGiCnDsCpA{VlGoDQaJsEcBGoBvAaHdNwJnHq@jBIfF~@nMuBb`@hGfGhHtMuBzFyEl_@q@fRlAjI`N|ZnDhDnBp@ve@{@`QtAjAbLfBdw@h@rB",
-   "pointCount": 31,
-   "start": [
-    39.728114,
-    140.197475
-   ],
-   "end": [
-    39.725873,
-    140.146276
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:138",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "みずほの里ロード",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.27,
-   "curviness": 116.1,
-   "flow": 14.1,
-   "turnCount": 27,
-   "score": 48.8,
-   "baseScore": 48.8,
-   "spotCount": 0,
-   "polyline": "skbpFiamyYnCh@hLjKvUbKzExEjFlJ`Q`@xExCfCxE~@`EXhTnOdFpMh@lFv@pVaA",
-   "pointCount": 15,
-   "start": [
-    39.50282,
-    140.646768
-   ],
-   "end": [
-    39.479015,
-    140.631999
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:139",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "淀川北野目線",
-   "ref": "113",
-   "highway": "secondary",
-   "lengthKm": 9.44,
-   "curviness": 95.2,
-   "flow": 13.6,
-   "turnCount": 66,
-   "score": 48.7,
-   "baseScore": 48.7,
-   "spotCount": 0,
-   "polyline": "atmpFsnbwYmAaIQgJm@aCEsGbFeN`EuVaEkKcKuOeDgKk@sGUyL|Ao`@V_Bv@h@j\\n\\zIlEpFPrDgAjCiBlCqG`C{]aCaXnBuQTeL_C}OsGsSkAk\\d@{DvFeNvLmr@JaLyBsL_BeUPgKzCgIbDuOdAcLpCoi@z@_BzBmA",
-   "pointCount": 41,
-   "start": [
-    39.56049,
-    140.264904
-   ],
-   "end": [
-    39.547798,
-    140.349029
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:140",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "秋田御所野雄和線",
-   "ref": "61",
-   "highway": "primary",
-   "lengthKm": 7.21,
-   "curviness": 136,
-   "flow": 12.7,
-   "turnCount": 77,
-   "score": 48.7,
-   "baseScore": 48.7,
-   "spotCount": 0,
-   "polyline": "wojpFekyvYcK|CuKeAmF|B_CNcL{CeMuLqGoBiEaDcLe@eGbBkKpAwJjD{QdYyD~D{Al@wI}@yIzB}C}AgBEaDj@gI`Fu@@mOcEwZkEyLnCsObGwDD{H_AiFfBsBNiJ{ByLrDqLDwH~EuAhCI`BtBvVU~C",
-   "pointCount": 39,
-   "start": [
-    39.544437,
-    140.218273
-   ],
-   "end": [
-    39.600093,
-    140.205791
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:141",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "大館十和田湖線",
-   "ref": "2",
-   "highway": "primary",
-   "lengthKm": 6.58,
-   "curviness": 118.2,
-   "flow": 14.1,
-   "turnCount": 55,
-   "score": 48.6,
-   "baseScore": 48.6,
-   "spotCount": 0,
-   "polyline": "ce|tFkifyYc@wEkCmJG}ClC}KbA_OjA_EbBcB`NiJrAeEMqHm@iBqQuYaGc[_CgBgOeBgEaBsKyYqLqUs@}CzAeKL_GyBwXi@{CkGaIu@{Cd@{NxIaQ`FmGnGqOxG{IjEgBnG}FdNeH",
-   "pointCount": 34,
-   "start": [
-    40.290264,
-    140.61222
-   ],
-   "end": [
-    40.290936,
-    140.670803
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:142",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "金光寺能代線",
-   "ref": "210",
-   "highway": "secondary",
-   "lengthKm": 7.35,
-   "curviness": 111.1,
-   "flow": 12.8,
-   "turnCount": 64,
-   "score": 48.5,
-   "baseScore": 48.5,
-   "spotCount": 0,
-   "polyline": "cm{sFq{}uYsBrBqB|HeDhEcR|RcSjL{GvLg@bCy@rTmBnLsCnHeBdCeIlEcFnFsAfOiHf_@uHdRcAjAyE~@eIiIaAOuKxAwJlIaGrDcDtAcEf@aIfC_Z{DeI`@kEvDyFvOeBhAyGnB}AlAkCbGeFbPeCvEsFjEmJjA",
-   "pointCount": 39,
-   "start": [
-    40.122577,
-    140.077532
-   ],
-   "end": [
-    40.168961,
-    140.031323
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:143",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "白岩角館線",
-   "ref": "258",
-   "highway": "secondary",
-   "lengthKm": 3.95,
-   "curviness": 111.2,
-   "flow": 13.7,
-   "turnCount": 32,
-   "score": 48.4,
-   "baseScore": 48.4,
-   "spotCount": 0,
-   "polyline": "wvrpF}rfyYf@tGbA|E~Atd@bDjXrCrGxG`Er@`BmDhv@z@hBjJtI`GfN`@lCYbCiDnI_AdKiHpZwBfCqGpC",
-   "pointCount": 19,
-   "start": [
-    39.586515,
-    140.613748
-   ],
-   "end": [
-    39.584323,
-    140.573973
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:144",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "仙北北部第二広域農道",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 16.67,
-   "curviness": 100.1,
-   "flow": 12,
-   "turnCount": 139,
-   "score": 48.3,
-   "baseScore": 48.3,
-   "spotCount": 0,
-   "polyline": "ccgqFixzvYaAmF{A{DgB}AgGyBuAqBcJwg@NaGvEwMjAiFhCiYKoEy@yEcOk_@gBkKBsHrBeShGq_@S_DiCgKBaGzPee@zBaBrJ_@dCgAtRu^rAkAlHaCdE}DvAuFhDyY`BaDrDoAbMt@fEQbH_BfC{B|@kBlB_MxAkErBaCjMmJ`BqCbD{MtIaSvFuYtDsHrDmCvCaAp^}DhBsBxCwHpAcBlNkDbEiBbMkLxN{IzDsF`AyF@mEaHe\\\\cTe@iHkBkHuIgNWyFp@yCj]kf@dA_E^_Jx@iD~SuZfA_Dr@cLdAaF|AkC`H_H`AsEGaEm@mCuLwOgHiOwBcK[gL",
-   "pointCount": 84,
-   "start": [
-    39.690896,
-    140.22549
-   ],
-   "end": [
-    39.644387,
-    140.369831
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:145",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "国道398号",
-   "ref": "398",
-   "highway": "trunk",
-   "lengthKm": 16.11,
-   "curviness": 119.6,
-   "flow": 15.7,
-   "turnCount": 123,
-   "score": 48.1,
-   "baseScore": 48.1,
-   "spotCount": 0,
-   "polyline": "qznmFelayY[gAwFcAqDuCuN_CeDeF_HvAqOQyRtNoAvIoD~E{ElEaAjEcDhIgCdBcLm@aOsIuXm@w@cAgGtAsFDeDoAoCS{Th@mDt@iI{CuQHqCp@gT~LyHbM{QjCqEzB{MhBsFNmLi@kJxBgE|C_Lr@qJkAsIgGaG`@aKqDaCt@iEhEgL`CiUbV{QjKcEtFzBbMyAjUF|AlBfHGjJ}@jByFpCcJnHmMrD{@dBI`aAaKj_AOlN_D~JaDpFiClQ`BvVFxQdD~NFpBcArGaIxVoBxIwAxKs@hPoChI",
-   "pointCount": 74,
-   "start": [
-    39.075126,
-    140.587066
-   ],
-   "end": [
-    39.165028,
-    140.502082
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:146",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "入道崎寒風山線",
-   "ref": "55",
-   "highway": "primary",
-   "lengthKm": 5.32,
-   "curviness": 91.5,
-   "flow": 13.1,
-   "turnCount": 37,
-   "score": 48.1,
-   "baseScore": 45.2,
-   "spotCount": 1,
-   "polyline": "wu{rF_cctYeCxBy]nN{FrDwBjCyAhYDbEvA~IoCvStDxy@_FlRsA`Ly@zCmH~Ps@dMgB|FyEjEqCp@sL`@_QfHsAdBo@dBWrD`Dnb@",
-   "pointCount": 24,
-   "start": [
-    39.960121,
-    139.776638
-   ],
-   "end": [
-    39.978335,
-    139.729349
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:147",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "メロンロード",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.05,
-   "curviness": 128.4,
-   "flow": 12.1,
-   "turnCount": 43,
-   "score": 48.1,
-   "baseScore": 48.1,
-   "spotCount": 0,
-   "polyline": "odwsFmrhuYoBeBgEwH}DoBsDZ}HnGgJ~D{CCgQwCoLgKeEeFaNyF}HoMkIsBmBuA_BwBcAsDMi\\wAaMa@iMUyAyB_EZoLo@_M",
-   "pointCount": 24,
-   "start": [
-    40.100722,
-    139.968554
-   ],
-   "end": [
-    40.122903,
-    139.993731
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "秋田県:148",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "国道398号",
-   "ref": "398",
-   "highway": "trunk",
-   "lengthKm": 8.81,
-   "curviness": 147.4,
-   "flow": 14.6,
-   "turnCount": 89,
-   "score": 48,
-   "baseScore": 48,
-   "spotCount": 0,
-   "polyline": "kugmFa_jyY{GnD_IxIaGoB}HzC{IYeBY{CoBkA?gAp@kGhJiCvBcCl@oFGkKvHgArBeC|IKrKmAbIe@rN`AdNgCpK_BrK_BrFsGzCoHpJLnFx@vDEjBu@vGaC~ImA|HVlIe@zFiCbH{AhBwMzHyDzGq@hEyB~EiIfGuBjEi@`@_M[qJqAgDkCkAOkUjBuDhB{UxRaMnBkGfIwKnDaFvIwBlB_Ev@wC_@",
-   "pointCount": 57,
-   "start": [
-    39.038457,
-    140.631047
-   ],
-   "end": [
-    39.09122,
-    140.577498
-   ]
-  },
-  {
-   "id": "秋田県:149",
-   "region": "akita",
-   "regionName": "秋田県",
-   "name": "国道105号",
-   "ref": "105",
-   "highway": "trunk",
-   "lengthKm": 24.98,
-   "curviness": 130.8,
-   "flow": 14.1,
-   "turnCount": 232,
-   "score": 48,
-   "baseScore": 48,
-   "spotCount": 0,
-   "polyline": "mgeqF{g|xYwApC{AbL_AjCoHlI_CtAgb@aAuK{CoAiA_BsEEiJ~@{HrDaI^mFy@wDoJiUkBoXo@uDqB_DkEoCyAmBiBuLyBqIwB}DmRwJiCiGaEiGgBcBcDkAiFkEcE{@sHf@mMiEmD]kI`CwSn@}Bh@yKrGwQvOaCjAsHTkDiAkKyJgHC{A`CqF|ByMhBkAx@oEzGaC`@_Cu@{d@kq@yHiOsNqLcA}CK{IsCoL_IaH{FeJuPiFiCr@eGhIq[|UuChAsD`@wCQmO{EiDmFcBuAoVSc^oSmDg@eCpA{HtIyHj`@aAdCmCjCuGtBaBUgAwAgB}PqAeBsRwF_Kt@cApATdG_@fBaIrEeEtEKdBlBnIL~EkA|E[|E{BfH_CxDkKf@{D|@iGy@{Nz@wLzEiC|CyAhDu@^}A]wJ}F}HkLeKYuUlDaFpDqBp@mR`CsSfFsE\\eElCmDj@}FjD}Cb@wFq@oDf@qLhHmL|@}GvCeIGoSmFmJBiGeHsLoBiGJaNdCmK[mJbAkBr@kFfEyCO_IoB",
-   "pointCount": 136,
-   "start": [
-    39.681353,
-    140.560778
-   ],
-   "end": [
-    39.855131,
-    140.580056
    ]
   }
  ],
- "hiddenCount": 34
+ "hiddenCount": 37
 }

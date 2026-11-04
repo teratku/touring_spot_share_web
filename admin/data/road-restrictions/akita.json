@@ -1,27 +1,168 @@
 {
-  "romaji": "akita",
-  "updatedAt": "2026-08-16T12:35:47.505Z",
-  "count": 1,
-  "restrictions": [
-    {
-      "id": "osm-akita-115550913",
-      "kind": "noMotorcycle",
-      "name": "秋田自動車道",
-      "prefecture": "秋田県",
-      "polyline": "yqipFy|mwYrAl@`A[[yD`AxDm@~AkEzBaAQe@{A",
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": {
-        "from": "22:00",
-        "to": "06:00"
-      },
-      "minCc": null,
-      "maxCc": 125,
-      "checkedAt": "2026-08-16",
-      "source": "admin",
-      "origin": "osm"
-    }
-  ]
+ "romaji": "akita",
+ "updatedAt": "2026-10-24T23:09:19.201Z",
+ "count": 6,
+ "restrictions": [
+  {
+   "id": "osm-akita-115550913",
+   "kind": "noMotorcycle",
+   "name": "秋田自動車道",
+   "prefecture": "秋田県",
+   "polyline": "yqipFy|mwYrAl@`A[[yD`AxDm@~AkEzBaAQe@{A",
+   "note": null,
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": {
+    "from": "22:00",
+    "to": "06:00"
+   },
+   "minCc": null,
+   "maxCc": 125,
+   "checkedAt": "2026-08-16",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "winter-akita-aspite",
+   "kind": "winterClosure",
+   "name": "八幡平アスピーテライン",
+   "prefecture": "秋田県",
+   "polyline": "_mesF_yjzYa@iE}A{D`@kD{AcELmAbAOxArCp@Pb@eAUoDpByDdAEpA~DhAX~A_GjA{AvCyAxEa@JaAiA{D~AoD{@yCEaBf@wBrAiBlAG|AxAz@FjKuFnHoAd@n@jC~Pd@Pl@{@QyAiA}BD{@l@a@`At@JlCdAvB@jDVn@bR`LtGjHhQbM~@hDh@ZfLqGpIUhF}A~C`AzD[lBhCjFxDf[fNzASvC_CbEwAVw@]w@oDoBRwA~F`AfC]vJ_FfAwFSuBeBkC_@eBtAiLGoAs@[]\\_BnGi@Fi@o@tAuF\\kEmB}F`LuQ\\aDw@mB_F}BqCoCuBkIE_B|D}D~EaAvA_AjE|A~DkCjEt@nFzBjAEA}BcBiA{BoD}FkGaD_BHwAn@_@jJtBdA@b@w@YeAcEiAgCyDGkAf@g@|B`A|@aAe@qAaBq@}AiBYuBr@a@pFxA~GO@_BoDgDi@kACmAtJsChH_EJwA]m@gD[gBsAlAwDrSyJHeBsG{Jq@sGVaB`A@|CdCd[`Ej@sAd@gOtAqG??jAcKiAkHByAxDiGnGuC~EoH|BaM`HqM|GgPY_AiBoAoBwFbCeGFuAuBaFXkI}BwBg@qAfAaLaC_Jw@kHpAcH`DwE\\eJzCgIKoCiE{KcEsXJ_BbDyERwAw@iA{DwAiD?gF`Aw@q@GwAtUe`@VkByA{JHoAdBiEfAaHvB{CpIeHvAeEn@mFhDgMhDyG~DeE`DuNbBq@hDBhHmDpKgMxI?bMu@rFoAvEO|@iAiDiJgFyIsFgDsDcA{AwAyA}CyFlBy@g@q@kBC_Ho@m@e@Bm@`AoAnIFfFu@|@iENwDsAwBmByCuEIqAn@sAhJBZe@KwA[WuIWo@q@b@{AjG{B`AeHG}Ay@{@_FGwRcMaDaOa@sHbCuQl@aJhLig@S}DcByGFyDz@gCnHyKdEgLjCoMlCiE[a@iG`Ce@a@DqAbF_D~HkKnFmLdAOvBf@xB|FbOtFl@KI}@qH{D[c@Hq@hOrCdBSCeAcFsBMm@d@[rIdBpEnB~DbGjDLz@g@hAgEm@kBaCwBo@sDn@q@pDp@fAc@~BoDnEmNzEmBtAwAfCkH@{@cAsC^qDsAcJDuBv@GdAhFj@Zp@{@`AiEm@mNiL_T`@oJ`BaF~@a@rFtDnDYtAnClAb@",
+   "note": "2025〜26年は 11/4 17時〜4/15 10時（NEXCO東日本 前沢SA の案内）。2026〜27年は未発表（2026-10-25）・開通直後は夜間通行止めあり",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-04",
+    "to": "04-14"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-akita-yuzawakurikoma",
+   "kind": "winterClosure",
+   "name": "湯沢栗駒公園線",
+   "prefecture": "秋田県",
+   "polyline": "a{lmFcavxYpCsH|EqDb@{CdA}AxGyCvNaJzAuA~@wBn@{MfDqYdA}Rc@aKdEgKnA_HbE{J@kNvHcUnIaHpMsShHmGvJwFrKZzBg@|\\qU~O_PnHeE??fLqN~CiNzFwDlFgGvEiA`FeE|@mBhEyRnEkJ~FgK~FoBnAcAjGaMLgL{BgNIoF_@wAsDyE_BgDSoJwDuKjByN`GaSbBcBjEaArAoGtIeJN}X^yBfEcA~M~@^w@TkFrC{@zAcHdKyDp@cA~AsG~@WbEXwE_Mi@mGzAsAh@{FxAiAdAaCxHaEjDqE`AyGDiFzHiQsAwBcBZoCg@q@iBmAC{AaDoD}BUiGbEkGUeBy@s@gELkFe@{GXkKmCkBLeAfCZvB`A|@nF`Al@z@TpBkAtE{ApBgCpAoCXwDo@sR}J}A_Ck@eCIyCd@cIk@_@mGCeEaD}BR{IfG}GvLsBRwBqA",
+   "note": "閉まるのは 湯沢市木地山〜国道398号交差点 5.7km。2025〜26年は 11/10 12時〜4/17 12時（秋田県 雄勝地域振興局 冬期閉鎖区間情報 2026-05-27）。2026〜27年は未発表",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-10",
+    "to": "04-16"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-akita-r342",
+   "kind": "winterClosure",
+   "name": "国道342号（須川・栗駒）",
+   "prefecture": "秋田県",
+   "polyline": "y{anFeazyY~EeBxBcIbAkAdJcE`_@lTjOUrGx@`QsCxCt@hAG~EiEdNe@rH\\jCo@nAh@|BhDbDGvGfB|PzAfHa@tD{C`B]jBLzFnCjRiCvD~@bGMlAe@jJkJ~KuCjJ_FbL_DrSoAnQjAhMnHnIJxFkDnM_BpGkGjCgErBoAxAOfEz@lEcBlFEnN}EnGqArHFzDgCdBXlS|LxG`CbGv@pGlEtBvDdEfBjAKz@y@v@oHfByAjDS`AVnFlG~B~@db@l@pHhAzFH`McDlJSdNiHpIf@tT@tBaBbBgEdAcAhIoAlLuDnJiBhPoA~B^xGhD|Cl@jG@pE}@hEsB`E{Dlo@{{@nFaClZeAbJ^|v@lO??pFfCnBrBzFpMrDnDtOhErF?dEtBtCY|CmBl@JnClEdBjAj@hC`FxIpGgBtI_LDcAo@e@sDpE}@KW_AvEeIlC{MfCeDvB{IuCgJaAWeDd@gDwDUqBj@}I~D{FzG}DbPcPv@aB`CsLlF}FP{AWsIqCsCqAqFNmA~Cy@~F|AXeA}@aDn@m@tFrA`CvBlALf@c@RuA_AgD@qAn@a@rBHzBmBf@iL`IiOpC}IEqOjB}F_BwG@mA^_@`ADvT|IvErCp@OjEiEdCXnD}@vCh@|_@iKxDdBj@uBi@}AiHXm@kAtGsI`@yC",
+   "note": "狐狼化山トンネルゲート〜岩手県境 11.3km は 2025〜26年 11/4 12時〜4/24 12時・東成瀬村椿川〜ゲート 5.0km は降雪で閉鎖〜4/17（秋田県 雄勝地域振興局 冬期閉鎖区間情報 2026-05-27）。2026〜27年は未発表",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-04",
+    "to": "04-23"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-akita-r397",
+   "kind": "winterClosure",
+   "name": "国道397号（栗駒）",
+   "prefecture": "秋田県",
+   "polyline": "uw}mFabczYo@vDEhExAvWa@Vo@_@QyEw@kA}F^eA[u@mGy@IU~@PzH{BbIx@tHWdAeA[mAwI?mIq@S[d@wA~QsBhITlBzBtCMbAo@?{FmGUaA|@kEIk@o@MyBlHgI~G}GdM{@YMkAlEeIZwCo@eCqCwEo@?g@hA~AzEQxBo@n@aBMqBcEkAk@oMxIQjCbApDFfBc@tI_AjCgBjBm@?Cy@bCuCn@{Cu@{Fs@SMv@z@hFk@rAcBN}@`A]~NyDjPwFdIqL`MwIdMsBvSd@dOzDxLGpCgBdKFfb@rBvN",
+   "note": "東成瀬村岩井川〜岩手県境 7.3km。2025〜26年は 11/7 12時〜5/21 12時（秋田県 雄勝地域振興局 冬期閉鎖区間情報 2026-05-27）。2026〜27年は未発表",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "activePeriod": {
+    "from": "11-07",
+    "to": "05-20"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-akita-r398",
+   "kind": "winterClosure",
+   "name": "国道398号（宮城県境）",
+   "prefecture": "秋田県",
+   "polyline": "kkslF}}{yYsA`DyBbCwBrBoDdBeBhFuIL}CrCgC}AqAVg@dAD|EeAzAoGUoOjCkAi@mC_EqI{DgGjAyFWwElEwDl@aCvDgCvAsDaAcCj@gAfBk@hI_CnGm@TiDqBaDoEuLdAkFmB}EPwG{@uLiFiBtALbKg@bBwA@cFkDmAHqAdAgCiAiEbJsG`F}Bj@eKe@eA|AeAdFoA^gA_AaDcNx@yDK_AcIgI",
+   "note": "湯沢市小安奥山〜宮城県境 12.8km。2025〜26年は 11/25 15時〜4/23 12時（秋田県 雄勝地域振興局 冬期閉鎖区間情報 2026-05-27）。2026〜27年は未発表",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-25",
+    "to": "04-22"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  }
+ ]
 }

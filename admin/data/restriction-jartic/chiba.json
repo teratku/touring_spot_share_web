@@ -1,12 +1,12 @@
 {
   "prefecture": "千葉県",
   "romaji": "chiba",
-  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-10-24に利用）を加工して作成",
   "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
-  "targetMonth": "2026年06月",
-  "releaseDay": "2026年08月01日",
-  "fetchedAt": "2026-08-28T12:49:45.916Z",
-  "totalRows": 115838,
+  "targetMonth": "2026年08月",
+  "releaseDay": "2026年10月01日",
+  "fetchedAt": "2026-10-24T12:17:02.435Z",
+  "totalRows": 115777,
   "candidates": [
     {
       "id": "jartic-13000000000000000000000000008932",
@@ -3052,20 +3052,8 @@
       "prefecture": "千葉県",
       "points": [
         [
-          139.997417797622,
-          35.7219854563255
-        ],
-        [
-          139.995870929991,
-          35.722057437544
-        ],
-        [
-          139.99581293469,
-          35.7220664363303
-        ],
-        [
-          139.995751939681,
-          35.7220744352244
+          139.995767753929,
+          35.7220712270689
         ],
         [
           139.995042994266,
@@ -3093,11 +3081,11 @@
           "原付"
         ],
         "dayLabel": null,
-        "decidedAt": "2023/05/09"
+        "decidedAt": "2026/09/08"
       },
       "source": "jartic",
       "nameSource": null,
-      "chainPolyline": "m}_yE{fnuYMtH}@rH",
+      "chainPolyline": "}}_yEq|muYg@pCSlC",
       "sourceRoad": "(名前が引けず)",
       "matchedName": "",
       "city": "",
@@ -3105,7 +3093,7 @@
       "to": "",
       "targetLabel": "原付",
       "confidence": "JARTIC",
-      "reason": "車両通行止め / 07:00〜08:30 / 意思決定 2023/05/09"
+      "reason": "車両通行止め / 07:00〜08:30 / 意思決定 2026/09/08"
     },
     {
       "id": "jartic-13000000000000000000000000009235",
@@ -4079,6 +4067,68 @@
       "targetLabel": "原付",
       "confidence": "JARTIC",
       "reason": "車両通行止め / 07:00〜08:30 / 意思決定 2002/02/21"
+    },
+    {
+      "id": "jartic-13000000000000000000000000009448",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "千葉県",
+      "points": [
+        [
+          139.960415174923,
+          35.8609904406022
+        ],
+        [
+          139.960254201447,
+          35.8601855701363
+        ],
+        [
+          139.960174213914,
+          35.859843624896
+        ],
+        [
+          139.960112223316,
+          35.8595996638497
+        ],
+        [
+          139.959957246413,
+          35.8590217559828
+        ],
+        [
+          139.95993225012,
+          35.8589297706496
+        ]
+      ],
+      "note": "車両通行止め",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:00",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両通行止め",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "1987/08/10"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "eb{yEs_guYzK`B",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "車両通行止め / 07:00〜08:30 / 意思決定 1987/08/10"
     },
     {
       "id": "jartic-13000000000000000000000000009475",
@@ -13694,6 +13744,150 @@
       "targetLabel": "原付",
       "confidence": "JARTIC",
       "reason": "車両通行止め / 07:30〜08:30 / 意思決定 2025/06/13"
+    },
+    {
+      "id": "jartic-13000000000000000000000000145514",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "千葉県",
+      "points": [
+        [
+          139.951306788709,
+          35.8751822946508
+        ],
+        [
+          139.951488073475,
+          35.8751897501833
+        ],
+        [
+          139.952028875128,
+          35.875260447168
+        ],
+        [
+          139.952113284015,
+          35.8752756268476
+        ],
+        [
+          139.952250775115,
+          35.8752576875015
+        ],
+        [
+          139.952466485602,
+          35.8752956316234
+        ],
+        [
+          139.952607194163,
+          35.8753387359616
+        ],
+        [
+          139.952647912773,
+          35.8753971997532
+        ],
+        [
+          139.952632535214,
+          35.8755625510414
+        ],
+        [
+          139.952666941687,
+          35.875580322842
+        ],
+        [
+          139.953273218834,
+          35.8755441175343
+        ],
+        [
+          139.953773250665,
+          35.8755207322633
+        ],
+        [
+          139.953957654088,
+          35.8755230937256
+        ],
+        [
+          139.954163935434,
+          35.8755254332393
+        ],
+        [
+          139.954242098071,
+          35.8755431612471
+        ]
+      ],
+      "note": "車両通行止め",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両通行止め",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/01/14"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "{z}yEufeuYWgFG[o@KFyH",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "車両通行止め / 07:30〜08:30 / 意思決定 2026/01/14"
+    },
+    {
+      "id": "jartic-13000000000000000000000000145517",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "千葉県",
+      "points": [
+        [
+          139.952530121268,
+          35.8760433980445
+        ],
+        [
+          139.952623162799,
+          35.8755651038385
+        ]
+      ],
+      "note": "車両通行止め",
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "07:30",
+        "to": "08:30"
+      },
+      "minCc": 0,
+      "maxCc": 50,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "車両通行止め",
+        "vehicles": [
+          "原付"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/01/14"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "g`~yEineuY|AQ",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "原付",
+      "confidence": "JARTIC",
+      "reason": "車両通行止め / 07:30〜08:30 / 意思決定 2026/01/14"
     }
   ]
 }

@@ -1,0 +1,46 @@
+{
+ "prefecture": "三重県",
+ "romaji": "mie",
+ "builtAt": "2026-10-24T13:06:29.072Z",
+ "count": 1,
+ "source": "openstreetmap",
+ "sourceUrl": "https://www.openstreetmap.org/",
+ "attribution": "© OpenStreetMap contributors（ODbL）",
+ "candidates": [
+  {
+   "id": "osmw-mie-75035975",
+   "prefecture": "三重県",
+   "city": "",
+   "sourceRoad": "国道477号",
+   "matchedName": "国道477号",
+   "from": "",
+   "to": "",
+   "target": "access:conditional=no @ (winter)",
+   "targetLabel": "二輪すべて",
+   "confidence": "OSM",
+   "reason": "OSM には access:conditional=no @ (winter) とだけ書かれている（期間は 12/1〜3/31 を仮に入れた）。必ず確かめること",
+   "chainPolyline": "q{ttEctr_Y}Cs[gAyEkDkCVu@xBJFkAkCmA{@_C_CLg@m@n@wGqAkD|@GzAhH\\q@a@mFsCwDe@}G}DgIt@o@nBhFxDbA@{@gD_F{DqJS_Kp@f@d@jEnA|Al@m@{AgCI_IiCkBbAsFcDkFgG_Dt@}GqF}EKgFqIiO_BsKn@gKu@q@iCHq@sAxD{IsCaB@{E{DyF",
+   "polyline": "q{ttEctr_Y}Cs[gAyEkDkCVu@xBJFkAkCmA{@_C_CLg@m@n@wGqAkD|@GzAhH\\q@a@mFsCwDe@}G}DgIt@o@nBhFxDbA@{@gD_F{DqJS_Kp@f@d@jEnA|Al@m@{AgCI_IiCkBbAsFcDkFgG_Dt@}GqF}EKgFqIiO_BsKn@gKu@q@iCHq@sAxD{IsCaB@{E{DyF",
+   "lengthMeters": 5707,
+   "geocode": null,
+   "kind": "winterClosure",
+   "minCc": null,
+   "maxCc": null,
+   "activePeriod": {
+    "from": "12-01",
+    "to": "03-31"
+   },
+   "activeMonths": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "fragmentCount": 16,
+   "alreadyRegistered": false
+  }
+ ]
+}

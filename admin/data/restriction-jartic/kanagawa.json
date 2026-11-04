@@ -1,15 +1,15 @@
 {
   "prefecture": "神奈川県",
   "romaji": "kanagawa",
-  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-08-28に利用）を加工して作成",
+  "attribution": "出典：「交通規制情報」（公益財団法人日本道路交通情報センター）（https://www.jartic.or.jp/service/opendata/）（2026-10-24に利用）を加工して作成",
   "sourceUrl": "https://www.jartic.or.jp/service/opendata/",
-  "targetMonth": "2026年06月",
-  "releaseDay": "2026年08月01日",
-  "fetchedAt": "2026-08-28T12:50:16.814Z",
-  "totalRows": 210035,
+  "targetMonth": "2026年08月",
+  "releaseDay": "2026年10月01日",
+  "fetchedAt": "2026-10-24T12:17:29.365Z",
+  "totalRows": 209978,
   "candidates": [
     {
-      "id": "jartic-14202606000002800000053700100057",
+      "id": "jartic-14202608000002800000053700100057",
       "kind": "noMotorcycle",
       "name": "横浜新道",
       "prefecture": "神奈川県",
@@ -357,7 +357,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000002900000053700100069",
+      "id": "jartic-14202608000002900000053700100069",
       "kind": "noMotorcycle",
       "name": "横浜新道",
       "prefecture": "神奈川県",
@@ -413,7 +413,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000003000000063300100001",
+      "id": "jartic-14202608000003000000063300100001",
       "kind": "noMotorcycle",
       "name": "逗葉新道",
       "prefecture": "神奈川県",
@@ -509,7 +509,7 @@
       "reason": "通行止め / 終日 / 意思決定 2026/04/24"
     },
     {
-      "id": "jartic-14202606000003100000066900100103",
+      "id": "jartic-14202608000003100000066900100103",
       "kind": "noMotorcycle",
       "name": "小田原箱根道路",
       "prefecture": "神奈川県",
@@ -749,7 +749,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000003200000066900100111",
+      "id": "jartic-14202608000003200000066900100111",
       "kind": "noMotorcycle",
       "name": "小田原厚木道路",
       "prefecture": "神奈川県",
@@ -1297,7 +1297,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000006500000066900100042",
+      "id": "jartic-14202608000011400000066900100042",
       "kind": "noMotorcycle",
       "name": "真鶴道路",
       "prefecture": "神奈川県",
@@ -2137,7 +2137,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000020300000058900100028",
+      "id": "jartic-14202608000021200000058900100028",
       "kind": "noMotorcycle",
       "name": "多摩川スカイブリッジ",
       "prefecture": "神奈川県",
@@ -2185,7 +2185,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000021500000066900100090",
+      "id": "jartic-14202608000022400000066900100090",
       "kind": "noMotorcycle",
       "name": "湯本元箱根線",
       "prefecture": "神奈川県",
@@ -3123,337 +3123,7 @@
       "reason": "通行止め / 08:00〜15:00 / 土曜・日曜・休日 / 意思決定 2004/05/14"
     },
     {
-      "id": "jartic-14202606000187500000051300100040",
-      "kind": "noMotorcycle",
-      "name": null,
-      "prefecture": "神奈川県",
-      "points": [
-        [
-          139.654392274442,
-          35.3454963833866
-        ],
-        [
-          139.650216789481,
-          35.3454615919512
-        ],
-        [
-          139.650230611466,
-          35.3408570846937
-        ]
-      ],
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": {
-        "from": "00:00",
-        "to": "06:00"
-      },
-      "minCc": 0,
-      "maxCc": 99999,
-      "jartic": {
-        "kindCode": "5",
-        "kindName": "",
-        "vehicles": [
-          "二輪"
-        ],
-        "dayLabel": null,
-        "decidedAt": "2023/06/29"
-      },
-      "source": "jartic",
-      "nameSource": null,
-      "chainPolyline": "klvvE}fksYF`Yv[A",
-      "sourceRoad": "(名前が引けず)",
-      "matchedName": "",
-      "city": "",
-      "from": "",
-      "to": "",
-      "targetLabel": "二輪",
-      "confidence": "JARTIC",
-      "reason": "通行止め / 00:00〜06:00 / 意思決定 2023/06/29"
-    },
-    {
-      "id": "jartic-14202606000187600000052500100100",
-      "kind": "noMotorcycle",
-      "name": "臨港幹線道路",
-      "prefecture": "神奈川県",
-      "points": [
-        [
-          139.633727418831,
-          35.4640866712678
-        ],
-        [
-          139.633448576632,
-          35.4635756099495
-        ],
-        [
-          139.633318603209,
-          35.4632328665615
-        ],
-        [
-          139.63315058528,
-          35.4627187519501
-        ],
-        [
-          139.633093671205,
-          35.4621618660764
-        ],
-        [
-          139.63311176011,
-          35.4614050029024
-        ],
-        [
-          139.633319544765,
-          35.460880895924
-        ],
-        [
-          139.63354649365,
-          35.4603751206529
-        ],
-        [
-          139.633962594197,
-          35.4598540725416
-        ],
-        [
-          139.6349095158,
-          35.4586422742521
-        ],
-        [
-          139.635441722458,
-          35.4580204056193
-        ],
-        [
-          139.636094483689,
-          35.4572024489549
-        ],
-        [
-          139.636705575869,
-          35.4565114224306
-        ]
-      ],
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": {
-        "from": "00:00",
-        "to": "05:00"
-      },
-      "minCc": 0,
-      "maxCc": 99999,
-      "jartic": {
-        "kindCode": "5",
-        "kindName": "",
-        "vehicles": [
-          "二輪"
-        ],
-        "dayLabel": null,
-        "decidedAt": "2026/01/29"
-      },
-      "source": "jartic",
-      "nameSource": "grid",
-      "nameDistanceMeters": 4,
-      "chainPolyline": "qqmwEyegsYdBv@jDz@dGFlEwAdWwR",
-      "sourceRoad": "臨港幹線道路",
-      "matchedName": "臨港幹線道路",
-      "city": "",
-      "from": "",
-      "to": "",
-      "targetLabel": "二輪",
-      "confidence": "JARTIC",
-      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
-    },
-    {
-      "id": "jartic-14202606000187700000052500100101",
-      "kind": "noMotorcycle",
-      "name": "臨港幹線道路",
-      "prefecture": "神奈川県",
-      "points": [
-        [
-          139.636549478962,
-          35.4564844781415
-        ],
-        [
-          139.634356481081,
-          35.4591872063058
-        ],
-        [
-          139.633801495775,
-          35.4598690681237
-        ],
-        [
-          139.633402614089,
-          35.4604320564943
-        ],
-        [
-          139.633180664686,
-          35.4609400538373
-        ],
-        [
-          139.632994540026,
-          35.4615699832085
-        ],
-        [
-          139.632962570343,
-          35.4621757511901
-        ],
-        [
-          139.633109465613,
-          35.4629787234251
-        ],
-        [
-          139.633335529263,
-          35.4636017162937
-        ],
-        [
-          139.633615481202,
-          35.4641405524383
-        ]
-      ],
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": {
-        "from": "00:00",
-        "to": "05:00"
-      },
-      "minCc": 0,
-      "maxCc": 99999,
-      "jartic": {
-        "kindCode": "5",
-        "kindName": "",
-        "vehicles": [
-          "二輪"
-        ],
-        "dayLabel": null,
-        "decidedAt": "2026/01/29"
-      },
-      "source": "jartic",
-      "nameSource": "grid",
-      "nameDistanceMeters": 6,
-      "chainPolyline": "_blwEmwgsYeTdPoBnAeBj@}Bd@yBD_D]gFeB",
-      "sourceRoad": "臨港幹線道路",
-      "matchedName": "臨港幹線道路",
-      "city": "",
-      "from": "",
-      "to": "",
-      "targetLabel": "二輪",
-      "confidence": "JARTIC",
-      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
-    },
-    {
-      "id": "jartic-14202606000187800000052500100102",
-      "kind": "noMotorcycle",
-      "name": "国際大通り",
-      "prefecture": "神奈川県",
-      "points": [
-        [
-          139.636698631899,
-          35.4565136442939
-        ],
-        [
-          139.637261388595,
-          35.4559564914949
-        ],
-        [
-          139.638317443489,
-          35.4552726941918
-        ],
-        [
-          139.639152396566,
-          35.4547858164085
-        ]
-      ],
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": {
-        "from": "00:00",
-        "to": "05:00"
-      },
-      "minCc": 0,
-      "maxCc": 99999,
-      "jartic": {
-        "kindCode": "5",
-        "kindName": "",
-        "vehicles": [
-          "二輪"
-        ],
-        "dayLabel": null,
-        "decidedAt": "2026/01/29"
-      },
-      "source": "jartic",
-      "nameSource": "grid",
-      "nameDistanceMeters": 5,
-      "chainPolyline": "eblwEkxgsYlBoBhFyJ",
-      "sourceRoad": "国際大通り",
-      "matchedName": "国際大通り",
-      "city": "",
-      "from": "",
-      "to": "",
-      "targetLabel": "二輪",
-      "confidence": "JARTIC",
-      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
-    },
-    {
-      "id": "jartic-14202606000187900000058100100003",
-      "kind": "noMotorcycle",
-      "name": "臨港幹線道路",
-      "prefecture": "神奈川県",
-      "points": [
-        [
-          139.639294343034,
-          35.4544858509725
-        ],
-        [
-          139.638222739683,
-          35.4550435503803
-        ],
-        [
-          139.637103075367,
-          35.45580539378
-        ],
-        [
-          139.636559756411,
-          35.4564730906502
-        ]
-      ],
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": {
-        "from": "00:00",
-        "to": "05:00"
-      },
-      "minCc": 0,
-      "maxCc": 99999,
-      "jartic": {
-        "kindCode": "5",
-        "kindName": "",
-        "vehicles": [
-          "二輪"
-        ],
-        "dayLabel": null,
-        "decidedAt": "2026/01/29"
-      },
-      "source": "jartic",
-      "nameSource": "grid",
-      "nameDistanceMeters": 6,
-      "chainPolyline": "qukwEqhhsYmBtEyC~EcCjB",
-      "sourceRoad": "臨港幹線道路",
-      "matchedName": "臨港幹線道路",
-      "city": "",
-      "from": "",
-      "to": "",
-      "targetLabel": "二輪",
-      "confidence": "JARTIC",
-      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
-    },
-    {
-      "id": "jartic-14202606000188100000071300100014",
+      "id": "jartic-14202608000175300000071300100014",
       "kind": "noMotorcycle",
       "name": "鳥屋川尻線",
       "prefecture": "神奈川県",
@@ -4061,7 +3731,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000188200000071300100015",
+      "id": "jartic-14202608000175400000071300100015",
       "kind": "noMotorcycle",
       "name": null,
       "prefecture": "神奈川県",
@@ -4524,7 +4194,7 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000188300000071300100019",
+      "id": "jartic-14202608000175500000071300100019",
       "kind": "noMotorcycle",
       "name": "松風都井沢線",
       "prefecture": "神奈川県",
@@ -4720,7 +4390,337 @@
       "reason": "通行止め / 終日 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000189200000053300100073",
+      "id": "jartic-14202608000189900000051300100040",
+      "kind": "noMotorcycle",
+      "name": null,
+      "prefecture": "神奈川県",
+      "points": [
+        [
+          139.654392274442,
+          35.3454963833866
+        ],
+        [
+          139.650216789481,
+          35.3454615919512
+        ],
+        [
+          139.650230611466,
+          35.3408570846937
+        ]
+      ],
+      "note": null,
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "00:00",
+        "to": "06:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2023/06/29"
+      },
+      "source": "jartic",
+      "nameSource": null,
+      "chainPolyline": "klvvE}fksYF`Yv[A",
+      "sourceRoad": "(名前が引けず)",
+      "matchedName": "",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "通行止め / 00:00〜06:00 / 意思決定 2023/06/29"
+    },
+    {
+      "id": "jartic-14202608000190000000052500100100",
+      "kind": "noMotorcycle",
+      "name": "臨港幹線道路",
+      "prefecture": "神奈川県",
+      "points": [
+        [
+          139.633727418831,
+          35.4640866712678
+        ],
+        [
+          139.633448576632,
+          35.4635756099495
+        ],
+        [
+          139.633318603209,
+          35.4632328665615
+        ],
+        [
+          139.63315058528,
+          35.4627187519501
+        ],
+        [
+          139.633093671205,
+          35.4621618660764
+        ],
+        [
+          139.63311176011,
+          35.4614050029024
+        ],
+        [
+          139.633319544765,
+          35.460880895924
+        ],
+        [
+          139.63354649365,
+          35.4603751206529
+        ],
+        [
+          139.633962594197,
+          35.4598540725416
+        ],
+        [
+          139.6349095158,
+          35.4586422742521
+        ],
+        [
+          139.635441722458,
+          35.4580204056193
+        ],
+        [
+          139.636094483689,
+          35.4572024489549
+        ],
+        [
+          139.636705575869,
+          35.4565114224306
+        ]
+      ],
+      "note": null,
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "00:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/01/29"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 4,
+      "chainPolyline": "qqmwEyegsYdBv@jDz@dGFlEwAdWwR",
+      "sourceRoad": "臨港幹線道路",
+      "matchedName": "臨港幹線道路",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
+    },
+    {
+      "id": "jartic-14202608000190100000052500100101",
+      "kind": "noMotorcycle",
+      "name": "臨港幹線道路",
+      "prefecture": "神奈川県",
+      "points": [
+        [
+          139.636549478962,
+          35.4564844781415
+        ],
+        [
+          139.634356481081,
+          35.4591872063058
+        ],
+        [
+          139.633801495775,
+          35.4598690681237
+        ],
+        [
+          139.633402614089,
+          35.4604320564943
+        ],
+        [
+          139.633180664686,
+          35.4609400538373
+        ],
+        [
+          139.632994540026,
+          35.4615699832085
+        ],
+        [
+          139.632962570343,
+          35.4621757511901
+        ],
+        [
+          139.633109465613,
+          35.4629787234251
+        ],
+        [
+          139.633335529263,
+          35.4636017162937
+        ],
+        [
+          139.633615481202,
+          35.4641405524383
+        ]
+      ],
+      "note": null,
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "00:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/01/29"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 6,
+      "chainPolyline": "_blwEmwgsYeTdPoBnAeBj@}Bd@yBD_D]gFeB",
+      "sourceRoad": "臨港幹線道路",
+      "matchedName": "臨港幹線道路",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
+    },
+    {
+      "id": "jartic-14202608000190200000052500100102",
+      "kind": "noMotorcycle",
+      "name": "国際大通り",
+      "prefecture": "神奈川県",
+      "points": [
+        [
+          139.636698631899,
+          35.4565136442939
+        ],
+        [
+          139.637261388595,
+          35.4559564914949
+        ],
+        [
+          139.638317443489,
+          35.4552726941918
+        ],
+        [
+          139.639152396566,
+          35.4547858164085
+        ]
+      ],
+      "note": null,
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "00:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/01/29"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 5,
+      "chainPolyline": "eblwEkxgsYlBoBhFyJ",
+      "sourceRoad": "国際大通り",
+      "matchedName": "国際大通り",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
+    },
+    {
+      "id": "jartic-14202608000190300000058100100003",
+      "kind": "noMotorcycle",
+      "name": "臨港幹線道路",
+      "prefecture": "神奈川県",
+      "points": [
+        [
+          139.639294343034,
+          35.4544858509725
+        ],
+        [
+          139.638222739683,
+          35.4550435503803
+        ],
+        [
+          139.637103075367,
+          35.45580539378
+        ],
+        [
+          139.636559756411,
+          35.4564730906502
+        ]
+      ],
+      "note": null,
+      "activeMonths": null,
+      "activeDays": null,
+      "includesHoliday": false,
+      "activeHours": {
+        "from": "00:00",
+        "to": "05:00"
+      },
+      "minCc": 0,
+      "maxCc": 99999,
+      "jartic": {
+        "kindCode": "5",
+        "kindName": "",
+        "vehicles": [
+          "二輪"
+        ],
+        "dayLabel": null,
+        "decidedAt": "2026/01/29"
+      },
+      "source": "jartic",
+      "nameSource": "grid",
+      "nameDistanceMeters": 6,
+      "chainPolyline": "qukwEqhhsYmBtEyC~EcCjB",
+      "sourceRoad": "臨港幹線道路",
+      "matchedName": "臨港幹線道路",
+      "city": "",
+      "from": "",
+      "to": "",
+      "targetLabel": "二輪",
+      "confidence": "JARTIC",
+      "reason": "通行止め / 00:00〜05:00 / 意思決定 2026/01/29"
+    },
+    {
+      "id": "jartic-14202608000191200000053300100073",
       "kind": "noMotorcycle",
       "name": null,
       "prefecture": "神奈川県",
@@ -4770,7 +4770,7 @@
       "reason": "通行止め / 07:00〜09:00 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000189300000054900100053",
+      "id": "jartic-14202608000191300000054900100053",
       "kind": "noMotorcycle",
       "name": "首都高速神奈川7号横浜北線",
       "prefecture": "神奈川県",
@@ -4825,7 +4825,7 @@
       "reason": "通行止め / 07:00〜09:00 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000189400000061700100022",
+      "id": "jartic-14202608000191400000061700100022",
       "kind": "noMotorcycle",
       "name": null,
       "prefecture": "神奈川県",
@@ -4903,7 +4903,7 @@
       "reason": "通行止め / 07:30〜08:30 / 意思決定 2023/06/29"
     },
     {
-      "id": "jartic-14202606000189500000061700100040",
+      "id": "jartic-14202608000191500000061700100040",
       "kind": "noMotorcycle",
       "name": null,
       "prefecture": "神奈川県",
@@ -4953,7 +4953,7 @@
       "reason": "通行止め / 07:30〜08:30 / 意思決定 2024/01/26"
     },
     {
-      "id": "jartic-14202606000190100000066900100042",
+      "id": "jartic-14202608000192100000066900100042",
       "kind": "noMotorcycle",
       "name": "真鶴道路",
       "prefecture": "神奈川県",

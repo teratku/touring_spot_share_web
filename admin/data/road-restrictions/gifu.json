@@ -1,41 +1,100 @@
 {
-  "romaji": "gifu",
-  "updatedAt": "2026-09-28T09:21:23.266Z",
-  "count": 2,
-  "restrictions": [
-    {
-      "id": "osm-gifu-114216723",
-      "kind": "noMotorcycle",
-      "name": "白山白川郷ホワイトロード",
-      "prefecture": "岐阜県",
-      "polyline": "m`j|E_vqbYt@hA`De@vBmE`DkAnDqFtAc@pK|]nFx@lHeArC|Al@`BOnH{DrB}C`F{CjO\\lI_AlFtCvDC~GjIpBs@tRuCfKzBxJ~EpLeAhCZ~CcBzBq@lD_G~DaE{AyDGiA`CoGiFqEL{G_Aq@x@InBwGYaAz@aBvCa@zFmFV}F|DkCsAiHf@x@v@pF?zArDfKkErDnBfCYzB_ItGbClEkBx@`ANrEbD^PbMo@KoBwGaHwDiBj@[dFaBzDsFoAeCdBKbAjBvBrBqBlDbAzDcCxAzBnAzG|@v@rLbA|EQQ|@oKz@?`CvBhBObAmI~AoBbGsCeAWzEsClDStCgAViC{@}Ax@q@dNtHlIg@zDkBrAk@lBxB~DoEhFh@tBUz@{EnD}Ef@_@hDpFhIHbB{@dBhAlBnFy@pE`AtFuA_@dCdArC_CvGwB`BhFbFpEpASpBaEdEZ|GbQzNhAH",
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": null,
-      "checkedAt": "2026-08-16",
-      "source": "admin",
-      "origin": "osm"
-    },
-    {
-      "id": "osm-gifu-113834950",
-      "kind": "noMotorcycle",
-      "name": "伊吹山ドライブウェイ",
-      "prefecture": "岐阜県",
-      "polyline": "mv{vEaey_YjHm@{FlA_FaDgADkGhV{J|DyHwA~@~G_CbQs@h@]_Ar@iDmAuIoGgElBiElHyFQeDxA}D}EoIyHrCmGmFfFmCpEaIoFhFiEh@sIhEItAnH|CLbC`B|@`AfCqA|EyEk@sH~@fDbFCnCiBzCzExIV`Bg@bBcFjDwCqCyBI_BcBqAhBeBM?vBz@zBqBxFaB[qBz@{CgAgBb@mBuAkAtAkDi@@~EiBxBtBrDw@jExCxCeAbHj@rCfB|@Qx@m@HeJaGeFqKoBpCiBMu@rBmBc@m@tFfAtDcGRW|CoC`DLdEqG~E?tAxArAAr@oCaA{AhAcAhCeB_AiBJ}@~CcBt@m@tBkFq@oF`A_BuCsCIkAoAyBx@aEwCoAxHl@\\j@eEp@IcAvMsIjH}Cn@qE|CoJRuBmAeLhBqC~IeCbAc@zAwG~Au@i@q@mDeBY_CnHiG~DwDqA}BgC_AyDfAwHa@qBkBs@mC`@aHg@qEeAoBgCk@BDzF}BtJApBhGdAnIrExB`LnFnEjBb@b@zFhDlFvA~HtChG",
-      "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": 125,
-      "checkedAt": "2026-09-28",
-      "source": "admin",
-      "origin": "osm"
-    }
-  ]
+ "romaji": "gifu",
+ "updatedAt": "2026-10-24T23:09:19.206Z",
+ "count": 4,
+ "restrictions": [
+  {
+   "id": "osm-gifu-114216723",
+   "kind": "noMotorcycle",
+   "name": "白山白川郷ホワイトロード",
+   "prefecture": "岐阜県",
+   "polyline": "m`j|E_vqbYt@hA`De@vBmE`DkAnDqFtAc@pK|]nFx@lHeArC|Al@`BOnH{DrB}C`F{CjO\\lI_AlFtCvDC~GjIpBs@tRuCfKzBxJ~EpLeAhCZ~CcBzBq@lD_G~DaE{AyDGiA`CoGiFqEL{G_Aq@x@InBwGYaAz@aBvCa@zFmFV}F|DkCsAiHf@x@v@pF?zArDfKkErDnBfCYzB_ItGbClEkBx@`ANrEbD^PbMo@KoBwGaHwDiBj@[dFaBzDsFoAeCdBKbAjBvBrBqBlDbAzDcCxAzBnAzG|@v@rLbA|EQQ|@oKz@?`CvBhBObAmI~AoBbGsCeAWzEsClDStCgAViC{@}Ax@q@dNtHlIg@zDkBrAk@lBxB~DoEhFh@tBUz@{EnD}Ef@_@hDpFhIHbB{@dBhAlBnFy@pE`AtFuA_@dCdArC_CvGwB`BhFbFpEpASpBaEdEZ|GbQzNhAH",
+   "note": null,
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-08-16",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "osm-gifu-113834950",
+   "kind": "noMotorcycle",
+   "name": "伊吹山ドライブウェイ",
+   "prefecture": "岐阜県",
+   "polyline": "mv{vEaey_YjHm@{FlA_FaDgADkGhV{J|DyHwA~@~G_CbQs@h@]_Ar@iDmAuIoGgElBiElHyFQeDxA}D}EoIyHrCmGmFfFmCpEaIoFhFiEh@sIhEItAnH|CLbC`B|@`AfCqA|EyEk@sH~@fDbFCnCiBzCzExIV`Bg@bBcFjDwCqCyBI_BcBqAhBeBM?vBz@zBqBxFaB[qBz@{CgAgBb@mBuAkAtAkDi@@~EiBxBtBrDw@jExCxCeAbHj@rCfB|@Qx@m@HeJaGeFqKoBpCiBMu@rBmBc@m@tFfAtDcGRW|CoC`DLdEqG~E?tAxArAAr@oCaA{AhAcAhCeB_AiBJ}@~CcBt@m@tBkFq@oF`A_BuCsCIkAoAyBx@aEwCoAxHl@\\j@eEp@IcAvMsIjH}Cn@qE|CoJRuBmAeLhBqC~IeCbAc@zAwG~Au@i@q@mDeBY_CnHiG~DwDqA}BgC_AyDfAwHa@qBkBs@mC`@aHg@qEeAoBgCk@BDzF}BtJApBhGdAnIrExB`LnFnEjBb@b@zFhDlFvA~HtChG",
+   "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 125,
+   "checkedAt": "2026-09-28",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "winter-gifu-whiteroad",
+   "kind": "winterClosure",
+   "name": "白山白川郷ホワイトロード",
+   "prefecture": "岐阜県",
+   "polyline": "inh|EwhlbYqAr@aE{AyDGiA`CoGiFqEL{G_Aq@x@InBwGYaAz@aBvCa@zFmFV}F|DkCsAiHf@x@v@pF?zArDfKkErDnBfCYzB_ItGbClEkBx@`ANrEbD^PbMo@KoBwGaHwDiBj@[dFaBzDsFoAeCdBKbAjBvBrBqBlDbAzDcCxAzBnAzG|@v@rLbA|EQQ|@oKz@?`CvBhBObAmI~AoBbGsCeAWzEsClDStCgAViC{@}Ax@q@dNtHlIg@zDkBrAk@lBxB~DoEhFh@tBUz@{EnD}Ef@_@hDpFhIHbB{@dBhAlBnFy@pE`AtFuA_@dCdArC_CvGwB`BhFbFpEpASpBaEdEZ|GbQzNhAH",
+   "note": "2026年は 11/10 まで通行の予定（6/12 に全線開通）。開通日は年でかなり違う（2025年は石川側 6/27・岐阜側 7/11）。有料道路",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "activePeriod": {
+    "from": "11-11",
+    "to": "06-11"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gifu-r157",
+   "kind": "winterClosure",
+   "name": "国道157号（温見峠）",
+   "prefecture": "岐阜県",
+   "polyline": "opsxE_qs`YkFzD_Eb@oCw@{A`Au@fL{B|B|@dCSnB]WR}Ak@K{OlDmMjG}@]{AsB_Fv@sJrGkFn@mDfAmB|AyBb@cEfEgLdHcRhHgBo@y@cEa@YuHu@u@dA`@rBa@xHsBfCHfCiCzCwBqAaAwD{E~DeHqBg@fAm@vK{CpEaB^yE{AGeB{B}EGqIyFkJ[oBcFo@fDwGrCaA~CDl@g@Ae@mCyB_@eByHoE]qCVcAmBe@uAqET]nC?zA{@rBgKCwAbBkC`Bo@|ABbCzAz@MKkF|C{HkCoC]h@iEm@?kFgDwDNsE{E{ETkDbBkEs@u@wJw@OyHg@_Ag@CiDnB}AbB}@rCiBp@aDfD_MlEgEr@wCxCoD~FaDdAmE[aEdAiAfBi@zCgHhFqB|Dn@nAk@j@SpA_FRwGiBeBbDc@@OoBoDUsAaAcAgCiDsAmEh@iDrCiHiA_LlFsAhCaHrHeC\\uGlD{GUy@hAyB{A_CfEeCbAaIv@wEeAuA`@_EEiBy@yGgGqAh@o@hF}@ZoA{E{PeFqBgDuB}G_AQkAz@oCb@wDMuHiIkDfCeEvHkFnF}Ah@_GTiGxAqDe@oBdAe@~BgAjAaBnFoDpBwDbF_CvIkEjBcApAuBbII|Cs@lAmAlLm@`A@vKy@tBsBlAXbE}BhC?pCmAzE_ChCsAvCoArGIpEq@dE",
+   "note": "根尾大河原〜温見峠（県境）9.5km は 2025〜26年 11/20〜5/7・根尾能郷〜大河原は 12/4〜4/10（岐阜土木事務所）。災害通行止めが続いていることがある。2026〜27年は未発表",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "activePeriod": {
+    "from": "11-20",
+    "to": "05-06"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  }
+ ]
 }

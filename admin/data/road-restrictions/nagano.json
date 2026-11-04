@@ -1,41 +1,178 @@
 {
-  "romaji": "nagano",
-  "updatedAt": "2026-09-28T09:21:23.278Z",
-  "count": 2,
-  "restrictions": [
-    {
-      "id": "osm-nagano-148792075",
-      "kind": "noMotorcycle",
-      "name": "白糸ハイランドウェイ",
-      "prefecture": "長野県",
-      "polyline": "_ge}EajwlYDoA}DyEfAku@uGwAmDmS}AeCi@mDmFyBx@aFGcHsAuA]}E~BoWq@eBaGyBuDbAq@[oAuFfAaHrDiHlCqARoC`F{H~FaRdI}ObG_HnEqCrCeS`Di@tEd@zIeA`LcGtCiJhC}AnEbArFhLb@`DxD~ChAlFpAN`NsGx@cCzLwAhBoElGqI|YmWv@kDhDwC`@aFh@Dt@dCpDeChBwDxFu@LjB`EcDUeAuHqBOiAtBeAbEv@",
-      "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": 125,
-      "checkedAt": "2026-09-28",
-      "source": "admin",
-      "origin": "osm"
-    },
-    {
-      "id": "osm-nagano-68423668",
-      "kind": "noMotorcycle",
-      "name": "鬼押ハイウエー",
-      "prefecture": "長野県",
-      "polyline": "_ge}EajwlYc\\h@ac@~Qka@`M__BrnA}_@x{@",
-      "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": 125,
-      "checkedAt": "2026-09-28",
-      "source": "admin",
-      "origin": "osm"
-    }
-  ]
+ "romaji": "nagano",
+ "updatedAt": "2026-10-24T23:09:19.204Z",
+ "count": 7,
+ "restrictions": [
+  {
+   "id": "osm-nagano-148792075",
+   "kind": "noMotorcycle",
+   "name": "白糸ハイランドウェイ",
+   "prefecture": "長野県",
+   "polyline": "_ge}EajwlYDoA}DyEfAku@uGwAmDmS}AeCi@mDmFyBx@aFGcHsAuA]}E~BoWq@eBaGyBuDbAq@[oAuFfAaHrDiHlCqARoC`F{H~FaRdI}ObG_HnEqCrCeS`Di@tEd@zIeA`LcGtCiJhC}AnEbArFhLb@`DxD~ChAlFpAN`NsGx@cCzLwAhBoElGqI|YmWv@kDhDwC`@aFh@Dt@dCpDeChBwDxFu@LjB`EcDUeAuHqBOiAtBeAbEv@",
+   "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 125,
+   "checkedAt": "2026-09-28",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "osm-nagano-68423668",
+   "kind": "noMotorcycle",
+   "name": "鬼押ハイウエー",
+   "prefecture": "長野県",
+   "polyline": "_ge}EajwlYc\\h@ac@~Qka@`M__BrnA}_@x{@",
+   "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 125,
+   "checkedAt": "2026-09-28",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "winter-nagano-mugikusa",
+   "kind": "winterClosure",
+   "name": "メルヘン街道（麦草峠）",
+   "prefecture": "長野県",
+   "polyline": "yso{Eq~clYtB~IP~HhCd]QhIj@zK`DvFtLzHnFdFhD`FfL~I`ItBxA~@jEhNlIhOz@pGpAhD|DzE~GnCzFrEhFxKnI`IrBdDZrB@fHlFpL|EnFxAnG`@fHzCvGjCvPUxHb@|FYbCOtPsC|HYdDgBrFH`DdAfDY`BoA`@o@a@yBkGBsD_AcEw@{IgB@}AxExA|S]jEeA`CbDfJM`FaAvBFrA`AzCnF`E`@z@ObBmAzC}DxFI~BnBrLmC~AQh@Rz@xAP`E}A\\m@RcDh@OpDfHxHzErBdEpGtIjA|DdB~@|FxN|BxHR|BhHtMb@UNsAS{Or@}Aa@aDmAiD?eEp@qAnFnG`DpNxGjBdApDdAShCp@zFtE~@u@IqE}EiKs@eDhAwFp@YnL|NvCm@dAvDjB?pInHxBbAvCk@dBpAhBdIhChFbDe@jH_GlIPvDsAvBpAdBdFpFlFb_@bIvAAjCsA`DoJPuEwAuJhD_Gv@sDG_ByAiDz@uIlAsA`Eq@|FpEnDiFdAKh@b@TvIYbELjFgAFcAmFk@w@{@D_@|@dBrHn@jGpA~E|@~@hCmArBoCp@Ir@b@hAjERrIjBdFUb@g@SmGaLY\\h@fBZfJq@Hs@_B{@i@u@Ng@x@rCnIlClCv@nBL`BWj@]Gq@cBa@Z`BhM}@Am@gC]JIdAbBvFvCrDSn@wC]w@l@^p@vCZVj@Mn@iFc@uA^Mh@dB?|AbAIlAmBQBbA|I|MbHrGfAzE|B`DpBrFj@xEYlAaH{Au@h@pA~Tl@n@pEl@|@bBTlF|D~GvF|CfBvDQzAi@j@kGLmB[wAr@mGnV",
+   "note": "閉まるのは 佐久穂町麦草峠〜小海町千代里（7.7km）。2026〜27年は 11/19 11時〜4/15 11時（長野県 佐久建設事務所 2026-09-30）",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-19",
+    "to": "04-14"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-nagano-kakeyu",
+   "kind": "winterClosure",
+   "name": "鹿教湯別所上田線",
+   "prefecture": "長野県",
+   "polyline": "m~u|Eso_jYiEgGuE}BGwCwAgAeBRgB}B?i@dByBs@cCLiCdCeCjA}FaCsCr@yD_Cy@nA_CFcBwCuEnCyAcAc@iAuDtAw@jBQlA}AjBTPYgBkDeCs@q@sE]e@gB@u@c@yBPe@e@n@{GY{AP_BZ]dDCrAoCnBuAYoD`@qBWq@JiAgAyAl@iCGkCr@m@dCDa@mBb@mEVYbBLtBmB}@uBKaDqB]_BgCD{@pEkD?sAs@e@yBGuAqA{AoFkB}AFe@dAKBs@mBgAiAcDyAc@yHoG_Gq@_AwCyBfAyCm@eD}Cm@AiBhAu@qA}Cg@_CJiBfAeCRaBu@aENeCiByGnEiCNEq@x@k@Wi@}GjCgCdB_@m@zCwBGi@cCt@eLv@g@eAr@}C}@q@iGtEk@@mBaFjEkH_BiAsBTaCa@cIqF",
+   "note": "青木村沓掛〜上田市野倉新田 4.5km。2026〜27年は 11/25 10時〜3/23 15時（長野県 上田建設事務所 2026-09-30）",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "activePeriod": {
+    "from": "11-25",
+    "to": "03-22"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-nagano-hofukuji",
+   "kind": "winterClosure",
+   "name": "下奈良本豊科線（保福寺峠）",
+   "prefecture": "長野県",
+   "polyline": "s~z|Ek{}iYu@rGxC~Gj@nJh@`BbACr@{CjA[x@r@|BvGd@AjA}ApBd@fDq@zA|@tCfERhD{A~EhD`K]zDtAfCjAjG~DxGbEXzCfCnIhBjHnJjA`@fAhCdAiDn@SpGrHnDPrCjAd@mCp@u@xB`@jAO_CkDEw@tAoLh@_@~AxDbHLRv@[~DlFjCZjBpD?~BlDPGoAmD@mAzAwB\\kBhIeEvCi@lAaAf@eC`D}@fA_HzDmCIa@iA_@X{Bp@iArAr@hDpIMdFmC|@xF~Gn@lDl@MCaFhCjB|AT`GnI?lB~@nBd@[BoCp@|BtDbGm@hHx@|EkBpC{DZr@vBuAtDFtBgArBHbAv@dAq@tBFhA^L`F}HhCg@~AsDDdC{@`B}@fGqAbE_DdF@xB`@OH_CbGqEfAuBfCcCjC_@d@qArDjBrEj@vCy@z@b@VzBl@g@v@_El@SPrC]vBhBfAvAqAb@HnB~EdC`AzBzGU^a@Mi@eBqDmAcAiA}@@oBpFDhAs@bCoAhA{AlDIhCeAvA@`D{BfAsBfCRZ`C{BzEaAk@}BzBgATaCfC{@C^eBn@AfCcAlAlCtBHbAsD`A_AhArCnAlBfCKjCzCBL~B]zEbBnA@bCvArHPYu@cFQkGT{@OsAb@Kn@jCk@fAnBfL~@zAs@vAo@nIk@lL\\tPs@nAnAnCs@vCxApA@z@eAjGHpEs@lBN~Bi@tBBpB_AxFsBlEuGuBuAHw@fAq@@[c@CqCcAoCgDsDkBaA]f@rEnIDjEg@nA^hBlCrClCdAn@zDiAbMEjEu@n@F`@jCxADxAyB|Io@vF\\Hz@_DjE}Ev@FOrEwAhE?fGcH`SLfC{DpWTbBoFfNLxT{C`OgD|Ke@rIeBfHj@`b@mCd^l@hBUnFNv[y@|CqDdGgBf@aKY",
+   "note": "保福寺1号橋手前〜保福寺峠（松本市境）8.1km。2026〜27年は 11/25 11時30分〜4/13 15時（長野県 上田建設事務所 2026-09-30）",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-25",
+    "to": "04-12"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-nagano-sanadashinden",
+   "kind": "winterClosure",
+   "name": "真田新田線",
+   "prefecture": "長野県",
+   "polyline": "ixe}Eiw|iYrGeGxEIIm@aB]y@eALyBuAuLk@Gg@nAc@nBArDe@l@yB}CuCQ]]Ps@hCJb@k@sAeEu@SeB|@kAgCT[lA|@}@uExAtA\\WqAaDF}@`GwEjEkGHqA_A}EcEyGs@AOlA|A`GgC`CqAdDWAMgAb@_Dc@]aB`ACe@v@c@Ho@_B]bAiC@}B_@y@sAz@uCvEM[bAmEcBoAa@{Bs@i@g@ZsA]WbAd@dBOd@yCmBw@sAnA[Xq@a@oEpAiNbAuCNyG^?@nAd@BzFqKt@MoBwCuAy@qA_Dk@qHPwCcAmCkAaHEqHyEqFg@yAfAqLm@wFPeFSiE}BmSLgBrB_Fj@cGdAiDvCoBvGe@rDcCnBgB|E}H",
+   "note": "上田市上室賀 西松尾〜藤庄 4.8km。2026〜27年は 11/25 14時〜4/13 15時（長野県 上田建設事務所 2026-09-30）",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-25",
+    "to": "04-12"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-nagano-tazawa",
+   "kind": "winterClosure",
+   "name": "田沢中挾線",
+   "prefecture": "長野県",
+   "polyline": "sd`}Eau{iYvBkCbBQfDfBzB~D`FnAvBi@`C{BEYiHJ`E{EwGeAjD}BDk@uFeBNm@vFyBbEJCk@kCgEhFHLg@cAiB{BcBBs@~Fe@lBLbF|DrAeCbA]bAh@l@ScFyKiC}MqDaJMoG`DgKCyDoBwC",
+   "note": "青木村田沢（横手キャンプ場）〜 2.4km。2026〜27年は 12/2 11時〜3/23 15時（長野県 上田建設事務所 2026-09-30）",
+   "activeMonths": [
+    12,
+    1,
+    2,
+    3
+   ],
+   "activePeriod": {
+    "from": "12-02",
+    "to": "03-22"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  }
+ ]
 }

@@ -1,6 +1,6 @@
 {
  "romaji": "yamagata",
- "updatedAt": "2026-08-26T11:53:17.090Z",
+ "updatedAt": "2026-10-21T12:03:23.110Z",
  "overrides": {
   "月山公園線@38.69,139.98": {
    "hidden": false,
@@ -1771,7 +1771,7 @@
    "updatedAt": "2026-08-26T11:53:17.085Z"
   },
   "置賜東部広域農道（ぶどう・松茸ライン）@37.91,140.20": {
-   "hidden": false,
+   "hidden": true,
    "boost": 0,
    "title": null,
    "note": null,
@@ -1779,7 +1779,8 @@
     "flowing"
    ],
    "shape": null,
-   "updatedAt": "2026-08-26T11:53:17.085Z"
+   "toll": null,
+   "updatedAt": "2026-10-21T12:03:23.110Z"
   },
   "新庄舟形線@38.70,140.35": {
    "hidden": false,
@@ -2142,5 +2143,21 @@
    "updatedAt": "2026-08-26T11:53:17.087Z"
   }
  },
- "added": {}
+ "added": {
+  "楢下高畠線@38.02,140.26": {
+   "name": "楢下高畠線",
+   "highway": "secondary",
+   "shape": "kx`gFsx`wYm@pCw@`AyN|CeMtLmE`BuHr@}y@}DuR{LuCMyGt@mC}AqDiEsIyC}EuDmTgEiE\\kPhIm@jAkD|BcHVaa@bHiIuAmMwJmFmBwNy@{Q`DoIkBeLiG{B{C[uC`D{b@EuF}BmMeMyNyAcHkAs\\bDw`@EgScAyIwA{FOgHJsFvAcKLaGwAcHsHwJa@uCHeH",
+   "hidden": false,
+   "boost": 0,
+   "title": null,
+   "note": null,
+   "tags": [
+    "winding",
+    "flowing"
+   ],
+   "toll": null,
+   "updatedAt": "2026-10-21T12:01:25.607Z"
+  }
+ }
 }

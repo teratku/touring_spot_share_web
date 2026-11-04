@@ -1,16 +1,17 @@
 {
  "prefecture": "三重県",
  "romaji": "mie",
- "generation": 5,
- "contentHash": "7d17e31a5876",
- "builtAt": "2026-10-11T10:56:18.098Z",
+ "generation": 6,
+ "contentHash": "5fac8db00653",
+ "overridesHash": "6f418f4815fc",
+ "builtAt": "2026-10-21T12:27:14.838Z",
  "weights": {
   "curviness": 0.41,
   "flow": 0.3,
   "length": 0.18,
   "classRank": 0.11
  },
- "count": 150,
+ "count": 101,
  "segments": [
   {
    "id": "三重県:0",
@@ -36,6 +37,7 @@
     34.404508,
     136.405253
    ],
+   "overrideKey": "飯南三瀬谷停車場線@34.45,136.39",
    "tags": [
     "winding",
     "flowing"
@@ -65,6 +67,7 @@
     34.391405,
     136.897618
    ],
+   "overrideKey": "阿児磯部鳥羽線@34.44,136.88",
    "tags": [
     "winding",
     "caution"
@@ -94,6 +97,7 @@
     34.706716,
     136.364465
    ],
+   "overrideKey": "青山高原公園線@34.67,136.27",
    "tags": [
     "winding",
     "caution"
@@ -123,6 +127,7 @@
     34.141433,
     136.237114
    ],
+   "overrideKey": "大杉谷海山線@34.27,136.19",
    "tags": [
     "winding",
     "caution"
@@ -152,6 +157,7 @@
     34.078572,
     136.190071
    ],
+   "overrideKey": "中井浦九鬼線@34.03,136.23",
    "tags": [
     "winding",
     "caution"
@@ -181,6 +187,7 @@
     34.587605,
     136.080806
    ],
+   "overrideKey": "赤目掛線@34.52,136.12",
    "tags": [
     "winding",
     "caution"
@@ -210,6 +217,7 @@
     34.485937,
     136.83564
    ],
+   "overrideKey": "伊勢志摩 e-POWER ROAD@34.46,136.73",
    "tags": [
     "winding",
     "flowing"
@@ -244,6 +252,7 @@
     33.81324,
     135.866198
    ],
+   "overrideKey": "熊野川紀和線@33.88,135.92",
    "tags": [
     "winding",
     "caution"
@@ -273,6 +282,7 @@
     34.550839,
     136.261113
    ],
+   "overrideKey": "太郎生伊勢八知停車場線@34.53,136.19",
    "tags": [
     "winding",
     "flowing"
@@ -302,6 +312,7 @@
     33.927553,
     135.980283
    ],
+   "overrideKey": "御浜北山線@33.84,136.06",
    "tags": [
     "winding",
     "caution"
@@ -331,6 +342,7 @@
     34.296178,
     136.595932
    ],
+   "overrideKey": "阿曽浦港線@34.28,136.58",
    "tags": [
     "winding",
     "caution"
@@ -338,31 +350,6 @@
   },
   {
    "id": "三重県:11",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "答志桃取線",
-   "ref": "759",
-   "highway": "secondary",
-   "lengthKm": 5.93,
-   "curviness": 654.2,
-   "flow": 29.6,
-   "turnCount": 131,
-   "score": 97.2,
-   "baseScore": 97.2,
-   "spotCount": 0,
-   "polyline": "{tvqEasqbYMfHpAjBvLZzIpBcAxLx@nQbAnDdDtGAhAcAbDC~DrAjAX|H}@hBV`@pABkAtBzBnFW|DfA`AhA}ApApDzBTpA`C|@b@rA}A`@DP|B|@f@Lv@rAPN\\mD|AXrG|EvD~@N~AfC?jB_CxKdArBMtCaBhG|AfA~AfJs@rBsA`AFnAbDtClAlF]n@wAIkBd@[jBf@bFEtFo@p@}B]aCbEnCvLAtD|DrFf@pDvBzB|A~C",
-   "pointCount": 65,
-   "start": [
-    34.52766,
-    136.901774
-   ],
-   "end": [
-    34.515546,
-    136.856218
-   ]
-  },
-  {
-   "id": "三重県:12",
    "region": "mie",
    "regionName": "三重県",
    "name": "熊野矢ノ川線",
@@ -385,13 +372,14 @@
     33.863348,
     135.963198
    ],
+   "overrideKey": "熊野矢ノ川線@33.95,135.98",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:13",
+   "id": "三重県:12",
    "region": "mie",
    "regionName": "三重県",
    "name": "礫浦押淵線",
@@ -415,13 +403,14 @@
     136.63857
    ],
    "reshaped": true,
+   "overrideKey": "礫浦押淵線@34.31,136.67",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:14",
+   "id": "三重県:13",
    "region": "mie",
    "regionName": "三重県",
    "name": "八知下多気一志線",
@@ -444,12 +433,13 @@
     34.533766,
     136.270483
    ],
+   "overrideKey": "八知下多気一志線@34.53,136.30",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "三重県:15",
+   "id": "三重県:14",
    "region": "mie",
    "regionName": "三重県",
    "name": "老ケ野古田青山線",
@@ -472,13 +462,14 @@
     34.644328,
     136.255151
    ],
+   "overrideKey": "老ケ野古田青山線@34.67,136.27",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:16",
+   "id": "三重県:15",
    "region": "mie",
    "regionName": "三重県",
    "name": "長尾板屋線",
@@ -501,13 +492,14 @@
     33.888045,
     135.95473
    ],
+   "overrideKey": "長尾板屋線@33.88,135.92",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:17",
+   "id": "三重県:16",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道368号",
@@ -530,13 +522,14 @@
     34.469958,
     136.39697
    ],
+   "overrideKey": "国道368号@34.51,136.31",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:18",
+   "id": "三重県:17",
    "region": "mie",
    "regionName": "三重県",
    "name": "山添桔梗が丘線",
@@ -559,13 +552,14 @@
     34.649927,
     136.104057
    ],
+   "overrideKey": "山添桔梗が丘線@34.70,136.06",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:19",
+   "id": "三重県:18",
    "region": "mie",
    "regionName": "三重県",
    "name": "紀宝川瀬線",
@@ -588,13 +582,14 @@
     33.82263,
     135.958559
    ],
+   "overrideKey": "紀宝川瀬線@33.80,135.98",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:20",
+   "id": "三重県:19",
    "region": "mie",
    "regionName": "三重県",
    "name": "七色峡線",
@@ -617,13 +612,14 @@
     33.965259,
     135.989895
    ],
+   "overrideKey": "七色峡線@33.94,136.04",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:21",
+   "id": "三重県:20",
    "region": "mie",
    "regionName": "三重県",
    "name": "合ケ野松阪線",
@@ -646,13 +642,14 @@
     34.569371,
     136.473943
    ],
+   "overrideKey": "合ケ野松阪線@34.57,136.40",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:22",
+   "id": "三重県:21",
    "region": "mie",
    "regionName": "三重県",
    "name": "一志美杉線",
@@ -675,13 +672,14 @@
     34.611684,
     136.376035
    ],
+   "overrideKey": "一志美杉線@34.59,136.37",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:23",
+   "id": "三重県:22",
    "region": "mie",
    "regionName": "三重県",
    "name": "津芸濃大山田線",
@@ -704,13 +702,14 @@
     34.796272,
     136.433132
    ],
+   "overrideKey": "津芸濃大山田線@34.77,136.32",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:24",
+   "id": "三重県:23",
    "region": "mie",
    "regionName": "三重県",
    "name": "松阪青山線",
@@ -733,13 +732,14 @@
     34.513663,
     136.455823
    ],
+   "overrideKey": "松阪青山線@34.60,136.31",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:25",
+   "id": "三重県:24",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道425号",
@@ -762,13 +762,14 @@
     34.078572,
     136.190071
    ],
+   "overrideKey": "国道425号@34.06,136.09",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:26",
+   "id": "三重県:25",
    "region": "mie",
    "regionName": "三重県",
    "name": "上野島ヶ原線",
@@ -791,13 +792,14 @@
     34.761367,
     136.055451
    ],
+   "overrideKey": "上野島ヶ原線@34.73,136.07",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:27",
+   "id": "三重県:26",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道306号",
@@ -820,13 +822,14 @@
     35.188452,
     136.465384
    ],
+   "overrideKey": "国道306号@35.20,136.42",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:28",
+   "id": "三重県:27",
    "region": "mie",
    "regionName": "三重県",
    "name": "畑毛東貝野阿下喜線",
@@ -849,12 +852,13 @@
     35.153881,
     136.527893
    ],
+   "overrideKey": "畑毛東貝野阿下喜線@35.18,136.52",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:29",
+   "id": "三重県:28",
    "region": "mie",
    "regionName": "三重県",
    "name": "新鹿佐渡線",
@@ -877,13 +881,14 @@
     33.944057,
     136.096271
    ],
+   "overrideKey": "新鹿佐渡線@33.93,136.15",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:30",
+   "id": "三重県:29",
    "region": "mie",
    "regionName": "三重県",
    "name": "蔵持霧生線",
@@ -906,13 +911,14 @@
     34.588848,
     136.171765
    ],
+   "overrideKey": "蔵持霧生線@34.62,136.13",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:31",
+   "id": "三重県:30",
    "region": "mie",
    "regionName": "三重県",
    "name": "上笠間八幡名張線",
@@ -935,13 +941,14 @@
     34.651957,
     136.06496
    ],
+   "overrideKey": "上笠間八幡名張線@34.61,136.03",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:32",
+   "id": "三重県:31",
    "region": "mie",
    "regionName": "三重県",
    "name": "阿児磯部鳥羽線",
@@ -965,13 +972,14 @@
     136.88008
    ],
    "reshaped": true,
+   "overrideKey": "阿児磯部鳥羽線@34.47,136.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:33",
+   "id": "三重県:32",
    "region": "mie",
    "regionName": "三重県",
    "name": "鳥羽磯部線",
@@ -994,13 +1002,14 @@
     34.387446,
     136.882934
    ],
+   "overrideKey": "鳥羽磯部線@34.38,136.81",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:34",
+   "id": "三重県:33",
    "region": "mie",
    "regionName": "三重県",
    "name": "鼎田辺線",
@@ -1023,13 +1032,14 @@
     35.192513,
     136.525525
    ],
+   "overrideKey": "鼎田辺線@35.22,136.50",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:35",
+   "id": "三重県:34",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道169号",
@@ -1052,13 +1062,14 @@
     33.964171,
     135.993111
    ],
+   "overrideKey": "国道169号@34.00,136.01",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:36",
+   "id": "三重県:35",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道477号",
@@ -1081,13 +1092,14 @@
     35.011986,
     136.482692
    ],
+   "overrideKey": "国道477号@35.01,136.42",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:37",
+   "id": "三重県:36",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道422号線",
@@ -1110,13 +1122,14 @@
     34.821856,
     136.112715
    ],
+   "overrideKey": "国道422号線@34.85,136.11",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:38",
+   "id": "三重県:37",
    "region": "mie",
    "regionName": "三重県",
    "name": "関大山田線",
@@ -1139,13 +1152,14 @@
     34.771516,
     136.288504
    ],
+   "overrideKey": "関大山田線@34.84,136.32",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:39",
+   "id": "三重県:38",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道422号",
@@ -1168,13 +1182,14 @@
     34.347093,
     136.28919
    ],
+   "overrideKey": "国道422号@34.41,136.23",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:40",
+   "id": "三重県:39",
    "region": "mie",
    "regionName": "三重県",
    "name": "青山美杉線",
@@ -1197,13 +1212,14 @@
     34.567748,
     136.274699
    ],
+   "overrideKey": "青山美杉線@34.66,136.18",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:41",
+   "id": "三重県:40",
    "region": "mie",
    "regionName": "三重県",
    "name": "小船紀宝線",
@@ -1226,13 +1242,14 @@
     33.738091,
     135.979482
    ],
+   "overrideKey": "小船紀宝線@33.84,135.86",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:42",
+   "id": "三重県:41",
    "region": "mie",
    "regionName": "三重県",
    "name": "布生夏見線",
@@ -1255,13 +1272,14 @@
     34.581238,
     136.159352
    ],
+   "overrideKey": "布生夏見線@34.60,136.13",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:43",
+   "id": "三重県:42",
    "region": "mie",
    "regionName": "三重県",
    "name": "松阪青山線",
@@ -1284,13 +1302,14 @@
     34.667088,
     136.170741
    ],
+   "overrideKey": "松阪青山線@34.62,136.32",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:44",
+   "id": "三重県:43",
    "region": "mie",
    "regionName": "三重県",
    "name": "名張青山線",
@@ -1313,13 +1332,14 @@
     34.61671,
     136.186424
    ],
+   "overrideKey": "名張青山線@34.62,136.11",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:45",
+   "id": "三重県:44",
    "region": "mie",
    "regionName": "三重県",
    "name": "七色峡線",
@@ -1342,13 +1362,14 @@
     33.926947,
     136.047462
    ],
+   "overrideKey": "七色峡線@33.89,136.09",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:46",
+   "id": "三重県:45",
    "region": "mie",
    "regionName": "三重県",
    "name": "磯部浜島線",
@@ -1371,13 +1392,14 @@
     34.357825,
     136.767324
    ],
+   "overrideKey": "磯部浜島線@34.32,136.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:47",
+   "id": "三重県:46",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道311号",
@@ -1400,13 +1422,14 @@
     33.907641,
     136.134474
    ],
+   "overrideKey": "国道311号@33.95,136.22",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:48",
+   "id": "三重県:47",
    "region": "mie",
    "regionName": "三重県",
    "name": "滝之原美旗停車場線",
@@ -1429,12 +1452,13 @@
     34.663264,
     136.133565
    ],
+   "overrideKey": "滝之原美旗停車場線@34.63,136.15",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:49",
+   "id": "三重県:48",
    "region": "mie",
    "regionName": "三重県",
    "name": "賀田港中山線",
@@ -1457,13 +1481,14 @@
     33.973951,
     136.183269
    ],
+   "overrideKey": "賀田港中山線@34.00,136.15",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:50",
+   "id": "三重県:49",
    "region": "mie",
    "regionName": "三重県",
    "name": "辻原西町線",
@@ -1486,12 +1511,13 @@
     34.514206,
     136.455242
    ],
+   "overrideKey": "辻原西町線@34.53,136.48",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:51",
+   "id": "三重県:50",
    "region": "mie",
    "regionName": "三重県",
    "name": "大宮宮川線",
@@ -1514,12 +1540,13 @@
     34.362942,
     136.338578
    ],
+   "overrideKey": "大宮宮川線@34.39,136.41",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:52",
+   "id": "三重県:51",
    "region": "mie",
    "regionName": "三重県",
    "name": "嬉野美杉線",
@@ -1542,13 +1569,14 @@
     34.553156,
     136.375376
    ],
+   "overrideKey": "嬉野美杉線@34.62,136.44",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:53",
+   "id": "三重県:52",
    "region": "mie",
    "regionName": "三重県",
    "name": "鳥羽阿児線",
@@ -1571,6 +1599,7 @@
     34.443648,
     136.880669
    ],
+   "overrideKey": "鳥羽阿児線@34.38,136.86",
    "tags": [
     "scenic",
     "winding",
@@ -1578,7 +1607,7 @@
    ]
   },
   {
-   "id": "三重県:54",
+   "id": "三重県:53",
    "region": "mie",
    "regionName": "三重県",
    "name": "片野飯高線",
@@ -1601,12 +1630,13 @@
     34.434887,
     136.339309
    ],
+   "overrideKey": "片野飯高線@34.44,136.38",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:55",
+   "id": "三重県:54",
    "region": "mie",
    "regionName": "三重県",
    "name": "湯の山温泉線",
@@ -1629,12 +1659,13 @@
     35.019638,
     136.45106
    ],
+   "overrideKey": "湯の山温泉線@35.02,136.48",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:56",
+   "id": "三重県:55",
    "region": "mie",
    "regionName": "三重県",
    "name": "鵜殿熊野線",
@@ -1657,13 +1688,14 @@
     33.782328,
     135.989759
    ],
+   "overrideKey": "鵜殿熊野線@33.74,136.02",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:57",
+   "id": "三重県:56",
    "region": "mie",
    "regionName": "三重県",
    "name": "長島港古里線",
@@ -1686,12 +1718,13 @@
     34.195097,
     136.333103
    ],
+   "overrideKey": "長島港古里線@34.19,136.31",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:58",
+   "id": "三重県:57",
    "region": "mie",
    "regionName": "三重県",
    "name": "鳥羽磯部線",
@@ -1714,13 +1747,14 @@
     34.44044,
     136.842019
    ],
+   "overrideKey": "鳥羽磯部線@34.39,136.88",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:59",
+   "id": "三重県:58",
    "region": "mie",
    "regionName": "三重県",
    "name": "畑毛本郷線",
@@ -1743,12 +1777,13 @@
     35.181718,
     136.522913
    ],
+   "overrideKey": "畑毛本郷線@35.18,136.50",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:60",
+   "id": "三重県:59",
    "region": "mie",
    "regionName": "三重県",
    "name": "一志美杉線",
@@ -1771,13 +1806,14 @@
     34.528451,
     136.311978
    ],
+   "overrideKey": "一志美杉線@34.56,136.34",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:61",
+   "id": "三重県:60",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道260号",
@@ -1800,13 +1836,14 @@
     34.214063,
     136.354458
    ],
+   "overrideKey": "国道260号@34.25,136.41",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:62",
+   "id": "三重県:61",
    "region": "mie",
    "regionName": "三重県",
    "name": "南浦海山線",
@@ -1829,13 +1866,14 @@
     34.108683,
     136.222318
    ],
+   "overrideKey": "南浦海山線@34.09,136.16",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:63",
+   "id": "三重県:62",
    "region": "mie",
    "regionName": "三重県",
    "name": "三畑四日市線",
@@ -1858,13 +1896,14 @@
     34.935594,
     136.479812
    ],
+   "overrideKey": "三畑四日市線@34.93,136.45",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:64",
+   "id": "三重県:63",
    "region": "mie",
    "regionName": "三重県",
    "name": "四日市関線",
@@ -1887,13 +1926,14 @@
     34.953327,
     136.45654
    ],
+   "overrideKey": "四日市関線@34.85,136.39",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:65",
+   "id": "三重県:64",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道25号",
@@ -1916,13 +1956,14 @@
     34.839233,
     136.244033
    ],
+   "overrideKey": "国道25号@34.86,136.38",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:66",
+   "id": "三重県:65",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道311号",
@@ -1945,6 +1986,7 @@
     33.962959,
     136.202943
    ],
+   "overrideKey": "国道311号@34.03,136.23",
    "tags": [
     "scenic",
     "winding",
@@ -1952,7 +1994,7 @@
    ]
   },
   {
-   "id": "三重県:67",
+   "id": "三重県:66",
    "region": "mie",
    "regionName": "三重県",
    "name": "名張曽爾線",
@@ -1975,6 +2017,7 @@
     34.6198,
     136.103915
    ],
+   "overrideKey": "名張曽爾線@34.53,136.14",
    "tags": [
     "scenic",
     "winding",
@@ -1982,7 +2025,7 @@
    ]
   },
   {
-   "id": "三重県:68",
+   "id": "三重県:67",
    "region": "mie",
    "regionName": "三重県",
    "name": "西庄内高塚線",
@@ -2005,13 +2048,14 @@
     34.904685,
     136.489135
    ],
+   "overrideKey": "西庄内高塚線@34.93,136.46",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "三重県:69",
+   "id": "三重県:68",
    "region": "mie",
    "regionName": "三重県",
    "name": "川合大宮線",
@@ -2034,13 +2078,14 @@
     34.334253,
     136.408314
    ],
+   "overrideKey": "川合大宮線@34.39,136.41",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:70",
+   "id": "三重県:69",
    "region": "mie",
    "regionName": "三重県",
    "name": "伊賀青山線",
@@ -2063,13 +2108,14 @@
     34.69596,
     136.22467
    ],
+   "overrideKey": "伊賀青山線@34.75,136.24",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:71",
+   "id": "三重県:70",
    "region": "mie",
    "regionName": "三重県",
    "name": "南濃北勢線",
@@ -2092,13 +2138,14 @@
     35.211575,
     136.550767
    ],
+   "overrideKey": "南濃北勢線@35.15,136.52",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:72",
+   "id": "三重県:71",
    "region": "mie",
    "regionName": "三重県",
    "name": "蔵持霧生線",
@@ -2122,13 +2169,14 @@
     136.19691
    ],
    "reshaped": true,
+   "overrideKey": "蔵持霧生線@34.62,136.22",
    "title": "伊賀コリドールロード",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:73",
+   "id": "三重県:72",
    "region": "mie",
    "regionName": "三重県",
    "name": "伊賀コリドールロード",
@@ -2151,13 +2199,14 @@
     34.785276,
     136.100811
    ],
+   "overrideKey": "伊賀コリドールロード@34.84,136.11",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:74",
+   "id": "三重県:73",
    "region": "mie",
    "regionName": "三重県",
    "name": "赤目滝線",
@@ -2180,13 +2229,14 @@
     34.599871,
     136.075391
    ],
+   "overrideKey": "赤目滝線@34.57,136.08",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:75",
+   "id": "三重県:74",
    "region": "mie",
    "regionName": "三重県",
    "name": "亀山白山線",
@@ -2209,13 +2259,14 @@
     34.709128,
     136.405007
    ],
+   "overrideKey": "亀山白山線@34.67,136.34",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:76",
+   "id": "三重県:75",
    "region": "mie",
    "regionName": "三重県",
    "name": "亀山白山線",
@@ -2238,13 +2289,14 @@
     34.723486,
     136.387266
    ],
+   "overrideKey": "亀山白山線@34.81,136.44",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:77",
+   "id": "三重県:76",
    "region": "mie",
    "regionName": "三重県",
    "name": "東貝野南中津原丹生川停車場線",
@@ -2267,13 +2319,14 @@
     35.149187,
     136.54243
    ],
+   "overrideKey": "東貝野南中津原丹生川停車場線@35.17,136.54",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:78",
+   "id": "三重県:77",
    "region": "mie",
    "regionName": "三重県",
    "name": "南勢磯部線",
@@ -2296,13 +2349,14 @@
     34.371772,
     136.802582
    ],
+   "overrideKey": "南勢磯部線@34.37,136.86",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:79",
+   "id": "三重県:78",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道163号",
@@ -2325,13 +2379,14 @@
     34.758412,
     136.337002
    ],
+   "overrideKey": "国道163号@34.72,136.39",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:80",
+   "id": "三重県:79",
    "region": "mie",
    "regionName": "三重県",
    "name": "前村野中線",
@@ -2354,12 +2409,13 @@
     34.467044,
     136.563142
    ],
+   "overrideKey": "前村野中線@34.47,136.52",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:81",
+   "id": "三重県:80",
    "region": "mie",
    "regionName": "三重県",
    "name": "茅原丹生線",
@@ -2382,13 +2438,14 @@
     34.488104,
     136.49375
    ],
+   "overrideKey": "茅原丹生線@34.46,136.51",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:82",
+   "id": "三重県:81",
    "region": "mie",
    "regionName": "三重県",
    "name": "伊勢磯部線",
@@ -2411,13 +2468,14 @@
     34.468541,
     136.715969
    ],
+   "overrideKey": "伊勢磯部線@34.39,136.80",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:83",
+   "id": "三重県:82",
    "region": "mie",
    "regionName": "三重県",
    "name": "穴倉南神山津線",
@@ -2440,13 +2498,14 @@
     34.725956,
     136.470319
    ],
+   "overrideKey": "穴倉南神山津線@34.74,136.39",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:84",
+   "id": "三重県:83",
    "region": "mie",
    "regionName": "三重県",
    "name": "伊勢路伊勢線",
@@ -2469,13 +2528,14 @@
     34.345822,
     136.642985
    ],
+   "overrideKey": "伊勢路伊勢線@34.45,136.66",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:85",
+   "id": "三重県:84",
    "region": "mie",
    "regionName": "三重県",
    "name": "磯部大王線",
@@ -2498,13 +2558,14 @@
     34.316943,
     136.884915
    ],
+   "overrideKey": "磯部大王線@34.38,136.81",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "三重県:86",
+   "id": "三重県:85",
    "region": "mie",
    "regionName": "三重県",
    "name": "鳥羽松阪線",
@@ -2528,13 +2589,14 @@
     136.81661
    ],
    "reshaped": true,
+   "overrideKey": "鳥羽松阪線@34.49,136.72",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:87",
+   "id": "三重県:86",
    "region": "mie",
    "regionName": "三重県",
    "name": "紀宝川瀬線",
@@ -2557,13 +2619,14 @@
     33.790991,
     135.984093
    ],
+   "overrideKey": "紀宝川瀬線@33.75,136.02",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:88",
+   "id": "三重県:87",
    "region": "mie",
    "regionName": "三重県",
    "name": "磯部大王線",
@@ -2586,13 +2649,14 @@
     34.303571,
     136.879804
    ],
+   "overrideKey": "磯部大王線@34.29,136.88",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:89",
+   "id": "三重県:88",
    "region": "mie",
    "regionName": "三重県",
    "name": "鈴鹿芸濃線",
@@ -2615,13 +2679,14 @@
     34.827119,
     136.418575
    ],
+   "overrideKey": "鈴鹿芸濃線@34.83,136.48",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:90",
+   "id": "三重県:89",
    "region": "mie",
    "regionName": "三重県",
    "name": "高奈上三瀬線",
@@ -2644,13 +2709,14 @@
     34.410119,
     136.460916
    ],
+   "overrideKey": "高奈上三瀬線@34.40,136.43",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:91",
+   "id": "三重県:90",
    "region": "mie",
    "regionName": "三重県",
    "name": "上野島ヶ原線",
@@ -2673,12 +2739,13 @@
     34.704668,
     136.134954
    ],
+   "overrideKey": "上野島ヶ原線@34.73,136.08",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:92",
+   "id": "三重県:91",
    "region": "mie",
    "regionName": "三重県",
    "name": "田光梅戸井停車場線",
@@ -2701,12 +2768,13 @@
     35.065741,
     136.517201
    ],
+   "overrideKey": "田光梅戸井停車場線@35.08,136.56",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:93",
+   "id": "三重県:92",
    "region": "mie",
    "regionName": "三重県",
    "name": "上友田円徳院線",
@@ -2729,12 +2797,13 @@
     34.808097,
     136.180859
    ],
+   "overrideKey": "上友田円徳院線@34.84,136.19",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:94",
+   "id": "三重県:93",
    "region": "mie",
    "regionName": "三重県",
    "name": "伊賀コリドールロード",
@@ -2757,13 +2826,14 @@
     34.627855,
     136.154739
    ],
+   "overrideKey": "伊賀コリドールロード@34.61,136.19",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:95",
+   "id": "三重県:94",
    "region": "mie",
    "regionName": "三重県",
    "name": "打見大台線",
@@ -2786,12 +2856,13 @@
     34.415034,
     136.480304
    ],
+   "overrideKey": "打見大台線@34.39,136.41",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:96",
+   "id": "三重県:95",
    "region": "mie",
    "regionName": "三重県",
    "name": "鵜殿熊野線",
@@ -2814,13 +2885,14 @@
     33.870405,
     136.074782
    ],
+   "overrideKey": "鵜殿熊野線@33.79,136.01",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:97",
+   "id": "三重県:96",
    "region": "mie",
    "regionName": "三重県",
    "name": "国道422号",
@@ -2843,6 +2915,7 @@
     34.273315,
     136.255362
    ],
+   "overrideKey": "国道422号@34.34,136.28",
    "tags": [
     "scenic",
     "winding",
@@ -2850,7 +2923,7 @@
    ]
   },
   {
-   "id": "三重県:98",
+   "id": "三重県:97",
    "region": "mie",
    "regionName": "三重県",
    "name": "草生窪田津線",
@@ -2873,12 +2946,13 @@
     34.771388,
     136.418981
    ],
+   "overrideKey": "草生窪田津線@34.78,136.46",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "三重県:99",
+   "id": "三重県:98",
    "region": "mie",
    "regionName": "三重県",
    "name": "御浜紀和線",
@@ -2901,13 +2975,14 @@
     33.849709,
     135.977844
    ],
+   "overrideKey": "御浜紀和線@33.80,136.04",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:100",
+   "id": "三重県:99",
    "region": "mie",
    "regionName": "三重県",
    "name": "伊勢大宮線",
@@ -2930,13 +3005,14 @@
     34.355996,
     136.413503
    ],
+   "overrideKey": "伊勢大宮線@34.44,136.63",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "三重県:101",
+   "id": "三重県:100",
    "region": "mie",
    "regionName": "三重県",
    "name": "北勢多度線",
@@ -2959,1214 +3035,11 @@
     35.132457,
     136.593659
    ],
+   "overrideKey": "北勢多度線@35.11,136.56",
    "tags": [
     "flowing"
-   ]
-  },
-  {
-   "id": "三重県:102",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "国道42号",
-   "ref": "42",
-   "highway": "trunk",
-   "lengthKm": 14.52,
-   "curviness": 255.5,
-   "flow": 18.2,
-   "turnCount": 204,
-   "score": 60.8,
-   "baseScore": 60.8,
-   "spotCount": 0,
-   "polyline": "ef}mEoqx}XiGcBeADyAfBGvEgDnHgDC_A\\iCxBm@fFcERwEzBaDr@}BnAwC|D}@m@]iDeCPi@YwCyJuALBnLqBlL@dLm@`A_HjAo@t@VbAhCfAhAnHa@nG|AzB@z@w@h@mCcAmA@sBjAc@xDi@`AmGFEpBvDvFVhAk@dGmA`Ey@bAiCbAcBvDaG~HuHpDmWmGqFN_HqBmBz@aF|GyC`AyFUkAk@e@}@aB{LsCoCgCWiYTqCeBsE}HyIeFyEc@eI_CiB@gJ~BgAA}HwDkBgDTyDvCuFlCa@`Aw@~@aEy@iCmEeBaCRuF~DwDtAkPfBsA}@cEkIgE_FiCgA_SsCkSrBwBlAyNpNeFvBiRQo\\cHqAgAsAwE{@iAaKqF}B[gMp@iAc@m@oBAiIo@mDeCcC_J_AsB{BmDiMuCeS",
-   "pointCount": 110,
-   "start": [
-    33.905788,
-    136.118155
-   ],
-   "end": [
-    33.992019,
-    136.118512
-   ]
-  },
-  {
-   "id": "三重県:103",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "亀山安濃線",
-   "ref": "649",
-   "highway": "secondary",
-   "lengthKm": 3.7,
-   "curviness": 209.2,
-   "flow": 18.4,
-   "turnCount": 42,
-   "score": 60.7,
-   "baseScore": 60.7,
-   "spotCount": 0,
-   "polyline": "avusE_x{_Y{@b@FfC]`DjBy@pCuEbAs@dYqBjPeDjOv@bB]~DwGnCiO~@}BvEcBnK@bD_BbKcChKyF~EVpAk@hD_NCkJjAaH",
-   "pointCount": 24,
-   "start": [
-    34.850411,
-    136.462236
-   ],
-   "end": [
-    34.826575,
-    136.476748
-   ]
-  },
-  {
-   "id": "三重県:104",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "上野南山城線",
-   "ref": "82",
-   "highway": "primary",
-   "lengthKm": 4.62,
-   "curviness": 230,
-   "flow": 18,
-   "turnCount": 59,
-   "score": 60.5,
-   "baseScore": 60.5,
-   "spotCount": 0,
-   "polyline": "cg}rEgoq}X}@jGeD~EqMb_@?dAzG~MnIvEtCjDfJ`UfEtFdAfDvDtCdC`EzD_@t@lA|@~CBfI|A`F[rDfCpC\\jAEhIt@|If@zAdQbKzFbAp@dCOhEf@zEfA`ExCvEjJlD",
-   "pointCount": 32,
-   "start": [
-    34.725136,
-    136.081964
-   ],
-   "end": [
-    34.709386,
-    136.044697
-   ]
-  },
-  {
-   "id": "三重県:105",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "松阪第二環状線",
-   "ref": "59",
-   "highway": "primary",
-   "lengthKm": 3.88,
-   "curviness": 138.9,
-   "flow": 24.5,
-   "turnCount": 22,
-   "score": 60.4,
-   "baseScore": 60.4,
-   "spotCount": 0,
-   "polyline": "sb|qEy|n`YxFcJjAkFgDeAzBaKhAqL[OoQaFck@_LsOu@mBv@cOeB_QsE{CKaSrA}DOgB|@iN{A",
-   "pointCount": 18,
-   "start": [
-    34.555456,
-    136.560292
-   ],
-   "end": [
-    34.580421,
-    136.57242
-   ]
-  },
-  {
-   "id": "三重県:106",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "亀山白山線",
-   "ref": "28",
-   "highway": "primary",
-   "lengthKm": 3.13,
-   "curviness": 180.5,
-   "flow": 21.7,
-   "turnCount": 26,
-   "score": 60.2,
-   "baseScore": 60.2,
-   "spotCount": 0,
-   "polyline": "guqrEypd_Y`CdCjLlErRGjEuBdGuIxEErChBbEjAfF`ApFCpF`BhEb@dBpA~FsC`JqGi@uCj^_R`CJ",
-   "pointCount": 19,
-   "start": [
-    34.665961,
-    136.343333
-   ],
-   "end": [
-    34.641276,
-    136.347541
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "三重県:107",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "東海道",
-   "ref": "1",
-   "highway": "trunk",
-   "lengthKm": 3.04,
-   "curviness": 282.9,
-   "flow": 18.3,
-   "turnCount": 47,
-   "score": 60.2,
-   "baseScore": 60.2,
-   "spotCount": 0,
-   "polyline": "gf~sEcqc_YvB]xCh@rCzCrAvD|@b@|Ac@bBwCn@Y`EjC`Cq@rFEv@s@IaCkGsHgAi@kCCcAm@a@mAYyJtCsQaAcJtFoRd@iQlAeCjL}M",
-   "pointCount": 26,
-   "start": [
-    34.893963,
-    136.338256
-   ],
-   "end": [
-    34.885505,
-    136.356033
-   ]
-  },
-  {
-   "id": "三重県:108",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "四日市員弁線",
-   "ref": "9",
-   "highway": "primary",
-   "lengthKm": 8.2,
-   "curviness": 200.3,
-   "flow": 18.9,
-   "turnCount": 87,
-   "score": 60.2,
-   "baseScore": 60.2,
-   "spotCount": 0,
-   "polyline": "gwttEmd}`YPFwK{DcHkGaL{BqDd@}BjAcAzAkEnAyF`@gD]aB`F{CvBq@fBc@hIKtW_EvJ{BrKwGlQwCzOiCpGoAXeUiC{FmE_VvWiEfHmBdFeApIyEfSeA|@iAtDElE_BhHmBvCyAvKgGbP_EhD_C~FsIpCqCbDmRdPyInJ{Hz[o@rAuC|B}ArM",
-   "pointCount": 46,
-   "start": [
-    35.009317,
-    136.633195
-   ],
-   "end": [
-    35.053331,
-    136.580336
-   ]
-  },
-  {
-   "id": "三重県:109",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "草生窪田津線",
-   "ref": "410",
-   "highway": "secondary",
-   "lengthKm": 3.68,
-   "curviness": 174.8,
-   "flow": 17.4,
-   "turnCount": 37,
-   "score": 59.9,
-   "baseScore": 57,
-   "spotCount": 1,
-   "polyline": "slesEicb`Y}DxO_EtI|HtE\\nA?d`@iExOu@zG^dC~GbN~@fH}CbLuBbCcDdOuNjNwF~DiAvCeBvBGfAdAdDVrFaBhG",
-   "pointCount": 22,
-   "start": [
-    34.766985,
-    136.494774
-   ],
-   "end": [
-    34.773404,
-    136.461039
-   ]
-  },
-  {
-   "id": "三重県:110",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "亀山停車場石水渓線",
-   "ref": "302",
-   "highway": "secondary",
-   "lengthKm": 5.8,
-   "curviness": 184,
-   "flow": 18.7,
-   "turnCount": 57,
-   "score": 59.9,
-   "baseScore": 59.9,
-   "spotCount": 0,
-   "polyline": "el~sE{fy_Y`OqPzEzDbCr@jBA|D}@fWcLzLcDjGI`CtA`CCfEbAbGw@~DL`MsDnGUhD_AzHrDhNeEfLqB~@FtHtDvSJvJeDtCwEnAStRhOmCnFo@lFB~AxAbChAd@~BIjLcDtAfHzAnB",
-   "pointCount": 36,
-   "start": [
-    34.894907,
-    136.449258
-   ],
-   "end": [
-    34.851553,
-    136.449115
-   ]
-  },
-  {
-   "id": "三重県:111",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "久居河芸線",
-   "ref": "55",
-   "highway": "primary",
-   "lengthKm": 8.15,
-   "curviness": 138.3,
-   "flow": 18.5,
-   "turnCount": 61,
-   "score": 59.8,
-   "baseScore": 55.2,
-   "spotCount": 2,
-   "polyline": "}q_sEk|~_Y{QiLwAwCqFSgDeAgS`@qB{@uA_DaAuLqEgHuI_EqCmFqDmCyViN{C}KeIye@mDeEsB[_i@~GdCqWjLcc@{S{JLkK{BwGaB_RkDcJ}B{CgAc@iS}@uIv@_OyGcLnDoKdAiFB{@aA",
-   "pointCount": 35,
-   "start": [
-    34.737107,
-    136.4783
-   ],
-   "end": [
-    34.782468,
-    136.520809
-   ]
-  },
-  {
-   "id": "三重県:112",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "上稲葉羽野線",
-   "ref": "659",
-   "highway": "secondary",
-   "lengthKm": 3.15,
-   "curviness": 206.2,
-   "flow": 18,
-   "turnCount": 36,
-   "score": 59.8,
-   "baseScore": 59.8,
-   "spotCount": 0,
-   "polyline": "iturEcrs_YgCfEsLxIM`At@|EQv@sOzEkJr@uB~@wAxG_FhKwAAwCgBkJYcHpAeCnCeBx@eJjAiO~McE~BcAjFqDtE",
-   "pointCount": 22,
-   "start": [
-    34.686294,
-    136.420342
-   ],
-   "end": [
-    34.707936,
-    136.404401
-   ]
-  },
-  {
-   "id": "三重県:113",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "鈴鹿環状線",
-   "ref": "54",
-   "highway": "primary",
-   "lengthKm": 3.23,
-   "curviness": 178.8,
-   "flow": 21.4,
-   "turnCount": 27,
-   "score": 59.7,
-   "baseScore": 59.7,
-   "spotCount": 0,
-   "polyline": "{xpsEkjh`YcAkDkAaBqGi@}@gQeDcHWeBPqIzAcMfMge@x@mZrAoCvAu@fAyDUsDfGy_@iKoF",
-   "pointCount": 17,
-   "start": [
-    34.825257,
-    136.526623
-   ],
-   "end": [
-    34.825031,
-    136.556803
-   ]
-  },
-  {
-   "id": "三重県:114",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "家所阿漕停車場線",
-   "ref": "657",
-   "highway": "secondary",
-   "lengthKm": 4.53,
-   "curviness": 207.5,
-   "flow": 17.1,
-   "turnCount": 55,
-   "score": 59.5,
-   "baseScore": 59.5,
-   "spotCount": 0,
-   "polyline": "ef|rEypy_YYxALlIYnDpBrJDxG{C`Jx@zGzFnCf@t@_@tIqBdFyGrHsA|EeCrAy@rFgZdi@_AjGqHxIeFjJu@hCaDfBoGvMmDrCaBtEkC|CmDlGWdDhBjHGbF",
-   "pointCount": 30,
-   "start": [
-    34.719868,
-    136.450847
-   ],
-   "end": [
-    34.734374,
-    136.41062
-   ]
-  },
-  {
-   "id": "三重県:115",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "篠立下野尻線",
-   "ref": "614",
-   "highway": "secondary",
-   "lengthKm": 7.05,
-   "curviness": 192.7,
-   "flow": 17.4,
-   "turnCount": 78,
-   "score": 59.5,
-   "baseScore": 59.5,
-   "spotCount": 0,
-   "polyline": "evruEqpc`YnGxKh@~B}BhCu@tLoDzHIrKgBfSeEdL}DzB{FrHqGfMq@zDmAdCiIjKcB~DaDzCoFbNkCrKyMfJaCRsAz@wEiFgGkKyIeAaNqIkPyH_MbCoBzAmAhEcLW{@ZyEhHoE~EkKzGkApEU~PcOnPiBtDJ~A",
-   "pointCount": 40,
-   "start": [
-    35.162754,
-    136.502008
-   ],
-   "end": [
-    35.199605,
-    136.463539
-   ]
-  },
-  {
-   "id": "三重県:116",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "国道422号",
-   "ref": "422",
-   "highway": "trunk",
-   "lengthKm": 9.78,
-   "curviness": 248.9,
-   "flow": 17.9,
-   "turnCount": 136,
-   "score": 59.3,
-   "baseScore": 59.3,
-   "spotCount": 0,
-   "polyline": "gfyoEcnb_YqF`EeLvFwG|PyG|CoD|MwEdCw@hA[dBEhQ^tA~DvDvBdK_AfA}EtAcE~G_@zBXvBxEbI~@b@nBc@rDcCt@mAzCyAfF_F|IcAfAH~CzBlAbHtEgAxB\\~C|CnArCLnBWrGmFpYsGvLmDrCmD|FgAt@kXoAgBTcAx@wEzHCxGaBjESlHu@~EiGtFoBbDkMzBoBz@aLw@sHdAqEi@iEBsO|K{ClF[hJ^`Nn@dCXtMzAnEqBdHsB~@aCxDgD~AsDrHeBnAm@??rA",
-   "pointCount": 71,
-   "start": [
-    34.212995,
-    136.33266
-   ],
-   "end": [
-    34.239911,
-    136.273795
-   ]
-  },
-  {
-   "id": "三重県:117",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "松阪度会線",
-   "ref": "119",
-   "highway": "secondary",
-   "lengthKm": 6.12,
-   "curviness": 176.2,
-   "flow": 18.6,
-   "turnCount": 58,
-   "score": 59.3,
-   "baseScore": 59.3,
-   "spotCount": 0,
-   "polyline": "yamqEuar`Y_A^uGBuL}DkWT}E}E}GaBqBRqBfB_T{DcLjAyIYmJaH{M_FsBWkIdC}SdWyDrBq@~KbA~Ca@~A{k@\\sKx@uDfAe@a@uCkJcBqJYkEiIoAoEkFkKoA",
-   "pointCount": 31,
-   "start": [
-    34.478533,
-    136.576432
-   ],
-   "end": [
-    34.524359,
-    136.579005
-   ]
-  },
-  {
-   "id": "三重県:118",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "国道42号",
-   "ref": "42",
-   "highway": "trunk",
-   "lengthKm": 17.65,
-   "curviness": 228.2,
-   "flow": 18.3,
-   "turnCount": 220,
-   "score": 59.2,
-   "baseScore": 59.2,
-   "spotCount": 0,
-   "polyline": "{|rnEasa~X{G_BmFh@_EqAyAaCQsEa@}AwKaHk@_AuA_EGqAb@qB|BcDH_AgCuEh@eJwCgKc@kGq@oBgGkCwD{Cw@`@oAlFq@Ja@w@ZqB[qAaEy@oEqFyFFaBe@gDqI_AaAkBUqHdAiA[s@qAgBeJmAoAaCBqOnCkCMy@gAuEsMqQ}I[}BtAkDC{@i@o@wFwAcEoOs@kAmAa@{KOuHvAoJKeF_CoIsJmI}BgC@i\\dPeEpCo\\lg@aBdBoDxAgIb@oIMeg@_ReEwCiIzBcHTe@jBhBdDa@vAk@@wFsDmGzBo@_BvCkJm@aBgHHih@uXkG]_D{@oFaFsDqKm@o@sFjBcL^cAc@KgAn@mDAyCe@iEqAgDMwCTmB|ByBo@yJxB}c@gCcHeA}I}AaCsGcEkB}BmAeE{@mH{@wAaO{E}FH}MoGiFG{AfAcAhCuB~LyApCoA|@aKW_SzCwBjAiB~FeAz@",
-   "pointCount": 122,
-   "start": [
-    34.016941,
-    136.164489
-   ],
-   "end": [
-    34.122623,
-    136.21682
-   ]
-  },
-  {
-   "id": "三重県:119",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "伊賀信楽線",
-   "ref": "50",
-   "highway": "primary",
-   "lengthKm": 8.93,
-   "curviness": 192.5,
-   "flow": 18.3,
-   "turnCount": 94,
-   "score": 59.2,
-   "baseScore": 59.2,
-   "spotCount": 0,
-   "polyline": "ytssEams~X}BlDiB`AuQoC{KoC}DrBnCjXrC~EvFhPNzJ_AvOP|HiAd@yB[wCqBaFtC}JbDuHz@aGnFmKlCiBxBmAlP|AlMmA`J`AjPfB~FJhEgDpIyBfKm@`H{GzP]lC`DpZf@v@zC|Af@bGqMbEkHlFyELsHyBwBhAcAnLgDpETrFgAxEe@rHw@`EU`IgBlSBfB|FlXd@lG]pCLj@",
-   "pointCount": 54,
-   "start": [
-    34.839972,
-    136.255694
-   ],
-   "end": [
-    34.863568,
-    136.188492
-   ]
-  },
-  {
-   "id": "三重県:120",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "久居美杉線",
-   "ref": "15",
-   "highway": "primary",
-   "lengthKm": 7.95,
-   "curviness": 212.9,
-   "flow": 16.8,
-   "turnCount": 101,
-   "score": 58.9,
-   "baseScore": 58.9,
-   "spotCount": 0,
-   "polyline": "gu~qEsew~XxDv@rDpBjClDlKnJnBjCpGvMzGnF~S`K|DhGhGpD~OtCdElDzBv@dE{IiBqMVuE|@aC|CaBzJd@~HiAv@q@dC_Hz@}@dBe@hG`ApPhKlLr@tDcBvFGlEwId@{BfCiBlBIhSvFnFk@GwCjBcC`KoA|DBfEmCnM{@bATbC~BxAxJxBlF`IBhKgAvZf@",
-   "pointCount": 49,
-   "start": [
-    34.568677,
-    136.274982
-   ],
-   "end": [
-    34.511783,
-    136.268757
-   ]
-  },
-  {
-   "id": "三重県:121",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "館町通線",
-   "ref": "715",
-   "highway": "secondary",
-   "lengthKm": 3.79,
-   "curviness": 172.2,
-   "flow": 19.2,
-   "turnCount": 34,
-   "score": 58.8,
-   "baseScore": 58.8,
-   "spotCount": 0,
-   "polyline": "svlqEceqaY_@oCHkCy@mBcFgGiIeBqBcAiAiGsEaNqEgIcAoD_MqJy\\qEqZ{^sQbVcGiBqBaCuC_GeEpA",
-   "pointCount": 19,
-   "start": [
-    34.476736,
-    136.735697
-   ],
-   "end": [
-    34.50133,
-    136.752453
-   ]
-  },
-  {
-   "id": "三重県:122",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "伊賀コリドールロード",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 12.71,
-   "curviness": 194.1,
-   "flow": 15.4,
-   "turnCount": 160,
-   "score": 58.5,
-   "baseScore": 58.5,
-   "spotCount": 0,
-   "polyline": "ek{rE}fh~Xb@`CbApA`GnApEtCfAtCdAhHz@`A`UaE`GeCfC[vVvB~UlFrF|D~A`@nJ_ArGaExDc@rBf@fDrB|GvHzBxAbKjBbCy@hAeBxGo`@hBqCrHo@xFpClBXxL_A`LXnBe@lH_FdH_CzA}CDaDgFqMa@mK{BqHpImDrLfGhDc@lEkCtBWjALrFtEfDKz@qAvAiG`@}NbCuHh@aA`DkBfHwMhIgEbCSvDdAzBW`XuNrGuG~@UhA`@fAjD|@jA~FxB~DvCfBCjGmBvDaGbBiAtPeC|CqCZqDp@mBjGmGhOgFbGv@zDC|CfAjA~EhBvCZzCOxAyBtFDlBnA`AtF\\jA]",
-   "pointCount": 89,
-   "start": [
-    34.715551,
-    136.198392
-   ],
-   "end": [
-    34.632389,
-    136.21886
-   ]
-  },
-  {
-   "id": "三重県:123",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "桑名東員線",
-   "ref": "142",
-   "highway": "secondary",
-   "lengthKm": 4.5,
-   "curviness": 151.5,
-   "flow": 20,
-   "turnCount": 34,
-   "score": 58.5,
-   "baseScore": 58.5,
-   "spotCount": 0,
-   "polyline": "wiauEqncaYhAeMx@u\\IkDu@oEqK_RsAyD}Es^MgEV{ACfFlEha@b@~ArLrSpAhDPzBkAbd@kLbw@",
-   "pointCount": 18,
-   "start": [
-    35.073718,
-    136.665527
-   ],
-   "end": [
-    35.075524,
-    136.658117
-   ]
-  },
-  {
-   "id": "三重県:124",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "松阪久居線",
-   "ref": "24",
-   "highway": "primary",
-   "lengthKm": 3.19,
-   "curviness": 136.9,
-   "flow": 23,
-   "turnCount": 19,
-   "score": 58.2,
-   "baseScore": 58.2,
-   "spotCount": 0,
-   "polyline": "wybrEmwd`YxKyS\\sDkBgPsCmMoBmEOoE`XuAhO_\\nNoWhK_ImKsP",
-   "pointCount": 12,
-   "start": [
-    34.589878,
-    136.508229
-   ],
-   "end": [
-    34.580525,
-    136.53301
-   ]
-  },
-  {
-   "id": "三重県:125",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "亀山城跡線",
-   "ref": "565",
-   "highway": "secondary",
-   "lengthKm": 4.09,
-   "curviness": 160.9,
-   "flow": 19.3,
-   "turnCount": 34,
-   "score": 58.2,
-   "baseScore": 58.2,
-   "spotCount": 0,
-   "polyline": "_iwsEuss_YrDgMxHgb@P_FuAcd@f@cKpDeL|P_XnBgGpB}MSqGkE{UYyGaDCcAwBLiBhByDg@{Fw@I_@~D{AtEmD`F",
-   "pointCount": 22,
-   "start": [
-    34.858565,
-    136.420594
-   ],
-   "end": [
-    34.855106,
-    136.453999
-   ]
-  },
-  {
-   "id": "三重県:126",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "国道260号",
-   "ref": "260",
-   "highway": "trunk",
-   "lengthKm": 16.07,
-   "curviness": 216,
-   "flow": 18.3,
-   "turnCount": 190,
-   "score": 58.1,
-   "baseScore": 58.1,
-   "spotCount": 0,
-   "polyline": "o|fpEmwk`YaEbVwB`GuCfAObN{AHq@aDw@g@qAlAaBpDwDBwAt@c@rDkEZsB_@}@|AVfCuAb@u@pBiBp@_DtLQxBNlJ`C|EVbKuCnDs@hBOlC`EjSpCfEp@B~BiAlEPhI}A|@VrDjRv@`Kj@nAxExD`DrIhGj@lOeCjBn@n@|@`A|GDvCo@bJd@tFpDnImAhJqC`GVvUbMb]rAl@zNdB~f@~TnCH`HwBnMpAdAxAdCtJtC`Wr@r@xIdBlChDz@tDIxYhMvVGbCiEzM^lKe@vDpBrJAjEaIlU_@lJPzBhI~Jdc@zUhAxCxC`P|BvV`DnK[tDoFxGoGvLHzBlB|Ed@fF_@nBwBhEOpH{A~BmE|A_AvCnAxLs@bJvBpKdA|L",
-   "pointCount": 99,
-   "start": [
-    34.283116,
-    136.544065
-   ],
-   "end": [
-    34.251807,
-    136.421341
-   ]
-  },
-  {
-   "id": "三重県:127",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "紀勢インター線",
-   "ref": "68",
-   "highway": "primary",
-   "lengthKm": 5.42,
-   "curviness": 203.9,
-   "flow": 17,
-   "turnCount": 65,
-   "score": 57.8,
-   "baseScore": 57.8,
-   "spotCount": 0,
-   "polyline": "_dhpEuzm_Y~@iBtByK?uCp@uBxIeHjIoCrDcDvB_@hJiH`F_ClDTrHnIbBd@dHE|HwA`C_B|C_FvKyDhJzBxOqBjR|DjCrAbOXnA_AbHuPfKsIvD_HdATtEvH|@_@d@eC`A[`EtF~KB",
-   "pointCount": 35,
-   "start": [
-    34.289442,
-    136.390992
-   ],
-   "end": [
-    34.25008,
-    136.404022
-   ]
-  },
-  {
-   "id": "三重県:128",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "浜島阿児線",
-   "ref": "17",
-   "highway": "primary",
-   "lengthKm": 8.23,
-   "curviness": 197.1,
-   "flow": 16.7,
-   "turnCount": 97,
-   "score": 57.7,
-   "baseScore": 57.7,
-   "spotCount": 0,
-   "polyline": "qyjpEcrraYuAsHE{Gw@mFuJsUcB_CmI_GuEgG{DqBiJ{AgFf@yNzDiBa@{@mAYuBHiLeAuEh@[]eCbHkA`@{@HeD_A{BiBaB_AaExDyKvAsAv@mBjCmOc@sGaAcFqA_CsAaIdAiGQ}AaCgGr@cHIeM_B}SuCaKHwBjBcICkKsHyVLeJUqBoAaCyJcH}B{Di@wCDyIyBsHyDiDuJkCcCOeH|@}@KgHuHy@kHAyD",
-   "pointCount": 60,
-   "start": [
-    34.303133,
-    136.742897
-   ],
-   "end": [
-    34.328249,
-    136.807914
-   ]
-  },
-  {
-   "id": "三重県:129",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "伊賀コリドールロード",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 4.61,
-   "curviness": 147.8,
-   "flow": 19.5,
-   "turnCount": 35,
-   "score": 57.6,
-   "baseScore": 57.6,
-   "spotCount": 0,
-   "polyline": "uqsrEcst}XtG_Bn@aBYmJd@w@dEgB`EuEdDmTfD{NC}@tL}Bba@oOmFkW^gF`d@cy@lAwGMmL`LmZz@gA",
-   "pointCount": 19,
-   "start": [
-    34.675628,
-    136.097944
-   ],
-   "end": [
-    34.655066,
-    136.134817
-   ]
-  },
-  {
-   "id": "三重県:130",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "南藤原竹川線",
-   "ref": "707",
-   "highway": "secondary",
-   "lengthKm": 3.63,
-   "curviness": 170.3,
-   "flow": 18.2,
-   "turnCount": 34,
-   "score": 57.5,
-   "baseScore": 57.5,
-   "spotCount": 0,
-   "polyline": "o~`rEkr{`YbJbA|CaBdJzC~PxCvDHdFjAdC}@`HnC`LyAlRy@nDL`IzB`J|@|QdLpEbB`Ij@~Ar@~H`GbCp@nGbE",
-   "pointCount": 21,
-   "start": [
-    34.580398,
-    136.625178
-   ],
-   "end": [
-    34.549718,
-    136.617066
-   ]
-  },
-  {
-   "id": "三重県:131",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "四日市鈴鹿環状線",
-   "ref": "8",
-   "highway": "primary",
-   "lengthKm": 5.02,
-   "curviness": 156.7,
-   "flow": 20.2,
-   "turnCount": 39,
-   "score": 57.5,
-   "baseScore": 57.5,
-   "spotCount": 0,
-   "polyline": "wustEe{y`YZ_@ToDfB}EVyCcAyJ_CcJ]_NgAeGFkEhF{KfJ{IaFw@sFzAkT_FgDB{Cw@kEaMaEyOiA{EYoEsFiT`UgZfGoGnBgD|ImIzBkAxCIpIoN",
-   "pointCount": 29,
-   "start": [
-    35.003957,
-    136.616352
-   ],
-   "end": [
-    35.002406,
-    136.654296
-   ]
-  },
-  {
-   "id": "三重県:132",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "小林鹿間線",
-   "ref": "634",
-   "highway": "secondary",
-   "lengthKm": 3.86,
-   "curviness": 182.6,
-   "flow": 17.2,
-   "turnCount": 41,
-   "score": 57.5,
-   "baseScore": 57.5,
-   "spotCount": 0,
-   "polyline": "mejtEorl`YxE~BrEt@~ElBbEjE`EvBzF`AxE|BhGrAtQnJxAdBzAd@YbH|CnB`CbDhEbDpB?jO{E~WnAxF{@rGfEbMfMrB[dBuDbBwAdAAvAz@",
-   "pointCount": 27,
-   "start": [
-    34.955274,
-    136.548396
-   ],
-   "end": [
-    34.925689,
-    136.536661
-   ]
-  },
-  {
-   "id": "三重県:133",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "浜島阿児線",
-   "ref": "17",
-   "highway": "primary",
-   "lengthKm": 3.03,
-   "curviness": 196.9,
-   "flow": 18.1,
-   "turnCount": 33,
-   "score": 57.4,
-   "baseScore": 57.4,
-   "spotCount": 0,
-   "polyline": "kxopEanabYf@mHWiJnGz@zFkArB@zPfH`EjN`HfJhKd@pK|CzIAxAMpFmCdLsD`BqBbAgFpAkCg@qEx@gB",
-   "pointCount": 20,
-   "start": [
-    34.328544,
-    136.819048
-   ],
-   "end": [
-    34.309159,
-    136.821407
-   ]
-  },
-  {
-   "id": "三重県:134",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "四日市鈴鹿環状線",
-   "ref": "8",
-   "highway": "primary",
-   "lengthKm": 4.61,
-   "curviness": 151.2,
-   "flow": 20.5,
-   "turnCount": 34,
-   "score": 57.3,
-   "baseScore": 57.3,
-   "spotCount": 0,
-   "polyline": "y}{sEots`YCvVd@`EiF?aBaBqFgCeBzF{@lKyUfTaCvAgIlCmTkHaDK}YfLyFbAcEIaXaE{FD_EbAiDpBgMfPmCr@{IG",
-   "pointCount": 23,
-   "start": [
-    34.882373,
-    136.584557
-   ],
-   "end": [
-    34.914413,
-    136.569356
-   ]
-  },
-  {
-   "id": "三重県:135",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "四日市多度線",
-   "ref": "26",
-   "highway": "primary",
-   "lengthKm": 4.65,
-   "curviness": 183.7,
-   "flow": 18.2,
-   "turnCount": 47,
-   "score": 57.3,
-   "baseScore": 57.3,
-   "spotCount": 0,
-   "polyline": "qvxtEuo|`YwLqRcAMuPnGgFfJ_BfAaCNuDe@{Ex@mIdHaQbGaJoDiF}@{Et@uAcB_AeDy@m@{FJoFq@uHxA_d@qKwEsFkNmIiEbMyFbCgCY",
-   "pointCount": 26,
-   "start": [
-    35.029692,
-    136.629871
-   ],
-   "end": [
-    35.06541,
-    136.630929
-   ]
-  },
-  {
-   "id": "三重県:136",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "亀山安濃線",
-   "ref": "649",
-   "highway": "secondary",
-   "lengthKm": 6.49,
-   "curviness": 152.3,
-   "flow": 15.5,
-   "turnCount": 64,
-   "score": 57.1,
-   "baseScore": 54.2,
-   "spotCount": 1,
-   "polyline": "whpsE}z_`Y~HnD|I|AV~EnBbFhBhAzIa@zI|AdCBvSoDjHKhAdAjBdE~PhGfDlDtDrArFnEpLNvBb@lAbCz@~FxApDnBhCzN|HlGBvR~DjJvIvElJjKzD~B|AjAPnGcB~Fi@nLX|Na@~H\\|MrPbGtB",
-   "pointCount": 38,
-   "start": [
-    34.822684,
-    136.483192
-   ],
-   "end": [
-    34.772328,
-    136.460617
-   ]
-  },
-  {
-   "id": "三重県:137",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "佐原勢和松阪線",
-   "ref": "429",
-   "highway": "secondary",
-   "lengthKm": 3.08,
-   "curviness": 189.7,
-   "flow": 16.7,
-   "turnCount": 35,
-   "score": 57,
-   "baseScore": 57,
-   "spotCount": 0,
-   "polyline": "wunqEovy_YV_A`Bs@hByChA_HnAm@z@DdOwO~JkXlCeDbNgA~K{E`TgDvCG`G|@hE_EjEg@lC^pLnF",
-   "pointCount": 19,
-   "start": [
-    34.486835,
-    136.451759
-   ],
-   "end": [
-    34.464578,
-    136.46415
-   ]
-  },
-  {
-   "id": "三重県:138",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "国道368号",
-   "ref": "368;422",
-   "highway": "trunk",
-   "lengthKm": 13.48,
-   "curviness": 216.2,
-   "flow": 17.5,
-   "turnCount": 167,
-   "score": 56.9,
-   "baseScore": 56.9,
-   "spotCount": 0,
-   "polyline": "wbtqEk}j~XwDbBaBfBwBfH[nGoFrG?rA`AnEXhHpCbEbBrGlC|CqCtFg@~GmBtH}CtFQpCc@v@cE]iSfGu[dQqBIyNmDgBiBgCqHiNyKgBk@kOnDmJfAeJzCuHUqGj@mAYqFkEuB]aK~FwBc@aAdByAT}CrCu]wAwFb@sBlAgBvDOfCZhESrAcCbA_FGmAl@_ExD{EjC{BlDqIzDoBdCcCjJwAtBoABk@e@aCoEw@{EgEUkLfEgK~LeWxLmE|JcDrBkAnBYpF`AhJe@lA_BbA}@NoGk@w@p@wAdEyEfAqSoC}G_BeKX_Dj@__@pMoAKmJgFaCDsC|AeD~EuH|HiCz@uAWeAoAkCgL",
-   "pointCount": 92,
-   "start": [
-    34.514525,
-    136.212217
-   ],
-   "end": [
-    34.602502,
-    136.169673
-   ]
-  },
-  {
-   "id": "三重県:139",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "伊勢松阪線",
-   "ref": "60",
-   "highway": "primary",
-   "lengthKm": 10.56,
-   "curviness": 144,
-   "flow": 19.2,
-   "turnCount": 79,
-   "score": 56.9,
-   "baseScore": 56.9,
-   "spotCount": 0,
-   "polyline": "so|qEi_baYrKeJ~EcMFgEgC_W@sBbHm\\fA}LrBoKbGiMn@wEvHeUj@{Ei@qGd@sBbCqDrE{@fE}CnEaBtNcSfAcEnKyF|IcIbXeS~OkOrBo@bDP|GsBt@HhJxGvMrFxOtS|CzBnCh@vD]x@~EtRsAlJhEpGfPv^_RlD}@lDlXnAnChCbBnBRfC[xi@{K~CTrIdDxFfA",
-   "pointCount": 50,
-   "start": [
-    34.557536,
-    136.657972
-   ],
-   "end": [
-    34.493426,
-    136.69019
-   ]
-  },
-  {
-   "id": "三重県:140",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "上野大山田線",
-   "ref": "56",
-   "highway": "primary",
-   "lengthKm": 5.55,
-   "curviness": 200.5,
-   "flow": 16.1,
-   "turnCount": 69,
-   "score": 56.6,
-   "baseScore": 56.6,
-   "spotCount": 0,
-   "polyline": "afasEeke~X~@wBzIqJr@cIzFeHfBgMfCwE`CoI~DsGp@yBp@kGT_P}@yF?yGu@iFpAoUjC}IDaEuByEMiDmBuJA}JmEJaDgAyI|EgUMoCy@eDaCsC[uDgB{Gg@eE_DqFgC}AjAsQ`B{HbC",
-   "pointCount": 36,
-   "start": [
-    34.745448,
-    136.183711
-   ],
-   "end": [
-    34.758089,
-    136.21722
-   ]
-  },
-  {
-   "id": "三重県:141",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "平生庄田線",
-   "ref": "660",
-   "highway": "secondary",
-   "lengthKm": 5.68,
-   "curviness": 174.6,
-   "flow": 16.3,
-   "turnCount": 61,
-   "score": 56.5,
-   "baseScore": 56.5,
-   "spotCount": 0,
-   "polyline": "ivsrEwit_Y}ElKeAbE`@nEV~`@o@hGaClB{A`DoErFwLlKqApNuD~Ga@vEaDpOyFhKmJxCiGjMiIbB_DzHaCnLyJzLyAzEeC~CwBrFwFrFkB@oBrA}Ct@GhL}E|TuA|AcLjG_AK",
-   "pointCount": 33,
-   "start": [
-    34.676373,
-    136.424119
-   ],
-   "end": [
-    34.702675,
-    136.377184
-   ]
-  },
-  {
-   "id": "三重県:142",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "川原北勢インター線",
-   "ref": "157",
-   "highway": "secondary",
-   "lengthKm": 6.74,
-   "curviness": 158.9,
-   "flow": 17,
-   "turnCount": 63,
-   "score": 56.4,
-   "baseScore": 56.4,
-   "spotCount": 0,
-   "polyline": "sg}uEa`e`YrJH|GqCdSqEjBiAbD`@fD}BxDVzBcA|E@jJqDjHo@pCwGdHuD|G_CtRiBjBmAxPs@tFb@l@lHrAnDtBp@xEF|c@zF`HlJbr@fIhJtHtKd@fDc@bRnBvKwC~J~A",
-   "pointCount": 32,
-   "start": [
-    35.216738,
-    136.50961
-   ],
-   "end": [
-    35.161065,
-    136.508209
-   ]
-  },
-  {
-   "id": "三重県:143",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "安乗港線",
-   "ref": "514",
-   "highway": "secondary",
-   "lengthKm": 3.83,
-   "curviness": 179.3,
-   "flow": 16,
-   "turnCount": 43,
-   "score": 55.9,
-   "baseScore": 55.9,
-   "spotCount": 0,
-   "polyline": "wfvpEe~pbYfItC|B~AtDnHxIlAtGnGfEjKjFlFtFpS|DhKHxFnCfDzAvHzOxHlFq@hA^pEpOl@pIp@pBfFvE`JzCzFbG~D`B",
-   "pointCount": 23,
-   "start": [
-    34.361556,
-    136.898426
-   ],
-   "end": [
-    34.33873,
-    136.871811
-   ]
-  },
-  {
-   "id": "三重県:144",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "相鹿瀬大台線",
-   "ref": "709",
-   "highway": "secondary",
-   "lengthKm": 4.88,
-   "curviness": 177.4,
-   "flow": 15.7,
-   "turnCount": 55,
-   "score": 55.9,
-   "baseScore": 55.9,
-   "spotCount": 0,
-   "polyline": "sahqEqlm`YrHrElHzKdEXvBdAfQpTvOhDtFwAbGlA~@lGrDfKCjReEbJKvMpEpLPjGfAtF@hIrAtPG`BgD|GeCtT`AvI}@pQr@|CjCvD@vAk@tA",
-   "pointCount": 28,
-   "start": [
-    34.452898,
-    136.552574
-   ],
-   "end": [
-    34.438834,
-    136.512285
-   ]
-  },
-  {
-   "id": "三重県:145",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "国道42号",
-   "ref": "42;167",
-   "highway": "trunk",
-   "lengthKm": 9.78,
-   "curviness": 160.6,
-   "flow": 18.1,
-   "turnCount": 87,
-   "score": 55.8,
-   "baseScore": 52.9,
-   "spotCount": 1,
-   "polyline": "ujmqEm}fbYo@fGiDh@wFpEaDJoEoBcCc@sBP}D~AwAzAqDpJgBfGMvBNdC`AxCvHhJ~@pGGhG_D`Vh@vJlCrGp[t_@hAzFgA`WuA`CuAt@uWxBuBwFwAaAaKd@uE`BoCdEo@~O{DxEg@xBFzB~Fl[R|Iy@vCwDjDqMxFgh@v^aD~@gXdCkBpAoD`Y}@l\\bArDp@bLjDdQdD`IbBZ",
-   "pointCount": 52,
-   "start": [
-    34.479952,
-    136.84711
-   ],
-   "end": [
-    34.504753,
-    136.778305
-   ]
-  },
-  {
-   "id": "三重県:146",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "国道167号",
-   "ref": "167",
-   "highway": "trunk",
-   "lengthKm": 8.32,
-   "curviness": 155.7,
-   "flow": 18.5,
-   "turnCount": 70,
-   "score": 55.6,
-   "baseScore": 52.7,
-   "spotCount": 1,
-   "polyline": "sfcqEo|bbYiB}Q{JwPU}BPcPe@yCyKaPyPoKyA[}IFiLoB_FoAsImFiEsAsLw@cOhFsAbCcAxIk@~AwArAgG~BkIg@kDgCeI_KgNaCwD\\qO~DcClAcF~EgHvA_F}AsJcG_IeDgDgCoC{DqAoK{@wAyBr@yBg@Qc@eDhCcCh@gc@yAtIIxXlA`B[~DaCpA|@",
-   "pointCount": 48,
-   "start": [
-    34.428097,
-    136.826478
-   ],
-   "end": [
-    34.472491,
-    136.845931
-   ]
-  },
-  {
-   "id": "三重県:147",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "伊賀甲南線",
-   "ref": "133;673",
-   "highway": "secondary",
-   "lengthKm": 4.45,
-   "curviness": 163,
-   "flow": 16.5,
-   "turnCount": 44,
-   "score": 55.5,
-   "baseScore": 55.5,
-   "spotCount": 0,
-   "polyline": "waqsEazi~X{KpI_BfKiHxLiAZkEOmPbDgBjFkEjHuFfGgFxC}AxBiH`AqFs@eANcFiDgJ}I{AsDmFq@iEnD}JMcBd@iHvDmUhSoH|A{DbBcH`A",
-   "pointCount": 27,
-   "start": [
-    34.826678,
-    136.206565
-   ],
-   "end": [
-    34.859355,
-    136.191583
-   ]
-  },
-  {
-   "id": "三重県:148",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "鈴鹿宮妻峡線",
-   "ref": "115",
-   "highway": "secondary",
-   "lengthKm": 3.06,
-   "curviness": 155.7,
-   "flow": 17.6,
-   "turnCount": 27,
-   "score": 55.5,
-   "baseScore": 55.5,
-   "spotCount": 0,
-   "polyline": "wz~sE{pp`Y|@rSfBtGoAdBc@tEfChFLjAkCtLmVfa@eAtJ}@nD{BxEgCfCqBlN}BnEeCbCqCdA}TzA",
-   "pointCount": 18,
-   "start": [
-    34.89724,
-    136.568619
-   ],
-   "end": [
-    34.908758,
-    136.543632
-   ]
-  },
-  {
-   "id": "三重県:149",
-   "region": "mie",
-   "regionName": "三重県",
-   "name": "四日市多度線",
-   "ref": "26",
-   "highway": "primary",
-   "lengthKm": 3.84,
-   "curviness": 178.9,
-   "flow": 17.2,
-   "turnCount": 40,
-   "score": 55.5,
-   "baseScore": 55.5,
-   "spotCount": 0,
-   "polyline": "ateuE{iz`Y|Nj@dF|@fDfD~RdJpCyDbDgCfB{IZiFbFyInJc@vTsM|J}CtGcA~BoDlLx@rXaB|B_AjFoHr@KvAx@",
-   "pointCount": 21,
-   "start": [
-    35.09585,
-    136.618702
-   ],
-   "end": [
-    35.066742,
-    136.628128
    ]
   }
  ],
- "hiddenCount": 48
+ "hiddenCount": 99
 }

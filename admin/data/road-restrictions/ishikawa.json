@@ -1,24 +1,54 @@
 {
-  "romaji": "ishikawa",
-  "updatedAt": "2026-08-16T09:26:25.723Z",
-  "count": 1,
-  "restrictions": [
-    {
-      "id": "osm-ishikawa-26827564",
-      "kind": "noMotorcycle",
-      "name": "白山白川郷ホワイトロード",
-      "prefecture": "石川県",
-      "polyline": "gqi|E{tnaYcBqAAyH~@kJhGqEhDnAAyGjH_EjB}BbAsDlAmLs@aQpCuHdA_KvC_H`@gD{JwTmHyGiEeUZ}KkFwFuFqNi@kHv@iE}@mCbF_MmAaHZ}HkAoSNcEmCyHOqFb@iDiAiFNaG}@{CHgEoBkF_DyDR}BeC_F]gJpAoBNmDfEaD|AqHfEwDCwIlDeBh@gCvA}AoAyE{Cu@e@iD~AoEdNuG`CSnAcD@eCvJqF\\kFtH{J|AmIrDkB`DiLxD}F`DyNnEkF\\wJe@{CpAsOGyE_AqEtAiKSm@e@VyA`Lt@`F}@rGTxAoBvBcAnFTlE_@~BwFlEw@~BP`DmEbC_IlOcFRgDtAoApBsCeB{C@SnAr@dC]zBhAvGiB`BViF{BeNDuG`A[tJfClDcF|Do@`@wBs@mEzEiDxAuJbCsCAiA}DqFrD_ELuBaAiFxDgGUaDcA{AcD?eDaCmBqJoB{AoBmFsDwA_D~A}@`Cw@a@q@kDnAsF_GgAk@qB\\aAxDi@~AmDeBwFKcEaMoIkAmBnDqBtEQdBgCJqBqAoCNkD{RwM",
-      "note": "OSM の motorcycle=no 由来。地図での確認はまだ（road-builder で確かめること）",
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": null,
-      "checkedAt": "2026-08-16",
-      "source": "admin",
-      "origin": "osm"
-    }
-  ]
+ "romaji": "ishikawa",
+ "updatedAt": "2026-10-24T23:09:19.205Z",
+ "count": 2,
+ "restrictions": [
+  {
+   "id": "osm-ishikawa-26827564",
+   "kind": "noMotorcycle",
+   "name": "白山白川郷ホワイトロード",
+   "prefecture": "石川県",
+   "polyline": "gqi|E{tnaYcBqAAyH~@kJhGqEhDnAAyGjH_EjB}BbAsDlAmLs@aQpCuHdA_KvC_H`@gD{JwTmHyGiEeUZ}KkFwFuFqNi@kHv@iE}@mCbF_MmAaHZ}HkAoSNcEmCyHOqFb@iDiAiFNaG}@{CHgEoBkF_DyDR}BeC_F]gJpAoBNmDfEaD|AqHfEwDCwIlDeBh@gCvA}AoAyE{Cu@e@iD~AoEdNuG`CSnAcD@eCvJqF\\kFtH{J|AmIrDkB`DiLxD}F`DyNnEkF\\wJe@{CpAsOGyE_AqEtAiKSm@e@VyA`Lt@`F}@rGTxAoBvBcAnFTlE_@~BwFlEw@~BP`DmEbC_IlOcFRgDtAoApBsCeB{C@SnAr@dC]zBhAvGiB`BViF{BeNDuG`A[tJfClDcF|Do@`@wBs@mEzEiDxAuJbCsCAiA}DqFrD_ELuBaAiFxDgGUaDcA{AcD?eDaCmBqJoB{AoBmFsDwA_D~A}@`Cw@a@q@kDnAsF_GgAk@qB\\aAxDi@~AmDeBwFKcEaMoIkAmBnDqBtEQdBgCJqBqAoCNkD{RwM",
+   "note": "OSM の motorcycle=no 由来。地図での確認はまだ（road-builder で確かめること）",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-08-16",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "winter-ishikawa-whiteroad",
+   "kind": "winterClosure",
+   "name": "白山白川郷ホワイトロード",
+   "prefecture": "石川県",
+   "polyline": "qti|EmbebYzRvMOjDpAnCKpBeBfCuEPoDpBjAlB`MnIJbEdBvF_BlDyDh@]`Aj@pB~FfAoArFp@jDv@`@|@aC~C_BrDvAnBlFnBzAlBpJdD`CbD?bAzAT`DyDfG`AhFMtBsD~D|DpF@hAcCrCyAtJ{EhDr@lEa@vB}Dn@mDbFuJgCaAZEtGzBdNWhFhBaBiAwG\\{Bs@eCRoAzCArCdBnAqBfDuAbFS~HmOlEcCQaDv@_CvFmE^_CUmEbAoFnBwBUyA|@sGu@aFxAaLd@WRl@uAhK~@pEFxEqArOd@zC]vJoEjFaDxNyD|FaDhLsDjB}AlIuHzJ]jFwJpFAdCoAbDaCReNtG_BnEd@hDzCt@nAxEwA|Ai@fCmDdBBvIgEvD}ApHgE`DOlDqAnB\\fJdC~ES|B~CxDnBjFIfE|@zCO`GhAhFc@hDNpFlCxHl@l_@",
+   "note": "2026年は 11/10 まで通行の予定（6/12 に全線開通）。開通日は年でかなり違う（2025年は石川側 6/27・岐阜側 7/11）。有料道路",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "activePeriod": {
+    "from": "11-11",
+    "to": "06-11"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  }
+ ]
 }

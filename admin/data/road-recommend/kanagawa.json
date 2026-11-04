@@ -1,16 +1,17 @@
 {
  "prefecture": "神奈川県",
  "romaji": "kanagawa",
- "generation": 7,
- "contentHash": "9b3dfb065567",
- "builtAt": "2026-10-11T10:56:18.231Z",
+ "generation": 9,
+ "contentHash": "a28c5363abd6",
+ "overridesHash": "fe27306ad81f",
+ "builtAt": "2026-10-21T12:38:22.533Z",
  "weights": {
   "curviness": 0.41,
   "flow": 0.3,
   "length": 0.18,
   "classRank": 0.11
  },
- "count": 72,
+ "count": 59,
  "segments": [
   {
    "id": "神奈川県:0",
@@ -36,6 +37,7 @@
     35.189043,
     139.025038
    ],
+   "overrideKey": "湯河原箱根仙石原線@35.15,139.10",
    "tags": [
     "scenic",
     "winding"
@@ -65,6 +67,7 @@
     35.60091,
     139.199929
    ],
+   "overrideKey": "奥牧野相模湖線@35.58,139.15",
    "tags": [
     "winding",
     "flowing"
@@ -94,6 +97,7 @@
     35.563589,
     139.206548
    ],
+   "overrideKey": "藤野津久井線@35.59,139.17",
    "tags": [
     "winding",
     "flowing"
@@ -123,6 +127,7 @@
     35.264259,
     139.013905
    ],
+   "overrideKey": "仙石原強羅停車場線@35.25,139.05",
    "tags": [
     "winding",
     "caution"
@@ -152,6 +157,7 @@
     35.321766,
     139.044128
    ],
+   "overrideKey": "はこね金太郎ライン@35.28,139.00",
    "tags": [
     "winding"
    ]
@@ -180,6 +186,7 @@
     35.146574,
     139.155184
    ],
+   "overrideKey": "真鶴半島公園線@35.16,139.13",
    "tags": [
     "flowing"
    ]
@@ -208,6 +215,7 @@
     35.463187,
     139.215477
    ],
+   "overrideKey": "秦野清川線@35.38,139.24",
    "tags": [
     "winding",
     "caution"
@@ -237,6 +245,7 @@
     35.331568,
     139.078749
    ],
+   "overrideKey": "御殿場大井線@35.33,138.99",
    "tags": [
     "winding",
     "flowing"
@@ -266,6 +275,7 @@
     35.165456,
     139.059022
    ],
+   "overrideKey": "湯河原パークウェイ@35.17,139.03",
    "tags": [
     "flowing"
    ],
@@ -299,6 +309,7 @@
     35.323151,
     139.007316
    ],
+   "overrideKey": "足柄峠線@35.34,138.99",
    "tags": [
     "winding",
     "flowing"
@@ -328,6 +339,7 @@
     35.584826,
     139.131064
    ],
+   "overrideKey": "奥牧野相模湖線@35.59,139.15",
    "tags": [
     "flowing"
    ]
@@ -356,9 +368,11 @@
     35.486778,
     139.208409
    ],
+   "overrideKey": "秦野清川線@35.46,139.22",
    "tags": [
     "winding",
-    "flowing"
+    "flowing",
+    "caution"
    ]
   },
   {
@@ -385,6 +399,7 @@
     35.550237,
     139.133493
    ],
+   "overrideKey": "山北藤野線@35.54,139.12",
    "tags": [
     "flowing"
    ]
@@ -413,6 +428,7 @@
     35.534142,
     139.093096
    ],
+   "overrideKey": "道志みち@35.54,139.11",
    "tags": [
     "winding",
     "flowing"
@@ -442,6 +458,7 @@
     35.627306,
     139.122311
    ],
+   "overrideKey": "佐野川上野原線@35.64,139.14",
    "tags": [
     "winding"
    ]
@@ -470,6 +487,7 @@
     35.371865,
     138.947643
    ],
+   "overrideKey": "山中湖小山線@35.41,138.92",
    "tags": [
     "winding",
     "flowing"
@@ -499,6 +517,7 @@
     35.596608,
     139.121578
    ],
+   "overrideKey": "四日市場上野原線@35.58,139.11",
    "tags": [
     "flowing"
    ]
@@ -527,6 +546,7 @@
     35.150192,
     139.125475
    ],
+   "overrideKey": "小田原湯河原線@35.21,139.14",
    "tags": [
     "flowing"
    ]
@@ -555,6 +575,7 @@
     35.596433,
     139.151724
    ],
+   "overrideKey": "山北藤野線@35.57,139.15",
    "tags": [
     "flowing"
    ]
@@ -583,6 +604,7 @@
     35.162813,
     139.001705
    ],
+   "overrideKey": "国道1号@35.24,139.11",
    "tags": [
     "winding",
     "flowing"
@@ -612,6 +634,7 @@
     35.230454,
     138.978784
    ],
+   "overrideKey": "芦ノ湖スカイライン@35.18,139.01",
    "tags": [
     "winding",
     "flowing"
@@ -646,6 +669,7 @@
     35.533816,
     139.216583
    ],
+   "overrideKey": "伊勢原津久井線@35.56,139.21",
    "tags": [
     "flowing"
    ]
@@ -674,6 +698,7 @@
     35.123207,
     139.038898
    ],
+   "overrideKey": "熱海箱根峠線@35.18,139.01",
    "tags": [
     "winding",
     "flowing"
@@ -703,6 +728,7 @@
     35.221905,
     139.080164
    ],
+   "overrideKey": "神奈川県道732号湯本元箱根線@35.23,139.11",
    "tags": [
     "flowing"
    ]
@@ -731,6 +757,7 @@
     35.265801,
     139.013441
    ],
+   "overrideKey": "湯河原箱根仙石原線@35.21,139.03",
    "tags": [
     "winding",
     "flowing"
@@ -760,6 +787,7 @@
     35.566123,
     139.255366
    ],
+   "overrideKey": "鳥屋川尻線@35.58,139.26",
    "tags": [
     "flowing"
    ]
@@ -788,6 +816,7 @@
     35.625906,
     139.116725
    ],
+   "overrideKey": "甲州街道@35.62,139.20",
    "tags": [
     "winding",
     "flowing"
@@ -817,6 +846,7 @@
     35.142038,
     139.621602
    ],
+   "overrideKey": "上宮田金田三崎港線@35.14,139.65",
    "tags": [
     "flowing"
    ]
@@ -845,6 +875,7 @@
     35.295173,
     139.202058
    ],
+   "overrideKey": "広域農道やまゆりライン@35.31,139.23",
    "tags": [
     "flowing"
    ]
@@ -873,6 +904,7 @@
     35.564148,
     139.190222
    ],
+   "overrideKey": "道志みち@35.54,139.14",
    "tags": [
     "winding",
     "flowing"
@@ -902,6 +934,7 @@
     35.5469,
     139.22097
    ],
+   "overrideKey": "鳥屋川尻線@35.57,139.25",
    "tags": [
     "winding",
     "flowing"
@@ -931,6 +964,7 @@
     35.37044,
     139.034402
    ],
+   "overrideKey": "山北藤野線@35.36,139.07",
    "tags": [
     "flowing"
    ]
@@ -959,6 +993,7 @@
     35.339936,
     139.226862
    ],
+   "overrideKey": "平塚松田線@35.36,139.27",
    "tags": [
     "flowing"
    ]
@@ -987,6 +1022,7 @@
     35.144488,
     139.658876
    ],
+   "overrideKey": "県道215号線@35.19,139.66",
    "tags": [
     "flowing"
    ]
@@ -1015,6 +1051,7 @@
     35.261926,
     139.150762
    ],
+   "overrideKey": "小田原山北線@35.29,139.13",
    "tags": [
     "flowing"
    ]
@@ -1043,6 +1080,7 @@
     35.335858,
     139.121604
    ],
+   "overrideKey": "怒田開成小田原線@35.35,139.10",
    "tags": [
     "flowing"
    ]
@@ -1071,6 +1109,7 @@
     35.274701,
     138.992501
    ],
+   "overrideKey": "箱根裏街道@35.24,139.06",
    "tags": [
     "winding",
     "flowing"
@@ -1100,6 +1139,7 @@
     35.142038,
     139.621602
    ],
+   "overrideKey": "県道26号線@35.17,139.64",
    "tags": [
     "flowing"
    ]
@@ -1128,6 +1168,7 @@
     35.345169,
     139.073357
    ],
+   "overrideKey": "矢倉沢山北線@35.33,139.06",
    "tags": [
     "flowing"
    ]
@@ -1156,6 +1197,7 @@
     35.347885,
     139.216939
    ],
+   "overrideKey": "広域農道やまゆりライン@35.31,139.22",
    "tags": [
     "winding"
    ]
@@ -1184,6 +1226,7 @@
     35.347107,
     139.150225
    ],
+   "overrideKey": "平塚松田線@35.34,139.20",
    "tags": [
     "flowing"
    ]
@@ -1212,6 +1255,7 @@
     35.192378,
     139.063574
    ],
+   "overrideKey": "アネスト岩田 ターンパイク箱根@35.24,139.14",
    "tags": [
     "winding",
     "flowing"
@@ -1246,6 +1290,7 @@
     35.261759,
     139.579962
    ],
+   "overrideKey": "県道207号線@35.29,139.57",
    "tags": [
     "flowing"
    ]
@@ -1274,6 +1319,7 @@
     35.407499,
     139.049318
    ],
+   "overrideKey": "山北藤野線@35.37,139.03",
    "tags": [
     "winding",
     "flowing"
@@ -1303,6 +1349,7 @@
     35.371831,
     139.184659
    ],
+   "overrideKey": "秦野大井線@35.34,139.16",
    "tags": [
     "winding",
     "flowing"
@@ -1332,6 +1379,7 @@
     35.267909,
     139.604702
    ],
+   "overrideKey": "逗子葉山横須賀線@35.24,139.60",
    "tags": [
     "flowing"
    ]
@@ -1360,6 +1408,7 @@
     35.462515,
     139.290382
    ],
+   "overrideKey": "伊勢原津久井線@35.48,139.27",
    "tags": [
     "flowing"
    ]
@@ -1388,6 +1437,7 @@
     35.115376,
     139.088803
    ],
+   "overrideKey": "国道135号@35.24,139.15",
    "tags": [
     "winding",
     "flowing"
@@ -1422,6 +1472,7 @@
     35.185027,
     139.655182
    ],
+   "overrideKey": "県道214号線@35.22,139.64",
    "tags": [
     "flowing"
    ]
@@ -1450,6 +1501,7 @@
     35.56531,
     139.262462
    ],
+   "overrideKey": "国道412号線@35.51,139.30",
    "tags": [
     "flowing"
    ]
@@ -1478,6 +1530,7 @@
     35.329792,
     139.514518
    ],
+   "overrideKey": "藤沢鎌倉線@35.31,139.54",
    "tags": [
     "flowing"
    ]
@@ -1506,6 +1559,7 @@
     35.581199,
     139.231469
    ],
+   "overrideKey": "道志みち@35.56,139.20",
    "tags": [
     "winding",
     "flowing"
@@ -1535,6 +1589,7 @@
     35.610405,
     139.193078
    ],
+   "overrideKey": "国道412号線@35.60,139.23",
    "tags": [
     "winding",
     "flowing"
@@ -1564,6 +1619,7 @@
     35.141032,
     139.110191
    ],
+   "overrideKey": "熱海ビーチライン@35.11,139.09",
    "tags": [
     "toll"
    ],
@@ -1597,6 +1653,7 @@
     35.358026,
     139.067464
    ],
+   "overrideKey": "国道246号@35.36,138.99",
    "tags": [
     "winding",
     "flowing"
@@ -1626,6 +1683,7 @@
     35.360481,
     139.298222
    ],
+   "overrideKey": "相模原大磯線@35.32,139.28",
    "tags": [
     "flowing"
    ]
@@ -1654,6 +1712,7 @@
     35.289843,
     139.237421
    ],
+   "overrideKey": "中井羽根尾線@35.33,139.22",
    "tags": [
     "flowing"
    ]
@@ -1682,6 +1741,7 @@
     35.36466,
     138.993882
    ],
+   "overrideKey": "国道246号@35.37,139.03",
    "tags": [
     "winding",
     "flowing"
@@ -1711,336 +1771,12 @@
     35.378333,
     139.170346
    ],
+   "overrideKey": "国道246号@35.35,139.14",
    "tags": [
     "winding",
     "flowing"
    ]
-  },
-  {
-   "id": "神奈川県:59",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "横須賀葉山線",
-   "ref": "27",
-   "highway": "primary",
-   "lengthKm": 3.47,
-   "curviness": 126.2,
-   "flow": 13.7,
-   "turnCount": 32,
-   "score": 47.7,
-   "baseScore": 47.7,
-   "spotCount": 0,
-   "polyline": "gibvEcqlsYeB`CuJbFeIzHoJpXwAtAuHbDwAdC{CvJyH`FqDzEgC`LmBbE_QtSeCjAaEd@wa@mFcBX",
-   "pointCount": 18,
-   "start": [
-    35.242604,
-    139.661142
-   ],
-   "end": [
-    35.265933,
-    139.641756
-   ]
-  },
-  {
-   "id": "神奈川県:60",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "国道412号線",
-   "ref": "412",
-   "highway": "trunk",
-   "lengthKm": 4.01,
-   "curviness": 127.5,
-   "flow": 14.2,
-   "turnCount": 36,
-   "score": 47.6,
-   "baseScore": 44.7,
-   "spotCount": 1,
-   "polyline": "eoaxEgp{pYMpCeBvFqXt`@w@~HoChG}^dIuLrIoExAiIpEuCtDqDdAcF}A{NuH_H{AcAvEkMrYgCzBsFz@",
-   "pointCount": 19,
-   "start": [
-    35.566109,
-    139.246279
-   ],
-   "end": [
-    35.59307,
-    139.226117
-   ]
-  },
-  {
-   "id": "神奈川県:61",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "横浜上麻生道路",
-   "ref": "12",
-   "highway": "primary",
-   "lengthKm": 3.3,
-   "curviness": 120.9,
-   "flow": 13.8,
-   "turnCount": 29,
-   "score": 47.3,
-   "baseScore": 47.3,
-   "spotCount": 0,
-   "polyline": "y~xwE}mwrY~L_CzA}@`BkDuAoGSoLn@}EvCuIDwCMkBmB{FwDsQLyQ|[u_ApDuPtCgE",
-   "pointCount": 16,
-   "start": [
-    35.522526,
-    139.553112
-   ],
-   "end": [
-    35.514042,
-    139.583992
-   ]
-  },
-  {
-   "id": "神奈川県:62",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "国道134号",
-   "ref": "134",
-   "highway": "trunk",
-   "lengthKm": 12.64,
-   "curviness": 125.2,
-   "flow": 14.7,
-   "turnCount": 108,
-   "score": 47,
-   "baseScore": 47,
-   "spotCount": 0,
-   "polyline": "}t_vE}rdsYiHdMaDhCmBpDsHh\\cAlKu@tAmKjIwAdCcAvEy@jNoBvHwEdC}MtV_G~E}EzHyFz@kJrCyCpBkJbU{KrPyIrP_AdD_AvJaArB{Cd@gGcC}Gs@iEf@aD~A_NxDg@u@{LcGw[{U{Du@eEr@gBfBaDjJoAbLmExHmAx@iZWmI}CuId@kGy@gBjJ_RlV}Af@kN^gEn@aJpDuE`E_D~GqBlKt@nCtErFt@xCx@nPiAfH}CzDqYnNkE~HsFpGcHdMaK`B{BtA",
-   "pointCount": 66,
-   "start": [
-    35.229112,
-    139.620467
-   ],
-   "end": [
-    35.304412,
-    139.551881
-   ]
-  },
-  {
-   "id": "神奈川県:63",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "国道134号",
-   "ref": "134",
-   "highway": "trunk",
-   "lengthKm": 5.59,
-   "curviness": 150.2,
-   "flow": 14,
-   "turnCount": 60,
-   "score": 46.8,
-   "baseScore": 46.8,
-   "spotCount": 0,
-   "polyline": "eqwuEovksYvNrI~AjDjArIrAzBlCfAlJMnCzBdCvKv@xVn@rCtC|DjG|CvIL|IxArDKrEkBlB?bJ`CtN~@iAxGqApBaKrD{[dYaMlGwGbHaCPoFqB}G^cCxAyBpDkDxA{InH",
-   "pointCount": 33,
-   "start": [
-    35.187551,
-    139.656882
-   ],
-   "end": [
-    35.185071,
-    139.629001
-   ]
-  },
-  {
-   "id": "神奈川県:64",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "松田国府津線",
-   "ref": "72",
-   "highway": "primary",
-   "lengthKm": 3.43,
-   "curviness": 107.8,
-   "flow": 14.2,
-   "turnCount": 26,
-   "score": 46.8,
-   "baseScore": 46.8,
-   "spotCount": 0,
-   "polyline": "s_uvEqdipYk@c@_RpCyPbFmKFiB`@w@fAwAdJJhVz@rNy@rXcDtKgBjNsE~N_@dFgA|E{EtLJ~G",
-   "pointCount": 18,
-   "start": [
-    35.33834,
-    139.152254
-   ],
-   "end": [
-    35.351584,
-    139.124928
-   ]
-  },
-  {
-   "id": "神奈川県:65",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "藤沢平塚線",
-   "ref": "47",
-   "highway": "primary",
-   "lengthKm": 3.5,
-   "curviness": 110.5,
-   "flow": 13.8,
-   "turnCount": 28,
-   "score": 46.6,
-   "baseScore": 46.6,
-   "spotCount": 0,
-   "polyline": "ii{vEkl~qYa@jDcClIKzBdCxGrEvBvBzDvGnUvAzKqAvHM|CpC`d@sEzTqCrHo@xFf@nHrG|]IjCqB~J",
-   "pointCount": 19,
-   "start": [
-    35.370606,
-    139.424862
-   ],
-   "end": [
-    35.36815,
-    139.38944
-   ]
-  },
-  {
-   "id": "神奈川県:66",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "藤沢厚木線",
-   "ref": "43",
-   "highway": "primary",
-   "lengthKm": 3.9,
-   "curviness": 108.5,
-   "flow": 13.6,
-   "turnCount": 31,
-   "score": 46.5,
-   "baseScore": 46.5,
-   "spotCount": 0,
-   "polyline": "}ngwEwtvqYzDgBnCuDjGgExL`Bh`@{AdCk@hAwC_A{h@r@}D~FmH`E{H~FeIvFiDnI{BdQgSfEwBrIHbDe@",
-   "pointCount": 19,
-   "start": [
-    35.432953,
-    139.385242
-   ],
-   "end": [
-    35.408555,
-    139.406442
-   ]
-  },
-  {
-   "id": "神奈川県:67",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "東京環状",
-   "ref": "16",
-   "highway": "trunk",
-   "lengthKm": 3.23,
-   "curviness": 137.1,
-   "flow": 15.3,
-   "turnCount": 29,
-   "score": 46.2,
-   "baseScore": 46.2,
-   "spotCount": 0,
-   "polyline": "q|jvEegjsY~IuFfDiElAuCOgJvByRLiHnF{MPmEwAyHwCia@jAuG~IqHhTg]tKD",
-   "pointCount": 15,
-   "start": [
-    35.286647,
-    139.649309
-   ],
-   "end": [
-    35.275401,
-    139.676961
-   ]
-  },
-  {
-   "id": "神奈川県:68",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "東京環状",
-   "ref": "16",
-   "highway": "trunk",
-   "lengthKm": 11.84,
-   "curviness": 120,
-   "flow": 14.2,
-   "turnCount": 100,
-   "score": 46,
-   "baseScore": 46,
-   "spotCount": 0,
-   "polyline": "iykvEuugsYwKdYkAjAwE`@eFtBkDf@yFjDuGf@}@|C^|DStAkI~KeBhAeBJgFm@yNz@}FfCoDN}Qm@eSoEgDM_HhBaH|MuNjJ_Bb@od@nBwL{DwKu@oIcJwCsBwEcA_^PsH`@oQnFaCCkZiO}I_KmGwCkHqAuQ^oCSoCy@iHqEgOuA}IkEgPeBeCyAyG{JgDo@eDfAiBjDeCpH{B|PmFbKwB~Lo@z@uRlKwQaAiDV",
-   "pointCount": 59,
-   "start": [
-    35.291247,
-    139.636274
-   ],
-   "end": [
-    35.381634,
-    139.622153
-   ]
-  },
-  {
-   "id": "神奈川県:69",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "小田原山北線",
-   "ref": "74",
-   "highway": "primary",
-   "lengthKm": 3.56,
-   "curviness": 66.7,
-   "flow": 15.9,
-   "turnCount": 15,
-   "score": 45.6,
-   "baseScore": 45.6,
-   "spotCount": 0,
-   "polyline": "kvqvEoy_pYrOrJtCeIzKqr@vA{FpDmGtSwRlAsBvCiJdNcMnb@}N|I}I",
-   "pointCount": 12,
-   "start": [
-    35.3215,
-    139.1044
-   ],
-   "end": [
-    35.300377,
-    139.127142
-   ]
-  },
-  {
-   "id": "神奈川県:70",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "第二京浜",
-   "ref": "1",
-   "highway": "trunk",
-   "lengthKm": 3.49,
-   "curviness": 87.1,
-   "flow": 17.9,
-   "turnCount": 17,
-   "score": 45.4,
-   "baseScore": 45.4,
-   "spotCount": 0,
-   "polyline": "iewwEgbmsYwHiF_l@on@wC{GcFaTiIkYkDqGaDyCqFyB?Wsn@yR",
-   "pointCount": 11,
-   "start": [
-    35.513329,
-    139.663883
-   ],
-   "end": [
-    35.536136,
-    139.687699
-   ]
-  },
-  {
-   "id": "神奈川県:71",
-   "region": "kanagawa",
-   "regionName": "神奈川県",
-   "name": "環状２号",
-   "ref": "17",
-   "highway": "primary",
-   "lengthKm": 5.76,
-   "curviness": 86,
-   "flow": 12.1,
-   "turnCount": 41,
-   "score": 43.8,
-   "baseScore": 43.8,
-   "spotCount": 0,
-   "polyline": "{ppwEmq|rYdDpHvCzCbBfAzQfFzErCdEzFlHzN|AtAzLrV|CtCbObHxBbBzNpE~E`@|PgAtKZfDt@fN|Fz@CrNlGhJDlIc@nm@KnCaAhKqM`DsAbCQ",
-   "pointCount": 28,
-   "start": [
-    35.479342,
-    139.579273
-   ],
-   "end": [
-    35.434235,
-    139.563488
-   ]
   }
  ],
- "hiddenCount": 91
+ "hiddenCount": 104
 }

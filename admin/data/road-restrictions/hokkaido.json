@@ -1,7 +1,7 @@
 {
  "romaji": "hokkaido",
- "updatedAt": "2026-09-28T09:21:23.269Z",
- "count": 8,
+ "updatedAt": "2026-10-24T23:09:19.204Z",
+ "count": 9,
  "restrictions": [
   {
    "id": "jartic-01202606000076100000000000198740",
@@ -138,6 +138,34 @@
    "checkedAt": "2026-09-28",
    "source": "admin",
    "origin": "osm"
+  },
+  {
+   "id": "winter-hokkaido-shiretoko",
+   "kind": "winterClosure",
+   "name": "知床横断道路（国道334号）",
+   "prefecture": "北海道",
+   "polyline": "wcwkGyl}tZg@hHv@`ViBpGuDnDm@lFr@xC~ArArEb@pCuB|Gf@jAh@lCbFnAf`@kDdUdAhK_@z@eAB_AiEkAgSh@eScGyHsAO{@hAB~BjDjCVhAm@zAwCIo@lANvQ_CdPk@fUiAl@w@iAq@mYyA}AgAt@iHxSDlBrAdDQ`BaA\\wCkByDg@aAh@IfArDfCdBzFtDxCc@|AqAEiBiAqB{DeACc@hBjBnG`CrD|IzEfFvFdA`EUvIhG`IKpAkAPiC_FcIiDoFdAyAvBJrDjKpQz@~DIjSmCzE@|Av@l@vJYtCiL|BeBtC|B`CjIM~ByIxCwMrAk@tAmAlPgFlNyBzA{CsAoHsQ}Aa@gGx@sDyG{@H_DhEkDy@}CdCeG{DsEpF_KRyFmEaKZ_KkE{CbA}@|D\\vCrK`KdAjFsAtGiIjFfA|Pm@jA}LzFu@uAJeBrHmG]{EeKcFcDJmCzAmK|Q`BzPq@hNcBzAaIVwB~@}Ql_@yG`Y_Bpu@_AbF_GzNVjP]vDsTp]_Gde@kX~bAcBjAgBm@oHsW{Bm@wFdIwD~J_EpDwEtNaFjJuQzNuCzF",
+   "note": "羅臼町湯ノ沢〜斜里町岩尾別 約23.8km。2025〜26年は 11/4 17時〜（10/24〜は夜間通行止め）・2026年は 4/28 開通（釧路・網走開発建設部）。2026〜27年は未発表（2026-10-25）",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-04",
+    "to": "04-27"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
   }
  ]
 }

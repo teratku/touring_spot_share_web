@@ -1,53 +1,20 @@
 {
  "prefecture": "福島県",
  "romaji": "fukushima",
- "generation": 7,
- "contentHash": "c0a95cc40c79",
- "builtAt": "2026-10-11T10:59:26.498Z",
+ "generation": 8,
+ "contentHash": "595ffe3f4ac8",
+ "overridesHash": "cc5a5bca3eab",
+ "builtAt": "2026-10-21T12:27:14.929Z",
  "weights": {
   "curviness": 0.41,
   "flow": 0.3,
   "length": 0.18,
   "classRank": 0.11
  },
- "count": 150,
+ "count": 121,
  "segments": [
   {
    "id": "福島県:0",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "蔵王エコーライン",
-   "ref": "",
-   "highway": "secondary",
-   "osmId": null,
-   "spotCount": 0,
-   "tags": [
-    "scenic",
-    "winding",
-    "flowing"
-   ],
-   "title": null,
-   "note": null,
-   "polyline": "o_ugFcdgxYyAuBy@mDu@m@mJXcBx@k@SEkAzCiI@iBk@o@aCi@y@gAi@iHkB_Ho@IcAdBk@Dy@yDuAaCBkAtBm@Vq@[k@}B]S_A`Dg@HuAqJkAyCkDn@oCKk@_DQDw@`B_Dg@g@eCZi@Y?q@|A{B?}@yJf@_BWoAmBsC_N}AeAyDHs@w@RwDrCcKdPoCxAuAhAmDOsFaN_f@\\{BpBsCfDwBOkAmC{@Sw@\\e@hCUJy@cDY[cAXi@jCa@f@}@o@gAqE[z@mEa@g@iCDd@yC[CgA`Be@KnAsEc@WgBp@Q_@bBqEM}@yIp@m@gAZaFyEsBy@qJh@?p@pDd@JNq@{BaH?{@h@JbAvD^JN_@iDwMj@OtA~A`@k@yEuF?i@XK|AxBb@WaEuFb@YtCnCh@AJu@w@}DnBw@Pi@[k@sB?u@wANmAbCiF?gC}@_AkDK[u@j@oAdGmEd@{AOcAgDgGuAmGn@e@tIc@Gk@sBSIi@bC_@XcJdDeEpCmIGsBeB}GtBuRpDsItBkMlBi@E{@wAe@G{@`@[vA\\^e@WaAgCM]w@\\w@pCVJmAmF@K_An@aBsBkAiBsNOuRa@eFdDyHH_Mn@kGjAc@v@|B~@GtAgSh@c@fAXj@]E}Lj@eLv@i@dGhBb@WkBkIXsC|ByGAuBuKkFSu@v@mAlGt@b@S~@wLzBcHaBeH",
-   "pointCount": 192,
-   "start": [
-    38.1236,
-    140.45266
-   ],
-   "end": [
-    38.13039,
-    140.5597
-   ],
-   "lengthKm": 16.03,
-   "curviness": 642.5,
-   "flow": 54.2,
-   "turnCount": 190,
-   "score": 98.9,
-   "baseScore": 98.9,
-   "added": true
-  },
-  {
-   "id": "福島県:1",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "福島県道133号赤井停車場線",
@@ -70,13 +37,14 @@
     37.086908,
     140.862638
    ],
+   "overrideKey": "福島県道133号赤井停車場線@37.10,140.78",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:2",
+   "id": "福島県:1",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国見福島線",
@@ -99,13 +67,14 @@
     37.86529,
     140.519903
    ],
+   "overrideKey": "国見福島線@37.88,140.53",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:3",
+   "id": "福島県:2",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "東山温泉線",
@@ -128,13 +97,14 @@
     37.456069,
     140.015738
    ],
+   "overrideKey": "東山温泉線@37.48,139.96",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:4",
+   "id": "福島県:3",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "矢吹天栄線",
@@ -157,6 +127,7 @@
     37.23442,
     140.164355
    ],
+   "overrideKey": "矢吹天栄線@37.27,140.10",
    "tags": [
     "winding",
     "forest",
@@ -164,7 +135,7 @@
    ]
   },
   {
-   "id": "福島県:5",
+   "id": "福島県:4",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "富岡大越線",
@@ -187,13 +158,14 @@
     37.386219,
     140.732597
    ],
+   "overrideKey": "富岡大越線@37.39,140.63",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:6",
+   "id": "福島県:5",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "才鉢前山線",
@@ -216,13 +188,14 @@
     36.960838,
     140.59829
    ],
+   "overrideKey": "才鉢前山線@36.99,140.62",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:7",
+   "id": "福島県:6",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "八溝山公園線",
@@ -245,12 +218,13 @@
     36.928298,
     140.270872
    ],
+   "overrideKey": "八溝山公園線@36.90,140.28",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:8",
+   "id": "福島県:7",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "下関河内小生瀬線",
@@ -273,12 +247,13 @@
     36.81234,
     140.424447
    ],
+   "overrideKey": "下関河内小生瀬線@36.85,140.43",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:9",
+   "id": "福島県:8",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "小栗山宮下線",
@@ -301,12 +276,13 @@
     37.439062,
     139.557247
    ],
+   "overrideKey": "小栗山宮下線@37.44,139.53",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:10",
+   "id": "福島県:9",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "藤小椿線",
@@ -329,13 +305,14 @@
     37.539896,
     139.718709
    ],
+   "overrideKey": "藤小椿線@37.57,139.71",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:11",
+   "id": "福島県:10",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "岳温泉大玉線",
@@ -358,13 +335,14 @@
     37.580215,
     140.338694
    ],
+   "overrideKey": "岳温泉大玉線@37.61,140.34",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:12",
+   "id": "福島県:11",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "上小国下川原線",
@@ -387,13 +365,14 @@
     37.757936,
     140.560741
    ],
+   "overrideKey": "上小国下川原線@37.79,140.56",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:13",
+   "id": "福島県:12",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "小栗山宮下線",
@@ -416,13 +395,14 @@
     37.455301,
     139.601958
    ],
+   "overrideKey": "小栗山宮下線@37.44,139.58",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:14",
+   "id": "福島県:13",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "高田柳津線",
@@ -445,13 +425,14 @@
     37.481249,
     139.742296
    ],
+   "overrideKey": "高田柳津線@37.48,139.78",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:15",
+   "id": "福島県:14",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "下郷会津本郷線",
@@ -474,13 +455,14 @@
     37.258073,
     139.868309
    ],
+   "overrideKey": "下郷会津本郷線@37.29,139.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:16",
+   "id": "福島県:15",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "会津若松三島線",
@@ -503,13 +485,14 @@
     37.437882,
     139.682368
    ],
+   "overrideKey": "会津若松三島線@37.45,139.65",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:17",
+   "id": "福島県:16",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "上郷下野尻線",
@@ -532,13 +515,14 @@
     37.637041,
     139.728464
    ],
+   "overrideKey": "上郷下野尻線@37.63,139.62",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:18",
+   "id": "福島県:17",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "高田柳津線",
@@ -561,12 +545,13 @@
     37.475231,
     139.775394
    ],
+   "overrideKey": "高田柳津線@37.46,139.80",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:19",
+   "id": "福島県:18",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "三株下市萱小川線",
@@ -589,12 +574,13 @@
     37.117985,
     140.653734
    ],
+   "overrideKey": "三株下市萱小川線@37.14,140.68",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:20",
+   "id": "福島県:19",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "布沢横田線",
@@ -617,13 +603,14 @@
     37.341384,
     139.483067
    ],
+   "overrideKey": "布沢横田線@37.38,139.44",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:21",
+   "id": "福島県:20",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "浅川古殿線",
@@ -646,13 +633,14 @@
     37.095812,
     140.51356
    ],
+   "overrideKey": "浅川古殿線@37.10,140.48",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:22",
+   "id": "福島県:21",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "下川内竜田停車場線",
@@ -675,6 +663,7 @@
     37.313016,
     140.839712
    ],
+   "overrideKey": "下川内竜田停車場線@37.29,140.86",
    "tags": [
     "winding",
     "forest",
@@ -682,7 +671,7 @@
    ]
   },
   {
-   "id": "福島県:23",
+   "id": "福島県:22",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "桧原板谷線",
@@ -705,13 +694,14 @@
     37.803017,
     140.273318
    ],
+   "overrideKey": "桧原板谷線@37.82,140.28",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:24",
+   "id": "福島県:23",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "あぶくま洞都路線",
@@ -734,13 +724,14 @@
     37.392803,
     140.662594
    ],
+   "overrideKey": "あぶくま洞都路線@37.35,140.65",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:25",
+   "id": "福島県:24",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "塙大津港線",
@@ -763,6 +754,7 @@
     36.888743,
     140.623295
    ],
+   "overrideKey": "塙大津港線@36.89,140.61",
    "tags": [
     "winding",
     "forest",
@@ -770,7 +762,7 @@
    ]
   },
   {
-   "id": "福島県:26",
+   "id": "福島県:25",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "福島吾妻裏磐梯線",
@@ -794,6 +786,7 @@
     140.33038
    ],
    "reshaped": true,
+   "overrideKey": "福島吾妻裏磐梯線@37.68,140.24",
    "title": "磐梯吾妻スカイライン",
    "tags": [
     "scenic",
@@ -802,7 +795,7 @@
    ]
   },
   {
-   "id": "福島県:27",
+   "id": "福島県:26",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "中野須賀川線",
@@ -825,6 +818,7 @@
     37.371505,
     140.164248
    ],
+   "overrideKey": "中野須賀川線@37.32,140.23",
    "tags": [
     "winding",
     "forest",
@@ -832,7 +826,7 @@
    ]
   },
   {
-   "id": "福島県:28",
+   "id": "福島県:27",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道400号",
@@ -855,13 +849,14 @@
     37.520457,
     139.659626
    ],
+   "overrideKey": "国道400号@37.48,139.66",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:29",
+   "id": "福島県:28",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "羽鳥福良線",
@@ -884,6 +879,7 @@
     37.279542,
     140.061709
    ],
+   "overrideKey": "羽鳥福良線@37.34,140.08",
    "tags": [
     "winding",
     "forest",
@@ -891,7 +887,7 @@
    ]
   },
   {
-   "id": "福島県:30",
+   "id": "福島県:29",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道401号",
@@ -914,13 +910,14 @@
     37.270532,
     139.554969
    ],
+   "overrideKey": "国道401号@37.26,139.61",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:31",
+   "id": "福島県:30",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "那須甲子線",
@@ -943,6 +940,7 @@
     37.175088,
     140.041497
    ],
+   "overrideKey": "那須甲子線@37.12,140.01",
    "tags": [
     "winding",
     "forest",
@@ -950,7 +948,7 @@
    ]
   },
   {
-   "id": "福島県:32",
+   "id": "福島県:31",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道401号",
@@ -973,6 +971,7 @@
     37.264468,
     139.609401
    ],
+   "overrideKey": "国道401号@37.30,139.64",
    "tags": [
     "winding",
     "forest",
@@ -980,7 +979,7 @@
    ]
   },
   {
-   "id": "福島県:33",
+   "id": "福島県:32",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道401号",
@@ -1003,13 +1002,14 @@
     37.3366,
     139.727197
    ],
+   "overrideKey": "国道401号@37.34,139.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:34",
+   "id": "福島県:33",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "磐梯山ゴールドライン",
@@ -1032,13 +1032,14 @@
     37.572627,
     140.019067
    ],
+   "overrideKey": "磐梯山ゴールドライン@37.64,140.05",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:35",
+   "id": "福島県:34",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "新郷荻野停車場線",
@@ -1061,13 +1062,14 @@
     37.616937,
     139.722633
    ],
+   "overrideKey": "新郷荻野停車場線@37.64,139.66",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:36",
+   "id": "福島県:35",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "高萩塙線",
@@ -1090,13 +1092,14 @@
     36.89,
     140.502822
    ],
+   "overrideKey": "高萩塙線@36.87,140.57",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:37",
+   "id": "福島県:36",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "下川内竜田停車場線",
@@ -1119,6 +1122,7 @@
     37.282401,
     140.884579
    ],
+   "overrideKey": "下川内竜田停車場線@37.28,140.98",
    "tags": [
     "winding",
     "forest",
@@ -1126,7 +1130,7 @@
    ]
   },
   {
-   "id": "福島県:38",
+   "id": "福島県:37",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道252号",
@@ -1149,13 +1153,14 @@
     37.306982,
     139.234872
    ],
+   "overrideKey": "国道252号@37.31,139.20",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:39",
+   "id": "福島県:38",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "緑資源幹線林道 飯豊・檜枝岐線",
@@ -1178,13 +1183,14 @@
     37.378634,
     139.718581
    ],
+   "overrideKey": "緑資源幹線林道 飯豊・檜枝岐線@37.38,139.67",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:40",
+   "id": "福島県:39",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "上戸渡広野線",
@@ -1207,6 +1213,7 @@
     37.213062,
     140.852821
    ],
+   "overrideKey": "上戸渡広野線@37.21,140.99",
    "tags": [
     "winding",
     "forest",
@@ -1214,7 +1221,7 @@
    ]
   },
   {
-   "id": "福島県:41",
+   "id": "福島県:40",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "いわき上三坂小野線",
@@ -1237,13 +1244,14 @@
     37.084408,
     140.682569
    ],
+   "overrideKey": "いわき上三坂小野線@37.07,140.69",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:42",
+   "id": "福島県:41",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "林道大霊山線",
@@ -1267,13 +1275,14 @@
     140.68705
    ],
    "reshaped": true,
+   "overrideKey": "林道大霊山線@37.78,140.67",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:43",
+   "id": "福島県:42",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "山口渡利線",
@@ -1296,12 +1305,13 @@
     37.749898,
     140.472562
    ],
+   "overrideKey": "山口渡利線@37.75,140.53",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:44",
+   "id": "福島県:43",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "才鉢前山線",
@@ -1324,45 +1334,13 @@
     36.992223,
     140.617872
    ],
+   "overrideKey": "才鉢前山線@37.01,140.68",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:45",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "蔵王エコーライン",
-   "ref": "",
-   "highway": "secondary",
-   "osmId": null,
-   "spotCount": 0,
-   "tags": [
-    "winding",
-    "flowing"
-   ],
-   "title": null,
-   "note": null,
-   "polyline": "{evgF}wxwYz@o@`ADz@xAHdChAT^qGe@aAwAy@Ow@f@w@vBNZu@U}@iHoFMcBj@s@|Kz@nFfFdIjA~DCvAi@vCqFCoAg@BqA|BgA\\oCYqAmA}ARQy@vA{@lBd@`Bk@vBmEtDiBLs@c@_@eC`AaEW]m@`@m@fEg@dGkFk@o@_ExAaA[Us@ViA|BoBvBgRMmAaCiCWgDtD_`@aAqBsFuD_AwAu@aCOeDh@}DrA_CnHoAhDRj@i@PwAk@mAcEiCkFmNaFm@Q{@f@UhGv@jK{EnBmCnIg@nGcCvAdAh@_@o@uBeCiAwHTeFgBeJlAyD_BiC_@]q@f@eAvJkAxGwBzJ_HhEYOiAcIaBsCR{DzBg@k@tD{DnBsDbCoI|FcKpBiJs@I}DlHyHdHwBg@m@sCzAiElC{AQeAeKjAgMpHiDUw@yADqBlKkMBcCu@s@oEVsMqCeDFDeAnBq@pJaHt@}AAoAm@_AkAUiJxDoC]qAeByEuPD_CfC_JbEkEf@sA?kCsBgLXcDtM_VtAu@hGu@lCqBz@iDEkK",
-   "pointCount": 145,
-   "start": [
-    38.12974,
-    140.37903
-   ],
-   "end": [
-    38.12258,
-    140.44685
-   ],
-   "lengthKm": 14.94,
-   "curviness": 391.4,
-   "flow": 40.9,
-   "turnCount": 143,
-   "score": 87,
-   "baseScore": 87,
-   "added": true
-  },
-  {
-   "id": "福島県:46",
+   "id": "福島県:44",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "八溝山線",
@@ -1385,13 +1363,14 @@
     36.93847,
     140.255183
    ],
+   "overrideKey": "八溝山線@37.01,140.33",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:47",
+   "id": "福島県:45",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "湯野上会津高田線",
@@ -1414,12 +1393,13 @@
     37.308268,
     139.882414
    ],
+   "overrideKey": "湯野上会津高田線@37.33,139.86",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:48",
+   "id": "福島県:46",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "小名浜小野線",
@@ -1442,52 +1422,13 @@
     37.127743,
     140.777284
    ],
+   "overrideKey": "小名浜小野線@37.10,140.77",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:49",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "蔵王ハイライン",
-   "ref": "",
-   "highway": "tertiary",
-   "osmId": null,
-   "spotCount": 0,
-   "tags": [
-    "winding",
-    "flowing"
-   ],
-   "title": null,
-   "note": null,
-   "polyline": "k_ugFaufxYoJ}Lc@AEh@dBfGRnFaAxFz@hGq@z@aAc@cCyRe@kBa@Q[v@|@tG}BtIqAzBHf@",
-   "pointCount": 18,
-   "start": [
-    38.12358,
-    140.45025
-   ],
-   "end": [
-    38.12747,
-    140.44666
-   ],
-   "lengthKm": 1.64,
-   "curviness": 435.6,
-   "flow": 44.7,
-   "turnCount": 16,
-   "score": 86.4,
-   "baseScore": 86.4,
-   "added": true,
-   "toll": "full",
-   "tollKm": 1.64,
-   "tollNames": [
-    "蔵王ハイライン"
-   ],
-   "tollAuto": "full",
-   "tollAutoKm": 1.64
-  },
-  {
-   "id": "福島県:50",
+   "id": "福島県:47",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道289号旧道",
@@ -1510,13 +1451,14 @@
     36.958719,
     140.54021
    ],
+   "overrideKey": "国道289号旧道@36.99,140.50",
    "tags": [
     "flowing",
     "caution"
    ]
   },
   {
-   "id": "福島県:51",
+   "id": "福島県:48",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "広域基幹林道花塚線",
@@ -1539,13 +1481,14 @@
     37.632115,
     140.662568
    ],
+   "overrideKey": "広域基幹林道花塚線@37.68,140.66",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:52",
+   "id": "福島県:49",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "緑資源幹線林道 飯豊・檜枝岐線",
@@ -1568,13 +1511,14 @@
     37.505516,
     139.767773
    ],
+   "overrideKey": "緑資源幹線林道 飯豊・檜枝岐線@37.47,139.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:53",
+   "id": "福島県:50",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "湯の岳別所線",
@@ -1597,6 +1541,7 @@
     37.030411,
     140.79003
    ],
+   "overrideKey": "湯の岳別所線@37.00,140.82",
    "title": "湯ノ岳パノラマライン",
    "tags": [
     "winding",
@@ -1604,7 +1549,7 @@
    ]
   },
   {
-   "id": "福島県:54",
+   "id": "福島県:51",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "湖南湊線",
@@ -1627,13 +1572,14 @@
     37.412878,
     140.110761
    ],
+   "overrideKey": "湖南湊線@37.43,140.07",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:55",
+   "id": "福島県:52",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "馬場平杉田線",
@@ -1656,13 +1602,14 @@
     37.579916,
     140.352231
    ],
+   "overrideKey": "馬場平杉田線@37.56,140.41",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:56",
+   "id": "福島県:53",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "古殿須賀川線",
@@ -1685,13 +1632,14 @@
     37.172618,
     140.468079
    ],
+   "overrideKey": "古殿須賀川線@37.16,140.52",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:57",
+   "id": "福島県:54",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "福島吾妻裏磐梯線",
@@ -1724,7 +1672,7 @@
    "added": true
   },
   {
-   "id": "福島県:58",
+   "id": "福島県:55",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "下郷会津本郷線",
@@ -1747,13 +1695,14 @@
     37.359355,
     139.871789
    ],
+   "overrideKey": "下郷会津本郷線@37.33,139.86",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:59",
+   "id": "福島県:56",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "原町二本松線",
@@ -1776,12 +1725,13 @@
     37.603858,
     140.672854
    ],
+   "overrideKey": "原町二本松線@37.62,140.71",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:60",
+   "id": "福島県:57",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道399号",
@@ -1804,6 +1754,7 @@
     37.692674,
     140.69259
    ],
+   "overrideKey": "国道399号@37.57,140.74",
    "title": "あぶくまロマンチック街道",
    "tags": [
     "winding",
@@ -1811,7 +1762,7 @@
    ]
   },
   {
-   "id": "福島県:61",
+   "id": "福島県:58",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道399号",
@@ -1834,13 +1785,14 @@
     37.257911,
     140.840966
    ],
+   "overrideKey": "国道399号@37.13,140.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:62",
+   "id": "福島県:59",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "神俣停車場川前線",
@@ -1863,13 +1815,14 @@
     37.207421,
     140.749595
    ],
+   "overrideKey": "神俣停車場川前線@37.32,140.66",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:63",
+   "id": "福島県:60",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道352号",
@@ -1892,13 +1845,14 @@
     37.080926,
     139.424485
    ],
+   "overrideKey": "国道352号@37.00,139.26",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:64",
+   "id": "福島県:61",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "三株下市萱小川線",
@@ -1921,6 +1875,7 @@
     37.126605,
     140.854222
    ],
+   "overrideKey": "三株下市萱小川線@37.13,140.78",
    "tags": [
     "winding",
     "forest",
@@ -1928,7 +1883,7 @@
    ]
   },
   {
-   "id": "福島県:65",
+   "id": "福島県:62",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "山口保原線",
@@ -1951,12 +1906,13 @@
     37.797898,
     140.562182
    ],
+   "overrideKey": "山口保原線@37.77,140.51",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:66",
+   "id": "福島県:63",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道400号",
@@ -1979,12 +1935,13 @@
     37.282309,
     139.687047
    ],
+   "overrideKey": "国道400号@37.26,139.71",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:67",
+   "id": "福島県:64",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "磐梯吾妻レークライン",
@@ -2007,13 +1964,14 @@
     37.651284,
     140.169527
    ],
+   "overrideKey": "磐梯吾妻レークライン@37.67,140.10",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:68",
+   "id": "福島県:65",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "本宮土湯温泉線",
@@ -2036,13 +1994,14 @@
     37.654902,
     140.250016
    ],
+   "overrideKey": "本宮土湯温泉線@37.66,140.30",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:69",
+   "id": "福島県:66",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道459号",
@@ -2065,13 +2024,14 @@
     37.684386,
     139.720471
    ],
+   "overrideKey": "国道459号@37.67,139.61",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:70",
+   "id": "福島県:67",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "吉間田滝根線",
@@ -2094,12 +2054,13 @@
     37.293525,
     140.653717
    ],
+   "overrideKey": "吉間田滝根線@37.30,140.71",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:71",
+   "id": "福島県:68",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "林道岩舘・檜枝岐線",
@@ -2122,6 +2083,7 @@
     37.054738,
     139.478006
    ],
+   "overrideKey": "林道岩舘・檜枝岐線@37.02,139.44",
    "title": "尾瀬・小繋ライン",
    "tags": [
     "winding",
@@ -2129,7 +2091,7 @@
    ]
   },
   {
-   "id": "福島県:72",
+   "id": "福島県:69",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "大規模林道米沢下郷線",
@@ -2152,12 +2114,13 @@
     37.427348,
     140.027502
    ],
+   "overrideKey": "大規模林道米沢下郷線@37.39,140.03",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:73",
+   "id": "福島県:70",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "平松梁川線",
@@ -2180,13 +2143,14 @@
     37.85999,
     140.60831
    ],
+   "overrideKey": "平松梁川線@37.85,140.68",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:74",
+   "id": "福島県:71",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "古殿須賀川線",
@@ -2209,13 +2173,14 @@
     37.117522,
     140.567153
    ],
+   "overrideKey": "古殿須賀川線@37.15,140.52",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:75",
+   "id": "福島県:72",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "勿来浅川線",
@@ -2238,13 +2203,14 @@
     37.032603,
     140.524815
    ],
+   "overrideKey": "勿来浅川線@36.92,140.74",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:76",
+   "id": "福島県:73",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "小林会津宮下停車場線",
@@ -2267,13 +2233,14 @@
     37.310412,
     139.449095
    ],
+   "overrideKey": "小林会津宮下停車場線@37.36,139.52",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:77",
+   "id": "福島県:74",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "川前停車場上三坂線",
@@ -2296,13 +2263,14 @@
     37.201216,
     140.698681
    ],
+   "overrideKey": "川前停車場上三坂線@37.21,140.73",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:78",
+   "id": "福島県:75",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "草野大倉鹿島線",
@@ -2325,13 +2293,14 @@
     37.724228,
     140.870796
    ],
+   "overrideKey": "草野大倉鹿島線@37.69,140.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:79",
+   "id": "福島県:76",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "林道新鶴柳津線",
@@ -2354,12 +2323,13 @@
     37.44498,
     139.776178
    ],
+   "overrideKey": "林道新鶴柳津線@37.46,139.77",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:80",
+   "id": "福島県:77",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "片倉末続停車場線",
@@ -2382,12 +2352,13 @@
     37.173036,
     140.99361
    ],
+   "overrideKey": "片倉末続停車場線@37.18,140.95",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:81",
+   "id": "福島県:78",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "三株下市萱小川線",
@@ -2410,13 +2381,14 @@
     37.0247,
     140.564315
    ],
+   "overrideKey": "三株下市萱小川線@37.12,140.64",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:82",
+   "id": "福島県:79",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "湯川大町線",
@@ -2439,13 +2411,14 @@
     37.380272,
     140.022625
    ],
+   "overrideKey": "湯川大町線@37.41,139.99",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:83",
+   "id": "福島県:80",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "福島吾妻裏磐梯線",
@@ -2468,13 +2441,14 @@
     37.652768,
     140.176783
    ],
+   "overrideKey": "福島吾妻裏磐梯線@37.64,140.22",
    "title": "磐梯吾妻レークライン",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "福島県:84",
+   "id": "福島県:81",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "高陦田島線",
@@ -2497,13 +2471,14 @@
     37.309139,
     139.898933
    ],
+   "overrideKey": "高陦田島線@37.25,139.86",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:85",
+   "id": "福島県:82",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "湯川大町線",
@@ -2526,13 +2501,14 @@
     37.444544,
     139.967491
    ],
+   "overrideKey": "湯川大町線@37.41,139.99",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:86",
+   "id": "福島県:83",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "あぶくま洞都路線",
@@ -2555,13 +2531,14 @@
     37.434996,
     140.795197
    ],
+   "overrideKey": "あぶくま洞都路線@37.40,140.69",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:87",
+   "id": "福島県:84",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道252号",
@@ -2584,13 +2561,14 @@
     37.344555,
     139.312452
    ],
+   "overrideKey": "国道252号@37.31,139.24",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:88",
+   "id": "福島県:85",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "緑資源幹線林道 飯豊・檜枝岐線",
@@ -2613,6 +2591,7 @@
     37.510029,
     139.765994
    ],
+   "overrideKey": "緑資源幹線林道 飯豊・檜枝岐線@37.55,139.78",
    "tags": [
     "winding",
     "forest",
@@ -2620,7 +2599,7 @@
    ]
   },
   {
-   "id": "福島県:89",
+   "id": "福島県:86",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "湖南湊線",
@@ -2643,12 +2622,13 @@
     37.518985,
     140.018249
    ],
+   "overrideKey": "湖南湊線@37.45,140.05",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:90",
+   "id": "福島県:87",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道399号",
@@ -2671,13 +2651,14 @@
     37.741442,
     140.607714
    ],
+   "overrideKey": "国道399号@37.69,140.68",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:91",
+   "id": "福島県:88",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "会津若松三島線",
@@ -2700,12 +2681,13 @@
     37.508199,
     139.806352
    ],
+   "overrideKey": "会津若松三島線@37.48,139.78",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:92",
+   "id": "福島県:89",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "上移常葉線",
@@ -2728,6 +2710,7 @@
     37.514108,
     140.649045
    ],
+   "overrideKey": "上移常葉線@37.44,140.64",
    "tags": [
     "winding",
     "flowing",
@@ -2735,7 +2718,7 @@
    ]
   },
   {
-   "id": "福島県:93",
+   "id": "福島県:90",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "道木沢線",
@@ -2758,13 +2741,14 @@
     37.253061,
     140.043888
    ],
+   "overrideKey": "道木沢線@37.28,140.05",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:94",
+   "id": "福島県:91",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "浪江三春線",
@@ -2787,13 +2771,14 @@
     37.527796,
     140.855713
    ],
+   "overrideKey": "浪江三春線@37.50,140.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:95",
+   "id": "福島県:92",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "白河羽鳥線",
@@ -2816,13 +2801,14 @@
     37.165771,
     140.172597
    ],
+   "overrideKey": "白河羽鳥線@37.27,140.08",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:96",
+   "id": "福島県:93",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "舟津福良線",
@@ -2845,12 +2831,13 @@
     37.410621,
     140.126399
    ],
+   "overrideKey": "舟津福良線@37.39,140.09",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:97",
+   "id": "福島県:94",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "小野四倉線",
@@ -2873,12 +2860,13 @@
     37.243174,
     140.681477
    ],
+   "overrideKey": "小野四倉線@37.23,140.70",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:98",
+   "id": "福島県:95",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "石沢荻田線",
@@ -2901,12 +2889,13 @@
     37.591135,
     140.525464
    ],
+   "overrideKey": "石沢荻田線@37.56,140.58",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:99",
+   "id": "福島県:96",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "旅人勿来線",
@@ -2929,12 +2918,13 @@
     36.952754,
     140.705264
    ],
+   "overrideKey": "旅人勿来線@36.94,140.66",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:100",
+   "id": "福島県:97",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "原町二本松線",
@@ -2958,13 +2948,14 @@
     140.7174
    ],
    "reshaped": true,
+   "overrideKey": "原町二本松線@37.61,140.80",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:101",
+   "id": "福島県:98",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "原町浪江線",
@@ -2987,12 +2978,13 @@
     37.601489,
     140.920193
    ],
+   "overrideKey": "原町浪江線@37.59,140.89",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:102",
+   "id": "福島県:99",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "下郷会津本郷線",
@@ -3015,13 +3007,14 @@
     37.38339,
     139.878457
    ],
+   "overrideKey": "下郷会津本郷線@37.42,139.88",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:103",
+   "id": "福島県:100",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "いわき上三坂小野線",
@@ -3044,13 +3037,14 @@
     37.137511,
     140.640067
    ],
+   "overrideKey": "いわき上三坂小野線@37.11,140.66",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:104",
+   "id": "福島県:101",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "石川鴇子線",
@@ -3073,12 +3067,13 @@
     37.152813,
     140.480893
    ],
+   "overrideKey": "石川鴇子線@37.15,140.52",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:105",
+   "id": "福島県:102",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "飯谷大巻線",
@@ -3101,6 +3096,7 @@
     37.533004,
     139.721622
    ],
+   "overrideKey": "飯谷大巻線@37.50,139.67",
    "tags": [
     "winding",
     "flowing",
@@ -3108,7 +3104,7 @@
    ]
   },
   {
-   "id": "福島県:106",
+   "id": "福島県:103",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道349号",
@@ -3131,13 +3127,14 @@
     36.929316,
     140.541403
    ],
+   "overrideKey": "国道349号@36.87,140.44",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:107",
+   "id": "福島県:104",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "黒磯棚倉線",
@@ -3160,6 +3157,7 @@
     36.974142,
     140.199719
    ],
+   "overrideKey": "黒磯棚倉線@37.01,140.33",
    "tags": [
     "winding",
     "flowing",
@@ -3167,7 +3165,7 @@
    ]
   },
   {
-   "id": "福島県:108",
+   "id": "福島県:105",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "赤坂西野石川線",
@@ -3190,13 +3188,14 @@
     37.142412,
     140.45158
    ],
+   "overrideKey": "赤坂西野石川線@37.06,140.46",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:109",
+   "id": "福島県:106",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "常葉野川線",
@@ -3219,45 +3218,14 @@
     37.507479,
     140.722687
    ],
+   "overrideKey": "常葉野川線@37.44,140.65",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:110",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "ぶどうまつたけライン",
-   "ref": "",
-   "highway": "tertiary",
-   "osmId": null,
-   "spotCount": 0,
-   "tags": [
-    "flowing"
-   ],
-   "title": null,
-   "note": null,
-   "polyline": "abffFkftvYcDaDwAg@eYjCkO{EqLRiBg@uA}AgAeGiCmPGkIYqAiL}BwCsD}AQ{JnFkEj@qGwCkRwS{HuC_SC_LrEcStCcd@dAoGOeHqA{CoAiOsU{@[{@NsClEoDzCgEvHaPrEug@s@aJoD_XkAoh@g\\}`@s[wWed@cOsKwFoBeOCkMkFaRqA_C`AyB~CeAfDeAdIq@p@y@Bg@g@`AuJOsA_Cu@mGDaArAMjDmCvCwAIiFwCcALK`AZd@hBb@|@|@HjDi@lAyCnAyCmAkA`Ao@Cm@_ADmDeBoBy@YoCbBuAq@hAqFk@eG{J}PfBeEIyAwDcA_BqDiIuFmP?wP~AyNWyMvCaKGcKdEsVxA",
-   "pointCount": 93,
-   "start": [
-    37.88337,
-    140.1919
-   ],
-   "end": [
-    38.00835,
-    140.22738
-   ],
-   "lengthKm": 17.23,
-   "curviness": 157,
-   "flow": 30.4,
-   "turnCount": 89,
-   "score": 69.7,
-   "baseScore": 69.7,
-   "added": true
-  },
-  {
-   "id": "福島県:111",
+   "id": "福島県:107",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "相馬大内線",
@@ -3280,6 +3248,7 @@
     37.792382,
     140.911454
    ],
+   "overrideKey": "相馬大内線@37.83,140.86",
    "tags": [
     "winding",
     "flowing",
@@ -3287,7 +3256,7 @@
    ]
   },
   {
-   "id": "福島県:112",
+   "id": "福島県:108",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "会津若松裏磐梯線",
@@ -3310,13 +3279,14 @@
     37.663776,
     140.045474
    ],
+   "overrideKey": "会津若松裏磐梯線@37.73,140.06",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:113",
+   "id": "福島県:109",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "大内会津高田線",
@@ -3339,6 +3309,7 @@
     37.371433,
     139.856661
    ],
+   "overrideKey": "大内会津高田線@37.42,139.85",
    "tags": [
     "winding",
     "forest",
@@ -3346,7 +3317,7 @@
    ]
   },
   {
-   "id": "福島県:114",
+   "id": "福島県:110",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "国道349号",
@@ -3369,13 +3340,14 @@
     37.094896,
     140.542105
    ],
+   "overrideKey": "国道349号@36.98,140.55",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:115",
+   "id": "福島県:111",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "石井大子線",
@@ -3398,13 +3370,14 @@
     36.858974,
     140.350274
    ],
+   "overrideKey": "石井大子線@36.91,140.41",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "福島県:116",
+   "id": "福島県:112",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "折木筒木原久ノ浜線",
@@ -3427,12 +3400,13 @@
     37.198221,
     140.959888
    ],
+   "overrideKey": "折木筒木原久ノ浜線@37.20,140.99",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:117",
+   "id": "福島県:113",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "富岡大越線",
@@ -3455,12 +3429,13 @@
     37.350882,
     140.789296
    ],
+   "overrideKey": "富岡大越線@37.38,140.75",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:118",
+   "id": "福島県:114",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "浪江国見線",
@@ -3484,13 +3459,14 @@
     140.757
    ],
    "reshaped": true,
+   "overrideKey": "浪江国見線@37.76,140.69",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:119",
+   "id": "福島県:115",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "広野小高線",
@@ -3513,12 +3489,13 @@
     37.570096,
     141.019874
    ],
+   "overrideKey": "広野小高線@37.55,141.01",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:120",
+   "id": "福島県:116",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "塙大津港線",
@@ -3541,13 +3518,14 @@
     36.921576,
     140.529321
    ],
+   "overrideKey": "塙大津港線@36.96,140.41",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:121",
+   "id": "福島県:117",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "曲木中野目線",
@@ -3570,12 +3548,13 @@
     37.184277,
     140.43798
    ],
+   "overrideKey": "曲木中野目線@37.19,140.40",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:122",
+   "id": "福島県:118",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "柳渡戸常葉線",
@@ -3598,13 +3577,14 @@
     37.397873,
     140.693886
    ],
+   "overrideKey": "柳渡戸常葉線@37.44,140.65",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "福島県:123",
+   "id": "福島県:119",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "飯坂保原線",
@@ -3627,12 +3607,13 @@
     37.786821,
     140.543899
    ],
+   "overrideKey": "飯坂保原線@37.79,140.51",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "福島県:124",
+   "id": "福島県:120",
    "region": "fukushima",
    "regionName": "福島県",
    "name": "皿貝勿来停車場線",
@@ -3655,719 +3636,12 @@
     37.002494,
     140.710242
    ],
+   "overrideKey": "皿貝勿来停車場線@36.96,140.70",
    "tags": [
     "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:125",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "山都柳津線",
-   "ref": "151",
-   "highway": "secondary",
-   "lengthKm": 3.45,
-   "curviness": 273,
-   "flow": 20.9,
-   "turnCount": 45,
-   "score": 68,
-   "baseScore": 68,
-   "spotCount": 0,
-   "polyline": "k_cdF}xwsYkLaFmG_GwDyBiEuEkFsCoE[iAeBg@yB}FkBkDqG}BqKuAkMqBue@RkOy@SY{AsAs@{@kC@mDsDwF{DaLqHkH",
-   "pointCount": 23,
-   "start": [
-    37.539896,
-    139.718709
-   ],
-   "end": [
-    37.556272,
-    139.747054
-   ],
-   "tags": [
-    "winding",
-    "caution"
-   ]
-  },
-  {
-   "id": "福島県:126",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "母畑白河線",
-   "ref": "139",
-   "highway": "secondary",
-   "lengthKm": 5.07,
-   "curviness": 283.9,
-   "flow": 19.4,
-   "turnCount": 74,
-   "score": 67.9,
-   "baseScore": 67.9,
-   "spotCount": 0,
-   "polyline": "_s}aFwlhxYrFtGn@pBEjBaClGz@~HoCjGgA`LxIp]sAxJHlCuAdKQtIcBpGpAnErIpAjExDt@nBwA~DXlDRbAbFtGd@~G|E`Q~FdGfAlDzCxFjCYh@|LvCt@tBvGDhDw@rC}AdNx@xC\\pEzBvCx@`F",
-   "pointCount": 38,
-   "start": [
-    37.184638,
-    140.459163
-   ],
-   "end": [
-    37.173355,
-    140.412002
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:127",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "上川内川前線",
-   "ref": "287",
-   "highway": "secondary",
-   "lengthKm": 12.07,
-   "curviness": 271.9,
-   "flow": 18.8,
-   "turnCount": 175,
-   "score": 67.8,
-   "baseScore": 67.8,
-   "spotCount": 0,
-   "polyline": "q`sbFmxbzYdAo@fOnBpImHhMyHh@Bb@tAp@FlQmFfCZxE}@dFr@hIuHrEw@jF}CnFQnIqDtB[hH\\lE|BlF_BnHn@~AeAlIl@b\\VvFoCpDvAzEKhBn@jAvBo@dIf@xEOrGr@dB`AZ|J}BzFJfFmB|H_@~M}E|G_@`GaBpG`AhKcBdFn@vKCbPwInEY`SwDpA`A|ArClCjAr@~@hAzENpHtGrJF|CvClCzBI~CpA~@EdAy@tEuHhHm@vEfBzE~H`Fl@zErBjOmDhCkBhCzDrAp@n@IzBwClCH~@q@ZcF|@kBbABhGzCrDgCbAqCvCuD~DxBzBwEpDStCgEvCvAn@vFxAdC",
-   "pointCount": 90,
-   "start": [
-    37.294327,
-    140.757989
-   ],
-   "end": [
-    37.203665,
-    140.759773
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:128",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "白坂関辺線",
-   "ref": "388",
-   "highway": "secondary",
-   "lengthKm": 8.94,
-   "curviness": 254.9,
-   "flow": 20.3,
-   "turnCount": 112,
-   "score": 67.7,
-   "baseScore": 67.7,
-   "spotCount": 0,
-   "polyline": "cwjaFumbwYlLx@p@~BjBlCjEzChCjJnFdA\\yB~En@dEg@nDhAtDLzJaDxBjAtGG~JlIvK`BdCrZbIfToE|QIpD_AdEc@^OpD_@b@_BLe@`F{@rB_@BmBgByAD_FhEsGtDtEp_@]nCiJdJ_FpJeIjFoHbCwErDoAtCSnBjBbJA|A{C~F_AnDmD|BgDxL}ArQp@dHtB`EdFjCdAzAn@pMjDxIjAv@tCXz@v@NhAkC|HO~ArDpHj@~CiBnY",
-   "pointCount": 64,
-   "start": [
-    37.088021,
-    140.264754
-   ],
-   "end": [
-    37.079162,
-    140.200196
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:129",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "二本松安達線",
-   "ref": "129",
-   "highway": "secondary",
-   "lengthKm": 6.9,
-   "curviness": 204,
-   "flow": 24.3,
-   "turnCount": 58,
-   "score": 67.7,
-   "baseScore": 67.7,
-   "spotCount": 0,
-   "polyline": "{dmdFyvdxYo@l@_JnAcAeD}CSwH|B_KaHi@?oBcC[uI|@q_@oDCC_TiQo^oGgCgDiCyMgD{FQsHeAyCnBoBqEsE|BgC}@uOo@wGmB}ImAwDiF{@qJeEyTuCe[iA}DyGaIuEeCqBwBaHeCgDe@wIoG}Bs@o@y@{AoFuEcF",
-   "pointCount": 41,
-   "start": [
-    37.591977,
-    140.440295
-   ],
-   "end": [
-    37.632067,
-    140.481369
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:130",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "いわき石川線",
-   "ref": "14",
-   "highway": "primary",
-   "lengthKm": 3.4,
-   "curviness": 289,
-   "flow": 20.9,
-   "turnCount": 47,
-   "score": 67.5,
-   "baseScore": 67.5,
-   "spotCount": 0,
-   "polyline": "kz{`FcjtzYDsB|Eu@dDmBvBxHdBvBq@lAWjFbC`KxAzClFvCfEAtAnFxAvAhEU~Gp@pDzCzDn@hAnBdBlIxApC`@zBzBnWz@zDPtKhDbJ\\|U",
-   "pointCount": 27,
-   "start": [
-    37.011739,
-    140.847863
-   ],
-   "end": [
-    36.997064,
-    140.823343
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:131",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "石沢荻田線",
-   "ref": "303",
-   "highway": "secondary",
-   "lengthKm": 3.54,
-   "curviness": 286.8,
-   "flow": 19.5,
-   "turnCount": 52,
-   "score": 67.5,
-   "baseScore": 67.5,
-   "spotCount": 0,
-   "polyline": "}uadFooeyY_BWkCd@_@l@L|G~BhIcHlGDnDwA|DwGhGaG`IkCp@{EtDiC|FqE\\qGdD_Cq@iGIgEiAiCGaB`@aDvB_M`Ec@|@B|AxArFpClG_CzNYbO",
-   "pointCount": 29,
-   "start": [
-    37.533266,
-    140.608084
-   ],
-   "end": [
-    37.550322,
-    140.585665
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:132",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "林道　馬場平線",
-   "ref": "",
-   "highway": "tertiary",
-   "lengthKm": 3.09,
-   "curviness": 300.6,
-   "flow": 18.6,
-   "turnCount": 50,
-   "score": 67.3,
-   "baseScore": 67.3,
-   "spotCount": 0,
-   "polyline": "y`vaFo|jyYT|E`BhHItHbDjIp@l@j@Kv@gDbAu@rBnA~BtCxBzFjD~Av@~@x@zBAbFdCtEzCvC`BpJv@~AnBrA|Cn@nMtHjC~Bb@~AMxGb@jBfB~C|AxKhFlEj@xA",
-   "pointCount": 31,
-   "start": [
-    37.145892,
-    140.635757
-   ],
-   "end": [
-    37.13092,
-    140.612154
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:133",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "浪江国見線",
-   "ref": "31",
-   "highway": "primary",
-   "lengthKm": 6.8,
-   "curviness": 283,
-   "flow": 20.1,
-   "turnCount": 96,
-   "score": 67.3,
-   "baseScore": 67.3,
-   "spotCount": 0,
-   "polyline": "oiqeFowqyY~An@K`B~@hDeAdI_@lNn@lKiAfDe@lE{BlEcAZqEc@wFhIaCnAaBJ{DiAu@`BgD`@cBlGgIrNsCrCyBLiCpHkGDsCt@k@vFeEhIgB\\gDs@uAfDwKdEsHjFwB|CkEjA{A~EaBlCcBjNaJrPaAjNmDhLiBdE_IbLsBnEu@bMcAxg@{DBuOpC",
-   "pointCount": 47,
-   "start": [
-    37.777038,
-    140.670803
-   ],
-   "end": [
-    37.809378,
-    140.619051
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:134",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "石川鴇子線",
-   "ref": "140",
-   "highway": "secondary",
-   "lengthKm": 12.37,
-   "curviness": 276.4,
-   "flow": 17.9,
-   "turnCount": 191,
-   "score": 67.2,
-   "baseScore": 67.2,
-   "spotCount": 0,
-   "polyline": "o}cbFm|cyY|CbExClA`E~@lG[hCb@vF`DjCtEfAl@xEJjJs@xBv@pErEj@dBTxDcAlGA`IbGdMQnETbAdCxAlD}@p@L|DjD|AbFjDhCh@jBxAzAfFq@rQjAvFgBnJ|C`IeBh@fKdBxG|CbRShTj@|E|AdCdDlCSzE\\~GjBzAtFhAnGzNCrE{AjA}DnAmAnGjBpFhAvGdBtDHlAgAnH\\zBzAdBxFnAzE?hErCO|E`@bB|FhFbFbMxFfBb@pKn@xA~BfCnFjCnApAnBtFvA~Pb@bAjCTtB~@jEjIhA|@hEhAvBbE`AZlEcAdFf@t@bF?`Cz@~AfIa@`B`@f@`AXrFnDjIRbBwAdHfBvB`HrTaA~Ih@rCdAjBpJfIdChDrKzElDzDfCzA",
-   "pointCount": 101,
-   "start": [
-    37.217041,
-    140.599907
-   ],
-   "end": [
-    37.155115,
-    140.516404
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:135",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "牧ノ内長沼線",
-   "ref": "292",
-   "highway": "secondary",
-   "lengthKm": 3.55,
-   "curviness": 248.4,
-   "flow": 19.1,
-   "turnCount": 46,
-   "score": 67.2,
-   "baseScore": 64.3,
-   "spotCount": 1,
-   "polyline": "wolbFwkuvYcFsA{NcBaA}NkAiGoAcAsBs@kIKaHnCmG_DwFuMuHcAZqFwAyEU}D[g@oQzAkFsAiCCeFhBs@GsDiD}C}GcHcEqF_H",
-   "pointCount": 25,
-   "start": [
-    37.260924,
-    140.197878
-   ],
-   "end": [
-    37.28469,
-    140.213753
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:136",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "谷田川三春線",
-   "ref": "144",
-   "highway": "secondary",
-   "lengthKm": 5.37,
-   "curviness": 270.4,
-   "flow": 19.6,
-   "turnCount": 74,
-   "score": 67.2,
-   "baseScore": 67.2,
-   "spotCount": 0,
-   "polyline": "o{fcFirmxYpEd@tE]jFfAjEqCzCuE~N_AdATnF`H|M|BrOkJpKyBbDwBxBkCl@qBK_BiBgFCyM`@{@~DoCfCf@lL`MbRxEhD`F`FtEvP@\\}@y@sErAs@nBTfArDpCoAfD`@xExFz@OlAsCvAmA`E]jMt@",
-   "pointCount": 39,
-   "start": [
-    37.395918,
-    140.485651
-   ],
-   "end": [
-    37.3585,
-    140.489452
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:137",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "中ノ沢熱海線",
-   "ref": "24",
-   "highway": "primary",
-   "lengthKm": 14.16,
-   "curviness": 265.1,
-   "flow": 19.9,
-   "turnCount": 189,
-   "score": 67.1,
-   "baseScore": 67.1,
-   "spotCount": 0,
-   "polyline": "ajqdFepxvY`B}E`B{LgCaLJuVy@{UtLwS|By@hErBjBIfLiPh@oDCaEuEs^IaDjA{G|AeCdBkAfEs@jl@h@xA\\rIlFpDHvByAfAwDiAeTdAmAdFu@|E|AlQvKpJfA|HM|DeEv[kIxBkDhBqG`AkAlCw@bF\\vOeFLoB_D{ASo@R}@xC_AtEqDfEdA|DeAfKuQ~@RLlAkDxDIfAd@x@p@GnBuBzCRt@c@DsAoB_DJo@p@Yp@^tAdDbEp@t@pDd@Rn@Mp@mAiC_F@{@~MyJp@VHjAcFrEs@~AX|BfADpCcE~BgAzNU~G_DlKk@n@q@\\sDdAo@jEtBdBRbUgAvJbFzB@jg@{SdOmEpIqInE{@xPsI",
-   "pointCount": 96,
-   "start": [
-    37.61329,
-    140.213947
-   ],
-   "end": [
-    37.533531,
-    140.265957
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:138",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "下郷会津本郷線",
-   "ref": "131",
-   "highway": "secondary",
-   "lengthKm": 4.33,
-   "curviness": 250.4,
-   "flow": 18.4,
-   "turnCount": 59,
-   "score": 66.9,
-   "baseScore": 64,
-   "spotCount": 1,
-   "polyline": "qjzbF}rstYnJhFfDZpJqAbJmD|A`CyAjF@`AfAhBlBrAbGd@|Eu@xDaBnAThJpQ`DdEfBDzBvErBbClB`KvA~BxDvAhBFzA]|DuChRuGfFfEdFjB~EpDfE|EnAlGl@v@hDfAtK~@",
-   "pointCount": 34,
-   "start": [
-    37.331768,
-    139.861109
-   ],
-   "end": [
-    37.301549,
-    139.846094
-   ],
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:139",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "国道459号",
-   "ref": "459",
-   "highway": "trunk",
-   "lengthKm": 9.43,
-   "curviness": 297.7,
-   "flow": 21.6,
-   "turnCount": 130,
-   "score": 66.8,
-   "baseScore": 66.8,
-   "spotCount": 0,
-   "polyline": "m`~dFcsftYmC~ICjC|BZ`KjFtBdC^zARxP\\`CnFdSnAtAdBf@rB]dF{DxAwDzAKxFjE~AfGvBNxA|@jBnGtFlGfF\\lD~E~GvGnIzB~C~Ex@`@bJn@bFkBtCQlFj@|QiCnJhFhFXdAbBg@d@uApH{FtI}@~JaD|ImAtIeH|JyDbMeCvBcF`@aDfB{@jBK`Eo@`BgAx@yCf@iOnKaFtG_FvCuAhFXzA}EhCcBlCqCzA_@xAdAbDO~Bc@hBiCzBqA`JuFvC}DbEsAjJL`AnBnCHhGkAxDCzCx@bEg@rEsAh@",
-   "pointCount": 77,
-   "start": [
-    37.678312,
-    139.794585
-   ],
-   "end": [
-    37.670159,
-    139.734286
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:140",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "国見福島線",
-   "ref": "353",
-   "highway": "secondary",
-   "lengthKm": 4.04,
-   "curviness": 241.2,
-   "flow": 21.7,
-   "turnCount": 45,
-   "score": 66.7,
-   "baseScore": 66.7,
-   "spotCount": 0,
-   "polyline": "g~`fFaktxYkMgK}CdHk@?mGkF{LaCiArA_DgBaDWuQ|BkGhCiT?yD~K{Cb@qAdBgIcAyDv@sEDgGgCqBBgDy@oFuCyKs@qCyAyH_IsCiE}BmA",
-   "pointCount": 27,
-   "start": [
-    37.857164,
-    140.52033
-   ],
-   "end": [
-    37.889159,
-    140.524224
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:141",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "二本松川俣線",
-   "ref": "117",
-   "highway": "secondary",
-   "lengthKm": 16.67,
-   "curviness": 248.3,
-   "flow": 18.6,
-   "turnCount": 222,
-   "score": 66.5,
-   "baseScore": 66.5,
-   "spotCount": 0,
-   "polyline": "gvodFoiixY`@mZoGoA}GiL_D_QiCgH_CgOsA}Cw@cHGeAj@aDbE_DhDiKDuEu@sIsB}FuHn@wJiGw@wAq@kI_GeIqOqEeE{BuB}BcFiYKiFgAqDJgRt@uJ`@gApD}Cb@mBZoOaBwIP}JlBaQ[cCwCaC_EyJSiBBoPxBoOr@mAhFqCpBsB~HmQ^_CGuCu@{BsJ}IImAhAwFKmF_AiBaDw@s@aA}AaTLaCfCuIY}KdA_Sx@oGhBaGl@cOiAgIiB_DuGwDcNuBqHLkIqByE}BaG{@cBoCkLmByAwCg@kCmGoCwBqL_A}@oAG_CkAiCkEmCoCEwHi@uAsBoByD{@oBoFiA[wCRoIgEg@L{AxCeB?gAaAaCgFmDoDc@}CyCSeAaBqBLcDkB]fAy@D?m@z@iADmBgBgEaB{AwA{CuDoBqLqC_B_BoFeKEyS|AgEMyBiCeCsH}DwScUcIyC}Eq@",
-   "pointCount": 122,
-   "start": [
-    37.605002,
-    140.463759
-   ],
-   "end": [
-    37.661125,
-    140.594608
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:142",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "二本松金屋線",
-   "ref": "73",
-   "highway": "primary",
-   "lengthKm": 5.18,
-   "curviness": 253.8,
-   "flow": 21.5,
-   "turnCount": 61,
-   "score": 66.3,
-   "baseScore": 66.3,
-   "spotCount": 0,
-   "polyline": "{_dcF_f~wYs@oDk@_Ki@qAq@u@gDP}@[kI{IeGiEuEkBsCmCg@Xs@xBK`FgAzAwB`@kG}@oGdCmNoBkIfBw@o@uB}F_Bi@uFrCiDjDiAJ{JuEqGdAwBeB{EUaHpAaCgAkCqEgCdBgBTuAvAqMnC{IqH{WoXgAq@gFR",
-   "pointCount": 41,
-   "start": [
-    37.381256,
-    140.406884
-   ],
-   "end": [
-    37.419212,
-    140.417966
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:143",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "斎藤下行合線",
-   "ref": "297",
-   "highway": "secondary",
-   "lengthKm": 4.49,
-   "curviness": 245.2,
-   "flow": 20.8,
-   "turnCount": 53,
-   "score": 66.2,
-   "baseScore": 66.2,
-   "spotCount": 0,
-   "polyline": "}lfcFw|fxYC[X`BlCxBrB~DfAfMhCzBl@tC`CjFEvEt@zDQzAqBpDu@rDhA`F@hDwDjO{AvJ}@zJZdFbBfE|GvGnH`EpFjAxKdJdF|BtAjFCrDl@|CdCrELtF|@dFu@vLmBjGFpJxCxLjA`B",
-   "pointCount": 37,
-   "start": [
-    37.393592,
-    140.451484
-   ],
-   "end": [
-    37.382204,
-    140.410361
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:144",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "奥川新郷線",
-   "ref": "361",
-   "highway": "secondary",
-   "lengthKm": 5.35,
-   "curviness": 267.5,
-   "flow": 18.8,
-   "turnCount": 76,
-   "score": 66.1,
-   "baseScore": 66.1,
-   "spotCount": 0,
-   "polyline": "}~vdFejmsYaKaCuDiBwQLyHwBuAJiF~BcH}CkDsCuLkG_UsFiFDkDcCsBd@_DjC_Iz@iFzAkIgAaIaE}DVeIeBcE?sQhNoB`EeD`E_EnMiA~KuCvEe@bGwB`DoAMe@n@Xp@zBKEz@a@r@_C@}A~BCfA",
-   "pointCount": 39,
-   "start": [
-    37.64223,
-    139.665155
-   ],
-   "end": [
-    37.680687,
-    139.657041
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:145",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "広野小高線",
-   "ref": "391",
-   "highway": "secondary",
-   "lengthKm": 4.99,
-   "curviness": 229.9,
-   "flow": 21.2,
-   "turnCount": 54,
-   "score": 65.8,
-   "baseScore": 65.8,
-   "spotCount": 0,
-   "polyline": "kjcdFg_t{YjENfHm@zLvBlXrR`AcFq@cMgAsF?sJnCSrCuBj@sB|K_GRq@{@cEf@gBxFgBlg@}\\kA}ED{IcC_K`TsJfE{@bB}AdAUlEFbEoAlGv@lJjD",
-   "pointCount": 29,
-   "start": [
-    37.541661,
-    141.009961
-   ],
-   "end": [
-    37.512279,
-    141.02919
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:146",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "谷田川三春線",
-   "ref": "144",
-   "highway": "secondary",
-   "lengthKm": 5.1,
-   "curviness": 277.5,
-   "flow": 17.9,
-   "turnCount": 79,
-   "score": 65.8,
-   "baseScore": 65.8,
-   "spotCount": 0,
-   "polyline": "wp~bFqklxY^?fErFjB@bAn@`@bDFrGlI|FbB`HbB~BbEnArGJ~L~ClD_@jC_DlIu@pDzGnBlAhGr@hFlBbFJZp@JpDx@~BnB|ChIvH`CjFhDhBpCJnClEvDlBjBtB`I~BrFsBlBBjFnC`GzApFtDhDGtI`IrOh@",
-   "pointCount": 41,
-   "start": [
-    37.353241,
-    140.479453
-   ],
-   "end": [
-    37.315996,
-    140.457692
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:147",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "浅川古殿線",
-   "ref": "276",
-   "highway": "secondary",
-   "lengthKm": 6.89,
-   "curviness": 278.6,
-   "flow": 17.3,
-   "turnCount": 111,
-   "score": 65.7,
-   "baseScore": 65.7,
-   "spotCount": 0,
-   "polyline": "almaF_elxYvB~IhA|BWjEp@~EQfE~AbG}E~We@d^bBjLVjKrA`Gg@rJXzCnArCrApApDzAlCL~BjCxE`BbDrDp@jD`ApACvEtAxBTzA}@bE\\pF[fGrCvGs@pHrArDfCxBrHxAfApDyAbPhBhF`@tLhAzEe@|ETjAtElC~Rz@bFvBxGf@~DaCx@Hh@tEfBlCXbFpAhDAdAiCbJ~C~N",
-   "pointCount": 54,
-   "start": [
-    37.10161,
-    140.4784
-   ],
-   "end": [
-    37.081216,
-    140.419695
-   ],
-   "tags": [
-    "winding",
-    "caution"
-   ]
-  },
-  {
-   "id": "福島県:148",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "小野田母神線",
-   "ref": "13",
-   "highway": "primary",
-   "lengthKm": 10.13,
-   "curviness": 280.8,
-   "flow": 17.9,
-   "turnCount": 159,
-   "score": 65.6,
-   "baseScore": 65.6,
-   "spotCount": 0,
-   "polyline": "{mqbFu`gyYmGpMUdIk@nEt@lClDbFKxETjCr@bDrBlEV|Bq@pAoCdBm@fAP|KaEjMNlG{ApJnDfE_@zA}CxCaAlCjAjHMlC_AxAcERaAh@cJdWsEpJkApFYnE{EbKo@fJ}@hCaHzFqAbEq@~GcGbHMtAf@rAlEtBr@bAn@vFwCfEkC`JwCzDo@tIkD~GmFjOqBtMoGtF{ErJ}@vDTlH}ClGk@lEhAzDvHjMbD|BXbBi@jAgF|AaE|Du@lBZ`C_@v@sBn@FdAj@@`CuA~AGhHhGxImC`NbAlE|B~EI~R`L|C~CdLzDdCc@",
-   "pointCount": 80,
-   "start": [
-    37.286215,
-    140.615947
-   ],
-   "end": [
-    37.289825,
-    140.536809
-   ],
-   "tags": [
-    "flowing"
-   ]
-  },
-  {
-   "id": "福島県:149",
-   "region": "fukushima",
-   "regionName": "福島県",
-   "name": "広野小高線",
-   "ref": "391",
-   "highway": "secondary",
-   "lengthKm": 4.7,
-   "curviness": 195.5,
-   "flow": 23.5,
-   "turnCount": 39,
-   "score": 65.5,
-   "baseScore": 65.5,
-   "spotCount": 0,
-   "polyline": "yezcF}tw{Y`OTHgEYa@e@oSgGsFkSKq@_@{@_Du@s@aDu@wJi@__@jCeGtByc@vEgHm@qK`@mDlCmEbAMh@{F~@e\\rNmEPyFcA",
-   "pointCount": 24,
-   "start": [
-    37.494849,
-    141.028793
-   ],
-   "end": [
-    37.526629,
-    141.029965
-   ],
-   "tags": [
     "flowing"
    ]
   }
  ],
- "hiddenCount": 20
+ "hiddenCount": 33
 }

@@ -1,0 +1,45 @@
+{
+ "prefecture": "神奈川県",
+ "romaji": "kanagawa",
+ "builtAt": "2026-10-24T12:55:17.342Z",
+ "count": 1,
+ "source": "openstreetmap",
+ "sourceUrl": "https://www.openstreetmap.org/",
+ "attribution": "© OpenStreetMap contributors（ODbL）",
+ "candidates": [
+  {
+   "id": "osmw-kanagawa-137989819",
+   "prefecture": "神奈川県",
+   "city": "",
+   "sourceRoad": "林道玄倉線",
+   "matchedName": "林道玄倉線",
+   "from": "",
+   "to": "",
+   "target": "vehicle:conditional=no @ (Jul-Sep)",
+   "targetLabel": "二輪すべて",
+   "confidence": "OSM",
+   "reason": "OSM の vehicle:conditional=no @ (Jul-Sep) から期間を読んだ。毎年の開通日・閉鎖日を道路管理者の発表で確かめること",
+   "chainPolyline": "wfgwEcb{oYPv@m@t@}Bf@uFxDf@lAnGpARlIgAnBrBvA",
+   "polyline": "wfgwEcb{oYPv@m@t@}Bf@uFxDf@lAnGpARlIgAnBrBvA",
+   "lengthMeters": 805,
+   "geocode": null,
+   "kind": "winterClosure",
+   "minCc": null,
+   "maxCc": null,
+   "activePeriod": {
+    "from": "07-01",
+    "to": "09-30"
+   },
+   "activeMonths": [
+    7,
+    8,
+    9
+   ],
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "fragmentCount": 1,
+   "alreadyRegistered": false
+  }
+ ]
+}

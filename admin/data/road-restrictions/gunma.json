@@ -1,58 +1,276 @@
 {
-  "romaji": "gunma",
-  "updatedAt": "2026-09-28T09:21:23.267Z",
-  "count": 3,
-  "restrictions": [
-    {
-      "id": "osm-gunma-792751226",
-      "kind": "noMotorcycle",
-      "name": "上信自動車道",
-      "prefecture": "群馬県",
-      "polyline": "cu`~EgednYj@dIg@dGuIfUpAtVQfDoEzLsS~\\gFbNiB|Nb@lWqAlIw\\vz@gEhDqOpEmYf_@sAfDsA`N_BjG",
-      "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": 125,
-      "checkedAt": "2026-09-28",
-      "source": "admin",
-      "origin": "osm"
-    },
-    {
-      "id": "osm-gunma-68423668",
-      "kind": "noMotorcycle",
-      "name": "鬼押ハイウエー",
-      "prefecture": "群馬県",
-      "polyline": "_ge}EajwlYc\\h@ac@~Q}]fK}h@r_@ox@xo@ql@htA}AtAyN}EaXiEeZkHeLoGqHwAw\\gO{LmKyd@qH{G}EmFnAmIOyn@wS{L`CcJ|H_Fj@e@zB@|Hy@lAyJcCwD?m|@dKiFYcl@}TwGTyDhD}RvIsT{EaTmB",
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": 125,
-      "checkedAt": "2026-08-16",
-      "source": "admin",
-      "origin": "osm"
-    },
-    {
-      "id": "osm-gunma-68423779",
-      "kind": "noMotorcycle",
-      "name": "鬼押ハイウエー",
-      "prefecture": "群馬県",
-      "polyline": "qmm}E{gqlYlCGpBkBhKfDrBs@",
-      "note": null,
-      "activeMonths": null,
-      "activeDays": null,
-      "includesHoliday": false,
-      "activeHours": null,
-      "minCc": null,
-      "maxCc": 125,
-      "checkedAt": "2026-08-16",
-      "source": "admin",
-      "origin": "osm"
-    }
-  ]
+ "romaji": "gunma",
+ "updatedAt": "2026-10-24T23:09:19.199Z",
+ "count": 11,
+ "restrictions": [
+  {
+   "id": "osm-gunma-792751226",
+   "kind": "noMotorcycle",
+   "name": "上信自動車道",
+   "prefecture": "群馬県",
+   "polyline": "cu`~EgednYj@dIg@dGuIfUpAtVQfDoEzLsS~\\gFbNiB|Nb@lWqAlIw\\vz@gEhDqOpEmYf_@sAfDsA`N_BjG",
+   "note": "利用者の確認（2026-09-28）: 125cc以下の二輪は通行不可",
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 125,
+   "checkedAt": "2026-09-28",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "osm-gunma-68423668",
+   "kind": "noMotorcycle",
+   "name": "鬼押ハイウエー",
+   "prefecture": "群馬県",
+   "polyline": "_ge}EajwlYc\\h@ac@~Q}]fK}h@r_@ox@xo@ql@htA}AtAyN}EaXiEeZkHeLoGqHwAw\\gO{LmKyd@qH{G}EmFnAmIOyn@wS{L`CcJ|H_Fj@e@zB@|Hy@lAyJcCwD?m|@dKiFYcl@}TwGTyDhD}RvIsT{EaTmB",
+   "note": null,
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 125,
+   "checkedAt": "2026-08-16",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "osm-gunma-68423779",
+   "kind": "noMotorcycle",
+   "name": "鬼押ハイウエー",
+   "prefecture": "群馬県",
+   "polyline": "qmm}E{gqlYlCGpBkBhKfDrBs@",
+   "note": null,
+   "activeMonths": null,
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": 125,
+   "checkedAt": "2026-08-16",
+   "source": "admin",
+   "origin": "osm"
+  },
+  {
+   "id": "winter-gunma-shigakusatsu",
+   "kind": "winterClosure",
+   "name": "志賀草津道路",
+   "prefecture": "群馬県",
+   "polyline": "woo~Est{lY}CfWcA|@wE`@mBnHcAlAuJAqCk@yByBoDyHmHmBoBhAsEfLuKvCwAhCR`AhE|@b@bAiFpKkCnJC~@h@RpBkD`AX]pC}AlBI|@dALnB_DzCqM~@gBrCmBjAHZfBmAlF{C|Fb@fG~BAf@l@IvByApEdF~GpEQp@v@k@fCyAhA{CRcEa@q@zDdD`HfDd@dE|BI~@gC?Yh@~B~JW~F~@dChDfAOl@yAMB|@bBz@bCGv@p@vBrIB|@e@Z_BkAo@sBi@Bs@vLzAvGMhAyA`CCbA\\`@jA[j@yA`@eCGyE\\UV\\IjJyCrPbCfJTfCm@R}D}BuEdGc@ImAwDw@IuC`A|AmIvA_Do@sD}BoGu@o@aAHk@pAB~@tAzC]zAkJ|E_GwAu@^D|@nDvGxBr@`DKTj@oCtBeA~LeDl@wDhImA`GLd@b@QnBiGbAg@v@XqBpCmA`OeA^mCcDw@LtDxEzA~@fE_Lr@A}@pCgArMy@ZyCcA{Av@EfCjCfFE`AmElHaDPa@n@E`G|@lHsBtN{CrJ?tLg@bHkBzA_BnFNvFk@XwAeBqCu@_BdD?~B{Br@oArBJx@lCpCZvAgArEc@fIaAp@e@WDiMoCyGmAmH_D|@yGc@wA{AaASqHr@yI{@sHJkI_G_CmEwC}Ca@_DuAk@qAsB}GvAsAKyA}As@uE[Y]b@HfDt@tCo@`@eB{Mb@}L{G[cI_HuIqBsE_@_Br@gE|FeCv@U`A^`GKjO",
+   "note": "天狗山ゲート〜渋峠（長野県境）17.9km。2026〜27年は 11/11 13時〜4/21 10時（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html）。火山の規制が別にある",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-11",
+    "to": "04-20"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gunma-konsei",
+   "kind": "winterClosure",
+   "name": "金精道路（国道120号）",
+   "prefecture": "群馬県",
+   "polyline": "k~v_FahxqYoDvBkIhAi@vAl@nH[xEdAJhAeDrAQd@bAMxAsCzBEx@lATtAgAl@LNp@_BrEj@hCIbA_Bn@SjArJfR`I~Lz@zBV~Ce@~Eu@pAqGrB}C~EyBxHgBbLiC|GGzBd@xEvDpIvBjId@dGEhC}A`IMnIoBdMlGnSbE`GhJ|BdGYbD~GpEvBvBc@~B{FfBGvChH~DlBZ|@MdByFbEm@lClAdE|@_@BsCd@_AbBb@NrAmBbFyElCJvAhDi@xFwG|@HRdA_@fAsClAsAlGeAxBKtCkNrFiJ}HcAiFtAqFMaAa@KsEhCsCy@qIcHs@ICdA|ClKtC~C~Ce@\\x@kD|L_E|FaDnIoBbLLvAxGnCzJB~Cx@z@~Bv@dQlGtHvCpOvB[p@mEz@mAvKpBvAv@\\nBUzFNtDvGlORvDgF~KmAz@_Be@sE}FqAe@u@t@xDhL{A|GtGrCRzD`EtHJbEyCzCM`B|@p@nCB`J{AfALzAhAfBrKwBzG\\zNrFlSr@YHgA_AoLXs@`AJzC`PLpJxExJ]fH`AxEpOnMbHlIhGpQnFfHjApH{@hGh@zBzKnCfCvBj@zI~DlKhEzYzEdIGhAcBzDBt@lEfCrDrFhAxGjBrEAfBmElDa@tA~BlTA|H`@lAxC`Bl@`APlEhBvEDzEjGlQpBdOzEjGvFbKbIzYzEbIfDjIx@v@lL~DxIzJ~BvGnKrIvAvD~DvRHbPt@jAhTlBxFgJrCsA|Ds@lXyBnIlBxM{@fAa@",
+   "note": "閉まるのは 金精トンネル（栃木県境）〜丸沼スキー場入口 12.1km。2026〜27年は 12/25 12時〜4/23 12時（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html）",
+   "activeMonths": [
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "12-25",
+    "to": "04-22"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gunma-minakamikatashina",
+   "kind": "winterClosure",
+   "name": "水上片品線",
+   "prefecture": "群馬県",
+   "polyline": "wjy_F{muoYgEyBmAMoCzFgGyCs@oAAqC_@o@oDuAmC}CkAQoBr@yI}Iu@}AmD_A]gB?wFkCFs@kE{ByEgB}@eD`AqDiC}Be@mBeGqAh@IzCm@|@aEy@aD|@}DAeA|CkG|K}HLuAmD`AkK[gBwPkHwBaDeGWqEcBoEnBcHYi@eA?{D[_AeD{B{BPi@a@}CsI_@yEa@{@oEI}A}CiL[qHaBw@{B]eLiB_K_Bi@qFpAeBeBbAmE~BwBbByDtEsFGgJr@{DkDqFEw@`DaJvCsBdBgDAu@qAmAIs@zCgIScE|@iChBgCdJoV]iJr@iEfKeIrAcEdA}@~Cw@zH|C|ACpA}Ar@}HxAyApHsApBwAzFb@`IaIdJ@hH}LrEyB~CSrCsBl@qJtA_Hr@yIxBcJLwFvA{C?iDvAyCbAoGfAcBD{A}@_FtAkDTkRXuAdDoD`Co@tCT~JnGh@MJ{@SkGeCeEq@sKf@mTp@yEzCuFLaLs@cB{FqESqCb@eFmCmCBgE_CaF@{C|@{DoAsCb@kGW}IyCaEAcH`@uBWcAkBkAsBaHT{GcHyBoBiFBw@bAoBEcBf@mB~AyBp@cC|BmBdAeFo@yFt@cB?iAkCsBc@kB`A_FQeBb@_CSeGdAcEg@eJx@kB?kAk@y@cCDIg@p@k@JiAyAmE_@w@eAD}DhCg@C[iDeBeCAiEkCtAmBEoBz@yBbC_A_@w@wDPuFw@\\i@nBkBUeB`Ca@gBuBb@c@SEk@tA_Ad@iA_AgDeEuB_CWwB_CP}@tAaApBmGrEcC?k@o@I{EnABy@vC_Cr@yCg@Q}CzBKw@hAa@Ma@k@AgFdCy@yD}DoGi@cC_@@IzA`CbLOl@_IuJi@yC_@A@vAf@dCbAzAMd@oCcDeCB{CgBgDmFwCx@mD[a@j@B~@|C`EVdC|Ab@~@_@pCHtBvBG|@uBCuCzAaAvCWhEa@|@c@a@k@_FgB_AqBkEy@p@{AS}@z@mAAE~BaBmBg@?]lANnB_CNy@~B@|CsBn@e@zFW@FqAYUuA|AgARe@jCe@Pk@m@MgC|AqFrAiTz@{EhAaCSaEdAcB@eGdB{IgHgYqBmACkB`CeBxCqHv@}GlCmAbAuIaDyD}@cLwHqIM{A~@cD?qB_CgDGgBvEkGzBLzClAvJiDfCeI",
+   "note": "湯ノ小屋橋〜津奈木橋 17.7km は 11/5 14時〜5/21 10時・津奈木橋〜戸倉スキー場入口 7.3km は 4/16 10時まで（2026〜27年（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html））",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "activePeriod": {
+    "from": "11-05",
+    "to": "05-20"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gunma-r405",
+   "kind": "winterClosure",
+   "name": "国道405号（野反湖）",
+   "prefecture": "群馬県",
+   "polyline": "qfn~E{demY@i@a@YcFg@uJ{CsAgDoAwJiF}DcCIwArBaDJk@}AsBsAwAgEqBmAuCEsDxAaBWuBcGgNsNgEhAsE?wAgC]wBqFiBuHwLcAm@uBzBEdE{@DeBaB_@hFeFtEqA@uAaCiFsBoHnBsFdFyCX{A|E{AlAaAeAeBEuByA}Ep@eEiFyQKg@_@y@cCo@[",
+   "note": "和光原地区〜野反湖 12.3km。2026〜27年は 11/25 15時〜4/21 10時（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html）",
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "11-25",
+    "to": "04-20"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gunma-budo",
+   "kind": "winterClosure",
+   "name": "上野小海線（ぶどう峠）",
+   "prefecture": "群馬県",
+   "polyline": "mfg{E{lumYbDpD|HtD`FvElDj@xCxDJbAsA|F@dEp@vBjB|AjAxBFbBmAxGt@zB|EhE_@jDJnChF|CnDUxAr@~BbCd@pCp@~@nGs@rBnD|HxBrDlBl@vBDfJdClHbA|@lD^t@~Bt@f@`FJV^MdC`@hBhCh@jB|EdDzAR|IfAtDaBjGE|B`@nBgBxBX~B`AxBq@~CRjGm@rEcA~AwAhFyDbEAlCjAvBh@xFrA~@lCQdBsE`DCxAh@l@|@lBu@PPoFpKcCd@wDvBJ`@lFsA|Ch@Hx@sF[oA~@k@~A\\lGoAhGPzDu@hJZrEQ`Ke@bDH~DeF^cC|@xGYhBv@hDR_Dh@yBq@}FpA]bGZhG[tEiArDXxClBnDxA`L_@~DeAsAUJt@bEFlDsAnDd@j@f@OrCeD~C`AnHbHpDtGTlB_@JYcBwB_DoBe@i@mAsCwBsBWkAxACzC}Br@If@x@dFvCpDLhC{BaAo@Ds@`Ak@~C{A[kErH{@qHsBFuAdBaBtMoC~Di@a@[kFoBm@RiFk@Na@hD?jBfB`BL|CYrBp@`BTjDzFeDK_D^aAxAGr@oDFbIRp@rAj@vCwC|Bv@p@xAh@BdB}@d@aDx@u@xBn@bAnC~@z@a@dElA~BfDnBlACbB|AEb@_Bb@iArAsDNy@p@@jFmDkCoBt@MfD}@~C?~QiDuEm@wCiAgA}@fAmCnKwC|AcBLRlEZMJmBZKb@jCpBRz@pAS|Eb@xD}Av@Eh@z@bBb@xDlD|AlAlC}CrA]pBoBx@?|A~AzDKpEq@|C`@GjB_EhByAlA]Nv@sC|Hw@vGkDhGg@`ThAnDInBmAtCoFfFeAdC",
+   "note": "中ノ沢林道分岐〜ぶどう峠 8.9km。2026〜27年は 12/2 11時〜4/7 11時（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html）（長野側も同じ期間）",
+   "activeMonths": [
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "12-02",
+    "to": "04-06"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gunma-jikkoku",
+   "kind": "winterClosure",
+   "name": "国道299号（十石峠）",
+   "prefecture": "群馬県",
+   "polyline": "emn{Eok~lYvGcCvDeMlHeE~EmEh@}CHoNtGiBhAh@p@o@Ga@oAc@xBaC\\{Lw@eD`@sArAB~@lEnBh@r@_@N_HvAeG[{Hz@uBbCgCbAkDRqDr@gCY{G}BkEZaBY_MvAqL?yBtBqOfDmIdEwCSmAuBSUa@bCoAfBaDZ`BXB|DkKNyAiC{AzBoBCaD}@}AbA}@dAhAvAEjB{A^uBvAGz@mA~BsIl@e@vBjAhFc@x@|Ae@l@Lb@fAdAnDpAl@sBTsPhH}EfA{F`DqG^sEq@iCLiAjGkC|G{TcAcH^oDmBeGe@kKh@wHQeE\\oGa@e@UVMtEq@vB@tGeA~A{@tGDjJqAbDwGyAiBqDk@KqAdA}DyAkCjHbEhIWz@gRv@YdApA`Bg@jBcH}@}BoA{@\\o@|@AzCpFdJAr@cAv@g@Cu@gB{CaCwBb@RqBiByGj@iCv@qCvAeBvAkG^o@lBQ`A_C|@yQg@}AyDl@sCEpG_Hv@eCK{Eb@}KkCcHHuBdAwCy@eGFqAhC_F^cEp@y@lAqGY}@cDcCQoFiFuBOs@d@gFnDcKkAiGp@sDjA{BsA_@o@gB{AZmBq@m@}A@mBjCqBzBYhAkE|C}A|AeMsEwCyBkE_Jc@iCwC^s@rJjAhCwFdBgAjC_@r@sAdAMr@_AByD|Fu@`C{H~@{@h@}Ch@o@rJmD~CyCjLwCx@d@dGRxE`CxASlAeNbBwBlFeBx@{ANwK^wAvL{GlBHj@y@B{M",
+   "note": "日影平橋〜十石峠 13.1km。2026〜27年は 12/11 11時〜4/6 11時（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html）（長野側も同じ期間）",
+   "activeMonths": [
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "12-11",
+    "to": "04-05"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gunma-ogoakagi",
+   "kind": "winterClosure",
+   "name": "大胡赤城線",
+   "prefecture": "群馬県",
+   "polyline": "{rp}EurmpY_H_D_LU_EcB}Fc@eUv@cWcHoFeC{Bb@{NrIqGkAG_HsD}QyAuCUoCaDkKmG{EuF}A_IhA_GjC_Hp@iFzBf@sCnBcAoBPiBl@qFrF_DPsAmCkCDcB|@e@`E_AZg@vAaBc@lAu@Ei@_Bf@_CO?`ArAtAY`DwBB@c@jAUAyAwF_EE^fBtARdAeA?{AcBeAHmGxF}BSgBZyEfEq@{ChCYv@sBxFqBZeAwIiAcAwAI^j@jA~@r@Wt@eD}DcDgBO`@hAvAi@nBcAiBk@xAe@Fy@oC{A|B[SKcBi@@sAfB{AiCuAvBe@yAmC{BWN`@hAK|@_BoCc@tAu@eBe@|Ai@sBq@~@gAaCWxBk@C}@oBW~AiAuAKnBs@u@Ut@w@MwClCiG`By@WkC`AqAGrA]dBiB|@K?e@_EfA}CQqAtB{A|@dB{BOw@QbAeCfCOYl@cBg@LyAzC[MLeA]Au@lBjBrAWtAmHw@iCl@Q~ByCtBbAfDK|@oId@St@bAvEqDKsCf@?fDaAoDr@mAdCkAg@aFT_AxB{BsCtAuAnFuF~B?fEc@vBgFjK[fEy@bCqJ|DyCi@kCJsPkVeFsD_FyF_DiI_BgBmAiDgDgB?}AlBcIiCmF_@uEq@[cElAo@lBCfJWb@YYHuBiA_EcGkCGaAdAaDz@g@vCEVk@kEiJ_@cLWY",
+   "note": "赤城温泉入口〜小沼 9.1km。2026〜27年は 12/15 10時〜4/5 10時（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html）",
+   "activeMonths": [
+    12,
+    1,
+    2,
+    3,
+    4
+   ],
+   "activePeriod": {
+    "from": "12-15",
+    "to": "04-04"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  },
+  {
+   "id": "winter-gunma-numataakagi",
+   "kind": "winterClosure",
+   "name": "沼田赤城線",
+   "prefecture": "群馬県",
+   "polyline": "kps~EcjwoYbHeIsA}Iz@uH`JoX{H{Js@cFaIeK_B_EcCwC}BmAwKsOUoANuDmAyCmN{OsJ_F_DH{Aw@}H{JyB_GT{Db@}@zAcArKkCk@mFvDwD\\mA@sBkB{KeEiMSoClEghAYcHZmE`DmIbDkFxA{@tGcAfA{@`DqVhKoHpIiNtXcKnHkD`DcCfEqA|N}Yz`@uUpEaE|HmMlAaETcCC}Zp@eDx@iAjCeAhHg@jQaAjNGxNqCfO}AxEsBb@wA[yAgDeA{AoA{@}E~@}Al@CzDxD~@El@uAOyByBuGDmLeBoHPaBrBmEB_AQc@y@KgChFuA~@gA[IaBxCmEpCgC`D~@hAUNoAg@s@cE?i@a@HkBxD~@tBo@rBJ|DvAtAwBlB_JpA{AdEm@rB}BDi@eByCuFoBeDEiFp@yC[w@o@|OkOzEuHdC{BlGgAxByCS}A}@JkGhDq@_AFgA`Cu@rCeDzCIhJmIxHkBv@kEv@k@rKY|EmB`JvEzS|A`B\\zFlDj@Mb@gBg@o@kD}@VmB|@Bj^jMzFpCr@OJmBkBu@u@}AjAcAzGxD|NsANiBg@c@_JG}@Qg@_A\\u@bKuCjBkC|@?~BnBxHyCjEjAZcCaAqBwFw@EaBl@a@tLk@vFfBtA_@F_A{A}ByH{AFaBf@SjMjA`HdEr@cAOw@cCmBQq@Lo@r@[dQvGpBEVe@K}@wBcDmC}AkDo@_@k@?w@f@w@zF`C~MgA|LnE^UQmCtE|@DeDv@EvCjDRdA}A|BbBdHTdEu@hI^\\`EBf@oAiAaEHeA|AgBxEaQn@?d@jAuCpI@x@n@f@^KlBiErEcApC{DfJeA~AuDfCa@lGuEdE\\`C}@xCd@xAMnFeBtBiCrCkBfEoArAr@b@~@",
+   "note": "旧有料道路料金所〜大沼周遊道路交差点 11.1km。2026〜27年は 1/4 14時〜3/19 10時（群馬県 2026-10-14 https://www.pref.gunma.jp/06/h2810053.html）",
+   "activeMonths": [
+    1,
+    2,
+    3
+   ],
+   "activePeriod": {
+    "from": "01-04",
+    "to": "03-18"
+   },
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "minCc": null,
+   "maxCc": null,
+   "checkedAt": "2026-10-25",
+   "source": "admin",
+   "origin": "survey"
+  }
+ ]
 }

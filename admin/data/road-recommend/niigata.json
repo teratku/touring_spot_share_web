@@ -1,16 +1,17 @@
 {
  "prefecture": "新潟県",
  "romaji": "niigata",
- "generation": 4,
- "contentHash": "74025dbc6b0d",
- "builtAt": "2026-10-11T10:56:18.191Z",
+ "generation": 5,
+ "contentHash": "86f3fdbc0354",
+ "overridesHash": "1a1f5b628589",
+ "builtAt": "2026-10-21T12:27:14.908Z",
  "weights": {
   "curviness": 0.41,
   "flow": 0.3,
   "length": 0.18,
   "classRank": 0.11
  },
- "count": 150,
+ "count": 106,
  "segments": [
   {
    "id": "新潟県:0",
@@ -36,6 +37,7 @@
     37.081675,
     138.839456
    ],
+   "overrideKey": "田沢小栗山線@36.99,138.76",
    "title": "魚沼スカイライン",
    "tags": [
     "scenic",
@@ -66,6 +68,7 @@
     37.083011,
     138.873225
    ],
+   "overrideKey": "十日町六日町線@37.13,138.76",
    "tags": [
     "winding",
     "caution"
@@ -95,6 +98,7 @@
     37.134718,
     138.611504
    ],
+   "overrideKey": "石黒松代線@37.17,138.58",
    "tags": [
     "winding",
     "flowing"
@@ -124,6 +128,7 @@
     37.051181,
     138.764165
    ],
+   "overrideKey": "新宮二ツ屋線@37.07,138.78",
    "tags": [
     "winding",
     "flowing"
@@ -131,31 +136,6 @@
   },
   {
    "id": "新潟県:4",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "黒又山大栃山線",
-   "ref": "500",
-   "highway": "secondary",
-   "lengthKm": 15.64,
-   "curviness": 647.1,
-   "flow": 28,
-   "turnCount": 361,
-   "score": 98.9,
-   "baseScore": 98.9,
-   "spotCount": 0,
-   "polyline": "oipbFqvcpY{AgCq@?mEhImElCgBTuDqBqEnD~AtG~ApAl@rA[tAHfFg@xGo@hC|BpEqD\\sBfErAfBRrDhAbBAdAiCOkAmCi@ImAT{A~BcCD}C{BuBqDw@b@qBbEsALeB`CqEfAiBwA}@I_AxB@tEiAd@g@jAcAJ{DfCsAxGmAcAoB|C}EB{FtCnBdEf@fC_BCqBgCaBSgDdCmAfB{D|@eAdBuAaBeAVc@yAaDcBqBcCcBt@mDw@mAn@cAm@_B^eAgAeCxAoA}CkC`@]hCs@~@iAq@wEF_Al@e@`CsClD}E~@uCBuAj@hApAnBKfEh@lC|A\\bA]vDk@DuBsA{DUwIr@oEaDSpBrDxI|AtMu@BkB{BcAoDiEqBqExGwCnCAdAt@~@SfCaA@s@z@?nAaA`DaDyGNmAtAqA{@w@sC^cDwP{A]cE{Fk@EX|CIxEsCZiA|@cAgA_CKSXz@xAi@rBcGdEsAwAoAz@h@xCyHpWeDpIe@bEe@v@s@RoDa@eQjKcG_GqAK}@pAiAzCD`C|CtBnA|CZjD|CzB_@fGeBpE}ElCsEkBcI\\kDnDsDhAeEpLgCfEuCzByExAoMzJ}FdB{ClEkAbFeDpFsF`CmGhHm@zBgEzDcCvAgCJ",
-   "pointCount": 168,
-   "start": [
-    37.2804,
-    139.124406
-   ],
-   "end": [
-    37.355032,
-    139.065251
-   ]
-  },
-  {
-   "id": "新潟県:5",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "横畑高田線",
@@ -179,12 +159,13 @@
     138.22058
    ],
    "reshaped": true,
+   "overrideKey": "横畑高田線@37.09,138.13",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "新潟県:6",
+   "id": "新潟県:5",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "赤玉両津港線",
@@ -207,13 +188,14 @@
     37.99356,
     138.53306
    ],
+   "overrideKey": "赤玉両津港線@38.06,138.47",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:7",
+   "id": "新潟県:6",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "白雲台乙和池相川線;大佐渡スカイライン",
@@ -236,13 +218,14 @@
     38.081362,
     138.333198
    ],
+   "overrideKey": "白雲台乙和池相川線;大佐渡スカイライン@38.04,138.25",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:8",
+   "id": "新潟県:7",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "上町屋釜沢糸魚川線",
@@ -265,13 +248,14 @@
     37.004725,
     137.912548
    ],
+   "overrideKey": "上町屋釜沢糸魚川線@36.95,137.90",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:9",
+   "id": "新潟県:8",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "駒込北潟線",
@@ -294,13 +278,14 @@
     37.570313,
     138.938573
    ],
+   "overrideKey": "駒込北潟線@37.55,139.01",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:10",
+   "id": "新潟県:9",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "佐渡縦貫線",
@@ -323,13 +308,14 @@
     38.190253,
     138.324552
    ],
+   "overrideKey": "佐渡縦貫線@38.11,138.39",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:11",
+   "id": "新潟県:10",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "静平西三川線",
@@ -352,13 +338,14 @@
     37.9237,
     138.347768
    ],
+   "overrideKey": "静平西三川線@37.90,138.29",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:12",
+   "id": "新潟県:11",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "牧横住線",
@@ -381,13 +368,14 @@
     37.084444,
     138.432439
    ],
+   "overrideKey": "牧横住線@37.05,138.43",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:13",
+   "id": "新潟県:12",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "新座八箇線",
@@ -410,6 +398,7 @@
     37.121634,
     138.80128
    ],
+   "overrideKey": "新座八箇線@37.09,138.79",
    "tags": [
     "scenic",
     "winding",
@@ -417,7 +406,7 @@
    ]
   },
   {
-   "id": "新潟県:14",
+   "id": "新潟県:13",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "遅場見附線",
@@ -440,13 +429,14 @@
     37.474791,
     139.094262
    ],
+   "overrideKey": "遅場見附線@37.50,139.06",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:15",
+   "id": "新潟県:14",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大栗田越後下関停車場線",
@@ -469,13 +459,14 @@
     38.140966,
     139.553867
    ],
+   "overrideKey": "大栗田越後下関停車場線@38.18,139.60",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:16",
+   "id": "新潟県:15",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "山之坊大峰小滝線",
@@ -498,13 +489,14 @@
     36.939344,
     137.856451
    ],
+   "overrideKey": "山之坊大峰小滝線@36.90,137.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:17",
+   "id": "新潟県:16",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "中永宮本線",
@@ -527,12 +519,13 @@
     37.505394,
     138.759959
    ],
+   "overrideKey": "中永宮本線@37.47,138.76",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:18",
+   "id": "新潟県:17",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "真田高島線",
@@ -555,13 +548,14 @@
     37.113661,
     138.715394
    ],
+   "overrideKey": "真田高島線@37.12,138.68",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:19",
+   "id": "新潟県:18",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "岩沢中条線",
@@ -584,13 +578,14 @@
     37.166604,
     138.809155
    ],
+   "overrideKey": "岩沢中条線@37.19,138.82",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:20",
+   "id": "新潟県:19",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "竹沢塩谷線",
@@ -613,13 +608,14 @@
     37.299901,
     138.903025
    ],
+   "overrideKey": "竹沢塩谷線@37.32,138.89",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:21",
+   "id": "新潟県:20",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "高倉東野名線",
@@ -642,13 +638,14 @@
     37.358153,
     139.049466
    ],
+   "overrideKey": "高倉東野名線@37.38,139.04",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:22",
+   "id": "新潟県:21",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "蒲池西山線",
@@ -671,13 +668,14 @@
     36.935295,
     137.871281
    ],
+   "overrideKey": "蒲池西山線@36.95,137.90",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:23",
+   "id": "新潟県:22",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "名木山浦川原線",
@@ -700,13 +698,14 @@
     37.189516,
     138.493875
    ],
+   "overrideKey": "名木山浦川原線@37.16,138.47",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:24",
+   "id": "新潟県:23",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "西枯木又堀之内線",
@@ -729,13 +728,14 @@
     37.146614,
     138.846686
    ],
+   "overrideKey": "西枯木又堀之内線@37.12,138.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:25",
+   "id": "新潟県:24",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "佐渡縦貫線",
@@ -758,13 +758,14 @@
     37.986886,
     138.388392
    ],
+   "overrideKey": "佐渡縦貫線@37.92,138.40",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:26",
+   "id": "新潟県:25",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "釜谷内浦線",
@@ -787,13 +788,14 @@
     38.447602,
     139.22158
    ],
+   "overrideKey": "釜谷内浦線@38.47,139.25",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:27",
+   "id": "新潟県:26",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "岩沢中条線",
@@ -816,13 +818,14 @@
     37.198111,
     138.810552
    ],
+   "overrideKey": "岩沢中条線@37.22,138.83",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:28",
+   "id": "新潟県:27",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "濁沢種苧原線",
@@ -845,13 +848,14 @@
     37.346483,
     138.905337
    ],
+   "overrideKey": "濁沢種苧原線@37.36,138.93",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:29",
+   "id": "新潟県:28",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "虫亀南荷頃線",
@@ -874,13 +878,14 @@
     37.342839,
     138.88857
    ],
+   "overrideKey": "虫亀南荷頃線@37.33,138.86",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:30",
+   "id": "新潟県:29",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "田沢水沢線",
@@ -903,12 +908,13 @@
     37.016922,
     138.718963
    ],
+   "overrideKey": "田沢水沢線@37.04,138.73",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:31",
+   "id": "新潟県:30",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "荒谷竜光線",
@@ -931,13 +937,14 @@
     37.303398,
     138.856021
    ],
+   "overrideKey": "荒谷竜光線@37.29,138.88",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:32",
+   "id": "新潟県:31",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "水沢新田種苧原線",
@@ -960,13 +967,14 @@
     37.319425,
     138.940749
    ],
+   "overrideKey": "水沢新田種苧原線@37.30,138.95",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:33",
+   "id": "新潟県:32",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "濁沢種苧原線",
@@ -989,13 +997,14 @@
     37.356946,
     138.898047
    ],
+   "overrideKey": "濁沢種苧原線@37.36,138.88",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:34",
+   "id": "新潟県:33",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "関赤倉線",
@@ -1018,13 +1027,14 @@
     36.892037,
     138.177331
    ],
+   "overrideKey": "関赤倉線@36.91,138.16",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:35",
+   "id": "新潟県:34",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "池ヶ原塩殿線",
@@ -1047,12 +1057,13 @@
     37.267493,
     138.794305
    ],
+   "overrideKey": "池ヶ原塩殿線@37.27,138.83",
    "tags": [
     "winding"
    ]
   },
   {
-   "id": "新潟県:36",
+   "id": "新潟県:35",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "貫木穴沢線",
@@ -1075,13 +1086,14 @@
     37.357538,
     139.069701
    ],
+   "overrideKey": "貫木穴沢線@37.37,139.09",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:37",
+   "id": "新潟県:36",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "阿弥陀瀬上条線",
@@ -1104,13 +1116,14 @@
     37.546856,
     138.774921
    ],
+   "overrideKey": "阿弥陀瀬上条線@37.51,138.77",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:38",
+   "id": "新潟県:37",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "法末真人線",
@@ -1133,13 +1146,14 @@
     37.265766,
     138.746488
    ],
+   "overrideKey": "法末真人線@37.25,138.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:39",
+   "id": "新潟県:38",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "上越安塚柏崎線",
@@ -1162,13 +1176,14 @@
     37.131911,
     138.444791
    ],
+   "overrideKey": "上越安塚柏崎線@37.13,138.42",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:40",
+   "id": "新潟県:39",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大潟高柳線",
@@ -1191,13 +1206,14 @@
     37.188559,
     138.571203
    ],
+   "overrideKey": "大潟高柳線@37.17,138.52",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:41",
+   "id": "新潟県:40",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "十日町当間塩沢線",
@@ -1220,12 +1236,13 @@
     37.020133,
     138.816123
    ],
+   "overrideKey": "十日町当間塩沢線@37.02,138.80",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:42",
+   "id": "新潟県:41",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "小千谷大和線",
@@ -1249,13 +1266,14 @@
     138.86691
    ],
    "reshaped": true,
+   "overrideKey": "小千谷大和線@37.20,138.84",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:43",
+   "id": "新潟県:42",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道405号",
@@ -1278,13 +1296,14 @@
     37.090624,
     138.48719
    ],
+   "overrideKey": "国道405号@37.03,138.63",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:44",
+   "id": "新潟県:43",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道352号",
@@ -1307,6 +1326,7 @@
     37.057594,
     139.254098
    ],
+   "overrideKey": "国道352号@37.13,139.17",
    "title": "樹海ライン",
    "tags": [
     "winding",
@@ -1314,7 +1334,7 @@
    ]
   },
   {
-   "id": "新潟県:45",
+   "id": "新潟県:44",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大崎小泊線",
@@ -1337,13 +1357,14 @@
     37.875986,
     138.33641
    ],
+   "overrideKey": "大崎小泊線@37.87,138.30",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:46",
+   "id": "新潟県:45",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "石打停車場塩沢線",
@@ -1366,13 +1387,14 @@
     37.017763,
     138.824837
    ],
+   "overrideKey": "石打停車場塩沢線@37.04,138.84",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:47",
+   "id": "新潟県:46",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道352号",
@@ -1395,13 +1417,14 @@
     37.136965,
     139.150609
    ],
+   "overrideKey": "国道352号@37.20,139.08",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:48",
+   "id": "新潟県:47",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "栃尾守門線",
@@ -1424,13 +1447,14 @@
     37.322112,
     139.019816
    ],
+   "overrideKey": "栃尾守門線@37.42,138.98",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:49",
+   "id": "新潟県:48",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "法末真人線",
@@ -1453,13 +1477,14 @@
     37.24904,
     138.759453
    ],
+   "overrideKey": "法末真人線@37.25,138.79",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:50",
+   "id": "新潟県:49",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "菖蒲高原線",
@@ -1482,13 +1507,14 @@
     37.04462,
     138.514251
    ],
+   "overrideKey": "菖蒲高原線@37.07,138.52",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:51",
+   "id": "新潟県:50",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "上越飯山線",
@@ -1511,13 +1537,14 @@
     36.987225,
     138.399713
    ],
+   "overrideKey": "上越飯山線@37.04,138.32",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:52",
+   "id": "新潟県:51",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "天水島東川線",
@@ -1540,13 +1567,14 @@
     37.057763,
     138.602175
    ],
+   "overrideKey": "天水島東川線@37.07,138.64",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:53",
+   "id": "新潟県:52",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "松代松之山線",
@@ -1569,13 +1597,14 @@
     37.084144,
     138.61974
    ],
+   "overrideKey": "松代松之山線@37.13,138.61",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:54",
+   "id": "新潟県:53",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "上小沢北条線",
@@ -1598,13 +1627,14 @@
     36.981345,
     138.273515
    ],
+   "overrideKey": "上小沢北条線@36.98,138.33",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:55",
+   "id": "新潟県:54",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道403号",
@@ -1627,13 +1657,14 @@
     37.007858,
     138.475399
    ],
+   "overrideKey": "国道403号@37.12,138.50",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:56",
+   "id": "新潟県:55",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "山ノ相川内ヶ巻停車場線",
@@ -1656,13 +1687,14 @@
     37.200643,
     138.84353
    ],
+   "overrideKey": "山ノ相川内ヶ巻停車場線@37.25,138.85",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:57",
+   "id": "新潟県:56",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大佐渡スカイライン",
@@ -1685,13 +1717,14 @@
     38.081362,
     138.333198
    ],
+   "overrideKey": "大佐渡スカイライン@38.03,138.37",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:58",
+   "id": "新潟県:57",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "鹿瀬日出谷線",
@@ -1714,13 +1747,14 @@
     37.706692,
     139.530388
    ],
+   "overrideKey": "鹿瀬日出谷線@37.69,139.48",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:59",
+   "id": "新潟県:58",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "多田皆川金井線",
@@ -1743,13 +1777,14 @@
     37.912882,
     138.482306
    ],
+   "overrideKey": "多田皆川金井線@37.94,138.46",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:60",
+   "id": "新潟県:59",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "余川塩沢停車場線",
@@ -1772,13 +1807,14 @@
     37.055265,
     138.825819
    ],
+   "overrideKey": "余川塩沢停車場線@37.07,138.87",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:61",
+   "id": "新潟県:60",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "上小沢脇野田停車場線",
@@ -1801,13 +1837,14 @@
     37.044471,
     138.291026
    ],
+   "overrideKey": "上小沢脇野田停車場線@36.98,138.33",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:62",
+   "id": "新潟県:61",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "田代小国線",
@@ -1830,13 +1867,14 @@
     37.335103,
     138.633184
    ],
+   "overrideKey": "田代小国線@37.31,138.71",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:63",
+   "id": "新潟県:62",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道405号",
@@ -1859,13 +1897,14 @@
     36.982688,
     138.668241
    ],
+   "overrideKey": "国道405号@36.86,138.63",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:64",
+   "id": "新潟県:63",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "城内焼野線",
@@ -1888,13 +1927,14 @@
     37.100766,
     138.889774
    ],
+   "overrideKey": "城内焼野線@37.16,138.83",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:65",
+   "id": "新潟県:64",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "新潟村松三川線",
@@ -1917,13 +1957,14 @@
     37.688262,
     139.375705
    ],
+   "overrideKey": "新潟村松三川線@37.67,139.23",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:66",
+   "id": "新潟県:65",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "長岡栃尾巻線",
@@ -1946,6 +1987,7 @@
     37.440542,
     138.874028
    ],
+   "overrideKey": "長岡栃尾巻線@37.47,138.99",
    "tags": [
     "scenic",
     "winding",
@@ -1953,7 +1995,7 @@
    ]
   },
   {
-   "id": "新潟県:67",
+   "id": "新潟県:66",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大沢小国小千谷線",
@@ -1976,13 +2018,14 @@
     37.27883,
     138.706914
    ],
+   "overrideKey": "大沢小国小千谷線@37.27,138.78",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:68",
+   "id": "新潟県:67",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "高尾田島線",
@@ -2005,12 +2048,13 @@
     37.067216,
     138.423882
    ],
+   "overrideKey": "高尾田島線@37.07,138.39",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:69",
+   "id": "新潟県:68",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "上越安塚柏崎線",
@@ -2033,13 +2077,14 @@
     37.122592,
     138.504917
    ],
+   "overrideKey": "上越安塚柏崎線@37.11,138.47",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:70",
+   "id": "新潟県:69",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "貫木穴沢線",
@@ -2062,13 +2107,14 @@
     37.372732,
     139.07165
    ],
+   "overrideKey": "貫木穴沢線@37.38,139.03",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:71",
+   "id": "新潟県:70",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "上越安塚柏崎線",
@@ -2091,13 +2137,14 @@
     37.238501,
     138.552017
    ],
+   "overrideKey": "上越安塚柏崎線@37.16,138.53",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:72",
+   "id": "新潟県:71",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "飯山新井線",
@@ -2120,13 +2167,14 @@
     36.946415,
     138.322518
    ],
+   "overrideKey": "飯山新井線@36.95,138.28",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:73",
+   "id": "新潟県:72",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道353号",
@@ -2149,6 +2197,7 @@
     37.136003,
     138.574736
    ],
+   "overrideKey": "国道353号@37.27,138.57",
    "tags": [
     "winding",
     "flowing",
@@ -2156,7 +2205,7 @@
    ]
   },
   {
-   "id": "新潟県:74",
+   "id": "新潟県:73",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "柳島信濃坂線",
@@ -2179,6 +2228,7 @@
     37.072925,
     138.475323
    ],
+   "overrideKey": "柳島信濃坂線@37.05,138.45",
    "tags": [
     "scenic",
     "winding",
@@ -2186,7 +2236,7 @@
    ]
   },
   {
-   "id": "新潟県:75",
+   "id": "新潟県:74",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "仙納徳合線",
@@ -2209,13 +2259,14 @@
     37.119176,
     138.070313
    ],
+   "overrideKey": "仙納徳合線@37.14,138.06",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:76",
+   "id": "新潟県:75",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "小千谷川口大和線",
@@ -2239,13 +2290,14 @@
     138.86413
    ],
    "reshaped": true,
+   "overrideKey": "小千谷川口大和線@37.32,138.86",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:77",
+   "id": "新潟県:76",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "柏崎高浜堀之内線",
@@ -2268,6 +2320,7 @@
     37.246392,
     138.928667
    ],
+   "overrideKey": "柏崎高浜堀之内線@37.30,138.90",
    "tags": [
     "winding",
     "flowing",
@@ -2275,7 +2328,7 @@
    ]
   },
   {
-   "id": "新潟県:78",
+   "id": "新潟県:77",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大崩岩山線",
@@ -2298,13 +2351,14 @@
     37.225972,
     138.782244
    ],
+   "overrideKey": "大崩岩山線@37.22,138.82",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:79",
+   "id": "新潟県:78",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "十日町塩沢線",
@@ -2327,6 +2381,7 @@
     37.0412,
     138.843934
    ],
+   "overrideKey": "十日町塩沢線@37.11,138.75",
    "tags": [
     "scenic",
     "winding",
@@ -2334,7 +2389,7 @@
    ]
   },
   {
-   "id": "新潟県:80",
+   "id": "新潟県:79",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "黒倉野中線",
@@ -2357,13 +2412,14 @@
     37.634871,
     139.467757
    ],
+   "overrideKey": "黒倉野中線@37.58,139.51",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:81",
+   "id": "新潟県:80",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "浅草山大白川停車場線",
@@ -2386,13 +2442,14 @@
     37.350046,
     139.167286
    ],
+   "overrideKey": "浅草山大白川停車場線@37.37,139.20",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:82",
+   "id": "新潟県:81",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道403号",
@@ -2415,13 +2472,14 @@
     37.288249,
     138.748834
    ],
+   "overrideKey": "国道403号@37.29,138.78",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:83",
+   "id": "新潟県:82",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "黒岩下小野線",
@@ -2444,13 +2502,14 @@
     37.237722,
     138.408651
    ],
+   "overrideKey": "黒岩下小野線@37.25,138.49",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:84",
+   "id": "新潟県:83",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "親柄大白川停車場線",
@@ -2473,13 +2532,14 @@
     37.328976,
     139.026339
    ],
+   "overrideKey": "親柄大白川停車場線@37.31,139.01",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:85",
+   "id": "新潟県:84",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "橋立青梅停車場線",
@@ -2502,13 +2562,14 @@
     36.973872,
     137.760399
    ],
+   "overrideKey": "橋立青梅停車場線@37.00,137.78",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:86",
+   "id": "新潟県:85",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "松代岡野町線",
@@ -2531,13 +2592,14 @@
     37.142285,
     138.604886
    ],
+   "overrideKey": "松代岡野町線@37.23,138.64",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:87",
+   "id": "新潟県:86",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大沢小国小千谷線",
@@ -2560,12 +2622,13 @@
     37.248539,
     138.667848
    ],
+   "overrideKey": "大沢小国小千谷線@37.26,138.70",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:88",
+   "id": "新潟県:87",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "半蔵金入広瀬停車場線",
@@ -2588,13 +2651,14 @@
     37.351858,
     139.040676
    ],
+   "overrideKey": "半蔵金入広瀬停車場線@37.36,138.99",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:89",
+   "id": "新潟県:88",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道353号",
@@ -2617,13 +2681,14 @@
     37.056895,
     138.657961
    ],
+   "overrideKey": "国道353号@37.07,138.70",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:90",
+   "id": "新潟県:89",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "中深見越後田沢停車場線",
@@ -2646,13 +2711,14 @@
     37.04367,
     138.683328
    ],
+   "overrideKey": "中深見越後田沢停車場線@36.99,138.68",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:91",
+   "id": "新潟県:90",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "柏崎小国線",
@@ -2675,13 +2741,14 @@
     37.323,
     138.711843
    ],
+   "overrideKey": "柏崎小国線@37.37,138.63",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:92",
+   "id": "新潟県:91",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "栃尾山古志線",
@@ -2704,13 +2771,14 @@
     37.35595,
     138.930697
    ],
+   "overrideKey": "栃尾山古志線@37.45,138.98",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:93",
+   "id": "新潟県:92",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "柏崎高浜堀之内線",
@@ -2733,13 +2801,14 @@
     37.329785,
     138.90918
    ],
+   "overrideKey": "柏崎高浜堀之内線@37.31,138.91",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:94",
+   "id": "新潟県:93",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "町屋越後堀之内停車場線",
@@ -2762,13 +2831,14 @@
     37.241165,
     138.92532
    ],
+   "overrideKey": "町屋越後堀之内停車場線@37.19,138.93",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:95",
+   "id": "新潟県:94",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "両津真野赤泊線",
@@ -2791,13 +2861,14 @@
     37.872124,
     138.416775
    ],
+   "overrideKey": "両津真野赤泊線@37.96,138.34",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:96",
+   "id": "新潟県:95",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "荒沢塩野町線",
@@ -2820,12 +2891,13 @@
     38.326573,
     139.555617
    ],
+   "overrideKey": "荒沢塩野町線@38.34,139.58",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:97",
+   "id": "新潟県:96",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "門出石黒線",
@@ -2848,13 +2920,14 @@
     37.175587,
     138.608369
    ],
+   "overrideKey": "門出石黒線@37.19,138.57",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:98",
+   "id": "新潟県:97",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "小千谷大沢線",
@@ -2877,13 +2950,14 @@
     37.224981,
     138.714222
    ],
+   "overrideKey": "小千谷大沢線@37.27,138.78",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:99",
+   "id": "新潟県:98",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "沢口塩沢線",
@@ -2906,13 +2980,14 @@
     37.01588,
     138.859135
    ],
+   "overrideKey": "沢口塩沢線@36.99,138.90",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:100",
+   "id": "新潟県:99",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "大石原線",
@@ -2935,12 +3010,13 @@
     37.217651,
     138.89366
    ],
+   "overrideKey": "大石原線@37.21,138.92",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:101",
+   "id": "新潟県:100",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "羽茂港村山線",
@@ -2963,12 +3039,13 @@
     37.850328,
     138.318554
    ],
+   "overrideKey": "羽茂港村山線@37.86,138.30",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:102",
+   "id": "新潟県:101",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "入塩川上樫出線",
@@ -2991,12 +3068,13 @@
     37.476197,
     139.043725
    ],
+   "overrideKey": "入塩川上樫出線@37.49,139.02",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:103",
+   "id": "新潟県:102",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "国道353号",
@@ -3019,13 +3097,14 @@
     36.997508,
     138.730896
    ],
+   "overrideKey": "国道353号@36.99,138.76",
    "tags": [
     "winding",
     "flowing"
    ]
   },
   {
-   "id": "新潟県:104",
+   "id": "新潟県:103",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "小出奥只見線",
@@ -3048,12 +3127,13 @@
     37.212837,
     139.044265
    ],
+   "overrideKey": "小出奥只見線@37.22,139.01",
    "tags": [
     "flowing"
    ]
   },
   {
-   "id": "新潟県:105",
+   "id": "新潟県:104",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "村上朝日線",
@@ -3076,38 +3156,14 @@
     38.238393,
     139.45873
    ],
+   "overrideKey": "村上朝日線@38.26,139.50",
    "tags": [
     "winding",
     "caution"
    ]
   },
   {
-   "id": "新潟県:106",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "小千谷大和線",
-   "ref": "58",
-   "highway": "primary",
-   "lengthKm": 6.79,
-   "curviness": 342.7,
-   "flow": 24.2,
-   "turnCount": 96,
-   "score": 76.3,
-   "baseScore": 76.3,
-   "spotCount": 0,
-   "polyline": "ayabF{cknY{B`AsDkCu@d@{@vC_DGaNfCsAG_FeCuE|@kBnAuGtJwGjGmEvIkEnPiBjCcCz@mBxB}G`DeNnK}CvAwDaAwEsE{@uCiBsCsBc@mA{Cq@SkD|@m@t@cAfCr@hA@`A}B`CyDpByCzD}APaChD_DrBiTjHqI`GwC~FmAHy@yGw@B_BtEoNbJXhBvBx@Xl@eApAkEbCE~CkAbAlAxBzC~BxBlEiBtWa@x@",
-   "pointCount": 59,
-   "start": [
-    37.206089,
-    138.834702
-   ],
-   "end": [
-    37.244847,
-    138.80383
-   ]
-  },
-  {
-   "id": "新潟県:107",
+   "id": "新潟県:105",
    "region": "niigata",
    "regionName": "新潟県",
    "name": "岩野塚山線",
@@ -3130,1082 +3186,12 @@
     37.367548,
     138.776352
    ],
+   "overrideKey": "岩野塚山線@37.36,138.74",
    "tags": [
     "winding",
     "flowing"
-   ]
-  },
-  {
-   "id": "新潟県:108",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "東長鳥五十土線",
-   "ref": "433",
-   "highway": "secondary",
-   "lengthKm": 3.99,
-   "curviness": 367.6,
-   "flow": 21.6,
-   "turnCount": 68,
-   "score": 76,
-   "baseScore": 76,
-   "spotCount": 0,
-   "polyline": "_ydcFsplmYkAvC{J{ByDNmFtB}CuCsFsAu@^cB`DsGKqIiFq@kAIaMf@aEg@}BgA]cCr@mEDsEcEiL_AkCdA_LvLwBvEoAN_BaChF_Kt@yIy@q@mCFgAwC}@Sy@t@YjD}@b@aHyJa@sA",
-   "pointCount": 36,
-   "start": [
-    37.385275,
-    138.678023
-   ],
-   "end": [
-    37.407908,
-    138.68669
-   ]
-  },
-  {
-   "id": "新潟県:109",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "鞍掛八木向線",
-   "ref": "183",
-   "highway": "secondary",
-   "lengthKm": 8.81,
-   "curviness": 320,
-   "flow": 23.3,
-   "turnCount": 121,
-   "score": 75.7,
-   "baseScore": 75.7,
-   "spotCount": 0,
-   "polyline": "ke|cFisapYru@rRhGuA|DXvAf@fHjG~LY~HkBzDIzKrBvP|FxGrFzGjTf@vDjCbFpDxKj@pErDzEhBdHxOdQlClBtBbA`CGzDlAlCD`EuAjFi@tBkBv@Eb@qA`EeEv@kCfAj@nA[b@wAmA{AH}@rCcLpCcCVuCbBcCXqChDcC~CMjCdA|A]fKqJ`C_ExBcJ~By@`AiBPw@sBwAXeGtHsNp@}CpAHf@iAMi@kBu@gBj@y@`Aa@a@t@{J|AwFhCsFp@iDbBmBiB{H",
-   "pointCount": 69,
-   "start": [
-    37.505024,
-    139.113653
-   ],
-   "end": [
-    37.453448,
-    139.119948
-   ],
-   "unpaved": {
-    "unpavedMeters": 143,
-    "totalMeters": 8814,
-    "ratio": 0.016,
-    "surface": "gravel",
-    "label": "砂利"
-   }
-  },
-  {
-   "id": "新潟県:110",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "牧上野線",
-   "ref": "511",
-   "highway": "secondary",
-   "lengthKm": 3.2,
-   "curviness": 320.1,
-   "flow": 25,
-   "turnCount": 41,
-   "score": 75.7,
-   "baseScore": 75.7,
-   "spotCount": 0,
-   "polyline": "yz|dFeihpYd@tS_F~HCdPl@nFlEzJhDfLrGHxEzD`AnFK`EvCrApHrLtEIbBmDjC`@xE`CbWLtB_BnChFKd@",
-   "pointCount": 21,
-   "start": [
-    37.672294,
-    139.147874
-   ],
-   "end": [
-    37.657627,
-    139.128382
-   ]
-  },
-  {
-   "id": "新潟県:111",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "万条新田越後中里停車場線",
-   "ref": "361",
-   "highway": "secondary",
-   "lengthKm": 8.19,
-   "curviness": 307.5,
-   "flow": 24.2,
-   "turnCount": 104,
-   "score": 75.6,
-   "baseScore": 75.6,
-   "spotCount": 0,
-   "polyline": "kzg`FiwmnY@dF_`@xEwFyIoTwLe\\mEuEyDyFuAIsHkHqGwCuD}A{DBcAzAsDBsEoJLsE`CS`EqDlJ{Dbb@mCqCmNbA_C|@uCw@k@FsErFmH^mI{B_DMka@wNi@pAnCtASfBiAJaEmAgEh@aGkB}@?kBbA_ASTcBdCmApH_AXgBi@k@gH`@kFrBuDFuG~FuDI{AlBuBj@{BeAcB}CmFI",
-   "pointCount": 55,
-   "start": [
-    36.909339,
-    138.848053
-   ],
-   "end": [
-    36.960111,
-    138.851613
-   ]
-  },
-  {
-   "id": "新潟県:112",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "加用今新田津南停車場線",
-   "ref": "251",
-   "highway": "secondary",
-   "lengthKm": 11.87,
-   "curviness": 280,
-   "flow": 21,
-   "turnCount": 158,
-   "score": 75.4,
-   "baseScore": 70.8,
-   "spotCount": 2,
-   "polyline": "_n{`FacfmYn@o@nGgPrAiLrAiA~ABlD`E~H`E~BxC`CtE\\dExAdEz@dGfI~Gn@jEuAdUp@l@pAq@u@_GdDyExAHd@x@Gp@oCl@c@r@JlA`HfJjBFhGfC|BT`BlBxBhAbAnE`@bLt@rBhU`GlQWjGxBdSc@nGbD~@tKbD`BnAFvFaBxTCfSfEHj@mCpJcAxIeGzMkEjPsChCuB|GcCpD[lFhFtG`@lDpDjEhCbKRrFpBlDbB|@jWr@`D`AzG~DnG`@r@`@ZbCuBdCsAzFsGtMm@fW|MrHvCvDbMlBXj@mBOKd@~JdDhKnHhArBqCjD",
-   "pointCount": 82,
-   "start": [
-    37.009762,
-    138.64513
-   ],
-   "end": [
-    36.959596,
-    138.587091
-   ]
-  },
-  {
-   "id": "新潟県:113",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "国道352号",
-   "ref": "352",
-   "highway": "trunk",
-   "lengthKm": 15.33,
-   "curviness": 338.9,
-   "flow": 23.1,
-   "turnCount": 225,
-   "score": 75.2,
-   "baseScore": 72.3,
-   "spotCount": 1,
-   "polyline": "wzbcFgy{nYvCgAQa@iD{@nDiAxBZ|AlApCCt@~@dB{@p@nBUhA|@zAnHz@`BkAnEYbBcCxAc@`@cBfAH|@qBlCVN}AbCa@CgDzA}C`D[dDyAr@`@`@hBnBm@~EtArByEjDdAbEeAlDqIzDyEzHnF`GjAFaEbA{EmAgIsAoAuEjAgBaCL_DtLkDfH}InFFtBeD`Cl@f@eA]}Eb@iD~EwDrD}EvC_AzG\\xHcCbI{FjH_MhFyE~HyDfPoBtFuOxAi@nDb@hAQvCuEvIeGdDmK|EoCvGwLfCePrNeLzJ}SJoBeBiEIoBnC{H|@eA|KZfJeAzBw@~DwClH{AxLlAnG_AzCuB~B_D|QqZzEaDtCYhDZnUvE`IfEbCNxNyGfNg@fFf@~Eu@zDsDfGgMdFsE`CkAdM_CnIwG|DcBnJyAvAlBtKvGnD`@|AQ",
-   "pointCount": 113,
-   "start": [
-    37.375319,
-    138.920039
-   ],
-   "end": [
-    37.275405,
-    138.980814
-   ]
-  },
-  {
-   "id": "新潟県:114",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "佐渡一周線",
-   "ref": "45",
-   "highway": "primary",
-   "lengthKm": 13.71,
-   "curviness": 341.5,
-   "flow": 22.2,
-   "turnCount": 211,
-   "score": 75.2,
-   "baseScore": 75.2,
-   "spotCount": 0,
-   "polyline": "_jyhF{malYj@|BdBfBtCbL~Ff@`HbGhFn@vFjB`HZd@q@Oq@eETcFeBmAuB{BgBM}Db@kAr@O`InD|BcAdHaA|AmAvFi@hHzBzCtBxGrL~DjBx@nIbAhApDX\\g@?mBp@}@hA[rAr@Fx@cAxA~@tCD`CbBjA`@vCfAlClChAnDfE~@WVwBtBmE~@BZvGfG`Cy@jEnAxBrAOpEaH|F}AvNaC`D{AlF`ArEYbCxArF|AnBrBnBh@bBIjBxDvA`GnClEvEzDpBJjCrEjEgFhDmB@d@cCjBgCpDw@`Do@z@Nh@d@KfByEpHeFx@wBjGT|BjBbEOpBdB`BdF|PvHhFzD`GdJtHjP|GvDpDrFxC`Oq@dH?xEdBlHpDtGn@bDrAfCh@bLxEbO_@|HPdDrAdD|KdIdDjG?vD_DlJB`E~@zDpLnZlFfAxIjRtErClJhI",
-   "pointCount": 116,
-   "start": [
-    38.309598,
-    138.457422
-   ],
-   "end": [
-    38.239461,
-    138.393909
-   ]
-  },
-  {
-   "id": "新潟県:115",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "川谷十町歩線",
-   "ref": "241",
-   "highway": "secondary",
-   "lengthKm": 11.36,
-   "curviness": 303.3,
-   "flow": 23.1,
-   "turnCount": 149,
-   "score": 74.7,
-   "baseScore": 74.7,
-   "spotCount": 0,
-   "polyline": "kb`bFifklYHeAR`HhBtGJfE`D|JlMjZz@|@`D`A`AYV~A[`FfF]rA`C~Bh@b@`D|Bf@|AhBzBhDb@~BFvDhAhCwA|ECpB^dDrC~Dg@RmCeCi@Ln@~AaAhCGzFfBpE{AdHuCbCwEj@m@dFmOnQgAbEgJ~CoA`AsAdDYhGaEzDwA`LyDfGYhB^tEzA`FnFdHpDdHfGpFfCdIvB`OfKhNh@hBdBvMeApINz@rBhCBx@gHbYe@~HbH|GC|J^lBxG~G|A|EbDtEbAlCqBxCWxDgBtH}GrMyF~FyJ~A{MhImC`EmCjHmG`[yRnSkKzEwAhG",
-   "pointCount": 83,
-   "start": [
-    37.197336,
-    138.507406
-   ],
-   "end": [
-    37.2036,
-    138.41357
-   ]
-  },
-  {
-   "id": "新潟県:116",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "飯山斑尾新井線",
-   "ref": "97",
-   "highway": "primary",
-   "lengthKm": 13.76,
-   "curviness": 331.7,
-   "flow": 22.3,
-   "turnCount": 205,
-   "score": 74.6,
-   "baseScore": 74.6,
-   "spotCount": 0,
-   "polyline": "yjc`Feo~jY[dByBrCw@vDgApAwAdED`@b@@rBuCiBfGqDvASpCo@b@sAVcB[eBl@oGU_Cv@uCuBwJdC{E}@yD`A{PoGsIjD{AQkA{@eEnAwC[iDx@kDsCiG~@oFe@sC{@sAkBmKeBwCBuE~BiAcAoBuFsCkBwAsBuC}AmCe@iB{CcI{BoDFkCp@yAw@uD?yA}@aCfAoB_C_AzCgC~AkF_CgAzEk@TeAxCoAt@oB}@qBnCqB~JuBVoAxCaAR{@dAgCWeB|EcDz@{@z@[bAHfEiGdFSvEgAfCyG|@wEbJoBdA_BDmE~CG|DrExEz@zB`@hKe@~DkFtLsN~PyNdOoMjJmAuEaFgHkCoHuKsMaBk@uJ]wEcAeGVcDcCeFqA}E_FaNyE_EqCeGqRgP_QeFwDmLwGiWIsGsAsEiFuAYeEmF",
-   "pointCount": 111,
-   "start": [
-    36.886368,
-    138.278429
-   ],
-   "end": [
-    36.977331,
-    138.270826
-   ]
-  },
-  {
-   "id": "新潟県:117",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "大潟高柳線",
-   "ref": "78",
-   "highway": "primary",
-   "lengthKm": 14.49,
-   "curviness": 334.2,
-   "flow": 21.6,
-   "turnCount": 224,
-   "score": 74.2,
-   "baseScore": 74.2,
-   "spotCount": 0,
-   "polyline": "emebFicqkYnBoFxDuEbFaDcCiIj@yJcCqUhAcGlDkIVeCa@_BiF{IS{BdB}EjB_QbIkXo@gD_DoFyAgAiFI_HkCyC{EcD_BG_CrCcLbBmCt@yIbE{JxK{e@fN_GlDuFRkLk@eHh@gGbHwD~FyFrIi@~BoAvGoJlBkEzF}XCwEaDwCe@mAeAkWe@gCyHmO}AgQUuOoAiEGeD_AaClFea@rAkClDqB|D{G|@}HIuC~CsLIgDxAwA\\_Bc@eG|@iKgA}G~DuCJmIyAoDa@aLoBkGr@uGg@_Bw@yIhBqGfBaCF{Eh@kDpCyCl@mBjB{AhAyGbFeGPuAgAiDDgB`EyC|@E|@~@`@G^w@FaCbA{@{AkC]oC}@gAK_JZuBo@q@p@sB_BoBoA@k@gAtBoAvDk@Ri@c@sE_Bw@Iw@kAoAh@eAjBa@RoA?mDh@sDm@oD",
-   "pointCount": 115,
-   "start": [
-    37.22467,
-    138.37381
-   ],
-   "end": [
-    37.204305,
-    138.505142
-   ]
-  },
-  {
-   "id": "新潟県:118",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "東谷塚野山線",
-   "ref": "550",
-   "highway": "secondary",
-   "lengthKm": 3.43,
-   "curviness": 360.9,
-   "flow": 20.6,
-   "turnCount": 60,
-   "score": 74.2,
-   "baseScore": 74.2,
-   "spotCount": 0,
-   "polyline": "ay{bF}o{mYhDtDhA_Cn@Y`@X]lEmB~Eq@xFqDlAqAQgF~@wDs@mCbBuWzHgDdEaCz@cD|CmCx@gDnG_BlHkB`FIhEhChClFbA~FaAfBDjKfE|FDfCzBjCK",
-   "pointCount": 30,
-   "start": [
-    37.339211,
-    138.754711
-   ],
-   "end": [
-    37.343187,
-    138.738899
-   ]
-  },
-  {
-   "id": "新潟県:119",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "新潟五泉間瀬線",
-   "ref": "55",
-   "highway": "primary",
-   "lengthKm": 10.03,
-   "curviness": 352.4,
-   "flow": 20.9,
-   "turnCount": 169,
-   "score": 74.1,
-   "baseScore": 74.1,
-   "spotCount": 0,
-   "polyline": "uigeFkwfpYj@~GG`EnAzH~AvDp@fPvF~K`BdHtBfChFrCtP|BlC~EhEdBdBdBl@`C|AC~ArAtB^fCjDVdIbAlDMxBsBtEcGxGk@nJmEbCEd@pDNv@j@zBjHnAlAvBp@nApCt@xE[pJ~@~NjAdJxDfJzFpJrBxEd@lCu@zN}DnD{AfFu@`A_CdBeEPIpAbA`Di@tAwC~@aDc@oEgBIn@n@|@TlB}@zAkAWgCyEsCPWj@RlAdBzBzBhN?zBcA|E|@Qn@iDd@JUvB^rG]bDZ|DtAtAlBLhCvAnB|E|@~@pAxE|Br@|BvF}HrXgDfDaAzBqArI_CdJwFfN}OnN_DNyEeC",
-   "pointCount": 90,
-   "start": [
-    37.725873,
-    139.139902
-   ],
-   "end": [
-    37.721157,
-    139.064394
-   ]
-  },
-  {
-   "id": "新潟県:120",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "角田山麓公園線",
-   "ref": "562",
-   "highway": "secondary",
-   "lengthKm": 4.96,
-   "curviness": 272.5,
-   "flow": 26,
-   "turnCount": 52,
-   "score": 74,
-   "baseScore": 74,
-   "spotCount": 0,
-   "polyline": "_}oeFgkrnYJ[qK`XgFlW_BzByHxEcHvH}Bb@{AQsg@qScEjPeAbL{AtFqJ~GqHzCe@~@a@`KwB|GsDhCQfCiAlCoE|ByAzFaEgAyBrBoBnHmF~G[`BkEvAmCfCaDfA",
-   "pointCount": 31,
-   "start": [
-    37.769922,
-    138.871725
-   ],
-   "end": [
-    37.799123,
-    138.842745
-   ]
-  },
-  {
-   "id": "新潟県:121",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "柳島信濃坂線",
-   "ref": "301",
-   "highway": "secondary",
-   "lengthKm": 8.23,
-   "curviness": 317.2,
-   "flow": 21.9,
-   "turnCount": 119,
-   "score": 73.9,
-   "baseScore": 73.9,
-   "spotCount": 0,
-   "polyline": "mk`aFw_~kY`@pDgBzCaDtCl@fCEbAiCB}BtEkBJwBdBgBDuHjEmCt@ElBaFnSJ`Ay@~A?zBiEtAw@bDeHjIy@nLeDjQWfEgClIgD~WyExFu@rE{B`D{BfH_FjHkCzPcDhDoBvLqEpCaChL{D`Fi@nDuBfCQlDq@^yHZ}DdHuIe@mGmDmDY{AbBoBnF}DxD{AbF_FtD_FHkPtC{GjIyPnAgEnDgB`DuDnPwBvBgBB}Az@",
-   "pointCount": 61,
-   "start": [
-    37.034955,
-    138.439801
-   ],
-   "end": [
-    37.07983,
-    138.381482
-   ],
-   "tags": [
-    "scenic",
-    "winding",
-    "caution"
-   ]
-  },
-  {
-   "id": "新潟県:122",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "西枯木又堀之内線",
-   "ref": "388",
-   "highway": "secondary",
-   "lengthKm": 3.59,
-   "curviness": 344.6,
-   "flow": 21.3,
-   "turnCount": 58,
-   "score": 73.8,
-   "baseScore": 73.8,
-   "spotCount": 0,
-   "polyline": "eixaFccpnY_Bm@qBiC_DeLoB_@cHxH}K~IaANgDs@gAh@]fBfCvCFdBY`@aE~AwNz@u@fB}DvCK`Al@pBEhBqFpJ_BXmHoByIxB{HmA_D@gElB_DlEuAt@gEu@qEzBeC]WX",
-   "pointCount": 34,
-   "start": [
-    37.157471,
-    138.860179
-   ],
-   "end": [
-    37.181451,
-    138.850734
-   ]
-  },
-  {
-   "id": "新潟県:123",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "国道403号",
-   "ref": "403",
-   "highway": "trunk",
-   "lengthKm": 4.88,
-   "curviness": 337.7,
-   "flow": 26.2,
-   "turnCount": 63,
-   "score": 73.6,
-   "baseScore": 73.6,
-   "spotCount": 0,
-   "polyline": "wsqbForymYh@bFBvE]xAdBhDz@hD]pCp@~@pBl@ThCd@t@MfAc@R}BYgAs@a@LMp@p@|Cm@hBf@d@fCG`Dn@~AjEg@bFiF~GmHlSoCn\\B`B`BbIzBzv@_@j\\cAfA}XnKiInIe@hBPxO",
-   "pointCount": 36,
-   "start": [
-    37.287163,
-    138.74488
-   ],
-   "end": [
-    37.293459,
-    138.70157
-   ]
-  },
-  {
-   "id": "新潟県:124",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "鹿熊中浦線",
-   "ref": "471",
-   "highway": "secondary",
-   "lengthKm": 3.12,
-   "curviness": 330.2,
-   "flow": 22.4,
-   "turnCount": 46,
-   "score": 73.6,
-   "baseScore": 73.6,
-   "spotCount": 0,
-   "polyline": "whhdF_`bpY_@fGiC~GqDhFwC|AOhBTbDe@dEeCpCwDz@{CzEgCm@NlBcAzCj@lBGtA`ApK|FvZw@pJ[nNiHf\\_HrJ_AzD",
-   "pointCount": 23,
-   "start": [
-    37.566995,
-    139.115679
-   ],
-   "end": [
-    37.574858,
-    139.086466
-   ]
-  },
-  {
-   "id": "新潟県:125",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "杉野沢二俣線",
-   "ref": "399",
-   "highway": "secondary",
-   "lengthKm": 3.3,
-   "curviness": 304,
-   "flow": 23.9,
-   "turnCount": 42,
-   "score": 73.4,
-   "baseScore": 73.4,
-   "spotCount": 0,
-   "polyline": "ihd`F}ujjY^oFUuAiCkBsE}FmBgAEyDoHqAiBPZgKeI_B}BkAiJfAyCcAS}TuFgKmBs@}F~CwBVa@]eBwHyOcTlCaV",
-   "pointCount": 23,
-   "start": [
-    36.891087,
-    138.177114
-   ],
-   "end": [
-    36.906532,
-    138.198548
-   ]
-  },
-  {
-   "id": "新潟県:126",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "柏崎越路線",
-   "ref": "72",
-   "highway": "primary",
-   "lengthKm": 13.4,
-   "curviness": 312,
-   "flow": 22.2,
-   "turnCount": 188,
-   "score": 73,
-   "baseScore": 73,
-   "spotCount": 0,
-   "polyline": "{s~bFurfmYiC{AcM}NwBsOiHkTj@oSHgb@k@iCwVgTkQuC}IoDkFEoCgEcJqFqGiGgQsL_NuGwB}FqEfAmDcDuD^qCaAqDfKqFdDiFg@uBcCeBgFiB}BU{Ea@qAeBaBkDaAaBwGMqAt@_ERqFdEkJ]oBcAaBLcKnEuJjAiRu@aCoCuCqFaDc@_BlD}HhCcAbJGx@[b@qAUsCq@eAc@SiDv@aGcFkHi@qB{A[_BT}Cs@aDC}DaBoGwBgD[mCxAoDyBSWs@^e@lCSr@u@Gw@cBOWm@fBaC]wG|@uDvCpAz@UPcDpAkEZaFfAiAxCe@hDqHXiG|@aDY}Dv@_D_BiDdBsAb@iBK{BhBmCO}DfBmCxCgUvGyUtBaKvAeDpAeHdCiFjEgDbAaS",
-   "pointCount": 104,
-   "start": [
-    37.353735,
-    138.647628
-   ],
-   "end": [
-    37.379462,
-    138.745664
-   ]
-  },
-  {
-   "id": "新潟県:127",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "杉沢上樫出線",
-   "ref": "442",
-   "highway": "secondary",
-   "lengthKm": 3.67,
-   "curviness": 247.1,
-   "flow": 24.5,
-   "turnCount": 37,
-   "score": 72.9,
-   "baseScore": 70,
-   "spotCount": 1,
-   "polyline": "qz~cF_ngoY|@n@zDzJjBPB_Of@yCbBeB|CkYQkUfIv@lBuEtDc@rBFzCdCpAMj[mZ`DmKlAeAvLsC~NuGpBVjFhE",
-   "pointCount": 22,
-   "start": [
-    37.518653,
-    138.979682
-   ],
-   "end": [
-    37.498319,
-    138.997145
-   ]
-  },
-  {
-   "id": "新潟県:128",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "柿崎牧線",
-   "ref": "61",
-   "highway": "primary",
-   "lengthKm": 13.12,
-   "curviness": 336.8,
-   "flow": 20.4,
-   "turnCount": 217,
-   "score": 72.8,
-   "baseScore": 72.8,
-   "spotCount": 0,
-   "polyline": "kcjaF_~okYq@aEw@uAqEcAwDeCo@Nm@rDk@l@}CQwDyA_@iA[qJy@aAkE`@iFy@}@t@cB~FcAJeBmAIy@xAeHlBqSdFgI|@kGEkEqA}OwCcAkC_E`BiLUoCRyBuDiJk@{GLuE_A}DyAuBuD{P_AyBc@uDmBeAcBiDmFDyHuEmBY{AV{AvCsD~BkGjAiDe@{CRoC}A}CQsBcBeCc@_BsB_F_DuBUOi@Rc@xG|Ab@u@yF}AmB{Aa@q@O}BoBKaCkF{EyB[cDuF}CaCM}@uASmDwDs@y@sCgBeBBiCcDsOmAaNiB_F_AsGy@eAsImE}Gz@qHwEuAW{IxAeFsCeCg@_HrAsCSkGdA_Em@eEcFy@WyNnC}CkEiAo@uFqA}MbA}PoJoHd@aC~D{HB}S_G_BVwDpD{@F}EwBiJ}N_PkE",
-   "pointCount": 111,
-   "start": [
-    37.084863,
-    138.36784
-   ],
-   "end": [
-    37.158824,
-    138.426926
-   ]
-  },
-  {
-   "id": "新潟県:129",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "滝之又堀之内線",
-   "ref": "230",
-   "highway": "secondary",
-   "lengthKm": 4.14,
-   "curviness": 327.9,
-   "flow": 21.2,
-   "turnCount": 64,
-   "score": 72.7,
-   "baseScore": 72.7,
-   "spotCount": 0,
-   "polyline": "}~qbFmcdoYwDhBkA}@qEZiMvOsB`E{CpCoFfA}BnAaDPwCe@kHpAeAzGoBfEeFtFyDnAcD`CsA`@mDc@yC|@oDfEoEdCmAe@a@sAe@CkHtC}BgAkBAcCrBoE~Au@bEwA~CiAg@qANoFhDoKfBmGhC_F`A",
-   "pointCount": 38,
-   "start": [
-    37.28895,
-    138.962634
-   ],
-   "end": [
-    37.319916,
-    138.94529
-   ]
-  },
-  {
-   "id": "新潟県:130",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "上小沢北条線",
-   "ref": "455",
-   "highway": "secondary",
-   "lengthKm": 3.61,
-   "curviness": 259.5,
-   "flow": 26,
-   "turnCount": 36,
-   "score": 72.5,
-   "baseScore": 72.5,
-   "spotCount": 0,
-   "polyline": "sez`Fku|jY_BoB{AWyGjAqBrAcPzDgb@pDoCfAcFp@aEAA}BwDKoDxAkQN{NsBuQkH?qDz@_J{H}@qBgAgA{BgA\\iFw@",
-   "pointCount": 23,
-   "start": [
-    37.003304,
-    138.269178
-   ],
-   "end": [
-    37.031453,
-    138.272938
-   ]
-  },
-  {
-   "id": "新潟県:131",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "神立湯沢線",
-   "ref": "351",
-   "highway": "secondary",
-   "lengthKm": 4.62,
-   "curviness": 316.6,
-   "flow": 21.5,
-   "turnCount": 68,
-   "score": 72.4,
-   "baseScore": 72.4,
-   "spotCount": 0,
-   "polyline": "mni`FktenYn@wAYyAgD{C}BImBiA{@yB{Aw@sAQwApAgEAuRuDiLaJ_@kBRcEOaAw@{@aBLg@lAf@vF]jBkEzAmC`D{M~BwE_FaAyCaD_CA_AwAwDmBrBcI|CaEnCeNhUaD|DgLtF}IbJwBx@aFRsCjDuBq@",
-   "pointCount": 40,
-   "start": [
-    36.917673,
-    138.806618
-   ],
-   "end": [
-    36.948633,
-    138.80312
-   ]
-  },
-  {
-   "id": "新潟県:132",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "下折立浦佐停車場線",
-   "ref": "265",
-   "highway": "secondary",
-   "lengthKm": 6.79,
-   "curviness": 323.2,
-   "flow": 20.3,
-   "turnCount": 108,
-   "score": 72.3,
-   "baseScore": 72.3,
-   "spotCount": 0,
-   "polyline": "gebbFaswoY`AGbEcCbH?vFqEzG_AtDuCrJLpHyBvPfBzIw@|LjFjEjFhIxElFlB|AxEHbFzAhDlDlElHdAtDwAxBpArQrCzA~ACbB`@h@dCaAnDfAzAzC`BlJxDMpH{BpFaDnEk@vCdAbN?xCrDdIjEvAM^pBjCfEz@h@P`DnBrAUzCTpGdAf@|DrG~@vDfDbDlGn@zB~EdBjB",
-   "pointCount": 53,
-   "start": [
-    37.208044,
-    139.062409
-   ],
-   "end": [
-    37.159193,
-    139.041667
-   ]
-  },
-  {
-   "id": "新潟県:133",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "妙照寺佐和田線",
-   "ref": "305",
-   "highway": "secondary",
-   "lengthKm": 6.29,
-   "curviness": 283.1,
-   "flow": 23.1,
-   "turnCount": 77,
-   "score": 72.2,
-   "baseScore": 72.2,
-   "spotCount": 0,
-   "polyline": "wv_gFa{gkYsAOsEyBmAD_LtC_Kr@mEdCaMz@uVeAsU_GiFq@|@_K[eFuATqAkG\\}FUuCsCiEa@_BcBqA[cCn@aEsCeGKiCt@uAvFw@~@u@XgBO}KdLGlTuCdFRnBvAvCqIjAu@zEbB`FqB`Dd@dBvAzD{ChBr@tOy@pJuBhDJdGlApGU",
-   "pointCount": 46,
-   "start": [
-    38.014681,
-    138.326413
-   ],
-   "end": [
-    38.011811,
-    138.3451
-   ]
-  },
-  {
-   "id": "新潟県:134",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "新津茨曽根燕線",
-   "ref": "127",
-   "highway": "secondary",
-   "lengthKm": 5.67,
-   "curviness": 299.8,
-   "flow": 22.1,
-   "turnCount": 77,
-   "score": 72.1,
-   "baseScore": 72.1,
-   "spotCount": 0,
-   "polyline": "s}ceFudhoYrBH~EpCxFdB~CnB|ApD\\jGpAvDR`LhRnV[fYhEvJlD`TxBxDfAxDdB|Bf@vT`GfHfHzCbGzDn@~F`BtEl@tEPdQd@ZtBMdCdNlAxCvElDnAhCpEhDhCpOkA`KBtBn@pCpAdBgAtEoEfD@dA",
-   "pointCount": 39,
-   "start": [
-    37.70858,
-    138.983314
-   ],
-   "end": [
-    37.688111,
-    138.933157
-   ]
-  },
-  {
-   "id": "新潟県:135",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "柏崎高浜堀之内線",
-   "ref": "23",
-   "highway": "primary",
-   "lengthKm": 10.52,
-   "curviness": 331.2,
-   "flow": 20.4,
-   "turnCount": 171,
-   "score": 72,
-   "baseScore": 72,
-   "spotCount": 0,
-   "polyline": "m{ybFgawnY?rCyB~BoCVgBjADtL_AdBe@C}B{CoDEmAcGcCmDuBoGyBgBm@p@HhF{AtHmAQmCiG}@MoBdA}FpKmBZkBzBaGF}DpCYv@IhI_@nDrAfDAfEuGxFgEEu@t@\\dBpEAv@v@q@bIy@jAkBm@kEsFsDqCgEKoCmC_ByEmIqDmBmCeC_@}CVsG{DeJt@uEtCwDzGuHzAeDxAaEdEuGjMyA~@qMlCoDzEw@nFdApUGzD}@tDVbFeGxMiCNyBjBkGCqCpAoBxCmO|Em@t@cA~DyDbAgA`AwDnKsApBiBb@eGKaEj@yEzB}IhIcE_@iClCqDfJ{L|FUvO",
-   "pointCount": 88,
-   "start": [
-    37.329355,
-    138.895718
-   ],
-   "end": [
-    37.387967,
-    138.853135
-   ],
-   "tags": [
-    "winding",
-    "caution"
-   ]
-  },
-  {
-   "id": "新潟県:136",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "柿崎小国線",
-   "ref": "25",
-   "highway": "primary",
-   "lengthKm": 22.25,
-   "curviness": 287.9,
-   "flow": 22,
-   "turnCount": 291,
-   "score": 71.9,
-   "baseScore": 71.9,
-   "spotCount": 0,
-   "polyline": "s`tbFcoamYg@zUf@bDApBZTfD_AXTaBrD\\lBp@|@h@sC`AeBlAHFxAsArFcAb@_C_@w@l@uD`QjBvI^|LpCvM|@bDhFhIlFrPT`CSrG^xBvDrGlD~Cp@zBN`Fr@pBtDdDrKfDtIdF~F?pBbAxChNCjCgCbNjA|P[nAkF~@}@t@c@nBJvF\\pApFtBr@`AnEhM\\vIx@tBtHzGdS|FhBdBzCtF`@pBE`U{DnHaC|IG`B`FlMhA`RxBpJdCpQdFtG|A|KpEfObEvFvC`PQrDkA|DObG_@FoAaEiByBKn@x@vDqBxD}D|Ds@~B`Dt@fDzBhBs@tADtBqB|Db@g@z@}CX{@zB}Aj@wChCFb@^?pBeAjA@vByChAx@jCw@zDmDlDlArCgBtCAfCiCz@cCNeB[iGXBz@tHWvDaBtCuCdCIfAbEhCpLx@rFpDrGhHtF`CpD|FhCjIdE|EbD~FhElCzKvSjInKH`CbCpIpHnQnBpBfFbRNtAgCvESzDhGnVl@hP~CjEnAbKrCfBLrCwA~JfArFnB|ZfA`EzFtD~AnEe@nm@_@tDn@nLz@hChBvBhIdEfBbB`CnFf@|G|EhBbDtCz@zBPvBKjCaD`Or@nBrCjB`@tOYxDoC~G_PlSoFtN{BpB",
-   "pointCount": 169,
-   "start": [
-    37.299464,
-    138.621462
-   ],
-   "end": [
-    37.24336,
-    138.450714
-   ]
-  },
-  {
-   "id": "新潟県:137",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "滝之又堀之内線",
-   "ref": "230",
-   "highway": "secondary",
-   "lengthKm": 3.24,
-   "curviness": 288.3,
-   "flow": 23.3,
-   "turnCount": 40,
-   "score": 71.6,
-   "baseScore": 71.6,
-   "spotCount": 0,
-   "polyline": "wckbFo`|nYwBsEe@aDxIkONeB[oGfFqM^gKtAkBzAEr@i@jDdAxAdB`GtBr@tDjAZbEhEnBmDbEqLbCuLdEgMlBuCn@wBP_EfByLrCeI|@a@",
-   "pointCount": 27,
-   "start": [
-    37.253884,
-    138.921202
-   ],
-   "end": [
-    37.240672,
-    138.942948
-   ]
-  },
-  {
-   "id": "新潟県:138",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "小白倉木落線",
-   "ref": "326",
-   "highway": "secondary",
-   "lengthKm": 5.49,
-   "curviness": 312.7,
-   "flow": 20.7,
-   "turnCount": 83,
-   "score": 71.5,
-   "baseScore": 71.5,
-   "spotCount": 0,
-   "polyline": "aecbFk~zmYkIbU_HvEJtH|@`FKnBlD|GWpAaBxBHlA|CtAjCuCfASnCT~At@T~@Wn@oElBaFnEkE~JMnBrAjO~AbDMhD`@|CnBhCpClIxFv[dAvLfDdPcAlBW`CmFpGeDp@kGy@{Cx@kBw@mAeDmCCmCsAkHx@gOgCiByAwDwHqAF",
-   "pointCount": 45,
-   "start": [
-    37.213126,
-    138.751898
-   ],
-   "end": [
-    37.224006,
-    138.720706
-   ]
-  },
-  {
-   "id": "新潟県:139",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "上路市振停車場線",
-   "ref": "115",
-   "highway": "secondary",
-   "lengthKm": 6.7,
-   "curviness": 257.6,
-   "flow": 19.4,
-   "turnCount": 89,
-   "score": 71,
-   "baseScore": 66.4,
-   "spotCount": 2,
-   "polyline": "adt`Fo{kgYFhAz@tAWvHt@rBIvD{AnDPzEcB~LVpC~ErIfBlGpJnNrFxFV`OzFzPpIrSlCbOpE~GpHuBr@HdBvGa@fA}ClAi@nBLpBnAhDFrE_@dAmBtAoAlDZvKu@dC_DvCyMfEmGlGkDxEyBxE}AjDeAzEsDfEkBrJaRt_@sAl@q@~AmAt@oEbGcMtJ",
-   "pointCount": 48,
-   "start": [
-    36.97233,
-    137.691598
-   ],
-   "end": [
-    36.978362,
-    137.634755
-   ]
-  },
-  {
-   "id": "新潟県:140",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "柴倉津川線",
-   "ref": "228",
-   "highway": "secondary",
-   "lengthKm": 8.07,
-   "curviness": 192.9,
-   "flow": 27.8,
-   "turnCount": 56,
-   "score": 70.9,
-   "baseScore": 79.3,
-   "spotCount": 0,
-   "polyline": "ohjdFyqorYuElGM`CqBdDXxEmOnJ_AnJ}@zCgBnCmDvCaD|GyCvCyA~GwAvC}HpHwFuAaAl@cKpWU`FRdK]dBgD\\uCbDcEd@iKbF{@lAo@nHmAfByGE}GkFwBbBqC|@_B~JyML{B`@sBlAgCjEaAjIIzFa@xCv@lE{@`JqKtLiDtAuFb@eF`BkH_AiJh@cI}AmE`@_DpBeGrG_FpBmB|EyJbMoJdEoF`E}AhC",
-   "pointCount": 58,
-   "start": [
-    37.5772,
-    139.51277
-   ],
-   "end": [
-    37.62648,
-    139.46386
-   ],
-   "reshaped": true,
-   "tags": [
-    "winding",
-    "flowing"
-   ]
-  },
-  {
-   "id": "新潟県:141",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "月池松代線",
-   "ref": "243",
-   "highway": "secondary",
-   "lengthKm": 6.71,
-   "curviness": 274.1,
-   "flow": 19.6,
-   "turnCount": 94,
-   "score": 70.7,
-   "baseScore": 67.8,
-   "spotCount": 1,
-   "polyline": "safaFcktlYsC`BoA]yCLkBbB}FqC{Dh@eDwBq@f@S~CwAdA}D_FWkDiCKoAkBsAs@qHmOuKsFwBWgFV}F`FeLfBsAm@iGgHqFsBiBE}GtB_Y}HaP^gNyAgFgCqLyQg@EmCfCkCWmEuEiCcAaDuDsEcBwGpAmLPaG`KkFB{IzCeKgGmGuH",
-   "pointCount": 46,
-   "start": [
-    37.064102,
-    138.554255
-   ],
-   "end": [
-    37.115502,
-    138.567392
-   ]
-  },
-  {
-   "id": "新潟県:142",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "胎内二王子公園羽黒線",
-   "ref": "53",
-   "highway": "primary",
-   "lengthKm": 25.15,
-   "curviness": 278.6,
-   "flow": 21,
-   "turnCount": 333,
-   "score": 70.4,
-   "baseScore": 70.4,
-   "spotCount": 0,
-   "polyline": "ouigF{p`rYjFkAt@wCQcC_FuKsAkF]mDfC{u@r@uB`E{@|CkDgGsInHqExIqHpC{JhA{ItFaMzGuLnGaFfD_GdMsCrH}H`O_E`VgLtQ_EfBFhJbKzDbAtEtGjLv@xGtCbCcMvI{Gp@iAjAyVxD{ItKaPlSmOdGsMvDiFfFyd@~GmKEaE^cA|FAlA{@z@mBtAeLAsQrFyN`DkD^qAO}LlBiGbG{DvO}BhK|AnF[pBmAdFwFl@iAr@gEdCwCrEi@|EqCPsBu@eIHgBrCwPzCcH_@}EtBoEt@qNl@qAzPcDz@DtBzAhIyBxAeBfAuIdCmC`A[lHf@hAi@rAaIfCaEjMe@rC}BvDu@~DNjDjGnIjDhE~DfFnCz@BpCcEzDeC^mBQkGrB_EzAwFnCgAnDDn@lAfHzD^?Z}@\\R~@jDpF`GlBbHfCv@b@_@LqBu@{FXiDvCiGDoBlBUx@mClB~AdCc@d@vArDlC~ArCxAlGdBjAf@_AMmCtAaBW}A^sBEyB~MmKxFzA|DNl@`DlDxCjAzBfA|Ht@r@h@WhAcEj@i@nCKjAsDlCyCtAa@rFXt@gBv@E~C~E|@`@h@~C|DpAjCtBzGdNnClA`F?b@CZu@R{HpCcFnHiD~LgLlIqBlFeFvBeAxNY~FsBvADhHbHl@vH~AfAfUw@zHuBjF?vLcIIcB}CoA",
-   "pointCount": 180,
-   "start": [
-    38.065685,
-    139.435822
-   ],
-   "end": [
-    37.924968,
-    139.541218
-   ]
-  },
-  {
-   "id": "新潟県:143",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "牧横住線",
-   "ref": "278",
-   "highway": "secondary",
-   "lengthKm": 5.19,
-   "curviness": 304.3,
-   "flow": 20.2,
-   "turnCount": 78,
-   "score": 70.3,
-   "baseScore": 70.3,
-   "spotCount": 0,
-   "polyline": "iaqaF_zykY`BgDrJcHrD}IVaEv@{CjGeHtCyE~@kDhCwAzH}IfFoC^s@Q}B\\y@~JoHbBIrCsApJiInGmDdD{Gr@WnEO|Fb@zLoCdBjCXpCtAnAbIDtC{AlC`@rBS|GpC^fAzCrCPpA`B`CzDRjDnCvEhFXtBx@fAlJ|AnD|BbD?",
-   "pointCount": 45,
-   "start": [
-    37.120372,
-    138.418396
-   ],
-   "end": [
-    37.084159,
-    138.429982
-   ]
-  },
-  {
-   "id": "新潟県:144",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "小出守門線",
-   "ref": "70",
-   "highway": "primary",
-   "lengthKm": 3.52,
-   "curviness": 262.2,
-   "flow": 22.5,
-   "turnCount": 41,
-   "score": 70.2,
-   "baseScore": 67.3,
-   "spotCount": 1,
-   "polyline": "w{|bF}~toYjAmFt@}@pQZjEdAbAbCBfE\\hAbMpMhDpG^|H~@lF?hFo@pAuBdAM~ClCdEzAlGF~ChALjHjEtEpGjHbApC`DjNtGhOsC|C?",
-   "pointCount": 27,
-   "start": [
-    37.344756,
-    139.048953
-   ],
-   "end": [
-    37.324681,
-    139.031316
-   ]
-  },
-  {
-   "id": "新潟県:145",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "上塩栃尾線",
-   "ref": "317",
-   "highway": "secondary",
-   "lengthKm": 7.86,
-   "curviness": 263.4,
-   "flow": 17.9,
-   "turnCount": 116,
-   "score": 70,
-   "baseScore": 65.4,
-   "spotCount": 2,
-   "polyline": "on{cFczvoYbGdHlLzBfIeAtH~CbC`@hFvDrDfEhPyChEx@bA~@tAtExEfElAjCxCtC|BdFbDvCbBClEkBvEz@fKcBxCTtCyC|FMxBu@~@n@lAtGpEz@FtBkAbBcF~@}ArAiCbG@lCjBfE|A~G~HtL|@jJnAdDxJvE~FzAnDlEj@vBZbGbBpDg@fF`@pFhAlBzI`I|A~LUrAqBt@]|@vDxHWrZ{C`NoMdX{@tCAfB",
-   "pointCount": 59,
-   "start": [
-    37.501358,
-    139.058425
-   ],
-   "end": [
-    37.469301,
-    139.010396
-   ]
-  },
-  {
-   "id": "新潟県:146",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "国道353号",
-   "ref": "353",
-   "highway": "trunk",
-   "lengthKm": 3.47,
-   "curviness": 355.3,
-   "flow": 22,
-   "turnCount": 56,
-   "score": 69.8,
-   "baseScore": 69.8,
-   "spotCount": 0,
-   "polyline": "uuv`F}`enYeA|CeKlNLxVnAlJ[tNiAjG_@hKXnA|BvBjFdCbBhGoAnJg@X_DOaAhFf@\\rAo@h@TVbDlDpKjAfBdAc@QgMd@k@r@ZFlIhBjGtAbL",
-   "pointCount": 29,
-   "start": [
-    36.985385,
-    138.803506
-   ],
-   "end": [
-    36.983274,
-    138.776785
-   ]
-  },
-  {
-   "id": "新潟県:147",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "原田川線",
-   "ref": "416",
-   "highway": "secondary",
-   "lengthKm": 4.58,
-   "curviness": 299.4,
-   "flow": 20.2,
-   "turnCount": 68,
-   "score": 69.7,
-   "baseScore": 69.7,
-   "spotCount": 0,
-   "polyline": "gkjbFupznY~B~@pF]pPjApMtChIQhFtAdGfDhBjDl@tFl@rArQ~QrCdAlDbFnAz@zB~D`Bz@vBfC\\lDfExNSz@_Ci@]jAfD~HjBtLe@BcEgEuJcD{A}CwAaA_A`@n@dBlF|FvItGStEjAxD",
-   "pointCount": 36,
-   "start": [
-    37.249964,
-    138.913548
-   ],
-   "end": [
-    37.230339,
-    138.891715
-   ]
-  },
-  {
-   "id": "新潟県:148",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "紫雲寺菅谷線",
-   "ref": "545",
-   "highway": "secondary",
-   "lengthKm": 6.04,
-   "curviness": 259.6,
-   "flow": 22.4,
-   "turnCount": 70,
-   "score": 69.6,
-   "baseScore": 69.6,
-   "spotCount": 0,
-   "polyline": "owxfF{h|qYlE`Q_Q~DgA|@LxF~@dC`@A`AgC~@H?hHzAnIWV_@[sAsGc@QKd@`BzJ[hFk@fAyDTeDpCmFzb@JxJmAnH_DlIeCxYaM`WyI~\\qD~Qe@tHBbKd@lEfBtCfAdSyBnd@DdB`B~F",
-   "pointCount": 37,
-   "start": [
-    37.97896,
-    139.414063
-   ],
-   "end": [
-    37.989117,
-    139.359394
-   ]
-  },
-  {
-   "id": "新潟県:149",
-   "region": "niigata",
-   "regionName": "新潟県",
-   "name": "滝谷上赤谷線",
-   "ref": "335",
-   "highway": "secondary",
-   "lengthKm": 5.67,
-   "curviness": 289.9,
-   "flow": 20.3,
-   "turnCount": 81,
-   "score": 69.5,
-   "baseScore": 69.5,
-   "spotCount": 0,
-   "polyline": "m|xeFaokrYItEb@vCz@`CpCfDoAxAaBj@o@dGPvHtBlMXNN_@y@sGP{@rAjHx@vAE|Fj@pDoCzJrBdMeAnEmDdE[`FzAvH?nEqErM{AhCWdCvA|ILhH`C|KnBnFFdCeEzISjCTvG[|DeHnTm@rJqCbJ_@vM}AtAkKt@qBbAwEtLaFvI",
-   "pointCount": 46,
-   "start": [
-    37.815907,
-    139.491846
-   ],
-   "end": [
-    37.824138,
-    139.440353
    ]
   }
  ],
- "hiddenCount": 45
+ "hiddenCount": 86
 }

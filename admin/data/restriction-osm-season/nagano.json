@@ -1,0 +1,89 @@
+{
+ "prefecture": "長野県",
+ "romaji": "nagano",
+ "builtAt": "2026-10-24T13:02:03.529Z",
+ "count": 2,
+ "source": "openstreetmap",
+ "sourceUrl": "https://www.openstreetmap.org/",
+ "attribution": "© OpenStreetMap contributors（ODbL）",
+ "candidates": [
+  {
+   "id": "osmw-nagano-149062143",
+   "prefecture": "長野県",
+   "city": "",
+   "sourceRoad": "乗鞍岳線",
+   "matchedName": "乗鞍岳線",
+   "from": "",
+   "to": "",
+   "target": "access:conditional=yes @ (Jul 1-Sep 30 06:00-18:00; Oct 1-Oct 31 07:00-18:00)",
+   "targetLabel": "二輪すべて",
+   "confidence": "OSM",
+   "reason": "OSM の access:conditional=yes @ (Jul 1-Sep 30 06:00-18:00; Oct 1-Oct 31 07:00-18:00)（開いている期間）の外を閉鎖とした。開通日を道路管理者の発表で確かめること",
+   "chainPolyline": "qon{Es{qfYRk@nFZhDq@vBeBhGeBrBzAxBYpC}EfAoEpCaBlBd@NhC|BlAr@bEhFrA`BiA`EkIpF}DrCg@yGkAu@qBgE_ByAqBuBzA{@_@`DcHmBaBr@iGpDa@aB{AuEBoAmD`DoAs@mDnCs@xBdATm@a@mDuC_DaBkAmDGbBgCoBDaCjDYa@^yAg@?_DlQkDlEaEoCPkEs@uB_Bs@eFRsDyALm@~EpApIwCrBh@cBoB_FpAiE[vGqArDiE}EjAqDm@yAmA?aA`Gb@~B{AwDO}AkEqAu@p@_ArD`CuCaIoAg@pAoBSeAmAVxA_Ew@ScBnB",
+   "polyline": "qon{Es{qfYRk@nFZhDq@vBeBhGeBrBzAxBYpC}EfAoEpCaBlBd@NhC|BlAr@bEhFrA`BiA`EkIpF}DrCg@yGkAu@qBgE_ByAqBuBzA{@_@`DcHmBaBr@iGpDa@aB{AuEBoAmD`DoAs@mDnCs@xBdATm@a@mDuC_DaBkAmDGbBgCoBDaCjDYa@^yAg@?_DlQkDlEaEoCPkEs@uB_Bs@eFRsDyALm@~EpApIwCrBh@cBoB_FpAiE[vGqArDiE}EjAqDm@yAmA?aA`Gb@~B{AwDO}AkEqAu@p@_ArD`CuCaIoAg@pAoBSeAmAVxA_Ew@ScBnB",
+   "lengthMeters": 8047,
+   "geocode": null,
+   "kind": "winterClosure",
+   "minCc": null,
+   "maxCc": null,
+   "activePeriod": {
+    "from": "11-01",
+    "to": "06-30"
+   },
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "fragmentCount": 6,
+   "alreadyRegistered": false
+  },
+  {
+   "id": "osmw-nagano-149062151",
+   "prefecture": "長野県",
+   "city": "",
+   "sourceRoad": "乗鞍岳線",
+   "matchedName": "乗鞍岳線",
+   "from": "",
+   "to": "",
+   "target": "access:conditional=yes @ (Jul 1-Sep 30 06:00-18:00; Oct 1-Oct 31 07:00-18:00)",
+   "targetLabel": "二輪すべて",
+   "confidence": "OSM",
+   "reason": "OSM の access:conditional=yes @ (Jul 1-Sep 30 06:00-18:00; Oct 1-Oct 31 07:00-18:00)（開いている期間）の外を閉鎖とした。開通日を道路管理者の発表で確かめること",
+   "chainPolyline": "}`n{Em|ufYMmHy@y@E}AsDjBqDyEiAuDjHwSAkD`@CRrBu@vIV`@~B}Rb@VCnFn@@XgLpBnEp@P~CwGlDaDjBvDhC_BXaGnAqEjBHrCwFbC`@lAcApCt@rDk@tB_CdDSjDoBjAiCnASf@cByCVoBrC}GQmDxAcCMkDyEaINvJyBdEfA|Au@NsA",
+   "polyline": "}`n{Em|ufYMmHy@y@E}AsDjBqDyEiAuDjHwSAkD`@CRrBu@vIV`@~B}Rb@VCnFn@@XgLpBnEp@P~CwGlDaDjBvDhC_BXaGnAqEjBHrCwFbC`@lAcApCt@rDk@tB_CdDSjDoBjAiCnASf@cByCVoBrC}GQmDxAcCMkDyEaINvJyBdEfA|Au@NsA",
+   "lengthMeters": 5082,
+   "geocode": null,
+   "kind": "winterClosure",
+   "minCc": null,
+   "maxCc": null,
+   "activePeriod": {
+    "from": "11-01",
+    "to": "06-30"
+   },
+   "activeMonths": [
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "activeDays": null,
+   "includesHoliday": false,
+   "activeHours": null,
+   "fragmentCount": 6,
+   "alreadyRegistered": false
+  }
+ ]
+}
