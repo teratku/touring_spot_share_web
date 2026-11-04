@@ -12,7 +12,7 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://biketeilen.web.app/">
     <meta name="apple-itunes-app" content="app-id=1466607921">
-    <script src="/share.js" defer></script>
+    <script src="/share.js?v=2" defer></script>
 
     <!-- OGP -->
     <meta property="og:title" content="ツーリングスポットシェア - バイクツーリングスポット共有サービス">
@@ -59,6 +59,7 @@
     <script defer src="/__/firebase/12.4.0/firebase-analytics-compat.js"></script>
     <script defer src="/__/firebase/init.js"></script>
     <script defer src="/analytics.js?v=2"></script>
+    <script defer src="/app-link.js?v=1"></script>
     <!-- サブスクの状態（プランの上限を決める。2026-10-08） -->
     <script defer src="/subscription.js?v=2"></script>
 
@@ -3924,7 +3925,7 @@
             <div class="app-store-banner-sub">アプリでもっと便利に</div>
           </div>
         </div>
-        <div class="app-store-banner-actions">
+        <div class="app-store-banner-actions" data-placement="top-banner">
           <a href="https://apps.apple.com/jp/app/id1466607921" target="_blank" rel="noopener noreferrer" class="app-store-badge-link" @click="dismissAppBanner">
             <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg"
                 alt="App Store からダウンロード"

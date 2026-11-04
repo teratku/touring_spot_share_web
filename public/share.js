@@ -113,6 +113,7 @@
       if (until && Date.now() < until) return;
     } catch (_) {}
     var bar = document.createElement("div");
+    bar.setAttribute("data-placement", "share-banner");  // app-link.js がどこで押したかに使う
     bar.style.cssText = "position:fixed;left:0;right:0;bottom:0;background:linear-gradient(90deg," + TEAL + ",#0bbed6);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px;z-index:99998;font-size:14px;box-shadow:0 -2px 10px rgba(0,0,0,.15)";
     bar.innerHTML =
       '<span style="font-size:20px">🏍️</span>' +

@@ -26,6 +26,8 @@ const PROJECT_ID = "biketeilen";
 const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const ICON = path.join(__dirname, "..", "public", "icon-512.png");
 const LIST_URL = "biketeilen.web.app/winter-closures.html";
+/** 投稿に載せる URL。⚠️ 経路の印を付ける（GA4 で X の投稿から来た人を数える・利用者の要望 2026-11-04）。X は URL を長さによらず23文字に数える */
+const POST_URL = `https://${LIST_URL}?utm_source=x&utm_medium=social&utm_campaign=weekly_closures`;
 const MAX_ROWS = 6;
 
 function arg(name) { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : null; }
@@ -137,7 +139,7 @@ async function main() {
     `--user-data-dir=${path.join(dir, ".chrome")}`, "--window-size=1600,900", `--screenshot=${png}`, "file://" + html],
     { stdio: "ignore" });
   fs.rmSync(path.join(dir, ".chrome"), { recursive: true, force: true });
-  const text = postText(week, { url: `https://${LIST_URL}` });
+  const text = postText(week, { url: POST_URL });
   fs.writeFileSync(path.join(dir, "post.txt"), text + "\n");
   for (const x of [...week.closing, ...week.reopening]) console.log(`  ${x.dateLabel} ${x.hour} ${x.name}（${x.prefecture}）${x.usual ? " 例年" : ""}`);
   console.log(`\n${png}\n${path.join(dir, "post.txt")}\n\n${text}`);
