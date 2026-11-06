@@ -16,3 +16,6 @@ data/restriction-osm/
 
 # 毎週の「今週閉まる道」の画像（buildWeeklyClosures.js）。画像は git に入れない
 generated/weekly-closures/
+
+# 未知のスポットの候補（buildUnknownSpots.py が OSM から作る・約11MB・作り直せる）
+data/unknown-spots.json

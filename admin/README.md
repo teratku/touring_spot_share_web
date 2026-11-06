@@ -188,6 +188,22 @@ node setRallyStatus.js --year 2026 --status paused           # 年度一括
 - 好みの決め方はアプリ（`RiderSignals.swift`）と同じ（`lib/riderInsights.js`。重み: 投稿・プラン 1.0／★4以上の口コミ 0.8／いいね 0.6／選んだ記録は回数）。片方だけ変えない
 - 投稿の「近くの道」は、この画面では道の種類だけを使う（アプリは配信データから道を引き当てて札・曲がり具合まで使う）
 
+### 未知のスポット（`/unknown`・開発者だけ・本番を読むだけ）
+
+定義はアプリの repo の `docs/unknown-spots-definition.md`。利用者の判断（2026-11-06）: B（アプリにとって未知・OSM から）を本命・A（自分にとって未知）も一緒・通り過ぎたは未知のまま。まずはこの画面で開発者だけが確かめる。
+
+| メソッド | パス | 用途 |
+|---|---|---|
+| GET | `/unknown` | 画面（unknown-spots.html）。種類ごとの数（未知・投稿済み・道が遠い・手がかりなし）、地図に未知の候補（近いものは数の丸にまとめる・markerclusterer）、外した候補を灰色で、A の一覧 |
+| GET | `/api/unknown/spots?refresh=1` | `data/unknown-spots.json` の候補をアプリの投稿・おすすめ道路と比べて判定（1週間覚える。候補を作り直すと読み直す） |
+| GET | `/api/unknown/others?uid=` | A: その人の投稿から 300m 以内に無い、ほかの人の投稿 |
+
+- 候補は OSM から作る（OSM を焼き直したら作り直す。日本全体で約20分・メモリ約9GB。⚠️ osmium の CLI は動かないので pyosmium）:
+  `python3 -B admin/buildUnknownSpots.py ~/Downloads/japan-260823.osm.pbf admin/data/unknown-spots.json`
+- 判定は `lib/unknownSpots.js`（投稿から 300m＋広い地物は形の大きさ・車の通れる道のそば・立入禁止でない・wiki／文化財／展望所・滝・峠・岬／おすすめ道路 1km のどれか）。投稿は毎日増えるので候補のファイルに焼き込まない
+- 画面に「© OpenStreetMap contributors」を出す（ODbL）
+- A の「寄った」（走行記録で 150m に 5分）は端末の中にしか無いので、ここでは見ない（アプリで作るときに端末の中で比べる）
+
 ### 走った人の声（`/api/roads/feedback`・開発者だけ・本番を読むだけ）
 
 アプリの「走った道の感想」（`RoadFeedback.swift`。記録を保存した日の夜20時に通知で聞く）が `road_feedback` に書いたものを、道ごとにまとめる。

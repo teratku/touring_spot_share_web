@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>未知のスポット</title>
+<!--
+  開発者だけが見る画面（127.0.0.1 の管理ツール・本番を読むだけ）。
+  ⚠️ 利用者の判断（2026-11-06）: B（アプリにとって未知・OSM から）を本命・A（自分にとって未知・ほかの人の投稿）も一緒・
+     通り過ぎたは未知のまま。まずは web で開発者だけが確かめる。定義はアプリの repo の docs/unknown-spots-definition.md、
+     判定は lib/unknownSpots.js、候補は buildUnknownSpots.py → data/unknown-spots.json
+-->
+<style>
+  :root { --teal:#00A8C6; --ink:#1f2d3d; --line:#e4e9ee; --muted:#78909c; --bg:#f4f7f9; --gray:#9aa7b1; --mine:#7c3aed; }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif; color:var(--ink); background:var(--bg); display:flex; flex-direction:column; }
+  header { background:linear-gradient(90deg,var(--teal),#0bbed6); color:#fff; padding:10px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  header h1 { font-size:17px; margin:0; }
+  header .pill { font-size:11px; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:999px; }
+  header .spacer { flex:1; }
+  header button { border:1px solid rgba(255,255,255,.6); background:transparent; color:#fff; border-radius:8px; padding:6px 12px; font-size:13px; cursor:pointer; }
+  header button:focus-visible, .kind:focus-visible, .post:focus-visible { outline:2px solid var(--teal); outline-offset:2px; }
+  .main { flex:1; display:flex; min-height:0; }
+  aside { width:420px; max-width:45vw; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:14px; border-right:1px solid var(--line); background:#fff; }
+  .mapwrap { flex:1; position:relative; min-height:300px; }
+  #map { position:absolute; inset:0; }
+  #mapnote { position:absolute; left:10px; bottom:24px; background:rgba(255,255,255,.95); border-radius:8px; padding:5px 10px; font-size:12px; box-shadow:0 1px 4px rgba(0,0,0,.15); max-width:70%; }
+  .osm { position:absolute; right:60px; bottom:2px; font-size:10px; background:rgba(255,255,255,.8); padding:0 4px; }
+  .osm a { color:var(--ink); }
+  h2 { font-size:13px; margin:0 0 6px; color:var(--muted); letter-spacing:.04em; }
+  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .card { background:var(--bg); border-radius:8px; padding:8px; text-align:center; }
+  .card b { display:block; font-size:18px; font-variant-numeric:tabular-nums; }
+  .card span { font-size:11px; color:var(--muted); }
+  .card.hi { background:#e0f6fa; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th { font-weight:normal; color:var(--muted); font-size:11px; text-align:right; padding:2px 4px; }
+  th:first-child { text-align:left; }
+  td { padding:4px; border-bottom:1px solid var(--line); text-align:right; font-variant-numeric:tabular-nums; }
+  td:first-child { text-align:left; }
+  td.u { font-weight:600; }
+  tr.kind { cursor:pointer; }
+  tr.kind.off td { opacity:.35; }
+  tr.kind i { width:10px; height:10px; border-radius:50%; display:inline-block; margin-right:6px; vertical-align:-1px; }
+  .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:12px; }
+  .row input[type=search], .row select, .row input[type=text] { font-size:12px; padding:5px 8px; border:1px solid var(--line); border-radius:6px; min-width:0; }
+  .row input[type=search] { flex:1; }
+  .row label { display:inline-flex; gap:4px; align-items:center; cursor:pointer; }
+  .posts { display:flex; flex-direction:column; gap:6px; max-height:360px; overflow-y:auto; }
+  .post { display:flex; gap:8px; align-items:center; border:1px solid var(--line); border-radius:8px; padding:6px; cursor:pointer; background:#fff; text-align:left; font:inherit; color:inherit; }
+  .post img { width:48px; height:48px; object-fit:cover; border-radius:6px; background:var(--bg); flex:none; }
+  .post b { font-size:13px; display:block; }
+  .post span { font-size:11px; color:var(--muted); }
+  .muted { color:var(--muted); font-size:12px; }
+  .err { color:#c0392b; font-size:13px; }
+  .note { font-size:11px; color:var(--muted); line-height:1.6; margin:6px 0 0; }
+  .iw { font-size:12px; line-height:1.6; max-width:260px; }
+  .iw b { font-size:14px; }
+  .iw .tag { display:inline-block; font-size:11px; border-radius:999px; padding:0 7px; color:#fff; margin-right:4px; }
+  @media (max-width:760px) { .main { flex-direction:column; } aside { width:auto; max-width:none; max-height:50vh; border-right:none; border-bottom:1px solid var(--line); } }
+</style>
+</head>
+<body>
+  <header>
+    <h1>🧭 未知のスポット</h1>
+    <span class="pill">ローカル開発用 · 本番を読むだけ</span>
+    <span class="spacer"></span>
+    <span id="stamp" class="pill"></span>
+    <button id="refresh" type="button">投稿を読み直す</button>
+  </header>
+  <div class="main">
+    <aside>
+      <div id="status" class="muted">読み込んでいます…（初回は全国の候補の判定に数秒かかります）</div>
+      <section>
+        <h2>アプリにとって未知（B・OSM から）</h2>
+        <div class="cards" id="cards"></div>
+        <p class="note" id="source"></p>
+      </section>
+      <section>
+        <h2>種類ごと（押すと地図に出す／消す）</h2>
+        <table>
+          <thead><tr><th>種類</th><th>未知</th><th>候補</th><th>投稿済み</th><th>道が遠い</th><th>手がかりなし</th></tr></thead>
+          <tbody id="kinds"></tbody>
+        </table>
+        <p class="note">未知 ＝ 投稿から 300m 以内に無い（湖・海岸などは形の大きさを足す）・車の通れる道のそば・立入禁止でない・値打ちの手がかり（wiki／文化財／展望所・滝・峠・岬／おすすめ道路から 1km）がある。ひとつの候補が複数の理由に当たることがあります。</p>
+      </section>
+      <section>
+        <h2>地図に出すもの</h2>
+        <div class="row">
+          <input type="search" id="q" placeholder="名前で絞る（例: 滝・峠）" />
+        </div>
+        <div class="row" style="margin-top:6px">
+          <label><input type="checkbox" id="showOut" /> 外した候補も灰色で出す</label>
+          <button type="button" id="allKinds">種類をすべて</button>
+        </div>
+      </section>
+      <section>
+        <h2>自分にとって未知（A・ほかの人の投稿）</h2>
+        <div class="row">
+          <select id="uid">
+            <option value="">選ばない</option>
+            <option value="3X7lTlF7bTUOGkb5gWiiLol3a5W2">開発者（シミュレーターの方）</option>
+            <option value="5elMKe1WEMPVP3LezAuoMwJbJE32">開発者（もう一方）</option>
+          </select>
+          <input type="text" id="uidText" placeholder="UID を直接" style="flex:1" />
+        </div>
+        <p class="note" id="aSummary">選んだ人の投稿から 300m 以内に無い、ほかの人の投稿を紫で出します。「寄った」（走行記録）は端末の中にしか無いので、ここでは見ません。</p>
+        <div class="posts" id="posts"></div>
+      </section>
+    </aside>
+    <div class="mapwrap">
+      <div id="map"></div>
+      <div id="mapnote" hidden></div>
+      <div class="osm">候補 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a></div>
+    </div>
+  </div>
+<script>
+// 種類ごとの色（地図の点と表の丸）
+const KIND_COLORS = {
+  viewpoint:"#0ea5e9", waterfall:"#2563eb", pass:"#16a34a", cape:"#0d9488", beach:"#eab308", onsen:"#dc2626",
+  dam:"#475569", attraction:"#db2777", camp:"#65a30d", lake:"#06b6d4", historic:"#92400e", worship:"#b45309", park:"#4d7c0f",
+};
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+let data = null, map = null, mapReady = false, info = null;
+const markerOf = new Map(); // B の点（候補の並びの番号 → Marker）。⚠️ 要るときに1回だけ作る
+let clusterer = null, clusterKey = "";
+let aMarkers = [];         // A の点（数百件なのでまとめない）
+let aPosts = [];
+const activeKinds = new Set();
+
+const label = (k) => (data && data.labels[k]) || k;
+function reasons(flags) {
+  const F = data.flags, out = [];
+  if (flags & F.posted) out.push("投稿済み");
+  if (flags & F.noRoad) out.push("道が遠い");
+  if (flags & F.closed) out.push("立入禁止");
+  if (flags & F.noValue) out.push("手がかりなし");
+  return out;
+}
+
+function render() {
+  const c = Object.values(data.counts).reduce((a, k) => {
+    for (const key in k) a[key] = (a[key] || 0) + k[key];
+    return a;
+  }, {});
+  document.getElementById("cards").innerHTML = [
+    ["未知", c.unknown, true], ["候補", c.all], ["投稿済み", c.posted], ["道が遠い", c.noRoad],
+    ["手がかりなし", c.noValue], ["立入禁止", c.closed], ["アプリの投稿", data.posts], ["おすすめ道路", data.funRoads],
+  ].map(([l, n, hi]) => `<div class="card ${hi ? "hi" : ""}"><b>${(n || 0).toLocaleString()}</b><span>${l}</span></div>`).join("");
+  const peak = data.osmCounts.peak;
+  document.getElementById("source").textContent =
+    `OSM ${data.source}（候補を作った日 ${new Date(data.builtAt).toLocaleDateString("ja-JP")}）・判定 ${data.tookMs}ms` +
+    (peak ? `・山頂は数だけ（名前あり ${peak.named.toLocaleString()}）` : "");
+  const kinds = Object.keys(data.counts).sort((a, b) => data.counts[b].unknown - data.counts[a].unknown);
+  document.getElementById("kinds").innerHTML = kinds.map((k) => {
+    const n = data.counts[k];
+    return `<tr class="kind ${activeKinds.has(k) ? "" : "off"}" data-k="${k}" tabindex="0" role="button" aria-pressed="${activeKinds.has(k)}">
+      <td><i style="background:${KIND_COLORS[k] || "#888"}"></i>${esc(label(k))}</td><td class="u">${n.unknown.toLocaleString()}</td>
+      <td>${n.all.toLocaleString()}</td><td>${n.posted}</td><td>${n.noRoad.toLocaleString()}</td><td>${n.noValue.toLocaleString()}</td></tr>`;
+  }).join("");
+  drawMap();
+}
+
+function clear(list) { list.forEach((m) => m.setMap(null)); list.length = 0; }
+
+/** B の点（1件）。未知は種類の色・外した候補は灰色で小さく */
+function markerFor(i) {
+  let m = markerOf.get(i);
+  if (m) return m;
+  const s = data.spots[i];
+  const [lat, lng, name, kind, , flags] = s;
+  const unknown = flags === 0;
+  m = new google.maps.Marker({
+    position: { lat, lng }, title: name, zIndex: unknown ? 2 : 1, optimized: true,
+    icon: { path: google.maps.SymbolPath.CIRCLE, scale: unknown ? 6 : 4, fillColor: unknown ? (KIND_COLORS[kind] || "#888") : "#9aa7b1",
+      fillOpacity: unknown ? 0.95 : 0.6, strokeColor: "#fff", strokeWeight: 1 },
+  });
+  m.meUnknown = unknown;
+  m.addListener("click", () => openSpot(s, m));
+  markerOf.set(i, m);
+  return m;
+}
+
+/** まとまりの丸。数で大きさを変え、未知を含むなら青緑・外した候補だけなら灰色 */
+const clusterIcons = {};
+function clusterIcon(count, unknown) {
+  const size = count < 10 ? 30 : count < 100 ? 36 : count < 1000 ? 44 : 52;
+  const color = unknown > 0 ? "#00A8C6" : "#9aa7b1";
+  const key = size + color;
+  if (clusterIcons[key]) return clusterIcons[key];
+  const c = size / 2;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">` +
+    `<circle cx="${c}" cy="${c}" r="${c - 1}" fill="${color}" fill-opacity=".25"/>` +
+    `<circle cx="${c}" cy="${c}" r="${c - 5}" fill="${color}" stroke="#fff" stroke-width="1.5"/></svg>`;
+  return (clusterIcons[key] = { url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg),
+    scaledSize: new google.maps.Size(size, size), anchor: new google.maps.Point(c, c) });
+}
+const clusterRenderer = {
+  render(cluster) {
+    const count = cluster.count;
+    const unknown = cluster.markers.reduce((n, m) => n + (m.meUnknown ? 1 : 0), 0);
+    return new google.maps.Marker({ position: cluster.position, icon: clusterIcon(count, unknown), zIndex: 1000 + count,
+      label: { text: count >= 10000 ? Math.round(count / 1000) + "k" : String(count), color: "#fff", fontSize: count < 1000 ? "12px" : "11px", fontWeight: "bold" },
+      title: `${count} 件（未知 ${unknown}）` });
+  },
+};
+
+/**
+ * 地図の点。⚠️ 全国で数万件あるので、近いものは数の丸にまとめる（markerclusterer・道の駅マップと同じ部品。
+ * 利用者の要望 2026-11-06:「データが重すぎた。クラスターマーカーを使用して欲しい」）。
+ * 見えている範囲だけまとめる（SuperClusterViewportAlgorithm）。丸を押すと寄って広がる。
+ * ⚠️ 点は1回だけ作り、絞り込み（種類・名前・外した候補）が変わったときだけ入れ直す。地図を動かしても作り直さない
+ */
+function drawMap() {
+  if (!mapReady || !data) return;
+  const q = document.getElementById("q").value.trim();
+  const showOut = document.getElementById("showOut").checked;
+  const key = [...activeKinds].sort().join(",") + "|" + q + "|" + showOut + "|" + data.cachedAt;
+  if (key === clusterKey) return;
+  clusterKey = key;
+  const shown = [];
+  let unknown = 0;
+  data.spots.forEach((s, i) => {
+    const [, , name, kind, , flags] = s;
+    if (!activeKinds.has(kind)) return;
+    if (flags !== 0 && !showOut) return;
+    if (q && !name.includes(q)) return;
+    if (flags === 0) unknown++;
+    shown.push(markerFor(i));
+  });
+  const MC = window.markerClusterer;
+  if (!(MC && MC.MarkerClusterer)) {
+    document.getElementById("status").textContent = "まとめる部品（markerclusterer）が読めませんでした。再読み込みしてください";
+    document.getElementById("status").className = "err";
+    return;
+  }
+  if (!clusterer) {
+    clusterer = new MC.MarkerClusterer({
+      map, markers: shown, renderer: clusterRenderer,
+      algorithm: new MC.SuperClusterViewportAlgorithm({ maxZoom: 13, radius: 70, viewportPadding: 60 }),
+      onClusterClick: (_e, cluster, m) => { info.close(); m.fitBounds(cluster.bounds, 40); },
+    });
+  } else {
+    clusterer.clearMarkers(true);
+    // ⚠️ 部品が地図に付く前（onAdd の前）に描かせると落ちる（道の駅マップと同じ）
+    clusterer.addMarkers(shown, !clusterer.getProjection());
+  }
+  const note = document.getElementById("mapnote");
+  note.hidden = false;
+  note.textContent = `地図に ${shown.length.toLocaleString()} 件` + (showOut ? `（未知 ${unknown.toLocaleString()}）` : "") +
+    "。丸を押すと寄って広がります";
+}
+
+function openSpot(s, marker) {
+  const [lat, lng, name, kind, osm, flags, why, postedId] = s;
+  const type = { n: "node", w: "way", r: "relation" }[osm[0]];
+  const r = reasons(flags);
+  const tags = r.length
+    ? r.map((t) => `<span class="tag" style="background:#9aa7b1">${t}</span>`).join("")
+    : `<span class="tag" style="background:var(--teal)">未知</span>`;
+  info.setContent(`<div class="iw"><b>${esc(name)}</b><br>${esc(label(kind))}　${tags}
+    ${why ? `<br>手がかり: ${esc(why)}` : ""}
+    ${postedId ? `<br>近くの投稿: <code>${esc(postedId)}</code>` : ""}
+    <br><a href="https://www.openstreetmap.org/${type}/${esc(osm.slice(1))}" target="_blank" rel="noopener">OSM で見る</a>
+    ・<a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" rel="noopener">Google マップ</a></div>`);
+  info.open({ map, anchor: marker });
+}
+
+async function load(refresh) {
+  const status = document.getElementById("status");
+  status.className = "muted";
+  status.textContent = "読み込んでいます…（初回は全国の候補の判定に数秒かかります）";
+  try {
+    const res = await fetch("/api/unknown/spots" + (refresh ? "?refresh=1" : ""));
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    const first = !data;
+    // ⚠️ 読み直すと候補の並び（＝点の番号）が変わることがあるので、作った点を捨ててから入れ直す
+    if (!first) { if (clusterer) clusterer.clearMarkers(); markerOf.clear(); clusterKey = ""; }
+    data = json;
+    if (first) Object.keys(data.counts).forEach((k) => activeKinds.add(k));
+    status.textContent = "";
+    document.getElementById("stamp").textContent = "読んだ時刻 " + new Date(json.cachedAt).toLocaleString("ja-JP");
+    render();
+  } catch (e) {
+    status.textContent = "読めませんでした: " + e.message;
+    status.className = "err";
+  }
+}
+
+async function loadOthers() {
+  const uid = document.getElementById("uidText").value.trim() || document.getElementById("uid").value;
+  const box = document.getElementById("posts");
+  const sum = document.getElementById("aSummary");
+  clear(aMarkers);
+  aPosts = [];
+  box.innerHTML = "";
+  if (!uid) { sum.textContent = "人を選ぶと、その人の投稿から 300m 以内に無い、ほかの人の投稿を紫で出します。"; return; }
+  sum.textContent = "読み込んでいます…";
+  try {
+    const res = await fetch("/api/unknown/others?uid=" + encodeURIComponent(uid));
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    aPosts = json.unknown;
+    sum.textContent = `この人の投稿 ${json.mine} 件・ほかの人の投稿 ${json.others} 件のうち、この人にとって未知 ${aPosts.length} 件`;
+    box.innerHTML = aPosts.map((p, i) => `<button type="button" class="post" data-i="${i}">
+      ${p.imageURL ? `<img src="${esc(p.imageURL)}" alt="" loading="lazy" />` : `<img alt="" />`}
+      <div><b>${esc(p.name || "（名前なし）")}</b><span>${esc(p.address || "")}</span></div></button>`).join("")
+      || `<div class="muted">ありません（ほかの人の投稿は、どれもこの人の投稿のそば）</div>`;
+    drawOthers();
+  } catch (e) {
+    sum.textContent = "読めませんでした: " + e.message;
+  }
+}
+
+function drawOthers() {
+  if (!mapReady) return;
+  clear(aMarkers);
+  const bounds = new google.maps.LatLngBounds();
+  aPosts.forEach((p, i) => {
+    if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return;
+    const m = new google.maps.Marker({ map, position: { lat: p.lat, lng: p.lng }, zIndex: 3,
+      icon: { path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5, fillColor: "#7c3aed", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 1 } });
+    m.addListener("click", () => openPost(i));
+    aMarkers.push(m);
+    bounds.extend(m.getPosition());
+  });
+  if (!bounds.isEmpty()) map.fitBounds(bounds, 40);
+}
+
+function openPost(i) {
+  const p = aPosts[i], m = aMarkers[i];
+  if (!p || !m) return;
+  info.setContent(`<div class="iw"><b>${esc(p.name || "（名前なし）")}</b><br>${esc(p.address || "")}
+    ${p.imageURL ? `<br><img src="${esc(p.imageURL)}" alt="" style="width:200px;border-radius:6px;margin-top:4px" />` : ""}
+    <br><span class="tag" style="background:#7c3aed">ほかの人の投稿</span><code>${esc(p.spotId)}</code></div>`);
+  info.open({ map, anchor: m });
+}
+
+function activate(el, fn) {
+  el.addEventListener("click", fn);
+  el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(e); } });
+}
+activate(document.getElementById("kinds"), (e) => {
+  const k = e.target.closest(".kind")?.dataset.k;
+  if (!k) return;
+  activeKinds.has(k) ? activeKinds.delete(k) : activeKinds.add(k);
+  render();
+});
+document.getElementById("allKinds").addEventListener("click", () => { Object.keys(data.counts).forEach((k) => activeKinds.add(k)); render(); });
+let qTimer = null;
+document.getElementById("q").addEventListener("input", () => { clearTimeout(qTimer); qTimer = setTimeout(drawMap, 250); });
+document.getElementById("showOut").addEventListener("change", drawMap);
+document.getElementById("uid").addEventListener("change", () => { document.getElementById("uidText").value = ""; loadOthers(); });
+document.getElementById("uidText").addEventListener("change", loadOthers);
+document.getElementById("posts").addEventListener("click", (e) => {
+  const i = Number(e.target.closest(".post")?.dataset.i);
+  if (!Number.isInteger(i) || !aMarkers[i]) return;
+  map.panTo(aMarkers[i].getPosition());
+  if (map.getZoom() < 13) map.setZoom(13);
+  openPost(i);
+});
+document.getElementById("refresh").addEventListener("click", () => load(true));
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), { center: { lat: 35.4, lng: 138.7 }, zoom: 9,
+    mapTypeControl: false, streetViewControl: false });
+  info = new google.maps.InfoWindow();
+  mapReady = true;
+  drawMap();
+  if (aPosts.length) drawOthers();
+}
+window.initMap = initMap;
+load(false);
+</script>
+<script src="https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>
+</body>
+</html>

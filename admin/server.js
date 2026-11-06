@@ -128,8 +128,27 @@ function mapSpot(d) {
     lat, lng,
     address: x.administrative || x.locality || null,
     imageURL: (Array.isArray(x.locationImageURLs) && x.locationImageURLs[0]) || x.iconImageURL || null,
+    // ⚠️ 未知のスポットの A（自分にとって未知）だけが使う。/api/spots は cleanSpots で落とす
+    userID: x.userID || null,
+    iconURL: x.iconImageURL || null,
     _ts: x.createTimeTimeStamp || null,
   };
+}
+
+/** 全部の投稿（/api/spots と同じ読み方・1週間持つ）。未知のスポットが使う */
+async function allAppSpots() {
+  if (spotsCache && Date.now() - spotsCache.t < SPOTS_TTL_MS) return spotsCache.spots;
+  const snap = await db.collection("imagedownload").limit(30000).get();
+  const spots = []; const byId = new Set(); let maxTs = null;
+  snap.forEach((d) => {
+    const s = mapSpot(d);
+    if (!s) return;
+    spots.push(s); byId.add(s.spotId);
+    if (s._ts && tsMs(s._ts) > tsMs(maxTs)) maxTs = s._ts;
+  });
+  spotsCache = { t: Date.now(), spots, byId, maxTs };
+  console.log(`📥 full read: ${spots.length} 件（1週間キャッシュ）`);
+  return spots;
 }
 function tsMs(t) { return t && typeof t.toMillis === "function" ? t.toMillis() : (typeof t === "number" ? t : 0); }
 function cleanSpots(arr) {
@@ -2248,6 +2267,53 @@ app.post("/api/rally-cover/:rallyId", (req, res) => {
 
 // 開発者用：ユーザーの購読状態を確認（admin SDK で読取。user_stats/{uid}.subscription は iOS が保存）。
 // =====================================================
+// 未知のスポット（開発者だけ・読むだけ）。画面は public/unknown-spots.html（http://127.0.0.1:4317/unknown）。
+// 定義はアプリの repo の docs/unknown-spots-definition.md。候補は buildUnknownSpots.py で作る data/unknown-spots.json
+const unknownSpots = require("./lib/unknownSpots");
+let unknownCache = null; // { t, file mtime, result }
+app.get("/unknown", (_req, res) => sendHtml(res, "unknown-spots.html"));
+app.get("/api/unknown/spots", async (req, res) => {
+  try {
+    const file = path.join(__dirname, "data", "unknown-spots.json");
+    if (!fs.existsSync(file)) {
+      return res.status(404).json({ error: "data/unknown-spots.json が無い。python3 -B admin/buildUnknownSpots.py <japan.osm.pbf> admin/data/unknown-spots.json で作る" });
+    }
+    const mtime = fs.statSync(file).mtimeMs;
+    const fresh = req.query.refresh !== "1" && unknownCache && unknownCache.mtime === mtime
+      && Date.now() - unknownCache.t < SPOTS_TTL_MS;
+    if (!fresh) {
+      const started = Date.now();
+      const data = JSON.parse(fs.readFileSync(file, "utf8"));
+      const posts = await allAppSpots();
+      const dir = path.join(__dirname, "data", "road-recommend");
+      const segments = fs.readdirSync(dir).filter((f) => f.endsWith(".json"))
+        .flatMap((f) => { try { return JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")).segments || []; } catch (_) { return []; } });
+      const result = unknownSpots.classify(data.spots, posts, unknownSpots.funRoadGrid(segments));
+      unknownCache = { t: Date.now(), mtime, result: { ...result, builtAt: data.builtAt, source: data.source,
+        osmCounts: data.counts, posts: posts.length, funRoads: segments.length, labels: unknownSpots.KIND_LABELS,
+        flags: unknownSpots.FLAG, tookMs: Date.now() - started } };
+      console.log(`🔎 未知のスポット: 候補 ${data.spots.length} 件を判定（${Date.now() - started}ms）`);
+    }
+    res.json({ ...unknownCache.result, cachedAt: new Date(unknownCache.t).toISOString() });
+  } catch (e) {
+    console.error("unknown spots error:", e.message);
+    res.status(500).json({ error: e.message });
+  }
+});
+// A: 自分にとって未知（ほかの人の投稿で、その人の投稿から 300m 以内に無いもの）
+app.get("/api/unknown/others", async (req, res) => {
+  try {
+    const uid = String(req.query.uid || "");
+    if (!uid) return res.status(400).json({ error: "uid が要る" });
+    const r = unknownSpots.othersUnknown(await allAppSpots(), uid);
+    res.json({ mine: r.mine, others: r.others,
+      unknown: r.unknown.map((p) => ({ spotId: p.spotId, name: p.name, lat: p.lat, lng: p.lng,
+        address: p.address, imageURL: p.imageURL || p.iconURL })) });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // 利用者の好みと行き先（開発者だけ・読むだけ）。画面は public/riders.html（http://127.0.0.1:4317/riders）
 // =====================================================
 // ⚠️ 利用者の要望（2026-10-07）: 全員の確認は開発者だけの web の画面で、どんな場所によく行くかを地図で見て、
