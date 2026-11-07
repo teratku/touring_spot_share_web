@@ -187,8 +187,9 @@ function markerFor(i) {
   const unknown = flags === 0;
   m = new google.maps.Marker({
     position: { lat, lng }, title: name, zIndex: unknown ? 2 : 1, optimized: true,
-    icon: { path: google.maps.SymbolPath.CIRCLE, scale: unknown ? 6 : 4, fillColor: unknown ? (KIND_COLORS[kind] || "#888") : "#9aa7b1",
-      fillOpacity: unknown ? 0.95 : 0.6, strokeColor: "#fff", strokeWeight: 1 },
+    // ⚠️ 1点で出るときの大きさ（利用者の要望 2026-11-07「マーカーサイズを大きくしたい」・前は 6／4 で押しにくかった）
+    icon: { path: google.maps.SymbolPath.CIRCLE, scale: unknown ? 10 : 6, fillColor: unknown ? (KIND_COLORS[kind] || "#888") : "#9aa7b1",
+      fillOpacity: unknown ? 0.95 : 0.6, strokeColor: "#fff", strokeWeight: unknown ? 2 : 1 },
   });
   m.meUnknown = unknown;
   m.addListener("click", () => openSpot(s, m));
@@ -336,7 +337,7 @@ function drawOthers() {
   aPosts.forEach((p, i) => {
     if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return;
     const m = new google.maps.Marker({ map, position: { lat: p.lat, lng: p.lng }, zIndex: 3,
-      icon: { path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 5, fillColor: "#7c3aed", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 1 } });
+      icon: { path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW, scale: 7, fillColor: "#7c3aed", fillOpacity: 1, strokeColor: "#fff", strokeWeight: 2 } });
     m.addListener("click", () => openPost(i));
     aMarkers.push(m);
     bounds.extend(m.getPosition());
