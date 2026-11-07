@@ -78,6 +78,9 @@ service firebase.storage {
     //    uploadGridBoundaries）が残っているが、開く画面が無い（2026-10-03 に確認）
     match /Json/{allPaths=**}        { allow read: if true; allow write: if false; }
     match /grids_empty/{allPaths=**} { allow read: if true; allow write: if false; }
+    // ナビの声（VOICEVOX）の読み辞書 voicevox/open_jtalk_dic_utf_8-1.11.zip（アプリが ?alt=media で落とす・
+    // 置くのは手で gcloud storage cp。docs/voicevox-nav-voice-plan.md）
+    match /voicevox/{allPaths=**}    { allow read: if true; allow write: if false; }
     match /grid_boundaries.csv       { allow read: if true; allow write: if false; }
   }
 }
