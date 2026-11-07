@@ -57,6 +57,11 @@
   .note { font-size:11px; color:var(--muted); line-height:1.6; margin:6px 0 0; }
   .iw { font-size:12px; line-height:1.6; max-width:260px; }
   .iw b { font-size:14px; }
+  .iw .add { margin-top:6px; padding-top:6px; border-top:1px solid var(--line); }
+  .iw .add button { border:none; background:var(--teal); color:#fff; border-radius:6px; padding:5px 10px; font-size:12px; cursor:pointer; }
+  .iw .add button:disabled { background:var(--gray); cursor:default; }
+  .iw .add .ok { color:#0f766e; font-weight:600; }
+  .iw .add .ng { color:#c0392b; }
   .iw .tag { display:inline-block; font-size:11px; border-radius:999px; padding:0 7px; color:#fff; margin-right:4px; }
   @media (max-width:760px) { .main { flex-direction:column; } aside { width:auto; max-width:none; max-height:50vh; border-right:none; border-bottom:1px solid var(--line); } }
 </style>
@@ -64,7 +69,7 @@
 <body>
   <header>
     <h1>🧭 未知のスポット</h1>
-    <span class="pill">ローカル開発用 · 本番を読むだけ</span>
+    <span class="pill">ローカル開発用 · 本番を読むだけ（プランに足すときだけ書く）</span>
     <span class="spacer"></span>
     <span id="stamp" class="pill"></span>
     <button id="refresh" type="button">投稿を読み直す</button>
@@ -94,6 +99,14 @@
           <label><input type="checkbox" id="showOut" /> 外した候補も灰色で出す</label>
           <button type="button" id="allKinds">種類をすべて</button>
         </div>
+      </section>
+      <section>
+        <h2>開発者のプランに足す（本番に書く）</h2>
+        <div class="row">
+          <select id="plan" style="flex:1"><option value="">読み込んでいます…</option></select>
+          <button type="button" id="reloadPlans">読み直す</button>
+        </div>
+        <p class="note" id="planNote">足す先は 3X7l… のプランだけ。点を押して「プランに追加」。100m 以内にもう入っている・10 件入っているプランには足しません。</p>
       </section>
       <section>
         <h2>自分にとって未知（A・ほかの人の投稿）</h2>
@@ -264,7 +277,8 @@ function openSpot(s, marker) {
     ${why ? `<br>手がかり: ${esc(why)}` : ""}
     ${postedId ? `<br>近くの投稿: <code>${esc(postedId)}</code>` : ""}
     <br><a href="https://www.openstreetmap.org/${type}/${esc(osm.slice(1))}" target="_blank" rel="noopener">OSM で見る</a>
-    ・<a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" rel="noopener">Google マップ</a></div>`);
+    ・<a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" rel="noopener">Google マップ</a>
+    ${addBox({ name, lat, lng })}</div>`);
   info.open({ map, anchor: marker });
 }
 
@@ -335,9 +349,89 @@ function openPost(i) {
   if (!p || !m) return;
   info.setContent(`<div class="iw"><b>${esc(p.name || "（名前なし）")}</b><br>${esc(p.address || "")}
     ${p.imageURL ? `<br><img src="${esc(p.imageURL)}" alt="" style="width:200px;border-radius:6px;margin-top:4px" />` : ""}
-    <br><span class="tag" style="background:#7c3aed">ほかの人の投稿</span><code>${esc(p.spotId)}</code></div>`);
+    <br><span class="tag" style="background:#7c3aed">ほかの人の投稿</span><code>${esc(p.spotId)}</code>
+    ${addBox({ name: p.name || "（名前なし）", lat: p.lat, lng: p.lng, spotId: p.spotId, address: p.address, imageUrl: p.imageURL })}</div>`);
   info.open({ map, anchor: m });
 }
+
+// ---- 開発者のプランに足す（lib/devPlanAttach.js・/api/unknown/plans）----
+// ⚠️ 本番の users/3X7l…/touringPlans に書く。足す先の人はサーバが決める（画面からは送らない）
+let plans = [], planMax = 10, infoSpot = null;
+const NEW_PLAN = "__new";
+const PLAN_KEY = "unknown.planId";
+function savedPlanId() { try { return localStorage.getItem(PLAN_KEY) || ""; } catch (_) { return ""; } }
+function savePlanId(id) { try { localStorage.setItem(PLAN_KEY, id); } catch (_) {} }
+
+async function loadPlans() {
+  const sel = document.getElementById("plan");
+  try {
+    const res = await fetch("/api/unknown/plans");
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    plans = json.plans; planMax = json.max;
+    renderPlans(savedPlanId());
+  } catch (e) {
+    sel.innerHTML = `<option value="">読めませんでした</option>`;
+    document.getElementById("planNote").textContent = "プランを読めませんでした: " + e.message;
+  }
+}
+function renderPlans(selected) {
+  const sel = document.getElementById("plan");
+  sel.innerHTML = `<option value="">足す先のプランを選ぶ</option>` +
+    plans.map((p) => `<option value="${esc(p.id)}" ${p.count >= planMax ? "disabled" : ""}>${esc(p.name)}（${p.count}/${planMax}）</option>`).join("") +
+    `<option value="${NEW_PLAN}">＋ 新しいプランを作って足す</option>`;
+  const ok = selected === NEW_PLAN || plans.some((p) => p.id === selected && p.count < planMax);
+  sel.value = ok ? selected : "";
+}
+function planLabel() {
+  const id = document.getElementById("plan").value;
+  if (id === NEW_PLAN) return "新しいプラン";
+  const p = plans.find((x) => x.id === id);
+  return p ? `「${p.name}」` : null;
+}
+/** 情報の窓の下の「プランに追加」。押したときに足す場所は infoSpot */
+function addBox(spot) {
+  infoSpot = spot;
+  const to = planLabel();
+  return `<div class="add" id="addBox">${to
+    ? `<button type="button" id="addPlan">${esc(to)}に追加</button>`
+    : `<span class="muted">左の「開発者のプランに足す」でプランを選ぶと、ここから足せます</span>`}</div>`;
+}
+async function addToPlan() {
+  const box = document.getElementById("addBox"), btn = document.getElementById("addPlan");
+  if (!box || !btn || !infoSpot) return;
+  const spot = infoSpot;
+  let planId = document.getElementById("plan").value, newPlanName = null;
+  if (planId === NEW_PLAN) {
+    newPlanName = (prompt("新しいプランの名前", "未知のスポット") || "").trim();
+    if (!newPlanName) return;
+    planId = null;
+  }
+  btn.disabled = true; btn.textContent = "足しています…";
+  try {
+    const res = await fetch("/api/unknown/plans/add", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ planId, newPlanName, spot }) });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    const known = plans.find((p) => p.id === json.planId);
+    if (known) known.count = json.count;
+    else plans.push({ id: json.planId, name: json.planName, count: json.count });
+    savePlanId(json.planId);
+    renderPlans(json.planId);
+    if (infoSpot === spot) box.innerHTML = `<span class="ok">「${esc(json.planName)}」に追加しました（${json.count}/${planMax}）</span>`;
+  } catch (e) {
+    if (infoSpot === spot) box.innerHTML = `<span class="ng">${esc(e.message)}</span>`;
+  }
+}
+document.getElementById("plan").addEventListener("change", (e) => {
+  savePlanId(e.target.value);
+  // 開いている窓のボタンも、選んだプランに合わせる
+  const box = document.getElementById("addBox");
+  if (box && infoSpot) box.outerHTML = addBox(infoSpot);
+});
+document.getElementById("reloadPlans").addEventListener("click", loadPlans);
+// ⚠️ 情報の窓は文字で作り直すので、ボタンには直接付けず、まとめて受ける
+document.addEventListener("click", (e) => { if (e.target.closest("#addPlan")) addToPlan(); });
 
 function activate(el, fn) {
   el.addEventListener("click", fn);
@@ -374,6 +468,7 @@ function initMap() {
 }
 window.initMap = initMap;
 load(false);
+loadPlans();
 </script>
 <script src="https://unpkg.com/@googlemaps/markerclusterer@2.5.3/dist/index.min.js"></script>
 <script async src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&callback=initMap"></script>

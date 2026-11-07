@@ -2314,6 +2314,54 @@ app.get("/api/unknown/others", async (req, res) => {
   }
 });
 
+// 未知のスポットを開発者のプランに足す（利用者の要望 2026-11-07）。
+// ⚠️ 本番に書く。書くのは 3X7lTlF7bTUOGkb5gWiiLol3a5W2 の users/{uid}/touringPlans だけ（lib/devPlanAttach.js の DEV_UIDS）。
+//    UID は画面から受け取らない（受け取ると、ほかの人のプランに書けてしまう）
+const devPlan = require("./lib/devPlanAttach");
+const devPlansRef = () => db.collection("users").doc(devPlan.DEV_UIDS[0]).collection("touringPlans");
+app.get("/api/unknown/plans", async (_req, res) => {
+  try {
+    // ⚠️ アプリのプラン一覧（PlanAttachmentManager.fetchPlans）と同じ並び（作った順）
+    const snap = await devPlansRef().orderBy("createdAt", "asc").get();
+    res.json({ max: devPlan.MAX_SPOTS, plans: snap.docs.map((d) => {
+      const x = d.data();
+      return { id: d.id, name: x.name || "ツーリングプラン", count: (x.spots || []).length };
+    }) });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+app.post("/api/unknown/plans/add", async (req, res) => {
+  const { planId, newPlanName, spot } = req.body || {};
+  try {
+    const FV = admin.firestore.FieldValue;
+    if (!planId) {
+      const name = String(newPlanName || "").trim();
+      if (!name) return res.status(400).json({ error: "プラン名が要る" });
+      const r = devPlan.appended([], spot);
+      if (r.error) return res.status(r.code).json({ error: r.error });
+      const ref = await devPlansRef().add({ name, spots: r.spots, createdAt: FV.serverTimestamp(), updatedAt: FV.serverTimestamp() });
+      console.log(`🗺 開発者のプランを作って足した: ${name} ← ${r.spot.name}`);
+      return res.json({ planId: ref.id, planName: name, count: 1 });
+    }
+    const ref = devPlansRef().doc(String(planId));
+    // ⚠️ 読んでから書くまでにアプリで足されても数がずれないよう、まとめて行う
+    const out = await db.runTransaction(async (t) => {
+      const doc = await t.get(ref);
+      if (!doc.exists) return { code: 404, error: "プランが見つかりません" };
+      const r = devPlan.appended(doc.data().spots, spot);
+      if (r.error) return r;
+      t.update(ref, { spots: r.spots, updatedAt: FV.serverTimestamp() });
+      return { planName: doc.data().name || "ツーリングプラン", count: r.spots.length, spotName: r.spot.name };
+    });
+    if (out.error) return res.status(out.code).json({ error: out.error });
+    console.log(`🗺 開発者のプランに足した: ${out.planName} ← ${out.spotName}`);
+    res.json({ planId, planName: out.planName, count: out.count });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // 利用者の好みと行き先（開発者だけ・読むだけ）。画面は public/riders.html（http://127.0.0.1:4317/riders）
 // =====================================================
 // ⚠️ 利用者の要望（2026-10-07）: 全員の確認は開発者だけの web の画面で、どんな場所によく行くかを地図で見て、
