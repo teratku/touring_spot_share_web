@@ -7,16 +7,16 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="バイクツーリングスポットを地図から探せる共有サービス。日本全国のライダーおすすめスポットを検索・保存・共有できます。">
-    <meta name="keywords" content="バイク,ツーリング,スポット,バイクツーリング,ツーリングスポット,おすすめ,地図,共有,日本">
+    <meta name="description" content="峠・ワインディング・絶景の道を通るルートを作るバイクのナビ。日本全国のおすすめ道路と冬季閉鎖、ライダーが投稿したスポットを地図から探せます。">
+    <meta name="keywords" content="バイク,ナビ,ツーリング,峠,ワインディング,ルート,冬季閉鎖,125cc,原付,ツーリングスポット,道の駅">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://biketeilen.web.app/">
     <meta name="apple-itunes-app" content="app-id=1466607921">
-    <script src="/share.js?v=2" defer></script>
+    <script src="/share.js?v=3" defer></script>
 
     <!-- OGP -->
-    <meta property="og:title" content="ツーリングスポットシェア - バイクツーリングスポット共有サービス">
-    <meta property="og:description" content="日本全国のライダーおすすめツーリングスポットを地図から探して共有。">
+    <meta property="og:title" content="ツーリングスポットシェア - 峠や絶景の道を通るバイクのナビ">
+    <meta property="og:description" content="日本全国の峠・ワインディング・絶景の道を通るルートを作るバイクのナビ。冬季閉鎖・道の駅・走った道の記録まで。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://biketeilen.web.app/">
     <meta property="og:image" content="https://biketeilen.web.app/images/ogp.png">
@@ -25,8 +25,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ツーリングスポットシェア - バイクツーリングスポット共有サービス">
-    <meta name="twitter:description" content="日本全国のライダーおすすめツーリングスポットを地図から探して共有。">
+    <meta name="twitter:title" content="ツーリングスポットシェア - 峠や絶景の道を通るバイクのナビ">
+    <meta name="twitter:description" content="日本全国の峠・ワインディング・絶景の道を通るルートを作るバイクのナビ。冬季閉鎖・道の駅・走った道の記録まで。">
     <meta name="twitter:image" content="https://biketeilen.web.app/images/ogp.png">
 
     <!-- 構造化データ (JSON-LD) -->
@@ -1711,6 +1711,15 @@
       .ob-step:last-child {
         border-bottom: none;
       }
+      .ob-step-link {
+        color: inherit;
+        text-decoration: none;
+        border-radius: 10px;
+      }
+      .ob-step-link:hover .ob-step-text h3,
+      .ob-step-link:focus-visible .ob-step-text h3 {
+        color: #0090aa;
+      }
       .ob-step-icon {
         width: 42px;
         height: 42px;
@@ -1821,34 +1830,34 @@
           <div class="onboarding-modal">
             <div class="onboarding-header">
               <span class="ob-main-icon">🏍️</span>
-              <h2>ツーリングスポットシェアへようこそ！</h2>
-              <p>全国のライダーが投稿したおすすめスポットをチェックしよう</p>
+              <h2>行き先までの道を、走りたい道に。</h2>
+              <p>峠や絶景の道を通るルートを作るバイクのナビです</p>
             </div>
             <div class="onboarding-steps">
-              <div class="ob-step">
-                <div class="ob-step-icon">🗺️</div>
+              <a class="ob-step ob-step-link" href="/roads.html" @click="closeOnboarding">
+                <div class="ob-step-icon">⛰️</div>
                 <div class="ob-step-text">
-                  <h3>地図でスポットを発見</h3>
-                  <p>全国のおすすめスポットをマップ上で確認。ピンをタップして詳細をチェック！</p>
+                  <h3>近くのおすすめ道路を見る</h3>
+                  <p>峠・ワインディング・絶景の道を、曲がり具合や長さで探せます。</p>
                 </div>
-              </div>
-              <div class="ob-step">
-                <div class="ob-step-icon">📋</div>
+              </a>
+              <a class="ob-step ob-step-link" href="/winter-closures.html" @click="closeOnboarding">
+                <div class="ob-step-icon">❄️</div>
                 <div class="ob-step-text">
-                  <h3>リストで一覧表示</h3>
-                  <p>エリアやタグで絞り込み検索。気になる場所をすぐ見つけられる！</p>
+                  <h3>冬季閉鎖を確かめる</h3>
+                  <p>スカイラインや峠が、いつまで走れるかを一覧で。</p>
                 </div>
-              </div>
-              <div class="ob-step">
-                <div class="ob-step-icon">🛣️</div>
+              </a>
+              <a class="ob-step ob-step-link" href="/about.html" @click="closeOnboarding">
+                <div class="ob-step-icon">🧭</div>
                 <div class="ob-step-text">
-                  <h3>ツーリングプランを作成</h3>
-                  <p>行きたいスポットをまとめてプランに保存。次のツーリングの計画に活用しよう！</p>
+                  <h3>アプリでルートを作る</h3>
+                  <p>行き先を入れると、おすすめ道路を通るルートにして声で案内します。</p>
                 </div>
-              </div>
+              </a>
             </div>
             <div class="onboarding-footer">
-              <button class="ob-btn-start" @click="closeOnboarding">さっそく使ってみる 🚀</button>
+              <button class="ob-btn-start" @click="closeOnboarding">地図でスポットを見る</button>
               <button class="ob-btn-skip" @click="closeOnboarding">スキップ</button>
             </div>
           </div>
@@ -1858,7 +1867,7 @@
             <button class="menu-btn" @click="toggleMenu" aria-label="メニュー">☰</button>
             <div>
               <h1>🏍️ ツーリングスポットシェア</h1>
-              <div class="subtitle">あなたの旅を共有しよう</div>
+              <div class="subtitle">峠を通るルートを作るバイクのナビ</div>
             </div>
           </div>
           <!-- タブ切り替えボタン -->

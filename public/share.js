@@ -117,7 +117,7 @@
     bar.style.cssText = "position:fixed;left:0;right:0;bottom:0;background:linear-gradient(90deg," + TEAL + ",#0bbed6);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px;z-index:99998;font-size:14px;box-shadow:0 -2px 10px rgba(0,0,0,.15)";
     bar.innerHTML =
       '<span style="font-size:20px">🏍️</span>' +
-      '<span style="flex:1;line-height:1.3">アプリで記録・投稿・スタンプラリー。<b>無料で始める</b></span>';
+      '<span style="flex:1;line-height:1.3">峠や絶景の道を通るルートを、アプリで。<b>無料で始める</b></span>';
     var dl = document.createElement("a");
     dl.href = APP_URL; dl.target = "_blank"; dl.rel = "noopener";
     dl.textContent = "App Storeで開く";
